@@ -52,7 +52,7 @@
 
 .km-meego .km-button
 {
-    background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.1));
+    .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.1));
     .border-radius(~".8rem");
 
     border: 1px solid transparent;
@@ -142,7 +142,7 @@
 {
     overflow: hidden;
     .border-radius(~".8rem");
-    background: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 98%, rgba(0,0,0,.2));
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,0) 98%, rgba(0,0,0,.2));
     padding: 0;
 }
 
@@ -170,7 +170,7 @@
 
 .km-meego .km-switch-handle
 {
-    background: linear-gradient(top, rgb(255,255,255), rgb(215,215,215) 5%, rgb(255,255,255));
+    .linear-gradient-image(top, rgb(255,255,255), rgb(215,215,215) 5%, rgb(255,255,255));
     width: 1.6rem;
     height: 1.6rem;
     background: #fff;
@@ -182,13 +182,14 @@
 
 .km-meego .km-switch-on .km-switch-wrapper
 {
-    background: #1080DD linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,.3) 10%, rgba(255,255,255,0));
+    background: #1080DD;
+    .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,.3) 10%, rgba(255,255,255,0));
 }
 
 .km-meego .km-badge,
 .km-meego .km-detail
 {
-    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
+    .linear-gradient-image(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: #FFF;
     border: .3rem solid #FFF;
     background-color: #bc0404;
@@ -303,7 +304,7 @@
     border: 1px 0 1px 1px;
     border-color: transparent;
     background-color: #1080dd;
-    background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.2));
+    .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.2));
 }
 
 .km-meego .km-content:first-child
@@ -335,7 +336,7 @@
     display: table;
     padding: 0;
     background: #e5e5e5;
-    background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2));
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.2));
     background-clip: padding-box;
     border-top: 1px solid #fff;
     .box-shadow(0 0 5px rgba(0,0,0,.8));
@@ -375,7 +376,7 @@
 .km-meego .km-tabstrip .km-state-active
 {
     background: #f5f5f5;
-    background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.1));
+    .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.1));
 }
 
 .km-meego .km-tabstrip .km-state-active:last-child
@@ -506,7 +507,7 @@
 {
     color: #fff;
     background-color: #1080dd;
-    background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.2));
+    .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.2));
 }
 
 .km-meego .km-listinset .km-state-active .km-listview-link:after,
@@ -598,7 +599,7 @@
 {
     border: 1px solid #000;
     background-color: rgb(54, 54, 54);
-    background-image: linear-gradient(top, rgb(54, 54, 54), rgb(43, 43, 43));
+    .linear-gradient-image(top, rgb(54, 54, 54), rgb(43, 43, 43));
     .border-radius(2px);
     .box-sizing(border-box);
     .box-shadow(0 0 1px 2px #808080);
@@ -620,13 +621,13 @@
 .km-meego .km-navbar .km-icon,
 .km-meego .km-button .km-icon
 {
-    background: linear-gradient(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
+    .linear-gradient-image(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
 }
 
 .km-meego .km-button.km-state-active .km-icon
 {
     background: #768694;
-    background: linear-gradient(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
+    .linear-gradient-image(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
 }
 
 .km-meego .km-tabstrip .km-icon
@@ -646,7 +647,8 @@
 
 .km-meego .km-tabstrip .km-button .km-icon
 {
-    background: #231f20 linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.4));
+    background: #231f20;
+    .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.4));
 }
 
 /* Pull to refresh */
@@ -687,15 +689,16 @@
 
 .km-meego .km-slider-handle
 {
-    background: linear-gradient(top, #ccc, #fff);
+    .linear-gradient-image(top, #ccc, #fff);
     border: 1px solid #eee;
 }
 
 .km-meego .km-slider-background
 {
-    background: linear-gradient(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4)) 0 0 no-repeat,
-                linear-gradient(top, rgb(219,219,219), rgb(255,255,255)) 12rem 0 no-repeat,
-                linear-gradient(top, rgb(42,93,178), rgb(109,169,247)) 0 0 no-repeat;
+    background: 0 0 no-repeat, 12rem 0 no-repeat, 0 0 no-repeat;
+    .linear-gradient-image(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4),
+                     top, rgb(219,219,219), rgb(255,255,255),
+                     top, rgb(42,93,178), rgb(109,169,247));
 }
 
 /* Scroller */
@@ -717,7 +720,7 @@
 
 .km-meego .km-dialog-title
 {
-    background: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
+    .linear-gradient-image(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
     text-shadow: 0 -1px #333;
 }
 
@@ -1042,7 +1045,7 @@
 .km-meego .km-listview-label input[type=radio]:checked:after,
 .km-meego .km-listview-label input[type=checkbox]:checked:after
 {
-    background: linear-gradient(top, #fff, #f9f9f9 10%, #eee);
+    .linear-gradient-image(top, #fff, #f9f9f9 10%, #eee);
     .box-shadow(0 1px 1px rgba(0,0,0,.7));
 }
 

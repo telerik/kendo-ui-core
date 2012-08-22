@@ -40,13 +40,13 @@
     box-pack: @pack;
 }
 
-.border-radius() {
+.border-radius(...) {
     border-radius: @arguments;
     -moz-border-radius: @arguments;
     -webkit-border-radius: @arguments;
 }
 
-.box-shadow() {
+.box-shadow(...) {
     box-shadow: @arguments;
     -webkit-box-shadow: @arguments;
 }
@@ -63,7 +63,7 @@
     background-clip: @type;
 }
 
-.transform() {
+.transform(...) {
     -webkit-transform: @arguments;
     -moz-transform: @arguments;
     -ms-transform: @arguments;
@@ -71,7 +71,7 @@
     transform: @arguments;
 }
 
-.transform-origin() {
+.transform-origin(...) {
     -webkit-transform-origin: @arguments;
     -moz-transform-origin: @arguments;
     -ms-transform-origin: @arguments;
@@ -79,13 +79,13 @@
     transform-origin: @arguments;
 }
 
-.transform-style() {
+.transform-style(...) {
     -webkit-transform-origin: @arguments;
     -moz-transform-origin: @arguments;
     transform-style: @arguments;
 }
 
-.transition() {
+.transition(...) {
     -webkit-transition: @arguments;
     -moz-transition: @arguments;
     -ms-transition: @arguments;
@@ -93,7 +93,7 @@
     transition: @arguments;
 }
 
-.pTransition() {
+.pTransition(...) {
     -webkit-transition: ~"-webkit-@{arguments}";
     -moz-transition: ~"-moz-@{arguments}";
     -ms-transition: ~"-ms-@{arguments}";
@@ -101,26 +101,42 @@
     transition: @arguments;
 }
 
-.user-select() {
+.user-select(...) {
     -moz-user-select: @arguments;
     -webkit-user-select: @arguments;
     user-select: @arguments;
 }
 
-.animation() {
+.animation(...) {
     animation: @arguments;
     -moz-animation: @arguments;
     -webkit-animation: @arguments;
 }
 
-.appearance() {
+.appearance(...) {
     appearance: @arguments;
     -moz-appearance: @arguments;
     -webkit-appearance: @arguments;
 }
 
-.text-size-adjust() {
+.text-size-adjust(...) {
     -webkit-text-size-adjust: @arguments;
     -moz-text-size-adjust: @arguments;
     text-size-adjust: @arguments;
+}
+
+.linear-gradient(...) {
+    background: linear-gradient("webkit", @arguments);
+    background: linear-gradient("moz", @arguments);
+    background: linear-gradient("ms", @arguments);
+    background: linear-gradient("o", @arguments);
+    background: linear-gradient("", @arguments);
+}
+
+.linear-gradient-image(...) {
+    background-image: linear-gradient("webkit", @arguments);
+    background-image: linear-gradient("moz", @arguments);
+    background-image: linear-gradient("ms", @arguments);
+    background-image: linear-gradient("o", @arguments);
+    background-image: linear-gradient("", @arguments);
 }

@@ -219,7 +219,7 @@
 .km-android .km-badge,
 .km-android .km-detail
 {
-    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
+    .linear-gradient-image(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: #FFF;
     border: .3em solid #FFF;
     background-color: #bc0404;
@@ -584,14 +584,15 @@
 .km-android,
 .km-android .km-content
 {
-    background: linear-gradient(top, rgba(0,0,0,0), rgba(255,255,255,.2)) #000;
+    background: #000;
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(255,255,255,.2));
 }
 
 .km-android .km-item label:before
 {
     border: 1px solid #000;
     background-color: rgb(54, 54, 54);
-    background-image: linear-gradient(top, rgb(54, 54, 54), rgb(43, 43, 43));
+    .linear-gradient-image(top, rgb(54, 54, 54), rgb(43, 43, 43));
     .border-radius(2px);
     .box-sizing(border-box);
     .box-shadow(0 0 1px 2px #808080);
@@ -604,14 +605,14 @@
 
 .km-android .km-button .km-icon
 {
-    background: linear-gradient(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
+    .linear-gradient-image(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
 }
 
 .km-android .km-navbar .km-icon
 {
     margin-left: .5em;
     margin-right: -.3em;
-    background: linear-gradient(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
+    .linear-gradient-image(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
 }
 
 .km-android .km-tabstrip .km-icon
@@ -628,12 +629,14 @@
 
 .km-android .km-tabstrip .km-button .km-icon
 {
-    background: #555 linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,0));
+    background: #555;
+    .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,0));
 }
 
 .km-android .km-tabstrip .km-state-active .km-icon
 {
-    background: #3F99D2 linear-gradient(top, rgba(255,255,255,.6) 0, rgba(255,255,255,0) 50%, rgba(255,255,255,.3) 100%);
+    background: #3F99D2;
+    .linear-gradient-image(top, rgba(255,255,255,.6) 0, rgba(255,255,255,0) 50%, rgba(255,255,255,.3) 100%);
 }
 
 /* Pull To Refresh */
@@ -675,15 +678,16 @@
 
 .km-android .km-slider-handle
 {
-    background: linear-gradient(top, #ccc, #fff);
+    .linear-gradient-image(top, #ccc, #fff);
     border: 1px solid #eee;
 }
 
 .km-android .km-slider-background
 {
-    background: linear-gradient(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4)) 0 0 no-repeat,
-                linear-gradient(top, rgb(219,219,219), rgb(255,255,255)) 12em 0 no-repeat,
-                linear-gradient(top, rgb(42,93,178), rgb(109,169,247)) 0 0 no-repeat;
+    background: 0 0 no-repeat, 12em 0 no-repeat, 0 0 no-repeat;
+    .linear-gradient-image(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4),
+                     top, rgb(219,219,219), rgb(255,255,255),
+                     top, rgb(42,93,178), rgb(109,169,247));
 }
 
 /* Scroller */
@@ -705,7 +709,7 @@
 
 .km-android .km-dialog-title
 {
-    background: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
+    .linear-gradient-image(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
     text-shadow: 0 -1px #333;
 }
 
@@ -830,8 +834,9 @@
     border-bottom: 1px solid rgba(127,127,127,.5);
     margin-bottom: 1px;
     background-clip: padding-box;
-    background: linear-gradient(top, transparent 90%, #777 90%, #777) no-repeat 0 0,
-                linear-gradient(top, transparent 90%, #777 90%, #777) transparent no-repeat 100% 0;
+    background: no-repeat 0 0, transparent no-repeat 100% 0;
+    .linear-gradient-image(top, transparent 90%, #777 90%, #777,
+                     top, transparent 90%, #777 90%, #777);
     background-size: 1px 100%;
 }
 
@@ -843,8 +848,9 @@
 .km-android input[type=email]:focus,
 .km-android input[type=text]:not(.k-input):focus
 {
-    background: linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)) no-repeat 0 0,
-                linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)) transparent no-repeat 100% 0;
+    background: no-repeat 0 0, transparent no-repeat 100% 0;
+    .linear-gradient-image(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6),
+                     top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6));
     background-size: 2px 100%;
     margin-bottom: 0;
     border-bottom: 2px solid rgba(40,170,220,.6);
