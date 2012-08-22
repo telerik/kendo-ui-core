@@ -4817,11 +4817,8 @@
             var plotArea = this;
 
             plotArea.createCategoryAxes();
-
             plotArea.aggregateDateSeries();
-
             plotArea.createCharts();
-
             plotArea.createValueAxes();
         },
 
@@ -4922,7 +4919,6 @@
                     categoryMap = categoryAxis.categoryMap;
 
                     srcData = seriesClone.data;
-
                     seriesClone.data = data = [];
 
                     for (groupIx = 0; groupIx < categories.length; groupIx++) {
@@ -4955,9 +4951,9 @@
 
         appendChart: function(chart) {
             var plotArea = this,
-                options = plotArea.options,
                 series = chart.options.series,
-                categories = plotArea.primaryCategoryAxis.options.categories,
+                categoryAxis = plotArea.seriesCategoryAxis(series[0]),
+                categories = categoryAxis.options.categories,
                 categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
 
             append(categories, new Array(categoriesToAdd));

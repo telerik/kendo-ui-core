@@ -486,6 +486,38 @@
                     ok($.inArray(secondaryCategoryAxis, plotArea.children) >= 0);
                 });
 
+                test("adds categories to match actual data", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                        type: "column",
+                        data: [1, 2, 3],
+                        categoryAxis: "b"
+                    }], {
+                        categoryAxis: [{
+                            }, {
+                            name: "b",
+                            categories: ["A", "B"]
+                        }]
+                    });
+
+                    equals(plotArea.namedCategoryAxes.b.options.categories.length, 3);
+                });
+
+                test("accepts extra categories", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "column",
+                            data: [100],
+                            categoryAxis: "b"
+                        }], {
+                        categoryAxis: [{
+                            }, {
+                            name: "b",
+                            categories: ["A", "B"]
+                        }]
+                    });
+
+                    equals(plotArea.namedCategoryAxes.b.options.categories.length, 2);
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Column series", {
                     setup: function() {
