@@ -179,7 +179,7 @@
                 rtlStyle = textarea.closest(".k-rtl").length ? "direction:rtl;" : "";
 
             textarea.hide();
-            iframe = $("<iframe />", { frameBorder: "0" })
+            iframe = $("<iframe />", { src: 'javascript:""', frameBorder: "0" })
                             .css("display", "")
                             .addClass("k-content")
                             .insertBefore(textarea)[0];
