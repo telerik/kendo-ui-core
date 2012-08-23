@@ -1,4 +1,5 @@
 var less = require("./less-js/lib/less"),
+    execSync = require("execSync"),
     kendoBuild = require("./kendo-build"),
     fs = require("fs"),
     path = require("path"),
@@ -9,7 +10,6 @@ function buildThemes(themesFolder, outputFolder) {
         var parser = new(less.Parser)({
                 paths: [ themesFolder ]
             }),
-            source = kendoBuild.readText(file),
             theme = path.basename(file, ".less"),
             output = path.join(outputFolder, theme + ".css"),
             cacheEntry = cache[file];
@@ -17,15 +17,9 @@ function buildThemes(themesFolder, outputFolder) {
         if (cacheEntry) {
             kendoBuild.writeText(output, cacheEntry);
         } else {
-            parser.parse(source, function (error, ast) {
-                if (error) {
-                    console.log("ERROR: `" + theme + "` theme generation failed: " + error.message);
-                } else {
-                    cache[file] = ast.toCSS();
-                    kendoBuild.writeText(output, cache[file]);
-                    console.log("Built theme", theme);
-                }
-            });
+            var code = execSync.code("./build/less-js/bin/lessc " + file + " " + output);
+            console.log("Built theme ", theme, " (", code, ")");
+            cache[file] = kendoBuild.readText(output);
         }
     });
 }
