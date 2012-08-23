@@ -93,6 +93,11 @@
     border-left-width: 1px;
 }
 
+.k-rtl .k-grid-header .k-header
+{
+    text-align: right;
+}
+
 /* Pager */
 
 /*.k-rtl .k-pager-info
@@ -147,6 +152,33 @@
 {
     right: auto;
     left: 2px;
+}
+
+/* Slider */
+
+.k-rtl .k-slider .k-button-decrease
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-slider .k-button-increase
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-slider-horizontal .k-slider-track,
+.k-rtl .k-slider-horizontal .k-slider-selection
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-slider-horizontal .k-slider-buttons .k-slider-track
+{
+    left: auto;
+    right: 34px;
 }
 
 /* TabStrip */

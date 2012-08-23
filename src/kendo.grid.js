@@ -667,31 +667,40 @@
 
             that.thead.on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
                  var th = $(this),
-                    position = th.offset().left + this.offsetWidth;
+                    position = th.offset().left + (!isRtl ? this.offsetWidth : 0);
 
                 if(e.clientX > position - indicatorWidth &&  e.clientX < position + indicatorWidth) {
                     cursor(that.wrapper, th.css('cursor'));
-
+                    
                     if (!resizeHandle) {
                         resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"/>');
                         container.append(resizeHandle);
                     }
 
-                    left = this.offsetWidth;
+                    if (!isRtl) {
+                        left = this.offsetWidth;
 
-                    th.prevAll().each(function() {
-                        left += this.offsetWidth;
-                    });
+                        th.prevAll().each(function() {
+                            left += this.offsetWidth;
+                        });
+                    } else {
+                        var headerWrap = th.closest(".k-grid-header-wrap"),
+                            webkitCorrection = $.browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
+                            firefoxCorrection = $.browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
+                            document.title = firefoxCorrection;
+                        left = th.position().left - webkitCorrection + firefoxCorrection;
+                    }
 
                     resizeHandle.css({
                         top: scrollable ? 0 : heightAboveHeader(that.wrapper),
                         left: left - indicatorWidth,
                         height: th.outerHeight(),
-                        width: indicatorWidth * 3
+                        width: indicatorWidth * 3,
+                        background: "red"
                     })
                     .data("th", th)
                     .show();
-
+                    
                 } else {
                     cursor(that.wrapper, "");
 
@@ -744,14 +753,16 @@
                         gridWidth = that.tbody.outerWidth();
                     },
                     resize: function(e) {
-                        var width = columnWidth + e.x.location - columnStart,
+                        
+                        var rtlMultiplier = isRtl ? -1 : 1,
+                            width = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier),
                             footer = that.footer || $();
 
                         if (width > 10) {
                             col.css('width', width);
 
                             if (options.scrollable) {
-                                that._footerWidth = gridWidth + e.x.location - columnStart;
+                                that._footerWidth = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
                                 that.tbody.parent()
                                     .add(that.thead.parent())
                                     .add(footer.find("table"))
@@ -1878,18 +1889,20 @@
                 that.scrollables = header.children(".k-grid-header-wrap");
 
                 // the footer may exists if rendered from the server
-                var footer = that.wrapper.find(".k-grid-footer");
+                var footer = that.wrapper.find(".k-grid-footer"),
+                    webKitRtlCorrection = (isRtl && $.browser.webkit) ? scrollbar : 0;
+
                 if (footer.length) {
                     that.scrollables = that.scrollables.add(footer.children(".k-grid-footer-wrap"));
                 }
 
                 if (scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").bind("scroll" + NS, function () {
-                        that.scrollables.scrollLeft(this.scrollLeft);
+                        that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
                     });
                 } else {
                     that.content.bind("scroll" + NS, function () {
-                        that.scrollables.scrollLeft(this.scrollLeft);
+                        that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
                     });
 
                     var touchScroller = kendo.touchScroller(that.content);
