@@ -146,7 +146,9 @@
 
         options: {
             name: "ListView",
+            style: "",
             type: "flat",
+            autoBind: true,
             fixedHeaders: false,
             template: "#:data#",
             headerTemplate: '<span class="km-text">#:value#</span>',
@@ -159,9 +161,7 @@
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing",
-            pullOffset: 140,
-            style: "",
-            autoBind: true
+            pullOffset: 140
         },
 
         setOptions: function(options) {
@@ -217,6 +217,16 @@
                 });
 
                 return;
+            }
+
+            if (!element[0].firstChild || that._pulled) {
+                item = view[0];
+                that._pulled = false;
+
+                //TODO: test whether the correct item is cached
+                if (item) {
+                    that._firstItem = view[0];
+                }
             }
 
             if (!that.template) {
@@ -308,8 +318,8 @@
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
             } else {
-                that._refreshHandler = $.proxy(that.refresh, that);
-                that._requestStartHandler = $.proxy(that._showLoading, that);
+                that._refreshHandler = proxy(that.refresh, that);
+                that._requestStartHandler = proxy(that._showLoading, that);
             }
 
             that.dataSource = DataSource.create(options.dataSource)
@@ -400,7 +410,17 @@
             if (options.pullToRefresh) {
                 scroller.setOptions({
                     pullToRefresh: true,
-                    pull: function() { dataSource.read(); },
+                    pull: function() {
+                        var callback = options.pullParameters,
+                            params = { page: 1 };
+
+                        if (callback) {
+                            params = callback.call(that, that._firstItem);
+                        }
+
+                        that._pulled = true;
+                        dataSource.read(params);
+                    },
                     pullTemplate: options.pullTemplate,
                     releaseTemplate: options.releaseTemplate,
                     refreshTemplate: options.refreshTemplate
@@ -436,11 +456,20 @@
         },
 
         _nextPage: function() {
-            var that = this;
+            var that = this,
+                callback = that.options.endlessScrollParameters,
+                dataSource = that.dataSource,
+                page = dataSource.page(),
+                params;
+
             that.loading = true;
             that._toggleLoader(true);
 
-            if (!that.dataSource.next()) {
+            if (callback) {
+                params = callback.call(that, dataSource.at(dataSource.total() - 1));
+            }
+
+            if (!dataSource.next(params)) {
                 that.stopEndlessScrolling();
             }
         },
@@ -458,7 +487,7 @@
                 template = "#=this.template(data)#";
             }
 
-            groupTemplateProxy.template = that.template = $.proxy(kendo.template("<li" + dataIDAttribute + ">" + template + "</li>"), templateProxy);
+            groupTemplateProxy.template = that.template = proxy(kendo.template("<li" + dataIDAttribute + ">" + template + "</li>"), templateProxy);
 
             if (typeof headerTemplate === FUNCTION) {
                 groupTemplateProxy._headerTemplate = headerTemplate;
@@ -467,7 +496,7 @@
 
             groupTemplateProxy.headerTemplate = kendo.template(headerTemplate);
 
-            that.groupTemplate = $.proxy(GROUP_TEMPLATE, groupTemplateProxy);
+            that.groupTemplate = proxy(GROUP_TEMPLATE, groupTemplateProxy);
         },
 
         _click: function(e) {

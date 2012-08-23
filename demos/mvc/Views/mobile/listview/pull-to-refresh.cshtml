@@ -22,29 +22,21 @@
 
 <script>
     function mobileListViewPullToRefresh() {
-            var lastID;
             var dataSource = new kendo.data.DataSource({
                 serverPaging: true,
+                pageSize: 10,
                 transport: {
                     read: {
                         url: "http://search.twitter.com/search.json", // the remove service url
                         dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
                     },
                     parameterMap: function(options) {
-                        var page = options.page;
-                        var parameters = {
+                        return {
                             q: "javascript",
-                            since_id: lastID //additional parameters sent to the remote service
-                        }
-
-                        return parameters;
-                    }
-                },
-                change: function() {
-                    var item = this.view()[0];
-
-                    if (item) {
-                        lastID = item.id_str;
+                            page: options.page,
+                            rpp: options.pageSize,
+                            since_id: options.since_id //additional parameters sent to the remote service
+                        };
                     }
                 },
                 schema: { // describe the result format
@@ -56,7 +48,14 @@
             dataSource: dataSource,
             pullToRefresh: true,
             appendOnRefresh: true,
-            template: $("#pull-to-refresh-template").text()
+            template: $("#pull-to-refresh-template").text(),
+            endlessScroll: true,
+            pullParameters: function(item) {
+                return {
+                    since_id: item.id_str,
+                    page: 1
+                };
+            }
         });
     }
 </script>

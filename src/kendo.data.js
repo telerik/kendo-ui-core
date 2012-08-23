@@ -2301,10 +2301,13 @@
             }, options));
         },
 
-        next: function() {
+        //TODO: add tests for the options
+        next: function(options) {
             var that = this,
                 page = that.page(),
                 total = that.total();
+
+            options = options || {};
 
             if (!page || (total && page + 1 > that.totalPages())) {
                 return;
@@ -2313,11 +2316,14 @@
             that._skip = page * that.take();
 
             page += 1;
-            that._query({ page: page });
+            options.page = page;
+
+            that._query(options);
 
             return page;
         },
 
+        //TODO: implement options
         prev: function() {
             var that = this,
                 page = that.page();

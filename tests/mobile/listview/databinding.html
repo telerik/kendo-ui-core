@@ -290,7 +290,6 @@
                 }
 
                 setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-                var drag = application.scroller().drag;
 
                 $.mockjaxClear();
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
@@ -304,13 +303,68 @@
                     equal(listview.children().length, 2);
                     ds.unbind("change", firstAssert);
                     ds.bind("change", secondAssert);
-                    drag.trigger("start", drag);
-                    drag.y.delta = 200;
-                    drag.trigger("move", drag);
-                    drag.trigger("end", drag);
+
+                    application.scroller().trigger("pull");
                 }
 
                 ds.bind("change", firstAssert);
+            });
+
+            asyncTest("Pull to refresh always send page number 1", 1, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+
+                var listview;
+                var ds = kendo.data.DataSource.create({
+                    transport: {
+                        read: { url: "foo.json", type: "json" },
+                        parameterMap: function(options) {
+                            //first time DS does not send page number
+                            if (options.page !== undefined) {
+                                equal(options.page, 1);
+                            }
+                        }
+                    },
+                    serverPaging: true
+                });
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        pullToRefresh: true
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                var scroller = application.scroller();
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
+
+                function firstAssert() {
+                    $.mockjaxClear();
+                    scroller.trigger("pull");
+                    start();
+                }
+
+                ds.bind("change", firstAssert);
+            });
+
+            test("Pull to refresh calls pull to refresh callback", 1, function(){
+                var listview;
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: [],
+                        pullToRefresh: true,
+                        pullCallback: function() {
+                            ok(true);
+                        }
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                application.scroller().trigger("pull");
             });
 
             module("press to load more", {
@@ -473,6 +527,75 @@
 
                 ds.bind("change", firstAssert);
 
+            });
+
+            asyncTest("Endless scrolling increment the page number", 1, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+
+                var ds = kendo.data.DataSource.create({
+                    pageSize: 1,
+                    transport: { read: { url: "foo.json", type: "json" } }
+                });
+
+                var listview;
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        endlessScroll: true
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                var scroller = application.scroller();
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
+
+                function secondAssert() {
+                    start();
+                    equal(listview.data("kendoMobileListView").dataSource.page(), 2);
+                }
+
+                function firstAssert() {
+                    ds.unbind("change", firstAssert);
+                    ds.bind("change", secondAssert);
+
+                    scroller.trigger("scroll", {
+                        scrollTop: scroller.scrollHeight() - scroller.element.height()
+                    });
+                }
+
+                scroller.trigger("resize");
+
+                ds.bind("change", firstAssert);
+            });
+
+            test("Endless scroll calls endless callback", 1, function(){
+                var listview;
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: {
+                            data: ["item1", "item2"],
+                            pageSize: 1
+                        },
+                        endlessScroll: true,
+                        endlessCallback: function() {
+                            ok(true);
+                        }
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                var scroller = application.scroller();
+
+                scroller.trigger("resize");
+
+                scroller.trigger("scroll", {
+                    scrollTop: scroller.scrollHeight() - scroller.element.height()
+                });
             });
 
             asyncTest("stopEndlessScrolling method stops endlessScrolling functionality", function() {
