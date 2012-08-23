@@ -94,8 +94,14 @@
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         "date": function(container, options) {
-            var attr = createAttributes(options);
-            attr[kendo.attr("format")] = options.format;
+            var attr = createAttributes(options),
+                format = options.format;
+
+            if (format) {
+                format = kendo._extractFormat(format);
+            }
+
+            attr[kendo.attr("format")] = format;
 
             $('<input type="text"/>').attr(attr).appendTo(container).kendoDatePicker({ format: options.format });
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);

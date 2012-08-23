@@ -392,6 +392,27 @@
                 equal(div.find("input").data("kendoDatePicker").options.format, "bar");
             });
 
+            test("extacted format is passed to date type editor", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "date"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                         fields: {
+                            field: "foo",
+                            format: "{0:dd.MM.yyyy}"
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").attr(kendo.attr("format")), "dd.MM.yyyy");
+            });
+
             test("default picker format is preserved if no field format is set", function() {
                 var MyModel = Model.define({
                         fields: {
