@@ -168,40 +168,18 @@
         }
     });
 
-    function normalizeEvent(e) {
-        var location = e,
-            originalEvent = e.originalEvent,
-            touchID;
-
-        if (support.touch) {
-            touchID = e.identifier;
-        }
-
-        if (pointers) {
-            touchID = originalEvent.pointerId;
-            location = originalEvent;
-        }
-
-        return {
-            location: location,
-            touchID: touchID
-        };
-    }
-
     var Touch = Class.extend({
         init: function(drag, target, event) {
             var that = this,
-                eventInfo = normalizeEvent(event),
-                location = eventInfo.location,
                 timestamp = now();
 
             extend(that, {
-                x: new DragAxis("X", location, timestamp),
-                y: new DragAxis("Y", location, timestamp),
+                x: new DragAxis("X", event, timestamp),
+                y: new DragAxis("Y", event, timestamp),
                 drag: drag,
                 target: target,
                 currentTarget: event.currentTarget,
-                _touchID: eventInfo.touchID,
+                _touchID: event.identifier,
                 _moved: false,
                 _finished: false
             });
@@ -348,7 +326,8 @@
         init: function(element, options) {
             var that = this,
                 filter,
-                preventIfMoving;
+                preventIfMoving,
+                eventMap = {};
 
             options = options || {};
             filter = that.filter = options.filter;
@@ -358,12 +337,18 @@
             element = $(element);
             Observable.fn.init.call(that);
 
+
             extend(that, {
+                eventMap: eventMap,
                 element: element,
                 surface: options.global ? SURFACE : options.surface || element,
                 stopPropagation: options.stopPropagation,
                 pressed: false
             });
+
+            eventMap[MOVE_EVENTS] = function(e) { that._move(e); };
+            eventMap[END_EVENTS] = function(e) { that._end(e); };
+
 
             element
                 .on(START_EVENTS + NS, filter, proxy(that._start, that))
@@ -407,6 +392,7 @@
 
         destroy: function() {
             this.element.off(NS);
+            this.surface.off(this.eventMap);
             this._disposeAll();
         },
 
@@ -459,30 +445,29 @@
 
         _start: function(e) {
             var that = this,
+                idx = 0,
                 filter = that.filter,
-                target;
+                target,
+                touches = toCommonEvent(e),
+                length = touches.length,
+                touch;
 
-            if (filter) {
-                target = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
-            } else {
-                target = that.element;
-            }
+            for (; idx < length; idx ++) {
+                touch = touches[idx];
 
-            if (!target.length) {
-                return;
-            }
+                target = $(touch.target);
 
-            if (support.touch) {
-                var changedTouches = e.originalEvent.changedTouches;
+                if (filter) {
+                    target = target.is(filter) ? target : target.closest(filter);
+                } else {
+                    target = that.element;
+                }
 
-                // activeIdentifiers = $.map(that.touches, function(touch) { return touch.touchID; }),
-                //
-                $.each(changedTouches, function(_, touch) {
-                    that.touches.push(new Touch(that, touch.target, touch));
-                });
+                if (!target.length) {
+                    continue;
+                }
 
-            } else {
-                that.touches.push(new Touch(that, target, e));
+                that.touches.push(new Touch(that, target, touch));
             }
 
             if (that._isMultiTouch()) {
@@ -496,8 +481,39 @@
             }
 
             Drag.current = null;
+        },
+
+        _move: function(e) {
+
+        },
+
+        _end: function(e) {
+
         }
     });
+
+    function toCommonEvent(e) {
+        var touches = [],
+            originalEvent = e.originalEvent,
+            idx = 0, length,
+            changedTouches;
+
+        if (support.touch) {
+            changedTouches = originalEvent.changedTouches;
+            for (length = changedTouches.length; idx < length; idx ++) {
+                touches.push(changedTouches[idx]);
+            }
+        }
+        else if (support.pointers) {
+            originalEvent.identifier = originalEvent.pointerId;
+            originalEvent.target = e.target;
+            touches.push(originalEvent);
+        } else {
+            touches.push(e);
+        }
+
+        return touches;
+    }
 
     var Tap = Observable.extend({
         init: function(element, options) {
