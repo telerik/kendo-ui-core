@@ -42,12 +42,14 @@
 
             function stubPlotArea(getCategorySlot, getValueSlot, options) {
                 return new function() {
-                    this.categoryAxis = {
+                    this.categoryAxis = this.primaryCategoryAxis = {
                         getSlot: getCategorySlot,
                         lineBox: function() {
                             return new Box2D(1,1,1,1);
                         },
-                        options: {}
+                        options: {
+                            categories: ["A", "B"]
+                        }
                     };
 
                     this.namedValueAxes = {
@@ -58,6 +60,13 @@
                             },
                             options: {}
                         }
+                    };
+
+                    this.namedCategoryAxes = { };
+
+                    this.seriesCategoryAxis = function(series) {
+                        return series.categoryAxis ?
+                            this.namedCategoryAxes[series.categoryAxis] : this.primaryCategoryAxis;
                     };
 
                     this.options = options;
@@ -83,11 +92,6 @@
                             slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
 
                         return new Box2D(0, slotTop, 0, slotBottom);
-                    },
-                    {
-                        categoryAxis: {
-                            categories: ["A", "B"]
-                        }
                     }
                 );
 

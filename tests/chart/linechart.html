@@ -42,9 +42,11 @@
 
             function stubPlotArea(getCategorySlot, getValueSlot, options) {
                 return new function() {
-                    this.categoryAxis = {
+                    this.categoryAxis = this.primaryCategoryAxis = {
                         getSlot: getCategorySlot,
-                        options: {}
+                        options: {
+                            categories: ["A", "B"]
+                        }
                     };
 
                     this.namedValueAxes = {
@@ -52,6 +54,13 @@
                             getSlot: getValueSlot,
                             options: {}
                         }
+                    };
+
+                    this.namedCategoryAxes = { };
+
+                    this.seriesCategoryAxis = function(series) {
+                        return series.categoryAxis ?
+                            this.namedCategoryAxes[series.categoryAxis] : this.primaryCategoryAxis;
                     };
 
                     this.options = options;
@@ -77,11 +86,6 @@
                             slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
 
                         return new Box2D(0, slotTop, 0, slotBottom);
-                    },
-                    {
-                        categoryAxis: {
-                            categories: ["A", "B"]
-                        }
                     }
                 );
 
@@ -221,6 +225,38 @@
                         result = lineChart.getNearestPoint(point.box.x2, point.box.y2 + 100, 1);
 
                     ok(result === point);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Multiple Category Axes", {
+                    setup: function() {
+                        var chart = createChart({
+                            series: [{
+                                type: "line",
+                                data: [1],
+                                categoryAxis: "secondary"
+                            }],
+                            valueAxis: {
+                                axisCrossingValue: [10, 0]
+                            },
+                            categoryAxis: [{
+                                categories: ["A"]
+                            }, {
+                                name: "secondary",
+                                categories: ["B"]
+                            }]
+                        });
+
+                        series = chart._model._plotArea.charts[0];
+                    }
+                });
+
+                test("sets category axis to first series category axis", function() {
+                    equals(series.categoryAxis.options.name, "secondary");
+                });
+
+                test("line is marked as above axis with respect to its category axis", function() {
+                    equals(series.points[0].options.aboveAxis, true);
                 });
 
                 // ------------------------------------------------------------
