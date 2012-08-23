@@ -622,6 +622,7 @@ function pad(number) {
             decimalIndex,
             sharpIndex,
             zeroIndex,
+            percentIndex,
             startZeroIndex,
             start = -1,
             end;
@@ -758,12 +759,18 @@ function pad(number) {
             });
         }
 
+        percentIndex = format.indexOf("%");
+
+        isPercent = percentIndex != -1;
         isCurrency = format.indexOf("$") != -1;
-        isPercent = format.indexOf("%") != -1;
 
         //multiply number if the format has percent
         if (isPercent) {
-            number *= 100;
+            if (format[percentIndex - 1] !== "\\") {
+                number *= 100;
+            } else {
+                format = format.split("\\").join("");
+            }
         }
 
         if (isCurrency || isPercent) {

@@ -105,6 +105,10 @@
                 equal(toString(10, "# '%'"), "10 '%'");
             });
 
+            test("toString with escaped percent symbol", function() {
+                equal(toString(10, "# \\%"), "10 %");
+            });
+
             test("toString with quote as literal", function() {
                 equal(toString(10, "# \"%\""), "10 \"%\"");
             });
