@@ -268,21 +268,37 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Multiple Category Axes", {
                     setup: function() {
-                        plotArea.namedCategoryAxes.secondary = kendo.deepExtend({
-                            options: { name: "secondary" } },
-                            plotArea.primaryCategoryAxis
-                        );
+                        var chart = createChart({
+                            series: [{
+                                type: "bar",
+                                data: [1],
+                                categoryAxis: "secondary"
+                            }],
+                            valueAxis: {
+                                axisCrossingValue: [10, 0]
+                            },
+                            categoryAxis: [{
+                                categories: ["A"]
+                            }, {
+                                name: "secondary",
+                                categories: ["B"]
+                            }]
+                        });
 
-                        setupBarChart(plotArea, {
-                            series: [
-                                $.extend({ categoryAxis: "secondary" }, positiveSeries ),
-                                positiveSeries
-                            ]});
+                        series = chart._model._plotArea.charts[0];
                     }
                 });
 
                 test("sets category axis to first series category axis", function() {
                     equals(series.categoryAxis.options.name, "secondary");
+                });
+
+                test("bar is marked as above axis with respect to its category axis", function() {
+                    equals(series.points[0].options.aboveAxis, true);
+                });
+
+                test("bar is rendered from its category axis", function() {
+                    equals(series.points[0].box.x1, series.categoryAxis.lineBox().x1);
                 });
 
                 // ------------------------------------------------------------

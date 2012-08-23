@@ -1728,7 +1728,7 @@
                 var value = data.value;
 
                 valueAxis = chart.seriesValueAxis(currentSeries);
-                axisCrossingValue = valueAxis.options.axisCrossingValue;
+                axisCrossingValue = chart.categoryAxisCrossingValue(valueAxis);
                 point = chartPoints[pointIx++];
 
                 stacks = (chart._stacks || [])[categoryIx];
@@ -1742,7 +1742,7 @@
                 }
 
                 var categorySlot = chart.categorySlot(categoryAxis, categoryIx, valueAxis),
-                    valueSlot = chart.valueSlot(valueAxis, value),
+                    valueSlot = chart.valueSlot(valueAxis, value, axisCrossingValue),
                     slotX = invertAxes ? valueSlot : categorySlot,
                     slotY = invertAxes ? categorySlot : valueSlot,
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
@@ -1764,10 +1764,17 @@
             chart.box = targetBox;
         },
 
+        categoryAxisCrossingValue: function(valueAxis) {
+            var categoryAxis = this.categoryAxis,
+                crossingValues = [].concat(valueAxis.options.axisCrossingValue);
+
+            return crossingValues[categoryAxis.axisIndex || 0];
+        },
+
         reflowCategories: function() { },
 
-        valueSlot: function(valueAxis, value) {
-            return valueAxis.getSlot(value);
+        valueSlot: function(valueAxis, value, axisCrossingValue) {
+            return valueAxis.getSlot(value, axisCrossingValue);
         },
 
         categorySlot: function(categoryAxis, categoryIx) {
@@ -1963,8 +1970,8 @@
             );
         },
 
-        valueSlot: function(valueAxis, value) {
-            return valueAxis.getSlot(value, this.options.isStacked ? 0 : undefined);
+        valueSlot: function(valueAxis, value, axisCrossingValue) {
+            return valueAxis.getSlot(value, this.options.isStacked ? 0 : axisCrossingValue);
         },
 
         categorySlot: function(categoryAxis, categoryIx, valueAxis) {
@@ -5107,6 +5114,7 @@
                     plotArea.namedCategoryAxes[axisName] = categoryAxis;
                 }
 
+                categoryAxis.axisIndex = i;
                 axes.push(categoryAxis);
                 plotArea.axes.push(categoryAxis);
                 plotArea.append(categoryAxis);
@@ -5177,7 +5185,7 @@
 
             for (i = 0; i < length; i++) {
                 axis = allAxes[i];
-                if (axis != categoryAxis) {
+                if (!equalsIgnoreCase(axis.options.type, CATEGORY)) {
                     currentValue = axis.getValue(point);
                     if (currentValue !== null) {
                         values.push(currentValue);
