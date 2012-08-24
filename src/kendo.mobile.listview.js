@@ -199,10 +199,17 @@
                 dataSource = that.dataSource,
                 view = dataSource.view(),
                 loading = that.loading,
-                appendMethod = loading ? "append" : "html",
+                appendMethod = "html",
+                hasContent = element[0].firstChild,
                 contents,
                 data,
                 item;
+
+            if (loading) {
+                appendMethod = "append";
+            } else if (options.appendOnRefresh) {
+                appendMethod = "prepend";
+            }
 
             if (e.action === "itemchange") {
                 data = e.items[0];
@@ -219,15 +226,29 @@
                 return;
             }
 
-            if (!element[0].firstChild || that._pulled) {
+
+            //refactor
+            if (!hasContent || that._pulled) {
                 item = view[0];
                 that._pulled = false;
 
                 //TODO: test whether the correct item is cached
                 if (item) {
+                    console.log("setting first item")
                     that._firstItem = view[0];
                 }
             }
+
+            if (!hasContent || loading) {
+                item = view[view.length - 1];
+
+                if (item) {
+                    console.log("setting last item")
+                    that._lastItem = dataSource.at(dataSource.total() - 1);
+                }
+            }
+            //refactor
+
 
             if (!that.template) {
                 that._templates();
@@ -240,10 +261,6 @@
                 contents = kendo.render(that.groupTemplate, view);
             } else {
                 contents = kendo.render(that.template, view);
-            }
-
-             if (options.appendOnRefresh) {
-                appendMethod = "prepend";
             }
 
             element[appendMethod](contents);
@@ -466,7 +483,7 @@
             that._toggleLoader(true);
 
             if (callback) {
-                params = callback.call(that, dataSource.at(dataSource.total() - 1));
+                params = callback.call(that, that._lastItem);
             }
 
             if (!dataSource.next(params)) {
