@@ -2082,7 +2082,7 @@
                     });
 
                     $("#" + plotArea.options.id).trigger({
-                        type: "click", clientX: 300, clientY: 0
+                        type: "click", clientX: 300, clientY: 300
                     });
                 });
 
@@ -2101,6 +2101,135 @@
                     createBarChart({
                         plotAreaClick: function(e) { equals(e.category, "B"); }
                     });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("event arguments contain all categories", 1, function() {
+                    createBarChart({
+                        categoryAxis: [{
+                            categories: ["A", "B"]
+                        }, {
+                            categories: ["a", "b"]
+                        }],
+                        plotAreaClick: function(e) { same(e.category, ["B", "b"]); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("event arguments contain categories when second axis is moved", 1, function() {
+                    createBarChart({
+                        categoryAxis: [{
+                            categories: ["A", "B"]
+                        }, {
+                            categories: ["a", "b"]
+                        }],
+                        valueAxis: {
+                            axisCrossingValue: [0, 100]
+                        },
+                        plotAreaClick: function(e) { same(e.category, ["B", "b"]); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                // ------------------------------------------------------------
+                function createChartWithPanes(plotAreaClick) {
+                    chart = createChart({
+                        panes: [{
+                            name: "top"
+                        }, {
+                            name: "bottom"
+                        }],
+                        categoryAxis: [{
+                            name: "catA",
+                            pane: "top",
+                            categories: ["A", "B"]
+                        }, {
+                            name: "catB",
+                            pane: "bottom",
+                            categories: ["C"]
+                        }],
+                        valueAxis: [{
+                            name: "valA",
+                            pane: "top"
+                        }, {
+                            name: "valB",
+                            pane: "bottom"
+                        }],
+                        series: [{
+                            axis: "valA",
+                            categoryAxis: "catA",
+                            data: [1, 2]
+                        }, {
+                            axis: "valB",
+                            categoryAxis: "catB",
+                            data: [10]
+                        }],
+                        plotAreaClick: plotAreaClick
+                    });
+
+                    plotArea = chart._model.children[1];
+                }
+
+                module("Categorical Plot Area / Events / plotAreaClick / Panes", {
+                    teardown: destroyChart
+                });
+
+                test("categories are scoped to pane", 1, function() {
+                    createChartWithPanes(
+                        function(e) {
+                            same(e.category, "C");
+                        }
+                    );
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 450
+                    });
+                });
+
+                test("values are scoped to pane", 1, function() {
+                    createChartWithPanes(
+                        function(e) {
+                            same(e.value, 9, TOLERANCE);
+                        }
+                    );
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 450
+                    });
+                });
+
+                test("uses primary category axis if the pane lacks one", 1, function() {
+                    chart = createChart({
+                        panes: [{
+                            name: "top"
+                        }, {
+                            name: "bottom"
+                        }],
+                        categoryAxis: {
+                            pane: "bottom",
+                            categories: ["A", "B"]
+                        },
+                        valueAxis: {
+                            pane: "top"
+                        },
+                        series: [{
+                            data: [1, 2]
+                        }],
+                        plotAreaClick: function(e) {
+                            equals(e.category, "A")
+                        }
+                    });
+
+                    plotArea = chart._model.children[1];
 
                     $("#" + plotArea.options.id).trigger({
                         type: "click", clientX: 300, clientY: 300

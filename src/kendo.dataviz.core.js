@@ -231,6 +231,7 @@
             };
         },
 
+        // TODO: Accept Point2D
         containsPoint: function(x, y) {
             var box = this;
 

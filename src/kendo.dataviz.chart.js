@@ -1028,7 +1028,8 @@
                 lineBox = axis.lineBox(),
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
-                intervals = math.max(1, options.categories.length - 1),
+                totalCategories = options.categories.length - 1,
+                intervals = math.max(1, totalCategories),
                 offset = (reverse ? -1 : 1) * (point[valueAxis] - lineStart),
                 step = intervals / lineSize,
                 categoriesOffset = round(offset * step),
@@ -1042,6 +1043,7 @@
                 intervals - categoriesOffset:
                 categoriesOffset;
 
+            categoryIx = math.min(categoryIx, totalCategories);
             return options.categories[categoryIx];
         },
 
@@ -1714,7 +1716,6 @@
             var chart = this,
                 options = chart.options,
                 invertAxes = options.invertAxes,
-                plotArea = chart.plotArea,
                 pointIx = 0,
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
@@ -5174,31 +5175,53 @@
             var plotArea = this,
                 coords = chart._eventCoordinates(e),
                 point = new Point2D(coords.x, coords.y),
-                categoryAxis = plotArea.categoryAxis,
-                allAxes = plotArea.axes,
+                pane = plotArea.pointPane(point),
+                allAxes,
                 i,
-                length = allAxes.length,
                 axis,
-                currentValue,
-                category = categoryAxis.getCategory(point),
+                categories = [],
                 values = [];
 
-            for (i = 0; i < length; i++) {
+            if (!pane) {
+                return;
+            }
+
+            allAxes = pane.axes;
+            for (i = 0; i < allAxes.length; i++) {
                 axis = allAxes[i];
-                if (!equalsIgnoreCase(axis.options.type, CATEGORY)) {
-                    currentValue = axis.getValue(point);
-                    if (currentValue !== null) {
-                        values.push(currentValue);
-                    }
+                if (equalsIgnoreCase(axis.options.type, CATEGORY)) {
+                    appendIfDefined(categories, axis.getCategory(point));
+                } else {
+                    appendIfDefined(values, axis.getValue(point));
                 }
             }
 
-            if (defined(category) && values.length > 0) {
+            if (categories.length === 0) {
+                appendIfDefined(
+                    categories, plotArea.primaryCategoryAxis.getCategory(point)
+                );
+            }
+
+            if (categories.length > 0 && values.length > 0) {
                 chart.trigger(PLOT_AREA_CLICK, {
                     element: $(e.target),
-                    category: category,
+                    category: singleItemOrArray(categories),
                     value: singleItemOrArray(values)
                 });
+            }
+        },
+
+        pointPane: function(point) {
+            var plotArea = this,
+                panes = plotArea.panes,
+                currentPane,
+                i;
+
+            for (i = 0; i < panes.length; i++) {
+                currentPane = panes[i];
+                if (currentPane.contentBox.containsPoint(point.x, point.y)) {
+                    return currentPane;
+                }
             }
         },
 
@@ -6218,6 +6241,12 @@
         }
 
         return a === b;
+    }
+
+    function appendIfDefined(array, element) {
+        if (defined(element)) {
+            array.push(element);
+        }
     }
 
     // Exports ================================================================
