@@ -30,7 +30,7 @@
             extend(that, options);
 
             that.drag.bind("gestureend", proxy(that.start, that));
-            that.tap.bind("press", proxy(that.cancel, that));
+            that.tapCapture.bind("press", proxy(that.cancel, that));
         },
 
         start: function() {
@@ -74,7 +74,7 @@
                 })
             });
 
-            that.tap.bind("press", function() { that.cancel(); });
+            that.tapCapture.bind("press", function() { that.cancel(); });
             that.drag.bind("end", proxy(that.start, that));
             that.drag.bind("gestureend", proxy(that.start, that));
             that.drag.bind("tap", proxy(that.onEnd, that));
@@ -113,7 +113,7 @@
             } else {
                 that.velocity = e.touch[that.axis].velocity * 16;
                 if (that.velocity) {
-                    that.tap.captureNext();
+                    that.tapCapture.captureNext();
                     Animation.fn.start.call(that);
                 }
             }
@@ -135,7 +135,7 @@
         },
 
         _end: function() {
-            this.tap.cancelCapture();
+            this.tapCapture.cancelCapture();
             this.end();
         },
 
@@ -222,7 +222,7 @@
 
             var inner = element.children().eq(1),
 
-                tap = new kendo.Tap(element),
+                tapCapture = new kendo.TapCapture(element),
 
                 movable = new Movable(inner),
 
@@ -258,7 +258,7 @@
                     movable: movable,
                     dimensions: dimensions,
                     drag: drag,
-                    tap: tap
+                    tapCapture: tapCapture
                 });
 
             movable.bind(CHANGE, function() {
@@ -277,7 +277,7 @@
                 zoomSnapBack: zoomSnapBack,
                 drag: drag,
                 pane: pane,
-                tap: tap,
+                tapCapture: tapCapture,
                 pulled: false,
                 scrollElement: inner,
                 fixedContainer: element.children().first()
@@ -397,7 +397,7 @@
             var that = this,
             movable = that.movable,
             dimension = that.dimensions[axis],
-            tap = that.tap,
+            tapCapture = that.tapCapture,
 
             scrollBar = new ScrollBar({
                 axis: axis,
@@ -409,7 +409,7 @@
             inertia = new DragInertia({
                 axis: axis,
                 movable: movable,
-                tap: tap,
+                tapCapture: tapCapture,
                 drag: that.drag,
                 dimension: dimension,
                 elastic: that.options.elastic,

@@ -345,7 +345,6 @@
             eventMap[MOVE_EVENTS] = function(e) { that._move(e); };
             eventMap[END_EVENTS] = function(e) { that._end(e); };
 
-
             element
                 .on(START_EVENTS + NS, filter, proxy(that._start, that))
                 .on("dragstart" + NS, filter, kendo.preventDefault);
@@ -515,7 +514,7 @@
     });
 
 
-    var Tap = Observable.extend({
+    var TapCapture = Observable.extend({
         init: function(element, options) {
             var that = this,
                 domElement = element[0];
@@ -529,6 +528,14 @@
             Observable.fn.init.call(that);
 
             that.bind(["press", "release"], options || {});
+        },
+
+        captureNext: function() {
+            this.capture = true;
+        },
+
+        cancelCapture: function() {
+            this.capture = false;
         },
 
         _press: function(e) {
@@ -547,14 +554,6 @@
                 e.preventDefault();
                 that.cancelCapture();
             }
-        },
-
-        captureNext: function() {
-            this.capture = true;
-        },
-
-        cancelCapture: function() {
-            this.capture = false;
         }
     });
 
@@ -1174,7 +1173,7 @@
     kendo.ui.plugin(DropTargetArea);
     kendo.ui.plugin(Draggable);
     kendo.Drag = Drag;
-    kendo.Tap = Tap;
+    kendo.TapCapture = TapCapture;
     kendo.containerBoundaries = containerBoundaries;
 
     extend(kendo.ui, {
