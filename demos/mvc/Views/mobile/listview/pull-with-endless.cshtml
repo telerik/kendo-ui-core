@@ -36,7 +36,7 @@
                             page: options.page,
                             rpp: options.pageSize,
                             since_id: options.since_id, //additional parameters sent to the remote service
-                            max_id: options.max_id
+                            max_id: options.max_id //additional parameters sent to the remove service
                         };
                     }
                 },
@@ -50,6 +50,7 @@
             template: $("#pull-with-endless-template").text(),
             appendOnRefresh: true,
             pullToRefresh: true,
+            //addition parameters which will be passed to the DataSource's read method
             pullParameters: function(item) { //pass first data item of the ListView
                 return {
                     since_id: item.id_str,
@@ -57,6 +58,7 @@
                 };
             },
             endlessScroll: true,
+            //addition parameters which will be passed to the DataSource's next method
             endlessScrollParameters: function(firstOrigin) {
                 if (firstOrigin) {
                     return {
