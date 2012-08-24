@@ -2467,7 +2467,6 @@
                 storage = {},
                 count = 0,
                 scope = {},
-                dataSource = that.dataSource,
                 groups = that._groups(),
                 fieldsMap = buildEmptyAggregatesObject(aggregates),
                 column;
