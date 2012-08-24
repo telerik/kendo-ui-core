@@ -234,7 +234,6 @@
 
                 //TODO: test whether the correct item is cached
                 if (item) {
-                    console.log("setting first item")
                     that._firstItem = view[0];
                 }
             }
@@ -243,7 +242,6 @@
                 item = view[view.length - 1];
 
                 if (item) {
-                    console.log("setting last item")
                     that._lastItem = dataSource.at(dataSource.total() - 1);
                 }
             }
