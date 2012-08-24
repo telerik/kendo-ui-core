@@ -46,8 +46,8 @@ function release(id) {
 test("determines zoom point", 2, function() {
     press(10, 10);
     press(13, 14, 2);
-    equal(pane.touchPair.center.x, 11.5);
-    equal(pane.touchPair.center.y, 12);
+    equal(pane.gestureInfo.center.x, 11.5);
+    equal(pane.gestureInfo.center.y, 12);
 })
 
 test("zooms content", function() {

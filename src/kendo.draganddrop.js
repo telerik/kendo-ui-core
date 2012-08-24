@@ -673,25 +673,25 @@
         }
     });
 
-    var TouchPair = Class.extend({
-        init: function(e) {
-            var finger1 = e.touches[0],
-                x1 = finger1.x.location,
-                y1 = finger1.y.location,
-                finger2 = e.touches[1],
-                x2 = finger2.x.location,
-                y2 = finger2.y.location,
-                dx = x1 - x2,
-                dy = y1 - y2;
+    function gestureTouchInfo(e) {
+        var finger1 = e.touches[0],
+            x1 = finger1.x.location,
+            y1 = finger1.y.location,
+            finger2 = e.touches[1],
+            x2 = finger2.x.location,
+            y2 = finger2.y.location,
+            dx = x1 - x2,
+            dy = y1 - y2;
 
-            this.center = {
+        return {
+            center: {
                x: (x1 + x2) / 2,
                y: (y1 + y2) / 2
-            };
+            },
 
-            this.distance = Math.sqrt(dx*dx + dy*dy);
+            distance: Math.sqrt(dx*dx + dy*dy)
         }
-    });
+    }
 
     var Pane = Class.extend({
 
@@ -723,17 +723,17 @@
 
             that.drag.bind(["move", "end", "gesturestart", "gesturechange", "gestureend"], {
                 gesturestart: function(e) {
-                    that.touchPair = new TouchPair(e);
+                    that.gestureInfo = gestureTouchInfo(e);
                 },
 
                 gesturechange: function(e) {
-                    var previousTouchPair = that.touchPair,
-                        previousCenter = previousTouchPair.center,
+                    var previousGestureInfo = that.gestureInfo,
+                        previousCenter = previousGestureInfo.center,
 
-                        touchPair = new TouchPair(e),
-                        center = touchPair.center,
+                        gestureInfo = gestureTouchInfo(e),
+                        center = gestureInfo.center,
 
-                        scaleDelta = touchPair.distance / previousTouchPair.distance,
+                        scaleDelta = gestureInfo.distance / previousGestureInfo.distance,
                         coordinates;
 
                     if (movable.scale <= 1 && scaleDelta < 1) {
@@ -751,7 +751,7 @@
                     y.dragMove(coordinates.y);
 
                     that.dimensions.rescale(movable.scale);
-                    that.touchPair = touchPair;
+                    that.gestureInfo = gestureInfo;
                 },
 
                 gestureend: function() {
