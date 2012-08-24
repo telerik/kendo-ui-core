@@ -56,13 +56,13 @@
             template: $("#pull-with-endless-template").text(),
             appendOnRefresh: true,
             pullToRefresh: true,
-            endlessScroll: true,
             pullParameters: function(item) { //pass first data item of the ListView
                 return {
                     since_id: item.id_str,
                     page: 1
                 };
             },
+            endlessScroll: true,
             endlessScrollParameters: function() {
                 if (firstItem) {
                     return {
