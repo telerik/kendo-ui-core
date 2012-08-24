@@ -95,6 +95,10 @@
                     "url": "listview/endless-scrolling.html"
                 },
                 {
+                    "text": "Pull to refresh + Endless scrolling",
+                    "url": "listview/pull-with-endless.html"
+                },
+                {
                     "text": "Fixed Headers",
                     "url": "listview/fixedheaders.html"
                 },
