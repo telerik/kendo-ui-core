@@ -1769,7 +1769,7 @@
             var categoryAxis = this.categoryAxis,
                 crossingValues = [].concat(valueAxis.options.axisCrossingValue);
 
-            return crossingValues[categoryAxis.axisIndex || 0];
+            return crossingValues[categoryAxis.axisIndex || 0] || 0;
         },
 
         reflowCategories: function() { },
