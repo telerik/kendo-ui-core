@@ -174,12 +174,12 @@
                 timestamp = now();
 
             extend(that, {
-                x: new DragAxis("X", event, timestamp),
-                y: new DragAxis("Y", event, timestamp),
+                x: new DragAxis("X", event.location, timestamp),
+                y: new DragAxis("Y", event.location, timestamp),
                 drag: drag,
                 target: target,
                 currentTarget: event.currentTarget,
-                id: event.identifier,
+                id: event.id,
                 _moved: false,
                 _finished: false
             });
@@ -215,13 +215,13 @@
 
         move: function(touch) {
             var that = this,
-                e = touch.jQueryEvent,
+                e = touch.event,
                 timestamp = now();
 
             if (that._finished) { return; }
 
-            that.x.move(touch, timestamp);
-            that.y.move(touch, timestamp);
+            that.x.move(touch.location, timestamp);
+            that.y.move(touch.location, timestamp);
 
             if (!that._moved) {
                 if (that._withinIgnoreThreshold()) {
@@ -243,7 +243,7 @@
 
         end: function(touch) {
             var that = this,
-                e = touch.jQueryEvent;
+                e = touch.event;
 
             if (that._finished) { return; }
 
@@ -278,6 +278,45 @@
             return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.drag.threshold;
         }
     });
+
+    function getTouches(e) {
+        var touches = [],
+            originalEvent = e.originalEvent,
+            idx = 0, length,
+            changedTouches,
+            touch;
+
+        if (support.touch) {
+            changedTouches = originalEvent.changedTouches;
+            for (length = changedTouches.length; idx < length; idx ++) {
+                touch = changedTouches[idx];
+                touches.push({
+                    location: touch,
+                    event: e,
+                    target: touch.target,
+                    id: touch.identifier
+                });
+            }
+        }
+        else if (support.pointers) {
+            touches.push({
+                location: originalEvent,
+                event: e,
+                target: e.target,
+                id: originalEvent.pointerId
+
+            });
+        } else {
+            touches.push({
+                id: 1, // hardcoded ID for mouse event;
+                event: e,
+                target: e.target,
+                location: e
+            });
+        }
+
+        return touches;
+    }
 
     var Drag = Observable.extend({
         init: function(element, options) {
@@ -407,7 +446,7 @@
                 idx = 0,
                 filter = that.filter,
                 target,
-                touches = toCommonEvent(e),
+                touches = getTouches(e),
                 length = touches.length,
                 touch;
 
@@ -453,7 +492,7 @@
         _eachTouch: function(methodName, e) {
             var that = this,
                 dict = {},
-                touches = toCommonEvent(e),
+                touches = getTouches(e),
                 activeTouches = that.touches,
                 idx,
                 touch,
@@ -466,7 +505,7 @@
 
             for (idx = 0; idx < touches.length; idx ++) {
                 touch = touches[idx];
-                matchingTouch = dict[touch.identifier];
+                matchingTouch = dict[touch.id];
 
                 if (matchingTouch) {
                     matchingTouch[methodName](touch);
@@ -475,32 +514,6 @@
         }
     });
 
-    function toCommonEvent(e) {
-        var touches = [],
-            originalEvent = e.originalEvent,
-            idx = 0, length,
-            changedTouches;
-
-        if (support.touch) {
-            changedTouches = originalEvent.changedTouches;
-            for (length = changedTouches.length; idx < length; idx ++) {
-                changedTouches[idx].jQueryEvent = e;
-                touches.push(changedTouches[idx]);
-            }
-        }
-        else if (support.pointers) {
-            originalEvent.identifier = originalEvent.pointerId;
-            originalEvent.target = e.target;
-            originalEvent.jQueryEvent = e;
-            touches.push(originalEvent);
-        } else {
-            e.identifier = 1; // hardcoded ID for mouse event;
-            e.jQueryEvent = e;
-            touches.push(e);
-        }
-
-        return touches;
-    }
 
     var Tap = Observable.extend({
         init: function(element, options) {
