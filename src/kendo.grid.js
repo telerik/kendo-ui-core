@@ -2275,6 +2275,12 @@
             });
         },
 
+        _groups: function() {
+            var group = this.dataSource.group();
+
+            return group ? group.length : 0;
+        },
+
         _tmpl: function(rowTemplate, alt) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
@@ -2286,7 +2292,7 @@
                 type,
                 hasDetails = that._hasDetails(),
                 className = [],
-                groups = that.dataSource.group().length;
+                groups = that._groups();
 
             if (!rowTemplate) {
                 rowTemplate = "<tr";
@@ -2441,7 +2447,7 @@
                 that.footerTemplate = that._footerTmpl(aggregates, "footerTemplate", "k-footer-template");
             }
 
-            if (groups.length && grep(that.columns, function(column) { return column.groupFooterTemplate; }).length) {
+            if (groups && grep(that.columns, function(column) { return column.groupFooterTemplate; }).length) {
                 aggregates = $.map(groups, function(g) { return g.aggregates; });
                 that.groupFooterTemplate = that._footerTmpl(aggregates, "groupFooterTemplate", "k-group-footer");
             }
@@ -2461,7 +2467,7 @@
                 count = 0,
                 scope = {},
                 dataSource = that.dataSource,
-                groups = dataSource.group().length,
+                groups = that._groups(),
                 fieldsMap = buildEmptyAggregatesObject(aggregates),
                 column;
 
@@ -2516,7 +2522,7 @@
                 paramName = settings.paramName,
                 templateFunctionStorage = {},
                 templateFunctionCount = 0,
-                groups = that.dataSource.group().length,
+                groups = that._groups(),
                 colspan = visibleColumns(that.columns).length,
                 type = typeof template;
 
@@ -2696,7 +2702,7 @@
         _appendCols: function(table) {
             var that = this;
 
-            normalizeCols(table, visibleColumns(that.columns), that._hasDetails(),  that.dataSource.group().length);
+            normalizeCols(table, visibleColumns(that.columns), that._hasDetails(), that._groups());
         },
 
         _autoColumns: function(schema) {
