@@ -5,12 +5,16 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public abstract class Element<T extends Element<T>> implements Node {
     private String tagName;
     private boolean selfClosing;
     private List<Node> children;
+    private Map<String, Object> attributes;
     private String innerHtml;
 
     protected Element(String tagName) {
@@ -22,6 +26,7 @@ public abstract class Element<T extends Element<T>> implements Node {
         this.innerHtml = "";
         this.tagName = tagName;
         this.selfClosing = selfClosing;
+        this.attributes = new HashMap<String,Object>();
     }
 
     @SuppressWarnings("unchecked")
@@ -44,9 +49,24 @@ public abstract class Element<T extends Element<T>> implements Node {
         return (T)this;
     }
 
+    @SuppressWarnings("unchecked")
+    public T attr(String attribute, Object value) {
+        attributes.put(attribute, value);
+
+        return (T)this;
+    }
+
     public void write(Writer out) throws IOException {
         out.append("<")
            .append(tagName);
+
+        for (Entry<String, Object> attribute : attributes.entrySet()) {
+           out.append(" ")
+              .append(attribute.getKey())
+              .append("=\"")
+              .append(attribute.getValue().toString())
+              .append("\"");
+        }
 
         if (selfClosing) {
             out.append(" />");
