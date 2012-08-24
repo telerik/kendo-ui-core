@@ -319,6 +319,44 @@
                 equal(page, undefined);
             });
 
+            test("next method accepts parameters", 1, function() {
+                var dataSource = new DataSource( {
+                    data: [1, 2, 3],
+                    pageSize: 1
+                });
+
+                dataSource.read();
+
+                stub(dataSource, {
+                    query: dataSource.query
+                });
+
+                dataSource.next({
+                    custom: "custom"
+                });
+
+                equal(dataSource.args("query", 0)[0].custom, "custom");
+            });
+
+            test("next page overrides page property of the passed parameters", 1, function() {
+                var dataSource = new DataSource( {
+                    data: [1, 2, 3],
+                    pageSize: 1
+                });
+
+                dataSource.read();
+
+                stub(dataSource, {
+                    query: dataSource.query
+                });
+
+                dataSource.next({
+                    page: 3
+                });
+
+                equal(dataSource.args("query", 0)[0].page, 2);
+            });
+
             test("prev method gets the previous page", function() {
                 var dataSource = new DataSource({
                     data: [1,2,3],
@@ -414,6 +452,46 @@
                 });
 
                 dataSource.prev();
+            });
+
+            test("prev method accepts parameters", 1, function() {
+                var dataSource = new DataSource( {
+                    data: [1, 2, 3],
+                    pageSize: 1
+                });
+
+                dataSource.read();
+                dataSource.page(3);
+
+                stub(dataSource, {
+                    query: dataSource.query
+                });
+
+                dataSource.prev({
+                    custom: "custom"
+                });
+
+                equal(dataSource.args("query", 0)[0].custom, "custom");
+            });
+
+            test("prev method overrides passed page parameter", 1, function() {
+                var dataSource = new DataSource( {
+                    data: [1, 2, 3],
+                    pageSize: 1
+                });
+
+                dataSource.read();
+                dataSource.page(3);
+
+                stub(dataSource, {
+                    query: dataSource.query
+                });
+
+                dataSource.prev({
+                    page: 1
+                });
+
+                equal(dataSource.args("query", 0)[0].page, 2);
             });
 
             test("page should page and persist settings applied through the constructor", function(){

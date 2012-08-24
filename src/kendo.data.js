@@ -2301,7 +2301,6 @@
             }, options));
         },
 
-        //TODO: add tests for the options
         next: function(options) {
             var that = this,
                 page = that.page(),
@@ -2323,10 +2322,11 @@
             return page;
         },
 
-        //TODO: implement options
-        prev: function() {
+        prev: function(options) {
             var that = this,
                 page = that.page();
+
+            options = options || {};
 
             if (!page || page === 1) {
                 return;
@@ -2335,7 +2335,9 @@
             that._skip = that._skip - that.take();
 
             page -= 1;
-            that._query({ page: page });
+            options.page = page;
+
+            that._query(options);
 
             return page;
         },
