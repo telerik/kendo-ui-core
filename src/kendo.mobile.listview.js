@@ -200,16 +200,9 @@
                 view = dataSource.view(),
                 loading = that.loading,
                 appendMethod = "html",
-                hasContent = element[0].firstChild,
                 contents,
                 data,
                 item;
-
-            if (loading) {
-                appendMethod = "append";
-            } else if (options.appendOnRefresh) {
-                appendMethod = "prepend";
-            }
 
             if (e.action === "itemchange") {
                 data = e.items[0];
@@ -226,31 +219,11 @@
                 return;
             }
 
-
-            //refactor
-            if (!hasContent || that._pulled) {
-                item = view[0];
-                that._pulled = false;
-
-                //TODO: test whether the correct item is cached
-                if (item) {
-                    that._firstItem = view[0];
-                }
-            }
-
-            if (!hasContent || loading) {
-                item = view[view.length - 1];
-
-                if (item) {
-                    that._lastItem = dataSource.at(dataSource.total() - 1);
-                }
-            }
-            //refactor
-
-
             if (!that.template) {
                 that._templates();
             }
+
+            that._cacheDataItems();
 
             that.trigger("dataBinding");
 
@@ -259,6 +232,12 @@
                 contents = kendo.render(that.groupTemplate, view);
             } else {
                 contents = kendo.render(that.template, view);
+            }
+
+            if (loading) {
+                appendMethod = "append";
+            } else if (options.appendOnRefresh) {
+                appendMethod = "prepend";
             }
 
             element[appendMethod](contents);
@@ -281,6 +260,35 @@
             that._style();
 
             that.trigger("dataBound", { ns: ui });
+        },
+
+        _cacheDataItems: function() {
+            var that = this,
+                view = that.dataSource.view(),
+                item;
+
+            if (!that.element[0].firstChild) {
+                that._firstOrigin = that._first = view[0];
+                that._last = view[view.length - 1];
+            }
+
+            if (that._pulled) {
+                item = view[0];
+                that._pulled = false;
+
+                //TODO: test whether the correct item is cached
+                if (item) {
+                    that._first = item;
+                }
+            }
+
+            if (that.loading) {
+                item = view[view.length - 1];
+
+                if (item) {
+                    that._last = item;
+                }
+            }
         },
 
         items: function() {
@@ -430,7 +438,7 @@
                             params = { page: 1 };
 
                         if (callback) {
-                            params = callback.call(that, that._firstItem);
+                            params = callback.call(that, that._first);
                         }
 
                         that._pulled = true;
@@ -481,7 +489,7 @@
             that._toggleLoader(true);
 
             if (callback) {
-                params = callback.call(that, that._lastItem);
+                params = callback.call(that, that._firstOrigin, that._last);
             }
 
             if (!dataSource.next(params)) {

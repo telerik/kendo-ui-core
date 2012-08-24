@@ -40,16 +40,10 @@
                         };
                     }
                 },
-                change: function() {
-                    if (!firstItem) {
-                        firstItem = this.view()[0];
-                    }
-                },
                 schema: { // describe the result format
                     data: "results" // the data which the data source will be bound to is in the "results" field
                 }
-            }),
-            firstItem;
+            });
 
         $("#pull-with-endless").kendoMobileListView({
             dataSource: dataSource,
@@ -63,10 +57,10 @@
                 };
             },
             endlessScroll: true,
-            endlessScrollParameters: function() {
-                if (firstItem) {
+            endlessScrollParameters: function(firstOrigin) {
+                if (firstOrigin) {
                     return {
-                        max_id: firstItem.id_str
+                        max_id: firstOrigin.id_str
                     };
                 }
             }
