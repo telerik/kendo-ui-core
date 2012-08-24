@@ -290,7 +290,6 @@
                 }
 
                 setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-                var drag = application.scroller().drag;
 
                 $.mockjaxClear();
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
@@ -304,10 +303,120 @@
                     equal(listview.children().length, 2);
                     ds.unbind("change", firstAssert);
                     ds.bind("change", secondAssert);
-                    drag.trigger("start", drag);
-                    drag.y.delta = 200;
-                    drag.trigger("move", drag);
-                    drag.trigger("end", drag);
+
+                    application.scroller().trigger("pull");
+                }
+
+                ds.bind("change", firstAssert);
+            });
+
+            asyncTest("Pull to refresh always send page number 1", 1, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+
+                var listview;
+                var ds = kendo.data.DataSource.create({
+                    transport: {
+                        read: { url: "foo.json", type: "json" },
+                        parameterMap: function(options) {
+                            //first time DS does not send page number
+                            if (options.page !== undefined) {
+                                equal(options.page, 1);
+                            }
+                        }
+                    },
+                    serverPaging: true
+                });
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        pullToRefresh: true
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                var scroller = application.scroller();
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
+
+                function firstAssert() {
+                    $.mockjaxClear();
+                    scroller.trigger("pull");
+                    start();
+                }
+
+                ds.bind("change", firstAssert);
+            });
+
+            test("Pull to refresh calls pull to refresh callback", 1, function(){
+                var listview;
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: [],
+                        pullToRefresh: true,
+                        pullParameters: function() {
+                            ok(true);
+                        }
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                application.scroller().trigger("pull");
+            });
+
+            asyncTest("Pull to refresh passes first item to the callback", 2, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+
+                var listview, calls = 1;
+                var ds = kendo.data.DataSource.create({
+                    transport: {
+                        read: { url: "foo.json", type: "json" },
+                        parameterMap: function(options) {
+                            //first time DS does not send page number
+                            if (options.page !== undefined) {
+                                equal(options.page, 1);
+                            }
+                        }
+                    },
+                    serverPaging: true
+                });
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        pullToRefresh: true,
+                        pullParameters: function(item) {
+                            if (calls === 1) {
+                                equal(item, "foo");
+                                calls ++;
+                            } else {
+                                equal(item, "foo1");
+                                $.mockjaxClear();
+                                start();
+                            }
+                        }
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                var scroller = application.scroller();
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["foo1"] });
+
+                function secondAssert() {
+                    scroller.trigger("pull");
+                }
+
+                function firstAssert() {
+                    ds.unbind("change", firstAssert);
+                    ds.bind("change", secondAssert);
+
+                    scroller.trigger("pull");
                 }
 
                 ds.bind("change", firstAssert);
@@ -365,6 +474,46 @@
                     equal(listview.children().length, 2);
                     ds.unbind("change", firstAssert);
                     ds.bind("change", secondAssert);
+
+                    listview.parent().find(".km-load").click();
+                }
+
+                ds.bind("change", firstAssert);
+            });
+
+            asyncTest("ListView calls loadMoreParameters", 2, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+                var ds = kendo.data.DataSource.create({
+                    transport: {
+                        read: { url: "foo.json", type: "json" }
+                    },
+                    serverPaging: true,
+                    pageSize: 1
+                });
+                var listview;
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        loadMore: true,
+                        loadMoreParameters: function(first, last) {
+                            $.mockjaxClear();
+                            start();
+
+                            equal(first, "foo");
+                            equal(last, "bar");
+                        }
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["baz"] });
+
+                function firstAssert() {
+                    ds.unbind("change", firstAssert);
 
                     listview.parent().find(".km-load").click();
                 }
@@ -475,6 +624,133 @@
 
             });
 
+            asyncTest("Endless scrolling increment the page number", 1, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+
+                var ds = kendo.data.DataSource.create({
+                    pageSize: 1,
+                    transport: { read: { url: "foo.json", type: "json" } }
+                });
+
+                var listview;
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        endlessScroll: true
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                var scroller = application.scroller();
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
+
+                function secondAssert() {
+                    start();
+                    equal(listview.data("kendoMobileListView").dataSource.page(), 2);
+                }
+
+                function firstAssert() {
+                    ds.unbind("change", firstAssert);
+                    ds.bind("change", secondAssert);
+
+                    scroller.trigger("scroll", {
+                        scrollTop: scroller.scrollHeight() - scroller.element.height()
+                    });
+                }
+
+                scroller.trigger("resize");
+
+                ds.bind("change", firstAssert);
+            });
+
+            asyncTest("ListView cache original first item and the last item", 4, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+
+                var ds = kendo.data.DataSource.create({
+                    pageSize: 2,
+                    serverPaging: true,
+                    schema: { total: function() { return 6; } },
+                    transport: { read: { url: "foo.json", type: "json" } }
+                });
+
+                var listview, calls = 1;
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        endlessScroll: true,
+                        endlessScrollParameters: function (first, last) {
+
+                            if (calls === 1) {
+                                equal(first, "foo");
+                                equal(last, "bar");
+                                calls ++;
+                            } else {
+                                start();
+                                equal(first, "foo");
+                                equal(last, "bar1");
+                            }
+                        }
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                var scroller = application.scroller();
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["foo1", "bar1"] });
+
+                function secondAssert() {
+                    scroller.trigger("scroll", {
+                        scrollTop: scroller.scrollHeight() - scroller.element.height()
+                    });
+                }
+
+                function firstAssert() {
+                    ds.unbind("change", firstAssert);
+                    ds.bind("change", secondAssert);
+
+                    scroller.trigger("scroll", {
+                        scrollTop: scroller.scrollHeight() - scroller.element.height()
+                    });
+                }
+
+                scroller.trigger("resize");
+
+                ds.bind("change", firstAssert);
+            });
+
+            test("Endless scroll calls endless callback", 1, function(){
+                var listview;
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: {
+                            data: ["item1", "item2"],
+                            pageSize: 1
+                        },
+                        endlessScroll: true,
+                        endlessScrollParameters: function() {
+                            ok(true);
+                        }
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                var scroller = application.scroller();
+
+                scroller.trigger("resize");
+
+                scroller.trigger("scroll", {
+                    scrollTop: scroller.scrollHeight() - scroller.element.height()
+                });
+            });
+
             asyncTest("stopEndlessScrolling method stops endlessScrolling functionality", function() {
                 window.initListView = function(e) {
                     var listview = e.view.element.find("#listview");
@@ -496,18 +772,18 @@
             });
 
             test("stopLoadMore method disables loadMore functionality", function() {
-                var listview = $("<div/>").kendoMobileListView({
+                var lv = $("<div/>").kendoMobileListView({
                     dataSource: [],
                     loadMore: true
                 }).data("kendoMobileListView");
 
-                listview.stopLoadMore();
+                lv.stopLoadMore();
 
-                equal(listview._loadButton.data("events"), undefined);
+                equal(lv._loadButton.data("events"), undefined);
             });
 
             test("stopLoadMore method raises event", 1, function() {
-                var listview = $("<div/>").kendoMobileListView({
+                var lv = $("<div/>").kendoMobileListView({
                     dataSource: [],
                     loadMore: true,
                     lastPageReached: function() {
@@ -515,10 +791,10 @@
                     }
                 }).data("kendoMobileListView");
 
-                listview.stopLoadMore();
+                lv.stopLoadMore();
             });
 
-            asyncTest("stopEndlessScrolling method raises event", 1, function() {
+            asyncTest("stopEndlessScrolling method raises event", function() {
                 window.initListView = function(e) {
                     var listview = e.view.element.find("#listview");
                     listview.kendoMobileListView({

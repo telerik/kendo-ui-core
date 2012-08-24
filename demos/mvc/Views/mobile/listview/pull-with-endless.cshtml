@@ -1,4 +1,4 @@
-<div data-role="view" data-init="mobileListViewPullToRefresh" data-title="Pull to refresh">
+<div data-role="view" data-init="mobileListViewPullWithEndless" data-title="Pull to refresh">
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
@@ -6,10 +6,10 @@
         </div>
     </header>
 
-    <ul id="pull-to-refresh-listview"></ul>
+    <ul id="pull-with-endless"></ul>
 </div>
 
-<script id="pull-to-refresh-template" type="text/x-kendo-template">
+<script id="pull-with-endless-template" type="text/x-kendo-template">
     <div class="tweet">
         <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" />#= text #
         <div class="metadata">
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-    function mobileListViewPullToRefresh() {
+    function mobileListViewPullWithEndless() {
             var dataSource = new kendo.data.DataSource({
                 serverPaging: true,
                 pageSize: 10,
@@ -35,7 +35,8 @@
                             q: "javascript",
                             page: options.page,
                             rpp: options.pageSize,
-                            since_id: options.since_id //additional parameters sent to the remote service
+                            since_id: options.since_id, //additional parameters sent to the remote service
+                            max_id: options.max_id //additional parameters sent to the remove service
                         };
                     }
                 },
@@ -44,17 +45,26 @@
                 }
             });
 
-        $("#pull-to-refresh-listview").kendoMobileListView({
+        $("#pull-with-endless").kendoMobileListView({
             dataSource: dataSource,
-            pullToRefresh: true,
+            template: $("#pull-with-endless-template").text(),
             appendOnRefresh: true,
-            template: $("#pull-to-refresh-template").text(),
-            endlessScroll: true,
-            pullParameters: function(item) {
+            pullToRefresh: true,
+            //addition parameters which will be passed to the DataSource's read method
+            pullParameters: function(item) { //pass first data item of the ListView
                 return {
                     since_id: item.id_str,
                     page: 1
                 };
+            },
+            endlessScroll: true,
+            //addition parameters which will be passed to the DataSource's next method
+            endlessScrollParameters: function(firstOrigin) {
+                if (firstOrigin) {
+                    return {
+                        max_id: firstOrigin.id_str
+                    };
+                }
             }
         });
     }

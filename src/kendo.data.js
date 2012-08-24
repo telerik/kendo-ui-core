@@ -2301,10 +2301,12 @@
             }, options));
         },
 
-        next: function() {
+        next: function(options) {
             var that = this,
                 page = that.page(),
                 total = that.total();
+
+            options = options || {};
 
             if (!page || (total && page + 1 > that.totalPages())) {
                 return;
@@ -2313,14 +2315,18 @@
             that._skip = page * that.take();
 
             page += 1;
-            that._query({ page: page });
+            options.page = page;
+
+            that._query(options);
 
             return page;
         },
 
-        prev: function() {
+        prev: function(options) {
             var that = this,
                 page = that.page();
+
+            options = options || {};
 
             if (!page || page === 1) {
                 return;
@@ -2329,7 +2335,9 @@
             that._skip = that._skip - that.take();
 
             page -= 1;
-            that._query({ page: page });
+            options.page = page;
+
+            that._query(options);
 
             return page;
         },
