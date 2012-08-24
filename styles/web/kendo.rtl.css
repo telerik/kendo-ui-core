@@ -98,6 +98,12 @@
     text-align: right;
 }
 
+.k-rtl .k-scrollbar-vertical
+{
+    right: auto;
+    left: 0;
+}
+
 /* Pager */
 
 /*.k-rtl .k-pager-info
@@ -144,6 +150,13 @@
 
 .k-rtl .k-menu .k-link > .k-i-arrow-e { background-position: 0 -48px; }
 .k-rtl .k-menu .k-link > .k-i-arrow-w { background-position: 0 -16px; }
+
+.k-rtl .k-menu .k-image,
+.k-rtl .k-menu .k-sprite
+{
+    margin-left: 4px;
+    margin-right: -4px;
+}
 
 /* PanelBar */
 
