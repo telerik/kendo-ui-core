@@ -481,6 +481,46 @@
                 ds.bind("change", firstAssert);
             });
 
+            asyncTest("ListView calls loadMoreParameters", 2, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+                var ds = kendo.data.DataSource.create({
+                    transport: {
+                        read: { url: "foo.json", type: "json" }
+                    },
+                    serverPaging: true,
+                    pageSize: 1
+                });
+                var listview;
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        loadMore: true,
+                        loadMoreParameters: function(first, last) {
+                            $.mockjaxClear();
+                            start();
+
+                            equal(first, "foo");
+                            equal(last, "bar");
+                        }
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["baz"] });
+
+                function firstAssert() {
+                    ds.unbind("change", firstAssert);
+
+                    listview.parent().find(".km-load").click();
+                }
+
+                ds.bind("change", firstAssert);
+            });
+
             test("ListView hides the load button on click", 4, function() {
                 var dom = $("<ul/>").appendTo("#qunit-fixture");
 

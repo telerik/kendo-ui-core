@@ -477,7 +477,8 @@
 
         _nextPage: function() {
             var that = this,
-                callback = that.options.endlessScrollParameters,
+                options = that.options,
+                callback = options.endlessScrollParameters || options.loadMoreParameters,
                 params;
 
             that.loading = true;
