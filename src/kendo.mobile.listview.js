@@ -223,7 +223,7 @@
                 that._templates();
             }
 
-            that._cacheDataItems();
+            that._cacheDataItems(view);
 
             that.trigger("dataBinding");
 
@@ -262,10 +262,8 @@
             that.trigger("dataBound", { ns: ui });
         },
 
-        _cacheDataItems: function() {
-            var that = this,
-                view = that.dataSource.view(),
-                item;
+        _cacheDataItems: function(view) {
+            var that = this, item;
 
             if (!that.element[0].firstChild) {
                 that._firstOrigin = that._first = view[0];
@@ -276,7 +274,6 @@
                 item = view[0];
                 that._pulled = false;
 
-                //TODO: test whether the correct item is cached
                 if (item) {
                     that._first = item;
                 }
@@ -481,8 +478,6 @@
         _nextPage: function() {
             var that = this,
                 callback = that.options.endlessScrollParameters,
-                dataSource = that.dataSource,
-                page = dataSource.page(),
                 params;
 
             that.loading = true;
@@ -492,7 +487,8 @@
                 params = callback.call(that, that._firstOrigin, that._last);
             }
 
-            if (!dataSource.next(params)) {
+            if (!that.dataSource.next(params)) {
+                that.stopLoadMore();
                 that.stopEndlessScrolling();
             }
         },
