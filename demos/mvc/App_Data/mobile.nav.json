@@ -87,12 +87,16 @@
                     "url": "listview/pull-to-refresh.html"
                 },
                 {
-                    "text": "Press to load more",
-                    "url": "listview/press-to-load-more.html"
-                },
-                {
                     "text": "Endless scrolling",
                     "url": "listview/endless-scrolling.html"
+                },
+                {
+                    "text": "Pull to refresh + Endless scrolling",
+                    "url": "listview/pull-with-endless.html"
+                },
+                {
+                    "text": "Press to load more",
+                    "url": "listview/press-to-load-more.html"
                 },
                 {
                     "text": "Fixed Headers",
