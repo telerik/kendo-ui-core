@@ -502,8 +502,11 @@
                             that.trigger(LOAD_COMPLETE);
                             callback(that._createRemoteView(url, html));
                         }, 'html')
-                        .fail(function() {
+                        .fail(function(request) {
                             that.trigger(LOAD_COMPLETE);
+                            if (request.status === 0 && request.responseText) {
+                                callback(that._createRemoteView(url, request.responseText));
+                            }
                         });
         },
 
