@@ -34,7 +34,7 @@
                         callback({
                             direction: direction,
                             drag: e.drag,
-                            target: $(touch.currentTarget)
+                            target: $(e.event.currentTarget)
                         });
 
                         touch.cancel();
