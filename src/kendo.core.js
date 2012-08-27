@@ -2391,13 +2391,17 @@ function pad(number) {
         }
     });
 
-    kendo.touchScroller = function(element, options) {
-        if (support.touch && kendo.mobile.ui.Scroller && !element.data("kendoMobileScroller")) {
-            element.kendoMobileScroller(options);
-            return element.data("kendoMobileScroller");
-        } else {
-            return false;
-        }
+    kendo.touchScroller = function(elements, options) {
+        // return the first touch scroller
+        return $(elements).map(function(idx, element) {
+            element = $(element);
+            if (support.touch && kendo.mobile.ui.Scroller && !element.data("kendoMobileScroller")) {
+                element.kendoMobileScroller(options);
+                return element.data("kendoMobileScroller");
+            } else {
+                return false;
+            }
+        })[0];
     };
 
     kendo.preventDefault = function(e) {
