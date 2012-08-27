@@ -190,7 +190,6 @@
             }
             doc = wnd.document || iframe.contentDocument;
 
-            doc.designMode = "On";
             doc.open();
             doc.write(
                     "<!DOCTYPE html><html><head>" +
@@ -210,7 +209,7 @@
                     $.map(stylesheets, function(href){
                         return "<link rel='stylesheet' href='" + href + "'>";
                     }).join("") +
-                    "</head><body></body></html>"
+                    "</head><body contenteditable='true'></body></html>"
                 );
 
             doc.close();
