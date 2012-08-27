@@ -976,8 +976,10 @@
         onCancel: $.noop,
 
         start: function() {
-            this._started = true;
-            animationFrame(this._tickProxy);
+            if (!this.done()) {
+                this._started = true;
+                animationFrame(this._tickProxy);
+            }
         },
 
         cancel: function() {

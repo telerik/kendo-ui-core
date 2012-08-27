@@ -1,5 +1,42 @@
 var movable, pane, dimensions, drag;
 
+module("pane dimensions");
+
+test("calculates min scale", 1, function() {
+    fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 600px;">Element</div></div>');
+    var container = fixture.children().first();
+
+    element = container.children().first();
+
+    dimensions = new kendo.ui.PaneDimensions({
+        element: element,
+        container: container
+    });
+
+    dimensions.refresh();
+    equal(dimensions.minScale, 0.5);
+
+    fixture.empty();
+})
+
+test("allows overriding min scale", 1, function() {
+    fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 600px;">Element</div></div>');
+    var container = fixture.children().first();
+
+    element = container.children().first();
+
+    dimensions = new kendo.ui.PaneDimensions({
+        element: element,
+        container: container,
+        minScale: 1
+    });
+
+    dimensions.refresh();
+    equal(dimensions.minScale, 1);
+
+    fixture.empty();
+})
+
 module("pane", {
     setup: function() {
         kendo.support.touch = true;
@@ -100,7 +137,7 @@ test("zooming out causes friction", function() {
     press(14, 18, 2);
     move(10, 10);
     move(13, 14, 2);
-    equal(movable.scale, 0.92, 0.1);
+    equal(movable.scale, 0.92 / 2, 0.1);
 });
 
 

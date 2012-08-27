@@ -607,6 +607,7 @@
             that.size = size;
             that.total = total * that.scale;
             that.min = Math.min(that.max, that.size - that.total);
+            that.minScale = that.size / that.total;
 
             that.enabled = that._forceEnabled || ( total != that.size);
 
@@ -625,6 +626,7 @@
 
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
+            that.forcedMinScale = options.minScale;
 
             that.bind(CHANGE, options);
 
@@ -642,6 +644,7 @@
             that.x.update();
             that.y.update();
             that.enabled = that.x.enabled || that.y.enabled;
+            that.minScale = that.forcedMinScale || Math.max(that.x.minScale, that.y.minScale);
             that.trigger(CHANGE);
         }
     });
@@ -690,7 +693,7 @@
             },
 
             distance: Math.sqrt(dx*dx + dy*dy)
-        }
+        };
     }
 
     var Pane = Class.extend({
@@ -734,10 +737,13 @@
                         center = gestureInfo.center,
 
                         scaleDelta = gestureInfo.distance / previousGestureInfo.distance,
+
+                        minScale = that.dimensions.minScale,
                         coordinates;
 
-                    if (movable.scale <= 1 && scaleDelta < 1) {
-                        scaleDelta += (1 - scaleDelta) * 0.8;
+                    if (movable.scale <= minScale && scaleDelta < 1) {
+                        // Resist shrinking. Instead of shrinking from 1 to 0.5, it will shrink to 0.5 + (1 /* minScale */ - 0.5) * 0.8 = 0.9;
+                        scaleDelta += (minScale - scaleDelta) * 0.8;
                     }
 
                     coordinates = {

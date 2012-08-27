@@ -33,18 +33,8 @@
             that.tapCapture.bind("press", proxy(that.cancel, that));
         },
 
-        start: function() {
-            var that = this;
-
-            if (that.movable.scale >= 1) {
-                return;
-            }
-
-            Animation.fn.start.call(that);
-        },
-
         done: function() {
-            return this.movable.scale > 0.99;
+            return this.dimensions.minScale - this.movable.scale < 0.01;
         },
 
         tick: function() {
