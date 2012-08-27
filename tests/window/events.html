@@ -171,7 +171,7 @@
 
                 dialog.press(keys.UP);
 
-                equal(dialogObject.wrapper.offset().top, offset.top - 10);
+                close(dialogObject.wrapper.offset().top, offset.top - 10, .1);
             });
 
             test("down arrow moves window down", function() {
@@ -181,7 +181,7 @@
 
                 dialog.press(keys.DOWN);
 
-                equal(dialogObject.wrapper.offset().top, offset.top + 10);
+                close(dialogObject.wrapper.offset().top, offset.top + 10, .1);
             });
 
             test("left arrow moves window left", function() {
