@@ -142,9 +142,9 @@
         init: function(element, options) {
             var that = this;
 
-            that._animations(options);
-
             Widget.fn.init.call(that, element, options);
+
+            that._animations(that.options);
 
             if (that.element.is("ul")) {
                 that.wrapper = that.element.wrapAll("<div />").parent();
