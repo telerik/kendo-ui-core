@@ -147,10 +147,10 @@
                 });
             }
 
-            asyncTest("Raises pull when pulled", 1, function() {
-                setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
+            asyncTest("triggers pull when pulled", 1, function() {
+                setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div>');
 
-                var drag = application.view().scroller.drag;
+                var el = $("#page1 .km-scroll-wrapper");
 
                 application.scroller().setOptions({
                     pullToRefresh: true,
@@ -161,26 +161,24 @@
                     }
                 });
 
-                drag.trigger("start", drag);
-                drag.y.delta = 200;
-                drag.trigger("move", drag);
-                drag.trigger("end", drag);
+                el.trigger($.Event("mousedown", { pageX: 1, pageY: 1}));
+                el.trigger($.Event("mousemove", { pageX: 1, pageY: 200}));
+                el.trigger($.Event("mouseup"));
             });
 
-            asyncTest("Raises scroll when scrolled", 1, function() {
-                setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
+            asyncTest("triggers scroll when scrolled", 1, function() {
+                setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div>');
 
-                var drag = application.scroller().drag;
+                var el = $("#page1 .km-scroll-wrapper");
 
                 application.scroller().bind("scroll", function() {
                     start();
                     ok(true);
                 });
 
-                drag.trigger("start", drag);
-                drag.y.delta = -200;
-                drag.trigger("move", drag);
-                drag.trigger("end", drag);
+                el.trigger($.Event("mousedown", { pageX: 0, pageY: 200}));
+                el.trigger($.Event("mousemove", { pageX: 0, pageY: 0}));
+                el.trigger($.Event("mouseup"));
             });
 
             function success() {
