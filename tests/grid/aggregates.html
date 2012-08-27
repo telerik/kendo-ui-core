@@ -140,6 +140,33 @@
                 }, 1);
             });
 
+            test("footer row scrolls together with the data area after group is applied", function() {
+                var grid = new Grid(table(), {
+                        dataSource: {
+                            data: [ {foo: 1},{foo: 2},{foo: 3}],
+                            aggregate: { field: "foo", aggregate: "count" }
+                        },
+                        columns: [ { field: "foo", footerTemplate: "baz", width: "3000px" } ]
+                    });
+
+                grid.dataSource.group({
+                    field: "foo",
+                    aggregate: { field: "foo", aggregate: "count" }
+                });
+
+                var footerWrap = grid.wrapper.find("div.k-grid-footer-wrap"),
+                    contentDiv = grid.wrapper.children("div.k-grid-content");
+
+                contentDiv.scrollLeft(100);
+
+                stop();
+
+                window.setTimeout(function(){
+                    start();
+                    equal(footerWrap.scrollLeft(), 100);
+                }, 1);
+            });
+
             test("footer cell is rendered for each column", function() {
                 var grid = new Grid(table(), {
                     dataSource: {
