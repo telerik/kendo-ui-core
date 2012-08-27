@@ -2109,15 +2109,9 @@
                 }
 
                 if (options.scrollable) {
-                    var containsFooter = false;
-                    that.scrollables.each(function(){
-                        if ($(this).hasClass("k-grid-footer-wrap")) {
-                            containsFooter = true;
-                        }
-                    });
-                    if (!containsFooter) {
-                        that.scrollables = that.scrollables.add(that.footer.children(".k-grid-footer-wrap"));
-                    }
+                    that.scrollables = that.scrollables
+                        .not(".k-grid-footer-wrap")
+                        .add(that.footer.children(".k-grid-footer-wrap"));
                 }
 
                 if (options.resizable && that._footerWidth) {
