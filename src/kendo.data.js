@@ -2452,9 +2452,11 @@
 
                 var paging = that.options.serverPaging;
                 var sorting = that.options.serverSorting;
+                var filtering = that.options.serverFiltering;
                 try {
                     that.options.serverPaging = true;
                     that.options.serverSorting = true;
+                    that.options.serverFiltering = true;
                     if (paging) {
                         that._data = data = that._observe(data);
                     }
@@ -2462,6 +2464,7 @@
                 } finally {
                     that.options.serverPaging = paging;
                     that.options.serverSorting = sorting;
+                    that.options.serverFiltering = filtering;
                 }
 
                 return;
