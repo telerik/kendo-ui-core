@@ -3,6 +3,7 @@
         keys = kendo.keys,
         ui = kendo.ui,
         Widget = ui.Widget,
+        extractFormat = kendo._extractFormat,
         parse = kendo.parseFloat,
         placeholderSupported = kendo.support.placeholder,
         touch = kendo.support.touch,
@@ -35,7 +36,7 @@
          init: function(element, options) {
              var that = this,
              isStep = options && options.step !== undefined,
-             min, max, step, value, format;
+             min, max, step, value;
 
              Widget.fn.init.call(that, element, options);
 
@@ -70,10 +71,7 @@
                  options.step = step;
              }
 
-             format = options.format;
-             if (format.slice(0,3) === "{0:") {
-                 options.format = format.slice(3, format.length - 1);
-             }
+             options.format = extractFormat(options.format);
 
              value = options.value;
              that.value(value !== NULL ? value : element.val());
