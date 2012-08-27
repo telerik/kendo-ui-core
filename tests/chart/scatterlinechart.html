@@ -42,10 +42,10 @@
             }
 
             (function() {
-                var series = { data: [[1, 1], [2, 2]], labels: {} },
+                var series = { data: [[1, 1], [2, 2]], labels: {}, type: "scatterLine" },
                     sparseSeries = { data: [
                                         [1, 1], [2, 2], undefined, [2, 2], [null, 1], [1, null]
-                                    ], labels: {} },
+                                    ], labels: {}, type: "scatterLine" },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2;
 
@@ -150,8 +150,8 @@
 
                         setupScatterLineChart(plotArea, {
                             series: [
-                                { xAxis: "primary", yAxis: "primary", data: [[1, 10], [2, 20]] },
-                                { xAxis: "secondary", yAxis: "secondary", data: [[3, 30], [4, 40]] }
+                                { xAxis: "primary", yAxis: "primary", data: [[1, 10], [2, 20]], type: "scatterLine" },
+                                { xAxis: "secondary", yAxis: "secondary", data: [[3, 30], [4, 40]], type: "scatterLine" }
                             ]
                         });
                     }
@@ -247,7 +247,8 @@
                                         width: 4,
                                         color: "#cf0",
                                         opacity: 0.5,
-                                        dashType: "dot"
+                                        dashType: "dot",
+                                        type: "scatterLine"
                                     },
                                     series
                                 )
@@ -317,7 +318,7 @@
                     setupScatterLineChart(plotArea, {
                         series: [{
                             data: [ null, [1, 1], [2, 2]],
-                            labels: {}
+                            labels: {}, type: "scatterLine"
                         }]
                     });
 
@@ -349,7 +350,8 @@
                     setupScatterLineChart(plotArea, {
                         series: [{
                             data: [[1, 10], [2, 20]],
-                            labels: { visible: true, format: "{0:C} {1:C}" }
+                            labels: { visible: true, format: "{0:C} {1:C}" },
+                            type: "scatterLine"
                         }]
                     });
 
@@ -385,6 +387,7 @@
                     scatterLineChart = new dataviz.ScatterLineChart(plotArea, {
                         series: [$.extend({
                             data: [[0, 0], [1, 1]],
+                            type: "scatterLine",
                             color: "#f00",
                             markers: {
                                 visible: false,

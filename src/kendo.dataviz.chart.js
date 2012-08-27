@@ -1755,7 +1755,6 @@
                 series = options.series,
                 categories = chart.plotArea.options.categoryAxis.categories || [],
                 count = categoriesCount(series),
-                valueFields = chart.valueFields(),
                 bindableFields = chart.bindableFields(),
                 categoryIx,
                 seriesIx,
@@ -1768,15 +1767,11 @@
                 for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                     currentCategory = categories[categoryIx];
                     currentSeries = series[seriesIx];
-                    pointData = bindPoint(currentSeries, categoryIx, valueFields, bindableFields);
+                    pointData = bindPoint(currentSeries, categoryIx, bindableFields);
 
                     callback(pointData, currentCategory, categoryIx, currentSeries, seriesIx);
                 }
             }
-        },
-
-        valueFields: function() {
-            return ["value"];
         },
 
         bindableFields: function() {
@@ -2800,7 +2795,6 @@
                 options = chart.options,
                 series = options.series,
                 seriesPoints = chart.seriesPoints,
-                valueFields = chart.valueFields(),
                 bindableFields = chart.bindableFields(),
                 pointIx,
                 seriesIx,
@@ -2819,7 +2813,7 @@
                 }
 
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
-                    pointData = bindPoint(currentSeries, pointIx, valueFields, bindableFields);
+                    pointData = bindPoint(currentSeries, pointIx, bindableFields);
                     value = pointData.value;
                     fields = pointData.fields;
 
@@ -2832,10 +2826,6 @@
                    }, fields));
                 }
             }
-        },
-
-        valueFields: function() {
-            return ["x", "y"];
         },
 
         bindableFields: function() {
@@ -2988,10 +2978,6 @@
             }
 
             return max;
-        },
-
-        valueFields: function() {
-            return ["x", "y", "size"];
         },
 
         bindableFields: function() {
@@ -3186,10 +3172,6 @@
 
     var CandleStickChart = LineChart.extend({
         options: {},
-
-        valueFields: function() {
-            return ["open", "high", "low", "close"];
-        },
 
         reflowCategories: function(categorySlots) {
             var chart = this,
@@ -3549,7 +3531,6 @@
                 series = options.series,
                 seriesCount = series.length,
                 overlayId = uniqueId(),
-                valueFields = chart.valueFields(),
                 bindableFields = chart.bindableFields(),
                 currentSeries,
                 pointData,
@@ -3577,7 +3558,7 @@
                 }
 
                 for (i = 0; i < data.length; i++) {
-                    pointData = bindPoint(currentSeries, i, valueFields, bindableFields);
+                    pointData = bindPoint(currentSeries, i, bindableFields);
                     value = pointData.value;
                     fields = pointData.fields;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
@@ -3604,10 +3585,6 @@
                     currentAngle += angle;
                 }
             }
-        },
-
-        valueFields: function() {
-            return ["value"];
         },
 
         bindableFields: function() {
@@ -3655,15 +3632,13 @@
         },
 
         pointsTotal: function(series) {
-            var chart = this,
-                valueFields = chart.valueFields(),
-                data = series.data,
+            var data = series.data,
                 length = data.length,
                 sum = 0,
                 i;
 
             for(i = 0; i < length; i++) {
-                sum += bindPoint(series, i, valueFields).value;
+                sum += bindPoint(series, i).value;
             }
 
             return sum;
@@ -4915,14 +4890,13 @@
                 srcData = seriesClone.data;
 
                 seriesClone.data = data = [];
-
                 for (groupIx = 0; groupIx < categories.length; groupIx++) {
                     categoryIndicies = categoryMap[groupIx];
                     srcValues = [];
 
                     for (i = 0; i < categoryIndicies.length; i++) {
                         categoryIx = categoryIndicies[i];
-                        pointData = bindPoint(currentSeries, categoryIx, ["value"]);
+                        pointData = bindPoint(currentSeries, categoryIx);
                         value = pointData.value;
 
                         if (defined(value)) {
@@ -5308,7 +5282,7 @@
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 if (currentSeries[vertical ? "yAxis" : "xAxis"] == axisOptions.name) {
-                    firstPointValue = bindPoint(currentSeries, 0, ["x", "y"]).value;
+                    firstPointValue = bindPoint(currentSeries, 0).value;
                     dateData = firstPointValue[vertical ? "y" : "x"] instanceof Date;
 
                     break;
@@ -5970,17 +5944,32 @@
         return diff;
     }
 
-    function bindPoint(series, pointIx, valueFields, pointFields) {
+    function valueFieldsByChartType(type) {
+        var result = ["value"];
+
+        if (inArray(type, [CANDLE_STICK, VERTICAL_CANDLE_STICK])){
+            result = ["open", "high", "low", "close"];
+        } else if (inArray(type, XY_CHARTS)) {
+            result = [X, Y];
+            if (type === BUBBLE) {
+                result.push("size");
+            }
+        }
+
+        return result;
+    }
+
+    function bindPoint(series, pointIx, pointFields) {
         var pointData = series.data[pointIx],
             fieldData,
             fields = {},
             srcValueFields,
             srcPointFields,
+            valueFields = valueFieldsByChartType(series.type),
             value,
             result = { value: pointData };
 
-        if (defined(pointData))
-        {
+        if (defined(pointData)) {
             if (isArray(pointData)) {
                 fieldData = pointData.slice(valueFields.length);
                 value = bindFromArray(pointData, valueFields);

@@ -554,6 +554,8 @@
 
                 test("sets value field from undefined", function() {
                     series.data = [undefined];
+                    series.type = "bar";
+
                     same(bindPoint(series, 0, ["value"]),
                         { value: undefined, fields: {} }
                     );
@@ -561,80 +563,29 @@
 
                 test("sets value field from null", function() {
                     series.data = [null];
-                    same(bindPoint(series, 0, ["value"]),
+                    series.type = "bar";
+
+                    same(bindPoint(series, 0),
                         { value: null, fields: {} }
-                    );
-                });
-
-                test("sets value from custom object", function() {
-                    series.data = [{ a: 1 }];
-                    same(bindPoint(series, 0, ["a"]),
-                        { value: 1, fields: {} }
-                    );
-                });
-
-                test("sets multiple values from custom object", function() {
-                    series.data = [{ a: 1, b: 2 }];
-                    same(bindPoint(series, 0, ["a", "b"]),
-                        { value: { a: 1, b: 2}, fields: {} }
-                    );
-                });
-
-                test("sets fields from custom object", function() {
-                    series.data = [{ a: 1, b: 2 }];
-                    same(bindPoint(series, 0, ["a"], ["b"]),
-                        { value: 1, fields: { b: 2 } }
-                    );
-                });
-
-                test("binds array to value and point fields", function() {
-                    series.data = [[1, "red"]];
-                    same(bindPoint(series, 0, ["value"], ["color"]),
-                        { value: 1, fields: { color: "red"} }
                     );
                 });
 
                 test("binds array to multiple values", function() {
                     series.data = [[1, 2]];
-                    same(bindPoint(series, 0, ["x", "y"]),
-                        { value: { x: 1, y: 2 }, fields: {} }
-                    );
-                });
+                    series.type = "scatter";
 
-                test("extra fields are ignored", function() {
-                    series.data = [[1, "red"]];
-                    same(bindPoint(series, 0, ["value"], ["color", "category"]),
-                        { value: 1, fields: { color: "red"}}
+                    same(bindPoint(series, 0),
+                        { value: { x: 1, y: 2 }, fields: {} }
                     );
                 });
 
                 test("binds value to dataItem using field name", function() {
                     series.field = "aValue";
                     series.data = [{ aValue: 1 }];
+                    series.type = "pie";
 
-                    same(bindPoint(series, 0, ["value"]),
+                    same(bindPoint(series, 0),
                         { value: 1, fields: {} }
-                    );
-                });
-
-                test("binds multiple values to dataItem", function() {
-                    series.aField = "aValue";
-                    series.bField = "bValue";
-                    series.data = [{ aValue: 1, bValue: 2 }];
-
-                    same(bindPoint(series, 0, ["a", "b"]),
-                        { value: { a: 1, b: 2 }, fields: {} }
-                    );
-                });
-
-                test("binds multiple value and point fields to dataItem", function() {
-                    series.aField = "aValue";
-                    series.bField = "bValue";
-                    series.colorField = "color";
-                    series.data = [{ aValue: 1, bValue: 2, color: "red" }];
-
-                    same(bindPoint(series, 0, ["a", "b"], ["color"]),
-                        { value: { a: 1, b: 2} , fields: { color: "red" } }
                     );
                 });
             })();

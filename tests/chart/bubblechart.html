@@ -52,6 +52,7 @@
                     }, {
                         x: 3, y: 3, size: 20, category: "b"
                     }],
+                    type: "bubble",
                     minSize: 10,
                     maxSize: 110
                 };
@@ -88,7 +89,8 @@
                 test("Bubbles with negative size are hidden", function() {
                     setupBubbleChart(plotArea, { series: [{
                             data: [{x: 1, y: 1, size: -100}],
-                            negativeValues: { visible: false }
+                            negativeValues: { visible: false },
+                            type: "bubble"
                         }]
                     });
 
@@ -105,7 +107,8 @@
 
                 test("Default maximum bubble diameter is proportional to box size", function() {
                     setupBubbleChart(plotArea, { series: [{
-                            data: [{x: 1, y: 1, size: 100}]
+                            data: [{x: 1, y: 1, size: 100}],
+                            type: "bubble"
                         }]
                     });
 
@@ -114,7 +117,8 @@
 
                 test("Default minimum bubble diameter is proportional to box size", function() {
                     setupBubbleChart(plotArea, { series: [{
-                            data: [{x: 1, y: 1, size: 10}, {x: 1, y: 1, size: 100}]
+                            data: [{x: 1, y: 1, size: 10}, {x: 1, y: 1, size: 100}],
+                            type: "bubble"
                         }]
                     });
 
@@ -123,7 +127,8 @@
 
                 test("Default minimum bubble diameter is floored to 10", function() {
                     setupBubbleChart(plotArea, { series: [{
-                            data: [{x: 1, y: 1, size: 10}, {x: 1, y: 1, size: 100}]
+                            data: [{x: 1, y: 1, size: 10}, {x: 1, y: 1, size: 100}],
+                            type: "bubble"
                         }]
                     });
 
@@ -143,7 +148,8 @@
                 test("Color is set for bubbles with negative size", function() {
                     setupBubbleChart(plotArea, { series: [{
                             data: [{x: 1, y: 1, size: -100}],
-                            negativeValues: { visible: true, color: "red" }
+                            negativeValues: { visible: true, color: "red" },
+                            type: "bubble"
                         }]
                     });
 
