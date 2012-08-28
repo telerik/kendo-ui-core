@@ -203,6 +203,14 @@
     margin-right: 0;
 }
 
+.k-rtl .k-tabstrip-items .k-item .k-image,
+.k-rtl .k-tabstrip-items .k-item .k-sprite,
+.k-rtl .k-panelbar .k-tabstrip-items .k-item .k-image,
+.k-rtl .k-panelbar .k-tabstrip-items .k-item .k-sprite
+{
+    margin: -3px -6px 0 3px;
+}
+
 /* TreeView */
 
 .k-rtl .k-treeview .k-item

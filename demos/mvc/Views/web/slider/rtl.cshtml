@@ -1,0 +1,32 @@
+
+        <div id="example" class="k-content">
+            <div class="k-rtl">
+                <input id="slider" class="temperature" />
+                <br /><br /><br />
+                <div id="rangeslider" class="humidity">
+                    <input />
+                    <input />
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#slider").kendoSlider({
+                        min: 0,
+                        max: 30,
+                        smallStep: 1,
+                        largeStep: 10,
+                        value: 18
+                    });
+
+                    $("#rangeslider").kendoRangeSlider({
+                        min: 0,
+                        max: 10,
+                        smallStep: 1,
+                        largeStep: 2,
+                        tickPlacement: "both"
+                    });
+                });
+            </script>
+
+        </div>
