@@ -952,7 +952,6 @@
             "packages": ["!mvc"],
             "text": "Styling",
             "name": "styling",
-            "documentation": "framework/styling",
             "spriteCssClass": "stylingIcon",
             "items": [
                 {
