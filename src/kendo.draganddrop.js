@@ -329,10 +329,10 @@
             filter = that.filter = options.filter;
             that.threshold = options.threshold || 0;
             that.touches = [];
+            that._maxTouches = options.multiTouch ? 2 : 1;
 
             element = $(element);
             Observable.fn.init.call(that);
-
 
             extend(that, {
                 eventMap: eventMap,
@@ -428,6 +428,11 @@
             return this.touches.length > 1;
         },
 
+        _maxTouchesReached: function() {
+
+            return this.touches.length >= this._maxTouches;
+        },
+
         _disposeAll: function() {
             $.each(this.touches, function() { this.dispose(); });
         },
@@ -449,7 +454,23 @@
                 length = touches.length,
                 touch;
 
+            if (that._maxTouchesReached()) {
+                return;
+            }
+
+            Drag.current = null;
+
+            that.currentTarget = e.currentTarget;
+
+            if (that.stopPropagation) {
+                e.stopPropagation();
+            }
+
             for (; idx < length; idx ++) {
+                if (that._maxTouchesReached()) {
+                    break;
+                }
+
                 touch = touches[idx];
 
                 target = $(touch.target);
@@ -465,19 +486,11 @@
                 }
 
                 that.touches.push(new Touch(that, target, touch));
+
+                if (that._isMultiTouch()) {
+                    that.notify("gesturestart", {});
+                }
             }
-
-            if (that._isMultiTouch()) {
-                that.notify("gesturestart", {});
-            }
-
-            that.currentTarget = e.currentTarget;
-
-            if (that.stopPropagation) {
-                e.stopPropagation();
-            }
-
-            Drag.current = null;
         },
 
         _move: function(e) {
@@ -607,7 +620,7 @@
             that.size = size;
             that.total = total * that.scale;
             that.min = Math.min(that.max, that.size - that.total);
-            that.minScale = that.size / that.total;
+            that.minScale = that.size / total;
 
             that.enabled = that._forceEnabled || ( total != that.size);
 
@@ -743,7 +756,7 @@
 
                     if (movable.scale <= minScale && scaleDelta < 1) {
                         // Resist shrinking. Instead of shrinking from 1 to 0.5, it will shrink to 0.5 + (1 /* minScale */ - 0.5) * 0.8 = 0.9;
-                        scaleDelta += (minScale - scaleDelta) * 0.8;
+                        scaleDelta += (1 - scaleDelta) * 0.8;
                     }
 
                     coordinates = {
@@ -758,14 +771,6 @@
 
                     that.dimensions.rescale(movable.scale);
                     that.gestureInfo = gestureInfo;
-                },
-
-                gestureend: function() {
-                    if (movable.scale < 1) {
-                        movable.scale = 1;
-                        movable.moveTo(0, 0);
-                    }
-                    that.dimensions.rescale(movable.scale);
                 },
 
                 move: function(e) {
