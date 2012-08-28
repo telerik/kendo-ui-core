@@ -52,7 +52,7 @@ module("pane", {
             container: container
         });
 
-        drag = new kendo.Drag(element);
+        drag = new kendo.Drag(element, {multiTouch: true});
 
         pane = new kendo.ui.Pane({
             movable: movable,

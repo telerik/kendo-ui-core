@@ -45,7 +45,7 @@
 
         onEnd: function() {
             var movable = this.movable;
-            movable.scaleTo(1);
+            movable.scaleTo(this.dimensions.minScale);
             this.dimensions.rescale(movable.scale);
         }
     });
@@ -226,6 +226,7 @@
 
                 drag = new kendo.Drag(element, {
                     allowSelection: true,
+                    multiTouch: options.zoom,
                     start: function(e) {
                         dimensions.refresh();
 
@@ -295,6 +296,7 @@
 
         options: {
             name: "Scroller",
+            zoom: false,
             pullOffset: 140,
             elastic: true,
             pullTemplate: "Pull to refresh",

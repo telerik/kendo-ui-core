@@ -207,7 +207,7 @@ module("drag gestures", {
         kendo.support.touch = true;
         element = $('<div />');
         $("#qunit-fixture").empty().append(element);
-        drag = new Drag(element);
+        drag = new Drag(element, {multiTouch: true});
 
         triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 1});
         triggerTouchEvent("mousemove", {pageX: 15, pageY: 25, identifier: 1});
@@ -226,6 +226,16 @@ test("triggers gesturestart on second touch move", 1, function(){
     triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 2});
     triggerTouchEvent("mousemove", {pageX: 15, pageY: 25, identifier: 2});
 });
+
+test("accepts maximum 2 fingers", 1, function(){
+    drag.bind("gesturestart", function(e) {
+        ok(true);
+    });
+
+    triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 2});
+    triggerTouchEvent("mousedown", {pageX: 20, pageY: 30, identifier: 3});
+});
+
 
 test("does not trigger move on second touch move", 0, function(){
     drag.bind("move", function(e) {

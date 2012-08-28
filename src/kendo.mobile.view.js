@@ -43,6 +43,7 @@
             title: "",
             defaultTransition: "",
             stretch: false,
+            zoom: false,
             model: null
         },
 
@@ -151,7 +152,7 @@
             if (that.options.stretch) {
                 that.content.addClass("km-stretched-view");
             } else {
-                that.content.kendoMobileScroller();
+                that.content.kendoMobileScroller({zoom: that.options.zoom});
 
                 that.scroller = that.content.data("kendoMobileScroller");
                 that.scrollerContent = that.scroller.scrollElement;
