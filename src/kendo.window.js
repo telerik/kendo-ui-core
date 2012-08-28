@@ -94,7 +94,8 @@
                 wrapper,
                 offset, visibility, display,
                 isVisible = false,
-                content;
+                content,
+                titlebarButtons = ".k-window-titlebar .k-window-action";
 
             Widget.fn.init.call(that, element, options);
             options = that.options;
@@ -150,14 +151,17 @@
 
             that.toFront();
 
+            that._tabindex(wrapper.children(KWINDOWCONTENT));
+
             if (options.visible && options.modal) {
                 that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
             }
 
             wrapper
-                .on("mouseenter" + NS,  ".k-window-titlebar .k-window-action", function () { $(this).addClass(KHOVERSTATE); })
-                .on("mouseleave" + NS,  ".k-window-titlebar .k-window-action", function () { $(this).removeClass(KHOVERSTATE); })
-                .on("click" + NS, ".k-window-titlebar .k-window-action", proxy(that._windowActionHandler, that));
+                .on("mouseenter" + NS, titlebarButtons, function () { $(this).addClass(KHOVERSTATE); })
+                .on("mouseleave" + NS, titlebarButtons, function () { $(this).removeClass(KHOVERSTATE); })
+                .on("click" + NS, titlebarButtons, proxy(that._windowActionHandler, that))
+                .on("keydown" + NS, proxy(that._keydown, that));
 
             if (options.resizable) {
                 wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(that.toggleMaximization, that));
@@ -269,6 +273,50 @@
             minHeight: 50,
             maxWidth: Infinity,
             maxHeight: Infinity
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                options = that.options,
+                keys = kendo.keys,
+                keyCode = e.keyCode,
+                wrapper = that.wrapper,
+                offset, handled,
+                distance = 10;
+
+            if (keyCode == keys.ESC) {
+                that.close();
+            }
+
+            if (options.draggable && !e.ctrlKey) {
+                offset = wrapper.offset();
+
+                if (keyCode == keys.UP) {
+                    handled = wrapper.css("top", offset.top - distance);
+                } else if (keyCode == keys.DOWN) {
+                    handled = wrapper.css("top", offset.top + distance);
+                } else if (keyCode == keys.LEFT) {
+                    handled = wrapper.css("left", offset.left - distance);
+                } else if (keyCode == keys.RIGHT) {
+                    handled = wrapper.css("left", offset.left + distance);
+                }
+            }
+
+            if (options.resizable && e.ctrlKey) {
+                if (keyCode == keys.UP) {
+                    handled = wrapper.height(wrapper.height() - distance);
+                } else if (keyCode == keys.DOWN) {
+                    handled = wrapper.height(wrapper.height() + distance);
+                } if (keyCode == keys.LEFT) {
+                    handled = wrapper.width(wrapper.width() - distance);
+                } else if (keyCode == keys.RIGHT) {
+                    handled = wrapper.width(wrapper.width() + distance);
+                }
+            }
+
+            if (handled) {
+                e.preventDefault();
+            }
         },
 
         _overlay: function (visible) {

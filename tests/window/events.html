@@ -15,7 +15,8 @@
     </head>
     <body>
         <script>
-            var Window = kendo.ui.Window;
+            var Window = kendo.ui.Window,
+                dialog, dialogObject;
 
             module("events", {
                 teardown: function() {
@@ -25,7 +26,10 @@
             });
 
             function createWindow(options) {
-                return $("<div />").appendTo(document.body).kendoWindow(options).data("kendoWindow");
+                dialog = $("<div />").appendTo(document.body).kendoWindow(options);
+                dialogObject = dialog.data("kendoWindow");
+
+                return dialogObject;
             }
 
             test("clicking on window brings it in front of other windows", function() {
@@ -38,14 +42,15 @@
             });
 
             asyncTest("loading of iframe triggers load event", 1, function() {
-                var triggered = false,
-                    dialog = createWindow({
-                        content: "blank.html",
-                        iframe: true,
-                        refresh: function() {
-                            ok(true);
-                        }
-                    });
+                var triggered = false;
+
+                createWindow({
+                    content: "blank.html",
+                    iframe: true,
+                    refresh: function() {
+                        ok(true);
+                    }
+                });
 
                 setTimeout(function() {
                     start();
@@ -53,14 +58,15 @@
             });
 
             asyncTest("multiple loading of iframe triggers one refresh per load", function() {
-                var triggers = 0,
-                    dialog = createWindow({
-                        content: "blank.html",
-                        iframe: true,
-                        refresh: function() {
-                            triggers++;
-                        }
-                    });
+                var triggers = 0;
+
+                var dialog = createWindow({
+                    content: "blank.html",
+                    iframe: true,
+                    refresh: function() {
+                        triggers++;
+                    }
+                });
 
                 setTimeout(function() {
                     dialog.refresh("blank.html?v2");
@@ -129,6 +135,113 @@
                 });
 
                 equal(dialog.wrapper.find(".k-resize-handle").css("display"), "none");
+            });
+
+            module("keyboard support", {
+                teardown: function() {
+                    $(".k-window,.k-overlay").remove();
+                    $.mockjaxClear();
+                }
+            });
+
+            var keys = kendo.keys;
+
+            $.fn.press = function(key, options) {
+                return this.trigger($.extend({ type: "keydown", keyCode: key }, options ));
+            };
+
+            test("escape key triggers close event", function() {
+                var triggers = 0;
+
+                createWindow({
+                    close: function() {
+                        triggers++;
+                    }
+                });
+
+                dialog.press(keys.ESC);
+
+                equal(triggers, 1);
+            });
+
+            test("up arrow moves window up", function() {
+                createWindow({});
+
+                var offset = dialogObject.wrapper.offset();
+
+                dialog.press(keys.UP);
+
+                close(dialogObject.wrapper.offset().top, offset.top - 10, .1);
+            });
+
+            test("down arrow moves window down", function() {
+                createWindow({});
+
+                var offset = dialogObject.wrapper.offset();
+
+                dialog.press(keys.DOWN);
+
+                close(dialogObject.wrapper.offset().top, offset.top + 10, .1);
+            });
+
+            test("left arrow moves window left", function() {
+                createWindow({});
+
+                var offset = dialogObject.wrapper.offset();
+
+                dialog.press(keys.LEFT);
+
+                equal(dialogObject.wrapper.offset().left, offset.left - 10);
+            });
+
+            test("right arrow moves window right", function() {
+                createWindow({});
+
+                var offset = dialogObject.wrapper.offset();
+
+                dialog.press(keys.RIGHT);
+
+                equal(dialogObject.wrapper.offset().left, offset.left + 10);
+            });
+
+            test("ctrl+down arrow expands window", function() {
+                createWindow({});
+
+                var height = dialogObject.wrapper.height();
+
+                dialog.press(keys.DOWN, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.height(), height + 10);
+            });
+
+            test("ctrl+up arrow shrinks window", function() {
+                createWindow({});
+
+                var height = dialogObject.wrapper.height();
+
+                dialog.press(keys.UP, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.height(), height - 10);
+            });
+
+            test("ctrl+left arrow shrinks window", function() {
+                createWindow({});
+
+                var width = dialogObject.wrapper.width();
+
+                dialog.press(keys.LEFT, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.width(), width - 10);
+            });
+
+            test("ctrl+right arrow expands window", function() {
+                createWindow({});
+
+                var width = dialogObject.wrapper.width();
+
+                dialog.press(keys.RIGHT, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.width(), width + 10);
             });
         </script>
 
