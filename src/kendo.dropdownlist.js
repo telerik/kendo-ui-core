@@ -154,10 +154,17 @@
                     })
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("keypress" + ns, proxy(that._keypress, that))
-                    .on("focusin" + ns, function() { dropDownWrapper.addClass(FOCUSED); })
+                    .on("focusin" + ns, function() {
+                        dropDownWrapper.addClass(FOCUSED);
+                        clearTimeout(that._bluring);
+                    })
                     .on("focusout" + ns, function() {
                         that._blur();
                         dropDownWrapper.removeClass(FOCUSED);
+
+                        that._bluring = setTimeout(function() {
+                            element.blur();
+                        });
                     });
             }
         },

@@ -77,6 +77,8 @@
 
                     that._placeholder();
                     that._blur();
+
+                    element.blur();
                 });
 
             that._oldIndex = that.selectedIndex = -1;

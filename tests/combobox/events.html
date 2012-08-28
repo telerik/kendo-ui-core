@@ -429,6 +429,16 @@
 
                 ok(!combobox.popup.visible());
             });
+
+            test("ComboBox trigger blur of the hidden input", 1, function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+
+                combobox.element.blur(function() {
+                    ok(true);
+                });
+
+                combobox.input.blur();
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
