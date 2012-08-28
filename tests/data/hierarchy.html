@@ -826,6 +826,36 @@
                 ok(dataSource.get(2))
                 equal(dataSource.get(2).text, children.data()[0].text);
             });
+
+            test("sorting is used when loading child datasources", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [
+                        { foo: 1, text: "foo", items: [
+                            { foo: 3, text: "alpha" },
+                            { foo: 2, text: "ghamma" },
+                            { foo: 2, text: "alpha" },
+                            { foo: 2, text: "beta" }
+                        ] }
+                    ],
+                    sort: [
+                        { field: "foo", dir: "asc" },
+                        { field: "text", dir: "asc" }
+                    ]
+                });
+
+                dataSource.read();
+
+                var root = dataSource.data()[0];
+
+                root.load();
+
+                var data = root.children.view();
+
+                equal(data[0].text, "alpha");
+                equal(data[1].text, "beta");
+                equal(data[2].text, "ghamma");
+                equal(data[3].text, "alpha");
+            });
         </script>
     </body>
 </html>
