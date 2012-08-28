@@ -226,7 +226,7 @@
 
                 drag = new kendo.Drag(element, {
                     allowSelection: true,
-                    multiTouch: options.zoom,
+                    multiTouch: that.options.zoom,
                     start: function(e) {
                         dimensions.refresh();
 
