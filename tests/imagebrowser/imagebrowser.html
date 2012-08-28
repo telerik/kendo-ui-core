@@ -357,7 +357,7 @@
                 stop();
             });
 
-            test("clicking on directory does not trigger the change events", 1, function() {
+            test("clicking on directory does not trigger the change event", 1, function() {
                 var browser = setup({
                     change: function() {
                         ok(false);
@@ -369,7 +369,7 @@
                 ok(!browser.value());
             });
 
-            test("clicking on file triggers the change events", 2, function() {
+            test("clicking on file triggers the change event", 2, function() {
                 var browser = setup({
                     path: "foo",
                     change: function() {
@@ -382,7 +382,7 @@
                 equal(browser.value(), "foo/File1");
             });
 
-            test("clicking on file triggers the change events", 2, function() {
+            test("clicking on file triggers the change event", 2, function() {
                 var browser = setup({
                     path: "foo",
                     change: function() {
@@ -640,6 +640,29 @@
 
                 same(browser._createFile("foo"), model);
             });
+
+            test("value custom formating is applied", function() {
+                var browser = setup({
+                    imageUrl: function(path) {
+                        return "foo" + path;
+                    }
+                });
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+
+                equal(browser.value(), "foo/File1");
+            });
+
+            test("value custom formating as string is applied", function() {
+                var browser = setup({
+                    imageUrl: "foo?path={0}"
+                });
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+
+                equal(browser.value(), "foo?path=/File1");
+            });
+
         </script>
     </body>
 </html>

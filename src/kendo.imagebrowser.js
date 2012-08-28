@@ -199,10 +199,17 @@
         },
 
         value: function() {
-            var selected = this._selectedItem();
+            var that = this,
+                selected = that._selectedItem(),
+                path,
+                imageUrl = that.options.imageUrl;
 
-            if (selected && selected.get(this._getFieldName(TYPEFIELD)) === "f") {
-                return concatPaths(this.path(), selected.get(this._getFieldName(NAMEFIELD)));
+            if (selected && selected.get(that._getFieldName(TYPEFIELD)) === "f") {
+                path = concatPaths(that.path(), selected.get(that._getFieldName(NAMEFIELD)));
+                if (imageUrl) {
+                    path = isFunction(imageUrl) ? imageUrl(path) : kendo.format(imageUrl, path);
+                }
+                return path;
             }
         },
 
