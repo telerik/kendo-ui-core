@@ -45,7 +45,7 @@
                     this.categoryAxis = this.primaryCategoryAxis = {
                         getSlot: getCategorySlot,
                         lineBox: function() {
-                            return new Box2D(1,1,1,1);
+                            return new Box2D(0,2,2,2);
                         },
                         options: {
                             categories: ["A", "B"]
@@ -56,7 +56,7 @@
                         primary: {
                             getSlot: getValueSlot,
                             lineBox: function() {
-                                return new Box2D(1,1,1,1);
+                                return new Box2D(0,0,0,2);
                             },
                             options: {}
                         }
@@ -630,8 +630,8 @@
                     });
 
                     same(pointCoordinates, [
-                        [ 0.5, 1 ], [ 0.5, 2 ],
-                        [ 1.5, 2 ], [ 1.5, 1 ]
+                        [ 0.5, 2 ], [ 0.5, 1 ],
+                        [ 1.5, 0 ], [ 1.5, 2 ]
                     ]);
                 });
 
@@ -648,13 +648,13 @@
                 test("area continues after missing value", function() {
                     setupAreaChart(plotArea, {
                         series: [
-                            { data: [ null, 1, 2] }
+                            { data: [ null, 1, 2 ] }
                         ]
                     });
 
                     same(pointCoordinates, [
-                        [ 1.5, 1 ], [ 1.5, 2 ],
-                        [ 2.5, 2 ], [ 2.5, 1 ]
+                        [ 1.5, 2 ], [ 1.5, 1 ],
+                        [ 2.5, 0 ], [ 2.5, 2 ]
                     ]);
                 });
 
@@ -666,8 +666,8 @@
                     });
 
                     same(pointCoordinates, [
-                        [ 0.5, 1 ], [ 0.5, 2 ], [ 1.5, 2 ],
-                        [ 3.5, 2 ], [ 3.5, 1 ]
+                        [ 0.5, 2 ], [ 0.5, 1 ], [ 1.5, 0 ],
+                        [ 3.5, 0 ], [ 3.5, 2 ]
                     ]);
                 });
 
@@ -679,8 +679,8 @@
                     });
 
                     same(pointCoordinates, [
-                        [ 0.5, 1 ], [ 0.5, 2 ], [ 1.5, 2 ],
-                        [ 2.5, 2 ], [ 3.5, 2 ], [ 3.5, 1 ]
+                        [ 0.5, 2 ], [ 0.5, 1 ], [ 1.5, 0 ],
+                        [ 2.5, 2 ], [ 3.5, 0 ], [ 3.5, 2 ]
                     ]);
                 });
 

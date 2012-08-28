@@ -79,7 +79,7 @@
                         return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                                          categoryIndex + 1, CATEGORY_AXIS_Y);
                     },
-                    function(value) {
+                    function(value, b) {
                         var value = typeof value === "undefined" ? 0 : value,
                             valueY = VALUE_AXIS_MAX - value,
                             slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
@@ -582,7 +582,7 @@
                     });
 
                     same(pointCoordinates, [
-                        [ 0.5, 2 ], [ 1.5, 2 ]
+                        [ 0.5, 1 ], [ 1.5, 0 ]
                     ]);
                 });
 
@@ -599,12 +599,12 @@
                 test("line continues after missing value", function() {
                     setupLineChart(plotArea, {
                         series: [
-                            { data: [ null, 1, 2] }
+                            { data: [ null, 1, 2 ] }
                         ]
                     });
 
                     same(pointCoordinates, [
-                        [ 1.5, 2 ], [ 2.5, 2 ]
+                        [ 1.5, 1 ], [ 2.5, 0 ]
                     ]);
                 });
 
@@ -616,7 +616,7 @@
                     });
 
                     same(pointCoordinates, [
-                        [ 0.5, 2 ], [ 1.5, 2 ], [ 3.5, 2 ]
+                        [ 0.5, 1 ], [ 1.5, 0 ], [ 3.5, 0 ]
                     ]);
                 });
 
@@ -628,7 +628,7 @@
                     });
 
                     same(pointCoordinates, [
-                        [ 0.5, 2 ], [ 1.5, 2 ], [ 2.5, 2 ], [ 3.5, 2 ]
+                        [ 0.5, 1 ], [ 1.5, 0 ], [ 2.5, 2 ], [ 3.5, 0 ]
                     ]);
                 });
 
