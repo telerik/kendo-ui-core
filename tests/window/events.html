@@ -146,8 +146,8 @@
 
             var keys = kendo.keys;
 
-            $.fn.press = function(key) {
-                return this.trigger({ type: "keydown", keyCode: key } );
+            $.fn.press = function(key, options) {
+                return this.trigger($.extend({ type: "keydown", keyCode: key }, options ));
             };
 
             test("escape key triggers close event", function() {
@@ -202,6 +202,46 @@
                 dialog.press(keys.RIGHT);
 
                 equal(dialogObject.wrapper.offset().left, offset.left + 10);
+            });
+
+            test("ctrl+down arrow expands window", function() {
+                createWindow({});
+
+                var height = dialogObject.wrapper.height();
+
+                dialog.press(keys.DOWN, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.height(), height + 10);
+            });
+
+            test("ctrl+up arrow shrinks window", function() {
+                createWindow({});
+
+                var height = dialogObject.wrapper.height();
+
+                dialog.press(keys.UP, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.height(), height - 10);
+            });
+
+            test("ctrl+left arrow shrinks window", function() {
+                createWindow({});
+
+                var width = dialogObject.wrapper.width();
+
+                dialog.press(keys.LEFT, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.width(), width - 10);
+            });
+
+            test("ctrl+right arrow expands window", function() {
+                createWindow({});
+
+                var width = dialogObject.wrapper.width();
+
+                dialog.press(keys.RIGHT, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.width(), width + 10);
             });
         </script>
 
