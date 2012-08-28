@@ -271,6 +271,10 @@
                 {
                     "text": "Overview",
                     "url": "view/index.html"
+                },
+                {
+                    "text": "Zoomable View",
+                    "url": "view/zoomable.html"
                 }
             ]
         },
