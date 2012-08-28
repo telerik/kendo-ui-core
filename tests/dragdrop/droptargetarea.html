@@ -31,11 +31,12 @@
             module("kendo.ui.DropTargetArea", {
                 setup: function() {
                     targetElement = $("<div><div class='test1'>&nbsp;</div><div class='test2'>&nbsp;</div></div>").prependTo(document.body);
-                    span = $("<span>&nbsp;</span>").prependTo(document.body);
+                    span = $("<span>Foo</span>").prependTo(document.body);
                 },
                 teardown: function() {
                     span.remove();
                     targetElement.remove();
+                    draggable.destroy();
                 }
             });
 
@@ -47,6 +48,7 @@
             function startDrag() {
                 var offset = kendo.getOffset(targetElement);
                 trigger("mousedown", { pageX: 1, pageY: 1 });
+
                 trigger("mousemove", {
                     pageX: offset.left,
                     pageY: offset.top,

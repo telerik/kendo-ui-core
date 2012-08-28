@@ -23,6 +23,33 @@
         RESIZE = "resize",
         SCROLL = "scroll";
 
+    var ZoomSnapBack = Animation.extend({
+        init: function(options) {
+            var that = this;
+            Animation.fn.init.call(that);
+            extend(that, options);
+
+            that.drag.bind("gestureend", proxy(that.start, that));
+            that.tapCapture.bind("press", proxy(that.cancel, that));
+        },
+
+        done: function() {
+            return this.dimensions.minScale - this.movable.scale < 0.01;
+        },
+
+        tick: function() {
+            var movable = this.movable;
+            movable.scaleWith(1.1);
+            this.dimensions.rescale(movable.scale);
+        },
+
+        onEnd: function() {
+            var movable = this.movable;
+            movable.scaleTo(this.dimensions.minScale);
+            this.dimensions.rescale(movable.scale);
+        }
+    });
+
     var DragInertia = Animation.extend({
         init: function(options) {
             var that = this;
@@ -37,8 +64,9 @@
                 })
             });
 
-            that.tap.bind("press", function() { that.cancel(); });
+            that.tapCapture.bind("press", function() { that.cancel(); });
             that.drag.bind("end", proxy(that.start, that));
+            that.drag.bind("gestureend", proxy(that.start, that));
             that.drag.bind("tap", proxy(that.onEnd, that));
         },
 
@@ -65,17 +93,17 @@
             return Math.abs(this.velocity) < 1;
         },
 
-        start: function() {
+        start: function(e) {
             var that = this;
 
-            if (!that.dimension.present()) { return; }
+            if (!that.dimension.enabled) { return; }
 
             if (that._outOfBounds()) {
                 that._snapBack();
             } else {
-                that.velocity = that.drag[that.axis].velocity * 16;
+                that.velocity = e.touch[that.axis].velocity * 16;
                 if (that.velocity) {
-                    that.tap.captureNext();
+                    that.tapCapture.captureNext();
                     Animation.fn.start.call(that);
                 }
             }
@@ -97,7 +125,7 @@
         },
 
         _end: function() {
-            this.tap.cancelCapture();
+            this.tapCapture.cancelCapture();
             this.end();
         },
 
@@ -184,7 +212,7 @@
 
             var inner = element.children().eq(1),
 
-                tap = new kendo.Tap(element),
+                tapCapture = new kendo.TapCapture(element),
 
                 movable = new Movable(inner),
 
@@ -198,10 +226,11 @@
 
                 drag = new kendo.Drag(element, {
                     allowSelection: true,
+                    multiTouch: options.zoom,
                     start: function(e) {
                         dimensions.refresh();
 
-                        if (dimensions.present()) {
+                        if (dimensions.enabled) {
                             drag.capture();
                         } else {
                             drag.cancel();
@@ -214,6 +243,13 @@
                     dimensions: dimensions,
                     drag: drag,
                     elastic: that.options.elastic
+                }),
+
+                zoomSnapBack = new ZoomSnapBack({
+                    movable: movable,
+                    dimensions: dimensions,
+                    drag: drag,
+                    tapCapture: tapCapture
                 });
 
             movable.bind(CHANGE, function() {
@@ -229,9 +265,10 @@
             extend(that, {
                 movable: movable,
                 dimensions: dimensions,
+                zoomSnapBack: zoomSnapBack,
                 drag: drag,
                 pane: pane,
-                tap: tap,
+                tapCapture: tapCapture,
                 pulled: false,
                 scrollElement: inner,
                 fixedContainer: element.children().first()
@@ -259,6 +296,7 @@
 
         options: {
             name: "Scroller",
+            zoom: false,
             pullOffset: 140,
             elastic: true,
             pullTemplate: "Pull to refresh",
@@ -351,7 +389,7 @@
             var that = this,
             movable = that.movable,
             dimension = that.dimensions[axis],
-            tap = that.tap,
+            tapCapture = that.tapCapture,
 
             scrollBar = new ScrollBar({
                 axis: axis,
@@ -363,7 +401,7 @@
             inertia = new DragInertia({
                 axis: axis,
                 movable: movable,
-                tap: tap,
+                tapCapture: tapCapture,
                 drag: that.drag,
                 dimension: dimension,
                 elastic: that.options.elastic,

@@ -43,7 +43,11 @@
         MOVE = "move",
         END = "end",
         CANCEL = "cancel",
-        TAP = "tap";
+        TAP = "tap",
+        GESTURESTART = "gesturestart",
+        GESTURECHANGE = "gesturechange",
+        GESTUREEND = "gestureend",
+        GESTURETAP = "gesturetap";
 
     if (support.touch) {
         START_EVENTS = "touchstart";
@@ -94,10 +98,6 @@
         };
     }
 
-    function addNS(events, ns) {
-        return events.replace(/ /g, ns + " ");
-    }
-
     function preventTrigger(e) {
         e.preventDefault();
 
@@ -138,17 +138,14 @@
     }
 
     var DragAxis = Class.extend({
-        init: function(axis) {
-            this.axis = axis;
-        },
-
-        start: function(location, timeStamp) {
+        init: function(axis, location, timeStamp) {
             var that = this,
-                offset = location["page" + that.axis];
+                offset = location["page" + axis];
 
+            that.axis = axis;
             that.startLocation = that.location = offset;
-            that.client = location["client" + that.axis];
-            that.screen = location["screen" + that.axis];
+            that.client = location["client" + axis];
+            that.screen = location["screen" + axis];
             that.velocity = that.delta = 0;
             that.timeStamp = timeStamp;
         },
@@ -171,38 +168,188 @@
         }
     });
 
+    var Touch = Class.extend({
+        init: function(drag, target, event) {
+            var that = this,
+                timestamp = now();
+
+            extend(that, {
+                x: new DragAxis("X", event.location, timestamp),
+                y: new DragAxis("Y", event.location, timestamp),
+                drag: drag,
+                target: target,
+                currentTarget: event.currentTarget,
+                id: event.id,
+                _moved: false,
+                _finished: false
+            });
+        },
+
+        dispose: function() {
+            var that = this,
+                drag = that.drag,
+                activeTouches = drag.touches;
+
+            that._finished = true;
+
+            activeTouches.splice(activeTouches.indexOf(that), 1);
+        },
+
+        skip: function() {
+            this.dispose();
+        },
+
+        cancel: function() {
+            this.dispose();
+        },
+
+        isMoved: function() {
+            return this._moved;
+        },
+
+        _start: function(e) {
+           this.startTime = now();
+           this._moved = true;
+           this._trigger(START, e);
+        },
+
+        move: function(touch) {
+            var that = this,
+                e = touch.event,
+                timestamp = now();
+
+            if (that._finished) { return; }
+
+            that.x.move(touch.location, timestamp);
+            that.y.move(touch.location, timestamp);
+
+            if (!that._moved) {
+                if (that._withinIgnoreThreshold()) {
+                    return;
+                }
+
+                if (!Drag.current || Drag.current === that.drag) {
+                    that._start(e);
+                } else {
+                    return that.dispose();
+                }
+            }
+
+            // Event handlers may cancel the drag in the START event handler, hence the double check for pressed.
+            if (!that._finished) {
+                that._trigger(MOVE, e);
+            }
+        },
+
+        end: function(touch) {
+            var that = this,
+                e = touch.event;
+
+            if (that._finished) { return; }
+
+            if (that._moved) {
+                that._trigger(END, e);
+            } else {
+                that._trigger(TAP, e);
+            }
+
+            that.dispose();
+        },
+
+        _trigger: function(name, e) {
+            var that = this,
+                data = {
+                    touch: that,
+                    x: that.x,
+                    y: that.y,
+                    target: that.target,
+                    event: e
+                };
+
+            if(that.drag.notify(name, data)) {
+                e.preventDefault();
+            }
+        },
+
+        _withinIgnoreThreshold: function() {
+            var xDelta = this.x.initialDelta,
+                yDelta = this.y.initialDelta;
+
+            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.drag.threshold;
+        }
+    });
+
+    function getTouches(e) {
+        var touches = [],
+            originalEvent = e.originalEvent,
+            idx = 0, length,
+            changedTouches,
+            touch;
+
+        if (support.touch) {
+            changedTouches = originalEvent.changedTouches;
+            for (length = changedTouches.length; idx < length; idx ++) {
+                touch = changedTouches[idx];
+                touches.push({
+                    location: touch,
+                    event: e,
+                    target: touch.target,
+                    id: touch.identifier
+                });
+            }
+        }
+        else if (support.pointers) {
+            touches.push({
+                location: originalEvent,
+                event: e,
+                target: e.target,
+                id: originalEvent.pointerId
+
+            });
+        } else {
+            touches.push({
+                id: 1, // hardcoded ID for mouse event;
+                event: e,
+                target: e.target,
+                location: e
+            });
+        }
+
+        return touches;
+    }
+
     var Drag = Observable.extend({
         init: function(element, options) {
             var that = this,
-                eventMap = {},
                 filter,
                 preventIfMoving,
-                ns = "." + kendo.guid();
+                eventMap = {};
 
             options = options || {};
             filter = that.filter = options.filter;
             that.threshold = options.threshold || 0;
+            that.touches = [];
+            that._maxTouches = options.multiTouch ? 2 : 1;
 
             element = $(element);
             Observable.fn.init.call(that);
 
-            eventMap[addNS(MOVE_EVENTS, ns)] = proxy(that._move, that);
-            eventMap[addNS(END_EVENTS, ns)] = proxy(that._end, that);
-
             extend(that, {
-                x: new DragAxis("X"),
-                y: new DragAxis("Y"),
+                eventMap: eventMap,
                 element: element,
                 surface: options.global ? SURFACE : options.surface || element,
                 stopPropagation: options.stopPropagation,
-                pressed: false,
-                eventMap: eventMap,
-                ns: ns
+                pressed: false
             });
+
+            eventMap[MOVE_EVENTS] = function(e) { that._move(e); };
+            eventMap[END_EVENTS] = function(e) { that._end(e); };
 
             element
                 .on(START_EVENTS + NS, filter, proxy(that._start, that))
                 .on("dragstart" + NS, filter, kendo.preventDefault);
+
+            that.surface.on(eventMap);
 
             if (pointers) {
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
@@ -220,7 +367,7 @@
 
             if (support.eventCapture) {
                 preventIfMoving = function(e) {
-                    if (that.moved) {
+                    if (that._isMoved()) {
                         e.preventDefault();
                     }
                 };
@@ -233,50 +380,85 @@
             START,
             MOVE,
             END,
-            CANCEL], options);
+            CANCEL,
+            GESTURESTART,
+            GESTURECHANGE,
+            GESTUREEND,
+            GESTURETAP], options);
         },
 
         destroy: function() {
             this.element.off(NS);
+            this.surface.off(this.eventMap);
+            this._disposeAll();
         },
 
         capture: function() {
-            Drag.captured = true;
+            Drag.current = this;
         },
 
         cancel: function() {
-            this._cancel();
+            this._disposeAll();
             this.trigger(CANCEL);
         },
 
-        skip: function() {
-            this._cancel();
+        notify: function(eventName, data) {
+            var that = this;
+
+            if (this._isMultiTouch()) {
+                switch(eventName) {
+                    case MOVE:
+                        eventName = GESTURECHANGE;
+                        break;
+                    case END:
+                        eventName = GESTUREEND;
+                        break;
+                    case TAP:
+                        eventName = GESTURETAP;
+                        break;
+                }
+
+                data.touches = that.touches;
+            }
+
+            return this.trigger(eventName, data);
         },
 
-        _cancel: function() {
-            var that = this;
-            that.moved = that.pressed = false;
-            that.surface.off(that.ns);
+        _isMultiTouch: function() {
+            return this.touches.length > 1;
+        },
+
+        _maxTouchesReached: function() {
+
+            return this.touches.length >= this._maxTouches;
+        },
+
+        _disposeAll: function() {
+            $.each(this.touches, function() { this.dispose(); });
+        },
+
+        _isMoved: function() {
+            return $.grep(this.touches, function(touch) { return touch.isMoved(); }).length;
+        },
+
+        _isPressed: function() {
+            return this.touches.length;
         },
 
         _start: function(e) {
             var that = this,
+                idx = 0,
                 filter = that.filter,
-                originalEvent = e.originalEvent,
-                touch,
-                location = e;
+                target,
+                touches = getTouches(e),
+                length = touches.length,
+                touch;
 
-            if (that.pressed) { return; }
-
-            if (filter) {
-                that.target = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
-            } else {
-                that.target = that.element;
-            }
-
-            if (!that.target.length) {
+            if (that._maxTouchesReached()) {
                 return;
             }
+
+            Drag.current = null;
 
             that.currentTarget = e.currentTarget;
 
@@ -284,129 +466,68 @@
                 e.stopPropagation();
             }
 
-            that.pressed = true;
-            that.moved = false;
-            that.startTime = null;
+            for (; idx < length; idx ++) {
+                if (that._maxTouchesReached()) {
+                    break;
+                }
 
-            if (support.touch) {
-                touch = originalEvent.changedTouches[0];
-                that.touchID = touch.identifier;
-                location = touch;
+                touch = touches[idx];
+
+                target = $(touch.target);
+
+                if (filter) {
+                    target = target.is(filter) ? target : target.closest(filter);
+                } else {
+                    target = that.element;
+                }
+
+                if (!target.length) {
+                    continue;
+                }
+
+                that.touches.push(new Touch(that, target, touch));
+
+                if (that._isMultiTouch()) {
+                    that.notify("gesturestart", {});
+                }
             }
-
-            if (pointers) {
-                that.touchID = originalEvent.pointerId;
-                location = originalEvent;
-            }
-
-            that._perAxis(START, location, now());
-            that.surface.off(that.eventMap).on(that.eventMap);
-            Drag.captured = false;
         },
 
         _move: function(e) {
-            var that = this,
-                xDelta,
-                yDelta,
-                delta;
-
-            if (!that.pressed) { return; }
-
-            that._withEvent(e, function(location) {
-
-                that._perAxis(MOVE, location, now());
-
-                if (!that.moved) {
-                    xDelta = that.x.initialDelta;
-                    yDelta = that.y.initialDelta;
-
-                    delta = Math.sqrt(xDelta * xDelta + yDelta * yDelta);
-
-                    if (delta <= that.threshold) {
-                        return;
-                    }
-
-                    if (!Drag.captured) {
-                        that.startTime = now();
-                        that._trigger(START, e);
-                        that.moved = true;
-                    } else {
-                        return that._cancel();
-                    }
-                }
-
-                // Event handlers may cancel the swipe in the START event handler, hence the double check for pressed.
-                if (that.pressed) {
-                    that._trigger(MOVE, e);
-                }
-            });
+            this._eachTouch("move", e);
         },
 
         _end: function(e) {
-            var that = this;
-
-            if (!that.pressed) { return; }
-
-            that._withEvent(e, function() {
-                if (that.moved) {
-                    that.endTime = now();
-                    that._trigger(END, e);
-                    that.moved = false;
-                } else {
-                    that._trigger(TAP, e);
-                }
-
-                that._cancel();
-            });
+            this._eachTouch("end", e);
         },
 
-        _perAxis: function(method, location, timeStamp) {
-            this.x[method](location, timeStamp);
-            this.y[method](location, timeStamp);
-        },
-
-        _trigger: function(name, e) {
-            var data = {
-                x: this.x,
-                y: this.y,
-                target: this.target,
-                event: e
-            };
-
-            if(this.trigger(name, data)) {
-                e.preventDefault();
-            }
-        },
-
-        _withEvent: function(e, callback) {
+        _eachTouch: function(methodName, e) {
             var that = this,
-                touchID = that.touchID,
-                originalEvent = e.originalEvent,
-                touches,
-                idx;
+                dict = {},
+                touches = getTouches(e),
+                activeTouches = that.touches,
+                idx,
+                touch,
+                matchingTouch;
 
-            if (support.touch) {
-                touches = originalEvent.changedTouches;
-                idx = touches.length;
-
-                while (idx) {
-                    idx --;
-                    if (touches[idx].identifier === touchID) {
-                        return callback(touches[idx]);
-                    }
-                }
+            for (idx = 0; idx < activeTouches.length; idx ++) {
+                touch = activeTouches[idx];
+                dict[touch.id] = touch;
             }
-            else if (pointers) {
-                if (touchID === originalEvent.pointerId) {
-                    return callback(originalEvent);
+
+            for (idx = 0; idx < touches.length; idx ++) {
+                touch = touches[idx];
+                matchingTouch = dict[touch.id];
+
+                if (matchingTouch) {
+                    matchingTouch[methodName](touch);
                 }
-            } else {
-                return callback(e);
             }
         }
     });
 
-    var Tap = Observable.extend({
+
+    var TapCapture = Observable.extend({
         init: function(element, options) {
             var that = this,
                 domElement = element[0];
@@ -420,6 +541,14 @@
             Observable.fn.init.call(that);
 
             that.bind(["press", "release"], options || {});
+        },
+
+        captureNext: function() {
+            this.capture = true;
+        },
+
+        cancelCapture: function() {
+            this.capture = false;
         },
 
         _press: function(e) {
@@ -438,14 +567,6 @@
                 e.preventDefault();
                 that.cancelCapture();
             }
-        },
-
-        captureNext: function() {
-            this.capture = true;
-        },
-
-        cancelCapture: function() {
-            this.capture = false;
         }
     });
 
@@ -456,6 +577,7 @@
 
             $.extend(that, options);
 
+            that.scale = 1;
             that.max = 0;
             that._forceEnabled = false;
 
@@ -474,10 +596,6 @@
             return  offset > this.max || offset < this.min;
         },
 
-        present: function() {
-            return this._forceEnabled || (this.max - this.min);
-        },
-
         forceEnabled: function() {
             this._forceEnabled = true;
         },
@@ -490,12 +608,22 @@
             return this.element[0][this.scrollSize];
         },
 
-        update: function(silent) {
-            var that = this;
+        rescale: function(scale) {
+            this.scale = scale;
+        },
 
-            that.size = that.getSize();
-            that.total = that.getTotal();
+        update: function(silent) {
+            var that = this,
+                total = that.getTotal(),
+                size = that.getSize();
+
+            that.size = size;
+            that.total = total * that.scale;
             that.min = Math.min(that.max, that.size - that.total);
+            that.minScale = that.size / total;
+
+            that.enabled = that._forceEnabled || ( total != that.size);
+
             if (!silent) {
                 that.trigger(CHANGE, that);
             }
@@ -511,20 +639,26 @@
 
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
+            that.forcedMinScale = options.minScale;
 
             that.bind(CHANGE, options);
 
             kendo.onResize(refresh);
         },
 
-        present: function() {
-            return this.x.present() || this.y.present();
+        rescale: function(newScale) {
+            this.x.rescale(newScale);
+            this.y.rescale(newScale);
+            this.refresh();
         },
 
         refresh: function() {
-            this.x.update();
-            this.y.update();
-            this.trigger(CHANGE);
+            var that = this;
+            that.x.update();
+            that.y.update();
+            that.enabled = that.x.enabled || that.y.enabled;
+            that.minScale = that.forcedMinScale || Math.max(that.x.minScale, that.y.minScale);
+            that.trigger(CHANGE);
         }
     });
 
@@ -542,7 +676,7 @@
                 movable = that.movable,
                 position = movable[axis] + delta;
 
-            if (!dimension.present()) {
+            if (!dimension.enabled) {
                 return;
             }
 
@@ -555,39 +689,97 @@
         }
     });
 
+    function gestureTouchInfo(e) {
+        var finger1 = e.touches[0],
+            x1 = finger1.x.location,
+            y1 = finger1.y.location,
+            finger2 = e.touches[1],
+            x2 = finger2.x.location,
+            y2 = finger2.y.location,
+            dx = x1 - x2,
+            dy = y1 - y2;
+
+        return {
+            center: {
+               x: (x1 + x2) / 2,
+               y: (y1 + y2) / 2
+            },
+
+            distance: Math.sqrt(dx*dx + dy*dy)
+        };
+    }
+
     var Pane = Class.extend({
+
         init: function(options) {
             var that = this,
                 x,
                 y,
-                resistance;
+                resistance,
+                movable;
 
             extend(that, {elastic: true}, options);
 
             resistance = that.elastic ? 0.5 : 0;
+            movable = that.movable;
 
             that.x = x = new PaneAxis({
                 axis: "x",
                 dimension: that.dimensions.x,
                 resistance: resistance,
-                movable: that.movable
+                movable: movable
             });
 
             that.y = y = new PaneAxis({
                 axis: "y",
                 dimension: that.dimensions.y,
                 resistance: resistance,
-                movable: that.movable
+                movable: movable
             });
 
-            that.drag.bind(["move", "end"], {
+            that.drag.bind(["move", "end", "gesturestart", "gesturechange", "gestureend"], {
+                gesturestart: function(e) {
+                    that.gestureInfo = gestureTouchInfo(e);
+                },
+
+                gesturechange: function(e) {
+                    var previousGestureInfo = that.gestureInfo,
+                        previousCenter = previousGestureInfo.center,
+
+                        gestureInfo = gestureTouchInfo(e),
+                        center = gestureInfo.center,
+
+                        scaleDelta = gestureInfo.distance / previousGestureInfo.distance,
+
+                        minScale = that.dimensions.minScale,
+                        coordinates;
+
+                    if (movable.scale <= minScale && scaleDelta < 1) {
+                        // Resist shrinking. Instead of shrinking from 1 to 0.5, it will shrink to 0.5 + (1 /* minScale */ - 0.5) * 0.8 = 0.9;
+                        scaleDelta += (1 - scaleDelta) * 0.8;
+                    }
+
+                    coordinates = {
+                        x: (movable.x - previousCenter.x) * scaleDelta + center.x - movable.x,
+                        y: (movable.y - previousCenter.y) * scaleDelta + center.y - movable.y
+                    };
+
+                    movable.scaleWith(scaleDelta);
+
+                    x.dragMove(coordinates.x);
+                    y.dragMove(coordinates.y);
+
+                    that.dimensions.rescale(movable.scale);
+                    that.gestureInfo = gestureInfo;
+                },
+
                 move: function(e) {
-                    if (x.dimension.present() || y.dimension.present()) {
+                    if (x.dimension.enabled || y.dimension.enabled) {
                         x.dragMove(e.x.delta);
                         y.dragMove(e.y.delta);
                         e.preventDefault();
                     } else {
-                        that.drag.skip();
+                        e.touch.skip();
                     }
                 },
 
@@ -603,12 +795,12 @@
         translate;
 
     if (support.hasHW3D) {
-        translate = function(x, y) {
-            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
+        translate = function(x, y, scale) {
+            return "translate3d(" + round(x) + "px," + round(y) +"px,0) scale(" + scale + ")";
         };
     } else {
-        translate = function(x, y) {
-            return "translate(" + round(x) + "px," + round(y) +"px)";
+        translate = function(x, y, scale) {
+            return "translate(" + round(x) + "px," + round(y) +"px) scale(" + scale + ")";
         };
     }
 
@@ -619,13 +811,25 @@
             Observable.fn.init.call(that);
 
             that.element = $(element);
+            that.element[0].style.webkitTransformOrigin = "left top";
             that.x = 0;
             that.y = 0;
-            that._saveCoordinates(translate(that.x, that.y));
+            that.scale = 1;
+            that._saveCoordinates(translate(that.x, that.y, that.scale));
         },
 
         translateAxis: function(axis, by) {
             this[axis] += by;
+            this.refresh();
+        },
+
+        scaleTo: function(scale) {
+            this.scale = scale;
+            this.refresh();
+        },
+
+        scaleWith: function(scaleDelta) {
+            this.scale *= scaleDelta;
             this.refresh();
         },
 
@@ -647,7 +851,7 @@
 
         refresh: function() {
             var that = this,
-                newCoordinates = translate(that.x, that.y);
+                newCoordinates = translate(that.x, that.y, that.scale);
 
             if (newCoordinates != that.coordinates) {
                 that.element[0].style[TRANSFORM_STYLE] = newCoordinates;
@@ -756,7 +960,7 @@
                 cancel: proxy(that._cancel, that)
             });
 
-            that._destroyHandler = proxy(that._destroy, that);
+            that._afterEndHandler = proxy(that._afterEnd, that);
             that.captureEscape = function(e) {
                 if (e.keyCode === kendo.keys.ESC) {
                     that._trigger(DRAGCANCEL, {event: e});
@@ -782,47 +986,7 @@
             dropped: false
         },
 
-        _start: function(e) {
-            var that = this,
-                options = that.options,
-                container = options.container,
-                hint = options.hint;
-
-            that.currentTarget = that.drag.target;
-            that.currentTargetOffset = getOffset(that.currentTarget);
-
-            if (hint) {
-                that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
-
-                var offset = getOffset(that.currentTarget);
-                that.hintOffset = offset;
-
-                that.hint.css( {
-                    position: "absolute",
-                    zIndex: 20000, // the Window's z-index is 10000 and can be raised because of z-stacking
-                    left: offset.left,
-                    top: offset.top
-                })
-                .appendTo(document.body);
-            }
-
-            draggables[options.group] = that;
-
-            that.dropped = false;
-
-            if (container) {
-                that.boundaries = containerBoundaries(container, that.hint);
-            }
-
-            if (that._trigger(DRAGSTART, e)) {
-                that.drag.cancel();
-                that._destroy();
-            }
-
-            $(document).on(KEYUP, that.captureEscape);
-        },
-
-        updateHint: function(e) {
+        _updateHint: function(e) {
             var that = this,
                 coordinates,
                 options = that.options,
@@ -850,6 +1014,46 @@
             }
 
             that.hint.css(coordinates);
+        },
+
+        _start: function(e) {
+            var that = this,
+                options = that.options,
+                container = options.container,
+                hint = options.hint;
+
+            that.currentTarget = e.target;
+            that.currentTargetOffset = getOffset(that.currentTarget);
+
+            if (hint) {
+                that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
+
+                var offset = getOffset(that.currentTarget);
+                that.hintOffset = offset;
+
+                that.hint.css( {
+                    position: "absolute",
+                    zIndex: 20000, // the Window's z-index is 10000 and can be raised because of z-stacking
+                    left: offset.left,
+                    top: offset.top
+                })
+                .appendTo(document.body);
+            }
+
+            draggables[options.group] = that;
+
+            that.dropped = false;
+
+            if (container) {
+                that.boundaries = containerBoundaries(container, that.hint);
+            }
+
+            if (that._trigger(DRAGSTART, e)) {
+                that.drag.cancel();
+                that._afterEnd();
+            }
+
+            $(document).on(KEYUP, that.captureEscape);
         },
 
         _drag: function(e) {
@@ -881,7 +1085,7 @@
             that._trigger(DRAG, e);
 
             if (that.hint) {
-                that.updateHint(e);
+                that._updateHint(e);
             }
         },
 
@@ -903,9 +1107,9 @@
             var that = this;
 
             if (that.hint && !that.dropped) {
-                that.hint.animate(that.currentTargetOffset, "fast", that._destroyHandler);
+                that.hint.animate(that.currentTargetOffset, "fast", that._afterEndHandler);
             } else {
-                that._destroy();
+                that._afterEnd();
             }
         },
 
@@ -957,12 +1161,12 @@
 
             Widget.fn.destroy.call(that);
 
-            that._destroy();
+            that._afterEnd();
 
             that.drag.destroy();
         },
 
-        _destroy: function() {
+        _afterEnd: function() {
             var that = this;
 
             if (that.hint) {
@@ -980,7 +1184,7 @@
     kendo.ui.plugin(DropTargetArea);
     kendo.ui.plugin(Draggable);
     kendo.Drag = Drag;
-    kendo.Tap = Tap;
+    kendo.TapCapture = TapCapture;
     kendo.containerBoundaries = containerBoundaries;
 
     extend(kendo.ui, {
