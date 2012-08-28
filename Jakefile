@@ -604,7 +604,7 @@ function version() {
 }
 
 function mkdirClean(dir) {
-    if (path.existsSync(dir)) {
+    if (fs.existsSync(dir)) {
         kendoBuild.rmdirSyncRecursive(dir);
     }
 
