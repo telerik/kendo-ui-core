@@ -56,12 +56,15 @@
                     kendo.mobile.init = init;
                     $.mockjaxClear();
                     kendo.history.stop();
+                    $("#qunit-fixture").empty();
                 }
             });
 
             function setup(html, options) {
-                $("#qunit-fixture").html(html);
-                application = new kendo.mobile.Application($("#qunit-fixture"), options);
+                var root = $("<div />").append(html);
+                $("#qunit-fixture").append(root);
+                console.log(root);
+                application = new kendo.mobile.Application(root, options);
             }
 
             test("Navigates to remote view silently on ready", function() {
@@ -147,7 +150,7 @@
                 });
             }
 
-            asyncTest("triggers pull when pulled", 1, function() {
+            test("triggers pull when pulled", 1, function() {
                 setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div>');
 
                 var el = $("#page1 .km-scroll-wrapper");
@@ -156,7 +159,6 @@
                     pullToRefresh: true,
                     pullOffset: 100,
                     pull: function() {
-                        start();
                         ok(true);
                     }
                 });
@@ -166,18 +168,17 @@
                 el.trigger($.Event("mouseup"));
             });
 
-            asyncTest("triggers scroll when scrolled", 1, function() {
+            test("triggers scroll when scrolled", 1, function() {
                 setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div>');
 
                 var el = $("#page1 .km-scroll-wrapper");
 
                 application.scroller().bind("scroll", function() {
-                    start();
                     ok(true);
                 });
 
-                el.trigger($.Event("mousedown", { pageX: 0, pageY: 200}));
-                el.trigger($.Event("mousemove", { pageX: 0, pageY: 0}));
+                el.trigger($.Event("mousedown", { pageX: 1, pageY: 200}));
+                el.trigger($.Event("mousemove", { pageX: 1, pageY: 1}));
                 el.trigger($.Event("mouseup"));
             });
 
@@ -207,8 +208,9 @@
             });
 
             test("Appends root and phone/tablet classes on documentElement", function () {
-                ok($("#qunit-fixture").parent().hasClass("km-root"));
-                ok($("#qunit-fixture").parent().hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
+                setup('<div data-role="view" />');
+                ok($("#qunit-fixture").hasClass("km-root"));
+                ok($("#qunit-fixture").hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
             });
 
             test("Raises meaningful error when the app can't find views", 1, function() {
