@@ -2832,7 +2832,7 @@
                 that.children.one(CHANGE, function() {
                             that._loaded = true;
                         })
-                        .query(options);
+                        ._query(options);
             }
         },
 
