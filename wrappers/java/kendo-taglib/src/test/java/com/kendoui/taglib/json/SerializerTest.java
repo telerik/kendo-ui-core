@@ -64,4 +64,138 @@ public class SerializerTest {
             }
         }));
     }
+
+    @Test
+    public void jsonQuotesStrings() throws IOException {
+        assertEquals("{\"foo\":\"foo\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "foo";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonEscapesQuotes() throws IOException {
+        assertEquals("{\"foo\":\"\\\"\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "\"";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonEscapesBackSlash() throws IOException {
+        assertEquals("{\"foo\":\"\\\\\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "\\";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonEscapesCarriageReturn() throws IOException {
+        assertEquals("{\"foo\":\"\\r\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "\r";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonEscapesLineFeed() throws IOException {
+        assertEquals("{\"foo\":\"\\n\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "\n";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonEscapesBell() throws IOException {
+        assertEquals("{\"foo\":\"\\b\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "\b";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonEscapesTab() throws IOException {
+        assertEquals("{\"foo\":\"\\t\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "\t";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonEscapesFormFeed() throws IOException {
+        assertEquals("{\"foo\":\"\\f\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "\f";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonEscapesSlashWhenAfterLessThan() throws IOException {
+        assertEquals("{\"foo\":\"<\\/script>\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "</script>";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonEscapesUnicodeEntities() throws IOException {
+        assertEquals("{\"foo\":\"\\u2000\"}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public String getFoo() {
+                return "\u2000";
+            }
+        }));
+    }
+
+    @Test
+    public void jsonSerializesNumbers() throws IOException {
+        assertEquals("{\"foo\":1.5}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public float getFoo() {
+                return 1.5f;
+            }
+        }));
+    }
+
+    @Test
+    public void jsonSerializesNestedObjects() throws IOException {
+        assertEquals("{\"foo\":{\"bar\":\"bar\"}}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public Object getFoo() {
+                return new Object() {
+                    public String getBar() {
+                        return "bar";
+                    }
+                };
+            }
+        }));
+    }
+
+    @Test
+    public void jsonSerializesArrays() throws IOException {
+        assertEquals("{\"foo\":[1,2]}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public int[] getFoo() {
+                return new int[] { 1, 2 };
+            }
+        }));
+    }
 }
