@@ -1457,17 +1457,20 @@
                 lineBox = axis.lineBox(),
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
-                axisCrossingValues = [].concat(options.axisCrossingValue),
-                // TODO assume b = a when b is missing. Axis crossing value is unreliable
-                crossingValue = axisCrossingValues[0],
                 dir = reverse ? -1 : 1,
                 step = dir * (lineSize / (options.max - options.min)),
                 p1,
                 p2,
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
-            a = defined(a) ? a : crossingValue;
-            b = defined(b) ? b : crossingValue;
+            if (!defined(a)) {
+                a = b || 0;
+            }
+
+            if (!defined(b)) {
+                b = a || 0;
+            }
+
             a = math.max(math.min(a, options.max), options.min);
             b = math.max(math.min(b, options.max), options.min);
 
