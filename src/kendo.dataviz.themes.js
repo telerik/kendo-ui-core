@@ -40,7 +40,13 @@
                         width: 1
                     },
                     gap: 1,
-                    baseBodyColor: WHITE
+                    baseBodyColor: WHITE,
+                    aggregate: {
+                        "open": "max",
+                        "high": "max",
+                        "low": "min",
+                        "close": "max"
+                    }
                 },
                 verticalCandleStick: {
                     line: {
@@ -50,7 +56,13 @@
                         width: 1
                     },
                     gap: 1,
-                    baseBodyColor: WHITE
+                    baseBodyColor: WHITE,
+                    aggregate: {
+                        "open": "max",
+                        "high": "max",
+                        "low": "min",
+                        "close": "max"
+                    }
                 },
                 bubble: {
                     opacity: 0.6,

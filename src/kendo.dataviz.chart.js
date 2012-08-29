@@ -4875,7 +4875,6 @@
                 seriesClone,
                 srcData,
                 data,
-                aggregate,
                 srcValues,
                 i,
                 categoryIx,
@@ -4885,7 +4884,6 @@
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 seriesClone = deepExtend({}, currentSeries);
-                aggregate = plotArea.seriesAggregate(seriesClone);
 
                 srcData = seriesClone.data;
 
@@ -4905,7 +4903,7 @@
                     }
 
                     if (srcValues.length > 1) {
-                        data[groupIx] = aggregate(srcValues, currentSeries);
+                        data[groupIx] = calculateAggregates(srcValues, currentSeries);
                     } else {
                         data[groupIx] = srcData[categoryIndicies[0]];
                     }
@@ -4915,15 +4913,6 @@
             }
 
             plotArea.series = processedSeries;
-        },
-
-        seriesAggregate: function(series) {
-            var aggregate = series.aggregate;
-            if (typeof aggregate === STRING) {
-                aggregate = Aggregates[aggregate];
-            }
-
-            return aggregate || Aggregates.max;
         },
 
         appendChart: function(chart) {
@@ -5672,6 +5661,52 @@
             return Aggregates.sum(values) / Aggregates.count(values);
         }
     };
+
+    function calculateAggregates(values, series) {
+        var aggregate = series.aggregate,
+            result;
+
+        function execSimple(values, aggregate, series) {
+            var result,
+                aggregateType = typeof aggregate;
+
+            if (aggregateType === STRING) {
+                result = Aggregates[aggregate](values);
+            } else if (aggregateType === "function") {
+                result = aggregate(values, series);
+            } else {
+                result = Aggregates.max(values);
+            }
+
+            return result;
+        }
+
+        function execComposite(values, aggregate, series) {
+            var valueFields = valueFieldsByChartType(series.type),
+                valueFieldsCount = valueFields.length,
+                count = values.length,
+                i, j, field, result = {}, data = [];
+
+            for (i = 0; i < valueFieldsCount; i++) {
+                field = valueFields[i];
+                for (j = 0; j < count; j++) {
+                    data.push(values[j][field]);
+                }
+                result[field] = execSimple(data, aggregate[field], series);
+                data = [];
+            }
+
+            return result;
+        }
+
+        if (typeof aggregate === "object") {
+            result = execComposite(values, aggregate, series);
+        } else {
+            result = execSimple(values, aggregate, series);
+        }
+
+        return result;
+    }
 
     function sparseArrayMin(arr) {
         return sparseArrayLimits(arr).min;

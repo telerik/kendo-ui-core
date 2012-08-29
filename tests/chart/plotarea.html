@@ -815,6 +815,9 @@
                     same(series[0].dataItems, ["a", "b", "c"]);
                 });
 
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Aggregates");
+
                 test("Aggregates series data using max by default", function() {
                     createPlotArea([{
                         data: [100, 200, 300]
@@ -859,6 +862,67 @@
                             same(values, series.data);
                             return 0;
                         }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / OHLC Aggregates");
+
+                test("Series data using aggregate", function() {
+                    createPlotArea([{
+                        type: "candleStick",
+                        aggregate: {
+                            "open": "max",
+                            "high": "max",
+                            "low": "min",
+                            "close": "max",
+                        },
+                        data: [[1,4,0,2], [2,5,1,3], [3,6,2,4]]
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    }),
+                    point = plotArea.series[0].data[0];
+
+                    same([point.open, point.high, point.low, point.close], [3,6,0,4]);
+                });
+
+                test("Series data with predefined function", function() {
+                    createPlotArea([{
+                        type: "candleStick",
+                        aggregate: {
+                            "open": "min",
+                            "high": "min",
+                            "low": "min",
+                            "close": "min",
+                        },
+                        data: [[1,4,0,2], [2,5,1,3], [3,6,2,4]]
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    }),
+                    point = plotArea.series[0].data[0];
+
+                    same([point.open, point.high, point.low, point.close], [1,4,0,2]);
+                });
+
+                test("Series data with user function", 1, function() {
+                    var data = [[1,4,0,2], [2,5,1,3], [3,6,2,4]];
+                    createPlotArea([{
+                        type: "candleStick",
+                        aggregate: {
+                            "open": function(values, series) {
+                                same(data, series.data);
+                                return 0;
+                            }
+                        },
+                        data: data
                     }], {
                         categoryAxis: kendo.deepExtend({
                             baseUnit: "months"
