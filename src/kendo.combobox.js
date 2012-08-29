@@ -88,7 +88,7 @@
                 });
 
             if (element[0].id) {
-                that.input.attr("aria-owns", that.list[0].id);
+                that.input.attr("aria-owns", that.ul[0].id);
             }
 
             that._oldIndex = that.selectedIndex = -1;
@@ -604,7 +604,7 @@
                                  });
 
             if (element.id) {
-                that._arrow.attr("aria-controls", that.list[0].id);
+                that._arrow.attr("aria-controls", that.ul[0].id);
             }
         },
 

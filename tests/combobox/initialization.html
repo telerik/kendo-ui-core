@@ -272,7 +272,7 @@
            test("template should render item directly if datatextField is empty string", function(){
                 var combobox = new ComboBox(input, { dataTextField : ""});
 
-                equal(combobox.template("foo"), '<li role="option" unselectable="on" class="k-item">foo</li>');
+                equal(combobox.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
            });
 
            test("template should use defined datatextField", function(){
@@ -280,7 +280,7 @@
                     dataTextField : "ProductName"
                 });
 
-                equal(combobox.template({ProductName: "foo"}), '<li role="option" unselectable="on" class="k-item">foo</li>');
+                equal(combobox.template({ProductName: "foo"}), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
            });
 
            test("changing the template", function() {
@@ -613,7 +613,7 @@
             test("ComboBox adds aria-owns", function() {
                 var combobox = new ComboBox(input.attr("id", "test"));
 
-                equal(combobox.input.attr("aria-owns"), combobox.list.attr("id"));
+                equal(combobox.input.attr("aria-owns"), combobox.ul.attr("id"));
             });
 
             test("ComboBox adds aria-activedescentant", function() {
@@ -674,6 +674,12 @@
                 equal(combobox._arrow.attr("role"), "button");
                 equal(combobox._arrow.attr("tabindex"), "-1");
                 equal(combobox._arrow.attr("aria-controls"), undefined);
+            });
+
+            test("ComboBox adds role='listbox' to list element", function() {
+                var combobox = new ComboBox(input);
+
+                equal(combobox.ul.attr("role"), "listbox");
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
