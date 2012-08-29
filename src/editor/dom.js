@@ -259,7 +259,21 @@ var Dom = {
     },
 
     scrollTo: function (node) {
-        node.ownerDocument.body.scrollTop = $(Dom.isDataNode(node) ? node.parentNode : node).offset().top;
+        var body = node.ownerDocument.body,
+            element = $(Dom.isDataNode(node) ? node.parentNode : node),
+            windowHeight = Dom.windowFromDocument(node.ownerDocument).innerHeight,
+            elementTop, elementHeight;
+
+        if (Dom.name(element[0]) == "br") {
+            element = element.parent();
+        }
+
+        elementTop = element.offset().top;
+        elementHeight = element.height();
+
+        if (elementHeight + elementTop > body.scrollTop + windowHeight) {
+            body.scrollTop = elementHeight + elementTop - windowHeight;
+        }
     },
 
     insertAt: function (parent, newElement, position) {
