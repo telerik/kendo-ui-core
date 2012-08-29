@@ -94,13 +94,13 @@
                 equal(ul.find("li").length, 0);
             });
 
-            test("DataSource change action is passed to databinding event", 2, function() {
+            test("DataSource change action is passed to databinding event", 3, function() {
                 var listView = setup().data("kendoListView");
 
                 listView.bind("dataBinding", function(e) {
-                    console.log(e);
                    equal(e.action, "add");
                    equal(e.items.length, 1);
+                   equal(e.index, 1);
                });
 
                listView.dataSource.insert(1, {});
