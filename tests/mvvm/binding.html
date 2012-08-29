@@ -1193,6 +1193,31 @@
 
                 ok(dom.css("display") != "none");
             });
+
+            test("mobile and desktop widgets are initialized in the correct priority", function() {
+                var TestWidget = kendo.ui.Widget.extend({
+                    options: {
+                        name: "TestWidget"
+                    }
+                });
+                kendo.ui.plugin(TestWidget);
+
+                var MobileTestWidget = kendo.mobile.ui.Widget.extend({
+                    options: {
+                        name: "TestWidget"
+                    }
+                });
+                kendo.mobile.ui.plugin(MobileTestWidget);
+
+                var dom = $("<div data-bind='source: foo' data-template='mobile-widget-template' />");
+                kendo.bind(dom, kendo.observable({foo: ["bar"]}), kendo.mobile.ui, kendo.ui);
+                console.log(dom);
+                ok(dom.find("span").data("kendoMobileTestWidget"));
+            });
+        </script>
+
+        <script id="mobile-widget-template" type="text/x-kendo-template">
+            <span data-role="testwidget" />
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
