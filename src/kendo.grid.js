@@ -3051,7 +3051,11 @@
                 return;
             }
 
-            that.trigger("dataBinding");
+            e = e || {};
+
+            if (that.trigger("dataBinding", { action: e.action || "rebind", index: e.index, items: e.items })) {
+                return;
+            }
 
             if (current && current.hasClass("k-state-focused")) {
                 currentIndex = that.items().index(current.parent());

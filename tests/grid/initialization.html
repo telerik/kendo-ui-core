@@ -472,6 +472,30 @@
                 ok(called);
             });
 
+            test("cancelling databinding event prevents refresh", function() {
+                var grid = new Grid(table, {
+                        dataSource: [ {foo:"foo", bar:"bar"} ],
+                        dataBinding: function(e) { e.preventDefault(); }
+                    });
+
+                equal(grid.items().length, 0);
+            });
+
+            test("DataSource change action is passed to databinding event", 3, function() {
+                var grid = new Grid(table, {
+                        dataSource: [ {foo:"foo", bar:"bar"} ],
+                    });
+
+                grid.bind("dataBinding", function(e) {
+                    equal(e.index, 1);
+                    equal(e.action, "add");
+                    equal(e.items.length, 1);
+               });
+
+               grid.dataSource.insert(1, {});
+            });
+
+
             test("initialization from rendered table should disable encoding", function() {
                 $(table).html("<thead><tr><th data-kendo-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {scrollable: false});
