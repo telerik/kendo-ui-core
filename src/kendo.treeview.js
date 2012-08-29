@@ -520,6 +520,61 @@
             }
         },
 
+        _enabled: function(node) {
+            return !node.children("div").children(".k-in").hasClass("k-state-disabled");
+        },
+
+        parent: function(node) {
+            return $(node).parent().closest(NODE);
+        },
+
+        _nextVisible: function(node) {
+            var that = this,
+                expanded = that._expanded(node),
+                result;
+
+            if (expanded) {
+                result = subGroup(node).children().first();
+            } else {
+                while (node.length && !node.next().length) {
+                    node = that.parent(node);
+                }
+
+                if (node.next().length) {
+                    result = node.next();
+                } else {
+                    result = node;
+                }
+            }
+
+            if (!that._enabled(result)) {
+                result = that._nextVisible(result);
+            }
+
+            return result;
+        },
+
+        _previousVisible: function(node) {
+            var that = this,
+                result;
+
+            if (node.prev().length) {
+                result = node.prev();
+
+                while (that._expanded(result)) {
+                    result = subGroup(result).children().last();
+                }
+            } else {
+                result = that.parent(node) || node;
+            }
+
+            if (!that._enabled(result)) {
+                result = that._previousVisible(result);
+            }
+
+            return result;
+        },
+
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
@@ -532,13 +587,9 @@
                 that._oldSelection = selection[0];
             }
 
-            function parentOf(node) {
-                return node.parent().closest(NODE);
-            }
-
             if (key == keys.RIGHT) {
                 if (expanded) {
-                    target = subGroup(selection).children().first();
+                    target = that._nextVisible(selection);
                 } else {
                     that.expand(selection);
                 }
@@ -546,35 +597,23 @@
                 if (expanded) {
                     that.collapse(selection);
                 } else {
-                    target = parentOf(selection);
+                    target = that.parent(selection);
+
+                    if (!that._enabled(target)) {
+                        target = undefined;
+                    }
                 }
             } else if (key == keys.DOWN) {
                 if (!selection.length) {
                     target = that.root.children().eq(0);
-                } else if (expanded) {
-                    target = subGroup(selection).children().first();
                 } else {
-                    while (selection.length && !selection.next().length) {
-                        selection = parentOf(selection);
-                    }
-
-                    if (selection.next().length) {
-                        target = selection.next();
-                    } else {
-                        target = selection;
-                    }
+                    target = that._nextVisible(selection);
                 }
             } else if (key == keys.UP) {
                 if (!selection.length) {
                     target = that.root.children().last();
-                } else if (selection.prev().length) {
-                    target = selection.prev();
-
-                    while (that._expanded(target)) {
-                        target = subGroup(target).children().last();
-                    }
                 } else {
-                    target = parentOf(selection) || selection;
+                    target = that._previousVisible(selection);
                 }
             } else if (key == keys.HOME) {
                 target = that.root.children().eq(0);

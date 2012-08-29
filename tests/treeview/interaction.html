@@ -27,6 +27,12 @@
                 $(".k-treeview,.k-drag-clue").remove();
             }
 
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            };
+
+            var keys = kendo.keys;
+
             module("expand / collapse", {
                 teardown: removeTreeViews
             });
@@ -233,10 +239,6 @@
                 teardown: removeTreeViews
             });
 
-            $.fn.press = function(key) {
-                return this.trigger({ type: "keydown", keyCode: key } );
-            };
-
             test("right arrow expands node", 1, function() {
                 createTreeView({
                     dataSource: [
@@ -249,7 +251,7 @@
                     }
                 });
 
-                treeview.press(kendo.keys.RIGHT);
+                treeview.press(keys.RIGHT);
             });
 
             test("right arrow at expanded node moves to first child", function() {
@@ -259,7 +261,7 @@
                     ] }
                 ]);
 
-                treeview.press(kendo.keys.RIGHT);
+                treeview.press(keys.RIGHT);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
             });
@@ -276,7 +278,7 @@
                     }
                 });
 
-                treeview.press(kendo.keys.LEFT);
+                treeview.press(keys.LEFT);
             });
 
             test("left arrow selects parent node of already collapsed nodes", function() {
@@ -288,7 +290,7 @@
                     ] }
                 ]);
 
-                treeview.press(kendo.keys.LEFT);
+                treeview.press(keys.LEFT);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
             });
@@ -299,7 +301,7 @@
                     { text: "baz" }
                 ]);
 
-                treeview.press(kendo.keys.DOWN);
+                treeview.press(keys.DOWN);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
             });
@@ -312,7 +314,7 @@
                     { text: "baz" }
                 ]);
 
-                treeview.press(kendo.keys.DOWN);
+                treeview.press(keys.DOWN);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item .k-item")[0]);
             });
@@ -325,7 +327,7 @@
                     { text: "baz" }
                 ]);
 
-                treeview.press(kendo.keys.DOWN);
+                treeview.press(keys.DOWN);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
             });
@@ -340,7 +342,7 @@
                     { text: "qux" }
                 ]);
 
-                treeview.press(kendo.keys.DOWN);
+                treeview.press(keys.DOWN);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
             });
@@ -351,7 +353,7 @@
                     { text: "qux", selected: true }
                 ]);
 
-                treeview.press(kendo.keys.DOWN);
+                treeview.press(keys.DOWN);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
             });
@@ -362,7 +364,7 @@
                     { text: "bar" }
                 ]);
 
-                treeview.press(kendo.keys.DOWN);
+                treeview.press(keys.DOWN);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
             });
@@ -373,7 +375,7 @@
                     { text: "bar" }
                 ]);
 
-                treeview.press(kendo.keys.UP);
+                treeview.press(keys.UP);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
             });
@@ -384,7 +386,7 @@
                     { text: "bar", selected: true }
                 ]);
 
-                treeview.press(kendo.keys.UP);
+                treeview.press(keys.UP);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
             });
@@ -397,7 +399,7 @@
                     { text: "baz", selected: true }
                 ]);
 
-                treeview.press(kendo.keys.UP);
+                treeview.press(keys.UP);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item .k-item")[0]);
             });
@@ -412,7 +414,7 @@
                     { text: "qux", selected: true }
                 ]);
 
-                treeview.press(kendo.keys.UP);
+                treeview.press(keys.UP);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item .k-item .k-item")[0]);
             });
@@ -424,7 +426,7 @@
                     ] }
                 ]);
 
-                treeview.press(kendo.keys.UP);
+                treeview.press(keys.UP);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
             });
@@ -436,7 +438,7 @@
                     { text: "baz", selected: true }
                 ]);
 
-                treeview.press(kendo.keys.HOME);
+                treeview.press(keys.HOME);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
             });
@@ -448,7 +450,7 @@
                     { text: "baz" }
                 ]);
 
-                treeview.press(kendo.keys.END);
+                treeview.press(keys.END);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
             });
@@ -462,7 +464,7 @@
                     ] }
                 ]);
 
-                treeview.press(kendo.keys.END);
+                treeview.press(keys.END);
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item .k-item .k-item")[0]);
 
@@ -479,8 +481,8 @@
                     }
                 });
 
-                treeview.press(kendo.keys.DOWN);
-                treeview.press(kendo.keys.ENTER);
+                treeview.press(keys.DOWN);
+                treeview.press(keys.ENTER);
             });
 
             test("enter key does not trigger select event if selection was not changed", function() {
@@ -496,7 +498,7 @@
                     }
                 });
 
-                treeview.press(kendo.keys.ENTER);
+                treeview.press(keys.ENTER);
 
                 ok(!triggered);
             });
@@ -514,10 +516,10 @@
                     }
                 });
 
-                treeview.press(kendo.keys.DOWN);
-                treeview.press(kendo.keys.ENTER);
-                treeview.press(kendo.keys.UP);
-                treeview.press(kendo.keys.ENTER);
+                treeview.press(keys.DOWN);
+                treeview.press(keys.ENTER);
+                treeview.press(keys.UP);
+                treeview.press(keys.ENTER);
 
                 equal(triggeredCount, 2);
             });
@@ -530,11 +532,11 @@
                     checkboxTemplate: "<input type='checkbox' />"
                 });
 
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 ok(treeview.find(":checkbox").is(":checked"));
 
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 ok(!treeview.find(":checkbox").is(":checked"));
             });
@@ -546,7 +548,7 @@
                     ]
                 });
 
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 ok(true);
             });
@@ -565,7 +567,7 @@
                 });
 
                 treeview.focus();
-                treeview.press(kendo.keys.DOWN);
+                treeview.press(keys.DOWN);
                 treeview.blur();
 
                 equal(triggeredCount, 1);
@@ -586,8 +588,8 @@
                 });
 
                 treeview.focus();
-                treeview.press(kendo.keys.DOWN);
-                treeview.press(kendo.keys.UP);
+                treeview.press(keys.DOWN);
+                treeview.press(keys.UP);
                 treeview.blur();
 
                 equal(triggeredCount, 0);
@@ -625,7 +627,7 @@
                     }
                 });
 
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 ok(treeview.find(":checkbox:first").prop("indeterminate"));
             });
@@ -642,7 +644,7 @@
                     }
                 });
 
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 ok(treeview.find(":checkbox:first").prop("checked"));
             });
@@ -660,7 +662,7 @@
                     }
                 });
 
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 var checkboxes = treeview.find(":checkbox");
 
@@ -682,13 +684,13 @@
                 });
 
                 // check selected item
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 // move to 'foo'
-                treeview.press(kendo.keys.UP);
+                treeview.press(keys.UP);
 
                 // check 'foo'
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 ok(!treeview.find(":checkbox:first").prop("indeterminate"));
             });
@@ -709,17 +711,109 @@
                 });
 
                 // check selected item
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 // move to 'foo'
-                treeview.press(kendo.keys.UP);
-                treeview.press(kendo.keys.UP);
+                treeview.press(keys.UP);
+                treeview.press(keys.UP);
 
                 // check 'foo'
-                treeview.press(kendo.keys.SPACEBAR);
+                treeview.press(keys.SPACEBAR);
 
                 ok(!treeview.find(":checkbox").eq(1).prop("indeterminate"));
                 ok(!treeview.find(":checkbox").eq(1).data("indeterminate"));
+            });
+
+            test("down arrow skips disabled items on same level", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar", enabled: false },
+                        { text: "baz" }
+                    ]
+                });
+
+                treeview.press(keys.DOWN);
+
+                equal(treeview.find(".k-state-selected").text(), "baz");
+            });
+
+            test("down arrow skips disabled child items", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true, expanded: true, items: [
+                            { text: "bar", enabled: false },
+                            { text: "baz" }
+                        ] }
+                    ]
+                });
+
+                treeview.press(keys.DOWN);
+
+                equal(treeview.find(".k-state-selected").text(), "baz");
+            });
+
+            test("right arrow skips disabled first child", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true, expanded: true, items: [
+                            { text: "bar", enabled: false },
+                            { text: "baz" }
+                        ] }
+                    ]
+                });
+
+                treeview.press(keys.RIGHT);
+
+                equal(treeview.find(".k-state-selected").text(), "baz");
+            });
+
+            test("right arrow skips disabled first child", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true, expanded: true, items: [
+                            { text: "bar", enabled: false, expanded: true, items: [
+                                { text: "baz" }
+                            ] }
+                        ] }
+                    ]
+                });
+
+                treeview.press(keys.RIGHT);
+
+                equal(treeview.find(".k-state-selected").text(), "baz");
+            });
+
+            test("up arrow skips disabled items", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar", enabled: false, expanded: true, items: [
+                                { text: "baz", selected: true }
+                            ] }
+                        ] }
+                    ]
+                });
+
+                treeview.press(keys.UP);
+
+                equal(treeview.find(".k-state-selected").text(), "foo");
+            });
+
+            test("left arrow does nothing when going to disabled parent", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar", enabled: false, expanded: true, items: [
+                                { text: "baz", selected: true }
+                            ] }
+                        ] }
+                    ]
+                });
+
+                treeview.press(keys.LEFT);
+
+                equal(treeview.find(".k-state-selected").text(), "baz");
             });
 
             module("drag & drop with load-on-demand", {
