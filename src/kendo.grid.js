@@ -125,18 +125,22 @@
             var that = this,
                 scrollTop = that.verticalScrollbar.scrollTop(),
                 originalEvent = e.originalEvent,
+                deltaY = originalEvent.wheelDeltaY,
                 delta;
 
-            e.preventDefault();
 
-            if (originalEvent.wheelDelta) {
-                delta = originalEvent.wheelDelta;
-            } else if (originalEvent.detail) {
+            if (originalEvent.wheelDelta) { // Webkit and IE
+                if (deltaY === undefined || deltaY) { // IE does not have deltaY, thus always scroll (horizontal scrolling is treated as vertical)
+                    delta = originalEvent.wheelDelta;
+                }
+            } else if (originalEvent.detail && originalEvent.axis === originalEvent.VERTICAL_AXIS) { // Firefox and Opera
                 delta = (-originalEvent.detail) * 10;
-            } else if (kendo.support.browser.opera) {
-                delta = -originalEvent.wheelDelta;
             }
-            that.verticalScrollbar.scrollTop(scrollTop + (-delta));
+
+            if (delta) {
+                e.preventDefault();
+                that.verticalScrollbar.scrollTop(scrollTop + (-delta));
+            }
         },
 
         _scroll: function(e) {

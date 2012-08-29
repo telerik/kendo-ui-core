@@ -1,0 +1,129 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>editable</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <link href="../styles/web/kendo.common.css" rel="stylesheet" />
+        <link href="../styles/web/kendo.default.less" rel="stylesheet/less" />
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+        <style>
+            body {
+               font: 75% arial,helvetica,sans-serif;
+           }
+       </style>
+   </head>
+    <body>
+        <div id='grid1' style='width: 200px;'>
+        </div>
+        <script>
+            $('#grid1').kendoGrid({
+                height: 350,
+                scrollable: {virtual : true },
+                columns: [
+                {
+                    field: "FirstName",
+                    title: "First Name",
+                    width: 150},
+                {
+                    field: "LastName",
+                    title: "Last Name",
+                    width: 150}
+                ],
+                dataSource: {
+                    pageSize: 20,
+                    data: [
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    { FirstName: "Joe2", LastName: "Smith"},
+                    ]
+                }
+            });
+        </script>
+    </body>
+</html>
