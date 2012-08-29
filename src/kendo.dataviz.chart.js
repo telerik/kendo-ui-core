@@ -4974,7 +4974,9 @@
                 categories = categoryAxis.options.categories,
                 categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
 
-            append(categories, new Array(categoriesToAdd));
+            while (categoriesToAdd--) {
+                categories.push("");
+            }
 
             plotArea.valueAxisRangeTracker.update(chart.valueAxisRanges);
 
