@@ -440,7 +440,7 @@
                 for (idx = 0, length = items.length; idx < length; idx++) {
                     child = clone.children[0];
                     element.insertBefore(child, reference || null);
-                    bindElement(child, items[idx], kendo.ui.roles);
+                    bindElement(child, items[idx], this.options.roles);
                 }
             }
         },
@@ -479,7 +479,7 @@
 
                 if (element.children.length) {
                     for (idx = 0, length = source.length; idx < length; idx++) {
-                        bindElement(element.children[idx], source[idx], kendo.ui.roles);
+                        bindElement(element.children[idx], source[idx], this.options.roles);
                     }
                 }
             }
@@ -1138,7 +1138,8 @@
             bind = parseBindings(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
-                options = kendo.parseOptions(element, { textField: "", valueField: "", template: "", valueUpdate: CHANGE});
+                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE});
+                options.roles = roles;
                 target = new BindingTarget(element, options);
             }
 
