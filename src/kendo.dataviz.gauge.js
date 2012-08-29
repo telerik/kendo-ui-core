@@ -169,7 +169,7 @@
                     rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, pointRotation),
                     rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, pointRotation)
                 ], true, options),
-                view.createCircle([center.x, center.y], capSize, {
+                view.createCircle(center, capSize, {
                     fill: options.cap.color || options.color
                 })
             ];
