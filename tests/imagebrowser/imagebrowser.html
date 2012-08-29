@@ -663,6 +663,18 @@
                 equal(browser.value(), "foo?path=/File1");
             });
 
+            test("listView is not rebuild when item is deleted", function() {
+                var browser = setup();
+
+                browser.listView.bind("dataBound", function() {
+                    ok(false);
+                });
+
+                browser._showMessage = function() { return true};// suppress the alert for poping
+
+                browser.list.find("li[data-type=d]").mousedown().mouseup();
+                browser.toolbar.find(".k-delete").click();
+            });
         </script>
     </body>
 </html>

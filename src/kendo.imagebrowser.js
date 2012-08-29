@@ -501,9 +501,14 @@
                 editTemplate: that._editTmpl(),
                 selectable: true,
                 autoBind: false,
-                dataBound: function() {
+                dataBinding: function(e) {
                     that.toolbar.find(".k-delete").parent().addClass("k-state-disabled");
 
+                    if (e.action === "remove" || e.action === "sync") {
+                        e.preventDefault();
+                    }
+                },
+                dataBound: function() {
                     if (that.dataSource.view().length) {
                         that._tiles = this.items().filter("[" + kendo.attr("type") + "=f]");
                         that._scroll();
