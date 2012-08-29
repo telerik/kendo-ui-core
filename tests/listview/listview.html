@@ -84,6 +84,28 @@
                 ok(called);
             });
 
+            test("cancelling databinding event prevents refresh", function() {
+                var ul = setup({
+                    dataBinding: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                equal(ul.find("li").length, 0);
+            });
+
+            test("DataSource change action is passed to databinding event", 2, function() {
+                var listView = setup().data("kendoListView");
+
+                listView.bind("dataBinding", function(e) {
+                    console.log(e);
+                   equal(e.action, "add");
+                   equal(e.items.length, 1);
+               });
+
+               listView.dataSource.insert(1, {});
+            });
+
             test("autoBind false does not populate listView", function() {
                 var ul = setup({autoBind: false});
                 equal(ul.find("li").length, 0);

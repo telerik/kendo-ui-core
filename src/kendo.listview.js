@@ -157,7 +157,11 @@
                 return;
             }
 
-            that.trigger(DATABINDING);
+            e = e || {};
+
+            if (that.trigger(DATABINDING, { action: e.action || "rebind", items: e.items, index: e.index })) {
+                return;
+            }
 
             that._destroyEditable();
 
