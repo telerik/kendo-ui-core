@@ -377,7 +377,7 @@
 
         _position: function(fixed) {
             var that = this,
-                element = that.element,
+                element = that.element.css(POSITION, ""),
                 wrapper = that.wrapper,
                 options = that.options,
                 viewport = $(options.viewport),
@@ -455,6 +455,7 @@
                 location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewport.width() / zoomLevel, origins[1], positions[1], wrapper.outerWidth());
             }
 
+            element.css(POSITION, ABSOLUTE);
             wrapper.css(location);
 
             return (location.left != flipPos.left || location.top != flipPos.top);

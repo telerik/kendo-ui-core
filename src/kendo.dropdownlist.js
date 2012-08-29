@@ -202,6 +202,10 @@
             that.ul[0].innerHTML = kendo.render(that.template, data);
             that._height(length);
 
+            if (that.popup.visible()) {
+                that.popup._position();
+            }
+
             if (that.element.is(SELECT)) {
                 if (optionLabel && length) {
                     optionLabel = that._optionLabelText(optionLabel);
