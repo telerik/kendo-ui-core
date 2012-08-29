@@ -1356,6 +1356,7 @@ div.k-grid-header .k-header
     float: right;
     margin: -.5em -.6em -.4em;
     padding: .5em .2em .4em;
+    z-index: 1; /*mvc site.css*/
 }
 
 .k-grid .k-animation-container
@@ -1623,10 +1624,10 @@ html body .k-grid tbody .k-button-icon
     padding: 0 .3em;
 }
 
-.k-edit-cell .k-textbox,
-.k-edit-cell .k-widget,
-.k-grid-edit-row .k-textbox,
-.k-grid-edit-row .k-widget
+.k-edit-cell>.k-textbox,
+.k-edit-cell>.k-widget,
+.k-grid-edit-row>td>.k-textbox,
+.k-grid-edit-row>td>.k-widget
 {
     width: 100%;
 }
@@ -1638,10 +1639,10 @@ html body .k-grid tbody .k-button-icon
     box-sizing: border-box;
 }
 
-*+html .k-edit-cell .k-textbox,
-*+html .k-edit-cell .k-widget,
-*+html .k-grid-edit-row .k-textbox,
-*+html .k-grid-edit-row .k-widget
+*+html .k-edit-cell>.k-textbox,
+*+html .k-edit-cell>.k-widget,
+*+html .k-grid-edit-row>td>.k-textbox,
+*+html .k-grid-edit-row>td>.k-widget
 {
     display: block;
     width: 90%;
