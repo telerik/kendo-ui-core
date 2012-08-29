@@ -533,7 +533,9 @@
                 expanded = that._expanded(node),
                 result;
 
-            if (expanded) {
+            if (!node.length) {
+                result = that.root.children().eq(0);
+            } else if (expanded) {
                 result = subGroup(node).children().first();
             } else {
                 while (node.length && !node.next().length) {
@@ -558,8 +560,12 @@
             var that = this,
                 result;
 
-            if (node.prev().length) {
-                result = node.prev();
+            if (!node.length || node.prev().length) {
+                if (node.length) {
+                    result = node.prev();
+                } else {
+                    result = that.root.children().last();
+                }
 
                 while (that._expanded(result)) {
                     result = subGroup(result).children().last();
@@ -604,25 +610,13 @@
                     }
                 }
             } else if (key == keys.DOWN) {
-                if (!selection.length) {
-                    target = that.root.children().eq(0);
-                } else {
-                    target = that._nextVisible(selection);
-                }
+                target = that._nextVisible(selection);
             } else if (key == keys.UP) {
-                if (!selection.length) {
-                    target = that.root.children().last();
-                } else {
-                    target = that._previousVisible(selection);
-                }
+                target = that._previousVisible(selection);
             } else if (key == keys.HOME) {
-                target = that.root.children().eq(0);
+                target = that._nextVisible($());
             } else if (key == keys.END) {
-                target = that.root.children().last();
-
-                while (that._expanded(target)) {
-                    target = subGroup(target).children().last();
-                }
+                target = that._previousVisible($());
             } else if (key == keys.ENTER) {
                 if (selection[0] != that._oldSelection) {
                     delete that._oldSelection;

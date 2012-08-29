@@ -816,6 +816,32 @@
                 equal(treeview.find(".k-state-selected").text(), "baz");
             });
 
+            test("down arrow without selection goes to first non-disabled item", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", enabled: false },
+                        { text: "baz" }
+                    ]
+                });
+
+                treeview.press(keys.DOWN);
+
+                equal(treeview.find(".k-state-selected").text(), "baz");
+            });
+
+            test("up arrow without selection goes to last non-disabled item", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "baz", enabled: false }
+                    ]
+                });
+
+                treeview.press(keys.UP);
+
+                equal(treeview.find(".k-state-selected").text(), "foo");
+            });
+
             module("drag & drop with load-on-demand", {
                 setup: function() {
                     var i = 1;
