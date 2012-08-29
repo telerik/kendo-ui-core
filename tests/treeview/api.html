@@ -57,6 +57,18 @@
                 ok(!node.find(".k-in").hasClass("k-state-disabled"));
             });
 
+            test("enable(node, false) removes selected class", function() {
+                createTreeView([
+                    { text: "foo", selected: true }
+                ]);
+
+                var node = treeview.find(".k-item:first");
+
+                treeviewObject.enable(node, false);
+
+                ok(!node.find(".k-in").hasClass("k-state-selected"));
+            });
+
             test("select(node) selects node", function() {
                 createTreeView([
                     { text: "foo" }
