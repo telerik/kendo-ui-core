@@ -256,11 +256,11 @@
             });
 
             test("containsPoint returns true for points within box", function() {
-                ok(box.containsPoint(5, 5));
+                ok(box.containsPoint(new Point2D(5, 5)));
             });
 
             test("containsPoint returns false for points outside box", function() {
-                ok(box.containsPoint(5, 5));
+                ok(box.containsPoint(new Point2D(5, 5)));
             });
 
             test("center returns x center", function() {

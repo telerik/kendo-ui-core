@@ -434,7 +434,7 @@
                 owner,
                 seriesPoint;
 
-            if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
+            if (chart._plotArea.box.containsPoint(coords)) {
                 if (point && point.series && (point.series.type === LINE || point.series.type === AREA)) {
                     owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
@@ -5237,7 +5237,7 @@
 
             for (i = 0; i < panes.length; i++) {
                 currentPane = panes[i];
-                if (currentPane.contentBox.containsPoint(point.x, point.y)) {
+                if (currentPane.contentBox.containsPoint(point)) {
                     return currentPane;
                 }
             }

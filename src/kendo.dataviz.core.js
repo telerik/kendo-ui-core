@@ -231,12 +231,11 @@
             };
         },
 
-        // TODO: Accept Point2D
-        containsPoint: function(x, y) {
+        containsPoint: function(point) {
             var box = this;
 
-            return x >= box.x1 && x <= box.x2 &&
-                   y >= box.y1 && y <= box.y2;
+            return point.x >= box.x1 && point.x <= box.x2 &&
+                   point.y >= box.y1 && point.y <= box.y2;
         },
 
         points: function() {
