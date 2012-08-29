@@ -675,6 +675,18 @@
                 browser.list.find("li[data-type=d]").mousedown().mouseup();
                 browser.toolbar.find(".k-delete").click();
             });
+
+            test("double clicking a image triggers apply event", 1, function() {
+                var browser = setup({
+                    apply: function() {
+                        ok(true);
+                    }
+                });
+
+                browser.list.find("li[data-type=f]")
+                    .trigger("dblclick");
+            });
+
         </script>
     </body>
 </html>

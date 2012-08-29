@@ -117,7 +117,7 @@ var ImageCommand = Command.extend({
         dialog = EditorUtils.createDialog(windowContent, that.editor, extend({}, that.editor.options.dialogOptions, {
             title: INSERTIMAGE,
             close: close,
-             activate: function() {
+            activate: function() {
                 if (showBrowser) {
                     var that = this;
 
@@ -125,8 +125,9 @@ var ImageCommand = Command.extend({
                         that.element.find(".k-image-browser"),
                         extend({}, imageBrowser, {
                             change: function() {
-                                that.element.find('#k-editor-image-url').val(this.value());
-                            }
+                                that.element.find(KEDITORIMAGEURL).val(this.value());
+                            },
+                            apply: apply
                         })
                     );
                 }

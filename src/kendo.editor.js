@@ -5218,8 +5218,9 @@ var ImageCommand = Command.extend({
                         that.element.find(".k-image-browser"),
                         extend({}, imageBrowser, {
                             change: function() {
-                                that.element.find('#k-editor-image-url').val(this.value());
-                            }
+                                that.element.find(KEDITORIMAGEURL).val(this.value());
+                            },
+                            apply: apply
                         })
                     );
                 }

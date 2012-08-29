@@ -8,6 +8,7 @@
         isFunction = $.isFunction,
         trimSlashesRegExp = /(^\/|\/$)/g,
         CHANGE = "change",
+        APPLY = "apply",
         ERROR = "error",
         CLICK = "click",
         NS = ".kendoImageBrowser",
@@ -182,7 +183,7 @@
             fileTypes: "*.png,*.gif,*.jpg,*.jpeg"
         },
 
-        events: [ERROR, CHANGE],
+        events: [ERROR, CHANGE, APPLY],
 
         destroy: function() {
             var that = this;
@@ -493,7 +494,7 @@
             that.list = $('<ul class="k-reset k-floats k-tiles" />')
                 .appendTo(that.element)
                 .on("scroll" + NS, proxy(that._scroll, that))
-                .on("dblclick" + NS, "li[" + kendo.attr("type") + "=d]", proxy(that._dblClick, that));
+                .on("dblclick" + NS, "li", proxy(that._dblClick, that));
 
             that.listView = new kendo.ui.ListView(that.list, {
                 dataSource: that.dataSource,
@@ -522,11 +523,16 @@
 
         _dblClick: function(e) {
             var that = this,
-                folder = that.dataSource.getByUid($(e.currentTarget).attr(kendo.attr("uid")));
+                li = $(e.currentTarget);
 
-            if (folder) {
-                that.path(concatPaths(that.path(), folder.get(that._getFieldName(NAMEFIELD))));
-                that.breadcrumbs.value(that.path());
+            if (li.filter("[" + kendo.attr("type") + "=d]").length) {
+                var folder = that.dataSource.getByUid(li.attr(kendo.attr("uid")));
+                if (folder) {
+                    that.path(concatPaths(that.path(), folder.get(that._getFieldName(NAMEFIELD))));
+                    that.breadcrumbs.value(that.path());
+                }
+            } else if (li.filter("[" + kendo.attr("type") + "=f]").length) {
+                that.trigger(APPLY);
             }
         },
 
