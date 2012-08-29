@@ -4711,20 +4711,36 @@
             var plotArea = this,
                 axes = plotArea.axes,
                 gridLines = [],
+                processedPanes = {},
                 i,
                 j,
                 axis,
-                altAxis;
+                axisPane,
+                altAxis,
+                altAxisPane;
 
             for (i = 0; i < axes.length; i++) {
                 axis = axes[i];
+                axisPane = axis.pane.options.name;
+
                 for (j = i; j < axes.length; j++) {
                     altAxis = axes[j];
+                    altAxisPane = altAxis.pane.options.name;
 
-                    if (axis.options.vertical !== altAxis.options.vertical) {
-                        append(gridLines, plotArea.renderGridLines(view, axis, altAxis));
-                        append(gridLines, plotArea.renderGridLines(view, altAxis, axis));
+                    if (axis.options.vertical === altAxis.options.vertical) {
+                        continue;
                     }
+
+                    if (processedPanes[axisPane] && processedPanes[altAxisPane]) {
+                        // Only render one set of gridlines per pane
+                        continue;
+                    }
+
+                    processedPanes[axisPane] = true;
+                    processedPanes[altAxisPane] = true;
+
+                    append(gridLines, plotArea.renderGridLines(view, axis, altAxis));
+                    append(gridLines, plotArea.renderGridLines(view, altAxis, axis));
                 }
             }
 

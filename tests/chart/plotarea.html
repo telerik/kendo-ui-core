@@ -1182,6 +1182,14 @@
                     equals(view.log.line[0].x2, plotArea.namedValueAxes.primary.lineBox().x2);
                 });
 
+                test("should not render gridlines for secondary value axis", function() {
+                    createPlotArea({
+                        categories: ["A"]
+                    }, [{}, {}]);
+
+                    equal(view.log.line.length, 6);
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Major Gridlines / Panes", {
                     setup: function() {
