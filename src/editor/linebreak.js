@@ -170,6 +170,9 @@ var NewLineCommand = Command.extend({
         }
         range.setStartAfter(br);
         range.collapse(true);
+
+        dom.scrollTo(br.nextSibling);
+
         RangeUtils.selectRange(range);
     }
 });
