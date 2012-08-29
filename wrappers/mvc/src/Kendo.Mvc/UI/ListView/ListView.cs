@@ -40,6 +40,12 @@
             DataSource.ModelType(typeof(T));            
         }
 
+        public bool? AutoBind 
+        { 
+            get; 
+            set; 
+        }
+
         public string TagName
         {
             get;

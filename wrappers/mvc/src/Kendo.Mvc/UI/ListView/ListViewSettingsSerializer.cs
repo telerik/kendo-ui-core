@@ -16,6 +16,12 @@
         {
             options["dataSource"] = listView.DataSource.ToJson();
 
+            if (listView.AutoBind == false)
+            {
+                options["autoBind"] = false;
+                listView.Pageable.AutoBind = false;
+            }
+
             SerializeClientTemplate(options);
 
             SerializePaging(options);
