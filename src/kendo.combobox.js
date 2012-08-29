@@ -223,6 +223,10 @@
             ul.innerHTML = kendo.render(that.template, data);
             that._height(length);
 
+            if (that.popup.visible()) {
+                that.popup._position();
+            }
+
             if (that.element.is(SELECT)) {
                 if (state === STATE_REBIND) {
                     value = that.value();

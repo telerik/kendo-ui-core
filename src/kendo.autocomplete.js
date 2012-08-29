@@ -202,6 +202,10 @@
 
             that._height(length);
 
+            if (popup.visible()) {
+                popup._position();
+            }
+
             if (length) {
                 if (options.highlightFirst) {
                     that.current($(ul.firstChild));
