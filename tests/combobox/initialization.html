@@ -272,7 +272,7 @@
            test("template should render item directly if datatextField is empty string", function(){
                 var combobox = new ComboBox(input, { dataTextField : ""});
 
-                equal(combobox.template("foo"), '<li unselectable="on" class="k-item">foo</li>');
+                equal(combobox.template("foo"), '<li role="option" unselectable="on" class="k-item">foo</li>');
            });
 
            test("template should use defined datatextField", function(){
@@ -280,7 +280,7 @@
                     dataTextField : "ProductName"
                 });
 
-                equal(combobox.template({ProductName: "foo"}), '<li unselectable="on" class="k-item">foo</li>');
+                equal(combobox.template({ProductName: "foo"}), '<li role="option" unselectable="on" class="k-item">foo</li>');
            });
 
            test("changing the template", function() {
@@ -576,6 +576,104 @@
                     equal(combobox.input.val(), "123");
                     start();
                 }, 150);
+            });
+
+            module("kendo.ui.ComboBox ARIA", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    if (input.data("kendoComboBox")) {
+                        input.data("kendoComboBox").destroy();
+                    }
+                    input.closest(".k-widget").remove();
+                }
+            });
+
+            test("ComboBox adds role to the input", function() {
+                var combobox = new ComboBox(input);
+
+                equal(combobox.input[0].getAttribute("role"), "combobox");
+            });
+
+            test("ComboBox adds aria-autocomplete='list'", function() {
+                var combobox = new ComboBox(input);
+
+                equal(combobox.input.attr("aria-autocomplete"), "list");
+            });
+
+            test("ComboBox adds aria-autocomplete='both' if suggestion is enabled", function() {
+                var combobox = new ComboBox(input, {
+                    suggest: true
+                });
+
+                equal(combobox.input.attr("aria-autocomplete"), "both");
+            });
+
+            test("ComboBox adds aria-owns", function() {
+                var combobox = new ComboBox(input.attr("id", "test"));
+
+                equal(combobox.input.attr("aria-owns"), combobox.list.attr("id"));
+            });
+
+            test("ComboBox adds aria-activedescentant", function() {
+                var combobox = new ComboBox(input.attr("id", "test"), {
+                    dataSource: ["Item1", "Item2"],
+                    value: "Item2"
+                });
+
+                equal(combobox.selectedIndex, 1);
+                equal(combobox.ul.children().eq(0).attr("id"), undefined);
+                equal(combobox.ul.children().eq(1).attr("id"), "test_option_selected");
+                equal(combobox.input.attr("aria-activedescentant"), "test_option_selected");
+            });
+
+            test("ComboBox adds aria-disabled='true'", function() {
+                var combobox = new ComboBox(input.attr("disabled", "disabled"));
+
+                equal(combobox.input.attr("aria-disabled"), "true");
+            });
+
+            test("ComboBox adds aria-disabled='false'", function() {
+                var combobox = new ComboBox(input);
+
+                equal(combobox.input.attr("aria-disabled"), "false");
+            });
+
+            test("ComboBox adds aria-expanded='false'", function() {
+                var combobox = new ComboBox(input);
+
+                equal(combobox.input.attr("aria-expanded"), "false");
+            });
+
+            test("ComboBox adds aria-expanded='true'", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["item1", "item2"]
+                });
+
+                combobox.open();
+
+                equal(combobox.input.attr("aria-expanded"), "true");
+            });
+
+            test("ComboBox sets aria-expanded to false on close", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["item1", "item2"]
+                });
+
+                combobox.open();
+                combobox.close();
+
+                ok(!combobox.popup.visible());
+                equal(combobox.input.attr("aria-expanded"), "false");
+            });
+
+            test("ComboBox makes down arrow ARIA accessible", function() {
+                var combobox = new ComboBox(input);
+
+                equal(combobox._arrow.attr("role"), "button");
+                equal(combobox._arrow.attr("tabindex"), "-1");
+                equal(combobox._arrow.attr("aria-controls"), undefined);
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

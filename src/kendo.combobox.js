@@ -16,6 +16,7 @@
         FOCUSED = "k-state-focused",
         MOUSEDOWN = "mousedown" + ns,
         SELECT = "select",
+        ARIA_DISABLED = "aria-disabled",
         STATE_SELECTED = "k-state-selected",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
@@ -79,18 +80,16 @@
                     that._blur();
 
                     element.blur();
+                })
+                .attr({
+                    "role": "combobox",
+                    "aria-expanded": false,
+                    "aria-autocomplete": options.suggest ? "both" : "list"
                 });
 
-            //ARIA
-
-            that.input.attr("role", "combobox")
-                .attr("aria-owns", that.popup.element[0].id)
-                .attr("aria-autocomplete", "both")
-
-            that._arrow.attr("tabindex", -1)
-                .attr("role", "button")
-                .attr("aria-controls", that.popup.element[0].id)
-            //end
+            if (element[0].id) {
+                that.input.attr("aria-owns", that.list[0].id);
+            }
 
             that._oldIndex = that.selectedIndex = -1;
             that._old = that.value();
@@ -189,14 +188,17 @@
                     .removeClass(DEFAULT)
                     .addClass(DISABLED);
 
-                input.attr(ATTRIBUTE, ATTRIBUTE);
+                input.attr(ATTRIBUTE, ATTRIBUTE)
+                     .attr(ARIA_DISABLED, true);
             } else {
                 wrapper
                     .removeClass(DISABLED)
                     .addClass(DEFAULT)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                input.removeAttr(ATTRIBUTE);
+                input.removeAttr(ATTRIBUTE)
+                     .attr(ARIA_DISABLED, false);
+
                 arrow.on(CLICK, function() { that.toggle(); })
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
             }
@@ -594,8 +596,16 @@
             }
 
             that._focused = that.input = input;
-            that._arrow = wrapper.find(".k-icon");
             that._inputWrapper = $(wrapper[0].firstChild);
+            that._arrow = wrapper.find(".k-icon")
+                                 .attr({
+                                     "role": "button",
+                                     "tabIndex": -1
+                                 });
+
+            if (element.id) {
+                that._arrow.attr("aria-controls", that.list[0].id);
+            }
         },
 
         _keydown: function(e) {

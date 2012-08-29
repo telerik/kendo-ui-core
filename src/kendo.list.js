@@ -49,7 +49,7 @@
                         });
 
             //aria
-
+            /*
             //that.list.attr("role", "presentation");
             that.ul.attr("role", "listbox")
                 .attr("aria-expanded", false)
@@ -59,7 +59,7 @@
             //
             if (that.input) {
                 that.input.attr("aria-expanded", false)
-            }
+            }*/
 
             id = that.element.attr(ID);
             if (id) {
