@@ -5208,14 +5208,14 @@
             for (i = 0; i < allAxes.length; i++) {
                 axis = allAxes[i];
                 if (equalsIgnoreCase(axis.options.type, CATEGORY)) {
-                    appendIfDefined(categories, axis.getCategory(point));
+                    appendIfNotNull(categories, axis.getCategory(point));
                 } else {
-                    appendIfDefined(values, axis.getValue(point));
+                    appendIfNotNull(values, axis.getValue(point));
                 }
             }
 
             if (categories.length === 0) {
-                appendIfDefined(
+                appendIfNotNull(
                     categories, plotArea.primaryCategoryAxis.getCategory(point)
                 );
             }
@@ -6261,8 +6261,8 @@
         return a === b;
     }
 
-    function appendIfDefined(array, element) {
-        if (defined(element)) {
+    function appendIfNotNull(array, element) {
+        if (element !== null) {
             array.push(element);
         }
     }
