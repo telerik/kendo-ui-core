@@ -458,6 +458,11 @@ html .k-error-colored
     }
 }
 
+.k-virtual-scrollable-wrap
+{
+    overflow-x:auto; /*needed by IE8*/
+}
+
 /* Window */
 
 div.k-window
