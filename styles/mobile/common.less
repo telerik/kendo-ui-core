@@ -156,7 +156,7 @@
 
 .km-view-title
 {
-    display: none;
+    visibility: hidden;
 }
 
 .km-toolbar,
@@ -939,20 +939,14 @@
 .km-rightitem
 {
     z-index: 1;
-    position: relative;
-    float: right;
+    position: absolute;
+    right: .5em;
 }
 
 .km-leftitem
 {
-    float: left;
-}
-
-.km-root .km-leftitem ~ .km-view-title,
-.km-root .km-rightitem ~ .km-view-title
-{
-    position: absolute;
-    left: 0;
+    left: .5em;
+    right: auto;
 }
 
 /* Dialog */
