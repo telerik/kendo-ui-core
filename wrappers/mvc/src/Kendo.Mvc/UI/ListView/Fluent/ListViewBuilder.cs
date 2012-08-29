@@ -179,6 +179,17 @@
         }
 
         /// <summary>
+        /// Specifies if the ListView should be automatically bound on initial load. 
+        /// This is only possible if AJAX binding is used, and widget is not initialy populated on the server.
+        /// </summary>
+        /// <param name="value">If true ListView will be automatically data bound, otherwise false</param>        
+        public ListViewBuilder<T> AutoBind(bool value)
+        {
+            Component.AutoBind = value;
+            return this;
+        }
+
+        /// <summary>
         /// Specifies ListView wrapper element tag name.
         /// </summary>       
         /// <example>
