@@ -826,6 +826,7 @@
                 if (!enable) {
                     this.collapse(item);
                     isCollapsed = true;
+                    item.find(".k-in:first").removeClass("k-state-selected");
                 }
 
                 this._updateNodeClasses(item, {}, { enabled: enable, expanded: !isCollapsed });
