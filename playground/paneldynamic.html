@@ -1,12 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <title></title>
     <script type="text/javascript" src="../src/jquery.js"></script>
-    <script type="text/javascript" src="https://raw.github.com/jquery/jquery-tmpl/master/jquery.tmpl.min.js"></script>
+    <!--<script type="text/javascript" src="https://raw.github.com/jquery/jquery-tmpl/master/jquery.tmpl.min.js"></script>-->
     <script type="text/javascript" src="../src/kendo.core.js"></script>
     <script type="text/javascript" src="../src/kendo.fx.js"></script>
+    <script type="text/javascript" src="../src/kendo.data.js"></script>
+    <script type="text/javascript" src="../src/kendo.listview.js"></script>
+    <script type="text/javascript" src="../src/kendo.pager.js"></script>
     <script type="text/javascript" src="../src/kendo.panelbar.js"></script>
     <style type="text/css">
         html
@@ -19,6 +21,85 @@
     <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
 </head>
 <body>
+<ul id="panelbar">
+  <li>
+      <span class="k-link">ListView 1</span>
+      <div class="k-content">
+          <div id="listview1"></div>
+          <div id="pager1" class="k-pager-wrap"></div>
+      </div>
+  </li>
+  <li>
+      <span class="k-link">ListView 2</span>
+      <div class="k-content">
+          <div id="listview2"></div>
+          <div id="pager2" class="k-pager-wrap"></div>
+      </div>
+  </li>
+</ul>
+
+<script id="template" type="text/x-kendo-template">
+    <div>Name: ${name} || Age: ${age}</div>
+</script>
+
+<script type="text/javascript">
+    $("#panelbar").kendoPanelBar({
+
+    });
+
+    var ds1 = new kendo.data.DataSource({
+        data: [
+            { name: "John Doe", age: 23 },
+            { name: "Jane Doe", age: 23 },
+            { name: "John Doe", age: 23 },
+            { name: "Jane Doe", age: 23 },
+            { name: "John Doe", age: 23 },
+            { name: "Jane Doe", age: 23 },
+            { name: "John Doe", age: 23 },
+            { name: "Jane Doe", age: 23 },
+            { name: "John Doe", age: 23 },
+            { name: "Jane Doe", age: 23 },
+            { name: "John Doe", age: 23 },
+            { name: "Jane Doe", age: 23 }
+        ],
+        pageSize: 4
+    });
+
+    var ds2 = new kendo.data.DataSource({
+        data: [
+            { name: "Jack Smith", age: 33 },
+            { name: "Jane Smith", age: 33 },
+            { name: "Jack Smith", age: 33 },
+            { name: "Jane Smith", age: 33 },
+            { name: "Jack Smith", age: 33 },
+            { name: "Jane Smith", age: 33 },
+            { name: "Jack Smith", age: 33 },
+            { name: "Jane Smith", age: 33 }
+        ],
+        pageSize: 3
+    });
+
+    $("#listview1").kendoListView({
+        dataSource: ds1,
+        template: $("#template").html()
+    });
+
+    $("#pager1").kendoPager({
+        dataSource: ds1
+    });
+
+    $("#listview2").kendoListView({
+        dataSource: ds2,
+        template: $("#template").html()
+    });
+
+    $("#pager2").kendoPager({
+        dataSource: ds2
+    });
+
+</script>
+
+<!--
 <ul id="FormBar"></ul>
 <script id="rowTemplate" type="text/x-jquery-tmpl">
     <div>
@@ -120,5 +201,6 @@
         }
     });
 </script>
+-->
 </body>
 </html>

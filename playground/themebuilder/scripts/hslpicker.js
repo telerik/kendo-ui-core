@@ -77,13 +77,13 @@
 
                 var popupElement = that.popup.element.addClass("k-list-container"),
                     hueElement = $('<label class="label">H<input type="range" /></label>').appendTo(popupElement).find("input"),
-                    hueValue = $('<input type="text" class="slider-value" title="hue" />').appendTo(popupElement).after('<br />'),
+                    hueValue = $('<input type="text" class="input-value" title="hue" />').appendTo(popupElement).after('<br />'),
                     saturationElement = $('<label class="label">S<input type="range" /></label>').appendTo(popupElement).find("input"),
-                    saturationValue = $('<input type="text" class="slider-value" title="saturation" />').appendTo(popupElement).after('<br />'),
+                    saturationValue = $('<input type="text" class="input-value" title="saturation" />').appendTo(popupElement).after('<br />'),
                     lightnessElement = $('<label class="label">L<input type="range" /></label>').appendTo(popupElement).find("input"),
-                    lightnessValue = $('<input type="text" class="slider-value" title="lightness" />').appendTo(popupElement).after('<br />'),
+                    lightnessValue = $('<input type="text" class="input-value" title="lightness" />').appendTo(popupElement).after('<br />'),
                     alphaElement = $('<label class="label">A<input type="range" /></label>').appendTo(popupElement).find("input"),
-                    alphaValue = $('<input type="text" class="slider-value" title="alpha" />').appendTo(popupElement),
+                    alphaValue = $('<input type="text" class="input-value" title="alpha" />').appendTo(popupElement),
                     changeProxy = proxy(that._onChange, that),
                     slideProxy = proxy(that._onSlide, that);
 

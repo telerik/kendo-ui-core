@@ -13,7 +13,7 @@
 
         PatternPicker = Widget.extend({
             init: function (element, options) {
-                var that = this;
+                var that = this, popupElement;
 
                 Widget.fn.init.call(that, element, options);
                 element = that.element;
@@ -43,7 +43,9 @@
                     }
                 });
 
-                that.preview = $("<div class='pattern-preview'></div>").appendTo(that.popup.element);
+                popupElement = that.popup.element.addClass("k-list-container");
+
+                that.preview = $("<div class='pattern-preview'></div>").appendTo(popupElement);
                 that._update();
 
                 if (!options.filter) {
@@ -68,8 +70,20 @@
                         });
                 }
 
-                that.popup.element
-                    .addClass("k-list-container");
+                var repeatXID = kendo.guid(),
+                    repeatYID = kendo.guid(),
+                    urlLabel = $('<label class="label">Pattern Url</label>').appendTo(popupElement).after('<br />'),
+                    urlValue = $('<input type="text" class="input-value" title="Url" />').appendTo(urlLabel),
+                    repeatXValue = $('<input id="' + repeatXID + '" type="checkbox" class="k-checkbox check-value" title="repeat-x" />').appendTo(popupElement),
+                    repeatYValue = $('<input id="' + repeatYID + '" type="checkbox" class="k-checkbox check-value" title="repeat-y" />')
+                                        .appendTo(popupElement),
+                    positiionXValue = $('<input type="text" class="input-value" title="position-x" />')
+                                        .appendTo($('<label class="label">X</label>').appendTo(popupElement)),
+                    positionYValue = $('<input type="text" class="input-value" title="position-y" />')
+                                        .appendTo($('<label class="label">Y</label>').appendTo(popupElement));
+
+                repeatXValue.after('<label for="' + repeatXID + '" class="k-checkbox label">X</label>');
+                repeatYValue.after('<label for="' + repeatYID + '" class="k-checkbox label">Y</label><br />');
             },
 
             options: {
