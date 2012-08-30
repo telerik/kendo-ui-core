@@ -26,8 +26,12 @@
                                     '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-button-bare k-upload-button">' +
                                         '<span class="k-icon k-add"></span>#=messages.uploadFile#<input type="file" name="file" /></div></div>' +
                                 '#}#' +
-                                '<button type="button" class="k-button k-button-icon k-button-bare"><span class="k-icon k-addfolder"></span></button>' +
-                                '<button type="button" class="k-button k-button-icon k-button-bare k-state-disabled"><span class="k-icon k-delete"></span></button>&nbsp;' +
+                                '#if(showCreate) {#' +
+                                    '<button type="button" class="k-button k-button-icon k-button-bare"><span class="k-icon k-addfolder"></span></button>' +
+                                '#}#' +
+                                '#if(showDelete) {#' +
+                                    '<button type="button" class="k-button k-button-icon k-button-bare k-state-disabled"><span class="k-icon k-delete"></span></button>&nbsp;' +
+                                '#}#' +
                             '</div>' +
                             '<div class="k-tiles-arrange">#=messages.orderBy#: <a href="\\#" class="k-link"><span>#=messages.orderByName#</span><span class="k-icon k-i-arrow-s"></span></a>' +
                             '</div>' +
@@ -236,7 +240,9 @@
 
             that.toolbar = $(template({
                     messages: messages,
-                    showUpload: that.options.transport.uploadUrl
+                    showUpload: that.options.transport.uploadUrl,
+                    showCreate: that.options.transport.create,
+                    showDelete: that.options.transport.destroy
                 }))
                 .appendTo(that.element)
                 .find(".k-upload input")
