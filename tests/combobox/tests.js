@@ -38,5 +38,9 @@ tests.push(
     {
         page: "combobox/lint.html",
         title: "combobox lint"
+    },
+    {
+        page: "combobox/aria.html",
+        title: "combobox aria"
     }
 );

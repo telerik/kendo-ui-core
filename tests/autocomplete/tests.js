@@ -34,5 +34,9 @@ tests.push(
     {
         page: "autocomplete/lint.html",
         title: "autocomplete lint"
+    },
+    {
+        page: "autocomplete/aria.html",
+        title: "autocomplete aria"
     }
 );
