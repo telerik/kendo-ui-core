@@ -1231,7 +1231,7 @@ var Dom = {
         }
 
         elementTop = element.offset().top;
-        elementHeight = element.height();
+        elementHeight = element[0].offsetHeight;
 
         if (elementHeight + elementTop > body.scrollTop + windowHeight) {
             body.scrollTop = elementHeight + elementTop - windowHeight;
