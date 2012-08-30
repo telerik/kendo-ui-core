@@ -161,6 +161,14 @@
             {
                 throw new NotSupportedException(Exceptions.DataKeysEmpty);
             }
+
+            if (AutoBind.HasValue)
+            {
+                if (DataSource.Type != DataSourceType.Ajax || (DataSource.Type == DataSourceType.Ajax && DataSource.Data != null))
+                {
+                    throw new NotSupportedException(Exceptions.CannotSetAutoBindIfBoundDuringInitialization);
+                }
+            }
         }
 
         private void ProcessDataSource()
