@@ -30,7 +30,7 @@
         init: function(element, options) {
             var that = this,
                 ns = that.ns,
-                list, id;
+                id;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
@@ -278,6 +278,7 @@
         _popup: function() {
             var that = this,
                 list = that.list,
+                focused = that._focused,
                 options = that.options,
                 wrapper = that.wrapper;
 
@@ -288,11 +289,17 @@
 
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
+                    } else {
+                        focused.attr("aria-expanded", true);
+                        that.ul.attr("aria-hidden", false);
                     }
                 },
                 close: function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
+                    } else {
+                        focused.attr("aria-expanded", false);
+                        that.ul.attr("aria-hidden", true);
                     }
                 },
                 animation: options.animation,
@@ -480,6 +487,7 @@
             var that = this;
             clearTimeout(that._busy);
             that._arrow.removeClass(LOADING);
+            that._focused.attr("aria-busy", false);
             that._busy = null;
         },
 
@@ -493,6 +501,7 @@
             }
 
             that._busy = setTimeout(function () {
+                that._focused.attr("aria-busy", true);
                 that._arrow.addClass(LOADING);
             }, 100);
         },
