@@ -72,7 +72,7 @@
         }
 
         .color-preview,
-        .slider-value
+        .input-value
         {
             display: inline-block;
             width: 2.6em;
@@ -459,6 +459,7 @@
             position: absolute;
         }
 
+        .k-static-pattern,
         .k-static-gradient
         {
             width: 540px !important;
@@ -575,7 +576,7 @@
             padding: 8px 7px 3px;
         }
 
-        .k-colorpick .slider-value
+        .k-popup .input-value
         {
             background: #d9d9d9;
             margin: 9px 0 3px;
@@ -583,6 +584,48 @@
             vertical-align: middle;
             font-size: 1em;
             outline: 0;
+        }
+
+        .k-patternpick .label
+        {
+            width: auto;
+            margin: 9px 0 0 5px;
+            text-transform: uppercase;
+        }
+
+        .k-patternpick .input-value
+        {
+            margin: 0 5px;
+            text-transform: none;
+        }
+
+        .k-patternpick [title=Url]
+        {
+            width: 200px;
+            text-align: left;
+            padding: 0 5px;
+        }
+
+        :root .k-patternpick label.k-checkbox {
+            padding-left: 0;
+            padding-right: 1.6em;
+        }
+
+        :root .k-patternpick input.k-checkbox + label.k-checkbox:before,
+        :root .k-patternpick input.k-checkbox + label.k-checkbox:after
+        {
+            left: auto;
+            right: 0;
+            width: 1.6em;
+            height: 1.6em;
+            margin: -.6em 1px 0 0;
+        }
+
+        :root .k-patternpick input.k-checkbox + label.k-checkbox:after
+        {
+            margin-right: 2px;
+            width: 1.45em;
+            height: 1.45em;
         }
 
         .k-colorpick .km-slider-wrapper
@@ -603,13 +646,29 @@
                         -moz-linear-gradient(top, #e4e4e4, #e4e4e4) 0 0 no-repeat;
         }
 
-        .k-colorpick .slider-value,
-        .k-colorpick .km-slider-container
+        .k-popup .input-value,
+        .k-colorpick .km-slider-container,
+        :root .k-patternpick input.k-checkbox + label.k-checkbox:before
         {
             border-radius: 9px;
             -moz-border-radius: 9px;
             -webkit-border-radius: 9px;
             box-shadow: inset 0 1px 2px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
+        }
+
+        :root .k-patternpick input.k-checkbox:checked + label.k-checkbox:before
+        {
+            background: #fff;
+        }
+
+        :root .k-patternpick input.k-checkbox + label.k-checkbox:after
+        {
+            margin-top: -.45em;
+            color: #000;
+            content: "\2713";
+            background: transparent;
+            border: 0;
+            box-shadow: none;
         }
 
         .k-colorpick .km-slider-handle
@@ -1049,7 +1108,6 @@
             }
             :root input.k-checkbox:checked + label.k-checkbox:after {
                 display: inline-block;
-
             }
         </style>
         <input id="iosbox" type="checkbox" checked="checked" class="k-checkbox"/>
