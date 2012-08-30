@@ -243,6 +243,8 @@
             var chart = this;
 
             applyDefaults(chart.options);
+
+            delete chart._sourceSeries;
             chart._onDataChanged();
         },
 
