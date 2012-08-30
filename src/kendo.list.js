@@ -18,6 +18,7 @@
         SELECTED = "selected",
         REQUESTSTART = "requestStart",
         REQUESTEND = "requestEnd",
+        WIDTH = "width",
         extend = $.extend,
         proxy = $.proxy,
         browser = kendo.support.browser,
@@ -28,7 +29,7 @@
         init: function(element, options) {
             var that = this,
                 ns = that.ns,
-                list, id;
+                id;
 
             Widget.fn.init.call(that, element, options);
 
@@ -38,9 +39,15 @@
                         .css({ overflow: kendo.support.touch ? "": "auto" })
                         .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); })
-                        .on(CLICK + ns, LI, proxy(that._click, that));
+                        .on(CLICK + ns, LI, proxy(that._click, that))
+                        .attr({
+                            tabIndex: -1,
+                            role: "listbox",
+                            "aria-hidden": true,
+                            "aria-live": that.options.filter === "none" ? "off" : "polite"
+                        })
 
-            that.list = list = $("<div class='k-list-container'/>")
+            that.list = $("<div class='k-list-container'/>")
                         .append(that.ul)
                         .on("mousedown" + ns, function(e) {
                             e.preventDefault();
@@ -48,7 +55,9 @@
 
             id = that.element.attr(ID);
             if (id) {
-                list.attr(ID, id + "-list");
+                that.list.attr(ID, id + "-list");
+                that.ul.attr(ID, id + "-listbox");
+                that._optionID = id + "_option_selected";
             }
         },
 
@@ -57,16 +66,24 @@
         },
 
         current: function(candidate) {
-            var that = this;
+            var that = this,
+                id = that._optionID;
 
             if (candidate !== undefined) {
                 if (that._current) {
-                    that._current.removeClass(FOCUSED);
+                    that._current
+                        .removeClass(FOCUSED)
+                        .removeAttr(ID);
                 }
 
                 if (candidate) {
                     candidate.addClass(FOCUSED);
                     that._scroll(candidate);
+
+                    if (id) {
+                        that._focused.attr("aria-activedescentant", id)
+                        candidate.attr(ID, id)
+                    }
                 }
 
                 that._current = candidate;
@@ -212,6 +229,10 @@
                 wrapper = this.wrapper,
                 computedStyle, computedWidth;
 
+            if (!list.data(WIDTH) && width) {
+                return;
+            }
+
             computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
             computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
 
@@ -224,14 +245,14 @@
             list.css({
                 fontFamily: wrapper.css("font-family"),
                 width: width
-            });
-
-            return true;
+            })
+            .data(WIDTH, width);
         },
 
         _popup: function() {
             var that = this,
                 list = that.list,
+                focused = that._focused,
                 options = that.options,
                 wrapper = that.wrapper;
 
@@ -242,11 +263,17 @@
 
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
+                    } else {
+                        focused.attr("aria-expanded", true);
+                        that.ul.attr("aria-hidden", false);
                     }
                 },
                 close: function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
+                    } else {
+                        focused.attr("aria-expanded", false);
+                        that.ul.attr("aria-hidden", true);
                     }
                 },
                 animation: options.animation
@@ -314,7 +341,8 @@
             }
 
             if (!template) {
-                that.template = kendo.template('<li unselectable="on" class="k-item">${data' + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
+                //that.template = kendo.template('<li id="items_#=data' + (options.dataTextField ? "." : "") + options.dataTextField + '#" tabindex="-1" role="option" unselectable="on" class="k-item">${data' + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
+                that.template = kendo.template('<li tabindex="-1" role="option" unselectable="on" class="k-item">${data' + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
             } else {
                 template = kendo.template(template);
                 that.template = function(data) {
@@ -425,6 +453,7 @@
             var that = this;
             clearTimeout(that._busy);
             that._arrow.removeClass(LOADING);
+            that._focused.attr("aria-busy", false);
             that._busy = null;
         },
 
@@ -438,6 +467,7 @@
             }
 
             that._busy = setTimeout(function () {
+                that._focused.attr("aria-busy", true);
                 that._arrow.addClass(LOADING);
             }, 100);
         },
