@@ -83,13 +83,10 @@
                 })
                 .attr({
                     "role": "combobox",
-                    "aria-expanded": false,
-                    "aria-autocomplete": options.suggest ? "both" : "list"
+                    "aria-expanded": false
                 });
 
-            if (element[0].id) {
-                that.input.attr("aria-owns", that.ul[0].id);
-            }
+            that._aria();
 
             that._oldIndex = that.selectedIndex = -1;
             that._old = that.value();
@@ -150,6 +147,7 @@
 
             this._template();
             this._accessors();
+            this._aria();
         },
 
         current: function(li) {

@@ -41,6 +41,8 @@
 
             that._tabindex();
 
+            that._aria();
+
             that._span();
 
             that._popup();
@@ -115,6 +117,7 @@
 
             this._template();
             this._accessors();
+            this._aria();
         },
 
         destroy: function() {
@@ -492,10 +495,6 @@
                                   "aria-haspopup": true,
                                   "aria-expanded": false
                               });
-
-            if (DOMelement.id) {
-                wrapper.attr("aria-owns", that.ul[0].id);
-            }
         }
     });
 

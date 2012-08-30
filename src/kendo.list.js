@@ -45,8 +45,7 @@
                         .attr({
                             tabIndex: -1,
                             role: "listbox",
-                            "aria-hidden": true,
-                            "aria-live": that.options.filter === "none" ? "off" : "polite"
+                            "aria-hidden": true
                         });
 
             that.list = $("<div class='k-list-container'/>")
@@ -147,6 +146,22 @@
 
             that._text = getter(options.dataTextField);
             that._value = getter(options.dataValueField);
+        },
+
+        _aria: function() {
+            var that = this,
+                options = that.options,
+                element = that._focused;
+
+            if (options.suggest !== undefined) {
+                element.attr("aria-autocomplete", options.suggest ? "both" : "list");
+            }
+
+            if (that.element[0].id) {
+                element.attr("aria-owns", that.ul[0].id);
+            }
+
+            that.ul.attr("aria-live", !options.filter || options.filter === "none" ? "off" : "polite");
         },
 
         _blur: function() {

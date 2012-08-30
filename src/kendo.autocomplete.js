@@ -93,8 +93,7 @@
                 .attr({
                     autocomplete: "off",
                     role: "textbox",
-                    "aria-haspopup": true,
-                    "aria-autocomplete": options.suggest ? "both" : "list"
+                    "aria-haspopup": true
                 });
 
             that._enable();
@@ -106,6 +105,8 @@
             if (element[0].id) {
                 element.attr("aria-owns", that.ul[0].id);
             }
+
+            that._aria();
 
             that._placeholder();
 
@@ -161,6 +162,7 @@
 
             this._template();
             this._accessors();
+            this._aria();
         },
 
 
