@@ -681,6 +681,75 @@
 
                 equal(combobox.ul.attr("role"), "listbox");
             });
+
+            test("ComboBox adds role to the popup element", function() {
+                var combobox = new ComboBox(input);
+
+                equal(combobox.ul.attr("role"), "listbox");
+            });
+
+            test("ComboBox adds aria-hidden to the popup element", 3, function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["item1", "item2"]
+                });
+
+                equal(combobox.ul.attr("aria-hidden"), "true");
+
+                combobox.open();
+
+                equal(combobox.ul.attr("aria-hidden"), "false");
+
+                combobox.close();
+
+                equal(combobox.ul.attr("aria-hidden"), "true");
+            });
+
+            test("ComboBox adds aria-live=off if no filter", function() {
+                 var combobox = new ComboBox(input, {
+                    dataSource: ["item1", "item2"]
+                });
+
+                equal(combobox.ul.attr("aria-live"), "off");
+            });
+
+            test("ComboBox adds aria-live=polite if filter is set", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["item1", "item2"],
+                    filter: "startswith"
+                });
+
+                equal(combobox.ul.attr("aria-live"), "polite");
+            });
+
+            asyncTest("ComboBox adds aria-busy=true when loader is shown", 1, function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["item1", "item2"],
+                    filter: "startswith"
+                });
+
+                combobox._showBusy();
+
+                setTimeout(function() {
+                    start();
+                    equal(combobox.input.attr("aria-busy"), "true");
+                }, 150);
+            });
+
+            asyncTest("ComboBox adds aria-busy=false when loader is hidden", 1, function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["item1", "item2"],
+                    filter: "startswith"
+                });
+
+                combobox._showBusy();
+
+                setTimeout(function() {
+                    start();
+
+                    combobox._hideBusy();
+                    equal(combobox.input.attr("aria-busy"), "false");
+                }, 150);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
