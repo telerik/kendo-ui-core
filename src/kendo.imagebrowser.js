@@ -22,12 +22,14 @@
         EMPTYTILE = kendo.template('<li class="k-tile-empty"><strong>${text}</strong></li>'),
         TOOLBARTMPL = '<div class="k-widget k-toolbar k-floatwrap">' +
                             '<div class="k-toolbar-wrap">' +
-                            '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-button-bare k-upload-button">' +
-                                '<span class="k-icon k-add"></span>#=uploadFile#<input type="file" name="file" /></div></div>' +
+                                '#if(showUpload) { # ' +
+                                    '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-button-bare k-upload-button">' +
+                                        '<span class="k-icon k-add"></span>#=messages.uploadFile#<input type="file" name="file" /></div></div>' +
+                                '#}#' +
                                 '<button type="button" class="k-button k-button-icon k-button-bare"><span class="k-icon k-addfolder"></span></button>' +
                                 '<button type="button" class="k-button k-button-icon k-button-bare k-state-disabled"><span class="k-icon k-delete"></span></button>&nbsp;' +
                             '</div>' +
-                            '<div class="k-tiles-arrange">#=orderBy#: <a href="\\#" class="k-link"><span>#=orderByName#</span><span class="k-icon k-i-arrow-s"></span></a>' +
+                            '<div class="k-tiles-arrange">#=messages.orderBy#: <a href="\\#" class="k-link"><span>#=messages.orderByName#</span><span class="k-icon k-i-arrow-s"></span></a>' +
                             '</div>' +
                         '</div>';
 
@@ -232,7 +234,10 @@
                 arrangeBy = [{ text: messages.orderByName, value: "name", ns: kendo.ns },
                     { text: messages.orderBySize, value: "size", ns: kendo.ns }];
 
-            that.toolbar = $(template(messages))
+            that.toolbar = $(template({
+                    messages: messages,
+                    showUpload: that.options.transport.uploadUrl
+                }))
                 .appendTo(that.element)
                 .find(".k-upload input")
                 .kendoUpload({

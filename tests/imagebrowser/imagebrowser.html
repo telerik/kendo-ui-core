@@ -105,14 +105,21 @@
             });
 
             test("toolbar texts", function() {
-                var browser = setup();
+                var browser = setup({
+                    transport: {
+                        uploadUrl: "foo"
+                    }
+                });
 
-                equal(browser.toolbar.find("div.k-upload").text(), "Upload");
+                equal(browser.toolbar.find("div.k-upload .k-upload-button").text(), "Upload");
                 equal(browser.toolbar.find("div.k-tiles-arrange").text(), "Arrange by: Name");
             });
 
             test("toolbar texts are loaded from messages", function() {
                 var browser = setup({
+                    transport: {
+                        uploadUrl: "foo"
+                    },
                     messages: {
                         uploadFile: "foo",
                         orderBy: "bar",
@@ -120,7 +127,7 @@
                     }
                 });
 
-                equal(browser.toolbar.find("div.k-upload").text(), "foo");
+                equal(browser.toolbar.find("div.k-upload .k-upload-button").text(), "foo");
                 equal(browser.toolbar.find("div.k-tiles-arrange").text(), "bar: baz");
             });
 
@@ -687,6 +694,14 @@
                     .trigger("dblclick");
             });
 
+            test("upload is not displayed if uploadUrl is not set", function() {
+                var browser = setup({
+                    transport: {
+                    }
+                });
+
+                ok(!browser.element.find(".k-upload").length);
+            });
         </script>
     </body>
 </html>
