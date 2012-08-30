@@ -50,6 +50,7 @@
                         });
 
             id = element.attr(ID);
+
             if (id) {
                 that.list.attr(ID, id + "-list");
                 that.ul.attr(ID, id + "_listbox");

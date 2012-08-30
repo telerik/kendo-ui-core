@@ -475,9 +475,18 @@
             element.hide();
 
             that._focused = that.wrapper = wrapper
-                              .attr("unselectable", "on")
                               .addClass("k-widget k-dropdown k-header")
-                              .addClass(DOMelement.className);
+                              .addClass(DOMelement.className)
+                              .attr({
+                                  unselectable: "on",
+                                  role: "listbox",
+                                  "aria-haspopup": true,
+                                  "aria-expanded": false
+                              });
+
+            if (DOMelement.id) {
+                wrapper.attr("aria-owns", that.ul[0].id);
+            }
         }
     });
 
