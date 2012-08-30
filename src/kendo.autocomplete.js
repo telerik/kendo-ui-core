@@ -6,6 +6,8 @@
         keys = kendo.keys,
         DataSource = kendo.data.DataSource,
         List = ui.List,
+        ARIA_DISABLED = "aria-disabled",
+        CHANGE = "change",
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         FOCUSED = "k-state-focused",
@@ -172,7 +174,8 @@
                     .removeClass(DEFAULT)
                     .addClass(STATEDISABLED);
 
-                element.attr(DISABLED, DISABLED);
+                element.attr(DISABLED, DISABLED)
+                       .attr(ARIA_DISABLED, true);
             } else {
                 wrapper
                     .removeClass(STATEDISABLED)
@@ -180,7 +183,8 @@
                     .on(HOVEREVENTS, that._toggleHover);
 
                 element
-                    .removeAttr(DISABLED);
+                    .removeAttr(DISABLED)
+                    .attr(ARIA_DISABLED, false);
             }
         },
 

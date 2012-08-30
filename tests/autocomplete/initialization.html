@@ -264,6 +264,37 @@
                 equal(autocomplete.element.attr("tabIndex"), "2");
             });
 
+            test("Autocomplete adds aria-disabled=false", function() {
+                var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
+                    placeholder: "Select...",
+                    suggest: false
+                });
+
+                equal(autocomplete.element.attr("aria-disabled"), "false");
+            });
+
+            test("Autocomplete adds aria-disabled=true", function() {
+                var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
+                    placeholder: "Select...",
+                    suggest: false,
+                    enable: false
+                });
+
+                equal(autocomplete.element.attr("aria-disabled"), "true");
+            });
+
+            test("Autocomplete adds aria-expanded", function() {
+                var autocomplete = new AutoComplete(input, {
+                    placeholder: "Select...",
+                    dataSource: ["Item"],
+                    suggest: false
+                });
+
+                autocomplete.search("I");
+
+                equal(autocomplete.element.attr("aria-expanded"), "true");
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
