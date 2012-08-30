@@ -246,6 +246,23 @@
                 equal(autocomplete.element.attr("aria-autocomplete"), "list");
             });
 
+            test("Autocomplete sets tabindex", function() {
+                var autocomplete = new AutoComplete(input.attr("id", "test"), {
+                    placeholder: "Select...",
+                    suggest: false
+                });
+
+                equal(autocomplete.element.prop("tabIndex"), "0");
+            });
+
+            test("Autocomplete preserves tab order", function() {
+                var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
+                    placeholder: "Select...",
+                    suggest: false
+                });
+
+                equal(autocomplete.element.attr("tabIndex"), "2");
+            });
 
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

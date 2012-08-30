@@ -74,11 +74,6 @@
 
             that._popup();
 
-            //aria
-
-            element.attr("tabindex", 0)
-
-            //end
             element
                 .addClass("k-input")
                 .on("keydown" + ns, proxy(that._keydown, that))
@@ -105,6 +100,10 @@
             that._popup();
 
             that._old = that._accessor();
+
+            if (element[0].id) {
+                element.attr("aria-owns", that.ul[0].id);
+            }
 
             that._placeholder();
 
