@@ -66,7 +66,12 @@
 
             if (candidate !== undefined) {
                 if (that._current) {
-                    that._current.removeClass(FOCUSED);
+                    that._current
+                        .removeClass(FOCUSED)
+                        .removeAttr(ID);
+
+                    that._focused
+                        .removeAttr("aria-activedescendant");
                 }
 
                 if (candidate) {

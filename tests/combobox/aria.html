@@ -191,13 +191,26 @@
                 equal(combobox.input.attr("aria-busy"), "false");
             });
 
-            test("ComboBox does not have aria-activedescendant if no item is selected", function() {
+            test("ComboBox does not have aria-activedescendant if no item is selected on load", function() {
                 var combobox = new ComboBox(input.attr("id", "test"), {
                     highlightFirst: true,
                     dataSource: ["item1", "item2"],
                     filter: "startswith"
                 });
 
+                equal(combobox.selectedIndex, -1);
+                equal(combobox.input.attr("aria-activedescendant"), undefined);
+            });
+
+            test("ComboBox remove aria-activedescendant if no item is selected", function() {
+                var combobox = new ComboBox(input.attr("id", "test"), {
+                    highlightFirst: true,
+                    dataSource: ["item1", "item2"],
+                    filter: "startswith",
+                    value: "item1"
+                });
+
+                combobox.value("");
                 equal(combobox.selectedIndex, -1);
                 equal(combobox.input.attr("aria-activedescendant"), undefined);
             });
