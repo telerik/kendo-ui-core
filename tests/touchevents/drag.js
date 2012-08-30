@@ -38,6 +38,15 @@ module("drag", {
     }
 });
 
+test("raises press on touchstart", 2, function(){
+    drag.bind("press", function(e) {
+        equal(e.x.location, 10);
+        equal(e.y.location, 20);
+    });
+
+    press(10, 20);
+});
+
 test("raises start on first mouse move", 2, function(){
     drag.bind("start", function(e) {
         equal(e.x.location, 15);

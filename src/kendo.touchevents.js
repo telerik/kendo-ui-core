@@ -55,6 +55,46 @@
         parent.trigger(e.type);
     }
 
+    function getTouches(e) {
+        var touches = [],
+            originalEvent = e.originalEvent,
+            idx = 0, length,
+            changedTouches,
+            touch;
+
+        if (support.touch) {
+            changedTouches = originalEvent.changedTouches;
+            for (length = changedTouches.length; idx < length; idx ++) {
+                touch = changedTouches[idx];
+                touches.push({
+                    location: touch,
+                    event: e,
+                    target: touch.target,
+                    id: touch.identifier
+                });
+            }
+        }
+        else if (support.pointers) {
+            touches.push({
+                location: originalEvent,
+                event: e,
+                target: e.target,
+                id: originalEvent.pointerId
+
+            });
+        } else {
+            touches.push({
+                id: 1, // hardcoded ID for mouse event;
+                event: e,
+                target: e.target,
+                location: e
+            });
+        }
+
+        return touches;
+    }
+
+
     var TouchAxis = Class.extend({
         init: function(axis, location) {
             var that = this;
@@ -96,20 +136,61 @@
     });
 
     var Touch = Class.extend({
-        init: function(drag, target, event) {
-            var that = this,
-                timestamp = now();
+        init: function(drag, target, touchInfo) {
+            var that = this;
 
             extend(that, {
-                x: new TouchAxis("X", event.location, timestamp),
-                y: new TouchAxis("Y", event.location, timestamp),
+                x: new TouchAxis("X", touchInfo.location),
+                y: new TouchAxis("Y", touchInfo.location),
                 drag: drag,
                 target: target,
-                currentTarget: event.currentTarget,
-                id: event.id,
+                currentTarget: touchInfo.currentTarget,
+                id: touchInfo.id,
                 _moved: false,
                 _finished: false
             });
+
+            that._trigger("press", touchInfo);
+        },
+
+        move: function(touchInfo) {
+            var that = this;
+
+            if (that._finished) { return; }
+
+            that.x.move(touchInfo.location);
+            that.y.move(touchInfo.location);
+
+            if (!that._moved) {
+                if (that._withinIgnoreThreshold()) {
+                    return;
+                }
+
+                if (!Drag.current || Drag.current === that.drag) {
+                    that._start(touchInfo);
+                } else {
+                    return that.dispose();
+                }
+            }
+
+            // Event handlers may cancel the drag in the START event handler, hence the double check for pressed.
+            if (!that._finished) {
+                that._trigger(MOVE, touchInfo);
+            }
+        },
+
+        end: function(touchInfo) {
+            var that = this;
+
+            if (that._finished) { return; }
+
+            if (that._moved) {
+                that._trigger(END, touchInfo);
+            } else {
+                that._trigger(TAP, touchInfo);
+            }
+
+            that.dispose();
         },
 
         dispose: function() {
@@ -134,67 +215,26 @@
             return this._moved;
         },
 
-        _start: function(e) {
+        _start: function(touchInfo) {
            this.startTime = now();
            this._moved = true;
-           this._trigger(START, e);
+           this._trigger(START, touchInfo);
         },
 
-        move: function(touch) {
+
+        _trigger: function(name, touchInfo) {
             var that = this,
-                e = touch.event,
-                timestamp = now();
-
-            if (that._finished) { return; }
-
-            that.x.move(touch.location, timestamp);
-            that.y.move(touch.location, timestamp);
-
-            if (!that._moved) {
-                if (that._withinIgnoreThreshold()) {
-                    return;
-                }
-
-                if (!Drag.current || Drag.current === that.drag) {
-                    that._start(e);
-                } else {
-                    return that.dispose();
-                }
-            }
-
-            // Event handlers may cancel the drag in the START event handler, hence the double check for pressed.
-            if (!that._finished) {
-                that._trigger(MOVE, e);
-            }
-        },
-
-        end: function(touch) {
-            var that = this,
-                e = touch.event;
-
-            if (that._finished) { return; }
-
-            if (that._moved) {
-                that._trigger(END, e);
-            } else {
-                that._trigger(TAP, e);
-            }
-
-            that.dispose();
-        },
-
-        _trigger: function(name, e) {
-            var that = this,
+                jQueryEvent = touchInfo.event,
                 data = {
                     touch: that,
                     x: that.x,
                     y: that.y,
                     target: that.target,
-                    event: e
+                    event: jQueryEvent
                 };
 
             if(that.drag.notify(name, data)) {
-                e.preventDefault();
+                jQueryEvent.preventDefault();
             }
         },
 
@@ -205,45 +245,6 @@
             return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.drag.threshold;
         }
     });
-
-    function getTouches(e) {
-        var touches = [],
-            originalEvent = e.originalEvent,
-            idx = 0, length,
-            changedTouches,
-            touch;
-
-        if (support.touch) {
-            changedTouches = originalEvent.changedTouches;
-            for (length = changedTouches.length; idx < length; idx ++) {
-                touch = changedTouches[idx];
-                touches.push({
-                    location: touch,
-                    event: e,
-                    target: touch.target,
-                    id: touch.identifier
-                });
-            }
-        }
-        else if (support.pointers) {
-            touches.push({
-                location: originalEvent,
-                event: e,
-                target: e.target,
-                id: originalEvent.pointerId
-
-            });
-        } else {
-            touches.push({
-                id: 1, // hardcoded ID for mouse event;
-                event: e,
-                target: e.target,
-                location: e
-            });
-        }
-
-        return touches;
-    }
 
     var Drag = Observable.extend({
         init: function(element, options) {
@@ -354,16 +355,19 @@
         },
 
         _maxTouchesReached: function() {
-
             return this.touches.length >= this._maxTouches;
         },
 
         _disposeAll: function() {
-            $.each(this.touches, function() { this.dispose(); });
+            $.each(this.touches, function() {
+                this.dispose();
+            });
         },
 
         _isMoved: function() {
-            return $.grep(this.touches, function(touch) { return touch.isMoved(); }).length;
+            return $.grep(this.touches, function(touch) {
+                return touch.isMoved();
+            }).length;
         },
 
         _isPressed: function() {
@@ -433,6 +437,7 @@
                 activeTouches = that.touches,
                 idx,
                 touch,
+                touchInfo,
                 matchingTouch;
 
             for (idx = 0; idx < activeTouches.length; idx ++) {
@@ -441,11 +446,11 @@
             }
 
             for (idx = 0; idx < touches.length; idx ++) {
-                touch = touches[idx];
-                matchingTouch = dict[touch.id];
+                touchInfo = touches[idx];
+                matchingTouch = dict[touchInfo.id];
 
                 if (matchingTouch) {
-                    matchingTouch[methodName](touch);
+                    matchingTouch[methodName](touchInfo);
                 }
             }
         }
