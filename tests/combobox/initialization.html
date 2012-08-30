@@ -625,7 +625,7 @@
                 equal(combobox.selectedIndex, 1);
                 equal(combobox.ul.children().eq(0).attr("id"), undefined);
                 equal(combobox.ul.children().eq(1).attr("id"), "test_option_selected");
-                equal(combobox.input.attr("aria-activedescentant"), "test_option_selected");
+                equal(combobox.input.attr("aria-activedescendant"), "test_option_selected");
             });
 
             test("ComboBox adds aria-disabled='true'", function() {
@@ -743,6 +743,17 @@
 
                 combobox._hideBusy();
                 equal(combobox.input.attr("aria-busy"), "false");
+            });
+
+            test("ComboBox does not have aria-activedescendant if no item is selected", function() {
+                var combobox = new ComboBox(input.attr("id", "test"), {
+                    highlightFirst: true,
+                    dataSource: ["item1", "item2"],
+                    filter: "startswith"
+                });
+
+                equal(combobox.selectedIndex, -1);
+                equal(combobox.input.attr("aria-activedescendant"), undefined);
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

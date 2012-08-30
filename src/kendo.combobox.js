@@ -668,8 +668,9 @@
             var that = this,
                 text,
                 value,
-                idx = that._highlight(li),
-                data = that._data();
+                data = that._data(),
+                id = that._optionID,
+                idx = that._highlight(li);
 
             that.selectedIndex = idx;
 
@@ -687,6 +688,11 @@
                 that._prev = that.input[0].value = text;
                 that._accessor(value !== undefined ? value : text, idx);
                 that._placeholder();
+
+                if (id) {
+                    that._focused.attr("aria-activedescendant", id)
+                    that._current.attr("id", id)
+                }
             }
         },
 
