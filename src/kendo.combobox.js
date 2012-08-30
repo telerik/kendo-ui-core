@@ -691,7 +691,10 @@
 
                 if (id) {
                     that._focused.attr("aria-activedescendant", id);
-                    that._current.attr("id", id);
+                    that._current.attr({
+                        id: id,
+                        "aria-selected": true
+                    });
                 }
             }
         },

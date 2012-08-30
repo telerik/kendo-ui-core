@@ -214,6 +214,30 @@
                 equal(combobox.selectedIndex, -1);
                 equal(combobox.input.attr("aria-activedescendant"), undefined);
             });
+
+            test("ComboBox adds aria-selected to the selected item", function() {
+                var combobox = new ComboBox(input.attr("id", "test"), {
+                    highlightFirst: true,
+                    dataSource: ["item1", "item2"],
+                    filter: "startswith",
+                    value: "item1"
+                });
+
+                equal(combobox.current().attr("aria-selected"), "true");
+            });
+
+            test("ComboBox removes aria-selected from unselected item", function() {
+                var combobox = new ComboBox(input.attr("id", "test"), {
+                    highlightFirst: true,
+                    dataSource: ["item1", "item2"],
+                    filter: "startswith",
+                    value: "item1"
+                });
+
+                combobox.value("");
+
+                ok(!combobox.ul.children("[aria-selected=true]")[0]);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

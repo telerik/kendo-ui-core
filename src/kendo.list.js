@@ -68,6 +68,7 @@
                 if (that._current) {
                     that._current
                         .removeClass(FOCUSED)
+                        .removeAttr("aria-selected")
                         .removeAttr(ID);
 
                     that._focused
