@@ -30,5 +30,9 @@ tests.push(
     {
         page: "dropdownlist/integration.html",
         title: "dropdownlist integration"
+    },
+    {
+        page: "dropdownlist/aria.html",
+        title: "dropdownlist aria"
     }
 );

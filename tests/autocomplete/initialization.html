@@ -112,7 +112,7 @@
                     template: "#= data.toUpperCase() #"
                 });
 
-                equal(autocomplete.template("foo"), '<li unselectable="on" class="k-item">FOO</li>');
+                equal(autocomplete.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">FOO</li>');
             });
 
             test("highlight first item", function() {

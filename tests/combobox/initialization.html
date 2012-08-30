@@ -289,7 +289,7 @@
                    template: "#= data.toUpperCase() #"
                });
 
-               equal(combobox.template("foo"), '<li unselectable="on" class="k-item">FOO</li>');
+               equal(combobox.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">FOO</li>');
                equal(combobox.options.template, "#= data.toUpperCase() #");
            });
 

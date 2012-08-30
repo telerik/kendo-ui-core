@@ -41,9 +41,15 @@
                         .css({ overflow: kendo.support.touch ? "": "auto" })
                         .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); })
-                        .on(CLICK + ns, LI, proxy(that._click, that));
+                        .on(CLICK + ns, LI, proxy(that._click, that))
+                        .attr({
+                            tabIndex: -1,
+                            role: "listbox",
+                            "aria-hidden": true,
+                            "aria-live": that.options.filter === "none" ? "off" : "polite"
+                        });
 
-            that.list = list = $("<div class='k-list-container'/>")
+            that.list = $("<div class='k-list-container'/>")
                         .append(that.ul)
                         .on("mousedown" + ns, function(e) {
                             e.preventDefault();
@@ -344,7 +350,7 @@
             } else {
                 template = kendo.template(template);
                 that.template = function(data) {
-                    return '<li unselectable="on" class="k-item">' + template(data) + "</li>";
+                    return '<li tabindex="-1" role="option" unselectable="on" class="k-item">' + template(data) + "</li>";
                 };
             }
         },
