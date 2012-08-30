@@ -3,6 +3,12 @@ package com.kendoui.taglib.json;
 import java.io.IOException;
 import java.io.Writer;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -195,6 +201,36 @@ public class SerializerTest {
             @SuppressWarnings("unused")
             public int[] getFoo() {
                 return new int[] { 1, 2 };
+            }
+        }));
+    }
+
+    @Test
+    public void jsonSerializesCollections() throws IOException {
+        assertEquals("{\"foo\":[1,2]}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public Collection<?> getFoo() {
+                List<Integer> collection = new ArrayList<Integer>();
+
+                collection.add(1);
+                collection.add(2);
+
+                return collection;
+            }
+        }));
+    }
+
+    @Test
+    public void jsonSerializesMaps() throws IOException {
+        assertEquals("{\"foo\":{\"bar\":\"bar\",\"baz\":\"baz\"}}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public Map<?,?> getFoo() {
+                Map<String,String> map = new LinkedHashMap<String,String>();
+
+                map.put("bar", "bar");
+                map.put("baz", "baz");
+
+                return map;
             }
         }));
     }

@@ -12,8 +12,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import java.text.NumberFormat;
-
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -95,20 +94,38 @@ public class Serializer {
     }
 
     public void serialize(Writer out, Object object) throws IOException {
+        serializeMap(out, options(object));
+    }
+
+    private void serializeValue(Writer out, Object value) throws IOException {
+        if (value instanceof String) {
+            quote(out, (String)value);
+        } else if (value instanceof Number) {
+            out.append(value.toString());
+        } else if (value instanceof Collection<?>) {
+            serializeCollection(out, (Collection<?>)value);
+        } else if (value instanceof Map<?,?>) {
+            serializeMap(out, (Map<?,?>)value);
+        } else if (value.getClass().isArray()) {
+            serializeArray(out, value);
+        } else {
+            serialize(out, value);
+        }
+    }
+
+    private void serializeMap(Writer out, Map<?,?> map) throws IOException {
         out.append("{");
 
-        Map<String, Object> options = options(object);
-
-        Iterator<Entry<String, Object>> iterator = options.entrySet().iterator();
+        Iterator<?> iterator =  map.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Entry<String, Object> option = iterator.next();
+            Entry<?,?> entry = (Entry<?,?>)iterator.next();
 
             out.append("\"")
-               .append(option.getKey())
+               .append(entry.getKey().toString())
                .append("\":");
 
-            serializeValue(out, option.getValue());
+            serializeValue(out, entry.getValue());
 
             if (iterator.hasNext()) {
                 out.append(",");
@@ -118,16 +135,20 @@ public class Serializer {
         out.append("}");
     }
 
-    private void serializeValue(Writer out, Object value) throws IOException {
-        if (value instanceof String) {
-            quote(out, (String)value);
-        } else if (value instanceof Number) {
-            out.append(value.toString());
-        } else if (value.getClass().isArray()) {
-            serializeArray(out, value);
-        } else {
-            serialize(out, value);
+    private void serializeCollection(Writer out, Collection<?> collection) throws IOException {
+        out.append("[");
+
+        Iterator<?> iterator = collection.iterator();
+
+        while (iterator.hasNext()) {
+            serializeValue(out, iterator.next());
+
+            if (iterator.hasNext()) {
+                out.append(",");
+            }
         }
+
+        out.append("]");
     }
 
     private void serializeArray(Writer out, Object array) throws IOException {
