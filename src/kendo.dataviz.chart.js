@@ -5092,45 +5092,38 @@
 
         createCategoryAxes: function() {
             var plotArea = this,
-                options = plotArea.options,
                 invertAxes = plotArea.invertAxes,
-                categoryAxisOptions = [].concat(options.categoryAxis),
+                definitions = [].concat(plotArea.options.categoryAxis),
+                options,
+                name,
                 categories,
-                categoriesCount,
-                axisName,
-                axisType,
+                type,
                 dateCategory,
                 categoryAxis,
                 axes = [],
-                primaryAxis;
+                primaryAxis,
+                i;
 
-            // TODO: Cleanup
-            for (var i = 0; i < categoryAxisOptions.length; i++) {
-                var currentOptions = categoryAxisOptions[i];
+            for (i = 0; i < definitions.length; i++) {
+                options = definitions[i];
+                categories = options.categories || [];
+                type  = options.type || "";
+                options = deepExtend({
+                    vertical: invertAxes,
+                    axisCrossingValue: invertAxes ? categories.length : 0
+                }, options);
 
-                axisName = currentOptions.name;
-                categories = currentOptions.categories || [];
-                categoriesCount = categories.length;
-                axisType  = currentOptions.type || "";
+                name = options.name;
                 dateCategory = categories[0] instanceof Date;
 
-                if (equalsIgnoreCase(axisType, DATE) || (!axisType && dateCategory)) {
-                    categoryAxis = new DateCategoryAxis(deepExtend({
-                            vertical: invertAxes
-                        },
-                        currentOptions)
-                    );
+                if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
+                    categoryAxis = new DateCategoryAxis(options);
                 } else {
-                    categoryAxis = new CategoryAxis(deepExtend({
-                            vertical: invertAxes,
-                            axisCrossingValue: invertAxes ? categoriesCount : 0
-                        },
-                        currentOptions)
-                    );
+                    categoryAxis = new CategoryAxis(options);
                 }
 
-                if (axisName) {
-                    plotArea.namedCategoryAxes[axisName] = categoryAxis;
+                if (name) {
+                    plotArea.namedCategoryAxes[name] = categoryAxis;
                 }
 
                 categoryAxis.axisIndex = i;
@@ -5165,6 +5158,7 @@
                 primaryValueAxis;
 
             each(valueAxisOptions, function() {
+                // TODO: Use the category axis designation scheme
                 axisName = this.name || PRIMARY;
                 range = plotArea.valueAxisRangeTracker.query(axisName);
 
