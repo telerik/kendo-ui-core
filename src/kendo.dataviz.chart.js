@@ -94,6 +94,7 @@
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
         NS = ".kendoChart",
+        OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
@@ -125,16 +126,16 @@
         TOOLTIP_OFFSET = 5,
         TOOLTIP_SHOW_DELAY = 100,
         TRIANGLE = "triangle",
-        VERTICAL_LINE = "verticalLine",
         VERTICAL_AREA = "verticalArea",
-        VERTICAL_CANDLE_STICK = "verticalCandleStick",
+        VERTICAL_LINE = "verticalLine",
+        VERTICAL_OHLC = "verticalOhlc",
         WHITE = "#fff",
         X = "x",
         Y = "y",
         YEARS = "years",
         ZERO = "zero";
 
-    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLE_STICK, VERTICAL_CANDLE_STICK],
+    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLE_STICK, OHLC],
         XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE];
 
     var DateLabelFormats = {
@@ -3062,31 +3063,21 @@
                 chart = point.owner,
                 value = point.value,
                 valueAxis = chart.seriesValueAxis(options),
-                w = options.vertical ? X : Y,
-                h = options.vertical ? Y : X,
-                points = [], ocSlot, lhSlot, mid;
+                points = [], mid, ocSlot, lhSlot;
 
             ocSlot = valueAxis.getSlot(value.open, value.close);
             lhSlot = valueAxis.getSlot(value.low, value.high);
 
+            ocSlot.x1 = lhSlot.x1 = box.x1;
+            ocSlot.x2 = lhSlot.x2 = box.x2;
+
             point.realBody = ocSlot;
 
-            ocSlot[w + 1] = lhSlot[w + 1] = box[w + 1];
-            ocSlot[w + 2] = lhSlot[w + 2] = box[w + 2];
-
-            mid = lhSlot.center()[w];
-
-            if (options.vertical) {
-                points.push(new Point2D(mid, lhSlot[h + 1]));
-                points.push(new Point2D(mid, ocSlot[h + 1]));
-                points.push(new Point2D(mid, ocSlot[h + 2]));
-                points.push(new Point2D(mid, lhSlot[h + 2]));
-            } else {
-                points.push(new Point2D(lhSlot[h + 1], mid));
-                points.push(new Point2D(ocSlot[h + 1], mid));
-                points.push(new Point2D(ocSlot[h + 2], mid));
-                points.push(new Point2D(lhSlot[h + 2], mid));
-            }
+            mid = lhSlot.center().x;
+            points.push(new Point2D(mid, lhSlot.y1));
+            points.push(new Point2D(mid, ocSlot.y1));
+            points.push(new Point2D(mid, ocSlot.y2));
+            points.push(new Point2D(mid, lhSlot.y2));
 
             point.linePoints = points;
 
@@ -3122,7 +3113,7 @@
 
             if (options.overlay) {
                 rectStyle.overlay = deepExtend({
-                    rotation: options.vertical ? 0 : 90
+                    rotation: 0
                 }, options.overlay);
             }
 
@@ -3149,16 +3140,10 @@
             var point = this,
                 options = point.options,
                 box = point.box,
-                vertical = options.vertical,
                 x, y;
 
-            if (vertical) {
-                x = box.x2 + TOOLTIP_OFFSET;
-                y = box.y1;
-            } else {
-                x = box.x2 + TOOLTIP_OFFSET;
-                y = box.y1;
-            }
+            x = box.x2 + TOOLTIP_OFFSET;
+            y = box.y1;
 
             return new Point2D(x, y);
         },
@@ -3188,13 +3173,13 @@
             var chart = this,
                 options = chart.options,
                 value = data.value,
-                point;
+                children = chart.children,
+                point, cluster;
 
             chart.updateRange(value, categoryIx, series);
 
-            point = chart.createPoint(value, categoryIx,
+            point = chart.createPoint(value,
                 deepExtend({
-                    vertical: !options.invertAxes,
                     tooltip: {
                         format: (category ? "{4:d}<br/>" : "") + "open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
                     }
@@ -3202,6 +3187,16 @@
             );
 
             if (point) {
+                cluster = children[categoryIx];
+
+                if (!cluster) {
+                    cluster = new ClusterLayout({
+                        vertical: options.invertAxes,
+                        gap: options.gap
+                    });
+                    cluster.append(point);
+                    chart.append(cluster);
+                }
                 if (value.open < value.close) {
                     point.baseBodyColor = series.baseBodyColor;
                 }
@@ -3216,26 +3211,8 @@
             chart.points.push(point);
         },
 
-        createPoint: function(value, categoryIx, series) {
-            var chart = this,
-                options = chart.options,
-                children = chart.children,
-                point, cluster;
-
-            point = new CandleStick(value, series);
-
-            cluster = children[categoryIx];
-
-            if (!cluster) {
-                cluster = new ClusterLayout({
-                    vertical: options.invertAxes,
-                    gap: options.gap
-                });
-                cluster.append(point);
-                chart.append(cluster);
-            }
-
-            return point;
+        createPoint: function(value, series) {
+            return new CandleStick(value, series);
         },
 
         updateRange: function(value, categoryIx, series) {
@@ -3255,6 +3232,71 @@
         formatPointValue: function(point, format) {
             var value = point.value;
             return autoFormat(format, value.open, value.high, value.low, value.close, point.category);
+        }
+    });
+
+    var OHLCPoint = CandleStick.extend({
+        reflow: function(box) {
+            var point = this,
+                options = point.options,
+                chart = point.owner,
+                value = point.value,
+                valueAxis = chart.seriesValueAxis(options),
+                oPoints = [], cPoints = [], lhPoints = [],
+                mid, oSlot, cSlot, lhSlot;
+
+            lhSlot = valueAxis.getSlot(value.low, value.high);
+            oSlot = valueAxis.getSlot(value.open, value.open);
+            cSlot = valueAxis.getSlot(value.close, value.close);
+
+            oSlot.x1 = cSlot.x1 = lhSlot.x1 = box.x1;
+            oSlot.x2 = cSlot.x2 = lhSlot.x2 = box.x2;
+
+            mid = lhSlot.center().x;
+
+            oPoints.push(new Point2D(oSlot.x1, oSlot.y1));
+            oPoints.push(new Point2D(mid, oSlot.y1));
+            cPoints.push(new Point2D(mid, cSlot.y1));
+            cPoints.push(new Point2D(cSlot.x2, cSlot.y1));
+            lhPoints.push(new Point2D(mid, lhSlot.y1));
+            lhPoints.push(new Point2D(mid, lhSlot.y2));
+
+            point.oPoints = oPoints;
+            point.cPoints = cPoints;
+            point.lhPoints = lhPoints;
+
+            point.box = lhSlot.clone().wrap(oSlot.clone().wrap(cSlot));
+        },
+
+        getViewElements: function(view) {
+            var point = this,
+                options = point.options,
+                elements = [],
+                lineStyle = {
+                    id: options.id,
+                    strokeOpacity: options.opacity,
+                    zIndex: -1,
+                    strokeWidth: options.line.width,
+                    stroke: options.line.color || options.color,
+                    dashType: options.line.dashType,
+                    data: { modelId: options.modelId }
+                };
+
+            elements.push(view.createPolyline(point.oPoints, true, lineStyle));
+            elements.push(view.createPolyline(point.cPoints, true, lineStyle));
+            elements.push(view.createPolyline(point.lhPoints, true, lineStyle));
+
+            append(elements,
+                ChartElement.fn.getViewElements.call(point, view)
+            );
+
+            return elements;
+        },
+    });
+
+    var OHLCChart = CandleStickChart.extend({
+        createPoint: function(value, series) {
+            return new OHLCPoint(value, series);
         }
     });
 
@@ -4775,7 +4817,7 @@
             // Refactor when implementing multiple category axis support.
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
-                    series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA, VERTICAL_CANDLE_STICK]
+                    series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
                 );
             }
 
@@ -4841,7 +4883,11 @@
                 );
 
                 plotArea.createCandleStickChart(
-                    plotArea.filterSeriesByType(paneSeries, [CANDLE_STICK, VERTICAL_CANDLE_STICK])
+                    plotArea.filterSeriesByType(paneSeries, [CANDLE_STICK])
+                );
+
+                plotArea.createOHLCChart(
+                    plotArea.filterSeriesByType(paneSeries, [OHLC])
                 );
             }
         },
@@ -4988,6 +5034,22 @@
                 });
 
             plotArea.appendChart(areaChart);
+        },
+
+        createOHLCChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                chart = new OHLCChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    gap: firstSeries.gap,
+                    series: series
+                });
+
+            plotArea.appendChart(chart);
         },
 
         createCandleStickChart: function(series) {
@@ -5791,7 +5853,7 @@
         delete seriesDefaults.scatterLine;
         delete seriesDefaults.bubble;
         delete seriesDefaults.candleStick;
-        delete seriesDefaults.verticalCandleStick;
+        delete seriesDefaults.ohlc;
     }
 
     function applySeriesColors(options) {
@@ -5982,7 +6044,7 @@
     function valueFieldsByChartType(type) {
         var result = ["value"];
 
-        if (inArray(type, [CANDLE_STICK, VERTICAL_CANDLE_STICK])){
+        if (inArray(type, [CANDLE_STICK, OHLC])){
             result = ["open", "high", "low", "close"];
         } else if (inArray(type, XY_CHARTS)) {
             result = [X, Y];

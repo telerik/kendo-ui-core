@@ -48,7 +48,7 @@
                         "close": "max"
                     }
                 },
-                verticalCandleStick: {
+                ohlc: {
                     line: {
                         width: 2
                     },
@@ -56,7 +56,6 @@
                         width: 1
                     },
                     gap: 1,
-                    baseBodyColor: WHITE,
                     aggregate: {
                         "open": "max",
                         "high": "max",
