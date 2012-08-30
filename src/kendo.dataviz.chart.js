@@ -249,6 +249,7 @@
             applyDefaults(chart.options);
 
             if (chart.dataSource) {
+                delete chart._sourceSeries;
                 chart._onDataChanged();
             } else {
                 chart._redraw();
