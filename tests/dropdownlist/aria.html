@@ -67,6 +67,22 @@
 
               equal(dropdownlist.wrapper.attr("aria-owns"), dropdownlist.ul.attr("id"));
           });
+
+          test("DropDownList renders aria-activedescendant", function() {
+              var dropdownlist = new DropDownList(input.attr("id", "test"), {
+                  dataSource: ["Item", "Item2"]
+              });
+
+              equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.current()[0].id);
+          });
+
+          test("DropDownList renders aria-selected", function() {
+              var dropdownlist = new DropDownList(input.attr("id", "test"), {
+                  dataSource: ["Item", "Item2"]
+              });
+
+              equal(dropdownlist.current().attr("aria-selected"), "true");
+          });
       </script>
       <div id="qunit-fixture">test markup, will be hidden</div>
       <ul id="log"></ul>
