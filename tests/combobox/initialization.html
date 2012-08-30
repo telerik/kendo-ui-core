@@ -735,20 +735,14 @@
                 }, 150);
             });
 
-            asyncTest("ComboBox adds aria-busy=false when loader is hidden", 1, function() {
+            test("ComboBox adds aria-busy=false when loader is hidden", 1, function() {
                 var combobox = new ComboBox(input, {
                     dataSource: ["item1", "item2"],
                     filter: "startswith"
                 });
 
-                combobox._showBusy();
-
-                setTimeout(function() {
-                    start();
-
-                    combobox._hideBusy();
-                    equal(combobox.input.attr("aria-busy"), "false");
-                }, 150);
+                combobox._hideBusy();
+                equal(combobox.input.attr("aria-busy"), "false");
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
