@@ -548,6 +548,8 @@
                 that.element.find("> .k-overlay").remove();
             }
 
+            that.element.focus();
+
             return that;
         },
 
