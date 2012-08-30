@@ -4787,7 +4787,7 @@
                     zIndex: -2,
                     strokeWidth: 0.1
                 }),
-                view.createRect(plotArea.box, {
+                view.createRect(bgBox, {
                     id: options.id,
                     data: { modelId: options.modelId },
                     stroke: border.width ? border.color : "",

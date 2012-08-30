@@ -1250,7 +1250,7 @@
                     sameBox(plotArea.box, new Box2D(110, 110, 990, 990), TOLERANCE);
                 });
 
-                test("should not render plot area with borders", function() {
+                test("should render plot area with borders", function() {
                     var categoryAxis = {
                             categories: ["A"]
                         },
@@ -1266,10 +1266,11 @@
                         }
                     });
 
-                    var plotAreaRect = view.log.rect[2];
-                    equal(plotAreaRect.style.dashType, "dot");
-                    equal(plotAreaRect.style.stroke, "red");
-                    equal(plotAreaRect.style.strokeWidth, 2);
+                    var rect = view.log.rect[2];
+                    equal(rect.style.dashType, "dot");
+                    equal(rect.style.stroke, "red");
+                    equal(rect.style.strokeWidth, 2);
+                    same([rect.x1, rect.y1, rect.x2, rect.y2], [116, 100, 989.5, 976], TOLERANCE);
                 });
 
                 test("should render plot area background", function() {
@@ -1284,7 +1285,9 @@
                         }
                     });
 
-                    equal(view.log.rect[1].style.fill, "color");
+                    var rect = view.log.rect[1];
+                    equal(rect.style.fill, "color");
+                    same([rect.x1, rect.y1, rect.x2, rect.y2], [116, 100, 989.5, 976], TOLERANCE);
                 });
 
                 test("should set plot area background opacity", function() {
