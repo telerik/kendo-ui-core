@@ -189,6 +189,45 @@
                 ok(true);
             });
 
+            module("kendo.ui.AutoComplete ARIA", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    var ac = input.data("kendoAutoComplete");
+                    if (ac) {
+                        ac.destroy();
+                        ac.wrapper.remove();
+                    } else {
+                        input.remove();
+                    }
+                }
+            });
+
+            test("AutoComplete adds ARIA role='textbox'", function() {
+                var autocomplete = new AutoComplete(input, {
+                    placeholder: "Select..."
+                });
+
+                equal(autocomplete.element.attr("role"), "textbox");
+            });
+
+            test("AutoComplete adds aria-haspopup", function() {
+                var autocomplete = new AutoComplete(input, {
+                    placeholder: "Select..."
+                });
+
+                equal(autocomplete.element.attr("aria-haspopup"), "true");
+            });
+
+            test("AutoComplete adds aria-owns", function() {
+                var autocomplete = new AutoComplete(input.attr("id", "test"), {
+                    placeholder: "Select..."
+                });
+
+                equal(autocomplete.element.attr("aria-owns"), autocomplete.ul.attr("id"));
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

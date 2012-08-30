@@ -77,14 +77,11 @@
             //aria
 
             element.attr("tabindex", 0)
-                   .attr("role", "textbox")
-                   .attr("aria-haspopup", true)
                    .attr("aria-autocomplete", "both")
                    .attr("aria-owns", that.popup.element[0].id) //element should have ID
 
             //end
             element
-                .attr("autocomplete", "off")
                 .addClass("k-input")
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on("paste" + ns, proxy(that._search, that))
@@ -97,6 +94,11 @@
                     that._change();
                     that._placeholder();
                     wrapper.removeClass(FOCUSED);
+                })
+                .attr({
+                    autocomplete: "off",
+                    role: "textbox",
+                    "aria-haspopup": true
                 });
 
             that._enable();
