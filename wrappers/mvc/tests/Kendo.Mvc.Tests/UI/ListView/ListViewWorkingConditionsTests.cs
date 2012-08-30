@@ -37,5 +37,31 @@ namespace Kendo.Mvc.UI.Tests.ListView
             listView.Editable.Enabled = true;
             Assert.Throws<NotSupportedException>(() => listView.VerifySettings());
         }
+
+        [Fact]
+        public void Should_throw_if_autobind_is_set_with_server_binding()
+        {           
+            listView.DataSource.Type = DataSourceType.Server;
+            listView.AutoBind = true;
+            Assert.Throws<NotSupportedException>(() => listView.VerifySettings());
+        }
+
+        [Fact]
+        public void Should_throw_if_autobind_is_set_with_initial_ajax_binding()
+        {            
+            listView.DataSource.Data = new Customer[] { new Customer() };
+            listView.DataSource.Type = DataSourceType.Ajax;
+            listView.AutoBind = false;
+            Assert.Throws<NotSupportedException>(() => listView.VerifySettings());
+        }
+
+        [Fact]
+        public void Should_not_throw_if_autobind_is_set_and_no_data_is_supplied_ajax_binding()
+        {
+            listView.DataSource.Data = new Customer[] { new Customer() };
+            listView.DataSource.Type = DataSourceType.Ajax;
+            listView.AutoBind = false;
+            Assert.Throws<NotSupportedException>(() => listView.VerifySettings());
+        }
     }
 }

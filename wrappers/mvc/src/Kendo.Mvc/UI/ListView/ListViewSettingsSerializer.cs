@@ -16,10 +16,12 @@
         {
             options["dataSource"] = listView.DataSource.ToJson();
 
-            if (listView.AutoBind == false)
+            var autoBind = listView.DataSource.Type != DataSourceType.Server && listView.AutoBind.GetValueOrDefault(true);
+
+            if (!autoBind)
             {
-                options["autoBind"] = false;
-                listView.Pageable.AutoBind = false;
+                options["autoBind"] = autoBind;
+                listView.Pageable.AutoBind = autoBind;
             }
 
             SerializeClientTemplate(options);
