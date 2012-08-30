@@ -155,7 +155,9 @@
                 }
             }
 
-            that.element.on(CLICK + NS , "a", proxy(that._click, that));
+            that.element
+                .on(CLICK + NS , "a", proxy(that._click, that))
+                .addClass("k-pager-wrap k-widget");
 
             if (options.autoBind) {
                 that.refresh();
