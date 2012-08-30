@@ -282,7 +282,8 @@
                 keyCode = e.keyCode,
                 wrapper = that.wrapper,
                 offset, handled,
-                distance = 10;
+                distance = 10,
+                newWidth, newHeight;
 
             if (keyCode == keys.ESC) {
                 that.close();
@@ -304,13 +305,24 @@
 
             if (options.resizable && e.ctrlKey) {
                 if (keyCode == keys.UP) {
-                    handled = wrapper.height(wrapper.height() - distance);
+                    handled = true;
+                    newHeight = wrapper.height() - distance;
                 } else if (keyCode == keys.DOWN) {
-                    handled = wrapper.height(wrapper.height() + distance);
+                    handled = true;
+                    newHeight = wrapper.height() + distance;
                 } if (keyCode == keys.LEFT) {
-                    handled = wrapper.width(wrapper.width() - distance);
+                    handled = true;
+                    newWidth = wrapper.width() - distance;
                 } else if (keyCode == keys.RIGHT) {
-                    handled = wrapper.width(wrapper.width() + distance);
+                    handled = true;
+                    newWidth = wrapper.width() + distance;
+                }
+
+                if (handled) {
+                    wrapper.css({
+                        width: constrain(newWidth, options.minWidth, options.maxWidth),
+                        height: constrain(newHeight, options.minHeight, options.maxHeight)
+                    });
                 }
             }
 

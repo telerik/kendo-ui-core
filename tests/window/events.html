@@ -205,43 +205,79 @@
             });
 
             test("ctrl+down arrow expands window", function() {
-                createWindow({});
-
-                var height = dialogObject.wrapper.height();
+                createWindow({ height: 200 });
 
                 dialog.press(keys.DOWN, { ctrlKey: true });
 
-                equal(dialogObject.wrapper.height(), height + 10);
+                equal(dialogObject.wrapper.height(), 210);
             });
 
             test("ctrl+up arrow shrinks window", function() {
-                createWindow({});
-
-                var height = dialogObject.wrapper.height();
+                createWindow({ height: 200 });
 
                 dialog.press(keys.UP, { ctrlKey: true });
 
-                equal(dialogObject.wrapper.height(), height - 10);
+                equal(dialogObject.wrapper.height(), 190);
             });
 
             test("ctrl+left arrow shrinks window", function() {
-                createWindow({});
-
-                var width = dialogObject.wrapper.width();
+                createWindow({ width: 200 });
 
                 dialog.press(keys.LEFT, { ctrlKey: true });
 
-                equal(dialogObject.wrapper.width(), width - 10);
+                equal(dialogObject.wrapper.width(), 190);
             });
 
             test("ctrl+right arrow expands window", function() {
-                createWindow({});
-
-                var width = dialogObject.wrapper.width();
+                createWindow({ width: 200 });
 
                 dialog.press(keys.RIGHT, { ctrlKey: true });
 
-                equal(dialogObject.wrapper.width(), width + 10);
+                equal(dialogObject.wrapper.width(), 210);
+            });
+
+            test("ctrl+left takes minWidth into account", function() {
+                createWindow({
+                    width: 100,
+                    minWidth: 95
+                });
+
+                dialog.press(keys.LEFT, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.width(), 95);
+            });
+
+            test("ctrl+right takes maxWidth into account", function() {
+                createWindow({
+                    width: 100,
+                    maxWidth: 105
+                });
+
+                dialog.press(keys.RIGHT, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.width(), 105);
+            });
+
+            test("ctrl+up takes minHeight into account", function() {
+                createWindow({
+                    height: 100,
+                    minHeight: 95
+                });
+
+                dialog.press(keys.UP, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.height(), 95);
+            });
+
+            test("ctrl+down takes maxHeight into account", function() {
+                createWindow({
+                    height: 100,
+                    maxHeight: 105
+                });
+
+                dialog.press(keys.DOWN, { ctrlKey: true });
+
+                equal(dialogObject.wrapper.height(), 105);
             });
         </script>
 
