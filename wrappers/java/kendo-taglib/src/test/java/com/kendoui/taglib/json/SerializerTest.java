@@ -5,6 +5,7 @@ import java.io.Writer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -233,5 +234,44 @@ public class SerializerTest {
                 return map;
             }
         }));
+    }
+
+    @Test
+    public void jsonSerializesSerializablesUsingTheirProperties() throws IOException {
+        Serializable bag = new Serializable () {
+            public Map<String,Object> properties() {
+                Map<String,Object> properties = new HashMap<String, Object>();
+
+                properties.put("foo", "foo");
+
+                return properties;
+            }
+        };
+
+        assertEquals("{\"foo\":\"foo\"}", serializer.json(bag));
+    }
+
+    @Test
+    public void jsonSerializesNestedSerializables() throws IOException {
+        Serializable bag = new Serializable () {
+            public Map<String,Object> properties() {
+                Map<String,Object> properties = new HashMap<String, Object>();
+
+                properties.put("foo", new Serializable() {
+
+                    public Map<String,Object> properties() {
+                        Map<String,Object> properties = new HashMap<String, Object>();
+
+                        properties.put("bar", "bar");
+
+                        return properties;
+                    }
+                });
+
+                return properties;
+            }
+        };
+
+        assertEquals("{\"foo\":{\"bar\":\"bar\"}}", serializer.json(bag));
     }
 }

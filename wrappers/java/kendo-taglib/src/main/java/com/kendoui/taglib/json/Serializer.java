@@ -12,7 +12,6 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -21,7 +20,7 @@ import java.util.Map.Entry;
 
 public class Serializer {
 
-    private Map<String, Object> options(Object object) {
+    private Map<String, Object> properties(Object object) {
         Map<String, Object> options = new HashMap<String, Object>();
 
         try {
@@ -93,23 +92,21 @@ public class Serializer {
         out.append("\"");
     }
 
-    public void serialize(Writer out, Object object) throws IOException {
-        serializeMap(out, options(object));
-    }
-
-    private void serializeValue(Writer out, Object value) throws IOException {
+    public void serialize(Writer out, Object value) throws IOException {
         if (value instanceof String) {
             quote(out, (String)value);
         } else if (value instanceof Number) {
             out.append(value.toString());
-        } else if (value instanceof Collection<?>) {
-            serializeCollection(out, (Collection<?>)value);
+        } else if (value instanceof Iterable<?>) {
+            serializeIterable(out, (Iterable<?>)value);
+        } else if (value instanceof Serializable) {
+            serializeMap(out, ((Serializable)value).properties());
         } else if (value instanceof Map<?,?>) {
             serializeMap(out, (Map<?,?>)value);
         } else if (value.getClass().isArray()) {
             serializeArray(out, value);
         } else {
-            serialize(out, value);
+            serializeMap(out, properties(value));
         }
     }
 
@@ -125,7 +122,7 @@ public class Serializer {
                .append(entry.getKey().toString())
                .append("\":");
 
-            serializeValue(out, entry.getValue());
+            serialize(out, entry.getValue());
 
             if (iterator.hasNext()) {
                 out.append(",");
@@ -135,13 +132,13 @@ public class Serializer {
         out.append("}");
     }
 
-    private void serializeCollection(Writer out, Collection<?> collection) throws IOException {
+    private void serializeIterable(Writer out, Iterable<?> iteratable) throws IOException {
         out.append("[");
 
-        Iterator<?> iterator = collection.iterator();
+        Iterator<?> iterator = iteratable.iterator();
 
         while (iterator.hasNext()) {
-            serializeValue(out, iterator.next());
+            serialize(out, iterator.next());
 
             if (iterator.hasNext()) {
                 out.append(",");
@@ -155,7 +152,7 @@ public class Serializer {
         out.append("[");
 
         for (int index = 0, length = Array.getLength(array); index < length; index++) {
-            serializeValue(out, Array.get(array, index));
+            serialize(out, Array.get(array, index));
 
             if (index < length - 1) {
                 out.append(",");

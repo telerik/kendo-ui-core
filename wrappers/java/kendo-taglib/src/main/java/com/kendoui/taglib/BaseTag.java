@@ -25,5 +25,6 @@ public abstract class BaseTag extends BodyTagSupport {
         
         return EVAL_PAGE;
     }
+    
     public abstract String getTagName();
 }
