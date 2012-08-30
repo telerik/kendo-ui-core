@@ -622,7 +622,7 @@
             that.min = Math.min(that.max, that.size - that.total);
             that.minScale = that.size / total;
 
-            that.enabled = that._forceEnabled || ( total != that.size);
+            that.enabled = that._forceEnabled || (that.total > that.size);
 
             if (!silent) {
                 that.trigger(CHANGE, that);
