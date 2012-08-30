@@ -36,7 +36,7 @@ var cdnBundle = {
     suites: ["web", "dataviz", "mobile", "aspnetmvc"],
     combinedSuites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
-    sourceLicense: "src-license-complete.txt",
+    sourceLicense: "src-license-cdn.txt",
     licenses: [commercialLicense],
     skipExamples: true
 };
