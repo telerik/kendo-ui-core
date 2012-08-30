@@ -128,7 +128,6 @@
         TRIANGLE = "triangle",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_LINE = "verticalLine",
-        VERTICAL_OHLC = "verticalOhlc",
         WHITE = "#fff",
         X = "x",
         Y = "y",
@@ -3138,7 +3137,6 @@
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
             var point = this,
-                options = point.options,
                 box = point.box,
                 x, y;
 
@@ -3291,7 +3289,7 @@
             );
 
             return elements;
-        },
+        }
     });
 
     var OHLCChart = CandleStickChart.extend({
