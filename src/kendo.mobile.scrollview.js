@@ -52,8 +52,8 @@
             });
 
             drag = new kendo.Drag(element, {
-                start: function() {
-                    if (abs(drag.x.velocity) * 2 >= abs(drag.y.velocity)) {
+                start: function(e) {
+                    if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
                         drag.capture();
                     } else {
                         drag.cancel();
