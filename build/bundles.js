@@ -38,7 +38,8 @@ var cdnBundle = {
     combinedScript: "all",
     sourceLicense: "src-license-cdn.txt",
     licenses: [commercialLicense],
-    skipExamples: true
+    skipExamples: true,
+    mvcLegacyThemes: true
 };
 
 var winjsBundle = {
@@ -129,6 +130,7 @@ var LATEST = "latest",
     INDEX = "index.html",
     SCRIPTS_ROOT = "src",
     STYLES_ROOT = "styles",
+    MVC_LEGACY_THEMES_ROOT = path.join("wrappers", "mvc", "legacy-themes"),
     DEMOS_ROOT = path.join("demos", "mvc"),
     TEMPLATES_ROOT = path.join("build", "templates"),
     SUITE_INDEX = path.join(TEMPLATES_ROOT, "suite-index.html"),
@@ -143,6 +145,7 @@ var LATEST = "latest",
     DEPLOY_SOURCE = "source",
     DEPLOY_SCRIPTS = "js",
     DEPLOY_STYLES = "styles",
+    DEPLOY_MVC_LEGACY_THEMES = "legacy-themes",
     DEPLOY_CULTURES = path.join(DEPLOY_SCRIPTS, "cultures"),
     DEPLOY_EXAMPLES = "examples",
     DEPLOY_LEGAL_ROOT = "LicenseAgreements",
@@ -223,6 +226,12 @@ function deployStyles(root, bundle, license, copySource) {
             }
         }
     });
+
+    if (bundle.mvcLegacyThemes) {
+        var mvcLegacyThemesDest = path.join(stylesDest, DEPLOY_MVC_LEGACY_THEMES);
+        mkdir(mvcLegacyThemesDest);
+        copyDir(MVC_LEGACY_THEMES_ROOT, mvcLegacyThemesDest);
+    }
 }
 
 function deployLicenses(root, bundle) {
