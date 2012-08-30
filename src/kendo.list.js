@@ -33,6 +33,7 @@
                 list, id;
 
             Widget.fn.init.call(that, element, options);
+            element = that.element;
 
             that._template();
 
@@ -48,9 +49,11 @@
                             e.preventDefault();
                         });
 
-            id = that.element.attr(ID);
+            id = element.attr(ID);
             if (id) {
-                list.attr(ID, id + "-list");
+                that.list.attr(ID, id + "-list");
+                that.ul.attr(ID, id + "-listbox");
+                that._optionID = id + "-option-selected";
             }
         },
 

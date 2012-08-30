@@ -77,8 +77,6 @@
             //aria
 
             element.attr("tabindex", 0)
-                   .attr("aria-autocomplete", "both")
-                   .attr("aria-owns", that.popup.element[0].id) //element should have ID
 
             //end
             element
@@ -98,7 +96,8 @@
                 .attr({
                     autocomplete: "off",
                     role: "textbox",
-                    "aria-haspopup": true
+                    "aria-haspopup": true,
+                    "aria-autocomplete": options.suggest ? "both" : "list"
                 });
 
             that._enable();

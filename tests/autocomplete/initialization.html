@@ -228,6 +228,25 @@
                 equal(autocomplete.element.attr("aria-owns"), autocomplete.ul.attr("id"));
             });
 
+            test("AutoComplete adds aria-autocomplete='both'", function() {
+                var autocomplete = new AutoComplete(input.attr("id", "test"), {
+                    placeholder: "Select...",
+                    suggest: true
+                });
+
+                equal(autocomplete.element.attr("aria-autocomplete"), "both");
+            });
+
+            test("AutoComplete adds aria-autocomplete='list' if no suggest", function() {
+                var autocomplete = new AutoComplete(input.attr("id", "test"), {
+                    placeholder: "Select...",
+                    suggest: false
+                });
+
+                equal(autocomplete.element.attr("aria-autocomplete"), "list");
+            });
+
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
