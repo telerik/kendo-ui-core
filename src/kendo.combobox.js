@@ -682,9 +682,7 @@
         _wrapper: function() {
             var that = this,
                 element = that.element,
-                wrapper;
-
-            wrapper = element.parent();
+                wrapper = element.parent();
 
             if (!wrapper.is("span.k-widget")) {
                 wrapper = element.hide().wrap("<span />").parent();
