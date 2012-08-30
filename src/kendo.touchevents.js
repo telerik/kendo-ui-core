@@ -55,34 +55,43 @@
         parent.trigger(e.type);
     }
 
-    var DragAxis = Class.extend({
-        init: function(axis, location, timeStamp) {
-            var that = this,
-                offset = location["page" + axis];
+    var TouchAxis = Class.extend({
+        init: function(axis, location) {
+            var that = this;
 
             that.axis = axis;
-            that.startLocation = that.location = offset;
-            that.client = location["client" + axis];
-            that.screen = location["screen" + axis];
+
+            that._updateLocationData(location);
+
+            that.startLocation = that.location;
             that.velocity = that.delta = 0;
-            that.timeStamp = timeStamp;
+            that.timeStamp = now();
         },
 
-        move: function(location, timeStamp) {
+        move: function(location) {
             var that = this,
-                offset = location["page" + that.axis];
+                offset = location["page" + that.axis],
+                timeStamp = now();
 
             if (!offset && invalidZeroEvents) {
                 return;
             }
 
             that.delta = offset - that.location;
-            that.location = offset;
-            that.client = location["client" + that.axis];
-            that.screen = location["screen" + that.axis];
+
+            that._updateLocationData(location);
+
             that.initialDelta = offset - that.startLocation;
             that.velocity = that.delta / (timeStamp - that.timeStamp);
             that.timeStamp = timeStamp;
+        },
+
+        _updateLocationData: function(location) {
+            var that = this, axis = that.axis;
+
+            that.location = location["page" + axis];
+            that.client = location["client" + axis];
+            that.screen = location["screen" + axis];
         }
     });
 
@@ -92,8 +101,8 @@
                 timestamp = now();
 
             extend(that, {
-                x: new DragAxis("X", event.location, timestamp),
-                y: new DragAxis("Y", event.location, timestamp),
+                x: new TouchAxis("X", event.location, timestamp),
+                y: new TouchAxis("Y", event.location, timestamp),
                 drag: drag,
                 target: target,
                 currentTarget: event.currentTarget,
