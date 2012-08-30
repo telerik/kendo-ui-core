@@ -78,9 +78,11 @@ var LinkCommand = Command.extend({
         var that = this,
             range = that.getRange(),
             collapsed = range.collapsed,
-            range = that.lockRange(true),
-            nodes = textNodes(range),
+            nodes,
             initialText = null;
+
+        range = that.lockRange(true);
+        nodes = textNodes(range);
 
         function apply(e) {
             var href = $("#k-editor-link-url", dialog.element).val(),
