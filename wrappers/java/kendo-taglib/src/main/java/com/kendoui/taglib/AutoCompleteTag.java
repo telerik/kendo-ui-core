@@ -6,8 +6,16 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
+
 @SuppressWarnings("serial")
-public class AutoCompleteTag extends BaseTag implements DataBoundWidget {    
+public class AutoCompleteTag extends BaseTag implements DataBoundWidget {
+
+    public AutoCompleteTag() {
+        super("AutoComplete");
+    }
+
     @Override
     public int doEndTag() throws JspException {
         JspWriter writer = pageContext.getOut();
@@ -27,7 +35,7 @@ public class AutoCompleteTag extends BaseTag implements DataBoundWidget {
     }
 
     @Override
-    public String getTagName() {
-        return "input";
+    protected Element<?> createElement() {
+        return new Input();
     }
 }

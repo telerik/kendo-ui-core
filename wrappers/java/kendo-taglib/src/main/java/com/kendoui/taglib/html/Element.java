@@ -49,6 +49,10 @@ public abstract class Element<T extends Element<T>> implements Node {
         return (T)this;
     }
 
+    public String html() {
+        return innerHtml;
+    }
+
     @SuppressWarnings("unchecked")
     public T attr(String attribute, Object value) {
         attributes.put(attribute, value);
