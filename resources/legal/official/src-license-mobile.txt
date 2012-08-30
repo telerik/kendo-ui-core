@@ -2,6 +2,7 @@
 * Kendo UI Mobile v#= version # (http://kendoui.com)
 * Copyright #= year # Telerik AD. All rights reserved.
 *
-* Kendo UI Mobile commercial licenses may be obtained at http://kendoui.com/mobile-license
+* Kendo UI Mobile commercial licenses may be obtained at
+* https://www.kendoui.com/purchase/license-agreement/kendo-ui-mobile-commercial.aspx
 * If you do not own a commercial license, this file shall be governed by the trial license terms.
 */
