@@ -34,6 +34,16 @@
             that.shim = new ShimClass(that.wrapper, $.extend({modal: !(os.android || os.meego)}, that.options.popup) );
 
             kendo.notify(that, ui);
+
+            kendo.onResize(function() {
+                var positionedElement = that.wrapper.parent(),
+                    viewPort = positionedElement.parent();
+
+                positionedElement.css({
+                    top: (viewPort.height() - positionedElement.height()) + "px",
+                    width: viewPort.width() + "px"
+                });
+            });
         },
 
         events: [
