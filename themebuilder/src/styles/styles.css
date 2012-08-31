@@ -94,7 +94,7 @@ body {
     text-align: center;
 }
 
-.k-list .k-item {
+.k-popup .k-list .k-item {
     width: 19px;
     height: 19px;
     overflow: hidden;
@@ -103,9 +103,9 @@ body {
     padding: 1px;
 }
 
-.k-list .k-state-hover,
-.k-list .k-state-focused,
-.k-list .k-state-selected {
+.k-popup .k-list .k-state-hover,
+.k-popup .k-list .k-state-focused,
+.k-popup .k-list .k-state-selected {
     padding: 0;
 }
 
