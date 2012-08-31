@@ -1,12 +1,13 @@
 package com.kendoui.taglib;
 
+import javax.servlet.jsp.JspWriter;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 import org.junit.Before;
@@ -19,23 +20,20 @@ public class BaseTagTest {
     private PageContext pageContext;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         tag = spy(new BaseTagTestDouble());
+
+        tag.setName("foo");
+
+        JspWriter out = mock(JspWriter.class);
+
+        when(out.append((String)anyObject())).thenReturn(out);
 
         pageContext = mock(PageContext.class);
 
-        tag.setPageContext(pageContext);
-    }
-
-    @Test
-    public void doEndTagWritesTheName() throws JspException {
-        JspWriter out = mock(JspWriter.class);
-
         when(pageContext.getOut()).thenReturn(out);
 
-        tag.doEndTag();
-
-        verify(tag).getName();
+        tag.setPageContext(pageContext);
     }
 
     @Test
@@ -44,10 +42,21 @@ public class BaseTagTest {
     }
 
     @Test
-    public void scriptReturnsPluginInitializationStatement() throws IOException {
-        tag.setName("foo");
-        tag.setFoo("foo");
+    public void htmlSetsTheIdAttributeToTheValueOfTheNameProperty() throws IOException {
+        assertEquals(tag.html().outerHtml(), "<div id=\"foo\"></div>");
+    }
 
-        assertEquals("jQuery(\"#foo\").kendoFoo({\"foo\":\"foo\"});", tag.script());
+    @Test
+    public void doEndTagCallsHtmlAndScript() throws JspException {
+        tag.doEndTag();
+
+        verify(tag).html();
+        verify(tag).script();
+    }
+
+    @Test
+    public void scriptReturnsPluginInitializationStatement() throws IOException {
+        tag.setFoo("foo");
+        assertEquals("jQuery(function(){jQuery(\"#foo\").kendoFoo({\"foo\":\"foo\"});})", tag.script().html());
     }
 }

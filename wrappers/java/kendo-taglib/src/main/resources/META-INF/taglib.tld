@@ -8,7 +8,7 @@
     <shortname>kendo</shortname>
     <info>Kendo UI Tag Library</info>
     <uri>http://www.kendoui.com/jsp/tags</uri>
-    
+
     <!-- AutoComplete  -->
     <tag>
         <name>autoComplete</name>
@@ -16,19 +16,32 @@
         <info>AutoComplete Widget</info>
         <body-content>JSP</body-content>
         <attribute>
-        	<name>name</name>
-        	<required>true</required>
-        	<rtexprvalue>true</rtexprvalue>
-        	<type>java.lang.String</type>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
-    
+
+    <!-- AutoComplete  -->
+    <tag>
+        <name>window</name>
+        <tag-class>com.kendoui.taglib.WindowTag</tag-class>
+        <info>Window Widget</info>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
     <!-- DataSource -->
-    
     <tag>
         <name>dataSource</name>
         <tag-class>com.kendoui.taglib.DataSourceTag</tag-class>
         <info>DataSource</info>
     </tag>
-     
+
 </taglib>

@@ -1,17 +1,17 @@
 package com.kendoui.taglib;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.io.Writer;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Script;
 
 import com.kendoui.taglib.json.Serializable;
 import com.kendoui.taglib.json.Serializer;
@@ -43,9 +43,18 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
 
     @Override
     public int doEndTag() throws JspException {
-        PrintWriter out = new PrintWriter(pageContext.getOut());
+        JspWriter out = pageContext.getOut();
 
-        out.format("<input id=\"{0}\"", getName());
+        Element<?> element = html();
+        Script script = script();
+
+        try {
+            element.write(out);
+
+            script.write(out);
+        } catch (IOException exception) {
+            throw new JspException(exception);
+        }
 
         return EVAL_PAGE;
     }
@@ -53,27 +62,33 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
     public Element<?> html() {
         Element<?> element = createElement();
 
+        element.attr("id", getName());
+
         return element;
     }
 
-    public void script(Writer out) throws IOException {
-        out.append("jQuery(\"#")
-           .append(getName())
-           .append("\").kendo")
-           .append(widget)
-           .append("(");
+    public Script script() {
+        StringWriter content = new StringWriter();
 
-        new Serializer().serialize(out, this);
+        content.append("jQuery(function(){jQuery(\"#")
+               .append(getName())
+               .append("\").kendo")
+               .append(widget)
+               .append("(");
 
-        out.append(");");
-    }
+        try {
+            new Serializer().serialize(content, this);
+        } catch (IOException exception) {
+            // StringWriter is not supposed to throw IOException
+        }
 
-    public String script() throws IOException {
-        StringWriter out = new StringWriter();
+        content.append(");})");
 
-        script(out);
+        Script script = new Script();
 
-        return out.toString();
+        script.html(content.toString());
+
+        return script;
     }
 
     protected abstract Element<?> createElement();

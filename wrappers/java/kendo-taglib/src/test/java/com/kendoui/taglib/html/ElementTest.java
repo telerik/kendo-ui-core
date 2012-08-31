@@ -23,6 +23,8 @@ public class ElementTest {
         Writer out = new StringWriter();
 
         element.write(out);
+        
+        element.append(new ElementTestDouble("foo")).foo();
 
         assertEquals("<div></div>", out.toString());
     }
