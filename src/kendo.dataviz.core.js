@@ -823,9 +823,10 @@
             label.value = value;
             label.index = index;
             label.dataItem = dataItem;
-            label.options.id = uniqueId();
 
-            TextBox.fn.init.call(label, text, options);
+            TextBox.fn.init.call(label, text,
+                deepExtend({ id: uniqueId() }, options)
+            );
 
             label.makeDiscoverable();
         },

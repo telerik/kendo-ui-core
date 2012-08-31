@@ -385,6 +385,14 @@
                     equals(view.log.text[0].style.zIndex, 2);
                 });
 
+                test("Label id is not assigned to the TextBox prototype", function() {
+                    numericAxis = new dataviz.NumericAxis(0, 1, {});
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    ok(!kendo.dataviz.TextBox.fn.options.id);
+                });
+
             })();
 
             (function() {
