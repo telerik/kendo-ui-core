@@ -1,7 +1,7 @@
 ﻿namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
-    using System.Web.Mvc;
+    using Kendo.Mvc.Extensions;
     
     public class ListViewSettingsSerializer<T> where T : class
     {
@@ -81,6 +81,7 @@
             if (listView.Editable.Enabled && !string.IsNullOrEmpty(listView.EditorHtml))
             {                
                 var html = listView.EditorHtml.Trim()
+                                .EscapeHtmlEntities()
                                 .Replace("\r\n", string.Empty)
                                 .Replace("jQuery(\"#", "jQuery(\"\\#");
 
