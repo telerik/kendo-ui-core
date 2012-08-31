@@ -199,15 +199,10 @@
                 options = that.options,
                 direction = "down",
                 animation, wrapper,
-                anchor = $(options.anchor),
-                style,
-                idx;
+                anchor = $(options.anchor);
 
             if (!that.visible()) {
-                for (idx = 0; idx < styles.length; idx++) {
-                    style = styles[idx];
-                    element.css(style, anchor.css(style));
-                }
+                element.css(kendo.getComputedStyles(anchor[0], styles));
 
                 if (element.data("animating") || that.trigger(OPEN)) {
                     return;

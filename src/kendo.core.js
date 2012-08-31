@@ -1471,6 +1471,34 @@ function pad(number) {
         return dflt !== undefined ? dflt : agent;
     }
 
+    function getComputedStyles(element, properties) {
+        var styles = {}, computedStyle;
+
+        if (document.defaultView && document.defaultView.getComputedStyle) {
+            computedStyle = document.defaultView.getComputedStyle(element, "");
+
+            if (properties) {
+                $.each(properties, function(idx, value) {
+                    styles[value] = computedStyle.getPropertyValue(value);
+                });
+            }
+        } else {
+            computedStyle = element.currentStyle;
+
+            if (properties) {
+                $.each(properties, function(idx, value) {
+                    styles[value] = computedStyle[value.replace(/\-(\w)/g, function (strMatch, g1) { return g1.toUpperCase(); })];
+                });
+            }
+        }
+
+        if (!kendo.size(styles)) {
+            styles = computedStyle;
+        }
+
+        return styles;
+    }
+
     (function() {
         support.scrollbar = function() {
             var div = document.createElement("div"),
@@ -1997,6 +2025,7 @@ function pad(number) {
         },
         wrap: wrap,
         deepExtend: deepExtend,
+        getComputedStyles: getComputedStyles,
         size: size,
         isNodeEmpty: isNodeEmpty,
         getOffset: kendo.getOffset || getOffset,
