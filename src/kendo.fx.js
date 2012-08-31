@@ -953,7 +953,7 @@
                 var horizontal = options.effects.pageturn.direction === "horizontal",
                     rotation = horizontal ? "rotatey" : "rotatex",
                     reverse = options.reverse,
-                    degree = -180, face = options.face, back = options.back,
+                    face = options.face, back = options.back,
                     property = horizontal ? WIDTH : HEIGHT,
                     size = element[property](),
                     leftPageClip = "rect(auto " + (size / 2) + "px auto auto)",
