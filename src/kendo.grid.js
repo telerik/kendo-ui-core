@@ -2667,7 +2667,7 @@
                 thead.addClass("k-grid-header");
             }
 
-            tr.appendTo(thead);
+            tr.find("script").remove().end().appendTo(thead);
 
             that.thead = thead;
 
@@ -2678,8 +2678,6 @@
             that._scrollable();
 
             that._updateCols();
-
-            //that._setContentHeight(); ***
 
             that._resizable();
 
