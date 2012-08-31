@@ -563,7 +563,7 @@
                 formattedValue = kendo.toString(date, options.format, options.culture);
 
                 if (formattedValue !== value) {
-                    that.element.val(formattedValue);
+                    that.element.val(date === null ? value : formattedValue);
                 }
 
                 return date;
