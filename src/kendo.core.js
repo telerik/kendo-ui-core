@@ -971,7 +971,11 @@ function pad(number) {
         shortTimeZoneRegExp = /[+|\-]\d{1,2}/,
         longTimeZoneRegExp = /[+|\-]\d{1,2}:\d{2}/,
         dateRegExp = /^\/Date\((.*?)\)\/$/,
-        formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"];
+        formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"],
+        numberRegExp = {
+            2: /^\d{1,2}/,
+            4: /^\d{4}/
+        };
 
     function outOfRange(value, start, end) {
         return !(value >= start && value <= end);
@@ -1002,7 +1006,7 @@ function pad(number) {
                 return i;
             },
             getNumber = function(size) {
-                var rg = new RegExp('^\\d{1,' + size + '}'),
+                var rg = numberRegExp[size] || new RegExp('^\\d{1,' + size + '}'),
                     match = value.substr(valueIdx, size).match(rg);
 
                 if (match) {
@@ -1095,7 +1099,7 @@ function pad(number) {
                     month -= 1; //because month is zero based
                 } else if (ch === "y") {
                     count = lookAhead("y");
-                    year = getNumber(count < 3 ? 2 : 4);
+                    year = getNumber(count);
                     if (year === null) {
                         year = defaultYear;
                     }
