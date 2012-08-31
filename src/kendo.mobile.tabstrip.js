@@ -33,6 +33,10 @@
             this._setActiveItem(this.element.find('a[href$="' + url + '"]'));
         },
 
+        clear: function() {
+            this.currentItem().removeClass(ACTIVE_STATE_CLASS);
+        },
+
         currentItem: function() {
             return this.element.children("." + ACTIVE_STATE_CLASS);
         },
@@ -60,7 +64,7 @@
             if (!item[0]) {
                 return;
             }
-            this.currentItem().removeClass(ACTIVE_STATE_CLASS);
+            this.clear();
             item.addClass(ACTIVE_STATE_CLASS);
         },
 
