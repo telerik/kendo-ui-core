@@ -201,31 +201,6 @@
         return parseInteger(element.css(property));
     }
 
-    function getComputedStyles(element, properties) {
-        var styles = {};
-
-        if (properties) {
-            if (document.defaultView && document.defaultView.getComputedStyle) {
-                var computedStyle = document.defaultView.getComputedStyle(element, "");
-
-                each(properties, function(idx, value) {
-                    styles[value] = computedStyle.getPropertyValue(value);
-                });
-            } else
-                if (element.currentStyle) { // Not really needed
-                    var style = element.currentStyle;
-
-                    each(properties, function(idx, value) {
-                        styles[value] = style[value.replace(/\-(\w)/g, function (strMatch, g1) { return g1.toUpperCase(); })];
-                    });
-                }
-        } else {
-            styles = document.defaultView.getComputedStyle(element, "");
-        }
-
-        return styles;
-    }
-
     function slideToSlideIn(options) {
       options.effects.slideIn = options.effects.slide;
       delete options.effects.slide;
@@ -412,7 +387,7 @@
                     retainPosition = (gotoEnd === false && taskKeys);
 
                 if (retainPosition) {
-                    cssValues = getComputedStyles(element[0], taskKeys);
+                    cssValues = kendo.getComputedStyles(element[0], taskKeys);
                 }
 
                 element.css(TRANSITION, "").css(TRANSITION);
