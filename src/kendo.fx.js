@@ -947,6 +947,103 @@
                 }
             }
         },
+        pageturn: {
+            setup: function(element, options) {
+
+                var horizontal = options.effects.pageturn.direction === "horizontal",
+                    rotation = horizontal ? "rotatey" : "rotatex",
+                    reverse = options.reverse,
+                    degree = -180, face = options.face, back = options.back,
+                    property = horizontal ? WIDTH : HEIGHT,
+                    size = element[property](),
+                    leftPageClip = "rect(auto " + (size / 2) + "px auto auto)",
+                    rightPageClip = "rect(auto auto auto " + (size / 2) + "px)";
+
+                if (!horizontal) {
+                    leftPageClip = "rect(auto auto " + (size / 2) + "px auto)";
+                    rightPageClip = "rect(" + (size / 2) + "px auto auto auto)";
+                }
+
+                function toRotation(deg) {
+                    return rotation + "(" + deg + "deg)";
+                }
+
+                var faceRotation = toRotation(0),
+                    flipRotation = toRotation(180),
+                    backFlipRotation = toRotation(-180),
+
+                    faceStart = faceRotation,
+                    faceEnd = backFlipRotation,
+                    backStart = flipRotation,
+                    backEnd = faceRotation;
+
+                if (reverse) {
+                    faceStart = backFlipRotation;
+                    faceEnd = faceRotation;
+                    backStart = faceRotation;
+                    backEnd = flipRotation;
+                }
+
+                if (!horizontal) {
+                    faceStart = faceRotation;
+                    faceEnd = flipRotation;
+                    backStart = backFlipRotation;
+                    backEnd = faceRotation;
+
+                    if (reverse) {
+                        faceStart = flipRotation;
+                        faceEnd = faceRotation;
+                        backStart = faceRotation;
+                        backEnd = backFlipRotation;
+                    }
+                }
+
+                face.show();
+                back.show();
+
+                if (support.hasHW3D) {
+                    if (element.css(PERSPECTIVE) == NONE) {
+                        element.css(PERSPECTIVE, 1000);
+                    }
+
+                    element.css(cssPrefix + "transform-style", "preserve-3d");
+
+                    var faceClone = face.clone(true).removeAttr("id"),
+                        backClone = back.clone(true).removeAttr("id"),
+                        clones = faceClone.add(backClone).addClass("temp-pages");
+
+                    face.css("clip", leftPageClip);
+                    back.css("clip", rightPageClip);
+                    element.append(clones);
+
+                    faceClone.css(BACKFACE, HIDDEN).css(TRANSFORM, faceStart).css("z-index", 1).css("clip", rightPageClip);
+                    backClone.css(BACKFACE, HIDDEN).css(TRANSFORM, backStart).css("z-index", 1).css("clip", leftPageClip);
+
+                    // hack to refresh CSS.
+                    clones.css(TRANSFORM);
+
+                    clones.css(TRANSITION, "all " + options.duration + "ms linear");
+
+                    faceClone.css(TRANSFORM, faceEnd);
+                    backClone.css(TRANSFORM, backEnd);
+                } else {
+                    if (kendo.size(options.effects) == 1) {
+                        options.duration = 0;
+                    }
+                }
+
+                return options.properties;
+            },
+            teardown: function(element, options) {
+
+                options[options.reverse ? "back" : "face"].hide();
+                options.face.add(options.back).css("clip", "");
+
+                if (support.hasHW3D) {
+                    element.find(".temp-pages").remove();
+                }
+            }
+        },
         simple: {
             setup: function(element, options) {
                 return options.properties;
