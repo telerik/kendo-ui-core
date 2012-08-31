@@ -36,6 +36,16 @@
             that._layout();
             that._scroller();
             that._model();
+
+            kendo.onResize(function() {
+                var positionedElement = that.wrapper.parent(),
+                    viewPort = positionedElement.parent();
+
+                positionedElement.css({
+                    top: (viewPort.height() - positionedElement.height()) / 2 + "px",
+                    left: (viewPort.width() - positionedElement.width()) / 2 + "px"
+                });
+            });
         },
 
         events: [
