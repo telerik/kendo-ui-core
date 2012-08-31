@@ -660,6 +660,14 @@
 
                 equal(kendo.parseDate(dateString, "dd.MM.yyyy"), null);
             });
+
+            test("parseDate returns null if input does not meet format", function() {
+                equal(parse("10/10/2000", "yyyy/MM/dd"), null);
+            });
+
+            test("parseDate parses yyy date", function() {
+                equal(+parse("900/10/10", "yyy/MM/dd"), +new Date(900, 9, 10));
+            });
         </script>
     </body>
 </html>
