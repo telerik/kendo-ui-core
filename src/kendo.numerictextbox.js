@@ -24,7 +24,6 @@
         POINT = ".",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
-        TYPE = touch ? "number" : "text",
         NULL = null,
         proxy = $.proxy,
         decimals = {
@@ -336,7 +335,7 @@
                 text = $("<input />").insertBefore(element).addClass(CLASSNAME);
             }
 
-            element.type = TYPE;
+            element.type = "text";
             text[0].type = "text";
             text[0].style.cssText = element.style.cssText;
             text.attr("placeholder", that.options.placeholder);
