@@ -13,7 +13,7 @@
 
         PatternPicker = Widget.extend({
             init: function (element, options) {
-                var that = this, popupElement;
+                var that = this, popupElement, repeat;
 
                 Widget.fn.init.call(that, element, options);
                 element = that.element;
@@ -24,6 +24,12 @@
                 }
 
                 that.bgimage = element.css("background-image");
+                that.backgroundPosX = element.css("background-position-x");
+                that.backgroundPosY = element.css("background-position-y");
+
+                repeat = element.css("background-repeat");
+                that.backgroundRepeatX = repeat == "repeat" || repeat == "repeat-x";
+                that.backgroundRepeatY = repeat == "repeat" || repeat == "repeat-y";
 
                 that.styleengine = that.element.parents(".device").data("kendoStyleEngine");
 
@@ -72,18 +78,34 @@
 
                 var repeatXID = kendo.guid(),
                     repeatYID = kendo.guid(),
-                    urlLabel = $('<label class="label">Pattern Url</label>').appendTo(popupElement).after('<br />'),
-                    urlValue = $('<input type="text" class="input-value" title="Url" />').appendTo(urlLabel),
-                    repeatXValue = $('<input id="' + repeatXID + '" type="checkbox" class="k-checkbox check-value" title="repeat-x" />').appendTo(popupElement),
-                    repeatYValue = $('<input id="' + repeatYID + '" type="checkbox" class="k-checkbox check-value" title="repeat-y" />')
-                                        .appendTo(popupElement),
-                    positiionXValue = $('<input type="text" class="input-value" title="position-x" />')
-                                        .appendTo($('<label class="label">X</label>').appendTo(popupElement)),
-                    positionYValue = $('<input type="text" class="input-value" title="position-y" />')
-                                        .appendTo($('<label class="label">Y</label>').appendTo(popupElement));
+                    urlLabel = $('<label class="label">Pattern Url</label>').appendTo(popupElement).after('<br />');
 
-                repeatXValue.after('<label for="' + repeatXID + '" class="k-checkbox label">X</label>');
-                repeatYValue.after('<label for="' + repeatYID + '" class="k-checkbox label">Y</label><br />');
+                that.urlValue = $('<input type="text" class="input-value" title="Url" />').appendTo(urlLabel);
+                that.repeatXValue = $('<input id="' + repeatXID + '" type="checkbox" class="k-checkbox check-value" title="repeat-x" />')
+                                    .appendTo(popupElement);
+                that.repeatYValue = $('<input id="' + repeatYID + '" type="checkbox" class="k-checkbox check-value" title="repeat-y" />')
+                                    .appendTo(popupElement);
+                that.positionXValue = $('<input type="text" class="input-value" title="position-x" />')
+                                .appendTo($('<label class="label">X</label>').appendTo(popupElement));
+                that.positionYValue = $('<input type="text" class="input-value" title="position-y" />')
+                                .appendTo($('<label class="label">Y</label>').appendTo(popupElement));
+
+                that.urlValue.val(that.bgimage.replace(/url\(["']?|["']?\);?/g, ""));
+                that.repeatXValue
+                    .before('<span class="label-title">Repeat</span>')
+                    .after('<label for="' + repeatXID + '" class="k-checkbox label" title="repeat-x">X</label>')
+                    [0].checked = that.backgroundRepeatX;
+
+                that.repeatYValue
+                    .after('<label for="' + repeatYID + '" class="k-checkbox label label-y" title="repeat-y">Y</label><br />');
+                    [0].checked = that.backgroundRepeatY;
+
+                that.positionXValue
+                    .val(that.backgroundPosX)
+                    .parent().before('<span class="label-title">Position</span>');
+
+                that.positionYValue
+                    .val(that.backgroundPosY);
             },
 
             options: {
@@ -120,6 +142,11 @@
 
                 if (target) {
                     that.preview.css("background-image", that.bgimage);
+                    that.urlValue.val(that.bgimage.replace(/url\(["']?|["']?\);?/g, ""));
+                    that.repeatXValue[0].checked = that.backgroundRepeatX;
+                    that.repeatYValue[0].checked = that.backgroundRepeatY;
+                    that.positionXValue.val(that.backgroundPosX);
+                    that.positionYValue.val(that.backgroundPosY);
 
                     if (trigger) {
                         that.trigger("pick", { color: that.color, target: target });
@@ -128,7 +155,7 @@
             },
 
             _toggle: function(open) {
-                var that = this, target, options = that.options;
+                var that = this, target, options = that.options, repeat;
 
                 if (options.filter) {
                     that.target = that.target || that.element.find(options.filter);
@@ -139,6 +166,13 @@
 
                 if (open) {
                     that.bgimage = target.css("background-image");
+                    that.backgroundPosX = target.css("background-position-x");
+                    that.backgroundPosY = target.css("background-position-y");
+
+                    repeat = target.css("background-repeat");
+                    that.backgroundRepeatX = repeat == "repeat" || repeat == "repeat-x";
+                    that.backgroundRepeatY = repeat == "repeat" || repeat == "repeat-y";
+
                     that._update(true);
                 }
 

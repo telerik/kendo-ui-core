@@ -586,11 +586,27 @@
             outline: 0;
         }
 
-        .k-patternpick .label
+        .k-patternpick .label,
+        .k-patternpick .label-title
         {
             width: auto;
             margin: 9px 0 0 5px;
             text-transform: uppercase;
+        }
+
+        .k-patternpick .label-title
+        {
+            line-height: 2em;
+            vertical-align: middle;
+            width: 82px;
+            display: inline-block;
+            text-align: right;
+            margin-right: 3px;
+        }
+
+        .k-patternpick .label-y
+        {
+            margin-left: 1.7em;
         }
 
         .k-patternpick .input-value
@@ -608,7 +624,8 @@
 
         :root .k-patternpick label.k-checkbox {
             padding-left: 0;
-            padding-right: 1.6em;
+            padding-right: 2.2em;
+            line-height: 2em;
         }
 
         :root .k-patternpick input.k-checkbox + label.k-checkbox:before,
@@ -616,9 +633,9 @@
         {
             left: auto;
             right: 0;
-            width: 1.6em;
-            height: 1.6em;
-            margin: -.6em 1px 0 0;
+            width: 1.7em;
+            height: 1.7em;
+            margin: -.85em 1px 0 0;
         }
 
         :root .k-patternpick input.k-checkbox + label.k-checkbox:after
@@ -650,9 +667,9 @@
         .k-colorpick .km-slider-container,
         :root .k-patternpick input.k-checkbox + label.k-checkbox:before
         {
-            border-radius: 9px;
-            -moz-border-radius: 9px;
-            -webkit-border-radius: 9px;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
             box-shadow: inset 0 1px 2px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
         }
 
@@ -663,7 +680,7 @@
 
         :root .k-patternpick input.k-checkbox + label.k-checkbox:after
         {
-            margin-top: -.45em;
+            margin-top: -1em;
             color: #000;
             content: "\2713";
             background: transparent;
