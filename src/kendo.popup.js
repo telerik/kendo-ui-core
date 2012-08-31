@@ -233,7 +233,7 @@
 
                 wrapper.css(POSITION);
 
-                if (options.appendTo == BODY) {
+                if ($(options.appendTo)[0] == document.body) {
                     wrapper.css(TOP, "-10000px");
                 }
 
