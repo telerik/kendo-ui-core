@@ -7,6 +7,7 @@ namespace Kendo.Mvc.Extensions
     public static class StringExtensions
     {
         private static readonly Regex NameExpression = new Regex("([A-Z]+(?=$|[A-Z][a-z])|[A-Z]?[a-z]+)", RegexOptions.Compiled);
+        private static readonly Regex EntityExpression = new Regex("(&amp;|&)#([0-9]+;)", RegexOptions.Compiled);
 
         /// <summary>
         /// Replaces the format item in a specified System.String with the text equivalent of the value of a corresponding System.Object instance in a specified array.
@@ -17,6 +18,11 @@ namespace Kendo.Mvc.Extensions
         public static string FormatWith(this string instance, params object[] args)
         {
             return string.Format(CultureInfo.CurrentCulture, instance, args);
+        }
+
+        public static string EscapeHtmlEntities(this string html)
+        {
+            return EntityExpression.Replace(html, "$1\\\\#$2");
         }
 
         public static bool HasValue(this string value)
