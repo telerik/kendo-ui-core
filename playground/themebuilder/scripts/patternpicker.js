@@ -31,7 +31,7 @@
                 that.backgroundRepeatX = repeat == "repeat" || repeat == "repeat-x";
                 that.backgroundRepeatY = repeat == "repeat" || repeat == "repeat-y";
 
-                that.styleengine = that.element.parents(".device").data("kendoStyleEngine");
+                that.styleengine = options.styleEngine || that.element.parents(".device").data("kendoStyleEngine");
 
                 that.popup = new ui.Popup("<div class='k-patternpick'></div>", {
                     anchor: element,
@@ -41,10 +41,10 @@
                     },
                     close: function () {
                         if (that.styleengine) {
-                            var bgimage = that.bgimage;
-                            bgimage = that.styleengine.mixBackground(bgimage, that.element);
+                            var background = { "background-image": that.bgimage };
+                            background = that.styleengine.mixBackground(background, that.element);
 
-                            that.styleengine.update(that.element, { "background-image": bgimage });
+                            that.styleengine.update(that.element, background);
                         }
                     }
                 });
@@ -106,12 +106,17 @@
 
                 that.positionYValue
                     .val(that.backgroundPosY);
+
+                popupElement.find("[title^=position]").keydown(proxy(that._keyDown, that));
+                popupElement.find("input[type=text]").bind("input", proxy(that._updateConnected, that));
+                popupElement.find("input[type=checkbox]").bind("change", proxy(that._updateConnected, that));
             },
 
             options: {
                 name: "PatternPicker",
                 filter: null,
-                toggleTarget: null
+                toggleTarget: null,
+                styleEngine: null
             },
 
             open: function (target) {
@@ -126,14 +131,26 @@
                 this._toggle(false);
             },
 
-            _updateConnected: function (element) {
+            _updateConnected: function () {
                 var that = this,
                     filter = that.options.filter,
-                    target = !filter ? that.element : that.target;
+                    target = !filter ? that.element : that.target,
+                    repeatX = that.repeatXValue[0].checked,
+                    repeatY = that.repeatYValue[0].checked,
+                    positionX = that.positionXValue.val(),
+                    positionY = that.positionYValue.val(),
+                    css = {
+                        backgroundImage: that.bgimage,
+                        backgroundRepeat: repeatX && repeatY ? "repeat" : repeatX ? "repeat-x" : repeatY ? "repeat-y" : "no-repeat",
+                        backgroundPosition: (/\d$/.test(positionX) ? positionX + "px" : positionX) + " " +
+                                            (/\d$/.test(positionY) ? positionY + "px" : positionY)
+                    };
 
-                that.preview.css("background-image", that.bgimage);
-                target.css("background-image", that.bgimage);
-                target.attr("data-pattern", that.styleengine.createHash(that.bgimage));
+                that.preview.css(css);
+                target.css(css);
+                if (that.styleengine) {
+                    target.attr("data-pattern", that.styleengine.createHash(target.css("background")));
+                }
             },
 
             _update: function (updateAttr, trigger) {
@@ -151,6 +168,19 @@
                     if (trigger) {
                         that.trigger("pick", { color: that.color, target: target });
                     }
+                }
+            },
+
+            _keyDown: function (e) {
+                var that = this,
+                    target = $(e.target),
+                    title = target.attr("title"),
+                    value = target.val(),
+                    unit = value.match(/[^\d\.]$/);
+
+                if (e.which == 38 || e.which == 40) {
+                    target.val(parseFloat(value) + (e.which == 38 ? 1 : -1) + unit);
+                    target.trigger("input");
                 }
             },
 
