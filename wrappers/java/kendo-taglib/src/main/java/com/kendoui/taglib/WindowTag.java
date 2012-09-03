@@ -6,7 +6,7 @@ import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
 
 @SuppressWarnings("serial")
-public class WindowTag extends BaseTag {
+public class WindowTag extends WidgetTag {
 
     public WindowTag() {
         super("Window");

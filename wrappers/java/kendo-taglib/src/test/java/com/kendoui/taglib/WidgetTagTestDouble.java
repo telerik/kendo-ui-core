@@ -4,9 +4,9 @@ import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
 
 @SuppressWarnings("serial")
-public class BaseTagTestDouble extends BaseTag {
+public class WidgetTagTestDouble extends WidgetTag {
 
-    public BaseTagTestDouble() {
+    public WidgetTagTestDouble() {
         super("Foo");
     }
 

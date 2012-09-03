@@ -4,15 +4,23 @@ import java.io.IOException;
 import java.io.Writer;
 
 public class Text implements Node {
-    private String nodeValue;
+    private String value;
 
+    public Text() {
+    
+    }
+    
+    public Text(String value) {
+        value(value);
+    }
+    
     @Override
     public void write(Writer out) throws IOException {
-        out.write(nodeValue);
+        out.write(value);
     }
 
     public Text value(String value) {
-        nodeValue = Text.escapeHtml(value);
+        this.value = Text.escapeHtml(value);
 
         return this;
     }

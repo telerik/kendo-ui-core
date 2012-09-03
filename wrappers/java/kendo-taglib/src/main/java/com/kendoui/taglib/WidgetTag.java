@@ -17,13 +17,13 @@ import com.kendoui.taglib.json.Serializable;
 import com.kendoui.taglib.json.Serializer;
 
 @SuppressWarnings("serial")
-public abstract class BaseTag extends BodyTagSupport implements Serializable {
+public abstract class WidgetTag extends BodyTagSupport implements Serializable {
     private String name;
     private String widget;
 
     protected Map<String,Object> json;
 
-    public BaseTag(String widget) {
+    public WidgetTag(String widget) {
         this.json = new HashMap<String,Object>();
         this.widget = widget;
     }

@@ -4,7 +4,7 @@ import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Input;
 
 @SuppressWarnings("serial")
-public class AutoCompleteTag extends BaseTag implements DataBoundWidget {
+public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
 
     public AutoCompleteTag() {
         super("AutoComplete");

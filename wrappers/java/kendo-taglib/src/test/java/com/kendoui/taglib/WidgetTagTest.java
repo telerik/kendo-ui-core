@@ -15,13 +15,13 @@ import org.junit.Test;
 
 import com.kendoui.taglib.html.Element;
 
-public class BaseTagTest {
-    private BaseTagTestDouble tag;
+public class WidgetTagTest {
+    private WidgetTagTestDouble tag;
     private PageContext pageContext;
 
     @Before
     public void setUp() throws IOException {
-        tag = spy(new BaseTagTestDouble());
+        tag = spy(new WidgetTagTestDouble());
 
         tag.setName("foo");
 

@@ -23,7 +23,34 @@
         </attribute>
     </tag>
 
-    <!-- AutoComplete  -->
+    <!-- PanelBar  -->
+    <tag>
+        <name>panelBar</name>
+        <tag-class>com.kendoui.taglib.PanelBarTag</tag-class>
+        <info>PanelBar Widget</info>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>panelBarItem</name>
+        <tag-class>com.kendoui.taglib.PanelBarItemTag</tag-class>
+        <info>PanelBar Item</info>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>text</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <!-- Window  -->
     <tag>
         <name>window</name>
         <tag-class>com.kendoui.taglib.WindowTag</tag-class>
