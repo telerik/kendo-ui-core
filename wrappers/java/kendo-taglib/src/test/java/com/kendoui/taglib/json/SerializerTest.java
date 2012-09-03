@@ -274,4 +274,14 @@ public class SerializerTest {
 
         assertEquals("{\"foo\":{\"bar\":\"bar\"}}", serializer.json(bag));
     }
+
+    @Test
+    public void jsonSerializesFunctionsAsVerbatimValue() throws IOException {
+        assertEquals("{\"foo\":foo}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public Function getFoo() {
+                return new Function("foo");
+            }
+        }));
+    }
 }

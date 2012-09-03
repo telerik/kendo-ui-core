@@ -103,6 +103,8 @@ public class Serializer {
             serializeMap(out, ((Serializable)value).properties());
         } else if (value instanceof Map<?,?>) {
             serializeMap(out, (Map<?,?>)value);
+        } else if (value instanceof Function) {
+            ((Function)value).write(out);
         } else if (value.getClass().isArray()) {
             serializeArray(out, value);
         } else {
