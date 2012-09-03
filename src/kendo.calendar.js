@@ -387,6 +387,7 @@
 
         _class: function(className, value) {
             var that = this,
+                id = that._cellID,
                 cell = that._cell;
 
             if (cell) {
@@ -403,8 +404,9 @@
                        .addClass(className)
                        .attr(ARIA_SELECTED, true);
 
-            if (that._cellID) {
-                cell.attr(ID, that._cellID);
+            if (id) {
+                cell.attr(ID, id);
+                that._table.attr("aria-activedescendant", id);
             }
         },
 

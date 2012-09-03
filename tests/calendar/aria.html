@@ -119,6 +119,19 @@
 
                 equal(cell.attr("id"), undefined);
             });
+
+            test("Calendar sets aria-activedescendant", function() {
+                instance.value(new Date(2000, 10, 10));
+
+                equal(instance._table.attr("aria-activedescendant"), instance._cell.attr("id"));
+            });
+
+            test("Calendar removes aria-activedescendant", function() {
+                instance.value(new Date(2000, 10, 10));
+                instance.value(null);
+
+                equal(instance._table.attr("aria-activedescendant"), undefined);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
