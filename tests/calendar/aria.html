@@ -46,8 +46,50 @@
                 equal(instance._title.attr("aria-atomic"), "true");
             });
 
-            test("Calendar adds roles", function() {
-                //equal(div.find("table").attr("role"), "grid");
+            test("Calendar adds grid role to MONTH view", function() {
+                equal(div.find("table").attr("role"), "grid");
+            });
+
+            test("Calendar adds row role to MONTH view's rows", function() {
+                var rows = div.find("table tr");
+                equal(rows.filter("[role=row]").length, rows.length);
+            });
+
+            test("Calendar adds gridcell role to MONTH view's cells", function() {
+                var cells = div.find("table td");
+                equal(cells.filter("[role=gridcell]").length, cells.length);
+            });
+
+            test("Calendar adds grid role to YEAR view", function() {
+                instance.navigateUp();
+                equal(div.find("table").attr("role"), "grid");
+            });
+
+            test("Calendar adds row role to YEAR view's rows", function() {
+                instance.navigateUp();
+                var rows = div.find("table tr");
+                equal(rows.filter("[role=row]").length, rows.length);
+            });
+
+            test("Calendar adds gridcell role to YEAR view's cells", function() {
+                instance.navigateUp();
+                var cells = div.find("table td");
+                equal(cells.filter("[role=gridcell]").length, cells.length);
+            });
+
+            test("calendar adds aria-disabled to the prev arrow", function() {
+                instance.navigate(instance.options.min);
+                equal(instance._prevArrow.attr("aria-disabled"), "true");
+            });
+
+            test("calendar adds aria-disabled to the next arrow", function() {
+                instance.navigate(instance.options.max);
+                equal(instance._nextArrow.attr("aria-disabled"), "true");
+            });
+
+            test("calendar adds aria-disabled to the up nav", function() {
+                instance.navigate(instance.options.max, "century");
+                equal(instance._title.attr("aria-disabled"), "true");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

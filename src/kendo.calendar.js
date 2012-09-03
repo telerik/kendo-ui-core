@@ -10,8 +10,8 @@
         touch = kendo.support.touch,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
-        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
-        emptyCellTemplate = template("<td>&nbsp;</td>", { useWithBlock: false }),
+        cellTemplate = template('<td#=data.cssClass# role="gridcell"><a class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
+        emptyCellTemplate = template('<td role="gridcell">&nbsp;</td>', { useWithBlock: false }),
         browser = kendo.support.browser,
         isIE8 = browser.msie && (parseInt(browser.version, 10) < 9 || (document.documentMode && document.documentMode < 9)),
         ns = ".kendoCalendar",
@@ -37,6 +37,7 @@
         MS_PER_DAY = 86400000,
         PREVARROW = "_prevArrow",
         NEXTARROW = "_nextArrow",
+        ARIA_DISABLED = "aria-disabled",
         proxy = $.proxy,
         extend = $.extend,
         DATE = Date,
@@ -194,7 +195,8 @@
                 currentValue = that._current,
                 future = value && +value > +currentValue,
                 vertical = view !== undefined && view !== that._index,
-                to, currentView, compare;
+                to, currentView, compare,
+                disabled;
 
             if (!value) {
                 value = currentValue;
@@ -211,9 +213,14 @@
             that._view = currentView = calendar.views[view];
             compare = currentView.compare;
 
-            title.toggleClass(DISABLED, view === views[CENTURY]);
-            that[PREVARROW].toggleClass(DISABLED, compare(value, min) < 1);
-            that[NEXTARROW].toggleClass(DISABLED, compare(value, max) > -1);
+            disabled = view === views[CENTURY];
+            title.toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
+
+            disabled = compare(value, min) < 1;
+            that[PREVARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
+
+            disabled = compare(value, max) > -1;
+            that[NEXTARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
 
             if (!from || that._changeView) {
                 title.html(currentView.title(value, culture));
@@ -568,8 +575,8 @@
                 empty = month.empty;
 
             that.month = {
-                content: template('<td#=data.cssClass#><a class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
-                empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
+                content: template('<td#=data.cssClass# role="gridcell"><a class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                empty: template('<td role="gridcell">' + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
 
             if (footer !== false) {
@@ -635,7 +642,7 @@
                 lastDayOfMonth = that.last(date),
                 toDateString = that.toDateString,
                 today = new DATE(),
-                html = '<table class="k-content" cellspacing="0"><thead><tr>';
+                html = '<table role="grid" class="k-content" cellspacing="0"><thead><tr role="row">';
 
                 for (; idx < 7; idx++) {
                     html += '<th scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';
@@ -648,7 +655,7 @@
                 return view({
                     cells: 42,
                     perRow: 7,
-                    html: html += "</tr></thead><tbody><tr>",
+                    html: html += '</tr></thead><tbody><tr role="row">',
                     start: new DATE(start.getFullYear(), start.getMonth(), start.getDate()),
                     min: new DATE(min.getFullYear(), min.getMonth(), min.getDate()),
                     max: new DATE(max.getFullYear(), max.getMonth(), max.getDate()),
@@ -912,11 +919,11 @@
             cellsPerRow = options.perRow || 4,
             content = options.content || cellTemplate,
             empty = options.empty || emptyCellTemplate,
-            html = options.html || '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>';
+            html = options.html || '<table role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
 
         for(; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow === 0) {
-                html += "</tr><tr>";
+                html += '</tr><tr role="row">';
             }
 
             data = build(start, idx);
