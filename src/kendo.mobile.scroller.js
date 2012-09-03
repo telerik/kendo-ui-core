@@ -29,7 +29,7 @@
             Animation.fn.init.call(that);
             extend(that, options);
 
-            that.drag.bind("gestureend", proxy(that.start, that));
+            that.userEvents.bind("gestureend", proxy(that.start, that));
             that.tapCapture.bind("press", proxy(that.cancel, that));
         },
 
@@ -65,9 +65,9 @@
             });
 
             that.tapCapture.bind("press", function() { that.cancel(); });
-            that.drag.bind("end", proxy(that.start, that));
-            that.drag.bind("gestureend", proxy(that.start, that));
-            that.drag.bind("tap", proxy(that.onEnd, that));
+            that.userEvents.bind("end", proxy(that.start, that));
+            that.userEvents.bind("gestureend", proxy(that.start, that));
+            that.userEvents.bind("tap", proxy(that.onEnd, that));
         },
 
         onCancel: function() {
@@ -225,16 +225,16 @@
                     }
                 }),
 
-                drag = new kendo.Drag(element, {
+                userEvents = new kendo.UserEvents(element, {
                     allowSelection: true,
                     multiTouch: that.options.zoom,
                     start: function(e) {
                         dimensions.refresh();
 
                         if (dimensions.enabled) {
-                            drag.capture();
+                            userEvents.capture();
                         } else {
-                            drag.cancel();
+                            userEvents.cancel();
                         }
                     }
                 }),
@@ -242,14 +242,14 @@
                 pane = new Pane({
                     movable: movable,
                     dimensions: dimensions,
-                    drag: drag,
+                    userEvents: userEvents,
                     elastic: that.options.elastic
                 }),
 
                 zoomSnapBack = new ZoomSnapBack({
                     movable: movable,
                     dimensions: dimensions,
-                    drag: drag,
+                    userEvents: userEvents,
                     tapCapture: tapCapture
                 });
 
@@ -267,7 +267,7 @@
                 movable: movable,
                 dimensions: dimensions,
                 zoomSnapBack: zoomSnapBack,
-                drag: drag,
+                userEvents: userEvents,
                 pane: pane,
                 tapCapture: tapCapture,
                 pulled: false,
@@ -337,7 +337,7 @@
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-            this.drag.destroy();
+            this.userEvents.destroy();
         },
 
         _initPullToRefresh: function() {
@@ -353,7 +353,7 @@
             that.hintContainer = that.refreshHint.children(".km-template");
 
             that.pane.y.bind("change", proxy(that._paneChange, that));
-            that.drag.bind("end", proxy(that._dragEnd, that));
+            that.userEvents.bind("end", proxy(that._dragEnd, that));
         },
 
         _dragEnd: function() {
@@ -403,7 +403,7 @@
                 axis: axis,
                 movable: movable,
                 tapCapture: tapCapture,
-                drag: that.drag,
+                userEvents: that.userEvents,
                 dimension: dimension,
                 elastic: that.options.elastic,
                 end: function() { scrollBar.hide(); }

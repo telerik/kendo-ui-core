@@ -105,7 +105,7 @@
                                 .bind("DOMMouseScroll" + NS + " mousewheel" + NS, proxy(that._wheelScroll, that));
 
             if (kendo.support.touch) {
-                that.drag = new kendo.Drag(that.wrapper, {
+                that.drag = new kendo.UserEvents(that.wrapper, {
                     global: true,
                     move: function(e) {
                         that.verticalScrollbar.scrollTop(that.verticalScrollbar.scrollTop() - e.y.delta);

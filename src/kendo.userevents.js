@@ -17,9 +17,9 @@
         END_EVENTS = "mouseup mouseleave",
 
         // Event namespace
-        NS = ".kendoDrag",
+        NS = ".kendoUserEvents",
 
-        // Drag events
+        // UserEvents events
         START = "start",
         MOVE = "move",
         END = "end",
@@ -136,13 +136,13 @@
     });
 
     var Touch = Class.extend({
-        init: function(drag, target, touchInfo) {
+        init: function(userEvents, target, touchInfo) {
             var that = this;
 
             extend(that, {
                 x: new TouchAxis("X", touchInfo.location),
                 y: new TouchAxis("Y", touchInfo.location),
-                drag: drag,
+                userEvents: userEvents,
                 target: target,
                 currentTarget: touchInfo.currentTarget,
                 id: touchInfo.id,
@@ -166,7 +166,7 @@
                     return;
                 }
 
-                if (!Drag.current || Drag.current === that.drag) {
+                if (!UserEvents.current || UserEvents.current === that.userEvents) {
                     that._start(touchInfo);
                 } else {
                     return that.dispose();
@@ -195,8 +195,8 @@
 
         dispose: function() {
             var that = this,
-                drag = that.drag,
-                activeTouches = drag.touches;
+                userEvents = that.userEvents,
+                activeTouches = userEvents.touches;
 
             that._finished = true;
 
@@ -233,7 +233,7 @@
                     event: jQueryEvent
                 };
 
-            if(that.drag.notify(name, data)) {
+            if(that.userEvents.notify(name, data)) {
                 jQueryEvent.preventDefault();
             }
         },
@@ -242,11 +242,11 @@
             var xDelta = this.x.initialDelta,
                 yDelta = this.y.initialDelta;
 
-            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.drag.threshold;
+            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.userEvents.threshold;
         }
     });
 
-    var Drag = Observable.extend({
+    var UserEvents = Observable.extend({
         init: function(element, options) {
             var that = this,
                 filter,
@@ -320,7 +320,7 @@
         },
 
         capture: function() {
-            Drag.current = this;
+            UserEvents.current = this;
         },
 
         cancel: function() {
@@ -387,7 +387,7 @@
                 return;
             }
 
-            Drag.current = null;
+            UserEvents.current = null;
 
             that.currentTarget = e.currentTarget;
 
@@ -456,5 +456,5 @@
         }
     });
 
-    kendo.Drag = Drag;
+    kendo.UserEvents = UserEvents;
  })(jQuery);

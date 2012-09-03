@@ -11,7 +11,7 @@
                 maxDuration: 1000
             }, options);
 
-            new kendo.Drag(element, {
+            new kendo.UserEvents(element, {
                 surface: options.surface,
                 allowSelection: true,
 
@@ -33,7 +33,7 @@
                     {
                         callback({
                             direction: direction,
-                            drag: e.drag,
+                            userEvents: e.userEvents,
                             target: $(e.event.currentTarget)
                         });
 

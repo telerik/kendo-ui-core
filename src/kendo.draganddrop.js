@@ -6,7 +6,7 @@
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
         Observable = kendo.Observable,
-        Drag = kendo.Drag,
+        UserEvents = kendo.UserEvents,
         proxy = $.proxy,
         extend = $.extend,
         getOffset = kendo.getOffset,
@@ -317,7 +317,7 @@
                 movable: movable
             });
 
-            that.drag.bind(["move", "end", "gesturestart", "gesturechange"], {
+            that.userEvents.bind(["move", "end", "gesturestart", "gesturechange"], {
                 gesturestart: function(e) {
                     that.gestureInfo = gestureTouchInfo(e);
                 },
@@ -529,7 +529,7 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.drag = new Drag(that.element, {
+            that.userEvents = new UserEvents(that.element, {
                 global: true,
                 stopPropagation: true,
                 filter: that.options.filter,
@@ -544,7 +544,7 @@
             that.captureEscape = function(e) {
                 if (e.keyCode === kendo.keys.ESC) {
                     that._trigger(DRAGCANCEL, {event: e});
-                    that.drag.cancel();
+                    that.userEvents.cancel();
                 }
             };
         },
@@ -629,7 +629,7 @@
             }
 
             if (that._trigger(DRAGSTART, e)) {
-                that.drag.cancel();
+                that.userEvents.cancel();
                 that._afterEnd();
             }
 
@@ -743,7 +743,7 @@
 
             that._afterEnd();
 
-            that.drag.destroy();
+            that.userEvents.destroy();
         },
 
         _afterEnd: function() {

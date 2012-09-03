@@ -1,4 +1,4 @@
-var movable, pane, dimensions, drag;
+var movable, pane, dimensions, userEvents;
 
 module("pane dimensions");
 
@@ -52,11 +52,11 @@ module("pane", {
             container: container
         });
 
-        drag = new kendo.Drag(element, {multiTouch: true});
+        userEvents = new kendo.UserEvents(element, {multiTouch: true});
 
         pane = new kendo.ui.Pane({
             movable: movable,
-            drag: drag,
+            userEvents: userEvents,
             dimensions: dimensions
         });
 

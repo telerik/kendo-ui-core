@@ -1,5 +1,5 @@
-var drag,
-    Drag = kendo.Drag,
+var userEvents,
+    UserEvents = kendo.UserEvents,
     element;
 
 function triggerTouchEvent(type, info) {
@@ -31,15 +31,15 @@ function release(x, y, id) {
     })
 }
 
-module("drag", {
+module("UserEvents", {
     setup: function() {
         element = $('<div />');
-        drag = new Drag(element);
+        userEvents = new UserEvents(element);
     }
 });
 
 test("raises press on touchstart", 2, function(){
-    drag.bind("press", function(e) {
+    userEvents.bind("press", function(e) {
         equal(e.x.location, 10);
         equal(e.y.location, 20);
     });
@@ -48,7 +48,7 @@ test("raises press on touchstart", 2, function(){
 });
 
 test("raises start on first mouse move", 2, function(){
-    drag.bind("start", function(e) {
+    userEvents.bind("start", function(e) {
         equal(e.x.location, 15);
         equal(e.y.location, 25);
     });
@@ -58,7 +58,7 @@ test("raises start on first mouse move", 2, function(){
 });
 
 test("raises tap on tap", 1, function(){
-    drag.bind("tap", function(e) {
+    userEvents.bind("tap", function(e) {
         ok(true);
     });
 
@@ -67,7 +67,7 @@ test("raises tap on tap", 1, function(){
 });
 
 asyncTest("resets velocity on direction change", 2, function(){
-    drag.bind("end", function(e) {
+    userEvents.bind("end", function(e) {
         start();
         ok(e.x.velocity > 0);
         ok(e.y.velocity < 0);
@@ -89,7 +89,7 @@ asyncTest("resets velocity on direction change", 2, function(){
 });
 
 test("passes delta on mousemove", 2, function(){
-    drag.bind("move", function(e) {
+    userEvents.bind("move", function(e) {
         equal(e.x.delta, 10);
         equal(e.y.delta, 20);
     });
@@ -99,7 +99,7 @@ test("passes delta on mousemove", 2, function(){
 });
 
 test("does not track unpressed mousemove", 0, function(){
-    drag.bind("move", function(e) {
+    userEvents.bind("move", function(e) {
         ok(false);
     });
 
@@ -107,7 +107,7 @@ test("does not track unpressed mousemove", 0, function(){
 });
 
 asyncTest("calculates velocity on mouseup", 2, function(){
-    drag.bind("end", function(e) {
+    userEvents.bind("end", function(e) {
         start();
         ok(e.x.velocity > 0);
         ok(e.y.velocity < 0);
@@ -124,17 +124,17 @@ asyncTest("calculates velocity on mouseup", 2, function(){
     }, 1);
 });
 
-module("drag filter option", {
+module("filter option", {
     setup: function() {
         element = $('<div><div id="foo" /><div id="bar" /></div>');
-        drag = new Drag(element, {
+        userEvents = new UserEvents(element, {
             filter: "#foo"
         });
     }
 });
 
 test("binds to drag performed on elements matching filter", 1, function(){
-    drag.bind("start", function(e) {
+    userEvents.bind("start", function(e) {
         ok(true);
     });
 
@@ -145,7 +145,7 @@ test("binds to drag performed on elements matching filter", 1, function(){
 });
 
 test("ignores drag performed on elements not matching filter", 0, function(){
-    drag.bind("start", function(e) {
+    userEvents.bind("start", function(e) {
         ok(false);
     });
     element = element.find("#bar");
@@ -154,18 +154,18 @@ test("ignores drag performed on elements not matching filter", 0, function(){
     move(15, 25);
 });
 
-module("drag threshold option", {
+module("threshold option", {
     setup: function() {
         element = $('<div />');
         $("#qunit-fixture").empty().append(element);
-        drag = new Drag(element, {
+        userEvents = new UserEvents(element, {
             threshold: 5
         });
     }
 });
 
 test("ignores drag if less than threshold option", 0, function(){
-    drag.bind("start", function(e) {
+    userEvents.bind("start", function(e) {
         ok(false);
     });
 
@@ -174,7 +174,7 @@ test("ignores drag if less than threshold option", 0, function(){
 });
 
 test("raises start if distance is more than threshold option", 1, function(){
-    drag.bind("start", function(e) {
+    userEvents.bind("start", function(e) {
         ok(true);
     });
 
@@ -182,27 +182,27 @@ test("raises start if distance is more than threshold option", 1, function(){
     move(14, 24);
 });
 
-module("drag of nested elements", {
+module("nested elements", {
     setup: function() {
         element = $('<div id="parent"><div class="foo" /><div id="child"><div class="foo" /></div></div>');
-        parentDrag = new Drag(element, {
+        parentEvents = new UserEvents(element, {
             filter: element.children(".foo")
         });
 
         childElement = element.find("#child");
 
-        childDrag = new Drag(childElement, {
+        childEvents = new UserEvents(childElement, {
             filter: childElement.children(".foo")
         });
     }
 });
 
 test("ignores drag if filter does not match elements", 1, function() {
-    parentDrag.bind("start", function() {
+    parentEvents.bind("start", function() {
         ok(false);
     });
 
-    childDrag.bind("start", function() {
+    childEvents.bind("start", function() {
         ok(true);
     });
 
@@ -212,10 +212,10 @@ test("ignores drag if filter does not match elements", 1, function() {
     move(24, 54);
 });
 
-module("drag gestures", {
+module("gestures", {
     setup: function() {
         element = $('<div />');
-        drag = new Drag(element, {multiTouch: true});
+        userEvents = new UserEvents(element, {multiTouch: true});
 
         press(10, 20);
         move(15, 25);
@@ -224,7 +224,7 @@ module("drag gestures", {
 });
 
 test("triggers gesturestart on second touch move", 1, function(){
-    drag.bind("gesturestart", function(e) {
+    userEvents.bind("gesturestart", function(e) {
         ok(true);
     });
 
@@ -233,7 +233,7 @@ test("triggers gesturestart on second touch move", 1, function(){
 });
 
 test("accepts maximum 2 fingers", 1, function(){
-    drag.bind("gesturestart", function(e) {
+    userEvents.bind("gesturestart", function(e) {
         ok(true);
     });
 
@@ -243,7 +243,7 @@ test("accepts maximum 2 fingers", 1, function(){
 
 
 test("does not trigger move on second touch move", 0, function(){
-    drag.bind("move", function(e) {
+    userEvents.bind("move", function(e) {
         ok(false);
     });
 
@@ -252,7 +252,7 @@ test("does not trigger move on second touch move", 0, function(){
 });
 
 test("triggers gesturechange", 1, function(){
-    drag.bind("gesturechange", function(e) {
+    userEvents.bind("gesturechange", function(e) {
         ok(true);
     });
 
@@ -261,7 +261,7 @@ test("triggers gesturechange", 1, function(){
 });
 
 test("triggers gestureend", 1, function(){
-    drag.bind("gestureend", function(e) {
+    userEvents.bind("gestureend", function(e) {
         ok(true);
     });
 
@@ -271,7 +271,7 @@ test("triggers gestureend", 1, function(){
 });
 
 test("triggers end after the first touch is over", 1, function(){
-    drag.bind("end", function(e) {
+    userEvents.bind("end", function(e) {
         ok(true);
     });
 
@@ -283,11 +283,11 @@ test("triggers end after the first touch is over", 1, function(){
 
 test("triggers gesturestart before first touch move", 1, function(){
     var gestureStarted = false;
-    drag.bind("gesturestart", function(e) {
+    userEvents.bind("gesturestart", function(e) {
         gestureStarted = true;
     });
 
-    drag.bind("gesturechange", function() {
+    userEvents.bind("gesturechange", function() {
         ok(gestureStarted);
     });
 
