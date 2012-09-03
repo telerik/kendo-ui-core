@@ -209,7 +209,7 @@
             var that = this,
                 selected = that._selectedItem(),
                 path,
-                imageUrl = that.options.imageUrl;
+                imageUrl = that.options.transport.imageUrl;
 
             if (selected && selected.get(that._getFieldName(TYPEFIELD)) === "f") {
                 path = concatPaths(that.path(), selected.get(that._getFieldName(NAMEFIELD)));

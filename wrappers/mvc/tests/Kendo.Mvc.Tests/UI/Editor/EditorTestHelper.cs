@@ -34,8 +34,9 @@ namespace Kendo.Mvc.UI.Tests
             var urlGenerator = new Mock<IUrlGenerator>();
             urlGenerator.Setup(url => url.Generate(It.IsAny<RequestContext>(), It.IsAny<INavigatable>())).Returns(string.Empty);
 
-            var initializer = new Mock<IJavaScriptInitializer>();
-            return new Editor(viewContext, initializer.Object)
+            var initializer = new Mock<IJavaScriptInitializer>();            
+
+            return new Editor(viewContext, initializer.Object, urlGenerator.Object)
             {
                 Name = "Editor"
             };

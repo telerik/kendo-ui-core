@@ -412,9 +412,12 @@
     <Compile Include="UI\DropDownListBase\DropDownListBase.cs" />
     <Compile Include="UI\DropDownListBase\FilterType.cs" />
     <Compile Include="UI\DropDownListBase\Fluent\DropDownListBuilderBase.cs" />
+    <Compile Include="UI\Editor\EditorFileBrowserOperation.cs" />
     <Compile Include="UI\Editor\EditorMessages.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorFileBrowserSettingsBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorStyleSheetBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorMessagesBuilder.cs" />
+    <Compile Include="UI\Editor\EditorFileBrowserSettings.cs" />
     <Compile Include="UI\Editor\Tools\EditorListTool.cs" />
     <Compile Include="UI\Effects\ExpandableAnimation.cs" />
     <Compile Include="UI\Effects\Fluent\ExpandableAnimationBuilder.cs" />

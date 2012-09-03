@@ -60,6 +60,7 @@ var suiteScripts = {
         "kendo.columnmenu.js",
         "kendo.grid.js",
         "kendo.listview.js",
+        "kendo.imagebrowser.js",
         "kendo.editor.js",
         "kendo.numerictextbox.js",
         "kendo.menu.js",

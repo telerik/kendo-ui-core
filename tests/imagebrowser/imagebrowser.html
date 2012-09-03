@@ -632,8 +632,10 @@
 
             test("value custom formating is applied", function() {
                 var browser = setup({
-                    imageUrl: function(path) {
-                        return "foo" + path;
+                    transport: {
+                        imageUrl: function(path) {
+                            return "foo" + path;
+                        }
                     }
                 });
 
@@ -644,7 +646,9 @@
 
             test("value custom formating as string is applied", function() {
                 var browser = setup({
-                    imageUrl: "foo?path={0}"
+                    transport: {
+                        imageUrl: "foo?path={0}"
+                    }
                 });
 
                 browser.list.find("li[data-type=f]").mousedown().mouseup();

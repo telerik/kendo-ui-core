@@ -113,5 +113,14 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public EditorBuilder FileBrowser(Action<EditorFileBrowserSettingsBuilder> configurator)
+        {
+            var builder = new EditorFileBrowserSettingsBuilder(Component.FileBrowserSettings, Component.ViewContext, Component.UrlGenerator);
+
+            configurator(builder);
+
+            return this;
+        }
     }
 }

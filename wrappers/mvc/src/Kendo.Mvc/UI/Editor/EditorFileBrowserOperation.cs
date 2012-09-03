@@ -1,17 +1,16 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web.Routing;
-using Kendo.Mvc.Extensions;
 
 namespace Kendo.Mvc.UI
 {
-    public class CrudOperation : JsonObject, INavigatable
+    public class EditorFileBrowserOperation : JsonObject, INavigatable
     {
         private string routeName;
         private string controllerName;
         private string actionName;
 
-        public CrudOperation()
+        public EditorFileBrowserOperation()
         {            
             RouteValues = new RouteValueDictionary();
             Data = new ClientHandlerDescriptor();
@@ -33,24 +32,12 @@ namespace Kendo.Mvc.UI
             {
                 json["url"] = Encode(Url);
 
-                if (DataType.HasValue())
-                {
-                    json["dataType"] = DataType;
-                }
-
                 if (Data.HasValue())
                 {
                     json["data"] = Data;
-                }
-
-                if (Type.HasValue())
-                {
-                    json["type"] = Type;
-                }
+                }                
             }
-        }
-
-        public string DataType { get; set; }               
+        }         
 
         public string ActionName
         {
@@ -108,12 +95,6 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }
-
-        public string Type
-        {
-            get;
-            set;
-        }
+        }        
     }
 }

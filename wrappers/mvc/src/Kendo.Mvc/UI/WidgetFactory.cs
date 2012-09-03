@@ -92,7 +92,8 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual EditorBuilder Editor()
         {
             return new EditorBuilder(new Editor(ViewContext,
-                Initializer));
+                Initializer, 
+                UrlGenerator));
         }
 
         /// <summary>
