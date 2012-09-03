@@ -132,6 +132,8 @@
             },
 
             _updateConnected: function () {
+                this.bgimage = "url(" + this.urlValue.val() + ")";
+
                 var that = this,
                     filter = that.options.filter,
                     target = !filter ? that.element : that.target,
@@ -153,17 +155,18 @@
                 }
             },
 
-            _update: function (updateAttr, trigger) {
+            _update: function (trigger) {
                 var that = this,
                     target = !that.options.filter ? that.element : that.target;
 
                 if (target) {
-                    that.preview.css("background-image", that.bgimage);
                     that.urlValue.val(that.bgimage.replace(/url\(["']?|["']?\);?/g, ""));
                     that.repeatXValue[0].checked = that.backgroundRepeatX;
                     that.repeatYValue[0].checked = that.backgroundRepeatY;
                     that.positionXValue.val(that.backgroundPosX);
                     that.positionYValue.val(that.backgroundPosY);
+
+                    that._updateConnected();
 
                     if (trigger) {
                         that.trigger("pick", { color: that.color, target: target });
@@ -172,8 +175,7 @@
             },
 
             _keyDown: function (e) {
-                var that = this,
-                    target = $(e.target),
+                var target = $(e.target),
                     title = target.attr("title"),
                     value = target.val(),
                     unit = value.match(/[^\d\.]$/);
@@ -203,7 +205,7 @@
                     that.backgroundRepeatX = repeat == "repeat" || repeat == "repeat-x";
                     that.backgroundRepeatY = repeat == "repeat" || repeat == "repeat-y";
 
-                    that._update(true);
+                    that._update();
                 }
 
                 that.popup[open ? "open" : "close"]();
