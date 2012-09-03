@@ -219,6 +219,7 @@
                 dimensions = new PaneDimensions({
                     element: inner,
                     container: element,
+                    forcedEnabled: that.options.zoom,
                     change: function() {
                         that.trigger(RESIZE);
                     }

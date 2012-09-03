@@ -597,7 +597,7 @@
         },
 
         forceEnabled: function() {
-            this._forceEnabled = true;
+            this.forcedEnabled = true;
         },
 
         getSize: function() {
@@ -615,14 +615,15 @@
         update: function(silent) {
             var that = this,
                 total = that.getTotal(),
+                scaledTotal = total * that.scale,
                 size = that.getSize();
 
             that.size = size;
-            that.total = total * that.scale;
-            that.min = Math.min(that.max, that.size - that.total);
+            that.total = scaledTotal;
+            that.min = Math.min(that.max, that.size - scaledTotal);
             that.minScale = that.size / total;
 
-            that.enabled = that._forceEnabled || (that.total > that.size);
+            that.enabled = that.forcedEnabled || (scaledTotal > size);
 
             if (!silent) {
                 that.trigger(CHANGE, that);
