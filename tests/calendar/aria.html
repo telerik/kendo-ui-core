@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calendar ARIA</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Calendar ARIA</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var Calendar = kendo.ui.Calendar,
+                div, instance;
+
+            module("kendo.ui.Calendar ARIA", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                    instance = new Calendar(div);
+                },
+                teardown: function() {
+                    div.data("kendoCalendar").destroy();
+                    div.remove();
+                }
+            });
+
+            test("Calendar adds roles to the left and right arrow", function() {
+                equal(instance._prevArrow.attr("role"), "button");
+                equal(instance._nextArrow.attr("role"), "button");
+            });
+
+            test("Calendar adds roles", function() {
+                //equal(div.find("table").attr("role"), "grid");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

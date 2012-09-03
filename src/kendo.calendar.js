@@ -448,9 +448,9 @@
 
             if (!element.find(".k-header")[0]) {
                 element.html('<div class="k-header">' +
-                             '<a href="#" class="k-link k-nav-prev"><span class="k-icon k-i-arrow-w"></span></a>' +
+                             '<a href="#" role="button" class="k-link k-nav-prev"><span class="k-icon k-i-arrow-w"></span></a>' +
                              '<a href="#" class="k-link k-nav-fast"></a>' +
-                             '<a href="#" class="k-link k-nav-next"><span class="k-icon k-i-arrow-e"></span></a>' +
+                             '<a href="#" role="button" class="k-link k-nav-next"><span class="k-icon k-i-arrow-e"></span></a>' +
                              '</div>');
             }
 
