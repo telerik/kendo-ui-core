@@ -3018,46 +3018,6 @@
             }
         },
 
-        render: function() {
-            var point = this,
-                options = point.options,
-                labels = options.labels,
-                labelText = point.value,
-                labelTemplate;
-
-            if (point._rendered) {
-                return;
-            } else {
-                point._rendered = true;
-            }
-
-            if (labels.visible) {
-                if (labels.template) {
-                    labelTemplate = template(labels.template);
-                    labelText = labelTemplate({
-                        dataItem: point.dataItem,
-                        category: point.category,
-                        value: point.value,
-                        series: point.series
-                    });
-                } else if (labels.format) {
-                    labelText = point.formatValue(labels.format);
-                }
-                point.label = new TextBox(labelText,
-                    deepExtend({
-                        id: uniqueId(),
-                        align: CENTER,
-                        vAlign: CENTER,
-                        margin: {
-                            left: 5,
-                            right: 5
-                        }
-                    }, labels)
-                );
-                point.append(point.label);
-            }
-        },
-
         reflow: function(box) {
             var point = this,
                 options = point.options,
