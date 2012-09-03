@@ -3,6 +3,7 @@
     var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu,
         deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
         extend = $.extend,
+        each = $.each,
         propertyTargets = {
             color: [ "color", "background-color", "border-color" ],
             gradient: [ "background-image" ],
@@ -331,50 +332,56 @@
 
                 return output;
             },
-            mixBackground: function (css, element) {
-                var that = this,
+            mixBackground: function (css, element, replace) {
+                var that = this, idx, imageHash, repeats, url, comma, grPosition, grRepeat,
                     color = element.css("background-color"),
-                    backgrounds = element.css("background-image").split(backgroundSplitRegExp),
-                    positions = element.css("background-position").split(","),
-                    repeats = element.css("background-repeat").split(","),
-                    imageHash = that.createHash(css["background-image"]),
-                    isUrl = css["background-image"][0].toLowerCase() == "u";
+                    backgrounds = [ element.css("background-image").split(backgroundSplitRegExp), css["background-image"].split(backgroundSplitRegExp) ],
+                    backSplits = [ { gradient: [], url: [] }, { gradient: [] }],
+                    position = css["background-position"],
+                    repeat = css["background-repeat"];
 
-                idx = -1;
-                $.each(backgrounds, function (index, value) {
-                    if ((value[0].toLowerCase() == "u" && isUrl) || that.createHash(value) == imageHash) {
-                        idx = index;
-                        return false;
-                    }
+                position = position ? position.substring(position.indexOf(",") + 1) : "";
+                repeat = repeat ? repeat.substring(repeat.indexOf(",") + 1) : "";
+
+                backgrounds.forEach(function (val, idx) {
+                    val.forEach(function (value) {
+                        if ((value[0].toLowerCase() == "u")) {
+                            backSplits[0].url = [ value ];
+                        } else {
+                            backSplits[idx].gradient.push( value );
+                        }
+                    });
                 });
 
-                if (backgrounds[idx]) {
-                    backgrounds[idx] = css["background-image"];
-                    if (positions[idx]) {
-                        positions[idx] = css["background-position"];
-                        repeats[idx] = css["background-repeat"];
-                    }
-                } else if (backgrounds.length < 4) {
-                    if (isUrl) {
-                        backgrounds.push(css["background-image"]);
-                        if (positions.length == backgrounds.length-1 && css["background-position"]) {
-                            positions.push(css["background-position"]);
-                            repeats.push(css["background-repeat"]);
+                idx = -1;
+                if (backSplits[1].gradient[0]) {
+                    imageHash = that.createHash(backSplits[1].gradient[0]);
+                    backSplits[0].gradient.forEach(function (value, i) {
+                        if (that.createHash(value) == imageHash) {
+                            idx = i;
                         }
-                    } else {
-                        backgrounds.splice(0, 0, css["background-image"]);
-                        if (positions.length == backgrounds.length-1 && css["background-position"]) {
-                            positions.splice(0, 0, css["background-position"]);
-                            repeats.splice(0, 0, css["background-repeat"]);
-                        }
-                    }
+                    });
                 }
+
+                if (replace && backSplits[1].gradient[0]) { idx = 0; }
+
+                if (idx > -1) {
+                    backSplits[0].gradient[idx] = backSplits[1].gradient[0];
+                } else if (backSplits[0].gradient.length < 4 && backSplits[1].gradient[0]) {
+                    backSplits[0].gradient.splice(0, 0, backSplits[1].gradient[0]);
+                }
+
+                repeats = new Array(backSplits[0].gradient.length+1);
+                grPosition = repeats.join("0 0,");
+                grRepeat = repeats.join("repeat,");
+                url = backSplits[0].url[0];
+                comma = (url ? "," :"");
 
                 return {
                     "background-color": color,
-                    "background-image": backgrounds.join(","),
-                    "background-position": positions.join(","),
-                    "background-repeat": repeats.join(",")
+                    "background-image": (backSplits[0].gradient.length ? backSplits[0].gradient.join(",") + comma : "") + (url ? url : ""),
+                    "background-position": grPosition.substr(0, grPosition.length - 1) + comma  + (url ? position : ""),
+                    "background-repeat": grRepeat.substr(0, grRepeat.length - 1) + comma + (url ? repeat : "")
                 }
             },
             createHash: function(str) {
@@ -574,7 +581,7 @@
     }
 
     clones.shift();
-    $.each(clones.reverse(), function () {
+    each(clones.reverse(), function () {
         $("#iosDevice")
             .clone(true)
             .find("[id]") // Make sure there are no duplicate IDs.
@@ -589,7 +596,7 @@
 
     $("#" + clones[0] + "Device [data-role=view]").attr("data-init", "initTargets");
 
-    $.each(devices, function () {
+    each(devices, function () {
         var that = this.toString(),
             deviceId = "#" + that + "Device";
         applications[that] = new kendo.mobile.Application(deviceId, { platform: that });
@@ -617,13 +624,12 @@
                 var engine = target.parents(".device").data("kendoStyleEngine");
 
                 defaultCSS = { cursor: "default" };
-                $.each(pkg, function () { defaultCSS[this] = ""; });
-                console.log(defaultCSS);
+                each(pkg, function () { defaultCSS[this] = ""; });
 
                 css = kendo.getComputedStyles(element, pkg);
 
                 if (css["background-image"]) {
-                    extend(css, engine.mixBackground(css, target));
+                    extend(css, engine.mixBackground(css, target, true));
                 }
 
                 target.css(css);
@@ -677,7 +683,7 @@
                         return;
                     }
 
-                    applyHint(e.draggable.element[0], target, packages[whitelisted]);
+                    applyHint(draggedElement[0], target, packages[whitelisted]);
 
                     widgetTarget
                         .show()
@@ -737,7 +743,7 @@
                         contextMenu.show(offset.left + e.offsetX, offset.top + e.offsetY);
                     } else {
                         if (css["background-image"]) {
-                            extend(css, engine.mixBackground(css, target));
+                            extend(css, engine.mixBackground(css, target, true));
                         }
 
                         engine.update(target, css);
@@ -803,7 +809,7 @@
     function addRecentItem(element, type) {
         element = $(element);
 
-        var existing = $('.recent-' + type + 's [data-' + type + '="' + tools[type].set(element.attr("data-" + type)).get() + '"]');
+        var existing = $('.recent-' + type + 's [data-' + type + '="' + element.attr("data-" + type) + '"]');
 
         if (existing[0]) {
             existing
@@ -907,7 +913,7 @@
     $("#exportStyles").click(function () {
         var output = "";
 
-        $.each(devices, function () {
+        each(devices, function () {
             var that = this.toString();
             if ($("#" + that + "box")[0].checked) {
                 output += $("#" + that + "Device").data("kendoStyleEngine").getCSS();
@@ -925,7 +931,7 @@
             styles = {}, style;
 
         if (stylesheet[0].sheet) {
-            $.each(stylesheet[0].sheet.rules, function () {
+            each(stylesheet[0].sheet.rules, function () {
                 deviceClasses.forEach(function (value) {
                     if (this.selectorText.indexOf(value) === 0) {
 
