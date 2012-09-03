@@ -37,6 +37,15 @@
                 equal(instance._nextArrow.attr("role"), "button");
             });
 
+            test("Calendar adds role to the title button", function() {
+                equal(instance._title.attr("role"), "button");
+            });
+
+            test("Calendar adds live aria attributes", function() {
+                equal(instance._title.attr("aria-live"), "assertive");
+                equal(instance._title.attr("aria-atomic"), "true");
+            });
+
             test("Calendar adds roles", function() {
                 //equal(div.find("table").attr("role"), "grid");
             });
