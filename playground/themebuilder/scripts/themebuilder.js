@@ -281,17 +281,33 @@
 
         StyleEngine = Widget.extend({
             init: function (element, options) {
-                var that = this;
+                var that = this, key;
 
                 Widget.fn.init.call(that, element, options);
                 element = that.element;
+                options = that.options;
 
                 that.object = {};
 
-                that.styleElement = $("<style scoped></style>").insertBefore(element);
+                if (options.restoreFromStorage) {
+                    if (localStorage && localStorage.length) {
+                        try {
+                            for (var i = 0; i < localStorage.length; i++){
+                                key = localStorage.key(i);
+                                if (key.indexOf(".km-" + options.platform) === 0) {
+                                    that.object[key] = JSON.parse(localStorage.getItem(key));
+                                }
+                            }
+                        } catch(err) {}
+                    }
+                }
+
+                that.styleElement = $("<style scoped>\n" + that.getCSS() + "</style>").insertBefore(element);
             },
             options: {
-                name: "StyleEngine"
+                name: "StyleEngine",
+                restoreFromStorage: false,
+                platform: ""
             },
             populate: function(styles) {
                 this.object = extend(true, this.object, styles);
@@ -316,6 +332,7 @@
                 output = output.substr(0, output.length-1);
 
                 style[output] = extend(this.object[output], styles);
+                that.store(output, style[output]);
 
                 that.populate(style);
             },
@@ -345,10 +362,12 @@
 
                 backgrounds.forEach(function (val, idx) {
                     val.forEach(function (value) {
-                        if ((value[0].toLowerCase() == "u")) {
-                            backSplits[0].url = [ value ];
-                        } else {
-                            backSplits[idx].gradient.push( value );
+                        if (value[0].toLowerCase() != "none") {
+                            if ((value[0].toLowerCase() == "u")) {
+                                backSplits[0].url = [ value ];
+                            } else {
+                                backSplits[idx].gradient.push( value );
+                            }
                         }
                     });
                 });
@@ -397,6 +416,21 @@
                 }
 
                 return hash;
+            },
+            store: function(property, obj) {
+                if (localStorage) {
+                    try {
+                        localStorage.setItem(property, JSON.stringify(obj));
+                    } catch(err) {}
+                }
+            },
+            retrieve: function (property) {
+                if (localStorage && localStorage.length) {
+                    try {
+                        return JSON.parse(localStorage.getItem(property));
+                    } catch(err) {}
+                }
+                return {};
             }
         });
 
@@ -600,7 +634,7 @@
         var that = this.toString(),
             deviceId = "#" + that + "Device";
         applications[that] = new kendo.mobile.Application(deviceId, { platform: that });
-        engineTool = $(deviceId).kendoStyleEngine().data("kendoStyleEngine");
+        engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that }).data("kendoStyleEngine");
     });
 
     pickers = {
