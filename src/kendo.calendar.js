@@ -16,6 +16,7 @@
         isIE8 = browser.msie && (parseInt(browser.version, 10) < 9 || (document.documentMode && document.documentMode < 9)),
         ns = ".kendoCalendar",
         CLICK = (touch ? "touchend" : "click") + ns,
+        ID = "id",
         MIN = "min",
         LEFT = "left",
         SLIDE = "slide",
@@ -38,6 +39,7 @@
         PREVARROW = "_prevArrow",
         NEXTARROW = "_nextArrow",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_SELECTED = "aria-selected",
         proxy = $.proxy,
         extend = $.extend,
         DATE = Date,
@@ -50,7 +52,7 @@
 
     var Calendar = Widget.extend({
         init: function(element, options) {
-            var that = this, value;
+            var that = this, value, id;
 
             Widget.fn.init.call(that, element, options);
 
@@ -67,9 +69,14 @@
 
             that._footer(that.footer);
 
-            element
-                .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
-                .on(CLICK, CELLSELECTOR, proxy(that._click, that));
+            id = element
+                    .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
+                    .on(CLICK, CELLSELECTOR, proxy(that._click, that))
+                    .attr(ID);
+
+            if (id) {
+                that._cellID = id + "_cell_selected";
+            }
 
             value = options.value;
             normalize(options);
@@ -379,12 +386,26 @@
         },
 
         _class: function(className, value) {
-            this._table.find("td:not(." + OTHERMONTH + ")")
-                .removeClass(className)
-                .filter(function() {
-                   return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
-                })
-                .addClass(className);
+            var that = this,
+                cell = that._cell;
+
+            if (cell) {
+                cell.removeAttr(ARIA_SELECTED)
+                    .removeAttr(ID);
+            }
+
+            that._cell = cell = that._table
+                       .find("td:not(." + OTHERMONTH + ")")
+                       .removeClass(className)
+                       .filter(function() {
+                          return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
+                       })
+                       .addClass(className)
+                       .attr(ARIA_SELECTED, true);
+
+            if (that._cellID) {
+                cell.attr(ID, that._cellID);
+            }
         },
 
         _click: function(e) {

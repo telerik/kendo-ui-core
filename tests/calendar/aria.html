@@ -23,7 +23,7 @@
 
             module("kendo.ui.Calendar ARIA", {
                 setup: function() {
-                    div = $("<div />").appendTo(document.body);
+                    div = $("<div id='test' />").appendTo(document.body);
                     instance = new Calendar(div);
                 },
                 teardown: function() {
@@ -77,19 +77,47 @@
                 equal(cells.filter("[role=gridcell]").length, cells.length);
             });
 
-            test("calendar adds aria-disabled to the prev arrow", function() {
+            test("Calendar adds aria-disabled to the prev arrow", function() {
                 instance.navigate(instance.options.min);
                 equal(instance._prevArrow.attr("aria-disabled"), "true");
             });
 
-            test("calendar adds aria-disabled to the next arrow", function() {
+            test("Calendar adds aria-disabled to the next arrow", function() {
                 instance.navigate(instance.options.max);
                 equal(instance._nextArrow.attr("aria-disabled"), "true");
             });
 
-            test("calendar adds aria-disabled to the up nav", function() {
+            test("Calendar adds aria-disabled to the up nav", function() {
                 instance.navigate(instance.options.max, "century");
                 equal(instance._title.attr("aria-disabled"), "true");
+            });
+
+            test("Calendar adds aria-selected to the selected cell", function() {
+                instance.value(new Date());
+                equal(instance._table.find("td.k-state-selected").attr("aria-selected"), "true");
+            });
+
+            test("Calendar adds only one aria-selected=true", function() {
+                instance.value(new Date(2000, 10, 10));
+                instance.value(new Date(2000, 10, 20));
+
+                equal(instance._table.find("td[aria-selected=true]").length, 1);
+            });
+
+            test("Calendar sets id to the selected cell", function() {
+                instance.value(new Date(2000, 10, 10));
+                instance.value(new Date(2000, 10, 20));
+
+                equal(instance._table.find("td[aria-selected=true]").attr("id"), "test_cell_selected");
+            });
+
+            test("Calendar has only one cell with id", function() {
+                instance.value(new Date(2000, 10, 10));
+                var cell = instance._cell;
+
+                instance.value(new Date(2000, 10, 20));
+
+                equal(cell.attr("id"), undefined);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
