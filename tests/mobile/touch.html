@@ -33,10 +33,6 @@
 
             var element, touch;
 
-            function setup() {
-                element = $("<i />");
-                touch = element.kendoTouch().data("kendoTouch");
-            }
 
             function triggerTouchEvent(type, info) {
                 info.target = element;
@@ -67,8 +63,11 @@
                 })
             }
 
-            module("touchstart", {
-                setup: setup
+            module("touch events", {
+                setup: function() {
+                    element = $("<i />");
+                    touch = element.kendoTouch().data("kendoTouch");
+                }
             });
 
             test("triggers touchstart on press", 1, function() {
@@ -86,6 +85,31 @@
 
                 press(10, 10);
                 move(18, 18);
+            });
+
+            test("triggers drag on press + move", 1, function() {
+                touch.bind("drag", function() {
+                    ok(true);
+                });
+
+                press(10, 10);
+                move(18, 18);
+            });
+
+            test("triggers tap on press + release", 1, function() {
+                touch.bind("tap", function() {
+                    ok(true);
+                });
+
+                press(10, 10);
+                release(10, 10);
+            });
+
+            module("swipe events", {
+                setup: function() {
+                    element = $("<i />");
+                    touch = element.kendoTouch({ captureSwipe: true }).data("kendoTouch");
+                }
             });
 
             test("triggers swipe event on a long drag", 1, function() {
@@ -153,6 +177,44 @@
                 press(40, 1);
                 move(1, 1);
                 release(1, 1);
+            });
+
+            module("gestures", {
+                setup: function() {
+                    element = $('<div />');
+                    touch = element.kendoTouch({ multiTouch: true }).data("kendoTouch");
+
+                    press(10, 20);
+                    move(15, 25);
+                }
+            });
+
+            test("triggers gesturestart on second touch move", 1, function(){
+                touch.bind("gesturestart", function(e) {
+                    ok(true);
+                });
+
+                press(10, 20, 2)
+                move(15, 25, 2)
+            });
+
+            test("triggers gesturechange", 1, function(){
+                touch.bind("gesturechange", function(e) {
+                    ok(true);
+                });
+
+                press(10, 20, 2);
+                move(15, 25, 2);
+            });
+
+            test("triggers gestureend", 1, function(){
+                touch.bind("gestureend", function(e) {
+                    ok(true);
+                });
+
+                press(10, 20, 2);
+                move(15, 25, 2);
+                release(15, 25, 2);
             });
         </script>
     </body>

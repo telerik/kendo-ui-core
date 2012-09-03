@@ -55,9 +55,8 @@
         init: function(element, options) {
             var that = this;
 
-            options = $.extend({ minXDelta: 30, maxYDelta: 20, maxDuration: 1000 }, options);
-
             Widget.fn.init.call(that, element, options);
+            options = that.options;
 
             element = that.element;
 
@@ -65,13 +64,29 @@
                 return function(e) { that.trigger(name, { touch: e.touch }); }
             }
 
-            new kendo.UserEvents(element, {
+            function gestureEventProxy(name) {
+                return function(e) { that.trigger(name, { touches: e.touches }); }
+            }
+
+            that.events = new kendo.UserEvents(element, {
                 surface: options.surface,
+                multiTouch: options.multiTouch,
                 allowSelection: true,
                 press: eventProxy("touchstart"),
-                start: proxy(that, "_start"),
-                move: proxy(that, "_move"),
+                tap: proxy(that, "_tap"),
+                gesturestart: gestureEventProxy("gesturestart"),
+                gesturechange: gestureEventProxy("gesturechange"),
+                gestureend: gestureEventProxy("gestureend")
             });
+
+            if (options.captureSwipe) {
+                that.events.bind("start", proxy(that, "_swipeStart"));
+                that.events.bind("move", proxy(that, "_swipeMove"));
+            } else {
+                that.events.bind("start", eventProxy("dragstart"));
+                that.events.bind("move", eventProxy("drag"));
+                that.events.bind("end", eventProxy("dragend"));
+            }
 
             kendo.notify(that);
         },
@@ -79,25 +94,36 @@
         events: [
             "touchstart",
             "dragstart",
-            "swipe"
+            "drag",
+            "dragend",
+            "tap",
+            "swipe",
+            "gesturestart",
+            "gesturechange",
+            "gestureend"
         ],
 
         options: {
             name: "Touch",
+            surface: null,
+            multiTouch: false,
+            captureSwipe: false,
             minXDelta: 30,
             maxYDelta: 20,
             maxDuration: 1000
         },
 
-        _start: function(e) {
+        _tap: function(e) {
+            this.trigger("tap", { touch: e.touch });
+        },
+
+        _swipeStart: function(e) {
             if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
                 e.sender.capture();
             }
-
-            this.trigger("dragstart", { touch: e.touch });
         },
 
-        _move: function(e) {
+        _swipeMove: function(e) {
             var that = this,
                 options = that.options,
                 touch = e.touch,
@@ -118,7 +144,6 @@
                 touch.cancel();
             }
         }
-
     });
 
     kendo.ui.plugin(Touch);
