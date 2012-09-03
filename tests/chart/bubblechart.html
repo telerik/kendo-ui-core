@@ -60,20 +60,16 @@
                 function PlotAreaStub() { }
 
                 $.extend(PlotAreaStub.prototype, {
-                    namedXAxes: {
-                        primary: {
-                            getSlot: function(categoryIndex) {
-                                return new Box2D(0, 0, categoryIndex + 1, 0);
-                            }
+                    primaryXAxis: {
+                        getSlot: function(categoryIndex) {
+                            return new Box2D(0, 0, categoryIndex + 1, 0);
                         }
                     },
-                    namedYAxes: {
-                        primary: {
-                            getSlot: function(value) {
-                                return new Box2D(0, 1, 0, value);
-                            },
-                            options: {}
-                        }
+                    primaryYAxis: {
+                        getSlot: function(value) {
+                            return new Box2D(0, 1, 0, value);
+                        },
+                        options: {}
                     },
                     options: {}
                 });
