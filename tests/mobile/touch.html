@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo Touch Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script>
+            kendo.support.touch = true;
+        </script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.touch.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <h1 id="qunit-header">kendo Touch Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <ul id="log"></ul>
+
+        <script>
+            QUnit.config.reorder = false;
+
+            var element, touch;
+
+            function setup() {
+                element = $("<i />");
+                touch = element.kendoTouch().data("kendoTouch");
+            }
+
+            function triggerTouchEvent(type, info) {
+                info.target = element;
+                element.trigger($.Event(type, { originalEvent: { changedTouches: [ info ] }}));
+            }
+
+            function press(x, y, id) {
+                triggerTouchEvent("touchstart", {
+                    pageX: x,
+                    pageY: y,
+                    id: id || 1
+                })
+            }
+
+            function move(x, y, id) {
+                triggerTouchEvent("touchmove", {
+                    pageX: x,
+                    pageY: y,
+                    id: id || 1
+                })
+            }
+
+            function release(x, y, id) {
+                triggerTouchEvent("touchend", {
+                    pageX: x,
+                    pageY: y,
+                    id: id || 1
+                })
+            }
+
+            module("touchstart", {
+                setup: setup
+            });
+
+            test("triggers touchstart on press", 1, function() {
+                touch.bind("touchstart", function() {
+                    ok(true);
+                });
+
+                press();
+            });
+
+            test("triggers dragstart on press + move", 1, function() {
+                touch.bind("dragstart", function() {
+                    ok(true);
+                });
+
+                press(10, 10);
+                move(18, 18);
+            });
+
+            test("triggers swipe event on a long drag", 1, function() {
+                touch.bind("swipe", function() {
+                    ok(true);
+                });
+
+                press(1, 1);
+                move(20, 1);
+                move(40, 1);
+                release(40, 1);
+            });
+
+            test("ignores shorter swipes", 0, function(){
+                touch.bind("swipe", function() {
+                    ok(false);
+                });
+
+                press(1, 1);
+                move(10, 1);
+                move(11, 1);
+                release(11, 1);
+            });
+
+            test("ignores vertical swipes", 0, function() {
+                touch.bind("swipe", function() {
+                    ok(false);
+                });
+
+                press(1, 1);
+                move(40, 40);
+                release(40, 40);
+            });
+
+            asyncTest("ignores slow swipe event", 0, function() {
+                touch.bind("swipe", function() {
+                    ok(false);
+                });
+
+                press(1, 1);
+                move(20, 1);
+
+                setTimeout(function() {
+                    start();
+                    move(40, 1);
+                    release(40, 1);
+                }, 1100);
+            });
+
+            test("detects right swipe", 1, function() {
+                touch.bind("swipe", function(e) {
+                    equal(e.direction, "right");
+                });
+
+                press(1, 1);
+                move(40, 1);
+                release(40, 1);
+            });
+
+            test("detects left swipe", 1, function() {
+                touch.bind("swipe", function(e) {
+                    equal(e.direction, "left");
+                });
+
+                press(40, 1);
+                move(1, 1);
+                release(1, 1);
+            });
+        </script>
+    </body>
+</html>

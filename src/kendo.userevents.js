@@ -20,6 +20,7 @@
         NS = ".kendoUserEvents",
 
         // UserEvents events
+        PRESS = "press",
         START = "start",
         MOVE = "move",
         END = "end",
@@ -150,7 +151,7 @@
                 _finished: false
             });
 
-            that._trigger("press", touchInfo);
+            that._trigger(PRESS, touchInfo);
         },
 
         move: function(touchInfo) {
@@ -302,6 +303,7 @@
             }
 
             that.bind([
+            PRESS,
             TAP,
             START,
             MOVE,

@@ -100,7 +100,7 @@ var suiteScripts = {
         "kendo.userevents.js",
         "kendo.draganddrop.js",
         "kendo.popup.js",
-        "kendo.mobile.swipe.js",
+        "kendo.touch.js",
         "kendo.mobile.popover.js",
         "kendo.mobile.loader.js",
         "kendo.mobile.scroller.js",
