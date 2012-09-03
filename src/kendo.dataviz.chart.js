@@ -5145,9 +5145,12 @@
                     categoryAxis = new CategoryAxis(options);
                 }
 
-                // TODO: Name is mandatory if i > 0
                 if (name) {
-                    // TODO: Check for duplicates
+                    if (plotArea.namedCategoryAxes[name]) {
+                        throw new Error(
+                            "Category axis with name " + name + " is already defined"
+                        );
+                    }
                     plotArea.namedCategoryAxes[name] = categoryAxis;
                 }
 
@@ -5186,7 +5189,6 @@
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
-                // TODO: Name is mandatory if i > 0
                 name = axisOptions.name;
                 range = plotArea.valueAxisRangeTracker.query(name);
 
@@ -5195,7 +5197,11 @@
                 );
 
                 if (name) {
-                    // TODO: Check for duplicates
+                    if (plotArea.namedValueAxes[name]) {
+                        throw new Error(
+                            "Value axis with name " + name + " is already defined"
+                        );
+                    }
                     plotArea.namedValueAxes[name] = valueAxis;
                 }
 
@@ -5423,9 +5429,13 @@
                 axis = new NumericAxis(range.min, range.max, axisOptions);
             }
 
-            // TODO: Name is mandatory if i > 0
             if (axisName) {
-                // TODO: Check for duplicates
+                if (namedAxes[axisName]) {
+                    throw new Error(
+                        (vertical ? "Y" : "X") +
+                        " axis with name " + axisName + " is already defined"
+                    );
+                }
                 namedAxes[axisName] = axis;
             }
 

@@ -250,6 +250,22 @@
                     equals(slotX.y1, slotY.y1);
                 });
 
+                test("Throws error when value axis name is duplicate", function() {
+                    raises(function() {
+                        plotArea = new dataviz.CategoricalPlotArea([{
+                                type: "column",
+                                data: [100]
+                            }], {
+                            valueAxis: [{
+                                name: "b"
+                            }, {
+                                name: "b"
+                            }]
+                        });
+                    },
+                    /Value axis with name b is already defined/);
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Multiple Value Axes / Stacked Left", {
                     setup: function() {
@@ -525,6 +541,22 @@
                             categoryAxis: "b"
                         }])},
                         /Unable to locate category axis with name b/);
+                });
+
+                test("Throws error when category axis name is duplicate", function() {
+                    raises(function() {
+                        plotArea = new dataviz.CategoricalPlotArea([{
+                                type: "column",
+                                data: [100]
+                            }], {
+                            categoryAxis: [{
+                                name: "b"
+                            }, {
+                                name: "b"
+                            }]
+                        });
+                    },
+                    /Category axis with name b is already defined/);
                 });
 
                 // ------------------------------------------------------------
@@ -2594,6 +2626,32 @@
                     plotArea.reflow(chartBox);
 
                     equals(secondaryYAxis.lineBox().y2, primaryYAxis.lineBox().y2);
+                });
+
+                test("Throws error when X axis name is duplicate", function() {
+                    raises(function() {
+                        plotArea = createPlotArea(scatterSeriesData, {
+                            xAxis: [{
+                                name: "b"
+                            }, {
+                                name: "b"
+                            }]
+                        });
+                    },
+                    /X axis with name b is already defined/);
+                });
+
+                test("Throws error when Y axis name is duplicate", function() {
+                    raises(function() {
+                        plotArea = createPlotArea(scatterSeriesData, {
+                            yAxis: [{
+                                name: "b"
+                            }, {
+                                name: "b"
+                            }]
+                        });
+                    },
+                    /Y axis with name b is already defined/);
                 });
 
                 // ------------------------------------------------------------
