@@ -16,7 +16,11 @@
         	<strong>Window Content</strong>
         	
         	<kendo:autoComplete name="myAutoComplete">
-        	    <kendo:dataSource></kendo:dataSource>
+        	    <kendo:dataSource>
+        	    	<kendo:transport>
+        	    		<kendo:read></kendo:read>
+        	    	</kendo:transport>
+        	    </kendo:dataSource>
             </kendo:autoComplete>
         	
         </kendo:window>

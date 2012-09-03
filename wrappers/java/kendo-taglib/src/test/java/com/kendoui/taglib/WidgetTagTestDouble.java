@@ -10,12 +10,8 @@ public class WidgetTagTestDouble extends WidgetTag {
         super("Foo");
     }
 
-    public Object getFoo() {
-        return this.json.get("foo");
-    }
-
     public void setFoo(String foo) {
-        this.json.put("foo", foo);
+        setProperty("foo", foo);
     }
 
     @Override

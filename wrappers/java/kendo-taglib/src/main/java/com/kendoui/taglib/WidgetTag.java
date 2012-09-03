@@ -3,12 +3,9 @@ package com.kendoui.taglib;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Script;
@@ -17,20 +14,13 @@ import com.kendoui.taglib.json.Serializable;
 import com.kendoui.taglib.json.Serializer;
 
 @SuppressWarnings("serial")
-public abstract class WidgetTag extends BodyTagSupport implements Serializable {
+public abstract class WidgetTag extends BaseTag implements Serializable {
     private String name;
     private String widget;
 
-    protected Map<String,Object> json;
 
     public WidgetTag(String widget) {
-        this.json = new HashMap<String,Object>();
         this.widget = widget;
-    }
-
-    @Override
-    public Map<String,Object> properties() {
-        return json;
     }
 
     public String getName() {

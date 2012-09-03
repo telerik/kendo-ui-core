@@ -11,8 +11,8 @@ public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
     }
 
     @Override
-    public void setDataSource(DataSource dataSource) {
-
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
     }
 
     @Override
