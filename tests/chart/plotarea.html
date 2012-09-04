@@ -35,7 +35,6 @@
                 var plotArea,
                     categoryAxis,
                     namedCategoryAxes,
-                    primaryCategoryAxis,
                     secondaryCategoryAxis,
                     namedValueAxes,
                     primaryValueAxis,
@@ -107,7 +106,6 @@
 
                     categoryAxis = plotArea.categoryAxis;
                     namedCategoryAxes = plotArea.namedCategoryAxes;
-                    primaryCategoryAxis = plotArea.primaryCategoryAxis;
                     secondaryCategoryAxis = namedCategoryAxes.secondary;
                     namedValueAxes = plotArea.namedValueAxes;
                     primaryValueAxis = plotArea.primaryValueAxis;
@@ -487,7 +485,7 @@
                             }]
                     });
 
-                    ok(plotArea.primaryCategoryAxis === plotArea.namedCategoryAxes["a"]);
+                    ok(plotArea.categoryAxis === plotArea.namedCategoryAxes["a"]);
                 });
 
                 test("secondary category axis is added to children collection", function() {

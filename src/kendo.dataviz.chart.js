@@ -5022,7 +5022,7 @@
                 axisName = series.categoryAxis,
                 axis = axisName ?
                     plotArea.namedCategoryAxes[axisName] :
-                    plotArea.primaryCategoryAxis;
+                    plotArea.categoryAxis;
 
             if (!axis) {
                 throw new Error("Unable to locate category axis with name " + axisName);
@@ -5160,18 +5160,14 @@
                 plotArea.append(categoryAxis);
             }
 
-            plotArea.primaryCategoryAxis = axes[0];
-
-            // TODO: Remove legacy aliases
             primaryAxis = axes[0];
+            plotArea.categoryAxis = primaryAxis;
 
             if (invertAxes) {
                 plotArea.axisY = primaryAxis;
             } else {
                 plotArea.axisX = primaryAxis;
             }
-
-            plotArea.categoryAxis = primaryAxis;
         },
 
         createValueAxes: function() {
@@ -5248,7 +5244,7 @@
 
             if (categories.length === 0) {
                 appendIfNotNull(
-                    categories, plotArea.primaryCategoryAxis.getCategory(point)
+                    categories, plotArea.categoryAxis.getCategory(point)
                 );
             }
 
