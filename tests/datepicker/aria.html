@@ -88,7 +88,7 @@
             });
 
             test("DatePicker sets id to the shared calendar", function() {
-                equal(instance.dateView.calendar.element.attr("id"), "shared_kendo_calendar");
+                ok(instance.dateView.calendar.element.attr("id"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

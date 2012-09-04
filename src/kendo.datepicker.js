@@ -57,7 +57,7 @@
             sharedCalendar = DatePicker.sharedCalendar;
 
         if (!sharedCalendar) {
-            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr("id", "shared_kendo_calendar").hide().appendTo(body));
+            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr("id", kendo.guid()).hide().appendTo(body));
             calendar.makeUnselectable(sharedCalendar.element);
         }
 
