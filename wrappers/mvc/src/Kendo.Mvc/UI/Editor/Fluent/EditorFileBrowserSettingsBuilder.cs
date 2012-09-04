@@ -73,6 +73,12 @@ namespace Kendo.Mvc.UI.Fluent
             return Image(actionName, controllerName, (object)null);
         }
 
+        public EditorFileBrowserSettingsBuilder Image(string url)
+        {
+            settings.Image.Url = urlGenerator.Generate(viewContext.RequestContext, url); ;
+            return this;
+        }
+
         public EditorFileBrowserSettingsBuilder Image(string actionName, string controllerName, RouteValueDictionary routeValues)
         {
             settings.Image.Action(actionName, controllerName, routeValues);

@@ -212,7 +212,7 @@
                 imageUrl = that.options.transport.imageUrl;
 
             if (selected && selected.get(that._getFieldName(TYPEFIELD)) === "f") {
-                path = concatPaths(that.path(), selected.get(that._getFieldName(NAMEFIELD)));
+                path = concatPaths("/" + that.path(), selected.get(that._getFieldName(NAMEFIELD)));
                 if (imageUrl) {
                     path = isFunction(imageUrl) ? imageUrl(path) : kendo.format(imageUrl, path);
                 }
