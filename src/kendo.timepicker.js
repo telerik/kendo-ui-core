@@ -52,7 +52,7 @@
                     .on(MOUSEDOWN, preventDefault);
 
         if (id) {
-            that._listboxID = id + "_listbox";
+            that._listboxID = id + "_timepicker_timeview";
             that._optionID = id + "_option_selected";
 
             that.ul.attr(ID, that._listboxID);
