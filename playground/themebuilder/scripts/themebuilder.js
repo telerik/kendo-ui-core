@@ -4,15 +4,16 @@
         deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
         extend = $.extend,
         each = $.each,
+        dragging = false,
         propertyTargets = {
             color: [ "color", "background-color", "border-color" ],
             gradient: [ "background-image" ],
             pattern: [ "background-image" ]
         },
         packages = {
-            color: [ "color" ],
+            color: [ "background-color" ],
             "background-color": [ "background-color" ],
-            "border-color": [ "border-color" ],
+            "border-color": [ "background-color" ],
             "background-image": [ "background-image", "background-repeat", "background-position" ]
         },
         tools = {
@@ -261,6 +262,7 @@
                         color = element.css("background-color"),
                         doc = document.documentElement;
 
+                    dragging = true;
                     element.data("property", "background-color");
                     element.data("background-color", tools.color.compress(color));
 
@@ -270,6 +272,8 @@
                 },
                 dragend: function () {
                     var doc = document.documentElement;
+
+                    dragging = false;
                     widgetTarget.hide();
 
                     $(doc).removeClass("drop-override");
@@ -318,18 +322,23 @@
                 that.styleElement.remove();
                 that.styleElement = style;
             },
-            update: function(element, styles) {
-                element = $(element);
-                var that = this, style = {},
-                    output = "", widget;
+            getElementSelector: function (element, agnostic) {
+                var output = "", widget,
+                    parents = element.parentsUntil(agnostic ? ".km-pane" : ".km-root");
 
-                $(element.parentsUntil(".km-root").add(element).get().reverse()).each(function (idx, value) {
+                $(parents.add(element).get().reverse()).each(function (idx, value) {
                     widget = matchWidget(value);
                     if (widget && !(new RegExp(widget.selector + "\\s" + (widget.activeSelector ? "|" + widget.activeSelector + "\\s" : "")).test(output))) {
                         output = widget.selector + " " + output;
                     }
                 });
-                output = output.substr(0, output.length-1);
+
+                return output.substr(0, output.length-1);
+            },
+            update: function(element, styles, selector) {
+                element = $(element);
+                var that = this, style = {},
+                    output = selector || that.getElementSelector(element);
 
                 style[output] = extend(this.object[output], styles);
                 that.store(output, style[output]);
@@ -431,6 +440,28 @@
                     } catch(err) {}
                 }
                 return {};
+            },
+            reset: function () {
+                var that = this, key, style;
+
+                that.object = {};
+
+                style = $("<style scoped>\n" + that.getCSS() + "</style>").insertAfter(that.styleElement);
+
+                that.styleElement.remove();
+                that.styleElement = style;
+
+                if (that.options.restoreFromStorage) {
+                    if (localStorage && localStorage.length) {
+                        for (var i = 0; i < localStorage.length; i++){
+                            key = localStorage.key(i);
+                            if (key.indexOf(".km-" + that.options.platform) !== -1) {
+                                localStorage.removeItem(key);
+                                i--;
+                            }
+                        }
+                    }
+                }
             }
         });
 
@@ -449,6 +480,7 @@
                     gradient = element.css("background-image"),
                     doc = document.documentElement;
 
+                dragging = true;
                 element.data("property", "background-image");
                 element.data("background-image", tools.gradient.set(gradient).get());
 
@@ -471,6 +503,7 @@
                     pattern = element.css("background-image"),
                     doc = document.documentElement;
 
+                dragging = true;
                 element.data("property", "background-image");
                 element.data("background-image", pattern);
 
@@ -655,12 +688,18 @@
             $(".pattern-holder .drop").kendoDraggable(events.pattern);
 
             function applyHint(element, target, pkg) {
-                var engine = target.parents(".device").data("kendoStyleEngine");
-
-                defaultCSS = { cursor: "default" };
-                each(pkg, function () { defaultCSS[this] = ""; });
+                var engine = target.parents(".device").data("kendoStyleEngine"), color;
 
                 css = kendo.getComputedStyles(element, pkg);
+
+                if (css["background-color"]) {
+                    color = css["background-color"];
+                    delete css["background-color"];
+                    css[whitelisted] = color;
+                }
+
+                defaultCSS = { cursor: "default" };
+                each(css, function (idx) { defaultCSS[idx] = ""; });
 
                 if (css["background-image"]) {
                     extend(css, engine.mixBackground(css, target, true));
@@ -672,10 +711,12 @@
                     .children("div")
                     .last()
                     .children()
-                    .text(pkg[0]);
+                    .text(whitelisted);
             }
 
             $(document.body).on("DOMMouseScroll mousewheel", "*", function (e) {
+                if (!dragging) { return; }
+
                 var widget = matchWidget(e.currentTarget);
 
                 if (widget) {
@@ -694,7 +735,7 @@
 
                         target.css(defaultCSS);
 
-                        applyHint(draggedElement, target, packages[widget.whitelist[newIndex]]);
+                        applyHint(draggedElement[0], target, packages[widget.whitelist[newIndex]]);
                     }
                 }
             });
@@ -755,33 +796,24 @@
                         return;
                     }
 
-                    var color = $(e.draggable.element).css($(e.draggable.element).data("property")),
-                        target = $(e.dropTarget),
-                        engine = target.parents(".device").data("kendoStyleEngine");
+                    var target = $(e.dropTarget),
+                        engines = $("#applyall")[0].checked ?
+                            $.map(devices, function (value) { return $("#" + value + "Device").data("kendoStyleEngine"); }) :
+                            [ target.parents(".device").data("kendoStyleEngine") ],
+                        targetSelector = engines[0].getElementSelector(target, true);
 
                     target.css(defaultCSS);
                     widgetTarget.hide();
 
-                    if (CtrlDown) {
-                        var offset = target.offset(),
-                            structure = buildMenu(target);
+                    engines.forEach(function (value) {
+                        var currentTarget = value.element.find(targetSelector);
 
-                        contextMenu.element.empty();
-                        contextMenu.append(structure);
-                        contextMenu.one("select", function (e) {
-                            var style = {}, dataItem = getMenuDataItem(e.item, structure);
-                            style[dataItem.text] = color;
-
-                            engine.update(target.closest(dataItem.value), style);
-                        });
-                        contextMenu.show(offset.left + e.offsetX, offset.top + e.offsetY);
-                    } else {
                         if (css["background-image"]) {
-                            extend(css, engine.mixBackground(css, target, true));
+                            extend(css, value.mixBackground(css, currentTarget, true));
                         }
 
-                        engine.update(target, css);
-                    }
+                        value.update(currentTarget, css, ".km-" + value.options.platform + " " + targetSelector);
+                    });
                 }
             });
 
@@ -791,19 +823,6 @@
                 keydown: function (e) { CtrlDown = e.which == 17; },
                 keyup: function (e) { e.which == 17 && (CtrlDown = false); }
             });
-
-    //        var allProps = getPropertySelector();
-    //        $(document.body).on({
-    //            mouseover: function (e) {
-    //                $(".utility-active").removeClass("utility-active");
-    //                $(e.currentTarget).addClass("utility-active");
-    //                e.stopImmediatePropagation();
-    //            },
-    //            mouseout: function (e) {
-    //                $(".utility-active").removeClass("utility-active");
-    //                e.stopImmediatePropagation();
-    //            }
-    //        }, allProps);
 
             $(".device").on({
                 click: function (e) {
@@ -817,13 +836,6 @@
                 }
             }, ".utility-active");
 
-//            $(".km-tabstrip").kendoHSLPicker({
-//                change: function (e) {
-//                    this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.color.get() });
-//                }
-//            });
-//            $(".gradient").kendoGradientPicker();
-//            $(".km-navbar").kendoGradientPicker();
         }, 200);
     };
 
@@ -916,6 +928,20 @@
         }
     });
 
+    $(".optionsSheet").click(function () {
+        $(".optionsSheet .items")
+            .css("z-index", "");
+
+        $(".optionsSheet .cover")
+            .one(kendo.support.transitions.event, function () {
+                if ($(this).parent().hasClass("k-state-opened")) {
+                    $(".optionsSheet .items").css("z-index", 1);
+                }
+            }).css("overflow");
+
+        $(this).toggleClass("k-state-opened");
+    });
+
     var importWindow = $("#importWindow").kendoWindow({
         width: "400px",
         height: "400px",
@@ -933,6 +959,14 @@
         visible: false,
         modal: true
     }).data("kendoWindow");
+
+    $("#resetStyles").click(function () {
+        each(devices, function () {
+            var that = this.toString();
+
+            $("#" + that + "Device").data("kendoStyleEngine").reset();
+        });
+    });
 
     $("#importStyles").click(function () {
         if (sessionStorage && sessionStorage.length) {
