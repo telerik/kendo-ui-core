@@ -422,7 +422,10 @@
         },
 
         _supportsMultiple: function() {
-            return !kendo.support.browser.opera;
+            var windows = this._userAgent().indexOf("Windows") > -1;
+
+            return !kendo.support.browser.opera &&
+                   !(kendo.support.browser.safari && windows);
         },
 
         _supportsDrop: function() {
