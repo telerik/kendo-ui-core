@@ -73,6 +73,7 @@ var bundles = [{
     vsdoc: /.+md/,
     licenses: [commercialLicense],
     eula: "complete-eula",
+    readme: "README.KendoUI.Complete.txt"
 }, {
     name: "kendoui.web",
     suites: ["web"],
@@ -103,6 +104,7 @@ var bundles = [{
     licenses: [trialLicense],
     wrappers: ["aspnetmvc"],
     eula: "trial-eula",
+    readme: "README.KendoUI.Trial.txt"
 },{
     name: "kendoui.aspnetmvc.hotfix",
     suites: ["web", "dataviz", "mobile"],
@@ -250,6 +252,15 @@ function deployLicenses(root, bundle) {
         copyDir(
             THIRD_PARTY_LEGAL_ROOT,
             deployThirdPartyRoot
+        );
+    }
+}
+
+function deployReadme(root, bundle) {
+    if (bundle.readme) {
+        kendoBuild.copyFileSync(
+            path.join("resources", bundle.readme),
+            path.join(root, "README")
         );
     }
 }
@@ -480,6 +491,8 @@ function buildBundle(bundle, version, success, licenseBuilt) {
 
             console.log("Deploying licenses");
             deployLicenses(root, bundle);
+
+            deployReadme(root, bundle);
 
             if (!bundle.skipExamples) {
                 console.log("Deploying examples");
