@@ -3125,7 +3125,7 @@
                 x, y;
 
             x = box.x2 + TOOLTIP_OFFSET;
-            y = box.y1;
+            y = box.y1 + TOOLTIP_OFFSET;
 
             return new Point2D(x, y);
         },

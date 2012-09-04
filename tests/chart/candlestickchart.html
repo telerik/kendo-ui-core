@@ -350,7 +350,7 @@
                 test("tooltipAnchor is at top right of point", function() {
                     var anchor = point.tooltipAnchor(10, 10);
                     same([anchor.x, anchor.y],
-                         [point.box.x2 + TOOLTIP_OFFSET, point.box.y1])
+                         [point.box.x2 + TOOLTIP_OFFSET, point.box.y1 + TOOLTIP_OFFSET], TOLERANCE)
                 });
 
             })();
