@@ -231,11 +231,11 @@
             };
         },
 
-        containsPoint: function(x, y) {
+        containsPoint: function(point) {
             var box = this;
 
-            return x >= box.x1 && x <= box.x2 &&
-                   y >= box.y1 && y <= box.y2;
+            return point.x >= box.x1 && point.x <= box.x2 &&
+                   point.y >= box.y1 && point.y <= box.y2;
         },
 
         points: function() {
@@ -1462,8 +1462,14 @@
                 p2,
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
-            a = defined(a) ? a : options.axisCrossingValue;
-            b = defined(b) ? b : options.axisCrossingValue;
+            if (!defined(a)) {
+                a = b || 0;
+            }
+
+            if (!defined(b)) {
+                b = a || 0;
+            }
+
             a = math.max(math.min(a, options.max), options.min);
             b = math.max(math.min(b, options.max), options.min);
 

@@ -774,6 +774,28 @@
                     equals(categoryAxis.getCategory(new Point2D(334, 0)), "Bar");
                 });
 
+                test("returns single category for leftmost point", function() {
+                    categoryAxis = new dataviz.CategoryAxis({
+                        categories: ["Foo"],
+                        vertical: false,
+                        labels: { visible: false }
+                    });
+
+                    categoryAxis.reflow(chartBox);
+                    equals(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
+                });
+
+                test("returns single category for righttmost point", function() {
+                    categoryAxis = new dataviz.CategoryAxis({
+                        categories: ["Foo"],
+                        vertical: false,
+                        labels: { visible: false }
+                    });
+
+                    categoryAxis.reflow(chartBox);
+                    equals(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
+                });
+
                 // ------------------------------------------------------------
                 module("CategoryAxis / getCategory / Horizontal / Reverse", {
                     setup: function() {
@@ -831,6 +853,28 @@
 
                 test("returns category for middle point", function() {
                     equals(categoryAxis.getCategory(new Point2D(0, 350)), "Bar");
+                });
+
+                test("returns single category for topmost point", function() {
+                    categoryAxis = new dataviz.CategoryAxis({
+                        categories: ["Foo"],
+                        vertical: true,
+                        labels: { visible: false }
+                    });
+
+                    categoryAxis.reflow(chartBox);
+                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
+                });
+
+                test("returns single category for bottommost point", function() {
+                    categoryAxis = new dataviz.CategoryAxis({
+                        categories: ["Foo"],
+                        vertical: true,
+                        labels: { visible: false }
+                    });
+
+                    categoryAxis.reflow(chartBox);
+                    equals(categoryAxis.getCategory(new Point2D(0, 350)), "Foo");
                 });
 
                 // ------------------------------------------------------------

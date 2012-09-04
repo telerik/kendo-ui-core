@@ -44,20 +44,27 @@
 
             function stubPlotArea(getCategorySlot, getValueSlot, options) {
                 return new function() {
-                    this.categoryAxis = {
+                    this.categoryAxis = this.primaryCategoryAxis = {
                         getSlot: getCategorySlot,
+                        options: {
+                            axisCrossingValue: 0,
+                            categories: options.categoryAxis.categories
+                        }
+                    };
+
+                    this.valueAxis = {
+                        getSlot: getValueSlot,
                         options: {
                             axisCrossingValue: 0
                         }
                     };
 
-                    this.namedValueAxes = {
-                        primary: {
-                            getSlot: getValueSlot,
-                            options: {
-                                axisCrossingValue: 0
-                            }
-                        }
+                    this.namedCategoryAxes = { };
+                    this.namedValueAxes = {};
+
+                    this.seriesCategoryAxis = function(series) {
+                        return series.categoryAxis ?
+                            this.namedCategoryAxes[series.categoryAxis] : this.primaryCategoryAxis;
                     };
 
                     this.options = options;
@@ -105,11 +112,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.valueAxisRanges.primary.min, positiveSeries.data[0]);
+                    same(series.valueAxisRanges[undefined].min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.valueAxisRanges.primary.max, positiveSeries.data[1]);
+                    same(series.valueAxisRanges[undefined].max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -172,12 +179,21 @@
                 });
 
                 test("sets bar aboveAxis for reversed value axis", function() {
-                    plotArea.namedValueAxes.primary.options.reverse = true;
+                    plotArea.valueAxis.options.reverse = true;
 
                     setupBarChart(plotArea, { series: [ positiveSeries ] });
                     equal(series.points[0].options.aboveAxis, false);
 
-                    plotArea.namedValueAxes.primary.options.reverse = false;
+                    plotArea.valueAxis.options.reverse = false;
+                });
+
+                test("Throws error when unable to locate value axis", function() {
+                    raises(function() {
+                            setupBarChart(plotArea, {
+                                series: [{ axis: "b", data: [1] }]
+                            });
+                        },
+                        /Unable to locate value axis with name b/);
                 });
 
                 // ------------------------------------------------------------
@@ -188,11 +204,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.valueAxisRanges.primary.min, negativeSeries.data[1]);
+                    same(series.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.valueAxisRanges.primary.max, negativeSeries.data[0]);
+                    same(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("bar tops are aligned to category axis", function() {
@@ -216,33 +232,33 @@
                 });
 
                 test("sets bar aboveAxis for reversed value axis", function() {
-                    plotArea.namedValueAxes.primary.options.reverse = true;
+                    plotArea.valueAxis.options.reverse = true;
 
                     setupBarChart(plotArea, { series: [ negativeSeries ] });
                     equal(series.points[0].options.aboveAxis, true);
 
-                    plotArea.namedValueAxes.primary.options.reverse = false;
+                    plotArea.valueAxis.options.reverse = false;
                 });
 
                 // ------------------------------------------------------------
                 module("Bar Chart / Multiple Series", {
                     setup: function() {
-                        plotArea.namedValueAxes.secondary = plotArea.namedValueAxes.primary;
+                        plotArea.namedValueAxes.secondary = plotArea.valueAxis;
 
                         setupBarChart(plotArea, {
                             series: [
-                                $.extend({ axis: "primary" }, negativeSeries ),
+                                $.extend({ }, negativeSeries ),
                                 $.extend({ axis: "secondary" }, positiveSeries )
                             ] });
                         }
                 });
 
                 test("Reports minimum value for primary axis", function() {
-                    same(series.valueAxisRanges.primary.min, negativeSeries.data[1]);
+                    same(series.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum value for primary axis", function() {
-                    same(series.valueAxisRanges.primary.max, negativeSeries.data[0]);
+                    same(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("Reports minimum value for secondary axis", function() {
@@ -258,6 +274,51 @@
                 });
 
                 // ------------------------------------------------------------
+                var chart;
+                module("Bar Chart / Multiple Category Axes", {
+                    setup: function() {
+                        chart = createChart({
+                            series: [{
+                                type: "bar",
+                                data: [1],
+                                categoryAxis: "secondary"
+                            }],
+                            valueAxis: {
+                                axisCrossingValue: [10, 0]
+                            },
+                            categoryAxis: [{
+                                categories: ["A"]
+                            }, {
+                                name: "secondary",
+                                categories: ["B"]
+                            }]
+                        });
+
+                        series = chart._model._plotArea.charts[0];
+                    }
+                });
+
+                test("sets category axis to first series category axis", function() {
+                    equals(series.categoryAxis.options.name, "secondary");
+                });
+
+                test("bar is marked as above axis with respect to its category axis", function() {
+                    equals(series.points[0].options.aboveAxis, true);
+                });
+
+                test("bar is rendered from its category axis", function() {
+                    equals(series.points[0].box.x1, series.categoryAxis.lineBox().x1);
+                });
+
+                test("axis crossing value is assumed to be 0", function() {
+                    delete chart.options.valueAxis.axisCrossingValue;
+                    chart.refresh();
+                    series = chart._model._plotArea.charts[0];
+
+                    equals(series.points[0].options.aboveAxis, true);
+                });
+
+                // ------------------------------------------------------------
                 module("Bar Chart / Mismatched series", {
                     setup: function() {
                         setupBarChart(plotArea, {
@@ -269,11 +330,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.valueAxisRanges.primary.min, 1);
+                    same(series.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.valueAxisRanges.primary.max, 3);
+                    same(series.valueAxisRanges[undefined].max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -338,9 +399,9 @@
                 var oldGetSlot;
                 module("Bar Chart / Stack / Positive Values", {
                     setup: function() {
-                        oldGetSlot = plotArea.namedValueAxes.primary.getSlot;
+                        oldGetSlot = plotArea.valueAxis.getSlot;
 
-                        plotArea.namedValueAxes.primary.getSlot = function(a, b) {
+                        plotArea.valueAxis.getSlot = function(a, b) {
                             var a = typeof a === "undefined" ? 0 : a,
                                 b = typeof b === "undefined" ? a : b,
                                 top = VALUE_AXIS_MAX - Math.max(a, b),
@@ -357,16 +418,16 @@
                         );
                     },
                     teardown: function() {
-                        plotArea.namedValueAxes.primary.getSlot = oldGetSlot;
+                        plotArea.valueAxis.getSlot = oldGetSlot;
                     }
                 });
 
                 test("reports 0 as minumum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.min, 0);
+                    equal(series.valueAxisRanges[undefined].min, 0);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.max, 4);
+                    equal(series.valueAxisRanges[undefined].max, 4);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -413,11 +474,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.min, -4);
+                    equal(series.valueAxisRanges[undefined].min, -4);
                 });
 
                 test("reports 0 as maximum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.max, 0);
+                    equal(series.valueAxisRanges[undefined].max, 0);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -472,9 +533,9 @@
                 var oldGetSlot;
                 module("Bar Chart / Stack / Mixed Values", {
                     setup: function() {
-                        oldGetSlot = plotArea.namedValueAxes.primary.getSlot;
+                        oldGetSlot = plotArea.valueAxis.getSlot;
 
-                        plotArea.namedValueAxes.primary.getSlot = function(a, b) {
+                        plotArea.valueAxis.getSlot = function(a, b) {
                             var a = typeof a === "undefined" ? 0 : a,
                                 b = typeof b === "undefined" ? a : b,
                                 top = VALUE_AXIS_MAX - Math.max(a, b),
@@ -494,16 +555,16 @@
                         });
                     },
                     teardown: function() {
-                        plotArea.namedValueAxes.primary.getSlot = oldGetSlot;
+                        plotArea.valueAxis.getSlot = oldGetSlot;
                     }
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.min, -1);
+                    equal(series.valueAxisRanges[undefined].min, -1);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.max, 1);
+                    equal(series.valueAxisRanges[undefined].max, 1);
                 });
 
                 test("bars have set height according to value", function() {
@@ -573,12 +634,12 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Mixed Series", {
                     setup: function() {
-                        plotArea.namedValueAxes.a = plotArea.namedValueAxes.primary;
-                        plotArea.namedValueAxes.b = plotArea.namedValueAxes.primary;
+                        plotArea.namedValueAxes.a = plotArea.valueAxis;
+                        plotArea.namedValueAxes.b = plotArea.valueAxis;
 
                         setupBarChart(plotArea, {
                             series: [
-                                // Both axes should be on same axis.
+                                // Both series should be on the same axis.
                                 // This rule is intentionally broken for the tests.
                                 $.extend({ axis: "a" }, positiveSeries),
                                 $.extend({ axis: "b" }, negativeSeries)
@@ -620,11 +681,11 @@
                 });
 
                 test("reports 0 as minumum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.min, 0);
+                    equal(series.valueAxisRanges[undefined].min, 0);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.max, 4);
+                    equal(series.valueAxisRanges[undefined].max, 4);
                 });
 
                 test("bars in first category, first group are stacked", function() {
@@ -660,11 +721,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.min, -4);
+                    equal(series.valueAxisRanges[undefined].min, -4);
                 });
 
                 test("reports 0 as maximum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.max, 0);
+                    equal(series.valueAxisRanges[undefined].max, 0);
                 });
 
                 test("bars in first category, first group are stacked", function() {
@@ -700,11 +761,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.min, -2);
+                    equal(series.valueAxisRanges[undefined].min, -2);
                 });
 
                 test("reports 0 as maximum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.max, 2);
+                    equal(series.valueAxisRanges[undefined].max, 2);
                 });
 
                 test("bars in first category, first group are stacked", function() {
@@ -1280,11 +1341,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.valueAxisRanges.primary.min, negativeSeries.data[1]);
+                    same(series.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.valueAxisRanges.primary.max, negativeSeries.data[0]);
+                    same(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("bar sides are aligned to category axis", function() {
@@ -1350,11 +1411,11 @@
                 });
 
                 test("reports 0 as minumum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.min, 0);
+                    equal(series.valueAxisRanges[undefined].min, 0);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.max, 4);
+                    equal(series.valueAxisRanges[undefined].max, 4);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -1385,11 +1446,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.min, -4);
+                    equal(series.valueAxisRanges[undefined].min, -4);
                 });
 
                 test("reports 0 as maximum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.max, 0);
+                    equal(series.valueAxisRanges[undefined].max, 0);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -1421,11 +1482,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.min, -2);
+                    equal(series.valueAxisRanges[undefined].min, -2);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.valueAxisRanges.primary.max, 2);
+                    equal(series.valueAxisRanges[undefined].max, 2);
                 });
 
                 test("bars have set width according to value", function() {

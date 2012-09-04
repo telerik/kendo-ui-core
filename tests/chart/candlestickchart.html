@@ -42,16 +42,27 @@
 
             function stubPlotArea(getCategorySlot, getValueSlot, options) {
                 return new function() {
-                    this.categoryAxis = {
+                    this.categoryAxis = this.primaryCategoryAxis = {
                         getSlot: getCategorySlot,
-                        options: {}
+                        options: {
+                            axisCrossingValue: 0,
+                            categories: options.categoryAxis.categories
+                        }
                     };
 
-                    this.namedValueAxes = {
-                        primary: {
-                            getSlot: getValueSlot,
-                            options: {}
+                    this.valueAxis = {
+                        getSlot: getValueSlot,
+                        options: {
+                            axisCrossingValue: 0
                         }
+                    };
+
+                    this.namedCategoryAxes = { };
+                    this.namedValueAxes = {};
+
+                    this.seriesCategoryAxis = function(series) {
+                        return series.categoryAxis ?
+                            this.namedCategoryAxes[series.categoryAxis] : this.primaryCategoryAxis;
                     };
 
                     this.options = options;
@@ -94,11 +105,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(candleStickChart.valueAxisRanges.primary.min, series.data[0][2]);
+                    same(candleStickChart.valueAxisRanges[undefined].min, series.data[0][2]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(candleStickChart.valueAxisRanges.primary.max, series.data[0][1]);
+                    same(candleStickChart.valueAxisRanges[undefined].max, series.data[0][1]);
                 });
 
                 test("Reports number of categories", function() {

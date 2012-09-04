@@ -100,7 +100,6 @@
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
         PLOT_AREA_CLICK = "plotAreaClick",
-        PRIMARY = "primary",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
         ROUNDED_GLASS = "roundedGlass",
@@ -434,7 +433,7 @@
                 owner,
                 seriesPoint;
 
-            if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
+            if (chart._plotArea.box.containsPoint(coords)) {
                 if (point && point.series && (point.series.type === LINE || point.series.type === AREA)) {
                     owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
@@ -1028,7 +1027,8 @@
                 lineBox = axis.lineBox(),
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
-                intervals = math.max(1, options.categories.length - 1),
+                totalCategories = options.categories.length - 1,
+                intervals = math.max(1, totalCategories),
                 offset = (reverse ? -1 : 1) * (point[valueAxis] - lineStart),
                 step = intervals / lineSize,
                 categoriesOffset = round(offset * step),
@@ -1042,6 +1042,7 @@
                 intervals - categoriesOffset:
                 categoriesOffset;
 
+            categoryIx = math.min(categoryIx, totalCategories);
             return options.categories[categoryIx];
         },
 
@@ -1636,6 +1637,7 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
+            chart.categoryAxis = plotArea.seriesCategoryAxis(options.series[0]);
 
             // Value axis ranges grouped by axis name, e.g.:
             // primary: { min: 0, max: 1 }
@@ -1693,7 +1695,7 @@
 
         updateRange: function(value, categoryIx, series) {
             var chart = this,
-                axisName = series.axis || PRIMARY,
+                axisName = series.axis,
                 axisRange = chart.valueAxisRanges[axisName];
 
             if (defined(value)) {
@@ -1706,18 +1708,27 @@
         },
 
         seriesValueAxis: function(series) {
-            return this.plotArea.namedValueAxes[(series || {}).axis || PRIMARY];
+            var plotArea = this.plotArea,
+                axisName = series.axis,
+                axis = axisName ?
+                    plotArea.namedValueAxes[axisName] :
+                    plotArea.valueAxis;
+
+            if (!axis) {
+                throw new Error("Unable to locate value axis with name " + axisName);
+            }
+
+            return axis;
         },
 
         reflow: function(targetBox) {
             var chart = this,
                 options = chart.options,
                 invertAxes = options.invertAxes,
-                plotArea = chart.plotArea,
                 pointIx = 0,
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
-                categoryAxis = plotArea.categoryAxis,
+                categoryAxis = chart.categoryAxis,
                 valueAxis,
                 axisCrossingValue,
                 point,
@@ -1727,7 +1738,7 @@
                 var value = data.value;
 
                 valueAxis = chart.seriesValueAxis(currentSeries);
-                axisCrossingValue = valueAxis.options.axisCrossingValue;
+                axisCrossingValue = chart.categoryAxisCrossingValue(valueAxis);
                 point = chartPoints[pointIx++];
 
                 stacks = (chart._stacks || [])[categoryIx];
@@ -1741,7 +1752,7 @@
                 }
 
                 var categorySlot = chart.categorySlot(categoryAxis, categoryIx, valueAxis),
-                    valueSlot = chart.valueSlot(valueAxis, value),
+                    valueSlot = chart.valueSlot(valueAxis, value, axisCrossingValue),
                     slotX = invertAxes ? valueSlot : categorySlot,
                     slotY = invertAxes ? categorySlot : valueSlot,
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
@@ -1763,10 +1774,17 @@
             chart.box = targetBox;
         },
 
+        categoryAxisCrossingValue: function(valueAxis) {
+            var categoryAxis = this.categoryAxis,
+                crossingValues = [].concat(valueAxis.options.axisCrossingValue);
+
+            return crossingValues[categoryAxis.axisIndex || 0] || 0;
+        },
+
         reflowCategories: function() { },
 
-        valueSlot: function(valueAxis, value) {
-            return valueAxis.getSlot(value);
+        valueSlot: function(valueAxis, value, axisCrossingValue) {
+            return valueAxis.getSlot(value, axisCrossingValue);
         },
 
         categorySlot: function(categoryAxis, categoryIx) {
@@ -1777,7 +1795,7 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
-                categories = chart.plotArea.options.categoryAxis.categories || [],
+                categories = chart.categoryAxis.options.categories || [],
                 count = categoriesCount(series),
                 bindableFields = chart.bindableFields(),
                 categoryIx,
@@ -1943,7 +1961,7 @@
                 categoryTotals;
 
             if (isStacked) {
-                axisName = chart.options.series[0].axis || PRIMARY;
+                axisName = chart.options.series[0].axis;
                 categoryTotals = chart.categoryTotals();
                 chart.valueAxisRanges[axisName] = {
                     min: sparseArrayMin(categoryTotals.negative.concat(0)),
@@ -1962,8 +1980,8 @@
             );
         },
 
-        valueSlot: function(valueAxis, value) {
-            return valueAxis.getSlot(value, this.options.isStacked ? 0 : undefined);
+        valueSlot: function(valueAxis, value, axisCrossingValue) {
+            return valueAxis.getSlot(value, this.options.isStacked ? 0 : axisCrossingValue);
         },
 
         categorySlot: function(categoryAxis, categoryIx, valueAxis) {
@@ -2551,7 +2569,7 @@
                 axisName;
 
             if (isStacked) {
-                axisName = chart.options.series[0].axis || PRIMARY;
+                axisName = chart.options.series[0].axis;
                 chart.valueAxisRanges[axisName] = chart._stackAxisRange;
             }
         },
@@ -2719,8 +2737,8 @@
             var chart = this,
                 x = value.x,
                 y = value.y,
-                xAxisName = series.xAxis || PRIMARY,
-                yAxisName = series.yAxis || PRIMARY,
+                xAxisName = series.xAxis,
+                yAxisName = series.yAxis,
                 xAxisRange = chart.xAxisRanges[xAxisName],
                 yAxisRange = chart.yAxisRanges[yAxisName];
 
@@ -2769,12 +2787,26 @@
 
         seriesAxes: function(series) {
             var plotArea = this.plotArea,
-                xAxis = series.xAxis || PRIMARY,
-                yAxis = series.yAxis || PRIMARY;
+                xAxisName = series.xAxis,
+                xAxis = xAxisName ?
+                        plotArea.namedXAxes[xAxisName] :
+                        plotArea.axisX,
+                yAxisName = series.yAxis,
+                yAxis = yAxisName ?
+                        plotArea.namedYAxes[yAxisName] :
+                        plotArea.axisY;
+
+            if (!xAxis) {
+                throw new Error("Unable to locate X axis with name " + xAxisName);
+            }
+
+            if (!yAxis) {
+                throw new Error("Unable to locate Y axis with name " + yAxisName);
+            }
 
             return {
-                x: plotArea.namedXAxes[xAxis],
-                y: plotArea.namedYAxes[yAxis]
+                x: xAxis,
+                y: yAxis
             };
         },
 
@@ -3199,7 +3231,7 @@
 
         updateRange: function(value, categoryIx, series) {
             var chart = this,
-                axisName = series.axis || PRIMARY,
+                axisName = series.axis,
                 values = [value.low, value.open, value.close, value.high];
 
             if (defined(value)) {
@@ -4702,20 +4734,36 @@
             var plotArea = this,
                 axes = plotArea.axes,
                 gridLines = [],
+                processedPanes = {},
                 i,
                 j,
                 axis,
-                altAxis;
+                axisPane,
+                altAxis,
+                altAxisPane;
 
             for (i = 0; i < axes.length; i++) {
                 axis = axes[i];
+                axisPane = axis.pane.options.name;
+
                 for (j = i; j < axes.length; j++) {
                     altAxis = axes[j];
+                    altAxisPane = altAxis.pane.options.name;
 
-                    if (axis.options.vertical !== altAxis.options.vertical) {
-                        append(gridLines, plotArea.renderGridLines(view, axis, altAxis));
-                        append(gridLines, plotArea.renderGridLines(view, altAxis, axis));
+                    if (axis.options.vertical === altAxis.options.vertical) {
+                        continue;
                     }
+
+                    if (processedPanes[axisPane] && processedPanes[altAxisPane]) {
+                        // Only render one set of gridlines per pane
+                        continue;
+                    }
+
+                    processedPanes[axisPane] = true;
+                    processedPanes[altAxisPane] = true;
+
+                    append(gridLines, plotArea.renderGridLines(view, axis, altAxis));
+                    append(gridLines, plotArea.renderGridLines(view, altAxis, axis));
                 }
             }
 
@@ -4791,11 +4839,10 @@
             var plotArea = this,
                 axisOptions = deepExtend({}, plotArea.options, options);
 
+            plotArea.namedCategoryAxes = {};
             plotArea.namedValueAxes = {};
             plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
 
-            // TODO: Should be determined per-pane.
-            // Refactor when implementing multiple category axis support.
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
                     series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
@@ -4815,14 +4862,9 @@
         render: function() {
             var plotArea = this;
 
-            plotArea.createCategoryAxis();
-
-            if (equalsIgnoreCase(plotArea.categoryAxis.options.type, DATE)) {
-                plotArea.aggregateDateSeries();
-            }
-
+            plotArea.createCategoryAxes();
+            plotArea.aggregateDateSeries();
             plotArea.createCharts();
-
             plotArea.createValueAxes();
         },
 
@@ -4892,9 +4934,9 @@
             var plotArea = this,
                 series = plotArea.series,
                 processedSeries = [],
-                categoryAxis = plotArea.categoryAxis,
-                categories = categoryAxis.options.categories,
-                categoryMap = categoryAxis.categoryMap,
+                categoryAxis,
+                categories,
+                categoryMap,
                 groupIx,
                 categoryIndicies,
                 seriesIx,
@@ -4911,28 +4953,34 @@
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 seriesClone = deepExtend({}, currentSeries);
+                categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
 
-                srcData = seriesClone.data;
+                if (equalsIgnoreCase(categoryAxis.options.type, DATE)) {
+                    categories = categoryAxis.options.categories;
+                    categoryMap = categoryAxis.categoryMap;
 
-                seriesClone.data = data = [];
-                for (groupIx = 0; groupIx < categories.length; groupIx++) {
-                    categoryIndicies = categoryMap[groupIx];
-                    srcValues = [];
+                    srcData = seriesClone.data;
+                    seriesClone.data = data = [];
 
-                    for (i = 0; i < categoryIndicies.length; i++) {
-                        categoryIx = categoryIndicies[i];
-                        pointData = bindPoint(currentSeries, categoryIx);
-                        value = pointData.value;
+                    for (groupIx = 0; groupIx < categories.length; groupIx++) {
+                        categoryIndicies = categoryMap[groupIx];
+                        srcValues = [];
 
-                        if (defined(value)) {
-                            srcValues.push(pointData.value);
+                        for (i = 0; i < categoryIndicies.length; i++) {
+                            categoryIx = categoryIndicies[i];
+                            pointData = bindPoint(currentSeries, categoryIx);
+                            value = pointData.value;
+
+                            if (defined(value)) {
+                                srcValues.push(pointData.value);
+                            }
                         }
-                    }
 
-                    if (srcValues.length > 1) {
-                        data[groupIx] = calculateAggregates(srcValues, currentSeries);
-                    } else {
-                        data[groupIx] = srcData[categoryIndicies[0]];
+                        if (srcValues.length > 1) {
+                            data[groupIx] = calculateAggregates(srcValues, currentSeries);
+                        } else {
+                            data[groupIx] = srcData[categoryIndicies[0]];
+                        }
                     }
                 }
 
@@ -4944,12 +4992,14 @@
 
         appendChart: function(chart) {
             var plotArea = this,
-                options = plotArea.options,
                 series = chart.options.series,
-                categories = options.categoryAxis.categories,
+                categoryAxis = plotArea.seriesCategoryAxis(series[0]),
+                categories = categoryAxis.options.categories,
                 categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
 
-            append(categories, new Array(categoriesToAdd));
+            while (categoriesToAdd--) {
+                categories.push("");
+            }
 
             plotArea.valueAxisRangeTracker.update(chart.valueAxisRanges);
 
@@ -4962,9 +5012,23 @@
                 axisName = series.axis,
                 axisOptions = [].concat(options.valueAxis),
                 axis = $.grep(axisOptions, function(a) { return a.name === axisName; })[0],
-                paneName = axis.pane || "default";
+                paneName = (axis || {}).pane || "default";
 
             return paneName;
+        },
+
+        seriesCategoryAxis: function(series) {
+            var plotArea = this,
+                axisName = series.categoryAxis,
+                axis = axisName ?
+                    plotArea.namedCategoryAxes[axisName] :
+                    plotArea.categoryAxis;
+
+            if (!axis) {
+                throw new Error("Unable to locate category axis with name " + axisName);
+            }
+
+            return axis;
         },
 
         createBarChart: function(series) {
@@ -5049,76 +5113,106 @@
             plotArea.appendChart(chart);
         },
 
-        createCategoryAxis: function() {
+        createCategoryAxes: function() {
             var plotArea = this,
-                options = plotArea.options,
                 invertAxes = plotArea.invertAxes,
-                categoryAxisOptions = options.categoryAxis,
-                categories = categoryAxisOptions.categories,
-                categoriesCount = categories.length,
-                axisType  = categoryAxisOptions.type || "",
-                dateCategory = categories[0] instanceof Date,
-                categoryAxis;
+                definitions = [].concat(plotArea.options.categoryAxis),
+                options,
+                name,
+                categories,
+                type,
+                dateCategory,
+                categoryAxis,
+                axes = [],
+                primaryAxis,
+                i;
 
-            if (equalsIgnoreCase(axisType, DATE) || (!axisType && dateCategory)) {
-                categoryAxis = new DateCategoryAxis(deepExtend({
-                        vertical: invertAxes
-                    },
-                    categoryAxisOptions)
-                );
-            } else {
-                categoryAxis = new CategoryAxis(deepExtend({
-                        vertical: invertAxes,
-                        axisCrossingValue: invertAxes ? categoriesCount : 0
-                    },
-                    categoryAxisOptions)
-                );
+            for (i = 0; i < definitions.length; i++) {
+                options = definitions[i];
+                categories = options.categories || [];
+                type  = options.type || "";
+                options = deepExtend({
+                    vertical: invertAxes,
+                    axisCrossingValue: invertAxes ? categories.length : 0
+                }, options);
+
+                name = options.name;
+                dateCategory = categories[0] instanceof Date;
+
+                if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
+                    categoryAxis = new DateCategoryAxis(options);
+                } else {
+                    categoryAxis = new CategoryAxis(options);
+                }
+
+                if (name) {
+                    if (plotArea.namedCategoryAxes[name]) {
+                        throw new Error(
+                            "Category axis with name " + name + " is already defined"
+                        );
+                    }
+                    plotArea.namedCategoryAxes[name] = categoryAxis;
+                }
+
+                categoryAxis.axisIndex = i;
+                axes.push(categoryAxis);
+                plotArea.axes.push(categoryAxis);
+                plotArea.append(categoryAxis);
             }
+
+            primaryAxis = axes[0];
+            plotArea.categoryAxis = primaryAxis;
 
             if (invertAxes) {
-                plotArea.axisY = categoryAxis;
+                plotArea.axisY = primaryAxis;
             } else {
-                plotArea.axisX = categoryAxis;
+                plotArea.axisX = primaryAxis;
             }
-
-            plotArea.categoryAxis = categoryAxis;
-            plotArea.axes.push(categoryAxis);
-            plotArea.append(plotArea.categoryAxis);
         },
 
         createValueAxes: function() {
             var plotArea = this,
-                options = plotArea.options,
-                range,
+                definitions = [].concat(plotArea.options.valueAxis),
                 invertAxes = plotArea.invertAxes,
-                axis,
-                axisName,
-                namedValueAxes = plotArea.namedValueAxes,
-                valueAxisOptions = [].concat(options.valueAxis),
-                primaryValueAxis;
+                baseOptions = { vertical: !invertAxes },
+                axisOptions,
+                valueAxis,
+                primaryAxis,
+                axes = [],
+                range,
+                name,
+                i;
 
-            each(valueAxisOptions, function() {
-                axisName = this.name || PRIMARY;
-                range = plotArea.valueAxisRangeTracker.query(axisName);
+            for (i = 0; i < definitions.length; i++) {
+                axisOptions = definitions[i];
+                name = axisOptions.name;
+                range = plotArea.valueAxisRangeTracker.query(name);
 
-                axis = namedValueAxes[axisName] =
-                    new NumericAxis(range.min, range.max, deepExtend({
-                        vertical: !invertAxes
-                    },
-                    this)
+                valueAxis = new NumericAxis(range.min, range.max,
+                    deepExtend({}, baseOptions, axisOptions)
                 );
 
-                plotArea.axes.push(axis);
-                plotArea.append(axis);
-            });
+                if (name) {
+                    if (plotArea.namedValueAxes[name]) {
+                        throw new Error(
+                            "Value axis with name " + name + " is already defined"
+                        );
+                    }
+                    plotArea.namedValueAxes[name] = valueAxis;
+                }
 
-            primaryValueAxis = plotArea.getPrimaryValueAxis();
+                axes.push(valueAxis);
+                plotArea.axes.push(valueAxis);
+                plotArea.append(valueAxis);
+            }
 
-            // TODO: Consider removing axisX and axisY aliases
+            primaryAxis = axes[0];
+            plotArea.valueAxis = primaryAxis;
+
             if (invertAxes) {
-                plotArea.axisX = primaryValueAxis;
+                plotArea.axisX = primaryAxis;
             } else {
-                plotArea.axisY = primaryValueAxis;
+                plotArea.axisY = primaryAxis;
             }
         },
 
@@ -5126,51 +5220,54 @@
             var plotArea = this,
                 coords = chart._eventCoordinates(e),
                 point = new Point2D(coords.x, coords.y),
-                categoryAxis = plotArea.categoryAxis,
-                allAxes = plotArea.axes,
+                pane = plotArea.pointPane(point),
+                allAxes,
                 i,
-                length = allAxes.length,
                 axis,
-                currentValue,
-                category = categoryAxis.getCategory(point),
+                categories = [],
                 values = [];
 
-            for (i = 0; i < length; i++) {
+            if (!pane) {
+                return;
+            }
+
+            allAxes = pane.axes;
+            for (i = 0; i < allAxes.length; i++) {
                 axis = allAxes[i];
-                if (axis != categoryAxis) {
-                    currentValue = axis.getValue(point);
-                    if (currentValue !== null) {
-                        values.push(currentValue);
-                    }
+                if (equalsIgnoreCase(axis.options.type, CATEGORY)) {
+                    appendIfNotNull(categories, axis.getCategory(point));
+                } else {
+                    appendIfNotNull(values, axis.getValue(point));
                 }
             }
 
-            if (defined(category) && values.length > 0) {
+            if (categories.length === 0) {
+                appendIfNotNull(
+                    categories, plotArea.categoryAxis.getCategory(point)
+                );
+            }
+
+            if (categories.length > 0 && values.length > 0) {
                 chart.trigger(PLOT_AREA_CLICK, {
                     element: $(e.target),
-                    category: category,
+                    category: singleItemOrArray(categories),
                     value: singleItemOrArray(values)
                 });
             }
         },
 
-        getPrimaryValueAxis: function() {
+        pointPane: function(point) {
             var plotArea = this,
-                axes = plotArea.axes,
-                primaryValueAxis = plotArea.namedValueAxes[PRIMARY],
-                axesCount = axes.length,
-                axis, i;
+                panes = plotArea.panes,
+                currentPane,
+                i;
 
-            for (i = 0; i < axesCount && !primaryValueAxis; i++) {
-                axis = axes[i];
-
-                if (!equalsIgnoreCase(axis.options.type, CATEGORY)) {
-                    primaryValueAxis = axis;
-                    break;
+            for (i = 0; i < panes.length; i++) {
+                currentPane = panes[i];
+                if (currentPane.contentBox.containsPoint(point)) {
+                    return currentPane;
                 }
             }
-
-            return primaryValueAxis;
         }
     });
 
@@ -5200,7 +5297,7 @@
 
             for (i = 0; i < length; i++) {
                 axis = axisOptions[i];
-                axisName = axis.name || PRIMARY;
+                axisName = axis.name;
                 range = axisRanges[axisName];
                 chartRange = chartAxisRanges[axisName];
                 if (chartRange) {
@@ -5299,7 +5396,7 @@
 
         createXYAxis: function(options, vertical) {
             var plotArea = this,
-                axisName = options.name || PRIMARY,
+                axisName = options.name,
                 namedAxes = vertical ? plotArea.namedYAxes : plotArea.namedXAxes,
                 rangeTracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 range = rangeTracker.query(axisName),
@@ -5326,28 +5423,41 @@
             } else {
                 axis = new NumericAxis(range.min, range.max, axisOptions);
             }
-            namedAxes[axisName] = axis;
+
+            if (axisName) {
+                if (namedAxes[axisName]) {
+                    throw new Error(
+                        (vertical ? "Y" : "X") +
+                        " axis with name " + axisName + " is already defined"
+                    );
+                }
+                namedAxes[axisName] = axis;
+            }
+
             plotArea.append(axis);
             plotArea.axes.push(axis);
+
+            return axis;
         },
 
         createAxes: function() {
             var plotArea = this,
                 options = plotArea.options,
                 xAxesOptions = [].concat(options.xAxis),
-                yAxesOptions = [].concat(options.yAxis);
+                xAxes = [],
+                yAxesOptions = [].concat(options.yAxis),
+                yAxes = [];
 
             each(xAxesOptions, function() {
-                plotArea.createXYAxis(this, false);
+                xAxes.push(plotArea.createXYAxis(this, false));
             });
 
             each(yAxesOptions, function() {
-                plotArea.createXYAxis(this, true);
+                yAxes.push(plotArea.createXYAxis(this, true));
             });
 
-            // TODO: Remove axisX and axisY aliases
-            plotArea.axisX = plotArea.namedXAxes.primary || plotArea.namedXAxes[xAxesOptions[0].name];
-            plotArea.axisY = plotArea.namedYAxes.primary || plotArea.namedYAxes[yAxesOptions[0].name];
+            plotArea.axisX = xAxes[0];
+            plotArea.axisY = yAxes[0];
         },
 
         click: function(chart, e) {
@@ -6170,6 +6280,12 @@
         }
 
         return a === b;
+    }
+
+    function appendIfNotNull(array, element) {
+        if (element !== null) {
+            array.push(element);
+        }
     }
 
     // Exports ================================================================
