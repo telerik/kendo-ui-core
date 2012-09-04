@@ -345,9 +345,7 @@
             eventMap[MOVE_EVENTS] = function(e) { that._move(e); };
             eventMap[END_EVENTS] = function(e) { that._end(e); };
 
-            element
-                .on(START_EVENTS + NS, filter, proxy(that._start, that))
-                .on("dragstart" + NS, filter, kendo.preventDefault);
+            element.on(START_EVENTS + NS, filter, proxy(that._start, that));
 
             that.surface.on(eventMap);
 
@@ -356,7 +354,7 @@
             }
 
             if (!options.allowSelection) {
-                var args = ["mousedown" + NS + " selectstart" + NS, filter, preventTrigger];
+                var args = ["mousedown" + NS + " selectstart" + NS + " dragstart" + NS, filter, preventTrigger];
 
                 if (filter instanceof $) {
                     args.splice(2, 0, null);
