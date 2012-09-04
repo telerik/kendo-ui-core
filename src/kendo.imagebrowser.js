@@ -486,7 +486,7 @@
 
         orderBy: function(field) {
             this.dataSource.sort([
-                DEFAULTSORTORDER,
+                { field: this._getFieldName(TYPEFIELD), dir: "asc" },
                 { field: this._getFieldName(field), dir: "asc" }
             ]);
         },
@@ -562,8 +562,9 @@
                 options = that.options,
                 transport = options.transport,
                 sortOrder = extend({}, DEFAULTSORTORDER),
+                schema,
                 dataSource = {
-                    type: "imagebrowser",
+                    type: transport.type || "imagebrowser",
                     sort: sortOrder
                 };
 
@@ -576,6 +577,11 @@
                 dataSource.schema = options.schema;
                 if (isPlainObject(options.schema.model) && options.schema.model.fields) {
                     sortOrder.field = fieldName(options.schema.model.fields, TYPEFIELD);
+                }
+            } else if (transport.type && isPlainObject(kendo.data.schemas[transport.type])) {
+                schema = kendo.data.schemas[transport.type];
+                if (isPlainObject(schema.model) && schema.model.fields) {
+                    sortOrder.field = fieldName(schema.model.fields, TYPEFIELD);
                 }
             }
 

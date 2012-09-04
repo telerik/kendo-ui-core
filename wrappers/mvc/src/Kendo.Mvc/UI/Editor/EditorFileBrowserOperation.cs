@@ -12,8 +12,7 @@ namespace Kendo.Mvc.UI
 
         public EditorFileBrowserOperation()
         {            
-            RouteValues = new RouteValueDictionary();
-            Data = new ClientHandlerDescriptor();
+            RouteValues = new RouteValueDictionary();            
         }
 
         private string Encode(string value)
@@ -30,12 +29,7 @@ namespace Kendo.Mvc.UI
         {
             if (Url != null)
             {
-                json["url"] = Encode(Url);
-
-                if (Data.HasValue())
-                {
-                    json["data"] = Data;
-                }                
+                json["url"] = Encode(Url);                               
             }
         }         
 
@@ -67,9 +61,7 @@ namespace Kendo.Mvc.UI
 
                 routeName = null;
             }
-        }
-
-        public ClientHandlerDescriptor Data { get; set; }
+        }       
 
         public RouteValueDictionary RouteValues
         {

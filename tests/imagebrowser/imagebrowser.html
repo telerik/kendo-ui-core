@@ -185,6 +185,40 @@
                 equal(sortDescriptors[0].dir, "asc");
             });
 
+            test("items are sorted by with custom global schema", function() {
+                kendo.data.schemas["imagebrowser_custom"] =  {
+                        model: {
+                            fields: {
+                                name: "FileName",
+                                size: "FileSize",
+                                type: "Kind"
+                            }
+                        }
+                    };
+
+                kendo.data.transports["imagebrowser_custom"] =
+                    kendo.data.RemoteTransport.extend({
+                        init: function(options) {
+                            kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, this.options, options));
+                        },
+                        read: function(options) {
+                            options.success([ { FileName: "foo", FileSize: 42, Kind: "f" } ]);
+                        }
+                    });
+
+                var browser = setup({
+                    transport: {
+                        type: "imagebrowser_custom"
+                    }
+                });
+
+                var sortDescriptors = browser.dataSource.sort();
+
+                equal(sortDescriptors.length, 1);
+                equal(sortDescriptors[0].field, "Kind");
+                equal(sortDescriptors[0].dir, "asc");
+            });
+
             test("selecting item from arrangeby popup changes the sort order and persist default order", function() {
                 var browser = setup(),
                     toolbar = browser.toolbar;

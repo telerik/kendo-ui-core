@@ -77,7 +77,8 @@ namespace Kendo.Mvc.UI
             {
                 return pathProvider.ToAbsolute(ContentPath);
             }
-            return path;
+            
+            return pathProvider.CombinePaths(pathProvider.ToAbsolute(ContentPath), path);
         }
 
         public virtual JsonResult Read(string path)
@@ -172,6 +173,7 @@ namespace Kendo.Mvc.UI
 
             if (entry != null)
             {
+                path = pathProvider.CombinePaths(path, entry.Name);
                 if (entry.EntryType == FileBrowserEntryType.File)
                 {
                     DeleteFile(path);

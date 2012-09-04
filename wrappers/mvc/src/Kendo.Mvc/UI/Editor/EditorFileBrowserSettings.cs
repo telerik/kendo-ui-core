@@ -76,17 +76,18 @@ namespace Kendo.Mvc.UI
                 json["transport"] = transport;
 
                 transport["read"] = read;
+                transport["type"] = "imagebrowser-aspnetmvc";
 
                 var thumbnail = Thumbnail.ToJson();
                 if (thumbnail.Any())
                 {
-                    transport["thumbnailUrl"] = thumbnail;
+                    transport["thumbnailUrl"] = thumbnail["url"];
                 }
 
                 var upload = Upload.ToJson();
                 if (upload.Any())
                 {
-                    transport["uploadUrl"] = upload;
+                    transport["uploadUrl"] = upload["url"];
                 }
 
                 var destroy = Destroy.ToJson();
@@ -104,7 +105,7 @@ namespace Kendo.Mvc.UI
                 var image = Image.ToJson();
                 if (image.Any())
                 {
-                    transport["imageUrl"] = image;
+                    transport["imageUrl"] = image["url"];
                 }
             }
         }
