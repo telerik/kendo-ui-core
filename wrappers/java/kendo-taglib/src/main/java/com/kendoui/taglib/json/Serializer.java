@@ -97,6 +97,8 @@ public class Serializer {
             quote(out, (String)value);
         } else if (value instanceof Number) {
             out.append(value.toString());
+        } else if (value instanceof Boolean) {
+            out.append(value.toString());
         } else if (value instanceof Iterable<?>) {
             serializeIterable(out, (Iterable<?>)value);
         } else if (value instanceof Serializable) {

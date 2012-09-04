@@ -183,6 +183,15 @@ public class SerializerTest {
     }
 
     @Test
+    public void jsonSerializesBooleans() throws IOException {
+        assertEquals("{\"foo\":true}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public boolean getFoo() {
+                return true;
+            }
+        }));
+    }
+    @Test
     public void jsonSerializesNestedObjects() throws IOException {
         assertEquals("{\"foo\":{\"bar\":\"bar\"}}", serializer.json(new Object() {
             @SuppressWarnings("unused")
