@@ -197,16 +197,14 @@
                 ns: ns
             });
 
-            element
-                .on(START_EVENTS, filter, proxy(that._start, that))
-                .on("dragstart", filter, kendo.preventDefault);
+            element.on(START_EVENTS, filter, proxy(that._start, that));
 
             if (pointers) {
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
             }
 
             if (!options.allowSelection) {
-                var args = ["mousedown selectstart", filter, preventTrigger];
+                var args = ["mousedown selectstart dragstart", filter, preventTrigger];
 
                 if (filter instanceof $) {
                     args.splice(2, 0, null);
