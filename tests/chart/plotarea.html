@@ -1524,6 +1524,20 @@
                     equals(plotArea.panes.length, 2);
                 });
 
+                test("one chart is created per pane", function() {
+                    plotArea = new dataviz.CategoricalPlotArea([{
+                        name: "Value A",
+                        type: "column",
+                        data: [100]
+                    }, {
+                        name: "Value B",
+                        type: "column",
+                        data: [200]
+                    }], { });
+
+                    equals(plotArea.charts.length, 1);
+                });
+
                 test("two panes occupy 50% height each by default", function() {
                     createPlotArea({
                         panes: [{ name: "a" }, { name: "b" }]

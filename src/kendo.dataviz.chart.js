@@ -4881,7 +4881,9 @@
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
                 pane = plotArea.seriesPaneName(currentSeries);
-                paneNames.push(pane);
+                if (!inArray(pane, paneNames)) {
+                    paneNames.push(pane);
+                }
 
                 if (seriesByPane[pane]) {
                     seriesByPane[pane].push(currentSeries);
