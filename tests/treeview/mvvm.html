@@ -121,7 +121,40 @@
                 ok(treeview.wrapper.css("display") != "none", "treeview is not invisible");
             });
 
+            test("source binding", function() {
+                var dom = $('<div data-role="treeview" data-bind="source: source"></div>');
+
+                var viewModel = kendo.observable({
+                    source: new kendo.data.HierarchicalDataSource({
+                        data: [
+                            { text: "baz" }
+                        ]}
+                    )
+                });
+
+                kendo.bind(dom, viewModel);
+
+                equal(dom.text(), "baz");
+            });
+
+            test("template binding", function() {
+                var dom = $(
+                    '<div data-role="treeview" data-template="fooTemplate" data-bind="source: source"></div>'
+                );
+
+                var viewModel = kendo.observable({
+                    source: [
+                        { text: "bar" }
+                    ]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                equal(dom.text(), "bar foo");
+            });
         </script>
+
+        <script id="fooTemplate" type="text/x-kendo-template">#:item.text# foo</script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

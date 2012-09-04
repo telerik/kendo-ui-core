@@ -27,7 +27,7 @@
         KTREEVIEW = "k-treeview",
         VISIBLE = ":visible",
         NODE = ".k-item",
-        templates, rendering, TreeView,
+        rendering, TreeView,
         subGroup, nodeContents,
         bindings = {
             text: "dataTextField",
@@ -103,15 +103,6 @@
         }
     }
 
-    templates = {
-        dragClue: template("<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"),
-        group: template(
-            "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) #>" +
-                "#= renderItems(data) #" +
-            "</ul>"
-        )
-    };
-
     TreeView = Widget.extend({
         init: function (element, options) {
             var that = this,
@@ -142,18 +133,7 @@
 
             that._accessors();
 
-            if (options.template && typeof options.template == "string") {
-                options.template = template(options.template);
-            } else if (!options.template) {
-                options.template = that._textTemplate();
-            }
-
-            that._checkboxes();
-
-            that.templates = {
-                item: that._itemTemplate(),
-                loading: that._loadingTemplate()
-            };
+            that._templates();
 
             // render treeview if it's not already rendered
             if (!element.hasClass(KTREEVIEW)) {
@@ -255,6 +235,36 @@
             options.animation = animationOptions;
         },
 
+        _templates: function() {
+            var that = this,
+                options = that.options;
+
+            if (options.template && typeof options.template == "string") {
+                options.template = template(options.template);
+            } else if (!options.template) {
+                options.template = that._textTemplate();
+            }
+
+            that._checkboxes();
+
+            that.templates = {
+                dragClue: template(
+                    "<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"
+                ),
+                group: template(
+                    "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) #>" +
+                        "#= renderItems(data) #" +
+                    "</ul>"
+                ),
+                item: that._itemTemplate(),
+                loading: that._loadingTemplate()
+            };
+        },
+
+        items: function() {
+            return this.element.find(".k-item");
+        },
+
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
 
@@ -333,7 +343,8 @@
             },
             dragAndDrop: false,
             autoBind: true,
-            loadOnDemand: true
+            loadOnDemand: true,
+            template: ""
         },
 
         _accessors: function() {
@@ -453,6 +464,8 @@
             Widget.fn.setOptions.call(that, options);
 
             that._animation();
+
+            that._templates();
         },
 
         _trigger: function (eventName, node) {
@@ -1280,7 +1293,7 @@
 
             options.r = rendering;
 
-            return templates.group(options);
+            return that.templates.group(options);
         }
     });
 
@@ -1293,7 +1306,7 @@
         that._draggable = new ui.Draggable(treeview.element, {
            filter: "div:not(.k-state-disabled) .k-in",
            hint: function(node) {
-               return templates.dragClue({ text: node.text() });
+               return treeview.templates.dragClue({ text: node.text() });
            },
            cursorOffset: {
                left: 10,
