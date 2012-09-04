@@ -472,7 +472,7 @@
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
 
-                if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
+                if (chart.isBindable(currentSeries)) {
                     currentSeries.data = data;
 
                     append(processedSeries, grouped ?
@@ -493,6 +493,28 @@
 
             chart.trigger(DATABOUND);
             chart._redraw();
+        },
+
+        isBindable: function(series) {
+            var valueFields = valueFieldsByChartType(series.type),
+                result = true,
+                field, i;
+
+            for (i = 0; i < valueFields.length; i++) {
+                field = valueFields[i];
+                if (field === "value") {
+                    field = "field";
+                } else {
+                    field = field + "Field";
+                }
+
+                if (!series[field]) {
+                    result = false;
+                    break;
+                }
+            }
+
+            return result;
         },
 
         _createGroupedSeries: function(series, data) {
@@ -3064,7 +3086,7 @@
                 }, border),
                 lineStyle = {
                     id: options.id,
-                    strokeOpacity: options.opacity,
+                    strokeOpacity: defined(options.line.opacity) ? options.line.opacity : options.opacity,
                     zIndex: -1,
                     strokeWidth: options.line.width,
                     stroke: options.line.color || options.color,
@@ -3178,14 +3200,13 @@
         updateRange: function(value, categoryIx, series) {
             var chart = this,
                 axisName = series.axis || PRIMARY,
-                axisRange = chart.valueAxisRanges[axisName];
+                values = [value.low, value.open, value.close, value.high];
 
             if (defined(value)) {
-                axisRange = chart.valueAxisRanges[axisName] =
-                    axisRange || { min: MAX_VALUE, max: MIN_VALUE };
-
-                axisRange.min = math.min(axisRange.min, value.low, value.open, value.close, value.high);
-                axisRange.max = math.max(axisRange.max, value.low, value.open, value.close, value.high);
+                chart.valueAxisRanges[axisName] = {
+                    min: math.min.apply(math, values.concat([MAX_VALUE])),
+                    max: math.max.apply(math, values.concat([MIN_VALUE]))
+                };
             }
         },
 
@@ -6164,6 +6185,8 @@
         BarLabel: BarLabel,
         BubbleAnimationDecorator: BubbleAnimationDecorator,
         BubbleChart: BubbleChart,
+        CandleStickChart: CandleStickChart,
+        CandleStick: CandleStick,
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                categoriesCount = dataviz.categoriesCount,
+                chartBox = new Box2D(0, 0, 800, 600),
+                candleStickChart,
+                root,
+                view,
+                pointCoordinates,
+                TOLERANCE = 1;
+
+            function setupCandleStickChart(plotArea, options) {
+                view = new ViewStub();
+
+                candleStickChart = new dataviz.CandleStickChart(plotArea, options);
+
+                root = new dataviz.RootElement();
+                root.append(candleStickChart);
+
+                candleStickChart.reflow();
+                candleStickChart.getViewElements(view);
+                pointCoordinates = mapPoints(view.log.path[0].points);
+            }
+
+            function stubPlotArea(getCategorySlot, getValueSlot, options) {
+                return new function() {
+                    this.categoryAxis = {
+                        getSlot: getCategorySlot,
+                        options: {}
+                    };
+
+                    this.namedValueAxes = {
+                        primary: {
+                            getSlot: getValueSlot,
+                            options: {}
+                        }
+                    };
+
+                    this.options = options;
+                };
+            }
+
+            (function() {
+                var series = { data: [[3,4,1,2]], type: "candleStick" },
+                    VALUE_AXIS_MAX = 4,
+                    CATEGORY_AXIS_Y = 2;
+
+                var plotArea = stubPlotArea(
+                    function(categoryIndex) {
+                        return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                                         categoryIndex + 1, CATEGORY_AXIS_Y);
+                    },
+                    function(value) {
+                        var value = typeof value === "undefined" ? 0 : value,
+                            valueY = VALUE_AXIS_MAX - value,
+                            slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
+                            slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+
+                        return new Box2D(0, slotTop, 0, slotBottom);
+                    }, {
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    }
+                );
+
+                // ------------------------------------------------------------
+                module("Candle Stick Chart / ", {
+                    setup: function() {
+                        setupCandleStickChart(plotArea, { series: [ series ] });
+                    }
+                });
+
+                test("Creates points for candleStickChart data points", function() {
+                    equal(candleStickChart.points.length, series.data.length);
+                });
+
+                test("Reports minimum series value for default axis", function() {
+                    same(candleStickChart.valueAxisRanges.primary.min, series.data[0][2]);
+                });
+
+                test("Reports maximum series value for default axis", function() {
+                    same(candleStickChart.valueAxisRanges.primary.max, series.data[0][1]);
+                });
+
+                test("Reports number of categories", function() {
+                    setupCandleStickChart(plotArea, { series: [ series ]});
+                    equal(categoriesCount(candleStickChart.options.series), series.data.length);
+                });
+
+                test("points are distributed across category axis", function() {
+                    same(candleStickChart.points[0].box.x1, 0);
+                });
+
+                test("points are aligned to category axis", function() {
+                    same(candleStickChart.points[0].box.y1, 1);
+                });
+
+                test("points have set width", function() {
+                    $.each(candleStickChart.points, function() {
+                        equal(this.box.width(), 1);
+                    });
+                });
+
+                test("points have set height according to value", function() {
+                    same(candleStickChart.points[0].box.height(), 2);
+                });
+
+                test("sets point owner", function() {
+                    ok(candleStickChart.points[0].owner === candleStickChart);
+                });
+
+                test("sets point series", function() {
+                    ok(candleStickChart.points[0].series === series);
+                });
+
+                test("sets point series index", function() {
+                    ok(candleStickChart.points[0].seriesIx === 0);
+                });
+
+                test("sets point category", function() {
+                    equal(candleStickChart.points[0].category, "A");
+                });
+
+                test("sets point dataItem", function() {
+                    equal(typeof candleStickChart.points[0].dataItem, "object");
+                });
+
+                // ------------------------------------------------------------
+                module("Candle Stick Chart / Rendering", {
+                    setup: function() {
+                        setupCandleStickChart(plotArea, {
+                            series: [ $.extend({
+                                line: {
+                                    width: 4,
+                                    color: "#cf0",
+                                    opacity: 0.5
+                                }
+                            },
+                            series)]
+                        });
+                    }
+                });
+
+                test("sets line width", function() {
+                    equals(view.log.path[0].style.strokeWidth, 4);
+                });
+
+                test("sets line color", function() {
+                    equals(view.log.path[0].style.stroke, "#cf0");
+                });
+
+                test("sets line opacity", function() {
+                    equals(view.log.path[0].style.strokeOpacity, 0.5);
+                });
+
+                test("line has same model id as its segment", function() {
+                    equals(view.log.path[0].style.data.modelId, candleStickChart.points[0].options.modelId);
+                });
+
+                test("renders line chart group", function() {
+                    equals(view.log.group.length, 1);
+                });
+
+                test("sets group animation", function() {
+                    equals(view.log.group[0].options.animation.type, "clip");
+                });
+
+            })();
+
+            (function() {
+                var candleStickChart,
+                    MARGIN = PADDING = BORDER = 5,
+                    candleStick;
+
+                var plotArea = stubPlotArea(
+                    function(categoryIndex) {
+                        return new Box2D();
+                    },
+                    function(value) {
+                        return new Box2D();
+                    },
+                    {
+                        categoryAxis: { }
+                    }
+                );
+
+                function createCandleStickChart(options) {
+                    candleStickChart = new dataviz.CandleStickChart(plotArea, {
+                        series: [$.extend({
+                            data: [[3,4,2,1]],
+                            border: {
+                                opacity: 0.5,
+                                dashType: "dot",
+                            },
+                            line: {
+                                dashType: "dot",
+                                color: "red",
+                                opacity: 0.7,
+                                width: 0.2
+                            },
+                            color: "#f00",
+                            opacity: 0.2,
+                            type: "candleStick"
+                        }, options)]
+                    });
+                    candleStick = candleStickChart.points[0];
+                }
+
+                // ------------------------------------------------------------
+                module("Candle Stick Chart / Configuration", {
+                    setup: function() {
+                        createCandleStickChart();
+                    }
+                });
+
+                test("applies series color to point border", function() {
+                    equal(candleStick.options.color, "#f00");
+                });
+
+                test("applies opacity to point", function() {
+                    equal(candleStick.options.opacity, 0.2);
+                });
+
+                test("applies border color to point", function() {
+                    createCandleStickChart({ border: { color: "point-border" } });
+                    equal(candleStick.options.border.color, "point-border");
+                });
+
+                test("applies dashType", function() {
+                    equal(candleStick.options.border.dashType, "dot");
+                });
+
+                test("applies line dashType", function() {
+                    equal(candleStick.options.line.dashType, "dot");
+                });
+
+                test("applies line color", function() {
+                    equal(candleStick.options.line.color, "red");
+                });
+
+                test("applies line width", function() {
+                    equal(candleStick.options.line.width, 0.2);
+                });
+
+                test("applies line opacity", function() {
+                    equal(candleStick.options.line.opacity, 0.7);
+                });
+
+            })();
+
+            (function() {
+                var CandleStick = dataviz.CandleStick,
+                    point,
+                    box,
+                    label,
+                    root,
+                    VALUE = {
+                        open: 2,
+                        high: 4,
+                        low: 1,
+                        close: 3
+
+                    },
+                    TOOLTIP_OFFSET = 5,
+                    CATEGORY = "A",
+                    SERIES_NAME = "series";
+
+                function createPoint(options) {
+                    point = new CandleStick(VALUE,
+                        $.extend(true, {
+                            labels: { font: SANS12 }
+                        }, options)
+                    );
+
+                    point.category = CATEGORY;
+                    point.dataItem = { value: VALUE };
+                    point.series = { name: SERIES_NAME };
+
+                    point.owner = {
+                        formatPointValue: function(point, tooltipFormat) {
+                            return kendo.dataviz.autoFormat(tooltipFormat, point.value);
+                        },
+                        seriesValueAxis: function(series) {
+                            var numericAxis = new dataviz.NumericAxis(0, 4, {});
+                            numericAxis.reflow(chartBox);
+                            // Add numeric axis
+                            return numericAxis;
+                        }
+                    }
+
+                    box = new Box2D(0, 0, 100, 100);
+                    point.reflow(box);
+
+                    root = new dataviz.RootElement();
+                    root.append(point);
+                }
+
+                // ------------------------------------------------------------
+                module("Candle Stick", {
+                    setup: function() {
+                        createPoint();
+                    }
+                });
+
+                test("is discoverable", function() {
+                    ok(point.options.modelId);
+                });
+
+                test("sets point border width", function() {
+                    createPoint({ border: { width: 4 } });
+                    equals(point.options.border.width, 4);
+                });
+
+                test("sets point opacity", function() {
+                    createPoint({ opacity: 0.5 });
+                    same(point.options.opacity, 0.5);
+                });
+
+                test("sets point id", function() {
+                    ok(point.options.id.length > 0);
+                });
+
+                test("point has same model id", function() {
+                    view = new ViewStub();
+
+                    point.getViewElements(view);
+                    equals(view.log.path[0].style.data.modelId, point.options.modelId);
+                    equals(view.log.rect[0].style.data.modelId, point.options.modelId);
+                });
+
+                test("tooltipAnchor is at top right of point", function() {
+                    var anchor = point.tooltipAnchor(10, 10);
+                    same([anchor.x, anchor.y],
+                         [point.box.x2 + TOOLTIP_OFFSET, point.box.y1])
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+    </body>
+</html>

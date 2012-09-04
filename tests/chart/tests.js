@@ -92,6 +92,10 @@ tests.push(
         title: "chart bubble"
     },
     {
+        page: "chart/candlestickchart.html",
+        title: "chart candleStick"
+    },
+    {
         page: "chart/mvvm.html",
         title: "chart mvvm"
     },
