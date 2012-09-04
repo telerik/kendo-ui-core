@@ -24,7 +24,7 @@ public class PanelBarItemTagTest {
     @Test
     public void doEndTagThrowsIfNotNestedInPanelBarItemTagContainer() throws JspException {
         thrown.expect(JspException.class);
-        thrown.expectMessage("The <kendo:panelBarItem> tag should be nested in a <kendo:panelBar> or <kendo:panelBarItem>.");
+        thrown.expectMessage("The <kendo:panelBarItem> tag should be nested in a <kendo:panelBar> or <kendo:panelBarItem> tag.");
 
         item.doEndTag();
     }

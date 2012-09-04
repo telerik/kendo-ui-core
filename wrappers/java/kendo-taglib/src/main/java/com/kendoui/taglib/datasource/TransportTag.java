@@ -9,7 +9,7 @@ import com.kendoui.taglib.DataSourceTag;
 public class TransportTag extends BaseTag {
     @Override
     public int doEndTag() throws JspException {
-        DataSourceTag dataSource = (DataSourceTag)findAncestorWithClass(this, DataSourceTag.class);
+        DataSourceTag dataSource = (DataSourceTag)findParentWithClass(DataSourceTag.class);
 
         dataSource.setTransport(this);
 

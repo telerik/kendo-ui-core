@@ -18,7 +18,7 @@ import com.kendoui.taglib.html.Text;
 import com.kendoui.taglib.html.Ul;
 
 @SuppressWarnings("serial")
-public class PanelBarItemTag extends BodyTagSupport implements PanelBarItemTagContainer {
+public class PanelBarItemTag extends BaseTag implements PanelBarItemTagContainer {
     private List<PanelBarItemTag> items;
     private String text;
 
@@ -37,11 +37,7 @@ public class PanelBarItemTag extends BodyTagSupport implements PanelBarItemTagCo
 
     @Override
     public int doEndTag() throws JspException {
-        PanelBarItemTagContainer parent = (PanelBarItemTagContainer)findAncestorWithClass(this, PanelBarItemTagContainer.class);
-
-        if (parent == null) {
-            throw new JspException("The <kendo:panelBarItem> tag should be nested in a <kendo:panelBar> or <kendo:panelBarItem>.");
-        }
+        PanelBarItemTagContainer parent = (PanelBarItemTagContainer)findParentWithClass(PanelBarItemTagContainer.class, "<kendo:panelBar> or <kendo:panelBarItem> tag");
 
         parent.items().add(this);
 

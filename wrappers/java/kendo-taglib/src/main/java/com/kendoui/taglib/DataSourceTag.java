@@ -8,7 +8,7 @@ import com.kendoui.taglib.datasource.TransportTag;
 public class DataSourceTag extends BaseTag {
     @Override
     public int doEndTag() throws JspException {
-        DataBoundWidget widget = (DataBoundWidget)findAncestorWithClass(this, DataBoundWidget.class);
+        DataBoundWidget widget = (DataBoundWidget)findParentWithClass(DataBoundWidget.class, "tag which supports data binding");
 
         widget.setDataSource(this);
 

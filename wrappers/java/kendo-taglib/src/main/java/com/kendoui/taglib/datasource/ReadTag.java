@@ -8,7 +8,7 @@ import com.kendoui.taglib.BaseTag;
 public class ReadTag extends BaseTag {
     @Override
     public int doEndTag() throws JspException {
-        TransportTag transport = (TransportTag)findAncestorWithClass(this, TransportTag.class);
+        TransportTag transport = (TransportTag)findParentWithClass(TransportTag.class);
 
         transport.setRead(this);
 
