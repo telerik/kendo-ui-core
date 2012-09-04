@@ -167,6 +167,14 @@
     left: 2px;
 }
 
+.k-rtl .k-panelbar .k-image,
+.k-rtl .k-panelbar .k-sprite
+{
+    float: right;
+    margin-right: 0;
+    margin-left: 5px;
+}
+
 /* Slider */
 
 .k-rtl .k-slider .k-button-decrease
