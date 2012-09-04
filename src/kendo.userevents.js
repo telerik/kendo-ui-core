@@ -80,7 +80,15 @@
             changedTouches,
             touch;
 
-        if (support.touch) {
+        if (e.api) {
+            touches.push({
+                id: 2,  // hardcoded ID for API call;
+                event: e,
+                target: e.target,
+                location: e
+            });
+        }
+        else if (support.touch) {
             changedTouches = originalEvent.changedTouches;
             for (length = changedTouches.length; idx < length; idx ++) {
                 touch = changedTouches[idx];
@@ -372,6 +380,19 @@
             return this.trigger(eventName, data);
         },
 
+        // API
+        press: function(x, y) {
+            this._apiCall("_start", x, y);
+        },
+
+        move: function(x, y) {
+            this._apiCall("_move", x, y);
+        },
+
+        end: function(x, y) {
+            this._apiCall("_end", x, y);
+        },
+
         _isMultiTouch: function() {
             return this.touches.length > 1;
         },
@@ -475,6 +496,15 @@
                     matchingTouch[methodName](touchInfo);
                 }
             }
+        },
+
+        _apiCall: function(type, x, y) {
+            this[type]({
+                api: true,
+                pageX: x,
+                pageY: y,
+                target: this.element
+            });
         }
     });
 

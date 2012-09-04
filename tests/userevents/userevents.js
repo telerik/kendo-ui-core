@@ -1,4 +1,4 @@
-var userEvents,
+    var userEvents,
     UserEvents = kendo.UserEvents,
     element;
 
@@ -310,4 +310,40 @@ test("triggers gesturestart before first touch move", 1, function(){
 
     press(10, 20, 2);
     move(15, 25, 1);
+});
+
+module("UserEvents API", {
+    setup: function() {
+        element = $('<div />');
+        userEvents = new UserEvents(element);
+    }
+});
+
+test("raises press on press", 2, function(){
+    userEvents.bind("press", function(e) {
+        equal(e.x.location, 10);
+        equal(e.y.location, 20);
+    });
+
+    userEvents.press(10, 20);
+});
+
+test("raises start on first move", 2, function(){
+    userEvents.bind("start", function(e) {
+        equal(e.x.location, 15);
+        equal(e.y.location, 25);
+    });
+
+    userEvents.press(10, 20);
+    userEvents.move(15, 25);
+});
+
+test("raises end on end call", 1, function(){
+    userEvents.bind("end", function(e) {
+        ok(true);
+    });
+
+    userEvents.press(10, 20);
+    userEvents.move(15, 25);
+    userEvents.end(15, 25);
 });
