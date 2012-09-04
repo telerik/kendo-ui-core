@@ -3107,7 +3107,7 @@
                     stroke: options.border.color || options.color,
                     strokeWidth: options.border.width,
                     dashType: options.border.dashType,
-                    strokeOpacity: defined(options.border.opacity) ? options.border.opacity : options.opacity,
+                    strokeOpacity: defined(options.border.opacity) ? options.border.opacity : options.opacity
                 } : {},
                 rectStyle = deepExtend({
                     id: options.id,
