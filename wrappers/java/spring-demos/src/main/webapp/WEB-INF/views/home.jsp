@@ -15,10 +15,10 @@
         <kendo:window name="myWindow">
         	<strong>Window Content</strong>
         	
-        	<kendo:autoComplete name="myAutoComplete">
-        	    <kendo:dataSource>
+        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name">
+        	    <kendo:dataSource type="odata" serverFiltering="true">
         	    	<kendo:transport>
-        	    		<kendo:read></kendo:read>
+        	    		<kendo:read url="http://odata.netflix.com/Catalog/Titles"></kendo:read>
         	    	</kendo:transport>
         	    </kendo:dataSource>
             </kendo:autoComplete>

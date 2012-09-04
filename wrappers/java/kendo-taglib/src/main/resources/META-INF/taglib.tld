@@ -21,6 +21,11 @@
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <name>dataTextField</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
     <!-- PanelBar  -->
@@ -69,17 +74,32 @@
         <name>dataSource</name>
         <tag-class>com.kendoui.taglib.DataSourceTag</tag-class>
         <info>DataSource</info>
+        <attribute>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>serverFiltering</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Boolean</type>
+        </attribute>
     </tag>
 
     <tag>
         <name>transport</name>
         <tag-class>com.kendoui.taglib.datasource.TransportTag</tag-class>
-        <info>Transport</info>
+        <info>DataSource Transport</info>
     </tag>
 
     <tag>
         <name>read</name>
         <tag-class>com.kendoui.taglib.datasource.ReadTag</tag-class>
         <info>Transport Read</info>
+        <attribute>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 </taglib>

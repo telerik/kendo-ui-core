@@ -14,4 +14,8 @@ public class ReadTag extends BaseTag {
 
         return EVAL_PAGE;
     }
+
+    public void setUrl(String url) {
+        setProperty("url", url);
+    }
 }

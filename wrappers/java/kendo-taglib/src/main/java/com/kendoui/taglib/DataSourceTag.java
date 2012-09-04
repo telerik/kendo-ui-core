@@ -6,6 +6,7 @@ import com.kendoui.taglib.datasource.TransportTag;
 
 @SuppressWarnings("serial")
 public class DataSourceTag extends BaseTag {
+
     @Override
     public int doEndTag() throws JspException {
         DataBoundWidget widget = (DataBoundWidget)findParentWithClass(DataBoundWidget.class, "tag which supports data binding");
@@ -13,6 +14,14 @@ public class DataSourceTag extends BaseTag {
         widget.setDataSource(this);
 
         return EVAL_PAGE;
+    }
+
+    public void setType(String type) {
+        setProperty("type", type);
+    }
+
+    public void setServerFiltering(boolean serverFiltering) {
+        setProperty("serverFiltering", serverFiltering);
     }
 
     public void setTransport(TransportTag transport) {
