@@ -257,6 +257,17 @@
                 });
             });
 
+            test("css class is applied to the files if no thubnailUrl is set", 1, function() {
+                var browser = setup({ },
+                    [
+                        { name: "file1", type: "f", size: 42 },
+                        { name: "file2", type: "f", size: 142 }
+                    ]);
+
+                equal(browser.listView.element.find(".k-file").length, 2);
+            });
+
+
             test("schema is used to described custom result", function() {
                 $.mockjax({
                     url: "browse",

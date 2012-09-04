@@ -670,32 +670,33 @@
 
         _scroll: function(e) {
             var that = this;
+            if (that.options.transport && that.options.transport.thumbnailUrl) {
+                clearTimeout(that._timeout);
 
-            clearTimeout(that._timeout);
+                that._timeout = setTimeout(function() {
+                    var height = that.list.outerHeight(),
+                        viewTop = that.list.scrollTop(),
+                        viewBottom = viewTop + height;
 
-            that._timeout = setTimeout(function() {
-                var height = that.list.outerHeight(),
-                    viewTop = that.list.scrollTop(),
-                    viewBottom = viewTop + height;
+                    that._tiles.each(function() {
+                        var top = offsetTop(this),
+                            bottom = top + this.offsetHeight;
 
-                that._tiles.each(function() {
-                    var top = offsetTop(this),
-                        bottom = top + this.offsetHeight;
+                        if ((top >= viewTop && top < viewBottom) || (bottom >= viewTop && bottom < viewBottom)) {
+                            that._loadImage(this);
+                        }
 
-                    if ((top >= viewTop && top < viewBottom) || (bottom >= viewTop && bottom < viewBottom)) {
-                        that._loadImage(this);
-                    }
+                        if (top > viewBottom) {
+                            return false;
+                        }
+                    });
 
-                    if (top > viewBottom) {
-                        return false;
-                    }
-                });
+                    that._tiles = that._tiles.filter(function() {
+                        return !this.loaded;
+                    });
 
-                that._tiles = that._tiles.filter(function() {
-                    return !this.loaded;
-                });
-
-            }, 250);
+                }, 250);
+            }
         },
 
         _editTmpl: function() {
@@ -724,7 +725,11 @@
             html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "d") { #';
             html += '<div class="k-thumb"><span class="k-icon k-folder"></span></div>';
             html += "#}else{#";
-            html += '<div class="k-thumb"><span class="k-icon k-loading"></span></div>';
+            if (that.options.transport && that.options.transport.thumbnailUrl) {
+                html += '<div class="k-thumb"><span class="k-icon k-loading"></span></div>';
+            } else {
+                html += '<div class="k-thumb"><span class="k-icon k-file"></span></div>';
+            }
             html += "#}#";
             html += '<strong>${' + that._getFieldName(NAMEFIELD) + '}</strong>';
             html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "f") { # <span class="k-filesize">${this.sizeFormatter(' + that._getFieldName(SIZEFIELD) + ')}</span> #}#';
