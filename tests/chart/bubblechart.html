@@ -60,12 +60,12 @@
                 function PlotAreaStub() { }
 
                 $.extend(PlotAreaStub.prototype, {
-                    primaryXAxis: {
+                    axisX: {
                         getSlot: function(categoryIndex) {
                             return new Box2D(0, 0, categoryIndex + 1, 0);
                         }
                     },
-                    primaryYAxis: {
+                    axisY: {
                         getSlot: function(value) {
                             return new Box2D(0, 1, 0, value);
                         },

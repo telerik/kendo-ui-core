@@ -258,22 +258,22 @@
 
                 test("xAxis settings are applied to primary X Axis", function() {
                     createScatterChart({ xAxis: { min: 100 } });
-                    same(plotArea.primaryXAxis.options.min, 100);
+                    same(plotArea.axisX.options.min, 100);
                 });
 
                 test("xAxis can't be set to vertical", function() {
                     createScatterChart({ xAxis: { vertical: true } });
-                    same(plotArea.primaryXAxis.options.vertical, false);
+                    same(plotArea.axisX.options.vertical, false);
                 });
 
                 test("yAxis settings are applied to primary Y Axis", function() {
                     createScatterChart({ yAxis: { min: 100 } });
-                    same(plotArea.primaryYAxis.options.min, 100);
+                    same(plotArea.axisY.options.min, 100);
                 });
 
                 test("yAxis can't be set to horizontal", function() {
                     createScatterChart({ yAxis: { vertical: false } });
-                    same(plotArea.primaryYAxis.options.vertical, true);
+                    same(plotArea.axisY.options.vertical, true);
                 });
 
                 // ------------------------------------------------------------

@@ -2790,11 +2790,11 @@
                 xAxisName = series.xAxis,
                 xAxis = xAxisName ?
                         plotArea.namedXAxes[xAxisName] :
-                        plotArea.primaryXAxis,
+                        plotArea.axisX,
                 yAxisName = series.yAxis,
                 yAxis = yAxisName ?
                         plotArea.namedYAxes[yAxisName] :
-                        plotArea.primaryYAxis;
+                        plotArea.axisY;
 
             if (!xAxis) {
                 throw new Error("Unable to locate X axis with name " + xAxisName);
@@ -5456,10 +5456,6 @@
                 yAxes.push(plotArea.createXYAxis(this, true));
             });
 
-            plotArea.primaryXAxis = xAxes[0];
-            plotArea.primaryYAxis = yAxes[0];
-
-            // TODO: Remove axisX and axisY aliases
             plotArea.axisX = xAxes[0];
             plotArea.axisY = yAxes[0];
         },

@@ -50,13 +50,13 @@
                 function PlotAreaStub() { }
 
                 $.extend(PlotAreaStub.prototype, {
-                    primaryXAxis: {
+                    axisX: {
                         getSlot: function(categoryIndex) {
                             return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                             categoryIndex + 1, CATEGORY_AXIS_Y);
                         }
                     },
-                    primaryYAxis: {
+                    axisY: {
                         getSlot: function(value) {
                             var value = typeof value === "undefined" ? 0 : value,
                                 valueY = VALUE_AXIS_MAX - value,
@@ -141,8 +141,8 @@
                 module("Scatter Chart / Multiple Axes", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
-                        plotArea.namedXAxes.secondary = plotArea.primaryXAxis;
-                        plotArea.namedYAxes.secondary = plotArea.primaryYAxis;
+                        plotArea.namedXAxes.secondary = plotArea.axisX;
+                        plotArea.namedYAxes.secondary = plotArea.axisY;
 
                         setupScatterChart(plotArea, {
                             series: [

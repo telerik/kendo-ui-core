@@ -2304,9 +2304,9 @@
                     categoryAxis,
                     namedXAxes,
                     namedYAxes,
-                    primaryXAxis,
+                    axisX,
                     secondaryXAxis,
-                    primaryYAxis,
+                    axisY,
                     secondaryYAxis,
                     scatterSeriesData = [{
                         name: "Value A",
@@ -2321,11 +2321,10 @@
                 function createPlotArea(series, options) {
                     plotArea = new dataviz.XYPlotArea(series, options);
 
+                    axisX = plotArea.axisX;
+                    axisY = plotArea.axisY;
                     namedXAxes = plotArea.namedXAxes;
                     namedYAxes = plotArea.namedYAxes;
-
-                    primaryXAxis = plotArea.primaryXAxis;
-                    primaryYAxis = plotArea.primaryYAxis;
                     secondaryXAxis = namedXAxes.secondary;
                     secondaryYAxis = namedYAxes.secondary;
 
@@ -2342,17 +2341,14 @@
                 });
 
                 test("appends primary X axis to children collection", function() {
-                    ok($.inArray(primaryXAxis, plotArea.children) >= 0);
+                    ok($.inArray(axisX, plotArea.children) >= 0);
                 });
 
                 test("appends primary Y axis to children collection", function() {
-                    ok($.inArray(primaryYAxis, plotArea.children) >= 0);
+                    ok($.inArray(axisY, plotArea.children) >= 0);
                 });
 
                 test("aligns axes at default crossing values", function() {
-                    var axisX = primaryXAxis,
-                        axisY = primaryYAxis;
-
                     plotArea.reflow(chartBox);
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
@@ -2361,9 +2357,6 @@
                 });
 
                 test("aligns axises at non-default crossing values", function() {
-                    var axisX = primaryXAxis,
-                        axisY = primaryYAxis;
-
                     axisY.options.axisCrossingValue = 10;
                     axisX.options.axisCrossingValue = 1;
 
@@ -2572,9 +2565,6 @@
                 });
 
                 test("aligns primary axes at default crossing values", function() {
-                    var axisX = primaryXAxis,
-                        axisY = primaryYAxis;
-
                     plotArea.reflow(chartBox);
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
@@ -2590,7 +2580,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryXAxis.lineBox().x2, primaryXAxis.lineBox().x2);
+                    equals(secondaryXAxis.lineBox().x2, axisX.lineBox().x2);
                 });
 
                 test("secondary X axis on the left is contained in plot area", function() {
@@ -2601,7 +2591,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryXAxis.lineBox().x1, primaryXAxis.lineBox().x1);
+                    equals(secondaryXAxis.lineBox().x1, axisX.lineBox().x1);
                 });
 
                 test("secondary Y axis on top is contained in plot area", function() {
@@ -2612,7 +2602,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryYAxis.lineBox().y1, primaryYAxis.lineBox().y1, TOLERANCE);
+                    equals(secondaryYAxis.lineBox().y1, axisY.lineBox().y1, TOLERANCE);
                 });
 
                 test("secondary Y axis on bottom is contained in plot area", function() {
@@ -2623,7 +2613,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryYAxis.lineBox().y2, primaryYAxis.lineBox().y2);
+                    equals(secondaryYAxis.lineBox().y2, axisY.lineBox().y2);
                 });
 
                 test("Throws error when X axis name is duplicate", function() {
@@ -2669,30 +2659,30 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryXAxis.box.y2, primaryXAxis.box.y1 - margin);
+                    equals(secondaryXAxis.box.y2, axisX.box.y1 - margin);
                 });
 
                 test("stacked X axes on top are aligned", function() {
                     plotArea.reflow(chartBox);
 
                     same([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
-                         [primaryXAxis.lineBox().x1, primaryXAxis.lineBox().x2]
+                         [axisX.lineBox().x1, axisX.lineBox().x2]
                     );
                 });
 
                 test("stacked X axes on the top are mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(primaryXAxis.options.labels.mirror);
+                    ok(axisX.options.labels.mirror);
                     ok(secondaryXAxis.options.labels.mirror);
                 });
 
                 test("mirroring inverts the mirror option", function() {
-                    primaryXAxis.options.labels.mirror = true;
+                    axisX.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryXAxis.options.labels.mirror);
+                    ok(!axisX.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -2713,7 +2703,7 @@
                     plotArea.reflow(chartBox);
 
                     same([secondaryYAxis.box.x1, secondaryYAxis.box.y1],
-                         [primaryYAxis.box.x2 + margin, primaryYAxis.box.y1]
+                         [axisY.box.x2 + margin, axisY.box.y1]
                     );
                 });
 
@@ -2721,23 +2711,23 @@
                     plotArea.reflow(chartBox);
 
                     same([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
-                         [primaryYAxis.lineBox().y1, primaryYAxis.lineBox().y2]
+                         [axisY.lineBox().y1, axisY.lineBox().y2]
                     );
                 });
 
                 test("stacked Y axes on the right are mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(primaryYAxis.options.labels.mirror);
+                    ok(axisY.options.labels.mirror);
                     ok(secondaryYAxis.options.labels.mirror);
                 });
 
                 test("mirroring inverts the mirror option", function() {
-                    primaryYAxis.options.labels.mirror = true;
+                    axisY.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryYAxis.options.labels.mirror);
+                    ok(!axisY.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -2756,30 +2746,30 @@
 
                     plotArea.reflow(chartBox);
 
-                    same(secondaryXAxis.box.y1, primaryXAxis.box.y2 + margin);
+                    same(secondaryXAxis.box.y1, axisX.box.y2 + margin);
                 });
 
                 test("stacked X axes on bottom are aligned", function() {
                     plotArea.reflow(chartBox);
 
                     same([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
-                         [primaryXAxis.lineBox().x1, primaryXAxis.lineBox().x2]
+                         [axisX.lineBox().x1, axisX.lineBox().x2]
                     );
                 });
 
                 test("stacked X axes on the bottom are not mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryXAxis.options.labels.mirror);
+                    ok(!axisX.options.labels.mirror);
                     ok(!secondaryXAxis.options.labels.mirror);
                 });
 
                 test("user set mirror option is not changed", function() {
-                    primaryXAxis.options.labels.mirror = true;
+                    axisX.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(primaryXAxis.options.labels.mirror);
+                    ok(axisX.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -2799,7 +2789,7 @@
                     plotArea.reflow(chartBox);
 
                     same([secondaryYAxis.box.x2, secondaryYAxis.box.y1],
-                         [primaryYAxis.box.x1 - margin, primaryYAxis.box.y1]
+                         [axisY.box.x1 - margin, axisY.box.y1]
                     );
                 });
 
@@ -2807,23 +2797,23 @@
                     plotArea.reflow(chartBox);
 
                     same([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
-                         [primaryYAxis.lineBox().y1, primaryYAxis.lineBox().y2]
+                         [axisY.lineBox().y1, axisY.lineBox().y2]
                     );
                 });
 
                 test("stacked Y axes on the left are not mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryYAxis.options.labels.mirror);
+                    ok(!axisY.options.labels.mirror);
                     ok(!secondaryYAxis.options.labels.mirror);
                 });
 
                 test("user set mirror option is not changed", function() {
-                    primaryYAxis.options.labels.mirror = true;
+                    axisY.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(primaryYAxis.options.labels.mirror);
+                    ok(axisY.options.labels.mirror);
                 });
 
             })();
