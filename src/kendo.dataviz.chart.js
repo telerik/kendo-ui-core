@@ -3106,15 +3106,14 @@
                 border = options.border.width > 0 ? {
                     stroke: options.border.color || options.color,
                     strokeWidth: options.border.width,
-                    dashType: options.border.dashType
+                    dashType: options.border.dashType,
+                    strokeOpacity: defined(options.border.opacity) ? options.border.opacity : options.opacity,
                 } : {},
                 rectStyle = deepExtend({
                     id: options.id,
                     fill: point.baseBodyColor || options.color,
                     fillOpacity: options.opacity,
-                    strokeOpacity: options.opacity,
-                    zIndex: 2,
-                    data: { modelId: options.modelId }
+                    zIndex: 2
                 }, border),
                 lineStyle = {
                     id: options.id,
@@ -3122,8 +3121,7 @@
                     zIndex: -1,
                     strokeWidth: options.line.width,
                     stroke: options.line.color || options.color,
-                    dashType: options.line.dashType,
-                    data: { modelId: options.modelId }
+                    dashType: options.line.dashType
                 };
 
             if (options.overlay) {
@@ -3132,6 +3130,7 @@
                 }, options.overlay);
             }
 
+            elements.push(point.createOverlayRect(view, options));
             elements.push(view.createRect(point.realBody, rectStyle));
             elements.push(view.createPolyline(point.linePoints, true, lineStyle));
 
@@ -3140,6 +3139,15 @@
             );
 
             return elements;
+        },
+
+        createOverlayRect: function(view, options) {
+            return view.createRect(this.box, {
+                id: options.id,
+                data: { modelId: options.modelId },
+                fill: "#fff",
+                fillOpacity: 0
+            });
         },
 
         highlightOverlay: function(view, options) {
@@ -3291,10 +3299,10 @@
                     zIndex: -1,
                     strokeWidth: options.line.width,
                     stroke: options.line.color || options.color,
-                    dashType: options.line.dashType,
-                    data: { modelId: options.modelId }
+                    dashType: options.line.dashType
                 };
 
+            elements.push(point.createOverlayRect(view, options));
             elements.push(view.createPolyline(point.oPoints, true, lineStyle));
             elements.push(view.createPolyline(point.cPoints, true, lineStyle));
             elements.push(view.createPolyline(point.lhPoints, true, lineStyle));
