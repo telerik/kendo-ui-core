@@ -146,8 +146,8 @@
 
                         setupScatterChart(plotArea, {
                             series: [
-                                { xAxis: "primary", yAxis: "primary", data: [[1, 10], [2, 20]] },
-                                { xAxis: "secondary", yAxis: "secondary", data: [[3, 30], [4, 40]] }
+                                { type: "scatter", data: [[1, 10], [2, 20]] },
+                                { type: "scatter", xAxis: "secondary", yAxis: "secondary", data: [[3, 30], [4, 40]] }
                             ]
                         });
                     }

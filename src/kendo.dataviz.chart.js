@@ -3231,7 +3231,7 @@
 
         updateRange: function(value, categoryIx, series) {
             var chart = this,
-                axisName = series.axis || PRIMARY,
+                axisName = series.axis,
                 values = [value.low, value.open, value.close, value.high];
 
             if (defined(value)) {
