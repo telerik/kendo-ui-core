@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DatePicker ARIA</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DatePicker ARIA</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var DatePicker = kendo.ui.DatePicker,
+                input, instance;
+
+            module("kendo.ui.DatePicker ARIA", {
+                setup: function() {
+                    input = $("<input id='test' />").appendTo(document.body);
+                    instance = new DatePicker(input);
+                },
+                teardown: function() {
+                    input.data("kendoDatePicker").destroy();
+                    input.parents(".k-widget").remove();
+                }
+            });
+
+            test("DatePicker adds role to the input element", function() {
+                equal(input.attr("role"), "textbox");
+            });
+
+            test("DatePicker adds aria-owns", function() {
+                equal(input.attr("aria-owns"), "test_datepicker_dateview");
+            });
+
+            test("DatePicker adds aria-haspopup", function() {
+                equal(input.attr("aria-haspopup"), "true");
+            });
+
+            test("DatePicker sets id to the popup element", function() {
+                equal(instance.dateView.popup.element.attr("id"), "test_datepicker_dateview");
+            });
+
+            test("DatePicker adds aria-expanded", function() {
+                equal(input.attr("aria-expanded"), "false");
+            });
+
+            test("DatePicker sets aria-expanded to true", function() {
+                instance.open();
+                equal(input.attr("aria-expanded"), "true");
+            });
+
+            test("DatePicker sets aria-hidden=false to the popup element", function() {
+                instance.open();
+                equal(instance.dateView.popup.element.attr("aria-hidden"), "false");
+            });
+
+            test("DatePicker sets aria-hidden=true to the popup element", function() {
+                instance.open();
+                instance.close();
+                equal(instance.dateView.popup.element.attr("aria-hidden"), "true");
+            });
+
+            test("DatePicker adds aria-disabled=false", function() {
+                equal(input.attr("aria-disabled"), "false");
+            });
+
+            test("DatePicker sets aria-disabled=true", function() {
+                instance.enable(false);
+                equal(input.attr("aria-disabled"), "true");
+            });
+
+            test("DatePicker adds role to the toggle button", function() {
+                equal(instance._dateIcon.attr("role"), "button");
+            });
+
+            test("DatePicker adds aria-controls to the toggle button", function() {
+                equal(instance._dateIcon.attr("aria-controls"), "test_datepicker_dateview");
+            });
+
+            test("DatePicker sets id to the shared calendar", function() {
+                equal(instance.dateView.calendar.element.attr("id"), "shared_kendo_calendar");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

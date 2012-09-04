@@ -27,6 +27,7 @@
     MAX = "max",
     MONTH = "month",
     FIRST = "first",
+    ARIA_DISABLED = "aria-disabled",
     calendar = kendo.calendar,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
@@ -56,13 +57,17 @@
             sharedCalendar = DatePicker.sharedCalendar;
 
         if (!sharedCalendar) {
-            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).hide().appendTo(body));
+            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr("id", "shared_kendo_calendar").hide().appendTo(body));
             calendar.makeUnselectable(sharedCalendar.element);
         }
 
         that.calendar = sharedCalendar;
         that.options = options = options || {};
         that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
+
+        if (options.id) {
+            that.popup.element.attr("id", options.id);
+        }
 
         that._templates();
 
@@ -326,7 +331,7 @@
 
     var DatePicker = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, id;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
@@ -336,7 +341,18 @@
 
             that._wrapper();
 
+            that._icon();
+
+            id = element.attr("id");
+
+            if (id) {
+                id = id + "_datepicker_dateview";
+                element.attr("aria-owns", id);
+                that._dateIcon.attr("aria-controls", id);
+            }
+
             that.dateView = new DateView(extend({}, options, {
+                id: id,
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope
@@ -346,6 +362,9 @@
                 close: function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
+                    } else {
+                        element.attr("aria-expanded", false);
+                        that.dateView.popup.element.attr("aria-hidden", true);
                     }
                 },
                 open: function(e) {
@@ -361,11 +380,12 @@
                             that.dateView._current = date;
                             that.dateView.calendar._focus(date);
                         }
+
+                        element.attr("aria-expanded", true);
+                        that.dateView.popup.element.attr("aria-hidden", false);
                     }
                 }
             }));
-
-            that._icon();
 
             element[0].type = "text";
             element
@@ -374,7 +394,10 @@
                 .on("blur" + ns, proxy(that._blur, that))
                 .on("focus" + ns, function(e) {
                     that._inputWrapper.addClass(FOCUSED);
-                });
+                })
+                .attr("role", "textbox")
+                .attr("aria-haspopup", true)
+                .attr("aria-expanded", false);
 
             that._reset();
 
@@ -423,7 +446,8 @@
                     .removeClass(DEFAULT)
                     .addClass(STATEDISABLED);
 
-                element.attr(DISABLED, DISABLED);
+                element.attr(DISABLED, DISABLED)
+                       .attr(ARIA_DISABLED, true);
             } else {
                 wrapper
                     .addClass(DEFAULT)
@@ -431,7 +455,8 @@
                     .on(HOVEREVENTS, that._toggleHover);
 
                 element
-                    .removeAttr(DISABLED);
+                    .removeAttr(DISABLED)
+                    .attr(ARIA_DISABLED, false);
 
                 icon.on(CLICK, proxy(that._click, that))
                     .on(MOUSEDOWN, preventDefault);
@@ -541,7 +566,7 @@
                 icon = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar">select</span></span>').insertAfter(element);
             }
 
-            that._dateIcon = icon;
+            that._dateIcon = icon.attr("role", "button");
         },
 
         _option: function(option, value) {

@@ -22,5 +22,10 @@ tests.push(
     {
         page: "datepicker/lint.html",
         title: "datepicker lint"
+    },
+    {
+        page: "datepicker/aria.html",
+        title: "datepicker aria"
     }
+
 );
