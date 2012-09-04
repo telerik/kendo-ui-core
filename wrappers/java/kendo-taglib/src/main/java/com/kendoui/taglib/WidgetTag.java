@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
+import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Script;
 
@@ -81,5 +82,7 @@ public abstract class WidgetTag extends BaseTag implements Serializable {
         return script;
     }
 
-    protected abstract Element<?> createElement();
+    protected Element<?> createElement() {
+        return new Div();
+    }
 }

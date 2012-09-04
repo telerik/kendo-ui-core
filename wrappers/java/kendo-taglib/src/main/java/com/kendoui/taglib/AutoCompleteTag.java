@@ -22,6 +22,22 @@ public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
 
 //>> Attributes
 
+    public boolean getSuggest() {
+        return (boolean)getProperty("suggest");
+    }
+
+    public void setSuggest(boolean suggest) {
+        setProperty("suggest", suggest);
+    }
+
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String template) {
+        setProperty("template", template);
+    }
+
     public String getDataTextField() {
         return (String)getProperty("dataTextField");
     }
@@ -30,5 +46,61 @@ public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
         setProperty("dataTextField", dataTextField);
     }
 
-//<< Attributes
+    public int getMinLength() {
+        return (int)getProperty("minLength");
+    }
+
+    public void setMinLength(int minLength) {
+        setProperty("minLength", minLength);
+    }
+
+    public int getDelay() {
+        return (int)getProperty("delay");
+    }
+
+    public void setDelay(int delay) {
+        setProperty("delay", delay);
+    }
+
+    public int getHeight() {
+        return (int)getProperty("height");
+    }
+
+    public void setHeight(int height) {
+        setProperty("height", height);
+    }
+
+    public String getFilter() {
+        return (String)getProperty("filter");
+    }
+
+    public void setFilter(String filter) {
+        setProperty("filter", filter);
+    }
+
+    public boolean getIgnoreCase() {
+        return (boolean)getProperty("ignoreCase");
+    }
+
+    public void setIgnoreCase(boolean ignoreCase) {
+        setProperty("ignoreCase", ignoreCase);
+    }
+
+    public boolean getHighlightFirst() {
+        return (boolean)getProperty("highlightFirst");
+    }
+
+    public void setHighlightFirst(boolean highlightFirst) {
+        setProperty("highlightFirst", highlightFirst);
+    }
+
+    public String getPlaceholder() {
+        return (String)getProperty("placeholder");
+    }
+
+    public void setPlaceholder(String placeholder) {
+        setProperty("placeholder", placeholder);
+    }
+
+    //<< Attributes
 }

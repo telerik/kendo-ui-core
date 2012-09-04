@@ -1,8 +1,93 @@
+jQuery = require("jquery");
+
+document = {
+    createElement: function() {
+        return {
+            style: {}
+        };
+    },
+    documentElement: {
+        style: {}
+    }
+};
+
+
+navigator = {
+    userAgent: ""
+};
+
+window = {
+    document: document,
+    navigator: navigator
+};
+
 var xml = require("libxmljs"),
     fs = require("fs"),
     path = require("path"),
     root = "kendo-taglib/src/main/";
 
+    require("../../src/kendo.core.js");
+    require("../../src/kendo.fx.js");
+    require("../../src/kendo.data.odata.js");
+    require("../../src/kendo.data.xml.js");
+    require("../../src/kendo.model.js");
+    require("../../src/kendo.data.js");
+    require("../../src/kendo.draganddrop.js");
+    require("../../src/kendo.mobile.scroller.js");
+    require("../../src/kendo.popup.js");
+    require("../../src/kendo.list.js");
+    require("../../src/kendo.autocomplete.js");
+    require("../../src/kendo.calendar.js");
+    require("../../src/kendo.dataviz.core.js");
+    require("../../src/kendo.dataviz.chart.js");
+    require("../../src/kendo.dataviz.themes.js");
+    require("../../src/kendo.dataviz.svg.js");
+    require("../../src/kendo.dataviz.vml.js");
+    require("../../src/kendo.dataviz.gauge.js");
+    require("../../src/kendo.combobox.js");
+    require("../../src/kendo.datepicker.js");
+    require("../../src/kendo.dropdownlist.js");
+    require("../../src/kendo.numerictextbox.js");
+    require("../../src/kendo.validator.js");
+    require("../../src/kendo.binder.js");
+    require("../../src/kendo.editable.js");
+    require("../../src/kendo.filtermenu.js");
+    require("../../src/kendo.groupable.js");
+    require("../../src/kendo.pager.js");
+    require("../../src/kendo.selectable.js");
+    require("../../src/kendo.sortable.js");
+    require("../../src/kendo.columnmenu.js");
+    require("../../src/kendo.grid.js");
+    require("../../src/kendo.listview.js");
+    require("../../src/kendo.menu.js");
+    require("../../src/kendo.panelbar.js");
+    require("../../src/kendo.slider.js");
+    require("../../src/kendo.reorderable.js");
+    require("../../src/kendo.resizable.js");
+    require("../../src/kendo.splitter.js");
+    require("../../src/kendo.tabstrip.js");
+    require("../../src/kendo.timepicker.js");
+    require("../../src/kendo.datetimepicker.js");
+    require("../../src/kendo.treeview.js");
+    require("../../src/kendo.upload.js");
+    require("../../src/kendo.window.js");
+    require("../../src/kendo.editor.js");
+
+function generateJava(path, className) {
+    var javaCode = [];
+
+    javaCode.push("package com.kendoui.taglib;\r\n");
+    javaCode.push('@SuppressWarnings("serial")');
+    javaCode.push("public class " + className + " extends WidgetTag {");
+    javaCode.push("    public " + className + "() {");
+    javaCode.push('        super("' + className.replace("Tag", "") + '");');
+    javaCode.push("    }\r\n");
+    javaCode.push("    //>> Attributes");
+    javaCode.push("    //<< Attributes");
+    javaCode.push("}");
+
+    fs.writeFileSync(path, javaCode.join("\r\n"), "utf8");
+}
 
 function syncTld(tldPath) {
     var tld = fs.readFileSync(tldPath, "utf8");
@@ -19,6 +104,10 @@ function syncTld(tldPath) {
 
         var javaPath = pathFromClassName(className);
 
+        if (!fs.existsSync(javaPath)) {
+            generateJava(javaPath, className.split(".").pop());
+        }
+
         var source = fs.readFileSync(javaPath, "utf8");
 
         if (!/\/\/>> Attributes/.test(source)) {
@@ -30,7 +119,7 @@ function syncTld(tldPath) {
                return attribute.get("name").text() != "name";
             }).map(setterAndGetter).join("\r\n");
 
-            source = source.replace(/\/\/>> Attributes([^\/]*)\/\/<< Attributes/m, "//>> Attributes\r\n\r\n" + gettersAndSetters + "\r\n//<< Attributes");
+            source = source.replace(/\/\/>> Attributes([^\/]*)\/\/<< Attributes/m, "//>> Attributes\r\n\r\n" + gettersAndSetters + "\r\n    //<< Attributes");
 
             fs.writeFileSync(javaPath, source, "utf8");
         }
@@ -50,7 +139,9 @@ function setterAndGetter(attribute) {
     var javaTypes = {
         "java.lang.String": "String",
         "java.lang.Boolean": "boolean",
-        "java.lang.Integer": "int"
+        "java.lang.Integer": "int",
+        "boolean": "boolean",
+        "int": "int",
     };
 
     type = javaTypes[type];
@@ -70,5 +161,106 @@ function setterAndGetter(attribute) {
     return code.join("\r\n");
 }
 
-syncTld(root + "resources/META-INF/taglib.tld");
 
+//syncTld(root + "resources/META-INF/taglib.tld");
+
+function generateTag(widget) {
+    var options = widget.fn.options;
+    var name = options.name;
+
+    delete options.name;
+    delete options.prefix;
+
+    var tag = [];
+
+    tag.push("    <tag>")
+    tag.push("      <description>" + name + " Widget</description>");
+    tag.push("      <name>" + camelCase(name) + "</name>");
+    tag.push("      <tag-class>com.kendoui.taglib." + name + "Tag</tag-class>");
+    tag.push("      <body-content>JSP</body-content>");
+    tag.push("      <attribute>");
+    tag.push("          <name>name</name>");
+    tag.push("          <required>true</required>");
+    tag.push("          <rtexprvalue>true</rtexprvalue>");
+    tag.push("          <type>java.lang.String</type>");
+    tag.push("      </attribute>");
+
+    for (var option in options) {
+        var type = typeof options[option];
+
+        if (type === "number") {
+            type = "int";
+        } if (type === "string") {
+            type = "java.lang.String";
+        } else if (type === "object" || type === "null") {
+            continue;
+        }
+
+        tag.push("      <attribute>");
+        tag.push("          <name>" + option + "</name>");
+        tag.push("          <rtexprvalue>true</rtexprvalue>");
+        tag.push("          <type>" + type + "</type>");
+        tag.push("      </attribute>");
+    }
+
+    tag.push("    </tag>\r\n")
+
+    return tag.join("\r\n");
+}
+
+var ignoredRoles = ["sortable",
+    "columnmenu",
+    "reorderable",
+    "resizable",
+    "draggable",
+    "filtermenu",
+    "selectable",
+    "editable",
+    "groupable",
+    "virtualscrollable",
+    "droptarget",
+    "droptargetarea",
+    "popup",
+    "validator",
+    "pager"
+];
+
+function camelCase(value) {
+    return value.charAt(0).toLowerCase() + value.substring(1);
+}
+
+function generateTld(tldPath) {
+    var tags = [];
+
+    for (var key in window.kendo.ui.roles) {
+        if (ignoredRoles.indexOf(key) < 0) {
+            tags.push(generateTag(window.kendo.ui.roles[key]));
+        }
+    }
+
+    for (var key in window.kendo.dataviz.ui.roles) {
+        if (ignoredRoles.indexOf(key) < 0) {
+            tags.push(generateTag(window.kendo.dataviz.ui.roles[key]));
+        }
+    }
+
+    var tld = fs.readFileSync(tldPath, "utf8");
+
+    tld = tld.split("<!-- Widgets -->");
+
+    tld[1] = tags.join("\r\n");
+
+    tld = [
+        tld[0],
+        "<!-- Widgets -->\r\n\r\n",
+        tld[1],
+        "\r\n    <!-- Widgets -->",
+        tld[2]
+    ].join("");
+
+    fs.writeFileSync(tldPath, tld, "utf8");
+}
+
+generateTld(root + "resources/META-INF/taglib.tld");
+
+syncTld(root + "resources/META-INF/taglib.tld");

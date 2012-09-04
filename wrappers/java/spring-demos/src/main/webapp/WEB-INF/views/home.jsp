@@ -15,8 +15,8 @@
         <kendo:window name="myWindow">
         	<strong>Window Content</strong>
         	
-        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name">
-        	    <kendo:dataSource type="odata" serverFiltering="true">
+        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3">
+        	    <kendo:dataSource type="odata" serverFiltering="true" serverPaging="true" pageSize="20">
         	    	<kendo:transport>
         	    		<kendo:read url="http://odata.netflix.com/Catalog/Titles"></kendo:read>
         	    	</kendo:transport>
@@ -26,7 +26,7 @@
         </kendo:window>
         
         <kendo:panelBar name="myPanelBar">        	
-        	<kendo:panelBarItem text="Item with content">
+        	<kendo:panelBarItem text="Item with content">,b
         		<strong>Item Contents</strong>
         	</kendo:panelBarItem>
         	<kendo:panelBarItem text="Item with children">

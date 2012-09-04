@@ -2,7 +2,6 @@ package com.kendoui.taglib;
 
 import javax.servlet.jsp.JspException;
 
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Rule;
 

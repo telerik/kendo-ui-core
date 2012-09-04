@@ -25,6 +25,69 @@ public class WindowTag extends WidgetTag {
 
 //>> Attributes
 
+    public String getTitle() {
+        return (String)getProperty("title");
+    }
 
-//<< Attributes
+    public void setTitle(String title) {
+        setProperty("title", title);
+    }
+
+    public boolean getModal() {
+        return (boolean)getProperty("modal");
+    }
+
+    public void setModal(boolean modal) {
+        setProperty("modal", modal);
+    }
+
+    public boolean getResizable() {
+        return (boolean)getProperty("resizable");
+    }
+
+    public void setResizable(boolean resizable) {
+        setProperty("resizable", resizable);
+    }
+
+    public boolean getDraggable() {
+        return (boolean)getProperty("draggable");
+    }
+
+    public void setDraggable(boolean draggable) {
+        setProperty("draggable", draggable);
+    }
+
+    public int getMinWidth() {
+        return (int)getProperty("minWidth");
+    }
+
+    public void setMinWidth(int minWidth) {
+        setProperty("minWidth", minWidth);
+    }
+
+    public int getMinHeight() {
+        return (int)getProperty("minHeight");
+    }
+
+    public void setMinHeight(int minHeight) {
+        setProperty("minHeight", minHeight);
+    }
+
+    public int getMaxWidth() {
+        return (int)getProperty("maxWidth");
+    }
+
+    public void setMaxWidth(int maxWidth) {
+        setProperty("maxWidth", maxWidth);
+    }
+
+    public int getMaxHeight() {
+        return (int)getProperty("maxHeight");
+    }
+
+    public void setMaxHeight(int maxHeight) {
+        setProperty("maxHeight", maxHeight);
+    }
+
+    //<< Attributes
 }

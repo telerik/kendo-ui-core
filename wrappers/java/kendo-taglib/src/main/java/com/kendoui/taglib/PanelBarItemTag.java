@@ -85,5 +85,5 @@ public class PanelBarItemTag extends BaseTag implements PanelBarItemTagContainer
         setProperty("text", text);
     }
 
-//<< Attributes
+    //<< Attributes
 }

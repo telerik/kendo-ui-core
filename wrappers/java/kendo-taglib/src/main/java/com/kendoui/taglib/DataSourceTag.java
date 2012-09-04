@@ -38,5 +38,21 @@ public class DataSourceTag extends BaseTag {
         setProperty("serverFiltering", serverFiltering);
     }
 
-//<< Attributes
+    public boolean getServerPaging() {
+        return (boolean)getProperty("serverPaging");
+    }
+
+    public void setServerPaging(boolean serverPaging) {
+        setProperty("serverPaging", serverPaging);
+    }
+
+    public int getPageSize() {
+        return (int)getProperty("pageSize");
+    }
+
+    public void setPageSize(int pageSize) {
+        setProperty("pageSize", pageSize);
+    }
+
+    //<< Attributes
 }

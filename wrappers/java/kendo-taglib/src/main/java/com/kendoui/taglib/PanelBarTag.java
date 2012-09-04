@@ -36,6 +36,13 @@ public class PanelBarTag extends WidgetTag implements PanelBarItemTagContainer {
 
 //>> Attributes
 
+    public String getExpandMode() {
+        return (String)getProperty("expandMode");
+    }
 
-//<< Attributes
+    public void setExpandMode(String expandMode) {
+        setProperty("expandMode", expandMode);
+    }
+
+    //<< Attributes
 }
