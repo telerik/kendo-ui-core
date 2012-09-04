@@ -687,7 +687,6 @@
                         var headerWrap = th.closest(".k-grid-header-wrap"),
                             webkitCorrection = $.browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
                             firefoxCorrection = $.browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
-                            document.title = firefoxCorrection;
                         left = th.position().left - webkitCorrection + firefoxCorrection;
                     }
 
