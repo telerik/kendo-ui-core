@@ -15,12 +15,20 @@ public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
         setProperty("dataSource", dataSource);
     }
 
-    public void setDataTextField(String dataTextField) {
-        setProperty("dataTextField", dataTextField);
-    }
-
     @Override
     protected Element<?> createElement() {
         return new Input();
     }
+
+//>> Attributes
+
+    public String getDataTextField() {
+        return (String)getProperty("dataTextField");
+    }
+
+    public void setDataTextField(String dataTextField) {
+        setProperty("dataTextField", dataTextField);
+    }
+
+//<< Attributes
 }

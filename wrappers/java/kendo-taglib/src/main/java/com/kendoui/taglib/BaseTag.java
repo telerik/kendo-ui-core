@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.jsp.JspException;
 
 import javax.servlet.jsp.tagext.BodyTagSupport;
-import javax.servlet.jsp.tagext.Tag;
 
 import com.kendoui.taglib.json.Serializable;
 
@@ -21,6 +20,10 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
 
     public void setProperty(String key, Object value) {
         json.put(key, value);
+    }
+
+    public Object getProperty(String key) {
+        return json.get(key);
     }
 
     @Override

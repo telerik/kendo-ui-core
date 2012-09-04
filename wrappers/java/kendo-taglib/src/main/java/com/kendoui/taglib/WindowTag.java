@@ -23,4 +23,8 @@ public class WindowTag extends WidgetTag {
         return element;
     }
 
+//>> Attributes
+
+
+//<< Attributes
 }

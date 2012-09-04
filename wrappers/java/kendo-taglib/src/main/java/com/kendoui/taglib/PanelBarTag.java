@@ -33,4 +33,9 @@ public class PanelBarTag extends WidgetTag implements PanelBarItemTagContainer {
     public List<PanelBarItemTag> items() {
         return items;
     }
+
+//>> Attributes
+
+
+//<< Attributes
 }

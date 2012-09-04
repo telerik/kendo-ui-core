@@ -16,15 +16,27 @@ public class DataSourceTag extends BaseTag {
         return EVAL_PAGE;
     }
 
+    public void setTransport(TransportTag transport) {
+        setProperty("transport", transport);
+    }
+
+//>> Attributes
+
+    public String getType() {
+        return (String)getProperty("type");
+    }
+
     public void setType(String type) {
         setProperty("type", type);
+    }
+
+    public boolean getServerFiltering() {
+        return (boolean)getProperty("serverFiltering");
     }
 
     public void setServerFiltering(boolean serverFiltering) {
         setProperty("serverFiltering", serverFiltering);
     }
 
-    public void setTransport(TransportTag transport) {
-        setProperty("transport", transport);
-    }
+//<< Attributes
 }

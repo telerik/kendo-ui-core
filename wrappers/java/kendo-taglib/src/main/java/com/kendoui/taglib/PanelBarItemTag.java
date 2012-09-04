@@ -9,7 +9,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
 import javax.servlet.jsp.tagext.BodyContent;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
@@ -20,19 +19,9 @@ import com.kendoui.taglib.html.Ul;
 @SuppressWarnings("serial")
 public class PanelBarItemTag extends BaseTag implements PanelBarItemTagContainer {
     private List<PanelBarItemTag> items;
-    private String text;
-
 
     public PanelBarItemTag() {
         items = new ArrayList<PanelBarItemTag>();
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     @Override
@@ -85,4 +74,16 @@ public class PanelBarItemTag extends BaseTag implements PanelBarItemTagContainer
     public List<PanelBarItemTag> items() {
         return items;
     }
+
+//>> Attributes
+
+    public String getText() {
+        return (String)getProperty("text");
+    }
+
+    public void setText(String text) {
+        setProperty("text", text);
+    }
+
+//<< Attributes
 }

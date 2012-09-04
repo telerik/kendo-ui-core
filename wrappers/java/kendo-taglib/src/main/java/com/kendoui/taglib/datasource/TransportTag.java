@@ -19,4 +19,9 @@ public class TransportTag extends BaseTag {
     public void setRead(ReadTag read) {
         setProperty("read", read);
     }
+
+//>> Attributes
+
+
+//<< Attributes
 }
