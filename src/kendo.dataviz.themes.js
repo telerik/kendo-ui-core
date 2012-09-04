@@ -32,6 +32,9 @@
                 donut: {
                     margin: 1
                 },
+                line: {
+                    width: 4
+                },
                 candleStick: {
                     line: {
                         width: 2
