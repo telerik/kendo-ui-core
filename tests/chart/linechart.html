@@ -49,7 +49,7 @@
                         }
                     };
 
-                    this.primaryValueAxis = {
+                    this.valueAxis = {
                         getSlot: getValueSlot,
                         options: {}
                     };
@@ -437,8 +437,8 @@
                 // ------------------------------------------------------------
                 module("Line Chart / Stack / Mixed Series", {
                     setup: function() {
-                        plotArea.namedValueAxes.a = plotArea.primaryValueAxis;
-                        plotArea.namedValueAxes.b = plotArea.primaryValueAxis;
+                        plotArea.namedValueAxes.a = plotArea.valueAxis;
+                        plotArea.namedValueAxes.b = plotArea.valueAxis;
 
                         setupLineChart(plotArea, {
                             series: [

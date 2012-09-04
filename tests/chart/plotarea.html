@@ -37,7 +37,7 @@
                     namedCategoryAxes,
                     secondaryCategoryAxis,
                     namedValueAxes,
-                    primaryValueAxis,
+                    valueAxis,
                     secondaryValueAxis,
                     barSeriesData = [{
                         name: "Value A",
@@ -105,10 +105,10 @@
                     }, options));
 
                     categoryAxis = plotArea.categoryAxis;
+                    valueAxis = plotArea.valueAxis;
                     namedCategoryAxes = plotArea.namedCategoryAxes;
                     secondaryCategoryAxis = namedCategoryAxes.secondary;
                     namedValueAxes = plotArea.namedValueAxes;
-                    primaryValueAxis = plotArea.primaryValueAxis;
                     secondaryValueAxis = namedValueAxes.secondary;
 
                     chartSeries = plotArea.charts[0];
@@ -124,7 +124,7 @@
                 });
 
                 test("appends primary value axis to children collection", function() {
-                    ok($.inArray(primaryValueAxis, plotArea.children) >= 0);
+                    ok($.inArray(valueAxis, plotArea.children) >= 0);
                 });
 
                 test("appends category axis to children collection", function() {
@@ -133,7 +133,7 @@
 
                 test("aligns axes at default crossing values", function() {
                     var axisX = categoryAxis,
-                        axisY = primaryValueAxis;
+                        axisY = valueAxis;
 
                     plotArea.reflow(chartBox);
 
@@ -149,7 +149,7 @@
                     });
 
                     var axisX = categoryAxis,
-                        axisY = primaryValueAxis;
+                        axisY = valueAxis;
 
                     plotArea.reflow(chartBox);
 
@@ -160,7 +160,7 @@
 
                 test("aligns axises at non-default crossing values", function() {
                     var axisX = categoryAxis,
-                        axisY = primaryValueAxis;
+                        axisY = valueAxis;
 
                     axisY.options.axisCrossingValue = 10;
                     axisX.options.axisCrossingValue = 1;
@@ -178,7 +178,7 @@
                     });
 
                     var axisX = categoryAxis,
-                        axisY = primaryValueAxis;
+                        axisY = valueAxis;
 
                     plotArea.reflow(chartBox);
 
@@ -243,7 +243,7 @@
                     plotArea.reflow(chartBox);
 
                     var slotX = categoryAxis.getSlot(categoryAxis.options.axisCrossingValue),
-                        slotY = primaryValueAxis.getSlot(primaryValueAxis.options.axisCrossingValue);
+                        slotY = valueAxis.getSlot(valueAxis.options.axisCrossingValue);
 
                     equals(slotX.y1, slotY.y1);
                 });
@@ -283,7 +283,7 @@
                     plotArea.reflow(chartBox);
 
                     same([secondaryValueAxis.box.x2, secondaryValueAxis.box.y1],
-                         [primaryValueAxis.box.x1 - margin, primaryValueAxis.box.y1]
+                         [valueAxis.box.x1 - margin, valueAxis.box.y1]
                     );
                 });
 
@@ -291,23 +291,23 @@
                     plotArea.reflow(chartBox);
 
                     same([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
-                         [primaryValueAxis.lineBox().y1, primaryValueAxis.lineBox().y2]
+                         [valueAxis.lineBox().y1, valueAxis.lineBox().y2]
                     );
                 });
 
                 test("stacked axes on the left are not mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryValueAxis.options.labels.mirror);
+                    ok(!valueAxis.options.labels.mirror);
                     ok(!secondaryValueAxis.options.labels.mirror);
                 });
 
                 test("user set mirror option is not changed", function() {
-                    primaryValueAxis.options.labels.mirror = true;
+                    valueAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(primaryValueAxis.options.labels.mirror);
+                    ok(valueAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -332,7 +332,7 @@
                     plotArea.reflow(chartBox);
 
                     same([secondaryValueAxis.box.x1, secondaryValueAxis.box.y1],
-                         [primaryValueAxis.box.x2 + margin, primaryValueAxis.box.y1]
+                         [valueAxis.box.x2 + margin, valueAxis.box.y1]
                     );
                 });
 
@@ -340,7 +340,7 @@
                     plotArea.reflow(chartBox);
 
                     same([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
-                         [primaryValueAxis.lineBox().y1, primaryValueAxis.lineBox().y2]
+                         [valueAxis.lineBox().y1, valueAxis.lineBox().y2]
                     );
                 });
 
@@ -354,16 +354,16 @@
                 test("stacked axes on the right are mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(primaryValueAxis.options.labels.mirror);
+                    ok(valueAxis.options.labels.mirror);
                     ok(secondaryValueAxis.options.labels.mirror);
                 });
 
                 test("mirroring inverts the mirror option", function() {
-                    primaryValueAxis.options.labels.mirror = true;
+                    valueAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryValueAxis.options.labels.mirror);
+                    ok(!valueAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -387,30 +387,30 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryValueAxis.box.y2, primaryValueAxis.box.y1 - margin);
+                    equals(secondaryValueAxis.box.y2, valueAxis.box.y1 - margin);
                 });
 
                 test("stacked axes on top are aligned", function() {
                     plotArea.reflow(chartBox);
 
                     same([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
-                         [primaryValueAxis.lineBox().x1, primaryValueAxis.lineBox().x2]
+                         [valueAxis.lineBox().x1, valueAxis.lineBox().x2]
                     );
                 });
 
                 test("stacked axes on the top are mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(primaryValueAxis.options.labels.mirror);
+                    ok(valueAxis.options.labels.mirror);
                     ok(secondaryValueAxis.options.labels.mirror);
                 });
 
                 test("mirroring inverts the mirror option", function() {
-                    primaryValueAxis.options.labels.mirror = true;
+                    valueAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryValueAxis.options.labels.mirror);
+                    ok(!valueAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -431,30 +431,30 @@
 
                     plotArea.reflow(chartBox);
 
-                    same(secondaryValueAxis.box.y1, primaryValueAxis.box.y2 + margin);
+                    same(secondaryValueAxis.box.y1, valueAxis.box.y2 + margin);
                 });
 
                 test("stacked axes on bottom are aligned", function() {
                     plotArea.reflow(chartBox);
 
                     same([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
-                         [primaryValueAxis.lineBox().x1, primaryValueAxis.lineBox().x2]
+                         [valueAxis.lineBox().x1, valueAxis.lineBox().x2]
                     );
                 });
 
                 test("stacked axes on the bottom are not mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryValueAxis.options.labels.mirror);
+                    ok(!valueAxis.options.labels.mirror);
                     ok(!secondaryValueAxis.options.labels.mirror);
                 });
 
                 test("user set mirror option is not changed", function() {
-                    primaryValueAxis.options.labels.mirror = true;
+                    valueAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(primaryValueAxis.options.labels.mirror);
+                    ok(valueAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -567,7 +567,7 @@
                 });
 
                 test("value axis is vertical", function() {
-                    ok(primaryValueAxis.options.vertical);
+                    ok(valueAxis.options.vertical);
                 });
 
                 test("category axis is horizontal", function() {
@@ -575,7 +575,7 @@
                 });
 
                 test("value axis crosses at first category", function() {
-                    equal(primaryValueAxis.options.axisCrossingValue, 0);
+                    equal(valueAxis.options.axisCrossingValue, 0);
                 });
 
                 test("category axis crossing value can be changed", function() {
@@ -622,7 +622,7 @@
                 });
 
                 test("value axis is vertical", function() {
-                    ok(primaryValueAxis.options.vertical);
+                    ok(valueAxis.options.vertical);
                 });
 
                 test("category axis is horizontal", function() {
@@ -653,7 +653,7 @@
                 });
 
                 test("value axis is horizontal", function() {
-                    ok(!primaryValueAxis.options.vertical);
+                    ok(!valueAxis.options.vertical);
                 });
 
                 test("category axis is vertical", function() {
@@ -684,7 +684,7 @@
                 });
 
                 test("value axis is vertical", function() {
-                    ok(primaryValueAxis.options.vertical);
+                    ok(valueAxis.options.vertical);
                 });
 
                 test("category axis is horizontal", function() {
@@ -715,7 +715,7 @@
                 });
 
                 test("value axis is horizontal", function() {
-                    ok(!primaryValueAxis.options.vertical);
+                    ok(!valueAxis.options.vertical);
                 });
 
                 test("category axis is vertical", function() {
@@ -746,7 +746,7 @@
                 });
 
                 test("value axis is horizontal", function() {
-                    ok(!primaryValueAxis.options.vertical);
+                    ok(!valueAxis.options.vertical);
                 });
 
                 test("category axis is vertical", function() {
@@ -772,7 +772,7 @@
                 });
 
                 test("aligns axes at default crossing values", function() {
-                    var axisX = primaryValueAxis,
+                    var axisX = valueAxis,
                         axisY = categoryAxis;
 
                     plotArea.reflow(chartBox);
@@ -788,7 +788,7 @@
                         valueAxis: { reverse: true }
                     });
 
-                    var axisX = primaryValueAxis,
+                    var axisX = valueAxis,
                         axisY = categoryAxis;
 
                     plotArea.reflow(chartBox);
@@ -805,7 +805,7 @@
                         valueAxis: { reverse: true }
                     });
 
-                    var axisX = primaryValueAxis,
+                    var axisX = valueAxis,
                         axisY = categoryAxis;
 
                     plotArea.reflow(chartBox);
@@ -1209,7 +1209,7 @@
                         };
 
                     createPlotArea(categoryAxis, valueAxis);
-                    equals(view.log.line[0].x2, plotArea.primaryValueAxis.lineBox().x2);
+                    equals(view.log.line[0].x2, plotArea.valueAxis.lineBox().x2);
                 });
 
                 test("should not render gridlines for secondary value axis", function() {
@@ -1674,7 +1674,7 @@
                         }]
                     });
 
-                    equals(plotArea.primaryValueAxis.box.x1, 110);
+                    equals(plotArea.valueAxis.box.x1, 110);
                 });
 
                 test("right margin is included in pane width", function() {
@@ -1713,7 +1713,7 @@
                         }
                     });
 
-                    equals(plotArea.primaryValueAxis.box.x2, 990);
+                    equals(plotArea.valueAxis.box.x2, 990);
                 });
 
                 test("value axis is rendered in the first pane by default", function() {
@@ -1725,7 +1725,7 @@
                         }]
                     });
 
-                    equals(plotArea.primaryValueAxis.box.y1, 100);
+                    equals(plotArea.valueAxis.box.y1, 100);
                 });
 
                 test("category axis is rendered in the first pane by default", function() {
@@ -1752,7 +1752,7 @@
                         }
                     });
 
-                    equals(plotArea.primaryValueAxis.box.y1, 550);
+                    equals(plotArea.valueAxis.box.y1, 550);
                 });
 
                 test("value axis height matches the associated pane", function() {
@@ -1767,7 +1767,7 @@
                         }
                     });
 
-                    var axisBox = plotArea.primaryValueAxis.box;
+                    var axisBox = plotArea.valueAxis.box;
                     var paneBox = plotArea.panes[1].box;
 
                     equals(axisBox.y1, paneBox.y1);
@@ -1834,7 +1834,7 @@
                         }
                     });
 
-                    equals(plotArea.primaryValueAxis.box.x2,
+                    equals(plotArea.valueAxis.box.x2,
                            plotArea.panes[1].box.x2);
                 });
 
@@ -1853,7 +1853,7 @@
                         }
                     });
 
-                    var axisBox = plotArea.primaryValueAxis.box;
+                    var axisBox = plotArea.valueAxis.box;
                     var paneBox = plotArea.panes[1].box;
 
                     equals(axisBox.y1, paneBox.y1);
@@ -1955,7 +1955,7 @@
                     });
 
                     equals(plotArea.namedValueAxes["secondary"].box.x2,
-                           plotArea.primaryValueAxis.box.x2);
+                           plotArea.valueAxis.box.x2);
                 });
 
                 test("right anchor axis is assigned per pane", function() {
@@ -1976,7 +1976,7 @@
                     });
 
                     equals(plotArea.namedValueAxes["secondary"].box.x1,
-                           plotArea.primaryValueAxis.box.x1);
+                           plotArea.valueAxis.box.x1);
                 });
 
                 // ------------------------------------------------------------

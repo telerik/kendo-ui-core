@@ -1712,7 +1712,7 @@
                 axisName = series.axis,
                 axis = axisName ?
                     plotArea.namedValueAxes[axisName] :
-                    plotArea.primaryValueAxis;
+                    plotArea.valueAxis;
 
             if (!axis) {
                 throw new Error("Unable to locate value axis with name " + axisName);
@@ -5207,9 +5207,8 @@
             }
 
             primaryAxis = axes[0];
-            plotArea.primaryValueAxis = primaryAxis;
+            plotArea.valueAxis = primaryAxis;
 
-            // TODO: Consider removing axisX and axisY aliases
             if (invertAxes) {
                 plotArea.axisX = primaryAxis;
             } else {

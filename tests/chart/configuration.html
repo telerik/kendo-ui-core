@@ -183,12 +183,12 @@
 
                 test("default value axis type is numeric", function() {
                     createChart();
-                    equal(plotArea.primaryValueAxis.options.type, "numeric");
+                    equal(plotArea.valueAxis.options.type, "numeric");
                 });
 
                 test("value axis is rendered vertically by default", function() {
                     createChart();
-                    ok(plotArea.primaryValueAxis instanceof dataviz.NumericAxis);
+                    ok(plotArea.valueAxis instanceof dataviz.NumericAxis);
                 });
 
                 test("global color is applied to line", function() {
@@ -198,7 +198,7 @@
                         }
                     });
 
-                    equals(plotArea.primaryValueAxis.options.line.color, "#f00");
+                    equals(plotArea.valueAxis.options.line.color, "#f00");
                 });
 
                 test("line color overrides global color", function() {
@@ -208,7 +208,7 @@
                         }
                     });
 
-                    equals(plotArea.primaryValueAxis.options.line.color, "#f00");
+                    equals(plotArea.valueAxis.options.line.color, "#f00");
                 });
 
                 test("global color is applied to labels", function() {
@@ -218,7 +218,7 @@
                         }
                     });
 
-                    equals(plotArea.primaryValueAxis.options.labels.color, "#f00");
+                    equals(plotArea.valueAxis.options.labels.color, "#f00");
                 });
 
                 test("labels color overrides global color", function() {
@@ -228,7 +228,7 @@
                         }
                     });
 
-                    equals(plotArea.primaryValueAxis.options.labels.color, "#f00");
+                    equals(plotArea.valueAxis.options.labels.color, "#f00");
                 });
 
                 test("global color is applied to title", function() {
@@ -238,7 +238,7 @@
                         }
                     });
 
-                    equals(plotArea.primaryValueAxis.options.title.color, "#f00");
+                    equals(plotArea.valueAxis.options.title.color, "#f00");
                 });
 
                 test("title color overrides global color", function() {
@@ -248,7 +248,7 @@
                         }
                     });
 
-                    equals(plotArea.primaryValueAxis.options.title.color, "#f00");
+                    equals(plotArea.valueAxis.options.title.color, "#f00");
                 });
 
                 // ------------------------------------------------------------

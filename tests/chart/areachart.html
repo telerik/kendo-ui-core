@@ -52,7 +52,7 @@
                         }
                     };
 
-                    this.primaryValueAxis = {
+                    this.valueAxis = {
                         getSlot: getValueSlot,
                         lineBox: function() {
                             return new Box2D(0,0,0,2);
@@ -225,7 +225,7 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Multiple Series", {
                     setup: function() {
-                        plotArea.namedValueAxes.secondary = plotArea.primaryValueAxis;
+                        plotArea.namedValueAxes.secondary = plotArea.valueAxis;
 
                         setupAreaChart(plotArea, {
                             series: [
@@ -461,8 +461,8 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Stack / Mixed Series", {
                     setup: function() {
-                        plotArea.namedValueAxes.a = plotArea.primaryValueAxis;
-                        plotArea.namedValueAxes.b = plotArea.primaryValueAxis;
+                        plotArea.namedValueAxes.a = plotArea.valueAxis;
+                        plotArea.namedValueAxes.b = plotArea.valueAxis;
 
                         setupAreaChart(plotArea, {
                             series: [

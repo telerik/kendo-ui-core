@@ -52,7 +52,7 @@
                         }
                     };
 
-                    this.primaryValueAxis = {
+                    this.valueAxis = {
                         getSlot: getValueSlot,
                         options: {
                             axisCrossingValue: 0
@@ -179,12 +179,12 @@
                 });
 
                 test("sets bar aboveAxis for reversed value axis", function() {
-                    plotArea.primaryValueAxis.options.reverse = true;
+                    plotArea.valueAxis.options.reverse = true;
 
                     setupBarChart(plotArea, { series: [ positiveSeries ] });
                     equal(series.points[0].options.aboveAxis, false);
 
-                    plotArea.primaryValueAxis.options.reverse = false;
+                    plotArea.valueAxis.options.reverse = false;
                 });
 
                 test("Throws error when unable to locate value axis", function() {
@@ -232,18 +232,18 @@
                 });
 
                 test("sets bar aboveAxis for reversed value axis", function() {
-                    plotArea.primaryValueAxis.options.reverse = true;
+                    plotArea.valueAxis.options.reverse = true;
 
                     setupBarChart(plotArea, { series: [ negativeSeries ] });
                     equal(series.points[0].options.aboveAxis, true);
 
-                    plotArea.primaryValueAxis.options.reverse = false;
+                    plotArea.valueAxis.options.reverse = false;
                 });
 
                 // ------------------------------------------------------------
                 module("Bar Chart / Multiple Series", {
                     setup: function() {
-                        plotArea.namedValueAxes.secondary = plotArea.primaryValueAxis;
+                        plotArea.namedValueAxes.secondary = plotArea.valueAxis;
 
                         setupBarChart(plotArea, {
                             series: [
@@ -399,9 +399,9 @@
                 var oldGetSlot;
                 module("Bar Chart / Stack / Positive Values", {
                     setup: function() {
-                        oldGetSlot = plotArea.primaryValueAxis.getSlot;
+                        oldGetSlot = plotArea.valueAxis.getSlot;
 
-                        plotArea.primaryValueAxis.getSlot = function(a, b) {
+                        plotArea.valueAxis.getSlot = function(a, b) {
                             var a = typeof a === "undefined" ? 0 : a,
                                 b = typeof b === "undefined" ? a : b,
                                 top = VALUE_AXIS_MAX - Math.max(a, b),
@@ -418,7 +418,7 @@
                         );
                     },
                     teardown: function() {
-                        plotArea.primaryValueAxis.getSlot = oldGetSlot;
+                        plotArea.valueAxis.getSlot = oldGetSlot;
                     }
                 });
 
@@ -533,9 +533,9 @@
                 var oldGetSlot;
                 module("Bar Chart / Stack / Mixed Values", {
                     setup: function() {
-                        oldGetSlot = plotArea.primaryValueAxis.getSlot;
+                        oldGetSlot = plotArea.valueAxis.getSlot;
 
-                        plotArea.primaryValueAxis.getSlot = function(a, b) {
+                        plotArea.valueAxis.getSlot = function(a, b) {
                             var a = typeof a === "undefined" ? 0 : a,
                                 b = typeof b === "undefined" ? a : b,
                                 top = VALUE_AXIS_MAX - Math.max(a, b),
@@ -555,7 +555,7 @@
                         });
                     },
                     teardown: function() {
-                        plotArea.primaryValueAxis.getSlot = oldGetSlot;
+                        plotArea.valueAxis.getSlot = oldGetSlot;
                     }
                 });
 
@@ -634,8 +634,8 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Mixed Series", {
                     setup: function() {
-                        plotArea.namedValueAxes.a = plotArea.primaryValueAxis;
-                        plotArea.namedValueAxes.b = plotArea.primaryValueAxis;
+                        plotArea.namedValueAxes.a = plotArea.valueAxis;
+                        plotArea.namedValueAxes.b = plotArea.valueAxis;
 
                         setupBarChart(plotArea, {
                             series: [
