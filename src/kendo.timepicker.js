@@ -23,6 +23,10 @@
         MS_PER_DAY = 86400000,
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
+        ARIA_SELECTED = "aria-selected",
+        ARIA_EXPANDED = "aria-expanded",
+        ARIA_HIDDEN = "aria-hidden",
+        ID = "id",
         isArray = $.isArray,
         extend = $.extend,
         proxy = $.proxy,
@@ -51,7 +55,7 @@
             that._listboxID = id + "_listbox";
             that._optionID = id + "_option_selected";
 
-            that.ul.attr("id", that._listboxID);
+            that.ul.attr(ID, that._listboxID);
         }
 
         that._popup();
@@ -67,15 +71,15 @@
                 if (that._current) {
                     that._current
                         .removeClass(SELECTED)
-                        .removeAttr("aria-selected")
-                        .removeAttr("id");
+                        .removeAttr(ARIA_SELECTED)
+                        .removeAttr(ID);
                 }
 
                 if (candidate) {
 
                     candidate = $(candidate).addClass(SELECTED)
-                                            .attr("id", that._optionID)
-                                            .attr("aria-selected", true);
+                                            .attr(ID, that._optionID)
+                                            .attr(ARIA_SELECTED, true);
 
                     that.scroll(candidate[0]);
                 }
@@ -427,14 +431,13 @@
 
             element = that.element;
             options = that.options;
-            id = element.attr("id");
 
             normalize(options);
 
             that._wrapper();
 
             that.timeView = timeView = new TimeView(extend({}, options, {
-                id: id,
+                id: element.attr(ID),
                 anchor: that.wrapper,
                 format: options.format,
                 change: function(value, trigger) {
@@ -448,16 +451,16 @@
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
                     } else {
-                        element.attr("aria-expanded", true);
-                        timeView.ul.attr("aria-hidden", false);
+                        element.attr(ARIA_EXPANDED, true);
+                        timeView.ul.attr(ARIA_HIDDEN, false);
                     }
                 },
                 close: function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
                     } else {
-                        element.attr("aria-expanded", false);
-                        timeView.ul.attr("aria-hidden", true);
+                        element.attr(ARIA_EXPANDED, false);
+                        timeView.ul.attr(ARIA_HIDDEN, true);
                     }
                 }
             }));
@@ -472,14 +475,12 @@
                 .on("focus" + ns, function() {
                     that._inputWrapper.addClass(FOCUSED);
                 })
-                .attr("role", "textbox")
-                .attr("aria-haspopup", "true")
-                .attr("aria-expanded", "false")
-                .attr("aria-owns", timeView._listboxID)
-
-            if (id) {
-                that._arrow.attr("aria-controls", timeView._listboxID);
-            }
+                .attr({
+                    "role": "textbox",
+                    "aria-haspopup": true,
+                    "aria-expanded": false,
+                    "aria-owns": timeView._listboxID
+                });
 
             that.enable(!element.is('[disabled]'));
             that.value(options.value || element.val());
@@ -636,7 +637,10 @@
                 arrow = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-clock">select</span></span>').insertAfter(element);
             }
 
-            that._arrow = arrow.attr("role", "button");
+            that._arrow = arrow.attr({
+                "role": "button",
+                "aria-controls": that.timeView._listboxID
+            });
         },
 
         _keydown: function(e) {
