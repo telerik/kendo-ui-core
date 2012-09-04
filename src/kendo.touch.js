@@ -36,8 +36,8 @@
                     {
                         callback({
                             direction: direction,
-                            userEvents: e.userEvents,
-                            target: $(e.event.currentTarget)
+                            touch: touch,
+                            target: touch.target
                         });
 
                         touch.cancel();
@@ -48,7 +48,9 @@
     });
 
     $.fn.kendoMobileSwipe = function(callback, options) {
-        new Swipe(this, callback, options);
+        this.each(function() {
+            new Swipe(this, callback, options);
+        });
     };
 
 
@@ -84,7 +86,7 @@
                 gestureend: gestureEventProxy("gestureend")
             });
 
-            if (options.captureSwipe) {
+            if (options.enableSwipe) {
                 that.events.bind("start", proxy(that, "_swipestart"));
                 that.events.bind("move", proxy(that, "_swipemove"));
             } else {
@@ -102,18 +104,19 @@
             "drag",
             "dragend",
             "tap",
+            "doubletap",
+            "hold",
             "swipe",
             "gesturestart",
             "gesturechange",
-            "gestureend",
-            "hold"
+            "gestureend"
         ],
 
         options: {
             name: "Touch",
             surface: null,
             multiTouch: false,
-            captureSwipe: false,
+            enableSwipe: false,
             minXDelta: 30,
             maxYDelta: 20,
             maxDuration: 1000,
@@ -145,7 +148,6 @@
                 touch = e.touch;
 
             that._cancelHold();
-            that._triggerTouch("tap", e);
 
             if (lastTap) {
                 if (
@@ -157,6 +159,7 @@
 
                 that.lastTap = null;
             } else {
+                that._triggerTouch("tap", e);
                 that.lastTap = e.touch;
             }
         },
