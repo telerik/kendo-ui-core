@@ -269,26 +269,6 @@
         }
     });
 
-    function gestureTouchInfo(e) {
-        var finger1 = e.touches[0],
-            x1 = finger1.x.location,
-            y1 = finger1.y.location,
-            finger2 = e.touches[1],
-            x2 = finger2.x.location,
-            y2 = finger2.y.location,
-            dx = x1 - x2,
-            dy = y1 - y2;
-
-        return {
-            center: {
-               x: (x1 + x2) / 2,
-               y: (y1 + y2) / 2
-            },
-
-            distance: Math.sqrt(dx*dx + dy*dy)
-        };
-    }
-
     var Pane = Class.extend({
 
         init: function(options) {
@@ -319,17 +299,16 @@
 
             that.userEvents.bind(["move", "end", "gesturestart", "gesturechange"], {
                 gesturestart: function(e) {
-                    that.gestureInfo = gestureTouchInfo(e);
+                    that.gesture = e;
                 },
 
                 gesturechange: function(e) {
-                    var previousGestureInfo = that.gestureInfo,
-                        previousCenter = previousGestureInfo.center,
+                    var previousGesture = that.gesture,
+                        previousCenter = previousGesture.center,
 
-                        gestureInfo = gestureTouchInfo(e),
-                        center = gestureInfo.center,
+                        center = e.center,
 
-                        scaleDelta = gestureInfo.distance / previousGestureInfo.distance,
+                        scaleDelta = e.distance / previousGesture.distance,
 
                         minScale = that.dimensions.minScale,
                         coordinates;
@@ -350,7 +329,7 @@
                     y.dragMove(coordinates.y);
 
                     that.dimensions.rescale(movable.scale);
-                    that.gestureInfo = gestureInfo;
+                    that.gesture = e;
                 },
 
                 move: function(e) {

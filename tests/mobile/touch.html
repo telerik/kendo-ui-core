@@ -96,6 +96,13 @@
                 move(18, 18);
             });
 
+            module("tap events", {
+                setup: function() {
+                    element = $("<i />");
+                    touch = element.kendoTouch({ minHold: 100, doubleTapTimeout: 100 }).data("kendoTouch");
+                }
+            });
+
             test("triggers tap on press + release", 1, function() {
                 touch.bind("tap", function() {
                     ok(true);
@@ -103,6 +110,103 @@
 
                 press(10, 10);
                 release(10, 10);
+            });
+
+            test("triggers double tap on two subsequent taps", 1, function() {
+                touch.bind("doubletap", function() {
+                    ok(true);
+                });
+
+                press(10, 10);
+                release(10, 10);
+
+                press(10, 10);
+                release(10, 10);
+            });
+
+            test("too distant taps do not trigger double tap", 0, function() {
+                touch.bind("doubletap", function() {
+                    ok(false);
+                });
+
+                press(10, 10);
+                release(10, 10);
+
+                press(20, 20);
+                release(20, 20);
+            });
+
+            test("triple tapping triggers double tap once", 1, function() {
+                touch.bind("doubletap", function() {
+                    ok(true);
+                });
+
+                press(10, 10);
+                release(10, 10);
+
+                press(10, 10);
+                release(10, 10);
+
+                press(10, 10);
+                release(10, 10);
+            });
+
+            asyncTest("does not trigger double tap if second one is done after the doubleTapTimeout", 0, function() {
+                touch.bind("doubletap", function() {
+                    ok(false);
+                });
+
+                press(10, 10);
+                release(10, 10);
+
+                setTimeout(function() {
+                    start();
+                    press(10, 10);
+                    release(10, 10);
+                }, 200);
+            });
+
+            asyncTest("triggers hold if the threshold has passed", 1, function() {
+                touch.bind("hold", function() {
+                    ok(true);
+                });
+
+                press(10, 10);
+
+                setTimeout(function() {
+                    start();
+                    release(10, 10);
+                }, 120);
+            });
+
+            asyncTest("moving the finger voids the  hold", 0, function() {
+                touch.bind("hold", function() {
+                    ok(false);
+                });
+
+                press(10, 10);
+                move(20, 20);
+
+                setTimeout(function() {
+                    start();
+                    release(20, 20);
+                }, 120);
+            });
+
+            asyncTest("does not trigger hold if the the user releases before the threshold specified", 0, function() {
+                touch.bind("hold", function() {
+                    ok(false);
+                });
+
+                press(10, 10);
+
+                setTimeout(function() {
+                    release();
+                }, 10);
+
+                setTimeout(function() {
+                    start();
+                }, 120);
             });
 
             module("swipe events", {

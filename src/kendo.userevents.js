@@ -5,7 +5,6 @@
         document = window.document,
         SURFACE = $(document.documentElement),
         Class = kendo.Class,
-        Widget = kendo.ui.Widget,
         Observable = kendo.Observable,
         proxy = $.proxy,
         now = $.now,
@@ -54,6 +53,24 @@
         }
 
         parent.trigger(e.type);
+    }
+
+    function touchDelta(touch1, touch2) {
+        var x1 = touch1.x.location,
+            y1 = touch1.y.location,
+            x2 = touch2.x.location,
+            y2 = touch2.y.location,
+            dx = x1 - x2,
+            dy = y1 - y2;
+
+        return {
+            center: {
+               x: (x1 + x2) / 2,
+               y: (y1 + y2) / 2
+            },
+
+            distance: Math.sqrt(dx*dx + dy*dy)
+        };
     }
 
     function getTouches(e) {
@@ -183,6 +200,8 @@
         end: function(touchInfo) {
             var that = this;
 
+            that.endTime = now();
+
             if (that._finished) { return; }
 
             if (that._moved) {
@@ -217,9 +236,9 @@
         },
 
         _start: function(touchInfo) {
-           this.startTime = now();
-           this._moved = true;
-           this._trigger(START, touchInfo);
+            this.startTime = now();
+            this._moved = true;
+            this._trigger(START, touchInfo);
         },
 
 
@@ -331,7 +350,8 @@
         },
 
         notify: function(eventName, data) {
-            var that = this;
+            var that = this,
+                touches = that.touches;
 
             if (this._isMultiTouch()) {
                 switch(eventName) {
@@ -346,7 +366,7 @@
                         break;
                 }
 
-                data.touches = that.touches;
+                $.extend(data, {touches: touches}, touchDelta(touches[0], touches[1]));
             }
 
             return this.trigger(eventName, data);
@@ -458,5 +478,6 @@
         }
     });
 
+    kendo.touchDelta = touchDelta;
     kendo.UserEvents = UserEvents;
  })(jQuery);

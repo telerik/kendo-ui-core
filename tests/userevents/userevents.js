@@ -223,13 +223,30 @@ module("gestures", {
 
 });
 
+test("gesture start passes the center of the two touches", 2, function(){
+    userEvents.bind("gesturestart", function(e) {
+        equal(e.center.x, 10);
+        equal(e.center.y, 20);
+    });
+
+    press(5, 15, 2);
+});
+
+test("gesture start passes the distance of the two touches", 1, function(){
+    userEvents.bind("gesturestart", function(e) {
+        equal(e.distance, 14.1, 0.1);
+    });
+
+    press(5, 15, 2);
+});
+
 test("triggers gesturestart on second touch move", 1, function(){
     userEvents.bind("gesturestart", function(e) {
         ok(true);
     });
 
-    press(10, 20, 2)
-    move(15, 25, 2)
+    press(10, 20, 2);
+    move(15, 25, 2);
 });
 
 test("accepts maximum 2 fingers", 1, function(){
@@ -237,8 +254,8 @@ test("accepts maximum 2 fingers", 1, function(){
         ok(true);
     });
 
-    press(10, 20, 2)
-    press(10, 20, 3)
+    press(10, 20, 2);
+    press(10, 20, 3);
 });
 
 

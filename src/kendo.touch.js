@@ -2,7 +2,8 @@
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
-        abs = Math.abs;
+        abs = Math.abs,
+        MAX_DOUBLE_TAP_DISTANCE = 3;
 
 
     var Swipe = kendo.Class.extend({
@@ -61,18 +62,22 @@
             element = that.element;
 
             function eventProxy(name) {
-                return function(e) { that.trigger(name, { touch: e.touch }); }
+                return function(e) {
+                    that._triggerTouch(name, e);
+                };
             }
 
             function gestureEventProxy(name) {
-                return function(e) { that.trigger(name, { touches: e.touches }); }
+                return function(e) {
+                    that.trigger(name, { touches: e.touches });
+                };
             }
 
             that.events = new kendo.UserEvents(element, {
                 surface: options.surface,
                 multiTouch: options.multiTouch,
                 allowSelection: true,
-                press: eventProxy("touchstart"),
+                press: proxy(that, "_touchstart"),
                 tap: proxy(that, "_tap"),
                 gesturestart: gestureEventProxy("gesturestart"),
                 gesturechange: gestureEventProxy("gesturechange"),
@@ -80,10 +85,10 @@
             });
 
             if (options.captureSwipe) {
-                that.events.bind("start", proxy(that, "_swipeStart"));
-                that.events.bind("move", proxy(that, "_swipeMove"));
+                that.events.bind("start", proxy(that, "_swipestart"));
+                that.events.bind("move", proxy(that, "_swipemove"));
             } else {
-                that.events.bind("start", eventProxy("dragstart"));
+                that.events.bind("start", proxy(that, "_dragstart"));
                 that.events.bind("move", eventProxy("drag"));
                 that.events.bind("end", eventProxy("dragend"));
             }
@@ -100,7 +105,8 @@
             "swipe",
             "gesturestart",
             "gesturechange",
-            "gestureend"
+            "gestureend",
+            "hold"
         ],
 
         options: {
@@ -110,25 +116,71 @@
             captureSwipe: false,
             minXDelta: 30,
             maxYDelta: 20,
-            maxDuration: 1000
+            maxDuration: 1000,
+            minHold: 800,
+            doubleTapTimeout: 400
+        },
+
+        _cancelHold: function() {
+            clearTimeout(this.holdTimeout);
+        },
+
+        _triggerTouch: function(type, e) {
+            this.trigger(type, { touch: e.touch });
+        },
+
+        _touchstart: function(e) {
+            var that = this;
+
+            that._triggerTouch("touchstart", e);
+
+            that.holdTimeout = setTimeout(function() {
+                that._triggerTouch("hold", e);
+            }, that.options.minHold);
         },
 
         _tap: function(e) {
-            this.trigger("tap", { touch: e.touch });
+            var that = this,
+                lastTap = that.lastTap,
+                touch = e.touch;
+
+            that._cancelHold();
+            that._triggerTouch("tap", e);
+
+            if (lastTap) {
+                if (
+                        touch.endTime - lastTap.endTime < that.options.doubleTapTimeout &&
+                        kendo.touchDelta(touch, lastTap).distance < MAX_DOUBLE_TAP_DISTANCE
+                   ) {
+                       that._triggerTouch("doubletap", e);
+                   }
+
+                that.lastTap = null;
+            } else {
+                that.lastTap = e.touch;
+            }
         },
 
-        _swipeStart: function(e) {
+        _dragstart: function(e) {
+            this._cancelHold();
+            this._triggerTouch("dragstart", e);
+        },
+
+        _swipestart: function(e) {
+            this._cancelHold();
             if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
                 e.sender.capture();
             }
         },
 
-        _swipeMove: function(e) {
+        _swipemove: function(e) {
             var that = this,
                 options = that.options,
                 touch = e.touch,
                 duration = e.event.timeStamp - touch.startTime,
                 direction = touch.x.initialDelta > 0 ? "right" : "left";
+
+            that._cancelHold();
 
             if (
                 abs(touch.x.initialDelta) >= options.minXDelta &&

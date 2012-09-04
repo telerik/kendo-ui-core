@@ -80,13 +80,6 @@ function release(id) {
     triggerTouchEvent("mouseup", { pageX: 1, pageY: 1, identifier: id || 1});
 }
 
-test("determines zoom point", 2, function() {
-    press(10, 10);
-    press(13, 14, 2);
-    equal(pane.gestureInfo.center.x, 11.5);
-    equal(pane.gestureInfo.center.y, 12);
-})
-
 test("zooms content", function() {
     press(10, 10);
     press(13, 14, 2);
