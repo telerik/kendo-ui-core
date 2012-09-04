@@ -23,11 +23,14 @@
     HOVER = "k-state-hover",
     HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
     MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
+    ID = "id",
     MIN = "min",
     MAX = "max",
     MONTH = "month",
     FIRST = "first",
     ARIA_DISABLED = "aria-disabled",
+    ARIA_EXPANDED = "aria-expanded",
+    ARIA_HIDDEN = "aria-hidden",
     calendar = kendo.calendar,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
@@ -57,7 +60,7 @@
             sharedCalendar = DatePicker.sharedCalendar;
 
         if (!sharedCalendar) {
-            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr("id", kendo.guid()).hide().appendTo(body));
+            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr(ID, kendo.guid()).hide().appendTo(body));
             calendar.makeUnselectable(sharedCalendar.element);
         }
 
@@ -66,7 +69,7 @@
         that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
 
         if (options.id) {
-            that.popup.element.attr("id", options.id);
+            that.popup.element.attr(ID, options.id);
         }
 
         that._templates();
@@ -343,10 +346,11 @@
 
             that._icon();
 
-            id = element.attr("id");
+            id = element.attr(ID);
 
             if (id) {
                 id = id + "_datepicker_dateview";
+
                 element.attr("aria-owns", id);
                 that._dateIcon.attr("aria-controls", id);
             }
@@ -363,8 +367,8 @@
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
                     } else {
-                        element.attr("aria-expanded", false);
-                        that.dateView.popup.element.attr("aria-hidden", true);
+                        element.attr(ARIA_EXPANDED, false);
+                        that.dateView.popup.element.attr(ARIA_HIDDEN, true);
                     }
                 },
                 open: function(e) {
@@ -381,8 +385,8 @@
                             that.dateView.calendar._focus(date);
                         }
 
-                        element.attr("aria-expanded", true);
-                        that.dateView.popup.element.attr("aria-hidden", false);
+                        element.attr(ARIA_EXPANDED, true);
+                        that.dateView.popup.element.attr(ARIA_HIDDEN, false);
                     }
                 }
             }));
@@ -395,9 +399,11 @@
                 .on("focus" + ns, function(e) {
                     that._inputWrapper.addClass(FOCUSED);
                 })
-                .attr("role", "textbox")
-                .attr("aria-haspopup", true)
-                .attr("aria-expanded", false);
+                .attr({
+                    role: "textbox",
+                    "aria-haspopup": true,
+                    "aria-expanded": false
+                });
 
             that._reset();
 
