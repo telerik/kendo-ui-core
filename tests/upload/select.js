@@ -49,3 +49,43 @@ test("cancelling select event removes input", function() {
     equal($("input", uploadInstance.wrapper).length, 1);
 });
 
+test("multiple selection is disabled in Opera", function() {
+    var opera = kendo.support.browser.opera;
+    kendo.support.browser.opera = true;
+
+    uploadInstance = createUpload();
+    equals(uploadInstance._supportsMultiple(), false);
+
+    kendo.support.browser.opera = opera;
+});
+
+test("multiple selection is disabled in Safari on Windows", function() {
+    var safari = kendo.support.browser.safari;
+    kendo.support.browser.safari = true;
+
+    uploadInstance = createUpload();
+    uploadInstance._userAgent = function() {
+        return "Mozilla/5.0 (Windows NT 6.1; WOW64) " +
+        "AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2";
+    };
+
+    equals(uploadInstance._supportsMultiple(), false);
+
+    kendo.support.browser.safari = safari;
+});
+
+test("multiple selection is enabled in Safari", function() {
+    var safari = kendo.support.browser.safari;
+    kendo.support.browser.safari = true;
+
+    uploadInstance = createUpload();
+    uploadInstance._userAgent = function() {
+        return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) " +
+        "AppleWebKit/534.55.3 (KHTML, like Gecko) Version/5.1.3 Safari/534.53.10";
+    };
+
+    equals(uploadInstance._supportsMultiple(), true);
+
+    kendo.support.browser.safari = safari;
+});
+
