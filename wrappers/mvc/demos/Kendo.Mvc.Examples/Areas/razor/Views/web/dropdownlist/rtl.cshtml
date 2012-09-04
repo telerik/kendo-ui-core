@@ -1,0 +1,21 @@
+<div class="k-rtl">
+
+@(Html.Kendo().DropDownList()
+        .Name("dropdownlist")
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .BindTo(new List<SelectListItem>()
+        {
+            new SelectListItem() {
+                Text = "Item1", Value = "1"  
+            },
+            new SelectListItem() {
+                Text = "Item2", Value = "2"  
+            },
+            new SelectListItem() {
+                Text = "Item3", Value = "3"  
+            }
+        })
+)
+
+</div>
