@@ -425,7 +425,7 @@
 
     var TimePicker = Widget.extend({
         init: function(element, options) {
-            var that = this, id, timeView;
+            var that = this, timeView;
 
             Widget.fn.init.call(that, element, options);
 
@@ -686,7 +686,6 @@
             var that = this,
                 options = that.options,
                 timeView = that.timeView,
-                optionID = timeView._optionID,
                 date = timeView._parse(value);
 
             if (!isInRange(date, options.min, options.max)) {

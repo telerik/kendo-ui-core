@@ -63,7 +63,7 @@
                     }),
                     date = new Date(2000, 10, 10, 10, 10, 0);
 
-                equal(tv.template(kendo.toString(date, "hh:mm tt")), '<li class="k-item" unselectable="on">' + kendo.toString(date, "hh:mm tt") + '</li>');
+                equal(tv.template(kendo.toString(date, "hh:mm tt")), '<li tabindex="-1" role="option" class="k-item" unselectable="on">' + kendo.toString(date, "hh:mm tt") + '</li>');
             });
 
             //TimePicker
