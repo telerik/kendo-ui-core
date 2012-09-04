@@ -38,6 +38,7 @@
     .Draggable()
     .Resizable()
     .Width(600)
+    .Events(ev => ev.Close("onClose"))
 )
 
 <span id="undo" style="display:none" class="k-button">Click here to open the window.</span>
