@@ -39,7 +39,7 @@
             });
 
             test("DatePicker adds aria-owns", function() {
-                equal(input.attr("aria-owns"), "test_datepicker_dateview");
+                equal(input.attr("aria-owns"), "test_dateview");
             });
 
             test("DatePicker adds aria-haspopup", function() {
@@ -47,7 +47,7 @@
             });
 
             test("DatePicker sets id to the popup element", function() {
-                equal(instance.dateView.popup.element.attr("id"), "test_datepicker_dateview");
+                equal(instance.dateView.popup.element.attr("id"), "test_dateview");
             });
 
             test("DatePicker adds aria-expanded", function() {
@@ -84,7 +84,7 @@
             });
 
             test("DatePicker adds aria-controls to the toggle button", function() {
-                equal(instance._dateIcon.attr("aria-controls"), "test_datepicker_dateview");
+                equal(instance._dateIcon.attr("aria-controls"), "test_dateview");
             });
 
             test("DatePicker sets id to the shared calendar", function() {

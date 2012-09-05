@@ -56,8 +56,19 @@
 
     var DateView = function(options) {
         var that = this,
+            id = options.id,
             body = document.body,
-            sharedCalendar = DatePicker.sharedCalendar;
+            sharedCalendar = DatePicker.sharedCalendar,
+            div = $(DIV).attr(ARIA_HIDDEN, "true")
+                        .addClass("k-calendar-container")
+                        .appendTo(body);
+
+        if (id) {
+            id += "_dateview";
+
+            div.attr(ID, id);
+            that._dateViewID = id;
+        }
 
         if (!sharedCalendar) {
             sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr(ID, kendo.guid()).hide().appendTo(body));
@@ -347,17 +358,8 @@
 
             that._icon();
 
-            id = element.attr(ID);
-
-            if (id) {
-                id = id + "_datepicker_dateview";
-
-                element.attr("aria-owns", id);
-                that._dateIcon.attr("aria-controls", id);
-            }
-
             that.dateView = new DateView(extend({}, options, {
-                id: id,
+                id: element.attr(ID),
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope
@@ -405,6 +407,12 @@
                     "aria-haspopup": true,
                     "aria-expanded": false
                 });
+
+            id = that.dateView._dateViewID;
+            if (id) {
+                element.attr("aria-owns", id);
+                that._dateIcon.attr("aria-controls", id);
+            }
 
             that._reset();
 
