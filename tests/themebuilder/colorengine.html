@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ThemeBuilder tests</title>
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.panelbar.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+
+        <link rel="stylesheet" href="../../tests/qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">ThemeBuilder tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script src="../../themebuilder/src/scripts/less.js"></script>
+        <script src="../../themebuilder/src/scripts/themebuilder.js"></script>
+        <script src="../../themebuilder/src/scripts/colorengine.js"></script>
+
+        <script src="../jshint/jshint.js"></script>
+        <script src="../qhint.js"></script>
+
+        <script>
+            var ThemeBuilder = kendo.ThemeBuilder,
+                LessConstants = kendo.LessConstants;
+
+            module("ColorEngine");
+
+            /* hex2rgb */
+
+            test("Convert #000000 to RGB", function() {
+                var rgb = ColorEngine.hex2rgb("#000000");
+
+                equals(rgb.red, 0);
+                equals(rgb.green, 0);
+                equals(rgb.blue, 0);
+            });
+
+            test("Convert #ffffff to RGB", function() {
+                var rgb = ColorEngine.hex2rgb("#ffffff");
+
+                equals(rgb.red, 255);
+                equals(rgb.green, 255);
+                equals(rgb.blue, 255);
+            });
+
+            test("Convert #ff0000 to RGB", function() {
+                var rgb = ColorEngine.hex2rgb("#ff0000");
+
+                equals(rgb.red, 255);
+                equals(rgb.green, 0);
+                equals(rgb.blue, 0);
+            });
+
+            /* rgb2hex */
+
+            test("Convert RGB Black to HEX", function() {
+                var hex = ColorEngine.rgb2hex({ red: 0, green: 0, blue: 0 });
+
+                equals(hex, "#000000");
+            });
+
+            test("Convert RGB White to HEX", function() {
+                var hex = ColorEngine.rgb2hex({ red: 255, green: 255, blue: 255 });
+
+                equals(hex, "#ffffff");
+            });
+
+            /* css2hex */
+
+            test("css2hex() on rgb() black", function() {
+                var hex = ColorEngine.css2hex("rgb(0, 0, 0)");
+
+                equals(hex, "#000000");
+            });
+
+            test("css2hex() on rgb() white", function() {
+                var hex = ColorEngine.css2hex("rgb(255, 255, 255)");
+
+                equals(hex, "#ffffff");
+            });
+
+            test("css2hex() does not modify rgba", function() {
+                var hex = ColorEngine.css2hex("rgba(255,255,255,.25)");
+
+                equals(hex, "rgba(255,255,255,.25)");
+            });
+
+            test("css2hex('') returns black", function() {
+                var hex = ColorEngine.css2hex("");
+
+                equals(hex, "#000000");
+            });
+
+            /* shorthex2hex */
+
+            test("shorthex2hex() short HEX Black to HEX", function() {
+                var hex = ColorEngine.css2hex("#000");
+
+                equals(hex, "#000000");
+            });
+
+            test("shorthex2hex() short HEX White to HEX", function() {
+                var hex = ColorEngine.css2hex("#fff");
+
+                equals(hex, "#ffffff");
+            });
+
+            /* difference */
+
+            test("difference() between HEX colors", function() {
+                var diff = ColorEngine.difference("#000000", "#888888");
+
+                equals(diff, 408);
+            });
+
+            test("difference() between RGB colors", function() {
+                var diff = ColorEngine.difference("rgb(0, 0, 0)", "rgb(136, 136, 136)");
+
+                equals(diff, 408);
+            });
+
+            /* complementary*/
+
+            test("complementary() of HEX Black is #ffffff", function() {
+                var hex = ColorEngine.complementary("#000000");
+
+                equals(hex, "#ffffff");
+            });
+
+            test("complementary() of HEX White is #000000", function() {
+                var hex = ColorEngine.complementary("#ffffff");
+
+                equals(hex, "#000000");
+            });
+        </script>
+
+        <div id="qunit-fixture"> </div>
+        <ul id="log"></ul>
+    </body>
+</html>
+

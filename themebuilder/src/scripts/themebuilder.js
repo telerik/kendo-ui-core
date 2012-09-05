@@ -5,7 +5,6 @@
         map = $.map,
         CLICK = "click",
         CHANGE = "change",
-        doc = (window.parent || window).document,
         ui = kendo.ui,
         colorPicker = "ktb-colorpicker",
         numeric = "ktb-numeric",
@@ -148,10 +147,10 @@
                 return result;
             },
 
-            infer: function() {
+            infer: function(targetDocument) {
                 var constants = this.constants, constant,
                     property, value, target,
-                    cachedPrototype = $("<div style='border-style:solid;' />").appendTo(doc.body),
+                    cachedPrototype = $("<div style='border-style:solid;' />").appendTo(targetDocument.body),
                     prototype;
 
                 function getInferPrototype(target) {
@@ -187,7 +186,7 @@
                             }
                         }
 
-                        return root.appendTo(doc.body);
+                        return root.appendTo(targetDocument.body);
                     }
                 }
 
@@ -236,17 +235,18 @@
         }),
 
         ThemeBuilder = kendo.Observable.extend({
-            init: function(templateInfo) {
+            init: function(templateInfo, targetDocument) {
                 var that = this;
 
                 templateInfo = that.templateInfo = templateInfo || {};
+                that.targetDocument = targetDocument || (window.parent || window).document;
 
                 var constants = that.constants = templateInfo.constants;
 
                 that.constantsHierarchy = templateInfo.constantsHierarchy;
 
                 if (constants) {
-                    constants.infer();
+                    constants.infer(that.targetDocument);
                 }
 
                 that.render();
@@ -385,7 +385,8 @@
                 });
             },
             updateStyleSheet: function(cssText) {
-                var style = $("style[title='themebuilder']")[0];
+                var style = $("style[title='themebuilder']")[0],
+                    doc = this.targetDocument;
 
                 if (style) {
                     style.parentNode.removeChild(style);
