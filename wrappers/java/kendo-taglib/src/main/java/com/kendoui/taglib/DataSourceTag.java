@@ -46,12 +46,44 @@ public class DataSourceTag extends BaseTag {
         setProperty("serverPaging", serverPaging);
     }
 
+    public boolean getServerSorting() {
+        return (boolean)getProperty("serverSorting");
+    }
+
+    public void setServerSorting(boolean serverSorting) {
+        setProperty("serverSorting", serverSorting);
+    }
+
+    public boolean getServerGrouping() {
+        return (boolean)getProperty("serverGrouping");
+    }
+
+    public void setServerGrouping(boolean serverGrouping) {
+        setProperty("serverGrouping", serverGrouping);
+    }
+
     public int getPageSize() {
         return (int)getProperty("pageSize");
     }
 
     public void setPageSize(int pageSize) {
         setProperty("pageSize", pageSize);
+    }
+
+    public boolean getBatch() {
+        return (boolean)getProperty("batch");
+    }
+
+    public void setBatch(boolean batch) {
+        setProperty("batch", batch);
+    }
+
+    public boolean getSendAllFields() {
+        return (boolean)getProperty("sendAllFields");
+    }
+
+    public void setSendAllFields(boolean sendAllFields) {
+        setProperty("sendAllFields", sendAllFields);
     }
 
     //<< Attributes
