@@ -700,29 +700,6 @@ body > label
     padding: 0 2px;
 }
 
-:root .k-patternpick label.k-checkbox {
-    padding-left: 0;
-    padding-right: 2.2em;
-    line-height: 2em;
-}
-
-:root .k-patternpick input.k-checkbox + label.k-checkbox:before,
-:root .k-patternpick input.k-checkbox + label.k-checkbox:after
-{
-    left: auto;
-    right: 0;
-    width: 1.7em;
-    height: 1.7em;
-    margin: -.85em 1px 0 0;
-}
-
-:root .k-patternpick input.k-checkbox + label.k-checkbox:after
-{
-    margin-right: 2px;
-    width: 1.45em;
-    height: 1.45em;
-}
-
 .k-colorpick .km-slider-wrapper
 {
     margin-left: -.8em;
@@ -743,28 +720,12 @@ body > label
 
 .k-popup .input-value,
 .k-colorpick .km-slider-container,
-:root .k-patternpick input.k-checkbox + label.k-checkbox:before
+:root input.k-checkbox + label.k-checkbox:before
 {
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     box-shadow: inset 0 1px 2px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
-}
-
-:root .k-patternpick input.k-checkbox:checked + label.k-checkbox:before
-{
-    background: #fff;
-}
-
-:root .k-patternpick input.k-checkbox + label.k-checkbox:after
-{
-    margin-top: -1em;
-    color: #000;
-    content: "\2713";
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    font-weight: bold;
 }
 
 .k-colorpick .km-slider-handle
@@ -1018,4 +979,69 @@ body > label
     width: 300px;
     height: 300px;
     cursor: default;
+}
+
+/* Input styling */
+input.k-checkbox
+{
+    padding: 0;
+}
+
+:root input.k-checkbox
+{
+    position: absolute;
+    margin: 4px 0 0 0;
+    opacity: 0;
+}
+
+:root label.k-checkbox
+{
+    position: relative;
+    display: inline-block;
+    padding-left: 2.2em;
+    line-height: 2em;
+}
+
+:root .k-patternpick label.k-checkbox
+{
+    padding-left: 0;
+    padding-right: 2.2em;
+}
+
+:root input.k-checkbox + label.k-checkbox:before
+{
+    left: 0;
+    top: 50%;
+    width: 1.7em;
+    height: 1.7em;
+    content: "\a0";
+    background: rgba(0,0,0,.1);
+    padding: 0 1px 2px;
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+    margin: -.85em 1px 0 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+:root .k-patternpick input.k-checkbox + label.k-checkbox:before
+{
+    left: auto;
+    right: 0;
+}
+
+:root input.k-checkbox:checked + label.k-checkbox:before
+{
+    background: #00a3c7;
+    background-clip: content-box;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 2px #cbcbcb, inset 0 1px 3px 3px rgba(255,255,255,.7),
+                inset 0 0 0 6px #eee, inset 0 1px 2px 6px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
+}
+
+:root .optionsSheet input.k-checkbox:checked + label.k-checkbox:before
+{
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.5), inset 0 0 0 2px #727272, inset 0 1px 3px 3px rgba(255,255,255,.7),
+                inset 0 0 0 6px #eee, inset 0 1px 2px 6px rgba(0,0,0,.5), 0 1px 1px rgba(255,255,255,.7);
 }

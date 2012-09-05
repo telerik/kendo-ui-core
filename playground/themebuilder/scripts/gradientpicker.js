@@ -42,7 +42,7 @@
 
                 that.point.data("stop", that);
 
-                that.drag = new kendo.Drag(that.point, {
+                that.drag = new kendo.UserEvents(that.point, {
                     global: true,
                     stopPropagation: true,
                     tap: function () {
@@ -72,7 +72,7 @@
                 var that = this, value;
                 e.preventDefault();
 
-                value = that._position(limitValue((e.x.client - that.targetOffsetX), 0, that.constrain));
+                value = that._position(limitValue((e.touch.x.client - that.targetOffsetX), 0, that.constrain));
                 if (value != that.stop.position) {
                     that.stop.position = value;
                     that.parent._updateConnected(this.element, this.index);
@@ -98,7 +98,7 @@
 
             _stop: function(e) {
                 var that = this,
-                    value = that._position(limitValue((e.x.client - that.targetOffsetX), 0, that.constrain));
+                    value = that._position(limitValue((e.touch.x.client - that.targetOffsetX), 0, that.constrain));
 
                 that.stopped = true;
                 that.element.removeClass(ACTIVE_STATE);
