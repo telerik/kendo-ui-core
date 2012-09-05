@@ -51,9 +51,11 @@
         init: function(element, options) {
             var that = this, parentPopup;
 
+            options = options || {};
+
             if (options.isRtl) {
-                that.options.origin = BOTTOM + " " + RIGHT;
-                that.options.position = TOP + " " + RIGHT;
+                options.origin = options.origin || BOTTOM + " " + RIGHT;
+                options.position = options.position || TOP + " " + RIGHT;
             }
 
             Widget.fn.init.call(that, element, options);
