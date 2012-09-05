@@ -781,7 +781,7 @@
     Slider.Drag.prototype = {
         dragstart: function(e) {
             // HACK to initiate click on the line
-            this.draggable.drag._start(e);
+            this.draggable.userEvents._start(e);
         },
 
         _dragstart: function(e) {
