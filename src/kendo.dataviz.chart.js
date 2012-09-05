@@ -1193,7 +1193,9 @@
             deepExtend(options, {
                 min: toDate(options.min),
                 max: toDate(options.max),
-                axisCrossingValue: toDate(options.axisCrossingValue)
+                axisCrossingValue: toDate(
+                    options.axisCrossingValues || options.axisCrossingValue
+                )
             });
 
             options = axis.applyDefaults(toDate(seriesMin), toDate(seriesMax), options);
@@ -1780,7 +1782,10 @@
 
         categoryAxisCrossingValue: function(valueAxis) {
             var categoryAxis = this.categoryAxis,
-                crossingValues = [].concat(valueAxis.options.axisCrossingValue);
+                options = valueAxis.options,
+                crossingValues = [].concat(
+                    options.axisCrossingValues || options.axisCrossingValue
+                );
 
             return crossingValues[categoryAxis.axisIndex || 0] || 0;
         },
@@ -4349,7 +4354,9 @@
 
         axisCrossingValues: function(axis, crossingAxes) {
             var options = axis.options,
-                crossingValues = [].concat(options.axisCrossingValue),
+                crossingValues = [].concat(
+                    options.axisCrossingValues || options.axisCrossingValue
+                ),
                 valuesToAdd = crossingAxes.length - crossingValues.length,
                 defaultValue = crossingValues[0] || 0,
                 i;
@@ -5132,32 +5139,32 @@
             var plotArea = this,
                 invertAxes = plotArea.invertAxes,
                 definitions = [].concat(plotArea.options.categoryAxis),
-                options,
-                name,
+                i,
+                axisOptions,
                 categories,
                 type,
+                name,
                 dateCategory,
                 categoryAxis,
                 axes = [],
-                primaryAxis,
-                i;
+                primaryAxis;
 
             for (i = 0; i < definitions.length; i++) {
-                options = definitions[i];
-                categories = options.categories || [];
-                type  = options.type || "";
-                options = deepExtend({
+                axisOptions = definitions[i];
+                categories = axisOptions.categories || [];
+                type  = axisOptions.type || "";
+                axisOptions = deepExtend({
                     vertical: invertAxes,
                     axisCrossingValue: invertAxes ? categories.length : 0
-                }, options);
+                }, axisOptions);
 
-                name = options.name;
+                name = axisOptions.name;
                 dateCategory = categories[0] instanceof Date;
 
                 if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
-                    categoryAxis = new DateCategoryAxis(options);
+                    categoryAxis = new DateCategoryAxis(axisOptions);
                 } else {
-                    categoryAxis = new CategoryAxis(options);
+                    categoryAxis = new CategoryAxis(axisOptions);
                 }
 
                 if (name) {
@@ -5257,7 +5264,6 @@
             }
 
             if (categories.length === 0) {
-                // TODO: Add support for multiple category axes
                 appendIfNotNull(
                     categories, plotArea.categoryAxis.getCategory(point)
                 );
@@ -5977,7 +5983,24 @@
     function applyAxisDefaults(options, themeOptions) {
         var themeAxisDefaults = deepExtend({}, (themeOptions || {}).axisDefaults);
 
-        each(["category", "value", "x", "y"], function() {
+        // Resolve aliases
+        if (options.categoryAxes) {
+            options.categoryAxis = options.categoryAxes;
+        }
+
+        if (options.valueAxes) {
+            options.valueAxis = options.valueAxes;
+        }
+
+        if (options.xAxes) {
+            options.xAxis = options.xAxes;
+        }
+
+        if (options.yAxes) {
+            options.yAxis = options.yAxes;
+        }
+
+        each([CATEGORY, "value", X, Y], function() {
             var axisName = this + "Axis",
                 axes = [].concat(options[axisName]);
 
@@ -5986,8 +6009,11 @@
                 return deepExtend({},
                     themeAxisDefaults,
                     themeAxisDefaults[axisName],
-                    options.axisDefaults,
-                    { line: { color: axisColor }, labels: { color: axisColor }, title: { color: axisColor } },
+                    options.axisDefaults, {
+                        line: { color: axisColor },
+                        labels: { color: axisColor },
+                        title: { color: axisColor }
+                    },
                     axisOptions
                 );
             });

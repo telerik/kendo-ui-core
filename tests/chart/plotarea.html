@@ -171,6 +171,19 @@
                     same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
                 });
 
+                test("reads crossing values from axisCrossingValues alias", function() {
+                    var axisX = categoryAxis,
+                        axisY = valueAxis;
+
+                    axisY.options.axisCrossingValues = 10;
+                    axisX.options.axisCrossingValues = 1;
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValues),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValues);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
+                });
+
                 test("aligns reversed axes at non-default crossing values", function() {
                     createPlotArea(columnSeriesData, {
                         categoryAxis: { reverse: true, axisCrossingValue: 3 },

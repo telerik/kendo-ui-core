@@ -1343,6 +1343,22 @@
 
                     equals(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
                 });
+
+                test("categories are bound when using categoryAxes alias", function() {
+                    createBoundChart({
+                        categoryAxes: [{
+                            name: "Axis A",
+                            field: "category"
+                        }, {
+                            name: "Axis B",
+                            field: "category"
+                        }]
+                    });
+
+                    equals(plotArea.namedCategoryAxes["Axis A"].labels.length, 3);
+                    equals(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
+                });
+
             })();
         </script>
 

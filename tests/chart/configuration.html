@@ -176,6 +176,52 @@
                     equals(plotArea.categoryAxis.options.labels.color, "#f00");
                 });
 
+                test("categoryAxes alias overrides categoryAxis", function() {
+                    createChart({
+                        categoryAxis: {},
+                        categoryAxes: [{
+                            flag: true
+                        }]
+                    });
+
+                    ok(plotArea.categoryAxis.options.flag);
+                });
+
+                test("valueAxes alias overrides valueAxis", function() {
+                    createChart({
+                        valueAxis: {},
+                        valueAxes: [{
+                            flag: true
+                        }]
+                    });
+
+                    ok(plotArea.valueAxis.options.flag);
+                });
+
+                test("xAxes alias overrides xAxis", function() {
+                    createChart({
+                        xAxis: {},
+                        xAxes: [{
+                            flag: true
+                        }],
+                        series: [{ type: "scatterLine" }]
+                    });
+
+                    ok(plotArea.axisX.options.flag);
+                });
+
+                test("yAxes alias overrides yAxis", function() {
+                    createChart({
+                        yAxis: {},
+                        yAxes: [{
+                            flag: true
+                        }],
+                        series: [{ type: "scatterLine" }]
+                    });
+
+                    ok(plotArea.axisY.options.flag);
+                });
+
                 // ------------------------------------------------------------
                 module("Value Axis Configuration", {
                     teardown: destroyChart
@@ -291,6 +337,17 @@
                     ok(chart.options.categoryAxis.flag === true);
                 });
 
+                test("axisDefaults options are applied to categoryAxes", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        },
+                        categoryAxes: [{ local: true }]
+                    });
+
+                    ok(plotArea.categoryAxis.options.flag && plotArea.categoryAxis.options.local);
+                });
+
                 test("axisDefaults are applied to valueAxis", function() {
                     createChart({
                         axisDefaults: {
@@ -313,6 +370,17 @@
                     ok(chart.options.valueAxis[1].flag === true);
                 });
 
+                test("axisDefaults options are applied to valueAxes", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        },
+                        valueAxes: [{ local: true }]
+                    });
+
+                    ok(plotArea.valueAxis.options.flag && plotArea.valueAxis.options.local);
+                });
+
                 test("axisDefaults are applied to xAxis", function() {
                     createChart({
                         axisDefaults: {
@@ -331,6 +399,30 @@
                     });
 
                     ok(chart.options.yAxis.flag === true);
+                });
+
+                test("axisDefaults options are applied to xAxes", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        },
+                        xAxes: [{ local: true }],
+                        series: [{ type: "scatterLine" }]
+                    });
+
+                    ok(plotArea.axisX.options.flag && plotArea.axisX.options.local);
+                });
+
+                test("axisDefaults options are applied to yAxes", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        },
+                        yAxes: [{ local: true }],
+                        series: [{ type: "scatterLine" }]
+                    });
+
+                    ok(plotArea.axisY.options.flag && plotArea.axisY.options.local);
                 });
 
                 test("categoryAxis settings override axisDefaults settings", function() {
@@ -1162,6 +1254,68 @@
                     });
 
                     ok(chart.options.series[0].flag);
+                });
+
+                test("theme options are applied to categoryAxes", function() {
+                    dataviz.ui.themes.chart.test = {
+                        categoryAxis: {
+                            flag: true
+                        }
+                    };
+
+                    createChart({
+                        theme: "test",
+                        categoryAxes: [{ local: true }]
+                    });
+
+                    ok(plotArea.categoryAxis.options.flag && plotArea.categoryAxis.options.local);
+                });
+
+                test("theme options are applied to valueAxes", function() {
+                    dataviz.ui.themes.chart.test = {
+                        valueAxis: {
+                            flag: true
+                        }
+                    };
+
+                    createChart({
+                        theme: "test",
+                        valueAxes: [{ local: true }]
+                    });
+
+                    ok(plotArea.valueAxis.options.flag && plotArea.valueAxis.options.local);
+                });
+
+                test("theme options are applied to xAxes", function() {
+                    dataviz.ui.themes.chart.test = {
+                        xAxis: {
+                            flag: true
+                        }
+                    };
+
+                    createChart({
+                        theme: "test",
+                        xAxes: [{ local: true }],
+                        series: [{ type: "scatterLine" }]
+                    });
+
+                    ok(plotArea.axisX.options.flag && plotArea.axisX.options.local);
+                });
+
+                test("theme options are applied to yAxes", function() {
+                    dataviz.ui.themes.chart.test = {
+                        yAxis: {
+                            flag: true
+                        }
+                    };
+
+                    createChart({
+                        theme: "test",
+                        yAxes: [{ local: true }],
+                        series: [{ type: "scatterLine" }]
+                    });
+
+                    ok(plotArea.axisY.options.flag && plotArea.axisY.options.local);
                 });
 
                 // ------------------------------------------------------------
