@@ -8,8 +8,8 @@
     <tlib-version>1.0</tlib-version>
     <short-name>kendo</short-name>
     <uri>http://www.kendoui.com/jsp/tags</uri>
-    
-    <!-- Widgets -->
+
+    <!-- Auto-generated -->
 
     <tag>
       <description>AutoComplete Widget</description>
@@ -1121,7 +1121,7 @@
       </attribute>
     </tag>
 
-    <!-- Widgets -->
+    <!-- Auto-generated -->
 
 	<tag>
 	    <description>PanelBar Item</description>

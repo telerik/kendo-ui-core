@@ -274,15 +274,15 @@ function generateTld(tldPath) {
 
     var tld = fs.readFileSync(tldPath, "utf8");
 
-    tld = tld.split("<!-- Widgets -->");
+    tld = tld.split("<!-- Auto-generated -->");
 
     tld[1] = tags.join("\r\n");
 
     tld = [
         tld[0],
-        "<!-- Widgets -->\r\n\r\n",
+        "<!-- Auto-generated -->\r\n\r\n",
         tld[1],
-        "\r\n    <!-- Widgets -->",
+        "\r\n    <!-- Auto-generated -->",
         tld[2]
     ].join("");
 
