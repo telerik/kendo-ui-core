@@ -435,6 +435,17 @@
                 // trigger the tracking
                 img.src = urchinUrl;
             },
+            updateDataVizTheme: function(theme) {
+                var doc = this.targetDocument;
+                $("[data-role=chart]", doc).each(function() {
+                    // get jQuery of target document to access client-side object
+                    var win = "defaultView" in doc ? doc.defaultView : doc.parentWindow;
+                    var chart = win.$(this).data("kendoChart");
+
+                    kendo.deepExtend(chart.options, theme);
+                    chart.refresh();
+                });
+            },
             render: function() {
                 var that = this,
                     template = kendo.template,

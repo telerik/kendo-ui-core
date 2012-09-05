@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ThemeBuilder tests</title>
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.panelbar.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.gauge.js"></script>
+
+        <link rel="stylesheet" href="../../tests/qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">ThemeBuilder tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script src="../../themebuilder/src/scripts/less.js"></script>
+        <script src="../../themebuilder/src/scripts/themebuilder.js"></script>
+        <script src="../../themebuilder/src/scripts/colorengine.js"></script>
+
+        <script>
+            var ThemeBuilder = kendo.ThemeBuilder;
+
+            module("integration", {
+                teardown: function() {
+                    $("#kendo-themebuilder, head style, .k-chart").remove();
+                }
+            });
+
+            function createChart(options) {
+                return $("<div />")
+                    .appendTo("body")
+                    .kendoChart($.extend({}, options))
+                    .data("kendoChart");
+            }
+
+            test("updateDataVizTheme calls refresh on all charts on page", function() {
+                var chart = createChart(),
+                    themebuilder = new ThemeBuilder({}, document),
+                    called = false;
+
+                chart.refresh = function() {
+                    called = true;
+                };
+
+                themebuilder.updateDataVizTheme();
+
+                ok(called);
+            });
+
+            var fancyColor = "#b4d455";
+
+            test("updateDataVizTheme sets new theme options", function() {
+                var chart = createChart(),
+                    themebuilder = new ThemeBuilder({}, document);
+
+                themebuilder.updateDataVizTheme({
+                    title: { color: fancyColor }
+                });
+
+                equal(chart.options.title.color, fancyColor);
+            });
+
+        </script>
+
+        <div id="qunit-fixture"> </div>
+        <ul id="log"></ul>
+    </body>
+</html>
+

@@ -16,6 +16,10 @@ tests.push(
         title: "themebuilder integration"
     },
     {
+        page: "themebuilder/dataviz.html",
+        title: "themebuilder dataviz"
+    },
+    {
         page: "themebuilder/lint.html",
         title: "themebuilder lint"
     }
