@@ -86,5 +86,45 @@ public class DataSourceTag extends BaseTag {
         setProperty("sendAllFields", sendAllFields);
     }
 
+    public Function getChange() {
+        return (Function)getProperty("change");
+    }
+
+    public void setChange(String change) {
+        setProperty("change", new Function(change));
+    }
+
+    public Function getError() {
+        return (Function)getProperty("error");
+    }
+
+    public void setError(String error) {
+        setProperty("error", new Function(error));
+    }
+
+    public Function getSync() {
+        return (Function)getProperty("sync");
+    }
+
+    public void setSync(String sync) {
+        setProperty("sync", new Function(sync));
+    }
+
+    public Function getRequestStart() {
+        return (Function)getProperty("requestStart");
+    }
+
+    public void setRequestStart(String requestStart) {
+        setProperty("requestStart", new Function(requestStart));
+    }
+
+    public Function getRequestEnd() {
+        return (Function)getProperty("requestEnd");
+    }
+
+    public void setRequestEnd(String requestEnd) {
+        setProperty("requestEnd", new Function(requestEnd));
+    }
+
     //<< Attributes
 }
