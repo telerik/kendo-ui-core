@@ -134,6 +134,36 @@
                     same(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
+                test("segments are clipped to category axis", function() {
+                    setupAreaChart(plotArea, { series: [ positiveSeries ]});
+
+                    equals(areaChart._segments[0].points()[0].y, CATEGORY_AXIS_Y);
+                });
+
+                test("segments are clipped to secondary category axis", function() {
+                    plotArea.namedCategoryAxes["secondary"] = {
+                        getSlot: function(categoryIndex) {
+                            return new Box2D(categoryIndex, 0,
+                                             categoryIndex + 1, 0);
+                        },
+                        lineBox: function() {
+                            ok(true)
+                            return new Box2D(0,0,2,0);
+                        },
+                        options: {
+                            categories: ["A", "B"]
+                        }
+                    };
+
+                    setupAreaChart(plotArea, { series: [{
+                        categoryAxis: "secondary",
+                        data: [1, 2],
+                        labels: {}
+                    }]});
+
+                    equals(areaChart._segments[0].points()[0].y, 0);
+                });
+
                 test("points have set width", function() {
                     $.each(areaChart.points, function() {
                         equal(this.box.width(), 1);

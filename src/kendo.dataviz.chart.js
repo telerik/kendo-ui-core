@@ -2610,7 +2610,8 @@
                 invertAxes = chart.options.invertAxes,
                 valueAxis = chart.seriesValueAxis(segment.series),
                 valueAxisLineBox = valueAxis.lineBox(),
-                categoryAxisLineBox = plotArea.categoryAxis.lineBox(),
+                categoryAxis = plotArea.seriesCategoryAxis(segment.series),
+                categoryAxisLineBox = categoryAxis.lineBox(),
                 end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
                 stackPoints = segment.stackPoints,
                 points = LineSegment.fn.points.call(segment, stackPoints),
@@ -5256,6 +5257,7 @@
             }
 
             if (categories.length === 0) {
+                // TODO: Add support for multiple category axes
                 appendIfNotNull(
                     categories, plotArea.categoryAxis.getCategory(point)
                 );
