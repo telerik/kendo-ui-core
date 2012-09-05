@@ -49,6 +49,6 @@ wrappers/mvc/demos/**/Scripts
 wrappers/mvc/demos/**/Content
 wrappers/mvc/demos/**/App_Data
 Guardfile
-playground/chart-*
+playground/chart*
 wrappers/java/**/target
 wrappers/java/target
