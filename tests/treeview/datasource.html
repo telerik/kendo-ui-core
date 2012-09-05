@@ -605,6 +605,27 @@
                 equals(treeview.find(".k-item:last").text(), "bar");
             });
 
+            test("appending through node api does not expand item and group", function() {
+                var ExtendedNode = Node.define({
+                    extension: true,
+                    expanded: false
+                });
+
+                var foo = new ExtendedNode({ text: "foo" });
+
+                createTreeView({
+                    dataSource: {
+                        data: [ foo ]
+                    },
+
+                    loadOnDemand: false
+                });
+
+                foo.append(new ExtendedNode({ text: "bar" }));
+
+                ok(!treeview.find(".k-item .k-group").is(":visible"));
+            });
+
             test("populating hierarchical datasource before initialization", function() {
                 var root = new Node({ text: "foo", expanded: true });
 

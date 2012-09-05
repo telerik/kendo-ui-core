@@ -891,9 +891,10 @@
                 loadOnDemand = that.options.loadOnDemand,
                 i;
 
-            function append(items, parentNode, collapsed) {
+            function append(items, parentNode) {
                 var group = subGroup(parentNode),
-                    children = group.children();
+                    children = group.children(),
+                    collapsed = !that._expanded(parentNode);
 
                 if (typeof index == UNDEFINED) {
                     index = children.length;
@@ -931,7 +932,7 @@
                 if (node) {
                     subGroup(parentNode).empty();
 
-                    append(items, parentNode, true);
+                    append(items, parentNode);
                 } else {
                     that.root = that.wrapper.html(that._renderGroup({
                         items: items,
