@@ -218,5 +218,16 @@ namespace Kendo.Mvc.UI.Fluent
             }
             return this;
         }
+
+        /// <summary>
+        /// Specifies the format, which is used to format the values in the time drop-down list.
+        /// </summary>
+        public DateTimePickerBuilder TimeFormat(string timeFormat)
+        {
+
+            Component.TimeFormat = timeFormat;
+
+            return this;
+        }
     }
 }
