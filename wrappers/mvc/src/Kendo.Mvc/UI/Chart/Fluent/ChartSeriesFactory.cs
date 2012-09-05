@@ -124,7 +124,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Column<TValue>(Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression = null)
         {
-            var builder = Bar(valueExpression);
+            var builder = Bar(valueExpression, colorExpression);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
