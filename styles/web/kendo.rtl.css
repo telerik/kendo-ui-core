@@ -1,0 +1,267 @@
+﻿/* Kendo RTL CSS */
+
+.k-rtl
+{
+    direction: rtl;
+}
+
+/* Buttons */
+
+.k-rtl .k-button-icontext .k-icon
+{
+    margin: 0 -3px 0 3px;
+}
+
+/* TextBoxes, Pickers, Combos */
+
+.k-rtl .k-dropdown-wrap,
+.k-rtl .k-picker-wrap,
+.k-rtl .k-numeric-wrap
+{
+    padding-right: 2px;
+    padding-left: 22px;
+}
+
+.k-rtl .k-datetimepicker .k-picker-wrap {
+    padding-right: 2px;
+    padding-left: 42px;
+}
+
+.k-rtl span.k-picker-wrap .k-select,
+.k-rtl .k-numeric-wrap .k-select,
+.k-rtl .k-dropdown-wrap .k-select
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-datetimepicker .k-picker-wrap .k-icon
+{
+    margin: 0 3px 0 0;
+}
+
+/* Editor */
+
+.k-rtl .k-form-text-row input
+{
+    margin-right: 0;
+    margin-left: 1em;
+}
+
+.k-rtl .k-form-checkbox-row input
+{
+    margin-left: 0;
+    margin-right: 7.5em;
+}
+
+.k-rtl .k-form-checkbox-row label
+{
+    padding-left: 0;
+    padding-right: 0.3em;
+}
+
+/* Grid */
+
+.k-rtl div.k-grid-header,
+.k-rtl div.k-grid-footer
+{
+    padding-right: 0;
+    padding-left: 17px;
+}
+
+.k-rtl .k-grid-header-wrap,
+.k-rtl .k-grid-footer-wrap
+{
+    border-width: 0;
+}
+
+.k-rtl .k-grid-header .k-header:first-child,
+.k-rtl .k-grid tbody td:first-child,
+.k-rtl .k-grid tfoot td:first-child
+{
+    border-left-width: 1px;
+}
+
+.k-rtl div.k-grid td.k-hierarchy-cell
+{
+    border-left-width: 0;
+}
+
+.k-rtl .k-grid .k-group-cell + td,
+.k-rtl .k-grid .k-hierarchy-cell + td
+{
+    border-left-width: 1px;
+}
+
+.k-rtl .k-grid-header .k-header
+{
+    text-align: right;
+}
+
+.k-rtl .k-scrollbar-vertical
+{
+    right: auto;
+    left: 0;
+}
+
+/* Pager */
+
+/*.k-rtl .k-pager-info
+{
+    float: left;
+}
+
+.k-rtl .k-pager-wrap > .k-link,
+.k-rtl .k-pager-numbers
+{
+    float: right;
+}*/
+
+/* Menu */
+
+.k-rtl .k-menu .k-item,
+.k-rtl .k-widget.k-menu-horizontal > .k-item
+{
+    border-width: 0 0 0 1px;
+}
+
+.k-rtl .k-widget.k-menu-horizontal > .k-item
+{
+    float: right;
+}
+
+.k-rtl .k-menu .k-item > .k-link > .k-i-arrow-s
+{
+    margin-right: 0;
+    margin-left: -8px;
+}
+
+.k-rtl .k-menu .k-item > .k-link > .k-i-arrow-e
+{
+    right: auto;
+    left: 2px;
+}
+
+.k-rtl .k-menu .k-group .k-item > .k-link
+{
+    padding-left: 1.8em;
+    padding-right: .9em;
+}
+
+.k-rtl .k-menu .k-link > .k-i-arrow-e { background-position: 0 -48px; }
+.k-rtl .k-menu .k-link > .k-i-arrow-w { background-position: 0 -16px; }
+
+.k-rtl .k-menu .k-image,
+.k-rtl .k-menu .k-sprite
+{
+    margin-left: 4px;
+    margin-right: -4px;
+}
+
+/* PanelBar */
+
+.k-rtl .k-panelbar-expand,
+.k-rtl .k-panelbar-collapse
+{
+    right: auto;
+    left: 2px;
+}
+
+.k-rtl .k-panelbar .k-image,
+.k-rtl .k-panelbar .k-sprite
+{
+    float: right;
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+/* Slider */
+
+.k-rtl .k-slider .k-button-decrease
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-slider .k-button-increase
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-slider-horizontal .k-slider-track,
+.k-rtl .k-slider-horizontal .k-slider-selection
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-slider-horizontal .k-slider-buttons .k-slider-track
+{
+    left: auto;
+    right: 34px;
+}
+
+/* TabStrip */
+
+.k-rtl .k-tabstrip-items .k-item,
+.k-rtl .k-panelbar .k-tabstrip-items .k-item
+{
+    margin-left: -1px;
+    margin-right: 0;
+}
+
+.k-rtl .k-tabstrip-items .k-item .k-image,
+.k-rtl .k-tabstrip-items .k-item .k-sprite,
+.k-rtl .k-panelbar .k-tabstrip-items .k-item .k-image,
+.k-rtl .k-panelbar .k-tabstrip-items .k-item .k-sprite
+{
+    margin: -3px -6px 0 3px;
+}
+
+/* TreeView */
+
+.k-rtl .k-treeview .k-item
+{
+    padding: 0 16px 0 0;
+}
+
+.k-rtl .k-treeview .k-plus,
+.k-rtl .k-treeview .k-minus,
+.k-rtl .k-treeview .k-plus-disabled,
+.k-rtl .k-treeview .k-minus-disabled
+{
+    float: right;
+    margin-left: 0;
+    margin-right: -16px;
+}
+
+.k-rtl .k-treeview .k-sprite,
+.k-rtl .k-treeview .k-image
+{
+    margin-right: 0;
+    margin-left: 3px;
+}
+
+/* Upload */
+
+.k-rtl .k-progress,
+.k-rtl .k-progress-status
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-upload-files .k-button
+{
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+/* Window */
+
+.k-rtl .k-window-titlebar .k-window-actions
+{
+    right: auto;
+    left: .5em;
+}

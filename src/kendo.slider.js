@@ -42,6 +42,7 @@
 
             that._distance = options.max - options.min;
             that._isHorizontal = options.orientation == "horizontal";
+            that._isRtl = that._isHorizontal && kendo.support.isRtl(element);
             that._position = that._isHorizontal ? "left" : "bottom";
             that._size = that._isHorizontal ? "width" : "height";
             that._outerSize = that._isHorizontal ? "outerWidth" : "outerHeight";
@@ -102,7 +103,7 @@
 
         _setTrackDivWidth: function() {
             var that = this,
-                trackDivPosition = parseFloat(that._trackDiv.css(that._position), 10) * 2;
+                trackDivPosition = parseFloat(that._trackDiv.css(that._isRtl ? "right" : that._position), 10) * 2;
 
             that._trackDiv[that._size]((that.wrapper[that._size]() - 2) - trackDivPosition);
         },
@@ -149,9 +150,9 @@
                 items = that.wrapper.find(TICK_SELECTOR),
                 titleNumber = options.min,
                 count = items.length,
-                i = that._isHorizontal ? 0 : count - 1,
-                limit = that._isHorizontal ? count : -1,
-                increment = that._isHorizontal ? 1 : -1;
+                i = that._isHorizontal && !that._isRtl ? 0 : count - 1,
+                limit = that._isHorizontal && !that._isRtl ? count : -1,
+                increment = that._isHorizontal && !that._isRtl ? 1 : -1;
 
             for (; i - limit !== 0 ; i += increment) {
                 $(items[i]).attr("title", format(options.tooltip.format, round(titleNumber)));
@@ -168,7 +169,7 @@
                 step = round(options.largeStep / options.smallStep);
 
             if ((1000 * options.largeStep) % (1000 * options.smallStep) === 0) {
-                if (that._isHorizontal) {
+                if (that._isHorizontal && !that._isRtl) {
                     for (i = 0; i < items.length; i = round(i + step)) {
                         item = $(items[i]);
 
@@ -182,8 +183,10 @@
                         item.addClass("k-tick-large")
                             .html("<span class='k-label'>" + item.attr("title") + "</span>");
 
-                        if (i !== 0 && i !== items.length - 1) {
-                            item.css("line-height", item[that._size]() + "px");
+                        if (!that._isRtl) {
+                            if (i !== 0 && i !== items.length - 1) {
+                                item.css("line-height", item[that._size]() + "px");
+                            }
                         }
                     }
                 }
@@ -277,6 +280,11 @@
 
             that._pixelSteps[lastItem] = that._maxSelection;
             that._values[lastItem] = options.max;
+
+            if (that._isRtl) {
+                that._pixelSteps.reverse();
+                that._values.reverse();
+            }
         },
 
         _getValueFromPosition: function(mousePosition, dragableArea) {
@@ -289,6 +297,9 @@
 
             if (that._isHorizontal) {
                 position = mousePosition - dragableArea.startPoint;
+                if (that._isRtl) {
+                    position = that._maxSelection - position;
+                }
             } else {
                 position = dragableArea.startPoint - mousePosition;
             }
@@ -705,6 +716,9 @@
 
         _nextValueByIndex: function (index) {
             var count = this._values.length;
+            if (this._isRtl) {
+                index = count - 1 - index;
+            }
             return this._values[math.max(0, math.min(index, count - 1))];
         },
 
@@ -731,10 +745,11 @@
                 index = that._valueIndex = math.ceil(round(selectionValue / options.smallStep)),
                 selection = parseInt(that._pixelSteps[index], 10),
                 selectionDiv = that._trackDiv.find(".k-slider-selection"),
-                halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10);
+                halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10),
+                rtlCorrection = that._isRtl ? 2 : 0;
 
-            selectionDiv[that._size](selection);
-            dragHandle.css(that._position, selection - halfDragHanndle);
+            selectionDiv[that._size](that._isRtl ? that._maxSelection - selection : selection);
+            dragHandle.css(that._position, selection - halfDragHanndle - rtlCorrection);
         }
 
         moveSelection(options.value);
@@ -853,7 +868,11 @@
             e.preventDefault();
 
             if (owner._isHorizontal) {
-                that.val = that.constrainValue(x, startPoint, endPoint, x >= endPoint);
+                if (owner._isRtl) {
+                    that.val = that.constrainValue(x, startPoint, endPoint, x < endPoint);
+                } else {
+                    that.val = that.constrainValue(x, startPoint, endPoint, x >= endPoint);
+                }
             } else {
                 that.val = that.constrainValue(y, endPoint, startPoint, y <= endPoint);
             }
@@ -991,12 +1010,13 @@
 
             if (min < position && position < max) {
                 val = that.owner._getValueFromPosition(position, that.dragableArea);
-            } else
-                if (maxOverflow) {
+            } else {
+                if (maxOverflow ) {
                     val = that.options.max;
                 } else {
                     val = that.options.min;
                 }
+            }
 
             return val;
         }
@@ -1298,25 +1318,31 @@
                 selectionEndIndex = math.ceil(round(selectionEndValue / options.smallStep)),
                 selectionStart = that._pixelSteps[selectionStartIndex],
                 selectionEnd = that._pixelSteps[selectionEndIndex],
-                halfHandle = parseInt(dragHandles.eq(0)[that._outerSize]() / 2, 10);
+                halfHandle = parseInt(dragHandles.eq(0)[that._outerSize]() / 2, 10),
+                rtlCorrection = that._isRtl ? 2 : 0;
 
-            dragHandles.eq(0).css(that._position, selectionStart - halfHandle)
+            dragHandles.eq(0).css(that._position, selectionStart - halfHandle - rtlCorrection)
                        .end()
-                       .eq(1).css(that._position, selectionEnd - halfHandle);
+                       .eq(1).css(that._position, selectionEnd - halfHandle - rtlCorrection);
 
             makeSelection(selectionStart, selectionEnd);
         }
 
         function makeSelection(selectionStart, selectionEnd) {
-            var selection = 0,
-                selectionPosition = 0,
+            var selection,
+                selectionPosition,
                 selectionDiv = that._trackDiv.find(".k-slider-selection");
 
             selection = math.abs(selectionStart - selectionEnd);
-            selectionPosition = selectionStart < selectionEnd ? selectionStart : selectionEnd;
 
             selectionDiv[that._size](selection);
-            selectionDiv.css(that._position, selectionPosition - 1);
+            if (that._isRtl) {
+                selectionPosition = math.max(selectionStart, selectionEnd);
+                selectionDiv.css("right", that._maxSelection - selectionPosition - 1);
+            } else {
+                selectionPosition = math.min(selectionStart, selectionEnd);
+                selectionDiv.css(that._position, selectionPosition - 1);
+            }
         }
 
         moveSelection(that.value());

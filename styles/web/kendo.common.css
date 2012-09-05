@@ -233,9 +233,9 @@ html body .k-button-bare
 .k-numerictextbox .k-state-selected .k-i-arrow-s { background-position: -16px -35px; }
 
 .k-i-arrow-n { background-position: 0 0; }
-.k-i-arrow-e { background-position: 0 -16px; }
+.k-i-arrow-e, .k-rtl .k-slider .k-i-arrow-w { background-position: 0 -16px; }
 .k-i-arrow-s { background-position: 0 -32px; }
-.k-i-arrow-w { background-position: 0 -48px; }
+.k-i-arrow-w, .k-rtl .k-slider .k-i-arrow-e { background-position: 0 -48px; }
 
 .k-i-seek-n { background-position: 0 -64px; }
 .k-i-seek-e { background-position: 0 -80px; }
@@ -2564,8 +2564,8 @@ span.k-numerictextbox
 .k-justifyFull { background-position: -64px -198px; }
 .k-insertUnorderedList { background-position: -64px -242px; }
 .k-insertOrderedList { background-position: -64px -264px; }
-.k-indent { background-position: -112px 0; }
-.k-outdent { background-position: -112px -22px; }
+.k-indent, .k-rtl .k-outdent { background-position: -112px 0; }
+.k-outdent, .k-rtl .k-indent { background-position: -112px -22px; }
 .k-createLink { background-position: -112px -44px; }
 .k-unlink { background-position: -112px -66px; }
 .k-insertImage { background-position: -112px -88px; }

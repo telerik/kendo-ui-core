@@ -774,7 +774,7 @@
                 wrapper.append(templates.titlebar(extend(templates, options)));
             }
 
-            wrapper.toggleClass("k-rtl", !!that.element.closest(".k-rtl").length);
+            wrapper.toggleClass("k-rtl", kendo.support.isRtl(that.element));
 
             // Collect the src attributes of all iframes and then set them to empty string.
             // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4

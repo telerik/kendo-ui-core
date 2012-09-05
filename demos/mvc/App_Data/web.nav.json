@@ -48,6 +48,10 @@
                 {
                     "text": "API",
                     "url": "autocomplete/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "autocomplete/rtl.html"
                 }
             ]
         },
@@ -77,6 +81,10 @@
                     "packages": [ "mvc" ],
                     "text": "Globalization",
                     "url": "calendar/globalization.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "calendar/rtl.html"
                 }
             ]
         },
@@ -121,6 +129,10 @@
                 {
                     "text": "API",
                     "url": "combobox/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "combobox/rtl.html"
                 }
             ]
         },
@@ -154,6 +166,10 @@
                     "packages": [ "mvc" ],
                     "text": "Globalization",
                     "url": "datepicker/globalization.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "datepicker/rtl.html"
                 }
             ]
         },
@@ -188,6 +204,10 @@
                     "packages": [ "mvc" ],
                     "text": "Globalization",
                     "url": "datetimepicker/globalization.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "datetimepicker/rtl.html"
                 }
             ]
         },
@@ -220,6 +240,10 @@
                 {
                     "text": "API",
                     "url": "dropdownlist/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "dropdownlist/rtl.html"
                 }
             ]
         },
@@ -261,6 +285,10 @@
                 {
                     "text": "API",
                     "url": "editor/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "editor/rtl.html"
                 }
             ]
         },
@@ -442,6 +470,10 @@
                     "text": "Globalization",
                     "url": "grid/globalization.html",
                     "packages": ["mvc"]
+                },
+                {
+                    "text": "RTL support",
+                    "url": "grid/rtl.html"
                 }
             ]
         },
@@ -467,6 +499,10 @@
                 {
                     "text": "Selection",
                     "url": "listview/selection.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "listview/rtl.html"
                 }
             ]
         },
@@ -515,6 +551,10 @@
                 {
                     "text": "API",
                     "url": "menu/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "menu/rtl.html"
                 }
             ]
         },
@@ -540,6 +580,10 @@
                     "packages": [ "mvc" ],
                     "text": "Globalization",
                     "url": "numerictextbox/globalization.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "numerictextbox/rtl.html"
                 }
             ]
         },
@@ -572,6 +616,10 @@
                 {
                     "text": "API",
                     "url": "panelbar/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "panelbar/rtl.html"
                 }
             ]
         },
@@ -592,6 +640,10 @@
                 {
                     "text": "API",
                     "url": "slider/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "slider/rtl.html"
                 }
             ]
         },
@@ -616,6 +668,10 @@
                 {
                     "text": "API",
                     "url": "splitter/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "splitter/rtl.html"
                 }
             ]
         },
@@ -648,6 +704,10 @@
                 {
                     "text": "API",
                     "url": "tabstrip/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "tabstrip/rtl.html"
                 }
             ]
         },
@@ -677,6 +737,10 @@
                     "packages": [ "mvc" ],
                     "text": "Globalization",
                     "url": "timepicker/globalization.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "timepicker/rtl.html"
                 }
             ]
         },
@@ -739,6 +803,10 @@
                     "packages": [ "!mvc" ],
                     "text": "API",
                     "url": "treeview/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "treeview/rtl.html"
                 }
             ]
         },
@@ -764,6 +832,10 @@
                 {
                     "text": "API",
                     "url": "upload/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "upload/rtl.html"
                 }
             ]
         },
@@ -797,6 +869,10 @@
                 {
                     "text": "API",
                     "url": "window/api.html"
+                },
+                {
+                    "text": "RTL support",
+                    "url": "window/rtl.html"
                 }
             ]
         }

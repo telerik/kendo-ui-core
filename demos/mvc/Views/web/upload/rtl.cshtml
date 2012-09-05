@@ -1,0 +1,19 @@
+
+        <div id="example" class="k-content">
+
+            <div class="k-rtl">
+                <input name="files" id="files" type="file" />
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#files").kendoUpload({
+                        async: {
+                            saveUrl: "save",
+                            removeUrl: "remove",
+                            autoUpload: true
+                        }
+                    });
+                });
+            </script>
+        </div>

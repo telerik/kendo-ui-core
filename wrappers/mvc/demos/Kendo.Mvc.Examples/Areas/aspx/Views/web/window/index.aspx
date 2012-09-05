@@ -47,6 +47,7 @@
     .Draggable()
     .Resizable()
     .Width(600)
+    .Events(ev => ev.Close("onClose"))
     .Render();
 %>
 

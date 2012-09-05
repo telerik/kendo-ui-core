@@ -49,7 +49,8 @@
         formatRegExp = /(\}|\#)/ig,
         indicatorWidth = 3,
         templateHashRegExp = /#/ig,
-        COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>';
+        COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
+        isRtl = false;
 
     var VirtualScrollable =  Widget.extend({
         init: function(element, options) {
@@ -96,9 +97,8 @@
 
             element.css( {
                 width: "auto",
-                paddingRight: scrollbar,
                 overflow: "hidden"
-            });
+            }).css((isRtl ? "padding-left" : "padding-right"), scrollbar);
             that.content = element.children().first();
             that.wrapper = that.content.wrap('<div class="k-virtual-scrollable-wrap"/>')
                                 .parent()
@@ -451,6 +451,8 @@
 
             Widget.fn.init.call(that, element, options);
 
+            isRtl = kendo.support.isRtl(element);
+
             that._element();
 
             that._columns(that.options.columns);
@@ -665,21 +667,28 @@
 
             that.thead.on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
                  var th = $(this),
-                    position = th.offset().left + this.offsetWidth;
+                    position = th.offset().left + (!isRtl ? this.offsetWidth : 0);
 
                 if(e.clientX > position - indicatorWidth &&  e.clientX < position + indicatorWidth) {
                     cursor(that.wrapper, th.css('cursor'));
-
+                    
                     if (!resizeHandle) {
                         resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"/>');
                         container.append(resizeHandle);
                     }
 
-                    left = this.offsetWidth;
+                    if (!isRtl) {
+                        left = this.offsetWidth;
 
-                    th.prevAll().each(function() {
-                        left += this.offsetWidth;
-                    });
+                        th.prevAll().each(function() {
+                            left += this.offsetWidth;
+                        });
+                    } else {
+                        var headerWrap = th.closest(".k-grid-header-wrap"),
+                            webkitCorrection = $.browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
+                            firefoxCorrection = $.browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
+                        left = th.position().left - webkitCorrection + firefoxCorrection;
+                    }
 
                     resizeHandle.css({
                         top: scrollable ? 0 : heightAboveHeader(that.wrapper),
@@ -689,7 +698,7 @@
                     })
                     .data("th", th)
                     .show();
-
+                    
                 } else {
                     cursor(that.wrapper, "");
 
@@ -742,14 +751,16 @@
                         gridWidth = that.tbody.outerWidth();
                     },
                     resize: function(e) {
-                        var width = columnWidth + e.x.location - columnStart,
+                        
+                        var rtlMultiplier = isRtl ? -1 : 1,
+                            width = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier),
                             footer = that.footer || $();
 
                         if (width > 10) {
                             col.css('width', width);
 
                             if (options.scrollable) {
-                                that._footerWidth = gridWidth + e.x.location - columnStart;
+                                that._footerWidth = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
                                 that.tbody.parent()
                                     .add(that.thead.parent())
                                     .add(footer.find("table"))
@@ -1852,7 +1863,7 @@
                 }
 
                 // workaround for IE issue where scroll is not raised if container is same width as the scrollbar
-                header.css("padding-right", scrollable.virtual ? scrollbar + 1 : scrollbar);
+                header.css((isRtl ? "padding-left" : "padding-right"), scrollable.virtual ? scrollbar + 1 : scrollbar);
                 table = $('<table cellspacing="0" />');
                 table.append(that.thead);
                 header.empty().append($('<div class="k-grid-header-wrap" />').append(table));
@@ -1876,18 +1887,20 @@
                 that.scrollables = header.children(".k-grid-header-wrap");
 
                 // the footer may exists if rendered from the server
-                var footer = that.wrapper.find(".k-grid-footer");
+                var footer = that.wrapper.find(".k-grid-footer"),
+                    webKitRtlCorrection = (isRtl && $.browser.webkit) ? scrollbar : 0;
+
                 if (footer.length) {
                     that.scrollables = that.scrollables.add(footer.children(".k-grid-footer-wrap"));
                 }
 
                 if (scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").bind("scroll" + NS, function () {
-                        that.scrollables.scrollLeft(this.scrollLeft);
+                        that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
                     });
                 } else {
                     that.content.bind("scroll" + NS, function () {
-                        that.scrollables.scrollLeft(this.scrollLeft);
+                        that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
                     });
 
                     var touchScroller = kendo.touchScroller(that.content);
@@ -2132,7 +2145,7 @@
             if (that.options.scrollable) {
                 html = $('<div class="k-grid-footer"><div class="k-grid-footer-wrap"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div></div>');
                 that._appendCols(html.find("table"));
-                html.css("padding-right", kendo.support.scrollbar()); // Update inner fix.
+                html.css((isRtl ? "padding-left" : "padding-right"), kendo.support.scrollbar()); // Update inner fix.
 
                 return html;
             }

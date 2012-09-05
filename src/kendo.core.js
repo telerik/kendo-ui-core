@@ -1350,7 +1350,9 @@ function pad(number) {
 })();
 
     function wrap(element) {
-        var browser = support.browser, percentage;
+        var browser = support.browser,
+            percentage,
+            isRtl = element.css("direction") == "rtl";
 
         if (!element.parent().hasClass("k-animation-container")) {
             var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
@@ -1379,7 +1381,7 @@ function pad(number) {
                          .css({
                              width: width,
                              height: height,
-                             marginLeft: -left,
+                             marginLeft: left * (isRtl ? 1 : -1),
                              paddingLeft: left,
                              paddingRight: right,
                              paddingBottom: bottom
@@ -1513,6 +1515,10 @@ function pad(number) {
             document.body.removeChild(div);
             return result;
         };
+
+        support.isRtl = function(element) {
+            return $(element).closest(".k-rtl").length > 0;
+        }
 
         var table = document.createElement("table");
 

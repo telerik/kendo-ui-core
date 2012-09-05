@@ -144,7 +144,7 @@ var LinkCommand = Command.extend({
                 "</div>" +
             "</div>";
 
-        var dialog = $(windowContent).appendTo(document.body).kendoWindow($.extend({}, this.editor.options.dialogOptions, {
+        var dialog = EditorUtils.createDialog(windowContent, that.editor, $.extend({}, that.editor.options.dialogOptions, {
             title: "Insert link",
             close: close
         }))

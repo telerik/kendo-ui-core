@@ -131,9 +131,9 @@
         return direction.replace("top", "up").replace("bottom", "down");
     }
 
-    function parseDirection(direction, root) {
+    function parseDirection(direction, root, isRtl) {
         direction = direction.split(" ")[!root+0] || direction;
-        var output = { origin: [ "bottom", "left" ], position: [ "top", "left" ] },
+        var output = { origin: ["bottom", (isRtl ? "right" : "left")], position: ["top", (isRtl ? "right" : "left")] },
             horizontal = /left|right/.test(direction);
 
         if (horizontal) {
@@ -463,11 +463,16 @@
             var that = this,
                 options = that.options,
                 horizontal = options.orientation == "horizontal",
-                direction = options.direction;
+                direction = options.direction,
+                isRtl = kendo.support.isRtl(that.wrapper);
             element = that.element.find(element);
 
             if (/^(top|bottom|default)$/.test(direction)) {
-                direction = horizontal ? (direction + " right").replace("default", "bottom") : "right";
+                if (isRtl) {
+                    direction = horizontal ? (direction + " left").replace("default", "bottom") : "left";
+                } else {
+                    direction = horizontal ? (direction + " right").replace("default", "bottom") : "right";
+                }
             }
 
             element.siblings()
@@ -495,7 +500,7 @@
                         popup = ul.data(KENDOPOPUP);
                         var root = li.parent().hasClass(MENU),
                             parentHorizontal = root && horizontal,
-                            directions = parseDirection(direction, root),
+                            directions = parseDirection(direction, root, isRtl),
                             effects = options.animation.open.effects,
                             openEffects = effects !== undefined ? effects : "slideIn:" + getEffectDirection(direction, root);
 

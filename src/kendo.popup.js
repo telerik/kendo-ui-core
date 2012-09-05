@@ -51,6 +51,13 @@
         init: function(element, options) {
             var that = this, parentPopup;
 
+            options = options || {};
+
+            if (options.isRtl) {
+                options.origin = options.origin || BOTTOM + " " + RIGHT;
+                options.position = options.position || TOP + " " + RIGHT;
+            }
+
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
@@ -67,6 +74,7 @@
 
             that.element.hide()
                 .addClass("k-popup k-group k-reset")
+                .toggleClass("k-rtl", !!options.isRtl)
                 .css({ position : ABSOLUTE })
                 .appendTo(options.appendTo)
                 .on("mouseenter" + NS, function() {

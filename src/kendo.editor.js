@@ -176,7 +176,7 @@
 
         createContentElement: function(textarea, stylesheets) {
             var iframe, wnd, doc,
-                rtlStyle = textarea.closest(".k-rtl").length ? "direction:rtl;" : "";
+                rtlStyle = kendo.support.isRtl(textarea) ? "direction:rtl;" : "";
 
             textarea.hide();
             iframe = $("<iframe />", { src: 'javascript:""', frameBorder: "0" })
@@ -339,6 +339,17 @@
 
         registerFormat: function(formatName, format) {
             kendo.ui.Editor.fn.options.formats[formatName] = format;
+        },
+
+        createDialog: function (windowContent, editor, initOptions) {
+            var isRtl = kendo.support.isRtl(editor.wrapper),
+                win = $(windowContent).appendTo(document.body).kendoWindow(initOptions);
+
+            if (isRtl) {
+                win.closest(".k-window").addClass("k-rtl");
+            }
+
+            return win;
         }
     };
 
@@ -5008,7 +5019,7 @@ var LinkCommand = Command.extend({
                 "</div>" +
             "</div>";
 
-        var dialog = $(windowContent).appendTo(document.body).kendoWindow($.extend({}, this.editor.options.dialogOptions, {
+        var dialog = EditorUtils.createDialog(windowContent, that.editor, $.extend({}, that.editor.options.dialogOptions, {
             title: "Insert link",
             close: close
         }))
@@ -5195,23 +5206,21 @@ var ImageCommand = Command.extend({
                 '</div>' +
             '</div>';
 
-        dialog = $(windowContent)
-                .appendTo(document.body)
-                .kendoWindow(extend({}, that.editor.options.dialogOptions, {
-                    title: INSERTIMAGE,
-                    close: close,
-                    activate: function() {
-                        //if (showBrowser) {
-                            //new $t.imageBrowser(
-                                //$(this).find(".k-image-browser"),
-                                //extend(fileBrowser, {
-                                    //apply: apply,
-                                    //element: that.editor.element,
-                                    //messages: that.editor.options.messages
-                                //}));
-                        //}
-                    }
-                }))
+        dialog = EditorUtils.createDialog(windowContent, that.editor, extend({}, that.editor.options.dialogOptions, {
+            title: INSERTIMAGE,
+            close: close,
+            activate: function () {
+                //if (showBrowser) {
+                //new $t.imageBrowser(
+                //$(this).find(".k-image-browser"),
+                //extend(fileBrowser, {
+                //apply: apply,
+                //element: that.editor.element,
+                //messages: that.editor.options.messages
+                //}));
+                //}
+            }
+        }))
                 .hide()
                 .find(".k-dialog-insert").click(apply).end()
                 .find(".k-dialog-close").click(close).end()
@@ -5462,7 +5471,9 @@ var kendo = window.kendo,
     BlockFormatter = Editor.BlockFormatter;
 
 function indent(node, value) {
-    var property = dom.name(node) != "td" ? "marginLeft" : "paddingLeft";
+    var isRtl = $(node).css("direction") == "rtl",
+        indentDirection = isRtl ? "Right" : "Left",
+        property = dom.name(node) != "td" ? "margin" + indentDirection : "padding" + indentDirection;
     if (value === undefined) {
         return node.style[property] || 0;
     } else {
