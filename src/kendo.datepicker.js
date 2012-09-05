@@ -83,6 +83,7 @@
         if (options.id) {
             that.popup.element.attr(ID, options.id);
         }
+        that.div = div;
 
         that._templates();
 
@@ -346,7 +347,7 @@
 
     var DatePicker = Widget.extend({
         init: function(element, options) {
-            var that = this, id;
+            var that = this, div;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
@@ -355,8 +356,6 @@
             normalize(options);
 
             that._wrapper();
-
-            that._icon();
 
             that.dateView = new DateView(extend({}, options, {
                 id: element.attr(ID),
@@ -371,7 +370,7 @@
                         e.preventDefault();
                     } else {
                         element.attr(ARIA_EXPANDED, false);
-                        that.dateView.popup.element.attr(ARIA_HIDDEN, true);
+                        div.attr(ARIA_HIDDEN, true);
                     }
                 },
                 open: function(e) {
@@ -389,10 +388,13 @@
                         }
 
                         element.attr(ARIA_EXPANDED, true);
-                        that.dateView.popup.element.attr(ARIA_HIDDEN, false);
+                        div.attr(ARIA_HIDDEN, false);
                     }
                 }
             }));
+            div = that.dateView.div;
+
+            that._icon();
 
             element[0].type = "text";
             element
@@ -405,14 +407,9 @@
                 .attr({
                     role: "textbox",
                     "aria-haspopup": true,
-                    "aria-expanded": false
+                    "aria-expanded": false,
+                    "aria-owns": that.dateView._dateViewID
                 });
-
-            id = that.dateView._dateViewID;
-            if (id) {
-                element.attr("aria-owns", id);
-                that._dateIcon.attr("aria-controls", id);
-            }
 
             that._reset();
 
@@ -581,7 +578,10 @@
                 icon = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar">select</span></span>').insertAfter(element);
             }
 
-            that._dateIcon = icon.attr("role", "button");
+            that._dateIcon = icon.attr({
+                "role": "button",
+                "aria-controls": that.dateView._dateViewID
+            });
         },
 
         _option: function(option, value) {

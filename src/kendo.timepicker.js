@@ -425,7 +425,7 @@
 
     var TimePicker = Widget.extend({
         init: function(element, options) {
-            var that = this, timeView, ul;
+            var that = this, ul;
 
             Widget.fn.init.call(that, element, options);
 
@@ -436,7 +436,7 @@
 
             that._wrapper();
 
-            that.timeView = timeView = new TimeView(extend({}, options, {
+            that.timeView = new TimeView(extend({}, options, {
                 id: element.attr(ID),
                 anchor: that.wrapper,
                 format: options.format,
@@ -464,7 +464,7 @@
                     }
                 }
             }));
-            ul = timeView.ul;
+            ul = that.timeView.ul;
 
             that._icon();
             that._reset();
@@ -480,7 +480,7 @@
                     "role": "textbox",
                     "aria-haspopup": true,
                     "aria-expanded": false,
-                    "aria-owns": timeView._timeViewID
+                    "aria-owns": that.timeView._timeViewID
                 });
 
             that.enable(!element.is('[disabled]'));
