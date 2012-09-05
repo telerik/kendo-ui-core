@@ -5985,6 +5985,14 @@
             options.valueAxis = options.valueAxes;
         }
 
+        if (options.xAxes) {
+            options.xAxis = options.xAxes;
+        }
+
+        if (options.yAxes) {
+            options.yAxis = options.yAxes;
+        }
+
         each([CATEGORY, "value", X, Y], function() {
             var axisName = this + "Axis",
                 axes = [].concat(options[axisName]);
