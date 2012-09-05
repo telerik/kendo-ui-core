@@ -233,11 +233,11 @@ html
 }
 
 /* Code Viewer */
-.source a.selected 
+.source a.selected
 {
     text-decoration: underline;
 }
-    
+
 .source .code .controller {
     display: none;
 }
