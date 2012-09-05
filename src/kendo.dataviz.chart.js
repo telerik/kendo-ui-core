@@ -5132,32 +5132,32 @@
             var plotArea = this,
                 invertAxes = plotArea.invertAxes,
                 definitions = [].concat(plotArea.options.categoryAxis),
-                options,
-                name,
+                i,
+                axisOptions,
                 categories,
                 type,
+                name,
                 dateCategory,
                 categoryAxis,
                 axes = [],
-                primaryAxis,
-                i;
+                primaryAxis;
 
             for (i = 0; i < definitions.length; i++) {
-                options = definitions[i];
-                categories = options.categories || [];
-                type  = options.type || "";
-                options = deepExtend({
+                axisOptions = definitions[i];
+                categories = axisOptions.categories || [];
+                type  = axisOptions.type || "";
+                axisOptions = deepExtend({
                     vertical: invertAxes,
                     axisCrossingValue: invertAxes ? categories.length : 0
-                }, options);
+                }, axisOptions);
 
-                name = options.name;
+                name = axisOptions.name;
                 dateCategory = categories[0] instanceof Date;
 
                 if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
-                    categoryAxis = new DateCategoryAxis(options);
+                    categoryAxis = new DateCategoryAxis(axisOptions);
                 } else {
-                    categoryAxis = new CategoryAxis(options);
+                    categoryAxis = new CategoryAxis(axisOptions);
                 }
 
                 if (name) {
@@ -5257,7 +5257,6 @@
             }
 
             if (categories.length === 0) {
-                // TODO: Add support for multiple category axes
                 appendIfNotNull(
                     categories, plotArea.categoryAxis.getCategory(point)
                 );
@@ -5976,6 +5975,11 @@
 
     function applyAxisDefaults(options, themeOptions) {
         var themeAxisDefaults = deepExtend({}, (themeOptions || {}).axisDefaults);
+
+        // Resolve aliases
+        if (options.categoryAxes) {
+            options.categoryAxis = options.categoryAxes;
+        }
 
         each(["category", "value", "x", "y"], function() {
             var axisName = this + "Axis",

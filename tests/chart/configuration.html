@@ -176,6 +176,17 @@
                     equals(plotArea.categoryAxis.options.labels.color, "#f00");
                 });
 
+                test("categoryAxes alias overrides categoryAxis", function() {
+                    createChart({
+                        categoryAxis: {},
+                        categoryAxes: [{
+                            flag: true
+                        }]
+                    });
+
+                    ok(plotArea.categoryAxis.options.flag);
+                });
+
                 // ------------------------------------------------------------
                 module("Value Axis Configuration", {
                     teardown: destroyChart
@@ -289,6 +300,17 @@
                     });
 
                     ok(chart.options.categoryAxis.flag === true);
+                });
+
+                test("axisDefaults options are applied to categoryAxes", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        },
+                        categoryAxes: [{}]
+                    });
+
+                    ok(plotArea.categoryAxis.options.flag);
                 });
 
                 test("axisDefaults are applied to valueAxis", function() {
@@ -1162,6 +1184,21 @@
                     });
 
                     ok(chart.options.series[0].flag);
+                });
+
+                test("theme options are applied to categoryAxes", function() {
+                    dataviz.ui.themes.chart.test = {
+                        categoryAxis: {
+                            flag: true
+                        }
+                    };
+
+                    createChart({
+                        theme: "test",
+                        categoryAxes: [{ }]
+                    });
+
+                    ok(plotArea.categoryAxis.options.flag);
                 });
 
                 // ------------------------------------------------------------
