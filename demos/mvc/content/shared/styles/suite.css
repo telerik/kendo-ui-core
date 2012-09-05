@@ -1,8 +1,6 @@
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
-    overflow: hidden;
 }
 
 a {
@@ -16,14 +14,14 @@ a:hover {
 
 html {
     font: 75% 'Lucida Sans Unicode', 'Lucida Grande', Arial, Helvetica, sans-serif;
-    background: #fff;
+    background: #fff url("flowers-right.png") no-repeat fixed 100% -174px;
+    height: 100%;
     line-height: 1.5;
-
 }
 
 body {
-    box-shadow: 0 0 200px #aaa inset;
     background: url("flowers-left.png") no-repeat fixed 0 400px transparent;
+    min-height: 100%;
 }
 
 h1, h2 {
@@ -46,11 +44,8 @@ h2 {
 }
 
 #page {
-    background: url("flowers-right.png") no-repeat fixed 100% -174px transparent;
-    height: 100%;
     margin: 0;
     padding: 0 7%;
-    overflow: auto;
     width: 86%;
 }
 
