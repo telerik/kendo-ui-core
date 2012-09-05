@@ -367,7 +367,7 @@ body > label
     font-size: 12px;
 }
 
-.holder > .drop:hover:after
+.color-holder > .drop:hover:after
 {
     content: attr(data-color);
     display: block;
