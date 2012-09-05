@@ -431,7 +431,7 @@
         var field,
             fieldName;
 
-        for (var fieldName in obj) {
+        for (fieldName in obj) {
             field = obj[fieldName];
             if (isPlainObject(field) && field.field && field.field === name) {
                 return field;
