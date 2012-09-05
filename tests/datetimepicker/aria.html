@@ -73,6 +73,10 @@
                 equal(instance.timeView.ul.attr("id"), "test_timeview");
             });
 
+            test("DateTimePicker sets id to the div element of the dateView", function() {
+                equal(instance.dateView.div.attr("id"), "test_dateview");
+            });
+
             test("DateTimePicker adds role to the popup", function() {
                 equal(instance.timeView.ul.attr("role"), "listbox");
             });
