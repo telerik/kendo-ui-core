@@ -5,6 +5,8 @@
         extend = $.extend,
         each = $.each,
         dragging = false,
+        globalUndoBuffer = [],
+        globalRedoBuffer = [],
         propertyTargets = {
             color: [ "color", "background-color", "border-color" ],
             gradient: [ "background-image" ],
@@ -284,6 +286,8 @@
         widgetTarget = $("<div class='widgetTarget'><div><div /><div /></div><span /><div><span /></div></div>").appendTo(document.body),
 
         StyleEngine = Widget.extend({
+            undoBuffer: [],
+            redoBuffer: [],
             init: function (element, options) {
                 var that = this, key;
 
@@ -311,7 +315,9 @@
             options: {
                 name: "StyleEngine",
                 restoreFromStorage: false,
-                platform: ""
+                platform: "",
+                globalUndoBuffer: null,
+                globalRedoBuffer: null
             },
             populate: function(styles) {
                 this.object = extend(true, this.object, styles);
@@ -338,12 +344,48 @@
             update: function(element, styles, selector) {
                 element = $(element);
                 var that = this, style = {},
-                    output = selector || that.getElementSelector(element);
+                    output = selector || that.getElementSelector(element),
+                    undoItem = this.undoBuffer.push({});
 
+                undoItem[output] = this.object[output];
                 style[output] = extend(this.object[output], styles);
                 that.store(output, style[output]);
 
                 that.populate(style);
+
+                if (that.options.globalUndoBuffer) {
+                    that.options.globalUndoBuffer.push(that);
+                }
+            },
+            undo: function() {
+                var that = this,
+                    item = that.undoBuffer.pop();
+
+                if (item) {
+                    that.redoBuffer.push(item);
+                    if (that.options.globalRedoBuffer) {
+                        that.options.globalRedoBuffer.push(that);
+                    }
+
+                    that.store(item.keys()[0], item.values()[0]);
+
+                    that.populate(item);
+                }
+            },
+            redo: function() {
+                var that = this,
+                    item = that.redoBuffer.pop();
+
+                if (item) {
+                    that.undoBuffer.push(item);
+                    if (that.options.globalUndoBuffer) {
+                        that.options.globalUndoBuffer.push(that);
+                    }
+
+                    that.store(item.keys()[0], item.values()[0]);
+
+                    that.populate(item);
+                }
             },
             getCSS: function () {
                 var object = this.object, output = "";
@@ -609,6 +651,24 @@
         return menuStructure;
     }
 
+    function globalUndo() {
+        var lastEngine = globalUndoBuffer.pop();
+
+        if (lastEngine) {
+            lastEngine.undo();
+            globalRedoBuffer.push(lastEngine);
+        }
+    }
+
+    function globalRedo() {
+        var lastEngine = globalRedoBuffer.pop();
+
+        if (lastEngine) {
+            lastEngine.redo();
+            globalUndoBuffer.push(lastEngine);
+        }
+    }
+
     // Override Kendo History to avoid URL breaks and bad refresh
     kendo.history.navigate = function(to, silent) {
         var that = this;
@@ -667,7 +727,7 @@
         var that = this.toString(),
             deviceId = "#" + that + "Device";
         applications[that] = new kendo.mobile.Application(deviceId, { platform: that });
-        engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that }).data("kendoStyleEngine");
+        engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that, globalUndoBuffer: globalUndoBuffer, globalRedoBuffer: globalRedoBuffer }).data("kendoStyleEngine");
     });
 
     pickers = {
@@ -821,7 +881,16 @@
 
             $(document).on({
                 keydown: function (e) { CtrlDown = e.which == 17; },
-                keyup: function (e) { e.which == 17 && (CtrlDown = false); }
+                keyup: function (e) {
+                    if (e.ctrlKey && (e.which == 90 || e.which == 122)) {
+                        if (e.shiftKey) {
+                            globalRedo();
+                        } else {
+                            globalUndo();
+                        }
+                    }
+                    e.which == 17 && (CtrlDown = false);
+                }
             });
 
             $(".device").on({
