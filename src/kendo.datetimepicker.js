@@ -26,6 +26,8 @@
         MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
         MONTH = "month",
         SPAN = "<span/>",
+        ARIA_EXPANDED = "aria-expanded",
+        ARIA_HIDDEN = "aria-hidden",
         DATE = Date,
         MIN = new DATE(1900, 0, 1),
         MAX = new DATE(2099, 11, 31),
@@ -46,9 +48,9 @@
 
             that._wrapper();
 
-            that._icons();
-
             that._views();
+
+            that._icons();
 
             that._reset();
 
@@ -63,7 +65,13 @@
                         that._change(element.val());
                         that.close("date");
                         that.close("time");
-                    });
+                    })
+                   .attr({
+                        "role": "textbox",
+                        "aria-haspopup": true,
+                        "aria-expanded": false,
+                        "aria-owns": that.timeView._listboxID
+                   });
 
             that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
 
@@ -376,9 +384,11 @@
             var that = this,
                 element = that.element,
                 options = that.options,
+                id = element.attr("id"),
                 date;
 
             that.dateView = new kendo.DateView(extend({}, options, {
+                id: id,
                 anchor: that.wrapper,
                 change: function() {
                     var value = that.dateView.calendar.value(),
@@ -404,6 +414,9 @@
                 close: function(e) {
                     if (that.trigger(CLOSE, dateViewParams)) {
                         e.preventDefault();
+                    } else {
+                        element.attr(ARIA_EXPANDED, false);
+                        that.dateView.popup.element.attr(ARIA_HIDDEN, true);
                     }
                 },
                 open:  function(e) {
@@ -417,11 +430,16 @@
                             that.dateView._current = date;
                             that.dateView.calendar._focus(date);
                         }
+
+                        element.attr(ARIA_EXPANDED, true);
+                        that.dateView.popup.element.attr(ARIA_HIDDEN, false);
                     }
                 }
             }));
 
             that.timeView = new TimeView({
+                id: id,
+                value: options.value,
                 anchor: that.wrapper,
                 animation: options.animation,
                 dates: options.dates,
@@ -432,7 +450,6 @@
                 min: new DATE(MIN),
                 max: new DATE(MAX),
                 parseFormats: options.parseFormats,
-                value: options.value,
                 change: function(value, trigger) {
                     value = that.timeView._parse(value);
 
@@ -454,11 +471,17 @@
                 close: function(e) {
                     if (that.trigger(CLOSE, timeViewParams)) {
                         e.preventDefault();
+                    } else {
+                        element.attr(ARIA_EXPANDED, false);
+                        that.timeView.ul.attr(ARIA_HIDDEN, true);
                     }
                 },
                 open:  function(e) {
                     if (that.trigger(OPEN, timeViewParams)) {
                         e.preventDefault();
+                    } else {
+                        element.attr(ARIA_EXPANDED, true);
+                        that.timeView.ul.attr(ARIA_HIDDEN, false);
                     }
                 }
             });
@@ -476,8 +499,15 @@
             }
 
             icons = icons.children();
-            that._dateIcon = icons.eq(0);
-            that._timeIcon = icons.eq(1);
+            that._dateIcon = icons.eq(0).attr({
+                "role": "button",
+                "aria-controls": that.dateView.popup.element.attr("id")
+            });
+
+            that._timeIcon = icons.eq(1).attr({
+                "role": "button",
+                "aria-controls": that.timeView._listboxID
+            });
         },
 
         _wrapper: function() {

@@ -66,7 +66,8 @@
 
         that.calendar = sharedCalendar;
         that.options = options = options || {};
-        that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
+
+        that.popup = new ui.Popup($(DIV).attr(ARIA_HIDDEN, "true").addClass("k-calendar-container").appendTo(body), extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
 
         if (options.id) {
             that.popup.element.attr(ID, options.id);

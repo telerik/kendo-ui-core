@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DateTimePicker ARIA</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.datetimepicker.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DateTimePicker ARIA</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var DateTimePicker = kendo.ui.DateTimePicker,
+                input, instance;
+
+            module("kendo.ui.DateTimePicker ARIA", {
+                setup: function() {
+                    input = $("<input id='test' />").appendTo(document.body);
+                    instance = new DateTimePicker(input);
+                },
+                teardown: function() {
+                    input.data("kendoDateTimePicker").destroy();
+                    input.parents(".k-widget").remove();
+                }
+            });
+
+            test("DateTimePicker adds role to the input element", function() {
+                equal(input.attr("role"), "textbox");
+            });
+
+            test("DateTimePicker adds aria-haspopup", function() {
+                equal(input.attr("aria-haspopup"), "true");
+            });
+
+            test("DateTimePicker adds aria-expanded", function() {
+                equal(input.attr("aria-expanded"), "false");
+            });
+
+            test("DateTimePicker adds aria-owns", function() {
+                equal(input.attr("aria-owns"), instance.timeView.ul.attr("id"));
+            });
+
+            test("DateTimePicker sets aria-expanded=true", function() {
+                instance.open();
+                equal(input.attr("aria-expanded"), "true");
+            });
+
+            test("DateTimePicker sets aria-expanded=false", function() {
+                instance.open();
+                instance.close();
+                equal(input.attr("aria-expanded"), "false");
+            });
+
+            test("DateTimePicker adds role to the toggle button", function() {
+                equal(instance._dateIcon.attr("role"), "button");
+                equal(instance._timeIcon.attr("role"), "button");
+            });
+
+            test("DateTimePicker adds aria-controls to the toggle button", function() {
+                equal(instance._dateIcon.attr("aria-controls"), instance.dateView.popup.element.attr("id"));
+                equal(instance._timeIcon.attr("aria-controls"), instance.timeView.ul.attr("id"));
+            });
+
+            test("DateTimePicker sets id to the ul element", function() {
+                equal(instance.timeView.ul.attr("id"), "test_timepicker_timeview");
+            });
+
+            test("DateTimePicker adds role to the popup", function() {
+                equal(instance.timeView.ul.attr("role"), "listbox");
+            });
+
+            test("DateTimePicker adds aria-hidden to the popup", function() {
+                equal(instance.timeView.ul.attr("aria-hidden"), "true");
+            });
+
+            test("DateTimePicker sets aria-hidden=false when timeView is opened", function() {
+                instance.open("time");
+                equal(instance.timeView.ul.attr("aria-hidden"), "false");
+                equal(instance.dateView.popup.element.attr("aria-hidden"), "true");
+            });
+
+            test("DateTimePicker sets aria-hidden=false when dateView is opened", function() {
+                instance.open("date");
+                equal(instance.dateView.popup.element.attr("aria-hidden"), "false");
+                equal(instance.timeView.ul.attr("aria-hidden"), "true");
+            });
+
+            test("DateTimePicker sets aria-hidden=true to the popup", function() {
+                instance.open();
+                instance.close();
+                equal(instance.timeView.ul.attr("aria-hidden"), "true");
+            });
+
+            test("DateTimePicker renders li elements with role attr", function() {
+                instance.open("time");
+                equal(instance.timeView.ul.children(":first").attr("role"), "option");
+            });
+
+            test("DateTimePicker sets aria-selected to the selected option", function() {
+                instance.open();
+                instance.value("12:00 AM");
+                equal(instance.timeView.current().attr("aria-selected"), "true");
+            });
+
+            test("DateTimePicker allows only one selected option", function() {
+                instance.open();
+                instance.value("12:00 AM");
+                instance.value("2:00 AM");
+                equal(instance.timeView.ul.children("[aria-selected=true]").length, 1);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
