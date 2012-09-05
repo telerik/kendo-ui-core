@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.json.Function;
+
 @SuppressWarnings("serial")
 public class DateTimePickerTag extends WidgetTag {
     public DateTimePickerTag() {
@@ -70,6 +72,30 @@ public class DateTimePickerTag extends WidgetTag {
 
     public void setDepth(String depth) {
         setProperty("depth", depth);
+    }
+
+    public Function getOpen() {
+        return (Function)getProperty("open");
+    }
+
+    public void setOpen(String open) {
+        setProperty("open", new Function(open));
+    }
+
+    public Function getClose() {
+        return (Function)getProperty("close");
+    }
+
+    public void setClose(String close) {
+        setProperty("close", new Function(close));
+    }
+
+    public Function getChange() {
+        return (Function)getProperty("change");
+    }
+
+    public void setChange(String change) {
+        setProperty("change", new Function(change));
     }
 
     //<< Attributes

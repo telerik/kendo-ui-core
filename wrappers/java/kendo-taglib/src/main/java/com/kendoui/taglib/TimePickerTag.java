@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.json.Function;
+
 @SuppressWarnings("serial")
 public class TimePickerTag extends WidgetTag {
     public TimePickerTag() {
@@ -30,6 +32,30 @@ public class TimePickerTag extends WidgetTag {
 
     public void setHeight(int height) {
         setProperty("height", height);
+    }
+
+    public Function getOpen() {
+        return (Function)getProperty("open");
+    }
+
+    public void setOpen(String open) {
+        setProperty("open", new Function(open));
+    }
+
+    public Function getClose() {
+        return (Function)getProperty("close");
+    }
+
+    public void setClose(String close) {
+        setProperty("close", new Function(close));
+    }
+
+    public Function getChange() {
+        return (Function)getProperty("change");
+    }
+
+    public void setChange(String change) {
+        setProperty("change", new Function(change));
     }
 
     //<< Attributes

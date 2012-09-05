@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.json.Function;
+
 @SuppressWarnings("serial")
 public class NumericTextBoxTag extends WidgetTag {
     public NumericTextBoxTag() {
@@ -62,6 +64,22 @@ public class NumericTextBoxTag extends WidgetTag {
 
     public void setDownArrowText(String downArrowText) {
         setProperty("downArrowText", downArrowText);
+    }
+
+    public Function getChange() {
+        return (Function)getProperty("change");
+    }
+
+    public void setChange(String change) {
+        setProperty("change", new Function(change));
+    }
+
+    public Function getSpin() {
+        return (Function)getProperty("spin");
+    }
+
+    public void setSpin(String spin) {
+        setProperty("spin", new Function(spin));
     }
 
     //<< Attributes

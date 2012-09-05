@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.json.Function;
+
 @SuppressWarnings("serial")
 public class MenuTag extends WidgetTag {
     public MenuTag() {
@@ -46,6 +48,30 @@ public class MenuTag extends WidgetTag {
 
     public void setHoverDelay(int hoverDelay) {
         setProperty("hoverDelay", hoverDelay);
+    }
+
+    public Function getOpen() {
+        return (Function)getProperty("open");
+    }
+
+    public void setOpen(String open) {
+        setProperty("open", new Function(open));
+    }
+
+    public Function getClose() {
+        return (Function)getProperty("close");
+    }
+
+    public void setClose(String close) {
+        setProperty("close", new Function(close));
+    }
+
+    public Function getSelect() {
+        return (Function)getProperty("select");
+    }
+
+    public void setSelect(String select) {
+        setProperty("select", new Function(select));
     }
 
     //<< Attributes

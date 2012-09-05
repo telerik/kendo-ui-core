@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.json.Function;
+
 @SuppressWarnings("serial")
 public class RangeSliderTag extends WidgetTag {
     public RangeSliderTag() {
@@ -62,6 +64,22 @@ public class RangeSliderTag extends WidgetTag {
 
     public void setTickPlacement(String tickPlacement) {
         setProperty("tickPlacement", tickPlacement);
+    }
+
+    public Function getChange() {
+        return (Function)getProperty("change");
+    }
+
+    public void setChange(String change) {
+        setProperty("change", new Function(change));
+    }
+
+    public Function getSlide() {
+        return (Function)getProperty("slide");
+    }
+
+    public void setSlide(String slide) {
+        setProperty("slide", new Function(slide));
     }
 
     //<< Attributes

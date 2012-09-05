@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.json.Function;
+
 @SuppressWarnings("serial")
 public class CalendarTag extends WidgetTag {
     public CalendarTag() {
@@ -54,6 +56,22 @@ public class CalendarTag extends WidgetTag {
 
     public void setDepth(String depth) {
         setProperty("depth", depth);
+    }
+
+    public Function getChange() {
+        return (Function)getProperty("change");
+    }
+
+    public void setChange(String change) {
+        setProperty("change", new Function(change));
+    }
+
+    public Function getNavigate() {
+        return (Function)getProperty("navigate");
+    }
+
+    public void setNavigate(String navigate) {
+        setProperty("navigate", new Function(navigate));
     }
 
     //<< Attributes

@@ -76,7 +76,8 @@ var xml = require("libxmljs"),
 function generateJava(path, className) {
     var javaCode = [];
 
-    javaCode.push("package com.kendoui.taglib;\r\n");
+    javaCode.push("package com.kendoui.taglib;\r\n\r\n");
+    javaCode.push("import com.kendoui.taglib.json.Function;\r\n");
     javaCode.push('@SuppressWarnings("serial")');
     javaCode.push("public class " + className + " extends WidgetTag {");
     javaCode.push("    public " + className + "() {");
@@ -133,9 +134,6 @@ function pathFromClassName(className) {
 function setterAndGetter(attribute) {
     var name = attribute.get("name").text();
 
-    var upper = name[0].toUpperCase() + name.substring(1);
-    var type = attribute.get("type").text();
-
     var javaTypes = {
         "java.lang.String": "String",
         "java.lang.Boolean": "boolean",
@@ -144,24 +142,39 @@ function setterAndGetter(attribute) {
         "int": "int",
     };
 
-    type = javaTypes[type];
+    var upper = name[0].toUpperCase() + name.substring(1);
+
+    var type = attribute.get("type");
 
     var code = [];
+    if (type) {
+        type = javaTypes[type.text()];
 
-    code.push("    public " + type + " get" + upper + "() {");
-    code.push("        return (" + type + ")getProperty(\"" + name + "\");");
-    code.push("    }");
-    code.push("");
+        code.push("    public " + type + " get" + upper + "() {");
+        code.push("        return (" + type + ")getProperty(\"" + name + "\");");
+        code.push("    }");
+        code.push("");
 
-    code.push("    public void set" + upper + "(" + type + " " + name + ") {");
-    code.push("        setProperty(\"" + name + "\", " + name + ");");
-    code.push("    }");
-    code.push("");
+        code.push("    public void set" + upper + "(" + type + " " + name + ") {");
+        code.push("        setProperty(\"" + name + "\", " + name + ");");
+        code.push("    }");
+        code.push("");
+    } else {
+        code.push("    public Function get" + upper + "() {");
+        code.push("        return (Function)getProperty(\"" + name + "\");");
+        code.push("    }");
+        code.push("");
+
+        code.push("    public void set" + upper + "(String " + name + ") {");
+        code.push("        setProperty(\"" + name + "\", new Function(" + name + "));");
+        code.push("    }");
+        code.push("");
+    }
+
+
 
     return code.join("\r\n");
 }
-
-
 
 function optionDescription(md, option, widget) {
     var re = new RegExp("### " + option + ".*\\n+([^\.#]*)");
@@ -179,6 +192,7 @@ function optionDescription(md, option, widget) {
 
 function generateTag(widget, ns) {
     var options = widget.fn.options;
+    var events = widget.fn.events;
     var name = options.name;
 
     delete options.name;
@@ -203,8 +217,7 @@ function generateTag(widget, ns) {
 
     var md = fs.readFileSync(docPath, "utf8");
 
-    md = md.split("## Methods")[0];
-
+    var configurationMarkdown = md.split("## Methods")[0];
 
     for (var option in options) {
         var type = typeof options[option];
@@ -217,7 +230,7 @@ function generateTag(widget, ns) {
             type = "java.lang.String";
         }
 
-        var description = optionDescription(md, option, name);
+        var description = optionDescription(configurationMarkdown, option, name);
 
         tag.push("      <attribute>");
 
@@ -230,6 +243,23 @@ function generateTag(widget, ns) {
         tag.push("          <type>" + type + "</type>");
         tag.push("      </attribute>");
     }
+
+    var eventsMarkdown = md.split("## Events").pop();
+
+
+    events.forEach(function(event) {
+        tag.push("      <attribute>");
+
+        var description = optionDescription(eventsMarkdown, event, name);
+
+        if (description) {
+            tag.push("          <description>" + description + "</description>");
+        }
+
+        tag.push("          <name>" + event + "</name>");
+        tag.push("          <rtexprvalue>true</rtexprvalue>");
+        tag.push("      </attribute>");
+    });
 
     tag.push("    </tag>\r\n")
 

@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.json.Function;
+
 @SuppressWarnings("serial")
 public class SliderTag extends WidgetTag {
     public SliderTag() {
@@ -86,6 +88,22 @@ public class SliderTag extends WidgetTag {
 
     public void setDecreaseButtonTitle(String decreaseButtonTitle) {
         setProperty("decreaseButtonTitle", decreaseButtonTitle);
+    }
+
+    public Function getChange() {
+        return (Function)getProperty("change");
+    }
+
+    public void setChange(String change) {
+        setProperty("change", new Function(change));
+    }
+
+    public Function getSlide() {
+        return (Function)getProperty("slide");
+    }
+
+    public void setSlide(String slide) {
+        setProperty("slide", new Function(slide));
     }
 
     //<< Attributes

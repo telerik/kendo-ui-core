@@ -2,6 +2,7 @@ package com.kendoui.taglib;
 
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Input;
+import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
 public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
@@ -92,6 +93,54 @@ public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
 
     public void setPlaceholder(String placeholder) {
         setProperty("placeholder", placeholder);
+    }
+
+    public Function getOpen() {
+        return (Function)getProperty("open");
+    }
+
+    public void setOpen(String open) {
+        setProperty("open", new Function(open));
+    }
+
+    public Function getClose() {
+        return (Function)getProperty("close");
+    }
+
+    public void setClose(String close) {
+        setProperty("close", new Function(close));
+    }
+
+    public Function getChange() {
+        return (Function)getProperty("change");
+    }
+
+    public void setChange(String change) {
+        setProperty("change", new Function(change));
+    }
+
+    public Function getSelect() {
+        return (Function)getProperty("select");
+    }
+
+    public void setSelect(String select) {
+        setProperty("select", new Function(select));
+    }
+
+    public Function getDataBinding() {
+        return (Function)getProperty("dataBinding");
+    }
+
+    public void setDataBinding(String dataBinding) {
+        setProperty("dataBinding", new Function(dataBinding));
+    }
+
+    public Function getDataBound() {
+        return (Function)getProperty("dataBound");
+    }
+
+    public void setDataBound(String dataBound) {
+        setProperty("dataBound", new Function(dataBound));
     }
 
     //<< Attributes

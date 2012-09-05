@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.json.Function;
+
 @SuppressWarnings("serial")
 public class GridTag extends WidgetTag {
     public GridTag() {
@@ -118,6 +120,118 @@ public class GridTag extends WidgetTag {
 
     public void setColumnMenu(boolean columnMenu) {
         setProperty("columnMenu", columnMenu);
+    }
+
+    public Function getChange() {
+        return (Function)getProperty("change");
+    }
+
+    public void setChange(String change) {
+        setProperty("change", new Function(change));
+    }
+
+    public Function getDataBinding() {
+        return (Function)getProperty("dataBinding");
+    }
+
+    public void setDataBinding(String dataBinding) {
+        setProperty("dataBinding", new Function(dataBinding));
+    }
+
+    public Function getDataBound() {
+        return (Function)getProperty("dataBound");
+    }
+
+    public void setDataBound(String dataBound) {
+        setProperty("dataBound", new Function(dataBound));
+    }
+
+    public Function getDetailExpand() {
+        return (Function)getProperty("detailExpand");
+    }
+
+    public void setDetailExpand(String detailExpand) {
+        setProperty("detailExpand", new Function(detailExpand));
+    }
+
+    public Function getDetailCollapse() {
+        return (Function)getProperty("detailCollapse");
+    }
+
+    public void setDetailCollapse(String detailCollapse) {
+        setProperty("detailCollapse", new Function(detailCollapse));
+    }
+
+    public Function getDetailInit() {
+        return (Function)getProperty("detailInit");
+    }
+
+    public void setDetailInit(String detailInit) {
+        setProperty("detailInit", new Function(detailInit));
+    }
+
+    public Function getEdit() {
+        return (Function)getProperty("edit");
+    }
+
+    public void setEdit(String edit) {
+        setProperty("edit", new Function(edit));
+    }
+
+    public Function getSave() {
+        return (Function)getProperty("save");
+    }
+
+    public void setSave(String save) {
+        setProperty("save", new Function(save));
+    }
+
+    public Function getRemove() {
+        return (Function)getProperty("remove");
+    }
+
+    public void setRemove(String remove) {
+        setProperty("remove", new Function(remove));
+    }
+
+    public Function getSaveChanges() {
+        return (Function)getProperty("saveChanges");
+    }
+
+    public void setSaveChanges(String saveChanges) {
+        setProperty("saveChanges", new Function(saveChanges));
+    }
+
+    public Function getColumnResize() {
+        return (Function)getProperty("columnResize");
+    }
+
+    public void setColumnResize(String columnResize) {
+        setProperty("columnResize", new Function(columnResize));
+    }
+
+    public Function getColumnReorder() {
+        return (Function)getProperty("columnReorder");
+    }
+
+    public void setColumnReorder(String columnReorder) {
+        setProperty("columnReorder", new Function(columnReorder));
+    }
+
+    public Function getColumnShow() {
+        return (Function)getProperty("columnShow");
+    }
+
+    public void setColumnShow(String columnShow) {
+        setProperty("columnShow", new Function(columnShow));
+    }
+
+    public Function getColumnHide() {
+        return (Function)getProperty("columnHide");
+    }
+
+    public void setColumnHide(String columnHide) {
+        setProperty("columnHide", new Function(columnHide));
     }
 
     //<< Attributes
