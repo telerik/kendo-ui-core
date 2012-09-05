@@ -192,6 +192,7 @@ function generateTag(widget, ns) {
     tag.push("      <tag-class>com.kendoui.taglib." + name + "Tag</tag-class>");
     tag.push("      <body-content>JSP</body-content>");
     tag.push("      <attribute>");
+    tag.push("          <description>The mandatory and unique name of the widget. Used as the \"id\" attribute of the widget's HTML element.</description>");
     tag.push("          <name>name</name>");
     tag.push("          <required>true</required>");
     tag.push("          <rtexprvalue>true</rtexprvalue>");

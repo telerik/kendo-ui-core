@@ -17,6 +17,7 @@
       <tag-class>com.kendoui.taglib.AutoCompleteTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -84,6 +85,7 @@
       <tag-class>com.kendoui.taglib.CalendarTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -132,6 +134,7 @@
       <tag-class>com.kendoui.taglib.ComboBoxTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -223,6 +226,7 @@
       <tag-class>com.kendoui.taglib.DatePickerTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -266,6 +270,7 @@
       <tag-class>com.kendoui.taglib.DropDownListTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -345,6 +350,7 @@
       <tag-class>com.kendoui.taglib.NumericTextBoxTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -399,6 +405,7 @@
       <tag-class>com.kendoui.taglib.GridTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -491,6 +498,7 @@
       <tag-class>com.kendoui.taglib.ListViewTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -533,6 +541,7 @@
       <tag-class>com.kendoui.taglib.MenuTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -576,6 +585,7 @@
       <tag-class>com.kendoui.taglib.PanelBarTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -595,6 +605,7 @@
       <tag-class>com.kendoui.taglib.SliderTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -667,6 +678,7 @@
       <tag-class>com.kendoui.taglib.RangeSliderTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -721,6 +733,7 @@
       <tag-class>com.kendoui.taglib.SplitterTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -740,6 +753,7 @@
       <tag-class>com.kendoui.taglib.TabStripTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -795,6 +809,7 @@
       <tag-class>com.kendoui.taglib.TimePickerTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -825,6 +840,7 @@
       <tag-class>com.kendoui.taglib.DateTimePickerTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -885,6 +901,7 @@
       <tag-class>com.kendoui.taglib.TreeViewTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -915,6 +932,7 @@
       <tag-class>com.kendoui.taglib.UploadTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -946,6 +964,7 @@
       <tag-class>com.kendoui.taglib.WindowTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -1007,6 +1026,7 @@
       <tag-class>com.kendoui.taglib.EditorTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -1026,6 +1046,7 @@
       <tag-class>com.kendoui.taglib.ChartTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -1056,6 +1077,7 @@
       <tag-class>com.kendoui.taglib.RadialGaugeTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
@@ -1080,6 +1102,7 @@
       <tag-class>com.kendoui.taglib.LinearGaugeTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
+          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
           <name>name</name>
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
