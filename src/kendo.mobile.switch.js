@@ -73,7 +73,7 @@
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-            this.drag.destroy();
+            this.userEvents.destroy();
         },
 
         toggle: function() {
@@ -100,7 +100,7 @@
         },
 
         _start: function(e) {
-            this.drag.capture();
+            this.userEvents.capture();
             this.handle.addClass(ACTIVE_STATE);
         },
 
@@ -186,7 +186,7 @@
         _drag: function() {
             var that = this;
 
-            that.drag = new kendo.Drag(that.wrapper, {
+            that.userEvents = new kendo.UserEvents(that.wrapper, {
                 tap: function() {
                     that._toggle(!that.element[0].checked);
                 },

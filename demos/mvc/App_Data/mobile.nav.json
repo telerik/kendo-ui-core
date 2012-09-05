@@ -251,14 +251,14 @@
             ]
         },
         {
-            "text": "Swipe Events",
-            "name": "swipeevents",
-            "documentation": "mobile/swipe",
+            "text": "Touch Events",
+            "name": "touchevents",
+            "documentation": "mobile/touch",
             "spriteCssClass": "mobileAppIcon",
             "items": [
                 {
-                    "text": "Swipe Events",
-                    "url": "swipe/index.html"
+                    "text": "Touch Events",
+                    "url": "touch/index.html"
                 }
             ]
         },

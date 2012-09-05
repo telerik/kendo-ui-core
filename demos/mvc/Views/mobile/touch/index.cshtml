@@ -1,0 +1,36 @@
+<div data-role="view" data-title="Touch Events">
+
+    <div
+        id="touchSurface"
+        data-role="touch"
+        data-enable-swipe="1"
+        data-touchstart="myTouch.touchstart"
+        data-swipe="myTouch.swipe"
+        data-tap="myTouch.tap"
+        data-doubletap="myTouch.doubletap"
+        data-hold="myTouch.hold"
+        >
+    Touch, swipe, double-tap, tap, and hold me
+</div>
+<div class="console"></div>
+
+<script>
+    window.myTouch = {
+        touchstart: function(e) { kendoConsole.log("touch start"); },
+        swipe: function(e) { kendoConsole.log("swipe " + e.direction); },
+        tap: function(e) { kendoConsole.log("tap"); },
+        doubletap: function(e) { kendoConsole.log("double tap"); },
+        hold: function(e) { kendoConsole.log("hold"); }
+    }
+</script>
+
+<style scoped>
+    #touchSurface {
+        background: black;
+        color: white;
+        padding: 20px;
+        line-height: 20em;
+        text-align: center;
+        font-style: italic;
+    }
+</style>

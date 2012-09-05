@@ -1,4 +1,4 @@
-var movable, pane, dimensions, drag;
+var movable, pane, dimensions, userEvents;
 
 module("pane dimensions");
 
@@ -52,11 +52,11 @@ module("pane", {
             container: container
         });
 
-        drag = new kendo.Drag(element, {multiTouch: true});
+        userEvents = new kendo.UserEvents(element, {multiTouch: true});
 
         pane = new kendo.ui.Pane({
             movable: movable,
-            drag: drag,
+            userEvents: userEvents,
             dimensions: dimensions
         });
 
@@ -79,13 +79,6 @@ function move(x, y, id) {
 function release(id) {
     triggerTouchEvent("mouseup", { pageX: 1, pageY: 1, identifier: id || 1});
 }
-
-test("determines zoom point", 2, function() {
-    press(10, 10);
-    press(13, 14, 2);
-    equal(pane.gestureInfo.center.x, 11.5);
-    equal(pane.gestureInfo.center.y, 12);
-})
 
 test("zooms content", function() {
     press(10, 10);

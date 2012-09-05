@@ -38,7 +38,7 @@
 
             var movable,
                 transition,
-                drag,
+                userEvents,
                 dimensions,
                 dimension,
                 pane;
@@ -51,12 +51,12 @@
                 onEnd: proxy(that._transitionEnd, that)
             });
 
-            drag = new kendo.Drag(element, {
+            userEvents = new kendo.UserEvents(element, {
                 start: function(e) {
                     if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
-                        drag.capture();
+                        userEvents.capture();
                     } else {
-                        drag.cancel();
+                        userEvents.cancel();
                     }
 
                     transition.cancel();
@@ -75,7 +75,7 @@
 
             pane = new Pane({
                 dimensions: dimensions,
-                drag: drag,
+                userEvents: userEvents,
                 movable: movable,
                 elastic: true
             });
@@ -83,7 +83,7 @@
             $.extend(that, {
                 movable: movable,
                 transition: transition,
-                drag: drag,
+                userEvents: userEvents,
                 dimensions: dimensions,
                 dimension: dimension,
                 pane: pane
@@ -107,7 +107,7 @@
         destroy: function() {
             Widget.fn.destroy.call(this);
 
-            this.drag.destroy();
+            this.userEvents.destroy();
 
             kendo.destroy(this.element);
         },
