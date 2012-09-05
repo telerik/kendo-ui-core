@@ -5981,7 +5981,11 @@
             options.categoryAxis = options.categoryAxes;
         }
 
-        each(["category", "value", "x", "y"], function() {
+        if (options.valueAxes) {
+            options.valueAxis = options.valueAxes;
+        }
+
+        each([CATEGORY, "value", X, Y], function() {
             var axisName = this + "Axis",
                 axes = [].concat(options[axisName]);
 
@@ -5990,8 +5994,11 @@
                 return deepExtend({},
                     themeAxisDefaults,
                     themeAxisDefaults[axisName],
-                    options.axisDefaults,
-                    { line: { color: axisColor }, labels: { color: axisColor }, title: { color: axisColor } },
+                    options.axisDefaults, {
+                        line: { color: axisColor },
+                        labels: { color: axisColor },
+                        title: { color: axisColor }
+                    },
                     axisOptions
                 );
             });

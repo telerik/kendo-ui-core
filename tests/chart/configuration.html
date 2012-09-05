@@ -187,6 +187,17 @@
                     ok(plotArea.categoryAxis.options.flag);
                 });
 
+                test("valueAxes alias overrides valueAxis", function() {
+                    createChart({
+                        valueAxis: {},
+                        valueAxes: [{
+                            flag: true
+                        }]
+                    });
+
+                    ok(plotArea.valueAxis.options.flag);
+                });
+
                 // ------------------------------------------------------------
                 module("Value Axis Configuration", {
                     teardown: destroyChart
@@ -307,10 +318,21 @@
                         axisDefaults: {
                             flag: true
                         },
-                        categoryAxes: [{}]
+                        categoryAxes: [{ local: true }]
                     });
 
-                    ok(plotArea.categoryAxis.options.flag);
+                    ok(plotArea.categoryAxis.options.flag && plotArea.categoryAxis.options.local);
+                });
+
+                test("axisDefaults options are applied to valueAxes", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        },
+                        valueAxes: [{ local: true }]
+                    });
+
+                    ok(plotArea.valueAxis.options.flag && plotArea.valueAxis.options.local);
                 });
 
                 test("axisDefaults are applied to valueAxis", function() {
@@ -1195,10 +1217,25 @@
 
                     createChart({
                         theme: "test",
-                        categoryAxes: [{ }]
+                        categoryAxes: [{ local: true }]
                     });
 
-                    ok(plotArea.categoryAxis.options.flag);
+                    ok(plotArea.categoryAxis.options.flag && plotArea.categoryAxis.options.local);
+                });
+
+                test("theme options are applied to valueAxes", function() {
+                    dataviz.ui.themes.chart.test = {
+                        valueAxis: {
+                            flag: true
+                        }
+                    };
+
+                    createChart({
+                        theme: "test",
+                        valueAxes: [{ local: true }]
+                    });
+
+                    ok(plotArea.valueAxis.options.flag && plotArea.valueAxis.options.local);
                 });
 
                 // ------------------------------------------------------------
