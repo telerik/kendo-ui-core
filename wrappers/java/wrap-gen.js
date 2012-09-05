@@ -162,9 +162,22 @@ function setterAndGetter(attribute) {
 }
 
 
-//syncTld(root + "resources/META-INF/taglib.tld");
 
-function generateTag(widget) {
+function optionDescription(md, option, widget) {
+    var re = new RegExp("### " + option + ".*\\n+([^\.#]*)");
+
+    var description = re.exec(md);
+
+    if (description) {
+        return description[1].trim().replace(/[*]/g, "").replace(/\n/g, " ");
+    }
+
+    console.warn("Can't find description for the " + option + " of the " + widget + ".");
+
+    return "";
+}
+
+function generateTag(widget, ns) {
     var options = widget.fn.options;
     var name = options.name;
 
@@ -185,18 +198,32 @@ function generateTag(widget) {
     tag.push("          <type>java.lang.String</type>");
     tag.push("      </attribute>");
 
+    var docPath = "../../docs/api/" + ns + "/" + name.toLowerCase() + ".md";
+
+    var md = fs.readFileSync(docPath, "utf8");
+
+    md = md.split("## Methods")[0];
+
+
     for (var option in options) {
         var type = typeof options[option];
 
-        if (type === "number") {
-            type = "int";
-        } if (type === "string") {
-            type = "java.lang.String";
-        } else if (type === "object" || type === "null") {
+        if (type === "object" || type === "null" || option == "template") {
             continue;
+        } else if (type === "number") {
+            type = "int";
+        } else if (type === "string") {
+            type = "java.lang.String";
         }
 
+        var description = optionDescription(md, option, name);
+
         tag.push("      <attribute>");
+
+        if (description) {
+            tag.push("          <description>" + description + "</description>");
+        }
+
         tag.push("          <name>" + option + "</name>");
         tag.push("          <rtexprvalue>true</rtexprvalue>");
         tag.push("          <type>" + type + "</type>");
@@ -234,13 +261,13 @@ function generateTld(tldPath) {
 
     for (var key in window.kendo.ui.roles) {
         if (ignoredRoles.indexOf(key) < 0) {
-            tags.push(generateTag(window.kendo.ui.roles[key]));
+            tags.push(generateTag(window.kendo.ui.roles[key], "web"));
         }
     }
 
     for (var key in window.kendo.dataviz.ui.roles) {
         if (ignoredRoles.indexOf(key) < 0) {
-            tags.push(generateTag(window.kendo.dataviz.ui.roles[key]));
+            tags.push(generateTag(window.kendo.dataviz.ui.roles[key], "dataviz"));
         }
     }
 

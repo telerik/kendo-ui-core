@@ -80,14 +80,6 @@ public class ComboBoxTag extends WidgetTag {
         setProperty("highlightFirst", highlightFirst);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
-    }
-
-    public void setTemplate(String template) {
-        setProperty("template", template);
-    }
-
     public String getFilter() {
         return (String)getProperty("filter");
     }

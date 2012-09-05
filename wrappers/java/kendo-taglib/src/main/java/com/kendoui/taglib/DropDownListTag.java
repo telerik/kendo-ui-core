@@ -40,14 +40,6 @@ public class DropDownListTag extends WidgetTag {
         setProperty("text", text);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
-    }
-
-    public void setTemplate(String template) {
-        setProperty("template", template);
-    }
-
     public int getDelay() {
         return (int)getProperty("delay");
     }

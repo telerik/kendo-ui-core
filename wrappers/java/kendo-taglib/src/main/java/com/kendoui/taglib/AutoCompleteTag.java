@@ -30,14 +30,6 @@ public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
         setProperty("suggest", suggest);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
-    }
-
-    public void setTemplate(String template) {
-        setProperty("template", template);
-    }
-
     public String getDataTextField() {
         return (String)getProperty("dataTextField");
     }

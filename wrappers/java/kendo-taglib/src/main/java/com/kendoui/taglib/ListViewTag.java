@@ -32,14 +32,6 @@ public class ListViewTag extends WidgetTag {
         setProperty("navigatable", navigatable);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
-    }
-
-    public void setTemplate(String template) {
-        setProperty("template", template);
-    }
-
     public String getAltTemplate() {
         return (String)getProperty("altTemplate");
     }

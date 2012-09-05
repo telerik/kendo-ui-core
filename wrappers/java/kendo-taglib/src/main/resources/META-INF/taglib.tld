@@ -23,51 +23,55 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Controls whether the AutoComplete should automatically auto-type the rest of text</description>
           <name>suggest</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
-          <name>template</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
+          <description>Sets the field of the data item that provides the text content of the list items</description>
           <name>dataTextField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the minimum number of characters that should be typed before the AutoComplete queries the dataSource</description>
           <name>minLength</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Specifies the delay in ms after which the AutoComplete will start filtering the dataSource</description>
           <name>delay</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Sets the height of the drop-down list in pixels</description>
           <name>height</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Defines the type of filtration</description>
           <name>filter</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Defines whether the filtration should be case sensitive</description>
           <name>ignoreCase</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Controls whether the first item will be automatically highlighted</description>
           <name>highlightFirst</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>A string that appears in the textbox when it has no value</description>
           <name>placeholder</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -91,26 +95,31 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the culture info used by the widget</description>
           <name>culture</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the content of the footer</description>
           <name>footer</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the format, which is used to parse value set with value() method</description>
           <name>format</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the start view</description>
           <name>start</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the navigation depth</description>
           <name>depth</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -129,71 +138,79 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Controls whether the ComboBox should be initially enabled</description>
           <name>enable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Defines the initial selected item</description>
           <name>index</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Controls whether to bind the widget to the DataSource on initialization</description>
           <name>autoBind</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Specifies the delay in ms after which the ComboBox will start filtering dataSource</description>
           <name>delay</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the text content of the list items</description>
           <name>dataTextField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the value content of the list items</description>
           <name>dataValueField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the minimum characters that should be typed before the ComboBox activates</description>
           <name>minLength</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Define the height of the drop-down list in pixels</description>
           <name>height</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Controls whether the first item will be automatically highlighted</description>
           <name>highlightFirst</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
-          <name>template</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
+          <description>Defines the type of filtration</description>
           <name>filter</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>A string that appears in the textbox when the combobox has no value</description>
           <name>placeholder</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Controls whether the ComboBox should automatically auto-type the rest of text</description>
           <name>suggest</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Defines whether the filtration should be case sensitive</description>
           <name>ignoreCase</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -212,26 +229,31 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Template to be used for rendering the footer of the calendar</description>
           <name>footer</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the format, which is used to format the value of the DatePicker displayed in the input</description>
           <name>format</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the culture info used by the widget</description>
           <name>culture</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the start view</description>
           <name>start</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the navigation depth</description>
           <name>depth</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -250,61 +272,67 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Controls whether the DropDownList should be initially enabled</description>
           <name>enable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Defines the initial selected item</description>
           <name>index</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Controls whether to bind the widget on initialization</description>
           <name>autoBind</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Define the text of the widget, when the autoBind is set to false</description>
           <name>text</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
-          <name>template</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
+          <description>Specifies the delay in ms before the search text typed by the end user is cleared</description>
           <name>delay</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Define the height of the drop-down list in pixels</description>
           <name>height</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the text content of the list items</description>
           <name>dataTextField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the value content of the list items</description>
           <name>dataValueField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Define the text of the default empty item</description>
           <name>optionLabel</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Use it to set the Id of the parent DropDownList</description>
           <name>cascadeFrom</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Controls whether the search should be case sensitive</description>
           <name>ignoreCase</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -323,16 +351,19 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the increment/decrement step</description>
           <name>step</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Specifies the culture info used by the NumericTextBox widget</description>
           <name>culture</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the format of the number</description>
           <name>format</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -343,16 +374,19 @@
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Specifies the text displayed when the input is empty</description>
           <name>placeholder</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the text of the tooltip on the up arrow</description>
           <name>upArrowText</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the text of the tooltip on the down arrow</description>
           <name>downArrowText</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -371,6 +405,7 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Indicates whether the grid will call read on the DataSource initially</description>
           <name>autoBind</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -381,41 +416,49 @@
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Enable/disable grid scrolling</description>
           <name>scrollable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Defines whether grid columns are sortable</description>
           <name>sortable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Indicates whether selection is enabled/disabled</description>
           <name>selectable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Indicates whether keyboard navigation is enabled/disabled</description>
           <name>navigatable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Indicates whether paging is enabled/disabled</description>
           <name>pageable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Indicates whether editing is enabled/disabled</description>
           <name>editable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Indicates whether grouping is enabled/disabled</description>
           <name>groupable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Template to be used for rendering the rows in the grid</description>
           <name>rowTemplate</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -454,24 +497,22 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Indicates whether the list view will call read on the DataSource initially</description>
           <name>autoBind</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Indicates whether selection is enabled/disabled</description>
           <name>selectable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Indicates whether keyboard navigation is enabled/disabled</description>
           <name>navigatable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
-      </attribute>
-      <attribute>
-          <name>template</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
       </attribute>
       <attribute>
           <name>altTemplate</name>
@@ -479,6 +520,7 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies ListView item template in edit mode</description>
           <name>editTemplate</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -497,26 +539,31 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Root menu orientation</description>
           <name>orientation</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies Menu opening direction</description>
           <name>direction</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies that the root sub menus will be opened on item click</description>
           <name>openOnClick</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Specifies that sub menus should close after item selection (provided they won't navigate)</description>
           <name>closeOnClick</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving</description>
           <name>hoverDelay</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
@@ -535,6 +582,7 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies how the PanelBar items are displayed when opened and closed</description>
           <name>expandMode</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -558,46 +606,55 @@
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>The minimum value of the Slider</description>
           <name>min</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The maximum value of the Slider</description>
           <name>max</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The small step value of the Slider</description>
           <name>smallStep</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The delta with which the value will change when the user presses the Page Up or Page Down key (the drag handle must be focused)</description>
           <name>largeStep</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The orientation of a Slider: "horizontal" or "vertical"</description>
           <name>orientation</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Denotes the location of the tick marks in the Slider</description>
           <name>tickPlacement</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Can be used to show (true) or hide (false) the increase and decrease buttons of a Slider</description>
           <name>showButtons</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>The title of the increase button of the Slider</description>
           <name>increaseButtonTitle</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>The title of the decrease button of the Slider</description>
           <name>decreaseButtonTitle</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -621,31 +678,37 @@
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>The minimum value of the RangeSlider</description>
           <name>min</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The maximum value of the RangeSlider</description>
           <name>max</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The small step value of the RangeSlider</description>
           <name>smallStep</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The delta with which the value will change when the user presses the Page Up or Page Down key (the drag handle must be focused)</description>
           <name>largeStep</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>F The orientation of a RangeSlider; "horizontal" or "vertical"</description>
           <name>orientation</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Denotes the location of the tick marks in the RangeSlider</description>
           <name>tickPlacement</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -664,6 +727,7 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the orientation of the Splitter</description>
           <name>orientation</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -682,36 +746,43 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the text name of the tab</description>
           <name>dataTextField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the text content of the tab content element</description>
           <name>dataContentField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the image URL of the tab</description>
           <name>dataImageUrlField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the link URL for the tab</description>
           <name>dataUrlField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the CSS class of the tab</description>
           <name>dataSpriteCssClass</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Sets the field of the data item that provides the URL for the ajax loaded tab content</description>
           <name>dataContentUrlField</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab</description>
           <name>collapsible</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -730,11 +801,13 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the format, which is used to format the value of the TimePicker displayed in the input</description>
           <name>format</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the interval, between values in the popup list, in minutes</description>
           <name>interval</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
@@ -758,21 +831,25 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the format, which is used to format the value of the DateTimePicker displayed in the input</description>
           <name>format</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the format, which is used to format the values in the time drop-down list</description>
           <name>timeFormat</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the culture info used by the widget</description>
           <name>culture</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the interval, between values in the popup list, in minutes</description>
           <name>interval</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
@@ -783,16 +860,19 @@
           <type>int</type>
       </attribute>
       <attribute>
+          <description>Template to be used for rendering the footer of the calendar</description>
           <name>footer</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the start view of the calendar</description>
           <name>start</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies the navigation depth of the calendar</description>
           <name>depth</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -811,6 +891,7 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Disables (false) or enables (true) drag-and-drop on the nodes of a TreeView</description>
           <name>dragAndDrop</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -821,6 +902,7 @@
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Indicates whether the child datasources should be fetched lazily, when parent groups get expanded</description>
           <name>loadOnDemand</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -839,16 +921,19 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Enables (true) or disables (false) an Upload</description>
           <name>enabled</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Enables (true) or disables (false) the ability to select multiple files</description>
           <name>multiple</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Enables (true) or disables (false) the ability to display a file listing for uploading a file(s)</description>
           <name>showFileList</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -867,41 +952,49 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>The text in the window title bar</description>
           <name>title</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Specifies whether the window should show a modal overlay over the page</description>
           <name>modal</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Enables (true) or disables (false) the ability for users to resize a Window</description>
           <name>resizable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>Enables (true) or disables (false) the ability for users to move/drag a Window</description>
           <name>draggable</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>The minimum width (in pixels) that may be achieved by resizing the window</description>
           <name>minWidth</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The minimum height (in pixels) that may be achieved by resizing the window</description>
           <name>minHeight</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The maximum width (in pixels) that may be achieved by resizing the window</description>
           <name>maxWidth</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
       </attribute>
       <attribute>
+          <description>The maximum height (in pixels) that may be achieved by resizing the window</description>
           <name>maxHeight</name>
           <rtexprvalue>true</rtexprvalue>
           <type>int</type>
@@ -920,6 +1013,7 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Indicates whether the Editor should submit encoded HTML tags</description>
           <name>encoded</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -938,6 +1032,7 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>Sets Chart theme</description>
           <name>theme</name>
           <rtexprvalue>true</rtexprvalue>
           <type>java.lang.String</type>
@@ -948,6 +1043,7 @@
           <type>boolean</type>
       </attribute>
       <attribute>
+          <description>A value indicating if transition animations should be played</description>
           <name>transitions</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -971,6 +1067,7 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>A value indicating if transition animations should be played</description>
           <name>transitions</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
@@ -994,6 +1091,7 @@
           <type>java.lang.String</type>
       </attribute>
       <attribute>
+          <description>A value indicating if transition animations should be played</description>
           <name>transitions</name>
           <rtexprvalue>true</rtexprvalue>
           <type>boolean</type>
