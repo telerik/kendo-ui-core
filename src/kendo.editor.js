@@ -5226,7 +5226,7 @@ var ImageCommand = Command.extend({
                 }
             }
         }))
-               .hide()
+                .hide()
                 .find(".k-dialog-insert").click(apply).end()
                 .find(".k-dialog-close").click(close).end()
                 .find(".k-form-text-row input").keydown(keyDown).end()

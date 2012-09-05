@@ -56,7 +56,7 @@ namespace Kendo.Models
             "kendo.treeview.js",
             "kendo.upload.js",
             "kendo.window.js",
-            "kendo.imagebrowser.js"
+            "kendo.imagebrowser.js",
             "kendo.editor.js"
 #else
             "http://code.jquery.com/jquery-1.7.1.min.js",
