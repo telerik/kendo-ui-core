@@ -69,18 +69,23 @@
     <div class="box">
         <div class="applyall">
             <input id="applyall" type="checkbox" class="k-checkbox"/>
-            <label for="applyall" class="k-checkbox">Apply to all platforms</label><br /><br />
+            <label for="applyall" class="k-checkbox">Apply to all platforms</label>
         </div>
         <div class="optionsSheet">
             <div class="items">
-                <input id="iosbox" type="checkbox" checked="checked" class="k-checkbox"/>
-                <label for="iosbox" class="k-checkbox">iOS</label><br /><br />
-                <input id="androidbox" type="checkbox" checked="checked" class="k-checkbox" />
-                <label for="androidbox" class="k-checkbox">Android</label><br /><br />
-                <input id="blackberrybox" type="checkbox" class="k-checkbox" />
-                <label for="blackberrybox" class="k-checkbox">BlackBerry</label><br /><br />
-                <input id="meegobox" type="checkbox" class="k-checkbox" />
-                <label for="meegobox" class="k-checkbox">MeeGo</label>
+                <div class="item-header">Platforms</div>
+                <div style="float: right;">
+                    <input id="blackberrybox" type="checkbox" checked="checked" class="k-checkbox" />
+                    <label for="blackberrybox" class="k-checkbox">BlackBerry</label><br />
+                    <input id="meegobox" type="checkbox" class="k-checkbox" />
+                    <label for="meegobox" class="k-checkbox">MeeGo</label>
+                </div>
+                <div>
+                    <input id="iosbox" type="checkbox" checked="checked" class="k-checkbox"/>
+                    <label for="iosbox" class="k-checkbox">iOS</label><br />
+                    <input id="androidbox" type="checkbox" checked="checked" class="k-checkbox" />
+                    <label for="androidbox" class="k-checkbox">Android</label>
+                </div>
             </div>
             <div class="cover">
                 <div class="wrench"></div>
@@ -336,12 +341,6 @@
                 </style>
             </div>
         </div>
-        <br/><br/>
-        <div class="files">
-            <button id="resetStyles">Reset</button>
-            <button id="importStyles">Import</button>
-            <button id="exportStyles">Export</button>
-        </div>
         <div id="exportWindow">
             <textarea class="k-textbox"></textarea>
         </div>
@@ -352,6 +351,11 @@
             <label for="mixStyles" class="k-checkbox">Mix with existing styles</label>
             <button class="k-button" style="float: right;" id="import">Import</button>
         </div>
+    </div>
+    <div class="files">
+        <button id="resetStyles">Reset</button>
+        <button id="importStyles">Import</button>
+        <button id="exportStyles">Export</button>
     </div>
     <script type="text/javascript" src="scripts/themebuilder.js"></script>
 </body>
