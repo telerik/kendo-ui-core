@@ -74,6 +74,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string TimeFormat
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
@@ -92,7 +98,12 @@ namespace Kendo.Mvc.UI
             }
             
             options["format"] = Format;
-            
+
+            if (TimeFormat.HasValue())
+            {
+                options["timeFormat"] = TimeFormat;
+            }
+
             if (ParseFormats.Any())
             {
                 options["parseFormats"] = ParseFormats;
