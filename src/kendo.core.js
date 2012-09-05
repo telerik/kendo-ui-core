@@ -1518,7 +1518,7 @@ function pad(number) {
 
         support.isRtl = function(element) {
             return $(element).closest(".k-rtl").length > 0;
-        }
+        };
 
         var table = document.createElement("table");
 
