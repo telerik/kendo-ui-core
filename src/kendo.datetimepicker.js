@@ -69,8 +69,7 @@
                    .attr({
                         "role": "textbox",
                         "aria-haspopup": true,
-                        "aria-expanded": false,
-                        "aria-owns": that.timeView._listboxID
+                        "aria-expanded": false
                    });
 
             that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
@@ -385,6 +384,7 @@
                 element = that.element,
                 options = that.options,
                 id = element.attr("id"),
+                div, ul,
                 date;
 
             that.dateView = new kendo.DateView(extend({}, options, {
@@ -416,7 +416,7 @@
                         e.preventDefault();
                     } else {
                         element.attr(ARIA_EXPANDED, false);
-                        that.dateView.popup.element.attr(ARIA_HIDDEN, true);
+                        div.attr(ARIA_HIDDEN, true);
                     }
                 },
                 open:  function(e) {
@@ -432,10 +432,11 @@
                         }
 
                         element.attr(ARIA_EXPANDED, true);
-                        that.dateView.popup.element.attr(ARIA_HIDDEN, false);
+                        div.attr(ARIA_HIDDEN, false);
                     }
                 }
             }));
+            div = that.dateView.div;
 
             that.timeView = new TimeView({
                 id: id,
@@ -451,21 +452,23 @@
                 max: new DATE(MAX),
                 parseFormats: options.parseFormats,
                 change: function(value, trigger) {
-                    value = that.timeView._parse(value);
+                    var timeView = this;
+
+                    value = timeView._parse(value);
 
                     if (value < options.min) {
                         value = new DATE(options.min);
-                        that.timeView.options.min = value;
+                        timeView.options.min = value;
                     } else if (value > options.max) {
                         value = new DATE(options.max);
-                        that.timeView.options.max = value;
+                        timeView.options.max = value;
                     }
 
                     if (trigger) {
                         that._timeSelected = true;
                         that._change(value);
                     } else {
-                        that.element.val(kendo.toString(value, options.format, options.culture));
+                        element.val(kendo.toString(value, options.format, options.culture));
                     }
                 },
                 close: function(e) {
@@ -473,7 +476,7 @@
                         e.preventDefault();
                     } else {
                         element.attr(ARIA_EXPANDED, false);
-                        that.timeView.ul.attr(ARIA_HIDDEN, true);
+                        ul.attr(ARIA_HIDDEN, true);
                     }
                 },
                 open:  function(e) {
@@ -481,10 +484,11 @@
                         e.preventDefault();
                     } else {
                         element.attr(ARIA_EXPANDED, true);
-                        that.timeView.ul.attr(ARIA_HIDDEN, false);
+                        ul.attr(ARIA_HIDDEN, false);
                     }
                 }
             });
+            ul = that.timeView.ul;
         },
 
         _icons: function() {
@@ -501,12 +505,12 @@
             icons = icons.children();
             that._dateIcon = icons.eq(0).attr({
                 "role": "button",
-                "aria-controls": that.dateView.popup.element.attr("id")
+                "aria-controls": that.dateView._dateViewID
             });
 
             that._timeIcon = icons.eq(1).attr({
                 "role": "button",
-                "aria-controls": that.timeView._listboxID
+                "aria-controls": that.timeView._timeViewID
             });
         },
 

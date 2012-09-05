@@ -48,10 +48,6 @@
                 equal(input.attr("aria-expanded"), "false");
             });
 
-            test("DateTimePicker adds aria-owns", function() {
-                equal(input.attr("aria-owns"), instance.timeView.ul.attr("id"));
-            });
-
             test("DateTimePicker sets aria-expanded=true", function() {
                 instance.open();
                 equal(input.attr("aria-expanded"), "true");
@@ -74,7 +70,7 @@
             });
 
             test("DateTimePicker sets id to the ul element", function() {
-                equal(instance.timeView.ul.attr("id"), "test_timepicker_timeview");
+                equal(instance.timeView.ul.attr("id"), "test_timeview");
             });
 
             test("DateTimePicker adds role to the popup", function() {
