@@ -547,23 +547,27 @@
         },
 
         _bindCategories: function(data) {
-            var categoryAxis = this.options.categoryAxis,
-                i,
+            var definitions = [].concat(this.options.categoryAxis),
+                axisIx,
+                axis,
+                categoryIx,
                 category,
-                row,
-                length = data.length;
+                row;
 
-            if (categoryAxis.field) {
-                for (i = 0; i < length; i++) {
-                    row = data[i];
+            for (axisIx = 0; axisIx < definitions.length; axisIx++) {
+                axis = definitions[axisIx];
+                if (axis.field) {
+                    for (categoryIx = 0; categoryIx < data.length; categoryIx++) {
+                        row = data[categoryIx];
 
-                    category = getField(categoryAxis.field, row);
-                    if (i === 0) {
-                        categoryAxis.categories = [category];
-                        categoryAxis.dataItems = [row];
-                    } else {
-                        categoryAxis.categories.push(category);
-                        categoryAxis.dataItems.push(row);
+                        category = getField(axis.field, row);
+                        if (categoryIx === 0) {
+                            axis.categories = [category];
+                            axis.dataItems = [row];
+                        } else {
+                            axis.categories.push(category);
+                            axis.dataItems.push(row);
+                        }
                     }
                 }
             }

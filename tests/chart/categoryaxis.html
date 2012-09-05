@@ -1329,6 +1329,20 @@
                         }
                     });
                 });
+
+                test("categories are bound for secondary axis", function() {
+                    createBoundChart({
+                        categoryAxis: [{
+                            name: "Axis A",
+                            field: "category"
+                        }, {
+                            name: "Axis B",
+                            field: "category"
+                        }]
+                    });
+
+                    equals(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
+                });
             })();
         </script>
 
