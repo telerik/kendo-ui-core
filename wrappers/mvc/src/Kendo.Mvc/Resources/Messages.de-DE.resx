@@ -123,6 +123,15 @@
   <data name="Editor_CreateLink" xml:space="preserve">
     <value>Hyperlink einfügen</value>
   </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>A directory with this name was not found.</value>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Empty Folder</value>
+  </data>
   <data name="Editor_FontName" xml:space="preserve">
     <value>Schriftfamilie</value>
   </data>
@@ -153,6 +162,9 @@
   <data name="Editor_InsertUnorderedList" xml:space="preserve">
     <value>Aufzählliste</value>
   </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>The selected file "{0}" is not valid. Supported file types are {1}.</value>
+  </data>
   <data name="Editor_Italic" xml:space="preserve">
     <value>Kursiv</value>
   </data>
@@ -168,8 +180,20 @@
   <data name="Editor_JustifyRight" xml:space="preserve">
     <value>Rechtsbündig</value>
   </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Arrange by:</value>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Size</value>
+  </data>
   <data name="Editor_Outdent" xml:space="preserve">
     <value>Einzug verkleinern</value>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>A file with name "{0}" already exists in the current directory. Do you want to overwrite it?</value>
   </data>
   <data name="Editor_Strikethrough" xml:space="preserve">
     <value>Durchgestrichen</value>
@@ -188,6 +212,9 @@
   </data>
   <data name="Editor_Unlink" xml:space="preserve">
     <value>Hyperlink entfernen</value>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Upload</value>
   </data>
   <data name="Filter_And" xml:space="preserve">
     <value>Und</value>

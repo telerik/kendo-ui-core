@@ -363,4 +363,31 @@
   <data name="Grid_SortDescending" xml:space="preserve">
     <value>Sorteer Aflopend</value>
   </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Weet u zeker dat u het bestand "{0}" wilt verwijderen?</value>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>Een map met deze naam is niet gevonden.</value>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Lege map</value>
+  </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>Het geseleteceerde bestand "{0}" is niet geldig. De volgende bestandstypen worden ondersteund {1}.</value>
+  </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Sorteer op:</value>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Grootte</value>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>Het bestand met naam "{0}" bestaat reeds in deze map. Wilt u het bestand overschrijven?</value>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Upload</value>
+  </data>
 </root>

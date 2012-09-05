@@ -7,10 +7,12 @@ namespace Kendo.Mvc.UI
     public class EditorFileBrowserSettings : JsonObject
     {
         public const string DefaultFilter = "*.png,*.gif,*.jpg,*.jpeg";
+        private readonly EditorFileBrowserMessages messages;
 
-        public EditorFileBrowserSettings()
+        public EditorFileBrowserSettings(EditorFileBrowserMessages messages)
         {
             Filter = DefaultFilter;
+            this.messages = messages;
 
             Read = new EditorFileBrowserOperation();
             Thumbnail = new EditorFileBrowserOperation();
@@ -67,6 +69,12 @@ namespace Kendo.Mvc.UI
             if (Filter != DefaultFilter)
             {
                 json["filter"] = Filter;
+            }
+
+            var messages = this.messages.ToJson();
+            if (messages.Any())
+            {
+                json["messages"] = messages;
             }
 
             var read = Read.ToJson();

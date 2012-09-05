@@ -366,4 +366,31 @@
   <data name="Grid_SortDescending" xml:space="preserve">
     <value>Ordenar Descendente</value>
   </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Tem certeza de que deseja remover "{0}"?</value>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>Um diretório com este nome não foi encontrado.</value>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Pasta vazia</value>
+  </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>O arquivo selecionado "{0}" não é válido. Os tipos de arquivo suportados são {1}.</value>
+  </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Ordenar por:</value>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Tamanho</value>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>Um arquivo de nome "{0}" já existe no diretório atual. Deseja substituí-lo?</value>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Enviar arquivo</value>
+  </data>
 </root>

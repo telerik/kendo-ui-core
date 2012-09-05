@@ -369,4 +369,31 @@
   <data name="Grid_SortDescending" xml:space="preserve">
     <value>Сортирай низходящо</value>
   </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Сигурни ли сте че искате да изтриете "{0}"?</value>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>Директория с посоченото име не бе открита.</value>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Празна папка</value>
+  </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>Избраният файл "{0}" не е валиден. Поддържаните файлови формати са {1}.</value>
+  </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Подреди по:</value>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Име</value>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Големина</value>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>Файл с име "{0}" вече съществува в тази папка. Искате ли да го презапишете?</value>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Качи файл</value>
+  </data>
 </root>

@@ -35,7 +35,7 @@ namespace Kendo.Mvc.UI
                 .CreateLink().Unlink()
                 .InsertImage();
 
-            FileBrowserSettings = new EditorFileBrowserSettings();
+            FileBrowserSettings = new EditorFileBrowserSettings(Messages.FileBrowserMessages);
         }
 
         internal IUrlGenerator UrlGenerator
