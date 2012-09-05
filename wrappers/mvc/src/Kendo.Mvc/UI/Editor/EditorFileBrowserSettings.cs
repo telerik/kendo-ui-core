@@ -1,6 +1,7 @@
 ﻿using Kendo.Mvc.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Kendo.Mvc.UI
 {
@@ -110,10 +111,12 @@ namespace Kendo.Mvc.UI
                     transport["create"] = create;
                 }
 
-                var image = Image.ToJson();
-                if (image.Any())
+                var image = Image.Url;
+                if (image.HasValue())
                 {
-                    transport["imageUrl"] = image["url"];
+                    image = Regex.Replace(image, "(%20)*%7B0(%20)*", "{0", RegexOptions.IgnoreCase);
+                    image = Regex.Replace(image, "(%20)*%7D(%20)*", "}", RegexOptions.IgnoreCase);
+                    transport["imageUrl"] = image;
                 }
             }
         }

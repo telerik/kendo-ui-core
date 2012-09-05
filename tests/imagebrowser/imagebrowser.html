@@ -412,7 +412,7 @@
 
                 browser.list.find("li[data-type=f]").mousedown().mouseup();
 
-                equal(browser.value(), "/foo/File1");
+                equal(browser.value(), "foo/File1");
             });
 
             test("clicking on file triggers the change event", 2, function() {
@@ -425,7 +425,7 @@
 
                 browser.list.find("li[data-type=f]").mousedown().mouseup();
 
-                equal(browser.value(), "/foo/File1");
+                equal(browser.value(), "foo/File1");
             });
 
             test("clicking on folder enables the delete button", 2, function() {
@@ -462,7 +462,7 @@
 
                 browser.list.find("li[data-type=f]").mousedown().mouseup();
 
-                equal(browser.value(), "/bar/File1");
+                equal(browser.value(), "bar/File1");
             });
 
             test("file size is formatted", function() {
@@ -679,7 +679,7 @@
                 var browser = setup({
                     transport: {
                         imageUrl: function(path) {
-                            return "foo" + path;
+                            return "foo" + "/" + path;
                         }
                     }
                 });
@@ -698,7 +698,7 @@
 
                 browser.list.find("li[data-type=f]").mousedown().mouseup();
 
-                equal(browser.value(), "foo?path=/File1");
+                equal(browser.value(), "foo?path=File1");
             });
 
             test("listView is not rebuild when item is deleted", function() {

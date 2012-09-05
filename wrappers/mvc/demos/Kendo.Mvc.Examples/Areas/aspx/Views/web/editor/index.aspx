@@ -34,7 +34,7 @@
             &lt;/p&gt;
       <% })
       .FileBrowser(fileBrowser => fileBrowser
-        .Image("~/Content/UserFiles/Images{0}")
+        .Image("~/Content/UserFiles/Images/{0}")
         .Read("Read", "ImageBrowser")
         .Create("Create", "ImageBrowser")
         .Destroy("Destroy", "ImageBrowser")
