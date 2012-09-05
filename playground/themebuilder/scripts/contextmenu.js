@@ -74,7 +74,7 @@
                 });
             }
 
-            $(document.body).click(function () { that.popup.close() });
+            $(document.body).on(kendo.support.mouseup, function () { that.popup.close() });
         },
         options: {
             name: "ContextMenu",
