@@ -18,40 +18,40 @@ public class EditorTag extends WidgetTag {
         setProperty("encoded", encoded);
     }
 
-    public Function getSelect() {
-        return (Function)getProperty("select");
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
     }
 
     public void setSelect(String select) {
         setProperty("select", new Function(select));
     }
 
-    public Function getChange() {
-        return (Function)getProperty("change");
+    public String getChange() {
+        return ((Function)getProperty("change")).getBody();
     }
 
     public void setChange(String change) {
         setProperty("change", new Function(change));
     }
 
-    public Function getExecute() {
-        return (Function)getProperty("execute");
+    public String getExecute() {
+        return ((Function)getProperty("execute")).getBody();
     }
 
     public void setExecute(String execute) {
         setProperty("execute", new Function(execute));
     }
 
-    public Function getError() {
-        return (Function)getProperty("error");
+    public String getError() {
+        return ((Function)getProperty("error")).getBody();
     }
 
     public void setError(String error) {
         setProperty("error", new Function(error));
     }
 
-    public Function getPaste() {
-        return (Function)getProperty("paste");
+    public String getPaste() {
+        return ((Function)getProperty("paste")).getBody();
     }
 
     public void setPaste(String paste) {

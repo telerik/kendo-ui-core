@@ -50,24 +50,24 @@ public class MenuTag extends WidgetTag {
         setProperty("hoverDelay", hoverDelay);
     }
 
-    public Function getOpen() {
-        return (Function)getProperty("open");
+    public String getOpen() {
+        return ((Function)getProperty("open")).getBody();
     }
 
     public void setOpen(String open) {
         setProperty("open", new Function(open));
     }
 
-    public Function getClose() {
-        return (Function)getProperty("close");
+    public String getClose() {
+        return ((Function)getProperty("close")).getBody();
     }
 
     public void setClose(String close) {
         setProperty("close", new Function(close));
     }
 
-    public Function getSelect() {
-        return (Function)getProperty("select");
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
     }
 
     public void setSelect(String select) {

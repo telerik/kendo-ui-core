@@ -160,8 +160,8 @@ function setterAndGetter(attribute) {
         code.push("    }");
         code.push("");
     } else {
-        code.push("    public Function get" + upper + "() {");
-        code.push("        return (Function)getProperty(\"" + name + "\");");
+        code.push("    public String get" + upper + "() {");
+        code.push("        return ((Function)getProperty(\"" + name + "\")).getBody();");
         code.push("    }");
         code.push("");
 

@@ -14,13 +14,24 @@
         
         <kendo:window name="myWindow">
         	<strong>Window Content</strong>
-        	
-        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3">
+        	<script>
+        		function foo() {
+        			alert("foo");
+        		}
+        	</script>
+        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3" dataBound="foo">
         	    <kendo:dataSource type="odata" serverFiltering="true" serverPaging="true" pageSize="20">
         	    	<kendo:transport>
         	    		<kendo:read url="http://odata.netflix.com/Catalog/Titles"></kendo:read>
         	    	</kendo:transport>
         	    </kendo:dataSource>
+        	    <kendo:event name="dataBound">
+        	    	<script>
+        	    	function dataBound() {
+        	    		alert("dataBound");
+        	    	}
+        	    	</script>
+        	    </kendo:event>
             </kendo:autoComplete>
         	
         </kendo:window>

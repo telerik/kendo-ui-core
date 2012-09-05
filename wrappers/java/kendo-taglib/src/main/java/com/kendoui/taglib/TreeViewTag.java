@@ -34,64 +34,64 @@ public class TreeViewTag extends WidgetTag {
         setProperty("loadOnDemand", loadOnDemand);
     }
 
-    public Function getDragstart() {
-        return (Function)getProperty("dragstart");
+    public String getDragstart() {
+        return ((Function)getProperty("dragstart")).getBody();
     }
 
     public void setDragstart(String dragstart) {
         setProperty("dragstart", new Function(dragstart));
     }
 
-    public Function getDrag() {
-        return (Function)getProperty("drag");
+    public String getDrag() {
+        return ((Function)getProperty("drag")).getBody();
     }
 
     public void setDrag(String drag) {
         setProperty("drag", new Function(drag));
     }
 
-    public Function getDrop() {
-        return (Function)getProperty("drop");
+    public String getDrop() {
+        return ((Function)getProperty("drop")).getBody();
     }
 
     public void setDrop(String drop) {
         setProperty("drop", new Function(drop));
     }
 
-    public Function getDragend() {
-        return (Function)getProperty("dragend");
+    public String getDragend() {
+        return ((Function)getProperty("dragend")).getBody();
     }
 
     public void setDragend(String dragend) {
         setProperty("dragend", new Function(dragend));
     }
 
-    public Function getDataBound() {
-        return (Function)getProperty("dataBound");
+    public String getDataBound() {
+        return ((Function)getProperty("dataBound")).getBody();
     }
 
     public void setDataBound(String dataBound) {
         setProperty("dataBound", new Function(dataBound));
     }
 
-    public Function getExpand() {
-        return (Function)getProperty("expand");
+    public String getExpand() {
+        return ((Function)getProperty("expand")).getBody();
     }
 
     public void setExpand(String expand) {
         setProperty("expand", new Function(expand));
     }
 
-    public Function getCollapse() {
-        return (Function)getProperty("collapse");
+    public String getCollapse() {
+        return ((Function)getProperty("collapse")).getBody();
     }
 
     public void setCollapse(String collapse) {
         setProperty("collapse", new Function(collapse));
     }
 
-    public Function getSelect() {
-        return (Function)getProperty("select");
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
     }
 
     public void setSelect(String select) {

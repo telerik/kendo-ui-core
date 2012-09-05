@@ -1761,4 +1761,17 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    
+    <tag>
+        <description>Represents an event of a Kendo widget or DataSource</description>
+        <name>event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
 </taglib>

@@ -50,24 +50,24 @@ public class DatePickerTag extends WidgetTag {
         setProperty("depth", depth);
     }
 
-    public Function getOpen() {
-        return (Function)getProperty("open");
+    public String getOpen() {
+        return ((Function)getProperty("open")).getBody();
     }
 
     public void setOpen(String open) {
         setProperty("open", new Function(open));
     }
 
-    public Function getClose() {
-        return (Function)getProperty("close");
+    public String getClose() {
+        return ((Function)getProperty("close")).getBody();
     }
 
     public void setClose(String close) {
         setProperty("close", new Function(close));
     }
 
-    public Function getChange() {
-        return (Function)getProperty("change");
+    public String getChange() {
+        return ((Function)getProperty("change")).getBody();
     }
 
     public void setChange(String change) {

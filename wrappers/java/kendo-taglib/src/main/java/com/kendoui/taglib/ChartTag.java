@@ -34,40 +34,40 @@ public class ChartTag extends WidgetTag {
         setProperty("transitions", transitions);
     }
 
-    public Function getDataBound() {
-        return (Function)getProperty("dataBound");
+    public String getDataBound() {
+        return ((Function)getProperty("dataBound")).getBody();
     }
 
     public void setDataBound(String dataBound) {
         setProperty("dataBound", new Function(dataBound));
     }
 
-    public Function getSeriesClick() {
-        return (Function)getProperty("seriesClick");
+    public String getSeriesClick() {
+        return ((Function)getProperty("seriesClick")).getBody();
     }
 
     public void setSeriesClick(String seriesClick) {
         setProperty("seriesClick", new Function(seriesClick));
     }
 
-    public Function getSeriesHover() {
-        return (Function)getProperty("seriesHover");
+    public String getSeriesHover() {
+        return ((Function)getProperty("seriesHover")).getBody();
     }
 
     public void setSeriesHover(String seriesHover) {
         setProperty("seriesHover", new Function(seriesHover));
     }
 
-    public Function getAxisLabelClick() {
-        return (Function)getProperty("axisLabelClick");
+    public String getAxisLabelClick() {
+        return ((Function)getProperty("axisLabelClick")).getBody();
     }
 
     public void setAxisLabelClick(String axisLabelClick) {
         setProperty("axisLabelClick", new Function(axisLabelClick));
     }
 
-    public Function getPlotAreaClick() {
-        return (Function)getProperty("plotAreaClick");
+    public String getPlotAreaClick() {
+        return ((Function)getProperty("plotAreaClick")).getBody();
     }
 
     public void setPlotAreaClick(String plotAreaClick) {

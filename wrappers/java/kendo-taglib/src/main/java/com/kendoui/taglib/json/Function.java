@@ -13,4 +13,8 @@ public class Function {
     public void write(Writer out) throws IOException {
         out.append(body);
     }
+    
+    public String getBody() {
+        return body;
+    }
 }

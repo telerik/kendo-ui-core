@@ -66,56 +66,56 @@ public class TabStripTag extends WidgetTag {
         setProperty("collapsible", collapsible);
     }
 
-    public Function getSelect() {
-        return (Function)getProperty("select");
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
     }
 
     public void setSelect(String select) {
         setProperty("select", new Function(select));
     }
 
-    public Function getActivate() {
-        return (Function)getProperty("activate");
+    public String getActivate() {
+        return ((Function)getProperty("activate")).getBody();
     }
 
     public void setActivate(String activate) {
         setProperty("activate", new Function(activate));
     }
 
-    public Function getError() {
-        return (Function)getProperty("error");
+    public String getError() {
+        return ((Function)getProperty("error")).getBody();
     }
 
     public void setError(String error) {
         setProperty("error", new Function(error));
     }
 
-    public Function getContentLoad() {
-        return (Function)getProperty("contentLoad");
+    public String getContentLoad() {
+        return ((Function)getProperty("contentLoad")).getBody();
     }
 
     public void setContentLoad(String contentLoad) {
         setProperty("contentLoad", new Function(contentLoad));
     }
 
-    public Function getChange() {
-        return (Function)getProperty("change");
+    public String getChange() {
+        return ((Function)getProperty("change")).getBody();
     }
 
     public void setChange(String change) {
         setProperty("change", new Function(change));
     }
 
-    public Function getDataBinding() {
-        return (Function)getProperty("dataBinding");
+    public String getDataBinding() {
+        return ((Function)getProperty("dataBinding")).getBody();
     }
 
     public void setDataBinding(String dataBinding) {
         setProperty("dataBinding", new Function(dataBinding));
     }
 
-    public Function getDataBound() {
-        return (Function)getProperty("dataBound");
+    public String getDataBound() {
+        return ((Function)getProperty("dataBound")).getBody();
     }
 
     public void setDataBound(String dataBound) {

@@ -114,48 +114,48 @@ public class ComboBoxTag extends WidgetTag {
         setProperty("ignoreCase", ignoreCase);
     }
 
-    public Function getOpen() {
-        return (Function)getProperty("open");
+    public String getOpen() {
+        return ((Function)getProperty("open")).getBody();
     }
 
     public void setOpen(String open) {
         setProperty("open", new Function(open));
     }
 
-    public Function getClose() {
-        return (Function)getProperty("close");
+    public String getClose() {
+        return ((Function)getProperty("close")).getBody();
     }
 
     public void setClose(String close) {
         setProperty("close", new Function(close));
     }
 
-    public Function getChange() {
-        return (Function)getProperty("change");
+    public String getChange() {
+        return ((Function)getProperty("change")).getBody();
     }
 
     public void setChange(String change) {
         setProperty("change", new Function(change));
     }
 
-    public Function getSelect() {
-        return (Function)getProperty("select");
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
     }
 
     public void setSelect(String select) {
         setProperty("select", new Function(select));
     }
 
-    public Function getDataBinding() {
-        return (Function)getProperty("dataBinding");
+    public String getDataBinding() {
+        return ((Function)getProperty("dataBinding")).getBody();
     }
 
     public void setDataBinding(String dataBinding) {
         setProperty("dataBinding", new Function(dataBinding));
     }
 
-    public Function getDataBound() {
-        return (Function)getProperty("dataBound");
+    public String getDataBound() {
+        return ((Function)getProperty("dataBound")).getBody();
     }
 
     public void setDataBound(String dataBound) {

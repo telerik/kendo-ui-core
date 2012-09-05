@@ -50,48 +50,48 @@ public class ListViewTag extends WidgetTag {
         setProperty("editTemplate", editTemplate);
     }
 
-    public Function getChange() {
-        return (Function)getProperty("change");
+    public String getChange() {
+        return ((Function)getProperty("change")).getBody();
     }
 
     public void setChange(String change) {
         setProperty("change", new Function(change));
     }
 
-    public Function getDataBinding() {
-        return (Function)getProperty("dataBinding");
+    public String getDataBinding() {
+        return ((Function)getProperty("dataBinding")).getBody();
     }
 
     public void setDataBinding(String dataBinding) {
         setProperty("dataBinding", new Function(dataBinding));
     }
 
-    public Function getDataBound() {
-        return (Function)getProperty("dataBound");
+    public String getDataBound() {
+        return ((Function)getProperty("dataBound")).getBody();
     }
 
     public void setDataBound(String dataBound) {
         setProperty("dataBound", new Function(dataBound));
     }
 
-    public Function getEdit() {
-        return (Function)getProperty("edit");
+    public String getEdit() {
+        return ((Function)getProperty("edit")).getBody();
     }
 
     public void setEdit(String edit) {
         setProperty("edit", new Function(edit));
     }
 
-    public Function getRemove() {
-        return (Function)getProperty("remove");
+    public String getRemove() {
+        return ((Function)getProperty("remove")).getBody();
     }
 
     public void setRemove(String remove) {
         setProperty("remove", new Function(remove));
     }
 
-    public Function getSave() {
-        return (Function)getProperty("save");
+    public String getSave() {
+        return ((Function)getProperty("save")).getBody();
     }
 
     public void setSave(String save) {

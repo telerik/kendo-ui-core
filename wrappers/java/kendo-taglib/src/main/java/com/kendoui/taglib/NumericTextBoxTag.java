@@ -66,16 +66,16 @@ public class NumericTextBoxTag extends WidgetTag {
         setProperty("downArrowText", downArrowText);
     }
 
-    public Function getChange() {
-        return (Function)getProperty("change");
+    public String getChange() {
+        return ((Function)getProperty("change")).getBody();
     }
 
     public void setChange(String change) {
         setProperty("change", new Function(change));
     }
 
-    public Function getSpin() {
-        return (Function)getProperty("spin");
+    public String getSpin() {
+        return ((Function)getProperty("spin")).getBody();
     }
 
     public void setSpin(String spin) {

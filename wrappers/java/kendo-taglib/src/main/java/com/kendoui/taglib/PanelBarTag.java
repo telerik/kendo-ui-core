@@ -45,48 +45,48 @@ public class PanelBarTag extends WidgetTag implements PanelBarItemTagContainer {
         setProperty("expandMode", expandMode);
     }
 
-    public Function getExpand() {
-        return (Function)getProperty("expand");
+    public String getExpand() {
+        return ((Function)getProperty("expand")).getBody();
     }
 
     public void setExpand(String expand) {
         setProperty("expand", new Function(expand));
     }
 
-    public Function getCollapse() {
-        return (Function)getProperty("collapse");
+    public String getCollapse() {
+        return ((Function)getProperty("collapse")).getBody();
     }
 
     public void setCollapse(String collapse) {
         setProperty("collapse", new Function(collapse));
     }
 
-    public Function getSelect() {
-        return (Function)getProperty("select");
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
     }
 
     public void setSelect(String select) {
         setProperty("select", new Function(select));
     }
 
-    public Function getActivate() {
-        return (Function)getProperty("activate");
+    public String getActivate() {
+        return ((Function)getProperty("activate")).getBody();
     }
 
     public void setActivate(String activate) {
         setProperty("activate", new Function(activate));
     }
 
-    public Function getError() {
-        return (Function)getProperty("error");
+    public String getError() {
+        return ((Function)getProperty("error")).getBody();
     }
 
     public void setError(String error) {
         setProperty("error", new Function(error));
     }
 
-    public Function getContentLoad() {
-        return (Function)getProperty("contentLoad");
+    public String getContentLoad() {
+        return ((Function)getProperty("contentLoad")).getBody();
     }
 
     public void setContentLoad(String contentLoad) {

@@ -58,16 +58,16 @@ public class CalendarTag extends WidgetTag {
         setProperty("depth", depth);
     }
 
-    public Function getChange() {
-        return (Function)getProperty("change");
+    public String getChange() {
+        return ((Function)getProperty("change")).getBody();
     }
 
     public void setChange(String change) {
         setProperty("change", new Function(change));
     }
 
-    public Function getNavigate() {
-        return (Function)getProperty("navigate");
+    public String getNavigate() {
+        return ((Function)getProperty("navigate")).getBody();
     }
 
     public void setNavigate(String navigate) {

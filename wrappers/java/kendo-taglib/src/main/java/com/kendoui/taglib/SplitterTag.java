@@ -18,40 +18,40 @@ public class SplitterTag extends WidgetTag {
         setProperty("orientation", orientation);
     }
 
-    public Function getExpand() {
-        return (Function)getProperty("expand");
+    public String getExpand() {
+        return ((Function)getProperty("expand")).getBody();
     }
 
     public void setExpand(String expand) {
         setProperty("expand", new Function(expand));
     }
 
-    public Function getCollapse() {
-        return (Function)getProperty("collapse");
+    public String getCollapse() {
+        return ((Function)getProperty("collapse")).getBody();
     }
 
     public void setCollapse(String collapse) {
         setProperty("collapse", new Function(collapse));
     }
 
-    public Function getContentLoad() {
-        return (Function)getProperty("contentLoad");
+    public String getContentLoad() {
+        return ((Function)getProperty("contentLoad")).getBody();
     }
 
     public void setContentLoad(String contentLoad) {
         setProperty("contentLoad", new Function(contentLoad));
     }
 
-    public Function getResize() {
-        return (Function)getProperty("resize");
+    public String getResize() {
+        return ((Function)getProperty("resize")).getBody();
     }
 
     public void setResize(String resize) {
         setProperty("resize", new Function(resize));
     }
 
-    public Function getLayoutChange() {
-        return (Function)getProperty("layoutChange");
+    public String getLayoutChange() {
+        return ((Function)getProperty("layoutChange")).getBody();
     }
 
     public void setLayoutChange(String layoutChange) {

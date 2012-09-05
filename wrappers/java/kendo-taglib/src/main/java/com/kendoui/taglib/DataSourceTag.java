@@ -4,6 +4,8 @@ import javax.servlet.jsp.JspException;
 
 import com.kendoui.taglib.datasource.TransportTag;
 
+import com.kendoui.taglib.json.Function;
+
 @SuppressWarnings("serial")
 public class DataSourceTag extends BaseTag {
 
@@ -86,40 +88,40 @@ public class DataSourceTag extends BaseTag {
         setProperty("sendAllFields", sendAllFields);
     }
 
-    public Function getChange() {
-        return (Function)getProperty("change");
+    public String getChange() {
+        return ((Function)getProperty("change")).getBody();
     }
 
     public void setChange(String change) {
         setProperty("change", new Function(change));
     }
 
-    public Function getError() {
-        return (Function)getProperty("error");
+    public String getError() {
+        return ((Function)getProperty("error")).getBody();
     }
 
     public void setError(String error) {
         setProperty("error", new Function(error));
     }
 
-    public Function getSync() {
-        return (Function)getProperty("sync");
+    public String getSync() {
+        return ((Function)getProperty("sync")).getBody();
     }
 
     public void setSync(String sync) {
         setProperty("sync", new Function(sync));
     }
 
-    public Function getRequestStart() {
-        return (Function)getProperty("requestStart");
+    public String getRequestStart() {
+        return ((Function)getProperty("requestStart")).getBody();
     }
 
     public void setRequestStart(String requestStart) {
         setProperty("requestStart", new Function(requestStart));
     }
 
-    public Function getRequestEnd() {
-        return (Function)getProperty("requestEnd");
+    public String getRequestEnd() {
+        return ((Function)getProperty("requestEnd")).getBody();
     }
 
     public void setRequestEnd(String requestEnd) {

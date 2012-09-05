@@ -66,16 +66,16 @@ public class RangeSliderTag extends WidgetTag {
         setProperty("tickPlacement", tickPlacement);
     }
 
-    public Function getChange() {
-        return (Function)getProperty("change");
+    public String getChange() {
+        return ((Function)getProperty("change")).getBody();
     }
 
     public void setChange(String change) {
         setProperty("change", new Function(change));
     }
 
-    public Function getSlide() {
-        return (Function)getProperty("slide");
+    public String getSlide() {
+        return ((Function)getProperty("slide")).getBody();
     }
 
     public void setSlide(String slide) {

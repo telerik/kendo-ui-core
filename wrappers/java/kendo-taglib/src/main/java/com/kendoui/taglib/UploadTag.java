@@ -34,64 +34,64 @@ public class UploadTag extends WidgetTag {
         setProperty("showFileList", showFileList);
     }
 
-    public Function getSelect() {
-        return (Function)getProperty("select");
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
     }
 
     public void setSelect(String select) {
         setProperty("select", new Function(select));
     }
 
-    public Function getUpload() {
-        return (Function)getProperty("upload");
+    public String getUpload() {
+        return ((Function)getProperty("upload")).getBody();
     }
 
     public void setUpload(String upload) {
         setProperty("upload", new Function(upload));
     }
 
-    public Function getSuccess() {
-        return (Function)getProperty("success");
+    public String getSuccess() {
+        return ((Function)getProperty("success")).getBody();
     }
 
     public void setSuccess(String success) {
         setProperty("success", new Function(success));
     }
 
-    public Function getError() {
-        return (Function)getProperty("error");
+    public String getError() {
+        return ((Function)getProperty("error")).getBody();
     }
 
     public void setError(String error) {
         setProperty("error", new Function(error));
     }
 
-    public Function getComplete() {
-        return (Function)getProperty("complete");
+    public String getComplete() {
+        return ((Function)getProperty("complete")).getBody();
     }
 
     public void setComplete(String complete) {
         setProperty("complete", new Function(complete));
     }
 
-    public Function getCancel() {
-        return (Function)getProperty("cancel");
+    public String getCancel() {
+        return ((Function)getProperty("cancel")).getBody();
     }
 
     public void setCancel(String cancel) {
         setProperty("cancel", new Function(cancel));
     }
 
-    public Function getProgress() {
-        return (Function)getProperty("progress");
+    public String getProgress() {
+        return ((Function)getProperty("progress")).getBody();
     }
 
     public void setProgress(String progress) {
         setProperty("progress", new Function(progress));
     }
 
-    public Function getRemove() {
-        return (Function)getProperty("remove");
+    public String getRemove() {
+        return ((Function)getProperty("remove")).getBody();
     }
 
     public void setRemove(String remove) {

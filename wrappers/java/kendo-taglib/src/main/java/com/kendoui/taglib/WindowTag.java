@@ -91,72 +91,72 @@ public class WindowTag extends WidgetTag {
         setProperty("maxHeight", maxHeight);
     }
 
-    public Function getOpen() {
-        return (Function)getProperty("open");
+    public String getOpen() {
+        return ((Function)getProperty("open")).getBody();
     }
 
     public void setOpen(String open) {
         setProperty("open", new Function(open));
     }
 
-    public Function getActivate() {
-        return (Function)getProperty("activate");
+    public String getActivate() {
+        return ((Function)getProperty("activate")).getBody();
     }
 
     public void setActivate(String activate) {
         setProperty("activate", new Function(activate));
     }
 
-    public Function getDeactivate() {
-        return (Function)getProperty("deactivate");
+    public String getDeactivate() {
+        return ((Function)getProperty("deactivate")).getBody();
     }
 
     public void setDeactivate(String deactivate) {
         setProperty("deactivate", new Function(deactivate));
     }
 
-    public Function getClose() {
-        return (Function)getProperty("close");
+    public String getClose() {
+        return ((Function)getProperty("close")).getBody();
     }
 
     public void setClose(String close) {
         setProperty("close", new Function(close));
     }
 
-    public Function getRefresh() {
-        return (Function)getProperty("refresh");
+    public String getRefresh() {
+        return ((Function)getProperty("refresh")).getBody();
     }
 
     public void setRefresh(String refresh) {
         setProperty("refresh", new Function(refresh));
     }
 
-    public Function getResize() {
-        return (Function)getProperty("resize");
+    public String getResize() {
+        return ((Function)getProperty("resize")).getBody();
     }
 
     public void setResize(String resize) {
         setProperty("resize", new Function(resize));
     }
 
-    public Function getDragstart() {
-        return (Function)getProperty("dragstart");
+    public String getDragstart() {
+        return ((Function)getProperty("dragstart")).getBody();
     }
 
     public void setDragstart(String dragstart) {
         setProperty("dragstart", new Function(dragstart));
     }
 
-    public Function getDragend() {
-        return (Function)getProperty("dragend");
+    public String getDragend() {
+        return ((Function)getProperty("dragend")).getBody();
     }
 
     public void setDragend(String dragend) {
         setProperty("dragend", new Function(dragend));
     }
 
-    public Function getError() {
-        return (Function)getProperty("error");
+    public String getError() {
+        return ((Function)getProperty("error")).getBody();
     }
 
     public void setError(String error) {
