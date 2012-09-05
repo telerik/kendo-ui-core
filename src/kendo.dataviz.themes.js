@@ -35,7 +35,7 @@
                 line: {
                     width: 4
                 },
-                candleStick: {
+                candlestick: {
                     line: {
                         width: 2
                     },

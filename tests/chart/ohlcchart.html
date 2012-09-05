@@ -21,21 +21,21 @@
                 Box2D = dataviz.Box2D,
                 categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
-                candlestickChart,
+                ohlcChart,
                 root,
                 view,
                 TOLERANCE = 1;
 
-            function setupCandlestickChart(plotArea, options) {
+            function setupOHLCChart(plotArea, options) {
                 view = new ViewStub();
 
-                candlestickChart = new dataviz.CandlestickChart(plotArea, options);
+                ohlcChart = new dataviz.OHLCChart(plotArea, options);
 
                 root = new dataviz.RootElement();
-                root.append(candlestickChart);
+                root.append(ohlcChart);
 
-                candlestickChart.reflow();
-                candlestickChart.getViewElements(view);
+                ohlcChart.reflow();
+                ohlcChart.getViewElements(view);
             }
 
             function stubPlotArea(getCategorySlot, getValueSlot, options) {
@@ -68,7 +68,7 @@
             }
 
             (function() {
-                var series = { data: [[3,4,1,2]], type: "candlestick" },
+                var series = { data: [[3,4,1,2]], type: "ohlc" },
                     VALUE_AXIS_MAX = 4,
                     CATEGORY_AXIS_Y = 2;
 
@@ -92,67 +92,58 @@
                 );
 
                 // ------------------------------------------------------------
-                module("Candlestick Chart", {
+                module("OHLC Chart", {
                     setup: function() {
-                        setupCandlestickChart(plotArea, { series: [ series ] });
+                        setupOHLCChart(plotArea, { series: [ series ] });
                     }
                 });
 
-                test("creates points for candlestickChart data points", function() {
-                    equal(candlestickChart.points.length, series.data.length);
+                test("creates points for ohlcChart data points", function() {
+                    equal(ohlcChart.points.length, series.data.length);
                 });
 
                 test("reports minimum series value for default axis", function() {
-                    same(candlestickChart.valueAxisRanges[undefined].min, series.data[0][2]);
+                    same(ohlcChart.valueAxisRanges[undefined].min, series.data[0][2]);
                 });
 
                 test("reports maximum series value for default axis", function() {
-                    same(candlestickChart.valueAxisRanges[undefined].max, series.data[0][1]);
+                    same(ohlcChart.valueAxisRanges[undefined].max, series.data[0][1]);
                 });
 
                 test("reports number of categories", function() {
-                    setupCandlestickChart(plotArea, { series: [ series ]});
-                    equal(categoriesCount(candlestickChart.options.series), series.data.length);
+                    setupOHLCChart(plotArea, { series: [ series ]});
+                    equal(categoriesCount(ohlcChart.options.series), series.data.length);
                 });
 
                 test("sets point owner", function() {
-                    ok(candlestickChart.points[0].owner === candlestickChart);
+                    ok(ohlcChart.points[0].owner === ohlcChart);
                 });
 
                 test("sets point series", function() {
-                    ok(candlestickChart.points[0].series === series);
+                    ok(ohlcChart.points[0].series === series);
                 });
 
                 test("sets point series index", function() {
-                    ok(candlestickChart.points[0].seriesIx === 0);
+                    ok(ohlcChart.points[0].seriesIx === 0);
                 });
 
                 test("sets point category", function() {
-                    equal(candlestickChart.points[0].category, "A");
+                    equal(ohlcChart.points[0].category, "A");
                 });
 
                 test("sets point dataItem", function() {
-                    equal(typeof candlestickChart.points[0].dataItem, "object");
+                    equal(typeof ohlcChart.points[0].dataItem, "object");
                 });
 
                 // ------------------------------------------------------------
-                module("Candlestick Chart / Rendering", {
+                module("OHLC Chart / Rendering", {
                     setup: function() {
-                        setupCandlestickChart(plotArea, {
+                        setupOHLCChart(plotArea, {
                             series: [ $.extend({
-                                line: {
-                                    width: 4,
-                                    color: "lineColor",
-                                    opacity: 0.5,
-                                    dashType: "dot"
-                                },
-                                color: "rectColor",
-                                border: {
-                                    color: "borderColor",
-                                    width: 2,
-                                    opacity: 0.2,
-                                    dashType: "dot"
-                                }
+                                width: 4,
+                                color: "lineColor",
+                                opacity: 0.5,
+                                dashType: "dot"
                             },
                             series)]
                         });
@@ -175,31 +166,8 @@
                     equals(view.log.path[0].style.dashType, "dot");
                 });
 
-                test("sets rect border", function() {
-                    equals(view.log.rect[1].style.strokeWidth, 2);
-                    equals(view.log.rect[1].style.stroke, "borderColor");
-                    equals(view.log.rect[1].style.strokeOpacity, 0.2);
-                    equals(view.log.rect[1].style.dashType, "dot");
-                });
-
-                test("sets rect color(open > close)", function() {
-                    equals(view.log.rect[1].style.fill, "rectColor");
-                });
-
-                test("sets rect base body color(open < close)", function() {
-                    setupCandlestickChart(plotArea, {
-                        series: [{
-                            type: "candlestick",
-                            data: [[2,4,1,3]],
-                            baseBodyColor: "baseBodyColor"
-                        }]
-                    });
-
-                    equals(view.log.rect[1].style.fill, "baseBodyColor");
-                });
-
                 test("overlay rect has same model id as its segment", function() {
-                    equals(view.log.rect[0].style.data.modelId, candlestickChart.points[0].options.modelId);
+                    equals(view.log.rect[0].style.data.modelId, ohlcChart.points[0].options.modelId);
                 });
 
                 test("renders chart group", function() {
@@ -213,9 +181,9 @@
             })();
 
             (function() {
-                var candlestickChart,
+                var ohlcChart,
                     MARGIN = PADDING = BORDER = 5,
-                    candlestick;
+                    candleStick;
 
                 var plotArea = stubPlotArea(
                     function(categoryIndex) {
@@ -229,72 +197,47 @@
                     }
                 );
 
-                function createCandlestickChart(options) {
-                    candlestickChart = new dataviz.CandlestickChart(plotArea, {
+                function createOHLCChart(options) {
+                    ohlcChart = new dataviz.OHLCChart(plotArea, {
                         series: [$.extend({
                             data: [[3,4,2,1]],
-                            border: {
-                                opacity: 0.5,
-                                dashType: "dot",
-                            },
-                            line: {
-                                dashType: "dot",
-                                color: "red",
-                                opacity: 0.7,
-                                width: 0.2
-                            },
-                            color: "#f00",
-                            opacity: 0.2,
-                            type: "candlestick"
+                            dashType: "dashType",
+                            color: "lineColor",
+                            opacity: 0.7,
+                            width: 0.2,
+                            type: "ohlc"
                         }, options)]
                     });
-                    candlestick = candlestickChart.points[0];
+                    candleStick = ohlcChart.points[0];
                 }
 
                 // ------------------------------------------------------------
-                module("Candlestick Chart / Configuration", {
+                module("OHLC Chart / Configuration", {
                     setup: function() {
-                        createCandlestickChart();
+                        createOHLCChart();
                     }
                 });
 
                 test("applies series color to point border", function() {
-                    equal(candlestick.options.color, "#f00");
+                    equal(candleStick.options.color, "lineColor");
                 });
 
                 test("applies opacity to point", function() {
-                    equal(candlestick.options.opacity, 0.2);
-                });
-
-                test("applies border color to point", function() {
-                    createCandlestickChart({ border: { color: "point-border" } });
-                    equal(candlestick.options.border.color, "point-border");
+                    equal(candleStick.options.opacity, 0.7);
                 });
 
                 test("applies dashType", function() {
-                    equal(candlestick.options.border.dashType, "dot");
-                });
-
-                test("applies line dashType", function() {
-                    equal(candlestick.options.line.dashType, "dot");
-                });
-
-                test("applies line color", function() {
-                    equal(candlestick.options.line.color, "red");
+                    equal(candleStick.options.dashType, "dashType");
                 });
 
                 test("applies line width", function() {
-                    equal(candlestick.options.line.width, 0.2);
-                });
-
-                test("applies line opacity", function() {
-                    equal(candlestick.options.line.opacity, 0.7);
+                    equal(candleStick.options.width, 0.2);
                 });
 
             })();
 
             (function() {
-                var Candlestick = dataviz.Candlestick,
+                var OHLCPoint = dataviz.OHLCPoint,
                     point,
                     box,
                     label,
@@ -311,7 +254,7 @@
                     SERIES_NAME = "series";
 
                 function createPoint(options) {
-                    point = new Candlestick(VALUE,
+                    point = new OHLCPoint(VALUE,
                         $.extend(true, {
                             labels: { font: SANS12 }
                         }, options)
@@ -342,7 +285,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Candlestick", {
+                module("OHLC Chart", {
                     setup: function() {
                         createPoint();
                     }

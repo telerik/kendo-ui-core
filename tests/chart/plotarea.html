@@ -1044,7 +1044,7 @@
 
                 test("Series data using aggregate", function() {
                     createPlotArea([{
-                        type: "candleStick",
+                        type: "candlestick",
                         aggregate: {
                             "open": "max",
                             "high": "max",
@@ -1064,7 +1064,7 @@
 
                 test("Series data with predefined function", function() {
                     createPlotArea([{
-                        type: "candleStick",
+                        type: "candlestick",
                         aggregate: {
                             "open": "min",
                             "high": "min",
@@ -1085,7 +1085,7 @@
                 test("Series data with user function", 1, function() {
                     var data = [[1,4,0,2], [2,5,1,3], [3,6,2,4]];
                     createPlotArea([{
-                        type: "candleStick",
+                        type: "candlestick",
                         aggregate: {
                             "open": function(values, series) {
                                 same(data, series.data);

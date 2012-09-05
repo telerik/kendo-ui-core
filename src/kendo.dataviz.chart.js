@@ -57,7 +57,7 @@
         BLACK = "#000",
         BOTTOM = "bottom",
         BUBBLE = "bubble",
-        CANDLE_STICK = "candleStick",
+        CANDLESTICK = "candlestick",
         CATEGORY = "category",
         CENTER = "center",
         CHANGE = "change",
@@ -133,7 +133,7 @@
         YEARS = "years",
         ZERO = "zero";
 
-    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLE_STICK, OHLC],
+    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC],
         XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE];
 
     var DateLabelFormats = {
@@ -3062,7 +3062,7 @@
         }
     });
 
-    var CandleStick = ChartElement.extend({
+    var Candlestick = ChartElement.extend({
         init: function(value, options) {
             var point = this;
 
@@ -3185,9 +3185,9 @@
             return point.owner.formatPointValue(point, format);
         }
     });
-    deepExtend(CandleStick.fn, PointEventsMixin);
+    deepExtend(Candlestick.fn, PointEventsMixin);
 
-    var CandleStickChart = LineChart.extend({
+    var CandlestickChart = LineChart.extend({
         options: {},
 
         reflowCategories: function(categorySlots) {
@@ -3244,7 +3244,7 @@
         },
 
         createPoint: function(value, series) {
-            return new CandleStick(value, series);
+            return new Candlestick(value, series);
         },
 
         updateRange: function(value, categoryIx, series) {
@@ -3266,7 +3266,7 @@
         }
     });
 
-    var OHLCPoint = CandleStick.extend({
+    var OHLCPoint = Candlestick.extend({
         reflow: function(box) {
             var point = this,
                 options = point.options,
@@ -3307,9 +3307,9 @@
                     id: options.id,
                     strokeOpacity: options.opacity,
                     zIndex: -1,
-                    strokeWidth: options.line.width,
-                    stroke: options.line.color || options.color,
-                    dashType: options.line.dashType
+                    strokeWidth: options.width,
+                    stroke: options.color,
+                    dashType: options.dashType
                 };
 
             elements.push(point.createOverlayRect(view, options));
@@ -3325,7 +3325,7 @@
         }
     });
 
-    var OHLCChart = CandleStickChart.extend({
+    var OHLCChart = CandlestickChart.extend({
         createPoint: function(value, series) {
             return new OHLCPoint(value, series);
         }
@@ -4927,8 +4927,8 @@
                     plotArea.filterSeriesByType(paneSeries, [LINE, VERTICAL_LINE])
                 );
 
-                plotArea.createCandleStickChart(
-                    plotArea.filterSeriesByType(paneSeries, [CANDLE_STICK])
+                plotArea.createCandlestickChart(
+                    plotArea.filterSeriesByType(paneSeries, [CANDLESTICK])
                 );
 
                 plotArea.createOHLCChart(
@@ -5119,14 +5119,14 @@
             plotArea.appendChart(chart);
         },
 
-        createCandleStickChart: function(series) {
+        createCandlestickChart: function(series) {
             if (series.length === 0) {
                 return;
             }
 
             var plotArea = this,
                 firstSeries = series[0],
-                chart = new CandleStickChart(plotArea, {
+                chart = new CandlestickChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
                     series: series
@@ -5965,7 +5965,7 @@
         delete seriesDefaults.scatter;
         delete seriesDefaults.scatterLine;
         delete seriesDefaults.bubble;
-        delete seriesDefaults.candleStick;
+        delete seriesDefaults.candlestick;
         delete seriesDefaults.ohlc;
     }
 
@@ -6177,7 +6177,7 @@
     function valueFieldsByChartType(type) {
         var result = ["value"];
 
-        if (inArray(type, [CANDLE_STICK, OHLC])){
+        if (inArray(type, [CANDLESTICK, OHLC])){
             result = ["open", "high", "low", "close"];
         } else if (inArray(type, XY_CHARTS)) {
             result = [X, Y];
@@ -6343,8 +6343,8 @@
         BarLabel: BarLabel,
         BubbleAnimationDecorator: BubbleAnimationDecorator,
         BubbleChart: BubbleChart,
-        CandleStickChart: CandleStickChart,
-        CandleStick: CandleStick,
+        CandlestickChart: CandlestickChart,
+        Candlestick: Candlestick,
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,
@@ -6368,6 +6368,8 @@
         ShapeElement: ShapeElement,
         StackLayout: StackLayout,
         Tooltip: Tooltip,
+        OHLCChart: OHLCChart,
+        OHLCPoint: OHLCPoint,
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,

@@ -93,7 +93,11 @@ tests.push(
     },
     {
         page: "chart/candlestickchart.html",
-        title: "chart candleStick"
+        title: "chart candlestick"
+    },
+    {
+        page: "chart/ohlcchart.html",
+        title: "chart ohlc"
     },
     {
         page: "chart/mvvm.html",
