@@ -521,6 +521,17 @@
                     );
                 });
 
+                test("Axis crossing values can be parsed from axisCrossingValues", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"), {
+                            axisCrossingValues: ["2012/02/28", "2012/02/29"]
+                    });
+
+                    same(dateAxis.options.axisCrossingValue,
+                        [new Date("2012/02/28"), new Date("2012/02/29")]
+                    );
+                });
+
                 test("Major ticks count is correct", function() {
                     createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
                     equals(dateAxis.getMajorTickPositions().length, 7);

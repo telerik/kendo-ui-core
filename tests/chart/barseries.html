@@ -318,6 +318,14 @@
                     equals(series.points[0].options.aboveAxis, true);
                 });
 
+                test("axisCrossingValues alias is accepted with precedence", function() {
+                    chart.options.valueAxis.axisCrossingValues = [10, 10]
+                    chart.refresh();
+                    series = chart._model._plotArea.charts[0];
+
+                    equals(series.points[0].options.aboveAxis, false);
+                });
+
                 // ------------------------------------------------------------
                 module("Bar Chart / Mismatched series", {
                     setup: function() {

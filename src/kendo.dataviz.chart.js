@@ -1193,7 +1193,9 @@
             deepExtend(options, {
                 min: toDate(options.min),
                 max: toDate(options.max),
-                axisCrossingValue: toDate(options.axisCrossingValue)
+                axisCrossingValue: toDate(
+                    options.axisCrossingValues || options.axisCrossingValue
+                )
             });
 
             options = axis.applyDefaults(toDate(seriesMin), toDate(seriesMax), options);
@@ -1780,7 +1782,10 @@
 
         categoryAxisCrossingValue: function(valueAxis) {
             var categoryAxis = this.categoryAxis,
-                crossingValues = [].concat(valueAxis.options.axisCrossingValue);
+                options = valueAxis.options,
+                crossingValues = [].concat(
+                    options.axisCrossingValues || options.axisCrossingValue
+                );
 
             return crossingValues[categoryAxis.axisIndex || 0] || 0;
         },
@@ -4349,7 +4354,9 @@
 
         axisCrossingValues: function(axis, crossingAxes) {
             var options = axis.options,
-                crossingValues = [].concat(options.axisCrossingValue),
+                crossingValues = [].concat(
+                    options.axisCrossingValues || options.axisCrossingValue
+                ),
                 valuesToAdd = crossingAxes.length - crossingValues.length,
                 defaultValue = crossingValues[0] || 0,
                 i;
