@@ -52,10 +52,10 @@
                     .on(MOUSEDOWN, preventDefault);
 
         if (id) {
-            that._listboxID = id + "_timepicker_timeview";
+            that._timeViewID = id + "_timeview";
             that._optionID = id + "_option_selected";
 
-            that.ul.attr(ID, that._listboxID);
+            that.ul.attr(ID, that._timeViewID);
         }
 
         that._popup();
@@ -425,7 +425,7 @@
 
     var TimePicker = Widget.extend({
         init: function(element, options) {
-            var that = this, timeView;
+            var that = this, timeView, ul;
 
             Widget.fn.init.call(that, element, options);
 
@@ -452,7 +452,7 @@
                         e.preventDefault();
                     } else {
                         element.attr(ARIA_EXPANDED, true);
-                        timeView.ul.attr(ARIA_HIDDEN, false);
+                        ul.attr(ARIA_HIDDEN, false);
                     }
                 },
                 close: function(e) {
@@ -460,10 +460,11 @@
                         e.preventDefault();
                     } else {
                         element.attr(ARIA_EXPANDED, false);
-                        timeView.ul.attr(ARIA_HIDDEN, true);
+                        ul.attr(ARIA_HIDDEN, true);
                     }
                 }
             }));
+            ul = timeView.ul;
 
             that._icon();
             that._reset();
@@ -479,7 +480,7 @@
                     "role": "textbox",
                     "aria-haspopup": true,
                     "aria-expanded": false,
-                    "aria-owns": timeView._listboxID
+                    "aria-owns": timeView._timeViewID
                 });
 
             that.enable(!element.is('[disabled]'));
@@ -639,7 +640,7 @@
 
             that._arrow = arrow.attr({
                 "role": "button",
-                "aria-controls": that.timeView._listboxID
+                "aria-controls": that.timeView._timeViewID
             });
         },
 
