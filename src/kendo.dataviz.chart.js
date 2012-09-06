@@ -4114,6 +4114,8 @@
             var chart = this,
                 segment;
 
+            chart.createLegendItem(fields);
+
             segment = new DonutSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
             extend(segment, fields);
