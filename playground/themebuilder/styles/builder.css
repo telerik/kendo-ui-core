@@ -131,8 +131,43 @@ body
     height: 360px;
     position: relative;
     display: inline-block;
-    margin-right: 10px;
+    overflow: visible;
     font-size: 80%;
+    margin: 100px 70px 0 0;
+}
+
+.device:before
+{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    padding: 105px 25px 98px 22px;
+    margin: -105px 0 0 -25px;
+    background: url('../images/iphone.png');
+}
+
+.km-android:before
+{
+    padding: 88px 29px 89px 23px;
+    margin: -88px 0 0 -29px;
+    background: url('../images/android.png');
+}
+
+.km-blackberry:before
+{
+    padding: 83px 32px 100px 31px;
+    margin: -83px 0 0 -32px;
+    background: url('../images/blackberry.png');
+}
+
+.km-meego:before
+{
+    padding: 77px 25px 77px 23px;
+    margin: -77px 0 0 -24px;
+    background: url('../images/meego.png');
 }
 
 .hiddenOS
@@ -501,7 +536,8 @@ body > label
 .box
 {
     position: relative;
-    padding: 40px;
+    z-index: 0;
+    padding: 30px 40px 40px 45px;
     min-width: 940px;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#e0e0e0), to(#fff));
     background: -moz-linear-gradient(top, #e0e0e0, #fff);
