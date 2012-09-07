@@ -7,6 +7,7 @@
         dragging = false,
         globalUndoBuffer = [],
         globalRedoBuffer = [],
+        click = kendo.support.touch ? "touchend" : "click",
         defaultCSS = { cursor: "default", background: "", color: "", "border-color": "" },
         propertyTargets = {
             color: [ "color", "background-color", "border-color" ],
@@ -941,7 +942,7 @@
                 }
             });
 
-            $(".device").on(kendo.support.mouseup, ".utility-active", function (e) {
+            $(".device").on(click, ".utility-active", function (e) {
                 var target = $(e.currentTarget),
                     width = target.outerWidth();
 
@@ -988,7 +989,7 @@
             pickers[type].popup.wrapper.addClass("k-static-shown");
             pickers[type].open(recent);
 
-            recent.on(kendo.support.mouseup, function (e) {
+            recent.on(click, function (e) {
                 var that = $(this), item;
 
                 if (e.button == 0) {
@@ -1021,7 +1022,7 @@
 
             drop = $('<div class="drop" style="background-' + (type != "color" ? "image" : "color") + ':' + value + '"/>')
                     .insertBefore(".recent-" + type + "s")
-                    .on(kendo.support.mouseup, function () {
+                    .on(click, function () {
                         addRecentItem(this, type);
                     });
 
@@ -1068,9 +1069,9 @@
         }
     });
 
-    $(".optionsSheet label, .optionsSheet input").on(kendo.support.mouseup, function (e) { e.stopImmediatePropagation(); });
+    $(".optionsSheet label, .optionsSheet input").on(click, function (e) { e.stopImmediatePropagation(); });
 
-    $(".optionsSheet").on(kendo.support.mouseup, function (e) {
+    $(".optionsSheet").on(click, function (e) {
         e.preventDefault();
 
         $(".optionsSheet .items")
@@ -1104,7 +1105,7 @@
         modal: true
     }).data("kendoWindow");
 
-    $("#resetStyles").on(kendo.support.mouseup, function () {
+    $("#resetStyles").on(click, function () {
         each(devices, function () {
             var that = this.toString();
 
@@ -1112,7 +1113,7 @@
         });
     });
 
-    $("#importStyles").on(kendo.support.mouseup, function () {
+    $("#importStyles").on(click, function () {
         if (sessionStorage && sessionStorage.length) {
             try {
                 $("#importWindow .k-textbox")[0].value = sessionStorage.getItem("import");
@@ -1122,7 +1123,7 @@
         importWindow.center().open();
     });
 
-    $("#exportStyles").on(kendo.support.mouseup, function () {
+    $("#exportStyles").on(click, function () {
         var output = "";
 
         each(devices, function () {
@@ -1137,7 +1138,7 @@
         exportWindow.center().open();
     });
 
-    $("#import").on(kendo.support.mouseup, function () {
+    $("#import").on(click, function () {
         var imports = $("#importWindow .k-textbox")[0].value.replace(/<\s*\/.*?>/gm, ""),
             stylesheet = $("<style scoped>" + imports + "</style>").appendTo(document.body),
             styles = {}, style;

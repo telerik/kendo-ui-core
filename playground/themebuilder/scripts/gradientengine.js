@@ -192,9 +192,11 @@
             clone.sort(function(a,b) {
                 return a.position - b.position; // Always return sorted stops or W3C gradients get confused.
             }).forEach(function(stop) {
-                parsed = parseInt(stop.position, 10);
+                if (stop.position >= 0) {
+                    parsed = parseInt(stop.position, 10);
 
-                output += stop.color.get() + (parsed != 0 && stop.position != "100" ? " " + stop.position + "%" : "") + ",";
+                    output += stop.color.get() + (parsed != 0 && stop.position != "100" ? " " + stop.position + "%" : "") + ",";
+                }
             });
 
             return output.substring(0, output.length - 1) + "),";
@@ -208,26 +210,32 @@
             output += "-webkit-gradient(linear," + (direction ? normalizedStart : gradient.start.normalized) + "," + (direction ? normalizedEnd : gradient.end.normalized) + ",";
 
             gradient.stops.forEach(function(stop) {
-                output += "color-stop(" + (trimZeroes(stop.position / 100) || "0") + ", " + stop.color.get() + "),";
+                if (stop.position >= 0) {
+                    output += "color-stop(" + (trimZeroes(stop.position / 100) || "0") + ", " + stop.color.get() + "),";
+                }
             });
 
             return output.substring(0, output.length - 1) + "),";
         },
 
         _getSVGGradient: function (gradient, id, units) {
-            var output = "", color, alpha,
+            var output = "", color, alpha, clone = $.extend([], gradient.stops),
                 startDirection = gradient.start.normalized.split(" "),
                 endDirection = gradient.end.normalized.split(" ");
 
             output += '<linearGradient id="' + (id ? id : "ID") + '" gradientUnits="' + (units ? units : "objectBoundingBox") + '" x1="' + startDirection[0] + '" y1="' +
                       startDirection[1] + '" x2="' + endDirection[0] + '" y2="' + endDirection[1] + '">';
 
-            gradient.stops.forEach(function(stop) {
-                color = $.extend(stop.color.value);
-                alpha = color.alpha;
-                color.alpha = 1;
+            clone.sort(function(a,b) {
+                return a.position - b.position; // Always return sorted stops or W3C gradients get confused.
+            }).forEach(function(stop) {
+                if (stop.position >= 0) {
+                    color = $.extend(stop.color.value);
+                    alpha = color.alpha;
+                    color.alpha = 1;
 
-                output += '<stop offset="' + (trimZeroes(stop.position / 100) || "0") + '" stop-color="' + stop.color.color2css(color) + '" stop-opacity="' + alpha + '" %2F>';
+                    output += '<stop offset="' + (trimZeroes(stop.position / 100) || "0") + '" stop-color="' + stop.color.color2css(color) + '" stop-opacity="' + alpha + '" %2F>';
+                }
             });
 
             return output.replace(/#/g, "%23") + "<%2FlinearGradient>";

@@ -1046,10 +1046,6 @@ body > label
     top: 0;
     width: 20px;
     height: 20px;
-/*
-    -webkit-transition: all 100ms ease-out;
-    -moz-transition: all 100ms ease-out;
-*/
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAoElEQVR4Xu3UsQnCUBCHccWA9lZp7F+RCRSnELKIW9i5RtQiA2QCdwkR0kjg/Ip/IYKo5xUWFr/qPT64K25kZqF+OPgPLnBEhwtOSO6gzLFGBUOLFDFyAZM6aodnBfuI4ATNN8HxQ3AHkwHlp8EcB+zvY96oypZQo5fBG332ULqiCsZFFXw3upIOmTMIRRVb4oqZOygbtIpto65Nhumrfzeu3uIjJz9T1AAAAABJRU5ErkJggg==") no-repeat 0 100%;
 }
 
@@ -1059,14 +1055,6 @@ body > label
     height: 45px;
     cursor: pointer;
 }
-
-/*
-.optionsSheet:hover .wrench
-{
-    top: 3px;
-    right: 3px;
-}
-*/
 
 .optionsSheet.k-state-opened .cover
 {
