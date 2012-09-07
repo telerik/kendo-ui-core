@@ -89,7 +89,7 @@
             });
         }
         else if (support.touch) {
-            changedTouches = originalEvent.changedTouches;
+            changedTouches = originalEvent ? originalEvent.changedTouches : [];
             for (length = changedTouches.length; idx < length; idx ++) {
                 touch = changedTouches[idx];
                 touches.push({
@@ -508,6 +508,7 @@
         }
     });
 
+    kendo.getTouches = getTouches;
     kendo.touchDelta = touchDelta;
     kendo.UserEvents = UserEvents;
  })(jQuery);
