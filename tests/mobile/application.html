@@ -3,6 +3,13 @@
     <head>
         <title>kendo.application tests</title>
         <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.all.less" type="text/css" />
+
+        <script type="text/javascript">
+            navigator.__defineGetter__('userAgent', function(){
+                return 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3'; // mock userAgent
+            });
+        </script>
+
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
@@ -211,6 +218,22 @@
             test("Appends root and phone/tablet classes on documentElement", function () {
                 ok($("#qunit-fixture").parent().hasClass("km-root"));
                 ok($("#qunit-fixture").parent().hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
+            });
+
+            test("Force platform layout", 1, function() {
+                setup('<div data-role="view" />', {
+                    platform: "android"
+                });
+
+                ok(application.element.hasClass("km-android"));
+            });
+
+            test("Forcing platform layout still reports correct device", 1, function() {
+                setup('<div data-role="view" />', {
+                    platform: "android"
+                });
+
+                ok(application.element.hasClass("km-on-ios"));
             });
 
             test("Raises meaningful error when the app can't find views", 1, function() {
