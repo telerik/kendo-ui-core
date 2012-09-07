@@ -7,7 +7,7 @@
 
         DEFAULT_OS = "ios",
         OS = support.mobileOS,
-        OS_NAME_TEMPLATE = kendo.template("#=data.name##if(data.version){# #=data.name##=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
+        OS_NAME_TEMPLATE = kendo.template("km-#=data.name##if(data.device){# km-on-#=data.device##}##if(data.version){# #=data.name##=data.version.major# km-#=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = "km-vertical",
         HORIZONTAL = "km-horizontal",
@@ -26,6 +26,7 @@
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
+        DEVICE = OS.name,
         HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.browser == "mobilesafari",
         BARCOMPENSATION = 60,
 
@@ -125,7 +126,7 @@
                 version = false;
             }
 
-            that.osCssClass = OS_NAME_TEMPLATE({ name: "km-" + that.os, version: version });
+            that.osCssClass = OS_NAME_TEMPLATE({ name: that.os, device: DEVICE, version: version });
         },
 
         _startHistory: function() {
@@ -159,11 +160,10 @@
 
         _setupElementClass: function() {
             var that = this,
-                osCssClass = that.options.platform ? "km-" + that.options.platform : that.osCssClass,
                 element = that.element;
 
             element.parent().addClass("km-root km-" + (OS.tablet ? "tablet" : "phone"));
-            element.addClass(osCssClass + " " + getOrientationClass());
+            element.addClass(that.osCssClass + " " + getOrientationClass());
 
             if (BERRYPHONEGAP) {
                 applyViewportHeight();
