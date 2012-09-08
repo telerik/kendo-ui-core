@@ -433,7 +433,7 @@
 
                 return output;
             },
-            mixBackground: function (css, element, replace) {
+            mixBackground: function (css, element, replace, forceUrl) {
                 var that = this, idx, imageHash, repeats, url, comma, grPosition, grRepeat,
                     color = element.css("background-color"),
                     backgrounds = [ element.css("background-image").split(backgroundSplitRegExp), css["background-image"].split(backgroundSplitRegExp) ],
@@ -446,10 +446,10 @@
 
                 backgrounds.forEach(function (val, idx) {
                     val.forEach(function (value) {
-                        if (value[0].toLowerCase() != "none") {
-                            if ((value[0].toLowerCase() == "u")) {
-                                backSplits[0].url = [ value ];
-                            } else {
+                        if ((value[0].toLowerCase() == "u") || forceUrl) {
+                            backSplits[0].url = [ value ];
+                        } else {
+                            if (value[0].toLowerCase() != "none") {
                                 backSplits[idx].gradient.push( value );
                             }
                         }
@@ -806,7 +806,7 @@
                 }
 
                 if (css["background-image"]) {
-                    kendo.deepExtend(css, engine.mixBackground(css, target, true));
+                    kendo.deepExtend(css, engine.mixBackground(css, target, true, $(element).attr("data-pattern") !== undefined));
                 }
 
                 target.css(css);
@@ -913,7 +913,7 @@
                         var currentTarget = value.element.find(targetSelector);
 
                         if (css["background-image"]) {
-                            kendo.deepExtend(css, value.mixBackground(css, currentTarget, true));
+                            kendo.deepExtend(css, value.mixBackground(css, currentTarget, true, draggedElement.attr("data-pattern") !== undefined));
                         }
 
                         value.update(currentTarget, css, ".km-" + value.options.platform + " " + targetSelector);
@@ -976,8 +976,9 @@
         if (existing[0]) {
             existing
                 .addClass("k-state-active")
+                .trigger(click)
                 .siblings(".k-state-active")
-                .removeClass("k-state-active");
+                .removeClass("k-state-active")
         } else {
             var recent = element.clone()
                 .prependTo(".recent-" + type + "s")
@@ -1026,7 +1027,7 @@
                         addRecentItem(this, type);
                     });
 
-            style = drop.css("background" + (type == "color" ? "-color" : ""));
+            style = JSON.stringify(kendo.getComputedStyles(drop[0], type == "color" ? [ "background-color" ] : [ "background-image", "background-repeat", "background-position" ]));
             drop.attr("data-" + type, (type == "color" ? value : engineTool.createHash(style)));
 
             i++;

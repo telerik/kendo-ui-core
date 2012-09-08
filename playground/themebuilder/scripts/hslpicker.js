@@ -146,7 +146,7 @@
                 if (color) {
                     target
                         .css("background-color", color)
-                        .attr("data-color", color);
+                        .attr("data-color", color == "rgba(0,0,0,0)" ? "none" : color);
 
                     that._updateValues(updateAttr);
 
