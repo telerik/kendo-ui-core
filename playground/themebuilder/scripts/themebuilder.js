@@ -446,10 +446,12 @@
 
                 backgrounds.forEach(function (val, idx) {
                     val.forEach(function (value) {
-                        if ((value[0].toLowerCase() == "u") || forceUrl) {
+                        if (value[0].toLowerCase() == "u" || (forceUrl && value.trim() == "none")) {
                             backSplits[0].url = [ value ];
                         } else {
-                            if (value[0].toLowerCase() != "none") {
+                            if (!forceUrl && value.trim() == "none") {
+                                backSplits[0].gradient = [ "none" ];
+                            } else {
                                 backSplits[idx].gradient.push( value );
                             }
                         }
