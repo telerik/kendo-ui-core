@@ -57,6 +57,10 @@
                     output[i] = directions[output[i]].value;
                 }
             } else {
+                if (inverted) {
+                    output[i] = 100 - parseFloat(output[i]) + "%";
+                }
+
                 output[i] = output[i].replace(/^0%/, "0");
             }
         }
@@ -79,7 +83,7 @@
         },
 
         get: function ( prefixes, index, direction ) {
-            var output = "", that = this,
+            var output = "", that = this, gradients = [],
                 target = !isNaN(index) ? [ that.value[index]] : that.value;
 
             if (prefixes == "svg") {
@@ -93,6 +97,8 @@
             }
 
             $.each (prefixes, function (idx, value) {
+                output = "";
+
                 target.forEach(function(gradient) {
                     if (gradient.stops.length == 2 && gradient.stops[0].color.get() == "rgba(0,0,0,0)" && gradient.stops[1].color.get() == "rgba(0,0,0,0)") {
                         output += "none,";
@@ -102,10 +108,11 @@
                         output += that._getStandardGradient(gradient, value, direction);
                     }
                 });
-                output = output.substring(0, output.length-1);
+
+                gradients.push(output.substring(0, output.length-1));
             });
 
-            return output;
+            return gradients[1] ? gradients : gradients[0];
         },
 
         parseGradient: function (cssValue) {
@@ -176,12 +183,14 @@
             var that = this,
                 direction = angles.directions[angle];
 
-            that.value[index].angle = angle;
+            if (that.value[index]) {
+                that.value[index].angle = angle;
 
-            that.value[index].start.original = direction;
-            that.value[index].start.normalized = normalizePosition(direction);
-            that.value[index].end.original = false;
-            that.value[index].end.normalized = normalizePosition(direction, true);
+                that.value[index].start.original = direction;
+                that.value[index].start.normalized = normalizePosition(direction);
+                that.value[index].end.original = false;
+                that.value[index].end.normalized = normalizePosition(direction, true);
+            }
 
             return that;
         },

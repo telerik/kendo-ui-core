@@ -2,13 +2,14 @@
 
     var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu, visibleOSes,
         deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
-        extend = $.extend,
+        extend = $.extend, importWindow, exportWindow,
         each = $.each,
         dragging = false,
         globalUndoBuffer = [],
         globalRedoBuffer = [],
         click = kendo.support.touch ? "touchend" : "click",
         defaultCSS = { cursor: "default", background: "", color: "", "border-color": "" },
+        browsers = [ "-webkit-", "-moz-" ],
         propertyTargets = {
             color: [ "color", "background-color", "border-color" ],
             gradient: [ "background-image" ],
@@ -439,6 +440,45 @@
 
                 return output;
             },
+            getFullCSS: function () {
+                var object = this.object, output = "", outputs, backgrounds, firstLetter;
+
+                for (var i in object) {
+                    output += i + " {\n";
+                    for (var j in object[i]) {
+                        if (j == "background-image") {
+                            backgrounds = object[i][j].split(backgroundSplitRegExp);
+                            outputs = [];
+                            browsers.forEach(function () {
+                                outputs.push([]);
+                            });
+
+                            backgrounds.forEach(function (value) {
+                                firstLetter = value[0].toLowerCase();
+
+                                if (firstLetter != "u" && firstLetter != "n") {
+                                    tools.gradient.set(value).get(browsers).forEach(function (val, idx) {
+                                        outputs[idx].push(val);
+                                    });
+                                } else {
+                                    browsers.forEach(function (val, idx) {
+                                        outputs[idx].push(value);
+                                    })
+                                }
+                            });
+
+                            browsers.forEach(function (val, idx) {
+                                output += "    " + j + ": " + outputs[idx].join(",") + ";\n";
+                            });
+                        } else {
+                            output += "    " + j + ": " + object[i][j] + ";\n";
+                        }
+                    }
+                    output += "}\n";
+                }
+
+                return output;
+            },
             mixBackground: function (css, element, replace, forceUrl) {
                 var that = this, idx, imageHash, repeats, url, comma, grPosition, grRepeat,
                     color = element.css("background-color"),
@@ -563,6 +603,9 @@
             });
         }
     }
+
+    window.URL = window.webkitURL || window.mozURL || window.URL;
+    window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
 
     extend(events, {
         gradient: extend({}, events.color, {
@@ -807,7 +850,7 @@
 
     window.initTargets = function() {
         setTimeout(function () {
-            var property = "", whitelisted = false,
+            var whitelisted = false,
                 draggedElement, css, widget = false,
                 color = "transparent";
 
@@ -839,7 +882,7 @@
                     .text(whitelisted);
             }
 
-            $(document.body).on("DOMMouseScroll mousewheel", "*", function (e) {
+            $(".device").on("DOMMouseScroll mousewheel", "*", function (e) {
                 if (!dragging) { return; }
 
                 if (widget) {
@@ -1115,7 +1158,7 @@
         $(this).toggleClass("k-state-opened");
     });
 
-    var importWindow = $("#importWindow").kendoWindow({
+    importWindow = $("#importWindow").kendoWindow({
         width: "400px",
         height: "400px",
         maxHeight: "400px",
@@ -1124,7 +1167,11 @@
         modal: true
     }).data("kendoWindow");
 
-    var exportWindow = $("#exportWindow").kendoWindow({
+    exportWindow = $("#exportWindow");
+
+    exportWindow.append('<br /><br /><a class="k-button" target="_blank" download="kendo.mobile.exported.css">Download file (Chrome only)</a>');
+
+    exportWindow = exportWindow.kendoWindow({
         width: "400px",
         height: "400px",
         maxHeight: "400px",
@@ -1152,16 +1199,27 @@
     });
 
     $("#exportStyles").on(click, function () {
-        var output = "";
+        var output = "",
+            textarea = exportWindow.element.find("textarea"),
+            anchor = exportWindow.element.find("a");
 
         each(devices, function () {
             var that = this.toString();
             if ($("#" + that + "box")[0].checked) {
-                output += $("#" + that + "Device").data("kendoStyleEngine").getCSS();
+                output += $("#" + that + "Device").data("kendoStyleEngine").getFullCSS();
             }
         });
 
-        exportWindow.element.find("textarea").text(output);
+        textarea.text(output);
+        if (window.BlobBuilder) {
+            var bb = new BlobBuilder();
+            bb.append(output);
+
+            anchor.attr("href", window.URL.createObjectURL(bb.getBlob("text/plain")));
+        } else {
+            anchor.remove();
+            textarea.css("height", "365px");
+        }
 
         exportWindow.center().open();
     });
@@ -1184,7 +1242,7 @@
                             style[this.selectorText][this.style[i]] = this.style[this.style[i]];
                         }
 
-                        styles[value] = kendo.deepExtend(styles[value], style);
+                        styles[value] = extend(styles[value], style);
                     }
                 }, this);
             });
@@ -1198,6 +1256,10 @@
             }
 
             engine.populate(styles[idx]);
+
+            for (i in styles[idx]) {
+                engine.store(i, styles[idx][i]);
+            }
         }
 
         stylesheet.remove();
