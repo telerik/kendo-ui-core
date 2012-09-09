@@ -1864,13 +1864,13 @@ function pad(number) {
             },
 
             kendoAddClass: function(classes, options){
-                return toggleClass(this, classes, options, true);
+                return kendo.toggleClass(this, classes, options, true);
             },
             kendoRemoveClass: function(classes, options){
-                return toggleClass(this, classes, options, false);
+                return kendo.toggleClass(this, classes, options, false);
             },
             kendoToggleClass: function(classes, options, toggle){
-                return toggleClass(this, classes, options, toggle);
+                return kendo.toggleClass(this, classes, options, toggle);
             }
         });
     }
