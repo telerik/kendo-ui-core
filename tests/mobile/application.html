@@ -5,6 +5,7 @@
         <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.all.less" type="text/css" />
 
         <script type="text/javascript">
+            var realUserAgent = navigator.userAgent;
             navigator.__defineGetter__('userAgent', function(){
                 return 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3'; // mock userAgent
             });
@@ -25,6 +26,11 @@
         <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
+        <script type="text/javascript">
+            navigator.__defineGetter__('userAgent', function(){
+                return realUserAgent;
+            });
+        </script>
         <script src="../jquery.mockjax.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
