@@ -15,6 +15,7 @@ namespace Kendo.Controllers
             new Dictionary<string, string>
             {
                 { "web", "Web" },
+                { "dataviz", "DataViz" },
                 { "mobile", "Mobile" }
             };
 
