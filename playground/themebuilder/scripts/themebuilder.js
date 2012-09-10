@@ -843,7 +843,7 @@
     });
 
     pickers = {
-        color: $(".recent-colors").kendoHSLPicker({ filter: ".drop", styleEngine: engineTool }).data("kendoHSLPicker"),
+        color: $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker"),
         gradient: $(".recent-gradients").kendoGradientPicker({ filter: ".drop", styleEngine: engineTool }).data("kendoGradientPicker"),
         pattern: $(".recent-patterns").kendoPatternPicker({ filter: ".drop", styleEngine: engineTool }).data("kendoPatternPicker")
     };
