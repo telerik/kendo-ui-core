@@ -293,6 +293,17 @@
             ]
         },
         {
+            "id": "imagebrowser",
+            "name": "ImageBrowser",
+            "category": "web",
+            "description": "",
+            "source": "kendo.imagebrowser.min.js",
+            "depends": [
+                "listView",
+                "upload"
+            ]
+        }
+        {
             "id": "grid",
             "name": "Grid",
             "category": "web",

@@ -427,6 +427,21 @@
         "default": ""
     };
 
+    function getFieldByName(obj, name) {
+        var field,
+            fieldName;
+
+        for (fieldName in obj) {
+            field = obj[fieldName];
+            if (isPlainObject(field) && field.field && field.field === name) {
+                return field;
+            } else if (field === name) {
+                return field;
+            }
+        }
+        return null;
+    }
+
     var Model = ObservableObject.extend({
         init: function(data) {
             var that = this;
@@ -454,9 +469,14 @@
 
         _parse: function(field, value) {
             var that = this,
-            parse;
+                fieldName = field,
+                fields = (that.fields || {}),
+                parse;
 
-            field = (that.fields || {})[field];
+            field = fields[field];
+            if (!field) {
+                field = getFieldByName(fields, fieldName);
+            }
             if (field) {
                 parse = field.parse;
                 if (!parse && field.type) {
@@ -1718,7 +1738,7 @@
                         that._accept(arguments[idx]);
                     }
 
-                    that._change();
+                    that._change({ action: "sync" });
 
                     that.trigger(SYNC);
                 });
@@ -1833,9 +1853,9 @@
                             type: type
                         });
                     },
-                    error: function(response) {
+                    error: function(response, status, error) {
                         deferred.reject(response);
-                        that.trigger(ERROR, response);
+                        that.error(response, status, error);
                     }
                 }, data)
                 );

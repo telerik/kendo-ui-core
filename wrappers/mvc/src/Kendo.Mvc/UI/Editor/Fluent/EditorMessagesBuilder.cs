@@ -155,5 +155,12 @@ namespace Kendo.Mvc.UI.Fluent
             messages.Styles = message;
             return this;
         }
+
+        public EditorMessagesBuilder FileBrowser(Action<EditorFileBrowserMessagesBuilder> configurator)
+        {
+            configurator(new EditorFileBrowserMessagesBuilder(messages.FileBrowserMessages));
+
+            return this;
+        } 
     }
 }

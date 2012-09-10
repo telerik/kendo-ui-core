@@ -167,6 +167,7 @@
     <Compile Include="Controllers\Web\DropDownList\IndexController.cs" />
     <Compile Include="Controllers\Web\Editor\RtlController.cs" />
     <Compile Include="Controllers\Web\Editor\Custom_ToolsController.cs" />
+    <Compile Include="Controllers\Web\Editor\ImageBrowserController.cs" />
     <Compile Include="Controllers\Web\Editor\StylesController.cs" />
     <Compile Include="Controllers\Web\Editor\SnippetsController.cs" />
     <Compile Include="Controllers\Web\Editor\All_ToolsController.cs" />

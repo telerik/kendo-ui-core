@@ -155,6 +155,7 @@
     <Compile Include="UI\Chart\Serialization\ChartNegativeValueSettingsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
+    <Compile Include="UI\Editor\ImageBrowserControllerTests.cs" />
     <Compile Include="UI\Grid\GridScrollingSettingsTests.cs" />
     <Compile Include="UI\ListView\ListViewSettingsSerializerTests.cs" />
     <Compile Include="UI\ListView\ListViewSelectionSettingsBuilderTests.cs" />

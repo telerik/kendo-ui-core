@@ -33,7 +33,14 @@
                 &lt;a href="http://www.kendoui.com/forums.aspx"&gt;feedback&lt;/a&gt;!
             &lt;/p&gt;
       <% })
-         .Render();
+      .FileBrowser(fileBrowser => fileBrowser
+        .Image("~/Content/UserFiles/Images/{0}")
+        .Read("Read", "ImageBrowser")
+        .Create("Create", "ImageBrowser")
+        .Destroy("Destroy", "ImageBrowser")
+        .Upload("Upload", "ImageBrowser")
+        .Thumbnail("Thumbnail", "ImageBrowser"))
+      .Render();
 %>
 
 </asp:Content>

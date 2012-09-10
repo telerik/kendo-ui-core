@@ -25,4 +25,11 @@
                 <a href="http://www.kendoui.com/forums.aspx">feedback</a>!
             </p>
       </text>)
+.FileBrowser(fileBrowser => fileBrowser
+    .Image("~/Content/UserFiles/Images/{0}")    
+    .Read("Read", "ImageBrowser")
+    .Create("Create", "ImageBrowser")
+    .Destroy("Destroy", "ImageBrowser")
+    .Upload("Upload", "ImageBrowser")
+    .Thumbnail("Thumbnail", "ImageBrowser"))
 )

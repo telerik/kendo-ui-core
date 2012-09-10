@@ -5190,11 +5190,12 @@ var ImageCommand = Command.extend({
             }
         }
 
-        //var fileBrowser = that.editor.fileBrowser;
-        //var showBrowser = fileBrowser && fileBrowser.selectUrl !== undefined;
+        var imageBrowser = that.editor.options.imageBrowser;
+        var showBrowser = kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined;
 
         windowContent =
             '<div class="k-editor-dialog">' +
+                (showBrowser ? '<div class="k-image-browser"></div>' : "") +
                 '<ol>' +
                     '<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>' +
                     '<li class="k-form-text-row"><label for="k-editor-image-title">Tooltip</label><input type="text" class="k-input" id="k-editor-image-title"/></li>' +
@@ -5209,23 +5210,27 @@ var ImageCommand = Command.extend({
         dialog = EditorUtils.createDialog(windowContent, that.editor, extend({}, that.editor.options.dialogOptions, {
             title: INSERTIMAGE,
             close: close,
-            activate: function () {
-                //if (showBrowser) {
-                //new $t.imageBrowser(
-                //$(this).find(".k-image-browser"),
-                //extend(fileBrowser, {
-                //apply: apply,
-                //element: that.editor.element,
-                //messages: that.editor.options.messages
-                //}));
-                //}
+            activate: function() {
+                if (showBrowser) {
+                    var that = this;
+
+                    new kendo.ui.ImageBrowser(
+                        that.element.find(".k-image-browser"),
+                        extend({}, imageBrowser, {
+                            change: function() {
+                                that.element.find(KEDITORIMAGEURL).val(this.value());
+                            },
+                            apply: apply
+                        })
+                    );
+                }
             }
         }))
                 .hide()
                 .find(".k-dialog-insert").click(apply).end()
                 .find(".k-dialog-close").click(close).end()
                 .find(".k-form-text-row input").keydown(keyDown).end()
-                //.toggleClass("k-imagebrowser", showBrowser)
+                .toggleClass("k-imagebrowser", showBrowser)
                 // IE < 8 returns absolute url if getAttribute is not used
                 .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
                 .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()

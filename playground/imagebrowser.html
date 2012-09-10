@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>imagebrowser</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="../tests/jquery.mockjax.js"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.upload.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.listview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.imagebrowser.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+   </head>
+    <body>
+        <div id="container"></div>
+        <script>
+
+            $(document).ready(function() {
+                $("#container").kendoImageBrowser({
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                items: [ { name: "file1", type: "f", size: 42 },
+                                    { name: "file2", type: "f", size: 142 } ]
+                            });
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

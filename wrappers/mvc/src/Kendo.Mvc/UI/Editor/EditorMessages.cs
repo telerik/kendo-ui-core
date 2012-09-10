@@ -33,6 +33,8 @@ namespace Kendo.Mvc.UI
             FontSizeInherit = Messages.Editor_FontSizeInherit;
             FormatBlock = Messages.Editor_FormatBlock;
             Styles = Messages.Editor_Styles;
+
+            FileBrowserMessages = new EditorFileBrowserMessages();
         }
 
         public string Bold { get; set; }
@@ -59,6 +61,8 @@ namespace Kendo.Mvc.UI
         public string FontSizeInherit { get; set; }
         public string FormatBlock { get; set; }
         public string Styles { get; set; }
+
+        public EditorFileBrowserMessages FileBrowserMessages { get; set; }
 
         private const string DefaultBold = "Bold";
         private const string DefaultItalic = "Italic";

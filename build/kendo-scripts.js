@@ -29,6 +29,7 @@ var multipartScripts = [{
       output:   "kendo.aspnetmvc.js",
       inputs: [ path.join("aspnetmvc", "kendo.data.aspnetmvc.js"),
                 path.join("aspnetmvc", "kendo.combobox.aspnetmvc.js"),
+                path.join("aspnetmvc", "kendo.imagebrowser.aspnetmvc.js"),
                 path.join("aspnetmvc", "kendo.validator.aspnetmvc.js") ]
 }];
 
@@ -60,6 +61,7 @@ var suiteScripts = {
         "kendo.columnmenu.js",
         "kendo.grid.js",
         "kendo.listview.js",
+        "kendo.imagebrowser.js",
         "kendo.editor.js",
         "kendo.numerictextbox.js",
         "kendo.menu.js",

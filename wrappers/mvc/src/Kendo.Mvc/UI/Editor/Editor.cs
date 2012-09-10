@@ -12,8 +12,11 @@ namespace Kendo.Mvc.UI
 
     public class Editor : WidgetBase
     {
-        public Editor(ViewContext viewContext, IJavaScriptInitializer initializer) : base(viewContext, initializer)
+        public Editor(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
+            : base(viewContext, initializer)
         {
+            UrlGenerator = urlGenerator;
+
             DefaultToolGroup = new EditorToolGroup(this);
 
             Template = new HtmlTemplate();
@@ -31,6 +34,20 @@ namespace Kendo.Mvc.UI
                 .FormatBlock()
                 .CreateLink().Unlink()
                 .InsertImage();
+
+            FileBrowserSettings = new EditorFileBrowserSettings(Messages.FileBrowserMessages);
+        }
+
+        internal IUrlGenerator UrlGenerator
+        {
+            get;
+            private set;
+        }
+
+        public EditorFileBrowserSettings FileBrowserSettings
+        {
+            get;
+            private set;
         }
 
         public EditorMessages Messages
@@ -162,6 +179,12 @@ namespace Kendo.Mvc.UI
             if (StyleSheets.Count > 0)
             {
                 options["stylesheets"] = StyleSheets;
+            }
+
+            var fileSettings = FileBrowserSettings.ToJson();
+            if (fileSettings.Any())
+            {
+                options["imageBrowser"] = fileSettings;
             }
 
             writer.Write(Initializer.Initialize(Selector, "Editor", options));
