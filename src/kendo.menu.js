@@ -537,23 +537,25 @@
             return that;
         },
 
-        close: function (element) {
-            var that = this;
-            element = that.element.find(element);
+        close: function (items) {
+            var that = this,
+                element = that.element;
 
-            if (!element[0]) {
-                element = that.element.find(">.k-item");
+            items = element.find(items);
+
+            if (!items.length) {
+                items = element.find(">.k-item");
             }
 
-            element.each(function () {
+            items.each(function () {
                 var li = $(this);
 
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {
-                    var ul = li.find(".k-group:first:visible"), popup;
-                    if (ul[0]) {
-                        popup = ul.data(KENDOPOPUP);
+                    var popup = li.find(".k-group:first:visible").data(KENDOPOPUP);
+
+                    if (popup) {
                         popup.close();
                     }
                 }, that.options.hoverDelay));
@@ -562,9 +564,8 @@
             return that;
         },
 
-        _toggleDisabled: function (element, enable) {
-            element = this.element.find(element);
-            element.each(function () {
+        _toggleDisabled: function (items, enable) {
+            this.element.find(items).each(function () {
                 $(this)
                     .toggleClass(DEFAULTSTATE, enable)
                     .toggleClass(DISABLEDSTATE, !enable);
@@ -580,15 +581,14 @@
         },
 
         _updateClasses: function() {
-            var that = this;
+            var element = this.element,
+                items;
 
-            that.element.addClass("k-widget k-reset k-header " + MENU).addClass(MENU + "-" + that.options.orientation);
+            element.addClass("k-widget k-reset k-header " + MENU).addClass(MENU + "-" + this.options.orientation);
 
-            var items = that.element
-                            .find("li > ul")
-                            .addClass("k-group")
-                            .end()
-                            .find("> li,.k-group > li");
+            element.find("li > ul").addClass("k-group");
+
+            items = element.find("> li,.k-group > li");
 
             items.each(function () {
                 updateItemClasses(this);
@@ -684,13 +684,11 @@
         },
 
         _documentClick: function (e) {
-            var that = this;
-
-            if (contains(that.element[0], e.target)) {
+            if (contains(this.element[0], e.target)) {
                 return;
             }
 
-            that.clicked = false;
+            this.clicked = false;
         }
     });
 
