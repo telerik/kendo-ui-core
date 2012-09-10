@@ -981,11 +981,11 @@ body > label
     content: "";
     display: inline-block;
     width: 16px;
-    height: 14px;
+    height: 16px;
     margin-top: -3px;
     margin-right: 5px;
     vertical-align: middle;
-    background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAcCAMAAAAQssz4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NkNEM0I0NkJGNjZCMTFFMUFGNjk5NzVFNjI3RDlBOTUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NkNEM0I0NkNGNjZCMTFFMUFGNjk5NzVFNjI3RDlBOTUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2Q0QzQjQ2OUY2NkIxMUUxQUY2OTk3NUU2MjdEOUE5NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2Q0QzQjQ2QUY2NkIxMUUxQUY2OTk3NUU2MjdEOUE5NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PtNI5YsAAAAJUExURQCjx1ZWVv///y1HD0cAAAADdFJOU///ANfKDUEAAACMSURBVHjavJJRCsAwCENj73/ogRBNdT8KmxQM1me1LY6bhalMyyDWQHiRCtA7YL46QMQONQGTSlK5n8uWIukGhMiW7gm1VsQlYwOMW1oNPb7W8cP98ZcQpjINNboAwtdQ2XcBXx0ggkNNAFJJKvdzEf4VqJ28z5K1GJeMDTBuaTX0+FrHD/fpX3oEGAC/ngctniBqUgAAAABJRU5ErkJggg==") no-repeat 0 0;
+    background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAgCAMAAACy7Q9eAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTdDMzhERUZGQjYyMTFFMThDRTdFRkYyMkQ1OEI0MTEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTdDMzhERjBGQjYyMTFFMThDRTdFRkYyMkQ1OEI0MTEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5N0MzOERFREZCNjIxMUUxOENFN0VGRjIyRDU4QjQxMSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5N0MzOERFRUZCNjIxMUUxOENFN0VGRjIyRDU4QjQxMSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PrnMYzMAAAAJUExURQCjx1ZWVv///y1HD0cAAAADdFJOU///ANfKDUEAAAD6SURBVHjatJRRDsMgDEOd3f/QkzraxoYgR+34Isi8YjeAjz3CUmGIr5GnAoyXgR4RrD2A0/b6GwUwroAYGMqLTZ6RgZFc0cn0+BvzYw0sYOCYC7cK87cKNnMD03qITU2AageoSMmUS8fy5JlD5erRT1lFbLTNomsog5jbZt/Ynbb2rp5H6tzlDhEvvlwNYEM6VLhGnooULwM9Ilh7AKft9TcKIDI4s5WHTZ7IQCRXdDI9/sb8KWYBA8dcuFWYp5jM3MC0DrGJaVMWG0BFSqZcOpYnzxyqVE9+yipio20WXcM98lnGUjd2p629qwf038P9Xca/3iRnfAUYAPaHECMniJcOAAAAAElFTkSuQmCC") no-repeat 0 0;
 }
 
 .files button:hover
@@ -1004,19 +1004,39 @@ body > label
     background-position: -32px 0;
 }
 
+#undoStyles:before
+{
+    background-position: -48px 0;
+}
+
+#redoStyles:before
+{
+    background-position: -64px 0;
+}
+
 .files button:hover:before
 {
-    background-position: 0 -14px;
+    background-position: 0 -16px;
 }
 
 #exportStyles:hover:before
 {
-    background-position: -16px -14px;
+    background-position: -16px -16px;
 }
 
 #resetStyles:hover:before
 {
-    background-position: -32px -14px;
+    background-position: -32px -16px;
+}
+
+#undoStyles:hover:before
+{
+    background-position: -48px -16px;
+}
+
+#redoStyles:hover:before
+{
+    background-position: -64px -16px;
 }
 
 .applyall
