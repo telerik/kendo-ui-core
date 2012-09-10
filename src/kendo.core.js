@@ -2185,7 +2185,7 @@ function pad(number) {
         } else if (!isNaN(parseFloat(value))) {
             value = parseFloat(value);
         } else if (jsonRegExp.test(value) && !jsonFormatRegExp.test(value)) {
-            value = $.parseJSON(value);
+            value = eval("(" + value + ")");
         }
 
         return value;

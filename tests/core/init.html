@@ -247,6 +247,18 @@
                 equal(testwidget.options.columns.bar, "bar");
             });
 
+
+            function func() {
+            }
+
+            test("initializes functions from parameters", function() {
+            var dom = $('<div data-role="testwidget" data-columns=\'{"foo":func}\'/>');
+
+                kendo.init(dom);
+                var testwidget = dom.data("kendoTestWidget");
+                equal(testwidget.options.columns.foo, func);
+            });
+
             test("does not treat format strings as JSON", function() {
                 var dom = $('<div data-role="testwidget" data-foo="{0:d}"/>');
 
