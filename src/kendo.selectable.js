@@ -13,7 +13,19 @@
         DOCUMENT = $(document),
         CHANGE = "change",
         NS = ".kendoSelectable",
-        UNSELECTING = "k-state-unselecting";
+        UNSELECTING = "k-state-unselecting",
+        supportEventDelegation = false;
+
+        (function($) {
+            (function() {
+                $('<div class="parent"><span /></div>')
+                .on("click", ">*", function() {
+                    supportEventDelegation = true;
+                })
+                .find("span")
+                .click();
+            })();
+        })($);
 
     var Selectable = Widget.extend({
         init: function(element, options) {
@@ -28,7 +40,7 @@
             that._upDelegate = proxy(that._up, that);
 
             that.element.addClass(SELECTABLE);
-            that.element.on(MOUSEDOWN + NS, that.options.filter, proxy(that._down, that));
+            that.element.on(MOUSEDOWN + NS, (!supportEventDelegation ? "." + SELECTABLE + " " : "") + that.options.filter, proxy(that._down, that));
         },
 
         events: [CHANGE],
