@@ -641,8 +641,8 @@
             var that = this, openHandle,
                 target = $(kendo.eventTarget(e)),
                 link = target.closest("." + LINK),
-                href = link.attr("href"),
                 element = target.closest(allItemsSelector),
+                href = link.attr("href"), childGroup, childGroupVisible,
                 isLink = (!!href && href.charAt(href.length - 1) != "#");
 
             if (element.children(templateSelector)[0]) {
@@ -666,9 +666,13 @@
 
             e.handled = true;
 
-            if (that.options.closeOnClick && !(href && href.length > 0) && !element.children(groupSelector + ",.k-animation-container").length) {
+            childGroup = element.children(groupSelector + ",.k-animation-container");
+            childGroupVisible = childGroup.is(":visible");
+
+            if (that.options.closeOnClick && !isLink && (!childGroup.length || childGroupVisible)) {
                 that.close(link.parentsUntil(that.element, allItemsSelector));
                 that.clicked = false;
+                return;
             }
 
             if ((!element.parent().hasClass(MENU) || !that.options.openOnClick) && !touch) {
@@ -680,7 +684,7 @@
             }
 
             that.clicked = true;
-            openHandle = element.children(".k-animation-container, .k-group").is(":visible") ? CLOSE : OPEN;
+            openHandle = childGroup.is(":visible") ? CLOSE : OPEN;
             that[openHandle](element);
         },
 
