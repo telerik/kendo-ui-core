@@ -84,7 +84,7 @@ namespace Kendo
 
             routes.MapRoute(
                 "ThemeBuilder",
-                "themebuilder/index.html",
+                "themebuilder/{suite}.html",
                 new { controller = "ThemeBuilder", action = "Index" }
             );
 

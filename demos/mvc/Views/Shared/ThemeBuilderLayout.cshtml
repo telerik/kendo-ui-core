@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @foreach (string styleName in ViewBag.styles) {
+    <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+    }
+    @if (ViewBag.Debug) {
+    <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+    } else {
+    @Html.Partial("GoogleAnalytics")
+    }
+    <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
+    @foreach (string scriptName in @ViewBag.scripts)
+    {
+    <script src="@Url.Script(scriptName)"></script>
+    }
+    <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
+</head>
+<body>
+    @Html.Partial("Header")
+
+    <div id="example" class="floatWrap centerWrap">
+        <ul>
+            <li><a href="web.html">Web</a></li>
+            <li><a href="mobile.html">Mobile</a></li>
+        </ul>
+
+        <h1 id="exampleTitle" style="position:static">@ViewBag.Title</h1>
+
+        @RenderBody()
+    </div>
+
+    @Html.Partial("Footer")
+</body>
+</html>
