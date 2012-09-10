@@ -299,10 +299,10 @@
             "description": "",
             "source": "kendo.imagebrowser.min.js",
             "depends": [
-                "listView",
+                "listview",
                 "upload"
             ]
-        }
+        },
         {
             "id": "grid",
             "name": "Grid",
