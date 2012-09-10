@@ -28,7 +28,7 @@
             that._upDelegate = proxy(that._up, that);
 
             that.element.addClass(SELECTABLE);
-            that.element.on(MOUSEDOWN + NS, "." + SELECTABLE + " " + that.options.filter, proxy(that._down, that));
+            that.element.on(MOUSEDOWN + NS, that.options.filter, proxy(that._down, that));
         },
 
         events: [CHANGE],
