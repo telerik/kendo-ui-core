@@ -723,44 +723,44 @@
         return widgets;
     }
 
-    function getMenuDataItem(item, source) {
-        item = $(item);
-        var menuElement = item.closest(".k-menu"),
-            dataItem = source,
-            index = item.parentsUntil(menuElement, ".k-item").map(function () {
-                return $(this).index();
-            }).get().reverse();
-
-        index.push(item.index());
-
-        for (var i = -1, len = index.length; ++i < len;) {
-            dataItem = dataItem[index[i]];
-            dataItem = i < len-1 ? dataItem.items : dataItem;
-        }
-
-        return dataItem;
-    }
-
-    function buildMenu(element) {
-        var widgets = getWidgets(propertyTargets.color), menuStructure = [];
-
-        for (var i in widgets ) {
-            if (i != "selector") {
-                if (element.closest(widgets[i].selector)[0]) {
-                    var item = { text: widgets[i].name, items: [] };
-
-                    for (var j in widgets[i].whitelist) {
-                        item.items.push({ text: widgets[i].whitelist[j], value: widgets[i].selector });
-                    }
-
-                    menuStructure.push(item);
-                }
-            }
-        }
-
-        return menuStructure;
-    }
-
+//    function getMenuDataItem(item, source) {
+//        item = $(item);
+//        var menuElement = item.closest(".k-menu"),
+//            dataItem = source,
+//            index = item.parentsUntil(menuElement, ".k-item").map(function () {
+//                return $(this).index();
+//            }).get().reverse();
+//
+//        index.push(item.index());
+//
+//        for (var i = -1, len = index.length; ++i < len;) {
+//            dataItem = dataItem[index[i]];
+//            dataItem = i < len-1 ? dataItem.items : dataItem;
+//        }
+//
+//        return dataItem;
+//    }
+//
+//    function buildMenu(element) {
+//        var widgets = getWidgets(propertyTargets.color), menuStructure = [];
+//
+//        for (var i in widgets ) {
+//            if (i != "selector") {
+//                if (element.closest(widgets[i].selector)[0]) {
+//                    var item = { text: widgets[i].name, items: [] };
+//
+//                    for (var j in widgets[i].whitelist) {
+//                        item.items.push({ text: widgets[i].whitelist[j], value: widgets[i].selector });
+//                    }
+//
+//                    menuStructure.push(item);
+//                }
+//            }
+//        }
+//
+//        return menuStructure;
+//    }
+//
     window.globalUndo = function() {
         var lastEngine = globalUndoBuffer.pop();
 
@@ -991,7 +991,7 @@
                 }
             });
 
-            contextMenu = $("<ul />").appendTo(document.body).kendoContextMenu().data("kendoContextMenu");
+//            contextMenu = $("<ul />").appendTo(document.body).kendoContextMenu().data("kendoContextMenu");
 
             $(document).on({
                 keydown: function (e) { CtrlDown = e.which == 17; },
