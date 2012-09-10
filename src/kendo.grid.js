@@ -670,8 +670,6 @@
                     position = th.offset().left + (!isRtl ? this.offsetWidth : 0);
 
                 if(e.clientX > position - indicatorWidth &&  e.clientX < position + indicatorWidth) {
-                    cursor(that.wrapper, th.css('cursor'));
-                    
                     if (!resizeHandle) {
                         resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"/>');
                         container.append(resizeHandle);
@@ -698,13 +696,14 @@
                     })
                     .data("th", th)
                     .show();
-                    
-                } else {
-                    cursor(that.wrapper, "");
 
-                    if (resizeHandle) {
+                } else {
+
+                   if (resizeHandle) {
                        resizeHandle.hide();
-                    }
+                   } else {
+                       cursor(that.wrapper, "");
+                   }
                 }
             });
         },
@@ -736,7 +735,7 @@
                             contentTable = that.tbody.parent(),
                             footer = that.footer || $();
 
-                        cursor(that.wrapper, th.css('cursor'));
+                        cursor(that.wrapper, 'col-resize');
 
                         if (options.scrollable) {
                             col = that.thead.parent().find("col:eq(" + index + ")")
@@ -751,7 +750,7 @@
                         gridWidth = that.tbody.outerWidth();
                     },
                     resize: function(e) {
-                        
+
                         var rtlMultiplier = isRtl ? -1 : 1,
                             width = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier),
                             footer = that.footer || $();
