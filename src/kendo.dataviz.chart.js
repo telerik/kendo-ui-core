@@ -1083,7 +1083,9 @@
 
             options = axis.applyDefaults(options);
 
-            axis.groupCategories(options);
+            if (options.categories.length > 0) {
+                axis.groupCategories(options);
+            }
 
             CategoryAxis.fn.init.call(axis, options);
         },
@@ -2522,7 +2524,7 @@
                 plotValue = 0;
 
             if (!defined(value) || value === null) {
-                if (isStacked || series.missingValues === ZERO) {
+                if (series.missingValues === ZERO) {
                     value = 0;
                 } else {
                     return null;
@@ -2541,7 +2543,7 @@
             );
 
             if (isStacked) {
-                stackPoint = last(categoryPoints);
+                stackPoint = lastValue(categoryPoints);
                 if (stackPoint) {
                     plotValue = stackPoint.plotValue;
                 }
@@ -6328,6 +6330,18 @@
         }
 
         return a === b;
+    }
+
+    function lastValue(array) {
+        var i = array.length,
+            value;
+
+        while (i--) {
+            value = array[i];
+            if (defined(value) && value !== null) {
+                return value;
+            }
+        }
     }
 
     function appendIfNotNull(array, element) {
