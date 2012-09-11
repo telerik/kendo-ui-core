@@ -361,8 +361,8 @@
                 resizingHandler._resizable._resize({ y: {location: initialSplitBarPosition + 5 } });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
 
-                equals(parseInt(panes[1].offsetHeight), initialPaneSizes[1] + 5);
-                equals(parseInt(panes[2].offsetHeight), initialPaneSizes[2] - 5);
+                close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] + 5, 1);
+                close(parseInt(panes[2].offsetHeight), initialPaneSizes[2] - 5, 1);
             });
 
             test("resizing.stop fires splitter resize", function() {
