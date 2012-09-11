@@ -1878,16 +1878,6 @@ span.k-dropdown
     transition: box-shadow .15s ease-out;
 }
 
-.k-dropdown .k-state-focused
-{
-    outline:1px dotted;
-}
-
-.k-dropdown .k-state-focused.k-state-active
-{
-    outline:none;
-}
-
 .k-textbox > input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
