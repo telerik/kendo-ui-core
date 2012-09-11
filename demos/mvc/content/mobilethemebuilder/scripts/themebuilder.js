@@ -928,7 +928,7 @@
               "114x114" : "images/Icon@2x.png"
             }
         });
-        engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that }).data("kendoStyleEngine");
+        engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that, updateDocumentTitle: false }).data("kendoStyleEngine");
 
         applications[that].element.toggleClass("hiddenOS", !checkbox.checked);
     });
