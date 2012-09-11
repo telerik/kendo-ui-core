@@ -1320,7 +1320,6 @@
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
 
-                that._destroyEditable();
                 that.dataSource.sync();
             }
         },
