@@ -305,20 +305,20 @@
            });
 
            test("rebuild select options if data", function() {
+               var select = $("<select><option>&lt;script&gt;alert(1)&lt;/script&gt;</option></select>"),
+
+               combobox = new ComboBox(select);
+
+               equal(select.children(":first")[0].text, "<script>alert(1)<\/script>");
+           });
+
+           test("Encodes the text value of the option element", function() {
                var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>"),
                combobox = new ComboBox(select, {
                    dataTextField: "text",
                    dataValueField: "value",
                    dataSource: [{text: "Foo", value: 0}, {text: 0, value:5}]
                });
-
-               var children = select.children();
-
-               equal(children.length, 2);
-               equal(children.eq(0).text(), "Foo");
-               equal(children.eq(0).val(), "0");
-               equal(children.eq(1).text(), "0");
-               equal(children.eq(1).val(), "5");
            });
 
            test("value with space should be added to option", function() {
