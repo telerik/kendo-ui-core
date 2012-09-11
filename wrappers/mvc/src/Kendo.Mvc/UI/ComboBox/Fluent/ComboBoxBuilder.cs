@@ -63,6 +63,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ComboBoxBuilder BindTo(IEnumerable<DropDownListItem> dataSource)
         {
+            if (string.IsNullOrEmpty(Component.DataValueField)
+                && string.IsNullOrEmpty(Component.DataTextField))
+            {
+                DataValueField("Value");
+                DataTextField("Text");
+            }
+
             Component.DataSource.Data = dataSource;
             Component.ValueOfSelectedItem(dataSource);
 
