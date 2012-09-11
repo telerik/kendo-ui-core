@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pager MVVM support</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var DataSource = kendo.data.DataSource;
+
+            test("initializes a pager when data role is pager", function() {
+                var dom = $('<div data-role="pager"/>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoPager") instanceof kendo.ui.Pager);
+            });
+
+            test("initalizes data source", function() {
+                var dom = $('<div data-role="pager" data-bind="source:items" />');
+
+                kendo.bind(dom, { items: DataSource.create(["foo", "bar"]) } );
+                dom.data("kendoPager").dataSource.view();
+
+                equal(dom.data("kendoPager").dataSource.view()[0], "foo");
+            });
+
+            test("binding pager initialized before binding", function() {
+                var dom = $('<div data-bind="source:items" />');
+
+                var observable = kendo.observable({ items: DataSource.create([{text:"foo"}, {text:"bar"}])});
+
+                dom.kendoPager();
+
+                kendo.bind(dom, observable);
+
+                equal(dom.data("kendoPager").dataSource.at(0).text, "foo");
+            });
+
+            test("binding pager initialized after binding", function() {
+                var dom = $('<div data-bind="source:items" />');
+
+                var observable = kendo.observable({ items: DataSource.create([{text:"foo"}, {text:"bar"}])});
+
+                kendo.bind(dom, observable);
+
+                dom.kendoPager();
+
+                equal(dom.data("kendoPager").dataSource.at(0).text, "foo");
+            });
+
+        </script>
+
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
