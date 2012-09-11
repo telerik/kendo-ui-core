@@ -301,10 +301,26 @@
 
                 $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showSource, that));
                 $(".ktb-action-show-import").on(CLICK, proxy(that.showImport, that));
+                $(".ktb-action-create-web,.ktb-action-create-dataviz").on(CLICK, proxy(that.showSuite, that));
                 $(".ktb-action-back").on(CLICK, proxy(that.hideOverlay, that));
+                $(".ktb-action-back-to-suites").on(CLICK, proxy(that.showSuiteChooser, that));
                 $(".ktb-action-import").on(CLICK, proxy(that.importTheme, that));
 
                 that._track();
+            },
+            showSuiteChooser: function(e) {
+                $("#suite-chooser").slideDown("fast", function() {
+                    $("#create-web,#create-dataviz").hide();
+                });
+            },
+            showSuite: function(e) {
+                e.preventDefault();
+
+                var web = $(e.target).hasClass("ktb-action-create-web");
+
+                $(web ? "#create-web" : "#create-dataviz").show();
+
+                $("#suite-chooser").slideUp();
             },
             showSource: function(e) {
                 e.preventDefault();
@@ -453,42 +469,56 @@
             render: function() {
                 var that = this,
                     template = kendo.template,
+                    templateOptions = { paramName: "d", useWithBlock: false },
                     propertyGroupTemplate = template(
-                        "<li>#= title #" +
+                        "<li>#= d.title #" +
                             "<div class='styling-options'>" +
-                                "# for (var name in constants) {" +
-                                    "var c = constants[name];" +
+                                "# for (var name in d.constants) {" +
+                                    "var c = d.constants[name];" +
                                     "if (c.readonly) continue; #" +
-                                    "<label for='#= name #'>#= section[name] || name #</label>" +
-                                    "<input id='#= name #' class='#= editors[c.property] #' " +
-                                           "value='#= processors[c.property] ? processors[c.property](c.value) : c.value #' />" +
+                                    "<label for='#= name #'>#= d.section[name] || name #</label>" +
+                                    "<input id='#= name #' class='#= d.editors[c.property] #' " +
+                                           "value='#= d.processors[c.property] ? d.processors[c.property](c.value) : c.value #' />" +
                                 "# } #" +
                             "</div>" +
-                        "</li>"
+                        "</li>",
+                        templateOptions
                     ),
-                    button = template("<button class='k-button ktb-action-#= id #'>#= text #</button>");
+                    view = template(
+                        "<div id='#= d.id #' class='ktb-view#= d.overlay ? ' ktb-overlay' : '' #'>" +
+                            "#= d.toolbar ? d.toolbar : '' #" +
+                            "<div class='ktb-content'>#= d.content #</div>" +
+                        "</div>",
+                        templateOptions
+                    ),
+                    button = template(
+                        "<button class='k-button ktb-action-#= d.id #'>#= d.text #</button>",
+                        templateOptions
+                    );
 
                 $("<div id='kendo-themebuilder'>" +
-                        "<div id='download-overlay' class='ktb-view ktb-overlay'>" +
-                            button({ id: "back", text: "Back" }) +
-                            "<a href='http://www.kendoui.com/documentation/themebuilder.aspx' id='docs-link' target='_blank'>What should I do with this?</a>" +
-                            "<div class='ktb-content'>" +
-                                "<textarea readonly></textarea>" +
-                            "</div>" +
-                        "</div>" +
-                        "<div id='import-overlay' class='ktb-view ktb-overlay'>" +
-                            button({ id: "back", text: "Back" }) +
-                            button({ id: "import", text: "Import" }) +
-                            "<div class='ktb-content'>" +
-                                "<textarea></textarea>" +
-                            "</div>" +
-                        "</div>" +
-                        "<div id='advanced-mode' class='ktb-view'>" +
-                            button({ id: "get-css", text: "Get CSS..." }) +
-                            button({ id: "get-less", text: "Get LESS..." }) +
-                            button({ id: "show-import", text: "Import..." }) +
-                            "<div class='ktb-content'>" +
-                                "<ul id='stylable-elements'>" +
+                    view({
+                        id: "download-overlay",
+                        overlay: true,
+                        toolbar: button({ id: "back", text: "Back" }) +
+                                 "<a href='http://www.kendoui.com/documentation/themebuilder.aspx' id='docs-link' target='_blank'>What should I do with this?</a>",
+                        content: "<textarea readonly></textarea>"
+                    }) +
+
+                    view({
+                        id: "import-overlay",
+                        overlay: true,
+                        toolbar: button({ id: "back", text: "Back" }) + button({ id: "import", text: "Import" }),
+                        content: "<textarea></textarea>"
+                    }) +
+
+                    view({
+                        id: "create-web",
+                        toolbar: button({ id: "back-to-suites", text: "Back" }) +
+                                 button({ id: "get-css", text: "Get CSS..." }) +
+                                 button({ id: "get-less", text: "Get LESS..." }) +
+                                 button({ id: "show-import", text: "Import..." }),
+                        content: "<ul id='stylable-elements'>" +
                                     map(that.constantsHierarchy || {}, function(section, title) {
                                         var matchedConstants = {},
                                             constants = that.constants.constants;
@@ -505,10 +535,26 @@
                                             processors: processors
                                         });
                                     }).join("") +
-                                "</ul>" +
-                            "</div>" +
-                        "</div>" +
-                    "</div>").appendTo(document.body);
+                                "</ul>"
+                    }) +
+
+                    view({
+                        id: "create-dataviz",
+                        toolbar: button({ id: "back-to-suites", text: "Back" }) +
+                                 button({ id: "get-json", text: "Get JSON..." }),
+                        content: "yay!"
+                    }) +
+
+                    view({
+                        id: "suite-chooser",
+                        content: "<p>Create a theme for:</p>" +
+                                 "<ul>" +
+                                     "<li>" + button({ id: "create-web", text: "Kendo UI Web" }) + "</li>" +
+                                     "<li>" + button({ id: "create-dataviz", text: "Kendo UI DataViz" }) + "</li>" +
+                                 "</ul>"
+                    }) +
+
+                "</div>").appendTo(document.body);
             }
         });
 
