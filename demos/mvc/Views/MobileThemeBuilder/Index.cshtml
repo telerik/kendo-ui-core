@@ -1,43 +1,30 @@
+@{
+    Layout = null;
+}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Theme Builder</title>
-    <link type="text/css" href="../../../../styles/web/kendo.common.css" rel="stylesheet" />
-    <link type="text/css" href="../../../../styles/web/kendo.blueopal.less" rel="stylesheet/less" />
-    <link type="text/css" href="../../../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
-    <script src="../../content/shared/js/less.js"></script>
-    <script src="../../../../src/jquery.js"></script>
-    <script src="../../../../src/kendo.core.js"></script>
-    <script src="../../../../src/kendo.fx.js"></script>
-    <script src="../../../../src/kendo.userevents.js"></script>
-    <script src="../../../../src/kendo.draganddrop.js"></script>
-    <script src="../../../../src/kendo.data.js"></script>
-    <script src="../../../../src/kendo.popup.js"></script>
-    <script src="../../../../src/kendo.list.js"></script>
-    <script src="../../../../src/kendo.dropdownlist.js"></script>
-    <script src="../../../../src/kendo.history.js"></script>
-    <script src="../../../../src/kendo.mobile.scroller.js"></script>
-    <script src="../../../../src/kendo.mobile.navbar.js"></script>
-    <script src="../../../../src/kendo.mobile.tabstrip.js"></script>
-    <script src="../../../../src/kendo.mobile.button.js"></script>
-    <script src="../../../../src/kendo.mobile.buttongroup.js"></script>
-    <script src="../../../../src/kendo.mobile.switch.js"></script>
-    <script src="../../../../src/kendo.mobile.scrollview.js"></script>
-    <script src="../../../../src/kendo.mobile.listview.js"></script>
-    <script src="../../../../src/kendo.mobile.loader.js"></script>
-    <script src="../../../../src/kendo.mobile.view.js"></script>
-    <script src="../../../../src/kendo.mobile.pane.js"></script>
-    <script src="../../../../src/kendo.mobile.application.js"></script>
-    <script src="../../../../src/kendo.window.js"></script>
-    <script src="../../../../src/kendo.tabstrip.js"></script>
-    <script src="scripts/slider.js"></script>
-    <script src="scripts/colorengine.js"></script>
-    <script src="scripts/gradientengine.js"></script>
-    <script src="scripts/hslpicker.js"></script>
-    <script src="scripts/gradientpicker.js"></script>
-    <script src="scripts/patternpicker.js"></script>
-    <script src="scripts/fontpicker.js"></script>
-    <link type="text/css" href="styles/builder.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+    @foreach (string styleName in ViewBag.styles) {
+    <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+    }
+    @if (ViewBag.Debug) {
+    <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+    } else {
+    @Html.Partial("GoogleAnalytics")
+    }
+    @foreach (string scriptName in @ViewBag.scripts)
+    {
+    <script src="@Url.Script(scriptName)"></script>
+    }
+    <script src="@Url.Content("~/content/mobilethemebuilder/scripts/slider.js")"></script>
+    <script src="@Url.Content("~/content/mobilethemebuilder/scripts/colorengine.js")"></script>
+    <script src="@Url.Content("~/content/mobilethemebuilder/scripts/gradientengine.js")"></script>
+    <script src="@Url.Content("~/content/mobilethemebuilder/scripts/hslpicker.js")"></script>
+    <script src="@Url.Content("~/content/mobilethemebuilder/scripts/gradientpicker.js")"></script>
+    <script src="@Url.Content("~/content/mobilethemebuilder/scripts/patternpicker.js")"></script>
+    <script src="@Url.Content("~/content/mobilethemebuilder/scripts/fontpicker.js")"></script>
+    <link type="text/css" href="@Url.Content("~/content/mobilethemebuilder/styles/builder.css")" rel="stylesheet" />
 </head>
 <body class="body k-popup">
     <div class="header">
@@ -103,36 +90,36 @@
                         <li>
                             Africa
                             <ul>
-                                <li><h2>Nairobi</h2><img src="images/nairobi.jpg" /></li>
+                                <li><h2>Nairobi</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/nairobi.jpg")" /></li>
                             </ul>
                         </li>
                         <li>
                             America
                             <ul>
-                                <li><h2>Boston</h2><img src="images/boston.jpg" /></li>
-                                <li><h2>Ottawa</h2><img src="images/ottawa.jpg" /></li>
-                                <li><h2>San Francisco</h2><img src="images/san-francisco.jpg" /></li>
+                                <li><h2>Boston</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/boston.jpg")" /></li>
+                                <li><h2>Ottawa</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/ottawa.jpg")" /></li>
+                                <li><h2>San Francisco</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/san-francisco.jpg")" /></li>
                             </ul>
                         </li>
                         <li>
                             Asia
                             <ul>
-                                <li><h2>Bombay</h2><img src="images/bombay.jpg" /></li>
+                                <li><h2>Bombay</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/bombay.jpg")" /></li>
                             </ul>
                         </li>
                         <li>
                             Australia
                             <ul>
-                                <li><h2>Melbourne</h2><img src="images/melbourne.jpg" /></li>
-                                <li><h2>Sydney</h2><img src="images/sydney.jpg" /></li>
+                                <li><h2>Melbourne</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/melbourne.jpg")" /></li>
+                                <li><h2>Sydney</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/sydney.jpg")" /></li>
                             </ul>
                         </li>
                         <li>
                             Europe
                             <ul>
-                                <li><h2>Cannes</h2><img src="images/cannes.jpg" /></li>
-                                <li><h2>Liverpool</h2><img src="images/liverpool.jpg" /></li>
-                                <li><h2>London</h2><img src="images/london.jpg" /></li>
+                                <li><h2>Cannes</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/cannes.jpg")" /></li>
+                                <li><h2>Liverpool</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/liverpool.jpg")" /></li>
+                                <li><h2>London</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/london.jpg")" /></li>
                             </ul>
                         </li>
                     </ul>
@@ -151,38 +138,38 @@
                         <li>
                             A
                             <ul>
-                                <li><h2>Ann Devon</h2><img src="images/ann.jpg" /></li>
-                                <li><h2>Annette Roulet</h2><img src="images/annette.jpg" /></li>
-                                <li><h2>Antonio Moreno</h2><img src="images/antonio.jpg" /></li>
+                                <li><h2>Ann Devon</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/ann.jpg")" /></li>
+                                <li><h2>Annette Roulet</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/annette.jpg")" /></li>
+                                <li><h2>Antonio Moreno</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/antonio.jpg")" /></li>
                             </ul>
                         </li>
                         <li>
                             C
                             <ul>
-                                <li><h2>Carine Schmitt</h2><img src="images/carine.jpg" /></li>
-                                <li><h2>Catherine Dewey</h2><img src="images/catherine.jpg" /></li>
+                                <li><h2>Carine Schmitt</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/carine.jpg")" /></li>
+                                <li><h2>Catherine Dewey</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/catherine.jpg")" /></li>
                             </ul>
                         </li>
                         <li>
                            D
                             <ul>
-                                <li><h2>Daniel Tonini</h2><img src="images/daniel.jpg" /></li>
-                                <li><h2>Diego Roel</h2><img src="images/diego.jpg" /></li>
+                                <li><h2>Daniel Tonini</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/daniel.jpg")" /></li>
+                                <li><h2>Diego Roel</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/diego.jpg")" /></li>
                             </ul>
                         </li>
                         <li>
                             E
                             <ul>
-                                <li><h2>Eduardo Saavedra</h2><img src="images/eduardo.jpg" /></li>
-                                <li><h2>Elizabeth Brown</h2><img src="images/elizabeth.jpg" /></li>
+                                <li><h2>Eduardo Saavedra</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/eduardo.jpg")" /></li>
+                                <li><h2>Elizabeth Brown</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/elizabeth.jpg")" /></li>
                             </ul>
                         </li>
                         <li>
                             F
                             <ul>
-                                <li><h2>Felipe Izquierdo</h2><img src="images/felipe.jpg" /></li>
-                                <li><h2>Fran Wilson</h2><img src="images/fran.jpg" /></li>
-                                <li><h2>Francisco Chang</h2><img src="images/francisco.jpg" /></li>
+                                <li><h2>Felipe Izquierdo</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/felipe.jpg")" /></li>
+                                <li><h2>Fran Wilson</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/fran.jpg")" /></li>
+                                <li><h2>Francisco Chang</h2><img src="@Url.Content("~/content/mobilethemebuilder/images/francisco.jpg")" /></li>
                             </ul>
                         </li>
                     </ul>
@@ -203,7 +190,7 @@
                     <ul data-role="listview" data-style="inset" data-type="group">
                         <li>
                             <ul>
-                                <li><h2>Christina <span>Berglund</span></h2><img src="images/christina.jpg" /></li>
+                                <li><h2>Christina <span>Berglund</span></h2><img src="@Url.Content("~/content/mobilethemebuilder/images/christina.jpg")" /></li>
                                 <li>Username <span class="value">christina</span></li>
                                 <li>Email <span class="value">clientservice at kendoui.com</span></li>
                             </ul>
@@ -320,16 +307,16 @@
                         background-position: center center;
                         -webkit-transform: translatez(0);
                     }
-                    .photo1 {background-image: url("images/cities/sydney.jpg");}
-                    .photo2 {background-image: url("images/cities/bonn.jpg");}
-                    .photo3 {background-image: url("images/cities/boston.jpg");}
-                    .photo4 {background-image: url("images/cities/cairo.jpg");}
-                    .photo5 {background-image: url("images/cities/cancun.jpg");}
-                    .photo6 {background-image: url("images/cities/cape-town.jpg");}
-                    .photo7 {background-image: url("images/cities/liverpool.jpg");}
-                    .photo8 {background-image: url("images/cities/london.jpg");}
-                    .photo9 {background-image: url("images/cities/melbourne.jpg");}
-                    .photo10 {background-image: url("images/cities/san-francisco.jpg");}
+                    .photo1 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/sydney.jpg")");}
+                    .photo2 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/bonn.jpg")");}
+                    .photo3 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/boston.jpg")");}
+                    .photo4 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/cairo.jpg")");}
+                    .photo5 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/cancun.jpg")");}
+                    .photo6 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/cape-town.jpg")");}
+                    .photo7 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/liverpool.jpg")");}
+                    .photo8 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/london.jpg")");}
+                    .photo9 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/melbourne.jpg")");}
+                    .photo10 {background-image: url("@Url.Content("~/content/mobilethemebuilder/images/cities/san-francisco.jpg")");}
 
                     [id^="scrollview-container"] {
                         width: 100%;
@@ -365,6 +352,6 @@
         <button id="importStyles">Import</button>
         <button id="exportStyles">Export</button>
     </div>
-    <script type="text/javascript" src="scripts/themebuilder.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/mobilethemebuilder/scripts/themebuilder.js")"></script>
 </body>
 </html>

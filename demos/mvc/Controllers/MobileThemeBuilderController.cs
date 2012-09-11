@@ -21,8 +21,8 @@ namespace Kendo.Controllers
             ViewBag.Debug = false;
 #endif
 
-            ViewBag.scripts = Kendo.Models.ScriptGroups.All;
-            ViewBag.styles = Kendo.Models.StyleGroups.All;
+            ViewBag.scripts = Kendo.Models.ScriptGroups.Mobile;
+            ViewBag.styles = Kendo.Models.StyleGroups.Mobile;
 
             return View();
         }

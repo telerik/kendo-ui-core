@@ -84,6 +84,7 @@ namespace Kendo.Models
             "kendo.userevents.js",
             "kendo.draganddrop.js",
             "kendo.touch.js",
+            "kendo.window.js",
             "kendo.mobile.popover.js",
             "kendo.mobile.view.js",
             "kendo.mobile.scroller.js",
