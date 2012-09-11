@@ -23,7 +23,7 @@
             "background-image": [ "background-image", "background-repeat", "background-position" ],
             gradient: [ "background-image" ],
             pattern: [ "background-image", "background-repeat", "background-position" ],
-            font: [ "font", "text-shadow" ]
+            font: [ "font-family", "font-size", "font-weight", "font-style", "line-height", "text-shadow" ]
         },
         tools = {
             color: new Color(),
@@ -949,6 +949,7 @@
             $(".color-holder .drop").kendoDraggable(events.color);
             $(".gradient-holder .drop").kendoDraggable(events.gradient);
             $(".pattern-holder .drop").kendoDraggable(events.pattern);
+            $(".font-holder .drop").kendoDraggable(events.font);
 
             function applyHint(element, target, pkg) {
                 var engine = target.parents(".device").data("kendoStyleEngine"), color;
@@ -1082,8 +1083,6 @@
                     });
                 }
             });
-
-//            contextMenu = $("<ul />").appendTo(document.body).kendoContextMenu().data("kendoContextMenu");
 
             $(document).on({
                 keydown: function (e) { CtrlDown = e.which == 17; },

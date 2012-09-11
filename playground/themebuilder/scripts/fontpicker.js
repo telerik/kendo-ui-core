@@ -11,6 +11,7 @@
         Class = kendo.Class,
         proxy = $.proxy,
         ACTIVE_STATE = "km-state-active",
+        fontStyles = [ "font-family", "font-size", "font-weight", "font-style", "line-height", "text-shadow" ],
 
         FontPicker = Widget.extend({
             init: function (element, options) {
@@ -24,17 +25,11 @@
                     element.addClass("k-sampler");
                 }
 
-//                that.bgimage = element.css("background-image");
-//                that.backgroundPosX = element.css("background-position-x");
-//                that.backgroundPosY = element.css("background-position-y");
-//
-//                repeat = element.css("background-repeat");
-//                that.backgroundRepeatX = repeat == "repeat" || repeat == "repeat-x";
-//                that.backgroundRepeatY = repeat == "repeat" || repeat == "repeat-y";
+                that.css = kendo.getComputedStyles(element[0], fontStyles);
 
                 that.styleengine = options.styleEngine || that.element.parents(".device").data("kendoStyleEngine");
 
-                that.popup = new ui.Popup("<div class='k-backgroundpick'></div>", {
+                that.popup = new ui.Popup("<div class='k-fontpick'></div>", {
                     anchor: element,
                     origin: "bottom center",
                     position: "top center",
@@ -42,17 +37,14 @@
                     },
                     close: function () {
                         if (that.styleengine) {
-//                            var background = { "background-image": that.bgimage };
-//                            background = that.styleengine.mixBackground(background, that.element);
-//
-//                            that.styleengine.update(that.element, background);
+                            that.styleengine.update(that.element, that.css);
                         }
                     }
                 });
 
                 popupElement = that.popup.element;
 
-                that.previewPanel = $("<div class='background-list'></div>").appendTo(popupElement);
+                that.preview = $("<div class='font-preview'><div><div>QUICK BROWN FOX JUMPS OVER THE LAZY DOG</div><div>quick brown fox jumps over the lazy dog</div><div>QUICK BROWN FOX JUMPS OVER THE LAZY DOG</div><div>quick brown fox jumps over the lazy dog</div></div></div>").appendTo(popupElement);
                 that._update();
 
                 if (!options.filter) {
@@ -66,22 +58,31 @@
                 } else {
                     $(element)
                         .on(click, options.filter, function(e) {
-                            console.log("test");
                             if (support.matchesSelector.call(e.currentTarget, options.filter)) {
-                                e.stopPropagation();
+                                e.preventDefault();
                                 that.target = $(e.currentTarget);
                                 that.popup.options.anchor = that.target;
-                                if (that.popup.element.is(":visible")) {
-                                    that.popup._position();
-                                }
-
-                                that.popup.element.off().on(click, false);
                                 that._toggle();
                             }
                         });
                 }
 
-                that.css = kendo.getComputedStyles(element[0], [ "font-family", "font-size", "text-shadow" ]);
+                that.fontFamilyValue = $('<input type="text" class="input-value" title="font-family" />')
+                                          .appendTo($('<label class="label">Font Family</label>').appendTo(popupElement).after('<br />'));
+
+                that.fontSizeValue = $('<input type="text" class="input-value" title="font-size" />')
+                                        .appendTo($('<label class="label">Size</label>').appendTo(popupElement));
+
+                that.lineHeightValue = $('<input type="text" class="input-value" title="line-height" />')
+                                        .appendTo($('<label class="label">Line-height</label>').appendTo(popupElement).after('<br />'));
+
+                that.fontWeightValue = $('<select title="font-weight"><option value="lighter">lighter</option><option value="normal">normal</option><option value="bold">bold</option><option value="bolder">bolder</option><option value="inherit">inherit</option></select>')
+                                        .appendTo($('<label class="label">Weight</label>').appendTo(popupElement)).kendoDropDownList().data("");
+
+                that.fontStyleValue = $('<select title="font-style"><option value="normal">normal</option><option value="bold">bold</option></select>')
+                                        .appendTo($('<label class="label">Style</label>').appendTo(popupElement).after('<br />')).kendoDropDownList();
+
+
 
 //                var repeatXID = kendo.guid(),
 //                    repeatYID = kendo.guid(),
@@ -138,43 +139,30 @@
                 this._toggle(false);
             },
 
-//            _updateConnected: function () {
-//                var that = this,
-//                    value = this.urlValue.val();
-//
-//                that.bgimage = value == "none" ? value : "url(" + value + ")";
-//
-//                var filter = that.options.filter,
-//                    target = !filter ? that.element : that.target,
-//                    repeatX = that.repeatXValue[0].checked,
-//                    repeatY = that.repeatYValue[0].checked,
-//                    positionX = that.positionXValue.val(),
-//                    positionY = that.positionYValue.val(),
-//                    css = {
-//                        backgroundImage: that.bgimage,
-//                        backgroundRepeat: repeatX && repeatY ? "repeat" : repeatX ? "repeat-x" : repeatY ? "repeat-y" : "no-repeat",
-//                        backgroundPosition: (/\d$/.test(positionX) ? positionX + "px" : positionX) + " " +
-//                                            (/\d$/.test(positionY) ? positionY + "px" : positionY)
-//                    };
-//
-//                that.preview.css(css);
-//                target.css(css);
-//                if (that.styleengine) {
-//                    target.attr("data-pattern", that.styleengine.createHash(JSON.stringify(kendo.getComputedStyles(target[0], [ "background-image", "background-repeat", "background-position" ]))));
-//                }
-//            },
+            _updateConnected: function () {
+                var that = this;
+
+                var filter = that.options.filter,
+                    target = !filter ? that.element : that.target;
+
+                that.preview.css(that.css);
+                target.css(that.css);
+                if (that.styleengine) {
+                    target.attr("data-font", that.styleengine.createHash(JSON.stringify(that.css)));
+                }
+            },
 
             _update: function (trigger) {
                 var that = this,
                     target = !that.options.filter ? that.element : that.target;
 
                 if (target) {
-                    that.urlValue.val(that.bgimage.replace(/url\(["']?|["']?\);?/g, ""));
-                    that.repeatXValue[0].checked = that.backgroundRepeatX;
-                    that.repeatYValue[0].checked = that.backgroundRepeatY;
-                    that.positionXValue.val(that.backgroundPosX);
-                    that.positionYValue.val(that.backgroundPosY);
-
+//                    that.urlValue.val(that.bgimage.replace(/url\(["']?|["']?\);?/g, ""));
+//                    that.repeatXValue[0].checked = that.backgroundRepeatX;
+//                    that.repeatYValue[0].checked = that.backgroundRepeatY;
+//                    that.positionXValue.val(that.backgroundPosX);
+//                    that.positionYValue.val(that.backgroundPosY);
+//
                     that._updateConnected();
 
                     if (trigger) {
@@ -206,6 +194,8 @@
                 open = open !== undefined? open : that.options.filter ? true : !that.popup.visible();
 
                 if (open) {
+                    that.css = kendo.getComputedStyles(target[0], fontStyles);
+
 //                    that.bgimage = target.css("background-image");
 //                    that.backgroundPosX = target.css("background-position-x");
 //                    that.backgroundPosY = target.css("background-position-y");
@@ -214,7 +204,7 @@
 //                    that.backgroundRepeatX = repeat == "repeat" || repeat == "repeat-x";
 //                    that.backgroundRepeatY = repeat == "repeat" || repeat == "repeat-y";
 //
-//                    that._update();
+                    that._update();
                 }
 
                 that.popup[open ? "open" : "close"]();
