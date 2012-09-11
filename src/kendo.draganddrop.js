@@ -930,6 +930,10 @@
                 if (that.hint && contains(that.hint[0], target)) {
                     that.hint.hide();
                     target = elementUnderCursor(e);
+                    // IE8 does not return the element in iframe from first attempt
+                    if (!target) {
+                        target = elementUnderCursor(e);
+                    }
                     that.hint.show();
                 }
 
