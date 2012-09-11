@@ -639,6 +639,7 @@
 
         _click: function (e) {
             var that = this, openHandle,
+                options = that.options,
                 target = $(kendo.eventTarget(e)),
                 link = target.closest("." + LINK),
                 element = target.closest(allItemsSelector),
@@ -669,13 +670,13 @@
             childGroup = element.children(groupSelector + ",.k-animation-container");
             childGroupVisible = childGroup.is(":visible");
 
-            if (that.options.closeOnClick && !isLink && (!childGroup.length || childGroupVisible)) {
+            if (options.closeOnClick && !isLink && (!childGroup.length || (options.openOnClick && childGroupVisible))) {
                 that.close(link.parentsUntil(that.element, allItemsSelector));
                 that.clicked = false;
                 return;
             }
 
-            if ((!element.parent().hasClass(MENU) || !that.options.openOnClick) && !touch) {
+            if ((!element.parent().hasClass(MENU) || !options.openOnClick) && !touch) {
                 return;
             }
 
