@@ -47,6 +47,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DropDownListBuilder BindTo(IEnumerable<DropDownListItem> dataSource)
         {
+            if (string.IsNullOrEmpty(Component.DataValueField)
+                && string.IsNullOrEmpty(Component.DataTextField))
+            {
+                DataValueField("Value");
+                DataTextField("Text");
+            }
+
             Component.DataSource.Data = dataSource;
             Component.ValueOfSelectedItem(dataSource);
 
@@ -77,13 +84,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DropDownListBuilder BindTo(IEnumerable<SelectListItem> dataSource)
         {            
-            if (string.IsNullOrEmpty(Component.DataValueField)
-                && string.IsNullOrEmpty(Component.DataTextField))
-            {                
-                DataValueField("Value");
-                DataTextField("Text");                
-            }
-
             return BindTo(dataSource.Select(item => new DropDownListItem
             {
                 Text = item.Text,
