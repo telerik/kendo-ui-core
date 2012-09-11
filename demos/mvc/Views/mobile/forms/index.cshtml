@@ -111,11 +111,13 @@
     function initForm() {
         var body = $(".km-vertical,.km-horizontal");
 
-        $("#dropdown").kendoDropDownList({
-            // The options are needed only for the desktop demo, remove them for mobile.
-            popup: { appendTo: body },
-            animation: { open: { effects: body.hasClass("km-android") ? "fadeIn" : body.hasClass("km-ios") ? "slideIn:up" : undefined } }
-        });
+        if (kendo.ui.DropDownList) {
+            $("#dropdown").kendoDropDownList({
+                // The options are needed only for the desktop demo, remove them for mobile.
+                popup: { appendTo: body },
+                animation: { open: { effects: body.hasClass("km-android") ? "fadeIn" : body.hasClass("km-ios") ? "slideIn:up" : undefined } }
+            });
+        }
     }
 </script>
 
