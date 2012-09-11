@@ -462,11 +462,11 @@
                     same(areaChart.valueAxisRanges.primary.max, 4);
                 });
 
-                test("missing points are assumed to be 0 by default", function() {
-                    equals(areaChart.points[4].value, 0);
+                test("missing points are skipped by default", function() {
+                    equals(areaChart.points[4], null);
                 });
 
-                test("ignores interpolate option", function() {
+                test("line is drawn between existing points", function() {
                     setupAreaChart(plotArea, {
                         series: [
                             $.extend({ missingValues: "interpolate" }, sparseSeries)
@@ -474,18 +474,9 @@
                         isStacked: true
                     });
 
-                    equals(areaChart.points[2].value, 0);
-                });
-
-                test("ignores gap option", function() {
-                    setupAreaChart(plotArea, {
-                        series: [
-                            $.extend({ missingValues: "gap" }, sparseSeries)
-                        ],
-                        isStacked: true
-                    });
-
-                    equals(areaChart.points[2].value, 0);
+                    same(pointCoordinates, [
+                        [ 0.5, 1 ], [ 0.5, 2 ], [ 1.5, 2 ], [ 3.5, 2 ], [ 3.5, 1 ]
+                    ]);
                 });
 
                 // ------------------------------------------------------------
