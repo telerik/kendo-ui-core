@@ -4,6 +4,7 @@
         Widget = ui.Widget,
         keys = kendo.keys,
         touch = kendo.support.touch,
+        htmlEncode = kendo.htmlEncode,
         ID = "id",
         LI = "li",
         CLICK = touch ? "touchend" : "click",
@@ -644,7 +645,7 @@
                 option += ">";
 
                 if (dataText !== undefined) {
-                    option += dataText;
+                    option += htmlEncode(dataText);
                 }
 
                 option += "</option>";
