@@ -5,7 +5,6 @@
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
-        <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
@@ -31,8 +30,6 @@
             var ImageBrowser = kendo.ui.ImageBrowser,
                 container;
 
-            QUnit.config.testTimeout = 100;
-
             function setup(options, data) {
                 data = data || [{ name: "File1", size: 42, type: "f" }, { name: "Folder1", type: "d" }];
                 options = $.extend(true, {
@@ -50,12 +47,8 @@
             module("kendo.ui.imagebrowser", {
                 setup: function() {
                     container = $("<div/>").appendTo($(document.body));
-
-                    $.mockjaxSettings.contentType = "text/json";
-                    $.mockjaxSettings.responseTime = 0;
                 },
                 teardown: function() {
-                    $.mockjaxClear();
                     container.remove();
                 }
             });
@@ -75,16 +68,7 @@
             });
 
             test("constructor calls data", 1, function() {
-                $.mockjax({
-                    url: "browse",
-                    response: function() {
-                        this.responseText = "{ }";
-                        start();
-                        ok(true);
-                    }
-                });
-                setup({ transport: { read: "browse" } });
-                stop();
+                setup({ transport: { read: function() { ok(true); } } });
             });
 
             test("listView is attached", function() {
@@ -237,24 +221,12 @@
 
 
             test("listview renders the files", 1, function() {
-                $.mockjax({
-                    url: "browse",
-                    responseText: kendo.stringify({
-                            items: [
-                                { name: "file1", type: "f", size: 42 },
-                                { name: "file2", type: "f", size: 142 }
-                            ]
-                        })
-                });
+                var browser = setup({}, [
+                    { name: "file1", type: "f", size: 42 },
+                    { name: "file2", type: "f", size: 142 }
+                ]);
 
-                var browser = setup({ transport: { read: "browse" } });
-
-                stop();
-
-                browser.listView.bind("dataBound", function() {
-                    start();
-                    equal(this.items().length, 2);
-                });
+                equal(browser.listView.element.find("li").length, 2);
             });
 
             test("css class is applied to the files if no thubnailUrl is set", 1, function() {
@@ -269,27 +241,23 @@
 
 
             test("schema is used to described custom result", function() {
-                $.mockjax({
-                    url: "browse",
-                    responseText: kendo.stringify({
-                            MyData: [
-                                { name: "file1", type: "f", size: 42 },
-                                { name: "file2", type: "f", size: 142 }
-                            ]
-                        })
-                });
-
                 var browser = setup({
-                    transport: { read: "browse" },
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                MyData: [
+                                    { name: "file1", type: "f", size: 42 },
+                                    { name: "file2", type: "f", size: 142 }
+                                ]
+                            });
+                        }
+                    },
                     schema: {
                         data: "MyData"
                     }
                 });
-                stop();
-                browser.listView.bind("dataBound", function() {
-                    start();
-                    equal(this.items().length, 2);
-                });
+
+                equal(browser.listView.element.find("li").length, 2);
             });
 
             test("model field definition is used to generate item template", function() {
