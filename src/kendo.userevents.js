@@ -228,7 +228,7 @@
 
             that._finished = true;
 
-            activeTouches.splice(activeTouches.indexOf(that), 1);
+            activeTouches.splice($.inArray(that, activeTouches), 1);
         },
 
         skip: function() {
