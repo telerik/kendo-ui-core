@@ -5564,7 +5564,7 @@
             value;
 
         while (i--) {
-            value = array[i - 1];
+            value = array[i];
             if (defined(value) && value !== null) {
                 return value;
             }

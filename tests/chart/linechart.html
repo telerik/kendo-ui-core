@@ -434,11 +434,11 @@
                     same(lineChart.valueAxisRanges.primary.max, 4);
                 });
 
-                test("missing points are assumed to be 0 by default", function() {
-                    equals(lineChart.points[4].value, 0);
+                test("missing points are skipped by default", function() {
+                    equals(lineChart.points[4], null);
                 });
 
-                test("ignores interpolate option", function() {
+                test("line is drawn between existing points", function() {
                     setupLineChart(plotArea, {
                         series: [
                             $.extend({ missingValues: "interpolate" }, sparseSeries)
@@ -446,18 +446,22 @@
                         isStacked: true
                     });
 
-                    equals(lineChart.points[2].value, 0);
+                    same(pointCoordinates, [
+                        [ 0.5, 2 ], [ 1.5, 2 ], [ 3.5, 2 ]
+                    ]);
                 });
 
-                test("ignores gap option", function() {
+                test("line stops before missing value", function() {
                     setupLineChart(plotArea, {
                         series: [
-                            $.extend({ missingValues: "gap" }, sparseSeries)
+                            sparseSeries
                         ],
                         isStacked: true
                     });
 
-                    equals(lineChart.points[2].value, 0);
+                    same(pointCoordinates, [
+                        [ 0.5, 2 ], [ 1.5, 2 ]
+                    ]);
                 });
 
                 // ------------------------------------------------------------
