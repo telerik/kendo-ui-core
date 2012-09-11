@@ -752,25 +752,6 @@
                 ok(!browser.element.find(".k-addfolder").length);
             });
 
-            test("error 404 triggers the error event", 1, function() {
-                $.mockjax({
-                    url: "browse",
-                    status: "404",
-                    response: function() {
-                        start();
-                    }
-                });
-
-                var browser = setup({
-                    transport: { read: "browse" },
-                    error: function(e) {
-                        browser._showMessage = function() {}; // suppress the alert for poping
-                        ok(true);
-                    }
-                });
-                stop();
-            });
-
         </script>
     </body>
 </html>
