@@ -1331,10 +1331,6 @@
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
 
-                if (that._editMode() !== "popup") {
-                    that._displayRow(container);
-                }
-
                 that._destroyEditable();
                 that.dataSource.sync();
             }
