@@ -60,7 +60,7 @@
             Widget.fn.init.call(that, element, options);
 
             options = that.options;
-            that.dataSource = options.dataSource;
+            that.dataSource = kendo.data.DataSource.create(options.dataSource);
             that.linkTemplate = kendo.template(that.options.linkTemplate);
             that.selectTemplate = kendo.template(that.options.selectTemplate);
 
@@ -162,6 +162,8 @@
             if (options.autoBind) {
                 that.refresh();
             }
+
+            kendo.notify(that);
         },
 
         destroy: function() {
@@ -200,6 +202,18 @@
                 next: "Go to the next page",
                 last: "Go to the last page",
                 refresh: "Refresh"
+            }
+        },
+
+        setDataSource: function(dataSource) {
+            var that = this;
+
+            that.dataSource.unbind(CHANGE, that._refreshHandler);
+            that.dataSource = that.options.dataSource = dataSource;
+            dataSource.bind(CHANGE, that._refreshHandler);
+
+            if (that.options.autoBind) {
+                dataSource.fetch();
             }
         },
 

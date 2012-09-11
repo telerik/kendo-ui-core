@@ -5,4 +5,8 @@ tests.push({
     {
         page: "pager/lint.html",
         title: "pager lint"
+    },
+    {
+        page: "pager/mvvm.html",
+        title: "pager mvvm"
     });
