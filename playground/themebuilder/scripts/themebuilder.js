@@ -313,7 +313,7 @@
                 { font: "italic 1em Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
                 { font: "0.9em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
                 { font: "1em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "", "text-shadow" : "" }
+                { font: "inherit", "text-shadow" : "default" }
             ]
         },
 
