@@ -482,7 +482,8 @@ body > label
     background: rgba(255,255,255,.5);
 }
 
-.drop.k-none:after
+.drop.k-none:after,
+.drop.k-none:hover:after
 {
     content: "NONE";
     border: 0;

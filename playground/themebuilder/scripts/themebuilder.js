@@ -45,6 +45,7 @@
         cursorSvg = fillSvg + ' 14 38, crosshair',
         defaultColor = '<circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F>',
         defaultPattern = '<circle fill="url(%23pattern)" cx="14" cy="14" r="11"%2F><pattern id="pattern" patternUnits="userSpaceOnUse" x="0" y="0" width="8" height="8"><image x="0" y="0" width="8" height="8" xlink:href="##" clip-path="url(%23clipmask)" %2F><%2Fpattern>',
+        defaultFont = '<text x="14" y="17" width="28" text-anchor="middle" fill="%23fff" style="##">Aa<%2Ftext>',
         defaultStop = '<linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="50%" y1="0" x2="50%" y2="28"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient>',
         ui = kendo.ui,
         Widget = ui.Widget,
@@ -65,23 +66,23 @@
             text: {
                 name: "Text",
                 selector: ".km-text",
-                whitelist: [ "color", "font" ],
+                whitelist: [ "color" ],
                 blacklist: ".km-android .km-tabstrip .km-text, .km-blackberry .km-tabstrip .km-text, .km-meego .km-tabstrip .km-text"
             },
             grouptitleinset: {
                 name: "Group Title Inset",
                 selector: ".km-listgroupinset .km-group-title",
-                whitelist: [ "color", "background-color", "background-image", "font" ]
+                whitelist: [ "color", "background-color", "background-image" ]
             },
             grouptitle: {
                 name: "Group Title",
                 selector: ".km-listgroup .km-group-title",
-                whitelist: [ "color", "background-color", "background-image", "font" ]
+                whitelist: [ "color", "background-color", "background-image" ]
             },
             viewtitle: {
                 name: "View Title",
                 selector: ".km-view-title",
-                whitelist: [ "color", "font" ]
+                whitelist: [ "color" ]
             },
             listitem: {
                 name: "List Item",
@@ -121,12 +122,12 @@
             switchon: {
                 name: "Switch On Label",
                 selector: ".km-switch-label-on",
-                whitelist: [ "left", "width", "height", "color", "font" ]
+                whitelist: [ "left", "width", "height", "color" ]
             },
             switchoff: {
                 name: "Switch Off Label",
                 selector: ".km-switch-label-off",
-                whitelist: [ "left", "width", "height", "color", "font" ]
+                whitelist: [ "left", "width", "height", "color" ]
             },
             switcher: {
                 name: "Switch",
@@ -162,7 +163,7 @@
             navbar: {
                 name: "NavBar",
                 selector: ".km-navbar",
-                whitelist: [ "background-color", "background-image" ],
+                whitelist: [ "background-color", "background-image", "font" ],
                 children: [ "button", "viewtitle" ]
             },
             listview: {
@@ -174,13 +175,13 @@
             content: {
                 name: "View Content",
                 selector: ".km-content",
-                whitelist: [ "color", "background-color", "background-image" ],
+                whitelist: [ "color", "background-color", "background-image", "font" ],
                 children: [ "button", "listview", "scrollview", "switch", "buttongroup" ]
             },
             tabstrip: {
                 name: "TabStrip",
                 selector: ".km-tabstrip",
-                whitelist: [ "background-color", "background-image", "border-color", "border-width", "border-style" ],
+                whitelist: [ "background-color", "background-image", "border-color", "border-width", "border-style", "font" ],
                 children: [ "button" ]
             },
             view: {
@@ -288,30 +289,30 @@
             ],
 
             font: [
-                { font: "1em/normal HelveticaNeue, Roboto, \"Myriad Pro\", \"Nokia Pure\", Arial, sans-serif", "text-shadow" : "none" },
-                { font: "1.5em/normal HelveticaNeue, Roboto, \"Myriad Pro\", \"Nokia Pure\", Arial, sans-serif", "text-shadow" : "none" },
-                { font: "2em/normal HelveticaNeue, Roboto, \"Myriad Pro\", \"Nokia Pure\", Arial, sans-serif", "text-shadow" : "none" },
-                { font: "1em/normal HelveticaNeue, Roboto, \"Myriad Pro\", \"Nokia Pure\", Arial, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "1.5em/normal HelveticaNeue, Roboto, \"Myriad Pro\", \"Nokia Pure\", Arial, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "2em/normal HelveticaNeue, Roboto, \"Myriad Pro\", \"Nokia Pure\", Arial, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "1em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "none" },
-                { font: "1.5em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "none" },
-                { font: "2em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "none" },
-                { font: "1em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "1.5em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "2em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "0.9em/normal HelveticaNeue, Roboto, 'Myriad Pro', 'Nokia Pure', Arial, sans-serif", "text-shadow" : "none" },
+                { font: "1.3em/normal HelveticaNeue, Roboto, 'Myriad Pro', 'Nokia Pure', Arial, sans-serif", "text-shadow" : "none" },
+                { font: "1.6em/normal HelveticaNeue, Roboto, 'Myriad Pro', 'Nokia Pure', Arial, sans-serif", "text-shadow" : "none" },
+                { font: "0.9em/normal HelveticaNeue, Roboto, 'Myriad Pro', 'Nokia Pure', Arial, sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "1.3em/normal HelveticaNeue, Roboto, 'Myriad Pro', 'Nokia Pure', Arial, sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "1.6em/normal HelveticaNeue, Roboto, 'Myriad Pro', 'Nokia Pure', Arial, sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "0.9em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "none" },
+                { font: "1.3em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "none" },
+                { font: "1.6em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "none" },
+                { font: "0.9em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "1.3em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "1.6em/normal Roboto, HelveticaNeue, sans-serif", "text-shadow" : "0 -1px #000" },
 
-                { font: "1em/normal \"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif", "text-shadow" : "none" },
-                { font: "1.5em/normal \"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif", "text-shadow" : "none" },
-                { font: "2em/normal \"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif", "text-shadow" : "none" },
-                { font: "1em/normal \"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "1.5em/normal \"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "2em/normal \"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "1em/normal Arial, Helvetica, sans-serif", "text-shadow" : "none" },
-                { font: "1.5em/normal Arial, Helvetica, sans-serif", "text-shadow" : "none" },
-                { font: "2em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "1em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "1.5em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "0.9em/normal 'Lucida Sans Unicode', 'Lucida Grande', sans-serif", "text-shadow" : "none" },
+                { font: "1.3em/normal 'Lucida Sans Unicode', 'Lucida Grande', sans-serif", "text-shadow" : "none" },
+                { font: "1.6em/normal 'Lucida Sans Unicode', 'Lucida Grande', sans-serif", "text-shadow" : "none" },
+                { font: "0.9em/normal 'Lucida Sans Unicode', 'Lucida Grande', sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "1.3em/normal 'Lucida Sans Unicode', 'Lucida Grande', sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "1.6em/normal 'Lucida Sans Unicode', 'Lucida Grande', sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "0.9em/normal Arial, Helvetica, sans-serif", "text-shadow" : "none" },
+                { font: "1.3em/normal Arial, Helvetica, sans-serif", "text-shadow" : "none" },
+                { font: "1.6em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "0.9em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
+                { font: "1.3em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
                 { font: "", "text-shadow" : "" }
             ]
         },
@@ -719,21 +720,21 @@
             hint: function (element) {
                 return kendo.support.touch ?
                     $("<div style='width: 28px; height: 38px'/>")
-                        .css("background-image", fillSvg.replace(defaultColor, defaultPattern.replace("##", element.css("background-image").replace(/^url\("?|"?\)$/ig, "").replace("/", "%2F")))) :
+                        .css("background-image", fillSvg.replace(defaultColor, defaultFont.replace("##", JSON.stringify(kendo.getComputedStyles(element[0], [ "font-family", "font-size", "font-weight", "font-style" ])).replace(/","/g, ";").replace(/"|{|}|'/g, "")))) :
                     undefined;
             },
             dragstart: function () {
                 var element = this.element,
-                    font = element.css("font"),
+                    font = JSON.stringify(kendo.getComputedStyles(element[0], [ "font-family", "font-size", "font-weight", "font-style" ])).replace(/","/g, ";").replace(/"|{|}|'/g, ""),
                     doc = document.documentElement;
 
                 dragging = true;
                 element.data("property", "font");
-                element.data("font", font);
+                element.data("font", element.css("font"));
 
                 $(doc).addClass("drop-override");
                 if (!kendo.support.touch) {
-                    doc.style.cssText = "cursor: " + cursorSvg.replace(defaultColor, defaultPattern.replace("##", font));
+                    doc.style.cssText = "cursor: " + cursorSvg.replace(defaultColor, defaultFont.replace("##", font));
                 }
                 addRecentItem(element, "font");
             }
@@ -759,7 +760,7 @@
             widget = widgetList[idx];
 
             if (kendo.support.matchesSelector.call(element, widget.selector) && !kendo.support.matchesSelector.call(element, widget.blacklist)) {
-                if (properties) {
+                if (properties && widget.whitelist) {
                     props = widget.whitelist.filter(function (value) { return properties.indexOf(value) !== -1 });
                     if (props.length) {
                         return kendo.deepExtend( { widget: idx, element: element, properties: props, idx: 0 }, widget );
@@ -1015,7 +1016,7 @@
                         height = target.outerHeight(),
                         widgetChildren = widgetTarget.children("div");
 
-                    if (widget) {
+                    if (widget && widget.whitelist) {
                         whitelisted = widget.whitelist.indexOf(properties[widget.idx]) != -1 ? properties[widget.idx] : false;
 
                         if (!whitelisted) {
