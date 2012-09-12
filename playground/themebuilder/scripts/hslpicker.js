@@ -8,6 +8,7 @@
     var ui = kendo.ui,
         Widget = ui.Widget,
         support = kendo.support,
+        click = support.touch ? "touchend" : "click",
         proxy = $.proxy,
         extend = $.extend,
 
@@ -31,7 +32,7 @@
 
                 if (!options.filter) {
                     $(document.body)
-                        .on(kendo.support.mouseup, ".k-color-sampler", function(e) {
+                        .on(click, ".k-color-sampler", function(e) {
                             if (e.currentTarget == element[0]) {
                                 e.preventDefault();
                                 that._toggle();
@@ -56,7 +57,7 @@
 //                    };
 
                     $(element)
-                        .on(kendo.support.mouseup, options.filter, function(e) {
+                        .on(click, options.filter, function(e) {
                             if (support.matchesSelector.call(e.currentTarget, options.filter)) {
                                 e.preventDefault();
                                 that.target = $(e.currentTarget);
@@ -72,7 +73,7 @@
                 that.colorValue = $('<input type="text" class="color-value" />').appendTo(that.colorElement);
 
                 that.colorValue
-                    .bind("input", proxy(that._change, that))
+                    .on("input", proxy(that._change, that))
                     .keydown(proxy(that._keyDown, that));
 
                 var popupElement = that.popup.element.addClass("k-list-container"),

@@ -7,6 +7,7 @@
     var ui = kendo.ui,
         Widget = ui.Widget,
         support = kendo.support,
+        click = support.touch ? "touchend" : "click",
         Class = kendo.Class,
         proxy = $.proxy,
         ACTIVE_STATE = "km-state-active",
@@ -56,7 +57,7 @@
 
                 if (!options.filter) {
                     $(document.body)
-                        .on(kendo.support.mouseup, ".k-sampler", function(e) {
+                        .on(click, ".k-sampler", function(e) {
                             if (e.currentTarget == element[0]) {
                                 e.preventDefault();
                                 that._toggle();
@@ -64,7 +65,7 @@
                         });
                 } else {
                     $(element)
-                        .on(kendo.support.mouseup, options.filter, function(e) {
+                        .on(click, options.filter, function(e) {
                             if (support.matchesSelector.call(e.currentTarget, options.filter)) {
                                 e.preventDefault();
                                 that.target = $(e.currentTarget);
