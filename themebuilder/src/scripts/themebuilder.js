@@ -26,6 +26,12 @@
                 }
             }
         },
+        safeSetter = function(expression) {
+            return function(value) {
+                // TODO: remove hard-coded expression
+                return { title: { color: value } };
+            };
+        },
         ColorPicker = ui.ComboBox.extend({
             init: function(element, options) {
                 var that = this;
@@ -243,7 +249,8 @@
 
                 var constants = that.constants = templateInfo.constants;
 
-                that.constantsHierarchy = templateInfo.constantsHierarchy;
+                that.webConstantsHierarchy = templateInfo.webConstantsHierarchy;
+                that.datavizConstantsHierarchy = templateInfo.datavizConstantsHierarchy;
 
                 if (constants) {
                     constants.infer(that.targetDocument);
@@ -266,7 +273,7 @@
                     });
                 }
 
-                $("#stylable-elements")
+                $(".stylable-elements")
                     .kendoPanelBar()
                     .find(".ktb-colorpicker").kendoColorPicker({
                         change: changeHandler
@@ -398,11 +405,18 @@
             _propertyChange: function(e) {
                 var that = this;
 
-                that.constants.update(e.name, e.value);
+                if (/^@/.test(e.name)) {
+                    // LESS constant changed
+                    that.constants.update(e.name, e.value);
 
-                that._generateTheme(function(constants, css) {
-                    that.updateStyleSheet(css);
-                });
+                    that._generateTheme(function(constants, css) {
+                        that.updateStyleSheet(css);
+                    });
+                } else {
+                    // DataViz property changed
+                    var options = safeSetter(e.name)(e.value);
+                    that.updateDataVizTheme(options);
+                }
             },
             updateStyleSheet: function(cssText) {
                 var style = $("style[title='themebuilder']")[0],
@@ -470,7 +484,7 @@
                 var that = this,
                     template = kendo.template,
                     templateOptions = { paramName: "d", useWithBlock: false },
-                    propertyGroupTemplate = template(
+                    webPropertyGroupTemplate = template(
                         "<li>#= d.title #" +
                             "<div class='styling-options'>" +
                                 "# for (var name in d.constants) {" +
@@ -479,6 +493,17 @@
                                     "<label for='#= name #'>#= d.section[name] || name #</label>" +
                                     "<input id='#= name #' class='#= d.editors[c.property] #' " +
                                            "value='#= d.processors[c.property] ? d.processors[c.property](c.value) : c.value #' />" +
+                                "# } #" +
+                            "</div>" +
+                        "</li>",
+                        templateOptions
+                    ),
+                    datavizPropertyGroupTemplate = template(
+                        "<li>#= d.title #" +
+                            "<div class='styling-options'>" +
+                                "# for (var name in d.section) { #" +
+                                    "<label for='#= name #'>#= d.section[name] || name #</label>" +
+                                    "<input id='#= name #' class='ktb-colorpicker' value='#= d.value(name) #' />" +
                                 "# } #" +
                             "</div>" +
                         "</li>",
@@ -518,8 +543,8 @@
                                  button({ id: "get-css", text: "Get CSS..." }) +
                                  button({ id: "get-less", text: "Get LESS..." }) +
                                  button({ id: "show-import", text: "Import..." }),
-                        content: "<ul id='stylable-elements'>" +
-                                    map(that.constantsHierarchy || {}, function(section, title) {
+                        content: "<ul class='stylable-elements'>" +
+                                    map(that.webConstantsHierarchy || {}, function(section, title) {
                                         var matchedConstants = {},
                                             constants = that.constants.constants;
 
@@ -527,7 +552,7 @@
                                             matchedConstants[constant] = extend({}, constants[constant]);
                                         }
 
-                                        return propertyGroupTemplate({
+                                        return webPropertyGroupTemplate({
                                             title: title,
                                             constants: matchedConstants,
                                             section: section,
@@ -535,14 +560,24 @@
                                             processors: processors
                                         });
                                     }).join("") +
-                                "</ul>"
+                                 "</ul>"
                     }) +
 
                     view({
                         id: "create-dataviz",
                         toolbar: button({ id: "back-to-suites", text: "Back" }) +
                                  button({ id: "get-json", text: "Get JSON..." }),
-                        content: "yay!"
+                        content: "<ul class='stylable-elements'>" +
+                                    map(that.datavizConstantsHierarchy || {}, function(section, title) {
+                                        return datavizPropertyGroupTemplate({
+                                            title: title,
+                                            section: section,
+                                            value: function(name) {
+                                                return "#ffffff";
+                                            }
+                                        });
+                                    }).join("") +
+                                 "</ul>"
                     }) +
 
                     view({

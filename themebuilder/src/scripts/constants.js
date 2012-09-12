@@ -50,7 +50,7 @@
                 }
             },
 
-            "@texture-url": constant(".k-header", "background-image", 
+            "@texture-url": constant(".k-header", "background-image",
                 [ { text: "flat", value: "none" } ].concat(
                     [
                         "highlight", "glass", "brushed-metal", "noise",
@@ -131,7 +131,7 @@
             "@loading-panel-color":             constant(".k-loading-color", BGCOLOR),
             "@splitbar-background-color":       constant(".k-splitbar", BGCOLOR)
         },
-        constantsHierarchy = {
+        webConstantsHierarchy = {
             "Widgets": {
                 "@widget-background-color":       "Background",
                 "@widget-border-color":           "Border color",
@@ -201,12 +201,18 @@
                 "@loading-panel-color":           "Loading panel background",
                 "@splitbar-background-color":     "Splitbar background"
             }
+        },
+        datavizConstantsHierarchy = {
+            "Title": {
+                "title.color":                    "Color"
+            }
         };
 
     window.themeBuilder = new kendo.ThemeBuilder({
         template: lessTemplate,
         constants: new kendo.LessConstants(constants),
-        constantsHierarchy: constantsHierarchy
+        webConstantsHierarchy: webConstantsHierarchy,
+        datavizConstantsHierarchy: datavizConstantsHierarchy
     });
 
     if (typeof context.kendoThemeBuilder != "undefined") {
