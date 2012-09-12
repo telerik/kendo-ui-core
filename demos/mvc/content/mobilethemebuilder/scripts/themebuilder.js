@@ -12,7 +12,7 @@
         defaultCSS = { cursor: "default", background: "", color: "", "border-color": "", font: "", "text-shadow": "" },
         browsers = [ "-webkit-", "-moz-" ],
         propertyTargets = {
-            color: [ "color", "background-color", "border-color" ],
+            color: [ "background-color", "color", "border-color" ],
             gradient: [ "background-image" ],
             pattern: [ "background-image" ],
             font: [ "font" ]
@@ -187,7 +187,7 @@
             content: {
                 name: "View Content",
                 selector: ".km-content",
-                whitelist: [ "color", "background-color", "background-image", "font" ],
+                whitelist: [ "background-color", "color", "background-image", "font" ],
                 children: [ "button", "listview", "scrollview", "switch", "buttongroup" ]
             },
             tabstrip: {
@@ -662,7 +662,7 @@
 
     kendo.ui.plugin(StyleEngine);
 
-    if (localStorage && localStorage.length) {
+    if (localStorage) {
         try {
             visibleOSes = JSON.parse(localStorage.getItem("visibility"));
             visibleOSes.forEach(function (value) {
