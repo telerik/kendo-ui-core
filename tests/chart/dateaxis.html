@@ -228,7 +228,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Hours");
+                module("Date CategoryAxis / Base unit / Minutes");
 
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
@@ -252,12 +252,55 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Hours");
+
+                test("Base unit is determined by series delta (day boundary)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 23:00:00"), new Date("2012/02/06 00:00:00")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "hours");
+                });
+
+                // ------------------------------------------------------------
                 module("Date CategoryAxis / Base unit / Days");
 
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/04"), new Date("2012/02/05")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("Base unit is determined by series delta (month boundary)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/29"), new Date("2012/03/01")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("Base unit is determined by series delta (year boundary)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2011/12/31"), new Date("2012/01/01")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("Base unit is determined by minimum series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2011/01/01"), new Date("2012/02/04"), new Date("2012/02/05")
                         ]
                     });
 
@@ -368,7 +411,7 @@
                     equals(dateAxis.options.baseUnit, "months");
                 });
 
-                test("Base unit is determined by series delta (2)", function() {
+                test("Base unit is set to months when range extends to next month end", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2011/01/31"), new Date("2011/02/28")
