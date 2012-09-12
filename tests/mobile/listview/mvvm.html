@@ -34,6 +34,10 @@
             <strong data-bind="text: foo, events:{ click: rootHandler}"></strong>
         </script>
 
+        <script id="template-with-links" type="text/x-kendo-template">
+            <a data-bind="text: foo"></a>
+        </script>
+
         <script>
             test("initializes a listview when data role is listview", function() {
                 var dom = $('<ul data-role="listview"/>');
@@ -231,6 +235,23 @@
 
                 equal(observable.calls("rootHandler"), 1);
             });
+
+            test("template with links styles the links when item changes", 2, function() {
+                var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
+
+                var observable = kendo.observable({
+                    dataSource: [ { foo: "foo" } ]
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.find("li a").is(".km-listview-link"));
+
+                observable.dataSource[0].set("foo", "bar");
+
+                ok(dom.find("li a").is(".km-listview-link"));
+            });
+
 
             test("checking a checkbox updates the view-model", function() {
                 var dom = $('<ul data-role="listview" ><li><label><input type="checkbox" data-bind="checked: foo"/>Foo</label></li></ul>');

@@ -200,6 +200,7 @@
                     ns: ui
                 });
 
+                that._style();
                 return;
             }
 
