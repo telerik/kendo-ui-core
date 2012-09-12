@@ -1,4 +1,4 @@
-﻿(function($, undefined) {
+﻿﻿(function($, undefined) {
 
     var CssColorRegExp = /(rgb|hsl)a?\(\s*(\d+)\s*,\s*(\d+%?)\s*,\s*(\d+%?)\s*,?\s*([\.\d]+?)?\s*\)/i,
         CssHexRegExp = /^#(([0-9a-f]{3})|([0-9a-f]{6}))$/i,
