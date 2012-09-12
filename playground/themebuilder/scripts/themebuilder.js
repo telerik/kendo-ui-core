@@ -1,18 +1,6 @@
 (function ($, undefined) {
 
-    if (localStorage && localStorage.length) {
-        try {
-            JSON.parse(localStorage.getItem("visibility")).forEach(function (value) {
-                document.getElementById(value).checked = "checked";
-            });
-        } catch(err) {
-            [ "iosbox", "androidbox", "blackberrybox" ].forEach(function (value) {
-                document.getElementById(value).checked = "checked";
-            });
-        }
-    }
-
-    var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu,
+    var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu, visibleOSes,
         deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
         extend = $.extend,
         each = $.each,
@@ -553,6 +541,20 @@
 
     kendo.ui.plugin(StyleEngine);
 
+    if (localStorage && localStorage.length) {
+        try {
+            visibleOSes = JSON.parse(localStorage.getItem("visibility"));
+            visibleOSes.forEach(function (value) {
+                document.getElementById(value).checked = "checked";
+            });
+        } catch(err) {
+            visibleOSes = [ "iosbox", "androidbox", "blackberrybox" ];
+            visibleOSes.forEach(function (value) {
+                document.getElementById(value).checked = "checked";
+            });
+        }
+    }
+
     extend(events, {
         gradient: extend({}, events.color, {
             hint: function (element) {
@@ -899,7 +901,7 @@
 
                     var target = $(e.dropTarget),
                         engines = $("#applyall")[0].checked ?
-                            $.map(devices, function (value) { return $("#" + value + "Device").data("kendoStyleEngine"); }) :
+                            $.map(visibleOSes, function (value) { return $("#" + value.replace("box", "Device")).data("kendoStyleEngine"); }) :
                             [ target.parents(".device").data("kendoStyleEngine") ],
                         targetSelector = engines[0].getElementSelector(target, true);
 
@@ -1014,20 +1016,23 @@
     ["color", "gradient", "pattern"].forEach(function (type) {
         i = 0;
         while (defaults[type][i]) {
-           var value = tools[type].set(defaults[type][i]).get();
-           if (value == "rgba(0,0,0,0)") { value = "none" }
-           $('<div class="drop" style="background-' + (type != "color" ? "image" : "color") + ':' + value + '" data-' + type + '="' + (type != "color" ? engineTool.createHash(value) : value) + '" />')
+            var value = tools[type].set(defaults[type][i]).get(), drop, style;
+            if (value == "rgba(0,0,0,0)") { value = "none" }
+
+            drop = $('<div class="drop" style="background-' + (type != "color" ? "image" : "color") + ':' + value + '"/>')
                     .insertBefore(".recent-" + type + "s")
                     .on(kendo.support.mouseup, function () {
                         addRecentItem(this, type);
                     });
 
-           i++;
+            style = drop.css("background" + (type == "color" ? "-color" : ""));
+            drop.attr("data-" + type, (type == "color" ? value : engineTool.createHash(style)));
 
-           if (!(i % (type != "gradient" ? 12 : 11))) {
+            i++;
+
+            if (!(i % (type != "gradient" ? 12 : 11))) {
                $("<br />").insertBefore(".recent-" + type + "s");
-           }
-
+            }
         }
 
         $("." + type + "-holder .drop:last").addClass("k-none");
@@ -1048,7 +1053,7 @@
     $(".optionsSheet input").on("change", function () {
         $("#" + this.id.replace("box", "Device")).toggleClass("hiddenOS", !this.checked);
 
-        var visible = $(this)
+        visibleOSes = $(this)
                         .parents(".optionsSheet")
                         .find("label")
                         .prev(":checked")
@@ -1058,7 +1063,7 @@
 
         if (localStorage && localStorage.length) {
             try {
-                localStorage.setItem("visibility", JSON.stringify(visible));
+                localStorage.setItem("visibility", JSON.stringify(visibleOSes));
             } catch(err) {}
         }
     });
