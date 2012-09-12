@@ -71,12 +71,12 @@
                 that.fontFamilyValue = $('<input type="text" class="input-value" title="font-family" />')
                                           .appendTo(popupElement).after('<br />');
 
-                $('<span class="label-title">Line height</span>').appendTo(popupElement);
-                that.lineHeightValue = $('<input type="text" class="input-value" title="line-height" />')
+                $('<span class="label-title">Size</span>').appendTo(popupElement);
+                that.fontSizeValue = $('<input type="text" class="input-value" title="font-size" />')
                                         .appendTo(popupElement);
 
-                $('<span class="label-title label-size">Size</span>').appendTo(popupElement);
-                that.fontSizeValue = $('<input type="text" class="input-value" title="font-size" />')
+                $('<span class="label-title label-line-height">Line height</span>').appendTo(popupElement);
+                that.lineHeightValue = $('<input type="text" class="input-value" title="line-height" />')
                                         .appendTo(popupElement).after('<br />');
 
                 $('<span class="label-title">Weight</span>').appendTo(popupElement);

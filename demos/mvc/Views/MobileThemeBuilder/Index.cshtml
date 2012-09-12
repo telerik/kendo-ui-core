@@ -27,6 +27,9 @@
     <link type="text/css" href="@Url.Content("~/content/mobilethemebuilder/styles/builder.css")" rel="stylesheet" />
 </head>
 <body class="body k-popup">
+    <script>
+        $("body").css("visibility", "hidden");
+    </script>
     <div class="header">
         theme<span>builder<span class="underTitle">Kendo UI Mobile</span></span>
     </div>
@@ -346,12 +349,12 @@
         </div>
     </div>
     <div class="files">
-        <button id="undoStyles" onclick="globalUndo()">Undo</button>
-        <button id="redoStyles" onclick="globalRedo()">Redo</button>
+        <a id="undoStyles" onclick="globalUndo()">Undo</a>
+        <a id="redoStyles" onclick="globalRedo()">Redo</a>
         <span style="display: inline-block; width: 20px;"></span>
-        <button id="resetStyles">Reset</button>
-        <button id="importStyles">Import</button>
-        <button id="exportStyles">Export</button>
+        <a id="resetStyles">Reset</a>
+        <a id="importStyles">Import</a>
+        <a id="exportStyles">Export</a>
     </div>
     <script type="text/javascript" src="@Url.Content("~/content/mobilethemebuilder/scripts/themebuilder.js")"></script>
 </body>
