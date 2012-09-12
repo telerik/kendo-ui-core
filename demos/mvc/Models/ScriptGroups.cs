@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,6 +16,7 @@ namespace Kendo.Models
             "kendo.data.xml.js",
             "kendo.model.js",
             "kendo.data.js",
+            "kendo.userevents.js",
             "kendo.draganddrop.js",
             "kendo.mobile.scroller.js",
             "kendo.popup.js",
@@ -55,6 +56,7 @@ namespace Kendo.Models
             "kendo.treeview.js",
             "kendo.upload.js",
             "kendo.window.js",
+            "kendo.imagebrowser.js",
             "kendo.editor.js"
 #else
             "http://code.jquery.com/jquery-1.7.1.min.js",
@@ -79,8 +81,10 @@ namespace Kendo.Models
             "kendo.panelbar.js",
             "kendo.popup.js",
             "kendo.history.js",
+            "kendo.userevents.js",
             "kendo.draganddrop.js",
-            "kendo.mobile.swipe.js",
+            "kendo.touch.js",
+            "kendo.window.js",
             "kendo.mobile.popover.js",
             "kendo.mobile.view.js",
             "kendo.mobile.scroller.js",

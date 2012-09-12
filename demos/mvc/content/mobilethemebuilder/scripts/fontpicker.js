@@ -79,7 +79,7 @@
                 that.fontWeightValue = $('<select title="font-weight"><option value="lighter">lighter</option><option value="normal">normal</option><option value="bold">bold</option><option value="bolder">bolder</option><option value="inherit">inherit</option></select>')
                                         .appendTo($('<label class="label">Weight</label>').appendTo(popupElement)).kendoDropDownList().data("");
 
-                that.fontStyleValue = $('<select title="font-style"><option value="normal">normal</option><option value="bold">bold</option></select>')
+                that.fontStyleValue = $('<select title="font-style"><option value="normal">normal</option><option value="italic">italic</option><option value="oblique">oblique</option><option value="inherit">inherit</option></select>')
                                         .appendTo($('<label class="label">Style</label>').appendTo(popupElement).after('<br />')).kendoDropDownList();
 
 
