@@ -3680,7 +3680,7 @@
             var chart = this,
                 segment;
 
-            chart.createLegendItem(fields);
+            chart.createLegendItem(value, fields);
 
             if (!value) {
                 return;
@@ -3692,7 +3692,7 @@
             chart.segments.push(segment);
         },
 
-        createLegendItem: function(point) {
+        createLegendItem: function(value, point) {
             var chart = this,
                 options = (chart.options.legend || {}).labels || {},
                 text, labelTemplate;
@@ -3705,7 +3705,8 @@
                         text: text,
                         series: point.series,
                         dataItem: point.dataItem,
-                        value: point.value
+                        percentage: point.percentage,
+                        value: value
                     });
                 }
 
@@ -4126,7 +4127,7 @@
             var chart = this,
                 segment;
 
-            chart.createLegendItem(fields);
+            chart.createLegendItem(value, fields);
 
             if (!value) {
                 return;
@@ -5570,7 +5571,8 @@
                     series: series,
                     padding: firstSeries.padding,
                     startAngle: firstSeries.startAngle,
-                    connectors: firstSeries.connectors
+                    connectors: firstSeries.connectors,
+                    legend: plotArea.options.legend
                 });
 
             plotArea.appendChart(donutChart);
