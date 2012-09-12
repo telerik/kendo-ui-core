@@ -1,27 +1,14 @@
 require 'rake/clean'
+require './build/merge'
 
 JS = FileList['src/kendo*.js']
         .include("src/kendo.editor.js")
+        .include("src/kendo.aspnetmvc.js")
 
 MIN_JS = JS.sub(/src\/(.+)\.js/, "dist/\\1.min.js")
 
 CLEAN.include(MIN_JS)
 
-class MergeTask < Rake::FileTask
-    def execute(args=nil)
-        File.open(name, "w") do |output|
-            puts "Merge #{prerequisites.join(',')} to #{name}"
-
-            prerequisites.each do |src|
-                output.write File.read(src)
-            end
-        end
-    end
-end
-
-def merge(*args, &block)
-    MergeTask.define_task(*args, &block)
-end
 
 directory 'dist'
 
@@ -45,6 +32,12 @@ merge "src/kendo.editor.js" => [
     "src/editor/indent.js",
     "src/editor/viewhtml.js",
     "src/editor/pendingformats.js",
+]
+
+merge "src/kendo.aspnetmvc.js" => [
+    "src/aspnetmvc/kendo.data.aspnetmvc.js",
+    "src/aspnetmvc/kendo.combobox.aspnetmvc.js",
+    "src/aspnetmvc/kendo.validator.aspnetmvc.js"
 ]
 
 desc('Create kendo.editor.js')
