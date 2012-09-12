@@ -50,11 +50,19 @@
                 }
             },
 
-            "@texture-url": constant(".k-header", "background-image", [
-                { text: "flat", value: "none" },
-                { text: "highlight", value: "url('" + cdnRoot + "styles/textures/highlight.png')" },
-                { text: "glass", value: "url('" + cdnRoot + "styles/textures/glass.png')" }
-            ]),
+            "@texture-url": constant(".k-header", "background-image", 
+                [ { text: "flat", value: "none" } ].concat(
+                    [
+                        "highlight", "glass", "brushed-metal", "noise",
+                        "dots1", "dots2", "dots3", "dots4", "dots5",
+                        "dots6", "dots7", "dots8", "dots9", "dots10",
+                        "dots11", "dots12", "dots13", "leather1", "leather2",
+                        "stripe1", "stripe2", "stripe3", "stripe4", "stripe5", "stripe6"
+                    ].map(function(x) {
+                        return { text: x, value: "url('" + cdnRoot + "styles/textures/" + x + ".png')" };
+                    }
+                )
+            )),
 
             "@widget-background-color":         constant(".k-widget", BGCOLOR),
             "@widget-border-color":             constant(".k-widget", BORDERCOLOR),
