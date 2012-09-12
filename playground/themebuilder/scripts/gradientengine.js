@@ -184,6 +184,18 @@
             return that;
         },
 
+        closestStop: function (position, index) {
+            var lastValue = { position: 10000 };
+
+            this.value[index].stops.forEach(function(value) {
+                if (Math.abs(value.position - position) < Math.abs(lastValue.position - position)) {
+                    lastValue = value;
+                }
+            });
+
+            return lastValue;
+        },
+
         _getStandardGradient: function (gradient, prefix, direction) {
             var output = "", parsed, clone = $.extend([], gradient.stops);
 

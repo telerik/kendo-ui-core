@@ -120,6 +120,13 @@ body
     box-sizing: border-box;
 }
 
+body.k-popup
+{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border: 0;
+}
+
 .drop-override *
 {
     cursor: inherit !important;

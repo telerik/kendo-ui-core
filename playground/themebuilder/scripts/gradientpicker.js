@@ -80,6 +80,7 @@
             destroy: function() {
                 var that = this;
 
+                that.parent.picker.popup.close();
                 that.point.remove();
                 that.stop = undefined;
                 Widget.fn.destroy.call(that);
@@ -244,7 +245,7 @@
 
                 element.children(".gradient-preview").css("background-image", that.gradients.get(support.transforms.css, index, "left"));
                 target.css("background-image", gradient);
-                target.attr("data-gradient", gradient);
+                target.attr("data-gradient", that.styleengine.createHash(JSON.stringify(kendo.getComputedStyles(target[0], [ "background-image", "background-repeat", "background-position" ]))));
             },
 
             _addRotators: function () {
@@ -295,15 +296,17 @@
                             .on(click, ".gradient-preview", function(e) {
                                 var element = $(this),
                                     touch = kendo.getTouches(e),
+                                    position = (touch[0].location.offsetX || touch[0].location.pageX - element.offset().left) / element.outerWidth() * 100,
+                                    closestStop = that.gradients.closestStop(position, index),
                                     newStop = {
-                                        color: new Color("#000"),
-                                        position: (touch[0].location.offsetX || touch[0].location.pageX - element.offset().left) / element.outerWidth() * 100
+                                        color: closestStop.color,
+                                        position: position
                                     };
 
                                 currentValue.stops.push(newStop);
                                 newStop.dragStop = new DragStop(this.parentNode, { parent: that, index: index }, newStop);
                                 that._updateConnected(sample, index);
-                                newStop.dragStop.point.trigger(kendo.support.mousedown, { originalEvent: { changedTouches: [] } });
+                                newStop.dragStop.point.trigger(click, { originalEvent: { changedTouches: [] } });
                             })
                             .appendTo(that.gradientCollection);
 

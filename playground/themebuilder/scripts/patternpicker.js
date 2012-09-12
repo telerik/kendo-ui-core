@@ -131,10 +131,12 @@
             },
 
             _updateConnected: function () {
-                this.bgimage = "url(" + this.urlValue.val() + ")";
-
                 var that = this,
-                    filter = that.options.filter,
+                    value = this.urlValue.val();
+
+                that.bgimage = value == "none" ? value : "url(" + value + ")";
+
+                var filter = that.options.filter,
                     target = !filter ? that.element : that.target,
                     repeatX = that.repeatXValue[0].checked,
                     repeatY = that.repeatYValue[0].checked,
@@ -150,7 +152,7 @@
                 that.preview.css(css);
                 target.css(css);
                 if (that.styleengine) {
-                    target.attr("data-pattern", that.styleengine.createHash(target.css("background")));
+                    target.attr("data-pattern", that.styleengine.createHash(JSON.stringify(kendo.getComputedStyles(target[0], [ "background-image", "background-repeat", "background-position" ]))));
                 }
             },
 
