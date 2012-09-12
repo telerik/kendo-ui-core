@@ -1102,27 +1102,37 @@
                 count = categories.length,
                 categoryIx,
                 cat,
+                diff,
+                minDiff = MAX_VALUE,
                 lastCat,
-                unit,
-                baseUnit;
+                nextDay,
+                unit;
 
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
                 cat = toDate(categories[categoryIx]);
 
-                if (cat && lastCat && (cat - lastCat > 0)) {
-                    if (cat.getFullYear() - lastCat.getFullYear() > 0) {
-                        unit = YEARS;
-                    } else if (cat.getMonth() - lastCat.getMonth() > 0) {
-                        unit = MONTHS;
-                    } else if (cat.getDate() - lastCat.getDate() > 0) {
-                        unit = DAYS;
-                    } else if (cat.getHours() - lastCat.getHours() > 0) {
-                        unit = HOURS;
-                    } else {
-                        unit = MINUTES;
-                    }
+                if (cat && lastCat) {
+                    diff = cat - lastCat;
+                    if (diff > 0) {
+                        minDiff = math.min(minDiff, diff);
 
-                    baseUnit = baseUnit || unit;
+                        if (minDiff >= TIME_PER_YEAR) {
+                            unit = YEARS;
+                        } else if (minDiff >= TIME_PER_MONTH) {
+                            unit = MONTHS;
+                        } else if (minDiff >= TIME_PER_DAY) {
+                            nextDay = addDuration(cat, 1, DAYS);
+                            if (nextDay.getMonth() !== cat.getMonth()) {
+                                unit = MONTHS;
+                            } else {
+                                unit = DAYS;
+                            }
+                        } else if (minDiff >= TIME_PER_HOUR) {
+                            unit = HOURS;
+                        } else {
+                            unit = MINUTES;
+                        }
+                    }
                 }
 
                 lastCat = cat;
@@ -1132,7 +1142,7 @@
                 delete options.baseUnit;
             }
 
-            return deepExtend({ baseUnit: baseUnit || DAYS }, options);
+            return deepExtend({ baseUnit: unit || DAYS }, options);
         },
 
         groupCategories: function(options) {
