@@ -1342,7 +1342,7 @@
             styles = {}, style;
 
         if (stylesheet[0].sheet) {
-            each(stylesheet[0].sheet.rules, function () {
+            each((stylesheet[0].sheet.rules || stylesheet[0].sheet.cssRules), function () {
                 deviceClasses.forEach(function (value) {
                     if (this.selectorText.indexOf(value) === 0) {
 
@@ -1351,7 +1351,7 @@
                             if (!style[this.selectorText]){
                                 style[this.selectorText] = {};
                             }
-                            style[this.selectorText][this.style[i]] = this.style[this.style[i]];
+                            style[this.selectorText][this.style[i]] = this.style[this.style[i]] || this.style[$.camelCase(this.style[i])];
                         }
 
                         styles[value] = extend(styles[value], style);
