@@ -115,6 +115,7 @@
         options: {
             name: "Touch",
             surface: null,
+            global: false,
             multiTouch: false,
             enableSwipe: false,
             minXDelta: 30,
