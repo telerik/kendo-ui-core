@@ -94,7 +94,9 @@
 
             $.each (prefixes, function (idx, value) {
                 target.forEach(function(gradient) {
-                    if (value == "-webkit-") {
+                    if (gradient.stops.length == 2 && gradient.stops[0].color.get() == "rgba(0,0,0,0)" && gradient.stops[1].color.get() == "rgba(0,0,0,0)") {
+                        output += "none,";
+                    } else if (value == "-webkit-") {
                         output += that._getWebKitGradient(gradient, direction);
                     } else {
                         output += that._getStandardGradient(gradient, value, direction);
