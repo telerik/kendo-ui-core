@@ -124,6 +124,17 @@
         }
     };
 
+    function addValidationRules(modelField, rules) {
+        var validation = modelField ? (modelField.validation || {}) : {},
+            rule;
+
+        for (rule in validation) {
+            if (isFunction(validation[rule])) {
+                rules[rule] = validation[rule];
+            }
+        }
+    }
+
     var Editable = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -213,26 +224,33 @@
                 fields = that.options.fields || [],
                 container = that.options.clearContainer ? that.element.empty() : that.element,
                 model = that.options.model || {},
-                rules = {};
+                rules = {},
+                field,
+                isObject,
+                fieldName,
+                modelField,
+                modelFields;
 
             if (!$.isArray(fields)) {
                 fields = [fields];
             }
 
             for (idx = 0, length = fields.length; idx < length; idx++) {
-                var field = fields[idx],
-                    isObject = isPlainObject(field),
-                    fieldName = isObject ? field.field : field,
-                    modelField = (model.fields || model)[fieldName],
-                    validation = modelField ? (modelField.validation || {}) : {};
+                 field = fields[idx];
+                 isObject = isPlainObject(field);
+                 fieldName = isObject ? field.field : field;
+                 modelField = (model.fields || model)[fieldName];
 
-                for (var rule in validation) {
-                    if (isFunction(validation[rule])) {
-                        rules[rule] = validation[rule];
-                    }
-                }
+                 addValidationRules(modelField, rules);
 
-                that.editor(field, modelField);
+                 that.editor(field, modelField);
+            }
+
+            if (!length) {
+                modelFields = model.fields || model;
+                for (fieldName in modelFields) {
+                    addValidationRules(modelFields[fieldName], rules);
+               }
             }
 
             convertToValueBinding(container);
