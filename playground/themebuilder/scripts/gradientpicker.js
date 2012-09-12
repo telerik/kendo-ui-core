@@ -39,7 +39,8 @@
                     .on(kendo.support.mousedown, function () {
                         that.select(this);
                         $(this).trigger(click, { originalEvent: { changedTouches: [] } });
-                    }).on(click, function (e) {
+                    })
+                    .on(click, function (e) {
                         if (that.stopped) {
                             e.stopImmediatePropagation();
                         }
@@ -51,6 +52,7 @@
                     global: true,
                     stopPropagation: true,
                     tap: function () {
+                        that.drag.cancel();
                         that.stopped = false;
                     },
                     start: proxy(that._start, that),
@@ -125,6 +127,7 @@
                 var that = this,
                     value = that._position(limitValue((e.touch.x.client - that.targetOffsetX), 0, that.constrain));
 
+                that.drag.cancel();
                 that.stopped = true;
                 that.element.removeClass(ACTIVE_STATE);
                 if (that.point.is(":visible")) {
@@ -150,7 +153,7 @@
 
                 that.bgcolor = new Color(element.css("background-color"));
 
-                that.styleengine = that.element.parents(".device").data("kendoStyleEngine");
+                that.styleengine = options.styleEngine || that.element.parents(".device").data("kendoStyleEngine");
 
                 that.popup = new ui.Popup("<div class='k-gradientpick'></div>", {
                     anchor: element,
@@ -214,7 +217,8 @@
             options: {
                 name: "GradientPicker",
                 filter: null,
-                toggleTarget: null
+                toggleTarget: null,
+                styleEngine: null
             },
 
             open: function (target) {
