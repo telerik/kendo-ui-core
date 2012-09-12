@@ -96,7 +96,8 @@
                 that.textShadowSizeValue = $('<input type="text" class="input-value" title="text-shadow-size" />').appendTo(popupElement);
                 that.textShadowColorValue = $('<input type="text" class="input-value" title="text-shadow-color" />').appendTo(popupElement);
 
-                popupElement.find("[title*=shadow],[title*=size],[title*=height]").keydown(proxy(that._keyDown, that));
+                popupElement.find("[title*=shadow]:not([title=text-shadow-color]),[title*=size],[title*=height]").keydown(proxy(that._keyDown, that));
+                popupElement.find("[title=text-shadow-color]").keydown(proxy(that._colorKeyDown, that));
                 popupElement.find("input[type=text]").bind("input", proxy(that._updateConnected, that));
                 popupElement.find("select").bind("change", proxy(that._updateConnected, that));
             },
@@ -126,30 +127,38 @@
                 var filter = that.options.filter,
                     target = !filter ? that.element : that.target;
 
+                that.css["font-family"] = that.fontFamilyValue.val();
+                that.css["line-height"] = that.lineHeightValue.val();
+                that.css["font-size"] = that.fontSizeValue.val();
+                that.css["font-weight"] = that.fontWeightValue.value();
+                that.css["font-style"] = that.fontStyleValue.value();
+                that.css["text-shadow"] = that.textShadowColorValue.val() + " " + that.textShadowXValue.val() + " " + that.textShadowYValue.val() + " " + that.textShadowSizeValue.val();
+
                 that.preview.css(that.css);
-                target.css(that.css);
+                target.css(that.css).removeClass("k-none");
                 if (that.styleengine) {
                     target.attr("data-font", that.styleengine.createHash(JSON.stringify(that.css)));
                 }
             },
 
             _update: function (trigger) {
-                var that = this,
+                var that = this, textShadow,
                     target = !that.options.filter ? that.element : that.target;
 
                 if (target) {
                     that.fontFamilyValue.val(that.css["font-family"]);
                     that.lineHeightValue.val(that.css["line-height"]);
                     that.fontSizeValue.val(that.css["font-size"]);
-//                    that.fontWeightValue
-//                    that.fontStyleValue
+                    that.fontWeightValue.value(that.css["font-weight"]);
+                    that.fontStyleValue.value(that.css["font-style"]);
 
-//                    that.textShadowXValue.val();
-//                    that.textShadowYValue.val();
-//                    that.textShadowSizeValue.val();
-//                    that.textShadowColorValue.val();
+                    textShadow = that.css["text-shadow"].match(/(rgba?\(.*\)|-?[\d\.]+[^\d\.\s]*)\s?/ig) || [ "rgba(0,0,0,0)", "0px", "0px", "0px" ];
+                    that.textShadowXValue.val(textShadow[1]);
+                    that.textShadowYValue.val(textShadow[2]);
+                    that.textShadowSizeValue.val(textShadow[3]);
+                    that.textShadowColorValue.val(textShadow[0]);
 
-                    that._updateConnected();
+                    that.preview.css(that.css);
 
                     if (trigger) {
                         that.trigger("pick", { color: that.color, target: target });
@@ -164,7 +173,19 @@
                     unit = value.match(/[^\d\.]*$/)[0];
 
                 if (e.which == 38 || e.which == 40) {
-                    target.val(parseFloat(value) + (e.which == 38 ? 1 : -1) + unit);
+                    value = parseFloat(value);
+                    target.val((isNaN(value) ? "" : value + (e.which == 38 ? 1 : -1)) + unit);
+                    target.trigger("input");
+                }
+            },
+
+            _colorKeyDown: function (e) {
+                var target = $(e.target),
+                    title = target.attr("title"),
+                    value = target.val();
+
+                if (e.which == 38 || e.which == 40) {
+                    target.val(tools.color.set(value)[e.which == 38 ? "tint" : "shade"]().get());
                     target.trigger("input");
                 }
             },

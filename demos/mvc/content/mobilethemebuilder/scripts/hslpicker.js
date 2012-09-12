@@ -39,23 +39,6 @@
                             }
                         });
                 } else {
-//                    that.popup._mousedown = function(e) {
-//                        var container = that.popup.element[0],
-//                            options = that.popup.options,
-//                            anchor = $(options.anchor)[0],
-//                            toggleTarget = $(that.options.toggleTarget),
-//                            target = kendo.eventTarget(e),
-//                            popup = $(target).closest(".k-popup")[0];
-//
-//                        if (popup && popup !== that.popup.element[0] ){
-//                            return;
-//                        }
-//
-//                        if (!contains(container, target) && !contains(anchor, target) && !(contains(that.element[0], target)) && !(toggleTarget && contains(toggleTarget[0], target))) {
-//                            that.popup.close();
-//                        }
-//                    };
-
                     $(element)
                         .on(click, options.filter, function(e) {
                             if (support.matchesSelector.call(e.currentTarget, options.filter)) {
@@ -135,7 +118,6 @@
                     borderColor: readable
                 });
                 that.colorElement.css("background-color", color);
-
             },
 
             _update: function (updateAttr, trigger) {
@@ -223,7 +205,8 @@
 
                 target
                     .css("background-color", textColor)
-                    .attr("data-color", textColor);
+                    .attr("data-color", textColor)
+                    .removeClass("k-none");
 
                 that._updateValues(true);
                 e.sender.valueElement.val(e.value);

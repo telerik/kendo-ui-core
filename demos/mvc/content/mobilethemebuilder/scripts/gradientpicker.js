@@ -192,17 +192,7 @@
                         });
                 }
 
-                that.popup.element
-                    .addClass("k-list-container");
-//                    .on("click", function (e) {
-//                        if (!$(e.target).closest(".k-popup").hasClass("k-gradientpick")) { return; }
-//
-//                        var popup = that.picker.popup;
-//
-//                        if (popup && !popup.element.data("animating")) {
-//                            popup.close();
-//                        }
-//                    });
+                that.popup.element.addClass("k-list-container");
 
                 that.picker = that.popup.element
                                 .kendoHSLPicker({ filter: ".stop", pick: proxy(that._pick, that) })
@@ -243,7 +233,7 @@
                     gradient = that.gradients.get(support.transforms.css);
 
                 element.children(".gradient-preview").css("background-image", that.gradients.get(support.transforms.css, index, "left"));
-                target.css("background-image", gradient);
+                target.css("background-image", gradient).removeClass("k-none");
                 target.attr("data-gradient", that.styleengine.createHash(JSON.stringify(kendo.getComputedStyles(target[0], [ "background-image", "background-repeat", "background-position" ]))));
             },
 

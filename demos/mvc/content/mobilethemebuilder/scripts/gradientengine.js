@@ -76,7 +76,7 @@
         },
 
         set: function (cssValue) {
-            cssValue = cssValue && cssValue.indexOf("gradient") != -1 ? cssValue : "linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0))";
+            cssValue = cssValue && cssValue.indexOf("gradient") != -1 ? cssValue : "linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0))";
             this.value = this.parseGradient(cssValue);
 
             return this;

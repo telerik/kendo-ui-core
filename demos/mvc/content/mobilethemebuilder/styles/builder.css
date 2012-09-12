@@ -74,6 +74,7 @@ body.k-popup
     font-size: 80%;
     margin: 100px 50px 0 15px;
     text-align: left;
+    white-space: normal;
 }
 
 .device:before
@@ -674,7 +675,7 @@ body > label
 {
     padding-bottom: 5px;
     text-align: left;
-    line-height: normal;
+    line-height: inherit;
 }
 
 .k-static-gradient .color-preview
@@ -817,9 +818,15 @@ body > label
     width: 100px;
 }
 
+.k-fontpick [title=font-size],
+.k-fontpick [title=line-height]
+{
+    width: 80px;
+}
+
 .k-fontpick .label-size
 {
-    width: 114px;
+    width: 74px;
 }
 
 .k-fontpick .label-style
