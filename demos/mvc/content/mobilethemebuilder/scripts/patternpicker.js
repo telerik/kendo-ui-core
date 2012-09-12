@@ -130,7 +130,7 @@
                 this._toggle(false);
             },
 
-            _updateConnected: function () {
+            _updateConnected: function (clean) {
                 var that = this,
                     value = this.urlValue.val();
 
@@ -151,6 +151,11 @@
 
                 that.preview.css(css);
                 target.css(css);
+
+                if (clean) {
+                    target.removeClass("k-none");
+                }
+
                 if (that.styleengine) {
                     target.attr("data-pattern", that.styleengine.createHash(JSON.stringify(kendo.getComputedStyles(target[0], [ "background-image", "background-repeat", "background-position" ]))));
                 }
@@ -167,7 +172,7 @@
                     that.positionXValue.val(that.backgroundPosX);
                     that.positionYValue.val(that.backgroundPosY);
 
-                    that._updateConnected();
+                    that._updateConnected(true);
 
                     if (trigger) {
                         that.trigger("pick", { color: that.color, target: target });

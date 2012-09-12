@@ -1326,4 +1326,6 @@
 
         importWindow.close();
     });
+
+    window.tools = tools;
 })(jQuery);
