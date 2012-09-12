@@ -89,6 +89,8 @@
 
 .k-colorpick .km-slider-handle
 {
+    width: 1.4em;
+    height: 1.4em;
     border: 1px solid #eee;
     background: linear-gradient(top,#ccc,#fff);
     background: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0,#ccc),color-stop(1,#fff));
@@ -142,20 +144,23 @@ body > label
 .input-value
 {
     display: inline-block;
-    width: 2.6em;
-    height: 1.5em;
+    width: 3.3em;
+    height: 1.75em;
     line-height: 1em;
-    border-radius: 5px;
     text-align: center;
     color: #000;
-    border: 1px solid rgba(0,0,0,.3);
-    box-shadow: 0 0 1px rgba(0,0,0,.2);
+    -webkit-appearance: none;
+    -webkit-box-sizing: border-box;
 }
 
 .color-preview
 {
     display: block;
     width: auto;
+    padding-right: 16px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .label {
@@ -186,12 +191,12 @@ body > label
 {
     position: absolute;
     z-index: 1;
-    bottom: -25px;
+    bottom: -35px;
     width: 21px;
     height: 21px;
     border-radius: 11px;
-    -webkit-box-shadow: inset -1px -1px 1px rgba(0,0,0,.3);
     box-shadow: inset -1px -1px 1px rgba(0,0,0,.3);
+    -webkit-box-shadow: inset -1px -1px 1px rgba(0,0,0,.3);
     margin-left: -10px;
 }
 
@@ -200,8 +205,8 @@ body > label
     position: absolute;
     content: "\a0";
     width: 1px;
-    height: 64px;
-    top: -64px;
+    height: 74px;
+    top: -74px;
     left: 9px;
     background: rgba(0,0,0,.6);
     background-clip: padding-box;
@@ -212,8 +217,8 @@ body > label
 .stop.k-state-selected
 {
     background-image: none;
-    -webkit-box-shadow: 0 0 0 1px #fff, inset -1px -1px 1px rgba(0,0,0,.3);
     box-shadow: 0 0 0 1px #fff, inset -1px -1px 1px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 0 0 1px #fff, inset -1px -1px 1px rgba(0,0,0,.3);
 }
 
 .stop.k-state-selected:before
@@ -286,6 +291,7 @@ body > label
     height: 136px;
     background: #d9d9d9;
     box-shadow: inset 0 1px 0 #c4c4c4, inset 0 -1px 0 #fff;
+    -webkit-box-shadow: inset 0 1px 0 #c4c4c4, inset 0 -1px 0 #fff;
     overflow: hidden;
 }
 
@@ -296,9 +302,13 @@ body > label
     font-size: 0;
     z-index: 1;
     border: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.gradient-holder
+{
+    width: 495px;
 }
 
 .holder .k-animation-container
@@ -319,6 +329,7 @@ body > label
     text-align: center;
     position: relative;
     box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2), inset 0 0 5px rgba(0,0,0,.2);
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2), inset 0 0 5px rgba(0,0,0,.2);
 }
 
 .drop:before,
@@ -360,14 +371,14 @@ body > label
     vertical-align: bottom;
     display: inline-block;
     text-align: right;
-    padding-right: 16px;
     margin-bottom: 13px;
     width: 100%;
     box-sizing: border-box;
     font-size: 12px;
 }
 
-.color-holder > .drop:hover:after
+.color-holder > .drop:hover:after,
+.drop.k-none:after
 {
     content: attr(data-color);
     display: block;
@@ -384,6 +395,11 @@ body > label
     background: rgba(255,255,255,.5);
 }
 
+.drop.k-none:after
+{
+    content: "NONE";
+}
+
 .drop:hover,
 .drop.k-state-active,
 .rotator:hover,
@@ -391,10 +407,12 @@ body > label
 {
     background-color: transparent;
     box-shadow: inset 0 0 0 1px #fff, inset 0 0 6px rgba(255,255,255,.8);
+    -webkit-box-shadow: inset 0 0 0 1px #fff, inset 0 0 6px rgba(255,255,255,.8);
 }
 
 .header
 {
+    min-width: 950px;
     padding-left: 20px;
     font-size: 24px;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
@@ -425,6 +443,7 @@ body > label
 .tools
 {
     border: 0;
+    min-width: 950px;
 }
 
 .tools .menu
@@ -476,7 +495,9 @@ body > label
 
 .box
 {
+    position: relative;
     padding: 40px;
+    min-width: 940px;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#e0e0e0), to(#fff));
     background: -moz-linear-gradient(top, #e0e0e0, #fff);
 }
@@ -488,6 +509,7 @@ body > label
     width: 100%;
     position: relative;
     box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2);
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2);
 }
 
 .recents:before
@@ -530,6 +552,11 @@ body > label
     position: absolute;
 }
 
+.k-static-gradient
+{
+    left: 495px !important;
+}
+
 .k-static-pattern,
 .k-static-gradient
 {
@@ -558,6 +585,7 @@ body > label
     padding: 0;
     border-radius: 0;
     box-shadow: none;
+    -webkit-box-shadow: none;
     border: 0;
     background: none;
     width: 100%;
@@ -587,7 +615,12 @@ body > label
     width: 100px;
     height: 90px;
     line-height: 90px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.k-gradientpick .color-preview
+{
+    padding-right: 0;
 }
 
 .k-static-gradient .color-value
@@ -638,20 +671,20 @@ body > label
 
 .k-colorpick .km-slider
 {
-    height: 1.5em;
+    height: 1.72em;
     padding: 0 .8em;
 }
 
 .k-colorpick .label
 {
-    line-height: 1.6em;
+    line-height: 1.8em;
     padding: 8px 7px 3px;
 }
 
 .k-popup .input-value
 {
     background: #d9d9d9;
-    margin: 9px 0 3px;
+    margin: 8px 0 3px;
     border: 0;
     vertical-align: middle;
     font-size: 1em;
@@ -725,6 +758,7 @@ body > label
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
     box-shadow: inset 0 1px 2px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
 }
 
@@ -853,6 +887,7 @@ body > label
 
 .files button
 {
+    margin: 0 10px;
     color: #555;
     text-transform: uppercase;
     -moz-appearance: none;
@@ -910,7 +945,8 @@ body > label
 .applyall
 {
     position: absolute;
-    margin-top: -25px;
+    top: 8px;
+    right: 56px;
 }
 
 .optionsSheet
@@ -920,11 +956,10 @@ body > label
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     z-index: 1000;
     right: 0;
-    top: 197px;
+    top: -1px;
     background: #7f7f7f;
-    -webkit-box-shadow: inset -1px 1px 3px rgba(0,0,0,.3), -1px 1px 5px rgba(0,0,0,.3);
-    -moz-box-shadow: inset -1px 1px 3px rgba(0,0,0,.3), -1px 1px 5px rgba(0,0,0,.3);
     box-shadow: inset -1px 1px 3px rgba(0,0,0,.3), -1px 1px 5px rgba(0,0,0,.3);
+    -webkit-box-shadow: inset -1px 1px 3px rgba(0,0,0,.3), -1px 1px 5px rgba(0,0,0,.3);
 }
 
 .optionsSheet .items
@@ -932,10 +967,22 @@ body > label
     position: absolute;
     top: 30px;
     right: 30px;
-    width: 80px;
+    width: 170px;
     height: 100px;
     color: #fff;
     text-shadow: 0 -1px #333;
+}
+
+.optionsSheet .item-header
+{
+    position: absolute;
+    top: -25px;
+    right: 0;
+    border-bottom: 1px solid white;
+    display: block;
+    width: 100%;
+    height: 19px;
+    box-shadow: 0 1px rgba(0, 0, 0, .2);
 }
 
 .optionsSheet .cover
@@ -956,23 +1003,27 @@ body > label
     top: 0;
     width: 20px;
     height: 20px;
+/*
     -webkit-transition: all 100ms ease-out;
     -moz-transition: all 100ms ease-out;
+*/
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAoElEQVR4Xu3UsQnCUBCHccWA9lZp7F+RCRSnELKIW9i5RtQiA2QCdwkR0kjg/Ip/IYKo5xUWFr/qPT64K25kZqF+OPgPLnBEhwtOSO6gzLFGBUOLFDFyAZM6aodnBfuI4ATNN8HxQ3AHkwHlp8EcB+zvY96oypZQo5fBG332ULqiCsZFFXw3upIOmTMIRRVb4oqZOygbtIpto65Nhumrfzeu3uIjJz9T1AAAAABJRU5ErkJggg==") no-repeat 0 100%;
 }
 
 .optionsSheet:hover .cover
 {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
 }
 
+/*
 .optionsSheet:hover .wrench
 {
     top: 3px;
     right: 3px;
 }
+*/
 
 .optionsSheet.k-state-opened .cover
 {
@@ -991,7 +1042,7 @@ input.k-checkbox
 {
     position: absolute;
     margin: 4px 0 0 0;
-    opacity: 0;
+    display: none;
 }
 
 :root label.k-checkbox
@@ -1021,6 +1072,7 @@ input.k-checkbox
     text-align: center;
     display: inline-block;
     margin: -.85em 1px 0 0;
+    overflow: hidden;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -1038,10 +1090,14 @@ input.k-checkbox
     background-clip: content-box;
     box-shadow: inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 2px #cbcbcb, inset 0 1px 3px 3px rgba(255,255,255,.7),
                 inset 0 0 0 6px #eee, inset 0 1px 2px 6px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 2px #cbcbcb, inset 0 1px 3px 3px rgba(255,255,255,.7),
+                inset 0 0 0 6px #eee, inset 0 1px 2px 6px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
 }
 
 :root .optionsSheet input.k-checkbox:checked + label.k-checkbox:before
 {
     box-shadow: inset 0 1px 2px rgba(0,0,0,.5), inset 0 0 0 2px #727272, inset 0 1px 3px 3px rgba(255,255,255,.7),
+                inset 0 0 0 6px #eee, inset 0 1px 2px 6px rgba(0,0,0,.5), 0 1px 1px rgba(255,255,255,.7);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.5), inset 0 0 0 2px #727272, inset 0 1px 3px 3px rgba(255,255,255,.7),
                 inset 0 0 0 6px #eee, inset 0 1px 2px 6px rgba(0,0,0,.5), 0 1px 1px rgba(255,255,255,.7);
 }
