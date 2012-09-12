@@ -563,13 +563,13 @@
         autoBind: false,
         dataTextField: "text",
         dataValueField: "value",
-        template: "<span style='background-color: ${ data.value }' "+
+        template: "<span style='background-color: #= data.value #' "+
                         "class='k-icon k-color-preview' " +
-                        "title='${ data.text }'></span> ",
+                        "title='#= data.text #'></span> ",
         dataSource: new kendo.data.DataSource({
             data: map(
-                "#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0," +
-                "#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000".split(","), function(x) {
+                ("#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0," +
+                 "#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000").split(","), function(x) {
                 return { text: x, value: x };
             })
         })
