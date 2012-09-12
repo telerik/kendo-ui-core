@@ -12,7 +12,7 @@
         proxy = $.proxy,
         ACTIVE_STATE = "km-state-active",
 
-        BackgroundPicker = Widget.extend({
+        FontPicker = Widget.extend({
             init: function (element, options) {
                 var that = this, popupElement, repeat;
 
@@ -34,7 +34,7 @@
 
                 that.styleengine = options.styleEngine || that.element.parents(".device").data("kendoStyleEngine");
 
-                that.popup = new ui.Popup("<div class='k-patternpick'></div>", {
+                that.popup = new ui.Popup("<div class='k-backgroundpick'></div>", {
                     anchor: element,
                     origin: "bottom center",
                     position: "top center",
@@ -50,10 +50,10 @@
                     }
                 });
 
-                popupElement = that.popup.element.addClass("k-list-container");
+                popupElement = that.popup.element;
 
-//                that.preview = $("<div class='pattern-preview'></div>").appendTo(popupElement);
-//                that._update();
+                that.previewPanel = $("<div class='background-list'></div>").appendTo(popupElement);
+                that._update();
 
                 if (!options.filter) {
                     $(document.body)
@@ -66,14 +66,22 @@
                 } else {
                     $(element)
                         .on(click, options.filter, function(e) {
+                            console.log("test");
                             if (support.matchesSelector.call(e.currentTarget, options.filter)) {
-                                e.preventDefault();
+                                e.stopPropagation();
                                 that.target = $(e.currentTarget);
                                 that.popup.options.anchor = that.target;
+                                if (that.popup.element.is(":visible")) {
+                                    that.popup._position();
+                                }
+
+                                that.popup.element.off().on(click, false);
                                 that._toggle();
                             }
                         });
                 }
+
+                that.css = kendo.getComputedStyles(element[0], [ "font-family", "font-size", "text-shadow" ]);
 
 //                var repeatXID = kendo.guid(),
 //                    repeatYID = kendo.guid(),
@@ -112,7 +120,7 @@
             },
 
             options: {
-                name: "BackgroundPicker",
+                name: "FontPicker",
                 filter: null,
                 toggleTarget: null,
                 styleEngine: null
@@ -155,26 +163,26 @@
 //                    target.attr("data-pattern", that.styleengine.createHash(JSON.stringify(kendo.getComputedStyles(target[0], [ "background-image", "background-repeat", "background-position" ]))));
 //                }
 //            },
-//
-//            _update: function (trigger) {
-//                var that = this,
-//                    target = !that.options.filter ? that.element : that.target;
-//
-//                if (target) {
-//                    that.urlValue.val(that.bgimage.replace(/url\(["']?|["']?\);?/g, ""));
-//                    that.repeatXValue[0].checked = that.backgroundRepeatX;
-//                    that.repeatYValue[0].checked = that.backgroundRepeatY;
-//                    that.positionXValue.val(that.backgroundPosX);
-//                    that.positionYValue.val(that.backgroundPosY);
-//
-//                    that._updateConnected();
-//
-//                    if (trigger) {
-//                        that.trigger("pick", { color: that.color, target: target });
-//                    }
-//                }
-//            },
-//
+
+            _update: function (trigger) {
+                var that = this,
+                    target = !that.options.filter ? that.element : that.target;
+
+                if (target) {
+                    that.urlValue.val(that.bgimage.replace(/url\(["']?|["']?\);?/g, ""));
+                    that.repeatXValue[0].checked = that.backgroundRepeatX;
+                    that.repeatYValue[0].checked = that.backgroundRepeatY;
+                    that.positionXValue.val(that.backgroundPosX);
+                    that.positionYValue.val(that.backgroundPosY);
+
+                    that._updateConnected();
+
+                    if (trigger) {
+                        that.trigger("pick", { color: that.color, target: target });
+                    }
+                }
+            },
+
 //            _keyDown: function (e) {
 //                var target = $(e.target),
 //                    title = target.attr("title"),
@@ -198,15 +206,15 @@
                 open = open !== undefined? open : that.options.filter ? true : !that.popup.visible();
 
                 if (open) {
-                    that.bgimage = target.css("background-image");
-                    that.backgroundPosX = target.css("background-position-x");
-                    that.backgroundPosY = target.css("background-position-y");
-
-                    repeat = target.css("background-repeat");
-                    that.backgroundRepeatX = repeat == "repeat" || repeat == "repeat-x";
-                    that.backgroundRepeatY = repeat == "repeat" || repeat == "repeat-y";
-
-                    that._update();
+//                    that.bgimage = target.css("background-image");
+//                    that.backgroundPosX = target.css("background-position-x");
+//                    that.backgroundPosY = target.css("background-position-y");
+//
+//                    repeat = target.css("background-repeat");
+//                    that.backgroundRepeatX = repeat == "repeat" || repeat == "repeat-x";
+//                    that.backgroundRepeatY = repeat == "repeat" || repeat == "repeat-y";
+//
+//                    that._update();
                 }
 
                 that.popup[open ? "open" : "close"]();
@@ -214,6 +222,6 @@
 
         });
 
-    ui.plugin(BackgroundPicker);
+    ui.plugin(FontPicker);
 
 })(jQuery);

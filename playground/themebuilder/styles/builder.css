@@ -364,6 +364,34 @@ body > label
     width: 495px;
 }
 
+.font-holder
+{
+    font-size: 80%;
+}
+
+.font-holder .drop:after
+{
+    color: rgba(255,255,255,.9);
+    content: "Aa";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    font: inherit;
+    line-height: inherit;
+    border: 1px solid rgba(255,255,255,.4);
+    border-width: 1px 0;
+    vertical-align: middle;
+}
+
+.font-holder .drop:after:before
+{
+    content: "\a0";
+    display: block;
+    height: 100%;
+}
+
 .holder .k-animation-container
 {
     font-size: 1em;
@@ -457,6 +485,7 @@ body > label
 .drop.k-none:after
 {
     content: "NONE";
+    border: 0;
 }
 
 .drop:hover,
@@ -597,6 +626,11 @@ body > label
 .recent-patterns:before
 {
     content: "Recent Patterns";
+}
+
+.recent-fonts:before
+{
+    content: "Recent Fonts";
 }
 
 .k-static-picker,
@@ -828,6 +862,18 @@ body > label
     margin-top: 1px;
     background: -webkit-gradient(linear,50% 0,50% 100%,from(#fff),to(#eee));
     background: -moz-linear-gradient(top, #fff, #eee);
+}
+
+.k-backgroundpick
+{
+    background: #EBEBEB;
+    border: #ddd;
+}
+
+.background-list
+{
+    width: 220px;
+    height: 200px;
 }
 
 .widgetTarget
