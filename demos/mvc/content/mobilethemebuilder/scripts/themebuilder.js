@@ -861,8 +861,8 @@
     originalToggleItemClass = kendo.mobile.ui.ListView.prototype._toggleItemActiveClass;
 
     kendo.mobile.ui.ListView.prototype._toggleItemActiveClass = function(e) {
-        if (e.type !== kendo.support.mousemove) {
-            if (e.type !== kendo.support.mouseup) {
+        if (e.type != kendo.support.mousemove && e.type != kendo.support.mousecancel) {
+            if (e.type != kendo.support.mouseup) {
                 wasActive = $(e.currentTarget).parent().hasClass("km-state-active");
                 originalToggleItemClass(e);
             } else {
@@ -873,8 +873,12 @@
         }
     };
 
+    $(".device").on("mouseenter", ".km-list > li > .km-listview-link, .km-list > li > .km-listview-label, .km-button", function(e) {
+        wasActive = $(e.currentTarget).hasClass("km-state-active") || $(e.currentTarget).parent().hasClass("km-state-active");
+    });
+
     kendo.mobile.ui.Button.prototype._removeActive = function (e) {
-        if (e.type !== kendo.support.mouseup) {
+        if (e.type !== kendo.support.mouseup && e.type != kendo.support.mousecancel) {
             wasActive = $(e.currentTarget).hasClass("km-state-active");
             $(e.target).closest(".km-button,.km-detail").addClass("km-state-active");
         } else {
