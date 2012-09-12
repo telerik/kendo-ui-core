@@ -95,6 +95,18 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "MobileThemeBuilder",
+                "mobilethemebuilder/index.html",
+                new { controller = "MobileThemeBuilder", action = "Index" }
+            );
+
+            routes.MapRoute(
+                "MobileThemeBuilderIndex",
+                "mobilethemebuilder",
+                new { controller = "MobileThemeBuilder", action = "MobileThemeBuilderIndex" }
+            );
+
+            routes.MapRoute(
                 "Default",
                 "{controller}/{action}",
                 new { controller = "Home", action = "Index" }
