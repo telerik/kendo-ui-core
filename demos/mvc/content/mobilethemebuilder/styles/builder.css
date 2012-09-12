@@ -539,8 +539,10 @@ body > label
     height: 45px;
     width: 100%;
     position: relative;
+    overflow: hidden;
     box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2);
     -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2);
+    white-space: nowrap;
 }
 
 .recents:before
