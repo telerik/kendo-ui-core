@@ -920,7 +920,13 @@
             deviceId = "#" + that + "Device",
             checkbox = $("#" + that + "box")[0];
 
-        applications[that] = new kendo.mobile.Application(deviceId, { platform: that });
+        applications[that] = new kendo.mobile.Application(deviceId, {
+            platform: that,
+            icon: {
+              "72x72" : "images/Icon-72.png",
+              "114x114" : "images/Icon@2x.png"
+            }
+        });
         engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that }).data("kendoStyleEngine");
 
         applications[that].element.toggleClass("hiddenOS", !checkbox.checked);
