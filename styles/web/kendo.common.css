@@ -32,7 +32,7 @@
 .k-numeric-wrap.k-state-hover,
 .k-draghandle
 {
-    background-repeat: repeat-x;
+    background-repeat: repeat;
     background-position: 0 center;
 }
 
@@ -45,6 +45,7 @@
 .k-state-selected,
 .k-state-highlight
 {
+    background-repeat: repeat-x;
     background-position: 0 -258px;
 }
 
