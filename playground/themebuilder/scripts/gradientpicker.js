@@ -39,11 +39,6 @@
                     .on(kendo.support.mousedown, function () {
                         that.select(this);
                         $(this).trigger(click, { originalEvent: { changedTouches: [] } });
-                    })
-                    .on(click, function (e) {
-                        if (that.stopped) {
-                            e.stopImmediatePropagation();
-                        }
                     });
 
                 that.point.data("stop", that);
