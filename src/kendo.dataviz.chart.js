@@ -1718,8 +1718,7 @@
                 categoryAxis = plotArea.categoryAxis,
                 valueAxis,
                 axisCrossingValue,
-                point,
-                stacks;
+                point;
 
             chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
                 var value = data.value;
@@ -1727,12 +1726,6 @@
                 valueAxis = chart.seriesValueAxis(currentSeries);
                 axisCrossingValue = valueAxis.options.axisCrossingValue;
                 point = chartPoints[pointIx++];
-
-                stacks = (chart._stacks || [])[categoryIx];
-                if (stacks) {
-                    stacks[0].options.isReversed = valueAxis.options.reverse;
-                    stacks[1].options.isReversed = !valueAxis.options.reverse;
-                }
 
                 if (point && point.plotValue) {
                     value = point.plotValue;
@@ -1816,7 +1809,6 @@
 
             chart._groupTotals = {};
             chart._groups = [];
-            chart._stacks = [];
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
@@ -1874,10 +1866,10 @@
                         vertical: !options.invertAxes
                     });
                     negativeStack = new StackLayout({
-                        vertical: !options.invertAxes
+                        vertical: !options.invertAxes,
+                        isReversed: true
                     });
 
-                    barChart._stacks.push([ positiveStack, negativeStack ]);
                     stackWrap.append(positiveStack, negativeStack);
                 } else {
                     positiveStack = stackWrap.children[0];
@@ -1983,6 +1975,45 @@
             }
 
             return categorySlot;
+        },
+
+        reflow: function(targetBox) {
+            var chart = this;
+
+            chart.setStacksDirection();
+
+            CategoricalChart.fn.reflow.call(chart, targetBox);
+        },
+
+        setStacksDirection: function() {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                count = categoriesCount(series),
+                clusters = chart.children,
+                categoryIx,
+                seriesIx,
+                currentSeries,
+                valueAxis,
+                seriesCount = series.length;
+
+            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
+                currentSeries = series[seriesIx];
+                valueAxis = chart.seriesValueAxis(currentSeries);
+
+                for (categoryIx = 0; categoryIx < count; categoryIx++) {
+                    var cluster = clusters[categoryIx],
+                        stackWrap = chart.getStackWrap(currentSeries, cluster),
+                        stacks = stackWrap.children,
+                        positiveStack = stacks[0],
+                        negativeStack = stacks[1];
+
+                    if (positiveStack && negativeStack) {
+                        positiveStack.options.isReversed = valueAxis.options.reverse;
+                        negativeStack.options.isReversed = !valueAxis.options.reverse;
+                    }
+                }
+            }
         },
 
         reflowCategories: function(categorySlots) {
