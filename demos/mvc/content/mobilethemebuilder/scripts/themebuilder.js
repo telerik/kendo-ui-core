@@ -1,6 +1,7 @@
 (function ($, undefined) {
 
-    var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu, visibleOSes,
+    var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false,
+        originalToggleItemClass, visibleOSes, wasActive,
         deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
         extend = $.extend, importWindow, exportWindow,
         each = $.each,
@@ -53,6 +54,11 @@
         counter = 1,
         clones = extend([], devices),
         widgetList = {
+            listitemactiveicon: {
+                name: "Active List Icon",
+                selector: ".km-state-active .km-listview-link .km-icon",
+                whitelist: [ "background-color", "background-image" ]
+            },
             activeicon: {
                 name: "Active Icon",
                 selector: ".km-state-active span.km-icon",
@@ -849,6 +855,32 @@
 
         if (!silent) {
             that.trigger("change", {url: that.current});
+        }
+    };
+
+    originalToggleItemClass = kendo.mobile.ui.ListView.prototype._toggleItemActiveClass;
+
+    kendo.mobile.ui.ListView.prototype._toggleItemActiveClass = function(e) {
+        if (e.type !== kendo.support.mousemove) {
+            if (e.type !== kendo.support.mouseup) {
+                wasActive = $(e.currentTarget).parent().hasClass("km-state-active");
+                originalToggleItemClass(e);
+            } else {
+                if (!wasActive) {
+                    originalToggleItemClass(e);
+                }
+            }
+        }
+    };
+
+    kendo.mobile.ui.Button.prototype._removeActive = function (e) {
+        if (e.type !== kendo.support.mouseup) {
+            wasActive = $(e.currentTarget).hasClass("km-state-active");
+            $(e.target).closest(".km-button,.km-detail").addClass("km-state-active");
+        } else {
+            if (!wasActive) {
+                $(e.target).closest(".km-button,.km-detail").removeClass("km-state-active");
+            }
         }
     };
 
