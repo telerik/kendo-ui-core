@@ -350,6 +350,27 @@
                 ok($.isFunction(validatable.options.rules.foo));
             });
 
+            test("custom validation rules are assign to validation instance if no fields are assigned", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    foo: function() {
+
+                                    }
+                                }
+                            }
+                        }
+                    }),
+                model = new MyModel(),
+                editable = new Editable(div, { model: model }),
+                validatable = editable.validatable,
+                input = div.find(":input");
+
+                ok($.isFunction(validatable.options.rules.foo));
+            });
+
             test("model is not updated if validation fails", function() {
                 var MyModel = Model.define({
                         fields: {
