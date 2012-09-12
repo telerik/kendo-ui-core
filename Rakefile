@@ -1,10 +1,9 @@
 require 'rake/clean'
 
+JS = FileList['src/kendo*.js']
+MIN_JS = JS.sub(/src\/(.+)\.js/, "dist/\\1.min.js")
 
-SRC = FileList['src/kendo*.js']
-OBJ = SRC.sub(/src\/(.+)\.js/, "dist/\\1.min.js")
-
-CLEAN.include(OBJ)
+CLEAN.include(MIN_JS)
 
 directory 'dist'
 
@@ -12,4 +11,6 @@ rule ".min.js" => [ lambda { |target| target.sub(/dist\/(.+)\.min\.js/, "src/\\1
     sh "uglifyjs #{t.source} > #{t.name}"
 end
 
-task :default => OBJ
+task :minify_js => MIN_JS
+
+task :default => :minify_js
