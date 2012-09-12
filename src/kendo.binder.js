@@ -122,8 +122,10 @@
 
                 // If the binding is resolved by a parent object
                 if (source && source !== that.source) {
-                    // Listen for changes in the parent object
 
+                    that.currentSource = source; // save parent object
+
+                    // Listen for changes in the parent object
                     source.unbind(CHANGE, that._change)
                           .bind(CHANGE, that._change);
                 }
@@ -135,7 +137,10 @@
         },
 
         set: function(value) {
-            this.source.set(this.path, value);
+            var that = this,
+                source = that.currentSource || that.source;
+
+            source.set(that.path, value);
         },
 
         destroy: function() {
