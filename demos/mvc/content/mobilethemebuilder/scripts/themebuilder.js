@@ -243,7 +243,7 @@
                 { "background-color": "#333" },
                 { "background-color": "#191919" },
                 { "background-color": "#000" },
-                { "background-color": "transparent" }
+                { "background-color": "none" }
             ],
 
             gradient: [
@@ -323,7 +323,7 @@
                 { font: "0.9em/normal Arial, Helvetica, sans-serif", "text-shadow" : "none" },
                 { font: "1em/normal Arial, Helvetica, sans-serif", "text-shadow" : "none" },
                 { font: "italic 1em Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "inherit", "text-shadow" : "default" }
+                { "font-family": "inherit", "font-size": "inherit", "font-weight": "inherit", "font-style": "inherit", "line-height": "inherit", "text-shadow" : "inherit" }
             ]
         },
 
@@ -965,6 +965,14 @@
                     kendo.deepExtend(css, engine.mixBackground(css, target, true, $(element).attr("data-pattern") !== undefined));
                 }
 
+                if (draggedElement.hasClass("k-none") && css["font-family"]) {
+                    packages.font.forEach(function (value) {
+                        delete css[value];
+                    });
+
+                    kendo.deepExtend(css, defaults.font[defaults.font.length - 1]);
+                }
+
                 target.css(css);
 
                 widgetTarget
@@ -1182,6 +1190,10 @@
 
             if (value["background-image"]) {
                 value["background-image"] = tools[type].set(value["background-image"]).get();
+            }
+
+            if (value["background-color"]) {
+
             }
 
             drop = $('<div class="drop"></div>')
