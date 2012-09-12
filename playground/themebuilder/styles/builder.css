@@ -1,76 +1,3 @@
-.ktb-colorpicker
-{
-    margin-bottom: 5px;
-    width: 90px;
-}
-
-.k-color-preview,
-.k-colorpicker .k-i-arrow-s
-{
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
-    margin: 1px 0 0 1px;
-}
-
-.k-color-preview,
-.k-colorpicker .k-i-arrow-s
-{
-    margin: 0;
-    border: 0;
-    background-image: none;
-}
-
-.k-color-preview
-{
-    background-image: none;
-}
-
-.k-list
-{
-    text-align: center;
-}
-
-.k-list .k-item
-{
-    width: 19px;
-    height: 19px;
-    line-height: 19px;
-    overflow: hidden;
-    display: inline-block;
-    text-align: center;
-    padding: 1px;
-    vertical-align: middle;
-}
-
-.k-list .k-state-hover,
-.k-list .k-state-focused,
-.k-list .k-state-selected
-{
-    padding: 0;
-}
-
-.k-colorpicker .k-select
-{
-    padding: 3px;
-}
-
-.k-list .k-icon
-{
-    background-image: none;
-    margin: 0;
-}
-
-.k-colorpicker .k-i-arrow-s
-{
-    margin-top: 0;
-}
-
-.k-colorpicker .k-input
-{
-    font: 12px Consolas, Courier, monospace;
-}
-
 /* Slider */
 
 .k-colorpick .km-slider-background
@@ -369,7 +296,7 @@ body > label
     font-size: 80%;
 }
 
-.font-holder .drop:before
+.font-holder .drop:not(.k-none):before
 {
     background: #999;
 }
@@ -413,7 +340,8 @@ body > label
 .rotator,
 .k-static-picker .color-preview,
 .gradient-preview,
-.pattern-preview
+.pattern-preview,
+.font-preview
 {
     width: 45px;
     height: 45px;
@@ -428,7 +356,8 @@ body > label
 .k-static-picker .color-preview:before,
 .gradient-preview:before,
 .pattern-preview:before,
-.rotator:before
+.rotator:before,
+.font-preview:before
 {
     content: "\a0";
     display: block;
@@ -658,6 +587,7 @@ body > label
     left: 495px !important;
 }
 
+.k-static-font,
 .k-static-pattern,
 .k-static-gradient
 {
@@ -675,7 +605,7 @@ body > label
 }
 
 .k-static-picker > .k-popup,
-.k-static-picker .k-animation-container > .k-popup
+.k-static-picker .k-animation-container > .k-colorpick
 {
     display: block !important;
     height: 100%;
@@ -698,7 +628,8 @@ body > label
 }
 
 .k-static-picker .color-preview,
-.k-static-picker .pattern-preview
+.k-static-picker .pattern-preview,
+.k-static-picker .font-preview
 {
     width: 160px;
     height: 135px;
@@ -709,6 +640,33 @@ body > label
     border-radius: 0;
     float: left;
     border: 0;
+}
+
+.k-static-picker .font-preview
+{
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.k-static-picker .font-preview:before
+{
+    background: #999;
+    margin: -10px 0 0 -10px;
+}
+
+.k-static-picker .font-preview > div
+{
+    height: 100%;
+    overflow: hidden;
+}
+
+.k-static-picker .font-preview > div > div
+{
+    padding-bottom: 5px;
+    text-align: left;
+    line-height: normal;
 }
 
 .k-static-gradient .color-preview
@@ -793,14 +751,17 @@ body > label
 }
 
 .k-patternpick .label,
-.k-patternpick .label-title
+.k-patternpick .label-title,
+.k-fontpick .label,
+.k-fontpick .label-title
 {
     width: auto;
     margin: 9px 0 0 5px;
     text-transform: uppercase;
 }
 
-.k-patternpick .label-title
+.k-patternpick .label-title,
+.k-fontpick .label-title
 {
     line-height: 2em;
     vertical-align: middle;
@@ -810,22 +771,30 @@ body > label
     margin-right: 3px;
 }
 
-.k-patternpick .label-y
+.k-patternpick .label-y,
+.k-fontpick .label-y
 {
     margin-left: 3.2em;
 }
 
-.k-patternpick .input-value
+.k-patternpick .input-value,
+.k-fontpick .input-value
 {
     margin: 0 5px;
     text-transform: none;
 }
 
-.k-patternpick [title=Url]
+.k-patternpick [title=Url],
+.k-fontpick [title=font-family]
 {
     width: 200px;
     text-align: left;
     padding: 0 5px;
+}
+
+.k-fontpick .k-dropdown
+{
+    width: 80px;
 }
 
 .k-patternpick [title^=position]
@@ -868,18 +837,6 @@ body > label
     margin-top: 1px;
     background: -webkit-gradient(linear,50% 0,50% 100%,from(#fff),to(#eee));
     background: -moz-linear-gradient(top, #fff, #eee);
-}
-
-.k-backgroundpick
-{
-    background: #EBEBEB;
-    border: #ddd;
-}
-
-.background-list
-{
-    width: 220px;
-    height: 200px;
 }
 
 .widgetTarget
