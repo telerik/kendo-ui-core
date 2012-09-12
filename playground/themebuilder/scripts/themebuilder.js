@@ -7,6 +7,7 @@
         dragging = false,
         globalUndoBuffer = [],
         globalRedoBuffer = [],
+        defaultCSS = { cursor: "default", background: "", color: "", "border-color": "" },
         propertyTargets = {
             color: [ "color", "background-color", "border-color" ],
             gradient: [ "background-image" ],
@@ -286,8 +287,6 @@
         widgetTarget = $("<div class='widgetTarget'><div><div /><div /></div><span /><div><span /></div></div>").appendTo(document.body),
 
         StyleEngine = Widget.extend({
-            undoBuffer: [],
-            redoBuffer: [],
             init: function (element, options) {
                 var that = this, key;
 
@@ -296,6 +295,8 @@
                 options = that.options;
 
                 that.object = {};
+                that.undoBuffer = [];
+                that.redoBuffer = [];
 
                 if (options.restoreFromStorage) {
                     if (localStorage && localStorage.length) {
@@ -316,14 +317,23 @@
                 name: "StyleEngine",
                 restoreFromStorage: false,
                 platform: "",
-                globalUndoBuffer: null,
-                globalRedoBuffer: null
+            },
+            cleanse: function() {
+                var that = this, idx;
+
+                for (idx in that.object) {
+                    if (!that.object[idx]) {
+                        delete that.object[idx];
+                    }
+                }
             },
             populate: function(styles) {
-                this.object = extend(true, this.object, styles);
+                var that = this, style;
 
-                var that = this,
-                    style = $("<style scoped>\n" + that.getCSS() + "</style>").insertAfter(that.styleElement);
+                that.object = kendo.deepExtend(that.object, styles);
+                that.cleanse();
+
+                style = $("<style scoped>\n" + that.getCSS() + "</style>").insertAfter(that.styleElement);
 
                 that.styleElement.remove();
                 that.styleElement = style;
@@ -345,44 +355,66 @@
                 element = $(element);
                 var that = this, style = {},
                     output = selector || that.getElementSelector(element),
-                    undoItem = this.undoBuffer.push({});
+                    undoItem = {};
 
-                undoItem[output] = this.object[output];
-                style[output] = extend(this.object[output], styles);
-                that.store(output, style[output]);
+                if (output) {
+                    undoItem[output] = kendo.deepExtend({}, that.object[output]);
+                    that.undoBuffer.push(undoItem);
 
-                that.populate(style);
+                    if (this.object[output]) {
+                        style[output] = kendo.deepExtend(this.object[output], styles);
+                    } else {
+                        style[output] = styles;
+                    }
+                    that.store(output, style[output]);
 
-                if (that.options.globalUndoBuffer) {
-                    that.options.globalUndoBuffer.push(that);
+                    that.populate(style);
+
+                    if (globalUndoBuffer) {
+                        globalUndoBuffer.push(that);
+                    }
                 }
             },
             undo: function() {
-                var that = this,
+                var that = this, key, redoItem = {},
                     item = that.undoBuffer.pop();
 
                 if (item) {
-                    that.redoBuffer.push(item);
-                    if (that.options.globalRedoBuffer) {
-                        that.options.globalRedoBuffer.push(that);
+                    key = Object.keys(item)[0];
+
+                    redoItem[key] = kendo.deepExtend({}, that.object[key]);
+                    that.redoBuffer.push(redoItem);
+                    if (globalRedoBuffer) {
+                        globalRedoBuffer.push(that);
                     }
 
-                    that.store(item.keys()[0], item.values()[0]);
+                    that.store(key, item[key]);
+
+                    if (!kendo.size(item[key])) {
+                        item[key] = "";
+                    }
 
                     that.populate(item);
                 }
             },
             redo: function() {
-                var that = this,
+                var that = this, key, undoItem = {},
                     item = that.redoBuffer.pop();
 
                 if (item) {
-                    that.undoBuffer.push(item);
-                    if (that.options.globalUndoBuffer) {
-                        that.options.globalUndoBuffer.push(that);
+                    key = Object.keys(item)[0];
+
+                    undoItem[key] = kendo.deepExtend({}, that.object[key]);
+                    that.undoBuffer.push(undoItem);
+                    if (globalUndoBuffer) {
+                        globalUndoBuffer.push(that);
                     }
 
-                    that.store(item.keys()[0], item.values()[0]);
+                    that.store(key, item[key]);
+
+                    if (!kendo.size(item[key])) {
+                        item[key] = "";
+                    }
 
                     that.populate(item);
                 }
@@ -558,7 +590,6 @@
         })
     });
 
-
     for (var idx in widgetList) {
         var children = widgetList[idx].children;
         if (children) {
@@ -572,7 +603,7 @@
     function matchWidget(element) {
         for(var idx in widgetList) {
             if (kendo.support.matchesSelector.call(element, widgetList[idx].selector)) {
-                return extend( { widget: idx },  widgetList[idx] );
+                return kendo.deepExtend( { widget: idx },  widgetList[idx] );
             }
         }
 
@@ -656,7 +687,7 @@
 
         if (lastEngine) {
             lastEngine.undo();
-            globalRedoBuffer.push(lastEngine);
+//            globalRedoBuffer.push(lastEngine);
         }
     }
 
@@ -665,7 +696,7 @@
 
         if (lastEngine) {
             lastEngine.redo();
-            globalUndoBuffer.push(lastEngine);
+//            globalUndoBuffer.push(lastEngine);
         }
     }
 
@@ -727,7 +758,7 @@
         var that = this.toString(),
             deviceId = "#" + that + "Device";
         applications[that] = new kendo.mobile.Application(deviceId, { platform: that });
-        engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that, globalUndoBuffer: globalUndoBuffer, globalRedoBuffer: globalRedoBuffer }).data("kendoStyleEngine");
+        engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that }).data("kendoStyleEngine");
     });
 
     pickers = {
@@ -739,9 +770,8 @@
     window.initTargets = function() {
         setTimeout(function () {
             var property = "", whitelisted = false,
-                draggedElement,
-                color = "transparent",
-                css, defaultCSS;
+                draggedElement, css,
+                color = "transparent";
 
             $(".color-holder .drop").kendoDraggable(events.color);
             $(".gradient-holder .drop").kendoDraggable(events.gradient);
@@ -758,11 +788,8 @@
                     css[whitelisted] = color;
                 }
 
-                defaultCSS = { cursor: "default" };
-                each(css, function (idx) { defaultCSS[idx] = ""; });
-
                 if (css["background-image"]) {
-                    extend(css, engine.mixBackground(css, target, true));
+                    kendo.deepExtend(css, engine.mixBackground(css, target, true));
                 }
 
                 target.css(css);
@@ -869,7 +896,7 @@
                         var currentTarget = value.element.find(targetSelector);
 
                         if (css["background-image"]) {
-                            extend(css, value.mixBackground(css, currentTarget, true));
+                            kendo.deepExtend(css, value.mixBackground(css, currentTarget, true));
                         }
 
                         value.update(currentTarget, css, ".km-" + value.options.platform + " " + targetSelector);
@@ -882,8 +909,13 @@
             $(document).on({
                 keydown: function (e) { CtrlDown = e.which == 17; },
                 keyup: function (e) {
-                    if (e.ctrlKey && (e.which == 90 || e.which == 122)) {
-                        if (e.shiftKey) {
+                    var Y = e.which == 89 || e.which == 121,
+                        Z = e.which == 90 || e.which == 122;
+
+                    if (e.ctrlKey && (Y || Z)) {
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                        if (e.shiftKey || Y) {
                             globalRedo();
                         } else {
                             globalUndo();
@@ -1086,7 +1118,7 @@
                             style[this.selectorText][this.style[i]] = this.style[this.style[i]];
                         }
 
-                        styles[value] = extend(styles[value], style);
+                        styles[value] = kendo.deepExtend(styles[value], style);
                     }
                 }, this);
             });
