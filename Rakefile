@@ -47,5 +47,11 @@ merge "src/kendo.editor.js" => [
     "src/editor/pendingformats.js",
 ]
 
+desc('Create kendo.editor.js')
+task :editor => "src/kendo.editor.js"
+
+desc('Minify the JavaScript files')
 task :minify_js => MIN_JS
+
+desc('Build all Kendo UI distributions')
 task :default => ["dist", :minify_js]
