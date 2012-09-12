@@ -56,7 +56,8 @@
             text: {
                 name: "Text",
                 selector: ".km-text",
-                whitelist: [ "color", "font-family", "font-style", "font-weight", "font-size" ]
+                whitelist: [ "color", "font-family", "font-style", "font-weight", "font-size" ],
+                blacklist: ".km-android .km-tabstrip .km-text, .km-blackberry .km-tabstrip .km-text, .km-meego .km-tabstrip .km-text"
             },
             grouptitleinset: {
                 name: "Group Title Inset",
@@ -95,13 +96,18 @@
             },
             switchhandleon: {
                 name: "Active Switch Handle",
-                selector: ".km-switch-on .km-switch-handle",
+                selector: ".km-android .km-switch-on .km-switch-handle",
+                whitelist: [ "border-color" ]
+            },
+            switchhandleoff: {
+                name: "Inactive Switch Handle",
+                selector: ".km-android .km-switch-off .km-switch-handle",
                 whitelist: [ "border-color" ]
             },
             switchhandle: {
                 name: "Switch Handle",
                 selector: ".km-switch-handle",
-                whitelist: [ "width", "height","border-color" ]
+                whitelist: [ "width", "height", "background-color", "background-image" ]
             },
             switchon: {
                 name: "Switch On Label",
@@ -267,7 +273,7 @@
                         doc = document.documentElement;
 
                     dragging = true;
-                    element.data("property", "background-color");
+                    element.data("property", "color");
                     element.data("background-color", tools.color.compress(color));
 
                     $(doc).addClass("drop-override");
@@ -572,7 +578,7 @@
                     doc = document.documentElement;
 
                 dragging = true;
-                element.data("property", "background-image");
+                element.data("property", "gradient");
                 element.data("background-image", tools.gradient.set(gradient).get());
 
                 $(doc).addClass("drop-override");
@@ -595,7 +601,7 @@
                     doc = document.documentElement;
 
                 dragging = true;
-                element.data("property", "background-image");
+                element.data("property", "pattern");
                 element.data("background-image", pattern);
 
                 $(doc).addClass("drop-override");
@@ -617,14 +623,27 @@
         }
     }
 
-    function matchWidget(element) {
+    function matchWidget(element, properties) {
+        if ($(element).hasClass("km-root")) return false;
+
+        var widget, props;
+
         for(var idx in widgetList) {
-            if (kendo.support.matchesSelector.call(element, widgetList[idx].selector)) {
-                return kendo.deepExtend( { widget: idx },  widgetList[idx] );
+            widget = widgetList[idx];
+
+            if (kendo.support.matchesSelector.call(element, widget.selector) && !kendo.support.matchesSelector.call(element, widget.blacklist)) {
+                if (properties) {
+                    props = widget.whitelist.filter(function (value) { return properties.indexOf(value) !== -1 });
+                    if (props.length) {
+                        return kendo.deepExtend( { widget: idx, element: element, properties: props }, widget );
+                    }
+                } else {
+                    return kendo.deepExtend( { widget: idx, element: element }, widget );
+                }
             }
         }
 
-        return false;
+        return matchWidget(element.parentNode, properties);
     }
 
     function getPropertySelector(property) {
@@ -789,7 +808,7 @@
     window.initTargets = function() {
         setTimeout(function () {
             var property = "", whitelisted = false,
-                draggedElement, css,
+                draggedElement, css, widget = false,
                 color = "transparent";
 
             $(".color-holder .drop").kendoDraggable(events.color);
@@ -851,50 +870,55 @@
                 dragenter: function (e) {
                     draggedElement = $(e.draggable.element);
 
-                    var target = e.dropTarget,
+                    var properties = propertyTargets[draggedElement.data("property")];
+
+                    widget = matchWidget(e.dropTarget[0], properties);
+                    properties = widget.properties;
+
+                    var target = $(widget.element),
                         offset = target.offset(),
                         height = target.outerHeight(),
-                        widgetChildren = widgetTarget.children("div"),
-                        widget = matchWidget(target[0]),
-                        property = draggedElement.data("property");
+                        widgetChildren = widgetTarget.children("div");
 
-                    whitelisted = widget.whitelist.indexOf(property) != -1 ? property : propertyTargets.color.indexOf(property) != -1 ? widget.whitelist[0] : false;
+                    if (widget) {
+                        whitelisted = widget.whitelist.indexOf(properties[0]) != -1 ? properties[0] : propertyTargets.color.indexOf(properties[0]) != -1 ? widget.whitelist[0] : false;
 
-                    if (!whitelisted) {
-                        return;
+                        if (!whitelisted) {
+                            return;
+                        }
+
+                        applyHint(draggedElement[0], target, packages[whitelisted]);
+
+                        widgetTarget
+                            .show()
+                            .css(TRANSITION, "all 100ms")
+                            .css("display");
+
+                        widgetTarget
+                            .css({
+                                top: offset.top,
+                                left: offset.left
+                            })
+                            .children("span")
+                            .text(widget.name);
+
+                        widgetChildren
+                            .width(target.outerWidth())
+                            .css(TRANSITION, "all 100ms")
+                            .last()
+                            .css("top", height)
+                            .end()
+                            .css("display");
+
+                        widgetChildren
+                            .children("div")
+                            .height(height)
+                            .css(TRANSITION, "all 100ms")
+                            .css("display");
                     }
-
-                    applyHint(draggedElement[0], target, packages[whitelisted]);
-
-                    widgetTarget
-                        .show()
-                        .css(TRANSITION, "all 100ms")
-                        .css("display");
-
-                    widgetTarget
-                        .css({
-                            top: offset.top,
-                            left: offset.left
-                        })
-                        .children("span")
-                        .text(widget.name);
-
-                    widgetChildren
-                        .width(target.outerWidth())
-                        .css(TRANSITION, "all 100ms")
-                        .last()
-                        .css("top", height)
-                        .end()
-                        .css("display");
-
-                    widgetChildren
-                        .children("div")
-                        .height(height)
-                        .css(TRANSITION, "all 100ms")
-                        .css("display");
                 },
-                dragleave: function (e) {
-                    $(e.dropTarget).css(defaultCSS);
+                dragleave: function () {
+                    $(widget.element).css(defaultCSS);
                     widgetTarget.hide();
                 },
                 drop: function (e) {
@@ -902,7 +926,7 @@
                         return;
                     }
 
-                    var target = $(e.dropTarget),
+                    var target = $(widget.element),
                         engines = $("#applyall")[0].checked ?
                             $.map(visibleOSes, function (value) { return $("#" + value.replace("box", "Device")).data("kendoStyleEngine"); }) :
                             [ target.parents(".device").data("kendoStyleEngine") ],
