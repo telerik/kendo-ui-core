@@ -1,6 +1,7 @@
 require 'rake/clean'
 
-JS = FileList['src/kendo*.js'].include("src/kendo.editor.js")
+JS = FileList['src/kendo*.js']
+        .include("src/kendo.editor.js")
 
 MIN_JS = JS.sub(/src\/(.+)\.js/, "dist/\\1.min.js")
 
@@ -28,7 +29,23 @@ rule ".min.js" => [ lambda { |target| "src/#{ File.basename(target, '.min.js') }
     sh "uglifyjs #{t.source} > #{t.name}"
 end
 
-merge "src/kendo.editor.js" => "src/editor/main.js"
+merge "src/kendo.editor.js" => [
+    "src/editor/main.js",
+    "src/editor/dom.js",
+    "src/editor/serializer.js",
+    "src/editor/range.js",
+    "src/editor/system.js",
+    "src/editor/inlineformat.js",
+    "src/editor/formatblock.js",
+    "src/editor/linebreak.js",
+    "src/editor/lists.js",
+    "src/editor/link.js",
+    "src/editor/image.js",
+    "src/editor/components.js",
+    "src/editor/indent.js",
+    "src/editor/viewhtml.js",
+    "src/editor/pendingformats.js",
+]
 
 task :minify_js => MIN_JS
 task :default => ["dist", :minify_js]
