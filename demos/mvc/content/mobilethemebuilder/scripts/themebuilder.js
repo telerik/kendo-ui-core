@@ -84,9 +84,15 @@
                 selector: ".km-view-title",
                 whitelist: [ "color" ]
             },
+            listitemactivelink: {
+                name: "Active List Link",
+                selector: ".km-state-active .km-listview-link",
+                whitelist: [ "background-color", "background-image", "border-radius", "color", "border-color" ]
+            },
             listitem: {
                 name: "List Item",
                 selector: ".km-list > li",
+                activeSelector: ".km-state-active",
                 whitelist: [ "background-color", "background-image", "border-radius", "color", "border-color" ]
             },
             scrollitem: {
