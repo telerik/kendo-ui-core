@@ -635,7 +635,7 @@
                 if (properties) {
                     props = widget.whitelist.filter(function (value) { return properties.indexOf(value) !== -1 });
                     if (props.length) {
-                        return kendo.deepExtend( { widget: idx, element: element, properties: props }, widget );
+                        return kendo.deepExtend( { widget: idx, element: element, properties: props, idx: 0 }, widget );
                     }
                 } else {
                     return kendo.deepExtend( { widget: idx, element: element }, widget );
@@ -842,26 +842,27 @@
             $(document.body).on("DOMMouseScroll mousewheel", "*", function (e) {
                 if (!dragging) { return; }
 
-                var widget = matchWidget(e.currentTarget);
-
                 if (widget) {
                     e.preventDefault();
                     e.stopImmediatePropagation();
 
-                    var property = $(draggedElement).data("property"),
-                        index = widget.whitelist.indexOf(property),
-                        target = $(e.currentTarget),
-                        newIndex = 0, maxIndex = widget.whitelist.length - 1;
+                    var properties = widget.properties,
+                        target = $(widget.element),
+                        maxIndex = properties.length - 1;
 
-                    if (index != -1) {
-                        newIndex = index + (e.originalEvent.wheelDelta / 120 || e.originalEvent.detail / 3);
-                        newIndex < 0 && (newIndex = maxIndex);
-                        newIndex > maxIndex && (newIndex = 0);
+                    widget.idx += (e.originalEvent.wheelDelta / 120 || e.originalEvent.detail / 3);
+                    widget.idx < 0 && (widget.idx = maxIndex);
+                    widget.idx > maxIndex && (widget.idx = 0);
 
-                        target.css(defaultCSS);
+                    target.css(defaultCSS);
 
-                        applyHint(draggedElement[0], target, packages[widget.whitelist[newIndex]]);
+                    whitelisted = widget.whitelist.indexOf(properties[widget.idx]) != -1 ? properties[widget.idx] : false;
+
+                    if (!whitelisted) {
+                        return;
                     }
+
+                    applyHint(draggedElement[0], target, packages[properties[widget.idx]]);
                 }
             });
 
@@ -881,7 +882,7 @@
                         widgetChildren = widgetTarget.children("div");
 
                     if (widget) {
-                        whitelisted = widget.whitelist.indexOf(properties[0]) != -1 ? properties[0] : propertyTargets.color.indexOf(properties[0]) != -1 ? widget.whitelist[0] : false;
+                        whitelisted = widget.whitelist.indexOf(properties[widget.idx]) != -1 ? properties[widget.idx] : false;
 
                         if (!whitelisted) {
                             return;
