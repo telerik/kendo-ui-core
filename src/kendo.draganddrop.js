@@ -377,7 +377,7 @@
                 idx;
 
             if (support.touch) {
-                touches = originalEvent.changedTouches;
+                touches = originalEvent ? originalEvent.changedTouches : [];
                 idx = touches.length;
 
                 while (idx) {
