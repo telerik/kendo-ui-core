@@ -127,7 +127,7 @@
         _captureGhostClick: function(e) {
             if (attrValue($(e.currentTarget), "rel") !== EXTERNAL) {
                 e.preventDefault();
-            };
+            }
         },
 
         _mouseup: function(e) {
