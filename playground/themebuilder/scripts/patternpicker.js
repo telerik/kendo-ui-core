@@ -56,17 +56,15 @@
 
                 if (!options.filter) {
                     $(document.body)
-                        .on({
-                            click: function(e) {
-                                if (e.currentTarget == element[0]) {
-                                    e.preventDefault();
-                                    that._toggle();
-                                }
+                        .on(kendo.support.mouseup, ".k-sampler", function(e) {
+                            if (e.currentTarget == element[0]) {
+                                e.preventDefault();
+                                that._toggle();
                             }
-                        }, ".k-sampler");
+                        });
                 } else {
                     $(element)
-                        .on("click", options.filter, function(e) {
+                        .on(kendo.support.mouseup, options.filter, function(e) {
                             if (support.matchesSelector.call(e.currentTarget, options.filter)) {
                                 e.preventDefault();
                                 that.target = $(e.currentTarget);

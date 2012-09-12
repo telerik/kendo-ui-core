@@ -30,8 +30,10 @@
         backgroundSplitRegExp = /\s*,\s*(?=-|url)/i,
         properties = propertyTargets.color.concat(propertyTargets.gradient, propertyTargets.pattern),
         TRANSITION = kendo.support.transitions.css + "transition",
-        fillSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="28" height="38"><linearGradient id="shadow" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:rgba(0,0,0,.3)"%2F><%2FlinearGradient><path fill="url(%23shadow)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="50%" y1="0" x2="50%" y2="28"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient><circle fill="url(%23sq)" cx="14" cy="14" r="11"%2F><pattern id="sq" patternUnits="userSpaceOnUse" x="0" y="0" width="14" height="14" patternTransform="rotate(45)"><rect fill="%23888" x="0" y="0" width="14" height="14"%2f><rect fill="%23666" x="0" y="0" width="7" height="7"%2f><rect fill="%23666" x="7" y="7" width="7" height="7"%2f></pattern><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><linearGradient id="gr1" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="100%"><stop offset=".25" stop-color="%23666"%2F><stop offset=".25" stop-opacity="0"%2F><%2FlinearGradient><linearGradient id="gr2" gradientUnits="userSpaceOnUse" x1="0" y1="100%" x2="0" y2="100%"><stop offset=".25" stop-color="%23666"%2F><stop offset=".25" stop-opacity="0"%2F><%2FlinearGradient><linearGradient id="gr3" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="100%"><stop offset=".75" stop-opacity="0"%2F><stop offset=".75" stop-color="%23666"%2F><%2FlinearGradient><linearGradient id="gr4" gradientUnits="userSpaceOnUse" x1="0" y1="100%" x2="0" y2="100%"><stop offset=".75" stop-opacity="0"%2F><stop offset=".75" stop-color="%23666"%2F><%2FlinearGradient><%2Fsvg>\')',
+        fillSvg = 'url(\'data:image/svg+xml;utf-8,<svg version="1.1" xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" xmlns:xlink="http:%2F%2Fwww.w3.org%2F1999%2Fxlink" width="28" height="38"><linearGradient id="shadow" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:rgba(0,0,0,.3)"%2F><%2FlinearGradient><path fill="url(%23shadow)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="50%" y1="0" x2="50%" y2="28"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient><circle fill="url(%23sq)" cx="14" cy="14" r="11"%2F><pattern id="sq" patternUnits="userSpaceOnUse" x="0" y="0" width="14" height="14" patternTransform="rotate(45)"><rect fill="%23888" x="0" y="0" width="14" height="14"%2f><rect fill="%23666" x="0" y="0" width="7" height="7"%2f><rect fill="%23666" x="7" y="7" width="7" height="7"%2f></pattern><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><linearGradient id="gr1" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="100%"><stop offset=".25" stop-color="%23666"%2F><stop offset=".25" stop-opacity="0"%2F><%2FlinearGradient><linearGradient id="gr2" gradientUnits="userSpaceOnUse" x1="0" y1="100%" x2="0" y2="100%"><stop offset=".25" stop-color="%23666"%2F><stop offset=".25" stop-opacity="0"%2F><%2FlinearGradient><linearGradient id="gr3" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="100%"><stop offset=".75" stop-opacity="0"%2F><stop offset=".75" stop-color="%23666"%2F><%2FlinearGradient><linearGradient id="gr4" gradientUnits="userSpaceOnUse" x1="0" y1="100%" x2="0" y2="100%"><stop offset=".75" stop-opacity="0"%2F><stop offset=".75" stop-color="%23666"%2F><%2FlinearGradient><%2Fsvg>\')',
         cursorSvg = fillSvg + ' 14 38, crosshair',
+        defaultColor = '<circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F>',
+        defaultPattern = '<circle fill="url(%23pattern)" cx="14" cy="14" r="11"%2F><pattern id="pattern" patternUnits="userSpaceOnUse" x="0" y="0" width="8" height="8"><image x="0" y="0" width="8" height="8" xlink:href="##" clip-path="url(%23clipmask)" %2F><%2Fpattern>',
         defaultStop = '<linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="50%" y1="0" x2="50%" y2="28"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient>',
         ui = kendo.ui,
         Widget = ui.Widget,
@@ -535,7 +537,7 @@
             hint: function (element) {
                 return kendo.support.touch ?
                     $("<div style='width: 28px; height: 38px'/>")
-                        .css("background-image", fillSvg.replace(defaultStop, tools.pattern.set(element.css("background-image")).get())) :
+                        .css("background-image", fillSvg.replace(defaultColor, defaultPattern.replace("##", element.css("background-image").replace(/^url\("?|"?\)$/ig, "").replace("/", "%2F")))) :
                     undefined;
             },
             dragstart: function () {
@@ -549,7 +551,7 @@
 
                 $(doc).addClass("drop-override");
                 if (!kendo.support.touch) {
-                    doc.style.cssText = "cursor: " + cursorSvg.replace(defaultStop, tools.pattern.get());
+                    doc.style.cssText = "cursor: " + cursorSvg.replace(defaultColor, defaultPattern.replace("##", pattern.replace(/^url\("?|"?\)$/ig, "")));
                 }
                 addRecentItem(element, "pattern");
             }
@@ -891,17 +893,15 @@
                 }
             });
 
-            $(".device").on({
-                click: function (e) {
-                    var target = $(e.currentTarget),
-                        width = target.outerWidth();
+            $(".device").on(kendo.support.mouseup, ".utility-active", function (e) {
+                var target = $(e.currentTarget),
+                    width = target.outerWidth();
 
-                    if (width - 20 < e.offsetX && e.offsetX < width && e.offsetY > 0 && e.offsetY < 20) {
-                        e.stopImmediatePropagation();
-                        e.preventDefault();
-                    }
+                if (width - 20 < e.offsetX && e.offsetX < width && e.offsetY > 0 && e.offsetY < 20) {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
                 }
-            }, ".utility-active");
+            });
 
         }, 200);
     };
@@ -999,14 +999,18 @@
         }
     });
 
-    $(".optionsSheet").on(kendo.support.mouseup, function () {
+    $(".optionsSheet label, .optionsSheet input").on(kendo.support.mouseup, function (e) { e.stopImmediatePropagation(); });
+
+    $(".optionsSheet").on(kendo.support.mouseup, function (e) {
+        e.preventDefault();
+
         $(".optionsSheet .items")
             .css("z-index", "");
 
         $(".optionsSheet .cover")
             .one(kendo.support.transitions.event, function () {
                 if ($(this).parent().hasClass("k-state-opened")) {
-                    $(".optionsSheet .items").css("z-index", 1);
+                    $(".optionsSheet .items").css("z-index", 10);
                 }
             }).css("overflow");
 

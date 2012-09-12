@@ -550,6 +550,7 @@ body > label
     height: 100% !important;
     display: none;
     position: absolute;
+    -webkit-backface-visibility: hidden;
 }
 
 .k-static-gradient
@@ -947,6 +948,7 @@ body > label
     position: absolute;
     top: 8px;
     right: 56px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .optionsSheet

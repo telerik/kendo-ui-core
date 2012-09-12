@@ -33,8 +33,8 @@
                 that.point
                     .on(kendo.support.mousedown, function () {
                         that.select(this);
-                        $(this).trigger("click");
-                    }).on("click", function (e) {
+                        $(this).trigger(kendo.support.mouseup);
+                    }).on(kendo.support.mouseup, function (e) {
                         if (that.stopped) {
                             e.stopImmediatePropagation();
                         }
@@ -147,17 +147,15 @@
 
                 if (!options.filter) {
                     $(document.body)
-                        .on({
-                            click: function(e) {
-                                if (e.currentTarget == element[0]) {
-                                    e.preventDefault();
-                                    that._toggle();
-                                }
+                        .on(kendo.support.mouseup, ".k-sampler", function(e) {
+                            if (e.currentTarget == element[0]) {
+                                e.preventDefault();
+                                that._toggle();
                             }
-                        }, ".k-sampler");
+                        });
                 } else {
                     $(element)
-                        .on("click", options.filter, function(e) {
+                        .on(kendo.support.mouseup, options.filter, function(e) {
                             if (support.matchesSelector.call(e.currentTarget, options.filter)) {
                                 e.preventDefault();
                                 that.target = $(e.currentTarget);
@@ -228,7 +226,7 @@
                     $("<div class='rotator' style='background-image: " + rotatorGradient.setAngle(0, value).get() + "' title='" + value + "' />").appendTo(that.popup.element);
                 });
 
-                that.popup.element.on("click", ".rotator", function (e) {
+                that.popup.element.on(kendo.support.mouseup, ".rotator", function (e) {
                     var dragStop = that.gradients.value[0].stops[0].dragStop;
 
                     that.gradients.setAngle(0, e.currentTarget.title);
@@ -266,12 +264,12 @@
                                 backgroundImage: that.gradients.get(support.transforms.css, index, "left")
                             })
                             .end()
-                            .on("click", ".gradient-preview", function(e) {
+                            .on(kendo.support.mouseup, ".gradient-preview", function(e) {
                                 var newStop = { color: new Color("#000"), position: (e.offsetX || e.originalEvent.layerX) / $(this).outerWidth() * 100 };
                                 currentValue.stops.push(newStop);
                                 newStop.dragStop = new DragStop(sample, newStop, that, index);
                                 that._updateConnected(sample, index);
-                                newStop.dragStop.point.trigger("click");
+                                newStop.dragStop.point.trigger(kendo.support.mouseup);
                             })
                             .appendTo(that.gradientCollection);
 
