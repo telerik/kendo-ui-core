@@ -34,22 +34,6 @@
         whitespaceRegExp = /^\s+$/,
         buttonRegExp = /button/;
 
-    function toggleItemActiveClass(e) {
-        if (e.which > 1) {
-            return;
-        }
-
-        var clicked = $(e.currentTarget),
-            item = clicked.parent(),
-            role = attrValue(clicked, "role") || "",
-            plainItem = (!role.match(buttonRegExp)),
-            prevented = e.isDefaultPrevented();
-
-        if (plainItem) {
-            item.toggleClass(ACTIVE_CLASS, e.type === MOUSEDOWN && !prevented);
-        }
-    }
-
     function whitespace() {
         return this.nodeType === Node.TEXT_NODE && this.nodeValue.match(whitespaceRegExp);
     }
@@ -102,7 +86,7 @@
             options = that.options;
 
             that.element
-                .on([MOUSEDOWN_NS, MOUSEUP_NS, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, toggleItemActiveClass)
+                .on([MOUSEDOWN_NS, MOUSEUP_NS, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, that._toggleItemActiveClass)
                 .on(MOUSEUP_NS, ".km-listview-label", function (e) {
                     // on touch devices clicking a label will not check the inner input
                     if (kendo.support.touch) {
@@ -322,6 +306,22 @@
 
                that.trigger(LAST_PAGE_REACHED);
            }
+        },
+
+        _toggleItemActiveClass: function(e) {
+            if (e.which > 1) {
+                return;
+            }
+
+            var clicked = $(e.currentTarget),
+                item = clicked.parent(),
+                role = attrValue(clicked, "role") || "",
+                plainItem = (!role.match(buttonRegExp)),
+                prevented = e.isDefaultPrevented();
+
+            if (plainItem) {
+                item.toggleClass(ACTIVE_CLASS, e.type === MOUSEDOWN && !prevented);
+            }
         },
 
         _unbindDataSource: function() {
