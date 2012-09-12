@@ -2,7 +2,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
     (function ($, undefined) {
 
         var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false,
-            originalToggleItemClass, visibleOSes, wasActive,
+            originalToggleItemClass, visibleOSes, wasActive, helpRead,
             deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
             extend = $.extend, importWindow, exportWindow,
             each = $.each,
@@ -665,6 +665,18 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
 
         if (localStorage) {
             try {
+                helpRead = localStorage.getItem("helpRead");
+
+                if (!helpRead) {
+                    var help = $("<div class='help'><div><div class='closeHelp'></div></div></div>").appendTo(document.body);
+                    $(".closeHelp").on(click, function () {
+                        try {
+                            localStorage.setItem("helpRead", true);
+                            help.remove();
+                        } catch(err) {}
+                    });
+                }
+
                 visibleOSes = JSON.parse(localStorage.getItem("visibility"));
                 visibleOSes.forEach(function (value) {
                     document.getElementById(value).checked = "checked";
