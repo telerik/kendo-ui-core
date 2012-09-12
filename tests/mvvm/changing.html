@@ -725,7 +725,7 @@
             });
 
             test("value binding sets a field which is initially undefined", function() {
-                var viewModel = kendo.observable({});
+                var viewModel = kendo.observable({ });
 
                 var dom = $('<input data-bind="value: foo">');
 
@@ -747,6 +747,37 @@
                 viewModel.set("root", "bar");
                 equal(dom.find("li").text(), viewModel.root);
             });
+
+            test("tracks changes of element bound to parent field within a child template", function() {
+                var dom = $('<div><span data-bind="text:root"/><ul data-bind="source: items" data-template="ul-input-template"></ul></div>');
+
+                var viewModel = kendo.observable({
+                    root: "foo",
+                    items: [ { bar: "baz" } ]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("input").val("moo").change();
+
+                equal(dom.find("span").text(), "moo");
+            });
+
+            test("tracks changes of element bound to parent nested field within a child template", function() {
+                var dom = $('<div><span data-bind="text:root.child"/><ul data-bind="source: items" data-template="ul-input-child-template"></ul></div>');
+
+                var viewModel = kendo.observable({
+                    root: { child: "foo" },
+                    items: [ { bar: "baz" } ]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("input").val("moo").change();
+
+                equal(dom.find("span").text(), "moo");
+            });
+
 
             test("event handlers are detached when the binding is changed", function() {
                 var observable = kendo.observable({
@@ -780,6 +811,14 @@
 
         <script id="ul-template" type="text/x-kendo-template">
             <li data-bind="text:root"></li>
+        </script>
+
+        <script id="ul-input-template" type="text/x-kendo-template">
+            <li><input data-bind="value:root"/></li>
+        </script>
+
+        <script id="ul-input-child-template" type="text/x-kendo-template">
+            <li><input data-bind="value:root.child"/></li>
         </script>
 
         <script id="simple-field-template" type="text/x-kendo-template">
