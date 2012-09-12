@@ -18,6 +18,8 @@
         WIDGET_RELS = /popover|actionsheet|modalview/,
         BACK = "#:back",
 
+        proxy = $.proxy,
+
         attrValue = kendo.attrValue,
         // navigation element roles
         buttonRoles = "button backbutton detailbutton listview-link",
@@ -112,14 +114,20 @@
 
         _setupAppLinks: function() {
             var that = this,
-                mouseup = $.proxy(that._mouseup, that);
+                mouseup = proxy(that, "_mouseup");
 
             that.element
                 .on(MOUSEDOWN, roleSelector(linkRoles), mouseup)
                 .on(MOUSEUP, roleSelector(buttonRoles), mouseup)
                 .on(CLICK, roleSelector(linkRoles + " " + buttonRoles), appLinkClick)
-                .on(TOUCHSTART, roleSelector(buttonRoles), false) // Bust the ghost click
+                .on(TOUCHSTART, roleSelector(buttonRoles), proxy(that, "_captureGhostClick"))
                 .on(TOUCHSTART, ".km-popup .k-item", false); // Prevent ghost clicks in DropDownList
+        },
+
+        _captureGhostClick: function(e) {
+            if (attrValue($(e.currentTarget), "rel") !== EXTERNAL) {
+                e.preventDefault();
+            };
         },
 
         _mouseup: function(e) {
