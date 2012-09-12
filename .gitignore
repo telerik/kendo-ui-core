@@ -14,7 +14,8 @@ bin/
 .livereload
 app.js
 deploy/
-demos/examples/shared/js/kendo.examples.js
+dist/
+dist/ demos/examples/shared/js/kendo.examples.js
 demos/mvc/content/docs/
 demos/mvc/sources
 !src/docs
