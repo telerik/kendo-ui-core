@@ -179,7 +179,7 @@
                 var target = $(e.target),
                     title = target.attr("title"),
                     value = target.val(),
-                    unit = value.match(/[^\d\.]$/);
+                    unit = value.match(/[^\d\.]*$/);
 
                 if (e.which == 38 || e.which == 40) {
                     target.val(parseFloat(value) + (e.which == 38 ? 1 : -1) + unit);

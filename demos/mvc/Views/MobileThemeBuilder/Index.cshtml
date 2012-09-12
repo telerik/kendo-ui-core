@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title</title>
+    <title>ThemeBuilder for Kendo UI Mobile</title>
     @foreach (string styleName in ViewBag.styles) {
     <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }

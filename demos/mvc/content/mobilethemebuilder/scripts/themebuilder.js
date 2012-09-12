@@ -311,8 +311,6 @@
                 { font: "0.9em/normal Arial, Helvetica, sans-serif", "text-shadow" : "none" },
                 { font: "1em/normal Arial, Helvetica, sans-serif", "text-shadow" : "none" },
                 { font: "italic 1em Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "0.9em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
-                { font: "1em/normal Arial, Helvetica, sans-serif", "text-shadow" : "0 -1px #000" },
                 { font: "inherit", "text-shadow" : "default" }
             ]
         },
@@ -808,44 +806,6 @@
         return widgets;
     }
 
-//    function getMenuDataItem(item, source) {
-//        item = $(item);
-//        var menuElement = item.closest(".k-menu"),
-//            dataItem = source,
-//            index = item.parentsUntil(menuElement, ".k-item").map(function () {
-//                return $(this).index();
-//            }).get().reverse();
-//
-//        index.push(item.index());
-//
-//        for (var i = -1, len = index.length; ++i < len;) {
-//            dataItem = dataItem[index[i]];
-//            dataItem = i < len-1 ? dataItem.items : dataItem;
-//        }
-//
-//        return dataItem;
-//    }
-//
-//    function buildMenu(element) {
-//        var widgets = getWidgets(propertyTargets.color), menuStructure = [];
-//
-//        for (var i in widgets ) {
-//            if (i != "selector") {
-//                if (element.closest(widgets[i].selector)[0]) {
-//                    var item = { text: widgets[i].name, items: [] };
-//
-//                    for (var j in widgets[i].whitelist) {
-//                        item.items.push({ text: widgets[i].whitelist[j], value: widgets[i].selector });
-//                    }
-//
-//                    menuStructure.push(item);
-//                }
-//            }
-//        }
-//
-//        return menuStructure;
-//    }
-//
     window.globalUndo = function() {
         var lastEngine = globalUndoBuffer.pop();
 
@@ -924,9 +884,10 @@
         applications[that] = new kendo.mobile.Application(deviceId, {
             platform: that,
             icon: {
-              "72x72" : "images/Icon-72.png",
-              "114x114" : "images/Icon@2x.png"
-            }
+              "72x72" : "../content/mobilethemebuilder/images/Icon-72.png",
+              "144x144" : "../content/mobilethemebuilder/images/Icon2x.png"
+            },
+            updateDocumentTitle: false
         });
         engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that }).data("kendoStyleEngine");
 
@@ -1197,7 +1158,7 @@
 
             i++;
 
-            if (!(i % (type != "gradient" ? 12 : 11))) {
+            if (!(i % (type != "gradient" && type != "font" ? 12 : 11))) {
                $("<br />").insertBefore(".recent-" + type + "s");
             }
         }

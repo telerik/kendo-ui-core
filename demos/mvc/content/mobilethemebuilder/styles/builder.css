@@ -131,6 +131,8 @@ body > label
     color: #000;
     -webkit-appearance: none;
     -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .color-preview
@@ -138,9 +140,6 @@ body > label
     display: block;
     width: auto;
     padding-right: 16px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
 }
 
 .label {
@@ -277,6 +276,7 @@ body > label
 .holder
 {
     width: 540px;
+    height: 100%;
     position: relative;
     font-size: 0;
     z-index: 1;
@@ -285,7 +285,8 @@ body > label
     -webkit-box-shadow: none;
 }
 
-.gradient-holder
+.gradient-holder,
+.font-holder
 {
     width: 495px;
 }
@@ -513,6 +514,7 @@ body > label
     border: 0;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 .box
@@ -523,6 +525,11 @@ body > label
     min-width: 940px;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#e0e0e0), to(#fff));
     background: -moz-linear-gradient(top, #e0e0e0, #fff);
+}
+
+.box > .km-root
+{
+    white-space: nowrap;
 }
 
 .recents
@@ -581,7 +588,8 @@ body > label
     -webkit-backface-visibility: hidden;
 }
 
-.k-static-gradient
+.k-static-gradient,
+.k-static-font
 {
     left: 495px !important;
 }
@@ -643,6 +651,7 @@ body > label
 
 .k-static-picker .font-preview
 {
+    width: 145px;
     padding: 10px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -770,6 +779,12 @@ body > label
     margin-right: 3px;
 }
 
+.k-fontpick .label-title
+{
+    margin: 6px 0 2px 5px;
+    width: 90px;
+}
+
 .k-patternpick .label-y,
 .k-fontpick .label-y
 {
@@ -779,8 +794,9 @@ body > label
 .k-patternpick .input-value,
 .k-fontpick .input-value
 {
-    margin: 0 5px;
+    margin: 6px 5px 2px;
     text-transform: none;
+    z-index: 1;
 }
 
 .k-patternpick [title=Url],
@@ -791,9 +807,40 @@ body > label
     padding: 0 5px;
 }
 
+.k-fontpick [title=font-family]
+{
+    width: 250px;
+}
+
+.k-fontpick [title=text-shadow-color]
+{
+    width: 100px;
+}
+
+.k-fontpick .label-size
+{
+    width: 114px;
+}
+
+.k-fontpick .label-style
+{
+    width: 80px;
+}
+
+.k-fontpick
+{
+    font: 1rem Arial, Helvetica, sans-serif !important;
+}
+
 .k-fontpick .k-dropdown
 {
     width: 80px;
+}
+
+.k-fontpick .k-dropdown .k-input
+{
+    height: 1.2em;
+    padding: .1em 0;
 }
 
 .k-patternpick [title^=position]
@@ -821,6 +868,8 @@ body > label
 }
 
 .k-popup .input-value,
+.k-static-picker .k-dropdown,
+.k-static-picker .dropdown-wrapper,
 .k-colorpick .km-slider-container,
 :root input.k-checkbox + label.k-checkbox:before
 {
@@ -829,6 +878,74 @@ body > label
     -webkit-border-radius: 10px;
     -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
     box-shadow: inset 0 1px 2px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.7);
+}
+
+.k-static-picker .k-dropdown
+{
+    position: relative;
+    z-index: 1;
+    border: 1px solid transparent;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.k-static-picker .dropdown-wrapper
+{
+    margin: 6px 0 2px 3px;
+    vertical-align: middle;
+    display: inline-block;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.k-static-picker .k-dropdown.k-state-border-down,
+.k-static-picker .k-dropdown-wrap.k-state-active
+{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    padding-bottom: 1px;
+}
+
+.k-fontpick > .k-animation-container
+{
+    margin-top: -7px;
+    display: inline-block;
+    z-index: 0 !important;
+}
+
+.k-static-picker .k-fontpick .k-list
+{
+    margin-top: 7px;
+}
+
+.k-static-picker .k-fontpick .k-list .k-item
+{
+    margin: 2px 0;
+    line-height: 26px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.k-static-picker .k-fontpick .k-list-container
+{
+    margin-left: 0;
+    border-radius: 0 0 10px 10px;
+    -moz-border-radius: 0 0 10px 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+.k-static-picker .k-dropdown-wrap
+{
+    border: 0 !important;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: inherit;
+    -moz-border-radius: inherit;
+    -webkit-border-radius: inherit;
 }
 
 .k-colorpick .km-slider-handle
