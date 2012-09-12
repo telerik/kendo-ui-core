@@ -75,15 +75,15 @@
             <div class="items" onclick="">
                 <div class="item-header">Platforms</div>
                 <div style="float: right;">
-                    <input id="blackberrybox" type="checkbox" checked="checked" class="k-checkbox" />
+                    <input id="blackberrybox" type="checkbox" class="k-checkbox" />
                     <label for="blackberrybox" class="k-checkbox">BlackBerry</label><br />
                     <input id="meegobox" type="checkbox" class="k-checkbox" />
                     <label for="meegobox" class="k-checkbox">MeeGo</label>
                 </div>
                 <div>
-                    <input id="iosbox" type="checkbox" checked="checked" class="k-checkbox"/>
+                    <input id="iosbox" type="checkbox" class="k-checkbox"/>
                     <label for="iosbox" class="k-checkbox">iOS</label><br />
-                    <input id="androidbox" type="checkbox" checked="checked" class="k-checkbox" />
+                    <input id="androidbox" type="checkbox" class="k-checkbox" />
                     <label for="androidbox" class="k-checkbox">Android</label>
                 </div>
             </div>
@@ -353,6 +353,9 @@
         </div>
     </div>
     <div class="files">
+        <button id="undoStyles" onclick="globalUndo()">Undo</button>
+        <button id="redoStyles" onclick="globalRedo()">Redo</button>
+        <span style="display: inline-block; width: 50px;"></span>
         <button id="resetStyles">Reset</button>
         <button id="importStyles">Import</button>
         <button id="exportStyles">Export</button>

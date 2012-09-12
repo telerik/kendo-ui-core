@@ -1,5 +1,17 @@
 (function ($, undefined) {
 
+    if (localStorage && localStorage.length) {
+        try {
+            JSON.parse(localStorage.getItem("visibility")).forEach(function (value) {
+                document.getElementById(value).checked = "checked";
+            });
+        } catch(err) {
+            [ "iosbox", "androidbox", "blackberrybox" ].forEach(function (value) {
+                document.getElementById(value).checked = "checked";
+            });
+        }
+    }
+
     var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu,
         deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
         extend = $.extend,
@@ -682,23 +694,21 @@
         return menuStructure;
     }
 
-    function globalUndo() {
+    window.globalUndo = function() {
         var lastEngine = globalUndoBuffer.pop();
 
         if (lastEngine) {
             lastEngine.undo();
-//            globalRedoBuffer.push(lastEngine);
         }
-    }
+    };
 
-    function globalRedo() {
+    window.globalRedo = function() {
         var lastEngine = globalRedoBuffer.pop();
 
         if (lastEngine) {
             lastEngine.redo();
-//            globalUndoBuffer.push(lastEngine);
         }
-    }
+    };
 
     // Override Kendo History to avoid URL breaks and bad refresh
     kendo.history.navigate = function(to, silent) {
@@ -756,9 +766,13 @@
 
     each(devices, function () {
         var that = this.toString(),
-            deviceId = "#" + that + "Device";
+            deviceId = "#" + that + "Device",
+            checkbox = $("#" + that + "box")[0];
+
         applications[that] = new kendo.mobile.Application(deviceId, { platform: that });
         engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that }).data("kendoStyleEngine");
+
+        applications[that].element.toggleClass("hiddenOS", !checkbox.checked);
     });
 
     pickers = {
@@ -1028,6 +1042,24 @@
         },
         select: function (e) {
 
+        }
+    });
+
+    $(".optionsSheet input").on("change", function () {
+        $("#" + this.id.replace("box", "Device")).toggleClass("hiddenOS", !this.checked);
+
+        var visible = $(this)
+                        .parents(".optionsSheet")
+                        .find("label")
+                        .prev(":checked")
+                        .map(function() {
+                            return this.id;
+                        }).toArray();
+
+        if (localStorage && localStorage.length) {
+            try {
+                localStorage.setItem("visibility", JSON.stringify(visible));
+            } catch(err) {}
         }
     });
 

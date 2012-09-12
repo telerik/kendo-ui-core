@@ -135,6 +135,11 @@ body
     font-size: 80%;
 }
 
+.hiddenOS
+{
+    display: none;
+}
+
 body > label
 {
     vertical-align: middle;
