@@ -43,7 +43,7 @@
 
                 that.point.data("stop", that);
 
-                that.drag = new kendo.UserEvents(that.point, {
+                that.drag = new kendo.Drag(that.point, {
                     global: true,
                     stopPropagation: true,
                     tap: function () {
@@ -87,7 +87,7 @@
                 var that = this, value;
                 e.preventDefault();
 
-                value = that._position(limitValue((e.touch.x.client - that.targetOffsetX), 0, that.constrain));
+                value = that._position(limitValue((e.x.client - that.targetOffsetX), 0, that.constrain));
                 if (value != that.stop.position) {
                     if (e.y.initialDelta > 30) {
                         that.point.css("display", "none");
@@ -120,7 +120,7 @@
 
             _stop: function(e) {
                 var that = this,
-                    value = that._position(limitValue((e.touch.x.client - that.targetOffsetX), 0, that.constrain));
+                    value = that._position(limitValue((e.x.client - that.targetOffsetX), 0, that.constrain));
 
                 that.drag.cancel();
                 that.stopped = true;
@@ -283,9 +283,10 @@
                             })
                             .end()
                             .on(click, ".gradient-preview", function(e) {
+                                console.log(kendo.touchLocation(e));
                                 var element = $(this),
-                                    touch = kendo.getTouches(e),
-                                    position = (touch[0].location.offsetX || touch[0].location.pageX - element.offset().left) / element.outerWidth() * 100,
+                                    location = kendo.touchLocation(e),
+                                    position = (location.x - element.offset().left) / element.outerWidth() * 100,
                                     closestStop = that.gradients.closestStop(position, index),
                                     newStop = {
                                         color: closestStop.color,
