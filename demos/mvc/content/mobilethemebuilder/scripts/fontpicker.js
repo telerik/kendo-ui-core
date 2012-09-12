@@ -67,57 +67,38 @@
                         });
                 }
 
+                $('<span class="label-title">Font family</span>').appendTo(popupElement);
                 that.fontFamilyValue = $('<input type="text" class="input-value" title="font-family" />')
-                                          .appendTo($('<label class="label">Font Family</label>').appendTo(popupElement).after('<br />'));
+                                          .appendTo(popupElement).after('<br />');
 
-                that.fontSizeValue = $('<input type="text" class="input-value" title="font-size" />')
-                                        .appendTo($('<label class="label">Size</label>').appendTo(popupElement));
-
+                $('<span class="label-title">Line height</span>').appendTo(popupElement);
                 that.lineHeightValue = $('<input type="text" class="input-value" title="line-height" />')
-                                        .appendTo($('<label class="label">Line-height</label>').appendTo(popupElement).after('<br />'));
+                                        .appendTo(popupElement);
 
+                $('<span class="label-title label-size">Size</span>').appendTo(popupElement);
+                that.fontSizeValue = $('<input type="text" class="input-value" title="font-size" />')
+                                        .appendTo(popupElement).after('<br />');
+
+                $('<span class="label-title">Weight</span>').appendTo(popupElement);
                 that.fontWeightValue = $('<select title="font-weight"><option value="lighter">lighter</option><option value="normal">normal</option><option value="bold">bold</option><option value="bolder">bolder</option><option value="inherit">inherit</option></select>')
-                                        .appendTo($('<label class="label">Weight</label>').appendTo(popupElement)).kendoDropDownList().data("");
+                                        .appendTo(popupElement).wrap('<span class="dropdown-wrapper" />')
+                                        .kendoDropDownList().data("kendoDropDownList");
 
+                $('<span class="label-title label-style">Style</span>').appendTo(popupElement);
                 that.fontStyleValue = $('<select title="font-style"><option value="normal">normal</option><option value="italic">italic</option><option value="oblique">oblique</option><option value="inherit">inherit</option></select>')
-                                        .appendTo($('<label class="label">Style</label>').appendTo(popupElement).after('<br />')).kendoDropDownList();
+                                        .appendTo(popupElement).wrap('<span class="dropdown-wrapper" />')
+                                        .kendoDropDownList().data("kendoDropDownList");
 
+                $('<span class="label-title">Text shadow</span>').appendTo(popupElement);
 
+                that.textShadowXValue = $('<input type="text" class="input-value" title="text-shadow-x" />').appendTo(popupElement);
+                that.textShadowYValue = $('<input type="text" class="input-value" title="text-shadow-y" />').appendTo(popupElement);
+                that.textShadowSizeValue = $('<input type="text" class="input-value" title="text-shadow-size" />').appendTo(popupElement);
+                that.textShadowColorValue = $('<input type="text" class="input-value" title="text-shadow-color" />').appendTo(popupElement);
 
-//                var repeatXID = kendo.guid(),
-//                    repeatYID = kendo.guid(),
-//                    urlLabel = $('<label class="label">Pattern Url</label>').appendTo(popupElement).after('<br />');
-//
-//                that.urlValue = $('<input type="text" class="input-value" title="Url" />').appendTo(urlLabel);
-//                that.repeatXValue = $('<input id="' + repeatXID + '" type="checkbox" class="k-checkbox check-value" title="repeat-x" />')
-//                                    .appendTo(popupElement);
-//                that.repeatYValue = $('<input id="' + repeatYID + '" type="checkbox" class="k-checkbox check-value" title="repeat-y" />')
-//                                    .appendTo(popupElement);
-//                that.positionXValue = $('<input type="text" class="input-value" title="position-x" />')
-//                                .appendTo($('<label class="label">X</label>').appendTo(popupElement));
-//                that.positionYValue = $('<input type="text" class="input-value" title="position-y" />')
-//                                .appendTo($('<label class="label">Y</label>').appendTo(popupElement));
-//
-//                that.urlValue.val(that.bgimage.replace(/url\(["']?|["']?\);?/g, ""));
-//                that.repeatXValue
-//                    .before('<span class="label-title">Repeat</span>')
-//                    .after('<label for="' + repeatXID + '" class="k-checkbox label" title="repeat-x">X</label>')
-//                    [0].checked = that.backgroundRepeatX;
-//
-//                that.repeatYValue
-//                    .after('<label for="' + repeatYID + '" class="k-checkbox label label-y" title="repeat-y">Y</label><br />');
-//                    [0].checked = that.backgroundRepeatY;
-//
-//                that.positionXValue
-//                    .val(that.backgroundPosX)
-//                    .parent().before('<span class="label-title">Position</span>');
-//
-//                that.positionYValue
-//                    .val(that.backgroundPosY);
-//
-//                popupElement.find("[title^=position]").keydown(proxy(that._keyDown, that));
-//                popupElement.find("input[type=text]").bind("input", proxy(that._updateConnected, that));
-//                popupElement.find("input[type=checkbox]").bind("change", proxy(that._updateConnected, that));
+                popupElement.find("[title*=shadow],[title*=size],[title*=height]").keydown(proxy(that._keyDown, that));
+                popupElement.find("input[type=text]").bind("input", proxy(that._updateConnected, that));
+                popupElement.find("select").bind("change", proxy(that._updateConnected, that));
             },
 
             options: {
@@ -157,12 +138,17 @@
                     target = !that.options.filter ? that.element : that.target;
 
                 if (target) {
-//                    that.urlValue.val(that.bgimage.replace(/url\(["']?|["']?\);?/g, ""));
-//                    that.repeatXValue[0].checked = that.backgroundRepeatX;
-//                    that.repeatYValue[0].checked = that.backgroundRepeatY;
-//                    that.positionXValue.val(that.backgroundPosX);
-//                    that.positionYValue.val(that.backgroundPosY);
-//
+                    that.fontFamilyValue.val(that.css["font-family"]);
+                    that.lineHeightValue.val(that.css["line-height"]);
+                    that.fontSizeValue.val(that.css["font-size"]);
+//                    that.fontWeightValue
+//                    that.fontStyleValue
+
+//                    that.textShadowXValue.val();
+//                    that.textShadowYValue.val();
+//                    that.textShadowSizeValue.val();
+//                    that.textShadowColorValue.val();
+
                     that._updateConnected();
 
                     if (trigger) {
@@ -171,17 +157,17 @@
                 }
             },
 
-//            _keyDown: function (e) {
-//                var target = $(e.target),
-//                    title = target.attr("title"),
-//                    value = target.val(),
-//                    unit = value.match(/[^\d\.]$/);
-//
-//                if (e.which == 38 || e.which == 40) {
-//                    target.val(parseFloat(value) + (e.which == 38 ? 1 : -1) + unit);
-//                    target.trigger("input");
-//                }
-//            },
+            _keyDown: function (e) {
+                var target = $(e.target),
+                    title = target.attr("title"),
+                    value = target.val(),
+                    unit = value.match(/[^\d\.]*$/)[0];
+
+                if (e.which == 38 || e.which == 40) {
+                    target.val(parseFloat(value) + (e.which == 38 ? 1 : -1) + unit);
+                    target.trigger("input");
+                }
+            },
 
             _toggle: function(open) {
                 var that = this, target, options = that.options, repeat;
@@ -196,14 +182,6 @@
                 if (open) {
                     that.css = kendo.getComputedStyles(target[0], fontStyles);
 
-//                    that.bgimage = target.css("background-image");
-//                    that.backgroundPosX = target.css("background-position-x");
-//                    that.backgroundPosY = target.css("background-position-y");
-//
-//                    repeat = target.css("background-repeat");
-//                    that.backgroundRepeatX = repeat == "repeat" || repeat == "repeat-x";
-//                    that.backgroundRepeatY = repeat == "repeat" || repeat == "repeat-y";
-//
                     that._update();
                 }
 
