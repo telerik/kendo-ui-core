@@ -1,4 +1,4 @@
-if ($.browser.webkit || $.browser.mozilla) {
+if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
     (function ($, undefined) {
 
         var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false,
