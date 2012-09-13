@@ -747,7 +747,7 @@
             test("filter is populated with selected value from values list", function() {
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" },{ value: 42, text: "bar" }]});
 
-                var operators = filterMenu.form.find("select").eq(1).data("kendoDropDownList")
+                var operators = filterMenu.form.find("select").eq(1).data("kendoDropDownList");
                 operators.value(42);
                 operators.trigger("change");
 
@@ -756,6 +756,16 @@
                 equal(dataSource.filter().filters[0].value, 42);
                 equal(dataSource.filter().filters[0].field, "foo");
             });
-       </script>
+
+            test("filter is populated when text have literal symbol", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo ' bar" },{ value: 42, text: "bar" }]});
+
+                var ddl = filterMenu.form.find("select").eq(1).data("kendoDropDownList");
+                ddl.value(0);
+
+                equal(ddl.value(), 0);
+                equal(ddl.text(), "foo ' bar");
+            });
+      </script>
     </body>
 </html>
