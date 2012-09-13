@@ -1,3 +1,5 @@
+require "bundler/setup"
+require "uglifier"
 require 'rake/clean'
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 require 'merge'
@@ -14,7 +16,10 @@ CLEAN.include(MIN_JS)
 directory 'dist'
 
 rule ".min.js" => [ lambda { |target| "src/#{ File.basename(target, '.min.js') }.js" } ] do |t|
-    sh "uglifyjs #{t.source} > #{t.name}"
+    File.open(t.name, "w") do |file|
+        puts "Compressing #{t.source} to #{t.name}\n"
+        file.write Uglifier.new.compile(File.read(t.source))
+    end
 end
 
 merge "src/kendo.editor.js" => [
