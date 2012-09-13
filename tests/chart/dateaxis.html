@@ -421,6 +421,16 @@
                     equals(dateAxis.options.baseUnit, "months");
                 });
 
+                test("Base unit is set to months when series delta is 1 month - 3 days", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2011/03/31"), new Date("2011/04/29")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "months");
+                });
+
                 test("creates labels with default format", function() {
                     createDateCategoryAxis({
                         categories: [

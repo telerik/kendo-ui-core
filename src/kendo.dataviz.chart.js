@@ -1086,7 +1086,6 @@
                 diff,
                 minDiff = MAX_VALUE,
                 lastCat,
-                nextDay,
                 unit;
 
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
@@ -1099,15 +1098,10 @@
 
                         if (minDiff >= TIME_PER_YEAR) {
                             unit = YEARS;
-                        } else if (minDiff >= TIME_PER_MONTH) {
+                        } else if (minDiff >= TIME_PER_MONTH - TIME_PER_DAY * 3) {
                             unit = MONTHS;
                         } else if (minDiff >= TIME_PER_DAY) {
-                            nextDay = addDuration(cat, 1, DAYS);
-                            if (nextDay.getMonth() !== cat.getMonth()) {
-                                unit = MONTHS;
-                            } else {
-                                unit = DAYS;
-                            }
+                            unit = DAYS;
                         } else if (minDiff >= TIME_PER_HOUR) {
                             unit = HOURS;
                         } else {
