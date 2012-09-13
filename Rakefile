@@ -1,5 +1,3 @@
-require "bundler/setup"
-require "uglifier"
 require 'rake/clean'
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 require 'merge'
@@ -24,10 +22,7 @@ directory 'dist/styles'
 
 # A rule telling how to build .min.js files
 rule ".min.js" => [ lambda { |target| "src/#{ File.basename(target, '.min.js') }.js" } ] do |t|
-    File.open(t.name, "w") do |file|
-        puts "Compressing #{t.source} to #{t.name}\n"
-        file.write Uglifier.new.compile(File.read(t.source))
-    end
+    sh "uglifyjs #{t.source} > #{t.name}"
 end
 
 # A rule telling how to build .css files
