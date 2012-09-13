@@ -13,11 +13,11 @@ directory 'dist/js/cultures'
 directory 'dist/styles'
 
 # Rake tasks
-desc('Minify JavaScript')
-task :minify_js => ['dist/js/cultures', 'dist/source/js/cultures', MIN_JS].flatten
+desc('JavaScript')
+task :js => ['dist/js/cultures', 'dist/source/js/cultures', MIN_JS].flatten
 
 desc('Less')
 task :less => ['dist/source/styles', SRC_LESS, SRC_CSS].flatten
 
 desc('Build all Kendo UI distributions')
-task :default => [:minify_js,:less]
+task :default => [:js,:less]
