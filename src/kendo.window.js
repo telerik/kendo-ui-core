@@ -736,11 +736,11 @@
 
             Widget.fn.destroy.call(that);
 
+            kendo.destroy(that.wrapper);
+
             that.wrapper.remove().add(that.wrapper.find(".k-resize-handle,.k-window-titlebar")).off(NS);
 
             $(window).off("resize", that._resizeHandler);
-
-            kendo.destroy(that.wrapper);
 
             modalWindows = openedModalWindows();
 

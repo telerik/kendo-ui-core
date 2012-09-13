@@ -720,6 +720,45 @@
                 ok(!browser.element.find(".k-addfolder").length);
             });
 
+            test("destroy calls nested upload destroy", function() {
+                var browser = setup({ transport: { uploadUrl: "foo" } }),
+                    destroy = stub(container.find(".k-upload input").data("kendoUpload"), "destroy")
+
+                browser.destroy();
+                ok(destroy.calls("destroy"));
+            });
+
+            test("destroy calls nested listview destroy", function() {
+                var browser = setup(),
+                    destroy = stub(browser.listView, "destroy")
+
+                browser.destroy();
+                ok(destroy.calls("destroy"));
+            });
+
+            test("destroy calls nested popup destroy", function() {
+                var browser = setup(),
+                    destroy = stub(browser.arrangeByPopup, "destroy")
+
+                browser.destroy();
+                ok(destroy.calls("destroy"));
+            });
+
+            test("destroy calls nested searchbox destroy", function() {
+                var browser = setup(),
+                    destroy = stub(browser.searchBox, "destroy")
+
+                browser.destroy();
+                ok(destroy.calls("destroy"));
+            });
+
+            test("destroy calls nested breadcrumbs destroy", function() {
+                var browser = setup(),
+                    destroy = stub(browser.breadcrumbs, "destroy")
+
+                browser.destroy();
+                ok(destroy.calls("destroy"));
+            });
         </script>
     </body>
 </html>

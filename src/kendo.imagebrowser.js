@@ -203,6 +203,12 @@
                 .add(that.list)
                 .add(that.toolbar)
                 .off(NS);
+
+            if (that.arrangeByPopup) {
+                that.arrangeByPopup.destroy();
+            }
+
+            kendo.destroy(that.element);
         },
 
         value: function() {
