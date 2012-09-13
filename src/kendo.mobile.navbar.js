@@ -15,7 +15,8 @@
 
     var NavBar = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                centerElement;
 
             Widget.fn.init.call(that, element, options);
 
@@ -24,6 +25,11 @@
             element.addClass("km-navbar").wrapInner($('<div class="km-view-title" />'));
             createContainer("left", element);
             createContainer("right", element);
+            centerElement = element.find(".km-view-title");
+
+            if(!element.find(roleSelector("view-title"))[0]) {
+               centerElement.append($("<span>&nbsp;</span>"));
+            }
         },
 
         options: {
