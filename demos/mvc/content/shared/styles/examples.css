@@ -2462,7 +2462,12 @@ div.old-browser
 #themebuilder-chooser a.active,
 #themebuilder-chooser a.active:hover {
     background-color: #eaeaea;
-    box-shadow: inset 0 0 5px #aaa;
+    box-shadow: inset 0 1px 5px #aaa, inset 0 0 20px #bcbcbc;
+}
+
+.separator-shadow {
+    background: url("../images/separator-shadow.jpg") no-repeat 50% 0;
+    height: 60px;
 }
 
 #mobile-landing {
