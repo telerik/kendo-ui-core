@@ -21,7 +21,7 @@ rule /dist\/js\/.+\.js/ => [ lambda { |target| "dist/source/js/#{target.pathmap(
 end
 
 file 'dist/js/jquery.min.js' => 'src/jquery.min.js' do |t|
-    cp t.source, t.name
+    cp 'src/jquery.min.js', t.name
 end
 
 merge "src/kendo.editor.js" => [
