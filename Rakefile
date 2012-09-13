@@ -1,5 +1,6 @@
 require 'rake/clean'
-require './build/merge'
+$LOAD_PATH << File.join(File.dirname(__FILE__), "build")
+require 'merge'
 
 JS = FileList['src/kendo*.js']
         .include("src/kendo.editor.js")
