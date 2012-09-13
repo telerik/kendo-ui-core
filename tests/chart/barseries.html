@@ -759,8 +759,8 @@
                         setupBarChart(plotArea, {
                             series: [
                                 $.extend({ stack: "a" }, positiveSeries),
-                                $.extend({ stack: "a" }, negativeSeries),
-                                $.extend({ stack: "b" }, positiveSeries),
+                                $.extend({ stack: "a" }, positiveSeries),
+                                $.extend({ stack: "b" }, negativeSeries),
                                 $.extend({ stack: "b" }, negativeSeries)
                             ],
                             isStacked: true
@@ -769,15 +769,15 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.valueAxisRanges[undefined].min, -2);
+                    equal(series.valueAxisRanges[undefined].min, -4);
                 });
 
-                test("reports 0 as maximum value for default axis", function() {
-                    equal(series.valueAxisRanges[undefined].max, 2);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(series.valueAxisRanges[undefined].max, 4);
                 });
 
                 test("bars in first category, first group are stacked", function() {
-                    equal(series.points[1].box.y1, series.points[0].box.y2);
+                    equal(series.points[1].box.y2, series.points[0].box.y1);
                 });
 
                 test("bars in first category, second group are stacked", function() {
@@ -788,9 +788,50 @@
                     ok(series.points[2].box.y1 != series.points[1].box.y2);
                 });
 
+                test("bars in second category, first group are stacked", function() {
+                    equal(series.points[5].box.y2, series.points[4].box.y1);
+                });
+
+                test("bars in second category, second group are stacked", function() {
+                    equal(series.points[7].box.y1, series.points[6].box.y2);
+                });
+
                 test("stack base is set to zero value slot", function() {
                     equals(series.points[0].options.stackBase, 2);
                     equals(series.points[2].options.stackBase, 2);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Grouped Stack / Mixed Values / Reversed Axes", {
+                    setup: function() {
+                        plotArea.valueAxis.options.reverse = true;
+                        setupBarChart(plotArea, {
+                            series: [
+                                $.extend({ stack: "a" }, positiveSeries),
+                                $.extend({ stack: "a" }, positiveSeries),
+                                $.extend({ stack: "b" }, negativeSeries),
+                                $.extend({ stack: "b" }, negativeSeries)
+                            ],
+                            isStacked: true
+                        });
+                        plotArea.valueAxis.options.reverse = false;
+                    }
+                });
+
+                test("bars in first category, first group are stacked", function() {
+                    equal(series.points[1].box.y1, series.points[0].box.y2);
+                });
+
+                test("bars in first category, second group are stacked", function() {
+                    equal(series.points[3].box.y2, series.points[2].box.y1);
+                });
+
+                test("bars in second category, first group are stacked", function() {
+                    equal(series.points[5].box.y1, series.points[4].box.y2);
+                });
+
+                test("bars in second category, second group are stacked", function() {
+                    equal(series.points[7].box.y2, series.points[6].box.y1);
                 });
 
                 // ------------------------------------------------------------
