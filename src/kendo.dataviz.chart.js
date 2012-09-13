@@ -3125,7 +3125,6 @@
                 chart = point.owner,
                 value = point.value,
                 valueAxis = chart.seriesValueAxis(options),
-                borderWidth = options.border.width || 0,
                 points = [], mid, ocSlot, lhSlot;
 
             ocSlot = valueAxis.getSlot(value.open, value.close);
@@ -3176,9 +3175,9 @@
             }
 
             elements.push(view.createRect(point.realBody, rectStyle));
-            elements.push(point.createOverlayRect(view, options));
             elements.push(view.createPolyline(point.lowHighLinePoints[0], false, lineStyle));
             elements.push(view.createPolyline(point.lowHighLinePoints[1], false, lineStyle));
+            elements.push(point.createOverlayRect(view, options));
 
             append(elements,
                 ChartElement.fn.getViewElements.call(point, view)

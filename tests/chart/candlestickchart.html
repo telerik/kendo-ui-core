@@ -68,7 +68,7 @@
             }
 
             (function() {
-                var series = { data: [[3,4,1,2]], type: "candlestick" },
+                var series = { data: [[2,4,1,3]], type: "candlestick" },
                     VALUE_AXIS_MAX = 4,
                     CATEGORY_AXIS_Y = 2;
 
@@ -176,30 +176,30 @@
                 });
 
                 test("sets rect border", function() {
-                    equals(view.log.rect[1].style.strokeWidth, 2);
-                    equals(view.log.rect[1].style.stroke, "borderColor");
-                    equals(view.log.rect[1].style.strokeOpacity, 0.2);
-                    equals(view.log.rect[1].style.dashType, "dot");
+                    equals(view.log.rect[0].style.strokeWidth, 2);
+                    equals(view.log.rect[0].style.stroke, "borderColor");
+                    equals(view.log.rect[0].style.strokeOpacity, 0.2);
+                    equals(view.log.rect[0].style.dashType, "dot");
                 });
 
-                test("sets rect color(open > close)", function() {
-                    equals(view.log.rect[1].style.fill, "rectColor");
+                test("sets rect color(open < close)", function() {
+                    equals(view.log.rect[0].style.fill, "rectColor");
                 });
 
-                test("sets rect base body color(open < close)", function() {
+                test("sets rect base body color(open > close)", function() {
                     setupCandlestickChart(plotArea, {
                         series: [{
                             type: "candlestick",
-                            data: [[2,4,1,3]],
+                            data: [[3,4,1,2]],
                             baseBodyColor: "baseBodyColor"
                         }]
                     });
 
-                    equals(view.log.rect[1].style.fill, "baseBodyColor");
+                    equals(view.log.rect[0].style.fill, "baseBodyColor");
                 });
 
                 test("overlay rect has same model id as its segment", function() {
-                    equals(view.log.rect[0].style.data.modelId, candlestickChart.points[0].options.modelId);
+                    equals(view.log.rect[1].style.data.modelId, candlestickChart.points[0].options.modelId);
                 });
 
                 test("renders chart group", function() {
@@ -232,7 +232,7 @@
                 function createCandlestickChart(options) {
                     candlestickChart = new dataviz.CandlestickChart(plotArea, {
                         series: [$.extend({
-                            data: [[3,4,2,1]],
+                            data: [[1,4,2,3]],
                             border: {
                                 opacity: 0.5,
                                 dashType: "dot",
@@ -258,7 +258,7 @@
                     }
                 });
 
-                test("applies series color to point border", function() {
+                test("applies series color to point", function() {
                     equal(candlestick.options.color, "#f00");
                 });
 
@@ -370,7 +370,7 @@
                     view = new ViewStub();
 
                     point.getViewElements(view);
-                    equals(view.log.rect[0].style.data.modelId, point.options.modelId);
+                    equals(view.log.rect[1].style.data.modelId, point.options.modelId);
                 });
 
                 test("tooltipAnchor is at top right of point", function() {
