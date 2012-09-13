@@ -203,8 +203,12 @@
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
             }
 
+            if (options.preventDragEvent) {
+                element.on("dragstart", false);
+            }
+
             if (!options.allowSelection) {
-                var args = ["mousedown selectstart dragstart", filter, preventTrigger];
+                var args = ["mousedown selectstart", filter, preventTrigger];
 
                 if (filter instanceof $) {
                     args.splice(2, 0, null);

@@ -198,6 +198,7 @@
 
                 drag = new kendo.Drag(element, {
                     allowSelection: true,
+                    preventDragEvent: true,
                     start: function(e) {
                         dimensions.refresh();
 
