@@ -4,30 +4,24 @@ require 'merge'
 
 # All JavaScript files from src/
 JS = FileList['src/kendo*.js']
-        .include("src/kendo.editor.js")     # include this file explicitly because it is generated
-        .include("src/kendo.aspnetmvc.js")  # include this file explicitly because it is generated
+SRC_JS = JS.pathmap('dist/source/js/%f') # %f is the filename
+MIN_JS = SRC_JS.pathmap('dist/js/%f').ext('min.js').include('dist/js/jquery.min.js')
 
-# Minified JavaScript files in dist/js
-MIN_JS = JS.sub(/src\/(.+)\.js/, "dist/js/\\1.min.js")
+# The clean target will remove the dist directory
+CLEAN.include('dist')
 
-WEB_LESS = FileList['styles/web/kendo*.less']
-WEB_CSS = WEB_LESS.pathmap('dist/%p').ext("css")
+#Build /dist/source/js/*.js files by copying them from src/
+rule /dist\/source\/js\/.+\.js/ => [ lambda { |target| "src/#{target.pathmap('%f')}" }] do |t|
+    cp t.source, t.name
+end
 
-# The clean target will remove the minified JavaScript
-CLEAN.include(MIN_JS)
-
-# Required directories
-directory 'dist/js'
-directory 'dist/styles'
-
-# A rule telling how to build .min.js files
-rule ".min.js" => [ lambda { |target| "src/#{ File.basename(target, '.min.js') }.js" } ] do |t|
+#Build /dist/js/*.min.js files by running uglifyjs. Depends on building /dist/source/js/*.js
+rule /dist\/js\/.+\.js/ => [ lambda { |target| "dist/source/js/#{target.pathmap('%n').ext('js')}" }] do |t|
     sh "uglifyjs #{t.source} > #{t.name}"
 end
 
-# A rule telling how to build .css files
-rule ".css" => [ lambda { |target| "styles/web/#{ File.basename(target, '.css') }.less" } ] do |t|
-    p "less #{t.source} > #{t.name}"
+file 'dist/js/jquery.min.js' => 'src/jquery.min.js' do |t|
+    cp t.source, t.name
 end
 
 merge "src/kendo.editor.js" => [
@@ -54,15 +48,15 @@ merge "src/kendo.aspnetmvc.js" => [
     "src/aspnetmvc/kendo.validator.aspnetmvc.js"
 ]
 
+# Required directories
+directory 'dist/source/js'
+directory 'dist/js'
+
+desc('Minify JavaScript')
+task :minify_js => ['dist/js', 'dist/source/js', MIN_JS].flatten
+
 desc('Create kendo.editor.js')
 task :editor => "src/kendo.editor.js"
 
-desc('Minify the JavaScript files')
-task :minify_js => ["dist/js", MIN_JS].flatten
-
-desc('Create CSS files')
-task :css => ["dist/styles", WEB_CSS].flatten do
-end
-
 desc('Build all Kendo UI distributions')
-task :default => [:minify_js]
+task :default => :minify_js
