@@ -76,6 +76,12 @@
             var point = this;
             point.x = round(x || 0, COORD_PRECISION);
             point.y = round(y || 0, COORD_PRECISION);
+        },
+
+        clone: function() {
+            var point = this;
+
+            return new Point2D(point.x, point.y);
         }
     });
 

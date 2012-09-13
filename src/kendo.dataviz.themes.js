@@ -37,10 +37,12 @@
                 },
                 candlestick: {
                     line: {
-                        width: 2
+                        width: 1,
+                        color: BLACK
                     },
                     border: {
-                        width: 1
+                        width: 1,
+                        _brightness: 0.8
                     },
                     gap: 1,
                     baseBodyColor: WHITE,
@@ -49,13 +51,19 @@
                         "high": "max",
                         "low": "min",
                         "close": "max"
+                    },
+                    highlight: {
+                        line: {
+                            width: 2
+                        },
+                        border: {
+                            width: 2,
+                            opacity: 1
+                        }
                     }
                 },
                 ohlc: {
                     line: {
-                        width: 2
-                    },
-                    border: {
                         width: 1
                     },
                     gap: 1,
@@ -64,6 +72,12 @@
                         "high": "max",
                         "low": "min",
                         "close": "max"
+                    },
+                    highlight: {
+                        line: {
+                            width: 3,
+                            opacity: 1
+                        }
                     }
                 },
                 bubble: {
@@ -143,6 +157,27 @@
                         visible: false,
                         size: 6
                     }
+                },
+                candlestick: {
+                    baseBodyColor: "#555",
+                    line: {
+                        color: WHITE
+                    },
+                    border: {
+                        _brightness: 1.5,
+                        opacity: 1
+                    },
+                    highlight: {
+                        border: {
+                            color: WHITE,
+                            opacity: 0.2
+                        }
+                    }
+                },
+                ohlc: {
+                    line: {
+                        color: WHITE
+                    }
                 }
             },
             chartArea: {
@@ -199,6 +234,12 @@
                         visible: false,
                         size: 6
                     }
+                },
+                candlestick: {
+                    baseBodyColor: "#dedede",
+                    line: {
+                        color: "#8d8d8d"
+                    }
                 }
             },
             seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
@@ -251,6 +292,12 @@
                     markers: {
                         visible: false,
                         size: 6
+                    }
+                },
+                candlestick: {
+                    baseBodyColor: "#c4d0d5",
+                    line: {
+                        color: "#9aabb2"
                     }
                 }
             },
@@ -330,6 +377,9 @@
                         visible: false,
                         size: 6
                     }
+                },
+                candlestick: {
+                    baseBodyColor: "#a6afbe"
                 }
             },
             chartArea: {
@@ -383,6 +433,12 @@
                     markers: {
                         visible: false,
                         size: 6
+                    }
+                },
+                candlestick: {
+                    baseBodyColor: "#c7c7c7",
+                    line: {
+                        color: "#787878"
                     }
                 }
             },

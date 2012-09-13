@@ -3125,6 +3125,7 @@
                 chart = point.owner,
                 value = point.value,
                 valueAxis = chart.seriesValueAxis(options),
+                borderWidth = options.border.width || 0,
                 points = [], mid, ocSlot, lhSlot;
 
             ocSlot = valueAxis.getSlot(value.open, value.close);
@@ -3136,12 +3137,10 @@
             point.realBody = ocSlot;
 
             mid = lhSlot.center().x;
-            points.push(new Point2D(mid, lhSlot.y1));
-            points.push(new Point2D(mid, ocSlot.y1));
-            points.push(new Point2D(mid, ocSlot.y2));
-            points.push(new Point2D(mid, lhSlot.y2));
+            points.push([ new Point2D(mid, lhSlot.y1), new Point2D(mid, ocSlot.y1) ]);
+            points.push([ new Point2D(mid, ocSlot.y2), new Point2D(mid, lhSlot.y2) ]);
 
-            point.linePoints = points;
+            point.lowHighLinePoints = points;
 
             point.box = lhSlot.clone().wrap(ocSlot);
         },
@@ -3151,24 +3150,23 @@
                 options = point.options,
                 elements = [],
                 border = options.border.width > 0 ? {
-                    stroke: options.border.color || options.color,
+                    stroke: point.getBorderColor(),
                     strokeWidth: options.border.width,
                     dashType: options.border.dashType,
                     strokeOpacity: defined(options.border.opacity) ? options.border.opacity : options.opacity
                 } : {},
                 rectStyle = deepExtend({
                     id: options.id,
-                    fill: point.baseBodyColor || options.color,
-                    fillOpacity: options.opacity,
-                    zIndex: 2
+                    fill: options.color,
+                    fillOpacity: options.opacity
                 }, border),
                 lineStyle = {
                     id: options.id,
                     strokeOpacity: defined(options.line.opacity) ? options.line.opacity : options.opacity,
-                    zIndex: -1,
                     strokeWidth: options.line.width,
                     stroke: options.line.color || options.color,
-                    dashType: options.line.dashType
+                    dashType: options.line.dashType,
+                    strokeLineCap: "butt"
                 };
 
             if (options.overlay) {
@@ -3177,15 +3175,31 @@
                 }, options.overlay);
             }
 
-            elements.push(point.createOverlayRect(view, options));
             elements.push(view.createRect(point.realBody, rectStyle));
-            elements.push(view.createPolyline(point.linePoints, true, lineStyle));
+            elements.push(point.createOverlayRect(view, options));
+            elements.push(view.createPolyline(point.lowHighLinePoints[0], false, lineStyle));
+            elements.push(view.createPolyline(point.lowHighLinePoints[1], false, lineStyle));
 
             append(elements,
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
             return elements;
+        },
+
+        getBorderColor: function() {
+            var bar = this,
+                options = bar.options,
+                color = options.color,
+                border = options.border,
+                borderColor = border.color;
+
+            if (!defined(borderColor)) {
+                borderColor =
+                    new Color(color).brightness(border._brightness).toHex();
+            }
+
+            return borderColor;
         },
 
         createOverlayRect: function(view, options) {
@@ -3199,22 +3213,34 @@
 
         highlightOverlay: function(view, options) {
             var point = this,
-                box = point.box;
+                pointOptions = point.options,
+                highlight = pointOptions.highlight,
+                border = highlight.border || {},
+                data = { data: { modelId: pointOptions.modelId } },
+                rectStyle = deepExtend(data, options, {
+                    stroke: point.getBorderColor(),
+                    strokeOpacity: border.opacity,
+                    strokeWidth: border.width
+                }),
+                lineStyle = deepExtend(data, {
+                    stroke: point.getBorderColor(),
+                    strokeWidth: highlight.line.width,
+                    strokeLineCap: "butt"
+                }),
+                group = view.createGroup();
 
-            options = deepExtend({ data: { modelId: point.options.modelId } }, options);
+            group.children.push(view.createRect(point.realBody, rectStyle));
+            group.children.push(view.createPolyline(point.lowHighLinePoints[0], false, lineStyle));
+            group.children.push(view.createPolyline(point.lowHighLinePoints[1], false, lineStyle));
 
-            return view.createRect(box, options);
+            return group;
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
             var point = this,
-                box = point.box,
-                x, y;
+                box = point.box;
 
-            x = box.x2 + TOOLTIP_OFFSET;
-            y = box.y1 + TOOLTIP_OFFSET;
-
-            return new Point2D(x, y);
+            return new Point2D(box.x2 + TOOLTIP_OFFSET, box.y1 + TOOLTIP_OFFSET);
         },
 
         formatValue: function(format) {
@@ -3266,9 +3292,13 @@
                     cluster.append(point);
                     chart.append(cluster);
                 }
-                if (value.open < value.close) {
-                    point.baseBodyColor = series.baseBodyColor;
+
+                if (series.type == CANDLESTICK) {
+                    if (value.open > value.close) {
+                        point.options.color = series.baseBodyColor;
+                    }
                 }
+
                 point.categoryIx = categoryIx;
                 point.category = category;
                 point.series = series;
@@ -3359,6 +3389,25 @@
             );
 
             return elements;
+        },
+
+        highlightOverlay: function(view, options) {
+            var point = this,
+                pointOptions = point.options,
+                highlight = pointOptions.highlight,
+                data = { data: { modelId: pointOptions.modelId } },
+                lineStyle = deepExtend(data, {
+                    strokeWidth: highlight.line.width,
+                    strokeOpacity: highlight.line.opacity,
+                    stroke: pointOptions.color
+                }),
+                group = view.createGroup();
+
+            group.children.push(view.createPolyline(point.oPoints, true, lineStyle));
+            group.children.push(view.createPolyline(point.cPoints, true, lineStyle));
+            group.children.push(view.createPolyline(point.lhPoints, true, lineStyle));
+
+            return group;
         }
     });
 

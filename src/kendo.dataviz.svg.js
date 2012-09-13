@@ -321,7 +321,8 @@
             fill: "",
             fillOpacity: 1,
             strokeOpacity: 1,
-            rotation: [0,0,0]
+            rotation: [0,0,0],
+            strokeLineCap: SQUARE
         },
 
         refresh: function(domElement) {
@@ -351,9 +352,11 @@
         },
 
         renderLinecap: function() {
-            var dashType = this.options.dashType;
+            var options = this.options,
+                dashType = options.dashType,
+                strokeLineCap = options.strokeLineCap;
 
-            return (dashType && dashType != SOLID) ? BUTT : SQUARE;
+            return (dashType && dashType != SOLID) ? BUTT : strokeLineCap;
         },
 
         renderFill: function() {
