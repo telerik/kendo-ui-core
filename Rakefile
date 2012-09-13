@@ -8,12 +8,12 @@ JS = FileList['src/kendo*.js']
         .include("src/kendo.editor.js")
         .include("src/kendo.aspnetmvc.js")
 
-MIN_JS = JS.sub(/src\/(.+)\.js/, "dist/\\1.min.js")
+MIN_JS = JS.sub(/src\/(.+)\.js/, "dist/js/\\1.min.js")
 
 CLEAN.include(MIN_JS)
 
 
-directory 'dist'
+directory 'dist/js'
 
 rule ".min.js" => [ lambda { |target| "src/#{ File.basename(target, '.min.js') }.js" } ] do |t|
     File.open(t.name, "w") do |file|
@@ -50,7 +50,7 @@ desc('Create kendo.editor.js')
 task :editor => "src/kendo.editor.js"
 
 desc('Minify the JavaScript files')
-task :minify_js => MIN_JS
+task :minify_js => ["dist/js", MIN_JS].flatten
 
 desc('Build all Kendo UI distributions')
-task :default => ["dist", :minify_js]
+task :default => [:minify_js]
