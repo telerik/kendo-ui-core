@@ -340,7 +340,17 @@
                     same(areaChart.valueAxisRanges[undefined].max, 2);
                 });
 
-                test("omits missing points by default", function() {
+                test("missing points are assumed to be 0 by default", function() {
+                    equals(areaChart.points[2].value, 0);
+                });
+
+                test("omits missing points", function() {
+                    setupAreaChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "gap" }, sparseSeries)
+                        ]
+                    });
+
                     equals(areaChart.points[2], null);
                 });
 
@@ -352,16 +362,6 @@
                     });
 
                     equals(areaChart.points[2], null);
-                });
-
-                test("missing points are assumed to be 0", function() {
-                    setupAreaChart(plotArea, {
-                        series: [
-                            $.extend({ missingValues: "zero" }, sparseSeries)
-                        ]
-                    });
-
-                    equals(areaChart.points[2].value, 0);
                 });
 
                 test("getNearestPoint returns nearest series point (left)", function() {
@@ -532,11 +532,22 @@
                     same(areaChart.valueAxisRanges[undefined].max, 4);
                 });
 
-                test("missing points are skipped by default", function() {
+                test("missing points are assumed to be 0 by default", function() {
+                    equals(areaChart.points[4].value, 0);
+                });
+
+                test("omits missing points", function() {
+                    setupAreaChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "gap" }, sparseSeries)
+                        ],
+                        isStacked: true
+                    });
+
                     equals(areaChart.points[4], null);
                 });
 
-                test("line is drawn between existing points", function() {
+                test("line is drawn between existing points when interpolating", function() {
                     setupAreaChart(plotArea, {
                         series: [
                             $.extend({ missingValues: "interpolate" }, sparseSeries)

@@ -2468,7 +2468,7 @@
                     point = currentSeriesPoints[pointIx];
                     if (point) {
                         linePoints.push(point);
-                    } else if (currentSeries.missingValues !== INTERPOLATE) {
+                    } else if (chart.seriesMissingValues(currentSeries) !== INTERPOLATE) {
                         if (linePoints.length > 1) {
                             segments.push(
                                 chart.createSegment(
@@ -2491,6 +2491,13 @@
 
             chart._segments = segments;
             chart.append.apply(chart, segments);
+        },
+
+        seriesMissingValues: function(series) {
+            var missingValues = series.missingValues,
+                assumeZero = !missingValues && this.options.isStacked;
+
+            return assumeZero ? ZERO : missingValues;
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
@@ -2555,11 +2562,12 @@
                 options = chart.options,
                 isStacked = options.isStacked,
                 categoryPoints = chart.categoryPoints[categoryIx],
+                missingValues = chart.seriesMissingValues(series),
                 stackPoint,
                 plotValue = 0;
 
             if (!defined(value) || value === null) {
-                if (series.missingValues === ZERO) {
+                if (missingValues === ZERO) {
                     value = 0;
                 } else {
                     return null;
@@ -2716,11 +2724,15 @@
                 options = chart.options,
                 stackPoints;
 
-            if (options.isStacked && seriesIx > 0) {
+            if (options.isStacked && seriesIx > 0 && prevSegment) {
                 stackPoints = prevSegment.linePoints.slice(0).reverse();
             }
 
             return new AreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
+        },
+
+        _seriesMissingValues: function(series) {
+            return series.missingValues || ZERO;
         }
     });
 
