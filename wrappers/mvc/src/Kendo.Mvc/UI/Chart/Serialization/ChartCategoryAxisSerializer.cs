@@ -20,16 +20,22 @@ namespace Kendo.Mvc.UI
         public override IDictionary<string, object> Serialize()
         {
             var result = base.Serialize();
+
             FluentDictionary.For(result)
                 .Add("type", axis.Type.ToString(), () => axis.Type != null)
-                .Add("categories", SerializeCategories(), () => axis.Categories != null)
                 .Add("field", axis.Member, () => axis.Categories == null && axis.Member != null)
                 .Add("axisCrossingValue", axis.AxisCrossingValues, () => axis.AxisCrossingValues.Count() > 0)
                 .Add("min", axis.Min.ToJavaScriptString(), () => axis.Min != null)
                 .Add("max", axis.Max.ToJavaScriptString(), () => axis.Max != null);
 
-            if (axis.BaseUnit != null) {
+            if (axis.BaseUnit != null)
+            {
                 result.Add("baseUnit", axis.BaseUnit.ToString().ToLowerInvariant());
+            }
+
+            if (axis.Categories != null)
+            {
+               result.Add("categories", SerializeCategories());
             }
 
             return result;
@@ -40,6 +46,7 @@ namespace Kendo.Mvc.UI
             if (axis.Type == ChartCategoryAxisType.Date)
             {
                 var categories = new List<string>();
+                
                 foreach (DateTime? date in axis.Categories)
                 {
                     categories.Add(date.ToJavaScriptString());
