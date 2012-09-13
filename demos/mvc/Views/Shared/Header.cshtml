@@ -17,9 +17,9 @@
 <div class="suite-demos-nav">
     <ul class="centerWrap floatWrap">
         <li><a href="@Url.Content("~")">Overview</a><em></em></li>
-        <li@(Html.ActiveSuiteClass(Url.Content("Web")))>@Html.SuiteLink("Web", "Web Demos")</li>
-        <li@(Html.ActiveSuiteClass(Url.Content("Mobile")))>@Html.SuiteLink("Mobile", "Mobile Demos")</li>
-        <li@(Html.ActiveSuiteClass(Url.Content("DataViz")))>@Html.SuiteLink("DataViz", "DataViz Demos")</li>
-        <li@(Html.ActiveSuiteClass(Url.Content("ThemeBuilder")))>@Html.SuiteLink("ThemeBuilder")</li>
+        <li@(Html.ActiveSuiteClass(Url.Content("~/web")))>@Html.SuiteLink("Web", "Web Demos")</li>
+        <li@(Html.ActiveSuiteClass(Url.Content("~/mobile")))>@Html.SuiteLink("Mobile", "Mobile Demos")</li>
+        <li@(Html.ActiveSuiteClass(Url.Content("~/DataViz")))>@Html.SuiteLink("DataViz", "DataViz Demos")</li>
+        <li@(Html.ActiveSuiteClass(Url.Content("~/ThemeBuilder")))>@Html.SuiteLink("ThemeBuilder", "Theme Builders")</li>
     </ul>
 </div>
