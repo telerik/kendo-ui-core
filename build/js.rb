@@ -1,3 +1,30 @@
+require 'merge'
+
+# All JavaScript files from src/
+JS = FileList['src/kendo*.js'].include('src/cultures/*.js')
+SRC_JS = JS.sub('src', 'dist/source')
+MIN_JS = SRC_JS.sub('source', 'js').ext('min.js')
+    .include('dist/js/jquery.min.js')
+    .include('dist/js/kendo.web.min.js')
+    .include('dist/js/kendo.dataviz.min.js')
+    .include('dist/js/kendo.mobile.min.js')
+    .include('dist/js/kendo.all.min.js')
+
+#Build dist/source/js/*.js files by copying them from src/
+rule /dist\/source\/js\/.+\.js/ => [ lambda { |target| target.sub('dist/source/js', 'src') }] do |t|
+    cp t.source, t.name
+end
+
+#Build dist/js/*.min.js files by running uglifyjs over dist/source/js/*.js
+rule /dist\/js\/.+\.js/ => [ lambda { |target| target.sub('dist/js', 'dist/source/js').ext().ext('js') }] do |t|
+    sh "uglifyjs #{t.source} > #{t.name}"
+end
+
+#Copy src/jquery.min.js when it changes to dist/js/jquery.min.js
+file 'dist/js/jquery.min.js' => 'src/jquery.min.js' do |t|
+    cp 'src/jquery.min.js', t.name
+end
+
 #Composite JavaScript files
 merge "src/kendo.editor.js" => [
     "src/editor/main.js",
@@ -111,7 +138,6 @@ MOBILE_JS = [
     "dist/source/js/kendo.mobile.scrollview.js",
     "dist/source/js/kendo.mobile.switch.js",
     "dist/source/js/kendo.mobile.tabstrip.js"
-
 ]
 
 merge "dist/source/js/kendo.web.js" => WEB_JS
