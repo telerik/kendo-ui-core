@@ -2204,7 +2204,7 @@
 
             point.marker = new ShapeElement({
                 id: point.options.id,
-                visible: markers.visible,
+                visible: markers.visible && markers.size,
                 type: markers.type,
                 width: markers.size,
                 height: markers.size,

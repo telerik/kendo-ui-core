@@ -833,6 +833,11 @@
                     equals(marker.options.height, 10);
                 });
 
+                test("hides marker if size is 0", function() {
+                    createPoint({ markers: { size: 0 } });
+                    ok(!marker.options.visible);
+                });
+
                 test("sets marker background color", function() {
                     same(marker.options.background, point.options.markers.background);
                 });
