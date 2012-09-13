@@ -21,12 +21,11 @@
     @Html.Partial("Header")
 
     <div id="example" class="floatWrap centerWrap">
-        <ul>
-            <li><a href="web.html">Web</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
-        </ul>
-
-        <h1 id="exampleTitle" style="position:static">@ViewBag.Title</h1>
+        <div id="themebuilder-chooser">
+            <a href="web.html"@(Html.ActiveSuiteClass(Url.Content("themebuilder/web")))><img src="@Url.Content("~/content/shared/images/themebuilder-web-logo.png")" alt="ThemeBuilder for Kendo UI Web"></a>
+            or
+            <a href="mobile.html"@(Html.ActiveSuiteClass(Url.Content("themebuilder/mobile")))><img src="@Url.Content("~/content/shared/images/themebuilder-mobile-logo.png")" alt="ThemeBuilder for Kendo UI Mobile"></a>
+        </div>
 
         @RenderBody()
     </div>
