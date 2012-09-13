@@ -1,11 +1,17 @@
 require 'rake/clean'
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 require 'merge'
+require 'merged_files'
 
 # All JavaScript files from src/
 JS = FileList['src/kendo*.js'].include('src/cultures/*.js')
 SRC_JS = JS.sub('src', 'dist/source')
-MIN_JS = SRC_JS.sub('source', 'js').ext('min.js').include('dist/js/jquery.min.js')
+MIN_JS = SRC_JS.sub('source', 'js').ext('min.js')
+    .include('dist/js/jquery.min.js')
+    .include('dist/js/kendo.web.min.js')
+    .include('dist/js/kendo.dataviz.min.js')
+    .include('dist/js/kendo.mobile.min.js')
+    .include('dist/js/kendo.all.min.js')
 
 # The clean target will remove the dist directory
 CLEAN.include('dist')
@@ -24,29 +30,6 @@ file 'dist/js/jquery.min.js' => 'src/jquery.min.js' do |t|
     cp 'src/jquery.min.js', t.name
 end
 
-merge "src/kendo.editor.js" => [
-    "src/editor/main.js",
-    "src/editor/dom.js",
-    "src/editor/serializer.js",
-    "src/editor/range.js",
-    "src/editor/system.js",
-    "src/editor/inlineformat.js",
-    "src/editor/formatblock.js",
-    "src/editor/linebreak.js",
-    "src/editor/lists.js",
-    "src/editor/link.js",
-    "src/editor/image.js",
-    "src/editor/components.js",
-    "src/editor/indent.js",
-    "src/editor/viewhtml.js",
-    "src/editor/pendingformats.js",
-]
-
-merge "src/kendo.aspnetmvc.js" => [
-    "src/aspnetmvc/kendo.data.aspnetmvc.js",
-    "src/aspnetmvc/kendo.combobox.aspnetmvc.js",
-    "src/aspnetmvc/kendo.validator.aspnetmvc.js"
-]
 
 # Required directories
 directory 'dist/source/js/cultures'
