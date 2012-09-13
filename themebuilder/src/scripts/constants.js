@@ -203,8 +203,23 @@
             }
         },
         datavizConstantsHierarchy = {
-            "Title": {
-                "title.color":                    "Color"
+            "All": {
+                "title.color":                       "Title color",
+                "legend.labels.color":               "Legend text color",
+                "seriesDefaults.labels.color":       "Series text color",
+                "seriesDefaults.labels.background":  "Series text background",
+                "seriesDefaults.labels.opacity":     "Series text opacity",
+                "seriesDefaults.area.opacity":       "Area chart opacity",
+                "axisDefaults.line.color":           "Axis line color",
+                "axisDefaults.labels.color":         "Axis labels color",
+                "axisDefaults.minorGridLines.color": "Axis minor grid lines color",
+                "axisDefaults.majorGridLines.color": "Axis major grid lines color",
+                "axisDefaults.title.color":          "Axis title color",
+                "tooltip.background":                "Tooltip background",
+                "tooltip.color":                     "Tooltip text",
+                "tooltip.opacity":                   "Tooltip opacity"
+
+                // TODO: Add gauge styles
             }
         };
 

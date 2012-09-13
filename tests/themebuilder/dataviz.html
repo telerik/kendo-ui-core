@@ -79,6 +79,32 @@
                 equal(chart.options.title.color, fancyColor);
             });
 
+            test("_propertyChange sets simple property in options", function() {
+                var themebuilder = new ThemeBuilder({}, document),
+                    options;
+
+                themebuilder.updateDataVizTheme = function(o) {
+                    options = o;
+                };
+
+                themebuilder._propertyChange({ name: "foo", value: "bar" });
+
+                equal(options.foo, "bar");
+            });
+
+            test("_propertyChange sets complex property in options", function() {
+                var themebuilder = new ThemeBuilder({}, document),
+                    options;
+
+                themebuilder.updateDataVizTheme = function(o) {
+                    options = o;
+                };
+
+                themebuilder._propertyChange({ name: "foo.bar.baz", value: "qux" });
+
+                equal(options.foo.bar.baz, "qux");
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

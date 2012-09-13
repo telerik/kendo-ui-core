@@ -27,9 +27,24 @@
             }
         },
         safeSetter = function(expression) {
-            return function(value) {
-                // TODO: remove hard-coded expression
-                return { title: { color: value } };
+            return function(object, value) {
+                var obj = object,
+                    accessors = expression.split("."),
+                    i, name;
+
+                for (var i = 0; i < accessors.length - 1; i++) {
+                    name = accessors[i];
+
+                    if (!obj[name]) {
+                        obj[name] = {};
+                    }
+
+                    obj = obj[name];
+                }
+
+                obj[accessors[accessors.length - 1]] = value;
+
+                return object;
             };
         },
         ColorPicker = ui.ComboBox.extend({
@@ -414,7 +429,7 @@
                     });
                 } else {
                     // DataViz property changed
-                    var options = safeSetter(e.name)(e.value);
+                    var options = safeSetter(e.name)({}, e.value);
                     that.updateDataVizTheme(options);
                 }
             },
