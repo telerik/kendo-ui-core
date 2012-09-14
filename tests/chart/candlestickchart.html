@@ -191,11 +191,11 @@
                         series: [{
                             type: "candlestick",
                             data: [[3,4,1,2]],
-                            baseBodyColor: "baseBodyColor"
+                            baseColor: "baseColor"
                         }]
                     });
 
-                    equals(view.log.rect[0].style.fill, "baseBodyColor");
+                    equals(view.log.rect[0].style.fill, "baseColor");
                 });
 
                 test("overlay rect has same model id as its segment", function() {

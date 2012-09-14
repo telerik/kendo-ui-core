@@ -3263,6 +3263,10 @@
             }
         },
 
+        bindableFields: function() {
+            return ["color", "baseColor"];
+        },
+
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
@@ -3294,7 +3298,7 @@
 
                 if (series.type == CANDLESTICK) {
                     if (value.open > value.close) {
-                        point.options.color = series.baseBodyColor;
+                        point.options.color = series.baseColor;
                     }
                 }
 
@@ -3413,6 +3417,10 @@
     var OHLCChart = CandlestickChart.extend({
         createPoint: function(value, series) {
             return new OHLCPoint(value, series);
+        },
+
+        bindableFields: function() {
+            return ["color"];
         }
     });
 

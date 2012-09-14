@@ -45,7 +45,7 @@
                         _brightness: 0.8
                     },
                     gap: 1,
-                    baseBodyColor: WHITE,
+                    baseColor: WHITE,
                     aggregate: {
                         "open": "max",
                         "high": "max",
@@ -159,7 +159,7 @@
                     }
                 },
                 candlestick: {
-                    baseBodyColor: "#555",
+                    baseColor: "#555",
                     line: {
                         color: WHITE
                     },
@@ -236,7 +236,7 @@
                     }
                 },
                 candlestick: {
-                    baseBodyColor: "#dedede",
+                    baseColor: "#dedede",
                     line: {
                         color: "#8d8d8d"
                     }
@@ -295,7 +295,7 @@
                     }
                 },
                 candlestick: {
-                    baseBodyColor: "#c4d0d5",
+                    baseColor: "#c4d0d5",
                     line: {
                         color: "#9aabb2"
                     }
@@ -379,7 +379,7 @@
                     }
                 },
                 candlestick: {
-                    baseBodyColor: "#a6afbe"
+                    baseColor: "#a6afbe"
                 }
             },
             chartArea: {
@@ -436,7 +436,7 @@
                     }
                 },
                 candlestick: {
-                    baseBodyColor: "#c7c7c7",
+                    baseColor: "#c7c7c7",
                     line: {
                         color: "#787878"
                     }
