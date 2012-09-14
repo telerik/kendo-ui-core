@@ -2393,7 +2393,7 @@ div.old-browser
 
 #mainWrap .km-ios :-moz-any(.km-back)
 {
-    clip-path: url("../images/iconmasks.svg#backbutton");
+    clip-path: url("iconmasks.svg#backbutton");
 }
 
 
