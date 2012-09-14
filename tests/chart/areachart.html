@@ -318,7 +318,7 @@
 
                 test("getNearestPoint returns nearest series point", function() {
                     var point = areaChart.points[3],
-                        result = areaChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 1);
+                        result = areaChart.getNearestPoint(point.box.x2, point.box.y2 + 10, 1);
 
                     ok(result === point);
                 });
@@ -340,7 +340,17 @@
                     same(areaChart.valueAxisRanges[undefined].max, 2);
                 });
 
-                test("omits missing points by default", function() {
+                test("missing points are assumed to be 0 by default", function() {
+                    equals(areaChart.points[2].value, 0);
+                });
+
+                test("omits missing points", function() {
+                    setupAreaChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "gap" }, sparseSeries)
+                        ]
+                    });
+
                     equals(areaChart.points[2], null);
                 });
 
@@ -354,17 +364,13 @@
                     equals(areaChart.points[2], null);
                 });
 
-                test("missing points are assumed to be 0", function() {
+                test("getNearestPoint returns nearest series point (left)", function() {
                     setupAreaChart(plotArea, {
                         series: [
-                            $.extend({ missingValues: "zero" }, sparseSeries)
+                            $.extend({ missingValues: "gap" }, sparseSeries)
                         ]
                     });
 
-                    equals(areaChart.points[2].value, 0);
-                });
-
-                test("getNearestPoint returns nearest series point (left)", function() {
                     var point = areaChart.points[1],
                         result = areaChart.getNearestPoint(point.box.x2 + 0.1, point.box.y2, 0);
 
@@ -372,6 +378,12 @@
                 });
 
                 test("getNearestPoint returns nearest series point (right)", function() {
+                    setupAreaChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "gap" }, sparseSeries)
+                        ]
+                    });
+
                     var point = areaChart.points[3],
                         result = areaChart.getNearestPoint(point.box.x1 - 0.1, point.box.y1, 0);
 
@@ -532,11 +544,22 @@
                     same(areaChart.valueAxisRanges[undefined].max, 4);
                 });
 
-                test("missing points are skipped by default", function() {
+                test("missing points are assumed to be 0 by default", function() {
+                    equals(areaChart.points[4].value, 0);
+                });
+
+                test("omits missing points", function() {
+                    setupAreaChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "gap" }, sparseSeries)
+                        ],
+                        isStacked: true
+                    });
+
                     equals(areaChart.points[4], null);
                 });
 
-                test("line is drawn between existing points", function() {
+                test("line is drawn between existing points when interpolating", function() {
                     setupAreaChart(plotArea, {
                         series: [
                             $.extend({ missingValues: "interpolate" }, sparseSeries)
@@ -654,7 +677,7 @@
                 test("area stops before missing value", function() {
                     setupAreaChart(plotArea, {
                         series: [
-                            sparseSeries
+                            $.extend({ missingValues: "gap" }, sparseSeries)
                         ]
                     });
 
@@ -667,7 +690,7 @@
                 test("no area is created for isolated points", function() {
                     setupAreaChart(plotArea, {
                         series: [
-                            sparseSeries
+                            $.extend({ missingValues: "gap" }, sparseSeries)
                         ]
                     });
 
@@ -677,7 +700,7 @@
                 test("area continues after missing value", function() {
                     setupAreaChart(plotArea, {
                         series: [
-                            { data: [ null, 1, 2 ] }
+                            { missingValues: "gap", data: [ null, 1, 2 ] }
                         ]
                     });
 

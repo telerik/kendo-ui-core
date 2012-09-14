@@ -478,7 +478,18 @@
                     same(lineChart.valueAxisRanges[undefined].max, 4);
                 });
 
-                test("missing points are skipped by default", function() {
+                test("missing points are assumed to be 0 by default", function() {
+                    equals(lineChart.points[4].value, 0);
+                });
+
+                test("missing points are skipped", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "gap" }, sparseSeries)
+                        ],
+                        isStacked: true
+                    });
+
                     equals(lineChart.points[4], null);
                 });
 
@@ -498,7 +509,7 @@
                 test("line stops before missing value", function() {
                     setupLineChart(plotArea, {
                         series: [
-                            sparseSeries
+                            $.extend({ missingValues: "gap" }, sparseSeries)
                         ],
                         isStacked: true
                     });
