@@ -2731,7 +2731,7 @@
             return new AreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
         },
 
-        _seriesMissingValues: function(series) {
+        seriesMissingValues: function(series) {
             return series.missingValues || ZERO;
         }
     });
