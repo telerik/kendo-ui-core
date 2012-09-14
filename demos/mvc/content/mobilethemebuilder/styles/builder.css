@@ -1376,3 +1376,226 @@ input.k-checkbox
 {
     opacity: 1;
 }
+
+
+/* Firefox Icon Masks */
+
+.body .device .km-featured
+{
+    clip-path: url("../images/iconmasks.svg#featured");
+}
+
+.body .device .km-toprated,
+.body .device .km-favorites
+{
+    clip-path: url("../images/iconmasks.svg#toprated");
+}
+
+.body .device .km-mostviewed
+{
+    clip-path: url("../images/iconmasks.svg#mostviewed");
+}
+
+.body .device .km-bookmarks
+{
+    clip-path: url("../images/iconmasks.svg#bookmarks");
+}
+
+.body .device .km-contacts
+{
+    clip-path: url("../images/iconmasks.svg#contacts");
+}
+
+.body .device .km-download,
+.body .device .km-downloads
+{
+    clip-path: url("../images/iconmasks.svg#download");
+}
+
+.body .device .km-more
+{
+    clip-path: url("../images/iconmasks.svg#more");
+}
+
+.body .device .km-android .body .device .km-more
+{
+    clip-path: url("../images/iconmasks.svg#androidmore");
+}
+
+.body .device .km-meego .body .device .km-more
+{
+    clip-path: url("../images/iconmasks.svg#meegomore");
+}
+
+.body .device .km-mostrecent
+{
+    clip-path: url("../images/iconmasks.svg#mostrecent");
+}
+
+.body .device .km-recents
+{
+    clip-path: url("../images/iconmasks.svg#recents");
+}
+
+.body .device .km-history
+{
+    clip-path: url("../images/iconmasks.svg#history");
+}
+
+.body .device .km-add
+{
+    clip-path: url("../images/iconmasks.svg#add");
+}
+
+.body .device .km-details
+{
+    clip-path: url("../images/iconmasks.svg#details");
+}
+
+.body .device .km-info,
+.body .device .km-about
+{
+    clip-path: url("../images/iconmasks.svg#info");
+}
+
+.body .device .km-action
+{
+    clip-path: url("../images/iconmasks.svg#action");
+}
+
+.body .device .km-camera
+{
+    clip-path: url("../images/iconmasks.svg#camera");
+}
+
+.body .device .km-edit,
+.body .device .km-compose
+{
+    clip-path: url("../images/iconmasks.svg#edit");
+}
+
+.body .device .km-search
+{
+    clip-path: url("../images/iconmasks.svg#search");
+}
+
+.body .device .km-trash,
+.body .device .km-delete
+{
+    clip-path: url("../images/iconmasks.svg#trash");
+}
+
+.body .device .km-organize
+{
+    clip-path: url("../images/iconmasks.svg#organize");
+}
+
+.body .device .km-reply
+{
+    clip-path: url("../images/iconmasks.svg#reply");
+}
+
+.body .device .km-stop
+{
+    clip-path: url("../images/iconmasks.svg#stop");
+}
+
+.body .device .km-sounds,
+.body .device .km-volume
+{
+    clip-path: url("../images/iconmasks.svg#sounds");
+}
+
+.body .device .km-refresh
+{
+    clip-path: url("../images/iconmasks.svg#refresh");
+}
+
+.body .device .km-play
+{
+    clip-path: url("../images/iconmasks.svg#play");
+}
+
+.body .device .km-fastforward
+{
+    clip-path: url("../images/iconmasks.svg#fastforward");
+}
+
+.body .device .km-pause
+{
+    clip-path: url("../images/iconmasks.svg#pause");
+}
+
+.body .device .km-rewind
+{
+    clip-path: url("../images/iconmasks.svg#rewind");
+}
+
+.body .device .km-settings
+{
+    clip-path: url("../images/iconmasks.svg#settings");
+}
+
+.body .device .km-globe
+{
+    clip-path: url("../images/iconmasks.svg#globe");
+}
+
+.body .device .km-home
+{
+    clip-path: url("../images/iconmasks.svg#home");
+}
+
+.body .device .km-cart
+{
+    clip-path: url("../images/iconmasks.svg#cart");
+}
+
+.body .device .km-battery
+{
+    clip-path: url("../images/iconmasks.svg#battery");
+}
+
+.body .device .km-wifi
+{
+    clip-path: url("../images/iconmasks.svg#wifi");
+}
+
+.body .device .km-share
+{
+    clip-path: url("../images/iconmasks.svg#share");
+}
+
+.body .device .km-ios .km-loading,
+.body .device .km-ios .km-listview-refresh .km-icon,
+.body .device .km-ios .km-load-more .km-icon,
+.body .device .km-ios .km-scroller-refresh .km-icon
+{
+    clip-path: url("../images/iconmasks.svg#iosrefresh");
+}
+
+.body .device .km-meego .km-loading,
+.body .device .km-meego .km-listview-refresh .km-icon,
+.body .device .km-meego .km-load-more .km-icon,
+.body .device .km-meego .km-scroller-refresh .km-icon
+{
+    clip-path: url("../images/iconmasks.svg#berryrefresh");
+}
+
+.body .device .km-blackberry .km-loading,
+.body .device .km-blackberry .km-listview-refresh .km-icon,
+.body .device .km-blackberry .km-load-more .km-icon,
+.body .device .km-blackberry .km-scroller-refresh .km-icon
+{
+    clip-path: url("../images/iconmasks.svg#berryrefresh");
+}
+
+.body .device .km-scroller-pull .km-icon
+{
+    clip-path: url("../images/iconmasks.svg#pullrefresh");
+}
+
+.body .device .km-ios :-moz-any(.km-back)
+{
+    clip-path: url("../images/iconmasks.svg#backbutton");
+}

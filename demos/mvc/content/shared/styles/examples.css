@@ -2363,26 +2363,37 @@ div.old-browser
 }
 
 #mainWrap .km-ios .km-loading,
-#mainWrap .km-ios .km-listview-refresh .km-icon
+#mainWrap .km-ios .km-listview-refresh .km-icon,
+#mainWrap .km-ios .km-load-more .km-icon,
+#mainWrap .km-ios .km-scroller-refresh .km-icon
 {
     clip-path: url("iconmasks.svg#iosrefresh");
 }
 
 #mainWrap .km-meego .km-loading,
-#mainWrap .km-meego .km-listview-refresh .km-icon
+#mainWrap .km-meego .km-listview-refresh .km-icon,
+#mainWrap .km-meego .km-load-more .km-icon,
+#mainWrap .km-meego .km-scroller-refresh .km-icon
 {
     clip-path: url("iconmasks.svg#berryrefresh");
 }
 
 #mainWrap .km-blackberry .km-loading,
-#mainWrap .km-blackberry .km-listview-refresh .km-icon
+#mainWrap .km-blackberry .km-listview-refresh .km-icon,
+#mainWrap .km-blackberry .km-load-more .km-icon,
+#mainWrap .km-blackberry .km-scroller-refresh .km-icon
 {
     clip-path: url("iconmasks.svg#berryrefresh");
 }
 
-#mainWrap .km-listview-pull .km-icon
+#mainWrap .km-scroller-pull .km-icon
 {
     clip-path: url("iconmasks.svg#pullrefresh");
+}
+
+#mainWrap .km-ios :-moz-any(.km-back)
+{
+    clip-path: url("../images/iconmasks.svg#backbutton");
 }
 
 
