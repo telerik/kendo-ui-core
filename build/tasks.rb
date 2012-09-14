@@ -16,8 +16,22 @@ def merge(*args, &block)
     MergeTask.define_task(*args, &block)
 end
 
+# Copy file when it is modified
 def cp_file(*args)
     file *args do |t|
         cp t.prerequisites[0], t.name
+    end
+end
+
+# Copy files when they are modified
+def cp_files(files)
+    source = FileList[files.values[0]]
+
+    directory = files.keys[0]
+
+    destination = source.pathmap("#{directory}/%f")
+
+    destination.each_with_index do |f, index|
+        cp_file f => source[index]
     end
 end
