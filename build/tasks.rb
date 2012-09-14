@@ -15,3 +15,9 @@ end
 def merge(*args, &block)
     MergeTask.define_task(*args, &block)
 end
+
+def cp_file(*args)
+    file *args do |t|
+        cp t.prerequisites[0], t.name
+    end
+end

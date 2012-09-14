@@ -1,4 +1,4 @@
-require 'merge'
+require 'tasks'
 
 # All JavaScript files from src/
 JS = FileList['src/kendo*.js'].include('src/cultures/*.js')
@@ -21,9 +21,7 @@ rule /dist\/js\/.+\.js/ => [ lambda { |target| target.sub('dist/js', 'dist/sourc
 end
 
 #Copy src/jquery.min.js when it changes to dist/js/jquery.min.js
-file 'dist/js/jquery.min.js' => 'src/jquery.min.js' do |t|
-    cp 'src/jquery.min.js', t.name
-end
+cp_file 'dist/js/jquery.min.js' => 'src/jquery.min.js'
 
 #Composite JavaScript files
 merge "src/kendo.editor.js" => [

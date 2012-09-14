@@ -1,9 +1,6 @@
-require 'merge'
-
 LESS = FileList['styles/**/*.less']
 SRC_LESS = LESS.pathmap('dist/source/styles/%f')
 SRC_CSS = FileList['styles/**/kendo*.less'].pathmap('dist/source/styles/%f').ext("css")
-
 
 def find_less_src(lessfile)
     filename = lessfile.pathmap("%f")
