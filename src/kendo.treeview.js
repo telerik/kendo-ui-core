@@ -162,7 +162,7 @@
             if (!inferred) {
                 if (options.autoBind) {
                     that._progress(true);
-                    that.dataSource.read();
+                    that.dataSource.fetch();
                 }
             } else {
                 that._attachUids();
@@ -270,7 +270,7 @@
 
             this._dataSource();
 
-            this.dataSource.read();
+            this.dataSource.fetch();
         },
 
         _dataSource: function(silentRead) {
@@ -282,7 +282,7 @@
                 for (var i = 0; i < data.length; i++) {
                     data[i]._initChildren();
 
-                    data[i].children.read();
+                    data[i].children.fetch();
 
                     recursiveRead(data[i].children.view());
                 }
@@ -308,7 +308,7 @@
             that.dataSource = HierarchicalDataSource.create(dataSource);
 
             if (silentRead) {
-                that.dataSource.read();
+                that.dataSource.fetch();
 
                 recursiveRead(that.dataSource.view());
             }
