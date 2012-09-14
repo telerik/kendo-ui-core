@@ -21,10 +21,10 @@ rule /dist\/js\/.+\.min\.js/ => [ lambda { |target| target.sub('dist/js', 'dist/
 end
 
 #Copy src/jquery.min.js when it changes to dist/js/jquery.min.js
-cp_file 'dist/js/jquery.min.js' => 'src/jquery.min.js'
+file_copy 'dist/js/jquery.min.js' => 'src/jquery.min.js'
 
 #Composite JavaScript files
-merge "src/kendo.editor.js" => [
+file_merge "src/kendo.editor.js" => [
     "src/editor/main.js",
     "src/editor/dom.js",
     "src/editor/serializer.js",
@@ -42,7 +42,7 @@ merge "src/kendo.editor.js" => [
     "src/editor/pendingformats.js",
 ]
 
-merge "src/kendo.aspnetmvc.js" => [
+file_merge "src/kendo.aspnetmvc.js" => [
     "src/aspnetmvc/kendo.data.aspnetmvc.js",
     "src/aspnetmvc/kendo.combobox.aspnetmvc.js",
     "src/aspnetmvc/kendo.validator.aspnetmvc.js"
@@ -138,7 +138,7 @@ MOBILE_JS = [
     "dist/source/js/kendo.mobile.tabstrip.js"
 ]
 
-merge "dist/source/js/kendo.web.js" => WEB_JS
-merge "dist/source/js/kendo.dataviz.js" => DATAVIZ_JS
-merge "dist/source/js/kendo.mobile.js" => MOBILE_JS
-merge "dist/source/js/kendo.all.js" => WEB_JS.concat(DATAVIZ_JS).concat(MOBILE_JS).uniq
+file_merge "dist/source/js/kendo.web.js" => WEB_JS
+file_merge "dist/source/js/kendo.dataviz.js" => DATAVIZ_JS
+file_merge "dist/source/js/kendo.mobile.js" => MOBILE_JS
+file_merge "dist/source/js/kendo.all.js" => WEB_JS.concat(DATAVIZ_JS).concat(MOBILE_JS).uniq

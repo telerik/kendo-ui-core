@@ -17,7 +17,7 @@ desc('JavaScript')
 task :js => ['dist/js/cultures', 'dist/source/js/cultures', MIN_JS].flatten
 
 desc('Less')
-task :less => ['dist/styles', 'dist/source/styles', SRC_LESS, MIN_CSS].flatten
+task :less => ['dist/styles', 'dist/source/styles', MIN_CSS].flatten
 
 desc('Build all Kendo UI distributions')
 task :default => [:js,:less]

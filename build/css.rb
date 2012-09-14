@@ -1,10 +1,9 @@
 LESS = FileList['styles/**/*.less']
-SRC_LESS = LESS.pathmap('dist/source/styles/%f')
-SRC_CSS = FileList['styles/**/kendo*.less']
-            .include('styles/**/*.css')
-            .pathmap('dist/source/styles/%f')
-            .ext("css")
-MIN_CSS = SRC_CSS.pathmap('dist/styles/%f').ext('min.css')
+SRC_CSS = FileList['styles/**/*.*']
+MIN_CSS = FileList['styles/**/kendo*.less']
+    .include('styles/**/*.css')
+    .pathmap('dist/styles/%f')
+    .ext('min.css')
 
 def find_less_src(lessfile)
     filename = lessfile.pathmap("%f")
@@ -22,7 +21,11 @@ def find_less_prerequisites(lessfile)
     [lessfile].concat(prerequisites)
 end
 
-cp_files 'dist/source/styles' => 'styles/**/*.css'
+files 'dist/source/styles' => 'styles/**/*.css'
+files 'dist/source/styles' => 'styles/**/*.less'
+
+tree 'dist/source/styles' => 'styles/*/*/**/*.*'
+tree 'dist/styles' => 'styles/*/*/**/*.*'
 
 #Build dist/source/styles/*.less files by copying them from styles/
 rule /dist\/source\/styles\/.+\.less/ => [ lambda { |target| find_less_src(target) }] do |t|
