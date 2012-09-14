@@ -1,6 +1,5 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<object>" %>
 
-<%= Html.Kendo().DropDownList()
-    .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(""))
+<%= Html.Kendo().DropDownListFor(m => m)    
     .BindTo((SelectList)ViewData[ViewData.TemplateInfo.GetFullHtmlFieldName("") + "_Data"])
 %>
