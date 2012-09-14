@@ -874,9 +874,9 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
         originalToggleItemClass = kendo.mobile.ui.ListView.prototype._toggleItemActiveClass;
 
         kendo.mobile.ui.ListView.prototype._toggleItemActiveClass = function(e) {
-            if (e.type != kendo.support.mousemove && e.type != kendo.support.mousecancel) {
+            if ((!dragging && e.type != kendo.support.mousemove) && e.type != kendo.support.mousecancel) {
                 if (e.type != kendo.support.mouseup) {
-                    wasActive = $(e.currentTarget).parent().hasClass("km-state-active");
+                    wasActive = $(e.currentTarget).closest("li").hasClass("km-state-active");
                     originalToggleItemClass(e);
                 } else {
                     if (!wasActive) {
@@ -891,16 +891,17 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
         });
 
         kendo.mobile.ui.Button.prototype._removeActive = function (e) {
-            if (e.type !== kendo.support.mouseup && e.type != kendo.support.mousecancel) {
-                wasActive = $(e.currentTarget).hasClass("km-state-active");
-                $(e.target).closest(".km-button,.km-detail").addClass("km-state-active");
-            } else {
-                if (!wasActive) {
-                    $(e.target).closest(".km-button,.km-detail").removeClass("km-state-active");
+            if ((!dragging && e.type != kendo.support.mousemove) && e.type != kendo.support.mousecancel) {
+                if (e.type !== kendo.support.mouseup) {
+                    wasActive = $(e.currentTarget).closest(".km-button,.km-detail").hasClass("km-state-active");
+                    $(e.target).closest(".km-button,.km-detail").addClass("km-state-active");
+                } else {
+                    if (!wasActive) {
+                        $(e.target).closest(".km-button,.km-detail").removeClass("km-state-active");
+                    }
                 }
             }
         };
-
         function replaceIDs() {
             var id = this.id;
             this.id += counter;
