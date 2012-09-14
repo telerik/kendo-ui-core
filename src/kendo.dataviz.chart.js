@@ -3188,7 +3188,7 @@
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
-            group.children = elements
+            group.children = elements;
 
             return [group];
         },
@@ -3405,7 +3405,7 @@
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
-            group.children = elements
+            group.children = elements;
 
             return [group];
         },
