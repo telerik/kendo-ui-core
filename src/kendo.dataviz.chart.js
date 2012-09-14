@@ -3156,17 +3156,22 @@
                 } : {},
                 rectStyle = deepExtend({
                     id: options.id,
-                    fill: options.color,
+                    fill: point.color,
                     fillOpacity: options.opacity
                 }, border),
                 lineStyle = {
                     id: options.id,
                     strokeOpacity: defined(options.line.opacity) ? options.line.opacity : options.opacity,
                     strokeWidth: options.line.width,
-                    stroke: options.line.color || options.color,
+                    stroke: options.line.color || point.color,
                     dashType: options.line.dashType,
                     strokeLineCap: "butt"
-                };
+                },
+                group = view.createGroup({
+                    animation: {
+                        type: CLIP
+                    }
+                });
 
             if (options.overlay) {
                 rectStyle.overlay = deepExtend({
@@ -3183,13 +3188,15 @@
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
-            return elements;
+            group.children = elements
+
+            return [group];
         },
 
         getBorderColor: function() {
-            var bar = this,
-                options = bar.options,
-                color = options.color,
+            var point = this,
+                options = point.options,
+                color = point.color,
                 border = options.border,
                 borderColor = border.color;
 
@@ -3249,7 +3256,7 @@
     });
     deepExtend(Candlestick.fn, PointEventsMixin);
 
-    var CandlestickChart = LineChart.extend({
+    var CandlestickChart = CategoricalChart.extend({
         options: {},
 
         reflowCategories: function(categorySlots) {
@@ -3272,6 +3279,7 @@
                 options = chart.options,
                 value = data.value,
                 children = chart.children,
+                pointColor = data.fields.color || series.color,
                 point, cluster;
 
             chart.updateRange(value, categoryIx, series);
@@ -3298,10 +3306,11 @@
 
                 if (series.type == CANDLESTICK) {
                     if (value.open > value.close) {
-                        point.options.color = series.baseColor;
+                        pointColor = data.fields.baseColor || series.baseColor;
                     }
                 }
 
+                point.color = pointColor;
                 point.categoryIx = categoryIx;
                 point.category = category;
                 point.series = series;
@@ -3378,9 +3387,14 @@
                     strokeOpacity: options.opacity,
                     zIndex: -1,
                     strokeWidth: options.width,
-                    stroke: options.color,
+                    stroke: point.color,
                     dashType: options.dashType
-                };
+                },
+                group = view.createGroup({
+                    animation: {
+                        type: CLIP
+                    }
+                });
 
             elements.push(point.createOverlayRect(view, options));
             elements.push(view.createPolyline(point.oPoints, true, lineStyle));
@@ -3391,7 +3405,9 @@
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
-            return elements;
+            group.children = elements
+
+            return [group];
         },
 
         highlightOverlay: function(view, options) {
@@ -3402,7 +3418,7 @@
                 lineStyle = deepExtend(data, {
                     strokeWidth: highlight.line.width,
                     strokeOpacity: highlight.line.opacity,
-                    stroke: pointOptions.color
+                    stroke: point.color
                 }),
                 group = view.createGroup();
 

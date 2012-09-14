@@ -324,6 +324,70 @@
 
             })();
 
+            (function() {
+                var data = [{
+                        open: 2,
+                        high: 4,
+                        low: 1,
+                        close: 3,
+                        color: "color"
+                    }],
+                    point;
+
+                function createBubbleChart(candlestickSeries) {
+                    $("#container").kendoChart({
+                        dataSource: {
+                            data: data
+                        },
+                        series: [kendo.deepExtend({
+                            type: "ohlc"
+                        }, candlestickSeries)]
+                    });
+
+                    var chart = $("#container").data("kendoChart");
+                    point = chart._plotArea.charts[0].points[0];
+                }
+
+                // ------------------------------------------------------------
+                module("Candlestick Chart / Data Binding / Data Source", {
+                    teardown: function() {
+                        $("#container").empty();
+                    }
+                });
+
+                test("binds to 4-element array", function() {
+                    createBubbleChart({
+                        data: [[2, 4, 0, 3]]
+                    });
+
+                    same(point.value, { open: 2, high: 4, low: 0, close: 3 });
+                });
+
+                test("binds open, high, low and close field", function() {
+                    createBubbleChart({
+                        openField: "open",
+                        highField: "high",
+                        lowField: "low",
+                        closeField: "close"
+                    });
+
+                    same(point.value, { open: 2, high: 4, low: 1, close: 3 });
+                });
+
+                test("binds color field", function() {
+                    createBubbleChart({
+                        openField: "open",
+                        highField: "high",
+                        lowField: "low",
+                        closeField: "close",
+                        colorField: "color"
+                    });
+
+                    same(point.color, "color");
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
