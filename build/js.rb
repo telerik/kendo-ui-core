@@ -16,7 +16,7 @@ rule /dist\/source\/js\/.+\.js/ => [ lambda { |target| target.sub('dist/source/j
 end
 
 #Build dist/js/*.min.js files by running uglifyjs over dist/source/js/*.js
-rule /dist\/js\/.+\.js/ => [ lambda { |target| target.sub('dist/js', 'dist/source/js').ext().ext('js') }] do |t|
+rule /dist\/js\/.+\.min\.js/ => [ lambda { |target| target.sub('dist/js', 'dist/source/js').ext().ext('js') }] do |t|
     sh "uglifyjs #{t.source} > #{t.name}"
 end
 
