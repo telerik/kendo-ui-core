@@ -14,10 +14,20 @@ directory 'dist/styles'
 
 # Rake tasks
 desc('JavaScript')
-task :js => ['dist/js/cultures', 'dist/source/js/cultures', MIN_JS].flatten
+task :js => ['dist/js/cultures', 'dist/source/js/cultures', :min_js]
+
+multitask :min_js => MIN_JS
 
 desc('Less')
-task :less => ['dist/styles', 'dist/source/styles', MIN_CSS].flatten
+task :less => ['dist/styles', 'dist/source/styles', :min_css]
+
+multitask :min_css => MIN_CSS
 
 desc('Build all Kendo UI distributions')
 task :default => [:js,:less]
+
+tree "dist/complete" => ["dist/js/**/*.*", "dist/styles/**/*.*", "dist/source/**/*.*"]
+
+task :complete => [:js,:less, "dist/complete"] do |t|
+
+end

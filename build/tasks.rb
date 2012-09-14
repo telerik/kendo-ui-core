@@ -26,27 +26,14 @@ def file_copy(*args)
     end
 end
 
-# Copy files when they are modified
-def files(files)
-    source = FileList[files.values[0]]
+def tree(depth = 1, directories)
+    source = FileList[directories.values]
 
-    directory = files.keys[0]
+    directory = directories.keys[0]
 
-    destination = source.pathmap("#{directory}/%f")
+    destination = source.sub(/(.+?\/){#{depth}}/, "#{directory}/")
 
-    destination.each_with_index do |f, index|
-        file_copy f => source[index]
-    end
-end
-
-def tree(directories)
-    source = FileList[directories.values[0]]
-
-    dir = directories.keys[0]
-
-    destination = source.pathmap("#{dir}/%-1d/%f")
-
-    file dir => destination
+    file directory => destination
 
     destination.each_with_index do |f, index|
         file_copy f => source[index]
