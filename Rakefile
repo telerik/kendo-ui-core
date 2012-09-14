@@ -3,6 +3,8 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 require 'js'
 require 'css'
 
+VERSION = "2013"
+
 # The clean target will remove the dist directory
 CLEAN.include('dist')
 
@@ -24,12 +26,13 @@ task :less => ['dist/styles', 'dist/source/styles', :min_css]
 multitask :min_css => MIN_CSS
 
 desc('Build all Kendo UI distributions')
-task :default => [:js,:less]
+task :default => [:complete]
 
-tree :to => "dist/complete", :from => ["dist/js/**/*.*", "dist/styles/**/*.*", "dist/source/**/*.*"] do |t|
-    p t.name
-end
+tree :to => "dist/complete",
+     :from => ["dist/js/**/*.*", "dist/styles/**/*.*", "dist/source/**/*.*"],
+     :license => "dist/complete.license"
 
-task :complete => [:js,:less, "dist/complete"] do |t|
+file_license "dist/complete.license" => "resources/legal/official/src-license-complete.txt"
 
-end
+desc('Build Kendo UI Complete Commercial')
+task :complete => [:js,:less, "dist/complete"]

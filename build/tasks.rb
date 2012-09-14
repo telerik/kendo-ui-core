@@ -12,17 +12,61 @@ class MergeTask < Rake::FileTask
     end
 end
 
+class LicenseTask < Rake::FileTask
+    def execute(args=nil)
+        template = File.read(prerequisites[0])
+
+        File.open(name, "w") do |file|
+            file.write(template.sub "#= version #", VERSION)
+        end
+    end
+
+    def needed?
+        super || !File.read(name).include?(VERSION)
+    end
+end
+
+def ensure_path(path)
+    dir = path.pathmap('%d')
+    mkdir_p dir unless Dir.exists?(dir)
+end
+
 def file_merge(*args, &block)
     MergeTask.define_task(*args, &block)
 end
 
-# Copy file when it is modified
-def file_copy(*args)
-    file *args do |t|
-        dir = t.name.pathmap('%d')
-        mkdir_p dir unless Dir.exists?(dir)
+def file_license(*args, &block)
+    LicenseTask.define_task(*args, &block)
+end
 
-        cp t.prerequisites[0], t.name
+def subject_to_license?(file)
+    file.pathmap("%x") =~ /js|css|less/
+end
+
+# Copy file when it is modified
+def file_copy(options)
+    to = options[:to]
+    license = options[:license]
+    from = options[:from]
+
+    if license && subject_to_license?(to)
+        prerequisites = [from, license]
+    else
+        prerequisites = from
+    end
+
+    file to => prerequisites do |t|
+        ensure_path to
+
+        puts "cp #{from} #{to}"
+
+        File.open(to, "w") do |file|
+            if license && subject_to_license?(to)
+                file.write(File.read(license))
+            end
+
+            file.write(File.read(from))
+        end
     end
 end
 
@@ -36,6 +80,6 @@ def tree(options)
     file directory => destination
 
     destination.each_with_index do |f, index|
-        file_copy f => source[index]
+        file_copy :to => f, :from => source[index], :license => options[:license]
     end
 end

@@ -12,16 +12,20 @@ MIN_JS = SRC_JS.sub('source', 'js').ext('min.js')
 
 #Build dist/source/js/*.js files by copying them from src/
 rule /dist\/source\/js\/.+\.js/ => [ lambda { |target| target.sub('dist/source/js', 'src') }] do |t|
+    ensure_path t.name
+
     cp t.source, t.name
 end
 
 #Build dist/js/*.min.js files by running uglifyjs over dist/source/js/*.js
 rule /dist\/js\/.+\.min\.js/ => [ lambda { |target| target.sub('dist/js', 'dist/source/js').ext().ext('js') }] do |t|
+    ensure_path t.name
+
     sh "uglifyjs #{t.source} > #{t.name}"
 end
 
 #Copy src/jquery.min.js when it changes to dist/js/jquery.min.js
-file_copy 'dist/js/jquery.min.js' => 'src/jquery.min.js'
+file_copy :to => 'dist/js/jquery.min.js', :from => 'src/jquery.min.js'
 
 #Composite JavaScript files
 file_merge "src/kendo.editor.js" => [
