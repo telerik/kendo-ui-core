@@ -21,6 +21,7 @@
     SELECTED = "k-state-selected",
     STATEDISABLED = "k-state-disabled",
     HOVER = "k-state-hover",
+    KEYDOWN = "keydown" + ns,
     HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
     MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
     ID = "id",
@@ -78,7 +79,7 @@
         that.calendar = sharedCalendar;
         that.options = options = options || {};
 
-        that.popup = new ui.Popup($(DIV).attr(ARIA_HIDDEN, "true").addClass("k-calendar-container").appendTo(body), extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
+        that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
 
         if (options.id) {
             that.popup.element.attr(ID, options.id);
@@ -102,18 +103,13 @@
 
                 element.appendTo(popup.element)
                        .data(DATEVIEW, that)
-                       .off(CLICK + " " + MOUSEDOWN)
-                       .on(CLICK, "td:has(.k-link)", proxy(that._click, that))
-                       .on(MOUSEDOWN, preventDefault)
+                       .off(CLICK + " " + KEYDOWN)
+                       //.on(CLICK, "td:has(.k-link)", proxy(that._cellClicked, that))
+                       //.on(KEYDOWN, "table.k-content", proxy(that._move, that))
                        .show();
 
                 calendar.unbind(CHANGE)
                         .bind(CHANGE, options);
-
-                if (!touch) {
-                    calendar.unbind(NAVIGATE)
-                            .bind(NAVIGATE, proxy(that._navigate, that));
-                }
 
                 calendar.month = that.month;
                 calendar.options.depth = options.depth;
@@ -177,13 +173,7 @@
 
         move: function(e) {
             var that = this,
-                options = that.options,
-                currentValue = new DATE(that._current),
-                calendar = that.calendar,
-                index = calendar._index,
-                view = calendar._view,
-                key = e.keyCode,
-                value, prevent, method;
+                key = e.keyCode;
 
             if (key == keys.ESC) {
                 that.close();
@@ -191,74 +181,17 @@
             }
 
             if (e.altKey) {
-                if (key == keys.DOWN) {
-                    that.open();
-                    prevent = true;
-                } else if (key == keys.UP) {
-                    that.close();
-                    prevent = true;
-                }
+                that[key == keys.DOWN ? "open" : "close"]();
                 return;
             }
 
-            if (!that.popup.visible() || calendar._table.parent().data("animating")) {
+            if (!that.popup.visible() || that.calendar._table.parent().data("animating")) {
                 return;
             }
 
-            if (e.ctrlKey) {
-                if (key == keys.RIGHT) {
-                    calendar.navigateToFuture();
-                    prevent = true;
-                } else if (key == keys.LEFT) {
-                    calendar.navigateToPast();
-                    prevent = true;
-                } else if (key == keys.UP) {
-                    calendar.navigateUp();
-                    prevent = true;
-                } else if (key == keys.DOWN) {
-                    that._navigateDown();
-                    prevent = true;
-                }
-            } else {
-                if (key == keys.RIGHT) {
-                    value = 1;
-                    prevent = true;
-                } else if (key == keys.LEFT) {
-                    value = -1;
-                    prevent = true;
-                } else if (key == keys.UP) {
-                    value = index === 0 ? -7 : -4;
-                    prevent = true;
-                } else if (key == keys.DOWN) {
-                    value = index === 0 ? 7 : 4;
-                    prevent = true;
-                } else if (key == keys.ENTER) {
-                    that._navigateDown();
-                    prevent = true;
-                } else if (key == keys.HOME || key == keys.END) {
-                    method = key == keys.HOME ? FIRST : "last";
-                    currentValue = view[method](currentValue);
-                    prevent = true;
-                } else if (key == keys.PAGEUP) {
-                    prevent = true;
-                    calendar.navigateToPast();
-                } else if (key == keys.PAGEDOWN) {
-                    prevent = true;
-                    calendar.navigateToFuture();
-                }
-
-                if (value || method) {
-                    if (!method) {
-                        view.setDate(currentValue, value);
-                    }
-
-                    that._current = currentValue = restrictValue(currentValue, options.min, options.max);
-                    calendar._focus(currentValue);
-                }
-            }
-
-            if (prevent) {
-                e.preventDefault();
+            if (key == keys.ENTER) {
+                that._cellClicked();
+                //focus input
             }
         },
 
@@ -271,43 +204,16 @@
             that._current = new DATE(restrictValue(value, options.min, options.max));
 
             if (calendar.element.data(DATEVIEW) === that) {
-                calendar._focus(that._current);
                 calendar.value(value);
             }
         },
 
-        _click: function(e) {
-            if (e.currentTarget.className.indexOf(SELECTED) !== -1) {
+        _cellClicked: function(e) {
+            var cell = e ? e.currentTarget : this.calendar._cell[0];
+
+            if (cell.className.indexOf(SELECTED) !== -1) {
                 this.close();
             }
-        },
-
-        _navigate: function() {
-            var that = this,
-                calendar = that.calendar;
-
-            that._current = new DATE(calendar._current);
-            calendar._focus(calendar._current);
-        },
-
-        _navigateDown: function() {
-            var that = this,
-                calendar = that.calendar,
-                currentValue = calendar._current,
-                cell = calendar._table.find("." + FOCUSED),
-                value = cell.children(":" + FIRST).attr(kendo.attr("value")).split("/");
-
-            //Safari cannot create corretly date from "1/1/2090"
-            value = new DATE(value[0], value[1], value[2]);
-            kendo._adjustDate(value);
-
-            if (!cell[0] || cell.hasClass(SELECTED)) {
-                that.close();
-                return;
-            }
-
-            calendar._view.setDate(currentValue, value);
-            calendar.navigateDown(currentValue);
         },
 
         _option: function(option, value) {
@@ -331,7 +237,7 @@
                 empty = month.empty;
 
             that.month = {
-                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                content: template('<td#=data.cssClass#><a tabindex="-1" class="k-link" href="\\#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
                 empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
 
@@ -471,7 +377,7 @@
                     .attr(ARIA_DISABLED, false);
 
                 icon.on(CLICK, proxy(that._click, that))
-                    .on(MOUSEDOWN, preventDefault);
+                    .on(MOUSEDOWN, preventDefault); //????
             }
         },
 
@@ -526,9 +432,7 @@
         _blur: function() {
             var that = this;
 
-            that.close();
             that._change(that.element.val());
-            that._inputWrapper.removeClass(FOCUSED);
         },
 
         _click: function() {
