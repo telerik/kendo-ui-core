@@ -70,6 +70,12 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
                     selector: ".km-icon",
                     whitelist: [ "background-color", "background-image", "width", "height" ]
                 },
+                activetext: {
+                    name: "Active Text",
+                    selector: ".km-active-state .km-text",
+                    whitelist: [ "color" ],
+                    blacklist: ".km-android .km-tabstrip .km-text, .km-blackberry .km-tabstrip .km-text, .km-meego .km-tabstrip .km-text"
+                },
                 text: {
                     name: "Text",
                     selector: ".km-text",
