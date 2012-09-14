@@ -922,6 +922,48 @@
                 }
             }
         },
+
+        transfer: {
+            css: {
+                scale: function(element, options) {
+                    return 1;
+                }
+            },
+
+            setup: function(element, options) {
+                /**
+                 * Intersection point formulas are taken from here - http://zonalandeducation.com/mmts/intersections/intersectionOfTwoLines1/intersectionOfTwoLines1.html
+                 * Formula for a linear function from two points from here - http://demo.activemath.org/ActiveMath2/search/show.cmd?id=mbase://AC_UK_calculus/functions/ex_linear_equation_two_points
+                 * The transform origin point is the intersection point of the two lines from the top left corners/top right corners of the element and target.
+                 * The math and variables below MAY BE SIMPLIFIED (zeroes removed), but this would make the formula too cryptic.
+                 */
+                var target = options.target,
+                    offset = element.offset(),
+                    targetOffset = target.offset(),
+                    scale = target.outerHeight() / element.outerHeight(),
+
+                    x1 = 0,
+                    y1 = 0,
+
+                    x2 = targetOffset.left - offset.left,
+                    y2 = targetOffset.top - offset.top,
+
+                    x3 = x1 + element.outerWidth(),
+                    y3 = y1,
+
+                    x4 = x2 + target.outerWidth(),
+                    y4 = y2,
+
+                    Z1 = (y2 - y1) / (x2 - x1),
+                    Z2 = (y4 - y3) / (x4 - x3),
+
+                    X = (y1 - y3 - Z1 * x1 + Z2 * x3) / (Z2 - Z1),
+                    Y = y1 + Z1 * (X - x1);
+
+                return extend({ scale: scale, transformOrigin: X + PX + " " + Y + PX }, options.properties);
+            }
+        },
+
         pageturn: {
             setup: function(element, options) {
 
