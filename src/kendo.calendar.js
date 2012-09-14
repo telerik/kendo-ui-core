@@ -339,10 +339,10 @@
                 } else if (key == keys.ENTER) {
                     that._navigateDown();
                     prevent = true;
-                } else if (key == keys.HOME || key == keys.END) {
-                    method = key == keys.HOME ? FIRST : "last";
-                    currentValue = view[method](currentValue);
-                    prevent = true;
+                } else if (key == keys.HOME || key == keys.END) {
+                    method = key == keys.HOME ? "first" : "last";
+                    currentValue = view[method](currentValue);
+                    prevent = true;
                 } else if (key == keys.PAGEUP) {
                     prevent = true;
                     that.navigateToPast();
@@ -355,7 +355,6 @@
                     if (!method) {
                         view.setDate(currentValue, value);
                     }
-
                     that._focus(restrictValue(currentValue, options.min, options.max));
                 }
             }

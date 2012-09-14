@@ -24,6 +24,10 @@ tests.push(
         title: "calendar lint"
     },
     {
+        page: "calendar/navigation.html",
+        title: "calendar navigation"
+    },
+    {
         page: "calendar/aria.html",
         title: "calendar aria"
     }
