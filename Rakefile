@@ -26,7 +26,9 @@ multitask :min_css => MIN_CSS
 desc('Build all Kendo UI distributions')
 task :default => [:js,:less]
 
-tree "dist/complete" => ["dist/js/**/*.*", "dist/styles/**/*.*", "dist/source/**/*.*"]
+tree :to => "dist/complete", :from => ["dist/js/**/*.*", "dist/styles/**/*.*", "dist/source/**/*.*"] do |t|
+    p t.name
+end
 
 task :complete => [:js,:less, "dist/complete"] do |t|
 

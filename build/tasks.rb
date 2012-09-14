@@ -26,12 +26,12 @@ def file_copy(*args)
     end
 end
 
-def tree(depth = 1, directories)
-    source = FileList[directories.values]
+def tree(options)
+    source = FileList[*options[:from]]
 
-    directory = directories.keys[0]
+    directory = options[:to]
 
-    destination = source.sub(/(.+?\/){#{depth}}/, "#{directory}/")
+    destination = source.sub(/(.+?\/){#{options[:depth] || 1}}/, "#{directory}/")
 
     file directory => destination
 
