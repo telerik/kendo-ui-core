@@ -1275,13 +1275,19 @@
             for (var i = 0; i < data.length; i++) {
                 data[i]._initChildren();
 
-                recursiveRead(data[i].children.view());
+                data[i].children.fetch();
+
+                data[i].items = data[i].children.data();
+
+                recursiveRead(data[i].items);
             }
         }
 
-        dataSource.read();
+        dataSource.fetch();
 
         recursiveRead(dataSource.data());
+
+        dataSource._data._dataSource = dataSource;
 
         return dataSource._data;
     };

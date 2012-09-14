@@ -2821,7 +2821,7 @@
                 });
 
                 if (childrenField) {
-                    that[childrenField] = that.children._data;
+                    that[childrenField] = that.children.data();
                 }
             }
         },
@@ -3035,6 +3035,10 @@
             data = dataSource.data,
             fields = dataSource.fields,
             list = dataSource.list;
+
+        if (data && data._dataSource) {
+            return data._dataSource;
+        }
 
         if (!data && fields && !dataSource.transport) {
             if (list) {
