@@ -60,6 +60,11 @@ body.k-popup
     cursor: inherit !important;
 }
 
+.ie10hint {
+    margin-left: 37px;
+    margin-top: 2px;
+}
+
 .km-root
 {
     text-align: center;
@@ -371,6 +376,8 @@ body > label
                       -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #666)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, #707070), color-stop(.75, #666));
     background-image: -moz-linear-gradient(45deg, #666 25%, transparent 25%, transparent), -moz-linear-gradient(-45deg, #666 25%, transparent 25%, transparent),
                       -moz-linear-gradient(45deg, transparent 75%, #666 75%), -moz-linear-gradient(-45deg, #707070 75%, #666 75%);
+    background-image: linear-gradient(45deg, #666 25%, transparent 25%, transparent), linear-gradient(-45deg, #666 25%, transparent 25%, transparent),
+                      linear-gradient(45deg, transparent 75%, #666 75%), linear-gradient(-45deg, #707070 75%, #666 75%);
     background-size: 11px 11px;
 }
 
@@ -442,6 +449,7 @@ body > label
     font-size: 24px;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
     background: -moz-linear-gradient(top, #fff, #eee);
+    background: linear-gradient(to bottom, #fff, #eee);
     height: 62px;
     line-height: 62px;
     color: #777;
@@ -502,6 +510,7 @@ body > label
     border-color: #B5B5B5 #DFDFDF #E0E0E0;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#e8e8e8), to(#e0e0e0));
     background: -moz-linear-gradient(top, #e8e8e8, #e0e0e0);
+    background: linear-gradient(to bottom, #e8e8e8, #e0e0e0);
     border-radius: 10px;
 }
 
@@ -527,6 +536,7 @@ body > label
     min-width: 940px;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#e0e0e0), to(#fff));
     background: -moz-linear-gradient(top, #e0e0e0, #fff);
+    background: linear-gradient(to bottom, #e0e0e0, #fff);
 }
 
 .box > .km-root
@@ -885,6 +895,8 @@ body > label
                 -webkit-gradient(linear,50% 0,50% 100%,from(#e4e4e4),to(#e4e4e4)) 0 0 no-repeat;
     background: -moz-linear-gradient(top, #cacaca, #cacaca) 12em 0 no-repeat,
                 -moz-linear-gradient(top, #e4e4e4, #e4e4e4) 0 0 no-repeat;
+    background: linear-gradient(to bottom, #cacaca, #cacaca) 12em 0 no-repeat,
+                linear-gradient(to bottom, #e4e4e4, #e4e4e4) 0 0 no-repeat;
 }
 
 .k-popup .input-value,
@@ -973,6 +985,7 @@ body > label
     margin-top: 1px;
     background: -webkit-gradient(linear,50% 0,50% 100%,from(#fff),to(#eee));
     background: -moz-linear-gradient(top, #fff, #eee);
+    background: linear-gradient(to bottom, #fff, #eee);
 }
 
 .widgetTarget
@@ -1186,8 +1199,10 @@ body > label
     height: 40px;
     -webkit-transition: all 100ms ease-out;
     -moz-transition: all 100ms ease-out;
+    transition: all 100ms ease-out;
     background: -webkit-gradient(linear, 0 100%, 100% 0, from(#fff), color-stop(.45, #f9f9f9), color-stop(.5, #e5e5e5), color-stop(.5, rgba(0,0,0,.2)), color-stop(.55, rgba(0,0,0,0)), to(rgba(0,0,0,0)));
     background: -moz-linear-gradient(bottom left, #fff, #f9f9f9 45%, #e5e5e5 50%, rgba(0,0,0,.2) 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0));
+    background: linear-gradient(to top right, #fff, #f9f9f9 45%, #e5e5e5 50%, rgba(0,0,0,.2) 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0));
 }
 
 .optionsSheet .wrench

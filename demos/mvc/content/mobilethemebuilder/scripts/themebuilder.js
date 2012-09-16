@@ -1,4 +1,4 @@
-if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
+if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.support.browser.msie &&  kendo.support.browser.version >= 10)) {
     (function ($, undefined) {
 
         var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false,
@@ -44,11 +44,14 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
             properties = propertyTargets.color.concat(propertyTargets.gradient, propertyTargets.pattern, propertyTargets.font),
             TRANSITION = kendo.support.transitions.css + "transition",
             fillSvg = 'url(\'data:image/svg+xml;utf-8,<svg version="1.1" xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" xmlns:xlink="http:%2F%2Fwww.w3.org%2F1999%2Fxlink" width="28" height="38"><linearGradient id="shadow" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:rgba(0,0,0,.3)"%2F><%2FlinearGradient><path fill="url(%23shadow)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="50%" y1="0" x2="50%" y2="28"><stop offset="0"%2F><%2FlinearGradient><circle fill="url(%23sq)" cx="14" cy="14" r="11"%2F><pattern id="sq" patternUnits="userSpaceOnUse" x="0" y="0" width="14" height="14" patternTransform="rotate(45)"><rect fill="%23888" x="0" y="0" width="14" height="14"%2f><rect fill="%23666" x="0" y="0" width="7" height="7"%2f><rect fill="%23666" x="7" y="7" width="7" height="7"%2f></pattern><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><linearGradient id="gr1" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="100%"><stop offset=".25" stop-color="%23666"%2F><stop offset=".25" stop-opacity="0"%2F><%2FlinearGradient><linearGradient id="gr2" gradientUnits="userSpaceOnUse" x1="0" y1="100%" x2="0" y2="100%"><stop offset=".25" stop-color="%23666"%2F><stop offset=".25" stop-opacity="0"%2F><%2FlinearGradient><linearGradient id="gr3" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="100%"><stop offset=".75" stop-opacity="0"%2F><stop offset=".75" stop-color="%23666"%2F><%2FlinearGradient><linearGradient id="gr4" gradientUnits="userSpaceOnUse" x1="0" y1="100%" x2="0" y2="100%"><stop offset=".75" stop-opacity="0"%2F><stop offset=".75" stop-color="%23666"%2F><%2FlinearGradient><%2Fsvg>\')',
+            ie10fillSvg = "<div class='ie10hint'>" + fillSvg.replace("url(\'data:image/svg+xml;utf-8,", "").replace(/\)$/, "").replace(/%2f/gi, "/").replace(/%23/gi, "#") + "</div>",
             cursorSvg = fillSvg + ' 14 38, crosshair',
             defaultColor = '<circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F>',
+            defaultIE10Color = '<circle fill="url(#ID)" cx="14" cy="14" r="11"/>',
             defaultPattern = '<circle fill="url(%23pattern)" cx="14" cy="14" r="11"%2F><pattern id="pattern" patternUnits="userSpaceOnUse" x="0" y="0" width="8" height="8"><image x="0" y="0" width="8" height="8" xlink:href="##" clip-path="url(%23clipmask)" %2F><%2Fpattern>',
             defaultFont = '<text x="14" y="17" width="28" text-anchor="middle" fill="%23fff" style="##">Aa<%2Ftext>',
             defaultStop = '<linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="50%" y1="0" x2="50%" y2="28"><stop offset="0"%2F><%2FlinearGradient>',
+            defaultIE10Stop = '<linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="50%" y1="0" x2="50%" y2="28"><stop offset="0"/></linearGradient>',
             ui = kendo.ui,
             Widget = ui.Widget,
             applications = {},
@@ -342,10 +345,14 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
                         top: -38
                     },
                     hint: function (element) {
-                        return kendo.support.touch ?
-                            $("<div style='width: 28px; height: 38px'/>")
-                                .css("background-image", fillSvg.replace(defaultColor, '<circle fill="' + element.css("background-color") + '" cx="14" cy="14" r="11"%2F>'))
-                            : undefined;
+                        if (kendo.support.browser.msie) {
+                            return $(ie10fillSvg.replace(defaultIE10Color, '<circle fill="' + element.css("background-color") + '" cx="14" cy="14" r="11"/>'));
+                        } else {
+                            return kendo.support.touch ?
+                                $("<div " + (kendo.support.browser.msie ? "class='iehint'" : "") + "style='width: 28px; height: 38px'/>")
+                                    .css("background-image", fillSvg.replace(defaultColor, '<circle fill="' + element.css("background-color") + '" cx="14" cy="14" r="11"%2F>'))
+                                : undefined;
+                        }
                     },
                     dragstart: function () {
                         var element = this.element,
@@ -357,7 +364,9 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
                         element.data("background-color", tools.color.compress(color));
 
                         $(doc).addClass("drop-override");
-                        doc.style.cssText = "cursor: " + cursorSvg.replace(defaultColor, '<circle fill="' + color + '" cx="14" cy="14" r="11"%2F>');
+                        if (!kendo.support.touch) {
+                            doc.style.cssText = "cursor: " + (kendo.support.browser.msie ? "none" : cursorSvg.replace(defaultColor, '<circle fill="' + color + '" cx="14" cy="14" r="11"%2F>'));
+                        }
                         addRecentItem(element, "color");
                     },
                     dragend: function () {
@@ -701,10 +710,14 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
         extend(events, {
             gradient: extend({}, events.color, {
                 hint: function (element) {
-                    return kendo.support.touch ?
-                        $("<div style='width: 28px; height: 38px'/>")
-                            .css("background-image", fillSvg.replace(defaultStop, tools.gradient.set(element.css("background-image")).get("svg"))) :
-                        undefined;
+                    if (kendo.support.browser.msie) {
+                        return $(ie10fillSvg.replace(defaultIE10Stop, tools.gradient.set(element.css("background-image")).get("svg")));
+                    } else {
+                        return kendo.support.touch ?
+                            $("<div style='width: 28px; height: 38px'/>")
+                                .css("background-image", fillSvg.replace(defaultStop, tools.gradient.set(element.css("background-image")).get("svg"))) :
+                            undefined;
+                    }
                 },
                 dragstart: function () {
                     var element = this.element,
@@ -717,17 +730,21 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
 
                     $(doc).addClass("drop-override");
                     if (!kendo.support.touch) {
-                        doc.style.cssText = "cursor: " + cursorSvg.replace(defaultStop, tools.gradient.get("svg"));
+                        doc.style.cssText = "cursor: " + (kendo.support.browser.msie ? "none" : cursorSvg.replace(defaultStop, tools.gradient.get("svg")));
                     }
                     addRecentItem(element, "gradient");
                 }
             }),
             pattern: extend({}, events.color, {
                 hint: function (element) {
-                    return kendo.support.touch ?
-                        $("<div style='width: 28px; height: 38px'/>")
-                            .css("background-image", fillSvg.replace(defaultColor, defaultPattern.replace("##", element.css("background-image").replace(/^url\("?|"?\)$/ig, "").replace("/", "%2F")))) :
-                        undefined;
+                    if (kendo.support.browser.msie) {
+                        return $(ie10fillSvg.replace(defaultIE10Color, defaultPattern.replace("##", element.css("background-image").replace(/^url\("?|"?\)$/ig, ""))));
+                    } else {
+                        return kendo.support.touch ?
+                            $("<div style='width: 28px; height: 38px'/>")
+                                .css("background-image", fillSvg.replace(defaultColor, defaultPattern.replace("##", element.css("background-image").replace(/^url\("?|"?\)$/ig, "").replace("/", "%2F")))) :
+                            undefined;
+                    }
                 },
                 dragstart: function () {
                     var element = this.element,
@@ -740,17 +757,21 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
 
                     $(doc).addClass("drop-override");
                     if (!kendo.support.touch) {
-                        doc.style.cssText = "cursor: " + cursorSvg.replace(defaultColor, defaultPattern.replace("##", pattern.replace(/^url\("?|"?\)$/ig, "")));
+                        doc.style.cssText = "cursor: " + (kendo.support.browser.msie ? "none" : cursorSvg.replace(defaultColor, defaultPattern.replace("##", pattern.replace(/^url\("?|"?\)$/ig, ""))));
                     }
                     addRecentItem(element, "pattern");
                 }
             }),
             font: extend({}, events.color, {
                 hint: function (element) {
-                    return kendo.support.touch ?
-                        $("<div style='width: 28px; height: 38px'/>")
-                            .css("background-image", fillSvg.replace(defaultColor, defaultFont.replace("##", JSON.stringify(kendo.getComputedStyles(element[0], [ "font-family", "font-size", "font-weight", "font-style" ])).replace(/","/g, ";").replace(/"|{|}|'/g, "")))) :
-                        undefined;
+                    if (kendo.support.browser.msie) {
+                        return $(ie10fillSvg.replace(defaultIE10Color, defaultFont.replace("##", JSON.stringify(kendo.getComputedStyles(element[0], [ "font-family", "font-size", "font-weight", "font-style" ])).replace(/","/g, ";").replace(/"|{|}|'/g, "")).replace(/%2f/gi, "/")));
+                    } else {
+                        return kendo.support.touch ?
+                            $("<div style='width: 28px; height: 38px'/>")
+                                .css("background-image", fillSvg.replace(defaultColor, defaultFont.replace("##", JSON.stringify(kendo.getComputedStyles(element[0], [ "font-family", "font-size", "font-weight", "font-style" ])).replace(/","/g, ";").replace(/"|{|}|'/g, "")))) :
+                            undefined;
+                    }
                 },
                 dragstart: function () {
                     var element = this.element,
@@ -763,7 +784,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
 
                     $(doc).addClass("drop-override");
                     if (!kendo.support.touch) {
-                        doc.style.cssText = "cursor: " + cursorSvg.replace(defaultColor, defaultFont.replace("##", font));
+                        doc.style.cssText = "cursor: " + (kendo.support.browser.msie ? "none" : cursorSvg.replace(defaultColor, defaultFont.replace("##", font)));
                     }
                     addRecentItem(element, "font");
                 }
