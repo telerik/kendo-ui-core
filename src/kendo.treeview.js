@@ -178,7 +178,7 @@
                 .on(MOUSEENTER + NS, ".k-in.k-state-selected", function(e) { e.preventDefault(); })
                 .on(MOUSEENTER + NS, clickableItems, function () { $(this).addClass(KSTATEHOVER); })
                 .on("mouseleave" + NS, clickableItems, function () { $(this).removeClass(KSTATEHOVER); })
-                .on(CLICK + NS, clickableItems, proxy(that._nodeClick, that))
+                .on(CLICK + NS, clickableItems, proxy(that._click, that))
                 .on("dblclick" + NS, "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
                 .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that))
                 .on("keydown" + NS, proxy(that._keydown, that))
@@ -651,7 +651,7 @@
             }
         },
 
-        _nodeClick: function (e) {
+        _click: function (e) {
             var that = this,
                 node = $(e.target),
                 contents = nodeContents(node.closest(NODE)),
@@ -669,7 +669,7 @@
             }
 
             if (!node.hasClass(".k-state-selected") && !that._trigger(SELECT, node)) {
-                that.select(node);
+                that.dataItem(node).set("selected", true);
             }
         },
 
@@ -878,6 +878,12 @@
                         .data("indeterminate", false)
                         .prop("indeterminate", false);
                 }
+            } else if (field == "selected") {
+                for (i = 0; i < items.length; i++) {
+                    if (items[i][field]) {
+                        that.select(that.findByUid(items[i].uid));
+                    }
+                }
             }
         },
 
@@ -984,7 +990,8 @@
         },
 
         select: function (node) {
-            var element = this.element;
+            var element = this.element,
+                treeview = this;
 
             if (!arguments.length) {
                 return element.find(".k-state-selected").closest(NODE);
@@ -993,7 +1000,10 @@
             node = $(node, element).closest(NODE);
 
             if (node.length) {
-                element.find(".k-in").removeClass("k-state-hover k-state-selected");
+                element.find(".k-state-selected").removeClass("k-state-selected")
+                    .each(function() {
+                        delete treeview.dataItem(this).selected;
+                    });
 
                 node.find(".k-in:first").addClass("k-state-selected");
             }

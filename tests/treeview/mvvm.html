@@ -159,62 +159,88 @@
                 equal(dom.text(), "bar foo");
             });
 
-            test("binding to hierarchical observable", function() {
-                var Node = kendo.data.Node;
-                var viewModel = kendo.observable({
-                        products: kendo.observableHierarchy([
-                            { text: "foo", expanded: true, items: [
-                                { text: "bar" }
-                            ] }
-                        ])
-                    });
 
-                var dom = $('<div />').appendTo("body")
-                    .kendoTreeView({
-                        dataSource: viewModel.products
-                    });
+            (function() {
+                var viewModel, dom;
 
-                viewModel.get("products")[0].get("items")[0].set("text", "baz");
+                function setupObservableBinding(data) {
+                    viewModel = kendo.observable({
+                            products: kendo.observableHierarchy(data)
+                        });
 
-                equal(dom.find(".k-item .k-item").text(), "baz");
-            });
+                    dom = $('<div />').appendTo("body")
+                        .kendoTreeView({
+                            dataSource: viewModel.products
+                        });
+                }
 
-            test("adding children to child array adds them to the treeview", function() {
-                var viewModel = kendo.observable({
-                    products: kendo.observableHierarchy([
-                        { text: "foo", items: [] }
-                    ])
+                test("binding to hierarchical observable", function() {
+                    setupObservableBinding([
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] }
+                    ]);
+
+                    viewModel.get("products")[0].get("items")[0].set("text", "baz");
+
+                    equal(dom.find(".k-item .k-item").text(), "baz");
                 });
 
-                var dom = $('<div />').appendTo("body")
-                    .kendoTreeView({
-                        dataSource: viewModel.products
-                    });
+                test("adding children to child array adds them to the treeview", function() {
+                    setupObservableBinding([
+                        { text: "foo", items: [] }
+                    ]);
 
-                viewModel.products[0].items.push({ text: "bar" });
+                    viewModel.products[0].items.push({ text: "bar" });
 
-                equal(dom.find(".k-item .k-item").length, 1);
-                equal(dom.find(".k-item .k-item").text(), "bar");
-            });
+                    equal(dom.find(".k-item .k-item").length, 1);
+                    equal(dom.find(".k-item .k-item").text(), "bar");
+                });
 
-            test("removing children to child array removes them from the treeview", function() {
-                var viewModel = kendo.observable({
-                    products: kendo.observableHierarchy([
+                test("removing children to child array removes them from the treeview", function() {
+                    setupObservableBinding([
                         { text: "foo", items: [
                             { text: "bar" }
                         ] }
-                    ])
+                    ]);
+
+                    viewModel.products[0].items.splice(0, 1);
+
+                    equal(dom.find(".k-item .k-item").length, 0);
                 });
 
-                var dom = $('<div />').appendTo("body")
-                    .kendoTreeView({
-                        dataSource: viewModel.products
-                    });
+                test("setting selected field selects node", function() {
+                    setupObservableBinding([
+                        { text: "foo" }
+                    ]);
 
-                viewModel.products[0].items.splice(0, 1);
+                    viewModel.products[0].set("selected", true);
 
-                equal(dom.find(".k-item .k-item").length, 0);
-            });
+                    equal(dom.find(".k-state-selected").length, 1);
+                });
+
+                test("selecting a node sets the node selected flag", function() {
+                    setupObservableBinding([
+                        { text: "foo" }
+                    ]);
+
+                    dom.find(".k-in").trigger("click");
+
+                    ok(viewModel.products[0].get("selected"));
+                });
+
+                test("selecting a node removes selected flag from other nodes", function() {
+                    setupObservableBinding([
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ]);
+
+                    dom.find(".k-in:last").trigger("click");
+
+                    ok(!viewModel.products[0].get("selected"));
+                });
+
+            })();
 
         </script>
 
