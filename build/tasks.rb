@@ -1,3 +1,5 @@
+require 'rbconfig'
+
 class MergeTask < Rake::FileTask
     def execute(args=nil)
         File.open(name, 'w') do |output|
@@ -45,6 +47,18 @@ def subject_to_license?(file)
     file.pathmap("%x") =~ /js|css|less/
 end
 
+def msbuild(project, options=nil)
+    platform = RbConfig::CONFIG['host_os']
+
+    options = '/p:Configuration=Release' if options == nil
+
+    msbuild_path = 'c:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\msbuild.exe'
+
+    msbuild_path = 'xbuild' if platform =~ /linux|darwin/
+
+    sh "#{msbuild_path} #{project} #{options}"
+end
+
 # Copy file when it is modified
 def file_copy(options)
     to = options[:to]
@@ -81,8 +95,12 @@ def tree(options)
         destination = source.sub(/(.+?\/){#{options[:depth] || 1}}/, "#{dir}/")
 
         destination.each_with_index do |f, index|
-            file_copy :to => f, :from => source[index], :license => options[:license]
-            Rake::Task[f].invoke
+            src = source[index]
+
+            unless File.directory? src
+                file_copy :to => f, :from => src, :license => options[:license]
+                Rake::Task[f].invoke
+            end
         end
     end
 end

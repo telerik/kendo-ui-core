@@ -33,26 +33,59 @@ task :bundle_clean do
     rm_rf 'dist/bundles'
 end
 
-# Kendo UI Complete Commercial
-tree :to => "dist/bundles/complete",
-     :from => ["dist/js/**/*.*", "dist/styles/**/*.*", "dist/src/**/*.*"],
-     :license => "dist/bundles/complete.license"
+# Build ASP.NET MVC wrappers
+tree :to => 'dist/wrappers/mvc',
+     :from => FileList['wrappers/mvc/**/*.*'].exclude('**/Kendo*.dll'),
+     :depth => 2
 
-file_license "dist/bundles/complete.license" => "resources/legal/official/src-license-complete.txt"
+file 'dist/wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' =>
+    FileList['dist/wrappers/mvc/src/**/*.cs']
+        .include('dist/wrappers/mvc/src/**/*.resx') do
+    msbuild 'dist/wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
+end
+
+file 'dist/wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll' =>
+    FileList['dist/wrappers/mvc/demos/**/*.cs'] do
+    msbuild 'dist/wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
+end
+
+desc 'Build ASP.NET MVC wrappers'
+task :build_mvc => ['dist/wrappers/mvc',
+    'dist/wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll',
+    'dist/wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll'
+]
+
+# Kendo UI Complete Commercial
+tree :to => 'dist/bundles/complete',
+     :from => ['dist/js/**/*.*', 'dist/styles/**/*.*', 'dist/src/**/*.*'],
+     :license => 'dist/bundles/complete.license'
+
+file_license 'dist/bundles/complete.license' => 'resources/legal/official/src-license-complete.txt'
 
 desc('Build Kendo UI Complete Commercial')
 task :complete => [:js,:less, 'dist/bundles/complete']
 
-# Kendo UI Web Open src
-tree :to => "dist/bundles/web.open-source",
-     :from => FileList["dist/js/**/*.*"]
-            .include("dist/styles/**/*.*")
-            .include("dist/src/**/*.*")
-            .exclude("**/*mobile*")
-            .exclude("**/*dataviz*"),
-     :license => "dist/bundles/web.license"
+# Kendo UI Complete Trial
 
-file_license "dist/bundles/web.license" => "resources/legal/official/src-license-web.txt"
+tree :to => 'dist/bundles/complete.trial',
+     :from => ['dist/js/**/*.*', 'dist/styles/**/*.*', 'dist/src/**/*.*', 'dist/wrappers/**/*.*'],
+     :license => 'dist/bundles/complete.trial.license'
+
+file_license 'dist/bundles/complete.trial.license' => 'resources/legal/official/src-license-complete.txt'
+
+desc('Build Kendo UI Trial')
+task :trial => [:js, :less, :build_mvc, 'dist/bundles/complete.trial']
+
+# Kendo UI Web Open src
+tree :to => 'dist/bundles/web.open-source',
+     :from => FileList['dist/js/**/*.*']
+            .include('dist/styles/**/*.*')
+            .include('dist/src/**/*.*')
+            .exclude('**/*mobile*')
+            .exclude('**/*dataviz*'),
+     :license => 'dist/bundles/web.license'
+
+file_license 'dist/bundles/web.license' => 'resources/legal/official/src-license-web.txt'
 
 desc('Build Kendo UI Web Open src')
 task :web_gpl => [:js,:less, 'dist/bundles/web.open-source']
