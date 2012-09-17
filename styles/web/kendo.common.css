@@ -873,6 +873,10 @@ ul.k-menu-vertical > .k-item
     display: block;
     padding: .5em .9em .4em;
     line-height: 1.34em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .k-menu .k-group
