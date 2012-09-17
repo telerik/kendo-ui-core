@@ -59,7 +59,7 @@
 
             mobile.application = that; // global reference to current application
 
-            that.options = $.extend({ hideAddressBar: true, transition: "" }, options);
+            that.options = $.extend({ hideAddressBar: true, updateDocumentTitle: true, transition: "" }, options);
             kendo.Observable.fn.init.call(that, that.options);
             that.element = $(element ? element : document.body);
 
@@ -69,7 +69,11 @@
                 that.pane = new Pane(that.element, that.options);
                 that._setupElementClass();
                 that._attachMeta();
-                that._setupDocumentTitle();
+
+                if (that.options.updateDocumentTitle) {
+                    that._setupDocumentTitle();
+                }
+
                 that._startHistory();
 
                 if (support.touch) {
