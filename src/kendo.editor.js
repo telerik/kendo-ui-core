@@ -195,7 +195,7 @@
                     "<!DOCTYPE html><html><head>" +
                     "<meta charset='utf-8' />" +
                     "<style>" +
-                        "html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;}" +
+                        "html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;height:100%;min-height:100%;}" +
                         "html{font-size:100%}body{font-size:.75em;line-height:1.5;padding-top:1px;margin-top:-1px;" +
                         "word-wrap: break-word;-webkit-nbsp-mode: space;-webkit-line-break: after-white-space;" +
                         rtlStyle +
