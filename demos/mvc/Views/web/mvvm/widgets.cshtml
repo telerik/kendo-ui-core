@@ -96,7 +96,7 @@
         <tr>
             <td>
                 <h4>TreeView</h4>
-                <div data-role="treeview" data-animation="false" data-drag-and-drop="true" data-bind="source: treeviewSource"></div>
+                <div data-role="treeview" data-drag-and-drop="true" data-bind="source: treeviewSource"></div>
             </td>
         </tr>
         </tbody>
@@ -199,12 +199,12 @@
                     return kendo.toString(timePickerValue, "hh:mm:ss");
                 },
                 sliderValue: 5,
-                treeviewSource: [
-                    new Node({ text: "Andrew", expanded: true, items: [
-                        new Node({ text: "Nancy" }),
-                        new Node({ text: "Steve" })
-                    ] })
-                ],
+                treeviewSource: kendo.observableHierarchy([
+                    { text: "Andrew", expanded: true, items: [
+                        { text: "Nancy" },
+                        { text: "Steve" }
+                    ] }
+                ]),
                 displayTreeviewSource: function() {
                     return stringify(this.get("treeviewSource").toJSON());
                 }
@@ -357,12 +357,12 @@ var viewModel = kendo.observable({
 
         return kendo.toString(timePickerValue, "hh:mm:ss");
     },
-    treeviewSource: [
-        new Node({ text: "Andrew", expanded: true, items: [
-            new Node({ text: "Nancy" }),
-            new Node({ text: "Steve" })
-        ] })
-    ],
+    treeviewSource: kendo.observableHierarchy([
+        { text: "Andrew", expanded: true, items: [
+            { text: "Nancy" },
+            { text: "Steve" }
+        ] }
+    ]),
     displayTreeviewSource: function() {
         return stringify(this.get("treeviewSource").toJSON());
     }

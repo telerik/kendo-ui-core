@@ -672,7 +672,7 @@
             }
 
             if (!node.hasClass(".k-state-selected") && !that._trigger(SELECT, node)) {
-                that.dataItem(node).set("selected", true);
+                that.select(node);
             }
         },
 
@@ -868,24 +868,28 @@
         _updateNode: function(field, items) {
             var that = this, i, node, item;
 
-            for (i = 0; i < items.length; i++) {
-                item = items[i];
+            if (field == "selected") {
+                item = items[0];
 
-                if ($.inArray(field, that.options.dataTextField) >= 0) {
-                    node = that.findByUid(item.uid);
-                    that.text(node, item[field]);
-                } else if (field == CHECKED) {
-                    node = that.findByUid(item.uid);
-                    node.children("div").find(":checkbox")
-                        .prop(CHECKED, item[field])
-                        .data("indeterminate", false)
-                        .prop("indeterminate", false);
-                } else if (field == "selected") {
-                    if (item[field]) {
-                        that.select(that.findByUid(item.uid));
+                that.findByUid(item.uid).find(".k-in:first")
+                        .removeClass("k-state-hover")
+                        .toggleClass("k-state-selected", item[field]);
+            } else {
+                for (i = 0; i < items.length; i++) {
+                    item = items[i];
+
+                    if ($.inArray(field, that.options.dataTextField) >= 0) {
+                        node = that.findByUid(item.uid);
+                        that.text(node, item[field]);
+                    } else if (field == CHECKED) {
+                        node = that.findByUid(item.uid);
+                        node.children("div").find(":checkbox")
+                            .prop(CHECKED, item[field])
+                            .data("indeterminate", false)
+                            .prop("indeterminate", false);
+                    } else if (field == "expanded") {
+                        that._toggle(that.findByUid(item.uid), item[field]);
                     }
-                } else if (field == "expanded") {
-                    that._toggle(that.findByUid(item.uid), item[field]);
                 }
             }
         },
@@ -993,8 +997,8 @@
         },
 
         select: function (node) {
-            var element = this.element,
-                treeview = this;
+            var that = this,
+                element = that.element;
 
             if (!arguments.length) {
                 return element.find(".k-state-selected").closest(NODE);
@@ -1003,12 +1007,11 @@
             node = $(node, element).closest(NODE);
 
             if (node.length) {
-                element.find(".k-state-selected").removeClass("k-state-selected")
-                    .each(function() {
-                        treeview.dataItem(this).set("selected", false);
-                    });
+                element.find(".k-state-selected").each(function() {
+                    that.dataItem(this).set("selected", false);
+                });
 
-                node.find(".k-in:first").addClass("k-state-selected");
+                that.dataItem(node).set("selected", true);
             }
         },
 
