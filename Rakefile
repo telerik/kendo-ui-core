@@ -9,30 +9,51 @@ VERSION = "2013"
 CLEAN.include('dist')
 
 # Required directories
-directory 'dist/source/js/cultures'
-directory 'dist/source/styles'
+directory 'dist/src/js/cultures'
+directory 'dist/src/styles'
 directory 'dist/js/cultures'
 directory 'dist/styles'
 
 # Rake tasks
 desc('JavaScript')
-task :js => ['dist/js/cultures', 'dist/source/js/cultures', :min_js]
+task :js => ['dist/js/cultures', 'dist/src/js/cultures', :min_js]
 
 multitask :min_js => MIN_JS
 
 desc('Less')
-task :less => ['dist/styles', 'dist/source/styles', :min_css]
+task :less => ['dist/styles', 'dist/src/styles', :min_css]
 
 multitask :min_css => MIN_CSS
 
 desc('Build all Kendo UI distributions')
 task :default => [:complete]
 
-tree :to => "dist/complete",
-     :from => ["dist/js/**/*.*", "dist/styles/**/*.*", "dist/source/**/*.*"],
-     :license => "dist/complete.license"
+desc('Clean bundle files')
+task :bundle_clean do
+    rm_rf 'dist/bundles'
+end
 
-file_license "dist/complete.license" => "resources/legal/official/src-license-complete.txt"
+# Kendo UI Complete Commercial
+tree :to => "dist/bundles/complete",
+     :from => ["dist/js/**/*.*", "dist/styles/**/*.*", "dist/src/**/*.*"],
+     :license => "dist/bundles/complete.license"
+
+file_license "dist/bundles/complete.license" => "resources/legal/official/src-license-complete.txt"
 
 desc('Build Kendo UI Complete Commercial')
-task :complete => [:js,:less, 'dist/complete']
+task :complete => [:js,:less, 'dist/bundles/complete']
+
+# Kendo UI Web Open src
+tree :to => "dist/bundles/web.open-source",
+     :from => FileList["dist/js/**/*.*"]
+            .include("dist/styles/**/*.*")
+            .include("dist/src/**/*.*"),
+     :license => "dist/bundles/web.license"
+
+file_license "dist/bundles/web.license" => "resources/legal/official/src-license-web.txt"
+
+desc('Build Kendo UI Web Open src')
+task :web_gpl => [:js,:less, 'dist/bundles/web.open-source']
+
+desc 'Build all bundles'
+multitask :bundles => [:complete, :web_gpl]

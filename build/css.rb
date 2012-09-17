@@ -23,25 +23,25 @@ def find_less_prerequisites(lessfile)
     [lessfile].concat(prerequisites)
 end
 
-tree :depth => 2, :to => 'dist/source/styles', :from => 'styles/**/*.*'
+tree :depth => 2, :to => 'dist/src/styles', :from => 'styles/**/*.*'
 tree :depth => 2, :to => 'dist/styles',  :from => 'styles/*/*/**/*.*'
 
-#Build dist/source/styles/*.less files by copying them from styles/
-rule /dist\/source\/styles\/.+\.less/ => [ lambda { |target| find_less_src(target) }] do |t|
+#Build dist/src/styles/*.less files by copying them from styles/
+rule /dist\/src\/styles\/.+\.less/ => [ lambda { |target| find_less_src(target) }] do |t|
     ensure_path t.name
 
     cp t.source, t.name
 end
 
-#Build dist/source/styles/kendo*.css files by running less over /dist/source/styles/kendo*.less
-rule /dist\/source\/styles\/kendo.+\.css/ => [ lambda { |target| find_less_prerequisites(target.ext('less')) } ] do |t|
+#Build dist/src/styles/kendo*.css files by running less over /dist/src/styles/kendo*.less
+rule /dist\/src\/styles\/kendo.+\.css/ => [ lambda { |target| find_less_prerequisites(target.ext('less')) } ] do |t|
     ensure_path t.name
 
     sh "node build/less-js/bin/lessc #{t.source} #{t.name}"
 end
 
-#Build dist/styles/kendo*.min.css by running cssmin over dist/source/styles/kendo*.css
-rule /dist\/styles\/.+\.min\.css/ => [ lambda { |target| target.sub('dist/styles', 'dist/source/styles').ext().ext('css') }] do |t|
+#Build dist/styles/kendo*.min.css by running cssmin over dist/src/styles/kendo*.css
+rule /dist\/styles\/.+\.min\.css/ => [ lambda { |target| target.sub('dist/styles', 'dist/src/styles').ext().ext('css') }] do |t|
     ensure_path t.name
 
     sh "cssmin #{t.source} > #{t.name}"

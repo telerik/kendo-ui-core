@@ -14,6 +14,8 @@ end
 
 class LicenseTask < Rake::FileTask
     def execute(args=nil)
+        ensure_path(name)
+
         template = File.read(prerequisites[0])
 
         File.open(name, "w") do |file|
