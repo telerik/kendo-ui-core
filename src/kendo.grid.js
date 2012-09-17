@@ -870,7 +870,7 @@
         },
 
         cellIndex: function(td) {
-            return $(td).parent().find('td:not(.k-group-cell,.k-hierarchy-cell)').index(td);
+            return $(td).parent().children('td:not(.k-group-cell,.k-hierarchy-cell)').index(td);
         },
 
         _modelForContainer: function(container) {

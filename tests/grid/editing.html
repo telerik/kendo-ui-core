@@ -79,6 +79,17 @@
                 ok(cell.find(":input").length);
             });
 
+            test("clicking next to a cell with additional table is switched to edit mode", function() {
+                setup({
+                    columns: [
+                        { field: "foo", template: "<table><tr><td>inner foo</td></tr></table>" },
+                        "name"
+                    ]
+                });
+                var cell = table.find("td:last").click();
+                ok(cell.find(":input").length);
+            });
+
             test("clicking delete command cell does not switch to edit mode", function() {
                 setup({ columns: [{ command: "destroy" }] });
                 var cell = table.find("td:last").click();
