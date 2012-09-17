@@ -71,15 +71,16 @@ def file_copy(options)
 end
 
 def tree(options)
-    source = FileList[*options[:from]]
+    dir = options[:to]
 
-    directory = options[:to]
+    task dir do
+        source = FileList[*options[:from]]
 
-    destination = source.sub(/(.+?\/){#{options[:depth] || 1}}/, "#{directory}/")
+        destination = source.sub(/(.+?\/){#{options[:depth] || 1}}/, "#{dir}/")
 
-    file directory => destination
-
-    destination.each_with_index do |f, index|
-        file_copy :to => f, :from => source[index], :license => options[:license]
+        destination.each_with_index do |f, index|
+            file_copy :to => f, :from => source[index], :license => options[:license]
+            Rake::Task[f].invoke
+        end
     end
 end

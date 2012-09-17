@@ -8,7 +8,9 @@ MIN_CSS = FileList['styles/**/kendo*.less']
 def find_less_src(lessfile)
     filename = lessfile.pathmap("%f")
 
-    LESS.find { |less| File.basename(less) == filename }
+    result = LESS.find { |less| File.basename(less) == filename }
+    p filename, LESS if result == nil
+    result
 end
 
 def find_less_prerequisites(lessfile)

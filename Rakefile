@@ -35,4 +35,4 @@ tree :to => "dist/complete",
 file_license "dist/complete.license" => "resources/legal/official/src-license-complete.txt"
 
 desc('Build Kendo UI Complete Commercial')
-task :complete => [:js,:less, "dist/complete"]
+task :complete => [:js,:less, 'dist/complete']
