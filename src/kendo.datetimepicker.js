@@ -463,9 +463,9 @@
 
             if (!icons[0]) {
                 icons = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar">select</span><span unselectable="on" class="k-icon k-i-clock">select</span></span>').insertAfter(element);
-                icons = icons.children();
             }
 
+            icons = icons.children();
             that._dateIcon = icons.eq(0);
             that._timeIcon = icons.eq(1);
         },
