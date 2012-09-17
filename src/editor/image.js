@@ -62,7 +62,7 @@ var ImageCommand = Command.extend({
             range = that.lockRange(),
             applied = false,
             img = RangeUtils.image(range),
-            windowContent, dialog;
+            windowContent, dialog, dialogWidth;
 
         function apply(e) {
             that.attributes = {
@@ -114,9 +114,11 @@ var ImageCommand = Command.extend({
                 '</div>' +
             '</div>';
 
-        dialog = EditorUtils.createDialog(windowContent, that.editor, extend({}, that.editor.options.dialogOptions, {
+        dialogWidth = showBrowser ? { width: "960px" } : {}
+        dialog = EditorUtils.createDialog(windowContent, that.editor, extend(dialogWidth, that.editor.options.dialogOptions, {
             title: INSERTIMAGE,
             close: close,
+            resizable: showBrowser,
             activate: function() {
                 if (showBrowser) {
                     var that = this;

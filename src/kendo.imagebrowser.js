@@ -854,7 +854,7 @@
                 wrapper = element.parents(".k-search-wrap");
 
             element[0].style.width = "";
-            element.addClass("k-input");
+            element.addClass("k-input k-textbox");
 
             if (!wrapper.length) {
                 wrapper = element.wrap($('<div class="k-widget k-search-wrap k-textbox"/>')).parent();

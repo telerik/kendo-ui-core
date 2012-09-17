@@ -295,6 +295,8 @@ html body .k-button-bare
 .k-i-ungroup { background-position: -112px -288px; }
 .k-i-columns { background-position: -112px -304px; }
 
+.k-file { background-position: 0 0; }
+
 .k-image
 {
     border: 0;
@@ -3457,7 +3459,7 @@ html .k-upload
 {
     position: relative;
     float: right;
-    width: auto;
+    width: 20%;
     padding: 0;
 }
 
@@ -3472,7 +3474,6 @@ html .k-upload
 
 .k-search-wrap input.k-input
 {
-    width: 158px;
     padding-left: 0;
     padding-right: 0;
 }
@@ -3480,32 +3481,36 @@ html .k-upload
 .k-search-wrap .k-search
 {
     position: absolute;
-    top: 1px;
+    top: 4px;
     right: 2px;
+    margin:0;
 }
 
 .k-breadcrumbs
 {
     position: relative;
     float: left;
-    width: 560px;
+    width: 78%;
+    padding-right:2px;
 }
 
 .k-breadcrumbs-wrap
 {
     position: absolute;
-    top: 0;
+    top: 3px;
     left: 0;
     z-index: 1;
     padding-left: 5px;
     line-height: 18px;
 }
 
-html input.k-breadcrumbs-input
+.k-breadcrumbs>.k-input
 {
     width: 100%;
     padding-left: 2px;
+    font-size:inherit;
     font-family: inherit;
+    border:0;
 }
 
 .k-breadcrumbs .k-link,
@@ -3636,14 +3641,20 @@ html input.k-breadcrumbs-input
 {
     float: left;
     display: inline;
-    width: 86px;
-    height: 86px;
+    width: 80px;
+    height: 80px;
     margin: 4px 10px 0 4px;
 
     -khtml-user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+}
+
+.k-imagebrowser .k-file
+{
+    width: 80px;
+    height: 80px;
 }
 
 .k-imagebrowser .k-image
@@ -3684,25 +3695,26 @@ html input.k-breadcrumbs-input
     width: 100px;
 }
 
-.k-tile em,
-.k-tile .k-filesize
-{
-    clear: left;
-    font-weight: normal;
-    font-style: normal;
-}
-
 .k-tile strong,
 .k-tile input,
-.k-tile em,
 .k-tile .k-filesize
 {
     display: block;
 }
 
+.k-imagebrowser .k-form-text-row
+{
+    text-align: right;
+}
+
+.k-imagebrowser .k-form-text-row label
+{
+    width: 14%;
+}
+
 .k-imagebrowser .k-form-text-row input
 {
-    width: 628px;
+    width: 80%;
 }
 
 .k-tile-empty
