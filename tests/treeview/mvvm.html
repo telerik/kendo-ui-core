@@ -179,7 +179,7 @@
                 equal(dom.find(".k-item .k-item").text(), "baz");
             });
 
-            test("adding children to child array adds them to treeview", function() {
+            test("adding children to child array adds them to the treeview", function() {
                 var viewModel = kendo.observable({
                     products: kendo.observableHierarchy([
                         { text: "foo", items: [] }
@@ -195,6 +195,25 @@
 
                 equal(dom.find(".k-item .k-item").length, 1);
                 equal(dom.find(".k-item .k-item").text(), "bar");
+            });
+
+            test("removing children to child array removes them from the treeview", function() {
+                var viewModel = kendo.observable({
+                    products: kendo.observableHierarchy([
+                        { text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ])
+                });
+
+                var dom = $('<div />').appendTo("body")
+                    .kendoTreeView({
+                        dataSource: viewModel.products
+                    });
+
+                viewModel.products[0].items.splice(0, 1);
+
+                equal(dom.find(".k-item .k-item").length, 0);
             });
 
         </script>
