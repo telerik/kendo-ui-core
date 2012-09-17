@@ -362,6 +362,8 @@
             if (prevent) {
                 e.preventDefault();
             }
+
+            return currentValue;
         },
 
         //same as _click

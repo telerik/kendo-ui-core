@@ -193,6 +193,7 @@
                 that._cellClicked();
                 //focus input
             }
+            return that.calendar._move(e);
         },
 
         value: function(value) {
@@ -467,7 +468,9 @@
             if (!dateView.popup.visible() && e.keyCode == keys.ENTER) {
                 that._change(that.element.val());
             } else {
-                dateView.move(e);
+                var value = dateView.move(e);
+
+                that.element.attr("aria-label", "current focused date: " + kendo.toString(value, "MM/dd/yyyy"));
             }
         },
 
