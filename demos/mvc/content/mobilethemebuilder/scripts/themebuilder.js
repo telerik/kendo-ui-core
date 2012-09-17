@@ -877,6 +877,8 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
             }
         };
 
+        kendo.mobile.ui.Application.prototype._setupDocumentTitle = function() {};
+
         originalToggleItemClass = kendo.mobile.ui.ListView.prototype._toggleItemActiveClass;
 
         kendo.mobile.ui.ListView.prototype._toggleItemActiveClass = function(e) {
