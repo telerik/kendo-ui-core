@@ -960,6 +960,14 @@
                     X = (y1 - y3 - Z1 * x1 + Z2 * x3) / (Z2 - Z1),
                     Y = y1 + Z1 * (X - x1);
 
+                element.css({
+                    position: "absolute",
+                    top: offset.top,
+                    left: offset.left,
+                    marginLeft: 0,
+                    marginTop: 0
+                }).appendTo(document.body);
+
                 return extend({ scale: scale, transformOrigin: X + PX + " " + Y + PX }, options.properties);
             }
         },
