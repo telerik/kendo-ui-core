@@ -52,3 +52,4 @@ Guardfile
 playground/chart*
 wrappers/java/**/target
 wrappers/java/target
+demos/KendoCRUDService/KendoCRUDService/Content/UserFiles

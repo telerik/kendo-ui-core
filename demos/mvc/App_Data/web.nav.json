@@ -262,6 +262,11 @@
                     "url": "editor/custom-tools.html"
                 },
                 {
+                    "text": "Image browser",
+                    "url": "editor/imagebrowser.html",
+                    "packages": [ "mvc", "online" ]
+                },
+                {
                     "text": "All tools",
                     "url": "editor/all-tools.html"
                 },

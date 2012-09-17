@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -108,6 +109,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NorthwindEf.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileBrowser\ContentInitializer.cs" />
+    <Compile Include="Models\FileBrowser\DirectoryBrowser.cs" />
+    <Compile Include="Models\FileBrowser\EntryType.cs" />
+    <Compile Include="Models\FileBrowser\FileBrowserEntry.cs" />
+    <Compile Include="Models\FileBrowser\FitImageResizer.cs" />
+    <Compile Include="Models\FileBrowser\ImageSize.cs" />
+    <Compile Include="Models\FileBrowser\ThumbnailCreator.cs" />
     <Compile Include="Models\Northwind.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

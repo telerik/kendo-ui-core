@@ -41,7 +41,7 @@
         schemas: {
             "imagebrowser": {
                 data: function(data) {
-                    return data.items || [];
+                    return data.items || data || [];
                 },
                 model: {
                     id: "name",

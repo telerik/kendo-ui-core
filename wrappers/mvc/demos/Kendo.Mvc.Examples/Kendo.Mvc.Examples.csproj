@@ -387,6 +387,7 @@
     <Content Include="Areas\aspx\Views\web\dropdownlist\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\all_tools.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\imagebrowser.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\custom_tools.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\events.aspx" />
@@ -801,6 +802,7 @@
     <Content Include="Areas\razor\Views\web\slider\rtl.cshtml" />
     <Content Include="Areas\razor\Views\web\splitter\rtl.cshtml" />
     <Content Include="Areas\razor\Views\web\tabstrip\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\web\editor\imagebrowser.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
