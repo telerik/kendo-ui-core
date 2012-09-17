@@ -5384,10 +5384,10 @@
             allAxes = pane.axes;
             for (i = 0; i < allAxes.length; i++) {
                 axis = allAxes[i];
-                if (equalsIgnoreCase(axis.options.type, CATEGORY)) {
-                    appendIfNotNull(categories, axis.getCategory(point));
-                } else {
+                if (axis.getValue) {
                     appendIfNotNull(values, axis.getValue(point));
+                } else {
+                    appendIfNotNull(categories, axis.getCategory(point));
                 }
             }
 

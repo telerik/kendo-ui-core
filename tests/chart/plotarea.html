@@ -2228,6 +2228,20 @@
                     });
                 });
 
+                test("event arguments contain date category", 1, function() {
+                    var date = new Date("2012/09/15");
+                    createBarChart({
+                        categoryAxis: {
+                            categories: [date]
+                        },
+                        plotAreaClick: function(e) { equals(e.category.toString(), date.toString()); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
                 // ------------------------------------------------------------
                 function createChartWithPanes(plotAreaClick) {
                     chart = createChart({
