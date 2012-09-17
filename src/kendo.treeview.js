@@ -28,7 +28,7 @@
         VISIBLE = ":visible",
         NODE = ".k-item",
         rendering, TreeView,
-        subGroup, nodeContents,
+        subGroup, nodeContents, nodeIcon,
         bindings = {
             text: "dataTextField",
             url: "dataUrlField",
@@ -56,6 +56,9 @@
 
     subGroup = contentChild(".k-group");
     nodeContents = contentChild(".k-group,.k-content");
+    nodeIcon = function(node) {
+        return node.children("div").children(".k-icon");
+    };
 
     function checkboxes(node) {
         return node.children("div").find(":checkbox:first");
@@ -863,26 +866,26 @@
         },
 
         _updateNode: function(field, items) {
-            var that = this, i, node;
+            var that = this, i, node, item;
 
-            if ($.inArray(field, that.options.dataTextField) >= 0) {
-                for (i = 0; i < items.length; i++) {
-                    node = that.findByUid(items[i].uid);
-                    that.text(node, items[i][field]);
-                }
-            } else if (field == CHECKED) {
-                for (i = 0; i < items.length; i++) {
-                    node = that.findByUid(items[i].uid);
+            for (i = 0; i < items.length; i++) {
+                item = items[i];
+
+                if ($.inArray(field, that.options.dataTextField) >= 0) {
+                    node = that.findByUid(item.uid);
+                    that.text(node, item[field]);
+                } else if (field == CHECKED) {
+                    node = that.findByUid(item.uid);
                     node.children("div").find(":checkbox")
-                        .prop(CHECKED, items[i][field])
+                        .prop(CHECKED, item[field])
                         .data("indeterminate", false)
                         .prop("indeterminate", false);
-                }
-            } else if (field == "selected") {
-                for (i = 0; i < items.length; i++) {
-                    if (items[i][field]) {
-                        that.select(that.findByUid(items[i].uid));
+                } else if (field == "selected") {
+                    if (item[field]) {
+                        that.select(that.findByUid(item.uid));
                     }
+                } else if (field == "expanded") {
+                    that._toggle(that.findByUid(item.uid), item[field]);
                 }
             }
         },
@@ -1002,25 +1005,18 @@
             if (node.length) {
                 element.find(".k-state-selected").removeClass("k-state-selected")
                     .each(function() {
-                        delete treeview.dataItem(this).selected;
+                        treeview.dataItem(this).set("selected", false);
                     });
 
                 node.find(".k-in:first").addClass("k-state-selected");
             }
         },
 
-        toggle: function (node, expand) {
-            node = $(node);
-
-            if (!node.find(">div>.k-icon").is(".k-minus,.k-plus,.k-minus-disabled,.k-plus-disabled")) {
-                return;
-            }
-
+        _toggle: function(node, expand) {
             var that = this,
                 options = that.options,
                 contents = nodeContents(node),
-                isExpanding = arguments.length == 1 ? !contents.is(VISIBLE) : expand,
-                direction = isExpanding ? "expand" : "collapse",
+                direction = expand ? "expand" : "collapse",
                 animation = options.animation[direction],
                 dataItem = that.dataItem(node),
                 loaded;
@@ -1029,25 +1025,21 @@
                 return;
             }
 
-            if (isExpanding == that._expanded(node)) {
-                return;
-            }
-
             if (!that._trigger(direction, node)) {
-                that._expanded(node, isExpanding);
+                that._expanded(node, expand);
 
                 loaded = dataItem && dataItem.loaded();
 
                 if (loaded && contents.children().length > 0) {
-                    that._updateNodeClasses(node, {}, { expanded: isExpanding });
+                    that._updateNodeClasses(node, {}, { expanded: expand });
 
-                    if (!isExpanding) {
+                    if (!expand) {
                         contents.css("height", contents.height()).css("height");
                     }
 
                     contents.kendoStop(true, true).kendoAnimate(extend({ reset: true }, animation, {
                         complete: function() {
-                            if (isExpanding) {
+                            if (expand) {
                                 contents.css("height", "");
                             }
                         }
@@ -1061,6 +1053,20 @@
                     dataItem.load();
                 }
             }
+        },
+
+        toggle: function (node, expand) {
+            node = $(node);
+
+            if (!nodeIcon(node).is(".k-minus,.k-plus,.k-minus-disabled,.k-plus-disabled")) {
+                return;
+            }
+
+            if (arguments.length == 1) {
+                expand = !nodeContents(node).is(VISIBLE);
+            }
+
+            this._expanded(node, expand);
         },
 
         destroy: function() {
@@ -1108,7 +1114,7 @@
                     element.empty();
                 }
             } else {
-                node.find(">div>.k-icon").toggleClass("k-loading", showProgress);
+                nodeIcon(node).toggleClass("k-loading", showProgress);
             }
         },
 
@@ -1207,18 +1213,20 @@
             }
 
             return that._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
-                if (parentNode) {
-                    that._expanded(parentNode, true);
+                function add() {
+                    if (parentNode) {
+                        that._expanded(parentNode, true);
+                    }
+
+                    return dataSource.add(model);
                 }
 
-                if (dataSource.data()) {
-                    return dataSource.add(model);
-                } else {
-                    dataSource.one(CHANGE, function() {
-                        dataSource.add(model);
-                    });
+                if (!dataSource.data()) {
+                    dataSource.one(CHANGE, add);
 
                     return null;
+                } else {
+                    return add();
                 }
             });
         },

@@ -12,6 +12,7 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" ></div>
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
     </head>
     <body>
         <h1 id="qunit-header"></h1>
@@ -25,6 +26,7 @@
                     $(".k-treeview").remove();
                 }
             });
+
             test("initializes a treeview when data role is treeview", function() {
                 var dom = $('<ul data-role="treeview"></ul>');
 
@@ -161,6 +163,12 @@
 
 
             (function() {
+                module("MVVM : observableHierarchy", {
+                    teardown: function() {
+                        $(".k-treeview").remove();
+                    }
+                });
+
                 var viewModel, dom;
 
                 function setupObservableBinding(data) {
@@ -238,6 +246,19 @@
                     dom.find(".k-in:last").trigger("click");
 
                     ok(!viewModel.products[0].get("selected"));
+                });
+
+                test("setting expanded flag expands item", function() {
+                    setupObservableBinding([
+                        { text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ]);
+
+                    viewModel.products[0].set("expanded", true);
+
+                    equal(dom.find(".k-group").length, 2);
+                    ok(dom.find(".k-group:last").is(":visible"));
                 });
 
             })();
