@@ -1,7 +1,9 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        touch = kendo.support.touch,
+        touch = kendo.support.touch || kendo.support.pointers,
+        MOUSEDOWN = kendo.support.mousedown,
+        MOUSEUP = kendo.support.mouseup,
         extend = $.extend,
         proxy = $.proxy,
         each = $.each,
@@ -15,7 +17,7 @@
         LINK = "k-link",
         LAST = "k-last",
         CLOSE = "close",
-        CLICK = touch ? "touchend" : "click",
+        CLICK = touch  ? MOUSEUP : "click",
         TIMER = "timer",
         FIRST = "k-first",
         IMAGE = "k-image",
@@ -251,7 +253,7 @@
                        .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, linkSelector, that._toggleHover);
             } else {
                 options.openOnClick = true;
-                element.on("touchstart" + NS + " touchend" + NS, linkSelector, that._toggleHover);
+                element.on(MOUSEDOWN + NS + " " + MOUSEUP + NS, linkSelector, that._toggleHover);
             }
 
             if (options.openOnClick) {
@@ -576,7 +578,7 @@
             var target = $(kendo.eventTarget(e)).closest(allItemsSelector);
 
             if (!target.parents("li." + DISABLEDSTATE).length) {
-                target.toggleClass("k-state-hover", e.type == MOUSEENTER || e.type == "touchstart");
+                target.toggleClass("k-state-hover", e.type == MOUSEENTER || e.type == MOUSEDOWN);
             }
         },
 
