@@ -26,7 +26,7 @@ task :less => ['dist/styles', 'dist/src/styles', :min_css]
 multitask :min_css => MIN_CSS
 
 desc('Build all Kendo UI distributions')
-task :default => [:complete]
+task :default => [:bundles]
 
 desc('Clean bundle files')
 task :bundle_clean do
@@ -47,7 +47,9 @@ task :complete => [:js,:less, 'dist/bundles/complete']
 tree :to => "dist/bundles/web.open-source",
      :from => FileList["dist/js/**/*.*"]
             .include("dist/styles/**/*.*")
-            .include("dist/src/**/*.*"),
+            .include("dist/src/**/*.*")
+            .exclude("**/*mobile*")
+            .exclude("**/*dataviz*"),
      :license => "dist/bundles/web.license"
 
 file_license "dist/bundles/web.license" => "resources/legal/official/src-license-web.txt"
