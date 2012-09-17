@@ -1,11 +1,11 @@
 require 'rake/clean'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
+require 'version'
 require 'js'
 require 'css'
+require 'tasks'
 require 'mvc'
-
-VERSION = "2013"
 
 ROOT_MAP = {
     'js' => 'src/',

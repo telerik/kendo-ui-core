@@ -1,5 +1,3 @@
-require 'tasks'
-
 MVC_SRC = FileList['wrappers/mvc/src/**/*.cs']
             .include('wrappers/mvc/src/**/*.resx')
             .include('wrappers/mvc/src/**/*.csproj')

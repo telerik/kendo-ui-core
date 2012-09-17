@@ -21,7 +21,7 @@ class LicenseTask < Rake::FileTask
         template = File.read(prerequisites[0])
 
         File.open(name, "w") do |file|
-            file.write(template.sub "#= version #", VERSION)
+            file.write(template.sub("#= version #", VERSION).sub("#= year #", Time.now.year.to_s))
         end
     end
 
@@ -107,7 +107,7 @@ def bundle(options)
     name = options[:name]
     prerequisites = []
 
-    file_license "dist/bundles/#{name}.license" => "resources/legal/official/#{options[:license]}.txt"
+    file_license "dist/bundles/#{name}.license" => "resources/legal/#{BETA ? "beta" : "official" }/#{options[:license]}.txt"
 
     options[:contents].each do |target, contents|
 
