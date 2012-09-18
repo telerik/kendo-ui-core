@@ -75,8 +75,16 @@
             id = element
                     .addClass("k-widget k-calendar")
                     .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
-                    .on(CLICK, CELLSELECTOR, proxy(that._click, that))
                     .on(KEYDOWN, "table.k-content", proxy(that._move, that))
+                    .on(CLICK, CELLSELECTOR, function(e) {
+                        var link = e.currentTarget.firstChild;
+
+                        if (link.href.indexOf("#") != -1) {
+                            e.preventDefault();
+                        }
+
+                        that._click($(link));
+                    })
                     .attr(ID);
 
             if (id) {
@@ -260,14 +268,13 @@
                 that.trigger(NAVIGATE);
             }
 
-            if (+selectedValue !== +value) {
-                that._class("k-state-focused", currentView.toDateString(value));
-            } else if (that._cell) {
+            if (view === views[options.depth] && selectedValue) {
+                that._class("k-state-selected", currentView.toDateString(selectedValue));
                 that._cell.removeClass("k-state-focused");
             }
 
-            if (view === views[options.depth] && selectedValue) {
-                that._class("k-state-selected", currentView.toDateString(selectedValue));
+            if (+selectedValue !== +value) {
+                that._class("k-state-focused", currentView.toDateString(value));
             }
 
             that._changeView = true;
@@ -320,7 +327,7 @@
                     that.navigateUp();
                     prevent = true;
                 } else if (key == keys.DOWN) {
-                    that._navigateDown();
+                    that._click($(that._cell[0].firstChild));
                     prevent = true;
                 }
             } else {
@@ -337,7 +344,7 @@
                     value = index === 0 ? 7 : 4;
                     prevent = true;
                 } else if (key == keys.ENTER) {
-                    that._navigateDown();
+                    that._click($(that._cell[0].firstChild));
                     prevent = true;
                 } else if (key == keys.HOME || key == keys.END) {
                     method = key == keys.HOME ? "first" : "last";
@@ -363,12 +370,7 @@
                 e.preventDefault();
             }
 
-            return currentValue;
-        },
-
-        //same as _click
-        _navigateDown: function() {
-            this._click($(this._cell[0].firstChild));
+            return currentValue; //??
         },
 
         _animate: function(options) {
@@ -384,7 +386,7 @@
 
                 to.insertAfter(that.element[0].firstChild).focus();
             } else if (!from.is(":visible") || that.options.animation === false) {
-                to.insertAfter(from);
+                to.insertAfter(from).focus();
                 from.remove();
             } else {
                 that[options.vertical ? "_vertical" : "_horizontal"](from, to, options.future);
@@ -400,15 +402,15 @@
                 if (effects && effects.indexOf(SLIDE) != -1) {
                     from.add(to).css({ width: viewWidth });
 
-                    from.wrap("<div/>");
-
-                    from.parent()
-                    .css({
-                        position: "relative",
-                        width: viewWidth * 2,
-                        "float": LEFT,
-                        left: future ? 0 : -viewWidth
-                    });
+                    from.wrap("<div/>")
+                    .focus()
+                        .parent()
+                        .css({
+                            position: "relative",
+                            width: viewWidth * 2,
+                            "float": LEFT,
+                            left: future ? 0 : -viewWidth
+                        });
 
                     to[future ? "insertAfter" : "insertBefore"](from);
 
@@ -478,7 +480,7 @@
                     .removeAttr(ID);
             }
 
-            that._cell = cell = that._table
+            cell = that._table
                        .find("td:not(." + OTHERMONTH + ")")
                        .removeClass(className)
                        .filter(function() {
@@ -487,26 +489,25 @@
                        .addClass(className)
                        .attr(ARIA_SELECTED, true);
 
+            if (cell[0]) {
+                that._cell = cell;
+            }
+
             if (id) {
                 cell.attr(ID, id);
                 that._table.removeAttr("aria-activedescendant").attr("aria-activedescendant", id);
             }
         },
 
-        _click: function(args) {
+        _click: function(link) {
             var that = this,
                 options = that.options,
                 currentValue = that._current,
-                link = args[0] ? args : $(args.currentTarget.firstChild),
                 value = link.attr(kendo.attr(VALUE)).split("/");
 
             //Safari cannot create corretly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
             adjustDate(value);
-
-            if (args.preventDefault && link[0].href.indexOf("#") != -1) {
-                args.preventDefault();
-            }
 
             if (link.parent().hasClass(OTHERMONTH)) {
                 currentValue = value;
@@ -525,9 +526,8 @@
                 that.navigate(value);
             } else {
                 that._current = value;
+                that._class("k-state-focused", view.toDateString(value));
             }
-
-            that._class("k-state-focused", view.toDateString(value));
         },
 
         _footer: function(template) {
