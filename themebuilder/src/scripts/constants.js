@@ -8,6 +8,9 @@
                 values: values
             };
         },
+        toProtocolRelative = function(url) {
+            return url.replace(/^http(s?):\/\//i, "//");
+        },
         cdnRoot = (function() {
             var scripts = document.getElementsByTagName("script"),
                 script, path, i;
@@ -22,9 +25,9 @@
 
             path = script.src.split('?')[0];
 
-            return path.split("/").slice(0,-2).join("/") + "/";
+            return toProtocolRelative(path.split("/").slice(0,-2).join("/") + "/");
         })(),
-        lessTemplate = '',
+        lessTemplate = "",
         BGCOLOR = "background-color",
         BORDERCOLOR = "border-color",
         COLOR = "color",
@@ -36,11 +39,14 @@
                             .css("display", "none")
                             .appendTo(context.document.body),
                         result = icon.css("background-image")
-                            .replace(/url\(["']?(.*?)\/sprite\.png["']?\)$/i, "\"$1\"");
+                            .replace(/url\(["']?(.*?)\/sprite\.png["']?\)$/i, "\"$1\""),
+                        cdnRootRe = /cdn\.kendostatic\.com/i;
 
                     icon.remove();
 
-                    return result;
+                    result = result.replace(cdnRootRe, "da7xgjtj801h2.cloudfront.net");
+
+                    return toProtocolRelative(result);
                 }
             },
 
