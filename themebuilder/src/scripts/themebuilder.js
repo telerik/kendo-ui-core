@@ -32,7 +32,7 @@
                     accessors = expression.split("."),
                     i, name;
 
-                for (var i = 0; i < accessors.length - 1; i++) {
+                for (i = 0; i < accessors.length - 1; i++) {
                     name = accessors[i];
 
                     if (!obj[name]) {
