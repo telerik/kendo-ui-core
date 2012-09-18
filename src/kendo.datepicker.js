@@ -72,7 +72,7 @@
         }
 
         if (!sharedCalendar) {
-            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr(ID, kendo.guid()).hide().appendTo(body));
+            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr(ID, kendo.guid()).hide().appendTo(body), { focusOnNav: false });
             calendar.makeUnselectable(sharedCalendar.element);
         }
 
@@ -80,10 +80,6 @@
         that.options = options = options || {};
 
         that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
-
-        if (options.id) {
-            that.popup.element.attr(ID, options.id);
-        }
         that.div = div;
 
         that._templates();
@@ -104,8 +100,8 @@
                 element.appendTo(popup.element)
                        .data(DATEVIEW, that)
                        .off(CLICK + " " + KEYDOWN)
-                       //.on(CLICK, "td:has(.k-link)", proxy(that._cellClicked, that))
-                       //.on(KEYDOWN, "table.k-content", proxy(that._move, that))
+                       .on(CLICK, "td:has(.k-link)", proxy(that._click, that))
+                       .on(MOUSEDOWN, preventDefault)
                        .show();
 
                 calendar.unbind(CHANGE)
@@ -173,7 +169,9 @@
 
         move: function(e) {
             var that = this,
-                key = e.keyCode;
+                key = e.keyCode,
+                calendar = that.calendar,
+                selectIsClicked = e.ctrlKey && key == keys.DOWN || key == keys.ENTER;
 
             if (key == keys.ESC) {
                 that.close();
@@ -181,20 +179,29 @@
             }
 
             if (e.altKey) {
-                that[key == keys.DOWN ? "open" : "close"]();
+                if (key == keys.DOWN) {
+                    that.open();
+                    e.preventDefault();
+                } else if (key == keys.UP) {
+                    that.close();
+                    e.preventDefault();
+                }
                 return;
             }
 
-            if (!that.popup.visible() || that.calendar._table.parent().data("animating")) {
+            if (!that.popup.visible()){
                 return;
             }
 
-            if (key == keys.ENTER) {
-                that._cellClicked();
-                //focus input
+            if (selectIsClicked && calendar._cell.hasClass(SELECTED)) {
+                that.close();
+                e.preventDefault();
+                return;
             }
-            return that.calendar._move(e);
+
+            that._current = calendar._move(e);
         },
+
 
         value: function(value) {
             var that = this,
@@ -209,10 +216,8 @@
             }
         },
 
-        _cellClicked: function(e) {
-            var cell = e ? e.currentTarget : this.calendar._cell[0];
-
-            if (cell.className.indexOf(SELECTED) !== -1) {
+        _click: function(e) {
+            if (e.currentTarget.className.indexOf(SELECTED) !== -1) {
                 this.close();
             }
         },
@@ -319,6 +324,7 @@
                 });
 
             that._reset();
+            that._template();
 
             that.enable(!element.is('[disabled]'));
             that.value(options.value || that.element.val());
@@ -341,7 +347,8 @@
             start: MONTH,
             depth: MONTH,
             animation: {},
-            month : {}
+            month : {},
+            ariaTemplate: 'Current selected date is #=kendo.toString(data.current, "D")#'
         },
 
         setOptions: function(options) {
@@ -378,7 +385,7 @@
                     .attr(ARIA_DISABLED, false);
 
                 icon.on(CLICK, proxy(that._click, that))
-                    .on(MOUSEDOWN, preventDefault); //????
+                    .on(MOUSEDOWN, preventDefault);
             }
         },
 
@@ -422,6 +429,7 @@
             }
 
             that._old = that._update(value);
+            that._updateARIA(that._value);
         },
 
         _toggleHover: function(e) {
@@ -429,11 +437,13 @@
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
             }
         },
-
+    
         _blur: function() {
             var that = this;
 
+            that.close();
             that._change(that.element.val());
+            that._inputWrapper.removeClass(FOCUSED);
         },
 
         _click: function() {
@@ -468,10 +478,13 @@
             if (!dateView.popup.visible() && e.keyCode == keys.ENTER) {
                 that._change(that.element.val());
             } else {
-                var value = dateView.move(e);
-
-                that.element.attr("aria-label", "current focused date: " + kendo.toString(value, "MM/dd/yyyy"));
+                dateView.move(e);
+                that._updateARIA();
             }
+        },
+
+        _updateARIA: function() {
+            this.element.attr("aria-label", this._ariaTemplate({ current: this.dateView._current }));
         },
 
         _icon: function() {
@@ -577,6 +590,10 @@
 
                 that._form = form.on("reset", that._resetHandler);
             }
+        },
+
+        _template: function() {
+            this._ariaTemplate = template(this.options.ariaTemplate);
         }
     });
 
