@@ -107,7 +107,7 @@ def tree(options)
 end
 
 def description(name)
-    name = name.sub('.', ' ').split(/\W/).map { |c| c.capitalize }.join(' ')
+    name = name.split(/\W/).map { |c| c.capitalize }.join(' ')
 
     "Build Kendo UI #{name}"
 end
