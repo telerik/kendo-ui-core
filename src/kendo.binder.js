@@ -851,8 +851,10 @@
 
                     if (widget.dataSource instanceof kendo.data.DataSource) {
                         source = that.bindings.source.get();
-                        if (source instanceof kendo.data.DataSource || source._dataSource) {
-                            widget.setDataSource(source._dataSource || source);
+                        if (source instanceof kendo.data.DataSource) {
+                            widget.setDataSource(source);
+                        } else if (source && source._dataSource) {
+                            widget.setDataSource(source._dataSource);
                         } else {
                             widget.dataSource.data(source);
                         }
