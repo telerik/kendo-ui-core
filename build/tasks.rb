@@ -103,12 +103,19 @@ def tree(options)
     end
 end
 
+def description(name)
+    name = name.sub('.', ' ').split(/\W/).map { |c| c.capitalize }.join(' ')
+
+    "Build Kendo UI #{name}"
+end
+
 def bundle(options)
     name = options[:name]
     path = "dist/bundles/#{name}"
     prerequisites = []
+    license = "#{path}.license"
 
-    file_license "#{path}.license" => "resources/legal/#{BETA ? "beta" : "official" }/#{options[:license]}.txt"
+    file_license license => "resources/legal/#{BETA ? "beta" : "official" }/#{options[:license]}.txt"
 
     options[:contents].each do |target, contents|
 
@@ -117,14 +124,15 @@ def bundle(options)
         tree :to => to,
              :from => contents,
              :root => ROOT_MAP[target],
-             :license => 'dist/bundles/complete.license'
+             :license => license
 
         prerequisites.push(to)
     end
 
 
-    desc("Build Kendo UI #{name}")
     zip "#{path}.zip" => [:js, :less] + prerequisites
+
+    desc description(name)
     task name => "#{path}.zip"
 end
 

@@ -39,7 +39,7 @@ end
 desc 'Build ASP.NET MVC wrappers'
 task :build_mvc => 'wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll'
 
-bundle :name => 'complete',
+bundle :name => 'complete.commercial',
        :license => 'src-license-complete',
        :contents => {
             'js' => FileList[MIN_JS].include('src/jquery.min.js'),
@@ -58,7 +58,7 @@ bundle :name => 'trial',
             'wrappers/aspnetmvc/Examples' => MVC_DEMOS
        }
 
-bundle :name => 'web',
+bundle :name => 'web.commercial',
        :license => 'src-license-web',
        :contents => {
             'js' => WEB_MIN_JS,
@@ -68,4 +68,4 @@ bundle :name => 'web',
        }
 
 desc 'Build all bundles'
-multitask :bundles => [:trial, :complete, :web]
+multitask :bundles => ['trial', 'complete.commercial', 'web.commercial']
