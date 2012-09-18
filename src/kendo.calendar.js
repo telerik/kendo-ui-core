@@ -154,6 +154,13 @@
             Widget.fn.destroy.call(that);
         },
 
+        focus: function(table) {
+            table = table || this._table;
+            if (this.options.focusOnNav !== false) {
+                table.focus();
+            }
+        },
+
         min: function(value) {
             return this._option(MIN, value);
         },
@@ -272,9 +279,7 @@
                 that._class("k-state-selected", currentView.toDateString(selectedValue));
             }
 
-            if (+selectedValue !== +value) {
-                that._class("k-state-focused", currentView.toDateString(value));
-            }
+            that._class("k-state-focused", currentView.toDateString(value));
 
             that._changeView = true;
         },
@@ -383,9 +388,11 @@
                 from.parent().kendoStop(true, true).remove();
                 from.remove();
 
-                to.insertAfter(that.element[0].firstChild).focus();
+                to.insertAfter(that.element[0].firstChild);
+                that.focus();
             } else if (!from.is(":visible") || that.options.animation === false) {
-                to.insertAfter(from).focus();
+                to.insertAfter(from);
+                that.focus();
                 from.remove();
             } else {
                 that[options.vertical ? "_vertical" : "_horizontal"](from, to, options.future);
@@ -402,8 +409,9 @@
                     from.add(to).css({ width: viewWidth });
 
                     from.wrap("<div/>")
-                    .focus()
-                        .parent()
+                    that.focus(from);
+
+                    from.parent()
                         .css({
                             position: "relative",
                             width: viewWidth * 2,
@@ -417,7 +425,8 @@
                         effects: SLIDE + ":" + (future ? LEFT : "right"),
                         complete: function() {
                             from.remove();
-                            to.unwrap().focus();
+                            to.unwrap();
+                            that.focus();
                         }
                     });
 
@@ -454,7 +463,8 @@
                             position: "static",
                             top: 0,
                             left: 0
-                        }).focus();
+                        });
+                        that.focus();
                     }
                 });
 
