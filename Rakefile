@@ -36,7 +36,7 @@ task :build_mvc => 'wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples
 bundle :name => 'complete',
        :license => 'src-license-complete',
        :contents => {
-            'js' => MIN_JS,
+            'js' => FileList[MIN_JS].include('src/jquery.min.js'),
             'styles' => MIN_CSS_RESOURCES,
             'src/js' => SRC_JS,
             'src/styles' => SRC_CSS
@@ -45,7 +45,7 @@ bundle :name => 'complete',
 bundle :name => 'trial',
        :license => 'src-license-complete',
        :contents => {
-            'js' => MIN_JS,
+            'js' => FileList[MIN_JS].include('src/jquery.min.js'),
             'styles' => MIN_CSS_RESOURCES,
             'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL
        }
@@ -53,7 +53,7 @@ bundle :name => 'trial',
 bundle :name => 'web',
        :license => 'src-license-web',
        :contents => {
-            'js' => FileList[WEB_JS].include('src/kendo.web.js').ext('min.js'),
+            'js' => FileList[WEB_JS].include('src/kendo.web.js', 'src/jquery.js').ext('min.js').include('src/cultures/*.min.js'),
             'styles' => MIN_CSS_RESOURCES.keep_if { |f| f =~ /styles\/web\// },
             'src/js' => SRC_JS,
             'src/styles' => SRC_CSS
