@@ -13,6 +13,7 @@ var path = require("path"),
 
 // Configuration ==============================================================
 var CDN_ROOT = "http://cdn.kendostatic.com/",
+    PROTOCOL_RELATIVE_CDN_ROOT = "//da7xgjtj801h2.cloudfront.net/",
     STAGING_ROOT = "http://mvc-kendobuild/staging",
     SOURCE_PATH = "src",
     STYLES_PATH = "styles",
@@ -83,7 +84,7 @@ namespace("themebuilder", function() {
     task("production", ["themebuilder:source"], function() {
         themebuilder.deploy(
             THEMEBUILDER_LIVE_PATH,
-            CDN_ROOT + version()
+            PROTOCOL_RELATIVE_CDN_ROOT + version()
         );
 
         zip(THEMEBUILDER_LIVE_PACKAGE, THEMEBUILDER_LIVE_PATH, complete);
