@@ -851,8 +851,8 @@
 
                     if (widget.dataSource instanceof kendo.data.DataSource) {
                         source = that.bindings.source.get();
-                        if (source instanceof kendo.data.DataSource) {
-                            widget.setDataSource(source);
+                        if (source instanceof kendo.data.DataSource || source._dataSource) {
+                            widget.setDataSource(source._dataSource || source);
                         } else {
                             widget.dataSource.data(source);
                         }
@@ -1266,6 +1266,34 @@
         }
 
         return object;
+    };
+
+    kendo.observableHierarchy = function(array) {
+        var dataSource = kendo.data.HierarchicalDataSource.create(array);
+
+        function recursiveRead(data) {
+            var i, children;
+
+            for (i = 0; i < data.length; i++) {
+                data[i]._initChildren();
+
+                children = data[i].children;
+
+                children.fetch();
+
+                data[i].items = children.data();
+
+                recursiveRead(data[i].items);
+            }
+        }
+
+        dataSource.fetch();
+
+        recursiveRead(dataSource.data());
+
+        dataSource._data._dataSource = dataSource;
+
+        return dataSource._data;
     };
 
 })(jQuery);

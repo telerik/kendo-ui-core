@@ -14,7 +14,7 @@
                 <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue"/>
                 <h4>AutoComplete</h4>
             </td>
-            <td rowspan="9" style="background-color: #efefef; padding: 10px;">
+            <td rowspan="10" style="background-color: #efefef; padding: 10px;">
 <pre>
 {
     autoCompleteValue: <span data-bind="text: displayAutoCompleteValue"></span>,
@@ -22,11 +22,12 @@
     datePickerValue: <span data-bind="text: displayDatePickerValue"></span>,
     dropDownListValue: <span data-bind="text: displayDropDownListValue"></span>,
     gridSource: [
-<span data-bind="text: displayGridSource"></span>
-    ],
+<span data-bind="text: displayGridSource"></span>    ],
     numericTextBoxValue: <span data-bind="text: displayNumericTextBoxValue"></span>,
+    sliderValue: <span data-bind="text: sliderValue"></span>,
     timePickerValue: <span data-bind="text: displayTimePickerValue"></span>,
-    sliderValue: <span data-bind="text: sliderValue"></span>
+    treeviewSource: [
+<span data-bind="text: displayTreeviewSource"></span>    ]
 }
 </pre>
             </td>
@@ -92,19 +93,72 @@
                 </div>
             </td>
         </tr>
+        <tr>
+            <td>
+                <h4>TreeView</h4>
+                <div data-role="treeview" data-drag-and-drop="true" data-bind="source: treeviewSource"></div>
+            </td>
+        </tr>
         </tbody>
     </table>
     <script>
+        function tab() {
+            var tabs = "";
+
+            for (var i = 0; i < stringify.level; i++) {
+                tabs += "\t";
+            }
+
+            return tabs;
+        }
+
+        function stringify(items) {
+            var item,
+                itemString,
+                levelString = "";
+
+            for (var i = 0; i < items.length; i++) {
+                item = items[i];
+
+                if (!item.items) {
+                    itemString = kendo.stringify(item);
+                } else {
+                    stringify.level++;
+                    var subnodes = stringify(item.items);
+                    stringify.level--;
+
+                    delete item.items;
+
+                    itemString = kendo.stringify(item);
+
+                    itemString = itemString.substring(0, itemString.length - 1);
+
+                    itemString += ",\"items\":[\r\n" + subnodes + tab() + "]}";
+                }
+
+                levelString += tab() + itemString;
+
+                if (i != items.length - 1) {
+                    levelString += ",";
+                }
+
+                levelString += "\r\n";
+            }
+
+            return levelString;
+        }
+
+        stringify.level = 1;
+
         $(document).ready(function() {
+            var Node = kendo.data.Node;
             var viewModel = kendo.observable({
                 autoCompleteValue: null,
-                colors: [ {
-                    name: "Red", value: "#f00"
-                }, {
-                    name: "Green", value: "#0f0"
-                }, {
-                    name: "Blue", value: "#00f"
-                } ],
+                colors: [
+                    { name: "Red", value: "#f00" },
+                    { name: "Green", value: "#0f0" },
+                    { name: "Blue", value: "#00f" }
+                ],
                 displayAutoCompleteValue: function() {
                     var autoCompleteValue = this.get("autoCompleteValue");
                     return kendo.stringify(autoCompleteValue);
@@ -130,11 +184,7 @@
                     { Name: "Shoes", Price: 97.00, UnitsInStock: 29 }
                 ],
                 displayGridSource: function() {
-                    var gridSource = this.get("gridSource");
-
-                    return $.map(gridSource, function(product) {
-                        return "\t" + kendo.stringify(product);
-                    }).join(",\r\n");
+                    return stringify(this.get("gridSource").toJSON());
                 },
                 numericTextBoxValue: 10,
                 displayNumericTextBoxValue: function() {
@@ -148,7 +198,16 @@
 
                     return kendo.toString(timePickerValue, "hh:mm:ss");
                 },
-                sliderValue: 5
+                sliderValue: 5,
+                treeviewSource: kendo.observableHierarchy([
+                    { text: "Andrew", expanded: true, items: [
+                        { text: "Nancy" },
+                        { text: "Steve" }
+                    ] }
+                ]),
+                displayTreeviewSource: function() {
+                    return stringify(this.get("treeviewSource").toJSON());
+                }
             });
 
             viewModel.autoCompleteValue = viewModel.colors[1];
@@ -237,6 +296,15 @@
             &lt;/div&gt;
         &lt;/td&gt;
     &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;TreeView&lt;/h4&gt;
+            &lt;div data-role=&quot;treeview&quot;
+                data-animation=&quot;false&quot;
+                data-drag-and-drop=&quot;true&quot;
+                data-bind=&quot;source: treeviewSource&quot;&gt;&lt;/div&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
 &lt;/table&gt;
     </pre>
     </div>
@@ -245,13 +313,11 @@
         <pre class="prettyprint">
 var viewModel = kendo.observable({
     autoCompleteValue: null,
-    colors: [ {
-        name: "Red", value: "#f00",
-    }, {
-        name: "Green", value: "#0f0"
-    }, {
-        name: "Blue", value: "#00f"
-    } ],
+    colors: [
+        { name: "Red", value: "#f00" },
+        { name: "Green", value: "#0f0" },
+        { name: "Blue", value: "#00f" }
+    ],
     displayAutoCompleteValue: function() {
         var autoCompleteValue = this.get("autoCompleteValue");
         return kendo.stringify(autoCompleteValue);
@@ -277,11 +343,7 @@ var viewModel = kendo.observable({
         { Name: "Mishi Kobe Niku", Price: 97.00, UnitsInStock: 29 }
     ],
     displayGridSource: function() {
-        var gridSource = this.get("gridSource");
-
-        return $.map(gridSource, function(product) {
-            return "\t" + kendo.stringify(product);
-        }).join(",\r");
+        return stringify(this.get("gridSource"));
     },
     numericTextBoxValue: 10,
     displayNumericTextBoxValue: function() {
@@ -294,6 +356,15 @@ var viewModel = kendo.observable({
         var timePickerValue = this.get("timePickerValue");
 
         return kendo.toString(timePickerValue, "hh:mm:ss");
+    },
+    treeviewSource: kendo.observableHierarchy([
+        { text: "Andrew", expanded: true, items: [
+            { text: "Nancy" },
+            { text: "Steve" }
+        ] }
+    ]),
+    displayTreeviewSource: function() {
+        return stringify(this.get("treeviewSource").toJSON());
     }
 });
 
@@ -310,8 +381,7 @@ kendo.bind($("table"), viewModel);
             width: 100%;
         }
 
-        .metrotable > tbody > tr > td
-        {
+        .metrotable > tbody > tr > td {
             display: table-cell;
             padding: 5px 5px 5px 0;
             font-size: 1em;
@@ -324,18 +394,16 @@ kendo.bind($("table"), viewModel);
         .metrotable td > .k-datepicker,
         .metrotable td > .k-numerictextbox,
         .metrotable td > .k-timepicker,
-        .metrotable td > .k-slider
-        {
+        .metrotable td > .k-slider {
             float: right;
         }
 
-        .metrotable td > .k-slider
-        {
+        .metrotable td > .k-slider {
             margin-bottom: 10px;
         }
 
         .metrotable > tbody > tr > th {
-            border-bottom: 1px solid #CCCCCC;
+            border-bottom: 1px solid #ccc;
             color: #787878;
             font-size: 1.4em;
             font-weight: lighter;
@@ -344,7 +412,7 @@ kendo.bind($("table"), viewModel);
         }
 
         td h4 {
-            margin:0;
+            margin: 0;
             padding: 7px 0;
             font-weight: normal;
         }

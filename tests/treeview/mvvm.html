@@ -12,6 +12,7 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" ></div>
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
     </head>
     <body>
         <h1 id="qunit-header"></h1>
@@ -20,6 +21,12 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+            module("MVVM", {
+                teardown: function() {
+                    $(".k-treeview").remove();
+                }
+            });
+
             test("initializes a treeview when data role is treeview", function() {
                 var dom = $('<ul data-role="treeview"></ul>');
 
@@ -153,6 +160,126 @@
 
                 equal(dom.text(), "bar foo");
             });
+
+
+            (function() {
+                module("MVVM : observableHierarchy", {
+                    teardown: function() {
+                        $(".k-treeview").remove();
+                    }
+                });
+
+                var viewModel, dom;
+
+                function setupObservableBinding(data) {
+                    viewModel = kendo.observable({
+                            products: kendo.observableHierarchy(data)
+                        });
+
+                    dom = $('<div />').appendTo("body")
+                        .kendoTreeView({
+                            dataSource: viewModel.products
+                        });
+                }
+
+                test("binding to hierarchical observable", function() {
+                    setupObservableBinding([
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] }
+                    ]);
+
+                    viewModel.get("products")[0].get("items")[0].set("text", "baz");
+
+                    equal(dom.find(".k-item .k-item").text(), "baz");
+                });
+
+                test("adding children to child array adds them to the treeview", function() {
+                    setupObservableBinding([
+                        { text: "foo", items: [] }
+                    ]);
+
+                    viewModel.products[0].items.push({ text: "bar" });
+
+                    equal(dom.find(".k-item .k-item").length, 1);
+                    equal(dom.find(".k-item .k-item").text(), "bar");
+                });
+
+                test("removing children to child array removes them from the treeview", function() {
+                    setupObservableBinding([
+                        { text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ]);
+
+                    viewModel.products[0].items.splice(0, 1);
+
+                    equal(dom.find(".k-item .k-item").length, 0);
+                });
+
+                test("setting selected field selects node", function() {
+                    setupObservableBinding([
+                        { text: "foo" }
+                    ]);
+
+                    viewModel.products[0].set("selected", true);
+
+                    equal(dom.find(".k-state-selected").length, 1);
+                });
+
+                test("selecting a node sets the node selected flag", function() {
+                    setupObservableBinding([
+                        { text: "foo" }
+                    ]);
+
+                    dom.find(".k-in").trigger("click");
+
+                    ok(viewModel.products[0].get("selected"));
+                });
+
+                test("selecting a node removes selected flag from other nodes", function() {
+                    setupObservableBinding([
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ]);
+
+                    dom.find(".k-in:last").trigger("click");
+
+                    ok(!viewModel.products[0].get("selected"));
+                    ok(!("selected" in viewModel.products[0]));
+                });
+
+                test("setting expanded flag expands item", function() {
+                    setupObservableBinding([
+                        { text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ]);
+
+                    viewModel.products[0].set("expanded", true);
+
+                    equal(dom.find(".k-group").length, 2);
+                    ok(dom.find(".k-group:last").is(":visible"));
+                });
+
+                test("declarative binding", function() {
+                    viewModel = kendo.observable({
+                            products: kendo.observableHierarchy([
+                                { text: "foo" }
+                            ])
+                        });
+
+                    dom = $("<div data-role='treeview' data-bind='source: products' />").appendTo("body");
+
+                    kendo.bind(dom, viewModel);
+
+                    viewModel.products[0].items.push({ text: "bar" });
+
+                    equal(dom.find(".k-item .k-item").length, 1);
+                });
+
+            })();
+
         </script>
 
         <script id="fooTemplate" type="text/x-kendo-template">#:item.text# foo</script>

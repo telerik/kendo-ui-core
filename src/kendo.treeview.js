@@ -28,7 +28,7 @@
         VISIBLE = ":visible",
         NODE = ".k-item",
         rendering, TreeView,
-        subGroup, nodeContents,
+        subGroup, nodeContents, nodeIcon,
         bindings = {
             text: "dataTextField",
             url: "dataUrlField",
@@ -56,6 +56,9 @@
 
     subGroup = contentChild(".k-group");
     nodeContents = contentChild(".k-group,.k-content");
+    nodeIcon = function(node) {
+        return node.children("div").children(".k-icon");
+    };
 
     function checkboxes(node) {
         return node.children("div").find(":checkbox:first");
@@ -178,7 +181,7 @@
                 .on(MOUSEENTER + NS, ".k-in.k-state-selected", function(e) { e.preventDefault(); })
                 .on(MOUSEENTER + NS, clickableItems, function () { $(this).addClass(KSTATEHOVER); })
                 .on("mouseleave" + NS, clickableItems, function () { $(this).removeClass(KSTATEHOVER); })
-                .on(CLICK + NS, clickableItems, proxy(that._nodeClick, that))
+                .on(CLICK + NS, clickableItems, proxy(that._click, that))
                 .on("dblclick" + NS, "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
                 .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that))
                 .on("keydown" + NS, proxy(that._keydown, that))
@@ -651,7 +654,7 @@
             }
         },
 
-        _nodeClick: function (e) {
+        _click: function (e) {
             var that = this,
                 node = $(e.target),
                 contents = nodeContents(node.closest(NODE)),
@@ -863,20 +866,30 @@
         },
 
         _updateNode: function(field, items) {
-            var that = this, i, node;
+            var that = this, i, node, item;
 
-            if ($.inArray(field, that.options.dataTextField) >= 0) {
+            if (field == "selected") {
+                item = items[0];
+
+                that.findByUid(item.uid).find(".k-in:first")
+                        .removeClass("k-state-hover")
+                        .toggleClass("k-state-selected", item[field]);
+            } else {
                 for (i = 0; i < items.length; i++) {
-                    node = that.findByUid(items[i].uid);
-                    that.text(node, items[i][field]);
-                }
-            } else if (field == CHECKED) {
-                for (i = 0; i < items.length; i++) {
-                    node = that.findByUid(items[i].uid);
-                    node.children("div").find(":checkbox")
-                        .prop(CHECKED, items[i][field])
-                        .data("indeterminate", false)
-                        .prop("indeterminate", false);
+                    item = items[i];
+
+                    if ($.inArray(field, that.options.dataTextField) >= 0) {
+                        node = that.findByUid(item.uid);
+                        that.text(node, item[field]);
+                    } else if (field == CHECKED) {
+                        node = that.findByUid(item.uid);
+                        node.children("div").find(":checkbox")
+                            .prop(CHECKED, item[field])
+                            .data("indeterminate", false)
+                            .prop("indeterminate", false);
+                    } else if (field == "expanded") {
+                        that._toggle(that.findByUid(item.uid), item[field]);
+                    }
                 }
             }
         },
@@ -984,7 +997,8 @@
         },
 
         select: function (node) {
-            var element = this.element;
+            var that = this,
+                element = that.element;
 
             if (!arguments.length) {
                 return element.find(".k-state-selected").closest(NODE);
@@ -993,24 +1007,21 @@
             node = $(node, element).closest(NODE);
 
             if (node.length) {
-                element.find(".k-in").removeClass("k-state-hover k-state-selected");
+                element.find(".k-state-selected").each(function() {
+                    var dataItem = that.dataItem(this);
+                    dataItem.set("selected", false);
+                    delete dataItem.selected;
+                });
 
-                node.find(".k-in:first").addClass("k-state-selected");
+                that.dataItem(node).set("selected", true);
             }
         },
 
-        toggle: function (node, expand) {
-            node = $(node);
-
-            if (!node.find(">div>.k-icon").is(".k-minus,.k-plus,.k-minus-disabled,.k-plus-disabled")) {
-                return;
-            }
-
+        _toggle: function(node, expand) {
             var that = this,
                 options = that.options,
                 contents = nodeContents(node),
-                isExpanding = arguments.length == 1 ? !contents.is(VISIBLE) : expand,
-                direction = isExpanding ? "expand" : "collapse",
+                direction = expand ? "expand" : "collapse",
                 animation = options.animation[direction],
                 dataItem = that.dataItem(node),
                 loaded;
@@ -1019,25 +1030,21 @@
                 return;
             }
 
-            if (isExpanding == that._expanded(node)) {
-                return;
-            }
-
             if (!that._trigger(direction, node)) {
-                that._expanded(node, isExpanding);
+                that._expanded(node, expand);
 
                 loaded = dataItem && dataItem.loaded();
 
                 if (loaded && contents.children().length > 0) {
-                    that._updateNodeClasses(node, {}, { expanded: isExpanding });
+                    that._updateNodeClasses(node, {}, { expanded: expand });
 
-                    if (!isExpanding) {
+                    if (!expand) {
                         contents.css("height", contents.height()).css("height");
                     }
 
                     contents.kendoStop(true, true).kendoAnimate(extend({ reset: true }, animation, {
                         complete: function() {
-                            if (isExpanding) {
+                            if (expand) {
                                 contents.css("height", "");
                             }
                         }
@@ -1051,6 +1058,20 @@
                     dataItem.load();
                 }
             }
+        },
+
+        toggle: function (node, expand) {
+            node = $(node);
+
+            if (!nodeIcon(node).is(".k-minus,.k-plus,.k-minus-disabled,.k-plus-disabled")) {
+                return;
+            }
+
+            if (arguments.length == 1) {
+                expand = !nodeContents(node).is(VISIBLE);
+            }
+
+            this._expanded(node, expand);
         },
 
         destroy: function() {
@@ -1098,7 +1119,7 @@
                     element.empty();
                 }
             } else {
-                node.find(">div>.k-icon").toggleClass("k-loading", showProgress);
+                nodeIcon(node).toggleClass("k-loading", showProgress);
             }
         },
 
@@ -1197,18 +1218,20 @@
             }
 
             return that._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
-                if (parentNode) {
-                    that._expanded(parentNode, true);
+                function add() {
+                    if (parentNode) {
+                        that._expanded(parentNode, true);
+                    }
+
+                    return dataSource.add(model);
                 }
 
-                if (dataSource.data()) {
-                    return dataSource.add(model);
-                } else {
-                    dataSource.one(CHANGE, function() {
-                        dataSource.add(model);
-                    });
+                if (!dataSource.data()) {
+                    dataSource.one(CHANGE, add);
 
                     return null;
+                } else {
+                    return add();
                 }
             });
         },
