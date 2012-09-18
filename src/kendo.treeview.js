@@ -1008,7 +1008,9 @@
 
             if (node.length) {
                 element.find(".k-state-selected").each(function() {
-                    that.dataItem(this).set("selected", false);
+                    var dataItem = that.dataItem(this);
+                    dataItem.set("selected", false);
+                    delete dataItem.selected;
                 });
 
                 that.dataItem(node).set("selected", true);

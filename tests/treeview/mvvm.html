@@ -246,6 +246,7 @@
                     dom.find(".k-in:last").trigger("click");
 
                     ok(!viewModel.products[0].get("selected"));
+                    ok(!("selected" in viewModel.products[0]));
                 });
 
                 test("setting expanded flag expands item", function() {
@@ -259,6 +260,22 @@
 
                     equal(dom.find(".k-group").length, 2);
                     ok(dom.find(".k-group:last").is(":visible"));
+                });
+
+                test("declarative binding", function() {
+                    viewModel = kendo.observable({
+                            products: kendo.observableHierarchy([
+                                { text: "foo" }
+                            ])
+                        });
+
+                    dom = $("<div data-role='treeview' data-bind='source: products' />").appendTo("body");
+
+                    kendo.bind(dom, viewModel);
+
+                    viewModel.products[0].items.push({ text: "bar" });
+
+                    equal(dom.find(".k-item .k-item").length, 1);
                 });
 
             })();

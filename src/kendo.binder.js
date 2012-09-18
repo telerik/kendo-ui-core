@@ -851,8 +851,8 @@
 
                     if (widget.dataSource instanceof kendo.data.DataSource) {
                         source = that.bindings.source.get();
-                        if (source instanceof kendo.data.DataSource) {
-                            widget.setDataSource(source);
+                        if (source instanceof kendo.data.DataSource || source._dataSource) {
+                            widget.setDataSource(source._dataSource || source);
                         } else {
                             widget.dataSource.data(source);
                         }
@@ -1272,12 +1272,16 @@
         var dataSource = kendo.data.HierarchicalDataSource.create(array);
 
         function recursiveRead(data) {
-            for (var i = 0; i < data.length; i++) {
+            var i, children;
+
+            for (i = 0; i < data.length; i++) {
                 data[i]._initChildren();
 
-                data[i].children.fetch();
+                children = data[i].children;
 
-                data[i].items = data[i].children.data();
+                children.fetch();
+
+                data[i].items = children.data();
 
                 recursiveRead(data[i].items);
             }
