@@ -270,7 +270,6 @@
 
             if (view === views[options.depth] && selectedValue) {
                 that._class("k-state-selected", currentView.toDateString(selectedValue));
-                that._cell.removeClass("k-state-focused");
             }
 
             if (+selectedValue !== +value) {
