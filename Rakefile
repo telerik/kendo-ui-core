@@ -61,10 +61,10 @@ bundle :name => 'trial',
 bundle :name => 'web',
        :license => 'src-license-web',
        :contents => {
-            'js' => FileList[WEB_JS].include('src/kendo.web.js', 'src/jquery.js').ext('min.js').include('src/cultures/*.min.js'),
+            'js' => WEB_MIN_JS,
             'styles' => MIN_CSS_RESOURCES.keep_if { |f| f =~ /styles\/web\// },
-            'src/js' => SRC_JS,
-            'src/styles' => SRC_CSS
+            'src/js' => WEB_SRC_JS,
+            'src/styles' => SRC_CSS.keep_if { |f| f =~ /styles\/web\// }
        }
 
 desc 'Build all bundles'

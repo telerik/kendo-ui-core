@@ -41,7 +41,7 @@ file_merge "src/kendo.aspnetmvc.js" => [
 ]
 
 # Suites
-WEB_JS = [
+WEB_JS = FileList[
     "src/kendo.core.js",
     "src/kendo.fx.js",
     "src/kendo.data.odata.js",
@@ -84,7 +84,10 @@ WEB_JS = [
     "src/kendo.window.js"
 ]
 
-DATAVIZ_JS = [
+WEB_SRC_JS = FileList[WEB_JS].include('src/cultures/*.js', 'src/kendo.web.js').exclude('**/*.min.js')
+WEB_MIN_JS = FileList[WEB_SRC_JS].ext('min.js').include('src/jquery.min.js')
+
+DATAVIZ_JS = FileList[
     "src/kendo.core.js",
     "src/kendo.data.odata.js",
     "src/kendo.data.xml.js",
@@ -98,7 +101,7 @@ DATAVIZ_JS = [
     "src/kendo.dataviz.vml.js"
 ]
 
-MOBILE_JS = [
+MOBILE_JS = FileList[
     "src/kendo.core.js",
     "src/kendo.fx.js",
     "src/kendo.data.odata.js",
