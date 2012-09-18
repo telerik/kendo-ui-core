@@ -12,7 +12,9 @@ ROOT_MAP = {
     'styles' => /styles\/.+?\//,
     'src/js' => 'src/',
     'src/styles' => /styles\/.+?\//,
-    'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/'
+    'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
+    'wrappers/aspnetmvc/Examples' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/',
+    'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/'
 }
 
 # Rake tasks
@@ -47,7 +49,9 @@ bundle :name => 'trial',
        :contents => {
             'js' => FileList[MIN_JS].include('src/jquery.min.js'),
             'styles' => MIN_CSS_RESOURCES,
-            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL
+            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
+            'wrappers/aspnetmvc/Examples/bin' => MVC_DLL,
+            'wrappers/aspnetmvc/Examples' => MVC_DEMOS
        }
 
 bundle :name => 'web',

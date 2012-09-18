@@ -19,6 +19,13 @@ MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*']
                 .exclude('**/Kendo*.txt')
                 .reject { |f| File.directory? f }
 
+MVC_DEMOS = FileList['wrappers/mvc/demos/**/*']
+                .include('wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll')
+                .exclude('**/obj/**/*')
+                .exclude('**/System*.dll')
+                .exclude('**/*.pdb')
+                .exclude('**/*.mdb')
+
 # Build ASP.NET MVC wrappers
 
 file 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' => MVC_SRC do |t|
