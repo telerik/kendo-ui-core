@@ -39,9 +39,9 @@ bundle :name => 'complete.commercial',
        :license => 'src-license-complete',
        :eula => "complete",
        :contents => {
-            'js' => FileList[MIN_JS].include('src/jquery.min.js'),
+            'js' => COMPLETE_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
-            'src/js' => SRC_JS,
+            'src/js' => COMPLETE_SRC_JS,
             'src/styles' => SRC_CSS
        }
 
@@ -49,7 +49,7 @@ bundle :name => 'trial',
        :license => 'src-license-complete',
        :eula => "trial",
        :contents => {
-            'js' => FileList[MIN_JS].include('src/jquery.min.js'),
+            'js' => TRIAL_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
             'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
             'wrappers/aspnetmvc/Examples/bin' => MVC_DLL,
@@ -61,11 +61,37 @@ bundle :name => 'web.commercial',
        :eula => "web",
        :contents => {
             'js' => WEB_MIN_JS,
-            'styles' => MIN_CSS_RESOURCES.keep_if { |f| f =~ /styles\/web\// },
+            'styles' => WEB_MIN_CSS,
             'src/js' => WEB_SRC_JS,
-            'src/styles' => SRC_CSS.keep_if { |f| f =~ /styles\/web\// }
+            'src/styles' => WEB_SRC_CSS
        }
 
+bundle :name => 'web.open-source',
+       :license => 'src-license-web',
+       :contents => {
+            'js' => WEB_MIN_JS,
+            'styles' => WEB_MIN_CSS,
+            'src/js' => WEB_SRC_JS,
+            'src/styles' => WEB_SRC_CSS
+       }
+
+bundle :name => 'mobile.commercial',
+       :license => 'src-license-mobile',
+       :contents => {
+            'js' => MOBILE_MIN_JS,
+            'styles' => MOBILE_MIN_CSS,
+            'src/js' => MOBILE_SRC_JS,
+            'src/styles' => MOBILE_SRC_CSS
+       }
+
+bundle :name => 'dataviz.commercial',
+       :license => 'src-license-dataviz',
+       :contents => {
+            'js' => DATAVIZ_MIN_JS,
+            'styles' => DATAVIZ_MIN_CSS,
+            'src/js' => DATAVIZ_SRC_JS,
+            'src/styles' => DATAVIZ_SRC_CSS
+       }
 
 namespace :bundles do
     desc('Clean bundle files')
@@ -74,9 +100,17 @@ namespace :bundles do
         rm_rf 'dist/bundles'
     end
 
-    multitask :all => ['trial', 'complete.commercial', 'web.commercial']
+    multitask :all => [
+        'trial',
+        'complete.commercial',
+        'web.commercial',
+        'web.open-source',
+        'mobile.commercial',
+        'dataviz.commercial'
+    ]
 end
 
+desc 'Build all bundles'
 task :bundles =>  "bundles:all"
 
 task :default => :bundles

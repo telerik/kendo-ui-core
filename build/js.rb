@@ -101,6 +101,9 @@ DATAVIZ_JS = FileList[
     "src/kendo.dataviz.vml.js"
 ]
 
+DATAVIZ_SRC_JS = FileList[DATAVIZ_JS].include('src/cultures/*.js', 'src/kendo.dataviz.js').exclude('**/*.min.js')
+DATAVIZ_MIN_JS = FileList[DATAVIZ_SRC_JS].ext('min.js').include('src/jquery.min.js')
+
 MOBILE_JS = FileList[
     "src/kendo.core.js",
     "src/kendo.fx.js",
@@ -132,6 +135,14 @@ MOBILE_JS = FileList[
     "src/kendo.mobile.switch.js",
     "src/kendo.mobile.tabstrip.js"
 ]
+
+MOBILE_SRC_JS = FileList[MOBILE_JS].include('src/cultures/*.js', 'src/kendo.mobile.js').exclude('**/*.min.js')
+MOBILE_MIN_JS = FileList[MOBILE_SRC_JS].ext('min.js').include('src/jquery.min.js')
+
+COMPLETE_MIN_JS = (WEB_MIN_JS + DATAVIZ_MIN_JS + MOBILE_MIN_JS).uniq
+COMPLETE_SRC_JS = (WEB_SRC_JS + DATAVIZ_SRC_JS + MOBILE_SRC_JS).uniq
+
+TRIAL_MIN_JS = FileList[COMPLETE_MIN_JS].include('src/kendo.aspnetmvc.min.js')
 
 file_merge "src/kendo.web.js" => WEB_JS
 file_merge "src/kendo.dataviz.js" => DATAVIZ_JS

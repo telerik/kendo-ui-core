@@ -6,8 +6,16 @@ MIN_CSS = FileList['styles/**/kendo*.less']
     .ext('min.css')
     .uniq
 
-
 MIN_CSS_RESOURCES = FileList[MIN_CSS].include('styles/*/*/*').exclude('**/*.less')
+
+WEB_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/web\// }
+WEB_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/web\// }
+
+MOBILE_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/mobile\// }
+MOBILE_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/mobile\// }
+
+DATAVIZ_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/dataviz\// }
+DATAVIZ_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/dataviz\// }
 
 CLEAN.include(MIN_CSS)
     .include(LESS.ext('css'))
