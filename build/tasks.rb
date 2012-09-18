@@ -3,7 +3,7 @@ require 'rbconfig'
 class MergeTask < Rake::FileTask
     def execute(args=nil)
         File.open(name, 'w') do |output|
-            puts "Merge\n\t#{prerequisites.join("\n\t")} \nto #{name}"
+            $stderr.puts "Merge\n\t#{prerequisites.join("\n\t")} \nto #{name}"
 
             prerequisites.each do |src|
                 File.open(src, 'r:bom|utf-8') do |file|
@@ -74,7 +74,7 @@ def file_copy(options)
     file to => prerequisites do |t|
         ensure_path to
 
-        puts "cp #{from} #{to}"
+        $stderr.puts "cp #{from} #{to}"
 
         File.open(to, "w") do |file|
             if license && subject_to_license?(to)
@@ -105,13 +105,14 @@ end
 
 def bundle(options)
     name = options[:name]
+    path = "dist/bundles/#{name}"
     prerequisites = []
 
-    file_license "dist/bundles/#{name}.license" => "resources/legal/#{BETA ? "beta" : "official" }/#{options[:license]}.txt"
+    file_license "#{path}.license" => "resources/legal/#{BETA ? "beta" : "official" }/#{options[:license]}.txt"
 
     options[:contents].each do |target, contents|
 
-        to =  "dist/bundles/#{name}/#{target}"
+        to =  "#{path}/#{target}"
 
         tree :to => to,
              :from => contents,
@@ -121,7 +122,9 @@ def bundle(options)
         prerequisites.push(to)
     end
 
+
     desc("Build Kendo UI #{name}")
-    task name => [:js,:less, prerequisites].flatten
+    zip "#{path}.zip" => [:js, :less] + prerequisites
+    task name => "#{path}.zip"
 end
 

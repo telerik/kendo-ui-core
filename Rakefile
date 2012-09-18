@@ -1,7 +1,11 @@
 require 'rake/clean'
 
+require 'bundler/setup'
+require 'debugger'
+
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 require 'version'
+require 'archive'
 require 'js'
 require 'css'
 require 'tasks'
