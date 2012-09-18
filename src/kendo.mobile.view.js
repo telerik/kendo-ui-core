@@ -433,9 +433,8 @@
                 local = firstChar === "#",
                 remote = firstChar === "/",
                 view,
-                element;
-
-            url = url.split("?")[0];
+                element,
+                urlPath = url.split("?")[0];
 
             if (url === that.url) {
                 return;
@@ -450,7 +449,7 @@
                 element = container.children("[" + attr("url") + "='" + url + "']");
 
                 if (!element[0] && !remote) {
-                    element = container.children(local ? url : "#" + url);
+                    element = container.children(local ? urlPath : "#" + urlPath);
                 }
             }
 

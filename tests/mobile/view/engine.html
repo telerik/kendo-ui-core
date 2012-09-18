@@ -128,6 +128,21 @@
                 viewEngine.showView("page2.html");
             });
 
+            asyncTest("Show remote view with URL params", 2, function() {
+                $.mockjax({
+                    url: "page2.html?foo=bar",
+                    responseText: '<body><div data-role="view" id="page2">Page 2</div></body>'
+                });
+
+                viewEngine.bind("viewShow", function(e) {
+                    start();
+                    equal(root.has("#page2").length, 1, "Remote view is inserted in the application DOM element");
+                    equal(e.view.element[0], root.find("#page2")[0]);
+                });
+
+                viewEngine.showView("page2.html?foo=bar");
+            });
+
             asyncTest("Reuses remote view once loaded", 1, function() {
                 $.mockjax({
                     url: "page2.html",
