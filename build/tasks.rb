@@ -44,7 +44,7 @@ def file_license(*args, &block)
 end
 
 def subject_to_license?(file)
-    file.pathmap("%x") =~ /js|css|less/
+    file.pathmap('%f') =~ /^kendo(.+)(js|css|less)$/
 end
 
 def msbuild(project, options=nil)
