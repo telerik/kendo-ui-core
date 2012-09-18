@@ -132,7 +132,8 @@ def bundle(options)
 
     zip "#{path}.zip" => [:js, :less] + prerequisites
 
-    desc description(name)
     task name => "#{path}.zip"
+    desc description(name)
+    task "bundles:#{name}" => "#{path}.zip"
 end
 

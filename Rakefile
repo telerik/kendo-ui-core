@@ -67,5 +67,11 @@ bundle :name => 'web.commercial',
             'src/styles' => SRC_CSS.keep_if { |f| f =~ /styles\/web\// }
        }
 
-desc 'Build all bundles'
-multitask :bundles => ['trial', 'complete.commercial', 'web.commercial']
+
+namespace :bundles do
+    multitask :all => ['trial', 'complete.commercial', 'web.commercial']
+end
+
+task :bundles =>  "bundles:all"
+
+task :default => :bundles
