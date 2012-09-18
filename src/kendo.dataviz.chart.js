@@ -3310,11 +3310,13 @@
                 if (!cluster) {
                     cluster = new ClusterLayout({
                         vertical: options.invertAxes,
-                        gap: options.gap
+                        gap: options.gap,
+                        spacing: options.spacing
                     });
-                    cluster.append(point);
                     chart.append(cluster);
                 }
+
+                cluster.append(point);
 
                 if (series.type == CANDLESTICK) {
                     if (value.open > value.close) {
@@ -5241,7 +5243,8 @@
                 chart = new OHLCChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
-                    series: series
+                    series: series,
+                    spacing: firstSeries.spacing
                 });
 
             plotArea.appendChart(chart);
@@ -5257,7 +5260,8 @@
                 chart = new CandlestickChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
-                    series: series
+                    series: series,
+                    spacing: firstSeries.spacing
                 });
 
             plotArea.appendChart(chart);

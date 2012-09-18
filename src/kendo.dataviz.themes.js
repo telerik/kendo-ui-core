@@ -45,6 +45,7 @@
                         _brightness: 0.8
                     },
                     gap: 1,
+                    spacing: 0.3,
                     baseColor: WHITE,
                     aggregate: {
                         "open": "max",
@@ -67,6 +68,7 @@
                         width: 1
                     },
                     gap: 1,
+                    spacing: 0.3,
                     aggregate: {
                         "open": "max",
                         "high": "max",
