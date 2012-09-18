@@ -8,9 +8,19 @@
                 values: values
             };
         },
-        applicationRoot = (function() {
+        cdnRoot = (function() {
             var scripts = document.getElementsByTagName("script"),
-                path = scripts[scripts.length-1].src.split('?')[0];
+                script, path, i;
+
+            for (i = 0; i < scripts.length; i++) {
+                script = scripts[i];
+
+                if (script.src.indexOf("kendo.all.min") > 0) {
+                    break;
+                }
+            }
+
+            path = script.src.split('?')[0];
 
             return path.split("/").slice(0,-2).join("/") + "/";
         })(),
@@ -36,8 +46,8 @@
 
             "@texture-url": constant(".k-header", "background-image", [
                 { text: "flat", value: "none" },
-                { text: "highlight", value: "url('" + applicationRoot + "styles/textures/highlight.png')" },
-                { text: "glass", value: "url('" + applicationRoot + "styles/textures/glass.png')" }
+                { text: "highlight", value: "url('" + cdnRoot + "styles/textures/highlight.png')" },
+                { text: "glass", value: "url('" + cdnRoot + "styles/textures/glass.png')" }
             ]),
 
             "@widget-background-color":         constant(".k-widget", BGCOLOR),
