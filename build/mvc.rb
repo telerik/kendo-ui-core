@@ -7,12 +7,14 @@ MVC_SRC = FileList['wrappers/mvc/src/**/*.cs']
 
 MVC_DLL = FileList['wrappers/mvc/src/Kendo.Mvc/Resources/Messages.*.resx']
             .include('Kendo.Mvc.dll')
+            .include('Kendo.Mvc.xml')
             .pathmap('wrappers/mvc/src/Kendo.Mvc/bin/Release/%f')
             .sub(/Messages\.(.+).resx/, '\1/Kendo.Mvc.resources.dll')
 
 CLEAN.include(FileList['wrappers/mvc/**/Kendo*.dll'])
 
 rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
+rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
 MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*']
                 .exclude('**/Kendo.Mvc.Examples.dll')
