@@ -6,6 +6,9 @@ MIN_CSS = FileList['styles/**/kendo*.less']
     .ext('min.css')
     .uniq
 
+
+MIN_CSS_RESOURCES = FileList[MIN_CSS].include('styles/*/*/*').exclude('**/*.less')
+
 CLEAN.include(MIN_CSS)
     .include(LESS.ext('css'))
 

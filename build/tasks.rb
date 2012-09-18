@@ -102,3 +102,26 @@ def tree(options)
         file_copy :to => f, :from => src, :license => options[:license]
     end
 end
+
+def bundle(options)
+    name = options[:name]
+    prerequisites = []
+
+    file_license "dist/bundles/#{name}.license" => "resources/legal/official/#{options[:license]}.txt"
+
+    options[:contents].each do |target, contents|
+
+        to =  "dist/bundles/#{name}/#{target}"
+
+        tree :to => to,
+             :from => contents,
+             :root => ROOT_MAP[target],
+             :license => 'dist/bundles/complete.license'
+
+        prerequisites.push(to)
+    end
+
+    desc("Build Kendo UI #{name}")
+    task name => [:js,:less, prerequisites].flatten
+end
+

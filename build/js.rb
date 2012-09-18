@@ -133,4 +133,4 @@ MOBILE_JS = [
 file_merge "src/kendo.web.js" => WEB_JS
 file_merge "src/kendo.dataviz.js" => DATAVIZ_JS
 file_merge "src/kendo.mobile.js" => MOBILE_JS
-file_merge "src/kendo.all.js" => WEB_JS.concat(DATAVIZ_JS).concat(MOBILE_JS).uniq
+file_merge "src/kendo.all.js" => (WEB_JS + DATAVIZ_JS + MOBILE_JS).uniq
