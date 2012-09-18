@@ -236,7 +236,7 @@ html body .k-button-bare
 .k-i-arrow-n { background-position: 0 0; }
 .k-i-arrow-e, .k-rtl .k-slider .k-i-arrow-w { background-position: 0 -16px; }
 .k-i-arrow-s { background-position: 0 -32px; }
-.k-i-arrow-w, .k-rtl .k-slider .k-i-arrow-e { background-position: 0 -48px; }
+.k-i-arrow-w, .k-rtl .k-slider .k-i-arrow-e, .k-rtl .k-imagebrowser .k-i-arrow-e { background-position: 0 -48px; }
 
 .k-i-seek-n { background-position: 0 -64px; }
 .k-i-seek-e { background-position: 0 -80px; }
