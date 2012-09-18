@@ -3271,6 +3271,10 @@
     var CandlestickChart = CategoricalChart.extend({
         options: {},
 
+        bindableFields: function() {
+            return ["color", "baseColor"];
+        },
+
         reflowCategories: function(categorySlots) {
             var chart = this,
                 children = chart.children,
@@ -3280,10 +3284,6 @@
             for (i = 0; i < childrenLength; i++) {
                 children[i].reflow(categorySlots[i]);
             }
-        },
-
-        bindableFields: function() {
-            return ["color", "baseColor"];
         },
 
         addValue: function(data, category, categoryIx, series, seriesIx) {
@@ -3343,12 +3343,16 @@
         updateRange: function(value, categoryIx, series) {
             var chart = this,
                 axisName = series.axis,
+                axisRange = chart.valueAxisRanges[axisName],
                 values = [value.low, value.open, value.close, value.high];
 
             if (defined(value)) {
-                chart.valueAxisRanges[axisName] = {
-                    min: math.min.apply(math, values.concat([MAX_VALUE])),
-                    max: math.max.apply(math, values.concat([MIN_VALUE]))
+                axisRange = chart.valueAxisRanges[axisName] =
+                    axisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                axisRange = chart.valueAxisRanges[axisName] = {
+                    min: math.min.apply(math, values.concat([axisRange.min])),
+                    max: math.max.apply(math, values.concat([axisRange.max]))
                 };
             }
         },
