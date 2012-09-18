@@ -421,7 +421,7 @@
 
                 modalWindows = openedModalWindows(options.name);
 
-                shouldHideOverlay = options.modal && modalWindows.length == 1;
+                shouldHideOverlay = options.modal && modalWindows.length == 1 && modalWindows[0] == that.wrapper[0];
 
                 overlay = options.modal ? that._overlay(true) : $(undefined);
 
