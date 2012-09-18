@@ -1,4 +1,5 @@
 require 'rake/clean'
+
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 require 'js'
 require 'css'
@@ -33,31 +34,53 @@ task :bundle_clean do
     rm_rf 'dist/bundles'
 end
 
-# Build ASP.NET MVC wrappers
+MVC_SRC = FileList['wrappers/mvc/src/**/*.cs']
+            .include('wrappers/mvc/src/**/*.resx')
+            .include('wrappers/mvc/src/**/*.csproj')
+            .include('wrappers/mvc/src/**/*.snk')
+            .include('wrappers/mvc/src/**/*.dll')
+
+MVC_DLL = FileList['wrappers/mvc/src/Kendo.Mvc/Resources/Messages.*.resx']
+            .include('Kendo.Mvc.dll')
+            .pathmap('dist/wrappers/mvc/src/Kendo.Mvc/bin/Release/%f')
+            .sub(/Messages\.(.+).resx/, '\1/Kendo.Mvc.resources.dll')
+
+rule '.resources.dll' => 'dist/wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
+
+MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*']
+                .exclude('**/Kendo.Mvc.Examples.dll')
+                .exclude('**/Kendo*.txt')
+                .reject { |f| File.directory? f }
+
 tree :to => 'dist/wrappers/mvc',
-     :from => FileList['wrappers/mvc/**/*.*'].exclude('**/Kendo*.dll'),
-     :depth => 2
+     :from => FileList['wrappers/mvc/**/*'],
+     :root => 'wrappers/mvc/'
+
+# Build ASP.NET MVC wrappers
 
 file 'dist/wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' =>
-    FileList['dist/wrappers/mvc/src/**/*.cs']
-        .include('dist/wrappers/mvc/src/**/*.resx') do
+    MVC_SRC.sub('wrappers/', 'dist/wrappers/') do |t|
     msbuild 'dist/wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
 end
 
+# Build ASP.NET MVC demos
+
 file 'dist/wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll' =>
-    FileList['dist/wrappers/mvc/demos/**/*.cs'] do
+    MVC_DEMOS_SRC.sub('wrappers/', 'dist/wrappers/')
+    .include('dist/wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll') do
     msbuild 'dist/wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
 end
 
 desc 'Build ASP.NET MVC wrappers'
-task :build_mvc => ['dist/wrappers/mvc',
-    'dist/wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll',
+task :build_mvc => [
     'dist/wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll'
 ]
 
+=begin
 # Kendo UI Complete Commercial
 tree :to => 'dist/bundles/complete',
      :from => ['dist/js/**/*.*', 'dist/styles/**/*.*', 'dist/src/**/*.*'],
+     :root => 'dist/',
      :license => 'dist/bundles/complete.license'
 
 file_license 'dist/bundles/complete.license' => 'resources/legal/official/src-license-complete.txt'
@@ -65,17 +88,26 @@ file_license 'dist/bundles/complete.license' => 'resources/legal/official/src-li
 desc('Build Kendo UI Complete Commercial')
 task :complete => [:js,:less, 'dist/bundles/complete']
 
-# Kendo UI Complete Trial
+=end
+# Kendo UI Trial
 
-tree :to => 'dist/bundles/complete.trial',
-     :from => ['dist/js/**/*.*', 'dist/styles/**/*.*', 'dist/src/**/*.*', 'dist/wrappers/**/*.*'],
-     :license => 'dist/bundles/complete.trial.license'
+tree :to => 'dist/bundles/trial',
+     :from => [MIN_JS, MIN_CSS],
+     :root => 'dist/'
 
-file_license 'dist/bundles/complete.trial.license' => 'resources/legal/official/src-license-complete.txt'
+tree :to => 'dist/bundles/trial/wrappers/aspnetmvc/Binaries/Mvc3',
+     :from => MVC_DLL,
+     :root => 'dist/wrappers/mvc/src/Kendo.Mvc/bin/Release/'
+
+file_license 'dist/bundles/trial.license' => 'resources/legal/official/src-license-complete.txt'
 
 desc('Build Kendo UI Trial')
-task :trial => [:js, :less, :build_mvc, 'dist/bundles/complete.trial']
+task :trial => [:js, :less,
+    'dist/bundles/trial',
+    'dist/bundles/trial/wrappers/aspnetmvc/Binaries/Mvc3'
+]
 
+=begin
 # Kendo UI Web Open src
 tree :to => 'dist/bundles/web.open-source',
      :from => FileList['dist/js/**/*.*']
@@ -83,12 +115,14 @@ tree :to => 'dist/bundles/web.open-source',
             .include('dist/src/**/*.*')
             .exclude('**/*mobile*')
             .exclude('**/*dataviz*'),
+     :root => 'dist/',
      :license => 'dist/bundles/web.license'
 
 file_license 'dist/bundles/web.license' => 'resources/legal/official/src-license-web.txt'
 
 desc('Build Kendo UI Web Open src')
 task :web_gpl => [:js,:less, 'dist/bundles/web.open-source']
+=end
 
 desc 'Build all bundles'
-multitask :bundles => [:complete, :web_gpl]
+multitask :bundles => [:trial]

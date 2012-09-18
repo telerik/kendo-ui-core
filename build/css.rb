@@ -23,8 +23,8 @@ def find_less_prerequisites(lessfile)
     [lessfile].concat(prerequisites)
 end
 
-tree :depth => 2, :to => 'dist/src/styles', :from => 'styles/**/*.*'
-tree :depth => 2, :to => 'dist/styles',  :from => 'styles/*/*/**/*.*'
+tree :to => 'dist/src/styles', :from => 'styles/**/*.*', :root => /styles\/.+?\//
+tree :to => 'dist/styles',  :from => 'styles/*/*/**/*.*', :root => /styles\/.+?\//
 
 #Build dist/src/styles/*.less files by copying them from styles/
 rule /dist\/src\/styles\/.+\.less/ => [ lambda { |target| find_less_src(target) }] do |t|

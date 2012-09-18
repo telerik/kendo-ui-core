@@ -88,19 +88,18 @@ end
 
 def tree(options)
     dir = options[:to]
+    root = options[:root]
 
-    task dir do
-        source = FileList[*options[:from]]
 
-        destination = source.sub(/(.+?\/){#{options[:depth] || 1}}/, "#{dir}/")
+    source = FileList[*options[:from]].reject { |f| File.directory? f }
 
-        destination.each_with_index do |f, index|
-            src = source[index]
+    destination = source.sub(root, "#{dir}/")
 
-            unless File.directory? src
-                file_copy :to => f, :from => src, :license => options[:license]
-                Rake::Task[f].invoke
-            end
-        end
+    file dir => destination
+
+    destination.each_with_index do |f, index|
+        src = source[index]
+
+        file_copy :to => f, :from => src, :license => options[:license]
     end
 end
