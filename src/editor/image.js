@@ -114,7 +114,8 @@ var ImageCommand = Command.extend({
                 '</div>' +
             '</div>';
 
-        dialogWidth = showBrowser ? { width: "960px" } : {}
+        dialogWidth = showBrowser ? { width: "960px" } : {};
+
         dialog = EditorUtils.createDialog(windowContent, that.editor, extend(dialogWidth, that.editor.options.dialogOptions, {
             title: INSERTIMAGE,
             close: close,
