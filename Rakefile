@@ -6,26 +6,14 @@ require 'css'
 
 VERSION = "2013"
 
-# The clean target will remove the dist directory
-CLEAN.include('dist')
-
-# Required directories
-directory 'dist/src/js/cultures'
-directory 'dist/src/styles'
-directory 'dist/js/cultures'
-directory 'dist/styles'
-
 # Rake tasks
 desc('JavaScript')
-task :js => ['dist/js/cultures', 'dist/src/js/cultures', :min_js]
-
-multitask :min_js => MIN_JS
+multitask :js => MIN_JS
 
 desc('Less')
-task :less => ['dist/styles', 'dist/src/styles', :min_css]
+multitask :less => MIN_CSS
 
-multitask :min_css => MIN_CSS
-
+=begin
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 
@@ -88,7 +76,6 @@ file_license 'dist/bundles/complete.license' => 'resources/legal/official/src-li
 desc('Build Kendo UI Complete Commercial')
 task :complete => [:js,:less, 'dist/bundles/complete']
 
-=end
 # Kendo UI Trial
 
 tree :to => 'dist/bundles/trial',
@@ -122,7 +109,7 @@ file_license 'dist/bundles/web.license' => 'resources/legal/official/src-license
 
 desc('Build Kendo UI Web Open src')
 task :web_gpl => [:js,:less, 'dist/bundles/web.open-source']
-=end
 
 desc 'Build all bundles'
 multitask :bundles => [:trial]
+=end
