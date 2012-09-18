@@ -13,7 +13,6 @@ multitask :js => MIN_JS
 desc('Less')
 multitask :less => MIN_CSS
 
-=begin
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 
@@ -22,6 +21,7 @@ task :bundle_clean do
     rm_rf 'dist/bundles'
 end
 
+=begin
 MVC_SRC = FileList['wrappers/mvc/src/**/*.cs']
             .include('wrappers/mvc/src/**/*.resx')
             .include('wrappers/mvc/src/**/*.csproj')
@@ -63,19 +63,40 @@ desc 'Build ASP.NET MVC wrappers'
 task :build_mvc => [
     'dist/wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll'
 ]
+=end
 
-=begin
 # Kendo UI Complete Commercial
-tree :to => 'dist/bundles/complete',
-     :from => ['dist/js/**/*.*', 'dist/styles/**/*.*', 'dist/src/**/*.*'],
-     :root => 'dist/',
+tree :to => 'dist/bundles/complete/js',
+     :from => [MIN_JS],
+     :root => 'src/',
+     :license => 'dist/bundles/complete.license'
+
+tree :to => 'dist/bundles/complete/styles',
+     :from => [MIN_CSS],
+     :root => /styles\/.+?\//,
+     :license => 'dist/bundles/complete.license'
+
+tree :to => 'dist/bundles/complete/src/js',
+     :from => [SRC_JS],
+     :root => 'src/',
+     :license => 'dist/bundles/complete.license'
+
+tree :to => 'dist/bundles/complete/src/styles',
+     :from => [SRC_CSS],
+     :root => /styles\/.+?\//,
      :license => 'dist/bundles/complete.license'
 
 file_license 'dist/bundles/complete.license' => 'resources/legal/official/src-license-complete.txt'
 
 desc('Build Kendo UI Complete Commercial')
-task :complete => [:js,:less, 'dist/bundles/complete']
+task :complete => [:js,:less,
+    'dist/bundles/complete/js',
+    'dist/bundles/complete/styles',
+    'dist/bundles/complete/src/styles',
+    'dist/bundles/complete/src/js'
+]
 
+=begin
 # Kendo UI Trial
 
 tree :to => 'dist/bundles/trial',

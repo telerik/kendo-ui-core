@@ -90,7 +90,6 @@ def tree(options)
     dir = options[:to]
     root = options[:root]
 
-
     source = FileList[*options[:from]].reject { |f| File.directory? f }
 
     destination = source.sub(root, "#{dir}/")
