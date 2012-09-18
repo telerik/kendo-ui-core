@@ -1,5 +1,8 @@
 require 'rbconfig'
 
+LEGAL = File.join('resources', 'legal', BETA ? 'beta' : 'official')
+THIRD_PARTY_LEGAL = File.join('resources', 'legal', 'third-party')
+
 class MergeTask < Rake::FileTask
     def execute(args=nil)
         File.open(name, 'w') do |output|
@@ -113,13 +116,14 @@ def bundle(options)
     name = options[:name]
     path = "dist/bundles/#{name}"
     prerequisites = []
+    eula = options[:eula]
     license = "#{path}.license"
 
-    file_license license => "resources/legal/#{BETA ? "beta" : "official" }/#{options[:license]}.txt"
+    file_license license => File.join(LEGAL, "#{options[:license]}.txt")
 
     options[:contents].each do |target, contents|
 
-        to =  "#{path}/#{target}"
+        to = "#{path}/#{target}"
 
         tree :to => to,
              :from => contents,
@@ -127,6 +131,23 @@ def bundle(options)
              :license => license
 
         prerequisites.push(to)
+    end
+
+    if eula
+        license_agreements_path = File.join(path, "license-agreements")
+        third_party_path = File.join(license_agreements_path, "third-party")
+        source_path = File.join(LEGAL, eula + "-eula")
+
+        tree :to => license_agreements_path,
+             :from =>  File.join(source_path, "*"),
+             :root => source_path
+
+        tree :to => third_party_path,
+             :from =>  File.join(THIRD_PARTY_LEGAL, "*"),
+             :root => THIRD_PARTY_LEGAL
+
+        prerequisites.push(license_agreements_path)
+        prerequisites.push(third_party_path)
     end
 
 

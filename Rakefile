@@ -31,16 +31,13 @@ multitask :less => MIN_CSS
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 
-desc('Clean bundle files')
-task :bundle_clean do
-    rm_rf 'dist/bundles'
-end
 
 desc 'Build ASP.NET MVC wrappers'
 task :build_mvc => 'wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll'
 
 bundle :name => 'complete.commercial',
        :license => 'src-license-complete',
+       :eula => "complete",
        :contents => {
             'js' => FileList[MIN_JS].include('src/jquery.min.js'),
             'styles' => MIN_CSS_RESOURCES,
@@ -50,6 +47,7 @@ bundle :name => 'complete.commercial',
 
 bundle :name => 'trial',
        :license => 'src-license-complete',
+       :eula => "trial",
        :contents => {
             'js' => FileList[MIN_JS].include('src/jquery.min.js'),
             'styles' => MIN_CSS_RESOURCES,
@@ -60,6 +58,7 @@ bundle :name => 'trial',
 
 bundle :name => 'web.commercial',
        :license => 'src-license-web',
+       :eula => "web",
        :contents => {
             'js' => WEB_MIN_JS,
             'styles' => MIN_CSS_RESOURCES.keep_if { |f| f =~ /styles\/web\// },
@@ -69,6 +68,12 @@ bundle :name => 'web.commercial',
 
 
 namespace :bundles do
+    desc('Clean bundle files')
+
+    task :clean do
+        rm_rf 'dist/bundles'
+    end
+
     multitask :all => ['trial', 'complete.commercial', 'web.commercial']
 end
 
