@@ -713,6 +713,16 @@
             ]
         },
         {
+            "id": "mobile.modalview",
+            "name": "ModalView",
+            "category": "mobile",
+            "description": "The Kendo ModalView is used to present self-contained functionality in the context of the current task.",
+            "source": "kendo.mobile.modalview.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
             "id": "mobile.spitview",
             "name": "SplitView",
             "category": "mobile",
