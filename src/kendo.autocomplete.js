@@ -77,7 +77,7 @@
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on("paste" + ns, proxy(that._search, that))
                 .on("focus" + ns, function () {
-                    that._prev = that.value();
+                    that._prev = that._accessor();
                     that._placeholder(false);
                     wrapper.addClass(FOCUSED);
                 })
@@ -91,7 +91,7 @@
 
             that._popup();
 
-            that._old = that.value();
+            that._old = that._accessor();
 
             that._placeholder();
 
@@ -248,7 +248,7 @@
             separator = options.separator,
             length;
 
-            word = word || that.value();
+            word = word || that._accessor();
 
             that._current = null;
 
@@ -277,7 +277,7 @@
         suggest: function (word) {
             var that = this,
                 key = that._last,
-                value = that.value(),
+                value = that._accessor(),
                 element = that.element[0],
                 caret = caretPosition(element),
                 separator = that.options.separator,
@@ -329,12 +329,21 @@
 
             words[wordIndex] = value;
 
-            that.value(words.join(separator || ""));
+            that._accessor(words.join(separator || ""));
 
             selectText(element, caret, selectionEnd);
         },
 
         value: function (value) {
+            if (value !== undefined) {
+                this._accessor(value);
+                this._old = value;
+            } else {
+                return this._accessor();
+            }
+        },
+
+        _accessor: function (value) {
             var that = this,
                 element = that.element[0];
 
@@ -447,8 +456,8 @@
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function () {
-                if (that._prev !== that.value()) {
-                    that._prev = that.value();
+                if (that._prev !== that._accessor()) {
+                    that._prev = that._accessor();
                     that.search();
                 }
             }, that.options.delay);
@@ -471,10 +480,10 @@
                     text = that._text(data);
 
                     if (separator) {
-                        text = replaceWordAtCaret(caretPosition(that.element[0]), that.value(), text, separator);
+                        text = replaceWordAtCaret(caretPosition(that.element[0]), that._accessor(), text, separator);
                     }
 
-                    that.value(text);
+                    that._accessor(text);
                     that.current(li.addClass(SELECTED));
                 }
             }

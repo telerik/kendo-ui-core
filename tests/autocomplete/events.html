@@ -52,6 +52,18 @@
                 ok(changeWasCalled);
             });
 
+            test("value set with value method does not trigger change event", function() {
+                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+                    dataSource: ["foo", "bar"],
+                    change: function() {
+                        ok(false);
+                    }
+                });
+
+                autocomplete.value("test");
+                autocomplete._blur();
+            });
+
             asyncTest("raise change after search()", function() {
                 expect(1);
                 var autocomplete = new AutoComplete(input, {
@@ -79,7 +91,7 @@
                 });
 
                 autocomplete._prev = "foo";
-                autocomplete.value("bar");
+                autocomplete._accessor("bar");
                 autocomplete._change();
                 ok(changeWasCalled);
             });
