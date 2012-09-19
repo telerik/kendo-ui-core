@@ -29,6 +29,7 @@
         VALUE = "value",
         HOVER = "k-state-hover",
         DISABLED = "k-state-disabled",
+        FOCUSED = "k-state-focused",
         OTHERMONTH = "k-other-month",
         OTHERMONTHCLASS = ' class="' + OTHERMONTH + '"',
         TODAY = "k-nav-today",
@@ -279,7 +280,7 @@
                 that._class("k-state-selected", currentView.toDateString(selectedValue));
             }
 
-            that._class("k-state-focused", currentView.toDateString(value));
+            that._class(FOCUSED, currentView.toDateString(value));
 
             that._changeView = true;
         },
@@ -374,7 +375,7 @@
                 e.preventDefault();
             }
 
-            return currentValue; //??
+            return currentValue;
         },
 
         _animate: function(options) {
@@ -405,33 +406,33 @@
                 effects = horizontal.effects,
                 viewWidth = from.outerWidth();
 
-                if (effects && effects.indexOf(SLIDE) != -1) {
-                    from.add(to).css({ width: viewWidth });
+            if (effects && effects.indexOf(SLIDE) != -1) {
+                from.add(to).css({ width: viewWidth });
 
-                    from.wrap("<div/>")
-                    that.focus(from);
+                from.wrap("<div/>");
+                that.focus(from);
 
-                    from.parent()
-                        .css({
-                            position: "relative",
-                            width: viewWidth * 2,
-                            "float": LEFT,
-                            left: future ? 0 : -viewWidth
-                        });
-
-                    to[future ? "insertAfter" : "insertBefore"](from);
-
-                    extend(horizontal, {
-                        effects: SLIDE + ":" + (future ? LEFT : "right"),
-                        complete: function() {
-                            from.remove();
-                            to.unwrap();
-                            that.focus();
-                        }
+                from.parent()
+                    .css({
+                        position: "relative",
+                        width: viewWidth * 2,
+                        "float": LEFT,
+                        left: future ? 0 : -viewWidth
                     });
 
-                    from.parent().kendoStop(true, true).kendoAnimate(horizontal);
-                }
+                to[future ? "insertAfter" : "insertBefore"](from);
+
+                extend(horizontal, {
+                    effects: SLIDE + ":" + (future ? LEFT : "right"),
+                    complete: function() {
+                        from.remove();
+                        to.unwrap();
+                        that.focus();
+                    }
+                });
+
+                from.parent().kendoStop(true, true).kendoAnimate(horizontal);
+            }
         },
 
         _vertical: function(from, to) {
@@ -535,7 +536,7 @@
                 that.navigate(value);
             } else {
                 that._current = value;
-                that._class("k-state-focused", view.toDateString(value));
+                that._class(FOCUSED, view.toDateString(value));
             }
         },
 

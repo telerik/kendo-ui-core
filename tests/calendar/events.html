@@ -135,24 +135,6 @@
 
                 equals(calendar.calls("navigate"), 1);
             });
-
-            test("click on cell with URL does not preventDefault", 0, function() {
-                var date = new Date(2000, 10, 22),
-                    calendar = new Calendar(div, {
-                        value: date,
-                        dates: [date],
-                        url: "/home"
-                    });
-
-                var cell = div.find("a[href*=home]").parent();
-
-                calendar._click({
-                    currentTarget: cell[0],
-                    preventDefault: function() {
-                        ok(false);
-                    }
-                });
-            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
