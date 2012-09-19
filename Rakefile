@@ -106,6 +106,7 @@ bundle :name => 'dataviz.commercial',
 bundle :name => 'aspnetmvc.commercial',
        :license => 'src-license-complete',
        :eula => "aspnetmvc",
+       :vsdoc => { %w(web mobile dataviz framework) => "all" },
        :contents => {
             'js' => TRIAL_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,

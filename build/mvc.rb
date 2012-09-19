@@ -28,6 +28,30 @@ MVC_DEMOS = FileList['wrappers/mvc/demos/**/*']
                 .exclude('**/*.pdb')
                 .exclude('**/*.mdb')
 
+class AssemblyInfoTask < Rake::FileTask
+    def execute(args=nil)
+        assemblyInfo = File.read(name)
+
+        version = "#{VERSION}.340" # ".340" means ASP.NET MVC 3 .NET 4.0
+
+        assemblyInfo.gsub!(/Version\([^\)]*\)/, "Version(\"#{version}\")")
+
+        File.open(name, 'w') do |file|
+            file.write assemblyInfo
+        end
+    end
+
+    def needed?
+        super || !File.read(name).include?(VERSION)
+    end
+end
+
+def assembly_info_file (*args, &block)
+    AssemblyInfoTask.define_task(*args, &block)
+end
+
+assembly_info_file 'wrappers/mvc/src/shared/CommonAssemblyInfo.cs'
+
 namespace :mvc do
     tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content',
          :from => WEB_MIN_CSS + DATAVIZ_MIN_CSS,
@@ -39,6 +63,9 @@ namespace :mvc do
 
     task :assets_js => [:js, 'wrappers/mvc/demos/Kendo.Mvc.Examples/Scripts']
     task :assets_css => [:less, 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content']
+
+    desc('Update CommonAssemblyInfo.cs with current VERSION')
+    task :assembly_version => 'wrappers/mvc/src/shared/CommonAssemblyInfo.cs'
 
     desc('Copy the minified CSS and JavaScript to Content and Scripts folder')
     multitask :assets => [:assets_js, :assets_css]
