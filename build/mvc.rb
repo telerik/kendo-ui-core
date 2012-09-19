@@ -13,6 +13,9 @@ MVC_DLL = FileList['wrappers/mvc/src/Kendo.Mvc/Resources/Messages.*.resx']
 
 CLEAN.include(FileList['wrappers/mvc/**/Kendo*.dll'])
 
+MVC_RAZOR_EDITOR_TEMPLATES = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/*.cshtml']
+MVC_ASCX_EDITOR_TEMPLATES = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/*.ascx']
+
 rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
