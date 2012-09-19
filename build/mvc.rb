@@ -20,14 +20,16 @@ rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
 MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*']
-                .exclude('**/Kendo.Mvc.Examples.dll')
+                .exclude('**/*.dll')
                 .exclude('**/Kendo*.txt')
                 .reject { |f| File.directory? f }
 
 MVC_DEMOS = FileList['wrappers/mvc/demos/**/*']
-                .exclude('**/obj/**/*')
-                .exclude('**/*.dll')
                 .include('wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll')
+                .exclude('**/System*.dll')
+                .exclude('**/*resources.dll')
+                .exclude('**/Kendo.Mvc.dll')
+                .exclude('**/obj/**/*')
                 .exclude('**/*.pdb')
                 .exclude('**/*.mdb')
 

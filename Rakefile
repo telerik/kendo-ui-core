@@ -134,6 +134,8 @@ bundle :name => 'aspnetmvc.commercial',
 
 
 namespace :bundles do
+    CLEAN.include('dist/bundles')
+
     desc('Clean bundle files')
 
     task :clean do
