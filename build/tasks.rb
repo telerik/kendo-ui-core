@@ -121,7 +121,7 @@ def bundle(options)
     path = "dist/bundles/#{name}"
     license = "#{path}.license"
 
-    prerequisites = [:js, :less]
+    prerequisites = [:js, :less] + options[:prerequisites].to_a
 
     file_license license => File.join(LEGAL_DIR, "#{options[:license]}.txt")
 
