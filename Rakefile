@@ -10,6 +10,7 @@ require 'js'
 require 'css'
 require 'tasks'
 require 'mvc'
+require 'vsdoc'
 
 ROOT_MAP = {
     'js' => 'src/',
@@ -39,6 +40,7 @@ bundle :name => 'complete.commercial',
        :license => 'src-license-complete',
        :eula => "complete",
        :readme => "README.KendoUI.Complete",
+       :vsdoc => { %w(web mobile dataviz framework) => "all" },
        :contents => {
             'js' => COMPLETE_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
@@ -50,6 +52,7 @@ bundle :name => 'trial',
        :license => 'src-license-complete',
        :eula => "trial",
        :readme => "README.KendoUI.Trial",
+       :vsdoc => { %w(web mobile dataviz framework) => "all" },
        :contents => {
             'js' => TRIAL_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
@@ -61,6 +64,7 @@ bundle :name => 'trial',
 bundle :name => 'web.commercial',
        :license => 'src-license-web',
        :eula => "web",
+       :vsdoc => { %w(web framework) => "web" },
        :contents => {
             'js' => WEB_MIN_JS,
             'styles' => WEB_MIN_CSS,
@@ -70,6 +74,7 @@ bundle :name => 'web.commercial',
 
 bundle :name => 'web.open-source',
        :license => 'src-license-web',
+       :vsdoc => { %w(web framework) => "web" },
        :contents => {
             'js' => WEB_MIN_JS,
             'styles' => WEB_MIN_CSS,
@@ -79,6 +84,7 @@ bundle :name => 'web.open-source',
 
 bundle :name => 'mobile.commercial',
        :license => 'src-license-mobile',
+       :vsdoc => { %w(mobile framework) => "dataviz" },
        :contents => {
             'js' => MOBILE_MIN_JS,
             'styles' => MOBILE_MIN_CSS,
@@ -88,6 +94,7 @@ bundle :name => 'mobile.commercial',
 
 bundle :name => 'dataviz.commercial',
        :license => 'src-license-dataviz',
+       :vsdoc => { %w(dataviz framework) => "dataviz" },
        :contents => {
             'js' => DATAVIZ_MIN_JS,
             'styles' => DATAVIZ_MIN_CSS,

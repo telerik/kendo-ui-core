@@ -117,6 +117,7 @@ def bundle(options)
     name = options[:name]
     eula = options[:eula]
     readme = options[:readme]
+    vsdoc_sources = options[:vsdoc]
     path = "dist/bundles/#{name}"
     license = "#{path}.license"
 
@@ -161,6 +162,13 @@ def bundle(options)
         readme_path = File.join(path, "README")
         file_copy :to => readme_path, :from => File.join(README_DIR, "#{readme}.txt")
         prerequisites.push(readme_path)
+    end
+
+    if vsdoc_sources
+        sources = FileList["docs/api/{#{vsdoc_sources.keys[0].join(",")}}/*.md"]
+        vsdoc_path = File.join(path, "vsdoc", "kendo.#{vsdoc_sources.values[0]}-vsdoc.js")
+        vsdoc vsdoc_path => sources
+        prerequisites.push(vsdoc_path)
     end
 
     zip "#{path}.zip" =>  prerequisites
