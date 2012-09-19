@@ -367,6 +367,7 @@
                     if (!method) {
                         view.setDate(currentValue, value);
                     }
+
                     that._focus(restrictValue(currentValue, options.min, options.max));
                 }
             }
@@ -375,7 +376,7 @@
                 e.preventDefault();
             }
 
-            return currentValue;
+            return that._current;
         },
 
         _animate: function(options) {

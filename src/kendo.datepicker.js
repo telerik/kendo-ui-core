@@ -13,7 +13,6 @@
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
-    NAVIGATE = "navigate",
     DATEVIEW = "dateView",
     DISABLED = "disabled",
     DEFAULT = "k-state-default",
@@ -28,7 +27,6 @@
     MIN = "min",
     MAX = "max",
     MONTH = "month",
-    FIRST = "first",
     ARIA_DISABLED = "aria-disabled",
     ARIA_EXPANDED = "aria-expanded",
     ARIA_HIDDEN = "aria-hidden",
@@ -56,20 +54,12 @@
     }
 
     var DateView = function(options) {
-        var that = this,
-            id = options.id,
+        var that = this, id,
             body = document.body,
             sharedCalendar = DatePicker.sharedCalendar,
             div = $(DIV).attr(ARIA_HIDDEN, "true")
                         .addClass("k-calendar-container")
                         .appendTo(body);
-
-        if (id) {
-            id += "_dateview";
-
-            div.attr(ID, id);
-            that._dateViewID = id;
-        }
 
         if (!sharedCalendar) {
             sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr(ID, kendo.guid()).hide().appendTo(body), { focusOnNav: false });
@@ -78,6 +68,14 @@
 
         that.calendar = sharedCalendar;
         that.options = options = options || {};
+        id = options.id;
+
+        if (id) {
+            id += "_dateview";
+
+            div.attr(ID, id);
+            that._dateViewID = id;
+        }
 
         that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
         that.div = div;
