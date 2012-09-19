@@ -348,7 +348,7 @@
             depth: MONTH,
             animation: {},
             month : {},
-            ariaTemplate: 'Current focused date is #=kendo.toString(data.current, "D")#'
+            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "D")#'
         },
 
         setOptions: function(options) {
@@ -593,7 +593,7 @@
         },
 
         _template: function() {
-            this._ariaTemplate = template(this.options.ariaTemplate);
+            this._ariaTemplate = template(this.options.ARIATemplate);
         }
     });
 
