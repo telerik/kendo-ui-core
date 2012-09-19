@@ -25,9 +25,9 @@ MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*']
                 .reject { |f| File.directory? f }
 
 MVC_DEMOS = FileList['wrappers/mvc/demos/**/*']
-                .include('wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll')
                 .exclude('**/obj/**/*')
-                .exclude('**/System*.dll')
+                .exclude('**/*.dll')
+                .include('wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll')
                 .exclude('**/*.pdb')
                 .exclude('**/*.mdb')
 

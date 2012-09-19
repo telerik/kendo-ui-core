@@ -13,6 +13,11 @@ CLEAN.include(MIN_JS)
 #Build src/*.min.js files by running uglifyjs over src/*.js
 rule '.min.js' => lambda { |t| t.sub('min.js', 'js') } do |t|
     sh "uglifyjs #{t.source} > #{t.name}"
+    minjs = File.read(t.name)
+    File.open(t.name, 'w') do |file|
+        file.write ';'
+        file.write minjs
+    end
 end
 
 #Composite JavaScript files
