@@ -1083,7 +1083,7 @@
 
             options = axis.applyDefaults(options);
 
-            if (options.categories.length > 0) {
+            if (options.categories && options.categories.length > 0) {
                 axis.groupCategories(options);
             }
 
@@ -1099,7 +1099,7 @@
 
         applyDefaults: function(options) {
             var categories = options.categories,
-                count = categories.length,
+                count = defined(categories) ? categories.length : 0,
                 categoryIx,
                 cat,
                 diff,

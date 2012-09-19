@@ -105,6 +105,10 @@
                     same(dateAxis.options.max, new Date("2012/02/15 00:00"));
                 });
 
+                test("No categories", function() {
+                    createDateCategoryAxis();
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Grouping", {
                     setup: function() {
