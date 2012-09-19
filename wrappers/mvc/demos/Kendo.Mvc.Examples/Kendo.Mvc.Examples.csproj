@@ -835,7 +835,7 @@
   </Target> -->
   <Target Name="AfterBuild" Condition="'$(Configuration)'!='Release'">
     <!-- Deploy Web suite scripts and styles to Content and Scripts -->
-    <Exec Command="jake mvc:debug-examples" />
+    <Exec Command="rake mvc:assets" />
   </Target>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />

@@ -112,6 +112,15 @@ namespace :bundles do
     ]
 end
 
+namespace :mvc do
+    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content',
+         :from => WEB_MIN_CSS + DATAVIZ_MIN_CSS,
+         :root => 'styles/'
+
+    desc('Copy the minified CSS and JavaScript to Content and Scripts folder')
+    task :assets => [:js, :less, 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content']
+end
+
 desc 'Build all bundles'
 task :bundles =>  "bundles:all"
 
