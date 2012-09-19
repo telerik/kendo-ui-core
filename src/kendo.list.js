@@ -94,6 +94,14 @@
             }
         },
 
+        _unbindDataSource: function() {
+            var that = this;
+
+            that.dataSource.unbind(CHANGE, that._refreshHandler)
+                           .unbind(REQUESTSTART, that._requestStartHandler)
+                           .unbind(REQUESTEND, that._requestEndHandler);
+        },
+
         dataItem: function(index) {
             var that = this;
 
@@ -479,14 +487,6 @@
                                    .bind(CHANGE, that._refreshHandler)
                                    .bind(REQUESTSTART, that._requestStartHandler)
                                    .bind(REQUESTEND, that._requestEndHandler);
-        },
-
-        _unbindDataSource: function() {
-            var that = this;
-
-            that.dataSource.unbind(CHANGE, that._refreshHandler)
-                           .unbind(REQUESTSTART, that._requestStartHandler)
-                           .unbind(REQUESTEND, that._requestEndHandler);
         },
 
         _index: function(value) {

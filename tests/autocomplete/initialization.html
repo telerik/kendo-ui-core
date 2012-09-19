@@ -180,6 +180,15 @@
                 equal(autocomplete.value(), "");
             });
 
+            test("destroy method works", function() {
+                var autocomplete = new AutoComplete($("<input/>"),{
+                    placeholder: "Select..."
+                });
+
+                autocomplete.destroy();
+                ok(true);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
