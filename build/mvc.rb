@@ -56,3 +56,32 @@ file 'wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll' =>
     ['mvc:assets', MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll')].flatten do
     msbuild 'wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
 end
+
+# Copy Source.snk as Kendo.snk (the original Kendo.snk should not be distributed)
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.snk',
+          :from => 'wrappers/mvc/src/shared/Source.snk'
+
+# Copy CommonAssemblyInfo.cs because the 'shared' folder is not distributed
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/CommonAssemblyInfo.cs',
+          :from => 'wrappers/mvc/src/shared/CommonAssemblyInfo.cs'
+
+# Copy Kendo.Mvc.csproj (needed for the next task)
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj',
+          :from => 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
+
+# Patch Visual Studio Project - fix paths etc.
+file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj' do |t|
+    csproj = File.read(t.name)
+
+    csproj.gsub!(/\.\.\\shared\\Kendo\.snk/, 'Kendo.snk')
+    csproj.gsub!(/<Content Include=".*?data\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/, '')
+    csproj.gsub!(/<Content Include=".*?combobox\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/, '')
+    csproj.gsub!(/<Content Include=".*?validator\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/, '<Content Include="..\\js\\kendo.aspnetmvc.js"><Link>Scripts\\kendo.aspnetmvc.js</Link></Content>')
+    csproj.gsub!('<Link>Kendo.snk</Link>', '')
+    csproj.gsub!(/\.\.\\shared\\CommonAssemblyInfo\.cs/, 'CommonAssemblyInfo.cs')
+    csproj.gsub!('<Link>CommonAssemblyInfo.cs</Link>', '');
+
+    File.open(t.name, 'w') do |file|
+        file.write csproj
+    end
+end

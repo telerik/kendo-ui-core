@@ -17,6 +17,7 @@ ROOT_MAP = {
     'styles' => /styles\/.+?\//,
     'src/js' => 'src/',
     'src/styles' => /styles\/.+?\//,
+    'src/Kendo.Mvc' => 'wrappers/mvc/src/Kendo.Mvc/',
     'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
     'wrappers/aspnetmvc/Examples' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/',
     'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/'
@@ -102,6 +103,26 @@ bundle :name => 'dataviz.commercial',
             'src/styles' => DATAVIZ_SRC_CSS
        }
 
+bundle :name => 'aspnetmvc.commercial',
+       :license => 'src-license-complete',
+       :eula => "aspnetmvc",
+       :contents => {
+            'js' => TRIAL_MIN_JS,
+            'styles' => MIN_CSS_RESOURCES,
+            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
+            'wrappers/aspnetmvc/Examples/bin' => MVC_DLL,
+            'wrappers/aspnetmvc/Examples' => MVC_DEMOS,
+            'src/js' => COMPLETE_SRC_JS,
+            'src/styles' => SRC_CSS,
+            'src/Kendo.Mvc' => FileList['wrappers/mvc/src/Kendo.Mvc/**/*'].exclude('**/bin/**/*').exclude('**/obj/**/*').exclude('**/*.csproj'),
+       },
+       :prerequisites => [
+           'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.snk',
+           'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj',
+           'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/CommonAssemblyInfo.cs'
+       ]
+
+
 namespace :bundles do
     desc('Clean bundle files')
 
@@ -115,17 +136,9 @@ namespace :bundles do
         'web.commercial',
         'web.open-source',
         'mobile.commercial',
-        'dataviz.commercial'
+        'dataviz.commercial',
+        'aspnetmvc.commercial'
     ]
-end
-
-namespace :mvc do
-    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content',
-         :from => WEB_MIN_CSS + DATAVIZ_MIN_CSS,
-         :root => 'styles/'
-
-    desc('Copy the minified CSS and JavaScript to Content and Scripts folder')
-    task :assets => [:js, :less, 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content']
 end
 
 desc 'Build all bundles'
