@@ -26,6 +26,7 @@
         ARIA_SELECTED = "aria-selected",
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
+        ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
         ID = "id",
         isArray = $.isArray,
         extend = $.extend,
@@ -65,7 +66,8 @@
 
     TimeView.prototype = {
         current: function(candidate) {
-            var that = this;
+            var that = this,
+                active = that.options.active;
 
             if (candidate !== undefined) {
                 if (that._current) {
@@ -76,7 +78,6 @@
                 }
 
                 if (candidate) {
-
                     candidate = $(candidate).addClass(SELECTED)
                                             .attr(ID, that._optionID)
                                             .attr(ARIA_SELECTED, true);
@@ -85,6 +86,10 @@
                 }
 
                 that._current = candidate;
+
+                if (active) {
+                    active(candidate);
+                }
             } else {
                 return that._current;
             }
@@ -425,7 +430,7 @@
 
     var TimePicker = Widget.extend({
         init: function(element, options) {
-            var that = this, ul;
+            var that = this, ul, timeView;
 
             Widget.fn.init.call(that, element, options);
 
@@ -436,7 +441,7 @@
 
             that._wrapper();
 
-            that.timeView = new TimeView(extend({}, options, {
+            that.timeView = timeView = new TimeView(extend({}, options, {
                 id: element.attr(ID),
                 anchor: that.wrapper,
                 format: options.format,
@@ -462,9 +467,15 @@
                         element.attr(ARIA_EXPANDED, false);
                         ul.attr(ARIA_HIDDEN, true);
                     }
+                },
+                active: function(current) {
+                    element.removeAttr(ARIA_ACTIVEDESCENDANT);
+                    if (current) {
+                        element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
+                    }
                 }
             }));
-            ul = that.timeView.ul;
+            ul = timeView.ul;
 
             that._icon();
             that._reset();
@@ -480,7 +491,7 @@
                     "role": "textbox",
                     "aria-haspopup": true,
                     "aria-expanded": false,
-                    "aria-owns": that.timeView._timeViewID
+                    "aria-owns": timeView._timeViewID
                 });
 
             that.enable(!element.is('[disabled]'));
