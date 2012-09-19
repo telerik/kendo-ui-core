@@ -26,7 +26,9 @@
             module("kendo.ui.DatePicker ARIA", {
                 setup: function() {
                     input = $("<input id='test' />").appendTo(document.body);
-                    instance = new DatePicker(input);
+                    instance = new DatePicker(input, {
+                        ARIATemplate: "#=kendo.toString(current, 'D')#"
+                    });
                 },
                 teardown: function() {
                     input.data("kendoDatePicker").destroy();
@@ -89,6 +91,16 @@
 
             test("DatePicker sets id to the shared calendar", function() {
                 ok(instance.dateView.calendar.element.attr("id"));
+            });
+
+            test("DatePicker sets aria-label after navigation", function() {
+                instance.open();
+
+                instance.element.focus().keydown({
+                    preventDefault: function() {},
+                    keyCode: 40
+                });
+                equal(instance.element.attr("aria-label"), kendo.toString(instance.dateView._current, "D"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

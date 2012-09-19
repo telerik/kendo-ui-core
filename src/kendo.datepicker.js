@@ -427,7 +427,6 @@
             }
 
             that._old = that._update(value);
-            that._updateARIA(that._value);
         },
 
         _toggleHover: function(e) {
@@ -547,6 +546,7 @@
             that._value = date;
             that.dateView.value(date);
             that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
+            that._updateARIA(date);
 
             return date;
         },
