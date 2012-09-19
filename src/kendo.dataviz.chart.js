@@ -1340,6 +1340,8 @@
                 unit = YEARS;
             } else if (delta >= TIME_PER_MONTH) {
                 unit = MONTHS;
+            } else if (delta >= TIME_PER_WEEK) {
+                unit = WEEKS;
             } else if (delta >= TIME_PER_DAY) {
                 unit = DAYS;
             }

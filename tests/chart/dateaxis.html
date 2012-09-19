@@ -858,6 +858,42 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Date Value Axis / Base unit / Weeks");
+
+                test("Major unit is calculated for user set min/max (in weeks)", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/12/01"), {
+                            min: new Date("2012/02/01"),
+                            max: new Date("2012/02/15"),
+                            baseUnit: "weeks"
+                    });
+
+                    equals(dateAxis.options.majorUnit, 1);
+                });
+
+                test("creates labels with default format", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/01/15")
+                    );
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["12/25", "1/1", "1/8", "1/15", "1/22"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(new Date("2012/01/01"), new Date("2012/01/15"), {
+                        labels: {
+                            dateFormats: {
+                                weeks: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["12/25/11", "1/1/12", "1/8/12", "1/15/12", "1/22/12"]);
+                });
+
+                // ------------------------------------------------------------
                 module("Date Value Axis / Base unit / Months");
 
                 test("Major unit is calculated for user set min/max (in months)", function() {
