@@ -6,7 +6,6 @@
         keys = kendo.keys,
         DataSource = kendo.data.DataSource,
         List = ui.List,
-        CHANGE = "change",
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         FOCUSED = "k-state-focused",
@@ -118,13 +117,13 @@
             var that = this;
 
             if (that.dataSource && that._refreshHandler) {
-                that.dataSource.unbind(CHANGE, that._refreshHandler);
+                that._unbindDataSource();
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
             }
 
             that.dataSource = DataSource.create(that.options.dataSource)
-                .bind(CHANGE, that._refreshHandler);
+                .bind("change", that._refreshHandler);
         },
 
         setDataSource: function(dataSource) {
@@ -136,7 +135,7 @@
         events: [
             "open",
             "close",
-            CHANGE,
+            "change",
             "select",
             "dataBinding",
             "dataBound"
