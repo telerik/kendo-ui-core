@@ -126,6 +126,10 @@ def bundle(options)
 
     options[:contents].each do |target, contents|
 
+        root = ROOT_MAP[target]
+
+        raise "Nothing specified for '#{target}' in ROOT_MAP" unless root
+
         to = "#{path}/#{target}"
 
         tree :to => to,
