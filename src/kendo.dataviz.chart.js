@@ -111,11 +111,13 @@
         TIME_PER_MINUTE = 60000,
         TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
         TIME_PER_DAY = 24 * TIME_PER_HOUR,
+        TIME_PER_WEEK = 7 * TIME_PER_DAY,
         TIME_PER_MONTH = 31 * TIME_PER_DAY,
         TIME_PER_YEAR = 365 * TIME_PER_DAY,
         TIME_PER_UNIT = {
             "years": TIME_PER_YEAR,
             "months": TIME_PER_MONTH,
+            "weeks": TIME_PER_WEEK,
             "days": TIME_PER_DAY,
             "hours": TIME_PER_HOUR,
             "minutes": TIME_PER_MINUTE
@@ -127,6 +129,7 @@
         TRIANGLE = "triangle",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_LINE = "verticalLine",
+        WEEKS = "weeks",
         WHITE = "#fff",
         X = "x",
         Y = "y",
@@ -140,6 +143,7 @@
         minutes: "HH:mm",
         hours: "HH:mm",
         days: "M/d",
+        weeks: "M/d",
         months: "MMM 'yy",
         years: "yyyy"
     };
@@ -1119,6 +1123,8 @@
                             unit = YEARS;
                         } else if (minDiff >= TIME_PER_MONTH - TIME_PER_DAY * 3) {
                             unit = MONTHS;
+                        } else if (minDiff >= TIME_PER_WEEK) {
+                            unit = WEEKS;
                         } else if (minDiff >= TIME_PER_DAY) {
                             unit = DAYS;
                         } else if (minDiff >= TIME_PER_HOUR) {
@@ -1159,7 +1165,7 @@
 
             for (date = start; date < end; date = nextDate) {
                 groups.push(date);
-                nextDate = addDuration(date, 1, baseUnit);
+                nextDate = addDuration(date, 1, baseUnit, options.weekStartDay);
 
                 categoryIndicies = [];
                 for (categoryIx = 0; categoryIx < categories.length; categoryIx++) {
@@ -6252,13 +6258,16 @@
         }
     }
 
-    function addDuration(date, value, unit) {
+    function addDuration(date, value, unit, weekStartDay) {
         date = toDate(date);
 
         if (unit === YEARS) {
             return new Date(date.getFullYear() + value, 0, 1);
         } else if (unit === MONTHS) {
             return new Date(date.getFullYear(), date.getMonth() + value, 1);
+        } else if (unit === WEEKS) {
+            var weekStart = startOfWeek(date, weekStartDay);
+            return addDuration(weekStart, value * 7, DAYS);
         } else if (unit === DAYS) {
             return new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
         } else if (unit === HOURS) {
@@ -6270,6 +6279,24 @@
         }
 
         return date;
+    }
+
+    function startOfWeek(date, weekStartDay) {
+        var day = date.getDay(),
+            daysToSubtract = 0;
+
+        weekStartDay = weekStartDay || 0;
+        while (day !== weekStartDay) {
+            if (day === 0) {
+                day = 6;
+            } else {
+                day--;
+            }
+
+            daysToSubtract++;
+        }
+
+        return addTicks(date, -daysToSubtract * TIME_PER_DAY);
     }
 
     function floorDate(date, unit) {
@@ -6293,6 +6320,14 @@
             offsetDiff = a.getTimezoneOffset() - b.getTimezoneOffset();
 
         return diff - (offsetDiff * TIME_PER_MINUTE);
+    }
+
+    function addTicks(date, ticks) {
+        var tzOffsetBefore = date.getTimezoneOffset(),
+            result = new Date(date.getTime() + ticks),
+            tzOffsetDiff = result.getTimezoneOffset() - tzOffsetBefore;
+
+        return new Date(result.getTime() + tzOffsetDiff * TIME_PER_MINUTE);
     }
 
     function duration(a, b, unit) {

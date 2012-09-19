@@ -97,7 +97,7 @@
                 test("Max date can be parsed from string", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012/02/01"), new Date("2012/02/10")
+                            new Date("2012/02/01"), new Date("2012/02/5")
                         ],
                         max: "2012/02/15"
                     });
@@ -460,6 +460,58 @@
 
                     same($.map(view.log.text, function(text) { return text.content }),
                          ["1/1/12", "2/1/12"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Weeks");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/8")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "weeks");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/15")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1", "1/8", "1/15"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/15")
+                        ],
+                        labels: {
+                            dateFormats: {
+                                weeks: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1/12", "1/8/12", "1/15/12"]);
+                });
+
+                test("week start day can be customized", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/15")
+                        ],
+                        weekStartDay: 1
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1", "1/2", "1/9", "1/16"]);
                 });
 
                 // ------------------------------------------------------------
