@@ -287,6 +287,7 @@
     <Compile Include="UI\Chart\Fluent\ChartDonutSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartBubbleSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartNegativeValueSettingsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartOHLCSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarSeriesOverlaySerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLabelsBase.cs" />
@@ -307,6 +308,8 @@
     <Compile Include="UI\Chart\Serialization\ChartDonutSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBubbleSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartNegativeValueSettingsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartOHLCSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartOHLCAggregatesSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
@@ -366,6 +369,9 @@
     <Compile Include="UI\Chart\Series\ChartDonutSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartBubbleSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartNegativeValues.cs" />
+    <Compile Include="UI\Chart\Series\ChartOHLCSeries.cs" />
+    <Compile Include="UI\Chart\Series\ChartOHLCAggregates.cs" />
+    <Compile Include="UI\Chart\Series\IChartOHLCSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartBubbleSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartDonutSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartAreaSeries.cs" />

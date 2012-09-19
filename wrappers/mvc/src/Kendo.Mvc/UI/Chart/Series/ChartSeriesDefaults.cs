@@ -18,6 +18,7 @@ namespace Kendo.Mvc.UI
             ScatterLine = new ChartScatterLineSeries<T, object, object>(chart);
             Area = new ChartAreaSeries<T, object>(chart);
             VerticalArea = new ChartAreaSeries<T, object>(chart);
+            OHLC = new ChartOHLCSeries<T, object>(chart);
         }
 
         /// <summary>
@@ -96,6 +97,15 @@ namespace Kendo.Mvc.UI
         /// The default settings for all scatter line series.
         /// </summary>
         public IChartScatterLineSeries ScatterLine
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all ohlc series.
+        /// </summary>
+        public IChartOHLCSeries OHLC
         {
             get;
             private set;

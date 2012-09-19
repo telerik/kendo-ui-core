@@ -73,5 +73,13 @@ namespace Kendo.Mvc.UI
         {
             get;
         }
+
+        /// <summary>
+        /// The default settings for all ohlc series
+        /// </summary>
+        IChartOHLCSeries OHLC
+        {
+            get;
+        }
     }
 }

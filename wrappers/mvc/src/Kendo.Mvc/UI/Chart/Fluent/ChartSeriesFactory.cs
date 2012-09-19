@@ -889,6 +889,96 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartDonutSeriesBuilder<TModel>(donutSeries);
         }
 
+        /// <summary>
+        /// Defines bound ohlc series.
+        /// </summary>
+        public virtual ChartOHLCSeriesBuilder<TModel> OHLC<TValue>(
+            Expression<Func<TModel, TValue>> openExpression,
+            Expression<Func<TModel, TValue>> highExpression,
+            Expression<Func<TModel, TValue>> lowExpression,
+            Expression<Func<TModel, TValue>> closeExpression,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, string>> baseColorExpression = null
+            )
+        {
+            var ohlcSeries = new ChartOHLCSeries<TModel, TValue>(
+                Container, openExpression, highExpression, lowExpression, closeExpression, colorExpression, baseColorExpression
+            );
+
+            Container.Series.Add(ohlcSeries);
+
+            return new ChartOHLCSeriesBuilder<TModel>(ohlcSeries);
+        }
+
+        /// <summary>
+        /// Defines bound ohlc series.
+        /// </summary>
+        public virtual ChartOHLCSeriesBuilder<TModel> OHLC<TValue>(
+            string openMemberName,
+            string highMemberName,
+            string lowMemberName,
+            string closeMemberName,
+            string colorMemberName = null,
+            string baseColorMemberName = null)
+        {
+            return OHLC<TValue>(
+                null, openMemberName, highMemberName, lowMemberName,
+                closeMemberName, colorMemberName, baseColorMemberName
+            );
+        }
+
+        /// <summary>
+        /// Defines bound ohlc series.
+        /// </summary>
+        public virtual ChartOHLCSeriesBuilder<TModel> OHLC<TValue>(
+            Type memberType,
+            string openMemberName,
+            string highMemberName,
+            string lowMemberName,
+            string closeMemberName,
+            string colorMemberName = null,
+            string baseColorMemberName = null)
+        {
+            var expressionOpen = BuildMemberExpression(memberType, openMemberName);
+            var expressionHigh = BuildMemberExpression(memberType, highMemberName);
+            var expressionLow = BuildMemberExpression(memberType, lowMemberName);
+            var expressionClose = BuildMemberExpression(memberType, closeMemberName);
+            var expressionColor = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
+            var expressionBaseColor = baseColorMemberName.HasValue() ? BuildMemberExpression(memberType, baseColorMemberName) : null;
+
+            var seriesType = typeof(ChartOHLCSeries<,>).MakeGenericType(
+                typeof(TModel), expressionOpen.Body.Type, expressionHigh.Body.Type, expressionLow.Body.Type, expressionClose.Body.Type
+            );
+            var series = (IChartOHLCSeries)BuildSeries(
+                seriesType, expressionOpen, expressionHigh, expressionLow,
+                expressionClose, expressionColor, expressionBaseColor
+            );
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = openMemberName.AsTitle() + ", " + highMemberName.AsTitle() + ", " + lowMemberName.AsTitle() + ", " + closeMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartOHLCSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines ohlc series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartOHLCSeriesBuilder<TModel> OHLC<TValue>(IEnumerable data)
+        {
+            var ohlcSeries = new ChartOHLCSeries<TModel, TValue>(Container, data);
+
+            Container.Series.Add(ohlcSeries);
+
+            return new ChartOHLCSeriesBuilder<TModel>(ohlcSeries);
+        }
+
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
         {
             const bool liftMemberAccess = false;

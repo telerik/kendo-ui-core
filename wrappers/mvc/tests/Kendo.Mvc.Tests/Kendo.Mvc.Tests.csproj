@@ -117,6 +117,8 @@
     <Compile Include="UI\Chart\ChartBubbleSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\BubbleData.cs" />
     <Compile Include="UI\Chart\ChartNegativeValueSettingsBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartOHLCSeriesBuilderTests.cs" />
+    <Compile Include="UI\Chart\OHLCData.cs" />
     <Compile Include="UI\Chart\PlotAreaBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSerializationTests.cs" />
     <Compile Include="UI\Chart\ChartHtmlBuilderTests.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="UI\Chart\Serialization\ChartDonutSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBubbleSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartNegativeValueSettingsSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartOHLCSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
     <Compile Include="UI\Editor\ImageBrowserControllerTests.cs" />

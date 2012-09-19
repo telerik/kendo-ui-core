@@ -84,5 +84,13 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new ChartScatterLineSeriesBuilder<TModel>(chart.SeriesDefaults.ScatterLine);
         }
+
+        /// <summary>
+        /// Defines the default settings for ohlc series.
+        /// </summary>
+        public virtual ChartOHLCSeriesBuilder<TModel> OHLC()
+        {
+            return new ChartOHLCSeriesBuilder<TModel>(chart.SeriesDefaults.OHLC);
+        }
     }
 }

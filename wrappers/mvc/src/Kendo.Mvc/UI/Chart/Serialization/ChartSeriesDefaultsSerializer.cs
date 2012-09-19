@@ -41,6 +41,9 @@ namespace Kendo.Mvc.UI
             var scatterLineData = seriesDefaults.ScatterLine.CreateSerializer().Serialize();
             scatterLineData.Remove("type");
 
+            var ohlcData = seriesDefaults.OHLC.CreateSerializer().Serialize();
+            ohlcData.Remove("type");
+
             var result = new Dictionary<string, object>();
             FluentDictionary.For(result)
                   .Add("bar", barData, () => barData.Count > 0)
@@ -51,7 +54,8 @@ namespace Kendo.Mvc.UI
                   .Add("verticalArea", verticalAreaData, () => verticalAreaData.Count > 0)
                   .Add("pie", pieData, () => pieData.Count > 0)
                   .Add("scatter", scatterData, () => scatterData.Count > 0)
-                  .Add("scatterLine", scatterLineData, () => scatterLineData.Count > 0);
+                  .Add("scatterLine", scatterLineData, () => scatterLineData.Count > 0)
+                  .Add("ohlc", ohlcData, () => ohlcData.Count > 0);
 
             return result;
         }
