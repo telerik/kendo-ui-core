@@ -77,48 +77,33 @@
                 equal(instance.dateView.div.attr("id"), "test_dateview");
             });
 
-            test("DateTimePicker adds role to the popup", function() {
-                equal(instance.timeView.ul.attr("role"), "listbox");
-            });
-
-            test("DateTimePicker adds aria-hidden to the popup", function() {
-                equal(instance.timeView.ul.attr("aria-hidden"), "true");
-            });
-
-            test("DateTimePicker sets aria-hidden=false when timeView is opened", function() {
-                instance.open("time");
-                equal(instance.timeView.ul.attr("aria-hidden"), "false");
-                equal(instance.dateView.popup.element.attr("aria-hidden"), "true");
-            });
-
-            test("DateTimePicker sets aria-hidden=false when dateView is opened", function() {
-                instance.open("date");
-                equal(instance.dateView.popup.element.attr("aria-hidden"), "false");
-                equal(instance.timeView.ul.attr("aria-hidden"), "true");
-            });
-
-            test("DateTimePicker sets aria-hidden=true to the popup", function() {
-                instance.open();
-                instance.close();
-                equal(instance.timeView.ul.attr("aria-hidden"), "true");
-            });
-
-            test("DateTimePicker renders li elements with role attr", function() {
-                instance.open("time");
-                equal(instance.timeView.ul.children(":first").attr("role"), "option");
-            });
-
             test("DateTimePicker sets aria-selected to the selected option", function() {
                 instance.open();
                 instance.value("12:00 AM");
                 equal(instance.timeView.current().attr("aria-selected"), "true");
             });
 
-            test("DateTimePicker allows only one selected option", function() {
-                instance.open();
-                instance.value("12:00 AM");
-                instance.value("2:00 AM");
-                equal(instance.timeView.ul.children("[aria-selected=true]").length, 1);
+            test("DateTimePicker sets aria-owns to the DateView id", function() {
+                instance.open("date");
+                equal(instance.element.attr("aria-owns"), instance.dateView._dateViewID);
+            });
+
+            test("DateTimePicker removes aria-owns to the DateView id", function() {
+                instance.open("date");
+                instance.close("date");
+                equal(instance.element.attr("aria-owns"), undefined);
+            });
+
+            test("DateTimePicker sets aria-owns to the DateView id", function() {
+                instance.open("date");
+                instance.open("time");
+                equal(instance.element.attr("aria-owns"), instance.timeView._timeViewID);
+            });
+
+            test("DateTimePicker removes aria-owns to the DateView id", function() {
+                instance.open("time");
+                instance.close("time");
+                equal(instance.element.attr("aria-owns"), undefined);
             });
 
         </script>

@@ -417,6 +417,7 @@
                     } else {
                         element.attr(ARIA_EXPANDED, false);
                         div.attr(ARIA_HIDDEN, true);
+                        element.removeAttr("aria-owns");
                     }
                 },
                 open:  function(e) {
@@ -431,8 +432,9 @@
                             that.dateView.calendar._focus(date);
                         }
 
-                        element.attr(ARIA_EXPANDED, true);
                         div.attr(ARIA_HIDDEN, false);
+                        element.attr(ARIA_EXPANDED, true);
+                        element.attr("aria-owns", that.dateView._dateViewID);
                     }
                 }
             }));
@@ -475,16 +477,18 @@
                     if (that.trigger(CLOSE, timeViewParams)) {
                         e.preventDefault();
                     } else {
-                        element.attr(ARIA_EXPANDED, false);
                         ul.attr(ARIA_HIDDEN, true);
+                        element.attr(ARIA_EXPANDED, false);
+                        element.removeAttr("aria-owns");
                     }
                 },
                 open:  function(e) {
                     if (that.trigger(OPEN, timeViewParams)) {
                         e.preventDefault();
                     } else {
-                        element.attr(ARIA_EXPANDED, true);
                         ul.attr(ARIA_HIDDEN, false);
+                        element.attr(ARIA_EXPANDED, true);
+                        element.attr("aria-owns", that.timeView._timeViewID);
                     }
                 }
             });
