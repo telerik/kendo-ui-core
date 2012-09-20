@@ -1,4 +1,4 @@
-<div data-role="view" id="buttongroup-home" data-init="mobileSalesViewInit" data-title="Sales Report">
+<div data-role="view" id="buttongroup-home" data-show="mobileSalesViewInit" data-title="Sales Report" data-layout="layout">
     <div class="head">&nbsp;</div>
     <ul id="select-period" data-index="0">
         <li>
@@ -50,11 +50,31 @@
     </ul>
 </div>
 
+
+<div data-role="layout" data-id="layout" data-platform="ios">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-align="left" data-role="button" class="nav-button" href="#index">Index</a>
+            <ul id="period" data-index="0">
+                <li>
+                    Month
+                </li>
+                <li>
+                    Quarter
+                </li>
+                <li>
+                    Year
+                </li>
+            </ul>
+        </div>
+    </header>
+</div>
+
 <script>
     function mobileSalesViewInit() {
         var listviews = this.element.find("ul.km-listview");
 
-        $("#select-period").kendoMobileButtonGroup({
+        $("#period, #select-period").kendoMobileButtonGroup({
             select: function() {
                 listviews.hide()
                          .eq(this.selectedIndex)
@@ -82,7 +102,7 @@
 #select-period {
     margin: 1em auto .4em auto;
 }
-#buttongroup-home ul span {
+#buttongroup-home .km-list span {
 	float: right;
 }
 #buttongroup-home .sales-up {

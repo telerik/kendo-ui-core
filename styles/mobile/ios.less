@@ -334,15 +334,30 @@
     padding: 0 1px 1px 0;
 }
 
-.km-ios .km-buttongroup .km-button
+.km-ios .km-buttongroup .km-button,
+.km-tablet .km-ios .km-buttongroup .km-button
 {
     border-width: 1px;
     border-right-width: 0;
+    border-color: rgba(0,0,0,.4);
+    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+}
+
+.km-tablet .km-ios .km-buttongroup .km-button:not(.km-state-active),
+.km-ios .km-content .km-buttongroup .km-button:not(.km-state-active)
+{
     color: #929292;
     text-shadow: 0 1px rgba(255,255,255,.8);
-    border-color: rgba(0,0,0,.4);
+}
+
+.km-ios .km-content .km-buttongroup .km-button
+{
     .linear-gradient-image(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
-    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+}
+
+.km-ios .km-navbar .km-buttongroup .km-button:not(.km-state-active)
+{
+    background-color: transparent;
 }
 
 .km-ios .km-buttongroup .km-button:last-child
@@ -352,18 +367,19 @@
 
 .km-ios .km-buttongroup .km-state-active
 {
-    color: #fff;
     text-shadow: none;
-    border-color: rgba(0,0,0,.4);
     border-width: 1px 0 1px 1px;
+    -webkit-box-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+}
+
+.km-ios .km-content .km-buttongroup .km-state-active
+{
+    color: #fff;
+    border-color: rgba(0,0,0,.4);
     background-color: #3D7EEB;
     .linear-gradient-image(top, rgba(0,0,0,.3), rgba(0,0,0,0) 50%, rgba(255,255,255,.05) 50%, rgba(255,255,255,.25));
     .box-shadow(inset -1px 0 2px rgba(0,0,0,.6));
-}
-
-.km-ios .km-buttongroup .km-state-active + .km-button
-{
-    border-left-width: 0;
 }
 
 .km-ios .km-buttongroup .km-state-active:last-child
@@ -932,6 +948,7 @@
     text-shadow: 0 1px rgba(255,255,255,.8);
 }
 
+.km-tablet .km-ios .km-navbar .km-button,
 .km-tablet .km-ios :not(.km-tabstrip):not(.km-buttongroup) > .km-button
 {
     background: #606060;
