@@ -766,7 +766,7 @@
                 return undefined;
             }
 
-            var contentElements = this.contentElements && this.contentElements[0] ? this.contentElements : this.contentAnimators,
+            var contentElements = this.contentElements && this.contentElements[0] && !kendo.support.touch ? this.contentElements : this.contentAnimators,
                 idTest = new RegExp("-" + (itemIndex + 1) + "$");
 
             if (contentElements) {
