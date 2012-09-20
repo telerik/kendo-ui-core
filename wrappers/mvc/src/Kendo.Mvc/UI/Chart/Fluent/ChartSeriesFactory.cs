@@ -21,7 +21,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="container">The container.</param>
         public ChartSeriesFactory(Chart<TModel> container)
         {
-
             Container = container;
         }
 
@@ -897,12 +896,11 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, TValue>> highExpression,
             Expression<Func<TModel, TValue>> lowExpression,
             Expression<Func<TModel, TValue>> closeExpression,
-            Expression<Func<TModel, string>> colorExpression = null,
-            Expression<Func<TModel, string>> baseColorExpression = null
+            Expression<Func<TModel, string>> colorExpression = null
             )
         {
             var ohlcSeries = new ChartOHLCSeries<TModel, TValue>(
-                Container, openExpression, highExpression, lowExpression, closeExpression, colorExpression, baseColorExpression
+                Container, openExpression, highExpression, lowExpression, closeExpression, colorExpression
             );
 
             Container.Series.Add(ohlcSeries);
@@ -918,12 +916,11 @@ namespace Kendo.Mvc.UI.Fluent
             string highMemberName,
             string lowMemberName,
             string closeMemberName,
-            string colorMemberName = null,
-            string baseColorMemberName = null)
+            string colorMemberName = null)
         {
             return OHLC<TValue>(
                 null, openMemberName, highMemberName, lowMemberName,
-                closeMemberName, colorMemberName, baseColorMemberName
+                closeMemberName, colorMemberName
             );
         }
 
@@ -936,22 +933,20 @@ namespace Kendo.Mvc.UI.Fluent
             string highMemberName,
             string lowMemberName,
             string closeMemberName,
-            string colorMemberName = null,
-            string baseColorMemberName = null)
+            string colorMemberName = null)
         {
             var expressionOpen = BuildMemberExpression(memberType, openMemberName);
             var expressionHigh = BuildMemberExpression(memberType, highMemberName);
             var expressionLow = BuildMemberExpression(memberType, lowMemberName);
             var expressionClose = BuildMemberExpression(memberType, closeMemberName);
             var expressionColor = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
-            var expressionBaseColor = baseColorMemberName.HasValue() ? BuildMemberExpression(memberType, baseColorMemberName) : null;
 
             var seriesType = typeof(ChartOHLCSeries<,>).MakeGenericType(
                 typeof(TModel), expressionOpen.Body.Type, expressionHigh.Body.Type, expressionLow.Body.Type, expressionClose.Body.Type
             );
             var series = (IChartOHLCSeries)BuildSeries(
                 seriesType, expressionOpen, expressionHigh, expressionLow,
-                expressionClose, expressionColor, expressionBaseColor
+                expressionClose, expressionColor
             );
 
             if (!series.Name.HasValue())
@@ -977,6 +972,96 @@ namespace Kendo.Mvc.UI.Fluent
             Container.Series.Add(ohlcSeries);
 
             return new ChartOHLCSeriesBuilder<TModel>(ohlcSeries);
+        }
+
+        /// <summary>
+        /// Defines bound candlestick series.
+        /// </summary>
+        public virtual ChartCandlestickSeriesBuilder<TModel> Candlestick<TValue>(
+            Expression<Func<TModel, TValue>> openExpression,
+            Expression<Func<TModel, TValue>> highExpression,
+            Expression<Func<TModel, TValue>> lowExpression,
+            Expression<Func<TModel, TValue>> closeExpression,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, string>> baseColorExpression = null
+            )
+        {
+            var ohlcSeries = new ChartCandlestickSeries<TModel, TValue>(
+                Container, openExpression, highExpression, lowExpression, closeExpression, colorExpression, baseColorExpression
+            );
+
+            Container.Series.Add(ohlcSeries);
+
+            return new ChartCandlestickSeriesBuilder<TModel>(ohlcSeries);
+        }
+
+        /// <summary>
+        /// Defines bound candlestick series.
+        /// </summary>
+        public virtual ChartCandlestickSeriesBuilder<TModel> Candlestick<TValue>(
+            string openMemberName,
+            string highMemberName,
+            string lowMemberName,
+            string closeMemberName,
+            string colorMemberName = null,
+            string baseColorMemberName = null)
+        {
+            return Candlestick<TValue>(
+                null, openMemberName, highMemberName, lowMemberName,
+                closeMemberName, colorMemberName, baseColorMemberName
+            );
+        }
+
+        /// <summary>
+        /// Defines bound candlestick series.
+        /// </summary>
+        public virtual ChartCandlestickSeriesBuilder<TModel> Candlestick<TValue>(
+            Type memberType,
+            string openMemberName,
+            string highMemberName,
+            string lowMemberName,
+            string closeMemberName,
+            string colorMemberName = null,
+            string baseColorMemberName = null)
+        {
+            var expressionOpen = BuildMemberExpression(memberType, openMemberName);
+            var expressionHigh = BuildMemberExpression(memberType, highMemberName);
+            var expressionLow = BuildMemberExpression(memberType, lowMemberName);
+            var expressionClose = BuildMemberExpression(memberType, closeMemberName);
+            var expressionColor = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
+            var expressionBaseColor = baseColorMemberName.HasValue() ? BuildMemberExpression(memberType, baseColorMemberName) : null;
+
+            var seriesType = typeof(ChartCandlestickSeries<,>).MakeGenericType(
+                typeof(TModel), expressionOpen.Body.Type, expressionHigh.Body.Type, expressionLow.Body.Type, expressionClose.Body.Type
+            );
+            var series = (IChartCandlestickSeries)BuildSeries(
+                seriesType, expressionOpen, expressionHigh, expressionLow,
+                expressionClose, expressionColor, expressionBaseColor
+            );
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = openMemberName.AsTitle() + ", " + highMemberName.AsTitle() + ", " + lowMemberName.AsTitle() + ", " + closeMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartCandlestickSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines candlestick series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartCandlestickSeriesBuilder<TModel> Candlestick<TValue>(IEnumerable data)
+        {
+            var candlestickSeries = new ChartCandlestickSeries<TModel, TValue>(Container, data);
+
+            Container.Series.Add(candlestickSeries);
+
+            return new ChartCandlestickSeriesBuilder<TModel>(candlestickSeries);
         }
 
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)

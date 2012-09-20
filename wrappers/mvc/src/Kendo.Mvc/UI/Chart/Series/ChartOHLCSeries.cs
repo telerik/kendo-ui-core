@@ -17,15 +17,13 @@ namespace Kendo.Mvc.UI
         /// <param name="expressionLow">The open expression.</param>
         /// <param name="expressionClose">The high expression.</param>
         /// <param name="expressionColor">The color expression.</param>
-        /// <param name="expressionBaseColor">The baseColor expression.</param>
         public ChartOHLCSeries(
             Chart<TModel> chart,
             Expression<Func<TModel, TValue>> openExpression,
             Expression<Func<TModel, TValue>> highExpression,
             Expression<Func<TModel, TValue>> lowExpression,
             Expression<Func<TModel, TValue>> closeExpression,
-            Expression<Func<TModel, string>> colorExpression,
-            Expression<Func<TModel, string>> baseColorExpression
+            Expression<Func<TModel, string>> colorExpression
             )
             : base(chart)
         {
@@ -42,11 +40,6 @@ namespace Kendo.Mvc.UI
             if (colorExpression != null)
             {
                 ColorMember = colorExpression.MemberWithoutInstance();
-            }
-
-            if (baseColorExpression != null)
-            {
-                BaseColorMember = baseColorExpression.MemberWithoutInstance();
             }
 
             Initialize();
@@ -102,12 +95,6 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <value>The model data close member name.</value>
         public string CloseMember { get; set; }
-
-        /// <summary>
-        /// Gets the model data base color member name.
-        /// </summary>
-        /// <value>The model data base color member name.</value>
-        public string BaseColorMember { get; set; }
 
         /// <summary>
         /// Gets the model data color member name.

@@ -1,7 +1,5 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI;
 
     /// <summary>

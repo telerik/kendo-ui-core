@@ -27,7 +27,6 @@ namespace Kendo.Mvc.UI
                 .Add("border", series.Border.CreateSerializer().Serialize(), ShouldSerializeBorder)
                 .Add("color", series.Color, () => series.Color.HasValue())
                 .Add("colorField", series.ColorMember, () => series.ColorMember.HasValue())
-                .Add("baseColorField", series.BaseColorMember, () => series.BaseColorMember.HasValue())
                 .Add("openField", series.OpenMember, () => series.OpenMember.HasValue())
                 .Add("highField", series.HighMember, () => series.HighMember.HasValue())
                 .Add("lowField", series.LowMember, () => series.LowMember.HasValue())

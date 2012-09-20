@@ -78,16 +78,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets the model base color member name.
-        /// </summary>
-        /// <value>The model base color member name.</value>
-        string BaseColorMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Gets the model open member name.
         /// </summary>
         /// <value>The model open member name.</value>
