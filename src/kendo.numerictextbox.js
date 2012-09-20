@@ -44,9 +44,7 @@
                            .on("keydown" + ns, proxy(that._keydown, that))
                            .on("paste" + ns, proxy(that._paste, that))
                            .on("blur" + ns, proxy(that._focusout, that))
-                           .attr({
-                               "role": "spinbutton"
-                           });
+                           .attr("role", "spinbutton");
 
              options.placeholder = options.placeholder || element.attr("placeholder");
 
@@ -79,13 +77,8 @@
                  options.step = step;
              }
 
-             if (options.min !== NULL) {
-                 element.attr("aria-valuemin", options.min);
-             }
-
-             if (options.max !== NULL) {
-                 element.attr("aria-valuemax", options.max);
-             }
+             element.attr("aria-valuemin", options.min)
+                    .attr("aria-valuemax", options.max);
 
              options.format = extractFormat(options.format);
 
@@ -453,7 +446,7 @@
             }
 
             options[option] = that._parse(value);
-            that.element.attr(option === "min" ? "aria-valuemin" : "aria-valuemax", options[option]);
+            that.element.attr("aria-value" + option, options[option]);
         },
 
         _spin: function(step, timeout) {

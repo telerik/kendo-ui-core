@@ -63,6 +63,12 @@
                 equal(input.attr("aria-valuemax"), "10");
             });
 
+            test("NumericTextBox do not set aria-valuemin", function() {
+                var numeric = new NumericTextBox(input);
+
+                equal(input.attr("aria-valuemin"), undefined);
+            });
+
             test("NumericTextBox adds aria-valuenow", function() {
                 var numeric = new NumericTextBox(input, {
                     value: 10
