@@ -361,7 +361,7 @@
             }
 
             that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
-            that._updateARIA();
+            that._updateARIA(date);
 
             return date;
         },
@@ -376,7 +376,7 @@
                 that.toggle(isDateViewVisible ? "time" : "date");
             } else if (isDateViewVisible) {
                 dateView.move(e);
-                that._updateARIA();
+                that._updateARIA(dateView._current);
             } else if (timeView.popup.visible()) {
                 timeView.move(e);
             } else if (e.keyCode === kendo.keys.ENTER) {
@@ -478,7 +478,7 @@
                     } else {
                         element.val(kendo.toString(value, options.format, options.culture));
                         that.dateView.value(value);
-                        that._updateARIA();
+                        that._updateARIA(value);
                     }
                 },
                 close: function(e) {
@@ -577,9 +577,8 @@
             this._ariaTemplate = kendo.template(this.options.ARIATemplate);
         },
 
-        _updateARIA: function() {
-            //should we set _value instead of _current on _update...
-            this.element.attr("aria-label", this._ariaTemplate({ current: this.dateView._current }));
+        _updateARIA: function(date) {
+            this.element.attr("aria-label", this._ariaTemplate({ current: date }));
         }
     });
 

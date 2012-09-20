@@ -476,7 +476,7 @@
                 that._change(that.element.val());
             } else {
                 dateView.move(e);
-                that._updateARIA();
+                that._updateARIA(dateView._current);
             }
         },
 
@@ -590,8 +590,8 @@
             this._ariaTemplate = template(this.options.ARIATemplate);
         },
 
-        _updateARIA: function() {
-            this.element.attr("aria-label", this._ariaTemplate({ current: this.dateView._current }));
+        _updateARIA: function(date) {
+            this.element.attr("aria-label", this._ariaTemplate({ current: date }));
         },
     });
 
