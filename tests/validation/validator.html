@@ -458,6 +458,20 @@
                 ok(validator.validate());
             });
 
+            test("validate returns true if input with type=text and data-kendo-type=number value does match step attribute and have min set with three decimal places step", function() {
+                var input = $('<input type="text" value="3.5" step="0.001" data-kendo-type="number" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true if input with type=text and data-kendo-type=number value does match step attribute and have min set with two decimal places step", function() {
+                var input = $('<input type="text" value="3.5" step="0.01" data-kendo-type="number" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
             test("validate returns true if input with type=text and data-kendo-type=number value does match step attribute and have min set with decimal step", function() {
                 var input = $('<input type="text" value="18.1" step="0.1" min="5" data-kendo-type="number" />'),
                     validator = setup(input);
