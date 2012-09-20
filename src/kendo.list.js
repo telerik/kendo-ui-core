@@ -677,7 +677,7 @@
                 options = that.options,
                 cascade = options.cascadeFrom,
                 parent, select, valueField,
-                deactivate, change, dataSource;
+                deactivate, change;
 
             if (cascade) {
                 parent = $("#" + cascade).data("kendo" + options.name);
@@ -686,7 +686,6 @@
                     return;
                 }
 
-                dataSource = that.dataSource;
                 valueField = parent.options.dataValueField;
                 deactivate = function() {
                     that.value("");
@@ -711,7 +710,7 @@
                         expressions, filters;
 
                     if (filterValue) {
-                        expressions = dataSource.filter() || {};
+                        expressions = that.dataSource.filter() || {};
                         removeFiltersForField(expressions, valueField);
                         filters = expressions.filters || [];
 
@@ -721,7 +720,7 @@
                             value: filterValue
                         });
 
-                        dataSource
+                        that.dataSource
                             .one(CHANGE, change)
                             .filter(filters);
 
