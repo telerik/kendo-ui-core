@@ -58,7 +58,16 @@
             .replace(/&gt;/g, '>');
     }
 
-    var Validator = Widget.extend({        init: function(element, options) {
+    function numberOfDecimalDigits(value) {
+        value = (value + "").split('.');
+        if (value.length > 1) {
+            return value[1].length;
+        }
+        return 0;
+    }
+
+    var Validator = Widget.extend({
+        init: function(element, options) {
             var that = this,
                 resolved = resolveRules(element);
 
@@ -127,10 +136,16 @@
                 step: function(input) {
                     if (input.filter(NUMBERINPUTSELECTOR + ",[" + kendo.attr("type") + "=number]").filter("[step]").length && input.val() !== "") {
                         var min = parseFloat(input.attr("min")) || 0,
-                            step = parseFloat(input.attr("step")) || 0,
-                            val = parseFloat(input.val());
+                            step = parseFloat(input.attr("step")) || 1,
+                            val = parseFloat(input.val()),
+                            decimals = numberOfDecimalDigits(step),
+                            raise;
 
-                        return (((val-min)*10)%(step*10)) / 100 === 0;
+                        if (decimals) {
+                            raise = Math.pow(10, decimals);
+                            return (((val-min)*raise)%(step*raise)) / Math.pow(100, decimals) === 0;
+                        }
+                        return ((val-min)%step) === 0;
                     }
                     return true;
                 },
