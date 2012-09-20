@@ -117,12 +117,26 @@
             test("DateTimePicker sets aria-label after navigation", function() {
                 instance.open();
 
-                instance.element.focus().keydown({
+                instance.element.focus().trigger({
+                    type: "keydown",
                     preventDefault: function() {},
                     keyCode: 40
                 });
 
                 equal(instance.element.attr("aria-label"), kendo.toString(instance.dateView._current, "G"));
+            });
+
+            test("DateTimePicker sets aria-activedescendant", function() {
+                instance.open("time");
+                instance.value("10/10/2000 12:00 AM");
+                equal(instance.element.attr("aria-activedescendant"), instance.timeView._optionID);
+            });
+
+            test("DateTimePicker removes aria-activedescendant", function() {
+                instance.open();
+                instance.value("10/10/2000 12:00 AM");
+                instance.value("10/10/2000 12:10 AM");
+                equal(instance.element.attr("aria-activedescendant"), undefined);
             });
 
         </script>

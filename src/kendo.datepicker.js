@@ -592,7 +592,7 @@
 
         _updateARIA: function(date) {
             this.element.attr("aria-label", this._ariaTemplate({ current: date }));
-        },
+        }
     });
 
     ui.plugin(DatePicker);

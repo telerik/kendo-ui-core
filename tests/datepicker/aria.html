@@ -96,7 +96,8 @@
             test("DatePicker sets aria-label after navigation", function() {
                 instance.open();
 
-                instance.element.focus().keydown({
+                instance.element.focus().trigger({
+                    type: "keydown",
                     preventDefault: function() {},
                     keyCode: 40
                 });
