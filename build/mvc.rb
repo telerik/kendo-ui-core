@@ -27,6 +27,7 @@ MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*']
 MVC_DEMOS = FileList['wrappers/mvc/demos/**/*']
                 .include('wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll')
                 .exclude('**/System*.dll')
+                .exclude('**/*.csproj')
                 .exclude('**/*resources.dll')
                 .exclude('**/Kendo.Mvc.dll')
                 .exclude('**/obj/**/*')
@@ -112,6 +113,28 @@ file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj' do |t|
     csproj.gsub!('<Link>Kendo.snk</Link>', '')
     csproj.gsub!(/\.\.\\shared\\CommonAssemblyInfo\.cs/, 'CommonAssemblyInfo.cs')
     csproj.gsub!('<Link>CommonAssemblyInfo.cs</Link>', '');
+
+    File.open(t.name, 'w') do |file|
+        file.write csproj
+    end
+end
+
+# Copy Kendo.Mvc.Examples.csproj (needed for the next task)
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
+          :from => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
+
+# Patch Visual Studio Project - fix paths etc.
+file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj' do |t|
+    csproj = File.read(t.name)
+
+    # remove AfterBuild target
+    csproj.sub!(/\s*<Target Name="AfterBuild"((.|\r|\n)*?)\/Target>/i, '')
+
+    # remove project reference
+    csproj.sub!(/\s*<ProjectReference((.|\r|\n)*?)\/ProjectReference>/i, '')
+
+    # add reference to Kendo dll
+    csproj.sub!(/(\s*)(<Reference.*?\/>)/i, '\1\2\1<Reference Include="Kendo.Mvc" />');
 
     File.open(t.name, 'w') do |file|
         file.write csproj

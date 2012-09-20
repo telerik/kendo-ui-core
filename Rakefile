@@ -129,6 +129,7 @@ bundle :name => 'aspnetmvc.commercial',
        :prerequisites => [
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.snk',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj',
+           'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/CommonAssemblyInfo.cs'
        ]
 
