@@ -653,6 +653,22 @@
                 same(addDuration(dateA, 15, "months"), new Date("2011/04/01"));
             });
 
+            test("rounds date to default week start (Sunday)", function() {
+                same(addDuration(dateA, 1, "weeks", 0), new Date("2010/01/03"));
+            });
+
+            test("rounds date to default week start (Sunday) after adding 5 weeks", function() {
+                same(addDuration(dateA, 5, "weeks", 0), new Date("2010/01/31"));
+            });
+
+            test("rounds date to custom week start", function() {
+                same(addDuration(dateA, 1, "weeks", 1), new Date("2010/01/04"));
+            });
+
+            test("rounds date to custom week start after adding 5 weeks", function() {
+                same(addDuration(dateA, 5, "weeks", 1), new Date("2010/02/01"));
+            });
+
             test("rounds date to days", function() {
                 same(addDuration(dateA, 35, "days"), new Date("2010/02/05"));
             });

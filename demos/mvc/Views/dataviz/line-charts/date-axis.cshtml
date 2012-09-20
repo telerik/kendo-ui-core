@@ -19,6 +19,11 @@
                         <label for="baseUnitMonths">Months</label>
                     </li>
                     <li>
+                        <input id="baseUnitWeeks" name="baseUnit"
+                                type="radio" value="weeks" autocomplete="off" />
+                        <label for="baseUnitWeeks">Weeks</label>
+                    </li>
+                    <li>
                         <input id="baseUnitDays" name="baseUnit"
                                 type="radio" value="days" autocomplete="off" />
                         <label for="baseUnitDays">Days</label>
@@ -66,17 +71,23 @@
                         },
                         series: [{
                             type: "line",
-                            data: [20, 40, 45, 30, 50],
-                            aggregate: "sum" 
+                            data: [40, 45, 30, 50, 45, 40, 35, 40, 42, 40, 35],
+                            aggregate: "sum"
                         }],
                         categoryAxis: {
                             baseUnit: "months",
                             categories: [
-                                new Date("2011/12/30"),
                                 new Date("2011/12/31"),
                                 new Date("2012/01/01"),
                                 new Date("2012/01/02"),
-                                new Date("2012/01/03")
+                                new Date("2012/01/03"),
+                                new Date("2012/01/04"),
+                                new Date("2012/01/05"),
+                                new Date("2012/01/06"),
+                                new Date("2012/01/07"),
+                                new Date("2012/01/08"),
+                                new Date("2012/01/09"),
+                                new Date("2012/01/10")
                             ]
                         }
                     });
