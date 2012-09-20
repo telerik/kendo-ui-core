@@ -642,17 +642,17 @@
                 });
 
                 test("Major ticks count is correct", function() {
-                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
-                    equals(dateAxis.getMajorTickPositions().length, 7);
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/06"));
+                    equals(dateAxis.getMajorTickPositions().length, 5);
                 });
 
                 test("Minor ticks count is correct", function() {
-                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
-                    equals(dateAxis.getMinorTickPositions().length, 31);
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/06"));
+                    equals(dateAxis.getMinorTickPositions().length, 21);
                 });
 
                 test("User set empty base unit defaults to automatic", function() {
-                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"), {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/06"), {
                         baseUnit: ""
                     });
 
@@ -674,7 +674,7 @@
 
                 test("Base unit is inferred from series range", function() {
                     createDateValueAxis(
-                        new Date("2012/02/01"), new Date("2012/02/10")
+                        new Date("2012/02/01"), new Date("2012/02/06")
                     );
 
                     equals("days", dateAxis.options.baseUnit);
@@ -684,7 +684,7 @@
                     createDateValueAxis(
                         new Date("2012/02/01"), new Date("2012/12/01"), {
                             min: new Date("2012/02/01"),
-                            max: new Date("2012/02/10")
+                            max: new Date("2012/02/06")
                     });
 
                     equals(dateAxis.options.baseUnit, "days");
@@ -705,10 +705,10 @@
                     createDateValueAxis(
                         new Date("2012/01/01"), new Date("2012/12/01"), {
                             min: new Date("2012/02/01"),
-                            max: new Date("2012/02/28")
+                            max: new Date("2012/02/06")
                     });
 
-                    equals(dateAxis.options.majorUnit, 6);
+                    equals(dateAxis.options.majorUnit, 2);
                 });
 
                 test("Major unit is calculated for user set min/max and base unit", function() {
@@ -725,7 +725,8 @@
                 test("Major unit is calculated for user set min and automatic max", function() {
                     createDateValueAxis(
                         new Date("2012/01/01"), new Date("2012/12/01"), {
-                            min: new Date("2012/11/01")
+                            min: new Date("2012/11/01"),
+                            baseUnit: "days"
                     });
 
                     equals(dateAxis.options.majorUnit, 6);
@@ -734,25 +735,27 @@
                 test("Major unit is calculated for user set max and automatic min", function() {
                     createDateValueAxis(
                         new Date("2012/01/01"), new Date("2012/12/01"), {
-                            max: new Date("2012/01/10")
+                            max: new Date("2012/01/10"),
+                            baseUnit: "days"
                     });
 
                     equals(dateAxis.options.majorUnit, 2);
                 });
 
                 test("Major unit is calculated for series when user min/max are not set", function() {
-                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/06"));
                     equal(dateAxis.options.majorUnit, 2);
                 });
 
                 test("Minor unit is derived from major unit", function() {
-                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/06"));
                     equal(dateAxis.options.minorUnit, 0.4);
                 });
 
                 test("Automatic maximum is rounded to set major unit", function() {
                     createDateValueAxis(
                         new Date("2012/02/01"), new Date("2012/02/10"), {
+                            baseUnit: "days",
                             majorUnit: 4
                     });
 
@@ -769,6 +772,7 @@
                 test("Automatic minimum is rounded to set major unit", function() {
                     createDateValueAxis(
                         new Date("2012/02/01"), new Date("2012/02/10"), {
+                            baseUnit: "days",
                             majorUnit: 4
                     });
 
@@ -777,7 +781,7 @@
 
                 test("Automatic minimum is rounded to auto major unit", function() {
                     createDateValueAxis(
-                        new Date("2012/02/01"), new Date("2012/02/10"));
+                        new Date("2012/02/01"), new Date("2012/02/06"));
 
                     same(dateAxis.options.min, new Date("2012/01/31"));
                 });
@@ -891,6 +895,42 @@
 
                     same($.map(view.log.text, function(text) { return text.content }),
                          ["12/25/11", "1/1/12", "1/8/12", "1/15/12", "1/22/12"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date Value Axis / Base unit / Weeks");
+
+                test("Major unit is calculated for user set min/max (in weeks)", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/12/01"), {
+                            min: new Date("2012/02/01"),
+                            max: new Date("2012/02/29"),
+                            baseUnit: "weeks"
+                    });
+
+                    equals(dateAxis.options.majorUnit, 1);
+                });
+
+                test("creates labels with default format", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/01/14")
+                    );
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["12/25", "1/1", "1/8", "1/15"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(new Date("2012/01/01"), new Date("2012/01/14"), {
+                        labels: {
+                            dateFormats: {
+                                weeks: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["12/25/11", "1/1/12", "1/8/12", "1/15/12"]);
                 });
 
                 // ------------------------------------------------------------
@@ -1013,6 +1053,7 @@
                     setup: function() {
                         dateAxis = new dataviz.DateValueAxis(
                             new Date("2012/02/01"), new Date("2012/02/10"), {
+                            baseUnit: "days",
                             vertical: false,
                             labels: { visible: false }
                         });
@@ -1045,6 +1086,7 @@
                     setup: function() {
                         dateAxis = new dataviz.DateValueAxis(
                             new Date("2012/02/01"), new Date("2012/02/10"), {
+                            baseUnit: "days",
                             vertical: false,
                             reverse: true,
                             labels: { visible: false }
@@ -1071,6 +1113,7 @@
                     setup: function() {
                         dateAxis = new dataviz.DateValueAxis(
                             new Date("2012/02/01"), new Date("2012/02/10"), {
+                            baseUnit: "days",
                             vertical: true,
                             labels: { visible: false }
                         });
@@ -1103,6 +1146,7 @@
                     setup: function() {
                         dateAxis = new dataviz.DateValueAxis(
                             new Date("2012/02/01"), new Date("2012/02/10"), {
+                            baseUnit: "days",
                             vertical: true,
                             reverse: true,
                             labels: { visible: false }
