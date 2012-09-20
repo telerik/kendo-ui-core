@@ -43,7 +43,10 @@
              element = that.element.addClass(INPUT)
                            .on("keydown" + ns, proxy(that._keydown, that))
                            .on("paste" + ns, proxy(that._paste, that))
-                           .on("blur" + ns, proxy(that._focusout, that));
+                           .on("blur" + ns, proxy(that._focusout, that))
+                           .attr({
+                               "role": "spinbutton"
+                           });
 
              options.placeholder = options.placeholder || element.attr("placeholder");
 
@@ -74,6 +77,14 @@
 
              if (!isStep && step !== NULL) {
                  options.step = step;
+             }
+
+             if (options.min !== NULL) {
+                 element.attr("aria-valuemin", options.min);
+             }
+
+             if (options.max !== NULL) {
+                 element.attr("aria-valuemax", options.max);
              }
 
              options.format = extractFormat(options.format);
@@ -442,6 +453,7 @@
             }
 
             options[option] = that._parse(value);
+            that.element.attr(option === "min" ? "aria-valuemin" : "aria-valuemax", options[option]);
         },
 
         _spin: function(step, timeout) {
@@ -513,7 +525,8 @@
 
             that._value = value = that._adjust(value);
             that._placeholder(kendo.toString(value, format, culture));
-            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
+            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "")
+                        .attr("aria-valuenow", value);
         },
 
         _placeholder: function(value) {

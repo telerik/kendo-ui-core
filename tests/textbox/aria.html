@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NumericTextBox ARIA</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/cultures/kendo.culture.de-DE.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">NumericTextBox ARIA</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var NumericTextBox = kendo.ui.NumericTextBox,
+                input;
+
+            module("kendo.ui.NumericTextBox ARIA", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("NumericTextBox adds role to the input element", function() {
+                input.kendoNumericTextBox();
+                equal(input.attr("role"), "spinbutton");
+            });
+
+            test("NumericTextBox adds aria-valuemin", function() {
+                input.kendoNumericTextBox({
+                    min: 0
+                });
+                equal(input.attr("aria-valuemin"), "0");
+            });
+
+            test("NumericTextBox adds aria-valuemax", function() {
+                input.kendoNumericTextBox({
+                    max: 0
+                });
+                equal(input.attr("aria-valuemax"), "0");
+            });
+
+            test("NumericTextBox updates aria-valuemin", function() {
+                var numeric = new NumericTextBox(input);
+
+                numeric.min(10);
+                equal(input.attr("aria-valuemin"), "10");
+            });
+
+            test("NumericTextBox updates aria-valuemax", function() {
+                var numeric = new NumericTextBox(input);
+
+                numeric.max(10);
+                equal(input.attr("aria-valuemax"), "10");
+            });
+
+            test("NumericTextBox adds aria-valuenow", function() {
+                var numeric = new NumericTextBox(input, {
+                    value: 10
+                });
+
+                equal(input.attr("aria-valuenow"), "10");
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
