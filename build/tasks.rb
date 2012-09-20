@@ -118,6 +118,7 @@ def bundle(options)
     eula = options[:eula]
     readme = options[:readme]
     vsdoc_sources = options[:vsdoc]
+    changelog_suites = options[:changelog]
     path = "dist/bundles/#{name}"
     license = "#{path}.license"
 
@@ -169,6 +170,14 @@ def bundle(options)
         vsdoc_path = File.join(path, "vsdoc", "kendo.#{vsdoc_sources.values[0]}-vsdoc.js")
         vsdoc vsdoc_path => sources
         prerequisites.push(vsdoc_path)
+    end
+
+    if changelog_suites
+        prerequisites.push(:fetch_changelog)
+
+        changelog_path = File.join(path, "changelog.html")
+        write_changelog(changelog_path, changelog_suites)
+        prerequisites.push(changelog_path)
     end
 
     zip "#{path}.zip" =>  prerequisites

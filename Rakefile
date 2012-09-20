@@ -11,6 +11,7 @@ require 'css'
 require 'tasks'
 require 'mvc'
 require 'vsdoc'
+require 'changelog'
 
 ROOT_MAP = {
     'js' => 'src/',
@@ -56,6 +57,7 @@ bundle :name => 'complete.commercial',
        :eula => "complete",
        :readme => "README.KendoUI.Complete",
        :vsdoc => { %w(web mobile dataviz framework) => "all" },
+       :changelog => %w(web mobile dataviz framework),
        :contents => {
             'js' => COMPLETE_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
@@ -68,6 +70,7 @@ bundle :name => 'trial',
        :eula => "trial",
        :readme => "README.KendoUI.Trial",
        :vsdoc => { %w(web mobile dataviz framework) => "all" },
+       :changelog => %w(web mobile dataviz framework aspnetmvc),
        :contents => {
             'js' => TRIAL_MIN_JS,
             'styles' => MIN_CSS_RESOURCES
@@ -80,6 +83,7 @@ bundle :name => 'web.commercial',
        :license => 'src-license-web',
        :eula => "web",
        :vsdoc => { %w(web framework) => "web" },
+       :changelog => %w(web framework),
        :contents => {
             'js' => WEB_MIN_JS,
             'styles' => WEB_MIN_CSS,
@@ -90,6 +94,7 @@ bundle :name => 'web.commercial',
 bundle :name => 'web.open-source',
        :license => 'src-license-web',
        :vsdoc => { %w(web framework) => "web" },
+       :changelog => %w(web framework),
        :contents => {
             'js' => WEB_MIN_JS,
             'styles' => WEB_MIN_CSS,
@@ -100,6 +105,7 @@ bundle :name => 'web.open-source',
 bundle :name => 'mobile.commercial',
        :license => 'src-license-mobile',
        :vsdoc => { %w(mobile framework) => "dataviz" },
+       :changelog => %w(mobile framework),
        :contents => {
             'js' => MOBILE_MIN_JS,
             'styles' => MOBILE_MIN_CSS,
@@ -110,6 +116,7 @@ bundle :name => 'mobile.commercial',
 bundle :name => 'dataviz.commercial',
        :license => 'src-license-dataviz',
        :vsdoc => { %w(dataviz framework) => "dataviz" },
+       :changelog => %w(dataviz framework),
        :contents => {
             'js' => DATAVIZ_MIN_JS,
             'styles' => DATAVIZ_MIN_CSS,
@@ -161,3 +168,5 @@ desc 'Build all bundles'
 task :bundles =>  "bundles:all"
 
 task :default => :bundles
+
+fetch_changelog_task :fetch_changelog
