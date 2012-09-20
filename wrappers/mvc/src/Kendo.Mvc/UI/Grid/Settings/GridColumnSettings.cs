@@ -59,6 +59,12 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        public string ClientGroupHeaderTemplate
+        {
+            get;
+            set;
+        }
+
         public bool Encoded
         {
             get;

@@ -119,8 +119,14 @@ namespace Kendo.Mvc.UI
 
         public string ClientGroupHeaderTemplate
         {
-            get;
-            set;
+            get
+            {
+                return Settings.ClientGroupHeaderTemplate;
+            }
+            set
+            {
+                Settings.ClientGroupHeaderTemplate = value;
+            }
         }
 
         public string ClientGroupFooterTemplate
