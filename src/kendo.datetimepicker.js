@@ -26,9 +26,10 @@
         MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
         MONTH = "month",
         SPAN = "<span/>",
+        ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
-        ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
+        ARIA_OWNS = "aria-owns",
         DATE = Date,
         MIN = new DATE(1900, 0, 1),
         MAX = new DATE(2099, 11, 31),
@@ -389,14 +390,15 @@
                 element = that.element,
                 options = that.options,
                 id = element.attr("id"),
+                dateView, timeView,
                 div, ul,
                 date;
 
-            that.dateView = new kendo.DateView(extend({}, options, {
+            that.dateView = dateView = new kendo.DateView(extend({}, options, {
                 id: id,
                 anchor: that.wrapper,
                 change: function() {
-                    var value = that.dateView.calendar.value(),
+                    var value = dateView.calendar.value(),
                         msValue = +value,
                         msMin = +options.min,
                         msMax = +options.max,
@@ -423,8 +425,8 @@
                         element.attr(ARIA_EXPANDED, false);
                         div.attr(ARIA_HIDDEN, true);
 
-                        if (!that.timeView.popup.visible()) {
-                            element.removeAttr("aria-owns");
+                        if (!timeView.popup.visible()) {
+                            element.removeAttr(ARIA_OWNS);
                         }
                     }
                 },
@@ -441,14 +443,14 @@
                         }
 
                         div.attr(ARIA_HIDDEN, false);
-                        element.attr(ARIA_EXPANDED, true);
-                        element.attr("aria-owns", that.dateView._dateViewID);
+                        element.attr(ARIA_EXPANDED, true)
+                               .attr(ARIA_OWNS, dateView._dateViewID);
                     }
                 }
             }));
-            div = that.dateView.div;
+            div = dateView.div;
 
-            that.timeView = new TimeView({
+            that.timeView = timeView = new TimeView({
                 id: id,
                 value: options.value,
                 anchor: that.wrapper,
@@ -462,14 +464,14 @@
                 max: new DATE(MAX),
                 parseFormats: options.parseFormats,
                 change: function(value, trigger) {
-                    value = that.timeView._parse(value);
+                    value = timeView._parse(value);
 
                     if (value < options.min) {
                         value = new DATE(options.min);
-                        that.timeView.options.min = value;
+                        timeView.options.min = value;
                     } else if (value > options.max) {
                         value = new DATE(options.max);
-                        that.timeView.options.max = value;
+                        timeView.options.max = value;
                     }
 
                     if (trigger) {
@@ -477,7 +479,7 @@
                         that._change(value);
                     } else {
                         element.val(kendo.toString(value, options.format, options.culture));
-                        that.dateView.value(value);
+                        dateView.value(value);
                         that._updateARIA(value);
                     }
                 },
@@ -487,8 +489,9 @@
                     } else {
                         ul.attr(ARIA_HIDDEN, true);
                         element.attr(ARIA_EXPANDED, false);
-                        if (!that.dateView.popup.visible()) {
-                            element.removeAttr("aria-owns");
+
+                        if (!dateView.popup.visible()) {
+                            element.removeAttr(ARIA_OWNS);
                         }
                     }
                 },
@@ -497,18 +500,18 @@
                         e.preventDefault();
                     } else {
                         ul.attr(ARIA_HIDDEN, false);
-                        element.attr(ARIA_EXPANDED, true);
-                        element.attr("aria-owns", that.timeView._timeViewID);
+                        element.attr(ARIA_EXPANDED, true)
+                               .attr(ARIA_OWNS, timeView._timeViewID);
                     }
                 },
                 active: function(current) {
                     element.removeAttr(ARIA_ACTIVEDESCENDANT);
                     if (current) {
-                        element.attr(ARIA_ACTIVEDESCENDANT, that.timeView._optionID);
+                        element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
                     }
                 }
             });
-            ul = that.timeView.ul;
+            ul = timeView.ul;
         },
 
         _icons: function() {
