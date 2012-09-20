@@ -119,19 +119,14 @@ file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj' do |t|
     end
 end
 
-# Copy Kendo.Mvc.Examples.csproj (needed for the next task)
-file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
-          :from => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
-
-# Patch Visual Studio Project - fix paths etc.
-file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj' do |t|
+def patch_examples_csproj t
     csproj = File.read(t.name)
 
     # remove AfterBuild target
-    csproj.sub!(/\s*<Target Name="AfterBuild"((.|\r|\n)*?)\/Target>/i, '')
+    csproj.sub!(/\s*<Target Name="AfterBuild"((.|\r|\n)*?)\/Target>/, '')
 
     # remove project reference
-    csproj.sub!(/\s*<ProjectReference((.|\r|\n)*?)\/ProjectReference>/i, '')
+    csproj.sub!(/\s*<ProjectReference((.|\r|\n)*?)\/ProjectReference>/, '')
 
     # add reference to Kendo dll
     csproj.sub!(/(\s*)(<Reference.*?\/>)/i, '\1\2\1<Reference Include="Kendo.Mvc" />');
@@ -139,4 +134,20 @@ file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.E
     File.open(t.name, 'w') do |file|
         file.write csproj
     end
+end
+
+# Copy Kendo.Mvc.Examples.csproj (needed for the next task)
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
+          :from => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
+
+file_copy :to => 'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
+          :from => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
+
+# Patch Visual Studio Project - fix paths etc.
+file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj' do |t|
+    patch_examples_csproj t
+end
+
+file  'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj' do |t|
+    patch_examples_csproj t
 end

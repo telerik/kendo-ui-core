@@ -23,7 +23,18 @@ ROOT_MAP = {
     'wrappers/aspnetmvc/EditorTemplates/razor' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/',
     'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
     'wrappers/aspnetmvc/Examples' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/',
+    'wrappers/aspnetmvc/Examples/Content/shared' => 'demos/mvc/content/shared',
     'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/'
+}
+
+MVC_CONTENT = {
+    'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
+    'wrappers/aspnetmvc/Examples/bin' => MVC_DLL,
+    'wrappers/aspnetmvc/Examples' => MVC_DEMOS,
+    'wrappers/aspnetmvc/Examples/Content/shared' => FileList['demos/mvc/content/shared/*'],
+    'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
+    'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
+    'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
 }
 
 # Rake tasks
@@ -59,14 +70,11 @@ bundle :name => 'trial',
        :vsdoc => { %w(web mobile dataviz framework) => "all" },
        :contents => {
             'js' => TRIAL_MIN_JS,
-            'styles' => MIN_CSS_RESOURCES,
-            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
-            'wrappers/aspnetmvc/Examples/bin' => MVC_DLL,
-            'wrappers/aspnetmvc/Examples' => MVC_DEMOS,
-            'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
-            'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
-            'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'],
-       }
+            'styles' => MIN_CSS_RESOURCES
+       }.merge(MVC_CONTENT),
+       :prerequisites => [
+           'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
+       ]
 
 bundle :name => 'web.commercial',
        :license => 'src-license-web',
@@ -109,23 +117,18 @@ bundle :name => 'dataviz.commercial',
             'src/styles' => DATAVIZ_SRC_CSS
        }
 
+
 bundle :name => 'aspnetmvc.commercial',
        :license => 'src-license-complete',
        :eula => "aspnetmvc",
        :vsdoc => { %w(web mobile dataviz framework) => "all" },
        :contents => {
-            'js' => TRIAL_MIN_JS,
+            'js' => MVC_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
-            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
-            'wrappers/aspnetmvc/Examples/bin' => MVC_DLL,
-            'wrappers/aspnetmvc/Examples' => MVC_DEMOS,
-            'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
-            'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
-            'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'],
-            'src/js' => COMPLETE_SRC_JS,
+            'src/js' => MVC_SRC_JS,
             'src/styles' => SRC_CSS,
             'src/Kendo.Mvc' => FileList['wrappers/mvc/src/Kendo.Mvc/**/*'].exclude('**/bin/**/*').exclude('**/obj/**/*').exclude('**/*.csproj'),
-       },
+       }.merge(MVC_CONTENT),
        :prerequisites => [
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.snk',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj',
