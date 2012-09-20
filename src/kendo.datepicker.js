@@ -480,10 +480,6 @@
             }
         },
 
-        _updateARIA: function() {
-            this.element.attr("aria-label", this._ariaTemplate({ current: this.dateView._current }));
-        },
-
         _icon: function() {
             var that = this,
                 element = that.element,
@@ -592,7 +588,11 @@
 
         _template: function() {
             this._ariaTemplate = template(this.options.ARIATemplate);
-        }
+        },
+
+        _updateARIA: function() {
+            this.element.attr("aria-label", this._ariaTemplate({ current: this.dateView._current }));
+        },
     });
 
     ui.plugin(DatePicker);

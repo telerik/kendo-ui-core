@@ -28,7 +28,9 @@
             module("kendo.ui.DateTimePicker ARIA", {
                 setup: function() {
                     input = $("<input id='test' />").appendTo(document.body);
-                    instance = new DateTimePicker(input);
+                    instance = new DateTimePicker(input, {
+                        ARIATemplate: "#=kendo.toString(current, 'G')#"
+                    });
                 },
                 teardown: function() {
                     input.data("kendoDateTimePicker").destroy();
@@ -104,6 +106,23 @@
                 instance.open("time");
                 instance.close("time");
                 equal(instance.element.attr("aria-owns"), undefined);
+            });
+
+            test("DateTimePicker sets aria-label on change", function() {
+                instance.value(new Date());
+
+                ok(instance.element.attr("aria-label"));
+            });
+
+            test("DateTimePicker sets aria-label after navigation", function() {
+                instance.open();
+
+                instance.element.focus().keydown({
+                    preventDefault: function() {},
+                    keyCode: 40
+                });
+
+                equal(instance.element.attr("aria-label"), kendo.toString(instance.dateView._current, "G"));
             });
 
         </script>

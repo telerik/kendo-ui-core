@@ -28,6 +28,7 @@
         SPAN = "<span/>",
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
+        ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
         DATE = Date,
         MIN = new DATE(1900, 0, 1),
         MAX = new DATE(2099, 11, 31),
@@ -53,6 +54,7 @@
             that._icons();
 
             that._reset();
+            that._template();
 
             element[0].type = "text";
             element.addClass("k-input")
@@ -96,7 +98,8 @@
             start: MONTH,
             depth: MONTH,
             animation: {},
-            month : {}
+            month : {},
+            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "G")#'
     },
 
     events: [
@@ -358,6 +361,7 @@
             }
 
             that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
+            that._updateARIA();
 
             return date;
         },
@@ -372,6 +376,7 @@
                 that.toggle(isDateViewVisible ? "time" : "date");
             } else if (isDateViewVisible) {
                 dateView.move(e);
+                that._updateARIA();
             } else if (timeView.popup.visible()) {
                 timeView.move(e);
             } else if (e.keyCode === kendo.keys.ENTER) {
@@ -417,7 +422,10 @@
                     } else {
                         element.attr(ARIA_EXPANDED, false);
                         div.attr(ARIA_HIDDEN, true);
-                        element.removeAttr("aria-owns");
+
+                        if (!that.timeView.popup.visible()) {
+                            element.removeAttr("aria-owns");
+                        }
                     }
                 },
                 open:  function(e) {
@@ -454,16 +462,14 @@
                 max: new DATE(MAX),
                 parseFormats: options.parseFormats,
                 change: function(value, trigger) {
-                    var timeView = this;
-
-                    value = timeView._parse(value);
+                    value = that.timeView._parse(value);
 
                     if (value < options.min) {
                         value = new DATE(options.min);
-                        timeView.options.min = value;
+                        that.timeView.options.min = value;
                     } else if (value > options.max) {
                         value = new DATE(options.max);
-                        timeView.options.max = value;
+                        that.timeView.options.max = value;
                     }
 
                     if (trigger) {
@@ -471,6 +477,8 @@
                         that._change(value);
                     } else {
                         element.val(kendo.toString(value, options.format, options.culture));
+                        that.dateView.value(value);
+                        that._updateARIA();
                     }
                 },
                 close: function(e) {
@@ -479,7 +487,9 @@
                     } else {
                         ul.attr(ARIA_HIDDEN, true);
                         element.attr(ARIA_EXPANDED, false);
-                        element.removeAttr("aria-owns");
+                        if (!that.dateView.popup.visible()) {
+                            element.removeAttr("aria-owns");
+                        }
                     }
                 },
                 open:  function(e) {
@@ -489,6 +499,12 @@
                         ul.attr(ARIA_HIDDEN, false);
                         element.attr(ARIA_EXPANDED, true);
                         element.attr("aria-owns", that.timeView._timeViewID);
+                    }
+                },
+                active: function(current) {
+                    element.removeAttr(ARIA_ACTIVEDESCENDANT);
+                    if (current) {
+                        element.attr(ARIA_ACTIVEDESCENDANT, that.timeView._optionID);
                     }
                 }
             });
@@ -555,6 +571,15 @@
 
                 that._form = form.on("reset", that._resetHandler);
             }
+        },
+
+        _template: function() {
+            this._ariaTemplate = kendo.template(this.options.ARIATemplate);
+        },
+
+        _updateARIA: function() {
+            //should we set _value instead of _current on _update...
+            this.element.attr("aria-label", this._ariaTemplate({ current: this.dateView._current }));
         }
     });
 
