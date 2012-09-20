@@ -12,6 +12,7 @@ require 'tasks'
 require 'mvc'
 require 'vsdoc'
 require 'changelog'
+require 'demos'
 
 ROOT_MAP = {
     'js' => 'src/',
