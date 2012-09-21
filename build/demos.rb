@@ -155,12 +155,17 @@ end
 CDN_ROOT = 'http://cdn.kendostatic.com/'
 THEME_BUILDER_ROOT = 'http://themebuilder.kendoui.com'
 
+PRODUCTION_RESOURCES = FileList['demos/mvc/**/*']
+            .exclude('**/*.cs')
+            .exclude('**/obj/**/*')
+
+
 tree :to => 'dist/demos/production',
-     :from => FileList['demos/mvc/**/*'],
+     :from => PRODUCTION_RESOURCES,
      :root => 'demos/mvc'
 
 tree :to => 'dist/demos/staging',
-     :from => FileList['demos/mvc/**/*'],
+     :from => PRODUCTION_RESOURCES,
      :root => 'demos/mvc'
 
 tree :to => 'dist/demos/staging/content/cdn/js',
