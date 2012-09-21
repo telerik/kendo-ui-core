@@ -110,14 +110,6 @@
             }
         },
 
-        _unbindDataSource: function() {
-            var that = this;
-
-            that.dataSource.unbind(CHANGE, that._refreshHandler)
-                           .unbind(REQUESTSTART, that._requestStartHandler)
-                           .unbind(REQUESTEND, that._requestEndHandler);
-        },
-
         dataItem: function(index) {
             var that = this;
 
