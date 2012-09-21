@@ -129,7 +129,6 @@ def to_heading_tree(file)
     root
 end
 
-desc 'Generate VSDOC from the markdown docs'
 def get_vsdoc(sources)
     classes = []
 
