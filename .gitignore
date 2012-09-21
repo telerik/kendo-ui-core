@@ -24,6 +24,7 @@ src/**/*.min.js
 src/*.min.js
 src/kendo.aspnetmvc.js
 src/kendo.all.js
+src/kendo.winjs.js
 src/kendo.dataviz.js
 src/kendo.mobile.js
 src/kendo.web.js

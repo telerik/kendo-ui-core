@@ -1,6 +1,7 @@
 LESS = FileList['styles/**/*.less']
 SRC_CSS = FileList['styles/**/*'].exclude('**/*.min.css').include(FileList['styles/**/kendo*.less'].ext('css')).uniq
 MIN_CSS = FileList['styles/**/kendo*.less']
+    .include('styles/web/kendo.winjs.css')
     .include('styles/**/*.css')
     .exclude('**/*.min.css')
     .ext('min.css')
@@ -17,7 +18,16 @@ MOBILE_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/mobile\// }
 DATAVIZ_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/dataviz\// }
 DATAVIZ_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/dataviz\// }
 
+WIN_SRC_CSS = FileList['styles/web/kendo.common.css'].include('styles/dataviz/kendo.dataviz.css')
+WIN_MIN_CSS = FileList['styles/web/kendo.winjs.min.css']
+
+file_merge 'styles/web/kendo.winjs.css' => [
+    'styles/web/kendo.common.css',
+    'styles/dataviz/kendo.dataviz.css',
+]
+
 CLEAN.include(MIN_CSS)
+    .include('styles/winjs/kendo.winjs.css')
     .include(LESS.ext('css'))
 
 def find_less_src(lessfile)
@@ -46,6 +56,6 @@ rule '.css' => ['.less', lambda { |target| find_less_prerequisites(target.ext('l
 end
 
 #Build styles/kendo*.min.css by running cssmin over styles/kendo*.css
-rule '.min.css' => [ lambda { |target| target.sub('min.css', 'css') }] do |t|
+rule '.min.css' => lambda { |target| target.sub('min.css', 'css') } do |t|
     sh "cssmin #{t.source} > #{t.name}"
 end

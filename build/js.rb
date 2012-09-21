@@ -152,7 +152,48 @@ MVC_SRC_JS = FileList[COMPLETE_SRC_JS].include('src/kendo.aspnetmvc.js')
 
 TRIAL_MIN_JS = FileList[MVC_MIN_JS]
 
+WIN_JS = FileList[
+    "src/kendo.core.js",
+    "src/kendo.fx.js",
+    "src/kendo.data.odata.js",
+    "src/kendo.data.xml.js",
+    "src/kendo.data.js",
+    "src/kendo.binder.js",
+    "src/kendo.validator.js",
+    "src/kendo.draganddrop.js",
+    "src/kendo.mobile.scroller.js",
+    "src/kendo.groupable.js",
+    "src/kendo.reorderable.js",
+    "src/kendo.resizable.js",
+    "src/kendo.sortable.js",
+    "src/kendo.selectable.js",
+    "src/kendo.pager.js",
+    "src/kendo.popup.js",
+    "src/kendo.list.js",
+    "src/kendo.calendar.js",
+    "src/kendo.datepicker.js",
+    "src/kendo.autocomplete.js",
+    "src/kendo.dropdownlist.js",
+    "src/kendo.combobox.js",
+    "src/kendo.grid.js",
+    "src/kendo.listview.js",
+    "src/kendo.numerictextbox.js",
+    "src/kendo.editable.js",
+    "src/kendo.filtermenu.js",
+    "src/kendo.timepicker.js",
+    "src/kendo.slider.js",
+    "src/kendo.dataviz.core.js",
+    "src/kendo.dataviz.themes.js",
+    "src/kendo.dataviz.chart.js",
+    "src/kendo.dataviz.gauge.js",
+    "src/kendo.dataviz.svg.js"
+]
+
+WIN_MIN_JS = FileList['src/kendo.winjs.min.js']
+WIN_SRC_JS = FileList['src/kendo.winjs.js']
+
 file_merge "src/kendo.web.js" => WEB_JS
 file_merge "src/kendo.dataviz.js" => DATAVIZ_JS
 file_merge "src/kendo.mobile.js" => MOBILE_JS
 file_merge "src/kendo.all.js" => (WEB_JS + DATAVIZ_JS + MOBILE_JS).uniq
+file_merge "src/kendo.winjs.js" => WIN_JS

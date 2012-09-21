@@ -16,6 +16,7 @@ require 'demos'
 require 'bundle'
 
 ROOT_MAP = {
+    '.' => /(src|styles\/.+?)\//,
     'js' => 'src/',
     'styles' => /styles\/.+?\//,
     'src/js' => 'src/',
@@ -160,6 +161,12 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
             'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
+       }
+
+bundle :name => 'winjs',
+       :license => 'src-license-none',
+       :contents => {
+            '.' => WIN_MIN_JS + WIN_SRC_JS + WIN_SRC_CSS + WIN_MIN_CSS
        }
 
 namespace :bundles do
