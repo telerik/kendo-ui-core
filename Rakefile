@@ -13,6 +13,7 @@ require 'mvc'
 require 'vsdoc'
 require 'changelog'
 require 'demos'
+require 'bundle'
 
 ROOT_MAP = {
     'js' => 'src/',
