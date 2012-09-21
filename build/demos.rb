@@ -146,11 +146,74 @@ def demos(options)
     files
 end
 
+CLEAN.include('dist/demos')
+
+file 'demos/mvc/bin/Kendo.dll' => DEMOS_CSHTML do |t|
+    msbuild 'demos/mvc/Kendo.csproj'
+end
+
+CDN_ROOT = 'http://cdn.kendostatic.com/'
+THEME_BUILDER_ROOT = 'http://themebuilder.kendoui.com'
+
+tree :to => 'dist/demos/production',
+     :from => FileList['demos/mvc/**/*'],
+     :root => 'demos/mvc'
+
+tree :to => 'dist/demos/staging',
+     :from => FileList['demos/mvc/**/*'],
+     :root => 'demos/mvc'
+
+tree :to => 'dist/demos/staging/content/cdn/js',
+     :from => COMPLETE_MIN_JS,
+     :root => 'src/'
+
+tree :to => 'dist/demos/staging/content/cdn/styles',
+     :from => MIN_CSS_RESOURCES,
+     :root => /styles\/.+?\//
+
+def patch_web_config(name, cdn_root, themebuilder_root)
+
+    config = File.read(name)
+
+    config.sub!('$CDN_ROOT', cdn_root)
+    config.sub!('$THEMEBUILDER_ROOT', themebuilder_root)
+
+    File.open(name, 'w') do |file|
+        file.write(config)
+    end
+
+end
+
 namespace :demos do
 
     desc('Build debug demo site')
-    task :debug => "demos/mvc/Kendo.csproj" do |t|
+    task :debug => 'demos/mvc/Kendo.csproj' do |t|
         msbuild t.prerequisites[0], '/p:Configuration=Debug'
     end
+
+    task :release => 'demos/mvc/bin/Kendo.dll'
+
+    task :staging_site => [:js,
+        :less,
+        :release,
+        'dist/demos/staging',
+        'dist/demos/staging/content/cdn/js',
+        'dist/demos/staging/content/cdn/styles'] do
+        patch_web_config('dist/demos/staging/Web.config', '~/content/cdn', '~/content/cdn/themebuilder')
+    end
+
+    zip 'dist/demos/staging.zip' => :staging_site
+
+    desc('Build staging demo site')
+    task :staging => 'dist/demos/staging.zip'
+
+    task :production_site => [:release, 'dist/demos/production'] do
+        patch_web_config('dist/demos/production/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT)
+    end
+
+    zip 'dist/demos/production.zip' => :production_site
+
+    desc('Build production demo site')
+    task :production => 'dist/demos/production.zip'
 end
 
