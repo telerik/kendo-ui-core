@@ -7,7 +7,6 @@
         DataSource = kendo.data.DataSource,
         List = ui.List,
         ARIA_DISABLED = "aria-disabled",
-        CHANGE = "change",
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         FOCUSED = "k-state-focused",
