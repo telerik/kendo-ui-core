@@ -151,6 +151,7 @@ MVC_MIN_JS = FileList[COMPLETE_MIN_JS].include('src/kendo.aspnetmvc.min.js')
 MVC_SRC_JS = FileList[COMPLETE_SRC_JS].include('src/kendo.aspnetmvc.js')
 
 TRIAL_MIN_JS = FileList[MVC_MIN_JS]
+CDN_MIN_JS = FileList[MVC_MIN_JS]
 
 WIN_JS = FileList[
     "src/kendo.core.js",

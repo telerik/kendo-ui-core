@@ -14,6 +14,7 @@ require 'vsdoc'
 require 'changelog'
 require 'demos'
 require 'bundle'
+require 'download_builder'
 
 ROOT_MAP = {
     '.' => /(src|styles\/.+?)\//,
@@ -51,6 +52,9 @@ multitask :less => MIN_CSS
 
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
+
+desc 'Build ASP.NET MVC wrappers'
+task :build_mvc => 'wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll'
 
 bundle :name => 'complete.commercial',
        :license => 'src-license-complete',
