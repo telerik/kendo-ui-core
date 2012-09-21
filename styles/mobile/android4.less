@@ -291,7 +291,15 @@
     background: none;
 }
 
-.km-android .km-buttongroup .km-button
+.km-android .km-navbar .km-buttongroup
+{
+    margin-top: .2em;
+    line-height: 1.2em;
+    height: 1.8em;
+}
+
+.km-android .km-buttongroup .km-button,
+.km-android .km-navbar .km-buttongroup .km-button
 {
     .border-radius(1px);
 
@@ -301,13 +309,21 @@
     background: #d6d6d6;
 }
 
+.km-android .km-navbar .km-buttongroup .km-button
+{
+    padding-left: 0;
+    padding-right: 0;
+    font-size: .9em;
+}
+
 :-moz-any(.km-android) .km-buttongroup .km-button
 {
     display: inline-block;
     margin-left: -4px;
 }
 
-.km-android .km-buttongroup .km-state-active
+.km-android .km-buttongroup .km-state-active,
+.km-android .km-navbar .km-buttongroup .km-state-active
 {
     background: #4cbee8;
     overflow: visible;
@@ -317,6 +333,7 @@
 .km-android .km-buttongroup .km-button .km-text
 {
     position: relative;
+    width: 100%;
     z-index: 1;
 }
 
@@ -373,16 +390,21 @@
 .km-android .km-toolbar .km-button
 {
     margin: 0;
-    padding: .7em 0;
-    padding: 1rem 0;
     border: 0;
     .box-shadow(none);
     background: none;
+}
+
+.km-android .km-navbar [class*=item] .km-button,
+.km-android .km-toolbar > .km-button
+{
+    padding: .7em 0;
+    padding: 1rem 0;
     color: #fff;
     text-transform: uppercase;
 }
 
-.km-android .km-navbar .km-text,
+.km-android .km-navbar [class*=item] .km-text,
 .km-android .km-tabstrip .km-text
 {
     position: relative;
@@ -406,7 +428,7 @@
     font-size: 0;
 }
 
-.km-android .km-navbar .km-text
+.km-android .km-navbar [class*=item] .km-text
 {
     float: none;
     border: 0;

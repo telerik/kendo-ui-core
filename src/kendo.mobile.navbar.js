@@ -28,7 +28,11 @@
             centerElement = element.find(".km-view-title");
 
             if(!element.find(roleSelector("view-title"))[0]) {
-               centerElement.append($("<span>&nbsp;</span>"));
+                if (centerElement.is(":empty")) {
+                    centerElement.append($("<span>&nbsp;</span>"));
+                } else {
+                    centerElement.addClass("km-no-title");
+                }
             }
         },
 
