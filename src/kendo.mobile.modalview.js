@@ -15,8 +15,8 @@
             element = that.element;
             options = that.options;
 
-            width = parseFloat(element.css("width"));
-            height = parseFloat(element.css("height"));
+            width = element[0].style.width || element.css("width");
+            height = element[0].style.height || element.css("height");
 
             element.addClass("km-modalview").wrap(WRAP);
 
@@ -24,6 +24,7 @@
                 width: options.width || width || 300,
                 height: options.height || height || 300
             });
+
             element.css({ width: "", height: "" });
 
             that.shim = new Shim(that.wrapper, {
