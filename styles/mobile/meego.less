@@ -22,7 +22,8 @@
     color: #fff;
     font-size: 1.5em;
     line-height: 1.8em;
-    margin-left: .3em;
+    padding-left: .3em;
+    padding-right: .3em;
     float: left;
     width: 100%;
 }
@@ -45,6 +46,17 @@
 {
     width: auto;
     position: static;
+}
+
+.km-meego .km-navbar .km-no-title
+{
+    position: absolute;
+    width: 100%;
+    display: block;
+    font-size: 1.6em;
+    left: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .km-meego .km-tabstrip .km-button
@@ -276,10 +288,21 @@
 
 .km-meego .km-buttongroup
 {
+    font-size: .8em;
     width: 90%;
     text-align: center;
     .border-radius(~".8rem");
     .box-shadow(0 1px 1px rgba(0,0,0,.4));
+}
+
+.km-meego .km-navbar .km-buttongroup
+{
+    width: 80%;
+    display: table;
+    height: auto;
+    margin: 2px auto;
+    font-size: 1.1rem;
+    line-height: 1.2em;
 }
 
 .km-meego .km-buttongroup .km-button
