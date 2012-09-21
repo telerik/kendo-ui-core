@@ -588,7 +588,7 @@
                 that.select(options.index);
             }
 
-            that.trigger("selected");
+            that.trigger(SELECTED);
         },
 
         _valueOnFetch: function(value) {
@@ -598,7 +598,7 @@
                 that.dataSource.one(CHANGE, function() {
                     that._fetch = true;
                     that.value(value);
-                    that.trigger("selected");
+                    that.trigger(SELECTED);
                 });
 
                 if (!that._request) { // if request is started do not fetch again
