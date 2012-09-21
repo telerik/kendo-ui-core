@@ -1,13 +1,10 @@
 require 'yaml'
 require 'erb'
 
-DEMOS_CSHTML = FileList['demos/mvc/Views/web/**/*.cshtml']
+DEMOS_CSHTML = FileList['demos/mvc/Views/*/**/*.cshtml']
 
-DEMOS_HTML = []
-
-WEB_TEMPLATE = ERB.new(File.read('build/templates/web-example.html.erb'))
-
-WEB_NAVIGATION = YAML.load(File.read('demos/mvc/App_Data/web.nav.json'))
+SUITE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/suite-index.html.erb'))
+BUNDLE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/bundle-index.html.erb'))
 
 def include_item?(item)
     packages = item['packages']
@@ -30,21 +27,9 @@ def include_item?(item)
     (!invert && match) || (invert && !match)
 end
 
-WEB_NAVIGATION.each do |name, categories|
-    categories.each do |category|
-        if include_item?(category)
-            category['items'].each do |item|
-                if include_item? (item)
-                    DEMOS_HTML.push ("dist/examples/web/#{item['url']}")
-                end
-            end
-        end
-    end
-end
+def find_demo_src (filename, path)
 
-def find_demo_src (filename)
-
-    filename = filename.sub('dist/examples', 'demos/mvc/Views').pathmap('%X.cshtml')
+    filename = filename.sub(path, 'demos/mvc/Views').pathmap('%X.cshtml')
 
     DEMOS_CSHTML.find { |file| file == filename }
 
@@ -62,35 +47,102 @@ def find_navigation_item(navigation, filename)
     end
 end
 
+def offline_navigation(suite)
 
-directory 'dist/examples'
+    navigation = YAML.load(File.read("demos/mvc/App_Data/#{suite}.nav.json"))
 
-rule /dist\/examples\/web\/.+\.html/ => lambda { |t| find_demo_src(t) } do |t|
-    item = find_navigation_item(WEB_NAVIGATION, t.name)
+    offline = {}
 
-    if item && include_item?(item)
+    navigation.each do |name, categories|
+        offline[name] = []
+        categories.each do |category|
+            if include_item?(category)
+                category['items'] = category['items'].find_all { |item| include_item?(item) }
 
-        body = File.read(find_demo_src(t.name))
-        body.gsub!(/@section \w+ {(.|\n|\r)+?}/, '')
-        body.gsub!(/@{(.|\n|\r)+?}/, '')
-        body.gsub!(/@@/, '');
-
-        ensure_path(t.name)
-
-        File.open(t.name, 'w') do |file|
-            title = item['text']
-
-            file.write WEB_TEMPLATE.result(binding)
+                offline[name].push(category)
+            end
         end
     end
+
+    offline
 end
 
-=begin
+def offline_demos(navigation, path)
 
-navigation.each do |category|
-    p category
+    demos = []
+
+    navigation.each do |name, categories|
+        categories.each do |category|
+            category['items'].each do |item|
+                demos.push("#{path}/#{item['url']}")
+            end
+        end
+    end
+
+    FileList[demos]
 end
-=end
+
+def demos(options)
+
+    path = options[:path] + "/examples"
+
+    suites = options[:suites]
+
+    files = FileList["#{path}/index.html"].include("#{path}/content")
+
+    tree :to => "#{path}/content",
+         :from => FileList['demos/mvc/content/**/*'],
+         :root => 'demos/mvc/content/'
+
+    # Build the index.html page of the demos
+    file "#{path}/index.html" => 'build/templates/bundle-index.html.erb' do |t|
+
+        File.open(t.name, 'w') do |file|
+            file.write BUNDLE_INDEX_TEMPLATE.result(binding) # 'binding' is the current scope
+        end
+
+    end
+
+    suites.each do |suite|
+
+        suite_path  = "#{path}/#{suite}"
+
+        navigation = offline_navigation(suite)
+
+        files = files + offline_demos(navigation, suite_path).include("#{suite_path}/index.html");
+
+        # Build the index.html page of the suite
+        file "#{suite_path}/index.html" => 'build/templates/suite-index.html.erb' do |t|
+
+            File.open(t.name, 'w') do |file|
+                file.write SUITE_INDEX_TEMPLATE.result(binding) # 'binding' is the current scope
+            end
+
+        end
+
+        template = ERB.new(File.read("build/templates/#{suite}-example.html.erb"))
+
+        # Create offline demos by processing the corresponding .cshtml files
+        rule /#{path}\/#{suite}\/.+\.html/ => lambda { |t| find_demo_src(t, path) } do |t|
+            body = File.read(find_demo_src(t.name, path))
+            body.gsub!(/@section \w+ {(.|\n|\r)+?}/, '')
+            body.gsub!(/@{(.|\n|\r)+?}/, '')
+            body.gsub!(/@@/, '');
+
+            ensure_path(t.name)
+
+            item = find_navigation_item(navigation, t.name)
+
+            File.open(t.name, 'w') do |file|
+                title = item['text'] # used by the template and passed via 'binding'
+
+                file.write template.result(binding) # 'binding' is the current scope
+            end
+        end
+    end
+
+    files
+end
 
 namespace :demos do
 
@@ -98,11 +150,5 @@ namespace :demos do
     task :debug => "demos/mvc/Kendo.csproj" do |t|
         msbuild t.prerequisites[0], '/p:Configuration=Debug'
     end
-
-    task :clean do |t|
-        rm_rf 'dist/examples'
-    end
-
-    task :html => DEMOS_HTML
 end
 

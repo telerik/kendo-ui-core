@@ -119,6 +119,7 @@ def bundle(options)
     readme = options[:readme]
     vsdoc_sources = options[:vsdoc]
     changelog_suites = options[:changelog]
+    demo_suites = options[:demos]
     path = "dist/bundles/#{name}"
     license = "#{path}.license"
 
@@ -178,6 +179,15 @@ def bundle(options)
         changelog_path = File.join(path, "changelog.html")
         write_changelog(changelog_path, changelog_suites)
         prerequisites.push(changelog_path)
+    end
+
+    if demo_suites
+        demo_files = demos( {
+            :path => path,
+            :suites => demo_suites
+        })
+
+        prerequisites = prerequisites + demo_files
     end
 
     zip "#{path}.zip" =>  prerequisites

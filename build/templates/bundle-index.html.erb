@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <title>Kendo UI Examples</title>
+    <link rel="stylesheet" href="content/shared/styles/suite.css" />
+</head>
+<body>
+    <div id="page">
+        <h1>Kendo UI Examples</h1>
+        <ul id="suites">
+        <% suites.each do |suite| %>
+            <li class="box">
+            <a href="<%= suite %>/index.html" class="imgPlate"><img src="content/shared/styles/demos-<%= suite %>.png" /></a>
+            <h2><a href="<%= suite %>/index.html"><%= suite.sub(/^(.)/) { $1.capitalize }%> examples</a></h2>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+</body>
+</html>

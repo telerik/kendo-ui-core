@@ -85,6 +85,7 @@ bundle :name => 'web.commercial',
        :eula => "web",
        :vsdoc => { %w(web framework) => "web" },
        :changelog => %w(web framework),
+       :demos => %w(web),
        :contents => {
             'js' => WEB_MIN_JS,
             'styles' => WEB_MIN_CSS,

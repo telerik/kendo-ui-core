@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+    <title>Kendo UI Examples</title>
+    <link rel="stylesheet" href="../content/shared/styles/suite.css" />
+</head>
+<body>
+    <div id="page">
+        <a class="offline-button" href="../index.html">Back to all suites</a>
+
+        <% navigation.each do |name, categories| %>
+        <h1><%= name.sub(/^(.)/) { $1.capitalize} %></h1>
+        <ul>
+            <% categories.each do |category| %>
+            <li>
+                <h2><%= category['text'] %></h2>
+                <ul>
+                    <% category['items'].each do |item| %>
+                        <li><a href='<%= item['url']%>'><%= item['text'] %></a></li>
+                    <% end %>
+                </ul>
+            </li>
+        <% end %>
+        </ul>
+        <% end %>
+    </div>
+</body>
+</html>
