@@ -598,6 +598,7 @@
                 that.dataSource.one(CHANGE, function() {
                     that._fetch = true;
                     that.value(value);
+                    that.trigger("selected");
                 });
 
                 if (!that._request) { // if request is started do not fetch again
@@ -735,7 +736,7 @@
                           select();
                           that.trigger("cascade");
                       })
-                      .one(SELECTED, function() {
+                      .bind(SELECTED, function() {
                           select();
                       });
 
