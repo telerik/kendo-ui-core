@@ -3108,9 +3108,12 @@
         },
 
         getViewElements: function(view) {
-            var chart = this;
+            var chart = this,
+                elements = ChartElement.fn.getViewElements.call(chart, view),
+                group = view.createGroup();
 
-            return ChartElement.fn.getViewElements.call(chart, view);
+            group.children = elements;
+            return [group];
         },
 
         formatPointValue: function(point, format) {

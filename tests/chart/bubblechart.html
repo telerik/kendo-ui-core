@@ -200,6 +200,10 @@
                     equals(outline.r, firstPoint.options.markers.size / 2 - 0.5);
                 });
 
+                test("renders top-level group", function() {
+                    equals(view.log.group.length, 1);
+                });
+
             })();
 
             (function() {
