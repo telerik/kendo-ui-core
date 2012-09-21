@@ -1157,6 +1157,7 @@
             var axis = this,
                 categories = toDate(options.categories),
                 baseUnit = options.baseUnit,
+                baseUnitStep = options.baseUnitStep || 1,
                 min = toTime(options.min),
                 max = toTime(options.max),
                 minCategory = toTime(sparseArrayMin(categories)),
@@ -1173,7 +1174,7 @@
 
             for (date = start; date < end; date = nextDate) {
                 groups.push(date);
-                nextDate = addDuration(date, 1, baseUnit, options.weekStartDay);
+                nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
 
                 categoryIndicies = [];
                 for (categoryIx = 0; categoryIx < categories.length; categoryIx++) {

@@ -107,7 +107,22 @@
 
                 test("No categories", function() {
                     createDateCategoryAxis();
-                });
+                })
+
+                test("Base unit step is applied", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/07")
+                        ],
+                        baseUnitStep: 3
+                    });
+
+                    console.log(categories)
+                    same(categories, [
+                        new Date("2012/02/01"), new Date("2012/02/04"),
+                        new Date("2012/02/07")
+                    ]);
+                });;
 
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Grouping", {
