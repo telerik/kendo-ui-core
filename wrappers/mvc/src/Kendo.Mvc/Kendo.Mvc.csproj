@@ -1173,5 +1173,4 @@
   <Target Name="BeforeBuild">
     <Copy SkipUnchangedFiles="true" SourceFiles="@(Mvc3References)" DestinationFolder="$(OutputPath)" />
   </Target>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
