@@ -21,7 +21,7 @@ def include_item?(item)
             package = package[1..-1]
         end
 
-        match = package == 'offline'
+        match = true if package == 'offline'
     end
 
     (!invert && match) || (invert && !match)
@@ -86,16 +86,18 @@ def demos(options)
 
     path = options[:path] + "/examples"
 
+    directory path
+
     suites = options[:suites]
 
     files = FileList["#{path}/index.html"].include("#{path}/content")
 
     tree :to => "#{path}/content",
-         :from => FileList['demos/mvc/content/**/*'],
+         :from => FileList['demos/mvc/content/**/*'].exclude('**/docs/*'),
          :root => 'demos/mvc/content/'
 
     # Build the index.html page of the demos
-    file "#{path}/index.html" => 'build/templates/bundle-index.html.erb' do |t|
+    file "#{path}/index.html" => [path, 'build/templates/bundle-index.html.erb'] do |t|
 
         File.open(t.name, 'w') do |file|
             file.write BUNDLE_INDEX_TEMPLATE.result(binding) # 'binding' is the current scope
