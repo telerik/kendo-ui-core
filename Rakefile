@@ -23,6 +23,7 @@ ROOT_MAP = {
     'src/styles' => /styles\/.+?\//,
     'src/Kendo.Mvc' => 'wrappers/mvc/src/Kendo.Mvc/',
     'wrappers/aspnetmvc/LegacyThemes' => 'wrappers/mvc/legacy-themes/',
+    'styles/telerik' => 'wrappers/mvc/legacy-themes/',
     'wrappers/aspnetmvc/EditorTemplates/ascx' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/',
     'wrappers/aspnetmvc/EditorTemplates/razor' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/',
     'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
@@ -163,7 +164,15 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
        }
 
-bundle :name => 'winjs',
+bundle :name => 'cdn.commercial',
+       :license => 'src-license-cdn',
+       :contents => {
+           'js' => COMPLETE_MIN_JS + MVC_MIN_JS,
+           'styles' => MIN_CSS_RESOURCES,
+           'styles/telerik' => FileList['wrappers/mvc/legacy-themes/**/*']
+       }
+
+bundle :name => 'winjs.commercial',
        :license => 'src-license-none',
        :contents => {
             '.' => WIN_MIN_JS + WIN_SRC_JS + WIN_SRC_CSS + WIN_MIN_CSS
@@ -187,7 +196,8 @@ namespace :bundles do
         'dataviz.commercial',
         'aspnetmvc.commercial',
         'aspnetmvc.hotfix.commercial',
-        'winjs'
+        'winjs.commercial',
+        'cdn.commercial'
     ]
 end
 
