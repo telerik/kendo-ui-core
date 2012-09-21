@@ -186,7 +186,8 @@ namespace :bundles do
         'mobile.commercial',
         'dataviz.commercial',
         'aspnetmvc.commercial',
-        'aspnetmvc.hotfix.commercial'
+        'aspnetmvc.hotfix.commercial',
+        'winjs'
     ]
 end
 
