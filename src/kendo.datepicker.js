@@ -278,6 +278,7 @@
 
             //Safari cannot create corretly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
+            kendo._adjustDate(value);
 
             if (!cell[0] || cell.hasClass(SELECTED)) {
                 that.close();
