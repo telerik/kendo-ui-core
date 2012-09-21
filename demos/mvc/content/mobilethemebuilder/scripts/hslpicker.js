@@ -72,6 +72,7 @@
                     slideProxy = proxy(that._onSlide, that);
 
                 popupElement.children("[type=text]").keydown(proxy(that._keyDown, that));
+                popupElement.children("[type=text]").bind("input", proxy(that._changeValue, that));
 
                 that.hueSlider = extend(hueElement.kendoColorSlider({ max: 359, slide: slideProxy, change: changeProxy }).data("kendoColorSlider"), { type: "hue", valueElement: hueValue });
                 that.saturationSlider = extend(saturationElement.kendoColorSlider({ slide: slideProxy, change: changeProxy }).data("kendoColorSlider"), { type: "saturation", valueElement: saturationValue });
@@ -153,6 +154,18 @@
 
                 that.color.set(e.target.value);
                 that._update(false, true);
+            },
+
+            _changeValue: function (e) {
+                var that = this,
+                    target = e.target,
+                    value = target.value,
+                    title = $(target).attr("title");
+
+                if (value == parseFloat(value) && value[value.length-1] != ".") {
+                    that.color[title](value);
+                    that._update(true, true);
+                }
             },
 
             _keyDown: function (e) {
