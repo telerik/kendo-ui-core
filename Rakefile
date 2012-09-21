@@ -148,6 +148,19 @@ bundle :name => 'aspnetmvc.commercial',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/CommonAssemblyInfo.cs'
        ]
 
+bundle :name => 'aspnetmvc.hotfix.commercial',
+       :license => 'src-license-complete',
+       :eula => "aspnetmvc",
+       :vsdoc => { %w(web mobile dataviz framework) => "all" },
+       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :contents => {
+            'js' => MVC_MIN_JS,
+            'styles' => MIN_CSS_RESOURCES,
+            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
+            'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
+            'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
+            'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
+       }
 
 namespace :bundles do
     CLEAN.include('dist/bundles')
@@ -165,7 +178,8 @@ namespace :bundles do
         'web.open-source',
         'mobile.commercial',
         'dataviz.commercial',
-        'aspnetmvc.commercial'
+        'aspnetmvc.commercial',
+        'aspnetmvc.hotfix.commercial'
     ]
 end
 
