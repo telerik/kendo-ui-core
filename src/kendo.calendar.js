@@ -3,6 +3,7 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         parse = kendo.parseDate,
+        adjustDate = kendo._adjustDate,
         extractFormat = kendo._extractFormat,
         template = kendo.template,
         getCulture = kendo.getCulture,
@@ -388,6 +389,7 @@
 
             //Safari cannot create corretly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
+            adjustDate(value);
 
             if (link[0].href.indexOf("#") != -1) {
                 e.preventDefault();
@@ -639,7 +641,9 @@
                     html += '<th scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';
                 }
 
-                today = +new DATE(today.getFullYear(), today.getMonth(), today.getDate());
+                today = new DATE(today.getFullYear(), today.getMonth(), today.getDate());
+                adjustDate(today);
+                today = +today;
 
                 return view({
                     cells: 42,
@@ -712,11 +716,13 @@
                 return result;
             },
             setDate: function(date, value) {
+                var hours = date.getHours();
                 if (value instanceof DATE) {
                     date.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
                 } else {
                     calendar.setTime(date, value * MS_PER_DAY);
                 }
+                adjustDate(date, hours);
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
@@ -758,7 +764,9 @@
                 return compare(date1, date2);
             },
             setDate: function(date, value) {
-                var month;
+                var month,
+                    hours = date.getHours();
+
                 if (value instanceof DATE) {
                     month = value.getMonth();
 
@@ -780,6 +788,8 @@
                         date.setDate(0);
                     }
                 }
+
+                adjustDate(date, hours);
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/1";

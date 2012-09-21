@@ -65,17 +65,6 @@
                 equal(tv.template(kendo.toString(date, "hh:mm tt")), '<li class="k-item" unselectable="on">' + kendo.toString(date, "hh:mm tt") + '</li>');
             });
 
-            test("TimeView wire required events of UL", function() {
-                var options = {
-                    anchor: input,
-                    format: "hh:mm tt"
-                },
-                tv = new TimeView(options);
-
-                ok(tv.ul.data("events").click);
-                ok(tv.list.data("events").mousedown);
-            });
-
             //TimePicker
             test("_wrapper() wraps input element", function() {
                 input.css("width", "200");

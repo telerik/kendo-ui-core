@@ -989,6 +989,13 @@ function pad(number) {
         return $.map(designators, designatorPredicate);
     }
 
+    //if date's day is different than the typed one - adjust
+    function adjustDate(date, hours) {
+        if (!hours && date.getHours() === 23) {
+            date.setHours(date.getHours() + 2);
+        }
+    }
+
     function parseExact(value, format, culture) {
         if (!value) {
             return null;
@@ -1220,8 +1227,13 @@ function pad(number) {
             return new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds));
         }
 
-        return new Date(year, month, day, hours, minutes, seconds, milliseconds);
+        value = new Date(year, month, day, hours, minutes, seconds, milliseconds);
+        adjustDate(value, hours);
+
+        return value;
     }
+
+    kendo._adjustDate = adjustDate;
 
     kendo.parseDate = function(value, formats, culture) {
         if (value instanceof Date) {

@@ -668,6 +668,14 @@
             test("parseDate parses yyy date", function() {
                 equal(+parse("900/10/10", "yyy/MM/dd"), +new Date(900, 9, 10));
             });
+
+            test("adjustDate adjusts Brasil date with DST", function() {
+                var date = new Date(2012, 9, 20, 23, 0, 0);
+
+                kendo._adjustDate(date, 0);
+
+                equal(+date, +new Date(2012, 9, 21, 1, 0, 0));
+            });
         </script>
     </body>
 </html>
