@@ -2,6 +2,7 @@ require 'yaml'
 require 'erb'
 
 DEMOS_CSHTML = FileList['demos/mvc/Views/*/**/*.cshtml']
+DEMOS_CS = FileList['demos/mvc//**/*.cs']
 
 SUITE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/suite-index.html.erb'))
 BUNDLE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/bundle-index.html.erb'))
@@ -148,7 +149,7 @@ end
 
 CLEAN.include('dist/demos')
 
-file 'demos/mvc/bin/Kendo.dll' => DEMOS_CSHTML do |t|
+file 'demos/mvc/bin/Kendo.dll' => DEMOS_CS do |t|
     msbuild 'demos/mvc/Kendo.csproj'
 end
 
@@ -162,11 +163,11 @@ PRODUCTION_RESOURCES = FileList['demos/mvc/**/*']
 
 tree :to => 'dist/demos/production',
      :from => PRODUCTION_RESOURCES,
-     :root => 'demos/mvc'
+     :root => 'demos/mvc/'
 
 tree :to => 'dist/demos/staging',
      :from => PRODUCTION_RESOURCES,
-     :root => 'demos/mvc'
+     :root => 'demos/mvc/'
 
 tree :to => 'dist/demos/staging/content/cdn/js',
      :from => COMPLETE_MIN_JS,
