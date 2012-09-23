@@ -26,6 +26,7 @@ MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*']
 
 MVC_DEMOS = FileList['wrappers/mvc/demos/**/*']
                 .include('wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll')
+                .exclude('**/*.winjs.*')
                 .exclude('**/System*.dll')
                 .exclude('**/*.csproj')
                 .exclude('**/*resources.dll')

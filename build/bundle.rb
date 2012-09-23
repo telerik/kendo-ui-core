@@ -12,11 +12,14 @@ def bundle(options)
     changelog_suites = options[:changelog]
     demo_suites = options[:demos]
     path = "dist/bundles/#{name}"
-    license = "#{path}.license"
+    license = nil
 
     prerequisites = [:js, :less] + options[:prerequisites].to_a
 
-    file_license license => File.join(LEGAL_DIR, "#{options[:license]}.txt")
+    if options[:license]
+        license = "#{path}.license"
+        file_license license => File.join(LEGAL_DIR, "#{options[:license]}.txt")
+    end
 
     options[:contents].each do |target, contents|
 

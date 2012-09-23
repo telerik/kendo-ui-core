@@ -174,7 +174,6 @@ bundle :name => 'cdn.commercial',
        }
 
 bundle :name => 'winjs.commercial',
-       :license => 'src-license-none',
        :contents => {
             '.' => WIN_MIN_JS + WIN_SRC_JS + WIN_SRC_CSS + WIN_MIN_CSS
        }

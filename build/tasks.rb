@@ -69,6 +69,7 @@ def file_copy(options)
     license = options[:license]
     from = options[:from]
 
+
     if license && subject_to_license?(to)
         prerequisites = [from, license]
     else

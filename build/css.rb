@@ -1,13 +1,12 @@
 LESS = FileList['styles/**/*.less']
-SRC_CSS = FileList['styles/**/*'].exclude('**/*.min.css').include(FileList['styles/**/kendo*.less'].ext('css')).uniq
+SRC_CSS = FileList['styles/**/*'].exclude('**/*.min.css').exclude('**/*.winjs.*').include(FileList['styles/**/kendo*.less'].ext('css')).uniq
 MIN_CSS = FileList['styles/**/kendo*.less']
-    .include('styles/web/kendo.winjs.css')
     .include('styles/**/*.css')
     .exclude('**/*.min.css')
     .ext('min.css')
     .uniq
 
-MIN_CSS_RESOURCES = FileList[MIN_CSS].include('styles/*/*/*').exclude('**/*.less')
+MIN_CSS_RESOURCES = FileList[MIN_CSS].include('styles/*/*/*').exclude('**/*.less').exclude('**/*.winjs.*')
 
 WEB_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/web\// }
 WEB_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/web\// }
