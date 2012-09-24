@@ -1,5 +1,5 @@
 require 'github_api'
-require 'thread'
+require 'singleton'
 require 'erb'
 
 CHANGELOG_TEMPLATE = ERB.new(File.read(File.join(File.dirname(__FILE__), 'changelog.html.erb')), 0, '%<>')
@@ -77,6 +77,7 @@ class Suite
 end
 
 class ChangeLog
+    include Singleton
     attr_reader :suites
 
     def initialize
@@ -87,6 +88,8 @@ class ChangeLog
             Suite.new("Mobile", "mobile"),
             Suite.new("ASP.NET MVC Wrappers" , "aspnetmvc")
         ]
+
+        fetch_issues
     end
 
     def fetch_issues
@@ -174,19 +177,8 @@ class ChangeLog
         def milestone_name(year, quarter, service_pack)
             "#{year}.Q#{quarter}#{".SP#{service_pack}" if service_pack}"
         end
-
-        def instance
-            unless @changelog
-                @changelog = ChangeLog.new
-                @changelog.fetch_issues
-            end
-
-            @changelog
-        end
     end
 end
-
-CHANGELOG_SEMAPHOR = Mutex.new
 
 class WriteChangeLogTask < Rake::FileTask
     attr_accessor :suites
@@ -195,9 +187,7 @@ class WriteChangeLogTask < Rake::FileTask
     end
 
     def contents
-        CHANGELOG_SEMAPHOR.synchronize do
-            @contents ||= ChangeLog.instance.render_changelog(suites)
-        end
+        @contents ||= ChangeLog.instance.render_changelog(suites)
     end
 
     def needed?
