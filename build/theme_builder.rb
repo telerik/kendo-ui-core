@@ -128,8 +128,11 @@ namespace :themebuilder do
     ]
 
     desc('Build the ThemeBuilder for staging')
-    task :staging => [
+    task :staging => 'dist/themebuilder/staging.zip'
+
+    zip 'dist/themebuilder/staging.zip' => [
         'dist/themebuilder/staging',
         'dist/themebuilder/staging/bootstrap.js'
     ]
+
 end
