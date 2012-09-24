@@ -1467,3 +1467,17 @@
 {
     -webkit-transition: -webkit-transform .0001ms;
 }
+
+// Fix for the Android input duplication issue
+.km-on-android.km-4 input
+{
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+.km-on-android.km-2 .km-list > li,
+.km-on-android.km-3 .km-list > li
+{
+    bottom: 10000px;
+    .transform(translatey(10000px));
+}
+
