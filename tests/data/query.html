@@ -93,6 +93,47 @@
                 equal(result[2].getFullYear(), 2011);
             });
 
+            test("orderBy sorts dates earlier then 1970 and nulls", function () {
+                var data = [new Date(1955, 1, 1), null, new Date(2009, 1, 1)];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                ok(!result[0]);
+                equal(result[1].getFullYear(), 1955);
+                equal(result[2].getFullYear(), 2009);
+            });
+
+            test("orderBy sorts dates earlier then 1970 and multiple nulls descending", function () {
+                var data = [new Date(1955, 1, 1), null, null, new Date(2009, 1, 1), null];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 5);
+                equal(result[0].getFullYear(), 2009);
+                equal(result[1].getFullYear(), 1955);
+                ok(!result[2]);
+                ok(!result[3]);
+                ok(!result[4]);
+            });
+
+            test("orderBy sorts dates earlier then 1970 and nulls descending", function () {
+                var data = [new Date(1955, 1, 1), null, new Date(2009, 1, 1)];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0].getFullYear(), 2009);
+                equal(result[1].getFullYear(), 1955);
+                ok(!result[2]);
+            });
+
             test("orderBy uses selector when sorting", function () {
                 var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
 

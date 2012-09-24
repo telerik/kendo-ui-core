@@ -596,6 +596,14 @@
                 a = selector(a);
                 b = selector(b);
 
+                if (a && a.getTime && !b) {
+                    return 1;
+                }
+
+                if (b && b.getTime && !a) {
+                    return -1;
+                }
+
                 return a > b ? 1 : (a < b ? -1 : 0);
             };
         },
@@ -605,6 +613,14 @@
             return function (a, b) {
                 a = selector(a);
                 b = selector(b);
+
+                if (a && a.getTime && !b) {
+                    return -1;
+                }
+
+                if (b && b.getTime && !a) {
+                    return 1;
+                }
 
                 return a < b ? 1 : (a > b ? -1 : 0);
             };
