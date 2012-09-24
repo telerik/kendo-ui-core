@@ -124,7 +124,6 @@
         lessEOLRe = /;$/m,
         lessConstantPairRe = /(@[a-z\-]+):\s*(.*)/i,
         LessConstants = kendo.Observable.extend({
-            // TODO: can this be converted to an array-like object?
             init: function(constants) {
                 this.constants = constants || {};
             },
@@ -252,6 +251,14 @@
                 }
 
                 cachedPrototype.remove();
+            },
+            apply: function(targetDocument) {
+            }
+        }),
+
+        JsonConstants = kendo.Observable.extend({
+            init: function(constants) {
+                this.constants = constants || {};
             }
         }),
 
@@ -321,7 +328,8 @@
                         change: changeHandler
                     }).end();
 
-                $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showSource, that));
+                $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showWebSource, that));
+                $(".ktb-action-get-json").on(CLICK, proxy(that.showDataVizSource, that));
                 $(".ktb-action-show-import").on(CLICK, proxy(that.showImport, that));
                 $(".ktb-action-create-web,.ktb-action-create-dataviz").on(CLICK, proxy(that.showSuite, that));
                 $(".ktb-action-back").on(CLICK, proxy(that.hideOverlay, that));
@@ -344,16 +352,25 @@
 
                 $("#suite-chooser").slideUp();
             },
-            showSource: function(e) {
+            _showSource: function(source) {
+                $("#download-overlay").slideDown()
+                    .find("textarea").val(source);
+            },
+            showDataVizSource: function(e) {
+                e.preventDefault();
+
+                this._showSource(JSON.stringify({ foo: "bar" }));
+            },
+            showWebSource: function(e) {
                 e.preventDefault();
 
                 var less = $(e.target).hasClass("ktb-action-get-less");
 
-                this._generateTheme(function(constants, css) {
+                this._generateTheme(proxy(function(constants, css) {
                     constants += '\n@import "template.less";';
-                    $("#download-overlay").slideDown()
-                        .find("textarea").val(less ? constants : css);
-                });
+
+                    this._showSource(less ? constants : css);
+                }, this));
             },
             showImport: function(e) {
                 e.preventDefault();
@@ -491,8 +508,7 @@
                     var win = "defaultView" in doc ? doc.defaultView : doc.parentWindow;
                     var chart = win.$(this).data("kendoChart");
 
-                    kendo.deepExtend(chart.options, theme);
-                    chart.refresh();
+                    chart.setOptions(kendo.deepExtend(chart.options, theme));
                 });
             },
             render: function() {

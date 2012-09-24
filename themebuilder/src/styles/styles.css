@@ -161,6 +161,9 @@ textarea {
     top: 30px;
     bottom: 0;
     width: 100%;
+    height: -webkit-calc(100% - 30px);
+    height: -moz-calc(100% - 30px);
+    height: calc(100% - 30px);
 }
 
 .ktb-overlay {
