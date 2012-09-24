@@ -68,8 +68,6 @@ def bundle(options)
     end
 
     if changelog_suites
-        prerequisites.push(:fetch_changelog)
-
         changelog_path = File.join(path, "changelog.html")
         write_changelog(changelog_path, changelog_suites)
         prerequisites.push(changelog_path)

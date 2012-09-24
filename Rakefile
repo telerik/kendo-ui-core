@@ -205,5 +205,3 @@ desc 'Build all bundles'
 task :bundles =>  "bundles:all"
 
 task :default => :bundles
-
-fetch_changelog_task :fetch_changelog

@@ -173,28 +173,34 @@ class ChangeLog
         def milestone_name(year, quarter, service_pack)
             "#{year}.Q#{quarter}#{".SP#{service_pack}" if service_pack}"
         end
+
+        def instance
+            unless @changelog
+                @changelog = ChangeLog.new
+                @changelog.fetch_issues
+            end
+
+            @changelog
+        end
     end
 end
 
-class FetchChangeLogTask < Rake::Task
+class WriteChangeLogTask < Rake::FileTask
+    attr_accessor :suites
     def execute(args)
-        $changelog = ChangeLog.new
-        $changelog.fetch_issues
+        File.open(name, 'w') { |file| file.write(contents) }
+    end
+
+    def contents
+        @contents ||= ChangeLog.instance.render_changelog(suites)
     end
 
     def needed?
-        !$changelog
+        !File.exist?(name) || File.read(name).strip != contents.strip
     end
 end
 
-def fetch_changelog_task(*args, &block)
-    FetchChangeLogTask.define_task(*args, &block)
-end
-
-def write_changelog(path, suite_names)
-    file path do
-        File.open(path, "w") do |file|
-            file.write($changelog.render_changelog(suite_names))
-        end
-    end
+def write_changelog(path, suites)
+    task = WriteChangeLogTask.define_task(path)
+    task.suites = suites
 end
