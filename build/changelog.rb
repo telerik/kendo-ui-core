@@ -1,4 +1,5 @@
 require 'github_api'
+require 'thread'
 require 'erb'
 
 CHANGELOG_TEMPLATE = ERB.new(File.read(File.join(File.dirname(__FILE__), 'changelog.html.erb')), 0, '%<>')
@@ -185,6 +186,8 @@ class ChangeLog
     end
 end
 
+CHANGELOG_SEMAPHOR = Mutex.new
+
 class WriteChangeLogTask < Rake::FileTask
     attr_accessor :suites
     def execute(args)
@@ -192,7 +195,9 @@ class WriteChangeLogTask < Rake::FileTask
     end
 
     def contents
-        @contents ||= ChangeLog.instance.render_changelog(suites)
+        CHANGELOG_SEMAPHOR.synchronize do
+            @contents ||= ChangeLog.instance.render_changelog(suites)
+        end
     end
 
     def needed?
