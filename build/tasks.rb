@@ -69,7 +69,6 @@ def file_copy(options)
     license = options[:license]
     from = options[:from]
 
-
     if license && subject_to_license?(to)
         prerequisites = [from, license]
     else
@@ -79,14 +78,18 @@ def file_copy(options)
     file to => prerequisites do |t|
         ensure_path to
 
-        $stderr.puts "cp #{from} #{to}"
+        if license
+            $stderr.puts "cp #{from} #{to}"
 
-        File.open(to, "w") do |file|
-            if license && subject_to_license?(to)
-                file.write(File.read(license))
+            File.open(to, "w") do |file|
+                if license && subject_to_license?(to)
+                    file.write(File.read(license))
+                end
+
+                file.write(File.read(from))
             end
-
-            file.write(File.read(from))
+        else
+            cp from, to
         end
     end
 end
