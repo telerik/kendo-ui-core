@@ -34,19 +34,19 @@
         },
 
         editorWrapperTemplate:
-            '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header"><tbody>' +
-                '<tr><td class="k-editor-toolbar-wrap"><ul class="k-editor-toolbar"></ul></td></tr>' +
+            '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header" role="presentation"><tbody>' +
+                '<tr role="presentation"><td class="k-editor-toolbar-wrap" role="presentation"><ul class="k-editor-toolbar" role="toolbar"></ul></td></tr>' +
                 '<tr><td class="k-editable-area"></td></tr>' +
             '</tbody></table>',
 
         buttonTemplate:
-            '<li class="k-editor-button">' +
-                '<a href="" class="k-tool-icon #= cssClass #" unselectable="on" title="#= tooltip #">#= tooltip #</a>' +
+            '<li class="k-editor-button" role="presentation">' +
+                '<a href="" role="button" class="k-tool-icon #= cssClass #" unselectable="on" title="#= tooltip #">#= tooltip #</a>' +
             '</li>',
 
         colorPickerTemplate:
-            '<li class="k-editor-colorpicker">' +
-                '<div class="k-widget k-colorpicker k-header #= cssClass #">' +
+            '<li class="k-editor-colorpicker" role="presentation">' +
+                '<div class="k-widget k-colorpicker k-header #= cssClass #" role="combobox" aria-autocomplete="list" title="#=tooltip#">' +
                     '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-i-arrow-s"></span>' +
             '</div></li>',
 
@@ -383,6 +383,8 @@
         fontSize: "Select font size",
         fontSizeInherit: "(inherited size)",
         formatBlock: "Format",
+        foreColor: "Fore color",
+        backColor: "Background color",
         style: "Styles",
         emptyFolder: "Empty Folder",
         uploadFile: "Upload",
@@ -428,6 +430,10 @@
             that.textarea = element.attr("autocomplete", "off")[0];
 
             wrapper = that.wrapper = wrapTextarea(element);
+
+            if (that.textarea.id) {
+                wrapper.find(".k-editor-toolbar").attr("aria-controls", that.textarea.id);
+            }
 
             renderTools(that, that.options.tools);
 
@@ -516,13 +522,13 @@
                     if (keyCode == keys.RIGHT) {
                         focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
                     } else if (keyCode == keys.LEFT) {
-                        focusElement = closestLi.prevAll(focusableTool).last().find(focusable);
+                        focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
                     } else if (keyCode == keys.ESC) {
                         focusElement = that;
                     } else if (keyCode == keys.TAB && !(e.ctrlKey || e.altKey)) {
                         // skip tabbing to disabled tools, and focus the editing area when running out of tools
                         if (e.shiftKey) {
-                            focusElement = closestLi.prevAll(focusableTool).last().find(focusable);
+                            focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
 
                             if (focusElement.length) {
                                 e.preventDefault();
@@ -983,6 +989,7 @@
                 isActive = isPending ? !isFormatted : isFormatted;
 
             $ui.toggleClass("k-state-active", isActive);
+            $ui.attr("aria-pressed", isActive);
         }
     });
 
@@ -3872,6 +3879,7 @@ var ColorTool = Tool.extend({
 
         new Editor.ColorPicker(ui, {
             value: "#000000",
+            ariaId: editor.element[0].id ? kendo.format("{0}_{1}_cp", editor.element[0].id, toolName) : "",
             change: function (e) {
                 Tool.exec(editor, toolName, e.value);
             }
@@ -5302,12 +5310,14 @@ var kendo = window.kendo,
     SELECTEDCOLORCLASS = ".k-selected-color",
     UNSELECTABLE = "unselectable",
     BACKGROUNDCOLOR = "background-color",
+    ARIASELECTED = "aria-selected",
+    ARIALABELLEDBY = "aria-labelledby",
     keys = kendo.keys,
     template = kendo.template(
 '<div class="k-colorpicker-popup">' +
    '<ul class="k-reset">'+
         '# for(var i = 0; i < colors.length; i++) { #' +
-            '<li class="k-item #= colors[i] == value ? "k-state-selected" : "" #">' +
+            '<li #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i] == value ? "k-state-selected" : "" #" aria-label="\\##= colors[i]#">' +
                 '<div style="background-color:\\##= colors[i] #"></div>'+
             '</li>' +
         '# } #' +
@@ -5316,7 +5326,8 @@ var kendo = window.kendo,
 
 var ColorPicker = Widget.extend({
     init: function(element, options) {
-        var that = this;
+        var that = this,
+            ariaId;
 
         Widget.fn.init.call(that, element, options);
 
@@ -5324,10 +5335,16 @@ var ColorPicker = Widget.extend({
         options = that.options;
 
         that._value = options.value;
+        that._ariaId = ariaId = options.ariaId;
+
+        if (ariaId) {
+            element.attr(ARIALABELLEDBY, ariaId);
+        }
 
         that.popup = $(template({
                         colors: options.colors,
-                        value: options.value.substring(1)
+                        value: options.value.substring(1),
+                        id: ariaId
                      }))
                      .kendoPopup({
                         anchor: element,
@@ -5398,6 +5415,22 @@ var ColorPicker = Widget.extend({
         this.popup.toggle();
     },
 
+    _applyAriaAttributes: function(prev, next) {
+        var that = this;
+
+        that.element.removeAttr(ARIALABELLEDBY);
+
+        that.element.attr(ARIALABELLEDBY, that._ariaId);
+
+        prev.removeAttr("id");
+        prev.attr(ARIASELECTED, false);
+
+        next.attr({
+            id: that._ariaId,
+            "aria-selected": true
+        });
+    },
+
     keydown: function(e) {
         var that = this,
             popup = that.popup.element,
@@ -5423,6 +5456,8 @@ var ColorPicker = Widget.extend({
                 if (next[0]) {
                     selected.removeClass(KSTATESELECTED);
                     next.addClass(KSTATESELECTED);
+
+                    that._applyAriaAttributes(selected, next);
                 }
             }
 
@@ -5435,6 +5470,8 @@ var ColorPicker = Widget.extend({
                 if (prev[0]) {
                     selected.removeClass(KSTATESELECTED);
                     prev.addClass(KSTATESELECTED);
+
+                    that._applyAriaAttributes(selected, prev);
                 }
             }
             preventDefault = true;

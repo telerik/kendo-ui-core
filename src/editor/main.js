@@ -46,7 +46,7 @@
 
         colorPickerTemplate:
             '<li class="k-editor-colorpicker" role="presentation">' +
-                '<div class="k-widget k-colorpicker k-header #= cssClass #" role="combobox" aria-autocomplete="list">' +
+                '<div class="k-widget k-colorpicker k-header #= cssClass #" role="combobox" aria-autocomplete="list" title="#=tooltip#">' +
                     '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-i-arrow-s"></span>' +
             '</div></li>',
 
@@ -383,6 +383,8 @@
         fontSize: "Select font size",
         fontSizeInherit: "(inherited size)",
         formatBlock: "Format",
+        foreColor: "Color",
+        backColor: "Background color",
         style: "Styles",
         emptyFolder: "Empty Folder",
         uploadFile: "Upload",
