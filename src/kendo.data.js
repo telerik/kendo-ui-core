@@ -576,11 +576,11 @@
                 a = selector(a);
                 b = selector(b);
 
-                if (a && a.getTime && !b) {
+                if (a && !b) {
                     return 1;
                 }
 
-                if (b && b.getTime && !a) {
+                if (b && !a) {
                     return -1;
                 }
 
@@ -594,11 +594,19 @@
                 a = selector(a);
                 b = selector(b);
 
-                if (a && a.getTime && !b) {
+                if (a && !b) {
                     return -1;
                 }
 
-                if (b && b.getTime && !a) {
+                if (b && !a) {
+                    return 1;
+                }
+
+                if (a === 0 && b == null) {
+                    return -1;
+                }
+
+                if (b === 0 && a == null) {
                     return 1;
                 }
 
