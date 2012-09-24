@@ -32,7 +32,7 @@ styles/**/*.css
 !styles/web/kendo.common.css
 !styles/web/kendo.rtl.css
 !styles/dataviz/kendo.dataviz.css
-live/
+ive/
 node_modules
 release/
 sitefinity-docs/
@@ -52,6 +52,8 @@ functional-tests/KendoDemosTests/bin
 styles/*.css
 !styles/kendo.common.css
 themebuilder/src/scripts/template.js
+themebuilder/src/**/themebuilder.all*
+themebuilder/src/**/bootstrap.min.css
 themebuilder/src/styles/kendo.black.css
 themebuilder/src/styles/Black/
 themebuilder/src/styles/textures/

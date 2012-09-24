@@ -4,6 +4,9 @@ require 'bundler/setup'
 require 'debugger'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
+
+CDN_ROOT = 'http://cdn.kendostatic.com/'
+
 require 'version'
 require 'archive'
 require 'js'
@@ -12,8 +15,9 @@ require 'tasks'
 require 'mvc'
 require 'vsdoc'
 require 'changelog'
-require 'demos'
 require 'bundle'
+require 'theme_builder'
+require 'demos'
 require 'download_builder'
 
 ROOT_MAP = {

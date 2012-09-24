@@ -2,7 +2,7 @@ require 'yaml'
 require 'erb'
 
 DEMOS_CSHTML = FileList['demos/mvc/Views/*/**/*.cshtml']
-DEMOS_CS = FileList['demos/mvc//**/*.cs']
+DEMOS_CS = FileList['demos/mvc/**/*.cs']
 
 SUITE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/suite-index.html.erb'))
 BUNDLE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/bundle-index.html.erb'))
@@ -153,7 +153,6 @@ file 'demos/mvc/bin/Kendo.dll' => DEMOS_CS do |t|
     msbuild 'demos/mvc/Kendo.csproj'
 end
 
-CDN_ROOT = 'http://cdn.kendostatic.com/'
 THEME_BUILDER_ROOT = 'http://themebuilder.kendoui.com'
 
 PRODUCTION_RESOURCES = FileList['demos/mvc/**/*']
@@ -197,6 +196,12 @@ tree :to => 'dist/demos/staging/content/cdn/styles',
      :from => MIN_CSS_RESOURCES,
      :root => /styles\/.+?\//
 
+tree :to => 'dist/demos/staging/content/cdn/themebuilder',
+     :from => FileList[THEME_BUILDER_RESOURCES]
+                .include('themebuilder/src/bootstrap.js')
+                .sub('themebuilder/src', 'dist/themebuilder/staging'),
+     :root => 'dist/themebuilder/staging/'
+
 def patch_web_config(name, cdn_root, themebuilder_root)
 
     config = File.read(name)
@@ -217,15 +222,21 @@ namespace :demos do
         msbuild t.prerequisites[0], '/p:Configuration=Debug'
     end
 
+    task :clean do
+        rm_rf 'dist/demos'
+    end
+
     task :release => 'demos/mvc/bin/Kendo.dll'
 
     task :staging_site => [:js,
         :less,
         :release,
+        'themebuilder:staging',
         'dist/demos/staging',
         'dist/demos/staging/sources/aspx',
         'dist/demos/staging/sources/razor',
         'dist/demos/staging/content/cdn/js',
+        'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles'] do
         patch_web_config('dist/demos/staging/Web.config', '~/content/cdn', '~/content/cdn/themebuilder')
     end
