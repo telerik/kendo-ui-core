@@ -1,7 +1,7 @@
 (function(){
     var context = window.parent,
         kendo = window.kendo,
-        constant = function(target, property, values){
+        constant = function(property, target, values){
             return {
                 target: target,
                 property: property,
@@ -31,7 +31,7 @@
         BGCOLOR = "background-color",
         BORDERCOLOR = "border-color",
         COLOR = "color",
-        constants = {
+        webConstants = {
             "@image-folder": {
                 readonly: true,
                 infer: function() {
@@ -50,7 +50,7 @@
                 }
             },
 
-            "@texture-url": constant(".k-header", "background-image",
+            "@texture-url": constant("background-image", ".k-header",
                 [ { text: "flat", value: "none" } ].concat(
                     [
                         "highlight", "glass", "brushed-metal", "noise",
@@ -64,53 +64,53 @@
                 )
             )),
 
-            "@widget-background-color":         constant(".k-widget", BGCOLOR),
-            "@widget-border-color":             constant(".k-widget", BORDERCOLOR),
-            "@widget-text-color":               constant(".k-widget", COLOR),
+            "@widget-background-color":         constant(BGCOLOR, ".k-widget"),
+            "@widget-border-color":             constant(BORDERCOLOR, ".k-widget"),
+            "@widget-text-color":               constant(COLOR, ".k-widget"),
 
-            "@header-background-color":         constant(".k-header", BGCOLOR),
-            "@header-text-color":               constant(".k-header", COLOR),
+            "@header-background-color":         constant(BGCOLOR, ".k-header"),
+            "@header-text-color":               constant(COLOR, ".k-header"),
 
-            "@button-background-color":         constant(".k-button", BGCOLOR),
-            "@button-text-color":               constant(".k-button", COLOR),
+            "@button-background-color":         constant(BGCOLOR, ".k-button"),
+            "@button-text-color":               constant(COLOR, ".k-button"),
 
-            "@group-background-color":          constant(".k-group", BGCOLOR),
-            "@group-border-color":              constant(".k-group", BORDERCOLOR),
+            "@group-background-color":          constant(BGCOLOR, ".k-group"),
+            "@group-border-color":              constant(BORDERCOLOR, ".k-group"),
 
-            "@content-background-color":        constant(".k-content", BGCOLOR),
+            "@content-background-color":        constant(BGCOLOR, ".k-content"),
 
-            "@select-background-color":         constant(".k-widget .k-picker-wrap", BGCOLOR),
-            "@select-border-color":             constant(".k-picker-wrap.k-state-hover", BORDERCOLOR),
-            "@select-hover-background-color":   constant(".k-picker-wrap.k-state-hover", BGCOLOR),
-            "@select-group-background-color":   constant(".k-list-container", BGCOLOR),
+            "@select-background-color":         constant(BGCOLOR, ".k-widget .k-picker-wrap"),
+            "@select-border-color":             constant(BORDERCOLOR, ".k-picker-wrap.k-state-hover"),
+            "@select-hover-background-color":   constant(BGCOLOR, ".k-picker-wrap.k-state-hover"),
+            "@select-group-background-color":   constant(BGCOLOR, ".k-list-container"),
 
-            "@hover-background-color":          constant(".k-state-hover", BGCOLOR),
-            "@hover-border-color":              constant(".k-state-hover", BORDERCOLOR),
-            "@hover-text-color":                constant(".k-state-hover", COLOR),
+            "@hover-background-color":          constant(BGCOLOR, ".k-state-hover"),
+            "@hover-border-color":              constant(BORDERCOLOR, ".k-state-hover"),
+            "@hover-text-color":                constant(COLOR, ".k-state-hover"),
 
-            "@selected-background-color":       constant(".k-state-selected", BGCOLOR),
-            "@selected-border-color":           constant(".k-state-selected", BORDERCOLOR),
-            "@selected-text-color":             constant(".k-state-selected", COLOR),
+            "@selected-background-color":       constant(BGCOLOR, ".k-state-selected"),
+            "@selected-border-color":           constant(BORDERCOLOR, ".k-state-selected"),
+            "@selected-text-color":             constant(COLOR, ".k-state-selected"),
 
-            "@active-background-color":         constant(".k-state-active", BGCOLOR),
-            "@active-border-color":             constant(".k-state-active", BORDERCOLOR),
-            "@active-text-color":               constant(".k-state-active", COLOR),
+            "@active-background-color":         constant(BGCOLOR, ".k-state-active"),
+            "@active-border-color":             constant(BORDERCOLOR, ".k-state-active"),
+            "@active-text-color":               constant(COLOR, ".k-state-active"),
 
-            "@error-background-color":          constant(".k-state-error", BGCOLOR),
-            "@error-border-color":              constant(".k-state-error", BORDERCOLOR),
-            "@error-text-color":                constant(".k-state-error", COLOR),
+            "@error-background-color":          constant(BGCOLOR, ".k-state-error"),
+            "@error-border-color":              constant(BORDERCOLOR, ".k-state-error"),
+            "@error-text-color":                constant(COLOR, ".k-state-error"),
 
-            "@disabled-text-color":             constant(".k-state-disabled", COLOR),
+            "@disabled-text-color":             constant(COLOR, ".k-state-disabled"),
 
-            "@validation-background-color":     constant(".k-tooltip-validation", BGCOLOR),
-            "@validation-border-color":         constant(".k-tooltip-validation", BORDERCOLOR),
-            "@validation-text-color":           constant(".k-tooltip-validation", COLOR),
+            "@validation-background-color":     constant(BGCOLOR, ".k-tooltip-validation"),
+            "@validation-border-color":         constant(BORDERCOLOR, ".k-tooltip-validation"),
+            "@validation-text-color":           constant(COLOR, ".k-tooltip-validation"),
 
-            "@tooltip-background-color":        constant(".k-tooltip", BGCOLOR),
-            "@tooltip-border-color":            constant(".k-tooltip", BORDERCOLOR),
-            "@tooltip-text-color":              constant(".k-tooltip", COLOR),
+            "@tooltip-background-color":        constant(BGCOLOR, ".k-tooltip"),
+            "@tooltip-border-color":            constant(BORDERCOLOR, ".k-tooltip"),
+            "@tooltip-text-color":              constant(COLOR, ".k-tooltip"),
 
-            "@main-border-radius":              constant(".k-button", "border-radius"),
+            "@main-border-radius":              constant("border-radius", ".k-button"),
             "@list-border-radius": {
                 readonly: true,
                 value: "@main-border-radius - 1"
@@ -122,14 +122,30 @@
             "@slider-border-radius":            { readonly: true, value: "13px" },
             "@draghandle-border-radius":        { readonly: true, value: "7px" },
 
-            "@alt-background-color":            constant(".k-alt", BGCOLOR),
-            "@input-background-color":          constant(".k-input", BGCOLOR),
-            "@input-text-color":                constant(".k-autocomplete .k-input", COLOR),
-            "@shadow-color":                    constant(".k-popup", "box-shadow"),
-            "@shadow-inset-color":              constant(".k-autocomplete .k-input", "box-shadow"),
-            "@link-text-color":                 constant("a.k-link", COLOR),
-            "@loading-panel-color":             constant(".k-loading-color", BGCOLOR),
-            "@splitbar-background-color":       constant(".k-splitbar", BGCOLOR)
+            "@alt-background-color":            constant(BGCOLOR, ".k-alt"),
+            "@input-background-color":          constant(BGCOLOR, ".k-input"),
+            "@input-text-color":                constant(COLOR, ".k-autocomplete .k-input"),
+            "@shadow-color":                    constant("box-shadow", ".k-popup"),
+            "@shadow-inset-color":              constant("box-shadow", ".k-autocomplete .k-input"),
+            "@link-text-color":                 constant(COLOR, "a.k-link"),
+            "@loading-panel-color":             constant(BGCOLOR, ".k-loading-color"),
+            "@splitbar-background-color":       constant(BGCOLOR, ".k-splitbar")
+        },
+        datavizConstants = {
+            "title.color":                          constant(COLOR),
+            "legend.labels.color":                  constant(COLOR),
+            "seriesDefaults.labels.color":          constant(COLOR),
+            "seriesDefaults.labels.background":     constant(COLOR),
+            "seriesDefaults.labels.opacity":        constant("opacity"),
+            "seriesDefaults.area.opacity":          constant("opacity"),
+            "axisDefaults.line.color":              constant(COLOR),
+            "axisDefaults.labels.color":            constant(COLOR),
+            "axisDefaults.minorGridLines.color":    constant(COLOR),
+            "axisDefaults.majorGridLines.color":    constant(COLOR),
+            "axisDefaults.title.color":             constant(COLOR),
+            "tooltip.background":                   constant(COLOR),
+            "tooltip.color":                        constant(COLOR),
+            "tooltip.opacity":                      constant("opacity")
         },
         webConstantsHierarchy = {
             "Widgets": {
@@ -203,29 +219,36 @@
             }
         },
         datavizConstantsHierarchy = {
-            "All": {
+            "Title & legend": {
                 "title.color":                       "Title color",
-                "legend.labels.color":               "Legend text color",
+                "legend.labels.color":               "Legend text color"
+            },
+
+            "Axes": {
                 "seriesDefaults.labels.color":       "Series text color",
                 "seriesDefaults.labels.background":  "Series text background",
                 "seriesDefaults.labels.opacity":     "Series text opacity",
                 "seriesDefaults.area.opacity":       "Area chart opacity",
                 "axisDefaults.line.color":           "Axis line color",
                 "axisDefaults.labels.color":         "Axis labels color",
-                "axisDefaults.minorGridLines.color": "Axis minor grid lines color",
-                "axisDefaults.majorGridLines.color": "Axis major grid lines color",
-                "axisDefaults.title.color":          "Axis title color",
+                "axisDefaults.minorGridLines.color": "Minor grid lines color",
+                "axisDefaults.majorGridLines.color": "Major grid lines color",
+                "axisDefaults.title.color":          "Axis title color"
+            },
+
+            "Tooltip": {
                 "tooltip.background":                "Tooltip background",
                 "tooltip.color":                     "Tooltip text",
                 "tooltip.opacity":                   "Tooltip opacity"
-
-                // TODO: Add gauge styles
             }
+
+            // TODO: Add gauge styles
         };
 
     window.themeBuilder = new kendo.ThemeBuilder({
         template: lessTemplate,
-        constants: new kendo.LessConstants(constants),
+        webConstants: new kendo.LessConstants(webConstants),
+        datavizConstants: datavizConstants,
         webConstantsHierarchy: webConstantsHierarchy,
         datavizConstantsHierarchy: datavizConstantsHierarchy
     });

@@ -14,7 +14,8 @@
             "border-color": colorPicker,
             "box-shadow": colorPicker,
             "border-radius": numeric,
-            "background-image": "ktb-combo"
+            "background-image": "ktb-combo",
+            "opacity": "ktb-opacity"
         },
         whitespaceRe = /\s/g,
         processors = {
@@ -269,7 +270,9 @@
                 templateInfo = that.templateInfo = templateInfo || {};
                 that.targetDocument = targetDocument || (window.parent || window).document;
 
-                var constants = that.constants = templateInfo.constants;
+                var constants = that.constants = templateInfo.webConstants;
+
+                that.datavizConstants = templateInfo.datavizConstants;
 
                 that.webConstantsHierarchy = templateInfo.webConstantsHierarchy;
                 that.datavizConstantsHierarchy = templateInfo.datavizConstantsHierarchy;
@@ -326,7 +329,13 @@
                         step: 1,
                         format: "#px",
                         change: changeHandler
-                    }).end();
+                    }).end()
+                    .find(".ktb-opacity").kendoNumericTextBox({
+                        min: 0,
+                        max: 1,
+                        step: .1,
+                        change: changeHandler
+                    });
 
                 $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showWebSource, that));
                 $(".ktb-action-get-json").on(CLICK, proxy(that.showDataVizSource, that));
@@ -447,6 +456,7 @@
                 } else {
                     // DataViz property changed
                     var options = safeSetter(e.name)({}, e.value);
+                    console.log(options);
                     that.updateDataVizTheme(options);
                 }
             },
@@ -506,35 +516,27 @@
                 $("[data-role=chart]", doc).each(function() {
                     // get jQuery of target document to access client-side object
                     var win = "defaultView" in doc ? doc.defaultView : doc.parentWindow;
-                    var chart = win.$(this).data("kendoChart");
+                    var chartObject = win.$(this);
+                    var chart = chartObject.data("kendoChart");
 
-                    chart.setOptions(kendo.deepExtend(chart.options, theme));
+                    chart.options = kendo.deepExtend(chart.options, theme);
+
+                    chart.refresh();
                 });
             },
             render: function() {
                 var that = this,
                     template = kendo.template,
                     templateOptions = { paramName: "d", useWithBlock: false },
-                    webPropertyGroupTemplate = template(
+                    propertyGroupTemplate = template(
                         "<li>#= d.title #" +
                             "<div class='styling-options'>" +
-                                "# for (var name in d.constants) {" +
+                                "# for (var name in d.section) {" +
                                     "var c = d.constants[name];" +
                                     "if (c.readonly) continue; #" +
                                     "<label for='#= name #'>#= d.section[name] || name #</label>" +
                                     "<input id='#= name #' class='#= d.editors[c.property] #' " +
                                            "value='#= d.processors[c.property] ? d.processors[c.property](c.value) : c.value #' />" +
-                                "# } #" +
-                            "</div>" +
-                        "</li>",
-                        templateOptions
-                    ),
-                    datavizPropertyGroupTemplate = template(
-                        "<li>#= d.title #" +
-                            "<div class='styling-options'>" +
-                                "# for (var name in d.section) { #" +
-                                    "<label for='#= name #'>#= d.section[name] || name #</label>" +
-                                    "<input id='#= name #' class='ktb-colorpicker' value='#= d.value(name) #' />" +
                                 "# } #" +
                             "</div>" +
                         "</li>",
@@ -576,16 +578,9 @@
                                  button({ id: "show-import", text: "Import..." }),
                         content: "<ul class='stylable-elements'>" +
                                     map(that.webConstantsHierarchy || {}, function(section, title) {
-                                        var matchedConstants = {},
-                                            constants = that.constants.constants;
-
-                                        for (var constant in section) {
-                                            matchedConstants[constant] = extend({}, constants[constant]);
-                                        }
-
-                                        return webPropertyGroupTemplate({
+                                        return propertyGroupTemplate({
                                             title: title,
-                                            constants: matchedConstants,
+                                            constants: that.constants.constants,
                                             section: section,
                                             editors: propertyEditors,
                                             processors: processors
@@ -600,12 +595,12 @@
                                  button({ id: "get-json", text: "Get JSON..." }),
                         content: "<ul class='stylable-elements'>" +
                                     map(that.datavizConstantsHierarchy || {}, function(section, title) {
-                                        return datavizPropertyGroupTemplate({
+                                        return propertyGroupTemplate({
                                             title: title,
+                                            constants: that.datavizConstants || {},
                                             section: section,
-                                            value: function(name) {
-                                                return "#ffffff";
-                                            }
+                                            editors: propertyEditors,
+                                            processors: processors
                                         });
                                     }).join("") +
                                  "</ul>"
