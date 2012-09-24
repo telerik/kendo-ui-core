@@ -720,6 +720,8 @@
                 return src;
             });
 
+            wrapper.toggleClass("k-rtl", !!that.element.closest(".k-rtl").length);
+
             // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
             wrapper
                 .appendTo(that.appendTo)
