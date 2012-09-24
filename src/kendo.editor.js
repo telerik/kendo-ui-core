@@ -46,7 +46,7 @@
 
         colorPickerTemplate:
             '<li class="k-editor-colorpicker" role="presentation">' +
-                '<div class="k-widget k-colorpicker k-header #= cssClass #" role="combobox" aria-autocomplete="list" title="#=tooltip#">' +
+                '<div class="k-widget k-colorpicker k-header #= cssClass #" role="combobox" title="#=tooltip#">' +
                     '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-i-arrow-s"></span>' +
             '</div></li>',
 
