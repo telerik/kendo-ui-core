@@ -792,9 +792,28 @@
                 });
             } else {
                 body.innerHTML = html;
+
                 if (browser.msie) {
                     // having unicode characters creates denormalized DOM tree in IE9
                     dom.normalize(body);
+
+                    setTimeout(function() {
+                        // fix for IE9 OL bug -- https://connect.microsoft.com/IE/feedback/details/657695/ordered-list-numbering-changes-from-correct-to-0-0
+                        var ols = body.getElementsByTagName("ol"), i, ol, originalStart;
+
+                        for (i = 0; i < ols.length; i++) {
+                            ol = ols[i];
+                            originalStart = ol.getAttribute("start");
+
+                            ol.setAttribute("start", 1);
+
+                            if (originalStart) {
+                                ol.setAttribute("start", originalStart);
+                            } else {
+                                ol.removeAttribute(originalStart);
+                            }
+                        }
+                    }, 1);
                 }
             }
 
