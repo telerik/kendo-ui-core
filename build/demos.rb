@@ -160,14 +160,34 @@ PRODUCTION_RESOURCES = FileList['demos/mvc/**/*']
             .exclude('**/*.cs')
             .exclude('**/obj/**/*')
 
+MVC_RAZOR_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.cshtml']
+                    .exclude('**/Shared/**/*')
+                    .exclude('**/_ViewStart.cshtml')
+MVC_ASPX_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.as*x']
 
 tree :to => 'dist/demos/production',
      :from => PRODUCTION_RESOURCES,
      :root => 'demos/mvc/'
 
+tree :to => 'dist/demos/production/sources/aspx',
+     :from => MVC_ASPX_VIEWS,
+     :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
+
+tree :to => 'dist/demos/production/sources/razor',
+     :from => MVC_RAZOR_VIEWS,
+     :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
+
 tree :to => 'dist/demos/staging',
      :from => PRODUCTION_RESOURCES,
      :root => 'demos/mvc/'
+
+tree :to => 'dist/demos/staging/sources/aspx',
+     :from => MVC_ASPX_VIEWS,
+     :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
+
+tree :to => 'dist/demos/staging/sources/razor',
+     :from => MVC_RAZOR_VIEWS,
+     :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
 
 tree :to => 'dist/demos/staging/content/cdn/js',
      :from => COMPLETE_MIN_JS,
@@ -203,6 +223,8 @@ namespace :demos do
         :less,
         :release,
         'dist/demos/staging',
+        'dist/demos/staging/sources/aspx',
+        'dist/demos/staging/sources/razor',
         'dist/demos/staging/content/cdn/js',
         'dist/demos/staging/content/cdn/styles'] do
         patch_web_config('dist/demos/staging/Web.config', '~/content/cdn', '~/content/cdn/themebuilder')
@@ -213,7 +235,10 @@ namespace :demos do
     desc('Build staging demo site')
     task :staging => 'dist/demos/staging.zip'
 
-    task :production_site => [:release, 'dist/demos/production'] do
+    task :production_site => [:release,
+        'dist/demos/production',
+        'dist/demos/production/sources/aspx',
+        'dist/demos/production/sources/razor'] do
         patch_web_config('dist/demos/production/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT)
     end
 
