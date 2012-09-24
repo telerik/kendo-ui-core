@@ -758,7 +758,8 @@
                 contentHtml = that.element,
                 options = that.options,
                 iframeSrcAttributes,
-                wrapper;
+                wrapper,
+                isRtl = kendo.support.isRtl(contentHtml);
 
             if (options.scrollable === false) {
                 contentHtml.attr("style", "overflow:hidden;");
@@ -774,8 +775,6 @@
                 wrapper.append(templates.titlebar(extend(templates, options)));
             }
 
-            wrapper.toggleClass("k-rtl", kendo.support.isRtl(that.element));
-
             // Collect the src attributes of all iframes and then set them to empty string.
             // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
             iframeSrcAttributes = contentHtml.find("iframe:not(.k-content)").map(function(iframe) {
@@ -786,12 +785,16 @@
 
             // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
             wrapper
+                .toggleClass("k-rtl", isRtl)
                 .appendTo(that.appendTo)
                 .append(contentHtml)
                 .find("iframe:not(.k-content)").each(function(index) {
                    // Restore the src attribute of the iframes when they are part of the live DOM tree
                    this.src = iframeSrcAttributes[index];
                 });
+
+            wrapper.find(".k-window-title")
+                .css(isRtl ? "left" : "right", wrapper.find(".k-window-actions").outerWidth() + 10);
 
             contentHtml.show();
         }
@@ -807,7 +810,7 @@
         titlebar: template(
             "<div class='k-window-titlebar k-header'>&nbsp;" +
                 "<span class='k-window-title'>#= title #</span>" +
-                "<div class='k-window-actions k-header'>" +
+                "<div class='k-window-actions'>" +
                 "# for (var i = 0; i < actions.length; i++) { #" +
                     "#= action({ name: actions[i] }) #" +
                 "# } #" +
