@@ -712,8 +712,6 @@
                 wrapper.append(templates.titlebar(extend(templates, options)));
             }
 
-            wrapper.toggleClass("k-rtl", !!that.element.closest(".k-rtl").length);
-
             // Collect the src attributes of all iframes and then set them to empty string.
             // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
             iframeSrcAttributes = contentHtml.find("iframe:not(.k-content)").map(function(iframe) {
@@ -731,6 +729,9 @@
                    this.src = iframeSrcAttributes[index];
                 });
 
+            wrapper.find(".k-window-title")
+                .css("right", wrapper.find(".k-window-actions").outerWidth() + 10);
+
             contentHtml.show();
         }
     });
@@ -745,7 +746,7 @@
         titlebar: template(
             "<div class='k-window-titlebar k-header'>&nbsp;" +
                 "<span class='k-window-title'>#= title #</span>" +
-                "<div class='k-window-actions k-header'>" +
+                "<div class='k-window-actions'>" +
                 "# for (var i = 0; i < actions.length; i++) { #" +
                     "#= action({ name: actions[i] }) #" +
                 "# } #" +
