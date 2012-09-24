@@ -1,6 +1,7 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         extend = $.extend,
         each = $.each,
         template = kendo.template,
@@ -28,13 +29,16 @@
         ACTIVECLASS = ".k-state-active",
         GROUPS = "> .k-panel",
         CONTENTS = "> .k-content",
+        FOCUSEDCLASS = "k-state-focused",
         SELECTEDCLASS = ".k-state-selected",
         DISABLEDCLASS = ".k-state-disabled",
         HIGHLIGHTEDCLASS = ".k-state-highlighted",
         clickableItems = ITEM + ":not(.k-state-disabled) > .k-link",
         disabledItems = ITEM + ".k-state-disabled > .k-link",
         selectableItems = "> li > .k-state-selected, .k-panel > li > .k-state-selected",
+        //fix this
         highlightableItems = "> .k-state-highlighted, .k-panel > .k-state-highlighted",
+        focusedItems = "li > .k-state-focused",
         defaultState = "k-state-default",
         VISIBLE = ":visible",
         EMPTY = ":empty",
@@ -227,6 +231,7 @@
                 that.append(options.dataSource, element);
             }
 
+            that._tabindex();
             that._updateClasses();
 
             if (options.animation === false) {
@@ -236,7 +241,11 @@
             element
                 .on(CLICK + NS, clickableItems, $.proxy(that._click, that))
                 .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
-                .on(CLICK + NS, disabledItems, false);
+                .on(CLICK + NS, disabledItems, false)
+                .on("keydown" + NS, $.proxy(that._keydown, that))
+                .on("focus" + NS, function() {
+                    that._current(that._active());
+                });
 
             if (options.contentUrls) {
                 element.find("> .k-item")
@@ -368,9 +377,9 @@
                 return that.element.find(selectableItems).parent();
             }
 
-            element.each(function (index, item) {
-                item = $(item);
-                var link = item.children("." + LINK);
+            element.each(function (index) {
+                var item = $(this),
+                    link = item.children("." + LINK);
 
                 if (item.is(DISABLEDCLASS)) {
                     return that;
@@ -493,6 +502,65 @@
 
                 that._ajaxRequest(item, item.children("." + CONTENT), !item.is(VISIBLE));
             });
+        },
+
+        _active: function(selector) {
+            var item = this.select();
+
+            selector = selector || ":first";
+
+            if (!item[0]) {
+                item = this.element.find("li:has(span.k-link)" + selector);
+            } else {
+                item = item.eq(0); //if select return list ??????
+            }
+
+            return item;
+        },
+
+        _current: function(candidate) {
+            var that = this,
+                focused = that._focused;
+
+            if (candidate === undefined) {
+                return focused;
+            }
+
+            if (focused) {
+                focused.children(".k-link").removeClass(FOCUSEDCLASS);
+            }
+
+            if (candidate) {
+                candidate.children(".k-link").addClass(FOCUSEDCLASS);
+            }
+
+            that._focused = candidate;
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                current = that._current() || that._active();
+
+            if (key == keys.DOWN) {
+                current = current.next();
+                if (current[0]) {
+                    that._current(current);
+                } else {
+                    that._current(that._active());
+                }
+                e.preventDefault();
+            }
+
+            if (key == keys.UP) {
+                current = current.prev();
+                if (current[0]) {
+                    that._current(current);
+                } else {
+                    that._current(that._active(":last"));
+                }
+                e.preventDefault();
+            }
         },
 
         _insert: function (item, referenceItem, parent) {

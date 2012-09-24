@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kendo Navigation</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.panelbar.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+</head>
+<body>
+    <script type="text/javascript">
+
+        var PanelBar = kendo.ui.PanelBar,
+            keys = kendo.keys,
+            ul;
+
+        QUnit.config.reorder = false;
+
+        function addItems(count) {
+            var panel = ul.data("kendoPanelBar");
+
+            for (var i = 0; i < count; i++) {
+                panel.append({
+                    text: "Item" + i
+                });
+            }
+        }
+
+        module("PanelBar Navigation", {
+            setup: function() {
+                ul = $('<ul id="test" />').appendTo(document.body);
+            },
+            teardown: function() {
+                if (ul.data("kendoPanelBar")) {
+                    ul.data("kendoPanelBar").destroy();
+                }
+                ul.remove();
+            }
+        });
+
+        test("PanelBar adds tabindex", function() {
+            ul.kendoPanelBar();
+            equal(ul.attr("tabindex"), 0);
+        });
+
+        test("PanelBar selects first item on focus", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+
+            ul.focus();
+
+            var first = ul.children(":first");
+            ok(first.children(":first").hasClass("k-state-focused"));
+        });
+
+        test("PanelBar selects next item on key DOWN", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+
+            ul.focus();
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            ok(ul.children(":last").children(".k-link").hasClass("k-state-focused"));
+            ok(!ul.children(":first").children(".k-link").hasClass("k-state-focused"));
+        });
+
+        test("PanelBar selects next item on key DOWN", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+
+            ul.focus();
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.UP
+            });
+
+            ok(ul.children(":first").children(".k-link").hasClass("k-state-focused"));
+            ok(!ul.children(":last").children(".k-link").hasClass("k-state-focused"));
+        });
+    </script>
+
+    <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>
