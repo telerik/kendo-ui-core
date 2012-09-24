@@ -383,7 +383,7 @@
         fontSize: "Select font size",
         fontSizeInherit: "(inherited size)",
         formatBlock: "Format",
-        foreColor: "Fore color",
+        foreColor: "Color",
         backColor: "Background color",
         style: "Styles",
         emptyFolder: "Empty Folder",
@@ -3876,6 +3876,8 @@ var ColorTool = Tool.extend({
     initialize: function(ui, initOptions) {
         var editor = initOptions.editor,
             toolName = this.name;
+
+        ui.attr("title", initOptions.title);
 
         new Editor.ColorPicker(ui, {
             value: "#000000",

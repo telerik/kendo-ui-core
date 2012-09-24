@@ -422,6 +422,8 @@ var ColorTool = Tool.extend({
         var editor = initOptions.editor,
             toolName = this.name;
 
+        ui.attr("title", initOptions.title);
+
         new Editor.ColorPicker(ui, {
             value: "#000000",
             ariaId: editor.element[0].id ? kendo.format("{0}_{1}_cp", editor.element[0].id, toolName) : "",
