@@ -19,6 +19,7 @@ require 'bundle'
 require 'theme_builder'
 require 'demos'
 require 'download_builder'
+require 'cdn'
 
 ROOT_MAP = {
     '.' => /(src|styles\/.+?)\//,
