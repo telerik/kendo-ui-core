@@ -93,6 +93,10 @@ tests.push(
     },
     {
         page: "mobile/themebuilder/colorengine.html",
-        title: "theme builder color engine"
+        title: "mobile theme builder color engine"
+    },
+    {
+        page: "mobile/themebuilder/gradientengine.html",
+        title: "mobile theme builder gradient engine"
     }
 );
