@@ -34,19 +34,19 @@
         },
 
         editorWrapperTemplate:
-            '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header"><tbody>' +
-                '<tr><td class="k-editor-toolbar-wrap"><ul class="k-editor-toolbar"></ul></td></tr>' +
+            '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header" role="presentation"><tbody>' +
+                '<tr role="presentation"><td class="k-editor-toolbar-wrap" role="presentation"><ul class="k-editor-toolbar" role="toolbar"></ul></td></tr>' +
                 '<tr><td class="k-editable-area"></td></tr>' +
             '</tbody></table>',
 
         buttonTemplate:
-            '<li class="k-editor-button">' +
-                '<a href="" class="k-tool-icon #= cssClass #" unselectable="on" title="#= tooltip #">#= tooltip #</a>' +
+            '<li class="k-editor-button" role="presentation">' +
+                '<a href="" role="button" class="k-tool-icon #= cssClass #" unselectable="on" title="#= tooltip #">#= tooltip #</a>' +
             '</li>',
 
         colorPickerTemplate:
-            '<li class="k-editor-colorpicker">' +
-                '<div class="k-widget k-colorpicker k-header #= cssClass #">' +
+            '<li class="k-editor-colorpicker" role="presentation">' +
+                '<div class="k-widget k-colorpicker k-header #= cssClass #" role="combobox" aria-autocomplete="list">' +
                     '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-i-arrow-s"></span>' +
             '</div></li>',
 
@@ -429,6 +429,10 @@
 
             wrapper = that.wrapper = wrapTextarea(element);
 
+            if (that.textarea.id) {
+                wrapper.find(".k-editor-toolbar").attr("aria-controls", that.textarea.id);
+            }
+
             renderTools(that, that.options.tools);
 
             initializeContentElement(that);
@@ -516,13 +520,13 @@
                     if (keyCode == keys.RIGHT) {
                         focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
                     } else if (keyCode == keys.LEFT) {
-                        focusElement = closestLi.prevAll(focusableTool).last().find(focusable);
+                        focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
                     } else if (keyCode == keys.ESC) {
                         focusElement = that;
                     } else if (keyCode == keys.TAB && !(e.ctrlKey || e.altKey)) {
                         // skip tabbing to disabled tools, and focus the editing area when running out of tools
                         if (e.shiftKey) {
-                            focusElement = closestLi.prevAll(focusableTool).last().find(focusable);
+                            focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
 
                             if (focusElement.length) {
                                 e.preventDefault();
@@ -983,6 +987,7 @@
                 isActive = isPending ? !isFormatted : isFormatted;
 
             $ui.toggleClass("k-state-active", isActive);
+            $ui.attr("aria-pressed", isActive);
         }
     });
 
