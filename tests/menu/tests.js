@@ -8,6 +8,10 @@ tests.push(
         title: "menu events"
     },
     {
+        page: "menu/keyboard.html",
+        title: "keyboard navigation"
+    },
+    {
         page: "menu/openOnClick.html",
         title: "menu open on click"
     },

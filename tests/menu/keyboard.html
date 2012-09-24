@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.menu Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.menu.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+        <script type="text/javascript">
+
+             function getMenu() {
+                 return $("#Menu1").data("kendoMenu");
+             }
+
+             var keys = kendo.keys;
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            };
+
+        </script>
+    </head>
+    <body>
+
+        <ul id="Menu1" data-role="menu" class="k-widget k-reset k-header k-menu k-menu-horizontal" tabindex="0" style="position:absolute;visibility:hidden">
+                <li class="k-item k-state-default k-first"><span class="k-link">
+                    First Item
+                    <span class="k-icon k-i-arrow-s"></span></span><ul class="k-group">
+                        <li class="k-item k-state-default k-first"><span class="k-link">Sub Item 1</span></li>
+                        <li class="k-item k-state-default k-last"><span class="k-link">Sub Item 2</span></li>
+                    </ul>
+                </li>
+                <li class="k-item k-state-default"><span class="k-link">
+                    Second Item
+                    <span class="k-icon k-i-arrow-s"></span></span><ul class="k-group">
+                        <li class="k-item k-state-default k-first"><span class="k-link">Sub Item 1</span></li>
+                        <li class="k-item k-state-default k-last"><span class="k-link">Sub Item 2</span></li>
+                    </ul>
+                </li>
+                <li class="k-item k-state-default k-last"><span class="k-link">
+                    Third Item
+                    <span class="k-icon k-i-arrow-s"></span></span><ul class="k-group">
+                        <li class="k-item k-state-default k-first"><span class="k-link">Sub Item 1</span></li>
+                        <li class="k-item k-state-default k-last"><span class="k-link">Sub Item 2</span></li>
+                    </ul>
+                </li>
+            </ul>
+
+<script type="text/javascript">
+
+        var menu,
+            openedItem;
+
+        $("#Menu1").kendoMenu({ animation: false });
+
+        module("Menu / Keyboard navigation", {
+            setup: function () {
+                menu = getMenu();
+                menu._oldHoverItem = null;
+                menu.wrapper.find(".k-state-hover").removeClass("k-state-hover");
+                
+            },
+            teardown: function() {
+                openedItem = null;
+            }
+        });
+
+        test('Menu focus makes first root item active', function() {
+            menu.wrapper.focus();
+
+            ok(menu.wrapper.children(".k-item").first().hasClass("k-state-hover"));
+        });
+
+        test('Left and right arrows move focus between first and second item', function() {
+            menu.wrapper.focus().press(keys.RIGHT);
+            ok(menu.wrapper.children(".k-item").first().next().hasClass("k-state-hover"));
+
+            menu.wrapper.press(keys.LEFT);
+            ok(menu.wrapper.children(".k-item").first().hasClass("k-state-hover"));
+        });
+
+        test('Down arrow opens subitems group', function() {
+            menu.open = function(item) { openedItem = item; };
+            menu.wrapper.focus().press(keys.DOWN);
+
+            equal(openedItem[0], menu.wrapper.children(".k-item").first()[0]);
+        });
+
+        test('Left arrow moves focus from first to last item', function() {
+            menu.wrapper.focus().press(keys.LEFT);
+
+            ok(menu.wrapper.children(".k-item").last().hasClass("k-state-hover"));
+        });
+
+
+</script>
+
+    <h1 id="qunit-header">kendo.ui.Menu Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>

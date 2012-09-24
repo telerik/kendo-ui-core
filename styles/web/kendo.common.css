@@ -2,7 +2,7 @@
 
 .fake{color:red;}
 
-.k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
+.k-reset { margin:0;padding:0;border:0;/*outline:0;*/text-decoration:none;font-size:100%;list-style:none;}
 
 .k-floatwrap:after,.k-slider-items:after,.k-grid-toolbar:after{content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
 .k-floatwrap,.k-slider-items,.k-grid-toolbar{display:inline-block;}

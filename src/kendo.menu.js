@@ -8,6 +8,7 @@
         proxy = $.proxy,
         each = $.each,
         template = kendo.template,
+        keys = kendo.keys,
         Widget = ui.Widget,
         excludedNodesRegExp = /^(ul|a|div)$/i,
         NS = ".kendoMenu",
@@ -27,6 +28,7 @@
         MOUSELEAVE = "mouseleave",
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "k-state-default",
+        HOVERSTATE = "k-state-hover",
         DISABLEDSTATE = "k-state-disabled",
         groupSelector = ".k-group",
         allItemsSelector = ":not(.k-list) > .k-item",
@@ -244,13 +246,17 @@
 
             that.nextItemZIndex = 100;
 
+            that._tabindex();
+
             element.on(CLICK + NS, disabledSelector, false)
-                   .on(CLICK + NS, itemSelector, proxy(that._click , that));
+                   .on(CLICK + NS, itemSelector, proxy(that._click , that))
+                   .on("keydown" + NS, proxy(that._keydown, that))
+                   .on("focus" + NS, proxy(that._focus, that));
 
             if (!touch) {
                 element.on(MOUSEENTER + NS, itemSelector, proxy(that._mouseenter, that))
                        .on(MOUSELEAVE + NS, itemSelector, proxy(that._mouseleave, that))
-                       .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, linkSelector, that._toggleHover);
+                       .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, linkSelector, proxy(that._toggleHover, that));
             } else {
                 options.openOnClick = true;
                 element.on(MOUSEDOWN + NS + " " + MOUSEUP + NS, linkSelector, that._toggleHover);
@@ -580,10 +586,16 @@
         },
 
         _toggleHover: function(e) {
-            var target = $(kendo.eventTarget(e)).closest(allItemsSelector);
+            var target = $(kendo.eventTarget(e)).closest(allItemsSelector),
+                oldHoverItem = this._oldHoverItem;
+
+            if (oldHoverItem) {
+                oldHoverItem.removeClass(HOVERSTATE);
+            }
+            this._oldHoverItem = null;
 
             if (!target.parents("li." + DISABLEDSTATE).length) {
-                target.toggleClass("k-state-hover", e.type == MOUSEENTER || e.type == MOUSEDOWN);
+                target.toggleClass(HOVERSTATE, e.type == MOUSEENTER || e.type == MOUSEDOWN);
             }
         },
 
@@ -697,7 +709,222 @@
             }
 
             this.clicked = false;
+        },
+
+        _focus: function (e) {
+            var that = this,
+                target = e.target,
+                hoverItem = that._hoverItem();
+            
+            if (target == that.wrapper[0] && hoverItem.length) {
+                that._moveHover(null, hoverItem);
+            } else if (target == that.wrapper[0]) {
+                that._moveHover(null, that.wrapper.children().first());
+            }
+        },
+
+        _keydown: function (e) {
+            var that = this,
+                key = e.keyCode,
+                hoverItem = that._oldHoverItem,
+                target,
+                belongsToVertical,
+                hasChildren;
+
+            if (!hoverItem) {
+                hoverItem  = that._oldHoverItem = that._hoverItem();
+            }
+
+            belongsToVertical = that._itemBelongsToVertival(hoverItem);
+            hasChildren = that._itemHasChildren(hoverItem);
+
+            if (key == keys.RIGHT) {
+                target = that._itemRight(hoverItem, belongsToVertical, hasChildren);
+            } else if (key == keys.LEFT) {
+                target = that._itemLeft(hoverItem, belongsToVertical, hasChildren);
+            } else if (key == keys.DOWN) {
+                target = that._itemDown(hoverItem, belongsToVertical, hasChildren);
+            } else if (key == keys.UP) {
+                target = that._itemUp(hoverItem, belongsToVertical, hasChildren);
+            } else if (key == keys.ESC) {
+                target = that._itemEsc(hoverItem, belongsToVertical);
+            } else if (key == keys.ENTER || key == keys.SPACEBAR) {
+                //that._itemActivate(hoverItem);
+            } else if (key == keys.TAB) {
+                target = that._findRootParent(hoverItem);
+                that.close(target);
+                that._moveHover(hoverItem, target);
+
+                return;
+            }
+
+            if (target) {
+                e.preventDefault();
+            }
+        },
+
+        _hoverItem: function() {
+            return this.wrapper.find("li.k-item.k-state-hover").filter(":visible");
+        },
+
+        _itemBelongsToVertival: function (item) {
+            var menuIsVertical = this.wrapper.hasClass("k-menu-vertical");
+
+            if (!item.length) {
+                return menuIsVertical;
+            }
+            return item.parent().hasClass("k-group") || menuIsVertical;
+        },
+
+        _itemHasChildren: function (item) {
+            if (!item.length) {
+                return false;
+            }
+            return item.children("ul.k-group, div.k-animation-container").length > 0;
+        },
+
+        _moveHover: function (item, nextItem) {
+            if (item) {
+                item.removeClass(HOVERSTATE);
+            }
+            if (nextItem) {
+                nextItem.addClass(HOVERSTATE);
+                this._oldHoverItem = nextItem;
+            }
+        },
+
+        _findRootParent: function (item) {
+//            var parent = item.parent();
+//            if (parent.length == 0) {
+//                return;
+//            } else if (parent.hasClass("k-menu")) {
+//                return item;
+//            } else {
+//                return this._findRootParent(parent);
+//            }
+            if (item.parent().hasClass("k-menu")) {
+                return item;
+            } else {
+                return item.parentsUntil(".k-menu", "li.k-item").last();
+            }
+        },
+
+        _isRootItem: function (item) {
+            return item.parent().hasClass("k-menu");
+        },
+
+        _itemRight: function (item, belongsToVertical, hasChildren) {
+            var that = this,
+                nextItem,
+                parentItem;
+
+            if (!belongsToVertical) {
+                nextItem = item.next();
+                if (!nextItem.length) {
+                    nextItem = item.parent().children().first();
+                }
+            } else if (hasChildren) {
+                that.open(item);
+                nextItem = item.find(".k-group").children().first();
+            } else if (that.options.orientation == "horizontal") {
+                parentItem = that._findRootParent(item);
+                that.close(parentItem);
+                nextItem = parentItem.next();
+            }
+
+            if (!nextItem.length) {
+                nextItem = that.wrapper.children(".k-item").first();
+            }
+
+            that._moveHover(item, nextItem);
+            return nextItem;
+        },
+
+        _itemLeft: function (item, belongsToVertical, hasChildren) {
+            var that = this,
+                nextItem;
+
+            if (!belongsToVertical) {
+                nextItem = item.prev();
+                if (!nextItem.length) {
+                    nextItem = item.parent().children().last();
+                }
+            } else {
+                nextItem = item.parent().closest(".k-item");
+                that.close(nextItem);
+                if (that._isRootItem(nextItem) && that.options.orientation == "horizontal") {
+                    nextItem = nextItem.prev();
+                }
+            }
+
+            if (!nextItem.length) {
+                nextItem = that.wrapper.children(".k-item").last();
+            }
+
+            that._moveHover(item, nextItem);
+            return nextItem;
+        },
+
+        _itemDown: function (item, belongsToVertical, hasChildren) {
+            var that = this,
+                nextItem;
+
+            if (!belongsToVertical) {
+                if (!hasChildren || item.hasClass(DISABLEDSTATE)) {
+                    return;
+                } else {
+                    that.open(item);
+                    nextItem = item.find(".k-group").children().first();
+                }
+            } else {
+                nextItem = item.next();
+            }
+
+            if (!nextItem.length && item.length) {
+                nextItem = item.parent().children().first();
+            } else if (!item.length) {
+                nextItem = that.wrapper.children(".k-item").first();
+            }
+
+            that._moveHover(item, nextItem);
+            return nextItem;
+        },
+
+        _itemUp: function (item, belongsToVertical, hasChildren) {
+            var that = this,
+                nextItem;
+
+            if (!belongsToVertical) {
+                return;
+            } else {
+                nextItem = item.prev();
+            }
+
+            if (!nextItem.length && item.length) {
+                nextItem = item.parent().children().last();
+            } else if (!item.length) {
+                nextItem = that.wrapper.children(".k-item").last();
+            }
+
+            that._moveHover(item, nextItem);
+            return nextItem;
+        },
+
+        _itemEsc: function (item, belongsToVertical) {
+            var that = this,
+                nextItem;
+
+            if (!belongsToVertical) {
+                return item;
+            } else {
+                nextItem = item.parent().closest(".k-item");
+                that.close(nextItem);
+                that._moveHover(item, nextItem);
+            }
+
+            return nextItem;
         }
+
     });
 
     // client-side rendering
