@@ -239,7 +239,8 @@
                 .on(CLICK + NS, disabledItems, false)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, function() {
-                    that._current(that._active());
+                    var item = that.select();
+                    that._current(item[0] ? item.last() : that._first());
                 })
                 .on("blur" + NS, function() {
                     that._current(null);
@@ -371,7 +372,7 @@
             var that = this;
             element = that.element.find(element);
 
-            if (arguments.length === 0) {
+            if (element === undefined) {
                 return that.element.find(selectableItems).parent();
             }
 
@@ -500,16 +501,6 @@
 
                 that._ajaxRequest(item, item.children("." + CONTENT), !item.is(VISIBLE));
             });
-        },
-
-        _active: function() {
-            var item = this.select();
-
-            if (!item[0]) {
-                return this._first();
-            } else {
-                return item.eq(0); //if select return list ??????
-            }
         },
 
         _first: function() {
