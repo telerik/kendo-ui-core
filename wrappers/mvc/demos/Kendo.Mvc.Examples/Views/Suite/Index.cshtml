@@ -3,13 +3,13 @@
 <html>
 <head>
     <title>Kendo UI @ViewBag.SuiteTitle Examples</title>
-    <link href="@Url.Content("~/Content/shared/suite.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/shared/suite.css")" rel="stylesheet">
 </head>
 <body>
     <div id="page">
         <a class="offline-button" href="@(Url.RouteUrl("Default", new { controller = "" }))">Back to all suites</a>
         @foreach (string category in ViewBag.Navigation.Keys)
-        {            
+        {
             <h1>@category</h1>
             <ul>
                 @foreach (NavigationWidget widget in ViewBag.Navigation[category])

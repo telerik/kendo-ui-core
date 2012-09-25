@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" >
     <meta charset="utf-8" />
     <link href="<%= Url.Content("~/Content/dataviz/kendo.dataviz.min.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%= Url.Content("~/Content/shared/examples-offline.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/shared/examples-offline.css") %>" rel="stylesheet" type="text/css" />
     <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/kendo.dataviz.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>

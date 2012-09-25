@@ -84,6 +84,7 @@ bundle :name => 'trial',
             'styles' => MIN_CSS_RESOURCES
        }.merge(MVC_CONTENT),
        :prerequisites => [
+           'mvc:assets',
            'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
        ]
 
@@ -147,9 +148,13 @@ bundle :name => 'aspnetmvc.commercial',
             'styles' => MIN_CSS_RESOURCES,
             'src/js' => MVC_SRC_JS,
             'src/styles' => SRC_CSS,
-            'src/Kendo.Mvc' => FileList['wrappers/mvc/src/Kendo.Mvc/**/*'].exclude('**/bin/**/*').exclude('**/obj/**/*').exclude('**/*.csproj'),
+            'src/Kendo.Mvc' => FileList['wrappers/mvc/src/Kendo.Mvc/**/*']
+                .exclude('**/bin/**/*')
+                .exclude('**/obj/**/*')
+                .exclude('**/*.csproj'),
        }.merge(MVC_CONTENT),
        :prerequisites => [
+           'mvc:assets',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.snk',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj',
            'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',

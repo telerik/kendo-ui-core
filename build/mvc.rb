@@ -19,12 +19,36 @@ MVC_ASCX_EDITOR_TEMPLATES = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/View
 rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
-MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*']
-                .exclude('**/*.dll')
-                .exclude('**/Kendo*.txt')
+MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*.cs']
                 .reject { |f| File.directory? f }
 
 MVC_DEMOS = FileList['wrappers/mvc/demos/**/*']
+                .include(FileList[MVC_MIN_JS]
+                    .sub('src', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Scripts')
+                )
+                .include(FileList[MIN_CSS_RESOURCES]
+                    .sub('styles', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content')
+                )
+                .include(
+                    FileList['demos/mvc/content/web/**/*']
+                        .reject { |f| File.directory? f }
+                        .sub('demos/mvc/content', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content')
+                )
+                .include(
+                    FileList['demos/mvc/content/dataviz/**/*']
+                        .reject { |f| File.directory? f }
+                        .sub('demos/mvc/content', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content')
+                )
+                .include(
+                    FileList['demos/mvc/content/shared/styles/**/*']
+                        .reject { |f| File.directory? f }
+                        .sub('demos/mvc/content/shared/styles', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared')
+                )
+                .include(
+                    FileList['demos/mvc/content/shared/icons/**/*']
+                        .reject { |f| File.directory? f }
+                        .sub('demos/mvc/content/shared/icons', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared/icons')
+                )
                 .include('wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll')
                 .exclude('**/*.winjs.*')
                 .exclude('**/System*.dll')
@@ -61,21 +85,43 @@ assembly_info_file 'wrappers/mvc/src/shared/CommonAssemblyInfo.cs'
 
 namespace :mvc do
     tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content',
-         :from => WEB_MIN_CSS + DATAVIZ_MIN_CSS,
+         :from => MIN_CSS_RESOURCES,
          :root => 'styles/'
 
+    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/web',
+         :from => 'demos/mvc/content/web/**/*',
+         :root => 'demos/mvc/content/web/'
+
+    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/dataviz',
+         :from => 'demos/mvc/content/dataviz/**/*',
+         :root => 'demos/mvc/content/dataviz/'
+
+    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared',
+         :from => 'demos/mvc/content/shared/styles/**/*',
+         :root => 'demos/mvc/content/shared/styles/'
+
+    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared/icons',
+         :from => 'demos/mvc/content/shared/icons/**/*',
+         :root => 'demos/mvc/content/shared/icons/'
+
     tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Scripts',
-         :from => WEB_MIN_JS + DATAVIZ_MIN_JS,
+         :from => MVC_MIN_JS,
          :root => 'src/'
 
     task :assets_js => [:js, 'wrappers/mvc/demos/Kendo.Mvc.Examples/Scripts']
-    task :assets_css => [:less, 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content']
+    task :assets_css => [
+        :less,
+        'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/web',
+        'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/dataviz',
+        'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared',
+        'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared/icons',
+    ]
 
     desc('Update CommonAssemblyInfo.cs with current VERSION')
     task :assembly_version => 'wrappers/mvc/src/shared/CommonAssemblyInfo.cs'
 
     desc('Copy the minified CSS and JavaScript to Content and Scripts folder')
-    multitask :assets => [:assets_js, :assets_css]
+    task :assets => ['mvc:assets_js', 'mvc:assets_css']
 end
 
 # Build ASP.NET MVC wrappers
@@ -87,7 +133,7 @@ end
 # Build ASP.NET MVC demos
 
 file 'wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll' =>
-    ['mvc:assets', MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll')].flatten do
+    MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll') do |t|
     msbuild 'wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
 end
 
