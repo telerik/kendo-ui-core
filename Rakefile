@@ -192,7 +192,7 @@ namespace :bundles do
         rm_rf 'dist/bundles'
     end
 
-    multitask :all => [
+    task :all => [
         'trial',
         'complete.commercial',
         'web.commercial',
