@@ -343,11 +343,7 @@
                 item = ul.children().eq(1);
 
             ul.focus();
-            panelbar._click({
-                currentTarget: item.find(".k-link"),
-                preventDefault: function() {}
-            });
-
+            panelbar._click(item.find(".k-link"));
             equal(panelbar._focused[0], item[0]);
         });
     </script>

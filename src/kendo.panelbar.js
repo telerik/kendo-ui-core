@@ -229,7 +229,11 @@
             }
 
             element
-                .on(CLICK + NS, clickableItems, $.proxy(that._click, that))
+                .on(CLICK + NS, clickableItems, function(e) {
+                    if (that._click($(e.currentTarget))) {
+                        e.preventDefault();
+                    }
+                })
                 .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
                 .on(CLICK + NS, disabledItems, false)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
@@ -311,7 +315,7 @@
                     }
 
                     if (!that._triggerEvent(EXPAND, item)) {
-                        that._toggleItem(item, false, null);
+                        that._toggleItem(item, false);
                     }
 
                     if (!useAnimation) {
@@ -342,7 +346,7 @@
                     }
 
                     if (!that._triggerEvent(COLLAPSE, item)) {
-                        that._toggleItem(item, true, null);
+                        that._toggleItem(item, true);
                     }
 
                     if (!useAnimation) {
@@ -556,14 +560,8 @@
                 e.preventDefault();
             }
 
-            current = current.children("." + LINK);
-
-            if ((key == keys.ENTER || key == keys.SPACEBAR) && current[0]) {
-                that._click({
-                    currentTarget: current[0],
-                    preventDefault: $.noop
-                });
-
+            if (key == keys.ENTER || key == keys.SPACEBAR) {
+                that._click(current.children("." + LINK));
                 e.preventDefault();
             }
         },
@@ -710,10 +708,10 @@
             updateFirstLast(items);
         },
 
-        _click: function (e) {
+        _click: function (target) {
             var that = this,
-                target = $(e.currentTarget),
-                element = that.element;
+                element = that.element,
+                prevent;
 
             if (target.parents("li" + DISABLEDCLASS).length) {
                 return;
@@ -737,11 +735,11 @@
             }
 
             if (that._triggerEvent(SELECT, item)) {
-                e.preventDefault();
+                prevent = true;
             }
 
             if (isAnchor || contents.length) {
-                e.preventDefault();
+                prevent = true;
             } else {
                 return;
             }
@@ -756,30 +754,27 @@
                 var visibility = contents.is(VISIBLE);
 
                 if (!that._triggerEvent(!visibility ? EXPAND : COLLAPSE, item)) {
-                    that._toggleItem(item, visibility, e);
+                    prevent = that._toggleItem(item, visibility);
                 }
             }
+
+            return prevent;
         },
 
-        _toggleItem: function (element, isVisible, e) {
+        _toggleItem: function (element, isVisible) {
             var that = this,
-                childGroup = element.find(GROUPS);
+                childGroup = element.find(GROUPS),
+                prevent;
 
             if (childGroup.length) {
-
                 this._toggleGroup(childGroup, isVisible);
-
-                if (e) {
-                    e.preventDefault();
-                }
+                prevent = true;
             } else {
 
                 var content = element.find("> ."  + CONTENT);
 
                 if (content.length) {
-                    if (e) {
-                        e.preventDefault();
-                    }
+                    prevent = true;
 
                     if (!content.is(EMPTY)) {
                         that._toggleGroup(content, isVisible);
@@ -788,6 +783,7 @@
                     }
                 }
             }
+            return prevent;
         },
 
         _toggleGroup: function (element, visibility) {
