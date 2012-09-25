@@ -20,13 +20,13 @@
 
         QUnit.config.reorder = false;
 
-        function addItems(count) {
+        function addItems(count, parent) {
             var panel = ul.data("kendoPanelBar");
 
             for (var i = 0; i < count; i++) {
                 panel.append({
                     text: "Item" + i
-                });
+                }, parent);
             }
         }
 
@@ -57,6 +57,17 @@
             ok(first.children(":first").hasClass("k-state-focused"));
         });
 
+        test("PanelBar clears focused item on blur", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+
+            ul.focus();
+            ul.blur();
+
+            var first = ul.children(":first");
+            ok(!first.children(":first").hasClass("k-state-focused"));
+        });
+
         test("PanelBar selects next item on key DOWN", function() {
             ul.kendoPanelBar();
             addItems(2);
@@ -71,7 +82,60 @@
             ok(!ul.children(":first").children(".k-link").hasClass("k-state-focused"));
         });
 
-        test("PanelBar selects next item on key DOWN", function() {
+        test("PanelBar selects first item of group", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+            addItems(2, ul.children(":first"));
+
+            ul.focus();
+            ul.data("kendoPanelBar").expand(ul.children(":first"));
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            ok(ul.children(":first").find("li:first > span.k-link").hasClass("k-state-focused"));
+        });
+
+        test("PanelBar selects next item if current is last in a group", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+            addItems(2, ul.children(":first"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar.expand(ul.children(":first"));
+            panelbar._current(ul.children(":first").find("li:last"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            ok(ul.children(":last").children("span.k-link").hasClass("k-state-focused"));
+        });
+
+        test("PanelBar selects first if last is selected", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+            addItems(2, ul.children(":first"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar.expand(ul.children(":first"));
+            panelbar._current(ul.children(":last"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            ok(ul.children(":first").children("span.k-link").hasClass("k-state-focused"));
+        });
+
+        test("PanelBar selects prev item on key UP", function() {
             ul.kendoPanelBar();
             addItems(2);
 
@@ -88,6 +152,74 @@
 
             ok(ul.children(":first").children(".k-link").hasClass("k-state-focused"));
             ok(!ul.children(":last").children(".k-link").hasClass("k-state-focused"));
+        });
+
+        test("PanelBar selects prev parent item", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+            addItems(2, ul.children(":first"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar.expand(ul.children(":first"));
+            panelbar._current(ul.children(":first").find("li:first"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.UP
+            });
+
+            ok(ul.children(":first").children(".k-link").hasClass("k-state-focused"));
+        });
+
+        test("PanelBar selects selects last if no prev", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+            addItems(2, ul.children(":first"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar.expand(ul.children(":first"));
+            panelbar._current(ul.children(":first").find("li:first"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.UP
+            });
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.UP
+            });
+
+            ok(ul.children(":last").children(".k-link").hasClass("k-state-focused"));
+        });
+
+        test("PanelBar selects prev nested and visible item", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+            addItems(2, ul.children(":first"));
+            addItems(2, ul.children(":first").children(".k-group").children(":last"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar.expand(ul.children(":first"));
+            panelbar.expand(ul.children(":first").children(".k-group").children(":last"));
+            panelbar._current(ul.children(":last"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.UP
+            });
+
+            ok(ul.children(":first")
+                 .children(".k-group").children(":last")
+                 .children(".k-group").children(":last")
+                 .children("span.k-link")
+                 .hasClass("k-state-focused"));
         });
     </script>
 

@@ -245,6 +245,9 @@
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, function() {
                     that._current(that._active());
+                })
+                .on("blur" + NS, function() {
+                    that._current(null);
                 });
 
             if (options.contentUrls) {
@@ -504,18 +507,22 @@
             });
         },
 
-        _active: function(selector) {
+        _active: function() {
             var item = this.select();
 
-            selector = selector || ":first";
-
             if (!item[0]) {
-                item = this.element.find("li:has(span.k-link)" + selector);
+                return this._first();
             } else {
-                item = item.eq(0); //if select return list ??????
+                return item.eq(0); //if select return list ??????
             }
+        },
 
-            return item;
+        _first: function() {
+            return this.element.find("li:has(span.k-link):first");
+        },
+
+        _last: function() {
+            return this.element.find("li:has(span.k-link):last");
         },
 
         _current: function(candidate) {
@@ -540,27 +547,67 @@
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
-                current = that._current() || that._active();
+                current = that._current();
 
             if (key == keys.DOWN) {
-                current = current.next();
-                if (current[0]) {
-                    that._current(current);
-                } else {
-                    that._current(that._active());
-                }
+                that._current(that._nextItem(current));
                 e.preventDefault();
             }
 
             if (key == keys.UP) {
-                current = current.prev();
-                if (current[0]) {
-                    that._current(current);
-                } else {
-                    that._current(that._active(":last"));
-                }
+                that._current(that._prevItem(current));
                 e.preventDefault();
             }
+        },
+
+        _nextItem: function(item) {
+            if (!item) {
+                return this._first();
+            }
+
+            var group = item.children(".k-group"),
+                next = item.next();
+
+            if (group.is(":visible")) { //or add expanded attr
+                next = group.children("li:first");
+            }
+
+            if (!next[0]) {
+                next = item.parent(".k-group").parent("li.k-item").next();
+            }
+
+            if (!next[0]) {
+                return this._first();
+            }
+
+            return next;
+        },
+
+        _prevItem: function(item) {
+            if (!item) {
+                return this._last();
+            }
+
+            var prev = result = item.prev(),
+                group;
+
+            if (!prev[0]) {
+                group = item.parent(".k-group");
+                if (group[0]) {
+                    prev = group.parent("li.k-item");
+                } else {
+                    prev = this._last();
+                }
+            } else {
+                while(result[0]) {
+                    result = result.children(".k-group:visible").children("li:last");
+                    if (result[0]) {
+                        prev = result;
+                    }
+                }
+            }
+
+            return prev;
         },
 
         _insert: function (item, referenceItem, parent) {
