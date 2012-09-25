@@ -12,6 +12,7 @@
         HREF = "href",
         LAST = "k-last",
         LINK = "k-link",
+        LINKSELECTOR = "." + LINK,
         ERROR = "error",
         CLICK = "click",
         ITEM = ".k-item",
@@ -168,7 +169,7 @@
         item.each(function() {
             var item = $(this);
 
-            if (!item.children("." + LINK).length) {
+            if (!item.children(LINKSELECTOR).length) {
                 item
                     .contents()      // exclude groups, real links, templates and empty text nodes
                     .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
@@ -247,7 +248,7 @@
             if (options.contentUrls) {
                 element.find("> .k-item")
                     .each(function(index, item) {
-                        $(item).find("." + LINK).data(CONTENTURL, options.contentUrls[index]);
+                        $(item).find(LINKSELECTOR).data(CONTENTURL, options.contentUrls[index]);
                     });
             }
 
@@ -376,7 +377,7 @@
 
             element.each(function (index) {
                 var item = $(this),
-                    link = item.children("." + LINK);
+                    link = item.children(LINKSELECTOR);
 
                 if (item.is(DISABLEDCLASS)) {
                     return that;
@@ -561,7 +562,7 @@
             }
 
             if (key == keys.ENTER || key == keys.SPACEBAR) {
-                that._click(current.children("." + LINK));
+                that._click(current.children(LINKSELECTOR));
                 e.preventDefault();
             }
         },
@@ -721,7 +722,7 @@
                 return;
             }
 
-            var link = target.closest("." + LINK),
+            var link = target.closest(LINKSELECTOR),
                 item = link.closest(ITEM);
 
             that._updateSelected(link);
@@ -824,7 +825,7 @@
         _collapseAllExpanded: function (item) {
             var that = this, children, stopExpand = false;
 
-            if (item.find("> ." + LINK).hasClass("k-header")) {
+            if (item.children(LINKSELECTOR).hasClass("k-header")) {
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
 
                 if (groups.is(VISIBLE)) {
@@ -853,7 +854,7 @@
 
             var that = this,
                 statusIcon = element.find(".k-panelbar-collapse, .k-panelbar-expand"),
-                link = element.find("." + LINK),
+                link = element.find(LINKSELECTOR),
                 loadingIconTimeout = setTimeout(function () {
                     statusIcon.addClass("k-loading");
                 }, 100),
