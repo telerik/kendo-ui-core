@@ -294,6 +294,24 @@
             ok(ul.children(":first").children(".k-group:visible")[0]);
         });
 
+        test("PanelBar selects item on Enter", function() {
+            ul.kendoPanelBar();
+            addItems(3);
+            addItems(2, ul.children(":first"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar._current(ul.children(":first"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.ENTER
+            });
+
+            ok(ul.children(":first").children(".k-link").hasClass("k-state-selected"));
+        });
+
         test("PanelBar collapses expanded group", function() {
             ul.kendoPanelBar();
             addItems(3);
