@@ -159,7 +159,9 @@
                 themeName;
 
             Widget.fn.init.call(chart, element);
-            chart._originalOptions = options = deepExtend({}, chart.options, userOptions);
+            options = deepExtend({}, chart.options, userOptions);
+
+            chart._originalOptions = deepExtend({}, options);
 
             themeName = options.theme;
             themeOptions = themeName ? themes[themeName] || themes[themeName.toLowerCase()] : {};
