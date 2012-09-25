@@ -185,3 +185,19 @@ def vsdoc(*args, &block)
     VsDocTask.define_task(*args, &block)
 end
 
+namespace :vsdoc do
+    VSDOC_SOURCES = FileList["docs/api/{web,mobile,dataviz,framework}/*.md"]
+    %w(master production).each do |branch|
+        namespace branch do
+            desc "Test VSDoc generation"
+            task :test do
+                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
+
+                File.open("dist/kendo.vsdoc-#{branch}.js", "w") do |f|
+                    f.write get_vsdoc(VSDOC_SOURCES)
+                    sh "/usr/lib/node_modules/jshint/bin/hint #{f.path}"
+                end
+            end
+        end
+    end
+end

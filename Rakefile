@@ -2,6 +2,7 @@ require 'rake/clean'
 
 require 'bundler/setup'
 require 'debugger'
+require 'tempfile'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 
@@ -20,6 +21,7 @@ require 'theme_builder'
 require 'demos'
 require 'download_builder'
 require 'cdn'
+require 'tests'
 
 ROOT_MAP = {
     '.' => /(src|styles\/.+?)\//,
@@ -204,43 +206,58 @@ BUNDLES = [
 ]
 
 namespace :build do
-    zip_bundles = []
+    def zip_targets(destination)
+        zip_bundles = []
 
-    BUNDLES.each do |bundle|
-        zip_filename = ('kendoui.' + bundle).sub(/\.[^\.]+$/, ".#{VERSION}\\0.zip")
-        zip_filename = "/kendo-builds/Stable/#{zip_filename}"
+        BUNDLES.each do |bundle|
+            zip_filename = ('kendoui.' + bundle).sub(/\.[^\.]+$/, ".#{VERSION}\\0.zip")
+            zip_filename = "/kendo-builds/#{destination}/#{zip_filename}"
 
-        file_copy :to => zip_filename,
-                  :from => "dist/bundles/#{bundle}.zip"
+            file_copy :to => zip_filename,
+                      :from => "dist/bundles/#{bundle}.zip"
 
-        zip_bundles.push(zip_filename)
+            zip_bundles.push(zip_filename)
+        end
+
+        zip_demos = "/kendo-builds/#{destination}/production.zip"
+
+        file_copy :to => zip_demos,
+                  :from => "dist/demos/production.zip"
+
+        zip_bundles.push(zip_demos)
+
+        tree :to => "/kendo-builds/WinJS/#{destination}",
+             :from => FileList[WIN_JS_RESOURCES].pathmap('dist/bundles/winjs.commercial/%f'),
+             :root => 'dist/bundles/winjs.commercial/'
+
+        zip_bundles.push("/kendo-builds/WinJS/#{destination}")
+
+        clean_task = "/kendo-builds/#{destination}"
+
+        task clean_task do
+            sh "find /kendo-builds/#{destination}/* -mtime +2 -exec rm {} \\;"
+        end
+
+        zip_bundles.push(clean_task)
+
+        zip_bundles
     end
-
-    zip_demos = '/kendo-builds/Stable/production.zip'
-
-    file_copy :to => zip_demos,
-              :from => "dist/demos/production.zip"
-
-    tree :to => '/kendo-builds/WinJS/Stable',
-         :from => FileList[WIN_JS_RESOURCES].pathmap('dist/bundles/winjs.commercial/%f'),
-         :root => 'dist/bundles/winjs.commercial/'
-
-    zip_bundles.push(zip_demos)
 
     desc('Runs a build over the stable branch')
-    task :stable => [:bundles,
-        'demos:production',
-        'demos:staging',
-        'download_builder:staging',
-        zip_bundles,
-        '/kendo-builds/WinJS/Stable'].flatten do
-
+    task :stable => [:bundles, 'demos:production', 'demos:staging', 'download_builder:staging', zip_targets("Stable")].flatten do
         sh 'rsync -avc dist/demos/staging/ /var/www/staging/'
-
-        sh 'find /kendo-builds/Stable/* -mtime +2 -exec rm {} \;'
-
         sh 'rsync -avc dist/download-builder-staging/ /var/www/download-builder-staging/'
     end
+
+    write_changelog "/var/www/changelog/index.html", %w(web mobile dataviz framework aspnetmvc)
+
+    desc('Runs a build over the production branch')
+    task "production" => ["tests:Production", "vsdoc:production:test", :bundles, 'demos:production', 'demos:staging', 'download_builder:staging', zip_targets("Production"), "/var/www/changelog/index.html"].flatten do
+        sh 'rsync -avc dist/demos/staging/ /var/www/production/'
+    end
+
+    desc('Runs test suite over the master branch')
+    task "ci" => ["tests:CI", "vsdoc:master:test"]
 end
 
 namespace :bundles do
