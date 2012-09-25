@@ -947,7 +947,7 @@
                 } else if (key == SOURCE) {
                     hasSource = true;
                 } else if (key == EVENTS) {
-                    hasEvents = true
+                    hasEvents = true;
                 } else {
                     this.applyBinding(key, bindings, specificBinders);
                 }
