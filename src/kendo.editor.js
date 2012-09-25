@@ -5217,7 +5217,7 @@ var ImageCommand = Command.extend({
         }
 
         var imageBrowser = that.editor.options.imageBrowser;
-        var showBrowser = kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined;
+        var showBrowser = !!(kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined);
 
         windowContent =
             '<div class="k-editor-dialog">' +
