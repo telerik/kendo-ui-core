@@ -509,12 +509,17 @@
 
         _first: function() {
             //do not get item which is disabled
-            return this.element.find("li:has(span.k-link):first");
+            return this.element.children("li:has(span.k-link):first");
         },
 
         _last: function() {
-            //do not get item which is disabled
-            return this.element.find("li:has(span.k-link):last");
+            var item = this.element.children("li:has(span.k-link):last"),
+                group = item.children(".k-group:visible");
+
+            if (group[0]) {
+                return group.children(".k-item:last");
+            }
+            return item;
         },
 
         _current: function(candidate) {

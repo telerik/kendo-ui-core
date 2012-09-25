@@ -257,6 +257,25 @@
             ok(ul.children(":first").children(".k-link").hasClass("k-state-focused"));
         });
 
+        test("PanelBar moves focus to last element in the last expanded group", function() {
+            ul.kendoPanelBar();
+            addItems(3);
+            addItems(2, ul.children(":last"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar.expand(ul.children(":last"));
+            panelbar._current(ul.children(":first"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.UP
+            });
+
+            ok(ul.children(":last").children(".k-group").children(":last").children(".k-link").hasClass("k-state-focused"));
+        });
+
         test("PanelBar expands current focused item on Enter", function() {
             ul.kendoPanelBar();
             addItems(3);
