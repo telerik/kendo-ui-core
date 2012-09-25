@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         public void Should_render_button_as_td_child()
         {
             builder.CreateRow().Children.SelectRecursive(node => node.Children)
-                .Any(n => n.TagName == "a" && n.Attribute("class").Split(' ').Contains("k-collapse")).ShouldBeTrue();
+                .Any(n => n.TagName == "a" && n.Attribute("class").Split(' ').Contains("k-i-collapse")).ShouldBeTrue();
         }
 
         [Fact]

@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Html
             var p = new HtmlElement("p").AddClass(UIPrimitives.ResetStyle)
                 .AppendTo(td);
 
-            new HtmlElement("a").AddClass(UIPrimitives.Icon, "k-collapse")
+            new HtmlElement("a").AddClass(UIPrimitives.Icon, "k-i-collapse")
                 .Attribute("href", "#")
                 .AppendTo(p);
             
