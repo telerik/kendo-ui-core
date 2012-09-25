@@ -561,12 +561,13 @@
                 e.preventDefault();
             }
 
-            if (key == keys.ENTER || key == keys.SPACE) {
+            if (key == keys.ENTER || key == keys.SPACEBAR) {
                 if (current.children(".k-group:visible")[0]) {
                     that.collapse(current);
                 } else {
                     that.expand(current);
                 }
+                e.preventDefault();
             }
         },
 
