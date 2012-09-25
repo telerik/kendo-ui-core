@@ -106,10 +106,6 @@
                                     options.template = EditorUtils.buttonTemplate;
                                 }
                             }
-
-                            //if (options.exec && typeof(options.exec) == "string") {
-                            //    options.exec = $.parseJSON('{"exec":' + '"' + options.exec + '"}').exec;
-                            //}
                         }
                     } else if (editor.tools[currentTool]) {
                         editorTools[currentTool] = editor.tools[currentTool];
@@ -629,7 +625,9 @@
             "change",
             "execute",
             "error",
-            "paste"
+            "paste",
+            "keydown",
+            "keyup"
         ],
 
         options: {
@@ -2921,6 +2919,8 @@ var TypingHandler = Class.extend({
             keyboard = editor.keyboard,
             isTypingKey = keyboard.isTypingKey(e);
 
+        that.editor.trigger("keydown", e);
+
         if (isTypingKey && !keyboard.isTypingInProgress()) {
             var range = editor.getRange();
             that.startRestorePoint = new RestorePoint(range);
@@ -2938,6 +2938,8 @@ var TypingHandler = Class.extend({
 
     keyup: function (e) {
         var keyboard = this.editor.keyboard;
+
+        this.editor.trigger("keyup", e);
 
         if (keyboard.isTypingInProgress()) {
             keyboard.endTyping();

@@ -165,6 +165,8 @@ var TypingHandler = Class.extend({
             keyboard = editor.keyboard,
             isTypingKey = keyboard.isTypingKey(e);
 
+        that.editor.trigger("keydown", e);
+
         if (isTypingKey && !keyboard.isTypingInProgress()) {
             var range = editor.getRange();
             that.startRestorePoint = new RestorePoint(range);
@@ -182,6 +184,8 @@ var TypingHandler = Class.extend({
 
     keyup: function (e) {
         var keyboard = this.editor.keyboard;
+
+        this.editor.trigger("keyup", e);
 
         if (keyboard.isTypingInProgress()) {
             keyboard.endTyping();
