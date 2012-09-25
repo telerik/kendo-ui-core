@@ -239,7 +239,13 @@
             tooltip: {
                 visible: false
             },
-            transitions: true
+            transitions: true,
+            valueAxis: {},
+            plotArea: {},
+            axisDefatuls: {},
+            title: {},
+            xAxis: {},
+            yAxis: {}
         },
 
         refresh: function() {
