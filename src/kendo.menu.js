@@ -729,7 +729,8 @@
                 hoverItem = that._oldHoverItem,
                 target,
                 belongsToVertical,
-                hasChildren;
+                hasChildren,
+                isRtl = kendo.support.isRtl(that.wrapper);
 
             if (!hoverItem) {
                 hoverItem  = that._oldHoverItem = that._hoverItem();
@@ -739,9 +740,9 @@
             hasChildren = that._itemHasChildren(hoverItem);
 
             if (key == keys.RIGHT) {
-                target = that._itemRight(hoverItem, belongsToVertical, hasChildren);
+                target = that[isRtl ? "_itemLeft" : "_itemRight"](hoverItem, belongsToVertical, hasChildren);
             } else if (key == keys.LEFT) {
-                target = that._itemLeft(hoverItem, belongsToVertical, hasChildren);
+                target = that[isRtl ? "_itemRight" : "_itemLeft"](hoverItem, belongsToVertical, hasChildren);
             } else if (key == keys.DOWN) {
                 target = that._itemDown(hoverItem, belongsToVertical, hasChildren);
             } else if (key == keys.UP) {
