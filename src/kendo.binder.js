@@ -10,6 +10,7 @@
         proxy = $.proxy,
         VALUE = "value",
         SOURCE = "source",
+        EVENTS = "events",
         CHECKED = "checked",
         CHANGE = "change";
 
@@ -949,6 +950,7 @@
                 key,
                 hasValue,
                 hasSource,
+                hasEvents,
                 specificBinders = binders[nodeName] || {};
 
             for (key in bindings) {
@@ -956,6 +958,8 @@
                     hasValue = true;
                 } else if (key == SOURCE) {
                     hasSource = true;
+                } else if (key == EVENTS) {
+                    hasEvents = true
                 } else {
                     this.applyBinding(key, bindings, specificBinders);
                 }
@@ -967,6 +971,10 @@
 
             if (hasValue) {
                 this.applyBinding(VALUE, bindings, specificBinders);
+            }
+
+            if (hasEvents) {
+                this.applyBinding(EVENTS, bindings, specificBinders);
             }
         },
 

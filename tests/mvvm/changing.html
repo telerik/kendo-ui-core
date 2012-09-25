@@ -109,6 +109,21 @@
                 equal(dom.find("span").text(), "foo");
             });
 
+            test("the view model is updated when the change event is raised", 1, function() {
+                var viewModel = kendo.observable( {
+                    foo: "",
+                    change: function() {
+                        equal(this.foo, "bar");
+                    }
+                });
+
+                var dom = $('<input data-bind="events: { change: change }, value: foo" />');
+
+                kendo.bind(dom, viewModel);
+
+                dom.val("bar").trigger("change");
+            });
+
             test("keyup event notifies value listeners", function() {
                 var viewModel = kendo.observable( {
                     foo: ["foo", "bar", "baz"],
