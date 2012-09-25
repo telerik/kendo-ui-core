@@ -109,6 +109,18 @@
                 ok(item.hasClass("k-state-selected"));
             });
 
+            test("clicking node sets it as focused", function() {
+                createTreeView([
+                    { text: "foo" }
+                ]);
+
+                var item = treeview.find(".k-item:first .k-in");
+
+                item.trigger("click");
+
+                ok(item.hasClass("k-state-focused"));
+            });
+
             test("clicking disabled nodes does not select them", function() {
                 createTreeView([
                     { text: "foo", enabled: false }
@@ -252,6 +264,7 @@
                     }
                 });
 
+                treeview.focus();
                 treeview.press(keys.RIGHT);
             });
 
@@ -262,9 +275,10 @@
                     ] }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.RIGHT);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[1]);
             });
 
             test("left arrow collapses expanded nodes", 1, function() {
@@ -279,10 +293,11 @@
                     }
                 });
 
+                treeview.focus();
                 treeview.press(keys.LEFT);
             });
 
-            test("left arrow selects parent node of already collapsed nodes", function() {
+            test("left arrow focuses parent node of already collapsed nodes", function() {
                 createTreeView([
                     { text: "foo", expanded: true, items: [
                         { selected: true, text: "bar", items: [
@@ -291,23 +306,25 @@
                     ] }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.LEFT);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[0]);
             });
 
-            test("down arrow moves selection to next sibling", function() {
+            test("down arrow moves focus to next sibling", function() {
                 createTreeView([
                     { text: "foo", selected: true },
                     { text: "baz" }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[1]);
             });
 
-            test("down arrow moves selection to first child, if expanded", function() {
+            test("down arrow moves focus to first child, if expanded", function() {
                 createTreeView([
                     { text: "foo", expanded: true, selected: true, items: [
                         { text: "bar" }
@@ -315,12 +332,13 @@
                     { text: "baz" }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item .k-item")[0]);
             });
 
-            test("down arrow moves selection to next parent, if there are no more siblings left", function() {
+            test("down arrow moves focus to next parent, if there are no more siblings left", function() {
                 createTreeView([
                     { text: "foo", expanded: true, items: [
                         { text: "bar", selected: true }
@@ -328,12 +346,13 @@
                     { text: "baz" }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item:last")[0]);
             });
 
-            test("down arrow moves selection to next grandparent, if there are no more siblings left", function() {
+            test("down arrow moves focus to next grandparent, if there are no more siblings left", function() {
                 createTreeView([
                     { text: "foo", expanded: true, items: [
                         { text: "bar", expanded: true, items: [
@@ -343,56 +362,61 @@
                     { text: "qux" }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item:last")[0]);
             });
 
-            test("down arrow does not change selection when hitting the last item", function() {
+            test("down arrow does not change focus when hitting the last item", function() {
                 createTreeView([
                     { text: "foo" },
                     { text: "qux", selected: true }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item:last")[0]);
             });
 
-            test("down arrow in treeview without selection selects first node", function() {
+            test("down arrow in treeview without focused node focus first node", function() {
                 createTreeView([
                     { text: "foo" },
                     { text: "bar" }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[0]);
             });
 
-            test("up arrow in treeview without selection selects last node", function() {
+            test("up arrow in treeview without focused node focus last node", function() {
                 createTreeView([
                     { text: "foo" },
                     { text: "bar" }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.UP);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[1]);
             });
 
-            test("up arrow moves selection to previous node", function() {
+            test("up arrow moves focus to previous node", function() {
                 createTreeView([
                     { text: "foo" },
                     { text: "bar", selected: true }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.UP);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[0]);
             });
 
-            test("up arrow moves selection to last expanded node of previous node", function() {
+            test("up arrow moves focus to last expanded node of previous node", function() {
                 createTreeView([
                     { text: "foo", expanded: true, items: [
                         { text: "bar" }
@@ -400,12 +424,13 @@
                     { text: "baz", selected: true }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.UP);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item .k-item")[0]);
             });
 
-            test("up arrow moves selection to previous grandparent, when parents are expanded", function() {
+            test("up arrow moves focus to previous grandparent, when parents are expanded", function() {
                 createTreeView([
                     { text: "foo", expanded: true, items: [
                         { text: "bar", expanded: true, items: [
@@ -415,45 +440,49 @@
                     { text: "qux", selected: true }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.UP);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item .k-item")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item .k-item .k-item")[0]);
             });
 
-            test("up arrow moves selection to parent node when out of previous nodes", function() {
+            test("up arrow moves focus to parent node when out of previous nodes", function() {
                 createTreeView([
                     { text: "foo", expanded: true, items: [
                         { text: "bar", selected: true }
                     ] }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.UP);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[0]);
             });
 
-            test("home key moves selection to first node", function() {
+            test("home key moves focus to first node", function() {
                 createTreeView([
                     { text: "foo" },
                     { text: "bar" },
                     { text: "baz", selected: true }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.HOME);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[0]);
             });
 
-            test("end key moves selection to last node", function() {
+            test("end key moves focus to last node", function() {
                 createTreeView([
                     { text: "foo", selected: true },
                     { text: "bar" },
                     { text: "baz" }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.END);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item:last")[0]);
             });
 
             test("end key moves to last child node", function() {
@@ -465,9 +494,10 @@
                     ] }
                 ]);
 
+                treeview.focus();
                 treeview.press(keys.END);
 
-                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item .k-item")[0]);
+                equal(treeviewObject.current()[0], treeview.find(".k-item .k-item .k-item")[0]);
 
             });
 
@@ -481,7 +511,7 @@
                         equal(e.node, treeview.find(".k-item:last")[0]);
                     }
                 });
-
+                treeview.focus();
                 treeview.press(keys.DOWN);
                 treeview.press(keys.ENTER);
             });
@@ -499,6 +529,7 @@
                     }
                 });
 
+                treeview.focus();
                 treeview.press(keys.ENTER);
 
                 ok(!triggered);
@@ -517,6 +548,7 @@
                     }
                 });
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
                 treeview.press(keys.ENTER);
                 treeview.press(keys.UP);
@@ -533,6 +565,7 @@
                     checkboxTemplate: "<input type='checkbox' />"
                 });
 
+                treeview.focus();
                 treeview.press(keys.SPACEBAR);
 
                 ok(treeview.find(":checkbox").is(":checked"));
@@ -554,25 +587,53 @@
                 ok(true);
             });
 
-            test("blurring the treeview triggers select event", function() {
-                var triggeredCount = 0;
-
+            test("blurring the treeview removes the focused state", function() {
                 createTreeView({
                     dataSource: [
                         { text: "foo", selected: true },
                         { text: "bar" }
-                    ],
-                    select: function() {
-                        triggeredCount++;
-                    }
+                    ]
                 });
 
                 treeview.focus();
                 treeview.press(keys.DOWN);
                 treeview.blur();
 
-                equal(triggeredCount, 1);
+                ok(!treeview.data("kendoTreeView").current().hasClass("k-state-focused"));
+            });
 
+            test("focusing after blurring the treeview focus the same node", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "bar" }
+                    ]
+                });
+
+                treeview.focus();
+                treeview.press(keys.DOWN);
+                treeview.press(keys.DOWN);
+                treeview.blur();
+                treeview.focus();
+
+                equal(treeview.data("kendoTreeView").current().text(), "bar");
+            });
+
+            test("focusing after blurring the treeview focus the selected node", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ]
+                });
+
+                treeview.focus();
+                treeview.press(keys.DOWN);
+                treeview.press(keys.DOWN);
+                treeview.blur();
+                treeview.focus();
+
+                equal(treeview.data("kendoTreeView").current().text(), "foo");
             });
 
             test("blurring the treeview does not trigger select event, if selection has not changed", function() {
@@ -628,6 +689,7 @@
                     }
                 });
 
+                treeview.focus();
                 treeview.press(keys.SPACEBAR);
 
                 ok(treeview.find(":checkbox:first").prop("indeterminate"));
@@ -645,6 +707,7 @@
                     }
                 });
 
+                treeview.focus();
                 treeview.press(keys.SPACEBAR);
 
                 ok(treeview.find(":checkbox:first").prop("checked"));
@@ -663,6 +726,7 @@
                     }
                 });
 
+                treeview.focus();
                 treeview.press(keys.SPACEBAR);
 
                 var checkboxes = treeview.find(":checkbox");
@@ -683,6 +747,8 @@
                         checkChildren: true
                     }
                 });
+
+                treeview.focus();
 
                 // check selected item
                 treeview.press(keys.SPACEBAR);
@@ -734,9 +800,10 @@
                     ]
                 });
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
-                equal(treeview.find(".k-state-selected").text(), "baz");
+                equal(treeview.find(".k-state-focused").text(), "baz");
             });
 
             test("down arrow skips disabled child items", function() {
@@ -749,9 +816,10 @@
                     ]
                 });
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
-                equal(treeview.find(".k-state-selected").text(), "baz");
+                equal(treeview.find(".k-state-focused").text(), "baz");
             });
 
             test("right arrow skips disabled first child", function() {
@@ -764,9 +832,10 @@
                     ]
                 });
 
+                treeview.focus();
                 treeview.press(keys.RIGHT);
 
-                equal(treeview.find(".k-state-selected").text(), "baz");
+                equal(treeview.find(".k-state-focused").text(), "baz");
             });
 
             test("right arrow skips disabled first child", function() {
@@ -780,9 +849,10 @@
                     ]
                 });
 
+                treeview.focus();
                 treeview.press(keys.RIGHT);
 
-                equal(treeview.find(".k-state-selected").text(), "baz");
+                equal(treeview.find(".k-state-focused").text(), "baz");
             });
 
             test("up arrow skips disabled items", function() {
@@ -796,9 +866,10 @@
                     ]
                 });
 
+                treeview.focus();
                 treeview.press(keys.UP);
 
-                equal(treeview.find(".k-state-selected").text(), "foo");
+                equal(treeview.find(".k-state-focused").text(), "foo");
             });
 
             test("left arrow does nothing when going to disabled parent", function() {
@@ -812,9 +883,10 @@
                     ]
                 });
 
+                treeview.focus();
                 treeview.press(keys.LEFT);
 
-                equal(treeview.find(".k-state-selected").text(), "baz");
+                equal(treeview.find(".k-state-focused").text(), "baz");
             });
 
             test("down arrow without selection goes to first non-disabled item", function() {
@@ -825,9 +897,10 @@
                     ]
                 });
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
-                equal(treeview.find(".k-state-selected").text(), "baz");
+                equal(treeview.find(".k-state-focused").text(), "baz");
             });
 
             test("up arrow without selection goes to last non-disabled item", function() {
@@ -838,9 +911,38 @@
                     ]
                 });
 
+                treeview.focus();
                 treeview.press(keys.UP);
 
-                equal(treeview.find(".k-state-selected").text(), "foo");
+                equal(treeview.find(".k-state-focused").text(), "foo");
+            });
+
+            test("down arrow without selection sets the first non-disabled item as focused", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", enabled: false },
+                        { text: "baz" }
+                    ]
+                });
+
+                treeview.press(keys.DOWN);
+
+                equal(treeview.find(".k-state-focused").text(), "baz");
+            });
+
+            test("focus is cleared after rebind", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "baz" }
+                    ]
+                });
+
+                treeview.press(keys.DOWN);
+                widget = treeview.data("kendoTreeView");
+                widget.dataSource.read();
+
+                ok(!widget.current().length);
             });
 
             module("drag & drop with load-on-demand", {

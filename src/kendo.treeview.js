@@ -525,7 +525,16 @@
         },
 
         _focus: function(e) {
-            this._oldSelection = this.select()[0];
+            var selected = this.select(),
+                current;
+
+            if (selected.length) {
+                this._oldSelection = selected[0];
+                this.current(selected);
+            } else {
+                current = this.current();
+                this.current(current);
+            }
         },
 
         focus: function() {
@@ -534,10 +543,10 @@
 
         _blur: function(e) {
             var that = this,
-                selection = that.select();
+                focused = that.current();
 
-            if (selection[0] != that._oldSelection) {
-                that._trigger(SELECT, selection);
+            if (focused.length) {
+                focused.find(".k-in:first").removeClass("k-state-focused");
             }
         },
 
@@ -606,7 +615,7 @@
             var that = this,
                 key = e.keyCode,
                 target,
-                selection = that.select(),
+                selection = that.current(),
                 expanded = that._expanded(selection),
                 checkbox = selection.find(":checkbox:first");
 
@@ -615,7 +624,7 @@
             }
 
             if (!that._oldSelection) {
-                that._oldSelection = selection[0];
+                that._oldSelection = that.select()[0];
             }
 
             if (key == keys.RIGHT) {
@@ -645,6 +654,7 @@
             } else if (key == keys.ENTER) {
                 if (selection[0] != that._oldSelection) {
                     delete that._oldSelection;
+                    that.select(selection);
                     that._trigger(SELECT, selection);
                 }
             } else if (key == keys.SPACEBAR && checkbox.length) {
@@ -655,11 +665,12 @@
                 that._checkboxChange({ target: checkbox });
 
                 target = selection;
+                that.select(target);
             }
 
             if (target) {
                 e.preventDefault();
-                that.select(target);
+                that.current(target);
             }
         },
 
@@ -880,9 +891,14 @@
             if (field == "selected") {
                 item = items[0];
 
-                that.findByUid(item.uid).find(".k-in:first")
+                node = that.findByUid(item.uid).find(".k-in:first")
                         .removeClass("k-state-hover")
-                        .toggleClass("k-state-selected", item[field]);
+                        .toggleClass("k-state-selected", item[field])
+                        .end();
+
+                if (item[field]) {
+                    that.current(node);
+                }
             } else {
                 for (i = 0; i < items.length; i++) {
                     item = items[i];
@@ -940,6 +956,8 @@
             if (e.field) {
                 return that._updateNode(e.field, items);
             }
+
+            that._current = null;
 
             if (node) {
                 parentNode = that.findByUid(node.uid);
@@ -1003,6 +1021,28 @@
 
                 this._updateNodeClasses(item, {}, { enabled: enable, expanded: !isCollapsed });
             });
+        },
+
+        current: function(node) {
+            var that = this,
+                element = that.element,
+                current = that._current;
+
+            if (node !== undefined && node.length) {
+                if (current) {
+                    current.find(".k-in:first")
+                        .removeClass("k-state-focused");
+                }
+
+                that._current = $(node, element).closest(NODE)
+                    .find(".k-in:first")
+                    .addClass("k-state-focused")
+                    .end();
+
+                return;
+            }
+
+            return current || $();
         },
 
         select: function (node) {
