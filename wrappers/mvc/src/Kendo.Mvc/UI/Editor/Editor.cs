@@ -85,8 +85,8 @@ namespace Kendo.Mvc.UI
                 Template.Html = value;
             }
         }
-        
-        public Action Content 
+
+        public Action Content
         {
             get
             {
@@ -107,7 +107,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);           
+            var options = new Dictionary<string, object>(Events);
 
             options["tools"] = DefaultToolGroup.Tools.Select(tool =>
             {
@@ -121,7 +121,7 @@ namespace Kendo.Mvc.UI
                         { "name", customButtonTool.Name},
                         { "tooltip", (!string.IsNullOrEmpty(customButtonTool.ToolTip) ? customButtonTool.ToolTip : customButtonTool.Name) },
                         { "exec", customButtonTool.Exec }
-                    };                    
+                    };
                 }
                 else if (customTemplateTool != null)
                 {
@@ -134,15 +134,15 @@ namespace Kendo.Mvc.UI
                     var listToolItems = listTool.Items.Select(item => new { text = item.Text, value = item.Value });
 
                     return new Dictionary<string, object>() {
-                        { "name", listTool.Name}, 
+                        { "name", listTool.Name},
                         { "items", listToolItems }
-                    };                    
+                    };
                 }
                 else
                 {
                     return new Dictionary<string, object>() {
                         { "name", tool.Name }
-                    };                    
+                    };
                 }
             });
 
@@ -189,9 +189,9 @@ namespace Kendo.Mvc.UI
 
             writer.Write(Initializer.Initialize(Selector, "Editor", options));
 
-            base.WriteInitializationScript(writer);         
-        }        
-        
+            base.WriteInitializationScript(writer);
+        }
+
         protected override void WriteHtml(HtmlTextWriter writer)
         {
             new EditorHtmlBuilder(this)

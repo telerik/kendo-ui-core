@@ -67,5 +67,33 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public EditorEventBuilder KeyUp(string handler)
+        {
+            Handler("keyup", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder KeyUp(Func<object, object> handler)
+        {
+            Handler("keyup", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder KeyDown(string handler)
+        {
+            Handler("keydown", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder KeyDown(Func<object, object> handler)
+        {
+            Handler("keydown", handler);
+
+            return this;
+        }
     }
 }

@@ -234,6 +234,36 @@
                 ok(e.command instanceof kendo.ui.editor.FormatCommand);
             });
 
+            test("keydown in document body triggers keydown event", function() {
+                var e;
+
+                editor.bind("keydown", function() {
+                    e = arguments[0];
+                });
+
+                editor.value('foo');
+
+                $(editor.body).trigger({ type: "keydown", keyCode: 65 });
+
+                ok(e);
+                equal(e.keyCode, 65);
+            });
+
+            test("keyup in document body triggers keyup event", function() {
+                var e;
+
+                editor.bind("keyup", function() {
+                    e = arguments[0];
+                });
+
+                editor.value('foo');
+
+                $(editor.body).trigger({ type: "keyup", keyCode: 69 });
+
+                ok(e);
+                equal(e.keyCode, 69);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

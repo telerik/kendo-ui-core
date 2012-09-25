@@ -106,10 +106,6 @@
                                     options.template = EditorUtils.buttonTemplate;
                                 }
                             }
-
-                            //if (options.exec && typeof(options.exec) == "string") {
-                            //    options.exec = $.parseJSON('{"exec":' + '"' + options.exec + '"}').exec;
-                            //}
                         }
                     } else if (editor.tools[currentTool]) {
                         editorTools[currentTool] = editor.tools[currentTool];
@@ -640,7 +636,9 @@
             "change",
             "execute",
             "error",
-            "paste"
+            "paste",
+            "keydown",
+            "keyup"
         ],
 
         options: {
