@@ -82,6 +82,23 @@
             ok(!ul.children(":first").children(".k-link").hasClass("k-state-focused"));
         });
 
+        test("PanelBar misses next item if disabled", function() {
+            ul.kendoPanelBar();
+            addItems(3);
+
+            var panelbar = ul.data("kendoPanelBar");
+            panelbar.enable(ul.children().eq(1), false);
+
+            ul.focus();
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            ok(ul.children(":last").children(".k-link").hasClass("k-state-focused"));
+        });
+
         test("PanelBar selects first item of group", function() {
             ul.kendoPanelBar();
             addItems(2);
@@ -220,6 +237,24 @@
                  .children(".k-group").children(":last")
                  .children("span.k-link")
                  .hasClass("k-state-focused"));
+        });
+
+        test("PanelBar misses prev item if disabled", function() {
+            ul.kendoPanelBar();
+            addItems(3);
+
+            var panelbar = ul.data("kendoPanelBar");
+            panelbar.enable(ul.children().eq(1), false);
+
+            ul.focus();
+            panelbar._current(ul.children(":last"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.UP
+            });
+
+            ok(ul.children(":first").children(".k-link").hasClass("k-state-focused"));
         });
     </script>
 

@@ -518,10 +518,12 @@
         },
 
         _first: function() {
+            //do not get item which is disabled
             return this.element.find("li:has(span.k-link):first");
         },
 
         _last: function() {
+            //do not get item which is disabled
             return this.element.find("li:has(span.k-link):last");
         },
 
@@ -580,6 +582,10 @@
                 return this._first();
             }
 
+            if (next.hasClass("k-state-disabled")) {
+                next = this._nextItem(next);
+            }
+
             return next;
         },
 
@@ -605,6 +611,10 @@
                         prev = result;
                     }
                 }
+            }
+
+            if (prev.hasClass("k-state-disabled")) {
+                prev = this._prevItem(prev);
             }
 
             return prev;
