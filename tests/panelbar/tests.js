@@ -30,5 +30,9 @@ tests.push(
     {
         page: "panelbar/lint.html",
         title: "panelbar lint"
+    },
+    {
+        page: "panelbar/navigation.html",
+        title: "panelbar navigation"
     }
 );
