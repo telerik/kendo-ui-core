@@ -600,10 +600,15 @@
                 .add(that.wrapper)
                 .add(that.table)
                 .add(that.thead)
-                .add(that.content)
-                .add(that.content.find(">.k-virtual-scrollable-wrap"))
-                .add(that.wrapper.find(">.k-grid-toolbar"))
-                .off(NS);
+                .add(that.wrapper.find(">.k-grid-toolbar"));
+
+            if (that.content) {
+                that.element
+                    .add(that.content)
+                    .add(that.content.find(">.k-virtual-scrollable-wrap"));
+            }
+
+            that.element.off(NS);
 
             kendo.destroy(that.wrapper);
         },
