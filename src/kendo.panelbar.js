@@ -36,9 +36,7 @@
         clickableItems = ITEM + ":not(.k-state-disabled) > .k-link",
         disabledItems = ITEM + ".k-state-disabled > .k-link",
         selectableItems = "> li > .k-state-selected, .k-panel > li > .k-state-selected",
-        //fix this
         highlightableItems = "> .k-state-highlighted, .k-panel > .k-state-highlighted",
-        focusedItems = "li > .k-state-focused",
         defaultState = "k-state-default",
         VISIBLE = ":visible",
         EMPTY = ":empty",
@@ -206,14 +204,6 @@
         items.filter(".k-last:not(:last-child)").removeClass(LAST);
         items.filter(":first-child").addClass(FIRST);
         items.filter(":last-child").addClass(LAST);
-    }
-
-    function updateSelected (element, link) {
-        element.find(selectableItems).removeClass(SELECTEDCLASS.substr(1));
-        element.find(highlightableItems).removeClass(HIGHLIGHTEDCLASS.substr(1));
-
-        link.addClass(SELECTEDCLASS.substr(1));
-        link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
     }
 
     var PanelBar = Widget.extend({
@@ -388,7 +378,7 @@
                     return that;
                 }
 
-                updateSelected(that.element, link);
+                that._updateSelected(link);
             });
 
             return that;
@@ -603,8 +593,8 @@
                 return this._last();
             }
 
-            var prev = result = item.prev(),
-                group;
+            var prev = item.prev(),
+                result, group;
 
             if (!prev[0]) {
                 group = item.parent(".k-group");
@@ -614,6 +604,7 @@
                     prev = this._last();
                 }
             } else {
+                result = prev;
                 while(result[0]) {
                     result = result.children(".k-group:visible").children("li:last");
                     if (result[0]) {
@@ -728,7 +719,7 @@
             var link = target.closest("." + LINK),
                 item = link.closest(ITEM);
 
-            updateSelected(element, link);
+            that._updateSelected(link);
 
             var contents = item.find(GROUPS).add(item.find(CONTENTS)),
                 href = link.attr(HREF),
@@ -897,6 +888,17 @@
             var that = this;
 
             return that.trigger(eventName, { item: element[0] });
+        },
+
+        _updateSelected: function(link) {
+            var element = this.element;
+
+            element.find(selectableItems).removeClass(SELECTEDCLASS.substr(1));
+            element.find(highlightableItems).removeClass(HIGHLIGHTEDCLASS.substr(1));
+
+            link.addClass(SELECTEDCLASS.substr(1));
+            link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
+            this._current(link.parent(ITEM));
         }
     });
 

@@ -297,6 +297,22 @@
 
             ok(!ul.children(":first").children(".k-group").is(":visible"));
         });
+
+        test("PanelBar makes clicked element focused", function() {
+            ul.kendoPanelBar();
+            addItems(3);
+
+            var panelbar = ul.data("kendoPanelBar"),
+                item = ul.children().eq(1);
+
+            ul.focus();
+            panelbar._click({
+                currentTarget: item.find(".k-link"),
+                preventDefault: function() {}
+            });
+
+            equal(panelbar._focused[0], item[0]);
+        });
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
