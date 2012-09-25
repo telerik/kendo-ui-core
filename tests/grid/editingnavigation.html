@@ -59,6 +59,13 @@
                 return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
             }
 
+            function focusCell(grid, selector) {
+                selector = selector || "tr:first>td:first";
+                grid.current(grid.table.focus().find(selector));
+
+                return grid;
+            }
+
             module("grid editing navigation", {
                 setup: function() {
                     table = document.createElement("table");
@@ -74,7 +81,7 @@
             test("pressing enter key edit the cell", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER);
 
                 ok(table.find("tr>td:first").hasClass("k-edit-cell"));
             });
@@ -82,7 +89,7 @@
             test("pressing enter key on command column does not edit the cell", function() {
                 var grid = setup({ columns: [{ command: "destroy" }, "id"]} );
 
-                grid.wrapper.focus().press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER);
 
                 ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
                 ok(table.find("tr>td:first").hasClass("k-state-focused"));
@@ -91,7 +98,7 @@
             test("pressing enter key on edited cell exits edit mode", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER).press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER).press(kendo.keys.ENTER);
 
                 ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
             });
@@ -99,7 +106,7 @@
             test("pressing enter key on edited cell restores current", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER).press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER).press(kendo.keys.ENTER);
 
                 ok(table.find("tr>td:first")[0] === grid.current()[0]);
                 ok(table.find("tr>td:first").hasClass("k-state-focused"));
@@ -108,7 +115,7 @@
             test("pressing enter key on edited cell does not exits edit mode if validation fails", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER);
                 table.find("tr>td>input:first").val("").press(kendo.keys.ENTER);
 
                 ok(table.find("tr>td:first").hasClass("k-edit-cell"));
@@ -118,7 +125,7 @@
             test("pressing navigation key action is skipped if cell is edited", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER);
                 table.find("tr>td>input:first").press(kendo.keys.RIGHT);
 
                 ok(table.find("tr>td:first")[0] === grid.current()[0]);
@@ -127,7 +134,7 @@
             test("pressing enter on cell when another is edited", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER);
                 grid.current(table.find("tr>td").eq(1));
                 table.find("tr>td").eq(1).press(kendo.keys.ENTER);
 
@@ -139,7 +146,7 @@
             test("pressing enter on cell when another is edited and validation fails", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER);
                 table.find("tr>td>input:first").val("");
                 grid.current(table.find("tr>td").eq(1));
                 table.find("tr>td").eq(1).press(kendo.keys.ENTER);
@@ -152,7 +159,7 @@
             test("pressing space key inside grid editor does not change selection", function() {
                 var grid = setup({ selectable: "cell" });
 
-                grid.wrapper.focus().press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER);
                 table.find("tr>td>input:first").press(kendo.keys.SPACEBAR);
 
                 ok(!grid.current().hasClass("k-state-selected"));
@@ -161,7 +168,7 @@
             test("pressing tab key edit next cell", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.TAB);
+                focusCell(grid).table.press(kendo.keys.TAB);
 
                 ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
             });
@@ -169,7 +176,7 @@
             test("pressing tab key on edited cell exits edit mode", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER).press(kendo.keys.TAB);
+                focusCell(grid).table.press(kendo.keys.ENTER).press(kendo.keys.TAB);
 
                 ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
                 ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
@@ -178,7 +185,7 @@
             test("pressing tab key on edited cell does not exits edit mode if validation fails", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER);
                 table.find("tr>td>input:first").val("").press(kendo.keys.TAB);
 
                 ok(table.find("tr>td:first").hasClass("k-edit-cell"));
@@ -216,7 +223,7 @@
             test("pressing escape key on edited cell exits edit mode", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.ENTER).press(kendo.keys.ESC);
+                focusCell(grid).table.press(kendo.keys.ENTER).press(kendo.keys.ESC);
 
                 ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
                 ok(table.find("tr>td:first").hasClass("k-state-focused"));
@@ -225,7 +232,7 @@
             test("pressing enter key edit the row in inline mode", function() {
                 var grid = setup({ editable: "inline" });
 
-                grid.wrapper.focus().press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER);
 
                 ok(table.find("tr:first").hasClass("k-grid-edit-row"));
                 equal(table.find("tr:first").data("role"), "editable");
@@ -234,7 +241,7 @@
             test("pressing enter key on edited item closes edit form in inline mode", function() {
                 var grid = setup({ editable: "inline" });
 
-                grid.wrapper.focus().press(kendo.keys.ENTER).press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.ENTER).press(kendo.keys.ENTER);
 
                 ok(!table.find("tr:first").hasClass("k-grid-edit-row"));
             });
@@ -242,7 +249,7 @@
             test("pressing enter key on edited cell restores current in inline mode", function() {
                 var grid = setup({ editable: "inline" });
 
-                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.ENTER).press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.DOWN).press(kendo.keys.ENTER).press(kendo.keys.ENTER);
 
                 ok(table.find("tr:eq(1)>td:first")[0] === grid.current()[0]);
                 ok(table.find("tr:eq(1)>td:first").hasClass("k-state-focused"));
@@ -251,7 +258,7 @@
             test("pressing enter key on edited row does not exits edit mode if validation fails in inline mode", function() {
                 var grid = setup({ editable: "inline" });
 
-                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.DOWN).press(kendo.keys.ENTER);
                 table.find("tr>td>input:first").val("").press(kendo.keys.ENTER);
 
                 ok(table.find("tr:eq(1)").hasClass("k-grid-edit-row"));
@@ -262,7 +269,7 @@
             test("pressing enter on row when another item is edited and validation fails in inline mode", function() {
                 var grid = setup({ editable: "inline" });
 
-                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.ENTER);
+                focusCell(grid).table.press(kendo.keys.DOWN).press(kendo.keys.ENTER);
                 table.find("tr>td>input:first").val("");
                 grid.current(table.find("tr>td"));
                 grid.current().press(kendo.keys.ENTER);
@@ -275,7 +282,7 @@
             test("pressing escape key on edited row exits edit mode when in inline", function() {
                 var grid = setup({ editable: "inline" });
 
-                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.ENTER).press(kendo.keys.ESC);
+                focusCell(grid).table.press(kendo.keys.DOWN).press(kendo.keys.ENTER).press(kendo.keys.ESC);
 
                 ok(!table.find("tr:eq(1)").hasClass("k-grid-edit-row"));
                 ok(table.find("tr:eq(1)>td:first").hasClass("k-state-focused"));

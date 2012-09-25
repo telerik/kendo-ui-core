@@ -18,11 +18,11 @@
         math = Math,
         REQUESTSTART = "requestStart",
         ERROR = "error",
-        ROW_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer):visible",
+        //ROW_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer):visible",
         DATA_CELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
         SELECTION_CELL_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer) > td:not(.k-group-cell):not(.k-hierarchy-cell)",
-        CELL_SELECTOR =  ROW_SELECTOR + ">td" + DATA_CELL,
-        FIRST_CELL_SELECTOR = ROW_SELECTOR + ":first" + ">td" + DATA_CELL + ":first",
+        //CELL_SELECTOR =  ROW_SELECTOR + ">td" + DATA_CELL,
+        //FIRST_CELL_SELECTOR = ROW_SELECTOR + ":first" + ">td" + DATA_CELL + ":first",
         NS = ".kendoGrid",
         EDIT = "edit",
         SAVE = "save",
@@ -36,7 +36,7 @@
         DETAILEXPAND = "detailExpand",
         DETAILCOLLAPSE = "detailCollapse",
         FOCUSED = "k-state-focused",
-        FOCUSABLE = "k-focusable",
+        //FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
         COLUMNRESIZE = "columnResize",
         COLUMNREORDER = "columnReorder",
@@ -544,7 +544,7 @@
             scrollable: true,
             sortable: false,
             selectable: false,
-            navigatable: false,
+            navigatable: true,
             pageable: false,
             editable: false,
             groupable: false,
@@ -1645,128 +1645,207 @@
         },
 
         _navigatable: function() {
+            var NAVROW = "tr:visible",
+                NAVCELL = ":not(.k-group-cell,.k-hierarchy-cell):visible",
+                FIRSTNAVITEM = NAVROW + ":first>" + NAVCELL + ":first";
+
             var that = this,
-                wrapper = that.wrapper,
-                table = that.table.addClass(FOCUSABLE),
                 currentProxy = proxy(that.current, that),
-                selector = "." + FOCUSABLE + " " + CELL_SELECTOR,
-                browser = kendo.support.browser,
+                table = that.table,
+                dataTable = table,
                 clickCallback = function(e) {
-                    var currentTarget = $(e.currentTarget);
-                    if (currentTarget.closest("tbody")[0] !== that.tbody[0]) {
+                    var currentTarget = $(e.currentTarget),
+                        currentTable = currentTarget.closest("table")[0];
+
+                    if (currentTable !== that.table[0] && currentTable !== that.thead.parent()[0]) {
                         return;
                     }
 
                     currentProxy(currentTarget);
-                    if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
-                        setTimeout(function() { wrapper.focus(); } );
+
+                    //:focusable returns false -> this selector should be in :focusable?
+                    if (!$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
+                        setTimeout(function() { currentTarget.closest("table").focus(); } );
                     }
 
-                    e.stopPropagation();
+                    //required for hierarchy;
+                    //stopPropagation will prevent grouping and selection;
+                    //stopImmediatePropagation will prevent selection
+                    //e.stopImmediatePropagation();
+                    //e.stopPropagation();
                 };
 
-            if (that.options.navigatable) {
-                wrapper.on("focus" + NS, function() {
-                    var current = that._current;
-                    if(current && current.is(":visible")) {
-                        current.addClass(FOCUSED);
+            if (that.options.scrollable) {
+                dataTable = table.add(that.thead.parent());
+                that.thead.parent().on("keydown", function(e) {
+                    if (e.keyCode == keys.TAB) {
+                        that._current.removeClass("k-state-focused");
+                        that._current = null;
+                    }
+                }).find("a.k-link").attr("tabIndex", -1);
+            }
+
+            dataTable.attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
+            dataTable.on("focus" + NS, function(e) {
+                var current = currentProxy();
+                if (current && current.is(":visible")) {
+                    current.addClass(FOCUSED);
+                } else {
+                    currentProxy($(this).find(FIRSTNAVITEM));
+                }
+            })
+            .on("focusout" + NS, function(e) {
+                var current = currentProxy();
+                if (current) {
+                    current.removeClass(FOCUSED);
+                }
+            })
+            .on("mousedown" + NS, NAVROW + ">" + NAVCELL, clickCallback)
+            //.on("mousedown" + NS, CELL_SELECTOR, clickCallback)
+            .on("keydown" + NS, function(e) {
+                var key = e.keyCode,
+                    handled = false,
+                    canHandle = !e.isDefaultPrevented() && !$(e.target).is(":button,a,:input,a>.k-icon"),
+                    pageable = that.options.pageable,
+                    dataSource = that.dataSource,
+                    isInCell = that._editMode() == "incell",
+                    currentIndex,
+                    row,
+                    index,
+                    shiftKey = e.shiftKey,
+                    browser = kendo.support.browser,
+                    current = currentProxy();
+
+                if (current && current.is("th")) {
+                    canHandle = true;
+                }
+
+                if (canHandle && key == keys.UP) {
+                    if (current) {
+                        row = current.parent().prevAll(NAVROW).first();
+                        if (!row[0]) {
+                            row = that.thead.parent().focus().find(NAVROW).first();
+                        }
+
+                        index = current.index();
+                        current = row.children().eq(index);
+                        if (!current[0] || !current.is(NAVCELL)) {
+                            current = row.children(NAVCELL).first();
+                        }
                     } else {
-                        currentProxy(that.table.find(FIRST_CELL_SELECTOR));
+                        current = table.find(FIRSTNAVITEM);
                     }
-                })
-                .on("focusout" + NS, function(e) {
-                    if (that._current) {
-                        that._current.removeClass(FOCUSED);
+
+                    handled = true;
+                    currentProxy(current);
+                } else if (canHandle && key == keys.DOWN) {
+                    if (current) {
+                         row = current.parent().nextAll(NAVROW).first();
+                        if (!row[0] && current.is("th")) {
+                            row = that.tbody.parent().focus().end().find(NAVROW).first();
+                        }
+                        index = current.index();
+                        current = row.children().eq(index);
+                        if (!current[0] || !current.is(NAVCELL)) {
+                            current = row.children(NAVCELL).first();
+                        }
+                    } else {
+                        //on page the current will not exist
+                        current = table.find(FIRSTNAVITEM);
                     }
-                    e.stopPropagation();
-                })
-                .on("keydown" + NS, function(e) {
-                    var key = e.keyCode,
-                        current = that.current(),
-                        shiftKey = e.shiftKey,
-                        dataSource = that.dataSource,
-                        pageable = that.options.pageable,
-                        canHandle = !$(e.target).is(":button,a,:input,a>.t-icon"),
-                        isInCell = that._editMode() == "incell",
-                        currentIndex,
-                        cell,
-                        handled = false;
 
-                    if (canHandle && keys.UP === key) {
-                        currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).first().children()
-                            .eq(current.index() >= 0 ? current.index() : 0).last() : table.find(FIRST_CELL_SELECTOR));
+                    handled = true;
+                    currentProxy(current);
+                } else if (canHandle && key == keys.LEFT) {
+                    currentProxy(current ? current.prevAll(DATA_CELL + ":first") : table.find(FIRSTNAVITEM));
+                    handled = true;
+                } else if (canHandle && key == keys.RIGHT) {
+                    if (current) {
+                        if (current.next()[0]) {
+                            current = current.next();
+                        }
+                    } else {
+                        current = table.find(FIRSTNAVITEM);
+                    }
 
+                    handled = true;
+                    currentProxy(current);
+                } else if (key == keys.ENTER || keys.F2 == key) {
+                    current = current ? current : table.find(FIRSTNAVITEM);
+                    if (current.is("th")) {
+                        current.find(".k-link").click();
                         handled = true;
-                    } else if (canHandle && keys.DOWN === key) {
-                        currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children()
-                            .eq(current.index() >= 0 ? current.index() : 0).last() : table.find(FIRST_CELL_SELECTOR));
-
-                        handled = true;
-                    } else if (canHandle && keys.LEFT === key) {
-                        currentProxy(current ? current.prevAll(DATA_CELL + ":first") : table.find(FIRST_CELL_SELECTOR));
-                        handled = true;
-                    } else if (canHandle && keys.RIGHT === key) {
-                        currentProxy(current ? current.nextAll(":visible:first") : table.find(FIRST_CELL_SELECTOR));
-                        handled = true;
-                    } else if (canHandle && pageable && keys.PAGEDOWN == key) {
-                        that._current = null;
-                        dataSource.page(dataSource.page() + 1);
-                        handled = true;
-                    } else if (canHandle && pageable && keys.PAGEUP == key) {
-                        that._current = null;
-                        dataSource.page(dataSource.page() - 1);
+                    } else if (current.parent().is(".k-master-row,.k-grouping-row")) {
+                        current.parent().find(".k-icon:first").click();
                         handled = true;
                     } else if (that.options.editable) {
-                        current = current ? current : table.find(FIRST_CELL_SELECTOR);
-                        if (keys.ENTER == key || keys.F2 == key) {
-                            that._handleEditing(current);
+                        that._handleEditing(current);
+                        handled = true;
+                    }
+                } else if (canHandle && pageable && keys.PAGEDOWN == key) {
+                    //page after page
+                    if (that._current) {
+                        that._current.removeClass("k-state-focused");
+                        that._current = null;
+                    }
+                    dataSource.page(dataSource.page() + 1);
+                    handled = true;
+                } else if (canHandle && pageable && keys.PAGEUP == key) {
+                    //page after page
+                    if (that._current) {
+                        that._current.removeClass("k-state-focused");
+                        that._current = null;
+                    }
+                    dataSource.page(dataSource.page() - 1);
+                    handled = true;
+                } else if (that.options.editable) {
+                    if (keys.ESC == key && that._editContainer) {
+                        if (that._editContainer.has(current[0]) || current[0] === that._editContainer[0]) {
+                            if (isInCell) {
+                                that.closeCell();
+                            } else {
+                                currentIndex = that.items().index(current.parent());
+                                document.activeElement.blur();
+                                that.cancelRow();
+                                if (currentIndex >= 0) {
+                                    that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                                }
+                            }
+
+                            if (browser.msie && parseInt(browser.version, 10) < 9) {
+                                document.body.focus();
+                            }
+                            table.focus();
                             handled = true;
-                        } else if (keys.TAB == key && isInCell) {
-                            cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
-                            if (!cell.length) {
-                                cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row,.k-detail-row):visible")
-                                    .children(DATA_CELL + (shiftKey ? ":last" : ":first"));
-                            }
+                        }
+                    } else if (keys.TAB == key && isInCell && current) {
+                        var cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
+                        if (!cell.length) {
+                            cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row,.k-detail-row):visible")
+                            .children(DATA_CELL + (shiftKey ? ":last" : ":first"));
+                        }
 
-                            if (cell.length) {
-                                that._handleEditing(current, cell);
-                                handled = true;
-                            }
-                        } else if (keys.ESC == key && that._editContainer) {
-                            if (that._editContainer.has(current[0]) || current[0] === that._editContainer[0]) {
-                                if (isInCell) {
-                                    that.closeCell();
-                                } else {
-                                    currentIndex = that.items().index(current.parent());
-                                    document.activeElement.blur();
-                                    that.cancelRow();
-                                    if (currentIndex >= 0) {
-                                        that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
-                                    }
-                                }
-
-                                if (browser.msie && parseInt(browser.version, 10) < 9) {
-                                    document.body.focus();
-                                }
-                                wrapper.focus();
-                                handled = true;
-                            }
+                        if (cell.length) {
+                            that._handleEditing(current, cell);
+                            handled = true;
                         }
                     }
+                }
 
-                    if(handled) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                })
-                .on("mousedown" + NS, selector, clickCallback); }
+                if (handled) {
+                    //prevent browser scrolling
+                    e.preventDefault();
+                    //required in hierarchy
+                    e.stopPropagation();
+                }
+            });
         },
 
         _handleEditing: function(current, next) {
             var that = this,
                 mode = that._editMode(),
                 editContainer = that._editContainer,
-                idx,
+                //idx,
                 isEdited;
 
             if (mode == "incell") {
@@ -1784,22 +1863,25 @@
                     if (mode == "incell") {
                         that.closeCell();
                     } else {
+                        /*
                         if (current.parent()[0] === editContainer[0]) {
                             idx = that.items().index(current.parent());
                         } else {
                             idx = that.items().index(editContainer);
                         }
+                        */
                         that.saveRow();
-                        that.current(that.items().eq(idx).children().filter(DATA_CELL).first());
+                        //that.current(that.items().eq(idx).children().filter(":not(.k-group-cell):visible").first());
                         isEdited = true;
                     }
                 } else {
                     if (mode == "incell") {
                         that.current(editContainer);
                     } else {
+                        //TODO DATA_CELL should be NAVCELL
                         that.current(editContainer.children().filter(DATA_CELL).first());
                     }
-                    editContainer.find(":input:visible:first").focus();
+                    editContainer.find(":focusable:first").focus();
                     return;
                 }
             }
@@ -1808,7 +1890,7 @@
                 that.current(next);
             }
 
-            that.wrapper.focus();
+            that.table.focus();
             if ((!isEdited && !next) || next) {
                 if (mode == "incell") {
                     that.editCell(that.current());
@@ -1828,10 +1910,11 @@
                wrapper = wrapper.wrap("<div/>").parent();
             }
 
-            that.wrapper = wrapper.addClass("k-grid k-widget")
+            that.wrapper = wrapper.addClass("k-grid k-widget");/*
                                   .attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
 
             table.removeAttr(TABINDEX);
+            */
 
             if (height) {
                 that.wrapper.css(HEIGHT, height);
@@ -3093,7 +3176,7 @@
                 return;
             }
 
-            if (current && current.hasClass("k-state-focused")) {
+            if (current && !current.is("th")/*&& current.hasClass("k-state-focused")*/) {
                 currentIndex = that.items().index(current.parent());
             }
 

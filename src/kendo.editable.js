@@ -264,7 +264,7 @@
                 errorTemplate: that.options.errorTemplate || undefined,
                 rules: rules }).data("kendoValidator");
 
-            container.find(":input:visible:first").focus();
+            container.find(":focusable:first").focus();
         }
    });
 
