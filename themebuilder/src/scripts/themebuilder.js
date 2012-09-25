@@ -260,6 +260,15 @@
         JsonConstants = kendo.Observable.extend({
             init: function(constants) {
                 this.constants = constants || {};
+            },
+            infer: function(targetDocument) {
+                var $ = targetDocument.defaultView.$,
+                    chart = $("[data-role=chart]", targetDocument).data("kendoChart"),
+                    constants = this.constants, constant;
+
+                for (constant in constants) {
+                    constants[constant].value = kendo.getter(constant, true)(chart.options);
+                }
             }
         }),
 
@@ -279,6 +288,10 @@
 
                 if (constants) {
                     constants.infer(that.targetDocument);
+                }
+
+                if (that.datavizConstants) {
+                    that.datavizConstants.infer(that.targetDocument);
                 }
 
                 that.render();
@@ -456,7 +469,6 @@
                 } else {
                     // DataViz property changed
                     var options = safeSetter(e.name)({}, e.value);
-                    console.log(options);
                     that.updateDataVizTheme(options);
                 }
             },
@@ -597,7 +609,7 @@
                                     map(that.datavizConstantsHierarchy || {}, function(section, title) {
                                         return propertyGroupTemplate({
                                             title: title,
-                                            constants: that.datavizConstants || {},
+                                            constants: that.datavizConstants.constants || {},
                                             section: section,
                                             editors: propertyEditors,
                                             processors: processors
@@ -640,6 +652,7 @@
 
     extend(kendo, {
         LessConstants: LessConstants,
+        JsonConstants: JsonConstants,
         ThemeBuilder: ThemeBuilder
     });
 })(jQuery, window.kendo);

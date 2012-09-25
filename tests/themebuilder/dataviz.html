@@ -105,6 +105,47 @@
                 equal(options.foo.bar.baz, "qux");
             });
 
+            var chart, constants;
+
+            module("JsonConstants", {
+                setup: function() {
+                    chart = $("<div />").appendTo("body").kendoChart({
+                        title: {
+                            color: "#b4d455"
+                        },
+                        tooltip: {
+                            background: "#f1f1f1"
+                        }
+                    });
+                },
+                teardown: function() {
+                    chart.remove();
+                }
+            });
+
+            test("infer infers basic constant", function() {
+                constants = new kendo.JsonConstants({
+                    "title.color": {
+                        property: "color"
+                    }
+                });
+
+                constants.infer(document);
+
+                equal(constants.constants["title.color"].value, "#b4d455");
+            });
+
+            test("infer infers multiple constants", function() {
+                constants = new kendo.JsonConstants({
+                    "title.color": { property: "color" },
+                    "tooltip.background": { property: "color" }
+                });
+
+                constants.infer(document);
+
+                equal(constants.constants["tooltip.background"].value, "#f1f1f1");
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

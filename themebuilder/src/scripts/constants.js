@@ -248,7 +248,7 @@
     window.themeBuilder = new kendo.ThemeBuilder({
         template: lessTemplate,
         webConstants: new kendo.LessConstants(webConstants),
-        datavizConstants: datavizConstants,
+        datavizConstants: new kendo.JsonConstants(datavizConstants),
         webConstantsHierarchy: webConstantsHierarchy,
         datavizConstantsHierarchy: datavizConstantsHierarchy
     });
