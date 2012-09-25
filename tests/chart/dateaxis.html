@@ -109,20 +109,20 @@
                     createDateCategoryAxis();
                 })
 
-                test("Base unit step is applied", function() {
+                test("Base unit step is applied for explicit baseUnit", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01"), new Date("2012/02/07")
                         ],
+                        baseUnit: "days",
                         baseUnitStep: 3
                     });
 
-                    console.log(categories)
                     same(categories, [
                         new Date("2012/02/01"), new Date("2012/02/04"),
                         new Date("2012/02/07")
                     ]);
-                });;
+                });
 
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Grouping", {
@@ -270,6 +270,54 @@
                          ["10:00", "10:01", "10:02"]);
                 });
 
+                test("maxDateGroups constraint forces selection of base unit step", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:10:00")
+                        ],
+                        maxDateGroups: 6
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("maxDateGroups constraint forces selection of next base unit (hours)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:50:00")
+                        ],
+                        autoBaseUnitSteps: { minutes: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "hours");
+                });
+
+                test("maxDateGroups keeps user set base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:50:00")
+                        ],
+                        autoBaseUnitSteps: { minutes: [1] },
+                        baseUnit: "minutes",
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "hours");
+                });
+
+                test("maxDateGroups constraint has lower priority than base unit step", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:10:00")
+                        ],
+                        maxDateGroups: 6,
+                        baseUnitStep: 1
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 1);
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Base unit / Hours");
 
@@ -281,6 +329,29 @@
                     });
 
                     equals(dateAxis.options.baseUnit, "hours");
+                });
+
+                test("maxDateGroups constraint forces selection of base unit step", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 10:00:00"), new Date("2012/02/05 21:00:00")
+                        ],
+                        maxDateGroups: 10
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("maxDateGroups constraint forces selection of next base unit (days)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 20:00:00")
+                        ],
+                        autoBaseUnitSteps: { hours: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
                 });
 
                 // ------------------------------------------------------------
@@ -417,6 +488,104 @@
                          ["2012", "2012", "2012"]);
                 });
 
+                test("maxDateGroups constraint forces selection of base unit step", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 00:00:00")
+                        ],
+                        maxDateGroups: 3
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("maxDateGroups constraint forces selection of next base unit (weeks)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/20 00:00:00")
+                        ],
+                        autoBaseUnitSteps: { days: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "weeks");
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Weeks");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/8")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "weeks");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/15")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1", "1/8", "1/15"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/15")
+                        ],
+                        labels: {
+                            dateFormats: {
+                                weeks: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1/12", "1/8/12", "1/15/12"]);
+                });
+
+                test("week start day can be customized", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/15")
+                        ],
+                        weekStartDay: kendo.days.Monday
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1", "1/2", "1/9", "1/16"]);
+                });
+
+                test("maxDateGroups constraint forces selection of base unit step", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 00:00:00"), new Date("2012/03/03 00:00:00")
+                        ],
+                        maxDateGroups: 2
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("maxDateGroups constraint forces selection of next base unit (months)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 00:00:00"), new Date("2012/03/03 00:00:00")
+                        ],
+                        autoBaseUnitSteps: { weeks: [1] },
+                        maxDateGroups: 2
+                    });
+
+                    equals(dateAxis.options.baseUnit, "months");
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Base unit / Months");
 
@@ -477,56 +646,27 @@
                          ["1/1/12", "2/1/12"]);
                 });
 
-                // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Weeks");
-
-                test("Base unit is determined by series delta", function() {
+                test("maxDateGroups constraint forces selection of base unit step", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012/02/01"), new Date("2012/02/8")
-                        ]
-                    });
-
-                    equals(dateAxis.options.baseUnit, "weeks");
-                });
-
-                test("creates labels with default format", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/01/01"), new Date("2012/01/15")
-                        ]
-                    });
-
-                    same($.map(view.log.text, function(text) { return text.content }),
-                         ["1/1", "1/8", "1/15"]);
-                });
-
-                test("creates labels with custom date format", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/01/01"), new Date("2012/01/15")
+                            new Date("2012/02/01 00:00:00"), new Date("2012/06/01 00:00:00")
                         ],
-                        labels: {
-                            dateFormats: {
-                                weeks: "M/d/yy"
-                            }
-                        }
+                        maxDateGroups: 3
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
-                         ["1/1/12", "1/8/12", "1/15/12"]);
+                    equals(dateAxis.options.baseUnitStep, 2);
                 });
 
-                test("week start day can be customized", function() {
+                test("maxDateGroups constraint forces selection of next base unit (years)", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012/01/01"), new Date("2012/01/15")
+                            new Date("2012/02/01 00:00:00"), new Date("2012/12/01 00:00:00")
                         ],
-                        weekStartDay: kendo.days.Monday
+                        autoBaseUnitSteps: { months: [1] },
+                        maxDateGroups: 5
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
-                         ["1/1", "1/2", "1/9", "1/16"]);
+                    equals(dateAxis.options.baseUnit, "years");
                 });
 
                 // ------------------------------------------------------------
@@ -567,6 +707,17 @@
 
                     same($.map(view.log.text, function(text) { return text.content }),
                          ["1/1/12", "1/1/13"]);
+                });
+
+                test("maxDateGroups constraint forces selection of base unit step", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01 00:00:00"), new Date("2016/01/01 00:00:00")
+                        ],
+                        maxDateGroups: 3
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
                 });
 
             })();

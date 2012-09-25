@@ -1106,6 +1106,14 @@
             type: DATE,
             labels: {
                 dateFormats: DateLabelFormats
+            },
+            autoBaseUnitSteps: {
+                minutes: [1, 2, 5, 15, 30],
+                hours: [1, 2, 3, 6, 12],
+                days: [1, 2, 3],
+                weeks: [1, 2],
+                months: [1, 2, 3, 6],
+                years: [1, 2, 3, 5, 10, 25, 50]
             }
         },
 
@@ -1117,40 +1125,43 @@
                 diff,
                 minDiff = MAX_VALUE,
                 lastCat,
-                unit;
-
-            for (categoryIx = 0; categoryIx < count; categoryIx++) {
-                cat = toDate(categories[categoryIx]);
-
-                if (cat && lastCat) {
-                    diff = cat - lastCat;
-                    if (diff > 0) {
-                        minDiff = math.min(minDiff, diff);
-
-                        if (minDiff >= TIME_PER_YEAR) {
-                            unit = YEARS;
-                        } else if (minDiff >= TIME_PER_MONTH - TIME_PER_DAY * 3) {
-                            unit = MONTHS;
-                        } else if (minDiff >= TIME_PER_WEEK) {
-                            unit = WEEKS;
-                        } else if (minDiff >= TIME_PER_DAY) {
-                            unit = DAYS;
-                        } else if (minDiff >= TIME_PER_HOUR) {
-                            unit = HOURS;
-                        } else {
-                            unit = MINUTES;
-                        }
-                    }
-                }
-
-                lastCat = cat;
-            }
+                unit,
+                defaults = {};
 
             if (!options.baseUnit) {
+                for (categoryIx = 0; categoryIx < count; categoryIx++) {
+                    cat = toDate(categories[categoryIx]);
+
+                    if (cat && lastCat) {
+                        diff = cat - lastCat;
+                        if (diff > 0) {
+                            minDiff = math.min(minDiff, diff);
+
+                            if (minDiff >= TIME_PER_YEAR) {
+                                unit = YEARS;
+                            } else if (minDiff >= TIME_PER_MONTH - TIME_PER_DAY * 3) {
+                                unit = MONTHS;
+                            } else if (minDiff >= TIME_PER_WEEK) {
+                                unit = WEEKS;
+                            } else if (minDiff >= TIME_PER_DAY) {
+                                unit = DAYS;
+                            } else if (minDiff >= TIME_PER_HOUR) {
+                                unit = HOURS;
+                            } else {
+                                unit = MINUTES;
+                            }
+                        }
+                    }
+
+                    lastCat = cat;
+                }
+
+                defaults.baseUnit = unit || DAYS;
+
                 delete options.baseUnit;
             }
 
-            return deepExtend({ baseUnit: unit || DAYS }, options);
+            return deepExtend(defaults, options);
         },
 
         groupCategories: function(options) {
@@ -1171,6 +1182,39 @@
                 categoryIndicies,
                 categoryIx,
                 categoryDate;
+
+
+            var span = (end - start),
+                step = baseUnitStep,
+                totalUnits = span / TIME_PER_UNIT[baseUnit],
+                maxDateGroups = options.maxDateGroups || totalUnits,
+                autoBaseUnitSteps = deepExtend(axis.options.autoBaseUnitSteps, options.autoBaseUnitSteps);
+
+            if (!options.baseUnitStep) {
+                while (totalUnits > maxDateGroups) {
+                    var steps = steps || autoBaseUnitSteps[baseUnit];
+                    var step = steps.shift();
+
+                    if (step) {
+                        totalUnits = (span / TIME_PER_UNIT[baseUnit]) / step;
+                    } else {
+                        // TODO: Don't increment baseUnit if set explicitly
+                        baseUnit =  baseUnit === MINUTES ? HOURS :
+                                    baseUnit === HOURS ? DAYS :
+                                    baseUnit === DAYS ? WEEKS :
+                                    baseUnit === WEEKS ? MONTHS :
+                                    baseUnit === MONTHS ? YEARS : YEARS;
+                        steps = undefined;
+                        step = 1;
+                    }
+                }
+            }
+
+            options.baseUnitStep = baseUnitStep = step;
+            options.baseUnit = baseUnit;
+            start = floorDate(min || minCategory, baseUnit);
+            end = ceilDate((max || maxCategory) + 1, baseUnit);
+
 
             for (date = start; date < end; date = nextDate) {
                 groups.push(date);
