@@ -17,7 +17,7 @@
         )
       )
       .StyleSheets(css => css
-        .Add(Url.Content("~/Content/web/Editor/editorStyles.min.css"))
+        .Add(Url.Content("~/Content/web/Editor/editorStyles.css"))
       )
       .Value(() =>
            { %>

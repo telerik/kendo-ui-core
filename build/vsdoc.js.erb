@@ -1,0 +1,91 @@
+var kendo = {
+    ui: {},
+    mobile: { ui: {}},
+    dataviz: {ui: {}}
+};
+
+
+% classes.each do |the_class|
+
+% if the_class.real_class?
+<%= the_class.name %> = function() { };
+
+<%= the_class.name %>.prototype = {
+
+% bind = false
+% unbind = false
+
+% the_class.methods.each do |method|
+
+% bind = true if method.name == "bind"
+% unbind = true if method.name == "unbind"
+
+    <%= method.name %>: function(<%= method.parameters.map { |param| param.name }.join "," %>) {
+        /// <summary>
+        /// <%= method.description.strip.gsub(/\n/, "\n/// ")  %>
+        /// </summary>
+% method.parameters.each do |param|
+        /// <param name="<%= param.name %>" type="<%= param.type %>" <%= param.type === "Element" ? 'domElement="true"' : '' %><%= param.description.strip.gsub(/\n/, " ") %></param>
+% end
+% if method.returns
+    /// <returns type="<%= method.returns %>"><%= method.returns_description.strip %></returns>
+% end
+
+        },
+% end
+
+% if !bind
+    bind: function(event, callback) {
+        /// <summary>
+        /// Binds to a widget event.
+        /// </summary>
+        /// <param name="event" type="String">The event name</param>
+        /// <param name="callback" type="Function">The callback to be executed when the event is triggered.</param>
+    },
+% end
+
+% if !unbind
+    unbind: function(event, callback) {
+        /// <summary>
+        /// Unbinds a callback from a widget event.
+        /// </summary>
+        /// <param name="event" type="String">The event name</param>
+        /// <param name="callback" type="Function">The callback to be removed.</param>
+    }
+% else
+    self: null
+% end
+
+};
+
+$.fn.get<%= the_class.plugin.sub("kendo", "Kendo") %> = function() {
+    /// <summary>
+    /// Returns a reference to the <%= the_class.name %> widget, instantiated on the selector.
+    /// </summary>
+    /// <returns type="<%= the_class.name %>">The <%= the_class.name %> instance (if present).</returns>
+};
+
+$.fn.<%= the_class.plugin %> = function(options) {
+    /// <summary>
+    /// Instantiates a <%= the_class.name %> widget based the DOM elements that match the selector.
+
+% if the_class.configuration.length
+    /// &\#10;Accepts an object with the following configuration options:
+    /// &\#10;
+% the_class.configuration.each do |option|
+% next if option.name.include? "."
+    /// &\#10;<%= option.name %> — <%= option.type.gsub(/\*/, '') %> <%= option.default %>
+    /// &\#10;<%= option.description.strip.gsub(/\n/, "\n/// &\\#10;").gsub(/<(?:.|\n)*?>/, '') %>
+    /// &\#10;
+% end
+% end
+    /// </summary>
+    /// <param name="options" type="Object">
+    /// The widget configuration options
+    /// </param>
+};
+
+% else # namespace
+<%= the_class.name %> = {};
+% end
+% end
