@@ -560,6 +560,14 @@
                 that._current(that._prevItem(current));
                 e.preventDefault();
             }
+
+            if (key == keys.ENTER || key == keys.SPACE) {
+                if (current.children(".k-group:visible")[0]) {
+                    that.collapse(current);
+                } else {
+                    that.expand(current);
+                }
+            }
         },
 
         _nextItem: function(item) {

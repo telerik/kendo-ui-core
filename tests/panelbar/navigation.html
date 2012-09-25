@@ -256,6 +256,47 @@
 
             ok(ul.children(":first").children(".k-link").hasClass("k-state-focused"));
         });
+
+        test("PanelBar expands current focused item on Enter", function() {
+            ul.kendoPanelBar();
+            addItems(3);
+            addItems(2, ul.children(":first"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar._current(ul.children(":first"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.ENTER
+            });
+
+            ok(ul.children(":first").children(".k-group:visible")[0]);
+        });
+
+        test("PanelBar collapses expanded group", function() {
+            ul.kendoPanelBar();
+            addItems(3);
+            addItems(2, ul.children(":first"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar._current(ul.children(":first"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.ENTER
+            });
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.ENTER
+            });
+
+            ok(!ul.children(":first").children(".k-group").is(":visible"));
+        });
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
