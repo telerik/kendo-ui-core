@@ -178,10 +178,65 @@ bundle :name => 'cdn.commercial',
            'styles/telerik' => FileList['wrappers/mvc/legacy-themes/**/*']
        }
 
+WIN_JS_RESOURCES = WIN_MIN_JS + WIN_SRC_JS + WIN_SRC_CSS + WIN_MIN_CSS
+
 bundle :name => 'winjs.commercial',
        :contents => {
-            '.' => WIN_MIN_JS + WIN_SRC_JS + WIN_SRC_CSS + WIN_MIN_CSS
+            '.' => WIN_JS_RESOURCES
        }
+
+BUNDLES = [
+    'trial',
+    'complete.commercial',
+    'web.commercial',
+    'web.open-source',
+    'mobile.commercial',
+    'dataviz.commercial',
+    'aspnetmvc.commercial',
+    'aspnetmvc.hotfix.commercial',
+    'winjs.commercial',
+    'cdn.commercial'
+]
+
+namespace :build do
+    zip_bundles = []
+
+    BUNDLES.each do |bundle|
+        zip_filename = ('kendoui.' + bundle).sub(/\.[^\.]+$/, ".#{VERSION}\\0.zip")
+        zip_filename = "/kendo-builds/Stable/#{zip_filename}"
+
+        file_copy :to => zip_filename,
+                  :from => "dist/bundles/#{bundle}.zip"
+
+        zip_bundles.push(zip_filename)
+    end
+
+    zip_demos = '/kendo-builds/Stable/production.zip'
+
+    file_copy :to => zip_demos,
+              :from => "dist/demos/production.zip"
+
+    tree :to => '/kendo-builds/WinJS/Stable',
+         :from => FileList[WIN_JS_RESOURCES].pathmap('dist/bundles/winjs.commercial/%f'),
+         :root => 'dist/bundles/winjs.commercial/'
+
+    zip_bundles.push(zip_demos)
+
+    desc('Runs a build over the stable branch')
+    task :stable => [:bundles,
+        'demos:production',
+        'demos:staging',
+        'download_builder:staging',
+        zip_bundles,
+        '/kendo-builds/WinJS/Stable'].flatten do
+
+        sh 'rsync -avc dist/demos/staging/ /var/www/staging/'
+
+        sh 'find /kendo-builds/Stable/* -mtime +2 -exec rm {} \;'
+
+        sh 'rsync -avc dist/download-builder-staging/ /var/www/download-builder-staging/'
+    end
+end
 
 namespace :bundles do
     CLEAN.include('dist/bundles')
@@ -192,18 +247,7 @@ namespace :bundles do
         rm_rf 'dist/bundles'
     end
 
-    task :all => [
-        'trial',
-        'complete.commercial',
-        'web.commercial',
-        'web.open-source',
-        'mobile.commercial',
-        'dataviz.commercial',
-        'aspnetmvc.commercial',
-        'aspnetmvc.hotfix.commercial',
-        'winjs.commercial',
-        'cdn.commercial'
-    ]
+    task :all => BUNDLES
 end
 
 desc 'Build all bundles'
