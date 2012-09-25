@@ -347,7 +347,7 @@
                         min: 0,
                         max: 1,
                         step: .1,
-                        change: changeHandler
+                        spin: changeHandler
                     });
 
                 $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showWebSource, that));
@@ -531,7 +531,9 @@
                     var chartObject = win.$(this);
                     var chart = chartObject.data("kendoChart");
 
-                    chart.options = kendo.deepExtend(chart.options, theme);
+                    var options = kendo.deepExtend(chart._originalOptions, theme);
+
+                    chart.options = options;
 
                     chart.refresh();
                 });
