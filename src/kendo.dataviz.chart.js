@@ -51,6 +51,7 @@
     var ABOVE = "above",
         AREA = "area",
         AUTO = "auto",
+        FIT = "fit",
         AXIS_LABEL_CLICK = dataviz.AXIS_LABEL_CLICK,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.8,
@@ -1102,12 +1103,12 @@
 
             if (options.categories && options.categories.length > 0) {
                 baseUnit = (options.baseUnit || "").toLowerCase();
-                useDefault = baseUnit !== AUTO && !inArray(baseUnit, BASE_UNITS);
+                useDefault = baseUnit !== FIT && !inArray(baseUnit, BASE_UNITS);
                 if (useDefault) {
                     options.baseUnit = axis.defaultBaseUnit(options);
                 }
 
-                if (baseUnit === AUTO || options.baseUnitStep === AUTO) {
+                if (baseUnit === FIT || options.baseUnitStep === AUTO) {
                     axis.autoBaseUnit(options);
                 }
 
@@ -1174,7 +1175,7 @@
 
         range: function(options) {
             var categories = toDate(options.categories),
-                autoUnit = options.baseUnit === AUTO,
+                autoUnit = options.baseUnit === FIT,
                 baseUnit = autoUnit ? BASE_UNITS[0] : options.baseUnit,
                 min = toTime(options.min),
                 max = toTime(options.max),
@@ -1189,7 +1190,7 @@
         autoBaseUnit: function(options) {
             var axis = this,
                 range = axis.range(options),
-                autoUnit = options.baseUnit === AUTO,
+                autoUnit = options.baseUnit === FIT,
                 autoUnitIx = 0,
                 baseUnit = autoUnit ? BASE_UNITS[autoUnitIx++] : options.baseUnit,
                 span = (range.max - range.min),
