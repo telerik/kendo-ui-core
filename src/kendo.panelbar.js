@@ -16,6 +16,8 @@
         ERROR = "error",
         CLICK = "click",
         ITEM = ".k-item",
+        GROUP = ".k-group",
+        VISIBLEGROUP = GROUP + ":visible",
         IMAGE = "k-image",
         FIRST = "k-first",
         EXPAND = "expand",
@@ -31,10 +33,11 @@
         GROUPS = "> .k-panel",
         CONTENTS = "> .k-content",
         FOCUSEDCLASS = "k-state-focused",
+        DISABLEDCLASS = "k-state-disabled",
         SELECTEDCLASS = ".k-state-selected",
-        DISABLEDCLASS = ".k-state-disabled",
         HIGHLIGHTEDCLASS = ".k-state-highlighted",
-        clickableItems = ITEM + ":not(.k-state-disabled) > .k-link",
+        ACTIVEITEMSELECTOR = ITEM + ":not(.k-state-disabled)",
+        clickableItems = ACTIVEITEMSELECTOR + " > .k-link",
         disabledItems = ITEM + ".k-state-disabled > .k-link",
         selectableItems = "> li > .k-state-selected, .k-panel > li > .k-state-selected",
         highlightableItems = "> .k-state-highlighted, .k-panel > .k-state-highlighted",
@@ -185,7 +188,7 @@
     function updateArrow (items) {
         items = $(items);
 
-        items.children(".k-link").children(".k-icon").remove();
+        items.children(LINKSELECTOR).children(".k-icon").remove();
 
         items
             .filter(":has(.k-panel),:has(.k-content)")
@@ -365,27 +368,28 @@
             element = this.element.find(element);
             element
                 .toggleClass(defaultState, enable)
-                .toggleClass(DISABLEDCLASS.substr(1), !enable);
+                .toggleClass(DISABLEDCLASS, !enable);
         },
 
         select: function (element) {
             var that = this;
-            element = that.element.find(element);
 
             if (element === undefined) {
                 return that.element.find(selectableItems).parent();
             }
 
-            element.each(function (index) {
-                var item = $(this),
-                    link = item.children(LINKSELECTOR);
+            that.element
+                .find(element)
+                .each(function (index) {
+                    var item = $(this),
+                        link = item.children(LINKSELECTOR);
 
-                if (item.is(DISABLEDCLASS)) {
-                    return that;
-                }
+                    if (item.hasClass(DISABLEDCLASS)) {
+                        return that;
+                    }
 
-                that._updateSelected(link);
-            });
+                    that._updateSelected(link);
+                });
 
             return that;
         },
@@ -504,16 +508,15 @@
         },
 
         _first: function() {
-            //do not get item which is disabled
-            return this.element.children("li:has(span.k-link):first");
+            return this.element.children(ACTIVEITEMSELECTOR).first();
         },
 
         _last: function() {
-            var item = this.element.children("li:has(span.k-link):last"),
-                group = item.children(".k-group:visible");
+            var item = this.element.children(ACTIVEITEMSELECTOR).last(),
+                group = item.children(VISIBLEGROUP);
 
             if (group[0]) {
-                return group.children(".k-item:last");
+                return group.children(ACTIVEITEMSELECTOR).last();
             }
             return item;
         },
@@ -527,11 +530,11 @@
             }
 
             if (focused) {
-                focused.children(".k-link").removeClass(FOCUSEDCLASS);
+                focused.children(LINKSELECTOR).removeClass(FOCUSEDCLASS);
             }
 
             if (candidate) {
-                candidate.children(".k-link").addClass(FOCUSEDCLASS);
+                candidate.children(LINKSELECTOR).addClass(FOCUSEDCLASS);
             }
 
             that._focused = candidate;
@@ -563,22 +566,22 @@
                 return this._first();
             }
 
-            var group = item.children(".k-group"),
+            var group = item.children(VISIBLEGROUP),
                 next = item.next();
 
-            if (group.is(":visible")) { //or add expanded attr
-                next = group.children("li:first");
+            if (group[0]) {
+                next = group.children("." + FIRST);
             }
 
             if (!next[0]) {
-                next = item.parent(".k-group").parent("li.k-item").next();
+                next = item.parents(ITEM).next();
             }
 
             if (!next[0]) {
-                return this._first();
+                next = this._first();
             }
 
-            if (next.hasClass("k-state-disabled")) {
+            if (next.hasClass(DISABLEDCLASS)) {
                 next = this._nextItem(next);
             }
 
@@ -591,26 +594,24 @@
             }
 
             var prev = item.prev(),
-                result, group;
+                result;
 
             if (!prev[0]) {
-                group = item.parent(".k-group");
-                if (group[0]) {
-                    prev = group.parent("li.k-item");
-                } else {
+                prev = item.parents(ITEM);
+                if (!prev[0]) {
                     prev = this._last();
                 }
             } else {
                 result = prev;
-                while(result[0]) {
-                    result = result.children(".k-group:visible").children("li:last");
+                while (result[0]) {
+                    result = result.children(VISIBLEGROUP).children("." + LAST);
                     if (result[0]) {
                         prev = result;
                     }
                 }
             }
 
-            if (prev.hasClass("k-state-disabled")) {
+            if (prev.hasClass(DISABLEDCLASS)) {
                 prev = this._prevItem(prev);
             }
 
@@ -668,7 +669,7 @@
         _toggleHover: function(e) {
             var target = $(e.currentTarget);
 
-            if (!target.parents("li" + DISABLEDCLASS).length) {
+            if (!target.parents("li." + DISABLEDCLASS).length) {
                 target.toggleClass("k-state-hover", e.type == MOUSEENTER);
             }
         },
@@ -705,7 +706,7 @@
                 element = that.element,
                 prevent;
 
-            if (target.parents("li" + DISABLEDCLASS).length) {
+            if (target.parents("li." + DISABLEDCLASS).length) {
                 return;
             }
 
