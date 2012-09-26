@@ -345,8 +345,8 @@
                 resizingHandler._resizable._resize({ y: {location: initialSplitBarPosition + 5 } });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
 
-                equals(parseInt(panes[0].offsetHeight), initialPaneSizes[0] + 5);
-                equals(parseInt(panes[1].offsetHeight), initialPaneSizes[1] - 5);
+                close(parseInt(panes[0].offsetHeight), initialPaneSizes[0] + 5, 1);
+                close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] - 5, 1);
             });
 
             test("resizing.stop for middle panes", function() {
@@ -406,6 +406,24 @@
                 resizingHandler._resizable._stop({ keyCode: 27, currentTarget: splitBar });
 
                 ok(!triggered);
+            });
+
+            test("expanding an initially collapsed pane allows it to be resized", function() {
+                var splitter = $(getSplitterHtml(2))
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [
+                                { collapsed: true, collapsible: true, size: "50px" },
+                                { }
+                            ]
+                        }),
+                    splitBar = splitter.find(".k-splitbar"),
+                    panes = splitter.find(".k-pane");
+
+                splitter.data("kendoSplitter").expand(".k-pane:first");
+
+                var resizingHandler = splitter.data("kendoSplitter").resizing;
+                ok($.inArray(splitBar[0], resizingHandler._resizable.draggable.options.filter) == 0);
             });
 
             module("Nested splitters", {

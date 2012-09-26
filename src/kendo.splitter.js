@@ -389,6 +389,9 @@
             }
 
             this.trigger(RESIZE);
+
+            this.resizing.destroy();
+            this.resizing = new PaneResizing(this);
         },
 
         collapse: function(pane) {
