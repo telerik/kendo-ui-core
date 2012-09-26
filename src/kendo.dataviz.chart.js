@@ -50,6 +50,7 @@
     // Constants ==============================================================
     var ABOVE = "above",
         AREA = "area",
+        AUTO = "auto",
         AXIS_LABEL_CLICK = dataviz.AXIS_LABEL_CLICK,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.8,
@@ -122,9 +123,6 @@
             "hours": TIME_PER_HOUR,
             "minutes": TIME_PER_MINUTE
         },
-        BASE_UNITS = [
-            "auto", MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
-        ],
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
@@ -139,8 +137,12 @@
         YEARS = "years",
         ZERO = "zero";
 
-    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC],
-        XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE];
+    var CATEGORICAL_CHARTS =
+            [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC],
+        XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE],
+        BASE_UNITS = [
+            MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
+        ];
 
     var DateLabelFormats = {
         minutes: "HH:mm",
@@ -1088,7 +1090,8 @@
     var DateCategoryAxis = CategoryAxis.extend({
         init: function(options) {
             var axis = this,
-                baseUnit;
+                baseUnit,
+                useDefault;
 
             options = options || {};
 
@@ -1098,12 +1101,13 @@
             });
 
             if (options.categories && options.categories.length > 0) {
-                baseUnit = (options.baseUnit || "default").toLowerCase();
-                if (baseUnit === "default" || !inArray(baseUnit, BASE_UNITS)) {
+                baseUnit = (options.baseUnit || "").toLowerCase();
+                useDefault = baseUnit !== AUTO && !inArray(baseUnit, BASE_UNITS);
+                if (useDefault) {
                     options.baseUnit = axis.defaultBaseUnit(options);
                 }
 
-                if (baseUnit === "auto" || options.baseUnitStep === "auto") {
+                if (baseUnit === AUTO || options.baseUnitStep === AUTO) {
                     axis.autoBaseUnit(options);
                 }
 
@@ -1136,8 +1140,7 @@
                 diff,
                 minDiff = MAX_VALUE,
                 lastCat,
-                unit,
-                defaults = {};
+                unit;
 
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
                 cat = toDate(categories[categoryIx]);
@@ -1169,45 +1172,44 @@
             return unit || DAYS;
         },
 
-        autoBaseUnit: function(options) {
-            var axis = this,
-                categories = toDate(options.categories),
-                baseUnit = options.baseUnit,
-                auto = baseUnit === "auto",
+        range: function(options) {
+            var categories = toDate(options.categories),
+                autoUnit = options.baseUnit === AUTO,
+                baseUnit = autoUnit ? BASE_UNITS[0] : options.baseUnit,
                 min = toTime(options.min),
                 max = toTime(options.max),
                 minCategory = toTime(sparseArrayMin(categories)),
-                maxCategory = toTime(sparseArrayMax(categories)),
-                start = floorDate(min || minCategory, baseUnit),
-                end = ceilDate((max || maxCategory) + 1, baseUnit),
-                date,
-                nextDate,
-                groups = [],
-                categoryMap = [],
-                categoryIndicies,
-                categoryIx,
-                categoryDate;
+                maxCategory = toTime(sparseArrayMax(categories));
 
-            var span = (end - start),
-                baseUnit = auto ? MINUTES : baseUnit,
+            return { min: floorDate(min || minCategory, baseUnit),
+                     max: ceilDate((max || maxCategory) + 1, baseUnit)
+            };
+        },
+
+        autoBaseUnit: function(options) {
+            var axis = this,
+                range = axis.range(options),
+                autoUnit = options.baseUnit === AUTO,
+                autoUnitIx = 0,
+                baseUnit = autoUnit ? BASE_UNITS[autoUnitIx++] : options.baseUnit,
+                span = (range.max - range.min),
                 totalUnits = span / TIME_PER_UNIT[baseUnit],
                 maxDateGroups = options.maxDateGroups || totalUnits,
-                autoBaseUnitSteps = deepExtend({}, axis.options.autoBaseUnitSteps, options.autoBaseUnitSteps);
+                autoBaseUnitSteps = deepExtend(
+                    {}, axis.options.autoBaseUnitSteps, options.autoBaseUnitSteps
+                ),
+                unitSteps,
+                step;
 
             while (totalUnits > maxDateGroups) {
-                var steps = steps || autoBaseUnitSteps[baseUnit];
-                var step = steps.shift();
+                unitSteps = unitSteps || autoBaseUnitSteps[baseUnit].slice(0);
+                step = unitSteps.shift();
 
                 if (step) {
                     totalUnits = (span / TIME_PER_UNIT[baseUnit]) / step;
-                } else if (auto) {
-                    baseUnit =  baseUnit === MINUTES ? HOURS :
-                                baseUnit === HOURS ? DAYS :
-                                baseUnit === DAYS ? WEEKS :
-                                baseUnit === WEEKS ? MONTHS :
-                                baseUnit === MONTHS ? YEARS : YEARS;
-                    steps = undefined;
-                    step = 1;
+                } else if (autoUnit) {
+                    baseUnit = BASE_UNITS[autoUnitIx++] || last(BASE_UNITS);
+                    unitSteps = null;
                 } else {
                     break;
                 }
@@ -1222,12 +1224,7 @@
                 categories = toDate(options.categories),
                 baseUnit = options.baseUnit,
                 baseUnitStep = options.baseUnitStep || 1,
-                min = toTime(options.min),
-                max = toTime(options.max),
-                minCategory = toTime(sparseArrayMin(categories)),
-                maxCategory = toTime(sparseArrayMax(categories)),
-                start = floorDate(min || minCategory, baseUnit),
-                end = ceilDate((max || maxCategory) + 1, baseUnit),
+                range = axis.range(options),
                 date,
                 nextDate,
                 groups = [],
@@ -1236,7 +1233,7 @@
                 categoryIx,
                 categoryDate;
 
-            for (date = start; date < end; date = nextDate) {
+            for (date = range.min; date < range.max; date = nextDate) {
                 groups.push(date);
                 nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
 

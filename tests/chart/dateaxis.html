@@ -146,6 +146,22 @@
                     ]);
                 });
 
+                test("User set base unit step is disregarded when using automatic base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/07")
+                        ],
+                        baseUnit: "auto",
+                        baseUnitStep: 1,
+                        maxDateGroups: 3
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/01"), new Date("2012/02/04"),
+                        new Date("2012/02/07")
+                    ]);
+                });
+
                 test("maxDateGroups constraint does not alter default base unit", function() {
                     createDateCategoryAxis({
                         categories: [
