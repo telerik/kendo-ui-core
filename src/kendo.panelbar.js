@@ -29,7 +29,7 @@
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
-        ACTIVECLASS = ".k-state-active",
+        ACTIVECLASS = "k-state-active",
         GROUPS = "> .k-panel",
         CONTENTS = "> .k-content",
         FOCUSEDCLASS = "k-state-focused",
@@ -81,9 +81,9 @@
                     index = item.index;
 
                 if (item.enabled === false) {
-                    result += " k-state-disabled";
+                    result += " " + DISABLEDCLASS;
                 } else if (item.expanded === true) {
-                    result += " k-state-active";
+                    result += " " + ACTIVECLASS;
                 } else {
                     result += " k-state-default";
                 }
@@ -163,7 +163,7 @@
             .children("a")
             .filter(":focus")
             .parent()
-            .addClass(ACTIVECLASS.substr(1));
+            .addClass(ACTIVECLASS);
         item
             .find(">div")
             .addClass(CONTENT)
@@ -197,7 +197,7 @@
                 var item = $(this),
                     parent = item.parent();
 
-                item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS.substr(1)) ? "k-i-arrow-n k-panelbar-collapse" : "k-i-arrow-s k-panelbar-expand") + "'/>");
+                item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? "k-i-arrow-n k-panelbar-collapse" : "k-i-arrow-s k-panelbar-expand") + "'/>");
             });
     }
 
@@ -242,8 +242,8 @@
                 .on(CLICK + NS, disabledItems, false)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, function() {
-                    var item = that.select();
-                    that._current(item[0] ? item.last() : that._first());
+                    var item = that.select().last();
+                    that._current(item[0] ? item : that._first());
                 })
                 .on("blur" + NS, function() {
                     that._current(null);
@@ -256,9 +256,9 @@
                     });
             }
 
-            content = element.find("li" + ACTIVECLASS + " > ." + CONTENT);
+            content = element.find("li." + ACTIVECLASS + " > ." + CONTENT);
 
-            if (content.length > 0) {
+            if (content[0]) {
                 that.expand(content.parent(), false);
             }
 
@@ -574,7 +574,7 @@
             }
 
             if (!next[0]) {
-                next = item.parents(ITEM).next();
+                next = item.parent(VISIBLEGROUP).parent(ITEM).next();
             }
 
             if (!next[0]) {
@@ -597,7 +597,7 @@
                 result;
 
             if (!prev[0]) {
-                prev = item.parents(ITEM);
+                prev = item.parent(VISIBLEGROUP).parent(ITEM);
                 if (!prev[0]) {
                     prev = this._last();
                 }
@@ -629,7 +629,7 @@
             var plain = $.isPlainObject(item),
                 groupData = {
                     firstLevel: parent.hasClass("k-panelbar"),
-                    expanded: parent.parent().hasClass("k-state-active"),
+                    expanded: parent.parent().hasClass(ACTIVECLASS),
                     length: parent.children().length
                 };
 
@@ -688,7 +688,7 @@
                                 .add(that.element);
 
             var items = panels
-                            .find("> li:not(" + ACTIVECLASS + ") > ul")
+                            .find("> li:not(." + ACTIVECLASS + ") > ul")
                             .css({ display: "none" })
                             .end()
                             .find("> li");
@@ -757,14 +757,13 @@
         _toggleItem: function (element, isVisible) {
             var that = this,
                 childGroup = element.find(GROUPS),
-                prevent;
+                prevent, content;
 
             if (childGroup.length) {
                 this._toggleGroup(childGroup, isVisible);
                 prevent = true;
             } else {
-
-                var content = element.find("> ."  + CONTENT);
+                content = element.children("."  + CONTENT);
 
                 if (content.length) {
                     prevent = true;
@@ -793,7 +792,7 @@
             element
                 .parent()
                 .toggleClass(defaultState, visibility)
-                .toggleClass(ACTIVECLASS.substr(1), !visibility)
+                .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-icon")
                     .toggleClass("k-i-arrow-n", !visibility)
                     .toggleClass("k-panelbar-collapse", !visibility)
