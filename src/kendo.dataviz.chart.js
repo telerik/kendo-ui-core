@@ -122,6 +122,9 @@
             "hours": TIME_PER_HOUR,
             "minutes": TIME_PER_MINUTE
         },
+        BASE_UNITS = [
+            "auto", MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
+        ],
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
@@ -1088,14 +1091,20 @@
 
             options = options || {};
 
-            deepExtend(options, {
+            options = deepExtend({}, options, {
                 min: toDate(options.min),
                 max: toDate(options.max)
             });
 
-            options = axis.applyDefaults(options);
-
             if (options.categories && options.categories.length > 0) {
+                if (!options.baseUnit || options.baseUnit.toLowerCase() === "default" || !inArray(options.baseUnit.toLowerCase(), BASE_UNITS)) {
+                    options.baseUnit = axis.defaultBaseUnit(options);
+                }
+
+                if (options.baseUnit.toLowerCase() === "auto" || (!options.baseUnitStep && options.maxDateGroups)) {
+                    axis.autoBaseUnit(options);
+                }
+
                 axis.groupCategories(options);
             }
 
@@ -1117,7 +1126,7 @@
             }
         },
 
-        applyDefaults: function(options) {
+        defaultBaseUnit: function(options) {
             var categories = options.categories,
                 count = defined(categories) ? categories.length : 0,
                 categoryIx,
@@ -1128,40 +1137,86 @@
                 unit,
                 defaults = {};
 
-            if (!options.baseUnit) {
-                for (categoryIx = 0; categoryIx < count; categoryIx++) {
-                    cat = toDate(categories[categoryIx]);
+            for (categoryIx = 0; categoryIx < count; categoryIx++) {
+                cat = toDate(categories[categoryIx]);
 
-                    if (cat && lastCat) {
-                        diff = cat - lastCat;
-                        if (diff > 0) {
-                            minDiff = math.min(minDiff, diff);
+                if (cat && lastCat) {
+                    diff = cat - lastCat;
+                    if (diff > 0) {
+                        minDiff = math.min(minDiff, diff);
 
-                            if (minDiff >= TIME_PER_YEAR) {
-                                unit = YEARS;
-                            } else if (minDiff >= TIME_PER_MONTH - TIME_PER_DAY * 3) {
-                                unit = MONTHS;
-                            } else if (minDiff >= TIME_PER_WEEK) {
-                                unit = WEEKS;
-                            } else if (minDiff >= TIME_PER_DAY) {
-                                unit = DAYS;
-                            } else if (minDiff >= TIME_PER_HOUR) {
-                                unit = HOURS;
-                            } else {
-                                unit = MINUTES;
-                            }
+                        if (minDiff >= TIME_PER_YEAR) {
+                            unit = YEARS;
+                        } else if (minDiff >= TIME_PER_MONTH - TIME_PER_DAY * 3) {
+                            unit = MONTHS;
+                        } else if (minDiff >= TIME_PER_WEEK) {
+                            unit = WEEKS;
+                        } else if (minDiff >= TIME_PER_DAY) {
+                            unit = DAYS;
+                        } else if (minDiff >= TIME_PER_HOUR) {
+                            unit = HOURS;
+                        } else {
+                            unit = MINUTES;
                         }
                     }
-
-                    lastCat = cat;
                 }
 
-                defaults.baseUnit = unit || DAYS;
-
-                delete options.baseUnit;
+                lastCat = cat;
             }
 
-            return deepExtend(defaults, options);
+            return unit || DAYS;
+        },
+
+        autoBaseUnit: function(options) {
+            var axis = this,
+                categories = toDate(options.categories),
+                baseUnit = options.baseUnit,
+                baseUnitStep = options.baseUnitStep || 1,
+                min = toTime(options.min),
+                max = toTime(options.max),
+                minCategory = toTime(sparseArrayMin(categories)),
+                maxCategory = toTime(sparseArrayMax(categories)),
+                start = floorDate(min || minCategory, baseUnit),
+                end = ceilDate((max || maxCategory) + 1, baseUnit),
+                date,
+                nextDate,
+                groups = [],
+                categoryMap = [],
+                categoryIndicies,
+                categoryIx,
+                categoryDate;
+
+            var span = (end - start),
+                step = baseUnitStep,
+                auto = baseUnit === "auto",
+                baseUnit = auto ? MINUTES : baseUnit,
+                totalUnits = span / TIME_PER_UNIT[baseUnit],
+                maxDateGroups = options.maxDateGroups || totalUnits,
+                autoBaseUnitSteps = deepExtend({}, axis.options.autoBaseUnitSteps, options.autoBaseUnitSteps);
+
+            if (!options.baseUnitStep) {
+                while (totalUnits > maxDateGroups) {
+                    var steps = steps || autoBaseUnitSteps[baseUnit];
+                    var step = steps.shift();
+
+                    if (step) {
+                        totalUnits = (span / TIME_PER_UNIT[baseUnit]) / step;
+                    } else if (auto) {
+                        baseUnit =  baseUnit === MINUTES ? HOURS :
+                                    baseUnit === HOURS ? DAYS :
+                                    baseUnit === DAYS ? WEEKS :
+                                    baseUnit === WEEKS ? MONTHS :
+                                    baseUnit === MONTHS ? YEARS : YEARS;
+                        steps = undefined;
+                        step = 1;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            options.baseUnitStep = baseUnitStep = step;
+            options.baseUnit = baseUnit;
         },
 
         groupCategories: function(options) {
@@ -1182,39 +1237,6 @@
                 categoryIndicies,
                 categoryIx,
                 categoryDate;
-
-
-            var span = (end - start),
-                step = baseUnitStep,
-                totalUnits = span / TIME_PER_UNIT[baseUnit],
-                maxDateGroups = options.maxDateGroups || totalUnits,
-                autoBaseUnitSteps = deepExtend(axis.options.autoBaseUnitSteps, options.autoBaseUnitSteps);
-
-            if (!options.baseUnitStep) {
-                while (totalUnits > maxDateGroups) {
-                    var steps = steps || autoBaseUnitSteps[baseUnit];
-                    var step = steps.shift();
-
-                    if (step) {
-                        totalUnits = (span / TIME_PER_UNIT[baseUnit]) / step;
-                    } else {
-                        // TODO: Don't increment baseUnit if set explicitly
-                        baseUnit =  baseUnit === MINUTES ? HOURS :
-                                    baseUnit === HOURS ? DAYS :
-                                    baseUnit === DAYS ? WEEKS :
-                                    baseUnit === WEEKS ? MONTHS :
-                                    baseUnit === MONTHS ? YEARS : YEARS;
-                        steps = undefined;
-                        step = 1;
-                    }
-                }
-            }
-
-            options.baseUnitStep = baseUnitStep = step;
-            options.baseUnit = baseUnit;
-            start = floorDate(min || minCategory, baseUnit);
-            end = ceilDate((max || maxCategory) + 1, baseUnit);
-
 
             for (date = start; date < end; date = nextDate) {
                 groups.push(date);

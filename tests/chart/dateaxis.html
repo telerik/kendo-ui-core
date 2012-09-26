@@ -72,7 +72,18 @@
                     equals(dateAxis.options.baseUnit, "days");
                 });
 
-                test("User set empty base unit defaults to automatic", function() {
+                test("Setting base unit to 'default' selects one based on minimum difference", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/01 00:20:00")
+                        ],
+                        baseUnit: "default"
+                    });
+
+                    equals(dateAxis.options.baseUnit, "minutes");
+                });
+
+                test("Empty base unit interpreted as 'default'", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01"), new Date("2012/03/10")
@@ -81,6 +92,17 @@
                     });
 
                     equals(dateAxis.options.baseUnit, "months");
+                });
+
+                test("Invalid base unit interpreted as 'default'", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/01 00:20:00")
+                        ],
+                        baseUnit: "fortnight"
+                    });
+
+                    equals(dateAxis.options.baseUnit, "minutes");
                 });
 
                 test("Min date can be parsed from string", function() {
@@ -107,7 +129,7 @@
 
                 test("No categories", function() {
                     createDateCategoryAxis();
-                })
+                });
 
                 test("Base unit step is applied for explicit baseUnit", function() {
                     createDateCategoryAxis({
@@ -122,6 +144,18 @@
                         new Date("2012/02/01"), new Date("2012/02/04"),
                         new Date("2012/02/07")
                     ]);
+                });
+
+                test("maxDateGroups constraint does not alter default base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:50:00")
+                        ],
+                        autoBaseUnitSteps: { minutes: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "minutes");
                 });
 
                 // ------------------------------------------------------------
@@ -286,6 +320,7 @@
                         categories: [
                             new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:50:00")
                         ],
+                        baseUnit: "auto",
                         autoBaseUnitSteps: { minutes: [1] },
                         maxDateGroups: 5
                     });
@@ -303,7 +338,7 @@
                         maxDateGroups: 5
                     });
 
-                    equals(dateAxis.options.baseUnit, "hours");
+                    equals(dateAxis.options.baseUnit, "minutes");
                 });
 
                 test("maxDateGroups constraint has lower priority than base unit step", function() {
@@ -347,6 +382,7 @@
                         categories: [
                             new Date("2012/02/01 10:00:00"), new Date("2012/02/01 20:00:00")
                         ],
+                        baseUnit: "auto",
                         autoBaseUnitSteps: { hours: [1] },
                         maxDateGroups: 5
                     });
@@ -504,6 +540,7 @@
                         categories: [
                             new Date("2012/02/01 00:00:00"), new Date("2012/02/20 00:00:00")
                         ],
+                        baseUnit: "auto",
                         autoBaseUnitSteps: { days: [1] },
                         maxDateGroups: 5
                     });
@@ -579,6 +616,7 @@
                         categories: [
                             new Date("2012/02/05 00:00:00"), new Date("2012/03/03 00:00:00")
                         ],
+                        baseUnit: "auto",
                         autoBaseUnitSteps: { weeks: [1] },
                         maxDateGroups: 2
                     });
@@ -662,6 +700,7 @@
                         categories: [
                             new Date("2012/02/01 00:00:00"), new Date("2012/12/01 00:00:00")
                         ],
+                        baseUnit: "auto",
                         autoBaseUnitSteps: { months: [1] },
                         maxDateGroups: 5
                     });
