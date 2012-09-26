@@ -1,15 +1,13 @@
 #!/usr/bin/env node
 
 var http       = require("http"),
-    faye       = require("faye"),
-    static     = require("node-static"),
     path       = require("path"),
     fs         = require("fs"),
-    builder    = require("xmlbuilder"),
     spawn      = require("child_process").spawn,
     os         = require("os"),
-    colors     = require('colors'),
     util       = require('util'),
+    faye       = require("faye"),
+    static     = require("node-static"),
     builder    = require('xmlbuilder');
 
 var WEBROOT    = path.join(path.dirname(__filename), ".."),
