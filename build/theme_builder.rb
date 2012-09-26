@@ -29,8 +29,7 @@ file 'themebuilder/src/scripts/template.js' => [ 'styles/web/template.less',
     less = less.gsub('\\', '\\\\')
                .gsub('"', '\\"')
                .gsub("'", "\\\\\\\\'")
-               .gsub("\r\n", '\\n')
-               .gsub("(\n|\r)", '\\n')
+               .gsub(/\n/, "\\n")
 
     less = "'#{less}'"
 
