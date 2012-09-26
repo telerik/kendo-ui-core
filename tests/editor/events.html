@@ -264,6 +264,18 @@
                 equal(e.keyCode, 69);
             });
 
+            test("calling preventDefault of observable keydown event prevents DOM event", function() {
+                editor.bind("keydown", function(e) {
+                    e.preventDefault();
+                });
+
+                var e = $.Event({ type: "keydown", keyCode: 42 });
+
+                $(editor.body).trigger(e);
+
+                ok(e.isDefaultPrevented());
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

@@ -2917,11 +2917,16 @@ var TypingHandler = Class.extend({
         var that = this,
             editor = that.editor,
             keyboard = editor.keyboard,
-            isTypingKey = keyboard.isTypingKey(e);
+            isTypingKey = keyboard.isTypingKey(e),
+            evt = extend({}, e);
 
-        that.editor.trigger("keydown", e);
+        that.editor.trigger("keydown", evt);
 
-        if (isTypingKey && !keyboard.isTypingInProgress()) {
+        if (evt.isDefaultPrevented()) {
+            e.preventDefault();
+        }
+
+        if (!evt.isDefaultPrevented() && isTypingKey && !keyboard.isTypingInProgress()) {
             var range = editor.getRange();
             that.startRestorePoint = new RestorePoint(range);
 
