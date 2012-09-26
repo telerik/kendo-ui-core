@@ -386,11 +386,11 @@
     }
 
     function createTrack (options, element) {
-        var dragHandleCount = element.is("input") ? 1 : 2
-            firstDragHendleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle;
+        var dragHandleCount = element.is("input") ? 1 : 2,
+            firstDragHandleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle;
 
         return "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
-               "<a href='#' class='k-draghandle' title='" + firstDragHendleTitle + "'>Drag</a>" +
+               "<a href='#' class='k-draghandle' title='" + firstDragHandleTitle + "'>Drag</a>" +
                (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='" + options.rightDragHandleTitle + "'>Drag</a>" : "") +
                "</div>";
     }
