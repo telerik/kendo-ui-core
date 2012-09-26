@@ -73,11 +73,25 @@ var browserProcesses = [],
 
 if (os.type() === "Darwin") {
     browsers =  [{
-            exe: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
-            params: [testRunnerURL]
+            exe: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
+            params: [
+                "--user-data-dir=" + process.env["BROWSER_TEMP"],
+                "--activate-on-launch",
+                "--homepage=about:blank",
+                "--no-first-run",
+                "--no-default-browser-check",
+                testRunnerURL
+            ]
         },{
             exe: "/Applications/Firefox.app/Contents/MacOS/firefox",
-            params: ['-private', '-no-remote', '-new-window', testRunnerURL]
+            params: [
+                '-private',
+                '-no-remote',
+                '-P',
+                process.env["FIREFOX_PROFILE"],
+                '-new-window',
+                testRunnerURL
+            ]
     }];
 } else {
     /**
@@ -123,7 +137,7 @@ browsers.forEach(function(browser, index) {
         process.stderr.write("Executing " + browser.exe + " " + browser.params.join(" ") + " PID: " + child.pid + "\n");
 
         child.stderr.on("data", function(data) {
-            process.sdterr.write(data);
+            process.stderr.write(data);
         });
 
         child.stdout.on("data", function(data) {

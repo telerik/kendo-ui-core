@@ -1,10 +1,17 @@
 
 def run_tests(port)
     sh <<-SH
-export BROWSER_TEMP=`mktemp -d`
+export BROWSER_TEMP=`mktemp -dt tests.XXXXXXXXXXXXXXXXXXXXXXXXX`
 export FIREFOX_PROFILE=${BROWSER_TEMP##*.}
-xvfb-run -a firefox -no-remote -CreateProfile $FIREFOX_PROFILE
-source build/temp-browser-profiles.sh
+
+case `uname -a` in
+  *Linux*)
+    xvfb-run -a firefox -no-remote -CreateProfile $FIREFOX_PROFILE
+    ;;
+  *Darwin*)
+    /Applications/Firefox.app/Contents/MacOS/firefox -no-remote -CreateProfile $FIREFOX_PROFILE
+    ;;
+esac
 
 tests/tests.js tests/ #{port} 1>test-results.xml || exit 1
     SH
