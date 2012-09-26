@@ -1130,7 +1130,8 @@
                 weeks: [1, 2],
                 months: [1, 2, 3, 6],
                 years: [1, 2, 3, 5, 10, 25, 50]
-            }
+            },
+            maxDateGroups: 10
         },
 
         defaultBaseUnit: function(options) {
@@ -1193,9 +1194,9 @@
                 autoUnit = options.baseUnit === FIT,
                 autoUnitIx = 0,
                 baseUnit = autoUnit ? BASE_UNITS[autoUnitIx++] : options.baseUnit,
-                span = (range.max - range.min),
+                span = range.max - range.min,
                 totalUnits = span / TIME_PER_UNIT[baseUnit],
-                maxDateGroups = options.maxDateGroups || totalUnits,
+                maxDateGroups = options.maxDateGroups || axis.options.maxDateGroups,
                 autoBaseUnitSteps = deepExtend(
                     {}, axis.options.autoBaseUnitSteps, options.autoBaseUnitSteps
                 ),

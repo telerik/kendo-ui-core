@@ -152,7 +152,6 @@
                             new Date("2012/02/01"), new Date("2012/02/07")
                         ],
                         baseUnit: "fit",
-                        baseUnitStep: 1,
                         maxDateGroups: 3
                     });
 
@@ -172,6 +171,26 @@
                     });
 
                     equals(dateAxis.options.baseUnit, "minutes");
+                });
+
+                test("maxDateGroups defaults to 10", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/10 00:00:00")
+                        ],
+                        baseUnit: "fit"
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 1);
+
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/11 00:00:00")
+                        ],
+                        baseUnit: "fit"
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
                 });
 
                 // ------------------------------------------------------------
