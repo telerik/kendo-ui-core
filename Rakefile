@@ -206,12 +206,15 @@ BUNDLES = [
 ]
 
 namespace :build do
+    WEB_ROOT = "/var/www"
+    ARCHIVE_ROOT = "/kendo-builds"
+
     def zip_targets(destination)
         zip_bundles = []
 
         BUNDLES.each do |bundle|
             zip_filename = ('kendoui.' + bundle).sub(/\.[^\.]+$/, ".#{VERSION}\\0.zip")
-            zip_filename = "/kendo-builds/#{destination}/#{zip_filename}"
+            zip_filename = "#{ARCHIVE_ROOT}/#{destination}/#{zip_filename}"
 
             file_copy :to => zip_filename,
                       :from => "dist/bundles/#{bundle}.zip"
@@ -219,7 +222,7 @@ namespace :build do
             zip_bundles.push(zip_filename)
         end
 
-        zip_demos = "/kendo-builds/#{destination}/production.zip"
+        zip_demos = "#{ARCHIVE_ROOT}/#{destination}/production.zip"
 
         file_copy :to => zip_demos,
                   :from => "dist/demos/production.zip"
@@ -230,12 +233,12 @@ namespace :build do
              :from => FileList[WIN_JS_RESOURCES].pathmap('dist/bundles/winjs.commercial/%f'),
              :root => 'dist/bundles/winjs.commercial/'
 
-        zip_bundles.push("/kendo-builds/WinJS/#{destination}")
+        zip_bundles.push("#{ARCHIVE_ROOT}/WinJS/#{destination}")
 
-        clean_task = "/kendo-builds/#{destination}"
+        clean_task = "#{ARCHIVE_ROOT}/#{destination}"
 
         task clean_task do
-            sh "find /kendo-builds/#{destination}/* -mtime +2 -exec rm {} \\;"
+            sh "find #{ARCHIVE_ROOT}/#{destination}/* -mtime +2 -exec rm {} \\;"
         end
 
         zip_bundles.push(clean_task)
@@ -245,15 +248,15 @@ namespace :build do
 
     desc('Runs a build over the stable branch')
     task :stable => [:bundles, 'demos:production', 'demos:staging', 'download_builder:staging', zip_targets("Stable")].flatten do
-        sh 'rsync -avc dist/demos/staging/ /var/www/staging/'
-        sh 'rsync -avc dist/download-builder-staging/ /var/www/download-builder-staging/'
+        sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
+        sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
     end
 
-    write_changelog "/var/www/changelog/index.html", %w(web mobile dataviz framework aspnetmvc)
+    write_changelog "#{WEB_ROOT}/changelog/index.html", %w(web mobile dataviz framework aspnetmvc)
 
     desc('Runs a build over the production branch')
-    task "production" => ["tests:Production", "vsdoc:production:test", :bundles, 'demos:production', 'demos:staging', 'download_builder:staging', zip_targets("Production"), "/var/www/changelog/index.html"].flatten do
-        sh 'rsync -avc dist/demos/staging/ /var/www/production/'
+    task "production" => ["tests:Production", "vsdoc:production:test", :bundles, 'demos:production', 'demos:staging', 'download_builder:staging', zip_targets("Production"), "#{WEB_ROOT}/changelog/index.html"].flatten do
+        sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
     end
 
     desc('Runs test suite over the master branch')
