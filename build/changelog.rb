@@ -141,7 +141,7 @@ class ChangeLog
     end
 
     def page_issues(milestone, page)
-        $stderr.puts "Fetching issues for #{milestone.title}, page #{page}..."
+        $stderr.puts "Fetching issues for #{milestone.title}, page #{page}..." if VERBOSE
         client.issues.list_repo nil, nil,
             :state => "closed",
             :milestone => milestone.number,

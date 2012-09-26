@@ -87,7 +87,7 @@ def demos(options)
 
     path = options[:path] + "/examples"
 
-    directory path
+    mkdir_p path, :verbose => false
 
     suites = options[:suites]
 

@@ -173,7 +173,9 @@ end
 class VsDocTask < Rake::FileTask
     include Rake::DSL
     def execute(args=nil)
-        mkdir_p(File.dirname(name))
+        mkdir_p File.dirname(name), :verbose => false
+
+        $stderr.puts("Creating #{name}") if VERBOSE
 
         File.open(name, "w") do |file|
             file.write get_vsdoc(prerequisites)

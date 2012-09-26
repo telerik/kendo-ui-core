@@ -4,6 +4,8 @@ require 'bundler/setup'
 require 'debugger'
 require 'tempfile'
 
+VERBOSE = verbose == true
+
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 
 CDN_ROOT = 'http://cdn.kendostatic.com/'

@@ -7,7 +7,7 @@ THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')
 class MergeTask < Rake::FileTask
     def execute(args=nil)
         File.open(name, 'w') do |output|
-            $stderr.puts "Merge\n\t#{prerequisites.join("\n\t")} \nto #{name}"
+            $stderr.puts "Merge\n\t#{prerequisites.join("\n\t")} \nto #{name}" if VERBOSE
 
             prerequisites.each do |src|
                 File.open(src, 'r:bom|utf-8') do |file|
@@ -36,7 +36,7 @@ end
 
 def ensure_path(path)
     dir = path.pathmap('%d')
-    mkdir_p dir unless Dir.exists?(dir)
+    mkdir_p dir, :verbose => false unless Dir.exists?(dir)
 end
 
 def file_merge(*args, &block)
@@ -60,7 +60,7 @@ def msbuild(project, options=nil)
 
     msbuild_path = 'xbuild' if platform =~ /linux|darwin/
 
-    sh "#{msbuild_path} #{project} #{options}"
+    sh "#{msbuild_path} /v:q #{project} #{options}", :verbose => VERBOSE
 end
 
 # Copy file when it is modified
@@ -79,7 +79,7 @@ def file_copy(options)
         ensure_path to
 
         if license
-            $stderr.puts "cp #{from} #{to}"
+            $stderr.puts "cp #{from} #{to}" if VERBOSE
 
             File.open(to, "w") do |file|
                 if license && subject_to_license?(to)
@@ -89,7 +89,7 @@ def file_copy(options)
                 file.write(File.read(from))
             end
         else
-            cp from, to
+            cp from, to, :verbose => VERBOSE
         end
     end
 end

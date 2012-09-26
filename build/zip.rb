@@ -7,7 +7,9 @@ class ZipTask < Rake::FileTask
 
         dir = name.pathmap('%d/%n')
 
-        rm_rf name
+        rm_rf name, :verbose => false
+
+        $stderr.puts("Creating #{name}") if VERBOSE
 
         Zip::ZipFile.open(name, Zip::ZipFile::CREATE) do |file|
             Dir[File.join(dir, '**', '*')].each do |src|
