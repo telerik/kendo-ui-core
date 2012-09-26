@@ -4,10 +4,8 @@ namespace Kendo.Mvc.UI.Tests
     using Kendo.Mvc.UI.Tests.Chart;
     using Xunit;
 
-    public class ChartOHLCSeriesSerializerTests
+    public class ChartOHLCSeriesSerializerTests : ChartSeriesSerializerBaseTests<ChartOHLCSeries<OHLCData, decimal>>
     {
-        private IChartOHLCSeries series;
-
         public ChartOHLCSeriesSerializerTests()
         {
             var chart = ChartTestHelper.CreateChart<OHLCData>();

@@ -23,6 +23,7 @@ namespace Kendo.Mvc.UI
                 .Add("aggregates", series.Aggregates.CreateSerializer().Serialize(), ShouldSerializeAggregates)
                 .Add("gap", series.Gap, () => series.Gap.HasValue)
                 .Add("spacing", series.Spacing, () => series.Spacing.HasValue)
+                .Add("axis", series.Axis, () => series.Axis.HasValue())
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("border", series.Border.CreateSerializer().Serialize(), ShouldSerializeBorder)
                 .Add("color", series.Color, () => series.Color.HasValue())
