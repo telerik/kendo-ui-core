@@ -335,7 +335,7 @@
                        .before(createButton(options, "decrease", that._isHorizontal));
             }
 
-            element.before(createTrack(element));
+            element.before(createTrack(options, element));
         }
     });
 
@@ -385,12 +385,13 @@
         return result;
     }
 
-    function createTrack (element) {
-        var dragHandleCount = element.is("input") ? 1 : 2;
+    function createTrack (options, element) {
+        var dragHandleCount = element.is("input") ? 1 : 2
+            firstDragHendleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle;
 
         return "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
-               "<a href='#' class='k-draghandle' title='Drag'>Drag</a>" +
-               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='Drag'>Drag</a>" : "") +
+               "<a href='#' class='k-draghandle' title='" + firstDragHendleTitle + "'>Drag</a>" +
+               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='" + options.rightDragHandleTitle + "'>Drag</a>" : "") +
                "</div>";
     }
 
@@ -509,6 +510,7 @@
             showButtons: true,
             increaseButtonTitle: "Increase",
             decreaseButtonTitle: "Decrease",
+            dragHandleTitle: "drag",
             tooltip: { format: "{0}" }
         },
 
@@ -1052,6 +1054,8 @@
 
         options: {
             name: "RangeSlider",
+            leftDragHandleTitle: "drag",
+            rightDragHandleTitle: "drag",
             tooltip: { format: "{0}" }
         },
 
