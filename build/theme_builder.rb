@@ -68,7 +68,7 @@ def patch_bootstrap(to, from, cdn)
         file.write(bootstrap)
     end
 
-    sh "uglifyjs #{to} > #{File.basename(to)}.min.js"
+    uglifyjs(to, File.basename(to) + '.min.js')
 
     mv "#{File.basename(to)}.min.js", to
 end

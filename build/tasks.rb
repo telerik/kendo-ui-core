@@ -63,6 +63,25 @@ def msbuild(project, options=nil)
     sh "#{msbuild_path} /v:q #{project} #{options}", :verbose => VERBOSE
 end
 
+def uglifyjs(from, to)
+    sh "uglifyjs #{from} > #{to}", :verbose => VERBOSE
+
+    minjs = File.read(to)
+
+    File.open(to, 'w') do |file|
+        file.write(';')
+        file.write(minjs)
+    end
+end
+
+def less(from, to)
+    sh "node build/less-js/bin/lessc #{from} #{to}", :verbose => VERBOSE
+end
+
+def cssmin(from, to)
+    sh "cssmin #{from} > #{to}", :verbose => VERBOSE
+end
+
 # Copy file when it is modified
 def file_copy(options)
     to = options[:to]
