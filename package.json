@@ -1,0 +1,12 @@
+{
+   "name": "kendo",
+   "version": "1.0.0",
+   "dependencies": {
+       "uglify-js": "",
+       "cssmin": "",
+       "faye": "",
+       "node-static": "",
+       "xmlbuilder": "",
+       "colors": ""
+   }
+}
