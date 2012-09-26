@@ -37,6 +37,7 @@ file_merge "src/kendo.editor.js" => [
 file_merge "src/kendo.aspnetmvc.js" => [
     "src/aspnetmvc/kendo.data.aspnetmvc.js",
     "src/aspnetmvc/kendo.combobox.aspnetmvc.js",
+    "src/aspnetmvc/kendo.imagebrowser.aspnetmvc.js",
     "src/aspnetmvc/kendo.validator.aspnetmvc.js"
 ]
 
@@ -68,6 +69,7 @@ WEB_JS = FileList[
     "src/kendo.columnmenu.js",
     "src/kendo.grid.js",
     "src/kendo.listview.js",
+    "src/kendo.imagebrowser.js",
     "src/kendo.editor.js",
     "src/kendo.numerictextbox.js",
     "src/kendo.menu.js",
