@@ -9,7 +9,7 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 CDN_ROOT = 'http://cdn.kendostatic.com/'
 
 require 'version'
-require 'archive'
+require 'zip'
 require 'js'
 require 'css'
 require 'tasks'
