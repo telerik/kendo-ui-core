@@ -164,7 +164,7 @@ var TypingHandler = Class.extend({
             editor = that.editor,
             keyboard = editor.keyboard,
             isTypingKey = keyboard.isTypingKey(e),
-            evt = extend({}, e);
+            evt = extend($.Event(), e);
 
         that.editor.trigger("keydown", evt);
 
