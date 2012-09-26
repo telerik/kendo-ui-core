@@ -11,6 +11,7 @@
         keys = kendo.keys,
         NS = ".kendoTreeView",
         SELECT = "select",
+        NAVIGATE = "navigate",
         EXPAND = "expand",
         CHANGE = "change",
         CHECKED = "checked",
@@ -330,7 +331,8 @@
 
             EXPAND,
             COLLAPSE,
-            SELECT
+            SELECT,
+            NAVIGATE
         ],
 
         options: {
@@ -615,9 +617,9 @@
             var that = this,
                 key = e.keyCode,
                 target,
-                selection = that.current(),
-                expanded = that._expanded(selection),
-                checkbox = selection.find(":checkbox:first");
+                focused = that.current(),
+                expanded = that._expanded(focused),
+                checkbox = focused.find(":checkbox:first");
 
             if (e.target != e.currentTarget) {
                 return;
@@ -629,33 +631,33 @@
 
             if (key == keys.RIGHT) {
                 if (expanded) {
-                    target = that._nextVisible(selection);
+                    target = that._nextVisible(focused);
                 } else {
-                    that.expand(selection);
+                    that.expand(focused);
                 }
             } else if (key == keys.LEFT) {
                 if (expanded) {
-                    that.collapse(selection);
+                    that.collapse(focused);
                 } else {
-                    target = that.parent(selection);
+                    target = that.parent(focused);
 
                     if (!that._enabled(target)) {
                         target = undefined;
                     }
                 }
             } else if (key == keys.DOWN) {
-                target = that._nextVisible(selection);
+                target = that._nextVisible(focused);
             } else if (key == keys.UP) {
-                target = that._previousVisible(selection);
+                target = that._previousVisible(focused);
             } else if (key == keys.HOME) {
                 target = that._nextVisible($());
             } else if (key == keys.END) {
                 target = that._previousVisible($());
             } else if (key == keys.ENTER) {
-                if (selection[0] != that._oldSelection) {
+                if (focused[0] != that._oldSelection) {
                     delete that._oldSelection;
-                    that.select(selection);
-                    that._trigger(SELECT, selection);
+                    that.select(focused);
+                    that._trigger(SELECT, focused);
                 }
             } else if (key == keys.SPACEBAR && checkbox.length) {
                 checkbox.prop(CHECKED, !checkbox.prop(CHECKED))
@@ -664,13 +666,16 @@
 
                 that._checkboxChange({ target: checkbox });
 
-                target = selection;
+                target = focused;
                 that.select(target);
             }
 
             if (target) {
                 e.preventDefault();
-                that.current(target);
+                if (focused[0] != target[0]) {
+                    that._trigger(NAVIGATE, target);
+                    that.current(target);
+                }
             }
         },
 

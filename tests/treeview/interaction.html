@@ -945,6 +945,34 @@
                 ok(!widget.current().length);
             });
 
+            test("down arrow triggers navigate event", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "baz" }
+                    ],
+                    navigate: function(node) {
+                        ok(node);
+                    }
+                });
+
+                treeview.press(keys.DOWN);
+            });
+
+            test("up arrow triggers navigate event", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "baz", selected: true }
+                    ],
+                    navigate: function(node) {
+                        ok(node);
+                    }
+                });
+
+                treeview.focus();
+                treeview.press(keys.UP);
+            });
             module("drag & drop with load-on-demand", {
                 setup: function() {
                     var i = 1;
