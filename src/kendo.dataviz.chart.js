@@ -1087,7 +1087,8 @@
 
     var DateCategoryAxis = CategoryAxis.extend({
         init: function(options) {
-            var axis = this;
+            var axis = this,
+                baseUnit;
 
             options = options || {};
 
@@ -1097,11 +1098,12 @@
             });
 
             if (options.categories && options.categories.length > 0) {
-                if (!options.baseUnit || options.baseUnit.toLowerCase() === "default" || !inArray(options.baseUnit.toLowerCase(), BASE_UNITS)) {
+                baseUnit = (options.baseUnit || "default").toLowerCase();
+                if (baseUnit === "default" || !inArray(baseUnit, BASE_UNITS)) {
                     options.baseUnit = axis.defaultBaseUnit(options);
                 }
 
-                if (options.baseUnit.toLowerCase() === "auto" || (!options.baseUnitStep && options.maxDateGroups)) {
+                if (baseUnit === "auto" || options.baseUnitStep === "auto") {
                     axis.autoBaseUnit(options);
                 }
 
@@ -1171,7 +1173,7 @@
             var axis = this,
                 categories = toDate(options.categories),
                 baseUnit = options.baseUnit,
-                baseUnitStep = options.baseUnitStep || 1,
+                auto = baseUnit === "auto",
                 min = toTime(options.min),
                 max = toTime(options.max),
                 minCategory = toTime(sparseArrayMin(categories)),
@@ -1187,35 +1189,31 @@
                 categoryDate;
 
             var span = (end - start),
-                step = baseUnitStep,
-                auto = baseUnit === "auto",
                 baseUnit = auto ? MINUTES : baseUnit,
                 totalUnits = span / TIME_PER_UNIT[baseUnit],
                 maxDateGroups = options.maxDateGroups || totalUnits,
                 autoBaseUnitSteps = deepExtend({}, axis.options.autoBaseUnitSteps, options.autoBaseUnitSteps);
 
-            if (!options.baseUnitStep) {
-                while (totalUnits > maxDateGroups) {
-                    var steps = steps || autoBaseUnitSteps[baseUnit];
-                    var step = steps.shift();
+            while (totalUnits > maxDateGroups) {
+                var steps = steps || autoBaseUnitSteps[baseUnit];
+                var step = steps.shift();
 
-                    if (step) {
-                        totalUnits = (span / TIME_PER_UNIT[baseUnit]) / step;
-                    } else if (auto) {
-                        baseUnit =  baseUnit === MINUTES ? HOURS :
-                                    baseUnit === HOURS ? DAYS :
-                                    baseUnit === DAYS ? WEEKS :
-                                    baseUnit === WEEKS ? MONTHS :
-                                    baseUnit === MONTHS ? YEARS : YEARS;
-                        steps = undefined;
-                        step = 1;
-                    } else {
-                        break;
-                    }
+                if (step) {
+                    totalUnits = (span / TIME_PER_UNIT[baseUnit]) / step;
+                } else if (auto) {
+                    baseUnit =  baseUnit === MINUTES ? HOURS :
+                                baseUnit === HOURS ? DAYS :
+                                baseUnit === DAYS ? WEEKS :
+                                baseUnit === WEEKS ? MONTHS :
+                                baseUnit === MONTHS ? YEARS : YEARS;
+                    steps = undefined;
+                    step = 1;
+                } else {
+                    break;
                 }
             }
 
-            options.baseUnitStep = baseUnitStep = step;
+            options.baseUnitStep = step;
             options.baseUnit = baseUnit;
         },
 

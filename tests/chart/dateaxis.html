@@ -304,18 +304,19 @@
                          ["10:00", "10:01", "10:02"]);
                 });
 
-                test("maxDateGroups constraint forces selection of base unit step", function() {
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:10:00")
                         ],
+                        baseUnitStep: "auto",
                         maxDateGroups: 6
                     });
 
                     equals(dateAxis.options.baseUnitStep, 2);
                 });
 
-                test("maxDateGroups constraint forces selection of next base unit (hours)", function() {
+                test("automatic base unit (hours) is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:50:00")
@@ -366,18 +367,19 @@
                     equals(dateAxis.options.baseUnit, "hours");
                 });
 
-                test("maxDateGroups constraint forces selection of base unit step", function() {
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/05 10:00:00"), new Date("2012/02/05 21:00:00")
                         ],
+                        baseUnitStep: "auto",
                         maxDateGroups: 10
                     });
 
                     equals(dateAxis.options.baseUnitStep, 2);
                 });
 
-                test("maxDateGroups constraint forces selection of next base unit (days)", function() {
+                test("automatic base unit (days) is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 10:00:00"), new Date("2012/02/01 20:00:00")
@@ -524,18 +526,19 @@
                          ["2012", "2012", "2012"]);
                 });
 
-                test("maxDateGroups constraint forces selection of base unit step", function() {
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 00:00:00"), new Date("2012/02/05 00:00:00")
                         ],
+                        baseUnitStep: "auto",
                         maxDateGroups: 3
                     });
 
                     equals(dateAxis.options.baseUnitStep, 2);
                 });
 
-                test("maxDateGroups constraint forces selection of next base unit (weeks)", function() {
+                test("automatic base unit (weeks) is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 00:00:00"), new Date("2012/02/20 00:00:00")
@@ -600,18 +603,19 @@
                          ["1/1", "1/2", "1/9", "1/16"]);
                 });
 
-                test("maxDateGroups constraint forces selection of base unit step", function() {
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/05 00:00:00"), new Date("2012/03/03 00:00:00")
                         ],
+                        baseUnitStep: "auto",
                         maxDateGroups: 2
                     });
 
                     equals(dateAxis.options.baseUnitStep, 2);
                 });
 
-                test("maxDateGroups constraint forces selection of next base unit (months)", function() {
+                test("automatic base unit (months) is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/05 00:00:00"), new Date("2012/03/03 00:00:00")
@@ -684,18 +688,19 @@
                          ["1/1/12", "2/1/12"]);
                 });
 
-                test("maxDateGroups constraint forces selection of base unit step", function() {
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 00:00:00"), new Date("2012/06/01 00:00:00")
                         ],
+                        baseUnitStep: "auto",
                         maxDateGroups: 3
                     });
 
                     equals(dateAxis.options.baseUnitStep, 2);
                 });
 
-                test("maxDateGroups constraint forces selection of next base unit (years)", function() {
+                test("automatic base unit (years) is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 00:00:00"), new Date("2012/12/01 00:00:00")
@@ -748,11 +753,12 @@
                          ["1/1/12", "1/1/13"]);
                 });
 
-                test("maxDateGroups constraint forces selection of base unit step", function() {
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/01/01 00:00:00"), new Date("2016/01/01 00:00:00")
                         ],
+                        baseUnitStep: "auto",
                         maxDateGroups: 3
                     });
 
