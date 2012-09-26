@@ -149,6 +149,7 @@
 
                 wrapper
                     .on("click" + ns, function(e) {
+                            clearTimeout(that._bluring);
                             e.preventDefault();
                             that.toggle();
                     })
