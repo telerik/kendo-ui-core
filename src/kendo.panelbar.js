@@ -1,6 +1,7 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         extend = $.extend,
         each = $.each,
         template = kendo.template,
@@ -11,9 +12,12 @@
         HREF = "href",
         LAST = "k-last",
         LINK = "k-link",
+        LINKSELECTOR = "." + LINK,
         ERROR = "error",
         CLICK = "click",
         ITEM = ".k-item",
+        GROUP = ".k-group",
+        VISIBLEGROUP = GROUP + ":visible",
         IMAGE = "k-image",
         FIRST = "k-first",
         EXPAND = "expand",
@@ -25,13 +29,15 @@
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
-        ACTIVECLASS = ".k-state-active",
+        ACTIVECLASS = "k-state-active",
         GROUPS = "> .k-panel",
         CONTENTS = "> .k-content",
+        FOCUSEDCLASS = "k-state-focused",
+        DISABLEDCLASS = "k-state-disabled",
         SELECTEDCLASS = ".k-state-selected",
-        DISABLEDCLASS = ".k-state-disabled",
         HIGHLIGHTEDCLASS = ".k-state-highlighted",
-        clickableItems = ITEM + ":not(.k-state-disabled) > .k-link",
+        ACTIVEITEMSELECTOR = ITEM + ":not(.k-state-disabled)",
+        clickableItems = ACTIVEITEMSELECTOR + " > .k-link",
         disabledItems = ITEM + ".k-state-disabled > .k-link",
         selectableItems = "> li > .k-state-selected, .k-panel > li > .k-state-selected",
         highlightableItems = "> .k-state-highlighted, .k-panel > .k-state-highlighted",
@@ -75,9 +81,9 @@
                     index = item.index;
 
                 if (item.enabled === false) {
-                    result += " k-state-disabled";
+                    result += " " + DISABLEDCLASS;
                 } else if (item.expanded === true) {
-                    result += " k-state-active";
+                    result += " " + ACTIVECLASS;
                 } else {
                     result += " k-state-default";
                 }
@@ -157,7 +163,7 @@
             .children("a")
             .filter(":focus")
             .parent()
-            .addClass(ACTIVECLASS.substr(1));
+            .addClass(ACTIVECLASS);
         item
             .find(">div")
             .addClass(CONTENT)
@@ -166,7 +172,7 @@
         item.each(function() {
             var item = $(this);
 
-            if (!item.children("." + LINK).length) {
+            if (!item.children(LINKSELECTOR).length) {
                 item
                     .contents()      // exclude groups, real links, templates and empty text nodes
                     .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
@@ -182,7 +188,7 @@
     function updateArrow (items) {
         items = $(items);
 
-        items.children(".k-link").children(".k-icon").remove();
+        items.children(LINKSELECTOR).children(".k-icon").remove();
 
         items
             .filter(":has(.k-panel),:has(.k-content)")
@@ -191,7 +197,7 @@
                 var item = $(this),
                     parent = item.parent();
 
-                item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS.substr(1)) ? "k-i-arrow-n k-panelbar-collapse" : "k-i-arrow-s k-panelbar-expand") + "'/>");
+                item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? "k-i-arrow-n k-panelbar-collapse" : "k-i-arrow-s k-panelbar-expand") + "'/>");
             });
     }
 
@@ -202,14 +208,6 @@
         items.filter(".k-last:not(:last-child)").removeClass(LAST);
         items.filter(":first-child").addClass(FIRST);
         items.filter(":last-child").addClass(LAST);
-    }
-
-    function updateSelected (element, link) {
-        element.find(selectableItems).removeClass(SELECTEDCLASS.substr(1));
-        element.find(highlightableItems).removeClass(HIGHLIGHTEDCLASS.substr(1));
-
-        link.addClass(SELECTEDCLASS.substr(1));
-        link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
     }
 
     var PanelBar = Widget.extend({
@@ -227,6 +225,7 @@
                 that.append(options.dataSource, element);
             }
 
+            that._tabindex();
             that._updateClasses();
 
             if (options.animation === false) {
@@ -234,20 +233,32 @@
             }
 
             element
-                .on(CLICK + NS, clickableItems, $.proxy(that._click, that))
+                .on(CLICK + NS, clickableItems, function(e) {
+                    if (that._click($(e.currentTarget))) {
+                        e.preventDefault();
+                    }
+                })
                 .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
-                .on(CLICK + NS, disabledItems, false);
+                .on(CLICK + NS, disabledItems, false)
+                .on("keydown" + NS, $.proxy(that._keydown, that))
+                .on("focus" + NS, function() {
+                    var item = that.select().last();
+                    that._current(item[0] ? item : that._first());
+                })
+                .on("blur" + NS, function() {
+                    that._current(null);
+                });
 
             if (options.contentUrls) {
                 element.find("> .k-item")
                     .each(function(index, item) {
-                        $(item).find("." + LINK).data(CONTENTURL, options.contentUrls[index]);
+                        $(item).find(LINKSELECTOR).data(CONTENTURL, options.contentUrls[index]);
                     });
             }
 
-            content = element.find("li" + ACTIVECLASS + " > ." + CONTENT);
+            content = element.find("li." + ACTIVECLASS + " > ." + CONTENT);
 
-            if (content.length > 0) {
+            if (content[0]) {
                 that.expand(content.parent(), false);
             }
 
@@ -309,7 +320,7 @@
                     }
 
                     if (!that._triggerEvent(EXPAND, item)) {
-                        that._toggleItem(item, false, null);
+                        that._toggleItem(item, false);
                     }
 
                     if (!useAnimation) {
@@ -340,7 +351,7 @@
                     }
 
                     if (!that._triggerEvent(COLLAPSE, item)) {
-                        that._toggleItem(item, true, null);
+                        that._toggleItem(item, true);
                     }
 
                     if (!useAnimation) {
@@ -357,27 +368,28 @@
             element = this.element.find(element);
             element
                 .toggleClass(defaultState, enable)
-                .toggleClass(DISABLEDCLASS.substr(1), !enable);
+                .toggleClass(DISABLEDCLASS, !enable);
         },
 
         select: function (element) {
             var that = this;
-            element = that.element.find(element);
 
-            if (arguments.length === 0) {
+            if (element === undefined) {
                 return that.element.find(selectableItems).parent();
             }
 
-            element.each(function (index, item) {
-                item = $(item);
-                var link = item.children("." + LINK);
+            that.element
+                .find(element)
+                .each(function (index) {
+                    var item = $(this),
+                        link = item.children(LINKSELECTOR);
 
-                if (item.is(DISABLEDCLASS)) {
-                    return that;
-                }
+                    if (item.hasClass(DISABLEDCLASS)) {
+                        return that;
+                    }
 
-                updateSelected(that.element, link);
-            });
+                    that._updateSelected(link);
+                });
 
             return that;
         },
@@ -495,6 +507,117 @@
             });
         },
 
+        _first: function() {
+            return this.element.children(ACTIVEITEMSELECTOR).first();
+        },
+
+        _last: function() {
+            var item = this.element.children(ACTIVEITEMSELECTOR).last(),
+                group = item.children(VISIBLEGROUP);
+
+            if (group[0]) {
+                return group.children(ACTIVEITEMSELECTOR).last();
+            }
+            return item;
+        },
+
+        _current: function(candidate) {
+            var that = this,
+                focused = that._focused;
+
+            if (candidate === undefined) {
+                return focused;
+            }
+
+            if (focused) {
+                focused.children(LINKSELECTOR).removeClass(FOCUSEDCLASS);
+            }
+
+            if (candidate) {
+                candidate.children(LINKSELECTOR).addClass(FOCUSEDCLASS);
+            }
+
+            that._focused = candidate;
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                current = that._current();
+
+            if (key == keys.DOWN) {
+                that._current(that._nextItem(current));
+                e.preventDefault();
+            }
+
+            if (key == keys.UP) {
+                that._current(that._prevItem(current));
+                e.preventDefault();
+            }
+
+            if (key == keys.ENTER || key == keys.SPACEBAR) {
+                that._click(current.children(LINKSELECTOR));
+                e.preventDefault();
+            }
+        },
+
+        _nextItem: function(item) {
+            if (!item) {
+                return this._first();
+            }
+
+            var group = item.children(VISIBLEGROUP),
+                next = item.next();
+
+            if (group[0]) {
+                next = group.children("." + FIRST);
+            }
+
+            if (!next[0]) {
+                next = item.parent(VISIBLEGROUP).parent(ITEM).next();
+            }
+
+            if (!next[0]) {
+                next = this._first();
+            }
+
+            if (next.hasClass(DISABLEDCLASS)) {
+                next = this._nextItem(next);
+            }
+
+            return next;
+        },
+
+        _prevItem: function(item) {
+            if (!item) {
+                return this._last();
+            }
+
+            var prev = item.prev(),
+                result;
+
+            if (!prev[0]) {
+                prev = item.parent(VISIBLEGROUP).parent(ITEM);
+                if (!prev[0]) {
+                    prev = this._last();
+                }
+            } else {
+                result = prev;
+                while (result[0]) {
+                    result = result.children(VISIBLEGROUP).children("." + LAST);
+                    if (result[0]) {
+                        prev = result;
+                    }
+                }
+            }
+
+            if (prev.hasClass(DISABLEDCLASS)) {
+                prev = this._prevItem(prev);
+            }
+
+            return prev;
+        },
+
         _insert: function (item, referenceItem, parent) {
             var that = this,
                 items, contents = [];
@@ -506,7 +629,7 @@
             var plain = $.isPlainObject(item),
                 groupData = {
                     firstLevel: parent.hasClass("k-panelbar"),
-                    expanded: parent.parent().hasClass("k-state-active"),
+                    expanded: parent.parent().hasClass(ACTIVECLASS),
                     length: parent.children().length
                 };
 
@@ -546,7 +669,7 @@
         _toggleHover: function(e) {
             var target = $(e.currentTarget);
 
-            if (!target.parents("li" + DISABLEDCLASS).length) {
+            if (!target.parents("li." + DISABLEDCLASS).length) {
                 target.toggleClass("k-state-hover", e.type == MOUSEENTER);
             }
         },
@@ -565,7 +688,7 @@
                                 .add(that.element);
 
             var items = panels
-                            .find("> li:not(" + ACTIVECLASS + ") > ul")
+                            .find("> li:not(." + ACTIVECLASS + ") > ul")
                             .css({ display: "none" })
                             .end()
                             .find("> li");
@@ -578,12 +701,12 @@
             updateFirstLast(items);
         },
 
-        _click: function (e) {
+        _click: function (target) {
             var that = this,
-                target = $(e.currentTarget),
-                element = that.element;
+                element = that.element,
+                prevent;
 
-            if (target.parents("li" + DISABLEDCLASS).length) {
+            if (target.parents("li." + DISABLEDCLASS).length) {
                 return;
             }
 
@@ -591,10 +714,10 @@
                 return;
             }
 
-            var link = target.closest("." + LINK),
+            var link = target.closest(LINKSELECTOR),
                 item = link.closest(ITEM);
 
-            updateSelected(element, link);
+            that._updateSelected(link);
 
             var contents = item.find(GROUPS).add(item.find(CONTENTS)),
                 href = link.attr(HREF),
@@ -605,11 +728,11 @@
             }
 
             if (that._triggerEvent(SELECT, item)) {
-                e.preventDefault();
+                prevent = true;
             }
 
             if (isAnchor || contents.length) {
-                e.preventDefault();
+                prevent = true;
             } else {
                 return;
             }
@@ -624,30 +747,26 @@
                 var visibility = contents.is(VISIBLE);
 
                 if (!that._triggerEvent(!visibility ? EXPAND : COLLAPSE, item)) {
-                    that._toggleItem(item, visibility, e);
+                    prevent = that._toggleItem(item, visibility);
                 }
             }
+
+            return prevent;
         },
 
-        _toggleItem: function (element, isVisible, e) {
+        _toggleItem: function (element, isVisible) {
             var that = this,
-                childGroup = element.find(GROUPS);
+                childGroup = element.find(GROUPS),
+                prevent, content;
 
             if (childGroup.length) {
-
                 this._toggleGroup(childGroup, isVisible);
-
-                if (e) {
-                    e.preventDefault();
-                }
+                prevent = true;
             } else {
-
-                var content = element.find("> ."  + CONTENT);
+                content = element.children("."  + CONTENT);
 
                 if (content.length) {
-                    if (e) {
-                        e.preventDefault();
-                    }
+                    prevent = true;
 
                     if (!content.is(EMPTY)) {
                         that._toggleGroup(content, isVisible);
@@ -656,6 +775,7 @@
                     }
                 }
             }
+            return prevent;
         },
 
         _toggleGroup: function (element, visibility) {
@@ -672,7 +792,7 @@
             element
                 .parent()
                 .toggleClass(defaultState, visibility)
-                .toggleClass(ACTIVECLASS.substr(1), !visibility)
+                .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-icon")
                     .toggleClass("k-i-arrow-n", !visibility)
                     .toggleClass("k-panelbar-collapse", !visibility)
@@ -696,7 +816,7 @@
         _collapseAllExpanded: function (item) {
             var that = this, children, stopExpand = false;
 
-            if (item.find("> ." + LINK).hasClass("k-header")) {
+            if (item.children(LINKSELECTOR).hasClass("k-header")) {
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
 
                 if (groups.is(VISIBLE)) {
@@ -725,7 +845,7 @@
 
             var that = this,
                 statusIcon = element.find(".k-panelbar-collapse, .k-panelbar-expand"),
-                link = element.find("." + LINK),
+                link = element.find(LINKSELECTOR),
                 loadingIconTimeout = setTimeout(function () {
                     statusIcon.addClass("k-loading");
                 }, 100),
@@ -763,6 +883,17 @@
             var that = this;
 
             return that.trigger(eventName, { item: element[0] });
+        },
+
+        _updateSelected: function(link) {
+            var element = this.element;
+
+            element.find(selectableItems).removeClass(SELECTEDCLASS.substr(1));
+            element.find(highlightableItems).removeClass(HIGHLIGHTEDCLASS.substr(1));
+
+            link.addClass(SELECTEDCLASS.substr(1));
+            link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
+            this._current(link.parent(ITEM));
         }
     });
 
