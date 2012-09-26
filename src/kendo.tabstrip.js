@@ -1,6 +1,7 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         map = $.map,
         each = $.each,
         trim = $.trim,
@@ -155,9 +156,19 @@
             options = that.options;
 
             that.wrapper
+                .attr("tabindex", 0)
+                .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on(CLICK + NS, CLICKABLEITEMS, $.proxy(that._click, that))
                 .on(MOUSEENTER + NS +" " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
-                .on(CLICK + NS, DISABLEDLINKS, false);
+                .on(CLICK + NS, DISABLEDLINKS, false)
+                .on("focus" + NS, function() {
+                    var item = that.select().last();
+
+                    that._current(item[0] ? item : that._first());
+                })
+                .on("blur" + NS, function() {
+                    that._current(null);
+                });
 
             that._updateClasses();
 
@@ -182,6 +193,65 @@
             }
 
             kendo.notify(that);
+        },
+
+        _first: function() {
+            return this.tabGroup.children(".k-item:not(.k-state-disabled)").first();
+        },
+
+        _last: function() {
+            return this.tabGroup.children(".k-item:not(.k-state-disabled)").last();
+        },
+
+        _current: function(candidate) {
+            var that = this,
+                focused = that._focused;
+
+            if (candidate === undefined) {
+                return focused;
+            }
+
+            if (focused) {
+                focused.removeClass("k-state-focused");
+            }
+
+            if (candidate) {
+                candidate.addClass("k-state-focused");
+            }
+
+            that._focused = candidate;
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                current = that._current();
+
+            if (key == keys.DOWN || key == keys.RIGHT) {
+                current = current.next();
+                if (!current[0]) {
+                    current = that._first();
+                }
+
+                that._current(current);
+
+                e.preventDefault();
+            }
+
+            if (key == keys.UP || key == keys.LEFT) {
+                current = current.prev();
+                if (!current[0]) {
+                    current = that._last();
+                }
+
+                that._current(current);
+                e.preventDefault();
+            }
+
+            if (key == keys.ENTER || key == keys.SPACEBAR) {
+                //that._click(current.children(LINKSELECTOR));
+                e.preventDefault();
+            }
         },
 
         _dataSource: function() {
