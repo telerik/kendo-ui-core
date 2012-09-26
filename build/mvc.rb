@@ -1,55 +1,68 @@
-MVC_SRC = FileList['wrappers/mvc/src/**/*.cs']
-            .include('wrappers/mvc/src/**/*.resx')
-            .include('wrappers/mvc/src/**/*.csproj')
-            .include('wrappers/mvc/src/**/*.snk')
-            .include('wrappers/mvc/src/**/*.dll')
-            .exclude('wrappers/mvc/src/**/Kendo*.dll')
+MVC_SRC_ROOT = 'wrappers/mvc/src/'
+MVC_DEMOS_ROOT = 'wrappers/mvc/demos/Kendo.Mvc.Examples/'
+DEMO_SHARED_ROOT = 'demos/mvc/content/'
 
-MVC_DLL = FileList['wrappers/mvc/src/Kendo.Mvc/Resources/Messages.*.resx']
+# The list of files which Kendo.Mvc.dll depends on
+MVC_WRAPPERS_SRC = FileList[MVC_SRC_ROOT + '**/*.cs']
+            .include(MVC_SRC_ROOT + '**/*.resx')
+            .include(MVC_SRC_ROOT + '**/*.csproj')
+            .include(MVC_SRC_ROOT + '**/*.snk')
+            .include(MVC_SRC_ROOT + '**/*.dll')
+            .exclude(MVC_SRC_ROOT + '**/Kendo*.dll')
+
+# The list of assemblies produced when building the wrappers - Kendo.Mvc.dll and satellite assemblies
+MVC_DLL = FileList[MVC_SRC_ROOT + 'Kendo.Mvc/Resources/Messages.*.resx']
             .include('Kendo.Mvc.dll')
             .include('Kendo.Mvc.xml')
-            .pathmap('wrappers/mvc/src/Kendo.Mvc/bin/Release/%f')
+            .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release/%f')
             .sub(/Messages\.(.+).resx/, '\1/Kendo.Mvc.resources.dll')
 
+# Delete all Kendo*.dll files when `rake clean`
 CLEAN.include(FileList['wrappers/mvc/**/Kendo*.dll'])
 
-MVC_RAZOR_EDITOR_TEMPLATES = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/*.cshtml']
-MVC_ASCX_EDITOR_TEMPLATES = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/*.ascx']
+# Delete all ~/Scripts/**/kendo*.js files when `rake clean`. They are copied by `rake mvc:assets`
+CLEAN.include(FileList[MVC_DEMOS_ROOT + 'Scripts/**/kendo*.js'])
 
+# Delete all ~/Content/**/kendo*.css files when `rake clean`. They are copied by `rake mvc:assets`
+CLEAN.include(FileList[MVC_DEMOS_ROOT + 'Content/**/kendo*.css'])
+
+MVC_RAZOR_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTemplates/*.cshtml']
+MVC_ASCX_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTemplates/*.ascx']
+
+# Satellite assemblies (<culture>\Kendo.Mvc.ressources.dll) depend on Kendo.Mvc.dll
 rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
+
+# XML API documentation depends on Kendo.Mvc.Dll
 rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
-MVC_DEMOS_SRC = FileList['wrappers/mvc/demos/**/*.cs']
+# The list of whils which Kendo.Mvc.Examples.dll depends on
+MVC_DEMOS_SRC = FileList[MVC_DEMOS_ROOT + '**/*.cs']
                 .reject { |f| File.directory? f }
 
-MVC_DEMOS = FileList['wrappers/mvc/demos/**/*']
+# The list of files to deploy in the demos
+MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                 .include(FileList[MVC_MIN_JS]
-                    .sub('src', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Scripts')
+                    .sub('src', MVC_DEMOS_ROOT + 'Scripts')
                 )
                 .include(FileList[MIN_CSS_RESOURCES]
-                    .sub('styles', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content')
+                    .sub('styles', MVC_DEMOS_ROOT + 'Content')
                 )
                 .include(
-                    FileList['demos/mvc/content/web/**/*']
+                    FileList[DEMO_SHARED_ROOT + '{web,dataviz}/**/*']
                         .reject { |f| File.directory? f }
-                        .sub('demos/mvc/content', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content')
+                        .sub(DEMO_SHARED_ROOT, MVC_DEMOS_ROOT + 'Content/')
                 )
                 .include(
-                    FileList['demos/mvc/content/dataviz/**/*']
+                    FileList[DEMO_SHARED_ROOT + 'shared/styles/**/*']
                         .reject { |f| File.directory? f }
-                        .sub('demos/mvc/content', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content')
+                        .sub(DEMO_SHARED_ROOT + 'shared/styles', MVC_DEMOS_ROOT + 'Content/shared')
                 )
                 .include(
-                    FileList['demos/mvc/content/shared/styles/**/*']
+                    FileList[DEMO_SHARED_ROOT + 'shared/icons/**/*']
                         .reject { |f| File.directory? f }
-                        .sub('demos/mvc/content/shared/styles', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared')
+                        .sub(DEMO_SHARED_ROOT + 'shared/icons', MVC_DEMOS_ROOT + 'Content/shared/icons')
                 )
-                .include(
-                    FileList['demos/mvc/content/shared/icons/**/*']
-                        .reject { |f| File.directory? f }
-                        .sub('demos/mvc/content/shared/icons', 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared/icons')
-                )
-                .include('wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll')
+                .include(MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll')
                 .exclude('**/*.winjs.*')
                 .exclude('**/System*.dll')
                 .exclude('**/*.csproj')
@@ -59,6 +72,7 @@ MVC_DEMOS = FileList['wrappers/mvc/demos/**/*']
                 .exclude('**/*.pdb')
                 .exclude('**/*.mdb')
 
+# Updates assembly version if the VERSION constant is changed
 class AssemblyInfoTask < Rake::FileTask
     def execute(args=nil)
         assemblyInfo = File.read(name)
@@ -81,40 +95,41 @@ def assembly_info_file (*args, &block)
     AssemblyInfoTask.define_task(*args, &block)
 end
 
+# Update CommonAssemblyInfo.cs whenever the VERSION constant changes
 assembly_info_file 'wrappers/mvc/src/shared/CommonAssemblyInfo.cs'
 
 namespace :mvc do
-    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content',
+    tree :to => MVC_DEMOS_ROOT + 'Content',
          :from => MIN_CSS_RESOURCES,
          :root => 'styles/'
 
-    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/web',
-         :from => 'demos/mvc/content/web/**/*',
-         :root => 'demos/mvc/content/web/'
+    tree :to => MVC_DEMOS_ROOT + 'Content/web',
+         :from => DEMO_SHARED_ROOT + 'web/**/*',
+         :root => DEMO_SHARED_ROOT + 'web/'
 
-    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/dataviz',
-         :from => 'demos/mvc/content/dataviz/**/*',
-         :root => 'demos/mvc/content/dataviz/'
+    tree :to => MVC_DEMOS_ROOT + 'Content/dataviz',
+         :from => DEMO_SHARED_ROOT + 'dataviz/**/*',
+         :root => DEMO_SHARED_ROOT + 'dataviz/'
 
-    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared',
-         :from => 'demos/mvc/content/shared/styles/**/*',
-         :root => 'demos/mvc/content/shared/styles/'
+    tree :to => MVC_DEMOS_ROOT + 'Content/shared',
+         :from => DEMO_SHARED_ROOT + 'shared/styles/**/*',
+         :root => DEMO_SHARED_ROOT + 'shared/styles/'
 
-    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared/icons',
-         :from => 'demos/mvc/content/shared/icons/**/*',
-         :root => 'demos/mvc/content/shared/icons/'
+    tree :to => MVC_DEMOS_ROOT + 'Content/shared/icons',
+         :from => DEMO_SHARED_ROOT + 'shared/icons/**/*',
+         :root => DEMO_SHARED_ROOT + 'shared/icons/'
 
-    tree :to => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Scripts',
+    tree :to => MVC_DEMOS_ROOT + 'Scripts',
          :from => MVC_MIN_JS,
          :root => 'src/'
 
-    task :assets_js => [:js, 'wrappers/mvc/demos/Kendo.Mvc.Examples/Scripts']
+    task :assets_js => [:js, MVC_DEMOS_ROOT + 'Scripts']
     task :assets_css => [
         :less,
-        'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/web',
-        'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/dataviz',
-        'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared',
-        'wrappers/mvc/demos/Kendo.Mvc.Examples/Content/shared/icons',
+        MVC_DEMOS_ROOT + 'Content/web',
+        MVC_DEMOS_ROOT + 'Content/dataviz',
+        MVC_DEMOS_ROOT + 'Content/shared',
+        MVC_DEMOS_ROOT + 'Content/shared/icons',
     ]
 
     desc('Update CommonAssemblyInfo.cs with current VERSION')
@@ -124,17 +139,15 @@ namespace :mvc do
     task :assets => ['mvc:assets_js', 'mvc:assets_css']
 end
 
-# Build ASP.NET MVC wrappers
-
-file 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' => MVC_SRC do |t|
+# Produce Kendo.Mvc.dll by building Kendo.Mvc.csproj
+file 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' => MVC_WRAPPERS_SRC do |t|
     msbuild 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
 end
 
-# Build ASP.NET MVC demos
-
-file 'wrappers/mvc/demos/Kendo.Mvc.Examples/bin/Kendo.Mvc.Examples.dll' =>
+# Produce Kendo.Mvc.Examples.dll by building Kendo.Mvc.Examples.csproj
+file MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll' =>
     MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll') do |t|
-    msbuild 'wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
+    msbuild MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
 end
 
 # Copy Source.snk as Kendo.snk (the original Kendo.snk should not be distributed)
@@ -185,10 +198,10 @@ end
 
 # Copy Kendo.Mvc.Examples.csproj (needed for the next task)
 file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
-          :from => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
+          :from => MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
 
 file_copy :to => 'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
-          :from => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
+          :from => MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
 
 # Patch Visual Studio Project - fix paths etc.
 file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj' do |t|
