@@ -533,9 +533,7 @@
 
                     var options = kendo.deepExtend(chart._originalOptions, theme);
 
-                    chart.options = options;
-
-                    chart.refresh();
+                    chartObject.kendoChart(options);
                 });
             },
             render: function() {
