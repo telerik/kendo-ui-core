@@ -27,8 +27,8 @@ namespace Kendo.Controllers
                 foreach (var file in files)
                 {
                     // Some browsers send file names with full path. This needs to be stripped.
-                    var fileName = Path.GetFileName(file.FileName);
-                    var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                    //var fileName = Path.GetFileName(file.FileName);
+                    //var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
 
                     // The files are not actually saved in this demo
                     // file.SaveAs(physicalPath);

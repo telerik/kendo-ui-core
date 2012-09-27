@@ -89,7 +89,9 @@ namespace Kendo.Controllers
                         {
                             ViewBag.CurrentWidget = widget;
                             ViewBag.CurrentExample = example;
-                            ViewBag.Title = example.Text;
+                            ViewBag.Title = example.Title ?? example.Text;
+                            ViewBag.Meta = example.Meta;
+                            ViewBag.Description = example.Description;
 
                             found = true;
                         }

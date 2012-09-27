@@ -674,10 +674,6 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
-  <Target Name="AfterBuild" Condition="'$(Configuration)'!='Release'">
-    <!-- Copy source files of the wrappers -->
-    <Exec Command="jake demos:copy-wrappers-sources" />
-  </Target>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
   </Target>
