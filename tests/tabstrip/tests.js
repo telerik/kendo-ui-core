@@ -22,5 +22,9 @@ tests.push(
     {
         page: "tabstrip/lint.html",
         title: "tabstrip lint"
+    },
+    {
+        page: "tabstrip/navigation.html",
+        title: "tabstrip navigation"
     }
 );
