@@ -4,6 +4,10 @@ tests.push(
         title: "themebuilder"
     },
     {
+        page: "themebuilder/themecollection.html",
+        title: "themebuilder themecollection"
+    },
+    {
         page: "themebuilder/colorengine.html",
         title: "themebuilder colorengine"
     },

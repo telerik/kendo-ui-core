@@ -34,6 +34,7 @@
         <script>
             var ThemeBuilder = kendo.ThemeBuilder,
                 LessConstants = kendo.LessConstants,
+                JsonConstants = kendo.JsonConstants,
                 constant = function(target, property, values) {
                     return {
                         target: target,
@@ -178,6 +179,24 @@
 
                 themebuilder.element.find("[id='@foo']").val(color)
                     .data("kendoColorPicker").trigger("change");
+            });
+
+            test("_propertyChange updates dataviz constant", function() {
+                var color = "#b4d455",
+                    constants = new JsonConstants({
+                        "title.color": { property: "color" }
+                    }),
+                    themebuilder = new ThemeBuilder({
+                        template: '',
+                        datavizConstants: constants
+                    });
+
+                themebuilder._propertyChange({
+                    value: color,
+                    name: "title.color"
+                });
+
+                equals(constants.constants["title.color"].value, color)
             });
 
         </script>

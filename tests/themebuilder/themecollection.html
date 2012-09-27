@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ThemeBuilder tests</title>
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.panelbar.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.gauge.js"></script>
+
+        <link rel="stylesheet" href="../../tests/qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">ThemeBuilder.ThemeCollection tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script src="../../themebuilder/src/scripts/less.js"></script>
+        <script src="../../themebuilder/src/scripts/themebuilder.js"></script>
+        <script src="../../themebuilder/src/scripts/colorengine.js"></script>
+
+        <script>
+            var ThemeCollection = kendo.ThemeCollection,
+                JsonConstants = kendo.JsonConstants,
+                LessConstants = kendo.LessConstants;
+
+            test("update method updates variables in themes", function() {
+                var collection = new ThemeCollection([
+                        new LessConstants({ "@foo": {} })
+                    ]),
+                    color = "#f1f1f1";
+
+                collection.update("@foo", color);
+
+                equal(collection[0].constants["@foo"].value, color);
+            });
+
+            test("applyTheme method applies theme to target document", 1, function() {
+                var less = new LessConstants({ "@foo": { value: "#ff0000" } }),
+                    collection = new ThemeCollection([ less ]);
+
+                less.applyTheme = function() {
+                    ok(true);
+                };
+
+                collection.apply(document);
+            });
+        </script>
+
+        <div id="qunit-fixture"> </div>
+        <ul id="log"></ul>
+    </body>
+</html>
+

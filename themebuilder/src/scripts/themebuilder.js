@@ -8,6 +8,7 @@
         ui = kendo.ui,
         colorPicker = "ktb-colorpicker",
         numeric = "ktb-numeric",
+        ObservableObject = kendo.data.ObservableObject,
         propertyEditors = {
             "color": colorPicker,
             "background-color": colorPicker,
@@ -124,16 +125,10 @@
         },
         lessEOLRe = /;$/m,
         lessConstantPairRe = /(@[a-z\-]+):\s*(.*)/i,
-        LessConstants = kendo.Observable.extend({
+        LessConstants = ObservableObject.extend({
             init: function(constants) {
                 this.constants = constants || {};
-            },
-
-            set: function(name, value) {
-                var constant = this.constants[name];
-                if (constant) {
-                    constant.value = value;
-                }
+                ObservableObject.fn.init.call(this, constants);
             },
 
             serialize: function() {
@@ -149,7 +144,7 @@
                     var result = lessConstantPairRe.exec(this);
 
                     if (result) {
-                        that.set(result[1], result[2]);
+                        that.update(result[1], result[2]);
                     }
                 });
             },
@@ -253,24 +248,32 @@
 
                 cachedPrototype.remove();
             },
-            apply: function(targetDocument) {
+
+            applyTheme: function(targetDocument) {
             }
         }),
 
-        JsonConstants = kendo.Observable.extend({
+        JsonConstants = ObservableObject.extend({
             init: function(constants) {
                 this.constants = constants || {};
+                ObservableObject.fn.init.call(this);
             },
+
             infer: function(targetDocument) {
                 var $ = targetDocument.defaultView.$,
                     chart = $("[data-role=chart]", targetDocument).data("kendoChart"),
                     constants = this.constants, constant;
 
+                if (!chart) {
+                    return;
+                }
+
                 for (constant in constants) {
                     constants[constant].value = kendo.getter(constant, true)(chart.options);
                 }
             },
-            source: function() {
+
+            source: function(format) {
                 var result = {},
                     constant, constants = this.constants;
 
@@ -278,7 +281,62 @@
                     safeSetter(constant)(result, constants[constant].value);
                 }
 
-                return JSON.stringify(result, null, 4);
+                if (format == "string") {
+                    return JSON.stringify(result, null, 4);
+                } else {
+                    return result;
+                }
+
+            },
+
+            applyTheme: function(targetDocument) {
+                var w = "defaultView" in targetDocument ? targetDocument.defaultView : targetDocument.parentWindow,
+                    source = this.source("json");
+
+                $("[data-role=chart]", targetDocument).each(function() {
+                    // get jQuery of target document to access client-side object
+                    var chartElement = w.$(this),
+                        chart = chartElement.data("kendoChart"),
+                        options = kendo.deepExtend(chart._originalOptions, source);
+
+                    chartElement.kendoChart(options);
+                });
+            }
+        }),
+
+        ThemeCollection = kendo.data.ObservableArray.extend({
+            update: function(name, value) {
+                var i, constant;
+
+                for (i = 0; i < this.length; i++) {
+                    constant = this[i].constants[name];
+
+                    if (constant) {
+                        constant.value = value;
+                    }
+                }
+            },
+
+            infer: function(targetDocument) {
+                for (var i = 0; i < this.length; i++) {
+                    this[i].infer(targetDocument);
+                }
+            },
+
+            valuesFor: function(id) {
+                for (var i = 0; i < this.length; i++) {
+                    if (this[i].constants[id]) {
+                        return this[i].constants[id].values;
+                    }
+                }
+
+                return [];
+            },
+
+            apply: function(targetDocument) {
+                for (var i = 0; i < this.length; i++) {
+                    this[i].applyTheme(targetDocument);
+                }
             }
         }),
 
@@ -289,20 +347,22 @@
                 templateInfo = that.templateInfo = templateInfo || {};
                 that.targetDocument = targetDocument || (window.parent || window).document;
 
-                var constants = that.constants = templateInfo.webConstants;
+                var themes = [];
 
-                that.datavizConstants = templateInfo.datavizConstants;
+                if (templateInfo.webConstants) {
+                    themes.push(templateInfo.webConstants);
+                }
+
+                if (templateInfo.datavizConstants) {
+                    themes.push(templateInfo.datavizConstants);
+                }
+
+                this.themes = new ThemeCollection(themes);
 
                 that.webConstantsHierarchy = templateInfo.webConstantsHierarchy;
                 that.datavizConstantsHierarchy = templateInfo.datavizConstantsHierarchy;
 
-                if (constants) {
-                    constants.infer(that.targetDocument);
-                }
-
-                if (that.datavizConstants) {
-                    that.datavizConstants.infer(that.targetDocument);
-                }
+                this.themes.infer(that.targetDocument);
 
                 that.render();
 
@@ -328,7 +388,7 @@
                     }).end()
                     .find(".ktb-combo")
                         .each(function() {
-                            var data = constants ? constants.constants[this.id].values : [];
+                            var data = that.themes.valuesFor(this.id);
 
                             data.splice(0, 0, { text: "unchanged", value: this.value });
 
@@ -394,7 +454,7 @@
                 this._showSource(
                     "// use as theme: 'newTheme'\n" +
                     "kendo.dataviz.ui.themes.chart.newThemeName = " +
-                    this.datavizConstants.source()
+                    this.themes[1].source("string")
                 );
             },
             showWebSource: function(e) {
@@ -446,7 +506,7 @@
                         clientObject = $(that).data(clientObjects[dataType]);
 
                     if (clientObject) {
-                        clientObject.value(constants.constants[that.id].value);
+                        clientObject.value(constants[that.id].value);
                     }
                 });
             },
@@ -456,7 +516,7 @@
                 $(".ktb-overlay:visible").slideUp();
             },
             _generateTheme: function(callback) {
-                var constants = this.constants.serialize();
+                var constants = this.themes[0].serialize();
                 (new window.less.Parser()).parse(
                     constants + this.templateInfo.template,
                     function (err, tree) {
@@ -471,20 +531,16 @@
                 );
             },
             _propertyChange: function(e) {
-                var that = this;
+                this.themes.update(e.name, e.value);
+                this.themes.apply(this.targetDocument);
 
-                if (/^@/.test(e.name)) {
-                    // LESS constant changed
-                    that.constants.set(e.name, e.value);
-
-                    that._generateTheme(function(constants, css) {
-                        that.updateStyleSheet(css);
-                    });
-                } else {
-                    // DataViz property changed
-                    var options = safeSetter(e.name)({}, e.value);
-                    that.updateDataVizTheme(options);
-                }
+                //if (/^@/.test(e.name)) {
+                    //that._generateTheme(function(constants, css) {
+                        //that.updateStyleSheet(css);
+                    //});
+                //} else {
+                    //that.updateDataVizTheme(options);
+                //}
             },
             updateStyleSheet: function(cssText) {
                 var style = $("style[title='themebuilder']")[0],
@@ -536,19 +592,6 @@
 
                 // trigger the tracking
                 img.src = urchinUrl;
-            },
-            updateDataVizTheme: function(theme) {
-                var doc = this.targetDocument;
-
-                $("[data-role=chart]", doc).each(function() {
-                    // get jQuery of target document to access client-side object
-                    var win = "defaultView" in doc ? doc.defaultView : doc.parentWindow,
-                        chartElement = win.$(this),
-                        chart = chartElement.data("kendoChart"),
-                        options = kendo.deepExtend(chart._originalOptions, theme);
-
-                    chartElement.kendoChart(options);
-                });
             },
             render: function() {
                 var that = this,
@@ -606,7 +649,7 @@
                                     map(that.webConstantsHierarchy || {}, function(section, title) {
                                         return propertyGroupTemplate({
                                             title: title,
-                                            constants: that.constants.constants || {},
+                                            constants: that.themes[0].constants || {},
                                             section: section,
                                             editors: propertyEditors,
                                             processors: processors
@@ -623,7 +666,7 @@
                                     map(that.datavizConstantsHierarchy || {}, function(section, title) {
                                         return propertyGroupTemplate({
                                             title: title,
-                                            constants: that.datavizConstants.constants || {},
+                                            constants: that.themes[1].constants || {},
                                             section: section,
                                             editors: propertyEditors,
                                             processors: processors
@@ -665,6 +708,7 @@
     kendo.ui.plugin(ColorPicker);
 
     extend(kendo, {
+        ThemeCollection: ThemeCollection,
         LessConstants: LessConstants,
         JsonConstants: JsonConstants,
         ThemeBuilder: ThemeBuilder

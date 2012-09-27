@@ -37,13 +37,8 @@
         <script src="../../themebuilder/src/scripts/colorengine.js"></script>
 
         <script>
-            var ThemeBuilder = kendo.ThemeBuilder;
-
-            module("integration", {
-                teardown: function() {
-                    $("#kendo-themebuilder, head style, .k-chart").remove();
-                }
-            });
+            var ThemeBuilder = kendo.ThemeBuilder,
+                JsonConstants = kendo.JsonConstants;
 
             function createChart(options) {
                 return $("<div />")
@@ -52,48 +47,8 @@
                     .data("kendoChart");
             }
 
-            var fancyColor = "#b4d455";
-
-            test("updateDataVizTheme sets new theme options", function() {
-                var chart = createChart(),
-                    themebuilder = new ThemeBuilder({}, document);
-
-                themebuilder.updateDataVizTheme({
-                    title: { color: fancyColor }
-                });
-
-                chart = $("[data-role=chart]").data("kendoChart");
-
-                equal(chart.options.title.color, fancyColor);
-            });
-
-            test("_propertyChange sets simple property in options", function() {
-                var themebuilder = new ThemeBuilder({}, document),
-                    options;
-
-                themebuilder.updateDataVizTheme = function(o) {
-                    options = o;
-                };
-
-                themebuilder._propertyChange({ name: "foo", value: "bar" });
-
-                equal(options.foo, "bar");
-            });
-
-            test("_propertyChange sets complex property in options", function() {
-                var themebuilder = new ThemeBuilder({}, document),
-                    options;
-
-                themebuilder.updateDataVizTheme = function(o) {
-                    options = o;
-                };
-
-                themebuilder._propertyChange({ name: "foo.bar.baz", value: "qux" });
-
-                equal(options.foo.bar.baz, "qux");
-            });
-
-            var chart, constants;
+            var fancyColor = "#b4d455",
+                chart, constants;
 
             module("JsonConstants", {
                 setup: function() {
@@ -107,12 +62,12 @@
                     });
                 },
                 teardown: function() {
-                    chart.remove();
+                    $("[data-role=chart]").remove();
                 }
             });
 
             test("infer infers basic constant", function() {
-                constants = new kendo.JsonConstants({
+                constants = new JsonConstants({
                     "title.color": {
                         property: "color"
                     }
@@ -124,7 +79,7 @@
             });
 
             test("infer infers multiple constants", function() {
-                constants = new kendo.JsonConstants({
+                constants = new JsonConstants({
                     "title.color": { property: "color" },
                     "tooltip.background": { property: "color" }
                 });
@@ -134,13 +89,27 @@
                 equal(constants.constants["tooltip.background"].value, "#f1f1f1");
             });
 
+            test("applyTheme applies theme to target document", function() {
+                createChart();
+
+                constants = new JsonConstants({
+                    "title.color": { property: "color", value: fancyColor }
+                });
+
+                constants.applyTheme(document);
+
+                chart = $("[data-role=chart]").data("kendoChart");
+
+                equal(chart.options.title.color, fancyColor);
+            });
+
             test("source returns json source", function() {
-                constants = new kendo.JsonConstants({
+                constants = new JsonConstants({
                     "title.color": { property: "color", value: "#b4d455" },
                     "tooltip.background": { property: "color", value: "#00f00d" }
                 });
 
-                var source = JSON.parse(constants.source());
+                var source = JSON.parse(constants.source("string"));
 
                 equal(source.title.color, "#b4d455");
                 equal(source.tooltip.background, "#00f00d");
