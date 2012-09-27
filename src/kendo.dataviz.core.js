@@ -934,9 +934,9 @@
             margin: 5,
             visible: true,
             reverse: false,
+            justified: true,
 
-            _alignLines: true,
-            _labelsOnTicks: true
+            _alignLines: true
         },
 
         // abstract labelsCount(): Number
@@ -974,14 +974,14 @@
                 vertical = options.vertical,
                 labels = axis.labels,
                 labelSize = vertical ? HEIGHT : WIDTH,
-                labelsOnTicks = options._labelsOnTicks,
+                justified = options.justified,
                 mirror = options.labels.mirror,
                 axisX = mirror ? box.x1 : box.x2,
                 axisY = mirror ? box.y2 : box.y1,
                 startMargin = 0,
                 endMargin = options.line.width;
 
-            if (labelsOnTicks && labels.length > 1) {
+            if (justified && labels.length > 1) {
                 startMargin = labels[0].box[labelSize]() / 2;
                 endMargin = last(labels).box[labelSize]() / 2;
             }
@@ -1188,7 +1188,7 @@
                 options = axis.options,
                 labelOptions = options.labels,
                 labels = axis.labels,
-                labelsBetweenTicks = !options._labelsOnTicks,
+                labelsBetweenTicks = !options.justified,
                 vertical = options.vertical,
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,

@@ -965,8 +965,7 @@
                 color: BLACK
             },
             zIndex: 1,
-
-            _labelsOnTicks: false
+            justified: false
         },
 
         range: function() {
@@ -977,9 +976,11 @@
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
+                justified = options.justified,
                 lineBox = axis.lineBox(),
                 size = vertical ? lineBox.height() : lineBox.width(),
-                step = size / itemsCount,
+                intervals = itemsCount - (justified ? 1 : 0),
+                step = size / intervals,
                 dim = vertical ? Y : X,
                 pos = lineBox[dim + 1],
                 positions = [],
@@ -990,7 +991,9 @@
                 pos += step;
             }
 
-            positions.push(lineBox[dim + 2]);
+            if (!justified) {
+                positions.push(lineBox[dim + 2]);
+            }
 
             return options.reverse ? positions.reverse() : positions;
         },
@@ -1012,25 +1015,26 @@
                 options = axis.options,
                 reverse = options.reverse,
                 vertical = options.vertical,
+                justified = options.justified,
                 valueAxis = vertical ? Y : X,
                 lineBox = axis.lineBox(),
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1),
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 size = vertical ? lineBox.height() : lineBox.width(),
-                categoriesLength = math.max(1, options.categories.length),
-                step = (reverse ? -1 : 1) * (size / categoriesLength),
+                intervals = math.max(1, options.categories.length - (justified ? 1 : 0)),
+                step = (reverse ? -1 : 1) * (size / intervals),
                 p1,
                 p2,
                 slotSize;
 
-            from = clipValue(from, 0, categoriesLength);
+            from = clipValue(from, 0, intervals);
             to = defined(to) ? to : from;
-            to = clipValue(to, from, categoriesLength);
+            to = clipValue(to, from, intervals);
             p1 = lineStart + (from * step);
-            p2 = p1 + step;
+            p2 = p1 + (justified ? 0 : step);
             slotSize = to - from;
 
-            if (slotSize > 0 || (from == to && categoriesLength == from)) {
+            if (slotSize > 0 || (from == to && intervals == from)) {
                 p2 = p1 + (slotSize * step);
             }
 

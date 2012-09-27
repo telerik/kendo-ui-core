@@ -194,12 +194,28 @@
                          [185.5, 586.5], TOLERANCE);
                 });
 
+                test("labels are distributed horizontally (justified)", function() {
+                    createCategoryAxis({ justified: true });
+                    categoryAxis.getViewElements(view);
+
+                    same($.map(view.log.text, function(text) { return text.style.x }),
+                         [0, 773], TOLERANCE);
+                });
+
                 test("labels are distributed horizontally in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     categoryAxis.getViewElements(view);
 
                     same($.map(view.log.text, function(text) { return text.style.x }),
                          [586.5, 185.5], TOLERANCE);
+                });
+
+                test("labels are distributed horizontally in reverse (justified)", function() {
+                    createCategoryAxis({ justified: true, reverse: true });
+                    categoryAxis.getViewElements(view);
+
+                    same($.map(view.log.text, function(text) { return text.style.x }),
+                         [773, 0], TOLERANCE);
                 });
 
                 test("labels are positioned below axis line", 2, function() {
@@ -216,12 +232,28 @@
                          [0, 400, 800], TOLERANCE);
                 });
 
+                test("major ticks are distributed horizontally (justified)", function() {
+                    createCategoryAxis({ justified: true });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
+                         [14.5, 786.5], TOLERANCE);
+                });
+
                 test("major ticks are distributed horizontally in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     same($.map(view.log.line, function(line) { return line.x1; }),
                          [800, 400, 0], TOLERANCE);
+                });
+
+                test("major ticks are distributed horizontally in reverse (justified)", function() {
+                    createCategoryAxis({ justified: true, reverse: true });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
+                         [786.5, 14.5], TOLERANCE);
                 });
 
                 test("major ticks can be disabled", function() {
@@ -242,6 +274,18 @@
                          [0, 200, 400, 600, 800], TOLERANCE);
                 });
 
+                test("minor ticks are distributed horizontally (justified)", function() {
+                    createCategoryAxis({
+                        justified: true,
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                    });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
+                         [14.5, 272, 529, 786], TOLERANCE);
+                });
+
                 test("minor ticks are distributed horizontally in reverse", function() {
                     createCategoryAxis({
                         reverse: true,
@@ -252,6 +296,19 @@
                     view.log.line.shift();
                     same($.map(view.log.line, function(line) { return line.x1; }),
                          [800, 600, 400, 200, 0], TOLERANCE);
+                });
+
+                test("minor ticks are distributed horizontally in reverse (justified)", function() {
+                    createCategoryAxis({
+                        justified: true,
+                        reverse: true,
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                     });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
+                         [786, 529, 271, 14.5], TOLERANCE);
                 });
 
                 test("minor ticks can be disabled", function() {
@@ -440,6 +497,14 @@
                          [141, 441], TOLERANCE);
                 });
 
+                test("labels are distributed vertically (justified)", function() {
+                    createCategoryAxis({ vertical: true, justified: true });
+                    categoryAxis.getViewElements(view);
+
+                    same($.map(view.log.text, function(text) { return text.style.y }),
+                         [0, 582], TOLERANCE);
+                });
+
                 test("labels are positioned to the left of the axis line", function() {
                     categoryAxis.getViewElements(view);
 
@@ -454,6 +519,14 @@
                          [0, 300, 600], TOLERANCE);
                 });
 
+                test("major ticks are distributed vertically (justified)", function() {
+                    createCategoryAxis({ vertical: true, justified: true });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.y1; }),
+                         [9, 591], TOLERANCE);
+                });
+
                 test("minor ticks are distributed vertically", function() {
                     createCategoryAxis({
                         majorTicks: { visible: false },
@@ -464,6 +537,19 @@
                     view.log.line.shift();
                     same($.map(view.log.line, function(line) { return line.y1; }),
                         [0, 150, 300, 450, 600], TOLERANCE);
+                });
+
+                test("minor ticks are distributed vertically (justified)", function() {
+                    createCategoryAxis({
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
+                        vertical: true,
+                        justified: true
+                    });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.y1; }),
+                        [9, 203, 397, 591], TOLERANCE);
                 });
 
                 test("line width 0 remove all ticks", function() {
@@ -626,10 +712,22 @@
                     same([slot.x1, slot.x2], [lineBox.x1, xMid]);
                 });
 
+                test("positions slot for first category (justified)", function() {
+                    createCategoryAxis({ justified: true });
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.x1, slot.x2], [lineBox.x1, lineBox.x1]);
+                });
+
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(0);
                     same([slot.x1, slot.x2], [xMid, lineBox.x2]);
+                });
+
+                test("positions slot for first category in reverse (justified)", function() {
+                    createCategoryAxis({ reverse: true, justified: true });
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.x1, slot.x2], [lineBox.x2, lineBox.x2]);
                 });
 
                 test("positions slot for first w/o labels", function() {
@@ -643,10 +741,22 @@
                     same([slot.x1, slot.x2], [xMid, lineBox.x2]);
                 });
 
+                test("positions slot for second category (justified)", function() {
+                    createCategoryAxis({ justified: true });
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.x1, slot.x2], [lineBox.x2, lineBox.x2]);
+                });
+
                 test("positions slot for second category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(1);
                     same([slot.x1, slot.x2], [lineBox.x1, xMid]);
+                });
+
+                test("positions slot for second category in reverse (justified)", function() {
+                    createCategoryAxis({ reverse: true, justified: true });
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.x1, slot.x2], [lineBox.x1, lineBox.x1]);
                 });
 
                 test("positions slot for second category w/o labels", function() {
@@ -713,10 +823,22 @@
                     same([slot.y1, slot.y2], [lineBox.y1, yMid]);
                 });
 
+                test("positions slot for first category (justified)", function() {
+                    createCategoryAxis({ vertical: true, justified: true });
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.y1, slot.y2], [lineBox.y1, lineBox.y1]);
+                });
+
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(0);
                     same([slot.y1, slot.y2], [yMid, lineBox.y2]);
+                });
+
+                test("positions slot for first category in reverse (justified)", function() {
+                    createCategoryAxis({ vertical: true, reverse: true, justified: true });
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.y1, slot.y2], [lineBox.y2, lineBox.y2]);
                 });
 
                 test("positions slot for second category", function() {
