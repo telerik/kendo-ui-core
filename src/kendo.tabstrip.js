@@ -1,6 +1,7 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         map = $.map,
         each = $.each,
         trim = $.trim,
@@ -11,6 +12,7 @@
         NS = ".kendoTabStrip",
         IMG = "img",
         HREF = "href",
+        PREV = "prev",
         LINK = "k-link",
         LAST = "k-last",
         CLICK = "click",
@@ -25,14 +27,17 @@
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
-        CLICKABLEITEMS = ".k-tabstrip-items > .k-item:not(.k-state-disabled)",
-        HOVERABLEITEMS = ".k-tabstrip-items > .k-item:not(.k-state-disabled):not(.k-state-active)",
-        DISABLEDLINKS = ".k-tabstrip-items > .k-state-disabled .k-link",
         DISABLEDSTATE = "k-state-disabled",
         DEFAULTSTATE = "k-state-default",
         ACTIVESTATE = "k-state-active",
+        FOCUSEDSTATE = "k-state-focused",
         HOVERSTATE = "k-state-hover",
         TABONTOP = "k-tab-on-top",
+        ACTIVEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
+        CLICKABLEITEMS = ".k-tabstrip-items > " + ACTIVEITEMS,
+        NAVIGATABLEITEMS = ACTIVEITEMS + ":not(." + ACTIVESTATE + ")",
+        HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS,
+        DISABLEDLINKS = ".k-tabstrip-items > .k-state-disabled .k-link",
 
         templates = {
             content: template(
@@ -155,9 +160,20 @@
             options = that.options;
 
             that.wrapper
-                .on(CLICK + NS, CLICKABLEITEMS, $.proxy(that._click, that))
-                .on(MOUSEENTER + NS +" " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
-                .on(CLICK + NS, DISABLEDLINKS, false);
+                .on(CLICK + NS, DISABLEDLINKS, false)
+                .on(CLICK + NS, CLICKABLEITEMS, function(e) {
+                    if (that._click($(e.currentTarget))) {
+                        e.preventDefault();
+                    }
+                })
+                .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
+                .on("keydown" + NS, $.proxy(that._keydown, that))
+                .on("focus" + NS, function() { that._current(that._endItem("first")); })
+                .on("blur" + NS, function() { that._current(null); });
+
+            that._isRtl = kendo.support.isRtl(that.wrapper);
+
+            that._tabindex();
 
             that._updateClasses();
 
@@ -182,6 +198,76 @@
             }
 
             kendo.notify(that);
+        },
+
+        _endItem: function(action) {
+            return this.tabGroup.children(NAVIGATABLEITEMS)[action]();
+        },
+
+        _item: function(item, action) {
+            var endItem;
+            if (action === PREV) {
+                endItem = "last";
+            } else {
+                endItem = "first";
+            }
+
+            if (!item) {
+                return this._endItem(endItem);
+            }
+
+            item = item[action]();
+
+            if (!item[0]) {
+                item = this._endItem(endItem);
+            }
+
+            if (item.hasClass(DISABLEDSTATE) || item.hasClass(ACTIVESTATE)) {
+                item = this._item(item, action);
+            }
+
+            return item;
+        },
+
+        _current: function(candidate) {
+            var that = this,
+                focused = that._focused;
+
+            if (candidate === undefined) {
+                return focused;
+            }
+
+            if (focused) {
+                focused.removeClass(FOCUSEDSTATE);
+            }
+
+            if (candidate && !candidate.hasClass(ACTIVESTATE)) {
+                candidate.addClass(FOCUSEDSTATE);
+            }
+
+            that._focused = candidate;
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                current = that._current(),
+                rtl = that._isRtl,
+                action;
+
+            if (key == keys.DOWN || key == keys.RIGHT) {
+                action = rtl ? PREV : "next";
+            } else if (key == keys.UP || key == keys.LEFT) {
+                action = rtl ? "next" : PREV;
+            } else if (key == keys.ENTER || key == keys.SPACEBAR) {
+                that._click(current);
+                e.preventDefault();
+            }
+
+            if (action) {
+                that._current(that._item(current, action));
+                e.preventDefault();
+            }
         },
 
         _dataSource: function() {
@@ -589,21 +675,20 @@
             $(e.currentTarget).toggleClass(HOVERSTATE, e.type == MOUSEENTER);
         },
 
-        _click: function (e) {
+        _click: function (item) {
             var that = this,
-                item = $(e.currentTarget),
                 link = item.find("." + LINK),
                 href = link.attr(HREF),
                 collapse = that.options.collapsible,
-                content = $(that.contentElement(item.index()));
+                content = $(that.contentElement(item.index())),
+                prevent, isAnchor;
 
             if (item.closest(".k-widget")[0] != that.wrapper[0]) {
                 return;
             }
 
             if (item.is("." + DISABLEDSTATE + (!collapse ? ",." + ACTIVESTATE : ""))) {
-                e.preventDefault();
-                return;
+                return true;
             }
 
             if (that.tabGroup.children("[data-animating], [data-in-request]").length) {
@@ -611,27 +696,27 @@
             }
 
             if (that.trigger(SELECT, { item: item[0], contentElement: content[0] })) {
-                e.preventDefault();
-            } else {
-                var isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
-
-                if (!href || isAnchor) {
-                    e.preventDefault();
-                } else {
-                    return;
-                }
-
-                if (collapse && item.is("." + ACTIVESTATE)) {
-                    that.deactivateTab(item);
-                    e.preventDefault();
-
-                    return;
-                }
-
-                if (that.activateTab(item)) {
-                    e.preventDefault();
-                }
+                return true;
             }
+
+            isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+
+            if (!href || isAnchor) {
+                prevent = true;
+            } else {
+                return;
+            }
+
+            if (collapse && item.is("." + ACTIVESTATE)) {
+                that.deactivateTab(item);
+                return true;
+            }
+
+            if (that.activateTab(item)) {
+                prevent = true;
+            }
+
+            return prevent;
         },
 
         deactivateTab: function (item) {
@@ -690,6 +775,7 @@
                     .css("z-index");
 
                 item.addClass(ACTIVESTATE);
+                that._current(item);
 
                 that.trigger("change");
 
@@ -722,6 +808,7 @@
                         oldTab.addClass(DEFAULTSTATE);
                         item.addClass(ACTIVESTATE);
                     }
+                    that._current(item);
 
                     content
                         .closest(".k-content")
