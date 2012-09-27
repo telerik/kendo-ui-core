@@ -63,6 +63,13 @@ def msbuild(project, options=nil)
     sh "#{msbuild_path} /v:q #{project} #{options}", :verbose => VERBOSE
 end
 
+def mvn(name, options)
+    cmd = 'mvn '
+    cmd = cmd + '-q ' unless VERBOSE
+
+    sh "#{cmd}-f #{name} #{options}", :verbose => VERBOSE
+end
+
 def uglifyjs(from, to)
     sh "uglifyjs #{from} > #{to}", :verbose => VERBOSE
 
