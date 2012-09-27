@@ -155,6 +155,10 @@
 
             that._tabindex();
 
+            if (!that.wrapper.filter("[role=tree]").length) {
+                that.wrapper.attr("role", "tree");
+            }
+
             that._dataSource(inferred);
 
             that._attachEvents();
@@ -170,6 +174,10 @@
                 }
             } else {
                 that._attachUids();
+            }
+
+            if (that.element[0].id) {
+                that._ariaId = kendo.format("{0}_tv_active", that.element[0].id);
             }
         },
 
@@ -218,6 +226,7 @@
 
             root.children("li").each(function(index, item) {
                 item = $(item).attr(uidAttr, data[index].uid);
+                item.attr("role", "treeitem");
                 that._attachUids(item.children("ul"), data[index].children);
             });
         },
@@ -257,7 +266,7 @@
                     "<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"
                 ),
                 group: template(
-                    "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) #>" +
+                    "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) # role='group'>" +
                         "#= renderItems(data) #" +
                     "</ul>"
                 ),
@@ -425,16 +434,16 @@
                     "# var url = " + that._fieldAccessor("url") + "(item); #" +
                     "# var imageUrl = " + that._fieldAccessor("imageUrl") + "(item); #" +
                     "# var spriteCssClass = " + that._fieldAccessor("spriteCssClass") + "(item); #" +
-                    "<li class='#= r.wrapperCssClass(group, item) #'" +
+                    "<li role='treeitem' class='#= r.wrapperCssClass(group, item) #'" +
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
                             "# if (item.hasChildren) { #" +
-                                "<span class='#= r.toggleButtonClass(item) #'></span>" +
+                                "<span class='#= r.toggleButtonClass(item) #' role='presentation'></span>" +
                             "# } #" +
 
                             "# if (treeview.checkboxes) { #" +
-                                "<span class='k-checkbox'>" +
+                                "<span class='k-checkbox' role='presentation'>" +
                                     "#= treeview.checkboxes.template(data) #" +
                                 "</span>" +
                             "# } #" +
@@ -442,7 +451,7 @@
                             "# var tag = url ? 'a' : 'span'; #" +
                             "# var textAttr = url ? ' href=\\'' + url + '\\'' : ''; #" +
 
-                            "<#=tag# class='#= r.textClass(item) #'#= textAttr #>" +
+                            "<#=tag#  class='#= r.textClass(item) #'#= textAttr #>" +
 
                                 "# if (imageUrl) { #" +
                                     "<img class='k-image' alt='' src='#= imageUrl #'>" +
@@ -565,7 +574,7 @@
                 expanded = that._expanded(node),
                 result;
 
-            if (!node.length) {
+            if (!node.length || !node.is(":visible")) {
                 result = that.root.children().eq(0);
             } else if (expanded) {
                 result = subGroup(node).children().first();
@@ -672,6 +681,7 @@
 
             if (target) {
                 e.preventDefault();
+
                 if (focused[0] != target[0]) {
                     that._trigger(NAVIGATE, target);
                     that.current(target);
@@ -962,8 +972,6 @@
                 return that._updateNode(e.field, items);
             }
 
-            that._current = null;
-
             if (node) {
                 parentNode = that.findByUid(node.uid);
                 that._progress(parentNode, false);
@@ -1031,18 +1039,28 @@
         current: function(node) {
             var that = this,
                 element = that.element,
-                current = that._current;
+                current = that._current,
+                id = that._ariaId;
 
             if (node !== undefined && node.length) {
-                if (current) {
+              if (current) {
                     current.find(".k-in:first")
                         .removeClass("k-state-focused");
+
+                    current.removeAttr("id");
                 }
 
                 that._current = $(node, element).closest(NODE)
                     .find(".k-in:first")
                     .addClass("k-state-focused")
                     .end();
+
+                if (id) {
+                    that.wrapper.removeAttr("aria-activedescendant");
+                    that.wrapper.attr("aria-activedescendant", id);
+                    that._current.attr("id", id);
+                }
+
 
                 return;
             }
@@ -1156,8 +1174,10 @@
 
             if (value) {
                 node.attr(expandedAttr, "true");
+                node.attr("aria-expanded", "true");
             } else {
                 node.removeAttr(expandedAttr);
+                node.attr("aria-expanded", "false");
             }
         },
 

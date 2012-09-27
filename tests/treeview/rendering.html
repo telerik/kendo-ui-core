@@ -426,7 +426,34 @@
                 ok(checkboxes.eq(0).is(":checked"));
                 ok(!checkboxes.eq(1).is(":checked"));
             });
-        </script>
+
+            module("aria generation", moduleOptions);
+
+            test("treeview role is added to the wrapper", function() {
+                treeview.kendoTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo" }
+                    ]
+                });
+
+                equal(treeview.attr("role"), "tree");
+            });
+
+            test("treeview role is added if created from html", function() {
+                var element = $("<div class=\"k-treeview\"><ul><li>item</li></ul></div>").appendTo(document.body).kendoTreeView();
+
+                equal(element.attr("role"), "tree");
+            });
+
+            test("treeviewitem role is assigned to the nodes", function() {
+                treeview.kendoTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo" }
+                    ]
+                });
+                equal(treeview.find("li.k-item:first").attr("role"), "treeitem");
+            });
+       </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

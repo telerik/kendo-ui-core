@@ -930,21 +930,6 @@
                 equal(treeview.find(".k-state-focused").text(), "baz");
             });
 
-            test("focus is cleared after rebind", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo" },
-                        { text: "baz" }
-                    ]
-                });
-
-                treeview.press(keys.DOWN);
-                widget = treeview.data("kendoTreeView");
-                widget.dataSource.read();
-
-                ok(!widget.current().length);
-            });
-
             test("down arrow triggers navigate event", 1, function() {
                 createTreeView({
                     dataSource: [
@@ -973,6 +958,90 @@
                 treeview.focus();
                 treeview.press(keys.UP);
             });
+
+            test("down arrow when focused element is not visible focuses first node", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [ { text: "baz", selected: true } ] }
+                    ]
+                });
+
+                treeview.focus();
+
+                treeview.data("kendoTreeView").dataSource.data()[0].set("expanded", false);
+
+                treeview.press(keys.DOWN);
+
+                equal(treeview.find(".k-state-focused").text(), "foo");
+            });
+
+            test("focusing node set aria-activedescendent to the wrapper", function() {
+                treeview = $("<div id=\"treeview\" />").appendTo(document.body)
+                    .kendoTreeView({
+                        dataSource: [
+                            { text: "foo" },
+                            { text: "baz" }
+                        ]
+                    });
+
+                treeview.focus();
+
+                treeview.press(keys.DOWN);
+
+                ok(treeview.data("kendoTreeView")._ariaId);
+                equal(treeview.attr("aria-activedescendant"), treeview.data("kendoTreeView")._ariaId);
+            });
+
+            test("focusing node sets its id", function() {
+                treeview = $("<div id=\"treeview\" />").appendTo(document.body)
+                    .kendoTreeView({
+                        dataSource: [
+                            { text: "foo" },
+                            { text: "baz" }
+                        ]
+                    });
+
+                treeview.focus();
+
+                treeview.press(keys.DOWN);
+
+                ok(treeview.find("#" + treeview.data("kendoTreeView")._ariaId).length);
+            });
+
+            test("focusing node does not set its id if treeview does not have id", function() {
+                treeview = $("<div />").appendTo(document.body)
+                    .kendoTreeView({
+                        dataSource: [
+                            { text: "foo" },
+                            { text: "baz" }
+                        ]
+                    });
+
+                treeview.focus();
+
+                treeview.press(keys.DOWN);
+
+                ok(!treeview.find("#" + treeview.data("kendoTreeView")._ariaId).length);
+            });
+
+            test("aria-activedescendent is not set if id is not set", function() {
+                treeview = $("<div/>").appendTo(document.body)
+                    .kendoTreeView({
+                        dataSource: [
+                            { text: "foo" },
+                            { text: "baz" }
+                        ]
+                    });
+
+                treeview.focus();
+
+                treeview.press(keys.DOWN);
+
+                ok(!treeview.data("kendoTreeView")._ariaId);
+                ok(!treeview.filter("[aria-activedescendant]").length);
+            });
+
+
             module("drag & drop with load-on-demand", {
                 setup: function() {
                     var i = 1;
