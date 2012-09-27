@@ -52,20 +52,6 @@
                     .data("kendoChart");
             }
 
-            test("updateDataVizTheme calls refresh on all charts on page", function() {
-                var chart = createChart(),
-                    themebuilder = new ThemeBuilder({}, document),
-                    called = false;
-
-                chart.refresh = function() {
-                    called = true;
-                };
-
-                themebuilder.updateDataVizTheme();
-
-                ok(called);
-            });
-
             var fancyColor = "#b4d455";
 
             test("updateDataVizTheme sets new theme options", function() {
@@ -75,6 +61,8 @@
                 themebuilder.updateDataVizTheme({
                     title: { color: fancyColor }
                 });
+
+                chart = $("[data-role=chart]").data("kendoChart");
 
                 equal(chart.options.title.color, fancyColor);
             });
@@ -144,6 +132,18 @@
                 constants.infer(document);
 
                 equal(constants.constants["tooltip.background"].value, "#f1f1f1");
+            });
+
+            test("source returns json source", function() {
+                constants = new kendo.JsonConstants({
+                    "title.color": { property: "color", value: "#b4d455" },
+                    "tooltip.background": { property: "color", value: "#00f00d" }
+                });
+
+                var source = JSON.parse(constants.source());
+
+                equal(source.title.color, "#b4d455");
+                equal(source.tooltip.background, "#00f00d");
             });
 
         </script>

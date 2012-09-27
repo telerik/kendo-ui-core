@@ -86,7 +86,7 @@
                     }),
                     themeBuilder = new ThemeBuilder({
                         template: '',
-                        constants: constants,
+                        webConstants: constants,
                         webConstantsHierarchy: {
                             "Foos": {
                                 "@foo-color": "foo color"
@@ -133,7 +133,7 @@
                     inferred = true;
                 };
 
-                var themebuilder = new ThemeBuilder({ constants: constants }, document);
+                var themebuilder = new ThemeBuilder({ webConstants: constants }, document);
 
                 ok(inferred);
             });
@@ -145,7 +145,7 @@
                     }),
                     themebuilder = new ThemeBuilder({
                         template: '',
-                        constants: constants
+                        webConstants: constants
                     });
 
                 themebuilder._propertyChange({
@@ -161,7 +161,7 @@
                 var color = "#b4d455",
                     themebuilder = new ThemeBuilder({
                         template: '',
-                        constants: new LessConstants({
+                        webConstants: new LessConstants({
                             "@foo": constant(".k-widget", "background-color")
                         }),
                         webConstantsHierarchy: {

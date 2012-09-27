@@ -129,7 +129,7 @@
                 this.constants = constants || {};
             },
 
-            update: function(name, value) {
+            set: function(name, value) {
                 var constant = this.constants[name];
                 if (constant) {
                     constant.value = value;
@@ -149,7 +149,7 @@
                     var result = lessConstantPairRe.exec(this);
 
                     if (result) {
-                        that.update(result[1], result[2]);
+                        that.set(result[1], result[2]);
                     }
                 });
             },
@@ -269,6 +269,16 @@
                 for (constant in constants) {
                     constants[constant].value = kendo.getter(constant, true)(chart.options);
                 }
+            },
+            source: function() {
+                var result = {},
+                    constant, constants = this.constants;
+
+                for (constant in constants) {
+                    safeSetter(constant)(result, constants[constant].value);
+                }
+
+                return JSON.stringify(result, null, 4);
             }
         }),
 
@@ -346,7 +356,7 @@
                     .find(".ktb-opacity").kendoNumericTextBox({
                         min: 0,
                         max: 1,
-                        step: .1,
+                        step: 0.1,
                         spin: changeHandler
                     });
 
@@ -381,7 +391,11 @@
             showDataVizSource: function(e) {
                 e.preventDefault();
 
-                this._showSource(JSON.stringify({ foo: "bar" }));
+                this._showSource(
+                    "// use as theme: 'newTheme'\n" +
+                    "kendo.dataviz.ui.themes.chart.newThemeName = " +
+                    this.datavizConstants.source()
+                );
             },
             showWebSource: function(e) {
                 e.preventDefault();
@@ -461,7 +475,7 @@
 
                 if (/^@/.test(e.name)) {
                     // LESS constant changed
-                    that.constants.update(e.name, e.value);
+                    that.constants.set(e.name, e.value);
 
                     that._generateTheme(function(constants, css) {
                         that.updateStyleSheet(css);
@@ -525,15 +539,15 @@
             },
             updateDataVizTheme: function(theme) {
                 var doc = this.targetDocument;
+
                 $("[data-role=chart]", doc).each(function() {
                     // get jQuery of target document to access client-side object
-                    var win = "defaultView" in doc ? doc.defaultView : doc.parentWindow;
-                    var chartObject = win.$(this);
-                    var chart = chartObject.data("kendoChart");
+                    var win = "defaultView" in doc ? doc.defaultView : doc.parentWindow,
+                        chartElement = win.$(this),
+                        chart = chartElement.data("kendoChart"),
+                        options = kendo.deepExtend(chart._originalOptions, theme);
 
-                    var options = kendo.deepExtend(chart._originalOptions, theme);
-
-                    chartObject.kendoChart(options);
+                    chartElement.kendoChart(options);
                 });
             },
             render: function() {
@@ -592,7 +606,7 @@
                                     map(that.webConstantsHierarchy || {}, function(section, title) {
                                         return propertyGroupTemplate({
                                             title: title,
-                                            constants: that.constants.constants,
+                                            constants: that.constants.constants || {},
                                             section: section,
                                             editors: propertyEditors,
                                             processors: processors
