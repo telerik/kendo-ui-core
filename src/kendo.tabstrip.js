@@ -156,19 +156,22 @@
             options = that.options;
 
             that.wrapper
-                .attr("tabindex", 0)
-                .on("keydown" + NS, $.proxy(that._keydown, that))
-                .on(CLICK + NS, CLICKABLEITEMS, $.proxy(that._click, that))
-                .on(MOUSEENTER + NS +" " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
                 .on(CLICK + NS, DISABLEDLINKS, false)
+                .on(CLICK + NS, CLICKABLEITEMS, function(e) {
+                    if (that._click($(e.currentTarget))) {
+                        e.preventDefault();
+                    }
+                })
+                .on(MOUSEENTER + NS +" " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
+                .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, function() {
-                    var item = that.select().last();
-
-                    that._current(item[0] ? item : that._first());
+                    that._current(that._first());
                 })
                 .on("blur" + NS, function() {
                     that._current(null);
                 });
+
+            that._tabindex();
 
             that._updateClasses();
 
@@ -196,11 +199,47 @@
         },
 
         _first: function() {
-            return this.tabGroup.children(".k-item:not(.k-state-disabled)").first();
+            return this.tabGroup.children(".k-item:not(.k-state-active, .k-state-disabled)").first();
         },
 
         _last: function() {
-            return this.tabGroup.children(".k-item:not(.k-state-disabled)").last();
+            return this.tabGroup.children(".k-item:not(.k-state-active, .k-state-disabled)").last();
+        },
+
+        _nextItem: function(item) {
+            if (!item) {
+                return this._first();
+            }
+
+            var next = item.next();
+
+            if (!next[0]) {
+                next = this._first();
+            }
+
+            if (next.hasClass(DISABLEDSTATE) || next.hasClass(ACTIVESTATE)) {
+                next = this._nextItem(next);
+            }
+
+            return next;
+        },
+
+        _prevItem: function(item) {
+            if (!item) {
+                return this._last();
+            }
+
+            var prev = item.prev();
+
+            if (!prev[0]) {
+                prev = this._last();
+            }
+
+            if (prev.hasClass(DISABLEDSTATE) || prev.hasClass(ACTIVESTATE)) {
+                prev = this._prevItem(prev);
+            }
+
+            return prev;
         },
 
         _current: function(candidate) {
@@ -215,7 +254,7 @@
                 focused.removeClass("k-state-focused");
             }
 
-            if (candidate) {
+            if (candidate && !candidate.hasClass(ACTIVESTATE)) {
                 candidate.addClass("k-state-focused");
             }
 
@@ -228,28 +267,17 @@
                 current = that._current();
 
             if (key == keys.DOWN || key == keys.RIGHT) {
-                current = current.next();
-                if (!current[0]) {
-                    current = that._first();
-                }
-
-                that._current(current);
-
+                that._current(that._nextItem(current));
                 e.preventDefault();
             }
 
             if (key == keys.UP || key == keys.LEFT) {
-                current = current.prev();
-                if (!current[0]) {
-                    current = that._last();
-                }
-
-                that._current(current);
+                that._current(that._prevItem(current));
                 e.preventDefault();
             }
 
             if (key == keys.ENTER || key == keys.SPACEBAR) {
-                //that._click(current.children(LINKSELECTOR));
+                that._click(current);
                 e.preventDefault();
             }
         },
@@ -659,21 +687,20 @@
             $(e.currentTarget).toggleClass(HOVERSTATE, e.type == MOUSEENTER);
         },
 
-        _click: function (e) {
+        _click: function (item) {
             var that = this,
-                item = $(e.currentTarget),
                 link = item.find("." + LINK),
                 href = link.attr(HREF),
                 collapse = that.options.collapsible,
-                content = $(that.contentElement(item.index()));
+                content = $(that.contentElement(item.index())),
+                prevent, isAnchor;
 
             if (item.closest(".k-widget")[0] != that.wrapper[0]) {
                 return;
             }
 
             if (item.is("." + DISABLEDSTATE + (!collapse ? ",." + ACTIVESTATE : ""))) {
-                e.preventDefault();
-                return;
+                return true;
             }
 
             if (that.tabGroup.children("[data-animating], [data-in-request]").length) {
@@ -681,27 +708,27 @@
             }
 
             if (that.trigger(SELECT, { item: item[0], contentElement: content[0] })) {
-                e.preventDefault();
-            } else {
-                var isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
-
-                if (!href || isAnchor) {
-                    e.preventDefault();
-                } else {
-                    return;
-                }
-
-                if (collapse && item.is("." + ACTIVESTATE)) {
-                    that.deactivateTab(item);
-                    e.preventDefault();
-
-                    return;
-                }
-
-                if (that.activateTab(item)) {
-                    e.preventDefault();
-                }
+                return true;
             }
+
+            isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+
+            if (!href || isAnchor) {
+                prevent = true;
+            } else {
+                return;
+            }
+
+            if (collapse && item.is("." + ACTIVESTATE)) {
+                that.deactivateTab(item);
+                return true;
+            }
+
+            if (that.activateTab(item)) {
+                prevent = true;
+            }
+
+            return prevent;
         },
 
         deactivateTab: function (item) {
@@ -760,6 +787,7 @@
                     .css("z-index");
 
                 item.addClass(ACTIVESTATE);
+                that._current(item);
 
                 that.trigger("change");
 
@@ -792,6 +820,7 @@
                         oldTab.addClass(DEFAULTSTATE);
                         item.addClass(ACTIVESTATE);
                     }
+                    that._current(item);
 
                     content
                         .closest(".k-content")
