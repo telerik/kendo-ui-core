@@ -171,6 +171,9 @@
                     that._current(null);
                 });
 
+
+            that._isRtl = kendo.support.isRtl(that.wrapper);
+
             that._tabindex();
 
             that._updateClasses();
@@ -267,12 +270,12 @@
                 current = that._current();
 
             if (key == keys.DOWN || key == keys.RIGHT) {
-                that._current(that._nextItem(current));
+                that._current(that[that._isRtl ? "_prevItem" : "_nextItem"](current));
                 e.preventDefault();
             }
 
             if (key == keys.UP || key == keys.LEFT) {
-                that._current(that._prevItem(current));
+                that._current(that[that._isRtl ? "_nextItem" : "_prevItem"](current));
                 e.preventDefault();
             }
 
