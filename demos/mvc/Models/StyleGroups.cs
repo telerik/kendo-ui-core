@@ -15,6 +15,7 @@ namespace Kendo.Models
             "dataviz/kendo.dataviz.css"
 #else
             "kendo.common.min.css",
+            "web/kendo.rtl.css",
             "kendo.default.min.css",
             "kendo.dataviz.min.css"
 #endif
