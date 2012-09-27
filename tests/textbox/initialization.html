@@ -158,6 +158,12 @@
                 equal(textbox._text.attr("placeholder"), "Select...");
             });
 
+            test("copy input className to the wrapper", function() {
+                var numeric = new NumericTextBox(input.addClass("test"));
+
+                ok(numeric.wrapper.hasClass("test"));
+            });
+
             if (!kendo.support.placeholder) {
                 test("NumericTextBox sets the placeholder in the input element", function() {
                     var textbox = new NumericTextBox(input, {
