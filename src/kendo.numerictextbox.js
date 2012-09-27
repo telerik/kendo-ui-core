@@ -515,6 +515,7 @@
         _wrapper: function() {
             var that = this,
                 element = that.element,
+                DOMElement = element[0],
                 wrapper;
 
             wrapper = element.parents(".k-numerictextbox");
@@ -524,9 +525,12 @@
                 wrapper = wrapper.wrap("<span/>").parent();
             }
 
-            wrapper[0].style.cssText = element[0].style.cssText;
-            element[0].style.width = "";
-            that.wrapper = wrapper.addClass("k-widget k-numerictextbox").show();
+            wrapper[0].style.cssText = DOMElement.style.cssText;
+            DOMElement.style.width = "";
+            that.wrapper = wrapper.addClass("k-widget k-numerictextbox")
+                                  .addClass(DOMElement.className)
+                                  .show();
+
             that._inputWrapper = $(wrapper[0].firstChild);
         },
 
