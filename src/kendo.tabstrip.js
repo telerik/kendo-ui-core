@@ -12,6 +12,7 @@
         NS = ".kendoTabStrip",
         IMG = "img",
         HREF = "href",
+        PREV = "prev",
         LINK = "k-link",
         LAST = "k-last",
         CLICK = "click",
@@ -204,7 +205,12 @@
         },
 
         _item: function(item, action) {
-            var endItem = action === "prev" ? "last" : "first";
+            var endItem;
+            if (action === PREV) {
+                endItem = "last";
+            } else {
+                endItem = "first";
+            }
 
             if (!item) {
                 return this._endItem(endItem);
@@ -250,9 +256,9 @@
                 action;
 
             if (key == keys.DOWN || key == keys.RIGHT) {
-                action = rtl ? "prev" : "next";
+                action = rtl ? PREV : "next";
             } else if (key == keys.UP || key == keys.LEFT) {
-                action = rtl ? "next" : "prev";
+                action = rtl ? "next" : PREV;
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current);
                 e.preventDefault();
