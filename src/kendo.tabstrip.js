@@ -26,14 +26,17 @@
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
-        CLICKABLEITEMS = ".k-tabstrip-items > .k-item:not(.k-state-disabled)",
-        HOVERABLEITEMS = ".k-tabstrip-items > .k-item:not(.k-state-disabled):not(.k-state-active)",
-        DISABLEDLINKS = ".k-tabstrip-items > .k-state-disabled .k-link",
         DISABLEDSTATE = "k-state-disabled",
         DEFAULTSTATE = "k-state-default",
         ACTIVESTATE = "k-state-active",
+        FOCUSEDSTATE = "k-state-focused",
         HOVERSTATE = "k-state-hover",
         TABONTOP = "k-tab-on-top",
+        ACTIVEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
+        CLICKABLEITEMS = ".k-tabstrip-items > " + ACTIVEITEMS,
+        NAVIGATABLEITEMS = ACTIVEITEMS + ":not(." + ACTIVESTATE + ")",
+        HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS,
+        DISABLEDLINKS = ".k-tabstrip-items > .k-state-disabled .k-link",
 
         templates = {
             content: template(
@@ -162,15 +165,10 @@
                         e.preventDefault();
                     }
                 })
-                .on(MOUSEENTER + NS +" " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
+                .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
-                .on("focus" + NS, function() {
-                    that._current(that._first());
-                })
-                .on("blur" + NS, function() {
-                    that._current(null);
-                });
-
+                .on("focus" + NS, function() { that._current(that._endItem("first")); })
+                .on("blur" + NS, function() { that._current(null); });
 
             that._isRtl = kendo.support.isRtl(that.wrapper);
 
@@ -201,48 +199,28 @@
             kendo.notify(that);
         },
 
-        _first: function() {
-            return this.tabGroup.children(".k-item:not(.k-state-active, .k-state-disabled)").first();
+        _endItem: function(action) {
+            return this.tabGroup.children(NAVIGATABLEITEMS)[action]();
         },
 
-        _last: function() {
-            return this.tabGroup.children(".k-item:not(.k-state-active, .k-state-disabled)").last();
-        },
+        _item: function(item, action) {
+            var endItem = action === "prev" ? "last" : "first";
 
-        _nextItem: function(item) {
             if (!item) {
-                return this._first();
+                return this._endItem(endItem);
             }
 
-            var next = item.next();
+            item = item[action]();
 
-            if (!next[0]) {
-                next = this._first();
+            if (!item[0]) {
+                item = this._endItem(endItem);
             }
 
-            if (next.hasClass(DISABLEDSTATE) || next.hasClass(ACTIVESTATE)) {
-                next = this._nextItem(next);
+            if (item.hasClass(DISABLEDSTATE) || item.hasClass(ACTIVESTATE)) {
+                item = this._item(item, action);
             }
 
-            return next;
-        },
-
-        _prevItem: function(item) {
-            if (!item) {
-                return this._last();
-            }
-
-            var prev = item.prev();
-
-            if (!prev[0]) {
-                prev = this._last();
-            }
-
-            if (prev.hasClass(DISABLEDSTATE) || prev.hasClass(ACTIVESTATE)) {
-                prev = this._prevItem(prev);
-            }
-
-            return prev;
+            return item;
         },
 
         _current: function(candidate) {
@@ -254,11 +232,11 @@
             }
 
             if (focused) {
-                focused.removeClass("k-state-focused");
+                focused.removeClass(FOCUSEDSTATE);
             }
 
             if (candidate && !candidate.hasClass(ACTIVESTATE)) {
-                candidate.addClass("k-state-focused");
+                candidate.addClass(FOCUSEDSTATE);
             }
 
             that._focused = candidate;
@@ -267,20 +245,21 @@
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
-                current = that._current();
+                current = that._current(),
+                rtl = that._isRtl,
+                action;
 
             if (key == keys.DOWN || key == keys.RIGHT) {
-                that._current(that[that._isRtl ? "_prevItem" : "_nextItem"](current));
-                e.preventDefault();
-            }
-
-            if (key == keys.UP || key == keys.LEFT) {
-                that._current(that[that._isRtl ? "_nextItem" : "_prevItem"](current));
-                e.preventDefault();
-            }
-
-            if (key == keys.ENTER || key == keys.SPACEBAR) {
+                action = rtl ? "prev" : "next";
+            } else if (key == keys.UP || key == keys.LEFT) {
+                action = rtl ? "next" : "prev";
+            } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current);
+                e.preventDefault();
+            }
+
+            if (action) {
+                that._current(that._item(current, action));
                 e.preventDefault();
             }
         },
