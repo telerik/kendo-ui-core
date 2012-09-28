@@ -235,6 +235,76 @@
                     equals(plotArea.categoryAxis.options.categories.length, 2);
                 });
 
+                test("categoryAxis justified is not altered with line series", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "line",
+                            data: [100]
+                        }], {
+                        categoryAxis: {
+                            categories: ["A", "B"],
+                            justified: true
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.options.justified, true);
+                });
+
+                test("categoryAxis justified is set to false with bar series", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "bar",
+                            data: [100]
+                        }], {
+                        categoryAxis: {
+                            categories: ["A", "B"],
+                            justified: true
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.options.justified, false);
+                });
+
+                test("categoryAxis justified is set to false with column series", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "column",
+                            data: [100]
+                        }], {
+                        categoryAxis: {
+                            categories: ["A", "B"],
+                            justified: true
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.options.justified, false);
+                });
+
+                test("categoryAxis justified is set to false with OHLC series", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "ohlc",
+                            data: [[]]
+                        }], {
+                        categoryAxis: {
+                            categories: ["A", "B"],
+                            justified: true
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.options.justified, false);
+                });
+
+                test("categoryAxis justified is set to false with candlestick series", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "candlestick",
+                            data: [[]]
+                        }], {
+                        categoryAxis: {
+                            categories: ["A", "B"],
+                            justified: true
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.options.justified, false);
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Multiple Value Axes", {
                     setup: function() {

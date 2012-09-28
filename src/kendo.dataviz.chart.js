@@ -5377,7 +5377,11 @@
                 dateCategory,
                 categoryAxis,
                 axes = [],
-                primaryAxis;
+                primaryAxis,
+                centeredSeries = plotArea.filterSeriesByType(
+                    plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK]
+                ),
+                enableJustified = centeredSeries.length === 0;
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
@@ -5386,7 +5390,9 @@
                 axisOptions = deepExtend({
                     vertical: invertAxes,
                     axisCrossingValue: invertAxes ? categories.length : 0
-                }, axisOptions);
+                }, axisOptions, {
+                    justified: enableJustified && axisOptions.justified
+                });
 
                 name = axisOptions.name;
                 dateCategory = categories[0] instanceof Date;
