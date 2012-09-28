@@ -57,12 +57,24 @@ file_copy :to => "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/W
 file_copy :to => 'dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml',
           :from => SPRING_DEMOS_ROOT + 'pom.xml'
 
+file_copy :to => 'dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml',
+          :from => JSP_TAGLIB_POM
+
 file_copy :to => "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
           :from => JSP_TAGLIB_JAR
 
 PROJECT = <<-eos
     <groupId>com.kendoui</groupId>
     <version>#{VERSION}</version>
+eos
+
+JUNIT = <<-eos
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.8.1</version>
+        <scope>test</scope>
+    </dependency>
 eos
 
 BUILD = <<-eos
@@ -83,7 +95,7 @@ BUILD = <<-eos
 eos
 
 # Patch POM - remove parent etc.
-def patch_pom(name)
+def patch_demos_pom(name)
     pom = File.read(name)
 
     pom.sub!(/<parent>(.|\n)*<\/parent>/, PROJECT)
@@ -95,14 +107,33 @@ def patch_pom(name)
     end
 end
 
+def patch_taglib_pom(name)
+    pom = File.read(name)
+
+    pom.sub!(/<parent>(.|\n)*<\/parent>/, PROJECT)
+    pom.sub!(/<dependency>\n\s*<groupId>com\.kendoui(.|\n)*<\/dependency>/, '')
+    pom.sub!(/<\/dependencies>/, JUNIT + '</dependencies>')
+    pom.sub!(/<\/dependencies>/, '</dependencies>' + BUILD)
+
+    File.open(name, 'w') do |file|
+        file.write(pom)
+    end
+end
+
+
 # Prepare the demos pom.xml for end users (trial package)
 file 'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml' do |t|
-    patch_pom(t.name)
+    patch_demos_pom(t.name)
 end
 
 # Prepare the demos pom.xml for end users (commercial package)
 file 'dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml' do |t|
-    patch_pom(t.name)
+    patch_demos_pom(t.name)
+end
+
+# Prepare the src pom.xml for end users
+file 'dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml' do |t|
+    patch_taglib_pom(t.name)
 end
 
 namespace :java do

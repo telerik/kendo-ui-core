@@ -42,6 +42,7 @@ ROOT_MAP = {
     'wrappers/aspnetmvc/Examples/Content/shared' => 'demos/mvc/content/shared',
     'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
     'wrappers/jsp/kendo-taglib' => 'wrappers/java/kendo-taglib/target/',
+    'src/kendo-taglib/src' => 'wrappers/java/kendo-taglib/src/',
     'wrappers/jsp/spring-demos/src' => 'wrappers/java/spring-demos/src/'
 }
 
@@ -213,11 +214,13 @@ bundle :name => 'jsp.commercial',
             'js' => MVC_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
             'src/js' => COMPLETE_SRC_JS,
-            'src/styles' => SRC_CSS
+            'src/styles' => SRC_CSS,
+            'src/kendo-taglib/src' => JSP_TAGLIB_SRC
        }.merge(JSP_CONTENT),
        :prerequisites => [
            "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
            'dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml',
+           'dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml'
        ]
 
 BUNDLES = [
