@@ -39,7 +39,7 @@
                     slider = newSlider({ value: 5, smallStep: 2 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
-                dragHandle.trigger({ type: "keydown",
+                dragHandle.focus().trigger({ type: "keydown",
                     keyCode: downArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -51,7 +51,7 @@
 
                 slider.value(5);
 
-                dragHandle.trigger({ type: "keydown",
+                dragHandle.focus().trigger({ type: "keydown",
                     keyCode: leftArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -70,7 +70,7 @@
                     slider = newSlider({ value: 5, smallStep: 2 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
-                dragHandle.trigger({ type: "keydown",
+                dragHandle.focus().trigger({ type: "keydown",
                     keyCode: upArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -82,7 +82,7 @@
 
                 slider.value(5);
 
-                dragHandle.trigger({ type: "keydown",
+                dragHandle.focus().trigger({ type: "keydown",
                     keyCode: rightArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -100,7 +100,7 @@
                     slider = newSlider({ value: 5, largeStep: 3 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
-                dragHandle.trigger({ type: "keydown",
+                dragHandle.focus().trigger({ type: "keydown",
                     keyCode: end,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -118,7 +118,7 @@
                     slider = newSlider({ value: 5, largeStep: 3 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
-                dragHandle.trigger({ type: "keydown",
+                dragHandle.focus().trigger({ type: "keydown",
                     keyCode: home,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -136,7 +136,7 @@
                     slider = newSlider({ value: 5 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
-                dragHandle.trigger({ type: "keydown",
+                dragHandle.focus().trigger({ type: "keydown",
                     keyCode: end,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -154,7 +154,7 @@
                     slider = newSlider({ value: 5 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
-                dragHandle.trigger({ type: "keydown",
+                dragHandle.focus().trigger({ type: "keydown",
                     keyCode: home,
                     preventDefault: function () {
                         isDefaultPrevent = true;

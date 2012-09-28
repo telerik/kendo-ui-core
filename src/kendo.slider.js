@@ -1288,16 +1288,18 @@
                 selectionEndValue = that.options.selectionEnd,
                 dragSelectionStart,
                 dragSelectionEnd,
-                activeHandleDrag = that._activeHandleDrag;
+                activeHandleDrag;
 
             if (e.keyCode in that._keyMap) {
                 if (handle == "firstHandle") {
+                    activeHandleDrag = that._activeHandleDrag = that._firstHandleDrag;
                     selectionStartValue = that._keyMap[e.keyCode](selectionStartValue);
 
                     if (selectionStartValue > selectionEndValue) {
                         selectionEndValue = selectionStartValue;
                     }
                 } else {
+                    activeHandleDrag = that._activeHandleDrag = that._lastHandleDrag;
                     selectionEndValue = that._keyMap[e.keyCode](selectionEndValue);
 
                     if (selectionStartValue > selectionEndValue) {

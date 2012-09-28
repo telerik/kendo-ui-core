@@ -40,7 +40,7 @@
                     dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 //left drag handle
-                dragHandles.eq(0).trigger({ type: "keydown",
+                dragHandles.eq(0).focus().trigger({ type: "keydown",
                     keyCode: downArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -53,7 +53,7 @@
                 rangeSlider.values(3, 6);
                 isDefaultPrevent = false;
 
-                dragHandles.eq(0).trigger({ type: "keydown",
+                dragHandles.eq(0).focus().trigger({ type: "keydown",
                     keyCode: leftArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -67,7 +67,7 @@
 
                 //right drag handle
                 isDefaultPrevent = false;
-                dragHandles.eq(1).trigger({ type: "keydown",
+                dragHandles.eq(1).focus().trigger({ type: "keydown",
                     keyCode: downArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -80,7 +80,7 @@
                 rangeSlider.values(3, 6);
                 isDefaultPrevent = false;
 
-                dragHandles.eq(1).trigger({ type: "keydown",
+                dragHandles.eq(1).focus().trigger({ type: "keydown",
                     keyCode: leftArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -98,7 +98,7 @@
                     dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 // left drag handle
-                dragHandles.eq(0).trigger({ type: "keydown",
+                dragHandles.eq(0).focus().trigger({ type: "keydown",
                     keyCode: upArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -111,7 +111,7 @@
                 rangeSlider.values(3, 6);
                 isDefaultPrevent = false;
 
-                dragHandles.eq(0).trigger({ type: "keydown",
+                dragHandles.eq(0).focus().trigger({ type: "keydown",
                     keyCode: rightArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -125,7 +125,7 @@
 
                 // right drag handle
                 isDefaultPrevent = false;
-                dragHandles.eq(1).trigger({ type: "keydown",
+                dragHandles.eq(1).focus().trigger({ type: "keydown",
                     keyCode: upArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -138,7 +138,7 @@
                 rangeSlider.values(3, 6);
                 isDefaultPrevent = false;
 
-                dragHandles.eq(1).trigger({ type: "keydown",
+                dragHandles.eq(1).focus().trigger({ type: "keydown",
                     keyCode: rightArrow,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -155,7 +155,7 @@
                     dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 // left drag handle
-                dragHandles.eq(0).trigger({ type: "keydown",
+                dragHandles.eq(0).focus().trigger({ type: "keydown",
                     keyCode: pageUp,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -169,7 +169,7 @@
 
                 // right drag handle
                 isDefaultPrevent = false;
-                dragHandles.eq(1).trigger({ type: "keydown",
+                dragHandles.eq(1).focus().trigger({ type: "keydown",
                     keyCode: pageUp,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -186,7 +186,7 @@
                     dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 //left drag handle
-                dragHandles.eq(0).trigger({ type: "keydown",
+                dragHandles.eq(0).focus().trigger({ type: "keydown",
                     keyCode: pageDown,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -200,7 +200,7 @@
 
                 //right drag handle
                 isDefaultPrevent = false;
-                dragHandles.eq(1).trigger({ type: "keydown",
+                dragHandles.eq(1).focus().trigger({ type: "keydown",
                     keyCode: pageDown,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -217,7 +217,7 @@
                     dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 // left drag hangle
-                dragHandles.eq(0).trigger({ type: "keydown",
+                dragHandles.eq(0).focus().trigger({ type: "keydown",
                     keyCode: end,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -231,7 +231,7 @@
 
                 //right drag handle
                 isDefaultPrevent = false;
-                dragHandles.eq(1).trigger({ type: "keydown",
+                dragHandles.eq(1).focus().trigger({ type: "keydown",
                     keyCode: end,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -248,7 +248,7 @@
                     dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 //left drag handle
-                dragHandles.eq(0).trigger({ type: "keydown",
+                dragHandles.eq(0).focus().trigger({ type: "keydown",
                     keyCode: home,
                     preventDefault: function () {
                         isDefaultPrevent = true;
@@ -261,7 +261,7 @@
                 rangeSlider.values(3, 6);
 
                 //right drag handle
-                dragHandles.eq(1).trigger({ type: "keydown",
+                dragHandles.eq(1).focus().trigger({ type: "keydown",
                     keyCode: home,
                     preventDefault: function () {
                         isDefaultPrevent = true;

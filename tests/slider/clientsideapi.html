@@ -206,7 +206,7 @@
                 };
 
                 var slider = newSlider({ "change": change, value: 0 }),
-                    dragHandle = slider.wrapper.find(".k-draghandle");
+                    dragHandle = slider.wrapper.find(".k-draghandle").focus();
 
                 dragHandle.trigger({ type: "keydown", keyCode: downArrow });
                 dragHandle.trigger({ type: "keydown", keyCode: leftArrow });
