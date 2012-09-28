@@ -161,6 +161,8 @@
                 target = $(e.currentTarget),
                 position = target.position();
 
+            //has new position, which we persist in the _left/_right
+            console.log(this.resizing._resizable.position);
             if (!that._left) {
                 that._left = position.left;
             }

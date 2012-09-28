@@ -87,6 +87,7 @@
                 currentPosition = that._initialElementPosition + (e[that._positionMouse].location - that._initialMousePosition),
                 position;
 
+
             position = minPosition !== undefined ? Math.max(minPosition, currentPosition) : currentPosition;
             that.position = position =  maxPosition !== undefined ? Math.min(maxPosition, position) : position;
 
