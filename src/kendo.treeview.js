@@ -436,6 +436,7 @@
                     "# var spriteCssClass = " + that._fieldAccessor("spriteCssClass") + "(item); #" +
                     "<li role='treeitem' class='#= r.wrapperCssClass(group, item) #'" +
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
+                        "#=item.selected ? \"aria-selected='true'\" : ''#" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
                             "# if (item.hasChildren) { #" +
@@ -451,7 +452,7 @@
                             "# var tag = url ? 'a' : 'span'; #" +
                             "# var textAttr = url ? ' href=\\'' + url + '\\'' : ''; #" +
 
-                            "<#=tag#  class='#= r.textClass(item) #'#= textAttr #>" +
+                            "<#=tag#  class='#= r.textClass(item) #'#= textAttr # >" +
 
                                 "# if (imageUrl) { #" +
                                     "<img class='k-image' alt='' src='#= imageUrl #'>" +
@@ -913,6 +914,9 @@
 
                 if (item[field]) {
                     that.current(node);
+                    node.attr("aria-selected", true);
+                } else {
+                    node.attr("aria-selected", false);
                 }
             } else {
                 for (i = 0; i < items.length; i++) {
@@ -1060,7 +1064,6 @@
                     that.wrapper.attr("aria-activedescendant", id);
                     that._current.attr("id", id);
                 }
-
 
                 return;
             }

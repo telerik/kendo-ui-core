@@ -453,6 +453,42 @@
                 });
                 equal(treeview.find("li.k-item:first").attr("role"), "treeitem");
             });
+
+            test("aria-selected true is rendered for selected nodes", function() {
+                var widget = treeview.kendoTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true }
+                    ]
+                }).data("kendoTreeView");
+
+                ok(treeview.find(".k-state-selected").closest("li").attr("aria-selected"));
+            });
+
+            test("selecting node renders aria-selected", function() {
+                var widget = treeview.kendoTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ]
+                }).data("kendoTreeView");
+
+                widget.dataSource.at(0).set("selected", true);
+
+                ok(treeview.find(".k-state-selected").closest("li").attr("aria-selected"));
+            });
+
+            test("unselecting node selected node renders aria-selected false", function() {
+                var widget = treeview.kendoTreeView({
+                        dataSource: [
+                            { text: "foo" }
+                        ]
+                    }).data("kendoTreeView"),
+                    node = widget.dataSource.at(0);
+
+                node.set("selected", true);
+                node.set("selected", false);
+
+                equal(treeview.find("li:first").attr("aria-selected"), "false");
+            });
        </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
