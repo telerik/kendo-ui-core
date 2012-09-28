@@ -40,7 +40,9 @@ ROOT_MAP = {
     'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
     'wrappers/aspnetmvc/Examples' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/',
     'wrappers/aspnetmvc/Examples/Content/shared' => 'demos/mvc/content/shared',
-    'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/'
+    'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
+    'wrappers/jsp/kendo-taglib' => 'wrappers/java/kendo-taglib/target/',
+    'wrappers/jsp/spring-demos/src' => 'wrappers/java/spring-demos/src/'
 }
 
 MVC_CONTENT = {
@@ -51,6 +53,11 @@ MVC_CONTENT = {
     'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
     'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
     'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
+}
+
+JSP_CONTENT = {
+    'wrappers/jsp/kendo-taglib' => JSP_TAGLIB_JAR,
+    'wrappers/jsp/spring-demos/src' => SPRING_DEMOS_SRC
 }
 
 # Rake tasks
@@ -86,10 +93,12 @@ bundle :name => 'trial',
        :demos => %w(web dataviz mobile),
        :contents => {
             'js' => TRIAL_MIN_JS,
-            'styles' => MIN_CSS_RESOURCES
-       }.merge(MVC_CONTENT),
+            'styles' => MIN_CSS_RESOURCES,
+       }.merge(MVC_CONTENT).merge(JSP_CONTENT),
        :prerequisites => [
            'mvc:assets',
+           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
            'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
        ]
 
