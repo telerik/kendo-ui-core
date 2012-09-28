@@ -678,6 +678,11 @@
                 var valueA = selector(a);
                 var valueB = selector(b);
 
+                if (valueA && valueA.getTime && valueB && valueB.getTime) {
+                    valueA = valueA.getTime();
+                    valueB = valueB.getTime();
+                }
+
                 if (valueA === valueB) {
                     return a.__position - b.__position;
                 }
