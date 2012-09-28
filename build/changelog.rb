@@ -86,7 +86,8 @@ class ChangeLog
             Suite.new("Web", "web"),
             Suite.new("DataViz", "dataviz"),
             Suite.new("Mobile", "mobile"),
-            Suite.new("ASP.NET MVC Wrappers" , "aspnetmvc")
+            Suite.new("ASP.NET MVC Wrappers" , "aspnetmvc"),
+            Suite.new("JSP Wrappers" , "jsp")
         ]
 
         fetch_issues
