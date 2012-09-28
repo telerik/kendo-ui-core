@@ -1199,24 +1199,31 @@
                 autoUnitIx = 0,
                 baseUnit = autoUnit ? BASE_UNITS[autoUnitIx++] : options.baseUnit,
                 span = range.max - range.min,
-                totalUnits = span / TIME_PER_UNIT[baseUnit],
+                units = span / TIME_PER_UNIT[baseUnit],
+                totalUnits = units,
                 maxDateGroups = options.maxDateGroups || axis.options.maxDateGroups,
                 autoBaseUnitSteps = deepExtend(
                     {}, axis.options.autoBaseUnitSteps, options.autoBaseUnitSteps
                 ),
                 unitSteps,
-                step;
+                step,
+                nextStep;
 
-            while (totalUnits > maxDateGroups) {
+            while (units > maxDateGroups) {
                 unitSteps = unitSteps || autoBaseUnitSteps[baseUnit].slice(0);
-                step = unitSteps.shift();
+                nextStep = unitSteps.shift();
 
-                if (step) {
-                    totalUnits = (span / TIME_PER_UNIT[baseUnit]) / step;
+                if (nextStep) {
+                    step = nextStep;
+                    units = totalUnits / step;
                 } else if (autoUnit) {
                     baseUnit = BASE_UNITS[autoUnitIx++] || last(BASE_UNITS);
+                    totalUnits = span / TIME_PER_UNIT[baseUnit];
                     unitSteps = null;
                 } else {
+                    if (units > maxDateGroups) {
+                        step = math.ceil(totalUnits / maxDateGroups);
+                    }
                     break;
                 }
             }
