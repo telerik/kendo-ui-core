@@ -333,6 +333,19 @@
 
                 equal(combobox.value(), "");
             });
+
+            test("ComboBox selects first item on down arrow even when it is highlighted", function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["foo"]
+                }).data("kendoComboBox");
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                equal(combobox.value(), "foo");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
