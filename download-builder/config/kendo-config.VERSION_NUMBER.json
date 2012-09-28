@@ -271,6 +271,19 @@
             ]
         },
         {
+            "id": "datetimepicker",
+            "name": "DateTimePicker",
+            "category": "web",
+            "description": "The DateTimePicker allows the end user to select a value from a calendar or a time drop-down list.",
+            "source": "kendo.datetimepicker.min.js",
+            "depends": [
+                "timepicker",
+                "datepicker",
+                "calendar",
+                "popup"
+            ]
+        },
+        {
             "id": "dropdownlist",
             "name": "DropDownList",
             "category": "web",
