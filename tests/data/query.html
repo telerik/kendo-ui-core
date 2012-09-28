@@ -975,6 +975,31 @@
                 equal(result[0].items[1].foo, 1);
             });
 
+            test("groupby on dates with descending sort should be stable", function() {
+                var data = [{foo:11, bar: new Date(1999, 1, 1)},{foo:10, bar: new Date(1999, 1,1)},{foo:9, bar: new Date(1999, 1,1)},{foo:8, bar: new Date(1999, 1,1)},{foo:7, bar: new Date(1999, 1,1)}, {foo:6, bar: new Date(1999, 1,1)},{foo:5, bar: new Date(1999, 1,1)},{foo:4, bar: new Date(1999, 1,1)},{foo:3, bar: new Date(1999, 1,1)},{foo:2, bar: new Date(1999, 1,1)},{foo:1, bar: new Date(1999, 1,1)}];
+
+                var result = new Query(data)
+                    .sort([ { field: "foo", dir: "desc" }])
+                    .groupBy( {
+                        field: "bar", dir: "desc"
+                    }).toArray();
+
+                equal(result.length, 1);
+                equal(result[0].items.length, 11);
+                equal(result[0].items[0].foo, 11);
+                equal(result[0].items[1].foo, 10);
+                equal(result[0].items[2].foo, 9);
+                equal(result[0].items[3].foo, 8);
+                equal(result[0].items[4].foo, 7);
+                equal(result[0].items[5].foo, 6);
+                equal(result[0].items[6].foo, 5);
+                equal(result[0].items[7].foo, 4);
+                equal(result[0].items[8].foo, 3);
+                equal(result[0].items[9].foo, 2);
+                equal(result[0].items[10].foo, 1);
+            });
+
+
             test("groupby groups data by date", function() {
                 var data = [ {field: new Date(2011, 1, 1)} , {field: new Date(2011, 2, 2) } , {field: new Date(2011, 1, 1) } ];
 
