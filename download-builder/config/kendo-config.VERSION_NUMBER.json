@@ -278,9 +278,7 @@
             "source": "kendo.datetimepicker.min.js",
             "depends": [
                 "timepicker",
-                "datepicker",
-                "calendar",
-                "popup"
+                "datepicker"
             ]
         },
         {
