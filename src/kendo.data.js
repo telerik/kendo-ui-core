@@ -2802,14 +2802,19 @@
                data = that.children;
             }
 
-            children = extend({
+            children = {
                 schema: {
                     data: data,
                     model: {
-                        hasChildren: hasChildren
+                        hasChildren: hasChildren,
+                        id: that.idField
                     }
                 }
-            }, that.children);
+            };
+
+            if (typeof that.children !== STRING) {
+                extend(children, that.children);
+            }
 
             children.data = value;
 

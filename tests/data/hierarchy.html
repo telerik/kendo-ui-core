@@ -827,6 +827,30 @@
                 equal(dataSource.get(2).text, children.data()[0].text);
             });
 
+            test("get method works for subitems and custom id field", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [
+                        { foo: 1, text: "foo", items: [
+                            { foo: 2, text: "bar" },
+                            { foo: 3, text: "baz" }
+                        ] }
+                    ],
+                    schema: {
+                        model: {
+                            id: "foo",
+                            children: "items"
+                        }
+                    }
+                });
+
+                dataSource.read();
+
+                dataSource.data()[0].load();
+
+                ok(dataSource.get(2))
+                equal(dataSource.get(2).text, "bar");
+            });
+
             test("sorting is used when loading child datasources", function() {
                 var dataSource = new HierarchicalDataSource({
                     data: [
