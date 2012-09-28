@@ -388,8 +388,8 @@
         },
 
         // API
-        press: function(x, y) {
-            this._apiCall("_start", x, y);
+        press: function(x, y, target) {
+            this._apiCall("_start", x, y, target);
         },
 
         move: function(x, y) {
@@ -505,12 +505,14 @@
             }
         },
 
-        _apiCall: function(type, x, y) {
+        _apiCall: function(type, x, y, target) {
             this[type]({
                 api: true,
                 pageX: x,
                 pageY: y,
-                target: this.element
+                target: target || this.element,
+                stopPropagation: $.noop,
+                preventDefault: $.noop
             });
         }
     });

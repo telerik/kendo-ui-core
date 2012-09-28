@@ -97,6 +97,22 @@
                 expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)";
 
             that.element
+                .on("keydown" + NS, splitbarSelector, proxy(that._keydown, that))
+                //.on("keyup" + NS, splitbarSelector, proxy(that._keyup, that))
+                .on("focus" + NS, splitbarSelector, function(e) {
+                    var userEvents = that.resizing._resizable.draggable.userEvents;
+                    var bar = $(e.currentTarget),
+                        position = bar.position();
+
+                    userEvents.press(position.left, 796, e.currentTarget);
+                })
+                .on("blur" + NS, splitbarSelector, function(e) {
+                    var userEvents = that.resizing._resizable.draggable.userEvents;
+                    userEvents.end();
+
+                    that._left = null;
+                    that._top = null;
+                })
                 .on(MOUSEENTER + NS, splitbarSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on(MOUSELEAVE + NS, splitbarSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on("mousedown" + NS, splitbarSelector, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
@@ -137,6 +153,49 @@
             $(window).off("resize", that._resizeHandler);
 
             kendo.destroy(that.element);
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                userEvents = this.resizing._resizable.draggable.userEvents,
+                target = $(e.currentTarget),
+                position = target.position();
+
+            if (!that._left) {
+                that._left = position.left;
+            }
+
+            if (!that._top) {
+                that._top = position.top;
+            }
+
+            if (e.keyCode === kendo.keys.LEFT) {
+                userEvents.move(that._left, that._top);
+                that._left -= 10;
+                userEvents.move(that._left, that._top);
+                e.preventDefault();
+            }
+
+            if (e.keyCode === kendo.keys.RIGHT) {
+                userEvents.move(that._left, that._top);
+                that._left += 10;
+                userEvents.move(that._left, that._top);
+                e.preventDefault();
+            }
+
+            if (e.keyCode === kendo.keys.UP) {
+                userEvents.move(that._left, that._top);
+                that._top -= 10;
+                userEvents.move(that._left, that._top);
+                e.preventDefault();
+            }
+
+            if (e.keyCode === kendo.keys.DOWN) {
+                userEvents.move(that._left, that._top);
+                that._top += 10;
+                userEvents.move(that._left, that._top);
+                e.preventDefault();
+            }
         },
 
         _initPanes: function() {
