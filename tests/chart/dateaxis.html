@@ -146,6 +146,21 @@
                     ]);
                 });
 
+                test("Categories are rounded to next base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/05")
+                        ],
+                        baseUnit: "days",
+                        baseUnitStep: 3
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/01"), new Date("2012/02/04"),
+                        new Date("2012/02/07")
+                    ]);
+                });
+
                 test("User set base unit step is disregarded when using automatic base unit", function() {
                     createDateCategoryAxis({
                         categories: [
@@ -348,6 +363,7 @@
                         maxDateGroups: 6
                     });
 
+                    console.log(dateAxis.options.categories)
                     equals(dateAxis.options.baseUnitStep, 2);
                 });
 
@@ -674,7 +690,7 @@
                     });
 
                     same($.map(view.log.text, function(text) { return text.content }),
-                         ["1/1", "1/2", "1/9", "1/16"]);
+                         ["12/26", "1/2", "1/9"]);
                 });
 
                 test("automatic base unit step is chosen according to maxDateGroups", function() {

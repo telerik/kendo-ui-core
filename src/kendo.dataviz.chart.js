@@ -1187,9 +1187,8 @@
                 minCategory = toTime(sparseArrayMin(categories)),
                 maxCategory = toTime(sparseArrayMax(categories));
 
-            return { min: floorDate(min || minCategory, baseUnit),
-                     max: ceilDate((max || maxCategory) + 1, baseUnit)
-            };
+            return { min: addDuration(min || minCategory, 0, baseUnit, options.weekStartDay),
+                     max: addDuration(max || maxCategory, 1, baseUnit, options.weekStartDay) };
         },
 
         autoBaseUnit: function(options) {
@@ -1238,6 +1237,7 @@
                 baseUnit = options.baseUnit,
                 baseUnitStep = options.baseUnitStep || 1,
                 range = axis.range(options),
+                end = addDuration(range.max, baseUnitStep - 1, baseUnit, options.weekStartDay),
                 date,
                 nextDate,
                 groups = [],
@@ -1246,7 +1246,7 @@
                 categoryIx,
                 categoryDate;
 
-            for (date = range.min; date < range.max; date = nextDate) {
+            for (date = range.min; date < end; date = nextDate) {
                 groups.push(date);
                 nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
 
