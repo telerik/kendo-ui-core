@@ -61,6 +61,7 @@
                 equals(splitbars.length, 2);
                 equals(splitbars.eq(0).index(), 1);
                 equals(splitbars.eq(1).index(), 3);
+                equals(splitbars.attr("tabindex"), 0);
             });
 
             test("splitbars have collapse button for collapsible panes", function() {

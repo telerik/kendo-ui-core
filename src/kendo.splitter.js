@@ -296,7 +296,7 @@
 
             if (splitBarsCount === 0) {
                 splitBarsCount = panes.length - 1;
-                panes.slice(0, splitBarsCount).after("<div class='k-splitbar' data-marker='" + that._marker + "' />");
+                panes.slice(0, splitBarsCount).after("<div tabindex="0" class='k-splitbar' data-marker='" + that._marker + "' />");
                 that._updateSplitBars();
                 splitBars = element.children(".k-splitbar");
             } else {
