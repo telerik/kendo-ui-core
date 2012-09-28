@@ -552,7 +552,12 @@
                 if (e.altKey) {
                     that.toggle(down);
                 } else if (down) {
-                    that._select(current ? current[0].nextSibling : ul.firstChild);
+                    if (!current || (that.selectedIndex === -1 && !that.value())) {
+                        current = ul.firstChild;
+                    } else {
+                        current = current[0].nextSibling;
+                    }
+                    that._select(current);
                     e.preventDefault();
                 } else {
                     that._select(current ? current[0].previousSibling : ul.lastChild);
