@@ -489,6 +489,78 @@
 
                 equal(treeview.find("li:first").attr("aria-selected"), "false");
             });
+
+            test("aria-selected false is render for selected node which are disabled", function() {
+                var widget = treeview.kendoTreeView({
+                        dataSource: [
+                            { text: "foo" }
+                        ]
+                    }).data("kendoTreeView"),
+                    node = widget.dataSource.at(0);
+
+                node.set("selected", true);
+
+                widget.enable(treeview.find("li:first"), false);
+
+                ok(!treeview.find("li[aria-selected]").length);
+            });
+
+
+            test("aria-disabled true is rendered for disabled nodes", function() {
+                var widget = treeview.kendoTreeView({
+                    dataSource: [
+                        { text: "foo", enabled: false }
+                    ]
+                }).data("kendoTreeView");
+
+                ok(treeview.find(".k-state-disabled").closest("li").attr("aria-disabled"));
+            });
+
+            test("aria-disabled is not rendered for not disabled nodes", function() {
+                var widget = treeview.kendoTreeView({
+                    dataSource: [
+                        { text: "foo", enabled: true }
+                    ]
+                }).data("kendoTreeView");
+
+                ok(!treeview.find("li:first").filter("[aria-disabled]").length);
+            });
+
+            test("aria-disabled is not rendered for nodes which does not have enabled field", function() {
+                var widget = treeview.kendoTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ]
+                }).data("kendoTreeView");
+
+                ok(!treeview.find("li:first").filter("[aria-disabled]").length);
+            });
+
+            test("aria-disabled true is rendered when node is disabled", function() {
+                var widget = treeview.kendoTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ]
+                }).data("kendoTreeView");
+
+                widget.enable(treeview.find("li:first"), false);
+
+                ok(treeview.find("[aria-disabled]").length);
+            });
+
+            test("aria-disabled is removed when node is enabled", function() {
+                var widget = treeview.kendoTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ]
+                }).data("kendoTreeView");
+
+                widget.enable(treeview.find("li:first"), false);
+                widget.enable(treeview.find("li:first"), true);
+
+                ok(!treeview.find("[aria-disabled]").length);
+            });
+
        </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

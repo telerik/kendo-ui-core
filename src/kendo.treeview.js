@@ -28,6 +28,8 @@
         KTREEVIEW = "k-treeview",
         VISIBLE = ":visible",
         NODE = ".k-item",
+        ARIASELECTED = "aria-selected",
+        ARIADISABLED = "aria-disabled",
         rendering, TreeView,
         subGroup, nodeContents, nodeIcon,
         bindings = {
@@ -437,6 +439,7 @@
                     "<li role='treeitem' class='#= r.wrapperCssClass(group, item) #'" +
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                         "#=item.selected ? \"aria-selected='true'\" : ''#" +
+                        "#=item.enabled === false ? \"aria-disabled='true'\" : ''#" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
                             "# if (item.hasChildren) { #" +
@@ -914,9 +917,9 @@
 
                 if (item[field]) {
                     that.current(node);
-                    node.attr("aria-selected", true);
+                    node.attr(ARIASELECTED, true);
                 } else {
-                    node.attr("aria-selected", false);
+                    node.attr(ARIASELECTED, false);
                 }
             } else {
                 for (i = 0; i < items.length; i++) {
@@ -1030,10 +1033,14 @@
             this._processNodes(nodes, function (index, item) {
                 var isCollapsed = !nodeContents(item).is(VISIBLE);
 
+                item.removeAttr(ARIADISABLED);
+
                 if (!enable) {
                     this.collapse(item);
                     isCollapsed = true;
                     item.find(".k-in:first").removeClass("k-state-selected");
+                    item.removeAttr(ARIASELECTED);
+                    item.attr(ARIADISABLED, true);
                 }
 
                 this._updateNodeClasses(item, {}, { enabled: enable, expanded: !isCollapsed });
