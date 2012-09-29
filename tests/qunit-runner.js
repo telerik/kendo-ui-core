@@ -105,26 +105,26 @@
     // runner test page hooks - if this page has a runner as parent
     // then set up the metric callbacks
     if (parent.__qunit_runner) {
-        var runner = parent.__qunit_runner;
+        var parentRunner = parent.__qunit_runner;
 
         QUnit.config.done.push(function (state) {
-            runner.pageProgress(window.frameElement, state.failed, state.total, "done", true);
+            parentRunner.pageProgress(window.frameElement, state.failed, state.total, "done", true);
         });
 
         QUnit.config.testStart.push(function (state) {
             startDate = +new Date();
-            runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
+            parentRunner.pageProgress(window.frameElement, 0, 0, state.name + " started");
         });
 
         QUnit.config.testDone.push(function (state) {
-            runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
+            parentRunner.pageProgress(window.frameElement, state.failed, state.total, state.name);
 
             var newFails = $('li.fail li.fail').not(knownFails);
 
             $.extend(state, {
                 failures: $.map(newFails.contents(), function(err) { return $(err).text() }),
                 duration: ((+new Date()) - startDate) / 1000,
-                suite: runner.currentTestTitle,
+                suite: parentRunner.currentTestTitle,
                 agent: navigator.userAgent
             })
 
