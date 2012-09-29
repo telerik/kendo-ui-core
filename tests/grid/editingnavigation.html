@@ -246,6 +246,8 @@
                 ok(!table.find("tr:first").hasClass("k-grid-edit-row"));
             });
 
+            /*
+            this wiil be no loger supported
             test("pressing enter key on edited cell restores current in inline mode", function() {
                 var grid = setup({ editable: "inline" });
 
@@ -254,6 +256,7 @@
                 ok(table.find("tr:eq(1)>td:first")[0] === grid.current()[0]);
                 ok(table.find("tr:eq(1)>td:first").hasClass("k-state-focused"));
             });
+            */
 
             test("pressing enter key on edited row does not exits edit mode if validation fails in inline mode", function() {
                 var grid = setup({ editable: "inline" });

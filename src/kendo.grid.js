@@ -1664,26 +1664,35 @@
                     currentProxy(currentTarget);
 
                     //:focusable returns false -> this selector should be in :focusable?
-                    if (!$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
-                        setTimeout(function() { currentTarget.closest("table").focus(); } );
+                    if (currentTarget.is("th") || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
+                        setTimeout(function() {
+                            currentTable.focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+                        });
                     }
-
-                    //required for hierarchy;
-                    //stopPropagation will prevent grouping and selection;
-                    //stopImmediatePropagation will prevent selection
-                    //e.stopImmediatePropagation();
-                    //e.stopPropagation();
+                    e.preventDefault(); //if any problem occurs, call preventDefault only for the clicked header links
                 };
 
+            //that.content.attr("tabindex", -1);
             if (that.options.scrollable) {
                 dataTable = table.add(that.thead.parent());
                 that.thead.parent().on("keydown", function(e) {
-                    if (e.keyCode == keys.TAB) {
+                    if (!e.shiftKey && e.keyCode == keys.TAB) {
                         that._current.removeClass("k-state-focused");
                         that._current = null;
                     }
-                }).find("a.k-link").attr("tabIndex", -1);
+                });
+                that.content.attr("tabindex", -1); //otherwise FF will focus content div
             }
+            that.thead.find("a.k-link").attr("tabIndex", -1);
+
+            that.table.on("mousedown" + NS, ".k-detail-cell", function(e) {
+                var targetGrid = $(e.target).closest(".k-widget")[0]; // this should be k-widget, maybe
+                //check whether e.target is in grid wrapper
+
+                if (targetGrid  && targetGrid !== that.wrapper[0]) {
+                    e.stopImmediatePropagation();
+                }
+            });
 
             dataTable.attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
             dataTable.on("focus" + NS, function(e) {
@@ -1701,7 +1710,6 @@
                 }
             })
             .on("mousedown" + NS, NAVROW + ">" + NAVCELL, clickCallback)
-            //.on("mousedown" + NS, CELL_SELECTOR, clickCallback)
             .on("keydown" + NS, function(e) {
                 var key = e.keyCode,
                     handled = false,
@@ -1783,19 +1791,9 @@
                         handled = true;
                     }
                 } else if (canHandle && pageable && keys.PAGEDOWN == key) {
-                    //page after page
-                    if (that._current) {
-                        that._current.removeClass("k-state-focused");
-                        that._current = null;
-                    }
                     dataSource.page(dataSource.page() + 1);
                     handled = true;
                 } else if (canHandle && pageable && keys.PAGEUP == key) {
-                    //page after page
-                    if (that._current) {
-                        that._current.removeClass("k-state-focused");
-                        that._current = null;
-                    }
                     dataSource.page(dataSource.page() - 1);
                     handled = true;
                 } else if (that.options.editable) {
@@ -3163,6 +3161,7 @@
                 placeholder,
                 currentIndex,
                 current = that.current(),
+                isCurrentInHeader = false,
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + visibleColumns(that.columns).length;
 
@@ -3176,8 +3175,12 @@
                 return;
             }
 
-            if (current && !current.is("th")/*&& current.hasClass("k-state-focused")*/) {
-                currentIndex = that.items().index(current.parent());
+            if (current && current.hasClass(FOCUSED)) {
+                isCurrentInHeader = current.is("th");
+                currentIndex = 0;
+                if (isCurrentInHeader) {
+                    currentIndex = that.thead.find("th:not(.k-group-cell)").index(current);
+                }
             }
 
             that._destroyEditable();
@@ -3231,7 +3234,16 @@
             that._setContentHeight();
 
             if (currentIndex >= 0) {
-                that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
+                if (that._current) {
+                    that._current.removeClass("k-state-focused");
+                    that._current = null;
+                }
+                if (!isCurrentInHeader) {
+                    that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
+                } else {
+                    that.current(that.thead.find("th:not(.k-group-cell)").eq(currentIndex));
+                }
+                that._current.closest("table")[0].focus();
             }
 
             that.trigger(DATABOUND);

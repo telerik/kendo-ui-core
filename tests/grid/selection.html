@@ -288,7 +288,7 @@
             test("focus after grid refresh selects first cell", function() {
                 var grid = setup();
 
-                grid.table.focus().trigger("focusout");
+                grid.table.focus();
                 grid.refresh();
 
                 var row = table.find("tbody tr").eq(0);
