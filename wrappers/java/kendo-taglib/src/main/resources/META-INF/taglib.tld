@@ -161,28 +161,10 @@ the dataSource.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the maximum date, which the calendar can show.</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the minimum date, which the calendar can show.</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
-        </attribute>
-        <attribute>
             <description>Specifies the start view.</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the selected date.</description>
-            <name>value</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Fires when the selected date is changed</description>
@@ -422,29 +404,11 @@ settings are available for the</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the maximum date, which the calendar can show.</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the minimum date that the calendar can show.</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
-        </attribute>
-        <attribute>
             <description>Specifies the start view.
 The following settings are available for the</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the selected date.</description>
-            <name>value</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Fires when the selected date is changed</description>
@@ -509,18 +473,6 @@ settings are available for the</description>
             <type>int</type>
         </attribute>
         <attribute>
-            <description>Specifies the maximum date, which the calendar can show.</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the minimum date that the calendar can show.</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
-        </attribute>
-        <attribute>
             <description>Specifies the start view of the calendar.
 The following settings are available for the</description>
             <name>start</name>
@@ -532,12 +484,6 @@ The following settings are available for the</description>
             <name>timeFormat</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the selected value.</description>
-            <name>value</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Triggered when the underlying value of a DateTimePicker is changed.</description>
@@ -1523,24 +1469,6 @@ tab.</description>
             <name>interval</name>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the end value in the popup list.</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the start value in the popup list.</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the selected time.</description>
-            <name>value</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Triggered when the underlying value of a TimePicker is changed.</description>

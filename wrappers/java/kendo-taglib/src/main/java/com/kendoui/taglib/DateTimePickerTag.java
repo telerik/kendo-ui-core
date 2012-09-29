@@ -50,22 +50,6 @@ public class DateTimePickerTag extends WidgetTag {
         setProperty("interval", value);
     }
 
-    public Date getMax() {
-        return (Date)getProperty("max");
-    }
-
-    public void setMax(Date value) {
-        setProperty("max", value);
-    }
-
-    public Date getMin() {
-        return (Date)getProperty("min");
-    }
-
-    public void setMin(Date value) {
-        setProperty("min", value);
-    }
-
     public String getStart() {
         return (String)getProperty("start");
     }
@@ -80,14 +64,6 @@ public class DateTimePickerTag extends WidgetTag {
 
     public void setTimeFormat(String value) {
         setProperty("timeFormat", value);
-    }
-
-    public Date getValue() {
-        return (Date)getProperty("value");
-    }
-
-    public void setValue(Date value) {
-        setProperty("value", value);
     }
 
     public String getChange() {

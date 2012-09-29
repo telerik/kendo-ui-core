@@ -34,30 +34,6 @@ public class TimePickerTag extends WidgetTag {
         setProperty("interval", value);
     }
 
-    public Date getMax() {
-        return (Date)getProperty("max");
-    }
-
-    public void setMax(Date value) {
-        setProperty("max", value);
-    }
-
-    public Date getMin() {
-        return (Date)getProperty("min");
-    }
-
-    public void setMin(Date value) {
-        setProperty("min", value);
-    }
-
-    public Date getValue() {
-        return (Date)getProperty("value");
-    }
-
-    public void setValue(Date value) {
-        setProperty("value", value);
-    }
-
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }

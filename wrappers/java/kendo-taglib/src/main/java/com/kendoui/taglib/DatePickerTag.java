@@ -42,36 +42,12 @@ public class DatePickerTag extends WidgetTag {
         setProperty("format", value);
     }
 
-    public Date getMax() {
-        return (Date)getProperty("max");
-    }
-
-    public void setMax(Date value) {
-        setProperty("max", value);
-    }
-
-    public Date getMin() {
-        return (Date)getProperty("min");
-    }
-
-    public void setMin(Date value) {
-        setProperty("min", value);
-    }
-
     public String getStart() {
         return (String)getProperty("start");
     }
 
     public void setStart(String value) {
         setProperty("start", value);
-    }
-
-    public Date getValue() {
-        return (Date)getProperty("value");
-    }
-
-    public void setValue(Date value) {
-        setProperty("value", value);
     }
 
     public String getChange() {

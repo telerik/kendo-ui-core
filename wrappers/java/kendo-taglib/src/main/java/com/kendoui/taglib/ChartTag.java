@@ -3,12 +3,12 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class ChartTag extends WidgetTag {
+public class ChartTag extends WidgetTag implements DataBoundWidget {
     public ChartTag() {
         super("Chart");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {

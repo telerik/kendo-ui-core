@@ -106,7 +106,7 @@ class Option
     end
 
     def required?
-        @type != 'Object' && @type != 'Array' && @type != nil
+        @type != 'Object' && @type != 'Array' && @type != 'java.lang.Date' && @type != nil
     end
 
     def to_xml
