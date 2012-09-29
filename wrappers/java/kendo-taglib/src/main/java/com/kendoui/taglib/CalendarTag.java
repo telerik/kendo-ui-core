@@ -18,14 +18,6 @@ public class CalendarTag extends WidgetTag {
         setProperty("culture", value);
     }
 
-    public String getDates() {
-        return ((Function)getProperty("dates")).getBody();
-    }
-
-    public void setDates(String value) {
-        setProperty("dates", new Function(value));
-    }
-
     public String getDepth() {
         return (String)getProperty("depth");
     }

@@ -18,14 +18,6 @@ public class SplitterTag extends WidgetTag {
         setProperty("orientation", value);
     }
 
-    public String getPanes() {
-        return ((Function)getProperty("panes")).getBody();
-    }
-
-    public void setPanes(String value) {
-        setProperty("panes", new Function(value));
-    }
-
     public String getCollapse() {
         return ((Function)getProperty("collapse")).getBody();
     }

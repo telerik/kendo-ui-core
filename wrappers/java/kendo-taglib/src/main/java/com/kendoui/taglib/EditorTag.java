@@ -18,22 +18,6 @@ public class EditorTag extends WidgetTag {
         setProperty("encoded", value);
     }
 
-    public String getStylesheets() {
-        return ((Function)getProperty("stylesheets")).getBody();
-    }
-
-    public void setStylesheets(String value) {
-        setProperty("stylesheets", new Function(value));
-    }
-
-    public String getTools() {
-        return ((Function)getProperty("tools")).getBody();
-    }
-
-    public void setTools(String value) {
-        setProperty("tools", new Function(value));
-    }
-
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }

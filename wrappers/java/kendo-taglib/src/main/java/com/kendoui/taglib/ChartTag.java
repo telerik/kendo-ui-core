@@ -10,22 +10,6 @@ public class ChartTag extends WidgetTag {
 
     //>> Attributes
 
-    public String getSeries() {
-        return ((Function)getProperty("series")).getBody();
-    }
-
-    public void setSeries(String value) {
-        setProperty("series", new Function(value));
-    }
-
-    public String getSeriesColors() {
-        return ((Function)getProperty("seriesColors")).getBody();
-    }
-
-    public void setSeriesColors(String value) {
-        setProperty("seriesColors", new Function(value));
-    }
-
     public String getTheme() {
         return (String)getProperty("theme");
     }

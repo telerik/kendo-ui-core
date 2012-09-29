@@ -18,14 +18,6 @@ public class DateTimePickerTag extends WidgetTag {
         setProperty("culture", value);
     }
 
-    public String getDates() {
-        return ((Function)getProperty("dates")).getBody();
-    }
-
-    public void setDates(String value) {
-        setProperty("dates", new Function(value));
-    }
-
     public String getDepth() {
         return (String)getProperty("depth");
     }
@@ -72,14 +64,6 @@ public class DateTimePickerTag extends WidgetTag {
 
     public void setMin(String value) {
         setProperty("min", new Function(value));
-    }
-
-    public String getParseFormats() {
-        return ((Function)getProperty("parseFormats")).getBody();
-    }
-
-    public void setParseFormats(String value) {
-        setProperty("parseFormats", new Function(value));
     }
 
     public String getStart() {

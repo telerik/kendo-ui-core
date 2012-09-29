@@ -27,14 +27,6 @@ public class WindowTag extends WidgetTag {
 
 //>> Attributes
 
-    public String getActions() {
-        return ((Function)getProperty("actions")).getBody();
-    }
-
-    public void setActions(String value) {
-        setProperty("actions", new Function(value));
-    }
-
     public String getAppendTo() {
         return ((Function)getProperty("appendTo")).getBody();
     }

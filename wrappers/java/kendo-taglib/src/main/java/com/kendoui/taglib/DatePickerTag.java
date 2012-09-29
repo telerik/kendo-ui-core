@@ -58,14 +58,6 @@ public class DatePickerTag extends WidgetTag {
         setProperty("min", new Function(value));
     }
 
-    public String getParseFormats() {
-        return ((Function)getProperty("parseFormats")).getBody();
-    }
-
-    public void setParseFormats(String value) {
-        setProperty("parseFormats", new Function(value));
-    }
-
     public String getStart() {
         return (String)getProperty("start");
     }

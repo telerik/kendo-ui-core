@@ -18,14 +18,6 @@ public class GridTag extends WidgetTag implements DataBoundWidget {
         setProperty("autoBind", value);
     }
 
-    public String getColumns() {
-        return ((Function)getProperty("columns")).getBody();
-    }
-
-    public void setColumns(String value) {
-        setProperty("columns", new Function(value));
-    }
-
     @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
@@ -85,14 +77,6 @@ public class GridTag extends WidgetTag implements DataBoundWidget {
 
     public void setSelectable(String value) {
         setProperty("selectable", value);
-    }
-
-    public String getToolbar() {
-        return ((Function)getProperty("toolbar")).getBody();
-    }
-
-    public void setToolbar(String value) {
-        setProperty("toolbar", new Function(value));
     }
 
     public String getChange() {

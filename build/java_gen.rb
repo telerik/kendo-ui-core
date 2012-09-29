@@ -36,7 +36,8 @@ JS_TO_JAVA_TYPES = {
     'Number' => 'int',
     'String' => 'java.lang.String',
     'Boolean' => 'boolean',
-    'Object' => 'object'
+    'Object' => 'Object',
+    'Array' => 'Array'
 }
 
 JAVA_DATASOURCE_SETTER = %{
@@ -79,14 +80,20 @@ class Attribute
         @description = options[:description].strip
     end
 
+    def required?
+        @type != 'Object' && @type != 'Array'
+    end
+
     def to_xml
-        return '' unless @type != 'object'
+        return '' unless required?
 
         TLD_ATTR_TEMPLATE.result(binding)
     end
 
     def to_java
-        return '' unless @type != 'object'
+        return '' unless required?
+
+        $stderr.puts("\t|- #{@name} (#{@type || 'event'})") if VERBOSE
 
         return JAVA_DATASOURCE_SETTER if @name == 'dataSource'
 
@@ -108,6 +115,8 @@ class Tag
     end
 
     def to_java
+        $stderr.puts("\t#{name}") if VERBOSE
+
         @attributes.map {|attr| attr.to_java }.join
     end
 
@@ -186,6 +195,8 @@ def generate
 
     tld = File.read(TLD)
 
+    $stderr.puts("Updating #{TLD}") if VERBOSE
+
     tld.sub!(/<!-- Auto-generated -->(.|\n)*<!-- Auto-generated -->/,
              "<!-- Auto-generated -->\n\n" +
              tags.map{ |t| t.to_xml }.join("\n") +
@@ -200,6 +211,8 @@ def generate
         filename = "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{tag.name}Tag.java"
 
         if File.exists?(filename)
+            $stderr.puts("Updating #{filename}") if VERBOSE
+
             java = File.read(filename)
 
             java.sub!(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,

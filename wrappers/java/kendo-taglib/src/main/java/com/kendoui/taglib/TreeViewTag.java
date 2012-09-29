@@ -26,11 +26,6 @@ public class TreeViewTag extends WidgetTag implements DataBoundWidget {
         setProperty("dataImageUrlField", value);
     }
 
-    @Override
-    public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
-    }
-
     public String getDataSpriteCssClassField() {
         return (String)getProperty("dataSpriteCssClassField");
     }
