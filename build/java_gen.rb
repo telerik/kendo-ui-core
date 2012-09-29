@@ -4,18 +4,33 @@ TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 
 MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md')
 
-class Attribute
+JS_TO_JAVA_TYPES = {
+    'Number' => 'int',
+    'String' => 'java.lang.String',
+    'Boolean' => 'boolean',
+    'Object' => 'object'
+}
 
+class Attribute
     attr_reader :name, :type, :description
 
     def initialize(options)
-        @name = options[:name]
-        @type = options[:type]
-        @description = options[:description]
+        @name = options[:name].strip
+        @type = JS_TO_JAVA_TYPES[options[:type].strip]
+        @description = options[:description].strip
     end
 
     def to_xml
+        return '' unless @type != 'object'
 
+        <<-eos
+        <attribute>
+            <description>#{@description}</description>
+            <name>#{@name}</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>#{@type}</type>
+        </attribute>
+        eos
     end
 end
 
@@ -29,11 +44,22 @@ class Tag
     end
 
     def to_xml
-        xml = <<-eos
-            <name>#{@name} Widget</name>
+        <<-eos
+    <tag>
+        <description>#{@name} Widget</description>
+        <name>#{@name.sub(/^./) { |c| c.downcase }}</name>
+        <tag-class>com.kendoui.taglib.#{@name}Tag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+#{@attributes.map{ |a| a.to_xml }.join }
+    </tag>
         eos
-
-        xml
     end
 
     def self.parse(filename)
@@ -56,19 +82,32 @@ class Tag
 
         configuration = root.children.slice(start_element_index..end_element_index)
 
+        find_child_with_type = lambda do |element, type|
+            element.children.find { |e| e.type == type }
+        end
+
+        find_element_with_type = lambda do |reference_index, type|
+            configuration.slice(reference_index, configuration.length)
+                         .find { |e| e.type == type }
+        end
+
         configuration.each_with_index do |e, index|
             if (e.type == :header && e.options[:level] == 3)
-                type = find_child_with_type(e, :codespan)
-                text = find_child_with_type(e, :text)
+                name = find_child_with_type.call(e, :text).value
 
-                paragraph  = find_element_with_type(configuration, index, :p)
-                description = find_child_with_type(paragraph, :text)
+                unless name.include?('.')
+                    type = find_child_with_type.call(e, :codespan)
+                    paragraph  = find_element_with_type.call(index, :p)
+                    description = find_child_with_type.call(paragraph, :text)
 
-                attribute = Attribute.new :name => text.value,
-                    :type => type.value,
-                    :description => description.value
+                    p e if type == nil || paragraph == nil || description == nil
 
-                tag.attributes.push(attribute)
+                    attribute = Attribute.new :name => name,
+                        :type => type.value,
+                        :description => description.value
+
+                    tag.attributes.push(attribute)
+                end
             end
         end
 
@@ -76,28 +115,27 @@ class Tag
     end
 end
 
-def sync_tld
-    filename = MARKDOWN.find {|f| f =~ /autocomplete/ }
-    tag = Tag.parse(filename)
+def generate
+    tags = MARKDOWN.map{ |md| Tag.parse(md) }.sort{ |a, b| a.name <=> b.name }
 
-    p tag.to_xml
-end
+    tld = File.read(TLD)
 
-def find_child_with_type(element, type)
-    element.children.find { |e| e.type == type }
-end
+    tld.sub!(/<!-- Auto-generated -->(.|\n)*<!-- Auto-generated -->/,
+             "<!-- Auto-generated -->\n\n" +
+             tags.map{ |t| t.to_xml }.join("\n") +
+             "\n\n<!-- Auto-generated -->"
+        )
 
-def find_element_with_type(elements, reference_index, type)
-    elements = elements.slice(reference_index, elements.length)
-
-    elements.find { |e| e.type == type }
+    File.open(TLD, 'w') do |file|
+        file.write(tld)
+    end
 end
 
 
 namespace :java do
-    desc('Sync the tag library definition with the documentation')
-    task :sync_tld do
-        sync_tld
+    desc('Generate JSP Wrappers from Markdown API reference')
+    task :generate do
+        generate
     end
 end
 

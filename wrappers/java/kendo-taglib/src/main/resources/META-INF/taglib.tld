@@ -14,1653 +14,1535 @@
     <!-- Auto-generated -->
 
     <tag>
-      <description>AutoComplete Widget</description>
-      <name>autoComplete</name>
-      <tag-class>com.kendoui.taglib.AutoCompleteTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Controls whether the AutoComplete should automatically auto-type the rest of text</description>
-          <name>suggest</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the text content of the list items</description>
-          <name>dataTextField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the minimum number of characters that should be typed before the AutoComplete queries the dataSource</description>
-          <name>minLength</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the delay in ms after which the AutoComplete will start filtering the dataSource</description>
-          <name>delay</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Sets the height of the drop-down list in pixels</description>
-          <name>height</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Defines the type of filtration</description>
-          <name>filter</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Defines whether the filtration should be case sensitive</description>
-          <name>ignoreCase</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Controls whether the first item will be automatically highlighted</description>
-          <name>highlightFirst</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>A string that appears in the textbox when it has no value</description>
-          <name>placeholder</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the drop-down list is opened</description>
-          <name>open</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the drop-down list is closed</description>
-          <name>close</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the value has been changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a Li element is selected</description>
-          <name>select</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBinding</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBound</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>AutoComplete Widget</description>
+        <name>autoComplete</name>
+        <tag-class>com.kendoui.taglib.AutoCompleteTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The set of data that the AutoComplete will be bound to.
+ Either a local JavaScript object, or an instance of the Kendo UI DataSource.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the text content of the list items.</description>
+            <name>dataTextField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the delay in ms after which the AutoComplete will start filtering the dataSource.</description>
+            <name>delay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the AutoComplete should be initially enabled.</description>
+            <name>enable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines the type of filtration. This value is handled by the remote data source.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the height of the drop-down list in pixels.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the first item will be automatically highlighted.</description>
+            <name>highlightFirst</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines whether the filtration should be case sensitive.</description>
+            <name>ignoreCase</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the minimum number of characters that should be typed before the AutoComplete queries
+the dataSource.</description>
+            <name>minLength</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>A string that appears in the textbox when it has no value.</description>
+            <name>placeholder</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the separator for completion. Empty by default, allowing for only one completion.</description>
+            <name>separator</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the AutoComplete should automatically auto-type the rest of text.</description>
+            <name>suggest</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the items in the list.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>Calendar Widget</description>
-      <name>calendar</name>
-      <tag-class>com.kendoui.taglib.CalendarTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <name>url</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the culture info used by the widget</description>
-          <name>culture</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the content of the footer</description>
-          <name>footer</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the format, which is used to parse value set with value() method</description>
-          <name>format</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the start view</description>
-          <name>start</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the navigation depth</description>
-          <name>depth</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the selected date is changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when navigate</description>
-          <name>navigate</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>Calendar Widget</description>
+        <name>calendar</name>
+        <tag-class>com.kendoui.taglib.CalendarTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the culture info used by the widget.</description>
+            <name>culture</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies a list of dates, which will be passed to the month template.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the navigation depth.</description>
+            <name>depth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the content of the footer. If false, the footer will not be rendered.</description>
+            <name>footer</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the footer. If false, the footer will not be rendered.</description>
+            <name>footer</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the format, which is used to parse value set with value() method.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the maximum date, which the calendar can show.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the minimum date, which the calendar can show.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the start view.</description>
+            <name>start</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the selected date.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>ComboBox Widget</description>
-      <name>comboBox</name>
-      <tag-class>com.kendoui.taglib.ComboBoxTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Controls whether the ComboBox should be initially enabled</description>
-          <name>enable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Defines the initial selected item</description>
-          <name>index</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Controls whether to bind the widget to the DataSource on initialization</description>
-          <name>autoBind</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the delay in ms after which the ComboBox will start filtering dataSource</description>
-          <name>delay</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the text content of the list items</description>
-          <name>dataTextField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the value content of the list items</description>
-          <name>dataValueField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the minimum characters that should be typed before the ComboBox activates</description>
-          <name>minLength</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Define the height of the drop-down list in pixels</description>
-          <name>height</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Controls whether the first item will be automatically highlighted</description>
-          <name>highlightFirst</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Defines the type of filtration</description>
-          <name>filter</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>A string that appears in the textbox when the combobox has no value</description>
-          <name>placeholder</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Controls whether the ComboBox should automatically auto-type the rest of text</description>
-          <name>suggest</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Defines whether the filtration should be case sensitive</description>
-          <name>ignoreCase</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the drop-down list is opened</description>
-          <name>open</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the drop-down list is closed</description>
-          <name>close</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the value has been changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a Li element is selected</description>
-          <name>select</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBinding</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBound</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>ComboBox Widget</description>
+        <name>comboBox</name>
+        <tag-class>com.kendoui.taglib.ComboBoxTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether to bind the widget to the DataSource on initialization.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Use it to set the Id of the parent DropDownList.</description>
+            <name>cascadeFrom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A local JavaScript object or instance of DataSource or the data that the ComboBox will be bound to.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the text content of the list items.</description>
+            <name>dataTextField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the value content of the list items.</description>
+            <name>dataValueField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the delay in ms after which the ComboBox will start filtering dataSource.</description>
+            <name>delay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the ComboBox should be initially enabled.</description>
+            <name>enable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines the type of filtration. If "none" the ComboBox will not filter the items.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Define the height of the drop-down list in pixels.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the first item will be automatically highlighted.</description>
+            <name>highlightFirst</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines whether the filtration should be case sensitive.</description>
+            <name>ignoreCase</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the initial selected item.</description>
+            <name>index</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the minimum characters that should be typed before the ComboBox activates</description>
+            <name>minLength</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>A string that appears in the textbox when the combobox has no value.</description>
+            <name>placeholder</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the ComboBox should automatically auto-type the rest of text.</description>
+            <name>suggest</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the items in the list.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Define the text of the widget, when the autoBind is set to false.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Define the value of the widget</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>DatePicker Widget</description>
-      <name>datePicker</name>
-      <tag-class>com.kendoui.taglib.DatePickerTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Template to be used for rendering the footer of the calendar</description>
-          <name>footer</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the format, which is used to format the value of the DatePicker displayed in the input</description>
-          <name>format</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the culture info used by the widget</description>
-          <name>culture</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the start view</description>
-          <name>start</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the navigation depth</description>
-          <name>depth</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the calendar is opened</description>
-          <name>open</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the calendar is closed</description>
-          <name>close</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the selected date is changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>DatePicker Widget</description>
+        <name>datePicker</name>
+        <tag-class>com.kendoui.taglib.DatePickerTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the culture info used by the widget.</description>
+            <name>culture</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the navigation depth. The following
+settings are available for the</description>
+            <name>depth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the footer of the calendar.</description>
+            <name>footer</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the format, which is used to format the value of the DatePicker displayed in the input. The format also will be used to parse the input.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the maximum date, which the calendar can show.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the minimum date that the calendar can show.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the format will be used. Note that value of the format option is always used.</description>
+            <name>parseFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the start view.
+The following settings are available for the</description>
+            <name>start</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the selected date.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>DropDownList Widget</description>
-      <name>dropDownList</name>
-      <tag-class>com.kendoui.taglib.DropDownListTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Controls whether the DropDownList should be initially enabled</description>
-          <name>enable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Defines the initial selected item</description>
-          <name>index</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Controls whether to bind the widget on initialization</description>
-          <name>autoBind</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Define the text of the widget, when the autoBind is set to false</description>
-          <name>text</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the delay in ms before the search text typed by the end user is cleared</description>
-          <name>delay</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Define the height of the drop-down list in pixels</description>
-          <name>height</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the text content of the list items</description>
-          <name>dataTextField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the value content of the list items</description>
-          <name>dataValueField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Define the text of the default empty item</description>
-          <name>optionLabel</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Use it to set the Id of the parent DropDownList</description>
-          <name>cascadeFrom</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Controls whether the search should be case sensitive</description>
-          <name>ignoreCase</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the drop-down list is opened</description>
-          <name>open</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the drop-down list is closed</description>
-          <name>close</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the value has been changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a Li element is selected</description>
-          <name>select</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBinding</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBound</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>DateTimePicker Widget</description>
+        <name>dateTimePicker</name>
+        <tag-class>com.kendoui.taglib.DateTimePickerTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the culture info used by the widget.</description>
+            <name>culture</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the navigation depth of the calendar. The following
+settings are available for the</description>
+            <name>depth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the footer of the calendar.</description>
+            <name>footer</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the format, which is used to format the value of the DateTimePicker displayed in the input. The format also will be used to parse the input.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the interval, between values in the popup list, in minutes.</description>
+            <name>interval</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the maximum date, which the calendar can show.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the minimum date that the calendar can show.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the options.format and options.timeFormat will be used. Note that value of the format option is always used.</description>
+            <name>parseFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the start view of the calendar.
+The following settings are available for the</description>
+            <name>start</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the format, which is used to format the values in the time drop-down list.</description>
+            <name>timeFormat</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the selected value.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>NumericTextBox Widget</description>
-      <name>numericTextBox</name>
-      <tag-class>com.kendoui.taglib.NumericTextBoxTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the increment/decrement step</description>
-          <name>step</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the culture info used by the NumericTextBox widget</description>
-          <name>culture</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the format of the number</description>
-          <name>format</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <name>spinners</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the text displayed when the input is empty</description>
-          <name>placeholder</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the text of the tooltip on the up arrow</description>
-          <name>upArrowText</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the text of the tooltip on the down arrow</description>
-          <name>downArrowText</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the value is changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the value is changed from the spin buttons</description>
-          <name>spin</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>DropDownList Widget</description>
+        <name>dropDownList</name>
+        <tag-class>com.kendoui.taglib.DropDownListTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether to bind the widget on initialization.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Use it to set the Id of the parent DropDownList.</description>
+            <name>cascadeFrom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Instance of DataSource or the data that the DropDownList will be bound to.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the text content of the list items.</description>
+            <name>dataTextField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the value content of the list items.</description>
+            <name>dataValueField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the delay in ms before the search text typed by the end user is cleared.</description>
+            <name>delay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the DropDownList should be initially enabled.</description>
+            <name>enable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Define the height of the drop-down list in pixels.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the search should be case sensitive.</description>
+            <name>ignoreCase</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the initial selected item.</description>
+            <name>index</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Define the text of the default empty item. If the value is an object, then the widget will use it directly.</description>
+            <name>optionLabel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the items in the list.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Define the text of the widget, when the autoBind is set to false.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Define the value of the widget</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>Grid Widget</description>
-      <name>grid</name>
-      <tag-class>com.kendoui.taglib.GridTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether the grid will call read on the DataSource initially</description>
-          <name>autoBind</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <name>filterable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Enable/disable grid scrolling</description>
-          <name>scrollable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Defines whether grid columns are sortable</description>
-          <name>sortable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether selection is enabled/disabled</description>
-          <name>selectable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether keyboard navigation is enabled/disabled</description>
-          <name>navigatable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether paging is enabled/disabled</description>
-          <name>pageable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether editing is enabled/disabled</description>
-          <name>editable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether grouping is enabled/disabled</description>
-          <name>groupable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Template to be used for rendering the rows in the grid</description>
-          <name>rowTemplate</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <name>altRowTemplate</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <name>resizable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <name>reorderable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <name>columnMenu</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the grid selection has changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBinding</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the grid has received data from the data source</description>
-          <name>dataBound</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the grid detail row is expanded</description>
-          <name>detailExpand</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the grid detail row is collapsed</description>
-          <name>detailCollapse</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the grid detail is initialized</description>
-          <name>detailInit</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the grid enters edit mode</description>
-          <name>edit</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires before the grid item is changed</description>
-          <name>save</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires before the grid item is removed</description>
-          <name>remove</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires before the grid calls DataSource sync</description>
-          <name>saveChanges</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>columnResize</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>columnReorder</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>columnShow</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>columnHide</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>Editor Widget</description>
+        <name>editor</name>
+        <tag-class>com.kendoui.taglib.EditorTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether the Editor should submit encoded HTML tags.</description>
+            <name>encoded</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Allows custom stylesheets to be included within the editing area.</description>
+            <name>stylesheets</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
+as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs</description>
+            <name>tools</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>ListView Widget</description>
-      <name>listView</name>
-      <tag-class>com.kendoui.taglib.ListViewTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether the list view will call read on the DataSource initially</description>
-          <name>autoBind</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether selection is enabled/disabled</description>
-          <name>selectable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether keyboard navigation is enabled/disabled</description>
-          <name>navigatable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <name>altTemplate</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies ListView item template in edit mode</description>
-          <name>editTemplate</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the list view selection has changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBinding</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the list view has received data from the data source</description>
-          <name>dataBound</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the list view enters edit mode</description>
-          <name>edit</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires before the list view item is removed</description>
-          <name>remove</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>save</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>Grid Widget</description>
+        <name>grid</name>
+        <tag-class>com.kendoui.taglib.GridTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether the grid will call read on the DataSource initially.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
+            <name>columns</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Instance of DataSource or Object with DataSource configuration.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the detail rows in the grid.
+See the</description>
+            <name>detailTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether grouping is enabled/disabled.</description>
+            <name>groupable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether keyboard navigation is enabled/disabled.</description>
+            <name>navigatable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether paging is enabled/disabled.</description>
+            <name>pageable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the rows in the grid.</description>
+            <name>rowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Enable/disable grid scrolling. Possible values:</description>
+            <name>scrollable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether selection is enabled/disabled. Possible values:</description>
+            <name>selectable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>This is a list of commands for which the corresponding buttons will be rendered.
+The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+            <name>toolbar</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>Menu Widget</description>
-      <name>menu</name>
-      <tag-class>com.kendoui.taglib.MenuTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Root menu orientation</description>
-          <name>orientation</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies Menu opening direction</description>
-          <name>direction</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies that the root sub menus will be opened on item click</description>
-          <name>openOnClick</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Specifies that sub menus should close after item selection (provided they won't navigate)</description>
-          <name>closeOnClick</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving</description>
-          <name>hoverDelay</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Fires before a sub menu gets opened</description>
-          <name>open</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires after a sub menu gets closed</description>
-          <name>close</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when a menu item gets selected</description>
-          <name>select</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>ListView Widget</description>
+        <name>listView</name>
+        <tag-class>com.kendoui.taglib.ListViewTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether the list view will call read on the DataSource initially.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Instance of DataSource or Object with DataSource configuration.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies ListView item template in edit mode.</description>
+            <name>editTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether keyboard navigation is enabled/disabled.</description>
+            <name>navigatable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether selection is enabled/disabled. Possible values:</description>
+            <name>selectable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies ListView item template.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>PanelBar Widget</description>
-      <name>panelBar</name>
-      <tag-class>com.kendoui.taglib.PanelBarTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies how the PanelBar items are displayed when opened and closed</description>
-          <name>expandMode</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Triggered when an item of a PanelBar is expanded</description>
-          <name>expand</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when an item of a PanelBar is collapsed</description>
-          <name>collapse</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when an item of a PanelBar is selected</description>
-          <name>select</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when an item of a PanelBar is activated</description>
-          <name>activate</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when AJAX request results in an error</description>
-          <name>error</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when content is fetched from an AJAX request</description>
-          <name>contentLoad</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>Menu Widget</description>
+        <name>menu</name>
+        <tag-class>com.kendoui.taglib.MenuTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies that sub menus should close after item selection (provided they won't navigate).</description>
+            <name>closeOnClick</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies Menu opening direction. Can be "top", "bottom", "left", "right".
+You can also specify different direction for root and sub menu items, separating them with space. The example below will initialize the root menu to open upwards and
+its sub menus to the left.</description>
+            <name>direction</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.</description>
+            <name>hoverDelay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Specifies that the root sub menus will be opened on item click.</description>
+            <name>openOnClick</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Root menu orientation. Could be horizontal or vertical.</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies how Menu should adjust to screen boundaries. By default the strategy is</description>
+            <name>popupCollision</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>Slider Widget</description>
-      <name>slider</name>
-      <tag-class>com.kendoui.taglib.SliderTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <name>enabled</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>The minimum value of the Slider</description>
-          <name>min</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The maximum value of the Slider</description>
-          <name>max</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The small step value of the Slider</description>
-          <name>smallStep</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The delta with which the value will change when the user presses the Page Up or Page Down key (the drag handle must be focused)</description>
-          <name>largeStep</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The orientation of a Slider: "horizontal" or "vertical"</description>
-          <name>orientation</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Denotes the location of the tick marks in the Slider</description>
-          <name>tickPlacement</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Can be used to show (true) or hide (false) the increase and decrease buttons of a Slider</description>
-          <name>showButtons</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>The title of the increase button of the Slider</description>
-          <name>increaseButtonTitle</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>The title of the decrease button of the Slider</description>
-          <name>decreaseButtonTitle</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the user drags the drag handle to a new position</description>
-          <name>slide</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>NumericTextBox Widget</description>
+        <name>numericTextBox</name>
+        <tag-class>com.kendoui.taglib.NumericTextBoxTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the culture info used by the NumericTextBox widget.</description>
+            <name>culture</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the number precision. If not set precision defined by current culture is used.</description>
+            <name>decimals</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the text of the tooltip on the down arrow.</description>
+            <name>downArrowText</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the format of the number. Any valid number format is allowed.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the largest value the user can enter.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the smallest value the user can enter.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the text displayed when the input is empty.</description>
+            <name>placeholder</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the increment/decrement step.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the text of the tooltip on the up arrow.</description>
+            <name>upArrowText</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the value of the NumericTextBox widget.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>RangeSlider Widget</description>
-      <name>rangeSlider</name>
-      <tag-class>com.kendoui.taglib.RangeSliderTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <name>enabled</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>The minimum value of the RangeSlider</description>
-          <name>min</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The maximum value of the RangeSlider</description>
-          <name>max</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The small step value of the RangeSlider</description>
-          <name>smallStep</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The delta with which the value will change when the user presses the Page Up or Page Down key (the drag handle must be focused)</description>
-          <name>largeStep</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>F The orientation of a RangeSlider; "horizontal" or "vertical"</description>
-          <name>orientation</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Denotes the location of the tick marks in the RangeSlider</description>
-          <name>tickPlacement</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the user drags the drag handle to a new position</description>
-          <name>slide</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>Pager Widget</description>
+        <name>pager</name>
+        <tag-class>com.kendoui.taglib.PagerTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether the pager refresh method will be called within its initialization.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines the number of buttons displayed in the numeric pager.</description>
+            <name>buttonCount</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Instance of kendo DataSource. See the</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>The template for selectbox with predefined page sizes.</description>
+            <name>selectTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The template for page number links.</description>
+            <name>linkTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines if a label showing current paging information will be displayed.</description>
+            <name>info</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines if an input element which allows the user to navigate to given page will be displayed.</description>
+            <name>input</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines if numeric portion of the pager will be shown.</description>
+            <name>numeric</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Displays a list with predefined page sizes. An array of values to be displayed can be provided. If pageSize option is provided for DataSource then this pageSize value will be automaticaly selected in created selectbox.</description>
+            <name>pageSizes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Defines if buttons for navigating to the first, last, previous and next pages will be shown.</description>
+            <name>previousNext</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines if a refresh button will be displayed. Click on that button will call DataSource read() method to get actual data.</description>
+            <name>refresh</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>Splitter Widget</description>
-      <name>splitter</name>
-      <tag-class>com.kendoui.taglib.SplitterTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the orientation of the Splitter</description>
-          <name>orientation</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Triggered when a pane of a Splitter is expanded</description>
-          <name>expand</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a pane of a Splitter is collapsed</description>
-          <name>collapse</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when the content for a pane has finished loading</description>
-          <name>contentLoad</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a pane is resized</description>
-          <name>resize</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the splitter layout has changed</description>
-          <name>layoutChange</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>PanelBar Widget</description>
+        <name>panelBar</name>
+        <tag-class>com.kendoui.taglib.PanelBarTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies how the</description>
+            <name>expandMode</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>TabStrip Widget</description>
-      <name>tabStrip</name>
-      <tag-class>com.kendoui.taglib.TabStripTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the text name of the tab</description>
-          <name>dataTextField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the text content of the tab content element</description>
-          <name>dataContentField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the image URL of the tab</description>
-          <name>dataImageUrlField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the link URL for the tab</description>
-          <name>dataUrlField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the CSS class of the tab</description>
-          <name>dataSpriteCssClass</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Sets the field of the data item that provides the URL for the ajax loaded tab content</description>
-          <name>dataContentUrlField</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab</description>
-          <name>collapsible</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Triggered before a tab is selected</description>
-          <name>select</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered just after a tab is being made visible, but before the end of the animation</description>
-          <name>activate</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when an AJAX request results in an error</description>
-          <name>error</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when content is fetched from an AJAX request</description>
-          <name>contentLoad</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBinding</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBound</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>RangeSlider Widget</description>
+        <name>rangeSlider</name>
+        <tag-class>com.kendoui.taglib.RangeSliderTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
+handle must be focused). Note: The allied largeStep will also set large tick for every large step.</description>
+            <name>largeStep</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The maximum value of the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The minimum value of the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>F
+The orientation of a</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The selection end value of the</description>
+            <name>selectionEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The selection start value of the</description>
+            <name>selectionStart</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The small step value of the</description>
+            <name>smallStep</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Denotes the location of the tick marks in the</description>
+            <name>tickPlacement</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>TimePicker Widget</description>
-      <name>timePicker</name>
-      <tag-class>com.kendoui.taglib.TimePickerTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the format, which is used to format the value of the TimePicker displayed in the input</description>
-          <name>format</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the interval, between values in the popup list, in minutes</description>
-          <name>interval</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <name>height</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the time drop-down list is opened</description>
-          <name>open</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the time drop-down list is closed</description>
-          <name>close</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when the underlying value of a TimePicker is changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>Slider Widget</description>
+        <name>slider</name>
+        <tag-class>com.kendoui.taglib.SliderTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the decrease button of the</description>
+            <name>decreaseButtonTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the increase button of the</description>
+            <name>increaseButtonTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
+handle must be focused). Note: The allied largeStep will also set large tick for every large step.</description>
+            <name>largeStep</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The maximum value of the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The minimum value of the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The orientation of a</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Can be used to show (</description>
+            <name>showButtons</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The small step value of the</description>
+            <name>smallStep</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Denotes the location of the tick marks in the</description>
+            <name>tickPlacement</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The underlying value of the</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>DateTimePicker Widget</description>
-      <name>dateTimePicker</name>
-      <tag-class>com.kendoui.taglib.DateTimePickerTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the format, which is used to format the value of the DateTimePicker displayed in the input</description>
-          <name>format</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the format, which is used to format the values in the time drop-down list</description>
-          <name>timeFormat</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the culture info used by the widget</description>
-          <name>culture</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the interval, between values in the popup list, in minutes</description>
-          <name>interval</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <name>height</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Template to be used for rendering the footer of the calendar</description>
-          <name>footer</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the start view of the calendar</description>
-          <name>start</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies the navigation depth of the calendar</description>
-          <name>depth</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the calendar or the time drop-down list is opened</description>
-          <name>open</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the calendar or the time drop-down list is closed</description>
-          <name>close</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when the underlying value of a DateTimePicker is changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>Splitter Widget</description>
+        <name>splitter</name>
+        <tag-class>com.kendoui.taglib.SplitterTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the orientation of the</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>An array of pane definitions.</description>
+            <name>panes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>TreeView Widget</description>
-      <name>treeView</name>
-      <tag-class>com.kendoui.taglib.TreeViewTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Disables (false) or enables (true) drag-and-drop on the nodes of a TreeView</description>
-          <name>dragAndDrop</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <name>autoBind</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether the child datasources should be fetched lazily, when parent groups get expanded</description>
-          <name>loadOnDemand</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Triggered before the dragging of a node starts</description>
-          <name>dragstart</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered while a node is being dragged</description>
-          <name>drag</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a node is being dropped</description>
-          <name>drop</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered after a node has been dropped</description>
-          <name>dragend</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>dataBound</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered before a subgroup gets expanded</description>
-          <name>expand</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered before a subgroup gets collapsed</description>
-          <name>collapse</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a node gets selected</description>
-          <name>select</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>TabStrip Widget</description>
+        <name>tabStrip</name>
+        <tag-class>com.kendoui.taglib.TabStripTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.</description>
+            <name>collapsible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the text content of
+the tab content element.</description>
+            <name>dataContentField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the URL for
+the ajax loaded tab content.</description>
+            <name>dataContentUrlField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the image URL of
+the tab.</description>
+            <name>dataImageUrlField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the CSS class of
+the tab.</description>
+            <name>dataSpriteCssClass</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the text name of the tab.</description>
+            <name>dataTextField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the link URL for the
+tab.</description>
+            <name>dataUrlField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>Upload Widget</description>
-      <name>upload</name>
-      <tag-class>com.kendoui.taglib.UploadTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Enables (true) or disables (false) an Upload</description>
-          <name>enabled</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Enables (true) or disables (false) the ability to select multiple files</description>
-          <name>multiple</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Enables (true) or disables (false) the ability to display a file listing for uploading a file(s)</description>
-          <name>showFileList</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Triggered when a file(s) is selected</description>
-          <name>select</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when one or more files are about to be uploaded</description>
-          <name>upload</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when an upload / remove operation has been completed successfully</description>
-          <name>success</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when an upload / remove operation has failed</description>
-          <name>error</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when all active uploads have completed either successfully or with errors</description>
-          <name>complete</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when the upload has been cancelled while in progress</description>
-          <name>cancel</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when upload progress data is available</description>
-          <name>progress</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when an uploaded file is about to be removed</description>
-          <name>remove</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>TimePicker Widget</description>
+        <name>timePicker</name>
+        <tag-class>com.kendoui.taglib.TimePickerTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the culture info used by the widget.</description>
+            <name>culture</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the format, which is used to format the value of the TimePicker displayed in the input. The format also will be used to parse the input.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the interval, between values in the popup list, in minutes.</description>
+            <name>interval</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the end value in the popup list.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the start value in the popup list.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the formats, which are used to parse the value set with the value method or by direct input. If not set the value of the options.format will be used. Note that value of the format option is always used.</description>
+            <name>parseFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies the selected time.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>Window Widget</description>
-      <name>window</name>
-      <tag-class>com.kendoui.taglib.WindowTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>The text in the window title bar</description>
-          <name>title</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Specifies whether the window should show a modal overlay over the page</description>
-          <name>modal</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Enables (true) or disables (false) the ability for users to resize a Window</description>
-          <name>resizable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Enables (true) or disables (false) the ability for users to move/drag a Window</description>
-          <name>draggable</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>The minimum width (in pixels) that may be achieved by resizing the window</description>
-          <name>minWidth</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The minimum height (in pixels) that may be achieved by resizing the window</description>
-          <name>minHeight</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The maximum width (in pixels) that may be achieved by resizing the window</description>
-          <name>maxWidth</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>The maximum height (in pixels) that may be achieved by resizing the window</description>
-          <name>maxHeight</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>int</type>
-      </attribute>
-      <attribute>
-          <description>Triggered when a Window is opened (i</description>
-          <name>open</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a Window has finished its opening animation</description>
-          <name>activate</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a Window has finished its closing animation</description>
-          <name>deactivate</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a Window is closed (by a user or through the close() method)</description>
-          <name>close</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when the content of a Window have been refreshed via AJAX</description>
-          <name>refresh</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a Window has been resized by a user</description>
-          <name>resize</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when the user starts to move the window</description>
-          <name>dragstart</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when a Window has been moved by a user</description>
-          <name>dragend</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Triggered when an AJAX request for content fails</description>
-          <name>error</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>TreeView Widget</description>
+        <name>treeView</name>
+        <tag-class>com.kendoui.taglib.TreeViewTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Template for rendering of the treeview checkboxes.</description>
+            <name>checkboxTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides
+the image URL of the treeview nodes.</description>
+            <name>dataImageUrlField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data that the</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides
+the sprite CSS class of the treeview nodes.</description>
+            <name>dataSpriteCssClassField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides
+the text content of the treeview nodes.</description>
+            <name>dataTextField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides
+the link URL of the treeview nodes.</description>
+            <name>dataUrlField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Disables (</description>
+            <name>dragAndDrop</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether the child datasources should be fetched
+lazily, when parent groups get expanded. Setting this to false causes all child dataSources to
+be loaded at initialization time. Note: when initializing a TreeView from array (rather than from a
+HierarchicalDataSource instance), the default value of this option is false.</description>
+            <name>loadOnDemand</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Template for rendering of the nodes of the treeview.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>Editor Widget</description>
-      <name>editor</name>
-      <tag-class>com.kendoui.taglib.EditorTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Indicates whether the Editor should submit encoded HTML tags</description>
-          <name>encoded</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the Editor selection has changed</description>
-          <name>select</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when Editor is blurred and its content has changed</description>
-          <name>change</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when an Editor command is executed</description>
-          <name>execute</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>error</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires before when content is pasted in the Editor</description>
-          <name>paste</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>Upload Widget</description>
+        <name>upload</name>
+        <tag-class>com.kendoui.taglib.UploadTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Enables (</description>
+            <name>enabled</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Enables (</description>
+            <name>multiple</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Enables (</description>
+            <name>showFileList</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>Chart Widget</description>
-      <name>chart</name>
-      <tag-class>com.kendoui.taglib.ChartTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>Sets Chart theme</description>
-          <name>theme</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <name>autoBind</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>A value indicating if transition animations should be played</description>
-          <name>transitions</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
-      <attribute>
-          <description>Fires when the chart has received data from the data source and is about to render it</description>
-          <name>dataBound</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when chart series are clicked</description>
-          <name>seriesClick</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when chart series are hovered</description>
-          <name>seriesHover</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when an axis label is clicked</description>
-          <name>axisLabelClick</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      <attribute>
-          <description>Fires when plot area is clicked</description>
-          <name>plotAreaClick</name>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+        <description>Window Widget</description>
+        <name>window</name>
+        <tag-class>com.kendoui.taglib.WindowTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize",
+and "Maximize".</description>
+            <name>actions</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Specifies a URL or request options that the window should load its content from. For remote URLs, a
+container iframe element is automatically created.</description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Enables (</description>
+            <name>draggable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Explicitly states whether content iframe should be created.</description>
+            <name>iframe</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The maximum height (in pixels) that may be achieved by resizing the window.</description>
+            <name>maxHeight</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The maximum width (in pixels) that may be achieved by resizing the window.</description>
+            <name>maxWidth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The minimum height (in pixels) that may be achieved by resizing the window.</description>
+            <name>minHeight</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The minimum width (in pixels) that may be achieved by resizing the window.</description>
+            <name>minWidth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the window should show a modal overlay over the page.</description>
+            <name>modal</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Enables (</description>
+            <name>resizable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The text in the window title bar.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the window will be initially visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>RadialGauge Widget</description>
-      <name>radialGauge</name>
-      <tag-class>com.kendoui.taglib.RadialGaugeTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <name>theme</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>A value indicating if transition animations should be played</description>
-          <name>transitions</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
+        <description>kendo.dataviz.ui.Chart Widget</description>
+        <name>kendo.dataviz.ui.Chart</name>
+        <tag-class>com.kendoui.taglib.kendo.dataviz.ui.ChartTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Array of series definitions.</description>
+            <name>series</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
+            <name>seriesColors</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type></type>
+        </attribute>
+        <attribute>
+            <description>Sets Chart theme. Available themes: default, blueOpal, black.</description>
+            <name>theme</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if transition animations should be played.</description>
+            <name>transitions</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
     </tag>
 
     <tag>
-      <description>LinearGauge Widget</description>
-      <name>linearGauge</name>
-      <tag-class>com.kendoui.taglib.LinearGaugeTag</tag-class>
-      <body-content>JSP</body-content>
-      <attribute>
-          <description>The mandatory and unique name of the widget. Used as the "id" attribute of the widget's HTML element.</description>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <name>theme</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>java.lang.String</type>
-      </attribute>
-      <attribute>
-          <description>A value indicating if transition animations should be played</description>
-          <name>transitions</name>
-          <rtexprvalue>true</rtexprvalue>
-          <type>boolean</type>
-      </attribute>
+        <description>kendo.dataviz.ui.LinearGauge Widget</description>
+        <name>kendo.dataviz.ui.LinearGauge</name>
+        <tag-class>com.kendoui.taglib.kendo.dataviz.ui.LinearGaugeTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if transition animations should be played.</description>
+            <name>transitions</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
     </tag>
 
-    <!-- Auto-generated -->
+    <tag>
+        <description>kendo.dataviz.ui.RadialGauge Widget</description>
+        <name>kendo.dataviz.ui.RadialGauge</name>
+        <tag-class>com.kendoui.taglib.kendo.dataviz.ui.RadialGaugeTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the range indicators.</description>
+            <name>rangeSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if transition animations should be played.</description>
+            <name>transitions</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+<!-- Auto-generated -->
 
 	<tag>
 	    <description>PanelBar Item</description>
