@@ -44,33 +44,52 @@
                 ]
             });
 
-            test('editor value should not be encoded', function() {
-                var editorEncodeFalse = getEditor('#EditorEncodeFalse');
-                editorEncodeFalse.value('<p>foo</p>');
+            test("editor value should not be encoded", function() {
+                var editorEncodeFalse = getEditor("#EditorEncodeFalse");
+                editorEncodeFalse.value("<p>foo</p>");
 
                 editorEncodeFalse.update();
 
-                equal(editorEncodeFalse.textarea.value, '<p>foo</p>');
+                equal(editorEncodeFalse.textarea.value, "<p>foo</p>");
             });
 
-            test('editor default Encode value must be true', function() {
+            test("editor default Encode value must be true", function() {
                 equal(getEditor().options.encoded, true);
             });
 
-            test('editor should add stylesheets', function() {
-                var editorWithStyleSheets = getEditor('#EditorWithStyleSheets');
+            test("editor should add stylesheets", function() {
+                var editorWithStyleSheets = getEditor("#EditorWithStyleSheets");
 
                 equal(editorWithStyleSheets.options.stylesheets[0], "kendo.common.css");
                 equal(editorWithStyleSheets.options.stylesheets[1], "kendo.theme.css");
             });
 
-            test('editor outputs css links in iframe', function() {
-                var editorWithStyleSheets = getEditor('#EditorWithStyleSheets');
+            test("editor outputs css links in iframe", function() {
+                var editorWithStyleSheets = getEditor("#EditorWithStyleSheets");
 
-                var links = $('link', editorWithStyleSheets.document);
+                var links = $("link", editorWithStyleSheets.document);
 
-                equal(links.eq(0).attr('href'), "kendo.common.css");
-                equal(links.eq(1).attr('href'), "kendo.theme.css");
+                equal(links.eq(0).attr("href"), "kendo.common.css");
+                equal(links.eq(1).attr("href"), "kendo.theme.css");
+            });
+
+            test("setting value does not remove selection, if content is the same", function() {
+                var editor = getEditor();
+                editor.value("<p>foo</p>");
+
+                var range = editor.createRange();
+                var p = editor.body.firstChild.firstChild;
+                range.setStart(p, 1);
+                range.setEnd(p, 2);
+
+                editor.selectRange(range);
+
+                editor.value("<p>foo</p>");
+
+                range = editor.getRange();
+
+                equal(range.startOffset, 1);
+                equal(range.endOffset, 2);
             });
 
 
