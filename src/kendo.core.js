@@ -989,6 +989,13 @@ function pad(number) {
         return $.map(designators, designatorPredicate);
     }
 
+    //if date's day is different than the typed one - adjust
+    function adjustDate(date, hours) {
+        if (!hours && date.getHours() === 23) {
+            date.setHours(date.getHours() + 2);
+        }
+    }
+
     function parseExact(value, format, culture) {
         if (!value) {
             return null;
@@ -1246,6 +1253,8 @@ function pad(number) {
 
         return value;
     }
+
+    kendo._adjustDate = adjustDate;
 
     kendo.parseDate = function(value, formats, culture) {
         if (value instanceof Date) {
@@ -1644,7 +1653,7 @@ function pad(number) {
                         os.flatVersion = os.majorVersion + minorVersion + (new Array(3 - (minorVersion.length < 3 ? minorVersion.length : 2)).join("0"));
                         os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== UNDEFINED || typeof window.cordova !== UNDEFINED; // Use file protocol to detect appModes.
 
-                        if (os.android && support.devicePixelRatio < 1.5 && (window.outerWidth > 800 || window.outerHeight > 800)) {
+                        if (os.android && support.devicePixelRatio < 1.5 && (window.outerWidth > 800 || window.outerHeight > 800 || (window.screen && (window.screen.availWidth > 800 || window.screen.availHeight > 800)))) {
                             os.tablet = agent;
                         }
 
@@ -2527,18 +2536,15 @@ function pad(number) {
     };
 
     function focusable(element, isTabIndexNotNaN) {
-        var map,
-            mapName,
-            img,
-            nodeName = element.nodeName.toLowerCase();
+        var nodeName = element.nodeName.toLowerCase();
 
         return (/input|select|textarea|button|object/.test(nodeName) ?
-                    !element.disabled :
-                    "a" === nodeName ?
-                        element.href || isTabIndexNotNaN :
-                        isTabIndexNotNaN
-                ) &&
-                visible(element);
+                !element.disabled :
+                "a" === nodeName ?
+                element.href || isTabIndexNotNaN :
+                isTabIndexNotNaN
+               ) &&
+            visible(element);
     }
 
     function visible(element) {
@@ -2552,5 +2558,4 @@ function pad(number) {
             return focusable(element, !isNaN($.attr(element, "tabindex")));
         }
     });
-
 })(jQuery);

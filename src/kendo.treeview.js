@@ -1068,8 +1068,8 @@
 
                 if (id) {
                     that.wrapper.removeAttr("aria-activedescendant");
-                    that.wrapper.attr("aria-activedescendant", id);
                     that._current.attr("id", id);
+                    that.wrapper.attr("aria-activedescendant", id);
                 }
 
                 return;
