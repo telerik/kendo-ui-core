@@ -13,6 +13,7 @@
 
     <!-- Auto-generated -->
 
+
     <tag>
         <description>AutoComplete Widget</description>
         <name>autoComplete</name>
@@ -25,12 +26,12 @@
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>The set of data that the AutoComplete will be bound to.
  Either a local JavaScript object, or an instance of the Kendo UI DataSource.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Sets the field of the data item that provides the text content of the list items.</description>
@@ -105,8 +106,28 @@ the dataSource.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the value has been changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the drop-down list is closed</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the drop-down list is opened</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Li element is selected.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>Calendar Widget</description>
@@ -120,6 +141,7 @@ the dataSource.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
             <name>culture</name>
@@ -130,7 +152,6 @@ the dataSource.</description>
             <description>Specifies a list of dates, which will be passed to the month template.</description>
             <name>dates</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the navigation depth.</description>
@@ -160,13 +181,11 @@ the dataSource.</description>
             <description>Specifies the maximum date, which the calendar can show.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the minimum date, which the calendar can show.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the start view.</description>
@@ -178,10 +197,19 @@ the dataSource.</description>
             <description>Specifies the selected date.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the selected date is changed</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when navigate</description>
+            <name>navigate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>ComboBox Widget</description>
@@ -195,6 +223,7 @@ the dataSource.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Controls whether to bind the widget to the DataSource on initialization.</description>
             <name>autoBind</name>
@@ -211,7 +240,6 @@ the dataSource.</description>
             <description>A local JavaScript object or instance of DataSource or the data that the ComboBox will be bound to.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Sets the field of the data item that provides the text content of the list items.</description>
@@ -289,7 +317,6 @@ the dataSource.</description>
             <description>Template to be used for rendering the items in the list.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Define the text of the widget, when the autoBind is set to false.</description>
@@ -303,8 +330,28 @@ the dataSource.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the value has been changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the drop-down list is closed</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the drop-down list is opened</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Li element is selected.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>DatePicker Widget</description>
@@ -318,6 +365,7 @@ the dataSource.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
             <name>culture</name>
@@ -347,19 +395,16 @@ settings are available for the</description>
             <description>Specifies the maximum date, which the calendar can show.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the minimum date that the calendar can show.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the format will be used. Note that value of the format option is always used.</description>
             <name>parseFormats</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the start view.
@@ -372,10 +417,24 @@ The following settings are available for the</description>
             <description>Specifies the selected date.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the selected date is changed</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the calendar is closed</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the calendar is opened</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>DateTimePicker Widget</description>
@@ -389,6 +448,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
             <name>culture</name>
@@ -399,7 +459,6 @@ The following settings are available for the</description>
             <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
             <name>dates</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the navigation depth of the calendar. The following
@@ -430,19 +489,16 @@ settings are available for the</description>
             <description>Specifies the maximum date, which the calendar can show.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the minimum date that the calendar can show.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the options.format and options.timeFormat will be used. Note that value of the format option is always used.</description>
             <name>parseFormats</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the start view of the calendar.
@@ -461,10 +517,24 @@ The following settings are available for the</description>
             <description>Specifies the selected value.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
-
+        <attribute>
+            <description>Triggered when the underlying value of a DateTimePicker is changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the calendar or the time drop-down list is closed</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the calendar or the time drop-down list is opened</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>DropDownList Widget</description>
@@ -478,6 +548,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Controls whether to bind the widget on initialization.</description>
             <name>autoBind</name>
@@ -494,7 +565,6 @@ The following settings are available for the</description>
             <description>Instance of DataSource or the data that the DropDownList will be bound to.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Sets the field of the data item that provides the text content of the list items.</description>
@@ -542,7 +612,6 @@ The following settings are available for the</description>
             <description>Define the text of the default empty item. If the value is an object, then the widget will use it directly.</description>
             <name>optionLabel</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Template to be used for rendering the items in the list.</description>
@@ -562,8 +631,28 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the value has been changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the drop-down list is closed</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the drop-down list is opened</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Li element is selected.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>Editor Widget</description>
@@ -577,6 +666,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Indicates whether the Editor should submit encoded HTML tags.</description>
             <name>encoded</name>
@@ -587,17 +677,35 @@ The following settings are available for the</description>
             <description>Allows custom stylesheets to be included within the editing area.</description>
             <name>stylesheets</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
 as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs</description>
             <name>tools</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
-
+        <attribute>
+            <description>Fires when Editor is blurred and its content has changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when an Editor command is executed.</description>
+            <name>execute</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires before when content is pasted in the Editor.</description>
+            <name>paste</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the Editor selection has changed.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>Grid Widget</description>
@@ -611,6 +719,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Indicates whether the grid will call read on the DataSource initially.</description>
             <name>autoBind</name>
@@ -621,20 +730,17 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
             <name>columns</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Instance of DataSource or Object with DataSource configuration.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Template to be used for rendering the detail rows in the grid.
 See the</description>
             <name>detailTemplate</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Indicates whether grouping is enabled/disabled.</description>
@@ -652,19 +758,16 @@ See the</description>
             <description>Indicates whether paging is enabled/disabled.</description>
             <name>pageable</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Template to be used for rendering the rows in the grid.</description>
             <name>rowTemplate</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Enable/disable grid scrolling. Possible values:</description>
             <name>scrollable</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Indicates whether selection is enabled/disabled. Possible values:</description>
@@ -677,10 +780,54 @@ See the</description>
 The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
             <name>toolbar</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the grid selection has changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the grid has received data from the data source.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the grid detail row is collapsed.</description>
+            <name>detailCollapse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the grid detail row is expanded.</description>
+            <name>detailExpand</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the grid detail is initialized.</description>
+            <name>detailInit</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the grid enters edit mode.</description>
+            <name>edit</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires before the grid item is removed.</description>
+            <name>remove</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires before the grid item is changed.</description>
+            <name>save</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires before the grid calls DataSource sync.</description>
+            <name>saveChanges</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>ListView Widget</description>
@@ -694,6 +841,7 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Indicates whether the list view will call read on the DataSource initially.</description>
             <name>autoBind</name>
@@ -704,13 +852,11 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <description>Instance of DataSource or Object with DataSource configuration.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies ListView item template in edit mode.</description>
             <name>editTemplate</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
@@ -728,10 +874,30 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <description>Specifies ListView item template.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the list view selection has changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the list view has received data from the data source.
+and is about to render it.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the list view enters edit mode.</description>
+            <name>edit</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires before the list view item is removed.</description>
+            <name>remove</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>Menu Widget</description>
@@ -745,6 +911,7 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Specifies that sub menus should close after item selection (provided they won't navigate).</description>
             <name>closeOnClick</name>
@@ -783,8 +950,23 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-
+        <attribute>
+            <description>Fires after a sub menu gets closed.</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires before a sub menu gets opened.</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when a menu item gets selected.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>NumericTextBox Widget</description>
@@ -798,6 +980,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Specifies the culture info used by the NumericTextBox widget.</description>
             <name>culture</name>
@@ -858,8 +1041,18 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the value is changed</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the value is changed from the spin buttons</description>
+            <name>spin</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>Pager Widget</description>
@@ -873,6 +1066,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Indicates whether the pager refresh method will be called within its initialization.</description>
             <name>autoBind</name>
@@ -889,7 +1083,6 @@ its sub menus to the left.</description>
             <description>Instance of kendo DataSource. See the</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>The template for selectbox with predefined page sizes.</description>
@@ -925,7 +1118,6 @@ its sub menus to the left.</description>
             <description>Displays a list with predefined page sizes. An array of values to be displayed can be provided. If pageSize option is provided for DataSource then this pageSize value will be automaticaly selected in created selectbox.</description>
             <name>pageSizes</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Defines if buttons for navigating to the first, last, previous and next pages will be shown.</description>
@@ -939,8 +1131,13 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the current page has changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>PanelBar Widget</description>
@@ -954,14 +1151,45 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Specifies how the</description>
             <name>expandMode</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-
+        <attribute>
+            <description>Triggered when an item of a PanelBar is activated.</description>
+            <name>activate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when an item of a PanelBar is collapsed.</description>
+            <name>collapse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when content is fetched from an AJAX request.</description>
+            <name>contentLoad</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when AJAX request results in an error.</description>
+            <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when an item of a PanelBar is expanded.</description>
+            <name>expand</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when an item of a PanelBar is selected.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>RangeSlider Widget</description>
@@ -975,6 +1203,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
 handle must be focused). Note: The allied largeStep will also set large tick for every large step.</description>
@@ -1025,8 +1254,18 @@ The orientation of a</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user drags the drag handle to a new position.</description>
+            <name>slide</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>Slider Widget</description>
@@ -1040,6 +1279,7 @@ The orientation of a</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>The title of the decrease button of the</description>
             <name>decreaseButtonTitle</name>
@@ -1101,8 +1341,18 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user drags the drag handle to a new position.</description>
+            <name>slide</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>Splitter Widget</description>
@@ -1116,6 +1366,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Specifies the orientation of the</description>
             <name>orientation</name>
@@ -1126,10 +1377,34 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <description>An array of pane definitions.</description>
             <name>panes</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
-
+        <attribute>
+            <description>Triggered when a pane of a Splitter is collapsed.</description>
+            <name>collapse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when the content for a pane has finished loading.</description>
+            <name>contentLoad</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a pane of a Splitter is expanded.</description>
+            <name>expand</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the splitter layout has changed</description>
+            <name>layoutChange</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a pane is resized.</description>
+            <name>resize</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>TabStrip Widget</description>
@@ -1143,6 +1418,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.</description>
             <name>collapsible</name>
@@ -1190,8 +1466,28 @@ tab.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-
+        <attribute>
+            <description>Triggered just after a tab is being made visible, but before the end of the animation</description>
+            <name>activate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when content is fetched from an AJAX request.</description>
+            <name>contentLoad</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when an AJAX request results in an error.</description>
+            <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered before a tab is selected.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>TimePicker Widget</description>
@@ -1205,6 +1501,7 @@ tab.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
             <name>culture</name>
@@ -1215,7 +1512,6 @@ tab.</description>
             <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
             <name>dates</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the format, which is used to format the value of the TimePicker displayed in the input. The format also will be used to parse the input.</description>
@@ -1233,28 +1529,39 @@ tab.</description>
             <description>Specifies the end value in the popup list.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the start value in the popup list.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the formats, which are used to parse the value set with the value method or by direct input. If not set the value of the options.format will be used. Note that value of the format option is always used.</description>
             <name>parseFormats</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies the selected time.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
-
+        <attribute>
+            <description>Triggered when the underlying value of a TimePicker is changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the time drop-down list is closed</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the time drop-down list is opened</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>TreeView Widget</description>
@@ -1268,11 +1575,11 @@ tab.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Template for rendering of the treeview checkboxes.</description>
             <name>checkboxTemplate</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Sets the field of the data item that provides
@@ -1285,7 +1592,6 @@ the image URL of the treeview nodes.</description>
             <description>The data that the</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Sets the field of the data item that provides
@@ -1327,10 +1633,44 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <description>Template for rendering of the nodes of the treeview.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
-
+        <attribute>
+            <description>Triggered before a subgroup gets collapsed.</description>
+            <name>collapse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered while a node is being dragged.</description>
+            <name>drag</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered after a node has been dropped.</description>
+            <name>dragend</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered before the dragging of a node starts.</description>
+            <name>dragstart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a node is being dropped.</description>
+            <name>drop</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered before a subgroup gets expanded.</description>
+            <name>expand</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a node gets selected.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>Upload Widget</description>
@@ -1344,6 +1684,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Enables (</description>
             <name>enabled</name>
@@ -1362,8 +1703,51 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
-
+        <attribute>
+            <description>Fires when the upload has been cancelled while in progress.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when all active uploads have completed either successfully or with errors.</description>
+            <name>complete</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when an upload / remove operation has failed.</description>
+            <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when upload progress data is available.</description>
+            <name>progress</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when an uploaded file is about to be removed.
+Cancelling the event will prevent the remove.</description>
+            <name>remove</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a file(s) is selected. Note: Cancelling this event will prevent the selection from
+occurring.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when an upload / remove operation has been completed successfully.</description>
+            <name>success</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when one or more files are about to be uploaded.
+Cancelling the event will prevent the upload.</description>
+            <name>upload</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>Window Widget</description>
@@ -1377,19 +1761,18 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize",
 and "Maximize".</description>
             <name>actions</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Specifies a URL or request options that the window should load its content from. For remote URLs, a
 container iframe element is automatically created.</description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Enables (</description>
@@ -1451,8 +1834,53 @@ container iframe element is automatically created.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
-
+        <attribute>
+            <description>Triggered when a Window has finished its opening animation.</description>
+            <name>activate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Window is closed (by a user or through the close() method).</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Window has finished its closing animation.</description>
+            <name>deactivate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Window has been moved by a user.</description>
+            <name>dragend</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when the user starts to move the window.</description>
+            <name>dragstart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when an AJAX request for content fails.</description>
+            <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Window is opened (i.e. the open() method is called).</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when the content of a Window have been refreshed via AJAX.</description>
+            <name>refresh</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Window has been resized by a user.</description>
+            <name>resize</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>kendo.dataviz.ui.Chart Widget</description>
@@ -1466,17 +1894,16 @@ container iframe element is automatically created.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>Array of series definitions.</description>
             <name>series</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
             <name>seriesColors</name>
             <rtexprvalue>true</rtexprvalue>
-            <type></type>
         </attribute>
         <attribute>
             <description>Sets Chart theme. Available themes: default, blueOpal, black.</description>
@@ -1490,8 +1917,34 @@ container iframe element is automatically created.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
-
+        <attribute>
+            <description>Fires when an axis label is clicked.</description>
+            <name>axisLabelClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the chart has received data from the data source
+and is about to render it.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when plot area is clicked.</description>
+            <name>plotAreaClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when chart series are clicked.</description>
+            <name>seriesClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when chart series are hovered.</description>
+            <name>seriesHover</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
+        
 
     <tag>
         <description>kendo.dataviz.ui.LinearGauge Widget</description>
@@ -1505,14 +1958,15 @@ container iframe element is automatically created.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>A value indicating if transition animations should be played.</description>
             <name>transitions</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
-
     </tag>
+        
 
     <tag>
         <description>kendo.dataviz.ui.RadialGauge Widget</description>
@@ -1526,6 +1980,7 @@ container iframe element is automatically created.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
         <attribute>
             <description>The width of the range indicators.</description>
             <name>rangeSize</name>
@@ -1538,9 +1993,8 @@ container iframe element is automatically created.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
-
     </tag>
-
+        
 
 <!-- Auto-generated -->
 

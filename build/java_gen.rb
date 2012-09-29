@@ -1,8 +1,36 @@
 require 'kramdown'
+require 'erb'
 
 TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 
 MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md')
+
+TLD_ATTR_TEMPLATE = ERB.new(%{
+        <attribute>
+            <description><%= description %></description>
+            <name><%= name %></name>
+            <rtexprvalue>true</rtexprvalue>
+<% if type %>
+            <type><%= type %></type>
+<% end %>
+        </attribute>}, 0, "<>")
+
+TLD_TAG_TEMPLATE = ERB.new(%{
+    <tag>
+        <description><%= name %> Widget</description>
+        <name><%= name.sub(/^./) { |c| c.downcase } %></name>
+        <tag-class>com.kendoui.taglib.<%= name %>Tag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+<%= attributes.map{ |a| a.to_xml }.join %>
+    </tag>
+        })
 
 JS_TO_JAVA_TYPES = {
     'Number' => 'int',
@@ -16,21 +44,14 @@ class Attribute
 
     def initialize(options)
         @name = options[:name].strip
-        @type = JS_TO_JAVA_TYPES[options[:type].strip]
+        @type = JS_TO_JAVA_TYPES[options[:type]]
         @description = options[:description].strip
     end
 
     def to_xml
         return '' unless @type != 'object'
 
-        <<-eos
-        <attribute>
-            <description>#{@description}</description>
-            <name>#{@name}</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>#{@type}</type>
-        </attribute>
-        eos
+        TLD_ATTR_TEMPLATE.result(binding)
     end
 end
 
@@ -44,22 +65,7 @@ class Tag
     end
 
     def to_xml
-        <<-eos
-    <tag>
-        <description>#{@name} Widget</description>
-        <name>#{@name.sub(/^./) { |c| c.downcase }}</name>
-        <tag-class>com.kendoui.taglib.#{@name}Tag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
-            <name>name</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-#{@attributes.map{ |a| a.to_xml }.join }
-    </tag>
-        eos
+        TLD_TAG_TEMPLATE.result(binding)
     end
 
     def self.parse(filename)
@@ -72,13 +78,9 @@ class Tag
 
         tag = Tag.new(header.options[:raw_text])
 
-        configuration_element = root.children.find { |e| e.options[:raw_text] == 'Configuration' }
+        start_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Configuration' }
 
-        methods_element = root.children.find { |e| e.options[:raw_text] == 'Methods' }
-
-        start_element_index = root.children.index(configuration_element)
-
-        end_element_index = root.children.index(methods_element)
+        end_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Methods' }
 
         configuration = root.children.slice(start_element_index..end_element_index)
 
@@ -86,8 +88,8 @@ class Tag
             element.children.find { |e| e.type == type }
         end
 
-        find_element_with_type = lambda do |reference_index, type|
-            configuration.slice(reference_index, configuration.length)
+        find_element_with_type = lambda do |elements, reference_index, type|
+            elements.slice(reference_index, elements.length)
                          .find { |e| e.type == type }
         end
 
@@ -97,14 +99,35 @@ class Tag
 
                 unless name.include?('.')
                     type = find_child_with_type.call(e, :codespan)
-                    paragraph  = find_element_with_type.call(index, :p)
-                    description = find_child_with_type.call(paragraph, :text)
 
-                    p e if type == nil || paragraph == nil || description == nil
+                    paragraph  = find_element_with_type.call(configuration, index, :p)
+
+                    description = find_child_with_type.call(paragraph, :text)
 
                     attribute = Attribute.new :name => name,
                         :type => type.value,
                         :description => description.value
+
+                    tag.attributes.push(attribute)
+                end
+            end
+        end
+
+        start_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Events' }
+
+        if start_element_index != nil
+            events = root.children.slice(start_element_index, root.children.length)
+
+            events.each_with_index do |e, index|
+                if (e.type == :header && e.options[:level] == 3)
+                    name = find_child_with_type.call(e, :text).value
+
+                    paragraph  = find_element_with_type.call(events, index, :p)
+
+                    description = find_child_with_type.call(paragraph, :text)
+
+                    attribute = Attribute.new :name => name,
+                                              :description => description.value
 
                     tag.attributes.push(attribute)
                 end
