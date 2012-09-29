@@ -1,9 +1,5 @@
 tests.push(
     {
-        page: "themebuilder/index.html",
-        title: "themebuilder"
-    },
-    {
         page: "themebuilder/themecollection.html",
         title: "themebuilder themecollection"
     },
