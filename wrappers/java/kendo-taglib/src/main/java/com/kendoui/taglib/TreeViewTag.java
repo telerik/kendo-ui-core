@@ -10,20 +10,17 @@ public class TreeViewTag extends WidgetTag implements DataBoundWidget {
 
     //>> Attributes
 
-    public String getCheckboxTemplate() {
-        return ((Function)getProperty("checkboxTemplate")).getBody();
-    }
-
-    public void setCheckboxTemplate(String value) {
-        setProperty("checkboxTemplate", new Function(value));
-    }
-
     public String getDataImageUrlField() {
         return (String)getProperty("dataImageUrlField");
     }
 
     public void setDataImageUrlField(String value) {
         setProperty("dataImageUrlField", value);
+    }
+
+    @Override
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
     }
 
     public String getDataSpriteCssClassField() {
@@ -64,14 +61,6 @@ public class TreeViewTag extends WidgetTag implements DataBoundWidget {
 
     public void setLoadOnDemand(boolean value) {
         setProperty("loadOnDemand", value);
-    }
-
-    public String getTemplate() {
-        return ((Function)getProperty("template")).getBody();
-    }
-
-    public void setTemplate(String value) {
-        setProperty("template", new Function(value));
     }
 
     public String getCollapse() {

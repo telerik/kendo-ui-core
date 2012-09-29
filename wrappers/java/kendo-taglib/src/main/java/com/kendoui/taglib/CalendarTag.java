@@ -42,20 +42,20 @@ public class CalendarTag extends WidgetTag {
         setProperty("format", value);
     }
 
-    public String getMax() {
-        return ((Function)getProperty("max")).getBody();
+    public Date getMax() {
+        return (Date)getProperty("max");
     }
 
-    public void setMax(String value) {
-        setProperty("max", new Function(value));
+    public void setMax(Date value) {
+        setProperty("max", value);
     }
 
-    public String getMin() {
-        return ((Function)getProperty("min")).getBody();
+    public Date getMin() {
+        return (Date)getProperty("min");
     }
 
-    public void setMin(String value) {
-        setProperty("min", new Function(value));
+    public void setMin(Date value) {
+        setProperty("min", value);
     }
 
     public String getStart() {
@@ -66,12 +66,12 @@ public class CalendarTag extends WidgetTag {
         setProperty("start", value);
     }
 
-    public String getValue() {
-        return ((Function)getProperty("value")).getBody();
+    public Date getValue() {
+        return (Date)getProperty("value");
     }
 
-    public void setValue(String value) {
-        setProperty("value", new Function(value));
+    public void setValue(Date value) {
+        setProperty("value", value);
     }
 
     public String getChange() {

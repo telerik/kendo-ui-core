@@ -28,12 +28,6 @@
         </attribute>
 
         <attribute>
-            <description>The set of data that the AutoComplete will be bound to.
- Either a local JavaScript object, or an instance of the Kendo UI DataSource.</description>
-            <name>dataSource</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Sets the field of the data item that provides the text content of the list items.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -170,11 +164,13 @@ the dataSource.</description>
             <description>Specifies the maximum date, which the calendar can show.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Specifies the minimum date, which the calendar can show.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Specifies the start view.</description>
@@ -186,6 +182,7 @@ the dataSource.</description>
             <description>Specifies the selected date.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Fires when the selected date is changed</description>
@@ -280,11 +277,6 @@ and is about to render it.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>A local JavaScript object or instance of DataSource or the data that the ComboBox will be bound to.</description>
-            <name>dataSource</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Sets the field of the data item that provides the text content of the list items.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -355,11 +347,6 @@ and is about to render it.</description>
             <name>suggest</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>Template to be used for rendering the items in the list.</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <description>Define the text of the widget, when the autoBind is set to false.</description>
@@ -438,11 +425,13 @@ settings are available for the</description>
             <description>Specifies the maximum date, which the calendar can show.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Specifies the minimum date that the calendar can show.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Specifies the start view.
@@ -455,6 +444,7 @@ The following settings are available for the</description>
             <description>Specifies the selected date.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Fires when the selected date is changed</description>
@@ -522,11 +512,13 @@ settings are available for the</description>
             <description>Specifies the maximum date, which the calendar can show.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Specifies the minimum date that the calendar can show.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Specifies the start view of the calendar.
@@ -545,6 +537,7 @@ The following settings are available for the</description>
             <description>Specifies the selected value.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Triggered when the underlying value of a DateTimePicker is changed.</description>
@@ -590,11 +583,6 @@ The following settings are available for the</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Instance of DataSource or the data that the DropDownList will be bound to.</description>
-            <name>dataSource</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Sets the field of the data item that provides the text content of the list items.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -635,11 +623,6 @@ The following settings are available for the</description>
             <name>index</name>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
-        </attribute>
-        <attribute>
-            <description>Define the text of the default empty item. If the value is an object, then the widget will use it directly.</description>
-            <name>optionLabel</name>
-            <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <description>Template to be used for rendering the items in the list.</description>
@@ -754,41 +737,10 @@ The following settings are available for the</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Instance of DataSource or Object with DataSource configuration.</description>
-            <name>dataSource</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Template to be used for rendering the detail rows in the grid.
-See the</description>
-            <name>detailTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Indicates whether grouping is enabled/disabled.</description>
-            <name>groupable</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
             <name>navigatable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>Indicates whether paging is enabled/disabled.</description>
-            <name>pageable</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Template to be used for rendering the rows in the grid.</description>
-            <name>rowTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Enable/disable grid scrolling. Possible values:</description>
-            <name>scrollable</name>
-            <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <description>Indicates whether selection is enabled/disabled. Possible values:</description>
@@ -891,16 +843,6 @@ See the</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Instance of DataSource or Object with DataSource configuration.</description>
-            <name>dataSource</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Specifies ListView item template in edit mode.</description>
-            <name>editTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
             <name>navigatable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -911,11 +853,6 @@ See the</description>
             <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies ListView item template.</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <description>Fires when the list view selection has changed.</description>
@@ -1128,11 +1065,6 @@ its sub menus to the left.</description>
             <type>int</type>
         </attribute>
         <attribute>
-            <description>Instance of kendo DataSource. See the</description>
-            <name>dataSource</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>The template for selectbox with predefined page sizes.</description>
             <name>selectTemplate</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1161,11 +1093,6 @@ its sub menus to the left.</description>
             <name>numeric</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>Displays a list with predefined page sizes. An array of values to be displayed can be provided. If pageSize option is provided for DataSource then this pageSize value will be automaticaly selected in created selectbox.</description>
-            <name>pageSizes</name>
-            <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <description>Defines if buttons for navigating to the first, last, previous and next pages will be shown.</description>
@@ -1601,16 +1528,19 @@ tab.</description>
             <description>Specifies the end value in the popup list.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Specifies the start value in the popup list.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Specifies the selected time.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Date</type>
         </attribute>
         <attribute>
             <description>Triggered when the underlying value of a TimePicker is changed.</description>
@@ -1643,11 +1573,6 @@ tab.</description>
             <type>java.lang.String</type>
         </attribute>
 
-        <attribute>
-            <description>Template for rendering of the treeview checkboxes.</description>
-            <name>checkboxTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
         <attribute>
             <description>Sets the field of the data item that provides
 the image URL of the treeview nodes.</description>
@@ -1690,11 +1615,6 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <name>loadOnDemand</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>Template for rendering of the nodes of the treeview.</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <description>Triggered before a subgroup gets collapsed.</description>
@@ -1829,18 +1749,6 @@ Cancelling the event will prevent the upload.</description>
             <type>java.lang.String</type>
         </attribute>
 
-        <attribute>
-            <description>The element that the Window will be appended to.
-Note that this</description>
-            <name>appendTo</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Specifies a URL or request options that the window should load its content from. For remote URLs, a
-container iframe element is automatically created.</description>
-            <name>content</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
         <attribute>
             <description>Enables (</description>
             <name>draggable</name>

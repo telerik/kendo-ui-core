@@ -127,14 +127,6 @@ public class ComboBoxTag extends WidgetTag implements DataBoundWidget {
         setProperty("suggest", value);
     }
 
-    public String getTemplate() {
-        return ((Function)getProperty("template")).getBody();
-    }
-
-    public void setTemplate(String value) {
-        setProperty("template", new Function(value));
-    }
-
     public String getText() {
         return (String)getProperty("text");
     }

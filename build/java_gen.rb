@@ -5,15 +5,20 @@ TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 
 MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md')
 
-TLD_ATTR_TEMPLATE = ERB.new(%{
+JAVA_EVENT_TLD = ERB.new(%{
         <attribute>
             <description><%= description %></description>
             <name><%= name %></name>
             <rtexprvalue>true</rtexprvalue>
-<% if type %>
+        </attribute>})
+
+JAVA_OPTION_TLD = ERB.new(%{
+        <attribute>
+            <description><%= description %></description>
+            <name><%= name %></name>
+            <rtexprvalue>true</rtexprvalue>
             <type><%= type %></type>
-<% end %>
-        </attribute>}, 0, "<>")
+        </attribute>})
 
 TLD_TAG_TEMPLATE = ERB.new(%{
     <tag>
@@ -28,7 +33,7 @@ TLD_TAG_TEMPLATE = ERB.new(%{
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-<%= attributes.map{ |a| a.to_xml }.join %>
+<%= (options + events).map {|o| o.to_xml }.join %>
     </tag>
         })
 
@@ -37,7 +42,8 @@ JS_TO_JAVA_TYPES = {
     'String' => 'java.lang.String',
     'Boolean' => 'boolean',
     'Object' => 'Object',
-    'Array' => 'Array'
+    'Array' => 'Array',
+    'Date' => 'java.lang.Date'
 }
 
 JAVA_DATASOURCE_SETTER = %{
@@ -47,31 +53,50 @@ JAVA_DATASOURCE_SETTER = %{
     }
 }
 
-JAVA_GETTER_TEMPLATE = ERB.new(%{
-<% if type %>
-    public <%= type.sub('java.lang.', '') %> get<%= name.sub(/^./) { |c| c.capitalize } %>() {
-        return (<%= type.sub('java.lang.', '') %>)getProperty("<%= name %>");
-    }
-<% else %>
+JAVA_EVENT_GETTER = ERB.new(%{
     public String get<%= name.sub(/^./) { |c| c.capitalize } %>() {
         return ((Function)getProperty("<%= name %>")).getBody();
     }
-<% end %>
-}, 0, '<>')
+})
 
-JAVA_SETTER_TEMPLATE = ERB.new(%{
-<% if type %>
-    public void set<%= name.sub(/^./) { |c| c.capitalize } %>(<%= type.sub('java.lang.', '') %> value) {
-        setProperty("<%= name %>", value);
+JAVA_OPTION_GETTER = ERB.new(%{
+    public <%= type.sub('java.lang.', '') %> get<%= name.sub(/^./) { |c| c.capitalize } %>() {
+        return (<%= type.sub('java.lang.', '') %>)getProperty("<%= name %>");
     }
-<% else %>
+})
+
+JAVA_EVENT_SETTER = ERB.new(%{
     public void set<%= name.sub(/^./) { |c| c.capitalize } %>(String value) {
         setProperty("<%= name %>", new Function(value));
     }
-<% end %>
-}, 0, '<>')
+})
 
-class Attribute
+JAVA_OPTION_SETTER = ERB.new(%{
+    public void set<%= name.sub(/^./) { |c| c.capitalize } %>(<%= type.sub('java.lang.', '') %> value) {
+        setProperty("<%= name %>", value);
+    }
+})
+
+class Event
+    attr_reader :name, :description
+
+    def initialize(options)
+        @name = options[:name].strip
+        @description = options[:description].strip
+    end
+
+    def to_xml
+        JAVA_EVENT_TLD.result(binding)
+    end
+
+    def to_java
+        $stderr.puts("\t|- #{@name} (event)") if VERBOSE
+
+        [JAVA_EVENT_GETTER.result(binding), JAVA_EVENT_SETTER.result(binding)].join
+    end
+end
+
+class Option
     attr_reader :name, :type, :description
 
     def initialize(options)
@@ -81,33 +106,34 @@ class Attribute
     end
 
     def required?
-        @type != 'Object' && @type != 'Array'
+        @type != 'Object' && @type != 'Array' && @type != nil
     end
 
     def to_xml
         return '' unless required?
 
-        TLD_ATTR_TEMPLATE.result(binding)
+        JAVA_OPTION_TLD.result(binding)
     end
 
     def to_java
-        return '' unless required?
-
-        $stderr.puts("\t|- #{@name} (#{@type || 'event'})") if VERBOSE
+        $stderr.puts("\t|- #{@name} (#{@type})") if VERBOSE
 
         return JAVA_DATASOURCE_SETTER if @name == 'dataSource'
 
-        [JAVA_GETTER_TEMPLATE.result(binding), JAVA_SETTER_TEMPLATE.result(binding)].join
+        return '' unless required?
+
+        [JAVA_OPTION_GETTER.result(binding), JAVA_OPTION_SETTER.result(binding)].join
     end
 end
 
 class Tag
 
-    attr_reader :attributes, :name
+    attr_reader :options, :name, :events
 
     def initialize(name)
         @name = name.sub(/kendo.*ui\./, '')
-        @attributes = []
+        @options = []
+        @events = []
     end
 
     def to_xml
@@ -117,7 +143,7 @@ class Tag
     def to_java
         $stderr.puts("\t#{name}") if VERBOSE
 
-        @attributes.map {|attr| attr.to_java }.join
+        (@options + @events).map {|attr| attr.to_java }.join
     end
 
     def self.parse(filename)
@@ -156,11 +182,11 @@ class Tag
 
                     description = find_child_with_type.call(paragraph, :text)
 
-                    attribute = Attribute.new :name => name,
+                    option = Option.new :name => name,
                         :type => type.value,
                         :description => description.value
 
-                    tag.attributes.push(attribute)
+                    tag.options.push(option)
                 end
             end
         end
@@ -178,10 +204,10 @@ class Tag
 
                     description = find_child_with_type.call(paragraph, :text)
 
-                    attribute = Attribute.new :name => name,
-                                              :description => description.value
+                    event = Event.new :name => name,
+                                      :description => description.value
 
-                    tag.attributes.push(attribute)
+                    tag.events.push(event)
                 end
             end
         end

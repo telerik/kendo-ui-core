@@ -23,52 +23,12 @@ public class GridTag extends WidgetTag implements DataBoundWidget {
         setProperty("dataSource", dataSource);
     }
 
-    public String getDetailTemplate() {
-        return ((Function)getProperty("detailTemplate")).getBody();
-    }
-
-    public void setDetailTemplate(String value) {
-        setProperty("detailTemplate", new Function(value));
-    }
-
-    public String getGroupable() {
-        return ((Function)getProperty("groupable")).getBody();
-    }
-
-    public void setGroupable(String value) {
-        setProperty("groupable", new Function(value));
-    }
-
     public boolean getNavigatable() {
         return (boolean)getProperty("navigatable");
     }
 
     public void setNavigatable(boolean value) {
         setProperty("navigatable", value);
-    }
-
-    public String getPageable() {
-        return ((Function)getProperty("pageable")).getBody();
-    }
-
-    public void setPageable(String value) {
-        setProperty("pageable", new Function(value));
-    }
-
-    public String getRowTemplate() {
-        return ((Function)getProperty("rowTemplate")).getBody();
-    }
-
-    public void setRowTemplate(String value) {
-        setProperty("rowTemplate", new Function(value));
-    }
-
-    public String getScrollable() {
-        return ((Function)getProperty("scrollable")).getBody();
-    }
-
-    public void setScrollable(String value) {
-        setProperty("scrollable", new Function(value));
     }
 
     public String getSelectable() {

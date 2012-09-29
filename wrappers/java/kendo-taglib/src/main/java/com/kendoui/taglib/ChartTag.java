@@ -10,6 +10,11 @@ public class ChartTag extends WidgetTag {
 
     //>> Attributes
 
+    @Override
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
+    }
+
     public String getTheme() {
         return (String)getProperty("theme");
     }

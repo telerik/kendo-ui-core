@@ -87,14 +87,6 @@ public class DropDownListTag extends WidgetTag implements DataBoundWidget {
         setProperty("index", value);
     }
 
-    public String getOptionLabel() {
-        return ((Function)getProperty("optionLabel")).getBody();
-    }
-
-    public void setOptionLabel(String value) {
-        setProperty("optionLabel", new Function(value));
-    }
-
     public String getTemplate() {
         return (String)getProperty("template");
     }

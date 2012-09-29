@@ -27,22 +27,6 @@ public class WindowTag extends WidgetTag {
 
 //>> Attributes
 
-    public String getAppendTo() {
-        return ((Function)getProperty("appendTo")).getBody();
-    }
-
-    public void setAppendTo(String value) {
-        setProperty("appendTo", new Function(value));
-    }
-
-    public String getContent() {
-        return ((Function)getProperty("content")).getBody();
-    }
-
-    public void setContent(String value) {
-        setProperty("content", new Function(value));
-    }
-
     public boolean getDraggable() {
         return (boolean)getProperty("draggable");
     }
