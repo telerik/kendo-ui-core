@@ -741,10 +741,15 @@
 
         value: function (html) {
             var body = this.body,
-                dom = kendo.ui.editor.Dom;
+                dom = kendo.ui.editor.Dom,
+                currentHtml = kendo.ui.editor.Serializer.domToXhtml(body);
 
             if (html === undefined) {
-                return kendo.ui.editor.Serializer.domToXhtml(body);
+                return currentHtml;
+            }
+
+            if (html == currentHtml) {
+                return;
             }
 
             this.pendingFormats.clear();
