@@ -28,6 +28,13 @@ class Tag
         @attributes = []
     end
 
+    def to_xml
+        xml = <<-eos
+            <name>#{@name} Widget</name>
+        eos
+
+        xml
+    end
 
     def self.parse(filename)
 
@@ -73,7 +80,7 @@ def sync_tld
     filename = MARKDOWN.find {|f| f =~ /autocomplete/ }
     tag = Tag.parse(filename)
 
-    p tag
+    p tag.to_xml
 end
 
 def find_child_with_type(element, type)
