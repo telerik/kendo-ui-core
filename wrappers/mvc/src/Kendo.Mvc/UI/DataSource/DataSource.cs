@@ -133,7 +133,7 @@ namespace Kendo.Mvc.UI
 
         private object SerializeDataSource(IEnumerable data)
         {
-            var dataTableEnumerable = data as DataTableWrapper;
+            var dataTableEnumerable = RawData as DataTableWrapper;
 
             if (dataTableEnumerable != null && dataTableEnumerable.Table != null)
             {
