@@ -27,141 +27,181 @@ public class WindowTag extends WidgetTag {
 
 //>> Attributes
 
-    public String getTitle() {
-        return (String)getProperty("title");
+    public String getActions() {
+        return ((Function)getProperty("actions")).getBody();
     }
 
-    public void setTitle(String title) {
-        setProperty("title", title);
+    public void setActions(String value) {
+        setProperty("actions", new Function(value));
     }
 
-    public boolean getModal() {
-        return (boolean)getProperty("modal");
+    public String getAppendTo() {
+        return ((Function)getProperty("appendTo")).getBody();
     }
 
-    public void setModal(boolean modal) {
-        setProperty("modal", modal);
+    public void setAppendTo(String value) {
+        setProperty("appendTo", new Function(value));
     }
 
-    public boolean getResizable() {
-        return (boolean)getProperty("resizable");
+    public String getContent() {
+        return ((Function)getProperty("content")).getBody();
     }
 
-    public void setResizable(boolean resizable) {
-        setProperty("resizable", resizable);
+    public void setContent(String value) {
+        setProperty("content", new Function(value));
     }
 
     public boolean getDraggable() {
         return (boolean)getProperty("draggable");
     }
 
-    public void setDraggable(boolean draggable) {
-        setProperty("draggable", draggable);
+    public void setDraggable(boolean value) {
+        setProperty("draggable", value);
     }
 
-    public int getMinWidth() {
-        return (int)getProperty("minWidth");
+    public boolean getIframe() {
+        return (boolean)getProperty("iframe");
     }
 
-    public void setMinWidth(int minWidth) {
-        setProperty("minWidth", minWidth);
-    }
-
-    public int getMinHeight() {
-        return (int)getProperty("minHeight");
-    }
-
-    public void setMinHeight(int minHeight) {
-        setProperty("minHeight", minHeight);
-    }
-
-    public int getMaxWidth() {
-        return (int)getProperty("maxWidth");
-    }
-
-    public void setMaxWidth(int maxWidth) {
-        setProperty("maxWidth", maxWidth);
+    public void setIframe(boolean value) {
+        setProperty("iframe", value);
     }
 
     public int getMaxHeight() {
         return (int)getProperty("maxHeight");
     }
 
-    public void setMaxHeight(int maxHeight) {
-        setProperty("maxHeight", maxHeight);
+    public void setMaxHeight(int value) {
+        setProperty("maxHeight", value);
     }
 
-    public String getOpen() {
-        return ((Function)getProperty("open")).getBody();
+    public int getMaxWidth() {
+        return (int)getProperty("maxWidth");
     }
 
-    public void setOpen(String open) {
-        setProperty("open", new Function(open));
+    public void setMaxWidth(int value) {
+        setProperty("maxWidth", value);
+    }
+
+    public int getMinHeight() {
+        return (int)getProperty("minHeight");
+    }
+
+    public void setMinHeight(int value) {
+        setProperty("minHeight", value);
+    }
+
+    public int getMinWidth() {
+        return (int)getProperty("minWidth");
+    }
+
+    public void setMinWidth(int value) {
+        setProperty("minWidth", value);
+    }
+
+    public boolean getModal() {
+        return (boolean)getProperty("modal");
+    }
+
+    public void setModal(boolean value) {
+        setProperty("modal", value);
+    }
+
+    public boolean getResizable() {
+        return (boolean)getProperty("resizable");
+    }
+
+    public void setResizable(boolean value) {
+        setProperty("resizable", value);
+    }
+
+    public String getTitle() {
+        return (String)getProperty("title");
+    }
+
+    public void setTitle(String value) {
+        setProperty("title", value);
+    }
+
+    public boolean getVisible() {
+        return (boolean)getProperty("visible");
+    }
+
+    public void setVisible(boolean value) {
+        setProperty("visible", value);
     }
 
     public String getActivate() {
         return ((Function)getProperty("activate")).getBody();
     }
 
-    public void setActivate(String activate) {
-        setProperty("activate", new Function(activate));
-    }
-
-    public String getDeactivate() {
-        return ((Function)getProperty("deactivate")).getBody();
-    }
-
-    public void setDeactivate(String deactivate) {
-        setProperty("deactivate", new Function(deactivate));
+    public void setActivate(String value) {
+        setProperty("activate", new Function(value));
     }
 
     public String getClose() {
         return ((Function)getProperty("close")).getBody();
     }
 
-    public void setClose(String close) {
-        setProperty("close", new Function(close));
+    public void setClose(String value) {
+        setProperty("close", new Function(value));
     }
 
-    public String getRefresh() {
-        return ((Function)getProperty("refresh")).getBody();
+    public String getDeactivate() {
+        return ((Function)getProperty("deactivate")).getBody();
     }
 
-    public void setRefresh(String refresh) {
-        setProperty("refresh", new Function(refresh));
-    }
-
-    public String getResize() {
-        return ((Function)getProperty("resize")).getBody();
-    }
-
-    public void setResize(String resize) {
-        setProperty("resize", new Function(resize));
-    }
-
-    public String getDragstart() {
-        return ((Function)getProperty("dragstart")).getBody();
-    }
-
-    public void setDragstart(String dragstart) {
-        setProperty("dragstart", new Function(dragstart));
+    public void setDeactivate(String value) {
+        setProperty("deactivate", new Function(value));
     }
 
     public String getDragend() {
         return ((Function)getProperty("dragend")).getBody();
     }
 
-    public void setDragend(String dragend) {
-        setProperty("dragend", new Function(dragend));
+    public void setDragend(String value) {
+        setProperty("dragend", new Function(value));
+    }
+
+    public String getDragstart() {
+        return ((Function)getProperty("dragstart")).getBody();
+    }
+
+    public void setDragstart(String value) {
+        setProperty("dragstart", new Function(value));
     }
 
     public String getError() {
         return ((Function)getProperty("error")).getBody();
     }
 
-    public void setError(String error) {
-        setProperty("error", new Function(error));
+    public void setError(String value) {
+        setProperty("error", new Function(value));
     }
 
-    //<< Attributes
+    public String getOpen() {
+        return ((Function)getProperty("open")).getBody();
+    }
+
+    public void setOpen(String value) {
+        setProperty("open", new Function(value));
+    }
+
+    public String getRefresh() {
+        return ((Function)getProperty("refresh")).getBody();
+    }
+
+    public void setRefresh(String value) {
+        setProperty("refresh", new Function(value));
+    }
+
+    public String getResize() {
+        return ((Function)getProperty("resize")).getBody();
+    }
+
+    public void setResize(String value) {
+        setProperty("resize", new Function(value));
+    }
+
+//<< Attributes
 }

@@ -3,7 +3,7 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class ListViewTag extends WidgetTag {
+public class ListViewTag extends WidgetTag implements DataBoundWidget {
     public ListViewTag() {
         super("ListView");
     }
@@ -14,89 +14,78 @@ public class ListViewTag extends WidgetTag {
         return (boolean)getProperty("autoBind");
     }
 
-    public void setAutoBind(boolean autoBind) {
-        setProperty("autoBind", autoBind);
+    public void setAutoBind(boolean value) {
+        setProperty("autoBind", value);
     }
 
-    public boolean getSelectable() {
-        return (boolean)getProperty("selectable");
+    @Override
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
     }
 
-    public void setSelectable(boolean selectable) {
-        setProperty("selectable", selectable);
+    public String getEditTemplate() {
+        return ((Function)getProperty("editTemplate")).getBody();
+    }
+
+    public void setEditTemplate(String value) {
+        setProperty("editTemplate", new Function(value));
     }
 
     public boolean getNavigatable() {
         return (boolean)getProperty("navigatable");
     }
 
-    public void setNavigatable(boolean navigatable) {
-        setProperty("navigatable", navigatable);
+    public void setNavigatable(boolean value) {
+        setProperty("navigatable", value);
     }
 
-    public String getAltTemplate() {
-        return (String)getProperty("altTemplate");
+    public String getSelectable() {
+        return (String)getProperty("selectable");
     }
 
-    public void setAltTemplate(String altTemplate) {
-        setProperty("altTemplate", altTemplate);
+    public void setSelectable(String value) {
+        setProperty("selectable", value);
     }
 
-    public String getEditTemplate() {
-        return (String)getProperty("editTemplate");
+    public String getTemplate() {
+        return ((Function)getProperty("template")).getBody();
     }
 
-    public void setEditTemplate(String editTemplate) {
-        setProperty("editTemplate", editTemplate);
+    public void setTemplate(String value) {
+        setProperty("template", new Function(value));
     }
 
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }
 
-    public void setChange(String change) {
-        setProperty("change", new Function(change));
-    }
-
-    public String getDataBinding() {
-        return ((Function)getProperty("dataBinding")).getBody();
-    }
-
-    public void setDataBinding(String dataBinding) {
-        setProperty("dataBinding", new Function(dataBinding));
+    public void setChange(String value) {
+        setProperty("change", new Function(value));
     }
 
     public String getDataBound() {
         return ((Function)getProperty("dataBound")).getBody();
     }
 
-    public void setDataBound(String dataBound) {
-        setProperty("dataBound", new Function(dataBound));
+    public void setDataBound(String value) {
+        setProperty("dataBound", new Function(value));
     }
 
     public String getEdit() {
         return ((Function)getProperty("edit")).getBody();
     }
 
-    public void setEdit(String edit) {
-        setProperty("edit", new Function(edit));
+    public void setEdit(String value) {
+        setProperty("edit", new Function(value));
     }
 
     public String getRemove() {
         return ((Function)getProperty("remove")).getBody();
     }
 
-    public void setRemove(String remove) {
-        setProperty("remove", new Function(remove));
+    public void setRemove(String value) {
+        setProperty("remove", new Function(value));
     }
 
-    public String getSave() {
-        return ((Function)getProperty("save")).getBody();
-    }
-
-    public void setSave(String save) {
-        setProperty("save", new Function(save));
-    }
-
-    //<< Attributes
+//<< Attributes
 }

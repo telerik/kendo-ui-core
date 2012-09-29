@@ -12,136 +12,144 @@ public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
     }
 
     @Override
-    public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
-    }
-
-    @Override
     protected Element<?> createElement() {
         return new Input();
     }
 
 //>> Attributes
 
-    public boolean getSuggest() {
-        return (boolean)getProperty("suggest");
-    }
-
-    public void setSuggest(boolean suggest) {
-        setProperty("suggest", suggest);
+    @Override
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
     }
 
     public String getDataTextField() {
         return (String)getProperty("dataTextField");
     }
 
-    public void setDataTextField(String dataTextField) {
-        setProperty("dataTextField", dataTextField);
-    }
-
-    public int getMinLength() {
-        return (int)getProperty("minLength");
-    }
-
-    public void setMinLength(int minLength) {
-        setProperty("minLength", minLength);
+    public void setDataTextField(String value) {
+        setProperty("dataTextField", value);
     }
 
     public int getDelay() {
         return (int)getProperty("delay");
     }
 
-    public void setDelay(int delay) {
-        setProperty("delay", delay);
+    public void setDelay(int value) {
+        setProperty("delay", value);
     }
 
-    public int getHeight() {
-        return (int)getProperty("height");
+    public boolean getEnable() {
+        return (boolean)getProperty("enable");
     }
 
-    public void setHeight(int height) {
-        setProperty("height", height);
+    public void setEnable(boolean value) {
+        setProperty("enable", value);
     }
 
     public String getFilter() {
         return (String)getProperty("filter");
     }
 
-    public void setFilter(String filter) {
-        setProperty("filter", filter);
+    public void setFilter(String value) {
+        setProperty("filter", value);
     }
 
-    public boolean getIgnoreCase() {
-        return (boolean)getProperty("ignoreCase");
+    public int getHeight() {
+        return (int)getProperty("height");
     }
 
-    public void setIgnoreCase(boolean ignoreCase) {
-        setProperty("ignoreCase", ignoreCase);
+    public void setHeight(int value) {
+        setProperty("height", value);
     }
 
     public boolean getHighlightFirst() {
         return (boolean)getProperty("highlightFirst");
     }
 
-    public void setHighlightFirst(boolean highlightFirst) {
-        setProperty("highlightFirst", highlightFirst);
+    public void setHighlightFirst(boolean value) {
+        setProperty("highlightFirst", value);
+    }
+
+    public boolean getIgnoreCase() {
+        return (boolean)getProperty("ignoreCase");
+    }
+
+    public void setIgnoreCase(boolean value) {
+        setProperty("ignoreCase", value);
+    }
+
+    public int getMinLength() {
+        return (int)getProperty("minLength");
+    }
+
+    public void setMinLength(int value) {
+        setProperty("minLength", value);
     }
 
     public String getPlaceholder() {
         return (String)getProperty("placeholder");
     }
 
-    public void setPlaceholder(String placeholder) {
-        setProperty("placeholder", placeholder);
+    public void setPlaceholder(String value) {
+        setProperty("placeholder", value);
     }
 
-    public String getOpen() {
-        return ((Function)getProperty("open")).getBody();
+    public String getSeparator() {
+        return (String)getProperty("separator");
     }
 
-    public void setOpen(String open) {
-        setProperty("open", new Function(open));
+    public void setSeparator(String value) {
+        setProperty("separator", value);
     }
 
-    public String getClose() {
-        return ((Function)getProperty("close")).getBody();
+    public boolean getSuggest() {
+        return (boolean)getProperty("suggest");
     }
 
-    public void setClose(String close) {
-        setProperty("close", new Function(close));
+    public void setSuggest(boolean value) {
+        setProperty("suggest", value);
+    }
+
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
     }
 
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }
 
-    public void setChange(String change) {
-        setProperty("change", new Function(change));
+    public void setChange(String value) {
+        setProperty("change", new Function(value));
+    }
+
+    public String getClose() {
+        return ((Function)getProperty("close")).getBody();
+    }
+
+    public void setClose(String value) {
+        setProperty("close", new Function(value));
+    }
+
+    public String getOpen() {
+        return ((Function)getProperty("open")).getBody();
+    }
+
+    public void setOpen(String value) {
+        setProperty("open", new Function(value));
     }
 
     public String getSelect() {
         return ((Function)getProperty("select")).getBody();
     }
 
-    public void setSelect(String select) {
-        setProperty("select", new Function(select));
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
     }
 
-    public String getDataBinding() {
-        return ((Function)getProperty("dataBinding")).getBody();
-    }
-
-    public void setDataBinding(String dataBinding) {
-        setProperty("dataBinding", new Function(dataBinding));
-    }
-
-    public String getDataBound() {
-        return ((Function)getProperty("dataBound")).getBody();
-    }
-
-    public void setDataBound(String dataBound) {
-        setProperty("dataBound", new Function(dataBound));
-    }
-
-    //<< Attributes
+//<< Attributes
 }

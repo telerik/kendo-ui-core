@@ -10,117 +10,93 @@ public class TabStripTag extends WidgetTag {
 
     //>> Attributes
 
-    public String getDataTextField() {
-        return (String)getProperty("dataTextField");
+    public boolean getCollapsible() {
+        return (boolean)getProperty("collapsible");
     }
 
-    public void setDataTextField(String dataTextField) {
-        setProperty("dataTextField", dataTextField);
+    public void setCollapsible(boolean value) {
+        setProperty("collapsible", value);
     }
 
     public String getDataContentField() {
         return (String)getProperty("dataContentField");
     }
 
-    public void setDataContentField(String dataContentField) {
-        setProperty("dataContentField", dataContentField);
-    }
-
-    public String getDataImageUrlField() {
-        return (String)getProperty("dataImageUrlField");
-    }
-
-    public void setDataImageUrlField(String dataImageUrlField) {
-        setProperty("dataImageUrlField", dataImageUrlField);
-    }
-
-    public String getDataUrlField() {
-        return (String)getProperty("dataUrlField");
-    }
-
-    public void setDataUrlField(String dataUrlField) {
-        setProperty("dataUrlField", dataUrlField);
-    }
-
-    public String getDataSpriteCssClass() {
-        return (String)getProperty("dataSpriteCssClass");
-    }
-
-    public void setDataSpriteCssClass(String dataSpriteCssClass) {
-        setProperty("dataSpriteCssClass", dataSpriteCssClass);
+    public void setDataContentField(String value) {
+        setProperty("dataContentField", value);
     }
 
     public String getDataContentUrlField() {
         return (String)getProperty("dataContentUrlField");
     }
 
-    public void setDataContentUrlField(String dataContentUrlField) {
-        setProperty("dataContentUrlField", dataContentUrlField);
+    public void setDataContentUrlField(String value) {
+        setProperty("dataContentUrlField", value);
     }
 
-    public boolean getCollapsible() {
-        return (boolean)getProperty("collapsible");
+    public String getDataImageUrlField() {
+        return (String)getProperty("dataImageUrlField");
     }
 
-    public void setCollapsible(boolean collapsible) {
-        setProperty("collapsible", collapsible);
+    public void setDataImageUrlField(String value) {
+        setProperty("dataImageUrlField", value);
     }
 
-    public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
+    public String getDataSpriteCssClass() {
+        return (String)getProperty("dataSpriteCssClass");
     }
 
-    public void setSelect(String select) {
-        setProperty("select", new Function(select));
+    public void setDataSpriteCssClass(String value) {
+        setProperty("dataSpriteCssClass", value);
+    }
+
+    public String getDataTextField() {
+        return (String)getProperty("dataTextField");
+    }
+
+    public void setDataTextField(String value) {
+        setProperty("dataTextField", value);
+    }
+
+    public String getDataUrlField() {
+        return (String)getProperty("dataUrlField");
+    }
+
+    public void setDataUrlField(String value) {
+        setProperty("dataUrlField", value);
     }
 
     public String getActivate() {
         return ((Function)getProperty("activate")).getBody();
     }
 
-    public void setActivate(String activate) {
-        setProperty("activate", new Function(activate));
-    }
-
-    public String getError() {
-        return ((Function)getProperty("error")).getBody();
-    }
-
-    public void setError(String error) {
-        setProperty("error", new Function(error));
+    public void setActivate(String value) {
+        setProperty("activate", new Function(value));
     }
 
     public String getContentLoad() {
         return ((Function)getProperty("contentLoad")).getBody();
     }
 
-    public void setContentLoad(String contentLoad) {
-        setProperty("contentLoad", new Function(contentLoad));
+    public void setContentLoad(String value) {
+        setProperty("contentLoad", new Function(value));
     }
 
-    public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+    public String getError() {
+        return ((Function)getProperty("error")).getBody();
     }
 
-    public void setChange(String change) {
-        setProperty("change", new Function(change));
+    public void setError(String value) {
+        setProperty("error", new Function(value));
     }
 
-    public String getDataBinding() {
-        return ((Function)getProperty("dataBinding")).getBody();
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
     }
 
-    public void setDataBinding(String dataBinding) {
-        setProperty("dataBinding", new Function(dataBinding));
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
     }
 
-    public String getDataBound() {
-        return ((Function)getProperty("dataBound")).getBody();
-    }
-
-    public void setDataBound(String dataBound) {
-        setProperty("dataBound", new Function(dataBound));
-    }
-
-    //<< Attributes
+//<< Attributes
 }

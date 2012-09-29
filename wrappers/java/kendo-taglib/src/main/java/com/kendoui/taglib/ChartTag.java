@@ -10,69 +10,77 @@ public class ChartTag extends WidgetTag {
 
     //>> Attributes
 
+    public String getSeries() {
+        return ((Function)getProperty("series")).getBody();
+    }
+
+    public void setSeries(String value) {
+        setProperty("series", new Function(value));
+    }
+
+    public String getSeriesColors() {
+        return ((Function)getProperty("seriesColors")).getBody();
+    }
+
+    public void setSeriesColors(String value) {
+        setProperty("seriesColors", new Function(value));
+    }
+
     public String getTheme() {
         return (String)getProperty("theme");
     }
 
-    public void setTheme(String theme) {
-        setProperty("theme", theme);
-    }
-
-    public boolean getAutoBind() {
-        return (boolean)getProperty("autoBind");
-    }
-
-    public void setAutoBind(boolean autoBind) {
-        setProperty("autoBind", autoBind);
+    public void setTheme(String value) {
+        setProperty("theme", value);
     }
 
     public boolean getTransitions() {
         return (boolean)getProperty("transitions");
     }
 
-    public void setTransitions(boolean transitions) {
-        setProperty("transitions", transitions);
-    }
-
-    public String getDataBound() {
-        return ((Function)getProperty("dataBound")).getBody();
-    }
-
-    public void setDataBound(String dataBound) {
-        setProperty("dataBound", new Function(dataBound));
-    }
-
-    public String getSeriesClick() {
-        return ((Function)getProperty("seriesClick")).getBody();
-    }
-
-    public void setSeriesClick(String seriesClick) {
-        setProperty("seriesClick", new Function(seriesClick));
-    }
-
-    public String getSeriesHover() {
-        return ((Function)getProperty("seriesHover")).getBody();
-    }
-
-    public void setSeriesHover(String seriesHover) {
-        setProperty("seriesHover", new Function(seriesHover));
+    public void setTransitions(boolean value) {
+        setProperty("transitions", value);
     }
 
     public String getAxisLabelClick() {
         return ((Function)getProperty("axisLabelClick")).getBody();
     }
 
-    public void setAxisLabelClick(String axisLabelClick) {
-        setProperty("axisLabelClick", new Function(axisLabelClick));
+    public void setAxisLabelClick(String value) {
+        setProperty("axisLabelClick", new Function(value));
+    }
+
+    public String getDataBound() {
+        return ((Function)getProperty("dataBound")).getBody();
+    }
+
+    public void setDataBound(String value) {
+        setProperty("dataBound", new Function(value));
     }
 
     public String getPlotAreaClick() {
         return ((Function)getProperty("plotAreaClick")).getBody();
     }
 
-    public void setPlotAreaClick(String plotAreaClick) {
-        setProperty("plotAreaClick", new Function(plotAreaClick));
+    public void setPlotAreaClick(String value) {
+        setProperty("plotAreaClick", new Function(value));
     }
 
-    //<< Attributes
+    public String getSeriesClick() {
+        return ((Function)getProperty("seriesClick")).getBody();
+    }
+
+    public void setSeriesClick(String value) {
+        setProperty("seriesClick", new Function(value));
+    }
+
+    public String getSeriesHover() {
+        return ((Function)getProperty("seriesHover")).getBody();
+    }
+
+    public void setSeriesHover(String value) {
+        setProperty("seriesHover", new Function(value));
+    }
+
+//<< Attributes
 }

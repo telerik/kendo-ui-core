@@ -10,93 +10,125 @@ public class DateTimePickerTag extends WidgetTag {
 
     //>> Attributes
 
-    public String getFormat() {
-        return (String)getProperty("format");
-    }
-
-    public void setFormat(String format) {
-        setProperty("format", format);
-    }
-
-    public String getTimeFormat() {
-        return (String)getProperty("timeFormat");
-    }
-
-    public void setTimeFormat(String timeFormat) {
-        setProperty("timeFormat", timeFormat);
-    }
-
     public String getCulture() {
         return (String)getProperty("culture");
     }
 
-    public void setCulture(String culture) {
-        setProperty("culture", culture);
+    public void setCulture(String value) {
+        setProperty("culture", value);
     }
 
-    public int getInterval() {
-        return (int)getProperty("interval");
+    public String getDates() {
+        return ((Function)getProperty("dates")).getBody();
     }
 
-    public void setInterval(int interval) {
-        setProperty("interval", interval);
-    }
-
-    public int getHeight() {
-        return (int)getProperty("height");
-    }
-
-    public void setHeight(int height) {
-        setProperty("height", height);
-    }
-
-    public String getFooter() {
-        return (String)getProperty("footer");
-    }
-
-    public void setFooter(String footer) {
-        setProperty("footer", footer);
-    }
-
-    public String getStart() {
-        return (String)getProperty("start");
-    }
-
-    public void setStart(String start) {
-        setProperty("start", start);
+    public void setDates(String value) {
+        setProperty("dates", new Function(value));
     }
 
     public String getDepth() {
         return (String)getProperty("depth");
     }
 
-    public void setDepth(String depth) {
-        setProperty("depth", depth);
+    public void setDepth(String value) {
+        setProperty("depth", value);
     }
 
-    public String getOpen() {
-        return ((Function)getProperty("open")).getBody();
+    public String getFooter() {
+        return (String)getProperty("footer");
     }
 
-    public void setOpen(String open) {
-        setProperty("open", new Function(open));
+    public void setFooter(String value) {
+        setProperty("footer", value);
     }
 
-    public String getClose() {
-        return ((Function)getProperty("close")).getBody();
+    public String getFormat() {
+        return (String)getProperty("format");
     }
 
-    public void setClose(String close) {
-        setProperty("close", new Function(close));
+    public void setFormat(String value) {
+        setProperty("format", value);
+    }
+
+    public int getInterval() {
+        return (int)getProperty("interval");
+    }
+
+    public void setInterval(int value) {
+        setProperty("interval", value);
+    }
+
+    public String getMax() {
+        return ((Function)getProperty("max")).getBody();
+    }
+
+    public void setMax(String value) {
+        setProperty("max", new Function(value));
+    }
+
+    public String getMin() {
+        return ((Function)getProperty("min")).getBody();
+    }
+
+    public void setMin(String value) {
+        setProperty("min", new Function(value));
+    }
+
+    public String getParseFormats() {
+        return ((Function)getProperty("parseFormats")).getBody();
+    }
+
+    public void setParseFormats(String value) {
+        setProperty("parseFormats", new Function(value));
+    }
+
+    public String getStart() {
+        return (String)getProperty("start");
+    }
+
+    public void setStart(String value) {
+        setProperty("start", value);
+    }
+
+    public String getTimeFormat() {
+        return (String)getProperty("timeFormat");
+    }
+
+    public void setTimeFormat(String value) {
+        setProperty("timeFormat", value);
+    }
+
+    public String getValue() {
+        return ((Function)getProperty("value")).getBody();
+    }
+
+    public void setValue(String value) {
+        setProperty("value", new Function(value));
     }
 
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }
 
-    public void setChange(String change) {
-        setProperty("change", new Function(change));
+    public void setChange(String value) {
+        setProperty("change", new Function(value));
     }
 
-    //<< Attributes
+    public String getClose() {
+        return ((Function)getProperty("close")).getBody();
+    }
+
+    public void setClose(String value) {
+        setProperty("close", new Function(value));
+    }
+
+    public String getOpen() {
+        return ((Function)getProperty("open")).getBody();
+    }
+
+    public void setOpen(String value) {
+        setProperty("open", new Function(value));
+    }
+
+//<< Attributes
 }

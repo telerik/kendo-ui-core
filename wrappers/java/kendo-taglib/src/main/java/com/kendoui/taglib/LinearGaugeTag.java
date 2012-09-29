@@ -8,21 +8,13 @@ public class LinearGaugeTag extends WidgetTag {
 
     //>> Attributes
 
-    public String getTheme() {
-        return (String)getProperty("theme");
-    }
-
-    public void setTheme(String theme) {
-        setProperty("theme", theme);
-    }
-
     public boolean getTransitions() {
         return (boolean)getProperty("transitions");
     }
 
-    public void setTransitions(boolean transitions) {
-        setProperty("transitions", transitions);
+    public void setTransitions(boolean value) {
+        setProperty("transitions", value);
     }
 
-    //<< Attributes
+//<< Attributes
 }

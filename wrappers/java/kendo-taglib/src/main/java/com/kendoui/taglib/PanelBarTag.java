@@ -41,57 +41,57 @@ public class PanelBarTag extends WidgetTag implements PanelBarItemTagContainer {
         return (String)getProperty("expandMode");
     }
 
-    public void setExpandMode(String expandMode) {
-        setProperty("expandMode", expandMode);
-    }
-
-    public String getExpand() {
-        return ((Function)getProperty("expand")).getBody();
-    }
-
-    public void setExpand(String expand) {
-        setProperty("expand", new Function(expand));
-    }
-
-    public String getCollapse() {
-        return ((Function)getProperty("collapse")).getBody();
-    }
-
-    public void setCollapse(String collapse) {
-        setProperty("collapse", new Function(collapse));
-    }
-
-    public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
-    }
-
-    public void setSelect(String select) {
-        setProperty("select", new Function(select));
+    public void setExpandMode(String value) {
+        setProperty("expandMode", value);
     }
 
     public String getActivate() {
         return ((Function)getProperty("activate")).getBody();
     }
 
-    public void setActivate(String activate) {
-        setProperty("activate", new Function(activate));
+    public void setActivate(String value) {
+        setProperty("activate", new Function(value));
     }
 
-    public String getError() {
-        return ((Function)getProperty("error")).getBody();
+    public String getCollapse() {
+        return ((Function)getProperty("collapse")).getBody();
     }
 
-    public void setError(String error) {
-        setProperty("error", new Function(error));
+    public void setCollapse(String value) {
+        setProperty("collapse", new Function(value));
     }
 
     public String getContentLoad() {
         return ((Function)getProperty("contentLoad")).getBody();
     }
 
-    public void setContentLoad(String contentLoad) {
-        setProperty("contentLoad", new Function(contentLoad));
+    public void setContentLoad(String value) {
+        setProperty("contentLoad", new Function(value));
     }
 
-    //<< Attributes
+    public String getError() {
+        return ((Function)getProperty("error")).getBody();
+    }
+
+    public void setError(String value) {
+        setProperty("error", new Function(value));
+    }
+
+    public String getExpand() {
+        return ((Function)getProperty("expand")).getBody();
+    }
+
+    public void setExpand(String value) {
+        setProperty("expand", new Function(value));
+    }
+
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
+    }
+
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
+    }
+
+//<< Attributes
 }

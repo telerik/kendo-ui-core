@@ -73,7 +73,7 @@
             <description>Defines whether the filtration should be case sensitive.</description>
             <name>ignoreCase</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>Specifies the minimum number of characters that should be typed before the AutoComplete queries
@@ -160,12 +160,6 @@ the dataSource.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the content of the footer. If false, the footer will not be rendered.</description>
-            <name>footer</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
             <description>Template to be used for rendering the footer. If false, the footer will not be rendered.</description>
             <name>footer</name>
             <rtexprvalue>true</rtexprvalue>
@@ -206,6 +200,70 @@ the dataSource.</description>
         <attribute>
             <description>Fires when navigate</description>
             <name>navigate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+        
+
+    <tag>
+        <description>Chart Widget</description>
+        <name>chart</name>
+        <tag-class>com.kendoui.taglib.ChartTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Array of series definitions.</description>
+            <name>series</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
+            <name>seriesColors</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Sets Chart theme. Available themes: default, blueOpal, black.</description>
+            <name>theme</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if transition animations should be played.</description>
+            <name>transitions</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Fires when an axis label is clicked.</description>
+            <name>axisLabelClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the chart has received data from the data source
+and is about to render it.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when plot area is clicked.</description>
+            <name>plotAreaClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when chart series are clicked.</description>
+            <name>seriesClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when chart series are hovered.</description>
+            <name>seriesHover</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
@@ -695,6 +753,16 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when the user depresses a keyboard key. Triggered multiple times if the user holds the key down.</description>
+            <name>keydown</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user releases a keyboard key.</description>
+            <name>keyup</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires before when content is pasted in the Editor.</description>
             <name>paste</name>
             <rtexprvalue>true</rtexprvalue>
@@ -746,7 +814,6 @@ See the</description>
             <description>Indicates whether grouping is enabled/disabled.</description>
             <name>groupable</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
         </attribute>
         <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
@@ -784,6 +851,11 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
         <attribute>
             <description>Fires when the grid selection has changed.</description>
             <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user resizes a column.</description>
+            <name>columnResize</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -825,6 +897,28 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <description>Fires before the grid calls DataSource sync.</description>
             <name>saveChanges</name>
             <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+        
+
+    <tag>
+        <description>LinearGauge Widget</description>
+        <name>linearGauge</name>
+        <tag-class>com.kendoui.taglib.LinearGaugeTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>A value indicating if transition animations should be played.</description>
+            <name>transitions</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
     </tag>
         
@@ -1024,6 +1118,12 @@ its sub menus to the left.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Specifies whether the up/down spin buttons should be rendered</description>
+            <name>spinners</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Specifies the increment/decrement step.</description>
             <name>step</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1187,6 +1287,40 @@ its sub menus to the left.</description>
             <description>Triggered when an item of a PanelBar is selected.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+        
+
+    <tag>
+        <description>RadialGauge Widget</description>
+        <name>radialGauge</name>
+        <tag-class>com.kendoui.taglib.RadialGaugeTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the range indicators.</description>
+            <name>rangeSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>The distance from the range indicators to the ticks.</description>
+            <name>rangeDistance</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if transition animations should be played.</description>
+            <name>transitions</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
     </tag>
         
@@ -1640,6 +1774,11 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Triggered after the dataSource change event has been processed (adding/removing items);</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Triggered while a node is being dragged.</description>
             <name>drag</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1769,6 +1908,12 @@ and "Maximize".</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>The element that the Window will be appended to.
+Note that this</description>
+            <name>appendTo</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Specifies a URL or request options that the window should load its content from. For remote URLs, a
 container iframe element is automatically created.</description>
             <name>content</name>
@@ -1870,7 +2015,9 @@ container iframe element is automatically created.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered when the content of a Window have been refreshed via AJAX.</description>
+            <description>Triggered when the content of a Window has finished loading via AJAX,
+when the window iframe has finished loading, or when the refresh button
+has been clicked on a window with static content.</description>
             <name>refresh</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -1878,120 +2025,6 @@ container iframe element is automatically created.</description>
             <description>Triggered when a Window has been resized by a user.</description>
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
-        </attribute>
-    </tag>
-        
-
-    <tag>
-        <description>kendo.dataviz.ui.Chart Widget</description>
-        <name>kendo.dataviz.ui.Chart</name>
-        <tag-class>com.kendoui.taglib.kendo.dataviz.ui.ChartTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
-            <name>name</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Array of series definitions.</description>
-            <name>series</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
-            <name>seriesColors</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Sets Chart theme. Available themes: default, blueOpal, black.</description>
-            <name>theme</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>A value indicating if transition animations should be played.</description>
-            <name>transitions</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>Fires when an axis label is clicked.</description>
-            <name>axisLabelClick</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fires when the chart has received data from the data source
-and is about to render it.</description>
-            <name>dataBound</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fires when plot area is clicked.</description>
-            <name>plotAreaClick</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fires when chart series are clicked.</description>
-            <name>seriesClick</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fires when chart series are hovered.</description>
-            <name>seriesHover</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-    </tag>
-        
-
-    <tag>
-        <description>kendo.dataviz.ui.LinearGauge Widget</description>
-        <name>kendo.dataviz.ui.LinearGauge</name>
-        <tag-class>com.kendoui.taglib.kendo.dataviz.ui.LinearGaugeTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
-            <name>name</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>A value indicating if transition animations should be played.</description>
-            <name>transitions</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-    </tag>
-        
-
-    <tag>
-        <description>kendo.dataviz.ui.RadialGauge Widget</description>
-        <name>kendo.dataviz.ui.RadialGauge</name>
-        <tag-class>com.kendoui.taglib.kendo.dataviz.ui.RadialGaugeTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
-            <name>name</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The width of the range indicators.</description>
-            <name>rangeSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-        <attribute>
-            <description>A value indicating if transition animations should be played.</description>
-            <name>transitions</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
         </attribute>
     </tag>
         

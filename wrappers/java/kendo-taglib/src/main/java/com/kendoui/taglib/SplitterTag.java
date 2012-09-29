@@ -14,49 +14,57 @@ public class SplitterTag extends WidgetTag {
         return (String)getProperty("orientation");
     }
 
-    public void setOrientation(String orientation) {
-        setProperty("orientation", orientation);
+    public void setOrientation(String value) {
+        setProperty("orientation", value);
     }
 
-    public String getExpand() {
-        return ((Function)getProperty("expand")).getBody();
+    public String getPanes() {
+        return ((Function)getProperty("panes")).getBody();
     }
 
-    public void setExpand(String expand) {
-        setProperty("expand", new Function(expand));
+    public void setPanes(String value) {
+        setProperty("panes", new Function(value));
     }
 
     public String getCollapse() {
         return ((Function)getProperty("collapse")).getBody();
     }
 
-    public void setCollapse(String collapse) {
-        setProperty("collapse", new Function(collapse));
+    public void setCollapse(String value) {
+        setProperty("collapse", new Function(value));
     }
 
     public String getContentLoad() {
         return ((Function)getProperty("contentLoad")).getBody();
     }
 
-    public void setContentLoad(String contentLoad) {
-        setProperty("contentLoad", new Function(contentLoad));
+    public void setContentLoad(String value) {
+        setProperty("contentLoad", new Function(value));
     }
 
-    public String getResize() {
-        return ((Function)getProperty("resize")).getBody();
+    public String getExpand() {
+        return ((Function)getProperty("expand")).getBody();
     }
 
-    public void setResize(String resize) {
-        setProperty("resize", new Function(resize));
+    public void setExpand(String value) {
+        setProperty("expand", new Function(value));
     }
 
     public String getLayoutChange() {
         return ((Function)getProperty("layoutChange")).getBody();
     }
 
-    public void setLayoutChange(String layoutChange) {
-        setProperty("layoutChange", new Function(layoutChange));
+    public void setLayoutChange(String value) {
+        setProperty("layoutChange", new Function(value));
     }
 
-    //<< Attributes
+    public String getResize() {
+        return ((Function)getProperty("resize")).getBody();
+    }
+
+    public void setResize(String value) {
+        setProperty("resize", new Function(value));
+    }
+
+//<< Attributes
 }

@@ -14,49 +14,73 @@ public class EditorTag extends WidgetTag {
         return (boolean)getProperty("encoded");
     }
 
-    public void setEncoded(boolean encoded) {
-        setProperty("encoded", encoded);
+    public void setEncoded(boolean value) {
+        setProperty("encoded", value);
     }
 
-    public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
+    public String getStylesheets() {
+        return ((Function)getProperty("stylesheets")).getBody();
     }
 
-    public void setSelect(String select) {
-        setProperty("select", new Function(select));
+    public void setStylesheets(String value) {
+        setProperty("stylesheets", new Function(value));
+    }
+
+    public String getTools() {
+        return ((Function)getProperty("tools")).getBody();
+    }
+
+    public void setTools(String value) {
+        setProperty("tools", new Function(value));
     }
 
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }
 
-    public void setChange(String change) {
-        setProperty("change", new Function(change));
+    public void setChange(String value) {
+        setProperty("change", new Function(value));
     }
 
     public String getExecute() {
         return ((Function)getProperty("execute")).getBody();
     }
 
-    public void setExecute(String execute) {
-        setProperty("execute", new Function(execute));
+    public void setExecute(String value) {
+        setProperty("execute", new Function(value));
     }
 
-    public String getError() {
-        return ((Function)getProperty("error")).getBody();
+    public String getKeydown() {
+        return ((Function)getProperty("keydown")).getBody();
     }
 
-    public void setError(String error) {
-        setProperty("error", new Function(error));
+    public void setKeydown(String value) {
+        setProperty("keydown", new Function(value));
+    }
+
+    public String getKeyup() {
+        return ((Function)getProperty("keyup")).getBody();
+    }
+
+    public void setKeyup(String value) {
+        setProperty("keyup", new Function(value));
     }
 
     public String getPaste() {
         return ((Function)getProperty("paste")).getBody();
     }
 
-    public void setPaste(String paste) {
-        setProperty("paste", new Function(paste));
+    public void setPaste(String value) {
+        setProperty("paste", new Function(value));
     }
 
-    //<< Attributes
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
+    }
+
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
+    }
+
+//<< Attributes
 }

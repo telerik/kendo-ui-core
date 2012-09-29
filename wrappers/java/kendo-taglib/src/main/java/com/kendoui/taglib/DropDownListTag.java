@@ -3,148 +3,153 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class DropDownListTag extends WidgetTag {
+public class DropDownListTag extends WidgetTag implements DataBoundWidget {
     public DropDownListTag() {
         super("DropDownList");
     }
 
     //>> Attributes
 
-    public boolean getEnable() {
-        return (boolean)getProperty("enable");
-    }
-
-    public void setEnable(boolean enable) {
-        setProperty("enable", enable);
-    }
-
-    public int getIndex() {
-        return (int)getProperty("index");
-    }
-
-    public void setIndex(int index) {
-        setProperty("index", index);
-    }
-
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }
 
-    public void setAutoBind(boolean autoBind) {
-        setProperty("autoBind", autoBind);
-    }
-
-    public String getText() {
-        return (String)getProperty("text");
-    }
-
-    public void setText(String text) {
-        setProperty("text", text);
-    }
-
-    public int getDelay() {
-        return (int)getProperty("delay");
-    }
-
-    public void setDelay(int delay) {
-        setProperty("delay", delay);
-    }
-
-    public int getHeight() {
-        return (int)getProperty("height");
-    }
-
-    public void setHeight(int height) {
-        setProperty("height", height);
-    }
-
-    public String getDataTextField() {
-        return (String)getProperty("dataTextField");
-    }
-
-    public void setDataTextField(String dataTextField) {
-        setProperty("dataTextField", dataTextField);
-    }
-
-    public String getDataValueField() {
-        return (String)getProperty("dataValueField");
-    }
-
-    public void setDataValueField(String dataValueField) {
-        setProperty("dataValueField", dataValueField);
-    }
-
-    public String getOptionLabel() {
-        return (String)getProperty("optionLabel");
-    }
-
-    public void setOptionLabel(String optionLabel) {
-        setProperty("optionLabel", optionLabel);
+    public void setAutoBind(boolean value) {
+        setProperty("autoBind", value);
     }
 
     public String getCascadeFrom() {
         return (String)getProperty("cascadeFrom");
     }
 
-    public void setCascadeFrom(String cascadeFrom) {
-        setProperty("cascadeFrom", cascadeFrom);
+    public void setCascadeFrom(String value) {
+        setProperty("cascadeFrom", value);
     }
 
-    public boolean getIgnoreCase() {
-        return (boolean)getProperty("ignoreCase");
+    @Override
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
     }
 
-    public void setIgnoreCase(boolean ignoreCase) {
-        setProperty("ignoreCase", ignoreCase);
+    public String getDataTextField() {
+        return (String)getProperty("dataTextField");
     }
 
-    public String getOpen() {
-        return ((Function)getProperty("open")).getBody();
+    public void setDataTextField(String value) {
+        setProperty("dataTextField", value);
     }
 
-    public void setOpen(String open) {
-        setProperty("open", new Function(open));
+    public String getDataValueField() {
+        return (String)getProperty("dataValueField");
     }
 
-    public String getClose() {
-        return ((Function)getProperty("close")).getBody();
+    public void setDataValueField(String value) {
+        setProperty("dataValueField", value);
     }
 
-    public void setClose(String close) {
-        setProperty("close", new Function(close));
+    public int getDelay() {
+        return (int)getProperty("delay");
+    }
+
+    public void setDelay(int value) {
+        setProperty("delay", value);
+    }
+
+    public boolean getEnable() {
+        return (boolean)getProperty("enable");
+    }
+
+    public void setEnable(boolean value) {
+        setProperty("enable", value);
+    }
+
+    public int getHeight() {
+        return (int)getProperty("height");
+    }
+
+    public void setHeight(int value) {
+        setProperty("height", value);
+    }
+
+    public String getIgnoreCase() {
+        return (String)getProperty("ignoreCase");
+    }
+
+    public void setIgnoreCase(String value) {
+        setProperty("ignoreCase", value);
+    }
+
+    public int getIndex() {
+        return (int)getProperty("index");
+    }
+
+    public void setIndex(int value) {
+        setProperty("index", value);
+    }
+
+    public String getOptionLabel() {
+        return ((Function)getProperty("optionLabel")).getBody();
+    }
+
+    public void setOptionLabel(String value) {
+        setProperty("optionLabel", new Function(value));
+    }
+
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
+    }
+
+    public String getText() {
+        return (String)getProperty("text");
+    }
+
+    public void setText(String value) {
+        setProperty("text", value);
+    }
+
+    public String getValue() {
+        return (String)getProperty("value");
+    }
+
+    public void setValue(String value) {
+        setProperty("value", value);
     }
 
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }
 
-    public void setChange(String change) {
-        setProperty("change", new Function(change));
+    public void setChange(String value) {
+        setProperty("change", new Function(value));
+    }
+
+    public String getClose() {
+        return ((Function)getProperty("close")).getBody();
+    }
+
+    public void setClose(String value) {
+        setProperty("close", new Function(value));
+    }
+
+    public String getOpen() {
+        return ((Function)getProperty("open")).getBody();
+    }
+
+    public void setOpen(String value) {
+        setProperty("open", new Function(value));
     }
 
     public String getSelect() {
         return ((Function)getProperty("select")).getBody();
     }
 
-    public void setSelect(String select) {
-        setProperty("select", new Function(select));
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
     }
 
-    public String getDataBinding() {
-        return ((Function)getProperty("dataBinding")).getBody();
-    }
-
-    public void setDataBinding(String dataBinding) {
-        setProperty("dataBinding", new Function(dataBinding));
-    }
-
-    public String getDataBound() {
-        return ((Function)getProperty("dataBound")).getBody();
-    }
-
-    public void setDataBound(String dataBound) {
-        setProperty("dataBound", new Function(dataBound));
-    }
-
-    //<< Attributes
+//<< Attributes
 }

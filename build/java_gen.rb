@@ -39,6 +39,37 @@ JS_TO_JAVA_TYPES = {
     'Object' => 'object'
 }
 
+JAVA_DATASOURCE_SETTER = %{
+    @Override
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
+    }
+}
+
+JAVA_GETTER_TEMPLATE = ERB.new(%{
+<% if type %>
+    public <%= type.sub('java.lang.', '') %> get<%= name.sub(/^./) { |c| c.capitalize } %>() {
+        return (<%= type.sub('java.lang.', '') %>)getProperty("<%= name %>");
+    }
+<% else %>
+    public String get<%= name.sub(/^./) { |c| c.capitalize } %>() {
+        return ((Function)getProperty("<%= name %>")).getBody();
+    }
+<% end %>
+}, 0, '<>')
+
+JAVA_SETTER_TEMPLATE = ERB.new(%{
+<% if type %>
+    public void set<%= name.sub(/^./) { |c| c.capitalize } %>(<%= type.sub('java.lang.', '') %> value) {
+        setProperty("<%= name %>", value);
+    }
+<% else %>
+    public void set<%= name.sub(/^./) { |c| c.capitalize } %>(String value) {
+        setProperty("<%= name %>", new Function(value));
+    }
+<% end %>
+}, 0, '<>')
+
 class Attribute
     attr_reader :name, :type, :description
 
@@ -53,6 +84,14 @@ class Attribute
 
         TLD_ATTR_TEMPLATE.result(binding)
     end
+
+    def to_java
+        return '' unless @type != 'object'
+
+        return JAVA_DATASOURCE_SETTER if @name == 'dataSource'
+
+        [JAVA_GETTER_TEMPLATE.result(binding), JAVA_SETTER_TEMPLATE.result(binding)].join
+    end
 end
 
 class Tag
@@ -60,12 +99,16 @@ class Tag
     attr_reader :attributes, :name
 
     def initialize(name)
-        @name = name.sub('kendo.ui.', '')
+        @name = name.sub(/kendo.*ui\./, '')
         @attributes = []
     end
 
     def to_xml
         TLD_TAG_TEMPLATE.result(binding)
+    end
+
+    def to_java
+        @attributes.map {|attr| attr.to_java }.join
     end
 
     def self.parse(filename)
@@ -151,6 +194,26 @@ def generate
 
     File.open(TLD, 'w') do |file|
         file.write(tld)
+    end
+
+    tags.each do |tag|
+        filename = "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{tag.name}Tag.java"
+
+        if File.exists?(filename)
+            java = File.read(filename)
+
+            java.sub!(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
+                        "//>> Attributes\n" +
+                        tag.to_java +
+                        "\n//<< Attributes"
+                     )
+
+            java.gsub!(/\r?\n/, "\r\n")
+
+            File.open(filename, 'w') do |file|
+                file.write(java)
+            end
+        end
     end
 end
 

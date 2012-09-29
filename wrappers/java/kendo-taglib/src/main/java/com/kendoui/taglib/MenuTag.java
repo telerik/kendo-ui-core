@@ -10,69 +10,77 @@ public class MenuTag extends WidgetTag {
 
     //>> Attributes
 
-    public String getOrientation() {
-        return (String)getProperty("orientation");
+    public boolean getCloseOnClick() {
+        return (boolean)getProperty("closeOnClick");
     }
 
-    public void setOrientation(String orientation) {
-        setProperty("orientation", orientation);
+    public void setCloseOnClick(boolean value) {
+        setProperty("closeOnClick", value);
     }
 
     public String getDirection() {
         return (String)getProperty("direction");
     }
 
-    public void setDirection(String direction) {
-        setProperty("direction", direction);
-    }
-
-    public boolean getOpenOnClick() {
-        return (boolean)getProperty("openOnClick");
-    }
-
-    public void setOpenOnClick(boolean openOnClick) {
-        setProperty("openOnClick", openOnClick);
-    }
-
-    public boolean getCloseOnClick() {
-        return (boolean)getProperty("closeOnClick");
-    }
-
-    public void setCloseOnClick(boolean closeOnClick) {
-        setProperty("closeOnClick", closeOnClick);
+    public void setDirection(String value) {
+        setProperty("direction", value);
     }
 
     public int getHoverDelay() {
         return (int)getProperty("hoverDelay");
     }
 
-    public void setHoverDelay(int hoverDelay) {
-        setProperty("hoverDelay", hoverDelay);
+    public void setHoverDelay(int value) {
+        setProperty("hoverDelay", value);
     }
 
-    public String getOpen() {
-        return ((Function)getProperty("open")).getBody();
+    public boolean getOpenOnClick() {
+        return (boolean)getProperty("openOnClick");
     }
 
-    public void setOpen(String open) {
-        setProperty("open", new Function(open));
+    public void setOpenOnClick(boolean value) {
+        setProperty("openOnClick", value);
+    }
+
+    public String getOrientation() {
+        return (String)getProperty("orientation");
+    }
+
+    public void setOrientation(String value) {
+        setProperty("orientation", value);
+    }
+
+    public String getPopupCollision() {
+        return (String)getProperty("popupCollision");
+    }
+
+    public void setPopupCollision(String value) {
+        setProperty("popupCollision", value);
     }
 
     public String getClose() {
         return ((Function)getProperty("close")).getBody();
     }
 
-    public void setClose(String close) {
-        setProperty("close", new Function(close));
+    public void setClose(String value) {
+        setProperty("close", new Function(value));
+    }
+
+    public String getOpen() {
+        return ((Function)getProperty("open")).getBody();
+    }
+
+    public void setOpen(String value) {
+        setProperty("open", new Function(value));
     }
 
     public String getSelect() {
         return ((Function)getProperty("select")).getBody();
     }
 
-    public void setSelect(String select) {
-        setProperty("select", new Function(select));
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
     }
 
-    //<< Attributes
+//<< Attributes
 }

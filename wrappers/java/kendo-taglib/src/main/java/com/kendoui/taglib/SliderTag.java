@@ -10,101 +10,101 @@ public class SliderTag extends WidgetTag {
 
     //>> Attributes
 
-    public boolean getEnabled() {
-        return (boolean)getProperty("enabled");
+    public String getDecreaseButtonTitle() {
+        return (String)getProperty("decreaseButtonTitle");
     }
 
-    public void setEnabled(boolean enabled) {
-        setProperty("enabled", enabled);
-    }
-
-    public int getMin() {
-        return (int)getProperty("min");
-    }
-
-    public void setMin(int min) {
-        setProperty("min", min);
-    }
-
-    public int getMax() {
-        return (int)getProperty("max");
-    }
-
-    public void setMax(int max) {
-        setProperty("max", max);
-    }
-
-    public int getSmallStep() {
-        return (int)getProperty("smallStep");
-    }
-
-    public void setSmallStep(int smallStep) {
-        setProperty("smallStep", smallStep);
-    }
-
-    public int getLargeStep() {
-        return (int)getProperty("largeStep");
-    }
-
-    public void setLargeStep(int largeStep) {
-        setProperty("largeStep", largeStep);
-    }
-
-    public String getOrientation() {
-        return (String)getProperty("orientation");
-    }
-
-    public void setOrientation(String orientation) {
-        setProperty("orientation", orientation);
-    }
-
-    public String getTickPlacement() {
-        return (String)getProperty("tickPlacement");
-    }
-
-    public void setTickPlacement(String tickPlacement) {
-        setProperty("tickPlacement", tickPlacement);
-    }
-
-    public boolean getShowButtons() {
-        return (boolean)getProperty("showButtons");
-    }
-
-    public void setShowButtons(boolean showButtons) {
-        setProperty("showButtons", showButtons);
+    public void setDecreaseButtonTitle(String value) {
+        setProperty("decreaseButtonTitle", value);
     }
 
     public String getIncreaseButtonTitle() {
         return (String)getProperty("increaseButtonTitle");
     }
 
-    public void setIncreaseButtonTitle(String increaseButtonTitle) {
-        setProperty("increaseButtonTitle", increaseButtonTitle);
+    public void setIncreaseButtonTitle(String value) {
+        setProperty("increaseButtonTitle", value);
     }
 
-    public String getDecreaseButtonTitle() {
-        return (String)getProperty("decreaseButtonTitle");
+    public int getLargeStep() {
+        return (int)getProperty("largeStep");
     }
 
-    public void setDecreaseButtonTitle(String decreaseButtonTitle) {
-        setProperty("decreaseButtonTitle", decreaseButtonTitle);
+    public void setLargeStep(int value) {
+        setProperty("largeStep", value);
+    }
+
+    public int getMax() {
+        return (int)getProperty("max");
+    }
+
+    public void setMax(int value) {
+        setProperty("max", value);
+    }
+
+    public int getMin() {
+        return (int)getProperty("min");
+    }
+
+    public void setMin(int value) {
+        setProperty("min", value);
+    }
+
+    public String getOrientation() {
+        return (String)getProperty("orientation");
+    }
+
+    public void setOrientation(String value) {
+        setProperty("orientation", value);
+    }
+
+    public boolean getShowButtons() {
+        return (boolean)getProperty("showButtons");
+    }
+
+    public void setShowButtons(boolean value) {
+        setProperty("showButtons", value);
+    }
+
+    public int getSmallStep() {
+        return (int)getProperty("smallStep");
+    }
+
+    public void setSmallStep(int value) {
+        setProperty("smallStep", value);
+    }
+
+    public String getTickPlacement() {
+        return (String)getProperty("tickPlacement");
+    }
+
+    public void setTickPlacement(String value) {
+        setProperty("tickPlacement", value);
+    }
+
+    public int getValue() {
+        return (int)getProperty("value");
+    }
+
+    public void setValue(int value) {
+        setProperty("value", value);
     }
 
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }
 
-    public void setChange(String change) {
-        setProperty("change", new Function(change));
+    public void setChange(String value) {
+        setProperty("change", new Function(value));
     }
 
     public String getSlide() {
         return ((Function)getProperty("slide")).getBody();
     }
 
-    public void setSlide(String slide) {
-        setProperty("slide", new Function(slide));
+    public void setSlide(String value) {
+        setProperty("slide", new Function(value));
     }
 
-    //<< Attributes
+//<< Attributes
 }

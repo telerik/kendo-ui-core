@@ -7,7 +7,7 @@
     <groupId>com.kendoui</groupId>
     <artifactId>kendo</artifactId>
     <packaging>pom</packaging>
-    <version>2012.3.928</version>
+    <version>2012.3.929</version>
     <name>Kendo Java Wrappers</name>
 
     <modules>

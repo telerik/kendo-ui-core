@@ -14,89 +14,89 @@ public class UploadTag extends WidgetTag {
         return (boolean)getProperty("enabled");
     }
 
-    public void setEnabled(boolean enabled) {
-        setProperty("enabled", enabled);
+    public void setEnabled(boolean value) {
+        setProperty("enabled", value);
     }
 
     public boolean getMultiple() {
         return (boolean)getProperty("multiple");
     }
 
-    public void setMultiple(boolean multiple) {
-        setProperty("multiple", multiple);
+    public void setMultiple(boolean value) {
+        setProperty("multiple", value);
     }
 
     public boolean getShowFileList() {
         return (boolean)getProperty("showFileList");
     }
 
-    public void setShowFileList(boolean showFileList) {
-        setProperty("showFileList", showFileList);
-    }
-
-    public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
-    }
-
-    public void setSelect(String select) {
-        setProperty("select", new Function(select));
-    }
-
-    public String getUpload() {
-        return ((Function)getProperty("upload")).getBody();
-    }
-
-    public void setUpload(String upload) {
-        setProperty("upload", new Function(upload));
-    }
-
-    public String getSuccess() {
-        return ((Function)getProperty("success")).getBody();
-    }
-
-    public void setSuccess(String success) {
-        setProperty("success", new Function(success));
-    }
-
-    public String getError() {
-        return ((Function)getProperty("error")).getBody();
-    }
-
-    public void setError(String error) {
-        setProperty("error", new Function(error));
-    }
-
-    public String getComplete() {
-        return ((Function)getProperty("complete")).getBody();
-    }
-
-    public void setComplete(String complete) {
-        setProperty("complete", new Function(complete));
+    public void setShowFileList(boolean value) {
+        setProperty("showFileList", value);
     }
 
     public String getCancel() {
         return ((Function)getProperty("cancel")).getBody();
     }
 
-    public void setCancel(String cancel) {
-        setProperty("cancel", new Function(cancel));
+    public void setCancel(String value) {
+        setProperty("cancel", new Function(value));
+    }
+
+    public String getComplete() {
+        return ((Function)getProperty("complete")).getBody();
+    }
+
+    public void setComplete(String value) {
+        setProperty("complete", new Function(value));
+    }
+
+    public String getError() {
+        return ((Function)getProperty("error")).getBody();
+    }
+
+    public void setError(String value) {
+        setProperty("error", new Function(value));
     }
 
     public String getProgress() {
         return ((Function)getProperty("progress")).getBody();
     }
 
-    public void setProgress(String progress) {
-        setProperty("progress", new Function(progress));
+    public void setProgress(String value) {
+        setProperty("progress", new Function(value));
     }
 
     public String getRemove() {
         return ((Function)getProperty("remove")).getBody();
     }
 
-    public void setRemove(String remove) {
-        setProperty("remove", new Function(remove));
+    public void setRemove(String value) {
+        setProperty("remove", new Function(value));
     }
 
-    //<< Attributes
+    public String getSelect() {
+        return ((Function)getProperty("select")).getBody();
+    }
+
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
+    }
+
+    public String getSuccess() {
+        return ((Function)getProperty("success")).getBody();
+    }
+
+    public void setSuccess(String value) {
+        setProperty("success", new Function(value));
+    }
+
+    public String getUpload() {
+        return ((Function)getProperty("upload")).getBody();
+    }
+
+    public void setUpload(String value) {
+        setProperty("upload", new Function(value));
+    }
+
+//<< Attributes
 }
