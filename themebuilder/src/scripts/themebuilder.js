@@ -417,7 +417,8 @@
                         min: 0,
                         max: 1,
                         step: 0.1,
-                        spin: changeHandler
+                        spin: changeHandler,
+                        change: changeHandler
                     });
 
                 $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showWebSource, that));
