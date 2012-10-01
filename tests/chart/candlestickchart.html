@@ -186,16 +186,16 @@
                     equals(view.log.rect[0].style.fill, "rectColor");
                 });
 
-                test("sets rect base body color(open > close)", function() {
+                test("sets rect down body color(open > close)", function() {
                     setupCandlestickChart(plotArea, {
                         series: [{
                             type: "candlestick",
                             data: [[3,4,1,2]],
-                            baseColor: "baseColor"
+                            downColor: "downColor"
                         }]
                     });
 
-                    equals(view.log.rect[0].style.fill, "baseColor");
+                    equals(view.log.rect[0].style.fill, "downColor");
                 });
 
                 test("overlay rect has same model id as its segment", function() {
@@ -388,7 +388,7 @@
                         low: 1,
                         close: 3,
                         color: "color",
-                        baseColor: "baseColor"
+                        downColor: "downColor"
                     }],
                     point;
 
@@ -444,10 +444,10 @@
                     same(point.color, "color");
                 });
 
-                test("binds baseColor field", function() {
+                test("binds downColor field", function() {
                     $("#container").kendoChart({
                         dataSource: {
-                            data: [{ open: 3, high: 4, low: 1, close: 2, color: "color", baseColor: "baseColor" }]
+                            data: [{ open: 3, high: 4, low: 1, close: 2, color: "color", downColor: "downColor" }]
                         },
                         series: [{
                             type: "candlestick",
@@ -455,14 +455,14 @@
                             highField: "high",
                             lowField: "low",
                             closeField: "close",
-                            baseField: "baseColor"
+                            baseField: "downColor"
                         }]
                     });
 
                     var chart = $("#container").data("kendoChart");
                     point = chart._plotArea.charts[0].points[0];
 
-                    same(point.color, "baseColor");
+                    same(point.color, "downColor");
                 });
 
             })();
