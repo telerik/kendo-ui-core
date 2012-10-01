@@ -46,7 +46,7 @@
                     },
                     gap: 1,
                     spacing: 0.3,
-                    baseColor: WHITE,
+                    downColor: WHITE,
                     aggregate: {
                         "open": "max",
                         "high": "max",
@@ -161,7 +161,7 @@
                     }
                 },
                 candlestick: {
-                    baseColor: "#555",
+                    downColor: "#555",
                     line: {
                         color: WHITE
                     },
@@ -238,7 +238,7 @@
                     }
                 },
                 candlestick: {
-                    baseColor: "#dedede",
+                    downColor: "#dedede",
                     line: {
                         color: "#8d8d8d"
                     }
@@ -297,7 +297,7 @@
                     }
                 },
                 candlestick: {
-                    baseColor: "#c4d0d5",
+                    downColor: "#c4d0d5",
                     line: {
                         color: "#9aabb2"
                     }
@@ -381,7 +381,7 @@
                     }
                 },
                 candlestick: {
-                    baseColor: "#a6afbe"
+                    downColor: "#a6afbe"
                 }
             },
             chartArea: {
@@ -438,7 +438,7 @@
                     }
                 },
                 candlestick: {
-                    baseColor: "#c7c7c7",
+                    downColor: "#c7c7c7",
                     line: {
                         color: "#787878"
                     }

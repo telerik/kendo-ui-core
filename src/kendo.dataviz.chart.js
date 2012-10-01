@@ -3291,7 +3291,7 @@
         options: {},
 
         bindableFields: function() {
-            return ["color", "baseColor"];
+            return ["color", "downColor"];
         },
 
         reflowCategories: function(categorySlots) {
@@ -3339,7 +3339,7 @@
 
                 if (series.type == CANDLESTICK) {
                     if (value.open > value.close) {
-                        pointColor = data.fields.baseColor || series.baseColor;
+                        pointColor = data.fields.downColor || series.downColor;
                     }
                 }
 
