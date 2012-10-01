@@ -469,7 +469,9 @@
                         var effect = kendo.fx[effectName];
 
                         if (effect) {
-                            var dir = kendo.directions[settings.direction];
+                            var dir = kendo.directions[settings.direction],
+                                start = effect.css;
+
                             if (settings.direction && dir) {
                                 settings.direction = (options.reverse ? dir.reverse : settings.direction);
                             }
@@ -486,8 +488,12 @@
                                 $.merge(restore, effect.restore);
                             }
 
-                            if (effect.css) {
-                                css = extend(css, effect.css);
+                            if (start) {
+                                if ($.isFunction(start)) {
+                                    extend(css, start(element, opts));
+                                } else {
+                                    extend(css, start);
+                                }
                             }
                         }
                     });
@@ -720,28 +726,31 @@
         },
 
         fade: {
-            css: {
-                opacity: function(element, options) {
-                    var opacity = element.data("opacity"), direction = options.effects.fade.direction;
-                    return direction == "out" && isNaN(opacity) || direction == "in" ? 0 : opacity;
-                }
-            },
             restore: [ "opacity" ],
+            css: function(element, options) {
+                var opacity = element.data("opacity"),
+                    direction = options.effects.fade.direction,
+                    result = direction == "out" && isNaN(opacity) || direction == "in" ? 0 : opacity;
+
+                return { opacity: result };
+            },
+
             setup: function(element, options) {
                 return extend({ opacity: options.effects.fade.direction == "out" ? 0 : 1 }, options.properties);
             }
         },
+
         zoom: {
-            css: {
-                scale: function(element, options) {
-                    var scale = animationProperty(element, "scale");
-                    return options.effects.zoom.direction == "in" ? (scale != 1 ? scale : "0.01") : 1;
-                },
-                zoom: function(element, options) {
-                    var zoom = element[0].style.zoom;
-                    return options.effects.zoom.direction == "in" && hasZoom ? (zoom ? zoom : "0.01") : undefined;
-                }
+            css: function(element, options) {
+                var scale = animationProperty(element, "scale"),
+                    zoomIn = options.effects.zoom.direction == "in",
+                    scaleValue =  zoomIn ? (scale != 1 ? scale : "0.01") : 1,
+                    zoom = element[0].style.zoom,
+                    zoomValue = zoomIn && hasZoom ? (zoom ? zoom : "0.01") : undefined;
+
+                return { scale: scaleValue, zoom: zoomValue };
             },
+
             setup: function(element, options) {
                 var reverse = options.effects.zoom.direction == "out";
 
