@@ -346,7 +346,8 @@
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode;
+                key = e.keyCode,
+                value;
 
             if (key == keys.DOWN) {
                 that._step(-1);
@@ -356,7 +357,7 @@
                 that._change(that.element.val());
             }
 
-            if (that._prevent(key) && !e.ctrlKey) {
+            if (that._prevent(key, e.shiftKey) && !e.ctrlKey) {
                 e.preventDefault();
             }
         },
@@ -373,7 +374,7 @@
             });
         },
 
-        _prevent: function(key) {
+        _prevent: function(key, shiftKey) {
             var that = this,
                 element = that.element[0],
                 value = element.value,
@@ -384,7 +385,7 @@
                 precision = options.decimals,
                 idx = caret(element),
                 prevent = true,
-                end;
+                number;
 
             if (precision === NULL) {
                 precision = numberFormat.decimals;
@@ -400,16 +401,22 @@
                  key == keys.RIGHT ||
                  key == keys.TAB ||
                  key == keys.BACKSPACE ||
-                 key == keys.ENTER) {
+                 key == keys.ENTER)
+            {
                 prevent = false;
+                if (shiftKey) {
+                    number = parseInt(String.fromCharCode(key));
+                    if (!isNaN(number)) {
+                        element.value = value.substring(0, idx) + number + value.substring(idx);
+                        prevent = true;
+                    }
+                }
             } else if (decimals[key] === separator && precision > 0 && value.indexOf(separator) == -1) {
                 prevent = false;
             } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109) && idx === 0) { //sign
                 prevent = false;
             } else if (key == 110 && precision > 0 && value.indexOf(separator) == -1) {
-                end = value.substring(idx);
-
-                element.value = value.substring(0, idx) + separator + end;
+                element.value = value.substring(0, idx) + separator + value.substring(idx);
             }
 
             return prevent;
