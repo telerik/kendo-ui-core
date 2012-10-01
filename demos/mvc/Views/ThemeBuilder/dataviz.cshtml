@@ -34,11 +34,15 @@
 <div class="column">
     <div id="area-chart"></div>
 
+    <div id="bubble-chart"></div>
+
     <div id="radial-gauge"></div>
 </div>
 
 <div class="column">
     <div id="mixed-chart"></div>
+
+    <div id="pie-chart"></div>
 
     <div id="linear-gauge"></div>
 </div>
@@ -85,33 +89,6 @@
 
 <script>
     $(document).ready(function() {
-        var transport = {
-            read: {
-                url: "../content/web/datasource/internet-users.json",
-                dataType: "json"
-            }
-        };
-
-        var sharedDataSource = new kendo.data.DataSource({
-            transport: transport,
-            sort: {
-                field: "year",
-                dir: "asc"
-            },
-            schema: {
-                model: {
-                    fields: {
-                        year: {
-                            type: "number"
-                        },
-                        value: {
-                            type: "string"
-                        }
-                    }
-                }
-            }
-        });
-
         $("#area-chart").kendoChart({
             transitions: false,
             theme: $(document).data("kendoSkin") || "default",
@@ -152,6 +129,7 @@
 
         $("#mixed-chart").kendoChart({
             transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
             title: {
                 text: "Hybrid car mileage report"
             },
@@ -184,18 +162,97 @@
             }],
             categoryAxis: {
                 categories: ["Mon", "Tue", "Wed", "Thu", "Fri"],
-                // Align the first two value axes to the left
-                // and the last two to the right.
-                //
-                // Right alignment is done by specifying a
-                // crossing value greater than or equal to
-                // the number of categories.
                 axisCrossingValues: [0, 10]
+            }
+        });
+
+
+        $("#bubble-chart").kendoChart({
+            transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
+            legend: {
+                visible: false
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "../content/dataviz/js/crime-stats.json",
+                        dataType: "json"
+                    }
+                }
+            },
+            series: [{
+                type: "bubble",
+                xField: "murder",
+                yField: "burglary",
+                sizeField: "population",
+                categoryField: "state"
+            }],
+            xAxis: {
+                labels: {
+                    format: "{0:N0}"
+                },
+                title: {
+                    text: "Murders per 100,000 population"
+                }
+            },
+            yAxis: {
+                labels: {
+                    format: "{0:N0}"
+                },
+                title: {
+                    text: "Burglaries per 100,000 population"
+                }
+            },
+            tooltip: {
+                visible: true,
+                format: "{3}: Population {2:N0}"
+            }
+        });
+
+        $("#pie-chart").kendoChart({
+            transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
+            title: {
+                text: "Break-up of Spain Electricity Production for 2008"
+            },
+            legend: {
+                position: "bottom",
+                labels: {
+                    template: "#= text # (#= value #%)"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    visible: true,
+                    format: "{0}%"
+                }
+            },
+            series: [{
+                type: "pie",
+                data: [ {
+                    category: "Hydro",
+                    value: 22
+                }, {
+                    category: "Solar",
+                    value: 2
+                }, {
+                    category: "Nuclear",
+                    value: 49
+                }, {
+                    category: "Wind",
+                    value: 27
+                } ]
+            }],
+            tooltip: {
+                visible: true,
+                format: "{0}%"
             }
         });
 
         $("#linear-gauge").kendoLinearGauge({
             transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
             pointer: {
                 value: 30
             }
@@ -203,26 +260,12 @@
 
         $("#radial-gauge").kendoRadialGauge({
             transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
             pointer: {
                 value: 40
             },
             scale: {
-                max: 180,
-                ranges: [
-                    {
-                        from: 80,
-                        to: 120,
-                        color: "#ffc700"
-                    }, {
-                        from: 120,
-                        to: 150,
-                        color: "#ff7a00"
-                    }, {
-                        from: 150,
-                        to: 180,
-                        color: "#c20000"
-                    }
-                ]
+                max: 180
             }
         });
     });
