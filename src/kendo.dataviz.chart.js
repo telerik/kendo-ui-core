@@ -1332,20 +1332,15 @@
                 dataItem = options.dataItems ? options.dataItems[index] : null,
                 date = options.categories[index],
                 baseUnit = options.baseUnit,
+                visible = true,
                 unitFormat = labelOptions.dateFormats[baseUnit];
 
             if (!options.roundToBaseUnit) {
                 var roundedDate = floorDate(date, baseUnit, options.weekStartDay);
-
-                if (!dateEquals(roundedDate, date)) {
-                    var baseUnitIx = $.inArray(options.baseUnit, BASE_UNITS),
-                        prevBaseUnit = BASE_UNITS[baseUnitIx - 1] || BASE_UNITS[0];
-
-                    unitFormat = labelOptions.dateFormats[prevBaseUnit];
-                }
+                visible = dateEquals(roundedDate, date);
             }
 
-            labelOptions = deepExtend({ format: unitFormat }, labelOptions);
+            labelOptions = deepExtend({ format: unitFormat }, labelOptions, { visible: visible });
             return new AxisDateLabel(date, index, dataItem, labelOptions);
         }
     });

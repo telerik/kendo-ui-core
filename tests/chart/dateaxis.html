@@ -419,9 +419,9 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Round to base unit");
+                module("Date CategoryAxis / No Rounding");
 
-                test("First label is formatted as next smaller base unit", function() {
+                test("First label is hidden if it does not match base unit", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
@@ -429,7 +429,7 @@
                         roundToBaseUnit: false
                     });
 
-                    equals(dateAxis.labels[0].text, "15:00");
+                    equals(dateAxis.labels[0].options.visible, false);
                 });
 
                 test("First label is formatted as base unit if it matches it exactly", function() {
@@ -443,7 +443,7 @@
                     equals(dateAxis.labels[0].text, "2/1");
                 });
 
-                test("First category length matches time duration", function() {
+                test("Last label is hidden if it does not match base unit", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
@@ -451,7 +451,58 @@
                         roundToBaseUnit: false
                     });
 
-                    equals(dateAxis.getMajorTickPositions()[1], 88, 1);
+                    equals(dateAxis.labels[5].options.visible, false);
+                });
+
+                test("First label is formatted as base unit if it matches it exactly", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    equals(dateAxis.labels[0].text, "2/1");
+                });
+
+                test("Major ticks are positioned at exact time", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    same(dateAxis.getMajorTickPositions(),
+                        [0, 88, 321, 555, 789, 799], 1);
+                });
+
+                test("Major ticks are not affected when start/end time match base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 00:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    same(dateAxis.getMajorTickPositions(),
+                        [0, 200, 400, 600, 800], 1);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / No Rounding / Reversed");
+
+                test("Major ticks are positioned at exact time", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        reverse: true
+                    });
+
+                    same(dateAxis.getMajorTickPositions(),
+                        [799, 711, 477, 243, 10, 0], 1);
                 });
 
                 // ------------------------------------------------------------
