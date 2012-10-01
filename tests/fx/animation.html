@@ -171,12 +171,11 @@
                 ok(callbackWasCalled);
             });
 
-            test("make sure keep, css, setup, teardown and restore are called in sequence", function() {
+            test("make sure css, setup, teardown and restore are called in sequence", function() {
                 var cssWasKept = false, cssWasSet = false, setupWasCalled = false, teardownWasCalled = false, cssWasRestored = false;
                 span.css("overflow", "visible");
 
                 kendo.fx.foo = {
-                    keep: [ "overflow" ],
                     restore: [ "overflow" ],
                     css: {
                         overflow: function (element) {
@@ -288,12 +287,8 @@
                     span.kendoAnimate({
                         effects: "fadeOut",
                         duration: 10,
-                        init: function () {
-                            opacity = span.css("opacity");
-                        },
                         complete: function () {
-                            ok(opacity == 1);
-                            ok(span.css("opacity") == 0);
+                            equal(span.css("opacity"), 0);
                             start();
                         }
                     });

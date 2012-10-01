@@ -442,7 +442,7 @@
         }
     }
 
-    function initDirection (element, direction, reverse) {
+    function initDirection(element, direction, reverse) {
         var real = kendo.directions[direction],
             dir = reverse ? kendo.directions[real.reverse] : real;
 
@@ -457,7 +457,7 @@
 
         element.data("animating", true);
 
-        var props = { keep: [], restore: [] }, css = {}, target,
+        var restore = [], css = {}, target,
             methods = { setup: [], teardown: [] }, properties = {},
 
             // create a promise for each effect
@@ -476,17 +476,15 @@
 
                             opts = extend(true, opts, settings);
 
-                            each(methods, function (idx) {
+                            each(methods, function(idx) {
                                 if (effect[idx]) {
                                     methods[idx].push(effect[idx]);
                                 }
                             });
 
-                            each(props, function(idx) {
-                                if (effect[idx]) {
-                                    $.merge(props[idx], effect[idx]);
-                                }
-                            });
+                            if (effect.restore) {
+                                $.merge(restore, effect.restore);
+                            }
 
                             if (effect.css) {
                                 css = extend(css, effect.css);
@@ -495,7 +493,7 @@
                     });
 
                     if (methods.setup.length) {
-                        each ($.unique(props.keep), function(idx, value) {
+                        each (restore, function(idx, value) {
                             if (!element.data(value)) {
                                 element.data(value, element.css(value));
                             }
@@ -554,15 +552,15 @@
             }
 
             if (size(effects)) {
-                var restore = function() {
-                    each ($.unique(props.restore), function(idx, value) {
+                var restoreCallback = function() {
+                    each (restore, function(idx, value) {
                         element.css(value, element.data(value));
                     });
                 };
 
-                restore();
+                restoreCallback();
                 if (hasZoom && !transforms) {
-                    setTimeout(restore, 0); // Again jQuery callback in IE8-.
+                    setTimeout(restoreCallback, 0); // Again jQuery callback in IE8-.
                 }
 
                 each(methods.teardown, function() { this(element, options); }); // call the internal completion callbacks
@@ -722,7 +720,6 @@
         },
 
         fade: {
-            keep: [ "opacity" ],
             css: {
                 opacity: function(element, options) {
                     var opacity = element.data("opacity"), direction = options.effects.fade.direction;
@@ -845,7 +842,6 @@
             }
         },
         expand: {
-            keep: [ OVERFLOW ],
             css: { overflow: HIDDEN },
             restore: [ OVERFLOW ],
             setup: function(element, options) {
