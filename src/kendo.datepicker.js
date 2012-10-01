@@ -349,8 +349,18 @@
                     }
                 },
                 open: function(e) {
+                    var options = that.options,
+                        date;
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
+                    } else {
+                        date = parse(element.val(), options.parseFormats, options.culture);
+                        if (!date) {
+                            that.dateView.value(date);
+                        } else {
+                            that.dateView._current = date;
+                            that.dateView.calendar._focus(date);
+                        }
                     }
                 }
             }));
