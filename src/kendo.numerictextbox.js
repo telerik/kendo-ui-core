@@ -346,8 +346,7 @@
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode,
-                value;
+                key = e.keyCode;
 
             if (key == keys.DOWN) {
                 that._step(-1);
@@ -405,7 +404,7 @@
             {
                 prevent = false;
                 if (shiftKey) {
-                    number = parseInt(String.fromCharCode(key));
+                    number = parseInt(String.fromCharCode(key), 10);
                     if (!isNaN(number)) {
                         element.value = value.substring(0, idx) + number + value.substring(idx);
                         prevent = true;
