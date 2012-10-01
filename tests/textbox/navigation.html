@@ -225,18 +225,6 @@
                     start();
                 }, 500);
             });
-
-            asyncTest("pressing mousedown of the down arrow decrement value", 1, function() {
-                var textbox = new NumericTextBox(input);
-
-                textbox._downArrow.mousedown();
-
-                setTimeout(function() {
-                    clearTimeout(textbox._spinning);
-                    ok(textbox.value() < -1);
-                    start();
-                }, 500);
-            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
