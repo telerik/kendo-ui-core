@@ -419,6 +419,42 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Date CategoryAxis / Round to base unit");
+
+                test("First label is formatted as next smaller base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    equals(dateAxis.labels[0].text, "15:00");
+                });
+
+                test("First label is formatted as base unit if it matches it exactly", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    equals(dateAxis.labels[0].text, "2/1");
+                });
+
+                test("First category length matches time duration", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    equals(dateAxis.getMajorTickPositions()[1], 88, 1);
+                });
+
+                // ------------------------------------------------------------
                 module("Date CategoryAxis / Base unit / Hours");
 
                 test("Base unit is determined by series delta (day boundary)", function() {

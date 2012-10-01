@@ -1100,7 +1100,9 @@
 
             options = options || {};
 
-            options = deepExtend({}, options, {
+            options = deepExtend({
+                roundToBaseUnit: true
+            }, options, {
                 min: toDate(options.min),
                 max: toDate(options.max)
             });
@@ -1187,12 +1189,12 @@
                 minCategory = toTime(sparseArrayMin(categories)),
                 maxCategory = toTime(sparseArrayMax(categories));
 
-            if (options._exact) {
-                return { min: toDate(min || minCategory),
-                         max: toDate(max || maxCategory) };
-            } else {
+            if (options.roundToBaseUnit) {
                 return { min: addDuration(min || minCategory, 0, baseUnit, options.weekStartDay),
                          max: addDuration(max || maxCategory, 1, baseUnit, options.weekStartDay) };
+            } else {
+                return { min: toDate(min || minCategory),
+                         max: toDate(max || maxCategory) };
             }
         },
 
@@ -1241,14 +1243,16 @@
                 options = axis.options,
                 positions = [];
 
-            if (options._exact) {
+            if (options.roundToBaseUnit) {
+                positions = CategoryAxis.fn.getMajorTickPositions.call(axis);
+            } else {
                 var vertical = options.vertical,
                     reverse = options.reverse,
                     lineBox = axis.lineBox(),
                     lineSize = vertical ? lineBox.height() : lineBox.width(),
                     categories = options.categories,
-                    startTime = categories[0],
-                    timeRange = last(categories) - categories[0],
+                    startTime = categories[0].getTime(),
+                    timeRange = last(categories) - startTime,
                     scale = lineSize / timeRange,
                     divisions = categories.length,
                     dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
@@ -1263,13 +1267,11 @@
                     pos = startPos + timePos * scale * dir;
                     positions.push(round(pos, COORD_PRECISION));
                 }
-            } else {
-                positions = CategoryAxis.fn.getMajorTickPositions.call(axis);
             }
 
             return positions;
 
-            // TODO: Override getSlot, getCategory to be aware of _exact
+            // TODO: Override getSlot, getCategory to be aware of roundToBaseUnit
         },
 
         groupCategories: function(options) {
@@ -1287,14 +1289,14 @@
                 categoryIx,
                 categoryDate;
 
-            if (options._exact) {
+            if (!options.roundToBaseUnit) {
                 end = range.max;
             }
 
             // TODO: Refactor loop
             for (date = range.min; /*date < end*/; /*date = nextDate*/) {
                 nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
-                if (options._exact && nextDate > end) {
+                if (!options.roundToBaseUnit && nextDate > end) {
                     nextDate = end;
                 }
 
@@ -1310,12 +1312,12 @@
 
                 categoryMap.push(categoryIndicies);
 
-                if (options._exact) {
-                    if (date >= end) break;
+                if (options.roundToBaseUnit) {
                     date = nextDate;
+                    if (date >= end) break;
                 } else {
-                    date = nextDate;
                     if (date >= end) break;
+                    date = nextDate;
                 }
             }
 
@@ -1329,15 +1331,21 @@
             var options = this.options,
                 dataItem = options.dataItems ? options.dataItems[index] : null,
                 date = options.categories[index],
-                unitFormat = labelOptions.dateFormats[options.baseUnit];
+                baseUnit = options.baseUnit,
+                unitFormat = labelOptions.dateFormats[baseUnit];
 
-            // TODO: Use a flag instead of this
-            if (addDuration(date, 0, options.baseUnit, options.weekStartDay).getTime() !== date.getTime()) {
-                labelOptions = deepExtend({}, labelOptions, { visible: false });
+            if (!options.roundToBaseUnit) {
+                var roundedDate = floorDate(date, baseUnit, options.weekStartDay);
+
+                if (!dateEquals(roundedDate, date)) {
+                    var baseUnitIx = $.inArray(options.baseUnit, BASE_UNITS),
+                        prevBaseUnit = BASE_UNITS[baseUnitIx - 1] || BASE_UNITS[0];
+
+                    unitFormat = labelOptions.dateFormats[prevBaseUnit];
+                }
             }
 
-            labelOptions.format = labelOptions.format || unitFormat;
-
+            labelOptions = deepExtend({ format: unitFormat }, labelOptions);
             return new AxisDateLabel(date, index, dataItem, labelOptions);
         }
     });
@@ -6456,20 +6464,20 @@
         return addTicks(date, -daysToSubtract * TIME_PER_DAY);
     }
 
-    function floorDate(date, unit) {
+    function floorDate(date, unit, weekStartDay) {
         date = toDate(date);
 
-        return addDuration(date, 0, unit);
+        return addDuration(date, 0, unit, weekStartDay);
     }
 
-    function ceilDate(date, unit) {
+    function ceilDate(date, unit, weekStartDay) {
         date = toDate(date);
 
-        if (floorDate(date, unit).getTime() === date.getTime()) {
+        if (floorDate(date, unit, weekStartDay).getTime() === date.getTime()) {
             return date;
         }
 
-        return addDuration(date, 1, unit);
+        return addDuration(date, 1, unit, weekStartDay);
     }
 
     function dateDiff(a, b) {
@@ -6648,6 +6656,14 @@
     function equalsIgnoreCase(a, b) {
         if (a && b) {
             return a.toLowerCase() === b.toLowerCase();
+        }
+
+        return a === b;
+    }
+
+    function dateEquals(a, b) {
+        if (a && b) {
+            return a.getTime() === b.getTime();
         }
 
         return a === b;
