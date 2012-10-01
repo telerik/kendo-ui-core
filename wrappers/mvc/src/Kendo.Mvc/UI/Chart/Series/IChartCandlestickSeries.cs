@@ -5,10 +5,10 @@ namespace Kendo.Mvc.UI
     public interface IChartCandlestickSeries : IChartOHLCSeries
     {
         /// <summary>
-        /// Gets the model base color member name.
+        /// Gets the model down color member name.
         /// </summary>
-        /// <value>The model base color member name.</value>
-        string BaseColorMember
+        /// <value>The model down color member name.</value>
+        string DownColorMember
         {
             get;
             set;

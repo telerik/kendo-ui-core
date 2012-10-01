@@ -3,7 +3,6 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Resources;
     using System.Collections;
 
     public class ChartCandlestickSeries<TModel, TValue> : ChartOHLCSeries<TModel, TValue>, IChartCandlestickSeries where TModel : class
@@ -17,7 +16,7 @@ namespace Kendo.Mvc.UI
         /// <param name="expressionLow">The open expression.</param>
         /// <param name="expressionClose">The high expression.</param>
         /// <param name="expressionColor">The color expression.</param>
-        /// <param name="expressionBaseColor">The baseColor expression.</param>
+        /// <param name="expressionDownColor">The downColor expression.</param>
         public ChartCandlestickSeries(
             Chart<TModel> chart,
             Expression<Func<TModel, TValue>> openExpression,
@@ -25,13 +24,13 @@ namespace Kendo.Mvc.UI
             Expression<Func<TModel, TValue>> lowExpression,
             Expression<Func<TModel, TValue>> closeExpression,
             Expression<Func<TModel, string>> colorExpression,
-            Expression<Func<TModel, string>> baseColorExpression
+            Expression<Func<TModel, string>> downColorExpression
             )
             : base(chart, openExpression, highExpression, lowExpression, closeExpression, colorExpression)
         {
-            if (baseColorExpression != null)
+            if (downColorExpression != null)
             {
-                BaseColorMember = baseColorExpression.MemberWithoutInstance();
+                DownColorMember = downColorExpression.MemberWithoutInstance();
             }
 
             Initialize();
@@ -60,10 +59,10 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets the model data base color member name.
+        /// Gets the model data down color member name.
         /// </summary>
-        /// <value>The model data base color member name.</value>
-        public string BaseColorMember { get; set; }
+        /// <value>The model data down color member name.</value>
+        public string DownColorMember { get; set; }
 
         /// <summary>
         /// Gets or sets the effects overlay

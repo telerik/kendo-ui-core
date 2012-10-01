@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("type", series.Type)
-                .Add("baseColorField", series.BaseColorMember, () => series.BaseColorMember.HasValue());
+                .Add("downColorField", series.DownColorMember, () => series.DownColorMember.HasValue());
 
             if (series.Overlay != null) 
             { 

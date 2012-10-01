@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var chart = ChartTestHelper.CreateChart<OHLCData>();
             chart.Data = OHLCDataBuilder.GetCollection();
-            series = new ChartCandlestickSeries<OHLCData, decimal>(chart, d => d.Open, d => d.High, d => d.Low, d => d.Close, d => d.Color, d => d.BaseColor);
+            series = new ChartCandlestickSeries<OHLCData, decimal>(chart, d => d.Open, d => d.High, d => d.Low, d => d.Close, d => d.Color, d => d.DownColor);
         }
 
         [Fact]
@@ -22,15 +22,15 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_serialize_color_field_if_color_member_is_set()
         {
-            series.BaseColorMember = "BaseColor";
-            GetJson(series)["baseColorField"].ShouldEqual("BaseColor");
+            series.DownColorMember = "DownColor";
+            GetJson(series)["downColorField"].ShouldEqual("DownColor");
         }
 
         [Fact]
         public void Should_not_serialize_color_field_if_color_member_is_not_set()
         {
-            series.BaseColorMember = null;
-            GetJson(series).ContainsKey("baseColorField").ShouldBeFalse();
+            series.DownColorMember = null;
+            GetJson(series).ContainsKey("downColorField").ShouldBeFalse();
         }
 
         [Fact]

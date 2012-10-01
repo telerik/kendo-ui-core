@@ -983,11 +983,11 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, TValue>> lowExpression,
             Expression<Func<TModel, TValue>> closeExpression,
             Expression<Func<TModel, string>> colorExpression = null,
-            Expression<Func<TModel, string>> baseColorExpression = null
+            Expression<Func<TModel, string>> downColorExpression = null
             )
         {
             var ohlcSeries = new ChartCandlestickSeries<TModel, TValue>(
-                Container, openExpression, highExpression, lowExpression, closeExpression, colorExpression, baseColorExpression
+                Container, openExpression, highExpression, lowExpression, closeExpression, colorExpression, downColorExpression
             );
 
             Container.Series.Add(ohlcSeries);
@@ -1004,11 +1004,11 @@ namespace Kendo.Mvc.UI.Fluent
             string lowMemberName,
             string closeMemberName,
             string colorMemberName = null,
-            string baseColorMemberName = null)
+            string downColorMemberName = null)
         {
             return Candlestick<TValue>(
                 null, openMemberName, highMemberName, lowMemberName,
-                closeMemberName, colorMemberName, baseColorMemberName
+                closeMemberName, colorMemberName, downColorMemberName
             );
         }
 
@@ -1022,21 +1022,21 @@ namespace Kendo.Mvc.UI.Fluent
             string lowMemberName,
             string closeMemberName,
             string colorMemberName = null,
-            string baseColorMemberName = null)
+            string downColorMemberName = null)
         {
             var expressionOpen = BuildMemberExpression(memberType, openMemberName);
             var expressionHigh = BuildMemberExpression(memberType, highMemberName);
             var expressionLow = BuildMemberExpression(memberType, lowMemberName);
             var expressionClose = BuildMemberExpression(memberType, closeMemberName);
             var expressionColor = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
-            var expressionBaseColor = baseColorMemberName.HasValue() ? BuildMemberExpression(memberType, baseColorMemberName) : null;
+            var expressionDownColor = downColorMemberName.HasValue() ? BuildMemberExpression(memberType, downColorMemberName) : null;
 
             var seriesType = typeof(ChartCandlestickSeries<,>).MakeGenericType(
                 typeof(TModel), expressionOpen.Body.Type, expressionHigh.Body.Type, expressionLow.Body.Type, expressionClose.Body.Type
             );
             var series = (IChartCandlestickSeries)BuildSeries(
                 seriesType, expressionOpen, expressionHigh, expressionLow,
-                expressionClose, expressionColor, expressionBaseColor
+                expressionClose, expressionColor, expressionDownColor
             );
 
             if (!series.Name.HasValue())
