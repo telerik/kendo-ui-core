@@ -68,7 +68,7 @@ test('addMarker inserts markers', function() {
 
 });
 test('addMarker normalizes', function() {
-    editor.value('foo');
+    editor.value('bar');
 
     var range = createRange(editor.body.firstChild, 0, editor.body.firstChild, 3);
 
@@ -90,14 +90,14 @@ test('addMarker does not remove line breaks', function() {
 });
 
 test('addMarker on collapsed range', function() {
-    editor.value('foo');
+    editor.value('baz');
 
     var range = createCollapsedRange(editor.body.firstChild, 1);
 
     var marker = new Marker();
     marker.add(range);
 
-    equal(editor.body.innerHTML.toLowerCase(), 'f<span class="k-marker"></span><span class="k-marker"></span>oo');
+    equal(editor.body.innerHTML.toLowerCase(), 'b<span class="k-marker"></span><span class="k-marker"></span>az');
 });
 
 test('removeMarker removes markers', function() {
@@ -192,14 +192,14 @@ test('addCaretMarker updates range to include caret marker', function() {
 });
 
 test('removeCaretMarker removes caret marker', function() {
-    editor.value('foo');
+    editor.value('qux');
 
     var range = createRange(editor.body.firstChild, 1, editor.body.firstChild, 2);
     var marker = new Marker();
     marker.addCaret(range);
     marker.removeCaret(range);
 
-    equal(editor.value(), 'foo');
+    equal(editor.value(), 'qux');
 });
 
 test('removeCaretMarker normalizes dom', function() {
@@ -214,7 +214,7 @@ test('removeCaretMarker normalizes dom', function() {
 });
 
 test('removeCaretMarker updates range to collapsed state', function() {
-    editor.value('foo');
+    editor.value('qux');
 
     var range = createRange(editor.body.firstChild, 1, editor.body.firstChild, 2);
     var marker = new Marker();
