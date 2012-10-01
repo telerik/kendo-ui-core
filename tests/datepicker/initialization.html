@@ -287,6 +287,32 @@
                 ok(datepicker.wrapper.hasClass("test"));
             });
 
+            test("DatePicker updates calendar if empty input element on open", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.value(new Date());
+
+                input.focus().val("");
+                datepicker.open();
+
+                equal(datepicker.dateView.calendar.value(), null);
+            });
+
+            test("DatePicker updates calendar's focused date", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    date = new Date(2000, 10, 10);
+
+                datepicker.value(new Date(2000, 9, 1));
+
+                input.focus().val(kendo.toString(date, "MM/dd/yyyy"));
+                datepicker.open();
+
+                var link = datepicker.dateView.calendar.element.find(".k-state-focused > .k-link");
+
+                equal(+datepicker.dateView.calendar.value(), +datepicker.value());
+                equal(link.html(), date.getDate());
+            });
+
             if (!kendo.support.touch) {
                 test("DatePickers changes the type of the input", function() {
                     var input = $("<input type='date'/>"),
