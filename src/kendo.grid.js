@@ -2762,6 +2762,7 @@
                 template = column.groupHeaderTemplate,
                 text =  (column.title || field) + ': ' + value,
                 data = extend({}, { field: group.field, value: group.value }, group.aggregates[group.field]),
+                footerDefaults = that._groupAggregatesDefaultObject || {},
                 groupItems = group.items;
 
             if (template) {
@@ -2783,7 +2784,7 @@
             }
 
             if (that.groupFooterTemplate) {
-                html += that.groupFooterTemplate(group.aggregates);
+                html += that.groupFooterTemplate(extend(footerDefaults, group.aggregates));
             }
             return html;
         },
@@ -3094,6 +3095,10 @@
             if(groups > 0) {
                 if (that.detailTemplate) {
                     colspan++;
+                }
+
+                if (that.groupFooterTemplate) {
+                    that._groupAggregatesDefaultObject = buildEmptyAggregatesObject(that.dataSource.aggregate());
                 }
 
                 for (idx = 0, length = data.length; idx < length; idx++) {
