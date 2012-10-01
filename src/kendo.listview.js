@@ -250,6 +250,9 @@
             if (element !== undefined && element.length) {
                 if (!current || current[0] !== element[0]) {
                     element.addClass(FOCUSED);
+
+                    that._scrollTo(element[0]);
+
                     if (current) {
                         current.removeClass(FOCUSED);
                     }
@@ -258,6 +261,37 @@
             }
 
             return that._current;
+        },
+
+        _scrollTo: function(element) {
+            var that = this,
+                container,
+                UseJQueryoffset = false,
+                SCROLL = "scroll";
+
+            if (that.wrapper.css("overflow") == "auto" || that.wrapper.css("overflow") == SCROLL) {
+                container = that.wrapper[0];
+            } else {
+                container = window;
+                UseJQueryoffset = true;
+            }
+
+            var scrollDirectionFunc = function(direction, dimension) {
+
+                var elementOffset = UseJQueryoffset ? $(element).offset()[direction.toLowerCase()] : element["offset" + direction],
+                    elementDimension = element["client" + dimension],
+                    containerScrollAmount = $(container)[SCROLL + direction](),
+                    containerDimension = $(container)[dimension.toLowerCase()]();
+
+                if (elementOffset + elementDimension > containerScrollAmount + containerDimension) {
+                    $(container)[SCROLL + direction](elementOffset + elementDimension - containerDimension);
+                } else if (elementOffset < containerScrollAmount) {
+                    $(container)[SCROLL + direction](elementOffset);
+                }
+            }
+
+            scrollDirectionFunc("Top", "Height");
+            scrollDirectionFunc("Left", "Width");
         },
 
         _navigatable: function() {
@@ -289,18 +323,59 @@
                     })
                     .on("keydown" + NS, function(e) {
                         var key = e.keyCode,
-                            current = that.current();
+                            current = that.current(),
+                            canHandle = !$(e.target).is(":button,textarea,a,a>.t-icon"),
+                            preventDefault = kendo.preventDefault,
+                            editItem = element.find("." + KEDITITEM),
+                            idx;
 
-                        if (keys.UP === key) {
+                        if (!canHandle && keys.ESC != key) {
+                            return;
+                        }
+
+                        if (keys.UP === key || keys.LEFT === key) {
                             that.current(current ? current.prev() : element.find(FOCUSSELECTOR).first());
-                        } else if (keys.DOWN === key) {
+                            preventDefault(e);
+                        } else if (keys.DOWN === key || keys.RIGHT === key) {
                             that.current(current ? current.next() : element.find(FOCUSSELECTOR).first());
-                        } else if (keys.PAGEUP == key) {
+                            preventDefault(e);
+                        } else if (keys.PAGEUP === key) {
                             that._current = null;
                             that.dataSource.page(that.dataSource.page() - 1);
-                        } else if (keys.PAGEDOWN == key) {
+                            preventDefault(e);
+                        } else if (keys.PAGEDOWN === key) {
                             that._current = null;
                             that.dataSource.page(that.dataSource.page() + 1);
+                            preventDefault(e);
+                        } else if (keys.HOME === key) {
+                            that.current(element.find(FOCUSSELECTOR).first());
+                            preventDefault(e);
+                        } else if (keys.END === key) {
+                            that.current(element.find(FOCUSSELECTOR).last());
+                            preventDefault(e);
+                        } else if (keys.ENTER === key) {
+                            if (editItem.length != 0 && canHandle) {
+                                idx = element.find(FOCUSSELECTOR).index(editItem);
+                                document.activeElement.blur();
+                                that.save();
+                                var focusAgain = function(){
+                                    that.element.trigger("focus");
+                                    that.current(that.element.find(FOCUSSELECTOR).eq(idx));
+                                };
+                                that.one("dataBound", focusAgain);
+                            } else if (that.options.editTemplate != "") {
+                                that._current = null;
+                                that.edit(current);
+                            }
+                        } else if (keys.ESC === key) {
+                            editItem = element.find("." + KEDITITEM);
+                            if (editItem.length === 0) {
+                                return;
+                            }
+                            idx = element.find(FOCUSSELECTOR).index(editItem);
+                            that.cancel();
+                            that.element.trigger("focus");
+                            that.current(that.element.find(FOCUSSELECTOR).eq(idx));
                         }
                     });
 
