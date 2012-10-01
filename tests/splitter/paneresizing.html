@@ -422,7 +422,7 @@
                 splitter.data("kendoSplitter").expand(".k-pane:first");
 
                 var resizingHandler = splitter.data("kendoSplitter").resizing;
-                ok($.inArray(splitBar[0], resizingHandler._resizable.draggable.options.filter) == 0);
+                ok(splitBar.is(resizingHandler._resizable.draggable.options.filter));
             });
 
             module("Nested splitters", {

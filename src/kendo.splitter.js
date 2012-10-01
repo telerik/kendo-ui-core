@@ -62,6 +62,8 @@
 
             that.bind(RESIZE, proxy(that._resize, that));
 
+            that._marker = kendo.guid().substring(0, 8);
+
             that._initPanes();
 
             that._resizeHandler = function() {
@@ -294,7 +296,7 @@
 
             if (splitBarsCount === 0) {
                 splitBarsCount = panes.length - 1;
-                panes.slice(0, splitBarsCount).after("<div class='k-splitbar' />");
+                panes.slice(0, splitBarsCount).after("<div class='k-splitbar' data-marker='" + that._marker + "' />");
                 that._updateSplitBars();
                 splitBars = element.children(".k-splitbar");
             } else {
@@ -439,7 +441,7 @@
 
         that._resizable = new kendo.ui.Resizable(splitter.element, {
             orientation: orientation,
-            handle: splitter.element.children(".k-splitbar-draggable-" + orientation),
+            handle: ".k-splitbar-draggable-" + orientation + "[data-marker=" + splitter._marker + "]",
             hint: proxy(that._createHint, that),
             start: proxy(that._start, that),
             max: proxy(that._max, that),
