@@ -22,7 +22,7 @@
                 keys = kendo.keys,
                 input;
 
-            QUnit.reorder = false;
+            QUnit.config.reorder = false;
 
             $.fn.pressKey = function(key, eventName) {
                 key = key || kendo.keys.DOWN;
@@ -195,6 +195,22 @@
 
                 input.pressKey(110);
 
+                equal(input.val(), "");
+            });
+
+            test("NumericTextBox prevents Shift + key but updates input's value'", function() {
+                var textbox = new NumericTextBox(input),
+                    shiftKey = true;
+
+                ok(textbox._prevent(48 /* 0 */, shiftKey));
+                equal(input.val(), "0");
+            });
+
+            test("NumericTextBox prevents Shift and not number key", function() {
+                var textbox = new NumericTextBox(input),
+                    shiftKey = true;
+
+                ok(textbox._prevent(192 /* ` */, shiftKey));
                 equal(input.val(), "");
             });
 
