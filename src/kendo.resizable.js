@@ -29,6 +29,9 @@
                 dragstart: proxy(that._start, that),
                 dragend: proxy(that._stop, that)
             });
+
+            //new
+            that.userEvents = that.draggable.userEvents;
         },
 
         events: [
@@ -41,6 +44,7 @@
             name: "Resizable",
             orientation: HORIZONTAL
         },
+
         _max: function(e) {
             var that = this,
                 hintSize = that.hint ? that.hint[that._sizingDom]() : 0,
@@ -108,6 +112,7 @@
             that.trigger(RESIZEEND, extend(e, { position: that.position }));
             $(document.body).css("cursor", "");
         },
+
         destroy: function() {
             var that = this;
 
@@ -116,6 +121,28 @@
             if (that.draggable) {
                 that.draggable.destroy();
             }
+        },
+
+        press: function(target) {
+            var position = target.position();
+            this.userEvents.press(position.left, position.top, target[0]);
+            this.pressed = target;
+        },
+
+        move: function(delta) {
+            var position = this.position || this.pressed.position()[this._position],
+            mousePos = {
+                x: 0,
+                y: 0
+            };
+
+            mousePos[this._positionMouse] = position + delta;
+
+            this.userEvents.move(mousePos.x, mousePos.y);
+        },
+
+        end: function() {
+            this.userEvents.end();
         }
     });
 

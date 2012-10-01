@@ -1,6 +1,7 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         extend = $.extend,
         proxy = $.proxy,
         Widget = ui.Widget,
@@ -98,20 +99,11 @@
 
             that.element
                 .on("keydown" + NS, splitbarSelector, proxy(that._keydown, that))
-                //.on("keyup" + NS, splitbarSelector, proxy(that._keyup, that))
                 .on("focus" + NS, splitbarSelector, function(e) {
-                    var userEvents = that.resizing._resizable.draggable.userEvents;
-                    var bar = $(e.currentTarget),
-                        position = bar.position();
-
-                    userEvents.press(position.left, 796, e.currentTarget);
+                    that.resizing.press($(e.currentTarget));
                 })
                 .on("blur" + NS, splitbarSelector, function(e) {
-                    var userEvents = that.resizing._resizable.draggable.userEvents;
-                    userEvents.end();
-
-                    that._left = null;
-                    that._top = null;
+                    that.resizing.end();
                 })
                 .on(MOUSEENTER + NS, splitbarSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on(MOUSELEAVE + NS, splitbarSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
@@ -157,46 +149,18 @@
 
         _keydown: function(e) {
             var that = this,
-                userEvents = this.resizing._resizable.draggable.userEvents,
-                target = $(e.currentTarget),
-                position = target.position();
+                key = e.keyCode,
+                delta;
 
-            //has new position, which we persist in the _left/_right
-            console.log(this.resizing._resizable.position);
-            if (!that._left) {
-                that._left = position.left;
+            if (key === keys.RIGHT || key === keys.DOWN) {
+                delta = 10;
+            } else if (key === keys.LEFT || key === keys.UP) {
+                delta = -10;
             }
 
-            if (!that._top) {
-                that._top = position.top;
-            }
-
-            if (e.keyCode === kendo.keys.LEFT) {
-                userEvents.move(that._left, that._top);
-                that._left -= 10;
-                userEvents.move(that._left, that._top);
+            if (delta) {
                 e.preventDefault();
-            }
-
-            if (e.keyCode === kendo.keys.RIGHT) {
-                userEvents.move(that._left, that._top);
-                that._left += 10;
-                userEvents.move(that._left, that._top);
-                e.preventDefault();
-            }
-
-            if (e.keyCode === kendo.keys.UP) {
-                userEvents.move(that._left, that._top);
-                that._top -= 10;
-                userEvents.move(that._left, that._top);
-                e.preventDefault();
-            }
-
-            if (e.keyCode === kendo.keys.DOWN) {
-                userEvents.move(that._left, that._top);
-                that._top += 10;
-                userEvents.move(that._left, that._top);
-                e.preventDefault();
+                that.resizing.move(delta);
             }
         },
 
@@ -357,7 +321,9 @@
 
             if (splitBarsCount === 0) {
                 splitBarsCount = panes.length - 1;
-                panes.slice(0, splitBarsCount).after("<div tabindex="0" class='k-splitbar' data-marker='" + that._marker + "' />");
+                panes.slice(0, splitBarsCount)
+                     .after("<div tabindex='0' class='k-splitbar' data-marker='" + that._marker + "' />");
+
                 that._updateSplitBars();
                 splitBars = element.children(".k-splitbar");
             } else {
@@ -513,6 +479,18 @@
     }
 
     PaneResizing.prototype = {
+        press: function(target) {
+            this._resizable.press(target);
+        },
+
+        move: function(delta) {
+            this._resizable.move(delta);
+        },
+
+        end: function() {
+            this._resizable.end();
+        },
+
         destroy: function() {
             this._resizable.destroy();
         },
