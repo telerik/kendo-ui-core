@@ -10,7 +10,7 @@ import com.kendoui.taglib.html.Ul;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class PanelBarTag extends WidgetTag implements PanelBarItemTagContainer {
+public class PanelBarTag extends WidgetTag  /* interfaces */implements Animation/* interfaces */ {
     private List<PanelBarItemTag> items;
 
     public PanelBarTag() {
@@ -30,12 +30,16 @@ public class PanelBarTag extends WidgetTag implements PanelBarItemTagContainer {
         return element;
     }
 
-    @Override
     public List<PanelBarItemTag> items() {
         return items;
     }
 
 //>> Attributes
+
+    @Override
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
 
     public String getExpandMode() {
         return (String)getProperty("expandMode");

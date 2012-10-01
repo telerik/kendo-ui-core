@@ -3,12 +3,17 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class MenuTag extends WidgetTag {
+public class MenuTag extends WidgetTag  /* interfaces */implements Animation/* interfaces */ {
     public MenuTag() {
         super("Menu");
     }
 
     //>> Attributes
+
+    @Override
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
 
     public boolean getCloseOnClick() {
         return (boolean)getProperty("closeOnClick");

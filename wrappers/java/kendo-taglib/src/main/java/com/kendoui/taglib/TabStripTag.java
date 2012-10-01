@@ -3,12 +3,17 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class TabStripTag extends WidgetTag {
+public class TabStripTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
     public TabStripTag() {
         super("TabStrip");
     }
 
     //>> Attributes
+
+    @Override
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
 
     public boolean getCollapsible() {
         return (boolean)getProperty("collapsible");

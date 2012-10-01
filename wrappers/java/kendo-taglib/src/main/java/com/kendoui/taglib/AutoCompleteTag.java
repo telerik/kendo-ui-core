@@ -5,7 +5,7 @@ import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
+public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBoundWidget, Animation/* interfaces */ {
 
     public AutoCompleteTag() {
         super("AutoComplete");
@@ -17,6 +17,11 @@ public class AutoCompleteTag extends WidgetTag implements DataBoundWidget {
     }
 
 //>> Attributes
+
+    @Override
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {

@@ -13,18 +13,21 @@ JAVA_EVENT_TLD = ERB.new(%{
         </attribute>})
 
 JAVA_OPTION_TLD = ERB.new(%{
+<% if (name != '') %>
         <attribute>
             <description><%= description %></description>
             <name><%= name %></name>
             <rtexprvalue>true</rtexprvalue>
             <type><%= type %></type>
-        </attribute>})
+        </attribute>
+<% end %>
+}, 0, '<>')
 
-TLD_TAG_TEMPLATE = ERB.new(%{
+TLD_WIDGET_TAG_TEMPLATE = ERB.new(%{
     <tag>
-        <description><%= name %> Widget</description>
+        <description><%= name %></description>
         <name><%= name.sub(/^./) { |c| c.downcase } %></name>
-        <tag-class>com.kendoui.taglib.<%= name %>Tag</tag-class>
+        <tag-class>com.kendoui.taglib.<%= type %></tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
@@ -37,6 +40,53 @@ TLD_TAG_TEMPLATE = ERB.new(%{
     </tag>
         })
 
+TLD_TAG_TEMPLATE = ERB.new(%{
+    <tag>
+        <description><%= name %></description>
+        <name><%= name.sub(/^./) { |c| c.downcase } %></name>
+        <tag-class>com.kendoui.taglib.<%= type %></tag-class>
+        <body-content>JSP</body-content>
+<%= options.map {|o| o.to_xml }.join %>
+    </tag>
+})
+
+JAVA_INTERFACE_TEMPLATE = ERB.new(%{
+package com.kendoui.taglib;
+
+public interface <%= interface %> {
+    void set<%= interface %>(<%= interface %>Tag value);
+}
+})
+
+JAVA_WIDGET_TEMPLATE = ERB.new(%{
+package com.kendoui.taglib;
+
+import com.kendoui.taglib.json.Function;
+
+@SuppressWarnings("serial")
+public class <%= type %> extends WidgetTag /* interfaces */ /* interfaces */ {
+
+    public <%= type %>() {
+        super("<%= name %>");
+    }
+
+//>> Attributes
+//<< Attributes
+}
+})
+
+JAVA_TAG_TEMPLATE = ERB.new(%{
+package com.kendoui.taglib;
+
+import javax.servlet.jsp.JspException;
+
+@SuppressWarnings("serial")
+public class <%= type %> extends BaseTag /* interfaces */ /* interfaces */ {
+
+//>> Attributes
+//<< Attributes
+}
+})
 JS_TO_JAVA_TYPES = {
     'Number' => 'int',
     'String' => 'java.lang.String',
@@ -74,6 +124,24 @@ JAVA_EVENT_SETTER = ERB.new(%{
 JAVA_OPTION_SETTER = ERB.new(%{
     public void set<%= name.sub(/^./) { |c| c.capitalize } %>(<%= type.sub('java.lang.', '') %> value) {
         setProperty("<%= name %>", value);
+    }
+})
+
+JAVA_TAG_SETTER = ERB.new(%{
+    @Override
+    public void set<%= name.sub(/^./) { |c| c.capitalize } %>(<%= type.sub('java.lang.', '') %> value) {
+        setProperty("<%= name %>", value);
+    }
+})
+
+JAVA_PARENT_SETTER = ERB.new(%{
+    @Override
+    public int doEndTag() throws JspException {
+        <%= parent_type %> parent = (<%= parent_type %>)findParentWithClass(<%= parent_type %>.class);
+
+        parent.set<%= name %>(this);
+
+        return EVAL_PAGE;
     }
 })
 
@@ -127,23 +195,137 @@ class Option
 end
 
 class Tag
+    include Rake::DSL
 
-    attr_reader :options, :name, :events
+    attr_reader :options, :name, :events, :children
 
-    def initialize(name)
-        @name = name.sub(/kendo.*ui\./, '')
-        @options = []
+    attr_accessor :type, :parent_type
+
+    def initialize(name, options = [])
+        @name = name.sub(/kendo.*ui\./, '').sub('kendo.data.', '')
+        @type = @name + 'Tag'
+        @options = options
         @events = []
+        @children = []
     end
 
     def to_xml
-        TLD_TAG_TEMPLATE.result(binding)
+        type = @type
+
+        TLD_WIDGET_TAG_TEMPLATE.result(binding)
     end
 
     def to_java
         $stderr.puts("\t#{name}") if VERBOSE
 
-        (@options + @events).map {|attr| attr.to_java }.join
+        parent = ''
+
+        if @parent_type
+            parent_type = @name
+            parent = JAVA_PARENT_SETTER.result(binding)
+        end
+
+        children = @children.map do |child|
+            type = child.type
+            name = child.name.sub(/^./) { |c| c.downcase }
+            JAVA_TAG_SETTER.result(binding)
+        end.join
+
+        parent + children + (@options + @events).map {|attr| attr.to_java }.join
+    end
+
+    def sync_java
+        path = @type
+
+        filename = "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{path}.java"
+
+        template = JAVA_WIDGET_TEMPLATE
+        template = JAVA_TAG_TEMPLATE if @parent_type
+
+        java = template.result(binding)
+
+        java = File.read(filename) if File.exists?(filename)
+
+        $stderr.puts("Updating #{filename}") if VERBOSE
+
+        interfaces = @children.map{ |c| c.name }.uniq
+        interfaces.each do |interface|
+            interface_filename =  "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{interface}.java"
+
+            ensure_path(interface_filename)
+
+            File.open(interface_filename, 'w') do |file|
+                file.write(JAVA_INTERFACE_TEMPLATE.result(binding))
+            end
+        end
+
+        if @options.any? { |o| o.name == 'dataSource' }
+            interfaces = ['DataBoundWidget', interfaces].flatten
+        end
+
+        implements = ""
+        implements = 'implements ' + interfaces.join(", ") if interfaces.any?
+
+        java.sub!(/\/\* interfaces \*\/(.|\n)*\/\* interfaces \*\//,
+                 '/* interfaces */' + implements + '/* interfaces */')
+
+        java.sub!(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
+                        "//>> Attributes\n" +
+                        to_java +
+                        "\n//<< Attributes"
+                     )
+
+        java.gsub!(/\r?\n/, "\r\n")
+
+        ensure_path(filename)
+
+        File.open(filename, 'w') do |file|
+            file.write(java)
+        end
+
+        @children.each { |child| child.sync_java }
+
+    end
+
+    def promote_options_to_tags
+        p @options if @name.start_with?('groupable')
+
+        @options.dup.each do |option|
+            prefix = option.name + '.'
+
+            child_options = @options.find_all { |o| o.name.start_with?(prefix) }
+
+            if child_options.any?
+                @options.delete(option)
+
+                child_options.each do |o|
+                    o.name.sub!(prefix, '')
+                    @options.delete(o)
+                end
+
+                child = Tag.new(option.name.sub(/^./) { |c| c.capitalize }, child_options)
+
+                child.parent_type = @type
+
+                @children.push(child)
+
+                child.promote_options_to_tags
+            end
+        end
+    end
+
+    def same_options?(tag)
+        return false if tag.options.length != @options.length
+
+        tag.options.all? do |target|
+            @options.any? do |source|
+                source.name == target.name && source.type == target.type
+            end
+        end
+    end
+
+    def all_children
+        @children + children.map { |child| child.all_children }.flatten
     end
 
     def self.parse(filename)
@@ -175,19 +357,26 @@ class Tag
             if (e.type == :header && e.options[:level] == 3)
                 name = find_child_with_type.call(e, :text).value
 
-                unless name.include?('.')
-                    type = find_child_with_type.call(e, :codespan)
+                type = find_child_with_type.call(e, :codespan)
+
+                next unless type
+
+                name.sub!(/\s*type\s*[=:][^\.]*\.?/, '')
+
+                type.value.split('|').each do |t|
+                    next if t =~ /Function/
 
                     paragraph  = find_element_with_type.call(configuration, index, :p)
 
                     description = find_child_with_type.call(paragraph, :text)
 
                     option = Option.new :name => name,
-                        :type => type.value,
+                        :type => t,
                         :description => description.value
 
                     tag.options.push(option)
                 end
+
             end
         end
 
@@ -212,7 +401,17 @@ class Tag
             end
         end
 
+        tag.promote_options_to_tags
+
+        tag.remove_duplicate_options
+
         tag
+    end
+
+    def remove_duplicate_options
+        @options = @options.uniq { |o| o.name }
+
+        @children.each { |child| child.remove_duplicate_options }
     end
 end
 
@@ -223,9 +422,13 @@ def generate
 
     $stderr.puts("Updating #{TLD}") if VERBOSE
 
+    children = tags.map{ |t| t.all_children }.flatten.uniq { |t| t.name }
+
+    xml = (tags + children).map{ |t| t.to_xml }.join("\n")
+
     tld.sub!(/<!-- Auto-generated -->(.|\n)*<!-- Auto-generated -->/,
              "<!-- Auto-generated -->\n\n" +
-             tags.map{ |t| t.to_xml }.join("\n") +
+             xml +
              "\n\n<!-- Auto-generated -->"
         )
 
@@ -233,27 +436,7 @@ def generate
         file.write(tld)
     end
 
-    tags.each do |tag|
-        filename = "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{tag.name}Tag.java"
-
-        if File.exists?(filename)
-            $stderr.puts("Updating #{filename}") if VERBOSE
-
-            java = File.read(filename)
-
-            java.sub!(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
-                        "//>> Attributes\n" +
-                        tag.to_java +
-                        "\n//<< Attributes"
-                     )
-
-            java.gsub!(/\r?\n/, "\r\n")
-
-            File.open(filename, 'w') do |file|
-                file.write(java)
-            end
-        end
-    end
+    tags.each { |tag| tag.sync_java }
 end
 
 

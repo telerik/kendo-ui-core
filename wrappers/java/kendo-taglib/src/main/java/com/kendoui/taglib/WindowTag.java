@@ -8,7 +8,7 @@ import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class WindowTag extends WidgetTag {
+public class WindowTag extends WidgetTag /* interfaces */implements Animation, Content/* interfaces */ {
 
     public WindowTag() {
         super("Window");
@@ -26,6 +26,24 @@ public class WindowTag extends WidgetTag {
     }
 
 //>> Attributes
+
+    @Override
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
+
+    @Override
+    public void setContent(ContentTag value) {
+        setProperty("content", value);
+    }
+
+    public String getContent() {
+        return (String)getProperty("content");
+    }
+
+    public void setContent(String value) {
+        setProperty("content", value);
+    }
 
     public boolean getDraggable() {
         return (boolean)getProperty("draggable");

@@ -3,12 +3,17 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class ComboBoxTag extends WidgetTag implements DataBoundWidget {
+public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundWidget, Animation/* interfaces */ {
     public ComboBoxTag() {
         super("ComboBox");
     }
 
     //>> Attributes
+
+    @Override
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
 
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");

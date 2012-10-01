@@ -3,12 +3,17 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class DropDownListTag extends WidgetTag implements DataBoundWidget {
+public class DropDownListTag extends WidgetTag /* interfaces */implements DataBoundWidget, Animation/* interfaces */ {
     public DropDownListTag() {
         super("DropDownList");
     }
 
     //>> Attributes
+
+    @Override
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
 
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");

@@ -3,12 +3,17 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class SliderTag extends WidgetTag {
+public class SliderTag extends WidgetTag /* interfaces */implements Tooltip/* interfaces */ {
     public SliderTag() {
         super("Slider");
     }
 
     //>> Attributes
+
+    @Override
+    public void setTooltip(TooltipTag value) {
+        setProperty("tooltip", value);
+    }
 
     public String getDecreaseButtonTitle() {
         return (String)getProperty("decreaseButtonTitle");

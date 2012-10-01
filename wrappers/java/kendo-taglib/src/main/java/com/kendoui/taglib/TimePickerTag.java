@@ -3,12 +3,17 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class TimePickerTag extends WidgetTag {
+public class TimePickerTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
     public TimePickerTag() {
         super("TimePicker");
     }
 
     //>> Attributes
+
+    @Override
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
 
     public String getCulture() {
         return (String)getProperty("culture");

@@ -1,12 +1,27 @@
 package com.kendoui.taglib;
 
 @SuppressWarnings("serial")
-public class RadialGaugeTag extends WidgetTag {
+public class RadialGaugeTag extends WidgetTag /* interfaces */implements GaugeArea, Pointer, Scale/* interfaces */ {
     public RadialGaugeTag() {
         super("RadialGauge");
     }
 
     //>> Attributes
+
+    @Override
+    public void setGaugeArea(GaugeAreaTag value) {
+        setProperty("gaugeArea", value);
+    }
+
+    @Override
+    public void setPointer(PointerTag value) {
+        setProperty("pointer", value);
+    }
+
+    @Override
+    public void setScale(ScaleTag value) {
+        setProperty("scale", value);
+    }
 
     public int getRangeSize() {
         return (int)getProperty("rangeSize");

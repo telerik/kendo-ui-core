@@ -3,7 +3,7 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class EditorTag extends WidgetTag {
+public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
     public EditorTag() {
         super("Editor");
     }

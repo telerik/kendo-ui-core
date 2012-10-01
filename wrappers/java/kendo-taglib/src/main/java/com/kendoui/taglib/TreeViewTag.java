@@ -3,12 +3,25 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class TreeViewTag extends WidgetTag implements DataBoundWidget {
+public class TreeViewTag extends WidgetTag /* interfaces */implements DataBoundWidget, Animation/* interfaces */ {
     public TreeViewTag() {
         super("TreeView");
     }
 
     //>> Attributes
+
+    @Override
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
+
+    public String getCheckboxTemplate() {
+        return (String)getProperty("checkboxTemplate");
+    }
+
+    public void setCheckboxTemplate(String value) {
+        setProperty("checkboxTemplate", value);
+    }
 
     public String getDataImageUrlField() {
         return (String)getProperty("dataImageUrlField");
@@ -61,6 +74,14 @@ public class TreeViewTag extends WidgetTag implements DataBoundWidget {
 
     public void setLoadOnDemand(boolean value) {
         setProperty("loadOnDemand", value);
+    }
+
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
     }
 
     public String getCollapse() {

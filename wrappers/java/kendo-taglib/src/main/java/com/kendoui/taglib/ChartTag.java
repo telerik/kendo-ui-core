@@ -3,12 +3,62 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class ChartTag extends WidgetTag implements DataBoundWidget {
+public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidget, CategoryAxis, Title, ChartArea, Legend, PlotArea, Series, Tooltip, XAxis, SeriesDefaults, ValueAxis/* interfaces */ {
     public ChartTag() {
         super("Chart");
     }
 
 //>> Attributes
+
+    @Override
+    public void setCategoryAxis(CategoryAxisTag value) {
+        setProperty("categoryAxis", value);
+    }
+
+    @Override
+    public void setTitle(TitleTag value) {
+        setProperty("title", value);
+    }
+
+    @Override
+    public void setChartArea(ChartAreaTag value) {
+        setProperty("chartArea", value);
+    }
+
+    @Override
+    public void setLegend(LegendTag value) {
+        setProperty("legend", value);
+    }
+
+    @Override
+    public void setPlotArea(PlotAreaTag value) {
+        setProperty("plotArea", value);
+    }
+
+    @Override
+    public void setSeries(SeriesTag value) {
+        setProperty("series", value);
+    }
+
+    @Override
+    public void setTooltip(TooltipTag value) {
+        setProperty("tooltip", value);
+    }
+
+    @Override
+    public void setXAxis(XAxisTag value) {
+        setProperty("xAxis", value);
+    }
+
+    @Override
+    public void setSeriesDefaults(SeriesDefaultsTag value) {
+        setProperty("seriesDefaults", value);
+    }
+
+    @Override
+    public void setValueAxis(ValueAxisTag value) {
+        setProperty("valueAxis", value);
+    }
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {

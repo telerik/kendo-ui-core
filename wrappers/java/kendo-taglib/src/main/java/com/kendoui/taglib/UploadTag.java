@@ -3,12 +3,22 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class UploadTag extends WidgetTag {
+public class UploadTag extends WidgetTag /* interfaces */implements Async, Localization/* interfaces */ {
     public UploadTag() {
         super("Upload");
     }
 
     //>> Attributes
+
+    @Override
+    public void setAsync(AsyncTag value) {
+        setProperty("async", value);
+    }
+
+    @Override
+    public void setLocalization(LocalizationTag value) {
+        setProperty("localization", value);
+    }
 
     public boolean getEnabled() {
         return (boolean)getProperty("enabled");

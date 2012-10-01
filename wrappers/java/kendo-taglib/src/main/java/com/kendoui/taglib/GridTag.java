@@ -3,12 +3,42 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class GridTag extends WidgetTag implements DataBoundWidget {
+public class GridTag extends WidgetTag  /* interfaces */implements DataBoundWidget, Columns, Sortable, Editable, Groupable, Pageable, Toolbar/* interfaces */ {
     public GridTag() {
         super("Grid");
     }
 
     //>> Attributes
+
+    @Override
+    public void setColumns(ColumnsTag value) {
+        setProperty("columns", value);
+    }
+
+    @Override
+    public void setSortable(SortableTag value) {
+        setProperty("sortable", value);
+    }
+
+    @Override
+    public void setEditable(EditableTag value) {
+        setProperty("editable", value);
+    }
+
+    @Override
+    public void setGroupable(GroupableTag value) {
+        setProperty("groupable", value);
+    }
+
+    @Override
+    public void setPageable(PageableTag value) {
+        setProperty("pageable", value);
+    }
+
+    @Override
+    public void setToolbar(ToolbarTag value) {
+        setProperty("toolbar", value);
+    }
 
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");

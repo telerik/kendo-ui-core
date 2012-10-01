@@ -3,12 +3,17 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class RangeSliderTag extends WidgetTag {
+public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip/* interfaces */ {
     public RangeSliderTag() {
         super("RangeSlider");
     }
 
     //>> Attributes
+
+    @Override
+    public void setTooltip(TooltipTag value) {
+        setProperty("tooltip", value);
+    }
 
     public int getLargeStep() {
         return (int)getProperty("largeStep");

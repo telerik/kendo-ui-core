@@ -3,12 +3,17 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class CalendarTag extends WidgetTag {
+public class CalendarTag extends WidgetTag /* interfaces */implements Month/* interfaces */ {
     public CalendarTag() {
         super("Calendar");
     }
 
 //>> Attributes
+
+    @Override
+    public void setMonth(MonthTag value) {
+        setProperty("month", value);
+    }
 
     public String getCulture() {
         return (String)getProperty("culture");
