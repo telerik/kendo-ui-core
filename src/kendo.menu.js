@@ -42,7 +42,7 @@
                 "<div class='k-content k-group'>#= content(item) #</div>"
             ),
             group: template(
-                "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+                "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) # role='menu' aria-hidden='true'>" +
                     "#= renderItems(data) #" +
                 "</ul>"
             ),
@@ -53,7 +53,8 @@
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li class='#= wrapperCssClass(group, item) #'>" +
+                "<li class='#= wrapperCssClass(group, item) #' role='menuitem' #=item.items ? \"aria-haspopup='true'\": \"\"#" +
+                    "#=item.enabled === false ? \"aria-disabled='true'\" : ''#>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } }) #" +
@@ -182,12 +183,17 @@
         item
             .filter("li[disabled]")
             .addClass(DISABLEDSTATE)
-            .removeAttr("disabled");
+            .removeAttr("disabled")
+            .attr("aria-disabled", true);
         item
             .children("a")
             .filter(":focus")
             .parent()
             .addClass(ACTIVESTATE);
+
+        if (!item.filter("[role]").length) {
+            item.attr("role", "menuitem");
+        }
 
         if (!item.children("." + LINK).length) {
             item
@@ -272,6 +278,12 @@
                 that.clicked = false;
                 that._documentClickHandler = proxy(that._documentClick, that);
                 $(document).click(that._documentClickHandler);
+            }
+
+            element.attr("role", "menubar");
+
+            if (element[0].id) {
+                that._ariaId = kendo.format("{0}_mn_active", element[0].id);
             }
 
             kendo.notify(that);
@@ -434,7 +446,9 @@
             } else {
                 items = $(item);
                 groups = items.find("> ul")
-                                .addClass("k-group");
+                                .addClass("k-group")
+                                .attr("role", "menu");
+
                 items = items.filter("li");
 
                 items.add(groups.find("> li")).each(function () {
@@ -546,7 +560,7 @@
                             popup.options.position = directions.position;
                             popup.options.animation.open.effects = openEffects;
                         }
-
+                        ul.removeAttr("aria-hidden");
                         popup.open();
                     }
 
@@ -576,6 +590,7 @@
 
                     if (popup) {
                         popup.close();
+                        popup.element.attr("aria-hidden", true);
                     }
                 }, that.options.hoverDelay));
             });
@@ -587,7 +602,8 @@
             this.element.find(items).each(function () {
                 $(this)
                     .toggleClass(DEFAULTSTATE, enable)
-                    .toggleClass(DISABLEDSTATE, !enable);
+                    .toggleClass(DISABLEDSTATE, !enable)
+                    .attr("aria-disabled", !enable);
             });
         },
 
@@ -617,7 +633,7 @@
 
             element.addClass("k-widget k-reset k-header " + MENU).addClass(MENU + "-" + this.options.orientation);
 
-            element.find("li > ul").addClass("k-group");
+            element.find("li > ul").addClass("k-group").attr("role", "menu").attr("aria-hidden", element.is(":visible"));
 
             items = element.find("> li,.k-group > li");
 
@@ -803,12 +819,29 @@
         },
 
         _moveHover: function (item, nextItem) {
+            var that = this,
+                id = that._ariaId;
+
             if (item.length && nextItem.length) {
                 item.removeClass(HOVERSTATE);
+                if (item[0].id === id) {
+                    item.removeAttr("id");
+                }
             }
+
             if (nextItem.length) {
+                if (nextItem[0].id) {
+                    id = nextItem[0].id;
+                }
+
                 nextItem.addClass(HOVERSTATE);
-                this._oldHoverItem = nextItem;
+                that._oldHoverItem = nextItem;
+
+                if (id) {
+                    that.element.removeAttr("aria-activedescendant");
+                    nextItem.attr("id", id);
+                    that.element.attr("aria-activedescendant", id);
+                }
             }
         },
 

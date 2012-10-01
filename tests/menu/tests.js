@@ -16,6 +16,10 @@ tests.push(
         title: "menu open on click"
     },
     {
+        page: "menu/aria.html",
+        title: "menu ARIA support"
+    },
+    {
         page: "menu/mvvm.html",
         title: "menu mvvm"
     },
