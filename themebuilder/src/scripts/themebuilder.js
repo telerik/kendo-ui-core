@@ -453,7 +453,7 @@
 
                 this._showSource(
                     "// use as theme: 'newTheme'\n" +
-                    "kendo.dataviz.ui.themes.chart.newThemeName = " +
+                    "kendo.dataviz.ui.themes.chart.newTheme = " +
                     this.themes[1].source("string")
                 );
             },
