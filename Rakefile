@@ -232,7 +232,7 @@ BUNDLES = [
     'mobile.commercial',
     'dataviz.commercial',
     'aspnetmvc.commercial',
-    'jsp.commercial',
+#    'jsp.commercial',
     'aspnetmvc.hotfix.commercial',
     'winjs.commercial',
     'cdn.commercial'
