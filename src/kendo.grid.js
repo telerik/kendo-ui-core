@@ -1669,10 +1669,12 @@
                             currentTable.focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
                         });
                     }
-                    e.preventDefault(); //if any problem occurs, call preventDefault only for the clicked header links
+
+                    if (currentTarget.is("th")) {
+                        e.preventDefault(); //if any problem occurs, call preventDefault only for the clicked header links
+                    }
                 };
 
-            //that.content.attr("tabindex", -1);
             if (that.options.scrollable) {
                 dataTable = table.add(that.thead.parent());
                 that.thead.parent().on("keydown", function(e) {
@@ -1798,11 +1800,11 @@
                     handled = true;
                 } else if (that.options.editable) {
                     if (keys.ESC == key && that._editContainer) {
-                        if (that._editContainer.has(current[0]) || current[0] === that._editContainer[0]) {
+                        if (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0]) {
                             if (isInCell) {
                                 that.closeCell();
                             } else {
-                                currentIndex = that.items().index(current.parent());
+                                currentIndex = that.items().index($(current).parent());
                                 document.activeElement.blur();
                                 that.cancelRow();
                                 if (currentIndex >= 0) {
@@ -3175,7 +3177,7 @@
                 return;
             }
 
-            if (current && current.hasClass(FOCUSED)) {
+            if (current && (current.hasClass(FOCUSED) || document.activeElement === that.table[0])) {
                 isCurrentInHeader = current.is("th");
                 currentIndex = 0;
                 if (isCurrentInHeader) {
