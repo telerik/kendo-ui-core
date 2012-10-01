@@ -374,8 +374,9 @@
 
         _views: function() {
             var that = this,
-                element = that.element;
-                options = that.options;
+                element = that.element,
+                options = that.options,
+                date;
 
             that.dateView = new kendo.DateView(extend({}, options, {
                 anchor: that.wrapper,
@@ -409,7 +410,7 @@
                     if (that.trigger(OPEN, dateViewParams)) {
                         e.preventDefault();
                     } else {
-                        var date = parse(element.val(), options.parseFormats, options.culture);
+                        date = parse(element.val(), options.parseFormats, options.culture);
                         if (!date) {
                             that.dateView.value(date);
                         } else {
