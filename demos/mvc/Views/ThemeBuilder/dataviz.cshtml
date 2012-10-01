@@ -32,8 +32,15 @@
 
 <div class="k-content floatWrap">
 <div class="column">
-
     <div id="area-chart"></div>
+
+    <div id="radial-gauge"></div>
+</div>
+
+<div class="column">
+    <div id="mixed-chart"></div>
+
+    <div id="linear-gauge"></div>
 </div>
 
 </div>
@@ -59,13 +66,14 @@
     }
 
     .column {
-        width: 47%;
+        width: 46%;
         padding: 0 2%;
         margin: 0;
         float: left;
     }
 
-    .column .k-widget {
+    .column .k-chart,
+    .column .k-gauge {
         display: block;
         margin-bottom: 14px;
     }
@@ -119,13 +127,15 @@
             seriesDefaults: {
                 type: "area"
             },
-            series: [{
-                name: "World",
-                data: [15.7, 16.7, 20, 23.5, 26.6]
+            series: [
+                {
+                    name: "World",
+                    data: [15.7, 16.7, 20, 23.5, 26.6]
                 }, {
-                name: "United States",
-                data: [67.96, 68.93, 75, 74, 78]
-            }],
+                    name: "United States",
+                    data: [67.96, 68.93, 75, 74, 78]
+                }
+            ],
             valueAxis: {
                 labels: {
                     format: "{0}%"
@@ -137,6 +147,82 @@
             tooltip: {
                 visible: true,
                 format: "{0}%"
+            }
+        });
+
+        $("#mixed-chart").kendoChart({
+            transitions: false,
+            title: {
+                text: "Hybrid car mileage report"
+            },
+            legend: {
+                position: "top"
+            },
+            series: [{
+                type: "column",
+                data: [20, 40, 45, 30, 50],
+                stack: true,
+                name: "on battery"
+            }, {
+                type: "column",
+                data: [20, 30, 35, 35, 40],
+                stack: true,
+                name: "on gas"
+            }, {
+                type: "line",
+                data: [7.8, 6.2, 5.9, 7.4, 5.6],
+                name: "l/100 km",
+                axis: "l100km"
+            }],
+            valueAxes: [{
+                title: { text: "miles" },
+                min: 0,
+                max: 100
+            }, {
+                name: "l100km",
+                title: { text: "liters per 100km" }
+            }],
+            categoryAxis: {
+                categories: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                // Align the first two value axes to the left
+                // and the last two to the right.
+                //
+                // Right alignment is done by specifying a
+                // crossing value greater than or equal to
+                // the number of categories.
+                axisCrossingValues: [0, 10]
+            }
+        });
+
+        $("#linear-gauge").kendoLinearGauge({
+            transitions: false,
+            pointer: {
+                value: 30
+            }
+        });
+
+        $("#radial-gauge").kendoRadialGauge({
+            transitions: false,
+            pointer: {
+                value: 40
+            },
+            scale: {
+                max: 180,
+                ranges: [
+                    {
+                        from: 80,
+                        to: 120,
+                        color: "#ffc700"
+                    }, {
+                        from: 120,
+                        to: 150,
+                        color: "#ff7a00"
+                    }, {
+                        from: 150,
+                        to: 180,
+                        color: "#c20000"
+                    }
+                ]
             }
         });
     });
