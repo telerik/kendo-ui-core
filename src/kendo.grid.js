@@ -2872,6 +2872,7 @@
                 rows,
                 row,
                 cell,
+                tables,
                 idx,
                 cols,
                 colWidth,
@@ -2936,8 +2937,17 @@
                 }
             }
 
+            tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
+
             if (width) {
-                $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table).width(width);
+                tables.width(width);
+            }
+
+            if($.browser.msie && parseInt($.browser.version) === 8) {
+                tables.css("display", "inline-table");              
+                setTimeout(function() { 
+                    tables.css("display", "table");
+                }, 1);
             }
 
             that.trigger(COLUMNHIDE, { column: column });
