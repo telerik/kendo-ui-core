@@ -374,6 +374,7 @@
 
         _views: function() {
             var that = this,
+                element = that.element;
                 options = that.options;
 
             that.dateView = new kendo.DateView(extend({}, options, {
@@ -407,6 +408,14 @@
                 open:  function(e) {
                     if (that.trigger(OPEN, dateViewParams)) {
                         e.preventDefault();
+                    } else {
+                        var date = parse(element.val(), options.parseFormats, options.culture);
+                        if (!date) {
+                            that.dateView.value(date);
+                        } else {
+                            that.dateView._current = date;
+                            that.dateView.calendar._focus(date);
+                        }
                     }
                 }
             }));
