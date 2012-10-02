@@ -297,6 +297,20 @@
 
                 equal(dialogObject.wrapper.height(), 105);
             });
+
+            test("hitting arrow keys in nested input does not trigger keyboard support", function() {
+                createWindow({
+                    content: {
+                        template: "<input class='foo' />"
+                    }
+                });
+
+                var offset = dialogObject.wrapper.offset();
+
+                dialog.find("input").press(keys.UP);
+
+                equal(dialogObject.wrapper.offset().top, offset.top);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

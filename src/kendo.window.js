@@ -285,6 +285,10 @@
                 distance = 10,
                 newWidth, newHeight;
 
+            if (e.target != wrapper.children(KWINDOWCONTENT)[0]) {
+                return;
+            }
+
             if (keyCode == keys.ESC) {
                 that.close();
             }
