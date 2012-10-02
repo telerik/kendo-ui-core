@@ -1,9 +1,16 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.chart.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
-public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidget, CategoryAxis, Title, ChartArea, Legend, PlotArea, Series, Tooltip, XAxis, SeriesDefaults, ValueAxis/* interfaces */ {
+public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis, Title, Area, Legend, PlotArea, Series, Tooltip, XAxis, SeriesDefaults, ValueAxis, DataBoundWidget/* interfaces */ {
+
     public ChartTag() {
         super("Chart");
     }
@@ -21,8 +28,8 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     @Override
-    public void setChartArea(ChartAreaTag value) {
-        setProperty("chartArea", value);
+    public void setArea(AreaTag value) {
+        setProperty("area", value);
     }
 
     @Override

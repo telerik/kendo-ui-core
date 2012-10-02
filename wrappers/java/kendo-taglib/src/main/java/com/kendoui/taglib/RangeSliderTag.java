@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.rangeslider.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
 public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip/* interfaces */ {
+
     public RangeSliderTag() {
         super("RangeSlider");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setTooltip(TooltipTag value) {

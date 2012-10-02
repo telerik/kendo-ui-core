@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.splitter.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
 public class SplitterTag extends WidgetTag /* interfaces */implements Panes/* interfaces */ {
+
     public SplitterTag() {
         super("Splitter");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setPanes(PanesTag value) {

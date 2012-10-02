@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.timepicker.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
 public class TimePickerTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
+
     public TimePickerTag() {
         super("TimePicker");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setAnimation(AnimationTag value) {

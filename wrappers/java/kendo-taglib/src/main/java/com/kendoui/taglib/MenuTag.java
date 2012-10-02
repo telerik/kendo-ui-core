@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.menu.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
-public class MenuTag extends WidgetTag  /* interfaces */implements Animation/* interfaces */ {
+public class MenuTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
+
     public MenuTag() {
         super("Menu");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setAnimation(AnimationTag value) {

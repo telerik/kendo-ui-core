@@ -1,12 +1,19 @@
+
 package com.kendoui.taglib;
 
+
+import com.kendoui.taglib.lineargauge.*;
+
+
+
 @SuppressWarnings("serial")
-public class LinearGaugeTag extends WidgetTag  /* interfaces */implements GaugeArea, Pointer, Scale/* interfaces */ {
+public class LinearGaugeTag extends WidgetTag /* interfaces */implements GaugeArea, Pointer, Scale/* interfaces */ {
+
     public LinearGaugeTag() {
         super("LinearGauge");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setGaugeArea(GaugeAreaTag value) {

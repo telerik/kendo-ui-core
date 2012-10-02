@@ -1,14 +1,19 @@
+
 package com.kendoui.taglib;
+
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
 public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
+
     public EditorTag() {
         super("Editor");
     }
 
-    //>> Attributes
+//>> Attributes
 
     public boolean getEncoded() {
         return (boolean)getProperty("encoded");

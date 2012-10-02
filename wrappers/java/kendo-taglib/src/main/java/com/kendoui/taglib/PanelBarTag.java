@@ -1,5 +1,6 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.panelbar.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import com.kendoui.taglib.html.Ul;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class PanelBarTag extends WidgetTag  /* interfaces */implements Animation/* interfaces */ {
+public class PanelBarTag extends WidgetTag  /* interfaces */implements Animation, PanelBarItemTagContainer/* interfaces */ {
     private List<PanelBarItemTag> items;
 
     public PanelBarTag() {

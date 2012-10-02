@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.upload.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
 public class UploadTag extends WidgetTag /* interfaces */implements Async, Localization/* interfaces */ {
+
     public UploadTag() {
         super("Upload");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setAsync(AsyncTag value) {

@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.combobox.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
-public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundWidget, Animation/* interfaces */ {
+public class ComboBoxTag extends WidgetTag /* interfaces */implements Animation, DataBoundWidget/* interfaces */ {
+
     public ComboBoxTag() {
         super("ComboBox");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setAnimation(AnimationTag value) {

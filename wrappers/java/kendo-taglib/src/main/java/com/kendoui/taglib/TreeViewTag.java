@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.treeview.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
-public class TreeViewTag extends WidgetTag /* interfaces */implements DataBoundWidget, Animation/* interfaces */ {
+public class TreeViewTag extends WidgetTag /* interfaces */implements Animation, DataBoundWidget/* interfaces */ {
+
     public TreeViewTag() {
         super("TreeView");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setAnimation(AnimationTag value) {

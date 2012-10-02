@@ -1,19 +1,18 @@
+
 package com.kendoui.taglib;
 
-import com.kendoui.taglib.html.Element;
-import com.kendoui.taglib.html.Input;
+
+import com.kendoui.taglib.autocomplete.*;
+
+
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
-public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBoundWidget, Animation/* interfaces */ {
+public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animation, DataBoundWidget/* interfaces */ {
 
     public AutoCompleteTag() {
         super("AutoComplete");
-    }
-
-    @Override
-    protected Element<?> createElement() {
-        return new Input();
     }
 
 //>> Attributes

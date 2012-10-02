@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.dropdownlist.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
-public class DropDownListTag extends WidgetTag /* interfaces */implements DataBoundWidget, Animation/* interfaces */ {
+public class DropDownListTag extends WidgetTag /* interfaces */implements Animation, DataBoundWidget/* interfaces */ {
+
     public DropDownListTag() {
         super("DropDownList");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setAnimation(AnimationTag value) {

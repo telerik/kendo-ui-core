@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.grid.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
-public class GridTag extends WidgetTag  /* interfaces */implements DataBoundWidget, Columns, Sortable, Editable, Groupable, Pageable, Toolbar/* interfaces */ {
+public class GridTag extends WidgetTag /* interfaces */implements Columns, Sortable, Editable, Groupable, Pageable, Toolbar, DataBoundWidget/* interfaces */ {
+
     public GridTag() {
         super("Grid");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setColumns(ColumnsTag value) {

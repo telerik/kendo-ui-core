@@ -1,14 +1,19 @@
+
 package com.kendoui.taglib;
+
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
-public class ListViewTag extends WidgetTag implements DataBoundWidget {
+public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundWidget/* interfaces */ {
+
     public ListViewTag() {
         super("ListView");
     }
 
-    //>> Attributes
+//>> Attributes
 
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");

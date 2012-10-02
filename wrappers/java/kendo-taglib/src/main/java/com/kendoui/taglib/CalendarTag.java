@@ -1,9 +1,16 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.calendar.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
 public class CalendarTag extends WidgetTag /* interfaces */implements Month/* interfaces */ {
+
     public CalendarTag() {
         super("Calendar");
     }

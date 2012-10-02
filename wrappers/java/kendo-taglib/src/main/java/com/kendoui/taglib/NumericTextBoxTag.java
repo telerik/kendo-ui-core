@@ -1,14 +1,19 @@
+
 package com.kendoui.taglib;
+
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
-public class NumericTextBoxTag extends WidgetTag {
+public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces */ {
+
     public NumericTextBoxTag() {
         super("NumericTextBox");
     }
 
-    //>> Attributes
+//>> Attributes
 
     public String getCulture() {
         return (String)getProperty("culture");

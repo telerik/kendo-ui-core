@@ -5,6 +5,8 @@ import javax.servlet.jsp.tagext.BodyContent;
 import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
 
+import com.kendoui.taglib.window.*;
+
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")

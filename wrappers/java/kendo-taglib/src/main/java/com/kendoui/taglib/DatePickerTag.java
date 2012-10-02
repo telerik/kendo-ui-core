@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.datepicker.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
 public class DatePickerTag extends WidgetTag /* interfaces */implements Animation, Month/* interfaces */ {
+
     public DatePickerTag() {
         super("DatePicker");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setAnimation(AnimationTag value) {

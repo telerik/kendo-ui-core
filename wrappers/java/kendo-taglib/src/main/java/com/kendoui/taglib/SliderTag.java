@@ -1,14 +1,21 @@
+
 package com.kendoui.taglib;
+
+
+import com.kendoui.taglib.slider.*;
+
 
 import com.kendoui.taglib.json.Function;
 
+
 @SuppressWarnings("serial")
 public class SliderTag extends WidgetTag /* interfaces */implements Tooltip/* interfaces */ {
+
     public SliderTag() {
         super("Slider");
     }
 
-    //>> Attributes
+//>> Attributes
 
     @Override
     public void setTooltip(TooltipTag value) {

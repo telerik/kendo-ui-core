@@ -19,7 +19,7 @@
         			alert("foo");
         		}
         	</script>
-        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3" dataBound="foo">
+        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3">
         	    <kendo:dataSource type="odata" serverFiltering="true" serverPaging="true" pageSize="20">
         	    	<kendo:transport>
         	    		<kendo:read url="http://odata.netflix.com/Catalog/Titles"></kendo:read>
@@ -35,9 +35,13 @@
             </kendo:autoComplete>
         	
         </kendo:window>
-        
+        <kendo:chart name="myChart">
+        	<kendo:chartTitle text="Foo">
+       			<kendo:chartTitleBorder color="#a0b0c0" width="1"/>
+        	</kendo:chartTitle>
+        </kendo:chart>
         <kendo:panelBar name="myPanelBar">        	
-        	<kendo:panelBarItem text="Item with content">,b
+        	<kendo:panelBarItem text="Item with content">
         		<strong>Item Contents</strong>
         	</kendo:panelBarItem>
         	<kendo:panelBarItem text="Item with children">

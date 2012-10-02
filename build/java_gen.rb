@@ -43,15 +43,19 @@ TLD_WIDGET_TAG_TEMPLATE = ERB.new(%{
 TLD_TAG_TEMPLATE = ERB.new(%{
     <tag>
         <description><%= name %></description>
-        <name><%= name.sub(/^./) { |c| c.downcase } %></name>
-        <tag-class>com.kendoui.taglib.<%= type %></tag-class>
+        <name><%= xml_name %></name>
+        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= type %></tag-class>
+<% if children.any? %>
         <body-content>JSP</body-content>
+<% else %>
+        <body-content>empty</body-content>
+<% end %>
 <%= options.map {|o| o.to_xml }.join %>
     </tag>
 })
 
 JAVA_INTERFACE_TEMPLATE = ERB.new(%{
-package com.kendoui.taglib;
+package com.kendoui.taglib.<%= namespace %>;
 
 public interface <%= interface %> {
     void set<%= interface %>(<%= interface %>Tag value);
@@ -61,7 +65,12 @@ public interface <%= interface %> {
 JAVA_WIDGET_TEMPLATE = ERB.new(%{
 package com.kendoui.taglib;
 
+<% if children.any? %>
+import com.kendoui.taglib.<%= namespace %>.*;
+<% end %>
+<% if events.any? %>
 import com.kendoui.taglib.json.Function;
+<% end %>
 
 @SuppressWarnings("serial")
 public class <%= type %> extends WidgetTag /* interfaces */ /* interfaces */ {
@@ -76,7 +85,9 @@ public class <%= type %> extends WidgetTag /* interfaces */ /* interfaces */ {
 })
 
 JAVA_TAG_TEMPLATE = ERB.new(%{
-package com.kendoui.taglib;
+package com.kendoui.taglib.<%= namespace %>;
+
+import com.kendoui.taglib.BaseTag;
 
 import javax.servlet.jsp.JspException;
 
@@ -199,7 +210,7 @@ class Tag
 
     attr_reader :options, :name, :events, :children
 
-    attr_accessor :type, :parent_type
+    attr_accessor :type, :parent_type, :namespace, :parent
 
     def initialize(name, options = [])
         @name = name.sub(/kendo.*ui\./, '').sub('kendo.data.', '')
@@ -209,10 +220,18 @@ class Tag
         @children = []
     end
 
+    def xml_name
+        return @name.sub(/^./) { |c| c.downcase } unless @parent
+
+        return @parent.xml_name + @name
+    end
+
     def to_xml
         type = @type
 
-        TLD_WIDGET_TAG_TEMPLATE.result(binding)
+        template = @parent_type ? TLD_TAG_TEMPLATE : TLD_WIDGET_TAG_TEMPLATE
+
+        template.result(binding)
     end
 
     def to_java
@@ -235,9 +254,12 @@ class Tag
     end
 
     def sync_java
-        path = @type
+        path = @namespace ? @namespace + '/' + @type : @type
+        namespace = @namespace ? @namespace : @name.downcase
 
         filename = "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{path}.java"
+
+        interfaces = @children.map{ |c| c.name }.uniq
 
         template = JAVA_WIDGET_TEMPLATE
         template = JAVA_TAG_TEMPLATE if @parent_type
@@ -248,9 +270,8 @@ class Tag
 
         $stderr.puts("Updating #{filename}") if VERBOSE
 
-        interfaces = @children.map{ |c| c.name }.uniq
         interfaces.each do |interface|
-            interface_filename =  "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{interface}.java"
+            interface_filename =  "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{namespace}/#{interface}.java"
 
             ensure_path(interface_filename)
 
@@ -260,7 +281,11 @@ class Tag
         end
 
         if @options.any? { |o| o.name == 'dataSource' }
-            interfaces = ['DataBoundWidget', interfaces].flatten
+            interfaces.push('DataBoundWidget')
+        end
+
+        if (@name =~/PanelBar/)
+            interfaces.push('PanelBarItemTagContainer')
         end
 
         implements = ""
@@ -288,8 +313,6 @@ class Tag
     end
 
     def promote_options_to_tags
-        p @options if @name.start_with?('groupable')
-
         @options.dup.each do |option|
             prefix = option.name + '.'
 
@@ -303,9 +326,14 @@ class Tag
                     @options.delete(o)
                 end
 
-                child = Tag.new(option.name.sub(/^./) { |c| c.capitalize }, child_options)
+                namespace = @namespace ? @namespace : @name.downcase
+
+                child = Tag.new(option.name.sub(namespace, '').sub(/^./) { |c| c.capitalize }, child_options)
 
                 child.parent_type = @type
+                child.parent = self
+                child.namespace = namespace
+
 
                 @children.push(child)
 
@@ -422,7 +450,7 @@ def generate
 
     $stderr.puts("Updating #{TLD}") if VERBOSE
 
-    children = tags.map{ |t| t.all_children }.flatten.uniq { |t| t.name }
+    children = tags.map{ |t| t.all_children }.flatten
 
     xml = (tags + children).map{ |t| t.to_xml }.join("\n")
 
