@@ -74,14 +74,14 @@
                 var fooFinished = false, barFinished = false;
 
                 kendo.fx.foo = {
-                    setup: function(element, options) {
+                    endState: function(element, options) {
                         fooFinished = true;
                         options.complete();
                     }
                 };
 
                 kendo.fx.bar = {
-                    setup: function(element, options) {
+                    endState: function(element, options) {
                         barFinished = true;
                         options.complete();
                     }
@@ -98,7 +98,7 @@
                 var firstAnimationFinished = false;
 
                 kendo.fx.foo = {
-                    setup: function(element, options) {
+                    endState: function(element, options) {
                         options.complete();
                     }
                 };
@@ -117,7 +117,7 @@
                 var reverseWasCalled = false;
 
                 kendo.fx.foo = {
-                    setup: function(element, options) {
+                    endState: function(element, options) {
                         reverseWasCalled = options.reverse;
                         options.complete();
                     }
@@ -131,7 +131,7 @@
                 var reverseWasCalled = false, callbackWasCalled = false;
 
                 kendo.fx.foo = {
-                    setup: function(element, options) {
+                    endState: function(element, options) {
                         reverseWasCalled = options.reverse;
                         options.complete();
                     }
@@ -154,7 +154,7 @@
                 var reverseWasCalled = false, callbackWasCalled = false;
 
                 kendo.fx.foo = {
-                    setup: function(element, options) {
+                    endState: function(element, options) {
                         reverseWasCalled = options.reverse;
                         options.complete();
                     }
@@ -178,14 +178,14 @@
                 kendo.fx.foo = {
                     restore: [ "overflow" ],
 
-                    css: function(element) {
+                    startState: function(element) {
                         if (element.data("overflow") == "visible")
                             cssWasKept = true;
 
                         return { overflow: "hidden" };
                     },
 
-                    setup: function(element, options) {
+                    endState: function(element, options) {
                         if (element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
                             cssWasSet = true;
 
@@ -212,7 +212,7 @@
                 var called = false;
 
                 kendo.fx.moo = {
-                    setup: function(element, options) {
+                    endState: function(element, options) {
                         return { translateX: "10px" };
                     }
                 };
@@ -238,10 +238,10 @@
                     var height = -1;
 
                     kendo.fx.foo = {
-                        css: function() {
+                        startState: function() {
                             return { height: 0, display: "block" };
                         },
-                        setup: function(element, options) {
+                        endState: function(element, options) {
                             return { height: 100 };
                         }
                     };

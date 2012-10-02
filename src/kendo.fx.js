@@ -412,8 +412,8 @@
 
         element.data("animating", true);
 
-        var restore = [], css = {}, target,
-            methods = { css: [], setup: [], teardown: [] }, properties = {},
+        var restore = [], startState = {}, target,
+            methods = { startState: [], endState: [], teardown: [] }, properties = {},
 
             // create a promise for each effect
             promise = $.Deferred(function(deferred) {
@@ -446,37 +446,39 @@
                         }
                     });
 
-                    if (methods.setup.length) {
+                    if (methods.endState.length) {
                         each(restore, function(idx, value) {
                             if (!element.data(value)) {
                                 element.data(value, element.css(value));
                             }
                         });
 
-                        each(methods.css, function() {
-                            extend(css, this(element, opts));
+                        each(methods.startState, function() {
+                            extend(startState, this(element, opts));
                         });
 
-                        extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
+                        extend(startState, { display: element.data("olddisplay") || "block" }); // Add show to the set
 
                         if (transforms && !options.reset) {
                             target = element.data("targetTransform");
 
                             if (target) {
-                                extend(target, css);
+                                extend(target, startState);
                             }
                         }
 
-                        css = normalizeCSS(element, css, opts);
+                        startState = normalizeCSS(element, startState, opts);
 
                         if (transforms && !transitions) {
-                            css = strip3DTransforms(css);
+                            startState = strip3DTransforms(startState);
                         }
 
-                        element.css(css)
+                        element.css(startState)
                                .css(TRANSFORM); // Nudge
 
-                        each (methods.setup, function() { properties = extend(properties, this(element, opts)); });
+                        each(methods.endState, function() {
+                            extend(properties, this(element, opts));
+                        });
 
                         if (kendo.fx.animate) {
                             options.init();
@@ -676,7 +678,7 @@
 
         fade: {
             restore: [ "opacity" ],
-            css: function(element, options) {
+            startState: function(element, options) {
                 var opacity = element.data("opacity"),
                     direction = options.effects.fade.direction,
                     result = direction == "out" && isNaN(opacity) || direction == "in" ? 0 : opacity;
@@ -684,13 +686,13 @@
                 return { opacity: result };
             },
 
-            setup: function(element, options) {
+            endState: function(element, options) {
                 return extend({ opacity: options.effects.fade.direction == "out" ? 0 : 1 }, options.properties);
             }
         },
 
         zoom: {
-            css: function(element, options) {
+            startState: function(element, options) {
                 var scale = hasZoom ? element[0].style.zoom : animationProperty(element, "scale"),
                     zoomIn = options.effects.zoom.direction == "in",
                     value = zoomIn ? (scale != 1 ? scale : "0.01") : 1;
@@ -702,7 +704,7 @@
                 }
             },
 
-            setup: function(element, options) {
+            endState: function(element, options) {
                 var reverse = options.effects.zoom.direction == "out";
 
                 if (hasZoom) {
@@ -722,7 +724,7 @@
             }
         },
         slide: {
-            setup: function(element, options) {
+            endState: function(element, options) {
                 var reverse = options.reverse, extender = {},
                     init = initDirection(element, options.effects.slide.direction, reverse),
                     property = transforms && options.transition !== false ? init.direction.transition : init.direction.property;
@@ -741,7 +743,7 @@
             }
         },
         slideMargin: {
-            setup: function(element, options) {
+            endState: function(element, options) {
                 var origin = element.data(ORIGIN),
                     offset = options.offset, margin,
                     extender = {}, reverse = options.reverse;
@@ -756,7 +758,7 @@
             }
         },
         slideTo: {
-            setup: function(element, options) {
+            endState: function(element, options) {
                 var offset = (options.offset+"").split(","),
                     extender = {}, reverse = options.reverse;
 
@@ -774,7 +776,7 @@
         },
 
         slideIn: {
-            css: function(element, options) {
+            startState: function(element, options) {
                 var init = initDirection(element, options.effects.slideIn.direction, options.reverse),
                     value = (!options.reverse ? init.offset : 0) + PX;
 
@@ -785,7 +787,7 @@
                 }
             },
 
-            setup: function(element, options) {
+            endState: function(element, options) {
                 var reverse = options.reverse,
                     init = initDirection(element, options.effects.slideIn.direction, reverse),
                     extender = {};
@@ -805,13 +807,13 @@
         },
 
         expand: {
-            css: function() {
+            startState: function() {
                 return { overflow: HIDDEN };
             },
 
             restore: [ OVERFLOW ],
 
-            setup: function(element, options) {
+            endState: function(element, options) {
                 var reverse = options.reverse,
                     direction = options.effects.expand.direction,
                     property = (direction ? direction == "vertical" : true) ? HEIGHT : WIDTH,
@@ -841,7 +843,7 @@
             }
         },
         flip: {
-            css: function (element, options) {
+            startState: function (element, options) {
                 var value = options.reverse ? "180deg" : "0deg";
                 if (options.effects.flip.direction == "vertical") {
                     return { rotatex: value };
@@ -850,7 +852,7 @@
                 }
             },
 
-            setup: function(element, options) {
+            endState: function(element, options) {
                 var rotation = options.effects.flip.direction == "horizontal" ? "rotatey" : "rotatex",
                     reverse = options.reverse, parent = element.parent(),
                     degree = options.degree, face = options.face, back = options.back,
@@ -888,11 +890,11 @@
         },
 
         transfer: {
-            css: function() {
+            startState: function() {
                 return { scale: 1 };
             },
 
-            setup: function(element, options) {
+            endState: function(element, options) {
                 /**
                  * Intersection point formulas are taken from here - http://zonalandeducation.com/mmts/intersections/intersectionOfTwoLines1/intersectionOfTwoLines1.html
                  * Formula for a linear function from two points from here - http://demo.activemath.org/ActiveMath2/search/show.cmd?id=mbase://AC_UK_calculus/functions/ex_linear_equation_two_points
@@ -935,7 +937,7 @@
         },
 
         pageturn: {
-            setup: function(element, options) {
+            endState: function(element, options) {
 
                 var horizontal = options.effects.pageturn.direction === "horizontal",
                     rotation = horizontal ? "rotatey" : "rotatex",
@@ -1032,7 +1034,7 @@
             }
         },
         simple: {
-            setup: function(element, options) {
+            endState: function(element, options) {
                 return options.properties;
             }
         }
