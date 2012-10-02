@@ -427,7 +427,9 @@
                             var dir = kendo.directions[settings.direction];
 
                             if (settings.direction && dir) {
-                                settings.direction = (options.reverse ? dir.reverse : settings.direction);
+                                if (options.reverse) {
+                                    settings.direction = dir.reverse;
+                                }
                             }
 
                             opts = extend(true, opts, settings);
