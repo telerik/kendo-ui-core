@@ -1252,12 +1252,15 @@
                     lineSize = vertical ? lineBox.height() : lineBox.width(),
                     categories = options.categories,
                     startTime = categories[0].getTime(),
-                    timeRange = last(categories) - startTime,
+                    range = axis.range(axis.options),
+                    timeRange = range.max - range.min,
                     scale = lineSize / timeRange,
                     divisions = categories.length,
                     dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
                     startEdge = dir === 1 ? 1 : 2,
+                    endEdge = dir === 1 ? 2 : 1,
                     startPos = lineBox[(vertical ? Y : X) + startEdge],
+                    endPos = lineBox[(vertical ? Y : X) + endEdge],
                     pos = startPos,
                     i,
                     timePos;
@@ -1267,11 +1270,60 @@
                     pos = startPos + timePos * scale * dir;
                     positions.push(round(pos, COORD_PRECISION));
                 }
+
+                if (last(positions) !== endPos) {
+                    positions.push(endPos);
+                }
             }
 
             return positions;
+        },
 
-            // TODO: Override getSlot, getCategory to be aware of roundToBaseUnit
+        getSlot: function(from, to) {
+            var axis = this,
+                options = axis.options;
+
+            if (options.roundToBaseUnit) {
+                return CategoryAxis.fn.getSlot.call(axis, from, to);
+            } else {
+                // TODO: Replace base imlpementation with this
+                var majorTicks = axis.getMajorTickPositions();
+                var reverse = options.reverse,
+                    vertical = options.vertical,
+                    justified = options.justified,
+                    valueAxis = vertical ? Y : X,
+                    lineBox = axis.lineBox(),
+                    slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1),
+                    lineEnd = lineBox[valueAxis + (reverse ? 1 : 2)],
+                    intervals = math.max(1, majorTicks.length - (justified ? 2 : 1)),
+                    p1,
+                    p2,
+                    slotSize;
+
+                from = clipValue(from, 0, intervals);
+                to = defined(to) ? to : from;
+                to = clipValue(to, from, intervals);
+                p1 = majorTicks[from];
+                p2 = justified ? p1 : majorTicks[to];
+                slotSize = to - from;
+
+                if (slotSize > 0 || (from == to)) {
+                    p2 = majorTicks[to + 1] || lineEnd;
+                }
+
+                if (justified) {
+                    if (from === intervals) {
+                        p1 = p2;
+                    } else {
+                        p2 = p1;
+                    }
+                }
+
+                slotBox[valueAxis + 1] = reverse ? p2 : p1;
+                slotBox[valueAxis + 2] = reverse ? p1 : p2;
+
+                return slotBox;
+            }
         },
 
         groupCategories: function(options) {
@@ -1280,29 +1332,26 @@
                 baseUnit = options.baseUnit,
                 baseUnitStep = options.baseUnitStep || 1,
                 range = axis.range(options),
-                end = addDuration(range.max, baseUnitStep - 1, baseUnit, options.weekStartDay),
+                round = options.roundToBaseUnit,
+                end,
                 date,
                 nextDate,
                 groups = [],
-                categoryMap = [],
+                categoryMap = axis.categoryMap = [],
                 categoryIndicies,
                 categoryIx,
                 categoryDate;
 
-            if (!options.roundToBaseUnit) {
-                end = range.max;
-            }
+            end = round ?
+                addDuration(range.max, baseUnitStep - 1, baseUnit, options.weekStartDay) :
+                range.max;
 
-            // TODO: Refactor loop
-            for (date = range.min; /*date < end*/; /*date = nextDate*/) {
+            for (date = range.min; date < end; date = nextDate) {
                 nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
-                if (!options.roundToBaseUnit && nextDate > end) {
-                    nextDate = end;
-                }
 
                 groups.push(date);
-
                 categoryIndicies = [];
+
                 for (categoryIx = 0; categoryIx < categories.length; categoryIx++) {
                     categoryDate = toDate(categories[categoryIx]);
                     if (categoryDate && categoryDate >= date && categoryDate < nextDate) {
@@ -1311,20 +1360,11 @@
                 }
 
                 categoryMap.push(categoryIndicies);
-
-                if (options.roundToBaseUnit) {
-                    date = nextDate;
-                    if (date >= end) break;
-                } else {
-                    if (date >= end) break;
-                    date = nextDate;
-                }
             }
 
             options.min = groups[0];
-            options.max = last(groups);
+            options.max = round ? last(groups) : end;
             options.categories = groups;
-            axis.categoryMap = categoryMap;
         },
 
         createAxisLabel: function(index, labelOptions) {
@@ -1335,7 +1375,7 @@
                 visible = true,
                 unitFormat = labelOptions.dateFormats[baseUnit];
 
-            if (!options.roundToBaseUnit) {
+            if (options.justified) {
                 var roundedDate = floorDate(date, baseUnit, options.weekStartDay);
                 visible = dateEquals(roundedDate, date);
             }
@@ -5446,8 +5486,7 @@
                 primaryAxis,
                 centeredSeries = plotArea.filterSeriesByType(
                     plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK]
-                ),
-                enableJustified = centeredSeries.length === 0;
+                );
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
@@ -5456,9 +5495,12 @@
                 axisOptions = deepExtend({
                     vertical: invertAxes,
                     axisCrossingValue: invertAxes ? categories.length : 0
-                }, axisOptions, {
-                    justified: enableJustified && axisOptions.justified
-                });
+                }, axisOptions);
+
+                if (centeredSeries.length > 0) {
+                    axisOptions.justified = false;
+                    axisOptions.roundToBaseUnit = true;
+                }
 
                 name = axisOptions.name;
                 dateCategory = categories[0] instanceof Date;

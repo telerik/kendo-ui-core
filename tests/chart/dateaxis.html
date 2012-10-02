@@ -18,9 +18,11 @@
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
                 dateAxis,
-                chartBox = new dataviz.Box2D(0, 0, 800, 600),
-                view;
+                chartBox = new Box2D(0, 0, 800, 600),
+                view,
+                TOLERANCE = 1;
 
             // Tests expect particular font size
             dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
@@ -235,6 +237,17 @@
                     same(dateAxis.categoryMap, [[0], [], [1]]);
                 });
 
+                test("categoryMap when rounding is disabled", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 21:00:00"), new Date("2012/02/05 03:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    same(dateAxis.categoryMap, [[0], [], [], [], [1]]);
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Min-Max values", {
                     setup: function() {
@@ -421,50 +434,6 @@
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / No Rounding");
 
-                test("First label is hidden if it does not match base unit", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false
-                    });
-
-                    equals(dateAxis.labels[0].options.visible, false);
-                });
-
-                test("First label is formatted as base unit if it matches it exactly", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false
-                    });
-
-                    equals(dateAxis.labels[0].text, "2/1");
-                });
-
-                test("Last label is hidden if it does not match base unit", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false
-                    });
-
-                    equals(dateAxis.labels[5].options.visible, false);
-                });
-
-                test("First label is formatted as base unit if it matches it exactly", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false
-                    });
-
-                    equals(dateAxis.labels[0].text, "2/1");
-                });
-
                 test("Major ticks are positioned at exact time", function() {
                     createDateCategoryAxis({
                         categories: [
@@ -487,6 +456,21 @@
 
                     same(dateAxis.getMajorTickPositions(),
                         [0, 200, 400, 600, 800], 1);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / No Rounding / Justified");
+
+                test("First label is hidden if it does not match base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    equals(dateAxis.labels[0].options.visible, false);
                 });
 
                 // ------------------------------------------------------------
@@ -979,6 +963,120 @@
                     });
 
                     equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Slots / No Rounding");
+
+                test("Returns correct first partial slot", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    sameBox(dateAxis.getSlot(0),
+                            new Box2D(0, 0, 88, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct first full slot", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    sameBox(dateAxis.getSlot(1),
+                            new Box2D(88, 0, 322, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct last full slot", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    sameBox(dateAxis.getSlot(3),
+                            new Box2D(555, 0, 789, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct last partial slot", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    sameBox(dateAxis.getSlot(4),
+                            new Box2D(789, 0, 799, 0),
+                            TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Slots / No Rounding / Justified");
+
+                test("Returns correct first partial slot", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    sameBox(dateAxis.getSlot(0),
+                            new Box2D(14, 0, 14, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct first full slot", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    sameBox(dateAxis.getSlot(1),
+                            new Box2D(98, 0, 98, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct last full slot", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    sameBox(dateAxis.getSlot(3),
+                            new Box2D(551, 0, 551, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct last partial slot", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    sameBox(dateAxis.getSlot(4),
+                            new Box2D(786, 0, 786, 0),
+                            TOLERANCE);
                 });
 
             })();
