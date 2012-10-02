@@ -73,19 +73,19 @@
             asyncTest("animate waits all effects to finish", function() {
                 var fooFinished = false, barFinished = false;
 
-                kendo.fx.foo = {
-                    endState: function(element, options) {
+                kendo.fx.createEffect("foo", {
+                    endState: function() {
                         fooFinished = true;
-                        options.complete();
+                        this.options.complete();
                     }
-                };
+                });
 
-                kendo.fx.bar = {
-                    endState: function(element, options) {
+                kendo.fx.createEffect("bar", {
+                    endState: function() {
                         barFinished = true;
-                        options.complete();
+                        this.options.complete();
                     }
-                };
+                });
 
                 animate(span, "foo bar", function() {
                     ok(fooFinished);
@@ -97,11 +97,11 @@
             asyncTest("animations play in sequence", function() {
                 var firstAnimationFinished = false;
 
-                kendo.fx.foo = {
-                    endState: function(element, options) {
-                        options.complete();
+                kendo.fx.createEffect("foo", {
+                    endState: function() {
+                        this.options.complete();
                     }
-                };
+                });
 
                 animate(span, "foo", function() {
                     firstAnimationFinished = true;
@@ -116,12 +116,12 @@
             test("reverse method of the effect is called if reverse = true", function() {
                 var reverseWasCalled = false;
 
-                kendo.fx.foo = {
-                    endState: function(element, options) {
-                        reverseWasCalled = options.reverse;
-                        options.complete();
+                kendo.fx.createEffect("foo", {
+                    endState: function() {
+                        reverseWasCalled = this.options.reverse;
+                        this.options.complete();
                     }
-                };
+                });
 
                 animate(span, "foo", true);
                 ok(reverseWasCalled);
@@ -130,12 +130,12 @@
             test("passing options to animate", function() {
                 var reverseWasCalled = false, callbackWasCalled = false;
 
-                kendo.fx.foo = {
-                    endState: function(element, options) {
-                        reverseWasCalled = options.reverse;
-                        options.complete();
+                kendo.fx.createEffect("foo", {
+                    endState: function() {
+                        reverseWasCalled = this.options.reverse;
+                        this.options.complete();
                     }
-                };
+                });
 
                 animate(span, {
                     reverse: true,
@@ -153,12 +153,12 @@
             test("passing options to animate effects as string", function() {
                 var reverseWasCalled = false, callbackWasCalled = false;
 
-                kendo.fx.foo = {
-                    endState: function(element, options) {
-                        reverseWasCalled = options.reverse;
-                        options.complete();
+                kendo.fx.createEffect("foo", {
+                    endState: function() {
+                        reverseWasCalled = this.options.reverse;
+                        this.options.complete();
                     }
-                };
+                });
 
                 animate(span, {
                     reverse: true,
@@ -175,30 +175,30 @@
                 var cssWasKept = false, cssWasSet = false, setupWasCalled = false, teardownWasCalled = false, cssWasRestored = false;
                 span.css("overflow", "visible");
 
-                kendo.fx.foo = {
+                kendo.fx.createEffect("foo", {
                     restore: [ "overflow" ],
 
-                    startState: function(element) {
-                        if (element.data("overflow") == "visible")
+                    startState: function() {
+                        if (this.element.data("overflow") == "visible")
                             cssWasKept = true;
 
                         return { overflow: "hidden" };
                     },
 
-                    endState: function(element, options) {
-                        if (element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
+                    endState: function() {
+                        if (this.element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
                             cssWasSet = true;
 
                         setupWasCalled = true;
-                        options.complete();
+                        this.options.complete();
                     },
-                    teardown: function(element, options) {
-                        if (element.css("overflow") == "visible")
+                    teardown: function() {
+                        if (this.element.css("overflow") == "visible")
                             cssWasRestored = true;
 
                         teardownWasCalled = true;
                     }
-                };
+                });
 
                 animate(span, "foo");
                 ok(cssWasKept);
@@ -211,11 +211,11 @@
             asyncTest("callback is fired asynchronously after animate", function() {
                 var called = false;
 
-                kendo.fx.moo = {
-                    endState: function(element, options) {
+                kendo.fx.createEffect("moo", {
+                    endState: function() {
                         return { translateX: "10px" };
                     }
-                };
+                });
 
                 span.kendoAnimate({
                     effects: "moo",
@@ -237,14 +237,14 @@
                 asyncTest("animating height from 0 to 100 results in 100px high element", function() {
                     var height = -1;
 
-                    kendo.fx.foo = {
+                    kendo.fx.createEffect("foo", {
                         startState: function() {
                             return { height: 0, display: "block" };
                         },
-                        endState: function(element, options) {
+                        endState: function() {
                             return { height: 100 };
                         }
-                    };
+                    });
 
                     span.kendoAnimate({
                         effects: "foo",
@@ -284,7 +284,7 @@
 
                     var opacity = 5;
 
-                    kendo.fx.fade.restore = [];
+                    kendo.fx.Effects.fade.prototype.restore = [];
 
                     span.kendoAnimate({
                         effects: "fadeOut",

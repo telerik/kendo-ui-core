@@ -1809,7 +1809,9 @@ function pad(number, digits, end) {
 
     var fx = {
         promise: function (element, options) {
-            element.css({ display: element.data("olddisplay") || "block" }).css("display");
+            if (!element.is(":visible")) {
+                element.css({ display: element.data("olddisplay") || "block" }).css("display");
+            }
 
             if (options.hide) {
                 element.data("olddisplay", element.css("display")).hide();
