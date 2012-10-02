@@ -2943,9 +2943,9 @@
                 tables.width(width);
             }
 
-            if($.browser.msie && parseInt($.browser.version) === 8) {
-                tables.css("display", "inline-table");              
-                setTimeout(function() { 
+            if($.browser.msie && parseInt($.browser.version, 10) == 8) {
+                tables.css("display", "inline-table");
+                setTimeout(function() {
                     tables.css("display", "table");
                 }, 1);
             }
