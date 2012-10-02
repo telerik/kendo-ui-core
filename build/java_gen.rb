@@ -5,14 +5,14 @@ TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 
 MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md')
 
-JAVA_EVENT_TLD = ERB.new(%{
+TLD_EVENT_TEMPLATE = ERB.new(%{
         <attribute>
             <description><%= description %></description>
             <name><%= name %></name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>})
 
-JAVA_OPTION_TLD = ERB.new(%{
+TLD_OPTION_TEMPLATE = ERB.new(%{
 <% if (name != '') %>
         <attribute>
             <description><%= description %></description>
@@ -26,7 +26,7 @@ JAVA_OPTION_TLD = ERB.new(%{
 TLD_WIDGET_TAG_TEMPLATE = ERB.new(%{
     <tag>
         <description><%= name %></description>
-        <name><%= name.sub(/^./) { |c| c.downcase } %></name>
+        <name><%= name.camelize %></name>
         <tag-class>com.kendoui.taglib.<%= type %></tag-class>
         <body-content>JSP</body-content>
         <attribute>
@@ -40,7 +40,7 @@ TLD_WIDGET_TAG_TEMPLATE = ERB.new(%{
     </tag>
         })
 
-TLD_TAG_TEMPLATE = ERB.new(%{
+TLD_NESTED_TAG_TEMPLATE = ERB.new(%{
     <tag>
         <description><%= name %></description>
         <name><%= xml_name %></name>
@@ -84,7 +84,7 @@ public class <%= type %> extends WidgetTag /* interfaces */ /* interfaces */ {
 }
 })
 
-JAVA_TAG_TEMPLATE = ERB.new(%{
+JAVA_NESTED_TAG_TEMPLATE = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
 
 import com.kendoui.taglib.BaseTag;
@@ -98,6 +98,7 @@ public class <%= type %> extends BaseTag /* interfaces */ /* interfaces */ {
 //<< Attributes
 }
 })
+
 JS_TO_JAVA_TYPES = {
     'Number' => 'int',
     'String' => 'java.lang.String',
@@ -138,7 +139,7 @@ JAVA_OPTION_SETTER = ERB.new(%{
     }
 })
 
-JAVA_TAG_SETTER = ERB.new(%{
+JAVA_NESTED_TAG_SETTER = ERB.new(%{
     @Override
     public void set<%= name.sub(/^./) { |c| c.capitalize } %>(<%= type.sub('java.lang.', '') %> value) {
         setProperty("<%= name %>", value);
@@ -156,6 +157,12 @@ JAVA_PARENT_SETTER = ERB.new(%{
     }
 })
 
+class String
+    def camelize
+        self.sub(/^./) { |c| c.downcase }
+    end
+end
+
 class Event
     attr_reader :name, :description
 
@@ -165,7 +172,7 @@ class Event
     end
 
     def to_xml
-        JAVA_EVENT_TLD.result(binding)
+        TLD_EVENT_TEMPLATE.result(binding)
     end
 
     def to_java
@@ -191,7 +198,7 @@ class Option
     def to_xml
         return '' unless required?
 
-        JAVA_OPTION_TLD.result(binding)
+        TLD_OPTION_TEMPLATE.result(binding)
     end
 
     def to_java
@@ -221,7 +228,7 @@ class Tag
     end
 
     def xml_name
-        return @name.sub(/^./) { |c| c.downcase } unless @parent
+        return @name.camelize unless @parent
 
         return @parent.xml_name + @name
     end
@@ -229,7 +236,7 @@ class Tag
     def to_xml
         type = @type
 
-        template = @parent_type ? TLD_TAG_TEMPLATE : TLD_WIDGET_TAG_TEMPLATE
+        template = @parent_type ? TLD_NESTED_TAG_TEMPLATE : TLD_WIDGET_TAG_TEMPLATE
 
         template.result(binding)
     end
@@ -246,8 +253,8 @@ class Tag
 
         children = @children.map do |child|
             type = child.type
-            name = child.name.sub(/^./) { |c| c.downcase }
-            JAVA_TAG_SETTER.result(binding)
+            name = child.name.camelize
+            JAVA_NESTED_TAG_SETTER.result(binding)
         end.join
 
         parent + children + (@options + @events).map {|attr| attr.to_java }.join
@@ -262,7 +269,7 @@ class Tag
         interfaces = @children.map{ |c| c.name }.uniq
 
         template = JAVA_WIDGET_TEMPLATE
-        template = JAVA_TAG_TEMPLATE if @parent_type
+        template = JAVA_NESTED_TAG_TEMPLATE if @parent_type
 
         java = template.result(binding)
 
@@ -328,7 +335,7 @@ class Tag
 
                 namespace = @namespace ? @namespace : @name.downcase
 
-                child = Tag.new(option.name.sub(namespace, '').sub(/^./) { |c| c.capitalize }, child_options)
+                child = NestedTag.new(option.name.sub(namespace, '').sub(/^./) { |c| c.capitalize }, child_options)
 
                 child.parent_type = @type
                 child.parent = self
@@ -338,16 +345,6 @@ class Tag
                 @children.push(child)
 
                 child.promote_options_to_tags
-            end
-        end
-    end
-
-    def same_options?(tag)
-        return false if tag.options.length != @options.length
-
-        tag.options.all? do |target|
-            @options.any? do |source|
-                source.name == target.name && source.type == target.type
             end
         end
     end
@@ -441,6 +438,9 @@ class Tag
 
         @children.each { |child| child.remove_duplicate_options }
     end
+end
+
+class NestedTag < Tag
 end
 
 def generate
