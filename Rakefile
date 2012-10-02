@@ -246,13 +246,19 @@ namespace :build do
         zip_bundles = []
 
         BUNDLES.each do |bundle|
-            zip_filename = ('kendoui.' + bundle).sub(/\.[^\.]+$/, ".#{VERSION}\\0.zip")
-            zip_filename = "#{ARCHIVE_ROOT}/#{destination}/#{zip_filename}"
+            latest_zip_filename = "#{ARCHIVE_ROOT}/#{destination}/#{('kendoui.' + bundle).sub(/\.[^\.]+$/, ".latest\\0.zip")}"
 
-            file_copy :to => zip_filename,
+            file_copy :to => latest_zip_filename,
                       :from => "dist/bundles/#{bundle}.zip"
 
-            zip_bundles.push(zip_filename)
+            zip_bundles.push(latest_zip_filename)
+
+            versioned_zip_filename = "#{ARCHIVE_ROOT}/#{destination}/#{('kendoui.' + bundle).sub(/\.[^\.]+$/, ".#{VERSION}\\0.zip")}"
+
+            file_copy :to => versioned_zip_filename,
+                      :from => "dist/bundles/#{bundle}.zip"
+
+            zip_bundles.push(versioned_zip_filename)
         end
 
         zip_demos = "#{ARCHIVE_ROOT}/#{destination}/production.zip"
