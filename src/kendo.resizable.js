@@ -7,6 +7,7 @@
         extend = $.extend,
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",
+        CANCEL = "cancel",
         START = "start",
         RESIZE = "resize",
         RESIZEEND = "resizeend";
@@ -26,6 +27,7 @@
                 distance: 0,
                 filter: options.handle,
                 drag: proxy(that._resize, that),
+                dragcancel: proxy(that._cancel, that),
                 dragstart: proxy(that._start, that),
                 dragend: proxy(that._stop, that)
             });
@@ -36,7 +38,8 @@
         events: [
             RESIZE,
             RESIZEEND,
-            START
+            START,
+            CANCEL
         ],
 
         options: {
@@ -51,19 +54,21 @@
 
             return isFunction(size) ? size(e) : size !== undefined ? (that._initialElementPosition + size) - hintSize : size;
         },
+
         _min: function(e) {
             var that = this,
                 size = that.options.min;
 
             return isFunction(size) ? size(e) : size !== undefined ? that._initialElementPosition + size : size;
         },
+
         _start: function(e) {
             var that = this,
                 hint = that.options.hint,
                 el = $(e.currentTarget);
 
             that._initialElementPosition = el.position()[that._position];
-            that._initialMousePosition = !e.api ? e[that._positionMouse].location : that._initialElementPosition;
+            that._initialMousePosition = e[that._positionMouse].startLocation;
 
             if (hint) {
                 that.hint = isFunction(hint) ? $(hint(el)) : hint;
@@ -82,6 +87,7 @@
 
             $(document.body).css("cursor", el.css("cursor"));
         },
+
         _resize: function(e) {
             var that = this,
                 handle = $(e.currentTarget),
@@ -100,6 +106,7 @@
 
             that.trigger(RESIZE, extend(e, { position: position }));
         },
+
         _stop: function(e) {
             var that = this;
 
@@ -109,6 +116,23 @@
 
             that.trigger(RESIZEEND, extend(e, { position: that.position }));
             $(document.body).css("cursor", "");
+        },
+
+        _cancel: function(e) {
+            var that = this,
+                position = {
+                    left: 0,
+                    top: 0
+                };
+
+            if (that.hint) {
+                position[that._position] = that._initialElementPosition;
+                that.hint.animate(position, "fast", function() {
+                    that._stop(e);
+                    that.position = null;
+                    that.trigger(CANCEL);
+                });
+            }
         },
 
         destroy: function() {
@@ -122,9 +146,14 @@
         },
 
         press: function(target) {
+            if (!target) {
+                return;
+            }
+
             var position = target.position();
-            this.targetPosition = position;
             this.userEvents.press(position.left, position.top, target[0]);
+            this.targetPosition = position;
+            this.target = target;
         },
 
         move: function(delta) {

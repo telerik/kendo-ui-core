@@ -107,7 +107,7 @@
                 })
                 .on(MOUSEENTER + NS, splitbarSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on(MOUSELEAVE + NS, splitbarSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                .on("mousedown" + NS, splitbarSelector, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
+                .on("mousedown" + NS, splitbarSelector, function() { that.resizing.end(); that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
                 .on("mouseup" + NS, splitbarSelector, function() { that._panes().children(".k-splitter-overlay").remove(); })
                 .on(MOUSEENTER + NS, expandCollapseSelector, function() { $(this).addClass("k-state-hover"); })
                 .on(MOUSELEAVE + NS, expandCollapseSelector, function() { $(this).removeClass('k-state-hover'); })
@@ -156,6 +156,15 @@
                 delta = 10;
             } else if (key === keys.LEFT || key === keys.UP) {
                 delta = -10;
+            }
+
+            if (key === keys.ENTER) {
+                that.resizing.end();
+                that.resizing.press($(e.currentTarget));
+            }
+
+            if (key === keys.ESC) {
+                that.resizing.press($(e.currentTarget));
             }
 
             if (delta) {
@@ -474,11 +483,16 @@
             max: proxy(that._max, that),
             min: proxy(that._min, that),
             invalidClass:"k-restricted-size-" + orientation,
-            resizeend: proxy(that._stop, that)
+            resizeend: proxy(that._stop, that),
+            cancel: proxy(that._cancel, that)
         });
     }
 
     PaneResizing.prototype = {
+        cancel: function() {
+            this._resizable.cancel();
+        },
+
         press: function(target) {
             this._resizable.press(target);
         },
@@ -494,6 +508,11 @@
         destroy: function() {
             this._resizable.destroy();
         },
+
+        _cancel: function() {
+            this.press(this._resizable.target);
+        },
+
         _createHint: function(handle) {
             var that = this;
             return $("<div class='k-ghost-splitbar k-ghost-splitbar-" + that.orientation + " k-state-default' />")
