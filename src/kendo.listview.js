@@ -288,7 +288,7 @@
                 } else if (elementOffset < containerScrollAmount) {
                     $(container)[SCROLL + direction](elementOffset);
                 }
-            }
+            };
 
             scrollDirectionFunc("Top", "Height");
             scrollDirectionFunc("Left", "Width");
@@ -354,7 +354,7 @@
                             that.current(element.find(FOCUSSELECTOR).last());
                             preventDefault(e);
                         } else if (keys.ENTER === key) {
-                            if (editItem.length != 0 && canHandle) {
+                            if (editItem.length !== 0 && canHandle) {
                                 idx = element.find(FOCUSSELECTOR).index(editItem);
                                 document.activeElement.blur();
                                 that.save();
@@ -363,7 +363,7 @@
                                     that.current(that.element.find(FOCUSSELECTOR).eq(idx));
                                 };
                                 that.one("dataBound", focusAgain);
-                            } else if (that.options.editTemplate != "") {
+                            } else if (that.options.editTemplate !== "") {
                                 that._current = null;
                                 that.edit(current);
                             }
