@@ -177,14 +177,14 @@
 
                 kendo.fx.foo = {
                     restore: [ "overflow" ],
-                    css: {
-                        overflow: function (element) {
-                            if (element.data("overflow") == "visible")
-                                cssWasKept = true;
 
-                            return "hidden";
-                        }
+                    css: function(element) {
+                        if (element.data("overflow") == "visible")
+                            cssWasKept = true;
+
+                        return { overflow: "hidden" };
                     },
+
                     setup: function(element, options) {
                         if (element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
                             cssWasSet = true;
@@ -238,7 +238,9 @@
                     var height = -1;
 
                     kendo.fx.foo = {
-                        css: { height: 0, display: "block" },
+                        css: function() {
+                            return { height: 0, display: "block" };
+                        },
                         setup: function(element, options) {
                             return { height: 100 };
                         }

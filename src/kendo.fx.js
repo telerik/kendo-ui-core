@@ -285,26 +285,8 @@
         return properties;
     }
 
-    function evaluateCSS(element, properties, options) {
-        var key, value;
-
-        for (key in properties) {
-            if ($.isFunction(properties[key])) {
-                value = properties[key](element, options);
-                if (value !== undefined) {
-                    properties[key] = value;
-                } else {
-                    delete properties[key];
-                }
-            }
-
-        }
-
-        return properties;
-    }
-
     function normalizeCSS(element, properties, options) {
-        var transformation = [], cssValues = {}, lowerKey, key, value, exitValue, isTransformed;
+        var transformation = [], cssValues = {}, lowerKey, key, value, isTransformed;
 
         for (key in properties) {
             lowerKey = key.toLowerCase();
@@ -313,23 +295,12 @@
             if (!support.hasHW3D && isTransformed && transform2d.indexOf(lowerKey) == -1) {
                 delete properties[key];
             } else {
-                exitValue = false;
+                value = properties[key];
 
-                if ($.isFunction(properties[key])) {
-                    value = properties[key](element, options);
-                    if (value !== undefined) {
-                        exitValue = value;
-                    }
+                if (isTransformed) {
+                    transformation.push(key + "(" + value + ")");
                 } else {
-                    exitValue = properties[key];
-                }
-
-                if (exitValue !== false) {
-                    if (isTransformed) {
-                        transformation.push(key + "(" + exitValue + ")");
-                    } else {
-                        cssValues[key] = exitValue;
-                    }
+                    cssValues[key] = value;
                 }
             }
         }
@@ -458,7 +429,7 @@
         element.data("animating", true);
 
         var restore = [], css = {}, target,
-            methods = { setup: [], teardown: [] }, properties = {},
+            methods = { css: [], setup: [], teardown: [] }, properties = {},
 
             // create a promise for each effect
             promise = $.Deferred(function(deferred) {
@@ -469,8 +440,7 @@
                         var effect = kendo.fx[effectName];
 
                         if (effect) {
-                            var dir = kendo.directions[settings.direction],
-                                start = effect.css;
+                            var dir = kendo.directions[settings.direction];
 
                             if (settings.direction && dir) {
                                 settings.direction = (options.reverse ? dir.reverse : settings.direction);
@@ -487,37 +457,32 @@
                             if (effect.restore) {
                                 $.merge(restore, effect.restore);
                             }
-
-                            if (start) {
-                                if ($.isFunction(start)) {
-                                    extend(css, start(element, opts));
-                                } else {
-                                    extend(css, start);
-                                }
-                            }
                         }
                     });
 
                     if (methods.setup.length) {
-                        each (restore, function(idx, value) {
+                        each(restore, function(idx, value) {
                             if (!element.data(value)) {
                                 element.data(value, element.css(value));
                             }
                         });
 
+                        each(methods.css, function() {
+                            extend(css, this(element, opts));
+                        });
+
                         if (options.show) {
-                            css = extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
+                            extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
                         }
 
                         if (transforms && !options.reset) {
-                            css = evaluateCSS(element, css, opts);
-
                             target = element.data("targetTransform");
 
                             if (target) {
-                                css = extend(target, css);
+                                extend(target, css);
                             }
                         }
+
                         css = normalizeCSS(element, css, opts);
 
                         if (transforms && !transitions) {
@@ -742,13 +707,15 @@
 
         zoom: {
             css: function(element, options) {
-                var scale = animationProperty(element, "scale"),
+                var scale = hasZoom ? element[0].style.zoom : animationProperty(element, "scale"),
                     zoomIn = options.effects.zoom.direction == "in",
-                    scaleValue =  zoomIn ? (scale != 1 ? scale : "0.01") : 1,
-                    zoom = element[0].style.zoom,
-                    zoomValue = zoomIn && hasZoom ? (zoom ? zoom : "0.01") : undefined;
+                    value = zoomIn ? (scale != 1 ? scale : "0.01") : 1;
 
-                return { scale: scaleValue, zoom: zoomValue };
+                if (hasZoom) {
+                    return { zoom: value };
+                } else {
+                    return { scale: value };
+                }
             },
 
             setup: function(element, options) {
@@ -821,17 +788,19 @@
                 return extend(extender, options.properties);
             }
         },
+
         slideIn: {
-            css: {
-                translatex: function (element, options) {
-                    var init = initDirection(element, options.effects.slideIn.direction, options.reverse);
-                    return init.direction.transition == "translatex" ? (!options.reverse ? init.offset : 0) + PX : undefined;
-                },
-                translatey: function (element, options) {
-                    var init = initDirection(element, options.effects.slideIn.direction, options.reverse);
-                    return init.direction.transition == "translatey" ? (!options.reverse ? init.offset : 0) + PX : undefined;
+            css: function(element, options) {
+                var init = initDirection(element, options.effects.slideIn.direction, options.reverse),
+                    value = (!options.reverse ? init.offset : 0) + PX;
+
+                if (init.direction.transition == "translatex") {
+                    return { translatex: value };
+                } else {
+                    return { translatey: value };
                 }
             },
+
             setup: function(element, options) {
                 var reverse = options.reverse,
                     init = initDirection(element, options.effects.slideIn.direction, reverse),
@@ -850,9 +819,14 @@
                 return extend(extender, options.properties);
             }
         },
+
         expand: {
-            css: { overflow: HIDDEN },
+            css: function() {
+                return { overflow: HIDDEN };
+            },
+
             restore: [ OVERFLOW ],
+
             setup: function(element, options) {
                 var reverse = options.reverse,
                     direction = options.effects.expand.direction,
@@ -883,14 +857,15 @@
             }
         },
         flip: {
-            css: {
-                rotatex: function (element, options) {
-                    return options.effects.flip.direction == "vertical" ? options.reverse ? "180deg" : "0deg" : undefined;
-                },
-                rotatey: function (element, options) {
-                    return options.effects.flip.direction == "horizontal" ? options.reverse ? "180deg" : "0deg" : undefined;
+            css: function (element, options) {
+                var value = options.reverse ? "180deg" : "0deg";
+                if (options.effects.flip.direction == "vertical") {
+                    return { rotatex: value };
+                } else {
+                    return { rotatey: value };
                 }
             },
+
             setup: function(element, options) {
                 var rotation = options.effects.flip.direction == "horizontal" ? "rotatey" : "rotatex",
                     reverse = options.reverse, parent = element.parent(),
@@ -929,10 +904,8 @@
         },
 
         transfer: {
-            css: {
-                scale: function(element, options) {
-                    return 1;
-                }
+            css: function() {
+                return { scale: 1 };
             },
 
             setup: function(element, options) {
