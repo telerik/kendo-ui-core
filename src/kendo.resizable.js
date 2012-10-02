@@ -129,7 +129,7 @@
                 position[that._position] = that._initialElementPosition;
                 that.hint.animate(position, "fast", function() {
                     that._stop(e);
-                    that.position = null;
+                    that.position = undefined;
                     that.trigger(CANCEL);
                 });
             }
@@ -159,16 +159,21 @@
         move: function(delta) {
             var that = this,
                 orientation = that._position,
-                position = that.targetPosition;
+                position = that.targetPosition,
+                current = that.position;
 
-            position[orientation] = (that.position || position[orientation]) + delta;
+            if (current === undefined) {
+                current = position[orientation];
+            }
+
+            position[orientation] = current + delta;
 
             that.userEvents.move(position.left, position.top);
         },
 
         end: function() {
             this.userEvents.end();
-            this.position = null;
+            this.position = undefined;
         }
     });
 

@@ -94,7 +94,8 @@
         _attachEvents: function() {
             var that = this,
                 orientation = that.options.orientation,
-                splitbarSelector = ".k-splitbar-draggable-" + orientation,
+                splitbarSelector = ".k-splitbar-" + orientation,
+                splitbarDraggableSelector = ".k-splitbar-draggable-" + orientation,
                 expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)";
 
             that.element
@@ -105,15 +106,15 @@
                 .on("blur" + NS, splitbarSelector, function(e) {
                     that.resizing.end();
                 })
-                .on(MOUSEENTER + NS, splitbarSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
-                .on(MOUSELEAVE + NS, splitbarSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                .on("mousedown" + NS, splitbarSelector, function() { that.resizing.end(); that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
-                .on("mouseup" + NS, splitbarSelector, function() { that._panes().children(".k-splitter-overlay").remove(); })
+                .on(MOUSEENTER + NS, splitbarDraggableSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
+                .on(MOUSELEAVE + NS, splitbarDraggableSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
+                .on("mousedown" + NS, splitbarDraggableSelector, function() { that.resizing.end(); that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
+                .on("mouseup" + NS, splitbarDraggableSelector, function() { that._panes().children(".k-splitter-overlay").remove(); })
                 .on(MOUSEENTER + NS, expandCollapseSelector, function() { $(this).addClass("k-state-hover"); })
                 .on(MOUSELEAVE + NS, expandCollapseSelector, function() { $(this).removeClass('k-state-hover'); })
                 .on(CLICK + NS, ".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", that._arrowClick(COLLAPSE))
                 .on(CLICK + NS, ".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", that._arrowClick(EXPAND))
-                .on("dblclick" + NS, ".k-splitbar", proxy(that._dbclick, that))
+                .on("dblclick" + NS, ".k-splitbar", proxy(that._togglePane, that))
                 .parent().closest(".k-splitter").each(function() {
                     var parentSplitter = $(this),
                         splitter = parentSplitter.data("kendoSplitter");
@@ -150,6 +151,7 @@
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
+                resizing = that.resizing,
                 delta;
 
             if (key === keys.RIGHT || key === keys.DOWN) {
@@ -159,17 +161,23 @@
             }
 
             if (key === keys.ENTER) {
-                that.resizing.end();
-                that.resizing.press($(e.currentTarget));
+                resizing.end();
+                resizing.press($(e.currentTarget));
+                e.preventDefault();
             }
 
-            if (key === keys.ESC) {
-                that.resizing.press($(e.currentTarget));
+            if (key === keys.SPACEBAR) {
+                resizing.end();
+
+                that._togglePane(e);
+                resizing.press($(e.currentTarget));
+
+                e.preventDefault();
             }
 
             if (delta) {
+                resizing.move(delta);
                 e.preventDefault();
-                that.resizing.move(delta);
             }
         },
 
@@ -231,7 +239,8 @@
                 this[type](pane[0]);
             }
         },
-        _dbclick: function(e) {
+
+        _togglePane: function(e) {
             var that = this,
                 target = $(e.target),
                 arrow;
@@ -489,10 +498,6 @@
     }
 
     PaneResizing.prototype = {
-        cancel: function() {
-            this._resizable.cancel();
-        },
-
         press: function(target) {
             this._resizable.press(target);
         },
