@@ -64,6 +64,14 @@ public class PageableTag extends BaseTag /* interfaces */implements Messages/* i
         setProperty("input", value);
     }
 
+    public boolean getPageSizes() {
+        return (boolean)getProperty("pageSizes");
+    }
+
+    public void setPageSizes(boolean value) {
+        setProperty("pageSizes", value);
+    }
+
     public boolean getRefresh() {
         return (boolean)getProperty("refresh");
     }

@@ -101,7 +101,9 @@ public class <%= type %> extends BaseTag /* interfaces */ /* interfaces */ {
 
 JS_TO_JAVA_TYPES = {
     'Number' => 'int',
+    'number' => 'int',
     'String' => 'java.lang.String',
+    'string' => 'java.lang.String',
     'Boolean' => 'boolean',
     'Object' => 'Object',
     'Array' => 'Array',
@@ -161,6 +163,10 @@ class String
     def camelize
         self.sub(/^./) { |c| c.downcase }
     end
+
+    def strip_namespace
+        self.sub(/kendo.*ui\./, '').sub('kendo.data.', '')
+    end
 end
 
 class Event
@@ -192,7 +198,7 @@ class Option
     end
 
     def required?
-        @type != 'Object' && @type != 'Array' && @type != 'java.lang.Date' && @type != nil
+        @type != 'Object' && @type != 'Array' && @type != 'java.lang.Date' && @type
     end
 
     def to_xml
@@ -218,7 +224,7 @@ class Tag
     attr_reader :options, :name, :events, :children
 
     def initialize(options)
-        @name = options[:name].sub(/kendo.*ui\./, '').sub('kendo.data.', '')
+        @name = options[:name].strip_namespace
         @options = []
         @events = []
         @children = []
@@ -282,7 +288,7 @@ class Tag
     end
 
     def generated_interfaces
-        @children.map{ |c| c.name }.uniq
+        @children.map{ |c| c.name }
     end
 
     def implement_interfaces(code, interfaces)
@@ -411,7 +417,7 @@ class Tag
                     description = find_child_with_type.call(paragraph, :text)
 
                     option = Option.new :name => name,
-                        :type => t,
+                        :type => t.strip.strip_namespace,
                         :description => description.value
 
                     tag.options.push(option)

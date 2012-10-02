@@ -99,6 +99,14 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements Animat
         setProperty("index", value);
     }
 
+    public String getOptionLabel() {
+        return (String)getProperty("optionLabel");
+    }
+
+    public void setOptionLabel(String value) {
+        setProperty("optionLabel", value);
+    }
+
     public String getTemplate() {
         return (String)getProperty("template");
     }

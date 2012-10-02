@@ -83,6 +83,14 @@ public class PagerTag extends WidgetTag /* interfaces */implements Messages, Dat
         setProperty("numeric", value);
     }
 
+    public boolean getPageSizes() {
+        return (boolean)getProperty("pageSizes");
+    }
+
+    public void setPageSizes(boolean value) {
+        setProperty("pageSizes", value);
+    }
+
     public boolean getPreviousNext() {
         return (boolean)getProperty("previousNext");
     }

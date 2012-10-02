@@ -68,6 +68,14 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
         setProperty("navigatable", value);
     }
 
+    public boolean getScrollable() {
+        return (boolean)getProperty("scrollable");
+    }
+
+    public void setScrollable(boolean value) {
+        setProperty("scrollable", value);
+    }
+
     public String getSelectable() {
         return (String)getProperty("selectable");
     }

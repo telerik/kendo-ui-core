@@ -64,6 +64,14 @@ public class LabelsTag extends BaseTag /* interfaces */implements Border/* inter
         setProperty("margin", value);
     }
 
+    public int getPadding() {
+        return (int)getProperty("padding");
+    }
+
+    public void setPadding(int value) {
+        setProperty("padding", value);
+    }
+
     public String getPosition() {
         return (String)getProperty("position");
     }

@@ -48,6 +48,22 @@ public class TitleTag extends BaseTag /* interfaces */implements Border/* interf
         setProperty("font", value);
     }
 
+    public int getMargin() {
+        return (int)getProperty("margin");
+    }
+
+    public void setMargin(int value) {
+        setProperty("margin", value);
+    }
+
+    public int getPadding() {
+        return (int)getProperty("padding");
+    }
+
+    public void setPadding(int value) {
+        setProperty("padding", value);
+    }
+
     public String getPosition() {
         return (String)getProperty("position");
     }

@@ -19,6 +19,14 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         return EVAL_PAGE;
     }
 
+    public boolean getConfirmation() {
+        return (boolean)getProperty("confirmation");
+    }
+
+    public void setConfirmation(boolean value) {
+        setProperty("confirmation", value);
+    }
+
     public boolean getDestroy() {
         return (boolean)getProperty("destroy");
     }

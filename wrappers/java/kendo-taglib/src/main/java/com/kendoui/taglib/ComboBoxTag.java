@@ -139,6 +139,14 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements Animation,
         setProperty("suggest", value);
     }
 
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
+    }
+
     public String getText() {
         return (String)getProperty("text");
     }

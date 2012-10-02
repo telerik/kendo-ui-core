@@ -267,6 +267,14 @@ public class SeriesTag extends BaseTag /* interfaces */implements Labels, Border
         setProperty("size", value);
     }
 
+    public int getStartAngle() {
+        return (int)getProperty("startAngle");
+    }
+
+    public void setStartAngle(int value) {
+        setProperty("startAngle", value);
+    }
+
     public String getDashType() {
         return (String)getProperty("dashType");
     }

@@ -37,6 +37,14 @@ public class LegendTag extends BaseTag /* interfaces */implements Border, Labels
         setProperty("background", value);
     }
 
+    public int getMargin() {
+        return (int)getProperty("margin");
+    }
+
+    public void setMargin(int value) {
+        setProperty("margin", value);
+    }
+
     public int getOffsetX() {
         return (int)getProperty("offsetX");
     }
@@ -51,6 +59,14 @@ public class LegendTag extends BaseTag /* interfaces */implements Border, Labels
 
     public void setOffsetY(int value) {
         setProperty("offsetY", value);
+    }
+
+    public int getPadding() {
+        return (int)getProperty("padding");
+    }
+
+    public void setPadding(int value) {
+        setProperty("padding", value);
     }
 
     public String getPosition() {

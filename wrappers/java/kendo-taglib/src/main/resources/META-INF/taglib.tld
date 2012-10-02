@@ -364,6 +364,13 @@ and is about to render it.</description>
         </attribute>
 
         <attribute>
+            <description>Template to be used for rendering the items in the list.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Define the text of the widget, when the autoBind is set to false.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
@@ -627,6 +634,13 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Define the text of the default empty item. If the value is an object, then the widget will use it directly.</description>
+            <name>optionLabel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Template to be used for rendering the items in the list.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
@@ -746,6 +760,13 @@ The following settings are available for the</description>
         <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
             <name>navigatable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/disable grid scrolling. Possible values:</description>
+            <name>scrollable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -1127,6 +1148,13 @@ its sub menus to the left.</description>
         <attribute>
             <description>Defines if numeric portion of the pager will be shown.</description>
             <name>numeric</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Displays a list with predefined page sizes. An array of values to be displayed can be provided. If pageSize option is provided for DataSource then this pageSize value will be automaticaly selected in created selectbox.</description>
+            <name>pageSizes</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -2091,6 +2119,20 @@ between subsequent categories. Available options:</description>
         </attribute>
 
         <attribute>
+            <description>The margin of the title.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the title.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
             <description>The position of the title.</description>
             <name>position</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2176,6 +2218,13 @@ between subsequent categories. Available options:</description>
         </attribute>
 
         <attribute>
+            <description>The margin of the legend.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
             <description>The X offset from its position.  The offset is relative to the current position of the legend.
 For instance, a value of 20 will move the legend 20 pixels to the right of it's initial position.  A negative value will move the legend
 to the left of the current position.</description>
@@ -2189,6 +2238,13 @@ to the left of the current position.</description>
 For instance, a value of 20 will move the legend 20 pixels down from it's initial position.  A negative value will move the legend
 upwards from the current position.</description>
             <name>offsetY</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the legend.</description>
+            <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
         </attribute>
@@ -2434,6 +2490,13 @@ The function return value is displayed instead of the individual points.</descri
         <attribute>
             <description>The size of the series.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The start angle of the first donut segment.</description>
+            <name>startAngle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
         </attribute>
@@ -2748,12 +2811,26 @@ values increase from right to left and from top to bottom.</description>
         </attribute>
 
         <attribute>
+            <description>The margin of the labels.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
             <description>Mirrors the axis labels and ticks.
 If the labels are normally on the left side of the axis,
 mirroring the axis will render them to the right.</description>
             <name>mirror</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
         </attribute>
 
         <attribute>
@@ -3975,6 +4052,13 @@ mirroring the axis will render them to the right.</description>
         </attribute>
 
         <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
             <description>The rotation angle of the labels.</description>
             <name>rotation</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4197,6 +4281,20 @@ hex and rgb.</description>
             <name>font</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the title.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the title.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
         </attribute>
 
         <attribute>
@@ -4499,6 +4597,13 @@ the minimum and maximum values.</description>
 
 
         <attribute>
+            <description>Defines the text that will be used in confirmation box when delete an item.</description>
+            <name>confirmation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether item should be deleted when click on delete button.</description>
             <name>destroy</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4579,6 +4684,13 @@ the minimum and maximum values.</description>
         <attribute>
             <description>Defines if an input element which allows the user to navigate to given page will be displayed.</description>
             <name>input</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Displayes a list with predefined page sizes. An array of values to be displayed can be provided.</description>
+            <name>pageSizes</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -5055,6 +5167,13 @@ Any valid CSS color string will work here, including hex and rgb.</description>
         <attribute>
             <description>The margin of the labels.</description>
             <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
         </attribute>
@@ -5562,6 +5681,13 @@ Any valid CSS color string will work here, including hex and rgb.</description>
         <attribute>
             <description>The margin of the labels.</description>
             <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
         </attribute>
