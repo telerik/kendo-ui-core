@@ -30,7 +30,6 @@
                 dragend: proxy(that._stop, that)
             });
 
-            //new
             that.userEvents = that.draggable.userEvents;
         },
 
@@ -63,8 +62,8 @@
                 hint = that.options.hint,
                 el = $(e.currentTarget);
 
-            that._initialMousePosition = e[that._positionMouse].location;
             that._initialElementPosition = el.position()[that._position];
+            that._initialMousePosition = !e.api ? e[that._positionMouse].location : that._initialElementPosition;
 
             if (hint) {
                 that.hint = isFunction(hint) ? $(hint(el)) : hint;
@@ -90,7 +89,6 @@
                 minPosition = that._minPosition,
                 currentPosition = that._initialElementPosition + (e[that._positionMouse].location - that._initialMousePosition),
                 position;
-
 
             position = minPosition !== undefined ? Math.max(minPosition, currentPosition) : currentPosition;
             that.position = position =  maxPosition !== undefined ? Math.min(maxPosition, position) : position;
@@ -125,24 +123,23 @@
 
         press: function(target) {
             var position = target.position();
+            this.targetPosition = position;
             this.userEvents.press(position.left, position.top, target[0]);
-            this.pressed = target;
         },
 
         move: function(delta) {
-            var position = this.position || this.pressed.position()[this._position],
-            mousePos = {
-                x: 0,
-                y: 0
-            };
+            var that = this,
+                orientation = that._position,
+                position = that.targetPosition;
 
-            mousePos[this._positionMouse] = position + delta;
+            position[orientation] = (that.position || position[orientation]) + delta;
 
-            this.userEvents.move(mousePos.x, mousePos.y);
+            that.userEvents.move(position.left, position.top);
         },
 
         end: function() {
             this.userEvents.end();
+            this.position = null;
         }
     });
 
