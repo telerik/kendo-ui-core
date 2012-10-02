@@ -188,11 +188,14 @@ class Event
     end
 end
 
+types = {};
+
 class Option
     attr_reader :name, :type, :description
 
     def initialize(options)
         @name = options[:name].strip
+        types[options[:type]] = true
         @type = JS_TO_JAVA_TYPES[options[:type]]
         @description = options[:description].strip
     end
@@ -521,6 +524,8 @@ def generate
     end
 
     tags.each { |tag| tag.sync_java }
+
+    p types.keys
 end
 
 
