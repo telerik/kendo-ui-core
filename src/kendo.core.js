@@ -1883,9 +1883,9 @@ function pad(number, digits, end) {
     }
 
     function animate(element, options, duration, reverse, complete) {
-        element.each(function (idx, el) { // fire separate queues on every element to separate the callback elements
+        element.each(function(idx, el) { // fire separate queues on every element to separate the callback elements
             el = $(el);
-            el.queue(function () {
+            el.queue(function() {
                 fx.promise(el, prepareAnimationOptions(options, duration, reverse, complete));
             });
         });

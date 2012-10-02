@@ -405,7 +405,7 @@
     }
 
     kendo.fx.promise = function(element, options) {
-        var promises = [], effects;
+        var effects;
 
         effects = kendo.parseEffects(options.effects);
         options.effects = effects;
@@ -496,10 +496,8 @@
                 deferred.resolve();
             }).promise();
 
-        promises.push(promise);
-
         //wait for all effects to complete
-        $.when.apply(null, promises).then(function() {
+        $.when(promise).then(function() {
             element
                 .removeData("animating")
                 .dequeue(); // call next animation from the queue
