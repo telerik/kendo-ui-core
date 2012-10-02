@@ -247,34 +247,6 @@
         return acc;
     }
 
-    function stopTransition(element, transition) {
-        if (element.data(ABORT_ID)) {
-            clearTimeout(element.data(ABORT_ID));
-            element.removeData(ABORT_ID);
-        }
-
-        element.css(TRANSITION, "").css(TRANSITION);
-        element.dequeue();
-        transition.complete.call(element);
-    }
-
-    function activateTask(currentTransition) {
-        var element = currentTransition.object, delay = 0;
-
-        if (!currentTransition) {
-            return;
-        }
-
-        element.css(currentTransition.setup).css(TRANSITION);
-        element.css(currentTransition.CSS).css(TRANSFORM);
-
-        if (browser.mozilla) {
-            element.one(transitions.event, function () { stopTransition(element, currentTransition); } );
-            delay = 50;
-        }
-        element.data(ABORT_ID, setTimeout(stopTransition, currentTransition.duration + delay, element, currentTransition));
-    }
-
     function strip3DTransforms(properties) {
         for (var key in properties) {
             if (transformProps.indexOf(key) != -1 && transform2d.indexOf(key) == -1) {
@@ -312,10 +284,24 @@
         return cssValues;
     }
 
+    function stopTransition(element, callback) {
+        if (element.data(ABORT_ID)) {
+            clearTimeout(element.data(ABORT_ID));
+            element.removeData(ABORT_ID);
+        }
+
+        element.css(TRANSITION, "").css(TRANSITION);
+        element.dequeue();
+        callback.call(element);
+    }
+
     if (transitions) {
 
         extend(kendo.fx, {
             transition: function(element, properties, options) {
+                var css,
+                    delay = 0,
+                    oldKeys = element.data("keys") || [];
 
                 options = extend({
                         duration: 200,
@@ -328,22 +314,20 @@
 
                 options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
 
-                var css = normalizeCSS(element, properties, options),
-                    currentTask = {
-                        keys: keys(css),
-                        CSS: css,
-                        object: element,
-                        setup: {},
-                        duration: options.duration,
-                        complete: options.complete
-                    };
-                currentTask.setup[TRANSITION] = options.exclusive + " " + options.duration + "ms " + options.ease;
+                css = normalizeCSS(element, properties, options);
 
-                var oldKeys = element.data("keys") || [];
-                $.merge(oldKeys, currentTask.keys);
+                $.merge(oldKeys, keys(css));
                 element.data("keys", $.unique(oldKeys));
 
-                activateTask(currentTask);
+                element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease).css(TRANSITION);
+                element.css(css).css(TRANSFORM);
+
+                if (browser.mozilla) {
+                    element.one(transitions.event, function () { stopTransition(element, options.complete); } );
+                    delay = 50;
+                }
+
+                element.data(ABORT_ID, setTimeout(stopTransition, options.duration + delay, element, options.complete));
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
