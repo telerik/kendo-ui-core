@@ -251,14 +251,14 @@
 
             if (animationOptions === false) {
                 animationOptions = {
-                    expand: { show: true, effects: {} },
+                    expand: { effects: {} },
                     collapse: { hide: true, effects: {} }
                 };
             } else if (!animationOptions.collapse || !("effects" in animationOptions.collapse)) {
                 animationOptions.collapse = extend({ reverse: true }, animationOptions.expand);
             }
 
-            extend(animationOptions.collapse, { show: false, hide: true });
+            extend(animationOptions.collapse, { hide: true });
 
             options.animation = animationOptions;
         },
@@ -489,8 +489,7 @@
             animation: {
                 expand: {
                     effects: "expand:vertical",
-                    duration: 200,
-                    show: true
+                    duration: 200
                 }, collapse: {
                     duration: 100
                 }

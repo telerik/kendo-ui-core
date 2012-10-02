@@ -234,7 +234,7 @@
             delete options.reverse;
         }
 
-        options.effects = $.extend(kendo.parseEffects(effects, mirror), {show: true});
+        options.effects = kendo.parseEffects(effects, mirror);
 
         return options;
     }
@@ -471,9 +471,7 @@
                             extend(css, this(element, opts));
                         });
 
-                        if (options.show) {
-                            extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
-                        }
+                        extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
 
                         if (transforms && !options.reset) {
                             target = element.data("targetTransform");
@@ -502,7 +500,7 @@
 
                         return;
                     }
-                } else if (options.show) {
+                } else {
                     element.css({ display: element.data("olddisplay") || "block" }).css("display");
                     options.init();
                 }

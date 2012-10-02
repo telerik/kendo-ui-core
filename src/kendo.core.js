@@ -1809,9 +1809,7 @@ function pad(number, digits, end) {
 
     var fx = {
         promise: function (element, options) {
-            if (options.show) {
-                element.css({ display: element.data("olddisplay") || "block" }).css("display");
-            }
+            element.css({ display: element.data("olddisplay") || "block" }).css("display");
 
             if (options.hide) {
                 element.data("olddisplay", element.css("display")).hide();
@@ -1879,8 +1877,7 @@ function pad(number, digits, end) {
             reverse: false,
             init: noop,
             teardown: noop,
-            hide: false,
-            show: false
+            hide: false
         }, options, { completeCallback: options.complete, complete: noop }); // Move external complete callback, so deferred.resolve can be always executed.
 
     }

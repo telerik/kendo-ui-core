@@ -251,7 +251,7 @@
             var options = this.options;
 
             if (options.animation === false) {
-                options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+                options.animation = { open: { effects: {} }, close: { hide: true, effects: {} } };
             }
         },
 
@@ -278,8 +278,7 @@
             animation: {
                 open: {
                     effects: { zoom: { direction: "in" }, fade: { direction: "in" } },
-                    duration: 350,
-                    show: true
+                    duration: 350
                 },
                 close: {
                     effects: { zoom: { direction: "out", properties: { scale: 0.7 } }, fade: { direction: "out" } },
@@ -465,8 +464,7 @@
                     if (showOptions.duration) {
                         overlay.kendoStop().kendoAnimate({
                             effects: { fade: { direction: "in", properties: { opacity: 0.5 } } },
-                            duration: showOptions.duration,
-                            show: true
+                            duration: showOptions.duration
                         });
                     } else {
                         overlay.css("opacity", 0.5).show();
