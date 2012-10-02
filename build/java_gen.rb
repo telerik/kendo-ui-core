@@ -159,6 +159,35 @@ JAVA_PARENT_SETTER = ERB.new(%{
     }
 })
 
+JAVA_ARRAY_PARENT_SETTER = ERB.new(%{
+    private List<<%= child.type %>> <%= name.camelize %> = new ArrayList<<%= child.type %>>();
+
+    @Override
+    public int doEndTag() throws JspException {
+        <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
+
+        parent.set<%= name %>(this);
+
+        return EVAL_PAGE;
+    }
+})
+JAVA_ARRAY_ADD_TO_PARENT = ERB.new(%{
+    public int doEndTag() throws JspException {
+        <%= parent.type %> parent = (<%= name %>)findParentWithClass(<%= parent.type %>.class);
+
+        parent.add<%= name %>(this);
+
+        return EVAL_PAGE;
+    }
+})
+
+JAVA_ARRAY_ADD_CHILD = ERB.new(%{
+    @Override
+    public void add<%= child.name %>(<%= child.type.sub('java.lang.', '') %> value) {
+        <%= name.camelize %>.add(value);
+    }
+})
+
 class String
     def camelize
         self.sub(/^./) { |c| c.downcase }
@@ -166,6 +195,10 @@ class String
 
     def strip_namespace
         self.sub(/kendo.*ui\./, '').sub('kendo.data.', '')
+    end
+
+    def singular
+        self.sub(/s$/, '')
     end
 end
 
@@ -188,14 +221,12 @@ class Event
     end
 end
 
-types = {};
-
 class Option
     attr_reader :name, :type, :description
 
+
     def initialize(options)
         @name = options[:name].strip
-        types[options[:type]] = true
         @type = JS_TO_JAVA_TYPES[options[:type]]
         @description = options[:description].strip
     end
@@ -306,7 +337,6 @@ class Tag
                  "//>> Attributes\n#{to_java}\n//<< Attributes"
     end
 
-
     def sync_java
         java = java_source_code
 
@@ -362,9 +392,15 @@ class Tag
                     @options.delete(o)
                 end
 
-                child = NestedTag.new :name => option.name,
-                                      :parent => self,
-                                      :options => child_options
+                if option.type == 'Array'
+                    child =  NestedTagArray.new :name => option.name,
+                              :parent => self,
+                              :options => child_options
+                else
+                    child =  NestedTag.new :name => option.name,
+                              :parent => self,
+                              :options => child_options
+                end
 
                 @children.push(child)
 
@@ -502,6 +538,42 @@ class NestedTag < Tag
     end
 end
 
+class NestedTagArray < NestedTag
+    attr_reader :child
+
+    def initialize(options)
+        super
+
+        @child = NestedTagArrayItem.new :name => @name.singular,
+              :parent => self,
+              :options => @options
+
+        @children.push(@child)
+
+        @options = []
+    end
+
+    def parent_setter
+        JAVA_ARRAY_PARENT_SETTER.result(binding)
+    end
+
+    def child_setters
+        JAVA_ARRAY_ADD_CHILD.result(binding)
+    end
+end
+
+class NestedTagArrayItem < NestedTag
+    attr_reader :parent
+
+    def initialize(options)
+        super
+    end
+
+    def parent_setter
+        JAVA_ARRAY_ADD_TO_PARENT.result(binding)
+    end
+end
+
 def generate
     tags = MARKDOWN.map{ |md| Tag.parse(md) }.sort{ |a, b| a.name <=> b.name }
 
@@ -524,8 +596,6 @@ def generate
     end
 
     tags.each { |tag| tag.sync_java }
-
-    p types.keys
 end
 
 
