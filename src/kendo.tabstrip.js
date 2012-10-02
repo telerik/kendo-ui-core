@@ -89,7 +89,7 @@
                 return item.url ? "a" : "span";
             },
             contentAttributes: function(content) {
-                return content.active !== true ? " style='display:none' aria-hidden='true'" : "";
+                return content.active !== true ? " style='display:none' aria-hidden='true' aria-expanded='false'" : "";
             },
             content: function(item) {
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
@@ -204,6 +204,10 @@
 
             that.element.attr("role", "tablist");
 
+            if (that.element[0].id) {
+                that._ariaId = that.element[0].id + "_ts_active";
+            }
+
             kendo.notify(that);
         },
 
@@ -238,7 +242,9 @@
 
         _current: function(candidate) {
             var that = this,
-                focused = that._focused;
+                focused = that._focused,
+                id = that._ariaId,
+                content;
 
             if (candidate === undefined) {
                 return focused;
@@ -246,10 +252,18 @@
 
             if (focused) {
                 focused.removeClass(FOCUSEDSTATE);
+                focused.removeAttr("id");
             }
 
             if (candidate && !candidate.hasClass(ACTIVESTATE)) {
                 candidate.addClass(FOCUSEDSTATE);
+
+                that.element.removeAttr("aria-activedescendant");
+
+                if (id) {
+                    candidate.attr("id", id);
+                    that.element.attr("aria-activedescendant", id);
+                }
             }
 
             that._focused = candidate;
@@ -673,7 +687,8 @@
                     currentContent.attr("id", id);
                 }
                 currentContent.attr("role", "tabpanel");
-                currentContent.filter(":not(." + ACTIVESTATE + ")").attr("aria-hidden", true);
+                currentContent.filter(":not(." + ACTIVESTATE + ")").attr("aria-hidden", true).attr("aria-expanded", false);
+                currentContent.filter("." + ACTIVESTATE).attr("aria-expanded", true);
             });
 
             that.contentElements = that.contentAnimators = that.wrapper.children("div"); // refresh the contents
@@ -750,11 +765,14 @@
                 item.removeClass(ACTIVESTATE);
             }
 
+            item.removeAttr("aria-selected");
+
             that.contentAnimators
                     .filter("." + ACTIVESTATE)
                     .kendoStop(true, true)
                     .kendoAnimate( close )
-                    .removeClass(ACTIVESTATE);
+                    .removeClass(ACTIVESTATE)
+                    .attr("aria-hidden", true);
         },
 
         activateTab: function (item) {
@@ -832,11 +850,10 @@
                         .addClass(ACTIVESTATE)
                         .removeAttr("aria-hidden")
                         .kendoStop(true, true)
+                        .attr("aria-expanded", true)
                         .kendoAnimate( extend({ init: function () {
                             that.trigger(ACTIVATE, { item: item[0], contentElement: content[0] });
-                        } }, animation, { complete: function () {
-                                                        item.removeAttr("data-animating");
-                                                    } } ) );
+                        } }, animation, { complete: function () { item.removeAttr("data-animating"); } } ) );
                 },
                 showContent = function() {
                     if (!isAjaxContent) {
@@ -854,6 +871,7 @@
                     .removeClass(ACTIVESTATE);
 
             visibleContents.attr("aria-hidden", true);
+            visibleContents.attr("aria-expanded", false);
 
             if (visibleContents.length) {
                 visibleContents

@@ -128,6 +128,20 @@
             equal(div.find("div[aria-hidden=true]").text(), "bar content");
         });
 
+        test("aria-hidden is set to the content if tab is deactivated", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "foo content" },{ text: "bar", content: "bar content"}  ]
+            });
+
+            div.data("kendoTabStrip").select(0);
+            div.data("kendoTabStrip").deactivateTab(div.find("li:first"));
+
+            equal(div.find("div[aria-hidden=true]").length, 2);
+        });
+
+
         test("aria-hidden false is set to the prev active content if another unexisting tab is activated", function() {
             div.kendoTabStrip({
                 dataTextField: "text",
@@ -175,6 +189,44 @@
                     .kendoTabStrip();
 
             equal(div.find("li[aria-selected=true]").text(), "foo");
+        });
+
+        test("aria-expanded false is added to the content ", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}  ]
+            });
+
+            equal(div.find("div[aria-expanded=false]").length, 2);
+        });
+
+        test("aria-expanded is added to the active tab", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}  ]
+            });
+
+            div.data("kendoTabStrip").select(0);
+
+            equal(div.find("div[aria-expanded=true]").text(), "foo content");
+        });
+
+        test("aria-expanded false is added to the non active content when created from html", function() {
+            div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
+                    .appendTo(document.body)
+                    .kendoTabStrip();
+
+            equal(div.find("div[aria-expanded=false]").length, 2);
+        });
+
+        test("aria-expanded is added to the active content when created from html", function() {
+            div = $('<div id="test"><ul><li class="k-state-active">foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
+                    .appendTo(document.body)
+                    .kendoTabStrip();
+
+            equal(div.find("div[aria-expanded=true]").text(), "foo content");
         });
     </script>
 

@@ -25,7 +25,8 @@
 
             for (var i = 0; i < count; i++) {
                 tabstrip.append({
-                    text: "Item" + i
+                    text: "Item" + i,
+                    content: "Content Item" + i
                 });
             }
         }
@@ -137,7 +138,7 @@
             });
 
             ok(div.find(".k-item:first").hasClass("k-state-focused"));
-
+            equal(div.attr("aria-activedescendant"), "test-1");
         });
 
         test("TabStrip selects last if current is first", function() {
