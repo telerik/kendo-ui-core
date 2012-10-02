@@ -43,7 +43,7 @@ TLD_WIDGET_TAG_TEMPLATE = ERB.new(%{
 TLD_NESTED_TAG_TEMPLATE = ERB.new(%{
     <tag>
         <description><%= name %></description>
-        <name><%= xml_name %></name>
+        <name><%= tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= type %></tag-class>
 <% if children.any? %>
         <body-content>JSP</body-content>
@@ -149,7 +149,7 @@ JAVA_NESTED_TAG_SETTER = ERB.new(%{
 JAVA_PARENT_SETTER = ERB.new(%{
     @Override
     public int doEndTag() throws JspException {
-        <%= parent_type %> parent = (<%= parent_type %>)findParentWithClass(<%= parent_type %>.class);
+        <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
 
         parent.set<%= name %>(this);
 
@@ -217,59 +217,62 @@ class Tag
 
     attr_reader :options, :name, :events, :children
 
-    attr_accessor :type, :parent_type, :namespace, :parent
-
-    def initialize(name, options = [])
-        @name = name.sub(/kendo.*ui\./, '').sub('kendo.data.', '')
-        @type = @name + 'Tag'
-        @options = options
+    def initialize(options)
+        @name = options[:name].sub(/kendo.*ui\./, '').sub('kendo.data.', '')
+        @options = []
         @events = []
         @children = []
     end
 
-    def xml_name
-        return @name.camelize unless @parent
+    def type
+        @name + "Tag"
+    end
 
-        return @parent.xml_name + @name
+    def namespace
+        @name.downcase
+    end
+
+    def path
+        type
+    end
+
+    def tag_name
+        return @name.camelize
+    end
+
+    def xml_template
+        TLD_WIDGET_TAG_TEMPLATE
     end
 
     def to_xml
-        type = @type
-
-        template = @parent_type ? TLD_NESTED_TAG_TEMPLATE : TLD_WIDGET_TAG_TEMPLATE
-
-        template.result(binding)
+        xml_template.result(binding)
     end
 
-    def to_java
-        $stderr.puts("\t#{name}") if VERBOSE
-
-        parent = ''
-
-        if @parent_type
-            parent_type = @name
-            parent = JAVA_PARENT_SETTER.result(binding)
-        end
-
+    def child_setters
         children = @children.map do |child|
             type = child.type
             name = child.name.camelize
             JAVA_NESTED_TAG_SETTER.result(binding)
         end.join
+    end
 
-        parent + children + (@options + @events).map {|attr| attr.to_java }.join
+    def java_options_and_events
+        (@options + @events).map {|attr| attr.to_java }.join
+    end
+
+    def to_java
+        $stderr.puts("\t#{name}") if VERBOSE
+        child_setters + java_options_and_events
+    end
+
+    def template
+        JAVA_WIDGET_TEMPLATE
     end
 
     def sync_java
-        path = @namespace ? @namespace + '/' + @type : @type
-        namespace = @namespace ? @namespace : @name.downcase
-
         filename = "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{path}.java"
 
         interfaces = @children.map{ |c| c.name }.uniq
-
-        template = JAVA_WIDGET_TEMPLATE
-        template = JAVA_NESTED_TAG_TEMPLATE if @parent_type
 
         java = template.result(binding)
 
@@ -316,7 +319,10 @@ class Tag
         end
 
         @children.each { |child| child.sync_java }
+    end
 
+    def namespace
+        @name.downcase
     end
 
     def promote_options_to_tags
@@ -333,14 +339,9 @@ class Tag
                     @options.delete(o)
                 end
 
-                namespace = @namespace ? @namespace : @name.downcase
-
-                child = NestedTag.new(option.name.sub(namespace, '').sub(/^./) { |c| c.capitalize }, child_options)
-
-                child.parent_type = @type
-                child.parent = self
-                child.namespace = namespace
-
+                child = NestedTag.new :name => option.name,
+                                      :parent => self,
+                                      :options => child_options
 
                 @children.push(child)
 
@@ -361,7 +362,7 @@ class Tag
 
         header = root.children.find { |e| e.type == :header && e.options[:level] == 1 }
 
-        tag = Tag.new(header.options[:raw_text])
+        tag = Tag.new :name => header.options[:raw_text]
 
         start_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Configuration' }
 
@@ -441,6 +442,41 @@ class Tag
 end
 
 class NestedTag < Tag
+    def namespace
+        @parent.namespace
+    end
+
+    def tag_name
+        return @parent.tag_name + @name
+    end
+
+    def path
+        namespace + "/" + type
+    end
+
+    def parent_setter
+        JAVA_PARENT_SETTER.result(binding)
+    end
+
+    def to_java
+        $stderr.puts("\t#{name}") if VERBOSE
+        parent_setter + child_setters + java_options_and_events
+    end
+
+    def template
+        JAVA_NESTED_TAG_TEMPLATE
+    end
+
+    def xml_template
+        TLD_NESTED_TAG_TEMPLATE
+    end
+
+    def initialize(options)
+        super
+        @parent = options[:parent]
+        @name = options[:name].sub(@parent.namespace, '').sub(/^./) { |c| c.capitalize }
+        @options = options[:options]
+    end
 end
 
 def generate
