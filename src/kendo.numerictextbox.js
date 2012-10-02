@@ -52,7 +52,13 @@
              that._arrows();
              that._input();
 
-             that._text.on("focus" + ns, proxy(that._click, that));
+             if (touch) {
+                that._text.on(TOUCHEND + ns, function() {
+                    that._toggleText(false);
+                });
+             } else {
+                 that._text.on("focus" + ns, proxy(that._click, that));
+             }
 
              min = that.min(element.attr("min"));
              max = that.max(element.attr("max"));
@@ -294,9 +300,9 @@
 
         _focusin: function() {
             var that = this;
-            that._toggleText(false);
-            that.element.focus();
             that._inputWrapper.addClass(FOCUSED);
+            that._toggleText(false);
+            that.element[0].focus();
         },
 
         _focusout: function() {
@@ -476,7 +482,6 @@
         _toggleText: function(toggle) {
             var that = this;
 
-            toggle = !!toggle;
             that._text.toggle(toggle);
             that.element.toggle(!toggle);
         },
