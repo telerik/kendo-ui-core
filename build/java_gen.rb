@@ -269,16 +269,41 @@ class Tag
         JAVA_WIDGET_TEMPLATE
     end
 
+    def java_filename
+        "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{path}.java"
+    end
+
+    def java_source_code
+        if File.exists?(java_filename)
+            File.read(java_filename)
+        else
+            template.result(binding)
+        end
+    end
+
+    def generated_interfaces
+        @children.map{ |c| c.name }.uniq
+    end
+
+    def implement_interfaces(code, interfaces)
+        implements = 'implements ' + interfaces.join(", ") if interfaces.any?
+
+        code.sub /\/\* interfaces \*\/(.|\n)*\/\* interfaces \*\//,
+                 "/* interfaces */#{implements}/* interfaces */"
+    end
+
+    def generate_attributes(code)
+        code.sub /\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
+                 "//>> Attributes\n#{to_java}\n//<< Attributes"
+    end
+
+
     def sync_java
-        filename = "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{path}.java"
+        java = java_source_code
 
-        interfaces = @children.map{ |c| c.name }.uniq
+        $stderr.puts("Updating #{java_filename}") if VERBOSE
 
-        java = template.result(binding)
-
-        java = File.read(filename) if File.exists?(filename)
-
-        $stderr.puts("Updating #{filename}") if VERBOSE
+        interfaces = generated_interfaces
 
         interfaces.each do |interface|
             interface_filename =  "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{namespace}/#{interface}.java"
@@ -298,24 +323,13 @@ class Tag
             interfaces.push('PanelBarItemTagContainer')
         end
 
-        implements = ""
-        implements = 'implements ' + interfaces.join(", ") if interfaces.any?
+        java = implement_interfaces(java, interfaces)
+        java = generate_attributes(java)
 
-        java.sub!(/\/\* interfaces \*\/(.|\n)*\/\* interfaces \*\//,
-                 '/* interfaces */' + implements + '/* interfaces */')
+        ensure_path(java_filename)
 
-        java.sub!(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
-                        "//>> Attributes\n" +
-                        to_java +
-                        "\n//<< Attributes"
-                     )
-
-        java.gsub!(/\r?\n/, "\r\n")
-
-        ensure_path(filename)
-
-        File.open(filename, 'w') do |file|
-            file.write(java)
+        File.open(java_filename, 'w') do |file|
+            file.write(java.gsub(/\r?\n/, "\r\n"))
         end
 
         @children.each { |child| child.sync_java }
