@@ -41,7 +41,7 @@
 
         templates = {
             content: template(
-                "<div class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
+                "<div class='k-content'#= contentAttributes(data) # role='tabpanel'>#= content(item) #</div>"
             ),
             itemWrapper: template(
                 "<#= tag(item) # class='k-link'#= contentUrl(item) ##= textAttributes(item) #>" +
@@ -49,7 +49,7 @@
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li class='#= wrapperCssClass(group, item) #'>" +
+                "<li class='#= wrapperCssClass(group, item) #' role='tab' #=item.active ? \"aria-selected='true'\" : ''#>" +
                     "#= itemWrapper(data) #" +
                 "</li>"
             ),
@@ -89,7 +89,7 @@
                 return item.url ? "a" : "span";
             },
             contentAttributes: function(content) {
-                return content.active !== true ? " style='display:none'" : "";
+                return content.active !== true ? " style='display:none' aria-hidden='true'" : "";
             },
             content: function(item) {
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
@@ -120,6 +120,11 @@
             .filter(":focus")
             .parent()
             .addClass(ACTIVESTATE + " " + TABONTOP);
+
+        tabs.attr("role", "tab");
+        tabs.filter("." + ACTIVESTATE)
+            .attr("aria-selected", true);
+
 
         tabs.each(function() {
             var item = $(this);
@@ -196,6 +201,8 @@
             if (content.length > 0 && content[0].childNodes.length === 0) {
                 that.activateTab(selectedItems.eq(0));
             }
+
+            that.element.attr("role", "tablist");
 
             kendo.notify(that);
         },
@@ -665,6 +672,8 @@
                 } else {
                     currentContent.attr("id", id);
                 }
+                currentContent.attr("role", "tabpanel");
+                currentContent.filter(":not(." + ACTIVESTATE + ")").attr("aria-hidden", true);
             });
 
             that.contentElements = that.contentAnimators = that.wrapper.children("div"); // refresh the contents
@@ -792,6 +801,7 @@
             if (content.length === 0) {
                 visibleContents
                     .removeClass( ACTIVESTATE )
+                    .attr("aria-hidden", true)
                     .kendoStop(true, true)
                     .kendoAnimate( close );
                 return false;
@@ -812,11 +822,15 @@
                         oldTab.addClass(DEFAULTSTATE);
                         item.addClass(ACTIVESTATE);
                     }
+                    oldTab.removeAttr("aria-selected");
+                    item.attr("aria-selected", true);
+
                     that._current(item);
 
                     content
                         .closest(".k-content")
                         .addClass(ACTIVESTATE)
+                        .removeAttr("aria-hidden")
                         .kendoStop(true, true)
                         .kendoAnimate( extend({ init: function () {
                             that.trigger(ACTIVATE, { item: item[0], contentElement: content[0] });
@@ -838,6 +852,8 @@
 
             visibleContents
                     .removeClass(ACTIVESTATE);
+
+            visibleContents.attr("aria-hidden", true);
 
             if (visibleContents.length) {
                 visibleContents

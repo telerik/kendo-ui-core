@@ -26,5 +26,9 @@ tests.push(
     {
         page: "tabstrip/navigation.html",
         title: "tabstrip navigation"
+    },
+    {
+        page: "tabstrip/aria.html",
+        title: "tabstrip aria"
     }
 );

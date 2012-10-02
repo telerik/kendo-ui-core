@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kendo ARIA support</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.tabstrip.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+</head>
+<body>
+    <script type="text/javascript">
+
+        var TabStrip = kendo.ui.TabStrip,
+            keys = kendo.keys,
+            div;
+
+        QUnit.config.reorder = false;
+
+        function addItems(count) {
+            var tabstrip = div.data("kendoTabStrip");
+
+            for (var i = 0; i < count; i++) {
+                tabstrip.append({
+                    text: "Item" + i
+                });
+            }
+        }
+
+        module("TabStrip ARIA support", {
+            setup: function() {
+                div = $('<div id="test" />').appendTo(document.body);
+            },
+            teardown: function() {
+                if (div.data("kendoTabStrip")) {
+                    div.data("kendoTabStrip").destroy();
+                }
+                div.remove();
+            }
+        });
+
+        test("tablist role is added to the wrapper", function() {
+            div.kendoTabStrip();
+
+            ok(div.filter("[role=tablist]").length);
+        });
+
+        test("tab role is set to items", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataSource: [ { text: "foo", content: "bar" } ]
+            });
+
+            equal(div.find("li[role=tab]").text(), "foo");
+        });
+
+        test("tab role is set to items when created from html", function() {
+            div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul></div>')
+                    .appendTo(document.body)
+                    .kendoTabStrip();
+
+            equal(div.find("li[role=tab]").length, 2);
+        });
+
+        test("tabpanel role is set to the content items", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "bar"} ]
+            });
+
+            equal(div.find("div[role=tabpanel]").text(), "bar");
+        });
+
+        test("tabpanel role is set to content items when created from html", function() {
+            div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
+                    .appendTo(document.body)
+                    .kendoTabStrip();
+
+            equal(div.find("div[role=tabpanel]").length, 2);
+        });
+
+        test("hidden attribute is set to the content if tab is not visible", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "foo content" },{ text: "bar", content: "bar content"}  ]
+            });
+
+            equal(div.find("div[aria-hidden=true]").length, 2);
+        });
+
+        test("hidden attribute is set to the content if tab is not visible when created from html", function() {
+            div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
+                    .appendTo(document.body)
+                    .kendoTabStrip();
+
+            equal(div.find("div[aria-hidden=true]").length, 2);
+        });
+
+        test("aria-hidden is removed from the content if tab is activated", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "foo content" },{ text: "bar", content: "bar content"}  ]
+            });
+
+            div.data("kendoTabStrip").select(1);
+
+            equal(div.find("div[aria-hidden=true]").length, 1);
+            equal(div.find("div[aria-hidden=true]").text(), "foo content");
+        });
+
+        test("aria-hidden false is set to the prev active content if another tab is activated", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "foo content" },{ text: "bar", content: "bar content"}  ]
+            });
+
+            div.data("kendoTabStrip").select(1);
+            div.data("kendoTabStrip").select(0);
+
+            equal(div.find("div[aria-hidden=true]").length, 1);
+            equal(div.find("div[aria-hidden=true]").text(), "bar content");
+        });
+
+        test("aria-hidden false is set to the prev active content if another unexisting tab is activated", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}, { text: "bar"}  ]
+            });
+
+            div.data("kendoTabStrip").select(1);
+            div.data("kendoTabStrip").select(2);
+
+            equal(div.find("div[aria-hidden=true]").length, 2);
+            equal(div.find("div[aria-hidden=true]:first").text(), "foo content");
+            equal(div.find("div[aria-hidden=true]:last").text(), "bar content");
+        });
+
+        test("aria-selected is added to the active tab", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}  ]
+            });
+
+            div.data("kendoTabStrip").select(0);
+
+            equal(div.find("li[aria-selected=true]").text(), "foo");
+        });
+
+        test("aria-selected is remove from the prev active tab", function() {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}  ]
+            });
+
+            div.data("kendoTabStrip").select(0);
+            div.data("kendoTabStrip").select(1);
+
+            equal(div.find("li[aria-selected=true]").length, 1);
+            equal(div.find("li[aria-selected=true]").text(), "bar");
+        });
+
+        test("aria-selected is added to the active tab when created from html", function() {
+            div = $('<div id="test"><ul><li class="k-state-active">foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
+                    .appendTo(document.body)
+                    .kendoTabStrip();
+
+            equal(div.find("li[aria-selected=true]").text(), "foo");
+        });
+    </script>
+
+    <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <div id="log"></div>
+</body>
+</html>
