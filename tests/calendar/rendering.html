@@ -469,7 +469,7 @@
             test("year view renders title", function() {
                 var today = new Date(2011, 9, 10);
 
-                equal(calendar.views[1].title(today), today.getFullYear() + "");
+                equal(calendar.views[1].title(today) + "", today.getFullYear() + "");
             });
 
             test("year view renders meta view  4x3 cells", function() {
@@ -554,8 +554,8 @@
 
                 equal(div.find("tbody").find("tr:first").find("td").length, 4);
                 equal(div.find("tbody").find("td > a").length, 12);
-                equal(div.find("tbody").find("a:first").html(), 2009);
-                equal(div.find("tbody").find("a:last").html(), 2020);
+                equal(div.find("tbody").find("a:first").html() + "", 2009 + "");
+                equal(div.find("tbody").find("a:last").html() + "", 2020 + "");
             });
 
             test("decade view renders only years in range", function() {
