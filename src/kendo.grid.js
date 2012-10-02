@@ -1553,9 +1553,11 @@
                 });
 
                 if (that.options.navigatable) {
-                    that.wrapper.keydown(function(e) {
+                    that.table.on("keydown" + NS, function(e) {
                         var current = that.current();
-                        if (e.keyCode === keys.SPACEBAR && e.target == that.wrapper[0] && !current.hasClass("k-edit-cell")) {
+                        if (e.keyCode === keys.SPACEBAR && e.target == that.table[0] &&
+                            !current.is(".k-edit-cell,.k-header") &&
+                            current.parent().is(":not(.k-grouping-row,.k-detail-row,.k-group-footer)")) {
                             e.preventDefault();
                             e.stopPropagation();
                             current = cell ? current : current.parent();

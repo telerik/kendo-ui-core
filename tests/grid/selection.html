@@ -46,15 +46,6 @@
                 equal(grid.table.attr("tabIndex"), 0);
             });
 
-            /*
-            test("tabindex is removed from the table", function() {
-                table.attr("tabIndex", 1);
-                var grid = setup();
-
-                equal(table.attr("tabIndex"), undefined);
-            });
-            */
-
             test("positive tabindex is retained", function() {
                 table.attr("tabIndex", 1);
                 var grid = setup();
@@ -164,19 +155,18 @@
                 ok(table.find(">tbody>tr>td").first().is(".k-state-focused"));
             });
 
-            /*
             test("space key select the focused cell", function() {
-                var grid = setup({ selectable: "cell" });
+                setup({ selectable: "cell" });
 
-                grid.table.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
+                table.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
-                ok(table.find("tbody tr:eq(1)").find("td").first().hasClass("k-state-selected"));
+                ok(table.find("tbody tr:eq(1) td:first").hasClass("k-state-selected"));
             });
 
             test("space key select the multiple focused cells if multiple selection is enabled", function() {
                 var grid = setup({ selectable: "multipleCell" });
 
-                grid.wrapper.focus()
+                table.focus()
                             .press(kendo.keys.DOWN)
                             .press(kendo.keys.SPACEBAR)
                             .press(kendo.keys.RIGHT)
@@ -189,7 +179,7 @@
             test("space key select single cells if multiple selection is enabled but ctrl is not active", function() {
                 var grid = setup({ selectable: "multipleCell" });
 
-                grid.wrapper.focus()
+                grid.table.focus()
                             .press(kendo.keys.DOWN)
                             .press(kendo.keys.SPACEBAR)
                             .press(kendo.keys.RIGHT)
@@ -226,7 +216,15 @@
                 ok(triggered);
             });
 
-            */
+            test("space key does not select the header cell", function() {
+                setup({ selectable: "cell", scrollable: false });
+
+                table.focus().press(kendo.keys.SPACEBAR);
+
+                equal(table.find(".k-state-selected").length, 0);
+            });
+
+
             test("last selected cell on blur is highlighted on focus", function() {
                 var grid = setup();
 
