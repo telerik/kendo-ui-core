@@ -801,7 +801,7 @@
         _draggable: function() {
             var that = this;
             if (that.options.reorderable) {
-                that._draggableInstance = that.thead.kendoDraggable({
+                that._draggableInstance = that.wrapper.kendoDraggable({
                     group: kendo.guid(),
                     filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)",
                     hint: function(target) {

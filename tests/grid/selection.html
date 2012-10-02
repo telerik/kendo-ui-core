@@ -235,53 +235,38 @@
                 ok(row.find("td").first().hasClass("k-state-focused"));
             });
 
-            /* this will be valid scenario
-            test("focus on grouped grid focus first non-group cell", function() {
+            test("left arrow on grouped grid", function() {
                 var grid = setup();
                 grid.dataSource.group({field: "foo"});
 
-                grid.wrapper.focus();
+                grid.table.focus().press(kendo.keys.LEFT);
 
-                var row = table.find("tbody tr:not(.k-grouping-row)").first();
-                ok(row.find("td:not(.k-group-cell)").first().hasClass("k-state-focused"));
+                var row = table.find("tbody tr:first");
+                ok(row.find("td").eq(0).hasClass("k-state-focused"));
             });
 
-            test("left arrow on grouped grid skips group cell", function() {
+            test("down arrow on grouped grid", function() {
                 var grid = setup();
                 grid.dataSource.group({field: "foo"});
 
-                grid.element.focus().press(kendo.keys.LEFT);
+                grid.table.focus().press(kendo.keys.DOWN);
 
-                var row = table.find("tbody tr:not(.k-grouping-row)").first();
+                var row = table.find("tbody tr:not(.k-grouping-row):first");
                 ok(!row.find("td").eq(0).hasClass("k-state-focused"));
                 ok(row.find("td").eq(1).hasClass("k-state-focused"));
             });
 
-            test("down arrow on grouped grid skips grouping row", function() {
+            test("up arrow on grouped grid", function() {
                 var grid = setup();
                 grid.dataSource.group({field: "foo"});
 
-                grid.wrapper.focus().press(kendo.keys.DOWN);
-
-                var row = table.find("tbody tr:not(.k-grouping-row)").eq(1);
-                ok(!row.find("td").eq(0).hasClass("k-state-focused"));
-                ok(row.find("td").eq(1).hasClass("k-state-focused"));
-            });
-
-            test("up arrow on grouped grid skips grouping row", function() {
-                var grid = setup();
-                grid.dataSource.group({field: "foo"});
-
-                grid.wrapper.focus()
-                    .press(kendo.keys.DOWN)
+                grid.table.focus()
                     .press(kendo.keys.DOWN)
                     .press(kendo.keys.UP);
 
-                var row = table.find("tbody tr:not(.k-grouping-row)").eq(1);
-                ok(!row.find("td").eq(0).hasClass("k-state-focused"));
-                ok(row.find("td").eq(1).hasClass("k-state-focused"));
+                var row = table.find("tbody tr.k-grouping-row:first");
+                ok(row.find("td").eq(0).hasClass("k-state-focused"));
             });
-            */
 
             test("focus after grid refresh selects first cell", function() {
                 var grid = setup();
@@ -440,25 +425,6 @@
                 ok(!table.find("tbody tr:eq(0)").find("td:first").hasClass("k-state-focused"));
                 ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
             });
-
-            /* this is also valid scenario
-            test("detail row is skipped when down arrow is pressed", function() {
-                var grid = setup({ detailTemplate: "template" });
-                grid.expandRow(table.find("tbody tr:first"));
-                grid.wrapper.focus().press(kendo.keys.DOWN);
-
-                ok(table.find("tbody tr:not(.k-detail-row):eq(1)").find("td:nth(1)").hasClass("k-state-focused"));
-            });
-
-            test("detail row is skipepd when up arrow is pressed", function() {
-                var grid = setup({ detailTemplate: "template" });
-                grid.expandRow(table.find("tbody tr:first"));
-                grid.current(table.find("tbody tr:not(.k-detail-row):eq(1)").find("td:not(.k-hierarchy-cell):first"));
-                grid.element.focus().press(kendo.keys.UP);
-
-                ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
-            });
-            */
 
             test("group footer row is not selected when clicked", function() {
                 var grid = setup({selectable: true, columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
