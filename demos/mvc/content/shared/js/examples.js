@@ -164,7 +164,7 @@
         changeTheme: function(skinName, animate) {
             var kendoLinks = $("link[href*='kendo.']", doc.getElementsByTagName("head")[0]),
                 commonLink = kendoLinks.filter("[href*='kendo.common']"),
-                skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
+                skinLink = kendoLinks.filter(":not([href*='kendo.common'])").filter(":not([href*='rtl'])"),
                 currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
                 extension = /\.less$/.test(skinLink.attr("href")) ? ".less" : ".css",
                 url = currentFolder + commonLink.attr("href").replace(skinRegex, "kendo." + skinName + "$1" + extension),
