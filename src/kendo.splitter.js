@@ -53,13 +53,20 @@
 
     var Splitter = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                isHorizontal;
 
             Widget.fn.init.call(that, element, options);
 
             that.wrapper = that.element;
 
-            that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
+            isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
+
+            that.orientation = isHorizontal ? HORIZONTAL : VERTICAL;
+            that.supportedKeys = {
+                up: isHorizontal ? keys.LEFT : keys.UP,
+                down: isHorizontal ? keys.RIGHT : keys.DOWN
+            }
 
             that.bind(RESIZE, proxy(that._resize, that));
 
@@ -99,6 +106,7 @@
                 expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)";
 
             that.element
+                .on("mousedown" + NS, splitbarSelector, function(e) { e.currentTarget.focus(); })
                 .on("keydown" + NS, splitbarSelector, proxy(that._keydown, that))
                 .on("focus" + NS, splitbarSelector, function(e) {
                     that.resizing.press($(e.currentTarget));
@@ -152,31 +160,51 @@
             var that = this,
                 key = e.keyCode,
                 resizing = that.resizing,
-                delta;
+                supportedKeys = that.supportedKeys,
+                target = $(e.currentTarget),
+                delta, next, prev;
 
-            //Depending on the orientation use correct ARROWS
-            if (key === keys.RIGHT || key === keys.DOWN) {
-                delta = 10;
-            } else if (key === keys.LEFT || key === keys.UP) {
-                delta = -10;
-            } else if (key === keys.ENTER) {
-                resizing.end();
-                resizing.press($(e.currentTarget));
-                console.log(e.currentTarget);
-                e.preventDefault();
-            }
-
-            /*else if (key === keys.SPACEBAR) { //use CTRL + ARROW
-                resizing.end();
-
-                resizing.press($(e.currentTarget));
+            if (e.ctrlKey) {
+                prev = target.prev();
+                next = target.next();
 
                 e.preventDefault();
-            }*/
+                var action = that.orientation === HORIZONTAL ? "width" : "height";
 
-            if (delta) {
-                resizing.move(delta);
-                e.preventDefault();
+                if (key === supportedKeys.up) {
+                    if (!next[action]()) {
+                        that._triggerAction(EXPAND, next);
+                    } else {
+                        if (target.has(".k-collapse-prev,.k-collapse-next")[0]) {
+                            resizing.end();
+                            that._triggerAction(COLLAPSE, prev);
+                        }
+                    }
+                } else if (key === supportedKeys.down) {
+                    if (!prev[action]()) {
+                        that._triggerAction(EXPAND, prev);
+                    } else {
+                        if (target.has(".k-collapse-prev,.k-collapse-next")[0]) {
+                            resizing.end();
+                            that._triggerAction(COLLAPSE, next);
+                        }
+                    }
+                }
+
+            } else {
+                if (key === supportedKeys.down) {
+                    delta = 10;
+                } else if (key === supportedKeys.up) {
+                    delta = -10;
+                } else if (key === keys.ENTER) {
+                    resizing.end();
+                    e.preventDefault();
+                }
+
+                if (delta) {
+                    resizing.move(delta, target);
+                    e.preventDefault();
+                }
             }
         },
 
@@ -422,6 +450,10 @@
             pane = $(pane);
             paneConfig = pane.data(PANE);
 
+            if (!expand && !paneConfig.collapsible) {
+                return;
+            }
+
             if (arguments.length == 1) {
                 expand = paneConfig.collapsed === undefined ? false : paneConfig.collapsed;
             }
@@ -441,6 +473,7 @@
         },
 
         collapse: function(pane) {
+
             this.toggle(pane, false);
         },
 
@@ -500,7 +533,11 @@
             this._resizable.press(target);
         },
 
-        move: function(delta) {
+        move: function(delta, target) {
+            if (!this._resizable.target) {
+                this._resizable.press(target);
+            }
+
             this._resizable.move(delta);
         },
 
@@ -577,11 +614,11 @@
                 }
 
                 owner.trigger(RESIZE);
-            } else {
-                setTimeout(function(){
-                    that.press(splitbar);
-                });
             }
+
+            setTimeout(function() {
+                that.press(splitbar);
+            })
 
             return false;
         }

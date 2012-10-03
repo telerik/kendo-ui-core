@@ -335,6 +335,18 @@
                 equals(iframe.attr("src"), url);
                 ok(!pane.hasClass("k-scrollable"));
             });
+
+            test("Splitter does not collapse uncollapsable pane", function() {
+                var splitter = $(getSplitterHtml(2))
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: false }, { collapsible: false }]
+                        });
+
+                splitter.data("kendoSplitter").toggle(splitter.find(".k-scrollable:first"), false);
+
+                equal(splitter.find(".k-pane:first").data("pane").collapsed, undefined);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
