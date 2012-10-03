@@ -7,7 +7,6 @@
         extend = $.extend,
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",
-        CANCEL = "cancel",
         START = "start",
         RESIZE = "resize",
         RESIZEEND = "resizeend";
@@ -38,8 +37,7 @@
         events: [
             RESIZE,
             RESIZEEND,
-            START,
-            CANCEL
+            START
         ],
 
         options: {
@@ -119,19 +117,12 @@
         },
 
         _cancel: function(e) {
-            var that = this,
-                position = {
-                    left: 0,
-                    top: 0
-                };
+            var that = this;
 
             if (that.hint) {
-                position[that._position] = that._initialElementPosition;
-                that.hint.animate(position, "fast", function() {
-                    that._stop(e);
-                    that.position = undefined;
-                    that.trigger(CANCEL);
-                });
+                that.position = undefined;
+                that.hint.css(that._position, that._initialElementPosition);
+                that._stop(e);
             }
         },
 
@@ -150,10 +141,12 @@
                 return;
             }
 
-            var position = target.position();
-            this.userEvents.press(position.left, position.top, target[0]);
-            this.targetPosition = position;
-            this.target = target;
+            var position = target.position(),
+                that = this;
+
+            that.userEvents.press(position.left, position.top, target[0]);
+            that.targetPosition = position;
+            that.target = target;
         },
 
         move: function(delta) {

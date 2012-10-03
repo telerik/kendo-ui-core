@@ -154,26 +154,25 @@
                 resizing = that.resizing,
                 delta;
 
+            //Depending on the orientation use correct ARROWS
             if (key === keys.RIGHT || key === keys.DOWN) {
                 delta = 10;
             } else if (key === keys.LEFT || key === keys.UP) {
                 delta = -10;
-            }
-
-            if (key === keys.ENTER) {
+            } else if (key === keys.ENTER) {
                 resizing.end();
                 resizing.press($(e.currentTarget));
+                console.log(e.currentTarget);
                 e.preventDefault();
             }
 
-            if (key === keys.SPACEBAR) {
+            /*else if (key === keys.SPACEBAR) { //use CTRL + ARROW
                 resizing.end();
 
-                that._togglePane(e);
                 resizing.press($(e.currentTarget));
 
                 e.preventDefault();
-            }
+            }*/
 
             if (delta) {
                 resizing.move(delta);
@@ -492,8 +491,7 @@
             max: proxy(that._max, that),
             min: proxy(that._min, that),
             invalidClass:"k-restricted-size-" + orientation,
-            resizeend: proxy(that._stop, that),
-            cancel: proxy(that._cancel, that)
+            resizeend: proxy(that._stop, that)
         });
     }
 
@@ -512,10 +510,6 @@
 
         destroy: function() {
             this._resizable.destroy();
-        },
-
-        _cancel: function() {
-            this.press(this._resizable.target);
         },
 
         _createHint: function(handle) {
@@ -583,6 +577,10 @@
                 }
 
                 owner.trigger(RESIZE);
+            } else {
+                setTimeout(function(){
+                    that.press(splitbar);
+                });
             }
 
             return false;
