@@ -4676,7 +4676,7 @@ the minimum and maximum values.</description>
         <name>gridColumn</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
 
-        <body-content>JSP</body-content>
+        <body-content>empty</body-content>
 
 
         <attribute>

@@ -19,27 +19,27 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     @Override
     public void setCategoryAxis(CategoryAxisTag value) {
-        setProperty("categoryaxis", value);
+        setProperty("categoryaxis", value.properties());
     }
 
     @Override
     public void setTitle(TitleTag value) {
-        setProperty("title", value);
+        setProperty("title", value.properties());
     }
 
     @Override
     public void setArea(AreaTag value) {
-        setProperty("area", value);
+        setProperty("area", value.properties());
     }
 
     @Override
     public void setLegend(LegendTag value) {
-        setProperty("legend", value);
+        setProperty("legend", value.properties());
     }
 
     @Override
     public void setPlotArea(PlotAreaTag value) {
-        setProperty("plotarea", value);
+        setProperty("plotarea", value.properties());
     }
 
     @Override
@@ -49,22 +49,22 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     @Override
     public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value);
+        setProperty("tooltip", value.properties());
     }
 
     @Override
     public void setXAxis(XAxisTag value) {
-        setProperty("xaxis", value);
+        setProperty("xaxis", value.properties());
     }
 
     @Override
     public void setSeriesDefaults(SeriesDefaultsTag value) {
-        setProperty("seriesdefaults", value);
+        setProperty("seriesdefaults", value.properties());
     }
 
     @Override
     public void setValueAxis(ValueAxisTag value) {
-        setProperty("valueaxis", value);
+        setProperty("valueaxis", value.properties());
     }
 
     @Override

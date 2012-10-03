@@ -16,7 +16,7 @@ public class LocalizationTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setLocalization(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getCancel() {

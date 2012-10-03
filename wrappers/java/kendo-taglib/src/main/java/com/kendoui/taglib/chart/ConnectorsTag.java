@@ -16,7 +16,7 @@ public class ConnectorsTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setConnectors(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getColor() {

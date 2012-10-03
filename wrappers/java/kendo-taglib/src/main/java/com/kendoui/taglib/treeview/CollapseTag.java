@@ -16,7 +16,7 @@ public class CollapseTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setCollapse(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public int getDuration() {

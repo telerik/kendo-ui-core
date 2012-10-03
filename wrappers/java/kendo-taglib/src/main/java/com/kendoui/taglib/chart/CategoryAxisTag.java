@@ -16,42 +16,42 @@ public class CategoryAxisTag extends BaseTag /* interfaces */implements Labels, 
 
         parent.setCategoryAxis(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setLabels(LabelsTag value) {
-        setProperty("labels", value);
+        setProperty("labels", value.properties());
     }
 
     @Override
     public void setLine(LineTag value) {
-        setProperty("line", value);
+        setProperty("line", value.properties());
     }
 
     @Override
     public void setMajorGridLines(MajorGridLinesTag value) {
-        setProperty("majorgridlines", value);
+        setProperty("majorgridlines", value.properties());
     }
 
     @Override
     public void setMajorTicks(MajorTicksTag value) {
-        setProperty("majorticks", value);
+        setProperty("majorticks", value.properties());
     }
 
     @Override
     public void setMinorGridLines(MinorGridLinesTag value) {
-        setProperty("minorgridlines", value);
+        setProperty("minorgridlines", value.properties());
     }
 
     @Override
     public void setMinorTicks(MinorTicksTag value) {
-        setProperty("minorticks", value);
+        setProperty("minorticks", value.properties());
     }
 
     @Override
     public void setTitle(TitleTag value) {
-        setProperty("title", value);
+        setProperty("title", value.properties());
     }
 
     public int getAxisCrossingValue() {

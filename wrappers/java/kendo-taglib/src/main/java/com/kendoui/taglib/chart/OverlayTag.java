@@ -16,7 +16,7 @@ public class OverlayTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setOverlay(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getGradient() {

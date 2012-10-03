@@ -24,22 +24,22 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
 
     @Override
     public void setSortable(SortableTag value) {
-        setProperty("sortable", value);
+        setProperty("sortable", value.properties());
     }
 
     @Override
     public void setEditable(EditableTag value) {
-        setProperty("editable", value);
+        setProperty("editable", value.properties());
     }
 
     @Override
     public void setGroupable(GroupableTag value) {
-        setProperty("groupable", value);
+        setProperty("groupable", value.properties());
     }
 
     @Override
     public void setPageable(PageableTag value) {
-        setProperty("pageable", value);
+        setProperty("pageable", value.properties());
     }
 
     @Override

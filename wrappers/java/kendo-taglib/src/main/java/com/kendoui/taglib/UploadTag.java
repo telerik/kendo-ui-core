@@ -19,12 +19,12 @@ public class UploadTag extends WidgetTag /* interfaces */implements Async, Local
 
     @Override
     public void setAsync(AsyncTag value) {
-        setProperty("async", value);
+        setProperty("async", value.properties());
     }
 
     @Override
     public void setLocalization(LocalizationTag value) {
-        setProperty("localization", value);
+        setProperty("localization", value.properties());
     }
 
     public boolean getEnabled() {

@@ -16,7 +16,7 @@ public class NegativeValuesTag extends BaseTag /* interfaces *//* interfaces */ 
 
         parent.setNegativeValues(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getColor() {

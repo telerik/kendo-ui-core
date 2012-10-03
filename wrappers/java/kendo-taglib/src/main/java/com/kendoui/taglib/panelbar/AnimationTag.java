@@ -16,17 +16,17 @@ public class AnimationTag extends BaseTag /* interfaces */implements Close, Open
 
         parent.setAnimation(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setClose(CloseTag value) {
-        setProperty("close", value);
+        setProperty("close", value.properties());
     }
 
     @Override
     public void setOpen(OpenTag value) {
-        setProperty("open", value);
+        setProperty("open", value.properties());
     }
 
 //<< Attributes

@@ -16,7 +16,7 @@ public class MinorGridLinesTag extends BaseTag /* interfaces *//* interfaces */ 
 
         parent.setMinorGridLines(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getColor() {

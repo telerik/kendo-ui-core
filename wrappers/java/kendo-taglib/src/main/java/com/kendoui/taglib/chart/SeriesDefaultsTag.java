@@ -16,22 +16,22 @@ public class SeriesDefaultsTag extends BaseTag /* interfaces */implements Border
 
         parent.setSeriesDefaults(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setBorder(BorderTag value) {
-        setProperty("border", value);
+        setProperty("border", value.properties());
     }
 
     @Override
     public void setLabels(LabelsTag value) {
-        setProperty("labels", value);
+        setProperty("labels", value.properties());
     }
 
     @Override
     public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value);
+        setProperty("tooltip", value.properties());
     }
 
     public int getGap() {

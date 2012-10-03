@@ -19,7 +19,7 @@ public class TabStripTag extends WidgetTag /* interfaces */implements Animation/
 
     @Override
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value);
+        setProperty("animation", value.properties());
     }
 
     public boolean getCollapsible() {

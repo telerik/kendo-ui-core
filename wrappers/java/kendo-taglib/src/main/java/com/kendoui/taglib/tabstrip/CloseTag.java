@@ -16,7 +16,7 @@ public class CloseTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setClose(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public int getDuration() {

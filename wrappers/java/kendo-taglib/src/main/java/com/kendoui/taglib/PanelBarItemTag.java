@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -18,17 +19,27 @@ import com.kendoui.taglib.html.Ul;
 
 @SuppressWarnings("serial")
 public class PanelBarItemTag extends BaseTag implements PanelBarItemTagContainer {
-    private List<PanelBarItemTag> items;
+    private List<Map<String, Object>> items;
 
-    public PanelBarItemTag() {
-        items = new ArrayList<PanelBarItemTag>();
+    @Override
+    public void initialize() {
+        items = new ArrayList<Map<String, Object>>();
+        
+        super.initialize();
     }
-
+    
+    @Override
+    public void destroy() {
+        items = null;
+        
+        super.destroy();
+    }
+    
     @Override
     public int doEndTag() throws JspException {
         PanelBarItemTagContainer parent = (PanelBarItemTagContainer)findParentWithClass(PanelBarItemTagContainer.class, "<kendo:panelBar> or <kendo:panelBarItem> tag");
 
-        parent.items().add(this);
+        parent.items().add(this.properties());
 
         JspWriter out = pageContext.getOut();
 
@@ -48,7 +59,7 @@ public class PanelBarItemTag extends BaseTag implements PanelBarItemTagContainer
             throw new JspException(exception);
         }
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     private void appendBodyContent(Element<?> element, BodyContent bodyContent) {
@@ -71,7 +82,7 @@ public class PanelBarItemTag extends BaseTag implements PanelBarItemTagContainer
     }
 
     @Override
-    public List<PanelBarItemTag> items() {
+    public List<Map<String, Object>> items() {
         return items;
     }
 

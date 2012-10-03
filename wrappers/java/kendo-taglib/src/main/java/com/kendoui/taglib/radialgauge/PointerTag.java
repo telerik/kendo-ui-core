@@ -16,12 +16,12 @@ public class PointerTag extends BaseTag /* interfaces */implements Cap/* interfa
 
         parent.setPointer(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setCap(CapTag value) {
-        setProperty("cap", value);
+        setProperty("cap", value.properties());
     }
 
     public String getColor() {

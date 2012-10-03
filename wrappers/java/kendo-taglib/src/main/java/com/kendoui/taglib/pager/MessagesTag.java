@@ -16,7 +16,7 @@ public class MessagesTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setMessages(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getDisplay() {

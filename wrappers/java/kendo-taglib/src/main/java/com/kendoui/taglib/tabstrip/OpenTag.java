@@ -16,7 +16,7 @@ public class OpenTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setOpen(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public int getDuration() {

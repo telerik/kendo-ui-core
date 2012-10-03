@@ -52,7 +52,7 @@ public abstract class WidgetTag extends BaseTag implements Serializable {
             throw new JspException(exception);
         }
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public Element<?> html() {

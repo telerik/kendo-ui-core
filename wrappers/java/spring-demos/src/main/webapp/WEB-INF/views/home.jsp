@@ -14,7 +14,6 @@
         
         <kendo:window name="myWindow">
         	<strong>Window Content</strong>
-        	
         	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3">
         	    <kendo:dataSource type="odata" serverFiltering="true" serverPaging="true" pageSize="20">
         	    	<kendo:transport>
@@ -32,8 +31,8 @@
         
         	<kendo:grid name="grid">
         		<kendo:gridColumns>
-        			<kendo:gridColumn title="Foo"></kendo:gridColumn>
-        			<kendo:gridColumn title="Bar" width="100"></kendo:gridColumn>
+        			<kendo:gridColumn title="Foo"/>
+        			<kendo:gridColumn title="Bar" width="100"/>
         		</kendo:gridColumns>
         	</kendo:grid>	
         </kendo:window>
@@ -42,7 +41,8 @@
        			<kendo:chartTitleBorder color="#a0b0c0" width="1"/>
         	</kendo:chartTitle>
         </kendo:chart>
-        <kendo:panelBar name="myPanelBar">        	
+        
+        <kendo:panelBar name="myPanelBar">
         	<kendo:panelBarItem text="Item with content">
         		<strong>Item Contents</strong>
         	</kendo:panelBarItem>

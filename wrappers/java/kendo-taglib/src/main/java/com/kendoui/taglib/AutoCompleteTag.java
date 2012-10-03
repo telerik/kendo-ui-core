@@ -19,7 +19,7 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
 
     @Override
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value);
+        setProperty("animation", value.properties());
     }
 
     @Override

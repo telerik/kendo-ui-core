@@ -3,6 +3,7 @@ package com.kendoui.taglib.splitter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.kendoui.taglib.BaseTag;
 
@@ -13,9 +14,23 @@ public class PanesTag extends BaseTag /* interfaces */implements Pane/* interfac
 
 //>> Attributes
 
-    private List<PaneTag> panes = new ArrayList<PaneTag>();
+    private List<Map<String, Object>> panes;
 
-    public List<PaneTag> panes () {
+    @Override
+    public void initialize() {
+        panes = new ArrayList<Map<String, Object>>();
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+        panes = null;
+
+        super.destroy();
+    }
+
+    public List<Map<String, Object>> panes () {
         return panes;
     }
 
@@ -25,12 +40,12 @@ public class PanesTag extends BaseTag /* interfaces */implements Pane/* interfac
 
         parent.setPanes(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void addPane(PaneTag value) {
-        panes.add(value);
+        panes.add(value.properties());
     }
 
 //<< Attributes

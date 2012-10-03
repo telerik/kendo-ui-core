@@ -16,17 +16,17 @@ public class LegendTag extends BaseTag /* interfaces */implements Border, Labels
 
         parent.setLegend(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setBorder(BorderTag value) {
-        setProperty("border", value);
+        setProperty("border", value.properties());
     }
 
     @Override
     public void setLabels(LabelsTag value) {
-        setProperty("labels", value);
+        setProperty("labels", value.properties());
     }
 
     public String getBackground() {

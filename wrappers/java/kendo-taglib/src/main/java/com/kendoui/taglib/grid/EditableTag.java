@@ -16,7 +16,7 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setEditable(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public boolean getConfirmation() {

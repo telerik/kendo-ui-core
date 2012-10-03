@@ -15,47 +15,47 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
 
         parent.addSeriesItem(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setLabels(LabelsTag value) {
-        setProperty("labels", value);
+        setProperty("labels", value.properties());
     }
 
     @Override
     public void setBorder(BorderTag value) {
-        setProperty("border", value);
+        setProperty("border", value.properties());
     }
 
     @Override
     public void setLine(LineTag value) {
-        setProperty("line", value);
+        setProperty("line", value.properties());
     }
 
     @Override
     public void setMarkers(MarkersTag value) {
-        setProperty("markers", value);
+        setProperty("markers", value.properties());
     }
 
     @Override
     public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value);
+        setProperty("tooltip", value.properties());
     }
 
     @Override
     public void setOverlay(OverlayTag value) {
-        setProperty("overlay", value);
+        setProperty("overlay", value.properties());
     }
 
     @Override
     public void setNegativeValues(NegativeValuesTag value) {
-        setProperty("negativevalues", value);
+        setProperty("negativevalues", value.properties());
     }
 
     @Override
     public void setConnectors(ConnectorsTag value) {
-        setProperty("connectors", value);
+        setProperty("connectors", value.properties());
     }
 
     public String getField() {

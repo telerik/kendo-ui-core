@@ -16,7 +16,7 @@ public class ContentTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setContent(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getTemplate() {

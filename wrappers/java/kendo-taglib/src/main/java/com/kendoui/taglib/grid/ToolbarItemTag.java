@@ -15,7 +15,7 @@ public class ToolbarItemTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.addToolbarItem(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getName() {

@@ -3,6 +3,7 @@ package com.kendoui.taglib.chart;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.kendoui.taglib.BaseTag;
 
@@ -13,9 +14,23 @@ public class SeriesTag extends BaseTag /* interfaces */implements SeriesItem/* i
 
 //>> Attributes
 
-    private List<SeriesItemTag> series = new ArrayList<SeriesItemTag>();
+    private List<Map<String, Object>> series;
 
-    public List<SeriesItemTag> series () {
+    @Override
+    public void initialize() {
+        series = new ArrayList<Map<String, Object>>();
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+        series = null;
+
+        super.destroy();
+    }
+
+    public List<Map<String, Object>> series () {
         return series;
     }
 
@@ -25,12 +40,12 @@ public class SeriesTag extends BaseTag /* interfaces */implements SeriesItem/* i
 
         parent.setSeries(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void addSeriesItem(SeriesItemTag value) {
-        series.add(value);
+        series.add(value.properties());
     }
 
 //<< Attributes

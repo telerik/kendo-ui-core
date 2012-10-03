@@ -19,7 +19,7 @@ public class PagerTag extends WidgetTag /* interfaces */implements Messages, Dat
 
     @Override
     public void setMessages(MessagesTag value) {
-        setProperty("messages", value);
+        setProperty("messages", value.properties());
     }
 
     public boolean getAutoBind() {

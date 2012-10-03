@@ -16,17 +16,17 @@ public class AnimationTag extends BaseTag /* interfaces */implements Collapse, E
 
         parent.setAnimation(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setCollapse(CollapseTag value) {
-        setProperty("collapse", value);
+        setProperty("collapse", value.properties());
     }
 
     @Override
     public void setExpand(ExpandTag value) {
-        setProperty("expand", value);
+        setProperty("expand", value.properties());
     }
 
 //<< Attributes

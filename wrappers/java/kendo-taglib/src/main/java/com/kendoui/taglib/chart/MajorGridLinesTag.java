@@ -16,7 +16,7 @@ public class MajorGridLinesTag extends BaseTag /* interfaces *//* interfaces */ 
 
         parent.setMajorGridLines(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getColor() {

@@ -19,7 +19,7 @@ public class SliderTag extends WidgetTag /* interfaces */implements Tooltip/* in
 
     @Override
     public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value);
+        setProperty("tooltip", value.properties());
     }
 
     public String getDecreaseButtonTitle() {

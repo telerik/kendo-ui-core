@@ -16,7 +16,7 @@ public class LineTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setLine(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getColor() {

@@ -19,7 +19,7 @@ public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip
 
     @Override
     public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value);
+        setProperty("tooltip", value.properties());
     }
 
     public int getLargeStep() {

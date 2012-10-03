@@ -16,7 +16,7 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setAnimation(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
 //<< Attributes

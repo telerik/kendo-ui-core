@@ -16,7 +16,7 @@ public class ColumnTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.addColumn(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getCommand() {

@@ -16,7 +16,7 @@ public class MinorTicksTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setMinorTicks(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public int getSize() {

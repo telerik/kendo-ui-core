@@ -19,7 +19,7 @@ public class TimePickerTag extends WidgetTag /* interfaces */implements Animatio
 
     @Override
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value);
+        setProperty("animation", value.properties());
     }
 
     public String getCulture() {

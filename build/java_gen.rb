@@ -109,6 +109,7 @@ package com.kendoui.taglib.<%= namespace %>;
 import com.kendoui.taglib.BaseTag;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
@@ -164,8 +165,8 @@ JAVA_OPTION_SETTER = ERB.new(%{
 
 JAVA_NESTED_TAG_SETTER = ERB.new(%{
     @Override
-    public void set<%= child.name %>(<%= child.type.sub('java.lang.', '') %> value) {
-        setProperty("<%= child.name.downcase %>", value);
+    public void set<%= child.name %>(<%= child.type %> value) {
+        setProperty("<%= child.name.downcase %>", value.properties());
     }
 })
 
@@ -183,14 +184,28 @@ JAVA_PARENT_SETTER = ERB.new(%{
 
         parent.set<%= name %>(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 })
 
 JAVA_ARRAY_PARENT_SETTER = ERB.new(%{
-    private List<<%= child.type %>> <%= name.camelize %> = new ArrayList<<%= child.type %>>();
+    private List<Map<String, Object>> <%= name.camelize %>;
 
-    public List<<%= child.type %>> <%= name.camelize %> () {
+    @Override
+    public void initialize() {
+        <%= name.camelize %> = new ArrayList<Map<String, Object>>();
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+        <%= name.camelize %> = null;
+
+        super.destroy();
+    }
+
+    public List<Map<String, Object>> <%= name.camelize %> () {
         return <%= name.camelize %>;
     }
 
@@ -200,7 +215,7 @@ JAVA_ARRAY_PARENT_SETTER = ERB.new(%{
 
         parent.set<%= name %>(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 })
 
@@ -210,14 +225,14 @@ JAVA_ARRAY_ADD_TO_PARENT = ERB.new(%{
 
         parent.add<%= name %>(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 })
 
 JAVA_ARRAY_ADD_CHILD = ERB.new(%{
     @Override
-    public void add<%= child.name %>(<%= child.type.sub('java.lang.', '') %> value) {
-        <%= name.camelize %>.add(value);
+    public void add<%= child.name %>(<%= child.type %> value) {
+        <%= name.camelize %>.add(value.properties());
     }
 })
 

@@ -16,7 +16,7 @@ public class BorderTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setBorder(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getColor() {

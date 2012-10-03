@@ -15,7 +15,7 @@ public class PaneTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.addPane(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public boolean getCollapsed() {

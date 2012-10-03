@@ -16,7 +16,7 @@ public class MonthTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setMonth(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getContent() {

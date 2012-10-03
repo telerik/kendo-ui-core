@@ -19,7 +19,7 @@ public class CalendarTag extends WidgetTag /* interfaces */implements Month/* in
 
     @Override
     public void setMonth(MonthTag value) {
-        setProperty("month", value);
+        setProperty("month", value.properties());
     }
 
     public String getCulture() {

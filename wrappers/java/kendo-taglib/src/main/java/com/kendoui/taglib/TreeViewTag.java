@@ -19,7 +19,7 @@ public class TreeViewTag extends WidgetTag /* interfaces */implements Animation,
 
     @Override
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value);
+        setProperty("animation", value.properties());
     }
 
     public String getCheckboxTemplate() {

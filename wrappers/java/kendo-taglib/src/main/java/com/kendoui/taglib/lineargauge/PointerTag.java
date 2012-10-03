@@ -16,17 +16,17 @@ public class PointerTag extends BaseTag /* interfaces */implements Border, Track
 
         parent.setPointer(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setBorder(BorderTag value) {
-        setProperty("border", value);
+        setProperty("border", value.properties());
     }
 
     @Override
     public void setTrack(TrackTag value) {
-        setProperty("track", value);
+        setProperty("track", value.properties());
     }
 
     public String getColor() {

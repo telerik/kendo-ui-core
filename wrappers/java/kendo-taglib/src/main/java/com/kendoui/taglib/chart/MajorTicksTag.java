@@ -16,7 +16,7 @@ public class MajorTicksTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setMajorTicks(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public int getSize() {

@@ -16,7 +16,7 @@ public class CapTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setCap(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public String getColor() {

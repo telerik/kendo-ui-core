@@ -3,6 +3,7 @@ package com.kendoui.taglib.grid;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.kendoui.taglib.BaseTag;
 
@@ -13,9 +14,23 @@ public class ColumnsTag extends BaseTag /* interfaces */implements Column/* inte
 
 //>> Attributes
 
-    private List<ColumnTag> columns = new ArrayList<ColumnTag>();
+    private List<Map<String, Object>> columns;
 
-    public List<ColumnTag> columns () {
+    @Override
+    public void initialize() {
+        columns = new ArrayList<Map<String, Object>>();
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+        columns = null;
+
+        super.destroy();
+    }
+
+    public List<Map<String, Object>> columns () {
         return columns;
     }
 
@@ -25,12 +40,12 @@ public class ColumnsTag extends BaseTag /* interfaces */implements Column/* inte
 
         parent.setColumns(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void addColumn(ColumnTag value) {
-        columns.add(value);
+        columns.add(value.properties());
     }
 
 //<< Attributes

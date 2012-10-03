@@ -16,12 +16,12 @@ public class PageableTag extends BaseTag /* interfaces */implements Messages/* i
 
         parent.setPageable(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setMessages(MessagesTag value) {
-        setProperty("messages", value);
+        setProperty("messages", value.properties());
     }
 
     public int getPageSize() {

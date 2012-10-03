@@ -19,7 +19,7 @@ public class MenuTag extends WidgetTag /* interfaces */implements Animation/* in
 
     @Override
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value);
+        setProperty("animation", value.properties());
     }
 
     public boolean getCloseOnClick() {

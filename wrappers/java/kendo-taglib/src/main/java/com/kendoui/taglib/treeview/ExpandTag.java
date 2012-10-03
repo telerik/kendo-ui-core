@@ -16,7 +16,7 @@ public class ExpandTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setExpand(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public int getDuration() {

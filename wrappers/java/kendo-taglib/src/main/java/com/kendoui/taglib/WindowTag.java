@@ -31,12 +31,12 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation, C
 
     @Override
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value);
+        setProperty("animation", value.properties());
     }
 
     @Override
     public void setContent(ContentTag value) {
-        setProperty("content", value);
+        setProperty("content", value.properties());
     }
 
     public String getContent() {

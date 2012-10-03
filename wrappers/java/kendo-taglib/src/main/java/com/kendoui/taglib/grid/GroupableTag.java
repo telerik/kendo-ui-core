@@ -16,12 +16,12 @@ public class GroupableTag extends BaseTag /* interfaces */implements Messages/* 
 
         parent.setGroupable(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setMessages(MessagesTag value) {
-        setProperty("messages", value);
+        setProperty("messages", value.properties());
     }
 
 //<< Attributes

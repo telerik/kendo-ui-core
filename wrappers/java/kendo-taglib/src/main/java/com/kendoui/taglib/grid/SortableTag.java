@@ -16,7 +16,7 @@ public class SortableTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setSortable(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public boolean getAllowUnsort() {

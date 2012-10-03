@@ -16,12 +16,12 @@ public class TooltipTag extends BaseTag /* interfaces */implements Border/* inte
 
         parent.setTooltip(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setBorder(BorderTag value) {
-        setProperty("border", value);
+        setProperty("border", value.properties());
     }
 
     public String getBackground() {

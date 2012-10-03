@@ -17,17 +17,17 @@ public class LinearGaugeTag extends WidgetTag /* interfaces */implements GaugeAr
 
     @Override
     public void setGaugeArea(GaugeAreaTag value) {
-        setProperty("gaugearea", value);
+        setProperty("gaugearea", value.properties());
     }
 
     @Override
     public void setPointer(PointerTag value) {
-        setProperty("pointer", value);
+        setProperty("pointer", value.properties());
     }
 
     @Override
     public void setScale(ScaleTag value) {
-        setProperty("scale", value);
+        setProperty("scale", value.properties());
     }
 
     public boolean getTransitions() {

@@ -16,12 +16,12 @@ public class XAxisTag extends BaseTag /* interfaces */implements Labels/* interf
 
         parent.setXAxis(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setLabels(LabelsTag value) {
-        setProperty("labels", value);
+        setProperty("labels", value.properties());
     }
 
     public String getType() {

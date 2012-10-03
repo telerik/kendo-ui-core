@@ -16,22 +16,22 @@ public class ScaleTag extends BaseTag /* interfaces */implements Labels, MajorTi
 
         parent.setScale(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setLabels(LabelsTag value) {
-        setProperty("labels", value);
+        setProperty("labels", value.properties());
     }
 
     @Override
     public void setMajorTicks(MajorTicksTag value) {
-        setProperty("majorticks", value);
+        setProperty("majorticks", value.properties());
     }
 
     @Override
     public void setMinorTicks(MinorTicksTag value) {
-        setProperty("minorticks", value);
+        setProperty("minorticks", value.properties());
     }
 
     public int getMajorUnit() {

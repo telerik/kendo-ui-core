@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
@@ -14,8 +15,26 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
 
     private Map<String,Object> json;
 
-    public BaseTag() {
-        json = new HashMap<String,Object>();
+    @Override
+    public void setPageContext(PageContext context) {
+        initialize();
+        
+        super.setPageContext(context);
+    }
+    
+    public void initialize() {
+        json = new HashMap<String, Object>();
+    }
+    
+    public void destroy() {
+        json = null;
+    }
+    
+    @Override
+    public int doEndTag() throws JspException {
+        destroy();
+        
+        return super.doEndTag();
     }
 
     public void setProperty(String key, Object value) {

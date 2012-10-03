@@ -16,7 +16,7 @@ public class TooltipTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setTooltip(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public boolean getEnabled() {

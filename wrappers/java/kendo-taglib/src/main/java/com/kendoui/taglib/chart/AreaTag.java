@@ -16,12 +16,12 @@ public class AreaTag extends BaseTag /* interfaces */implements Border/* interfa
 
         parent.setArea(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     @Override
     public void setBorder(BorderTag value) {
-        setProperty("border", value);
+        setProperty("border", value.properties());
     }
 
     public String getBackground() {

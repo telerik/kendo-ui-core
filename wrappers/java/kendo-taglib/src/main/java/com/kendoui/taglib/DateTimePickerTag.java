@@ -19,12 +19,12 @@ public class DateTimePickerTag extends WidgetTag /* interfaces */implements Anim
 
     @Override
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value);
+        setProperty("animation", value.properties());
     }
 
     @Override
     public void setMonth(MonthTag value) {
-        setProperty("month", value);
+        setProperty("month", value.properties());
     }
 
     public String getCulture() {

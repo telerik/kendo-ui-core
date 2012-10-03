@@ -16,7 +16,7 @@ public class AsyncTag extends BaseTag /* interfaces *//* interfaces */ {
 
         parent.setAsync(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
 
     public boolean getAutoUpload() {
