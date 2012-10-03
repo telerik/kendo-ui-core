@@ -19,8 +19,8 @@
         invalidZeroEvents = OS && OS.android,
         mobileChrome = (invalidZeroEvents && OS.browser == "chrome"),
         START_EVENTS = "mousedown",
-        MOVE_EVENTS = "mousemove",
-        END_EVENTS = "mouseup mouseleave",
+        MOVE_EVENTS = "mousemove touchmove",
+        END_EVENTS = "mouseup mouseleave touchend touchcancel",
         KEYUP = "keyup",
         CHANGE = "change",
 
@@ -42,7 +42,7 @@
         CANCEL = "cancel",
         TAP = "tap";
 
-    if (support.touch) {
+    if (support.ignoreMouseEvents) {
         START_EVENTS = "touchstart";
         MOVE_EVENTS = "touchmove";
         END_EVENTS = "touchend touchcancel";
@@ -92,7 +92,7 @@
     }
 
     function addNS(events, ns) {
-        return events.replace(/ /g, ns + " ");
+        return events.replace(/(\w+)/g, "$1" + ns);
     }
 
     function preventTrigger(e) {
@@ -251,6 +251,7 @@
         _cancel: function() {
             var that = this;
             that.moved = that.pressed = false;
+            that.surface.off(that.eventMap);
             that.surface.off(that.ns);
         },
 
@@ -283,7 +284,7 @@
             that.moved = false;
             that.startTime = null;
 
-            if (support.touch) {
+            if (e.type.match(/touch/)) {
                 touch = originalEvent.changedTouches[0];
                 that.touchID = touch.identifier;
                 location = touch;
@@ -295,7 +296,7 @@
             }
 
             that._perAxis(START, location, now());
-            that.surface.off(that.eventMap).on(that.eventMap);
+            that.surface.on(that.eventMap);
             Drag.captured = false;
         },
 
@@ -380,7 +381,7 @@
                 touches,
                 idx;
 
-            if (support.touch) {
+            if (e.type.match(/touch/)) {
                 touches = originalEvent ? originalEvent.changedTouches : [];
                 idx = touches.length;
 
@@ -407,7 +408,10 @@
                 domElement = element[0];
 
             that.capture = false;
-            domElement.addEventListener(START_EVENTS, proxy(that._press, that), true);
+            $.each(START_EVENTS.split(" "), function(idx, event) {
+                domElement.addEventListener(event, proxy(that._press, that), true);
+            });
+
             $.each(END_EVENTS.split(" "), function() {
                 domElement.addEventListener(this, proxy(that._release, that), true);
             });

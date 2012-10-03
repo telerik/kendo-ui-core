@@ -53,6 +53,8 @@
                     clientX: offset.left,
                     clientY: offset.top
                 });
+
+                trigger("mouseup", { pageX: 1, pageY: 1 });
             }
 
             function setup(options, draggableOptions) {

@@ -22,6 +22,9 @@
             var Draggable = kendo.ui.Draggable,
                 draggable,
                 span;
+
+            QUnit.config.reorder = false;
+
             module("kendo.ui.Draggable", {
                 setup: function() {
                     span = $("<span/>").appendTo(document.body);
@@ -51,6 +54,7 @@
 
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 10, pageY: 1 }, $(document.documentElement));
+                trigger("mouseup", { pageX: 10, pageY: 2 });
             });
 
             test("moving the mouse within the allowed distance does not trigger the dragstart event", 0, function() {
@@ -61,7 +65,7 @@
 
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 1, pageY: 1 }, $(document.documentElement));
-
+                trigger("mouseup", { pageX: 10, pageY: 2 });
             });
 
             test("prevent default from drag start event does not trigger drag event", 1, function() {
@@ -77,6 +81,7 @@
 
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 10, pageY: 1 });
+                trigger("mouseup", { pageX: 10, pageY: 2 });
             });
 
             test("drag event is raised during dragging", 2, function() {
@@ -89,7 +94,7 @@
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 10, pageY: 1 });
                 trigger("mousemove", { pageX: 10, pageY: 2 });
-
+                trigger("mouseup", { pageX: 10, pageY: 2 });
             });
 
             test("dragend event is raised", 1, function() {
