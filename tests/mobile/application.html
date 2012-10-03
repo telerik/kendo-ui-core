@@ -59,6 +59,7 @@
 
             var init = kendo.mobile.init,
                 os = kendo.support.mobileOS;
+
             module("kendo.Application", {
                 setup: function() {
                     location.hash = '';
@@ -77,7 +78,6 @@
             function setup(html, options) {
                 var root = $("<div />").append(html);
                 $("#qunit-fixture").append(root);
-                console.log(root);
                 application = new kendo.mobile.Application(root, options);
             }
 
@@ -177,9 +177,9 @@
                     }
                 });
 
-                el.trigger($.Event("mousedown", { pageX: 1, pageY: 1}));
-                el.trigger($.Event("mousemove", { pageX: 1, pageY: 200}));
-                el.trigger($.Event("mouseup"));
+                el.trigger($.Event("touchstart", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
+                el.trigger($.Event("touchmove", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 200, identifier: 1}] }}));
+                el.trigger($.Event("touchend", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 200, identifier: 1}] }}));
             });
 
             test("triggers scroll when scrolled", 1, function() {
@@ -191,9 +191,9 @@
                     ok(true);
                 });
 
-                el.trigger($.Event("mousedown", { pageX: 1, pageY: 200}));
-                el.trigger($.Event("mousemove", { pageX: 1, pageY: 1}));
-                el.trigger($.Event("mouseup"));
+                el.trigger($.Event("touchstart", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 200, identifier: 1}] }}));
+                el.trigger($.Event("touchmove", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
+                el.trigger($.Event("touchend", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
             });
 
             function success() {

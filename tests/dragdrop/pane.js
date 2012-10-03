@@ -69,15 +69,15 @@ module("pane", {
 });
 
 function press(x, y, id) {
-    triggerTouchEvent("mousedown", { pageX: x, pageY: y, identifier: id || 1});
+    triggerTouchEvent("touchstart", { pageX: x, pageY: y, identifier: id || 1});
 }
 
 function move(x, y, id) {
-    triggerTouchEvent("mousemove", { pageX: x, pageY: y, identifier: id || 1});
+    triggerTouchEvent("touchmove", { pageX: x, pageY: y, identifier: id || 1});
 }
 
 function release(id) {
-    triggerTouchEvent("mouseup", { pageX: 1, pageY: 1, identifier: id || 1});
+    triggerTouchEvent("touchend", { pageX: 1, pageY: 1, identifier: id || 1});
 }
 
 test("zooms content", function() {

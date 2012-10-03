@@ -124,7 +124,6 @@
         return touches;
     }
 
-
     var TouchAxis = Class.extend({
         init: function(axis, location) {
             var that = this;
