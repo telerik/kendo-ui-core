@@ -28,6 +28,8 @@
 
             QUnit.config.reorder = false;
 
+            $.fx = { speeds : {400: 1} };
+
             function animationProperty(element, property) {
                 if (transforms) {
                     var transform = element.css(TRANSFORM);
@@ -76,14 +78,12 @@
                 kendo.fx.createEffect("foo", {
                     endState: function() {
                         fooFinished = true;
-                        this.options.complete();
                     }
                 });
 
                 kendo.fx.createEffect("bar", {
                     endState: function() {
                         barFinished = true;
-                        this.options.complete();
                     }
                 });
 
@@ -99,7 +99,6 @@
 
                 kendo.fx.createEffect("foo", {
                     endState: function() {
-                        this.options.complete();
                     }
                 });
 
@@ -119,7 +118,6 @@
                 kendo.fx.createEffect("foo", {
                     endState: function() {
                         reverseWasCalled = this.options.reverse;
-                        this.options.complete();
                     }
                 });
 
@@ -127,88 +125,68 @@
                 ok(reverseWasCalled);
             });
 
-            test("passing options to animate", function() {
+            asyncTest("passing options to animate works", 2, function() {
                 var reverseWasCalled = false, callbackWasCalled = false;
 
                 kendo.fx.createEffect("foo", {
                     endState: function() {
-                        reverseWasCalled = this.options.reverse;
-                        this.options.complete();
+                        ok(this.options.reverse);
                     }
                 });
 
                 animate(span, {
+                    effects: { foo: {} },
                     reverse: true,
                     complete: function() {
-                        callbackWasCalled = true;
-                    },
-                    effects: {
-                        foo: {}
+                        ok(true);
+                        start();
                     }
                 });
-                ok(reverseWasCalled);
-                ok(callbackWasCalled);
             });
 
-            test("passing options to animate effects as string", function() {
+            asyncTest("passing options to animate effects as string", 2, function() {
                 var reverseWasCalled = false, callbackWasCalled = false;
 
                 kendo.fx.createEffect("foo", {
                     endState: function() {
-                        reverseWasCalled = this.options.reverse;
-                        this.options.complete();
+                        ok(this.options.reverse);
                     }
                 });
 
                 animate(span, {
                     reverse: true,
                     complete: function() {
-                        callbackWasCalled = true;
+                        ok(true);
+                        start();
                     },
                     effects: "foo"
                 });
-                ok(reverseWasCalled);
-                ok(callbackWasCalled);
             });
 
-            test("make sure css, setup, teardown and restore are called in sequence", function() {
-                var cssWasKept = false, cssWasSet = false, setupWasCalled = false, teardownWasCalled = false, cssWasRestored = false;
+            asyncTest("make sure css, setup, teardown and restore are called in sequence", 3, function() {
                 span.css("overflow", "visible");
 
                 kendo.fx.createEffect("foo", {
                     restore: [ "overflow" ],
 
                     startState: function() {
-                        if (this.element.data("overflow") == "visible")
-                            cssWasKept = true;
-
+                        ok(this.element.data("overflow") == "visible")
                         return { overflow: "hidden" };
                     },
 
                     endState: function() {
-                        if (this.element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
-                            cssWasSet = true;
-
-                        setupWasCalled = true;
-                        this.options.complete();
+                        ok(this.element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
                     },
                     teardown: function() {
-                        if (this.element.css("overflow") == "visible")
-                            cssWasRestored = true;
-
-                        teardownWasCalled = true;
+                        ok(this.element.css("overflow") == "visible");
+                        start();
                     }
                 });
 
                 animate(span, "foo");
-                ok(cssWasKept);
-                ok(cssWasSet);
-                ok(setupWasCalled);
-                ok(cssWasRestored);
-                ok(teardownWasCalled);
             });
 
-            asyncTest("callback is fired asynchronously after animate", function() {
+            asyncTest("callback is fired asynchronously after animate", 1, function() {
                 var called = false;
 
                 kendo.fx.createEffect("moo", {
@@ -225,7 +203,6 @@
                     },
                     complete: function() {
                         called = true;
-                        ok(true);
                         start();
                     }
                 });
@@ -234,7 +211,7 @@
             });
 
             if (!kendo.support.browser.mozilla) {
-                asyncTest("animating height from 0 to 100 results in 100px high element", function() {
+                asyncTest("animating height from 0 to 100 results in 100px high element", 2, function() {
                     var height = -1;
 
                     kendo.fx.createEffect("foo", {
@@ -253,8 +230,8 @@
                             height = span.height();
                         },
                         complete: function(element) {
-                            ok(height == 0);
-                            ok(span.height() == 100);
+                            equal(height, 0);
+                            equal(span.height(), 100);
                             start();
                         }
                     });

@@ -266,7 +266,7 @@
         return properties;
     }
 
-    function normalizeCSS(element, properties, options) {
+    function normalizeCSS(element, properties) {
         var transformation = [], cssValues = {}, lowerKey, key, value, isTransformed;
 
         for (key in properties) {
@@ -323,7 +323,7 @@
 
                 options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
 
-                css = normalizeCSS(element, properties, options);
+                css = normalizeCSS(element, properties);
 
                 $.merge(oldKeys, keys(css));
                 element.data("keys", $.unique(oldKeys));
@@ -416,7 +416,7 @@
     kendo.fx.promise = function(element, options) {
         var effects = [],
             effect,
-            promise,
+            deferred = $.Deferred(),
             startState = {},
             endState = {},
             target;
@@ -425,21 +425,16 @@
 
         element.data("animating", true);
 
-        // create a promise for each effect
-        promise = $.Deferred(function(deferred) {
-            if (!size(options.effects)) {
-                options.init();
-                deferred.resolve();
-                return;
-            }
-
-            var opts = extend({}, options, { complete: deferred.resolve });
+        if (!size(options.effects)) {
+            options.init();
+            deferred.resolve();
+        } else {
 
             each(options.effects, function(effectName, settings) {
                 var effectClass = Effects[effectName];
 
                 if (effectClass) {
-                    effect = new effectClass(element, extend(true, opts, settings));
+                    effect = new effectClass(element, extend(true, {}, options, settings));
                     effects.push(effect);
                 }
             });
@@ -466,7 +461,7 @@
                 }
             }
 
-            startState = normalizeCSS(element, startState, opts);
+            startState = normalizeCSS(element, startState);
 
             if (transforms && !transitions) {
                 startState = strip3DTransforms(startState);
@@ -482,12 +477,12 @@
             if (kendo.fx.animate) {
                 options.init();
                 element.data("targetTransform", endState);
-                kendo.fx.animate(element, endState, opts);
+                kendo.fx.animate(element, endState, extend({}, options, { complete: deferred.resolve }));
             }
-        }).promise();
+        }
 
-        //wait for all effects to complete
-        $.when(promise).then(function() {
+        // Wait for all effects to complete
+        $.when(deferred.promise()).then(function() {
             element
                 .removeData("animating")
                 .dequeue(); // call next animation from the queue
@@ -895,6 +890,7 @@
 
             return extend(completion, options.properties);
         },
+
         teardown: function() {
             var that = this,
                 element = that.element,
