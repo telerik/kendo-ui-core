@@ -102,6 +102,7 @@
                          .css(that._position, position);
             }
 
+            that.resizing = true;
             that.trigger(RESIZE, extend(e, { position: position }));
         },
 
@@ -112,6 +113,7 @@
                 that.hint.remove();
             }
 
+            that.resizing = false;
             that.trigger(RESIZEEND, extend(e, { position: that.position }));
             $(document.body).css("cursor", "");
         },

@@ -176,8 +176,10 @@
                     if (!expand[that._dimension]()) {
                         that._triggerAction(EXPAND, expand);
                     } else {
-                        //check if in resizing process
-                        resizing.end();
+                        if (resizing.isResizing()) {
+                            resizing.end();
+                        }
+
                         that._triggerAction(COLLAPSE, collapse);
                     }
 
@@ -541,11 +543,16 @@
             this._resizable.destroy();
         },
 
+        isResizing: function() {
+            return this._resizable.resizing;
+        },
+
         _createHint: function(handle) {
             var that = this;
             return $("<div class='k-ghost-splitbar k-ghost-splitbar-" + that.orientation + " k-state-default' />")
                         .css(that.alternateSizingProperty, handle[that.alternateSizingProperty]());
         },
+
         _start: function(e) {
             var that = this,
                 splitbar = $(e.currentTarget),
