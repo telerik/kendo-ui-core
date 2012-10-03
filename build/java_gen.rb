@@ -595,9 +595,6 @@ class NestedTagArray < NestedTag
         @options = []
     end
 
-    def template
-    end
-
     def setter_template
         JAVA_ARRAY_SETTER
     end
@@ -618,6 +615,10 @@ class NestedTagArrayItem < NestedTag
         super
 
         @children = options[:children]
+    end
+
+    def tag_name
+        return @parent.tag_name.sub(@parent.name, @name)
     end
 
     def parent_setter

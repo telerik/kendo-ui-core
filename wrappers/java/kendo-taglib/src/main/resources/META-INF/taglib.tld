@@ -3084,7 +3084,7 @@ Template variables:
 
     <tag>
         <description>SeriesItem</description>
-        <name>chartSeriesSeriesItem</name>
+        <name>chartSeriesItem</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -4673,10 +4673,10 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Column</description>
-        <name>gridColumnsColumn</name>
+        <name>gridColumn</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
 
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
 
         <attribute>
@@ -4846,7 +4846,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>ToolbarItem</description>
-        <name>gridToolbarToolbarItem</name>
+        <name>gridToolbarItem</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5935,7 +5935,7 @@ format will also influence the appearance of the</description>
 
     <tag>
         <description>Pane</description>
-        <name>splitterPanesPane</name>
+        <name>splitterPane</name>
         <tag-class>com.kendoui.taglib.splitter.PaneTag</tag-class>
 
         <body-content>empty</body-content>

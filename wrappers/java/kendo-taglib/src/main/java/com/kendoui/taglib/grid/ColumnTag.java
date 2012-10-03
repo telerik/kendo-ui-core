@@ -5,6 +5,7 @@ import com.kendoui.taglib.BaseTag;
 
 import javax.servlet.jsp.JspException;
 
+
 @SuppressWarnings("serial")
 public class ColumnTag extends BaseTag /* interfaces *//* interfaces */ {
 

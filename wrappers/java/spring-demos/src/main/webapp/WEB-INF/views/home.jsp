@@ -14,11 +14,7 @@
         
         <kendo:window name="myWindow">
         	<strong>Window Content</strong>
-        	<script>
-        		function foo() {
-        			alert("foo");
-        		}
-        	</script>
+        	
         	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3">
         	    <kendo:dataSource type="odata" serverFiltering="true" serverPaging="true" pageSize="20">
         	    	<kendo:transport>
@@ -33,7 +29,13 @@
         	    	</script>
         	    </kendo:event>
             </kendo:autoComplete>
-        	
+        
+        	<kendo:grid name="grid">
+        		<kendo:gridColumns>
+        			<kendo:gridColumn title="Foo"></kendo:gridColumn>
+        			<kendo:gridColumn title="Bar" width="100"></kendo:gridColumn>
+        		</kendo:gridColumns>
+        	</kendo:grid>	
         </kendo:window>
         <kendo:chart name="myChart">
         	<kendo:chartTitle text="Foo">
