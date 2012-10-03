@@ -2,8 +2,9 @@ namespace Kendo.Mvc.UI
 {
     using System;
     using System.Web.Mvc;
-    using Kendo.Mvc.UI.Html;
+    using Kendo.Mvc.Extensions;
     using System.Web.UI;
+    using Kendo.Mvc.UI.Html;
     using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
 
@@ -33,6 +34,10 @@ namespace Kendo.Mvc.UI
 
         public T? SelectionEnd { get; set; }
 
+        public string LeftDragHandleTitle { get; set; }
+
+        public string RightDragHandleTitle { get; set; }
+
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
@@ -51,6 +56,8 @@ namespace Kendo.Mvc.UI
                 .Add("tickPlacement", TickPlacement.ToString().ToLowerInvariant(), () => TickPlacement.HasValue)
                 .Add("smallStep", SmallStep, () => SmallStep.HasValue)
                 .Add("largeStep", LargeStep, () => LargeStep.HasValue)
+                .Add("leftDragHandleTitle", LeftDragHandleTitle, () => LeftDragHandleTitle.HasValue())
+                .Add("rightDragHandleTitle", RightDragHandleTitle, () => RightDragHandleTitle.HasValue())
                 .Add("min", Min, () => Min.HasValue)
                 .Add("max", Max, () => Max.HasValue);
 

@@ -146,5 +146,21 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>Sets the title of the slider draghandle.</summary>
+        public RangeSliderBuilder<T> LeftDragHandleTitle(string title)
+        {
+            Component.LeftDragHandleTitle = title;
+
+            return this;
+        }
+
+        /// <summary>Sets the title of the slider draghandle.</summary>
+        public RangeSliderBuilder<T> RightDragHandleTitle(string title)
+        {
+            Component.RightDragHandleTitle = title;
+
+            return this;
+        }
     }
 }

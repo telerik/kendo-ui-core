@@ -175,5 +175,22 @@ namespace Kendo.Mvc.UI.Tests
             const bool showButtons = true;
             builder.ShowButtons(showButtons).ShouldBeType<SliderBuilder<int>>();
         }
+
+        [Fact]
+        public void DragHandleTitle_should_return_builder()
+        {
+            const string title = "my title";
+            builder.DragHandleTitle(title).ShouldBeType<SliderBuilder<int>>();
+        }
+
+        [Fact]
+        public void Should_set_DragHandleTitle_property_of_the_slider()
+        {
+            const string title = "my title";
+            builder.DragHandleTitle(title);
+
+            component.DragHandleTitle.ShouldEqual(title);
+        }
+
     }
 }
