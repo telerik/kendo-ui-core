@@ -37,14 +37,14 @@ pom_file POM
 # Build the kendo-taglib-*.jar by running maven
 file JSP_TAGLIB_JAR => [POM, JSP_TAGLIB_SRC].flatten do
 
-    mvn(JSP_TAGLIB_POM, 'package')
+    mvn(JSP_TAGLIB_POM, 'clean package')
 
 end
 
 # Build the spring-demos-*.war by running maven
 file SPRING_DEMOS_WAR => [POM, JSP_TAGLIB_JAR, SPRING_DEMOS_SRC].flatten do
 
-    mvn(POM, 'package')
+    mvn(POM, 'clean package')
 
 end
 
