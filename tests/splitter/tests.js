@@ -32,6 +32,10 @@ tests.push(
         title: "splitter mvvm"
     },
     {
+        page: "splitter/navigation.html",
+        title: "splitter navigation"
+    },
+    {
         page: "splitter/lint.html",
         title: "splitter lint"
     }

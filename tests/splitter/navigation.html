@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Splitter navigation</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.resizable.js"></script>
+        <script src="../../src/kendo.splitter.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Splitter client creation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var keys = kendo.keys;
+
+            module("Splitter / Navigation", {
+                teardown: function() {
+                    $('.k-splitter').remove();
+                }
+            });
+
+            jQuery.fn.press = function(options) {
+                if (!options.type) {
+                    options.type = "keydown";
+                }
+
+                if (!options.preventDefault) {
+                    options.preventDefault = $.noop;
+                }
+
+                this.trigger(options);
+            }
+
+            test("Splitter explicitly presses the focused bar", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitterObject = splitter.data("kendoSplitter"),
+                    splitbar = splitter.find(".k-splitbar");
+
+                stub(splitterObject.resizing, "press");
+
+                splitbar.focus();
+
+                equal(splitterObject.resizing.args("press")[0][0], splitbar[0]);
+            });
+
+            test("Splitter explicitly call resizing.end() on blur of the splitbar", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitterObject = splitter.data("kendoSplitter"),
+                    splitbar = splitter.find(".k-splitbar");
+
+                stub(splitterObject.resizing, "end");
+
+                splitbar.focus().blur();
+
+                equal(splitterObject.resizing.calls("end"), 1);
+            });
+
+            test("Splitter explicitly presses the clicked bar", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitterObject = splitter.data("kendoSplitter"),
+                    splitbar = splitter.find(".k-splitbar");
+
+                stub(splitterObject.resizing, "press");
+
+                splitbar.mousedown();
+
+                equal(splitterObject.resizing.args("press")[0][0], splitbar[0]);
+            });
+
+            test("Splitter moves splitbar to left on key LEFT", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitbar = splitter.find(".k-splitbar");
+
+                splitbar.focus().press({
+                    keyCode: keys.LEFT
+                });
+
+                var hint = splitter.data("kendoSplitter").resizing._resizable.hint;
+
+                equal(hint.position().left, splitbar.position().left - 10);
+            });
+
+            test("Splitter moves splitbar to right on key RIGHT", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitbar = splitter.find(".k-splitbar");
+
+                splitbar.focus().press({
+                    keyCode: keys.RIGHT
+                });
+
+                var hint = splitter.data("kendoSplitter").resizing._resizable.hint;
+
+                equal(hint.position().left, splitbar.position().left + 10);
+            });
+
+            test("Splitter uses only specific keys depending on the orientation", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitbar = splitter.find(".k-splitbar");
+
+                splitbar.focus().press({
+                    keyCode: keys.RIGHT
+                });
+
+                var hint = splitter.data("kendoSplitter").resizing._resizable.hint;
+
+                equal(hint.position().left, splitbar.position().left + 10);
+
+                splitbar.focus().press({
+                    keyCode: keys.DOWN
+                });
+
+                equal(hint.position().left, splitbar.position().left + 10);
+            });
+
+            test("Splitter accepts resized splitbar on ENTER", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitbar = splitter.find(".k-splitbar"),
+                    initialLeft = splitbar.position().left;
+
+                splitbar.focus().press({
+                    keyCode: keys.LEFT
+                });
+
+                splitbar.focus().press({
+                    keyCode: keys.ENTER
+                });
+
+                equal(splitbar.position().left, initialLeft - 10);
+            });
+
+            test("Splitter can resize splitbar after previous resize", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitbar = splitter.find(".k-splitbar");
+
+                splitbar.focus().press({
+                    keyCode: keys.ENTER
+                });
+                splitbar.focus().press({
+                    keyCode: keys.LEFT
+                });
+
+                var hint = splitter.data("kendoSplitter").resizing._resizable.hint;
+
+                equal(hint.position().left, splitbar.position().left - 10);
+            });
+
+            test("Splitter defines navigationKeys depending on the orientation", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        orientation: "vertical"
+                    }),
+                    navKeys = splitter.data("kendoSplitter").navigationKeys;
+
+                equal(navKeys.decrease, keys.UP);
+                equal(navKeys.increase, keys.DOWN);
+            });
+
+            test("Resizable handles ESC", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitbar = splitter.find(".k-splitbar"),
+                    initialLeft = splitbar.position().left;
+
+                splitbar.focus().press({
+                    keyCode: keys.LEFT
+                });
+
+                splitbar.press({
+                    type: "keyup",
+                    keyCode: keys.ESC
+                });
+
+                var hint = splitter.data("kendoSplitter").resizing._resizable.hint;
+
+                ok(!hint.is(":visible"));
+                equal(splitbar.position().left, initialLeft);
+           });
+
+           test("Splitter collapses left pane on CTRL + LEFT", function() {
+               var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                       panes: [{ collapsible: true },
+                       {}]
+                   }),
+                   splitbar = splitter.find(".k-splitbar"),
+                   pane = splitter.find(".k-pane:first");
+
+                splitbar.focus().press({
+                    ctrlKey: true,
+                    keyCode: keys.LEFT
+                });
+
+                equal(pane.width(), 0);
+           });
+
+           test("Splitter collapses left pane on CTRL + RIGHT", function() {
+               var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                       panes: [
+                           { collapsible: true },
+                           { collapsible: true }
+                       ]
+                   }),
+                   splitbar = splitter.find(".k-splitbar"),
+                   pane = splitter.find(".k-pane:last");
+
+                splitbar.focus().press({
+                    ctrlKey: true,
+                    keyCode: keys.RIGHT
+                });
+
+                equal(pane.width(), 0);
+           });
+
+           test("Splitter expands left pane on CTRL + RIGHT", function() {
+               var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                       panes: [
+                           { collapsible: true },
+                           { collapsible: true }
+                       ]
+                   }),
+                   splitbar = splitter.find(".k-splitbar"),
+                   pane = splitter.find(".k-pane:first");
+
+               splitbar.focus().press({
+                   ctrlKey: true,
+                   keyCode: keys.LEFT
+               });
+
+               splitbar.focus().press({
+                   ctrlKey: true,
+                   keyCode: keys.RIGHT
+               });
+
+               notEqual(pane.width(), 0);
+           });
+
+           test("Splitter expands right pane on CTRL + LEFT", function() {
+               var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                       panes: [
+                           { collapsible: true },
+                           { collapsible: true }
+                       ]
+                   }),
+                   splitbar = splitter.find(".k-splitbar"),
+                   pane = splitter.find(".k-pane:last");
+
+               splitbar.focus().press({
+                   ctrlKey: true,
+                   keyCode: keys.RIGHT
+               });
+
+               splitbar.focus().press({
+                   ctrlKey: true,
+                   keyCode: keys.LEFT
+               });
+
+               notEqual(pane.width(), 0);
+           });
+
+           test("Splitter calls resizing.end if pane is process of resizing when press CTRL + LEFT", function() {
+               var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                       panes: [
+                           { collapsible: true },
+                           { collapsible: true }
+                       ]
+                   }),
+                   resizing = splitter.data("kendoSplitter").resizing,
+                   splitbar = splitter.find(".k-splitbar");
+
+               stub(resizing, "end");
+
+               splitbar.focus().press({
+                   keyCode: keys.RIGHT
+               });
+
+               splitbar.press({
+                   ctrlKey: true,
+                   keyCode: keys.LEFT
+               });
+
+               equal(resizing.calls("end"), 1);
+           });
+
+           test("Splitter calls resizing.end if pane is process of resizing when press CTRL + RIGHT", function() {
+               var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                       panes: [
+                           { collapsible: true },
+                           { collapsible: true }
+                       ]
+                   }),
+                   resizing = splitter.data("kendoSplitter").resizing,
+                   splitbar = splitter.find(".k-splitbar");
+
+               stub(resizing, "end");
+
+               splitbar.focus().press({
+                   keyCode: keys.RIGHT
+               });
+
+               splitbar.press({
+                   ctrlKey: true,
+                   keyCode: keys.RIGHT
+               });
+
+               equal(resizing.calls("end"), 1);
+           });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -63,9 +63,9 @@
             isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
 
             that.orientation = isHorizontal ? HORIZONTAL : VERTICAL;
-            that.supportedKeys = {
-                up: isHorizontal ? keys.LEFT : keys.UP,
-                down: isHorizontal ? keys.RIGHT : keys.DOWN
+            that.navigationKeys = {
+                decrease: isHorizontal ? keys.LEFT : keys.UP,
+                increase: isHorizontal ? keys.RIGHT : keys.DOWN
             };
 
             that.bind(RESIZE, proxy(that._resize, that));
@@ -160,7 +160,7 @@
             var that = this,
                 key = e.keyCode,
                 resizing = that.resizing,
-                supportedKeys = that.supportedKeys,
+                navigationKeys = that.navigationKeys,
                 target = $(e.currentTarget),
                 delta, next, prev;
 
@@ -171,7 +171,7 @@
                 e.preventDefault();
                 var action = that.orientation === HORIZONTAL ? "width" : "height";
 
-                if (key === supportedKeys.up) {
+                if (key === navigationKeys.decrease) {
                     if (!next[action]()) {
                         that._triggerAction(EXPAND, next);
                     } else {
@@ -180,7 +180,7 @@
                             that._triggerAction(COLLAPSE, prev);
                         }
                     }
-                } else if (key === supportedKeys.down) {
+                } else if (key === navigationKeys.increase) {
                     if (!prev[action]()) {
                         that._triggerAction(EXPAND, prev);
                     } else {
@@ -192,9 +192,9 @@
                 }
 
             } else {
-                if (key === supportedKeys.down) {
+                if (key === navigationKeys.increase) {
                     delta = 10;
-                } else if (key === supportedKeys.up) {
+                } else if (key === navigationKeys.decrease) {
                     delta = -10;
                 } else if (key === keys.ENTER) {
                     resizing.end();
