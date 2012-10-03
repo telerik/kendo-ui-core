@@ -1644,6 +1644,8 @@ function pad(number) {
 
         support.mobileOS = support.detectOS(navigator.userAgent);
 
+        support.ignoreMouseEvents = support.mobileOS.ios || support.mobileOS.android;
+
         function detectBrowser(ua) {
             var browser = false, match = [],
                 browserRxs = {

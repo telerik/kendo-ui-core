@@ -11,9 +11,9 @@
         extend = $.extend,
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
-        START_EVENTS = "mousedown",
-        MOVE_EVENTS = "mousemove",
-        END_EVENTS = "mouseup mouseleave",
+        START_EVENTS = "touchstart mousedown",
+        MOVE_EVENTS = "mousemove touchmove",
+        END_EVENTS = "mouseup mouseleave touchend touchcancel",
 
         // Event namespace
         NS = ".kendoUserEvents",
@@ -30,7 +30,7 @@
         GESTUREEND = "gestureend",
         GESTURETAP = "gesturetap";
 
-    if (support.touch) {
+    if (support.ignoreMouseEvents) {
         START_EVENTS = "touchstart";
         MOVE_EVENTS = "touchmove";
         END_EVENTS = "touchend touchcancel";
@@ -40,6 +40,10 @@
         START_EVENTS = "MSPointerDown";
         MOVE_EVENTS = "MSPointerMove";
         END_EVENTS = "MSPointerUp MSPointerCancel";
+    }
+
+    function addNS(events) {
+        return events.replace(/(\w+)/g, "$1" + NS);
     }
 
     function preventTrigger(e) {
@@ -88,7 +92,7 @@
                 location: e
             });
         }
-        else if (support.touch) {
+        else if (e.type.match(/touch/)) {
             changedTouches = originalEvent ? originalEvent.changedTouches : [];
             for (length = changedTouches.length; idx < length; idx ++) {
                 touch = changedTouches[idx];
@@ -301,7 +305,7 @@
             eventMap[MOVE_EVENTS] = function(e) { that._move(e); };
             eventMap[END_EVENTS] = function(e) { that._end(e); };
 
-            element.on(START_EVENTS + NS, filter, proxy(that._start, that));
+            element.on(addNS(START_EVENTS), filter, proxy(that._start, that));
 
             that.surface.on(eventMap);
 
@@ -310,11 +314,11 @@
             }
 
             if (options.preventDragEvent) {
-                element.on("dragstart " + NS, false);
+                element.on(addNS("dragstart"), false);
             }
 
             if (!options.allowSelection) {
-                var args = ["mousedown" + NS + " selectstart" + NS, filter, preventTrigger];
+                var args = [addNS("mousedown selectstart"), filter, preventTrigger];
 
                 if (filter instanceof $) {
                     args.splice(2, 0, null);
