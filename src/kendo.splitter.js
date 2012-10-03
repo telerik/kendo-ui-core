@@ -63,10 +63,13 @@
             isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
 
             that.orientation = isHorizontal ? HORIZONTAL : VERTICAL;
-            that.navigationKeys = {
+            that._dimension = isHorizontal ? "width" : "height";
+            that._navigationKeys = {
                 decrease: isHorizontal ? keys.LEFT : keys.UP,
                 increase: isHorizontal ? keys.RIGHT : keys.DOWN
             };
+
+            that._resizeStep = 10;
 
             that.bind(RESIZE, proxy(that._resize, that));
 
@@ -108,12 +111,8 @@
             that.element
                 .on("mousedown" + NS, splitbarSelector, function(e) { e.currentTarget.focus(); })
                 .on("keydown" + NS, splitbarSelector, proxy(that._keydown, that))
-                .on("focus" + NS, splitbarSelector, function(e) {
-                    that.resizing.press($(e.currentTarget));
-                })
-                .on("blur" + NS, splitbarSelector, function(e) {
-                    that.resizing.end();
-                })
+                .on("focus" + NS, splitbarSelector, function(e) { that.resizing.press($(e.currentTarget)); })
+                .on("blur" + NS, splitbarSelector, function(e) { that.resizing.end(); })
                 .on(MOUSEENTER + NS, splitbarDraggableSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on(MOUSELEAVE + NS, splitbarDraggableSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on("mousedown" + NS, splitbarDraggableSelector, function() { that.resizing.end(); that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
@@ -160,42 +159,35 @@
             var that = this,
                 key = e.keyCode,
                 resizing = that.resizing,
-                navigationKeys = that.navigationKeys,
                 target = $(e.currentTarget),
-                delta, next, prev;
+                navigationKeys = that._navigationKeys,
+                delta, expand, collapse;
 
             if (e.ctrlKey) {
-                prev = target.prev();
-                next = target.next();
-
-                e.preventDefault();
-                var action = that.orientation === HORIZONTAL ? "width" : "height";
-
                 if (key === navigationKeys.decrease) {
-                    if (!next[action]()) {
-                        that._triggerAction(EXPAND, next);
-                    } else {
-                        if (target.has(".k-collapse-prev,.k-collapse-next")[0]) {
-                            resizing.end();
-                            that._triggerAction(COLLAPSE, prev);
-                        }
-                    }
-                } else if (key === navigationKeys.increase) {
-                    if (!prev[action]()) {
-                        that._triggerAction(EXPAND, prev);
-                    } else {
-                        if (target.has(".k-collapse-prev,.k-collapse-next")[0]) {
-                            resizing.end();
-                            that._triggerAction(COLLAPSE, next);
-                        }
-                    }
+                    collapse = target.prev();
+                    expand = target.next();
+                } else if (key === navigationKeys.increase){
+                    collapse = target.next();
+                    expand = target.prev();
                 }
 
+                if (collapse) {
+                    if (!expand[that._dimension]()) {
+                        that._triggerAction(EXPAND, expand);
+                    } else {
+                        //check if in resizing process
+                        resizing.end();
+                        that._triggerAction(COLLAPSE, collapse);
+                    }
+
+                    e.preventDefault();
+                }
             } else {
                 if (key === navigationKeys.increase) {
-                    delta = 10;
+                    delta = that._resizeStep;
                 } else if (key === navigationKeys.decrease) {
-                    delta = -10;
+                    delta = that._resizeStep * -1;
                 } else if (key === keys.ENTER) {
                     resizing.end();
                     e.preventDefault();

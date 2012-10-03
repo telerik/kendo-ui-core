@@ -159,7 +159,7 @@
                 var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
                         orientation: "vertical"
                     }),
-                    navKeys = splitter.data("kendoSplitter").navigationKeys;
+                    navKeys = splitter.data("kendoSplitter")._navigationKeys;
 
                 equal(navKeys.decrease, keys.UP);
                 equal(navKeys.increase, keys.DOWN);
