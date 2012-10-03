@@ -30,7 +30,11 @@
 
             function startResizing(splitter, options) {
                 var resizingHandler = splitter.data("kendoSplitter").resizing;
-                resizingHandler._resizable._start($.extend({ x: { location: 0 }, y: { location: 0 }, currentTarget: splitter.find(".k-splitbar") }, options));
+                options = $.extend({ x: { location: 0 }, y: { location: 0 }, currentTarget: splitter.find(".k-splitbar") }, options)
+                options.x.startLocation = options.x.location;
+                options.y.startLocation = options.y.location;
+
+                resizingHandler._resizable._start(options);
             }
 
             test("resizing is initialized along with splitter", function() {
@@ -233,8 +237,8 @@
                     initialSplitBarPosition = splitBar.offset().left,
                     panes = splitter.find(".k-pane");
 
-                    resizingHandler._resizable._start({ currentTarget: splitBar, x: {location: initialSplitBarPosition } });
-                    resizingHandler._resizable._resize({ x: { location: initialSplitBarPosition + 5 } });
+                startResizing(splitter, { currentTarget: splitBar, x: {location: initialSplitBarPosition } });
+                resizingHandler._resizable._resize({ x: { location: initialSplitBarPosition + 5 } });
                 resizingHandler._resizable._stop({ currentTarget: splitBar });
 
                 ok(isPixelSize(panes.eq(0).data("pane").size));

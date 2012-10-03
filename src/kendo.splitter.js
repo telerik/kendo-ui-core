@@ -66,7 +66,7 @@
             that.supportedKeys = {
                 up: isHorizontal ? keys.LEFT : keys.UP,
                 down: isHorizontal ? keys.RIGHT : keys.DOWN
-            }
+            };
 
             that.bind(RESIZE, proxy(that._resize, that));
 
@@ -618,7 +618,7 @@
 
             setTimeout(function() {
                 that.press(splitbar);
-            })
+            });
 
             return false;
         }
