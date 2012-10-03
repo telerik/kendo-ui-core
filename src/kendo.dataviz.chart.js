@@ -1013,29 +1013,36 @@
         getSlot: function(from, to) {
             var axis = this,
                 options = axis.options,
+                majorTicks = axis.getMajorTickPositions(),
                 reverse = options.reverse,
-                vertical = options.vertical,
                 justified = options.justified,
-                valueAxis = vertical ? Y : X,
+                valueAxis = options.vertical ? Y : X,
                 lineBox = axis.lineBox(),
-                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1),
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
-                size = vertical ? lineBox.height() : lineBox.width(),
-                intervals = math.max(1, options.categories.length - (justified ? 1 : 0)),
-                step = (reverse ? -1 : 1) * (size / intervals),
+                lineEnd = lineBox[valueAxis + (reverse ? 1 : 2)],
+                slotBox = lineBox.clone(),
+                intervals = math.max(1, majorTicks.length - (justified ? 2 : 1)),
                 p1,
                 p2,
                 slotSize;
 
             from = clipValue(from, 0, intervals);
             to = defined(to) ? to : from;
-            to = clipValue(to, from, intervals);
-            p1 = lineStart + (from * step);
-            p2 = p1 + (justified ? 0 : step);
+            to = clipValue(to - 1, from, intervals);
+            p1 = from === 0 ? lineStart : majorTicks[from];
+            p2 = justified ? p1 : majorTicks[to];
             slotSize = to - from;
 
-            if (slotSize > 0 || (from == to && intervals == from)) {
-                p2 = p1 + (slotSize * step);
+            if (slotSize > 0 || (from === to)) {
+                p2 = majorTicks[to + 1] || lineEnd;
+            }
+
+            if (justified) {
+                if (from === intervals) {
+                    p1 = p2;
+                } else {
+                    p2 = p1;
+                }
             }
 
             slotBox[valueAxis + 1] = reverse ? p2 : p1;
@@ -1279,50 +1286,37 @@
             return positions;
         },
 
-        getSlot: function(from, to) {
+        getCategory: function(point) {
             var axis = this,
                 options = axis.options;
 
             if (options.roundToBaseUnit) {
-                return CategoryAxis.fn.getSlot.call(axis, from, to);
+                return CategoryAxis.fn.getCategory.call(axis, point);
             } else {
-                // TODO: Replace base imlpementation with this
-                var majorTicks = axis.getMajorTickPositions();
+                // TODO Implement via getMajorTickPositions
                 var reverse = options.reverse,
                     vertical = options.vertical,
-                    justified = options.justified,
                     valueAxis = vertical ? Y : X,
                     lineBox = axis.lineBox(),
-                    slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1),
-                    lineEnd = lineBox[valueAxis + (reverse ? 1 : 2)],
-                    intervals = math.max(1, majorTicks.length - (justified ? 2 : 1)),
-                    p1,
-                    p2,
-                    slotSize;
+                    lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                    lineSize = vertical ? lineBox.height() : lineBox.width(),
+                    totalCategories = options.categories.length - 1,
+                    intervals = math.max(1, totalCategories),
+                    offset = (reverse ? -1 : 1) * (point[valueAxis] - lineStart),
+                    step = intervals / lineSize,
+                    categoriesOffset = round(offset * step),
+                    categoryIx;
 
-                from = clipValue(from, 0, intervals);
-                to = defined(to) ? to : from;
-                to = clipValue(to, from, intervals);
-                p1 = majorTicks[from];
-                p2 = justified ? p1 : majorTicks[to];
-                slotSize = to - from;
-
-                if (slotSize > 0 || (from == to)) {
-                    p2 = majorTicks[to + 1] || lineEnd;
+                if (offset < 0 || offset > lineSize) {
+                    return null;
                 }
 
-                if (justified) {
-                    if (from === intervals) {
-                        p1 = p2;
-                    } else {
-                        p2 = p1;
-                    }
-                }
+                categoryIx = vertical ?
+                    intervals - categoriesOffset:
+                    categoriesOffset;
 
-                slotBox[valueAxis + 1] = reverse ? p2 : p1;
-                slotBox[valueAxis + 2] = reverse ? p1 : p2;
-
-                return slotBox;
+                categoryIx = math.min(categoryIx, totalCategories);
+                return options.categories[categoryIx];
             }
         },
 
