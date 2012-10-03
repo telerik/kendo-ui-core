@@ -19,7 +19,7 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     @Override
     public void setCategoryAxis(CategoryAxisTag value) {
-        setProperty("categoryAxis", value);
+        setProperty("categoryaxis", value);
     }
 
     @Override
@@ -39,12 +39,12 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     @Override
     public void setPlotArea(PlotAreaTag value) {
-        setProperty("plotArea", value);
+        setProperty("plotarea", value);
     }
 
     @Override
     public void setSeries(SeriesTag value) {
-        setProperty("series", value);
+        setProperty("series", value.series());
     }
 
     @Override
@@ -54,17 +54,17 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     @Override
     public void setXAxis(XAxisTag value) {
-        setProperty("xAxis", value);
+        setProperty("xaxis", value);
     }
 
     @Override
     public void setSeriesDefaults(SeriesDefaultsTag value) {
-        setProperty("seriesDefaults", value);
+        setProperty("seriesdefaults", value);
     }
 
     @Override
     public void setValueAxis(ValueAxisTag value) {
-        setProperty("valueAxis", value);
+        setProperty("valueaxis", value);
     }
 
     @Override

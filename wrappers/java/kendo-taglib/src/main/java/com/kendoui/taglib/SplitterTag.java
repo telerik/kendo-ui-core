@@ -19,7 +19,7 @@ public class SplitterTag extends WidgetTag /* interfaces */implements Panes/* in
 
     @Override
     public void setPanes(PanesTag value) {
-        setProperty("panes", value);
+        setProperty("panes", value.panes());
     }
 
     public String getOrientation() {

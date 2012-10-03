@@ -2306,264 +2306,6 @@ upwards from the current position.</description>
         <body-content>JSP</body-content>
 
 
-        <attribute>
-            <description>The data field containing the series value.</description>
-            <name>field</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Name template for auto-generated
-series when binding to grouped data.
-Template variables:</description>
-            <name>groupNameTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The series name visible in the legend.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Aggregate function for date series.
-This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.</description>
-            <name>aggregate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The series base color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Configures the behavior for handling missing values in area series.</description>
-            <name>missingValues</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The series opacity.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>A value indicating if the series should be stacked.</description>
-            <name>stack</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>The name of the value axis to use.</description>
-            <name>axis</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bar color.</description>
-            <name>colorField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The distance between category clusters.</description>
-            <name>gap</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>Space between bars.</description>
-            <name>spacing</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble category name.</description>
-            <name>categoryField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The max size of the bubble.</description>
-            <name>maxSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The min size of the bubble.</description>
-            <name>minSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble size value.</description>
-            <name>sizeField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>A boolean value indicating whether to show the bubble category name in the legend.</description>
-            <name>visibleInLegendField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The name of the X axis to use.</description>
-            <name>xAxis</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble x value.</description>
-            <name>xField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The name of the Y axis to use.</description>
-            <name>yAxis</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble y value.</description>
-            <name>yField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing a boolean value that indicates if the sector is exploded
-(available only for the last level of the series).</description>
-            <name>explodeField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The the size of the donut hole.</description>
-            <name>holeSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The margin around each series
-(not available for the last level of the series).</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding around the donut chart (equal on all sides).</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The size of the series.</description>
-            <name>size</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The start angle of the first donut segment.</description>
-            <name>startAngle</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The dash type of the line.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The line width of the line chart.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The series color when open value is smoller then close value.</description>
-            <name>downColor</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the body color.</description>
-            <name>downColorField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the open value.</description>
-            <name>openField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the high value.</description>
-            <name>highField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the low value.</description>
-            <name>lowField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the close value.</description>
-            <name>closeField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The line of the candlestick chart.</description>
-            <name>line</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
     </tag>
 
 
@@ -3335,6 +3077,275 @@ Template variables:
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>SeriesItem</description>
+        <name>chartSeriesSeriesItem</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTag</tag-class>
+
+        <body-content>JSP</body-content>
+
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.
+Template variables:</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Aggregate function for date series.
+This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.</description>
+            <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series base color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Configures the behavior for handling missing values in area series.</description>
+            <name>missingValues</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>A value indicating if the series should be stacked.</description>
+            <name>stack</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The name of the value axis to use.</description>
+            <name>axis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the bar color.</description>
+            <name>colorField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The distance between category clusters.</description>
+            <name>gap</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>Space between bars.</description>
+            <name>spacing</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the bubble category name.</description>
+            <name>categoryField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The max size of the bubble.</description>
+            <name>maxSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The min size of the bubble.</description>
+            <name>minSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the bubble size value.</description>
+            <name>sizeField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>A boolean value indicating whether to show the bubble category name in the legend.</description>
+            <name>visibleInLegendField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The name of the X axis to use.</description>
+            <name>xAxis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the bubble x value.</description>
+            <name>xField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The name of the Y axis to use.</description>
+            <name>yAxis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the bubble y value.</description>
+            <name>yField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing a boolean value that indicates if the sector is exploded
+(available only for the last level of the series).</description>
+            <name>explodeField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The the size of the donut hole.</description>
+            <name>holeSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin around each series
+(not available for the last level of the series).</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding around the donut chart (equal on all sides).</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The size of the series.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The start angle of the first donut segment.</description>
+            <name>startAngle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the line.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The line width of the line chart.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series color when open value is smoller then close value.</description>
+            <name>downColor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the body color.</description>
+            <name>downColorField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the open value.</description>
+            <name>openField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the high value.</description>
+            <name>highField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the low value.</description>
+            <name>lowField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the close value.</description>
+            <name>closeField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The line of the candlestick chart.</description>
+            <name>line</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -4494,71 +4505,8 @@ the minimum and maximum values.</description>
         <name>gridColumns</name>
         <tag-class>com.kendoui.taglib.grid.ColumnsTag</tag-class>
 
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
-
-        <attribute>
-            <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
-            <name>command</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Specified whether the column content is escaped. Disable encoding if the data contains HTML markup.</description>
-            <name>encoded</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>The field from the datasource that will be displayed in the column.</description>
-            <name>field</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies whether given column is filterable.</description>
-            <name>filterable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>The format that will be applied on the column cells.</description>
-            <name>format</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies whether given column is sortable.</description>
-            <name>sortable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>The template for column's cells.</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The text that will be displayed in the column header.</description>
-            <name>title</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The width of the column.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
 
     </tag>
 
@@ -4717,26 +4665,79 @@ the minimum and maximum values.</description>
         <name>gridToolbar</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarTag</tag-class>
 
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+
+    <tag>
+        <description>Column</description>
+        <name>gridColumnsColumn</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
+
         <body-content>empty</body-content>
 
 
         <attribute>
-            <description>The name of the command. One of the predefined or a custom.</description>
-            <name>name</name>
+            <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+            <name>command</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The template for the command button.</description>
+            <description>Specified whether the column content is escaped. Disable encoding if the data contains HTML markup.</description>
+            <name>encoded</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The field from the datasource that will be displayed in the column.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies whether given column is filterable.</description>
+            <name>filterable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The format that will be applied on the column cells.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies whether given column is sortable.</description>
+            <name>sortable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The template for column's cells.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The text of the command that will be set on the button.</description>
-            <name>text</name>
+            <description>The text that will be displayed in the column header.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the column.</description>
+            <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4836,6 +4837,38 @@ the minimum and maximum values.</description>
         <attribute>
             <description>Defines the text of the refresh button tooltip.</description>
             <name>refresh</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>ToolbarItem</description>
+        <name>gridToolbarToolbarItem</name>
+        <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
+
+        <body-content>empty</body-content>
+
+
+        <attribute>
+            <description>The name of the command. One of the predefined or a custom.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The template for the command button.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text of the command that will be set on the button.</description>
+            <name>text</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -5893,6 +5926,17 @@ format will also influence the appearance of the</description>
         <description>Panes</description>
         <name>splitterPanes</name>
         <tag-class>com.kendoui.taglib.splitter.PanesTag</tag-class>
+
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+
+    <tag>
+        <description>Pane</description>
+        <name>splitterPanesPane</name>
+        <tag-class>com.kendoui.taglib.splitter.PaneTag</tag-class>
 
         <body-content>empty</body-content>
 

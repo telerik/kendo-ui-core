@@ -26,12 +26,12 @@ public class ScaleTag extends BaseTag /* interfaces */implements Labels, MajorTi
 
     @Override
     public void setMajorTicks(MajorTicksTag value) {
-        setProperty("majorTicks", value);
+        setProperty("majorticks", value);
     }
 
     @Override
     public void setMinorTicks(MinorTicksTag value) {
-        setProperty("minorTicks", value);
+        setProperty("minorticks", value);
     }
 
     public int getEndAngle() {

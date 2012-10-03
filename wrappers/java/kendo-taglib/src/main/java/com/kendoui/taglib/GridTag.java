@@ -19,7 +19,7 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
 
     @Override
     public void setColumns(ColumnsTag value) {
-        setProperty("columns", value);
+        setProperty("columns", value.columns());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
 
     @Override
     public void setToolbar(ToolbarTag value) {
-        setProperty("toolbar", value);
+        setProperty("toolbar", value.toolbar());
     }
 
     public boolean getAutoBind() {

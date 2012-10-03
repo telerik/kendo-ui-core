@@ -31,22 +31,22 @@ public class ValueAxisTag extends BaseTag /* interfaces */implements Labels, Lin
 
     @Override
     public void setMajorGridLines(MajorGridLinesTag value) {
-        setProperty("majorGridLines", value);
+        setProperty("majorgridlines", value);
     }
 
     @Override
     public void setMajorTicks(MajorTicksTag value) {
-        setProperty("majorTicks", value);
+        setProperty("majorticks", value);
     }
 
     @Override
     public void setMinorGridLines(MinorGridLinesTag value) {
-        setProperty("minorGridLines", value);
+        setProperty("minorgridlines", value);
     }
 
     @Override
     public void setMinorTicks(MinorTicksTag value) {
-        setProperty("minorTicks", value);
+        setProperty("minorticks", value);
     }
 
     @Override

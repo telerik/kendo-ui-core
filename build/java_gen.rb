@@ -583,15 +583,15 @@ end
 class NestedTagArray < NestedTag
     attr_reader :child
 
-    def initialize(options)
+    def promote_options_to_tags
         super
 
         @child = NestedTagArrayItem.new :name => @name.singular,
               :parent => self,
-              :options => @options
+              :options => @options,
+              :children => @children
 
-        @children.push(@child)
-
+        @children = [@child]
         @options = []
     end
 
@@ -616,6 +616,8 @@ class NestedTagArrayItem < NestedTag
 
     def initialize(options)
         super
+
+        @children = options[:children]
     end
 
     def parent_setter
