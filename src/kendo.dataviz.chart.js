@@ -1293,29 +1293,28 @@
             if (options.roundToBaseUnit) {
                 return CategoryAxis.fn.getCategory.call(axis, point);
             } else {
-                // TODO Implement via getMajorTickPositions
                 var reverse = options.reverse,
                     vertical = options.vertical,
                     valueAxis = vertical ? Y : X,
                     lineBox = axis.lineBox(),
                     lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
-                    lineSize = vertical ? lineBox.height() : lineBox.width(),
-                    totalCategories = options.categories.length - 1,
-                    intervals = math.max(1, totalCategories),
-                    offset = (reverse ? -1 : 1) * (point[valueAxis] - lineStart),
-                    step = intervals / lineSize,
-                    categoriesOffset = round(offset * step),
+                    lineEnd = lineBox[valueAxis + (reverse ? 1 : 2)],
+                    position = point[valueAxis],
+                    majorTicks = axis.getMajorTickPositions(),
+                    i,
                     categoryIx;
 
-                if (offset < 0 || offset > lineSize) {
+                if (position < lineStart || position > lineEnd) {
                     return null;
                 }
 
-                categoryIx = vertical ?
-                    intervals - categoriesOffset:
-                    categoriesOffset;
+                for (i = 0; i < majorTicks.length; i++) {
+                    if (position <= majorTicks[i]) {
+                        categoryIx = math.max(0, i - 1);
+                        break;
+                    }
+                }
 
-                categoryIx = math.min(categoryIx, totalCategories);
                 return options.categories[categoryIx];
             }
         },

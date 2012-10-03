@@ -19,6 +19,7 @@
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
                 Box2D = dataviz.Box2D,
+                Point2D = dataviz.Point2D,
                 dateAxis,
                 chartBox = new Box2D(0, 0, 800, 600),
                 view,
@@ -376,7 +377,6 @@
                         maxDateGroups: 6
                     });
 
-                    console.log(dateAxis.options.categories)
                     equals(dateAxis.options.baseUnitStep, 2);
                 });
 
@@ -966,117 +966,181 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Slots / No Rounding");
+                module("Date CategoryAxis / getSlot / No Rounding", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                            ],
+                            roundToBaseUnit: false
+                        });
+                    }
+                });
 
                 test("Returns correct first partial slot", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false
-                    });
-
                     sameBox(dateAxis.getSlot(0),
                             new Box2D(0, 0, 88, 0),
                             TOLERANCE);
                 });
 
                 test("Returns correct first full slot", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false
-                    });
-
                     sameBox(dateAxis.getSlot(1),
                             new Box2D(88, 0, 322, 0),
                             TOLERANCE);
                 });
 
                 test("Returns correct last full slot", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false
-                    });
-
                     sameBox(dateAxis.getSlot(3),
                             new Box2D(555, 0, 789, 0),
                             TOLERANCE);
                 });
 
                 test("Returns correct last partial slot", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false
-                    });
-
                     sameBox(dateAxis.getSlot(4),
                             new Box2D(789, 0, 799, 0),
                             TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Slots / No Rounding / Justified");
+                module("Date CategoryAxis / getSlot / No Rounding / Justified", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                            ],
+                            roundToBaseUnit: false,
+                            justified: true
+                        });
+                    }
+                });
 
                 test("Returns correct first partial slot", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false,
-                        justified: true
-                    });
-
                     sameBox(dateAxis.getSlot(0),
                             new Box2D(14, 0, 14, 0),
                             TOLERANCE);
                 });
 
                 test("Returns correct first full slot", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false,
-                        justified: true
-                    });
-
                     sameBox(dateAxis.getSlot(1),
                             new Box2D(98, 0, 98, 0),
                             TOLERANCE);
                 });
 
                 test("Returns correct last full slot", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false,
-                        justified: true
-                    });
-
                     sameBox(dateAxis.getSlot(3),
                             new Box2D(551, 0, 551, 0),
                             TOLERANCE);
                 });
 
                 test("Returns correct last partial slot", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
-                        ],
-                        roundToBaseUnit: false,
-                        justified: true
-                    });
-
                     sameBox(dateAxis.getSlot(4),
                             new Box2D(786, 0, 786, 0),
                             TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / getCategory / No Rounding", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                            ],
+                            roundToBaseUnit: false
+                        });
+                    }
+                });
+
+                test("Returns correct first partial category (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(0, 0)),
+                           new Date("2012/02/01 15:00:00"));
+                });
+
+                test("Returns correct first partial category (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(87, 0)),
+                           new Date("2012/02/01 15:00:00"));
+                });
+
+                test("Returns correct first full slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(89, 0)).toString(),
+                         new Date("2012/02/02 00:00:00").toString());
+                });
+
+                test("Returns correct first full slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(321, 0)).toString(),
+                         new Date("2012/02/02 00:00:00").toString());
+                });
+
+                test("Returns correct last full slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(556, 0)).toString(),
+                         new Date("2012/02/04 00:00:00").toString());
+                });
+
+                test("Returns correct last full slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(788, 0)).toString(),
+                         new Date("2012/02/04 00:00:00").toString());
+                });
+
+                test("Returns correct last partial slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(790, 0)).toString(),
+                         new Date("2012/02/05 00:00:00").toString());
+                });
+
+                test("Returns correct last partial slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(799, 0)).toString(),
+                         new Date("2012/02/05 00:00:00").toString());
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / getCategory / No Rounding / Justified", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                            ],
+                            roundToBaseUnit: false,
+                            justified: true
+                        });
+                    }
+                });
+
+                test("Returns correct first partial category (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(14, 0)),
+                           new Date("2012/02/01 15:00:00"));
+                });
+
+                test("Returns correct first partial category (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(98, 0)),
+                           new Date("2012/02/01 15:00:00"));
+                });
+
+                test("Returns correct first full slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(99, 0)).toString(),
+                         new Date("2012/02/02 00:00:00").toString());
+                });
+
+                test("Returns correct first full slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(324, 0)).toString(),
+                         new Date("2012/02/02 00:00:00").toString());
+                });
+
+                test("Returns correct last full slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(551, 0)).toString(),
+                         new Date("2012/02/04 00:00:00").toString());
+                });
+
+                test("Returns correct last full slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(777, 0)).toString(),
+                         new Date("2012/02/04 00:00:00").toString());
+                });
+
+                test("Returns correct last partial slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(778, 0)).toString(),
+                         new Date("2012/02/05 00:00:00").toString());
+                });
+
+                test("Returns correct last partial slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(786, 0)).toString(),
+                         new Date("2012/02/05 00:00:00").toString());
                 });
 
             })();
