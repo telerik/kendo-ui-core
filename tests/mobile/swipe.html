@@ -28,6 +28,8 @@
         </script>
 
         <script>
+            QUnit.config.reorder = false;
+
             var root = $('#qunit-fixture');
 
             function setup(fixtureID) {
@@ -35,7 +37,7 @@
             }
 
             function teardown() {
-                root.empty();
+                root.empty().off();
             }
 
             function triggerEvent(type, e, el) {
