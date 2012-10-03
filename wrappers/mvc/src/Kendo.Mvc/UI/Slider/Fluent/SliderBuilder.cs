@@ -23,10 +23,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>Sets the title of the slider draghandle.</summary>
+        public SliderBuilder<T> DragHandleTitle(string title)
+        {
+            Component.DragHandleTitle = title;
+
+            return this;
+        }
+
         /// <summary>Sets the title of the slider increase button.</summary>
         public SliderBuilder<T> IncreaseButtonTitle(string title)
         {
-
             Component.IncreaseButtonTitle = title;
 
             return this;

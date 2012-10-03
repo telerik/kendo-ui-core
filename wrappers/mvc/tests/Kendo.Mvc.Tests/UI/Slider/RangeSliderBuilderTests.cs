@@ -149,5 +149,37 @@ namespace Kendo.Mvc.UI.Tests
             const int largeStep = 4;
             builder.LargeStep(largeStep).ShouldBeType<RangeSliderBuilder<int>>();
         }
+
+        [Fact]
+        public void LeftDragHandleTitle_should_return_builder()
+        {
+            const string leftTitle = "foo";
+            builder.LeftDragHandleTitle(leftTitle).ShouldBeType<RangeSliderBuilder<int>>();
+        }
+
+        [Fact]
+        public void RightDragHandleTitle_should_return_builder()
+        {
+            const string rightTitle = "foo";
+            builder.RightDragHandleTitle(rightTitle).ShouldBeType<RangeSliderBuilder<int>>();
+        }
+
+        [Fact]
+        public void Should_set_LeftDragHandleTitle_property_of_the_slider()
+        {
+            const string leftTitle = "foo";
+            builder.LeftDragHandleTitle(leftTitle);
+
+            component.LeftDragHandleTitle.ShouldEqual(leftTitle);
+        }
+
+        [Fact]
+        public void Should_set_RightDragHandleTitle_property_of_the_slider()
+        {
+            const string rightTitle = "foo";
+            builder.RightDragHandleTitle(rightTitle);
+
+            component.RightDragHandleTitle.ShouldEqual(rightTitle);
+        }
     }
 }

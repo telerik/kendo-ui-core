@@ -38,6 +38,8 @@ namespace Kendo.Mvc.UI
 
         public string DecreaseButtonTitle { get; set; }
 
+        public string DragHandleTitle { get; set; }
+        
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
@@ -54,6 +56,7 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(options)
                 .Add("orientation", Orientation.ToString().ToLowerInvariant(), () => Orientation.HasValue)
                 .Add("tickPlacement", TickPlacement.ToString().ToLowerInvariant(), () => TickPlacement.HasValue)
+                .Add("dragHandleTitle", DragHandleTitle, () => DragHandleTitle.HasValue())
                 .Add("increaseButtonTitle", IncreaseButtonTitle, () => IncreaseButtonTitle.HasValue())
                 .Add("decreaseButtonTitle", DecreaseButtonTitle, () => DecreaseButtonTitle.HasValue())
                 .Add("showButtons", ShowButtons, () => ShowButtons.HasValue)
