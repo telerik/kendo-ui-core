@@ -153,7 +153,7 @@
         },
 
         preloadStylesheet: function (file, callback) {
-            var element = $("<link rel='stylesheet' media='print' href='" + file + "'").appendTo("head");
+            var element = $("<link rel='stylesheet' media='print' href='" + file + "' />").appendTo("head");
 
             setTimeout(function () {
                 callback();
