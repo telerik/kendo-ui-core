@@ -57,8 +57,12 @@ TLD_NESTED_TAG_TEMPLATE = ERB.new(%{
 JAVA_INTERFACE_TEMPLATE = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
 
-public interface <%= interface %> {
-    void set<%= interface %>(<%= interface %>Tag value);
+public interface <%= child.name %> {
+<% if child.instance_of?(NestedTagArrayItem) %>
+    void add<%= child.name %>(<%= child.type %> value);
+<% else %>
+    void set<%= child.name %>(<%= child.type %> value);
+<% end %>
 }
 })
 
@@ -99,6 +103,23 @@ public class <%= type %> extends BaseTag /* interfaces */ /* interfaces */ {
 }
 })
 
+JAVA_NESTED_TAG_ARRAY_TEMPLATE = ERB.new(%{
+package com.kendoui.taglib.<%= namespace %>;
+
+import com.kendoui.taglib.BaseTag;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.jsp.JspException;
+
+@SuppressWarnings("serial")
+public class <%= type %> extends BaseTag /* interfaces */ /* interfaces */ {
+
+//>> Attributes
+//<< Attributes
+}
+})
 JS_TO_JAVA_TYPES = {
     'Number' => 'int',
     'number' => 'int',
@@ -143,8 +164,15 @@ JAVA_OPTION_SETTER = ERB.new(%{
 
 JAVA_NESTED_TAG_SETTER = ERB.new(%{
     @Override
-    public void set<%= name.sub(/^./) { |c| c.capitalize } %>(<%= type.sub('java.lang.', '') %> value) {
-        setProperty("<%= name %>", value);
+    public void set<%= child.name %>(<%= child.type.sub('java.lang.', '') %> value) {
+        setProperty("<%= child.name.downcase %>", value);
+    }
+})
+
+JAVA_ARRAY_SETTER = ERB.new(%{
+    @Override
+    public void set<%= child.name %>(<%= child.type %> value) {
+        setProperty("<%= child.name.downcase %>", value.<%= child.name.downcase %>());
     }
 })
 
@@ -162,6 +190,10 @@ JAVA_PARENT_SETTER = ERB.new(%{
 JAVA_ARRAY_PARENT_SETTER = ERB.new(%{
     private List<<%= child.type %>> <%= name.camelize %> = new ArrayList<<%= child.type %>>();
 
+    public List<<%= child.type %>> <%= name.camelize %> () {
+        return <%= name.camelize %>;
+    }
+
     @Override
     public int doEndTag() throws JspException {
         <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
@@ -171,9 +203,10 @@ JAVA_ARRAY_PARENT_SETTER = ERB.new(%{
         return EVAL_PAGE;
     }
 })
+
 JAVA_ARRAY_ADD_TO_PARENT = ERB.new(%{
     public int doEndTag() throws JspException {
-        <%= parent.type %> parent = (<%= name %>)findParentWithClass(<%= parent.type %>.class);
+        <%= parent.type %> parent = (<%= parent.type %>)findParentWithClass(<%= parent.type %>.class);
 
         parent.add<%= name %>(this);
 
@@ -198,6 +231,8 @@ class String
     end
 
     def singular
+        return self + 'Item' if end_with?('ies') || !end_with?('s')
+
         self.sub(/s$/, '')
     end
 end
@@ -290,10 +325,12 @@ class Tag
 
     def child_setters
         children = @children.map do |child|
-            type = child.type
-            name = child.name.camelize
-            JAVA_NESTED_TAG_SETTER.result(binding)
+            child.setter_template.result(binding)
         end.join
+    end
+
+    def setter_template
+        JAVA_NESTED_TAG_SETTER
     end
 
     def java_options_and_events
@@ -332,6 +369,10 @@ class Tag
                  "/* interfaces */#{implements}/* interfaces */"
     end
 
+    def interface_template
+        JAVA_INTERFACE_TEMPLATE
+    end
+
     def generate_attributes(code)
         code.sub /\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
                  "//>> Attributes\n#{to_java}\n//<< Attributes"
@@ -342,10 +383,9 @@ class Tag
 
         $stderr.puts("Updating #{java_filename}") if VERBOSE
 
-        interfaces = generated_interfaces
 
-        interfaces.each do |interface|
-            interface_filename =  "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{namespace}/#{interface}.java"
+        @children.each do |child|
+            interface_filename =  "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{namespace}/#{child.name}.java"
 
             ensure_path(interface_filename)
 
@@ -353,6 +393,8 @@ class Tag
                 file.write(JAVA_INTERFACE_TEMPLATE.result(binding))
             end
         end
+
+        interfaces = generated_interfaces
 
         if @options.any? { |o| o.name == 'dataSource' }
             interfaces.push('DataBoundWidget')
@@ -551,6 +593,13 @@ class NestedTagArray < NestedTag
         @children.push(@child)
 
         @options = []
+    end
+
+    def template
+    end
+
+    def setter_template
+        JAVA_ARRAY_SETTER
     end
 
     def parent_setter
