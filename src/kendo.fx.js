@@ -87,6 +87,14 @@
         out: {
             reverse: "in",
             modifier: 1
+        },
+
+        vertical: {
+            reverse: "vertical"
+        },
+
+        horizontal: {
+            reverse: "horizontal"
         }
     };
 
@@ -431,14 +439,6 @@
                 var effectClass = Effects[effectName];
 
                 if (effectClass) {
-                    var dir = kendo.directions[settings.direction];
-
-                    if (settings.direction && dir) {
-                        if (options.reverse) {
-                            settings.direction = dir.reverse;
-                        }
-                    }
-
                     effect = new effectClass(element, extend(true, opts, settings));
                     effects.push(effect);
                 }
@@ -671,11 +671,17 @@
 
     var Effect = kendo.Class.extend({
         init: function(element, options) {
-            this.element = element;
-            this.options = options;
+            var that = this;
+            that.element = element;
+            that.options = options;
 
-            if (!this.restore) {
-                this.restore = [];
+            var direction = options.direction;
+            if (direction && options.reverse) {
+                options.direction = kendo.directions[direction].reverse;
+            }
+
+            if (!that.restore) {
+                that.restore = [];
             }
         },
 
@@ -696,7 +702,7 @@
                 options = that.options;
 
             var opacity = element.data("opacity"),
-                direction = options.effects.fade.direction,
+                direction = options.direction,
                 result = direction == "out" && isNaN(opacity) || direction == "in" ? 0 : opacity;
 
             return { opacity: result };
@@ -706,7 +712,7 @@
             var that = this,
                 options = that.options;
 
-            return extend({ opacity: options.effects.fade.direction == "out" ? 0 : 1 }, options.properties);
+            return extend({ opacity: options.direction == "out" ? 0 : 1 }, options.properties);
         }
     });
 
@@ -717,7 +723,7 @@
                 options = that.options;
 
             var scale = hasZoom ? element[0].style.zoom : animationProperty(element, "scale"),
-                zoomIn = options.effects.zoom.direction == "in",
+                zoomIn = options.direction == "in",
                 value = zoomIn ? (scale != 1 ? scale : "0.01") : 1;
 
             if (hasZoom) {
@@ -732,7 +738,7 @@
                 element = that.element,
                 options = that.options;
 
-            var reverse = options.effects.zoom.direction == "out";
+            var reverse = options.direction == "out";
 
             if (hasZoom) {
                 var version = browser.version,
@@ -758,7 +764,7 @@
                 options = that.options;
 
             var reverse = options.reverse, extender = {},
-                init = initDirection(element, options.effects.slide.direction, reverse),
+                init = initDirection(element, options.direction, reverse),
                 property = transforms && options.transition !== false ? init.direction.transition : init.direction.property;
 
             init.offset /= -(options.divisor || 1);
@@ -824,7 +830,7 @@
                 element = that.element,
                 options = that.options;
 
-            var init = initDirection(element, options.effects.slideIn.direction, options.reverse),
+            var init = initDirection(element, options.direction, options.reverse),
                 value = (!options.reverse ? init.offset : 0) + PX;
 
             if (init.direction.transition == "translatex") {
@@ -840,7 +846,7 @@
                 options = that.options;
 
             var reverse = options.reverse,
-                init = initDirection(element, options.effects.slideIn.direction, reverse),
+                init = initDirection(element, options.direction, reverse),
                 extender = {};
 
             if (transforms && options.transition !== false) {
@@ -871,7 +877,7 @@
                 options = that.options;
 
             var reverse = options.reverse,
-                direction = options.effects.expand.direction,
+                direction = options.direction,
                 property = (direction ? direction == "vertical" : true) ? HEIGHT : WIDTH,
                 setLength = element[0].style[property],
                 oldLength = element.data(property),
@@ -894,7 +900,7 @@
                 element = that.element,
                 options = that.options;
 
-            var direction = options.effects.expand.direction,
+            var direction = options.direction,
                 property = (direction ? direction == "vertical" : true) ? HEIGHT : WIDTH,
                 length = element.data(property);
             if (length == AUTO || length === BLANK) {
@@ -909,7 +915,7 @@
                 options = that.options;
 
             var value = options.reverse ? "180deg" : "0deg";
-            if (options.effects.flip.direction == "vertical") {
+            if (options.direction == "vertical") {
                 return { rotatex: value };
             } else {
                 return { rotatey: value };
@@ -921,7 +927,7 @@
                 element = that.element,
                 options = that.options;
 
-            var rotation = options.effects.flip.direction == "horizontal" ? "rotatey" : "rotatex",
+            var rotation = options.direction == "horizontal" ? "rotatey" : "rotatex",
                 reverse = options.reverse, parent = element.parent(),
                 degree = options.degree, face = options.face, back = options.back,
                 faceRotation = rotation + (reverse ? "(180deg)" : "(0deg)"),
@@ -1021,7 +1027,7 @@
                 options = that.options;
 
 
-            var horizontal = options.effects.pageturn.direction === "horizontal",
+            var horizontal = options.direction === "horizontal",
                 rotation = horizontal ? "rotatey" : "rotatex",
                 reverse = options.reverse,
                 face = options.face, back = options.back,
