@@ -419,73 +419,71 @@
 
         // create a promise for each effect
         promise = $.Deferred(function(deferred) {
-            if (size(options.effects)) {
-                var opts = extend({}, options, { complete: deferred.resolve });
-
-                each(options.effects, function(effectName, settings) {
-                    var effectClass = Effects[effectName];
-
-                    if (effectClass) {
-                        var dir = kendo.directions[settings.direction];
-
-                        if (settings.direction && dir) {
-                            if (options.reverse) {
-                                settings.direction = dir.reverse;
-                            }
-                        }
-
-                        effect = new effectClass(element, extend(true, opts, settings));
-                        effects.push(effect);
-                    }
-                });
-
-                each(effects, function() {
-                    each(this.restore, function(idx, value) {
-                        if (!element.data(value)) {
-                            element.data(value, element.css(value));
-                        }
-                    });
-
-                    extend(startState, this.startState());
-                });
-
-                if (!element.is(":visible")) {
-                    extend(startState, { display: element.data("olddisplay") || "block" }); // Add show to the set
-                }
-
-                if (transforms && !options.reset) {
-                    target = element.data("targetTransform");
-
-                    if (target) {
-                        startState = extend(target, startState);
-                    }
-                }
-
-                startState = normalizeCSS(element, startState, opts);
-
-                if (transforms && !transitions) {
-                    startState = strip3DTransforms(startState);
-                }
-
-                element.css(startState)
-                       .css(TRANSFORM); // Nudge
-
-                each(effects, function() {
-                    extend(endState, this.endState());
-                });
-
-                if (kendo.fx.animate) {
-                    options.init();
-                    element.data("targetTransform", endState);
-                    kendo.fx.animate(element, endState, opts);
-                }
-
-                return;
-            } else {
+            if (!size(options.effects)) {
                 options.init();
+                deferred.resolve();
+                return;
             }
 
-            deferred.resolve();
+            var opts = extend({}, options, { complete: deferred.resolve });
+
+            each(options.effects, function(effectName, settings) {
+                var effectClass = Effects[effectName];
+
+                if (effectClass) {
+                    var dir = kendo.directions[settings.direction];
+
+                    if (settings.direction && dir) {
+                        if (options.reverse) {
+                            settings.direction = dir.reverse;
+                        }
+                    }
+
+                    effect = new effectClass(element, extend(true, opts, settings));
+                    effects.push(effect);
+                }
+            });
+
+            each(effects, function() {
+                each(this.restore, function(idx, value) {
+                    if (!element.data(value)) {
+                        element.data(value, element.css(value));
+                    }
+                });
+
+                extend(startState, this.startState());
+            });
+
+            if (!element.is(":visible")) {
+                extend(startState, { display: element.data("olddisplay") || "block" }); // Add show to the set
+            }
+
+            if (transforms && !options.reset) {
+                target = element.data("targetTransform");
+
+                if (target) {
+                    startState = extend(target, startState);
+                }
+            }
+
+            startState = normalizeCSS(element, startState, opts);
+
+            if (transforms && !transitions) {
+                startState = strip3DTransforms(startState);
+            }
+
+            element.css(startState)
+                   .css(TRANSFORM); // Nudge
+
+            each(effects, function() {
+                extend(endState, this.endState());
+            });
+
+            if (kendo.fx.animate) {
+                options.init();
+                element.data("targetTransform", endState);
+                kendo.fx.animate(element, endState, opts);
+            }
         }).promise();
 
         //wait for all effects to complete
