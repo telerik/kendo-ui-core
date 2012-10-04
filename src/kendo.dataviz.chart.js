@@ -50,6 +50,8 @@
     // Constants ==============================================================
     var ABOVE = "above",
         AREA = "area",
+        AUTO = "auto",
+        FIT = "fit",
         AXIS_LABEL_CLICK = dataviz.AXIS_LABEL_CLICK,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.8,
@@ -136,8 +138,12 @@
         YEARS = "years",
         ZERO = "zero";
 
-    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC],
-        XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE];
+    var CATEGORICAL_CHARTS =
+            [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC],
+        XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE],
+        BASE_UNITS = [
+            MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
+        ];
 
     var DateLabelFormats = {
         minutes: "HH:mm",
@@ -959,8 +965,7 @@
                 color: BLACK
             },
             zIndex: 1,
-
-            _labelsOnTicks: false
+            justified: false
         },
 
         range: function() {
@@ -971,9 +976,11 @@
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
+                justified = options.justified,
                 lineBox = axis.lineBox(),
                 size = vertical ? lineBox.height() : lineBox.width(),
-                step = size / itemsCount,
+                intervals = itemsCount - (justified ? 1 : 0),
+                step = size / intervals,
                 dim = vertical ? Y : X,
                 pos = lineBox[dim + 1],
                 positions = [],
@@ -984,7 +991,9 @@
                 pos += step;
             }
 
-            positions.push(lineBox[dim + 2]);
+            if (!justified) {
+                positions.push(lineBox[dim + 2]);
+            }
 
             return options.reverse ? positions.reverse() : positions;
         },
@@ -1004,28 +1013,36 @@
         getSlot: function(from, to) {
             var axis = this,
                 options = axis.options,
+                majorTicks = axis.getMajorTickPositions(),
                 reverse = options.reverse,
-                vertical = options.vertical,
-                valueAxis = vertical ? Y : X,
+                justified = options.justified,
+                valueAxis = options.vertical ? Y : X,
                 lineBox = axis.lineBox(),
-                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1),
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
-                size = vertical ? lineBox.height() : lineBox.width(),
-                categoriesLength = math.max(1, options.categories.length),
-                step = (reverse ? -1 : 1) * (size / categoriesLength),
+                lineEnd = lineBox[valueAxis + (reverse ? 1 : 2)],
+                slotBox = lineBox.clone(),
+                intervals = math.max(1, majorTicks.length - (justified ? 0 : 1)),
                 p1,
                 p2,
                 slotSize;
 
-            from = clipValue(from, 0, categoriesLength);
+            from = clipValue(from, 0, intervals);
             to = defined(to) ? to : from;
-            to = clipValue(to, from, categoriesLength);
-            p1 = lineStart + (from * step);
-            p2 = p1 + step;
+            to = clipValue(to - 1, from, intervals);
+            p1 = from === 0 ? lineStart : majorTicks[from];
+            p2 = justified ? p1 : majorTicks[to];
             slotSize = to - from;
 
-            if (slotSize > 0 || (from == to && categoriesLength == from)) {
-                p2 = p1 + (slotSize * step);
+            if (slotSize > 0 || (from === to)) {
+                p2 = majorTicks[to + 1] || lineEnd;
+            }
+
+            if (justified) {
+                if (from === intervals) {
+                    p1 = p2;
+                } else {
+                    p2 = p1;
+                }
             }
 
             slotBox[valueAxis + 1] = reverse ? p2 : p1;
@@ -1041,24 +1058,38 @@
                 vertical = options.vertical,
                 valueAxis = vertical ? Y : X,
                 lineBox = axis.lineBox(),
-                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
-                lineSize = vertical ? lineBox.height() : lineBox.width(),
-                totalCategories = options.categories.length - 1,
-                intervals = math.max(1, totalCategories),
-                offset = (reverse ? -1 : 1) * (point[valueAxis] - lineStart),
-                step = intervals / lineSize,
-                categoriesOffset = round(offset * step),
+                lineStart = lineBox[valueAxis + 1],
+                lineEnd = lineBox[valueAxis + 2],
+                position = point[valueAxis],
+                majorTicks = axis.getMajorTickPositions(),
+                tickPos,
+                nextTickPos,
+                i,
                 categoryIx;
 
-            if (offset < 0 || offset > lineSize) {
+            if (position < lineStart || position > lineEnd) {
                 return null;
             }
 
-            categoryIx = vertical ?
-                intervals - categoriesOffset:
-                categoriesOffset;
+            for (i = 0; i < majorTicks.length; i++) {
+                tickPos = majorTicks[i];
+                nextTickPos = majorTicks[i + 1];
 
-            categoryIx = math.min(categoryIx, totalCategories);
+                if (!defined(nextTickPos)) {
+                    nextTickPos = reverse ? lineStart : lineEnd;
+                }
+
+                if (reverse) {
+                    tickPos = nextTickPos;
+                    nextTickPos = majorTicks[i];
+                }
+
+                if (position >= tickPos && position <= nextTickPos) {
+                    categoryIx = math.max(0, vertical ? majorTicks.length - i - 2: i);
+                    break;
+                }
+            }
+
             return options.categories[categoryIx];
         },
 
@@ -1084,18 +1115,30 @@
 
     var DateCategoryAxis = CategoryAxis.extend({
         init: function(options) {
-            var axis = this;
+            var axis = this,
+                baseUnit,
+                useDefault;
 
             options = options || {};
 
-            deepExtend(options, {
+            options = deepExtend({
+                roundToBaseUnit: true
+            }, options, {
                 min: toDate(options.min),
                 max: toDate(options.max)
             });
 
-            options = axis.applyDefaults(options);
-
             if (options.categories && options.categories.length > 0) {
+                baseUnit = (options.baseUnit || "").toLowerCase();
+                useDefault = baseUnit !== FIT && !inArray(baseUnit, BASE_UNITS);
+                if (useDefault) {
+                    options.baseUnit = axis.defaultBaseUnit(options);
+                }
+
+                if (baseUnit === FIT || options.baseUnitStep === AUTO) {
+                    axis.autoBaseUnit(options);
+                }
+
                 axis.groupCategories(options);
             }
 
@@ -1106,10 +1149,19 @@
             type: DATE,
             labels: {
                 dateFormats: DateLabelFormats
-            }
+            },
+            autoBaseUnitSteps: {
+                minutes: [1, 2, 5, 15, 30],
+                hours: [1, 2, 3, 6, 12],
+                days: [1, 2, 3],
+                weeks: [1, 2],
+                months: [1, 2, 3, 6],
+                years: [1, 2, 3, 5, 10, 25, 50]
+            },
+            maxDateGroups: 10
         },
 
-        applyDefaults: function(options) {
+        defaultBaseUnit: function(options) {
             var categories = options.categories,
                 count = defined(categories) ? categories.length : 0,
                 categoryIx,
@@ -1146,60 +1198,173 @@
                 lastCat = cat;
             }
 
-            if (!options.baseUnit) {
-                delete options.baseUnit;
+            return unit || DAYS;
+        },
+
+        range: function(options) {
+            var categories = toDate(options.categories),
+                autoUnit = options.baseUnit === FIT,
+                baseUnit = autoUnit ? BASE_UNITS[0] : options.baseUnit,
+                min = toTime(options.min),
+                max = toTime(options.max),
+                minCategory = toTime(sparseArrayMin(categories)),
+                maxCategory = toTime(sparseArrayMax(categories));
+
+            if (options.roundToBaseUnit) {
+                return { min: addDuration(min || minCategory, 0, baseUnit, options.weekStartDay),
+                         max: addDuration(max || maxCategory, 1, baseUnit, options.weekStartDay) };
+            } else {
+                return { min: toDate(min || minCategory),
+                         max: toDate(max || maxCategory) };
+            }
+        },
+
+        autoBaseUnit: function(options) {
+            var axis = this,
+                range = axis.range(options),
+                autoUnit = options.baseUnit === FIT,
+                autoUnitIx = 0,
+                baseUnit = autoUnit ? BASE_UNITS[autoUnitIx++] : options.baseUnit,
+                span = range.max - range.min,
+                units = span / TIME_PER_UNIT[baseUnit],
+                totalUnits = units,
+                maxDateGroups = options.maxDateGroups || axis.options.maxDateGroups,
+                autoBaseUnitSteps = deepExtend(
+                    {}, axis.options.autoBaseUnitSteps, options.autoBaseUnitSteps
+                ),
+                unitSteps,
+                step,
+                nextStep;
+
+            while (units > maxDateGroups) {
+                unitSteps = unitSteps || autoBaseUnitSteps[baseUnit].slice(0);
+                nextStep = unitSteps.shift();
+
+                if (nextStep) {
+                    step = nextStep;
+                    units = totalUnits / step;
+                } else if (autoUnit) {
+                    baseUnit = BASE_UNITS[autoUnitIx++] || last(BASE_UNITS);
+                    totalUnits = span / TIME_PER_UNIT[baseUnit];
+                    unitSteps = null;
+                } else {
+                    if (units > maxDateGroups) {
+                        step = math.ceil(totalUnits / maxDateGroups);
+                    }
+                    break;
+                }
             }
 
-            return deepExtend({ baseUnit: unit || DAYS }, options);
+            options.baseUnitStep = step;
+            options.baseUnit = baseUnit;
+        },
+
+        getMajorTickPositions: function() {
+            var axis = this,
+                options = axis.options,
+                categories = options.categories,
+                positions = [];
+
+            if (options.roundToBaseUnit || categories.length === 0) {
+                positions = CategoryAxis.fn.getMajorTickPositions.call(axis);
+            } else {
+                var vertical = options.vertical,
+                    reverse = options.reverse,
+                    lineBox = axis.lineBox(),
+                    lineSize = vertical ? lineBox.height() : lineBox.width(),
+                    startTime = categories[0].getTime(),
+                    range = axis.range(axis.options),
+                    timeRange = range.max - range.min,
+                    scale = lineSize / timeRange,
+                    divisions = categories.length,
+                    dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
+                    startEdge = dir === 1 ? 1 : 2,
+                    endEdge = dir === 1 ? 2 : 1,
+                    startPos = lineBox[(vertical ? Y : X) + startEdge],
+                    endPos = lineBox[(vertical ? Y : X) + endEdge],
+                    pos = startPos,
+                    i,
+                    timePos;
+
+                for (i = 0; i < divisions; i++) {
+                    timePos = categories[i] - startTime;
+                    pos = startPos + timePos * scale * dir;
+                    positions.push(round(pos, COORD_PRECISION));
+                }
+
+                if (last(positions) !== endPos) {
+                    positions.push(endPos);
+                }
+            }
+
+            return positions;
         },
 
         groupCategories: function(options) {
             var axis = this,
                 categories = toDate(options.categories),
                 baseUnit = options.baseUnit,
-                min = toTime(options.min),
-                max = toTime(options.max),
-                minCategory = toTime(sparseArrayMin(categories)),
-                maxCategory = toTime(sparseArrayMax(categories)),
-                start = floorDate(min || minCategory, baseUnit),
-                end = ceilDate((max || maxCategory) + 1, baseUnit),
+                baseUnitStep = options.baseUnitStep || 1,
+                range = axis.range(options),
+                round = options.roundToBaseUnit,
+                end,
                 date,
                 nextDate,
                 groups = [],
-                categoryMap = [],
+                categoryMap = axis.categoryMap = [],
                 categoryIndicies,
+                lastCategoryIndicies = [],
                 categoryIx,
                 categoryDate;
 
-            for (date = start; date < end; date = nextDate) {
-                groups.push(date);
-                nextDate = addDuration(date, 1, baseUnit, options.weekStartDay);
+            end = round ?
+                addDuration(range.max, baseUnitStep - 1, baseUnit, options.weekStartDay) :
+                range.max;
 
+            for (date = range.min; date < end; date = nextDate) {
+                nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
+
+                groups.push(date);
                 categoryIndicies = [];
+
                 for (categoryIx = 0; categoryIx < categories.length; categoryIx++) {
                     categoryDate = toDate(categories[categoryIx]);
                     if (categoryDate && categoryDate >= date && categoryDate < nextDate) {
-                        categoryIndicies.push(categoryIx);
+                        if (options.justified && dateEquals(categoryDate, end)) {
+                            lastCategoryIndicies.push(categoryIx);
+                        } else {
+                            categoryIndicies.push(categoryIx);
+                        }
                     }
                 }
 
                 categoryMap.push(categoryIndicies);
             }
 
+            if (lastCategoryIndicies.length) {
+                groups.push(end);
+                categoryMap.push(lastCategoryIndicies);
+            }
+
             options.min = groups[0];
-            options.max = last(groups);
+            options.max = round ? last(groups) : end;
             options.categories = groups;
-            axis.categoryMap = categoryMap;
         },
 
         createAxisLabel: function(index, labelOptions) {
             var options = this.options,
                 dataItem = options.dataItems ? options.dataItems[index] : null,
                 date = options.categories[index],
-                unitFormat = labelOptions.dateFormats[options.baseUnit];
+                baseUnit = options.baseUnit,
+                visible = true,
+                unitFormat = labelOptions.dateFormats[baseUnit];
 
-            labelOptions.format = labelOptions.format || unitFormat;
+            if (options.justified) {
+                var roundedDate = floorDate(date, baseUnit, options.weekStartDay);
+                visible = dateEquals(roundedDate, date);
+            }
 
+            labelOptions = deepExtend({ format: unitFormat }, labelOptions, { visible: visible });
             return new AxisDateLabel(date, index, dataItem, labelOptions);
         }
     });
@@ -5302,7 +5467,10 @@
                 dateCategory,
                 categoryAxis,
                 axes = [],
-                primaryAxis;
+                primaryAxis,
+                centeredSeries = plotArea.filterSeriesByType(
+                    plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK]
+                );
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
@@ -5312,6 +5480,11 @@
                     vertical: invertAxes,
                     axisCrossingValue: invertAxes ? categories.length : 0
                 }, axisOptions);
+
+                if (centeredSeries.length > 0) {
+                    axisOptions.justified = false;
+                    axisOptions.roundToBaseUnit = true;
+                }
 
                 name = axisOptions.name;
                 dateCategory = categories[0] instanceof Date;
@@ -6312,20 +6485,20 @@
         return addTicks(date, -daysToSubtract * TIME_PER_DAY);
     }
 
-    function floorDate(date, unit) {
+    function floorDate(date, unit, weekStartDay) {
         date = toDate(date);
 
-        return addDuration(date, 0, unit);
+        return addDuration(date, 0, unit, weekStartDay);
     }
 
-    function ceilDate(date, unit) {
+    function ceilDate(date, unit, weekStartDay) {
         date = toDate(date);
 
-        if (floorDate(date, unit).getTime() === date.getTime()) {
+        if (floorDate(date, unit, weekStartDay).getTime() === date.getTime()) {
             return date;
         }
 
-        return addDuration(date, 1, unit);
+        return addDuration(date, 1, unit, weekStartDay);
     }
 
     function dateDiff(a, b) {
@@ -6504,6 +6677,14 @@
     function equalsIgnoreCase(a, b) {
         if (a && b) {
             return a.toLowerCase() === b.toLowerCase();
+        }
+
+        return a === b;
+    }
+
+    function dateEquals(a, b) {
+        if (a && b) {
+            return toTime(a) === toTime(b);
         }
 
         return a === b;

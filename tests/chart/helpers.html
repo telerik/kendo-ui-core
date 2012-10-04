@@ -513,6 +513,14 @@
                 same(floorDate(date, "months"), new Date("2012/03/01 00:00"));
             });
 
+            test("floorDate rounds date down to weeks", function() {
+                same(floorDate(date, "weeks"), new Date("2012/03/25 00:00"));
+            });
+
+            test("floorDate rounds date down to weeks with custom week start", function() {
+                same(floorDate(date, "weeks", kendo.days.Monday), new Date("2012/03/26 00:00"));
+            });
+
             test("floorDate rounds date down to days", function() {
                 same(floorDate(date, "days"), new Date("2012/03/29 00:00"));
             });
@@ -555,6 +563,21 @@
                 same(
                     ceilDate(new Date("2013/01/01 00:00"), "months"),
                     new Date("2013/01/01 00:00")
+                );
+            });
+
+            test("ceilDate rounds date up to weeks", function() {
+                same(ceilDate(date, "weeks"), new Date("2012/04/01 00:00"));
+            });
+
+            test("ceilDate rounds date up to weeks with custom week start day", function() {
+                same(ceilDate(date, "weeks", kendo.days.Monday), new Date("2012/04/02 00:00"));
+            });
+
+            test("ceilDate does not increment weeks for dates divisable by the baseUnit", function() {
+                same(
+                    ceilDate(new Date("2012/03/25 00:00"), "weeks"),
+                    new Date("2012/03/25 00:00")
                 );
             });
 

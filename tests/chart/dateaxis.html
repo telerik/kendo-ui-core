@@ -18,9 +18,12 @@
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                Point2D = dataviz.Point2D,
                 dateAxis,
-                chartBox = new dataviz.Box2D(0, 0, 800, 600),
-                view;
+                chartBox = new Box2D(0, 0, 800, 600),
+                view,
+                TOLERANCE = 1;
 
             // Tests expect particular font size
             dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
@@ -72,7 +75,18 @@
                     equals(dateAxis.options.baseUnit, "days");
                 });
 
-                test("User set empty base unit defaults to automatic", function() {
+                test("Setting base unit to 'default' selects one based on minimum difference", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/01 00:20:00")
+                        ],
+                        baseUnit: "default"
+                    });
+
+                    equals(dateAxis.options.baseUnit, "minutes");
+                });
+
+                test("Empty base unit interpreted as 'default'", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01"), new Date("2012/03/10")
@@ -81,6 +95,17 @@
                     });
 
                     equals(dateAxis.options.baseUnit, "months");
+                });
+
+                test("Invalid base unit interpreted as 'default'", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/01 00:20:00")
+                        ],
+                        baseUnit: "fortnight"
+                    });
+
+                    equals(dateAxis.options.baseUnit, "minutes");
                 });
 
                 test("Min date can be parsed from string", function() {
@@ -109,6 +134,83 @@
                     createDateCategoryAxis();
                 });
 
+                test("Base unit step is applied for explicit baseUnit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/07")
+                        ],
+                        baseUnit: "days",
+                        baseUnitStep: 3
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/01"), new Date("2012/02/04"),
+                        new Date("2012/02/07")
+                    ]);
+                });
+
+                test("Categories are rounded to next base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/05")
+                        ],
+                        baseUnit: "days",
+                        baseUnitStep: 3
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/01"), new Date("2012/02/04"),
+                        new Date("2012/02/07")
+                    ]);
+                });
+
+                test("User set base unit step is disregarded when using automatic base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/07")
+                        ],
+                        baseUnit: "fit",
+                        maxDateGroups: 3
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/01"), new Date("2012/02/04"),
+                        new Date("2012/02/07")
+                    ]);
+                });
+
+                test("maxDateGroups constraint does not alter default base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:50:00")
+                        ],
+                        autoBaseUnitSteps: { minutes: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "minutes");
+                });
+
+                test("maxDateGroups defaults to 10", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/10 00:00:00")
+                        ],
+                        baseUnit: "fit"
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 1);
+
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/11 00:00:00")
+                        ],
+                        baseUnit: "fit"
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Grouping", {
                     setup: function() {
@@ -134,6 +236,29 @@
                     });
 
                     same(dateAxis.categoryMap, [[0], [], [1]]);
+                });
+
+                test("categoryMap when rounding is disabled", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 21:00:00"), new Date("2012/02/05 03:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    same(dateAxis.categoryMap, [[0], [], [], [], [1]]);
+                });
+
+                test("categoryMap when rounding is disabled (justified)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 21:00:00"), new Date("2012/02/05 03:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    same(dateAxis.categoryMap, [[0], [], [], [], [], [1]]);
                 });
 
                 // ------------------------------------------------------------
@@ -255,6 +380,134 @@
                          ["10:00", "10:01", "10:02"]);
                 });
 
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:10:00")
+                        ],
+                        baseUnitStep: "auto",
+                        maxDateGroups: 6
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit step is calculated when outside of preset values", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:10:00")
+                        ],
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { minutes: [1] },
+                        maxDateGroups: 6
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit (hours) is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:50:00")
+                        ],
+                        baseUnit: "fit",
+                        autoBaseUnitSteps: { minutes: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "hours");
+                });
+
+                test("maxDateGroups keeps user set base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:50:00")
+                        ],
+                        autoBaseUnitSteps: { minutes: [1] },
+                        baseUnit: "minutes",
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "minutes");
+                });
+
+                test("maxDateGroups constraint has lower priority than base unit step", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:10:00")
+                        ],
+                        maxDateGroups: 6,
+                        baseUnitStep: 1
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 1);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / No Rounding");
+
+                test("Major ticks are positioned at exact time", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    same(dateAxis.getMajorTickPositions(),
+                        [0, 88, 321, 555, 789, 799], 1);
+                });
+
+                test("Major ticks are not affected when start/end time match base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 00:00:00")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    same(dateAxis.getMajorTickPositions(),
+                        [0, 200, 400, 600, 800], 1);
+                });
+
+                test("Does not fail with no categories", function() {
+                    createDateCategoryAxis({
+                        categories: [],
+                        roundToBaseUnit: false
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / No Rounding / Justified");
+
+                test("First label is hidden if it does not match base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    equals(dateAxis.labels[0].options.visible, false);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / No Rounding / Reversed");
+
+                test("Major ticks are positioned at exact time", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        reverse: true
+                    });
+
+                    same(dateAxis.getMajorTickPositions(),
+                        [799, 711, 477, 243, 10, 0], 1);
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Base unit / Hours");
 
@@ -266,6 +519,44 @@
                     });
 
                     equals(dateAxis.options.baseUnit, "hours");
+                });
+
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 10:00:00"), new Date("2012/02/05 21:00:00")
+                        ],
+                        baseUnitStep: "auto",
+                        maxDateGroups: 10
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit step is calculated when outside of preset values", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 10:00:00"), new Date("2012/02/05 21:00:00")
+                        ],
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { hours: [1] },
+                        maxDateGroups: 10
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit (days) is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 20:00:00")
+                        ],
+                        baseUnit: "fit",
+                        autoBaseUnitSteps: { hours: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
                 });
 
                 // ------------------------------------------------------------
@@ -402,6 +693,134 @@
                          ["2012", "2012", "2012"]);
                 });
 
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 00:00:00")
+                        ],
+                        baseUnitStep: "auto",
+                        maxDateGroups: 3
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit step is calculated when outside of preset values", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 00:00:00")
+                        ],
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { days: [1] },
+                        maxDateGroups: 3
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit (weeks) is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/20 00:00:00")
+                        ],
+                        baseUnit: "fit",
+                        autoBaseUnitSteps: { days: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "weeks");
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Weeks");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/8")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "weeks");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/15")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1", "1/8", "1/15"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/15")
+                        ],
+                        labels: {
+                            dateFormats: {
+                                weeks: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1/12", "1/8/12", "1/15/12"]);
+                });
+
+                test("week start day can be customized", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/15")
+                        ],
+                        weekStartDay: kendo.days.Monday
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["12/26", "1/2", "1/9"]);
+                });
+
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 00:00:00"), new Date("2012/03/03 00:00:00")
+                        ],
+                        baseUnitStep: "auto",
+                        maxDateGroups: 2
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit step is calculated when outside of preset values", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 00:00:00"), new Date("2012/03/03 00:00:00")
+                        ],
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { weeks: [1] },
+                        maxDateGroups: 2
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit (months) is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 00:00:00"), new Date("2012/03/03 00:00:00")
+                        ],
+                        baseUnit: "fit",
+                        autoBaseUnitSteps: { weeks: [1] },
+                        maxDateGroups: 2
+                    });
+
+                    equals(dateAxis.options.baseUnit, "months");
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Base unit / Months");
 
@@ -462,56 +881,42 @@
                          ["1/1/12", "2/1/12"]);
                 });
 
-                // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Weeks");
-
-                test("Base unit is determined by series delta", function() {
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012/02/01"), new Date("2012/02/8")
-                        ]
-                    });
-
-                    equals(dateAxis.options.baseUnit, "weeks");
-                });
-
-                test("creates labels with default format", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/01/01"), new Date("2012/01/15")
-                        ]
-                    });
-
-                    same($.map(view.log.text, function(text) { return text.content }),
-                         ["1/1", "1/8", "1/15"]);
-                });
-
-                test("creates labels with custom date format", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/01/01"), new Date("2012/01/15")
+                            new Date("2012/02/01 00:00:00"), new Date("2012/06/01 00:00:00")
                         ],
-                        labels: {
-                            dateFormats: {
-                                weeks: "M/d/yy"
-                            }
-                        }
+                        baseUnitStep: "auto",
+                        maxDateGroups: 3
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
-                         ["1/1/12", "1/8/12", "1/15/12"]);
+                    equals(dateAxis.options.baseUnitStep, 2);
                 });
 
-                test("week start day can be customized", function() {
+                test("automatic base unit step is calculated when outside of preset values", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012/01/01"), new Date("2012/01/15")
+                            new Date("2012/02/01 00:00:00"), new Date("2012/06/01 00:00:00")
                         ],
-                        weekStartDay: kendo.days.Monday
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { months: [1] },
+                        maxDateGroups: 3
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
-                         ["1/1", "1/2", "1/9", "1/16"]);
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit (years) is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/12/01 00:00:00")
+                        ],
+                        baseUnit: "fit",
+                        autoBaseUnitSteps: { months: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equals(dateAxis.options.baseUnit, "years");
                 });
 
                 // ------------------------------------------------------------
@@ -552,6 +957,209 @@
 
                     same($.map(view.log.text, function(text) { return text.content }),
                          ["1/1/12", "1/1/13"]);
+                });
+
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01 00:00:00"), new Date("2016/01/01 00:00:00")
+                        ],
+                        baseUnitStep: "auto",
+                        maxDateGroups: 3
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit step is calculated when outside of preset values", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01 00:00:00"), new Date("2016/01/01 00:00:00")
+                        ],
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { years: [1] },
+                        maxDateGroups: 3
+                    });
+
+                    equals(dateAxis.options.baseUnitStep, 2);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / getSlot / No Rounding", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                            ],
+                            roundToBaseUnit: false
+                        });
+                    }
+                });
+
+                test("Returns correct first partial slot", function() {
+                    sameBox(dateAxis.getSlot(0),
+                            new Box2D(0, 0, 88, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct first full slot", function() {
+                    sameBox(dateAxis.getSlot(1),
+                            new Box2D(88, 0, 322, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct last full slot", function() {
+                    sameBox(dateAxis.getSlot(3),
+                            new Box2D(555, 0, 789, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct last partial slot", function() {
+                    sameBox(dateAxis.getSlot(4),
+                            new Box2D(789, 0, 799, 0),
+                            TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / getSlot / No Rounding / Justified", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                            ],
+                            roundToBaseUnit: false,
+                            justified: true
+                        });
+                    }
+                });
+
+                test("Returns correct first partial slot", function() {
+                    sameBox(dateAxis.getSlot(0),
+                            new Box2D(14, 0, 14, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct first full slot", function() {
+                    sameBox(dateAxis.getSlot(1),
+                            new Box2D(98, 0, 98, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct last full slot", function() {
+                    sameBox(dateAxis.getSlot(3),
+                            new Box2D(551, 0, 551, 0),
+                            TOLERANCE);
+                });
+
+                test("Returns correct last partial slot", function() {
+                    sameBox(dateAxis.getSlot(4),
+                            new Box2D(777, 0, 777, 0),
+                            TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / getCategory / No Rounding", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                            ],
+                            roundToBaseUnit: false
+                        });
+                    }
+                });
+
+                test("Returns correct first partial category (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(0, 0)),
+                           new Date("2012/02/01 15:00:00"));
+                });
+
+                test("Returns correct first partial category (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(87, 0)),
+                           new Date("2012/02/01 15:00:00"));
+                });
+
+                test("Returns correct first full slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(89, 0)).toString(),
+                         new Date("2012/02/02 00:00:00").toString());
+                });
+
+                test("Returns correct first full slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(321, 0)).toString(),
+                         new Date("2012/02/02 00:00:00").toString());
+                });
+
+                test("Returns correct last full slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(556, 0)).toString(),
+                         new Date("2012/02/04 00:00:00").toString());
+                });
+
+                test("Returns correct last full slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(788, 0)).toString(),
+                         new Date("2012/02/04 00:00:00").toString());
+                });
+
+                test("Returns correct last partial slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(790, 0)).toString(),
+                         new Date("2012/02/05 00:00:00").toString());
+                });
+
+                test("Returns correct last partial slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(799, 0)).toString(),
+                         new Date("2012/02/05 00:00:00").toString());
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / getCategory / No Rounding / Justified", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01 15:00:00"), new Date("2012/02/05 01:00:00")
+                            ],
+                            roundToBaseUnit: false,
+                            justified: true
+                        });
+                    }
+                });
+
+                test("Returns correct first partial category (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(14, 0)),
+                           new Date("2012/02/01 15:00:00"));
+                });
+
+                test("Returns correct first partial category (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(98, 0)),
+                           new Date("2012/02/01 15:00:00"));
+                });
+
+                test("Returns correct first full slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(99, 0)).toString(),
+                         new Date("2012/02/02 00:00:00").toString());
+                });
+
+                test("Returns correct first full slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(324, 0)).toString(),
+                         new Date("2012/02/02 00:00:00").toString());
+                });
+
+                test("Returns correct last full slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(551, 0)).toString(),
+                         new Date("2012/02/04 00:00:00").toString());
+                });
+
+                test("Returns correct last full slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(777, 0)).toString(),
+                         new Date("2012/02/04 00:00:00").toString());
+                });
+
+                test("Returns correct last partial slot (left edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(778, 0)).toString(),
+                         new Date("2012/02/05 00:00:00").toString());
+                });
+
+                test("Returns correct last partial slot (right edge)", function() {
+                    same(dateAxis.getCategory(new Point2D(786, 0)).toString(),
+                         new Date("2012/02/05 00:00:00").toString());
                 });
 
             })();
