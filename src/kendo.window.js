@@ -285,7 +285,7 @@
                 distance = 10,
                 newWidth, newHeight;
 
-            if (e.target != wrapper.children(KWINDOWCONTENT)[0]) {
+            if (e.target != e.currentTarget) {
                 return;
             }
 

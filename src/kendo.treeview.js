@@ -605,6 +605,10 @@
                 expanded = that._expanded(selection),
                 checkbox = selection.find(":checkbox:first");
 
+            if (e.target != e.currentTarget) {
+                return;
+            }
+
             if (!that._oldSelection) {
                 that._oldSelection = selection[0];
             }

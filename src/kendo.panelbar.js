@@ -545,6 +545,10 @@
                 key = e.keyCode,
                 current = that._current();
 
+            if (e.target != e.currentTarget) {
+                return;
+            }
+
             if (key == keys.DOWN || key == keys.RIGHT) {
                 that._current(that._nextItem(current));
                 e.preventDefault();

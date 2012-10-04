@@ -255,6 +255,10 @@
                 rtl = that._isRtl,
                 action;
 
+            if (e.target != e.currentTarget) {
+                return;
+            }
+
             if (key == keys.DOWN || key == keys.RIGHT) {
                 action = rtl ? PREV : "next";
             } else if (key == keys.UP || key == keys.LEFT) {
