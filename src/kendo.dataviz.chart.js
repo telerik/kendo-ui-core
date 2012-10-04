@@ -6108,6 +6108,7 @@
                 .css({
                    backgroundColor: tooltipOptions.background,
                    borderColor: tooltipOptions.border.color || point.options.color,
+                   font: tooltipOptions.font,
                    color: tooltipOptions.color,
                    opacity: tooltipOptions.opacity,
                    borderWidth: tooltipOptions.border.width
