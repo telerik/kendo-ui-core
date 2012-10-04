@@ -695,21 +695,33 @@
                     });
                 });
 
-                // ------------------------------------------------------------
-                var xMid;
+            })();
 
+            (function() {
+                var categoryAxis,
+                    lineBox;
+
+                function createCategoryAxis(options) {
+                    categoryAxis = new dataviz.CategoryAxis(
+                        $.extend({
+                            categories: ["Foo", "Bar", "Baz"]
+                        }, options)
+                    );
+                    categoryAxis.reflow(chartBox);
+                    lineBox = categoryAxis.lineBox();
+                }
+
+                // ------------------------------------------------------------
                 module("Category Axis / Horizontal / Slots", {
                     setup: function() {
                         moduleSetup();
-
                         createCategoryAxis();
-                        xMid = lineBox.center().x;
                     }
                 });
 
                 test("positions slot for first category", function() {
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [lineBox.x1, xMid]);
+                    same([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
                 });
 
                 test("positions slot for first category (justified)", function() {
@@ -721,7 +733,7 @@
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [xMid, lineBox.x2]);
+                    same([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
                 });
 
                 test("positions slot for first category in reverse (justified)", function() {
@@ -733,36 +745,65 @@
                 test("positions slot for first w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [lineBox.x1, xMid]);
+                    same([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
                 });
 
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [xMid, lineBox.x2]);
+                    same([slot.x1, slot.x2], [266, 533], TOLERANCE);
                 });
 
                 test("positions slot for second category (justified)", function() {
                     createCategoryAxis({ justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [lineBox.x2, lineBox.x2]);
+                    same([slot.x1, slot.x2], [399, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [lineBox.x1, xMid]);
+                    same([slot.x1, slot.x2], [266, 533], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse (justified)", function() {
                     createCategoryAxis({ reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [lineBox.x1, lineBox.x1]);
+                    same([slot.x1, slot.x2], [399, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [xMid, lineBox.x2]);
+                    same([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                });
+
+                test("positions slot for third category", function() {
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                });
+
+                test("positions slot for third category (justified)", function() {
+                    createCategoryAxis({ justified: true });
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.x1, slot.x2], [lineBox.x2, lineBox.x2], TOLERANCE);
+                });
+
+                test("positions slot for third category in reverse", function() {
+                    createCategoryAxis({ reverse: true });
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                });
+
+                test("positions slot for third category in reverse (justified)", function() {
+                    createCategoryAxis({ reverse: true, justified: true });
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.x1, slot.x2], [lineBox.x1, lineBox.x1], TOLERANCE);
+                });
+
+                test("positions slot for third category w/o labels", function() {
+                    createCategoryAxis({ labels: { visible: false } });
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
                 });
 
                 test("slot height is 0", function() {
@@ -783,7 +824,7 @@
                 });
 
                 test("reports range maximum equal to category count", function() {
-                    equals(categoryAxis.range().max, 2);
+                    equals(categoryAxis.range().max, 3);
                 });
 
                 test("from value can't be lower than 0", function() {
@@ -807,20 +848,16 @@
                 });
 
                 // ------------------------------------------------------------
-                var yMid;
-
                 module("Category Axis / Vertical / Slots", {
                     setup: function() {
                         moduleSetup();
-
                         createCategoryAxis({ vertical: true });
-                        yMid = lineBox.center().y;
                     }
                 });
 
                 test("positions slot for first category", function() {
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.y1, slot.y2], [lineBox.y1, yMid]);
+                    same([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
                 });
 
                 test("positions slot for first category (justified)", function() {
@@ -832,7 +869,7 @@
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.y1, slot.y2], [yMid, lineBox.y2]);
+                    same([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
                 });
 
                 test("positions slot for first category in reverse (justified)", function() {
@@ -841,15 +878,68 @@
                     same([slot.y1, slot.y2], [lineBox.y2, lineBox.y2]);
                 });
 
+                test("positions slot for first w/o labels", function() {
+                    createCategoryAxis({ vertical: true, labels: { visible: false } });
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
+                });
+
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.y1, slot.y2], [yMid, lineBox.y2]);
+                    same([slot.y1, slot.y2], [200, 399], TOLERANCE);
+                });
+
+                test("positions slot for second category (justified)", function() {
+                    createCategoryAxis({ vertical: true, justified: true });
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.y1, slot.y2], [300, 300], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.y1, slot.y2], [lineBox.y1, yMid]);
+                    same([slot.y1, slot.y2], [200, 399], TOLERANCE);
+                });
+
+                test("positions slot for second category in reverse (justified)", function() {
+                    createCategoryAxis({ vertical: true, reverse: true, justified: true });
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.y1, slot.y2], [300, 300], TOLERANCE);
+                });
+
+                test("positions slot for second category w/o labels", function() {
+                    createCategoryAxis({ vertical: true, labels: { visible: false } });
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.y1, slot.y2], [200, 399], TOLERANCE);
+                });
+
+                test("positions slot for third category", function() {
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
+                });
+
+                test("positions slot for third category (justified)", function() {
+                    createCategoryAxis({ vertical: true, justified: true });
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.y1, slot.y2], [lineBox.y2, lineBox.y2], TOLERANCE);
+                });
+
+                test("positions slot for third category in reverse", function() {
+                    createCategoryAxis({ vertical: true, reverse: true });
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
+                });
+
+                test("positions slot for third category in reverse (justified)", function() {
+                    createCategoryAxis({ vertical: true, reverse: true, justified: true });
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.y1, slot.y2], [lineBox.y1, lineBox.y1], TOLERANCE);
+                });
+
+                test("positions slot for third category w/o labels", function() {
+                    createCategoryAxis({ vertical: true, labels: { visible: false } });
+                    var slot = categoryAxis.getSlot(2);
+                    same([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
                 });
 
                 test("slot width is 0", function() {

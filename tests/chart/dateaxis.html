@@ -249,6 +249,18 @@
                     same(dateAxis.categoryMap, [[0], [], [], [], [1]]);
                 });
 
+                test("categoryMap when rounding is disabled (justified)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 21:00:00"), new Date("2012/02/05 03:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    same(dateAxis.categoryMap, [[0], [], [], [], [], [1]]);
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Min-Max values", {
                     setup: function() {
@@ -456,6 +468,13 @@
 
                     same(dateAxis.getMajorTickPositions(),
                         [0, 200, 400, 600, 800], 1);
+                });
+
+                test("Does not fail with no categories", function() {
+                    createDateCategoryAxis({
+                        categories: [],
+                        roundToBaseUnit: false
+                    });
                 });
 
                 // ------------------------------------------------------------
@@ -1034,7 +1053,7 @@
 
                 test("Returns correct last partial slot", function() {
                     sameBox(dateAxis.getSlot(4),
-                            new Box2D(786, 0, 786, 0),
+                            new Box2D(777, 0, 777, 0),
                             TOLERANCE);
                 });
 

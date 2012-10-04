@@ -1021,7 +1021,7 @@
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineEnd = lineBox[valueAxis + (reverse ? 1 : 2)],
                 slotBox = lineBox.clone(),
-                intervals = math.max(1, majorTicks.length - (justified ? 2 : 1)),
+                intervals = math.max(1, majorTicks.length - (justified ? 0 : 1)),
                 p1,
                 p2,
                 slotSize;
@@ -1262,16 +1262,16 @@
         getMajorTickPositions: function() {
             var axis = this,
                 options = axis.options,
+                categories = options.categories,
                 positions = [];
 
-            if (options.roundToBaseUnit) {
+            if (options.roundToBaseUnit || categories.length === 0) {
                 positions = CategoryAxis.fn.getMajorTickPositions.call(axis);
             } else {
                 var vertical = options.vertical,
                     reverse = options.reverse,
                     lineBox = axis.lineBox(),
                     lineSize = vertical ? lineBox.height() : lineBox.width(),
-                    categories = options.categories,
                     startTime = categories[0].getTime(),
                     range = axis.range(axis.options),
                     timeRange = range.max - range.min,
@@ -1313,6 +1313,7 @@
                 groups = [],
                 categoryMap = axis.categoryMap = [],
                 categoryIndicies,
+                lastCategoryIndicies = [],
                 categoryIx,
                 categoryDate;
 
@@ -1329,11 +1330,20 @@
                 for (categoryIx = 0; categoryIx < categories.length; categoryIx++) {
                     categoryDate = toDate(categories[categoryIx]);
                     if (categoryDate && categoryDate >= date && categoryDate < nextDate) {
-                        categoryIndicies.push(categoryIx);
+                        if (options.justified && dateEquals(categoryDate, end)) {
+                            lastCategoryIndicies.push(categoryIx);
+                        } else {
+                            categoryIndicies.push(categoryIx);
+                        }
                     }
                 }
 
                 categoryMap.push(categoryIndicies);
+            }
+
+            if (lastCategoryIndicies.length) {
+                groups.push(end);
+                categoryMap.push(lastCategoryIndicies);
             }
 
             options.min = groups[0];
@@ -6674,7 +6684,7 @@
 
     function dateEquals(a, b) {
         if (a && b) {
-            return a.getTime() === b.getTime();
+            return toTime(a) === toTime(b);
         }
 
         return a === b;
