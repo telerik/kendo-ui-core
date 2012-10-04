@@ -677,7 +677,7 @@
             });
 
             test("DropDownList does not set width if list has style.width", function() {
-                var dropdown = input.kendoDropDownList().data("kendoDropDownList");
+                var dropdown = input.kendoDropDownList(["item"]).data("kendoDropDownList");
 
                 dropdown.list.width(400);
 
