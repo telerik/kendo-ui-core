@@ -29,7 +29,6 @@ src/kendo.dataviz.js
 src/kendo.mobile.js
 src/kendo.web.js
 styles/**/*.css
-!styles/web/kendo.common.css
 !styles/web/kendo.rtl.css
 !styles/dataviz/kendo.dataviz.css
 ive/
@@ -50,7 +49,6 @@ functional-tests/KendoCustom/**/TestLists/
 functional-tests/KendoCustom/**/TestResults/
 functional-tests/KendoDemosTests/bin
 styles/*.css
-!styles/kendo.common.css
 themebuilder/src/scripts/template.js
 themebuilder/src/**/themebuilder.all*
 themebuilder/src/**/bootstrap.min.css
