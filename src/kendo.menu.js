@@ -730,8 +730,7 @@
                 target,
                 belongsToVertical,
                 hasChildren,
-                isRtl = kendo.support.isRtl(that.wrapper),
-                itemLink;
+                isRtl = kendo.support.isRtl(that.wrapper);
 
             if (!hoverItem) {
                 hoverItem  = that._oldHoverItem = that._hoverItem();
