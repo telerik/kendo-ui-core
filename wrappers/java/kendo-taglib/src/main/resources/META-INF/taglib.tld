@@ -1984,7 +1984,7 @@ has been clicked on a window with static content.</description>
 
     <tag>
         <description>Animation</description>
-        <name>autoCompleteAnimation</name>
+        <name>autoComplete-animation</name>
         <tag-class>com.kendoui.taglib.autocomplete.AnimationTag</tag-class>
 
         <body-content>empty</body-content>
@@ -1995,7 +1995,7 @@ has been clicked on a window with static content.</description>
 
     <tag>
         <description>Month</description>
-        <name>calendarMonth</name>
+        <name>calendar-month</name>
         <tag-class>com.kendoui.taglib.calendar.MonthTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2020,7 +2020,7 @@ has been clicked on a window with static content.</description>
 
     <tag>
         <description>CategoryAxis</description>
-        <name>chartCategoryAxis</name>
+        <name>chart-categoryAxis</name>
         <tag-class>com.kendoui.taglib.chart.CategoryAxisTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2091,7 +2091,7 @@ between subsequent categories. Available options:</description>
 
     <tag>
         <description>Title</description>
-        <name>chartTitle</name>
+        <name>chart-title</name>
         <tag-class>com.kendoui.taglib.chart.TitleTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2158,7 +2158,7 @@ between subsequent categories. Available options:</description>
 
     <tag>
         <description>Area</description>
-        <name>chartArea</name>
+        <name>chart-area</name>
         <tag-class>com.kendoui.taglib.chart.AreaTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2204,7 +2204,7 @@ between subsequent categories. Available options:</description>
 
     <tag>
         <description>Legend</description>
-        <name>chartLegend</name>
+        <name>chart-legend</name>
         <tag-class>com.kendoui.taglib.chart.LegendTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2268,7 +2268,7 @@ upwards from the current position.</description>
 
     <tag>
         <description>PlotArea</description>
-        <name>chartPlotArea</name>
+        <name>chart-plotArea</name>
         <tag-class>com.kendoui.taglib.chart.PlotAreaTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2300,7 +2300,7 @@ upwards from the current position.</description>
 
     <tag>
         <description>Series</description>
-        <name>chartSeries</name>
+        <name>chart-series</name>
         <tag-class>com.kendoui.taglib.chart.SeriesTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2311,7 +2311,7 @@ upwards from the current position.</description>
 
     <tag>
         <description>Tooltip</description>
-        <name>chartTooltip</name>
+        <name>chart-tooltip</name>
         <tag-class>com.kendoui.taglib.chart.TooltipTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2372,7 +2372,7 @@ Template variables:</description>
 
     <tag>
         <description>XAxis</description>
-        <name>chartXAxis</name>
+        <name>chart-xAxis</name>
         <tag-class>com.kendoui.taglib.chart.XAxisTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2414,7 +2414,7 @@ It defaults to 1/5th of the majorUnit.</description>
 
     <tag>
         <description>SeriesDefaults</description>
-        <name>chartSeriesDefaults</name>
+        <name>chart-seriesDefaults</name>
         <tag-class>com.kendoui.taglib.chart.SeriesDefaultsTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2446,7 +2446,7 @@ It defaults to 1/5th of the majorUnit.</description>
 
     <tag>
         <description>ValueAxis</description>
-        <name>chartValueAxis</name>
+        <name>chart-valueAxis</name>
         <tag-class>com.kendoui.taglib.chart.ValueAxisTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2518,7 +2518,7 @@ values increase from right to left and from top to bottom.</description>
 
     <tag>
         <description>Labels</description>
-        <name>chartCategoryAxisLabels</name>
+        <name>chart-categoryAxis-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2617,7 +2617,7 @@ Every n-th label is rendered where n is the step</description>
 
     <tag>
         <description>Line</description>
-        <name>chartCategoryAxisLine</name>
+        <name>chart-categoryAxis-line</name>
         <tag-class>com.kendoui.taglib.chart.LineTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2657,7 +2657,7 @@ not the grid lines.</description>
 
     <tag>
         <description>MajorGridLines</description>
-        <name>chartCategoryAxisMajorGridLines</name>
+        <name>chart-categoryAxis-majorGridLines</name>
         <tag-class>com.kendoui.taglib.chart.MajorGridLinesTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2696,7 +2696,7 @@ not the grid lines.</description>
 
     <tag>
         <description>MajorTicks</description>
-        <name>chartCategoryAxisMajorTicks</name>
+        <name>chart-categoryAxis-majorTicks</name>
         <tag-class>com.kendoui.taglib.chart.MajorTicksTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2722,7 +2722,7 @@ on the chart.</description>
 
     <tag>
         <description>MinorGridLines</description>
-        <name>chartCategoryAxisMinorGridLines</name>
+        <name>chart-categoryAxis-minorGridLines</name>
         <tag-class>com.kendoui.taglib.chart.MinorGridLinesTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2762,7 +2762,7 @@ rgb.</description>
 
     <tag>
         <description>MinorTicks</description>
-        <name>chartCategoryAxisMinorTicks</name>
+        <name>chart-categoryAxis-minorTicks</name>
         <tag-class>com.kendoui.taglib.chart.MinorTicksTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2788,7 +2788,7 @@ on the chart.</description>
 
     <tag>
         <description>Title</description>
-        <name>chartCategoryAxisTitle</name>
+        <name>chart-categoryAxis-title</name>
         <tag-class>com.kendoui.taglib.chart.TitleTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -2856,7 +2856,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Border</description>
-        <name>chartCategoryAxisLabelsBorder</name>
+        <name>chart-categoryAxis-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2888,7 +2888,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Border</description>
-        <name>chartCategoryAxisTitleBorder</name>
+        <name>chart-categoryAxis-title-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2921,7 +2921,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Border</description>
-        <name>chartTitleBorder</name>
+        <name>chart-title-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2953,7 +2953,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Border</description>
-        <name>chartAreaBorder</name>
+        <name>chart-area-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -2985,7 +2985,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Border</description>
-        <name>chartLegendBorder</name>
+        <name>chart-legend-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3017,7 +3017,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Labels</description>
-        <name>chartLegendLabels</name>
+        <name>chart-legend-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3052,7 +3052,7 @@ Template variables:
 
     <tag>
         <description>Border</description>
-        <name>chartPlotAreaBorder</name>
+        <name>chart-plotArea-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3084,7 +3084,7 @@ Template variables:
 
     <tag>
         <description>SeriesItem</description>
-        <name>chartSeriesItem</name>
+        <name>chart-seriesItem</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -3353,7 +3353,7 @@ The function return value is displayed instead of the individual points.</descri
 
     <tag>
         <description>Labels</description>
-        <name>chartSeriesLabels</name>
+        <name>chart-series-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -3434,7 +3434,7 @@ The function return value is displayed instead of the individual points.</descri
 
     <tag>
         <description>Border</description>
-        <name>chartSeriesBorder</name>
+        <name>chart-series-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3466,7 +3466,7 @@ The function return value is displayed instead of the individual points.</descri
 
     <tag>
         <description>Line</description>
-        <name>chartSeriesLine</name>
+        <name>chart-series-line</name>
         <tag-class>com.kendoui.taglib.chart.LineTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3498,7 +3498,7 @@ The function return value is displayed instead of the individual points.</descri
 
     <tag>
         <description>Markers</description>
-        <name>chartSeriesMarkers</name>
+        <name>chart-series-markers</name>
         <tag-class>com.kendoui.taglib.chart.MarkersTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -3537,7 +3537,7 @@ The function return value is displayed instead of the individual points.</descri
 
     <tag>
         <description>Tooltip</description>
-        <name>chartSeriesTooltip</name>
+        <name>chart-series-tooltip</name>
         <tag-class>com.kendoui.taglib.chart.TooltipTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -3598,7 +3598,7 @@ Template variables:</description>
 
     <tag>
         <description>Overlay</description>
-        <name>chartSeriesOverlay</name>
+        <name>chart-series-overlay</name>
         <tag-class>com.kendoui.taglib.chart.OverlayTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3616,7 +3616,7 @@ Template variables:</description>
 
     <tag>
         <description>NegativeValues</description>
-        <name>chartSeriesNegativeValues</name>
+        <name>chart-series-negativeValues</name>
         <tag-class>com.kendoui.taglib.chart.NegativeValuesTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3641,7 +3641,7 @@ Template variables:</description>
 
     <tag>
         <description>Connectors</description>
-        <name>chartSeriesConnectors</name>
+        <name>chart-series-connectors</name>
         <tag-class>com.kendoui.taglib.chart.ConnectorsTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3673,7 +3673,7 @@ Template variables:</description>
 
     <tag>
         <description>Border</description>
-        <name>chartSeriesLabelsBorder</name>
+        <name>chart-series-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3705,7 +3705,7 @@ Template variables:</description>
 
     <tag>
         <description>Border</description>
-        <name>chartSeriesMarkersBorder</name>
+        <name>chart-series-markers-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3730,7 +3730,7 @@ Template variables:</description>
 
     <tag>
         <description>Border</description>
-        <name>chartSeriesTooltipBorder</name>
+        <name>chart-series-tooltip-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3755,7 +3755,7 @@ Template variables:</description>
 
     <tag>
         <description>Border</description>
-        <name>chartTooltipBorder</name>
+        <name>chart-tooltip-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3780,7 +3780,7 @@ Template variables:</description>
 
     <tag>
         <description>Labels</description>
-        <name>chartXAxisLabels</name>
+        <name>chart-xAxis-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3798,7 +3798,7 @@ Template variables:</description>
 
     <tag>
         <description>Border</description>
-        <name>chartSeriesDefaultsBorder</name>
+        <name>chart-seriesDefaults-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3830,7 +3830,7 @@ Template variables:</description>
 
     <tag>
         <description>Labels</description>
-        <name>chartSeriesDefaultsLabels</name>
+        <name>chart-seriesDefaults-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -3893,7 +3893,7 @@ labels</description>
 
     <tag>
         <description>Tooltip</description>
-        <name>chartSeriesDefaultsTooltip</name>
+        <name>chart-seriesDefaults-tooltip</name>
         <tag-class>com.kendoui.taglib.chart.TooltipTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -3954,7 +3954,7 @@ Template variables:</description>
 
     <tag>
         <description>Border</description>
-        <name>chartSeriesDefaultsLabelsBorder</name>
+        <name>chart-seriesDefaults-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -3986,7 +3986,7 @@ Template variables:</description>
 
     <tag>
         <description>Border</description>
-        <name>chartSeriesDefaultsTooltipBorder</name>
+        <name>chart-seriesDefaults-tooltip-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4011,7 +4011,7 @@ Template variables:</description>
 
     <tag>
         <description>Labels</description>
-        <name>chartValueAxisLabels</name>
+        <name>chart-valueAxis-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -4104,7 +4104,7 @@ Every n-th label is rendered where n is the step</description>
 
     <tag>
         <description>Line</description>
-        <name>chartValueAxisLine</name>
+        <name>chart-valueAxis-line</name>
         <tag-class>com.kendoui.taglib.chart.LineTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4145,7 +4145,7 @@ not the grid lines.</description>
 
     <tag>
         <description>MajorGridLines</description>
-        <name>chartValueAxisMajorGridLines</name>
+        <name>chart-valueAxis-majorGridLines</name>
         <tag-class>com.kendoui.taglib.chart.MajorGridLinesTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4177,7 +4177,7 @@ not the grid lines.</description>
 
     <tag>
         <description>MajorTicks</description>
-        <name>chartValueAxisMajorTicks</name>
+        <name>chart-valueAxis-majorTicks</name>
         <tag-class>com.kendoui.taglib.chart.MajorTicksTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4202,7 +4202,7 @@ not the grid lines.</description>
 
     <tag>
         <description>MinorGridLines</description>
-        <name>chartValueAxisMinorGridLines</name>
+        <name>chart-valueAxis-minorGridLines</name>
         <tag-class>com.kendoui.taglib.chart.MinorGridLinesTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4241,7 +4241,7 @@ not the grid lines.</description>
 
     <tag>
         <description>MinorTicks</description>
-        <name>chartValueAxisMinorTicks</name>
+        <name>chart-valueAxis-minorTicks</name>
         <tag-class>com.kendoui.taglib.chart.MinorTicksTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4266,7 +4266,7 @@ not the grid lines.</description>
 
     <tag>
         <description>Title</description>
-        <name>chartValueAxisTitle</name>
+        <name>chart-valueAxis-title</name>
         <tag-class>com.kendoui.taglib.chart.TitleTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -4341,7 +4341,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Border</description>
-        <name>chartValueAxisLabelsBorder</name>
+        <name>chart-valueAxis-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4374,7 +4374,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Border</description>
-        <name>chartValueAxisTitleBorder</name>
+        <name>chart-valueAxis-title-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4406,7 +4406,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Animation</description>
-        <name>comboBoxAnimation</name>
+        <name>comboBox-animation</name>
         <tag-class>com.kendoui.taglib.combobox.AnimationTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4417,7 +4417,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Animation</description>
-        <name>datePickerAnimation</name>
+        <name>datePicker-animation</name>
         <tag-class>com.kendoui.taglib.datepicker.AnimationTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4428,7 +4428,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Month</description>
-        <name>datePickerMonth</name>
+        <name>datePicker-month</name>
         <tag-class>com.kendoui.taglib.datepicker.MonthTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4454,7 +4454,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Animation</description>
-        <name>dateTimePickerAnimation</name>
+        <name>dateTimePicker-animation</name>
         <tag-class>com.kendoui.taglib.datetimepicker.AnimationTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4465,7 +4465,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Month</description>
-        <name>dateTimePickerMonth</name>
+        <name>dateTimePicker-month</name>
         <tag-class>com.kendoui.taglib.datetimepicker.MonthTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4491,7 +4491,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Animation</description>
-        <name>dropDownListAnimation</name>
+        <name>dropDownList-animation</name>
         <tag-class>com.kendoui.taglib.dropdownlist.AnimationTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4502,7 +4502,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Columns</description>
-        <name>gridColumns</name>
+        <name>grid-columns</name>
         <tag-class>com.kendoui.taglib.grid.ColumnsTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -4513,7 +4513,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Sortable</description>
-        <name>gridSortable</name>
+        <name>grid-sortable</name>
         <tag-class>com.kendoui.taglib.grid.SortableTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4538,7 +4538,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Editable</description>
-        <name>gridEditable</name>
+        <name>grid-editable</name>
         <tag-class>com.kendoui.taglib.grid.EditableTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4584,7 +4584,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Groupable</description>
-        <name>gridGroupable</name>
+        <name>grid-groupable</name>
         <tag-class>com.kendoui.taglib.grid.GroupableTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -4595,7 +4595,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Pageable</description>
-        <name>gridPageable</name>
+        <name>grid-pageable</name>
         <tag-class>com.kendoui.taglib.grid.PageableTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -4662,7 +4662,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Toolbar</description>
-        <name>gridToolbar</name>
+        <name>grid-toolbar</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -4673,7 +4673,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Column</description>
-        <name>gridColumn</name>
+        <name>grid-column</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4747,7 +4747,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Messages</description>
-        <name>gridGroupableMessages</name>
+        <name>grid-groupable-messages</name>
         <tag-class>com.kendoui.taglib.grid.MessagesTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4765,7 +4765,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Messages</description>
-        <name>gridPageableMessages</name>
+        <name>grid-pageable-messages</name>
         <tag-class>com.kendoui.taglib.grid.MessagesTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4846,7 +4846,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>ToolbarItem</description>
-        <name>gridToolbarItem</name>
+        <name>grid-toolbarItem</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
 
         <body-content>empty</body-content>
@@ -4878,7 +4878,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>GaugeArea</description>
-        <name>linearGaugeGaugeArea</name>
+        <name>linearGauge-gaugeArea</name>
         <tag-class>com.kendoui.taglib.lineargauge.GaugeAreaTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -4910,7 +4910,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Pointer</description>
-        <name>linearGaugePointer</name>
+        <name>linearGauge-pointer</name>
         <tag-class>com.kendoui.taglib.lineargauge.PointerTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -4964,7 +4964,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>Scale</description>
-        <name>linearGaugeScale</name>
+        <name>linearGauge-scale</name>
         <tag-class>com.kendoui.taglib.lineargauge.ScaleTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -5025,7 +5025,7 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
 
     <tag>
         <description>Border</description>
-        <name>linearGaugeGaugeAreaBorder</name>
+        <name>linearGauge-gaugeArea-border</name>
         <tag-class>com.kendoui.taglib.lineargauge.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5057,7 +5057,7 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
 
     <tag>
         <description>Border</description>
-        <name>linearGaugePointerBorder</name>
+        <name>linearGauge-pointer-border</name>
         <tag-class>com.kendoui.taglib.lineargauge.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5090,7 +5090,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>Track</description>
-        <name>linearGaugePointerTrack</name>
+        <name>linearGauge-pointer-track</name>
         <tag-class>com.kendoui.taglib.lineargauge.TrackTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -5129,7 +5129,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>Border</description>
-        <name>linearGaugePointerTrackBorder</name>
+        <name>linearGauge-pointer-track-border</name>
         <tag-class>com.kendoui.taglib.lineargauge.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5161,7 +5161,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>Labels</description>
-        <name>linearGaugeScaleLabels</name>
+        <name>linearGauge-scale-labels</name>
         <tag-class>com.kendoui.taglib.lineargauge.LabelsTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -5223,7 +5223,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>MajorTicks</description>
-        <name>linearGaugeScaleMajorTicks</name>
+        <name>linearGauge-scale-majorTicks</name>
         <tag-class>com.kendoui.taglib.lineargauge.MajorTicksTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5264,7 +5264,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>MinorTicks</description>
-        <name>linearGaugeScaleMinorTicks</name>
+        <name>linearGauge-scale-minorTicks</name>
         <tag-class>com.kendoui.taglib.lineargauge.MinorTicksTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5305,7 +5305,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>Border</description>
-        <name>linearGaugeScaleLabelsBorder</name>
+        <name>linearGauge-scale-labels-border</name>
         <tag-class>com.kendoui.taglib.lineargauge.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5337,7 +5337,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>Animation</description>
-        <name>menuAnimation</name>
+        <name>menu-animation</name>
         <tag-class>com.kendoui.taglib.menu.AnimationTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5348,7 +5348,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>Messages</description>
-        <name>pagerMessages</name>
+        <name>pager-messages</name>
         <tag-class>com.kendoui.taglib.pager.MessagesTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5429,7 +5429,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>Animation</description>
-        <name>panelBarAnimation</name>
+        <name>panelBar-animation</name>
         <tag-class>com.kendoui.taglib.panelbar.AnimationTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -5440,7 +5440,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>Close</description>
-        <name>panelBarAnimationClose</name>
+        <name>panelBar-animation-close</name>
         <tag-class>com.kendoui.taglib.panelbar.CloseTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5465,7 +5465,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>Open</description>
-        <name>panelBarAnimationOpen</name>
+        <name>panelBar-animation-open</name>
         <tag-class>com.kendoui.taglib.panelbar.OpenTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5497,7 +5497,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>GaugeArea</description>
-        <name>radialGaugeGaugeArea</name>
+        <name>radialGauge-gaugeArea</name>
         <tag-class>com.kendoui.taglib.radialgauge.GaugeAreaTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -5529,7 +5529,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>Pointer</description>
-        <name>radialGaugePointer</name>
+        <name>radialGauge-pointer</name>
         <tag-class>com.kendoui.taglib.radialgauge.PointerTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -5555,7 +5555,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>Scale</description>
-        <name>radialGaugeScale</name>
+        <name>radialGauge-scale</name>
         <tag-class>com.kendoui.taglib.radialgauge.ScaleTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -5617,7 +5617,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 
     <tag>
         <description>Border</description>
-        <name>radialGaugeGaugeAreaBorder</name>
+        <name>radialGauge-gaugeArea-border</name>
         <tag-class>com.kendoui.taglib.radialgauge.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5649,7 +5649,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 
     <tag>
         <description>Cap</description>
-        <name>radialGaugePointerCap</name>
+        <name>radialGauge-pointer-cap</name>
         <tag-class>com.kendoui.taglib.radialgauge.CapTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5675,7 +5675,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>Labels</description>
-        <name>radialGaugeScaleLabels</name>
+        <name>radialGauge-scale-labels</name>
         <tag-class>com.kendoui.taglib.radialgauge.LabelsTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -5744,7 +5744,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>MajorTicks</description>
-        <name>radialGaugeScaleMajorTicks</name>
+        <name>radialGauge-scale-majorTicks</name>
         <tag-class>com.kendoui.taglib.radialgauge.MajorTicksTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5785,7 +5785,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>MinorTicks</description>
-        <name>radialGaugeScaleMinorTicks</name>
+        <name>radialGauge-scale-minorTicks</name>
         <tag-class>com.kendoui.taglib.radialgauge.MinorTicksTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5826,7 +5826,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>Border</description>
-        <name>radialGaugeScaleLabelsBorder</name>
+        <name>radialGauge-scale-labels-border</name>
         <tag-class>com.kendoui.taglib.radialgauge.BorderTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5858,7 +5858,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>Tooltip</description>
-        <name>rangeSliderTooltip</name>
+        <name>rangeSlider-tooltip</name>
         <tag-class>com.kendoui.taglib.rangeslider.TooltipTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5891,7 +5891,7 @@ the</description>
 
     <tag>
         <description>Tooltip</description>
-        <name>sliderTooltip</name>
+        <name>slider-tooltip</name>
         <tag-class>com.kendoui.taglib.slider.TooltipTag</tag-class>
 
         <body-content>empty</body-content>
@@ -5924,7 +5924,7 @@ format will also influence the appearance of the</description>
 
     <tag>
         <description>Panes</description>
-        <name>splitterPanes</name>
+        <name>splitter-panes</name>
         <tag-class>com.kendoui.taglib.splitter.PanesTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -5935,7 +5935,7 @@ format will also influence the appearance of the</description>
 
     <tag>
         <description>Pane</description>
-        <name>splitterPane</name>
+        <name>splitter-pane</name>
         <tag-class>com.kendoui.taglib.splitter.PaneTag</tag-class>
 
         <body-content>empty</body-content>
@@ -6005,7 +6005,7 @@ value must not exceed</description>
 
     <tag>
         <description>Animation</description>
-        <name>tabStripAnimation</name>
+        <name>tabStrip-animation</name>
         <tag-class>com.kendoui.taglib.tabstrip.AnimationTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -6016,7 +6016,7 @@ value must not exceed</description>
 
     <tag>
         <description>Close</description>
-        <name>tabStripAnimationClose</name>
+        <name>tabStrip-animation-close</name>
         <tag-class>com.kendoui.taglib.tabstrip.CloseTag</tag-class>
 
         <body-content>empty</body-content>
@@ -6042,7 +6042,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
     <tag>
         <description>Open</description>
-        <name>tabStripAnimationOpen</name>
+        <name>tabStrip-animation-open</name>
         <tag-class>com.kendoui.taglib.tabstrip.OpenTag</tag-class>
 
         <body-content>empty</body-content>
@@ -6074,7 +6074,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
     <tag>
         <description>Animation</description>
-        <name>timePickerAnimation</name>
+        <name>timePicker-animation</name>
         <tag-class>com.kendoui.taglib.timepicker.AnimationTag</tag-class>
 
         <body-content>empty</body-content>
@@ -6085,7 +6085,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
     <tag>
         <description>Animation</description>
-        <name>treeViewAnimation</name>
+        <name>treeView-animation</name>
         <tag-class>com.kendoui.taglib.treeview.AnimationTag</tag-class>
 
         <body-content>JSP</body-content>
@@ -6096,7 +6096,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
     <tag>
         <description>Collapse</description>
-        <name>treeViewAnimationCollapse</name>
+        <name>treeView-animation-collapse</name>
         <tag-class>com.kendoui.taglib.treeview.CollapseTag</tag-class>
 
         <body-content>empty</body-content>
@@ -6121,7 +6121,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
     <tag>
         <description>Expand</description>
-        <name>treeViewAnimationExpand</name>
+        <name>treeView-animation-expand</name>
         <tag-class>com.kendoui.taglib.treeview.ExpandTag</tag-class>
 
         <body-content>empty</body-content>
@@ -6154,7 +6154,7 @@ node is expanded.</description>
 
     <tag>
         <description>Async</description>
-        <name>uploadAsync</name>
+        <name>upload-async</name>
         <tag-class>com.kendoui.taglib.upload.AsyncTag</tag-class>
 
         <body-content>empty</body-content>
@@ -6218,7 +6218,7 @@ containing one or more fields with the same name as the original input name.</de
 
     <tag>
         <description>Localization</description>
-        <name>uploadLocalization</name>
+        <name>upload-localization</name>
         <tag-class>com.kendoui.taglib.upload.LocalizationTag</tag-class>
 
         <body-content>empty</body-content>
@@ -6292,7 +6292,7 @@ containing one or more fields with the same name as the original input name.</de
 
     <tag>
         <description>Animation</description>
-        <name>windowAnimation</name>
+        <name>window-animation</name>
         <tag-class>com.kendoui.taglib.window.AnimationTag</tag-class>
 
         <body-content>empty</body-content>
@@ -6303,7 +6303,7 @@ containing one or more fields with the same name as the original input name.</de
 
     <tag>
         <description>Content</description>
-        <name>windowContent</name>
+        <name>window-content</name>
         <tag-class>com.kendoui.taglib.window.ContentTag</tag-class>
 
         <body-content>empty</body-content>

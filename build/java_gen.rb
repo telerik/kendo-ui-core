@@ -563,7 +563,7 @@ class NestedTag < Tag
     end
 
     def tag_name
-        return @parent.tag_name + @name
+        return "#{@parent.tag_name}-#{@name.camelize}"
     end
 
     def path
@@ -633,7 +633,7 @@ class NestedTagArrayItem < NestedTag
     end
 
     def tag_name
-        return @parent.tag_name.sub(@parent.name, @name)
+        return @parent.tag_name.sub(@parent.name.camelize, @name.camelize)
     end
 
     def parent_setter

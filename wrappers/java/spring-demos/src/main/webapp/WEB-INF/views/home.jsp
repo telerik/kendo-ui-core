@@ -30,16 +30,17 @@
             </kendo:autoComplete>
         
         	<kendo:grid name="grid">
-        		<kendo:gridColumns>
-        			<kendo:gridColumn title="Foo"/>
-        			<kendo:gridColumn title="Bar" width="100"/>
-        		</kendo:gridColumns>
+        		<kendo:grid-columns>
+        			<kendo:grid-column title="Foo"/>
+        			<kendo:grid-column title="Bar" width="100"/>
+        		</kendo:grid-columns>
         	</kendo:grid>	
         </kendo:window>
+
         <kendo:chart name="myChart">
-        	<kendo:chartTitle text="Foo">
-       			<kendo:chartTitleBorder color="#a0b0c0" width="1"/>
-        	</kendo:chartTitle>
+        	<kendo:chart-title text="Foo">
+       			<kendo:chart-title-border color="#ff0000" width="1"/>
+        	</kendo:chart-title>
         </kendo:chart>
         
         <kendo:panelBar name="myPanelBar">
