@@ -398,6 +398,9 @@
 
                 that._accept(current);
             } else if (key === keys.ESC) {
+                if (that.popup.visible()) {
+                    e.preventDefault();
+                }
                 that.close();
             } else {
                 that._search();

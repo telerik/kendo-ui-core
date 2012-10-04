@@ -250,6 +250,22 @@
                 ok(!autocomplete.ul.is(":visible"));
             });
 
+            test("esc calls prevent default if popup is opened", 1, function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["baz", "bar"]
+                });
+
+                input.val("b");
+                autocomplete.search();
+                input.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.ESC,
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
+            });
+
             test("clicking item more than once", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
