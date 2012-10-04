@@ -189,7 +189,7 @@
                 }
             }
 
-            kendo.destroy(that.element);
+            kendo.destroy(that.element.children());
         },
 
         open: function(x, y) {
