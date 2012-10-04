@@ -1680,7 +1680,7 @@
             if (that.options.scrollable) {
                 dataTable = table.add(that.thead.parent());
                 that.thead.parent().on("keydown", function(e) {
-                    if (!e.shiftKey && e.keyCode == keys.TAB) {
+                    if (!e.shiftKey && e.keyCode == keys.TAB && that._current) {
                         that._current.removeClass("k-state-focused");
                         that._current = null;
                     }
@@ -1689,11 +1689,8 @@
             }
             that.thead.find("a.k-link").attr("tabIndex", -1);
 
-            that.table.on("mousedown" + NS, ".k-detail-cell", function(e) {
-                var targetGrid = $(e.target).closest(".k-widget")[0]; // this should be k-widget, maybe
-                //check whether e.target is in grid wrapper
-
-                if (targetGrid  && targetGrid !== that.wrapper[0]) {
+            that.table.on("mousedown" + NS + " keydown" + NS, ".k-detail-cell", function(e) {
+                if (e.target !== e.currentTarget) {
                     e.stopImmediatePropagation();
                 }
             });

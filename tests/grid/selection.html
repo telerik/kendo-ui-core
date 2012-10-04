@@ -442,6 +442,15 @@
                 ok(!grid.element.find(".k-state-selected").length)
             });
 
+            test("detail cell is not focused", function() {
+                var grid = setup({ detailTemplate: "<input class='foo' />" });
+                grid.expandRow(table.find(".k-master-row:first"));
+                grid.table.find(".foo").focus().mousedown();
+
+                ok(!table.find(".k-detail-cell").hasClass("k-state-focused"));
+            });
+
+
             /* TODO should skip the footer?!
             test("group footer row is skipped when up arrow is pressed", function() {
                 var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
