@@ -9,7 +9,6 @@
         each = $.each,
         extend = $.extend,
         proxy = $.proxy,
-        size = kendo.size,
         support = kendo.support,
         browser = support.browser,
         transforms = support.transforms,
@@ -413,39 +412,31 @@
         return { direction: dir, offset: -dir.modifier * (dir.vertical ? element.outerHeight() : element.outerWidth()) };
     }
 
-    kendo.fx.promise = function(element, options) {
-        var effects = [],
-            effect,
-            deferred = $.Deferred(),
-            startState = {},
-            endState = {},
-            target;
+    var EffectSet = kendo.Class.extend({
+        init: function(element, effects, options) {
+            var that = this,
+                deferred = $.Deferred(),
+                startState = {},
+                endState = {},
+                target;
 
-        options.effects = kendo.parseEffects(options.effects);
+            that.element = element;
+            that.effects = effects;
+            that.options = options;
+            that.restore = [];
 
-        element.data("animating", true);
+            deferred.then($.proxy(this, "complete"));
 
-        if (!size(options.effects)) {
-            options.init();
-            deferred.resolve();
-        } else {
+            element.data("animating", true);
 
-            each(options.effects, function(effectName, settings) {
-                var effectClass = Effects[effectName];
-
-                if (effectClass) {
-                    effect = new effectClass(element, extend(true, {}, options, settings));
-                    effects.push(effect);
-                }
-            });
+            if (!effects.length) {
+                options.init();
+                deferred.resolve();
+                return;
+            }
 
             each(effects, function() {
-                each(this.restore, function(idx, value) {
-                    if (!element.data(value)) {
-                        element.data(value, element.css(value));
-                    }
-                });
-
+                that.addRestoreProperties(this.restore);
                 extend(startState, this.startState());
             });
 
@@ -474,15 +465,43 @@
                 extend(endState, this.endState());
             });
 
-            if (kendo.fx.animate) {
-                options.init();
-                element.data("targetTransform", endState);
-                kendo.fx.animate(element, endState, extend({}, options, { complete: deferred.resolve }));
-            }
-        }
+            options.init();
+            element.data("targetTransform", endState);
+            kendo.fx.animate(element, endState, extend({}, options, { complete: deferred.resolve }));
+        },
 
-        // Wait for all effects to complete
-        $.when(deferred.promise()).then(function() {
+        addRestoreProperties: function(restore) {
+            var element = this.element,
+                value,
+                i = 0,
+                length = restore.length;
+
+            for (; i < length; i ++) {
+                value = restore[i];
+
+                this.restore.push(value);
+
+                if (!element.data(value)) {
+                    element.data(value, element.css(value));
+                }
+            }
+        },
+
+        restoreCallback: function() {
+            var element = this.element;
+
+            for (var i = 0, length = this.restore.length; i < length; i ++) {
+                var value = this.restore[i];
+                element.css(value, element.data(value));
+            }
+        },
+
+        complete: function() {
+            var that = this,
+                element = that.element,
+                options = that.options,
+                effects = that.effects;
+
             element
                 .removeData("animating")
                 .dequeue(); // call next animation from the queue
@@ -491,29 +510,38 @@
                 element.data("olddisplay", element.css("display")).hide();
             }
 
-            if (effects.length) {
-                var restoreCallback = function() {
-                    each(effects, function() {
-                        each(this.restore, function(idx, value) {
-                            element.css(value, element.data(value));
-                        });
-                    });
-                };
+            this.restoreCallback();
 
-                restoreCallback();
-                if (hasZoom && !transforms) {
-                    setTimeout(restoreCallback, 0); // Again jQuery callback in IE8-.
-                }
-
-                each(effects, function() {
-                    this.teardown();
-                }); // call the internal completion callbacks
+            if (hasZoom && !transforms) {
+                setTimeout($.proxy(this, "restoreCallback"), 0); // Again jQuery callback in IE8-.
             }
+
+            each(effects, function() {
+                this.teardown();
+            }); // call the internal completion callbacks
 
             if (options.completeCallback) {
                 options.completeCallback(element); // call the external complete callback with the element
             }
+        }
+    });
+
+    kendo.fx.promise = function(element, options) {
+        var effects = [],
+            effect;
+
+        options.effects = kendo.parseEffects(options.effects);
+
+        each(options.effects, function(effectName, settings) {
+            var effectClass = Effects[effectName];
+
+            if (effectClass) {
+                effect = new effectClass(element, extend(true, {}, options, settings));
+                effects.push(effect);
+            }
         });
+
+        new EffectSet(element, effects, options);
     };
 
     kendo.fx.transitionPromise = function(element, destination, options) {
