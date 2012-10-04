@@ -9,6 +9,7 @@
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.sortable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -95,6 +96,16 @@
                 equal(table.find(".k-state-focused").length, 1);
             });
 
+            test("moving down from header", function() {
+                var grid = setup({
+                    columns: [{ field: "foo" }]
+                });
+
+                grid.thead.parent().focus().press(kendo.keys.DOWN);
+
+                ok(table.find("td:first").hasClass("k-state-focused"));
+            });
+
             test("right arrow moves focus on the next cell on the same row", function() {
                 var grid = setup();
                 grid.table.focus().press(kendo.keys.RIGHT);
@@ -113,7 +124,17 @@
                 ok(table.find("tbody tr:eq(0)").find("td").hasClass("k-state-focused"));
             });
 
-            test("pageDown should page to the next page", function() {
+            test("moving up to header", function() {
+                var grid = setup({
+                    columns: [{ field: "foo" }]
+                });
+
+                table.focus().press(kendo.keys.UP);
+
+                ok(grid.thead.find("th:first").hasClass("k-state-focused"));
+            });
+
+            test("pageDown page to the next page", function() {
                 var grid = setup({
                     pageable: {
                         pageSize: 1
@@ -123,7 +144,7 @@
                 equal(grid.dataSource.page(), 2);
             });
 
-            test("pageUp should page to the prev page", function() {
+            test("pageUp page to the prev page", function() {
                 var grid = setup({
                     pageable: {
                         pageSize: 1
@@ -134,7 +155,7 @@
                 equal(grid.dataSource.page(), 1);
             });
 
-            test("pageUp should not page to the pass first", function() {
+            test("pageUp should not page if on first page", function() {
                 var grid = setup({
                     pageable: {
                         pageSize: 1
@@ -142,6 +163,27 @@
                 });
                 table.focus().press(kendo.keys.PAGEUP);
                 equal(grid.dataSource.page(), 1);
+            });
+
+            test("page should focus first cell in the table", function() {
+                var grid = setup({
+                    pageable: {
+                        pageSize: 1
+                    }
+                });
+                table.focus().press(kendo.keys.PAGEDOWN);
+                ok(grid.table.find("td:first").hasClass("k-state-focused"));
+            });
+
+            test("page will persist the focus in header table", function() {
+                var grid = setup({
+                    pageable: {
+                        pageSize: 1
+                    },
+                    columns: [{ field: "foo" }]
+                });
+                grid.thead.parent().focus().press(kendo.keys.PAGEDOWN);
+                ok(grid.thead.find("th:first").hasClass("k-state-focused"));
             });
 
             test("down arrow after paging should select first cell", function() {
@@ -450,6 +492,14 @@
                 ok(!table.find(".k-detail-cell").hasClass("k-state-focused"));
             });
 
+            test("enter key on header on sortable grid", function() {
+                var grid = setup({ sortable: true, columns: [ { field: "foo" }] });
+                grid.thead.parent().focus().press(kendo.keys.ENTER);
+
+                equal(grid.dataSource.sort().length, 1);
+                equal(grid.dataSource.sort()[0].field, "foo");
+                equal(grid.dataSource.sort()[0].dir, "asc");
+            });
 
             /* TODO should skip the footer?!
             test("group footer row is skipped when up arrow is pressed", function() {

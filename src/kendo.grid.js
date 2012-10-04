@@ -23,6 +23,9 @@
         SELECTION_CELL_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer) > td:not(.k-group-cell):not(.k-hierarchy-cell)",
         //CELL_SELECTOR =  ROW_SELECTOR + ">td" + DATA_CELL,
         //FIRST_CELL_SELECTOR = ROW_SELECTOR + ":first" + ">td" + DATA_CELL + ":first",
+        NAVROW = "tr:visible",
+        NAVCELL = ":not(.k-group-cell,.k-hierarchy-cell):visible",
+        FIRSTNAVITEM = NAVROW + ":first>" + NAVCELL + ":first",
         NS = ".kendoGrid",
         EDIT = "edit",
         SAVE = "save",
@@ -1632,6 +1635,13 @@
             return that._current;
         },
 
+        _removeCurrent: function() {
+            if (this._current) {
+                this._current.removeClass(FOCUSED);
+                this._current = null;
+            }
+        },
+
         _scrollTo: function(element, container) {
             var isHorizontal =  element.tagName.toLowerCase() === "td",
                 elementOffset = element[isHorizontal ? "offsetLeft" : "offsetTop"],
@@ -1647,56 +1657,33 @@
         },
 
         _navigatable: function() {
-            var NAVROW = "tr:visible",
-                NAVCELL = ":not(.k-group-cell,.k-hierarchy-cell):visible",
-                FIRSTNAVITEM = NAVROW + ":first>" + NAVCELL + ":first";
-
             var that = this,
                 currentProxy = proxy(that.current, that),
                 table = that.table,
-                dataTable = table,
-                clickCallback = function(e) {
-                    var currentTarget = $(e.currentTarget),
-                        currentTable = currentTarget.closest("table")[0];
-
-                    if (currentTable !== that.table[0] && currentTable !== that.thead.parent()[0]) {
-                        return;
-                    }
-
-                    currentProxy(currentTarget);
-
-                    //:focusable returns false -> this selector should be in :focusable?
-                    if (currentTarget.is("th") || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
-                        setTimeout(function() {
-                            currentTable.focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
-                        });
-                    }
-
-                    if (currentTarget.is("th")) {
-                        e.preventDefault(); //if any problem occurs, call preventDefault only for the clicked header links
-                    }
-                };
+                headerTable = that.thead.find("a.k-link").attr("tabIndex", -1).end().parent(),
+                dataTable = table;
 
             if (that.options.scrollable) {
-                dataTable = table.add(that.thead.parent());
-                that.thead.parent().on("keydown", function(e) {
-                    if (!e.shiftKey && e.keyCode == keys.TAB && that._current) {
-                        that._current.removeClass("k-state-focused");
-                        that._current = null;
+                dataTable = table.add(headerTable);
+                headerTable.on("keydown" + NS, function(e) {
+                    if (!e.shiftKey && e.keyCode == keys.TAB) {
+                        that._removeCurrent();
                     }
                 });
-                that.content.attr("tabindex", -1); //otherwise FF will focus content div
-            }
-            that.thead.find("a.k-link").attr("tabIndex", -1);
 
-            that.table.on("mousedown" + NS + " keydown" + NS, ".k-detail-cell", function(e) {
+                //required for FF
+                that.content.attr("tabindex", -1);
+            }
+
+            table.on("mousedown" + NS + " keydown" + NS, ".k-detail-cell", function(e) {
                 if (e.target !== e.currentTarget) {
                     e.stopImmediatePropagation();
                 }
             });
 
-            dataTable.attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
-            dataTable.on("focus" + NS, function(e) {
+            dataTable.attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0))
+            .on("mousedown" + NS, NAVROW + ">" + NAVCELL, proxy(tableClick, that))
+            .on("focus" + NS, function(e) {
                 var current = currentProxy();
                 if (current && current.is(":visible")) {
                     current.addClass(FOCUSED);
@@ -1710,7 +1697,6 @@
                     current.removeClass(FOCUSED);
                 }
             })
-            .on("mousedown" + NS, NAVROW + ">" + NAVCELL, clickCallback)
             .on("keydown" + NS, function(e) {
                 var key = e.keyCode,
                     handled = false,
@@ -1749,7 +1735,7 @@
                     currentProxy(current);
                 } else if (canHandle && key == keys.DOWN) {
                     if (current) {
-                         row = current.parent().nextAll(NAVROW).first();
+                        row = current.parent().nextAll(NAVROW).first();
                         if (!row[0] && current.is("th")) {
                             row = that.tbody.parent().focus().end().find(NAVROW).first();
                         }
@@ -1759,7 +1745,6 @@
                             current = row.children(NAVCELL).first();
                         }
                     } else {
-                        //on page the current will not exist
                         current = table.find(FIRSTNAVITEM);
                     }
 
@@ -1779,6 +1764,12 @@
 
                     handled = true;
                     currentProxy(current);
+                } else if (canHandle && pageable && keys.PAGEDOWN == key) {
+                    dataSource.page(dataSource.page() + 1);
+                    handled = true;
+                } else if (canHandle && pageable && keys.PAGEUP == key) {
+                    dataSource.page(dataSource.page() - 1);
+                    handled = true;
                 } else if (key == keys.ENTER || keys.F2 == key) {
                     current = current ? current : table.find(FIRSTNAVITEM);
                     if (current.is("th")) {
@@ -1791,12 +1782,6 @@
                         that._handleEditing(current);
                         handled = true;
                     }
-                } else if (canHandle && pageable && keys.PAGEDOWN == key) {
-                    dataSource.page(dataSource.page() + 1);
-                    handled = true;
-                } else if (canHandle && pageable && keys.PAGEUP == key) {
-                    dataSource.page(dataSource.page() - 1);
-                    handled = true;
                 } else if (that.options.editable) {
                     if (keys.ESC == key && that._editContainer) {
                         if (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0]) {
@@ -1844,7 +1829,6 @@
             var that = this,
                 mode = that._editMode(),
                 editContainer = that._editContainer,
-                //idx,
                 isEdited;
 
             if (mode == "incell") {
@@ -1862,22 +1846,13 @@
                     if (mode == "incell") {
                         that.closeCell();
                     } else {
-                        /*
-                        if (current.parent()[0] === editContainer[0]) {
-                            idx = that.items().index(current.parent());
-                        } else {
-                            idx = that.items().index(editContainer);
-                        }
-                        */
                         that.saveRow();
-                        //that.current(that.items().eq(idx).children().filter(":not(.k-group-cell):visible").first());
                         isEdited = true;
                     }
                 } else {
                     if (mode == "incell") {
                         that.current(editContainer);
                     } else {
-                        //TODO DATA_CELL should be NAVCELL
                         that.current(editContainer.children().filter(DATA_CELL).first());
                     }
                     editContainer.find(":focusable:first").focus();
@@ -3235,10 +3210,7 @@
             that._setContentHeight();
 
             if (currentIndex >= 0) {
-                if (that._current) {
-                    that._current.removeClass("k-state-focused");
-                    that._current = null;
-                }
+                that._removeCurrent();
                 if (!isCurrentInHeader) {
                     that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
                 } else {
@@ -3272,6 +3244,27 @@
            }
        }
        return null;
+   }
+
+   function tableClick(e) {
+       var currentTarget = $(e.currentTarget),
+           currentTable = currentTarget.closest("table")[0];
+
+       if (currentTable !== this.table[0] && currentTable !== this.thead.parent()[0]) {
+           return;
+       }
+
+       this.current(currentTarget);
+
+       if (currentTarget.is("th") || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
+           setTimeout(function() {
+               currentTable.focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+           });
+       }
+
+       if (currentTarget.is("th")) {
+           e.preventDefault(); //if any problem occurs, call preventDefault only for the clicked header links
+       }
    }
 
    ui.plugin(Grid);
