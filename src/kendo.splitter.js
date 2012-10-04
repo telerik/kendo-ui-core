@@ -1,6 +1,7 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         extend = $.extend,
         proxy = $.proxy,
         Widget = ui.Widget,
@@ -52,13 +53,22 @@
 
     var Splitter = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                isHorizontal;
 
             Widget.fn.init.call(that, element, options);
 
             that.wrapper = that.element;
 
-            that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
+            isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
+            that.orientation = isHorizontal ? HORIZONTAL : VERTICAL;
+            that._dimension = isHorizontal ? "width" : "height";
+            that._keys = {
+                decrease: isHorizontal ? keys.LEFT : keys.UP,
+                increase: isHorizontal ? keys.RIGHT : keys.DOWN
+            };
+
+            that._resizeStep = 10;
 
             that.bind(RESIZE, proxy(that._resize, that));
 
@@ -93,19 +103,23 @@
         _attachEvents: function() {
             var that = this,
                 orientation = that.options.orientation,
-                splitbarSelector = ".k-splitbar-draggable-" + orientation,
+                splitbarSelector = ".k-splitbar-" + orientation,
+                splitbarDraggableSelector = ".k-splitbar-draggable-" + orientation,
                 expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)";
 
             that.element
-                .on(MOUSEENTER + NS, splitbarSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
-                .on(MOUSELEAVE + NS, splitbarSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                .on("mousedown" + NS, splitbarSelector, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
-                .on("mouseup" + NS, splitbarSelector, function() { that._panes().children(".k-splitter-overlay").remove(); })
+                .on("keydown" + NS, splitbarSelector, proxy(that._keydown, that))
+                .on("blur" + NS, splitbarSelector, function(e) { that.resizing.end(); })
+                .on("mousedown" + NS, splitbarSelector, function(e) { e.currentTarget.focus(); })
+                .on(MOUSEENTER + NS, splitbarDraggableSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
+                .on(MOUSELEAVE + NS, splitbarDraggableSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
+                .on("mousedown" + NS, splitbarDraggableSelector, function() { that.resizing.end(); that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
+                .on("mouseup" + NS, splitbarDraggableSelector, function() { that._panes().children(".k-splitter-overlay").remove(); })
                 .on(MOUSEENTER + NS, expandCollapseSelector, function() { $(this).addClass("k-state-hover"); })
                 .on(MOUSELEAVE + NS, expandCollapseSelector, function() { $(this).removeClass('k-state-hover'); })
                 .on(CLICK + NS, ".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", that._arrowClick(COLLAPSE))
                 .on(CLICK + NS, ".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", that._arrowClick(EXPAND))
-                .on("dblclick" + NS, ".k-splitbar", proxy(that._dbclick, that))
+                .on("dblclick" + NS, ".k-splitbar", proxy(that._togglePane, that))
                 .parent().closest(".k-splitter").each(function() {
                     var parentSplitter = $(this),
                         splitter = parentSplitter.data("kendoSplitter");
@@ -137,6 +151,39 @@
             $(window).off("resize", that._resizeHandler);
 
             kendo.destroy(that.element);
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                resizing = that.resizing,
+                target = $(e.currentTarget),
+                navigationKeys = that._keys,
+                increase = key === navigationKeys.increase,
+                decrease = key === navigationKeys.decrease,
+                pane;
+
+            if (increase || decrease) {
+                if (e.ctrlKey) {
+                    pane = target[decrease ? "next" : "prev"]();
+
+                    if (resizing.isResizing()) {
+                        resizing.end();
+                    }
+
+                    if (!pane[that._dimension]()) {
+                        that._triggerAction(EXPAND, pane);
+                    } else {
+                        that._triggerAction(COLLAPSE, target[decrease ? "prev" : "next"]());
+                    }
+                } else {
+                    resizing.move((decrease ? -1 : 1) * that._resizeStep, target);
+                }
+                e.preventDefault();
+            } else if (key === keys.ENTER) {
+                resizing.end();
+                e.preventDefault();
+            }
         },
 
         _initPanes: function() {
@@ -197,7 +244,8 @@
                 this[type](pane[0]);
             }
         },
-        _dbclick: function(e) {
+
+        _togglePane: function(e) {
             var that = this,
                 target = $(e.target),
                 arrow;
@@ -296,7 +344,9 @@
 
             if (splitBarsCount === 0) {
                 splitBarsCount = panes.length - 1;
-                panes.slice(0, splitBarsCount).after("<div class='k-splitbar' data-marker='" + that._marker + "' />");
+                panes.slice(0, splitBarsCount)
+                     .after("<div tabindex='0' class='k-splitbar' data-marker='" + that._marker + "' />");
+
                 that._updateSplitBars();
                 splitBars = element.children(".k-splitbar");
             } else {
@@ -378,6 +428,10 @@
             pane = $(pane);
             paneConfig = pane.data(PANE);
 
+            if (!expand && !paneConfig.collapsible) {
+                return;
+            }
+
             if (arguments.length == 1) {
                 expand = paneConfig.collapsed === undefined ? false : paneConfig.collapsed;
             }
@@ -397,6 +451,7 @@
         },
 
         collapse: function(pane) {
+
             this.toggle(pane, false);
         },
 
@@ -452,14 +507,36 @@
     }
 
     PaneResizing.prototype = {
+        press: function(target) {
+            this._resizable.press(target);
+        },
+
+        move: function(delta, target) {
+            if (!this._resizable.target) {
+                this._resizable.press(target);
+            }
+
+            this._resizable.move(delta);
+        },
+
+        end: function() {
+            this._resizable.end();
+        },
+
         destroy: function() {
             this._resizable.destroy();
         },
+
+        isResizing: function() {
+            return this._resizable.resizing;
+        },
+
         _createHint: function(handle) {
             var that = this;
             return $("<div class='k-ghost-splitbar k-ghost-splitbar-" + that.orientation + " k-state-default' />")
                         .css(that.alternateSizingProperty, handle[that.alternateSizingProperty]());
         },
+
         _start: function(e) {
             var that = this,
                 splitbar = $(e.currentTarget),
@@ -521,6 +598,10 @@
 
                 owner.trigger(RESIZE);
             }
+
+            setTimeout(function() {
+                that.press(splitbar);
+            });
 
             return false;
         }

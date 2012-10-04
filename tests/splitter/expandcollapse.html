@@ -344,7 +344,12 @@
             test("collapsing a pane adds an overflow:hidden style to it", function() {
                 var splitter = $(getSplitterHtml(2))
                         .appendTo(document.body)
-                        .kendoSplitter();
+                        .kendoSplitter({
+                            panes: [
+                                { collapsible: true },
+                                { collapsible: true }
+                            ]
+                        });
 
                 splitter.data("kendoSplitter").collapse(".k-pane:first");
 

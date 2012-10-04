@@ -26,9 +26,12 @@
                 distance: 0,
                 filter: options.handle,
                 drag: proxy(that._resize, that),
+                dragcancel: proxy(that._cancel, that),
                 dragstart: proxy(that._start, that),
                 dragend: proxy(that._stop, that)
             });
+
+            that.userEvents = that.draggable.userEvents;
         },
 
         events: [
@@ -41,6 +44,7 @@
             name: "Resizable",
             orientation: HORIZONTAL
         },
+
         _max: function(e) {
             var that = this,
                 hintSize = that.hint ? that.hint[that._sizingDom]() : 0,
@@ -48,19 +52,21 @@
 
             return isFunction(size) ? size(e) : size !== undefined ? (that._initialElementPosition + size) - hintSize : size;
         },
+
         _min: function(e) {
             var that = this,
                 size = that.options.min;
 
             return isFunction(size) ? size(e) : size !== undefined ? that._initialElementPosition + size : size;
         },
+
         _start: function(e) {
             var that = this,
                 hint = that.options.hint,
                 el = $(e.currentTarget);
 
-            that._initialMousePosition = e[that._positionMouse].location;
             that._initialElementPosition = el.position()[that._position];
+            that._initialMousePosition = e[that._positionMouse].startLocation;
 
             if (hint) {
                 that.hint = isFunction(hint) ? $(hint(el)) : hint;
@@ -79,6 +85,7 @@
 
             $(document.body).css("cursor", el.css("cursor"));
         },
+
         _resize: function(e) {
             var that = this,
                 handle = $(e.currentTarget),
@@ -95,8 +102,10 @@
                          .css(that._position, position);
             }
 
+            that.resizing = true;
             that.trigger(RESIZE, extend(e, { position: position }));
         },
+
         _stop: function(e) {
             var that = this;
 
@@ -104,9 +113,21 @@
                 that.hint.remove();
             }
 
+            that.resizing = false;
             that.trigger(RESIZEEND, extend(e, { position: that.position }));
             $(document.body).css("cursor", "");
         },
+
+        _cancel: function(e) {
+            var that = this;
+
+            if (that.hint) {
+                that.position = undefined;
+                that.hint.css(that._position, that._initialElementPosition);
+                that._stop(e);
+            }
+        },
+
         destroy: function() {
             var that = this;
 
@@ -115,6 +136,39 @@
             if (that.draggable) {
                 that.draggable.destroy();
             }
+        },
+
+        press: function(target) {
+            if (!target) {
+                return;
+            }
+
+            var position = target.position(),
+                that = this;
+
+            that.userEvents.press(position.left, position.top, target[0]);
+            that.targetPosition = position;
+            that.target = target;
+        },
+
+        move: function(delta) {
+            var that = this,
+                orientation = that._position,
+                position = that.targetPosition,
+                current = that.position;
+
+            if (current === undefined) {
+                current = position[orientation];
+            }
+
+            position[orientation] = current + delta;
+
+            that.userEvents.move(position.left, position.top);
+        },
+
+        end: function() {
+            this.userEvents.end();
+            this.target = this.position = undefined;
         }
     });
 
