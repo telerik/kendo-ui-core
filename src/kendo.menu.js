@@ -730,7 +730,8 @@
                 target,
                 belongsToVertical,
                 hasChildren,
-                isRtl = kendo.support.isRtl(that.wrapper);
+                isRtl = kendo.support.isRtl(that.wrapper),
+                itemLink;
 
             if (!hoverItem) {
                 hoverItem  = that._oldHoverItem = that._hoverItem();
@@ -750,7 +751,10 @@
             } else if (key == keys.ESC) {
                 target = that._itemEsc(hoverItem, belongsToVertical);
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
-                //that._itemActivate(hoverItem);
+                target = hoverItem.children(".k-link");
+                if (target.length > 0) {
+                    target[0].click();
+                }
             } else if (key == keys.TAB) {
                 target = that._findRootParent(hoverItem);
                 that.close(target);
@@ -759,7 +763,7 @@
                 return;
             }
 
-            if (target) {
+            if (target.length) {
                 e.preventDefault();
             }
         },
@@ -795,14 +799,6 @@
         },
 
         _findRootParent: function (item) {
-//            var parent = item.parent();
-//            if (parent.length == 0) {
-//                return;
-//            } else if (parent.hasClass("k-menu")) {
-//                return item;
-//            } else {
-//                return this._findRootParent(parent);
-//            }
             if (item.parent().hasClass("k-menu")) {
                 return item;
             } else {
