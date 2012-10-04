@@ -251,7 +251,8 @@
             element.on(CLICK + NS, disabledSelector, false)
                    .on(CLICK + NS, itemSelector, proxy(that._click , that))
                    .on("keydown" + NS, proxy(that._keydown, that))
-                   .on("focus" + NS, proxy(that._focus, that));
+                   .on("focus" + NS, proxy(that._focus, that))
+                   .on("blur" + NS, proxy(that._removeHoverItem, that));
 
             if (!touch) {
                 element.on(MOUSEENTER + NS, itemSelector, proxy(that._mouseenter, that))
@@ -586,17 +587,20 @@
         },
 
         _toggleHover: function(e) {
-            var target = $(kendo.eventTarget(e)).closest(allItemsSelector),
-                oldHoverItem = this._oldHoverItem;
+            var target = $(kendo.eventTarget(e)).closest(allItemsSelector);
+
+            if (!target.parents("li." + DISABLEDSTATE).length) {
+                target.toggleClass(HOVERSTATE, e.type == MOUSEENTER || e.type == MOUSEDOWN);
+            }
+        },
+
+        _removeHoverItem: function(e) {
+            var oldHoverItem = this._oldHoverItem;
 
             if (oldHoverItem) {
                 oldHoverItem.removeClass(HOVERSTATE);
             }
             this._oldHoverItem = null;
-
-            if (!target.parents("li." + DISABLEDSTATE).length) {
-                target.toggleClass(HOVERSTATE, e.type == MOUSEENTER || e.type == MOUSEDOWN);
-            }
         },
 
         _updateClasses: function() {
@@ -762,7 +766,7 @@
                 return;
             }
 
-            if (target.length) {
+            if (target && target[0]) {
                 e.preventDefault();
             }
         },
