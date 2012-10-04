@@ -45,11 +45,7 @@ TLD_NESTED_TAG_TEMPLATE = ERB.new(%{
         <description><%= name %></description>
         <name><%= tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= type %></tag-class>
-<% if children.any? %>
-        <body-content>JSP</body-content>
-<% else %>
-        <body-content>empty</body-content>
-<% end %>
+        <body-content><%= body_content %></body-content>
 <%= options.map {|o| o.to_xml }.join %>
     </tag>
 })
@@ -420,6 +416,10 @@ class Tag
             interfaces.push('DataBoundWidget')
         end
 
+        if namespace =~ /panelbar/ && @name == 'Item'
+            interfaces.push('Items')
+        end
+
         java = implement_interfaces(java, interfaces)
         java = patch_java_source_code(java)
 
@@ -508,6 +508,8 @@ class Tag
 
                 type.value.split('|').each do |t|
                     next if t =~ /Function/
+
+                    next if name =~ /content\.template/
 
                     paragraph  = find_element_with_type.call(configuration, index, :p)
 
@@ -600,6 +602,12 @@ class NestedTag < Tag
 
     def xml_template
         TLD_NESTED_TAG_TEMPLATE
+    end
+
+    def body_content
+        return 'JSP' if (@name == 'Item' && namespace == 'panelbar') || @children.any?
+
+        'empty'
     end
 
     def initialize(options)

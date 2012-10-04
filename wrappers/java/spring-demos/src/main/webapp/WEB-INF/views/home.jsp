@@ -13,28 +13,33 @@
         <p>The time on the server is ${serverTime}.</p>
         
         <kendo:window name="myWindow">
-        	<strong>Window Content</strong>
-        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3">
-        	    <kendo:dataSource type="odata" serverFiltering="true" serverPaging="true" pageSize="20">
-        	    	<kendo:transport>
-        	    		<kendo:read url="http://odata.netflix.com/Catalog/Titles"></kendo:read>
-        	    	</kendo:transport>
-        	    </kendo:dataSource>
-        	    <kendo:event name="dataBound">
-        	    	<script>
-        	    	function dataBound() {
-        	    		alert("dataBound");
-        	    	}
-        	    	</script>
-        	    </kendo:event>
-            </kendo:autoComplete>
-        
-        	<kendo:grid name="grid">
-        		<kendo:grid-columns>
-        			<kendo:grid-column title="Foo"/>
-        			<kendo:grid-column title="Bar" width="100"/>
-        		</kendo:grid-columns>
-        	</kendo:grid>	
+        	<kendo:window-content>
+        	
+	        	<strong>Window Content</strong>
+	        	
+	        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3">
+	        	    <kendo:dataSource type="odata" serverFiltering="true" serverPaging="true" pageSize="20">
+	        	    	<kendo:transport>
+	        	    		<kendo:read url="http://odata.netflix.com/Catalog/Titles"></kendo:read>
+	        	    	</kendo:transport>
+	        	    </kendo:dataSource>
+	        	    <kendo:event name="dataBound">
+	        	    	<script>
+	        	    	function dataBound() {
+	        	    		alert("dataBound");
+	        	    	}
+	        	    	</script>
+	        	    </kendo:event>
+	            </kendo:autoComplete>
+	        
+	        	<kendo:grid name="grid">
+	        		<kendo:grid-columns>
+	        			<kendo:grid-column title="Foo"/>
+	        			<kendo:grid-column title="Bar" width="100"/>
+	        		</kendo:grid-columns>
+	        	</kendo:grid>
+	        	
+        	</kendo:window-content>	
         </kendo:window>
 
         <kendo:chart name="myChart">
@@ -43,5 +48,19 @@
         	</kendo:chart-title>
         </kendo:chart>
         
+        <kendo:panelBar name="panelbar">
+        	<kendo:panelBar-items>
+        		<kendo:panelBar-item text="Root">
+        			<kendo:panelBar-item-items>
+        				<kendo:panelBar-item text="Child"/>
+        				<kendo:panelBar-item text="Child with content">
+        					<kendo:panelBar-item-content>
+        						<strong>I haz contentz</strong>
+        					</kendo:panelBar-item-content>
+        				</kendo:panelBar-item>
+        			</kendo:panelBar-item-items>
+        		</kendo:panelBar-item>
+        	</kendo:panelBar-items>
+        </kendo:panelBar>
     </body>
 </html>

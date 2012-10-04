@@ -5,10 +5,13 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.panelbar.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Ul;
 import com.kendoui.taglib.json.Function;
 
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyContent;
 
 @SuppressWarnings("serial")
 public class PanelBarTag extends WidgetTag /* interfaces */implements Animation, Items/* interfaces */ {
@@ -16,7 +19,16 @@ public class PanelBarTag extends WidgetTag /* interfaces */implements Animation,
     public PanelBarTag() {
         super("PanelBar");
     }
+    @Override
+    protected Element<?> createElement() {
+        Ul element = new Ul();
 
+        BodyContent content = getBodyContent();
+
+        element.html(content.getString());
+
+        return element;
+    }
     
     @Override
     public int doEndTag() throws JspException {

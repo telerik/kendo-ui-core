@@ -12,6 +12,10 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class ItemsTag extends BaseTag /* interfaces */implements Item/* interfaces */ {
 
+    @Override
+    public int doStartTag() {
+        return EVAL_BODY_INCLUDE;
+    }
     
     @Override
     public int doEndTag() throws JspException {
@@ -22,7 +26,6 @@ public class ItemsTag extends BaseTag /* interfaces */implements Item/* interfac
         parent.setItems(this);
 
 //<< doEndTag
-
         return super.doEndTag();
     }
 

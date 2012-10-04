@@ -14,7 +14,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyContent;
 
 @SuppressWarnings("serial")
-public class WindowTag extends WidgetTag /* interfaces */implements Animation, Content/* interfaces */ {
+public class WindowTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
 
     public WindowTag() {
         super("Window");
@@ -60,19 +60,6 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation, C
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
-    }
-
-    @Override
-    public void setContent(ContentTag value) {
-        setProperty("content", value.properties());
-    }
-
-    public String getContent() {
-        return (String)getProperty("content");
-    }
-
-    public void setContent(String value) {
-        setProperty("content", value);
     }
 
     public boolean getDraggable() {
