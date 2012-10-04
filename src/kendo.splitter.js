@@ -161,7 +161,7 @@
                 navigationKeys = that._keys,
                 increase = key === navigationKeys.increase,
                 decrease = key === navigationKeys.decrease,
-                delta, pane;
+                pane;
 
             if (increase || decrease) {
                 if (e.ctrlKey) {
@@ -177,11 +177,7 @@
                         resizing.end();
                     }
                 } else {
-                    delta = that._resizeStep;
-                    if (decrease) {
-                        delta = -delta;
-                    }
-                    resizing.move(delta, target);
+                    resizing.move((decrease ? -1 : 1) * that._resizeStep, target);
                 }
                 e.preventDefault();
             } else if (key === keys.ENTER) {
