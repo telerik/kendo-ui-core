@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class TitleTag extends BaseTag /* interfaces */implements Border/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Title parent = (Title)findParentWithClass(Title.class);
 
         parent.setTitle(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -97,4 +118,5 @@ public class TitleTag extends BaseTag /* interfaces */implements Border/* interf
     }
 
 //<< Attributes
+
 }

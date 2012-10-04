@@ -8,11 +8,38 @@ import com.kendoui.taglib.autocomplete.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animation, DataBoundWidget/* interfaces */ {
 
     public AutoCompleteTag() {
         super("AutoComplete");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -156,4 +183,5 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
     }
 
 //<< Attributes
+
 }

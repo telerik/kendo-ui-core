@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class PlotAreaTag extends BaseTag /* interfaces */implements Border/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         PlotArea parent = (PlotArea)findParentWithClass(PlotArea.class);
 
         parent.setPlotArea(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -49,4 +70,5 @@ public class PlotAreaTag extends BaseTag /* interfaces */implements Border/* int
     }
 
 //<< Attributes
+
 }

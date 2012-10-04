@@ -8,11 +8,38 @@ import com.kendoui.taglib.datepicker.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class DatePickerTag extends WidgetTag /* interfaces */implements Animation, Month/* interfaces */ {
 
     public DatePickerTag() {
         super("DatePicker");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -92,4 +119,5 @@ public class DatePickerTag extends WidgetTag /* interfaces */implements Animatio
     }
 
 //<< Attributes
+
 }

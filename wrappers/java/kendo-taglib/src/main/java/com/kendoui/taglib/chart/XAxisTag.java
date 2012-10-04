@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class XAxisTag extends BaseTag /* interfaces */implements Labels/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         XAxis parent = (XAxis)findParentWithClass(XAxis.class);
 
         parent.setXAxis(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setLabels(LabelsTag value) {
@@ -65,4 +86,5 @@ public class XAxisTag extends BaseTag /* interfaces */implements Labels/* interf
     }
 
 //<< Attributes
+
 }

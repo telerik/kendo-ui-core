@@ -3,19 +3,23 @@ package com.kendoui.taglib.panelbar;
 
 import com.kendoui.taglib.BaseTag;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.List;
+
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class CloseTag extends BaseTag /* interfaces *//* interfaces */ {
+public class ItemsTag extends BaseTag /* interfaces */implements Item/* interfaces */ {
 
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Close parent = (Close)findParentWithClass(Close.class);
+        Items parent = (Items)findParentWithClass(Items.class);
 
-        parent.setClose(this);
+        parent.setItems(this);
 
 //<< doEndTag
 
@@ -25,6 +29,9 @@ public class CloseTag extends BaseTag /* interfaces *//* interfaces */ {
     @Override
     public void initialize() {
 //>> initialize
+
+        items = new ArrayList<Map<String, Object>>();
+
 //<< initialize
 
         super.initialize();
@@ -33,6 +40,9 @@ public class CloseTag extends BaseTag /* interfaces *//* interfaces */ {
     @Override
     public void destroy() {
 //>> destroy
+
+        items = null;
+
 //<< destroy
 
         super.destroy();
@@ -40,20 +50,15 @@ public class CloseTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
-    public int getDuration() {
-        return (int)getProperty("duration");
+    private List<Map<String, Object>> items;
+
+    public List<Map<String, Object>> items() {
+        return items;
     }
 
-    public void setDuration(int value) {
-        setProperty("duration", value);
-    }
-
-    public String getEffects() {
-        return (String)getProperty("effects");
-    }
-
-    public void setEffects(String value) {
-        setProperty("effects", value);
+    @Override
+    public void addItem(ItemTag value) {
+        items.add(value.properties());
     }
 
 //<< Attributes

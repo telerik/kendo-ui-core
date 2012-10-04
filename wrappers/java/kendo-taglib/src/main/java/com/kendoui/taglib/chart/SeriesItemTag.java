@@ -8,15 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Border, Line, Markers, Tooltip, Overlay, NegativeValues, Connectors/* interfaces */ {
 
-//>> Attributes
-
+    
+    @Override
     public int doEndTag() throws JspException {
-        SeriesTag parent = (SeriesTag)findParentWithClass(SeriesTag.class);
+//>> doEndTag
+
+        SeriesItem parent = (SeriesItem)findParentWithClass(SeriesItem.class);
 
         parent.addSeriesItem(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setLabels(LabelsTag value) {
@@ -347,4 +369,5 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
     }
 
 //<< Attributes
+
 }

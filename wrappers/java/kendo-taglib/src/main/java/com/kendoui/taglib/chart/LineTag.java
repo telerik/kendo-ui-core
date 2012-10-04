@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class LineTag extends BaseTag /* interfaces *//* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Line parent = (Line)findParentWithClass(Line.class);
 
         parent.setLine(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     public String getColor() {
         return (String)getProperty("color");
@@ -52,4 +73,5 @@ public class LineTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
+
 }

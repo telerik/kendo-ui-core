@@ -8,15 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class ToolbarItemTag extends BaseTag /* interfaces *//* interfaces */ {
 
-//>> Attributes
-
+    
+    @Override
     public int doEndTag() throws JspException {
-        ToolbarTag parent = (ToolbarTag)findParentWithClass(ToolbarTag.class);
+//>> doEndTag
+
+        ToolbarItem parent = (ToolbarItem)findParentWithClass(ToolbarItem.class);
 
         parent.addToolbarItem(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     public String getName() {
         return (String)getProperty("name");
@@ -43,4 +65,5 @@ public class ToolbarItemTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
+
 }

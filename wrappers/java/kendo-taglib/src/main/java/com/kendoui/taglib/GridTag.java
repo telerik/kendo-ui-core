@@ -8,11 +8,38 @@ import com.kendoui.taglib.grid.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class GridTag extends WidgetTag /* interfaces */implements Columns, Sortable, Editable, Groupable, Pageable, Toolbar, DataBoundWidget/* interfaces */ {
 
     public GridTag() {
         super("Grid");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -165,4 +192,5 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
     }
 
 //<< Attributes
+
 }

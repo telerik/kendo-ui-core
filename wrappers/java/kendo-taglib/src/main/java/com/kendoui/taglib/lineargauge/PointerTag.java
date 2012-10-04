@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class PointerTag extends BaseTag /* interfaces */implements Border, Track/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Pointer parent = (Pointer)findParentWithClass(Pointer.class);
 
         parent.setPointer(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -78,4 +99,5 @@ public class PointerTag extends BaseTag /* interfaces */implements Border, Track
     }
 
 //<< Attributes
+
 }

@@ -8,11 +8,38 @@ import com.kendoui.taglib.rangeslider.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip/* interfaces */ {
 
     public RangeSliderTag() {
         super("RangeSlider");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -103,4 +130,5 @@ public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip
     }
 
 //<< Attributes
+
 }

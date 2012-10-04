@@ -1,13 +1,17 @@
+
 package com.kendoui.taglib;
 
-import javax.servlet.jsp.tagext.BodyContent;
-
-import com.kendoui.taglib.html.Div;
-import com.kendoui.taglib.html.Element;
 
 import com.kendoui.taglib.window.*;
 
+
+import com.kendoui.taglib.html.Div;
+import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.json.Function;
+
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyContent;
 
 @SuppressWarnings("serial")
 public class WindowTag extends WidgetTag /* interfaces */implements Animation, Content/* interfaces */ {
@@ -25,6 +29,30 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation, C
         element.html(content.getString());
 
         return element;
+    }
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -200,4 +228,5 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation, C
     }
 
 //<< Attributes
+
 }

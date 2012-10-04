@@ -1,46 +1,59 @@
 
 package com.kendoui.taglib.grid;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.kendoui.taglib.BaseTag;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.List;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class ToolbarTag extends BaseTag /* interfaces */implements ToolbarItem/* interfaces */ {
 
-//>> Attributes
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
 
-    private List<Map<String, Object>> toolbar;
+        Toolbar parent = (Toolbar)findParentWithClass(Toolbar.class);
+
+        parent.setToolbar(this);
+
+//<< doEndTag
+
+        return super.doEndTag();
+    }
 
     @Override
     public void initialize() {
+//>> initialize
+
         toolbar = new ArrayList<Map<String, Object>>();
+
+//<< initialize
 
         super.initialize();
     }
 
     @Override
     public void destroy() {
+//>> destroy
+
         toolbar = null;
+
+//<< destroy
 
         super.destroy();
     }
 
-    public List<Map<String, Object>> toolbar () {
+//>> Attributes
+
+    private List<Map<String, Object>> toolbar;
+
+    public List<Map<String, Object>> toolbar() {
         return toolbar;
-    }
-
-    @Override
-    public int doEndTag() throws JspException {
-        Toolbar parent = (Toolbar)findParentWithClass(Toolbar.class);
-
-        parent.setToolbar(this);
-
-        return super.doEndTag();
     }
 
     @Override
@@ -49,4 +62,5 @@ public class ToolbarTag extends BaseTag /* interfaces */implements ToolbarItem/*
     }
 
 //<< Attributes
+
 }

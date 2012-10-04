@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class PageableTag extends BaseTag /* interfaces */implements Messages/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Pageable parent = (Pageable)findParentWithClass(Pageable.class);
 
         parent.setPageable(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setMessages(MessagesTag value) {
@@ -89,4 +110,5 @@ public class PageableTag extends BaseTag /* interfaces */implements Messages/* i
     }
 
 //<< Attributes
+
 }

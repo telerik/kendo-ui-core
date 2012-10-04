@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class MonthTag extends BaseTag /* interfaces *//* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Month parent = (Month)findParentWithClass(Month.class);
 
         parent.setMonth(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     public String getContent() {
         return (String)getProperty("content");
@@ -36,4 +57,5 @@ public class MonthTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
+
 }

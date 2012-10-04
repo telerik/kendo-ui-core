@@ -5439,6 +5439,17 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
+        <description>Items</description>
+        <name>panelBar-items</name>
+        <tag-class>com.kendoui.taglib.panelbar.ItemsTag</tag-class>
+
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+
+    <tag>
         <description>Close</description>
         <name>panelBar-animation-close</name>
         <tag-class>com.kendoui.taglib.panelbar.CloseTag</tag-class>
@@ -5490,6 +5501,24 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <name>show</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Item</description>
+        <name>panelBar-item</name>
+        <tag-class>com.kendoui.taglib.panelbar.ItemTag</tag-class>
+
+        <body-content>empty</body-content>
+
+
+        <attribute>
+            <description>Specifies the text displayed by the item</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>

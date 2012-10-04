@@ -6,11 +6,38 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public NumericTextBoxTag() {
         super("NumericTextBox");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -120,4 +147,5 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
     }
 
 //<< Attributes
+
 }

@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class MessagesTag extends BaseTag /* interfaces *//* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Messages parent = (Messages)findParentWithClass(Messages.class);
 
         parent.setMessages(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     public String getDisplay() {
         return (String)getProperty("display");
@@ -100,4 +121,5 @@ public class MessagesTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
+
 }

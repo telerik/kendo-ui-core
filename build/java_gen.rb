@@ -66,6 +66,35 @@ public interface <%= child.name %> {
 }
 })
 
+JAVA_METHODS = %{
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
+//<< Attributes
+}
+
 JAVA_WIDGET_TEMPLATE = ERB.new(%{
 package com.kendoui.taglib;
 
@@ -76,15 +105,15 @@ import com.kendoui.taglib.<%= namespace %>.*;
 import com.kendoui.taglib.json.Function;
 <% end %>
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class <%= type %> extends WidgetTag /* interfaces */ /* interfaces */ {
 
     public <%= type %>() {
         super("<%= name %>");
     }
-
-//>> Attributes
-//<< Attributes
+    #{JAVA_METHODS}
 }
 })
 
@@ -97,9 +126,7 @@ import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class <%= type %> extends BaseTag /* interfaces */ /* interfaces */ {
-
-//>> Attributes
-//<< Attributes
+    #{JAVA_METHODS}
 }
 })
 
@@ -116,11 +143,10 @@ import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class <%= type %> extends BaseTag /* interfaces */ /* interfaces */ {
-
-//>> Attributes
-//<< Attributes
+    #{JAVA_METHODS}
 }
 })
+
 JS_TO_JAVA_TYPES = {
     'Number' => 'int',
     'number' => 'int',
@@ -178,55 +204,37 @@ JAVA_ARRAY_SETTER = ERB.new(%{
 })
 
 JAVA_PARENT_SETTER = ERB.new(%{
-    @Override
-    public int doEndTag() throws JspException {
         <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
 
         parent.set<%= name %>(this);
+})
 
-        return super.doEndTag();
+JAVA_ARRAY_INIT_TEMPLATE = ERB.new(%{
+        <%= name.camelize %> = new ArrayList<Map<String, Object>>();
+})
+
+JAVA_ARRAY_DESTROY_TEMPLATE = ERB.new(%{
+        <%= name.camelize %> = null;
+})
+
+JAVA_ARRAY_DECLARATION_TEMPLATE = ERB.new(%{
+    private List<Map<String, Object>> <%= name.camelize %>;
+
+    public List<Map<String, Object>> <%= name.camelize %>() {
+        return <%= name.camelize %>;
     }
 })
 
 JAVA_ARRAY_PARENT_SETTER = ERB.new(%{
-    private List<Map<String, Object>> <%= name.camelize %>;
-
-    @Override
-    public void initialize() {
-        <%= name.camelize %> = new ArrayList<Map<String, Object>>();
-
-        super.initialize();
-    }
-
-    @Override
-    public void destroy() {
-        <%= name.camelize %> = null;
-
-        super.destroy();
-    }
-
-    public List<Map<String, Object>> <%= name.camelize %> () {
-        return <%= name.camelize %>;
-    }
-
-    @Override
-    public int doEndTag() throws JspException {
         <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
 
         parent.set<%= name %>(this);
-
-        return super.doEndTag();
-    }
 })
 
 JAVA_ARRAY_ADD_TO_PARENT = ERB.new(%{
-    public int doEndTag() throws JspException {
-        <%= parent.type %> parent = (<%= parent.type %>)findParentWithClass(<%= parent.type %>.class);
+        <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
 
         parent.add<%= name %>(this);
-
-        return super.doEndTag();
-    }
 })
 
 JAVA_ARRAY_ADD_CHILD = ERB.new(%{
@@ -348,13 +356,8 @@ class Tag
         JAVA_NESTED_TAG_SETTER
     end
 
-    def java_options_and_events
-        (@options + @events).map {|attr| attr.to_java }.join
-    end
-
-    def to_java
-        $stderr.puts("\t#{name}") if VERBOSE
-        child_setters + java_options_and_events
+    def java_attributes
+        child_setters + (@options + @events).map {|attr| attr.to_java }.join
     end
 
     def template
@@ -388,9 +391,11 @@ class Tag
         JAVA_INTERFACE_TEMPLATE
     end
 
-    def generate_attributes(code)
+    def patch_java_source_code(code)
+        $stderr.puts("\t#{name}") if VERBOSE
+
         code.sub /\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
-                 "//>> Attributes\n#{to_java}\n//<< Attributes"
+                 "//>> Attributes\n#{java_attributes}\n//<< Attributes"
     end
 
     def sync_java
@@ -415,12 +420,8 @@ class Tag
             interfaces.push('DataBoundWidget')
         end
 
-        if (@name =~/PanelBar/)
-            interfaces.push('PanelBarItemTagContainer')
-        end
-
         java = implement_interfaces(java, interfaces)
-        java = generate_attributes(java)
+        java = patch_java_source_code(java)
 
         ensure_path(java_filename)
 
@@ -522,6 +523,16 @@ class Tag
             end
         end
 
+        if tag.name =~/PanelBar/
+            tag.options.push(Option.new :name => 'items',
+                                        :type => 'Array',
+                                        :description => "Contains items of #{tag.name}")
+
+            tag.options.push(Option.new :name => 'items.text',
+                                        :type => 'String',
+                                        :description => "Specifies the text displayed by the item")
+        end
+
         start_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Events' }
 
         if start_element_index != nil
@@ -570,13 +581,17 @@ class NestedTag < Tag
         namespace + "/" + type
     end
 
-    def parent_setter
-        JAVA_PARENT_SETTER.result(binding)
+    def parent_setter_template
+        JAVA_PARENT_SETTER
     end
 
-    def to_java
-        $stderr.puts("\t#{name}") if VERBOSE
-        parent_setter + child_setters + java_options_and_events
+    def patch_java_source_code(code)
+        code = super(code)
+
+        parent_setter = parent_setter_template.result(binding)
+
+        code.sub /\/\/>> doEndTag(.|\n)*\/\/<< doEndTag/,
+                 "//>> doEndTag\n#{parent_setter}\n//<< doEndTag"
     end
 
     def template
@@ -610,12 +625,35 @@ class NestedTagArray < NestedTag
         @options = []
     end
 
+    def template
+        JAVA_NESTED_TAG_ARRAY_TEMPLATE
+    end
+
     def setter_template
         JAVA_ARRAY_SETTER
     end
 
-    def parent_setter
-        JAVA_ARRAY_PARENT_SETTER.result(binding)
+    def patch_java_source_code(code)
+        code = super(code)
+
+        initialize = JAVA_ARRAY_INIT_TEMPLATE.result(binding)
+
+        code.sub! /\/\/>> initialize(.|\n)*\/\/<< initialize/,
+                 "//>> initialize\n#{initialize}\n//<< initialize"
+
+        destroy = JAVA_ARRAY_DESTROY_TEMPLATE.result(binding)
+
+        code.sub! /\/\/>> destroy(.|\n)*\/\/<< destroy/,
+                 "//>> destroy\n#{destroy}\n//<< destroy"
+        code
+    end
+
+    def parent_setter_template
+        JAVA_ARRAY_PARENT_SETTER
+    end
+
+    def java_attributes
+        JAVA_ARRAY_DECLARATION_TEMPLATE.result(binding) + super
     end
 
     def child_setters
@@ -636,8 +674,8 @@ class NestedTagArrayItem < NestedTag
         return @parent.tag_name.sub(@parent.name.camelize, @name.camelize)
     end
 
-    def parent_setter
-        JAVA_ARRAY_ADD_TO_PARENT.result(binding)
+    def parent_setter_template
+        JAVA_ARRAY_ADD_TO_PARENT
     end
 end
 

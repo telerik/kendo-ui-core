@@ -43,19 +43,5 @@
         	</kendo:chart-title>
         </kendo:chart>
         
-        <kendo:panelBar name="myPanelBar">
-        	<kendo:panelBarItem text="Item with content">
-        		<strong>Item Contents</strong>
-        	</kendo:panelBarItem>
-        	<kendo:panelBarItem text="Item with children">
-        		<kendo:panelBarItem text="Child with content">
-        			<strong>Child Contents</strong>
-        		</kendo:panelBarItem>
-        		<kendo:panelBarItem text="Child with children">
-        			<kendo:panelBarItem text="Child 1" />
-        			<kendo:panelBarItem text="Child 2" />
-        		</kendo:panelBarItem>
-        	</kendo:panelBarItem>
-        </kendo:panelBar>
     </body>
 </html>

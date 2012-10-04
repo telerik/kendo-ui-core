@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class AreaTag extends BaseTag /* interfaces */implements Border/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Area parent = (Area)findParentWithClass(Area.class);
 
         parent.setArea(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -65,4 +86,5 @@ public class AreaTag extends BaseTag /* interfaces */implements Border/* interfa
     }
 
 //<< Attributes
+
 }

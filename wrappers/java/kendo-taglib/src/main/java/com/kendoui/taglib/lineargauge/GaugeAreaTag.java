@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class GaugeAreaTag extends BaseTag /* interfaces */implements Border/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         GaugeArea parent = (GaugeArea)findParentWithClass(GaugeArea.class);
 
         parent.setGaugeArea(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -49,4 +70,5 @@ public class GaugeAreaTag extends BaseTag /* interfaces */implements Border/* in
     }
 
 //<< Attributes
+
 }

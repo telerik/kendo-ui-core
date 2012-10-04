@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class TooltipTag extends BaseTag /* interfaces */implements Border/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Tooltip parent = (Tooltip)findParentWithClass(Tooltip.class);
 
         parent.setTooltip(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -81,4 +102,5 @@ public class TooltipTag extends BaseTag /* interfaces */implements Border/* inte
     }
 
 //<< Attributes
+
 }

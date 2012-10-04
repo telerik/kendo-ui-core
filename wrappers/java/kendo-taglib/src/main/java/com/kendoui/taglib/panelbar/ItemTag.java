@@ -6,16 +6,16 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class CloseTag extends BaseTag /* interfaces *//* interfaces */ {
+public class ItemTag extends BaseTag /* interfaces *//* interfaces */ {
 
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Close parent = (Close)findParentWithClass(Close.class);
+        Item parent = (Item)findParentWithClass(Item.class);
 
-        parent.setClose(this);
+        parent.addItem(this);
 
 //<< doEndTag
 
@@ -40,20 +40,12 @@ public class CloseTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
-    public int getDuration() {
-        return (int)getProperty("duration");
+    public String getText() {
+        return (String)getProperty("text");
     }
 
-    public void setDuration(int value) {
-        setProperty("duration", value);
-    }
-
-    public String getEffects() {
-        return (String)getProperty("effects");
-    }
-
-    public void setEffects(String value) {
-        setProperty("effects", value);
+    public void setText(String value) {
+        setProperty("text", value);
     }
 
 //<< Attributes

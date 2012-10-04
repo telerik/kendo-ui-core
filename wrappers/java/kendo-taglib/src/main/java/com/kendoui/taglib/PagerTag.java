@@ -8,11 +8,38 @@ import com.kendoui.taglib.pager.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class PagerTag extends WidgetTag /* interfaces */implements Messages, DataBoundWidget/* interfaces */ {
 
     public PagerTag() {
         super("Pager");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -116,4 +143,5 @@ public class PagerTag extends WidgetTag /* interfaces */implements Messages, Dat
     }
 
 //<< Attributes
+
 }

@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class SeriesDefaultsTag extends BaseTag /* interfaces */implements Border, Labels, Tooltip/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         SeriesDefaults parent = (SeriesDefaults)findParentWithClass(SeriesDefaults.class);
 
         parent.setSeriesDefaults(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -59,4 +80,5 @@ public class SeriesDefaultsTag extends BaseTag /* interfaces */implements Border
     }
 
 //<< Attributes
+
 }

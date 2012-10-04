@@ -1,46 +1,59 @@
 
 package com.kendoui.taglib.grid;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.kendoui.taglib.BaseTag;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.List;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class ColumnsTag extends BaseTag /* interfaces */implements Column/* interfaces */ {
 
-//>> Attributes
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
 
-    private List<Map<String, Object>> columns;
+        Columns parent = (Columns)findParentWithClass(Columns.class);
+
+        parent.setColumns(this);
+
+//<< doEndTag
+
+        return super.doEndTag();
+    }
 
     @Override
     public void initialize() {
+//>> initialize
+
         columns = new ArrayList<Map<String, Object>>();
+
+//<< initialize
 
         super.initialize();
     }
 
     @Override
     public void destroy() {
+//>> destroy
+
         columns = null;
+
+//<< destroy
 
         super.destroy();
     }
 
-    public List<Map<String, Object>> columns () {
+//>> Attributes
+
+    private List<Map<String, Object>> columns;
+
+    public List<Map<String, Object>> columns() {
         return columns;
-    }
-
-    @Override
-    public int doEndTag() throws JspException {
-        Columns parent = (Columns)findParentWithClass(Columns.class);
-
-        parent.setColumns(this);
-
-        return super.doEndTag();
     }
 
     @Override
@@ -49,4 +62,5 @@ public class ColumnsTag extends BaseTag /* interfaces */implements Column/* inte
     }
 
 //<< Attributes
+
 }
