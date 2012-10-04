@@ -564,6 +564,7 @@
                 } else {
                     that._select(current ? current[0].previousSibling : ul.lastChild);
                 }
+                e.preventDefault();
                 pressed = true;
             } else if (key === keys.ENTER || key === keys.TAB) {
 
@@ -574,12 +575,11 @@
                 that._accept(current);
                 pressed = true;
             } else if (key === keys.ESC) {
+                if (that.popup.visible()) {
+                    e.preventDefault();
+                }
                 that.close();
                 pressed = true;
-            }
-
-            if (pressed) {
-                e.preventDefault();
             }
 
             return pressed;
