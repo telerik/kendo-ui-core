@@ -167,14 +167,14 @@
                 if (e.ctrlKey) {
                     pane = target[decrease ? "next" : "prev"]();
 
+                    if (resizing.isResizing()) {
+                        resizing.end();
+                    }
+
                     if (!pane[that._dimension]()) {
                         that._triggerAction(EXPAND, pane);
                     } else {
                         that._triggerAction(COLLAPSE, target[decrease ? "prev" : "next"]());
-                    }
-
-                    if (resizing.isResizing()) {
-                        resizing.end();
                     }
                 } else {
                     resizing.move((decrease ? -1 : 1) * that._resizeStep, target);

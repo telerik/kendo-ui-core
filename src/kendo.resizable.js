@@ -168,7 +168,7 @@
 
         end: function() {
             this.userEvents.end();
-            this.position = undefined;
+            this.target = this.position = undefined;
         }
     });
 
