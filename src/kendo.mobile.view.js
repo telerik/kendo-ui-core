@@ -404,7 +404,7 @@
             that.rootView = views.first();
 
             if (!that.rootView[0]) {
-                throw new Error("No root view found. Make sure that the kendo mobile application element directly contains one or more elements with data-role='view' attribute set.");
+                throw new Error('Your kendo mobile application element does not contain any direct child elements with data-role="view" attribute set. Make sure that you instantiate the mobile mobile application using the correct container.');
             }
             that._view = null;
 
