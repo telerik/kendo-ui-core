@@ -20,7 +20,7 @@ end
 namespace :tests do
     { CI: 8884, Production: 8885 }.each do |env, port|
         desc "Run #{env} tests"
-        task env => :js do
+        task env => [:less, :js] do
             run_tests(port)
         end
     end
