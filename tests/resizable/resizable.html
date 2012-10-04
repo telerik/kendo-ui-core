@@ -45,8 +45,8 @@
 
             function dragEvent(x, y, handle) {
                 return {
-                    x: { location: x },
-                    y: { location: y },
+                    x: { location: x, startLocation: x },
+                    y: { location: y, startLocation: y },
                     currentTarget: handle
                 };
             }
