@@ -19,6 +19,7 @@
         SELECTED = "selected",
         REQUESTSTART = "requestStart",
         REQUESTEND = "requestEnd",
+        WIDTH = "width",
         extend = $.extend,
         proxy = $.proxy,
         browser = kendo.support.browser,
@@ -221,21 +222,24 @@
                 wrapper = this.wrapper,
                 computedStyle, computedWidth;
 
-            if (!width) {
-                computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
-                computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
-
-                if (computedStyle && (browser.mozilla || browser.msie)) { // getComputedStyle returns different box in FF and IE.
-                    computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
-                }
-
-                width = computedWidth - (list.outerWidth() - list.width());
-
-                list.css({
-                    fontFamily: wrapper.css("font-family"),
-                    width: width
-                });
+            if (!list.data(WIDTH) && width) {
+                return;
             }
+
+            computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
+            computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
+
+            if (computedStyle && (browser.mozilla || browser.msie)) { // getComputedStyle returns different box in FF and IE.
+                computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
+            }
+
+            width = computedWidth - (list.outerWidth() - list.width());
+
+            list.css({
+                fontFamily: wrapper.css("font-family"),
+                width: width
+            })
+            .data(WIDTH, width);
 
             return true;
         },
