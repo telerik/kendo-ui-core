@@ -98,6 +98,19 @@
                     equals(element.css("fontFamily"), "Tahoma");
                 });
 
+                test("sets series tooltip font", function() {
+                    createTooltip();
+                    showNow(kendo.deepExtend({}, dataPointMock, {
+                        options: {
+                            tooltip: {
+                                font: "16px Tahoma"
+                            }
+                        }
+                    }));
+                    equals(element.css("fontSize"), "16px");
+                    equals(element.css("fontFamily"), "Tahoma");
+                });
+
                 test("sets border width", function() {
                     createTooltip({ border: { width: 1 } });
                     equals(element.css("border-top-width"), "1px");
