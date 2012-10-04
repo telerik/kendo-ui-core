@@ -405,13 +405,6 @@
         }
     }
 
-    function initDirection(element, direction, reverse) {
-        var real = kendo.directions[direction],
-            dir = reverse ? kendo.directions[real.reverse] : real;
-
-        return { direction: dir, offset: -dir.modifier * (dir.vertical ? element.outerHeight() : element.outerWidth()) };
-    }
-
     var EffectSet = kendo.Class.extend({
         init: function(element, options) {
             var that = this;
@@ -468,6 +461,7 @@
             });
 
             options.init();
+
             element.data("targetTransform", endState);
             kendo.fx.animate(element, endState, extend({}, options, { complete: deferred.resolve }));
         },
@@ -716,6 +710,17 @@
             }
         },
 
+        initDirection: function() {
+            var that = this,
+                element = that.element,
+                direction = that.options.direction,
+                reverse = that.options.reverse,
+                real = kendo.directions[direction],
+                dir = reverse ? kendo.directions[real.reverse] : real;
+
+            return { direction: dir, offset: -dir.modifier * (dir.vertical ? element.outerHeight() : element.outerWidth()) };
+        },
+
         startState: $.noop,
         endState: $.noop,
         teardown: $.noop
@@ -795,7 +800,7 @@
                 options = that.options;
 
             var reverse = options.reverse, extender = {},
-                init = initDirection(element, options.direction, reverse),
+                init = this.initDirection(),
                 property = transforms && options.transition !== false ? init.direction.transition : init.direction.property;
 
             init.offset /= -(options.divisor || 1);
@@ -854,14 +859,12 @@
         }
     });
 
-
     createEffect("slideIn", {
         startState: function() {
             var that = this,
-                element = that.element,
                 options = that.options;
 
-            var init = initDirection(element, options.direction, options.reverse),
+            var init = this.initDirection(),
                 value = (!options.reverse ? init.offset : 0) + PX;
 
             if (init.direction.transition == "translatex") {
@@ -877,7 +880,7 @@
                 options = that.options;
 
             var reverse = options.reverse,
-                init = initDirection(element, options.direction, reverse),
+                init = this.initDirection(),
                 extender = {};
 
             if (transforms && options.transition !== false) {
@@ -893,7 +896,6 @@
             return extend(extender, options.properties);
         }
     });
-
 
     createEffect("expand", {
         startState: function() {
@@ -999,7 +1001,6 @@
         }
     });
 
-
     createEffect("transfer", {
         startState: function() {
             return { scale: 1 };
@@ -1050,7 +1051,6 @@
             return extend({ scale: scale, transformOrigin: X + PX + " " + Y + PX }, options.properties);
         }
     });
-
 
     createEffect("pageturn", {
         endState: function() {
