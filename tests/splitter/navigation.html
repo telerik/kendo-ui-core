@@ -42,18 +42,6 @@
                 this.trigger(options);
             }
 
-            test("Splitter explicitly presses the focused bar", function() {
-                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
-                    splitterObject = splitter.data("kendoSplitter"),
-                    splitbar = splitter.find(".k-splitbar");
-
-                stub(splitterObject.resizing, "press");
-
-                splitbar.focus();
-
-                equal(splitterObject.resizing.args("press")[0][0], splitbar[0]);
-            });
-
             test("Splitter explicitly call resizing.end() on blur of the splitbar", function() {
                 var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
                     splitterObject = splitter.data("kendoSplitter"),
@@ -71,11 +59,9 @@
                     splitterObject = splitter.data("kendoSplitter"),
                     splitbar = splitter.find(".k-splitbar");
 
-                stub(splitterObject.resizing, "press");
-
                 splitbar.mousedown();
 
-                equal(splitterObject.resizing.args("press")[0][0], splitbar[0]);
+                equal(splitbar[0], document.activeElement);
             });
 
             test("Splitter moves splitbar to left on key LEFT", function() {
@@ -159,7 +145,7 @@
                 var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
                         orientation: "vertical"
                     }),
-                    navKeys = splitter.data("kendoSplitter")._navigationKeys;
+                    navKeys = splitter.data("kendoSplitter")._keys;
 
                 equal(navKeys.decrease, keys.UP);
                 equal(navKeys.increase, keys.DOWN);

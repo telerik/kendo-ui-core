@@ -64,7 +64,7 @@
 
             that.orientation = isHorizontal ? HORIZONTAL : VERTICAL;
             that._dimension = isHorizontal ? "width" : "height";
-            that._navigationKeys = {
+            that._keys = {
                 decrease: isHorizontal ? keys.LEFT : keys.UP,
                 increase: isHorizontal ? keys.RIGHT : keys.DOWN
             };
@@ -109,10 +109,9 @@
                 expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)";
 
             that.element
-                .on("mousedown" + NS, splitbarSelector, function(e) { e.currentTarget.focus(); })
                 .on("keydown" + NS, splitbarSelector, proxy(that._keydown, that))
-                .on("focus" + NS, splitbarSelector, function(e) { that.resizing.press($(e.currentTarget)); })
                 .on("blur" + NS, splitbarSelector, function(e) { that.resizing.end(); })
+                .on("mousedown" + NS, splitbarSelector, function(e) { e.currentTarget.focus(); })
                 .on(MOUSEENTER + NS, splitbarDraggableSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on(MOUSELEAVE + NS, splitbarDraggableSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on("mousedown" + NS, splitbarDraggableSelector, function() { that.resizing.end(); that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
@@ -160,45 +159,35 @@
                 key = e.keyCode,
                 resizing = that.resizing,
                 target = $(e.currentTarget),
-                navigationKeys = that._navigationKeys,
-                delta, expand, collapse;
+                navigationKeys = that._keys,
+                increase = key === navigationKeys.increase,
+                decrease = key === navigationKeys.decrease,
+                delta, pane;
 
-            if (e.ctrlKey) {
-                if (key === navigationKeys.decrease) {
-                    collapse = target.prev();
-                    expand = target.next();
-                } else if (key === navigationKeys.increase){
-                    collapse = target.next();
-                    expand = target.prev();
-                }
+            if (increase || decrease) {
+                if (e.ctrlKey) {
+                    pane = target[decrease ? "next" : "prev"]();
 
-                if (collapse) {
-                    if (!expand[that._dimension]()) {
-                        that._triggerAction(EXPAND, expand);
+                    if (!pane[that._dimension]()) {
+                        that._triggerAction(EXPAND, pane);
                     } else {
-                        if (resizing.isResizing()) {
-                            resizing.end();
-                        }
-
-                        that._triggerAction(COLLAPSE, collapse);
+                        that._triggerAction(COLLAPSE, target[decrease ? "prev" : "next"]());
                     }
 
-                    e.preventDefault();
-                }
-            } else {
-                if (key === navigationKeys.increase) {
+                    if (resizing.isResizing()) {
+                        resizing.end();
+                    }
+                } else {
                     delta = that._resizeStep;
-                } else if (key === navigationKeys.decrease) {
-                    delta = that._resizeStep * -1;
-                } else if (key === keys.ENTER) {
-                    resizing.end();
-                    e.preventDefault();
-                }
-
-                if (delta) {
+                    if (decrease) {
+                        delta = -delta;
+                    }
                     resizing.move(delta, target);
-                    e.preventDefault();
                 }
+                e.preventDefault();
+            } else if (key === keys.ENTER) {
+                resizing.end();
+                e.preventDefault();
             }
         },
 
