@@ -61,7 +61,7 @@ def patch_bootstrap(to, from, cdn)
 
     bootstrap = replace_variable(bootstrap, "requiredJs", '["scripts/themebuilder.all.min.js"]');
     bootstrap = replace_variable(bootstrap, "requiredCss", '["styles/themebuilder.all.min.css"]');
-    bootstrap = replace_variable(bootstrap, "JQUERY_LOCATION", '"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"');
+    bootstrap = replace_variable(bootstrap, "JQUERY_LOCATION", '"https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"');
     bootstrap = replace_variable(bootstrap, "KENDO_LOCATION", "\"#{cdn}\"");
 
     File.open(to, 'w') do |file|
