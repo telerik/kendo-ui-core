@@ -545,12 +545,12 @@
                 key = e.keyCode,
                 current = that._current();
 
-            if (key == keys.DOWN) {
+            if (key == keys.DOWN || key == keys.RIGHT) {
                 that._current(that._nextItem(current));
                 e.preventDefault();
             }
 
-            if (key == keys.UP) {
+            if (key == keys.UP || key == keys.LEFT) {
                 that._current(that._prevItem(current));
                 e.preventDefault();
             }
