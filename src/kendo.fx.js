@@ -413,27 +413,29 @@
     }
 
     var EffectSet = kendo.Class.extend({
-        init: function(element, effects, options) {
+        init: function(element, options) {
+            var that = this;
+
+            that.element = element;
+            that.effects = [];
+            that.options = options;
+            that.restore = [];
+        },
+
+        play: function(effects) {
             var that = this,
+                element = that.element,
+                options = that.options,
                 deferred = $.Deferred(),
                 startState = {},
                 endState = {},
                 target;
 
-            that.element = element;
             that.effects = effects;
-            that.options = options;
-            that.restore = [];
 
-            deferred.then($.proxy(this, "complete"));
+            deferred.then($.proxy(that, "complete"));
 
             element.data("animating", true);
-
-            if (!effects.length) {
-                options.init();
-                deferred.resolve();
-                return;
-            }
 
             each(effects, function() {
                 that.addRestoreProperties(this.restore);
@@ -518,16 +520,17 @@
 
             each(effects, function() {
                 this.teardown();
-            }); // call the internal completion callbacks
+            });
 
             if (options.completeCallback) {
-                options.completeCallback(element); // call the external complete callback with the element
+                options.completeCallback(element);
             }
         }
     });
 
     kendo.fx.promise = function(element, options) {
         var effects = [],
+            effectSet = new EffectSet(element, options),
             effect;
 
         options.effects = kendo.parseEffects(options.effects);
@@ -541,7 +544,12 @@
             }
         });
 
-        new EffectSet(element, effects, options);
+        if (effects[0]) {
+            effectSet.play(effects);
+        } else { // Not sure how would an fx promise reach this state - means that you call kendoAnimate with no valid effects? Why?
+            options.init();
+            effectSet.complete();
+        }
     };
 
     kendo.fx.transitionPromise = function(element, destination, options) {
