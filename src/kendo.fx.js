@@ -714,9 +714,7 @@
             var that = this,
                 element = that.element,
                 direction = that.options.direction,
-                reverse = that.options.reverse,
-                real = kendo.directions[direction],
-                dir = reverse ? kendo.directions[real.reverse] : real;
+                dir = kendo.directions[direction];
 
             return { direction: dir, offset: -dir.modifier * (dir.vertical ? element.outerHeight() : element.outerWidth()) };
         },
@@ -861,39 +859,29 @@
 
     createEffect("slideIn", {
         startState: function() {
-            var that = this,
-                options = that.options;
-
-            var init = this.initDirection(),
-                value = (!options.reverse ? init.offset : 0) + PX;
-
-            if (init.direction.transition == "translatex") {
-                return { translatex: value };
-            } else {
-                return { translatey: value };
-            }
+            return this._state(true);
         },
 
         endState: function() {
-            var that = this,
-                element = that.element,
-                options = that.options;
+            return this._state(false);
+        },
 
-            var reverse = options.reverse,
+        _state: function(invert) {
+            var that = this,
+                options = that.options,
+                extender = {},
                 init = this.initDirection(),
-                extender = {};
+                reverse = options.reverse,
+                offset = init.offset,
+                value = (invert ? (reverse ? 0 : offset) : (reverse ? -offset : 0)) + PX;
 
             if (transforms && options.transition !== false) {
-                extender[init.direction.transition] = (reverse ? init.offset : 0) + PX;
+                extender[init.direction.transition] = value;
             } else {
-                if (!reverse) {
-                    element.css(init.direction.property, init.offset + PX);
-                }
-                extender[init.direction.property] = (reverse ? init.offset : 0) + PX;
-                element.css(init.direction.property);
+                extender[init.direction.property] = value;
             }
 
-            return extend(extender, options.properties);
+            return extender;
         }
     });
 
