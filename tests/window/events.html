@@ -168,18 +168,16 @@
                 return this.trigger($.extend({ type: "keydown", keyCode: key }, options ));
             };
 
-            test("escape key triggers close event", function() {
+            test("escape key triggers close event", 1, function() {
                 var triggers = 0;
 
                 createWindow({
                     close: function() {
-                        triggers++;
+                        ok(true);
                     }
                 });
 
                 dialog.press(keys.ESC);
-
-                equal(triggers, 1);
             });
 
             test("up arrow moves window up", function() {

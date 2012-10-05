@@ -95,6 +95,7 @@
                 offset, visibility, display,
                 isVisible = false,
                 content,
+                windowContent,
                 titlebarButtons = ".k-window-titlebar .k-window-action";
 
             Widget.fn.init.call(that, element, options);
@@ -151,7 +152,8 @@
 
             that.toFront();
 
-            that._tabindex(wrapper.children(KWINDOWCONTENT));
+            windowContent = wrapper.children(KWINDOWCONTENT);
+            that._tabindex(windowContent);
 
             if (options.visible && options.modal) {
                 that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
@@ -160,7 +162,9 @@
             wrapper
                 .on("mouseenter" + NS, titlebarButtons, function () { $(this).addClass(KHOVERSTATE); })
                 .on("mouseleave" + NS, titlebarButtons, function () { $(this).removeClass(KHOVERSTATE); })
-                .on("click" + NS, titlebarButtons, proxy(that._windowActionHandler, that))
+                .on("click" + NS, titlebarButtons, proxy(that._windowActionHandler, that));
+
+            windowContent
                 .on("keydown" + NS, proxy(that._keydown, that));
 
             if (options.resizable) {
@@ -178,7 +182,7 @@
             }
 
             wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
-                .on("mousedown" + NS, proxy(that.toFront, that));
+                    .on("mousedown" + NS, proxy(that.toFront, that));
 
             that.touchScroller = kendo.touchScroller(element);
 
