@@ -243,8 +243,7 @@
         _current: function(candidate) {
             var that = this,
                 focused = that._focused,
-                id = that._ariaId,
-                content;
+                id = that._ariaId;
 
             if (candidate === undefined) {
                 return focused;
