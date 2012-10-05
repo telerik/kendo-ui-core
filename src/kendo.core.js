@@ -1108,8 +1108,9 @@ function pad(number) {
                     count = lookAhead("y");
                     year = getNumber(count);
                     if (year === null) {
-                        year = defaultYear;
+                        return null;
                     }
+
                     if (year < shortYearCutOff) {
                         year = (defaultYear - defaultYear % 100) + year;
                     }
@@ -1205,6 +1206,10 @@ function pad(number) {
                     return null;
                 }
             }
+        }
+
+        if (year === null) {
+            year = defaultYear;
         }
 
         if (pmHour && hours < 12) {

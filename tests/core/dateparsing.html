@@ -669,6 +669,23 @@
                 equal(+parse("900/10/10", "yyy/MM/dd"), +new Date(900, 9, 10));
             });
 
+            test("parseDate parses yy date", function() {
+                equal(+parse("09/10/10", "yy/MM/dd"), +new Date(2009, 9, 10));
+            });
+
+            test("parseDate returns null if 'yyy' and four digit year", function() {
+                equal(parse("201/10/10", "yyyy/MM/dd"), null);
+            });
+
+            test("parseDate returns null if 'yyyy' and three digit year", function() {
+                equal(parse("2011/10/10", "yyy/MM/dd"), null);
+            });
+
+            test("parseDate uses current year if no 'y'", function() {
+                var year = (new Date()).getFullYear();
+                equal(parse("10/10", "MM/dd").getFullYear(), year);
+            });
+
             test("adjustDate adjusts Brasil date with DST", function() {
                 var date = new Date(2012, 9, 20, 23, 0, 0);
 
