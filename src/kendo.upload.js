@@ -1050,7 +1050,7 @@
                     XMLHttpRequest: xhr });
             },
 
-            function onError(xhr, textStatus, textStatus) {
+            function onError(xhr, textStatus) {
                 var prevented = upload.trigger(ERROR, {
                     operation: "remove",
                     files: files,
