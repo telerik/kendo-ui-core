@@ -18,8 +18,18 @@ demos/examples/shared/js/kendo.examples.js
 demos/mvc/content/docs/
 demos/mvc/sources
 !src/docs
+dist/
+src/**/*.min.js
+src/*.min.js
 src/kendo.aspnetmvc.js
-live/
+src/kendo.all.js
+src/kendo.winjs.js
+src/kendo.dataviz.js
+src/kendo.mobile.js
+src/kendo.web.js
+styles/**/*.css
+styles/*.css
+!styles/dataviz/kendo.dataviz.css
 node_modules
 release/
 sitefinity-docs/
@@ -36,7 +46,6 @@ functional-tests/KendoCustom/**/Results/
 functional-tests/KendoCustom/**/TestLists/
 functional-tests/KendoCustom/**/TestResults/
 functional-tests/KendoDemosTests/bin
-styles/*.css
 !styles/kendo.common.css
 themebuilder/src/scripts/template.js
 themebuilder/src/styles/kendo.black.css
@@ -48,5 +57,7 @@ download-builder/service/App_Data
 wrappers/mvc/demos/**/Scripts
 wrappers/mvc/demos/**/Content
 wrappers/mvc/demos/**/App_Data
+wrappers/java/**/target
+wrappers/java/target
 Guardfile
 playground/chart-*
