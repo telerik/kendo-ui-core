@@ -305,6 +305,46 @@
                     equals(plotArea.categoryAxis.options.justified, false);
                 });
 
+                test("categoryAxis justified is not altered with bar series on secondary axis", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "line",
+                            data: [100]
+                        }, {
+                            type: "bar",
+                            data: [200],
+                            categoryAxis: "secondary"
+                        }], {
+                        categoryAxis: [{
+                            categories: ["A", "B"],
+                            justified: true
+                        }, {
+                            name: "secondary",
+                            categories: ["a", "b"]
+                        }]
+                    });
+
+                    equals(plotArea.categoryAxis.options.justified, true);
+                })
+
+                test("categoryAxis justified is not altered with bar series on primary axis", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "line",
+                            data: [100]
+                        }, {
+                            type: "bar",
+                            data: [200]
+                        }], {
+                        categoryAxis: [{
+                            categories: ["A", "B"]
+                        }, {
+                            categories: ["a", "b"],
+                            justified: true
+                        }]
+                    });
+
+                    equals(plotArea.axes[1].options.justified, true);
+                });
+
                 test("categoryAxis roundToBaseUnit is not altered with line series", function() {
                     var plotArea = new dataviz.CategoricalPlotArea([{
                             type: "line",
@@ -373,6 +413,46 @@
                     });
 
                     equals(plotArea.categoryAxis.options.roundToBaseUnit, true);
+                });
+
+                test("categoryAxis roundToBaseUnit is not altered with bar series on other axis", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "line",
+                            data: [100]
+                        }, {
+                            type: "bar",
+                            data: [200],
+                            categoryAxis: "secondary"
+                        }], {
+                        categoryAxis: [{
+                            categories: ["A", "B"],
+                            roundToBaseUnit: false
+                        }, {
+                            name: "secondary",
+                            categories: ["a", "b"]
+                        }]
+                    });
+
+                    equals(plotArea.categoryAxis.options.roundToBaseUnit, false);
+                });
+
+                test("categoryAxis justified is not altered with bar series on primary axis", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "line",
+                            data: [100]
+                        }, {
+                            type: "bar",
+                            data: [200]
+                        }], {
+                        categoryAxis: [{
+                            categories: ["A", "B"]
+                        }, {
+                            categories: ["a", "b"],
+                            roundToBaseUnit: false
+                        }]
+                    });
+
+                    equals(plotArea.axes[1].options.roundToBaseUnit, false);
                 });
 
                 // ------------------------------------------------------------

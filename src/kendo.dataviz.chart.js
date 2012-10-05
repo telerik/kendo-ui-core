@@ -5455,6 +5455,22 @@
             plotArea.appendChart(chart);
         },
 
+        axisRequiresRounding: function(categoryAxisName, categoryAxisIndex) {
+            var plotArea = this,
+                centeredSeries = plotArea.filterSeriesByType(
+                    plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK]
+                ),
+                seriesIx,
+                seriesAxis;
+
+            for (seriesIx = 0; seriesIx < centeredSeries.length; seriesIx++) {
+                seriesAxis = centeredSeries[seriesIx].categoryAxis || "";
+                if (seriesAxis === categoryAxisName || (!seriesAxis && categoryAxisIndex === 0)) {
+                    return true;
+                }
+            }
+        },
+
         createCategoryAxes: function() {
             var plotArea = this,
                 invertAxes = plotArea.invertAxes,
@@ -5467,27 +5483,23 @@
                 dateCategory,
                 categoryAxis,
                 axes = [],
-                primaryAxis,
-                centeredSeries = plotArea.filterSeriesByType(
-                    plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK]
-                );
+                primaryAxis;
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
+                name = axisOptions.name;
                 categories = axisOptions.categories || [];
+                dateCategory = categories[0] instanceof Date;
                 type  = axisOptions.type || "";
                 axisOptions = deepExtend({
                     vertical: invertAxes,
                     axisCrossingValue: invertAxes ? categories.length : 0
                 }, axisOptions);
 
-                if (centeredSeries.length > 0) {
+                if (plotArea.axisRequiresRounding(name, i)) {
                     axisOptions.justified = false;
                     axisOptions.roundToBaseUnit = true;
                 }
-
-                name = axisOptions.name;
-                dateCategory = categories[0] instanceof Date;
 
                 if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
                     categoryAxis = new DateCategoryAxis(axisOptions);
