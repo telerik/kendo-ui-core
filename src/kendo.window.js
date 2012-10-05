@@ -294,7 +294,7 @@
             }
 
             if (keyCode == keys.ESC) {
-                that.close();
+                that._close(true);
             }
 
             if (options.draggable && !e.ctrlKey) {
@@ -360,7 +360,7 @@
                 that = this;
 
             each({
-                "k-i-close": that.close,
+                "k-i-close": function() { that._close(true); },
                 "k-i-maximize": that.maximize,
                 "k-i-minimize": that.minimize,
                 "k-i-restore": that.restore,
@@ -475,7 +475,7 @@
             return that;
         },
 
-        close: function () {
+        _close: function(userTriggered) {
             var that = this,
                 wrapper = that.wrapper,
                 options = that.options,
@@ -484,7 +484,7 @@
                 modalWindows,
                 shouldHideOverlay, overlay;
 
-            if (wrapper.is(VISIBLE) && !that.trigger(CLOSE)) {
+            if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !!userTriggered })) {
                 options.visible = false;
 
                 modalWindows = openedModalWindows(options.name);
@@ -520,12 +520,15 @@
 
             if (that.options.isMaximized) {
                 $("html, body").css(OVERFLOW, "");
-                if (this._documentScrollTop && this._documentScrollTop > 0) {
-                    $(document).scrollTop(this._documentScrollTop);
+                if (that._documentScrollTop && that._documentScrollTop > 0) {
+                    $(document).scrollTop(that._documentScrollTop);
                 }
             }
+        },
 
-            return that;
+        close: function () {
+            this._close(false);
+            return this;
         },
 
         toFront: function () {

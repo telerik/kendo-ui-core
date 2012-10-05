@@ -1232,14 +1232,13 @@
                     resizable: false,
                     draggable: true,
                     title: "Edit",
-                    visible: false
+                    visible: false,
+                    close: function(e) {
+                        if (e.userTriggered) {
+                            that.cancelRow();
+                        }
+                    }
                 }, options));
-
-            var wnd = container.data("kendoWindow");
-
-            wnd.wrapper.on(CLICK + NS, "a:has(.k-i-close)", function() {
-                that.cancelRow();
-            });
 
             that.editable = that._editContainer
                 .kendoEditable({
@@ -1248,7 +1247,7 @@
                     clearContainer: false
                 }).data("kendoEditable");
 
-            wnd.center().open();
+            container.data("kendoWindow").center().open();
 
             that.trigger(EDIT, { container: container, model: model });
         },

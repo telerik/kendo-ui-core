@@ -168,12 +168,13 @@
                 return this.trigger($.extend({ type: "keydown", keyCode: key }, options ));
             };
 
-            test("escape key triggers close event", 1, function() {
+            test("escape key triggers close event", 2, function() {
                 var triggers = 0;
 
                 createWindow({
-                    close: function() {
+                    close: function(e) {
                         ok(true);
+                        ok(e.userTriggered);
                     }
                 });
 
