@@ -354,6 +354,14 @@ class Tag
         TLD_WIDGET_TAG_TEMPLATE
     end
 
+    def is_item?
+        has_items? && @name == 'Item'
+    end
+
+    def has_items?
+        namespace =~ /panelbar/
+    end
+
     def to_xml
         xml = xml_template.result(binding)
 
@@ -436,7 +444,7 @@ class Tag
             interfaces.push('DataBoundWidget')
         end
 
-        if namespace =~ /panelbar/ && @name == 'Item'
+        if is_item?
             interfaces.push('Items')
         end
 
@@ -548,7 +556,7 @@ class Tag
             end
         end
 
-        if tag.name =~/PanelBar/
+        if tag.has_items?
             tag.options.push(Option.new :name => 'items',
                                         :type => 'Array',
                                         :description => "Contains items of #{tag.name}")
@@ -630,7 +638,7 @@ class NestedTag < Tag
     end
 
     def body_content
-        return 'JSP' if (@name == 'Item' && namespace == 'panelbar') || @children.any?
+        return 'JSP' if is_item? || @children.any?
 
         'empty'
     end
