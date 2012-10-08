@@ -362,6 +362,8 @@
                 plotArea = new CategoricalPlotArea(categoricalSeries, options);
             }
 
+            plotArea.owner = chart;
+
             return plotArea;
         },
 
@@ -1155,6 +1157,7 @@
                     axis.autoBaseUnit(options);
                 }
 
+                axis._categories = toDate(options.categories);
                 axis.groupCategories(options);
             }
 
@@ -1318,7 +1321,7 @@
 
         groupCategories: function(options) {
             var axis = this,
-                categories = toDate(options.categories),
+                categories = axis._categories,
                 baseUnit = options.baseUnit,
                 baseUnitStep = options.baseUnitStep || 1,
                 range = axis.range(options),
@@ -1848,14 +1851,6 @@
             chart.plotArea = plotArea;
             chart.categoryAxis = plotArea.seriesCategoryAxis(options.series[0]);
 
-            // Value axis ranges grouped by axis name, e.g.:
-            // primary: { min: 0, max: 1 }
-            chart.valueAxisRanges = {};
-
-            chart.points = [];
-            chart.categoryPoints = [];
-            chart.seriesPoints = [];
-
             chart.render();
         },
 
@@ -1867,6 +1862,15 @@
 
         render: function() {
             var chart = this;
+
+            // Value axis ranges grouped by axis name, e.g.:
+            // primary: { min: 0, max: 1 }
+            chart.valueAxisRanges = {};
+
+            chart.points = [];
+            chart.categoryPoints = [];
+            chart.seriesPoints = [];
+            chart.children = [];
 
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
@@ -4545,6 +4549,8 @@
             options.id = uniqueId();
 
             pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
+
+            pane.container = new ChartElement();
         },
 
         options: {
@@ -4558,11 +4564,27 @@
         reflow: function(targetBox) {
             var pane = this;
 
+            var children = pane.container.children;
+            pane.container.children = [];
             BoxElement.fn.reflow.call(pane, targetBox);
+            pane.container.children = children;
 
             if(pane.title) {
                 pane.contentBox.y1 += pane.title.box.height();
             }
+        },
+
+        getViewElements: function(view) {
+            var pane = this,
+                elements = CategoricalChart.fn.getViewElements.call(pane, view),
+                group = view.createGroup({
+                    id: pane.options.id
+                });
+
+            group.children = elements.concat(
+                pane.container.getViewElements(view)
+            );
+            return [group];
         }
     });
 
@@ -4573,15 +4595,17 @@
             ChartElement.fn.init.call(plotArea, options);
 
             plotArea.series = series;
+            plotArea._series = series.slice(0);
             plotArea.charts = [];
             plotArea.options.legend.items = [];
             plotArea.axes = [];
 
             plotArea.options.id = uniqueId();
             plotArea.makeDiscoverable();
-            plotArea.render();
 
             plotArea.createPanes();
+            plotArea.render();
+            plotArea.setPaneAxes();
         },
 
         options: {
@@ -4607,7 +4631,6 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = new Pane(paneOptions[i]);
-                plotArea.setPaneAxes(currentPane, i);
 
                 panes.push(currentPane);
                 plotArea.append(currentPane);
@@ -4616,39 +4639,53 @@
             plotArea.panes = panes;
         },
 
-        setPaneAxes: function(pane, paneIndex) {
+        setPaneAxes: function(filterPane) {
             var plotArea = this,
                 axes = plotArea.axes,
                 currentAxis,
-                paneName = pane.options.name,
+                pane,
+                paneName,
                 axisPane,
                 match,
-                paneAxes = pane.axes = [],
+                paneAxes,
                 i;
 
-            for (i = 0; i < axes.length; i++) {
-                currentAxis = axes[i];
-                axisPane = currentAxis.options.pane;
+            for (var paneIndex = 0; paneIndex < plotArea.panes.length; paneIndex++) {
+                pane = plotArea.panes[paneIndex];
 
-                if (axisPane) {
-                    match = axisPane === paneName;
-                } else {
-                    match = paneIndex === 0;
-                }
+                if (!filterPane || filterPane === pane) {
+                    paneName = pane.options.name;
+                    paneAxes = pane.axes = [];
+                    for (i = 0; i < axes.length; i++) {
+                        currentAxis = axes[i];
+                        axisPane = currentAxis.options.pane;
 
-                if (match) {
-                    paneAxes.push(currentAxis);
-                    currentAxis.pane = pane;
+                        if (axisPane) {
+                            match = axisPane === paneName;
+                        } else {
+                            match = paneIndex === 0;
+                        }
+
+                        if (match) {
+                            paneAxes.push(currentAxis);
+                            currentAxis.pane = pane;
+                            pane.container.append(currentAxis);
+                        }
+                    }
                 }
             }
         },
 
-        appendChart: function(chart) {
+        appendChart: function(chart, pane) {
             var plotArea = this;
 
             plotArea.charts.push(chart);
             plotArea.addToLegend(chart);
-            plotArea.append(chart);
+            if (pane) {
+                pane.container.append(chart);
+            } else {
+                plotArea.append(chart);
+            }
         },
 
         addToLegend: function(chart) {
@@ -5202,6 +5239,7 @@
             var plotArea = this,
                 axisOptions = deepExtend({}, plotArea.options, options);
 
+            plotArea._series = series;
             plotArea.namedCategoryAxes = {};
             plotArea.namedValueAxes = {};
             plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
@@ -5231,7 +5269,62 @@
             plotArea.createValueAxes();
         },
 
-        createCharts: function() {
+        redrawPane: function(pane) {
+            var plotArea = this,
+                filteredAxes = [],
+                filteredCharts = [];
+
+            for (var i = 0; i < plotArea.axes.length; i++) {
+                var axis = plotArea.axes[i];
+                if (axis.pane !== pane) {
+                    filteredAxes.push(axis);
+                } else {
+                    if (axis instanceof CategoryAxis) {
+                        delete plotArea.namedCategoryAxes[axis.options.name];
+                    } else {
+                        delete plotArea.namedValueAxes[axis.options.name]
+                    }
+
+                    if (axis === plotArea.categoryAxis) {
+                        delete plotArea.categoryAxis;
+                    }
+
+                    if (axis === plotArea.valueAxis) {
+                        delete plotArea.valueAxis;
+                    }
+                }
+            }
+
+            plotArea.axes = filteredAxes;
+
+            for (var i = 0; i < plotArea.charts.length; i++) {
+                var chart = plotArea.charts[i];
+                if (pane.container.children.indexOf(chart) === -1) {
+                    filteredCharts.push(chart);
+                }
+            }
+
+            plotArea.charts = filteredCharts;
+
+            pane.container.children = [];
+
+            plotArea.createCategoryAxes(pane);
+            plotArea.aggregateDateSeries(pane);
+            plotArea.createCharts(pane);
+            plotArea.createValueAxes(pane);
+            plotArea.setPaneAxes(pane);
+            plotArea.reflow(plotArea.box);
+
+            var paneElement = document.getElementById(pane.options.id);
+            paneElement.parentNode.replaceChild(
+                plotArea.owner._view.renderElement(
+                    pane.getViewElements(plotArea.owner._view)[0]
+                ),
+                paneElement
+            );
+        },
+
+        createCharts: function(filterPane) {
             var plotArea = this,
                 series = plotArea.series,
                 seriesByPane = {},
@@ -5244,38 +5337,49 @@
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
                 pane = plotArea.seriesPaneName(currentSeries);
-                if (!inArray(pane, paneNames)) {
-                    paneNames.push(pane);
-                }
+                if (!filterPane || (filterPane.options.name === pane ||
+                   (pane === "default" && plotArea.panes.indexOf(filterPane) === 0))) {
+                    if (!inArray(pane, paneNames)) {
+                        paneNames.push(pane);
+                    }
 
-                if (seriesByPane[pane]) {
-                    seriesByPane[pane].push(currentSeries);
-                } else {
-                    seriesByPane[pane] = [currentSeries];
+                    if (seriesByPane[pane]) {
+                        seriesByPane[pane].push(currentSeries);
+                    } else {
+                        seriesByPane[pane] = [currentSeries];
+                    }
                 }
             }
 
             for (i = 0; i < paneNames.length; i++) {
                 paneSeries = seriesByPane[paneNames[i]];
+                pane = $.grep(plotArea.panes, function(p) {
+                    return p.options.name === paneNames[i];
+                })[0] || plotArea.panes[0];
 
                 plotArea.createAreaChart(
-                    plotArea.filterSeriesByType(paneSeries, [AREA, VERTICAL_AREA])
+                    plotArea.filterSeriesByType(paneSeries, [AREA, VERTICAL_AREA]),
+                    pane
                 );
 
                 plotArea.createBarChart(
-                    plotArea.filterSeriesByType(paneSeries, [COLUMN, BAR])
+                    plotArea.filterSeriesByType(paneSeries, [COLUMN, BAR]),
+                    pane
                 );
 
                 plotArea.createLineChart(
-                    plotArea.filterSeriesByType(paneSeries, [LINE, VERTICAL_LINE])
+                    plotArea.filterSeriesByType(paneSeries, [LINE, VERTICAL_LINE]),
+                    pane
                 );
 
                 plotArea.createCandlestickChart(
-                    plotArea.filterSeriesByType(paneSeries, [CANDLESTICK])
+                    plotArea.filterSeriesByType(paneSeries, [CANDLESTICK]),
+                    pane
                 );
 
                 plotArea.createOHLCChart(
-                    plotArea.filterSeriesByType(paneSeries, [OHLC])
+                    plotArea.filterSeriesByType(paneSeries, [OHLC]),
+                    pane
                 );
             }
         },
@@ -5295,9 +5399,9 @@
             return result;
         },
 
-        aggregateDateSeries: function() {
+        aggregateDateSeries: function(filterPane) {
             var plotArea = this,
-                series = plotArea.series,
+                series = plotArea._series,
                 processedSeries = [],
                 categoryAxis,
                 categories,
@@ -5319,8 +5423,12 @@
                 currentSeries = series[seriesIx];
                 seriesClone = deepExtend({}, currentSeries);
                 categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
+                var pane = $.grep(plotArea.panes, function(p) {
+                    return p.options.name === categoryAxis.options.pane;
+                })[0] || plotArea.panes[0];
+                var match = !filterPane || (filterPane === pane);
 
-                if (equalsIgnoreCase(categoryAxis.options.type, DATE)) {
+                if (match && equalsIgnoreCase(categoryAxis.options.type, DATE)) {
                     categories = categoryAxis.options.categories;
                     categoryMap = categoryAxis.categoryMap;
 
@@ -5355,7 +5463,7 @@
             plotArea.series = processedSeries;
         },
 
-        appendChart: function(chart) {
+        appendChart: function(chart, pane) {
             var plotArea = this,
                 series = chart.options.series,
                 categoryAxis = plotArea.seriesCategoryAxis(series[0]),
@@ -5368,7 +5476,7 @@
 
             plotArea.valueAxisRangeTracker.update(chart.valueAxisRanges);
 
-            PlotAreaBase.fn.appendChart.call(plotArea, chart);
+            PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
         },
 
         seriesPaneName: function(series) {
@@ -5414,7 +5522,7 @@
             plotArea.appendChart(barChart);
         },
 
-        createLineChart: function(series) {
+        createLineChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5427,10 +5535,10 @@
                     series: series
                 });
 
-            plotArea.appendChart(lineChart);
+            plotArea.appendChart(lineChart, pane);
         },
 
-        createAreaChart: function(series) {
+        createAreaChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5443,7 +5551,7 @@
                     series: series
                 });
 
-            plotArea.appendChart(areaChart);
+            plotArea.appendChart(areaChart, pane);
         },
 
         createOHLCChart: function(series) {
@@ -5463,7 +5571,7 @@
             plotArea.appendChart(chart);
         },
 
-        createCandlestickChart: function(series) {
+        createCandlestickChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5477,7 +5585,7 @@
                     spacing: firstSeries.spacing
                 });
 
-            plotArea.appendChart(chart);
+            plotArea.appendChart(chart, pane);
         },
 
         axisRequiresRounding: function(categoryAxisName, categoryAxisIndex) {
@@ -5496,7 +5604,7 @@
             }
         },
 
-        createCategoryAxes: function() {
+        createCategoryAxes: function(filterPane) {
             var plotArea = this,
                 invertAxes = plotArea.invertAxes,
                 definitions = [].concat(plotArea.options.categoryAxis),
@@ -5512,42 +5620,47 @@
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
-                name = axisOptions.name;
-                categories = axisOptions.categories || [];
-                dateCategory = categories[0] instanceof Date;
-                type  = axisOptions.type || "";
-                axisOptions = deepExtend({
-                    vertical: invertAxes,
-                    axisCrossingValue: invertAxes ? categories.length : 0
-                }, axisOptions);
+                var pane = $.grep(plotArea.panes, function(p) {
+                    return p.options.name === axisOptions.pane;
+                })[0] || plotArea.panes[0];
 
-                if (plotArea.axisRequiresRounding(name, i)) {
-                    axisOptions.justified = false;
-                    axisOptions.roundToBaseUnit = true;
-                }
+                if (!filterPane || filterPane === pane) {
+                    name = axisOptions.name;
+                    categories = axisOptions.categories || [];
+                    dateCategory = categories[0] instanceof Date;
+                    type  = axisOptions.type || "";
+                    axisOptions = deepExtend({
+                        vertical: invertAxes,
+                        axisCrossingValue: invertAxes ? categories.length : 0
+                    }, axisOptions);
 
-                if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
-                    categoryAxis = new DateCategoryAxis(axisOptions);
-                } else {
-                    categoryAxis = new CategoryAxis(axisOptions);
-                }
-
-                if (name) {
-                    if (plotArea.namedCategoryAxes[name]) {
-                        throw new Error(
-                            "Category axis with name " + name + " is already defined"
-                        );
+                    if (plotArea.axisRequiresRounding(name, i)) {
+                        axisOptions.justified = false;
+                        axisOptions.roundToBaseUnit = true;
                     }
-                    plotArea.namedCategoryAxes[name] = categoryAxis;
-                }
 
-                categoryAxis.axisIndex = i;
-                axes.push(categoryAxis);
-                plotArea.axes.push(categoryAxis);
-                plotArea.append(categoryAxis);
+                    if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
+                        categoryAxis = new DateCategoryAxis(axisOptions);
+                    } else {
+                        categoryAxis = new CategoryAxis(axisOptions);
+                    }
+
+                    if (name) {
+                        if (plotArea.namedCategoryAxes[name]) {
+                            throw new Error(
+                                "Category axis with name " + name + " is already defined"
+                            );
+                        }
+                        plotArea.namedCategoryAxes[name] = categoryAxis;
+                    }
+
+                    categoryAxis.axisIndex = i;
+                    axes.push(categoryAxis);
+                    plotArea.axes.push(categoryAxis);
+                }
             }
 
-            primaryAxis = axes[0];
+            primaryAxis = plotArea.categoryAxis || axes[0];
             plotArea.categoryAxis = primaryAxis;
 
             if (invertAxes) {
@@ -5557,7 +5670,7 @@
             }
         },
 
-        createValueAxes: function() {
+        createValueAxes: function(filterPane) {
             var plotArea = this,
                 definitions = [].concat(plotArea.options.valueAxis),
                 invertAxes = plotArea.invertAxes,
@@ -5572,28 +5685,33 @@
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
-                name = axisOptions.name;
-                range = plotArea.valueAxisRangeTracker.query(name);
+                var pane = $.grep(plotArea.panes, function(p) {
+                    return p.options.name === axisOptions.pane;
+                })[0] || plotArea.panes[0];
 
-                valueAxis = new NumericAxis(range.min, range.max,
-                    deepExtend({}, baseOptions, axisOptions)
-                );
+                if (!filterPane || filterPane === pane) {
+                    name = axisOptions.name;
+                    range = plotArea.valueAxisRangeTracker.query(name);
 
-                if (name) {
-                    if (plotArea.namedValueAxes[name]) {
-                        throw new Error(
-                            "Value axis with name " + name + " is already defined"
-                        );
+                    valueAxis = new NumericAxis(range.min, range.max,
+                        deepExtend({}, baseOptions, axisOptions)
+                    );
+
+                    if (name) {
+                        if (plotArea.namedValueAxes[name]) {
+                            throw new Error(
+                                "Value axis with name " + name + " is already defined"
+                            );
+                        }
+                        plotArea.namedValueAxes[name] = valueAxis;
                     }
-                    plotArea.namedValueAxes[name] = valueAxis;
-                }
 
-                axes.push(valueAxis);
-                plotArea.axes.push(valueAxis);
-                plotArea.append(valueAxis);
+                    axes.push(valueAxis);
+                    plotArea.axes.push(valueAxis);
+                }
             }
 
-            primaryAxis = axes[0];
+            primaryAxis = plotArea.valueAxis || axes[0];
             plotArea.valueAxis = primaryAxis;
 
             if (invertAxes) {
@@ -5742,13 +5860,13 @@
             plotArea.createAxes();
         },
 
-        appendChart: function(chart) {
+        appendChart: function(chart, pane) {
             var plotArea = this;
 
             plotArea.xAxisRangeTracker.update(chart.xAxisRanges);
             plotArea.yAxisRangeTracker.update(chart.yAxisRanges);
 
-            PlotAreaBase.fn.appendChart.call(plotArea, chart);
+            PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
         },
 
         createScatterChart: function(series) {
