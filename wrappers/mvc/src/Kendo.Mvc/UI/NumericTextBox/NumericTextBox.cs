@@ -65,6 +65,18 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string IncreaseButtonTitle
+        {
+            get;
+            set;
+        }
+
+        public string DecreaseButtonTitle
+        {
+            get;
+            set;
+        }
+
         public bool? Spinners
         {
             get;
@@ -94,6 +106,16 @@ namespace Kendo.Mvc.UI
             if (Placeholder.HasValue())
             {
                 options["placeholder"] = Placeholder;
+            }
+
+            if (IncreaseButtonTitle.HasValue())
+            {
+                options["upArrowText"] = IncreaseButtonTitle;
+            }
+
+            if (DecreaseButtonTitle.HasValue())
+            {
+                options["downArrowText"] = DecreaseButtonTitle;
             }
 
             if (Spinners != null)
