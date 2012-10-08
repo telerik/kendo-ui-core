@@ -23,13 +23,13 @@
 	        	    		<kendo:read url="http://odata.netflix.com/Catalog/Titles"></kendo:read>
 	        	    	</kendo:transport>
 	        	    </kendo:dataSource>
-	        	    <kendo:event name="dataBound">
+	        	    <kendo:autoComplete-event name="change">
 	        	    	<script>
 	        	    	function dataBound() {
-	        	    		alert("dataBound");
+	        	    		alert("change");
 	        	    	}
 	        	    	</script>
-	        	    </kendo:event>
+	        	    </kendo:autoComplete-event>
 	            </kendo:autoComplete>
 	        
 	        	<kendo:grid name="grid">

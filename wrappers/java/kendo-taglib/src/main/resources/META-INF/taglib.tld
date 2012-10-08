@@ -134,6 +134,20 @@ the dataSource.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the AutoComplete widget</description>
+        <name>autoComplete-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Calendar</description>
@@ -195,6 +209,20 @@ the dataSource.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Calendar widget</description>
+        <name>calendar-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, navigate.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Chart</description>
@@ -251,6 +279,20 @@ and is about to render it.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Chart widget</description>
+        <name>chart-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: axisLabelClick, dataBound, plotAreaClick, seriesClick, seriesHover.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>ComboBox</description>
@@ -406,6 +448,20 @@ and is about to render it.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the ComboBox widget</description>
+        <name>comboBox-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>DatePicker</description>
@@ -474,6 +530,20 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the DatePicker widget</description>
+        <name>datePicker-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>DateTimePicker</description>
@@ -556,6 +626,20 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the DateTimePicker widget</description>
+        <name>dateTimePicker-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>DropDownList</description>
@@ -683,6 +767,20 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the DropDownList widget</description>
+        <name>dropDownList-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Editor</description>
@@ -736,6 +834,20 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Editor widget</description>
+        <name>editor-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, execute, keydown, keyup, paste, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Grid</description>
@@ -830,6 +942,20 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Grid widget</description>
+        <name>grid-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, columnResize, dataBound, detailCollapse, detailExpand, detailInit, edit, remove, save, saveChanges.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>LinearGauge</description>
@@ -911,6 +1037,20 @@ and is about to render it.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the ListView widget</description>
+        <name>listView-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, dataBound, edit, remove.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Menu</description>
@@ -986,6 +1126,20 @@ its sub menus to the left.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Menu widget</description>
+        <name>menu-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: close, open, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>NumericTextBox</description>
@@ -1089,6 +1243,20 @@ its sub menus to the left.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the NumericTextBox widget</description>
+        <name>numericTextBox-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, spin.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Pager</description>
@@ -1180,6 +1348,20 @@ its sub menus to the left.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Pager widget</description>
+        <name>pager-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>PanelBar</description>
@@ -1233,6 +1415,20 @@ its sub menus to the left.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the PanelBar widget</description>
+        <name>panelBar-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: activate, collapse, contentLoad, error, expand, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>RadialGauge</description>
@@ -1354,6 +1550,20 @@ The orientation of a</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the RangeSlider widget</description>
+        <name>rangeSlider-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, slide.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Slider</description>
@@ -1451,6 +1661,20 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Slider widget</description>
+        <name>slider-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, slide.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Splitter</description>
@@ -1499,6 +1723,20 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Splitter widget</description>
+        <name>splitter-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: collapse, contentLoad, expand, layoutChange, resize.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>TabStrip</description>
@@ -1589,6 +1827,20 @@ tab.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the TabStrip widget</description>
+        <name>tabStrip-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: activate, contentLoad, error, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>TimePicker</description>
@@ -1641,6 +1893,20 @@ tab.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the TimePicker widget</description>
+        <name>timePicker-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>TreeView</description>
@@ -1760,6 +2026,20 @@ HierarchicalDataSource instance), the default value of this option is false.</de
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the TreeView widget</description>
+        <name>treeView-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: collapse, dataBound, drag, dragend, dragstart, drop, expand, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Upload</description>
@@ -1840,6 +2120,20 @@ Cancelling the event will prevent the upload.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Upload widget</description>
+        <name>upload-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: cancel, complete, error, progress, remove, select, success, upload.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Window</description>
@@ -1973,6 +2267,20 @@ has been clicked on a window with static content.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Window widget</description>
+        <name>window-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: activate, close, deactivate, dragend, dragstart, error, open, refresh, resize.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
@@ -6213,19 +6521,6 @@ containing one or more fields with the same name as the original input name.</de
         <body-content>JSP</body-content>
         <attribute>
             <name>url</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-    </tag>
-    
-    <tag>
-        <description>Represents an event of a Kendo widget or DataSource</description>
-        <name>event</name>
-        <tag-class>com.kendoui.taglib.EventTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <name>name</name>
-            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

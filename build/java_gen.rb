@@ -47,7 +47,7 @@ TLD_EVENT_TAG_TEMPLATE = ERB.new(%{
         <tag-class>com.kendoui.taglib.EventTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
-            <description>Specifies the name of the attribute. One of the following values: <%= events.map{|e| e.name }.join(',') %></description>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: <%= events.map{|e| e.name }.join(', ') %>.</description>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
@@ -355,7 +355,11 @@ class Tag
     end
 
     def to_xml
-        xml_template.result(binding)# + TLD_EVENT_TAG_TEMPLATE.result(binding)
+        xml = xml_template.result(binding)
+
+        xml +=  TLD_EVENT_TAG_TEMPLATE.result(binding) if @events.any?
+
+        xml
     end
 
     def child_setters
