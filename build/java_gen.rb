@@ -40,9 +40,25 @@ TLD_WIDGET_TAG_TEMPLATE = ERB.new(%{
     </tag>
         })
 
+TLD_EVENT_TAG_TEMPLATE = ERB.new(%{
+    <tag>
+        <description>Subscribes to an event of the <%= name %> widget</description>
+        <name><%= name.camelize %>-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the attribute. One of the following values: <%= events.map{|e| e.name }.join(',') %></description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+})
+
 TLD_NESTED_TAG_TEMPLATE = ERB.new(%{
     <tag>
-        <description><%= name %></description>
+        <description><%= description %></description>
         <name><%= tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= type %></tag-class>
         <body-content><%= body_content %></body-content>
@@ -339,7 +355,7 @@ class Tag
     end
 
     def to_xml
-        xml_template.result(binding)
+        xml_template.result(binding)# + TLD_EVENT_TAG_TEMPLATE.result(binding)
     end
 
     def child_setters
@@ -450,13 +466,16 @@ class Tag
                     @options.delete(o)
                 end
 
+
                 if option.type == 'Array'
                     child =  NestedTagArray.new :name => option.name,
                               :parent => self,
+                              :description => option.description,
                               :options => child_options
                 else
                     child =  NestedTag.new :name => option.name,
                               :parent => self,
+                              :description => option.description,
                               :options => child_options
                 end
 
@@ -571,6 +590,8 @@ class Tag
 end
 
 class NestedTag < Tag
+    attr_reader :description
+
     def namespace
         @parent.namespace
     end
@@ -615,6 +636,7 @@ class NestedTag < Tag
         @parent = options[:parent]
         @name = options[:name].sub(@parent.namespace, '').sub(/^./) { |c| c.capitalize }
         @options = options[:options]
+        @description = options[:description]
     end
 end
 
@@ -627,6 +649,7 @@ class NestedTagArray < NestedTag
         @child = NestedTagArrayItem.new :name => @name.singular,
               :parent => self,
               :options => @options,
+              :description => @description,
               :children => @children
 
         @children = [@child]
