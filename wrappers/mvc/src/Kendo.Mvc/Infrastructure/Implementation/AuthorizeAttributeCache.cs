@@ -46,7 +46,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation
         {
             object area;
 
-            if (routeValues != null && routeValues.TryGetValue("Area", out area)) 
+            if (routeValues != null && routeValues.TryGetValue("Area", out area) && area.ToString().HasValue()) 
             {
                 return controllerTypes.Where(t => t.FullName.Contains("." + area.ToString() + ".")).FirstOrDefault();
             }
