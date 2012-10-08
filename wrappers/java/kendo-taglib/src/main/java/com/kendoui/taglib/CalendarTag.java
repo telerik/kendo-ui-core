@@ -81,12 +81,36 @@ public class CalendarTag extends WidgetTag /* interfaces */implements Month/* in
         setProperty("format", value);
     }
 
+    public java.util.Date getMax() {
+        return (java.util.Date)getProperty("max");
+    }
+
+    public void setMax(java.util.Date value) {
+        setProperty("max", value);
+    }
+
+    public java.util.Date getMin() {
+        return (java.util.Date)getProperty("min");
+    }
+
+    public void setMin(java.util.Date value) {
+        setProperty("min", value);
+    }
+
     public String getStart() {
         return (String)getProperty("start");
     }
 
     public void setStart(String value) {
         setProperty("start", value);
+    }
+
+    public java.util.Date getValue() {
+        return (java.util.Date)getProperty("value");
+    }
+
+    public void setValue(java.util.Date value) {
+        setProperty("value", value);
     }
 
     public String getChange() {

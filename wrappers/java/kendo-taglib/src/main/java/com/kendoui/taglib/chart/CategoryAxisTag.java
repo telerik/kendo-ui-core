@@ -131,6 +131,22 @@ public class CategoryAxisTag extends BaseTag /* interfaces */implements Labels, 
         setProperty("baseUnit", value);
     }
 
+    public java.util.Date getMax() {
+        return (java.util.Date)getProperty("max");
+    }
+
+    public void setMax(java.util.Date value) {
+        setProperty("max", value);
+    }
+
+    public java.util.Date getMin() {
+        return (java.util.Date)getProperty("min");
+    }
+
+    public void setMin(java.util.Date value) {
+        setProperty("min", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }

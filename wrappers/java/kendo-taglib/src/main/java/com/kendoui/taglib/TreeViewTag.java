@@ -59,7 +59,9 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements A
 
     @Override
     public void setItems(ItemsTag value) {
+
         items = value.items();
+
     }
 
     public String getCheckboxTemplate() {

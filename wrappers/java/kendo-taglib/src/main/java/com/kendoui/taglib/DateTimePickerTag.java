@@ -94,6 +94,22 @@ public class DateTimePickerTag extends WidgetTag /* interfaces */implements Anim
         setProperty("interval", value);
     }
 
+    public java.util.Date getMax() {
+        return (java.util.Date)getProperty("max");
+    }
+
+    public void setMax(java.util.Date value) {
+        setProperty("max", value);
+    }
+
+    public java.util.Date getMin() {
+        return (java.util.Date)getProperty("min");
+    }
+
+    public void setMin(java.util.Date value) {
+        setProperty("min", value);
+    }
+
     public String getStart() {
         return (String)getProperty("start");
     }
@@ -108,6 +124,14 @@ public class DateTimePickerTag extends WidgetTag /* interfaces */implements Anim
 
     public void setTimeFormat(String value) {
         setProperty("timeFormat", value);
+    }
+
+    public java.util.Date getValue() {
+        return (java.util.Date)getProperty("value");
+    }
+
+    public void setValue(java.util.Date value) {
+        setProperty("value", value);
     }
 
     public String getChange() {

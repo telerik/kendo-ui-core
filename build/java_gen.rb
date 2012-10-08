@@ -167,7 +167,7 @@ JS_TO_JAVA_TYPES = {
     'Boolean' => 'boolean',
     'Object' => 'Object',
     'Array' => 'Array',
-    'Date' => 'java.lang.Date'
+    'Date' => 'java.util.Date'
 }
 
 JAVA_DATASOURCE_SETTER = %{
@@ -307,7 +307,7 @@ class Option
     end
 
     def required?
-        @type != 'Object' && @type != 'Array' && @type != 'java.lang.Date' && @type
+        @type != 'Object' && @type != 'Array' && @type
     end
 
     def to_xml

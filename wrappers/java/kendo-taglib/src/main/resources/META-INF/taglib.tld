@@ -191,10 +191,31 @@ the dataSource.</description>
         </attribute>
 
         <attribute>
+            <description>Specifies the maximum date, which the calendar can show.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the minimum date, which the calendar can show.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the start view.</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the selected date.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>
@@ -506,11 +527,32 @@ settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Specifies the maximum date, which the calendar can show.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the minimum date that the calendar can show.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the start view.
 The following settings are available for the</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the selected date.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>
@@ -595,6 +637,20 @@ settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Specifies the maximum date, which the calendar can show.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the minimum date that the calendar can show.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the start view of the calendar.
 The following settings are available for the</description>
             <name>start</name>
@@ -607,6 +663,13 @@ The following settings are available for the</description>
             <name>timeFormat</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the selected value.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>
@@ -1877,6 +1940,27 @@ tab.</description>
         </attribute>
 
         <attribute>
+            <description>Specifies the end value in the popup list.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the start value in the popup list.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the selected time.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
             <description>Triggered when the underlying value of a TimePicker is changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2374,6 +2458,24 @@ between subsequent categories. Available options:</description>
         </attribute>
 
         <attribute>
+            <description>The last date displayed on the axis.
+By default, the minimum date is the same as the last category.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>The first date displayed on the axis.
+By default, the minimum date is the same as the first category.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
             <description>The visibility of the axis.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2667,6 +2769,13 @@ Template variables:</description>
         </attribute>
 
         <attribute>
+            <description>Date at which the Y axis crosses this axis.</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
             <description>The base time interval for the axis labels.
 The default baseUnit is determined automatically from the value range. Available options:</description>
             <name>baseUnit</name>
@@ -2679,6 +2788,22 @@ The default baseUnit is determined automatically from the value range. Available
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end date of the axis.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>The start date of the axis.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>

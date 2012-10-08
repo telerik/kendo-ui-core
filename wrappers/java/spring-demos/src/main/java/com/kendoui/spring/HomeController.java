@@ -20,11 +20,11 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
         Date date = new Date();
-        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+        //DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
-        String formattedDate = dateFormat.format(date);
+        //String formattedDate = dateFormat.format(date);
 
-        model.addAttribute("serverTime", formattedDate );
+        model.addAttribute("serverTime", date );
 
         return "home";
     }

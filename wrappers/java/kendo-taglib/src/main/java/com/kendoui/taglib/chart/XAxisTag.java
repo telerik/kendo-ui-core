@@ -53,6 +53,14 @@ public class XAxisTag extends BaseTag /* interfaces */implements Labels/* interf
         setProperty("type", value);
     }
 
+    public java.util.Date getAxisCrossingValue() {
+        return (java.util.Date)getProperty("axisCrossingValue");
+    }
+
+    public void setAxisCrossingValue(java.util.Date value) {
+        setProperty("axisCrossingValue", value);
+    }
+
     public String getBaseUnit() {
         return (String)getProperty("baseUnit");
     }
@@ -67,6 +75,22 @@ public class XAxisTag extends BaseTag /* interfaces */implements Labels/* interf
 
     public void setMajorUnit(float value) {
         setProperty("majorUnit", value);
+    }
+
+    public java.util.Date getMax() {
+        return (java.util.Date)getProperty("max");
+    }
+
+    public void setMax(java.util.Date value) {
+        setProperty("max", value);
+    }
+
+    public java.util.Date getMin() {
+        return (java.util.Date)getProperty("min");
+    }
+
+    public void setMin(java.util.Date value) {
+        setProperty("min", value);
     }
 
     public float getMinorUnit() {

@@ -73,6 +73,30 @@ public class TimePickerTag extends WidgetTag /* interfaces */implements Animatio
         setProperty("interval", value);
     }
 
+    public java.util.Date getMax() {
+        return (java.util.Date)getProperty("max");
+    }
+
+    public void setMax(java.util.Date value) {
+        setProperty("max", value);
+    }
+
+    public java.util.Date getMin() {
+        return (java.util.Date)getProperty("min");
+    }
+
+    public void setMin(java.util.Date value) {
+        setProperty("min", value);
+    }
+
+    public java.util.Date getValue() {
+        return (java.util.Date)getProperty("value");
+    }
+
+    public void setValue(java.util.Date value) {
+        setProperty("value", value);
+    }
+
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }
