@@ -125,7 +125,7 @@ browsers.forEach(function(browser, index) {
         process.stderr.write("Executing " + browser.exe + " " + browser.params.join(" ") + " PID: " + child.pid + "\n");
 
         child.stderr.on("data", function(data) {
-            process.sdterr.write(data);
+            process.stderr.write(data);
         });
 
         child.stdout.on("data", function(data) {
