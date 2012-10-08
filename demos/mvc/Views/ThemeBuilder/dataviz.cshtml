@@ -52,8 +52,8 @@
 </div>
 
 <style scoped>
-    #example {
-        padding-top: 30px;
+    #example .k-content {
+        padding: 10px 0 30px;
     }
 
     h3 {
@@ -90,7 +90,8 @@
 </style>
 
 <script>
-    $(document).ready(function() {
+    function initialize() {
+        console.log("aaaa", $(document).data("kendoSkin") || "default");
         $("#area-chart").kendoChart({
             transitions: false,
             theme: $(document).data("kendoSkin") || "default",
@@ -270,5 +271,8 @@
                 max: 180
             }
         });
-    });
+    }
+
+    $(document).ready(initialize);
+    $("#example").bind("kendo:skinChange", initialize);
 </script>
