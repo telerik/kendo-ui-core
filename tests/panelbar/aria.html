@@ -101,6 +101,48 @@
             equal(items.eq(0).attr("role"), "group");
         });
 
+        test("PanelBar sets id to the focused item", function() {
+            addItems(2);
+
+            ul.focus();
+
+            ok(ul.find(".k-item:first > .k-link").hasClass("k-state-focused"))
+            equal(ul.find(".k-item:first").attr("id"), "test_pb_active")
+        });
+
+        test("PanelBar adds aria-selected to the focused item", function() {
+            addItems(2);
+
+            ul.focus();
+            ul.trigger({
+                type: "keydown",
+                keyCode: kendo.keys.DOWN,
+                preventDefault: $.noop
+            });
+
+            ok(ul.find(".k-item:last > .k-link").hasClass("k-state-focused"))
+            equal(ul.find(".k-item:first").attr("aria-selected"), undefined)
+            equal(ul.find(".k-item:last").attr("aria-selected"), "true")
+        });
+
+        test("PanelBar aria-activedescendant", function() {
+            addItems(2);
+
+            ul.focus();
+
+            equal(ul.attr("aria-activedescendant"), "test_pb_active");
+        });
+
+        test("PanelBar deletes aria-activedescendant", function() {
+            addItems(2);
+
+            ul.focus();
+
+            panelbar._current(null);
+
+            equal(ul.attr("aria-activedescendant"), undefined);
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>

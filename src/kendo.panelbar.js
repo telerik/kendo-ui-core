@@ -226,6 +226,10 @@
                 that.append(options.dataSource, element);
             }
 
+            if (element[0].id) {
+                that._itemId = element[0].id + "_pb_active";
+            }
+
             that._tabindex();
             that._updateClasses();
 
@@ -531,12 +535,25 @@
                 return focused;
             }
 
+            that.element.removeAttr("aria-activedescendant");
+
             if (focused) {
-                focused.children(LINKSELECTOR).removeClass(FOCUSEDCLASS);
+                focused
+                    .removeAttr("id")
+                    .removeAttr("aria-selected")
+                    .children(LINKSELECTOR)
+                    .removeClass(FOCUSEDCLASS);
             }
 
             if (candidate) {
-                candidate.children(LINKSELECTOR).addClass(FOCUSEDCLASS);
+                candidate.attr({
+                    "id": that._itemId,
+                    "aria-selected": true
+                })
+                .children(LINKSELECTOR)
+                .addClass(FOCUSEDCLASS);
+
+                that.element.attr("aria-activedescendant", that._itemId);
             }
 
             that._focused = candidate;
