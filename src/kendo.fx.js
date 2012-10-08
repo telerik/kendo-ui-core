@@ -815,6 +815,34 @@
         }
     });
 
+    createEffect("slideIn", {
+        startState: function() {
+            return this._state(true);
+        },
+
+        endState: function() {
+            return this._state(false);
+        },
+
+        _state: function(invert) {
+            var that = this,
+                options = that.options,
+                extender = {},
+                init = this.initDirection(),
+                reverse = options.reverse,
+                offset = init.offset / (options.divisor || 1),
+                value = (invert ? (reverse ? 0 : offset) : (reverse ? -offset : 0)) + PX;
+
+            if (transforms && options.transition !== false) {
+                extender[init.direction.transition] = value;
+            } else {
+                extender[init.direction.property] = value;
+            }
+
+            return extender;
+        }
+    });
+
     createEffect("slideMargin", {
         endState: function() {
             var that = this,
@@ -854,34 +882,6 @@
             element.css("left");
 
             return extend(extender, options.properties);
-        }
-    });
-
-    createEffect("slideIn", {
-        startState: function() {
-            return this._state(true);
-        },
-
-        endState: function() {
-            return this._state(false);
-        },
-
-        _state: function(invert) {
-            var that = this,
-                options = that.options,
-                extender = {},
-                init = this.initDirection(),
-                reverse = options.reverse,
-                offset = init.offset,
-                value = (invert ? (reverse ? 0 : offset) : (reverse ? -offset : 0)) + PX;
-
-            if (transforms && options.transition !== false) {
-                extender[init.direction.transition] = value;
-            } else {
-                extender[init.direction.property] = value;
-            }
-
-            return extender;
         }
     });
 
