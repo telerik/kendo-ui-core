@@ -65,11 +65,11 @@ public class TimePickerTag extends WidgetTag /* interfaces */implements Animatio
         setProperty("format", value);
     }
 
-    public int getInterval() {
-        return (int)getProperty("interval");
+    public float getInterval() {
+        return (float)getProperty("interval");
     }
 
-    public void setInterval(int value) {
+    public void setInterval(float value) {
         setProperty("interval", value);
     }
 

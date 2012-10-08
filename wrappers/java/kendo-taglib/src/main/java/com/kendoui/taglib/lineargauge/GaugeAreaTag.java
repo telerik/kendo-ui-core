@@ -45,27 +45,27 @@ public class GaugeAreaTag extends BaseTag /* interfaces */implements Border/* in
         setProperty("border", value.properties());
     }
 
-    public int getHeight() {
-        return (int)getProperty("height");
+    public float getHeight() {
+        return (float)getProperty("height");
     }
 
-    public void setHeight(int value) {
+    public void setHeight(float value) {
         setProperty("height", value);
     }
 
-    public int getMargin() {
-        return (int)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(int value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
-    public int getWidth() {
-        return (int)getProperty("width");
+    public float getWidth() {
+        return (float)getProperty("width");
     }
 
-    public void setWidth(int value) {
+    public void setWidth(float value) {
         setProperty("width", value);
     }
 

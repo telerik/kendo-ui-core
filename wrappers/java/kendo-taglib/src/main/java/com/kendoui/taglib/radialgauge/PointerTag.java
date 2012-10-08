@@ -53,11 +53,11 @@ public class PointerTag extends BaseTag /* interfaces */implements Cap/* interfa
         setProperty("color", value);
     }
 
-    public int getValue() {
-        return (int)getProperty("value");
+    public float getValue() {
+        return (float)getProperty("value");
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         setProperty("value", value);
     }
 

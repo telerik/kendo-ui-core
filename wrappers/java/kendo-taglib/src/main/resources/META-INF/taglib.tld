@@ -38,7 +38,7 @@
             <description>Specifies the delay in ms after which the AutoComplete will start filtering the dataSource.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -59,7 +59,7 @@
             <description>Sets the height of the drop-down list in pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -81,7 +81,7 @@
 the dataSource.</description>
             <name>minLength</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -339,7 +339,7 @@ and is about to render it.</description>
             <description>Specifies the delay in ms after which the ComboBox will start filtering dataSource.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -360,7 +360,7 @@ and is about to render it.</description>
             <description>Define the height of the drop-down list in pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -381,14 +381,14 @@ and is about to render it.</description>
             <description>Defines the initial selected item.</description>
             <name>index</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>Specifies the minimum characters that should be typed before the ComboBox activates</description>
             <name>minLength</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -591,7 +591,7 @@ settings are available for the</description>
             <description>Specifies the interval, between values in the popup list, in minutes.</description>
             <name>interval</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -686,7 +686,7 @@ The following settings are available for the</description>
             <description>Specifies the delay in ms before the search text typed by the end user is cleared.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -700,7 +700,7 @@ The following settings are available for the</description>
             <description>Define the height of the drop-down list in pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -714,7 +714,7 @@ The following settings are available for the</description>
             <description>Defines the initial selected item.</description>
             <name>index</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1085,7 +1085,7 @@ its sub menus to the left.</description>
             <description>Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.</description>
             <name>hoverDelay</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1165,7 +1165,7 @@ its sub menus to the left.</description>
             <description>Specifies the number precision. If not set precision defined by current culture is used.</description>
             <name>decimals</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1186,14 +1186,14 @@ its sub menus to the left.</description>
             <description>Specifies the largest value the user can enter.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>Specifies the smallest value the user can enter.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1214,7 +1214,7 @@ its sub menus to the left.</description>
             <description>Specifies the increment/decrement step.</description>
             <name>step</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1228,7 +1228,7 @@ its sub menus to the left.</description>
             <description>Specifies the value of the NumericTextBox widget.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1282,7 +1282,7 @@ its sub menus to the left.</description>
             <description>Defines the number of buttons displayed in the numeric pager.</description>
             <name>buttonCount</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1447,14 +1447,14 @@ its sub menus to the left.</description>
             <description>The width of the range indicators.</description>
             <name>rangeSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The distance from the range indicators to the ticks.</description>
             <name>rangeDistance</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1485,21 +1485,21 @@ its sub menus to the left.</description>
 handle must be focused). Note: The allied largeStep will also set large tick for every large step.</description>
             <name>largeStep</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum value of the</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum value of the</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1514,21 +1514,21 @@ The orientation of a</description>
             <description>The selection end value of the</description>
             <name>selectionEnd</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The selection start value of the</description>
             <name>selectionStart</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The small step value of the</description>
             <name>smallStep</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1597,21 +1597,21 @@ The orientation of a</description>
 handle must be focused). Note: The allied largeStep will also set large tick for every large step.</description>
             <name>largeStep</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum value of the</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum value of the</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1632,7 +1632,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <description>The small step value of the</description>
             <name>smallStep</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1646,7 +1646,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <description>The underlying value of the</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1873,7 +1873,7 @@ tab.</description>
             <description>Specifies the interval, between values in the popup list, in minutes.</description>
             <name>interval</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2166,28 +2166,28 @@ Cancelling the event will prevent the upload.</description>
             <description>The maximum height (in pixels) that may be achieved by resizing the window.</description>
             <name>maxHeight</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum width (in pixels) that may be achieved by resizing the window.</description>
             <name>maxWidth</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum height (in pixels) that may be achieved by resizing the window.</description>
             <name>minHeight</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum width (in pixels) that may be achieved by resizing the window.</description>
             <name>minWidth</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2324,7 +2324,7 @@ has been clicked on a window with static content.</description>
             <description>Category index at which the first value axis crosses this axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2414,14 +2414,14 @@ between subsequent categories. Available options:</description>
             <description>The margin of the title.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the title.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2466,28 +2466,28 @@ This is the entire visible area of the chart.</description>
             <description>The background opacity of the chart area.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The height of the chart area.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The margin of the chart area.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The width of the chart area.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -2510,7 +2510,7 @@ This is the entire visible area of the chart.</description>
             <description>The margin of the legend.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2519,7 +2519,7 @@ For instance, a value of 20 will move the legend 20 pixels to the right of it's 
 to the left of the current position.</description>
             <name>offsetX</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2528,14 +2528,14 @@ For instance, a value of 20 will move the legend 20 pixels down from it's initia
 upwards from the current position.</description>
             <name>offsetY</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the legend.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2572,14 +2572,14 @@ upwards from the current position.</description>
             <description>The background opacity of the plot area.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The margin of the plot area.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -2632,7 +2632,7 @@ upwards from the current position.</description>
             <description>The padding of the tooltip.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2678,7 +2678,7 @@ The default baseUnit is determined automatically from the value range. Available
             <description>The interval between major divisions in base units.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2686,7 +2686,7 @@ The default baseUnit is determined automatically from the value range. Available
 It defaults to 1/5th of the majorUnit.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
 
@@ -2703,14 +2703,14 @@ It defaults to 1/5th of the majorUnit.</description>
             <description>The distance between category clusters.</description>
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>Space between bars.</description>
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2733,7 +2733,7 @@ It defaults to 1/5th of the majorUnit.</description>
             <description>Value at which the category axis crosses this axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2748,7 +2748,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
             <description>The interval between major divisions.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2756,7 +2756,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
 This is often used in combination with the</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2764,7 +2764,7 @@ This is often used in combination with the</description>
 This is often used in combination with the</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2772,7 +2772,7 @@ This is often used in combination with the</description>
 It defaults to 1/5th of the majorUnit.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2831,7 +2831,7 @@ values increase from right to left and from top to bottom.</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2847,14 +2847,14 @@ mirroring the axis will render them to the right.</description>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The rotation angle of the labels.</description>
             <name>rotation</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2862,7 +2862,7 @@ mirroring the axis will render them to the right.</description>
 Skips rendering the first n labels.</description>
             <name>skip</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2870,7 +2870,7 @@ Skips rendering the first n labels.</description>
 Every n-th label is rendered where n is the step</description>
             <name>step</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2922,7 +2922,7 @@ Every n-th label is rendered where n is the step</description>
 not the grid lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -2960,7 +2960,7 @@ body of the chart.</description>
             <description>The width of the lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -2977,7 +2977,7 @@ body of the chart.</description>
 on the chart.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3023,7 +3023,7 @@ rgb.</description>
             <description>The width of the lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3040,7 +3040,7 @@ rgb.</description>
 on the chart.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3085,7 +3085,7 @@ hex and rgb.</description>
             <description>The margin of the title.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3099,7 +3099,7 @@ hex and rgb.</description>
             <description>The rotation angle of the title.</description>
             <name>rotation</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3143,7 +3143,7 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3174,7 +3174,7 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3204,7 +3204,7 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3234,7 +3234,7 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3264,7 +3264,7 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3327,7 +3327,7 @@ Template variables:
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3389,7 +3389,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The series opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3417,14 +3417,14 @@ The function return value is displayed instead of the individual points.</descri
             <description>The distance between category clusters.</description>
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>Space between bars.</description>
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3438,14 +3438,14 @@ The function return value is displayed instead of the individual points.</descri
             <description>The max size of the bubble.</description>
             <name>maxSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The min size of the bubble.</description>
             <name>minSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3502,7 +3502,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The the size of the donut hole.</description>
             <name>holeSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3510,28 +3510,28 @@ The function return value is displayed instead of the individual points.</descri
 (not available for the last level of the series).</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding around the donut chart (equal on all sides).</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The size of the series.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The start angle of the first donut segment.</description>
             <name>startAngle</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3638,14 +3638,14 @@ The function return value is displayed instead of the individual points.</descri
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3673,7 +3673,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The distance of the labels.</description>
             <name>distance</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3703,7 +3703,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3726,7 +3726,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The line opacity of the area chart.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3756,7 +3756,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The marker size.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3814,7 +3814,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The padding of the tooltip.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3891,14 +3891,14 @@ Template variables:</description>
             <description>The padding between the connector line and the label, and connector line and donut chart.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The width of the connector line.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3928,7 +3928,7 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3951,7 +3951,7 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3974,7 +3974,7 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -3997,7 +3997,7 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4043,7 +4043,7 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4090,14 +4090,14 @@ labels</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4148,7 +4148,7 @@ labels</description>
             <description>The padding of the tooltip.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4193,7 +4193,7 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4216,7 +4216,7 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4261,7 +4261,7 @@ hex and rgb</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4277,14 +4277,14 @@ mirroring the axis will render them to the right.</description>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The rotation angle of the labels.</description>
             <name>rotation</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4292,7 +4292,7 @@ mirroring the axis will render them to the right.</description>
 Skips rendering the first n labels.</description>
             <name>skip</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4300,7 +4300,7 @@ Skips rendering the first n labels.</description>
 Every n-th label is rendered where n is the step</description>
             <name>step</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4346,7 +4346,7 @@ not the grid lines.</description>
 not the grid lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4377,7 +4377,7 @@ body of the chart.</description>
             <description>The width of the lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4393,7 +4393,7 @@ body of the chart.</description>
             <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4437,7 +4437,7 @@ body of the chart.</description>
             <description>The width of the lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4453,7 +4453,7 @@ body of the chart.</description>
             <description>The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4498,14 +4498,14 @@ hex and rgb.</description>
             <description>The margin of the title.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the title.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4519,7 +4519,7 @@ hex and rgb.</description>
             <description>The rotation angle of the title.</description>
             <name>rotation</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4564,7 +4564,7 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4594,7 +4594,7 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4779,7 +4779,7 @@ the minimum and maximum values.</description>
             <description>Defines the number of records which will be displyed.</description>
             <name>pageSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4800,7 +4800,7 @@ the minimum and maximum values.</description>
             <description>Defines the number of buttons displayed in the numeric pager.</description>
             <name>buttonCount</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5053,21 +5053,21 @@ This is the entire visible area of the gauge.</description>
             <description>The height of the gauge area.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The margin of the gauge area.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The width of the gauge area.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5090,7 +5090,7 @@ This is the entire visible area of the gauge.</description>
             <description>The margin of the pointer.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5098,7 +5098,7 @@ This is the entire visible area of the gauge.</description>
 Any valid CSS color string will work here, including hex and rgb.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5112,14 +5112,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The size of the pointer.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The value of the gauge.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5135,28 +5135,28 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The interval between major divisions.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum value of the scale.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum value of the scale.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The interval between minor divisions.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5208,7 +5208,7 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5239,7 +5239,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5263,14 +5263,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The opacity of the track.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The size of the track.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5307,7 +5307,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5353,14 +5353,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5392,7 +5392,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5406,7 +5406,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the major ticks.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5431,7 +5431,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5445,7 +5445,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the minor ticks.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5475,7 +5475,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5597,7 +5597,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The number of milliseconds used for the visual animation when a</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5620,7 +5620,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The number of milliseconds used for the visual animation when an item is opened.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5667,21 +5667,21 @@ This is the entire visible area of the gauge.</description>
             <description>The height of the gauge area.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The margin of the gauge area.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The width of the gauge area.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5705,7 +5705,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The value of the gauge.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5722,35 +5722,35 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)</description>
             <name>endAngle</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The interval between major divisions.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum value of the scale.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum value of the scale.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The interval between minor divisions.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5765,7 +5765,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)</description>
             <name>startAngle</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5795,7 +5795,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5819,7 +5819,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The size of the cap in percents. (from 0 to 1)</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5865,14 +5865,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5910,7 +5910,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5925,7 +5925,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The width of the major ticks.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5950,7 +5950,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5964,7 +5964,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the minor ticks.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5994,7 +5994,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -6158,7 +6158,7 @@ value must not exceed</description>
             <description>The number of milliseconds used for the visual animation when the current tab is closed.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -6182,7 +6182,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <description>The number of milliseconds used for the visual animation when a new tab is shown.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -6231,7 +6231,7 @@ Setting this option to</description>
             <description>The number of milliseconds used for the animation when a node is expanded.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -6255,7 +6255,7 @@ Setting this option to</description>
 node is expanded.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>

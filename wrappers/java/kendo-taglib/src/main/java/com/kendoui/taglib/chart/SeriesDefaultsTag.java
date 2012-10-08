@@ -55,19 +55,19 @@ public class SeriesDefaultsTag extends BaseTag /* interfaces */implements Border
         setProperty("tooltip", value.properties());
     }
 
-    public int getGap() {
-        return (int)getProperty("gap");
+    public float getGap() {
+        return (float)getProperty("gap");
     }
 
-    public void setGap(int value) {
+    public void setGap(float value) {
         setProperty("gap", value);
     }
 
-    public int getSpacing() {
-        return (int)getProperty("spacing");
+    public float getSpacing() {
+        return (float)getProperty("spacing");
     }
 
-    public void setSpacing(int value) {
+    public void setSpacing(float value) {
         setProperty("spacing", value);
     }
 

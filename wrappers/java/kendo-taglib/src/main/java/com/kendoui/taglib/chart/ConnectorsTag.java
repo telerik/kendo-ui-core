@@ -48,19 +48,19 @@ public class ConnectorsTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("color", value);
     }
 
-    public int getPadding() {
-        return (int)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(int value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 
-    public int getWidth() {
-        return (int)getProperty("width");
+    public float getWidth() {
+        return (float)getProperty("width");
     }
 
-    public void setWidth(int value) {
+    public void setWidth(float value) {
         setProperty("width", value);
     }
 

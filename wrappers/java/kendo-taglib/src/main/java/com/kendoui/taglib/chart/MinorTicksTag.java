@@ -40,11 +40,11 @@ public class MinorTicksTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
-    public int getSize() {
-        return (int)getProperty("size");
+    public float getSize() {
+        return (float)getProperty("size");
     }
 
-    public void setSize(int value) {
+    public void setSize(float value) {
         setProperty("size", value);
     }
 

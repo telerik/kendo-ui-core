@@ -40,11 +40,11 @@ public class ExpandTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
-    public int getDuration() {
-        return (int)getProperty("duration");
+    public float getDuration() {
+        return (float)getProperty("duration");
     }
 
-    public void setDuration(int value) {
+    public void setDuration(float value) {
         setProperty("duration", value);
     }
 

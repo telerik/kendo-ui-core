@@ -78,35 +78,35 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation/* 
         setProperty("iframe", value);
     }
 
-    public int getMaxHeight() {
-        return (int)getProperty("maxHeight");
+    public float getMaxHeight() {
+        return (float)getProperty("maxHeight");
     }
 
-    public void setMaxHeight(int value) {
+    public void setMaxHeight(float value) {
         setProperty("maxHeight", value);
     }
 
-    public int getMaxWidth() {
-        return (int)getProperty("maxWidth");
+    public float getMaxWidth() {
+        return (float)getProperty("maxWidth");
     }
 
-    public void setMaxWidth(int value) {
+    public void setMaxWidth(float value) {
         setProperty("maxWidth", value);
     }
 
-    public int getMinHeight() {
-        return (int)getProperty("minHeight");
+    public float getMinHeight() {
+        return (float)getProperty("minHeight");
     }
 
-    public void setMinHeight(int value) {
+    public void setMinHeight(float value) {
         setProperty("minHeight", value);
     }
 
-    public int getMinWidth() {
-        return (int)getProperty("minWidth");
+    public float getMinWidth() {
+        return (float)getProperty("minWidth");
     }
 
-    public void setMinWidth(int value) {
+    public void setMinWidth(float value) {
         setProperty("minWidth", value);
     }
 

@@ -65,11 +65,11 @@ public class MenuTag extends WidgetTag /* interfaces */implements Animation/* in
         setProperty("direction", value);
     }
 
-    public int getHoverDelay() {
-        return (int)getProperty("hoverDelay");
+    public float getHoverDelay() {
+        return (float)getProperty("hoverDelay");
     }
 
-    public void setHoverDelay(int value) {
+    public void setHoverDelay(float value) {
         setProperty("hoverDelay", value);
     }
 

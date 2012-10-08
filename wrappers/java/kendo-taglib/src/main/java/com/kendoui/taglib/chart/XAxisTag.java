@@ -61,27 +61,27 @@ public class XAxisTag extends BaseTag /* interfaces */implements Labels/* interf
         setProperty("baseUnit", value);
     }
 
-    public int getMajorUnit() {
-        return (int)getProperty("majorUnit");
+    public float getMajorUnit() {
+        return (float)getProperty("majorUnit");
     }
 
-    public void setMajorUnit(int value) {
+    public void setMajorUnit(float value) {
         setProperty("majorUnit", value);
     }
 
-    public int getMinorUnit() {
-        return (int)getProperty("minorUnit");
+    public float getMinorUnit() {
+        return (float)getProperty("minorUnit");
     }
 
-    public void setMinorUnit(int value) {
+    public void setMinorUnit(float value) {
         setProperty("minorUnit", value);
     }
 
-    public int get() {
-        return (int)getProperty("");
+    public float get() {
+        return (float)getProperty("");
     }
 
-    public void set(int value) {
+    public void set(float value) {
         setProperty("", value);
     }
 

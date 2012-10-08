@@ -160,8 +160,8 @@ public class <%= type %> extends BaseTag /* interfaces */ /* interfaces */ {
 })
 
 JS_TO_JAVA_TYPES = {
-    'Number' => 'int',
-    'number' => 'int',
+    'Number' => 'float',
+    'number' => 'float',
     'String' => 'java.lang.String',
     'string' => 'java.lang.String',
     'Boolean' => 'boolean',

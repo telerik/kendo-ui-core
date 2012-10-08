@@ -55,35 +55,35 @@ public class ScaleTag extends BaseTag /* interfaces */implements Labels, MajorTi
         setProperty("minorticks", value.properties());
     }
 
-    public int getMajorUnit() {
-        return (int)getProperty("majorUnit");
+    public float getMajorUnit() {
+        return (float)getProperty("majorUnit");
     }
 
-    public void setMajorUnit(int value) {
+    public void setMajorUnit(float value) {
         setProperty("majorUnit", value);
     }
 
-    public int getMax() {
-        return (int)getProperty("max");
+    public float getMax() {
+        return (float)getProperty("max");
     }
 
-    public void setMax(int value) {
+    public void setMax(float value) {
         setProperty("max", value);
     }
 
-    public int getMin() {
-        return (int)getProperty("min");
+    public float getMin() {
+        return (float)getProperty("min");
     }
 
-    public void setMin(int value) {
+    public void setMin(float value) {
         setProperty("min", value);
     }
 
-    public int getMinorUnit() {
-        return (int)getProperty("minorUnit");
+    public float getMinorUnit() {
+        return (float)getProperty("minorUnit");
     }
 
-    public void setMinorUnit(int value) {
+    public void setMinorUnit(float value) {
         setProperty("minorUnit", value);
     }
 

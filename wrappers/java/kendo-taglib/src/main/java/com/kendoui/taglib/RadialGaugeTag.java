@@ -57,19 +57,19 @@ public class RadialGaugeTag extends WidgetTag /* interfaces */implements GaugeAr
         setProperty("scale", value.properties());
     }
 
-    public int getRangeSize() {
-        return (int)getProperty("rangeSize");
+    public float getRangeSize() {
+        return (float)getProperty("rangeSize");
     }
 
-    public void setRangeSize(int value) {
+    public void setRangeSize(float value) {
         setProperty("rangeSize", value);
     }
 
-    public int getRangeDistance() {
-        return (int)getProperty("rangeDistance");
+    public float getRangeDistance() {
+        return (float)getProperty("rangeDistance");
     }
 
-    public void setRangeDistance(int value) {
+    public void setRangeDistance(float value) {
         setProperty("rangeDistance", value);
     }
 

@@ -77,11 +77,11 @@ public class TooltipTag extends BaseTag /* interfaces */implements Border/* inte
         setProperty("format", value);
     }
 
-    public int getPadding() {
-        return (int)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(int value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 

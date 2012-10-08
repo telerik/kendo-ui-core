@@ -57,11 +57,11 @@ public class PagerTag extends WidgetTag /* interfaces */implements Messages, Dat
         setProperty("autoBind", value);
     }
 
-    public int getButtonCount() {
-        return (int)getProperty("buttonCount");
+    public float getButtonCount() {
+        return (float)getProperty("buttonCount");
     }
 
-    public void setButtonCount(int value) {
+    public void setButtonCount(float value) {
         setProperty("buttonCount", value);
     }
 

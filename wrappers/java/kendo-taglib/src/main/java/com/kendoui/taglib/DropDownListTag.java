@@ -86,11 +86,11 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements Animat
         setProperty("dataValueField", value);
     }
 
-    public int getDelay() {
-        return (int)getProperty("delay");
+    public float getDelay() {
+        return (float)getProperty("delay");
     }
 
-    public void setDelay(int value) {
+    public void setDelay(float value) {
         setProperty("delay", value);
     }
 
@@ -102,11 +102,11 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements Animat
         setProperty("enable", value);
     }
 
-    public int getHeight() {
-        return (int)getProperty("height");
+    public float getHeight() {
+        return (float)getProperty("height");
     }
 
-    public void setHeight(int value) {
+    public void setHeight(float value) {
         setProperty("height", value);
     }
 
@@ -118,11 +118,11 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements Animat
         setProperty("ignoreCase", value);
     }
 
-    public int getIndex() {
-        return (int)getProperty("index");
+    public float getIndex() {
+        return (float)getProperty("index");
     }
 
-    public void setIndex(int value) {
+    public void setIndex(float value) {
         setProperty("index", value);
     }
 

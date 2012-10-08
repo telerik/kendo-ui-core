@@ -128,11 +128,11 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
         setProperty("missingValues", value);
     }
 
-    public int getOpacity() {
-        return (int)getProperty("opacity");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setOpacity(int value) {
+    public void setOpacity(float value) {
         setProperty("opacity", value);
     }
 
@@ -160,19 +160,19 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
         setProperty("colorField", value);
     }
 
-    public int getGap() {
-        return (int)getProperty("gap");
+    public float getGap() {
+        return (float)getProperty("gap");
     }
 
-    public void setGap(int value) {
+    public void setGap(float value) {
         setProperty("gap", value);
     }
 
-    public int getSpacing() {
-        return (int)getProperty("spacing");
+    public float getSpacing() {
+        return (float)getProperty("spacing");
     }
 
-    public void setSpacing(int value) {
+    public void setSpacing(float value) {
         setProperty("spacing", value);
     }
 
@@ -184,19 +184,19 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
         setProperty("categoryField", value);
     }
 
-    public int getMaxSize() {
-        return (int)getProperty("maxSize");
+    public float getMaxSize() {
+        return (float)getProperty("maxSize");
     }
 
-    public void setMaxSize(int value) {
+    public void setMaxSize(float value) {
         setProperty("maxSize", value);
     }
 
-    public int getMinSize() {
-        return (int)getProperty("minSize");
+    public float getMinSize() {
+        return (float)getProperty("minSize");
     }
 
-    public void setMinSize(int value) {
+    public void setMinSize(float value) {
         setProperty("minSize", value);
     }
 
@@ -256,43 +256,43 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
         setProperty("explodeField", value);
     }
 
-    public int getHoleSize() {
-        return (int)getProperty("holeSize");
+    public float getHoleSize() {
+        return (float)getProperty("holeSize");
     }
 
-    public void setHoleSize(int value) {
+    public void setHoleSize(float value) {
         setProperty("holeSize", value);
     }
 
-    public int getMargin() {
-        return (int)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(int value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
-    public int getPadding() {
-        return (int)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(int value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 
-    public int getSize() {
-        return (int)getProperty("size");
+    public float getSize() {
+        return (float)getProperty("size");
     }
 
-    public void setSize(int value) {
+    public void setSize(float value) {
         setProperty("size", value);
     }
 
-    public int getStartAngle() {
-        return (int)getProperty("startAngle");
+    public float getStartAngle() {
+        return (float)getProperty("startAngle");
     }
 
-    public void setStartAngle(int value) {
+    public void setStartAngle(float value) {
         setProperty("startAngle", value);
     }
 

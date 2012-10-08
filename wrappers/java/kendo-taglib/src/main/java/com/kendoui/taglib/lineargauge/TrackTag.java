@@ -53,19 +53,19 @@ public class TrackTag extends BaseTag /* interfaces */implements Border/* interf
         setProperty("color", value);
     }
 
-    public int getOpacity() {
-        return (int)getProperty("opacity");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setOpacity(int value) {
+    public void setOpacity(float value) {
         setProperty("opacity", value);
     }
 
-    public int getSize() {
-        return (int)getProperty("size");
+    public float getSize() {
+        return (float)getProperty("size");
     }
 
-    public void setSize(int value) {
+    public void setSize(float value) {
         setProperty("size", value);
     }
 

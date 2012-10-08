@@ -77,19 +77,19 @@ public class LabelsTag extends BaseTag /* interfaces */implements Border/* inter
         setProperty("format", value);
     }
 
-    public int getMargin() {
-        return (int)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(int value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
-    public int getPadding() {
-        return (int)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(int value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 

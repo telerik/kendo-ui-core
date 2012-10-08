@@ -44,7 +44,7 @@
 
         <kendo:chart name="myChart">
         	<kendo:chart-title text="Foo">
-       			<kendo:chart-title-border color="#ff0000" width="1"/>
+       			<kendo:chart-title-border color="#ff0000" width="1.5"/>
         	</kendo:chart-title>
         </kendo:chart>
         

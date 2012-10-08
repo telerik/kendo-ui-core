@@ -75,11 +75,11 @@ public class CategoryAxisTag extends BaseTag /* interfaces */implements Labels, 
         setProperty("title", value.properties());
     }
 
-    public int getAxisCrossingValue() {
-        return (int)getProperty("axisCrossingValue");
+    public float getAxisCrossingValue() {
+        return (float)getProperty("axisCrossingValue");
     }
 
-    public void setAxisCrossingValue(int value) {
+    public void setAxisCrossingValue(float value) {
         setProperty("axisCrossingValue", value);
     }
 

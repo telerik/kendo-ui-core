@@ -56,11 +56,11 @@ public class BorderTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("dashType", value);
     }
 
-    public int getWidth() {
-        return (int)getProperty("width");
+    public float getWidth() {
+        return (float)getProperty("width");
     }
 
-    public void setWidth(int value) {
+    public void setWidth(float value) {
         setProperty("width", value);
     }
 

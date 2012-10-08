@@ -65,27 +65,27 @@ public class SliderTag extends WidgetTag /* interfaces */implements Tooltip/* in
         setProperty("increaseButtonTitle", value);
     }
 
-    public int getLargeStep() {
-        return (int)getProperty("largeStep");
+    public float getLargeStep() {
+        return (float)getProperty("largeStep");
     }
 
-    public void setLargeStep(int value) {
+    public void setLargeStep(float value) {
         setProperty("largeStep", value);
     }
 
-    public int getMax() {
-        return (int)getProperty("max");
+    public float getMax() {
+        return (float)getProperty("max");
     }
 
-    public void setMax(int value) {
+    public void setMax(float value) {
         setProperty("max", value);
     }
 
-    public int getMin() {
-        return (int)getProperty("min");
+    public float getMin() {
+        return (float)getProperty("min");
     }
 
-    public void setMin(int value) {
+    public void setMin(float value) {
         setProperty("min", value);
     }
 
@@ -105,11 +105,11 @@ public class SliderTag extends WidgetTag /* interfaces */implements Tooltip/* in
         setProperty("showButtons", value);
     }
 
-    public int getSmallStep() {
-        return (int)getProperty("smallStep");
+    public float getSmallStep() {
+        return (float)getProperty("smallStep");
     }
 
-    public void setSmallStep(int value) {
+    public void setSmallStep(float value) {
         setProperty("smallStep", value);
     }
 
@@ -121,11 +121,11 @@ public class SliderTag extends WidgetTag /* interfaces */implements Tooltip/* in
         setProperty("tickPlacement", value);
     }
 
-    public int getValue() {
-        return (int)getProperty("value");
+    public float getValue() {
+        return (float)getProperty("value");
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         setProperty("value", value);
     }
 

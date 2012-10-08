@@ -58,19 +58,19 @@ public class PointerTag extends BaseTag /* interfaces */implements Border, Track
         setProperty("color", value);
     }
 
-    public int getMargin() {
-        return (int)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(int value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
-    public int getOpacity() {
-        return (int)getProperty("opacity");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setOpacity(int value) {
+    public void setOpacity(float value) {
         setProperty("opacity", value);
     }
 
@@ -82,19 +82,19 @@ public class PointerTag extends BaseTag /* interfaces */implements Border, Track
         setProperty("shape", value);
     }
 
-    public int getSize() {
-        return (int)getProperty("size");
+    public float getSize() {
+        return (float)getProperty("size");
     }
 
-    public void setSize(int value) {
+    public void setSize(float value) {
         setProperty("size", value);
     }
 
-    public int getValue() {
-        return (int)getProperty("value");
+    public float getValue() {
+        return (float)getProperty("value");
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         setProperty("value", value);
     }
 
