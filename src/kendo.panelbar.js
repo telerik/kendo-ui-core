@@ -48,10 +48,10 @@
 
         templates = {
             content: template(
-                "<div class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
+                "<div role='region' class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
             ),
             group: template(
-                "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+                "<ul role='group' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
                     "#= renderItems(data) #" +
                 "</ul>"
             ),
@@ -62,7 +62,7 @@
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li role='tab' class='#= wrapperCssClass(group, item) #'>" +
+                "<li role='listitem' class='#= wrapperCssClass(group, item) #'>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
@@ -141,7 +141,7 @@
         };
 
     function updateItemClasses (item, panelElement) {
-        item = $(item).addClass("k-item").attr("role", "tab");
+        item = $(item).addClass("k-item").attr("role", "listitem");
 
         item
             .children(IMG)
@@ -167,6 +167,7 @@
         item
             .find(">div")
             .addClass(CONTENT)
+            .attr("role", "region")
             .css({ display: "none" });
 
         item.each(function() {
@@ -248,7 +249,7 @@
                 .on("blur" + NS, function() {
                     that._current(null);
                 })
-                .attr("role", "tablist");
+                .attr("role", "list");
 
             if (options.contentUrls) {
                 element.find("> .k-item")
@@ -690,6 +691,7 @@
                                         return $(this).parentsUntil(".k-panelbar", "div").length;
                                     })
                                 .addClass("k-group k-panel")
+                                .attr("role", "group")
                                 .add(that.element);
 
             var items = panels

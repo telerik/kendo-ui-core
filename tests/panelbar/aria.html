@@ -42,30 +42,63 @@
         });
 
         test("PanelBar sets role to the wrapper", function() {
-            equal(ul.attr("role"), "tablist");
+            equal(ul.attr("role"), "list");
         });
 
         test("PanelBar adds tab role to the panelbar items", function() {
             addItems(2);
 
             var items = ul.find(".k-item");
-            equal(items.eq(0).attr("role"), "tab");
-            equal(items.eq(1).attr("role"), "tab");
+            equal(items.eq(0).attr("role"), "listitem");
+            equal(items.eq(1).attr("role"), "listitem");
         });
 
         test("PanelBar adds tab role to items during init", function() {
             var panel = $("<ul id='test'><li>Test</li></ul>").kendoPanelBar();
 
             var items = panel.find(".k-item");
-            equal(items.eq(0).attr("role"), "tab");
+            equal(items.eq(0).attr("role"), "listitem");
         });
 
         test("PanelBar adds tab role to the added items", function() {
             addItems(2);
 
             var items = ul.find(".k-item");
-            equal(items.eq(0).attr("role"), "tab");
-            equal(items.eq(1).attr("role"), "tab");
+            equal(items.eq(0).attr("role"), "listitem");
+            equal(items.eq(1).attr("role"), "listitem");
+        });
+
+        test("PanelBar adds role group to the k-group elements", function() {
+            addItems(2);
+            addItems(2, ul.find(".k-item:first"));
+
+            var items = ul.find(".k-group");
+            equal(items.eq(0).attr("role"), "group");
+        });
+
+        test("PanelBar adds role 'region' to the .k-content elements", function() {
+            addItems(2);
+            panelbar.append({
+                text: "test",
+                content: "text"
+            });
+
+            var items = ul.find(".k-content");
+            equal(items.eq(0).attr("role"), "region");
+        });
+
+        test("PanelBar adds role region during init", function() {
+            var panel = $("<ul id='test'><li>Test</li><li>hi<div>content</div></li></ul>").kendoPanelBar();
+
+            var items = panel.find(".k-content");
+            equal(items.eq(0).attr("role"), "region");
+        });
+
+        test("PanelBar adds role group during init", function() {
+            var panel = $("<ul id='test'><li>Test<ul><li>Inner item</li></ul></li></ul>").kendoPanelBar();
+
+            var items = panel.find(".k-group");
+            equal(items.eq(0).attr("role"), "group");
         });
 
     </script>
