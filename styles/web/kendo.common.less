@@ -217,11 +217,29 @@ html body .k-button-bare
 
 @grid-size: 16px;
 
-.sprite-position(@row: 0, @column: 0) {
+// outputs background-position
+.sprite-position(@row, @column) when (ispixel(@column)) {
+    background-position: @row @column;
+}
+
+// outputs background-position in a grid
+.sprite-position(@row, @column) when not (ispixel(@column)) {
     background-position: (-@row * @grid-size) (-@column * @grid-size);
 }
 
-.sprite-hoverable(@row, @column) {
+// outputs background-position and hover state background position
+.sprite-hoverable(@row, @column, @grid-size: 16px) when (ispixel(@column)) {
+    .sprite-position(@row, @column);
+
+    .k-state-hover &,
+    .k-button:hover &,
+    .k-button:active & {
+        .sprite-position(@row - @grid-size, @column);
+    }
+}
+
+// outputs background-position and hover state background position, aligned in a grid
+.sprite-hoverable(@row, @column) when not (ispixel(@column)) {
     .sprite-position(@row, @column);
 
     .k-state-hover &,
@@ -266,9 +284,9 @@ html body .k-button-bare
 .k-i-seek-s { .sprite-hoverable(0, 6); }
 .k-i-seek-w { .sprite-hoverable(0, 7); }
 
-.k-si-arrow-n { background-position: 0 -129px; }
+.k-si-arrow-n { .sprite-hoverable(0, -129px); }
 .k-si-arrow-e { .sprite-hoverable(0, 9); }
-.k-si-arrow-s { background-position: 0 -159px; }
+.k-si-arrow-s { .sprite-hoverable(0, -159px); }
 .k-si-arrow-w { .sprite-hoverable(0, 11); }
 
 .k-i-arrowhead-n { .sprite-hoverable(0, 16); }
@@ -301,7 +319,7 @@ html body .k-button-bare
 .k-si-minus { .sprite-hoverable(2, 14); }
 
 .k-i-search { .sprite-hoverable(2, 15); }
-.k-i-custom { background-position: -115px -113px; }
+.k-i-custom { .sprite-hoverable(-115px, -113px, 26); }
 .k-editor .k-i-custom { background-position: -112px -110px; }
 .k-viewHtml { background-position: -112px -132px; }
 
@@ -3403,9 +3421,9 @@ html .k-upload
 }
 
 .k-retry { background-position: -164px -132px; }
-.k-si-refresh { background-position: -160px -128px; }
-.k-si-tick, .k-success { background-position: -160px -96px; }
-.k-si-cancel { background-position: -160px -112px; }
+.k-si-refresh { .sprite-hoverable(10, 8); }
+.k-si-tick, .k-success { .sprite-hoverable(10, 6); }
+.k-si-cancel { .sprite-hoverable(10, 7); }
 
 .k-filename
 {
