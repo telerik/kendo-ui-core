@@ -5,14 +5,14 @@ TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 
 MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md')
 
-TLD_EVENT_TEMPLATE = ERB.new(%{
+XML_EVENT_ATTRIBUTE_TEMPLATE = ERB.new(%{
         <attribute>
             <description><%= description %></description>
             <name><%= name %></name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>})
 
-TLD_OPTION_TEMPLATE = ERB.new(%{
+XML_OPTION_TEMPLATE = ERB.new(%{
 <% if (name != '') %>
         <attribute>
             <description><%= description %></description>
@@ -23,7 +23,7 @@ TLD_OPTION_TEMPLATE = ERB.new(%{
 <% end %>
 }, 0, '<>')
 
-TLD_WIDGET_TAG_TEMPLATE = ERB.new(%{
+XML_WIDGET_TAG_TEMPLATE = ERB.new(%{
     <tag>
         <description><%= name %></description>
         <name><%= name.camelize %></name>
@@ -40,7 +40,7 @@ TLD_WIDGET_TAG_TEMPLATE = ERB.new(%{
     </tag>
         })
 
-TLD_EVENT_TAG_TEMPLATE = ERB.new(%{
+XML_EVENT_TAG_TEMPLATE = ERB.new(%{
     <tag>
         <description>Subscribes to an event of the <%= name %> widget</description>
         <name><%= name.camelize %>-event</name>
@@ -56,7 +56,7 @@ TLD_EVENT_TAG_TEMPLATE = ERB.new(%{
     </tag>
 })
 
-TLD_NESTED_TAG_TEMPLATE = ERB.new(%{
+XML_NESTED_TAG_TEMPLATE = ERB.new(%{
     <tag>
         <description><%= description %></description>
         <name><%= tag_name %></name>
@@ -177,45 +177,45 @@ JAVA_DATASOURCE_SETTER = %{
     }
 }
 
-JAVA_EVENT_GETTER = ERB.new(%{
+JAVA_EVENT_GETTER_TEMPLATE = ERB.new(%{
     public String get<%= name.sub(/^./) { |c| c.capitalize } %>() {
         return ((Function)getProperty("<%= name %>")).getBody();
     }
 })
 
-JAVA_OPTION_GETTER = ERB.new(%{
+JAVA_OPTION_GETTER_TEMPLATE = ERB.new(%{
     public <%= type.sub('java.lang.', '') %> get<%= name.sub(/^./) { |c| c.capitalize } %>() {
         return (<%= type.sub('java.lang.', '') %>)getProperty("<%= name %>");
     }
 })
 
-JAVA_EVENT_SETTER = ERB.new(%{
+JAVA_EVENT_SETTER_TEMPLATE = ERB.new(%{
     public void set<%= name.sub(/^./) { |c| c.capitalize } %>(String value) {
         setProperty("<%= name %>", new Function(value));
     }
 })
 
-JAVA_OPTION_SETTER = ERB.new(%{
+JAVA_OPTION_SETTER_TEMPLATE = ERB.new(%{
     public void set<%= name.sub(/^./) { |c| c.capitalize } %>(<%= type.sub('java.lang.', '') %> value) {
         setProperty("<%= name %>", value);
     }
 })
 
-JAVA_NESTED_TAG_SETTER = ERB.new(%{
+JAVA_NESTED_TAG_SETTER_TEMPLATE = ERB.new(%{
     @Override
     public void set<%= child.name %>(<%= child.type %> value) {
         setProperty("<%= child.name.downcase %>", value.properties());
     }
 })
 
-JAVA_ARRAY_SETTER = ERB.new(%{
+JAVA_ARRAY_SETTER_TEMPLATE = ERB.new(%{
     @Override
     public void set<%= child.name %>(<%= child.type %> value) {
         setProperty("<%= child.name.downcase %>", value.<%= child.name.downcase %>());
     }
 })
 
-JAVA_PARENT_SETTER = ERB.new(%{
+JAVA_PARENT_SETTER_TEMPLATE = ERB.new(%{
         <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
 
         parent.set<%= name %>(this);
@@ -237,19 +237,19 @@ JAVA_ARRAY_DECLARATION_TEMPLATE = ERB.new(%{
     }
 })
 
-JAVA_ARRAY_PARENT_SETTER = ERB.new(%{
+JAVA_ARRAY_PARENT_SETTER_TEMPLATE = ERB.new(%{
         <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
 
         parent.set<%= name %>(this);
 })
 
-JAVA_ARRAY_ADD_TO_PARENT = ERB.new(%{
+JAVA_ARRAY_ADD_TO_PARENT_TEMPLATE = ERB.new(%{
         <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
 
         parent.add<%= name %>(this);
 })
 
-JAVA_ARRAY_ADD_CHILD = ERB.new(%{
+JAVA_ARRAY_ADD_CHILD_TEMPLATE = ERB.new(%{
     @Override
     public void add<%= child.name %>(<%= child.type %> value) {
         <%= name.camelize %>.add(value.properties());
@@ -281,13 +281,13 @@ class Event
     end
 
     def to_xml
-        TLD_EVENT_TEMPLATE.result(binding)
+        XML_EVENT_ATTRIBUTE_TEMPLATE.result(binding)
     end
 
     def to_java
         $stderr.puts("\t|- #{@name} (event)") if VERBOSE
 
-        [JAVA_EVENT_GETTER.result(binding), JAVA_EVENT_SETTER.result(binding)].join
+        [JAVA_EVENT_GETTER_TEMPLATE.result(binding), JAVA_EVENT_SETTER_TEMPLATE.result(binding)].join
     end
 end
 
@@ -308,7 +308,7 @@ class Option
     def to_xml
         return '' unless required?
 
-        TLD_OPTION_TEMPLATE.result(binding)
+        XML_OPTION_TEMPLATE.result(binding)
     end
 
     def to_java
@@ -318,7 +318,7 @@ class Option
 
         return '' unless required?
 
-        [JAVA_OPTION_GETTER.result(binding), JAVA_OPTION_SETTER.result(binding)].join
+        [JAVA_OPTION_GETTER_TEMPLATE.result(binding), JAVA_OPTION_SETTER_TEMPLATE.result(binding)].join
     end
 end
 
@@ -351,7 +351,7 @@ class Tag
     end
 
     def xml_template
-        TLD_WIDGET_TAG_TEMPLATE
+        XML_WIDGET_TAG_TEMPLATE
     end
 
     def is_item?
@@ -365,7 +365,7 @@ class Tag
     def to_xml
         xml = xml_template.result(binding)
 
-        xml +=  TLD_EVENT_TAG_TEMPLATE.result(binding) if @events.any?
+        xml +=  XML_EVENT_TAG_TEMPLATE.result(binding) if @events.any?
 
         xml
     end
@@ -377,7 +377,7 @@ class Tag
     end
 
     def setter_template
-        JAVA_NESTED_TAG_SETTER
+        JAVA_NESTED_TAG_SETTER_TEMPLATE
     end
 
     def java_attributes
@@ -617,7 +617,7 @@ class NestedTag < Tag
     end
 
     def parent_setter_template
-        JAVA_PARENT_SETTER
+        JAVA_PARENT_SETTER_TEMPLATE
     end
 
     def patch_java_source_code(code)
@@ -634,7 +634,7 @@ class NestedTag < Tag
     end
 
     def xml_template
-        TLD_NESTED_TAG_TEMPLATE
+        XML_NESTED_TAG_TEMPLATE
     end
 
     def body_content
@@ -673,7 +673,7 @@ class NestedTagArray < NestedTag
     end
 
     def setter_template
-        JAVA_ARRAY_SETTER
+        JAVA_ARRAY_SETTER_TEMPLATE
     end
 
     def patch_java_source_code(code)
@@ -692,7 +692,7 @@ class NestedTagArray < NestedTag
     end
 
     def parent_setter_template
-        JAVA_ARRAY_PARENT_SETTER
+        JAVA_ARRAY_PARENT_SETTER_TEMPLATE
     end
 
     def java_attributes
@@ -700,7 +700,7 @@ class NestedTagArray < NestedTag
     end
 
     def child_setters
-        JAVA_ARRAY_ADD_CHILD.result(binding)
+        JAVA_ARRAY_ADD_CHILD_TEMPLATE.result(binding)
     end
 end
 
@@ -718,7 +718,7 @@ class NestedTagArrayItem < NestedTag
     end
 
     def parent_setter_template
-        JAVA_ARRAY_ADD_TO_PARENT
+        JAVA_ARRAY_ADD_TO_PARENT_TEMPLATE
     end
 end
 
