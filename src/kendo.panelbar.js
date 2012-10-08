@@ -62,7 +62,7 @@
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li class='#= wrapperCssClass(group, item) #'>" +
+                "<li role='tab' class='#= wrapperCssClass(group, item) #'>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
@@ -141,7 +141,7 @@
         };
 
     function updateItemClasses (item, panelElement) {
-        item = $(item).addClass("k-item");
+        item = $(item).addClass("k-item").attr("role", "tab");
 
         item
             .children(IMG)
@@ -247,7 +247,8 @@
                 })
                 .on("blur" + NS, function() {
                     that._current(null);
-                });
+                })
+                .attr("role", "tablist");
 
             if (options.contentUrls) {
                 element.find("> .k-item")

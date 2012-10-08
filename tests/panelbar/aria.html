@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Panelbar aria</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.panelbar.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+</head>
+<body>
+    <script type="text/javascript">
+
+        var PanelBar = kendo.ui.PanelBar,
+            panelbar,
+            ul;
+
+        function addItems(count, parent) {
+            var panel = ul.data("kendoPanelBar");
+
+            for (var i = 0; i < count; i++) {
+                panel.append({
+                    text: "Item" + i
+                }, parent);
+            }
+        }
+
+        module("PanelBar aria", {
+            setup: function() {
+                ul = $('<ul id="test" />').appendTo(document.body);
+                panelbar = ul.kendoPanelBar().data("kendoPanelBar");
+            },
+            teardown: function() {
+                if (ul.data("kendoPanelBar")) {
+                    ul.data("kendoPanelBar").destroy();
+                }
+                ul.remove();
+            }
+        });
+
+        test("PanelBar sets role to the wrapper", function() {
+            equal(ul.attr("role"), "tablist");
+        });
+
+        test("PanelBar adds tab role to the panelbar items", function() {
+            addItems(2);
+
+            var items = ul.find(".k-item");
+            equal(items.eq(0).attr("role"), "tab");
+            equal(items.eq(1).attr("role"), "tab");
+        });
+
+        test("PanelBar adds tab role to items during init", function() {
+            var panel = $("<ul id='test'><li>Test</li></ul>").kendoPanelBar();
+
+            var items = panel.find(".k-item");
+            equal(items.eq(0).attr("role"), "tab");
+        });
+
+        test("PanelBar adds tab role to the added items", function() {
+            addItems(2);
+
+            var items = ul.find(".k-item");
+            equal(items.eq(0).attr("role"), "tab");
+            equal(items.eq(1).attr("role"), "tab");
+        });
+
+    </script>
+
+    <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>
