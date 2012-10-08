@@ -5491,6 +5491,31 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
+        <description>Contains items of Menu</description>
+        <name>menu-items</name>
+        <tag-class>com.kendoui.taglib.menu.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Contains items of Menu</description>
+        <name>menu-item</name>
+        <tag-class>com.kendoui.taglib.menu.ItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies the text displayed by the item</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Defines texts shown within the pager.</description>
         <name>pager-messages</name>
         <tag-class>com.kendoui.taglib.pager.MessagesTag</tag-class>
@@ -6457,6 +6482,13 @@ containing one or more fields with the same name as the original input name.</de
 		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
 		<body-content>JSP</body-content>
 	</tag>
+	
+	<tag>
+		<description>Menu Item content</description>
+		<name>menu-item-content</name>
+		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>	
 	
 	<tag>
 		<description>Window content</description>

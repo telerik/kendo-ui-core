@@ -363,7 +363,7 @@ class Tag
     end
 
     def has_items?
-        namespace =~ /panelbar|tabstrip/
+        namespace =~ /panelbar|tabstrip|menu/
     end
 
     def to_xml

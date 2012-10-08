@@ -4,19 +4,28 @@ package com.kendoui.taglib;
 
 import com.kendoui.taglib.menu.*;
 
-
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Ul;
 import com.kendoui.taglib.json.Function;
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MenuTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
+public class MenuTag extends WidgetTag /* interfaces */implements Animation, Items/* interfaces */ {
 
     public MenuTag() {
         super("Menu");
     }
 
+    @Override
+    public Element<?> createElement() {
+        Ul ul = new Ul();
+        
+        ul.html(body());
+        
+        return ul;
+    }
     
     @Override
     public int doEndTag() throws JspException {
@@ -47,6 +56,11 @@ public class MenuTag extends WidgetTag /* interfaces */implements Animation/* in
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
+    }
+
+    @Override
+    public void setItems(ItemsTag value) {
+        setProperty("items", value.items());
     }
 
     public boolean getCloseOnClick() {

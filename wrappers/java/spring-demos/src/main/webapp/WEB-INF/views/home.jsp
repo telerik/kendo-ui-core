@@ -48,6 +48,21 @@
         	</kendo:chart-title>
         </kendo:chart>
         
+        <kendo:menu name="menu">
+        	<kendo:menu-items>
+        		<kendo:menu-item text="Root">
+        				<kendo:menu-items>
+        					<kendo:menu-item text="Child"></kendo:menu-item>
+        					<kendo:menu-item text="Child With Content">
+        						<kendo:menu-item-content>
+        							<strong>Menu Item Content</strong>
+        						</kendo:menu-item-content>
+        					</kendo:menu-item>
+        				</kendo:menu-items>
+        		</kendo:menu-item>
+        	</kendo:menu-items>
+        </kendo:menu>
+        
         <kendo:panelBar name="panelbar">
         	<kendo:panelBar-items>
         		<kendo:panelBar-item text="Root">
