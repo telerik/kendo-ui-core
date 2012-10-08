@@ -83,6 +83,14 @@
             equal(div.find("div[role=tabpanel]").length, 2);
         });
 
+        test("TabStrip adds aria-controls to the tab items", function() {
+            div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
+                    .appendTo(document.body)
+                    .kendoTabStrip();
+
+            equal(div.find("li[role=tab]").eq(0).attr("aria-controls"), "test-1");
+        });
+
         test("hidden attribute is set to the content if tab is not visible", function() {
             div.kendoTabStrip({
                 dataTextField: "text",

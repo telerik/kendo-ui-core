@@ -680,6 +680,8 @@
                 var currentContent = contentElements.eq(idx),
                     id = tabStripID + "-" + (idx+1);
 
+                this.setAttribute("aria-controls", id);
+
                 if (!currentContent.length && contentUrls[idx]) {
                     $("<div id='"+ id +"' class='" + CONTENT + "'/>").appendTo(that.wrapper);
                 } else {
