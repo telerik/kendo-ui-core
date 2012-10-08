@@ -6272,6 +6272,15 @@ Setting this option to</description>
 
 
     <tag>
+        <description>Contains items of TreeView</description>
+        <name>treeView-items</name>
+        <tag-class>com.kendoui.taglib.treeview.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>The animation that will be used when collapsing items.</description>
         <name>treeView-animation-collapse</name>
         <tag-class>com.kendoui.taglib.treeview.CollapseTag</tag-class>
@@ -6320,6 +6329,22 @@ node is expanded.</description>
             <name>show</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Contains items of TreeView</description>
+        <name>treeView-item</name>
+        <tag-class>com.kendoui.taglib.treeview.ItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies the text displayed by the item</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -6491,6 +6516,13 @@ containing one or more fields with the same name as the original input name.</de
 	</tag>	
 	
 	<tag>
+		<description>TreeView Item content</description>
+		<name>treeView-item-content</name>
+		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	
+	<tag>
 		<description>Window content</description>
 		<name>window-content</name>
 		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
@@ -6498,9 +6530,16 @@ containing one or more fields with the same name as the original input name.</de
 	</tag>
 	
 	<tag>
-        <description>Child items</description>
+        <description>PanelBar child items</description>
         <name>panelBar-item-items</name>
         <tag-class>com.kendoui.taglib.panelbar.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    
+	<tag>
+        <description>TreeView child items</description>
+        <name>treeView-item-items</name>
+        <tag-class>com.kendoui.taglib.treeview.ItemsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     

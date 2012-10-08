@@ -71,7 +71,9 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     @Override
     public void setSeries(SeriesTag value) {
+
         setProperty("series", value.series());
+
     }
 
     @Override

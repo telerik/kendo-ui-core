@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.panelbar;
+package com.kendoui.taglib.treeview;
 
 import com.kendoui.taglib.ContentTag;
 
@@ -11,7 +11,7 @@ import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class ItemsTag extends ContentTag /* interfaces */implements Item/* interfaces */ {
-
+    
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
@@ -21,6 +21,7 @@ public class ItemsTag extends ContentTag /* interfaces */implements Item/* inter
         parent.setItems(this);
 
 //<< doEndTag
+
         return super.doEndTag();
     }
 

@@ -9,12 +9,10 @@ import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Ul;
 import com.kendoui.taglib.json.Function;
 
-
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyContent;
 
 @SuppressWarnings("serial")
-public class PanelBarTag extends WidgetTag /* interfaces */implements Animation, Items/* interfaces */ {
+public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements Animation, Items/* interfaces */ {
 
     public PanelBarTag() {
         super("PanelBar");
@@ -24,9 +22,7 @@ public class PanelBarTag extends WidgetTag /* interfaces */implements Animation,
     protected Element<?> createElement() {
         Ul element = new Ul();
 
-        BodyContent content = getBodyContent();
-
-        element.html(content.getString());
+        element.html(body());
 
         return element;
     }
@@ -64,7 +60,9 @@ public class PanelBarTag extends WidgetTag /* interfaces */implements Animation,
 
     @Override
     public void setItems(ItemsTag value) {
-        setProperty("items", value.items());
+
+        items = value.items();
+
     }
 
     public String getExpandMode() {

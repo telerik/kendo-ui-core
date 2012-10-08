@@ -48,35 +48,17 @@
         	</kendo:chart-title>
         </kendo:chart>
         
-        <kendo:menu name="menu">
-        	<kendo:menu-items>
-        		<kendo:menu-item text="Root">
-        				<kendo:menu-items>
-        					<kendo:menu-item text="Child"></kendo:menu-item>
-        					<kendo:menu-item text="Child With Content">
-        						<kendo:menu-item-content>
-        							<strong>Menu Item Content</strong>
-        						</kendo:menu-item-content>
-        					</kendo:menu-item>
-        				</kendo:menu-items>
-        		</kendo:menu-item>
-        	</kendo:menu-items>
-        </kendo:menu>
         
-        <kendo:panelBar name="panelbar">
-        	<kendo:panelBar-items>
-        		<kendo:panelBar-item text="Root">
-        			<kendo:panelBar-item-items>
-        				<kendo:panelBar-item text="Child"/>
-        				<kendo:panelBar-item text="Child with content">
-        					<kendo:panelBar-item-content>
-        						<strong>I haz contentz</strong>
-        					</kendo:panelBar-item-content>
-        				</kendo:panelBar-item>
-        			</kendo:panelBar-item-items>
-        		</kendo:panelBar-item>
-        	</kendo:panelBar-items>
-        </kendo:panelBar>
+        <kendo:treeView name="treeview">
+        	<kendo:treeView-items>
+        		<kendo:treeView-item text="Root">
+        			<kendo:treeView-item-items>
+        				<kendo:treeView-item text="Child"/>
+        				<kendo:treeView-item text="Child with content"></kendo:treeView-item>
+        			</kendo:treeView-item-items>
+        		</kendo:treeView-item>
+        	</kendo:treeView-items>
+        </kendo:treeView>
         
         <kendo:tabStrip name="tabStrip">
         	<kendo:tabStrip-items>
@@ -90,5 +72,20 @@
         		</kendo:tabStrip-item>
         	</kendo:tabStrip-items>
         </kendo:tabStrip>
+        
+          <kendo:menu name="menu">
+        	<kendo:menu-items>
+        		<kendo:menu-item text="Root">
+        				<kendo:menu-items>
+        					<kendo:menu-item text="Child"></kendo:menu-item>
+        					<kendo:menu-item text="Child With Content">
+        						<kendo:menu-item-content>
+        							<strong>Menu Item Content</strong>
+        						</kendo:menu-item-content>
+        					</kendo:menu-item>
+        				</kendo:menu-items>
+        		</kendo:menu-item>
+        	</kendo:menu-items>
+        </kendo:menu>
     </body>
 </html>

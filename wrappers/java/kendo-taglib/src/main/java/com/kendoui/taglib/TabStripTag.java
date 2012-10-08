@@ -10,10 +10,9 @@ import com.kendoui.taglib.json.Function;
 
 
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyContent;
 
 @SuppressWarnings("serial")
-public class TabStripTag extends WidgetTag /* interfaces */implements Animation, Items/* interfaces */ {
+public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements Animation, Items/* interfaces */ {
 
     public TabStripTag() {
         super("TabStrip");
@@ -23,9 +22,7 @@ public class TabStripTag extends WidgetTag /* interfaces */implements Animation,
     protected Element<?> createElement() {
         Element<?> element = super.createElement();
 
-        BodyContent content = getBodyContent();
-
-        element.html(content.getString());
+        element.html(body());
 
         return element;
     }
@@ -63,7 +60,9 @@ public class TabStripTag extends WidgetTag /* interfaces */implements Animation,
 
     @Override
     public void setItems(ItemsTag value) {
-        setProperty("items", value.items());
+
+        items = value.items();
+
     }
 
     public boolean getCollapsible() {

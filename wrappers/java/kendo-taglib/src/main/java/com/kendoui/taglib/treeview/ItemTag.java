@@ -1,15 +1,12 @@
 
-package com.kendoui.taglib.menu;
+package com.kendoui.taglib.treeview;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.kendoui.taglib.BaseItemTag;
-import com.kendoui.taglib.html.Element;
-import com.kendoui.taglib.html.Li;
-import com.kendoui.taglib.html.Ul;
-import com.kendoui.taglib.menu.ItemsTag;
+import com.kendoui.taglib.treeview.ItemsTag;
 
 import javax.servlet.jsp.JspException;
 
@@ -24,23 +21,6 @@ public class ItemTag extends BaseItemTag /* interfaces */implements Items/* inte
     @Override
     protected List<?> items() {
         return items;
-    }
-    
-    @Override
-    protected void appendContent(Element<?> element, String html){
-        Ul ul = new Ul();
-        
-        if (items.size() > 0) {
-            ul.html(html);
-        } else {
-            Li li = new Li();
-            
-            li.html(html);
-            
-            ul.append(li);
-        }
-        
-        element.append(ul);
     }
     
     @Override
@@ -71,7 +51,7 @@ public class ItemTag extends BaseItemTag /* interfaces */implements Items/* inte
     public void destroy() {
 //>> destroy
 //<< destroy
-        items = null;
+        items = new ArrayList<Map<String, Object>>();
         
         super.destroy();
     }

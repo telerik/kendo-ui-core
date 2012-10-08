@@ -211,7 +211,11 @@ JAVA_NESTED_TAG_SETTER_TEMPLATE = ERB.new(%{
 JAVA_ARRAY_SETTER_TEMPLATE = ERB.new(%{
     @Override
     public void set<%= child.name %>(<%= child.type %> value) {
+<% if has_items? %>
+        <%= child.name.downcase %> = value.<%= child.name.downcase %>();
+<% else %>
         setProperty("<%= child.name.downcase %>", value.<%= child.name.downcase %>());
+<% end %>
     }
 })
 
@@ -292,11 +296,12 @@ class Event
 end
 
 class Option
-    attr_reader :name, :type, :description
+    attr_reader :name, :type, :description, :parent
 
 
     def initialize(options)
         @name = options[:name].strip
+        @parent = options[:parent]
         @type = JS_TO_JAVA_TYPES[options[:type]]
         @description = options[:description].strip
     end
@@ -363,7 +368,7 @@ class Tag
     end
 
     def has_items?
-        namespace =~ /panelbar|tabstrip|menu/
+        namespace =~ /panelbar|tabstrip|menu|treeview/
     end
 
     def to_xml
@@ -408,7 +413,7 @@ class Tag
         @children.map{ |c| c.name }
     end
 
-    def implement_interfaces(code, interfaces)
+    def add_implements_interfaces(code, interfaces)
         implements = 'implements ' + interfaces.join(", ") if interfaces.any?
 
         code.sub /\/\* interfaces \*\/(.|\n)*\/\* interfaces \*\//,
@@ -452,7 +457,7 @@ class Tag
             interfaces.push('Items')
         end
 
-        java = implement_interfaces(java, interfaces)
+        java = add_implements_interfaces(java, interfaces)
         java = patch_java_source_code(java)
 
         ensure_path(java_filename)
@@ -551,6 +556,7 @@ class Tag
                     description = find_child_with_type.call(paragraph, :text)
 
                     option = Option.new :name => name,
+                        :parent => tag,
                         :type => t.strip.strip_namespace,
                         :description => description.value
 
