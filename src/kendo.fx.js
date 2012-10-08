@@ -824,14 +824,14 @@
             return this._state(false);
         },
 
-        _state: function(invert) {
+        _state: function(startState) {
             var that = this,
                 options = that.options,
                 extender = {},
                 init = this.initDirection(),
-                reverse = options.reverse,
-                offset = init.offset / (options.divisor || 1),
-                value = (invert ? (reverse ? 0 : offset) : (reverse ? -offset : 0)) + PX;
+                reverse = startState ? !options.reverse : options.reverse,
+                offset = Math.abs(init.offset / (options.divisor || 1)),
+                value = (reverse ? -offset : 0) + PX;
 
             if (transforms && options.transition !== false) {
                 extender[init.direction.transition] = value;
