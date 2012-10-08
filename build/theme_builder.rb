@@ -1,5 +1,5 @@
-file_merge 'themebuilder/src/scripts/less.js' => FileList[
-     'themebuilder/src/scripts/prologue.js',
+file_merge 'themebuilder/scripts/less.js' => FileList[
+     'themebuilder/scripts/prologue.js',
      'build/less-js/build/require.js',
      'build/less-js/build/ecma-5.js',
      'build/less-js/lib/less/parser.js',
@@ -7,22 +7,22 @@ file_merge 'themebuilder/src/scripts/less.js' => FileList[
      'build/less-js/lib/less/colors.js',
      'build/less-js/lib/less/tree/*.js',
      'build/less-js/lib/less/tree.js',
-     'themebuilder/src/scripts/epilogue.js',
+     'themebuilder/scripts/epilogue.js',
 ]
 
-file_copy :to => 'themebuilder/src/styles/kendo.black.css',
+file_copy :to => 'themebuilder/styles/kendo.black.css',
           :from => 'styles/web/kendo.black.css'
 
-tree :to => 'themebuilder/src/styles/Black',
+tree :to => 'themebuilder/styles/Black',
      :from => FileList['styles/web/Black/**/*'],
      :root => 'styles/web/Black/'
 
-tree :to => 'themebuilder/src/styles/textures',
+tree :to => 'themebuilder/styles/textures',
      :from => FileList['styles/web/textures/**/*'],
      :root => 'styles/web/textures/'
 
-file 'themebuilder/src/scripts/template.js' => [ 'styles/web/template.less',
-'themebuilder/src/scripts/constants.js' ] do |t|
+file 'themebuilder/scripts/template.js' => [ 'styles/web/template.less',
+'themebuilder/scripts/constants.js' ] do |t|
 
     less = File.read(t.prerequisites[0])
 
@@ -42,13 +42,13 @@ file 'themebuilder/src/scripts/template.js' => [ 'styles/web/template.less',
     end
 end
 
-file 'dist/themebuilder/production/bootstrap.js' => 'themebuilder/src/bootstrap.js' do |t|
+file 'dist/themebuilder/production/bootstrap.js' => 'themebuilder/bootstrap.js' do |t|
 
     patch_bootstrap(t.name, t.prerequisites[0], "#{CDN_ROOT}#{VERSION}")
 
 end
 
-file 'dist/themebuilder/staging/bootstrap.js' => 'themebuilder/src/bootstrap.js' do |t|
+file 'dist/themebuilder/staging/bootstrap.js' => 'themebuilder/bootstrap.js' do |t|
 
     patch_bootstrap(t.name, t.prerequisites[0], "http://mvc-kendobuild/staging/content/cdn/")
 
@@ -78,46 +78,46 @@ def replace_variable(source, name, value)
 
 end
 
-file_merge 'themebuilder/src/scripts/themebuilder.all.js' => [
-    'themebuilder/src/scripts/less.js',
-    'themebuilder/src/scripts/themebuilder.js',
-    'themebuilder/src/scripts/colorengine.js',
-    'themebuilder/src/scripts/template.js'
+file_merge 'themebuilder/scripts/themebuilder.all.js' => [
+    'themebuilder/scripts/less.js',
+    'themebuilder/scripts/themebuilder.js',
+    'themebuilder/scripts/colorengine.js',
+    'themebuilder/scripts/template.js'
 ]
 
-CLEAN.include('themebuilder/src/scripts/themebuilder.all*js')
-CLEAN.include('themebuilder/src/scripts/themebuilder.all*css')
-CLEAN.include('themebuilder/src/scripts/template.js')
+CLEAN.include('themebuilder/scripts/themebuilder.all*js')
+CLEAN.include('themebuilder/scripts/themebuilder.all*css')
+CLEAN.include('themebuilder/scripts/template.js')
 
-file_merge 'themebuilder/src/styles/themebuilder.all.css' => [
-    'themebuilder/src/styles/kendo.black.css',
-    'themebuilder/src/styles/styles.css',
+file_merge 'themebuilder/styles/themebuilder.all.css' => [
+    'themebuilder/styles/kendo.black.css',
+    'themebuilder/styles/styles.css',
 ]
 
-THEME_BUILDER_RESOURCES = FileList['themebuilder/src/scripts/themebuilder.all.min.js']
-                .include('themebuilder/src/styles/Black/**/*')
-                .include('themebuilder/src/styles/textures/**/*')
-                .include('themebuilder/src/styles/sprite.png')
-                .include('themebuilder/src/styles/bootstrap.min.css')
-                .include('themebuilder/src/styles/themebuilder.all.min.css')
+THEME_BUILDER_RESOURCES = FileList['themebuilder/scripts/themebuilder.all.min.js']
+                .include('themebuilder/styles/Black/**/*')
+                .include('themebuilder/styles/textures/**/*')
+                .include('themebuilder/styles/sprite.png')
+                .include('themebuilder/styles/bootstrap.min.css')
+                .include('themebuilder/styles/themebuilder.all.min.css')
 
 tree :to => 'dist/themebuilder/production',
      :from =>  THEME_BUILDER_RESOURCES,
-     :root => 'themebuilder/src/'
+     :root => 'themebuilder/'
 
 tree :to => 'dist/themebuilder/staging',
      :from =>  THEME_BUILDER_RESOURCES,
-     :root => 'themebuilder/src/'
+     :root => 'themebuilder/'
 
 namespace :themebuilder do
 
     desc('Build the generated ThemeBuilder sources')
     task :sources => [
-        'themebuilder/src/scripts/less.js',
-        'themebuilder/src/scripts/template.js',
-        'themebuilder/src/styles/kendo.black.css',
-        'themebuilder/src/styles/Black',
-        'themebuilder/src/styles/textures'
+        'themebuilder/scripts/less.js',
+        'themebuilder/scripts/template.js',
+        'themebuilder/styles/kendo.black.css',
+        'themebuilder/styles/Black',
+        'themebuilder/styles/textures'
     ]
 
     desc('Build the ThemeBuilder for live deployment')

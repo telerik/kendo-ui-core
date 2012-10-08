@@ -198,8 +198,8 @@ tree :to => 'dist/demos/staging/content/cdn/styles',
 
 tree :to => 'dist/demos/staging/content/cdn/themebuilder',
      :from => FileList[THEME_BUILDER_RESOURCES]
-                .include('themebuilder/src/bootstrap.js')
-                .sub('themebuilder/src', 'dist/themebuilder/staging'),
+                .include('themebuilder/bootstrap.js')
+                .sub('themebuilder', 'dist/themebuilder/staging'),
      :root => 'dist/themebuilder/staging/'
 
 def patch_web_config(name, cdn_root, themebuilder_root)
