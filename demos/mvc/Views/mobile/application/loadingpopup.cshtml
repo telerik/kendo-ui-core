@@ -3,16 +3,17 @@
 </div>
 
 <script>
-    var showButton, interval;
+    var showButton, interval, loaderElement;
 
     function viewInit(e) {
         showButton = $("#show").bind(kendo.support.mouseup, function() {
                         showButton.stop(true,true).fadeOut();
                         startLoading();
                      });
+
+        loaderElement = kendoMobileApplication.pane.loader.element.find("h1");
     }
 
-    var loaderElement = kendoMobileApplication.pane.loader.element.find("h1");
 
     function hideLoader() {
         clearInterval(interval);
@@ -55,12 +56,12 @@
         text-align: center;
     }
 
-    #show 
+    #show
     {
         margin-top: 100px;
         font-size: 1.5rem;
     }
-    
+
     /* Example Counter */
     .km-meego h1.loaderHeading,
     .km-android h1.loaderHeading,
@@ -77,7 +78,7 @@
         margin: -.65em 0 0 -.5em;
     }
 
-    .km-ios h1.loaderHeading 
+    .km-ios h1.loaderHeading
     {
     	font-size: 1rem;
     }
