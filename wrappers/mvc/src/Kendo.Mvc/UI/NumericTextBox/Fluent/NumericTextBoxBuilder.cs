@@ -163,5 +163,21 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>Sets the title of the NumericTextBox increase button.</summary>
+        public NumericTextBoxBuilder<T> IncreaseButtonTitle(string title)
+        {
+            Component.IncreaseButtonTitle = title;
+
+            return this;
+        }
+
+        /// <summary>Sets the title of the NumericTextBox decrease button.</summary>
+        public NumericTextBoxBuilder<T> DecreaseButtonTitle(string title)
+        {
+            Component.DecreaseButtonTitle = title;
+
+            return this;
+        }
     }
 }
