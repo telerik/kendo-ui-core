@@ -62,5 +62,18 @@
         		</kendo:panelBar-item>
         	</kendo:panelBar-items>
         </kendo:panelBar>
+        
+        <kendo:tabStrip name="tabStrip">
+        	<kendo:tabStrip-items>
+        		<kendo:tabStrip-item text="Tab 1">
+        			<kendo:tabStrip-item-content>
+        				<strong>First tab content</strong>
+        			</kendo:tabStrip-item-content>
+        		</kendo:tabStrip-item>
+        		<kendo:tabStrip-item text="Tab 2">
+        			<em>Second tab content</em>
+        		</kendo:tabStrip-item>
+        	</kendo:tabStrip-items>
+        </kendo:tabStrip>
     </body>
 </html>

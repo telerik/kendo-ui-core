@@ -354,12 +354,16 @@ class Tag
         XML_WIDGET_TAG_TEMPLATE
     end
 
-    def is_item?
+    def has_item_hierarchy?
+        has_items? && @name == 'Item' && namespace != 'tabstrip'
+    end
+
+    def has_item_content?
         has_items? && @name == 'Item'
     end
 
     def has_items?
-        namespace =~ /panelbar/
+        namespace =~ /panelbar|tabstrip/
     end
 
     def to_xml
@@ -444,7 +448,7 @@ class Tag
             interfaces.push('DataBoundWidget')
         end
 
-        if is_item?
+        if has_item_hierarchy?
             interfaces.push('Items')
         end
 
@@ -638,7 +642,7 @@ class NestedTag < Tag
     end
 
     def body_content
-        return 'JSP' if is_item? || @children.any?
+        return 'JSP' if has_item_content? || @children.any?
 
         'empty'
     end

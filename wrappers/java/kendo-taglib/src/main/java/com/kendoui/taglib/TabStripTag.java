@@ -5,18 +5,30 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.tabstrip.*;
 
 
+import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.json.Function;
 
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyContent;
 
 @SuppressWarnings("serial")
-public class TabStripTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
+public class TabStripTag extends WidgetTag /* interfaces */implements Animation, Items/* interfaces */ {
 
     public TabStripTag() {
         super("TabStrip");
     }
+    
+    @Override
+    protected Element<?> createElement() {
+        Element<?> element = super.createElement();
 
+        BodyContent content = getBodyContent();
+
+        element.html(content.getString());
+
+        return element;
+    }
     
     @Override
     public int doEndTag() throws JspException {
@@ -47,6 +59,11 @@ public class TabStripTag extends WidgetTag /* interfaces */implements Animation/
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
+    }
+
+    @Override
+    public void setItems(ItemsTag value) {
+        setProperty("items", value.items());
     }
 
     public boolean getCollapsible() {

@@ -6149,6 +6149,15 @@ value must not exceed</description>
 
 
     <tag>
+        <description>Contains items of TabStrip</description>
+        <name>tabStrip-items</name>
+        <tag-class>com.kendoui.taglib.tabstrip.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>The visual animation(s) that will be used when the current tab is closed.</description>
         <name>tabStrip-animation-close</name>
         <tag-class>com.kendoui.taglib.tabstrip.CloseTag</tag-class>
@@ -6197,6 +6206,22 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <name>show</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Contains items of TabStrip</description>
+        <name>tabStrip-item</name>
+        <tag-class>com.kendoui.taglib.tabstrip.ItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies the text displayed by the item</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -6422,6 +6447,13 @@ containing one or more fields with the same name as the original input name.</de
 	<tag>
 		<description>PanelBar Item content</description>
 		<name>panelBar-item-content</name>
+		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<description>TabStrip Item content</description>
+		<name>tabStrip-item-content</name>
 		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
 		<body-content>JSP</body-content>
 	</tag>

@@ -19,6 +19,7 @@ public class PanelBarTag extends WidgetTag /* interfaces */implements Animation,
     public PanelBarTag() {
         super("PanelBar");
     }
+    
     @Override
     protected Element<?> createElement() {
         Ul element = new Ul();
