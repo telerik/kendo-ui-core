@@ -89,7 +89,7 @@
                 .on([MOUSEDOWN_NS, MOUSEUP_NS, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, that._toggleItemActiveClass)
                 .on(MOUSEUP_NS, ".km-listview-label", function (e) {
                     // on touch devices clicking a label will not check the inner input
-                    if (kendo.support.touch) {
+                    if (support.mobileOS.ios) {
                         var input = $(e.target).find("input"),
                             value = !input[0].checked;
 
