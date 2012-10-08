@@ -62,7 +62,7 @@
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li role='listitem' class='#= wrapperCssClass(group, item) #'>" +
+                "<li role='listitem' #=aria#class='#= wrapperCssClass(group, item) #'>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
@@ -141,7 +141,8 @@
         };
 
     function updateItemClasses (item, panelElement) {
-        item = $(item).addClass("k-item").attr("role", "listitem");
+        item = $(item).addClass("k-item")
+                      .attr("role", "listitem");
 
         item
             .children(IMG)
@@ -164,14 +165,19 @@
             .filter(":focus")
             .parent()
             .addClass(ACTIVECLASS);
+
         item
-            .find(">div")
+            .children("div")
             .addClass(CONTENT)
             .attr("role", "region")
             .css({ display: "none" });
 
         item.each(function() {
             var item = $(this);
+
+            if (item.children(".k-content, .k-group")[0]) {
+                item.attr("aria-expanded", false);
+            }
 
             if (!item.children(LINKSELECTOR).length) {
                 item
@@ -671,13 +677,12 @@
                                 }));
                             }
                         });
+
                 contents = $.map(plain ? [ item ] : item, function (value, idx) {
                             if (value.content || value.contentUrl) {
                                 return $(PanelBar.renderContent({
                                     item: extend(value, { index: idx })
                                 }));
-                            } else {
-                                return false;
                             }
                         });
             } else {
@@ -927,13 +932,15 @@
             options = extend({ panelBar: {}, group: {} }, options);
 
             var empty = templates.empty,
-                item = options.item;
+                item = options.item,
+                content = item.items || item.content || item.contentUrl;
 
             return templates.item(extend(options, {
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
-                arrow: item.items || item.content || item.contentUrl ? templates.arrow : empty,
+                arrow: content ? templates.arrow : empty,
+                aria: content ? "aria-expanded='false' " : empty,
                 subGroup: PanelBar.renderGroup
             }, rendering));
         },

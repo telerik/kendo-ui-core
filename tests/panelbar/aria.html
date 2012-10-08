@@ -143,6 +143,28 @@
             equal(ul.attr("aria-activedescendant"), undefined);
         });
 
+        test("PanelBar adds role region during init", function() {
+            var panel = $("<ul id='test'><li>Test</li><li>hi<div>content</div></li><li>Last<ul><li>test</li></ul></li></ul>").kendoPanelBar();
+
+            var items = panel.find(".k-item").filter("[aria-expanded=false]");
+
+            equal(items.length, 2);
+        });
+
+        test("PanelBar adds aria-expanded=false to all items with content", function() {
+            addItems(3);
+            addItems(2, ul.find(".k-item:last"));
+
+            panelbar.append({
+                text: "test",
+                content: "content"
+            }, ul.find(".k-item").eq(1));
+
+            var items = ul.find(".k-item").filter("[aria-expanded=false]");
+
+            equal(items.length, 2);
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
