@@ -263,12 +263,12 @@
 
                 kendo.bind(dom, observable, kendo.mobile.ui);
 
-                var touch = kendo.support.touch;
+                var mobileOS = kendo.support.mobileOS;
                 try {
-                    kendo.support.touch = true;
+                    kendo.support.mobileOS = { ios: true };
                     dom.find("label").trigger("mouseup");
                 } finally {
-                    kendo.support.touch = touch;
+                    kendo.support.mobileOS = mobileOS;
                 }
 
                 equal(observable.foo, false);
