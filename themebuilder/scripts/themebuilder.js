@@ -406,9 +406,9 @@
 
                 this.themes = new ThemeCollection(themes);
 
-                this.render(templateInfo.webConstantsHierarchy, templateInfo.datavizConstantsHierarchy);
-
                 this.themes.infer(this.targetDocument);
+
+                this.render(templateInfo.webConstantsHierarchy, templateInfo.datavizConstantsHierarchy);
 
                 this.element = $("#kendo-themebuilder");
 
