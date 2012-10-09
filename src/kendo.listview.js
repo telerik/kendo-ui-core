@@ -123,7 +123,7 @@
         },
 
         _element: function() {
-            this.element.addClass("k-widget k-listview");
+            this.element.addClass("k-widget k-listview").attr("role", "listbox");
         },
 
         refresh: function(e) {
@@ -177,7 +177,9 @@
 
             items = that.items();
             for (idx = 0, length = view.length; idx < length; idx++) {
-                items.eq(idx).attr(kendo.attr("uid"), view[idx].uid);
+                items.eq(idx).attr(kendo.attr("uid"), view[idx].uid)
+                             .attr("role", "option")
+                             .attr("aria-selected", "false");
             }
 
             that.trigger(DATABOUND);
@@ -225,18 +227,26 @@
                             e.preventDefault();
                             if(multi) {
                                 if(!e.ctrlKey) {
+                                    that.element.children(".k-state-selected")
+                                        .attr("aria-selected", "false");
+
                                     that.selectable.clear();
                                 } else {
                                     if(current.hasClass(SELECTED)) {
+                                        current.attr("aria-selected", false);
                                         current.removeClass(SELECTED);
                                         current = null;
                                     }
                                 }
                             } else {
+                                that.element.children(".k-state-selected")
+                                    .attr("aria-selected", "false");
+
                                 that.selectable.clear();
                             }
 
                             that.selectable.value(current);
+                            current.attr("aria-selected", true);
                         }
                     });
                 }
@@ -307,7 +317,7 @@
                 };
 
             if (navigatable) {
-                element.attr("tabIndex", Math.max(element.attr("tabIndex") || 0, 0));
+                that._tabindex();
                 element.on("focus" + NS, function() {
                         var current = that._current;
                         if(current && current.is(":visible")) {
@@ -379,7 +389,8 @@
                         }
                     });
 
-                element.addClass(FOCUSABLE).on("mousedown" + NS, "." + FOCUSABLE + FOCUSSELECTOR, clickCallback);
+                element.addClass(FOCUSABLE).on("mousedown" + NS, "." + FOCUSABLE + FOCUSSELECTOR, clickCallback)
+                       .attr("aria-multiselectable", true);
             }
        },
 
