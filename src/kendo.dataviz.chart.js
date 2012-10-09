@@ -1157,7 +1157,6 @@
                     axis.autoBaseUnit(options);
                 }
 
-                axis._categories = toDate(options.categories);
                 axis.groupCategories(options);
             }
 
@@ -1321,7 +1320,7 @@
 
         groupCategories: function(options) {
             var axis = this,
-                categories = axis._categories,
+                categories = toDate(options.categories),
                 baseUnit = options.baseUnit,
                 baseUnitStep = options.baseUnitStep || 1,
                 range = axis.range(options),
@@ -1851,6 +1850,14 @@
             chart.plotArea = plotArea;
             chart.categoryAxis = plotArea.seriesCategoryAxis(options.series[0]);
 
+            // Value axis ranges grouped by axis name, e.g.:
+            // primary: { min: 0, max: 1 }
+            chart.valueAxisRanges = {};
+
+            chart.points = [];
+            chart.categoryPoints = [];
+            chart.seriesPoints = [];
+
             chart.render();
         },
 
@@ -1862,15 +1869,6 @@
 
         render: function() {
             var chart = this;
-
-            // Value axis ranges grouped by axis name, e.g.:
-            // primary: { min: 0, max: 1 }
-            chart.valueAxisRanges = {};
-
-            chart.points = [];
-            chart.categoryPoints = [];
-            chart.seriesPoints = [];
-            chart.children = [];
 
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
@@ -4595,7 +4593,6 @@
             ChartElement.fn.init.call(plotArea, options);
 
             plotArea.series = series;
-            plotArea._series = series.slice(0);
             plotArea.charts = [];
             plotArea.options.legend.items = [];
             plotArea.axes = [];
@@ -5239,7 +5236,6 @@
             var plotArea = this,
                 axisOptions = deepExtend({}, plotArea.options, options);
 
-            plotArea._series = series;
             plotArea.namedCategoryAxes = {};
             plotArea.namedValueAxes = {};
             plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
@@ -5402,7 +5398,7 @@
 
         aggregateDateSeries: function(filterPane) {
             var plotArea = this,
-                series = plotArea._series,
+                series = plotArea.srcSeries || plotArea.series,
                 processedSeries = [],
                 categoryAxis,
                 categories,
@@ -5461,6 +5457,7 @@
                 processedSeries.push(seriesClone);
             }
 
+            plotArea.srcSeries = series;
             plotArea.series = processedSeries;
         },
 
