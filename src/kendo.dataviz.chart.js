@@ -4567,7 +4567,8 @@
 
             pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
 
-            pane.container = new ChartElement();
+            // Content (such as charts) is rendered, but excluded from reflows
+            pane.content = new ChartElement();
         },
 
         options: {
@@ -4581,10 +4582,7 @@
         reflow: function(targetBox) {
             var pane = this;
 
-            var children = pane.container.children;
-            pane.container.children = [];
             BoxElement.fn.reflow.call(pane, targetBox);
-            pane.container.children = children;
 
             if(pane.title) {
                 pane.contentBox.y1 += pane.title.box.height();
@@ -4599,8 +4597,9 @@
                 });
 
             group.children = elements.concat(
-                pane.container.getViewElements(view)
+                pane.content.getViewElements(view)
             );
+
             return [group];
         }
     });
@@ -4685,7 +4684,7 @@
                         if (match) {
                             paneAxes.push(currentAxis);
                             currentAxis.pane = pane;
-                            pane.container.append(currentAxis);
+                            pane.content.append(currentAxis);
                         }
                     }
                 }
@@ -4698,7 +4697,7 @@
             plotArea.charts.push(chart);
             plotArea.addToLegend(chart);
             if (pane) {
-                pane.container.append(chart);
+                pane.content.append(chart);
             } else {
                 plotArea.append(chart);
             }
@@ -5315,14 +5314,14 @@
 
             for (var i = 0; i < plotArea.charts.length; i++) {
                 var chart = plotArea.charts[i];
-                if (pane.container.children.indexOf(chart) === -1) {
+                if (pane.content.children.indexOf(chart) === -1) {
                     filteredCharts.push(chart);
                 }
             }
 
             plotArea.charts = filteredCharts;
 
-            pane.container.children = [];
+            pane.content.children = [];
 
             plotArea.createCategoryAxes(pane);
             plotArea.aggregateDateSeries(pane);
