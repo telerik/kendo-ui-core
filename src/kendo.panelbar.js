@@ -62,7 +62,7 @@
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li role='listitem' #=aria#class='#= wrapperCssClass(group, item) #'>" +
+                "<li role='listitem' #=aria# class='#= wrapperCssClass(group, item) #'>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
@@ -649,20 +649,22 @@
 
         _insert: function (item, referenceItem, parent) {
             var that = this,
-                items, contents = [];
+                items, contents = [],
+                plain = $.isPlainObject(item),
+                isReferenceItem = referenceItem && referenceItem[0],
+                groupData;
 
-            if (!referenceItem || !referenceItem.length) {
+            if (!isReferenceItem) {
                 parent = that.element;
             }
 
-            var plain = $.isPlainObject(item),
-                groupData = {
-                    firstLevel: parent.hasClass("k-panelbar"),
-                    expanded: parent.parent().hasClass(ACTIVECLASS),
-                    length: parent.children().length
-                };
+            groupData = {
+                firstLevel: parent.hasClass("k-panelbar"),
+                expanded: parent.parent().hasClass(ACTIVECLASS),
+                length: parent.children().length
+            };
 
-            if (referenceItem && !parent.length) {
+            if (isReferenceItem && !parent.length) {
                 parent = $(PanelBar.renderGroup({ group: groupData })).appendTo(referenceItem);
             }
 
@@ -685,6 +687,9 @@
                                 }));
                             }
                         });
+
+                referenceItem.attr("aria-expanded", false);
+                console.log(referenceItem);
             } else {
                 items = $(item);
 
@@ -940,7 +945,7 @@
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
                 arrow: content ? templates.arrow : empty,
-                aria: content ? "aria-expanded='false' " : empty,
+                aria: content ? "aria-expanded='false'" : "",
                 subGroup: PanelBar.renderGroup
             }, rendering));
         },

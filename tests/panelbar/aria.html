@@ -158,11 +158,11 @@
             panelbar.append({
                 text: "test",
                 content: "content"
-            }, ul.find(".k-item").eq(1));
+            }, ul.children(".k-item").eq(1));
 
             var items = ul.find(".k-item").filter("[aria-expanded=false]");
 
-            equal(items.length, 2);
+            equal(items.length, 3);
         });
 
     </script>
