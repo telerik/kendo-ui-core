@@ -58,13 +58,13 @@
                 "</ul>"
             ),
             itemWrapper: template(
-                "<#= tag(item) # class='#= textClass(item, group) #'#= contentUrl(item) ##= textAttributes(item) #>" +
+                "<#= tag(item) # class='#= textClass(item, group) #' #= contentUrl(item) ##= textAttributes(item) #>" +
                     "#= image(item) ##= sprite(item) ##= text(item) #" +
                     "#= arrow(data) #" +
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li role='listitem' #=aria(item)# class='#= wrapperCssClass(group, item) #'>" +
+                "<li role='listitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
@@ -82,7 +82,7 @@
                 var attr = "";
 
                 if (item.items || item.content || item.contentUrl) {
-                    attr += ARIA_EXPANDED + "=" + (item.expanded ? "true" : "false") + " ";
+                    attr += ARIA_EXPANDED + "='" + (item.expanded ? "true" : "false") + "' ";
                 }
 
                 if (item.enabled === false) {

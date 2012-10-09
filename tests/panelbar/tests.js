@@ -34,5 +34,9 @@ tests.push(
     {
         page: "panelbar/navigation.html",
         title: "panelbar navigation"
+    },
+    {
+        page: "panelbar/aria.html",
+        title: "panelbar aria"
     }
 );
