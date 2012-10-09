@@ -80,6 +80,14 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
         setProperty("connectors", value.properties());
     }
 
+    public Object getData() {
+        return (Object)getProperty("data");
+    }
+
+    public void setData(Object value) {
+        setProperty("data", value);
+    }
+
     public String getField() {
         return (String)getProperty("field");
     }

@@ -62,6 +62,14 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation/* 
         setProperty("animation", value.properties());
     }
 
+    public Object getActions() {
+        return (Object)getProperty("actions");
+    }
+
+    public void setActions(Object value) {
+        setProperty("actions", value);
+    }
+
     public boolean getDraggable() {
         return (boolean)getProperty("draggable");
     }

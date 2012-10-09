@@ -83,6 +83,22 @@ public class CategoryAxisTag extends BaseTag /* interfaces */implements Labels, 
         setProperty("axisCrossingValue", value);
     }
 
+    public Object getAxisCrossingValues() {
+        return (Object)getProperty("axisCrossingValues");
+    }
+
+    public void setAxisCrossingValues(Object value) {
+        setProperty("axisCrossingValues", value);
+    }
+
+    public Object getCategories() {
+        return (Object)getProperty("categories");
+    }
+
+    public void setCategories(Object value) {
+        setProperty("categories", value);
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -105,6 +121,14 @@ public class CategoryAxisTag extends BaseTag /* interfaces */implements Labels, 
 
     public void setJustified(boolean value) {
         setProperty("justified", value);
+    }
+
+    public Object getPlotBands() {
+        return (Object)getProperty("plotBands");
+    }
+
+    public void setPlotBands(Object value) {
+        setProperty("plotBands", value);
     }
 
     public boolean getReverse() {

@@ -170,6 +170,13 @@ the dataSource.</description>
         </attribute>
 
         <attribute>
+            <description>Specifies a list of dates, which will be passed to the month template.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the navigation depth.</description>
             <name>depth</name>
             <rtexprvalue>true</rtexprvalue>
@@ -256,6 +263,13 @@ the dataSource.</description>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
+            <name>seriesColors</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -541,6 +555,13 @@ settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the format will be used. Note that value of the format option is always used.</description>
+            <name>parseFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the start view.
 The following settings are available for the</description>
             <name>start</name>
@@ -608,6 +629,13 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the navigation depth of the calendar. The following
 settings are available for the</description>
             <name>depth</name>
@@ -648,6 +676,13 @@ settings are available for the</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the options.format and options.timeFormat will be used. Note that value of the format option is always used.</description>
+            <name>parseFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -863,6 +898,21 @@ The following settings are available for the</description>
             <name>encoded</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Allows custom stylesheets to be included within the editing area.</description>
+            <name>stylesheets</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
+as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs</description>
+            <name>tools</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -1926,6 +1976,13 @@ tab.</description>
         </attribute>
 
         <attribute>
+            <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the format, which is used to format the value of the TimePicker displayed in the input. The format also will be used to parse the input.</description>
             <name>format</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1951,6 +2008,13 @@ tab.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the formats, which are used to parse the value set with the value method or by direct input. If not set the value of the options.format will be used. Note that value of the format option is always used.</description>
+            <name>parseFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -2018,6 +2082,13 @@ the image URL of the treeview nodes.</description>
             <name>dataImageUrlField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data that the</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -2233,6 +2304,14 @@ Cancelling the event will prevent the upload.</description>
         </attribute>
 
         <attribute>
+            <description>The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize",
+and "Maximize".</description>
+            <name>actions</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Enables (</description>
             <name>draggable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2412,6 +2491,20 @@ has been clicked on a window with static content.</description>
         </attribute>
 
         <attribute>
+            <description>Category indicies at which the value axes cross the category axis.</description>
+            <name>axisCrossingValues</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Array of category names.</description>
+            <name>categories</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Color to apply to all axis elements. Any valid CSS color string will work here, including hex and rgb.
 Individual color settings for line and labels take priority.</description>
             <name>color</name>
@@ -2431,6 +2524,14 @@ Individual color settings for line and labels take priority.</description>
             <name>justified</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The plot bands of category axis.
+The plot band fields:</description>
+            <name>plotBands</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -2862,6 +2963,13 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
+            <description>Value indicies at which the category axes cross the value axis.</description>
+            <name>axisCrossingValues</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Color to apply to all axis elements.
 Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.</description>
             <name>color</name>
@@ -2898,6 +3006,14 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The plot bands of the value axis.
+The plot band fields:</description>
+            <name>plotBands</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -3463,6 +3579,13 @@ Template variables:
         <name>chart-seriesItem</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemTag</tag-class>
         <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
 
         <attribute>
             <description>The data field containing the series value.</description>
@@ -5293,6 +5416,14 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
         </attribute>
 
         <attribute>
+            <description>The ranges of the scale.
+The range fields:</description>
+            <name>ranges</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Reverses the axis direction - values increase from right to left and from top to bottom.</description>
             <name>reverse</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5901,6 +6032,14 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The ranges of the scale.
+The range fields:</description>
+            <name>ranges</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>

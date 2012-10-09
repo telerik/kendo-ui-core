@@ -95,6 +95,14 @@ public class ScaleTag extends BaseTag /* interfaces */implements Labels, MajorTi
         setProperty("minorUnit", value);
     }
 
+    public Object getRanges() {
+        return (Object)getProperty("ranges");
+    }
+
+    public void setRanges(Object value) {
+        setProperty("ranges", value);
+    }
+
     public boolean getReverse() {
         return (boolean)getProperty("reverse");
     }

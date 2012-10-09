@@ -10,9 +10,12 @@
     </head>
     <body>
         <h1>Hello world!</h1>
-        <p>The time on the server is ${serverTime}.</p>
+        
+        <p>The time on the server is ${serverTime}</p>
         
         <kendo:datePicker name="datePicker" value="${serverTime}"></kendo:datePicker>
+        
+        <kendo:calendar name="calendar" dates="${dates}" ></kendo:calendar>
         
         <kendo:window name="myWindow">
         	<kendo:window-content>

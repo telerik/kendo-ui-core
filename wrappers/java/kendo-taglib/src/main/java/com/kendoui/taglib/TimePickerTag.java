@@ -57,6 +57,14 @@ public class TimePickerTag extends WidgetTag /* interfaces */implements Animatio
         setProperty("culture", value);
     }
 
+    public Object getDates() {
+        return (Object)getProperty("dates");
+    }
+
+    public void setDates(Object value) {
+        setProperty("dates", value);
+    }
+
     public String getFormat() {
         return (String)getProperty("format");
     }
@@ -87,6 +95,14 @@ public class TimePickerTag extends WidgetTag /* interfaces */implements Animatio
 
     public void setMin(java.util.Date value) {
         setProperty("min", value);
+    }
+
+    public Object getParseFormats() {
+        return (Object)getProperty("parseFormats");
+    }
+
+    public void setParseFormats(Object value) {
+        setProperty("parseFormats", value);
     }
 
     public java.util.Date getValue() {

@@ -26,6 +26,7 @@ public class HomeController {
 
         model.addAttribute("serverTime", date );
 
+        model.addAttribute("dates", new Date[] { new Date() });
         return "home";
     }
 }

@@ -62,6 +62,14 @@ public class DateTimePickerTag extends WidgetTag /* interfaces */implements Anim
         setProperty("culture", value);
     }
 
+    public Object getDates() {
+        return (Object)getProperty("dates");
+    }
+
+    public void setDates(Object value) {
+        setProperty("dates", value);
+    }
+
     public String getDepth() {
         return (String)getProperty("depth");
     }
@@ -108,6 +116,14 @@ public class DateTimePickerTag extends WidgetTag /* interfaces */implements Anim
 
     public void setMin(java.util.Date value) {
         setProperty("min", value);
+    }
+
+    public Object getParseFormats() {
+        return (Object)getProperty("parseFormats");
+    }
+
+    public void setParseFormats(Object value) {
+        setProperty("parseFormats", value);
     }
 
     public String getStart() {

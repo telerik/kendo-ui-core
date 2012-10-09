@@ -57,6 +57,14 @@ public class CalendarTag extends WidgetTag /* interfaces */implements Month/* in
         setProperty("culture", value);
     }
 
+    public Object getDates() {
+        return (Object)getProperty("dates");
+    }
+
+    public void setDates(Object value) {
+        setProperty("dates", value);
+    }
+
     public String getDepth() {
         return (String)getProperty("depth");
     }

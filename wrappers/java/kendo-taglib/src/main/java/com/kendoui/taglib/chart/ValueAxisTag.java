@@ -83,6 +83,14 @@ public class ValueAxisTag extends BaseTag /* interfaces */implements Labels, Lin
         setProperty("axisCrossingValue", value);
     }
 
+    public Object getAxisCrossingValues() {
+        return (Object)getProperty("axisCrossingValues");
+    }
+
+    public void setAxisCrossingValues(Object value) {
+        setProperty("axisCrossingValues", value);
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -121,6 +129,14 @@ public class ValueAxisTag extends BaseTag /* interfaces */implements Labels, Lin
 
     public void setMinorUnit(float value) {
         setProperty("minorUnit", value);
+    }
+
+    public Object getPlotBands() {
+        return (Object)getProperty("plotBands");
+    }
+
+    public void setPlotBands(Object value) {
+        setProperty("plotBands", value);
     }
 
     public boolean getReverse() {

@@ -101,6 +101,14 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
         setProperty("dataSource", dataSource);
     }
 
+    public Object getSeriesColors() {
+        return (Object)getProperty("seriesColors");
+    }
+
+    public void setSeriesColors(Object value) {
+        setProperty("seriesColors", value);
+    }
+
     public String getTheme() {
         return (String)getProperty("theme");
     }

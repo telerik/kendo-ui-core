@@ -102,6 +102,14 @@ public class DatePickerTag extends WidgetTag /* interfaces */implements Animatio
         setProperty("min", value);
     }
 
+    public Object getParseFormats() {
+        return (Object)getProperty("parseFormats");
+    }
+
+    public void setParseFormats(Object value) {
+        setProperty("parseFormats", value);
+    }
+
     public String getStart() {
         return (String)getProperty("start");
     }
