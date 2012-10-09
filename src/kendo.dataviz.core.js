@@ -893,7 +893,8 @@
                 align: axis.options.majorTickType
             });
 
-            axis.render();
+            axis.createLabels();
+            axis.createTitle();
         },
 
         options: {
@@ -940,16 +941,6 @@
 
         // abstract labelsCount(): Number
         // abstract createAxisLabel(index, options): AxisLabel
-
-        render: function() {
-            var axis = this;
-
-            axis.children = [];
-            axis.labels = [];
-
-            axis.createLabels();
-            axis.createTitle();
-        },
 
         createLabels: function() {
             var axis = this,
