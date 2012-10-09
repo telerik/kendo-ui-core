@@ -3530,7 +3530,7 @@
                 axisRange = chart.valueAxisRanges[axisName],
                 values = [value.low, value.open, value.close, value.high];
 
-            if (defined(value)) {
+            if (!inArray(undefined, values)) {
                 axisRange = chart.valueAxisRanges[axisName] =
                     axisRange || { min: MAX_VALUE, max: MIN_VALUE };
 
