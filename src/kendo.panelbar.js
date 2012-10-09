@@ -400,7 +400,7 @@
             element
                 .toggleClass(defaultState, enable)
                 .toggleClass(DISABLEDCLASS, !enable)
-                .attr(ARIA_DISABLED, !enable)
+                .attr(ARIA_DISABLED, !enable);
         },
 
         select: function (element) {
@@ -705,6 +705,8 @@
                                 return $(PanelBar.renderContent({
                                     item: extend(value, { index: idx })
                                 }));
+                            } else {
+                                return false;
                             }
                         });
 
