@@ -51,31 +51,28 @@
         },
         ColorPicker = ui.ComboBox.extend({
             init: function(element, options) {
-                var that = this;
-
                 if (options && options.change) {
                     options.colorPickerChange = options.change;
                     delete options.change;
                 }
 
-                ui.ComboBox.fn.init.call(that, element, options);
+                ui.ComboBox.fn.init.call(this, element, options);
 
-                that.list.width(210);
-                that.popup.options.origin = "bottom right";
-                that.popup.options.position = "top right";
+                this.list.width(210);
+                this.popup.options.origin = "bottom right";
+                this.popup.options.position = "top right";
 
-                that._updateColorPreview();
+                this._updateColorPreview();
 
-                that.bind(CHANGE, proxy(that._colorChange, that));
+                this.bind(CHANGE, proxy(this._colorChange, this));
 
-                that.wrapper.addClass("k-colorpicker")
+                this.wrapper.addClass("k-colorpicker")
                     .find(".k-colorpicker").removeClass(".k-colorpicker");
             },
 
             _colorChange: function(e) {
-                var that = this,
-                    changeHandler = that.options.colorPickerChange,
-                    value = that._updateColorPreview();
+                var changeHandler = this.options.colorPickerChange,
+                    value = this._updateColorPreview();
 
                 if (rgbValuesRe.test(value)) {
                     value = toHex(value);
@@ -85,12 +82,12 @@
                     value = "transparent";
                 }
 
-                that.value(value);
+                this.value(value);
 
                 if (changeHandler) {
-                    changeHandler.call(that, {
-                        name: that.element.attr("id"),
-                        value: that.element.val()
+                    changeHandler.call(this, {
+                        name: this.element.attr("id"),
+                        value: this.element.val()
                     });
                 }
             },
@@ -124,11 +121,13 @@
             });
         },
         lessEOLRe = /;$/m,
-        lessConstantPairRe = /(@[a-z\-]+):\s*(.*)/i,
         LessConstants = ObservableObject.extend({
-            init: function(constants) {
-                this.constants = constants || {};
-                ObservableObject.fn.init.call(this, constants);
+            init: function(options) {
+                options = options || {};
+                this.template = options.template || "";
+                this.constants = options.constants || {};
+
+                ObservableObject.fn.init.call(this);
             },
 
             serialize: function() {
@@ -137,28 +136,36 @@
                 }).join("\n");
             },
 
-            deserialize: function(content) {
-                var that = this;
+            deserialize: function(themeContent, targetDocument) {
+                var lessConstantPairRe = /(@[a-z\-]+):\s*(.*)/i,
+                    constant, i,
+                    constants = themeContent.split(lessEOLRe);
 
-                $.each(content.split(lessEOLRe), function() {
-                    var result = lessConstantPairRe.exec(this);
+                if (lessConstantPairRe.test(themeContent)) {
+                    for (i = 0; i < constants.length; i++) {
+                        constant = lessConstantPairRe.exec(constants[i]);
 
-                    if (result) {
-                        that.update(result[1], result[2]);
+                        if (constant) {
+                            this.update(constant[1], constant[2]);
+                        }
                     }
-                });
+                } else {
+                    this._updateStyleSheet(themeContent, targetDocument);
+
+                    this.infer();
+                }
             },
 
             colors: function() {
                 var constants = this.constants,
-                    result = [];
+                    result = [], i, value;
 
-                $.each(constants, function() {
-                    var value = this.value;
+                for (i = 0; i < constants.length; i++) {
+                    value = constants[i].value;
                     if (hexValueRe.test(value) && $.inArray(value, result) < 0) {
                         result.push(value);
                     }
-                });
+                }
 
                 return result;
             },
@@ -249,13 +256,54 @@
                 cachedPrototype.remove();
             },
 
+            _generateTheme: function(callback) {
+                var constants = this.serialize();
+                (new window.less.Parser()).parse(
+                    constants + this.template,
+                    function (err, tree) {
+                        var console = window.console;
+
+                        if (err && console) {
+                            return console.error(err);
+                        }
+
+                        callback(constants, tree.toCSS());
+                    }
+                );
+            },
+
+            _updateStyleSheet: function(cssText, targetDocument) {
+                var style = $("style[title='themebuilder']")[0];
+
+                if (style) {
+                    style.parentNode.removeChild(style);
+                }
+
+                style = targetDocument.createElement("style");
+                style.setAttribute("title", "themebuilder");
+
+                $("head", targetDocument.documentElement)[0].appendChild(style);
+
+                if (style.styleSheet) {
+                    style.styleSheet.cssText = cssText;
+                } else {
+                    style.appendChild(targetDocument.createTextNode(cssText));
+                }
+            },
+
             applyTheme: function(targetDocument) {
+                var that = this;
+
+                this._generateTheme(function(constants, cssText) {
+                    that._updateStyleSheet(cssText, targetDocument);
+                });
             }
         }),
 
         JsonConstants = ObservableObject.extend({
-            init: function(constants) {
-                this.constants = constants || {};
+            init: function(options) {
+                options = options || {};
+                this.constants = options.constants || {};
                 ObservableObject.fn.init.call(this);
             },
 
@@ -342,12 +390,11 @@
 
         ThemeBuilder = kendo.Observable.extend({
             init: function(templateInfo, targetDocument) {
-                var that = this;
+                var themes = [],
+                    themebuilder = this;
 
-                templateInfo = that.templateInfo = templateInfo || {};
-                that.targetDocument = targetDocument || (window.parent || window).document;
-
-                var themes = [];
+                templateInfo = this.templateInfo = templateInfo || {};
+                this.targetDocument = targetDocument || (window.parent || window).document;
 
                 if (templateInfo.webConstants) {
                     themes.push(templateInfo.webConstants);
@@ -359,14 +406,11 @@
 
                 this.themes = new ThemeCollection(themes);
 
-                that.webConstantsHierarchy = templateInfo.webConstantsHierarchy;
-                that.datavizConstantsHierarchy = templateInfo.datavizConstantsHierarchy;
+                this.render(templateInfo.webConstantsHierarchy, templateInfo.datavizConstantsHierarchy);
 
-                this.themes.infer(that.targetDocument);
+                this.themes.infer(this.targetDocument);
 
-                that.render();
-
-                that.element = $("#kendo-themebuilder");
+                this.element = $("#kendo-themebuilder");
 
                 function changeHandler(e) {
                     var value = this.value();
@@ -375,7 +419,7 @@
                         value = value + "px";
                     }
 
-                    that._propertyChange({
+                    themebuilder._propertyChange({
                         name: this.element[0].id,
                         value: value
                     });
@@ -388,7 +432,7 @@
                     }).end()
                     .find(".ktb-combo")
                         .each(function() {
-                            var data = that.themes.valuesFor(this.id);
+                            var data = themebuilder.themes.valuesFor(this.id);
 
                             data.splice(0, 0, { text: "unchanged", value: this.value });
 
@@ -421,15 +465,15 @@
                         change: changeHandler
                     });
 
-                $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showWebSource, that));
-                $(".ktb-action-get-json").on(CLICK, proxy(that.showDataVizSource, that));
-                $(".ktb-action-show-import").on(CLICK, proxy(that.showImport, that));
-                $(".ktb-action-create-web,.ktb-action-create-dataviz").on(CLICK, proxy(that.showSuite, that));
-                $(".ktb-action-back").on(CLICK, proxy(that.hideOverlay, that));
-                $(".ktb-action-back-to-suites").on(CLICK, proxy(that.showSuiteChooser, that));
-                $(".ktb-action-import").on(CLICK, proxy(that.importTheme, that));
+                $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(this.showWebSource, this));
+                $(".ktb-action-get-json").on(CLICK, proxy(this.showDataVizSource, this));
+                $(".ktb-action-show-import").on(CLICK, proxy(this.showImport, this));
+                $(".ktb-action-create-web,.ktb-action-create-dataviz").on(CLICK, proxy(this.showSuite, this));
+                $(".ktb-action-back").on(CLICK, proxy(this.hideOverlay, this));
+                $(".ktb-action-back-to-suites").on(CLICK, proxy(this.showSuiteChooser, this));
+                $(".ktb-action-import").on(CLICK, proxy(this.importTheme, this));
 
-                that._track();
+                this._track();
             },
             showSuiteChooser: function(e) {
                 $("#suite-chooser").slideDown("fast", function() {
@@ -485,13 +529,7 @@
                 var themeContent = $(e.target).closest(".ktb-view").find("textarea").val(),
                     constants = this.constants;
 
-                if (lessConstantPairRe.test(themeContent)) {
-                    constants.deserialize(themeContent);
-                } else {
-                    this.updateStyleSheet(themeContent);
-
-                    constants.infer();
-                }
+                constants.deserialize(themeContent, this.targetDocument);
 
                 this._propertyChange({});
 
@@ -502,12 +540,11 @@
                 };
 
                 $("input.ktb-colorpicker,input.ktb-numeric,input.ktb-combo").each(function() {
-                    var that = this,
-                        dataType = that.className.replace(/k-formatted-value|k-input|\s+/gi, ""),
-                        clientObject = $(that).data(clientObjects[dataType]);
+                    var dataType = this.className.replace(/k-formatted-value|k-input|\s+/gi, ""),
+                        clientObject = $(this).data(clientObjects[dataType]);
 
                     if (clientObject) {
-                        clientObject.value(constants[that.id].value);
+                        clientObject.value(constants[this.id].value);
                     }
                 });
             },
@@ -516,43 +553,9 @@
 
                 $(".ktb-overlay:visible").slideUp();
             },
-            _generateTheme: function(callback) {
-                var constants = this.themes[0].serialize();
-                (new window.less.Parser()).parse(
-                    constants + this.templateInfo.template,
-                    function (err, tree) {
-                        var console = window.console;
-
-                        if (err && console) {
-                            return console.error(err);
-                        }
-
-                        callback(constants, tree.toCSS());
-                    }
-                );
-            },
             _propertyChange: function(e) {
                 this.themes.update(e.name, e.value);
                 this.themes.apply(this.targetDocument);
-            },
-            updateStyleSheet: function(cssText) {
-                var style = $("style[title='themebuilder']")[0],
-                    doc = this.targetDocument;
-
-                if (style) {
-                    style.parentNode.removeChild(style);
-                }
-
-                style = doc.createElement("style");
-                style.setAttribute("title", "themebuilder");
-
-                $("head", doc.documentElement)[0].appendChild(style);
-
-                if (style.styleSheet) {
-                    style.styleSheet.cssText = cssText;
-                } else {
-                    style.appendChild(doc.createTextNode(cssText));
-                }
             },
             _track: function() {
                 var urchinCode = "UA-23480938-1",
@@ -586,7 +589,7 @@
                 // trigger the tracking
                 img.src = urchinUrl;
             },
-            render: function() {
+            render: function(webConstantsHierarchy, datavizConstantsHierarchy) {
                 var that = this,
                     template = kendo.template,
                     templateOptions = { paramName: "d", useWithBlock: false },
@@ -639,7 +642,7 @@
                                  button({ id: "get-less", text: "Get LESS..." }) +
                                  button({ id: "show-import", text: "Import..." }),
                         content: "<ul class='stylable-elements'>" +
-                                    map(that.webConstantsHierarchy || {}, function(section, title) {
+                                    map(webConstantsHierarchy || {}, function(section, title) {
                                         return propertyGroupTemplate({
                                             title: title,
                                             constants: that.themes[0].constants || {},
@@ -656,7 +659,7 @@
                         toolbar: button({ id: "back-to-suites", text: "Back" }) +
                                  button({ id: "get-json", text: "Get JSON..." }),
                         content: "<ul class='stylable-elements'>" +
-                                    map(that.datavizConstantsHierarchy || {}, function(section, title) {
+                                    map(datavizConstantsHierarchy || {}, function(section, title) {
                                         return propertyGroupTemplate({
                                             title: title,
                                             constants: that.themes[1].constants || {},

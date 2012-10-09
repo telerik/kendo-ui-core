@@ -43,7 +43,9 @@
 
             test("update method updates variables in themes", function() {
                 var collection = new ThemeCollection([
-                        new LessConstants({ "@foo": {} })
+                        new LessConstants({
+                            constants: { "@foo": {} }
+                        })
                     ]),
                     color = "#f1f1f1";
 
@@ -53,7 +55,9 @@
             });
 
             test("applyTheme method applies theme to target document", 1, function() {
-                var less = new LessConstants({ "@foo": { value: "#ff0000" } }),
+                var less = new LessConstants({
+                        constants: { "@foo": { value: "#ff0000" } }
+                    }),
                     collection = new ThemeCollection([ less ]);
 
                 less.applyTheme = function() {

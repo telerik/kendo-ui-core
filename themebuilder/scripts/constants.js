@@ -246,9 +246,13 @@
         };
 
     window.themeBuilder = new kendo.ThemeBuilder({
-        template: lessTemplate,
-        webConstants: new kendo.LessConstants(webConstants),
-        datavizConstants: new kendo.JsonConstants(datavizConstants),
+        webConstants: new kendo.LessConstants({
+            constants: webConstants,
+            template: lessTemplate
+        }),
+        datavizConstants: new kendo.JsonConstants({
+            constants: datavizConstants
+        }),
         webConstantsHierarchy: webConstantsHierarchy,
         datavizConstantsHierarchy: datavizConstantsHierarchy
     });

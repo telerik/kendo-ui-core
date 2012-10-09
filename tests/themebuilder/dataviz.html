@@ -68,8 +68,10 @@
 
             test("infer infers basic constant", function() {
                 constants = new JsonConstants({
-                    "title.color": {
-                        property: "color"
+                    constants: {
+                        "title.color": {
+                            property: "color"
+                        }
                     }
                 });
 
@@ -80,8 +82,10 @@
 
             test("infer infers multiple constants", function() {
                 constants = new JsonConstants({
-                    "title.color": { property: "color" },
-                    "tooltip.background": { property: "color" }
+                    constants: {
+                        "title.color": { property: "color" },
+                        "tooltip.background": { property: "color" }
+                    }
                 });
 
                 constants.infer(document);
@@ -93,7 +97,9 @@
                 createChart();
 
                 constants = new JsonConstants({
-                    "title.color": { property: "color", value: fancyColor }
+                    constants: {
+                        "title.color": { property: "color", value: fancyColor }
+                    }
                 });
 
                 constants.applyTheme(document);
@@ -105,8 +111,10 @@
 
             test("source returns json source", function() {
                 constants = new JsonConstants({
-                    "title.color": { property: "color", value: "#b4d455" },
-                    "tooltip.background": { property: "color", value: "#00f00d" }
+                    constants: {
+                        "title.color": { property: "color", value: "#b4d455" },
+                        "tooltip.background": { property: "color", value: "#00f00d" }
+                    }
                 });
 
                 var source = JSON.parse(constants.source("string"));
