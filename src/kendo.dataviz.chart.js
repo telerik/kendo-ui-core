@@ -5282,6 +5282,7 @@
                     if (axis instanceof CategoryAxis) {
                         delete plotArea.namedCategoryAxes[axis.options.name];
                     } else {
+                        plotArea.valueAxisRangeTracker.reset(axis.options.name);
                         delete plotArea.namedValueAxes[axis.options.name]
                     }
 
@@ -5554,7 +5555,7 @@
             plotArea.appendChart(areaChart, pane);
         },
 
-        createOHLCChart: function(series) {
+        createOHLCChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5568,7 +5569,7 @@
                     spacing: firstSeries.spacing
                 });
 
-            plotArea.appendChart(chart);
+            plotArea.appendChart(chart, pane);
         },
 
         createCandlestickChart: function(series, pane) {
@@ -5813,6 +5814,10 @@
                     range.max = math.max(range.max, chartRange.max);
                 }
             }
+        },
+
+        reset: function(axisName) {
+            this.axisRanges[axisName] = { min: MAX_VALUE, max: MIN_VALUE };
         },
 
         query: function(axisName) {
