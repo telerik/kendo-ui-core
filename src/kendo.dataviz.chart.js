@@ -279,6 +279,9 @@
             var chart = this,
                 options = chart.options,
                 element = chart.element,
+                viewElement,
+                existingViewElement = chart._viewElement,
+                container = document.createElement("div"),
                 model = chart._model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
@@ -289,7 +292,23 @@
                 view = chart._view = viewType.fromModel(model);
 
                 element.css("position", "relative");
-                chart._viewElement = view.renderTo(element[0]);
+                view.renderTo(container);
+                viewElement = container.firstElementChild;
+
+                if (existingViewElement) {
+                    existingViewElement.parentNode.replaceChild(
+                        viewElement,
+                        existingViewElement
+                    );
+                } else {
+                    element.append(viewElement);
+                }
+
+                if (chart._tooltip) {
+                    chart._tooltip.element.remove();
+                }
+
+                chart._viewElement = viewElement;
                 chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
                 chart._highlight = new Highlight(view, chart._viewElement);
             }
