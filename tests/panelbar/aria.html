@@ -165,6 +165,28 @@
             equal(items.length, 3);
         });
 
+        test("PanelBar updates aria-expanded state", function() {
+            addItems(3);
+            var last = ul.find(".k-item:last");
+
+            addItems(2, last);
+
+            panelbar.expand(last);
+            equal(last.attr("aria-expanded"), "true");
+        });
+
+        test("PanelBar updates aria-expanded state on collapse", function() {
+            addItems(3);
+            var last = ul.find(".k-item:last");
+
+            addItems(2, last);
+
+            panelbar.expand(last);
+            panelbar.collapse(last);
+
+            equal(last.attr("aria-expanded"), "false");
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>

@@ -793,6 +793,7 @@
                 childGroup = element.find(GROUPS),
                 prevent, content;
 
+            element.attr("aria-expanded", !isVisible);
             if (childGroup.length) {
                 this._toggleGroup(childGroup, isVisible);
                 prevent = true;
