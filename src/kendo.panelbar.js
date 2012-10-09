@@ -42,6 +42,8 @@
         selectableItems = "> li > .k-state-selected, .k-panel > li > .k-state-selected",
         highlightableItems = "> .k-state-highlighted, .k-panel > .k-state-highlighted",
         defaultState = "k-state-default",
+        ARIA_DISABLED = "aria-disabled",
+        ARIA_EXPANDED = "aria-expanded",
         VISIBLE = ":visible",
         EMPTY = ":empty",
         SINGLE = "single",
@@ -80,11 +82,11 @@
                 var attr = "";
 
                 if (item.items || item.content || item.contentUrl) {
-                    attr += "aria-expanded=" + (item.expanded ? "true" : "false") + " ";
+                    attr += ARIA_EXPANDED + "=" + (item.expanded ? "true" : "false") + " ";
                 }
 
                 if (item.enabled === false) {
-                    attr += "aria-disabled='true'";
+                    attr += ARIA_DISABLED + "='true'";
                 }
 
                 return attr;
@@ -173,7 +175,7 @@
         item
             .filter("li[disabled]")
             .addClass("k-state-disabled")
-            .attr("aria-disabled", true)
+            .attr(ARIA_DISABLED, true)
             .removeAttr("disabled");
 
         item
@@ -193,7 +195,7 @@
             var item = $(this);
 
             if (item.children(".k-content, .k-group")[0]) {
-                item.attr("aria-expanded", false);
+                item.attr(ARIA_EXPANDED, false);
             }
 
             if (!item.children(LINKSELECTOR).length) {
@@ -398,7 +400,7 @@
             element
                 .toggleClass(defaultState, enable)
                 .toggleClass(DISABLEDCLASS, !enable)
-                .attr("aria-disabled", !enable)
+                .attr(ARIA_DISABLED, !enable)
         },
 
         select: function (element) {
@@ -706,7 +708,7 @@
                             }
                         });
 
-                referenceItem.attr("aria-expanded", false);
+                referenceItem.attr(ARIA_EXPANDED, false);
                 console.log(referenceItem);
             } else {
                 items = $(item);
@@ -811,7 +813,7 @@
                 childGroup = element.find(GROUPS),
                 prevent, content;
 
-            element.attr("aria-expanded", !isVisible);
+            element.attr(ARIA_EXPANDED, !isVisible);
             if (childGroup.length) {
                 this._toggleGroup(childGroup, isVisible);
                 prevent = true;
