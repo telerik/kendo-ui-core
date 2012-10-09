@@ -5,6 +5,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.autocomplete.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 
@@ -17,6 +19,10 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
         super("AutoComplete");
     }
 
+    @Override
+    public Element<?> createElement() {
+        return new Input();
+    }
     
     @Override
     public int doEndTag() throws JspException {
@@ -51,7 +57,7 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public String getDataTextField() {

@@ -19,6 +19,7 @@
         <name>autoComplete</name>
         <tag-class>com.kendoui.taglib.AutoCompleteTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -26,6 +27,7 @@
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Sets the field of the data item that provides the text content of the list items.</description>
@@ -154,6 +156,7 @@ the dataSource.</description>
         <name>calendar</name>
         <tag-class>com.kendoui.taglib.CalendarTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -161,6 +164,7 @@ the dataSource.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
@@ -257,6 +261,7 @@ the dataSource.</description>
         <name>chart</name>
         <tag-class>com.kendoui.taglib.ChartTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -264,6 +269,7 @@ the dataSource.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
@@ -334,6 +340,7 @@ and is about to render it.</description>
         <name>comboBox</name>
         <tag-class>com.kendoui.taglib.ComboBoxTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -341,6 +348,7 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Controls whether to bind the widget to the DataSource on initialization.</description>
@@ -499,10 +507,165 @@ and is about to render it.</description>
 
 
     <tag>
+        <description>DataSource</description>
+        <name>dataSource</name>
+        <tag-class>com.kendoui.taglib.DataSourceTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+        <attribute>
+            <description>Sets fields on which initial aggregates should be calculated</description>
+            <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Enables (</description>
+            <name>autoSync</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Enables (</description>
+            <name>batch</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the local JavaScript object to use for the data source.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets initial filter</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets initial grouping</description>
+            <name>group</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets the index of the displayed page of data.</description>
+            <name>page</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets the number of records which contains a given page of data.</description>
+            <name>pageSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if aggregates are calculated on the server or not. By default aggregates are calculated client-side.</description>
+            <name>serverAggregates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if filtering of the data is handled on the server. By default filtering is performed client-side.</description>
+            <name>serverFiltering</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if grouping of the data is handled on the server. By default grouping is performed client-side.</description>
+            <name>serverGrouping</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if paging of the data is on the server. By default paging is performed client-side. If</description>
+            <name>serverPaging</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if sorting of the data should is handled on the server. By default sorting is performed client-side.</description>
+            <name>serverSorting</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets initial sort order</description>
+            <name>sort</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Loads transport with preconfigured settings. Currently supports only "odata" (Requires kendo.data.odata.js to be included).</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Fires when data is changed or read from the transport.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when an error occurs during data read or sync. The event arguments are the same as the ones of the error event of $.ajax().</description>
+            <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires after changes are synced.</description>
+            <name>sync</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when data request is to be made.</description>
+            <name>requestStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when a data request is received. Raised after a Create, Read, Update or Destroy request is performed.</description>
+            <name>requestEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+        
+    <tag>
+        <description>Subscribes to an event of the DataSource widget</description>
+        <name>dataSource-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, error, sync, requestStart, requestEnd.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
         <description>DatePicker</description>
         <name>datePicker</name>
         <tag-class>com.kendoui.taglib.DatePickerTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -510,6 +673,7 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
@@ -613,6 +777,7 @@ The following settings are available for the</description>
         <name>dateTimePicker</name>
         <tag-class>com.kendoui.taglib.DateTimePickerTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -620,6 +785,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
@@ -744,6 +910,7 @@ The following settings are available for the</description>
         <name>dropDownList</name>
         <tag-class>com.kendoui.taglib.DropDownListTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -751,6 +918,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Controls whether to bind the widget on initialization.</description>
@@ -885,6 +1053,7 @@ The following settings are available for the</description>
         <name>editor</name>
         <tag-class>com.kendoui.taglib.EditorTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -892,6 +1061,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Indicates whether the Editor should submit encoded HTML tags.</description>
@@ -967,6 +1137,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <name>grid</name>
         <tag-class>com.kendoui.taglib.GridTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -974,6 +1145,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Indicates whether the grid will call read on the DataSource initially.</description>
@@ -1075,6 +1247,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <name>linearGauge</name>
         <tag-class>com.kendoui.taglib.LinearGaugeTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1082,6 +1255,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>A value indicating if transition animations should be played.</description>
@@ -1098,6 +1272,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <name>listView</name>
         <tag-class>com.kendoui.taglib.ListViewTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1105,6 +1280,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Indicates whether the list view will call read on the DataSource initially.</description>
@@ -1170,6 +1346,7 @@ and is about to render it.</description>
         <name>menu</name>
         <tag-class>com.kendoui.taglib.MenuTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1177,6 +1354,7 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies that sub menus should close after item selection (provided they won't navigate).</description>
@@ -1259,6 +1437,7 @@ its sub menus to the left.</description>
         <name>numericTextBox</name>
         <tag-class>com.kendoui.taglib.NumericTextBoxTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1266,6 +1445,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies the culture info used by the NumericTextBox widget.</description>
@@ -1376,6 +1556,7 @@ its sub menus to the left.</description>
         <name>pager</name>
         <tag-class>com.kendoui.taglib.PagerTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1383,6 +1564,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Indicates whether the pager refresh method will be called within its initialization.</description>
@@ -1481,6 +1663,7 @@ its sub menus to the left.</description>
         <name>panelBar</name>
         <tag-class>com.kendoui.taglib.PanelBarTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1488,6 +1671,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies how the</description>
@@ -1548,6 +1732,7 @@ its sub menus to the left.</description>
         <name>radialGauge</name>
         <tag-class>com.kendoui.taglib.RadialGaugeTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1555,6 +1740,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>The width of the range indicators.</description>
@@ -1585,6 +1771,7 @@ its sub menus to the left.</description>
         <name>rangeSlider</name>
         <tag-class>com.kendoui.taglib.RangeSliderTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1592,6 +1779,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
@@ -1683,6 +1871,7 @@ The orientation of a</description>
         <name>slider</name>
         <tag-class>com.kendoui.taglib.SliderTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1690,6 +1879,7 @@ The orientation of a</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>The title of the decrease button of the</description>
@@ -1794,6 +1984,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         <name>splitter</name>
         <tag-class>com.kendoui.taglib.SplitterTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1801,6 +1992,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies the orientation of the</description>
@@ -1856,6 +2048,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         <name>tabStrip</name>
         <tag-class>com.kendoui.taglib.TabStripTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1863,6 +2056,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.</description>
@@ -1960,6 +2154,7 @@ tab.</description>
         <name>timePicker</name>
         <tag-class>com.kendoui.taglib.TimePickerTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1967,6 +2162,7 @@ tab.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
@@ -2061,6 +2257,7 @@ tab.</description>
         <name>treeView</name>
         <tag-class>com.kendoui.taglib.TreeViewTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -2068,6 +2265,7 @@ tab.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Template for rendering of the treeview checkboxes.</description>
@@ -2201,6 +2399,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
         <name>upload</name>
         <tag-class>com.kendoui.taglib.UploadTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -2208,6 +2407,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Enables (</description>
@@ -2295,6 +2495,7 @@ Cancelling the event will prevent the upload.</description>
         <name>window</name>
         <tag-class>com.kendoui.taglib.WindowTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -2302,6 +2503,7 @@ Cancelling the event will prevent the upload.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize",
@@ -4858,6 +5060,275 @@ hex and rgb.</description>
 
 
     <tag>
+        <description>Set the object responsible for describing the raw data format.</description>
+        <name>dataSource-schema</name>
+        <tag-class>com.kendoui.taglib.datasource.SchemaTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the field from the response which contains the aggregate results. If set to a function - the function will be called to
+return the aggregate results for the current response.</description>
+            <name>aggregates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the field from the response which contains the data items. If set to a function - the function will be called to
+return the data items for the current response.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the field from the response which contains any errors. If set to a function - the function will be called to
+return the errors for the current response (if present). If there are any errors the</description>
+            <name>errors</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the field from the response which contains the groups. If set to a function - the function will be called to
+return the groups for the current response.</description>
+            <name>groups</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the field from the response which contains the total number of data items. If set to a function - the function will be called to
+return the total number of data items for the current response.</description>
+            <name>total</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specify the type of the response - XML or JSON. The only supported values are</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies the settings for loading and saving data. This can be a remote or local/in-memory data.</description>
+        <name>dataSource-transport</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Options for remote create data operation, or the URL of the remote service.</description>
+            <name>create</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Options for remote destroy data operation, or the URL of the remote service.</description>
+            <name>destroy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Options for remote read data operation, or the URL of the remote service.</description>
+            <name>read</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Options for remote update data operation, or the URL of the remote service.</description>
+            <name>update</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Options for remote create data operation, or the URL of the remote service.</description>
+        <name>dataSource-transport-create</name>
+        <tag-class>com.kendoui.taglib.datasource.CreateTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of request to make (</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Options for remote destroy data operation, or the URL of the remote service.</description>
+        <name>dataSource-transport-destroy</name>
+        <tag-class>com.kendoui.taglib.datasource.DestroyTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of request to make (</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Options for remote read data operation, or the URL of the remote service.</description>
+        <name>dataSource-transport-read</name>
+        <tag-class>com.kendoui.taglib.datasource.ReadTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of request to make (</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Options for remote update data operation, or the URL of the remote service.</description>
+        <name>dataSource-transport-update</name>
+        <tag-class>com.kendoui.taglib.datasource.UpdateTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of request to make (</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The animation(s) used for opening and/or closing the pop-up. Setting this value to</description>
         <name>datePicker-animation</name>
         <tag-class>com.kendoui.taglib.datepicker.AnimationTag</tag-class>
@@ -6805,91 +7276,5 @@ containing one or more fields with the same name as the original input name.</de
         <name>treeView-item-items</name>
         <tag-class>com.kendoui.taglib.treeview.ItemsTag</tag-class>
         <body-content>JSP</body-content>
-    </tag>
-    
-    <tag>
-        <description>DataSource</description>
-        <name>dataSource</name>
-        <tag-class>com.kendoui.taglib.DataSourceTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <name>type</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <name>serverFiltering</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>serverPaging</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>serverSorting</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>serverGrouping</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>pageSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-        <attribute>
-            <name>batch</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>sendAllFields</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>change</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>error</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>sync</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>requestStart</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>requestEnd</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-    </tag>
-
-    <tag>
-        <description>DataSource Transport</description>
-        <name>transport</name>
-        <tag-class>com.kendoui.taglib.datasource.TransportTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>Transport Read</description>
-        <name>read</name>
-        <tag-class>com.kendoui.taglib.datasource.ReadTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <name>url</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
     </tag>
 </taglib>

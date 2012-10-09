@@ -1,20 +1,42 @@
-package com.kendoui.taglib.datasource;
 
-import javax.servlet.jsp.JspException;
+package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.BaseTag;
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
-public class ReadTag extends BaseTag {
+public class CreateTag extends BaseTag /* interfaces *//* interfaces */ {
+    
     @Override
     public int doEndTag() throws JspException {
-        TransportTag transport = (TransportTag)findParentWithClass(TransportTag.class);
+//>> doEndTag
 
-        transport.setRead(this);
+        Create parent = (Create)findParentWithClass(Create.class);
 
-        return EVAL_PAGE;
+        parent.setCreate(this);
+
+//<< doEndTag
+
+        return super.doEndTag();
     }
-    
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
 //>> Attributes
 
     public boolean getCache() {
@@ -58,4 +80,5 @@ public class ReadTag extends BaseTag {
     }
 
 //<< Attributes
+
 }

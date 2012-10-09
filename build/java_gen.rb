@@ -3,7 +3,7 @@ require 'erb'
 
 TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 
-MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md')
+MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md').include('docs/api/framework/datasource.md')
 
 XML_EVENT_ATTRIBUTE_TEMPLATE = ERB.new(%{
         <attribute>
@@ -29,6 +29,7 @@ XML_WIDGET_TAG_TEMPLATE = ERB.new(%{
         <name><%= name.camelize %></name>
         <tag-class>com.kendoui.taglib.<%= java_type %></tag-class>
         <body-content>JSP</body-content>
+<% if name != 'DataSource' %>
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -36,6 +37,7 @@ XML_WIDGET_TAG_TEMPLATE = ERB.new(%{
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+<% end %>
 <%= (options + events).map {|o| o.to_xml }.join %>
     </tag>
         })

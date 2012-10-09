@@ -3,10 +3,10 @@
 <html>
     <head>
         <title>Home</title>
-        <link href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.common.min.css" rel="stylesheet" />
-        <link href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.default.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.default.min.css" rel="stylesheet" />
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-        <script src="http://cdn.kendostatic.com/2012.2.710/js/kendo.all.min.js"></script>
+        <script src="http://cdn.kendostatic.com/2012.2.913/js/kendo.all.min.js"></script>
     </head>
     <body>
         <h1>Hello world!</h1>
@@ -17,25 +17,27 @@
         
         <kendo:calendar name="calendar" dates="${dates}" ></kendo:calendar>
         
+        <kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3">
+      	    <kendo:dataSource type="odata" serverFiltering="true" serverPaging="true" pageSize="20">
+      	    	<kendo:dataSource-transport>
+      	    		<kendo:dataSource-transport-read url="http://odata.netflix.com/Catalog/Titles"/>
+      	    	</kendo:dataSource-transport>
+      	    </kendo:dataSource>
+      	    <kendo:autoComplete-event name="change">
+      	    	<script>
+      	    	function dataBound() {
+      	    		console.log("change");
+      	    	}
+      	    	</script>
+      	    </kendo:autoComplete-event>
+       </kendo:autoComplete>
+	            
         <kendo:window name="myWindow">
         	<kendo:window-content>
         	
 	        	<strong>Window Content</strong>
 	        	
-	        	<kendo:autoComplete name="myAutoComplete" dataTextField="Name" minLength="3">
-	        	    <kendo:dataSource type="odata" serverFiltering="true" serverPaging="true" pageSize="20">
-	        	    	<kendo:transport>
-	        	    		<kendo:read url="http://odata.netflix.com/Catalog/Titles"></kendo:read>
-	        	    	</kendo:transport>
-	        	    </kendo:dataSource>
-	        	    <kendo:autoComplete-event name="change">
-	        	    	<script>
-	        	    	function dataBound() {
-	        	    		alert("change");
-	        	    	}
-	        	    	</script>
-	        	    </kendo:autoComplete-event>
-	            </kendo:autoComplete>
+	        	
 	        
 	        	<kendo:grid name="grid">
 	        		<kendo:grid-columns>
