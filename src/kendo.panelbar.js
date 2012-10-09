@@ -62,7 +62,7 @@
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li role='listitem' #=aria# class='#= wrapperCssClass(group, item) #'>" +
+                "<li role='listitem' #=aria(item)# class='#= wrapperCssClass(group, item) #'>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
@@ -76,6 +76,20 @@
         },
 
         rendering = {
+            aria: function(item) {
+                var attr = "";
+
+                if (item.items || item.content || item.contentUrl) {
+                    attr += "aria-expanded=" + (item.expanded ? "true" : "false") + " ";
+                }
+
+                if (item.enabled === false) {
+                    attr += "aria-disabled='true'";
+                }
+
+                return attr;
+            },
+
             wrapperCssClass: function (group, item) {
                 var result = "k-item",
                     index = item.index;
@@ -98,6 +112,7 @@
 
                 return result;
             },
+
             textClass: function(item, group) {
                 var result = LINK;
 
@@ -158,7 +173,9 @@
         item
             .filter("li[disabled]")
             .addClass("k-state-disabled")
+            .attr("aria-disabled", true)
             .removeAttr("disabled");
+
         item
             .filter(":not([class*=k-state])")
             .children("a")
@@ -380,7 +397,8 @@
             element = this.element.find(element);
             element
                 .toggleClass(defaultState, enable)
-                .toggleClass(DISABLEDCLASS, !enable);
+                .toggleClass(DISABLEDCLASS, !enable)
+                .attr("aria-disabled", !enable)
         },
 
         select: function (element) {
@@ -938,15 +956,13 @@
             options = extend({ panelBar: {}, group: {} }, options);
 
             var empty = templates.empty,
-                item = options.item,
-                content = item.items || item.content || item.contentUrl;
+                item = options.item;
 
             return templates.item(extend(options, {
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
-                arrow: content ? templates.arrow : empty,
-                aria: content ? "aria-expanded='false'" : "",
+                arrow: item.items || item.content || item.contentUrl ? templates.arrow : empty,
                 subGroup: PanelBar.renderGroup
             }, rendering));
         },

@@ -187,6 +187,40 @@
             equal(last.attr("aria-expanded"), "false");
         });
 
+        test("PanelBar adds aria-disabled attr", function() {
+            addItems(3);
+            var first = ul.find(".k-item:first");
+
+            panelbar.enable(first, false);
+
+            equal(first.attr("aria-disabled"), "true");
+        });
+
+        test("PanelBar adds aria-disabled=false", function() {
+            addItems(3);
+            var first = ul.find(".k-item:first");
+
+            panelbar.enable(first, false);
+            panelbar.enable(first);
+
+            equal(first.attr("aria-disabled"), "false");
+        });
+
+        test("PanelBar adds aria-disabled on init", function() {
+            var panel = $("<ul id='test'><li disabled='disabled'>Test</li></ul>").kendoPanelBar();
+
+            equal(panel.find(".k-item:first").attr("aria-disabled"), "true");
+        });
+
+        test("PanelBar adds aria-disabled on append", function() {
+            panelbar.append({
+                text: "first",
+                enabled: false
+            });
+
+            equal(ul.find(".k-item:first").attr("aria-disabled"), "true");
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
