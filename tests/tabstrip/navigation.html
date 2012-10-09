@@ -85,7 +85,8 @@
             });
 
             var item = div.find(".k-item").eq(1);
-            ok(item.hasClass("k-state-focused"));
+            ok(!item.hasClass("k-state-focused"));
+            ok(item.hasClass("k-state-active"));
         });
 
         test("TabStrip misses next item if disabled", function() {
@@ -103,7 +104,8 @@
             });
 
             var item = div.find(".k-item:last");
-            ok(item.hasClass("k-state-focused"));
+            ok(!item.hasClass("k-state-focused"));
+            ok(item.hasClass("k-state-active"));
         });
 
         test("TabStrip selects first if last is selected", function() {
@@ -120,7 +122,7 @@
                 keyCode: keys.RIGHT
             });
 
-            ok(div.find(".k-item:first").hasClass("k-state-focused"));
+            ok(div.find(".k-item:first").hasClass("k-state-active"));
         });
 
         test("TabStrip selects prev item on key UP", function() {
@@ -137,7 +139,7 @@
                 keyCode: keys.UP
             });
 
-            ok(div.find(".k-item:first").hasClass("k-state-focused"));
+            ok(div.find(".k-item:first").hasClass("k-state-active"));
             equal(div.attr("aria-activedescendant"), "test_ts_active");
         });
 
@@ -153,7 +155,7 @@
                 keyCode: keys.LEFT
             });
 
-            ok(div.find(".k-item:last").hasClass("k-state-focused"));
+            ok(div.find(".k-item:last").hasClass("k-state-active"));
 
         });
 
@@ -173,7 +175,7 @@
             });
 
             var item = div.find(".k-item:first");
-            ok(item.hasClass("k-state-focused"));
+            ok(item.hasClass("k-state-active"));
         });
 
         test("TabStrip selects focused item on ENTER", function() {

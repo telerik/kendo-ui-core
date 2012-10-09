@@ -33,10 +33,9 @@
         FOCUSEDSTATE = "k-state-focused",
         HOVERSTATE = "k-state-hover",
         TABONTOP = "k-tab-on-top",
-        ACTIVEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
-        CLICKABLEITEMS = ".k-tabstrip-items > " + ACTIVEITEMS,
-        NAVIGATABLEITEMS = ACTIVEITEMS + ":not(." + ACTIVESTATE + ")",
-        HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS,
+        NAVIGATABLEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
+        CLICKABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS,
+        HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS + ":not(." + ACTIVESTATE + ")",
         DISABLEDLINKS = ".k-tabstrip-items > .k-state-disabled .k-link",
 
         templates = {
@@ -173,7 +172,7 @@
                 })
                 .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
-                .on("focus" + NS, function() { that._current(that._endItem("first")); })
+                .on("focus" + NS, $.proxy(that._active, that))
                 .on("blur" + NS, function() { that._current(null); });
 
             that._isRtl = kendo.support.isRtl(that.wrapper);
@@ -211,6 +210,11 @@
             kendo.notify(that);
         },
 
+        _active: function() {
+            var item = this.tabGroup.children().filter("." + ACTIVESTATE);
+            this._current(item[0] ? item : this._endItem("first"));
+        },
+
         _endItem: function(action) {
             return this.tabGroup.children(NAVIGATABLEITEMS)[action]();
         },
@@ -233,7 +237,7 @@
                 item = this._endItem(endItem);
             }
 
-            if (item.hasClass(DISABLEDSTATE) || item.hasClass(ACTIVESTATE)) {
+            if (item.hasClass(DISABLEDSTATE)) {
                 item = this._item(item, action);
             }
 
@@ -254,8 +258,10 @@
                 focused.removeAttr("id");
             }
 
-            if (candidate && !candidate.hasClass(ACTIVESTATE)) {
-                candidate.addClass(FOCUSEDSTATE);
+            if (candidate) {
+                if (!candidate.hasClass(ACTIVESTATE)) {
+                    candidate.addClass(FOCUSEDSTATE);
+                }
 
                 that.element.removeAttr("aria-activedescendant");
 
@@ -289,7 +295,7 @@
             }
 
             if (action) {
-                that._current(that._item(current, action));
+                that._click(that._item(current, action));
                 e.preventDefault();
             }
         },
