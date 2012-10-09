@@ -708,8 +708,9 @@
                             }
                         });
 
-                referenceItem.attr(ARIA_EXPANDED, false);
-                console.log(referenceItem);
+                if (isReferenceItem) {
+                    referenceItem.attr(ARIA_EXPANDED, false);
+                }
             } else {
                 items = $(item);
 
