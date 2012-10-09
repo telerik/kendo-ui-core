@@ -209,25 +209,21 @@
         return parseInteger(element.css(property));
     }
 
-    function slideToSlideIn(options) {
-      options.effects.slideIn = options.effects.slide;
-      delete options.effects.slide;
-      delete options.complete;
-      return options;
-    }
 
     function parseTransitionEffects(options) {
-        var effects = options.effects,
-            mirror;
+        var effects = options.effects;
 
         if (effects === "zoom") {
-            effects = "zoomIn fadeIn";
-        }
-        if (effects === "slide") {
-            effects = "slide:left";
+            effects = "zoom:in fade:in";
         }
         if (effects === "fade") {
-            effects = "fadeIn";
+            effects = "fade:in";
+        }
+        if (effects === "slide") {
+            effects = "tile:left";
+        }
+        if (/^slide:(.+)$/.test(effects)) {
+            effects = "tile:" + RegExp.$1;
         }
         if (effects === "overlay") {
             effects = "slideIn:left";
@@ -236,13 +232,7 @@
             effects = "slideIn:" + RegExp.$1;
         }
 
-        mirror = options.reverse && /^(slide:)/.test(effects);
-
-        if (mirror) {
-            delete options.reverse;
-        }
-
-        options.effects = kendo.parseEffects(effects, mirror);
+        options.effects = kendo.parseEffects(effects);
 
         return options;
     }
@@ -433,6 +423,10 @@
             each(effects, function() {
                 that.addRestoreProperties(this.restore);
                 extend(startState, this.startState());
+
+                each(this.auxilaries(), function() {
+                    fx.promise(this.element, extend(true, {}, options, this.options));
+                });
             });
 
             if (!element.is(":visible")) {
@@ -683,14 +677,16 @@
             }
 
             options.complete = browser.msie ? function() { setTimeout(complete, 0); } : complete;
+            options.previous = (options.reverse ? destination : element);
+
             options.reset = true; // Reset transforms if there are any.
 
-            if ("slide" in options.effects) {
-                element.kendoAnimate(options);
-                destination.kendoAnimate(slideToSlideIn(options));
-            } else {
-                (options.reverse ? element : destination).kendoAnimate(options);
-            }
+            // execute callback only once, and hook up derived animations to previous view only once.
+            (options.reverse ? element : destination).each(function() {
+                $(this).kendoAnimate(extend(true, {}, options));
+                options.complete = null;
+                options.previous = null;
+            });
         }
     });
 
@@ -710,6 +706,14 @@
             }
         },
 
+        endState: function() {
+            return {};
+        },
+
+        startState: function() {
+            return {};
+        },
+
         initDirection: function() {
             var that = this,
                 element = that.element,
@@ -719,14 +723,43 @@
             return { direction: dir, offset: -dir.modifier * (dir.vertical ? element.outerHeight() : element.outerWidth()) };
         },
 
-        startState: $.noop,
-        endState: $.noop,
+        auxilaries: function() {
+            return [];
+        },
+
         teardown: $.noop
     });
 
     function createEffect(name, definition) {
         Effects[name] = Effect.extend(definition);
     }
+
+    createEffect("tile", {
+        auxilaries: function() {
+            var options = this.options,
+                reverse = options.reverse,
+                slideIn = "slideIn:" + options.direction,
+                slideOut = "slideIn:" + kendo.directions[options.direction].reverse,
+                aux = [{
+                    element: this.element,
+                    options: {
+                        effects: reverse ? slideOut : slideIn
+                    }
+                }];
+
+            if (options.previous) {
+                aux.push({
+                    element: options.previous,
+                    options: {
+                        effects: reverse ? slideIn : slideOut,
+                        reverse: !reverse
+                    }
+                });
+            }
+
+            return aux;
+        }
+    });
 
     createEffect("fade", {
         restore: [ "opacity" ],
@@ -791,31 +824,16 @@
         }
     });
 
-    createEffect("slide", {
-        endState: function() {
-            var that = this,
-                element = that.element,
-                options = that.options;
-
-            var reverse = options.reverse, extender = {},
-                init = this.initDirection(),
-                property = transforms && options.transition !== false ? init.direction.transition : init.direction.property;
-
-            init.offset /= -(options.divisor || 1);
-            if (!reverse) {
-                var origin = element.data(ORIGIN);
-                if (!origin && origin !== 0) {
-                    element.data(ORIGIN, animationProperty(element, property));
-                }
-            }
-
-            extender[property] = reverse ? (element.data(ORIGIN) || 0) : (element.data(ORIGIN) || 0) + init.offset + PX;
-
-            return extend(extender, options.properties);
-        }
-    });
-
     createEffect("slideIn", {
+        init: function(element, options) {
+            Effect.prototype.init.call(this, element, options);
+
+            // re-reverse the direction, as slideIn:left is not the reverse of slideIn:right
+            if (options.reverse) {
+                options.direction = kendo.directions[options.direction].reverse;
+            }
+        },
+
         startState: function() {
             return this._state(true);
         },
@@ -830,8 +848,8 @@
                 extender = {},
                 init = this.initDirection(),
                 reverse = startState ? !options.reverse : options.reverse,
-                offset = Math.abs(init.offset / (options.divisor || 1)),
-                value = (reverse ? -offset : 0) + PX;
+                offset = init.offset / (options.divisor || 1),
+                value = (reverse ? offset : 0) + PX;
 
             if (transforms && options.transition !== false) {
                 extender[init.direction.transition] = value;

@@ -293,26 +293,6 @@
                         });
                     });
 
-                asyncTest("slide:right moves the element right with its width", function() {
-                    span.css({ left: 10, width: 20 });
-                    var position = span.offset().left;
-
-                    span.kendoAnimate("slide:right", 20, function () {
-                        ok((transforms ? animationProperty(span, "translatex") : span.offset().left - position) == span.width());
-                        start();
-                    });
-                });
-
-                asyncTest("slide:down moves the element down with its height", function() {
-                    span.css({ top: 10, height: 20 });
-                    var position = span.offset().top;
-
-                    span.kendoAnimate("slide:down", 20, function () {
-                        ok((transforms ? animationProperty(span, "translatey") : span.offset().top - position) == span.height());
-                        start();
-                    });
-                });
-
                 asyncTest("slideIn:right moves the element right from - its width to 0", function() {
                     span.css({ position: "absolute", display: "block", left: 10 });
 
