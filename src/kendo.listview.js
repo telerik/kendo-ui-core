@@ -212,6 +212,10 @@
             if (selectable) {
                 multi = typeof selectable === STRING && selectable.toLowerCase().indexOf("multiple") > -1;
 
+                if (multi) {
+                    that.element.attr("aria-multiselectable", true);
+                }
+
                 that.selectable = new kendo.ui.Selectable(that.element, {
                     multiple: multi,
                     filter: FOCUSSELECTOR,
@@ -389,8 +393,7 @@
                         }
                     });
 
-                element.addClass(FOCUSABLE).on("mousedown" + NS, "." + FOCUSABLE + FOCUSSELECTOR, clickCallback)
-                       .attr("aria-multiselectable", true);
+                element.addClass(FOCUSABLE).on("mousedown" + NS, "." + FOCUSABLE + FOCUSSELECTOR, clickCallback);
             }
        },
 

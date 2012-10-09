@@ -51,8 +51,10 @@
                 equal(ul.attr("role"), "listbox");
             });
 
-            test("ListView adds aria-multiselectable", function() {
-                var ul = setup();
+            test("ListView adds aria-multiselectable if selectable=multiple", function() {
+                var ul = setup({
+                    selectable: "multiple"
+                });
 
                 equal(ul.attr("aria-multiselectable"), "true");
             });
@@ -79,22 +81,6 @@
                 });
 
                 equal(ul.data("kendoListView").current().attr("aria-selected"), "true");
-            });
-
-            test("ListView adds aria-selected=false on SPACEBAR", function() {
-                var ul = setup();
-
-                ul.focus();
-                ul.trigger({
-                    type: "keydown",
-                    keyCode: kendo.keys.SPACEBAR
-                });
-                ul.trigger({
-                    type: "keydown",
-                    keyCode: kendo.keys.SPACEBAR
-                });
-
-                equal(ul.data("kendoListView").current().attr("aria-selected"), "false");
             });
         </script>
     </body>
