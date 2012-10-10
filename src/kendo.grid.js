@@ -1478,11 +1478,9 @@
         },
 
         _groupable: function() {
-            var that = this,
-                wrapper = that.wrapper,
-                groupable = that.options.groupable;
+            var that = this;
 
-            if (!that.groupable) {
+            if (!that.options.groupable) {
                 that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", function(e) {
                     var element = $(this),
                     group = element.closest("tr");
@@ -1496,6 +1494,14 @@
                     e.stopPropagation();
                 });
             }
+
+            that._attachGroupable();
+        },
+
+        _attachGroupable: function() {
+            var that = this,
+                wrapper = that.wrapper,
+                groupable = that.options.groupable;
 
             if (groupable) {
                 if(!wrapper.has("div.k-grouping-header")[0]) {
@@ -2684,6 +2690,8 @@
             that._draggable();
 
             that._reorderable();
+
+            that._attachGroupable();
 
             that._columnMenu();
         },
