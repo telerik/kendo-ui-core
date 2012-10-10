@@ -8,6 +8,8 @@ import org.hibernate.type.StandardBasicTypes;
 
 import java.sql.Types;
 
+// Using the implementation from http://code.google.com/p/hibernate-sqlite/
+
 public class SQLiteDialect extends Dialect {
     public SQLiteDialect() {
         super();

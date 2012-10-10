@@ -23,5 +23,27 @@
 
     <context:component-scan base-package="com.kendoui.spring" />
 
+	
+	<beans:bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<beans:property name="driverClassName" value="org.sqlite.JDBC"/>
+		<beans:property name="url" value="jdbc:sqlite:northwind.db"/>
+	</beans:bean>
+	
+	<beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="myDataSource" />
+		<beans:property name="annotatedClasses">
+			<beans:list>
+				<beans:value>com.kendoui.spring.models.Product</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="hibernateProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">com.kendoui.spring.hibernate.SQLiteDialect</beans:prop>
+				<beans:prop key="hibernate.show_sql">true</beans:prop>
+				<beans:prop key="hibernate.format_sql">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+    
 </beans:beans>
 

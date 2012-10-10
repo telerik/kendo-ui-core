@@ -29,6 +29,9 @@ import com.kendoui.spring.models.Product;
 public class HomeController {
     @Autowired 
     private HttpServletRequest request;
+    
+    @Autowired 
+    private SessionFactory factory;
     /**
      * Simply selects the home view to render by returning its name.
      */
@@ -43,19 +46,11 @@ public class HomeController {
 
         model.addAttribute("dates", new Date[] { new Date() });
         
-        String db = request.getSession().getServletContext().getRealPath("/WEB-INF/northwind.db");
         
-        Configuration configuration = new Configuration()
-            .addAnnotatedClass(Product.class)
-            .setProperty("hibernate.format_sql", "true")
-            .setProperty("hibernate.show_sql", "true")
-            .setProperty("hibernate.connection.driver_class", "org.sqlite.JDBC")
-            .setProperty("hibernate.connection.url", "jdbc:sqlite:" + db)
-            .setProperty("hibernate.dialect", "com.kendoui.spring.hibernate.SQLiteDialect");
         //ServiceRegistry registry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
         //SessionFactory factory = configuration.buildSessionFactory(registry);
         
-        SessionFactory factory = configuration.buildSessionFactory();
+        //SessionFactory factory = configuration.buildSessionFactory();
         
         Session session = factory.openSession();
         
