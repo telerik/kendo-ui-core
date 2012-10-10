@@ -92,7 +92,6 @@
                 focusCell(grid).table.press(kendo.keys.ENTER);
 
                 ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
-                ok(table.find("tr>td:first").hasClass("k-state-focused"));
             });
 
             test("pressing enter key on edited cell exits edit mode", function() {
@@ -274,7 +273,7 @@
 
                 focusCell(grid).table.press(kendo.keys.DOWN).press(kendo.keys.ENTER);
                 table.find("tr>td>input:first").val("");
-                grid.current(table.find("tr>td"));
+                grid.current(table.find("tr>td:first"));
                 grid.current().press(kendo.keys.ENTER);
 
                 equal(table.find("tr:eq(1)>td")[0], grid.current()[0]);
@@ -289,6 +288,20 @@
 
                 ok(!table.find("tr:eq(1)").hasClass("k-grid-edit-row"));
                 ok(table.find("tr:eq(1)>td:first").hasClass("k-state-focused"));
+            });
+
+            test("enter key on button in editable grid", function() {
+                var grid = setup({
+                    columns: [{
+                        field: "foo",
+                        template: '<input id="button" type="button" />'
+                    }]
+                });
+
+                grid.table.focus().press(kendo.keys.ENTER);
+                $("#button").press(kendo.keys.ENTER);
+
+                ok(!grid.current().hasClass("k-edit-cell"));
             });
 
         </script>

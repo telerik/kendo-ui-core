@@ -1778,41 +1778,48 @@
                     } else if (current.parent().is(".k-master-row,.k-grouping-row")) {
                         current.parent().find(".k-icon:first").click();
                         handled = true;
-                    } else if (that.options.editable) {
-                        that._handleEditing(current);
+                    } else {
+                        var focusable = current.find(":focusable");
+                        if (focusable[0] && current.hasClass("k-state-focused")) {
+                            focusable.first().focus();
+                            handled = true;
+                        } else if (that.options.editable && !$(e.target).is(":button,.k-button")) {
+                            that._handleEditing(current);
+                            handled = true;
+                        }
+                    }
+                } else if (keys.ESC == key) {
+                    if ($.contains(current[0], document.activeElement) && !current.hasClass("k-edit-cell") && !current.parent().hasClass("k-grid-edit-row")) {
+                        that.table[0].focus();
+                        handled = true;
+                    } else if (that._editContainer && (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0])) {
+                        if (isInCell) {
+                            that.closeCell();
+                        } else {
+                            currentIndex = that.items().index($(current).parent());
+                            document.activeElement.blur();
+                            that.cancelRow();
+                            if (currentIndex >= 0) {
+                                that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                            }
+                        }
+
+                        if (browser.msie && parseInt(browser.version, 10) < 9) {
+                            document.body.focus();
+                        }
+                        table.focus();
                         handled = true;
                     }
-                } else if (that.options.editable) {
-                    if (keys.ESC == key && that._editContainer) {
-                        if (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0]) {
-                            if (isInCell) {
-                                that.closeCell();
-                            } else {
-                                currentIndex = that.items().index($(current).parent());
-                                document.activeElement.blur();
-                                that.cancelRow();
-                                if (currentIndex >= 0) {
-                                    that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                                }
-                            }
+                } else if (that.options.editable && keys.TAB == key && isInCell && current) {
+                    var cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
+                    if (!cell.length) {
+                        cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row,.k-detail-row):visible")
+                        .children(DATA_CELL + (shiftKey ? ":last" : ":first"));
+                    }
 
-                            if (browser.msie && parseInt(browser.version, 10) < 9) {
-                                document.body.focus();
-                            }
-                            table.focus();
-                            handled = true;
-                        }
-                    } else if (keys.TAB == key && isInCell && current) {
-                        var cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
-                        if (!cell.length) {
-                            cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row,.k-detail-row):visible")
-                            .children(DATA_CELL + (shiftKey ? ":last" : ":first"));
-                        }
-
-                        if (cell.length) {
-                            that._handleEditing(current, cell);
-                            handled = true;
-                        }
+                    if (cell.length) {
+                        that._handleEditing(current, cell);
+                        handled = true;
                     }
                 }
 

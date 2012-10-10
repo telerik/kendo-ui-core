@@ -501,6 +501,36 @@
                 equal(grid.dataSource.sort()[0].dir, "asc");
             });
 
+            test("enter key on button column", function() {
+                var grid = setup({
+                    columns: [ {
+                        field: "foo"
+                    },
+                    {
+                        template: '<input id="button" />'
+                    }]
+                });
+
+                grid.table.focus().press(kendo.keys.RIGHT).press(kendo.keys.ENTER);
+
+                equal(document.activeElement, $("#button")[0]);
+            });
+
+            test("esc key on focused button in column", function() {
+                var grid = setup({
+                    columns: [ {
+                        field: "foo",
+                        template: '<input id="button" />'
+                    }]
+                });
+
+                grid.table.focus().press(kendo.keys.ENTER);
+                $("#button").press(kendo.keys.ESC);
+
+                equal(document.activeElement, grid.table[0]);
+                ok(grid.table.find("td:first").hasClass("k-state-focused"));
+            });
+
             /* TODO should skip the footer?!
             test("group footer row is skipped when up arrow is pressed", function() {
                 var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
