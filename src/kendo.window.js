@@ -674,11 +674,19 @@
 
             Widget.fn.destroy.call(that);
 
+            kendo.destroy(that.wrapper);
+
+            if (that.resizing) {
+                that.resizing.destroy();
+            }
+
+            if (that.dragging) {
+                that.dragging.destroy();
+            }
+
             that.wrapper.remove().add(that.wrapper.find(".k-resize-handle,.k-window-titlebar")).off(NS);
 
             $(window).off("resize", that._resizeHandler);
-
-            kendo.destroy(that.wrapper);
 
             modalWindows = openedModalWindows();
 
@@ -867,6 +875,9 @@
             }
 
             return false;
+        },
+        destroy: function() {
+            this._draggable.destroy();
         }
     };
 
@@ -948,6 +959,9 @@
             this.owner.trigger(DRAGEND);
 
             return false;
+        },
+        destroy: function() {
+            this._draggable.destroy();
         }
     };
 
