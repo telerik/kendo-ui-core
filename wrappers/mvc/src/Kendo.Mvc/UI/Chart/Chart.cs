@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI
             DataSource.Schema.Data = "";
             DataSource.Schema.Total = "";
             DataSource.Schema.Errors = "";
-            DataSource.ModelType(typeof(T));
+            DataSource.ModelType(typeof(T));    
         }
 
         /// <summary>
@@ -299,7 +299,10 @@ namespace Kendo.Mvc.UI
             }
             else if (Data != null)
             {
-                options.Add("dataSource", new Dictionary<string, object> { { "data", Data } });
+                IDictionary<string, object> result = DataSource.ToJson();
+                result["data"] = Data;
+                result.Remove("transport");
+                options.Add("dataSource", result);
             }
         }
 
