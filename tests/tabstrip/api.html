@@ -41,6 +41,9 @@
 
             $(document).ready(function() {
                 $("#TabStrip1").kendoTabStrip({ animation: false, select: Select, activate: Activate });
+                $("#parentTabStrip").kendoTabStrip({ animation: false });
+                $("#childTabStrip").kendoTabStrip({ animation: false });
+                
             });
 
         </script>
@@ -129,14 +132,32 @@
     </div>
 </div>
 
+<div id="parentTabStrip" class="k-widget k-tabstrip k-header" style="visibility: hidden; position: absolute;">
+    <ul class="k-reset k-tabstrip-items">
+        <li class="k-item k-state-default">Tab 1</li>
+        <li class="k-item k-state-default k-state-active">Tab 2</li>
+    </ul>
+    <div id="parentTabStrip-1" class="k-content">foo</div>
+    <div id="parentTabStrip-2" class="k-content" style="display: block;">
+        <div id="childTabStrip" class="k-widget k-tabstrip k-header">
+            <ul class="k-reset k-tabstrip-items">
+                <li class="k-item k-state-default">foo</li>
+                <li class="k-item k-state-default k-state-active">bar</li>
+            </ul>
+            <div id="childTabStrip-1">foo</div>
+            <div id="childTabStrip-2" style="display: block;">bar</div>
+        </div>
+    </div>
+</div>
+
     <script type="text/javascript">
 
         function getRootItem(index) {
-            return $('#TabStrip1').find('.k-item').eq(index)
+            return $('#TabStrip1').find('.k-item').eq(index);
         }
 
-        function getTabStrip() {
-            return $("#TabStrip1").data("kendoTabStrip");
+        function getTabStrip(selector) {
+            return $(selector || "#TabStrip1").data("kendoTabStrip");
         }
 
         test('clicking item with url should navigate', function() {
@@ -323,6 +344,13 @@
 
             ok(tabStrip.tabGroup.is(":empty"));
             ok(!tabStrip.tabGroup.next()[0]);
+        });
+
+        test('select method ignores nested TabStrips', function() {
+            var parentTabStrip = getTabStrip("#parentTabStrip"),
+                idx = parentTabStrip.select().index();
+
+            equal(idx, 1);
         });
 
     </script>
