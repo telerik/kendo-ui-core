@@ -80,8 +80,12 @@
             editTemplate: ""
         },
 
+        _item: function(action) {
+            return this.element.children()[action]();
+        },
+
         items: function() {
-            return this.element.find(FOCUSSELECTOR);
+            return this.element.children();
         },
 
         setDataSource: function(dataSource) {
@@ -186,6 +190,10 @@
                              .attr("aria-selected", "false");
             }
 
+            if (that.element[0] === document.activeElement && that.options.navigatable) {
+                that.current(items.eq(0));
+            }
+
             that.trigger(DATABOUND);
         },
 
@@ -238,9 +246,9 @@
                                 if(!e.ctrlKey) {
                                     that.selectable.clear();
                                 } else {
-                                    if(current.hasClass(SELECTED)) {
+                                    if (current && current.hasClass(SELECTED)) {
                                         current.removeClass(SELECTED);
-                                        current = null;
+                                        return;
                                     }
                                 }
                             } else {
@@ -254,32 +262,27 @@
             }
         },
 
-        current: function(element) {
+        current: function(candidate) {
             var that = this,
+                element = that.element,
                 current = that._current;
 
-            if (element !== undefined && element.length) {
-                if (!current || current[0] !== element[0]) {
-                    if (current) {
-                        current.removeAttr("id");
-                        that.element.removeAttr("aria-activedescendant");
-                    }
-
-                    element.addClass(FOCUSED)
-                           .attr("id", that._itemId);
-
-                    that.element.attr("aria-activedescendant", that._itemId);
-
-                    that._scrollTo(element[0]);
-
-                    if (current) {
-                        current.removeClass(FOCUSED);
-                    }
-                    that._current = element;
-                }
+            if (candidate === undefined) {
+                return current;
             }
 
-            return that._current;
+            if (current) {
+                current.removeClass(FOCUSED).removeAttr("id");
+                element.removeAttr("aria-activedescendant");
+            }
+
+            if (candidate && candidate[0]) {
+                that._scrollTo(candidate[0]);
+                element.attr("aria-activedescendant", that._itemId);
+                candidate.addClass(FOCUSED).attr("id", that._itemId);
+            }
+
+            that._current = candidate;
         },
 
         _scrollTo: function(element) {
@@ -317,9 +320,8 @@
             var that = this,
                 navigatable = that.options.navigatable,
                 element = that.element,
-                currentProxy = proxy(that.current, that),
                 clickCallback = function(e) {
-                    currentProxy($(e.currentTarget));
+                    that.current($(e.currentTarget));
                     if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea")) {
                         element.focus();
                     }
@@ -329,11 +331,11 @@
                 that._tabindex();
                 element.on("focus" + NS, function() {
                         var current = that._current;
-                        if(current && current.is(":visible")) {
-                            current.addClass(FOCUSED);
-                        } else {
-                            currentProxy(element.find(FOCUSSELECTOR).first());
+                        if(!current ||  !current.is(":visible")) {
+                            current = that._item("first");
                         }
+
+                        that.current(current);
                     })
                     .on("focusout" + NS, function() {
                         if (that._current) {
@@ -342,7 +344,7 @@
                     })
                     .on("keydown" + NS, function(e) {
                         var key = e.keyCode,
-                            current = that.current(),
+                            current = that._current,
                             canHandle = !$(e.target).is(":button,textarea,a,a>.t-icon"),
                             preventDefault = kendo.preventDefault,
                             editItem = element.find("." + KEDITITEM),
@@ -353,37 +355,44 @@
                         }
 
                         if (keys.UP === key || keys.LEFT === key) {
-                            that.current(current ? current.prev() : element.find(FOCUSSELECTOR).first());
+                            if (current) {
+                                current = current.prev();
+                            }
+
+                            that.current(!current || !current[0] ? that._item("first") : current);
                             preventDefault(e);
                         } else if (keys.DOWN === key || keys.RIGHT === key) {
-                            that.current(current ? current.next() : element.find(FOCUSSELECTOR).first());
+                            if (current) {
+                                current = current.next();
+                            }
+                            that.current(!current || !current[0] ? that._item("first") : current);
                             preventDefault(e);
                         } else if (keys.PAGEUP === key) {
-                            that._current = null;
+                            that.current(null);
                             that.dataSource.page(that.dataSource.page() - 1);
                             preventDefault(e);
                         } else if (keys.PAGEDOWN === key) {
-                            that._current = null;
+                            that.current(null);
                             that.dataSource.page(that.dataSource.page() + 1);
                             preventDefault(e);
                         } else if (keys.HOME === key) {
-                            that.current(element.find(FOCUSSELECTOR).first());
+                            that.current(that._item("first"));
                             preventDefault(e);
                         } else if (keys.END === key) {
-                            that.current(element.find(FOCUSSELECTOR).last());
+                            that.current(that._item("last"));
                             preventDefault(e);
                         } else if (keys.ENTER === key) {
                             if (editItem.length !== 0 && canHandle) {
-                                idx = element.find(FOCUSSELECTOR).index(editItem);
+                                idx = that._items().index(editItem);
                                 document.activeElement.blur();
                                 that.save();
                                 var focusAgain = function(){
                                     that.element.trigger("focus");
-                                    that.current(that.element.find(FOCUSSELECTOR).eq(idx));
+                                    that.current(that._items().eq(idx));
                                 };
                                 that.one("dataBound", focusAgain);
                             } else if (that.options.editTemplate !== "") {
-                                that._current = null;
+                                that.current(null);
                                 that.edit(current);
                             }
                         } else if (keys.ESC === key) {
@@ -391,14 +400,14 @@
                             if (editItem.length === 0) {
                                 return;
                             }
-                            idx = element.find(FOCUSSELECTOR).index(editItem);
+                            idx = that._items().index(editItem);
                             that.cancel();
                             that.element.trigger("focus");
-                            that.current(that.element.find(FOCUSSELECTOR).eq(idx));
+                            that.current(that._items().eq(idx));
                         }
                     });
 
-                element.addClass(FOCUSABLE).on("mousedown" + NS, "." + FOCUSABLE + FOCUSSELECTOR, clickCallback);
+                element.addClass(FOCUSABLE).on("mousedown" + NS, "." + FOCUSABLE + FOCUSSELECTOR, proxy(clickCallback, that));
             }
        },
 
