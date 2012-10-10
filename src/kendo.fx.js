@@ -452,6 +452,7 @@
                    .css(TRANSFORM); // Nudge
 
             each(effects, function() {
+                this.setup();
                 extend(endState, this.endState());
             });
 
@@ -818,14 +819,6 @@
             }
         },
 
-        startState: function() {
-            return this._state(true);
-        },
-
-        endState: function() {
-            return extend(this._state(false), this.options.properties);
-        },
-
         _state: function(startState) {
             var that = this,
                 options = that.options,
@@ -842,6 +835,14 @@
             }
 
             return extender;
+        },
+
+        startState: function() {
+            return this._state(true);
+        },
+
+        endState: function() {
+            return extend(this._state(false), this.options.properties);
         }
     });
 
@@ -992,14 +993,15 @@
     });
 
     createEffect("transfer", {
-        startState: function() {
-            return { scale: 1 };
+        setup: function() {
+            this.element.appendTo(document.body);
         },
 
-        endState: function() {
+        _state: function(startState) {
             var that = this,
                 element = that.element,
-                options = that.options;
+                options = that.options,
+                reverse = startState ? !options.reverse : options.reverse;
 
             /**
              * Intersection point formulas are taken from here - http://zonalandeducation.com/mmts/intersections/intersectionOfTwoLines1/intersectionOfTwoLines1.html
@@ -1008,11 +1010,15 @@
              * The math and variables below MAY BE SIMPLIFIED (zeroes removed), but this would make the formula too cryptic.
              */
             var target = options.target,
-                offset = element.offset(),
-                targetOffset = target.offset(),
-                scale = target.outerHeight() / element.outerHeight(),
+                offset,
+                currentScale = animationProperty(element, "scale"),
+                targetOffset = target.offset();
 
-                x1 = 0,
+            element.css(TRANSFORM, "scale(1)").css(TRANSFORM);
+            offset = element.offset();
+            element.css(TRANSFORM, "scale(" + currentScale + ")");
+
+            var x1 = 0,
                 y1 = 0,
 
                 x2 = targetOffset.left - offset.left,
@@ -1030,15 +1036,24 @@
                 X = (y1 - y3 - Z1 * x1 + Z2 * x3) / (Z2 - Z1),
                 Y = y1 + Z1 * (X - x1);
 
-            element.css({
+
+            return {
                 position: "absolute",
                 top: offset.top,
                 left: offset.left,
                 marginLeft: 0,
-                marginTop: 0
-            }).appendTo(document.body);
+                marginTop: 0,
+                scale: reverse ? 1 : target.outerHeight() / element.outerHeight(),
+                transformOrigin:  X + PX + " " + Y + PX
+            };
+        },
 
-            return extend({ scale: scale, transformOrigin: X + PX + " " + Y + PX }, options.properties);
+        startState: function() {
+            return this._state(true);
+        },
+
+        endState: function() {
+            return extend(this._state(false), this.options.properties);
         }
     });
 

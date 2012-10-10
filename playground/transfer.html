@@ -49,7 +49,8 @@
     </head>
     <body>
         <div id="container">
-            <button style="position: absolute; z-index: 3">Start the transfer</button>
+            <button id="play"       style=" z-index: 3">Start the transfer</button>
+            <button id="reverse"    style=" z-index: 3">Reverse the transfer</button>
             <div id="target">
                 I will transfer myself to the destination
             </div>
@@ -58,8 +59,12 @@
         <div id="destination"> I am the destination</div>
 
         <script>
-        $("button").click(function() {
+        $("#play").click(function() {
             $("#target").kendoStop().kendoAnimate({ effects: "transfer",  target: $("#destination"), duration: 2500, ease: "ease-in" });
+        });
+
+        $("#reverse").click(function() {
+            $("#target").kendoStop().kendoAnimate({ effects: "transfer",  target: $("#destination"), duration: 2500, ease: "ease-in", reverse: true });
         });
         </script>
     </body>
