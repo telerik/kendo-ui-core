@@ -201,6 +201,19 @@
                 equal(dataSource.transport.calls("destroy"), 1);
             });
 
+            test("sync calls schange after destroy", function() {
+                var model = dataSource.get(1),
+                    wasCalled = false;
+
+                dataSource.remove(model);
+                dataSource.bind("change", function() {
+                    wasCalled = true;
+                });
+                dataSource.sync();
+
+                ok(wasCalled);
+            });
+
             test("sync does not call the destroy method of the transport if a new model is destroyed", function() {
                 stub(dataSource.transport, "destroy");
 

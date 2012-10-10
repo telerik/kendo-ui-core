@@ -117,7 +117,6 @@
                     });
 
                 dataSource.bind("requestEnd", function(e) {
-                    console.log(e);
                     same(e.response, data);
                     same(e.type, "read");
                 });
