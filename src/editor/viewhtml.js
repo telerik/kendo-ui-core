@@ -35,6 +35,8 @@ var ViewHtmlCommand = Command.extend({
             if (that.change) {
                 that.change();
             }
+
+            editor.trigger("change");
         }
 
         function close(e) {
