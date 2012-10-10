@@ -132,20 +132,21 @@
             "@splitbar-background-color":       constant(BGCOLOR, ".k-splitbar")
         },
         datavizConstants = {
-            "title.color":                          constant(COLOR),
-            "legend.labels.color":                  constant(COLOR),
-            "seriesDefaults.labels.color":          constant(COLOR),
-            "seriesDefaults.labels.background":     constant(COLOR),
-            "seriesDefaults.labels.opacity":        constant("opacity"),
-            "seriesDefaults.area.opacity":          constant("opacity"),
-            "axisDefaults.line.color":              constant(COLOR),
-            "axisDefaults.labels.color":            constant(COLOR),
-            "axisDefaults.minorGridLines.color":    constant(COLOR),
-            "axisDefaults.majorGridLines.color":    constant(COLOR),
-            "axisDefaults.title.color":             constant(COLOR),
-            "tooltip.background":                   constant(COLOR),
-            "tooltip.color":                        constant(COLOR),
-            "tooltip.opacity":                      constant("opacity")
+            "chart.title.color":                          constant(COLOR),
+            "chart.legend.labels.color":                  constant(COLOR),
+            "chart.seriesDefaults.labels.color":          constant(COLOR),
+            "chart.seriesDefaults.labels.background":     constant(COLOR),
+            "chart.seriesDefaults.labels.opacity":        constant("opacity"),
+            "chart.seriesDefaults.area.opacity":          constant("opacity"),
+            "chart.axisDefaults.line.color":              constant(COLOR),
+            "chart.axisDefaults.labels.color":            constant(COLOR),
+            "chart.axisDefaults.minorGridLines.color":    constant(COLOR),
+            "chart.axisDefaults.majorGridLines.color":    constant(COLOR),
+            "chart.axisDefaults.title.color":             constant(COLOR),
+            "chart.seriesColors[]":                       constant(COLOR),
+            "chart.tooltip.background":                   constant(COLOR),
+            "chart.tooltip.color":                        constant(COLOR),
+            "chart.tooltip.opacity":                      constant("opacity")
         },
         webConstantsHierarchy = {
             "Widgets": {
@@ -220,26 +221,26 @@
         },
         datavizConstantsHierarchy = {
             "Title & legend": {
-                "title.color":                       "Title color",
-                "legend.labels.color":               "Legend text color"
+                "chart.title.color":                       "Title color",
+                "chart.legend.labels.color":               "Legend text color"
             },
 
             "Axes": {
-                "seriesDefaults.labels.color":       "Series text color",
-                "seriesDefaults.labels.background":  "Series text background",
-                "seriesDefaults.labels.opacity":     "Series text opacity",
-                "seriesDefaults.area.opacity":       "Area chart opacity",
-                "axisDefaults.line.color":           "Axis line color",
-                "axisDefaults.labels.color":         "Axis labels color",
-                "axisDefaults.minorGridLines.color": "Minor grid lines color",
-                "axisDefaults.majorGridLines.color": "Major grid lines color",
-                "axisDefaults.title.color":          "Axis title color"
+                "chart.seriesDefaults.labels.color":       "Series text color",
+                "chart.seriesDefaults.labels.background":  "Series text background",
+                "chart.seriesDefaults.labels.opacity":     "Series text opacity",
+                "chart.seriesDefaults.area.opacity":       "Area chart opacity",
+                "chart.axisDefaults.line.color":           "Axis line color",
+                "chart.axisDefaults.labels.color":         "Axis labels color",
+                "chart.axisDefaults.minorGridLines.color": "Minor grid lines color",
+                "chart.axisDefaults.majorGridLines.color": "Major grid lines color",
+                "chart.axisDefaults.title.color":          "Axis title color"
             },
 
             "Tooltip": {
-                "tooltip.background":                "Tooltip background",
-                "tooltip.color":                     "Tooltip text",
-                "tooltip.opacity":                   "Tooltip opacity"
+                "chart.tooltip.background":                "Tooltip background",
+                "chart.tooltip.color":                     "Tooltip text",
+                "chart.tooltip.opacity":                   "Tooltip opacity"
             }
 
             // TODO: Add gauge styles

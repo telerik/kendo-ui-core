@@ -17,6 +17,8 @@
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.numerictextbox.js"></script>
         <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
 
         <link rel="stylesheet" href="../../tests/qunit/qunit/qunit.css" />
     </head>
@@ -196,6 +198,8 @@
                     themebuilder = new ThemeBuilder({
                         datavizConstants: constants
                     });
+
+                constants.applyTheme = function(){};
 
                 themebuilder._propertyChange({
                     value: color,

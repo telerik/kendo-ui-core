@@ -109,20 +109,6 @@
                 equal(chart.options.title.color, fancyColor);
             });
 
-            test("source returns json source", function() {
-                constants = new JsonConstants({
-                    constants: {
-                        "title.color": { property: "color", value: "#b4d455" },
-                        "tooltip.background": { property: "color", value: "#00f00d" }
-                    }
-                });
-
-                var source = JSON.parse(constants.source("string"));
-
-                equal(source.title.color, "#b4d455");
-                equal(source.tooltip.background, "#00f00d");
-            });
-
         </script>
 
         <div id="qunit-fixture"> </div>

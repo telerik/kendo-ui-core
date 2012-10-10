@@ -310,14 +310,15 @@
             infer: function(targetDocument) {
                 var $ = targetDocument.defaultView.$,
                     chart = $("[data-role=chart]", targetDocument).data("kendoChart"),
-                    constants = this.constants, constant;
+                    constants = this.constants, constant, property;
 
                 if (!chart) {
                     return;
                 }
 
                 for (constant in constants) {
-                    constants[constant].value = kendo.getter(constant, true)(chart.options);
+                    property = constant.replace(/^(chart|gauge)\./i, "").replace(/\[\]/g, "");
+                    constants[constant].value = kendo.getter(property, true)(chart.options);
                 }
             },
 
@@ -326,26 +327,30 @@
                     constant, constants = this.constants;
 
                 for (constant in constants) {
-                    safeSetter(constant)(result, constants[constant].value);
+                    safeSetter(constant.replace(/\[\]/g, ""))(result, constants[constant].value);
                 }
 
                 if (format == "string") {
-                    return JSON.stringify(result, null, 4);
+                    return "// use as theme: 'newTheme'\n" +
+                           "kendo.dataviz.ui.registerTheme('newTheme', " +
+                           JSON.stringify(result, null, 4) +
+                           ");";
                 } else {
                     return result;
                 }
-
             },
 
             applyTheme: function(targetDocument) {
-                var w = "defaultView" in targetDocument ? targetDocument.defaultView : targetDocument.parentWindow,
-                    source = this.source("json");
+                // work within the JS context of the target document
+                var w = "defaultView" in targetDocument ? targetDocument.defaultView : targetDocument.parentWindow;
+
+                w.kendo.dataviz.ui.registerTheme("newTheme", this.source("json"));
 
                 $("[data-role=chart]", targetDocument).each(function() {
-                    // get jQuery of target document to access client-side object
                     var chartElement = w.$(this),
-                        chart = chartElement.data("kendoChart"),
-                        options = kendo.deepExtend(chart._originalOptions, source);
+                        options = chartElement.data("kendoChart")._originalOptions;
+
+                    options.theme = "newTheme";
 
                     chartElement.kendoChart(options);
                 });
@@ -497,8 +502,6 @@
                 e.preventDefault();
 
                 this._showSource(
-                    "// use as theme: 'newTheme'\n" +
-                    "kendo.dataviz.ui.themes.chart.newTheme = " +
                     this.themes[1].source("string")
                 );
             },
