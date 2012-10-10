@@ -174,7 +174,7 @@ JS_TO_JAVA_TYPES = {
 JAVA_DATASOURCE_SETTER = %{
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 }
 

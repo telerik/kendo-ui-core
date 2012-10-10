@@ -82,7 +82,7 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements A
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public String getDataSpriteCssClassField() {

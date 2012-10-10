@@ -67,7 +67,7 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements Animat
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public String getDataTextField() {

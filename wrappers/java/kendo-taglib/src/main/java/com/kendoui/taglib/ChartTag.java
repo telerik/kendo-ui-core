@@ -98,7 +98,7 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public Object getSeriesColors() {

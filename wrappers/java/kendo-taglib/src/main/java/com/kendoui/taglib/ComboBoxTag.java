@@ -67,7 +67,7 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements Animation,
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public String getDataTextField() {

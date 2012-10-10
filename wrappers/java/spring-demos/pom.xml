@@ -34,6 +34,18 @@
         </dependency>
         
         <dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.7.2</version>
+		</dependency>
+              
+        <dependency>
+       		<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+        </dependency>
+        
+        <dependency>
             <groupId>com.kendoui</groupId>
             <artifactId>kendo-taglib</artifactId>
             <version>2012.3.1003</version>

@@ -67,7 +67,7 @@ public class PagerTag extends WidgetTag /* interfaces */implements Messages, Dat
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public String getSelectTemplate() {

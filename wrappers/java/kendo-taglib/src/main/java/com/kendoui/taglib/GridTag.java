@@ -88,7 +88,7 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public boolean getNavigatable() {

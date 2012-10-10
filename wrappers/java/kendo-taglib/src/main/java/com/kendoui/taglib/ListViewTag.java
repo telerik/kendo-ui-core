@@ -52,7 +52,7 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public boolean getNavigatable() {
