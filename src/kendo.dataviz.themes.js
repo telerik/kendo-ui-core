@@ -2,7 +2,7 @@
 
     // Imports ================================================================
     var kendo = window.kendo,
-        dataviz = kendo.dataviz,
+        ui = kendo.dataviz.ui,
         deepExtend = kendo.deepExtend;
 
     // Constants ==============================================================
@@ -121,11 +121,23 @@
         }
     };
 
-    // Exports ================================================================
-    var themes = dataviz.ui.themes;
+    var themes = ui.themes,
+        registerTheme = ui.registerTheme = function(themeName, options) {
+            var result = {};
+            // Apply base theme
+            result.chart = deepExtend({}, chartBaseTheme, options.chart);
+            result.gauge = deepExtend({}, gaugeBaseTheme, options.gauge);
 
-    dataviz.ui.themes.black = {
-        chart: deepExtend({}, chartBaseTheme, {
+            // Copy the line/area chart settings for their vertical counterparts
+            var defaults = result.chart.seriesDefaults;
+            defaults.verticalLine = deepExtend({}, defaults.line);
+            defaults.verticalArea = deepExtend({}, defaults.area);
+
+            themes[themeName] = result;
+        };
+
+    registerTheme("black", {
+        chart: {
             title: {
                 color: WHITE
             },
@@ -223,8 +235,8 @@
                 color: WHITE,
                 opacity: 0.8
             }
-        }),
-        gauge: deepExtend({}, gaugeBaseTheme, {
+        },
+        gauge: {
             pointer: {
                 color: "#0070e4"
             },
@@ -244,11 +256,11 @@
                     color: WHITE
                 }
             }
-        })
-    };
+        }
+    });
 
-    themes.blueopal = {
-        chart: deepExtend({}, chartBaseTheme, {
+    registerTheme("blueopal", {
+        chart: {
             title: {
                 color: "#293135"
             },
@@ -305,8 +317,8 @@
                 color: BLACK,
                 opacity: 0.8
             }
-        }),
-        gauge: deepExtend({}, gaugeBaseTheme, {
+        },
+        gauge: {
             pointer: {
                 color: "#005c83"
             },
@@ -326,11 +338,11 @@
                     color: "#293135"
                 }
             }
-        })
-    };
+        }
+    });
 
-    themes.default = {
-        chart: deepExtend({}, chartBaseTheme, {
+    registerTheme("default", {
+        chart: {
             title: {
                 color: "#8e8e8e"
             },
@@ -387,8 +399,8 @@
                 color: BLACK,
                 opacity: 0.8
             }
-        }),
-        gauge: deepExtend({}, gaugeBaseTheme, {
+        },
+        gauge: {
             pointer: {
                 color: "#ea7001"
             },
@@ -408,11 +420,11 @@
                     color: "#2e2e2e"
                 }
             }
-        })
-    };
+        }
+    });
 
-    themes.silver = {
-        chart: deepExtend({}, chartBaseTheme, {
+    registerTheme("silver", {
+        chart: {
             title: {
                 color: "#4e5968"
             },
@@ -494,8 +506,8 @@
                 color: "#4e5968",
                 opacity: 0.8
             }
-        }),
-        gauge: deepExtend({}, gaugeBaseTheme, {
+        },
+        gauge: {
             pointer: {
                 color: "#0879c0"
             },
@@ -515,11 +527,11 @@
                     color: "#515967"
                 }
             }
-        })
-    };
+        }
+    });
 
-    themes.metro = {
-        chart: deepExtend({}, chartBaseTheme, {
+    registerTheme("metro", {
+        chart: {
             title: {
                 color: "#777777"
             },
@@ -573,8 +585,8 @@
                 background: WHITE,
                 color: BLACK
             }
-        }),
-        gauge: deepExtend({}, gaugeBaseTheme, {
+        },
+        gauge: {
             pointer: {
                 color: "#8ebc00"
             },
@@ -594,15 +606,8 @@
                     color: "#777"
                 }
             }
-        })
-    };
-
-    // Copy the line/area settings for their vertical counterparts
-    for (var themeName in themes) {
-        var defaults = themes[themeName].chart.seriesDefaults;
-        defaults.verticalLine = deepExtend({}, defaults.line);
-        defaults.verticalArea = deepExtend({}, defaults.area);
-    }
+        }
+    });
 
 })(jQuery);
 
