@@ -92,6 +92,20 @@
                 equal(editor.value(), html);
             });
 
+            test("update button triggers change event", 1, function() {
+                var html = "<strong>bar</strong>";
+
+                editor.value("<p>foo</p>");
+
+                editor.bind("change", function() { ok(true); });
+
+                createViewHtmlCommand();
+
+                $(".k-window textarea").val(html);
+
+                $(".k-dialog-update").click();
+            });
+
             test("cancel button does not modify the editor content", function() {
                 var initialHtml = "<p>foo</p>";
 
