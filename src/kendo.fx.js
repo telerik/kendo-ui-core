@@ -570,17 +570,8 @@
 
                                 if (value in scaleProperties && properties[value] !== undefined) {
                                     params = currentValue.match(cssParamsRegExp);
-                                    if (hasZoom) {
-                                        var half = (1 - params[1]) / 2;
-                                        extend(single, {
-                                                           zoom: +params[1],
-                                                           marginLeft: element.width() * half,
-                                                           marginTop: element.height() * half
-                                                       });
-                                    } else if (transforms) {
-                                        extend(single, {
-                                                           scale: +params[0]
-                                                       });
+                                    if (transforms) {
+                                        extend(single, { scale: +params[0] });
                                     }
                                 } else {
                                     if (value in translateProperties && properties[value] !== undefined) {
@@ -791,43 +782,29 @@
     });
 
     createEffect("zoom", {
-        startState: function() {
+        restore: [ "scale" ],
+        _state: function(startState) {
             var that = this,
                 element = that.element,
-                options = that.options;
+                options = that.options,
+                scale = element.data("scale"),
+                value = isNaN(scale) ? 1 : scale,
+                out = options.direction === "out";
+                value;
 
-            var scale = hasZoom ? element[0].style.zoom : animationProperty(element, "scale"),
-                zoomIn = options.direction == "in",
-                value = zoomIn ? (scale != 1 ? scale : "0.01") : 1;
-
-            if (hasZoom) {
-                return { zoom: value };
-            } else {
-                return { scale: value };
+            if (startState) {
+                out = !out;
             }
+
+            return { scale: out ? 0.01 : value };
+        },
+
+        startState: function() {
+            return this._state(true);
         },
 
         endState: function() {
-            var that = this,
-                element = that.element,
-                options = that.options;
-
-            var reverse = options.direction == "out";
-
-            if (hasZoom) {
-                var version = browser.version,
-                    style = element[0].currentStyle,
-                    width = style.width.indexOf("%") != -1 ? element.parent().width() : element.width(),
-                    height = style.height.indexOf("%") != -1 ? element.parent().height() : parseInteger(style.height),
-                    half = version < 9 && options.effects.fade ? 0 : (1 - (parseInteger(element.css("zoom")) / 100)) / 2; // Kill margins in IE7/8 if using fade
-
-                element.css({
-                    marginLeft: width * (version < 8 ? 0 : half),
-                    marginTop: height * half
-                });
-            }
-
-            return extend({ scale: reverse ? 0.01 : 1 }, options.properties);
+            return extend(this._state(false), this.options.properties);
         }
     });
 
