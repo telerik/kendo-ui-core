@@ -159,13 +159,13 @@
                 that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
             }
 
-            wrapper
-                .on("mouseenter" + NS, titlebarButtons, function () { $(this).addClass(KHOVERSTATE); })
-                .on("mouseleave" + NS, titlebarButtons, function () { $(this).removeClass(KHOVERSTATE); })
-                .on("click" + NS, titlebarButtons, proxy(that._windowActionHandler, that));
+            //wrapper
+                //.on("mouseenter" + NS, titlebarButtons, function () { $(this).addClass(KHOVERSTATE); })
+                //.on("mouseleave" + NS, titlebarButtons, function () { $(this).removeClass(KHOVERSTATE); })
+                //.on("click" + NS, titlebarButtons, proxy(that._windowActionHandler, that));
 
-            windowContent
-                .on("keydown" + NS, proxy(that._keydown, that));
+            //windowContent
+                //.on("keydown" + NS, proxy(that._keydown, that));
 
             if (options.resizable) {
                 wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(that.toggleMaximization, that));
@@ -181,8 +181,8 @@
                 that.dragging = new WindowDragging(that);
             }
 
-            wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
-                    .on("mousedown" + NS, proxy(that.toFront, that));
+            //wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
+                    //.on("mousedown" + NS, proxy(that.toFront, that));
 
             that.touchScroller = kendo.touchScroller(element);
 
@@ -190,7 +190,7 @@
                 return that._onDocumentResize(e);
             };
 
-            $(window).on("resize", that._resizeHandler);
+            //$(window).on("resize", that._resizeHandler);
 
             if (options.visible) {
                 that.trigger(OPEN);
@@ -749,6 +749,14 @@
 
             kendo.destroy(that.wrapper);
 
+            if (that.resizing) {
+                that.resizing.destroy();
+            }
+
+            if (that.dragging) {
+                that.dragging.destroy();
+            }
+
             that.wrapper.remove().add(that.wrapper.find(".k-resize-handle,.k-window-titlebar")).off(NS);
 
             $(window).off("resize", that._resizeHandler);
@@ -940,6 +948,9 @@
             }
 
             return false;
+        },
+        destroy: function() {
+            this._draggable.destroy();
         }
     };
 
@@ -1021,6 +1032,9 @@
             this.owner.trigger(DRAGEND);
 
             return false;
+        },
+        destroy: function() {
+            this._draggable.destroy();
         }
     };
 
