@@ -42,30 +42,30 @@
         });
 
         test("PanelBar sets role to the wrapper", function() {
-            equal(ul.attr("role"), "list");
+            equal(ul.attr("role"), "menu");
         });
 
         test("PanelBar adds tab role to the panelbar items", function() {
             addItems(2);
 
             var items = ul.find(".k-item");
-            equal(items.eq(0).attr("role"), "listitem");
-            equal(items.eq(1).attr("role"), "listitem");
+            equal(items.eq(0).attr("role"), "menuitem");
+            equal(items.eq(1).attr("role"), "menuitem");
         });
 
         test("PanelBar adds tab role to items during init", function() {
             var panel = $("<ul id='test'><li>Test</li></ul>").kendoPanelBar();
 
             var items = panel.find(".k-item");
-            equal(items.eq(0).attr("role"), "listitem");
+            equal(items.eq(0).attr("role"), "menuitem");
         });
 
         test("PanelBar adds tab role to the added items", function() {
             addItems(2);
 
             var items = ul.find(".k-item");
-            equal(items.eq(0).attr("role"), "listitem");
-            equal(items.eq(1).attr("role"), "listitem");
+            equal(items.eq(0).attr("role"), "menuitem");
+            equal(items.eq(1).attr("role"), "menuitem");
         });
 
         test("PanelBar adds role group to the k-group elements", function() {
@@ -110,13 +110,19 @@
             equal(ul.find(".k-item:first").attr("id"), "test_pb_active")
         });
 
-        test("PanelBar adds aria-selected to the focused item", function() {
+        test("PanelBar adds aria-selected on selection", function() {
             addItems(2);
 
             ul.focus();
             ul.trigger({
                 type: "keydown",
                 keyCode: kendo.keys.DOWN,
+                preventDefault: $.noop
+            });
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: kendo.keys.ENTER,
                 preventDefault: $.noop
             });
 

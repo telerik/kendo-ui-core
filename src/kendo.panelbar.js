@@ -34,13 +34,12 @@
         CONTENTS = "> .k-content",
         FOCUSEDCLASS = "k-state-focused",
         DISABLEDCLASS = "k-state-disabled",
-        SELECTEDCLASS = ".k-state-selected",
-        HIGHLIGHTEDCLASS = ".k-state-highlighted",
+        SELECTEDCLASS = "k-state-selected",
+        HIGHLIGHTEDCLASS = "k-state-highlighted",
         ACTIVEITEMSELECTOR = ITEM + ":not(.k-state-disabled)",
         clickableItems = ACTIVEITEMSELECTOR + " > .k-link",
         disabledItems = ITEM + ".k-state-disabled > .k-link",
         selectableItems = "> li > .k-state-selected, .k-panel > li > .k-state-selected",
-        highlightableItems = "> .k-state-highlighted, .k-panel > .k-state-highlighted",
         defaultState = "k-state-default",
         ARIA_DISABLED = "aria-disabled",
         ARIA_EXPANDED = "aria-expanded",
@@ -64,7 +63,7 @@
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li role='listitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'>" +
+                "<li role='menuitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
@@ -159,7 +158,7 @@
 
     function updateItemClasses (item, panelElement) {
         item = $(item).addClass("k-item")
-                      .attr("role", "listitem");
+                      .attr("role", "menuitem");
 
         item
             .children(IMG)
@@ -272,13 +271,13 @@
                 .on(CLICK + NS, disabledItems, false)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, function() {
-                    var item = that.select().last();
+                    var item = that.select();
                     that._current(item[0] ? item : that._first());
                 })
                 .on("blur" + NS, function() {
                     that._current(null);
                 })
-                .attr("role", "list");
+                .attr("role", "menu");
 
             if (options.contentUrls) {
                 element.find("> .k-item")
@@ -342,8 +341,8 @@
                         return that;
                     }
 
-                    element.find(HIGHLIGHTEDCLASS).removeClass(HIGHLIGHTEDCLASS.substr(1));
-                    item.addClass(HIGHLIGHTEDCLASS.substr(1));
+                    element.find("." + HIGHLIGHTEDCLASS).removeClass(HIGHLIGHTEDCLASS);
+                    item.addClass(HIGHLIGHTEDCLASS);
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
@@ -374,7 +373,7 @@
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
 
                 if (!item.hasClass(DISABLEDCLASS) && groups.is(VISIBLE)) {
-                    item.removeClass(HIGHLIGHTEDCLASS.substr(1));
+                    item.removeClass(HIGHLIGHTEDCLASS);
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
@@ -566,18 +565,14 @@
             if (focused) {
                 focused
                     .removeAttr("id")
-                    .removeAttr("aria-selected")
                     .children(LINKSELECTOR)
                     .removeClass(FOCUSEDCLASS);
             }
 
             if (candidate) {
-                candidate.attr({
-                    "id": that._itemId,
-                    "aria-selected": true
-                })
-                .children(LINKSELECTOR)
-                .addClass(FOCUSEDCLASS);
+                candidate.attr("id", that._itemId)
+                         .children(LINKSELECTOR)
+                         .addClass(FOCUSEDCLASS);
 
                 that.element.attr("aria-activedescendant", that._itemId);
             }
@@ -816,7 +811,6 @@
                 childGroup = element.find(GROUPS),
                 prevent, content;
 
-            element.attr(ARIA_EXPANDED, !isVisible);
             if (childGroup.length) {
                 this._toggleGroup(childGroup, isVisible);
                 prevent = true;
@@ -849,6 +843,7 @@
 
             element
                 .parent()
+                .attr(ARIA_EXPANDED, !visibility)
                 .toggleClass(defaultState, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-icon")
@@ -944,14 +939,23 @@
         },
 
         _updateSelected: function(link) {
-            var element = this.element;
+            var that = this,
+                element = that.element,
+                item = link.parent(ITEM),
+                selected = that._selected;
 
-            element.find(selectableItems).removeClass(SELECTEDCLASS.substr(1));
-            element.find(highlightableItems).removeClass(HIGHLIGHTEDCLASS.substr(1));
+            if (selected) {
+                selected.removeAttr("aria-selected");
+            }
 
-            link.addClass(SELECTEDCLASS.substr(1));
-            link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
-            this._current(link.parent(ITEM));
+            that._selected = item.attr("aria-selected", true);
+
+            element.find(selectableItems).removeClass(SELECTEDCLASS);
+            element.find("> .k-state-highlighted, .k-panel > .k-state-highlighted").removeClass(HIGHLIGHTEDCLASS);
+
+            link.addClass(SELECTEDCLASS);
+            link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS);
+            that._current(item);
         }
     });
 
