@@ -362,14 +362,14 @@
             var that = this;
 
             if (arguments.length === 0) {
-                return that.wrapper.find("li." + ACTIVESTATE);
+                return that.tabGroup.find("li." + ACTIVESTATE);
             }
 
             if (!isNaN(element)) {
                 element = that.tabGroup.children().get(element);
             }
 
-            element = that.element.find(element);
+            element = that.tabGroup.find(element);
             $(element).each(function (index, item) {
                 item = $(item);
                 if (!item.hasClass(ACTIVESTATE) && !that.trigger(SELECT, { item: item[0], contentElement: that.contentHolder(item.index())[0] })) {
