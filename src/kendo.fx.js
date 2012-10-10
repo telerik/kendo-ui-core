@@ -766,23 +766,27 @@
 
     createEffect("fade", {
         restore: [ "opacity" ],
-        startState: function() {
+        _state: function(startState) {
             var that = this,
                 element = that.element,
-                options = that.options;
+                options = that.options,
+                opacity = element.data("opacity"),
+                value = isNaN(opacity) ? 1 : opacity;
+                out = options.direction === "out";
 
-            var opacity = element.data("opacity"),
-                direction = options.direction,
-                result = direction == "out" && isNaN(opacity) || direction == "in" ? 0 : opacity;
+                if (startState) {
+                    out = !out;
+                }
 
-            return { opacity: result };
+            return { opacity: out ? 0 : value };
+        },
+
+        startState: function() {
+            return this._state(true);
         },
 
         endState: function() {
-            var that = this,
-                options = that.options;
-
-            return extend({ opacity: options.direction == "out" ? 0 : 1 }, options.properties);
+            return extend(this._state(false), this.options.properties);
         }
     });
 
@@ -842,7 +846,7 @@
         },
 
         endState: function() {
-            return this._state(false);
+            return extend(this._state(false), this.options.properties);
         },
 
         _state: function(startState) {
