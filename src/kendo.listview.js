@@ -217,6 +217,7 @@
                 }
 
                 that.selectable = new kendo.ui.Selectable(that.element, {
+                    aria: true,
                     multiple: multi,
                     filter: FOCUSSELECTOR,
                     change: function() {
@@ -231,26 +232,18 @@
                             e.preventDefault();
                             if(multi) {
                                 if(!e.ctrlKey) {
-                                    that.element.children(".k-state-selected")
-                                        .attr("aria-selected", "false");
-
                                     that.selectable.clear();
                                 } else {
                                     if(current.hasClass(SELECTED)) {
-                                        current.attr("aria-selected", false);
                                         current.removeClass(SELECTED);
                                         current = null;
                                     }
                                 }
                             } else {
-                                that.element.children(".k-state-selected")
-                                    .attr("aria-selected", "false");
-
                                 that.selectable.clear();
                             }
 
                             that.selectable.value(current);
-                            current.attr("aria-selected", true);
                         }
                     });
                 }
