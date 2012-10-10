@@ -126,6 +126,7 @@ namespace :mvc do
     task :assets_js => [:js, MVC_DEMOS_ROOT + 'Scripts']
     task :assets_css => [
         :less,
+        MVC_DEMOS_ROOT + 'Content',
         MVC_DEMOS_ROOT + 'Content/web',
         MVC_DEMOS_ROOT + 'Content/dataviz',
         MVC_DEMOS_ROOT + 'Content/shared',
