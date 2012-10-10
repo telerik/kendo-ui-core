@@ -188,7 +188,8 @@
                 .on("focus" + NS, proxy(that._focus, that))
                 .on("blur" + NS, proxy(that._blur, that))
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
-                .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that));
+                .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
+                .on("click" + NS, function() { that.focus(); });
         },
 
         _checkboxClick: function(e) {
@@ -525,6 +526,10 @@
 
         _focus: function(e) {
             this._oldSelection = this.select()[0];
+        },
+
+        focus: function() {
+            this.element.focus();
         },
 
         _blur: function(e) {
