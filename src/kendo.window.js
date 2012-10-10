@@ -159,13 +159,13 @@
                 that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
             }
 
-            //wrapper
-                //.on("mouseenter" + NS, titlebarButtons, function () { $(this).addClass(KHOVERSTATE); })
-                //.on("mouseleave" + NS, titlebarButtons, function () { $(this).removeClass(KHOVERSTATE); })
-                //.on("click" + NS, titlebarButtons, proxy(that._windowActionHandler, that));
+            wrapper
+                .on("mouseenter" + NS, titlebarButtons, function () { $(this).addClass(KHOVERSTATE); })
+                .on("mouseleave" + NS, titlebarButtons, function () { $(this).removeClass(KHOVERSTATE); })
+                .on("click" + NS, titlebarButtons, proxy(that._windowActionHandler, that));
 
-            //windowContent
-                //.on("keydown" + NS, proxy(that._keydown, that));
+            windowContent
+                .on("keydown" + NS, proxy(that._keydown, that));
 
             if (options.resizable) {
                 wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(that.toggleMaximization, that));
@@ -181,8 +181,8 @@
                 that.dragging = new WindowDragging(that);
             }
 
-            //wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
-                    //.on("mousedown" + NS, proxy(that.toFront, that));
+            wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
+                    .on("mousedown" + NS, proxy(that.toFront, that));
 
             that.touchScroller = kendo.touchScroller(element);
 
@@ -190,7 +190,7 @@
                 return that._onDocumentResize(e);
             };
 
-            //$(window).on("resize", that._resizeHandler);
+            $(window).on("resize", that._resizeHandler);
 
             if (options.visible) {
                 that.trigger(OPEN);
