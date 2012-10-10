@@ -6218,14 +6218,18 @@
             var valueFields = valueFieldsByChartType(series.type),
                 valueFieldsCount = valueFields.length,
                 count = values.length,
-                i, j, field, result = {}, data = [];
+                i,
+                j,
+                field,
+                result = [],
+                data = [];
 
             for (i = 0; i < valueFieldsCount; i++) {
                 field = valueFields[i];
                 for (j = 0; j < count; j++) {
                     data.push(values[j][field]);
                 }
-                result[field] = execSimple(data, aggregate[field], series);
+                result.push(execSimple(data, aggregate[field], series));
                 data = [];
             }
 

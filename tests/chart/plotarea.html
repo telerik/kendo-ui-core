@@ -1277,6 +1277,29 @@
                     same(plotArea.series[0].data, [300]);
                 });
 
+                test("Aggregates bound series data with custom field names", function() {
+                    createPlotArea([{
+                        type: "candlestick",
+                        data: [{ o: 100, h: 100, l: 100, c: 100 }, { o: 200, h: 200, l: 200, c: 200 }],
+                        openField: "o",
+                        highField: "h",
+                        lowField: "l",
+                        closeField: "c",
+                        aggregate: {
+                            open: "max",
+                            high: "max",
+                            low: "max",
+                            close: "max"
+                        }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].data, [[200, 200, 200, 200]]);
+                });
+
                 test("Aggregates series data with predefined function", function() {
                     createPlotArea([{
                         data: [100, 200, 300],
@@ -1361,7 +1384,7 @@
                     }),
                     point = plotArea.series[0].data[0];
 
-                    same([point.open, point.high, point.low, point.close], [3,6,0,4]);
+                    same(point, [3,6,0,4]);
                 });
 
                 test("Series data with predefined function", function() {
@@ -1381,7 +1404,7 @@
                     }),
                     point = plotArea.series[0].data[0];
 
-                    same([point.open, point.high, point.low, point.close], [1,4,0,2]);
+                    same(point, [1,4,0,2]);
                 });
 
                 test("Series data with user function", 1, function() {
