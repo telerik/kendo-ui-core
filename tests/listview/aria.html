@@ -33,7 +33,7 @@
                     selectable: true,
                     dataSource: dataSource = new DataSource({ data: [1,2,3,4,5] })
                 }, options);
-                return $("<ul/>").kendoListView(options);
+                return $("<ul id='test'/>").kendoListView(options);
             }
 
             module("listview ARIA", {
@@ -81,6 +81,30 @@
                 });
 
                 equal(ul.data("kendoListView").current().attr("aria-selected"), "true");
+            });
+
+            test("ListView adds id to the last selected item", function() {
+                var ul = setup();
+
+                ul.focus();
+                ul.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.SPACEBAR
+                });
+
+                equal(ul.data("kendoListView").current().attr("id"), "test_lv_active");
+            });
+
+            test("ListView adds aria-activedescendant to the listview", function() {
+                var ul = setup();
+
+                ul.focus();
+                ul.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.SPACEBAR
+                });
+
+                equal(ul.attr("aria-activedescendant"), "test_lv_active");
             });
         </script>
     </body>

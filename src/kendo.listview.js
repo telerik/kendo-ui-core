@@ -32,7 +32,11 @@
 
             options = that.options;
 
-            that.wrapper = that.element;
+            that.wrapper = element = that.element;
+
+            if (element[0].id) {
+                that._itemId = element[0].id + "_lv_active";
+            }
 
             that._element();
 
@@ -256,7 +260,15 @@
 
             if (element !== undefined && element.length) {
                 if (!current || current[0] !== element[0]) {
-                    element.addClass(FOCUSED);
+                    if (current) {
+                        current.removeAttr("id");
+                        that.element.removeAttr("aria-activedescendant");
+                    }
+
+                    element.addClass(FOCUSED)
+                           .attr("id", that._itemId);
+
+                    that.element.attr("aria-activedescendant", that._itemId);
 
                     that._scrollTo(element[0]);
 
