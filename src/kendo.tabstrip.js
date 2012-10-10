@@ -175,7 +175,7 @@
             }
 
             var selectedItems = that.wrapper.find("li." + ACTIVESTATE),
-                content = that.contentHolder(selectedItems.index());
+                content = $(that.contentElement(selectedItems.parent().children().index(selectedItems)));
 
             if (content.length > 0 && content[0].childNodes.length === 0) {
                 that.activateTab(selectedItems.eq(0));
@@ -362,17 +362,17 @@
             var that = this;
 
             if (arguments.length === 0) {
-                return that.wrapper.find("li." + ACTIVESTATE);
+                return that.tabGroup.find("li." + ACTIVESTATE);
             }
 
             if (!isNaN(element)) {
                 element = that.tabGroup.children().get(element);
             }
 
-            element = that.element.find(element);
+            element = that.tabGroup.find(element);
             $(element).each(function (index, item) {
                 item = $(item);
-                if (!item.hasClass(ACTIVESTATE) && !that.trigger(SELECT, { item: item[0], contentElement: that.contentHolder(item.index())[0] })) {
+                if (!item.hasClass(ACTIVESTATE) && !that.trigger(SELECT, { item: item[0], contentElement: that.contentElement(item.index()) })) {
                     that.activateTab(item);
                 }
             });
@@ -399,7 +399,7 @@
             element.each(function () {
                 var item = $(this),
                     contentUrl = item.find("." + LINK).data(CONTENTURL),
-                    content = that.contentHolder(item.index());
+                    content = $(that.contentElement(item.index()));
 
                 if (contentUrl) {
                     that.ajaxRequest(item, content, null, contentUrl);
@@ -697,10 +697,9 @@
             }
 
             var visibleContents = contentAnimators.filter("." + ACTIVESTATE),
-                contentHolder = that.contentHolder(itemIndex),
-                contentElement = contentHolder.closest(".k-content");
+                content = $(that.contentElement(itemIndex));
 
-            if (contentHolder.length === 0) {
+            if (content.length === 0) {
                 visibleContents
                     .removeClass( ACTIVESTATE )
                     .kendoStop(true, true)
@@ -710,7 +709,7 @@
 
             item.attr("data-animating", true);
 
-            var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || false) && contentHolder.is(EMPTY),
+            var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || false) && content.is(EMPTY),
                 showContentElement = function () {
                     oldTab.removeClass(TABONTOP);
                     item.addClass(TABONTOP) // change these directly to bring the tab on top.
@@ -724,11 +723,12 @@
                         item.addClass(ACTIVESTATE);
                     }
 
-                    contentElement
+                    content
+                        .closest(".k-content")
                         .addClass(ACTIVESTATE)
                         .kendoStop(true, true)
                         .kendoAnimate( extend({ init: function () {
-                            that.trigger(ACTIVATE, { item: item[0], contentElement: contentHolder[0] });
+                            that.trigger(ACTIVATE, { item: item[0], contentElement: content[0] });
                         } }, animation, { complete: function () {
                                                         item.removeAttr("data-animating");
                                                     } } ) );
@@ -738,7 +738,7 @@
                         showContentElement();
                         that.trigger("change");
                     } else {
-                        that.ajaxRequest(item, contentHolder, function () {
+                        that.ajaxRequest(item, content, function () {
                             showContentElement();
                             that.trigger("change");
                         });
@@ -778,12 +778,6 @@
             }
 
             return undefined;
-        },
-
-        contentHolder: function (itemIndex) {
-            var contentElement = $(this.contentElement(itemIndex));
-
-            return kendo.support.touch ? contentElement.children(".km-scroll-container") : contentElement;
         },
 
         ajaxRequest: function (element, content, complete, url) {
