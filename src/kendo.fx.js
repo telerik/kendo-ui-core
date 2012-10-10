@@ -42,60 +42,61 @@
         TRANSITION = cssPrefix + "transition",
         TRANSFORM = cssPrefix + "transform",
         PERSPECTIVE = cssPrefix + "perspective",
-        BACKFACE = cssPrefix + "backface-visibility";
+        BACKFACE = cssPrefix + "backface-visibility",
+        directions = {
+            left: {
+                reverse: "right",
+                property: "left",
+                transition: "translatex",
+                vertical: false,
+                modifier: -1
+            },
+            right: {
+                reverse: "left",
+                property: "left",
+                transition: "translatex",
+                vertical: false,
+                modifier: 1
+            },
+            down: {
+                reverse: "up",
+                property: "top",
+                transition: "translatey",
+                vertical: true,
+                modifier: 1
+            },
+            up: {
+                reverse: "down",
+                property: "top",
+                transition: "translatey",
+                vertical: true,
+                modifier: -1
+            },
+            top: {
+                reverse: "bottom"
+            },
+            bottom: {
+                reverse: "top"
+            },
+            "in": {
+                reverse: "out",
+                modifier: -1
+            },
+            out: {
+                reverse: "in",
+                modifier: 1
+            },
 
-    kendo.directions = {
-        left: {
-            reverse: "right",
-            property: "left",
-            transition: "translatex",
-            vertical: false,
-            modifier: -1
-        },
-        right: {
-            reverse: "left",
-            property: "left",
-            transition: "translatex",
-            vertical: false,
-            modifier: 1
-        },
-        down: {
-            reverse: "up",
-            property: "top",
-            transition: "translatey",
-            vertical: true,
-            modifier: 1
-        },
-        up: {
-            reverse: "down",
-            property: "top",
-            transition: "translatey",
-            vertical: true,
-            modifier: -1
-        },
-        top: {
-            reverse: "bottom"
-        },
-        bottom: {
-            reverse: "top"
-        },
-        "in": {
-            reverse: "out",
-            modifier: -1
-        },
-        out: {
-            reverse: "in",
-            modifier: 1
-        },
+            vertical: {
+                reverse: "vertical"
+            },
 
-        vertical: {
-            reverse: "vertical"
-        },
+            horizontal: {
+                reverse: "horizontal"
+            }
+        };
 
-        horizontal: {
-            reverse: "horizontal"
-        }
-    };
+        kendo.directions = directions;
 
     extend($.fn, {
         kendoStop: function(clearQueue, gotoEnd) {
@@ -181,7 +182,7 @@
                     effectBody = {};
 
                 if (effect.length > 1) {
-                    effectBody.direction = (mirror && redirectedEffect ? kendo.directions[direction].reverse : direction);
+                    effectBody.direction = (mirror && redirectedEffect ? directions[direction].reverse : direction);
                 }
 
                 effects[effect[0]] = effectBody;
@@ -191,7 +192,7 @@
                 var direction = this.direction;
 
                 if (direction && mirror && !singleEffectRegExp.test(idx)) {
-                    this.direction = kendo.directions[direction].reverse;
+                    this.direction = directions[direction].reverse;
                 }
 
                 effects[idx] = this;
@@ -698,7 +699,7 @@
 
             var direction = options.direction;
             if (direction && options.reverse) {
-                options.direction = kendo.directions[direction].reverse;
+                options.direction = directions[direction].reverse;
             }
 
             if (!that.restore) {
@@ -718,7 +719,7 @@
             var that = this,
                 element = that.element,
                 direction = that.options.direction,
-                dir = kendo.directions[direction];
+                dir = directions[direction];
 
             return { direction: dir, offset: -dir.modifier * (dir.vertical ? element.outerHeight() : element.outerWidth()) };
         },
@@ -738,8 +739,10 @@
         auxilaries: function() {
             var options = this.options,
                 reverse = options.reverse,
-                slideIn = "slideIn:" + options.direction,
-                slideOut = "slideIn:" + kendo.directions[options.direction].reverse,
+                previous = options.previous,
+                direction = options.direction,
+                slideIn = "slideIn:" + direction,
+                slideOut = "slideIn:" + directions[direction].reverse,
                 aux = [{
                     element: this.element,
                     options: {
@@ -747,9 +750,9 @@
                     }
                 }];
 
-            if (options.previous) {
+            if (previous) {
                 aux.push({
-                    element: options.previous,
+                    element: previous,
                     options: {
                         effects: reverse ? slideIn : slideOut,
                         reverse: !reverse
@@ -830,7 +833,7 @@
 
             // re-reverse the direction, as slideIn:left is not the reverse of slideIn:right
             if (options.reverse) {
-                options.direction = kendo.directions[options.direction].reverse;
+                options.direction = directions[options.direction].reverse;
             }
         },
 
