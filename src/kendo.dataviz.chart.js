@@ -160,9 +160,10 @@
             var chart = this,
                 options,
                 themeOptions,
-                themes = dataviz.ui.themes.chart || {},
-                dataSourceOptions = (userOptions || {}).dataSource,
-                themeName;
+                themes = dataviz.ui.themes || {},
+                theme,
+                themeName,
+                dataSourceOptions = (userOptions || {}).dataSource;
 
             Widget.fn.init.call(chart, element);
             options = deepExtend({}, chart.options, userOptions);
@@ -170,7 +171,8 @@
             chart._originalOptions = deepExtend({}, options);
 
             themeName = options.theme;
-            themeOptions = themeName ? themes[themeName] || themes[themeName.toLowerCase()] : {};
+            theme = themes[themeName] || themes[themeName.toLowerCase()];
+            themeOptions = themeName && theme ? theme.chart : {};
 
             applyDefaults(options, themeOptions);
 

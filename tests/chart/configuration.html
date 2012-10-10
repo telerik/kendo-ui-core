@@ -478,9 +478,11 @@
                 });
 
                 test("axisDefaults override theme base", function() {
-                    dataviz.ui.themes.chart.test = {
-                        categoryAxis: {
-                            flag: true
+                    dataviz.ui.themes.test = {
+                        chart: {
+                            categoryAxis: {
+                                flag: true
+                            }
                         }
                     };
 
@@ -495,10 +497,12 @@
                 });
 
                 test("axisDefaults override theme with specific type", function() {
-                    dataviz.ui.themes.chart.test = {
-                        axisDefaults: {
-                            categoryAxis: {
-                                flag: true
+                    dataviz.ui.themes.test = {
+                        chart: {
+                            axisDefaults: {
+                                categoryAxis: {
+                                    flag: true
+                                }
                             }
                         }
                     };
@@ -1166,13 +1170,15 @@
                 // ------------------------------------------------------------
                 module("Themes", {
                     setup: function() {
-                        dataviz.ui.themes.chart.test = {
-                            flag: true,
-                            seriesColors: ["#f00", "#cf0"],
-                            seriesDefaults: {
-                                seriesDefaultsFlag: true,
-                                scatter: {
-                                    flag: false
+                        dataviz.ui.themes.test = {
+                                chart: {
+                                flag: true,
+                                seriesColors: ["#f00", "#cf0"],
+                                seriesDefaults: {
+                                    seriesDefaultsFlag: true,
+                                    scatter: {
+                                        flag: false
+                                    }
                                 }
                             }
                         };
@@ -1257,9 +1263,11 @@
                 });
 
                 test("theme options are applied to categoryAxes", function() {
-                    dataviz.ui.themes.chart.test = {
-                        categoryAxis: {
-                            flag: true
+                    dataviz.ui.themes.test = {
+                        chart: {
+                            categoryAxis: {
+                                flag: true
+                            }
                         }
                     };
 
@@ -1272,9 +1280,11 @@
                 });
 
                 test("theme options are applied to valueAxes", function() {
-                    dataviz.ui.themes.chart.test = {
-                        valueAxis: {
-                            flag: true
+                    dataviz.ui.themes.test = {
+                        chart: {
+                            valueAxis: {
+                                flag: true
+                            }
                         }
                     };
 
@@ -1287,9 +1297,11 @@
                 });
 
                 test("theme options are applied to xAxes", function() {
-                    dataviz.ui.themes.chart.test = {
-                        xAxis: {
-                            flag: true
+                    dataviz.ui.themes.test = {
+                        chart: {
+                            xAxis: {
+                                flag: true
+                            }
                         }
                     };
 
@@ -1303,9 +1315,11 @@
                 });
 
                 test("theme options are applied to yAxes", function() {
-                    dataviz.ui.themes.chart.test = {
-                        yAxis: {
-                            flag: true
+                    dataviz.ui.themes.test = {
+                        chart: {
+                            yAxis: {
+                                flag: true
+                            }
                         }
                     };
 

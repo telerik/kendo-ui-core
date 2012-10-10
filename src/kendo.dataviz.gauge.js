@@ -1193,7 +1193,8 @@
                 options,
                 themeOptions,
                 themeName,
-                themes = dataviz.ui.themes.gauge || {};
+                themes = dataviz.ui.themes || {},
+                theme;
 
             Widget.fn.init.call(gauge, element);
 
@@ -1202,7 +1203,8 @@
             options = deepExtend({}, gauge.options, userOptions);
 
             themeName = options.theme;
-            themeOptions = themeName ? themes[themeName] || themes[themeName.toLowerCase()] : {};
+            theme = themes[themeName] || themes[themeName.toLowerCase()];
+            themeOptions = themeName && theme ? theme.gauge : {};
 
             gauge.options = deepExtend({}, themeOptions, options);
 

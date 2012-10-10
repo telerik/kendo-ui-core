@@ -15,7 +15,6 @@
         SANS16 = "16px " + SANS,
         WHITE = "#fff";
 
-    // Chart themes ============================================================
     var chartBaseTheme = {
             title: {
                 font: SANS16
@@ -114,8 +113,19 @@
             }
         };
 
-    var chartThemes = {
-        black: deepExtend({}, chartBaseTheme, {
+    var gaugeBaseTheme = {
+        scale: {
+            labels: {
+                font: SANS12
+            }
+        }
+    };
+
+    // Exports ================================================================
+    var themes = dataviz.ui.themes;
+
+    dataviz.ui.themes.black = {
+        chart: deepExtend({}, chartBaseTheme, {
             title: {
                 color: WHITE
             },
@@ -214,67 +224,31 @@
                 opacity: 0.8
             }
         }),
+        gauge: deepExtend({}, gaugeBaseTheme, {
+            pointer: {
+                color: "#0070e4"
+            },
+            scale: {
+                rangePlaceholderColor: "#1d1d1d",
 
-        "default": deepExtend({}, chartBaseTheme, {
-            title: {
-                color: "#8e8e8e"
-            },
-            legend: {
                 labels: {
-                    color: "#232323"
-                }
-            },
-            seriesDefaults: {
-                labels: {
-                    color: BLACK,
-                    background: WHITE,
-                    opacity: 0.5
+                    color: WHITE
                 },
-                area: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    }
+                minorTicks: {
+                    color: WHITE
                 },
-                candlestick: {
-                    downColor: "#dedede",
-                    line: {
-                        color: "#8d8d8d"
-                    }
-                }
-            },
-            seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
-            categoryAxis: {
-                majorGridLines: {
-                    visible: true
-                }
-            },
-            axisDefaults: {
+                majorTicks: {
+                    color: WHITE
+                },
                 line: {
-                    color: "#8e8e8e"
-                },
-                labels: {
-                    color: "#232323"
-                },
-                minorGridLines: {
-                    color: "#f0f0f0"
-                },
-                majorGridLines: {
-                    color: "#dfdfdf"
-                },
-                title: {
-                    color: "#232323"
+                    color: WHITE
                 }
-            },
-            tooltip: {
-                background: WHITE,
-                color: BLACK,
-                opacity: 0.8
             }
-        }),
+        })
+    };
 
-        blueopal: deepExtend({}, chartBaseTheme, {
+    themes.blueopal = {
+        chart: deepExtend({}, chartBaseTheme, {
             title: {
                 color: "#293135"
             },
@@ -332,8 +306,113 @@
                 opacity: 0.8
             }
         }),
+        gauge: deepExtend({}, gaugeBaseTheme, {
+            pointer: {
+                color: "#005c83"
+            },
+            scale: {
+                rangePlaceholderColor: "#daecf4",
 
-        silver: deepExtend({}, chartBaseTheme, {
+                labels: {
+                    color: "#293135"
+                },
+                minorTicks: {
+                    color: "#293135"
+                },
+                majorTicks: {
+                    color: "#293135"
+                },
+                line: {
+                    color: "#293135"
+                }
+            }
+        })
+    };
+
+    themes.default = {
+        chart: deepExtend({}, chartBaseTheme, {
+            title: {
+                color: "#8e8e8e"
+            },
+            legend: {
+                labels: {
+                    color: "#232323"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: BLACK,
+                    background: WHITE,
+                    opacity: 0.5
+                },
+                area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                },
+                candlestick: {
+                    downColor: "#dedede",
+                    line: {
+                        color: "#8d8d8d"
+                    }
+                }
+            },
+            seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
+            categoryAxis: {
+                majorGridLines: {
+                    visible: true
+                }
+            },
+            axisDefaults: {
+                line: {
+                    color: "#8e8e8e"
+                },
+                labels: {
+                    color: "#232323"
+                },
+                minorGridLines: {
+                    color: "#f0f0f0"
+                },
+                majorGridLines: {
+                    color: "#dfdfdf"
+                },
+                title: {
+                    color: "#232323"
+                }
+            },
+            tooltip: {
+                background: WHITE,
+                color: BLACK,
+                opacity: 0.8
+            }
+        }),
+        gauge: deepExtend({}, gaugeBaseTheme, {
+            pointer: {
+                color: "#ea7001"
+            },
+            scale: {
+                rangePlaceholderColor: "#dedede",
+
+                labels: {
+                    color: "#2e2e2e"
+                },
+                minorTicks: {
+                    color: "#2e2e2e"
+                },
+                majorTicks: {
+                    color: "#2e2e2e"
+                },
+                line: {
+                    color: "#2e2e2e"
+                }
+            }
+        })
+    };
+
+    themes.silver = {
+        chart: deepExtend({}, chartBaseTheme, {
             title: {
                 color: "#4e5968"
             },
@@ -416,8 +495,31 @@
                 opacity: 0.8
             }
         }),
+        gauge: deepExtend({}, gaugeBaseTheme, {
+            pointer: {
+                color: "#0879c0"
+            },
+            scale: {
+                rangePlaceholderColor: "#f3f3f4",
 
-        metro: deepExtend({}, chartBaseTheme, {
+                labels: {
+                    color: "#515967"
+                },
+                minorTicks: {
+                    color: "#515967"
+                },
+                majorTicks: {
+                    color: "#515967"
+                },
+                line: {
+                    color: "#515967"
+                }
+            }
+        })
+    };
+
+    themes.metro = {
+        chart: deepExtend({}, chartBaseTheme, {
             title: {
                 color: "#777777"
             },
@@ -471,94 +573,8 @@
                 background: WHITE,
                 color: BLACK
             }
-        })
-    };
-
-    // Copy the line/area settings for their vertical counterparts
-    for (var themeName in chartThemes) {
-        var defaults = chartThemes[themeName].seriesDefaults;
-        defaults.verticalLine = deepExtend({}, defaults.line);
-        defaults.verticalArea = deepExtend({}, defaults.area);
-    }
-
-    // Gauge themes ===========================================================
-
-    var gaugeBaseTheme = {
-        scale: {
-            labels: {
-                font: SANS12
-            }
-        }
-    };
-
-    var gaugeThemes = {
-        black: deepExtend({}, gaugeBaseTheme, {
-            pointer: {
-                color: "#0070e4"
-            },
-            scale: {
-                rangePlaceholderColor: "#1d1d1d",
-
-                labels: {
-                    color: WHITE
-                },
-                minorTicks: {
-                    color: WHITE
-                },
-                majorTicks: {
-                    color: WHITE
-                },
-                line: {
-                    color: WHITE
-                }
-            }
         }),
-
-        blueopal: deepExtend({}, gaugeBaseTheme, {
-            pointer: {
-                color: "#005c83"
-            },
-            scale: {
-                rangePlaceholderColor: "#daecf4",
-
-                labels: {
-                    color: "#293135"
-                },
-                minorTicks: {
-                    color: "#293135"
-                },
-                majorTicks: {
-                    color: "#293135"
-                },
-                line: {
-                    color: "#293135"
-                }
-            }
-        }),
-
-        "default": deepExtend({}, gaugeBaseTheme, {
-            pointer: {
-                color: "#ea7001"
-            },
-            scale: {
-                rangePlaceholderColor: "#dedede",
-
-                labels: {
-                    color: "#2e2e2e"
-                },
-                minorTicks: {
-                    color: "#2e2e2e"
-                },
-                majorTicks: {
-                    color: "#2e2e2e"
-                },
-                line: {
-                    color: "#2e2e2e"
-                }
-            }
-        }),
-
-        metro: deepExtend({}, gaugeBaseTheme, {
+        gauge: deepExtend({}, gaugeBaseTheme, {
             pointer: {
                 color: "#8ebc00"
             },
@@ -578,36 +594,15 @@
                     color: "#777"
                 }
             }
-        }),
-
-        silver: deepExtend({}, gaugeBaseTheme, {
-            pointer: {
-                color: "#0879c0"
-            },
-            scale: {
-                rangePlaceholderColor: "#f3f3f4",
-
-                labels: {
-                    color: "#515967"
-                },
-                minorTicks: {
-                    color: "#515967"
-                },
-                majorTicks: {
-                    color: "#515967"
-                },
-                line: {
-                    color: "#515967"
-                }
-            }
         })
     };
 
-    // Exports ================================================================
-    deepExtend(dataviz.ui.themes, {
-        chart: chartThemes,
-        gauge: gaugeThemes
-    });
+    // Copy the line/area settings for their vertical counterparts
+    for (var themeName in themes) {
+        var defaults = themes[themeName].chart.seriesDefaults;
+        defaults.verticalLine = deepExtend({}, defaults.line);
+        defaults.verticalArea = deepExtend({}, defaults.area);
+    }
 
 })(jQuery);
 
