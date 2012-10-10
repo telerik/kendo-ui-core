@@ -24,7 +24,7 @@
                      '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ',
         viewportMeta = viewportTemplate({ height: "" }),
 
-        iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
+        iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
         DEVICE = OS.name,
         HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.browser == "mobilesafari",
@@ -115,7 +115,7 @@
                     os = platform;
                 }
 
-                support.mobileOS = OS = os;
+                OS = os;
             }
 
             if (os) {
