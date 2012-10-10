@@ -1893,7 +1893,7 @@
                 axisName = series.axis,
                 axisRange = chart.valueAxisRanges[axisName];
 
-            if (defined(value)) {
+            if (defined(value) && !isNaN(value)) {
                 axisRange = chart.valueAxisRanges[axisName] =
                     axisRange || { min: MAX_VALUE, max: MIN_VALUE };
 
@@ -6153,20 +6153,34 @@
 
     var Aggregates = {
         max: function(values) {
-            return math.max.apply(math, values);
+            var result = math.max.apply(math, values);
+            if (isNaN(result)) {
+                return sparseArrayMax(values);
+            } else {
+                return result;
+            }
         },
 
         min: function(values) {
-            return math.min.apply(math, values);
+            var result = math.min.apply(math, values);
+            if (isNaN(result)) {
+                return sparseArrayMin(values);
+            } else {
+                return result;
+            }
         },
 
         sum: function(values) {
             var i,
                 length = values.length,
-                sum = 0;
+                sum = 0,
+                n;
 
             for (i = 0; i < length; i++) {
-                sum += values[i];
+                n = values[i];
+                if (defined(n) && !isNaN(n)) {
+                    sum += n;
+                }
             }
 
             return sum;
@@ -6244,7 +6258,7 @@
 
         for (i = 0; i < length; i++) {
             n = arr[i];
-            if (defined(n)) {
+            if (defined(n) && !isNaN(n)) {
                 min = math.min(min, n);
                 max = math.max(max, n);
             }

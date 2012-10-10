@@ -212,6 +212,21 @@
                     );
                 });
 
+                test("NaN values are ignored when tracking axis range", 2, function() {
+                    stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
+                        function() {
+                            equal(this.valueAxisRangeTracker.query().min, 100);
+                            equal(this.valueAxisRangeTracker.query().max, 300);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "bar",
+                                data: [100, NaN, 300]
+                            }]);
+                        }
+                    );
+                });
+
                 test("adds categories to match actual data", function() {
                     var plotArea = new dataviz.CategoricalPlotArea(columnSeriesData, {
                         categoryAxis: {
@@ -841,6 +856,20 @@
                     );
                 });
 
+                test("NaN values are ignored when tracking axis range", 2, function() {
+                    stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
+                        function() {
+                            equal(this.valueAxisRangeTracker.query().min, 100);
+                            equal(this.valueAxisRangeTracker.query().max, 300);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "column",
+                                data: [100, NaN, 300]
+                            }]);
+                        }
+                    );
+                });
                 test("applies gap from first series", function() {
                     equals(chartSeries.options.gap, GAP);
                 });
@@ -938,6 +967,20 @@
                     ok(!chartSeries.options.isStacked);
                 });
 
+                test("NaN values are ignored when tracking axis range", 2, function() {
+                    stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
+                        function() {
+                            equal(this.valueAxisRangeTracker.query().min, 100);
+                            equal(this.valueAxisRangeTracker.query().max, 300);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "area",
+                                data: [100, NaN, 300]
+                            }]);
+                        }
+                    );
+                });
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Verical area series", {
                     setup: function() {
@@ -1181,6 +1224,45 @@
                     });
 
                     same(plotArea.series[0].data, [300]);
+                });
+
+                test("max ignores NaN values", function() {
+                    createPlotArea([{
+                        data: [100, NaN, 300],
+                        aggregate: "max"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].data, [300]);
+                });
+
+                test("min ignores NaN values", function() {
+                    createPlotArea([{
+                        data: [100, NaN, 300],
+                        aggregate: "min"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].data, [100]);
+                });
+
+                test("sum ignores NaN values", function() {
+                    createPlotArea([{
+                        data: [100, NaN, 300],
+                        aggregate: "sum"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].data, [400]);
                 });
 
                 test("Aggregates bound series data", function() {
