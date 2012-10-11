@@ -2695,7 +2695,9 @@
 
             that._reorderable();
 
-            that._attachGroupable();
+            if (that.groupable) {
+                that._attachGroupable();
+            }
 
             that._columnMenu();
         },
