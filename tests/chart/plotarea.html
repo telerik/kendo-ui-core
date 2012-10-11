@@ -123,12 +123,12 @@
                     }
                 });
 
-                test("appends primary value axis to children collection", function() {
-                    ok($.inArray(valueAxis, plotArea.children) >= 0);
+                test("appends primary value axis to pane content", function() {
+                    ok($.inArray(valueAxis, plotArea.panes[0].content.children) >= 0);
                 });
 
-                test("appends category axis to children collection", function() {
-                    ok($.inArray(categoryAxis, plotArea.children) >= 0);
+                test("appends category axis to pane content", function() {
+                    ok($.inArray(categoryAxis, plotArea.panes[0].content.children) >= 0);
                 });
 
                 test("aligns axes at default crossing values", function() {
@@ -483,8 +483,8 @@
                     }
                 });
 
-                test("secondary axis added to children collection", function() {
-                    ok($.inArray(secondaryValueAxis, plotArea.children) >= 0);
+                test("secondary axis added to pane content", function() {
+                    ok($.inArray(secondaryValueAxis, plotArea.panes[0].content.children) >= 0);
                 });
 
                 test("crosses category axis at default value", function() {
@@ -736,7 +736,7 @@
                     ok(plotArea.categoryAxis === plotArea.namedCategoryAxes["a"]);
                 });
 
-                test("secondary category axis is added to children collection", function() {
+                test("secondary category axis is added to pane content", function() {
                         moduleSetup();
 
                         createPlotArea(columnSeriesData, {
@@ -745,7 +745,7 @@
                             }]
                         });
 
-                    ok($.inArray(secondaryCategoryAxis, plotArea.children) >= 0);
+                    ok($.inArray(secondaryCategoryAxis, plotArea.panes[0].content.children) >= 0);
                 });
 
                 test("adds categories to match actual data", function() {
@@ -2706,12 +2706,12 @@
                     }
                 });
 
-                test("appends primary X axis to children collection", function() {
-                    ok($.inArray(axisX, plotArea.children) >= 0);
+                test("appends primary X axis to pane content", function() {
+                    ok($.inArray(axisX, plotArea.panes[0].content.children) >= 0);
                 });
 
-                test("appends primary Y axis to children collection", function() {
-                    ok($.inArray(axisY, plotArea.children) >= 0);
+                test("appends primary Y axis to pane content", function() {
+                    ok($.inArray(axisY, plotArea.panes[0].content.children) >= 0);
                 });
 
                 test("aligns axes at default crossing values", function() {
@@ -2922,12 +2922,12 @@
                     equals(plotArea.axisY.options.name, "a");
                 });
 
-                test("secondary X axis added to children collection", function() {
-                    ok($.inArray(secondaryXAxis, plotArea.children) >= 0);
+                test("secondary X axis added to pane content", function() {
+                    ok($.inArray(secondaryXAxis, plotArea.panes[0].content.children) >= 0);
                 });
 
-                test("secondary Y axis added to children collection", function() {
-                    ok($.inArray(secondaryYAxis, plotArea.children) >= 0);
+                test("secondary Y axis added to pane content", function() {
+                    ok($.inArray(secondaryYAxis, plotArea.panes[0].content.children) >= 0);
                 });
 
                 test("aligns primary axes at default crossing values", function() {

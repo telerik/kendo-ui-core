@@ -1112,7 +1112,7 @@
                 plotBands = options.plotBands || [],
                 vertical = options.vertical,
                 result = [],
-                plotArea = axis.parent,
+                plotArea = axis.plotArea,
                 slotX,
                 slotY,
                 from,

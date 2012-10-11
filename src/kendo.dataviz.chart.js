@@ -182,9 +182,11 @@
 
             chart.bind(chart.events, chart.options);
 
+            chart._stage = $("<div style='display: none' />")[0];
             chart.element
                 .addClass("k-chart")
-                .css("position", "relative");
+                .css("position", "relative")
+                .append(chart._stage);
 
             chart.wrapper = chart.element;
 
@@ -283,7 +285,7 @@
                 element = chart.element,
                 viewElement,
                 existingViewElement = chart._viewElement,
-                container = document.createElement("div"),
+                stage = chart._stage,
                 model = chart._model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
@@ -292,10 +294,9 @@
 
             if (viewType) {
                 view = chart._view = viewType.fromModel(model);
+                view.renderTo(stage);
 
-                view.renderTo(container);
-                viewElement = container.firstElementChild;
-
+                viewElement = stage.firstElementChild;
                 if (existingViewElement) {
                     existingViewElement.parentNode.replaceChild(
                         viewElement,
@@ -4569,8 +4570,10 @@
 
             pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
 
-            // Content (such as charts) is rendered, but excluded from reflows
             pane.content = new ChartElement();
+            pane.append(pane.content);
+
+            pane.axes = [];
         },
 
         options: {
@@ -4581,8 +4584,25 @@
             }
         },
 
+        appendAxis: function(axis) {
+            var pane = this;
+
+            pane.content.append(axis);
+            pane.axes.push(axis);
+            axis.pane = pane;
+        },
+
+        appendChart: function(chart) {
+            this.content.append(chart);
+        },
+
         reflow: function(targetBox) {
             var pane = this;
+
+            // Content (such as charts) is rendered, but excluded from reflows
+            if (last(pane.children) === pane.content) {
+                pane.children.pop();
+            }
 
             BoxElement.fn.reflow.call(pane, targetBox);
 
@@ -4622,7 +4642,6 @@
 
             plotArea.createPanes();
             plotArea.render();
-            plotArea.setPaneAxes();
         },
 
         options: {
@@ -4656,41 +4675,28 @@
             plotArea.panes = panes;
         },
 
-        setPaneAxes: function(filterPane) {
+        axisPane: function(axis) {
             var plotArea = this,
-                axes = plotArea.axes,
-                currentAxis,
-                pane,
-                paneName,
-                axisPane,
-                match,
-                paneAxes,
-                i;
+                panes = plotArea.panes,
+                i,
+                matchingPane;
 
-            for (var paneIndex = 0; paneIndex < plotArea.panes.length; paneIndex++) {
-                pane = plotArea.panes[paneIndex];
-
-                if (!filterPane || filterPane === pane) {
-                    paneName = pane.options.name;
-                    paneAxes = pane.axes = [];
-                    for (i = 0; i < axes.length; i++) {
-                        currentAxis = axes[i];
-                        axisPane = currentAxis.options.pane;
-
-                        if (axisPane) {
-                            match = axisPane === paneName;
-                        } else {
-                            match = paneIndex === 0;
-                        }
-
-                        if (match) {
-                            paneAxes.push(currentAxis);
-                            currentAxis.pane = pane;
-                            pane.content.append(currentAxis);
-                        }
-                    }
+            for (i = 0; i < panes.length; i++) {
+                if (panes[i].options.name === axis.options.pane) {
+                    matchingPane = panes[i];
+                    break;
                 }
             }
+
+            return matchingPane || panes[0];
+        },
+
+        appendAxis: function(axis) {
+            var plotArea = this;
+
+            plotArea.axisPane(axis).appendAxis(axis);
+            plotArea.axes.push(axis);
+            axis.plotArea = plotArea;
         },
 
         appendChart: function(chart, pane) {
@@ -4699,7 +4705,7 @@
             plotArea.charts.push(chart);
             plotArea.addToLegend(chart);
             if (pane) {
-                pane.content.append(chart);
+                pane.appendChart(chart);
             } else {
                 plotArea.append(chart);
             }
@@ -5285,6 +5291,7 @@
             plotArea.createValueAxes();
         },
 
+        // TODO: Test, refactor
         redrawPane: function(pane) {
             var plotArea = this,
                 filteredAxes = [],
@@ -5299,7 +5306,7 @@
                         delete plotArea.namedCategoryAxes[axis.options.name];
                     } else {
                         plotArea.valueAxisRangeTracker.reset(axis.options.name);
-                        delete plotArea.namedValueAxes[axis.options.name]
+                        delete plotArea.namedValueAxes[axis.options.name];
                     }
 
                     if (axis === plotArea.categoryAxis) {
@@ -5324,12 +5331,12 @@
             plotArea.charts = filteredCharts;
 
             pane.content.children = [];
+            pane.axes = [];
 
             plotArea.createCategoryAxes(pane);
             plotArea.aggregateDateSeries(pane);
             plotArea.createCharts(pane);
             plotArea.createValueAxes(pane);
-            plotArea.setPaneAxes(pane);
             plotArea.reflow(plotArea.box);
 
             var paneElement = document.getElementById(pane.options.id);
@@ -5674,7 +5681,7 @@
 
                     categoryAxis.axisIndex = i;
                     axes.push(categoryAxis);
-                    plotArea.axes.push(categoryAxis);
+                    plotArea.appendAxis(categoryAxis);
                 }
             }
 
@@ -5725,7 +5732,7 @@
                     }
 
                     axes.push(valueAxis);
-                    plotArea.axes.push(valueAxis);
+                    plotArea.appendAxis(valueAxis);
                 }
             }
 
@@ -5961,8 +5968,7 @@
                 namedAxes[axisName] = axis;
             }
 
-            plotArea.append(axis);
-            plotArea.axes.push(axis);
+            plotArea.appendAxis(axis);
 
             return axis;
         },
