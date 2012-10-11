@@ -4672,14 +4672,14 @@
             plotArea.panes = panes;
         },
 
-        axisPane: function(axis) {
+        findPane: function(name) {
             var plotArea = this,
                 panes = plotArea.panes,
                 i,
                 matchingPane;
 
             for (i = 0; i < panes.length; i++) {
-                if (panes[i].options.name === axis.options.pane) {
+                if (panes[i].options.name === name) {
                     matchingPane = panes[i];
                     break;
                 }
@@ -4689,9 +4689,10 @@
         },
 
         appendAxis: function(axis) {
-            var plotArea = this;
+            var plotArea = this,
+                pane = plotArea.findPane(axis.options.pane);
 
-            plotArea.axisPane(axis).appendAxis(axis);
+            pane.appendAxis(axis);
             plotArea.axes.push(axis);
             axis.plotArea = plotArea;
         },
@@ -5374,9 +5375,7 @@
 
             for (i = 0; i < paneNames.length; i++) {
                 paneSeries = seriesByPane[paneNames[i]];
-                pane = $.grep(plotArea.panes, function(p) {
-                    return p.options.name === paneNames[i];
-                })[0] || plotArea.panes[0];
+                pane = plotArea.findPane(paneNames[i]);
 
                 plotArea.createAreaChart(
                     plotArea.filterSeriesByType(paneSeries, [AREA, VERTICAL_AREA]),
@@ -5446,7 +5445,7 @@
                 currentSeries = series[seriesIx];
                 seriesClone = deepExtend({}, currentSeries);
                 categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
-                axisPane = plotArea.axisPane(categoryAxis);
+                axisPane = plotArea.findPane(categoryAxis.options.pane);
                 match = !filterPane || (filterPane === axisPane);
 
                 if (match && equalsIgnoreCase(categoryAxis.options.type, DATE)) {
@@ -5632,6 +5631,7 @@
                 definitions = [].concat(plotArea.options.categoryAxis),
                 i,
                 axisOptions,
+                pane,
                 categories,
                 type,
                 name,
@@ -5642,9 +5642,7 @@
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
-                var pane = $.grep(plotArea.panes, function(p) {
-                    return p.options.name === axisOptions.pane;
-                })[0] || plotArea.panes[0];
+                pane = plotArea.findPane(axisOptions.pane);
 
                 if (!filterPane || filterPane === pane) {
                     name = axisOptions.name;
@@ -5698,6 +5696,7 @@
                 invertAxes = plotArea.invertAxes,
                 baseOptions = { vertical: !invertAxes },
                 axisOptions,
+                pane,
                 valueAxis,
                 primaryAxis,
                 axes = [],
@@ -5707,9 +5706,7 @@
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
-                var pane = $.grep(plotArea.panes, function(p) {
-                    return p.options.name === axisOptions.pane;
-                })[0] || plotArea.panes[0];
+                pane = plotArea.findPane(axisOptions.pane);
 
                 if (!filterPane || filterPane === pane) {
                     name = axisOptions.name;
