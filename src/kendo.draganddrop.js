@@ -163,7 +163,7 @@
             that.client = location["client" + that.axis];
             that.screen = location["screen" + that.axis];
             that.initialDelta = offset - that.startLocation;
-            that.velocity = that.delta / (timeStamp - that.timeStamp);
+            that.velocity = that.delta / ((timeStamp - that.timeStamp) || 0); // Manually firing events in tests can make this 0.
             that.timeStamp = timeStamp;
         }
     });

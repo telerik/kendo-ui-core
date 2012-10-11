@@ -202,7 +202,11 @@
                     start: function(e) {
                         dimensions.refresh();
 
-                        if (dimensions.present()) {
+                        var velocityX = Math.abs(e.x.velocity),
+                            velocityY = Math.abs(e.y.velocity);
+
+                        if (dimensions.x.present() && velocityX * 2 >= velocityY ||
+                            dimensions.y.present() && velocityY * 2 >= velocityX) {
                             drag.capture();
                         } else {
                             drag.cancel();
