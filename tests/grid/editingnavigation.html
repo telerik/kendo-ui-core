@@ -47,7 +47,7 @@
                                 }
                             }
                         },
-                        data: [{ foo: "bar", name: "tom", id: 0 }, { foo: "baz", name: "jerry", id: 1 }]
+                        data: [{ foo: "bar", name: "tom", id: 0 }, { foo: "baz", name: "jerry", id: 1 }, { foo: "baz", name: "foo", id: 2 }]
                     })
                 }, options);
                 dataSource = options.dataSource;
@@ -213,10 +213,10 @@
             test("pressing shift and tab when current is at the begining of the row focus last cell on previous row", function() {
                 var grid = setup();
 
-                grid.current(table.find("tr:nth(1)>td:first"));
+                grid.current(table.find("tr:eq(2)>td:first"));
                 grid.element.focus().press(kendo.keys.TAB, false, true);
 
-                ok(table.find("tr:nth(0)>td:last")[0] === grid.current()[0]);
+                ok(table.find("tr:eq(1)>td:last")[0] === grid.current()[0]);
             });
 
             test("pressing escape key on edited cell exits edit mode", function() {
@@ -244,18 +244,6 @@
 
                 ok(!table.find("tr:first").hasClass("k-grid-edit-row"));
             });
-
-            /*
-            this wiil be no loger supported
-            test("pressing enter key on edited cell restores current in inline mode", function() {
-                var grid = setup({ editable: "inline" });
-
-                focusCell(grid).table.press(kendo.keys.DOWN).press(kendo.keys.ENTER).press(kendo.keys.ENTER);
-
-                ok(table.find("tr:eq(1)>td:first")[0] === grid.current()[0]);
-                ok(table.find("tr:eq(1)>td:first").hasClass("k-state-focused"));
-            });
-            */
 
             test("pressing enter key on edited row does not exits edit mode if validation fails in inline mode", function() {
                 var grid = setup({ editable: "inline" });
@@ -304,6 +292,57 @@
                 ok(!grid.current().hasClass("k-edit-cell"));
             });
 
+            test("pressing enter on delete command button", function() {
+                var grid = setup({
+                    editable: {
+                        confirmation: false
+                    },
+                    columns: [{ command: "destroy" }]
+                });
+
+                focusCell(grid).table.press(kendo.keys.ENTER).find(".k-button:first").click();
+
+                equal(table.find("td")[0], grid.current()[0]);
+            });
+
+            test("pressing enter on cancel command button", function() {
+                var grid = setup({
+                    editable: "inline",
+                    columns: ["foo", { command: "edit" }]
+                });
+
+                focusCell(grid).table.press(kendo.keys.ENTER).find(".k-grid-cancel").click();
+
+                equal(table.find("td")[0], grid.current()[0]);
+                ok(grid.current().hasClass("k-state-focused"));
+                equal(document.activeElement, grid.table[0]);
+            });
+
+            test("pressing enter on save command button", function() {
+                var grid = setup({
+                    editable: "inline",
+                    columns: ["foo", { command: "edit" }]
+                });
+
+                focusCell(grid).table.press(kendo.keys.ENTER).find(".k-grid-update").click();
+
+                equal(table.find("td")[0], grid.current()[0]);
+                ok(grid.current().hasClass("k-state-focused"));
+                equal(document.activeElement, grid.table[0]);
+            });
+
+            test("click on save command button for new item", function() {
+                var grid = setup({
+                    editable: "inline",
+                    columns: [{ command: "edit" }]
+                });
+
+                grid.addRow();
+                table.find(".k-grid-update").click();
+
+                ok(grid.current());
+                equal(document.activeElement, grid.table[0]);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

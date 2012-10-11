@@ -1145,7 +1145,12 @@
                     e.preventDefault();
                     e.stopPropagation();
 
+                    var currentIndex = that.items().index($(that.current()).parent());
+
                     that.cancelRow();
+
+                    that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                    that.table.focus();
                 });
 
                 container.on(CLICK + NS, "a.k-grid-update", function(e) {
@@ -1813,7 +1818,7 @@
                 } else if (that.options.editable && keys.TAB == key && isInCell && current) {
                     var cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
                     if (!cell.length) {
-                        cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row,.k-detail-row):visible")
+                        cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row):not(.k-detail-row):visible:first")
                         .children(DATA_CELL + (shiftKey ? ":last" : ":first"));
                     }
 
@@ -3143,7 +3148,7 @@
                 tbody,
                 placeholder,
                 currentIndex,
-                current = that.current(),
+                current = $(that.current()),
                 isCurrentInHeader = false,
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + visibleColumns(that.columns).length;
@@ -3158,7 +3163,7 @@
                 return;
             }
 
-            if (current && (current.hasClass(FOCUSED) || document.activeElement === that.table[0])) {
+            if (that.table[0] === document.activeElement || $.contains(that.table[0], document.activeElement)) {
                 isCurrentInHeader = current.is("th");
                 currentIndex = 0;
                 if (isCurrentInHeader) {
