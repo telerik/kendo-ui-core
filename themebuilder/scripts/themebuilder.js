@@ -32,19 +32,34 @@
             return function(object, value) {
                 var obj = object,
                     accessors = expression.split("."),
-                    i, name;
+                    i, name, arrayName,
+                    arrayRe = /\[(\d+)\]/;
 
-                for (i = 0; i < accessors.length - 1; i++) {
+                for (i = 0; accessors[i]; i++) {
                     name = accessors[i];
 
-                    if (!obj[name]) {
-                        obj[name] = {};
+                    if (arrayRe.test(name)) {
+                        arrayName = name.substring(0, name.indexOf("["));
+
+                        if (!obj[arrayName]) {
+                            obj[arrayName] = [];
+                        }
+
+                        obj[arrayName][parseInt(arrayRe.exec(name)[1], 10)] = value;
+
+                        break;
+                    } else {
+                        if (!obj[name]) {
+                            obj[name] = {};
+                        }
+
+                        if (i == accessors.length - 1) {
+                            obj[name] = value;
+                        } else {
+                            obj = obj[name];
+                        }
                     }
-
-                    obj = obj[name];
                 }
-
-                obj[accessors[accessors.length - 1]] = value;
 
                 return object;
             };
@@ -319,7 +334,7 @@
                 }
 
                 for (constant in constants) {
-                    property = constant.replace(/^(chart|gauge)\./i, "").replace(/\[\]/g, "");
+                    property = constant.replace(/^(chart|gauge)\./i, "");
                     isGauge = /^gauge\./i.test(constant);
                     constants[constant].value = kendo.getter(property, true)(isGauge ? gauge.options : chart.options);
                 }
@@ -330,7 +345,7 @@
                     constant, constants = this.constants;
 
                 for (constant in constants) {
-                    safeSetter(constant.replace(/\[\]/g, ""))(result, constants[constant].value);
+                    safeSetter(constant)(result, constants[constant].value);
                 }
 
                 if (format == "string") {

@@ -140,7 +140,12 @@
             "chart.axisDefaults.minorGridLines.color":    constant(COLOR),
             "chart.axisDefaults.majorGridLines.color":    constant(COLOR),
             "chart.axisDefaults.title.color":             constant(COLOR),
-            "chart.seriesColors[]":                       constant(COLOR),
+            "chart.seriesColors[0]":                      constant(COLOR),
+            "chart.seriesColors[1]":                      constant(COLOR),
+            "chart.seriesColors[2]":                      constant(COLOR),
+            "chart.seriesColors[3]":                      constant(COLOR),
+            "chart.seriesColors[4]":                      constant(COLOR),
+            "chart.seriesColors[5]":                      constant(COLOR),
             "chart.tooltip.background":                   constant(COLOR),
             "chart.tooltip.color":                        constant(COLOR),
             "chart.tooltip.opacity":                      constant("opacity"),
@@ -241,6 +246,15 @@
                 "chart.tooltip.background":                "Tooltip background",
                 "chart.tooltip.color":                     "Tooltip text",
                 "chart.tooltip.opacity":                   "Tooltip opacity"
+            },
+
+            "Series colors": {
+                "chart.seriesColors[0]":                   "Color #1",
+                "chart.seriesColors[1]":                   "Color #2",
+                "chart.seriesColors[2]":                   "Color #3",
+                "chart.seriesColors[3]":                   "Color #4",
+                "chart.seriesColors[4]":                   "Color #5",
+                "chart.seriesColors[5]":                   "Color #6"
             },
 
             "Gauge": {

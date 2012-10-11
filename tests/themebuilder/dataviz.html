@@ -41,32 +41,28 @@
                 JsonConstants = kendo.JsonConstants;
 
             function createChart(options) {
-                return $("<div />")
+                chart = $("<div />")
                     .appendTo("body")
-                    .kendoChart($.extend({}, options))
+                    .kendoChart(kendo.deepExtend({}, options))
                     .data("kendoChart");
+
+                return chart;
             }
 
             var fancyColor = "#b4d455",
                 chart, constants;
 
             module("JsonConstants", {
-                setup: function() {
-                    chart = $("<div />").appendTo("body").kendoChart({
-                        title: {
-                            color: "#b4d455"
-                        },
-                        tooltip: {
-                            background: "#f1f1f1"
-                        }
-                    });
-                },
                 teardown: function() {
                     $("[data-role=chart]").remove();
                 }
             });
 
             test("infer infers basic constant", function() {
+                createChart({
+                    title: { color: "#b4d455" }
+                });
+
                 constants = new JsonConstants({
                     constants: {
                         "title.color": {
@@ -81,6 +77,11 @@
             });
 
             test("infer infers multiple constants", function() {
+                createChart({
+                    title: { color: "#b4d455" },
+                    tooltip: { background: "#f1f1f1" }
+                });
+
                 constants = new JsonConstants({
                     constants: {
                         "title.color": { property: "color" },
@@ -94,7 +95,9 @@
             });
 
             test("applyTheme applies theme to target document", function() {
-                createChart();
+                createChart({
+                    title: { color: "#b4d455" }
+                });
 
                 constants = new JsonConstants({
                     constants: {
@@ -109,6 +112,49 @@
                 equal(chart.options.title.color, fancyColor);
             });
 
+            test("infer infers array elements", function() {
+                createChart({
+                    seriesColors: [ fancyColor ]
+                });
+
+                constants = new JsonConstants({
+                    constants: {
+                        "chart.seriesColors[0]": { property: "color" }
+                    }
+                });
+
+                constants.infer(document);
+
+                equal(constants.constants["chart.seriesColors[0]"].value, fancyColor);
+            });
+
+            test("serialized array properties are within an array", function() {
+                constants = new JsonConstants({
+                    constants: {
+                        "chart.seriesColors[0]": { property: "color", value: fancyColor }
+                    }
+                });
+
+                var theme = constants.source("json");
+
+                ok($.isArray(theme.chart.seriesColors));
+                equal(theme.chart.seriesColors[0], fancyColor);
+            });
+
+            test("serializing multiple array items", function() {
+                constants = new JsonConstants({
+                    constants: {
+                        "chart.seriesColors[0]": { property: "color", value: "#ff0000" },
+                        "chart.seriesColors[1]": { property: "color", value: "#00ff00" }
+                    }
+                });
+
+                var theme = constants.source("json");
+
+                equal(theme.chart.seriesColors.length, 2);
+                equal(theme.chart.seriesColors[0], "#ff0000");
+                equal(theme.chart.seriesColors[1], "#00ff00");
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
