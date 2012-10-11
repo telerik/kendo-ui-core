@@ -2109,35 +2109,38 @@
                 html = "",
                 footerTemplate = that.footerTemplate,
                 options = that.options,
-                footer;
+                footer = that.footer || that.wrapper.find(".k-grid-footer");
 
             if (footerTemplate) {
                 aggregates = !isEmptyObject(aggregates) ? aggregates : buildEmptyAggregatesObject(that.dataSource.aggregate());
 
                 html = $(that._wrapFooter(footerTemplate(aggregates)));
-                footer = that.footer || that.wrapper.find(".k-grid-footer");
 
                 if (footer.length) {
                     var tmp = html;
 
                     footer.replaceWith(tmp);
-                    that.footer = tmp;
+                    footer = that.footer = tmp;
                 } else {
                     if (options.scrollable) {
-                        that.footer = options.pageable ? html.insertBefore(that.wrapper.children("div.k-grid-pager")) : html.appendTo(that.wrapper);
+                        footer = that.footer = options.pageable ? html.insertBefore(that.wrapper.children("div.k-grid-pager")) : html.appendTo(that.wrapper);
                     } else {
-                        that.footer = html.insertBefore(that.tbody);
+                        footer = that.footer = html.insertBefore(that.tbody);
                     }
                 }
+            } else if (footer && !that.footer) {
+                that.footer = footer;
+            }
 
+            if (footer.length) {
                 if (options.scrollable) {
                     that.scrollables = that.scrollables
                         .not(".k-grid-footer-wrap")
-                        .add(that.footer.children(".k-grid-footer-wrap"));
+                        .add(footer.children(".k-grid-footer-wrap"));
                 }
 
                 if (options.resizable && that._footerWidth) {
-                    that.footer.find("table").css('width', that._footerWidth);
+                    footer.find("table").css('width', that._footerWidth);
                 }
             }
         },
@@ -2448,6 +2451,7 @@
                 options = that.options,
                 dataSource = that.dataSource,
                 groups = dataSource.group(),
+                footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 aggregates = dataSource.aggregate();
 
             that.rowTemplate = that._tmpl(options.rowTemplate);
@@ -2457,7 +2461,7 @@
                 that.detailTemplate = that._detailTmpl(options.detailTemplate || "");
             }
 
-            if (!isEmptyObject(aggregates) ||
+            if ((!isEmptyObject(aggregates) && !footer.length) ||
                 grep(that.columns, function(column) { return column.footerTemplate; }).length) {
 
                 that.footerTemplate = that._footerTmpl(aggregates, "footerTemplate", "k-footer-template");
