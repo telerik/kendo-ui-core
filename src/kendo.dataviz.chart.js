@@ -3515,16 +3515,21 @@
                 value = data.value,
                 children = chart.children,
                 pointColor = data.fields.color || series.color,
-                point, cluster;
+                point,
+                valueParts = this.splitValue(value),
+                hasValue = !inArray(undefined, valueParts) && !inArray(null, valueParts),
+                cluster;
 
-            point = chart.createPoint(value,
-                deepExtend({
-                    tooltip: {
-                        // TODO: Include category by default
-                        format: (category ? "{4:d}<br/>" : "") + "open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
-                    }
-                }, series)
-            );
+            if (hasValue) {
+                point = chart.createPoint(value,
+                    deepExtend({
+                        tooltip: {
+                            // TODO: Include category by default
+                            format: (category ? "{4:d}<br/>" : "") + "open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
+                        }
+                    }, series)
+                );
+            }
 
             cluster = children[categoryIx];
             if (!cluster) {
@@ -3560,10 +3565,7 @@
         },
 
         createPoint: function(value, series) {
-            var parts = this.splitValue(value);
-            if (!inArray(undefined, parts) && !inArray(null, parts)) {
-                return new Candlestick(value, series);
-            }
+            return new Candlestick(value, series);
         },
 
         splitValue: function(value) {
