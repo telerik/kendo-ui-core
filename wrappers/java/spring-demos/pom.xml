@@ -74,7 +74,13 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.9</version>
 		</dependency>
-                                        
+		
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+            
         <dependency>
             <groupId>com.kendoui</groupId>
             <artifactId>kendo-taglib</artifactId>

@@ -13,7 +13,8 @@ SPRING_DEMOS_ROOT = JAVA_WRAPPERS_ROOT + 'spring-demos/'
 SPRING_DEMOS_WAR = "#{SPRING_DEMOS_ROOT}target/sprind-demos-#{VERSION}.war"
 SPRING_DEMOS_SRC_ROOT = SPRING_DEMOS_ROOT + 'src/'
 SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*')
-SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/**/*']
+SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/**/*']
+SPRING_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
 SPRING_DEMOS_RESOURCES = SPRING_DEMOS_SRC_ROOT + 'main/webapp/resources'
 
 # Update a pom.xml file when the VERSION changes
@@ -141,6 +142,10 @@ end
 tree :to => SPRING_DEMOS_RESOURCES,
      :from => SPRING_DEMOS_SHARED_CONTENT,
      :root => 'demos/mvc/content/'
+
+tree :to => SPRING_DEMOS_RESOURCES,
+     :from => SPRING_DEMOS_NAVIGATION,
+     :root => 'demos/mvc/App_Data/'
 
 namespace :java do
     desc('Build the Kendo Tag Library')
