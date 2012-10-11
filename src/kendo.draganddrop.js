@@ -158,7 +158,8 @@
 
             that.scale = 1;
             that.max = 0;
-            that._forceEnabled = false;
+            that.forcedEnabled = false;
+            that.forcedDisabled = false;
 
             if (that.horizontal) {
                 that.measure = "width";
@@ -177,6 +178,10 @@
 
         forceEnabled: function() {
             this.forcedEnabled = true;
+        },
+
+        forceDisabled: function() {
+            this.forcedDisabled = true;
         },
 
         getSize: function() {
@@ -202,7 +207,7 @@
             that.min = Math.min(that.max, that.size - scaledTotal);
             that.minScale = that.size / total;
 
-            that.enabled = that.forcedEnabled || (scaledTotal > size);
+            that.enabled = that.forcedDisabled ? false : that.forcedEnabled || (scaledTotal > size);
 
             if (!silent) {
                 that.trigger(CHANGE, that);

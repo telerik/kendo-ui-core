@@ -140,7 +140,8 @@
         move: function(location) {
             var that = this,
                 offset = location["page" + that.axis],
-                timeStamp = now();
+                timeStamp = now(),
+                timeDelta = (timeStamp - that.timeStamp) || 1; // Firing manually events in tests can make this 0;
 
             if (!offset && invalidZeroEvents) {
                 return;
@@ -151,7 +152,7 @@
             that._updateLocationData(location);
 
             that.initialDelta = offset - that.startLocation;
-            that.velocity = that.delta / (timeStamp - that.timeStamp);
+            that.velocity = that.delta / timeDelta;
             that.timeStamp = timeStamp;
         },
 

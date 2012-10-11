@@ -12,6 +12,7 @@
         PaneDimensions = kendo.ui.PaneDimensions,
         Transition = fx.Transition,
         Animation = fx.Animation,
+        abs = Math.abs,
         SNAPBACK_DURATION = 500,
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.93,
@@ -90,7 +91,7 @@
         },
 
         done: function() {
-            return Math.abs(this.velocity) < 1;
+            return abs(this.velocity) < 1;
         },
 
         start: function(e) {
@@ -232,7 +233,11 @@
                     start: function(e) {
                         dimensions.refresh();
 
-                        if (dimensions.enabled) {
+                        var velocityX = abs(e.x.velocity),
+                            velocityY = abs(e.y.velocity);
+
+                        if (dimensions.x.enabled && velocityX * 2 >= velocityY ||
+                            dimensions.y.enabled && velocityY * 2 >= velocityX) {
                             userEvents.capture();
                         } else {
                             userEvents.cancel();
