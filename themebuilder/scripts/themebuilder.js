@@ -310,15 +310,18 @@
             infer: function(targetDocument) {
                 var $ = targetDocument.defaultView.$,
                     chart = $("[data-role=chart]", targetDocument).data("kendoChart"),
-                    constants = this.constants, constant, property;
+                    gauge = $("[data-role=radialgauge]", targetDocument).data("kendoRadialGauge"),
+                    constants = this.constants, constant, property,
+                    isGauge;
 
-                if (!chart) {
+                if (!chart && !gauge) {
                     return;
                 }
 
                 for (constant in constants) {
                     property = constant.replace(/^(chart|gauge)\./i, "").replace(/\[\]/g, "");
-                    constants[constant].value = kendo.getter(property, true)(chart.options);
+                    isGauge = /^gauge\./i.test(constant);
+                    constants[constant].value = kendo.getter(property, true)(isGauge ? gauge.options : chart.options);
                 }
             },
 
@@ -346,14 +349,20 @@
 
                 w.kendo.dataviz.ui.registerTheme("newTheme", this.source("json"));
 
-                $("[data-role=chart]", targetDocument).each(function() {
-                    var chartElement = w.$(this),
-                        options = chartElement.data("kendoChart")._originalOptions;
+                function setTheme(selector, component) {
+                    $(selector, targetDocument).each(function() {
+                        var element = w.$(this),
+                            options = element.data(component)._originalOptions;
 
-                    options.theme = "newTheme";
+                        options.theme = "newTheme";
 
-                    chartElement.kendoChart(options);
-                });
+                        element[component](options);
+                    });
+                }
+
+                setTheme("[data-role=chart]", "kendoChart");
+                setTheme("[data-role=radialgauge]", "kendoRadialGauge");
+                setTheme("[data-role=lineargauge]", "kendoLinearGauge");
             }
         }),
 

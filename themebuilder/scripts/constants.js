@@ -135,9 +135,6 @@
             "chart.title.color":                          constant(COLOR),
             "chart.legend.labels.color":                  constant(COLOR),
             "chart.seriesDefaults.labels.color":          constant(COLOR),
-            "chart.seriesDefaults.labels.background":     constant(COLOR),
-            "chart.seriesDefaults.labels.opacity":        constant("opacity"),
-            "chart.seriesDefaults.area.opacity":          constant("opacity"),
             "chart.axisDefaults.line.color":              constant(COLOR),
             "chart.axisDefaults.labels.color":            constant(COLOR),
             "chart.axisDefaults.minorGridLines.color":    constant(COLOR),
@@ -146,7 +143,13 @@
             "chart.seriesColors[]":                       constant(COLOR),
             "chart.tooltip.background":                   constant(COLOR),
             "chart.tooltip.color":                        constant(COLOR),
-            "chart.tooltip.opacity":                      constant("opacity")
+            "chart.tooltip.opacity":                      constant("opacity"),
+            "gauge.pointer.color":                        constant(COLOR),
+            "gauge.scale.rangePlaceholderColor":          constant(COLOR),
+            "gauge.scale.labels.color":                   constant(COLOR),
+            "gauge.scale.minorTicks.color":               constant(COLOR),
+            "gauge.scale.majorTicks.color":               constant(COLOR),
+            "gauge.scale.line.color":                     constant(COLOR)
         },
         webConstantsHierarchy = {
             "Widgets": {
@@ -227,9 +230,6 @@
 
             "Axes": {
                 "chart.seriesDefaults.labels.color":       "Series text color",
-                "chart.seriesDefaults.labels.background":  "Series text background",
-                "chart.seriesDefaults.labels.opacity":     "Series text opacity",
-                "chart.seriesDefaults.area.opacity":       "Area chart opacity",
                 "chart.axisDefaults.line.color":           "Axis line color",
                 "chart.axisDefaults.labels.color":         "Axis labels color",
                 "chart.axisDefaults.minorGridLines.color": "Minor grid lines color",
@@ -241,9 +241,16 @@
                 "chart.tooltip.background":                "Tooltip background",
                 "chart.tooltip.color":                     "Tooltip text",
                 "chart.tooltip.opacity":                   "Tooltip opacity"
-            }
+            },
 
-            // TODO: Add gauge styles
+            "Gauge": {
+                "gauge.pointer.color":                     "Pointer color",
+                "gauge.scale.rangePlaceholderColor":       "Range placeholder color",
+                "gauge.scale.labels.color":                "Scale labels text color",
+                "gauge.scale.minorTicks.color":            "Minor ticks color",
+                "gauge.scale.majorTicks.color":            "Major ticks color",
+                "gauge.scale.line.color":                  "Scale line color"
+            }
         };
 
     window.themeBuilder = new kendo.ThemeBuilder({

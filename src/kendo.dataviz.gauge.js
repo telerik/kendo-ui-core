@@ -1200,6 +1200,7 @@
 
             gauge.wrapper = gauge.element;
 
+            gauge._originalOptions = deepExtend({}, userOptions);
             options = deepExtend({}, gauge.options, userOptions);
 
             themeName = options.theme;
