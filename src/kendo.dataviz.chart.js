@@ -4571,6 +4571,7 @@
             pane.append(pane.content);
 
             pane.axes = [];
+            pane.charts = [];
         },
 
         options: {
@@ -4590,7 +4591,18 @@
         },
 
         appendChart: function(chart) {
-            this.content.append(chart);
+            var pane = this;
+
+            pane.charts.push(chart);
+            pane.content.append(chart);
+        },
+
+        empty: function() {
+            var pane = this;
+
+            pane.content.children = [];
+            pane.axes = [];
+            pane.charts = [];
         },
 
         reflow: function(targetBox) {
@@ -4697,6 +4709,22 @@
             axis.plotArea = plotArea;
         },
 
+        removeAxis: function(axisToRemove) {
+            var plotArea = this,
+                i,
+                axis,
+                filteredAxes = [];
+
+            for (i = 0; i < plotArea.axes.length; i++) {
+                axis = plotArea.axes[i];
+                if (axisToRemove !== axis) {
+                    filteredAxes.push(axis);
+                }
+            }
+
+            plotArea.axes = filteredAxes;
+        },
+
         appendChart: function(chart, pane) {
             var plotArea = this;
 
@@ -4707,6 +4735,22 @@
             } else {
                 plotArea.append(chart);
             }
+        },
+
+        removeChart: function(chartToRemove) {
+            var plotArea = this,
+                i,
+                chart,
+                filteredCharts = [];
+
+            for (i = 0; i < plotArea.charts.length; i++) {
+                chart = plotArea.charts[i];
+                if (chart !== chartToRemove) {
+                    filteredCharts.push(chart);
+                }
+            }
+
+            plotArea.charts = filteredCharts;
         },
 
         addToLegend: function(chart) {
@@ -4751,6 +4795,34 @@
             }
 
             plotArea.reflowCharts();
+        },
+
+        redrawPane: function(pane) {
+            var plotArea = this,
+                i;
+
+            for (i = 0; i < pane.axes.length; i++) {
+                plotArea.removeAxis(pane.axes[i]);
+            }
+
+            for (i = 0; i < pane.charts.length; i++) {
+                plotArea.removeChart(pane.charts[i]);
+            }
+
+            pane.empty();
+
+            plotArea.render(pane);
+            plotArea.reflow(plotArea.box);
+
+            var paneElement = document.getElementById(pane.options.id);
+            if (paneElement) {
+                paneElement.parentNode.replaceChild(
+                    plotArea.owner._view.renderElement(
+                        pane.getViewElements(plotArea.owner._view)[0]
+                    ),
+                    paneElement
+                );
+            }
         },
 
         axisCrossingValues: function(axis, crossingAxes) {
@@ -5280,70 +5352,35 @@
             valueAxis: {}
         },
 
-        render: function() {
+        render: function(pane) {
             var plotArea = this;
-
-            plotArea.createCategoryAxes();
-            plotArea.aggregateDateSeries();
-            plotArea.createCharts();
-            plotArea.createValueAxes();
-        },
-
-        // TODO: Test, refactor
-        redrawPane: function(pane) {
-            var plotArea = this,
-                filteredAxes = [],
-                filteredCharts = [];
-
-            for (var i = 0; i < plotArea.axes.length; i++) {
-                var axis = plotArea.axes[i];
-                if (axis.pane !== pane) {
-                    filteredAxes.push(axis);
-                } else {
-                    if (axis instanceof CategoryAxis) {
-                        delete plotArea.namedCategoryAxes[axis.options.name];
-                    } else {
-                        plotArea.valueAxisRangeTracker.reset(axis.options.name);
-                        delete plotArea.namedValueAxes[axis.options.name];
-                    }
-
-                    if (axis === plotArea.categoryAxis) {
-                        delete plotArea.categoryAxis;
-                    }
-
-                    if (axis === plotArea.valueAxis) {
-                        delete plotArea.valueAxis;
-                    }
-                }
-            }
-
-            plotArea.axes = filteredAxes;
-
-            for (var i = 0; i < plotArea.charts.length; i++) {
-                var chart = plotArea.charts[i];
-                if (pane.content.children.indexOf(chart) === -1) {
-                    filteredCharts.push(chart);
-                }
-            }
-
-            plotArea.charts = filteredCharts;
-
-            pane.content.children = [];
-            pane.axes = [];
 
             plotArea.createCategoryAxes(pane);
             plotArea.aggregateDateSeries(pane);
             plotArea.createCharts(pane);
             plotArea.createValueAxes(pane);
-            plotArea.reflow(plotArea.box);
+        },
 
-            var paneElement = document.getElementById(pane.options.id);
-            paneElement.parentNode.replaceChild(
-                plotArea.owner._view.renderElement(
-                    pane.getViewElements(plotArea.owner._view)[0]
-                ),
-                paneElement
-            );
+        removeAxis: function(axis) {
+            var plotArea = this,
+                axisName = axis.options.name;
+
+            PlotAreaBase.fn.removeAxis.call(plotArea, axis);
+
+            if (axis instanceof CategoryAxis) {
+                delete plotArea.namedCategoryAxes[axisName];
+            } else {
+                plotArea.valueAxisRangeTracker.reset(axisName);
+                delete plotArea.namedValueAxes[axisName];
+            }
+
+            if (axis === plotArea.categoryAxis) {
+                delete plotArea.categoryAxis;
+            }
+
+            if (axis === plotArea.valueAxis) {
+                delete plotArea.valueAxis;
+            }
         },
 
         createCharts: function(filterPane) {

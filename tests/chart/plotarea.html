@@ -2405,6 +2405,25 @@
                     equals(textBox.children[0].content, "Title");
                 });
 
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Panes / Redraw", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("Cleans up pane axes", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a"
+                        }]
+                    });
+
+                    plotArea.panes[0].axes[0].dirty = true;
+                    plotArea.redrawPane(plotArea.panes[0]);
+
+                    ok(!plotArea.panes[0].axes[0].dirty);
+                });
             })();
 
             (function() {
