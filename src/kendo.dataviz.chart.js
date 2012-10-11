@@ -3526,19 +3526,18 @@
                 }, series)
             );
 
+            cluster = children[categoryIx];
+            if (!cluster) {
+                cluster = new ClusterLayout({
+                    vertical: options.invertAxes,
+                    gap: options.gap,
+                    spacing: options.spacing
+                });
+                chart.append(cluster);
+            }
+
             if (point) {
                 chart.updateRange(value, categoryIx, series);
-
-                cluster = children[categoryIx];
-
-                if (!cluster) {
-                    cluster = new ClusterLayout({
-                        vertical: options.invertAxes,
-                        gap: options.gap,
-                        spacing: options.spacing
-                    });
-                    chart.append(cluster);
-                }
 
                 cluster.append(point);
 
@@ -5428,6 +5427,7 @@
                 series = plotArea.srcSeries || plotArea.series,
                 processedSeries = [],
                 categoryAxis,
+                axisPane,
                 categories,
                 categoryMap,
                 groupIx,
@@ -5439,6 +5439,7 @@
                 data,
                 srcValues,
                 i,
+                match,
                 categoryIx,
                 pointData,
                 value;
@@ -5447,10 +5448,8 @@
                 currentSeries = series[seriesIx];
                 seriesClone = deepExtend({}, currentSeries);
                 categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
-                var pane = $.grep(plotArea.panes, function(p) {
-                    return p.options.name === categoryAxis.options.pane;
-                })[0] || plotArea.panes[0];
-                var match = !filterPane || (filterPane === pane);
+                axisPane = plotArea.axisPane(categoryAxis);
+                match = !filterPane || (filterPane === axisPane);
 
                 if (match && equalsIgnoreCase(categoryAxis.options.type, DATE)) {
                     categories = categoryAxis.options.categories;
