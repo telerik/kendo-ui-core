@@ -720,6 +720,7 @@
             return [];
         },
 
+        setup: $.noop,
         teardown: $.noop
     });
 
@@ -758,12 +759,13 @@
 
     createEffect("fade", {
         restore: [ "opacity" ],
+
         _state: function(startState) {
             var that = this,
                 element = that.element,
                 options = that.options,
                 opacity = element.data("opacity"),
-                value = isNaN(opacity) ? 1 : opacity;
+                value = isNaN(opacity) ? 1 : opacity,
                 out = options.direction === "out";
 
                 if (startState) {
@@ -791,7 +793,6 @@
                 scale = element.data("scale"),
                 value = isNaN(scale) ? 1 : scale,
                 out = options.direction === "out";
-                value;
 
             if (startState) {
                 out = !out;
@@ -850,13 +851,14 @@
         endState: function() {
             var that = this,
                 element = that.element,
-                options = that.options;
+                options = that.options,
+                origin = element.data(ORIGIN),
+                offset = options.offset,
+                margin,
+                extender = {},
+                reverse = options.reverse;
 
-            var origin = element.data(ORIGIN),
-                offset = options.offset, margin,
-                extender = {}, reverse = options.reverse;
-
-            if (!reverse && !origin && origin !== 0) {
+            if (!reverse && origin === null) {
                 element.data(ORIGIN, parseFloat(element.css("margin-" + options.axis)));
             }
 
@@ -1057,109 +1059,115 @@
         }
     });
 
-    createEffect("pageturn", {
-        endState: function() {
+var CLIPS = {
+    top: "rect(auto auto $size auto)",
+    bottom: "rect($size auto auto auto)",
+    left: "rect(auto $size auto auto)",
+    right: "rect(auto auto auto $size)"
+};
+
+var ROTATIONS = {
+    top: { start: "rotatex(0deg)", end: "rotatex(180deg)" },
+    bottom: { start: "rotatex(-180deg)", end: "rotatex(0deg)" },
+    left: { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
+    right: { start: "rotatey(180deg)", end: "rotatey(0deg)" }
+};
+
+function clipInHalf(container, direction) {
+    var vertical = kendo.directions[direction].vertical,
+        size = (container[vertical ? HEIGHT : WIDTH]() / 2) + "px";
+
+    return CLIPS[direction].replace("$size", size);
+}
+
+    createEffect("turningpage", {
+        startState: function() {
             var that = this,
-                element = that.element,
-                options = that.options;
+                options = that.options,
+                direction = options.direction,
+                rotation = ROTATIONS[direction],
+                properties = {zIndex: 1};
 
+            properties.clip = clipInHalf(options.container, kendo.directions[direction].reverse);
+            properties[BACKFACE] = HIDDEN;
+            properties[TRANSFORM] = options.reverse ? rotation.end : rotation.start;
+            return properties;
+        },
 
-            var horizontal = options.direction === "horizontal",
-                rotation = horizontal ? "rotatey" : "rotatex",
-                reverse = options.reverse,
-                face = options.face, back = options.back,
-                property = horizontal ? WIDTH : HEIGHT,
-                size = element[property](),
-                leftPageClip = "rect(auto " + (size / 2) + "px auto auto)",
-                rightPageClip = "rect(auto auto auto " + (size / 2) + "px)";
+        endState: function() {
+            var options = this.options,
+                rotation = ROTATIONS[options.direction],
+                extender = {};
 
-            if (!horizontal) {
-                leftPageClip = "rect(auto auto " + (size / 2) + "px auto)";
-                rightPageClip = "rect(" + (size / 2) + "px auto auto auto)";
-            }
+            extender[TRANSFORM] = options.reverse ? rotation.start : rotation.end;
 
-            function toRotation(deg) {
-                return rotation + "(" + deg + "deg)";
-            }
+            return extend(extender, options.properties);
+        },
 
-            var faceRotation = toRotation(0),
-                flipRotation = toRotation(180),
-                backFlipRotation = toRotation(-180),
+        setup: function() {
+            this.options.container.append(this.element);
+        },
 
-                faceStart = faceRotation,
-                faceEnd = backFlipRotation,
-                backStart = flipRotation,
-                backEnd = faceRotation;
+        teardown: function() {
+            this.element.remove();
+        }
+    });
 
-            if (reverse) {
-                faceStart = backFlipRotation;
-                faceEnd = faceRotation;
-                backStart = faceRotation;
-                backEnd = flipRotation;
-            }
+    createEffect("staticpage", {
+        restore: ["clip"],
 
-            if (!horizontal) {
-                faceStart = faceRotation;
-                faceEnd = flipRotation;
-                backStart = backFlipRotation;
-                backEnd = faceRotation;
-
-                if (reverse) {
-                    faceStart = flipRotation;
-                    faceEnd = faceRotation;
-                    backStart = faceRotation;
-                    backEnd = backFlipRotation;
-                }
-            }
-
-            face.show();
-            back.show();
-
-            if (support.hasHW3D) {
-                if (element.css(PERSPECTIVE) == NONE) {
-                    element.css(PERSPECTIVE, 1000);
-                }
-
-                element.css(cssPrefix + "transform-style", "preserve-3d");
-
-                var faceClone = face.clone(true).removeAttr("id"),
-                    backClone = back.clone(true).removeAttr("id"),
-                    clones = faceClone.add(backClone).addClass("temp-pages");
-
-                face.css("clip", leftPageClip);
-                back.css("clip", rightPageClip);
-                element.append(clones);
-
-                faceClone.css(BACKFACE, HIDDEN).css(TRANSFORM, faceStart).css("z-index", 1).css("clip", rightPageClip);
-                backClone.css(BACKFACE, HIDDEN).css(TRANSFORM, backStart).css("z-index", 1).css("clip", leftPageClip);
-
-                // hack to refresh CSS.
-                clones.css(TRANSFORM);
-
-                clones.css(TRANSITION, "all " + options.duration + "ms linear");
-
-                faceClone.css(TRANSFORM, faceEnd);
-                backClone.css(TRANSFORM, backEnd);
-            } else {
-                if (kendo.size(options.effects) == 1) {
-                    options.duration = 0;
-                }
-            }
-
-            return options.properties;
+        startState: function() {
+            var options = this.options;
+            return { clip: clipInHalf(options.container, options.direction) };
         },
 
         teardown: function() {
             var that = this,
                 element = that.element,
-                options = that.options;
+                options = that.options,
+                reverse = options.reverse,
+                face = options.face;
 
-            options[options.reverse ? "back" : "face"].hide();
-            options.face.add(options.back).css("clip", "");
-
-            if (support.hasHW3D) {
-                element.find(".temp-pages").remove();
+            if ((reverse && !face) || (!reverse && face)) {
+                element.hide();
             }
+        }
+    });
+
+    createEffect("pageturn", {
+        auxilaries: function() {
+            var that = this,
+                options = that.options,
+                direction = options.direction === "horizontal" ? "left" : "top",
+                reverseDirection = kendo.directions[direction].reverse,
+                temp,
+                faceClone = options.face.clone(true).removeAttr("id"),
+                backClone = options.back.clone(true).removeAttr("id"),
+                element = that.element;
+
+                if (options.reverse) {
+                    temp = direction;
+                    direction = reverseDirection;
+                    reverseDirection = temp;
+                }
+
+            return [
+                { element: options.face, options: { effects: "staticpage", face: true, container: element, direction: direction }},
+                { element: options.back, options: { effects: "staticpage", face: false, container: element, direction: reverseDirection }},
+                { element: faceClone, options: { effects: "turningpage", face: true, container: element, direction: direction }},
+                { element: backClone, options: { effects: "turningpage", face: false, container: element, direction: reverseDirection }}
+            ];
+        },
+
+        startState: function() {
+            var state = {};
+            state[PERSPECTIVE] = 1000;
+            state.transformStyle = "preserve-3d";
+            return state;
+        },
+
+        teardown: function() {
+            this.element.find(".temp-pages").remove();
         }
     });
 
