@@ -182,7 +182,9 @@
 
             chart.bind(chart.events, chart.options);
 
-            chart.element.addClass("k-chart");
+            chart.element
+                .addClass("k-chart")
+                .css("position", "relative");
 
             chart.wrapper = chart.element;
 
@@ -291,7 +293,6 @@
             if (viewType) {
                 view = chart._view = viewType.fromModel(model);
 
-                element.css("position", "relative");
                 view.renderTo(container);
                 viewElement = container.firstElementChild;
 
@@ -3518,6 +3519,7 @@
             point = chart.createPoint(value,
                 deepExtend({
                     tooltip: {
+                        // TODO: Include category by default
                         format: (category ? "{4:d}<br/>" : "") + "open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
                     }
                 }, series)

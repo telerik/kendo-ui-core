@@ -35,7 +35,8 @@
                 module("refresh / redraw", {
                     setup: function() {
                         createChart({series: [{}]});
-                    }
+                    },
+                    teardown: destroyChart
                 });
 
                 test("refresh applies axis defaults", function() {
@@ -86,18 +87,25 @@
                     equal(chart.options.series[0].labels.visible, true);
                 });
 
-                test("refresh replaces markup", function() {
-                    chart.element.empty();
-                    chart.refresh();
-
-                    ok(chart.element.children().length > 0);
-                });
-
-                test("redraw replaces markup", function() {
-                    chart.element.empty();
+                test("redraw replaces SVG element", function() {
+                    chart.element.find("svg").data("dirty", true);
                     chart.redraw();
 
-                    ok(chart.element.children().length > 0);
+                    ok(!chart.element.data("dirty") > 0);
+                });
+
+                test("redraw does not remove elements appended to container", function() {
+                    chart.element.append("<div id='extra' />");
+                    chart.redraw();
+
+                    equals(chart.element.find("#extra").length, 1);
+                });
+
+                test("redraw removes tooltip element", function() {
+                    chart.element.find(".k-tooltip").data("dirty", true);
+                    chart.redraw();
+
+                    ok(!chart.element.find(".k-tooltip").data("dirty"));
                 });
 
                 test("refresh applies changes to data-bound series", function() {
