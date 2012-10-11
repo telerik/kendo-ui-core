@@ -102,6 +102,27 @@
                     equal(candlestickChart.points.length, series.data.length);
                 });
 
+                test("creates empty points for null values", function() {
+                    setupCandlestickChart(plotArea, { series: [{
+                        data: [[2,4,1,3], null], type: "candlestick"
+                    }]});
+                    equals(candlestickChart.points[1], undefined);
+                });
+
+                test("creates empty points for undefined values", function() {
+                    setupCandlestickChart(plotArea, { series: [{
+                        data: [[2,4,1,3], undefined], type: "candlestick"
+                    }]});
+                    equals(candlestickChart.points[1], undefined);
+                });
+
+                test("creates empty points for partially undefined values", function() {
+                    setupCandlestickChart(plotArea, { series: [{
+                        data: [[2,4,1,3], [0, 1, undefined, 2]], type: "candlestick"
+                    }]});
+                    equals(candlestickChart.points[1], undefined);
+                });
+
                 test("reports minimum series value for default axis", function() {
                     same(candlestickChart.valueAxisRanges[undefined].min, series.data[0][2]);
                 });

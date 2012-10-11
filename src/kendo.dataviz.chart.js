@@ -3480,8 +3480,6 @@
                 pointColor = data.fields.color || series.color,
                 point, cluster;
 
-            chart.updateRange(value, categoryIx, series);
-
             point = chart.createPoint(value,
                 deepExtend({
                     tooltip: {
@@ -3491,6 +3489,8 @@
             );
 
             if (point) {
+                chart.updateRange(value, categoryIx, series);
+
                 cluster = children[categoryIx];
 
                 if (!cluster) {
@@ -3523,29 +3523,38 @@
         },
 
         createPoint: function(value, series) {
-            return new Candlestick(value, series);
+            var parts = this.splitValue(value);
+            if (!inArray(undefined, parts) && !inArray(null, parts)) {
+                return new Candlestick(value, series);
+            }
+        },
+
+        splitValue: function(value) {
+            return [value.low, value.open, value.close, value.high];
         },
 
         updateRange: function(value, categoryIx, series) {
             var chart = this,
                 axisName = series.axis,
                 axisRange = chart.valueAxisRanges[axisName],
-                values = [value.low, value.open, value.close, value.high];
+                parts = chart.splitValue(value);
 
-            if (!inArray(undefined, values)) {
-                axisRange = chart.valueAxisRanges[axisName] =
-                    axisRange || { min: MAX_VALUE, max: MIN_VALUE };
+            axisRange = chart.valueAxisRanges[axisName] =
+                axisRange || { min: MAX_VALUE, max: MIN_VALUE };
 
-                axisRange = chart.valueAxisRanges[axisName] = {
-                    min: math.min.apply(math, values.concat([axisRange.min])),
-                    max: math.max.apply(math, values.concat([axisRange.max]))
-                };
-            }
+            axisRange = chart.valueAxisRanges[axisName] = {
+                min: math.min.apply(math, parts.concat([axisRange.min])),
+                max: math.max.apply(math, parts.concat([axisRange.max]))
+            };
         },
 
         formatPointValue: function(point, format) {
             var value = point.value;
-            return autoFormat(format, value.open, value.high, value.low, value.close, point.category);
+
+            return autoFormat(format,
+                value.open, value.high,
+                value.low, value.close, point.category
+            );
         }
     });
 
