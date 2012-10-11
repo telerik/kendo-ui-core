@@ -3351,6 +3351,9 @@
             },
             overlay: {
                 gradient: GLASS
+            },
+            tooltip: {
+                format: "{4:d}<br/>open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
             }
         },
 
@@ -3521,14 +3524,7 @@
                 cluster;
 
             if (hasValue) {
-                point = chart.createPoint(value,
-                    deepExtend({
-                        tooltip: {
-                            // TODO: Include category by default
-                            format: (category ? "{4:d}<br/>" : "") + "open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
-                        }
-                    }, series)
-                );
+                point = chart.createPoint(value, series);
             }
 
             cluster = children[categoryIx];
