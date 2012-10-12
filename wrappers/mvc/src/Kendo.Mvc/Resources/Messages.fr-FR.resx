@@ -157,37 +157,37 @@
     <value>Est égal à</value>
   </data>
   <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
-    <value>est postérieur ou égal à</value>
+    <value>Est postérieur ou égal à</value>
   </data>
   <data name="Filter_DateIsGreaterThan" xml:space="preserve">
-    <value>est postérieur</value>
+    <value>Est postérieur</value>
   </data>
   <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
-    <value>est antérieur ou égal à</value>
+    <value>Est antérieur ou égal à</value>
   </data>
   <data name="Filter_DateIsLessThan" xml:space="preserve">
-    <value>est antérieur</value>
+    <value>Est antérieur</value>
   </data>
   <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
-    <value>n’est pas égal à</value>
+    <value>N’est pas égal à</value>
   </data>
   <data name="Filter_NumberIsEqualTo" xml:space="preserve">
     <value>Est égal à</value>
   </data>
   <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
-    <value>est supérieur ou égal à</value>
+    <value>Est supérieur à</value>
   </data>
   <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
     <value>est supérieur à</value>
   </data>
   <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
-    <value>est inférieur ou égal à</value>
+    <value>Est inférieur ou égal à</value>
   </data>
   <data name="Filter_NumberIsLessThan" xml:space="preserve">
-    <value>est inférieur à</value>
+    <value>Est inférieur à</value>
   </data>
   <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
-    <value>n’est pas égal à</value>
+    <value>N’est pas égal à</value>
   </data>
   <data name="Filter_Info" xml:space="preserve">
     <value>Afficher les lignes avec la valeur qui</value>
@@ -199,13 +199,13 @@
     <value>Est égal à</value>
   </data>
   <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
-    <value>n’est pas égal à</value>
+    <value>N’est pas égal à</value>
   </data>
   <data name="Filter_StringStartsWith" xml:space="preserve">
     <value>Commence par</value>
   </data>
   <data name="Filter_StringContains" xml:space="preserve">
-    <value>contient</value>
+    <value>Contient</value>
   </data>
   <data name="Group_Empty" xml:space="preserve">
     <value>Faites glisser un en-tête de colonne et déposer ici pour grouper par cette colonne.</value>
@@ -214,7 +214,7 @@
     <value>Est égal à</value>
   </data>
   <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
-    <value>n’est pas égal à</value>
+    <value>N’est pas égal à</value>
   </data>
   <data name="Filter_SelectValue" xml:space="preserve">
     <value>-Sélectionner-</value>
@@ -241,10 +241,10 @@
     <value>Actualiser</value>
   </data>
   <data name="Filter_StringDoesNotContain" xml:space="preserve">
-    <value>Does not contain</value>
+    <value>Ne contient pas</value>
   </data>
   <data name="Filter_Or" xml:space="preserve">
-    <value>Or</value>
+    <value>Ou</value>
   </data>
   <data name="Editor_Bold" xml:space="preserve">
     <value>Gras</value>
@@ -367,7 +367,7 @@
     <value>Tri croissant</value>
   </data>
   <data name="Grid_SortDescending" xml:space="preserve">
-    <value>Trier Décroissant</value>
+    <value>Tri décroissant</value>
   </data>
   <data name="Editor_DeleteFile" xml:space="preserve">
     <value>Êtes-vous spur de vouloir supprimer "{0}"?</value>
