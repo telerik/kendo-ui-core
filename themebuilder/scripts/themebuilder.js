@@ -124,7 +124,6 @@
                 return $(this.wrapper).find(".k-i-arrow-s").css("backgroundColor", value || this.value()).css("backgroundColor");
             }
         }),
-        hexValueRe = /^#([0-9a-f]{3}){1,2}$/i,
         rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
         toHex = function(value) {
             return value.replace(rgbValuesRe, function(match, r, g, b) {
@@ -162,8 +161,8 @@
                     for (i = 0; i < constants.length; i++) {
                         constant = lessConstantPairRe.exec(constants[i]);
 
-                        if (constant) {
-                            this.update(constant[1], constant[2]);
+                        if (constant && this.constants[constant[1]]) {
+                            this.constants[constant[1]].value =  constant[2];
                         }
                     }
                 } else {
@@ -171,20 +170,6 @@
 
                     this.infer();
                 }
-            },
-
-            colors: function() {
-                var constants = this.constants,
-                    result = [], i, value;
-
-                for (i = 0; i < constants.length; i++) {
-                    value = constants[i].value;
-                    if (hexValueRe.test(value) && $.inArray(value, result) < 0) {
-                        result.push(value);
-                    }
-                }
-
-                return result;
             },
 
             infer: function(targetDocument) {
@@ -314,6 +299,18 @@
                 this._generateTheme(function(constants, cssText) {
                     that._updateStyleSheet(cssText, targetDocument);
                 });
+            },
+
+            source: function(format, callback) {
+                this._generateTheme(proxy(function(constants, css) {
+                    constants += '\n@import "template.less";';
+
+                    if (format == "less") {
+                        callback(constants);
+                    } else {
+                        callback(css);
+                    }
+                }, this));
             }
         }),
 
@@ -342,7 +339,7 @@
                 }
             },
 
-            source: function(format) {
+            source: function(format, callback) {
                 var result = {},
                     constant, constants = this.constants;
 
@@ -351,12 +348,12 @@
                 }
 
                 if (format == "string") {
-                    return "// use as theme: 'newTheme'\n" +
+                    callback("// use as theme: 'newTheme'\n" +
                            "kendo.dataviz.ui.registerTheme('newTheme', " +
                            JSON.stringify(result, null, 4) +
-                           ");";
+                           ");");
                 } else {
-                    return result;
+                    callback(result);
                 }
             },
 
@@ -364,7 +361,9 @@
                 // work within the JS context of the target document
                 var w = "defaultView" in targetDocument ? targetDocument.defaultView : targetDocument.parentWindow;
 
-                w.kendo.dataviz.ui.registerTheme("newTheme", this.source("json"));
+                this.source("json", function(theme) {
+                    w.kendo.dataviz.ui.registerTheme("newTheme", theme);
+                });
 
                 function setTheme(selector, component) {
                     $(selector, targetDocument).each(function() {
@@ -542,13 +541,11 @@
             showWebSource: function(e) {
                 e.preventDefault();
 
-                var less = $(e.target).hasClass("ktb-action-get-less");
+                var format = $(e.target).hasClass("ktb-action-get-less") ? "less" : "css";
 
-                this._generateTheme(proxy(function(constants, css) {
-                    constants += '\n@import "template.less";';
-
-                    this._showSource(less ? constants : css);
-                }, this));
+                this._showSource(
+                    this.themes[0].source(format)
+                );
             },
             showImport: function(e) {
                 e.preventDefault();

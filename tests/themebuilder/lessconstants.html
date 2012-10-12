@@ -57,25 +57,14 @@
                 }
             });
 
-            test("serialize() serializes contents in LESS format", function() {
-                var constants = new LessConstants({
-                    "@foo": extend(constant("", BGCOLOR), { value: "#f11f11" })
+            function createConstants(constants) {
+                return new LessConstants({
+                    constants: constants
                 });
-
-                equals(constants.serialize(), "@foo: #f11f11;");
-            });
-
-            test("serialize() with multiple variables", function() {
-                var constants = new LessConstants({
-                    "@foo": extend(constant("", BGCOLOR), { value: "#f11f11" }),
-                    "@bar": extend(constant("", COLOR), { value: "#b4d455" })
-                });
-
-                equals(constants.serialize(), "@foo: #f11f11;\n@bar: #b4d455;");
-            });
+            }
 
             test("deserialize() single variable", function() {
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant()
                 });
 
@@ -85,7 +74,7 @@
             });
 
             test("deserialize() multiple variables", function() {
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant(),
                     "@bar": constant()
                 });
@@ -97,7 +86,7 @@
             });
 
             test("deserialize() keeps constant types in tact", function() {
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": extend(constant("#foo", BGCOLOR), { value: "#f11f11" })
                 });
 
@@ -108,106 +97,96 @@
             });
 
             test("infer() infers nested className selectors", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet(".k-widget { font-size: 8px; }\n.k-widget .k-input { font-size: 10px; }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant(".k-widget .k-input", "font-size")
                 });
 
-                constants.infer();
+                constants._updateStyleSheet(".k-widget { font-size: 8px; }\n.k-widget .k-input { font-size: 10px; }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() selectors with multiple classNames", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet(".foo { font-size: 8px; }\n.foo.bar { font-size: 10px; }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant(".foo.bar", "font-size")
                 });
 
-                constants.infer();
+                constants._updateStyleSheet(".foo { font-size: 8px; }\n.foo.bar { font-size: 10px; }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() infers nested tagName selectors", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet("dl { font-size: 8px; }\ndl dt { font-size: 10px; }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant("dl dt", "font-size")
                 });
 
-                constants.infer();
+                constants._updateStyleSheet("dl { font-size: 8px; }\ndl dt { font-size: 10px; }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() infers basic property value", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet(".k-widget { font-size: 9px; }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant(".k-widget", "font-size")
                 });
 
-                constants.infer();
+                constants._updateStyleSheet(".k-widget { font-size: 9px; }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "9px");
             });
 
             test("infer() infers colors correctly", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet(".k-widget { background-color: #f11f11; }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant(".k-widget", "background-color")
                 });
 
-                constants.infer();
+                constants._updateStyleSheet(".k-widget { background-color: #f11f11; }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "#f11f11");
             });
 
             test("infer() with multiple constants", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet(".k-widget {\
-                    background-color: #f11f11;\
-                    border-color: #f00f00;\
-                }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant(".k-widget", "background-color"),
                     "@bar": constant(".k-widget", "border-color")
                 });
 
-                constants.infer();
+                constants._updateStyleSheet(".k-widget {\
+                    background-color: #f11f11;\
+                    border-color: #f00f00;\
+                }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "#f11f11");
                 equals(constants.constants["@bar"].value, "#f00f00");
             });
 
             test("infer() of border-radius", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet(".k-widget { border-radius: 3px; }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant(".k-widget", "border-radius")
                 });
 
-                constants.infer();
+                constants._updateStyleSheet(".k-widget { border-radius: 3px; }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "3px");
             });
 
             test("infer() of computed constants", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet(".bar { font-size: 20px; }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": {
                         infer: function() {
                             return "10px";
@@ -215,83 +194,60 @@
                     }
                 });
 
-                constants.infer();
+                constants._updateStyleSheet(".bar { font-size: 20px; }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() of readonly constants with value", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet(".bar { font-size: 20px; }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": {
                         readonly: true,
                         value: "10px"
                     }
                 });
 
-                constants.infer();
+                constants._updateStyleSheet(".bar { font-size: 20px; }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() of selector with tagName", function() {
-                var themeBuilder = new ThemeBuilder();
-                themeBuilder.updateStyleSheet(".foo:link { font-size: 20px; } .foo { font-size: 10px; }");
-
-                var constants = new LessConstants({
+                var constants = createConstants({
                     "@foo": constant("a.foo", "font-size")
                 });
 
-                constants.infer();
+                constants._updateStyleSheet(".foo:link { font-size: 20px; } .foo { font-size: 10px; }", document);
+
+                constants.infer(document);
 
                 equals(constants.constants["@foo"].value, "20px");
             });
 
-            test("update() updates value", function() {
-                var constants = new LessConstants({
-                    "@foo": constant(".k-widget", "background-color")
-                });
-
-                constants.update("@foo", "#f00");
-
-                equals(constants.constants["@foo"].value, "#f00");
-            });
-
-            test("colors() returns colors for constant", function() {
-                var constants = new LessConstants({
+            test("source('less') returns less source", 1, function() {
+                var constants = createConstants({
                     "@foo": extend(constant(".k-widget", "background-color"), { value: "#f00" })
                 });
 
-                same(constants.colors(), [ "#f00" ]);
+                constants.source("less", function(source) {
+                    equal(source, "@foo: #f00;\n@import \"template.less\";");
+                });
             });
 
-            test("colors() returns colors for multiple constants", function() {
-                var constants = new LessConstants({
-                    "@foo": extend(constant(".k-widget", "background-color"), { value: "#f00" }),
-                    "@bar": extend(constant(".k-widget", "border-color"), { value: "#00f" })
+            test("source('css') returns css source", 1, function() {
+                var constants = createConstants({
+                    "@foo": extend(constant(".k-widget", "color"), { value: "#f00" })
                 });
 
-                same(constants.colors(), [ "#f00", "#00f" ]);
-            });
+                constants.template = ".k-widget { color: @foo; }";
 
-            test("colors() returns unique colors", function() {
-                var constants = new LessConstants({
-                    "@foo": extend(constant(".k-widget", "background-color"), { value: "#f00" }),
-                    "@bar": extend(constant(".k-widget", "border-color"), { value: "#f00" })
+                constants.source("css", function(source) {
+                    equal(source.replace(/\s|\n/g, ""), ".k-widget{color:#ff0000;}");
                 });
-
-                same(constants.colors(), [ "#f00" ]);
-            });
-
-            test("colors() returns only values of color constants", function() {
-                var constants = new LessConstants({
-                    "@foo": extend(constant(".k-widget", "background-color"), { value: "#f00" }),
-                    "@bar": extend(constant(".k-widget", "box-shadow"), { value: "4px 3px 4px #ccc" })
-                });
-
-                same(constants.colors(), [ "#f00" ]);
             });
         </script>
 

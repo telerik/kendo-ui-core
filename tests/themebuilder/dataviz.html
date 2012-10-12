@@ -96,7 +96,7 @@
 
             test("applyTheme applies theme to target document", function() {
                 createChart({
-                    title: { color: "#b4d455" }
+                        title: { color: "#b4d455" }
                 });
 
                 constants = new JsonConstants({
@@ -128,20 +128,20 @@
                 equal(constants.constants["chart.seriesColors[0]"].value, fancyColor);
             });
 
-            test("serialized array properties are within an array", function() {
+            test("serialized array properties are within an array", 2, function() {
                 constants = new JsonConstants({
                     constants: {
                         "chart.seriesColors[0]": { property: "color", value: fancyColor }
                     }
                 });
 
-                var theme = constants.source("json");
-
-                ok($.isArray(theme.chart.seriesColors));
-                equal(theme.chart.seriesColors[0], fancyColor);
+                constants.source("json", function(theme) {
+                    ok($.isArray(theme.chart.seriesColors));
+                    equal(theme.chart.seriesColors[0], fancyColor);
+                });
             });
 
-            test("serializing multiple array items", function() {
+            test("serializing multiple array items", 3, function() {
                 constants = new JsonConstants({
                     constants: {
                         "chart.seriesColors[0]": { property: "color", value: "#ff0000" },
@@ -149,11 +149,11 @@
                     }
                 });
 
-                var theme = constants.source("json");
-
-                equal(theme.chart.seriesColors.length, 2);
-                equal(theme.chart.seriesColors[0], "#ff0000");
-                equal(theme.chart.seriesColors[1], "#00ff00");
+                constants.source("json", function(theme) {
+                    equal(theme.chart.seriesColors.length, 2);
+                    equal(theme.chart.seriesColors[0], "#ff0000");
+                    equal(theme.chart.seriesColors[1], "#00ff00");
+                });
             });
         </script>
 
