@@ -1,8 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 			</div>
 			<div class="source">
-				<a href="#" class="offline-button view selected">View</a>
-				<a href="#" class="offline-button controller">Controller</a>
+				<a href="#" class="offline-button view selected">JSP</a>
 				<div class="code">
 					<pre class="prettyprint view">${fn:escapeXml(view)}</pre>
 					<pre class="prettyprint controller">controller</pre>
@@ -13,17 +12,7 @@
 		 $(function() {
 		        prettyPrint();
 
-		        $(".source a").click(function(e) {
-		            var showView = $(this).is(".view");
-
-		            $(".source .code")
-		                .find(".view").toggle(showView).end()
-		                .find(".controller").toggle(!showView);
-
-		            $(".source a").toggleClass("selected");
-
-		            e.preventDefault();
-		        });
+		        $(".source a").click(false);
 		    });		
 		</script>
 	</body>
