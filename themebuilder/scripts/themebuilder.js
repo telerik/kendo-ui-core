@@ -327,19 +327,31 @@
 
             infer: function(targetDocument) {
                 var $ = targetDocument.defaultView.$,
-                    chart = $("[data-role=chart]", targetDocument).data("kendoChart"),
-                    gauge = $("[data-role=radialgauge]", targetDocument).data("kendoRadialGauge"),
-                    constants = this.constants, constant, property,
-                    isGauge;
+                    themeName = "default", theme,
+                    constants = this.constants, constant;
 
-                if (!chart && !gauge) {
-                    return;
+                function themeFrom(widgets) {
+                    var selector, object;
+
+                    for (selector in widgets) {
+                        object = $(selector, targetDocument).data(widgets[selector]);
+
+                        if (object) {
+                            return object.options.theme;
+                        }
+                    }
                 }
 
+                themeName = themeFrom({
+                    "[data-role=chart]": "kendoChart",
+                    "[data-role=radialgauge]": "kendoRadialGauge",
+                    "[data-role=lineargauge]": "kendoLinearGauge"
+                }) || "default";
+
+                theme = kendo.dataviz.ui.themes[themeName];
+
                 for (constant in constants) {
-                    property = constant.replace(/^(chart|gauge)\./i, "");
-                    isGauge = /^gauge\./i.test(constant);
-                    constants[constant].value = kendo.getter(property, true)(isGauge ? gauge.options : chart.options);
+                    constants[constant].value = kendo.getter(constant, true)(theme);
                 }
             },
 

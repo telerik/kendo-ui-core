@@ -58,14 +58,22 @@
                 }
             });
 
+            function createThemedChart(theme) {
+                kendo.dataviz.ui.registerTheme("foo", {
+                    chart: theme
+                });
+
+                createChart({ theme: "foo" });
+            }
+
             test("infer infers basic constant", function() {
-                createChart({
+                createThemedChart({
                     title: { color: "#b4d455" }
                 });
 
                 constants = new JsonConstants({
                     constants: {
-                        "title.color": {
+                        "chart.title.color": {
                             property: "color"
                         }
                     }
@@ -73,35 +81,35 @@
 
                 constants.infer(document);
 
-                equal(constants.constants["title.color"].value, "#b4d455");
+                equal(constants.constants["chart.title.color"].value, "#b4d455");
             });
 
             test("infer infers multiple constants", function() {
-                createChart({
+                createThemedChart({
                     title: { color: "#b4d455" },
                     tooltip: { background: "#f1f1f1" }
                 });
 
                 constants = new JsonConstants({
                     constants: {
-                        "title.color": { property: "color" },
-                        "tooltip.background": { property: "color" }
+                        "chart.title.color": { property: "color" },
+                        "chart.tooltip.background": { property: "color" }
                     }
                 });
 
                 constants.infer(document);
 
-                equal(constants.constants["tooltip.background"].value, "#f1f1f1");
+                equal(constants.constants["chart.tooltip.background"].value, "#f1f1f1");
             });
 
             test("applyTheme applies theme to target document", function() {
-                createChart({
-                        title: { color: "#b4d455" }
+                createThemedChart({
+                    title: { color: "#b4d455" },
                 });
 
                 constants = new JsonConstants({
                     constants: {
-                        "title.color": { property: "color", value: fancyColor }
+                        "chart.title.color": { property: "color", value: fancyColor }
                     }
                 });
 
@@ -113,7 +121,7 @@
             });
 
             test("infer infers array elements", function() {
-                createChart({
+                createThemedChart({
                     seriesColors: [ fancyColor ]
                 });
 
