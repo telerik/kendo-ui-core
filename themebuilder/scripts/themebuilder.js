@@ -81,6 +81,10 @@
 
                 this._updateColorPreview();
 
+                if (!this.element.val()) {
+                    this.value("transparent");
+                }
+
                 this.bind(CHANGE, proxy(this._colorChange, this));
 
                 this.wrapper.addClass("k-colorpicker")
@@ -341,10 +345,17 @@
 
             source: function(format, callback) {
                 var result = {},
-                    constant, constants = this.constants;
+                    constant, constants = this.constants,
+                    value;
 
                 for (constant in constants) {
-                    safeSetter(constant)(result, constants[constant].value);
+                    value = constants[constant].value;
+
+                    if (value == "transparent") {
+                        value = "";
+                    }
+
+                    safeSetter(constant)(result, value);
                 }
 
                 if (format == "string") {

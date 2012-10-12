@@ -134,6 +134,7 @@
         datavizConstants = {
             "chart.title.color":                          constant(COLOR),
             "chart.legend.labels.color":                  constant(COLOR),
+            "chart.chartArea.background":                 constant(COLOR),
             "chart.seriesDefaults.labels.color":          constant(COLOR),
             "chart.axisDefaults.line.color":              constant(COLOR),
             "chart.axisDefaults.labels.color":            constant(COLOR),
@@ -228,9 +229,10 @@
             }
         },
         datavizConstantsHierarchy = {
-            "Title & legend": {
+            "Title, legend & charting area": {
                 "chart.title.color":                       "Title color",
-                "chart.legend.labels.color":               "Legend text color"
+                "chart.legend.labels.color":               "Legend text color",
+                "chart.chartArea.background":              "Charting area"
             },
 
             "Axes": {

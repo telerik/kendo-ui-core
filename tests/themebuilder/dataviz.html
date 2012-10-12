@@ -155,6 +155,18 @@
                     equal(theme.chart.seriesColors[1], "#00ff00");
                 });
             });
+
+            test("'transparent' values are serialized as empty strings", 1, function() {
+                constants = new JsonConstants({
+                    constants: {
+                        "chart.plotArea.background": { property: "color", value: "transparent" }
+                    }
+                });
+
+                constants.source("json", function(theme) {
+                    equal(theme.chart.plotArea.background, "");
+                });
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
