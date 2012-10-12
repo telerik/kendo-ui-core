@@ -99,6 +99,11 @@
                     spacing: BAR_SPACING
                 }
             },
+            categoryAxis: {
+                majorGridLines: {
+                    visible: true
+                }
+            },
             axisDefaults: {
                 labels: {
                     font: SANS12
@@ -208,11 +213,6 @@
                 background: "#3d3d3d"
             },
             seriesColors: ["#0081da", "#3aafff", "#99c900", "#ffeb3d", "#b20753", "#ff4195"],
-            categoryAxis: {
-                majorGridLines: {
-                    visible: true
-                }
-            },
             axisDefaults: {
                 line: {
                     color: "#8e8e8e"
@@ -290,11 +290,6 @@
                 }
             },
             seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
-            categoryAxis: {
-                majorGridLines: {
-                    visible: true
-                }
-            },
             axisDefaults: {
                 line: {
                     color: "#9aabb2"
@@ -372,11 +367,6 @@
                 }
             },
             seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
-            categoryAxis: {
-                majorGridLines: {
-                    visible: true
-                }
-            },
             axisDefaults: {
                 line: {
                     color: "#8e8e8e"
@@ -479,11 +469,6 @@
                 background: "#eaeaec"
             },
             seriesColors: ["#007bc3", "#76b800", "#ffae00", "#ef4c00", "#a419b7", "#430B62"],
-            categoryAxis: {
-                majorGridLines: {
-                    visible: true
-                }
-            },
             axisDefaults: {
                 line: {
                     color: "#a6b1c0"
@@ -559,11 +544,6 @@
                 }
             },
             seriesColors: ["#25a0da", "#309b46", "#8ebc00", "#ff6900", "#e61e26", "#d8e404", "#16aba9", "#7e51a1", "#313131", "#ed1691"],
-            categoryAxis: {
-                majorGridLines: {
-                    visible: true
-                }
-            },
             axisDefaults: {
                 line: {
                     color: "#c7c7c7"
