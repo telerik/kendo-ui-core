@@ -1053,7 +1053,7 @@
             return slotBox;
         },
 
-        getCategory: function(point) {
+        getCategoryIndex: function(point) {
             var axis = this,
                 options = axis.options,
                 reverse = options.reverse,
@@ -1086,13 +1086,27 @@
                     nextTickPos = majorTicks[i];
                 }
 
+                if (options.justified && position === nextTickPos) {
+                    categoryIx = math.max(0, vertical ? majorTicks.length - i - 1 : i + 1);
+                    break;
+                }
+
                 if (position >= tickPos && position <= nextTickPos) {
                     categoryIx = math.max(0, vertical ? majorTicks.length - i - 2: i);
                     break;
                 }
             }
 
-            return options.categories[categoryIx];
+            return categoryIx;
+        },
+
+        getCategory: function(point) {
+            var index = this.getCategoryIndex(point);
+
+            if (index === null) {
+                return null;
+            }
+            return this.options.categories[index];
         },
 
         labelsCount: function() {
@@ -6204,6 +6218,215 @@
         }
     };
 
+    var Selection = Class.extend({
+        init: function(chartElement, categoryAxis, options) {
+            var that = this,
+                categoryAxisLineBox = categoryAxis.lineBox(),
+                valueAxis = that.getValueAxis(categoryAxis),
+                valueAxisLineBox = valueAxis.lineBox(),
+                selectorPrefix = "." + CSS_PREFIX,
+                wrapper;
+
+            that.options = deepExtend({}, that.options, options);
+            options = that.options;
+            that.chartElement = chartElement;
+            that.categoryAxis = categoryAxis;
+            that.valueAxis = valueAxis;
+
+            that.template = Selection.template;
+            if (!that.template) {
+                that.template = Tooltip.template = renderTemplate(
+                    "<div class='" + CSS_PREFIX + "selector' " +
+                    "style='width: #= d.width #px; height: #= d.height #px;" +
+                    " top: #= d.offset.top #px; left: #= d.offset.left #px;'>" +
+                    "<div class='" + CSS_PREFIX + "mask'></div>" +
+                    "<div class='" + CSS_PREFIX + "mask'></div>" +
+                    "<div class='" + CSS_PREFIX + "selection'>" +
+                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "leftHandle'></div>" +
+                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "rightHandle'></div>" +
+                    "</div></div>"
+                );
+            }
+
+            that.options = deepExtend({}, {
+                width: categoryAxisLineBox.width(),
+                height: valueAxisLineBox.height(),
+                offset: {
+                    top: valueAxisLineBox.y1,
+                    left: valueAxisLineBox.x2
+                },
+                start: options.min,
+                end: options.max
+            }, options);
+
+            that.wrapper = wrapper = $(that.template(that.options)).appendTo(chartElement);
+
+            that.selection = wrapper.find(selectorPrefix + "selection");
+            that.leftMask = wrapper.find(selectorPrefix + "mask").first();
+            that.rightMask = wrapper.find(selectorPrefix + "mask").last();
+            that.leftHandle = wrapper.find(selectorPrefix + "leftHandle");
+            that.rightHandle = wrapper.find(selectorPrefix + "rightHandle");
+            that.options.selection = {
+                border: {
+                    left: parseFloat(that.selection.css("border-left-width"), 10),
+                    right: parseFloat(that.selection.css("border-right-width"), 10)
+                }
+            };
+
+            that.leftHandle.css("top", (that.selection.height() - that.leftHandle.height()) / 2);
+            that.rightHandle.css("top", (that.selection.height() - that.rightHandle.height()) / 2);
+
+            that.setUpDragHandle(that.leftHandle);
+            that.setUpDragHandle(that.rightHandle);
+
+            that.setRange(options.start, options.end);
+        },
+
+        options: {
+            min: MIN_VALUE,
+            max: MAX_VALUE,
+            snap: true
+        },
+
+        getValueAxis: function(categoryAxis) {
+            var axes = categoryAxis.pane.axes,
+                axesCount = axes.length,
+                i, axis;
+
+            for (i = 0; i < axesCount; i++) {
+                axis = axes[i];
+
+                if (axis.options.vertical !== categoryAxis.options.vertical) {
+                    return axis;
+                }
+            }
+        },
+
+        setRange: function(start, end) {
+            var that = this,
+                options = that.options,
+                selectionStart = options.start,
+                selectionEnd = options.end;
+
+            if (!defined(start)) {
+                start = selectionStart;
+            }
+
+            if (!defined(end)) {
+                end = selectionEnd;
+            }
+
+            options.start = start;
+            options.end = end;
+
+            that.moveSelection();
+            //that.trigger("moveSelection", {
+            //    start: start,
+            //    end: end
+            //});
+        },
+
+        moveSelection: function() {
+            var that = this,
+                options = that.options,
+                offset = options.offset,
+                border = options.selection.border,
+                start = options.start,
+                end = options.end,
+                categoryAxis = that.categoryAxis,
+                leftMaskWidth, rightMaskWidth, box,
+                distance;
+
+            box = categoryAxis.getSlot(start);
+            leftMaskWidth = round(box.x1 - offset.left);
+            that.leftMask.width(leftMaskWidth);
+            that.selection.css("left", leftMaskWidth);
+
+            box = categoryAxis.getSlot(end);
+            rightMaskWidth = round(options.width - (box.x1 - offset.left));
+            that.rightMask.width(rightMaskWidth);
+            distance = options.width - rightMaskWidth;
+            if (distance != options.width) {
+                distance += border.right;
+            }
+            that.rightMask.css("left", distance);
+            that.selection.width(math.max(options.width - (leftMaskWidth + rightMaskWidth) - border.right, 0));
+        },
+
+        setUpDragHandle: function(handle) {
+            var that = this;
+
+            return new kendo.ui.Draggable(handle, {
+                dragstart: proxy(that.dragStart, that),
+                drag: proxy(that.drag, that),
+                dragend: proxy(that.dragEnd, that)
+            });
+        },
+
+        dragStart: function(e) {
+            var that = this;
+
+            that.dragHandle = $(e.currentTarget).css("cursor", "default");
+            that.isFirst = that.dragHandle.hasClass(CSS_PREFIX + "leftHandle");
+            that.currentLocation = that.leftMask.width();
+            if (!that.isFirst) {
+                that.currentLocation += that.selection.outerWidth();
+            }
+        },
+
+        drag: function(e) {
+            var that = this,
+                options = that.options,
+                position = that.currentLocation + (e.x.location - e.x.startLocation),
+                maxSelection = that.wrapper.width(),
+                border = options.selection.border,
+                distance;
+
+            if (that.isFirst) {
+                distance = round(math.min(math.max(position, 0), maxSelection - that.rightMask.width() - border.left));
+                that.leftMask.width(distance);
+            } else {
+                distance = round(math.min(math.max(position, that.leftMask.width()), maxSelection));
+                that.rightMask.width(maxSelection - distance);
+                if (distance > 0) {
+                    distance = math.min(maxSelection, distance + border.right);
+                }
+                that.rightMask.css("left", distance);
+            }
+
+            that.selection.css("left", that.leftMask.width());
+            that.selection.width(maxSelection - that.rightMask.width() - that.leftMask.width() - border.left);
+            that.position = distance;
+        },
+
+        dragEnd: function() {
+            var that = this,
+                options = that.options,
+                offsetLeft = options.offset.left,
+                border = options.selection.border,
+                startPoint = { x: offsetLeft + parseFloat(that.leftMask.width(), 10) + border.left },
+                endPoint = { x: offsetLeft + parseFloat(that.rightMask.css("left"), 10) },
+                categoryAxis = that.categoryAxis,
+                startIndex, endIndex;
+
+            that.dragHandle.css("cursor", "e-resize");
+
+            if (options.snap) {
+                startIndex = categoryAxis.getCategoryIndex(startPoint);
+                endIndex = categoryAxis.getCategoryIndex(endPoint);
+
+                that.setRange(startIndex, endIndex);
+            }
+
+            var eventArgs = {
+                startSelection: parseFloat(that.selection.css("left")),
+                endSelection: parseFloat(that.rightMask.css("left")),
+                startIndex: options.start,
+                endIndex: options.end
+            };
+        }
+    });
+
     function calculateAggregates(values, series) {
         var aggregate = series.aggregate,
             result;
@@ -6785,6 +7008,7 @@
         PieSegment: PieSegment,
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
+        Selection: Selection,
         ShapeElement: ShapeElement,
         StackLayout: StackLayout,
         Tooltip: Tooltip,
