@@ -4,8 +4,8 @@ tests.push(
         title: "themebuilder themecollection"
     },
     {
-        page: "themebuilder/lessconstants.html",
-        title: "themebuilder lessconstants"
+        page: "themebuilder/lesstheme.html",
+        title: "themebuilder lesstheme"
     },
     {
         page: "themebuilder/colorengine.html",

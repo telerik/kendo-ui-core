@@ -39,11 +39,11 @@
         <script>
             var ThemeCollection = kendo.ThemeCollection,
                 JsonConstants = kendo.JsonConstants,
-                LessConstants = kendo.LessConstants;
+                LessTheme = kendo.LessTheme;
 
             test("update method updates variables in themes", function() {
                 var collection = new ThemeCollection([
-                        new LessConstants({
+                        new LessTheme({
                             constants: { "@foo": {} }
                         })
                     ]),
@@ -55,7 +55,7 @@
             });
 
             test("applyTheme method applies theme to target document", 1, function() {
-                var less = new LessConstants({
+                var less = new LessTheme({
                         constants: { "@foo": { value: "#ff0000" } }
                     }),
                     collection = new ThemeCollection([ less ]);

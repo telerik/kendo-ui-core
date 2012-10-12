@@ -141,7 +141,7 @@
             });
         },
         lessEOLRe = /;$/m,
-        LessConstants = ObservableObject.extend({
+        LessTheme = ObservableObject.extend({
             init: function(options) {
                 options = options || {};
                 this.template = options.template || "";
@@ -746,7 +746,7 @@
 
     extend(kendo, {
         ThemeCollection: ThemeCollection,
-        LessConstants: LessConstants,
+        LessTheme: LessTheme,
         JsonConstants: JsonConstants,
         ThemeBuilder: ThemeBuilder
     });

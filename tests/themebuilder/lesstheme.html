@@ -36,7 +36,7 @@
 
         <script>
             var ThemeBuilder = kendo.ThemeBuilder,
-                LessConstants = kendo.LessConstants;
+                LessTheme = kendo.LessTheme;
 
 
             var constant = function(target, property, values) {
@@ -51,14 +51,14 @@
                 COLOR = "color",
                 extend = $.extend;
 
-            module("LessConstants", {
+            module("LessTheme", {
                 teardown: function() {
                     $("#kendo-themebuilder, head style").remove();
                 }
             });
 
             function createConstants(constants) {
-                return new LessConstants({
+                return new LessTheme({
                     constants: constants
                 });
             }

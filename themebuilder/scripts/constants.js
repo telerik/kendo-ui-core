@@ -270,7 +270,7 @@
         };
 
     window.themeBuilder = new kendo.ThemeBuilder({
-        webConstants: new kendo.LessConstants({
+        webConstants: new kendo.LessTheme({
             constants: webConstants,
             template: lessTemplate
         }),

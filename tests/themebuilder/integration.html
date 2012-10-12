@@ -35,7 +35,7 @@
 
         <script>
             var ThemeBuilder = kendo.ThemeBuilder,
-                LessConstants = kendo.LessConstants,
+                LessTheme = kendo.LessTheme,
                 JsonConstants = kendo.JsonConstants,
                 constant = function(target, property, values) {
                     return {
@@ -56,7 +56,7 @@
             });
 
             function updateStyleSheet(cssText) {
-                LessConstants.prototype._updateStyleSheet(cssText, document);
+                LessTheme.prototype._updateStyleSheet(cssText, document);
             }
 
             test("themebuilder object is available", function() {
@@ -84,7 +84,7 @@
             });
 
             test("render() renders color picker for box-shadow-color properties", function() {
-                var constants = new LessConstants({
+                var constants = new LessTheme({
                         constants: {
                             "@foo-color": constant(".k-widget", "box-shadow")
                         }
@@ -103,7 +103,7 @@
 
             test("value of box-shadow color picker gets processed as color", function() {
 
-                var constants = new LessConstants({
+                var constants = new LessTheme({
                         constants: {
                             "@foo-color": constant(".k-widget", "box-shadow")
                         }
@@ -118,7 +118,7 @@
 
             test("value of box-shadow color picker with inset shadow", function() {
 
-                var constants = new LessConstants({
+                var constants = new LessTheme({
                         constants: {
                             "@foo-color": constant(".k-widget", "box-shadow")
                         }
@@ -131,8 +131,8 @@
                 equals(constants.serialize(), "@foo-color: #b4d455;");
             });
 
-            test("LessConstants are inferred on init", function() {
-                var constants = new LessConstants(),
+            test("LessTheme are inferred on init", function() {
+                var constants = new LessTheme(),
                     inferred = false;
 
                 constants.infer = function() {
@@ -146,7 +146,7 @@
 
             test("_propertyChange updates constant", function() {
                 var color = "#b4d455",
-                    constants = new LessConstants({
+                    constants = new LessTheme({
                         constants: {
                             "@foo": constant(".k-widget", "background-color")
                         }
@@ -167,7 +167,7 @@
                 expect(2);
                 var color = "#b4d455",
                     themebuilder = new ThemeBuilder({
-                        webConstants: new LessConstants({
+                        webConstants: new LessTheme({
                             constants: {
                                 "@foo": constant(".k-widget", "background-color")
                             }
