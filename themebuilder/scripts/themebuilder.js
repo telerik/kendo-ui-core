@@ -33,7 +33,9 @@
                 var obj = object,
                     accessors = expression.split("."),
                     i, name, arrayName,
-                    arrayRe = /\[(\d+)\]/;
+                    arrayRe = /\[(\d+)\]/,
+                    // use the containing window Array constructor due to deepExtend array check
+                    arr = (window.parent || window).Array;
 
                 for (i = 0; accessors[i]; i++) {
                     name = accessors[i];
@@ -42,7 +44,7 @@
                         arrayName = name.substring(0, name.indexOf("["));
 
                         if (!obj[arrayName]) {
-                            obj[arrayName] = [];
+                            obj[arrayName] = new arr();
                         }
 
                         obj[arrayName][parseInt(arrayRe.exec(name)[1], 10)] = value;
@@ -367,7 +369,15 @@
                 function setTheme(selector, component) {
                     $(selector, targetDocument).each(function() {
                         var element = w.$(this),
-                            options = element.data(component)._originalOptions;
+                            options = element.data(component)._originalOptions,
+                            series = options.series;
+
+                        // clean applied series colors to apply new ones
+                        if (series) {
+                            for (var i = 0; i < series.length; i++) {
+                                delete series[i].color;
+                            }
+                        }
 
                         options.theme = "newTheme";
 
