@@ -68,7 +68,8 @@
         },
 
         current: function(candidate) {
-            var that = this;
+            var that = this,
+                id = that._optionID;
 
             if (candidate !== undefined) {
                 if (that._current) {
@@ -84,6 +85,11 @@
                 if (candidate) {
                     candidate.addClass(FOCUSED);
                     that._scroll(candidate);
+
+                    if (id) {
+                        candidate.attr("id", id);
+                        that._focused.attr("aria-activedescendant", id);
+                    }
                 }
 
                 that._current = candidate;

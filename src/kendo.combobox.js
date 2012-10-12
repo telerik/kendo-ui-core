@@ -667,7 +667,6 @@
                 text,
                 value,
                 data = that._data(),
-                id = that._optionID,
                 idx = that._highlight(li);
 
             that.selectedIndex = idx;
@@ -687,12 +686,8 @@
                 that._accessor(value !== undefined ? value : text, idx);
                 that._placeholder();
 
-                if (id) {
-                    that.input.attr("aria-activedescendant", id);
-                    that._current.attr({
-                        id: id,
-                        "aria-selected": true
-                    });
+                if (that._optionID) {
+                    that._current.attr("aria-selected", true);
                 }
             }
         },

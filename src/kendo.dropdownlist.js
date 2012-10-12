@@ -407,7 +407,6 @@
             var that = this,
                 current = that._current,
                 data = that._data(),
-                id = that._optionID,
                 value,
                 text,
                 idx;
@@ -430,12 +429,8 @@
                     that._accessor(value !== undefined ? value : text, idx);
                     that.current(li.addClass(SELECTED));
 
-                    if (id) {
-                        that.wrapper.attr("aria-activedescendant", id);
-                        that._current.attr({
-                            id: id,
-                            "aria-selected": true
-                        });
+                    if (that._optionID) {
+                        that._current.attr("aria-selected", true);
                     }
                 }
             }

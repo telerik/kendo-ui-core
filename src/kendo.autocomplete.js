@@ -191,7 +191,7 @@
 
         close: function () {
             var that = this;
-            that._current = null;
+            that.current(null);
             that.popup.close();
         },
 
