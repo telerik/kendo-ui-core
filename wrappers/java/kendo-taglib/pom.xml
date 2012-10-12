@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.kendoui</groupId>
         <artifactId>kendo</artifactId>
-        <version>2012.3.1011</version>
+        <version>2012.3.1012</version>
     </parent>
 
     <artifactId>kendo-taglib</artifactId>
@@ -17,10 +17,18 @@
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.0</version>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+	        <scope>provided</scope>
+		</dependency>
+            
         <dependency>
         	<groupId>org.mockito</groupId>
         	<artifactId>mockito-all</artifactId>
