@@ -45,7 +45,7 @@ file JSP_TAGLIB_JAR => [POM, JSP_TAGLIB_SRC].flatten do
 end
 
 # Build the spring-demos-*.war by running maven
-file SPRING_DEMOS_WAR => [POM, JSP_TAGLIB_JAR, SPRING_DEMOS_SRC].flatten do
+file SPRING_DEMOS_WAR => [POM, SPRING_DEMOS_SRC].flatten do
 
     mvn(POM, 'clean package')
 
