@@ -35,14 +35,17 @@
         FOCUSEDCLASS = "k-state-focused",
         DISABLEDCLASS = "k-state-disabled",
         SELECTEDCLASS = "k-state-selected",
+        SELECTEDSELECTOR = "." + SELECTEDCLASS,
         HIGHLIGHTEDCLASS = "k-state-highlighted",
         ACTIVEITEMSELECTOR = ITEM + ":not(.k-state-disabled)",
         clickableItems = ACTIVEITEMSELECTOR + " > .k-link",
         disabledItems = ITEM + ".k-state-disabled > .k-link",
-        selectableItems = "> li > .k-state-selected, .k-panel > li > .k-state-selected",
+        selectableItems = "> li > " + SELECTEDSELECTOR + ", .k-panel > li > " + SELECTEDSELECTOR,
         defaultState = "k-state-default",
         ARIA_DISABLED = "aria-disabled",
         ARIA_EXPANDED = "aria-expanded",
+        ARIA_HIDDEN = "aria-hidden",
+        ARIA_SELECTED = "aria-selected",
         VISIBLE = ":visible",
         EMPTY = ":empty",
         SINGLE = "single",
@@ -681,10 +684,10 @@
                          .attr("role", "group");
 
             panels.parent()
-                  .attr("aria-expanded", false)
+                  .attr(ARIA_EXPANDED, false)
                   .not("." + ACTIVECLASS)
                   .children("ul")
-                  .attr("aria-hidden", true)
+                  .attr(ARIA_HIDDEN, true)
                   .hide();
 
             items = that.element.add(panels).children();
@@ -733,21 +736,21 @@
                 .children("div")
                 .addClass(CONTENT)
                 .attr("role", "region")
-                .attr("aria-hidden", true)
+                .attr(ARIA_HIDDEN, true)
                 .hide()
                 .parent()
                 .attr(ARIA_EXPANDED, false);
 
-            link = item.children("." + SELECTEDCLASS);
+            link = item.children(SELECTEDSELECTOR);
             if (link[0]) {
                 if (selected) {
-                    selected.removeAttr("aria-selected")
-                            .children("." + SELECTEDCLASS)
+                    selected.removeAttr(ARIA_SELECTED)
+                            .children(SELECTEDSELECTOR)
                             .removeClass(SELECTEDCLASS);
                 }
 
                 link.addClass(SELECTEDCLASS);
-                this._selected = item.attr("aria-selected", true);
+                this._selected = item.attr(ARIA_SELECTED, true);
             }
 
             if (!item.children(LINKSELECTOR)[0]) {
@@ -855,7 +858,7 @@
             element
                 .parent()
                 .attr(ARIA_EXPANDED, !visibility)
-                .attr("aria-hidden", visibility)
+                .attr(ARIA_HIDDEN, visibility)
                 .toggleClass(defaultState, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-icon")
@@ -957,10 +960,10 @@
                 selected = that._selected;
 
             if (selected) {
-                selected.removeAttr("aria-selected");
+                selected.removeAttr(ARIA_SELECTED);
             }
 
-            that._selected = item.attr("aria-selected", true);
+            that._selected = item.attr(ARIA_SELECTED, true);
 
             element.find(selectableItems).removeClass(SELECTEDCLASS);
             element.find("> .k-state-highlighted, .k-panel > .k-state-highlighted").removeClass(HIGHLIGHTEDCLASS);
