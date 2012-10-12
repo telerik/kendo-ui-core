@@ -726,10 +726,10 @@
 
                     view({
                         id: "suite-chooser",
-                        content: "<p>Create a theme for:</p>" +
-                                 "<ul>" +
-                                     "<li>" + button({ id: "create-web", text: "Kendo UI Web" }) + "</li>" +
-                                     "<li>" + button({ id: "create-dataviz", text: "Kendo UI DataViz" }) + "</li>" +
+                        content: "<p style='text-align: center'>Create a theme for Kendo UI...</p>" +
+                                 "<ul class='suite-list'>" +
+                                     "<li>" + button({ id: "create-web", text: "Web" }) + "</li>" +
+                                     "<li>" + button({ id: "create-dataviz", text: "DataViz" }) + "</li>" +
                                  "</ul>"
                     }) +
 

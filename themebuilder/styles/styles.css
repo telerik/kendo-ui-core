@@ -200,3 +200,15 @@ textarea {
 .ktb-action-import {
     float: right;
 }
+
+.suite-list {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 1em 0;
+}
+
+.suite-list li {
+    display: inline-block;
+    margin: 0 .5em;
+}
