@@ -35,7 +35,7 @@ ive/
 node_modules
 release/
 sitefinity-docs/
-tags
+./tags
 functional-tests/Results/
 functional-tests/**/**/Profiler Configurations/
 functional-tests/**/Backup/
