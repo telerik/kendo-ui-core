@@ -52,7 +52,7 @@
                 "<div role='region' class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
             ),
             group: template(
-                "<ul role='group' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+                "<ul role='group' aria-hidden='true' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
                     "#= renderItems(data) #" +
                 "</ul>"
             ),
@@ -156,60 +156,6 @@
             }
         };
 
-    function updateItemClasses (item, panelElement) {
-        item = $(item).addClass("k-item")
-                      .attr("role", "menuitem");
-
-        item
-            .children(IMG)
-            .addClass(IMAGE);
-        item
-            .children("a")
-            .addClass(LINK)
-            .children(IMG)
-            .addClass(IMAGE);
-        item
-            .filter(":not([disabled]):not([class*=k-state])")
-            .addClass("k-state-default");
-        item
-            .filter("li[disabled]")
-            .addClass("k-state-disabled")
-            .attr(ARIA_DISABLED, true)
-            .removeAttr("disabled");
-
-        item
-            .filter(":not([class*=k-state])")
-            .children("a")
-            .filter(":focus")
-            .parent()
-            .addClass(ACTIVECLASS);
-
-        item
-            .children("div")
-            .addClass(CONTENT)
-            .attr("role", "region")
-            .css({ display: "none" });
-
-        item.each(function() {
-            var item = $(this);
-
-            if (item.children(".k-content, .k-group")[0]) {
-                item.attr(ARIA_EXPANDED, false);
-            }
-
-            if (!item.children(LINKSELECTOR).length) {
-                item
-                    .contents()      // exclude groups, real links, templates and empty text nodes
-                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                    .wrapAll("<span class='" + LINK + "'/>");
-            }
-        });
-
-        panelElement
-            .find(" > li > ." + LINK)
-            .addClass("k-header");
-    }
-
     function updateArrow (items) {
         items = $(items);
 
@@ -242,7 +188,7 @@
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.wrapper = that.element;
+            element = that.wrapper = that.element.addClass("k-widget k-reset k-header k-panelbar");
             options = that.options;
 
             if (options.dataSource) {
@@ -710,8 +656,7 @@
                 }
             } else {
                 items = $(item);
-
-                updateItemClasses(items, that.element);
+                that._updateItemsClasses(items);
             }
 
             return { items: items, group: parent, contents: contents };
@@ -726,31 +671,97 @@
         },
 
         _updateClasses: function() {
-            var that = this;
+            var that = this,
+                panels, items;
 
-            that.element.addClass("k-widget k-reset k-header k-panelbar");
+            panels = that.element
+                         .find("li > ul")
+                         .not(function () { return $(this).parentsUntil(".k-panelbar", "div").length; })
+                         .addClass("k-group k-panel")
+                         .attr("role", "group");
 
-            var panels = that.element
-                                .find("li > ul")
-                                .not(function () {
-                                        return $(this).parentsUntil(".k-panelbar", "div").length;
-                                    })
-                                .addClass("k-group k-panel")
-                                .attr("role", "group")
-                                .add(that.element);
+            panels.parent()
+                  .attr("aria-expanded", false)
+                  .not("." + ACTIVECLASS)
+                  .children("ul")
+                  .attr("aria-hidden", true)
+                  .hide();
 
-            var items = panels
-                            .find("> li:not(." + ACTIVECLASS + ") > ul")
-                            .css({ display: "none" })
-                            .end()
-                            .find("> li");
+            items = that.element.add(panels).children();
 
-            items.each(function () {
-                updateItemClasses(this, that.element);
-            });
-
+            that._updateItemsClasses(items);
             updateArrow(items);
             updateFirstLast(items);
+        },
+
+        _updateItemsClasses: function(items) {
+            var length = items.length,
+                idx = 0;
+
+            for(; idx < length; idx++) {
+                this._updateItemClasses(items[idx]);
+            }
+        },
+
+        _updateItemClasses: function(item) {
+            var selected = this._selected,
+                link;
+
+            item = $(item).addClass("k-item").attr("role", "menuitem");
+
+            item
+                .children(IMG)
+                .addClass(IMAGE);
+
+            item
+                .children("a")
+                .addClass(LINK)
+                .children(IMG)
+                .addClass(IMAGE);
+
+            item
+                .filter(":not([disabled]):not([class*=k-state])")
+                .addClass("k-state-default");
+
+            item
+                .filter("li[disabled]")
+                .addClass("k-state-disabled")
+                .attr(ARIA_DISABLED, true)
+                .removeAttr("disabled");
+
+            item
+                .children("div")
+                .addClass(CONTENT)
+                .attr("role", "region")
+                .attr("aria-hidden", true)
+                .hide()
+                .parent()
+                .attr(ARIA_EXPANDED, false);
+
+            link = item.children("." + SELECTEDCLASS);
+            if (link[0]) {
+                if (selected) {
+                    selected.removeAttr("aria-selected")
+                            .children("." + SELECTEDCLASS)
+                            .removeClass(SELECTEDCLASS);
+                }
+
+                link.addClass(SELECTEDCLASS);
+                this._selected = item.attr("aria-selected", true);
+            }
+
+            if (!item.children(LINKSELECTOR)[0]) {
+                item
+                    .contents()      // exclude groups, real links, templates and empty text nodes
+                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                    .wrapAll("<span class='" + LINK + "'/>");
+            }
+
+            if (item.parent(".k-panelbar")[0]) {
+                item
+                    .children(LINKSELECTOR)
+                    .addClass("k-header");
+            }
         },
 
         _click: function (target) {
@@ -844,6 +855,7 @@
             element
                 .parent()
                 .attr(ARIA_EXPANDED, !visibility)
+                .attr("aria-hidden", visibility)
                 .toggleClass(defaultState, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-icon")

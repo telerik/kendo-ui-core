@@ -88,7 +88,7 @@
         });
 
         test("PanelBar adds role region during init", function() {
-            var panel = $("<ul id='test'><li>Test</li><li>hi<div>content</div></li></ul>").kendoPanelBar();
+            var panel = $("<ul id='test2'><li>Test</li><li>hi<div>content</div></li></ul>").kendoPanelBar();
 
             var items = panel.find(".k-content");
             equal(items.eq(0).attr("role"), "region");
@@ -149,8 +149,8 @@
             equal(ul.attr("aria-activedescendant"), undefined);
         });
 
-        test("PanelBar adds role region during init", function() {
-            var panel = $("<ul id='test'><li>Test</li><li>hi<div>content</div></li><li>Last<ul><li>test</li></ul></li></ul>").kendoPanelBar();
+        test("PanelBar adds aria-expanded to the item during init", function() {
+            var panel = $("<ul id='test2'><li>Test</li><li>hi<div>content</div></li><li>Last<ul><li>test</li></ul></li></ul>").kendoPanelBar();
 
             var items = panel.find(".k-item").filter("[aria-expanded=false]");
 
@@ -193,6 +193,49 @@
             equal(last.attr("aria-expanded"), "false");
         });
 
+        test("PanelBar updates aria-hidden state", function() {
+            addItems(3);
+            var last = ul.find(".k-item:last");
+
+            addItems(2, last);
+
+            panelbar.expand(last);
+            equal(last.attr("aria-hidden"), "false");
+        });
+
+        test("PanelBar updates aria-hidden state on collapse", function() {
+            addItems(3);
+            var last = ul.find(".k-item:last");
+
+            addItems(2, last);
+
+            panelbar.expand(last);
+            panelbar.collapse(last);
+
+            equal(last.attr("aria-hidden"), "true");
+        });
+
+        test("PanelBar adds aria-hidden to the group when it is added with API", function() {
+            addItems(3);
+            var last = ul.find(".k-item:last");
+
+            addItems(2, last);
+
+            equal(last.find(".k-group").attr("aria-hidden"), "true");
+        });
+
+        test("PanelBar adds aria-hidden to k-group on init", function() {
+            var panel = $("<ul id='test'><li>Test<ul><li>Inner</li></ul></li></ul>").kendoPanelBar();
+
+            equal(panel.find(".k-group").attr("aria-hidden"), "true");
+        });
+
+        test("PanelBar adds aria-hidden to content on init", function() {
+            var panel = $("<ul id='test'><li>Test<div>Inner</div></li></ul>").kendoPanelBar();
+
+            equal(panel.find(".k-content").attr("aria-hidden"), "true");
+        });
+
         test("PanelBar adds aria-disabled attr", function() {
             addItems(3);
             var first = ul.find(".k-item:first");
@@ -225,6 +268,16 @@
             });
 
             equal(ul.find(".k-item:first").attr("aria-disabled"), "true");
+        });
+
+        test("PanelBar adds aria-selected on init", function() {
+            var panel = $("<ul id='test'><li><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link k-state-selected'>Test2</span></li></ul>").kendoPanelBar();
+
+            var links = panel.find(".k-state-selected");
+
+            equal(links.length, 1);
+            equal(links.parent().attr("aria-selected"), "true");
+            equal(links.parent().index(), 1);
         });
 
     </script>
