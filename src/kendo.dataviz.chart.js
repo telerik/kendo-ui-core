@@ -6418,12 +6418,12 @@
                 that.setRange(startIndex, endIndex);
             }
 
-            var eventArgs = {
-                startSelection: parseFloat(that.selection.css("left")),
-                endSelection: parseFloat(that.rightMask.css("left")),
-                startIndex: options.start,
-                endIndex: options.end
-            };
+            //var eventArgs = {
+            //    startSelection: parseFloat(that.selection.css("left")),
+            //    endSelection: parseFloat(that.rightMask.css("left")),
+            //    startIndex: options.start,
+            //    endIndex: options.end
+            //};
         }
     });
 
