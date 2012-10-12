@@ -168,7 +168,7 @@
                 } else {
                     this._updateStyleSheet(themeContent, targetDocument);
 
-                    this.infer();
+                    this.infer(targetDocument);
                 }
             },
 
@@ -527,25 +527,23 @@
 
                 $("#suite-chooser").slideUp();
             },
-            _showSource: function(source) {
-                $("#download-overlay").slideDown()
-                    .find("textarea").val(source);
-            },
             showDataVizSource: function(e) {
                 e.preventDefault();
 
-                this._showSource(
-                    this.themes[1].source("string")
-                );
+                this.themes[1].source("string", function(source) {
+                    $("#download-overlay").slideDown()
+                        .find("textarea").val(source);
+                });
             },
             showWebSource: function(e) {
                 e.preventDefault();
 
                 var format = $(e.target).hasClass("ktb-action-get-less") ? "less" : "css";
 
-                this._showSource(
-                    this.themes[0].source(format)
-                );
+                this.themes[0].source(format, function(source) {
+                    $("#download-overlay").slideDown()
+                        .find("textarea").val(source);
+                });
             },
             showImport: function(e) {
                 e.preventDefault();
@@ -561,24 +559,22 @@
                 e.preventDefault();
 
                 var themeContent = $(e.target).closest(".ktb-view").find("textarea").val(),
-                    constants = this.constants;
+                    theme = this.themes[0],
+                    clientObjects = {
+                        "ktb-colorpicker": "kendoColorPicker",
+                        "ktb-numeric": "kendoNumericTextBox",
+                        "ktb-combo": "kendoComboBox"
+                    };
 
-                constants.deserialize(themeContent, this.targetDocument);
-
-                this._propertyChange({});
-
-                var clientObjects = {
-                    "ktb-colorpicker": "kendoColorPicker",
-                    "ktb-numeric": "kendoNumericTextBox",
-                    "ktb-combo": "kendoComboBox"
-                };
+                theme.deserialize(themeContent, this.targetDocument);
 
                 $("input.ktb-colorpicker,input.ktb-numeric,input.ktb-combo").each(function() {
                     var dataType = this.className.replace(/k-formatted-value|k-input|\s+/gi, ""),
-                        clientObject = $(this).data(clientObjects[dataType]);
+                        clientObject = $(this).data(clientObjects[dataType]),
+                        constant = theme.constants[this.id];
 
-                    if (clientObject) {
-                        clientObject.value(constants[this.id].value);
+                    if (clientObject && constant) {
+                        clientObject.value(constant.value);
                     }
                 });
             },

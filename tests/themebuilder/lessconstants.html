@@ -70,7 +70,7 @@
 
                 constants.deserialize("@foo: #b4d455;");
 
-                equals(constants.constants["@foo"].value, "#b4d455");
+                equal(constants.constants["@foo"].value, "#b4d455");
             });
 
             test("deserialize() multiple variables", function() {
@@ -81,19 +81,29 @@
 
                 constants.deserialize("@foo: #b4d455;\n@bar: #000;");
 
-                equals(constants.constants["@foo"].value, "#b4d455");
-                equals(constants.constants["@bar"].value, "#000");
+                equal(constants.constants["@foo"].value, "#b4d455");
+                equal(constants.constants["@bar"].value, "#000");
             });
 
             test("deserialize() keeps constant types in tact", function() {
                 var constants = createConstants({
-                    "@foo": extend(constant("#foo", BGCOLOR), { value: "#f11f11" })
+                    "@foo": extend(constant(".foo", BGCOLOR), { value: "#f11f11" })
                 });
 
                 constants.deserialize("@foo: #b4d455;");
 
-                equals(constants.constants["@foo"].target, "#foo");
-                equals(constants.constants["@foo"].property, BGCOLOR);
+                equal(constants.constants["@foo"].target, ".foo");
+                equal(constants.constants["@foo"].property, BGCOLOR);
+            });
+
+            test("deserialize() from CSS", function() {
+                var theme = createConstants({
+                    "@foo": constant(".foo", COLOR)
+                });
+
+                theme.deserialize(".foo { color: #cccccc; }", document);
+
+                equal(theme.constants["@foo"].value, "#cccccc");
             });
 
             test("infer() infers nested className selectors", function() {
@@ -105,7 +115,7 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "10px");
+                equal(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() selectors with multiple classNames", function() {
@@ -117,7 +127,7 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "10px");
+                equal(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() infers nested tagName selectors", function() {
@@ -129,7 +139,7 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "10px");
+                equal(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() infers basic property value", function() {
@@ -141,7 +151,7 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "9px");
+                equal(constants.constants["@foo"].value, "9px");
             });
 
             test("infer() infers colors correctly", function() {
@@ -153,7 +163,7 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "#f11f11");
+                equal(constants.constants["@foo"].value, "#f11f11");
             });
 
             test("infer() with multiple constants", function() {
@@ -169,8 +179,8 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "#f11f11");
-                equals(constants.constants["@bar"].value, "#f00f00");
+                equal(constants.constants["@foo"].value, "#f11f11");
+                equal(constants.constants["@bar"].value, "#f00f00");
             });
 
             test("infer() of border-radius", function() {
@@ -182,7 +192,7 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "3px");
+                equal(constants.constants["@foo"].value, "3px");
             });
 
             test("infer() of computed constants", function() {
@@ -198,7 +208,7 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "10px");
+                equal(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() of readonly constants with value", function() {
@@ -213,7 +223,7 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "10px");
+                equal(constants.constants["@foo"].value, "10px");
             });
 
             test("infer() of selector with tagName", function() {
@@ -225,7 +235,7 @@
 
                 constants.infer(document);
 
-                equals(constants.constants["@foo"].value, "20px");
+                equal(constants.constants["@foo"].value, "20px");
             });
 
             test("source('less') returns less source", 1, function() {
