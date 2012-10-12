@@ -6,7 +6,6 @@ import java.io.FileReader;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -18,15 +17,9 @@ public class SourceCodeInterceptor extends HandlerInterceptorAdapter  {
         
         if (modelAndView != null) {
            
-            HandlerMethod handlerMethod = (HandlerMethod)handler;
-            Class<?> controller = handlerMethod.getBeanType();
-            //String filename = controller.getName().replaceAll("\\.", "/") + ".java";
-            
             String filename = modelAndView.getViewName() + ".jsp";
             
             String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/views/" + filename);
-            
-            System.out.println(realPath);
             
             BufferedReader input = new BufferedReader(new FileReader(realPath));
             
@@ -34,13 +27,13 @@ public class SourceCodeInterceptor extends HandlerInterceptorAdapter  {
             String line = input.readLine();
             
             while (line != null) {
-                content.append(line);
+                content.append(line + "\r\n");
                 line = input.readLine();
             }
             
             input.close();
             
-            System.out.println(content.toString());
+            modelAndView.addObject("view", content.toString());
         }
     }
 }
