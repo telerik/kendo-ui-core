@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class TrackTag extends BaseTag /* interfaces */implements Border/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Track parent = (Track)findParentWithClass(Track.class);
 
         parent.setTrack(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -32,19 +53,19 @@ public class TrackTag extends BaseTag /* interfaces */implements Border/* interf
         setProperty("color", value);
     }
 
-    public int getOpacity() {
-        return (int)getProperty("opacity");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setOpacity(int value) {
+    public void setOpacity(float value) {
         setProperty("opacity", value);
     }
 
-    public int getSize() {
-        return (int)getProperty("size");
+    public float getSize() {
+        return (float)getProperty("size");
     }
 
-    public void setSize(int value) {
+    public void setSize(float value) {
         setProperty("size", value);
     }
 
@@ -57,4 +78,5 @@ public class TrackTag extends BaseTag /* interfaces */implements Border/* interf
     }
 
 //<< Attributes
+
 }

@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class ScaleTag extends BaseTag /* interfaces */implements Labels, MajorTicks, MinorTicks/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Scale parent = (Scale)findParentWithClass(Scale.class);
 
         parent.setScale(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setLabels(LabelsTag value) {
@@ -34,35 +55,35 @@ public class ScaleTag extends BaseTag /* interfaces */implements Labels, MajorTi
         setProperty("minorticks", value.properties());
     }
 
-    public int getMajorUnit() {
-        return (int)getProperty("majorUnit");
+    public float getMajorUnit() {
+        return (float)getProperty("majorUnit");
     }
 
-    public void setMajorUnit(int value) {
+    public void setMajorUnit(float value) {
         setProperty("majorUnit", value);
     }
 
-    public int getMax() {
-        return (int)getProperty("max");
+    public float getMax() {
+        return (float)getProperty("max");
     }
 
-    public void setMax(int value) {
+    public void setMax(float value) {
         setProperty("max", value);
     }
 
-    public int getMin() {
-        return (int)getProperty("min");
+    public float getMin() {
+        return (float)getProperty("min");
     }
 
-    public void setMin(int value) {
+    public void setMin(float value) {
         setProperty("min", value);
     }
 
-    public int getMinorUnit() {
-        return (int)getProperty("minorUnit");
+    public float getMinorUnit() {
+        return (float)getProperty("minorUnit");
     }
 
-    public void setMinorUnit(int value) {
+    public void setMinorUnit(float value) {
         setProperty("minorUnit", value);
     }
 
@@ -72,6 +93,14 @@ public class ScaleTag extends BaseTag /* interfaces */implements Labels, MajorTi
 
     public void setMirror(boolean value) {
         setProperty("mirror", value);
+    }
+
+    public Object getRanges() {
+        return (Object)getProperty("ranges");
+    }
+
+    public void setRanges(Object value) {
+        setProperty("ranges", value);
     }
 
     public boolean getReverse() {
@@ -91,4 +120,5 @@ public class ScaleTag extends BaseTag /* interfaces */implements Labels, MajorTi
     }
 
 //<< Attributes
+
 }

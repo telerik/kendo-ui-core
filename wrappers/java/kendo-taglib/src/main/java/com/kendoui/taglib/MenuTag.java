@@ -4,15 +4,51 @@ package com.kendoui.taglib;
 
 import com.kendoui.taglib.menu.*;
 
-
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Ul;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
-public class MenuTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
+public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Animation, Items/* interfaces */ {
 
     public MenuTag() {
         super("Menu");
+    }
+
+    @Override
+    public Element<?> createElement() {
+        Ul ul = new Ul();
+        
+        ul.html(body());
+        
+        return ul;
+    }
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -20,6 +56,13 @@ public class MenuTag extends WidgetTag /* interfaces */implements Animation/* in
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
+    }
+
+    @Override
+    public void setItems(ItemsTag value) {
+
+        items = value.items();
+
     }
 
     public boolean getCloseOnClick() {
@@ -38,11 +81,11 @@ public class MenuTag extends WidgetTag /* interfaces */implements Animation/* in
         setProperty("direction", value);
     }
 
-    public int getHoverDelay() {
-        return (int)getProperty("hoverDelay");
+    public float getHoverDelay() {
+        return (float)getProperty("hoverDelay");
     }
 
-    public void setHoverDelay(int value) {
+    public void setHoverDelay(float value) {
         setProperty("hoverDelay", value);
     }
 
@@ -95,4 +138,5 @@ public class MenuTag extends WidgetTag /* interfaces */implements Animation/* in
     }
 
 //<< Attributes
+
 }

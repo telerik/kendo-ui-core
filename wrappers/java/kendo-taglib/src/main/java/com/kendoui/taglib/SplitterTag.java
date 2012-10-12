@@ -8,6 +8,8 @@ import com.kendoui.taglib.splitter.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class SplitterTag extends WidgetTag /* interfaces */implements Panes/* interfaces */ {
 
@@ -15,11 +17,38 @@ public class SplitterTag extends WidgetTag /* interfaces */implements Panes/* in
         super("Splitter");
     }
 
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
 //>> Attributes
 
     @Override
     public void setPanes(PanesTag value) {
+
         setProperty("panes", value.panes());
+
     }
 
     public String getOrientation() {
@@ -71,4 +100,5 @@ public class SplitterTag extends WidgetTag /* interfaces */implements Panes/* in
     }
 
 //<< Attributes
+
 }

@@ -8,6 +8,8 @@ import com.kendoui.taglib.grid.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class GridTag extends WidgetTag /* interfaces */implements Columns, Sortable, Editable, Groupable, Pageable, Toolbar, DataBoundWidget/* interfaces */ {
 
@@ -15,11 +17,38 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
         super("Grid");
     }
 
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
 //>> Attributes
 
     @Override
     public void setColumns(ColumnsTag value) {
+
         setProperty("columns", value.columns());
+
     }
 
     @Override
@@ -44,7 +73,9 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
 
     @Override
     public void setToolbar(ToolbarTag value) {
+
         setProperty("toolbar", value.toolbar());
+
     }
 
     public boolean getAutoBind() {
@@ -57,7 +88,7 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public boolean getNavigatable() {
@@ -165,4 +196,5 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
     }
 
 //<< Attributes
+
 }

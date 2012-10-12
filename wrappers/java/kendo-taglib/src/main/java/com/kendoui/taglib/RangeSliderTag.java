@@ -8,11 +8,38 @@ import com.kendoui.taglib.rangeslider.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip/* interfaces */ {
 
     public RangeSliderTag() {
         super("RangeSlider");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -22,27 +49,27 @@ public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip
         setProperty("tooltip", value.properties());
     }
 
-    public int getLargeStep() {
-        return (int)getProperty("largeStep");
+    public float getLargeStep() {
+        return (float)getProperty("largeStep");
     }
 
-    public void setLargeStep(int value) {
+    public void setLargeStep(float value) {
         setProperty("largeStep", value);
     }
 
-    public int getMax() {
-        return (int)getProperty("max");
+    public float getMax() {
+        return (float)getProperty("max");
     }
 
-    public void setMax(int value) {
+    public void setMax(float value) {
         setProperty("max", value);
     }
 
-    public int getMin() {
-        return (int)getProperty("min");
+    public float getMin() {
+        return (float)getProperty("min");
     }
 
-    public void setMin(int value) {
+    public void setMin(float value) {
         setProperty("min", value);
     }
 
@@ -54,27 +81,27 @@ public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip
         setProperty("orientation", value);
     }
 
-    public int getSelectionEnd() {
-        return (int)getProperty("selectionEnd");
+    public float getSelectionEnd() {
+        return (float)getProperty("selectionEnd");
     }
 
-    public void setSelectionEnd(int value) {
+    public void setSelectionEnd(float value) {
         setProperty("selectionEnd", value);
     }
 
-    public int getSelectionStart() {
-        return (int)getProperty("selectionStart");
+    public float getSelectionStart() {
+        return (float)getProperty("selectionStart");
     }
 
-    public void setSelectionStart(int value) {
+    public void setSelectionStart(float value) {
         setProperty("selectionStart", value);
     }
 
-    public int getSmallStep() {
-        return (int)getProperty("smallStep");
+    public float getSmallStep() {
+        return (float)getProperty("smallStep");
     }
 
-    public void setSmallStep(int value) {
+    public void setSmallStep(float value) {
         setProperty("smallStep", value);
     }
 
@@ -103,4 +130,5 @@ public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip
     }
 
 //<< Attributes
+
 }

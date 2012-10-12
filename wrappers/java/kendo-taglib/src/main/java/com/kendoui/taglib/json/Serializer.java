@@ -12,6 +12,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -99,6 +100,8 @@ public class Serializer {
             out.append(value.toString());
         } else if (value instanceof Boolean) {
             out.append(value.toString());
+        } else if (value instanceof Date) {
+            serializeDate(out, (Date)value);
         } else if (value instanceof Iterable<?>) {
             serializeIterable(out, (Iterable<?>)value);
         } else if (value instanceof Serializable) {
@@ -114,6 +117,12 @@ public class Serializer {
         }
     }
 
+    private void serializeDate(Writer out, Date value) throws IOException {
+        out.append("new Date(")
+           .append(new Long(value.getTime()).toString())
+           .append(")");
+    }
+    
     private void serializeMap(Writer out, Map<?,?> map) throws IOException {
         out.append("{");
 

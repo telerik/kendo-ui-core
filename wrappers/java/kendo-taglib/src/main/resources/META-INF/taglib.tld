@@ -19,6 +19,7 @@
         <name>autoComplete</name>
         <tag-class>com.kendoui.taglib.AutoCompleteTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -26,6 +27,7 @@
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Sets the field of the data item that provides the text content of the list items.</description>
@@ -38,7 +40,7 @@
             <description>Specifies the delay in ms after which the AutoComplete will start filtering the dataSource.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -59,7 +61,7 @@
             <description>Sets the height of the drop-down list in pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -81,7 +83,7 @@
 the dataSource.</description>
             <name>minLength</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -134,12 +136,27 @@ the dataSource.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the AutoComplete widget</description>
+        <name>autoComplete-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Calendar</description>
         <name>calendar</name>
         <tag-class>com.kendoui.taglib.CalendarTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -148,11 +165,19 @@ the dataSource.</description>
             <type>java.lang.String</type>
         </attribute>
 
+
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies a list of dates, which will be passed to the month template.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -177,10 +202,31 @@ the dataSource.</description>
         </attribute>
 
         <attribute>
+            <description>Specifies the maximum date, which the calendar can show.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the minimum date, which the calendar can show.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the start view.</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the selected date.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>
@@ -195,18 +241,41 @@ the dataSource.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Calendar widget</description>
+        <name>calendar-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, navigate.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Chart</description>
         <name>chart</name>
         <tag-class>com.kendoui.taglib.ChartTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+
+        <attribute>
+            <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
+            <name>seriesColors</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -251,12 +320,27 @@ and is about to render it.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Chart widget</description>
+        <name>chart-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: axisLabelClick, dataBound, plotAreaClick, seriesClick, seriesHover.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>ComboBox</description>
         <name>comboBox</name>
         <tag-class>com.kendoui.taglib.ComboBoxTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -264,6 +348,7 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Controls whether to bind the widget to the DataSource on initialization.</description>
@@ -297,7 +382,7 @@ and is about to render it.</description>
             <description>Specifies the delay in ms after which the ComboBox will start filtering dataSource.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -318,7 +403,7 @@ and is about to render it.</description>
             <description>Define the height of the drop-down list in pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -339,14 +424,14 @@ and is about to render it.</description>
             <description>Defines the initial selected item.</description>
             <name>index</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>Specifies the minimum characters that should be typed before the ComboBox activates</description>
             <name>minLength</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -406,12 +491,181 @@ and is about to render it.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the ComboBox widget</description>
+        <name>comboBox-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>DataSource</description>
+        <name>dataSource</name>
+        <tag-class>com.kendoui.taglib.DataSourceTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+        <attribute>
+            <description>Sets fields on which initial aggregates should be calculated</description>
+            <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Enables (</description>
+            <name>autoSync</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Enables (</description>
+            <name>batch</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the local JavaScript object to use for the data source.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets initial filter</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets initial grouping</description>
+            <name>group</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets the index of the displayed page of data.</description>
+            <name>page</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets the number of records which contains a given page of data.</description>
+            <name>pageSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if aggregates are calculated on the server or not. By default aggregates are calculated client-side.</description>
+            <name>serverAggregates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if filtering of the data is handled on the server. By default filtering is performed client-side.</description>
+            <name>serverFiltering</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if grouping of the data is handled on the server. By default grouping is performed client-side.</description>
+            <name>serverGrouping</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if paging of the data is on the server. By default paging is performed client-side. If</description>
+            <name>serverPaging</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Determines if sorting of the data should is handled on the server. By default sorting is performed client-side.</description>
+            <name>serverSorting</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets initial sort order</description>
+            <name>sort</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Loads transport with preconfigured settings. Currently supports only "odata" (Requires kendo.data.odata.js to be included).</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Fires when data is changed or read from the transport.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when an error occurs during data read or sync. The event arguments are the same as the ones of the error event of $.ajax().</description>
+            <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires after changes are synced.</description>
+            <name>sync</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when data request is to be made.</description>
+            <name>requestStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when a data request is received. Raised after a Create, Read, Update or Destroy request is performed.</description>
+            <name>requestEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+        
+    <tag>
+        <description>Subscribes to an event of the DataSource widget</description>
+        <name>dataSource-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, error, sync, requestStart, requestEnd.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>DatePicker</description>
         <name>datePicker</name>
         <tag-class>com.kendoui.taglib.DatePickerTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -419,6 +673,7 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
@@ -450,11 +705,39 @@ settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Specifies the maximum date, which the calendar can show.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the minimum date that the calendar can show.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the format will be used. Note that value of the format option is always used.</description>
+            <name>parseFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the start view.
 The following settings are available for the</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the selected date.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>
@@ -474,12 +757,27 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the DatePicker widget</description>
+        <name>datePicker-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>DateTimePicker</description>
         <name>dateTimePicker</name>
         <tag-class>com.kendoui.taglib.DateTimePickerTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -488,11 +786,19 @@ The following settings are available for the</description>
             <type>java.lang.String</type>
         </attribute>
 
+
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -521,7 +827,28 @@ settings are available for the</description>
             <description>Specifies the interval, between values in the popup list, in minutes.</description>
             <name>interval</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the maximum date, which the calendar can show.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the minimum date that the calendar can show.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the options.format and options.timeFormat will be used. Note that value of the format option is always used.</description>
+            <name>parseFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -537,6 +864,13 @@ The following settings are available for the</description>
             <name>timeFormat</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the selected value.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>
@@ -556,12 +890,27 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the DateTimePicker widget</description>
+        <name>dateTimePicker-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>DropDownList</description>
         <name>dropDownList</name>
         <tag-class>com.kendoui.taglib.DropDownListTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -569,6 +918,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Controls whether to bind the widget on initialization.</description>
@@ -602,7 +952,7 @@ The following settings are available for the</description>
             <description>Specifies the delay in ms before the search text typed by the end user is cleared.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -616,7 +966,7 @@ The following settings are available for the</description>
             <description>Define the height of the drop-down list in pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -630,7 +980,7 @@ The following settings are available for the</description>
             <description>Defines the initial selected item.</description>
             <name>index</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -683,12 +1033,27 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the DropDownList widget</description>
+        <name>dropDownList-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Editor</description>
         <name>editor</name>
         <tag-class>com.kendoui.taglib.EditorTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -697,11 +1062,27 @@ The following settings are available for the</description>
             <type>java.lang.String</type>
         </attribute>
 
+
         <attribute>
             <description>Indicates whether the Editor should submit encoded HTML tags.</description>
             <name>encoded</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Allows custom stylesheets to be included within the editing area.</description>
+            <name>stylesheets</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
+as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs</description>
+            <name>tools</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -736,12 +1117,27 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Editor widget</description>
+        <name>editor-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, execute, keydown, keyup, paste, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Grid</description>
         <name>grid</name>
         <tag-class>com.kendoui.taglib.GridTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -749,6 +1145,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Indicates whether the grid will call read on the DataSource initially.</description>
@@ -830,12 +1227,27 @@ The following settings are available for the</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Grid widget</description>
+        <name>grid-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, columnResize, dataBound, detailCollapse, detailExpand, detailInit, edit, remove, save, saveChanges.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>LinearGauge</description>
         <name>linearGauge</name>
         <tag-class>com.kendoui.taglib.LinearGaugeTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -843,6 +1255,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>A value indicating if transition animations should be played.</description>
@@ -859,6 +1272,7 @@ The following settings are available for the</description>
         <name>listView</name>
         <tag-class>com.kendoui.taglib.ListViewTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -866,6 +1280,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Indicates whether the list view will call read on the DataSource initially.</description>
@@ -911,12 +1326,27 @@ and is about to render it.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the ListView widget</description>
+        <name>listView-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, dataBound, edit, remove.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Menu</description>
         <name>menu</name>
         <tag-class>com.kendoui.taglib.MenuTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -924,6 +1354,7 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies that sub menus should close after item selection (provided they won't navigate).</description>
@@ -945,7 +1376,7 @@ its sub menus to the left.</description>
             <description>Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.</description>
             <name>hoverDelay</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -986,12 +1417,27 @@ its sub menus to the left.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Menu widget</description>
+        <name>menu-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: close, open, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>NumericTextBox</description>
         <name>numericTextBox</name>
         <tag-class>com.kendoui.taglib.NumericTextBoxTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -999,6 +1445,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies the culture info used by the NumericTextBox widget.</description>
@@ -1011,7 +1458,7 @@ its sub menus to the left.</description>
             <description>Specifies the number precision. If not set precision defined by current culture is used.</description>
             <name>decimals</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1032,14 +1479,14 @@ its sub menus to the left.</description>
             <description>Specifies the largest value the user can enter.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>Specifies the smallest value the user can enter.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1060,7 +1507,7 @@ its sub menus to the left.</description>
             <description>Specifies the increment/decrement step.</description>
             <name>step</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1074,7 +1521,7 @@ its sub menus to the left.</description>
             <description>Specifies the value of the NumericTextBox widget.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1089,12 +1536,27 @@ its sub menus to the left.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the NumericTextBox widget</description>
+        <name>numericTextBox-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, spin.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Pager</description>
         <name>pager</name>
         <tag-class>com.kendoui.taglib.PagerTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1102,6 +1564,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Indicates whether the pager refresh method will be called within its initialization.</description>
@@ -1114,7 +1577,7 @@ its sub menus to the left.</description>
             <description>Defines the number of buttons displayed in the numeric pager.</description>
             <name>buttonCount</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1180,12 +1643,27 @@ its sub menus to the left.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Pager widget</description>
+        <name>pager-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>PanelBar</description>
         <name>panelBar</name>
         <tag-class>com.kendoui.taglib.PanelBarTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1193,6 +1671,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies how the</description>
@@ -1233,12 +1712,27 @@ its sub menus to the left.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the PanelBar widget</description>
+        <name>panelBar-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: activate, collapse, contentLoad, error, expand, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>RadialGauge</description>
         <name>radialGauge</name>
         <tag-class>com.kendoui.taglib.RadialGaugeTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1247,18 +1741,19 @@ its sub menus to the left.</description>
             <type>java.lang.String</type>
         </attribute>
 
+
         <attribute>
             <description>The width of the range indicators.</description>
             <name>rangeSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The distance from the range indicators to the ticks.</description>
             <name>rangeDistance</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1276,6 +1771,7 @@ its sub menus to the left.</description>
         <name>rangeSlider</name>
         <tag-class>com.kendoui.taglib.RangeSliderTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1284,26 +1780,27 @@ its sub menus to the left.</description>
             <type>java.lang.String</type>
         </attribute>
 
+
         <attribute>
             <description>The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
 handle must be focused). Note: The allied largeStep will also set large tick for every large step.</description>
             <name>largeStep</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum value of the</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum value of the</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1318,21 +1815,21 @@ The orientation of a</description>
             <description>The selection end value of the</description>
             <name>selectionEnd</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The selection start value of the</description>
             <name>selectionStart</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The small step value of the</description>
             <name>smallStep</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1354,12 +1851,27 @@ The orientation of a</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the RangeSlider widget</description>
+        <name>rangeSlider-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, slide.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Slider</description>
         <name>slider</name>
         <tag-class>com.kendoui.taglib.SliderTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1367,6 +1879,7 @@ The orientation of a</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>The title of the decrease button of the</description>
@@ -1387,21 +1900,21 @@ The orientation of a</description>
 handle must be focused). Note: The allied largeStep will also set large tick for every large step.</description>
             <name>largeStep</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum value of the</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum value of the</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1422,7 +1935,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <description>The small step value of the</description>
             <name>smallStep</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1436,7 +1949,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <description>The underlying value of the</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1451,12 +1964,27 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Slider widget</description>
+        <name>slider-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, slide.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Splitter</description>
         <name>splitter</name>
         <tag-class>com.kendoui.taglib.SplitterTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1464,6 +1992,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies the orientation of the</description>
@@ -1499,12 +2028,27 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Splitter widget</description>
+        <name>splitter-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: collapse, contentLoad, expand, layoutChange, resize.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>TabStrip</description>
         <name>tabStrip</name>
         <tag-class>com.kendoui.taglib.TabStripTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1512,6 +2056,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.</description>
@@ -1589,12 +2134,27 @@ tab.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the TabStrip widget</description>
+        <name>tabStrip-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: activate, contentLoad, error, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>TimePicker</description>
         <name>timePicker</name>
         <tag-class>com.kendoui.taglib.TimePickerTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1603,11 +2163,19 @@ tab.</description>
             <type>java.lang.String</type>
         </attribute>
 
+
         <attribute>
             <description>Specifies the culture info used by the widget.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -1621,7 +2189,35 @@ tab.</description>
             <description>Specifies the interval, between values in the popup list, in minutes.</description>
             <name>interval</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the end value in the popup list.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the start value in the popup list.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the formats, which are used to parse the value set with the value method or by direct input. If not set the value of the options.format will be used. Note that value of the format option is always used.</description>
+            <name>parseFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the selected time.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>
@@ -1641,12 +2237,27 @@ tab.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the TimePicker widget</description>
+        <name>timePicker-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>TreeView</description>
         <name>treeView</name>
         <tag-class>com.kendoui.taglib.TreeViewTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1654,6 +2265,7 @@ tab.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Template for rendering of the treeview checkboxes.</description>
@@ -1668,6 +2280,13 @@ the image URL of the treeview nodes.</description>
             <name>dataImageUrlField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data that the</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -1760,12 +2379,27 @@ HierarchicalDataSource instance), the default value of this option is false.</de
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the TreeView widget</description>
+        <name>treeView-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: collapse, dataBound, drag, dragend, dragstart, drop, expand, select.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Upload</description>
         <name>upload</name>
         <tag-class>com.kendoui.taglib.UploadTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1773,6 +2407,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Enables (</description>
@@ -1840,12 +2475,27 @@ Cancelling the event will prevent the upload.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Upload widget</description>
+        <name>upload-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: cancel, complete, error, progress, remove, select, success, upload.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
         <description>Window</description>
         <name>window</name>
         <tag-class>com.kendoui.taglib.WindowTag</tag-class>
         <body-content>JSP</body-content>
+
         <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
@@ -1854,12 +2504,13 @@ Cancelling the event will prevent the upload.</description>
             <type>java.lang.String</type>
         </attribute>
 
+
         <attribute>
-            <description>Specifies a URL or request options that the window should load its content from. For remote URLs, a
-container iframe element is automatically created.</description>
-            <name>content</name>
+            <description>The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize",
+and "Maximize".</description>
+            <name>actions</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -1880,28 +2531,28 @@ container iframe element is automatically created.</description>
             <description>The maximum height (in pixels) that may be achieved by resizing the window.</description>
             <name>maxHeight</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum width (in pixels) that may be achieved by resizing the window.</description>
             <name>maxWidth</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum height (in pixels) that may be achieved by resizing the window.</description>
             <name>minHeight</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum width (in pixels) that may be achieved by resizing the window.</description>
             <name>minWidth</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -1981,25 +2632,35 @@ has been clicked on a window with static content.</description>
         </attribute>
     </tag>
         
+    <tag>
+        <description>Subscribes to an event of the Window widget</description>
+        <name>window-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: activate, close, deactivate, dragend, dragstart, error, open, refresh, resize.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 
     <tag>
-        <description>Animation</description>
-        <name>autoCompleteAnimation</name>
+        <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
+        <name>autoComplete-animation</name>
         <tag-class>com.kendoui.taglib.autocomplete.AnimationTag</tag-class>
-
         <body-content>empty</body-content>
-
 
     </tag>
 
 
     <tag>
-        <description>Month</description>
-        <name>calendarMonth</name>
+        <description>Templates for the cells rendered in the "month" view.</description>
+        <name>calendar-month</name>
         <tag-class>com.kendoui.taglib.calendar.MonthTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Template to be used for rendering the cells in the "month" view, which are in range.</description>
@@ -2019,18 +2680,30 @@ has been clicked on a window with static content.</description>
 
 
     <tag>
-        <description>CategoryAxis</description>
-        <name>chartCategoryAxis</name>
+        <description>The category axis configuration options.</description>
+        <name>chart-categoryAxis</name>
         <tag-class>com.kendoui.taglib.chart.CategoryAxisTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>Category index at which the first value axis crosses this axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Category indicies at which the value axes cross the category axis.</description>
+            <name>axisCrossingValues</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Array of category names.</description>
+            <name>categories</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -2053,6 +2726,14 @@ Individual color settings for line and labels take priority.</description>
             <name>justified</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The plot bands of category axis.
+The plot band fields:</description>
+            <name>plotBands</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -2080,6 +2761,24 @@ between subsequent categories. Available options:</description>
         </attribute>
 
         <attribute>
+            <description>The last date displayed on the axis.
+By default, the minimum date is the same as the last category.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>The first date displayed on the axis.
+By default, the minimum date is the same as the first category.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
             <description>The visibility of the axis.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2090,12 +2789,10 @@ between subsequent categories. Available options:</description>
 
 
     <tag>
-        <description>Title</description>
-        <name>chartTitle</name>
+        <description>The title of the category axis.</description>
+        <name>chart-title</name>
         <tag-class>com.kendoui.taglib.chart.TitleTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The alignment of the title.</description>
@@ -2122,14 +2819,14 @@ between subsequent categories. Available options:</description>
             <description>The margin of the title.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the title.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2157,12 +2854,11 @@ between subsequent categories. Available options:</description>
 
 
     <tag>
-        <description>Area</description>
-        <name>chartArea</name>
+        <description>The chart area configuration options.
+This is the entire visible area of the chart.</description>
+        <name>chart-area</name>
         <tag-class>com.kendoui.taglib.chart.AreaTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the chart area.</description>
@@ -2175,40 +2871,38 @@ between subsequent categories. Available options:</description>
             <description>The background opacity of the chart area.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The height of the chart area.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The margin of the chart area.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The width of the chart area.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Legend</description>
-        <name>chartLegend</name>
+        <description>The chart legend configuration options.</description>
+        <name>chart-legend</name>
         <tag-class>com.kendoui.taglib.chart.LegendTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the legend. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -2221,7 +2915,7 @@ between subsequent categories. Available options:</description>
             <description>The margin of the legend.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2230,7 +2924,7 @@ For instance, a value of 20 will move the legend 20 pixels to the right of it's 
 to the left of the current position.</description>
             <name>offsetX</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2239,14 +2933,14 @@ For instance, a value of 20 will move the legend 20 pixels down from it's initia
 upwards from the current position.</description>
             <name>offsetY</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the legend.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2267,12 +2961,10 @@ upwards from the current position.</description>
 
 
     <tag>
-        <description>PlotArea</description>
-        <name>chartPlotArea</name>
+        <description>The plot area configuration options. This is the area containing the plotted series.</description>
+        <name>chart-plotArea</name>
         <tag-class>com.kendoui.taglib.chart.PlotAreaTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the plot area.</description>
@@ -2285,37 +2977,33 @@ upwards from the current position.</description>
             <description>The background opacity of the plot area.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The margin of the plot area.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Series</description>
-        <name>chartSeries</name>
+        <description>Array of series definitions.</description>
+        <name>chart-series</name>
         <tag-class>com.kendoui.taglib.chart.SeriesTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
     </tag>
 
 
     <tag>
-        <description>Tooltip</description>
-        <name>chartTooltip</name>
+        <description>The data point tooltip configuration options.</description>
+        <name>chart-tooltip</name>
         <tag-class>com.kendoui.taglib.chart.TooltipTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the tooltip. The default is determined from the series color.</description>
@@ -2349,7 +3037,7 @@ upwards from the current position.</description>
             <description>The padding of the tooltip.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2371,18 +3059,23 @@ Template variables:</description>
 
 
     <tag>
-        <description>XAxis</description>
-        <name>chartXAxis</name>
+        <description>The name of the X axis to use.</description>
+        <name>chart-xAxis</name>
         <tag-class>com.kendoui.taglib.chart.XAxisTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The axis type.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Date at which the Y axis crosses this axis.</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>
@@ -2397,7 +3090,23 @@ The default baseUnit is determined automatically from the value range. Available
             <description>The interval between major divisions in base units.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end date of the axis.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>The start date of the axis.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
 
         <attribute>
@@ -2405,7 +3114,7 @@ The default baseUnit is determined automatically from the value range. Available
 It defaults to 1/5th of the majorUnit.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
 
@@ -2413,25 +3122,23 @@ It defaults to 1/5th of the majorUnit.</description>
 
 
     <tag>
-        <description>SeriesDefaults</description>
-        <name>chartSeriesDefaults</name>
+        <description>Default values for each series.</description>
+        <name>chart-seriesDefaults</name>
         <tag-class>com.kendoui.taglib.chart.SeriesDefaultsTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The distance between category clusters.</description>
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>Space between bars.</description>
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2445,18 +3152,23 @@ It defaults to 1/5th of the majorUnit.</description>
 
 
     <tag>
-        <description>ValueAxis</description>
-        <name>chartValueAxis</name>
+        <description>The value axis configuration options.</description>
+        <name>chart-valueAxis</name>
         <tag-class>com.kendoui.taglib.chart.ValueAxisTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>Value at which the category axis crosses this axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Value indicies at which the category axes cross the value axis.</description>
+            <name>axisCrossingValues</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -2471,7 +3183,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
             <description>The interval between major divisions.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2479,7 +3191,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
 This is often used in combination with the</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2487,7 +3199,7 @@ This is often used in combination with the</description>
 This is often used in combination with the</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2495,7 +3207,15 @@ This is often used in combination with the</description>
 It defaults to 1/5th of the majorUnit.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The plot bands of the value axis.
+The plot band fields:</description>
+            <name>plotBands</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -2517,12 +3237,10 @@ values increase from right to left and from top to bottom.</description>
 
 
     <tag>
-        <description>Labels</description>
-        <name>chartCategoryAxisLabels</name>
+        <description>Configures the axis labels.</description>
+        <name>chart-categoryAxis-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the labels. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -2556,7 +3274,7 @@ values increase from right to left and from top to bottom.</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2572,14 +3290,14 @@ mirroring the axis will render them to the right.</description>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The rotation angle of the labels.</description>
             <name>rotation</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2587,7 +3305,7 @@ mirroring the axis will render them to the right.</description>
 Skips rendering the first n labels.</description>
             <name>skip</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2595,7 +3313,7 @@ Skips rendering the first n labels.</description>
 Every n-th label is rendered where n is the step</description>
             <name>step</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2616,12 +3334,10 @@ Every n-th label is rendered where n is the step</description>
 
 
     <tag>
-        <description>Line</description>
-        <name>chartCategoryAxisLine</name>
+        <description>Configures the axis line. This will also effect major and minor ticks, but not gridlines.</description>
+        <name>chart-categoryAxis-line</name>
         <tag-class>com.kendoui.taglib.chart.LineTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the lines. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -2649,19 +3365,18 @@ Every n-th label is rendered where n is the step</description>
 not the grid lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>MajorGridLines</description>
-        <name>chartCategoryAxisMajorGridLines</name>
+        <description>Configures the major grid lines. These are the lines that are an extension of the major ticks through the
+body of the chart.</description>
+        <name>chart-categoryAxis-majorGridLines</name>
         <tag-class>com.kendoui.taglib.chart.MajorGridLinesTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the lines. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -2688,26 +3403,24 @@ not the grid lines.</description>
             <description>The width of the lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>MajorTicks</description>
-        <name>chartCategoryAxisMajorTicks</name>
+        <description>The major ticks of the axis.</description>
+        <name>chart-categoryAxis-majorTicks</name>
         <tag-class>com.kendoui.taglib.chart.MajorTicksTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2721,12 +3434,11 @@ on the chart.</description>
 
 
     <tag>
-        <description>MinorGridLines</description>
-        <name>chartCategoryAxisMinorGridLines</name>
+        <description>Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
+the body of the chart.</description>
+        <name>chart-categoryAxis-minorGridLines</name>
         <tag-class>com.kendoui.taglib.chart.MinorGridLinesTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the lines. Any valid CSS color string will work here, including hex and
@@ -2754,26 +3466,24 @@ rgb.</description>
             <description>The width of the lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>MinorTicks</description>
-        <name>chartCategoryAxisMinorTicks</name>
+        <description>The minor ticks of the axis.</description>
+        <name>chart-categoryAxis-minorTicks</name>
         <tag-class>com.kendoui.taglib.chart.MinorTicksTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2787,12 +3497,10 @@ on the chart.</description>
 
 
     <tag>
-        <description>Title</description>
-        <name>chartCategoryAxisTitle</name>
+        <description>The title of the category axis.</description>
+        <name>chart-categoryAxis-title</name>
         <tag-class>com.kendoui.taglib.chart.TitleTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the title. Any valid CSS color string will work here, including
@@ -2820,7 +3528,7 @@ hex and rgb.</description>
             <description>The margin of the title.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2834,7 +3542,7 @@ hex and rgb.</description>
             <description>The rotation angle of the title.</description>
             <name>rotation</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2855,12 +3563,10 @@ hex and rgb.</description>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartCategoryAxisLabelsBorder</name>
+        <description>The border of the labels.</description>
+        <name>chart-categoryAxis-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -2880,19 +3586,17 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartCategoryAxisTitleBorder</name>
+        <description>The border of the title.</description>
+        <name>chart-categoryAxis-title-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including
@@ -2913,19 +3617,17 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartTitleBorder</name>
+        <description>The border of the title.</description>
+        <name>chart-title-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -2945,19 +3647,17 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartAreaBorder</name>
+        <description>The border of the chart area.</description>
+        <name>chart-area-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -2977,19 +3677,17 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartLegendBorder</name>
+        <description>The border of the legend.</description>
+        <name>chart-legend-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -3009,19 +3707,17 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Labels</description>
-        <name>chartLegendLabels</name>
+        <description>Configures the legend labels.</description>
+        <name>chart-legend-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the labels.
@@ -3051,12 +3747,10 @@ Template variables:
 
 
     <tag>
-        <description>Border</description>
-        <name>chartPlotAreaBorder</name>
+        <description>The border of the plot area.</description>
+        <name>chart-plotArea-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -3076,19 +3770,24 @@ Template variables:
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>SeriesItem</description>
-        <name>chartSeriesItem</name>
+        <description>Array of series definitions.</description>
+        <name>chart-seriesItem</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemTag</tag-class>
-
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
 
         <attribute>
             <description>The data field containing the series value.</description>
@@ -3140,7 +3839,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The series opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3168,14 +3867,14 @@ The function return value is displayed instead of the individual points.</descri
             <description>The distance between category clusters.</description>
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>Space between bars.</description>
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3189,14 +3888,14 @@ The function return value is displayed instead of the individual points.</descri
             <description>The max size of the bubble.</description>
             <name>maxSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The min size of the bubble.</description>
             <name>minSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3253,7 +3952,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The the size of the donut hole.</description>
             <name>holeSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3261,28 +3960,28 @@ The function return value is displayed instead of the individual points.</descri
 (not available for the last level of the series).</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding around the donut chart (equal on all sides).</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The size of the series.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The start angle of the first donut segment.</description>
             <name>startAngle</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3352,12 +4051,10 @@ The function return value is displayed instead of the individual points.</descri
 
 
     <tag>
-        <description>Labels</description>
-        <name>chartSeriesLabels</name>
+        <description>Configures the series data labels.</description>
+        <name>chart-series-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the labels.</description>
@@ -3391,14 +4088,14 @@ The function return value is displayed instead of the individual points.</descri
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3426,19 +4123,17 @@ The function return value is displayed instead of the individual points.</descri
             <description>The distance of the labels.</description>
             <name>distance</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartSeriesBorder</name>
+        <description>The border of the labels.</description>
+        <name>chart-series-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -3458,19 +4153,17 @@ The function return value is displayed instead of the individual points.</descri
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Line</description>
-        <name>chartSeriesLine</name>
+        <description>The line of the area chart.</description>
+        <name>chart-series-line</name>
         <tag-class>com.kendoui.taglib.chart.LineTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The line color of the area chart.</description>
@@ -3483,7 +4176,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The line opacity of the area chart.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3497,12 +4190,10 @@ The function return value is displayed instead of the individual points.</descri
 
 
     <tag>
-        <description>Markers</description>
-        <name>chartSeriesMarkers</name>
+        <description>Configures the area markers.</description>
+        <name>chart-series-markers</name>
         <tag-class>com.kendoui.taglib.chart.MarkersTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the current series markers.</description>
@@ -3515,7 +4206,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The marker size.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3536,12 +4227,10 @@ The function return value is displayed instead of the individual points.</descri
 
 
     <tag>
-        <description>Tooltip</description>
-        <name>chartSeriesTooltip</name>
+        <description>The data point tooltip configuration options.</description>
+        <name>chart-series-tooltip</name>
         <tag-class>com.kendoui.taglib.chart.TooltipTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the tooltip. The default is determined from the series color.</description>
@@ -3575,7 +4264,7 @@ The function return value is displayed instead of the individual points.</descri
             <description>The padding of the tooltip.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3597,12 +4286,10 @@ Template variables:</description>
 
 
     <tag>
-        <description>Overlay</description>
-        <name>chartSeriesOverlay</name>
+        <description>The effects overlay.</description>
+        <name>chart-series-overlay</name>
         <tag-class>com.kendoui.taglib.chart.OverlayTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The gradient name.</description>
@@ -3615,12 +4302,10 @@ Template variables:</description>
 
 
     <tag>
-        <description>NegativeValues</description>
-        <name>chartSeriesNegativeValues</name>
+        <description>The settings for negative values.</description>
+        <name>chart-series-negativeValues</name>
         <tag-class>com.kendoui.taglib.chart.NegativeValuesTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the negative values.</description>
@@ -3640,12 +4325,10 @@ Template variables:</description>
 
 
     <tag>
-        <description>Connectors</description>
-        <name>chartSeriesConnectors</name>
+        <description>The label connectors options.</description>
+        <name>chart-series-connectors</name>
         <tag-class>com.kendoui.taglib.chart.ConnectorsTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the connector line.</description>
@@ -3658,26 +4341,24 @@ Template variables:</description>
             <description>The padding between the connector line and the label, and connector line and donut chart.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The width of the connector line.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartSeriesLabelsBorder</name>
+        <description>The border of the labels.</description>
+        <name>chart-series-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -3697,19 +4378,17 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartSeriesMarkersBorder</name>
+        <description>The border of the markers.</description>
+        <name>chart-series-markers-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -3722,19 +4401,17 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartSeriesTooltipBorder</name>
+        <description>The border configuration options.</description>
+        <name>chart-series-tooltip-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -3747,19 +4424,17 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartTooltipBorder</name>
+        <description>The border configuration options.</description>
+        <name>chart-tooltip-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -3772,19 +4447,17 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Labels</description>
-        <name>chartXAxisLabels</name>
+        <description>Label settings specific to the date axis.</description>
+        <name>chart-xAxis-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Culture to use for formatting the dates. See</description>
@@ -3797,12 +4470,10 @@ Template variables:</description>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartSeriesDefaultsBorder</name>
+        <description>The border of the series.</description>
+        <name>chart-seriesDefaults-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -3822,19 +4493,17 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Labels</description>
-        <name>chartSeriesDefaultsLabels</name>
+        <description>Configures the series data labels.</description>
+        <name>chart-seriesDefaults-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the labels. Any valid CSS color string will work here,
@@ -3871,14 +4540,14 @@ labels</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3892,12 +4561,10 @@ labels</description>
 
 
     <tag>
-        <description>Tooltip</description>
-        <name>chartSeriesDefaultsTooltip</name>
+        <description>The data point tooltip configuration options.</description>
+        <name>chart-seriesDefaults-tooltip</name>
         <tag-class>com.kendoui.taglib.chart.TooltipTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the tooltip. The default is determined from the series color.</description>
@@ -3931,7 +4598,7 @@ labels</description>
             <description>The padding of the tooltip.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -3953,12 +4620,10 @@ Template variables:</description>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartSeriesDefaultsLabelsBorder</name>
+        <description>The border of the labels.</description>
+        <name>chart-seriesDefaults-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -3978,19 +4643,17 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartSeriesDefaultsTooltipBorder</name>
+        <description>The border configuration options.</description>
+        <name>chart-seriesDefaults-tooltip-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -4003,19 +4666,17 @@ Template variables:</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Labels</description>
-        <name>chartValueAxisLabels</name>
+        <description>Configures the axis labels.</description>
+        <name>chart-valueAxis-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the labels. Any valid CSS color string will work here, including
@@ -4050,7 +4711,7 @@ hex and rgb</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4066,14 +4727,14 @@ mirroring the axis will render them to the right.</description>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The rotation angle of the labels.</description>
             <name>rotation</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4081,7 +4742,7 @@ mirroring the axis will render them to the right.</description>
 Skips rendering the first n labels.</description>
             <name>skip</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4089,7 +4750,7 @@ Skips rendering the first n labels.</description>
 Every n-th label is rendered where n is the step</description>
             <name>step</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4103,12 +4764,10 @@ Every n-th label is rendered where n is the step</description>
 
 
     <tag>
-        <description>Line</description>
-        <name>chartValueAxisLine</name>
+        <description>Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.</description>
+        <name>chart-valueAxis-line</name>
         <tag-class>com.kendoui.taglib.chart.LineTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the line. This will also effect the major and minor ticks, but
@@ -4137,19 +4796,18 @@ not the grid lines.</description>
 not the grid lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>MajorGridLines</description>
-        <name>chartValueAxisMajorGridLines</name>
+        <description>Configures the major grid lines. These are the lines that are an extension of the major ticks through the
+body of the chart.</description>
+        <name>chart-valueAxis-majorGridLines</name>
         <tag-class>com.kendoui.taglib.chart.MajorGridLinesTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the lines.</description>
@@ -4169,25 +4827,23 @@ not the grid lines.</description>
             <description>The width of the lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>MajorTicks</description>
-        <name>chartValueAxisMajorTicks</name>
+        <description>The major ticks of the axis.</description>
+        <name>chart-valueAxis-majorTicks</name>
         <tag-class>com.kendoui.taglib.chart.MajorTicksTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4201,12 +4857,10 @@ not the grid lines.</description>
 
 
     <tag>
-        <description>MinorGridLines</description>
-        <name>chartValueAxisMinorGridLines</name>
+        <description>Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through the</description>
+        <name>chart-valueAxis-minorGridLines</name>
         <tag-class>com.kendoui.taglib.chart.MinorGridLinesTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the lines.</description>
@@ -4233,25 +4887,23 @@ not the grid lines.</description>
             <description>The width of the lines.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>MinorTicks</description>
-        <name>chartValueAxisMinorTicks</name>
+        <description>The minor ticks of the axis.</description>
+        <name>chart-valueAxis-minorTicks</name>
         <tag-class>com.kendoui.taglib.chart.MinorTicksTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4265,12 +4917,10 @@ not the grid lines.</description>
 
 
     <tag>
-        <description>Title</description>
-        <name>chartValueAxisTitle</name>
+        <description>The title of the value axis.</description>
+        <name>chart-valueAxis-title</name>
         <tag-class>com.kendoui.taglib.chart.TitleTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the title. Any valid CSS color string will work here, including
@@ -4298,14 +4948,14 @@ hex and rgb.</description>
             <description>The margin of the title.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the title.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4319,7 +4969,7 @@ hex and rgb.</description>
             <description>The rotation angle of the title.</description>
             <name>rotation</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4340,12 +4990,10 @@ hex and rgb.</description>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartValueAxisLabelsBorder</name>
+        <description>The border of the labels.</description>
+        <name>chart-valueAxis-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including
@@ -4366,19 +5014,17 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>chartValueAxisTitleBorder</name>
+        <description>The border of the title.</description>
+        <name>chart-valueAxis-title-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.</description>
@@ -4398,90 +5044,70 @@ hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Animation</description>
-        <name>comboBoxAnimation</name>
+        <description>Animations to be used for opening/closing the popup. Setting to false will turn off the animation.</description>
+        <name>comboBox-animation</name>
         <tag-class>com.kendoui.taglib.combobox.AnimationTag</tag-class>
-
         <body-content>empty</body-content>
-
 
     </tag>
 
 
     <tag>
-        <description>Animation</description>
-        <name>datePickerAnimation</name>
-        <tag-class>com.kendoui.taglib.datepicker.AnimationTag</tag-class>
-
+        <description>Set the object responsible for describing the raw data format.</description>
+        <name>dataSource-schema</name>
+        <tag-class>com.kendoui.taglib.datasource.SchemaTag</tag-class>
         <body-content>empty</body-content>
-
-
-    </tag>
-
-
-    <tag>
-        <description>Month</description>
-        <name>datePickerMonth</name>
-        <tag-class>com.kendoui.taglib.datepicker.MonthTag</tag-class>
-
-        <body-content>empty</body-content>
-
 
         <attribute>
-            <description>Template to be used for rendering the cells in the calendar "month" view, which are in range.</description>
-            <name>content</name>
+            <description>Specifies the field from the response which contains the aggregate results. If set to a function - the function will be called to
+return the aggregate results for the current response.</description>
+            <name>aggregates</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The template used for rendering the cells in the calendar "month" view, which are not in the range between
-the minimum and maximum values.</description>
-            <name>empty</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Animation</description>
-        <name>dateTimePickerAnimation</name>
-        <tag-class>com.kendoui.taglib.datetimepicker.AnimationTag</tag-class>
-
-        <body-content>empty</body-content>
-
-
-    </tag>
-
-
-    <tag>
-        <description>Month</description>
-        <name>dateTimePickerMonth</name>
-        <tag-class>com.kendoui.taglib.datetimepicker.MonthTag</tag-class>
-
-        <body-content>empty</body-content>
-
-
-        <attribute>
-            <description>Template to be used for rendering the cells in the calendar "month" view, which are in range.</description>
-            <name>content</name>
+            <description>Specifies the field from the response which contains the data items. If set to a function - the function will be called to
+return the data items for the current response.</description>
+            <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The template used for rendering the cells in the calendar "month" view, which are not in the range between
-the minimum and maximum values.</description>
-            <name>empty</name>
+            <description>Specifies the field from the response which contains any errors. If set to a function - the function will be called to
+return the errors for the current response (if present). If there are any errors the</description>
+            <name>errors</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the field from the response which contains the groups. If set to a function - the function will be called to
+return the groups for the current response.</description>
+            <name>groups</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the field from the response which contains the total number of data items. If set to a function - the function will be called to
+return the total number of data items for the current response.</description>
+            <name>total</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specify the type of the response - XML or JSON. The only supported values are</description>
+            <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4490,34 +5116,307 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Animation</description>
-        <name>dropDownListAnimation</name>
-        <tag-class>com.kendoui.taglib.dropdownlist.AnimationTag</tag-class>
-
-        <body-content>empty</body-content>
-
-
-    </tag>
-
-
-    <tag>
-        <description>Columns</description>
-        <name>gridColumns</name>
-        <tag-class>com.kendoui.taglib.grid.ColumnsTag</tag-class>
-
+        <description>Specifies the settings for loading and saving data. This can be a remote or local/in-memory data.</description>
+        <name>dataSource-transport</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>Options for remote create data operation, or the URL of the remote service.</description>
+            <name>create</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Options for remote destroy data operation, or the URL of the remote service.</description>
+            <name>destroy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Options for remote read data operation, or the URL of the remote service.</description>
+            <name>read</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Options for remote update data operation, or the URL of the remote service.</description>
+            <name>update</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Sortable</description>
-        <name>gridSortable</name>
-        <tag-class>com.kendoui.taglib.grid.SortableTag</tag-class>
-
+        <description>Options for remote create data operation, or the URL of the remote service.</description>
+        <name>dataSource-transport-create</name>
+        <tag-class>com.kendoui.taglib.datasource.CreateTag</tag-class>
         <body-content>empty</body-content>
 
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of request to make (</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Options for remote destroy data operation, or the URL of the remote service.</description>
+        <name>dataSource-transport-destroy</name>
+        <tag-class>com.kendoui.taglib.datasource.DestroyTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of request to make (</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Options for remote read data operation, or the URL of the remote service.</description>
+        <name>dataSource-transport-read</name>
+        <tag-class>com.kendoui.taglib.datasource.ReadTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of request to make (</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Options for remote update data operation, or the URL of the remote service.</description>
+        <name>dataSource-transport-update</name>
+        <tag-class>com.kendoui.taglib.datasource.UpdateTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The type of request to make (</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation(s) used for opening and/or closing the pop-up. Setting this value to</description>
+        <name>datePicker-animation</name>
+        <tag-class>com.kendoui.taglib.datepicker.AnimationTag</tag-class>
+        <body-content>empty</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Templates for the cells rendered in the calendar "month" view.</description>
+        <name>datePicker-month</name>
+        <tag-class>com.kendoui.taglib.datepicker.MonthTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Template to be used for rendering the cells in the calendar "month" view, which are in range.</description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The template used for rendering the cells in the calendar "month" view, which are not in the range between
+the minimum and maximum values.</description>
+            <name>empty</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation(s) used for opening and/or closing the pop-ups. Setting this value to</description>
+        <name>dateTimePicker-animation</name>
+        <tag-class>com.kendoui.taglib.datetimepicker.AnimationTag</tag-class>
+        <body-content>empty</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Templates for the cells rendered in the calendar "month" view.</description>
+        <name>dateTimePicker-month</name>
+        <tag-class>com.kendoui.taglib.datetimepicker.MonthTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Template to be used for rendering the cells in the calendar "month" view, which are in range.</description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The template used for rendering the cells in the calendar "month" view, which are not in the range between
+the minimum and maximum values.</description>
+            <name>empty</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
+        <name>dropDownList-animation</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.AnimationTag</tag-class>
+        <body-content>empty</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
+        <name>grid-columns</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies whether given column is sortable.</description>
+        <name>grid-sortable</name>
+        <tag-class>com.kendoui.taglib.grid.SortableTag</tag-class>
+        <body-content>empty</body-content>
 
         <attribute>
             <description>Defines whether column can have unsorted state.</description>
@@ -4537,12 +5436,10 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Editable</description>
-        <name>gridEditable</name>
+        <description>Indicates whether editing is enabled/disabled.</description>
+        <name>grid-editable</name>
         <tag-class>com.kendoui.taglib.grid.EditableTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Defines the text that will be used in confirmation box when delete an item.</description>
@@ -4583,29 +5480,25 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Groupable</description>
-        <name>gridGroupable</name>
+        <description>Indicates whether grouping is enabled/disabled.</description>
+        <name>grid-groupable</name>
         <tag-class>com.kendoui.taglib.grid.GroupableTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
     </tag>
 
 
     <tag>
-        <description>Pageable</description>
-        <name>gridPageable</name>
+        <description>Indicates whether paging is enabled/disabled.</description>
+        <name>grid-pageable</name>
         <tag-class>com.kendoui.taglib.grid.PageableTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>Defines the number of records which will be displyed.</description>
             <name>pageSize</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4626,7 +5519,7 @@ the minimum and maximum values.</description>
             <description>Defines the number of buttons displayed in the numeric pager.</description>
             <name>buttonCount</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4661,23 +5554,20 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Toolbar</description>
-        <name>gridToolbar</name>
+        <description>This is a list of commands for which the corresponding buttons will be rendered.
+The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+        <name>grid-toolbar</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
     </tag>
 
 
     <tag>
-        <description>Column</description>
-        <name>gridColumn</name>
+        <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
+        <name>grid-column</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
@@ -4746,12 +5636,10 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Messages</description>
-        <name>gridGroupableMessages</name>
+        <description>Sets the messages displayed during grouping.</description>
+        <name>grid-groupable-messages</name>
         <tag-class>com.kendoui.taglib.grid.MessagesTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Sets the text of the empty grouping area message</description>
@@ -4764,12 +5652,10 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Messages</description>
-        <name>gridPageableMessages</name>
+        <description>Defines texts shown within the pager.</description>
+        <name>grid-pageable-messages</name>
         <tag-class>com.kendoui.taglib.grid.MessagesTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Defines the info text.</description>
@@ -4845,12 +5731,11 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>ToolbarItem</description>
-        <name>gridToolbarItem</name>
+        <description>This is a list of commands for which the corresponding buttons will be rendered.
+The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+        <name>grid-toolbarItem</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The name of the command. One of the predefined or a custom.</description>
@@ -4877,44 +5762,41 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>GaugeArea</description>
-        <name>linearGaugeGaugeArea</name>
+        <description>The gauge area configuration options.
+This is the entire visible area of the gauge.</description>
+        <name>linearGauge-gaugeArea</name>
         <tag-class>com.kendoui.taglib.lineargauge.GaugeAreaTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The height of the gauge area.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The margin of the gauge area.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The width of the gauge area.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Pointer</description>
-        <name>linearGaugePointer</name>
+        <description>The pointer configuration options.</description>
+        <name>linearGauge-pointer</name>
         <tag-class>com.kendoui.taglib.lineargauge.PointerTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The color of the pointer.</description>
@@ -4927,7 +5809,7 @@ the minimum and maximum values.</description>
             <description>The margin of the pointer.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4935,7 +5817,7 @@ the minimum and maximum values.</description>
 Any valid CSS color string will work here, including hex and rgb.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4949,53 +5831,51 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The size of the pointer.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The value of the gauge.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Scale</description>
-        <name>linearGaugeScale</name>
+        <description>Configures the scale.</description>
+        <name>linearGauge-scale</name>
         <tag-class>com.kendoui.taglib.lineargauge.ScaleTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The interval between major divisions.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum value of the scale.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum value of the scale.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The interval between minor divisions.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5004,6 +5884,14 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
             <name>mirror</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The ranges of the scale.
+The range fields:</description>
+            <name>ranges</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -5024,12 +5912,10 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
 
 
     <tag>
-        <description>Border</description>
-        <name>linearGaugeGaugeAreaBorder</name>
+        <description>The border of the gauge area.</description>
+        <name>linearGauge-gaugeArea-border</name>
         <tag-class>com.kendoui.taglib.lineargauge.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -5049,19 +5935,17 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>linearGaugePointerBorder</name>
+        <description>The border of the pointer.</description>
+        <name>linearGauge-pointer-border</name>
         <tag-class>com.kendoui.taglib.lineargauge.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border.
@@ -5082,19 +5966,18 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Track</description>
-        <name>linearGaugePointerTrack</name>
+        <description>The element arround/under the pointer.
+(available only for 'barIndicator' shape)</description>
+        <name>linearGauge-pointer-track</name>
         <tag-class>com.kendoui.taglib.lineargauge.TrackTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The color of the track.</description>
@@ -5107,14 +5990,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The opacity of the track.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The size of the track.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5128,12 +6011,10 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
 
     <tag>
-        <description>Border</description>
-        <name>linearGaugePointerTrackBorder</name>
+        <description>The border of the track.</description>
+        <name>linearGauge-pointer-track-border</name>
         <tag-class>com.kendoui.taglib.lineargauge.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -5153,19 +6034,17 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Labels</description>
-        <name>linearGaugeScaleLabels</name>
+        <description>Configures the scale labels.</description>
+        <name>linearGauge-scale-labels</name>
         <tag-class>com.kendoui.taglib.lineargauge.LabelsTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the labels.
@@ -5201,14 +6080,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5222,12 +6101,10 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
 
     <tag>
-        <description>MajorTicks</description>
-        <name>linearGaugeScaleMajorTicks</name>
+        <description>Configures the scale major ticks.</description>
+        <name>linearGauge-scale-majorTicks</name>
         <tag-class>com.kendoui.taglib.lineargauge.MajorTicksTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the major ticks.
@@ -5242,7 +6119,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5256,19 +6133,17 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the major ticks.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>MinorTicks</description>
-        <name>linearGaugeScaleMinorTicks</name>
+        <description>Configures the scale minor ticks.</description>
+        <name>linearGauge-scale-minorTicks</name>
         <tag-class>com.kendoui.taglib.lineargauge.MinorTicksTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the minor ticks.
@@ -5283,7 +6158,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5297,19 +6172,17 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the minor ticks.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>linearGaugeScaleLabelsBorder</name>
+        <description>The border of the labels.</description>
+        <name>linearGauge-scale-labels-border</name>
         <tag-class>com.kendoui.taglib.lineargauge.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -5329,30 +6202,51 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Animation</description>
-        <name>menuAnimation</name>
+        <description>A collection of</description>
+        <name>menu-animation</name>
         <tag-class>com.kendoui.taglib.menu.AnimationTag</tag-class>
-
         <body-content>empty</body-content>
-
 
     </tag>
 
 
     <tag>
-        <description>Messages</description>
-        <name>pagerMessages</name>
+        <description>Contains items of Menu</description>
+        <name>menu-items</name>
+        <tag-class>com.kendoui.taglib.menu.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Contains items of Menu</description>
+        <name>menu-item</name>
+        <tag-class>com.kendoui.taglib.menu.ItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies the text displayed by the item</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines texts shown within the pager.</description>
+        <name>pager-messages</name>
         <tag-class>com.kendoui.taglib.pager.MessagesTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Defines the info text.</description>
@@ -5428,29 +6322,34 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
-        <description>Animation</description>
-        <name>panelBarAnimation</name>
+        <description>A collection of visual animations used when</description>
+        <name>panelBar-animation</name>
         <tag-class>com.kendoui.taglib.panelbar.AnimationTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
     </tag>
 
 
     <tag>
-        <description>Close</description>
-        <name>panelBarAnimationClose</name>
+        <description>Contains items of PanelBar</description>
+        <name>panelBar-items</name>
+        <tag-class>com.kendoui.taglib.panelbar.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>The visual animation(s) that will be used when</description>
+        <name>panelBar-animation-close</name>
         <tag-class>com.kendoui.taglib.panelbar.CloseTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The number of milliseconds used for the visual animation when a</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5464,18 +6363,16 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
-        <description>Open</description>
-        <name>panelBarAnimationOpen</name>
+        <description>The visual animation(s) that will be used when opening items.</description>
+        <name>panelBar-animation-open</name>
         <tag-class>com.kendoui.taglib.panelbar.OpenTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The number of milliseconds used for the visual animation when an item is opened.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5496,44 +6393,57 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
-        <description>GaugeArea</description>
-        <name>radialGaugeGaugeArea</name>
-        <tag-class>com.kendoui.taglib.radialgauge.GaugeAreaTag</tag-class>
-
+        <description>Contains items of PanelBar</description>
+        <name>panelBar-item</name>
+        <tag-class>com.kendoui.taglib.panelbar.ItemTag</tag-class>
         <body-content>JSP</body-content>
 
-
         <attribute>
-            <description>The height of the gauge area.</description>
-            <name>height</name>
+            <description>Specifies the text displayed by the item</description>
+            <name>text</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The margin of the gauge area.</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-
-        <attribute>
-            <description>The width of the gauge area.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Pointer</description>
-        <name>radialGaugePointer</name>
-        <tag-class>com.kendoui.taglib.radialgauge.PointerTag</tag-class>
-
+        <description>The gauge area configuration options.
+This is the entire visible area of the gauge.</description>
+        <name>radialGauge-gaugeArea</name>
+        <tag-class>com.kendoui.taglib.radialgauge.GaugeAreaTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>The height of the gauge area.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the gauge area.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the gauge area.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The pointer configuration options.</description>
+        <name>radialGauge-pointer</name>
+        <tag-class>com.kendoui.taglib.radialgauge.PointerTag</tag-class>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the pointer.
@@ -5547,54 +6457,60 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The value of the gauge.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Scale</description>
-        <name>radialGaugeScale</name>
+        <description>Configures the scale.</description>
+        <name>radialGauge-scale</name>
         <tag-class>com.kendoui.taglib.radialgauge.ScaleTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The end angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)</description>
             <name>endAngle</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The interval between major divisions.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The maximum value of the scale.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The minimum value of the scale.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The interval between minor divisions.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The ranges of the scale.
+The range fields:</description>
+            <name>ranges</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -5609,19 +6525,17 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)</description>
             <name>startAngle</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>radialGaugeGaugeAreaBorder</name>
+        <description>The border of the gauge area.</description>
+        <name>radialGauge-gaugeArea-border</name>
         <tag-class>com.kendoui.taglib.radialgauge.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -5641,19 +6555,17 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Cap</description>
-        <name>radialGaugePointerCap</name>
+        <description>The cap configuration options.</description>
+        <name>radialGauge-pointer-cap</name>
         <tag-class>com.kendoui.taglib.radialgauge.CapTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the cap.
@@ -5667,19 +6579,17 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The size of the cap in percents. (from 0 to 1)</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Labels</description>
-        <name>radialGaugeScaleLabels</name>
+        <description>Configures the scale labels.</description>
+        <name>radialGauge-scale-labels</name>
         <tag-class>com.kendoui.taglib.radialgauge.LabelsTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
         <attribute>
             <description>The background color of the labels.
@@ -5715,14 +6625,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The margin of the labels.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
             <description>The padding of the labels.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5743,12 +6653,10 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
 
     <tag>
-        <description>MajorTicks</description>
-        <name>radialGaugeScaleMajorTicks</name>
+        <description>Configures the scale major ticks.</description>
+        <name>radialGauge-scale-majorTicks</name>
         <tag-class>com.kendoui.taglib.radialgauge.MajorTicksTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the major ticks.</description>
@@ -5762,7 +6670,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5777,19 +6685,17 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>The width of the major ticks.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>MinorTicks</description>
-        <name>radialGaugeScaleMinorTicks</name>
+        <description>Configures the scale minor ticks.</description>
+        <name>radialGauge-scale-minorTicks</name>
         <tag-class>com.kendoui.taglib.radialgauge.MinorTicksTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the minor ticks.
@@ -5804,7 +6710,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -5818,19 +6724,17 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the minor ticks.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Border</description>
-        <name>radialGaugeScaleLabelsBorder</name>
+        <description>The border of the labels.</description>
+        <name>radialGauge-scale-labels-border</name>
         <tag-class>com.kendoui.taglib.radialgauge.BorderTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including hex and rgb.</description>
@@ -5850,19 +6754,17 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Tooltip</description>
-        <name>rangeSliderTooltip</name>
+        <description>Configuration of the</description>
+        <name>rangeSlider-tooltip</name>
         <tag-class>com.kendoui.taglib.rangeslider.TooltipTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Disables (</description>
@@ -5890,12 +6792,10 @@ the</description>
 
 
     <tag>
-        <description>Tooltip</description>
-        <name>sliderTooltip</name>
+        <description>Configuration of the</description>
+        <name>slider-tooltip</name>
         <tag-class>com.kendoui.taglib.slider.TooltipTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Disables (</description>
@@ -5923,23 +6823,19 @@ format will also influence the appearance of the</description>
 
 
     <tag>
-        <description>Panes</description>
-        <name>splitterPanes</name>
+        <description>An array of pane definitions.</description>
+        <name>splitter-panes</name>
         <tag-class>com.kendoui.taglib.splitter.PanesTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
     </tag>
 
 
     <tag>
-        <description>Pane</description>
-        <name>splitterPane</name>
+        <description>An array of pane definitions.</description>
+        <name>splitter-pane</name>
         <tag-class>com.kendoui.taglib.splitter.PaneTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Specifies whether a pane is initially collapsed (</description>
@@ -6004,29 +6900,34 @@ value must not exceed</description>
 
 
     <tag>
-        <description>Animation</description>
-        <name>tabStripAnimation</name>
+        <description>A collection of visual animations used when</description>
+        <name>tabStrip-animation</name>
         <tag-class>com.kendoui.taglib.tabstrip.AnimationTag</tag-class>
-
         <body-content>JSP</body-content>
-
 
     </tag>
 
 
     <tag>
-        <description>Close</description>
-        <name>tabStripAnimationClose</name>
+        <description>Contains items of TabStrip</description>
+        <name>tabStrip-items</name>
+        <tag-class>com.kendoui.taglib.tabstrip.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>The visual animation(s) that will be used when the current tab is closed.</description>
+        <name>tabStrip-animation-close</name>
         <tag-class>com.kendoui.taglib.tabstrip.CloseTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The number of milliseconds used for the visual animation when the current tab is closed.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -6041,18 +6942,16 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
 
     <tag>
-        <description>Open</description>
-        <name>tabStripAnimationOpen</name>
+        <description>The visual animation(s) that will be used when the new tab is shown.</description>
+        <name>tabStrip-animation-open</name>
         <tag-class>com.kendoui.taglib.tabstrip.OpenTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The number of milliseconds used for the visual animation when a new tab is shown.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -6073,40 +6972,60 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
 
     <tag>
-        <description>Animation</description>
-        <name>timePickerAnimation</name>
-        <tag-class>com.kendoui.taglib.timepicker.AnimationTag</tag-class>
-
-        <body-content>empty</body-content>
-
-
-    </tag>
-
-
-    <tag>
-        <description>Animation</description>
-        <name>treeViewAnimation</name>
-        <tag-class>com.kendoui.taglib.treeview.AnimationTag</tag-class>
-
+        <description>Contains items of TabStrip</description>
+        <name>tabStrip-item</name>
+        <tag-class>com.kendoui.taglib.tabstrip.ItemTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>Specifies the text displayed by the item</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Collapse</description>
-        <name>treeViewAnimationCollapse</name>
-        <tag-class>com.kendoui.taglib.treeview.CollapseTag</tag-class>
-
+        <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
+        <name>timePicker-animation</name>
+        <tag-class>com.kendoui.taglib.timepicker.AnimationTag</tag-class>
         <body-content>empty</body-content>
 
+    </tag>
+
+
+    <tag>
+        <description>A collection of visual animations used when items are expanded or collapsed through user interaction.
+Setting this option to</description>
+        <name>treeView-animation</name>
+        <tag-class>com.kendoui.taglib.treeview.AnimationTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Contains items of TreeView</description>
+        <name>treeView-items</name>
+        <tag-class>com.kendoui.taglib.treeview.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation that will be used when collapsing items.</description>
+        <name>treeView-animation-collapse</name>
+        <tag-class>com.kendoui.taglib.treeview.CollapseTag</tag-class>
+        <body-content>empty</body-content>
 
         <attribute>
             <description>The number of milliseconds used for the animation when a node is expanded.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -6120,19 +7039,17 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
 
     <tag>
-        <description>Expand</description>
-        <name>treeViewAnimationExpand</name>
+        <description>The animation that will be used when expanding items.</description>
+        <name>treeView-animation-expand</name>
         <tag-class>com.kendoui.taglib.treeview.ExpandTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The number of milliseconds used for the animation when a
 node is expanded.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -6153,12 +7070,26 @@ node is expanded.</description>
 
 
     <tag>
-        <description>Async</description>
-        <name>uploadAsync</name>
+        <description>Contains items of TreeView</description>
+        <name>treeView-item</name>
+        <tag-class>com.kendoui.taglib.treeview.ItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies the text displayed by the item</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Configures the ability to upload a file(s) in an asynchronous manner. Please refer to the</description>
+        <name>upload-async</name>
         <tag-class>com.kendoui.taglib.upload.AsyncTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>The selected files will be uploaded immediately by default. You can change this behavior by setting
@@ -6217,12 +7148,10 @@ containing one or more fields with the same name as the original input name.</de
 
 
     <tag>
-        <description>Localization</description>
-        <name>uploadLocalization</name>
+        <description>Sets the strings rendered by the Upload.</description>
+        <name>upload-localization</name>
         <tag-class>com.kendoui.taglib.upload.LocalizationTag</tag-class>
-
         <body-content>empty</body-content>
-
 
         <attribute>
             <description>Sets the text of the cancel button text.</description>
@@ -6291,146 +7220,61 @@ containing one or more fields with the same name as the original input name.</de
 
 
     <tag>
-        <description>Animation</description>
-        <name>windowAnimation</name>
+        <description>A collection of {Animation} objects, used to change default animations. A value of</description>
+        <name>window-animation</name>
         <tag-class>com.kendoui.taglib.window.AnimationTag</tag-class>
-
         <body-content>empty</body-content>
-
-
-    </tag>
-
-
-    <tag>
-        <description>Content</description>
-        <name>windowContent</name>
-        <tag-class>com.kendoui.taglib.window.ContentTag</tag-class>
-
-        <body-content>empty</body-content>
-
-
-        <attribute>
-            <description>Template for the content of a</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
 
     </tag>
 
 
 <!-- Auto-generated -->
+	<tag>
+		<description>PanelBar Item content</description>
+		<name>panelBar-item-content</name>
+		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
 
 	<tag>
-	    <description>PanelBar Item</description>
-        <name>panelBarItem</name>
-        <tag-class>com.kendoui.taglib.PanelBarItemTag</tag-class>
+		<description>TabStrip Item content</description>
+		<name>tabStrip-item-content</name>
+		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	
+	<tag>
+		<description>Menu Item content</description>
+		<name>menu-item-content</name>
+		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>	
+	
+	<tag>
+		<description>TreeView Item content</description>
+		<name>treeView-item-content</name>
+		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	
+	<tag>
+		<description>Window content</description>
+		<name>window-content</name>
+		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	
+	<tag>
+        <description>PanelBar child items</description>
+        <name>panelBar-item-items</name>
+        <tag-class>com.kendoui.taglib.panelbar.ItemsTag</tag-class>
         <body-content>JSP</body-content>
-        <attribute>
-            <name>text</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-    </tag>
-
-
-    <tag>
-        <description>DataSource</description>
-        <name>dataSource</name>
-        <tag-class>com.kendoui.taglib.DataSourceTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <name>type</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <name>serverFiltering</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>serverPaging</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>serverSorting</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>serverGrouping</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>pageSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>int</type>
-        </attribute>
-        <attribute>
-            <name>batch</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>sendAllFields</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <name>change</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>error</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>sync</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>requestStart</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>requestEnd</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-    </tag>
-
-    <tag>
-        <description>DataSource Transport</description>
-        <name>transport</name>
-        <tag-class>com.kendoui.taglib.datasource.TransportTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>Transport Read</description>
-        <name>read</name>
-        <tag-class>com.kendoui.taglib.datasource.ReadTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <name>url</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
     </tag>
     
-    <tag>
-        <description>Represents an event of a Kendo widget or DataSource</description>
-        <name>event</name>
-        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+	<tag>
+        <description>TreeView child items</description>
+        <name>treeView-item-items</name>
+        <tag-class>com.kendoui.taglib.treeview.ItemsTag</tag-class>
         <body-content>JSP</body-content>
-        <attribute>
-            <name>name</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
     </tag>
 </taglib>

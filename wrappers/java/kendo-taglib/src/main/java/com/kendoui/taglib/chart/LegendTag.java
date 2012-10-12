@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class LegendTag extends BaseTag /* interfaces */implements Border, Labels/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Legend parent = (Legend)findParentWithClass(Legend.class);
 
         parent.setLegend(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -37,35 +58,35 @@ public class LegendTag extends BaseTag /* interfaces */implements Border, Labels
         setProperty("background", value);
     }
 
-    public int getMargin() {
-        return (int)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(int value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
-    public int getOffsetX() {
-        return (int)getProperty("offsetX");
+    public float getOffsetX() {
+        return (float)getProperty("offsetX");
     }
 
-    public void setOffsetX(int value) {
+    public void setOffsetX(float value) {
         setProperty("offsetX", value);
     }
 
-    public int getOffsetY() {
-        return (int)getProperty("offsetY");
+    public float getOffsetY() {
+        return (float)getProperty("offsetY");
     }
 
-    public void setOffsetY(int value) {
+    public void setOffsetY(float value) {
         setProperty("offsetY", value);
     }
 
-    public int getPadding() {
-        return (int)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(int value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 
@@ -86,4 +107,5 @@ public class LegendTag extends BaseTag /* interfaces */implements Border, Labels
     }
 
 //<< Attributes
+
 }

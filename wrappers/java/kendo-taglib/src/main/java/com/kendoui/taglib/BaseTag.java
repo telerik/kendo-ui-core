@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
+import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import com.kendoui.taglib.json.Serializable;
@@ -20,6 +21,16 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
         initialize();
         
         super.setPageContext(context);
+    }
+    
+    public String body() {
+        BodyContent body = getBodyContent();
+        
+        if (body != null) {
+            return body.getString();
+        }
+        
+        return "";
     }
     
     public void initialize() {

@@ -8,11 +8,38 @@ import com.kendoui.taglib.chart.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis, Title, Area, Legend, PlotArea, Series, Tooltip, XAxis, SeriesDefaults, ValueAxis, DataBoundWidget/* interfaces */ {
 
     public ChartTag() {
         super("Chart");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -44,7 +71,9 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     @Override
     public void setSeries(SeriesTag value) {
+
         setProperty("series", value.series());
+
     }
 
     @Override
@@ -69,7 +98,15 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
+    }
+
+    public Object getSeriesColors() {
+        return (Object)getProperty("seriesColors");
+    }
+
+    public void setSeriesColors(Object value) {
+        setProperty("seriesColors", value);
     }
 
     public String getTheme() {
@@ -129,4 +166,5 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
     }
 
 //<< Attributes
+
 }

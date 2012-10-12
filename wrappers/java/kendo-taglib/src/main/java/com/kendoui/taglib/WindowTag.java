@@ -1,16 +1,20 @@
+
 package com.kendoui.taglib;
 
-import javax.servlet.jsp.tagext.BodyContent;
-
-import com.kendoui.taglib.html.Div;
-import com.kendoui.taglib.html.Element;
 
 import com.kendoui.taglib.window.*;
 
+
+import com.kendoui.taglib.html.Div;
+import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.json.Function;
 
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyContent;
+
 @SuppressWarnings("serial")
-public class WindowTag extends WidgetTag /* interfaces */implements Animation, Content/* interfaces */ {
+public class WindowTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
 
     public WindowTag() {
         super("Window");
@@ -26,6 +30,30 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation, C
 
         return element;
     }
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
 
 //>> Attributes
 
@@ -34,17 +62,12 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation, C
         setProperty("animation", value.properties());
     }
 
-    @Override
-    public void setContent(ContentTag value) {
-        setProperty("content", value.properties());
+    public Object getActions() {
+        return (Object)getProperty("actions");
     }
 
-    public String getContent() {
-        return (String)getProperty("content");
-    }
-
-    public void setContent(String value) {
-        setProperty("content", value);
+    public void setActions(Object value) {
+        setProperty("actions", value);
     }
 
     public boolean getDraggable() {
@@ -63,35 +86,35 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation, C
         setProperty("iframe", value);
     }
 
-    public int getMaxHeight() {
-        return (int)getProperty("maxHeight");
+    public float getMaxHeight() {
+        return (float)getProperty("maxHeight");
     }
 
-    public void setMaxHeight(int value) {
+    public void setMaxHeight(float value) {
         setProperty("maxHeight", value);
     }
 
-    public int getMaxWidth() {
-        return (int)getProperty("maxWidth");
+    public float getMaxWidth() {
+        return (float)getProperty("maxWidth");
     }
 
-    public void setMaxWidth(int value) {
+    public void setMaxWidth(float value) {
         setProperty("maxWidth", value);
     }
 
-    public int getMinHeight() {
-        return (int)getProperty("minHeight");
+    public float getMinHeight() {
+        return (float)getProperty("minHeight");
     }
 
-    public void setMinHeight(int value) {
+    public void setMinHeight(float value) {
         setProperty("minHeight", value);
     }
 
-    public int getMinWidth() {
-        return (int)getProperty("minWidth");
+    public float getMinWidth() {
+        return (float)getProperty("minWidth");
     }
 
-    public void setMinWidth(int value) {
+    public void setMinWidth(float value) {
         setProperty("minWidth", value);
     }
 
@@ -200,4 +223,5 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation, C
     }
 
 //<< Attributes
+
 }

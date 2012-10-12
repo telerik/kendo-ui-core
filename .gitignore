@@ -35,7 +35,7 @@ ive/
 node_modules
 release/
 sitefinity-docs/
-tags
+./tags
 functional-tests/Results/
 functional-tests/**/**/Profiler Configurations/
 functional-tests/**/Backup/
@@ -64,5 +64,6 @@ wrappers/mvc/demos/**/App_Data
 Guardfile
 playground/chart*
 wrappers/java/**/target
+wrappers/java/spring-demos/src/main/webapp/resources
 wrappers/java/target
 demos/KendoCRUDService/KendoCRUDService/Content/UserFiles

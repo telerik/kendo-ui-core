@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class SeriesDefaultsTag extends BaseTag /* interfaces */implements Border, Labels, Tooltip/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         SeriesDefaults parent = (SeriesDefaults)findParentWithClass(SeriesDefaults.class);
 
         parent.setSeriesDefaults(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setBorder(BorderTag value) {
@@ -34,19 +55,19 @@ public class SeriesDefaultsTag extends BaseTag /* interfaces */implements Border
         setProperty("tooltip", value.properties());
     }
 
-    public int getGap() {
-        return (int)getProperty("gap");
+    public float getGap() {
+        return (float)getProperty("gap");
     }
 
-    public void setGap(int value) {
+    public void setGap(float value) {
         setProperty("gap", value);
     }
 
-    public int getSpacing() {
-        return (int)getProperty("spacing");
+    public float getSpacing() {
+        return (float)getProperty("spacing");
     }
 
-    public void setSpacing(int value) {
+    public void setSpacing(float value) {
         setProperty("spacing", value);
     }
 
@@ -59,4 +80,5 @@ public class SeriesDefaultsTag extends BaseTag /* interfaces */implements Border
     }
 
 //<< Attributes
+
 }

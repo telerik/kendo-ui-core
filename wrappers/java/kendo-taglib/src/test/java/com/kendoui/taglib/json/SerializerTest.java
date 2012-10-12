@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
+import java.util.Calendar;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -230,6 +232,19 @@ public class SerializerTest {
         }));
     }
 
+    @Test
+    public void jsonsSerializesDates() throws IOException {
+        assertEquals("{\"foo\":new Date(949359661812)}", serializer.json(new Object() {
+            @SuppressWarnings("unused")
+            public Date getFoo() {
+                Calendar cal = Calendar.getInstance();
+                
+                cal.setTimeInMillis(949359661812l);
+                
+                return cal.getTime();
+            }
+        }));
+    }
     @Test
     public void jsonSerializesMaps() throws IOException {
         assertEquals("{\"foo\":{\"bar\":\"bar\",\"baz\":\"baz\"}}", serializer.json(new Object() {

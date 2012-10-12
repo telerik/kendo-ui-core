@@ -8,16 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class GroupableTag extends BaseTag /* interfaces */implements Messages/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Groupable parent = (Groupable)findParentWithClass(Groupable.class);
 
         parent.setGroupable(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setMessages(MessagesTag value) {
@@ -25,4 +46,5 @@ public class GroupableTag extends BaseTag /* interfaces */implements Messages/* 
     }
 
 //<< Attributes
+
 }

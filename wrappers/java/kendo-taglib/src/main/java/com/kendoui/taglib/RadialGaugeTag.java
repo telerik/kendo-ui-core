@@ -6,11 +6,38 @@ import com.kendoui.taglib.radialgauge.*;
 
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class RadialGaugeTag extends WidgetTag /* interfaces */implements GaugeArea, Pointer, Scale/* interfaces */ {
 
     public RadialGaugeTag() {
         super("RadialGauge");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -30,19 +57,19 @@ public class RadialGaugeTag extends WidgetTag /* interfaces */implements GaugeAr
         setProperty("scale", value.properties());
     }
 
-    public int getRangeSize() {
-        return (int)getProperty("rangeSize");
+    public float getRangeSize() {
+        return (float)getProperty("rangeSize");
     }
 
-    public void setRangeSize(int value) {
+    public void setRangeSize(float value) {
         setProperty("rangeSize", value);
     }
 
-    public int getRangeDistance() {
-        return (int)getProperty("rangeDistance");
+    public float getRangeDistance() {
+        return (float)getProperty("rangeDistance");
     }
 
-    public void setRangeDistance(int value) {
+    public void setRangeDistance(float value) {
         setProperty("rangeDistance", value);
     }
 
@@ -55,4 +82,5 @@ public class RadialGaugeTag extends WidgetTag /* interfaces */implements GaugeAr
     }
 
 //<< Attributes
+
 }

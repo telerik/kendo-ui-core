@@ -8,27 +8,48 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class PageableTag extends BaseTag /* interfaces */implements Messages/* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Pageable parent = (Pageable)findParentWithClass(Pageable.class);
 
         parent.setPageable(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     @Override
     public void setMessages(MessagesTag value) {
         setProperty("messages", value.properties());
     }
 
-    public int getPageSize() {
-        return (int)getProperty("pageSize");
+    public float getPageSize() {
+        return (float)getProperty("pageSize");
     }
 
-    public void setPageSize(int value) {
+    public void setPageSize(float value) {
         setProperty("pageSize", value);
     }
 
@@ -48,11 +69,11 @@ public class PageableTag extends BaseTag /* interfaces */implements Messages/* i
         setProperty("numeric", value);
     }
 
-    public int getButtonCount() {
-        return (int)getProperty("buttonCount");
+    public float getButtonCount() {
+        return (float)getProperty("buttonCount");
     }
 
-    public void setButtonCount(int value) {
+    public void setButtonCount(float value) {
         setProperty("buttonCount", value);
     }
 
@@ -89,4 +110,5 @@ public class PageableTag extends BaseTag /* interfaces */implements Messages/* i
     }
 
 //<< Attributes
+
 }

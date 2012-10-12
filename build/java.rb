@@ -13,6 +13,9 @@ SPRING_DEMOS_ROOT = JAVA_WRAPPERS_ROOT + 'spring-demos/'
 SPRING_DEMOS_WAR = "#{SPRING_DEMOS_ROOT}target/sprind-demos-#{VERSION}.war"
 SPRING_DEMOS_SRC_ROOT = SPRING_DEMOS_ROOT + 'src/'
 SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*')
+SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/**/*']
+SPRING_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
+SPRING_DEMOS_RESOURCES = SPRING_DEMOS_SRC_ROOT + 'main/webapp/resources'
 
 # Update a pom.xml file when the VERSION changes
 class PomTask < Rake::FileTask
@@ -42,7 +45,7 @@ file JSP_TAGLIB_JAR => [POM, JSP_TAGLIB_SRC].flatten do
 end
 
 # Build the spring-demos-*.war by running maven
-file SPRING_DEMOS_WAR => [POM, JSP_TAGLIB_JAR, SPRING_DEMOS_SRC].flatten do
+file SPRING_DEMOS_WAR => [POM, SPRING_DEMOS_SRC].flatten do
 
     mvn(POM, 'clean package')
 
@@ -136,10 +139,18 @@ file 'dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml' do |t|
     patch_taglib_pom(t.name)
 end
 
+tree :to => SPRING_DEMOS_RESOURCES,
+     :from => SPRING_DEMOS_SHARED_CONTENT,
+     :root => 'demos/mvc/content/'
+
+tree :to => SPRING_DEMOS_RESOURCES,
+     :from => SPRING_DEMOS_NAVIGATION,
+     :root => 'demos/mvc/App_Data/'
+
 namespace :java do
     desc('Build the Kendo Tag Library')
     task :taglib => JSP_TAGLIB_JAR
 
     desc('Build the Kendo Spring Demos')
-    task :spring => SPRING_DEMOS_WAR
+    task :spring => [SPRING_DEMOS_RESOURCES, SPRING_DEMOS_WAR]
 end

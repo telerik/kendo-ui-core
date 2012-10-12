@@ -1,18 +1,53 @@
-
 package com.kendoui.taglib;
-
 
 import com.kendoui.taglib.treeview.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Ul;
 import com.kendoui.taglib.json.Function;
 
+import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TreeViewTag extends WidgetTag /* interfaces */implements Animation, DataBoundWidget/* interfaces */ {
+public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements Animation, Items, DataBoundWidget/* interfaces */ {
 
     public TreeViewTag() {
         super("TreeView");
+    }
+
+    @Override
+    protected Element<?> createElement() {
+        Ul ul = new Ul();
+        
+        ul.html(body());
+               
+        return ul;
+    }
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+        
+        
+        return super.doEndTag();
+    }
+    
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+        
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+        
+        super.destroy();
     }
 
 //>> Attributes
@@ -20,6 +55,13 @@ public class TreeViewTag extends WidgetTag /* interfaces */implements Animation,
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
+    }
+
+    @Override
+    public void setItems(ItemsTag value) {
+
+        items = value.items();
+
     }
 
     public String getCheckboxTemplate() {
@@ -40,7 +82,7 @@ public class TreeViewTag extends WidgetTag /* interfaces */implements Animation,
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public String getDataSpriteCssClassField() {
@@ -156,4 +198,5 @@ public class TreeViewTag extends WidgetTag /* interfaces */implements Animation,
     }
 
 //<< Attributes
+
 }

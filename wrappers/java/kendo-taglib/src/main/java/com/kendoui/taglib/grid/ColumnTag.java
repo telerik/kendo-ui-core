@@ -5,19 +5,40 @@ import com.kendoui.taglib.BaseTag;
 
 import javax.servlet.jsp.JspException;
 
-
 @SuppressWarnings("serial")
 public class ColumnTag extends BaseTag /* interfaces *//* interfaces */ {
 
-//>> Attributes
-
+    
+    @Override
     public int doEndTag() throws JspException {
-        ColumnsTag parent = (ColumnsTag)findParentWithClass(ColumnsTag.class);
+//>> doEndTag
+
+        Column parent = (Column)findParentWithClass(Column.class);
 
         parent.addColumn(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     public String getCommand() {
         return (String)getProperty("command");
@@ -92,4 +113,5 @@ public class ColumnTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
+
 }

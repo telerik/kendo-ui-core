@@ -8,11 +8,38 @@ import com.kendoui.taglib.upload.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class UploadTag extends WidgetTag /* interfaces */implements Async, Localization/* interfaces */ {
 
     public UploadTag() {
         super("Upload");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -116,4 +143,5 @@ public class UploadTag extends WidgetTag /* interfaces */implements Async, Local
     }
 
 //<< Attributes
+
 }

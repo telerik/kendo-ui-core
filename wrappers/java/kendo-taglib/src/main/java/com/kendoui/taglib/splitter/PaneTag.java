@@ -8,15 +8,37 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class PaneTag extends BaseTag /* interfaces *//* interfaces */ {
 
-//>> Attributes
-
+    
+    @Override
     public int doEndTag() throws JspException {
-        PanesTag parent = (PanesTag)findParentWithClass(PanesTag.class);
+//>> doEndTag
+
+        Pane parent = (Pane)findParentWithClass(Pane.class);
 
         parent.addPane(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
 
     public boolean getCollapsed() {
         return (boolean)getProperty("collapsed");
@@ -83,4 +105,5 @@ public class PaneTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
+
 }

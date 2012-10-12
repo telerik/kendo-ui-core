@@ -6,11 +6,38 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public EditorTag() {
         super("Editor");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -21,6 +48,22 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setEncoded(boolean value) {
         setProperty("encoded", value);
+    }
+
+    public Object getStylesheets() {
+        return (Object)getProperty("stylesheets");
+    }
+
+    public void setStylesheets(Object value) {
+        setProperty("stylesheets", value);
+    }
+
+    public Object getTools() {
+        return (Object)getProperty("tools");
+    }
+
+    public void setTools(Object value) {
+        setProperty("tools", value);
     }
 
     public String getChange() {
@@ -72,4 +115,5 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
+
 }

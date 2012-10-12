@@ -8,22 +8,43 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class MajorTicksTag extends BaseTag /* interfaces *//* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         MajorTicks parent = (MajorTicks)findParentWithClass(MajorTicks.class);
 
         parent.setMajorTicks(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
 
-    public int getSize() {
-        return (int)getProperty("size");
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
     }
 
-    public void setSize(int value) {
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
+
+    public float getSize() {
+        return (float)getProperty("size");
+    }
+
+    public void setSize(float value) {
         setProperty("size", value);
     }
 
@@ -36,4 +57,5 @@ public class MajorTicksTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
+
 }

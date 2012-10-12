@@ -8,11 +8,38 @@ import com.kendoui.taglib.datetimepicker.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class DateTimePickerTag extends WidgetTag /* interfaces */implements Animation, Month/* interfaces */ {
 
     public DateTimePickerTag() {
         super("DateTimePicker");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -33,6 +60,14 @@ public class DateTimePickerTag extends WidgetTag /* interfaces */implements Anim
 
     public void setCulture(String value) {
         setProperty("culture", value);
+    }
+
+    public Object getDates() {
+        return (Object)getProperty("dates");
+    }
+
+    public void setDates(Object value) {
+        setProperty("dates", value);
     }
 
     public String getDepth() {
@@ -59,12 +94,36 @@ public class DateTimePickerTag extends WidgetTag /* interfaces */implements Anim
         setProperty("format", value);
     }
 
-    public int getInterval() {
-        return (int)getProperty("interval");
+    public float getInterval() {
+        return (float)getProperty("interval");
     }
 
-    public void setInterval(int value) {
+    public void setInterval(float value) {
         setProperty("interval", value);
+    }
+
+    public java.util.Date getMax() {
+        return (java.util.Date)getProperty("max");
+    }
+
+    public void setMax(java.util.Date value) {
+        setProperty("max", value);
+    }
+
+    public java.util.Date getMin() {
+        return (java.util.Date)getProperty("min");
+    }
+
+    public void setMin(java.util.Date value) {
+        setProperty("min", value);
+    }
+
+    public Object getParseFormats() {
+        return (Object)getProperty("parseFormats");
+    }
+
+    public void setParseFormats(Object value) {
+        setProperty("parseFormats", value);
     }
 
     public String getStart() {
@@ -81,6 +140,14 @@ public class DateTimePickerTag extends WidgetTag /* interfaces */implements Anim
 
     public void setTimeFormat(String value) {
         setProperty("timeFormat", value);
+    }
+
+    public java.util.Date getValue() {
+        return (java.util.Date)getProperty("value");
+    }
+
+    public void setValue(java.util.Date value) {
+        setProperty("value", value);
     }
 
     public String getChange() {
@@ -108,4 +175,5 @@ public class DateTimePickerTag extends WidgetTag /* interfaces */implements Anim
     }
 
 //<< Attributes
+
 }

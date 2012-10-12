@@ -8,11 +8,38 @@ import com.kendoui.taglib.pager.*;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class PagerTag extends WidgetTag /* interfaces */implements Messages, DataBoundWidget/* interfaces */ {
 
     public PagerTag() {
         super("Pager");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -30,17 +57,17 @@ public class PagerTag extends WidgetTag /* interfaces */implements Messages, Dat
         setProperty("autoBind", value);
     }
 
-    public int getButtonCount() {
-        return (int)getProperty("buttonCount");
+    public float getButtonCount() {
+        return (float)getProperty("buttonCount");
     }
 
-    public void setButtonCount(int value) {
+    public void setButtonCount(float value) {
         setProperty("buttonCount", value);
     }
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public String getSelectTemplate() {
@@ -116,4 +143,5 @@ public class PagerTag extends WidgetTag /* interfaces */implements Messages, Dat
     }
 
 //<< Attributes
+
 }

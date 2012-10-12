@@ -8,22 +8,43 @@ import javax.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class ExpandTag extends BaseTag /* interfaces *//* interfaces */ {
 
-//>> Attributes
-
+    
     @Override
     public int doEndTag() throws JspException {
+//>> doEndTag
+
         Expand parent = (Expand)findParentWithClass(Expand.class);
 
         parent.setExpand(this);
 
+//<< doEndTag
+
         return super.doEndTag();
     }
 
-    public int getDuration() {
-        return (int)getProperty("duration");
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
     }
 
-    public void setDuration(int value) {
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
+
+    public float getDuration() {
+        return (float)getProperty("duration");
+    }
+
+    public void setDuration(float value) {
         setProperty("duration", value);
     }
 
@@ -44,4 +65,5 @@ public class ExpandTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
+
 }

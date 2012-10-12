@@ -6,11 +6,38 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public NumericTextBoxTag() {
         super("NumericTextBox");
+    }
+
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -23,11 +50,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         setProperty("culture", value);
     }
 
-    public int getDecimals() {
-        return (int)getProperty("decimals");
+    public float getDecimals() {
+        return (float)getProperty("decimals");
     }
 
-    public void setDecimals(int value) {
+    public void setDecimals(float value) {
         setProperty("decimals", value);
     }
 
@@ -47,19 +74,19 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         setProperty("format", value);
     }
 
-    public int getMax() {
-        return (int)getProperty("max");
+    public float getMax() {
+        return (float)getProperty("max");
     }
 
-    public void setMax(int value) {
+    public void setMax(float value) {
         setProperty("max", value);
     }
 
-    public int getMin() {
-        return (int)getProperty("min");
+    public float getMin() {
+        return (float)getProperty("min");
     }
 
-    public void setMin(int value) {
+    public void setMin(float value) {
         setProperty("min", value);
     }
 
@@ -79,11 +106,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         setProperty("spinners", value);
     }
 
-    public int getStep() {
-        return (int)getProperty("step");
+    public float getStep() {
+        return (float)getProperty("step");
     }
 
-    public void setStep(int value) {
+    public void setStep(float value) {
         setProperty("step", value);
     }
 
@@ -95,11 +122,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         setProperty("upArrowText", value);
     }
 
-    public int getValue() {
-        return (int)getProperty("value");
+    public float getValue() {
+        return (float)getProperty("value");
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         setProperty("value", value);
     }
 
@@ -120,4 +147,5 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
     }
 
 //<< Attributes
+
 }

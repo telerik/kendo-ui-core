@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.kendoui</groupId>
         <artifactId>kendo</artifactId>
-        <version>2012.3.1003</version>
+        <version>2012.3.1012</version>
     </parent>
 
     <artifactId>spring-demos</artifactId>
@@ -17,19 +17,82 @@
 
     <properties>
         <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
+        <org.hibernate.version>4.1.7.Final</org.hibernate.version>
     </properties>
 
     <dependencies>
+        
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-
+        
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+            
+		<dependency>
+			  <groupId>org.hibernate</groupId>
+			  <artifactId>hibernate-core</artifactId>
+			  <version>${org.hibernate.version}</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.7.2</version>
+		</dependency>
+              
+        <dependency>
+       		<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+        </dependency>
+        
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>20030825.184428</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>20030825.183949</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>20040616</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.9</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+            
         <dependency>
             <groupId>com.kendoui</groupId>
             <artifactId>kendo-taglib</artifactId>
-            <version>2012.3.1003</version>
+            <version>2012.3.1012</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

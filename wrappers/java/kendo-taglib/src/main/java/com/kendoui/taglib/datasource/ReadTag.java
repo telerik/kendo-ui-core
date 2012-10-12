@@ -17,13 +17,45 @@ public class ReadTag extends BaseTag {
     
 //>> Attributes
 
+    public boolean getCache() {
+        return (boolean)getProperty("cache");
+    }
+
+    public void setCache(boolean value) {
+        setProperty("cache", value);
+    }
+
+    public String getContentType() {
+        return (String)getProperty("contentType");
+    }
+
+    public void setContentType(String value) {
+        setProperty("contentType", value);
+    }
+
+    public String getDataType() {
+        return (String)getProperty("dataType");
+    }
+
+    public void setDataType(String value) {
+        setProperty("dataType", value);
+    }
+
+    public String getType() {
+        return (String)getProperty("type");
+    }
+
+    public void setType(String value) {
+        setProperty("type", value);
+    }
+
     public String getUrl() {
         return (String)getProperty("url");
     }
 
-    public void setUrl(String url) {
-        setProperty("url", url);
+    public void setUrl(String value) {
+        setProperty("url", value);
     }
 
-    //<< Attributes
+//<< Attributes
 }

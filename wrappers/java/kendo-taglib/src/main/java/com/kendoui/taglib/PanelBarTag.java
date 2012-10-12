@@ -1,51 +1,54 @@
+
 package com.kendoui.taglib;
 
-import com.kendoui.taglib.panelbar.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import javax.servlet.jsp.tagext.BodyContent;
+import com.kendoui.taglib.panelbar.*;
+
 
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Ul;
 import com.kendoui.taglib.json.Function;
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
-public class PanelBarTag extends WidgetTag  /* interfaces */implements Animation, PanelBarItemTagContainer/* interfaces */ {
-    private List<Map<String, Object>> items;
+public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements Animation, Items/* interfaces */ {
 
     public PanelBarTag() {
         super("PanelBar");
     }
     
     @Override
-    public void initialize() {
-        items = new ArrayList<Map<String, Object>>();
-        
-        super.initialize();
-    }
-    
-    @Override
-    public void destroy() {
-        items = null;
-        
-        super.destroy();
-    }
-    
-    @Override
     protected Element<?> createElement() {
         Ul element = new Ul();
 
-        BodyContent content = getBodyContent();
-
-        element.html(content.getString());
+        element.html(body());
 
         return element;
     }
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
 
-    public List<Map<String, Object>> items() {
-        return items;
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -53,6 +56,13 @@ public class PanelBarTag extends WidgetTag  /* interfaces */implements Animation
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
+    }
+
+    @Override
+    public void setItems(ItemsTag value) {
+
+        items = value.items();
+
     }
 
     public String getExpandMode() {
@@ -112,4 +122,5 @@ public class PanelBarTag extends WidgetTag  /* interfaces */implements Animation
     }
 
 //<< Attributes
+
 }

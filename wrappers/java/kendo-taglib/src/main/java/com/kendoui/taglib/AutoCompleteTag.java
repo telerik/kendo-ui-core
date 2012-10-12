@@ -5,14 +5,47 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.autocomplete.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
+
+import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animation, DataBoundWidget/* interfaces */ {
 
     public AutoCompleteTag() {
         super("AutoComplete");
+    }
+
+    @Override
+    public Element<?> createElement() {
+        return new Input();
+    }
+    
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
     }
 
 //>> Attributes
@@ -24,7 +57,7 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
+        setProperty("dataSource", dataSource.properties());
     }
 
     public String getDataTextField() {
@@ -35,11 +68,11 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
         setProperty("dataTextField", value);
     }
 
-    public int getDelay() {
-        return (int)getProperty("delay");
+    public float getDelay() {
+        return (float)getProperty("delay");
     }
 
-    public void setDelay(int value) {
+    public void setDelay(float value) {
         setProperty("delay", value);
     }
 
@@ -59,11 +92,11 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
         setProperty("filter", value);
     }
 
-    public int getHeight() {
-        return (int)getProperty("height");
+    public float getHeight() {
+        return (float)getProperty("height");
     }
 
-    public void setHeight(int value) {
+    public void setHeight(float value) {
         setProperty("height", value);
     }
 
@@ -83,11 +116,11 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
         setProperty("ignoreCase", value);
     }
 
-    public int getMinLength() {
-        return (int)getProperty("minLength");
+    public float getMinLength() {
+        return (float)getProperty("minLength");
     }
 
-    public void setMinLength(int value) {
+    public void setMinLength(float value) {
         setProperty("minLength", value);
     }
 
@@ -156,4 +189,5 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
     }
 
 //<< Attributes
+
 }
