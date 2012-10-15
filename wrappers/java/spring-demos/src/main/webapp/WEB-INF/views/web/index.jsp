@@ -1,14 +1,13 @@
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Kendo UI Web Examples</title>
-    <link href="<spring:url value='/resources/shared/styles/suite.css'/>" rel="stylesheet">
+    <link href="<c:url value='/resources/shared/styles/suite.css'/>" rel="stylesheet">
 </head>
 <body>
     <div id="page">
-        <a class="offline-button" href="<spring:url value='/'/>">Back to all suites</a>
+        <a class="offline-button" href="<c:url value='/'/>">Back to all suites</a>
         <c:forEach var="category" items="${navigation.keySet()}">
 	       	<h1>${category}</h1>
 	       	<ul>
@@ -19,7 +18,7 @@
 		       			<ul>
 		       			<c:forEach var="example" items="${widget.items}">
 		       				<c:if test="${example.include()}">
-		       					<li><a href="<spring:url value='${example.url.replaceAll(".html", "")}'/>">${example.text}</a></li>
+		       					<li><a href="<c:url value='${example.url.replaceAll(".html", "")}'/>">${example.text}</a></li>
 		       				</c:if>
 		       			</c:forEach>
 		       			</ul>
