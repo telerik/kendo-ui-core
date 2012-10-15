@@ -398,6 +398,9 @@
                         if (series) {
                             for (var i = 0; i < series.length; i++) {
                                 delete series[i].color;
+                                if (series[i].labels) {
+                                    delete series[i].labels.color;
+                                }
                             }
                         }
 
@@ -526,10 +529,9 @@
                         change: changeHandler
                     });
 
-                $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(this.showWebSource, this));
-                $(".ktb-action-get-json").on(CLICK, proxy(this.showDataVizSource, this));
+                $(".ktb-action-source").on(CLICK, proxy(this.showSource, this));
                 $(".ktb-action-show-import").on(CLICK, proxy(this.showImport, this));
-                $(".ktb-action-create-web,.ktb-action-create-dataviz").on(CLICK, proxy(this.showSuite, this));
+                $(".ktb-action[data-suite]").on(CLICK, proxy(this.showSuite, this));
                 $(".ktb-action-back").on(CLICK, proxy(this.hideOverlay, this));
                 $(".ktb-action-back-to-suites").on(CLICK, proxy(this.showSuiteChooser, this));
                 $(".ktb-action-import").on(CLICK, proxy(this.importTheme, this));
@@ -538,32 +540,26 @@
             },
             showSuiteChooser: function(e) {
                 $("#suite-chooser").slideDown("fast", function() {
-                    $("#create-web,#create-dataviz").hide();
+                    $(".ktb-view[data-suite]").hide();
                 });
             },
             showSuite: function(e) {
                 e.preventDefault();
 
-                var web = $(e.target).hasClass("ktb-action-create-web");
+                var suite = $(e.target).data("suite");
 
-                $(web ? "#create-web" : "#create-dataviz").show();
+                $(".ktb-view[data-suite=" + suite + "]").show();
 
                 $("#suite-chooser").slideUp();
             },
-            showDataVizSource: function(e) {
+            showSource: function(e) {
                 e.preventDefault();
 
-                this.themes[1].source("string", function(source) {
-                    $("#download-overlay").slideDown()
-                        .find("textarea").val(source);
-                });
-            },
-            showWebSource: function(e) {
-                e.preventDefault();
+                var format = $(e.target).data("format"),
+                    web = format != "string",
+                    theme = this.themes[web ? 0 : 1];
 
-                var format = $(e.target).hasClass("ktb-action-get-less") ? "less" : "css";
-
-                this.themes[0].source(format, function(source) {
+                theme.source(format, function(source) {
                     $("#download-overlay").slideDown()
                         .find("textarea").val(source);
                 });
@@ -660,15 +656,24 @@
                         "</li>",
                         templateOptions
                     ),
+                    renderDataAttributes =
+                        "# if (d.data) {" +
+                        "  for (var name in d.data) { #" +
+                            " data-#= name #='#= d.data[name] #'" +
+                        "# }" +
+                        "} #",
                     view = template(
-                        "<div id='#= d.id #' class='ktb-view#= d.overlay ? ' ktb-overlay' : '' #'>" +
-                            "#= d.toolbar ? d.toolbar : '' #" +
+                        "<div id='#= d.id #' class='ktb-view#= d.overlay ? ' ktb-overlay' : '' #'" +
+                            renderDataAttributes +
+                            ">#= d.toolbar ? d.toolbar : '' #" +
                             "<div class='ktb-content'>#= d.content #</div>" +
                         "</div>",
                         templateOptions
                     ),
                     button = template(
-                        "<button class='k-button ktb-action-#= d.id #'>#= d.text #</button>",
+                        "<button class='k-button ktb-action #= d.action ? ('ktb-action-' + d.action) : '' #'" +
+                            renderDataAttributes +
+                        ">#= d.text #</button>",
                         templateOptions
                     );
 
@@ -676,7 +681,7 @@
                     view({
                         id: "download-overlay",
                         overlay: true,
-                        toolbar: button({ id: "back", text: "Back" }) +
+                        toolbar: button({ action: "back", text: "Back" }) +
                                  "<a href='http://www.kendoui.com/documentation/themebuilder.aspx' id='docs-link' target='_blank'>What should I do with this?</a>",
                         content: "<textarea readonly></textarea>"
                     }) +
@@ -684,16 +689,16 @@
                     view({
                         id: "import-overlay",
                         overlay: true,
-                        toolbar: button({ id: "back", text: "Back" }) + button({ id: "import", text: "Import" }),
+                        toolbar: button({ action: "back", text: "Back" }) + button({ action: "import", text: "Import" }),
                         content: "<textarea></textarea>"
                     }) +
 
                     view({
-                        id: "create-web",
-                        toolbar: button({ id: "back-to-suites", text: "Back" }) +
-                                 button({ id: "get-css", text: "Get CSS..." }) +
-                                 button({ id: "get-less", text: "Get LESS..." }) +
-                                 button({ id: "show-import", text: "Import..." }),
+                        data: { suite: "web" },
+                        toolbar: button({ action: "back-to-suites", text: "Back" }) +
+                                 button({ action: "source", data: { format: "css" }, text: "Get CSS..." }) +
+                                 button({ action: "source", data: { format: "less" }, text: "Get LESS..." }) +
+                                 button({ action: "show-import", text: "Import..." }),
                         content: "<ul class='stylable-elements'>" +
                                     map(webConstantsHierarchy || {}, function(section, title) {
                                         return propertyGroupTemplate({
@@ -708,9 +713,10 @@
                     }) +
 
                     view({
-                        id: "create-dataviz",
-                        toolbar: button({ id: "back-to-suites", text: "Back" }) +
-                                 button({ id: "get-json", text: "Get JSON..." }),
+                        data: { suite: "dataviz" },
+                        toolbar: button({ action: "back-to-suites", text: "Back" }) +
+                                 button({ action: "source", data: { format: "string" }, text: "Get JSON..." }) +
+                                 button({ action: "show-import", text: "Import..." }),
                         content: "<ul class='stylable-elements'>" +
                                     map(datavizConstantsHierarchy || {}, function(section, title) {
                                         return propertyGroupTemplate({
@@ -728,8 +734,8 @@
                         id: "suite-chooser",
                         content: "<p style='text-align: center'>Create a theme for Kendo UI...</p>" +
                                  "<ul class='suite-list'>" +
-                                     "<li>" + button({ id: "create-web", text: "Web" }) + "</li>" +
-                                     "<li>" + button({ id: "create-dataviz", text: "DataViz" }) + "</li>" +
+                                     "<li>" + button({ data: { suite: "web" }, text: "Web" }) + "</li>" +
+                                     "<li>" + button({ data: { suite: "dataviz" }, text: "DataViz" }) + "</li>" +
                                  "</ul>"
                     }) +
 
