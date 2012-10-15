@@ -94,7 +94,7 @@ body {
     text-align: center;
 }
 
-.k-list .k-item {
+.k-popup .k-list .k-item {
     width: 19px;
     height: 19px;
     overflow: hidden;
@@ -103,9 +103,9 @@ body {
     padding: 1px;
 }
 
-.k-list .k-state-hover,
-.k-list .k-state-focused,
-.k-list .k-state-selected {
+.k-popup .k-list .k-state-hover,
+.k-popup .k-list .k-state-focused,
+.k-popup .k-list .k-state-selected {
     padding: 0;
 }
 
@@ -131,28 +131,45 @@ textarea {
     font: 12px Consolas, Courier, monospace;
 }
 
-.ktb-view > .k-button {
-    margin-right: .6em;
-}
-
-.ktb-content {
-    position: absolute;
-    overflow: scroll;
-    overflow-x: hidden;
-    top: 30px;
-    bottom: 0;
-    width: 100%;
-}
-
-.ktb-overlay {
+.ktb-view {
+    color: #fff;
     display: none;
+    background-color: #3d3d3d;
+}
+
+#suite-chooser {
+    display: block;
+}
+
+.ktb-view,
+.ktb-overlay,
+.ktb-content{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.ktb-view > .k-button {
+    margin-right: .6em;
+}
+
+.ktb-content {
+    overflow: scroll;
+    overflow-x: hidden;
+    top: 30px;
+    bottom: 0;
+    width: 100%;
+    height: -webkit-calc(100% - 30px);
+    height: -moz-calc(100% - 30px);
+    height: calc(100% - 30px);
+}
+
+.ktb-overlay {
+    display: none;
+    position: absolute;
     z-index: 2;
-    background-color: #3d3d3d;
 }
 
 .ktb-overlay .ktb-content {
@@ -182,4 +199,16 @@ textarea {
 
 .ktb-action-import {
     float: right;
+}
+
+.suite-list {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 1em 0;
+}
+
+.suite-list li {
+    display: inline-block;
+    margin: 0 .5em;
 }

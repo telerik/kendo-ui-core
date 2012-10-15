@@ -1,0 +1,274 @@
+@{
+    Layout = "~/Views/Shared/ThemeBuilderLayout.cshtml";
+}
+
+<div class="separator-shadow"></div>
+
+<div id="instructions-box">
+    <h3>Instructions</h3>
+    <ol id="instructions-list">
+        <li>Select a theme to modify
+            <ul id="themeChooser"><li></li></ul>
+        </li>
+        <li>Start the <a class="k-button" id="bookmarklet" href="">Kendo ThemeBuilder</a></li>
+        <li>Use the ThemeBuilder as a <strong>bookmarklet</strong> on your own pages! (Drag the button to your bookmarks bar)</li>
+    </ol>
+</div>
+
+<script>
+    window.applyCurrentTheme();
+    $("#themeChooser").themeChooser();
+
+    $("#bookmarklet").attr("href", ("javascript:(function(){" +
+            "var ktb=window.kendoThemeBuilder,s,d=document;" +
+            "if(typeof ktb!='undefined'){" +
+                "ktb.open();" +
+                "return" +
+            "}else{" +
+                "s=d.createElement('script');" +
+                "s.src='@ViewBag.DeployRoot/bootstrap.js?'+(+new Date());" +
+                "d.getElementsByTagName('body')[0].appendChild(s);" +
+            "}" +
+        "})()").replace(/\s+/g, "%20"));
+</script>
+
+<div class="k-content floatWrap">
+<div class="column">
+    <div id="area-chart"></div>
+
+    <div id="bubble-chart"></div>
+
+    <div id="radial-gauge"></div>
+</div>
+
+<div class="column">
+    <div id="mixed-chart"></div>
+
+    <div id="pie-chart"></div>
+
+    <div id="linear-gauge"></div>
+</div>
+
+</div>
+
+<style scoped>
+    #example .k-content {
+        padding: 10px 0 30px;
+    }
+
+    h3 {
+        font: normal 16px/1.5 Arial,sans-serif;
+        margin: 20px 0 13px;
+    }
+
+    #instructions-box {
+        border-left: 5px solid rgba(0,0,0,.5);
+        padding-left: 1em;
+        margin-left: 2%;
+    }
+
+    #instructions-list li {
+        padding: .4em 0;
+    }
+
+    .column {
+        width: 46%;
+        padding: 0 2%;
+        margin: 0;
+        float: left;
+    }
+
+    .column .k-chart,
+    .column .k-gauge {
+        display: block;
+        margin-bottom: 14px;
+    }
+
+    #middle-column {
+        width: 20%;
+    }
+</style>
+
+<script>
+    function initialize() {
+        $("#area-chart").kendoChart({
+            transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
+            title: {
+                text: "Internet Users"
+            },
+            legend: {
+                position: "bottom"
+            },
+            chartArea: {
+                background: ""
+            },
+            seriesDefaults: {
+                type: "area"
+            },
+            series: [
+                {
+                    name: "United States",
+                    data: [67.96, 68.93, 75, 74, 78]
+                }, {
+                    name: "World",
+                    data: [15.7, 16.7, 20, 23.5, 26.6]
+                }
+            ],
+            valueAxis: {
+                labels: {
+                    format: "{0}%"
+                }
+            },
+            categoryAxis: {
+                categories: [2005, 2006, 2007, 2008, 2009]
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}%"
+            }
+        });
+
+        $("#mixed-chart").kendoChart({
+            transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
+            title: {
+                text: "Hybrid car mileage report"
+            },
+            legend: {
+                position: "top"
+            },
+            series: [{
+                type: "column",
+                data: [20, 40, 45, 30, 50],
+                stack: true,
+                name: "on battery"
+            }, {
+                type: "column",
+                data: [20, 30, 35, 35, 40],
+                stack: true,
+                name: "on gas"
+            }, {
+                type: "line",
+                data: [7.8, 6.2, 5.9, 7.4, 5.6],
+                name: "l/100 km",
+                axis: "l100km"
+            }],
+            valueAxes: [{
+                title: { text: "miles" },
+                min: 0,
+                max: 100
+            }, {
+                name: "l100km",
+                title: { text: "liters per 100km" }
+            }],
+            categoryAxis: {
+                categories: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                axisCrossingValues: [0, 10]
+            }
+        });
+
+
+        $("#bubble-chart").kendoChart({
+            transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
+            legend: {
+                visible: false
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "../content/dataviz/js/crime-stats.json",
+                        dataType: "json"
+                    }
+                }
+            },
+            series: [{
+                type: "bubble",
+                xField: "murder",
+                yField: "burglary",
+                sizeField: "population",
+                categoryField: "state"
+            }],
+            xAxis: {
+                labels: {
+                    format: "{0:N0}"
+                },
+                title: {
+                    text: "Murders per 100,000 population"
+                }
+            },
+            yAxis: {
+                labels: {
+                    format: "{0:N0}"
+                },
+                title: {
+                    text: "Burglaries per 100,000 population"
+                }
+            },
+            tooltip: {
+                visible: true,
+                format: "{3}: Population {2:N0}"
+            }
+        });
+
+        $("#pie-chart").kendoChart({
+            transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
+            title: {
+                text: "Break-up of Spain Electricity Production for 2008"
+            },
+            legend: {
+                position: "bottom",
+                labels: {
+                    template: "#= text # (#= value #%)"
+                }
+            },
+            series: [{
+                type: "pie",
+                data: [ {
+                    category: "Hydro",
+                    value: 22
+                }, {
+                    category: "Solar",
+                    value: 2
+                }, {
+                    category: "Nuclear",
+                    value: 49
+                }, {
+                    category: "Wind",
+                    value: 27
+                } ]
+            }],
+            tooltip: {
+                visible: true,
+                format: "{0}%"
+            }
+        });
+
+        $("#linear-gauge").kendoLinearGauge({
+            transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
+            pointer: {
+                value: 30
+            }
+        });
+
+        $("#radial-gauge").kendoRadialGauge({
+            transitions: false,
+            theme: $(document).data("kendoSkin") || "default",
+            pointer: {
+                value: 40
+            },
+            scale: {
+                max: 180,
+                ranges: [
+                    { from: 160, to: 180, color: "#ff0000" }
+                ]
+            }
+        });
+    }
+
+    $(document).ready(initialize);
+    $("#example").bind("kendo:skinChange", initialize);
+</script>
