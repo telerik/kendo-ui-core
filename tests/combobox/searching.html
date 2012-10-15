@@ -193,6 +193,48 @@
                 combobox.search("fooooo");
             });
 
+            test("search with no filter indicates that the filtering is started", 0, function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: [],
+                    autoBind: false
+                });
+
+                combobox.search("fooooo");
+                equal(combobox._state, "filter");
+            });
+
+            test("ComboBox announces end of filtration on item selection", 0, function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: ["foo"],
+                    autoBind: false
+                });
+
+                input.focus();
+                combobox.search("f");
+                combobox.select(0);
+
+                equal(combobox._state, "accept");
+            });
+
+            test("ComboBox announces end of filtration custom value", 0, function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: ["foo"],
+                    autoBind: false
+                });
+
+                input.focus();
+                combobox.search("f");
+                combobox.value("custom");
+
+                equal(combobox._state, "accept");
+            });
+
            test("search with startswith rebind items", function() {
                 combobox.options.filter = "startswith";
                 combobox.text("f");
