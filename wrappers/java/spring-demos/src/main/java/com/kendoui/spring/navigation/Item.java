@@ -33,11 +33,11 @@ public class Item
                 name = name.substring(1);
             }
             
-            if (name.equals("mvc")) {
+            if (name.equals("jsp")) {
                 match = true;
             }
         }
-
+        
         return (!invert && match) || (invert && !match);
     }
 

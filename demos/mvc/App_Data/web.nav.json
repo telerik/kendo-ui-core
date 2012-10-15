@@ -319,7 +319,7 @@
                 {
                     "text": "Binding to remote data",
                     "url": "grid/remote-data.html",
-                    "packages": ["online", "offline"]
+                    "packages": ["online", "offline", "jsp"]
                 },
                 {
                     "text": "Ajax binding",

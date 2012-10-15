@@ -156,4 +156,8 @@ public class SQLiteDialect extends Dialect {
     public boolean supportsCascadeDelete() {
         return false;
     }
+    
+    public boolean bindLimitParametersInReverseOrder() {
+        return true;
+    }
 }
