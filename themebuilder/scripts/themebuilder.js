@@ -355,6 +355,26 @@
                 }
             },
 
+            deserialize: function(themeContent, targetDocument) {
+                var json, constant,
+                    constants = this.constants;
+
+                try {
+                    themeContent = themeContent.substring(
+                        themeContent.indexOf("{"),
+                        themeContent.lastIndexOf("}") + 1
+                    );
+
+                    json = JSON.parse(themeContent);
+                } catch (e) {
+                    return;
+                }
+
+                for (constant in constants) {
+                    constants[constant].value = kendo.getter(constant, true)(json);
+                }
+            },
+
             source: function(format, callback) {
                 var result = {},
                     constant, constants = this.constants,
@@ -531,7 +551,7 @@
 
                 $(".ktb-action-source").on(CLICK, proxy(this.showSource, this));
                 $(".ktb-action-show-import").on(CLICK, proxy(this.showImport, this));
-                $(".ktb-action[data-suite]").on(CLICK, proxy(this.showSuite, this));
+                $(".ktb-action-show[data-suite]").on(CLICK, proxy(this.showSuite, this));
                 $(".ktb-action-back").on(CLICK, proxy(this.hideOverlay, this));
                 $(".ktb-action-back-to-suites").on(CLICK, proxy(this.showSuiteChooser, this));
                 $(".ktb-action-import").on(CLICK, proxy(this.importTheme, this));
@@ -567,18 +587,23 @@
             showImport: function(e) {
                 e.preventDefault();
 
+                var suite = $(e.target).closest(".ktb-view").data("suite"),
+                    format = suite == "web" ? "LESS or CSS" : "JSON";
+
                 $("#import-overlay").slideDown()
                     .find("textarea")
                         .val("/*************************\n" +
-                             "* paste LESS or CSS here *\n" +
+                             "  paste " + format + " here \n" +
                              "*************************/")
                         .select();
             },
             importTheme: function(e) {
                 e.preventDefault();
 
-                var themeContent = $(e.target).closest(".ktb-view").find("textarea").val(),
-                    theme = this.themes[0],
+                var view = $(e.target).closest(".ktb-view"),
+                    suite = view.data("suite"),
+                    themeContent = view.find("textarea").val(),
+                    theme = this.themes[suite == "web" ? 0 : 1],
                     clientObjects = {
                         "ktb-colorpicker": "kendoColorPicker",
                         "ktb-numeric": "kendoNumericTextBox",
@@ -663,7 +688,8 @@
                         "# }" +
                         "} #",
                     view = template(
-                        "<div id='#= d.id #' class='ktb-view#= d.overlay ? ' ktb-overlay' : '' #'" +
+                        "<div #= d.id ? ' id=\"' + d.id + '\"' : '' #" +
+                            " class='ktb-view#= d.overlay ? ' ktb-overlay' : '' #'" +
                             renderDataAttributes +
                             ">#= d.toolbar ? d.toolbar : '' #" +
                             "<div class='ktb-content'>#= d.content #</div>" +
@@ -734,8 +760,8 @@
                         id: "suite-chooser",
                         content: "<p style='text-align: center'>Create a theme for Kendo UI...</p>" +
                                  "<ul class='suite-list'>" +
-                                     "<li>" + button({ data: { suite: "web" }, text: "Web" }) + "</li>" +
-                                     "<li>" + button({ data: { suite: "dataviz" }, text: "DataViz" }) + "</li>" +
+                                     "<li>" + button({ action: "show", data: { suite: "web" }, text: "Web" }) + "</li>" +
+                                     "<li>" + button({ action: "show", data: { suite: "dataviz" }, text: "DataViz" }) + "</li>" +
                                  "</ul>"
                     }) +
 

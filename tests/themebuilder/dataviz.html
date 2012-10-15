@@ -175,6 +175,60 @@
                     equal(theme.chart.plotArea.background, "");
                 });
             });
+
+            test("deserialize gets constant values from theme", function() {
+                constants = new JsonConstants({
+                    constants: {
+                        "chart.plotArea.background": { property: "color", value: "#ff0000" }
+                    }
+                });
+
+                constants.deserialize('{ "chart": { "plotArea": { "background": "#00ff00" } } }', document);
+
+                equal(constants.constants["chart.plotArea.background"].value, "#00ff00");
+            });
+
+            test("deserialize works for array properties", function() {
+                constants = new JsonConstants({
+                    constants: {
+                        "chart.seriesDefaults[0]": { property: "color", value: "#ff0000" },
+                        "chart.seriesDefaults[1]": { property: "color", value: "#ff0000" }
+                    }
+                });
+
+                constants.deserialize('{ "chart": { "seriesDefaults": [ "#00ff00", "#0000ff" ] } }', document);
+
+                equal(constants.constants["chart.seriesDefaults[0]"].value, "#00ff00");
+                equal(constants.constants["chart.seriesDefaults[1]"].value, "#0000ff");
+            });
+
+            test("deserialize works with source() output", 1, function() {
+                constants = new JsonConstants({
+                    constants: {
+                        "chart.plotArea.background": { property: "color", value: "#ff0000" }
+                    }
+                });
+
+                constants.source("string", function(source) {
+                    delete constants.constants["chart.plotArea.background"].value;
+
+                    constants.deserialize(source, document);
+
+                    equal(constants.constants["chart.plotArea.background"].value, "#ff0000");
+                });
+            });
+
+            test("deserializing fails silently for arbitrary data", function() {
+                constants = new JsonConstants({
+                    constants: {
+                        "chart.plotArea.background": { property: "color", value: "#ff0000" }
+                    }
+                });
+
+                constants.deserialize("// foo bar baz\nvar test = 1;", document);
+
+                equal(constants.constants["chart.plotArea.background"].value, "#ff0000");
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
