@@ -1,5 +1,26 @@
 /* Platform specific iOS CSS */
 
+/* Variables */
+
+@list-border-radius: 9px;
+
+@default-background-color: #7185a2;
+@button-background-color: #496b9a;
+@button-active-background-color: #264e8c;
+
+@tabstrip-icon-color: rgba(255,255,255,.3);
+@tabstrip-active-icon-color: #3F99D2;
+@button-icon-gradient: top, rgba(255,255,255,.7), rgba(255,255,255,.9);
+@buttongroup-icon-gradient: top, rgba(0,0,0,.5), rgba(0,0,0,.3);
+@tabstrip-icon-gradient: top, rgba(255,255,255,.2), rgba(255,255,255,0);
+@tabstrip-active-icon-gradient: top, rgba(255,255,255,.6) 0, rgba(255,255,255,0) 50%, rgba(255,255,255,.3) 100%;
+
+@button-active-shadow: inset 0 0 0 1px rgba(0,0,0,.3), inset 0 0 0 1000px rgba(0,0,0,.2);
+@buttongroup-active-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+@detail-active-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
+
+/* CSS */
+
 .km-ios
 {
     background: #fff;
@@ -44,7 +65,7 @@
     text-decoration: none;
     border: 1px solid #394d68;
     border-color: #2f3740 #394d68 #375073;
-    background-color: #7185a2;
+    background-color: @default-background-color;
 }
 
 .km-ios .km-button
@@ -53,7 +74,7 @@
     border-width: 0;
     border-bottom: 1px solid rgba(255,255,255,.5);
     padding: .4em .8em;
-    background: transparent, #496b9a;
+    background: transparent, @button-background-color;
     .linear-gradient-image(top, rgba(0,0,0,.3), rgba(0,0,0,0) 10%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5),
                      top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
     .box-shadow(inset 0 0 0 1px rgba(0,0,0,.3));
@@ -62,9 +83,9 @@
 .km-ios .km-button:active,
 .km-ios .km-button.km-state-active
 {
-    background-color: #264e8c;
-    -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,.3), inset 0 0 0 1000px rgba(0,0,0,.2);
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.3), inset 0 0 0 1000px rgba(0,0,0,.2);
+    background-color: @button-active-background-color;
+    -webkit-box-shadow: @button-active-shadow;
+    box-shadow: @button-active-shadow;
 }
 
 .km-ios li.km-state-active
@@ -283,8 +304,8 @@
 .km-ios .km-detail:active,
 .km-ios .km-detail.km-state-active
 {
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
-    box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
+    -webkit-box-shadow: @detail-active-shadow;
+    box-shadow: @detail-active-shadow;
 }
 
 .km-ios5 .km-listview .km-switch
@@ -297,7 +318,17 @@
     background-color: #000;
 }
 
+.km-font-icons.km-ios :-webkit-any(.km-list) .km-icon:after
+{
+    background-color: #000;
+}
+
 .km-ios li.km-state-active .km-icon
+{
+    background-color: #fff;
+}
+
+.km-font-icons.km-ios :-webkit-any(.km-state-active) .km-icon:after
 {
     background-color: #fff;
 }
@@ -308,6 +339,11 @@
     top: 10%;
     width: 90%;
     height: 90%;
+    background-color: #fff;
+}
+
+.km-font-icons.km-ios :-webkit-any(.km-detail) .km-icon:after
+{
     background-color: #fff;
 }
 
@@ -373,8 +409,8 @@
 {
     text-shadow: none;
     border-width: 1px 0 1px 1px;
-    -webkit-box-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: @buttongroup-active-shadow;
+    box-shadow: @buttongroup-active-shadow;
 }
 
 .km-ios .km-header > .km-buttongroup .km-state-active,
@@ -509,9 +545,9 @@
 .km-ios .km-listinset li:first-child > .km-listview-label,
 .km-ios .km-listgroupinset li:first-child > .km-listview-label
 {
-    -webkit-border-top-left-radius: 9px;
-    -webkit-border-top-right-radius: 9px;
-    .border-radius(9px 9px 0 0);
+    -webkit-border-top-left-radius: @list-border-radius;
+    -webkit-border-top-right-radius: @list-border-radius;
+    .border-radius(@list-border-radius @list-border-radius 0 0);
 }
 
 .km-ios .km-listinset li:last-child > .km-listview-link,
@@ -519,9 +555,9 @@
 .km-ios .km-listinset li:last-child > .km-listview-label,
 .km-ios .km-listgroupinset li:last-child > .km-listview-label
 {
-    -webkit-border-bottom-left-radius: 9px;
-    -webkit-border-bottom-right-radius: 9px;
-    .border-radius(0 0 9px 9px);
+    -webkit-border-bottom-left-radius: @list-border-radius;
+    -webkit-border-bottom-right-radius: @list-border-radius;
+    .border-radius(0 0 @list-border-radius @list-border-radius);
 }
 
 .km-ios .km-listinset li:first-child:last-child > .km-listview-link,
@@ -529,7 +565,7 @@
 .km-ios .km-listinset li:first-child:last-child > .km-listview-label,
 .km-ios .km-listgroupinset li:first-child:last-child > .km-listview-label
 {
-    .border-radius(9px);
+    .border-radius(@list-border-radius);
 }
 
 .km-ios .km-group-title
@@ -588,25 +624,58 @@
 .km-ios .km-button .km-icon,
 .km-ios .km-button.km-state-active .km-icon
 {
-    .linear-gradient-image(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
+    .linear-gradient-image(@button-icon-gradient);
+}
+
+.km-font-icons.km-ios :-webkit-any(.km-button) .km-icon:after,
+.km-font-icons.km-ios :-webkit-any(.km-button.km-state-active) .km-icon:after
+{
+    .linear-gradient-image(@button-icon-gradient);
 }
 
 .km-ios .km-buttongroup .km-icon
 {
     margin-top: .1em;
-    .linear-gradient-image(top, rgba(0,0,0,.5), rgba(0,0,0,.3));
+    .linear-gradient-image(@buttongroup-icon-gradient);
+}
+
+.km-font-icons.km-ios :-webkit-any(.km-buttongroup) .km-icon:after
+{
+    .linear-gradient-image(@buttongroup-icon-gradient);
 }
 
 .km-ios .km-tabstrip .km-icon
 {
-    background: rgba(255,255,255,.3);
-    .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,0));
+    background: @tabstrip-icon-color;
+    .linear-gradient-image(@tabstrip-icon-gradient);
+}
+
+.km-font-icons.km-ios .km-tabstrip .km-icon:after
+{
+    color: @tabstrip-icon-color;
+}
+
+.km-font-icons.km-ios :-webkit-any(.km-tabstrip) .km-icon:after
+{
+    background: @tabstrip-icon-color;
+    .linear-gradient-image(@tabstrip-icon-gradient);
 }
 
 .km-ios .km-tabstrip .km-state-active .km-icon
 {
-    background: #3F99D2;
-    .linear-gradient-image(top, rgba(255,255,255,.6) 0, rgba(255,255,255,0) 50%, rgba(255,255,255,.3) 100%);
+    background: @tabstrip-active-icon-color;
+    .linear-gradient-image(@tabstrip-active-icon-gradient);
+}
+
+.km-font-icons.km-ios .km-tabstrip .km-state-active .km-icon:after
+{
+    color: @tabstrip-active-icon-color;
+}
+
+.km-font-icons.km-ios :-webkit-any(.km-tabstrip) .km-state-active .km-icon:after
+{
+    background: @tabstrip-active-icon-color;
+    .linear-gradient-image(@tabstrip-active-icon-gradient);
 }
 
 /* Pull To Refresh */
@@ -622,12 +691,14 @@
     background: #788193;
     width: 2.4rem;
     height: 2.4rem;
+    font-size: 2.4rem;
 }
 
 .km-ios .km-scroller-refresh .km-icon
 {
     width: 2rem;
     height: 2rem;
+    font-size: 2rem;
 }
 
 /* ScrollView */
@@ -917,22 +988,22 @@
 
 .km-tablet .km-ios .km-tabstrip
 {
-    padding: .4em 0 .2em;
+    padding: .2rem 0 .2rem;
 }
 
 .km-tablet .km-ios.km-horizontal .km-tabstrip
 {
-    padding: .2em 0 0;
+    padding: .2rem 0 0;
 }
 
 .km-tablet .km-ios .km-tabstrip .km-icon
 {
-    margin: .3em auto;
+    margin: .3rem auto;
 }
 
 .km-tablet .km-ios.km-horizontal .km-tabstrip .km-icon
 {
-    margin: 0 auto;
+    margin: .1rem auto;
 }
 
 .km-tablet .km-ios .km-tabstrip .km-button
@@ -1135,7 +1206,7 @@
 
 .km-ios .km-modalview
 {
-    background-color: #7185a2;
+    background-color: @default-background-color;
     .box-sizing(border-box);
     .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
 }

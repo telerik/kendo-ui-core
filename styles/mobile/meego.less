@@ -258,6 +258,7 @@
     top: 12%;
     width: 80%;
     height: 80%;
+    font-size: 80%;
     background-color: #282828;
 }
 
@@ -371,7 +372,9 @@
 
 .km-meego .km-tabstrip
 {
-    display: table;
+    .flexbox(box);
+    .box-orient(horizontal);
+    .flex-direction(row);
     padding: 0;
     background: #e5e5e5;
     .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.2));
@@ -384,7 +387,9 @@
 .km-meego .km-tabstrip .km-button
 {
     color: #999;
-    display: table-cell;
+    .flex(1);
+    .flex-align(stretch);
+    display: block;
     padding: .5rem 0 .4rem;
     .border-radius(0);
     border-style: solid;
@@ -440,7 +445,6 @@
 .km-meego .km-tabstrip .km-state-active
 {
     color: #2e2e2e;
-    padding-bottom: 0;
     .box-shadow(none);
 }
 
@@ -642,11 +646,28 @@
 
 /* Icon styles */
 
+.km-font-icons.km-meego .km-icon:after
+{
+    text-shadow: 1px 1px 0 rgba(255,255,255,.5);
+}
+
+.km-font-icons.km-meego .km-state-active .km-icon:after
+{
+    text-shadow: none;
+}
+
 .km-meego .km-list .km-icon,
 .km-meego .km-navbar .km-icon,
 .km-meego .km-button .km-icon
 {
     .linear-gradient-image(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
+}
+
+.km-font-icons.km-meego .km-list .km-icon:after,
+.km-font-icons.km-meego .km-navbar .km-icon:after,
+.km-font-icons.km-meego .km-button .km-icon:after
+{
+    color: rgba(0,0,0,.8);
 }
 
 .km-meego .km-button.km-state-active .km-icon
@@ -655,13 +676,18 @@
     .linear-gradient-image(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
 }
 
+.km-font-icons.km-meego .km-button.km-state-active .km-icon:after
+{
+    color: #96a6b4;
+}
+
 .km-meego .km-tabstrip .km-icon
 {
     width: 1.8rem;
     height: 1.8rem;
+    font-size: 1.8rem;
     position: relative;
-    left: 50%;
-    margin: ~".3rem 0 .4rem -.9rem";
+    margin: .3rem auto .4rem;
 }
 
 .km-meego .km-listinset .km-state-active .km-listview-link > .km-icon,
@@ -670,10 +696,21 @@
     background: #fff;
 }
 
+.km-font-icons.km-meego .km-listinset .km-state-active .km-listview-link > .km-icon:after,
+.km-font-icons.km-meego .km-listgroupinset .km-state-active .km-listview-link > .km-icon:after
+{
+    color: #fff;
+}
+
 .km-meego .km-tabstrip .km-button .km-icon
 {
     background: #231f20;
     .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.4));
+}
+
+.km-font-icons.km-meego .km-tabstrip .km-button .km-icon:after
+{
+    color: #433f40;
 }
 
 /* Pull to refresh */
@@ -688,6 +725,7 @@
     background-color: #333;
     width: 2.4rem;
     height: 2.4rem;
+    font-size: 2.4rem;
 }
 
 /* ScrollView */
