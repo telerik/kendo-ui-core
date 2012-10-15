@@ -1,10 +1,14 @@
 package com.kendoui.taglib;
 
+import java.util.Map;
+import java.util.List;
+
 public class DataSourceRequest {
     private int page;
     private int pageSize;
     private int take;
     private int skip;
+    private List<Map<String, String>> sort;
     
     public int getPage() {
         return page;
@@ -36,6 +40,14 @@ public class DataSourceRequest {
 
     public void setSkip(int skip) {
         this.skip = skip;
+    }
+
+    public List<Map<String, String>> getSort() {
+        return sort;
+    }
+
+    public void setSort(List<Map<String, String>> sort) {
+        this.sort = sort;
     }
 
 }

@@ -12,7 +12,7 @@
    			<kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
    			<kendo:grid-column title="Units In Stock" field="unitsInStock" />
    		</kendo:grid-columns>
-   		<kendo:dataSource pageSize="10" serverPaging="true">
+   		<kendo:dataSource pageSize="10" serverPaging="true" serverSorting="true">
    			<kendo:dataSource-transport>
    				<kendo:dataSource-transport-read url="${transportReadUrl}" type="POST"/>
    				<kendo:dataSource-schema data="data" total="total" />

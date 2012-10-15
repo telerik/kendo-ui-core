@@ -1,10 +1,12 @@
 package com.kendoui.spring.models;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,7 +34,22 @@ public class ProductDaoImpl implements ProductDao {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
         result.setTotal((long)criteria.setProjection(Projections.rowCount()).uniqueResult());
         
+        
         criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
+        
+        if (request.getSort() != null && !request.getSort().isEmpty()) {
+            for (Map<String, String> sort : request.getSort()) {
+                String field = sort.get("field");
+                String dir = sort.get("dir");
+                
+                if (dir.equals("asc")) {
+                    criteria.addOrder(Order.asc(field));    
+                } else if (dir.equals("desc")) {
+                    criteria.addOrder(Order.desc(field));
+                }
+            }
+        }
+        
         criteria.setMaxResults(request.getTake());
         criteria.setFirstResult(request.getSkip());
         
