@@ -775,7 +775,10 @@
 
                 if (that._expanded(parentNode)) {
                     that._updateNodeClasses(parentNode);
-                    subGroup(parentNode).css("display", "block");
+                    subGroup(parentNode).css({
+                        display: "block",
+                        height: ""
+                    });
                 }
             }
 
