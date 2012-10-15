@@ -216,7 +216,7 @@
                 state = that._state,
                 data = that._data(),
                 length = data.length,
-                value, open;
+                value, open, custom;
 
             that.trigger("dataBinding");
 
@@ -233,8 +233,13 @@
                     that._state = "";
                 }
 
+                custom = that._option;
                 that._option = undefined;
                 that._options(data);
+
+                if (custom && custom[0].selected) {
+                    that._custom(custom.val());
+                }
             }
 
             if (length) {

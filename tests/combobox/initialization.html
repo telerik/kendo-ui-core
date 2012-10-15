@@ -169,6 +169,16 @@
 
            });
 
+           test("ComboBox persists custom value after re-bind", function() {
+               var select = $("<select></select>"),
+                   combobox = new ComboBox(select);
+
+                combobox.value("custom");
+                combobox.dataSource.data(["test"]);
+
+                equal(combobox.value(), "custom");
+           });
+
            test("selected index is get from select element", function() {
                var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
                    combobox = new ComboBox(select);
