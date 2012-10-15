@@ -206,6 +206,14 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements Animation,
         setProperty("close", new Function(value));
     }
 
+    public String getDataBound() {
+        return ((Function)getProperty("dataBound")).getBody();
+    }
+
+    public void setDataBound(String value) {
+        setProperty("dataBound", new Function(value));
+    }
+
     public String getOpen() {
         return ((Function)getProperty("open")).getBody();
     }

@@ -486,7 +486,7 @@ class Tag
 
             child_options = @options.find_all { |o| o.name.start_with?(prefix) }
 
-            if child_options.any?
+            if child_options.any? && option.type =~ /Array|Object/i
                 @options.delete(option)
 
                 child_options.each do |o|

@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis, Title, Area, Legend, PlotArea, Series, Tooltip, XAxis, SeriesDefaults, ValueAxis, DataBoundWidget/* interfaces */ {
+public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis, Title, Area, Legend, PlotArea, Series, Tooltip, SeriesDefaults, ValueAxis, XAxis, DataBoundWidget/* interfaces */ {
 
     public ChartTag() {
         super("Chart");
@@ -82,11 +82,6 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
     }
 
     @Override
-    public void setXAxis(XAxisTag value) {
-        setProperty("xaxis", value.properties());
-    }
-
-    @Override
     public void setSeriesDefaults(SeriesDefaultsTag value) {
         setProperty("seriesdefaults", value.properties());
     }
@@ -94,6 +89,11 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
     @Override
     public void setValueAxis(ValueAxisTag value) {
         setProperty("valueaxis", value.properties());
+    }
+
+    @Override
+    public void setXAxis(XAxisTag value) {
+        setProperty("xaxis", value.properties());
     }
 
     @Override

@@ -9,7 +9,10 @@ import javax.persistence.Column;
 @Table(name="Products")
 public class Product {
     private int productId;
-
+    private String productName;
+    private double unitPrice;
+    private int unitsInStock;
+    
     @Id
     @Column(name="ProductID")
     public int getProductId() {
@@ -20,4 +23,27 @@ public class Product {
         this.productId = productId;
     }
     
+    public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+	public int getUnitsInStock() {
+		return unitsInStock;
+	}
+
+	public void setUnitsInStock(int unitsInStock) {
+		this.unitsInStock = unitsInStock;
+	}
 }

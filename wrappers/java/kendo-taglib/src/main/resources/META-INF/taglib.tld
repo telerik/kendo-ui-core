@@ -125,6 +125,11 @@ the dataSource.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when the AutoComplete has received data from the data source.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when the drop-down list is opened</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
@@ -142,7 +147,7 @@ the dataSource.</description>
         <tag-class>com.kendoui.taglib.EventTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
-            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open, select.</description>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, dataBound, open, select.</description>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
@@ -480,6 +485,11 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when the ComboBox has received data from the data source.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when the drop-down list is opened</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
@@ -497,7 +507,7 @@ and is about to render it.</description>
         <tag-class>com.kendoui.taglib.EventTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
-            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open, select.</description>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, dataBound, open, select.</description>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
@@ -1022,6 +1032,11 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when the drop-down list has received data from the data source.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when the drop-down list is opened</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1039,7 +1054,7 @@ The following settings are available for the</description>
         <tag-class>com.kendoui.taglib.EventTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
-            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, open, select.</description>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, close, dataBound, open, select.</description>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
@@ -1155,8 +1170,22 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
+            <description>Indicates whether grouping is enabled/disabled.</description>
+            <name>groupable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
             <name>navigatable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates whether paging is enabled/disabled.</description>
+            <name>pageable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -2268,10 +2297,10 @@ tab.</description>
 
 
         <attribute>
-            <description>Template for rendering of the treeview checkboxes.</description>
-            <name>checkboxTemplate</name>
+            <description>If</description>
+            <name>checkboxes</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>boolean</type>
         </attribute>
 
         <attribute>
@@ -2779,6 +2808,29 @@ This is often used in combination with the</description>
         </attribute>
 
         <attribute>
+            <description>By default, the first and last dates will be rounded off to the nearest base unit.
+Specifying</description>
+            <name>roundToBaseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the week start day when</description>
+            <name>weekStartDay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the maximum number of groups (categories) to produce when
+either</description>
+            <name>maxDateGroups</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
             <description>The visibility of the axis.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -3059,69 +3111,6 @@ Template variables:</description>
 
 
     <tag>
-        <description>The name of the X axis to use.</description>
-        <name>chart-xAxis</name>
-        <tag-class>com.kendoui.taglib.chart.XAxisTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The axis type.</description>
-            <name>type</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Date at which the Y axis crosses this axis.</description>
-            <name>axisCrossingValue</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.util.Date</type>
-        </attribute>
-
-        <attribute>
-            <description>The base time interval for the axis labels.
-The default baseUnit is determined automatically from the value range. Available options:</description>
-            <name>baseUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The interval between major divisions in base units.</description>
-            <name>majorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The end date of the axis.
-This is often used in combination with the</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.util.Date</type>
-        </attribute>
-
-        <attribute>
-            <description>The start date of the axis.
-This is often used in combination with the</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.util.Date</type>
-        </attribute>
-
-        <attribute>
-            <description>The interval between minor divisions in base units.
-It defaults to 1/5th of the majorUnit.</description>
-            <name>minorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-
-    </tag>
-
-
-    <tag>
         <description>Default values for each series.</description>
         <name>chart-seriesDefaults</name>
         <tag-class>com.kendoui.taglib.chart.SeriesDefaultsTag</tag-class>
@@ -3232,6 +3221,70 @@ values increase from right to left and from top to bottom.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Scatter charts X-axis configuration options.
+Includes</description>
+        <name>chart-xAxis</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The axis type.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Date at which the Y axis crosses this axis.</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>The base time interval for the axis labels.
+The default baseUnit is determined automatically from the value range. Available options:</description>
+            <name>baseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between major divisions in base units.</description>
+            <name>majorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end date of the axis.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>The start date of the axis.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between minor divisions in base units.
+It defaults to 1/5th of the majorUnit.</description>
+            <name>minorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
 
     </tag>
 
@@ -3829,6 +3882,13 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
+            <description>The line of the area chart.</description>
+            <name>line</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Configures the behavior for handling missing values in area series.</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4036,13 +4096,6 @@ The function return value is displayed instead of the individual points.</descri
         <attribute>
             <description>The data field containing the close value.</description>
             <name>closeField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The line of the candlestick chart.</description>
-            <name>line</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4448,22 +4501,6 @@ Template variables:</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Label settings specific to the date axis.</description>
-        <name>chart-xAxis-labels</name>
-        <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Culture to use for formatting the dates. See</description>
-            <name>culture</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -5051,6 +5088,22 @@ hex and rgb.</description>
 
 
     <tag>
+        <description>Label settings specific to the date axis.</description>
+        <name>chart-xAxis-labels</name>
+        <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Culture to use for formatting the dates. See</description>
+            <name>culture</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn off the animation.</description>
         <name>comboBox-animation</name>
         <tag-class>com.kendoui.taglib.combobox.AnimationTag</tag-class>
@@ -5413,29 +5466,6 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Specifies whether given column is sortable.</description>
-        <name>grid-sortable</name>
-        <tag-class>com.kendoui.taglib.grid.SortableTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Defines whether column can have unsorted state.</description>
-            <name>allowUnsort</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>Defines sorting mode. Possible values:</description>
-            <name>mode</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
         <description>Indicates whether editing is enabled/disabled.</description>
         <name>grid-editable</name>
         <tag-class>com.kendoui.taglib.grid.EditableTag</tag-class>
@@ -5548,6 +5578,29 @@ the minimum and maximum values.</description>
             <name>info</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines whether grid columns are sortable.</description>
+        <name>grid-sortable</name>
+        <tag-class>com.kendoui.taglib.grid.SortableTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines whether column can have unsorted state.</description>
+            <name>allowUnsort</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines sorting mode. Possible values:</description>
+            <name>mode</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -7007,6 +7060,29 @@ Setting this option to</description>
 
 
     <tag>
+        <description>If</description>
+        <name>treeView-checkboxes</name>
+        <tag-class>com.kendoui.taglib.treeview.CheckboxesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked.</description>
+            <name>checkChildren</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Template for the checkbox rendering. Used to set the  checkbox name attribute, or to add hidden inputs that will be posted along the checkboxes.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Contains items of TreeView</description>
         <name>treeView-items</name>
         <tag-class>com.kendoui.taglib.treeview.ItemsTag</tag-class>
@@ -7060,7 +7136,7 @@ node is expanded.</description>
         </attribute>
 
         <attribute>
-            <description>Template for rendering of the treeview checkboxes.</description>
+            <description>If</description>
             <name>show</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>

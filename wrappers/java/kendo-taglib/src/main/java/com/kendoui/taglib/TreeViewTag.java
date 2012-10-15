@@ -10,7 +10,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements Animation, Items, DataBoundWidget/* interfaces */ {
+public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements Animation, Checkboxes, Items, DataBoundWidget/* interfaces */ {
 
     public TreeViewTag() {
         super("TreeView");
@@ -58,18 +58,23 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements A
     }
 
     @Override
+    public void setCheckboxes(CheckboxesTag value) {
+        setProperty("checkboxes", value.properties());
+    }
+
+    @Override
     public void setItems(ItemsTag value) {
 
         items = value.items();
 
     }
 
-    public String getCheckboxTemplate() {
-        return (String)getProperty("checkboxTemplate");
+    public boolean getCheckboxes() {
+        return (boolean)getProperty("checkboxes");
     }
 
-    public void setCheckboxTemplate(String value) {
-        setProperty("checkboxTemplate", value);
+    public void setCheckboxes(boolean value) {
+        setProperty("checkboxes", value);
     }
 
     public String getDataImageUrlField() {

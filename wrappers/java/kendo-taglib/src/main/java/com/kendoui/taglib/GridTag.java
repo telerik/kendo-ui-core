@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class GridTag extends WidgetTag /* interfaces */implements Columns, Sortable, Editable, Groupable, Pageable, Toolbar, DataBoundWidget/* interfaces */ {
+public class GridTag extends WidgetTag /* interfaces */implements Columns, Editable, Groupable, Pageable, Sortable, Toolbar, DataBoundWidget/* interfaces */ {
 
     public GridTag() {
         super("Grid");
@@ -52,11 +52,6 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
     }
 
     @Override
-    public void setSortable(SortableTag value) {
-        setProperty("sortable", value.properties());
-    }
-
-    @Override
     public void setEditable(EditableTag value) {
         setProperty("editable", value.properties());
     }
@@ -69,6 +64,11 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
     @Override
     public void setPageable(PageableTag value) {
         setProperty("pageable", value.properties());
+    }
+
+    @Override
+    public void setSortable(SortableTag value) {
+        setProperty("sortable", value.properties());
     }
 
     @Override
@@ -91,12 +91,28 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Sorta
         setProperty("dataSource", dataSource.properties());
     }
 
+    public boolean getGroupable() {
+        return (boolean)getProperty("groupable");
+    }
+
+    public void setGroupable(boolean value) {
+        setProperty("groupable", value);
+    }
+
     public boolean getNavigatable() {
         return (boolean)getProperty("navigatable");
     }
 
     public void setNavigatable(boolean value) {
         setProperty("navigatable", value);
+    }
+
+    public boolean getPageable() {
+        return (boolean)getProperty("pageable");
+    }
+
+    public void setPageable(boolean value) {
+        setProperty("pageable", value);
     }
 
     public boolean getScrollable() {

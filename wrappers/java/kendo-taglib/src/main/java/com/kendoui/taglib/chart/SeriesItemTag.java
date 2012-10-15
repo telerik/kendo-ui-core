@@ -128,6 +128,14 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
         setProperty("color", value);
     }
 
+    public String getLine() {
+        return (String)getProperty("line");
+    }
+
+    public void setLine(String value) {
+        setProperty("line", value);
+    }
+
     public String getMissingValues() {
         return (String)getProperty("missingValues");
     }
@@ -366,14 +374,6 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
 
     public void setCloseField(String value) {
         setProperty("closeField", value);
-    }
-
-    public String getLine() {
-        return (String)getProperty("line");
-    }
-
-    public void setLine(String value) {
-        setProperty("line", value);
     }
 
 //<< Attributes

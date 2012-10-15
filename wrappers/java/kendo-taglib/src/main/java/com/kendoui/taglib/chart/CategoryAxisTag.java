@@ -171,6 +171,30 @@ public class CategoryAxisTag extends BaseTag /* interfaces */implements Labels, 
         setProperty("min", value);
     }
 
+    public boolean getRoundToBaseUnit() {
+        return (boolean)getProperty("roundToBaseUnit");
+    }
+
+    public void setRoundToBaseUnit(boolean value) {
+        setProperty("roundToBaseUnit", value);
+    }
+
+    public float getWeekStartDay() {
+        return (float)getProperty("weekStartDay");
+    }
+
+    public void setWeekStartDay(float value) {
+        setProperty("weekStartDay", value);
+    }
+
+    public float getMaxDateGroups() {
+        return (float)getProperty("maxDateGroups");
+    }
+
+    public void setMaxDateGroups(float value) {
+        setProperty("maxDateGroups", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }
