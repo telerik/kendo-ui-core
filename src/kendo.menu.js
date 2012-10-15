@@ -792,10 +792,8 @@
         },
 
         _moveHover: function (item, nextItem) {
-            if (item) {
+            if (item && nextItem) {
                 item.removeClass(HOVERSTATE);
-            }
-            if (nextItem) {
                 nextItem.addClass(HOVERSTATE);
                 this._oldHoverItem = nextItem;
             }
@@ -832,7 +830,7 @@
                 nextItem = parentItem.next();
             }
 
-            if (!nextItem.length) {
+            if (nextItem && !nextItem.length) {
                 nextItem = that.wrapper.children(".k-item").first();
             }
 
