@@ -1205,6 +1205,13 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
+            <description>Defines whether grid columns are sortable.</description>
+            <name>sortable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>Fires when the grid selection has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>

@@ -131,6 +131,14 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Edita
         setProperty("selectable", value);
     }
 
+    public boolean getSortable() {
+        return (boolean)getProperty("sortable");
+    }
+
+    public void setSortable(boolean value) {
+        setProperty("sortable", value);
+    }
+
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }
