@@ -590,7 +590,9 @@
                 var suite = $(e.target).closest(".ktb-view").data("suite"),
                     format = suite == "web" ? "LESS or CSS" : "JSON";
 
-                $("#import-overlay").slideDown()
+                $("#import-overlay")
+                    .data("suite", suite)
+                    .slideDown()
                     .find("textarea")
                         .val("/*************************\n" +
                              "  paste " + format + " here \n" +
@@ -621,6 +623,8 @@
                         clientObject.value(constant.value);
                     }
                 });
+
+                theme.applyTheme(this.targetDocument);
             },
             hideOverlay: function(e) {
                 e.preventDefault();
