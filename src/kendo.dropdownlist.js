@@ -40,6 +40,8 @@
 
             that._wrapper();
 
+            that._tabindex();
+
             that._span();
 
             that._popup();
@@ -462,17 +464,15 @@
             var that = this,
                 element = that.element,
                 DOMelement = element[0],
-                tabIndex = element.attr(TABINDEX),
                 wrapper;
 
             wrapper = element.parent();
 
             if (!wrapper.is("span.k-widget")) {
                 wrapper = element.wrap("<span />").parent();
+                wrapper[0].style.cssText = DOMelement.style.cssText;
             }
 
-            wrapper.attr(TABINDEX, tabIndex || 0);
-            wrapper[0].style.cssText = DOMelement.style.cssText;
             element.hide();
 
             that._focused = that.wrapper = wrapper
