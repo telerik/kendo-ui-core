@@ -451,6 +451,12 @@
                 ok(!table.find("tbody tr:first").hasClass("k-state-selected"));
             });
 
+            test("hierarchy cell links tabindex", function() {
+                var grid = setup({ detailTemplate: "template" });
+
+                equal(table.find(".k-hierarchy-cell>a").attr("tabindex"), -1);
+            });
+
             test("k-hierarchy-cell is not highlighted when grid is focused", function() {
                 var grid = setup({ detailTemplate: "template" });
                 grid.table.focus();
@@ -466,6 +472,13 @@
 
                 ok(!table.find("tbody tr:eq(0)").find("td:first").hasClass("k-state-focused"));
                 ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
+            });
+
+            test("group cell links tabindex", function() {
+                var grid = setup();
+                grid.dataSource.group({ field: "foo" });
+
+                equal(table.find(".k-grouping-row a").attr("tabindex"), -1);
             });
 
             test("group footer row is not selected when clicked", function() {

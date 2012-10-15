@@ -24,7 +24,7 @@
         //CELL_SELECTOR =  ROW_SELECTOR + ">td" + DATA_CELL,
         //FIRST_CELL_SELECTOR = ROW_SELECTOR + ":first" + ">td" + DATA_CELL + ":first",
         NAVROW = "tr:visible",
-        NAVCELL = ":not(.k-group-cell,.k-hierarchy-cell):visible",
+        NAVCELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
         FIRSTNAVITEM = NAVROW + ":first>" + NAVCELL + ":first",
         NS = ".kendoGrid",
         EDIT = "edit",
@@ -2410,7 +2410,7 @@
                 }
 
                 if (hasDetails) {
-                    rowTemplate += '<td class="k-hierarchy-cell"><a class="k-icon k-plus" href="\\#"></a></td>';
+                    rowTemplate += '<td class="k-hierarchy-cell"><a class="k-icon k-plus" href="\\#" tabindex="-1"></a></td>';
                 }
 
                 for (idx = 0; idx < length; idx++) {
@@ -2856,7 +2856,7 @@
             html +=  '<tr class="k-grouping-row">' + groupCells(level) +
                       '<td colspan="' + colspan + '">' +
                         '<p class="k-reset">' +
-                         '<a class="k-icon k-i-collapse" href="#"></a>' + text +
+                         '<a class="k-icon k-i-collapse" href="#" tabindex="-1"></a>' + text +
                          '</p></td></tr>';
 
             if(group.hasSubgroups) {
