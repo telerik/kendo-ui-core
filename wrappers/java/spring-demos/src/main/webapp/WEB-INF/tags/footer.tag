@@ -1,6 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 			</div>
 			<div class="source">
+				Source:
 				<a href="#" class="offline-button view selected">JSP</a>
 				<div class="code">
 					<pre class="prettyprint view">${fn:escapeXml(view)}</pre>

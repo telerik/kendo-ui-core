@@ -15,7 +15,8 @@
     </head>
     <body>
     	<div class="page">
-    		<div id="example" class="k-content">
     		<a class="offline-button" href="<c:url value='../' />">Back to all examples</a>
+    		<div id="example" class="k-content">
+    		
     		
 
