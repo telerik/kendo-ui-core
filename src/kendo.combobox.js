@@ -298,12 +298,11 @@
             clearTimeout(that._typing);
 
             if (length >= options.minLength) {
+                that._state = STATE_FILTER;
                 if (filter === "none") {
                     that._filter(word);
                 } else {
                     that._open = true;
-                    that._state = STATE_FILTER;
-
                     that._filterSource({
                         value: ignoreCase ? word.toLowerCase() : word,
                         field: field,
@@ -442,11 +441,6 @@
             var that = this;
 
             if (li && that.popup.visible()) {
-
-                if (that._state === STATE_FILTER) {
-                    that._state = STATE_ACCEPT;
-                }
-
                 that._focus(li);
             } else {
                 that.text(that.text());
@@ -458,6 +452,10 @@
             var that = this,
                 element = that.element,
                 custom = that._option;
+
+            if (that._state === STATE_FILTER) {
+                that._state = STATE_ACCEPT;
+            }
 
             if (element.is(SELECT)) {
                 if (!custom) {
@@ -651,6 +649,10 @@
             that.selectedIndex = idx;
 
             if (idx !== -1) {
+                if (that._state === STATE_FILTER) {
+                    that._state = STATE_ACCEPT;
+                }
+
                 that._current.addClass(STATE_SELECTED);
 
                 data = data[idx];
