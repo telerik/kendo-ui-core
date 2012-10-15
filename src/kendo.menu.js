@@ -794,6 +794,8 @@
         _moveHover: function (item, nextItem) {
             if (item && nextItem) {
                 item.removeClass(HOVERSTATE);
+            }
+            if (nextItem) {
                 nextItem.addClass(HOVERSTATE);
                 this._oldHoverItem = nextItem;
             }

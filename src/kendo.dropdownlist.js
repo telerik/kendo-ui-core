@@ -12,7 +12,6 @@
         DEFAULT = "k-state-default",
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
-        TABINDEX = "tabIndex",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         proxy = $.proxy;
 
