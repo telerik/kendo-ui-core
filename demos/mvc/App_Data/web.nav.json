@@ -310,7 +310,7 @@
                 {
                     "text": "Initialization from table",
                     "url": "grid/from-table.html",
-                    "packages": ["!mvc"]
+                    "packages": ["!mvc", "!jsp"]
                 },
                 {
                     "text": "Binding to local data",

@@ -91,6 +91,14 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Edita
         setProperty("dataSource", dataSource.properties());
     }
 
+    public boolean getFilterable() {
+        return (boolean)getProperty("filterable");
+    }
+
+    public void setFilterable(boolean value) {
+        setProperty("filterable", value);
+    }
+
     public boolean getGroupable() {
         return (boolean)getProperty("groupable");
     }
