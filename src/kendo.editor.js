@@ -83,12 +83,13 @@
                 currentTool, tool, i,
                 nativeTools = editor._nativeTools,
                 template,
+                options,
                 toolsArea = $(editor.element).closest(".k-editor").find(".k-editor-toolbar");
 
             if (tools) {
                 for (i = 0; i < tools.length; i++) {
                     currentTool = tools[i];
-                    var options;
+                    options = null;
 
                     if ($.isPlainObject(currentTool)) {
 
