@@ -858,11 +858,14 @@
 .km-ios .km-popup .k-item,
 .km-ios .km-actionsheet > li > a
 {
-    background: transparent, #fff;
+    overflow: hidden;
+    background: #fff;
     .linear-gradient-image(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5),
                      top, rgba(0,0,0,0), rgba(0,0,0,0.1) 50%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.2));
     padding: .3em 0 .3em .6em;
     color: #000;
+    border-width: 3px;
+    border-color: rgba(0,0,0,.8);
     .border-radius(.6em);
     .box-shadow(~"inset 0 1px 1px rgba(255,255,255,.5), 0 1px 1px rgba(255,255,255,.5)");
     .box-sizing(border-box);
@@ -872,7 +875,7 @@
 
 .km-root .km-ios .km-popup .k-item
 {
-    border: 3px solid #32353a;
+    border: 3px solid rgba(0,0,0,.8);
 }
 
 .km-ios .km-popup .k-item,
@@ -911,9 +914,10 @@
 .km-ios .km-actionsheet > li > a:hover,
 .km-ios li.km-actionsheet-cancel > a
 {
-    background: transparent, #0b47a2;
+    background: #072398;
     .linear-gradient-image(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5),
-                     top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
+                     top, rgba(255,255,255,.6), rgba(255,255,255,.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,.15));
+    background-clip: padding-box;
     color: #fff;
     text-shadow: 0 -1px rgba(0,0,0,.3);
 }
