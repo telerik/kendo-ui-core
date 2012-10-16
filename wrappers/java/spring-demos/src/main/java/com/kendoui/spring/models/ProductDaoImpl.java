@@ -28,6 +28,26 @@ public class ProductDaoImpl implements ProductDao {
         return sessionFactory.getCurrentSession().createQuery("from Product").list();
     }
     
+    private static void restrict(Junction junction, Map<String, Object> filter) {
+        String operator = filter.get("operator").toString();
+        String field = filter.get("field").toString();
+        Object value = filter.get("value");
+        
+        try {
+            value = Double.parseDouble(value.toString());
+        }catch(NumberFormatException nfe) {
+        }
+        
+        switch(operator) {
+            case "eq":
+                junction.add(Restrictions.eq(field, value));
+                break;
+            case "neq":
+                junction.add(Restrictions.ne(field, value));
+                break;
+        }
+    }
+    
     private static void filter(Criteria criteria, Map<String, Object> filter) {
         List<Map<String, Object>> filters = (List<Map<String, Object>>)filter.get("filters");
         
@@ -42,24 +62,7 @@ public class ProductDaoImpl implements ProductDao {
                 if (entry.containsKey("logic")) {
                     filter(criteria, entry);
                 } else {
-                    String operator = entry.get("operator").toString();
-                    String field = entry.get("field").toString();
-                    Object value = entry.get("value");
-                    
-                    try {
-                        value = Double.parseDouble(value.toString());
-                    }catch(NumberFormatException nfe) {
-                        
-                    }
-                    
-                    switch(operator) {
-                        case "eq":
-                            junction.add(Restrictions.eq(field, value));
-                            break;
-                        case "neq":
-                            junction.add(Restrictions.ne(field, value));
-                            break;
-                    }
+                    restrict(junction, entry);
                 }
             }
             
@@ -72,11 +75,13 @@ public class ProductDaoImpl implements ProductDao {
         DataSourceResult result = new DataSourceResult();
         
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
-        result.setTotal((long)criteria.setProjection(Projections.rowCount()).uniqueResult());
-        
-        criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
         
         filter(criteria, request.getFilter());
+        
+        result.setTotal((long)criteria.setProjection(Projections.rowCount()).uniqueResult());
+        
+        criteria.setProjection(null);
+        criteria.setResultTransformer(Criteria.ROOT_ENTITY);
         
         if (request.getSort() != null && !request.getSort().isEmpty()) {
             for (Map<String, String> sort : request.getSort()) {
