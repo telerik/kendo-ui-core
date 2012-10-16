@@ -6918,20 +6918,27 @@
     getField.cache = {};
 
     function toDate(value) {
-        if (isArray(value)) {
-            return map(value, toDate);
+        var result,
+            aspDate,
+            i;
+
+        if (value instanceof Date) {
+            result = value;
+        } else if (typeof value === STRING) {
+            aspDate = DATE_REGEXP.exec(value);
+            result = new Date(aspDate ? parseInt(aspDate[1], 10) : value);
         } else if (value) {
-            if (value instanceof Date) {
-                return value;
-            } else {
-                if (typeof value === STRING) {
-                    var date = DATE_REGEXP.exec(value);
-                    return new Date(date ? parseInt(date[1], 10) : value);
-                } else {
-                    return new Date(value);
+            if (value.length) {
+                result = [];
+                for (i = 0; i < value.length; i++) {
+                    result.push(toDate(value[i]));
                 }
+            } else {
+                result = new Date(value);
             }
         }
+
+        return result;
     }
 
     function toTime(value) {
