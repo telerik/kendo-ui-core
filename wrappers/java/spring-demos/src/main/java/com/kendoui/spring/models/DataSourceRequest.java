@@ -1,5 +1,6 @@
-package com.kendoui.taglib;
+package com.kendoui.spring.models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -9,29 +10,17 @@ public class DataSourceRequest {
     private int pageSize;
     private int take;
     private int skip;
-    private List<Map<String, String>> sort;
+    
+    public class Sort {
+        
+    }
+    
+    private List<Sort> sort;
     private Map<String, Object> filter;
     
     public DataSourceRequest() {
         filter = new HashMap<String, Object>();
-        
-        List<Map<String, Object>> filters = new LazyList<Map<String, Object>>(new Factory<Map<String,Object>>() {
-            public Map<String, Object> create() {
-                Map<String, Object> result = new HashMap<String, Object>();
-        
-                List<Map<String, Object>> filters = new LazyList<Map<String, Object>>(new Factory<Map<String,Object>>() {
-                    public Map<String, Object> create() {
-                        return new HashMap<String, Object>();
-                    }
-                });
-                
-                result.put("filters", filters);
-                
-                return result; 
-            }
-        });
-        
-        filter.put("filters", filters);
+        filter.put("filters", new ArrayList<Map<String, Object>>(1));
     }
     
     public int getPage() {
@@ -66,11 +55,11 @@ public class DataSourceRequest {
         this.skip = skip;
     }
 
-    public List<Map<String, String>> getSort() {
+    public List<Sort> getSort() {
         return sort;
     }
 
-    public void setSort(List<Map<String, String>> sort) {
+    public void setSort(List<Sort> sort) {
         this.sort = sort;
     }
 

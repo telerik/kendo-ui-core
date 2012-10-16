@@ -23,6 +23,7 @@ public class Product {
         this.productId = productId;
     }
     
+    @Column(name="ProductName")
     public String getProductName() {
 		return productName;
 	}
@@ -31,6 +32,7 @@ public class Product {
 		this.productName = productName;
 	}
 
+	@Column(name="UnitPrice")
 	public double getUnitPrice() {
 		return unitPrice;
 	}
@@ -39,6 +41,7 @@ public class Product {
 		this.unitPrice = unitPrice;
 	}
 
+	@Column(name="UnitsInStock")
 	public int getUnitsInStock() {
 		return unitsInStock;
 	}
