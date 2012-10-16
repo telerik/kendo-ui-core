@@ -599,7 +599,7 @@
 
             if (checkboxOptions || options.checkboxTemplate) {
                 checkboxOptions = extend({
-                    template: options.checkboxTemplate || "<input type='checkbox' />"
+                    template: options.checkboxTemplate || "<input type='checkbox' #= item.checked ? 'checked' : '' # />"
                 }, options.checkboxes);
 
                 if (typeof checkboxOptions.template == "string") {
