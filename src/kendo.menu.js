@@ -721,9 +721,9 @@
                 hoverItem = that._hoverItem();
             
             if (target == that.wrapper[0] && hoverItem.length) {
-                that._moveHover(null, hoverItem);
+                that._moveHover([], hoverItem);
             } else if (target == that.wrapper[0]) {
-                that._moveHover(null, that.wrapper.children().first());
+                that._moveHover([], that.wrapper.children().first());
             }
         },
 
@@ -768,6 +768,7 @@
 
             if (target && target[0]) {
                 e.preventDefault();
+                e.stopPropagation(); // needed to handle ESC in column menu only when a root item is focused
             }
         },
 
@@ -792,10 +793,10 @@
         },
 
         _moveHover: function (item, nextItem) {
-            if (item && nextItem) {
+            if (item.length && nextItem.length) {
                 item.removeClass(HOVERSTATE);
             }
-            if (nextItem) {
+            if (nextItem.length) {
                 nextItem.addClass(HOVERSTATE);
                 this._oldHoverItem = nextItem;
             }
@@ -820,6 +821,9 @@
 
             if (!belongsToVertical) {
                 nextItem = item.next();
+                if (nextItem.is(".k-separator")) {
+                    nextItem = nextItem.next();
+                }
                 if (!nextItem.length) {
                     nextItem = item.parent().children().first();
                 }
@@ -830,10 +834,15 @@
                 parentItem = that._findRootParent(item);
                 that.close(parentItem);
                 nextItem = parentItem.next();
+                if (nextItem.is(".k-separator")) {
+                    nextItem = nextItem.next();
+                }
             }
 
             if (nextItem && !nextItem.length) {
                 nextItem = that.wrapper.children(".k-item").first();
+            } else if (!nextItem) {
+                nextItem = [];
             }
 
             that._moveHover(item, nextItem);
@@ -846,6 +855,9 @@
 
             if (!belongsToVertical) {
                 nextItem = item.prev();
+                if (nextItem.is(".k-separator")) {
+                    nextItem = nextItem.prev();
+                }
                 if (!nextItem.length) {
                     nextItem = item.parent().children().last();
                 }
@@ -854,6 +866,9 @@
                 that.close(nextItem);
                 if (that._isRootItem(nextItem) && that.options.orientation == "horizontal") {
                     nextItem = nextItem.prev();
+                    if (nextItem.is(".k-separator")) {
+                        nextItem = nextItem.prev();
+                    }
                 }
             }
 
@@ -878,6 +893,9 @@
                 }
             } else {
                 nextItem = item.next();
+                if (nextItem.is(".k-separator")) {
+                    nextItem = nextItem.next();
+                }
             }
 
             if (!nextItem.length && item.length) {
@@ -898,6 +916,9 @@
                 return;
             } else {
                 nextItem = item.prev();
+                if (nextItem.is(".k-separator")) {
+                    nextItem = nextItem.prev();
+                }
             }
 
             if (!nextItem.length && item.length) {

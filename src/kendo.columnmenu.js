@@ -110,6 +110,7 @@
         close: function() {
             this.menu.close();
             this.popup.close();
+            this.popup.element.off("keydown" + NS);
         },
 
         _click: function(e) {
@@ -119,8 +120,14 @@
         },
 
         _open: function() {
-            $(".k-column-menu").not(this.wrapper).each(function() {
+            var that = this;
+            $(".k-column-menu").not(that.wrapper).each(function() {
                 $(this).data(POPUP).close();
+            });
+            that.popup.element.on("keydown" + NS, function(e) {
+                if (e.keyCode == kendo.keys.ESC) {
+                    that.close();
+                }
             });
         },
 
