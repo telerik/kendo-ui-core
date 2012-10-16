@@ -4577,6 +4577,7 @@
 
             pane.charts.push(chart);
             pane.content.append(chart);
+            chart.pane = pane;
         },
 
         empty: function() {
@@ -4779,7 +4780,7 @@
             append(this.options.legend.items, data);
         },
 
-        reflow: function(targetBox) {
+        reflow: function(targetBox, filterPane) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
                 margin = getSpacing(options.margin);
@@ -4791,7 +4792,7 @@
                 plotArea.reflowAxes();
             }
 
-            plotArea.reflowCharts();
+            plotArea.reflowCharts(filterPane);
         },
 
         redrawPane: function(pane) {
@@ -4809,8 +4810,7 @@
             pane.empty();
             plotArea.render(pane);
 
-            // TODO: Reflow pane only
-            plotArea.reflow(plotArea.box);
+            plotArea.reflow(plotArea.box, pane);
             pane.refresh();
         },
 
@@ -5080,7 +5080,7 @@
             }
         },
 
-        reflowCharts: function() {
+        reflowCharts: function(filterPane) {
             var plotArea = this,
                 charts = plotArea.charts,
                 count = charts.length,
@@ -5088,7 +5088,9 @@
                 i;
 
             for (i = 0; i < count; i++) {
-                charts[i].reflow(box);
+                if (!filterPane || charts[i].pane == filterPane) {
+                    charts[i].reflow(box);
+                }
             }
         },
 
