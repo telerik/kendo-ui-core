@@ -60,6 +60,9 @@
                 '<select title="#= tooltip #" class="#= cssClass #"></select>' +
             '</li>',
 
+        separatorTemplate:
+            '<li class="k-separator"></li>',
+
         focusable: ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input",
 
         wrapTextarea: function(textarea) {
@@ -80,12 +83,12 @@
                 currentTool, tool, i,
                 nativeTools = editor._nativeTools,
                 template,
-                options,
                 toolsArea = $(editor.element).closest(".k-editor").find(".k-editor-toolbar");
 
             if (tools) {
                 for (i = 0; i < tools.length; i++) {
                     currentTool = tools[i];
+                    var options;
 
                     if ($.isPlainObject(currentTool)) {
 
@@ -691,9 +694,10 @@
                 "createLink",
                 "unlink",
                 "insertImage"/*,
-                "style", // declare explicitly
-                "subscript", // declare explicitly
-                "superscript" // declare explicitly */
+                "separator", // declare these explicitly
+                "style",
+                "subscript",
+                "superscript"  */
             ]
         },
 
@@ -969,6 +973,8 @@
             $ui.toggleClass("k-state-active", isActive);
         }
     });
+
+    EditorUtils.registerTool("separator", new Tool({ template: new ToolTemplate({template: EditorUtils.separatorTemplate})}));
 
     // Exports ================================================================
 
