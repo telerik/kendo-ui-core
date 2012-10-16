@@ -2555,7 +2555,8 @@ function pad(number) {
 
     $.extend($.expr[ ":" ], {
         focusable: function(element) {
-            return focusable(element, !isNaN($.attr(element, "tabindex")));
+            var idx = $.attr(element, "tabindex");
+            return focusable(element, !isNaN(idx) && idx > -1);
         }
     });
 })(jQuery);

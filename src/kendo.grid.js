@@ -1854,6 +1854,11 @@
                     $(document.activeElement).blur();
                 }
 
+                if (!that.editable) {
+                    that.table.focus();
+                    return;
+                }
+
                 if (that.editable.end()) {
                     if (mode == "incell") {
                         that.closeCell();
