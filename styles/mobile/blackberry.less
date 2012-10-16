@@ -562,7 +562,8 @@
 
 .km-blackberry input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-blackberry select:not([multiple]),
-.km-blackberry .k-dropdown
+.km-blackberry .k-dropdown,
+.km-blackberry textarea
 {
     .appearance(none);
     border: 1px solid rgba(0,0,0,.5);
@@ -573,7 +574,8 @@
 
 .km-blackberry .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-blackberry .km-list select:not([multiple]),
-.km-blackberry .km-list .k-dropdown
+.km-blackberry .km-list .k-dropdown,
+.km-blackberry .km-list textarea
 {
     margin-top: -1.05em;
     right: .8em;
@@ -615,7 +617,8 @@
 .km-blackberry input[type=tel],
 .km-blackberry input[type=url],
 .km-blackberry input[type=email],
-.km-blackberry input[type=text]:not(.k-input)
+.km-blackberry input[type=text]:not(.k-input),
+.km-blackberry textarea
 {
     .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
 }
@@ -626,7 +629,8 @@
 .km-blackberry input[type=tel]:focus,
 .km-blackberry input[type=url]:focus,
 .km-blackberry input[type=email]:focus,
-.km-blackberry input[type=text]:not(.k-input):focus
+.km-blackberry input[type=text]:not(.k-input):focus,
+.km-blackberry textarea:focus
 {
     border: 1px solid rgba(0,50,100,.7);
     .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 0 2px rgba(5,127,228,.6)");

@@ -1137,7 +1137,8 @@
 .km-list input[type=time],
 .km-list input[type=datetime],
 .km-list select:not([multiple]),
-.km-list .k-dropdown
+.km-list .k-dropdown,
+.km-list textarea
 {
     width: 50%;
     .box-sizing(border-box);
@@ -1145,7 +1146,8 @@
 
 .km-root input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-root select:not([multiple]),
-.km-root .k-dropdown
+.km-root .k-dropdown,
+.km-root textarea
 {
     font-size: 1.2em;
 }
@@ -1158,7 +1160,8 @@
     background: none;
 }
 
-.km-root input
+.km-root input,
+.km-root textarea
 {
     .user-select(text);
 }
@@ -1171,7 +1174,8 @@
 
 .km-root .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not(.k-input):not(.k-button),
 .km-root .km-list select:not([multiple]),
-.km-root .km-list .k-dropdown
+.km-root .km-list .k-dropdown,
+.km-root .km-list textarea
 {
     position: absolute;
     right: .8em;
@@ -1183,7 +1187,8 @@
 
 .km-root .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-root .km-list select:not([multiple]),
-.km-root .km-list .k-dropdown
+.km-root .km-list .k-dropdown,
+.km-root .km-list textarea
 {
     right: 0;
     margin-top: -.95em;
@@ -1196,6 +1201,7 @@
 
 .km-root .km-listview-label:after,
 .km-root input ~ .km-listview-link:after,
+.km-root textarea ~ .km-listview-link:after,
 .km-root select ~ .km-listview-link:after,
 .km-root .k-dropdown ~ .km-listview-link:after
 {
