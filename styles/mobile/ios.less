@@ -94,7 +94,7 @@
     color: white;
 }
 
-.km-ios .km-back
+.km-ios :-webkit-any(.km-back)
 {
     overflow: hidden;
     margin-left: -1em;
@@ -108,7 +108,7 @@
 .km-ios .km-back:after
 {
     content: "\a0";
-    display: block;
+    display: none;
     position: absolute;
     left: 1em;
     top: 0;
@@ -120,8 +120,14 @@
     background-repeat: no-repeat;
 }
 
+.km-ios :-webkit-any(.km-back):after
+{
+    display: block;
+}
+
 .km-ios :-moz-any(.km-back)
 {
+    overflow: hidden;
     margin-left: 0;
     padding-left: 1.4em;
     background-size: auto 100%;
@@ -130,6 +136,7 @@
 
 .km-ios :-moz-any(.km-back):after
 {
+    display: block;
     left: 0;
 }
 
