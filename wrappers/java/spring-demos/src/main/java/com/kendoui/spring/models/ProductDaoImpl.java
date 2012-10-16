@@ -6,6 +6,7 @@ import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -45,7 +46,32 @@ public class ProductDaoImpl implements ProductDao {
             case "neq":
                 junction.add(Restrictions.ne(field, value));
                 break;
+            case "gt":
+                junction.add(Restrictions.gt(field, value));
+                break;
+            case "gte":
+                junction.add(Restrictions.ge(field, value));
+                break;
+            case "lt":
+                junction.add(Restrictions.lt(field, value));
+                break;
+            case "lte":
+                junction.add(Restrictions.le(field, value));
+                break;
+            case "startswith":
+                junction.add(Restrictions.ilike(field, value.toString(), MatchMode.START));
+                break;
+            case "endswith":
+                junction.add(Restrictions.ilike(field, value.toString(), MatchMode.END));
+                break;
+            case "contains":
+                junction.add(Restrictions.ilike(field, value.toString(), MatchMode.ANYWHERE));
+                break;                
+            case "doesnotcontain":
+                junction.add(Restrictions.not(Restrictions.ilike(field, value.toString(), MatchMode.ANYWHERE)));
+                break;
         }
+
     }
     
     private static void filter(Criteria criteria, Map<String, Object> filter) {
