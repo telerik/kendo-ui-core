@@ -273,7 +273,7 @@
             "spriteCssClass": "chartAreaIcon",
             "thumbnailUrl": "content/dataviz/dashboards/stock.gif",
             "expanded": "true",
-            "packages": [ "!offline", "!mvc" ],
+            "packages": [ "!mvc" ],
             "items": [{
                 "text": "Launch",
                 "url": "dashboards/stock-history.html"
