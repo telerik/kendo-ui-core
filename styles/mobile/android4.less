@@ -795,7 +795,8 @@
 
 .km-android input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-android select:not([multiple]),
-.km-android .k-dropdown
+.km-android .k-dropdown,
+.km-android textarea
 {
     .appearance(none);
     color: #fff;
@@ -840,7 +841,8 @@
 .km-android input[type=tel],
 .km-android input[type=url],
 .km-android input[type=email],
-.km-android input[type=text]:not(.k-input)
+.km-android input[type=text]:not(.k-input),
+.km-android textarea
 {
     border: 0;
     border-bottom: 1px solid rgba(127,127,127,.5);
@@ -858,7 +860,8 @@
 .km-android input[type=tel]:focus,
 .km-android input[type=url]:focus,
 .km-android input[type=email]:focus,
-.km-android input[type=text]:not(.k-input):focus
+.km-android input[type=text]:not(.k-input):focus,
+.km-android textarea:focus
 {
     background: no-repeat 0 0, transparent no-repeat 100% 0;
     .linear-gradient-image(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6),
