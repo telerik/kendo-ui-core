@@ -2,7 +2,6 @@ package com.kendoui.spring.models;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,8 +22,6 @@ public class ProductDaoImpl implements ProductDao {
     
     @Override
     public DataSourceResult getList(DataSourceRequest request) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
-        
-        return request.toDataSourceResult(criteria);
+        return request.toDataSourceResult(sessionFactory.getCurrentSession(), Product.class);
     }
 }

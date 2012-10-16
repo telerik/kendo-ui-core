@@ -5,11 +5,16 @@ import java.util.Map;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
+import org.hibernate.transform.ResultTransformer;
 import org.springframework.util.AutoPopulatingList;
 
 public class DataSourceRequest {
@@ -18,6 +23,8 @@ public class DataSourceRequest {
     private int take;
     private int skip;
     private List<Map<String, String>> sort;
+    private List<Map<String, String>> group;
+    
     private Map<String, Object> filter;
     
     public DataSourceRequest() {
@@ -179,8 +186,45 @@ public class DataSourceRequest {
             }
         }
     }
+    
+    private static void group(final Criteria criteria, List<Map<String, String>> group, final Session session, final Class<?> clazz) {
+        if (group != null && !group.isEmpty()) {
+            for (Map<String, String> entry : group) {
+                final String field = entry.get("field");
+                String dir = entry.get("dir");
+                
+                criteria.setProjection(Projections.groupProperty(field));
+                criteria.setResultTransformer(new ResultTransformer() {
+                    
+                    @Override
+                    public Object transformTuple(Object[] value, String[] arg1) {
+                        // TODO Auto-generated method stub
+                
+                        Criteria criteria = session.createCriteria(clazz);
+                        Map<String, Object> group = new HashMap<String, Object>();
+                        
+                        group.put("value", value[0]);
+                        group.put("field", field);
+                        group.put("hasSubgroups", false);
+                        group.put("aggregates", new HashMap<String, Object>());
+                        group.put("items", criteria.add(Restrictions.eq(field, value[0])).list());
+                        
+                        return group;
+                    }
+                    
+                    @Override
+                    public List transformList(List arg0) {
+                        // TODO Auto-generated method stub
+                        return arg0;
+                    }
+                });
+            }
+        }
+    }
 
-    public DataSourceResult toDataSourceResult(Criteria criteria) {
+    public DataSourceResult toDataSourceResult(Session session, Class<?> clazz) {
+        Criteria criteria = session.createCriteria(clazz);
+        
         filter(criteria, getFilter());
         
         long total = (long)criteria.setProjection(Projections.rowCount()).uniqueResult();
@@ -188,6 +232,8 @@ public class DataSourceRequest {
         
         criteria.setProjection(null);
         criteria.setResultTransformer(Criteria.ROOT_ENTITY);
+
+        group(criteria, getGroup(), session, clazz);
         
         sort(criteria, getSort());
         
@@ -200,5 +246,13 @@ public class DataSourceRequest {
         result.setData(criteria.list());
         
         return result;
+    }
+
+    public List<Map<String, String>> getGroup() {
+        return group;
+    }
+
+    public void setGroup(List<Map<String, String>> group) {
+        this.group = group;
     }
 }
