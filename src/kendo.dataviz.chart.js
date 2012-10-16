@@ -1348,13 +1348,20 @@
                 groups.push(date);
                 categoryIndicies = [];
 
-                for (categoryIx = 0; categoryIx < categories.length; categoryIx++) {
+                // TODO: Test the **** out of this binary-search based optimization
+                // TODO: Consider the requirement for sorted dates. Should we sort them ourselves?
+                categoryIx = findNextDate(categories, date);
+                for (; categoryIx < categories.length; categoryIx++) {
                     categoryDate = toDate(categories[categoryIx]);
-                    if (categoryDate && categoryDate >= date && categoryDate < nextDate) {
-                        if (options.justified && dateEquals(categoryDate, end)) {
-                            lastCategoryIndicies.push(categoryIx);
+                    if (categoryDate && categoryDate >= date) {
+                        if (categoryDate < nextDate) {
+                            if (options.justified && dateEquals(categoryDate, end)) {
+                                lastCategoryIndicies.push(categoryIx);
+                            } else {
+                                categoryIndicies.push(categoryIx);
+                            }
                         } else {
-                            categoryIndicies.push(categoryIx);
+                            break;
                         }
                     }
                 }
@@ -1389,6 +1396,30 @@
             return new AxisDateLabel(date, index, dataItem, labelOptions);
         }
     });
+
+    function findNextDate(array, date) {
+        var low = 0,
+            high = array.length - 1,
+            i;
+
+        while (low <= high) {
+            i = math.floor((low + high) / 2);
+
+            if (array[i] < date) {
+                low = i + 1;
+                continue;
+            }
+
+            if (array[i] > date) {
+                high = i - 1;
+                continue;
+            }
+
+            return i;
+        }
+
+        return i - 1;
+    };
 
     var DateValueAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
