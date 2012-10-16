@@ -1,15 +1,14 @@
 package com.kendoui.spring.models;
 
-import java.beans.PropertyDescriptor;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.type.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +27,45 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> getList() {
         return sessionFactory.getCurrentSession().createQuery("from Product").list();
     }
+    
+    private static void filter(Criteria criteria, Map<String, Object> filter) {
+        List<Map<String, Object>> filters = (List<Map<String, Object>>)filter.get("filters");
+        
+        if (!filters.isEmpty()) {
+            Junction junction = Restrictions.conjunction();
+            
+            if (filter.get("logic").toString().equals("or")) {
+                junction = Restrictions.disjunction();
+            }
+            
+            for(Map<String, Object> entry : filters) {
+                if (entry.containsKey("logic")) {
+                    filter(criteria, entry);
+                } else {
+                    String operator = entry.get("operator").toString();
+                    String field = entry.get("field").toString();
+                    Object value = entry.get("value");
+                    
+                    try {
+                        value = Double.parseDouble(value.toString());
+                    }catch(NumberFormatException nfe) {
+                        
+                    }
+                    
+                    switch(operator) {
+                        case "eq":
+                            junction.add(Restrictions.eq(field, value));
+                            break;
+                        case "neq":
+                            junction.add(Restrictions.ne(field, value));
+                            break;
+                    }
+                }
+            }
+            
+            criteria.add(junction);
+        }
+    }
 
     @Override
     public DataSourceResult getList(DataSourceRequest request) {
@@ -36,33 +74,9 @@ public class ProductDaoImpl implements ProductDao {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
         result.setTotal((long)criteria.setProjection(Projections.rowCount()).uniqueResult());
         
-        
         criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
         
-        List<Map<String, Object>> filters = (List<Map<String, Object>>)request.getFilter().get("filters");
-        
-        if (!filters.isEmpty()) {
-            for(Map<String, Object> filter : filters) {
-                String operator = filter.get("operator").toString();
-                String field = filter.get("field").toString();
-                Object value = filter.get("value");
-                
-                try {
-                    value = Double.parseDouble(value.toString());
-                }catch(NumberFormatException nfe) {
-                    
-                }
-                
-                switch(operator) {
-                    case "eq":
-                        criteria.add(Restrictions.eq(field, value));
-                        break;
-                    case "neq":
-                        criteria.add(Restrictions.ne(field, value));
-                        break;
-                }
-            }
-        }
+        filter(criteria, request.getFilter());
         
         if (request.getSort() != null && !request.getSort().isEmpty()) {
             for (Map<String, String> sort : request.getSort()) {
