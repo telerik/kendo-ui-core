@@ -1450,7 +1450,7 @@
 
 /* Platform specific workarounds */
 
-.km-on-ios,
+.km-pane,
 .km-on-ios .km-view,
 .km-on-ios .km-header,
 .km-on-ios .km-footer,
@@ -1469,6 +1469,13 @@
 .km-on-blackberry .km-actionsheet-wrapper
 {
     -webkit-transform: translatez(0);
+}
+
+.km-on-meego,
+.km-on-android,
+.km-on-blackberry
+{
+    -webkit-transform: none;
 }
 
 //.km-on-android.km-4, /* Causes changing views to not refresh the screen in 4.0 */
