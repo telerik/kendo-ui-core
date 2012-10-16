@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kendoui.spring.models.ProductDao;
-import com.kendoui.taglib.DataSourceRequest;
-import com.kendoui.taglib.DataSourceResult;
+import com.kendoui.spring.models.DataSourceRequest;
+import com.kendoui.spring.models.DataSourceResult;
 
 @Controller
 @RequestMapping(value="/json")
