@@ -577,7 +577,6 @@
 .km-blackberry .km-list .k-dropdown,
 .km-blackberry .km-list textarea
 {
-    margin-top: -1.05em;
     right: .8em;
 }
 
@@ -620,6 +619,7 @@
 .km-blackberry input[type=text]:not(.k-input),
 .km-blackberry textarea
 {
+    margin-top: -1.05em;
     .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
 }
 
@@ -634,6 +634,17 @@
 {
     border: 1px solid rgba(0,50,100,.7);
     .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 0 2px rgba(5,127,228,.6)");
+}
+
+.km-blackberry input[type=color],
+.km-blackberry input[type=week],
+.km-blackberry input[type=date],
+.km-blackberry input[type=time],
+.km-blackberry input[type=month],
+.km-blackberry input[type=datetime],
+.km-blackberry select:not([multiple])
+{
+    margin-top: -1.05em;
 }
 
 .km-blackberry input[type=color],
@@ -668,6 +679,11 @@
 {
     color: #fff;
     background-color: #45bfff;
+}
+
+.km-blackberry .km-list .k-dropdown .k-input
+{
+    background-color: transparent;
 }
 
 .km-blackberry .k-dropdown .k-state-focused .k-input
