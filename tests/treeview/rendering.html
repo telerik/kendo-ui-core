@@ -411,6 +411,21 @@
                 equal(uidNodes.length, 1);
                 equal(uidNodes.data("kendo-uid"), node.uid);
             });
+
+            test("items with set checked state are rendered checked", function() {
+                treeview.kendoTreeView({
+                    dataSource: [
+                        { id: 1, checked: true, text: "foo" },
+                        { id: 2, checked: false, text: "bar" }
+                    ],
+                    checkboxes: true
+                });
+
+                var checkboxes = treeview.find(":checkbox");
+
+                ok(checkboxes.eq(0).is(":checked"));
+                ok(!checkboxes.eq(1).is(":checked"));
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
