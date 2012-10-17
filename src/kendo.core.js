@@ -1145,9 +1145,15 @@ function pad(number) {
                 } else if (ch === "f") {
                     count = lookAhead("f");
                     milliseconds = getNumber(count);
+
+                    if (milliseconds !== null && count > 3) {
+                        milliseconds = parseInt(milliseconds.toString().substring(0, 3), 10);
+                    }
+
                     if (milliseconds === null || outOfRange(milliseconds, 0, 999)) {
                         return null;
                     }
+
                 } else if (ch === "t") {
                     count = lookAhead("t");
                     amDesignators = calendar.AM;
@@ -1158,7 +1164,7 @@ function pad(number) {
                         pmDesignators = mapDesignators(pmDesignators);
                     }
 
-                    pmHour = getIndexByName(pmDesignators);
+                    pmHour = getIndexByName(pmDesignators)
                     if (!pmHour && !getIndexByName(amDesignators)) {
                         return null;
                     }
@@ -1200,6 +1206,9 @@ function pad(number) {
                     }
                 } else if (ch === "T") {
                     ISO8601 = checkLiteral();
+                    if (ISO8601) {
+                        UTC = true;
+                    }
                 } else if (ch === "'") {
                     literal = true;
                     checkLiteral();
@@ -1264,6 +1273,7 @@ function pad(number) {
                 formats[idx] = patterns[formatsSequence[idx]];
             }
             formats[idx] = "ddd MMM dd yyyy HH:mm:ss";
+            formats[++idx] = "yyyy-MM-ddTHH:mm:ss.fffffffzzz";
             formats[++idx] = "yyyy-MM-ddTHH:mm:ss.fffzzz";
             formats[++idx] = "yyyy-MM-ddTHH:mm:sszzz";
             formats[++idx] = "yyyy-MM-ddTHH:mmzzz";

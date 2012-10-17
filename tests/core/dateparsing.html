@@ -574,10 +574,6 @@
                 equal(+parse("10/10/2000 10:00 a", "MM/dd/yyyy hh:mm t"), +new Date(2000, 9, 10, 10, 0, 0));
             });
 
-            test("parseExact method parses local iso8601", function() {
-                equal(+parse("2000-10-10T14:30", "yyyy-MM-ddTHH:mm"), +new Date(2000, 9, 10, 14, 30, 0));
-            });
-
             test("parseExact method parses UTC iso8601", function() {
                 var utcDate = new Date(Date.UTC(2000, 9, 10, 14, 30, 0));
                 equal(+parse("2000-10-10T14:30Z", "yyyy-MM-ddTHH:mmzz"), +utcDate);
@@ -699,6 +695,16 @@
 
             test("parseDate expands year if digits are 2", function() {
                 equal(+parse("01/10/10", "yy/MM/dd"), +new Date(2001, 9, 10));
+            });
+
+            test("parseDate supports milliseconds length depending on the 'f' count", function() {
+                var result = parse("2012-03-25T03:30:10.1234567-10:00", "yyyy-MM-ddTHH:mm:ss.fffffffzzz");
+                equal(+result, Date.parse("2012-03-25T03:30:10.1234567-10:00"));
+            });
+
+            test("parseDate supports JSON.NET format", function() {
+                var result = parse("2012-03-25T03:30:10.1234567-10:00");
+                equal(+result, Date.parse("2012-03-25T03:30:10.1234567-10:00"));
             });
 
             test("adjustDate adjusts Brasil date with DST", function() {
