@@ -36,7 +36,7 @@
         END_EVENTS = "touchend touchcancel";
     }
 
-    if(pointers) {
+    if (pointers) {
         START_EVENTS = "MSPointerDown";
         MOVE_EVENTS = "MSPointerMove";
         END_EVENTS = "MSPointerUp MSPointerCancel";
