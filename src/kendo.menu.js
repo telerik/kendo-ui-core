@@ -736,6 +736,10 @@
                 hasChildren,
                 isRtl = kendo.support.isRtl(that.wrapper);
 
+            if (e.target != e.currentTarget && key != keys.ESC) {
+                return;
+            }
+
             if (!hoverItem) {
                 hoverItem  = that._oldHoverItem = that._hoverItem();
             }
