@@ -1348,11 +1348,10 @@
                 groups.push(date);
                 categoryIndicies = [];
 
-                // TODO: Test the **** out of this binary-search based optimization
-                // TODO: Consider the requirement for sorted dates. Should we sort them ourselves?
-                categoryIx = findNextDate(categories, date);
-                for (; categoryIx < categories.length; categoryIx++) {
-                    categoryDate = toDate(categories[categoryIx]);
+                for (categoryIx = lteDateIndex(categories, date);
+                     categoryIx < categories.length; categoryIx++) {
+
+                    categoryDate = categories[categoryIx];
                     if (categoryDate && categoryDate >= date) {
                         if (categoryDate < nextDate) {
                             if (options.justified && dateEquals(categoryDate, end)) {
@@ -1396,30 +1395,6 @@
             return new AxisDateLabel(date, index, dataItem, labelOptions);
         }
     });
-
-    function findNextDate(array, date) {
-        var low = 0,
-            high = array.length - 1,
-            i;
-
-        while (low <= high) {
-            i = math.floor((low + high) / 2);
-
-            if (array[i] < date) {
-                low = i + 1;
-                continue;
-            }
-
-            if (array[i] > date) {
-                high = i - 1;
-                continue;
-            }
-
-            return i;
-        }
-
-        return i - 1;
-    };
 
     var DateValueAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
@@ -7244,6 +7219,36 @@
         }
     }
 
+    function lteDateIndex(sortedDates, date) {
+        var low = 0,
+            high = sortedDates.length - 1,
+            i,
+            currentDate;
+
+        while (low <= high) {
+            i = math.floor((low + high) / 2);
+            currentDate = sortedDates[i];
+
+            if (currentDate < date) {
+                low = i + 1;
+                continue;
+            }
+
+            if (currentDate > date) {
+                high = i - 1;
+                continue;
+            }
+
+            return i;
+        }
+
+        if (sortedDates[i] <= date) {
+            return i;
+        } else {
+            return i - 1;
+        }
+    }
+
     // Exports ================================================================
 
     dataviz.ui.plugin(Chart);
@@ -7288,11 +7293,12 @@
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
+        bindPoint: bindPoint,
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
         duration: duration,
         floorDate: floorDate,
-        bindPoint: bindPoint,
+        lteDateIndex: lteDateIndex,
         toDate: toDate
     });
 

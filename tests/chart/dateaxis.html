@@ -1777,6 +1777,56 @@
                 });
             })();
 
+            (function() {
+                var lteDateIndex = kendo.dataviz.lteDateIndex;
+
+                // ------------------------------------------------------------
+                module("lteDateIndex");
+
+                test("returns -1 if the only item is greater", function() {
+                    equals(lteDateIndex([new Date("2012/01/01")], new Date("2011/12/31")), -1);
+                });
+
+                test("returns the only item index if equals", function() {
+                    equals(lteDateIndex([new Date("2012/01/01")], new Date("2012/01/01")), 0);
+                });
+
+                test("returns the only item index if less than", function() {
+                    equals(lteDateIndex([new Date("2012/01/01")], new Date("2012/02/01")), 0);
+                });
+
+                test("returns nearest item index (1)", function() {
+                    equals(lteDateIndex([
+                            new Date("2012/01/01"),
+                            new Date("2012/01/03"),
+                            new Date("2012/01/05")
+                        ],
+                        new Date("2012/01/02")
+                     ), 0);
+                });
+
+                test("returns nearest item index (2)", function() {
+                    equals(lteDateIndex([
+                            new Date("2012/01/01"),
+                            new Date("2012/01/03"),
+                            new Date("2012/01/05")
+                        ],
+                        new Date("2012/01/04")
+                     ), 1);
+                });
+
+                test("returns nearest item index (3)", function() {
+                    equals(lteDateIndex([
+                            new Date("2012/01/01"),
+                            new Date("2012/01/03"),
+                            new Date("2012/01/05")
+                        ],
+                        new Date("2012/01/06")
+                     ), 2);
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
