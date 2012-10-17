@@ -1164,7 +1164,8 @@ function pad(number) {
                         pmDesignators = mapDesignators(pmDesignators);
                     }
 
-                    pmHour = getIndexByName(pmDesignators)
+                    pmHour = getIndexByName(pmDesignators);
+
                     if (!pmHour && !getIndexByName(amDesignators)) {
                         return null;
                     }
