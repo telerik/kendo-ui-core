@@ -182,7 +182,11 @@
 
             chart.bind(chart.events, chart.options);
 
-            chart.element.addClass("k-chart");
+            chart._stage = $("<div style='display: none' />")[0];
+            chart.element
+                .addClass("k-chart")
+                .css("position", "relative")
+                .append(chart._stage);
 
             chart.wrapper = chart.element;
 
@@ -235,9 +239,7 @@
                 visible: true,
                 labels: {}
             },
-            categoryAxis: {
-                categories: []
-            },
+            categoryAxis: {},
             autoBind: true,
             seriesDefaults: {
                 type: COLUMN,
@@ -252,7 +254,6 @@
             transitions: true,
             valueAxis: {},
             plotArea: {},
-            axisDefatuls: {},
             title: {},
             xAxis: {},
             yAxis: {}
@@ -267,18 +268,30 @@
             chart._onDataChanged();
         },
 
-        redraw: function() {
-            var chart = this;
+        redraw: function(paneName) {
+            var chart = this,
+                pane,
+                plotArea;
 
             applyDefaults(chart.options);
 
-            chart._redraw();
+            if (paneName) {
+                plotArea = chart._model._plotArea;
+                resolveAxisAliases(plotArea.options);
+                pane = plotArea.findPane(paneName);
+                plotArea.redrawPane(pane);
+            } else {
+                chart._redraw();
+            }
         },
 
         _redraw: function() {
             var chart = this,
                 options = chart.options,
                 element = chart.element,
+                viewElement,
+                existingViewElement = chart._viewElement,
+                stage = chart._stage,
                 model = chart._model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
@@ -287,9 +300,23 @@
 
             if (viewType) {
                 view = chart._view = viewType.fromModel(model);
+                view.renderTo(stage);
 
-                element.css("position", "relative");
-                chart._viewElement = view.renderTo(element[0]);
+                viewElement = stage.firstElementChild;
+                if (existingViewElement) {
+                    existingViewElement.parentNode.replaceChild(
+                        viewElement,
+                        existingViewElement
+                    );
+                } else {
+                    element.append(viewElement);
+                }
+
+                if (chart._tooltip) {
+                    chart._tooltip.element.remove();
+                }
+
+                chart._viewElement = viewElement;
                 chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
                 chart._highlight = new Highlight(view, chart._viewElement);
             }
@@ -508,7 +535,8 @@
 
             applySeriesColors(chart.options);
 
-            chart._bindCategories(grouped ? data[0].items : data);
+            chart._categoriesData = grouped ? data[0].items : data;
+            bindCategories(chart.options, chart._categoriesData);
 
             chart.trigger(DATABOUND);
             chart._redraw();
@@ -564,33 +592,6 @@
             }
 
             return groupSeries;
-        },
-
-        _bindCategories: function(data) {
-            var definitions = [].concat(this.options.categoryAxis),
-                axisIx,
-                axis,
-                categoryIx,
-                category,
-                row;
-
-            for (axisIx = 0; axisIx < definitions.length; axisIx++) {
-                axis = definitions[axisIx];
-                if (axis.field) {
-                    for (categoryIx = 0; categoryIx < data.length; categoryIx++) {
-                        row = data[categoryIx];
-
-                        category = getField(axis.field, row);
-                        if (categoryIx === 0) {
-                            axis.categories = [category];
-                            axis.dataItems = [row];
-                        } else {
-                            axis.categories.push(category);
-                            axis.dataItems.push(row);
-                        }
-                    }
-                }
-            }
         },
 
         destroy: function() {
@@ -1343,13 +1344,19 @@
                 groups.push(date);
                 categoryIndicies = [];
 
-                for (categoryIx = 0; categoryIx < categories.length; categoryIx++) {
-                    categoryDate = toDate(categories[categoryIx]);
-                    if (categoryDate && categoryDate >= date && categoryDate < nextDate) {
-                        if (options.justified && dateEquals(categoryDate, end)) {
-                            lastCategoryIndicies.push(categoryIx);
+                for (categoryIx = lteDateIndex(categories, date);
+                     categoryIx < categories.length; categoryIx++) {
+
+                    categoryDate = categories[categoryIx];
+                    if (categoryDate && categoryDate >= date) {
+                        if (categoryDate < nextDate) {
+                            if (options.justified && dateEquals(categoryDate, end)) {
+                                lastCategoryIndicies.push(categoryIx);
+                            } else {
+                                categoryIndicies.push(categoryIx);
+                            }
                         } else {
-                            categoryIndicies.push(categoryIx);
+                            break;
                         }
                     }
                 }
@@ -3328,6 +3335,9 @@
             },
             overlay: {
                 gradient: GLASS
+            },
+            tooltip: {
+                format: "{4:d}<br/>open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
             }
         },
 
@@ -3492,29 +3502,27 @@
                 value = data.value,
                 children = chart.children,
                 pointColor = data.fields.color || series.color,
-                point, cluster;
+                point,
+                valueParts = this.splitValue(value),
+                hasValue = !inArray(undefined, valueParts) && !inArray(null, valueParts),
+                cluster;
 
-            point = chart.createPoint(value,
-                deepExtend({
-                    tooltip: {
-                        format: (category ? "{4:d}<br/>" : "") + "open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
-                    }
-                }, series)
-            );
+            if (hasValue) {
+                point = chart.createPoint(value, series);
+            }
+
+            cluster = children[categoryIx];
+            if (!cluster) {
+                cluster = new ClusterLayout({
+                    vertical: options.invertAxes,
+                    gap: options.gap,
+                    spacing: options.spacing
+                });
+                chart.append(cluster);
+            }
 
             if (point) {
                 chart.updateRange(value, categoryIx, series);
-
-                cluster = children[categoryIx];
-
-                if (!cluster) {
-                    cluster = new ClusterLayout({
-                        vertical: options.invertAxes,
-                        gap: options.gap,
-                        spacing: options.spacing
-                    });
-                    chart.append(cluster);
-                }
 
                 cluster.append(point);
 
@@ -3537,10 +3545,7 @@
         },
 
         createPoint: function(value, series) {
-            var parts = this.splitValue(value);
-            if (!inArray(undefined, parts) && !inArray(null, parts)) {
-                return new Candlestick(value, series);
-            }
+            return new Candlestick(value, series);
         },
 
         splitValue: function(value) {
@@ -4545,6 +4550,12 @@
             options.id = uniqueId();
 
             pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
+
+            pane.content = new ChartElement();
+            pane.append(pane.content);
+
+            pane.axes = [];
+            pane.charts = [];
         },
 
         options: {
@@ -4555,13 +4566,71 @@
             }
         },
 
+        appendAxis: function(axis) {
+            var pane = this;
+
+            pane.content.append(axis);
+            pane.axes.push(axis);
+            axis.pane = pane;
+        },
+
+        appendChart: function(chart) {
+            var pane = this;
+
+            pane.charts.push(chart);
+            pane.content.append(chart);
+            chart.pane = pane;
+        },
+
+        empty: function() {
+            var pane = this;
+
+            pane.content.children = [];
+            pane.axes = [];
+            pane.charts = [];
+        },
+
         reflow: function(targetBox) {
             var pane = this;
+
+            // Content (such as charts) is rendered, but excluded from reflows
+            if (last(pane.children) === pane.content) {
+                pane.children.pop();
+            }
 
             BoxElement.fn.reflow.call(pane, targetBox);
 
             if(pane.title) {
                 pane.contentBox.y1 += pane.title.box.height();
+            }
+        },
+
+        getViewElements: function(view) {
+            var pane = this,
+                elements = CategoricalChart.fn.getViewElements.call(pane, view),
+                group = view.createGroup({
+                    id: pane.options.id
+                });
+
+            group.children = elements.concat(
+                pane.content.getViewElements(view)
+            );
+
+            pane.view = view;
+
+            return [group];
+        },
+
+        refresh: function() {
+            var pane = this,
+                view = pane.view,
+                element = document.getElementById(pane.options.id);
+
+            if (view && element) {
+                element.parentNode.replaceChild(
+                    view.renderElement(pane.getViewElements(view)[0]),
+                    element
+                );
             }
         }
     });
@@ -4579,9 +4648,9 @@
 
             plotArea.options.id = uniqueId();
             plotArea.makeDiscoverable();
-            plotArea.render();
 
             plotArea.createPanes();
+            plotArea.render();
         },
 
         options: {
@@ -4607,7 +4676,6 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = new Pane(paneOptions[i]);
-                plotArea.setPaneAxes(currentPane, i);
 
                 panes.push(currentPane);
                 plotArea.append(currentPane);
@@ -4616,39 +4684,73 @@
             plotArea.panes = panes;
         },
 
-        setPaneAxes: function(pane, paneIndex) {
+        findPane: function(name) {
             var plotArea = this,
-                axes = plotArea.axes,
-                currentAxis,
-                paneName = pane.options.name,
-                axisPane,
-                match,
-                paneAxes = pane.axes = [],
-                i;
+                panes = plotArea.panes,
+                i,
+                matchingPane;
 
-            for (i = 0; i < axes.length; i++) {
-                currentAxis = axes[i];
-                axisPane = currentAxis.options.pane;
-
-                if (axisPane) {
-                    match = axisPane === paneName;
-                } else {
-                    match = paneIndex === 0;
-                }
-
-                if (match) {
-                    paneAxes.push(currentAxis);
-                    currentAxis.pane = pane;
+            for (i = 0; i < panes.length; i++) {
+                if (panes[i].options.name === name) {
+                    matchingPane = panes[i];
+                    break;
                 }
             }
+
+            return matchingPane || panes[0];
         },
 
-        appendChart: function(chart) {
+        appendAxis: function(axis) {
+            var plotArea = this,
+                pane = plotArea.findPane(axis.options.pane);
+
+            pane.appendAxis(axis);
+            plotArea.axes.push(axis);
+            axis.plotArea = plotArea;
+        },
+
+        removeAxis: function(axisToRemove) {
+            var plotArea = this,
+                i,
+                axis,
+                filteredAxes = [];
+
+            for (i = 0; i < plotArea.axes.length; i++) {
+                axis = plotArea.axes[i];
+                if (axisToRemove !== axis) {
+                    filteredAxes.push(axis);
+                }
+            }
+
+            plotArea.axes = filteredAxes;
+        },
+
+        appendChart: function(chart, pane) {
             var plotArea = this;
 
             plotArea.charts.push(chart);
             plotArea.addToLegend(chart);
-            plotArea.append(chart);
+            if (pane) {
+                pane.appendChart(chart);
+            } else {
+                plotArea.append(chart);
+            }
+        },
+
+        removeChart: function(chartToRemove) {
+            var plotArea = this,
+                i,
+                chart,
+                filteredCharts = [];
+
+            for (i = 0; i < plotArea.charts.length; i++) {
+                chart = plotArea.charts[i];
+                if (chart !== chartToRemove) {
+                    filteredCharts.push(chart);
+                }
+            }
+
+            plotArea.charts = filteredCharts;
         },
 
         addToLegend: function(chart) {
@@ -4680,7 +4782,7 @@
             append(this.options.legend.items, data);
         },
 
-        reflow: function(targetBox) {
+        reflow: function(targetBox, filterPane) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
                 margin = getSpacing(options.margin);
@@ -4692,7 +4794,26 @@
                 plotArea.reflowAxes();
             }
 
-            plotArea.reflowCharts();
+            plotArea.reflowCharts(filterPane);
+        },
+
+        redrawPane: function(pane) {
+            var plotArea = this,
+                i;
+
+            for (i = 0; i < pane.axes.length; i++) {
+                plotArea.removeAxis(pane.axes[i]);
+            }
+
+            for (i = 0; i < pane.charts.length; i++) {
+                plotArea.removeChart(pane.charts[i]);
+            }
+
+            pane.empty();
+            plotArea.render(pane);
+
+            plotArea.reflow(plotArea.box, pane);
+            pane.refresh();
         },
 
         axisCrossingValues: function(axis, crossingAxes) {
@@ -4961,7 +5082,7 @@
             }
         },
 
-        reflowCharts: function() {
+        reflowCharts: function(filterPane) {
             var plotArea = this,
                 charts = plotArea.charts,
                 count = charts.length,
@@ -4969,7 +5090,9 @@
                 i;
 
             for (i = 0; i < count; i++) {
-                charts[i].reflow(box);
+                if (!filterPane || charts[i].pane == filterPane) {
+                    charts[i].reflow(box);
+                }
             }
         },
 
@@ -5222,16 +5345,38 @@
             valueAxis: {}
         },
 
-        render: function() {
+        render: function(pane) {
             var plotArea = this;
 
-            plotArea.createCategoryAxes();
-            plotArea.aggregateDateSeries();
-            plotArea.createCharts();
-            plotArea.createValueAxes();
+            plotArea.createCategoryAxes(pane);
+            plotArea.aggregateDateSeries(pane);
+            plotArea.createCharts(pane);
+            plotArea.createValueAxes(pane);
         },
 
-        createCharts: function() {
+        removeAxis: function(axis) {
+            var plotArea = this,
+                axisName = axis.options.name;
+
+            PlotAreaBase.fn.removeAxis.call(plotArea, axis);
+
+            if (axis instanceof CategoryAxis) {
+                delete plotArea.namedCategoryAxes[axisName];
+            } else {
+                plotArea.valueAxisRangeTracker.reset(axisName);
+                delete plotArea.namedValueAxes[axisName];
+            }
+
+            if (axis === plotArea.categoryAxis) {
+                delete plotArea.categoryAxis;
+            }
+
+            if (axis === plotArea.valueAxis) {
+                delete plotArea.valueAxis;
+            }
+        },
+
+        createCharts: function(filterPane) {
             var plotArea = this,
                 series = plotArea.series,
                 seriesByPane = {},
@@ -5239,43 +5384,55 @@
                 i,
                 pane,
                 currentSeries,
-                paneSeries;
+                paneSeries,
+                firstPane = plotArea.panes[0],
+                defaultPaneMatch;
 
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
                 pane = plotArea.seriesPaneName(currentSeries);
-                if (!inArray(pane, paneNames)) {
-                    paneNames.push(pane);
-                }
+                defaultPaneMatch = pane === "default" && firstPane === filterPane;
 
-                if (seriesByPane[pane]) {
-                    seriesByPane[pane].push(currentSeries);
-                } else {
-                    seriesByPane[pane] = [currentSeries];
+                if (!filterPane || (defaultPaneMatch || filterPane.options.name === pane)) {
+                    if (!inArray(pane, paneNames)) {
+                        paneNames.push(pane);
+                    }
+
+                    if (seriesByPane[pane]) {
+                        seriesByPane[pane].push(currentSeries);
+                    } else {
+                        seriesByPane[pane] = [currentSeries];
+                    }
                 }
             }
 
             for (i = 0; i < paneNames.length; i++) {
                 paneSeries = seriesByPane[paneNames[i]];
+                pane = plotArea.findPane(paneNames[i]);
 
                 plotArea.createAreaChart(
-                    plotArea.filterSeriesByType(paneSeries, [AREA, VERTICAL_AREA])
+                    plotArea.filterSeriesByType(paneSeries, [AREA, VERTICAL_AREA]),
+                    pane
                 );
 
                 plotArea.createBarChart(
-                    plotArea.filterSeriesByType(paneSeries, [COLUMN, BAR])
+                    plotArea.filterSeriesByType(paneSeries, [COLUMN, BAR]),
+                    pane
                 );
 
                 plotArea.createLineChart(
-                    plotArea.filterSeriesByType(paneSeries, [LINE, VERTICAL_LINE])
+                    plotArea.filterSeriesByType(paneSeries, [LINE, VERTICAL_LINE]),
+                    pane
                 );
 
                 plotArea.createCandlestickChart(
-                    plotArea.filterSeriesByType(paneSeries, [CANDLESTICK])
+                    plotArea.filterSeriesByType(paneSeries, [CANDLESTICK]),
+                    pane
                 );
 
                 plotArea.createOHLCChart(
-                    plotArea.filterSeriesByType(paneSeries, [OHLC])
+                    plotArea.filterSeriesByType(paneSeries, [OHLC]),
+                    pane
                 );
             }
         },
@@ -5295,11 +5452,12 @@
             return result;
         },
 
-        aggregateDateSeries: function() {
+        aggregateDateSeries: function(filterPane) {
             var plotArea = this,
-                series = plotArea.series,
+                series = plotArea.srcSeries || plotArea.series,
                 processedSeries = [],
                 categoryAxis,
+                axisPane,
                 categories,
                 categoryMap,
                 groupIx,
@@ -5311,6 +5469,7 @@
                 data,
                 srcValues,
                 i,
+                match,
                 categoryIx,
                 pointData,
                 value;
@@ -5319,8 +5478,10 @@
                 currentSeries = series[seriesIx];
                 seriesClone = deepExtend({}, currentSeries);
                 categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
+                axisPane = plotArea.findPane(categoryAxis.options.pane);
+                match = !filterPane || (filterPane === axisPane);
 
-                if (equalsIgnoreCase(categoryAxis.options.type, DATE)) {
+                if (match && equalsIgnoreCase(categoryAxis.options.type, DATE)) {
                     categories = categoryAxis.options.categories;
                     categoryMap = categoryAxis.categoryMap;
 
@@ -5352,10 +5513,11 @@
                 processedSeries.push(seriesClone);
             }
 
+            plotArea.srcSeries = series;
             plotArea.series = processedSeries;
         },
 
-        appendChart: function(chart) {
+        appendChart: function(chart, pane) {
             var plotArea = this,
                 series = chart.options.series,
                 categoryAxis = plotArea.seriesCategoryAxis(series[0]),
@@ -5368,7 +5530,7 @@
 
             plotArea.valueAxisRangeTracker.update(chart.valueAxisRanges);
 
-            PlotAreaBase.fn.appendChart.call(plotArea, chart);
+            PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
         },
 
         seriesPaneName: function(series) {
@@ -5414,7 +5576,7 @@
             plotArea.appendChart(barChart);
         },
 
-        createLineChart: function(series) {
+        createLineChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5427,10 +5589,10 @@
                     series: series
                 });
 
-            plotArea.appendChart(lineChart);
+            plotArea.appendChart(lineChart, pane);
         },
 
-        createAreaChart: function(series) {
+        createAreaChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5443,10 +5605,10 @@
                     series: series
                 });
 
-            plotArea.appendChart(areaChart);
+            plotArea.appendChart(areaChart, pane);
         },
 
-        createOHLCChart: function(series) {
+        createOHLCChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5460,10 +5622,10 @@
                     spacing: firstSeries.spacing
                 });
 
-            plotArea.appendChart(chart);
+            plotArea.appendChart(chart, pane);
         },
 
-        createCandlestickChart: function(series) {
+        createCandlestickChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5477,7 +5639,7 @@
                     spacing: firstSeries.spacing
                 });
 
-            plotArea.appendChart(chart);
+            plotArea.appendChart(chart, pane);
         },
 
         axisRequiresRounding: function(categoryAxisName, categoryAxisIndex) {
@@ -5496,12 +5658,13 @@
             }
         },
 
-        createCategoryAxes: function() {
+        createCategoryAxes: function(filterPane) {
             var plotArea = this,
                 invertAxes = plotArea.invertAxes,
                 definitions = [].concat(plotArea.options.categoryAxis),
                 i,
                 axisOptions,
+                pane,
                 categories,
                 type,
                 name,
@@ -5512,42 +5675,45 @@
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
-                name = axisOptions.name;
-                categories = axisOptions.categories || [];
-                dateCategory = categories[0] instanceof Date;
-                type  = axisOptions.type || "";
-                axisOptions = deepExtend({
-                    vertical: invertAxes,
-                    axisCrossingValue: invertAxes ? categories.length : 0
-                }, axisOptions);
+                pane = plotArea.findPane(axisOptions.pane);
 
-                if (plotArea.axisRequiresRounding(name, i)) {
-                    axisOptions.justified = false;
-                    axisOptions.roundToBaseUnit = true;
-                }
+                if (!filterPane || filterPane === pane) {
+                    name = axisOptions.name;
+                    categories = axisOptions.categories || [];
+                    dateCategory = categories[0] instanceof Date;
+                    type  = axisOptions.type || "";
+                    axisOptions = deepExtend({
+                        vertical: invertAxes,
+                        axisCrossingValue: invertAxes ? categories.length : 0
+                    }, axisOptions);
 
-                if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
-                    categoryAxis = new DateCategoryAxis(axisOptions);
-                } else {
-                    categoryAxis = new CategoryAxis(axisOptions);
-                }
-
-                if (name) {
-                    if (plotArea.namedCategoryAxes[name]) {
-                        throw new Error(
-                            "Category axis with name " + name + " is already defined"
-                        );
+                    if (plotArea.axisRequiresRounding(name, i)) {
+                        axisOptions.justified = false;
+                        axisOptions.roundToBaseUnit = true;
                     }
-                    plotArea.namedCategoryAxes[name] = categoryAxis;
-                }
 
-                categoryAxis.axisIndex = i;
-                axes.push(categoryAxis);
-                plotArea.axes.push(categoryAxis);
-                plotArea.append(categoryAxis);
+                    if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
+                        categoryAxis = new DateCategoryAxis(axisOptions);
+                    } else {
+                        categoryAxis = new CategoryAxis(axisOptions);
+                    }
+
+                    if (name) {
+                        if (plotArea.namedCategoryAxes[name]) {
+                            throw new Error(
+                                "Category axis with name " + name + " is already defined"
+                            );
+                        }
+                        plotArea.namedCategoryAxes[name] = categoryAxis;
+                    }
+
+                    categoryAxis.axisIndex = i;
+                    axes.push(categoryAxis);
+                    plotArea.appendAxis(categoryAxis);
+                }
             }
 
-            primaryAxis = axes[0];
+            primaryAxis = plotArea.categoryAxis || axes[0];
             plotArea.categoryAxis = primaryAxis;
 
             if (invertAxes) {
@@ -5557,12 +5723,13 @@
             }
         },
 
-        createValueAxes: function() {
+        createValueAxes: function(filterPane) {
             var plotArea = this,
                 definitions = [].concat(plotArea.options.valueAxis),
                 invertAxes = plotArea.invertAxes,
                 baseOptions = { vertical: !invertAxes },
                 axisOptions,
+                pane,
                 valueAxis,
                 primaryAxis,
                 axes = [],
@@ -5572,28 +5739,31 @@
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
-                name = axisOptions.name;
-                range = plotArea.valueAxisRangeTracker.query(name);
+                pane = plotArea.findPane(axisOptions.pane);
 
-                valueAxis = new NumericAxis(range.min, range.max,
-                    deepExtend({}, baseOptions, axisOptions)
-                );
+                if (!filterPane || filterPane === pane) {
+                    name = axisOptions.name;
+                    range = plotArea.valueAxisRangeTracker.query(name);
 
-                if (name) {
-                    if (plotArea.namedValueAxes[name]) {
-                        throw new Error(
-                            "Value axis with name " + name + " is already defined"
-                        );
+                    valueAxis = new NumericAxis(range.min, range.max,
+                        deepExtend({}, baseOptions, axisOptions)
+                    );
+
+                    if (name) {
+                        if (plotArea.namedValueAxes[name]) {
+                            throw new Error(
+                                "Value axis with name " + name + " is already defined"
+                            );
+                        }
+                        plotArea.namedValueAxes[name] = valueAxis;
                     }
-                    plotArea.namedValueAxes[name] = valueAxis;
-                }
 
-                axes.push(valueAxis);
-                plotArea.axes.push(valueAxis);
-                plotArea.append(valueAxis);
+                    axes.push(valueAxis);
+                    plotArea.appendAxis(valueAxis);
+                }
             }
 
-            primaryAxis = axes[0];
+            primaryAxis = plotArea.valueAxis || axes[0];
             plotArea.valueAxis = primaryAxis;
 
             if (invertAxes) {
@@ -5697,6 +5867,10 @@
             }
         },
 
+        reset: function(axisName) {
+            this.axisRanges[axisName] = { min: MAX_VALUE, max: MIN_VALUE };
+        },
+
         query: function(axisName) {
             var tracker = this;
 
@@ -5723,60 +5897,86 @@
             yAxis: {}
         },
 
-        render: function() {
+        render: function(pane) {
             var plotArea = this,
                 series = plotArea.series;
 
             plotArea.createScatterChart(grep(series, function(s) {
                 return s.type === SCATTER;
-            }));
+            }), pane);
 
             plotArea.createScatterLineChart(grep(series, function(s) {
                 return s.type === SCATTER_LINE;
-            }));
+            }), pane);
 
             plotArea.createBubbleChart(grep(series, function(s) {
                 return s.type === BUBBLE;
-            }));
+            }), pane);
 
-            plotArea.createAxes();
+            plotArea.createAxes(pane);
         },
 
-        appendChart: function(chart) {
+        appendChart: function(chart, pane) {
             var plotArea = this;
 
             plotArea.xAxisRangeTracker.update(chart.xAxisRanges);
             plotArea.yAxisRangeTracker.update(chart.yAxisRanges);
 
-            PlotAreaBase.fn.appendChart.call(plotArea, chart);
+            PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
         },
 
-        createScatterChart: function(series) {
+        removeAxis: function(axis) {
+            var plotArea = this,
+                axisName = axis.options.name;
+
+            PlotAreaBase.fn.removeAxis.call(plotArea, axis);
+
+            if (axis.options.vertical) {
+                plotArea.yAxisRangeTracker.reset(axisName);
+                delete plotArea.namedYAxes[axisName];
+            } else {
+                plotArea.xAxisRangeTracker.reset(axisName);
+                delete plotArea.namedXAxes[axisName];
+            }
+
+            if (axis === plotArea.axisX) {
+                delete plotArea.axisX;
+            }
+
+            if (axis === plotArea.axisY) {
+                delete plotArea.axisY;
+            }
+        },
+
+        createScatterChart: function(series, pane) {
             var plotArea = this;
 
             if (series.length > 0) {
                 plotArea.appendChart(
-                    new ScatterChart(plotArea, { series: series })
+                    new ScatterChart(plotArea, { series: series }),
+                    pane
                 );
             }
         },
 
-        createScatterLineChart: function(series) {
+        createScatterLineChart: function(series, pane) {
             var plotArea = this;
 
             if (series.length > 0) {
                 plotArea.appendChart(
-                    new ScatterLineChart(plotArea, { series: series })
+                    new ScatterLineChart(plotArea, { series: series }),
+                    pane
                 );
             }
         },
 
-        createBubbleChart: function(series) {
+        createBubbleChart: function(series, pane) {
             var plotArea = this;
 
             if (series.length > 0) {
                 plotArea.appendChart(
-                    new BubbleChart(plotArea, { series: series })
+                    new BubbleChart(plotArea, { series: series }),
+                    pane
                 );
             }
         },
@@ -5821,13 +6021,12 @@
                 namedAxes[axisName] = axis;
             }
 
-            plotArea.append(axis);
-            plotArea.axes.push(axis);
+            plotArea.appendAxis(axis);
 
             return axis;
         },
 
-        createAxes: function() {
+        createAxes: function(filterPane) {
             var plotArea = this,
                 options = plotArea.options,
                 xAxesOptions = [].concat(options.xAxis),
@@ -5836,15 +6035,21 @@
                 yAxes = [];
 
             each(xAxesOptions, function() {
-                xAxes.push(plotArea.createXYAxis(this, false));
+                var pane = plotArea.findPane(this.pane);
+                if (!filterPane || filterPane === pane) {
+                    xAxes.push(plotArea.createXYAxis(this, false));
+                }
             });
 
             each(yAxesOptions, function() {
-                yAxes.push(plotArea.createXYAxis(this, true));
+                var pane = plotArea.findPane(this.pane);
+                if (!filterPane || filterPane === pane) {
+                    yAxes.push(plotArea.createXYAxis(this, true));
+                }
             });
 
-            plotArea.axisX = xAxes[0];
-            plotArea.axisY = yAxes[0];
+            plotArea.axisX = plotArea.axisX || xAxes[0];
+            plotArea.axisY = plotArea.axisY || yAxes[0];
         },
 
         click: function(chart, e) {
@@ -6574,12 +6779,21 @@
         }
     }
 
-    function applyAxisDefaults(options, themeOptions) {
-        var themeAxisDefaults = deepExtend({}, (themeOptions || {}).axisDefaults);
-
-        // Resolve aliases
+    function resolveAxisAliases(options) {
         if (options.categoryAxes) {
-            options.categoryAxis = options.categoryAxes;
+            var categories = [],
+                axes = [].concat(options.categoryAxis),
+                i;
+
+            for (i = 0; i < axes.length; i++) {
+                categories.push(axes[i].categories);
+            }
+
+            options.categoryAxis = axes = options.categoryAxes;
+
+            for (i = 0; i < axes.length; i++) {
+                axes[i].categories = axes[i].categories || categories.shift();
+            }
         }
 
         if (options.valueAxes) {
@@ -6593,6 +6807,12 @@
         if (options.yAxes) {
             options.yAxis = options.yAxes;
         }
+    }
+
+    function applyAxisDefaults(options, themeOptions) {
+        var themeAxisDefaults = deepExtend({}, (themeOptions || {}).axisDefaults);
+
+        resolveAxisAliases(options);
 
         each([CATEGORY, "value", X, Y], function() {
             var axisName = this + "Axis",
@@ -6619,6 +6839,33 @@
     function applyDefaults(options, themeOptions) {
         applyAxisDefaults(options, themeOptions);
         applySeriesDefaults(options, themeOptions);
+    }
+
+    function bindCategories(options, data) {
+        var definitions = [].concat(options.categoryAxis),
+            axisIx,
+            axis,
+            categoryIx,
+            category,
+            row;
+
+        for (axisIx = 0; axisIx < definitions.length; axisIx++) {
+            axis = definitions[axisIx];
+            if (axis.field) {
+                for (categoryIx = 0; categoryIx < data.length; categoryIx++) {
+                    row = data[categoryIx];
+
+                    category = getField(axis.field, row);
+                    if (categoryIx === 0) {
+                        axis.categories = [category];
+                        axis.dataItems = [row];
+                    } else {
+                        axis.categories.push(category);
+                        axis.dataItems.push(row);
+                    }
+                }
+            }
+        }
     }
 
     function incrementSlot(slots, index, value) {
@@ -6685,20 +6932,27 @@
     getField.cache = {};
 
     function toDate(value) {
-        if (isArray(value)) {
-            return map(value, toDate);
+        var result,
+            aspDate,
+            i;
+
+        if (value instanceof Date) {
+            result = value;
+        } else if (typeof value === STRING) {
+            aspDate = DATE_REGEXP.exec(value);
+            result = new Date(aspDate ? parseInt(aspDate[1], 10) : value);
         } else if (value) {
-            if (value instanceof Date) {
-                return value;
-            } else {
-                if (typeof value === STRING) {
-                    var date = DATE_REGEXP.exec(value);
-                    return new Date(date ? parseInt(date[1], 10) : value);
-                } else {
-                    return new Date(value);
+            if (value.length) {
+                result = [];
+                for (i = 0; i < value.length; i++) {
+                    result.push(toDate(value[i]));
                 }
+            } else {
+                result = new Date(value);
             }
         }
+
+        return result;
     }
 
     function toTime(value) {
@@ -6973,6 +7227,36 @@
         }
     }
 
+    function lteDateIndex(sortedDates, date) {
+        var low = 0,
+            high = sortedDates.length - 1,
+            i,
+            currentDate;
+
+        while (low <= high) {
+            i = math.floor((low + high) / 2);
+            currentDate = sortedDates[i];
+
+            if (currentDate < date) {
+                low = i + 1;
+                continue;
+            }
+
+            if (currentDate > date) {
+                high = i - 1;
+                continue;
+            }
+
+            return i;
+        }
+
+        if (sortedDates[i] <= date) {
+            return i;
+        } else {
+            return i - 1;
+        }
+    }
+
     // Exports ================================================================
 
     dataviz.ui.plugin(Chart);
@@ -7017,11 +7301,12 @@
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
+        bindPoint: bindPoint,
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
         duration: duration,
         floorDate: floorDate,
-        bindPoint: bindPoint,
+        lteDateIndex: lteDateIndex,
         toDate: toDate
     });
 

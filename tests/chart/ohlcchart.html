@@ -102,6 +102,34 @@
                     equal(ohlcChart.points.length, series.data.length);
                 });
 
+                test("creates empty points for null values", function() {
+                    setupOHLCChart(plotArea, { series: [{
+                        data: [[2,4,1,3], null], type: "ohlc"
+                    }]});
+                    equals(ohlcChart.points[1], undefined);
+                });
+
+                test("creates empty points for undefined values", function() {
+                    setupOHLCChart(plotArea, { series: [{
+                        data: [[2,4,1,3], undefined], type: "ohlc"
+                    }]});
+                    equals(ohlcChart.points[1], undefined);
+                });
+
+                test("creates empty points for partially undefined values", function() {
+                    setupOHLCChart(plotArea, { series: [{
+                        data: [[2,4,1,3], [0, 1, undefined, 2]], type: "ohlc"
+                    }]});
+                    equals(ohlcChart.points[1], undefined);
+                });
+
+                test("empty points are not collapsed", function() {
+                    setupOHLCChart(plotArea, { series: [{
+                        data: [[2,4,1,3], null, [2, 4, 1, 3]], type: "ohlc"
+                    }]});
+                    equals(ohlcChart.points[2].box.x1, 2);
+                });
+
                 test("reports minimum series value for default axis", function() {
                     same(ohlcChart.valueAxisRanges[undefined].min, series.data[0][2]);
                 });
@@ -183,7 +211,7 @@
             (function() {
                 var ohlcChart,
                     MARGIN = PADDING = BORDER = 5,
-                    candleStick;
+                    ohlcPoint;
 
                 var plotArea = stubPlotArea(
                     function(categoryIndex) {
@@ -208,7 +236,7 @@
                             type: "ohlc"
                         }, options)]
                     });
-                    candleStick = ohlcChart.points[0];
+                    ohlcPoint = ohlcChart.points[0];
                 }
 
                 // ------------------------------------------------------------
@@ -219,19 +247,19 @@
                 });
 
                 test("applies series color to point border", function() {
-                    equal(candleStick.options.color, "lineColor");
+                    equal(ohlcPoint.options.color, "lineColor");
                 });
 
                 test("applies opacity to point", function() {
-                    equal(candleStick.options.opacity, 0.7);
+                    equal(ohlcPoint.options.opacity, 0.7);
                 });
 
                 test("applies dashType", function() {
-                    equal(candleStick.options.dashType, "dashType");
+                    equal(ohlcPoint.options.dashType, "dashType");
                 });
 
                 test("applies line width", function() {
-                    equal(candleStick.options.width, 0.2);
+                    equal(ohlcPoint.options.width, 0.2);
                 });
 
             })();
@@ -285,7 +313,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("OHLC Chart", {
+                module("OHLC Point", {
                     setup: function() {
                         createPoint();
                     }

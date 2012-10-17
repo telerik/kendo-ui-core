@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <style>
+            .k-label { display: none; }
+
+            .wrapper {
+                position: absolute;
+            }
+
+            .selection {
+                border-bottom: 0;
+                position: absolute;
+                border: 1px solid #d2d2d2;
+                border-bottom: 0;
+            }
+
+            .handle {
+                background: #d2d2d2;
+                width: 7px;
+                height: 40px;
+                cursor: e-resize;
+                z-index: 1;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+                border-radius: 4px;
+                position: absolute;
+            }
+
+            .mask {
+                background: red;
+                opacity: 0.7;
+                position: absolute;
+            }
+
+            .border {
+                background: #d2d2d2;
+                width: 1px;
+                height: 100%;
+                position: absolute;
+            }
+
+            .leftHandle {
+                left: -4px;
+            }
+
+            .rightHandle {
+                right: -4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="chart" style="width: 900px; height: 400px;"></div>
+        <div id="rangeslider" style="width: 845px; margin-left: 50px;">
+            <input />
+            <input />
+        </div>
+        <div id="scatterChart"></div>
+        <div class="wrapper">
+            <div class="mask"></div>
+            <div class="mask"></div>
+            <div class="selection">
+                <div class="handle leftHandle"></div>
+                <div class="handle rightHandle"></div>
+            </div>
+        </div>
+        <script>
+            var updateCount = 0;
+            var navigatorDataSource;
+            var salesData = [];
+            var startDate = new Date("2007/06/01");
+
+            $(function() {
+                function generate() {
+                    var date = startDate;
+                    var endDate = new Date("2012/06/01");
+
+                    while (date <= endDate) {
+                        var open = Math.random() * 100;
+                        var close = open + (Math.random() * 100 * (Math.random() > 0.5 ? 1 : -1));
+                        var high = open + 100;
+                        var low = open - 100;
+                        salesData.push({
+                            date: date,
+                            open: open,
+                            high: high,
+                            low: low,
+                            close: close,
+                            sales: date.getYear() * 100 + Math.random() * 1000
+                        });
+
+                        date = kendo.dataviz.addDuration(date, 1, "days");
+                    }
+
+                    return salesData;
+                }
+
+                var data = generate(),
+                navigatorDataSource = new kendo.data.DataSource({
+                    data: data
+                });
+
+                navigatorDataSource.read();
+
+                $("#chart").kendoChart({
+                    dataSource: {
+                        data: data
+                    },
+                    panes: [{
+                        name: "top"
+                    }, {
+                        name: "bottom",
+                        height: 80
+                    }],
+                    valueAxes: [{
+                        name: "topValueAxis",
+                        line: {
+                            visible: false
+                        }
+                    }, {
+                        name: "bottomValueAxis",
+                        pane: "bottom",
+                        majorGridLines: {
+                            visible: false
+                        },
+                        visible: false
+                    }],
+                    categoryAxes: [{
+                        type: "date",
+                        field: "date",
+                        baseUnit: "fit",
+                        maxDateGroups: 20,
+                        justified: true,
+                        min: startDate,
+                        max: kendo.dataviz.addDuration(startDate, 1, "years")
+                    }, {
+                        field: "date",
+                        baseUnit: "fit",
+                        maxDateGroups: 200,
+                        baseUnitStep: "auto",
+                        justified: true,
+                        name: "bottomCategoryAxis",
+                        pane: "bottom",
+                        labels: { visible: false },
+                        majorTicks: { visible: false }
+                    }, {
+                        field: "date",
+                        baseUnit: "years",
+                        maxDateGroups: 20,
+                        baseUnitStep: "auto",
+                        justified: true,
+                        pane: "bottom",
+                        _exact: true
+                    }, {
+                        name: "kur",
+                        field: "date",
+                        baseUnit: "months",
+                        baseUnitStep: 1,
+                        justified: true,
+                        pane: "bottom",
+                        _exact: true,
+                        labels: { visible: false, mirror: true }
+                    }],
+                    series: [{
+                        type: "line",
+                        field: "sales",
+                        axis: "topValueAxis",
+                        width: 1
+                    }, {
+                        type: "area",
+                        axis: "bottomValueAxis",
+                        categoryAxis: "bottomCategoryAxis",
+                        field: "sales",
+                        markers: {
+                            visible: false
+                        },
+                        tooltip: {
+                            visible: false,
+                            template: "#= kendo.toString(category, 'd') #"
+                        },
+                        width: 1
+                    }],
+                    legend: {
+                        visible: false
+                    },
+                    transitions: false
+                });
+
+                function sliderChange(e) {
+                    var chart = $("#chart").data("kendoChart");
+                    var detailAxis = chart.options.categoryAxes[0];
+                    detailAxis.min = kendo.dataviz.addDuration(
+                        startDate,
+                        e.values[0] * 12,
+                        "months"
+                    );
+
+                    detailAxis.max = kendo.dataviz.addDuration(
+                        startDate,
+                        e.values[1] * 12,
+                        "months"
+                    );
+
+                    chart.refresh();
+                }
+
+                //$("#rangeslider").kendoRangeSlider({
+                //    change: sliderChange,
+                //    min: 0,
+                //    max: 20,
+                //    smallStep: 1,
+                //    largeStep: 5,
+                //    selectionStart: 1,
+                //    selectionEnd: 2,
+                //    tooltip: {
+                //        template: "#= formatTooltip(selectionStart, selectionEnd) #"
+                //    }
+                //});
+
+                // Navigator
+
+                // Insert navigator in the chart
+                $("#chart").append($(".wrapper"));
+
+                // Chart
+                var chart = $("#chart").data("kendoChart");
+                // Set size to the navigator
+                var plotArea = chart._plotArea,
+                    pane = plotArea.panes[1],
+                    categoryAxis = pane.axes[0],
+                    valueAxis = pane.axes[3],
+                    width = categoryAxis.box.width(),
+                    height = valueAxis.box.height(),
+                    wrapper = $(".wrapper");
+
+                wrapper
+                    .width(width)
+                    .height(height)
+                    .css("left", categoryAxis.box.x1)
+                    .css("top", valueAxis.box.y1);
+
+                var selection = wrapper.find(".selection").width(width - 2).css("left", 0);
+
+                selection.height(height);
+                selection.height(height - (selection.outerHeight() - selection.height()));
+                var borderWidth = selection.outerWidth() - selection.width(),
+                    masks = wrapper.find(".mask"),
+                    leftMask = masks.first().height(height),
+                    rightMask = masks.last().height(height),
+                    leftHandle = wrapper.find(".leftHandle"),
+                    rightHandle = wrapper.find(".rightHandle");
+
+                rightMask.width(0);
+                rightMask.css("left", width);
+
+                leftMask.width(0);
+                leftMask.css("left", 0);
+
+                leftHandle.css("top", (wrapper.height() - leftHandle.height()) / 2);
+                rightHandle.css("top", (wrapper.height() - rightHandle.height()) / 2);
+
+                var leftHandleDraggable = new DragHandleDrag(leftHandle, { isFirst: true, borderWidth: borderWidth, min: 0, max: wrapper.width() }, categoryAxis);
+
+                var rightHandleDraggable = new DragHandleDrag(rightHandle, { isFirst: false, borderWidth: borderWidth, min: 0, max: wrapper.width() }, categoryAxis);
+
+                //var selectionDraggable = new SelectionDrag(wrapper, leftHandle, rightHandle);
+            });
+
+
+            function DragHandleDrag(dragHandle, options, categoryAxis) {
+                var that = this,
+                    wrapper = dragHandle.closest(".wrapper"),
+                    masks = wrapper.find(".mask");
+
+                that.dragHandle = dragHandle;
+                that.categoryAxis = categoryAxis;
+
+                that.options = options;
+
+                that.leftMask = masks.first();
+                that.rightMask = masks.last();
+                that.selection = wrapper.find(".selection");
+
+                that.draggable = new kendo.ui.Draggable(dragHandle, {
+                    dragend: $.proxy(that.dragEnd, that),
+                    drag: $.proxy(that.drag, that),
+                    dragstart: $.proxy(that.dragStart, that)
+                })
+            }
+
+            DragHandleDrag.prototype = {
+                dragStart: function(e) {
+                    var that = this;
+
+                    that.currentLocation = that.leftMask.width();
+                    if (!that.options.isFirst) {
+                        that.currentLocation += that.selection.outerWidth();
+                    }
+                    that.dragHandle.css("cursor", "default");
+                },
+                drag: function(e) {
+                    var that = this,
+                        options = that.options,
+                        position = that.currentLocation + (e.x.location - e.x.startLocation),
+                        distance;
+
+                    if (options.isFirst) {
+                        distance = Math.min(Math.max(position, options.min), options.max - that.rightMask.width() - options.borderWidth);
+                        that.leftMask.width(distance);
+                    } else {
+                        distance = Math.min(Math.max(position, that.leftMask.width()), options.max);
+                        that.rightMask.width(options.max - distance);
+                        that.rightMask.css("left", distance);
+                    }
+
+                    that.selection.css("left", that.leftMask.width());
+                    that.selection.width(options.max - that.rightMask.width() - that.leftMask.width() - options.borderWidth);
+                    that.options.position = distance;
+                },
+                dragEnd: function() {
+                    var that = this,
+                        options = that.options,
+                        selectionLeft = parseFloat(that.selection.css("left")),
+                        chart = $("#chart").data("kendoChart"),
+                        detailAxis = chart.options.categoryAxis[0],
+                        plotArea = chart._plotArea,
+                        pane = plotArea.panes[1],
+                        navigatorCategoryAxis = pane.axes[0],
+                        valueAxis = pane.axes[3],
+                        startPoint = { x: valueAxis.box.x2 + selectionLeft, y: 0 },
+                        endPoint = { x: valueAxis.box.x2 + selectionLeft + that.selection.width(), y: 0 },
+                        box, categoryIndex, offset;
+
+                    that.dragHandle.css("cursor", "e-resize");
+
+                    //categoryIndex = navigatorCategoryAxis.getCategoryIndex(options.isFirst ? startPoint : endPoint);
+                    //if (categoryIndex == null) {
+                    //    categoryIndex = 100;
+                    //}
+
+                    //if (options.isFirst) {
+                    //    box = navigatorCategoryAxis.getSlot(categoryIndex);
+                    //    offset = Math.ceil((options.position + valueAxis.box.x2) - box.x1);
+                    //    if (options.position) {
+                    //        offset -= 1;
+                    //    }
+
+                    //    that.leftMask.width(that.leftMask.width() - offset);
+                    //    that.selection.css("left", selectionLeft - offset);
+                    //    that.selection.width(that.selection.width() + offset);
+                    //} else {
+                    //    box = navigatorCategoryAxis.getSlot(categoryIndex + 1);
+                    //    offset = box.x1 - (options.position + valueAxis.box.x2);
+
+                    //    that.selection.width(that.selection.width() + offset);
+                    //    that.rightMask.width(that.rightMask.width() - offset);
+                    //    that.rightMask.css("left", parseFloat(that.rightMask.css("left")) + offset);
+                    //}
+
+                    detailAxis.min = navigatorCategoryAxis.getCategory({ x: valueAxis.box.x2 + parseFloat(that.selection.css("left")), y: 0 });
+                    detailAxis.max = navigatorCategoryAxis.getCategory({ x: valueAxis.box.x2 + parseFloat(that.selection.css("left")) + that.selection.width(), y: 0 });
+
+                    chart._plotArea.redrawPane(plotArea.panes[0]);
+                }
+            };
+
+        </script>
+    </body>
+</html>
+

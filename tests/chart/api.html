@@ -35,7 +35,8 @@
                 module("refresh / redraw", {
                     setup: function() {
                         createChart({series: [{}]});
-                    }
+                    },
+                    teardown: destroyChart
                 });
 
                 test("refresh applies axis defaults", function() {
@@ -62,6 +63,90 @@
                     ok(chart.options.categoryAxis.flag === true);
                 });
 
+                test("redraw only redraws specified pane", 1, function() {
+                    createChart({
+                        panes: [{ name: "top" }, { name: "bottom" }]
+                    });
+
+                    var plotArea = chart._model._plotArea;
+                    plotArea.redrawPane = function(pane) {
+                        ok(pane === plotArea.panes[1]);
+                    };
+
+                    chart.redraw("bottom");
+                });
+
+                test("redraw redraws default pane if invalid name is specified", 1, function() {
+                    createChart({
+                        panes: [{ name: "top" }, { name: "bottom" }]
+                    });
+
+                    var plotArea = chart._model._plotArea;
+                    plotArea.redrawPane = function(pane) {
+                        ok(pane === plotArea.panes[0]);
+                    };
+
+                    chart.redraw("middle");
+                });
+
+                test("redraw applies category axis options set via aliases", 1, function() {
+                    createChart({
+                        panes: [{ name: "top" }, { name: "bottom" }],
+                        categoryAxes: [{
+                        }]
+                    });
+                    chart.options.categoryAxes[0].flag = true;
+                    chart.redraw("top");
+
+                    ok(chart._model._plotArea.categoryAxis.options.flag);
+                });
+
+                test("redraw keeps categories when using categoryAxes alias", function() {
+                    createChart({
+                        dataSource: {
+                            data: [{
+                                type: "alpha",
+                                value: 100
+                            }]
+                        },
+                        series: [{
+                            type: "column",
+                            data: [1000]
+                        }],
+                        panes: [{
+                            name: "top"
+                        }],
+                        categoryAxes: [{
+                            field: "type",
+                            pane: "top"
+                        }]
+                    });
+
+                    chart.redraw("top");
+                    equals(chart._model._plotArea.categoryAxis.options.categories[0], "alpha");
+                });
+
+                test("redraw applies value axis options set via aliases", 1, function() {
+                    createChart({
+                        series: [{
+                            type: "column",
+                            data: [1000]
+                        }],
+                        panes: [{
+                            name: "top"
+                        }],
+                        valueAxes: [{
+                            field: "type",
+                            pane: "top"
+                        }]
+                    });
+
+                    chart.options.valueAxes[0].flag = true;
+                    chart.redraw("top");
+
+                    ok(chart._model._plotArea.valueAxis.options.flag);
+                });
+
                 test("refresh applies series defaults", function() {
                     $.extend(chart.options, {
                         seriesDefaults: {
@@ -86,18 +171,25 @@
                     equal(chart.options.series[0].labels.visible, true);
                 });
 
-                test("refresh replaces markup", function() {
-                    chart.element.empty();
-                    chart.refresh();
-
-                    ok(chart.element.children().length > 0);
-                });
-
-                test("redraw replaces markup", function() {
-                    chart.element.empty();
+                test("redraw replaces SVG element", function() {
+                    chart.element.find("svg").data("dirty", true);
                     chart.redraw();
 
-                    ok(chart.element.children().length > 0);
+                    ok(!chart.element.data("dirty") > 0);
+                });
+
+                test("redraw does not remove elements appended to container", function() {
+                    chart.element.append("<div id='extra' />");
+                    chart.redraw();
+
+                    equals(chart.element.find("#extra").length, 1);
+                });
+
+                test("redraw removes tooltip element", function() {
+                    chart.element.find(".k-tooltip").data("dirty", true);
+                    chart.redraw();
+
+                    ok(!chart.element.find(".k-tooltip").data("dirty"));
                 });
 
                 test("refresh applies changes to data-bound series", function() {

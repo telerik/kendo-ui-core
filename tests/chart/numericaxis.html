@@ -1424,12 +1424,12 @@
                     lineSeriesData = [{
                         name: "Value A",
                         type: "line",
-                        data: [100, 200, 300]
+                        data: [0, 1]
                     }],
                     barSeriesData =  [{
                         name: "Value A",
                         type: "bar",
-                        data: [100, 20, 30]
+                        data: [0, 1]
                     }];
 
                 function createPlotArea(series, chartOptions) {
@@ -1463,7 +1463,7 @@
 
                 test("renders box", function() {
                     same([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                         [ 39, 572.516, 800, 572.677 ], TOLERANCE);
+                         [35, 432, 799, 479], TOLERANCE);
                 });
 
                 test("renders color", function() {
@@ -1482,13 +1482,13 @@
                 module("Numeric Axis / Plot Bands / Vertical", {
                     setup: function() {
                         createPlotArea(barSeriesData);
-                        plotBands = view.log.rect[3];
+                        plotBands = view.log.rect[0];
                     }
                 });
 
                 test("renders box", function() {
                     same([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                         [ 21, 0, 22, 600 ], TOLERANCE);
+                         [147, 0, 211, 599], TOLERANCE);
                 });
 
                 test("renders color", function() {
