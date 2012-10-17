@@ -226,6 +226,14 @@
                 ok($("#qunit-fixture").parent().hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
             });
 
+            test("Force font icons", 1, function() {
+                setup('<div data-role="view" />', {
+                    useFontIcons: true
+                });
+
+                ok(application.element.hasClass("km-font-icons"));
+            });
+
             test("Force platform layout", 1, function() {
                 setup('<div data-role="view" />', {
                     platform: "android"

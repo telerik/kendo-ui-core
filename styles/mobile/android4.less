@@ -1,5 +1,9 @@
 /* Platform specific Android 4 CSS */
 
+
+
+@tabstrip-active-icon-color: #33b5e5;
+
 .km-android
 {
     background: #000;
@@ -371,7 +375,7 @@
 {
     display: table;
     padding: 0;
-    background: #33b5e5;
+    background: @tabstrip-active-icon-color;
     background-clip: padding-box;
     border-bottom: 1px solid rgba(255,255,255,.4);
 }
@@ -606,17 +610,28 @@
     .linear-gradient-image(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
 }
 
+.km-font-icons.km-android .km-button .km-icon:after
+{
+    color: rgba(0,0,0,.8);
+}
+
 .km-android .km-navbar .km-icon
 {
-    margin-left: .5em;
-    margin-right: -.3em;
+    margin-left: .5rem;
+    margin-right: -.3rem;
     .linear-gradient-image(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
+}
+
+.km-font-icons.km-android .km-navbar .km-icon:after
+{
+    color: rgba(255,255,255,.8);
 }
 
 .km-android .km-tabstrip .km-icon
 {
     position: relative;
-    margin-bottom: .3em;
+    left: 0;
+    margin-bottom: .3rem;
     z-index: 2;
 }
 
@@ -631,10 +646,20 @@
     .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,0));
 }
 
+.km-font-icons.km-android .km-tabstrip .km-icon:after
+{
+    color: #555;
+}
+
 .km-android .km-tabstrip .km-state-active .km-icon
 {
-    background: #3F99D2;
+    background: @tabstrip-active-icon-color;
     .linear-gradient-image(top, rgba(255,255,255,.6) 0, rgba(255,255,255,0) 50%, rgba(255,255,255,.3) 100%);
+}
+
+.km-font-icons.km-android .km-tabstrip .km-state-active .km-icon:after
+{
+    color: @tabstrip-active-icon-color;
 }
 
 /* Pull To Refresh */

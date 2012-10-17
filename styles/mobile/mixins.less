@@ -1,43 +1,71 @@
+.flexbox(@type) {
+    display: ~"-moz-@{type}";
+    display: ~"-webkit-@{type}";
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
 .box-orient(@direction) {
     -moz-box-orient: @direction;
     -webkit-box-orient: @direction;
-    -ms-box-orient: @direction;
-    box-orient: @direction;
-}
-
-.box(@type) {
-    display: ~"-moz-@{type}";
-    display: ~"-webkit-@{type}";
-    display: ~"-ms-@{type}";
-    display: @type;
 }
 
 .box-direction(@direction) {
     -moz-box-direction: @direction;
     -webkit-box-direction: @direction;
-    -ms-box-direction: @direction;
-    box-direction: @direction;
 }
 
-.box-flex(@amount) {
+.flex-direction(@direction) {
+    -webkit-flex-direction: @direction;
+    -moz-flex-direction: @direction;
+    -ms-flex-direction: @direction;
+    flex-direction: @direction;
+}
+
+.flex-wrap(@wrap) {
+    -webkit-flex-wrap: @wrap;
+    -moz-flex-wrap: @wrap;
+    -ms-flex-wrap: @wrap;
+    flex-wrap: @wrap;
+}
+
+.flex(@amount) {
     -moz-box-flex: @amount;
     -webkit-box-flex: @amount;
-    -ms-box-flex: @amount;
-    box-flex: @amount;
+    -moz-flex: @amount;
+    -webkit-flex: @amount;
+    -ms-flex: @amount;
+    flex: @amount;
 }
 
-.box-align(@alignment) {
+.flex-align(@alignment) {
     -moz-box-align: @alignment;
     -webkit-box-align: @alignment;
-    -ms-box-align: @alignment;
-    box-align: @alignment;
+    -ms-flex-align: @alignment;
+    flex-align: @alignment;
 }
 
-.box-pack(@pack) {
+.flex-align-items(@alignment) {
+    -webkit-align-items: @alignment;
+    -moz-align-items: @alignment;
+    align-items: @alignment;
+}
+
+.flex-align-content(@alignment) {
+    -webkit-align-content: @alignment;
+    -moz-align-content: @alignment;
+    align-content: @alignment;
+}
+
+.flex-pack(@pack) {
     -moz-box-pack: @pack;
     -webkit-box-pack: @pack;
-    -ms-box-pack: @pack;
-    box-pack: @pack;
+    -moz-flex-pack: @pack;
+    -webkit-flex-pack: @pack;
+    -ms-flex-pack: @pack;
+    flex-pack: @pack;
 }
 
 .border-radius(...) {

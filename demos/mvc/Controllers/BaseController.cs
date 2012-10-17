@@ -23,7 +23,10 @@ namespace Kendo.Controllers
                 { ".jpg", "image/jpg" },
                 { ".gif", "image/gif" },
                 { ".png", "image/png" },
-                { ".svg", "image/svg+xml" }
+                { ".svg", "image/svg+xml" },
+                { ".eot", "application/vnd.ms-fontobject" },
+                { ".ttf", "application/octet-stream" },
+                { ".woff", "application/octet-stream" }
             };
 
         protected static readonly IDictionary<String, String> AssetRoots =

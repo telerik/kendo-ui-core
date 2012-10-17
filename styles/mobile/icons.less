@@ -1,5 +1,11 @@
 /* Icon Masks */
 
+@font-face {
+    font-family: "Kendo Mobile";
+    src: url("images/KendoMobile.woff") format("woff"),
+         url("images/KendoMobile.ttf") format("truetype");
+}
+
 .km-about,
 .km-action,
 .km-add,
@@ -54,6 +60,17 @@ body:after
 {
      content: url("images/icons.png");
      display: none;
+}
+
+body:before
+{
+    font-family: "Kendo Mobile";
+    content: "\a0";
+    font-size: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: -1;
 }
 
 .km-action
@@ -142,7 +159,6 @@ body:after
 {
     -webkit-mask-position-x: 46%;
     clip-path: url("images/iconmasks.svg#featured");
-//    clip-path: url("data:image/svg+xml;utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMSAxIj4NCiAgICA8Y2xpcFBhdGggaWQ9ImZlYXR1cmVkIiBjbGlwUGF0aFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCI+DQogICAgICAgIDxwYXRoIGZpbGw9ImJsYWNrIiBkPSJNMC40NzksMC4zNzRDMC40NTQsMC4zMSwwLjM4MSwwLjIzOSwwLjMxNiwwLjIxOEwwLjI5MiwwLjIwOWMtMC4wNjUtMC4wMjEtMC4xNTgtMC4wMi0wLjIwNiwwLjAwNA0KICAgICAgIAkJQzAuMDM5LDAuMjM3LDAuMDQsMC4yOTcsMC4wODgsMC4zNDVsMC4zODksMC4zODlDMC41MjUsMC43ODEsMC41OCwwLjgxMiwwLjU5OCwwLjhjMC4wMTgtMC4wMTIsMC4wMTMtMC4wNzQtMC4wMTEtMC4xMzkNCiAgICAgICAJCUwwLjQ3OSwwLjM3NHoiLz4NCiAgICAgICAgPHBhdGggZmlsbD0iYmxhY2siIGQ9Ik0wLjcyOSwwLjU3N0MwLjY3NSwwLjYyLDAuNjE1LDAuNjEyLDAuNTk2LDAuNTYxYy0wLjAyLTAuMDUxLTAuMDItMC4xMTYtMC4wMDItMC4xNDUNCiAgICAgICAgICAgIGMwLjAxOS0wLjAyNywwLjA3OC0wLjA2NSwwLjEzMy0wLjA4NGMwLjA1NC0wLjAxOCwwLjEzOC0wLjAxOCwwLjE4NiwwYzAuMDQ4LDAuMDE5LDAuMDQzLDAuMDY3LTAuMDExLDAuMTFMMC43MjksMC41Nzd6Ii8+DQogICAgICAgIDxwYXRoIGZpbGw9ImJsYWNrIiBkPSJNMC40MzIsMC43NWMwLjAxOCwwLjAxOCwwLjAyLDAuMDQ0LDAuMDAzLDAuMDU3QzAuNDE3LDAuODIsMC4zOTEsMC44MjIsMC4zNzYsMC44MTMNCiAgICAgICAgICAgIEMwLjM2LDAuODAzLDAuMzU5LDAuNzc2LDAuMzczLDAuNzU1UzAuNDE0LDAuNzMxLDAuNDMyLDAuNzV6Ii8+DQogICAgPC9jbGlwUGF0aD4NCjwvc3ZnPg==#featured");
 }
 
 .km-globe
@@ -318,3 +334,218 @@ body:after
     -webkit-mask-position-x: 100%;
     clip-path: url("images/iconmasks.svg#pullrefresh");
 }
+
+html.km-root .km-font-icons .km-icon,
+.km-font-icons .km-load-more .km-icon,
+.km-font-icons .km-scroller-refresh .km-icon,
+.km-font-icons .km-scroller-pull .km-icon
+{
+    background: none !important;
+    -webkit-mask-image: none;
+    -webkit-mask-size: auto auto;
+    clip-path: none !important;
+}
+
+.km-font-icons .km-icon:after
+{
+    position: static;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    vertical-align: middle;
+    font: 1em/1em "Kendo Mobile" !important;
+}
+
+.km-font-icons:not(.km-on-android):not(.km-on-blackberry):not(.km-on-meego) .km-icon:after
+{
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+}
+
+.km-font-icons .km-action:after
+{
+    content: "6";
+}
+
+.km-font-icons .km-add:after
+{
+    content: "a";
+}
+
+.km-font-icons .km-battery:after
+{
+    content: "z";
+}
+
+.km-font-icons .km-bookmarks:after
+{
+    content: "b";
+}
+
+.km-font-icons .km-camera:after
+{
+    content: "p";
+}
+
+.km-font-icons .km-cart:after
+{
+    content: "o";
+}
+
+.km-font-icons .km-edit:after,
+.km-font-icons .km-compose:after
+{
+    content: "e";
+}
+
+.km-font-icons .km-contacts:after
+{
+    content: "c";
+}
+
+.km-font-icons .km-trash:after,
+.km-font-icons .km-delete:after
+{
+    content: "q";
+}
+
+.km-font-icons .km-details:after
+{
+    content: "";
+}
+
+.km-font-icons .km-download:after,
+.km-font-icons .km-downloads:after
+{
+    content: "d";
+}
+
+.km-font-icons .km-fastforward:after
+{
+    content: "5";
+}
+
+.km-font-icons .km-toprated:after,
+.km-font-icons .km-favorites:after
+{
+    content: "x";
+}
+
+.km-font-icons .km-featured:after
+{
+    content: "f";
+}
+
+.km-font-icons .km-globe:after
+{
+    content: "u";
+}
+
+.km-font-icons .km-history:after
+{
+    content: "9";
+}
+
+.km-font-icons .km-home:after
+{
+    content: "h";
+}
+
+.km-font-icons .km-info:after,
+.km-font-icons .km-about:after
+{
+    content: "i";
+}
+
+.km-font-icons .km-more:after
+{
+    content: "";
+}
+
+.km-font-icons .km-mostrecent:after
+{
+    content: "j";
+}
+
+.km-font-icons .km-mostviewed:after
+{
+    content: "l";
+}
+
+.km-font-icons .km-organize:after
+{
+    content: "g";
+}
+
+.km-font-icons .km-pause:after
+{
+    content: "3";
+}
+
+.km-font-icons .km-play:after
+{
+    content: "1";
+}
+
+.km-font-icons .km-recents:after
+{
+    content: "t";
+}
+
+.km-font-icons .km-refresh:after
+{
+    content: "0";
+}
+
+.km-font-icons .km-reply:after
+{
+    content: "7";
+}
+
+.km-font-icons .km-rewind:after
+{
+    content: "4";
+}
+
+.km-font-icons .km-search:after
+{
+    content: "s";
+}
+
+.km-font-icons .km-settings:after
+{
+    content: "y";
+}
+
+.km-font-icons .km-share:after
+{
+    content: "";
+}
+
+.km-font-icons .km-sounds:after,
+.km-font-icons .km-volume:after
+{
+    content: "v";
+}
+
+.km-font-icons .km-stop:after
+{
+    content: "2";
+}
+
+.km-font-icons .km-wifi:after
+{
+    content: "m";
+}
+
+.km-font-icons.km-android .km-more:after
+{
+    content: "";
+}
+
+.km-font-icons.km-meego .km-more:after
+{
+    content: "";
+}
+
