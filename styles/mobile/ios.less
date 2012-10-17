@@ -8,6 +8,9 @@
 @button-background-color: #496b9a;
 @button-active-background-color: #264e8c;
 
+@pull-to-refresh-color: #788193;
+@pull-to-refresh-shadow: rgba(255,255,255,.5);
+
 @tabstrip-icon-color: rgba(255,255,255,.3);
 @tabstrip-active-icon-color: #3F99D2;
 @button-icon-gradient: top, rgba(255,255,255,.7), rgba(255,255,255,.9);
@@ -687,18 +690,34 @@
 
 /* Pull To Refresh */
 
+.km-ios .km-load-more,
 .km-ios .km-scroller-pull
 {
-    color: #788193;
+    color: @pull-to-refresh-color;
+    text-shadow: 0 1px 1px @pull-to-refresh-shadow;
 }
 
 .km-ios .km-load-more .km-icon,
 .km-ios .km-scroller-pull .km-icon
 {
-    background: #788193;
+    background: @pull-to-refresh-color;
     width: 2.4rem;
     height: 2.4rem;
     font-size: 2.4rem;
+}
+
+.km-font-icons.km-ios .km-load-more .km-icon:after,
+.km-font-icons.km-ios .km-scroller-pull .km-icon:after
+{
+    color: @pull-to-refresh-color;
+    text-shadow: 0 1px 1px @pull-to-refresh-shadow;
+}
+
+.km-font-icons.km-ios :-webkit-any(.km-load-more) .km-icon:after,
+.km-font-icons.km-ios :-webkit-any(.km-scroller-pull) .km-icon:after
+{
+    background: @pull-to-refresh-shadow;
+    text-shadow: 0 1px 1px @pull-to-refresh-color;
 }
 
 .km-ios .km-scroller-refresh .km-icon
