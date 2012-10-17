@@ -1,9 +1,9 @@
 /* Icon Masks */
 
 @font-face {
-    font-family: "Kendo Mobile";
-    src: url("images/KendoMobile.woff") format("woff"),
-         url("images/KendoMobile.ttf") format("truetype");
+    font-family: "Kendo UI";
+    src: url("images/KendoUI.woff") format("woff"),
+         url("images/KendoUI.ttf") format("truetype");
 }
 
 .km-about,
@@ -311,16 +311,6 @@ body:before
     clip-path: url("images/iconmasks.svg#meegorefresh");
 }
 
-.km-root .km-android .km-loading,
-.km-android .km-load-more .km-icon,
-.km-root .km-android .km-scroller-refresh .km-icon
-{
-    -webkit-mask-image: none;
-    background: url("images/icons.png");
-    background-size: auto 100%;
-    background-position-x: 96%;
-}
-
 .km-blackberry .km-loading,
 .km-blackberry .km-load-more .km-icon,
 .km-blackberry .km-scroller-refresh .km-icon
@@ -335,7 +325,12 @@ body:before
     clip-path: url("images/iconmasks.svg#pullrefresh");
 }
 
+.km-root .km-android .km-loading,
+.km-android .km-load-more .km-icon,
+.km-android .km-scroller-pull .km-icon,
+.km-android .km-scroller-refresh .km-icon,
 html.km-root .km-font-icons .km-icon,
+.km-font-icons.km-pane .km-loading,
 .km-font-icons .km-load-more .km-icon,
 .km-font-icons .km-scroller-refresh .km-icon,
 .km-font-icons .km-scroller-pull .km-icon
@@ -346,6 +341,11 @@ html.km-root .km-font-icons .km-icon,
     clip-path: none !important;
 }
 
+.km-android .km-loading:after,
+.km-font-icons .km-loading:after,
+.km-android .km-load-more .km-icon:after,
+.km-android .km-scroller-pull .km-icon:after,
+.km-android .km-scroller-refresh .km-icon:after,
 .km-font-icons .km-icon:after
 {
     position: static;
@@ -354,7 +354,7 @@ html.km-root .km-font-icons .km-icon,
     height: 100%;
     text-align: left;
     vertical-align: middle;
-    font: 1em/1em "Kendo Mobile" !important;
+    font: 1em/1em "Kendo UI" !important;
 }
 
 .km-font-icons:not(.km-on-android):not(.km-on-blackberry):not(.km-on-meego) .km-icon:after
@@ -365,187 +365,221 @@ html.km-root .km-font-icons .km-icon,
 
 .km-font-icons .km-action:after
 {
-    content: "6";
+    content: "\e0ca";
 }
 
 .km-font-icons .km-add:after
 {
-    content: "a";
+    content: "\e0cb";
 }
 
 .km-font-icons .km-battery:after
 {
-    content: "z";
+    content: "\e0ce";
 }
 
 .km-font-icons .km-bookmarks:after
 {
-    content: "b";
+    content: "\e0cf";
 }
 
 .km-font-icons .km-camera:after
 {
-    content: "p";
+    content: "\e0d0";
 }
 
 .km-font-icons .km-cart:after
 {
-    content: "o";
+    content: "\e0d1";
 }
 
 .km-font-icons .km-edit:after,
 .km-font-icons .km-compose:after
 {
-    content: "e";
+    content: "\e0d5";
 }
 
 .km-font-icons .km-contacts:after
 {
-    content: "c";
+    content: "\e0e4";
 }
 
 .km-font-icons .km-trash:after,
 .km-font-icons .km-delete:after
 {
-    content: "q";
+    content: "\e0ec";
 }
 
 .km-font-icons .km-details:after
 {
-    content: "";
+    content: "\e0e2";
 }
 
 .km-font-icons .km-download:after,
 .km-font-icons .km-downloads:after
 {
-    content: "d";
+    content: "\e0d4";
 }
 
 .km-font-icons .km-fastforward:after
 {
-    content: "5";
+    content: "\e0d9";
 }
 
 .km-font-icons .km-toprated:after,
 .km-font-icons .km-favorites:after
 {
-    content: "x";
+    content: "\e0d7";
 }
 
 .km-font-icons .km-featured:after
 {
-    content: "f";
+    content: "\e0d8";
 }
 
 .km-font-icons .km-globe:after
 {
-    content: "u";
+    content: "\e0dc";
 }
 
 .km-font-icons .km-history:after
 {
-    content: "9";
+    content: "\e0e7";
 }
 
 .km-font-icons .km-home:after
 {
-    content: "h";
+    content: "\e0dd";
 }
 
 .km-font-icons .km-info:after,
 .km-font-icons .km-about:after
 {
-    content: "i";
+    content: "\e0de";
 }
 
 .km-font-icons .km-more:after
 {
-    content: "";
+    content: "\e0e0";
 }
 
 .km-font-icons .km-mostrecent:after
 {
-    content: "j";
+    content: "\e0cc";
 }
 
 .km-font-icons .km-mostviewed:after
 {
-    content: "l";
+    content: "\e0d6";
 }
 
 .km-font-icons .km-organize:after
 {
-    content: "g";
+    content: "\e0eb";
 }
 
 .km-font-icons .km-pause:after
 {
-    content: "3";
+    content: "\e0e3";
 }
 
 .km-font-icons .km-play:after
 {
-    content: "1";
+    content: "\e0e5";
 }
 
 .km-font-icons .km-recents:after
 {
-    content: "t";
+    content: "\e0d2";
 }
 
 .km-font-icons .km-refresh:after
 {
-    content: "0";
+    content: "\e0e6";
 }
 
 .km-font-icons .km-reply:after
 {
-    content: "7";
+    content: "\e0ed";
 }
 
 .km-font-icons .km-rewind:after
 {
-    content: "4";
+    content: "\e0e8";
 }
 
 .km-font-icons .km-search:after
 {
-    content: "s";
+    content: "\e0e9";
 }
 
 .km-font-icons .km-settings:after
 {
-    content: "y";
+    content: "\e0da";
 }
 
 .km-font-icons .km-share:after
 {
-    content: "";
+    content: "\e0df";
 }
 
 .km-font-icons .km-sounds:after,
 .km-font-icons .km-volume:after
 {
-    content: "v";
+    content: "\e0ef";
 }
 
 .km-font-icons .km-stop:after
 {
-    content: "2";
+    content: "\e0ea";
 }
 
 .km-font-icons .km-wifi:after
 {
-    content: "m";
+    content: "\e0f0";
 }
 
 .km-font-icons.km-android .km-more:after
 {
-    content: "";
+    content: "\e0e1";
 }
 
 .km-font-icons.km-meego .km-more:after
 {
-    content: "";
+    content: "\e0f8";
+}
+
+.km-font-icons.km-ios .km-loading:after,
+.km-font-icons.km-ios .km-load-more .km-icon:after,
+.km-font-icons.km-ios .km-scroller-refresh .km-icon:after
+{
+    content: "\e0f7";
+}
+
+.km-font-icons.km-meego .km-loading:after,
+.km-font-icons.km-meego .km-load-more .km-icon:after,
+.km-font-icons.km-meego .km-scroller-refresh .km-icon:after
+{
+    content: "\e0f6";
+}
+
+.km-root .km-android .km-loading:after,
+.km-android .km-load-more .km-icon:after,
+.km-root .km-android .km-scroller-refresh .km-icon:after
+{
+    content: "\e0f6";
+}
+
+.km-font-icons.km-blackberry .km-loading:after,
+.km-font-icons.km-blackberry .km-load-more .km-icon:after,
+.km-font-icons.km-blackberry .km-scroller-refresh .km-icon:after
+{
+    content: "\e0f6";
+}
+
+.km-android .km-scroller-pull .km-icon:after,
+.km-font-icons .km-scroller-pull .km-icon:after
+{
+    content: "\e0f2";
 }
 

@@ -492,6 +492,12 @@
 
 /* Pull to refresh */
 
+.km-blackberry .km-load-more,
+.km-blackberry .km-scroller-pull
+{
+    font-size: 1.4rem;
+}
+
 .km-blackberry .km-load-more .km-icon,
 .km-blackberry .km-scroller-pull .km-icon
 {
@@ -499,6 +505,12 @@
     height: 2.4rem;
     font-size: 2.4rem;
     background-color: #057fe4;
+}
+
+.km-font-icons.km-blackberry .km-load-more .km-icon:after,
+.km-font-icons.km-blackberry .km-scroller-pull .km-icon:after
+{
+    color: #259fff;
 }
 
 .km-blackberry .km-scroller-refresh .km-icon
@@ -558,6 +570,7 @@
 {
     width: 50px;
     height: 50px;
+    font-size: 50px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -566,13 +579,9 @@
     background-color: #4acaff;
 }
 
-.km-blackberry7.km-m0 .km-loading,
-.km-blackberry7.km-m0 .km-load-more .km-icon,
-.km-blackberry7.km-m0 .km-scroller-pull .km-icon,
-.km-blackberry7.km-m0 .km-scroller-refresh .km-icon
+.km-font-icons.km-blackberry .km-loading:after
 {
-    background-color: transparent;
-    .animation(none);
+    color: #4acaff;
 }
 
 /* Forms */
