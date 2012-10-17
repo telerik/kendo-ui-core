@@ -686,6 +686,26 @@
                 equal(parse("10/10", "MM/dd").getFullYear(), year);
             });
 
+            test("parseDate does not expand year if digits are 4", function() {
+                equal(+parse("0001/10/10", "yyyy/MM/dd"), +new Date(0001, 9, 10));
+            });
+
+            test("parseDate returns null if yyyy and bigger date", function() {
+                equal(parse("10000/10/10", "yyyy/MM/dd"), null);
+            });
+
+            test("parseDate returns null if year is negative", function() {
+                equal(parse("-9000/10/10", "yyyy/MM/dd"), null);
+            });
+
+            test("parseDate supports 5 digit year", function() {
+                equal(+parse("11111/10/10", "yyyyy/MM/dd"), +new Date(11111, 9, 10));
+            });
+
+            test("parseDate expands year if digits are 2", function() {
+                equal(+parse("01/10/10", "yy/MM/dd"), +new Date(2001, 9, 10));
+            });
+
             test("adjustDate adjusts Brasil date with DST", function() {
                 var date = new Date(2012, 9, 20, 23, 0, 0);
 
