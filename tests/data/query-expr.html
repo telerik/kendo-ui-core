@@ -353,7 +353,7 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { field: "foo", value: "bar", operator: "endswith" } ]
-                }), "(d.foo.toLowerCase().lastIndexOf('bar') == d.foo.toLowerCase().length - 3)");
+                    }), "(d.foo.toLowerCase().indexOf('bar', d.foo.toLowerCase().length - 3) >= 0)");
             });
 
             test("contains", function() {
