@@ -1107,10 +1107,12 @@ function pad(number) {
                 } else if (ch === "y") {
                     count = lookAhead("y");
                     year = getNumber(count);
+
                     if (year === null) {
                         year = defaultYear;
                     }
-                    if (year < shortYearCutOff) {
+
+                    if (count < 4 && year < shortYearCutOff) {
                         year = (defaultYear - defaultYear % 100) + year;
                     }
                 } else if (ch === "h" ) {
