@@ -57,7 +57,7 @@ public class WebController {
             }
         }
         
-        model.addAttribute("navigation", navigation);
+        model.addAttribute("navigation", navigation); 
         
         return "web/index";
     }
