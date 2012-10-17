@@ -780,7 +780,7 @@
                     b = quote(b);
                 }
 
-                return a + ".lastIndexOf('" + b + "') == " + a + ".length - " + (b || "").length;
+                return a + ".indexOf('" + b + "', " + a + ".length - " + (b || "").length + ") >= 0";
             },
             contains: function(a, b, ignore) {
                 if (ignore) {
