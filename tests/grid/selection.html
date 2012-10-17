@@ -61,6 +61,14 @@
                 equal(grid.table.attr("tabIndex"), 0);
             });
 
+            test("footer table has negative tabindex", function() {
+                var grid = setup({
+                    columns: [ { field: "foo", footerTemplate: "foo" }]
+                });
+
+                equal(grid.footer.attr("tabindex"), -1);
+            });
+
             test("focusing grid element focus first cell", function() {
                 var grid = setup();
                 grid.table.focus();

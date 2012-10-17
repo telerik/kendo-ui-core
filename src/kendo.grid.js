@@ -23,7 +23,7 @@
         SELECTION_CELL_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer) > td:not(.k-group-cell):not(.k-hierarchy-cell)",
         //CELL_SELECTOR =  ROW_SELECTOR + ">td" + DATA_CELL,
         //FIRST_CELL_SELECTOR = ROW_SELECTOR + ":first" + ">td" + DATA_CELL + ":first",
-        NAVROW = "tr:visible",
+        NAVROW = "tr:not(.k-footer-template):visible",
         NAVCELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
         FIRSTNAVITEM = NAVROW + ":first>" + NAVCELL + ":first",
         NS = ".kendoGrid",
@@ -2212,7 +2212,7 @@
                 if (options.scrollable) {
                     that.scrollables = that.scrollables
                         .not(".k-grid-footer-wrap")
-                        .add(footer.children(".k-grid-footer-wrap"));
+                        .add(that.footer.attr("tabindex", -1).children(".k-grid-footer-wrap"));
                 }
 
                 if (options.resizable && that._footerWidth) {
