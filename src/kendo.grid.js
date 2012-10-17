@@ -1815,15 +1815,18 @@
                         table.focus();
                         handled = true;
                     }
-                } else if (that.options.editable && keys.TAB == key && isInCell && current) {
+                } else if (keys.TAB == key && current) {
                     var cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
                     if (!cell.length) {
                         cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row):not(.k-detail-row):visible:first")
                         .children(DATA_CELL + (shiftKey ? ":last" : ":first"));
                     }
 
-                    if (cell.length) {
+                    if (!current.is("th") && cell.length && that.options.editable && isInCell) {
                         that._handleEditing(current, cell);
+                        handled = true;
+                    } else if (shiftKey && that.content && that.table[0] === e.currentTarget) {
+                        currentProxy(that.thead.parent().focus().find(NAVROW).first().children(NAVCELL).first());
                         handled = true;
                     }
                 }

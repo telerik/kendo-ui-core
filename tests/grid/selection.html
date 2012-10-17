@@ -552,7 +552,17 @@
                 ok(grid.table.find("td:first").hasClass("k-state-focused"));
             });
 
-            /* TODO should skip the footer?!
+            test("pressing shift and tab on first cell", function() {
+                var grid = setup({ columns: [ "foo", "bar" ] });
+
+                grid.current(table.find("tr>td:first"));
+                grid.table.focus().press(kendo.keys.TAB, false, true);
+
+                ok(grid.thead.find("th:first").hasClass("k-state-focused"));
+                equal(document.activeElement, grid.thead.parent()[0]);
+            });
+
+            /*
             test("group footer row is skipped when up arrow is pressed", function() {
                 var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
                 grid.dataSource.group({ field: "foo" });
