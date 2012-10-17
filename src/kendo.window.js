@@ -460,6 +460,7 @@
                         effects: showOptions.effects,
                         duration: showOptions.duration,
                         complete: function() {
+                            that.element.focus();
                             that.trigger(ACTIVATE);
                             contentElement.css(OVERFLOW, initialOverflow);
                         }
