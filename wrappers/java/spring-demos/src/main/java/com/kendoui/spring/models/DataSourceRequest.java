@@ -1,19 +1,18 @@
 package com.kendoui.spring.models;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Subqueries;
 import org.hibernate.transform.ResultTransformer;
 import org.springframework.util.AutoPopulatingList;
 
@@ -97,13 +96,27 @@ public class DataSourceRequest {
         this.filter = filter;
     }
 
-    private static void restrict(Junction junction, Map<String, Object> filter) {
+    private static void restrict(Junction junction, Map<String, Object> filter, Class<?> clazz) {
         String operator = filter.get("operator").toString();
         String field = filter.get("field").toString();
         Object value = filter.get("value");
         
         try {
-            value = Double.parseDouble(value.toString());
+            Class<?> type = new PropertyDescriptor(field, clazz).getPropertyType();
+            if (type == double.class || type == Double.class) {
+                value = Double.parseDouble(value.toString());
+            } else if (type == float.class || type == Float.class) {
+                value = Float.parseFloat(value.toString());
+            } else if (type == long.class || type == Long.class) {
+                value = Long.parseLong(value.toString());
+            } else if (type == int.class || type == Integer.class) {
+                value = Integer.parseInt(value.toString());
+            } else if (type == short.class || type == Short.class) {
+                value = Short.parseShort(value.toString());
+            } else if (type == boolean.class || type == Boolean.class) {
+                value = Boolean.parseBoolean(value.toString());
+            }
+        }catch (IntrospectionException e) {
         }catch(NumberFormatException nfe) {
         }
         
@@ -150,7 +163,7 @@ public class DataSourceRequest {
 
     }
     
-    private static void filter(Criteria criteria, Map<String, Object> filter) {
+    private static void filter(Criteria criteria, Map<String, Object> filter, Class<?> clazz) {
         List<Map<String, Object>> filters = (List<Map<String, Object>>)filter.get("filters");
         
         if (!filters.isEmpty()) {
@@ -162,9 +175,9 @@ public class DataSourceRequest {
             
             for(Map<String, Object> entry : filters) {
                 if (entry.containsKey("logic")) {
-                    filter(criteria, entry);
+                    filter(criteria, entry, clazz);
                 } else {
-                    restrict(junction, entry);
+                    restrict(junction, entry, clazz);
                 }
             }
             
@@ -242,7 +255,7 @@ public class DataSourceRequest {
     public DataSourceResult toDataSourceResult(Session session, Class<?> clazz) {
         Criteria criteria = session.createCriteria(clazz);
         
-        filter(criteria, getFilter());
+        filter(criteria, getFilter(), clazz);
         
         long total = total(criteria);
         
