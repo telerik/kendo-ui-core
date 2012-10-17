@@ -187,58 +187,70 @@ public class DataSourceRequest {
         }
     }
     
-    private static void group(final Criteria criteria, List<Map<String, String>> group, final Session session, final Class<?> clazz) {
+    private static void group(final Criteria criteria, final List<Map<String, String>> group, final Session session, final Class<?> clazz) {
         if (group != null && !group.isEmpty()) {
-            for (Map<String, String> entry : group) {
-                final String field = entry.get("field");
-                String dir = entry.get("dir");
+            Map<String, String> entry = group.get(0);
+            
+            final String field = entry.get("field");
+            String dir = entry.get("dir");
+            
+            criteria.setProjection(Projections.groupProperty(field));
+            criteria.setResultTransformer(new ResultTransformer() {
                 
-                criteria.setProjection(Projections.groupProperty(field));
-                criteria.setResultTransformer(new ResultTransformer() {
+                @Override
+                public Object transformTuple(Object[] value, String[] arg1) {
+                    Criteria criteria = session.createCriteria(clazz);
+                    Map<String, Object> result = new HashMap<String, Object>();
                     
-                    @Override
-                    public Object transformTuple(Object[] value, String[] arg1) {
-                        // TODO Auto-generated method stub
+                    result.put("value", value[0]);
+                    result.put("field", field);
+                    result.put("hasSubgroups", group.size() > 1);
+                    result.put("aggregates", new HashMap<String, Object>());
+                    
+                    criteria.add(Restrictions.eq(field, value[0]));
+                    
+                    group(criteria, group.subList(1, group.size()), session, clazz);
+                    
+                    result.put("items", criteria.list());
+                    
+                    return result;
+                }
                 
-                        Criteria criteria = session.createCriteria(clazz);
-                        Map<String, Object> group = new HashMap<String, Object>();
-                        
-                        group.put("value", value[0]);
-                        group.put("field", field);
-                        group.put("hasSubgroups", false);
-                        group.put("aggregates", new HashMap<String, Object>());
-                        group.put("items", criteria.add(Restrictions.eq(field, value[0])).list());
-                        
-                        return group;
-                    }
-                    
-                    @Override
-                    public List transformList(List arg0) {
-                        // TODO Auto-generated method stub
-                        return arg0;
-                    }
-                });
-            }
+                @Override
+                public List transformList(List arg0) {
+                    // TODO Auto-generated method stub
+                    return arg0;
+                }
+            });
         }
     }
 
+    private static long total(Criteria criteria) {
+        long total = (long)criteria.setProjection(Projections.rowCount()).uniqueResult();
+        
+        criteria.setProjection(null);
+        criteria.setResultTransformer(Criteria.ROOT_ENTITY);
+        
+        return total;
+    }
+    
+    private static void page(Criteria criteria, int take, int skip) {
+        criteria.setMaxResults(take);
+        criteria.setFirstResult(skip);
+    }
+    
     public DataSourceResult toDataSourceResult(Session session, Class<?> clazz) {
         Criteria criteria = session.createCriteria(clazz);
         
         filter(criteria, getFilter());
         
-        long total = (long)criteria.setProjection(Projections.rowCount()).uniqueResult();
+        long total = total(criteria);
         
-        
-        criteria.setProjection(null);
-        criteria.setResultTransformer(Criteria.ROOT_ENTITY);
-
         group(criteria, getGroup(), session, clazz);
         
         sort(criteria, getSort());
-        
-        criteria.setMaxResults(getTake());
-        criteria.setFirstResult(getSkip());
+    
+        page(criteria, getTake(), getSkip());
         
         DataSourceResult result = new DataSourceResult();
         
