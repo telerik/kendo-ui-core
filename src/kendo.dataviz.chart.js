@@ -239,9 +239,7 @@
                 visible: true,
                 labels: {}
             },
-            categoryAxis: {
-                categories: []
-            },
+            categoryAxis: {},
             autoBind: true,
             seriesDefaults: {
                 type: COLUMN,
@@ -280,8 +278,6 @@
             if (paneName) {
                 plotArea = chart._model._plotArea;
                 resolveAxisAliases(plotArea.options);
-                // TODO: Only necessary because of the categoryAxes alias!
-                bindCategories(plotArea.options, chart._categoriesData);
                 pane = plotArea.findPane(paneName);
                 plotArea.redrawPane(pane);
             } else {
@@ -6785,7 +6781,19 @@
 
     function resolveAxisAliases(options) {
         if (options.categoryAxes) {
-            options.categoryAxis = options.categoryAxes;
+            var categories = [],
+                axes = [].concat(options.categoryAxis),
+                i;
+
+            for (i = 0; i < axes.length; i++) {
+                categories.push(axes[i].categories);
+            }
+
+            options.categoryAxis = axes = options.categoryAxes;
+
+            for (i = 0; i < axes.length; i++) {
+                axes[i].categories = axes[i].categories || categories.shift();
+            }
         }
 
         if (options.valueAxes) {
