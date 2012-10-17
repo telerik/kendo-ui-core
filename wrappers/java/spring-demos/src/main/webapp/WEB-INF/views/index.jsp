@@ -10,7 +10,7 @@
         <h2>Kendo UI for JSP</h2>
          <ul id="suites">
              <li class="box">
-                <a href="<spring:url value='/web/'/>" class="imgPlate"><img src="<c:url value='/resources/shared/styles/demos-web.png'/>" /></a>
+                <a href="<c:url value='/web/'/>" class="imgPlate"><img src="<c:url value='/resources/shared/styles/demos-web.png'/>" /></a>
                 <h2><a href="<c:url value='/web/'/>">Web examples</a></h2>
             </li>
              <li class="box">
