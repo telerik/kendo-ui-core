@@ -32,14 +32,7 @@
 
             kendo.mobile.ui.plugin(MyMobileWidget);
 
-            module("mobile core", {
-                setup: function() {
-                    kendo.ns = "kendo-";
-                },
-                teardown: function() {
-
-                }
-            });
+            module("mobile core");
 
             test("MobileWidget is Obserbable", function() {
                 var widget = new MobileWidget();
@@ -54,20 +47,16 @@
                 equal(widget.element[0], dom[0]);
             });
 
-            test("instantiates mobile widgets by data attribute and container dom", function() {
-                expect(1);
-
-                var dom = $("<div><div data-kendo-role='my'></div></div>");
+            test("instantiates mobile widgets by data attribute and container dom", 1, function() {
+                var dom = $("<div><div data-role='my'></div></div>");
 
                 kendo.mobile.init(dom);
 
                 ok(dom.find("div").data("kendoMobileMy"), "Plugin instantiated");
             });
 
-            test("instantiates mobile widgets by data attribute", function() {
-                expect(1);
-
-                var dom = $("<div data-kendo-role='my'></div>");
+            test("instantiates mobile widgets by data attribute", 1, function() {
+                var dom = $("<div data-role='my'></div>");
 
                 kendo.mobile.init(dom);
 
