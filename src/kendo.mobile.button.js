@@ -61,7 +61,7 @@
             this.element.off(ns);
         },
 
-        _removeActive: function (e) {
+        _removeActive: function(e) {
             $(e.target).closest(".km-button,.km-detail").toggleClass("km-state-active", e.type == MOUSEDOWN);
 
             if (ANDROID3UP) {
@@ -76,22 +76,19 @@
                 return;
             }
 
-            // that.element[0].blur();
-
-
             if (that.trigger(CLICK, {target: $(e.target), button: that.element})) {
                 e.preventDefault();
             }
         },
 
-        _style: function () {
+        _style: function() {
             var style = this.options.style,
                 element = this.element,
                 styles;
 
             if (style) {
                 styles = style.split(" ");
-                $.each(styles, function () {
+                $.each(styles, function() {
                     element.addClass("km-" + this);
                 });
             }
@@ -144,13 +141,13 @@
             Button.fn.init.call(this, element, options);
         },
 
-        _style: function () {
+        _style: function() {
             var style = this.options.style + " detail",
                 element = this.element;
 
             if (style) {
                 var styles = style.split(" ");
-                $.each(styles, function () {
+                $.each(styles, function() {
                     element.addClass("km-" + this);
                 });
             }
