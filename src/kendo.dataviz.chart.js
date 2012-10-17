@@ -174,7 +174,7 @@
             theme = themes[themeName] || themes[themeName.toLowerCase()];
             themeOptions = themeName && theme ? theme.chart : {};
 
-            applyDefaults(options, themeOptions);
+            chart._applyDefaults(options, themeOptions);
 
             chart.options = deepExtend({}, themeOptions, options);
 
@@ -196,6 +196,8 @@
                 .create(dataSourceOptions)
                 .bind(CHANGE, chart._dataChangeHandler);
 
+            chart._ready();
+
             chart._redraw();
             chart._attachEvents();
 
@@ -205,6 +207,8 @@
 
             kendo.notify(chart, dataviz.ui);
         },
+
+        _ready: function() { },
 
         setDataSource: function(dataSource) {
             var chart = this;
@@ -262,7 +266,7 @@
         refresh: function() {
             var chart = this;
 
-            applyDefaults(chart.options);
+            chart._applyDefaults(chart.options);
 
             delete chart._sourceSeries;
             chart._onDataChanged();
@@ -273,7 +277,7 @@
                 pane,
                 plotArea;
 
-            applyDefaults(chart.options);
+            chart._applyDefaults(chart.options);
 
             if (paneName) {
                 plotArea = chart._model._plotArea;
@@ -327,6 +331,11 @@
                 view = dataviz.SVGView.fromModel(model);
 
             return view.render();
+        },
+
+        _applyDefaults: function(options, themeOptions) {
+            applyAxisDefaults(options, themeOptions);
+            applySeriesDefaults(options, themeOptions);
         },
 
         _getModel: function() {
@@ -6834,11 +6843,6 @@
 
             options[axisName] = axes.length > 1 ? axes : axes[0];
         });
-    }
-
-    function applyDefaults(options, themeOptions) {
-        applyAxisDefaults(options, themeOptions);
-        applySeriesDefaults(options, themeOptions);
     }
 
     function bindCategories(options, data) {
