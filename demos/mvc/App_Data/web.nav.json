@@ -137,6 +137,10 @@
                 {
                     "text": "RTL support",
                     "url": "combobox/rtl.html"
+                },
+                {
+                    "text": "Navigation",
+                    "url": "combobox/navigation.html"
                 }
             ]
         },
@@ -248,6 +252,10 @@
                 {
                     "text": "RTL support",
                     "url": "dropdownlist/rtl.html"
+                },
+                {
+                    "text": "Navigation",
+                    "url": "dropdownlist/navigation.html"
                 }
             ]
         },
