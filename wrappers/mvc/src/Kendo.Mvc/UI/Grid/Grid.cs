@@ -930,7 +930,8 @@ namespace Kendo.Mvc.UI
                 Refresh = Pageable.Refresh,
                 PageSizes = Pageable.PageSizes,
                 Messages = Pageable.Messages,
-                IsInClientTemplate = IsInClientTemplate
+                IsInClientTemplate = IsInClientTemplate,
+                ButtonCount = Pageable.ButtonCount.GetValueOrDefault(10)
             };
         }
 

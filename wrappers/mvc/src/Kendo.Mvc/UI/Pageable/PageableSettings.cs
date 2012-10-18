@@ -12,6 +12,7 @@ namespace Kendo.Mvc.UI
             Numeric = true;
             Info = true;
             PreviousNext = true;
+            ButtonCount = 10;
         }
 
         public bool AutoBind { get; set; }
@@ -31,6 +32,8 @@ namespace Kendo.Mvc.UI
         public bool Refresh { get; set; }
 
         public int[] PageSizes { get; set; }
+
+        public int? ButtonCount { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -67,6 +70,11 @@ namespace Kendo.Mvc.UI
             if (PageSizes != null && PageSizes.Length > 0)
             {
                 json["pageSizes"] = PageSizes;
+            }
+
+            if (ButtonCount.HasValue)
+            {
+                json["buttonCount"] = ButtonCount;
             }
 
             var messages = Messages.ToJson();

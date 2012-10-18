@@ -31,5 +31,7 @@ namespace Kendo.Mvc.UI.Html
         public int[] PageSizes { get; set; }
 
         public bool IsInClientTemplate { get; set; }
+
+        public int ButtonCount { get; set; }
     }
 }
