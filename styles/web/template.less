@@ -326,18 +326,30 @@ textarea.k-textbox:hover,
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:hover,
 .k-button.k-state-disabled:active,
-.k-state-disabled .k-button:active,
-.k-draghandle
+.k-state-disabled .k-button:active
 {
     border-color: @widget-border-color;
     background-color: @button-background-color;
 }
 
-.k-button:hover,
-.k-draghandle:hover
+.k-button:hover
 {
     border-color: @hover-border-color;
     background-color: @hover-background-color;
+}
+
+.k-draghandle
+{
+    border-color: @draghandle-border-color;
+    background-color: @draghandle-background-color;
+    box-shadow: @draghandle-shadow;
+}
+
+.k-draghandle:hover
+{
+    border-color: @draghandle-hover-border-color;
+    background-color: @draghandle-hover-background-color;
+    box-shadow: @draghandle-hover-shadow;
 }
 
 /* states */

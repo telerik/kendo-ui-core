@@ -119,8 +119,14 @@
                 readonly: true,
                 value: "@main-border-radius - 2"
             },
-            "@slider-border-radius":            { readonly: true, value: "13px" },
-            "@draghandle-border-radius":        { readonly: true, value: "7px" },
+            "@slider-border-radius":                { readonly: true, value: "13px" },
+            "@draghandle-border-radius":            { readonly: true, value: "7px" },
+            "@draghandle-border-color":             { readonly: true, value: "@widget-border-color" },
+            "@draghandle-background-color":         { readonly: true, value: "@widget-background-color" },
+            "@draghandle-shadow":                   { readonly: true, value: "none" },
+            "@draghandle-hover-border-color":       { readonly: true, value: "@hover-border-color" },
+            "@draghandle-hover-background-color":   { readonly: true, value: "@hover-background-color" },
+            "@draghandle-hover-shadow:":            { readonly: true, value: "none" },
 
             "@alt-background-color":            constant(BGCOLOR, ".k-alt"),
             "@input-background-color":          constant(BGCOLOR, ".k-input"),
