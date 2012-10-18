@@ -8,7 +8,7 @@
         Chart = dataviz.ui.Chart;
 
     // Constants =============================================================
-    var AUTO_CATEGORY_WIDTH = 37,
+    var AUTO_CATEGORY_WIDTH = 36,
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = "_navigator";
 
@@ -52,6 +52,7 @@
                 type: "date",
                 field: dateField,
                 pane: NAVIGATOR_PANE,
+                // TODO: Range-based
                 baseUnit: "years",
                 maxDateGroups: 20,
                 baseUnitStep: "auto",
@@ -61,6 +62,7 @@
                 type: "date",
                 field: dateField,
                 pane: NAVIGATOR_PANE,
+                // TODO: Range-based
                 baseUnit: "months",
                 baseUnitStep: 1,
                 roundToBaseUnit: false,
@@ -104,8 +106,13 @@
                 categoryAxis: {
                     type: "date",
                     baseUnit: "fit",
-                    maxDateGroups: width / AUTO_CATEGORY_WIDTH,
-                    justified: true
+                    // TODO: Place in last pane automatically
+                    // TODO: Fix missing gridlines
+                    pane: "volume",
+                    // TODO: How to avoid label overlaps!?
+                    // Perhaps we can query the label width and set step accordingly?
+                    //labels: { step: 2 },
+                    maxDateGroups: width / AUTO_CATEGORY_WIDTH
                 }
             };
 

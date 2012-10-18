@@ -60,12 +60,14 @@
                     }],
                     panes: [
                         {
+                            title: "NYSE:BA"
                             // top pane
                             // TODO: make optional... somehow
                         },
                         {
+                            title: "Volume",
                             name: "volume",
-                            height: 120
+                            height: 140
                         }
                     ],
                     valueAxes: [{
@@ -82,9 +84,12 @@
                         field: "Volume",
                         // slaveAxis: 
                     },
-                    // TODO: Introduce single (top-level) dateField?
                     categoryAxis: [{
-                        field: "Date"
+                        // TODO: Introduce single (top-level) dateField?
+                        // or at series?
+                        field: "Date",
+                        min: "2001-03-15",
+                        max: "2002-02-12"
                     }]
                     /*
                     }, {
