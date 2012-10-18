@@ -52,7 +52,8 @@
                 roundToBaseUnit: false,
                 justified: true,
                 labels: { visible: false },
-                majorTicks: { visible: false }
+                majorTicks: { visible: false },
+                tooltip: { visible: false }
             }, {
                 type: "date",
                 field: dateField,
@@ -104,7 +105,8 @@
 
             $(chart.element).kendoDraggable({
                 drag: $.proxy(chart._onDrag, chart),
-                dragstart: $.proxy(chart._onDragStart, chart)
+                dragstart: $.proxy(chart._onDragStart, chart),
+                dragend: $.proxy(chart._onDragEnd, chart)
             });
         },
 
@@ -210,6 +212,7 @@
                 delete chart._activePoint;
                 chart._tooltip.hide();
                 chart._highlight.hide();
+                chart._suppressHover = true;
 
             chart._dragState = {
                 min: options.min,
@@ -260,6 +263,10 @@
                     navigatorAxis.options.categories,
                     rangeEnd
             ));
+        },
+
+        _onDragEnd: function(e) {
+            this._suppressHover = false;
         }
     });
 

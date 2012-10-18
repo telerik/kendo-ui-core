@@ -461,7 +461,7 @@
                 tooltipOptions,
                 point;
 
-            if (!highlight || highlight.overlayElement === e.target) {
+            if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
                 return;
             }
 
