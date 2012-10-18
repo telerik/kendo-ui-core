@@ -665,6 +665,11 @@
                 equal(+parse("900/10/10", "yyy/MM/dd"), +new Date(900, 9, 10));
             });
 
+            test("parseDate expands date if yyy format", function() {
+                var date = new Date(1990, 9, 10);
+                equal(+parse("090/10/10", "yyy/MM/dd"), +date);
+            });
+
             test("parseDate parses yy date", function() {
                 equal(+parse("09/10/10", "yy/MM/dd"), +new Date(2009, 9, 10));
             });
