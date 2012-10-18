@@ -158,6 +158,7 @@
                                 type: type,
                                 values: convertItems(options.values)
                             }))
+                            .on("keydown" + NS, proxy(that._keydown, that))
                             .on("submit" + NS, proxy(that._submit, that))
                             .on("reset" + NS, proxy(that._reset, that));
 
@@ -173,7 +174,9 @@
             if (!options.appendToElement) {
                 that.popup = that.form[POPUP]({
                     anchor: link,
-                    open: proxy(that._open, that)
+                    open: proxy(that._open, that),
+                    activate: proxy(that._activate, that),
+                    close: that.options.closeCallback
                 }).data(POPUP);
 
                 that.link = link;
@@ -358,6 +361,16 @@
                     popup.close();
                 }
             });
+        },
+
+        _activate: function() {
+            this.form.find(":focusable:first").focus();
+        },
+
+        _keydown: function(e) {
+            if (e.keyCode == kendo.keys.ESC) {
+                this.popup.close();
+            }
         },
 
         options: {

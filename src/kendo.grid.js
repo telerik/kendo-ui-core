@@ -1674,6 +1674,11 @@
                     if (!e.shiftKey && e.keyCode == keys.TAB) {
                         that._removeCurrent();
                     }
+
+                    if (e.altKey && e.keyCode == keys.DOWN) {
+                        currentProxy().find(".k-grid-filter, .k-header-column-menu").click();
+                        e.stopImmediatePropagation();
+                    }
                 });
 
                 //required for FF
@@ -2290,6 +2295,9 @@
                 columns = that.columns,
                 cell,
                 filterMenu,
+                closeCallback = function() {
+                    that.thead.parent().focus();
+                },
                 filterable = that.options.filterable;
 
             if (filterable && !that.options.columnMenu) {
@@ -2302,7 +2310,11 @@
                             if (filterMenu) {
                                 filterMenu.destroy();
                             }
-                            cell.kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, { dataSource: that.dataSource, values: columns[index].values}));
+                            cell.kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, {
+                                dataSource: that.dataSource,
+                                values: columns[index].values,
+                                closeCallback: closeCallback
+                            }));
                         }
                     });
             }

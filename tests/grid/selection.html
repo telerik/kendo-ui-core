@@ -7,7 +7,13 @@
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.filtermenu.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.sortable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
@@ -24,8 +30,8 @@
                 DataSource = kendo.data.DataSource,
                 table;
 
-            $.fn.press = function(key, ctrl, shift) {
-                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
+            $.fn.press = function(key, ctrl, shift, alt) {
+                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt } );
             }
 
             function setup(options) {
@@ -39,6 +45,7 @@
                 },
                 teardown: function() {
                     table.closest(".k-grid").remove();
+                    $(".k-animation-container").remove();
                 }
             });
 
@@ -562,6 +569,13 @@
                 equal(document.activeElement, grid.thead.parent()[0]);
             });
 
+            test("pressing alt and down opens filter menu", function() {
+                var grid = setup({ columns: [ "foo", "bar" ], filterable: true });
+
+                grid.thead.parent().focus().press(kendo.keys.DOWN, false, false, true);
+
+                ok(!grid.tbody.find("td:first").hasClass("k-state-focused"));
+            });
             /*
             test("group footer row is skipped when up arrow is pressed", function() {
                 var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
