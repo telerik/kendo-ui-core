@@ -6500,6 +6500,11 @@
             that.setRange(options.start, options.end);
 
             that.bind(that.events, that.options);
+
+            that.selection.kendoDraggable({
+                drag: proxy(that.dragSelection, that),
+                dragstart: proxy(that.dragSelectionStart, that)
+            });
         },
 
         events:[
@@ -6645,6 +6650,44 @@
             that.trigger(SELECT, {
                 start: startIndex,
                 end: endIndex
+            });
+        },
+
+        dragSelectionStart: function(e) {
+            var that = this,
+                options = that.options;
+
+            if ($(e.target).is(".k-selection")) {
+                that._dragSelectionState = {
+                    range: options.end - options.start,
+                    start: options.start
+                };
+            } else {
+                e.preventDefault();
+            }
+        },
+
+        dragSelection: function(e) {
+            var that = this,
+                options = that.options,
+                delta = e.x.startLocation - e.x.location,
+                fullRange = options.max - options.min,
+                state = that._dragSelectionState,
+                range = state.range,
+                scale = that.wrapper.width() / fullRange,
+                offset = math.round(delta / scale);
+
+            var start = math.min(
+                math.max(options.min, state.start - offset),
+                options.max - range);
+
+            var end = math.min(start + range, options.max);
+
+            that.setRange(start, end);
+
+            that.trigger(SELECT, {
+                start: start,
+                end: end
             });
         }
     });

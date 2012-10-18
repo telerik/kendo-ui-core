@@ -167,6 +167,8 @@
                     // TODO: Accept dates for start and end
                     start: start,
                     end: end,
+                    min: 0,
+                    max: navigatorAxis.options.categories.length - 1,
                     snap: true,
                     select: $.proxy(chart._navigatorSelect, chart)
                 });
