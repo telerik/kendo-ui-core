@@ -683,7 +683,10 @@
             });
 
             test("parseDate does not expand year if digits are 4", function() {
-                equal(+parse("0001/10/10", "yyyy/MM/dd"), +new Date(0001, 9, 10));
+                var date = new Date(1, 9, 10);
+                date.setFullYear(1);
+
+                equal(+parse("0001/10/10", "yyyy/MM/dd"), +date);
             });
 
             test("parseDate returns null if yyyy and bigger date", function() {
@@ -710,6 +713,11 @@
             test("parseDate supports JSON.NET format", function() {
                 var result = parse("2012-03-25T03:30:10.1234567-10:00");
                 equal(+result, Date.parse("2012-03-25T03:30:10.1234567-10:00"));
+            });
+
+            test("parseDate ISO8601 using local time if no time zone specified", function() {
+                var result = parse("2012-03-25T03:30:10", "yyyy-MM-ddTHH:mm:ss");
+                equal(+result, +new Date(2012, 2, 25, 3, 30, 10));
             });
 
             test("adjustDate adjusts Brasil date with DST", function() {

@@ -1064,7 +1064,8 @@ function pad(number) {
             ch, count, length, pattern,
             pmHour, UTC, ISO8601, matches,
             amDesignators, pmDesignators,
-            hoursOffset, minutesOffset;
+            hoursOffset, minutesOffset,
+            century;
 
         if (!format) {
             format = "d"; //shord date format
@@ -1112,8 +1113,12 @@ function pad(number) {
                         return null;
                     }
 
-                    if (count < 4 && year < shortYearCutOff) {
-                        year = (defaultYear - defaultYear % 100) + year;
+                    if (count == 2) {
+                        century = defaultYear - defaultYear % 100;
+                        if (shortYearCutOff < year) {
+                            century -= 100;
+                        }
+                        year = century + year;
                     }
                 } else if (ch === "h" ) {
                     lookAhead("h");
@@ -1165,7 +1170,6 @@ function pad(number) {
                     }
 
                     pmHour = getIndexByName(pmDesignators);
-
                     if (!pmHour && !getIndexByName(amDesignators)) {
                         return null;
                     }
@@ -1207,9 +1211,6 @@ function pad(number) {
                     }
                 } else if (ch === "T") {
                     ISO8601 = checkLiteral();
-                    if (ISO8601) {
-                        UTC = true;
-                    }
                 } else if (ch === "'") {
                     literal = true;
                     checkLiteral();
@@ -1240,11 +1241,15 @@ function pad(number) {
                 minutes += -minutesOffset;
             }
 
-            return new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds));
+            value = new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds));
+        } else {
+            value = new Date(year, month, day, hours, minutes, seconds, milliseconds);
+            adjustDate(value, hours);
         }
 
-        value = new Date(year, month, day, hours, minutes, seconds, milliseconds);
-        adjustDate(value, hours);
+        if (year < 100) {
+            value.setFullYear(year);
+        }
 
         return value;
     }
