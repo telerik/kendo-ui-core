@@ -20,7 +20,11 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
 
         return super.doEndTag();
     }
-
+    
+    public void setModel(ModelTag modelTag) {
+        setProperty("model", modelTag.properties());
+    }
+    
     @Override
     public void initialize() {
 //>> initialize

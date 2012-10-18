@@ -655,7 +655,7 @@ class NestedTag < Tag
     end
 
     def body_content
-        return 'JSP' if has_item_content? || @children.any?
+        return 'JSP' if has_item_content? || @children.any? || @name.downcase == 'schema'
 
         'empty'
     end

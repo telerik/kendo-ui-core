@@ -5130,7 +5130,7 @@ hex and rgb.</description>
         <description>Set the object responsible for describing the raw data format.</description>
         <name>dataSource-schema</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>Specifies the field from the response which contains the aggregate results. If set to a function - the function will be called to
@@ -7366,5 +7366,70 @@ containing one or more fields with the same name as the original input name.</de
         <name>treeView-item-items</name>
         <tag-class>com.kendoui.taglib.treeview.ItemsTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
+    
+    <tag>
+    	<description>Model definition</description>
+    	<name>dataSource-schema-model</name>
+    	<tag-class>com.kendoui.taglib.datasource.ModelTag</tag-class>
+    	<body-content>JSP</body-content>
+    	
+    	<attribute>
+    	 	<description>The name of the field which acts as an identifier of the model.</description>
+            <name>id</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+    	</attribute>
+    </tag>
+    
+    <tag>
+    	<description>Configures model fields</description>
+    	<name>dataSource-schema-model-fields</name>
+    	<tag-class>com.kendoui.taglib.datasource.FieldsTag</tag-class>
+    	<body-content>JSP</body-content>
+    </tag>
+    
+    <tag>
+    	<description>Defines a model field</description>
+    	<name>dataSource-schema-model-field</name>
+    	<tag-class>com.kendoui.taglib.datasource.FieldTag</tag-class>
+    	<body-content>JSP</body-content>
+    	
+    	 <attribute>
+            <description>The mandatory and unique name of the field.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        
+    	<attribute>
+            <description>Specifies the the type of the field. The available options are &quot;string&quot;, &quot;number&quot;, &quot;boolean&quot;, &quot;date&quot;. The default is &quot;string&quot;.
+            </description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    	<attribute>
+            <description>Specifies if the field is editable or not. The default value is &quot;true&quot;.</description>
+            <name>editable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        
+    	<attribute>
+            <description>Specifies if the defaultValue setting should be used. The default is &quot;false&quot;.</description>
+            <name>nullable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        
+        <attribute>
+            <description>Specifies the value which will be used for the field when a new model instance is created.</description>
+            <name>defaultValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
     </tag>
 </taglib>
