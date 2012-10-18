@@ -1113,7 +1113,7 @@ function pad(number) {
                         return null;
                     }
 
-                    if (count < 4 && year < 100) {
+                    if (count == 2) {
                         century = defaultYear - defaultYear % 100;
                         if (shortYearCutOff < year) {
                             century -= 100;
