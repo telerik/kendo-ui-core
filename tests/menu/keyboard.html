@@ -79,10 +79,12 @@
 
         test('Left and right arrows move focus between first and second item', function() {
             menu.wrapper.focus().press(keys.RIGHT);
-            ok(menu.wrapper.children(".k-item").first().next().hasClass("k-state-hover"));
+            var firstItem = menu.wrapper.children(".k-item").first();
+
+            ok(firstItem.next().hasClass("k-state-hover"));
 
             menu.wrapper.press(keys.LEFT);
-            ok(menu.wrapper.children(".k-item").first().hasClass("k-state-hover"));
+            ok(firstItem.hasClass("k-state-hover"));
         });
 
         test('Down arrow opens subitems group', function() {
@@ -98,6 +100,20 @@
             ok(menu.wrapper.children(".k-item").last().hasClass("k-state-hover"));
         });
 
+        test('Mouse events reset the keyboard navigation active item', function() {
+            menu.wrapper.focus().press(keys.RIGHT);
+
+            var firstItem = menu.wrapper.children(".k-item").first(),
+                secondItem = firstItem.next();
+
+            firstItem.children(".k-link").mouseenter();
+
+            ok(!secondItem.hasClass("k-state-hover"));
+
+            menu.wrapper.press(keys.RIGHT);
+
+            ok(secondItem.hasClass("k-state-hover"));
+        });
 
 </script>
 

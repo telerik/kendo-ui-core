@@ -260,7 +260,7 @@
                        .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, linkSelector, proxy(that._toggleHover, that));
             } else {
                 options.openOnClick = true;
-                element.on(MOUSEDOWN + NS + " " + MOUSEUP + NS, linkSelector, that._toggleHover);
+                element.on(MOUSEDOWN + NS + " " + MOUSEUP + NS, linkSelector, proxy(that._toggleHover, that));
             }
 
             if (options.openOnClick) {
@@ -592,6 +592,8 @@
             if (!target.parents("li." + DISABLEDSTATE).length) {
                 target.toggleClass(HOVERSTATE, e.type == MOUSEENTER || e.type == MOUSEDOWN);
             }
+
+            this._removeHoverItem();
         },
 
         _removeHoverItem: function(e) {
