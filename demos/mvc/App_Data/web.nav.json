@@ -52,6 +52,10 @@
                 {
                     "text": "RTL support",
                     "url": "autocomplete/rtl.html"
+                },
+                {
+                    "text": "Navigation",
+                    "url": "autocomplete/navigation.html"
                 }
             ]
         },

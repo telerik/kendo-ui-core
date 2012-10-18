@@ -1,0 +1,152 @@
+
+        <div id="example" class="k-content">
+            <div class="configuration k-widget k-header">
+                <span class="configHead">Supported keys</span>
+                <ul class="options">
+                    <li>
+                        <span class="key-button">↑</span>
+                        - highlights previous item
+                    </li>
+                    <li>
+                        <span class="key-button">↓</span>
+                        - highlights next item
+                    </li>
+                    <li>
+                        <span class="key-button wider rightAlign">enter</span>
+                        - selects highlighted item
+                    </li>
+                    <li>
+                        <span class="key-button wide">tab</span>
+                        - selects highlighted item
+                    </li>
+                    <li>
+                        <span class="key-button">esc</span>
+                        - closes popup
+                    </li>
+                </ul>
+            </div>
+
+            <div id="colors">
+               <label for="countries">Choose country: </label>
+               <input id="countries" />
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    var data = [
+                            "Albania",
+							"Andorra",
+							"Armenia",
+							"Austria",
+							"Azerbaijan",
+							"Belarus",
+							"Belgium",
+							"Bosnia & Herzegovina",
+							"Bulgaria",
+							"Croatia",
+							"Cyprus",
+							"Czech Republic",
+							"Denmark",
+							"Estonia",
+							"Finland",
+							"France",
+							"Georgia",
+							"Germany",
+							"Greece",
+							"Hungary",
+							"Iceland",
+							"Ireland",
+							"Italy",
+							"Kosovo",
+							"Latvia",
+							"Liechtenstein",
+							"Lithuania",
+							"Luxembourg",
+							"Macedonia",
+							"Malta",
+							"Moldova",
+							"Monaco",
+							"Montenegro",
+							"Netherlands",
+							"Norway",
+							"Poland",
+							"Portugal",
+							"Romania",
+							"Russia",
+							"San Marino",
+							"Serbia",
+							"Slovakia",
+							"Slovenia",
+							"Spain",
+							"Sweden",
+							"Switzerland",
+							"Turkey",
+							"Ukraine",
+							"United Kingdom",
+							"Vatican City"
+                        ];
+
+                    //create AutoComplete UI component
+                    $("#countries").kendoAutoComplete({
+                        dataSource: data,
+                        filter: "startswith",
+                        placeholder: "Select country...",
+                        separator: ", "
+                    });
+                });
+            </script>
+
+            <style scoped>
+                #products {
+                    margin-right: 50px;
+                }
+                .configuration {
+                    height: 410px;
+                    margin-bottom: -21px;
+                }
+                .configuration .k-textbox {
+                    width: 40px;
+                }
+
+                .key-button {
+                    display: inline-block;
+                    width: 32px;
+                    height: 23px;
+                    text-decoration: none;
+                    color: #555;
+                    margin: 4px 2px;
+                    padding: 25px 8px 0 8px;
+                    font-size: 13px;
+                    border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, #e2e2e2), color-stop(1, #f5f5f5));
+                    background-image: -moz-linear-gradient( center bottom, #e2e2e2 0%, #f5f5f5 100%);
+                    box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(0,0,0,0.5);
+                    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+                    vertical-align: bottom;
+                }
+
+                .widest {
+                    width: 102px;
+                }
+                .wider {
+                    width: 74px;
+                }
+                .wide {
+                    width: 60px;
+                }
+                .rightAlign {
+                    text-align: right;
+                }
+                .centerAlign {
+                    text-align: center;
+                }
+                .letter {
+                    padding-top: 14px;
+                    padding-bottom: 11px;
+                    font-weight: bold;
+                    font-size: 17px;
+                }
+            </style>
+        </div>
