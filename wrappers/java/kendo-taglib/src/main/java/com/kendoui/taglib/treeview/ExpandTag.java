@@ -40,6 +40,10 @@ public class ExpandTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "treeView-animation-expand";
+    }
+
     public float getDuration() {
         return (float)getProperty("duration");
     }

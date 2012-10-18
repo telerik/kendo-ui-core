@@ -40,6 +40,10 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-seriesItem";
+    }
+
     @Override
     public void setLabels(LabelsTag value) {
         setProperty("labels", value.properties());

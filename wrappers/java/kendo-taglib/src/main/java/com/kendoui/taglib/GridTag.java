@@ -44,6 +44,10 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Edita
 
 //>> Attributes
 
+    public static String tagName() {
+        return "grid";
+    }
+
     @Override
     public void setColumns(ColumnsTag value) {
 

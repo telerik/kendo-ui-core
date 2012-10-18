@@ -40,6 +40,10 @@ public class GaugeAreaTag extends BaseTag /* interfaces */implements Border/* in
 
 //>> Attributes
 
+    public static String tagName() {
+        return "radialGauge-gaugeArea";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

@@ -44,6 +44,10 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements Animat
 
 //>> Attributes
 
+    public static String tagName() {
+        return "dropDownList";
+    }
+
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());

@@ -40,6 +40,10 @@ public class ValueAxisTag extends BaseTag /* interfaces */implements Labels, Lin
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-valueAxis";
+    }
+
     @Override
     public void setLabels(LabelsTag value) {
         setProperty("labels", value.properties());

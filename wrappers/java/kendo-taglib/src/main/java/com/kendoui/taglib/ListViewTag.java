@@ -42,6 +42,10 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
 //>> Attributes
 
+    public static String tagName() {
+        return "listView";
+    }
+
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }

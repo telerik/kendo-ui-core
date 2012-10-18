@@ -8,6 +8,9 @@ import org.junit.Rule;
 
 import org.junit.rules.ExpectedException;
 
+import com.kendoui.taglib.datasource.SchemaTag;
+import com.kendoui.taglib.panelbar.Items;
+
 public class BaseTagTest {
     private BaseTag tag;
 
@@ -20,18 +23,19 @@ public class BaseTagTest {
     }
 
     @Test
-    public void findParentWithClassThrowsJspException() throws JspException {
+    public void findParentWithClassThrowsJspExceptionAndUsesTagNAme() throws JspException {
         thrown.expect(JspException.class);
-        thrown.expectMessage("The <kendo:baseTestDouble> tag should be nested in a <kendo:widget> tag.");
+        thrown.expectMessage("The <kendo:baseTagTestDouble> tag should be nested in a <kendo:dataSource-schema> tag.");
 
-        tag.findParentWithClass(WidgetTag.class);
+        tag.findParentWithClass(SchemaTag.class);
     }
 
     @Test
-    public void findParentWithClassThrowsJspExceptionAndAppendsExtraInfo() throws JspException {
+    public void findParentWithInterface() throws JspException {
         thrown.expect(JspException.class);
-        thrown.expectMessage("The <kendo:baseTestDouble> tag should be nested in a <kendo:foo> or <kendo:bar> tag.");
+        thrown.expectMessage("The <kendo:baseTagTestDouble> tag should be nested.");
 
-        tag.findParentWithClass(WidgetTag.class, "<kendo:foo> or <kendo:bar> tag");
+        tag.setParent(new WidgetTagTestDouble());
+        tag.findParentWithClass(Items.class);
     }
 }

@@ -44,6 +44,10 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart";
+    }
+
     @Override
     public void setCategoryAxis(CategoryAxisTag value) {
         setProperty("categoryaxis", value.properties());

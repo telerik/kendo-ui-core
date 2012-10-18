@@ -40,6 +40,10 @@ public class CloseTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "tabStrip-animation-close";
+    }
+
     public float getDuration() {
         return (float)getProperty("duration");
     }

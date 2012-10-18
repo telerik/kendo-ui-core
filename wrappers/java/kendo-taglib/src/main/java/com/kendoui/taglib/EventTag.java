@@ -30,4 +30,9 @@ public class EventTag extends FunctionTag {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public static String tagName() {
+        return "event";
+    }
+
 }

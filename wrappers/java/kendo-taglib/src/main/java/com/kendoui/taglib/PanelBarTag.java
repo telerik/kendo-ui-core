@@ -53,6 +53,10 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements A
 
 //>> Attributes
 
+    public static String tagName() {
+        return "panelBar";
+    }
+
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());

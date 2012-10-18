@@ -40,6 +40,10 @@ public class MajorGridLinesTag extends BaseTag /* interfaces *//* interfaces */ 
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-valueAxis-majorGridLines";
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

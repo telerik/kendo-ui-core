@@ -42,6 +42,10 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "editor";
+    }
+
     public boolean getEncoded() {
         return (boolean)getProperty("encoded");
     }

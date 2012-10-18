@@ -261,6 +261,12 @@ JAVA_ARRAY_ADD_CHILD_TEMPLATE = ERB.new(%{
     }
 })
 
+JAVA_TAG_NAME_TEMPLATE = ERB.new(%{
+    public static String tagName() {
+        return "<%= tag_name %>";
+    }
+})
+
 class String
     def camelize
         self.sub(/^./) { |c| c.downcase }
@@ -397,7 +403,7 @@ class Tag
     end
 
     def java_attributes
-        child_setters + (@options + @events).map {|attr| attr.to_java }.join
+        JAVA_TAG_NAME_TEMPLATE.result(binding) + child_setters + (@options + @events).map {|attr| attr.to_java }.join
     end
 
     def template

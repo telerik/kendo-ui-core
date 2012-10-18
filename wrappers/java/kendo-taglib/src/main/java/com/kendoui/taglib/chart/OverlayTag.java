@@ -40,6 +40,10 @@ public class OverlayTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-series-overlay";
+    }
+
     public String getGradient() {
         return (String)getProperty("gradient");
     }

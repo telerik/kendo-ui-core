@@ -44,6 +44,10 @@ public class RangeSliderTag extends WidgetTag /* interfaces */implements Tooltip
 
 //>> Attributes
 
+    public static String tagName() {
+        return "rangeSlider";
+    }
+
     @Override
     public void setTooltip(TooltipTag value) {
         setProperty("tooltip", value.properties());

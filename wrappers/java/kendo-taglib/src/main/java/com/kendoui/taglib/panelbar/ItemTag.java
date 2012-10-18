@@ -57,6 +57,10 @@ public class ItemTag extends BaseItemTag /* interfaces */implements Items/* inte
 
 //>> Attributes
 
+    public static String tagName() {
+        return "panelBar-item";
+    }
+
     public String getText() {
         return (String)getProperty("text");
     }

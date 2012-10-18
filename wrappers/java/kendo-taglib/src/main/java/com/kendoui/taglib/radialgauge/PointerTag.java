@@ -40,6 +40,10 @@ public class PointerTag extends BaseTag /* interfaces */implements Cap/* interfa
 
 //>> Attributes
 
+    public static String tagName() {
+        return "radialGauge-pointer";
+    }
+
     @Override
     public void setCap(CapTag value) {
         setProperty("cap", value.properties());

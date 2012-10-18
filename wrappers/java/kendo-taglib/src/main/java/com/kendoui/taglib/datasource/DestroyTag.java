@@ -39,6 +39,10 @@ public class DestroyTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "dataSource-transport-destroy";
+    }
+
     public boolean getCache() {
         return (boolean)getProperty("cache");
     }

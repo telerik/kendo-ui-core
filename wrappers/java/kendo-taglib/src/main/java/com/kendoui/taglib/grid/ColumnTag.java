@@ -40,6 +40,10 @@ public class ColumnTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "grid-column";
+    }
+
     public String getCommand() {
         return (String)getProperty("command");
     }

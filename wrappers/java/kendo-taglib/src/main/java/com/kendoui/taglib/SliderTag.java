@@ -44,6 +44,10 @@ public class SliderTag extends WidgetTag /* interfaces */implements Tooltip/* in
 
 //>> Attributes
 
+    public static String tagName() {
+        return "slider";
+    }
+
     @Override
     public void setTooltip(TooltipTag value) {
         setProperty("tooltip", value.properties());

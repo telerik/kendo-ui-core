@@ -44,6 +44,10 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements Animation,
 
 //>> Attributes
 
+    public static String tagName() {
+        return "comboBox";
+    }
+
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());

@@ -40,6 +40,10 @@ public class CategoryAxisTag extends BaseTag /* interfaces */implements Labels, 
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-categoryAxis";
+    }
+
     @Override
     public void setLabels(LabelsTag value) {
         setProperty("labels", value.properties());

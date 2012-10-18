@@ -55,6 +55,10 @@ public class ItemsTag extends ContentTag /* interfaces */implements Item/* inter
         return items;
     }
 
+    public static String tagName() {
+        return "treeView-items";
+    }
+
     @Override
     public void addItem(ItemTag value) {
         items.add(value.properties());

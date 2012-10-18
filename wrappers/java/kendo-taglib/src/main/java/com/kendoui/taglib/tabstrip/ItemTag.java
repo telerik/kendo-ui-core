@@ -60,6 +60,10 @@ public class ItemTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "tabStrip-item";
+    }
+
     public String getText() {
         return (String)getProperty("text");
     }

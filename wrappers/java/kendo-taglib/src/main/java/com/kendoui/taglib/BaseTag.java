@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,42 +63,41 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
         return json;
     }
 
-    private static String tagName(Class<?> klass) {
-        String className = klass.getSimpleName().replace("Tag", "");
-
-        StringBuilder tagName = new StringBuilder();
-
-        tagName.append("<kendo:")
-               .append(Character.toLowerCase(className.charAt(0)))
-               .append(className.substring(1))
-               .append(">");
-
-        return tagName.toString();
+    private static String tagName(Class<?> clazz) {
+        Method tagName = null;
+        try {
+            tagName = clazz.getDeclaredMethod("tagName", (Class<?>[])null);
+            return "<kendo:" + (String) tagName.invoke(null, (Object[])null) + ">";
+                
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            return "";
+        }
     }
 
-    public Object findParentWithClass(Class<?> klass) throws JspException {
-        return findParentWithClass(klass, "");
-    }
+    public Object findParentWithClass(Class<?> clazz) throws JspException {
+        Object parent = getParent();
 
-    public Object findParentWithClass(Class<?> klass, String info) throws JspException {
-        Object parent = findAncestorWithClass(this, klass);
-
-        if (parent == null) {
+        if (parent == null || !clazz.isAssignableFrom(parent.getClass())) {
             StringBuilder exception = new StringBuilder();
 
-            exception.append("The ")
-                     .append(tagName(getClass()))
-                     .append(" tag should be nested in a ");
-
-            if (!info.isEmpty()) {
-                exception.append(info)
-                         .append(".");
+            String targetTagName = tagName(clazz);
+            
+            if (targetTagName.isEmpty()) {
+                exception.append("The ")
+                    .append(tagName(getClass()))
+                    .append(" tag should be nested.");
+            
             } else {
-                exception.append(tagName(klass))
+                exception.append("The ")
+                         .append(tagName(getClass()))
+                         .append(" tag should be nested in a ")
+                         .append(tagName(clazz))
                          .append(" tag.");
             }
-
+        
             throw new JspException(exception.toString());
+
+            
         }
 
         return parent;

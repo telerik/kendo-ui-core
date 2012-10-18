@@ -40,6 +40,10 @@ public class PageableTag extends BaseTag /* interfaces */implements Messages/* i
 
 //>> Attributes
 
+    public static String tagName() {
+        return "grid-pageable";
+    }
+
     @Override
     public void setMessages(MessagesTag value) {
         setProperty("messages", value.properties());

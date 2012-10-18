@@ -53,6 +53,10 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements A
 
 //>> Attributes
 
+    public static String tagName() {
+        return "tabStrip";
+    }
+
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());

@@ -40,6 +40,10 @@ public class LocalizationTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "upload-localization";
+    }
+
     public String getCancel() {
         return (String)getProperty("cancel");
     }

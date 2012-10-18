@@ -43,6 +43,10 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "dataSource-schema";
+    }
+
     public String getAggregates() {
         return (String)getProperty("aggregates");
     }

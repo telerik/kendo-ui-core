@@ -40,6 +40,10 @@ public class MinorTicksTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "radialGauge-scale-minorTicks";
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

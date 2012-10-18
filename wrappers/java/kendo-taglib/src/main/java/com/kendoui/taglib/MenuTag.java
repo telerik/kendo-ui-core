@@ -53,6 +53,10 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Anima
 
 //>> Attributes
 
+    public static String tagName() {
+        return "menu";
+    }
+
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());

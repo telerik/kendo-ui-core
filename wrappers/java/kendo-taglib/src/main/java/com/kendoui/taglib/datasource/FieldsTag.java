@@ -22,4 +22,8 @@ public class FieldsTag extends BaseTag {
         
         setProperty(name, fieldTag.properties());
     }
+
+    public static String tagName() {
+        return "dataSource-schema-model-fields";
+    }
 }

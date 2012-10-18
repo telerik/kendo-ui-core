@@ -40,6 +40,10 @@ public class SeriesDefaultsTag extends BaseTag /* interfaces */implements Border
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-seriesDefaults";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

@@ -40,6 +40,10 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "grid-editable";
+    }
+
     public boolean getConfirmation() {
         return (boolean)getProperty("confirmation");
     }

@@ -40,6 +40,10 @@ public class ScaleTag extends BaseTag /* interfaces */implements Labels, MajorTi
 
 //>> Attributes
 
+    public static String tagName() {
+        return "radialGauge-scale";
+    }
+
     @Override
     public void setLabels(LabelsTag value) {
         setProperty("labels", value.properties());

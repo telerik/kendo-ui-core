@@ -40,6 +40,10 @@ public class AreaTag extends BaseTag /* interfaces */implements Border/* interfa
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-area";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

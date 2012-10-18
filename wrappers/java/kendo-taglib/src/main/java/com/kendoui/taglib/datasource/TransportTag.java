@@ -39,6 +39,10 @@ public class TransportTag extends BaseTag /* interfaces */implements Create, Des
 
 //>> Attributes
 
+    public static String tagName() {
+        return "dataSource-transport";
+    }
+
     @Override
     public void setCreate(CreateTag value) {
         setProperty("create", value.properties());

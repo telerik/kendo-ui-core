@@ -57,6 +57,10 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation/* 
 
 //>> Attributes
 
+    public static String tagName() {
+        return "window";
+    }
+
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());

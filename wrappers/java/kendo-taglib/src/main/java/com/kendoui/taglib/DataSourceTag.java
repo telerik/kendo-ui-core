@@ -43,6 +43,10 @@ public class DataSourceTag extends BaseTag /* interfaces */implements Schema, Tr
 
 //>> Attributes
 
+    public static String tagName() {
+        return "dataSource";
+    }
+
     @Override
     public void setSchema(SchemaTag value) {
         setProperty("schema", value.properties());

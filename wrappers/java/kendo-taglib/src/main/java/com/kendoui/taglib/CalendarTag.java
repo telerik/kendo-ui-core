@@ -44,6 +44,10 @@ public class CalendarTag extends WidgetTag /* interfaces */implements Month/* in
 
 //>> Attributes
 
+    public static String tagName() {
+        return "calendar";
+    }
+
     @Override
     public void setMonth(MonthTag value) {
         setProperty("month", value.properties());

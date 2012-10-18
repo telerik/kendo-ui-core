@@ -40,6 +40,10 @@ public class ToolbarItemTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "grid-toolbarItem";
+    }
+
     public String getName() {
         return (String)getProperty("name");
     }

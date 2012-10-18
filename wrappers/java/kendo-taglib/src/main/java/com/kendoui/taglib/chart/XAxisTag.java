@@ -40,6 +40,10 @@ public class XAxisTag extends BaseTag /* interfaces */implements Labels/* interf
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-xAxis";
+    }
+
     @Override
     public void setLabels(LabelsTag value) {
         setProperty("labels", value.properties());

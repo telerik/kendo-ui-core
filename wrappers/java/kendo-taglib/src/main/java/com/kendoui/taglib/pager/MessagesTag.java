@@ -40,6 +40,10 @@ public class MessagesTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "pager-messages";
+    }
+
     public String getDisplay() {
         return (String)getProperty("display");
     }

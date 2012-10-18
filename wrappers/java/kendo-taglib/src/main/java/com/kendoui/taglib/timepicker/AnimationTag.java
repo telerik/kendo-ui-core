@@ -40,6 +40,10 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "timePicker-animation";
+    }
+
 //<< Attributes
 
 }

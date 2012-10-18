@@ -80,6 +80,10 @@ public class ItemsTag extends BaseTag /* interfaces */implements Item/* interfac
         return items;
     }
 
+    public static String tagName() {
+        return "tabStrip-items";
+    }
+
     @Override
     public void addItem(ItemTag value) {
         items.add(value.properties());

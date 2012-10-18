@@ -40,6 +40,10 @@ public class LabelsTag extends BaseTag /* interfaces */implements Border/* inter
 
 //>> Attributes
 
+    public static String tagName() {
+        return "radialGauge-scale-labels";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

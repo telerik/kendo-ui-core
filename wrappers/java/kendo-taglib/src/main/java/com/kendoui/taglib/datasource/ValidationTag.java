@@ -46,4 +46,8 @@ public class ValidationTag extends BaseTag {
     public void setMax(double value) {
         setProperty("max", value);
     }
+    
+    public static String tagName() {
+        return "dataSource-schema-model-field-validation";
+    }
 }

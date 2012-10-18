@@ -40,6 +40,10 @@ public class GroupableTag extends BaseTag /* interfaces */implements Messages/* 
 
 //>> Attributes
 
+    public static String tagName() {
+        return "grid-groupable";
+    }
+
     @Override
     public void setMessages(MessagesTag value) {
         setProperty("messages", value.properties());

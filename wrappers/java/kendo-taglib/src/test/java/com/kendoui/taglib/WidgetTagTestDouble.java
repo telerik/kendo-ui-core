@@ -19,4 +19,8 @@ public class WidgetTagTestDouble extends WidgetTag {
         return new Div();
     }
 
+    public static String tagName() {
+        return "widgetTagTestDouble";
+    }
+
 }

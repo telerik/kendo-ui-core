@@ -64,4 +64,7 @@ public class FieldTag extends BaseTag {
         setProperty("validation", validationTag.properties());
     }
     
+    public static String tagName() {
+        return "dataSource-schema-model-field";
+    }
 }

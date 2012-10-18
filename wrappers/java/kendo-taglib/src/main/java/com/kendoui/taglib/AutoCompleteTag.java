@@ -50,6 +50,10 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
 
 //>> Attributes
 
+    public static String tagName() {
+        return "autoComplete";
+    }
+
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());

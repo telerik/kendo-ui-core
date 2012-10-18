@@ -39,6 +39,10 @@ public class UpdateTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "dataSource-transport-update";
+    }
+
     public boolean getCache() {
         return (boolean)getProperty("cache");
     }

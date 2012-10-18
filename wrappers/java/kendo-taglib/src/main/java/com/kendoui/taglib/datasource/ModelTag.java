@@ -26,4 +26,8 @@ public class ModelTag extends BaseTag {
     public void setFields(FieldsTag fieldsTag) {
         setProperty("fields", fieldsTag.properties());
     }
+    
+    public static String tagName() {
+        return "dataSource-schema-model";
+    }
 }

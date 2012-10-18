@@ -44,6 +44,10 @@ public class UploadTag extends WidgetTag /* interfaces */implements Async, Local
 
 //>> Attributes
 
+    public static String tagName() {
+        return "upload";
+    }
+
     @Override
     public void setAsync(AsyncTag value) {
         setProperty("async", value.properties());

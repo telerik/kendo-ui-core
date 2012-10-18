@@ -40,6 +40,10 @@ public class TitleTag extends BaseTag /* interfaces */implements Border/* interf
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-valueAxis-title";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

@@ -44,6 +44,10 @@ public class DatePickerTag extends WidgetTag /* interfaces */implements Animatio
 
 //>> Attributes
 
+    public static String tagName() {
+        return "datePicker";
+    }
+
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());

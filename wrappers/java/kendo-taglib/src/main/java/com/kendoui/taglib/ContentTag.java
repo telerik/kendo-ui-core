@@ -6,4 +6,8 @@ public class ContentTag extends BaseTag {
     public int doStartTag() {
         return EVAL_BODY_INCLUDE;
     }
+
+    public static String tagName() {
+        return "content";
+    }
 }

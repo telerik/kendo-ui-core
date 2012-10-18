@@ -40,6 +40,10 @@ public class AnimationTag extends BaseTag /* interfaces */implements Collapse, E
 
 //>> Attributes
 
+    public static String tagName() {
+        return "treeView-animation";
+    }
+
     @Override
     public void setCollapse(CollapseTag value) {
         setProperty("collapse", value.properties());

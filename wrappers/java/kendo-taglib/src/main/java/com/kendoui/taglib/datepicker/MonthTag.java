@@ -40,6 +40,10 @@ public class MonthTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "datePicker-month";
+    }
+
     public String getContent() {
         return (String)getProperty("content");
     }

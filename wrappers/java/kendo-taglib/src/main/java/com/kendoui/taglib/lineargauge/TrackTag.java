@@ -40,6 +40,10 @@ public class TrackTag extends BaseTag /* interfaces */implements Border/* interf
 
 //>> Attributes
 
+    public static String tagName() {
+        return "linearGauge-pointer-track";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

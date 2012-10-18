@@ -40,6 +40,10 @@ public class TooltipTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "rangeSlider-tooltip";
+    }
+
     public boolean getEnabled() {
         return (boolean)getProperty("enabled");
     }

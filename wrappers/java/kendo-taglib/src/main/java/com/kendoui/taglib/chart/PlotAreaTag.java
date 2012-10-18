@@ -40,6 +40,10 @@ public class PlotAreaTag extends BaseTag /* interfaces */implements Border/* int
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-plotArea";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

@@ -40,6 +40,10 @@ public class LineTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-valueAxis-line";
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

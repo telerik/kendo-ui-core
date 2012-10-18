@@ -40,6 +40,10 @@ public class MarkersTag extends BaseTag /* interfaces */implements Border/* inte
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-series-markers";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

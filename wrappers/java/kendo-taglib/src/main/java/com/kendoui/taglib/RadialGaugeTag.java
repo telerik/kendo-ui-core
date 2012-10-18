@@ -42,6 +42,10 @@ public class RadialGaugeTag extends WidgetTag /* interfaces */implements GaugeAr
 
 //>> Attributes
 
+    public static String tagName() {
+        return "radialGauge";
+    }
+
     @Override
     public void setGaugeArea(GaugeAreaTag value) {
         setProperty("gaugearea", value.properties());

@@ -40,6 +40,10 @@ public class MinorTicksTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-valueAxis-minorTicks";
+    }
+
     public float getSize() {
         return (float)getProperty("size");
     }

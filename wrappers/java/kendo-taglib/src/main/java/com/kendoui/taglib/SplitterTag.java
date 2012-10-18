@@ -44,6 +44,10 @@ public class SplitterTag extends WidgetTag /* interfaces */implements Panes/* in
 
 //>> Attributes
 
+    public static String tagName() {
+        return "splitter";
+    }
+
     @Override
     public void setPanes(PanesTag value) {
 

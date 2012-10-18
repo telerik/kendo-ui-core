@@ -40,6 +40,10 @@ public class AnimationTag extends BaseTag /* interfaces */implements Close, Open
 
 //>> Attributes
 
+    public static String tagName() {
+        return "tabStrip-animation";
+    }
+
     @Override
     public void setClose(CloseTag value) {
         setProperty("close", value.properties());

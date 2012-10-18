@@ -44,6 +44,10 @@ public class PagerTag extends WidgetTag /* interfaces */implements Messages, Dat
 
 //>> Attributes
 
+    public static String tagName() {
+        return "pager";
+    }
+
     @Override
     public void setMessages(MessagesTag value) {
         setProperty("messages", value.properties());

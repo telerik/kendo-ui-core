@@ -40,6 +40,10 @@ public class SortableTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "grid-sortable";
+    }
+
     public boolean getAllowUnsort() {
         return (boolean)getProperty("allowUnsort");
     }

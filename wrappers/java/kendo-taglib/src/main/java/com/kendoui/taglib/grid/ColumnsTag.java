@@ -56,6 +56,10 @@ public class ColumnsTag extends BaseTag /* interfaces */implements Column/* inte
         return columns;
     }
 
+    public static String tagName() {
+        return "grid-columns";
+    }
+
     @Override
     public void addColumn(ColumnTag value) {
         columns.add(value.properties());

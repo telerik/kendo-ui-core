@@ -40,6 +40,10 @@ public class CapTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "radialGauge-pointer-cap";
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

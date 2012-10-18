@@ -42,6 +42,10 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
 
 //>> Attributes
 
+    public static String tagName() {
+        return "numericTextBox";
+    }
+
     public String getCulture() {
         return (String)getProperty("culture");
     }

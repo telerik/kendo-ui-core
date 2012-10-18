@@ -56,6 +56,10 @@ public class SeriesTag extends BaseTag /* interfaces */implements SeriesItem/* i
         return series;
     }
 
+    public static String tagName() {
+        return "chart-series";
+    }
+
     @Override
     public void addSeriesItem(SeriesItemTag value) {
         series.add(value.properties());

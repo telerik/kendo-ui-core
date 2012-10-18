@@ -17,6 +17,10 @@ public class ReadTag extends BaseTag {
     
 //>> Attributes
 
+    public static String tagName() {
+        return "dataSource-transport-read";
+    }
+
     public boolean getCache() {
         return (boolean)getProperty("cache");
     }

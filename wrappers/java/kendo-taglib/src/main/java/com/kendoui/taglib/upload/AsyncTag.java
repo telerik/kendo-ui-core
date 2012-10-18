@@ -40,6 +40,10 @@ public class AsyncTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "upload-async";
+    }
+
     public boolean getAutoUpload() {
         return (boolean)getProperty("autoUpload");
     }

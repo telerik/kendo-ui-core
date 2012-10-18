@@ -44,6 +44,10 @@ public class TimePickerTag extends WidgetTag /* interfaces */implements Animatio
 
 //>> Attributes
 
+    public static String tagName() {
+        return "timePicker";
+    }
+
     @Override
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());

@@ -40,6 +40,10 @@ public class PaneTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "splitter-pane";
+    }
+
     public boolean getCollapsed() {
         return (boolean)getProperty("collapsed");
     }

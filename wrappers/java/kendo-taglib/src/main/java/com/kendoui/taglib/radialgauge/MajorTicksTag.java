@@ -40,6 +40,10 @@ public class MajorTicksTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "radialGauge-scale-majorTicks";
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

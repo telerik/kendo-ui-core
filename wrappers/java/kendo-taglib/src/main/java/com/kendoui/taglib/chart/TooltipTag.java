@@ -40,6 +40,10 @@ public class TooltipTag extends BaseTag /* interfaces */implements Border/* inte
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-seriesDefaults-tooltip";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

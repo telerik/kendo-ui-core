@@ -40,6 +40,10 @@ public class LegendTag extends BaseTag /* interfaces */implements Border, Labels
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-legend";
+    }
+
     @Override
     public void setBorder(BorderTag value) {
         setProperty("border", value.properties());

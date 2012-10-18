@@ -40,6 +40,10 @@ public class MinorGridLinesTag extends BaseTag /* interfaces *//* interfaces */ 
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-valueAxis-minorGridLines";
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

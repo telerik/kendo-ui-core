@@ -40,6 +40,10 @@ public class LabelsTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "chart-xAxis-labels";
+    }
+
     public String getCulture() {
         return (String)getProperty("culture");
     }

@@ -40,6 +40,10 @@ public class OpenTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    public static String tagName() {
+        return "tabStrip-animation-open";
+    }
+
     public float getDuration() {
         return (float)getProperty("duration");
     }

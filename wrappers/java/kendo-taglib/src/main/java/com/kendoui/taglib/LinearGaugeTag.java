@@ -42,6 +42,10 @@ public class LinearGaugeTag extends WidgetTag /* interfaces */implements GaugeAr
 
 //>> Attributes
 
+    public static String tagName() {
+        return "linearGauge";
+    }
+
     @Override
     public void setGaugeArea(GaugeAreaTag value) {
         setProperty("gaugearea", value.properties());
