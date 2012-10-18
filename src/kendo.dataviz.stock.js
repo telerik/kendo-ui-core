@@ -1,12 +1,16 @@
 (function ($, undefined) {
     // Imports ================================================================
     var kendo = window.kendo,
+        math = Math,
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
         Chart = dataviz.ui.Chart,
-        Selection = dataviz.Selection;
+        Selection = dataviz.Selection,
+
+        duration = dataviz.duration,
+        toDate = dataviz.toDate;
 
     // Constants =============================================================
     var AUTO_CATEGORY_WIDTH = 47,
@@ -97,6 +101,11 @@
                 },
                 width: 1
             });
+
+            $(chart.element).kendoDraggable({
+                drag: $.proxy(chart._onDrag, chart),
+                dragstart: $.proxy(chart._onDragStart, chart)
+            });
         },
 
         _applyDefaults: function(options, themeOptions) {
@@ -154,7 +163,7 @@
             }
 
             if (categoriesLength > 0) {
-                var selection = new Selection(chart.element, navigatorAxis, {
+                var selection = chart._selection = new Selection(chart.element, navigatorAxis, {
                     // TODO: Accept dates for start and end
                     start: start,
                     end: end,
@@ -177,6 +186,78 @@
             primaryAxis.max = navigatorAxis.options.categories[e.end];
             chart._plotArea.redrawPane(panes[0]);
             //chart._plotArea.redrawPane(panes[1]);
+        },
+
+        _onDragStart: function(e) {
+            var chart = this;
+            var primaryAxis = chart._plotArea.categoryAxis;
+            var options = primaryAxis.options;
+            var coords = chart._eventCoordinates(e);
+            var baseUnit = primaryAxis.options.baseUnit;
+
+            if (!chart._plotArea.panes[0].box.containsPoint(coords)) {
+                e.preventDefault();
+                return;
+            }
+
+            var range = duration(options.categories[0],
+                                dataviz.last(options.categories),
+                                baseUnit);
+
+            // TODO: Duplicate from mouseMove
+                delete chart._activePoint;
+                chart._tooltip.hide();
+                chart._highlight.hide();
+
+            chart._dragState = {
+                min: options.min,
+                max: options.max,
+                range: range,
+                scale: primaryAxis.box.width() / range,
+                baseUnit: baseUnit
+            };
+        },
+
+        _onDrag: function(e) {
+            var chart = this,
+                delta = e.x.startLocation - e.x.location,
+                panes = chart._plotArea.panes,
+                primaryAxis = chart._plotArea.categoryAxis,
+                navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+
+                var dragState = chart._dragState,
+                baseUnit = dragState.baseUnit;
+
+                var offset = math.round(delta / dragState.scale);
+
+            var rangeStart = toDate(math.min(
+                math.max(navigatorAxis.options.categories[0],
+                    dataviz.addDuration(dragState.min, offset, baseUnit)
+                ),
+                dataviz.addDuration(
+                    dataviz.last(navigatorAxis.options.categories), -dragState.range, baseUnit
+                )
+            ));
+            var rangeEnd = toDate(math.min(
+                dataviz.addDuration(rangeStart, dragState.range, baseUnit),
+                dataviz.last(navigatorAxis.options.categories)
+            ));
+
+            var axisSettings = chart._plotArea.options.categoryAxis[0];
+            axisSettings.min = rangeStart;
+            axisSettings.max = rangeEnd;
+            chart._plotArea.redrawPane(panes[0]);
+
+            var selection = chart._selection;
+            selection.setRange(
+                dataviz.lteDateIndex(
+                    navigatorAxis.options.categories,
+                    rangeStart
+                ),
+                dataviz.lteDateIndex(
+                    navigatorAxis.options.categories,
+                    rangeEnd
+            ));
         }
     });
 
