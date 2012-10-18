@@ -310,8 +310,8 @@
                     '#}#'+
                     '#if(showColumns){#'+
                         '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
-                        '#for (var col in columns) {#'+
-                            '<li><label><input type="checkbox" data-#=ns#field="#=columns[col].field#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</label></li>'+
+                        '#for (var idx=0,length=columns.length; idx < length;idx++) {#'+
+                            '<li><label><input type="checkbox" data-#=ns#field="#=columns[idx].field#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</label></li>'+
                         '#}#'+
                         '</ul></li>'+
                         '#if(filterable){#'+
