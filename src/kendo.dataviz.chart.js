@@ -6976,6 +6976,10 @@
     }
 
     function addDuration(date, value, unit, weekStartDay) {
+        if (!date) {
+            return date;
+        }
+
         date = toDate(date);
 
         if (unit === YEARS) {
