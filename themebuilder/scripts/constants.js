@@ -128,6 +128,8 @@
             "@draghandle-hover-background-color":   { readonly: true, value: "@hover-background-color" },
             "@draghandle-hover-shadow:":            { readonly: true, value: "none" },
 
+            "@default-icon-opacity":            { readonly: true, value: "0.8" },
+
             "@alt-background-color":            constant(BGCOLOR, ".k-alt"),
             "@input-background-color":          constant(BGCOLOR, ".k-input"),
             "@input-text-color":                constant(COLOR, ".k-autocomplete .k-input"),
