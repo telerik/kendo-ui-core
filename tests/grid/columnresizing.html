@@ -333,6 +333,22 @@
                 equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
             });
 
+            test("handler is position over the th right side when prev column is hidden", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: ["foo", "bar"]
+                });
+                grid.hideColumn("foo");
+
+                var lastColumn = grid.thead.find("th:last");
+
+                $(lastColumn).trigger({ type: "mousemove", clientX: lastColumn.offset().left + lastColumn.outerWidth(), clientY: 0});
+
+                equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").last()[0].offsetTop, lastColumn[0].offsetTop);
+                equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").last()[0].offsetLeft, lastColumn[0].offsetLeft + lastColumn[0].offsetWidth - indicatorWidth);
+            });
+
             test("handler is position over the th right side when scrolling is disabled", function() {
                 var grid = new Grid(table, {
                     dataSource: [ { foo: "foo", bar: "bar" } ],

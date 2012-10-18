@@ -681,7 +681,7 @@
 
                     left = this.offsetWidth;
 
-                    th.prevAll().each(function() {
+                    th.prevAll(":visible").each(function() {
                         left += this.offsetWidth;
                     });
 
