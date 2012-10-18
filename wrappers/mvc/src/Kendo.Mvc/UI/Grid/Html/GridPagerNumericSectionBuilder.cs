@@ -2,7 +2,7 @@ namespace Kendo.Mvc.UI.Html
 {
     class GridPagerNumericSectionBuilder : IGridPagerNumericSectionBuilder
     {
-        private const int NumericLinkSize = 10;
+        private int numericLinkSize = 10;
         private readonly IGridPagerButtonFactory buttonFactory;
 
         public GridPagerNumericSectionBuilder(IGridPagerButtonFactory buttonFactory)
@@ -10,8 +10,9 @@ namespace Kendo.Mvc.UI.Html
             this.buttonFactory = buttonFactory;
         }
 
-        public IHtmlNode Create(IGridUrlBuilder urlBuilder, int currentPage, int pageCount)
+        public IHtmlNode Create(IGridUrlBuilder urlBuilder, int currentPage, int pageCount, int buttonCount)
         {
+            numericLinkSize = buttonCount;
             var ul = new HtmlElement("ul").AddClass("k-pager-numbers k-reset");
 
             AppendContent(urlBuilder, ul, pageCount, currentPage);
@@ -65,7 +66,7 @@ namespace Kendo.Mvc.UI.Html
 
         private int CalculateEndIndex(int numericStart, int pageCount)
         {
-            var numericEnd = (numericStart + NumericLinkSize) - 1;
+            var numericEnd = (numericStart + numericLinkSize) - 1;
 
             if (numericEnd > pageCount)
             {
@@ -78,12 +79,12 @@ namespace Kendo.Mvc.UI.Html
         {
             var numericStart = 1;
 
-            if (currentPage > NumericLinkSize)
+            if (currentPage > numericLinkSize)
             {
-                var reminder = (currentPage%NumericLinkSize);
+                var reminder = (currentPage%numericLinkSize);
 
                 numericStart = (reminder == 0)
-                                   ? (currentPage - NumericLinkSize) + 1
+                                   ? (currentPage - numericLinkSize) + 1
                                    : (currentPage - reminder) + 1;
             }
             return numericStart;

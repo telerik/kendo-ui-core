@@ -68,7 +68,7 @@ namespace Kendo.Mvc.UI.Html
         {
             if (section.Numeric)
             {
-                numericSectionBuilder.Create(urlBuilder, section.Page, section.TotalPages)
+                numericSectionBuilder.Create(urlBuilder, section.Page, section.TotalPages, section.ButtonCount)
                                      .AppendTo(container);
             }
         }
