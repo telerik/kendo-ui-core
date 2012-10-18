@@ -32,8 +32,7 @@
                         }
                     },
                     series: [{
-                        type: "ohlc",
-                        field: "Volume",
+                        type: "candlestick",
                         openField: "Open",
                         highField: "High",
                         lowField: "Low",
@@ -46,7 +45,9 @@
                     categoryAxis: [{
                         // TODO: Introduce single (top-level) dateField?
                         // or at series?
-                        field: "Date"
+                        field: "Date",
+                        min: "2002/02/05",
+                        max: "2002/06/12"
                     }]
                 });
             });

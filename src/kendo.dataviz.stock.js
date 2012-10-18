@@ -103,14 +103,14 @@
             var chart = this,
                 width = chart.element.width() || dataviz.DEFAULT_WIDTH;
 
-            console.log(width / AUTO_CATEGORY_WIDTH)
             var stockDefaults = {
                 categoryAxis: {
                     type: "date",
                     baseUnit: "fit",
                     // TODO: Place in last pane automatically?
                     // TODO: Fix missing gridlines
-                    maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH)
+                    maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH),
+                    justified: true
                 }
             };
 
@@ -122,7 +122,10 @@
         },
 
         options: {
-            name: "StockChart"
+            name: "StockChart",
+            tooltip: {
+                visible: true
+            }
         },
 
         _redraw: function() {
@@ -131,11 +134,30 @@
             Chart.fn._redraw.call(chart);
 
             var navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            var primaryAxis = chart._plotArea.options.categoryAxis[0];
             var categoriesLength = navigatorAxis.options.categories.length;
+            var start = 0,
+                end = navigatorAxis.options.categories.length;
+
+            if (primaryAxis.min) {
+                start = dataviz.lteDateIndex(
+                    navigatorAxis.options.categories,
+                    dataviz.toDate(primaryAxis.min)
+                );
+            }
+
+            if (primaryAxis.max) {
+                end = dataviz.lteDateIndex(
+                    navigatorAxis.options.categories,
+                    dataviz.toDate(primaryAxis.max)
+                );
+            }
+
             if (categoriesLength > 0) {
                 var selection = new Selection(chart.element, navigatorAxis, {
-                    start: 0,
-                    end: navigatorAxis.options.categories.length,
+                    // TODO: Accept dates for start and end
+                    start: start,
+                    end: end,
                     snap: true,
                     select: $.proxy(chart._navigatorSelect, chart)
                 });
@@ -150,6 +172,7 @@
                 panes = chart._plotArea.panes;
 
             // TODO: Provide less awkward way to update axis options
+            // TODO: Return start and end date
             primaryAxis.min = navigatorAxis.options.categories[e.start];
             primaryAxis.max = navigatorAxis.options.categories[e.end];
             chart._plotArea.redrawPane(panes[0]);
