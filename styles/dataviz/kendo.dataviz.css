@@ -29,3 +29,50 @@ div.k-gauge
     white-space: nowrap;
     z-index: 1000;
 }
+
+/* Selection */
+.k-selector {
+    position: absolute;
+}
+
+.k-selection {
+    border-bottom: 0;
+    position: absolute;
+    border: 1px solid #d2d2d2;
+    border-bottom: 0;
+    height: 100%;
+}
+
+.k-handle {
+    background: #d2d2d2;
+    width: 7px;
+    height: 40px;
+    cursor: e-resize;
+    z-index: 1;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    position: absolute;
+}
+
+.k-mask {
+    background: #eee;
+    opacity: 0.7;
+    position: absolute;
+    height: 100%;
+}
+
+.k-border {
+    background: #d2d2d2;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+}
+
+.k-leftHandle {
+    left: -4px;
+}
+
+.k-rightHandle {
+    right: -4px;
+}

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>Bar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="chart" style="width: 900px; height: 400px;"></div>
+        <button id="benchmarkFull">Full redraw</button>
+        <button id="benchmarkPartial">Partial redraw</button>
+        <button id="stop">Stop</button>
+        <span id="fps">-- fps</span>
+        <script>
+            var updateCount = 0;
+            var startDate = new Date("2000/01/03");
+            var endDate = new Date("2012/11/01");
+
+            $(function() {
+
+                $("#chart").kendoStockChart({
+                    dataSource: {
+                        transport: {
+                            read: "boeing-stock.json"
+                        },
+                        sort: {
+                            field: "Date",
+                            dir: "asc"
+                        }
+                    },
+                    series: [{
+                        type: "ohlc",
+                        field: "Volume",
+                        openField: "Open",
+                        highField: "High",
+                        lowField: "Low",
+                        closeField: "Close",
+                        // TODO: Idea
+                        overlays: [{
+                            type: "macd"
+                        }]
+                    }/*, {
+                        type: "column",
+                        field: "Volume",
+                        axis: "volumeAxis"
+                    }*/],
+                    panes: [
+                        {
+                            title: "NYSE:BA"
+                            // Note: Can't be omitted :(
+                        }/*,
+                        {
+                            title: "Volume",
+                            name: "volume",
+                            height: 140
+                        }*/
+                    ],
+                    /*
+                    valueAxes: [{
+                            // TODO: make optional... somehow
+                        }, {
+                        name: "volumeAxis",
+                        pane: "volume",
+                        labels: {
+                            template: "#= kendo.format('{0:N0}', value / 1000) #k"
+                        }
+                    }],
+                       */
+                    navigator: {
+                        type: "line",
+                        field: "Volume",
+                        // slaveAxis: 
+                    },
+                    categoryAxis: [{
+                        // TODO: Introduce single (top-level) dateField?
+                        // or at series?
+                        field: "Date"
+                    }]
+                    /*
+                    }, {
+                    panes: [{
+                        name: "top"
+                    }, {
+                        name: "bottom",
+                        height: 80
+                    }],
+                    valueAxes: [{
+                        name: "topValueAxis",
+                        line: {
+                            visible: false
+                        }
+                    }, {
+                        name: "bottomValueAxis",
+                        pane: "bottom",
+                        majorGridLines: {
+                            visible: false
+                        },
+                        visible: false
+                    }],
+                    categoryAxes: [{
+                        type: "date",
+                        field: "Date",
+                        majorGridLines: {
+                            //TODO: Implement
+                            //step: 7
+                        },
+                        baseUnit: "fit",
+                        maxDateGroups: 30,
+                        justified: true,
+                        // --
+                        name: "one",
+                        // TODO: Investigate
+                        min: startDate,
+                        max: new Date("2000/02/01")
+                    }, {
+                        type: "date",
+                        field: "Date",
+                        baseUnit: "fit",
+                        maxDateGroups: 200,
+                        //baseUnitStep: 18,
+                        baseUnitStep: "auto",
+                        roundToBaseUnit: false,
+                        justified: true,
+                        name: "bottomCategoryAxis",
+                        pane: "bottom",
+                        labels: { visible: false },
+                        majorTicks: { visible: false }
+                    }, {
+                        type: "date",
+                        field: "Date",
+                        baseUnit: "years",
+                        maxDateGroups: 20,
+                        baseUnitStep: "auto",
+                        roundToBaseUnit: false,
+                        justified: true,
+                        pane: "bottom"
+                    }, {
+                        type: "date",
+                        field: "Date",
+                        baseUnit: "months",
+                        baseUnitStep: 1,
+                        roundToBaseUnit: false,
+                        justified: true,
+                        pane: "bottom",
+                        labels: { visible: false, mirror: true }
+                    }],
+                    series: [{
+                        type: "ohlc",
+                        field: "Volume",
+                        openField: "Open",
+                        highField: "High",
+                        lowField: "Low",
+                        closeField: "Close",
+                        // TODO: Axis range is not updated when axis name is not specified
+                        axis: "topValueAxis",
+                        width: 1,
+                        tooltip: {
+                            visible: true
+                        }
+                    }, {
+                        type: "area",
+                        axis: "bottomValueAxis",
+                        categoryAxis: "bottomCategoryAxis",
+                        field: "Volume",
+                        markers: {
+                            visible: false
+                        },
+                        tooltip: {
+                            visible: true,
+                            template: "#= kendo.toString(category, 'd') #"
+                        },
+                        width: 1
+                    }],
+                    legend: {
+                        visible: false
+                    },
+                    transitions: false
+                   */
+                });
+
+                var interval;
+                var start;
+                var frames;
+
+                $("#benchmarkFull").click(function() {
+                    var chart = $("#chart").data("kendoStockChart");
+                    var axis = chart.options.categoryAxis[0];
+                    if (!interval) {
+                        start = new Date();
+                        frames = 0;
+                        interval = setInterval(function() {
+                            if (axis.max > endDate) {
+                                axis.min = startDate;
+                                axis.max = kendo.dataviz.addDuration(startDate, 1, "months");
+                            }
+
+                            axis.min = kendo.dataviz.addDuration(axis.min, 1, "days");
+                            axis.max = kendo.dataviz.addDuration(axis.max, 1, "days");
+                            chart.refresh();
+
+                            var duration = (new Date() - start) / 1000;
+                            frames++;
+
+                            $("#fps").text(Math.round(frames / duration) + " fps");
+                        }, 0);
+                    }
+                });
+
+                $("#benchmarkPartial").click(function() {
+                    var chart = $("#chart").data("kendoStockChart");
+                    var model = chart._model;
+                    var plotArea = model._plotArea;
+                    var axis = chart.options.categoryAxis[0];
+                    if (!interval) {
+                        start = new Date();
+                        frames = 0;
+                        interval = setInterval(function() {
+                            if (axis.max > endDate) {
+                                axis.min = startDate;
+                                axis.max = kendo.dataviz.addDuration(startDate, 1, "months");
+                            }
+
+                            axis.min = kendo.dataviz.addDuration(axis.min || startDate, 1, "days");
+                            axis.max = kendo.dataviz.addDuration(axis.max || new Date("2000/02/03"), 1, "days");
+
+                            chart.redraw("top");
+
+                            var duration = (new Date() - start) / 1000;
+                            frames++;
+
+                            $("#fps").text(Math.round(frames / duration) + " fps");
+                        }, 0);
+                    }
+                });
+
+                $("#stop").click(function() {
+                    clearInterval(interval);
+                });
+            });
+        </script>
+    </body>
+</html>
+

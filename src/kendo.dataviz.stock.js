@@ -5,10 +5,11 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Chart = dataviz.ui.Chart;
+        Chart = dataviz.ui.Chart,
+        Selection = dataviz.Selection;
 
     // Constants =============================================================
-    var AUTO_CATEGORY_WIDTH = 36,
+    var AUTO_CATEGORY_WIDTH = 47,
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = "_navigator";
 
@@ -102,25 +103,57 @@
             var chart = this,
                 width = chart.element.width() || dataviz.DEFAULT_WIDTH;
 
+            console.log(width / AUTO_CATEGORY_WIDTH)
             var stockDefaults = {
                 categoryAxis: {
                     type: "date",
                     baseUnit: "fit",
-                    // TODO: Place in last pane automatically
+                    // TODO: Place in last pane automatically?
                     // TODO: Fix missing gridlines
-                    pane: "volume",
-                    // TODO: How to avoid label overlaps!?
-                    // Perhaps we can query the label width and set step accordingly?
-                    //labels: { step: 2 },
-                    maxDateGroups: width / AUTO_CATEGORY_WIDTH
+                    maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH)
                 }
             };
 
-            Chart.fn._applyDefaults.call(chart, options, deepExtend(themeOptions, stockDefaults));
+            if (themeOptions) {
+                deepExtend(themeOptions, stockDefaults);
+            }
+
+            Chart.fn._applyDefaults.call(chart, options, themeOptions);
         },
 
         options: {
             name: "StockChart"
+        },
+
+        _redraw: function() {
+            var chart = this;
+
+            Chart.fn._redraw.call(chart);
+
+            var navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            var categoriesLength = navigatorAxis.options.categories.length;
+            if (categoriesLength > 0) {
+                var selection = new Selection(chart.element, navigatorAxis, {
+                    start: 0,
+                    end: navigatorAxis.options.categories.length,
+                    snap: true,
+                    select: $.proxy(chart._navigatorSelect, chart)
+                });
+            }
+        },
+
+        _navigatorSelect: function(e) {
+            var chart = this,
+                navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS],
+                // TODO: Control all slave axes
+                primaryAxis = chart._plotArea.options.categoryAxis[0],
+                panes = chart._plotArea.panes;
+
+            // TODO: Provide less awkward way to update axis options
+            primaryAxis.min = navigatorAxis.options.categories[e.start];
+            primaryAxis.max = navigatorAxis.options.categories[e.end];
+            chart._plotArea.redrawPane(panes[0]);
+            //chart._plotArea.redrawPane(panes[1]);
         }
     });
 

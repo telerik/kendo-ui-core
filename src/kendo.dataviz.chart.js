@@ -11,6 +11,7 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
+        Observable = kendo.Observable,
         DataSource = kendo.data.DataSource,
         Widget = kendo.ui.Widget,
         template = kendo.template,
@@ -107,6 +108,7 @@
         ROUNDED_GLASS = "roundedGlass",
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
+        SELECT = "select",
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
         STRING = "string",
@@ -6432,7 +6434,7 @@
         }
     };
 
-    var Selection = Class.extend({
+    var Selection = Observable.extend({
         init: function(chartElement, categoryAxis, options) {
             var that = this,
                 categoryAxisLineBox = categoryAxis.lineBox(),
@@ -6440,6 +6442,8 @@
                 valueAxisLineBox = valueAxis.lineBox(),
                 selectorPrefix = "." + CSS_PREFIX,
                 wrapper;
+
+            Observable.fn.init.call(that);
 
             that.options = deepExtend({}, that.options, options);
             options = that.options;
@@ -6494,7 +6498,13 @@
             that.setUpDragHandle(that.rightHandle);
 
             that.setRange(options.start, options.end);
+
+            that.bind(that.events, that.options);
         },
+
+        events:[
+            SELECT
+        ],
 
         options: {
             min: MIN_VALUE,
@@ -6625,19 +6635,17 @@
 
             that.dragHandle.css("cursor", "e-resize");
 
-            if (options.snap) {
+            //if (options.snap) {
                 startIndex = categoryAxis.getCategoryIndex(startPoint);
                 endIndex = categoryAxis.getCategoryIndex(endPoint);
 
                 that.setRange(startIndex, endIndex);
-            }
+            //}
 
-            //var eventArgs = {
-            //    startSelection: parseFloat(that.selection.css("left")),
-            //    endSelection: parseFloat(that.rightMask.css("left")),
-            //    startIndex: options.start,
-            //    endIndex: options.end
-            //};
+            that.trigger(SELECT, {
+                start: startIndex,
+                end: endIndex
+            });
         }
     });
 
