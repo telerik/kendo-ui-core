@@ -9,7 +9,7 @@ namespace Kendo.Models
         public static readonly IList<string> All = new string[]
         {
 #if DEBUG
-            "web/kendo.common.css",
+            "web/kendo.common.less",
             "web/kendo.rtl.css",
             "web/kendo.default.less",
             "dataviz/kendo.dataviz.css"
@@ -24,7 +24,7 @@ namespace Kendo.Models
         public static readonly IList<string> Simulator = new string[]
         {
 #if DEBUG
-            "web/kendo.common.css",
+            "web/kendo.common.less",
             "web/kendo.black.less"
 #else
             "kendo.common.min.css",
@@ -35,7 +35,7 @@ namespace Kendo.Models
         public static readonly IList<string> Mobile = new string[]
         {
 #if DEBUG
-            "web/kendo.common.css",
+            "web/kendo.common.less",
             "web/kendo.default.less",
             "mobile/kendo.mobile.all.less"
 #else
