@@ -150,6 +150,16 @@ namespace Kendo.Mvc.UI.Fluent
             return (TDataSourceBuilder)this;
         }
 
+        /// <summary>
+        /// Configures Model properties
+        /// </summary>                
+        public virtual TDataSourceBuilder Model(Action<DataSourceModelDescriptorFactory<TModel>> configurator)
+        {
+            configurator(new DataSourceModelDescriptorFactory<TModel>(dataSource.Schema.Model));
+
+            return (TDataSourceBuilder)this;
+        }
+
         protected virtual void SetOperationUrl(CrudOperation operation, string actionName, string controllerName, object routeValues)
         {
             operation.Action(actionName, controllerName, routeValues);

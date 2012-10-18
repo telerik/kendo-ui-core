@@ -121,16 +121,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Configures Model properties
-        /// </summary>                
-        public virtual AjaxDataSourceBuilder<TModel> Model(Action<DataSourceModelDescriptorFactory<TModel>> configurator)
-        {
-            configurator(new DataSourceModelDescriptorFactory<TModel>(dataSource.Schema.Model));
-
-            return this;
-        }
-
-        /// <summary>
         /// Determines if modifications will be sent to the server in batches or as individually requests.
         /// </summary>
         /// <param name="enabled">If true changes will be batched, otherwise false.</param>        
