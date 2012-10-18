@@ -178,7 +178,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Data = new SalesData[] { new SalesData() };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{\"dataSource\":{\"data\":[{\"RepName\":null,\"DateString\":null,\"Date\":\"\\/Date(-62135596800000)\\/\",\"TotalSales\":0,\"RepSales\":0,\"Explode\":false,\"VisibleInLegend\":false,\"Color\":null}]}}");
+            output.ShouldContain("\"data\":[{\"RepName\":null,\"DateString\":null,\"Date\":\"\\/Date(-62135596800000)\\/\",\"TotalSales\":0,\"RepSales\":0,\"Explode\":false,\"VisibleInLegend\":false,\"Color\":null}]");
         }
 
         [Fact]
