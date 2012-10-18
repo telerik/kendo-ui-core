@@ -59,5 +59,9 @@ public class FieldTag extends BaseTag {
     public void setType(String value) {
         setProperty("type", value);
     }
+
+    public void setValidation(ValidationTag validationTag) {
+        setProperty("validation", validationTag.properties());
+    }
     
 }

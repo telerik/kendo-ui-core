@@ -7432,4 +7432,40 @@ containing one or more fields with the same name as the original input name.</de
             <type>Object</type>
         </attribute>
     </tag>
+    
+    <tag>
+    	<description>Specifies the validation options of a model field</description>
+    	<name>dataSource-schema-model-field-validation</name>
+    	<tag-class>com.kendoui.taglib.datasource.ValidationTag</tag-class>
+    	<body-content>empty</body-content>
+    	
+    	<attribute>
+            <description>Specifies if the field is required. The default value is &quot;false&quot;.</description>
+            <name>required</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        
+    	<attribute>
+            <description>A regular expression which the field value should match.</description>
+            <name>pattern</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    	<attribute>
+            <description>Specifies the maximum numeric value of the field.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>double</type>
+        </attribute>
+        
+    	<attribute>
+            <description>Specifies the minimum numeric value of the field.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>double</type>
+        </attribute>
+        
+    </tag>
 </taglib>
