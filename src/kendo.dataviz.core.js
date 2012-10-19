@@ -427,7 +427,8 @@
                 child = children[i];
 
                 if (!child.discoverable) {
-                    child.options = deepExtend(child.options, { modelId: modelId });
+                    child.options = child.options || {};
+                    child.options.modelId = modelId;
                 }
 
                 viewElements.push.apply(
