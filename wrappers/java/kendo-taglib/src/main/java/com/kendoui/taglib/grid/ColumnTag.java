@@ -2,6 +2,7 @@
 package com.kendoui.taglib.grid;
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.json.Function;
 
 import javax.servlet.jsp.JspException;
 
@@ -50,6 +51,14 @@ public class ColumnTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setCommand(String value) {
         setProperty("command", value);
+    }
+
+    public String getEditor() {
+        return ((Function)getProperty("editor")).getBody();
+    }
+
+    public void setEditor(String value) {
+        setProperty("editor", new Function(value));
     }
 
     public boolean getEncoded() {

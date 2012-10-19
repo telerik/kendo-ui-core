@@ -105,6 +105,14 @@ public class LabelsTag extends BaseTag /* interfaces */implements Border/* inter
         setProperty("position", value);
     }
 
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }

@@ -12,6 +12,7 @@ public class Product {
     private String productName;
     private double unitPrice;
     private int unitsInStock;
+    private boolean discontinued;
     
     @Id
     @Column(name="ProductID")
@@ -49,4 +50,15 @@ public class Product {
 	public void setUnitsInStock(int unitsInStock) {
 		this.unitsInStock = unitsInStock;
 	}
+
+	@Column(name="Discontinued")
+    public boolean getDiscontinued() {
+        return discontinued;
+    }
+
+    public void setDiscontinued(boolean discontinued) {
+        this.discontinued = discontinued;
+    }
+	
+	
 }

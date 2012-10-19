@@ -1170,6 +1170,21 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
+            <description>Template to be used for rendering the detail rows in the grid.
+See the</description>
+            <name>detailTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates whether editing is enabled/disabled.</description>
+            <name>editable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether filtering is enabled/disabled.</description>
             <name>filterable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1195,6 +1210,13 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <name>pageable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Template to be used for rendering the rows in the grid.</description>
+            <name>rowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -1333,6 +1355,13 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
+            <description>Specifies ListView item template in edit mode.</description>
+            <name>editTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
             <name>navigatable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1344,6 +1373,13 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies ListView item template.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -3384,6 +3420,14 @@ Every n-th label is rendered where n is the step</description>
         </attribute>
 
         <attribute>
+            <description>The label template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The visibility of the labels.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4173,6 +4217,14 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
+            <description>The label template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The visibility of the labels.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4602,6 +4654,14 @@ labels</description>
         </attribute>
 
         <attribute>
+            <description>The label template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The visibility of the labels.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4802,6 +4862,14 @@ Every n-th label is rendered where n is the step</description>
             <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -5137,7 +5205,7 @@ hex and rgb.</description>
 return the aggregate results for the current response.</description>
             <name>aggregates</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5145,7 +5213,7 @@ return the aggregate results for the current response.</description>
 return the data items for the current response.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5153,7 +5221,7 @@ return the data items for the current response.</description>
 return the errors for the current response (if present). If there are any errors the</description>
             <name>errors</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5161,7 +5229,14 @@ return the errors for the current response (if present). If there are any errors
 return the groups for the current response.</description>
             <name>groups</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
+        </attribute>
+
+        <attribute>
+            <description>Executed before the server response is used. Appropriate for preprocessing or parsing of the server response.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5169,7 +5244,7 @@ return the groups for the current response.</description>
 return the total number of data items for the current response.</description>
             <name>total</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5200,6 +5275,13 @@ return the total number of data items for the current response.</description>
             <name>destroy</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Convert the request parameters from dataSource format to remote service specific format.</description>
+            <name>parameterMap</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5641,6 +5723,13 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <name>command</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Provides a way to specify custom editor for this column.</description>
+            <name>editor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -6155,6 +6244,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -6705,6 +6802,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
         <attribute>
             <description>The labels positions.</description>
             <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template.
+Template variables:</description>
+            <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

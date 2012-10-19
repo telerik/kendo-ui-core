@@ -59,6 +59,14 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("dataSource", dataSource.properties());
     }
 
+    public String getEditTemplate() {
+        return ((Function)getProperty("editTemplate")).getBody();
+    }
+
+    public void setEditTemplate(String value) {
+        setProperty("editTemplate", new Function(value));
+    }
+
     public boolean getNavigatable() {
         return (boolean)getProperty("navigatable");
     }
@@ -73,6 +81,14 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setSelectable(String value) {
         setProperty("selectable", value);
+    }
+
+    public String getTemplate() {
+        return ((Function)getProperty("template")).getBody();
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", new Function(value));
     }
 
     public String getChange() {

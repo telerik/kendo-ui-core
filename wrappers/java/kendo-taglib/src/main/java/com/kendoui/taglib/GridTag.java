@@ -95,6 +95,22 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Edita
         setProperty("dataSource", dataSource.properties());
     }
 
+    public String getDetailTemplate() {
+        return ((Function)getProperty("detailTemplate")).getBody();
+    }
+
+    public void setDetailTemplate(String value) {
+        setProperty("detailTemplate", new Function(value));
+    }
+
+    public boolean getEditable() {
+        return (boolean)getProperty("editable");
+    }
+
+    public void setEditable(boolean value) {
+        setProperty("editable", value);
+    }
+
     public boolean getFilterable() {
         return (boolean)getProperty("filterable");
     }
@@ -125,6 +141,14 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Edita
 
     public void setPageable(boolean value) {
         setProperty("pageable", value);
+    }
+
+    public String getRowTemplate() {
+        return ((Function)getProperty("rowTemplate")).getBody();
+    }
+
+    public void setRowTemplate(String value) {
+        setProperty("rowTemplate", new Function(value));
     }
 
     public boolean getScrollable() {

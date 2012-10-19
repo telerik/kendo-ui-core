@@ -12,7 +12,7 @@ public class ReadTag extends BaseTag {
 
         transport.setRead(this);
 
-        return EVAL_PAGE;
+        return super.doEndTag();
     }
     
 //>> Attributes

@@ -2,6 +2,7 @@
 package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.json.Function;
 
 import javax.servlet.jsp.JspException;
 
@@ -77,6 +78,14 @@ public class TransportTag extends BaseTag /* interfaces */implements Create, Des
 
     public void setDestroy(String value) {
         setProperty("destroy", value);
+    }
+
+    public String getParameterMap() {
+        return ((Function)getProperty("parameterMap")).getBody();
+    }
+
+    public void setParameterMap(String value) {
+        setProperty("parameterMap", new Function(value));
     }
 
     public String getRead() {

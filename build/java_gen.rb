@@ -168,6 +168,7 @@ JS_TO_JAVA_TYPES = {
     'string' => 'java.lang.String',
     'Boolean' => 'boolean',
     'Object' => 'Object',
+    'Function' => 'String',
     'Date' => 'java.util.Date'
 }
 
@@ -320,6 +321,7 @@ class Option
     end
 
     def required?
+        p @type unless @java_type
         @java_type != 'Object' && @java_type
     end
 
@@ -336,7 +338,11 @@ class Option
 
         return '' unless required?
 
-        [JAVA_OPTION_GETTER_TEMPLATE.result(binding), JAVA_OPTION_SETTER_TEMPLATE.result(binding)].join
+        if @type != 'Function'
+            [JAVA_OPTION_GETTER_TEMPLATE.result(binding), JAVA_OPTION_SETTER_TEMPLATE.result(binding)].join
+        else
+            [JAVA_EVENT_GETTER_TEMPLATE.result(binding), JAVA_EVENT_SETTER_TEMPLATE.result(binding)].join
+        end
     end
 end
 
@@ -517,6 +523,13 @@ class Tag
 
                 child.promote_options_to_tags
             end
+=begin
+            if option.type == 'Function'
+                child = NestedTag.new :name => option.name,
+                    :parent => self,
+                    :description => option.description
+            end
+=end
         end
     end
 
@@ -560,8 +573,6 @@ class Tag
                 name.sub!(/\s*type\s*[=:][^\.]*\.?/, '')
 
                 type.value.split('|').each do |t|
-                    next if t =~ /Function/
-
                     next if name =~ /content\.template/
 
                     paragraph  = find_element_with_type.call(configuration, index, :p)
