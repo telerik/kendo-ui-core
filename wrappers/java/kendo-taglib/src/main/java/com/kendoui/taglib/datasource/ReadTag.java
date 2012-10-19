@@ -37,6 +37,14 @@ public class ReadTag extends BaseTag {
         setProperty("contentType", value);
     }
 
+    public Object getData() {
+        return (Object)getProperty("data");
+    }
+
+    public void setData(Object value) {
+        setProperty("data", value);
+    }
+
     public String getDataType() {
         return (String)getProperty("dataType");
     }

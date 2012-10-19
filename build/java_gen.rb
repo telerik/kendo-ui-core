@@ -321,9 +321,7 @@ class Option
     end
 
     def required?
-        p @parent.name, @name if @java_type == 'Object'
-
-        @java_type != 'Object' && @java_type
+        @java_type
     end
 
     def to_xml
@@ -500,11 +498,11 @@ class Tag
             child_options = @options.find_all { |o| o.name.start_with?(prefix) }
 
             if child_options.any? && option.type =~ /Array|Object/i
-                @options.delete(option)
+                @options.delete_if{|o| o.name == option.name && o.type == option.type }
 
                 child_options.each do |o|
+                    @options.delete_if { |opt| opt.name == o.name }
                     o.name.sub!(prefix, '')
-                    @options.delete(o)
                 end
 
 
@@ -571,19 +569,22 @@ class Tag
 
                 next unless type
 
-                name.sub!(/\s*type\s*[=:][^\.]*\.?/, '')
+                name.sub!(/\s*type\s*[=:][^\.]*\.?/, '') # skip exotic documentation like series.type="area".tooltip
 
                 type.value.split('|').each do |t|
                     next if name =~ /content\.template/
-
 
                     paragraph  = find_element_with_type.call(configuration, index, :p)
 
                     description = find_child_with_type.call(paragraph, :text)
 
+                    t = t.strip.strip_namespace
+
+                    name = name.strip
+
                     option = Option.new :name => name,
                         :parent => tag,
-                        :type => t.strip.strip_namespace,
+                        :type => t,
                         :description => description.value
 
                     tag.options.push(option)

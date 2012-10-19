@@ -44,6 +44,22 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dateTimePicker-animation";
     }
 
+    public Object getClose() {
+        return (Object)getProperty("close");
+    }
+
+    public void setClose(Object value) {
+        setProperty("close", value);
+    }
+
+    public Object getOpen() {
+        return (Object)getProperty("open");
+    }
+
+    public void setOpen(Object value) {
+        setProperty("open", value);
+    }
+
 //<< Attributes
 
 }

@@ -96,6 +96,14 @@ public class DataSourceTag extends BaseTag /* interfaces */implements Filter, Sc
         setProperty("data", value);
     }
 
+    public Object getFilter() {
+        return (Object)getProperty("filter");
+    }
+
+    public void setFilter(Object value) {
+        setProperty("filter", value);
+    }
+
     public Object getGroup() {
         return (Object)getProperty("group");
     }

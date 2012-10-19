@@ -59,6 +59,14 @@ public class FilterItemTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("field", value);
     }
 
+    public Object getValue() {
+        return (Object)getProperty("value");
+    }
+
+    public void setValue(Object value) {
+        setProperty("value", value);
+    }
+
 //<< Attributes
 
 }

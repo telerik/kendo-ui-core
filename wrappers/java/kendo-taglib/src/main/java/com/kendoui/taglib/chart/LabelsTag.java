@@ -52,6 +52,14 @@ public class LabelsTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("culture", value);
     }
 
+    public Object getDateFormats() {
+        return (Object)getProperty("dateFormats");
+    }
+
+    public void setDateFormats(Object value) {
+        setProperty("dateFormats", value);
+    }
+
 //<< Attributes
 
 }

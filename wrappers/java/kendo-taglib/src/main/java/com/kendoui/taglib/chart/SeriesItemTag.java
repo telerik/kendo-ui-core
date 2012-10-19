@@ -332,6 +332,14 @@ public class SeriesItemTag extends BaseTag /* interfaces */implements Labels, Bo
         setProperty("width", value);
     }
 
+    public Object getAggregates() {
+        return (Object)getProperty("aggregates");
+    }
+
+    public void setAggregates(Object value) {
+        setProperty("aggregates", value);
+    }
+
     public String getDownColor() {
         return (String)getProperty("downColor");
     }

@@ -135,6 +135,14 @@ public class ValueAxisTag extends BaseTag /* interfaces */implements Labels, Lin
         setProperty("minorUnit", value);
     }
 
+    public Object getName() {
+        return (Object)getProperty("name");
+    }
+
+    public void setName(Object value) {
+        setProperty("name", value);
+    }
+
     public Object getPlotBands() {
         return (Object)getProperty("plotBands");
     }

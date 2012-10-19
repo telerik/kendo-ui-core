@@ -100,6 +100,14 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
         setProperty("xaxis", value.properties());
     }
 
+    public Object getAxisDefaults() {
+        return (Object)getProperty("axisDefaults");
+    }
+
+    public void setAxisDefaults(Object value) {
+        setProperty("axisDefaults", value);
+    }
+
     @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource.properties());
@@ -127,6 +135,14 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
 
     public void setTransitions(boolean value) {
         setProperty("transitions", value);
+    }
+
+    public Object getYAxis() {
+        return (Object)getProperty("yAxis");
+    }
+
+    public void setYAxis(Object value) {
+        setProperty("yAxis", value);
     }
 
     public String getAxisLabelClick() {

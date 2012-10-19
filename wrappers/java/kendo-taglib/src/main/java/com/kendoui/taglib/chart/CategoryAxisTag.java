@@ -127,6 +127,14 @@ public class CategoryAxisTag extends BaseTag /* interfaces */implements Labels, 
         setProperty("justified", value);
     }
 
+    public String getName() {
+        return (String)getProperty("name");
+    }
+
+    public void setName(String value) {
+        setProperty("name", value);
+    }
+
     public Object getPlotBands() {
         return (Object)getProperty("plotBands");
     }
@@ -151,12 +159,28 @@ public class CategoryAxisTag extends BaseTag /* interfaces */implements Labels, 
         setProperty("type", value);
     }
 
+    public Object getAutoBaseUnitSteps() {
+        return (Object)getProperty("autoBaseUnitSteps");
+    }
+
+    public void setAutoBaseUnitSteps(Object value) {
+        setProperty("autoBaseUnitSteps", value);
+    }
+
     public String getBaseUnit() {
         return (String)getProperty("baseUnit");
     }
 
     public void setBaseUnit(String value) {
         setProperty("baseUnit", value);
+    }
+
+    public Object getBaseUnitStep() {
+        return (Object)getProperty("baseUnitStep");
+    }
+
+    public void setBaseUnitStep(Object value) {
+        setProperty("baseUnitStep", value);
     }
 
     public java.util.Date getMax() {

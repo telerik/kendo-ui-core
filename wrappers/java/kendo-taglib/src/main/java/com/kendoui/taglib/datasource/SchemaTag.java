@@ -80,6 +80,14 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("groups", new Function(value));
     }
 
+    public Object getModel() {
+        return (Object)getProperty("model");
+    }
+
+    public void setModel(Object value) {
+        setProperty("model", value);
+    }
+
     public String getParse() {
         return ((Function)getProperty("parse")).getBody();
     }

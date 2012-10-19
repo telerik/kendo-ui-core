@@ -54,6 +54,14 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("encoded", value);
     }
 
+    public Object getMessages() {
+        return (Object)getProperty("messages");
+    }
+
+    public void setMessages(Object value) {
+        setProperty("messages", value);
+    }
+
     public Object getStylesheets() {
         return (Object)getProperty("stylesheets");
     }

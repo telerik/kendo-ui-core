@@ -49,6 +49,14 @@ public class GaugeAreaTag extends BaseTag /* interfaces */implements Border/* in
         setProperty("border", value.properties());
     }
 
+    public Object getBackground() {
+        return (Object)getProperty("background");
+    }
+
+    public void setBackground(Object value) {
+        setProperty("background", value);
+    }
+
     public float getHeight() {
         return (float)getProperty("height");
     }
