@@ -460,6 +460,8 @@
 
             that._element();
 
+            that._aria();
+
             that._columns(that.options.columns);
 
             that._dataSource();
@@ -648,6 +650,14 @@
             }
         },
 
+        _aria: function() {
+            var id = this.element.attr("id") || "di_aria";
+
+            if (id) {
+                this._cellId = id + "_active_cell";
+            }
+        },
+
         _element: function() {
             var that = this,
                 table = that.element;
@@ -664,7 +674,7 @@
                 }
             }
 
-            that.table = table.attr("cellspacing", 0);
+            that.table = table.attr("cellspacing", 0).attr("role", "grid");
 
             that._wrapper();
         },
@@ -1616,15 +1626,20 @@
         current: function(element) {
             var that = this,
                 scrollable = that.options.scrollable,
-                current = that._current;
+                current = that._current,
+                table = that.table.add(that.thead.parent());
 
             if (element !== undefined && element.length) {
                 if (!current || current[0] !== element[0]) {
-                    element.addClass(FOCUSED);
                     if (current) {
-                        current.removeClass(FOCUSED);
+                        current.removeClass(FOCUSED).removeAttr("id");
+                        table.removeAttr("aria-activedescendant");
                     }
-                    that._current = element;
+
+                    element.attr("id", that._cellId);
+                    that._current = element.addClass(FOCUSED);
+
+                    table.attr("aria-activedescendant", that._cellId);
 
                     if(element.length && scrollable) {
                         that._scrollTo(element.parent()[0], that.content[0]);
@@ -1968,7 +1983,7 @@
 
                 // workaround for IE issue where scroll is not raised if container is same width as the scrollbar
                 header.css((isRtl ? "padding-left" : "padding-right"), scrollable.virtual ? scrollbar + 1 : scrollbar);
-                table = $('<table cellspacing="0" />');
+                table = $('<table role="grid" cellspacing="0" />');
                 table.append(that.thead);
                 header.empty().append($('<div class="k-grid-header-wrap" />').append(table));
 
@@ -2443,7 +2458,7 @@
                     rowTemplate += ' ' + kendo.attr("uid") + '="#=' + settings.paramName + '.uid#"';
                 }
 
-                rowTemplate += ">";
+                rowTemplate += " role='row'>";
 
                 if (groups > 0) {
                     rowTemplate += groupCells(groups);
@@ -2458,7 +2473,7 @@
                     template = column.template;
                     type = typeof template;
 
-                    rowTemplate += "<td" + stringifyAttributes(column.attributes) + ">";
+                    rowTemplate += "<td" + stringifyAttributes(column.attributes) + " role='gridcell'>";
                     rowTemplate += that._cellTmpl(column, state);
 
                     rowTemplate += "</td>";
@@ -2768,7 +2783,7 @@
                     text = that._headerCellText(th);
 
                     if (!th.command) {
-                        html += "<th " + kendo.attr("field") + "='" + (th.field || "") + "' ";
+                        html += "<th role='columnheader' " + kendo.attr("field") + "='" + (th.field || "") + "' ";
                         if (th.title) {
                             html += kendo.attr("title") + '="' + th.title.replace(/'/g, "\'") + '" ';
                         }

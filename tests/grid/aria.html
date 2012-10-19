@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Aria</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.sortable.js"></script>
+        <script src="../../src/kendo.filtermenu.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid Aria</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var Grid = kendo.ui.Grid,
+                table,
+                DataSource = kendo.data.DataSource;
+
+            module("grid aria", {
+                setup: function() {
+                    table = document.createElement("table");
+                    table.id = "test";
+
+                    document.body.appendChild(table);
+                },
+                teardown: function() {
+                    $(table).closest(".k-grid").remove();
+                }
+            });
+
+            test("Grid renders role=grid", function() {
+                var table = $("<table />").kendoGrid({ dataSource: [] });
+
+                equal(table.attr("role"), "grid");
+            });
+
+            test("Grid renders role=row to the tr", function() {
+                var grid = new Grid(table, [ { foo: "foo", bar: "bar" } ]);
+
+                equal($(table).find("tr").attr("role"), "row");
+            });
+
+            test("Grid renders role=cell to the td", function() {
+                var grid = new Grid(table, [ { foo: "foo", bar: "bar" } ]);
+
+                equal($(table).find("td").attr("role"), "gridcell");
+            });
+
+            test("Grid renders role=columnheader to the th (scrollable: false)", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    scrollable: false
+                });
+
+                equal($(table).find("th").attr("role"), "columnheader");
+            });
+
+            test("Grid renders role=grid to the header table", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    scrollable: true
+                });
+
+                equal(grid.thead.parent().attr("role"), "grid");
+            });
+
+            test("Grid sets active element on focus", function() {
+                var grid = new Grid(table, [ { foo: "foo", bar: "bar" } ]);
+
+                grid.table.focus();
+                var item = grid.current();
+
+                equal(item.attr("id"), "test_active_cell");
+                equal(grid.table.attr("aria-activedescendant"), "test_active_cell");
+            });
+
+            test("Grid sets active element on focus", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    columns: [ "foo"]
+                });
+
+                grid.thead.parent().focus();
+                var item = grid.current();
+
+                equal(item.attr("id"), "test_active_cell");
+                equal(grid.thead.parent().attr("aria-activedescendant"), "test_active_cell");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
