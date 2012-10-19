@@ -107,6 +107,35 @@
                     ok(root.modelMap[chartElement.options.modelId]);
                 });
 
+                test("disableDiscovery unregisters model id from root", function() {
+                    var root = new dataviz.RootElement();
+
+                    root.append(chartElement);
+                    chartElement.makeDiscoverable();
+                    chartElement.getViewElements(view);
+                    chartElement.disableDiscovery();
+
+                    ok(!root.modelMap[chartElement.options.modelId]);
+                })
+
+                test("disableDiscovery recurses on children", function() {
+                    var root = new dataviz.RootElement(),
+                        child1 = new dataviz.ChartElement(),
+                        child2 = new dataviz.ChartElement();
+
+                    child2.makeDiscoverable();
+
+                    root.append(chartElement);
+                    chartElement.append(child1);
+                    child1.append(child2);
+
+                    chartElement.makeDiscoverable();
+                    chartElement.getViewElements(view);
+                    chartElement.disableDiscovery();
+
+                    ok(!root.modelMap[child2.options.modelId]);
+                });;
+
                 test("getViewElements associates children with discoverable elements", function() {
                     var child1 = new dataviz.ChartElement(),
                         child2 = new dataviz.ChartElement();

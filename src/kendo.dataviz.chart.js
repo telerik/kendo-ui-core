@@ -4579,7 +4579,9 @@
         empty: function() {
             var pane = this;
 
+            pane.content.disableDiscovery();
             pane.content.children = [];
+
             pane.axes = [];
             pane.charts = [];
         },

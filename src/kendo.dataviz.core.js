@@ -452,6 +452,22 @@
             element.discoverable = true;
         },
 
+        disableDiscovery: function() {
+            var element = this,
+                children = element.children,
+                root = element.getRoot(),
+                modelId = element.options.modelId,
+                i;
+
+            if (root && modelId) {
+                delete root.modelMap[modelId];
+            }
+
+            for (i = 0; i < children.length; i++) {
+                children[i].disableDiscovery();
+            }
+        },
+
         getRoot: function() {
             var parent = this.parent;
 
