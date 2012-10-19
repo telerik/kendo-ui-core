@@ -552,13 +552,6 @@ and is about to render it.</description>
         </attribute>
 
         <attribute>
-            <description>Sets initial filter</description>
-            <name>filter</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>Sets initial grouping</description>
             <name>group</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5195,6 +5188,15 @@ hex and rgb.</description>
 
 
     <tag>
+        <description>Sets the initial filter.</description>
+        <name>dataSource-filter</name>
+        <tag-class>com.kendoui.taglib.datasource.FilterTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>Set the object responsible for describing the raw data format.</description>
         <name>dataSource-schema</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaTag</tag-class>
@@ -5294,6 +5296,29 @@ return the total number of data items for the current response.</description>
         <attribute>
             <description>Options for remote update data operation, or the URL of the remote service.</description>
             <name>update</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Sets the initial filter.</description>
+        <name>dataSource-filterItem</name>
+        <tag-class>com.kendoui.taglib.datasource.FilterItemTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the filter operator. One of the following values "eq", "neq", "lt", "lte", "gt", "gte", "startswith", "endswith", "contains".</description>
+            <name>operator</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the field to filter by.</description>
+            <name>field</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

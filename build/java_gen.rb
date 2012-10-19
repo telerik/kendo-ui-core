@@ -321,7 +321,8 @@ class Option
     end
 
     def required?
-        p @type unless @java_type
+        p @parent.name, @name if @java_type == 'Object'
+
         @java_type != 'Object' && @java_type
     end
 
@@ -574,6 +575,7 @@ class Tag
 
                 type.value.split('|').each do |t|
                     next if name =~ /content\.template/
+
 
                     paragraph  = find_element_with_type.call(configuration, index, :p)
 

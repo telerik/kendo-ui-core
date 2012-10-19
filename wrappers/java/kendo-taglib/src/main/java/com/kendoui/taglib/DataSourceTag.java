@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class DataSourceTag extends BaseTag /* interfaces */implements Schema, Transport/* interfaces */ {
+public class DataSourceTag extends BaseTag /* interfaces */implements Filter, Schema, Transport/* interfaces */ {
 
     @Override
     public int doEndTag() throws JspException {
@@ -45,6 +45,13 @@ public class DataSourceTag extends BaseTag /* interfaces */implements Schema, Tr
 
     public static String tagName() {
         return "dataSource";
+    }
+
+    @Override
+    public void setFilter(FilterTag value) {
+
+        setProperty("filter", value.filter());
+
     }
 
     @Override
@@ -87,14 +94,6 @@ public class DataSourceTag extends BaseTag /* interfaces */implements Schema, Tr
 
     public void setData(Object value) {
         setProperty("data", value);
-    }
-
-    public Object getFilter() {
-        return (Object)getProperty("filter");
-    }
-
-    public void setFilter(Object value) {
-        setProperty("filter", value);
     }
 
     public Object getGroup() {
