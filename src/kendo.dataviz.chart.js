@@ -3515,7 +3515,7 @@
                 pointColor = data.fields.color || series.color,
                 point,
                 valueParts = this.splitValue(value),
-                hasValue = !inArray(undefined, valueParts) && !inArray(null, valueParts),
+                hasValue = validNumbers(valueParts),
                 cluster;
 
             if (hasValue) {
@@ -7316,6 +7316,23 @@
         }
     }
 
+    function validNumbers(values) {
+        var valid = true,
+            i,
+            val,
+            length = values.length;
+
+        for (i = 0; i < length; i++) {
+            val = values[i];
+            if (val === null || !isFinite(val)) {
+                valid = false;
+                break;
+            }
+        }
+
+        return valid;
+    }
+
     // Exports ================================================================
 
     dataviz.ui.plugin(Chart);
@@ -7360,6 +7377,7 @@
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
+        validNumbers: validNumbers,
         bindPoint: bindPoint,
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
