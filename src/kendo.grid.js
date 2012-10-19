@@ -1789,9 +1789,9 @@
                         current.parent().find(".k-icon:first").click();
                         handled = true;
                     } else {
-                        var focusable = current.find(":focusable");
-                        if (focusable[0] && current.hasClass("k-state-focused")) {
-                            focusable.first().focus();
+                        var focusable = current.find(":focusable:first");
+                        if (!current.hasClass("k-edit-cell") && focusable[0] && current.hasClass("k-state-focused")) {
+                            focusable.focus();
                             handled = true;
                         } else if (that.options.editable && !$(e.target).is(":button,.k-button")) {
                             that._handleEditing(current);
@@ -1799,7 +1799,7 @@
                         }
                     }
                 } else if (keys.ESC == key) {
-                    if ($.contains(current[0], document.activeElement) && !current.hasClass("k-edit-cell") && !current.parent().hasClass("k-grid-edit-row")) {
+                    if (current && $.contains(current[0], document.activeElement) && !current.hasClass("k-edit-cell") && !current.parent().hasClass("k-grid-edit-row")) {
                         that.table[0].focus();
                         handled = true;
                     } else if (that._editContainer && (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0])) {
@@ -1820,7 +1820,11 @@
                         table.focus();
                         handled = true;
                     }
-                } else if (keys.TAB == key && current) {
+                } else if (keys.TAB == key) {
+                    if (!current) {
+                        current = table.find(FIRSTNAVITEM);
+                    }
+
                     var cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
                     if (!cell.length) {
                         cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row):not(.k-detail-row):visible:first")
@@ -1849,6 +1853,7 @@
             var that = this,
                 mode = that._editMode(),
                 editContainer = that._editContainer,
+                focusable,
                 isEdited;
 
             if (mode == "incell") {
@@ -1880,7 +1885,10 @@
                     } else {
                         that.current(editContainer.children().filter(DATA_CELL).first());
                     }
-                    editContainer.find(":focusable:first").focus();
+                    focusable = editContainer.find(":focusable:first")[0];
+                    if (focusable) {
+                        focusable.focus();
+                    }
                     return;
                 }
             }

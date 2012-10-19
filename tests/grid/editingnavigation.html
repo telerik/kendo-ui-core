@@ -343,6 +343,37 @@
                 ok(grid.current());
                 equal(document.activeElement, grid.table[0]);
             });
+
+            test("pressing escape key on new item without current", function() {
+                var grid = setup();
+
+                grid.addRow();
+                grid.table.press(kendo.keys.ESC);
+
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td:first").hasClass("k-state-focused"));
+            });
+
+            test("pressing enter key on new item without current and validation error", function() {
+                var grid = setup();
+
+                grid.addRow();
+                grid.table.press(kendo.keys.ENTER).find(":input:first").val("foo").end().press(kendo.keys.ENTER);
+
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td:first").hasClass("k-state-focused"));
+            });
+
+            test("pressing tab key on new item edit next cell", function() {
+                var grid = setup({ columns: [ "name", "foo" ] });
+
+                grid.addRow();
+                grid.table.press(kendo.keys.TAB);
+
+                ok(!table.find("tr>td").eq(0).hasClass("k-edit-cell"));
+                ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
