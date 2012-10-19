@@ -4619,7 +4619,7 @@
         renderGridLines: function(view) {
             var pane = this,
                 axes = pane.axes,
-                allAxes = pane.parent.axes,
+                allAxes = axes.concat(pane.parent.axes),
                 vGridLines = [],
                 hGridLines = [],
                 gridLines,
@@ -4627,19 +4627,16 @@
                 j,
                 axis,
                 vertical,
-                altAxis,
-                altAxisPane;
+                altAxis;
 
             for (i = 0; i < axes.length; i++) {
                 axis = axes[i];
                 vertical = axis.options.vertical;
                 gridLines = vertical ? vGridLines : hGridLines;
 
-                if (gridLines.length === 0) {
-                    for (j = 0; j < allAxes.length; j++) {
+                for (j = 0; j < allAxes.length; j++) {
+                    if (gridLines.length === 0) {
                         altAxis = allAxes[j];
-                        altAxisPane = altAxis.pane.options.name;
-
                         if (vertical !== altAxis.options.vertical) {
                             append(gridLines, axis.renderGridLines(view, altAxis, axis));
                         }
