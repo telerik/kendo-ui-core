@@ -92,8 +92,8 @@
                     ok(child2.getRoot() === chartElement);
                 });
 
-                test("makeDiscoverable assigns unique model id", function() {
-                    chartElement.makeDiscoverable();
+                test("enableDiscovery assigns unique model id", function() {
+                    chartElement.enableDiscovery();
                     ok(chartElement.options.modelId.length > 0);
                 });
 
@@ -101,7 +101,7 @@
                     var root = new dataviz.RootElement();
 
                     root.append(chartElement);
-                    chartElement.makeDiscoverable();
+                    chartElement.enableDiscovery();
                     chartElement.getViewElements(view);
 
                     ok(root.modelMap[chartElement.options.modelId]);
@@ -111,7 +111,7 @@
                     var root = new dataviz.RootElement();
 
                     root.append(chartElement);
-                    chartElement.makeDiscoverable();
+                    chartElement.enableDiscovery();
                     chartElement.getViewElements(view);
                     chartElement.disableDiscovery();
 
@@ -123,13 +123,13 @@
                         child1 = new dataviz.ChartElement(),
                         child2 = new dataviz.ChartElement();
 
-                    child2.makeDiscoverable();
+                    child2.enableDiscovery();
 
                     root.append(chartElement);
                     chartElement.append(child1);
                     child1.append(child2);
 
-                    chartElement.makeDiscoverable();
+                    chartElement.enableDiscovery();
                     chartElement.getViewElements(view);
                     chartElement.disableDiscovery();
 
@@ -143,7 +143,7 @@
                     child1.append(child2);
                     chartElement.append(child1);
 
-                    chartElement.makeDiscoverable();
+                    chartElement.enableDiscovery();
                     chartElement.getViewElements(view);
 
                     equals(chartElement.options.modelId, child1.options.modelId);
@@ -157,7 +157,7 @@
                     chartElement.append(child);
                     root.append(chartElement);
 
-                    chartElement.makeDiscoverable();
+                    chartElement.enableDiscovery();
                     chartElement.getViewElements(view);
                     child.getViewElements(view);
 
@@ -167,9 +167,9 @@
                 test("getViewElements does not associate already discoverable children", function() {
                     var child1 = new dataviz.ChartElement();
 
-                    child1.makeDiscoverable();
+                    child1.enableDiscovery();
 
-                    chartElement.makeDiscoverable();
+                    chartElement.enableDiscovery();
                     chartElement.append(child1);
 
                     chartElement.getViewElements(view);

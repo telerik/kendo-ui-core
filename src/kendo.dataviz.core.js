@@ -444,7 +444,7 @@
             return viewElements;
         },
 
-        makeDiscoverable: function() {
+        enableDiscovery: function() {
             var element = this,
                 options = element.options;
 
@@ -851,7 +851,7 @@
                 deepExtend({ id: uniqueId() }, options)
             );
 
-            label.makeDiscoverable();
+            label.enableDiscovery();
         },
 
         formatValue: function(value, options) {

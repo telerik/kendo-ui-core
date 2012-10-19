@@ -1667,7 +1667,7 @@
 
             bar.value = value;
             bar.options.id = uniqueId();
-            bar.makeDiscoverable();
+            bar.enableDiscovery();
         },
 
         options: {
@@ -2350,7 +2350,7 @@
 
             point.value = value;
             point.options.id = uniqueId();
-            point.makeDiscoverable();
+            point.enableDiscovery();
         },
 
         options: {
@@ -2589,7 +2589,7 @@
             segment.seriesIx = seriesIx;
             segment.options.id = uniqueId();
 
-            segment.makeDiscoverable();
+            segment.enableDiscovery();
         },
 
         options: {},
@@ -2738,7 +2738,7 @@
 
             chart._stackAxisRange = { min: MAX_VALUE, max: MIN_VALUE };
             chart._categoryTotals = [];
-            chart.makeDiscoverable();
+            chart.enableDiscovery();
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
@@ -3319,7 +3319,7 @@
             ChartElement.fn.init.call(point, options);
             point.value = value;
             point.options.id = uniqueId();
-            point.makeDiscoverable();
+            point.enableDiscovery();
         },
 
         options: {
@@ -3672,7 +3672,7 @@
 
             segment.value = value;
             segment.sector = sector;
-            segment.makeDiscoverable();
+            segment.enableDiscovery();
 
             ChartElement.fn.init.call(segment, options);
         },
@@ -4675,7 +4675,7 @@
             plotArea.axes = [];
 
             plotArea.options.id = uniqueId();
-            plotArea.makeDiscoverable();
+            plotArea.enableDiscovery();
 
             plotArea.createPanes();
             plotArea.render();
