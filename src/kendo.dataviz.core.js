@@ -53,8 +53,7 @@
         WHITE = "#fff",
         X = "x",
         Y = "y",
-        ZERO_THRESHOLD = 0.2,
-        ZERO_THRESHOLD_TIGHT = 0.8;
+        ZERO_THRESHOLD = 0.2;
 
     function getSpacing(value) {
         var spacing = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -1431,8 +1430,7 @@
 
         autoAxisMax: function(min, max, narrow) {
             var axisMax,
-                diff,
-                threshold;
+                diff;
 
             if (!min && !max) {
                 return 1;
@@ -1442,12 +1440,11 @@
                 max = min == max ? 0 : max;
 
                 diff = math.abs((max - min) / max);
-                threshold = narrow ? ZERO_THRESHOLD_TIGHT : ZERO_THRESHOLD;
-                if(diff > threshold) {
+                if(!narrow && diff > ZERO_THRESHOLD) {
                     return 0;
                 }
 
-                axisMax = max - ((min - max) / 2);
+                axisMax = math.min(0, max - ((min - max) / 2));
             } else {
                 min = min == max ? 0 : min;
                 axisMax = max;
@@ -1458,8 +1455,7 @@
 
         autoAxisMin: function(min, max, narrow) {
             var axisMin,
-                diff,
-                threshold;
+                diff;
 
             if (!min && !max) {
                 return 0;
@@ -1469,12 +1465,11 @@
                 min = min == max ? 0 : min;
 
                 diff = (max - min) / max;
-                threshold = narrow ? ZERO_THRESHOLD_TIGHT : ZERO_THRESHOLD;
-                if(diff > threshold) {
+                if(!narrow && diff > ZERO_THRESHOLD) {
                     return 0;
                 }
 
-                axisMin = min - ((max - min) / 2);
+                axisMin = math.max(0, min - ((max - min) / 2));
             } else {
                 max = min == max ? 0 : max;
                 axisMin = min;
