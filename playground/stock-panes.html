@@ -17,18 +17,16 @@
         <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
     </head>
     <body>
+        <h3>The Boeing Company (NYSE:BA)</h3>
         <div id="chart" style="width: 900px; height: 400px;"></div>
-        <button id="benchmarkFull">Full redraw</button>
-        <button id="benchmarkPartial">Partial redraw</button>
-        <button id="stop">Stop</button>
-        <span id="fps">-- fps</span>
         <script>
-            var updateCount = 0;
-            var startDate = new Date("2000/01/03");
-            var endDate = new Date("2012/11/01");
-
+            // TODO: VML
+            // TODO: LEAKS
+            // TODO: Refresh multiple panes
+            // TODO: FF rendering & perf
+            // TODO: narrowRange goes < 0 (sometimes)
+            // TODO: Introduce single (top-level) dateField
             $(function() {
-
                 $("#chart").kendoStockChart({
                     dataSource: {
                         transport: {
@@ -39,213 +37,53 @@
                             dir: "asc"
                         }
                     },
+                    dateField: "Date",
                     series: [{
-                        type: "ohlc",
-                        field: "Volume",
+                        type: "candlestick",
                         openField: "Open",
                         highField: "High",
                         lowField: "Low",
-                        closeField: "Close",
-                        // TODO: Idea
-                        overlays: [{
-                            type: "macd"
-                        }]
-                    }/*, {
+                        closeField: "Close"
+                    }, {
                         type: "column",
                         field: "Volume",
-                        axis: "volumeAxis"
-                    }*/],
-                    panes: [
-                        {
-                            title: "NYSE:BA"
-                            // Note: Can't be omitted :(
-                        }/*,
-                        {
-                            title: "Volume",
-                            name: "volume",
-                            height: 140
-                        }*/
-                    ],
-                    /*
-                    valueAxes: [{
-                            // TODO: make optional... somehow
-                        }, {
-                        name: "volumeAxis",
-                        pane: "volume",
-                        labels: {
-                            template: "#= kendo.format('{0:N0}', value / 1000) #k"
-                        }
+
+                        //TODO: Add pane: "volume" shortcut
+                        axis: "volume",
+                        categoryAxis: "volumeDate"
                     }],
-                       */
-                    navigator: {
-                        type: "line",
-                        field: "Volume",
-                        // slaveAxis: 
-                    },
-                    categoryAxis: [{
-                        // TODO: Introduce single (top-level) dateField?
-                        // or at series?
-                        field: "Date"
-                    }]
-                    /*
-                    }, {
                     panes: [{
-                        name: "top"
+                        name: "stock"
                     }, {
-                        name: "bottom",
+                        name: "volume",
                         height: 80
                     }],
-                    valueAxes: [{
-                        name: "topValueAxis",
-                        line: {
-                            visible: false
-                        }
-                    }, {
-                        name: "bottomValueAxis",
-                        pane: "bottom",
-                        majorGridLines: {
-                            visible: false
-                        },
-                        visible: false
-                    }],
-                    categoryAxes: [{
-                        type: "date",
-                        field: "Date",
-                        majorGridLines: {
-                            //TODO: Implement
-                            //step: 7
-                        },
-                        baseUnit: "fit",
-                        maxDateGroups: 30,
-                        justified: true,
-                        // --
-                        name: "one",
-                        // TODO: Investigate
-                        min: startDate,
-                        max: new Date("2000/02/01")
-                    }, {
-                        type: "date",
-                        field: "Date",
-                        baseUnit: "fit",
-                        maxDateGroups: 200,
-                        //baseUnitStep: 18,
-                        baseUnitStep: "auto",
-                        roundToBaseUnit: false,
-                        justified: true,
-                        name: "bottomCategoryAxis",
-                        pane: "bottom",
-                        labels: { visible: false },
-                        majorTicks: { visible: false }
-                    }, {
-                        type: "date",
-                        field: "Date",
-                        baseUnit: "years",
-                        maxDateGroups: 20,
-                        baseUnitStep: "auto",
-                        roundToBaseUnit: false,
-                        justified: true,
-                        pane: "bottom"
-                    }, {
-                        type: "date",
-                        field: "Date",
-                        baseUnit: "months",
-                        baseUnitStep: 1,
-                        roundToBaseUnit: false,
-                        justified: true,
-                        pane: "bottom",
-                        labels: { visible: false, mirror: true }
-                    }],
-                    series: [{
-                        type: "ohlc",
-                        field: "Volume",
-                        openField: "Open",
-                        highField: "High",
-                        lowField: "Low",
-                        closeField: "Close",
-                        // TODO: Axis range is not updated when axis name is not specified
-                        axis: "topValueAxis",
-                        width: 1,
-                        tooltip: {
-                            visible: true
-                        }
-                    }, {
-                        type: "area",
-                        axis: "bottomValueAxis",
-                        categoryAxis: "bottomCategoryAxis",
-                        field: "Volume",
-                        markers: {
-                            visible: false
-                        },
-                        tooltip: {
-                            visible: true,
-                            template: "#= kendo.toString(category, 'd') #"
-                        },
-                        width: 1
-                    }],
-                    legend: {
-                        visible: false
+                    navigator: {
+                        type: "line",
+                        field: "Close"
                     },
-                    transitions: false
-                   */
-                });
 
-                var interval;
-                var start;
-                var frames;
+                    // TODO: Infer
+                    categoryAxes: [{
+                        field: "Date",
+                        // TODO: Read from navigator options
+                        min: "2002/02/05",
+                        max: "2002/06/12"
+                    }, {
+                        field: "Date",
+                        name: "volumeDate",
+                        pane: "volume"
+                    }],
 
-                $("#benchmarkFull").click(function() {
-                    var chart = $("#chart").data("kendoStockChart");
-                    var axis = chart.options.categoryAxis[0];
-                    if (!interval) {
-                        start = new Date();
-                        frames = 0;
-                        interval = setInterval(function() {
-                            if (axis.max > endDate) {
-                                axis.min = startDate;
-                                axis.max = kendo.dataviz.addDuration(startDate, 1, "months");
-                            }
-
-                            axis.min = kendo.dataviz.addDuration(axis.min, 1, "days");
-                            axis.max = kendo.dataviz.addDuration(axis.max, 1, "days");
-                            chart.refresh();
-
-                            var duration = (new Date() - start) / 1000;
-                            frames++;
-
-                            $("#fps").text(Math.round(frames / duration) + " fps");
-                        }, 0);
-                    }
-                });
-
-                $("#benchmarkPartial").click(function() {
-                    var chart = $("#chart").data("kendoStockChart");
-                    var model = chart._model;
-                    var plotArea = model._plotArea;
-                    var axis = chart.options.categoryAxis[0];
-                    if (!interval) {
-                        start = new Date();
-                        frames = 0;
-                        interval = setInterval(function() {
-                            if (axis.max > endDate) {
-                                axis.min = startDate;
-                                axis.max = kendo.dataviz.addDuration(startDate, 1, "months");
-                            }
-
-                            axis.min = kendo.dataviz.addDuration(axis.min || startDate, 1, "days");
-                            axis.max = kendo.dataviz.addDuration(axis.max || new Date("2000/02/03"), 1, "days");
-
-                            chart.redraw("top");
-
-                            var duration = (new Date() - start) / 1000;
-                            frames++;
-
-                            $("#fps").text(Math.round(frames / duration) + " fps");
-                        }, 0);
-                    }
-                });
-
-                $("#stop").click(function() {
-                    clearInterval(interval);
+                    valueAxes: [{
+                        pane: "stock"
+                    }, {
+                        name: "volume",
+                        pane: "volume",
+                        labels: {
+                            template: "#= Math.round(value / 1000000) #"
+                        }
+                    }]
                 });
             });
         </script>
