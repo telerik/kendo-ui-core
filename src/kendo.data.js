@@ -308,7 +308,7 @@
 
         set: function(field, value) {
             var that = this,
-                current = that[field],
+                current = that.get(field),
                 parent = function() { return that; };
 
             if (current !== value) {

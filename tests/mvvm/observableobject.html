@@ -67,6 +67,17 @@
                 viewModel.set("foo", "baz");
             });
 
+            test("set triggers only once the change event if value is the same", 2, function() {
+                var viewModel = kendo.observable({ foo: { foo: "bar" }});
+
+                viewModel.bind("change", function() {
+                    ok(true, "change is raised");
+                });
+
+                viewModel.set("foo.foo", "baz");
+                viewModel.set("foo.foo", "baz");
+            });
+
             test("change event arguments provide the name of the field", function() {
                 expect(1);
 
