@@ -1235,8 +1235,9 @@
                 baseUnit = autoUnit ? BASE_UNITS[0] : options.baseUnit,
                 min = toTime(options.min),
                 max = toTime(options.max),
-                minCategory = toTime(sparseArrayMin(categories)),
-                maxCategory = toTime(sparseArrayMax(categories));
+                categoryLimits = sparseArrayLimits(categories),
+                minCategory = toTime(categoryLimits.min),
+                maxCategory = toTime(categoryLimits.max);
 
             if (options.roundToBaseUnit) {
                 return { min: addDuration(min || minCategory, 0, baseUnit, options.weekStartDay),
@@ -2818,14 +2819,16 @@
             var chart = this,
                 isStacked = chart.options.isStacked,
                 stackAxisRange = chart._stackAxisRange,
-                totals = chart._categoryTotals;
+                totals = chart._categoryTotals,
+                totalsLimits;
 
             if (defined(value)) {
                 if (isStacked) {
                     incrementSlot(totals, categoryIx, value);
 
-                    stackAxisRange.min = math.min(stackAxisRange.min, sparseArrayMin(totals));
-                    stackAxisRange.max = math.max(stackAxisRange.max, sparseArrayMax(totals));
+                    totalsLimits = sparseArrayLimits(totals);
+                    stackAxisRange.min = math.min(stackAxisRange.min, totalsLimits.min);
+                    stackAxisRange.max = math.max(stackAxisRange.max, totalsLimits.max);
                 } else {
                     CategoricalChart.fn.updateRange.apply(chart, arguments);
                 }
@@ -6690,7 +6693,7 @@
 
         for (i = 0; i < length; i++) {
             n = arr[i];
-            if (defined(n) && !isNaN(n)) {
+            if (n !== null && isFinite(n)) {
                 min = math.min(min, n);
                 max = math.max(max, n);
             }
