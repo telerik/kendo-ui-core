@@ -394,6 +394,31 @@
                 strictEqual(colIndex, 0);
             });
 
+            test("on open menu element is focused", function() {
+                var columnMenu = setup();
+
+                columnMenu.wrapper.data("kendoPopup").toggle();
+                columnMenu.link.click();
+
+                equal(document.activeElement, columnMenu.menu.element[0]);
+            });
+
+            test("closeCallback is called on popup close", function() {
+                var wasCalled = false,
+                    columnMenu = setup({
+                        closeCallback: function() {
+                            wasCalled = true;
+                        }
+                    }),
+                    popup = columnMenu.wrapper.data("kendoPopup");
+
+                popup.toggle();
+                columnMenu.link.click();
+                popup.close();
+
+                ok(wasCalled);
+            });
+
         </script>
     </body>
 </html>

@@ -1766,7 +1766,7 @@
                 } else if (canHandle && key == keys.RIGHT) {
                     if (current) {
                         if (current.next()[0]) {
-                            current = current.next();
+                            current = current.nextAll(DATA_CELL + ":first");
                         }
                     } else {
                         current = table.find(FIRSTNAVITEM);
@@ -2254,6 +2254,9 @@
                 menuOptions,
                 sortable,
                 filterable,
+                closeCallback = function() {
+                    that.thead.parent().focus();
+                },
                 cell;
 
             if (columnMenu) {
@@ -2281,7 +2284,8 @@
                                 sortable: sortable,
                                 filterable: filterable,
                                 messages: columnMenu.messages,
-                                owner: that
+                                owner: that,
+                                closeCallback: closeCallback
                             };
 
                             cell.kendoColumnMenu(menuOptions);

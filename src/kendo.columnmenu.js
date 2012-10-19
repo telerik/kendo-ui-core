@@ -56,7 +56,9 @@
 
             that.popup = that.wrapper[POPUP]({
                 anchor: link,
-                open: proxy(that._open, that)
+                open: proxy(that._open, that),
+                activate: proxy(that._activate, that),
+                close: that.options.closeCallback
             }).data(POPUP);
 
             that._menu();
@@ -129,6 +131,10 @@
                     that.close();
                 }
             });
+        },
+
+        _activate: function() {
+            this.menu.element.focus();
         },
 
         _ownerColumns: function() {
@@ -225,19 +231,27 @@
 
                 that.owner.bind(["columnHide", "columnShow"], that._updateColumnsMenuHandler);
 
-                that.wrapper.on(CHANGE + NS, "[type=checkbox]", function(e) {
-                    var input = $(this),
+                that.menu.bind("select", function(e) {
+                    var item = $(e.item),
+                        input,
                         index,
                         column,
                         columns = that.owner.columns,
-                        field = input.attr(kendo.attr("field"));
+                        field;
 
-                     column = grep(columns, function(column) {
+                    if (!item.parent().closest("li.k-columns-item")[0]) {
+                        return;
+                    }
+
+                    input = item.find(":checkbox");
+                    field = input.attr(kendo.attr("field"));
+
+                    column = grep(columns, function(column) {
                         return column.field == field || column.title == field;
                     })[0];
                     index = inArray(column, columns);
 
-                    if (input.is(":checked")) {
+                    if (column.hidden === true) {
                         that.owner.showColumn(index);
                     } else {
                         that.owner.hideColumn(index);
@@ -310,8 +324,8 @@
                     '#}#'+
                     '#if(showColumns){#'+
                         '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
-                        '#for (var idx=0,length=columns.length; idx < length;idx++) {#'+
-                            '<li><label><input type="checkbox" data-#=ns#field="#=columns[idx].field#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</label></li>'+
+                        '#for (var col in columns) {#'+
+                            '<li><input type="checkbox" data-#=ns#field="#=columns[col].field#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</li>'+
                         '#}#'+
                         '</ul></li>'+
                         '#if(filterable){#'+
