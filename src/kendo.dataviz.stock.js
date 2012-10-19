@@ -119,9 +119,11 @@
                     type: "date",
                     baseUnit: "fit",
                     // TODO: Place in last pane automatically?
-                    // TODO: Fix missing gridlines
                     maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH),
                     justified: true
+                },
+                valueAxis: {
+                    narrowRange: true
                 }
             };
 
@@ -166,7 +168,7 @@
 
             if (categoriesLength > 0) {
                 var selection = chart._selection = new Selection(chart.element, navigatorAxis, {
-                    // TODO: Accept dates for start and end
+                    // TODO: Start, end, min, max should be expressed in axis values
                     start: start,
                     end: end,
                     min: 0,
