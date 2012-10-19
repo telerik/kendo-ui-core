@@ -16,7 +16,7 @@
             var isRaised;
 
              function getRootItem(index) {
-                 return $('#Menu3').find('> .k-item').eq(index)
+                 return $('#Menu3').find('> .k-item > .k-link')[index];
              }
 
              function getMenu() {
@@ -94,9 +94,9 @@
                 <li class="k-item k-state-default"><a href="http://www.telerik.com/products/aspnet-ajax.aspx"
                                                       class="k-link">... and 28 more!</a></li>
             </ul>
-        </li><li class="k-item k-state-default"><a href="#Menu-4" class="k-link"><img
+        </li><li class="k-item k-state-default"><img
                 src="../../playground/Icons/Suites/orm.png" class="k-image" alt="image">OpenAccess ORM<span
-                class="k-icon k-i-arrow-s"></span></a>
+                class="k-icon k-i-arrow-s"></span>
             <ul class="k-group">
                 <li class="k-item">
                     <div id="Menu-4" class="k-content">
@@ -167,7 +167,7 @@
         });
 
         test('click method on item with URL shouldn\'t call preventDefault method', function() {
-            var item = getRootItem(8);
+            var item = getRootItem(7);
             var isCalled = false;
 
             var e = { target: item, preventDefault: function () { isCalled = true; }, stopPropagation: function () {} };

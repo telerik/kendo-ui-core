@@ -6,7 +6,6 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.menu.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
@@ -17,7 +16,7 @@
             var isRaised, isOpenRaised, isCloseRaised, isSelectRaised, selected;
 
              function getRootItem(index) {
-                 return $('#Menu1').find('> .k-item').eq(index)
+                 return $('#Menu1').find('> .k-item > .k-link').eq(index)
              }
 
              function getMenu() {
@@ -165,20 +164,20 @@
         });
 
         test('click method should set handled flag and select event is only fired once', function() {
-            var item = getRootItem(3);
+            var link = getRootItem(7);
             var isCalled = false;
 
-            var e = { stopPropagation: function () {}, preventDefault: function () {} };
+            var e = { target: link[0], stopPropagation: function () {}, preventDefault: function () {} };
 
             selected = 0;
-            menu._click(e, item);
+            menu._click(e);
 
             ok(e.handled);
             ok(selected == 1);
         });
 
         asyncTest('hovering root item opens it and raises open event', function() {
-            var item = getRootItem(1);
+            var item = getRootItem(1).parent();
 
             menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
@@ -189,7 +188,7 @@
         });
 
         asyncTest('leaving root item closes it and raises close event', function() {
-            var item = getRootItem(1);
+            var item = getRootItem(1).parent();
 
             menu._mouseleave({ currentTarget: item[0] });
 
@@ -200,59 +199,51 @@
         });
 
         test('clicking should raise select event', function() {
-            var item = getRootItem(2);
+            var link = getRootItem(2);
 
             isSelectRaised = false;
 
-            item.find('> .k-link').trigger(CLICK);
+            link.trigger(CLICK);
 
             ok(isSelectRaised);
         });
 
-        asyncTest('clicking on sub item should close the menu', function() {
-            var item = getRootItem(1);
+        test('clicking on sub item should close the menu', function() {
+            var link = getRootItem(1);
 
-            menu._mouseenter({currentTarget: item[0]});
+            menu._mouseenter({currentTarget: link[0]});
 
             var e = { stopPropagation: function () {}, preventDefault: function () {} };
 
-            setTimeout(function () {
-                item.find('.k-item > .k-link').trigger(CLICK);
+            link.trigger(CLICK);
 
-                setTimeout(function () {
-                    ok(item.find('.k-item:visible > .k-link').length == 0);
-                    start();
-                }, 1)
-            }, 1);
+            ok(link.parent().is(":visible"));
         });
 
         asyncTest('open should open item even if disabled', function() {
-            var item = getRootItem(6);
+            var item = getRootItem(6).parent();
 
             menu.disable(item);
             menu.open(item);
 
             setTimeout(function () {
-                equal(item.find('.k-group').eq(0).css("display"), "block");
+                ok(item.find('.k-group').is(":visible"));
                 start();
             }, 1);
         });
 
-        asyncTest('clicking should not open item if disabled', function() {
-            var item = getRootItem(3);
+        test('clicking should not open item if disabled', function() {
+            var item = getRootItem(4).parent();
 
             menu.disable(item);
 
-            item.find('> .k-link').trigger(CLICK);
+            item.children(".k-link").trigger(CLICK);
 
-            setTimeout(function () {
-                equal(item.find('.k-group').eq(0).css("display"), "none");
-                start();
-            }, 1);
+            ok(!item.find('.k-group').is(":visible"));
         });
 
         test('disable method should disable enabled item', function() {
-            var item = getRootItem(2);
+            var item = getRootItem(2).parent();
 
             menu.disable(item);
 
@@ -260,7 +251,7 @@
         });
 
         test('enable method should enable disabled item', function() {
-            var item = getRootItem(3);
+            var item = getRootItem(3).parent();
 
             menu.enable(item);
 
@@ -268,7 +259,7 @@
         });
 
         asyncTest('configure with popupCollision overrides the default', function() {
-            var item = getRootItem(3);
+            var item = getRootItem(3).parent();
 
             menu.open(item);
 
@@ -277,12 +268,6 @@
                 start();
             }, 1);
         });
-
-        test('client object is available in on load', function() {
-            ok(null !== onLoadMenu);
-            ok(undefined !== onLoadMenu);
-        });
-
 
 </script>
 

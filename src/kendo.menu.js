@@ -1,9 +1,9 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        touch = kendo.support.touch || kendo.support.pointers,
+        touch = (kendo.support.touch && kendo.support.mobileOS) || kendo.support.pointers,
         MOUSEDOWN = kendo.support.mousedown,
-        MOUSEUP = kendo.support.mouseup,
+        CLICK = kendo.support.click,
         extend = $.extend,
         proxy = $.proxy,
         each = $.each,
@@ -18,7 +18,6 @@
         LINK = "k-link",
         LAST = "k-last",
         CLOSE = "close",
-        CLICK = touch  ? MOUSEUP : "click",
         TIMER = "timer",
         FIRST = "k-first",
         IMAGE = "k-image",
@@ -31,6 +30,7 @@
         HOVERSTATE = "k-state-hover",
         DISABLEDSTATE = "k-state-disabled",
         groupSelector = ".k-group",
+        ACTIVESTATE = "k-state-active",
         allItemsSelector = ":not(.k-list) > .k-item",
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item:not(.k-state-disabled)",
@@ -187,7 +187,7 @@
             .children("a")
             .filter(":focus")
             .parent()
-            .addClass("k-state-active");
+            .addClass(ACTIVESTATE);
 
         if (!item.children("." + LINK).length) {
             item
@@ -248,20 +248,25 @@
 
             that._tabindex();
 
-            element.on(CLICK + NS, disabledSelector, false)
+            element.on("touchstart", function (e) {
+                        that.element[0].blur();
+                        that.element[0].focus();
+                        setTimeout(function () {
+                            that._moveHover([], $(kendo.eventTarget(e)).closest(allItemsSelector));
+                        }, 200); // Focus happens after click in WebKit.
+                    })
+                    .on("MSPointerDown", function (e) {
+                        that._oldHoverItem = $(e.target).closest(allItemsSelector);
+                    })
+                   .on(CLICK + NS, disabledSelector, false)
                    .on(CLICK + NS, itemSelector, proxy(that._click , that))
                    .on("keydown" + NS, proxy(that._keydown, that))
                    .on("focus" + NS, proxy(that._focus, that))
-                   .on("blur" + NS, proxy(that._removeHoverItem, that));
-
-            if (!touch) {
-                element.on(MOUSEENTER + NS, itemSelector, proxy(that._mouseenter, that))
-                       .on(MOUSELEAVE + NS, itemSelector, proxy(that._mouseleave, that))
-                       .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, linkSelector, proxy(that._toggleHover, that));
-            } else {
-                options.openOnClick = true;
-                element.on(MOUSEDOWN + NS + " " + MOUSEUP + NS, linkSelector, proxy(that._toggleHover, that));
-            }
+                   .on("blur" + NS, proxy(that._removeHoverItem, that))
+                   .on(MOUSEENTER + NS, itemSelector, proxy(that._mouseenter, that))
+                   .on(MOUSELEAVE + NS, itemSelector, proxy(that._mouseleave, that))
+                   .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS + " " +
+                       MOUSEDOWN + NS + " " + CLICK + NS, linkSelector, proxy(that._toggleHover, that));
 
             if (options.openOnClick) {
                 that.clicked = false;
@@ -527,7 +532,7 @@
                                 close: function (e) {
                                     var li = e.sender.wrapper.parent();
 
-                                    if (that.trigger(CLOSE, { item: li[0] }) === false) {
+                                    if (!that.trigger(CLOSE, { item: li[0] })) {
                                         li.css(ZINDEX, li.data(ZINDEX));
                                         li.removeData(ZINDEX);
                                     } else {
@@ -587,22 +592,23 @@
         },
 
         _toggleHover: function(e) {
-            var target = $(kendo.eventTarget(e)).closest(allItemsSelector);
+            var target = $(kendo.eventTarget(e) || e.target).closest(allItemsSelector),
+                isEnter = e.type == MOUSEENTER || MOUSEDOWN.indexOf(e.type) !== -1;
 
             if (!target.parents("li." + DISABLEDSTATE).length) {
-                target.toggleClass(HOVERSTATE, e.type == MOUSEENTER || e.type == MOUSEDOWN);
+                target.toggleClass(HOVERSTATE, isEnter);
             }
 
             this._removeHoverItem();
         },
 
-        _removeHoverItem: function(e) {
+        _removeHoverItem: function() {
             var oldHoverItem = this._oldHoverItem;
 
-            if (oldHoverItem) {
+            if (oldHoverItem && oldHoverItem.hasClass(HOVERSTATE)) {
                 oldHoverItem.removeClass(HOVERSTATE);
+                this._oldHoverItem = null;
             }
-            this._oldHoverItem = null;
         },
 
         _updateClasses: function() {
@@ -635,7 +641,7 @@
                 }
             }
 
-            if (that.options.openOnClick && that.clicked) {
+            if (that.options.openOnClick && that.clicked || touch) {
                 element.siblings().each(proxy(function (_, sibling) {
                     that.close(sibling);
                 }, that));
@@ -652,7 +658,7 @@
                 return;
             }
 
-            if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
+            if (!that.options.openOnClick && !touch && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                 that.close(element);
             }
         },
@@ -675,13 +681,7 @@
                 return;
             }
 
-            if (touch) {
-                element.siblings().each(proxy(function (_, sibling) {
-                    that.close(sibling);
-                }, that));
-            }
-
-            if (!e.handled && that.trigger(SELECT, { item: element[0] })) { // We shouldn't stop propagation.
+            if (!e.handled && !isLink && !that.trigger(SELECT, { item: element[0] })) { // We shouldn't stop propagation.
                 e.preventDefault();
             }
 
@@ -691,12 +691,13 @@
             childGroupVisible = childGroup.is(":visible");
 
             if (options.closeOnClick && !isLink && (!childGroup.length || (options.openOnClick && childGroupVisible))) {
+                element.removeClass(HOVERSTATE).css("height"); // Force refresh for Chrome
+                that._oldHoverItem = that._findRootParent(element);
                 that.close(link.parentsUntil(that.element, allItemsSelector));
                 that.clicked = false;
-                return;
-            }
-
-            if ((!element.parent().hasClass(MENU) || !options.openOnClick) && !touch) {
+                if ("touchend MSPointerUp".indexOf(e.type) != -1) {
+                    e.preventDefault();
+                }
                 return;
             }
 
@@ -721,10 +722,10 @@
             var that = this,
                 target = e.target,
                 hoverItem = that._hoverItem();
-            
+
             if (target == that.wrapper[0] && hoverItem.length) {
                 that._moveHover([], hoverItem);
-            } else if (target == that.wrapper[0]) {
+            } else if (target == that.wrapper[0] && !that._oldHoverItem) {
                 that._moveHover([], that.wrapper.children().first());
             }
         },
@@ -762,7 +763,8 @@
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 target = hoverItem.children(".k-link");
                 if (target.length > 0) {
-                    target[0].click();
+                    that._click({ target: target[0], preventDefault: function () {} });
+                    that._moveHover(hoverItem, that._findRootParent(hoverItem));
                 }
             } else if (key == keys.TAB) {
                 target = that._findRootParent(hoverItem);
