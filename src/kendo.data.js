@@ -308,7 +308,7 @@
 
         set: function(field, value) {
             var that = this,
-                current = that.get(field),
+                current = kendo.getter(field, true)(that),
                 parent = function() { return that; };
 
             if (current !== value) {
