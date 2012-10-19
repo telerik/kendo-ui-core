@@ -115,15 +115,17 @@
                 width = chart.element.width() || dataviz.DEFAULT_WIDTH;
 
             var stockDefaults = {
-                categoryAxis: {
-                    type: "date",
-                    baseUnit: "fit",
-                    // TODO: Place in last pane automatically?
-                    maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH),
-                    justified: true
-                },
-                valueAxis: {
-                    narrowRange: true
+                axisDefaults: {
+                    categoryAxis: {
+                        type: "date",
+                        baseUnit: "fit",
+                        // TODO: Place in last pane automatically?
+                        maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH),
+                        justified: true
+                    },
+                    valueAxis: {
+                        narrowRange: true
+                    }
                 }
             };
 
