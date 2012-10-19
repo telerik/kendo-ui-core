@@ -53,7 +53,8 @@
         WHITE = "#fff",
         X = "x",
         Y = "y",
-        ZERO_THRESHOLD = 0.2;
+        ZERO_THRESHOLD = 0.2,
+        ZERO_THRESHOLD_TIGHT = 0.8;
 
     function getSpacing(value) {
         var spacing = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -1311,8 +1312,9 @@
 
         initDefaults: function(seriesMin, seriesMax, options) {
             var axis = this,
-                autoMin = axis.autoAxisMin(seriesMin, seriesMax),
-                autoMax = axis.autoAxisMax(seriesMin, seriesMax),
+                narrowRange = options.narrowRange,
+                autoMin = axis.autoAxisMin(seriesMin, seriesMax, narrowRange),
+                autoMax = axis.autoAxisMax(seriesMin, seriesMax, narrowRange),
                 majorUnit = autoMajorUnit(autoMin, autoMax),
                 autoOptions = {
                     majorUnit: majorUnit
@@ -1363,17 +1365,21 @@
             return { min: options.min, max: options.max };
         },
 
-        autoAxisMax: function(min, max) {
+        autoAxisMax: function(min, max, narrow) {
+            var axisMax,
+                diff,
+                threshold;
+
             if (!min && !max) {
                 return 1;
             }
 
-            var axisMax;
             if (min <= 0 && max <= 0) {
                 max = min == max ? 0 : max;
 
-                var diff = math.abs((max - min) / max);
-                if(diff > ZERO_THRESHOLD) {
+                diff = math.abs((max - min) / max);
+                threshold = narrow ? ZERO_THRESHOLD_TIGHT : ZERO_THRESHOLD;
+                if(diff > threshold) {
                     return 0;
                 }
 
@@ -1386,17 +1392,21 @@
             return axisMax;
         },
 
-        autoAxisMin: function(min, max) {
+        autoAxisMin: function(min, max, narrow) {
+            var axisMin,
+                diff,
+                threshold;
+
             if (!min && !max) {
                 return 0;
             }
 
-            var axisMin;
             if (min >= 0 && max >= 0) {
                 min = min == max ? 0 : min;
 
-                var diff = (max - min) / max;
-                if(diff > ZERO_THRESHOLD) {
+                diff = (max - min) / max;
+                threshold = narrow ? ZERO_THRESHOLD_TIGHT : ZERO_THRESHOLD;
+                if(diff > threshold) {
                     return 0;
                 }
 

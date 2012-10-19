@@ -278,6 +278,18 @@
                     equal(numericAxis.options.majorUnit, 10);
                 });
 
+                test("setting narrowRange prevents axis minimum from being extend to 0", function() {
+                    numericAxis = new NumericAxis(45, 60, { narrowRange: true });
+
+                    equal(numericAxis.options.min, 35);
+                });
+
+                test("setting narrowRange prevents axis maximum from being extend to 0", function() {
+                    numericAxis = new NumericAxis(-60, -45, { narrowRange: true });
+
+                    equal(numericAxis.options.max, -35);
+                });
+
                 test("Automatic maximum is rounded to set major unit", function() {
                     numericAxis = new NumericAxis(0, 3, { majorUnit: 1 });
                     equals(numericAxis.options.max, 4);
