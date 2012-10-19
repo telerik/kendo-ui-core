@@ -184,11 +184,9 @@
 
             chart.bind(chart.events, chart.options);
 
-            chart._stage = $("<div style='display: none' />")[0];
             chart.element
                 .addClass("k-chart")
-                .css("position", "relative")
-                .append(chart._stage);
+                .css("position", "relative");
 
             chart.wrapper = chart.element;
 
@@ -295,9 +293,6 @@
             var chart = this,
                 options = chart.options,
                 element = chart.element,
-                viewElement,
-                existingViewElement = chart._viewElement,
-                stage = chart._stage,
                 model = chart._model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
@@ -306,23 +301,8 @@
 
             if (viewType) {
                 view = chart._view = viewType.fromModel(model);
-                view.renderTo(stage);
 
-                viewElement = stage.firstElementChild;
-                if (existingViewElement) {
-                    existingViewElement.parentNode.replaceChild(
-                        viewElement,
-                        existingViewElement
-                    );
-                } else {
-                    element.append(viewElement);
-                }
-
-                if (chart._tooltip) {
-                    chart._tooltip.element.remove();
-                }
-
-                chart._viewElement = viewElement;
+                chart._viewElement = view.renderTo(element[0]);
                 chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
                 chart._highlight = new Highlight(view, chart._viewElement);
             }
