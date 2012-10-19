@@ -2560,7 +2560,7 @@ ul.keyboard-legend li {
     height: 48px;
     vertical-align: middle;
     text-align: right;
-    padding: 0 10px 0 0;
+    padding: 10px 10px 0 0;
 }
 .button-descr {
     display: inline-block;
