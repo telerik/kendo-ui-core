@@ -1141,6 +1141,69 @@
             return result;
         },
 
+        renderGridLines: function(view, altAxis) {
+            var axis = this,
+                modelId = axis.plotArea.options.modelId,
+                options = axis.options,
+                vertical = options.vertical,
+                lineBox = altAxis.lineBox(),
+                lineStart = lineBox[vertical ? "x1" : "y1"],
+                lineEnd = lineBox[vertical ? "x2" : "y2" ],
+                majorTicks = axis.getMajorTickPositions(),
+                gridLines = [],
+                gridLine = function (pos, options) {
+                    return {
+                        pos: pos,
+                        options: options
+                    };
+                };
+
+            if (options.majorGridLines.visible) {
+                gridLines = map(majorTicks, function(pos) {
+                                return gridLine(pos, options.majorGridLines);
+                            });
+            }
+
+            if (options.minorGridLines.visible) {
+                gridLines = gridLines.concat(
+                    map(axis.getMinorTickPositions(), function(pos) {
+                        if (options.majorGridLines.visible) {
+                            if (!inArray(pos, majorTicks)) {
+                                return gridLine(pos, options.minorGridLines);
+                            }
+                        } else {
+                            return gridLine(pos, options.minorGridLines);
+                        }
+                    }
+                ));
+            }
+
+            return map(gridLines, function(line) {
+                var gridLineOptions = {
+                        data: { modelId: modelId },
+                        strokeWidth: line.options.width,
+                        stroke: line.options.color,
+                        dashType: line.options.dashType
+                    },
+                    linePos = round(line.pos),
+                    altAxisBox = altAxis.lineBox();
+
+                if (vertical) {
+                    if (!altAxis.options.line.visible || altAxisBox.y1 !== linePos) {
+                        return view.createLine(
+                            lineStart, linePos, lineEnd, linePos,
+                            gridLineOptions);
+                    }
+                } else {
+                    if (!altAxis.options.line.visible || altAxisBox.x1 !== linePos) {
+                        return view.createLine(
+                            linePos, lineStart, linePos, lineEnd,
+                            gridLineOptions);
+                    }
+                }
+            });
+        },
+
         reflow: function(box) {
             var axis = this,
                 options = axis.options,

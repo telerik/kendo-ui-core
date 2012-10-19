@@ -4624,12 +4624,47 @@
                 });
 
             group.children = elements.concat(
+                pane.renderGridLines(view),
                 pane.content.getViewElements(view)
             );
 
             pane.view = view;
 
             return [group];
+        },
+
+        renderGridLines: function(view) {
+            var pane = this,
+                axes = pane.axes,
+                allAxes = pane.parent.axes,
+                vGridLines = [],
+                hGridLines = [],
+                gridLines,
+                i,
+                j,
+                axis,
+                vertical,
+                altAxis,
+                altAxisPane;
+
+            for (i = 0; i < axes.length; i++) {
+                axis = axes[i];
+                vertical = axis.options.vertical;
+                gridLines = vertical ? vGridLines : hGridLines;
+
+                if (gridLines.length === 0) {
+                    for (j = 0; j < allAxes.length; j++) {
+                        altAxis = allAxes[j];
+                        altAxisPane = altAxis.pane.options.name;
+
+                        if (vertical !== altAxis.options.vertical) {
+                            append(gridLines, axis.renderGridLines(view, altAxis, axis));
+                        }
+                    }
+                }
+            }
+
+            return vGridLines.concat(hGridLines);
         },
 
         refresh: function() {
@@ -5164,109 +5199,6 @@
             }
         },
 
-        // TODO: Move to Axis class
-        renderGridLines: function(view, axis, secondaryAxis) {
-            var plotArea = this,
-                options = axis.options,
-                vertical = options.vertical,
-                lineBox = secondaryAxis.lineBox(),
-                lineStart = lineBox[vertical ? "x1" : "y1"],
-                lineEnd = lineBox[vertical ? "x2" : "y2" ],
-                majorTicks = axis.getMajorTickPositions(),
-                gridLines = [],
-                gridLine = function (pos, options) {
-                    return {
-                        pos: pos,
-                        options: options
-                    };
-                };
-
-            if (options.majorGridLines.visible) {
-                gridLines = map(majorTicks, function(pos) {
-                                return gridLine(pos, options.majorGridLines);
-                            });
-            }
-
-            if (options.minorGridLines.visible) {
-                gridLines = gridLines.concat(
-                    map(axis.getMinorTickPositions(), function(pos) {
-                        if (options.majorGridLines.visible) {
-                            if (!inArray(pos, majorTicks)) {
-                                return gridLine(pos, options.minorGridLines);
-                            }
-                        } else {
-                            return gridLine(pos, options.minorGridLines);
-                        }
-                    }
-                ));
-            }
-
-            return map(gridLines, function(line) {
-                var gridLineOptions = {
-                        data: { modelId: plotArea.options.modelId },
-                        strokeWidth: line.options.width,
-                        stroke: line.options.color,
-                        dashType: line.options.dashType
-                    },
-                    linePos = round(line.pos),
-                    secondaryAxisBox = secondaryAxis.lineBox();
-
-                if (vertical) {
-                    if (!secondaryAxis.options.line.visible || secondaryAxisBox.y1 !== linePos) {
-                        return view.createLine(
-                            lineStart, linePos, lineEnd, linePos,
-                            gridLineOptions);
-                    }
-                } else {
-                    if (!secondaryAxis.options.line.visible || secondaryAxisBox.x1 !== linePos) {
-                        return view.createLine(
-                            linePos, lineStart, linePos, lineEnd,
-                            gridLineOptions);
-                    }
-                }
-            });
-        },
-
-        renderAllGridLines: function(view) {
-            var plotArea = this,
-                axes = plotArea.axes,
-                gridLines = [],
-                processedPanes = {},
-                i,
-                j,
-                axis,
-                axisPane,
-                altAxis,
-                altAxisPane;
-
-            for (i = 0; i < axes.length; i++) {
-                axis = axes[i];
-                axisPane = axis.pane.options.name;
-
-                for (j = i; j < axes.length; j++) {
-                    altAxis = axes[j];
-                    altAxisPane = altAxis.pane.options.name;
-
-                    if (axis.options.vertical === altAxis.options.vertical) {
-                        continue;
-                    }
-
-                    if (processedPanes[axisPane] && processedPanes[altAxisPane]) {
-                        // Only render one set of gridlines per pane
-                        continue;
-                    }
-
-                    processedPanes[axisPane] = true;
-                    processedPanes[altAxisPane] = true;
-
-                    append(gridLines, plotArea.renderGridLines(view, axis, altAxis));
-                    append(gridLines, plotArea.renderGridLines(view, altAxis, axis));
-                }
-            }
-
-            return gridLines;
-        },
-
         backgroundBox: function() {
             var plotArea = this,
                 axes = plotArea.axes,
@@ -5305,9 +5237,8 @@
                 options = plotArea.options,
                 userOptions = options.plotArea,
                 border = userOptions.border || {},
-                elements = plotArea.renderAllGridLines(view);
+                elements = ChartElement.fn.getViewElements.call(plotArea, view);
 
-            append(elements, ChartElement.fn.getViewElements.call(plotArea, view));
             append(elements, [
                 view.createRect(bgBox, {
                     fill: userOptions.background,
