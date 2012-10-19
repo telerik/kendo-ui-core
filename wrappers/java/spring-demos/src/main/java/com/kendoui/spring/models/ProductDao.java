@@ -7,5 +7,7 @@ public interface ProductDao {
     
     public DataSourceResult getList(DataSourceRequest request);
     
-    public void update(List<Product> products);
+    public void saveOrUpdate(List<Product> products);
+    
+    public void delete(List<Product> products);
 }

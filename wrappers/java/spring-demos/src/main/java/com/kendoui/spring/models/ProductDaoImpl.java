@@ -20,18 +20,26 @@ public class ProductDaoImpl implements ProductDao {
         return sessionFactory.getCurrentSession().createCriteria(Product.class).list();
     }
     
-    
     @Override
     public DataSourceResult getList(DataSourceRequest request) {
         return request.toDataSourceResult(sessionFactory.getCurrentSession(), Product.class);
     }
     
     @Override
-    public void update(List<Product> products) {
+    public void saveOrUpdate(List<Product> products) {
         Session session = sessionFactory.getCurrentSession();
         
         for (Product product : products) {
             session.saveOrUpdate(product);
+        }
+    }
+    
+    @Override
+    public void delete(List<Product> products) {
+        Session session = sessionFactory.getCurrentSession();
+        
+        for (Product product : products) {
+            session.delete(session.load(Product.class, product.getProductId()));
         }
     }
 }

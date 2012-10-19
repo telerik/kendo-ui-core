@@ -26,13 +26,13 @@ public class EditingController {
         return "web/grid/editing";
     }
     
-    @RequestMapping(value = "/editing/products", method = RequestMethod.GET)
-    public @ResponseBody List<Product> products() {
+    @RequestMapping(value = "/editing/read", method = RequestMethod.POST)
+    public @ResponseBody List<Product> read() {
         return product.getList();
     }
     
-    @RequestMapping(value = "/editing/products", method = RequestMethod.POST)
-    public @ResponseBody List<Product> products(@RequestBody ArrayList<Map<String, Object>> models) {
+    @RequestMapping(value = "/editing/update", method = RequestMethod.POST)
+    public @ResponseBody List<Product> update(@RequestBody ArrayList<Map<String, Object>> models) {
         List<Product> products = new ArrayList<Product>();
         
         for (Map<String, Object> model : models) {
@@ -47,7 +47,44 @@ public class EditingController {
             products.add(product);
         }
         
-        product.update(products);
+        product.saveOrUpdate(products);
+        
+        return products;
+    }
+    
+    @RequestMapping(value = "/editing/create", method = RequestMethod.POST)
+    public @ResponseBody List<Product> create(@RequestBody ArrayList<Map<String, Object>> models) {
+        List<Product> products = new ArrayList<Product>();
+        
+        for (Map<String, Object> model : models) {
+            Product product = new Product();
+            
+            product.setProductName((String)model.get("productName"));
+            product.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
+            product.setUnitsInStock((int)model.get("unitsInStock"));
+            product.setDiscontinued((boolean)model.get("discontinued"));
+            
+            products.add(product);
+        }
+        
+        product.saveOrUpdate(products);
+        
+        return products;
+    }
+    
+    @RequestMapping(value = "/editing/destroy", method = RequestMethod.POST)
+    public @ResponseBody List<Product> destroy(@RequestBody ArrayList<Map<String, Object>> models) {
+        List<Product> products = new ArrayList<Product>();
+        
+        for (Map<String, Object> model : models) {
+            Product product = new Product();
+            
+            product.setProductId((int)model.get("productId"));
+            
+            products.add(product);
+        }
+        
+        product.delete(products);
         
         return products;
     }    

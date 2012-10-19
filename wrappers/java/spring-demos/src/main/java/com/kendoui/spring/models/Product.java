@@ -1,9 +1,11 @@
 package com.kendoui.spring.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="Products")
@@ -16,6 +18,7 @@ public class Product {
     
     @Id
     @Column(name="ProductID")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getProductId() {
         return productId;
     }
