@@ -140,7 +140,7 @@ namespace Kendo.Mvc.Extensions
 
             var aggregates = new List<AggregateDescriptor>();
 
-            if (aggregates != null)
+            if (request.Aggregates != null)
             {
                 aggregates.AddRange(request.Aggregates);
             }
