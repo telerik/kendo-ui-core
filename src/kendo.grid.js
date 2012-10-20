@@ -1821,11 +1821,18 @@
                         handled = true;
                     }
                 } else if (keys.TAB == key) {
-                    if (!current) {
-                        current = table.find(FIRSTNAVITEM);
+                    var cell;
+
+                    current = $(current);
+                    if (that.options.editable && isInCell) {
+                         cell = $(document.activeElement).closest(".k-edit-cell");
+
+                         if (cell[0] && cell[0] !== current[0]) {
+                             current = cell;
+                         }
                     }
 
-                    var cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
+                    cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
                     if (!cell.length) {
                         cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row):not(.k-detail-row):visible:first")
                         .children(DATA_CELL + (shiftKey ? ":last" : ":first"));

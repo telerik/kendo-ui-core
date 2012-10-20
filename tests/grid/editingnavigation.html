@@ -374,6 +374,18 @@
                 ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
             });
 
+            test("pressing tab key on new item edit when current is not the edit container", function() {
+                var grid = setup({ columns: [  "name", "foo" ] });
+
+                grid.table.focus();
+                document.activeElement.blur()
+                grid.addRow();
+                grid.table.press(kendo.keys.TAB);
+
+                ok(!table.find("tr>td").eq(0).hasClass("k-edit-cell"));
+                ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
+                equal(document.activeElement.parentNode, table.find(".k-edit-cell")[0]);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
