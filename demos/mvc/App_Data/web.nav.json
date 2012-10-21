@@ -89,6 +89,10 @@
                 {
                     "text": "RTL support",
                     "url": "calendar/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "calendar/navigation.html"
                 }
             ]
         },
