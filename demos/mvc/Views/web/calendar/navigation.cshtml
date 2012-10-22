@@ -1,13 +1,13 @@
 
         <div id="example" class="k-content">
             <div class="demo-section">
-                <div id="calendar" style="width: 230px" accesskey="w"></div>
+                <div id="calendar" style="width: 230px"></div>
             </div>
 
             <ul class="keyboard-legend">
                 <li>
                     <span class="button-preview">
-                        <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+                        <span class="key-button wider">Alt</span>
                         +
                         <span class="key-button">w</span>
                     </span>
@@ -117,6 +117,13 @@
                 $(document).ready(function() {
                     // create Calendar from div HTML element
                     $("#calendar").kendoCalendar();
+
+                    //focus the widget
+                    $(document).keydown(function(e) {
+                        if (e.altKey && e.keyCode === 87 /* w */) {
+                            $("#calendar").data("kendoCalendar").focus();
+                        }
+                    });
                 });
             </script>
 
