@@ -318,6 +318,10 @@
                 {
                     "text": "RTL support",
                     "url": "editor/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "editor/navigation.html"
                 }
             ]
         },
