@@ -54,8 +54,8 @@
                 });
             }
 
-            function setup(options, draggableOptions) {
-                target = new DropTarget(targetElement, options);
+            function setup(dropTargetOptions, draggableOptions) {
+                target = new DropTarget(targetElement, dropTargetOptions);
                 draggable = new Draggable(span, draggableOptions);
                 startDrag();
             }
@@ -69,7 +69,7 @@
             });
 
             test("dragleave is raised, passing the draggable", 1, function() {
-                setup( {
+                setup({
                         dragleave: function(e) {
                             ok(e.draggable === draggable);
                         }
@@ -100,7 +100,7 @@
             });
 
             test("dom event argument is passed to the drop event", 1, function() {
-                setup( {
+                setup({
                         drop: function(e) {
                             ok(e.pageX);
                         }
@@ -117,6 +117,39 @@
                 trigger("mouseup", { pageX: offset.left, pageY: offset.top });
 
                 ok(draggable.dropped);
+            });
+
+            test("destroy removes droptarget from droptargets object", function() {
+                target = new DropTarget(targetElement, {
+                    group: "foobarbaz"
+                });
+
+                target.destroy();
+
+                ok(!DropTarget._cache["foobarbaz"]);
+            });
+
+            test("destroy removes only destroyed object from cache", function() {
+                target = new DropTarget(targetElement, { group: "qux" });
+
+                var quxElement = $("<div />").appendTo("body");
+                var quxTarget = new DropTarget(quxElement, { group: "qux" });
+
+                target.destroy();
+
+                ok(DropTarget._cache["qux"]);
+                equal(DropTarget._cache["qux"].length, 1);
+            });
+
+            test("destroyGroup removes complete group from cache", function() {
+                target = new DropTarget(targetElement, { group: "qux" });
+
+                var quxElement = $("<div />").appendTo("body");
+                var quxTarget = new DropTarget(quxElement, { group: "qux" });
+
+                DropTarget.destroyGroup("qux");
+
+                ok(!DropTarget._cache["qux"]);
             });
        </script>
     </body>

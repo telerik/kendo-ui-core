@@ -455,6 +455,25 @@
             group: "default"
         },
 
+        destroy: function() {
+            var groupName = this.options.group,
+                group = dropTargets[groupName],
+                i;
+
+            if (group.length > 1) {
+                Widget.fn.destroy.call(this);
+
+                for (i = 0; i < group.length; i++) {
+                    if (group[i] == this) {
+                        group.splice(i, 1);
+                        break;
+                    }
+                }
+            } else {
+                DropTarget.destroyGroup(groupName);
+            }
+        },
+
         _trigger: function(eventName, e) {
             var that = this,
                 draggable = draggables[that.options.group];
@@ -484,6 +503,22 @@
             }
         }
     });
+
+    DropTarget.destroyGroup = function(groupName) {
+        var group = dropTargets[groupName],
+            i;
+
+        if (group) {
+            for (i = 0; i < group.length; i++) {
+                Widget.fn.destroy.call(group[i]);
+            }
+
+            group.length = 0;
+            delete dropTargets[groupName];
+        }
+    };
+
+    DropTarget._cache = dropTargets;
 
     var DropTargetArea = DropTarget.extend({
         init: function(element, options) {
