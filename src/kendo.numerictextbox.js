@@ -335,6 +335,7 @@
             var that = this,
                 CLASSNAME = "k-formatted-value",
                 element = that.element.show()[0],
+                accessKey = element.accessKey,
                 wrapper = that.wrapper,
                 text;
 
@@ -349,6 +350,11 @@
             text[0].type = "text";
             text[0].style.cssText = element.style.cssText;
             text.attr("placeholder", that.options.placeholder);
+
+            if (accessKey) {
+                text.attr("accesskey", accessKey);
+                element.accessKey = "";
+            }
 
             that._text = text.attr("readonly", true)
                              .addClass(element.className);
