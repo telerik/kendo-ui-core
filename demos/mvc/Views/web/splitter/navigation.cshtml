@@ -1,0 +1,176 @@
+        <div id="example" class="k-content">
+            <div id="vertical">
+                <div id="top-pane">
+                    <div id="horizontal" style="height: 100%; width: 100%;">
+                        <div id="left-pane">
+                            <div class="pane-content">
+                                <h3>Inner splitter / left pane</h3>
+                                <p>Resizable and collapsible.</p>
+                            </div>
+                        </div>
+                        <div id="center-pane">
+                            <div class="pane-content">
+                                <h3>Inner splitter / center pane</h3>
+                                <p>Resizable only.</p>
+                            </div>
+                        </div>
+                        <div id="right-pane">
+                            <div class="pane-content">
+                                <h3>Inner splitter / right pane</h3>
+                                <p>Resizable and collapsible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="bottom-pane">
+                    <div class="pane-content">
+                        <h3>Outer splitter / bottom pane</h3>
+                        <p>Non-resizable and non-collapsible.</p>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign wider">Alt</span>
+                        <span class="key-button">w</span>
+                    </span>
+                    <span class="button-descr">
+                        focuses first splitbar
+                    </span>
+                </li>
+            </ul>
+
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">←</span>
+                    </span>
+                    <span class="button-descr">
+                        moves focused splitbar to the left (if horizontal splitter)
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">→</span>
+                    </span>
+                    <span class="button-descr">
+                        moves focused splitbar to the right (if horizontal splitter)
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">↑</span>
+                    </span>
+                    <span class="button-descr">
+                        moves focused splitbar down (if vertical splitter)
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">↓</span>
+                    </span>
+                    <span class="button-descr">
+                        moves focused splitbar down (if vertical splitter)
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button wider rightAlign">enter</span>
+                    </span>
+                    <span class="button-descr">
+                        accepts current position of the splitbar
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">esc</span>
+                    </span>
+                    <span class="button-descr">
+                        returns splitbar to its initial position
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">ctrl</span>
+                        <span class="key-button leftAlign">←</span>
+                    </span>
+                    <span class="button-descr">
+                        collapses the left pane or expands the right one if collapsed
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">ctrl</span>
+                        <span class="key-button leftAlign">→</span>
+                    </span>
+                    <span class="button-descr">
+                        collapses the right pane or expands the left one if collapsed
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">ctrl</span>
+                        <span class="key-button leftAlign">↓</span>
+                    </span>
+                    <span class="button-descr">
+                        collapses the upper pane or expands the lower one if collapsed
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">ctrl</span>
+                        <span class="key-button leftAlign">↑</span>
+                    </span>
+                    <span class="button-descr">
+                        collapses the lower pane or expands the upper one if collapsed
+                    </span>
+                </li>
+            </ul>
+
+
+            <script>
+                $(document).ready(function() {
+                    $("#vertical").kendoSplitter({
+                        orientation: "vertical",
+                        panes: [
+                        { collapsible: false },
+                        { collapsible: false, size: "100px" },
+                        { collapsible: false, resizable: false, size: "100px" }
+                        ]
+                    });
+
+                    $("#horizontal").kendoSplitter({
+                        panes: [
+                        { collapsible: true, size: "220px" },
+                        { collapsible: false },
+                        { collapsible: true, size: "220px" }
+                        ]
+                    });
+
+                    //focus the widget
+                    $(document).on("keydown.examples", function(e) {
+                        if (e.altKey && e.keyCode === 87 /* w */) {
+                            $("#horizontal").find(".k-splitbar:first").focus();
+                        }
+                    });
+                });
+            </script>
+
+            <style scoped>
+                #vertical {
+                    height: 200px;
+                    width: 700px;
+                    margin: 0 auto;
+                }
+
+                #middle-pane { background-color: rgba(60, 70, 80, 0.10); }
+                #bottom-pane { background-color: rgba(60, 70, 80, 0.15); }
+                #left-pane, #center-pane, #right-pane  { background-color: rgba(60, 70, 80, 0.05); }
+
+                .pane-content {
+                    padding: 0 10px;
+                }
+            </style>
+        </div>
