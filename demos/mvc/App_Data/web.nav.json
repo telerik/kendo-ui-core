@@ -753,6 +753,10 @@
                 {
                     "text": "RTL support",
                     "url": "tabstrip/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "tabstrip/navigation.html"
                 }
             ]
         },
