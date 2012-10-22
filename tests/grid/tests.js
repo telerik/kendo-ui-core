@@ -90,5 +90,9 @@ tests.push(
     {
         page: "grid/lint.html",
         title: "grid lint"
+    },
+    {
+        page: "grid/aria.html",
+        title: "grid aria"
     }
 );
