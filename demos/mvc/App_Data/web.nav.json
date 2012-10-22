@@ -827,7 +827,7 @@
                 {
                     "packages": [ "!mvc" ],
                     "text": "Keyboard support",
-                    "url": "treeview/keyboard-support.html"
+                    "url": "treeview/navigation.html"
                 },
                 {
                     "packages": [ "!mvc" ],
