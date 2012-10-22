@@ -1525,7 +1525,7 @@
 
             if (groupable) {
                 if(!wrapper.has("div.k-grouping-header")[0]) {
-                    $("<div />").addClass("k-grouping-header").html("&nbsp;").prependTo(wrapper);
+                    $("<div />").addClass("k-grouping-header").prependTo(wrapper);
                 }
 
                 if (that.groupable) {
@@ -1670,20 +1670,21 @@
 
             if (that.options.scrollable) {
                 dataTable = table.add(headerTable);
-                headerTable.on("keydown" + NS, function(e) {
-                    if (!e.shiftKey && e.keyCode == keys.TAB) {
-                        that._removeCurrent();
-                    }
-
-                    if (e.altKey && e.keyCode == keys.DOWN) {
-                        currentProxy().find(".k-grid-filter, .k-header-column-menu").click();
-                        e.stopImmediatePropagation();
-                    }
-                });
 
                 //required for FF
-                that.content.attr("tabindex", -1);
+                //that.content.attr("tabindex", -1);
             }
+
+            headerTable.on("keydown" + NS, function(e) {
+                if (!e.shiftKey && e.keyCode == keys.TAB) {
+                    that._removeCurrent();
+                }
+
+                if (e.altKey && e.keyCode == keys.DOWN) {
+                    currentProxy().find(".k-grid-filter, .k-header-column-menu").click();
+                    e.stopImmediatePropagation();
+                }
+            });
 
             table.on("mousedown" + NS + " keydown" + NS, ".k-detail-cell", function(e) {
                 if (e.target !== e.currentTarget) {
