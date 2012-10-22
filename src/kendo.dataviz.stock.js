@@ -27,18 +27,6 @@
             Chart.fn.init.call(chart, element, options);
         },
 
-        _ready: function() {
-            var chart = this;
-
-            chart._navigator = new Navigator(chart, chart.options);
-
-            $(chart.element).kendoDraggable({
-                drag: $.proxy(chart._onDrag, chart),
-                dragstart: $.proxy(chart._onDragStart, chart),
-                dragend: $.proxy(chart._onDragEnd, chart)
-            });
-        },
-
         _applyDefaults: function(options, themeOptions) {
             var chart = this,
                 width = chart.element.width() || dataviz.DEFAULT_WIDTH;
@@ -90,10 +78,22 @@
         },
 
         _redraw: function() {
-            var chart = this;
+            var chart = this,
+                navigator = chart._navigator;
+
+            if (!navigator) {
+                navigator = chart._navigator = new Navigator(chart, chart.options);
+            }
+
+            // TODO: Extract class
+            $(chart.element).kendoDraggable({
+                drag: $.proxy(chart._onDrag, chart),
+                dragstart: $.proxy(chart._onDragStart, chart),
+                dragend: $.proxy(chart._onDragEnd, chart)
+            });
 
             Chart.fn._redraw.call(chart);
-            chart._navigator.redraw();
+            navigator.redraw();
         },
 
         _onDragStart: function(e) {

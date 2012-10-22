@@ -196,8 +196,6 @@
                 .create(dataSourceOptions)
                 .bind(CHANGE, chart._dataChangeHandler);
 
-            chart._ready();
-
             chart._redraw();
             chart._attachEvents();
 
@@ -207,8 +205,6 @@
 
             kendo.notify(chart, dataviz.ui);
         },
-
-        _ready: function() { },
 
         setDataSource: function(dataSource) {
             var chart = this;
@@ -6366,7 +6362,7 @@
 
             that.template = Selection.template;
             if (!that.template) {
-                that.template = Tooltip.template = renderTemplate(
+                that.template = Selection.template = renderTemplate(
                     "<div class='" + CSS_PREFIX + "selector' " +
                     "style='width: #= d.width #px; height: #= d.height #px;" +
                     " top: #= d.offset.top #px; left: #= d.offset.left #px;'>" +
