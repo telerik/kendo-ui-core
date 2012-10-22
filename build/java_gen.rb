@@ -326,7 +326,7 @@ class Option
     end
 
     def required?
-        @java_type && @type != 'Function'
+        @java_type
     end
 
     def to_xml
@@ -527,13 +527,6 @@ class Tag
 
                 child.promote_options_to_tags
             end
-=begin
-            if option.type == 'Funct'
-                child = NestedTag.new :name => option.name,
-                    :parent => self,
-                    :description => option.description
-            end
-=end
         end
     end
 
@@ -578,8 +571,11 @@ class Tag
 
                 type.value.split('|').each do |t|
                     name = name.strip
+
+
                     t = t.strip.strip_namespace
 
+                    next if t == 'Function'
                     next if IGNORED[tag.name.downcase] && IGNORED[tag.name.downcase].include?(name)
 
                     paragraph  = find_element_with_type.call(configuration, index, :p)

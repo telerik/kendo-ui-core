@@ -48,12 +48,52 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-schema";
     }
 
+    public String getAggregates() {
+        return (String)getProperty("aggregates");
+    }
+
+    public void setAggregates(String value) {
+        setProperty("aggregates", value);
+    }
+
+    public String getData() {
+        return (String)getProperty("data");
+    }
+
+    public void setData(String value) {
+        setProperty("data", value);
+    }
+
+    public String getErrors() {
+        return (String)getProperty("errors");
+    }
+
+    public void setErrors(String value) {
+        setProperty("errors", value);
+    }
+
+    public String getGroups() {
+        return (String)getProperty("groups");
+    }
+
+    public void setGroups(String value) {
+        setProperty("groups", value);
+    }
+
     public Object getModel() {
         return (Object)getProperty("model");
     }
 
     public void setModel(Object value) {
         setProperty("model", value);
+    }
+
+    public String getTotal() {
+        return (String)getProperty("total");
+    }
+
+    public void setTotal(String value) {
+        setProperty("total", value);
     }
 
     public String getType() {
