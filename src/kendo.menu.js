@@ -667,6 +667,8 @@
             var that = this, openHandle,
                 options = that.options,
                 target = $(kendo.eventTarget(e)),
+                nodeName = target[0] ? target[0].nodeName.toUpperCase() : "",
+                formNode = (nodeName == "INPUT" || nodeName == "SELECT" || nodeName == "BUTTON"),
                 link = target.closest("." + LINK),
                 element = target.closest(allItemsSelector),
                 href = link.attr("href"), childGroup, childGroupVisible,
@@ -681,7 +683,7 @@
                 return;
             }
 
-            if (!e.handled && !isLink && !that.trigger(SELECT, { item: element[0] })) { // We shouldn't stop propagation.
+            if (!e.handled && !isLink && !that.trigger(SELECT, { item: element[0] }) && !formNode) { // We shouldn't stop propagation and shoudn't prevent form elements.
                 e.preventDefault();
             }
 
@@ -701,7 +703,7 @@
                 return;
             }
 
-            if (!isLink) {
+            if (!isLink && !formNode) {
                 e.preventDefault();
             }
 
