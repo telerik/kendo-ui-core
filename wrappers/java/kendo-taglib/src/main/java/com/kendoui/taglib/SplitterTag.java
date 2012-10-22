@@ -48,30 +48,30 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "splitter";
     }
 
-    public void setCollapse(CollapseTag value) {
-        setEvent("collapse", value.getBody());
-    }
-
-    public void setContentLoad(ContentLoadTag value) {
-        setEvent("contentLoad", value.getBody());
-    }
-
-    public void setExpand(ExpandTag value) {
-        setEvent("expand", value.getBody());
-    }
-
-    public void setLayoutChange(LayoutChangeTag value) {
-        setEvent("layoutChange", value.getBody());
-    }
-
-    public void setResize(ResizeTag value) {
-        setEvent("resize", value.getBody());
-    }
-
     public void setPanes(PanesTag value) {
 
         setProperty("panes", value.panes());
 
+    }
+
+    public void setCollapse(CollapseFunctionTag value) {
+        setEvent("collapse", value.getBody());
+    }
+
+    public void setContentLoad(ContentLoadFunctionTag value) {
+        setEvent("contentLoad", value.getBody());
+    }
+
+    public void setExpand(ExpandFunctionTag value) {
+        setEvent("expand", value.getBody());
+    }
+
+    public void setLayoutChange(LayoutChangeFunctionTag value) {
+        setEvent("layoutChange", value.getBody());
+    }
+
+    public void setResize(ResizeFunctionTag value) {
+        setEvent("resize", value.getBody());
     }
 
     public String getOrientation() {

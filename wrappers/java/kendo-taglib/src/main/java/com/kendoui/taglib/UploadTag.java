@@ -48,44 +48,44 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "upload";
     }
 
-    public void setCancel(CancelTag value) {
-        setEvent("cancel", value.getBody());
-    }
-
-    public void setComplete(CompleteTag value) {
-        setEvent("complete", value.getBody());
-    }
-
-    public void setError(ErrorTag value) {
-        setEvent("error", value.getBody());
-    }
-
-    public void setProgress(ProgressTag value) {
-        setEvent("progress", value.getBody());
-    }
-
-    public void setRemove(RemoveTag value) {
-        setEvent("remove", value.getBody());
-    }
-
-    public void setSelect(SelectTag value) {
-        setEvent("select", value.getBody());
-    }
-
-    public void setSuccess(SuccessTag value) {
-        setEvent("success", value.getBody());
-    }
-
-    public void set(Tag value) {
-        setEvent("", value.getBody());
-    }
-
     public void setAsync(AsyncTag value) {
         setProperty("async", value);
     }
 
     public void setLocalization(LocalizationTag value) {
         setProperty("localization", value);
+    }
+
+    public void setCancel(CancelFunctionTag value) {
+        setEvent("cancel", value.getBody());
+    }
+
+    public void setComplete(CompleteFunctionTag value) {
+        setEvent("complete", value.getBody());
+    }
+
+    public void setError(ErrorFunctionTag value) {
+        setEvent("error", value.getBody());
+    }
+
+    public void setProgress(ProgressFunctionTag value) {
+        setEvent("progress", value.getBody());
+    }
+
+    public void setRemove(RemoveFunctionTag value) {
+        setEvent("remove", value.getBody());
+    }
+
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
+    }
+
+    public void setSuccess(SuccessFunctionTag value) {
+        setEvent("success", value.getBody());
+    }
+
+    public void setUpload(UploadFunctionTag value) {
+        setEvent("upload", value.getBody());
     }
 
     public boolean getEnabled() {

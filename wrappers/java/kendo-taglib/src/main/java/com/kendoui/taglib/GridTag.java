@@ -48,46 +48,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         return "grid";
     }
 
-    public void setChange(ChangeTag value) {
-        setEvent("change", value.getBody());
-    }
-
-    public void setColumnResize(ColumnResizeTag value) {
-        setEvent("columnResize", value.getBody());
-    }
-
-    public void setDataBound(DataBoundTag value) {
-        setEvent("dataBound", value.getBody());
-    }
-
-    public void setDetailCollapse(DetailCollapseTag value) {
-        setEvent("detailCollapse", value.getBody());
-    }
-
-    public void setDetailExpand(DetailExpandTag value) {
-        setEvent("detailExpand", value.getBody());
-    }
-
-    public void setDetailInit(DetailInitTag value) {
-        setEvent("detailInit", value.getBody());
-    }
-
-    public void setEdit(EditTag value) {
-        setEvent("edit", value.getBody());
-    }
-
-    public void setRemove(RemoveTag value) {
-        setEvent("remove", value.getBody());
-    }
-
-    public void setSave(SaveTag value) {
-        setEvent("save", value.getBody());
-    }
-
-    public void setSaveChanges(SaveChangesTag value) {
-        setEvent("saveChanges", value.getBody());
-    }
-
     public void setColumns(ColumnsTag value) {
 
         setProperty("columns", value.columns());
@@ -114,6 +74,54 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
         setProperty("toolbar", value.toolbar());
 
+    }
+
+    public void setDetailTemplate(DetailTemplateFunctionTag value) {
+        setEvent("detailTemplate", value.getBody());
+    }
+
+    public void setRowTemplate(RowTemplateFunctionTag value) {
+        setEvent("rowTemplate", value.getBody());
+    }
+
+    public void setChange(ChangeFunctionTag value) {
+        setEvent("change", value.getBody());
+    }
+
+    public void setColumnResize(ColumnResizeFunctionTag value) {
+        setEvent("columnResize", value.getBody());
+    }
+
+    public void setDataBound(DataBoundFunctionTag value) {
+        setEvent("dataBound", value.getBody());
+    }
+
+    public void setDetailCollapse(DetailCollapseFunctionTag value) {
+        setEvent("detailCollapse", value.getBody());
+    }
+
+    public void setDetailExpand(DetailExpandFunctionTag value) {
+        setEvent("detailExpand", value.getBody());
+    }
+
+    public void setDetailInit(DetailInitFunctionTag value) {
+        setEvent("detailInit", value.getBody());
+    }
+
+    public void setEdit(EditFunctionTag value) {
+        setEvent("edit", value.getBody());
+    }
+
+    public void setRemove(RemoveFunctionTag value) {
+        setEvent("remove", value.getBody());
+    }
+
+    public void setSave(SaveFunctionTag value) {
+        setEvent("save", value.getBody());
+    }
+
+    public void setSaveChanges(SaveChangesFunctionTag value) {
+        setEvent("saveChanges", value.getBody());
     }
 
     public boolean getAutoBind() {

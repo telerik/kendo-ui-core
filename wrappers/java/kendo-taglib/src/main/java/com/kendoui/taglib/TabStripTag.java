@@ -57,22 +57,6 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces *//* interface
         return "tabStrip";
     }
 
-    public void setActivate(ActivateTag value) {
-        setEvent("activate", value.getBody());
-    }
-
-    public void setContentLoad(ContentLoadTag value) {
-        setEvent("contentLoad", value.getBody());
-    }
-
-    public void setError(ErrorTag value) {
-        setEvent("error", value.getBody());
-    }
-
-    public void setSelect(SelectTag value) {
-        setEvent("select", value.getBody());
-    }
-
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value);
     }
@@ -81,6 +65,22 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces *//* interface
 
         items = value.items();
 
+    }
+
+    public void setActivate(ActivateFunctionTag value) {
+        setEvent("activate", value.getBody());
+    }
+
+    public void setContentLoad(ContentLoadFunctionTag value) {
+        setEvent("contentLoad", value.getBody());
+    }
+
+    public void setError(ErrorFunctionTag value) {
+        setEvent("error", value.getBody());
+    }
+
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
     }
 
     public boolean getCollapsible() {

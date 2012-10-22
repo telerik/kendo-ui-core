@@ -2450,46 +2450,6 @@ has been clicked on a window with static content.</description>
         
 
     <tag>
-        <description>Subscribes to the change event of AutoComplete.</description>
-        <name>autoComplete-change</name>
-        <tag-class>com.kendoui.taglib.autocomplete.ChangeTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the close event of AutoComplete.</description>
-        <name>autoComplete-close</name>
-        <tag-class>com.kendoui.taglib.autocomplete.CloseTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the dataBound event of AutoComplete.</description>
-        <name>autoComplete-dataBound</name>
-        <tag-class>com.kendoui.taglib.autocomplete.DataBoundTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the open event of AutoComplete.</description>
-        <name>autoComplete-open</name>
-        <tag-class>com.kendoui.taglib.autocomplete.OpenTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the select event of AutoComplete.</description>
-        <name>autoComplete-select</name>
-        <tag-class>com.kendoui.taglib.autocomplete.SelectTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
         <name>autoComplete-animation</name>
         <tag-class>com.kendoui.taglib.autocomplete.AnimationTag</tag-class>
@@ -2513,17 +2473,41 @@ has been clicked on a window with static content.</description>
 
 
     <tag>
-        <description>Subscribes to the change event of Calendar.</description>
-        <name>calendar-change</name>
-        <tag-class>com.kendoui.taglib.calendar.ChangeTag</tag-class>
+        <description>Subscribes to the change event of AutoComplete.</description>
+        <name>autoComplete-change</name>
+        <tag-class>com.kendoui.taglib.autocomplete.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the navigate event of Calendar.</description>
-        <name>calendar-navigate</name>
-        <tag-class>com.kendoui.taglib.calendar.NavigateTag</tag-class>
+        <description>Subscribes to the close event of AutoComplete.</description>
+        <name>autoComplete-close</name>
+        <tag-class>com.kendoui.taglib.autocomplete.CloseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dataBound event of AutoComplete.</description>
+        <name>autoComplete-dataBound</name>
+        <tag-class>com.kendoui.taglib.autocomplete.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the open event of AutoComplete.</description>
+        <name>autoComplete-open</name>
+        <tag-class>com.kendoui.taglib.autocomplete.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the select event of AutoComplete.</description>
+        <name>autoComplete-select</name>
+        <tag-class>com.kendoui.taglib.autocomplete.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -2552,41 +2536,17 @@ has been clicked on a window with static content.</description>
 
 
     <tag>
-        <description>Subscribes to the axisLabelClick event of Chart.</description>
-        <name>chart-axisLabelClick</name>
-        <tag-class>com.kendoui.taglib.chart.AxisLabelClickTag</tag-class>
+        <description>Subscribes to the change event of Calendar.</description>
+        <name>calendar-change</name>
+        <tag-class>com.kendoui.taglib.calendar.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the dataBound event of Chart.</description>
-        <name>chart-dataBound</name>
-        <tag-class>com.kendoui.taglib.chart.DataBoundTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the plotAreaClick event of Chart.</description>
-        <name>chart-plotAreaClick</name>
-        <tag-class>com.kendoui.taglib.chart.PlotAreaClickTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the seriesClick event of Chart.</description>
-        <name>chart-seriesClick</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesClickTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the seriesHover event of Chart.</description>
-        <name>chart-seriesHover</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesHoverTag</tag-class>
+        <description>Subscribes to the navigate event of Calendar.</description>
+        <name>calendar-navigate</name>
+        <tag-class>com.kendoui.taglib.calendar.NavigateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -2813,8 +2773,8 @@ either</description>
     <tag>
         <description>The chart area configuration options.
 This is the entire visible area of the chart.</description>
-        <name>chart-area</name>
-        <tag-class>com.kendoui.taglib.chart.AreaTag</tag-class>
+        <name>chart-chartArea</name>
+        <tag-class>com.kendoui.taglib.chart.ChartAreaTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -3312,6 +3272,46 @@ It defaults to 1/5th of the majorUnit.</description>
 
 
     <tag>
+        <description>Subscribes to the axisLabelClick event of Chart.</description>
+        <name>chart-axisLabelClick</name>
+        <tag-class>com.kendoui.taglib.chart.AxisLabelClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dataBound event of Chart.</description>
+        <name>chart-dataBound</name>
+        <tag-class>com.kendoui.taglib.chart.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the plotAreaClick event of Chart.</description>
+        <name>chart-plotAreaClick</name>
+        <tag-class>com.kendoui.taglib.chart.PlotAreaClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the seriesClick event of Chart.</description>
+        <name>chart-seriesClick</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the seriesHover event of Chart.</description>
+        <name>chart-seriesHover</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesHoverFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Configures the axis labels.</description>
         <name>chart-categoryAxis-labels</name>
         <tag-class>com.kendoui.taglib.chart.LabelsTag</tag-class>
@@ -3745,7 +3745,7 @@ hex and rgb.</description>
 
     <tag>
         <description>The border of the chart area.</description>
-        <name>chart-area-border</name>
+        <name>chart-chartArea-border</name>
         <tag-class>com.kendoui.taglib.chart.BorderTag</tag-class>
         <body-content>empty</body-content>
 
@@ -5181,46 +5181,6 @@ hex and rgb.</description>
 
 
     <tag>
-        <description>Subscribes to the change event of ComboBox.</description>
-        <name>comboBox-change</name>
-        <tag-class>com.kendoui.taglib.combobox.ChangeTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the close event of ComboBox.</description>
-        <name>comboBox-close</name>
-        <tag-class>com.kendoui.taglib.combobox.CloseTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the dataBound event of ComboBox.</description>
-        <name>comboBox-dataBound</name>
-        <tag-class>com.kendoui.taglib.combobox.DataBoundTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the open event of ComboBox.</description>
-        <name>comboBox-open</name>
-        <tag-class>com.kendoui.taglib.combobox.OpenTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the select event of ComboBox.</description>
-        <name>comboBox-select</name>
-        <tag-class>com.kendoui.taglib.combobox.SelectTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn off the animation.</description>
         <name>comboBox-animation</name>
         <tag-class>com.kendoui.taglib.combobox.AnimationTag</tag-class>
@@ -5244,41 +5204,41 @@ hex and rgb.</description>
 
 
     <tag>
-        <description>Subscribes to the change event of DataSource.</description>
-        <name>dataSource-change</name>
-        <tag-class>com.kendoui.taglib.datasource.ChangeTag</tag-class>
+        <description>Subscribes to the change event of ComboBox.</description>
+        <name>comboBox-change</name>
+        <tag-class>com.kendoui.taglib.combobox.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the error event of DataSource.</description>
-        <name>dataSource-error</name>
-        <tag-class>com.kendoui.taglib.datasource.ErrorTag</tag-class>
+        <description>Subscribes to the close event of ComboBox.</description>
+        <name>comboBox-close</name>
+        <tag-class>com.kendoui.taglib.combobox.CloseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the sync event of DataSource.</description>
-        <name>dataSource-sync</name>
-        <tag-class>com.kendoui.taglib.datasource.SyncTag</tag-class>
+        <description>Subscribes to the dataBound event of ComboBox.</description>
+        <name>comboBox-dataBound</name>
+        <tag-class>com.kendoui.taglib.combobox.DataBoundFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the requestStart event of DataSource.</description>
-        <name>dataSource-requestStart</name>
-        <tag-class>com.kendoui.taglib.datasource.RequestStartTag</tag-class>
+        <description>Subscribes to the open event of ComboBox.</description>
+        <name>comboBox-open</name>
+        <tag-class>com.kendoui.taglib.combobox.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the requestEnd event of DataSource.</description>
-        <name>dataSource-requestEnd</name>
-        <tag-class>com.kendoui.taglib.datasource.RequestEndTag</tag-class>
+        <description>Subscribes to the select event of ComboBox.</description>
+        <name>comboBox-select</name>
+        <tag-class>com.kendoui.taglib.combobox.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5403,6 +5363,46 @@ return the total number of data items for the current response.</description>
 
 
     <tag>
+        <description>Subscribes to the change event of DataSource.</description>
+        <name>dataSource-change</name>
+        <tag-class>com.kendoui.taglib.datasource.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the error event of DataSource.</description>
+        <name>dataSource-error</name>
+        <tag-class>com.kendoui.taglib.datasource.ErrorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the sync event of DataSource.</description>
+        <name>dataSource-sync</name>
+        <tag-class>com.kendoui.taglib.datasource.SyncFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the requestStart event of DataSource.</description>
+        <name>dataSource-requestStart</name>
+        <tag-class>com.kendoui.taglib.datasource.RequestStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the requestEnd event of DataSource.</description>
+        <name>dataSource-requestEnd</name>
+        <tag-class>com.kendoui.taglib.datasource.RequestEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Sets the initial filter.</description>
         <name>dataSource-filterItem</name>
         <tag-class>com.kendoui.taglib.datasource.FilterItemTag</tag-class>
@@ -5429,6 +5429,14 @@ return the total number of data items for the current response.</description>
             <type>Object</type>
         </attribute>
 
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the parse event of Schema.</description>
+        <name>dataSource-schema-parse</name>
+        <tag-class>com.kendoui.taglib.datasource.ParseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
 
@@ -5641,25 +5649,9 @@ Refer to the</description>
 
 
     <tag>
-        <description>Subscribes to the change event of DatePicker.</description>
-        <name>datePicker-change</name>
-        <tag-class>com.kendoui.taglib.datepicker.ChangeTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the close event of DatePicker.</description>
-        <name>datePicker-close</name>
-        <tag-class>com.kendoui.taglib.datepicker.CloseTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the open event of DatePicker.</description>
-        <name>datePicker-open</name>
-        <tag-class>com.kendoui.taglib.datepicker.OpenTag</tag-class>
+        <description>Subscribes to the parameterMap event of Transport.</description>
+        <name>dataSource-transport-parameterMap</name>
+        <tag-class>com.kendoui.taglib.datasource.ParameterMapFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5712,25 +5704,25 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Subscribes to the change event of DateTimePicker.</description>
-        <name>dateTimePicker-change</name>
-        <tag-class>com.kendoui.taglib.datetimepicker.ChangeTag</tag-class>
+        <description>Subscribes to the change event of DatePicker.</description>
+        <name>datePicker-change</name>
+        <tag-class>com.kendoui.taglib.datepicker.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the close event of DateTimePicker.</description>
-        <name>dateTimePicker-close</name>
-        <tag-class>com.kendoui.taglib.datetimepicker.CloseTag</tag-class>
+        <description>Subscribes to the close event of DatePicker.</description>
+        <name>datePicker-close</name>
+        <tag-class>com.kendoui.taglib.datepicker.CloseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the open event of DateTimePicker.</description>
-        <name>dateTimePicker-open</name>
-        <tag-class>com.kendoui.taglib.datetimepicker.OpenTag</tag-class>
+        <description>Subscribes to the open event of DatePicker.</description>
+        <name>datePicker-open</name>
+        <tag-class>com.kendoui.taglib.datepicker.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5783,41 +5775,25 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Subscribes to the change event of DropDownList.</description>
-        <name>dropDownList-change</name>
-        <tag-class>com.kendoui.taglib.dropdownlist.ChangeTag</tag-class>
+        <description>Subscribes to the change event of DateTimePicker.</description>
+        <name>dateTimePicker-change</name>
+        <tag-class>com.kendoui.taglib.datetimepicker.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the close event of DropDownList.</description>
-        <name>dropDownList-close</name>
-        <tag-class>com.kendoui.taglib.dropdownlist.CloseTag</tag-class>
+        <description>Subscribes to the close event of DateTimePicker.</description>
+        <name>dateTimePicker-close</name>
+        <tag-class>com.kendoui.taglib.datetimepicker.CloseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the dataBound event of DropDownList.</description>
-        <name>dropDownList-dataBound</name>
-        <tag-class>com.kendoui.taglib.dropdownlist.DataBoundTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the open event of DropDownList.</description>
-        <name>dropDownList-open</name>
-        <tag-class>com.kendoui.taglib.dropdownlist.OpenTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the select event of DropDownList.</description>
-        <name>dropDownList-select</name>
-        <tag-class>com.kendoui.taglib.dropdownlist.SelectTag</tag-class>
+        <description>Subscribes to the open event of DateTimePicker.</description>
+        <name>dateTimePicker-open</name>
+        <tag-class>com.kendoui.taglib.datetimepicker.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5846,9 +5822,49 @@ the minimum and maximum values.</description>
 
 
     <tag>
+        <description>Subscribes to the change event of DropDownList.</description>
+        <name>dropDownList-change</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the close event of DropDownList.</description>
+        <name>dropDownList-close</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.CloseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dataBound event of DropDownList.</description>
+        <name>dropDownList-dataBound</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the open event of DropDownList.</description>
+        <name>dropDownList-open</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the select event of DropDownList.</description>
+        <name>dropDownList-select</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Subscribes to the change event of Editor.</description>
         <name>editor-change</name>
-        <tag-class>com.kendoui.taglib.editor.ChangeTag</tag-class>
+        <tag-class>com.kendoui.taglib.editor.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5856,7 +5872,7 @@ the minimum and maximum values.</description>
     <tag>
         <description>Subscribes to the execute event of Editor.</description>
         <name>editor-execute</name>
-        <tag-class>com.kendoui.taglib.editor.ExecuteTag</tag-class>
+        <tag-class>com.kendoui.taglib.editor.ExecuteFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5864,7 +5880,7 @@ the minimum and maximum values.</description>
     <tag>
         <description>Subscribes to the keydown event of Editor.</description>
         <name>editor-keydown</name>
-        <tag-class>com.kendoui.taglib.editor.KeydownTag</tag-class>
+        <tag-class>com.kendoui.taglib.editor.KeydownFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5872,7 +5888,7 @@ the minimum and maximum values.</description>
     <tag>
         <description>Subscribes to the keyup event of Editor.</description>
         <name>editor-keyup</name>
-        <tag-class>com.kendoui.taglib.editor.KeyupTag</tag-class>
+        <tag-class>com.kendoui.taglib.editor.KeyupFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5880,7 +5896,7 @@ the minimum and maximum values.</description>
     <tag>
         <description>Subscribes to the paste event of Editor.</description>
         <name>editor-paste</name>
-        <tag-class>com.kendoui.taglib.editor.PasteTag</tag-class>
+        <tag-class>com.kendoui.taglib.editor.PasteFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5888,87 +5904,7 @@ the minimum and maximum values.</description>
     <tag>
         <description>Subscribes to the select event of Editor.</description>
         <name>editor-select</name>
-        <tag-class>com.kendoui.taglib.editor.SelectTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the change event of Grid.</description>
-        <name>grid-change</name>
-        <tag-class>com.kendoui.taglib.grid.ChangeTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the columnResize event of Grid.</description>
-        <name>grid-columnResize</name>
-        <tag-class>com.kendoui.taglib.grid.ColumnResizeTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the dataBound event of Grid.</description>
-        <name>grid-dataBound</name>
-        <tag-class>com.kendoui.taglib.grid.DataBoundTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the detailCollapse event of Grid.</description>
-        <name>grid-detailCollapse</name>
-        <tag-class>com.kendoui.taglib.grid.DetailCollapseTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the detailExpand event of Grid.</description>
-        <name>grid-detailExpand</name>
-        <tag-class>com.kendoui.taglib.grid.DetailExpandTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the detailInit event of Grid.</description>
-        <name>grid-detailInit</name>
-        <tag-class>com.kendoui.taglib.grid.DetailInitTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the edit event of Grid.</description>
-        <name>grid-edit</name>
-        <tag-class>com.kendoui.taglib.grid.EditTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the remove event of Grid.</description>
-        <name>grid-remove</name>
-        <tag-class>com.kendoui.taglib.grid.RemoveTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the save event of Grid.</description>
-        <name>grid-save</name>
-        <tag-class>com.kendoui.taglib.grid.SaveTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the saveChanges event of Grid.</description>
-        <name>grid-saveChanges</name>
-        <tag-class>com.kendoui.taglib.grid.SaveChangesTag</tag-class>
+        <tag-class>com.kendoui.taglib.editor.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6130,6 +6066,102 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
         <tag-class>com.kendoui.taglib.grid.ToolbarTag</tag-class>
         <body-content>JSP</body-content>
 
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the detailTemplate event of Grid.</description>
+        <name>grid-detailTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.DetailTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the rowTemplate event of Grid.</description>
+        <name>grid-rowTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.RowTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the change event of Grid.</description>
+        <name>grid-change</name>
+        <tag-class>com.kendoui.taglib.grid.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the columnResize event of Grid.</description>
+        <name>grid-columnResize</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnResizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dataBound event of Grid.</description>
+        <name>grid-dataBound</name>
+        <tag-class>com.kendoui.taglib.grid.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the detailCollapse event of Grid.</description>
+        <name>grid-detailCollapse</name>
+        <tag-class>com.kendoui.taglib.grid.DetailCollapseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the detailExpand event of Grid.</description>
+        <name>grid-detailExpand</name>
+        <tag-class>com.kendoui.taglib.grid.DetailExpandFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the detailInit event of Grid.</description>
+        <name>grid-detailInit</name>
+        <tag-class>com.kendoui.taglib.grid.DetailInitFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the edit event of Grid.</description>
+        <name>grid-edit</name>
+        <tag-class>com.kendoui.taglib.grid.EditFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the remove event of Grid.</description>
+        <name>grid-remove</name>
+        <tag-class>com.kendoui.taglib.grid.RemoveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the save event of Grid.</description>
+        <name>grid-save</name>
+        <tag-class>com.kendoui.taglib.grid.SaveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the saveChanges event of Grid.</description>
+        <name>grid-saveChanges</name>
+        <tag-class>com.kendoui.taglib.grid.SaveChangesFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
 
@@ -6795,9 +6827,25 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
+        <description>Subscribes to the editTemplate event of ListView.</description>
+        <name>listView-editTemplate</name>
+        <tag-class>com.kendoui.taglib.listview.EditTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the template event of ListView.</description>
+        <name>listView-template</name>
+        <tag-class>com.kendoui.taglib.listview.TemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Subscribes to the change event of ListView.</description>
         <name>listView-change</name>
-        <tag-class>com.kendoui.taglib.listview.ChangeTag</tag-class>
+        <tag-class>com.kendoui.taglib.listview.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6805,7 +6853,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
     <tag>
         <description>Subscribes to the dataBound event of ListView.</description>
         <name>listView-dataBound</name>
-        <tag-class>com.kendoui.taglib.listview.DataBoundTag</tag-class>
+        <tag-class>com.kendoui.taglib.listview.DataBoundFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6813,7 +6861,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
     <tag>
         <description>Subscribes to the edit event of ListView.</description>
         <name>listView-edit</name>
-        <tag-class>com.kendoui.taglib.listview.EditTag</tag-class>
+        <tag-class>com.kendoui.taglib.listview.EditFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6821,31 +6869,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
     <tag>
         <description>Subscribes to the remove event of ListView.</description>
         <name>listView-remove</name>
-        <tag-class>com.kendoui.taglib.listview.RemoveTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the close event of Menu.</description>
-        <name>menu-close</name>
-        <tag-class>com.kendoui.taglib.menu.CloseTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the open event of Menu.</description>
-        <name>menu-open</name>
-        <tag-class>com.kendoui.taglib.menu.OpenTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the select event of Menu.</description>
-        <name>menu-select</name>
-        <tag-class>com.kendoui.taglib.menu.SelectTag</tag-class>
+        <tag-class>com.kendoui.taglib.listview.RemoveFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6883,6 +6907,30 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
+        <description>Subscribes to the close event of Menu.</description>
+        <name>menu-close</name>
+        <tag-class>com.kendoui.taglib.menu.CloseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the open event of Menu.</description>
+        <name>menu-open</name>
+        <tag-class>com.kendoui.taglib.menu.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the select event of Menu.</description>
+        <name>menu-select</name>
+        <tag-class>com.kendoui.taglib.menu.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Contains items of Menu</description>
         <name>menu-item</name>
         <tag-class>com.kendoui.taglib.menu.ItemTag</tag-class>
@@ -6901,7 +6949,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
     <tag>
         <description>Subscribes to the change event of NumericTextBox.</description>
         <name>numericTextBox-change</name>
-        <tag-class>com.kendoui.taglib.numerictextbox.ChangeTag</tag-class>
+        <tag-class>com.kendoui.taglib.numerictextbox.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6909,15 +6957,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
     <tag>
         <description>Subscribes to the spin event of NumericTextBox.</description>
         <name>numericTextBox-spin</name>
-        <tag-class>com.kendoui.taglib.numerictextbox.SpinTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the change event of Pager.</description>
-        <name>pager-change</name>
-        <tag-class>com.kendoui.taglib.pager.ChangeTag</tag-class>
+        <tag-class>com.kendoui.taglib.numerictextbox.SpinFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -7002,49 +7042,9 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
-        <description>Subscribes to the activate event of PanelBar.</description>
-        <name>panelBar-activate</name>
-        <tag-class>com.kendoui.taglib.panelbar.ActivateTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the collapse event of PanelBar.</description>
-        <name>panelBar-collapse</name>
-        <tag-class>com.kendoui.taglib.panelbar.CollapseTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the contentLoad event of PanelBar.</description>
-        <name>panelBar-contentLoad</name>
-        <tag-class>com.kendoui.taglib.panelbar.ContentLoadTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the error event of PanelBar.</description>
-        <name>panelBar-error</name>
-        <tag-class>com.kendoui.taglib.panelbar.ErrorTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the expand event of PanelBar.</description>
-        <name>panelBar-expand</name>
-        <tag-class>com.kendoui.taglib.panelbar.ExpandTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the select event of PanelBar.</description>
-        <name>panelBar-select</name>
-        <tag-class>com.kendoui.taglib.panelbar.SelectTag</tag-class>
+        <description>Subscribes to the change event of Pager.</description>
+        <name>pager-change</name>
+        <tag-class>com.kendoui.taglib.pager.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -7064,6 +7064,54 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
         <tag-class>com.kendoui.taglib.panelbar.ItemsTag</tag-class>
         <body-content>JSP</body-content>
 
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the activate event of PanelBar.</description>
+        <name>panelBar-activate</name>
+        <tag-class>com.kendoui.taglib.panelbar.ActivateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the collapse event of PanelBar.</description>
+        <name>panelBar-collapse</name>
+        <tag-class>com.kendoui.taglib.panelbar.CollapseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the contentLoad event of PanelBar.</description>
+        <name>panelBar-contentLoad</name>
+        <tag-class>com.kendoui.taglib.panelbar.ContentLoadFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the error event of PanelBar.</description>
+        <name>panelBar-error</name>
+        <tag-class>com.kendoui.taglib.panelbar.ErrorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the expand event of PanelBar.</description>
+        <name>panelBar-expand</name>
+        <tag-class>com.kendoui.taglib.panelbar.ExpandFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the select event of PanelBar.</description>
+        <name>panelBar-select</name>
+        <tag-class>com.kendoui.taglib.panelbar.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
 
@@ -7505,22 +7553,6 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
-        <description>Subscribes to the change event of RangeSlider.</description>
-        <name>rangeSlider-change</name>
-        <tag-class>com.kendoui.taglib.rangeslider.ChangeTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the slide event of RangeSlider.</description>
-        <name>rangeSlider-slide</name>
-        <tag-class>com.kendoui.taglib.rangeslider.SlideTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
         <description>Configuration of the</description>
         <name>rangeSlider-tooltip</name>
         <tag-class>com.kendoui.taglib.rangeslider.TooltipTag</tag-class>
@@ -7552,17 +7584,17 @@ the</description>
 
 
     <tag>
-        <description>Subscribes to the change event of Slider.</description>
-        <name>slider-change</name>
-        <tag-class>com.kendoui.taglib.slider.ChangeTag</tag-class>
+        <description>Subscribes to the change event of RangeSlider.</description>
+        <name>rangeSlider-change</name>
+        <tag-class>com.kendoui.taglib.rangeslider.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the slide event of Slider.</description>
-        <name>slider-slide</name>
-        <tag-class>com.kendoui.taglib.slider.SlideTag</tag-class>
+        <description>Subscribes to the slide event of RangeSlider.</description>
+        <name>rangeSlider-slide</name>
+        <tag-class>com.kendoui.taglib.rangeslider.SlideFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -7599,41 +7631,17 @@ format will also influence the appearance of the</description>
 
 
     <tag>
-        <description>Subscribes to the collapse event of Splitter.</description>
-        <name>splitter-collapse</name>
-        <tag-class>com.kendoui.taglib.splitter.CollapseTag</tag-class>
+        <description>Subscribes to the change event of Slider.</description>
+        <name>slider-change</name>
+        <tag-class>com.kendoui.taglib.slider.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the contentLoad event of Splitter.</description>
-        <name>splitter-contentLoad</name>
-        <tag-class>com.kendoui.taglib.splitter.ContentLoadTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the expand event of Splitter.</description>
-        <name>splitter-expand</name>
-        <tag-class>com.kendoui.taglib.splitter.ExpandTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the layoutChange event of Splitter.</description>
-        <name>splitter-layoutChange</name>
-        <tag-class>com.kendoui.taglib.splitter.LayoutChangeTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the resize event of Splitter.</description>
-        <name>splitter-resize</name>
-        <tag-class>com.kendoui.taglib.splitter.ResizeTag</tag-class>
+        <description>Subscribes to the slide event of Slider.</description>
+        <name>slider-slide</name>
+        <tag-class>com.kendoui.taglib.slider.SlideFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -7644,6 +7652,46 @@ format will also influence the appearance of the</description>
         <tag-class>com.kendoui.taglib.splitter.PanesTag</tag-class>
         <body-content>JSP</body-content>
 
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the collapse event of Splitter.</description>
+        <name>splitter-collapse</name>
+        <tag-class>com.kendoui.taglib.splitter.CollapseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the contentLoad event of Splitter.</description>
+        <name>splitter-contentLoad</name>
+        <tag-class>com.kendoui.taglib.splitter.ContentLoadFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the expand event of Splitter.</description>
+        <name>splitter-expand</name>
+        <tag-class>com.kendoui.taglib.splitter.ExpandFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the layoutChange event of Splitter.</description>
+        <name>splitter-layoutChange</name>
+        <tag-class>com.kendoui.taglib.splitter.LayoutChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the resize event of Splitter.</description>
+        <name>splitter-resize</name>
+        <tag-class>com.kendoui.taglib.splitter.ResizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
 
@@ -7716,38 +7764,6 @@ value must not exceed</description>
 
 
     <tag>
-        <description>Subscribes to the activate event of TabStrip.</description>
-        <name>tabStrip-activate</name>
-        <tag-class>com.kendoui.taglib.tabstrip.ActivateTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the contentLoad event of TabStrip.</description>
-        <name>tabStrip-contentLoad</name>
-        <tag-class>com.kendoui.taglib.tabstrip.ContentLoadTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the error event of TabStrip.</description>
-        <name>tabStrip-error</name>
-        <tag-class>com.kendoui.taglib.tabstrip.ErrorTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the select event of TabStrip.</description>
-        <name>tabStrip-select</name>
-        <tag-class>com.kendoui.taglib.tabstrip.SelectTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
         <description>A collection of visual animations used when</description>
         <name>tabStrip-animation</name>
         <tag-class>com.kendoui.taglib.tabstrip.AnimationTag</tag-class>
@@ -7762,6 +7778,38 @@ value must not exceed</description>
         <tag-class>com.kendoui.taglib.tabstrip.ItemsTag</tag-class>
         <body-content>JSP</body-content>
 
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the activate event of TabStrip.</description>
+        <name>tabStrip-activate</name>
+        <tag-class>com.kendoui.taglib.tabstrip.ActivateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the contentLoad event of TabStrip.</description>
+        <name>tabStrip-contentLoad</name>
+        <tag-class>com.kendoui.taglib.tabstrip.ContentLoadFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the error event of TabStrip.</description>
+        <name>tabStrip-error</name>
+        <tag-class>com.kendoui.taglib.tabstrip.ErrorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the select event of TabStrip.</description>
+        <name>tabStrip-select</name>
+        <tag-class>com.kendoui.taglib.tabstrip.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
 
@@ -7836,30 +7884,6 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
 
     <tag>
-        <description>Subscribes to the change event of TimePicker.</description>
-        <name>timePicker-change</name>
-        <tag-class>com.kendoui.taglib.timepicker.ChangeTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the close event of TimePicker.</description>
-        <name>timePicker-close</name>
-        <tag-class>com.kendoui.taglib.timepicker.CloseTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the open event of TimePicker.</description>
-        <name>timePicker-open</name>
-        <tag-class>com.kendoui.taglib.timepicker.OpenTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
         <name>timePicker-animation</name>
         <tag-class>com.kendoui.taglib.timepicker.AnimationTag</tag-class>
@@ -7883,65 +7907,25 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
 
     <tag>
-        <description>Subscribes to the collapse event of TreeView.</description>
-        <name>treeView-collapse</name>
-        <tag-class>com.kendoui.taglib.treeview.CollapseTag</tag-class>
+        <description>Subscribes to the change event of TimePicker.</description>
+        <name>timePicker-change</name>
+        <tag-class>com.kendoui.taglib.timepicker.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the dataBound event of TreeView.</description>
-        <name>treeView-dataBound</name>
-        <tag-class>com.kendoui.taglib.treeview.DataBoundTag</tag-class>
+        <description>Subscribes to the close event of TimePicker.</description>
+        <name>timePicker-close</name>
+        <tag-class>com.kendoui.taglib.timepicker.CloseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the drag event of TreeView.</description>
-        <name>treeView-drag</name>
-        <tag-class>com.kendoui.taglib.treeview.DragTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the dragend event of TreeView.</description>
-        <name>treeView-dragend</name>
-        <tag-class>com.kendoui.taglib.treeview.DragendTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the dragstart event of TreeView.</description>
-        <name>treeView-dragstart</name>
-        <tag-class>com.kendoui.taglib.treeview.DragstartTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the drop event of TreeView.</description>
-        <name>treeView-drop</name>
-        <tag-class>com.kendoui.taglib.treeview.DropTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the expand event of TreeView.</description>
-        <name>treeView-expand</name>
-        <tag-class>com.kendoui.taglib.treeview.ExpandTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the select event of TreeView.</description>
-        <name>treeView-select</name>
-        <tag-class>com.kendoui.taglib.treeview.SelectTag</tag-class>
+        <description>Subscribes to the open event of TimePicker.</description>
+        <name>timePicker-open</name>
+        <tag-class>com.kendoui.taglib.timepicker.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -7985,6 +7969,70 @@ Setting this option to</description>
         <tag-class>com.kendoui.taglib.treeview.ItemsTag</tag-class>
         <body-content>JSP</body-content>
 
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the collapse event of TreeView.</description>
+        <name>treeView-collapse</name>
+        <tag-class>com.kendoui.taglib.treeview.CollapseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dataBound event of TreeView.</description>
+        <name>treeView-dataBound</name>
+        <tag-class>com.kendoui.taglib.treeview.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the drag event of TreeView.</description>
+        <name>treeView-drag</name>
+        <tag-class>com.kendoui.taglib.treeview.DragFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dragend event of TreeView.</description>
+        <name>treeView-dragend</name>
+        <tag-class>com.kendoui.taglib.treeview.DragendFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dragstart event of TreeView.</description>
+        <name>treeView-dragstart</name>
+        <tag-class>com.kendoui.taglib.treeview.DragstartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the drop event of TreeView.</description>
+        <name>treeView-drop</name>
+        <tag-class>com.kendoui.taglib.treeview.DropFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the expand event of TreeView.</description>
+        <name>treeView-expand</name>
+        <tag-class>com.kendoui.taglib.treeview.ExpandFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the select event of TreeView.</description>
+        <name>treeView-select</name>
+        <tag-class>com.kendoui.taglib.treeview.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
 
@@ -8055,70 +8103,6 @@ node is expanded.</description>
             <type>java.lang.String</type>
         </attribute>
 
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the cancel event of Upload.</description>
-        <name>upload-cancel</name>
-        <tag-class>com.kendoui.taglib.upload.CancelTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the complete event of Upload.</description>
-        <name>upload-complete</name>
-        <tag-class>com.kendoui.taglib.upload.CompleteTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the error event of Upload.</description>
-        <name>upload-error</name>
-        <tag-class>com.kendoui.taglib.upload.ErrorTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the progress event of Upload.</description>
-        <name>upload-progress</name>
-        <tag-class>com.kendoui.taglib.upload.ProgressTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the remove event of Upload.</description>
-        <name>upload-remove</name>
-        <tag-class>com.kendoui.taglib.upload.RemoveTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the select event of Upload.</description>
-        <name>upload-select</name>
-        <tag-class>com.kendoui.taglib.upload.SelectTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the success event of Upload.</description>
-        <name>upload-success</name>
-        <tag-class>com.kendoui.taglib.upload.SuccessTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the  event of Upload.</description>
-        <name>upload-</name>
-        <tag-class>com.kendoui.taglib.upload.Tag</tag-class>
-        <body-content>JSP</body-content>
     </tag>
 
 
@@ -8257,73 +8241,65 @@ containing one or more fields with the same name as the original input name.</de
 
 
     <tag>
-        <description>Subscribes to the activate event of Window.</description>
-        <name>window-activate</name>
-        <tag-class>com.kendoui.taglib.window.ActivateTag</tag-class>
+        <description>Subscribes to the cancel event of Upload.</description>
+        <name>upload-cancel</name>
+        <tag-class>com.kendoui.taglib.upload.CancelFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the close event of Window.</description>
-        <name>window-close</name>
-        <tag-class>com.kendoui.taglib.window.CloseTag</tag-class>
+        <description>Subscribes to the complete event of Upload.</description>
+        <name>upload-complete</name>
+        <tag-class>com.kendoui.taglib.upload.CompleteFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the deactivate event of Window.</description>
-        <name>window-deactivate</name>
-        <tag-class>com.kendoui.taglib.window.DeactivateTag</tag-class>
+        <description>Subscribes to the error event of Upload.</description>
+        <name>upload-error</name>
+        <tag-class>com.kendoui.taglib.upload.ErrorFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the dragend event of Window.</description>
-        <name>window-dragend</name>
-        <tag-class>com.kendoui.taglib.window.DragendTag</tag-class>
+        <description>Subscribes to the progress event of Upload.</description>
+        <name>upload-progress</name>
+        <tag-class>com.kendoui.taglib.upload.ProgressFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the dragstart event of Window.</description>
-        <name>window-dragstart</name>
-        <tag-class>com.kendoui.taglib.window.DragstartTag</tag-class>
+        <description>Subscribes to the remove event of Upload.</description>
+        <name>upload-remove</name>
+        <tag-class>com.kendoui.taglib.upload.RemoveFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the error event of Window.</description>
-        <name>window-error</name>
-        <tag-class>com.kendoui.taglib.window.ErrorTag</tag-class>
+        <description>Subscribes to the select event of Upload.</description>
+        <name>upload-select</name>
+        <tag-class>com.kendoui.taglib.upload.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the open event of Window.</description>
-        <name>window-open</name>
-        <tag-class>com.kendoui.taglib.window.OpenTag</tag-class>
+        <description>Subscribes to the success event of Upload.</description>
+        <name>upload-success</name>
+        <tag-class>com.kendoui.taglib.upload.SuccessFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
 
     <tag>
-        <description>Subscribes to the refresh event of Window.</description>
-        <name>window-refresh</name>
-        <tag-class>com.kendoui.taglib.window.RefreshTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the resize event of Window.</description>
-        <name>window-resize</name>
-        <tag-class>com.kendoui.taglib.window.ResizeTag</tag-class>
+        <description>Subscribes to the upload event of Upload.</description>
+        <name>upload-upload</name>
+        <tag-class>com.kendoui.taglib.upload.UploadFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -8348,6 +8324,78 @@ containing one or more fields with the same name as the original input name.</de
             <type>Object</type>
         </attribute>
 
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the activate event of Window.</description>
+        <name>window-activate</name>
+        <tag-class>com.kendoui.taglib.window.ActivateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the close event of Window.</description>
+        <name>window-close</name>
+        <tag-class>com.kendoui.taglib.window.CloseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the deactivate event of Window.</description>
+        <name>window-deactivate</name>
+        <tag-class>com.kendoui.taglib.window.DeactivateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dragend event of Window.</description>
+        <name>window-dragend</name>
+        <tag-class>com.kendoui.taglib.window.DragendFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dragstart event of Window.</description>
+        <name>window-dragstart</name>
+        <tag-class>com.kendoui.taglib.window.DragstartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the error event of Window.</description>
+        <name>window-error</name>
+        <tag-class>com.kendoui.taglib.window.ErrorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the open event of Window.</description>
+        <name>window-open</name>
+        <tag-class>com.kendoui.taglib.window.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the refresh event of Window.</description>
+        <name>window-refresh</name>
+        <tag-class>com.kendoui.taglib.window.RefreshFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the resize event of Window.</description>
+        <name>window-resize</name>
+        <tag-class>com.kendoui.taglib.window.ResizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
 

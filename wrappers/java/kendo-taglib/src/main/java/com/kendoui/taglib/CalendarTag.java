@@ -48,16 +48,16 @@ public class CalendarTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "calendar";
     }
 
-    public void setChange(ChangeTag value) {
+    public void setMonth(MonthTag value) {
+        setProperty("month", value);
+    }
+
+    public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
 
-    public void setNavigate(NavigateTag value) {
+    public void setNavigate(NavigateFunctionTag value) {
         setEvent("navigate", value.getBody());
-    }
-
-    public void setMonth(MonthTag value) {
-        setProperty("month", value);
     }
 
     public String getCulture() {

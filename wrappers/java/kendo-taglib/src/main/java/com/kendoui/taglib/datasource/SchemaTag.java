@@ -50,6 +50,10 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-schema";
     }
 
+    public void setParse(ParseFunctionTag value) {
+        setEvent("parse", value.getBody());
+    }
+
     public String getAggregates() {
         return (String)getProperty("aggregates");
     }

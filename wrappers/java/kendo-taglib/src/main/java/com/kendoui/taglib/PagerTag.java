@@ -48,12 +48,12 @@ public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidg
         return "pager";
     }
 
-    public void setChange(ChangeTag value) {
-        setEvent("change", value.getBody());
-    }
-
     public void setMessages(MessagesTag value) {
         setProperty("messages", value);
+    }
+
+    public void setChange(ChangeFunctionTag value) {
+        setEvent("change", value.getBody());
     }
 
     public boolean getAutoBind() {

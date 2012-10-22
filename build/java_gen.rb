@@ -288,6 +288,10 @@ class String
         self.sub(/^./) { |c| c.downcase }
     end
 
+    def pascalize
+        self.sub(/^./) { |c| c.upcase }
+    end
+
     def strip_namespace
         self.sub(/kendo.*ui\./, '').sub('kendo.data.', '')
     end
@@ -500,12 +504,12 @@ class Tag
                 end
 
                 if option.type == 'Array'
-                    child =  NestedTagArray.new :name => option.name,
+                    child =  NestedTagArray.new :name => option.name.sub(prefix, ''),
                               :parent => self,
                               :description => option.description,
                               :options => child_options
                 else
-                    child =  NestedTag.new :name => option.name,
+                    child =  NestedTag.new :name => option.name.sub(prefix, ''),
                               :parent => self,
                               :description => option.description,
                               :options => child_options,
@@ -516,6 +520,14 @@ class Tag
 
                 child.promote_options_to_tags
             end
+        end
+
+        @events.each do |event|
+            child = NestedTagEvent.new :name => event.name,
+                                  :parent => self,
+                                  :description => event.description
+
+            @children.push(child);
         end
     end
 
@@ -621,11 +633,6 @@ class Tag
 
                     tag.events.push(event)
 
-                    event = NestedTagEvent.new :name => name,
-                                          :parent => tag,
-                                          :description => description.value
-
-                    tag.children.push(event);
                 end
             end
         end
@@ -690,7 +697,7 @@ class NestedTag < Tag
     def initialize(options)
         super
         @parent = options[:parent]
-        @name = options[:name].sub(@parent.namespace, '').sub(/^./) { |c| c.capitalize }
+        @name = options[:name].pascalize
         @options = options[:options] if options[:options]
         @events = options[:events] if options[:events]
         @description = options[:description]
@@ -700,6 +707,10 @@ end
 class NestedTagEvent < NestedTag
     def template
         JAVA_EVENT_NESTED_TAG_TEMPLATE
+    end
+
+    def java_type
+        @name + 'FunctionTag'
     end
 
     def xml_template

@@ -57,18 +57,6 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces *//* interfaces */
         return "menu";
     }
 
-    public void setClose(CloseTag value) {
-        setEvent("close", value.getBody());
-    }
-
-    public void setOpen(OpenTag value) {
-        setEvent("open", value.getBody());
-    }
-
-    public void setSelect(SelectTag value) {
-        setEvent("select", value.getBody());
-    }
-
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value);
     }
@@ -77,6 +65,18 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces *//* interfaces */
 
         items = value.items();
 
+    }
+
+    public void setClose(CloseFunctionTag value) {
+        setEvent("close", value.getBody());
+    }
+
+    public void setOpen(OpenFunctionTag value) {
+        setEvent("open", value.getBody());
+    }
+
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
     }
 
     public boolean getCloseOnClick() {

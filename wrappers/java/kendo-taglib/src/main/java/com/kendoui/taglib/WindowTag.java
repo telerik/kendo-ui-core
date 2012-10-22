@@ -61,44 +61,44 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "window";
     }
 
-    public void setActivate(ActivateTag value) {
+    public void setAnimation(AnimationTag value) {
+        setProperty("animation", value);
+    }
+
+    public void setActivate(ActivateFunctionTag value) {
         setEvent("activate", value.getBody());
     }
 
-    public void setClose(CloseTag value) {
+    public void setClose(CloseFunctionTag value) {
         setEvent("close", value.getBody());
     }
 
-    public void setDeactivate(DeactivateTag value) {
+    public void setDeactivate(DeactivateFunctionTag value) {
         setEvent("deactivate", value.getBody());
     }
 
-    public void setDragend(DragendTag value) {
+    public void setDragend(DragendFunctionTag value) {
         setEvent("dragend", value.getBody());
     }
 
-    public void setDragstart(DragstartTag value) {
+    public void setDragstart(DragstartFunctionTag value) {
         setEvent("dragstart", value.getBody());
     }
 
-    public void setError(ErrorTag value) {
+    public void setError(ErrorFunctionTag value) {
         setEvent("error", value.getBody());
     }
 
-    public void setOpen(OpenTag value) {
+    public void setOpen(OpenFunctionTag value) {
         setEvent("open", value.getBody());
     }
 
-    public void setRefresh(RefreshTag value) {
+    public void setRefresh(RefreshFunctionTag value) {
         setEvent("refresh", value.getBody());
     }
 
-    public void setResize(ResizeTag value) {
+    public void setResize(ResizeFunctionTag value) {
         setEvent("resize", value.getBody());
-    }
-
-    public void setAnimation(AnimationTag value) {
-        setProperty("animation", value);
     }
 
     public Object getActions() {

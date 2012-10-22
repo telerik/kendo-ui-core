@@ -47,27 +47,27 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "editor";
     }
 
-    public void setChange(ChangeTag value) {
+    public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
 
-    public void setExecute(ExecuteTag value) {
+    public void setExecute(ExecuteFunctionTag value) {
         setEvent("execute", value.getBody());
     }
 
-    public void setKeydown(KeydownTag value) {
+    public void setKeydown(KeydownFunctionTag value) {
         setEvent("keydown", value.getBody());
     }
 
-    public void setKeyup(KeyupTag value) {
+    public void setKeyup(KeyupFunctionTag value) {
         setEvent("keyup", value.getBody());
     }
 
-    public void setPaste(PasteTag value) {
+    public void setPaste(PasteFunctionTag value) {
         setEvent("paste", value.getBody());
     }
 
-    public void setSelect(SelectTag value) {
+    public void setSelect(SelectFunctionTag value) {
         setEvent("select", value.getBody());
     }
 

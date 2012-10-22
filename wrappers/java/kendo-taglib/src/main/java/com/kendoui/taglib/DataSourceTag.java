@@ -47,26 +47,6 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource";
     }
 
-    public void setChange(ChangeTag value) {
-        setEvent("change", value.getBody());
-    }
-
-    public void setError(ErrorTag value) {
-        setEvent("error", value.getBody());
-    }
-
-    public void setSync(SyncTag value) {
-        setEvent("sync", value.getBody());
-    }
-
-    public void setRequestStart(RequestStartTag value) {
-        setEvent("requestStart", value.getBody());
-    }
-
-    public void setRequestEnd(RequestEndTag value) {
-        setEvent("requestEnd", value.getBody());
-    }
-
     public void setFilter(FilterTag value) {
 
         setProperty("filter", value.filter());
@@ -79,6 +59,26 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setTransport(TransportTag value) {
         setProperty("transport", value);
+    }
+
+    public void setChange(ChangeFunctionTag value) {
+        setEvent("change", value.getBody());
+    }
+
+    public void setError(ErrorFunctionTag value) {
+        setEvent("error", value.getBody());
+    }
+
+    public void setSync(SyncFunctionTag value) {
+        setEvent("sync", value.getBody());
+    }
+
+    public void setRequestStart(RequestStartFunctionTag value) {
+        setEvent("requestStart", value.getBody());
+    }
+
+    public void setRequestEnd(RequestEndFunctionTag value) {
+        setEvent("requestEnd", value.getBody());
     }
 
     public Object getAggregate() {

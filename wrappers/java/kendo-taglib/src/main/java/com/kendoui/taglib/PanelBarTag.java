@@ -57,30 +57,6 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces *//* interface
         return "panelBar";
     }
 
-    public void setActivate(ActivateTag value) {
-        setEvent("activate", value.getBody());
-    }
-
-    public void setCollapse(CollapseTag value) {
-        setEvent("collapse", value.getBody());
-    }
-
-    public void setContentLoad(ContentLoadTag value) {
-        setEvent("contentLoad", value.getBody());
-    }
-
-    public void setError(ErrorTag value) {
-        setEvent("error", value.getBody());
-    }
-
-    public void setExpand(ExpandTag value) {
-        setEvent("expand", value.getBody());
-    }
-
-    public void setSelect(SelectTag value) {
-        setEvent("select", value.getBody());
-    }
-
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value);
     }
@@ -89,6 +65,30 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces *//* interface
 
         items = value.items();
 
+    }
+
+    public void setActivate(ActivateFunctionTag value) {
+        setEvent("activate", value.getBody());
+    }
+
+    public void setCollapse(CollapseFunctionTag value) {
+        setEvent("collapse", value.getBody());
+    }
+
+    public void setContentLoad(ContentLoadFunctionTag value) {
+        setEvent("contentLoad", value.getBody());
+    }
+
+    public void setError(ErrorFunctionTag value) {
+        setEvent("error", value.getBody());
+    }
+
+    public void setExpand(ExpandFunctionTag value) {
+        setEvent("expand", value.getBody());
+    }
+
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
     }
 
     public String getExpandMode() {

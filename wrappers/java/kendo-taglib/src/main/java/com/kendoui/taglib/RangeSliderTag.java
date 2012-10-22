@@ -48,16 +48,16 @@ public class RangeSliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "rangeSlider";
     }
 
-    public void setChange(ChangeTag value) {
+    public void setTooltip(TooltipTag value) {
+        setProperty("tooltip", value);
+    }
+
+    public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
 
-    public void setSlide(SlideTag value) {
+    public void setSlide(SlideFunctionTag value) {
         setEvent("slide", value.getBody());
-    }
-
-    public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value);
     }
 
     public float getLargeStep() {

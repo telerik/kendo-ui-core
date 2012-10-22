@@ -56,38 +56,6 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         return "treeView";
     }
 
-    public void setCollapse(CollapseTag value) {
-        setEvent("collapse", value.getBody());
-    }
-
-    public void setDataBound(DataBoundTag value) {
-        setEvent("dataBound", value.getBody());
-    }
-
-    public void setDrag(DragTag value) {
-        setEvent("drag", value.getBody());
-    }
-
-    public void setDragend(DragendTag value) {
-        setEvent("dragend", value.getBody());
-    }
-
-    public void setDragstart(DragstartTag value) {
-        setEvent("dragstart", value.getBody());
-    }
-
-    public void setDrop(DropTag value) {
-        setEvent("drop", value.getBody());
-    }
-
-    public void setExpand(ExpandTag value) {
-        setEvent("expand", value.getBody());
-    }
-
-    public void setSelect(SelectTag value) {
-        setEvent("select", value.getBody());
-    }
-
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value);
     }
@@ -100,6 +68,38 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
 
         items = value.items();
 
+    }
+
+    public void setCollapse(CollapseFunctionTag value) {
+        setEvent("collapse", value.getBody());
+    }
+
+    public void setDataBound(DataBoundFunctionTag value) {
+        setEvent("dataBound", value.getBody());
+    }
+
+    public void setDrag(DragFunctionTag value) {
+        setEvent("drag", value.getBody());
+    }
+
+    public void setDragend(DragendFunctionTag value) {
+        setEvent("dragend", value.getBody());
+    }
+
+    public void setDragstart(DragstartFunctionTag value) {
+        setEvent("dragstart", value.getBody());
+    }
+
+    public void setDrop(DropFunctionTag value) {
+        setEvent("drop", value.getBody());
+    }
+
+    public void setExpand(ExpandFunctionTag value) {
+        setEvent("expand", value.getBody());
+    }
+
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
     }
 
     public boolean getCheckboxes() {

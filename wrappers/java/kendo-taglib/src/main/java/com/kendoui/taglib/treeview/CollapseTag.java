@@ -1,13 +1,15 @@
 
 package com.kendoui.taglib.treeview;
 
-import com.kendoui.taglib.FunctionTag;
+import com.kendoui.taglib.BaseTag;
+
+
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class CollapseTag extends FunctionTag /* interfaces *//* interfaces */ {
+public class CollapseTag extends BaseTag /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {

@@ -48,26 +48,6 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         return "chart";
     }
 
-    public void setAxisLabelClick(AxisLabelClickTag value) {
-        setEvent("axisLabelClick", value.getBody());
-    }
-
-    public void setDataBound(DataBoundTag value) {
-        setEvent("dataBound", value.getBody());
-    }
-
-    public void setPlotAreaClick(PlotAreaClickTag value) {
-        setEvent("plotAreaClick", value.getBody());
-    }
-
-    public void setSeriesClick(SeriesClickTag value) {
-        setEvent("seriesClick", value.getBody());
-    }
-
-    public void setSeriesHover(SeriesHoverTag value) {
-        setEvent("seriesHover", value.getBody());
-    }
-
     public void setCategoryAxis(CategoryAxisTag value) {
         setProperty("categoryaxis", value);
     }
@@ -76,8 +56,8 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("title", value);
     }
 
-    public void setArea(AreaTag value) {
-        setProperty("area", value);
+    public void setChartArea(ChartAreaTag value) {
+        setProperty("chartarea", value);
     }
 
     public void setLegend(LegendTag value) {
@@ -108,6 +88,26 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setXAxis(XAxisTag value) {
         setProperty("xaxis", value);
+    }
+
+    public void setAxisLabelClick(AxisLabelClickFunctionTag value) {
+        setEvent("axisLabelClick", value.getBody());
+    }
+
+    public void setDataBound(DataBoundFunctionTag value) {
+        setEvent("dataBound", value.getBody());
+    }
+
+    public void setPlotAreaClick(PlotAreaClickFunctionTag value) {
+        setEvent("plotAreaClick", value.getBody());
+    }
+
+    public void setSeriesClick(SeriesClickFunctionTag value) {
+        setEvent("seriesClick", value.getBody());
+    }
+
+    public void setSeriesHover(SeriesHoverFunctionTag value) {
+        setEvent("seriesHover", value.getBody());
     }
 
     @Override

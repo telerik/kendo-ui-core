@@ -45,11 +45,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         return "numericTextBox";
     }
 
-    public void setChange(ChangeTag value) {
+    public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
 
-    public void setSpin(SpinTag value) {
+    public void setSpin(SpinFunctionTag value) {
         setEvent("spin", value.getBody());
     }
 

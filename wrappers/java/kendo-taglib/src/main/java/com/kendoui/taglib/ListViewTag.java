@@ -46,19 +46,27 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         return "listView";
     }
 
-    public void setChange(ChangeTag value) {
+    public void setEditTemplate(EditTemplateFunctionTag value) {
+        setEvent("editTemplate", value.getBody());
+    }
+
+    public void setTemplate(TemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
+    public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
 
-    public void setDataBound(DataBoundTag value) {
+    public void setDataBound(DataBoundFunctionTag value) {
         setEvent("dataBound", value.getBody());
     }
 
-    public void setEdit(EditTag value) {
+    public void setEdit(EditFunctionTag value) {
         setEvent("edit", value.getBody());
     }
 
-    public void setRemove(RemoveTag value) {
+    public void setRemove(RemoveFunctionTag value) {
         setEvent("remove", value.getBody());
     }
 

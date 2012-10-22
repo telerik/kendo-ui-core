@@ -48,24 +48,24 @@ public class DatePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "datePicker";
     }
 
-    public void setChange(ChangeTag value) {
-        setEvent("change", value.getBody());
-    }
-
-    public void setClose(CloseTag value) {
-        setEvent("close", value.getBody());
-    }
-
-    public void setOpen(OpenTag value) {
-        setEvent("open", value.getBody());
-    }
-
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value);
     }
 
     public void setMonth(MonthTag value) {
         setProperty("month", value);
+    }
+
+    public void setChange(ChangeFunctionTag value) {
+        setEvent("change", value.getBody());
+    }
+
+    public void setClose(CloseFunctionTag value) {
+        setEvent("close", value.getBody());
+    }
+
+    public void setOpen(OpenFunctionTag value) {
+        setEvent("open", value.getBody());
     }
 
     public String getCulture() {
