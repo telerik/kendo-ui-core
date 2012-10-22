@@ -8,6 +8,7 @@ import javax.servlet.jsp.JspException;
 import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Li;
+import com.kendoui.taglib.html.Span;
 import com.kendoui.taglib.html.Text;
 import com.kendoui.taglib.html.Ul;
 
@@ -16,10 +17,16 @@ public abstract class BaseItemTag extends BaseTag {
     
     protected abstract List<?> items();
     protected abstract String getText();
+    protected abstract String getSpriteCssClass();
     
-    @Override
-    public int doEndTag() throws JspException {
-        Li element = new Li();
+    protected void renderContents(Li element) {
+        String spriteCssClass = getSpriteCssClass();
+        
+        if (spriteCssClass != null && spriteCssClass.trim().length() > 0) {
+            Span sprite = new Span();
+            sprite.attr("class", "k-sprite " + spriteCssClass);
+            element.append(sprite);
+        }
 
         element.append(new Text(getText()));
 
@@ -28,6 +35,13 @@ public abstract class BaseItemTag extends BaseTag {
         if (!html.isEmpty()) {
             appendContent(element, html);
         }
+    }
+    
+    @Override
+    public int doEndTag() throws JspException {
+        Li element = new Li();
+        
+        renderContents(element);
 
         try {
             element.write(pageContext.getOut());

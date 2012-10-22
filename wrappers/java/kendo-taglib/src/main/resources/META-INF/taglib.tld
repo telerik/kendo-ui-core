@@ -6943,6 +6943,13 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>Specifies the class name for the sprite image displayed by the item</description>
+            <name>spriteCssClass</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
 
@@ -7177,6 +7184,13 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
         <attribute>
             <description>Specifies the text displayed by the item</description>
             <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the class name for the sprite image displayed by the item</description>
+            <name>spriteCssClass</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -7880,6 +7894,13 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>Specifies the class name for the sprite image displayed by the item</description>
+            <name>spriteCssClass</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
 
@@ -8099,6 +8120,13 @@ node is expanded.</description>
         <attribute>
             <description>Specifies the text displayed by the item</description>
             <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the class name for the sprite image displayed by the item</description>
+            <name>spriteCssClass</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

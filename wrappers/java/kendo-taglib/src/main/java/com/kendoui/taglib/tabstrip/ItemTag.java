@@ -54,6 +54,14 @@ public class ItemTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("text", value);
     }
 
+    public String getSpriteCssClass() {
+        return (String)getProperty("spriteCssClass");
+    }
+
+    public void setSpriteCssClass(String value) {
+        setProperty("spriteCssClass", value);
+    }
+
 //<< Attributes
 
 }

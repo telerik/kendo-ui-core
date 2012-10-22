@@ -613,6 +613,10 @@ class Tag
             tag.options.push(Option.new :name => 'items.text',
                                         :type => 'String',
                                         :description => "Specifies the text displayed by the item")
+
+            tag.options.push(Option.new :name => 'items.spriteCssClass',
+                                        :type => 'String',
+                                        :description => "Specifies the class name for the sprite image displayed by the item")
         end
 
         start_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Events' }
