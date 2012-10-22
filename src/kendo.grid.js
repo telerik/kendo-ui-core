@@ -652,7 +652,7 @@
         },
 
         _aria: function() {
-            var id = this.element.attr("id") || "di_aria";
+            var id = this.element.attr("id") || "aria";
 
             if (id) {
                 this._cellId = id + "_active_cell";
@@ -675,7 +675,7 @@
                 }
             }
 
-            that.table = table.attr("cellspacing", 0).attr("role", "grid");
+            that.table = table.attr("cellspacing", 0).attr("role", that._hasDetails() ? "treegrid" : "grid");
 
             that._wrapper();
         },
@@ -2738,6 +2738,10 @@
 
                 that.trigger(expanding ? DETAILEXPAND : DETAILCOLLAPSE, { masterRow: masterRow, detailRow: detailRow});
                 detailRow.toggle(expanding);
+
+                if (that._current) {
+                    that._current.attr("aria-expanded", expanding);
+                }
 
                 e.preventDefault();
                 return false;

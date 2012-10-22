@@ -103,6 +103,41 @@
                 equal(item.attr("id"), "test_active_cell");
                 equal(grid.thead.parent().attr("aria-activedescendant"), "test_active_cell");
             });
+
+            test("Grid role is treegrid when has details", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    columns: [ "foo"],
+                    detailTemplate: "details"
+                });
+
+                equal(grid.element.attr("role"), "treegrid");
+            });
+
+            test("Grid set expanded state on expand", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    columns: [ "foo"],
+                    detailTemplate: "details"
+                });
+
+                grid.table.focus().find(".k-icon:first").click();
+
+                equal(grid.current().attr("aria-expanded"), "true");
+            });
+
+            test("Grid set expanded state on collapse", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    columns: [ "foo"],
+                    detailTemplate: "details"
+                });
+
+                grid.table.focus().find(".k-icon:first").click().click();
+
+                equal(grid.current().attr("aria-expanded"), "false");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
