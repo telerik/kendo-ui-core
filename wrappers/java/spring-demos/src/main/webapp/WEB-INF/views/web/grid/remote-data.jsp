@@ -13,9 +13,10 @@
             <kendo:grid-column title="Units In Stock" field="unitsInStock" />
         </kendo:grid-columns>
         <kendo:dataSource pageSize="10" serverPaging="true" serverSorting="true" serverFiltering="true" serverGrouping="true">
-            <kendo:dataSource-transport>
-                <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST"/>
-                <kendo:dataSource-schema data="data" total="total" groups="data">
+            <kendo:dataSource-transport parameterMap="parameterMap">
+                <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST"  contentType="application/json"/>                
+            </kendo:dataSource-transport>
+            <kendo:dataSource-schema data="data" total="total" groups="data">
                     <kendo:dataSource-schema-model>
                         <kendo:dataSource-schema-model-fields>
                             <kendo:dataSource-schema-model-field name="productName" type="string" />
@@ -24,7 +25,13 @@
                         </kendo:dataSource-schema-model-fields>
                     </kendo:dataSource-schema-model>
                 </kendo:dataSource-schema>
-            </kendo:dataSource-transport>
         </kendo:dataSource>
     </kendo:grid>
+    
+    <script>
+    function parameterMap(options, type) {        
+        return JSON.stringify(options);        
+    }
+    </script>
+    
 <demo:footer />

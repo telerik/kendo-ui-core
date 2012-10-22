@@ -25,7 +25,7 @@ public class DataSourceRequest {
     private int pageSize;
     private int take;
     private int skip;
-    private List<Map<String, String>> sort;
+    private List<SortDescriptor> sort;
     private List<GroupDescriptor> group;
     
     private FilterDescriptor filter;
@@ -66,11 +66,11 @@ public class DataSourceRequest {
         this.skip = skip;
     }
 
-    public List<Map<String, String>> getSort() {
+    public List<SortDescriptor> getSort() {
         return sort;
     }
 
-    public void setSort(List<Map<String, String>> sort) {
+    public void setSort(List<SortDescriptor> sort) {
         this.sort = sort;
     }
 
@@ -173,11 +173,11 @@ public class DataSourceRequest {
         }
     }
     
-    private static void sort(Criteria criteria, List<Map<String, String>> sort) {
+    private static void sort(Criteria criteria, List<SortDescriptor> sort) {
         if (sort != null && !sort.isEmpty()) {
-            for (Map<String, String> entry : sort) {
-                String field = entry.get("field");
-                String dir = entry.get("dir");
+            for (SortDescriptor entry : sort) {
+                String field = entry.getField();
+                String dir = entry.getDir();
                 
                 if (dir.equals("asc")) {
                     criteria.addOrder(Order.asc(field));    
@@ -332,13 +332,13 @@ public class DataSourceRequest {
         
         long total = total(criteria);
         
-        List<Map<String, String>> sort = new ArrayList<Map<String, String>>();
+        List<SortDescriptor> sort = new ArrayList<SortDescriptor>();
         
         List<GroupDescriptor> groups = getGroup();
-        List<Map<String, String>> sorts = getSort();
+        List<SortDescriptor> sorts = getSort();
         
         if (groups != null) {
-            appendGroups(sort);
+            sort.addAll(groups);
         }        
         
         if (sorts != null) {
@@ -369,26 +369,9 @@ public class DataSourceRequest {
         this.group = group;
     }
     
-    private void appendGroups(List<Map<String, String>> sorts){
-        List<GroupDescriptor> groups = getGroup();
-        if (groups != null && !groups.isEmpty()) {        
-            for (GroupDescriptor group : groups) {
-                Map<String, String> map = new HashMap<String,String>();
-                map.put("field", group.getField());
-                map.put("dir", group.getDir());
-                sorts.add(map);
-            }
-        }
-    }
-    
-    public static class GroupDescriptor {
+    public static class SortDescriptor {
         private String field;
         private String dir;
-        private List<AggregateDescriptor> aggregates;
-
-        public GroupDescriptor() {
-            aggregates = new ArrayList<AggregateDescriptor>();
-        }
         
         public String getField() {
             return field;
@@ -405,7 +388,15 @@ public class DataSourceRequest {
         public void setDir(String dir) {
             this.dir = dir;
         }
+    }
+    
+    public static class GroupDescriptor extends SortDescriptor {        
+        private List<AggregateDescriptor> aggregates;
 
+        public GroupDescriptor() {
+            aggregates = new ArrayList<AggregateDescriptor>();
+        }        
+        
         public List<AggregateDescriptor> getAggregates() {
             return aggregates;
         }
