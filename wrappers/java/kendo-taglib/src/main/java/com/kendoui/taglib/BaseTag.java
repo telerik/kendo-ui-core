@@ -55,12 +55,34 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
         return super.doEndTag();
     }
 
-    public void setProperty(String key, Object value) {
+    public void setProperty(String key, double value) {
+        json.put(key, value);
+    }
+    
+    public void setProperty(String key, String value) {
+        json.put(key, value);
+    }
+    
+    public void setProperty(String key, boolean value) {
+        json.put(key, value);
+    }
+    
+    public void setProperty(String key, Object value) {        
+        json.put(key, valueOf(value));
+    }
+    
+    protected Object valueOf(Object value) {
         if (value instanceof Serializable) {
             value = ((Serializable)value).properties();
+        } else if (value != null){
+            try {
+                value = Double.parseDouble(value.toString());
+            } catch (NumberFormatException e) {
+                
+            }
         }
-        
-        json.put(key, value);
+       
+        return value;
     }
 
     public Object getProperty(String key) {
