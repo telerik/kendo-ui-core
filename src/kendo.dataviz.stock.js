@@ -7,9 +7,11 @@
 
         dataviz = kendo.dataviz,
         Chart = dataviz.ui.Chart,
+        DateCategoryAxis = dataviz.DateCategoryAxis,
         Selection = dataviz.Selection,
 
         duration = dataviz.duration,
+        lteDateIndex = dataviz.lteDateIndex,
         toDate = dataviz.toDate;
 
     // Constants =============================================================
@@ -67,6 +69,18 @@
             name: "StockChart",
             tooltip: {
                 visible: true
+            },
+            navigator: {
+                seriesDefaults: {
+                    markers: {
+                        visible: false
+                    },
+                    tooltip: {
+                        visible: true,
+                        template: "#= kendo.toString(category, 'd') #"
+                    },
+                    width: 1
+                }
             }
         },
 
@@ -74,28 +88,32 @@
             var chart = this;
 
             Chart.fn._redraw.call(chart);
+            chart._redrawSelection();
+        },
 
+        _redrawSelection: function() {
+            var chart = this;
             var navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
-            var primaryAxis = chart._plotArea.options.categoryAxis[0];
+            var select = chart.options.navigator.select;
             var categoriesLength = navigatorAxis.options.categories.length;
-            var start = 0,
-                end = navigatorAxis.options.categories.length;
-
-            if (primaryAxis.min) {
-                start = dataviz.lteDateIndex(
-                    navigatorAxis.options.categories,
-                    dataviz.toDate(primaryAxis.min)
-                );
-            }
-
-            if (primaryAxis.max) {
-                end = dataviz.lteDateIndex(
-                    navigatorAxis.options.categories,
-                    dataviz.toDate(primaryAxis.max)
-                );
-            }
+            var start = 0;
+            var end = navigatorAxis.options.categories.length;
 
             if (categoriesLength > 0) {
+                if (select.from) {
+                    start = lteDateIndex(
+                        navigatorAxis.options.categories,
+                        toDate(select.from)
+                    );
+                }
+
+                if (select.to) {
+                    end = lteDateIndex(
+                        navigatorAxis.options.categories,
+                        toDate(select.to)
+                    );
+                }
+
                 var selection = chart._selection = new Selection(chart.element, navigatorAxis, {
                     // TODO: Start, end, min, max should be expressed in axis values
                     start: start,
@@ -105,6 +123,8 @@
                     snap: true,
                     select: $.proxy(chart._navigatorSelect, chart)
                 });
+
+                chart._applySelection();
             }
         },
 
@@ -167,37 +187,48 @@
                 visible: false
             });
 
-            series.push({
-                // TODO: Customization
-                // TODO: navigator.series?
-                type: options.navigator.type,
-                field: options.navigator.field,
-                axis: NAVIGATOR_AXIS,
-                categoryAxis: NAVIGATOR_AXIS,
-                markers: {
-                    visible: false
-                },
-                tooltip: {
-                    visible: true,
-                    template: "#= kendo.toString(category, 'd') #"
-                },
-                width: 1
-            });
+            var navigatorSeries = [].concat(options.navigator.series);
+            var seriesDefaults = options.navigator.seriesDefaults;
+            for (var i = 0; i < navigatorSeries.length; i++) {
+                series.push(
+                    deepExtend({}, seriesDefaults, navigatorSeries[i], {
+                        axis: NAVIGATOR_AXIS,
+                        categoryAxis: NAVIGATOR_AXIS,
+                    })
+                );
+            }
+        },
+
+        _applySelection: function() {
+            var chart = this;
+            var navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            var axes = chart._plotArea.options.categoryAxis;
+            var slavePanes = chart._plotArea.panes.slice(0, -1);
+            var i;
+            var select = chart.options.navigator.select;
+
+            for (i = 0; i < axes.length; i++) {
+                var slaveAxis = axes[i];
+                if (slaveAxis.pane !== NAVIGATOR_PANE) {
+                    slaveAxis.min = select.from;
+                    slaveAxis.max = select.to;
+                }
+            }
+
+            for (i = 0; i < slavePanes.length; i++) {
+                chart._plotArea.redrawPane(slavePanes[i]);
+            }
         },
 
         _navigatorSelect: function(e) {
-            var chart = this,
-                navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS],
-                // TODO: Control all slave axes
-                primaryAxis = chart._plotArea.options.categoryAxis[0],
-                panes = chart._plotArea.panes;
+            var chart = this;
+            var navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            var select = chart.options.navigator.select;
 
-            // TODO: Provide less awkward way to update axis options
             // TODO: Return start and end date
-            primaryAxis.min = navigatorAxis.options.categories[e.start];
-            primaryAxis.max = navigatorAxis.options.categories[e.end];
-            chart._plotArea.redrawPane(panes[0]);
-            //chart._plotArea.redrawPane(panes[1]);
+            select.from = navigatorAxis.options.categories[e.start];
+            select.to = navigatorAxis.options.categories[e.end];
+            chart._applySelection();
         },
 
         _onDragStart: function(e) {
@@ -263,11 +294,11 @@
 
             var selection = chart._selection;
             selection.setRange(
-                dataviz.lteDateIndex(
+                lteDateIndex(
                     navigatorAxis.options.categories,
                     rangeStart
                 ),
-                dataviz.lteDateIndex(
+                lteDateIndex(
                     navigatorAxis.options.categories,
                     rangeEnd
             ));
