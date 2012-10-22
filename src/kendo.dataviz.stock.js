@@ -26,82 +26,9 @@
         },
 
         _ready: function() {
-            var chart = this,
-                options = chart.options,
-                panes = options.panes = [].concat(options.panes),
-                categoryAxes = options.categoryAxis = [].concat(options.categoryAxis),
-                valueAxes = options.valueAxis = [].concat(options.valueAxis),
-                series = options.series;
+            var chart = this;
 
-            panes.push({
-                name: NAVIGATOR_PANE,
-                // TODO: Customization?
-                height: 80
-            });
-
-            var dateField = categoryAxes[0].field;
-            categoryAxes.push({
-                type: "date",
-                field: dateField,
-                name: NAVIGATOR_AXIS,
-                pane: NAVIGATOR_PANE,
-                baseUnit: "fit",
-                // TODO: Width based
-                maxDateGroups: 200,
-                baseUnitStep: "auto",
-                roundToBaseUnit: false,
-                justified: true,
-                labels: { visible: false },
-                majorTicks: { visible: false },
-                tooltip: { visible: false }
-            }, {
-                type: "date",
-                field: dateField,
-                pane: NAVIGATOR_PANE,
-                // TODO: Range-based
-                baseUnit: "years",
-                maxDateGroups: 20,
-                baseUnitStep: "auto",
-                roundToBaseUnit: false,
-                justified: true
-            }, {
-                type: "date",
-                field: dateField,
-                pane: NAVIGATOR_PANE,
-                // TODO: Range-based
-                baseUnit: "months",
-                baseUnitStep: 1,
-                roundToBaseUnit: false,
-                justified: true,
-                labels: { visible: false, mirror: true }
-            });
-
-            valueAxes.push({
-                // TODO: Extend navigaor.valueAxis
-                name: NAVIGATOR_AXIS,
-                pane: NAVIGATOR_PANE,
-                majorGridLines: {
-                    visible: false
-                },
-                visible: false
-            });
-
-            series.push({
-                // TODO: Customization
-                // TODO: navigator.series?
-                type: options.navigator.type,
-                field: options.navigator.field,
-                axis: NAVIGATOR_AXIS,
-                categoryAxis: NAVIGATOR_AXIS,
-                markers: {
-                    visible: false
-                },
-                tooltip: {
-                    visible: true,
-                    template: "#= kendo.toString(category, 'd') #"
-                },
-                width: 1
-            });
+            chart._createNavigator();
 
             $(chart.element).kendoDraggable({
                 drag: $.proxy(chart._onDrag, chart),
@@ -179,6 +106,83 @@
                     select: $.proxy(chart._navigatorSelect, chart)
                 });
             }
+        },
+
+        _createNavigator: function() {
+            var chart = this,
+                options = chart.options,
+                panes = options.panes = [].concat(options.panes),
+                categoryAxes = options.categoryAxis = [].concat(options.categoryAxis),
+                valueAxes = options.valueAxis = [].concat(options.valueAxis),
+                series = options.series;
+
+            panes.push(deepExtend(
+                {}, options.navigator.pane, { name: NAVIGATOR_PANE })
+            );
+
+            var dateField = categoryAxes[0].field;
+            categoryAxes.push({
+                type: "date",
+                field: dateField,
+                name: NAVIGATOR_AXIS,
+                pane: NAVIGATOR_PANE,
+                baseUnit: "fit",
+                // TODO: Width based
+                maxDateGroups: 200,
+                baseUnitStep: "auto",
+                roundToBaseUnit: false,
+                justified: true,
+                labels: { visible: false },
+                majorTicks: { visible: false },
+                tooltip: { visible: false }
+            }, {
+                type: "date",
+                field: dateField,
+                pane: NAVIGATOR_PANE,
+                // TODO: Range-based
+                baseUnit: "years",
+                maxDateGroups: 20,
+                baseUnitStep: "auto",
+                roundToBaseUnit: false,
+                justified: true
+            }, {
+                type: "date",
+                field: dateField,
+                pane: NAVIGATOR_PANE,
+                // TODO: Range-based
+                baseUnit: "months",
+                baseUnitStep: 1,
+                roundToBaseUnit: false,
+                justified: true,
+                labels: { visible: false, mirror: true }
+            });
+
+            valueAxes.push({
+                // TODO: Extend navigaor.valueAxis
+                name: NAVIGATOR_AXIS,
+                pane: NAVIGATOR_PANE,
+                majorGridLines: {
+                    visible: false
+                },
+                visible: false
+            });
+
+            series.push({
+                // TODO: Customization
+                // TODO: navigator.series?
+                type: options.navigator.type,
+                field: options.navigator.field,
+                axis: NAVIGATOR_AXIS,
+                categoryAxis: NAVIGATOR_AXIS,
+                markers: {
+                    visible: false
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= kendo.toString(category, 'd') #"
+                },
+                width: 1
+            });
         },
 
         _navigatorSelect: function(e) {

@@ -115,6 +115,11 @@
             },
             tooltip: {
                 font: SANS12
+            },
+            navigator: {
+                pane: {
+                    height: 80
+                }
             }
         };
 

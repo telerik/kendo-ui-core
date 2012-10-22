@@ -20,10 +20,10 @@
         <h3>The Boeing Company (NYSE:BA)</h3>
         <div id="chart" style="width: 900px; height: 400px;"></div>
         <script>
-            // TODO: narrowRange goes < 0 (sometimes)
-            // TODO: LEAKS
             // TODO: Introduce single (top-level) dateField
-            // TODO: Refresh multiple panes
+            // TODO: Scroll to zoom
+            // TODO: series.pane shortcut
+            // TODO: (-) Refresh multiple panes
             $(function() {
                 $("#chart").kendoStockChart({
                     dataSource: {
@@ -35,7 +35,6 @@
                             dir: "asc"
                         }
                     },
-                    dateField: "Date",
                     series: [{
                         type: "candlestick",
                         openField: "Open",
@@ -44,11 +43,19 @@
                         closeField: "Close"
                     }],
                     navigator: {
-                        type: "line",
-                        field: "Close"
-                        // series
+                        // object/array
+                        series: {
+                            type: "line",
+                            field: "Close"
+                        },
+                        select: {
+                            from: "2002/02/05",
+                            to: "2002/06/12"
+                        },
+                        pane: {
+                            height: 80
+                        }
                     },
-
                     // TODO: Infer
                     categoryAxes: [{
                         field: "Date",
