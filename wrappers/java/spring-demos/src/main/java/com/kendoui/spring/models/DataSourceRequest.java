@@ -19,7 +19,6 @@ import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.ResultTransformer;
-import org.springframework.util.AutoPopulatingList;
 
 public class DataSourceRequest {
     private int page;
@@ -29,28 +28,10 @@ public class DataSourceRequest {
     private List<Map<String, String>> sort;
     private List<GroupDescriptor> group;
     
-    private Map<String, Object> filter;
+    private FilterDescriptor filter;
     
     public DataSourceRequest() {
-        filter = new HashMap<String, Object>();
-        
-        List<Map<String, Object>> filters = new AutoPopulatingList<Map<String, Object>>(new AutoPopulatingList.ElementFactory<Map<String, Object>>() {
-            public Map<String, Object> createElement(int index) {
-                Map<String, Object> result = new HashMap<String, Object>();
-        
-                List<Map<String, Object>> filters = new AutoPopulatingList<Map<String, Object>>(new AutoPopulatingList.ElementFactory<Map<String,Object>>() {
-                    public Map<String, Object> createElement(int index) {
-                        return new HashMap<String, Object>();
-                    }
-                });
-                
-                result.put("filters", filters);
-                
-                return result; 
-            }
-        });
-        
-        filter.put("filters", filters);
+        filter = new FilterDescriptor();
     }
     
     public int getPage() {
@@ -93,18 +74,18 @@ public class DataSourceRequest {
         this.sort = sort;
     }
 
-    public Map<String, Object> getFilter() {
+    public FilterDescriptor getFilter() {
         return filter;
     }
 
-    public void setFilter(Map<String, Object> filter) {
+    public void setFilter(FilterDescriptor filter) {
         this.filter = filter;
     }
 
-    private static void restrict(Junction junction, Map<String, Object> filter, Class<?> clazz) {
-        String operator = filter.get("operator").toString();
-        String field = filter.get("field").toString();
-        Object value = filter.get("value");
+    private static void restrict(Junction junction, FilterDescriptor filter, Class<?> clazz) {
+        String operator = filter.getOperator();
+        String field = filter.getField();
+        Object value = filter.getValue();
         
         try {
             Class<?> type = new PropertyDescriptor(field, clazz).getPropertyType();
@@ -168,25 +149,27 @@ public class DataSourceRequest {
 
     }
     
-    private static void filter(Criteria criteria, Map<String, Object> filter, Class<?> clazz) {
-        List<Map<String, Object>> filters = (List<Map<String, Object>>)filter.get("filters");
-        
-        if (!filters.isEmpty()) {
-            Junction junction = Restrictions.conjunction();
+    private static void filter(Criteria criteria, FilterDescriptor filter, Class<?> clazz) {
+        if (filter != null) {
+            List<FilterDescriptor> filters = filter.filters;
             
-            if (filter.get("logic").toString().equals("or")) {
-                junction = Restrictions.disjunction();
-            }
-            
-            for(Map<String, Object> entry : filters) {
-                if (entry.containsKey("logic")) {
-                    filter(criteria, entry, clazz);
-                } else {
-                    restrict(junction, entry, clazz);
+            if (!filters.isEmpty()) {
+                Junction junction = Restrictions.conjunction();
+                
+                if (!filter.getFilters().isEmpty()  && filter.getLogic().toString().equals("or")) {
+                    junction = Restrictions.disjunction();
                 }
+                
+                for(FilterDescriptor entry : filters) {
+                    if (!entry.getFilters().isEmpty()) {
+                        filter(criteria, entry, clazz);
+                    } else {
+                        restrict(junction, entry, clazz);
+                    }
+                }
+                
+                criteria.add(junction);
             }
-            
-            criteria.add(junction);
         }
     }
     
@@ -445,6 +428,49 @@ public class DataSourceRequest {
         
         public void setAggregate(String aggregate) {
             this.aggregate = aggregate;
+        }
+    }
+    
+    public static class FilterDescriptor {
+        private String logic;
+        private List<FilterDescriptor> filters;        
+        private String field;
+        private Object value;        
+        private String operator;
+        
+        public FilterDescriptor() {
+            filters = new ArrayList<FilterDescriptor>();
+        }
+        
+        public String getField() {
+            return field;
+        }
+        public void setField(String field) {
+            this.field = field;
+        }
+        public Object getValue() {
+            return value;
+        }
+        public void setValue(Object value) {
+            this.value = value;
+        }
+        public String getOperator() {
+            return operator;
+        }
+        public void setOperator(String operator) {
+            this.operator = operator;
+        }
+        
+        public String getLogic() {
+            return logic;
+        }
+        
+        public void setLogic(String logic) {
+            this.logic = logic;
+        }
+
+        public List<FilterDescriptor> getFilters() {
+            return filters;
         }
     }
 }
