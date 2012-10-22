@@ -69,7 +69,7 @@ XML_NESTED_TAG_TEMPLATE = ERB.new(%{
         <name><%= tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= java_type %></tag-class>
         <body-content><%= body_content %></body-content>
-<%= options.map {|o| o.to_xml }.join %>
+<%= (options + events).map {|o| o.to_xml }.join %>
     </tag>
 })
 
@@ -342,11 +342,7 @@ class Option
 
         return '' unless required?
 
-        if @type != 'Function'
-            [JAVA_OPTION_GETTER_TEMPLATE.result(binding), JAVA_OPTION_SETTER_TEMPLATE.result(binding)].join
-        else
-            [JAVA_EVENT_GETTER_TEMPLATE.result(binding), JAVA_EVENT_SETTER_TEMPLATE.result(binding)].join
-        end
+        [JAVA_OPTION_GETTER_TEMPLATE.result(binding), JAVA_OPTION_SETTER_TEMPLATE.result(binding)].join
     end
 end
 
@@ -501,8 +497,9 @@ class Tag
             prefix = option.name + '.'
 
             child_options = @options.find_all { |o| o.name.start_with?(prefix) }
+            child_events = @events.find_all { |o| o.name.start_with?(prefix) }
 
-            if child_options.any? && option.type =~ /Array|Object/i
+            if (child_options.any? || child_events.any?) && option.type =~ /Array|Object/i
                 @options.delete_if{|o| o.name == option.name && o.type == option.type }
 
                 child_options.each do |o|
@@ -510,6 +507,10 @@ class Tag
                     o.name.sub!(prefix, '')
                 end
 
+                child_events.each do |o|
+                    @events.delete_if { |opt| opt.name == o.name }
+                    o.name.sub!(prefix, '')
+                end
 
                 if option.type == 'Array'
                     child =  NestedTagArray.new :name => option.name,
@@ -520,7 +521,8 @@ class Tag
                     child =  NestedTag.new :name => option.name,
                               :parent => self,
                               :description => option.description,
-                              :options => child_options
+                              :options => child_options,
+                              :events => child_events
                 end
 
                 @children.push(child)
@@ -569,18 +571,29 @@ class Tag
 
                 name.sub!(/\s*type\s*[=:][^\.]*\.?/, '') # skip exotic documentation like series.type="area".tooltip
 
-                type.value.split('|').each do |t|
-                    name = name.strip
+                name = name.strip
 
+                type = type.value.strip
 
+                paragraph  = find_element_with_type.call(configuration, index, :p)
+
+                description = find_child_with_type.call(paragraph, :text)
+
+                if type == 'Function'
+
+                    event = Event.new :name => name,
+                                      :description => description.value
+
+                    tag.events.push(event)
+
+                    next
+                end
+
+                type.split('|').each do |t|
                     t = t.strip.strip_namespace
 
                     next if t == 'Function'
                     next if IGNORED[tag.name.downcase] && IGNORED[tag.name.downcase].include?(name)
-
-                    paragraph  = find_element_with_type.call(configuration, index, :p)
-
-                    description = find_child_with_type.call(paragraph, :text)
 
                     option = Option.new :name => name,
                         :parent => tag,
@@ -685,6 +698,7 @@ class NestedTag < Tag
         @parent = options[:parent]
         @name = options[:name].sub(@parent.namespace, '').sub(/^./) { |c| c.capitalize }
         @options = options[:options]
+        @events = options[:events] if options[:events]
         @description = options[:description]
     end
 end

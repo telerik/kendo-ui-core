@@ -75,6 +75,22 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("selectable", value);
     }
 
+    public String getEditTemplate() {
+        return ((Function)getProperty("editTemplate")).getBody();
+    }
+
+    public void setEditTemplate(String value) {
+        setProperty("editTemplate", new Function(value));
+    }
+
+    public String getTemplate() {
+        return ((Function)getProperty("template")).getBody();
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", new Function(value));
+    }
+
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }

@@ -1263,6 +1263,17 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
+            <description>Template to be used for rendering the detail rows in the grid.
+See the</description>
+            <name>detailTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the rows in the grid.</description>
+            <name>rowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when the grid selection has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1320,7 +1331,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <tag-class>com.kendoui.taglib.EventTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
-            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, columnResize, dataBound, detailCollapse, detailExpand, detailInit, edit, remove, save, saveChanges.</description>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: detailTemplate, rowTemplate, change, columnResize, dataBound, detailCollapse, detailExpand, detailInit, edit, remove, save, saveChanges.</description>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
@@ -1391,6 +1402,16 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
+            <description>Specifies ListView item template in edit mode.</description>
+            <name>editTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Specifies ListView item template.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when the list view selection has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1419,7 +1440,7 @@ and is about to render it.</description>
         <tag-class>com.kendoui.taglib.EventTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
-            <description>Specifies the name of the event to subscribe to. Takes one of the following values: change, dataBound, edit, remove.</description>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: editTemplate, template, change, dataBound, edit, remove.</description>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
@@ -5477,6 +5498,25 @@ return the total number of data items for the current response.</description>
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>Executed before the server response is used. Appropriate for preprocessing or parsing of the server response.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Subscribes to an event of the Schema widget</description>
+        <name>schema-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: parse.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
 
@@ -5514,6 +5554,25 @@ return the total number of data items for the current response.</description>
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>Convert the request parameters from dataSource format to remote service specific format.</description>
+            <name>parameterMap</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Subscribes to an event of the Transport widget</description>
+        <name>transport-event</name>
+        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the name of the event to subscribe to. Takes one of the following values: parameterMap.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
 

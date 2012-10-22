@@ -159,6 +159,22 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Edita
         setProperty("sortable", value);
     }
 
+    public String getDetailTemplate() {
+        return ((Function)getProperty("detailTemplate")).getBody();
+    }
+
+    public void setDetailTemplate(String value) {
+        setProperty("detailTemplate", new Function(value));
+    }
+
+    public String getRowTemplate() {
+        return ((Function)getProperty("rowTemplate")).getBody();
+    }
+
+    public void setRowTemplate(String value) {
+        setProperty("rowTemplate", new Function(value));
+    }
+
     public String getChange() {
         return ((Function)getProperty("change")).getBody();
     }

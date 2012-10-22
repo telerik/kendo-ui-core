@@ -104,6 +104,14 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("type", value);
     }
 
+    public String getParse() {
+        return ((Function)getProperty("parse")).getBody();
+    }
+
+    public void setParse(String value) {
+        setProperty("parse", new Function(value));
+    }
+
 //<< Attributes
 
 }

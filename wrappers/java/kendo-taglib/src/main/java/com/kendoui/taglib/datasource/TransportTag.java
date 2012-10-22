@@ -96,6 +96,14 @@ public class TransportTag extends BaseTag /* interfaces */implements Create, Des
         setProperty("update", value);
     }
 
+    public String getParameterMap() {
+        return ((Function)getProperty("parameterMap")).getBody();
+    }
+
+    public void setParameterMap(String value) {
+        setProperty("parameterMap", new Function(value));
+    }
+
 //<< Attributes
 
 }
