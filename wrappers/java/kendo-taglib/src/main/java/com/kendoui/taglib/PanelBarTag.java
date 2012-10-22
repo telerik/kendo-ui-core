@@ -58,31 +58,31 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces *//* interface
     }
 
     public void setActivate(ActivateTag value) {
-        setProperty("activate", value.properties());
+        setEvent("activate", value.getBody());
     }
 
     public void setCollapse(CollapseTag value) {
-        setProperty("collapse", value.properties());
+        setEvent("collapse", value.getBody());
     }
 
     public void setContentLoad(ContentLoadTag value) {
-        setProperty("contentload", value.properties());
+        setEvent("contentLoad", value.getBody());
     }
 
     public void setError(ErrorTag value) {
-        setProperty("error", value.properties());
+        setEvent("error", value.getBody());
     }
 
     public void setExpand(ExpandTag value) {
-        setProperty("expand", value.properties());
+        setEvent("expand", value.getBody());
     }
 
     public void setSelect(SelectTag value) {
-        setProperty("select", value.properties());
+        setEvent("select", value.getBody());
     }
 
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value.properties());
+        setProperty("animation", value);
     }
 
     public void setItems(ItemsTag value) {

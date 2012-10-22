@@ -1,12 +1,13 @@
 
 package com.kendoui.taglib.datasource;
 
-import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.FunctionTag;
+import com.kendoui.taglib.DataSourceTag;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ChangeTag extends BaseTag /* interfaces *//* interfaces */ {
+public class ChangeTag extends FunctionTag /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {

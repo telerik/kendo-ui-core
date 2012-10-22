@@ -13,6 +13,13 @@
             <kendo:grid-column title="Units In Stock" field="unitsInStock" />
         </kendo:grid-columns>
         <kendo:dataSource pageSize="10">
+        	 <kendo:dataSource-change>
+        	 <script>
+        	 	function change() {
+        	 		console.log("change");
+        	 	}
+        	 </script>
+        	 </kendo:dataSource-change>
              <kendo:dataSource-schema>
                 <kendo:dataSource-schema-model>
                     <kendo:dataSource-schema-model-fields>

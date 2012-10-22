@@ -3,6 +3,9 @@ package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.BaseTag;
 
+import com.kendoui.taglib.DataSourceTag;
+
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;

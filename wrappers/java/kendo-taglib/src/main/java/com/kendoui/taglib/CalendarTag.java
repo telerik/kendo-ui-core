@@ -49,15 +49,15 @@ public class CalendarTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setNavigate(NavigateTag value) {
-        setProperty("navigate", value.properties());
+        setEvent("navigate", value.getBody());
     }
 
     public void setMonth(MonthTag value) {
-        setProperty("month", value.properties());
+        setProperty("month", value);
     }
 
     public String getCulture() {

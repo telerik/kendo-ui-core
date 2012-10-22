@@ -49,43 +49,43 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setColumnResize(ColumnResizeTag value) {
-        setProperty("columnresize", value.properties());
+        setEvent("columnResize", value.getBody());
     }
 
     public void setDataBound(DataBoundTag value) {
-        setProperty("databound", value.properties());
+        setEvent("dataBound", value.getBody());
     }
 
     public void setDetailCollapse(DetailCollapseTag value) {
-        setProperty("detailcollapse", value.properties());
+        setEvent("detailCollapse", value.getBody());
     }
 
     public void setDetailExpand(DetailExpandTag value) {
-        setProperty("detailexpand", value.properties());
+        setEvent("detailExpand", value.getBody());
     }
 
     public void setDetailInit(DetailInitTag value) {
-        setProperty("detailinit", value.properties());
+        setEvent("detailInit", value.getBody());
     }
 
     public void setEdit(EditTag value) {
-        setProperty("edit", value.properties());
+        setEvent("edit", value.getBody());
     }
 
     public void setRemove(RemoveTag value) {
-        setProperty("remove", value.properties());
+        setEvent("remove", value.getBody());
     }
 
     public void setSave(SaveTag value) {
-        setProperty("save", value.properties());
+        setEvent("save", value.getBody());
     }
 
     public void setSaveChanges(SaveChangesTag value) {
-        setProperty("savechanges", value.properties());
+        setEvent("saveChanges", value.getBody());
     }
 
     public void setColumns(ColumnsTag value) {
@@ -95,19 +95,19 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public void setEditable(EditableTag value) {
-        setProperty("editable", value.properties());
+        setProperty("editable", value);
     }
 
     public void setGroupable(GroupableTag value) {
-        setProperty("groupable", value.properties());
+        setProperty("groupable", value);
     }
 
     public void setPageable(PageableTag value) {
-        setProperty("pageable", value.properties());
+        setProperty("pageable", value);
     }
 
     public void setSortable(SortableTag value) {
-        setProperty("sortable", value.properties());
+        setProperty("sortable", value);
     }
 
     public void setToolbar(ToolbarTag value) {
@@ -126,7 +126,7 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource.properties());
+        setProperty("dataSource", dataSource);
     }
 
     public boolean getEditable() {

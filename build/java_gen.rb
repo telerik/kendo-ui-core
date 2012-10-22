@@ -49,17 +49,10 @@ XML_WIDGET_TAG_TEMPLATE = ERB.new(%{
 
 XML_EVENT_TAG_TEMPLATE = ERB.new(%{
     <tag>
-        <description>Subscribes to an event of the <%= name %> widget</description>
-        <name><%= name.camelize %>-event</name>
-        <tag-class>com.kendoui.taglib.EventTag</tag-class>
+        <description>Subscribes to the <%= name.camelize %> event of <%= parent.name %>.</description>
+        <name><%= tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= java_type %></tag-class>
         <body-content>JSP</body-content>
-        <attribute>
-            <description>Specifies the name of the event to subscribe to. Takes one of the following values: <%= events.map{|e| e.name }.join(', ') %>.</description>
-            <name>name</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
     </tag>
 })
 
@@ -71,18 +64,6 @@ XML_NESTED_TAG_TEMPLATE = ERB.new(%{
         <body-content><%= body_content %></body-content>
 <%= (options + events).map {|o| o.to_xml }.join %>
     </tag>
-})
-
-JAVA_INTERFACE_TEMPLATE = ERB.new(%{
-package com.kendoui.taglib.<%= namespace %>;
-
-public interface <%= child.name %> {
-<% if child.instance_of?(NestedTagArrayItem) %>
-    void add<%= child.name %>(<%= child.java_type %> value);
-<% else %>
-    void set<%= child.name %>(<%= child.java_type %> value);
-<% end %>
-}
 })
 
 JAVA_METHODS = %{
@@ -140,6 +121,13 @@ JAVA_NESTED_TAG_TEMPLATE = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
 
 import com.kendoui.taglib.BaseTag;
+<% if parent.namespace == parent.name.downcase %>
+import com.kendoui.taglib.<%= parent.java_type %>;
+<% end %>
+
+<% if events.any? %>
+import com.kendoui.taglib.json.Function;
+<% end %>
 
 import javax.servlet.jsp.JspException;
 
@@ -149,10 +137,29 @@ public class <%= java_type %> extends BaseTag /* interfaces */ /* interfaces */ 
 }
 })
 
+JAVA_EVENT_NESTED_TAG_TEMPLATE = ERB.new(%{
+package com.kendoui.taglib.<%= namespace %>;
+
+import com.kendoui.taglib.FunctionTag;
+<% if parent.namespace == parent.name.downcase %>
+import com.kendoui.taglib.<%= parent.java_type %>;
+<% end %>
+
+import javax.servlet.jsp.JspException;
+
+@SuppressWarnings("serial")
+public class <%= java_type %> extends FunctionTag /* interfaces */ /* interfaces */ {
+    #{JAVA_METHODS}
+}
+})
+
 JAVA_NESTED_TAG_ARRAY_TEMPLATE = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
 
 import com.kendoui.taglib.BaseTag;
+<% if parent.namespace == parent.name.downcase %>
+import com.kendoui.taglib.<%= parent.java_type %>;
+<% end %>
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -180,7 +187,7 @@ JS_TO_JAVA_TYPES = {
 JAVA_DATASOURCE_SETTER = %{
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource.properties());
+        setProperty("dataSource", dataSource);
     }
 }
 
@@ -210,7 +217,13 @@ JAVA_OPTION_SETTER_TEMPLATE = ERB.new(%{
 
 JAVA_NESTED_TAG_SETTER_TEMPLATE = ERB.new(%{
     public void set<%= child.name %>(<%= child.java_type %> value) {
-        setProperty("<%= child.name.downcase %>", value.properties());
+        setProperty("<%= child.name.downcase %>", value);
+    }
+})
+
+JAVA_NESTED_EVENT_SETTER_TEMPLATE = ERB.new(%{
+    public void set<%= child.name %>(<%= child.java_type %> value) {
+        setEvent("<%= child.name.camelize %>", value.getBody());
     }
 })
 
@@ -388,11 +401,7 @@ class Tag
     end
 
     def to_xml
-        xml = xml_template.result(binding)
-
-        #xml +=  XML_EVENT_TAG_TEMPLATE.result(binding) if @events.any?
-
-        xml
+        xml_template.result(binding)
     end
 
     def child_setters
@@ -436,10 +445,6 @@ class Tag
                  "/* interfaces */#{implements}/* interfaces */"
     end
 
-    def interface_template
-        JAVA_INTERFACE_TEMPLATE
-    end
-
     def patch_java_source_code(code)
         $stderr.puts("\t#{name}") if VERBOSE
 
@@ -452,27 +457,10 @@ class Tag
 
         $stderr.puts("Updating #{java_filename}") if VERBOSE
 
-
-=begin
-        @children.each do |child|
-            interface_filename =  "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{namespace}/#{child.name}.java"
-
-            ensure_path(interface_filename)
-
-            File.open(interface_filename, 'w') do |file|
-                file.write(JAVA_INTERFACE_TEMPLATE.result(binding))
-            end
-        end
-=end
-
         interfaces = [] # generated_interfaces
 
         if @options.any? { |o| o.name == 'dataSource' }
             interfaces.push('DataBoundWidget')
-        end
-
-        if has_item_hierarchy?
-            interfaces.push('Items')
         end
 
         java = add_implements_interfaces(java, interfaces)
@@ -633,7 +621,7 @@ class Tag
 
                     tag.events.push(event)
 
-                    event = NestedTag.new :name => name,
+                    event = NestedTagEvent.new :name => name,
                                           :parent => tag,
                                           :description => description.value
 
@@ -657,7 +645,8 @@ class Tag
 end
 
 class NestedTag < Tag
-    attr_reader :description, :parent
+    attr_reader :description
+    attr_accessor :parent
 
     def namespace
         @parent.namespace
@@ -708,6 +697,20 @@ class NestedTag < Tag
     end
 end
 
+class NestedTagEvent < NestedTag
+    def template
+        JAVA_EVENT_NESTED_TAG_TEMPLATE
+    end
+
+    def xml_template
+        XML_EVENT_TAG_TEMPLATE
+    end
+
+    def setter_template
+        JAVA_NESTED_EVENT_SETTER_TEMPLATE
+    end
+end
+
 class NestedTagArray < NestedTag
     attr_reader :child
 
@@ -747,10 +750,6 @@ class NestedTagArray < NestedTag
         code
     end
 
-    def parent_setter_template
-        JAVA_ARRAY_PARENT_SETTER_TEMPLATE
-    end
-
     def java_attributes
         JAVA_ARRAY_DECLARATION_TEMPLATE.result(binding) + super
     end
@@ -766,6 +765,8 @@ class NestedTagArrayItem < NestedTag
         super
 
         @children = options[:children]
+
+        @children.each { |child| child.parent = self }
     end
 
     def tag_name

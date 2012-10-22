@@ -2,7 +2,13 @@
 package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.BaseTag;
+
+import com.kendoui.taglib.DataSourceTag;
+
+
+
 import com.kendoui.taglib.json.Function;
+
 
 import javax.servlet.jsp.JspException;
 
@@ -21,11 +27,7 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
 
         return super.doEndTag();
     }
-    
-    public void setModel(ModelTag modelTag) {
-        setProperty("model", modelTag.properties());
-    }
-    
+
     @Override
     public void initialize() {
 //>> initialize

@@ -11,6 +11,7 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
+import com.kendoui.taglib.json.Function;
 import com.kendoui.taglib.json.Serializable;
 
 @SuppressWarnings("serial")
@@ -23,6 +24,10 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
         initialize();
         
         super.setPageContext(context);
+    }
+    
+    public void setEvent(String name, String body) {
+        setProperty(name, new Function(body));
     }
     
     public String body() {
@@ -51,6 +56,10 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
     }
 
     public void setProperty(String key, Object value) {
+        if (value instanceof Serializable) {
+            value = ((Serializable)value).properties();
+        }
+        
         json.put(key, value);
     }
 

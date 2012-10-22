@@ -58,19 +58,19 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces *//* interfaces */
     }
 
     public void setClose(CloseTag value) {
-        setProperty("close", value.properties());
+        setEvent("close", value.getBody());
     }
 
     public void setOpen(OpenTag value) {
-        setProperty("open", value.properties());
+        setEvent("open", value.getBody());
     }
 
     public void setSelect(SelectTag value) {
-        setProperty("select", value.properties());
+        setEvent("select", value.getBody());
     }
 
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value.properties());
+        setProperty("animation", value);
     }
 
     public void setItems(ItemsTag value) {

@@ -11,7 +11,6 @@ import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Script;
 
-import com.kendoui.taglib.json.Function;
 import com.kendoui.taglib.json.Serializable;
 import com.kendoui.taglib.json.Serializer;
 
@@ -31,10 +30,6 @@ public abstract class WidgetTag extends BaseTag implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setEvent(String name, String body) {
-        setProperty(name, new Function(body));
     }
 
     @Override

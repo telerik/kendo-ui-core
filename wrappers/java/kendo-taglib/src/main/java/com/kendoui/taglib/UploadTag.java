@@ -49,43 +49,43 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public void setCancel(CancelTag value) {
-        setProperty("cancel", value.properties());
+        setEvent("cancel", value.getBody());
     }
 
     public void setComplete(CompleteTag value) {
-        setProperty("complete", value.properties());
+        setEvent("complete", value.getBody());
     }
 
     public void setError(ErrorTag value) {
-        setProperty("error", value.properties());
+        setEvent("error", value.getBody());
     }
 
     public void setProgress(ProgressTag value) {
-        setProperty("progress", value.properties());
+        setEvent("progress", value.getBody());
     }
 
     public void setRemove(RemoveTag value) {
-        setProperty("remove", value.properties());
+        setEvent("remove", value.getBody());
     }
 
     public void setSelect(SelectTag value) {
-        setProperty("select", value.properties());
+        setEvent("select", value.getBody());
     }
 
     public void setSuccess(SuccessTag value) {
-        setProperty("success", value.properties());
+        setEvent("success", value.getBody());
     }
 
     public void set(Tag value) {
-        setProperty("", value.properties());
+        setEvent("", value.getBody());
     }
 
     public void setAsync(AsyncTag value) {
-        setProperty("async", value.properties());
+        setProperty("async", value);
     }
 
     public void setLocalization(LocalizationTag value) {
-        setProperty("localization", value.properties());
+        setProperty("localization", value);
     }
 
     public boolean getEnabled() {

@@ -2,7 +2,13 @@
 package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.BaseTag;
+
+import com.kendoui.taglib.DataSourceTag;
+
+
+
 import com.kendoui.taglib.json.Function;
+
 
 import javax.servlet.jsp.JspException;
 
@@ -45,19 +51,19 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public void setCreate(CreateTag value) {
-        setProperty("create", value.properties());
+        setProperty("create", value);
     }
 
     public void setDestroy(DestroyTag value) {
-        setProperty("destroy", value.properties());
+        setProperty("destroy", value);
     }
 
     public void setRead(ReadTag value) {
-        setProperty("read", value.properties());
+        setProperty("read", value);
     }
 
     public void setUpdate(UpdateTag value) {
-        setProperty("update", value.properties());
+        setProperty("update", value);
     }
 
     public String getCreate() {

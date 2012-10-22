@@ -47,19 +47,19 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setDataBound(DataBoundTag value) {
-        setProperty("databound", value.properties());
+        setEvent("dataBound", value.getBody());
     }
 
     public void setEdit(EditTag value) {
-        setProperty("edit", value.properties());
+        setEvent("edit", value.getBody());
     }
 
     public void setRemove(RemoveTag value) {
-        setProperty("remove", value.properties());
+        setEvent("remove", value.getBody());
     }
 
     public boolean getAutoBind() {
@@ -72,7 +72,7 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource.properties());
+        setProperty("dataSource", dataSource);
     }
 
     public boolean getNavigatable() {

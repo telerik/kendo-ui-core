@@ -49,23 +49,23 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public void setCollapse(CollapseTag value) {
-        setProperty("collapse", value.properties());
+        setEvent("collapse", value.getBody());
     }
 
     public void setContentLoad(ContentLoadTag value) {
-        setProperty("contentload", value.properties());
+        setEvent("contentLoad", value.getBody());
     }
 
     public void setExpand(ExpandTag value) {
-        setProperty("expand", value.properties());
+        setEvent("expand", value.getBody());
     }
 
     public void setLayoutChange(LayoutChangeTag value) {
-        setProperty("layoutchange", value.properties());
+        setEvent("layoutChange", value.getBody());
     }
 
     public void setResize(ResizeTag value) {
-        setProperty("resize", value.properties());
+        setEvent("resize", value.getBody());
     }
 
     public void setPanes(PanesTag value) {

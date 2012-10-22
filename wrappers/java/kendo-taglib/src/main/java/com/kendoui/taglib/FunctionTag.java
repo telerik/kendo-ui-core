@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import javax.servlet.jsp.JspException;
+
 @SuppressWarnings("serial")
 public abstract class FunctionTag extends BaseTag {
 
@@ -7,6 +9,12 @@ public abstract class FunctionTag extends BaseTag {
 
     public FunctionTag() {
         body = "";
+    }
+    
+    @Override
+    public int doEndTag() throws JspException {
+        setBody(body());
+        return super.doEndTag();
     }
 
     public void setBody(String body) {

@@ -49,11 +49,11 @@ public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setMessages(MessagesTag value) {
-        setProperty("messages", value.properties());
+        setProperty("messages", value);
     }
 
     public boolean getAutoBind() {
@@ -74,7 +74,7 @@ public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource.properties());
+        setProperty("dataSource", dataSource);
     }
 
     public String getSelectTemplate() {

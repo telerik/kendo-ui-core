@@ -48,27 +48,27 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setExecute(ExecuteTag value) {
-        setProperty("execute", value.properties());
+        setEvent("execute", value.getBody());
     }
 
     public void setKeydown(KeydownTag value) {
-        setProperty("keydown", value.properties());
+        setEvent("keydown", value.getBody());
     }
 
     public void setKeyup(KeyupTag value) {
-        setProperty("keyup", value.properties());
+        setEvent("keyup", value.getBody());
     }
 
     public void setPaste(PasteTag value) {
-        setProperty("paste", value.properties());
+        setEvent("paste", value.getBody());
     }
 
     public void setSelect(SelectTag value) {
-        setProperty("select", value.properties());
+        setEvent("select", value.getBody());
     }
 
     public boolean getEncoded() {

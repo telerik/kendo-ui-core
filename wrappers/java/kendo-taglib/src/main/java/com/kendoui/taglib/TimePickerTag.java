@@ -49,19 +49,19 @@ public class TimePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setClose(CloseTag value) {
-        setProperty("close", value.properties());
+        setEvent("close", value.getBody());
     }
 
     public void setOpen(OpenTag value) {
-        setProperty("open", value.properties());
+        setEvent("open", value.getBody());
     }
 
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value.properties());
+        setProperty("animation", value);
     }
 
     public String getCulture() {

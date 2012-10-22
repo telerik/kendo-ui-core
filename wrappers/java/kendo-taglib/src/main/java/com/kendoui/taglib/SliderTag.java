@@ -49,15 +49,15 @@ public class SliderTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setSlide(SlideTag value) {
-        setProperty("slide", value.properties());
+        setEvent("slide", value.getBody());
     }
 
     public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value.properties());
+        setProperty("tooltip", value);
     }
 
     public String getDecreaseButtonTitle() {

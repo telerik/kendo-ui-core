@@ -49,43 +49,43 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public void setAxisLabelClick(AxisLabelClickTag value) {
-        setProperty("axislabelclick", value.properties());
+        setEvent("axisLabelClick", value.getBody());
     }
 
     public void setDataBound(DataBoundTag value) {
-        setProperty("databound", value.properties());
+        setEvent("dataBound", value.getBody());
     }
 
     public void setPlotAreaClick(PlotAreaClickTag value) {
-        setProperty("plotareaclick", value.properties());
+        setEvent("plotAreaClick", value.getBody());
     }
 
     public void setSeriesClick(SeriesClickTag value) {
-        setProperty("seriesclick", value.properties());
+        setEvent("seriesClick", value.getBody());
     }
 
     public void setSeriesHover(SeriesHoverTag value) {
-        setProperty("serieshover", value.properties());
+        setEvent("seriesHover", value.getBody());
     }
 
     public void setCategoryAxis(CategoryAxisTag value) {
-        setProperty("categoryaxis", value.properties());
+        setProperty("categoryaxis", value);
     }
 
     public void setTitle(TitleTag value) {
-        setProperty("title", value.properties());
+        setProperty("title", value);
     }
 
     public void setArea(AreaTag value) {
-        setProperty("area", value.properties());
+        setProperty("area", value);
     }
 
     public void setLegend(LegendTag value) {
-        setProperty("legend", value.properties());
+        setProperty("legend", value);
     }
 
     public void setPlotArea(PlotAreaTag value) {
-        setProperty("plotarea", value.properties());
+        setProperty("plotarea", value);
     }
 
     public void setSeries(SeriesTag value) {
@@ -95,24 +95,24 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value.properties());
+        setProperty("tooltip", value);
     }
 
     public void setSeriesDefaults(SeriesDefaultsTag value) {
-        setProperty("seriesdefaults", value.properties());
+        setProperty("seriesdefaults", value);
     }
 
     public void setValueAxis(ValueAxisTag value) {
-        setProperty("valueaxis", value.properties());
+        setProperty("valueaxis", value);
     }
 
     public void setXAxis(XAxisTag value) {
-        setProperty("xaxis", value.properties());
+        setProperty("xaxis", value);
     }
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource.properties());
+        setProperty("dataSource", dataSource);
     }
 
     public Object getSeriesColors() {

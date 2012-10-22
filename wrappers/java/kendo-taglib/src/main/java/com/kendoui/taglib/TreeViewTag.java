@@ -57,43 +57,43 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
     }
 
     public void setCollapse(CollapseTag value) {
-        setProperty("collapse", value.properties());
+        setEvent("collapse", value.getBody());
     }
 
     public void setDataBound(DataBoundTag value) {
-        setProperty("databound", value.properties());
+        setEvent("dataBound", value.getBody());
     }
 
     public void setDrag(DragTag value) {
-        setProperty("drag", value.properties());
+        setEvent("drag", value.getBody());
     }
 
     public void setDragend(DragendTag value) {
-        setProperty("dragend", value.properties());
+        setEvent("dragend", value.getBody());
     }
 
     public void setDragstart(DragstartTag value) {
-        setProperty("dragstart", value.properties());
+        setEvent("dragstart", value.getBody());
     }
 
     public void setDrop(DropTag value) {
-        setProperty("drop", value.properties());
+        setEvent("drop", value.getBody());
     }
 
     public void setExpand(ExpandTag value) {
-        setProperty("expand", value.properties());
+        setEvent("expand", value.getBody());
     }
 
     public void setSelect(SelectTag value) {
-        setProperty("select", value.properties());
+        setEvent("select", value.getBody());
     }
 
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value.properties());
+        setProperty("animation", value);
     }
 
     public void setCheckboxes(CheckboxesTag value) {
-        setProperty("checkboxes", value.properties());
+        setProperty("checkboxes", value);
     }
 
     public void setItems(ItemsTag value) {
@@ -120,7 +120,7 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource.properties());
+        setProperty("dataSource", dataSource);
     }
 
     public String getDataSpriteCssClassField() {

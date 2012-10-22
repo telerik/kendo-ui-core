@@ -47,15 +47,15 @@ public class RadialGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public void setGaugeArea(GaugeAreaTag value) {
-        setProperty("gaugearea", value.properties());
+        setProperty("gaugearea", value);
     }
 
     public void setPointer(PointerTag value) {
-        setProperty("pointer", value.properties());
+        setProperty("pointer", value);
     }
 
     public void setScale(ScaleTag value) {
-        setProperty("scale", value.properties());
+        setProperty("scale", value);
     }
 
     public float getRangeSize() {

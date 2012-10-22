@@ -46,11 +46,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setSpin(SpinTag value) {
-        setProperty("spin", value.properties());
+        setEvent("spin", value.getBody());
     }
 
     public String getCulture() {

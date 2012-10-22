@@ -55,32 +55,32 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBo
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setClose(CloseTag value) {
-        setProperty("close", value.properties());
+        setEvent("close", value.getBody());
     }
 
     public void setDataBound(DataBoundTag value) {
-        setProperty("databound", value.properties());
+        setEvent("dataBound", value.getBody());
     }
 
     public void setOpen(OpenTag value) {
-        setProperty("open", value.properties());
+        setEvent("open", value.getBody());
     }
 
     public void setSelect(SelectTag value) {
-        setProperty("select", value.properties());
+        setEvent("select", value.getBody());
     }
 
     public void setAnimation(AnimationTag value) {
-        setProperty("animation", value.properties());
+        setProperty("animation", value);
     }
 
     @Override
     public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource.properties());
+        setProperty("dataSource", dataSource);
     }
 
     public String getDataTextField() {

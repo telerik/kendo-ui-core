@@ -48,23 +48,23 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public void setChange(ChangeTag value) {
-        setProperty("change", value.properties());
+        setEvent("change", value.getBody());
     }
 
     public void setError(ErrorTag value) {
-        setProperty("error", value.properties());
+        setEvent("error", value.getBody());
     }
 
     public void setSync(SyncTag value) {
-        setProperty("sync", value.properties());
+        setEvent("sync", value.getBody());
     }
 
     public void setRequestStart(RequestStartTag value) {
-        setProperty("requeststart", value.properties());
+        setEvent("requestStart", value.getBody());
     }
 
     public void setRequestEnd(RequestEndTag value) {
-        setProperty("requestend", value.properties());
+        setEvent("requestEnd", value.getBody());
     }
 
     public void setFilter(FilterTag value) {
@@ -74,11 +74,11 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public void setSchema(SchemaTag value) {
-        setProperty("schema", value.properties());
+        setProperty("schema", value);
     }
 
     public void setTransport(TransportTag value) {
-        setProperty("transport", value.properties());
+        setProperty("transport", value);
     }
 
     public Object getAggregate() {
