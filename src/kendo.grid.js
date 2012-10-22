@@ -542,6 +542,7 @@
 
         options: {
             name: "Grid",
+            aria: true,
             columns: [],
             toolbar: null,
             autoBind: true,
@@ -1564,6 +1565,7 @@
 
                 that.selectable = new kendo.ui.Selectable(that.table, {
                     filter: ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr:not(.k-grouping-row,.k-detail-row,.k-group-footer)"),
+                    aria: that.options.aria,
                     multiple: multi,
                     change: function() {
                         that.trigger(CHANGE);
@@ -2371,7 +2373,9 @@
                     .each(function(index) {
                         column = columns[index];
                         if (column.sortable !== false && !column.command && column.field) {
-                            $(this).attr("data-" + kendo.ns +"field", column.field).kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
+                            $(this)
+                            .attr("data-" + kendo.ns +"field", column.field)
+                            .kendoSortable(extend({}, sortable, { dataSource: that.dataSource, aria: that.options.aria }));
                         }
                     });
             }
