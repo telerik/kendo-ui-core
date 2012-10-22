@@ -13,7 +13,14 @@
             <kendo:grid-column title="Units In Stock" field="unitsInStock" />
         </kendo:grid-columns>
         <kendo:dataSource pageSize="10" serverPaging="true" serverSorting="true" serverFiltering="true" serverGrouping="true">
-            <kendo:dataSource-transport parameterMap="parameterMap">
+            <kendo:dataSource-transport>
+            	<kendo:dataSource-transport-parameterMap>
+            	<script>
+				    function parameterMap(options, type) {        
+				        return JSON.stringify(options);        
+				    }
+			    </script>
+            	</kendo:dataSource-transport-parameterMap>
                 <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST"  contentType="application/json"/>                
             </kendo:dataSource-transport>
             <kendo:dataSource-schema data="data" total="total" groups="data">
@@ -27,11 +34,4 @@
                 </kendo:dataSource-schema>
         </kendo:dataSource>
     </kendo:grid>
-    
-    <script>
-    function parameterMap(options, type) {        
-        return JSON.stringify(options);        
-    }
-    </script>
-    
 <demo:footer />
