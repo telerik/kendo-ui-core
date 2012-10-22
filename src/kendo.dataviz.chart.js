@@ -6783,20 +6783,23 @@
     }
 
     function applyAxisDefaults(options, themeOptions) {
-        var themeAxisDefaults = deepExtend({}, (themeOptions || {}).axisDefaults);
+        var themeAxisDefaults = ((themeOptions || {}).axisDefaults) || {};
 
         resolveAxisAliases(options);
 
         each([CATEGORY, "value", X, Y], function() {
             var axisName = this + "Axis",
-                axes = [].concat(options[axisName]);
+                axes = [].concat(options[axisName]),
+                axisDefaults = options.axisDefaults || {};
 
             axes = $.map(axes, function(axisOptions) {
                 var axisColor = (axisOptions || {}).color;
                 return deepExtend({},
                     themeAxisDefaults,
                     themeAxisDefaults[axisName],
-                    options.axisDefaults, {
+                    axisDefaults,
+                    axisDefaults[axisName],
+                    {
                         line: { color: axisColor },
                         labels: { color: axisColor },
                         title: { color: axisColor }

@@ -337,6 +337,18 @@
                     ok(chart.options.categoryAxis.flag === true);
                 });
 
+                test("axisDefaults.categoryAxis are applied to categoryAxis", function() {
+                    createChart({
+                        axisDefaults: {
+                            categoryAxis: {
+                                flag: true
+                            }
+                        }
+                    });
+
+                    ok(chart.options.categoryAxis.flag === true);
+                });
+
                 test("axisDefaults options are applied to categoryAxes", function() {
                     createChart({
                         axisDefaults: {
@@ -348,10 +360,35 @@
                     ok(plotArea.categoryAxis.options.flag && plotArea.categoryAxis.options.local);
                 });
 
+                test("axisDefaults.categoryAxis are applied to categoryAxes", function() {
+                    createChart({
+                        axisDefaults: {
+                            categoryAxis: {
+                                flag: true
+                            }
+                        },
+                        categoryAxes: [{ local: true }]
+                    });
+
+                    ok(plotArea.categoryAxis.options.flag && plotArea.categoryAxis.options.local);
+                });
+
                 test("axisDefaults are applied to valueAxis", function() {
                     createChart({
                         axisDefaults: {
                             flag: true
+                        }
+                    });
+
+                    ok(chart.options.valueAxis.flag === true);
+                });
+
+                test("axisDefaults.valueAxis are applied to valueAxis", function() {
+                    createChart({
+                        axisDefaults: {
+                            valueAxis: {
+                                flag: true
+                            }
                         }
                     });
 
@@ -374,6 +411,19 @@
                     createChart({
                         axisDefaults: {
                             flag: true
+                        },
+                        valueAxes: [{ local: true }]
+                    });
+
+                    ok(plotArea.valueAxis.options.flag && plotArea.valueAxis.options.local);
+                });
+
+                test("axisDefaults.valueAxis options are applied to valueAxes", function() {
+                    createChart({
+                        axisDefaults: {
+                            valueAxis: {
+                                flag: true
+                            }
                         },
                         valueAxes: [{ local: true }]
                     });

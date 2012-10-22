@@ -46,14 +46,7 @@
             var stockDefaults = {
                 axisDefaults: {
                     categoryAxis: {
-                        type: "date",
-                        baseUnit: "fit",
-                        // TODO: Place in last pane automatically?
-                        maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH),
-                        justified: true
-                    },
-                    valueAxis: {
-                        narrowRange: true
+                        maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH)
                     }
                 }
             };
@@ -67,6 +60,16 @@
 
         options: {
             name: "StockChart",
+            axisDefaults: {
+                categoryAxis: {
+                    type: "date",
+                    baseUnit: "fit",
+                    justified: true
+                },
+                valueAxis: {
+                    narrowRange: true
+                }
+            },
             tooltip: {
                 visible: true
             },
