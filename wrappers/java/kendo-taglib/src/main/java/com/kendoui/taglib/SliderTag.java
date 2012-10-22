@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class SliderTag extends WidgetTag /* interfaces */implements Tooltip/* interfaces */ {
+public class SliderTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public SliderTag() {
         super("Slider");
@@ -48,7 +48,14 @@ public class SliderTag extends WidgetTag /* interfaces */implements Tooltip/* in
         return "slider";
     }
 
-    @Override
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setSlide(SlideTag value) {
+        setProperty("slide", value.properties());
+    }
+
     public void setTooltip(TooltipTag value) {
         setProperty("tooltip", value.properties());
     }

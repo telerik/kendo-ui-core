@@ -9,7 +9,7 @@ import com.kendoui.taglib.lineargauge.*;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class LinearGaugeTag extends WidgetTag /* interfaces */implements GaugeArea, Pointer, Scale/* interfaces */ {
+public class LinearGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public LinearGaugeTag() {
         super("LinearGauge");
@@ -46,17 +46,14 @@ public class LinearGaugeTag extends WidgetTag /* interfaces */implements GaugeAr
         return "linearGauge";
     }
 
-    @Override
     public void setGaugeArea(GaugeAreaTag value) {
         setProperty("gaugearea", value.properties());
     }
 
-    @Override
     public void setPointer(PointerTag value) {
         setProperty("pointer", value.properties());
     }
 
-    @Override
     public void setScale(ScaleTag value) {
         setProperty("scale", value.properties());
     }

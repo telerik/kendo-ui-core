@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class UploadTag extends WidgetTag /* interfaces */implements Async, Localization/* interfaces */ {
+public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public UploadTag() {
         super("Upload");
@@ -48,12 +48,42 @@ public class UploadTag extends WidgetTag /* interfaces */implements Async, Local
         return "upload";
     }
 
-    @Override
+    public void setCancel(CancelTag value) {
+        setProperty("cancel", value.properties());
+    }
+
+    public void setComplete(CompleteTag value) {
+        setProperty("complete", value.properties());
+    }
+
+    public void setError(ErrorTag value) {
+        setProperty("error", value.properties());
+    }
+
+    public void setProgress(ProgressTag value) {
+        setProperty("progress", value.properties());
+    }
+
+    public void setRemove(RemoveTag value) {
+        setProperty("remove", value.properties());
+    }
+
+    public void setSelect(SelectTag value) {
+        setProperty("select", value.properties());
+    }
+
+    public void setSuccess(SuccessTag value) {
+        setProperty("success", value.properties());
+    }
+
+    public void set(Tag value) {
+        setProperty("", value.properties());
+    }
+
     public void setAsync(AsyncTag value) {
         setProperty("async", value.properties());
     }
 
-    @Override
     public void setLocalization(LocalizationTag value) {
         setProperty("localization", value.properties());
     }

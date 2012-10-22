@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class GridTag extends WidgetTag /* interfaces */implements Columns, Editable, Groupable, Pageable, Sortable, Toolbar, DataBoundWidget/* interfaces */ {
+public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidget/* interfaces */ {
 
     public GridTag() {
         super("Grid");
@@ -48,34 +48,68 @@ public class GridTag extends WidgetTag /* interfaces */implements Columns, Edita
         return "grid";
     }
 
-    @Override
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setColumnResize(ColumnResizeTag value) {
+        setProperty("columnresize", value.properties());
+    }
+
+    public void setDataBound(DataBoundTag value) {
+        setProperty("databound", value.properties());
+    }
+
+    public void setDetailCollapse(DetailCollapseTag value) {
+        setProperty("detailcollapse", value.properties());
+    }
+
+    public void setDetailExpand(DetailExpandTag value) {
+        setProperty("detailexpand", value.properties());
+    }
+
+    public void setDetailInit(DetailInitTag value) {
+        setProperty("detailinit", value.properties());
+    }
+
+    public void setEdit(EditTag value) {
+        setProperty("edit", value.properties());
+    }
+
+    public void setRemove(RemoveTag value) {
+        setProperty("remove", value.properties());
+    }
+
+    public void setSave(SaveTag value) {
+        setProperty("save", value.properties());
+    }
+
+    public void setSaveChanges(SaveChangesTag value) {
+        setProperty("savechanges", value.properties());
+    }
+
     public void setColumns(ColumnsTag value) {
 
         setProperty("columns", value.columns());
 
     }
 
-    @Override
     public void setEditable(EditableTag value) {
         setProperty("editable", value.properties());
     }
 
-    @Override
     public void setGroupable(GroupableTag value) {
         setProperty("groupable", value.properties());
     }
 
-    @Override
     public void setPageable(PageableTag value) {
         setProperty("pageable", value.properties());
     }
 
-    @Override
     public void setSortable(SortableTag value) {
         setProperty("sortable", value.properties());
     }
 
-    @Override
     public void setToolbar(ToolbarTag value) {
 
         setProperty("toolbar", value.toolbar());

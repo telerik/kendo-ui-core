@@ -1,21 +1,20 @@
 
-package com.kendoui.taglib.grid;
+package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.BaseTag;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class GroupableTag extends BaseTag /* interfaces */implements Messages/* interfaces */ {
-
+public class SyncTag extends BaseTag /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Groupable parent = (Groupable)findParentWithClass(Groupable.class);
+        DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
 
-        parent.setGroupable(this);
+        parent.setSync(this);
 
 //<< doEndTag
 
@@ -41,12 +40,7 @@ public class GroupableTag extends BaseTag /* interfaces */implements Messages/* 
 //>> Attributes
 
     public static String tagName() {
-        return "grid-groupable";
-    }
-
-    @Override
-    public void setMessages(MessagesTag value) {
-        setProperty("messages", value.properties());
+        return "dataSource-sync";
     }
 
 //<< Attributes

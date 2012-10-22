@@ -9,7 +9,7 @@ import com.kendoui.taglib.radialgauge.*;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class RadialGaugeTag extends WidgetTag /* interfaces */implements GaugeArea, Pointer, Scale/* interfaces */ {
+public class RadialGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public RadialGaugeTag() {
         super("RadialGauge");
@@ -46,17 +46,14 @@ public class RadialGaugeTag extends WidgetTag /* interfaces */implements GaugeAr
         return "radialGauge";
     }
 
-    @Override
     public void setGaugeArea(GaugeAreaTag value) {
         setProperty("gaugearea", value.properties());
     }
 
-    @Override
     public void setPointer(PointerTag value) {
         setProperty("pointer", value.properties());
     }
 
-    @Override
     public void setScale(ScaleTag value) {
         setProperty("scale", value.properties());
     }

@@ -10,7 +10,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements Animation, Checkboxes, Items, DataBoundWidget/* interfaces */ {
+public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements DataBoundWidget/* interfaces */ {
 
     public TreeViewTag() {
         super("TreeView");
@@ -56,17 +56,46 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements A
         return "treeView";
     }
 
-    @Override
+    public void setCollapse(CollapseTag value) {
+        setProperty("collapse", value.properties());
+    }
+
+    public void setDataBound(DataBoundTag value) {
+        setProperty("databound", value.properties());
+    }
+
+    public void setDrag(DragTag value) {
+        setProperty("drag", value.properties());
+    }
+
+    public void setDragend(DragendTag value) {
+        setProperty("dragend", value.properties());
+    }
+
+    public void setDragstart(DragstartTag value) {
+        setProperty("dragstart", value.properties());
+    }
+
+    public void setDrop(DropTag value) {
+        setProperty("drop", value.properties());
+    }
+
+    public void setExpand(ExpandTag value) {
+        setProperty("expand", value.properties());
+    }
+
+    public void setSelect(SelectTag value) {
+        setProperty("select", value.properties());
+    }
+
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
     }
 
-    @Override
     public void setCheckboxes(CheckboxesTag value) {
         setProperty("checkboxes", value.properties());
     }
 
-    @Override
     public void setItems(ItemsTag value) {
 
         items = value.items();

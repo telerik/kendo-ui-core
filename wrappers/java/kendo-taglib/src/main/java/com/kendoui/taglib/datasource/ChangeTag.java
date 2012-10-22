@@ -1,21 +1,20 @@
 
-package com.kendoui.taglib.chart;
+package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.BaseTag;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class OverlayTag extends BaseTag /* interfaces *//* interfaces */ {
-
+public class ChangeTag extends BaseTag /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Overlay parent = (Overlay)findParentWithClass(Overlay.class);
+        DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
 
-        parent.setOverlay(this);
+        parent.setChange(this);
 
 //<< doEndTag
 
@@ -41,15 +40,7 @@ public class OverlayTag extends BaseTag /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-overlay";
-    }
-
-    public String getGradient() {
-        return (String)getProperty("gradient");
-    }
-
-    public void setGradient(String value) {
-        setProperty("gradient", value);
+        return "dataSource-change";
     }
 
 //<< Attributes

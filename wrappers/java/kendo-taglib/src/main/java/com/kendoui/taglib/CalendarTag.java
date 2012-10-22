@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class CalendarTag extends WidgetTag /* interfaces */implements Month/* interfaces */ {
+public class CalendarTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public CalendarTag() {
         super("Calendar");
@@ -48,7 +48,14 @@ public class CalendarTag extends WidgetTag /* interfaces */implements Month/* in
         return "calendar";
     }
 
-    @Override
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setNavigate(NavigateTag value) {
+        setProperty("navigate", value.properties());
+    }
+
     public void setMonth(MonthTag value) {
         setProperty("month", value.properties());
     }

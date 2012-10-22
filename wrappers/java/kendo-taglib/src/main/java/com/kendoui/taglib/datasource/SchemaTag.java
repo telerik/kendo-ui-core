@@ -13,7 +13,7 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Schema parent = (Schema)findParentWithClass(Schema.class);
+        DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
 
         parent.setSchema(this);
 

@@ -209,14 +209,12 @@ JAVA_OPTION_SETTER_TEMPLATE = ERB.new(%{
 })
 
 JAVA_NESTED_TAG_SETTER_TEMPLATE = ERB.new(%{
-    @Override
     public void set<%= child.name %>(<%= child.java_type %> value) {
         setProperty("<%= child.name.downcase %>", value.properties());
     }
 })
 
 JAVA_ARRAY_SETTER_TEMPLATE = ERB.new(%{
-    @Override
     public void set<%= child.name %>(<%= child.java_type %> value) {
 <% if has_items? %>
         <%= child.name.downcase %> = value.<%= child.name.downcase %>();
@@ -227,7 +225,7 @@ JAVA_ARRAY_SETTER_TEMPLATE = ERB.new(%{
 })
 
 JAVA_PARENT_SETTER_TEMPLATE = ERB.new(%{
-        <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
+        <%= parent.java_type %> parent = (<%= parent.java_type %>)findParentWithClass(<%= parent.java_type %>.class);
 
         parent.set<%= name %>(this);
 })
@@ -249,19 +247,18 @@ JAVA_ARRAY_DECLARATION_TEMPLATE = ERB.new(%{
 })
 
 JAVA_ARRAY_PARENT_SETTER_TEMPLATE = ERB.new(%{
-        <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
+        <%= parent.java_type %> parent = (<%= parent.java_type %>)findParentWithClass(<%= parent.java_type %>.class);
 
         parent.set<%= name %>(this);
 })
 
 JAVA_ARRAY_ADD_TO_PARENT_TEMPLATE = ERB.new(%{
-        <%= name %> parent = (<%= name %>)findParentWithClass(<%= name %>.class);
+        <%= parent.java_type %> parent = (<%= parent.java_type %>)findParentWithClass(<%= parent.java_type %>.class);
 
         parent.add<%= name %>(this);
 })
 
 JAVA_ARRAY_ADD_CHILD_TEMPLATE = ERB.new(%{
-    @Override
     public void add<%= child.name %>(<%= child.java_type %> value) {
         <%= name.camelize %>.add(value.properties());
     }
@@ -393,7 +390,7 @@ class Tag
     def to_xml
         xml = xml_template.result(binding)
 
-        xml +=  XML_EVENT_TAG_TEMPLATE.result(binding) if @events.any?
+        #xml +=  XML_EVENT_TAG_TEMPLATE.result(binding) if @events.any?
 
         xml
     end
@@ -456,6 +453,7 @@ class Tag
         $stderr.puts("Updating #{java_filename}") if VERBOSE
 
 
+=begin
         @children.each do |child|
             interface_filename =  "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{namespace}/#{child.name}.java"
 
@@ -465,8 +463,9 @@ class Tag
                 file.write(JAVA_INTERFACE_TEMPLATE.result(binding))
             end
         end
+=end
 
-        interfaces = generated_interfaces
+        interfaces = [] # generated_interfaces
 
         if @options.any? { |o| o.name == 'dataSource' }
             interfaces.push('DataBoundWidget')
@@ -633,6 +632,12 @@ class Tag
                                       :description => description.value
 
                     tag.events.push(event)
+
+                    event = NestedTag.new :name => name,
+                                          :parent => tag,
+                                          :description => description.value
+
+                    tag.children.push(event);
                 end
             end
         end
@@ -652,7 +657,7 @@ class Tag
 end
 
 class NestedTag < Tag
-    attr_reader :description
+    attr_reader :description, :parent
 
     def namespace
         @parent.namespace
@@ -697,7 +702,7 @@ class NestedTag < Tag
         super
         @parent = options[:parent]
         @name = options[:name].sub(@parent.namespace, '').sub(/^./) { |c| c.capitalize }
-        @options = options[:options]
+        @options = options[:options] if options[:options]
         @events = options[:events] if options[:events]
         @description = options[:description]
     end
@@ -756,7 +761,6 @@ class NestedTagArray < NestedTag
 end
 
 class NestedTagArrayItem < NestedTag
-    attr_reader :parent
 
     def initialize(options)
         super

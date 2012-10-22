@@ -3,6 +3,7 @@ package com.kendoui.taglib;
 
 
 
+import com.kendoui.taglib.editor.*;
 import com.kendoui.taglib.json.Function;
 
 
@@ -44,6 +45,30 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public static String tagName() {
         return "editor";
+    }
+
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setExecute(ExecuteTag value) {
+        setProperty("execute", value.properties());
+    }
+
+    public void setKeydown(KeydownTag value) {
+        setProperty("keydown", value.properties());
+    }
+
+    public void setKeyup(KeyupTag value) {
+        setProperty("keyup", value.properties());
+    }
+
+    public void setPaste(PasteTag value) {
+        setProperty("paste", value.properties());
+    }
+
+    public void setSelect(SelectTag value) {
+        setProperty("select", value.properties());
     }
 
     public boolean getEncoded() {

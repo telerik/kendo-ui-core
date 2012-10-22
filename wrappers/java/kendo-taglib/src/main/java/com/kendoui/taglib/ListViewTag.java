@@ -2,7 +2,7 @@
 package com.kendoui.taglib;
 
 
-
+import com.kendoui.taglib.listview.*;
 import com.kendoui.taglib.json.Function;
 
 
@@ -44,6 +44,22 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public static String tagName() {
         return "listView";
+    }
+
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setDataBound(DataBoundTag value) {
+        setProperty("databound", value.properties());
+    }
+
+    public void setEdit(EditTag value) {
+        setProperty("edit", value.properties());
+    }
+
+    public void setRemove(RemoveTag value) {
+        setProperty("remove", value.properties());
     }
 
     public boolean getAutoBind() {

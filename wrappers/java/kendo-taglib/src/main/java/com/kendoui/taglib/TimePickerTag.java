@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TimePickerTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
+public class TimePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public TimePickerTag() {
         super("TimePicker");
@@ -48,7 +48,18 @@ public class TimePickerTag extends WidgetTag /* interfaces */implements Animatio
         return "timePicker";
     }
 
-    @Override
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setClose(CloseTag value) {
+        setProperty("close", value.properties());
+    }
+
+    public void setOpen(OpenTag value) {
+        setProperty("open", value.properties());
+    }
+
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
     }

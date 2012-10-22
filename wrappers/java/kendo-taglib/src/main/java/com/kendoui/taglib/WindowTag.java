@@ -14,7 +14,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyContent;
 
 @SuppressWarnings("serial")
-public class WindowTag extends WidgetTag /* interfaces */implements Animation/* interfaces */ {
+public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public WindowTag() {
         super("Window");
@@ -61,7 +61,42 @@ public class WindowTag extends WidgetTag /* interfaces */implements Animation/* 
         return "window";
     }
 
-    @Override
+    public void setActivate(ActivateTag value) {
+        setProperty("activate", value.properties());
+    }
+
+    public void setClose(CloseTag value) {
+        setProperty("close", value.properties());
+    }
+
+    public void setDeactivate(DeactivateTag value) {
+        setProperty("deactivate", value.properties());
+    }
+
+    public void setDragend(DragendTag value) {
+        setProperty("dragend", value.properties());
+    }
+
+    public void setDragstart(DragstartTag value) {
+        setProperty("dragstart", value.properties());
+    }
+
+    public void setError(ErrorTag value) {
+        setProperty("error", value.properties());
+    }
+
+    public void setOpen(OpenTag value) {
+        setProperty("open", value.properties());
+    }
+
+    public void setRefresh(RefreshTag value) {
+        setProperty("refresh", value.properties());
+    }
+
+    public void setResize(ResizeTag value) {
+        setProperty("resize", value.properties());
+    }
+
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
     }

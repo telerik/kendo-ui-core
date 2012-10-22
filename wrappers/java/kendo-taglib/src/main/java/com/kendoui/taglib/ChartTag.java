@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis, Title, Area, Legend, PlotArea, Series, Tooltip, SeriesDefaults, ValueAxis, XAxis, DataBoundWidget/* interfaces */ {
+public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidget/* interfaces */ {
 
     public ChartTag() {
         super("Chart");
@@ -48,54 +48,64 @@ public class ChartTag extends WidgetTag /* interfaces */implements CategoryAxis,
         return "chart";
     }
 
-    @Override
+    public void setAxisLabelClick(AxisLabelClickTag value) {
+        setProperty("axislabelclick", value.properties());
+    }
+
+    public void setDataBound(DataBoundTag value) {
+        setProperty("databound", value.properties());
+    }
+
+    public void setPlotAreaClick(PlotAreaClickTag value) {
+        setProperty("plotareaclick", value.properties());
+    }
+
+    public void setSeriesClick(SeriesClickTag value) {
+        setProperty("seriesclick", value.properties());
+    }
+
+    public void setSeriesHover(SeriesHoverTag value) {
+        setProperty("serieshover", value.properties());
+    }
+
     public void setCategoryAxis(CategoryAxisTag value) {
         setProperty("categoryaxis", value.properties());
     }
 
-    @Override
     public void setTitle(TitleTag value) {
         setProperty("title", value.properties());
     }
 
-    @Override
     public void setArea(AreaTag value) {
         setProperty("area", value.properties());
     }
 
-    @Override
     public void setLegend(LegendTag value) {
         setProperty("legend", value.properties());
     }
 
-    @Override
     public void setPlotArea(PlotAreaTag value) {
         setProperty("plotarea", value.properties());
     }
 
-    @Override
     public void setSeries(SeriesTag value) {
 
         setProperty("series", value.series());
 
     }
 
-    @Override
     public void setTooltip(TooltipTag value) {
         setProperty("tooltip", value.properties());
     }
 
-    @Override
     public void setSeriesDefaults(SeriesDefaultsTag value) {
         setProperty("seriesdefaults", value.properties());
     }
 
-    @Override
     public void setValueAxis(ValueAxisTag value) {
         setProperty("valueaxis", value.properties());
     }
 
-    @Override
     public void setXAxis(XAxisTag value) {
         setProperty("xaxis", value.properties());
     }

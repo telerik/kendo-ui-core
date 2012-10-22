@@ -12,7 +12,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Animation, Items/* interfaces */ {
+public class MenuTag extends WidgetWithItemsTag /* interfaces *//* interfaces */ {
 
     public MenuTag() {
         super("Menu");
@@ -57,12 +57,22 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Anima
         return "menu";
     }
 
-    @Override
+    public void setClose(CloseTag value) {
+        setProperty("close", value.properties());
+    }
+
+    public void setOpen(OpenTag value) {
+        setProperty("open", value.properties());
+    }
+
+    public void setSelect(SelectTag value) {
+        setProperty("select", value.properties());
+    }
+
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
     }
 
-    @Override
     public void setItems(ItemsTag value) {
 
         items = value.items();

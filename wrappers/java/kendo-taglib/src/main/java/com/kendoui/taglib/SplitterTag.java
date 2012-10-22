@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class SplitterTag extends WidgetTag /* interfaces */implements Panes/* interfaces */ {
+public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public SplitterTag() {
         super("Splitter");
@@ -48,7 +48,26 @@ public class SplitterTag extends WidgetTag /* interfaces */implements Panes/* in
         return "splitter";
     }
 
-    @Override
+    public void setCollapse(CollapseTag value) {
+        setProperty("collapse", value.properties());
+    }
+
+    public void setContentLoad(ContentLoadTag value) {
+        setProperty("contentload", value.properties());
+    }
+
+    public void setExpand(ExpandTag value) {
+        setProperty("expand", value.properties());
+    }
+
+    public void setLayoutChange(LayoutChangeTag value) {
+        setProperty("layoutchange", value.properties());
+    }
+
+    public void setResize(ResizeTag value) {
+        setProperty("resize", value.properties());
+    }
+
     public void setPanes(PanesTag value) {
 
         setProperty("panes", value.panes());

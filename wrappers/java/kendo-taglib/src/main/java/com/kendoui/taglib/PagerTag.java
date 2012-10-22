@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class PagerTag extends WidgetTag /* interfaces */implements Messages, DataBoundWidget/* interfaces */ {
+public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidget/* interfaces */ {
 
     public PagerTag() {
         super("Pager");
@@ -48,7 +48,10 @@ public class PagerTag extends WidgetTag /* interfaces */implements Messages, Dat
         return "pager";
     }
 
-    @Override
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
     public void setMessages(MessagesTag value) {
         setProperty("messages", value.properties());
     }

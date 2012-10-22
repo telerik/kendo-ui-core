@@ -13,7 +13,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animation, DataBoundWidget/* interfaces */ {
+public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBoundWidget/* interfaces */ {
 
     public AutoCompleteTag() {
         super("AutoComplete");
@@ -54,7 +54,26 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements Animat
         return "autoComplete";
     }
 
-    @Override
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setClose(CloseTag value) {
+        setProperty("close", value.properties());
+    }
+
+    public void setDataBound(DataBoundTag value) {
+        setProperty("databound", value.properties());
+    }
+
+    public void setOpen(OpenTag value) {
+        setProperty("open", value.properties());
+    }
+
+    public void setSelect(SelectTag value) {
+        setProperty("select", value.properties());
+    }
+
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
     }

@@ -12,7 +12,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements Animation, Items/* interfaces */ {
+public class PanelBarTag extends WidgetWithItemsTag /* interfaces *//* interfaces */ {
 
     public PanelBarTag() {
         super("PanelBar");
@@ -57,12 +57,34 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements A
         return "panelBar";
     }
 
-    @Override
+    public void setActivate(ActivateTag value) {
+        setProperty("activate", value.properties());
+    }
+
+    public void setCollapse(CollapseTag value) {
+        setProperty("collapse", value.properties());
+    }
+
+    public void setContentLoad(ContentLoadTag value) {
+        setProperty("contentload", value.properties());
+    }
+
+    public void setError(ErrorTag value) {
+        setProperty("error", value.properties());
+    }
+
+    public void setExpand(ExpandTag value) {
+        setProperty("expand", value.properties());
+    }
+
+    public void setSelect(SelectTag value) {
+        setProperty("select", value.properties());
+    }
+
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
     }
 
-    @Override
     public void setItems(ItemsTag value) {
 
         items = value.items();

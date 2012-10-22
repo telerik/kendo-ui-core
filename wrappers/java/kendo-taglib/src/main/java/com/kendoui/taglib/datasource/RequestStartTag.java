@@ -1,21 +1,20 @@
 
-package com.kendoui.taglib.panelbar;
+package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.BaseTag;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class AnimationTag extends BaseTag /* interfaces */implements Close, Open/* interfaces */ {
-
+public class RequestStartTag extends BaseTag /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Animation parent = (Animation)findParentWithClass(Animation.class);
+        DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
 
-        parent.setAnimation(this);
+        parent.setRequestStart(this);
 
 //<< doEndTag
 
@@ -41,17 +40,7 @@ public class AnimationTag extends BaseTag /* interfaces */implements Close, Open
 //>> Attributes
 
     public static String tagName() {
-        return "panelBar-animation";
-    }
-
-    @Override
-    public void setClose(CloseTag value) {
-        setProperty("close", value.properties());
-    }
-
-    @Override
-    public void setOpen(OpenTag value) {
-        setProperty("open", value.properties());
+        return "dataSource-requestStart";
     }
 
 //<< Attributes

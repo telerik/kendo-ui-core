@@ -1,10 +1,9 @@
 
 package com.kendoui.taglib;
 
-
+import com.kendoui.taglib.numerictextbox.*;
 
 import com.kendoui.taglib.json.Function;
-
 
 import javax.servlet.jsp.JspException;
 
@@ -44,6 +43,14 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
 
     public static String tagName() {
         return "numericTextBox";
+    }
+
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setSpin(SpinTag value) {
+        setProperty("spin", value.properties());
     }
 
     public String getCulture() {

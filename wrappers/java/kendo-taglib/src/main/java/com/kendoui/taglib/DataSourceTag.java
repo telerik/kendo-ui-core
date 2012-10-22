@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class DataSourceTag extends BaseTag /* interfaces */implements Filter, Schema, Transport/* interfaces */ {
+public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
 
     @Override
     public int doEndTag() throws JspException {
@@ -47,19 +47,36 @@ public class DataSourceTag extends BaseTag /* interfaces */implements Filter, Sc
         return "dataSource";
     }
 
-    @Override
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setError(ErrorTag value) {
+        setProperty("error", value.properties());
+    }
+
+    public void setSync(SyncTag value) {
+        setProperty("sync", value.properties());
+    }
+
+    public void setRequestStart(RequestStartTag value) {
+        setProperty("requeststart", value.properties());
+    }
+
+    public void setRequestEnd(RequestEndTag value) {
+        setProperty("requestend", value.properties());
+    }
+
     public void setFilter(FilterTag value) {
 
         setProperty("filter", value.filter());
 
     }
 
-    @Override
     public void setSchema(SchemaTag value) {
         setProperty("schema", value.properties());
     }
 
-    @Override
     public void setTransport(TransportTag value) {
         setProperty("transport", value.properties());
     }

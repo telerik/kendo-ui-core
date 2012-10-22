@@ -11,7 +11,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class DatePickerTag extends WidgetTag /* interfaces */implements Animation, Month/* interfaces */ {
+public class DatePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public DatePickerTag() {
         super("DatePicker");
@@ -48,12 +48,22 @@ public class DatePickerTag extends WidgetTag /* interfaces */implements Animatio
         return "datePicker";
     }
 
-    @Override
+    public void setChange(ChangeTag value) {
+        setProperty("change", value.properties());
+    }
+
+    public void setClose(CloseTag value) {
+        setProperty("close", value.properties());
+    }
+
+    public void setOpen(OpenTag value) {
+        setProperty("open", value.properties());
+    }
+
     public void setAnimation(AnimationTag value) {
         setProperty("animation", value.properties());
     }
 
-    @Override
     public void setMonth(MonthTag value) {
         setProperty("month", value.properties());
     }

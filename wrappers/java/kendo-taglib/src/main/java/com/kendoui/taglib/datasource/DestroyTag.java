@@ -12,7 +12,7 @@ public class DestroyTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Destroy parent = (Destroy)findParentWithClass(Destroy.class);
+        TransportTag parent = (TransportTag)findParentWithClass(TransportTag.class);
 
         parent.setDestroy(this);
 

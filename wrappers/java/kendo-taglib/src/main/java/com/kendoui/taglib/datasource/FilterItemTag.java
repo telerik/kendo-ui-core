@@ -12,7 +12,7 @@ public class FilterItemTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        FilterItem parent = (FilterItem)findParentWithClass(FilterItem.class);
+        FilterTag parent = (FilterTag)findParentWithClass(FilterTag.class);
 
         parent.addFilterItem(this);
 

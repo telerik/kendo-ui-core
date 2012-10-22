@@ -10,13 +10,13 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class FilterTag extends BaseTag /* interfaces */implements FilterItem/* interfaces */ {
+public class FilterTag extends BaseTag /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Filter parent = (Filter)findParentWithClass(Filter.class);
+        DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
 
         parent.setFilter(this);
 
@@ -59,7 +59,6 @@ public class FilterTag extends BaseTag /* interfaces */implements FilterItem/* i
         return "dataSource-filter";
     }
 
-    @Override
     public void addFilterItem(FilterItemTag value) {
         filter.add(value.properties());
     }

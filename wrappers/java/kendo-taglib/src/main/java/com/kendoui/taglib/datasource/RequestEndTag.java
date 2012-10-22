@@ -1,21 +1,20 @@
 
-package com.kendoui.taglib.treeview;
+package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.BaseTag;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class AnimationTag extends BaseTag /* interfaces */implements Collapse, Expand/* interfaces */ {
-
+public class RequestEndTag extends BaseTag /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Animation parent = (Animation)findParentWithClass(Animation.class);
+        DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
 
-        parent.setAnimation(this);
+        parent.setRequestEnd(this);
 
 //<< doEndTag
 
@@ -41,17 +40,7 @@ public class AnimationTag extends BaseTag /* interfaces */implements Collapse, E
 //>> Attributes
 
     public static String tagName() {
-        return "treeView-animation";
-    }
-
-    @Override
-    public void setCollapse(CollapseTag value) {
-        setProperty("collapse", value.properties());
-    }
-
-    @Override
-    public void setExpand(ExpandTag value) {
-        setProperty("expand", value.properties());
+        return "dataSource-requestEnd";
     }
 
 //<< Attributes

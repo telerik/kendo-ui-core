@@ -7,13 +7,13 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TransportTag extends BaseTag /* interfaces */implements Create, Destroy, Read, Update/* interfaces */ {
+public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        Transport parent = (Transport)findParentWithClass(Transport.class);
+        DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
 
         parent.setTransport(this);
 
@@ -44,22 +44,18 @@ public class TransportTag extends BaseTag /* interfaces */implements Create, Des
         return "dataSource-transport";
     }
 
-    @Override
     public void setCreate(CreateTag value) {
         setProperty("create", value.properties());
     }
 
-    @Override
     public void setDestroy(DestroyTag value) {
         setProperty("destroy", value.properties());
     }
 
-    @Override
     public void setRead(ReadTag value) {
         setProperty("read", value.properties());
     }
 
-    @Override
     public void setUpdate(UpdateTag value) {
         setProperty("update", value.properties());
     }
