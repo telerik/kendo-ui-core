@@ -23,94 +23,94 @@
                 </ul>
 
                 <ul class="keyboard-legend">
-                <li>
-                    <span class="button-preview">
-                        <span class="key-button leftAlign">←</span>
-                    </span>
-                    <span class="button-descr">
-                        moves window to the left
-                    </span>
-                </li>
-                <li>
-                    <span class="button-preview">
-                        <span class="key-button leftAlign">→</span>
-                    </span>
-                    <span class="button-descr">
-                        moves window to the right
-                    </span>
-                </li>
-                <li>
-                    <span class="button-preview">
-                        <span class="key-button leftAlign">↑</span>
-                    </span>
-                    <span class="button-descr">
-                        moves window up
-                    </span>
-                </li>
-                <li>
-                    <span class="button-preview">
-                        <span class="key-button leftAlign">↓</span>
-                    </span>
-                    <span class="button-descr">
-                        moves window down
-                    </span>
-                </li>
-                <li>
-                    <span class="button-preview">
-                        <span class="key-button">esc</span>
-                    </span>
-                    <span class="button-descr">
-                        closes window
-                    </span>
-                </li>
-                <li>
-                    <span class="button-preview">
-                        <span class="key-button">ctrl</span>
-                        <span class="key-button leftAlign">←</span>
-                    </span>
-                    <span class="button-descr">
-                        narrows window in horizontal direction
-                    </span>
-                </li>
-                <li>
-                    <span class="button-preview">
-                        <span class="key-button">ctrl</span>
-                        <span class="key-button leftAlign">→</span>
-                    </span>
-                    <span class="button-descr">
-                        expands window in horizontal direction
-                    </span>
-                </li>
-                <li>
-                    <span class="button-preview">
-                        <span class="key-button">ctrl</span>
-                        <span class="key-button leftAlign">↓</span>
-                    </span>
-                    <span class="button-descr">
-                        expands window in vertical direction
-                    </span>
-                </li>
-                <li>
-                    <span class="button-preview">
-                        <span class="key-button">ctrl</span>
-                        <span class="key-button leftAlign">↑</span>
-                    </span>
-                    <span class="button-descr">
-                        narrows window in vertical direction
-                    </span>
-                </li>
-            </ul>
+                    <li>
+                        <span class="button-preview">
+                            <span class="key-button">esc</span>
+                        </span>
+                        <span class="button-descr">
+                            closes window
+                        </span>
+                    </li>
+                    <li>
+                        <span class="button-preview">
+                            <span class="key-button leftAlign">←</span>
+                        </span>
+                        <span class="button-descr">
+                            moves window to the left
+                        </span>
+                    </li>
+                    <li>
+                        <span class="button-preview">
+                            <span class="key-button leftAlign">→</span>
+                        </span>
+                        <span class="button-descr">
+                            moves window to the right
+                        </span>
+                    </li>
+                    <li>
+                        <span class="button-preview">
+                            <span class="key-button leftAlign">↑</span>
+                        </span>
+                        <span class="button-descr">
+                            moves window up
+                        </span>
+                    </li>
+                    <li>
+                        <span class="button-preview">
+                            <span class="key-button leftAlign">↓</span>
+                        </span>
+                        <span class="button-descr">
+                            moves window down
+                        </span>
+                    </li>
+                    <li>
+                        <span class="button-preview">
+                            <span class="key-button">ctrl</span>
+                            <span class="key-button leftAlign">←</span>
+                        </span>
+                        <span class="button-descr">
+                            narrows window in horizontal direction
+                        </span>
+                    </li>
+                    <li>
+                        <span class="button-preview">
+                            <span class="key-button">ctrl</span>
+                            <span class="key-button leftAlign">→</span>
+                        </span>
+                        <span class="button-descr">
+                            expands window in horizontal direction
+                        </span>
+                    </li>
+                    <li>
+                        <span class="button-preview">
+                            <span class="key-button">ctrl</span>
+                            <span class="key-button leftAlign">↓</span>
+                        </span>
+                        <span class="button-descr">
+                            expands window in vertical direction
+                        </span>
+                    </li>
+                    <li>
+                        <span class="button-preview">
+                            <span class="key-button">ctrl</span>
+                            <span class="key-button leftAlign">↑</span>
+                        </span>
+                        <span class="button-descr">
+                            narrows window in vertical direction
+                        </span>
+                    </li>
+                </ul>
 
             </div>
 
             <script>
                 $(document).ready(function() {
                     var window = $("#window"),
-                        undo = $("#undo")
-                                .bind("click", function() {
-                                    window.data("kendoWindow").open();
-                                    undo.hide();
-                                });
+                    undo = $("#undo")
+                    .bind("click", function() {
+                        window.data("kendoWindow").open();
+                        undo.hide();
+                    });
 
                     var onClose = function() {
                         undo.show();
