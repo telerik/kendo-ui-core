@@ -17,7 +17,7 @@
     // Constants =============================================================
     var AUTO_CATEGORY_WIDTH = 47,
         NAVIGATOR_PANE = "_navigator",
-        NAVIGATOR_AXIS = "_navigator";
+        NAVIGATOR_AXIS = NAVIGATOR_PANE;
 
     // Stock chart ===========================================================
     var StockChart = Chart.extend({
@@ -46,6 +46,7 @@
             var stockDefaults = {
                 axisDefaults: {
                     categoryAxis: {
+                        field: options.dateField,
                         maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH)
                     }
                 }
@@ -70,9 +71,7 @@
                     narrowRange: true
                 }
             },
-            tooltip: {
-                visible: true
-            },
+            dateField: "date",
             navigator: {
                 seriesDefaults: {
                     markers: {
@@ -84,6 +83,9 @@
                     },
                     width: 1
                 }
+            },
+            tooltip: {
+                visible: true
             }
         },
 
@@ -143,7 +145,7 @@
                 {}, options.navigator.pane, { name: NAVIGATOR_PANE })
             );
 
-            var dateField = categoryAxes[0].field;
+            var dateField = options.dateField;
             categoryAxes.push({
                 type: "date",
                 field: dateField,

@@ -20,9 +20,12 @@
         <h3>The Boeing Company (NYSE:BA)</h3>
         <div id="chart" style="width: 900px; height: 400px;"></div>
         <script>
-            // TODO: Introduce single (top-level) dateField
             // TODO: Scroll to zoom
-            // TODO: series.pane shortcut
+            // TODO: Extract Navigator class
+            // TODO: StockChart demo(s)
+            // TODO: StockChart MVC Wrapper
+            // TODO: StockChart docs
+            // TODO: (-) series.pane shortcut
             // TODO: (-) Refresh multiple panes
             $(function() {
                 $("#chart").kendoStockChart({
@@ -35,6 +38,7 @@
                             dir: "asc"
                         }
                     },
+                    dateField: "Date",
                     series: [{
                         type: "candlestick",
                         openField: "Open",
@@ -43,7 +47,6 @@
                         closeField: "Close"
                     }],
                     navigator: {
-                        // object/array
                         series: {
                             type: "line",
                             field: "Close"
@@ -55,11 +58,7 @@
                         pane: {
                             height: 80
                         }
-                    },
-                    // TODO: Infer
-                    categoryAxes: [{
-                        field: "Date"
-                    }]
+                    }
                 });
             });
         </script>
