@@ -555,6 +555,7 @@
             var that = this,
                 element = that.element[0],
                 tabIndex = element.tabIndex,
+                accessKey = element.accessKey,
                 wrapper = that.wrapper,
                 SELECTOR = ".k-input",
                 input, DOMInput,
@@ -591,6 +592,11 @@
 
             if (placeholderSupported) {
                 input.attr("placeholder", that.options.placeholder);
+            }
+
+            if (accessKey) {
+                element.accessKey = "";
+                input[0].accessKey = accessKey;
             }
 
             that._focused = that.input = input;

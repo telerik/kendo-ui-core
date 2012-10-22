@@ -497,6 +497,14 @@
                 equal(input.attr("tabIndex"), 5);
             });
 
+            test("move accesskey to the visible input", function() {
+                var combobox = new ComboBox($("<input accesskey='w'/>"));
+
+                var input = combobox.input;
+
+                equal(input.attr("accesskey"), "w");
+            });
+
             test("ComboBox sets element value if option.value is defined", function() {
                 var dropdown = input.kendoComboBox({
                     dataSource: ["Item1", "Item2"],
