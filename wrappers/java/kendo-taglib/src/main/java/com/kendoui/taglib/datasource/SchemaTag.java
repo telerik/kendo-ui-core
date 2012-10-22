@@ -48,60 +48,12 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-schema";
     }
 
-    public String getAggregates() {
-        return ((Function)getProperty("aggregates")).getBody();
-    }
-
-    public void setAggregates(String value) {
-        setProperty("aggregates", new Function(value));
-    }
-
-    public String getData() {
-        return ((Function)getProperty("data")).getBody();
-    }
-
-    public void setData(String value) {
-        setProperty("data", new Function(value));
-    }
-
-    public String getErrors() {
-        return ((Function)getProperty("errors")).getBody();
-    }
-
-    public void setErrors(String value) {
-        setProperty("errors", new Function(value));
-    }
-
-    public String getGroups() {
-        return ((Function)getProperty("groups")).getBody();
-    }
-
-    public void setGroups(String value) {
-        setProperty("groups", new Function(value));
-    }
-
     public Object getModel() {
         return (Object)getProperty("model");
     }
 
     public void setModel(Object value) {
         setProperty("model", value);
-    }
-
-    public String getParse() {
-        return ((Function)getProperty("parse")).getBody();
-    }
-
-    public void setParse(String value) {
-        setProperty("parse", new Function(value));
-    }
-
-    public String getTotal() {
-        return ((Function)getProperty("total")).getBody();
-    }
-
-    public void setTotal(String value) {
-        setProperty("total", new Function(value));
     }
 
     public String getType() {

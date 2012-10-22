@@ -53,14 +53,6 @@ public class ColumnTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("command", value);
     }
 
-    public String getEditor() {
-        return ((Function)getProperty("editor")).getBody();
-    }
-
-    public void setEditor(String value) {
-        setProperty("editor", new Function(value));
-    }
-
     public boolean getEncoded() {
         return (boolean)getProperty("encoded");
     }

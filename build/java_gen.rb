@@ -5,6 +5,11 @@ TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 
 MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md').include('docs/api/framework/datasource.md')
 
+IGNORED = {
+    'chart' => ['axisDefaults'],
+    'window' => ['content.template']
+}
+
 XML_EVENT_ATTRIBUTE_TEMPLATE = ERB.new(%{
         <attribute>
             <description><%= description %></description>
@@ -321,7 +326,7 @@ class Option
     end
 
     def required?
-        @java_type
+        @java_type && @type != 'Function'
     end
 
     def to_xml
@@ -523,7 +528,7 @@ class Tag
                 child.promote_options_to_tags
             end
 =begin
-            if option.type == 'Function'
+            if option.type == 'Funct'
                 child = NestedTag.new :name => option.name,
                     :parent => self,
                     :description => option.description
@@ -572,15 +577,14 @@ class Tag
                 name.sub!(/\s*type\s*[=:][^\.]*\.?/, '') # skip exotic documentation like series.type="area".tooltip
 
                 type.value.split('|').each do |t|
-                    next if name =~ /content\.template/
+                    name = name.strip
+                    t = t.strip.strip_namespace
+
+                    next if IGNORED[tag.name.downcase] && IGNORED[tag.name.downcase].include?(name)
 
                     paragraph  = find_element_with_type.call(configuration, index, :p)
 
                     description = find_child_with_type.call(paragraph, :text)
-
-                    t = t.strip.strip_namespace
-
-                    name = name.strip
 
                     option = Option.new :name => name,
                         :parent => tag,
@@ -782,7 +786,6 @@ def generate
 
     tags.each { |tag| tag.sync_java }
 end
-
 
 namespace :java do
     desc('Generate JSP Wrappers from Markdown API reference')

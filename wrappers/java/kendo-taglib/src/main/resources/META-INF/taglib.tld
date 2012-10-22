@@ -285,13 +285,6 @@ the dataSource.</description>
 
 
         <attribute>
-            <description>Default options for all chart axes.</description>
-            <name>axisDefaults</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
             <description>DataSource configuration or instance.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1214,14 +1207,6 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
-            <description>Template to be used for rendering the detail rows in the grid.
-See the</description>
-            <name>detailTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-
-        <attribute>
             <description>Indicates whether editing is enabled/disabled.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1254,13 +1239,6 @@ See the</description>
             <name>pageable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>Template to be used for rendering the rows in the grid.</description>
-            <name>rowTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
         </attribute>
 
         <attribute>
@@ -1399,13 +1377,6 @@ See the</description>
         </attribute>
 
         <attribute>
-            <description>Specifies ListView item template in edit mode.</description>
-            <name>editTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-
-        <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
             <name>navigatable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1417,13 +1388,6 @@ See the</description>
             <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies ListView item template.</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5460,57 +5424,10 @@ hex and rgb.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Specifies the field from the response which contains the aggregate results. If set to a function - the function will be called to
-return the aggregate results for the current response.</description>
-            <name>aggregates</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies the field from the response which contains the data items. If set to a function - the function will be called to
-return the data items for the current response.</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies the field from the response which contains any errors. If set to a function - the function will be called to
-return the errors for the current response (if present). If there are any errors the</description>
-            <name>errors</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies the field from the response which contains the groups. If set to a function - the function will be called to
-return the groups for the current response.</description>
-            <name>groups</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-
-        <attribute>
             <description>Describes the</description>
             <name>model</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>Executed before the server response is used. Appropriate for preprocessing or parsing of the server response.</description>
-            <name>parse</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies the field from the response which contains the total number of data items. If set to a function - the function will be called to
-return the total number of data items for the current response.</description>
-            <name>total</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5541,13 +5458,6 @@ return the total number of data items for the current response.</description>
             <name>destroy</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Convert the request parameters from dataSource format to remote service specific format.</description>
-            <name>parameterMap</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
         </attribute>
 
         <attribute>
@@ -6093,13 +6003,6 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <name>command</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Provides a way to specify custom editor for this column.</description>
-            <name>editor</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
         </attribute>
 
         <attribute>
