@@ -152,6 +152,43 @@
             ok(ul.children(":first").children("span.k-link").hasClass("k-state-focused"));
         });
 
+        test("PanelBar selects first on HOME key", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+            addItems(2, ul.children(":first"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar.expand(ul.children(":first"));
+            panelbar._current(ul.children(":last"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.HOME
+            });
+
+            ok(ul.children(":first").children("span.k-link").hasClass("k-state-focused"));
+        });
+
+        test("PanelBar selects last on END key", function() {
+            ul.kendoPanelBar();
+            addItems(2);
+            addItems(2, ul.children(":first"));
+
+            var panelbar = ul.data("kendoPanelBar");
+
+            ul.focus();
+            panelbar.expand(ul.children(":first"));
+
+            ul.trigger({
+                type: "keydown",
+                keyCode: keys.END
+            });
+
+            ok(ul.children(":last").children("span.k-link").hasClass("k-state-focused"));
+        });
+
         test("PanelBar selects prev item on key UP", function() {
             ul.kendoPanelBar();
             addItems(2);

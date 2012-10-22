@@ -541,15 +541,17 @@
             if (key == keys.DOWN || key == keys.RIGHT) {
                 that._current(that._nextItem(current));
                 e.preventDefault();
-            }
-
-            if (key == keys.UP || key == keys.LEFT) {
+            } else if (key == keys.UP || key == keys.LEFT) {
                 that._current(that._prevItem(current));
                 e.preventDefault();
-            }
-
-            if (key == keys.ENTER || key == keys.SPACEBAR) {
+            } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current.children(LINKSELECTOR));
+                e.preventDefault();
+            } else if (key == keys.HOME) {
+                that._current(that._first());
+                e.preventDefault();
+            } else if (key == keys.END) {
+                that._current(that._last());
                 e.preventDefault();
             }
         },
