@@ -6410,10 +6410,12 @@
 
             that.bind(that.events, that.options);
 
-            that.selection.kendoDraggable({
-                drag: proxy(that.dragSelection, that),
-                dragstart: proxy(that.dragSelectionStart, that)
-            });
+            if (kendo.ui.Draggable) {
+                that.selection.kendoDraggable({
+                    drag: proxy(that.dragSelection, that),
+                    dragstart: proxy(that.dragSelectionStart, that)
+                });
+            }
         },
 
         events:[
@@ -6494,11 +6496,15 @@
         setUpDragHandle: function(handle) {
             var that = this;
 
-            return new kendo.ui.Draggable(handle, {
-                dragstart: proxy(that.dragStart, that),
-                drag: proxy(that.drag, that),
-                dragend: proxy(that.dragEnd, that)
-            });
+            if (kendo.ui.Draggable) {
+                return new kendo.ui.Draggable(handle, {
+                    dragstart: proxy(that.dragStart, that),
+                    drag: proxy(that.drag, that),
+                    dragend: proxy(that.dragEnd, that)
+                });
+            } else {
+                handle.removeClass(CSS_PREFIX + "handle");
+            }
         },
 
         dragStart: function(e) {

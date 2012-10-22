@@ -82,15 +82,16 @@
                 navigator = chart._navigator;
 
             if (!navigator) {
-                navigator = chart._navigator = new Navigator(chart, chart.options);
+                navigator = chart._navigator = new Navigator(chart);
             }
 
-            // TODO: Extract class
-            $(chart.element).kendoDraggable({
-                drag: $.proxy(chart._onDrag, chart),
-                dragstart: $.proxy(chart._onDragStart, chart),
-                dragend: $.proxy(chart._onDragEnd, chart)
-            });
+            if (kendo.ui.Draggable) {
+                $(chart.element).kendoDraggable({
+                    drag: $.proxy(chart._onDrag, chart),
+                    dragstart: $.proxy(chart._onDragStart, chart),
+                    dragend: $.proxy(chart._onDragEnd, chart)
+                });
+            }
 
             Chart.fn._redraw.call(chart);
             navigator.redraw();
@@ -175,11 +176,11 @@
     });
 
     var Navigator = Class.extend({
-        init: function(chart, options) {
+        init: function(chart) {
             var navi = this;
 
             navi.chart = chart;
-            navi.options = options;
+            navi.options = chart.options.navigator;
 
             navi.createPane();
             navi.createAxes();
@@ -191,7 +192,7 @@
                 chart = navi.chart,
                 axis = navi.mainAxis(),
                 groups = axis.options.categories,
-                select = navi.options.navigator.select,
+                select = navi.options.select,
                 min = 0,
                 max = groups.length - 1,
                 start = min,
@@ -222,7 +223,7 @@
 
         applySelection: function() {
             var navi = this,
-                select = navi.options.navigator.select,
+                select = navi.options.select,
                 chart = navi.chart,
                 plotArea = chart._plotArea,
                 slaveAxes = plotArea.options.categoryAxis,
@@ -247,7 +248,7 @@
             var navi = this,
                 axis = navi.mainAxis(),
                 groups = axis.options.categories,
-                select = navi.options.navigator.select;
+                select = navi.options.select;
 
             // TODO: Provide start and end date in arguments
             select.from = groups[e.start];
@@ -262,20 +263,23 @@
 
         createPane: function() {
             var navi = this,
-                options = navi.options,
-                panes = options.panes = [].concat(options.panes);
+                chartOptions = navi.chart.options,
+                panes = chartOptions.panes = [].concat(chartOptions.panes);
 
             panes.push(deepExtend(
-                {}, options.navigator.pane, { name: NAVIGATOR_PANE })
+                {}, navi.options.pane, { name: NAVIGATOR_PANE })
             );
         },
 
         createAxes: function() {
             var navi = this,
-                options = navi.options,
-                dateField = options.dateField,
-                categoryAxes = options.categoryAxis = [].concat(options.categoryAxis),
-                valueAxes = options.valueAxis = [].concat(options.valueAxis);
+                chartOptions = navi.chart.options,
+                dateField = chartOptions.dateField,
+                categoryAxes,
+                valueAxes;
+
+            categoryAxes = chartOptions.categoryAxis = [].concat(chartOptions.categoryAxis);
+            valueAxes = chartOptions.valueAxis = [].concat(chartOptions.valueAxis);
 
             var base = {
                 type: "date",
@@ -323,9 +327,10 @@
         createSeries: function() {
             var navi = this,
                 options = navi.options,
-                series = options.series,
-                navigatorSeries = [].concat(options.navigator.series),
-                defaults = options.navigator.seriesDefaults,
+                chart = navi.chart,
+                series = chart.options.series,
+                navigatorSeries = [].concat(options.series),
+                defaults = options.seriesDefaults,
                 i;
 
             for (i = 0; i < navigatorSeries.length; i++) {
