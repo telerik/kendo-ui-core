@@ -1511,20 +1511,18 @@
         _groupable: function() {
             var that = this;
 
-            if (!that.groupable) {
-                that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", function(e) {
-                    var element = $(this),
-                    group = element.closest("tr");
+            that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", function(e) {
+                var element = $(this),
+                group = element.closest("tr");
 
-                    if(element.hasClass('k-i-collapse')) {
-                        that.collapseGroup(group);
-                    } else {
-                        that.expandGroup(group);
-                    }
-                    e.preventDefault();
-                    e.stopPropagation();
-                });
-            }
+                if(element.hasClass('k-i-collapse')) {
+                    that.collapseGroup(group);
+                } else {
+                    that.expandGroup(group);
+                }
+                e.preventDefault();
+                e.stopPropagation();
+            });
 
             that._attachGroupable();
         },
@@ -2921,7 +2919,7 @@
             }
 
             html +=  '<tr class="k-grouping-row">' + groupCells(level) +
-                      '<td colspan="' + colspan + '">' +
+                      '<td colspan="' + colspan + '" aria-expanded="true">' +
                         '<p class="k-reset">' +
                          '<a class="k-icon k-i-collapse" href="#" tabindex="-1"></a>' + text +
                          '</p></td></tr>';
@@ -2948,6 +2946,7 @@
                 offset,
                 tr;
 
+            group.find("td:first").attr("aria-expanded", false);
             group.nextAll("tr").each(function() {
                 tr = $(this);
                 offset = tr.find(".k-group-cell").length;
@@ -2974,6 +2973,7 @@
                 offset,
                 groupsCount = 1;
 
+            group.find("td:first").attr("aria-expanded", true);
             group.nextAll("tr").each(function () {
                 tr = $(this);
                 offset = tr.find(".k-group-cell").length;

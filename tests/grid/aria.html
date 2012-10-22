@@ -138,6 +138,43 @@
                 equal(grid.current().attr("aria-expanded"), "false");
             });
 
+            test("Grid set expanded state on group expand", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    columns: [ "foo"]
+                });
+
+                grid.dataSource.group({ field: "foo" });
+                var row = grid.table.find("tr:first");
+                grid.collapseGroup(row);
+                grid.expandGroup(row);
+
+                equal(grid.table.find("tr td:first").attr("aria-expanded"), "true");
+            });
+
+            test("Grid set expanded state on group collapse", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    columns: [ "foo"]
+                });
+
+                grid.dataSource.group({ field: "foo" });
+                var row = grid.table.find("tr:first");
+                grid.collapseGroup(row);
+
+                equal(grid.table.find("tr td:first").attr("aria-expanded"), "false");
+            });
+
+            test("Grid set expanded state is set for group cell", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    columns: [ "foo"]
+                });
+
+                grid.dataSource.group({ field: "foo" });
+
+                equal(grid.table.find("tr td:first").attr("aria-expanded"), "true");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
