@@ -657,6 +657,10 @@
                 {
                     "text": "RTL support",
                     "url": "panelbar/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "panelbar/navigation.html"
                 }
             ]
         },
