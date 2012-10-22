@@ -292,6 +292,14 @@
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current);
                 e.preventDefault();
+            } else if (key == keys.HOME) {
+                that._click(that._endItem("first"));
+                e.preventDefault();
+                return;
+            } else if (key == keys.END) {
+                that._click(that._endItem("last"));
+                e.preventDefault();
+                return;
             }
 
             if (action) {
