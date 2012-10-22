@@ -85,12 +85,16 @@
                 navigator = chart._navigator = new Navigator(chart);
             }
 
-            if (kendo.ui.Draggable) {
-                $(chart.element).kendoDraggable({
-                    drag: $.proxy(chart._onDrag, chart),
-                    dragstart: $.proxy(chart._onDragStart, chart),
-                    dragend: $.proxy(chart._onDragEnd, chart)
-                });
+            if (!chart._panningSetup) {
+                if (kendo.ui.Draggable) {
+                    $(chart.element).kendoDraggable({
+                        drag: $.proxy(chart._onDrag, chart),
+                        dragstart: $.proxy(chart._onDragStart, chart),
+                        dragend: $.proxy(chart._onDragEnd, chart)
+                    });
+                }
+
+                chart._panningSetup = true;
             }
 
             Chart.fn._redraw.call(chart);
