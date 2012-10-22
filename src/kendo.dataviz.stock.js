@@ -85,6 +85,7 @@
                 navigator = chart._navigator = new Navigator(chart);
             }
 
+            // Add panning support to Axis
             if (!chart._panningSetup) {
                 if (kendo.ui.Draggable) {
                     $(chart.element).kendoDraggable({
