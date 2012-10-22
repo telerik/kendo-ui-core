@@ -119,7 +119,7 @@
                     $("#calendar").kendoCalendar();
 
                     //focus the widget
-                    $(document).keydown(function(e) {
+                    $(document).on("keydown.examples", function(e) {
                         if (e.altKey && e.keyCode === 87 /* w */) {
                             $("#calendar").data("kendoCalendar").focus();
                         }
