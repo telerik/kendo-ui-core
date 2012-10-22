@@ -6473,10 +6473,6 @@
             options.end = end;
 
             that.moveSelection();
-            //that.trigger("moveSelection", {
-            //    start: start,
-            //    end: end
-            //});
         },
 
         moveSelection: function() {
@@ -6564,7 +6560,7 @@
                 paddingLeft = options.padding.left,
                 border = options.selection.border,
                 startPoint = { x: offsetLeft - paddingLeft + parseFloat(that.leftMask.width(), 10) + border.left },
-                endPoint = { x: offsetLeft - paddingLeft + parseFloat(that.rightMask.css("left"), 10) },
+            endPoint = { x: offsetLeft - paddingLeft + parseFloat(that.rightMask.css("left"), 10) },
                 categoryAxis = that.categoryAxis,
                 startIndex, endIndex;
 
@@ -6607,13 +6603,13 @@
                 scale = that.wrapper.width() / fullRange,
                 offset = math.round(delta / scale);
 
-            var start = math.min(
+            that.start = math.min(
                 math.max(options.min, state.start - offset),
                 options.max - range);
 
-            var end = math.min(start + range, options.max);
+            that.end = math.min(that.start + range, options.max);
 
-            that.setRange(start, end);
+            that.setRange(that.start, that.end);
         },
 
         dragSelectionEnd: function(e) {
