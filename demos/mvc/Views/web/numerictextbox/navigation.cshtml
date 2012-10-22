@@ -1,0 +1,51 @@
+
+        <div id="example" class="k-content">
+            <div class="demo-section">
+                <input id="numerictextbox" accesskey="w"/>
+            </div>
+
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+                        +
+                        <span class="key-button">w</span>
+                    </span>
+                    <span class="button-descr">
+                        focuses the widget
+                    </span>
+                </li>
+            </ul>
+
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">↑</span>
+                    </span>
+                    <span class="button-descr">
+                        increases the widget's value
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">↓</span>
+                    </span>
+                    <span class="button-descr">
+                        decreases the widget's value
+                    </span>
+                </li>
+            </ul>
+
+            <script>
+                $(document).ready(function() {
+                    $("#numerictextbox").kendoNumericTextBox();
+                });
+            </script>
+
+            <style scoped>
+                div.demo-section
+                {
+                    width: 150px;
+                }
+            </style>
+        </div>
