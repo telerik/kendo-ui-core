@@ -314,6 +314,9 @@
                     // TODO: Range-based
                     baseUnit: "months",
                     baseUnitStep: 1,
+                    majorTicks: {
+                        width: 0.5
+                    },
                     labels: { visible: false, mirror: true }
                 })
             );

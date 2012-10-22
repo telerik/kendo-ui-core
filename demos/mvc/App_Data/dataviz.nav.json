@@ -213,6 +213,10 @@
                     "text": "Events",
                     "url": "api/events.html",
                     "packages": [ "!offline" ]
+            }, {
+                "text": "Benchmark",
+                "packages": [ "!mvc" ],
+                "url": "api/benchmark.html"
             }],
             "name": "api"
         }
@@ -228,6 +232,9 @@
             }, {
                 "text": "Scale options",
                 "url": "radial-gauge/scale-options.html"
+            }, {
+                "text": "Car Dashboard",
+                "url": "radial-gauge/car-dashboard.html"
             }],
             "name": "radial-gauge"
         }, {
@@ -244,30 +251,17 @@
             "name": "linear-gauge"
         }
     ],
+    "financial": [{
+            "text": "Stock Chart",
+            "documentation": "dataviz/stock-chart",
+            "items": [{
+                "text": "Basic usage",
+                "url": "financial/index.html"
+            }],
+            "name": "stock-chart"
+        }
+    ],
     "Sample Dashboards": [
-        {
-            "text": "Performance Benchmark",
-            "spriteCssClass": "chartIcon",
-            "thumbnailUrl": "content/dataviz/dashboards/performance.gif",
-            "packages": [ "!mvc" ],
-            "expanded": "true",
-            "items": [{
-                "text": "Launch",
-                "url": "dashboards/high-performance.html"
-            }],
-            "name": "high-performance"
-        },
-        {
-            "text": "Car Dashboard",
-            "spriteCssClass": "gaugeRadialIcon",
-            "thumbnailUrl": "content/dataviz/dashboards/car.gif",
-            "expanded": "true",
-            "items": [{
-                "text": "Launch",
-                "url": "dashboards/car-dashboard.html"
-            }],
-            "name": "car-dashboard"
-        },
         {
             "text": "Stock History",
             "spriteCssClass": "chartAreaIcon",

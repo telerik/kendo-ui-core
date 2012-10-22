@@ -1223,7 +1223,18 @@ p#copy
     width:526px;
 }
 
+.widgetGrid .dataviz .dashboards
+{
+    width:200px;
+}
+
 .widgetGrid .gauges
+{
+    width:180px;
+    min-height: 176px;
+}
+
+.widgetGrid .financial
 {
     width:180px;
     min-height: 176px;
