@@ -926,6 +926,10 @@
                 {
                     "text": "RTL support",
                     "url": "window/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "window/navigation.html"
                 }
             ]
         }
