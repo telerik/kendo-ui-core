@@ -6375,12 +6375,18 @@
                 );
             }
 
+            var paddingLeft = parseInt(chartElement.css("paddingLeft"), 10);
+            var paddingTop = parseInt(chartElement.css("paddingTop"), 10);
             that.options = deepExtend({}, {
                 width: categoryAxisLineBox.width(),
                 height: valueAxisLineBox.height(),
+                padding: {
+                    left: paddingLeft,
+                    top: paddingTop
+                },
                 offset: {
-                    top: valueAxisLineBox.y1,
-                    left: valueAxisLineBox.x2
+                    left: valueAxisLineBox.x2 + paddingLeft,
+                    top: valueAxisLineBox.y1 + paddingTop
                 },
                 start: options.min,
                 end: options.max
@@ -6470,6 +6476,7 @@
             var that = this,
                 options = that.options,
                 offset = options.offset,
+                padding = options.padding,
                 border = options.selection.border,
                 start = options.start,
                 end = options.end,
@@ -6478,12 +6485,12 @@
                 distance;
 
             box = categoryAxis.getSlot(start);
-            leftMaskWidth = round(box.x1 - offset.left);
+            leftMaskWidth = round(box.x1 - offset.left + padding.left);
             that.leftMask.width(leftMaskWidth);
             that.selection.css("left", leftMaskWidth);
 
             box = categoryAxis.getSlot(end);
-            rightMaskWidth = round(options.width - (box.x1 - offset.left));
+            rightMaskWidth = round(options.width - (box.x1 - offset.left + padding.left));
             that.rightMask.width(rightMaskWidth);
             distance = options.width - rightMaskWidth;
             if (distance != options.width) {
@@ -6547,9 +6554,10 @@
             var that = this,
                 options = that.options,
                 offsetLeft = options.offset.left,
+                paddingLeft = options.padding.left,
                 border = options.selection.border,
-                startPoint = { x: offsetLeft + parseFloat(that.leftMask.width(), 10) + border.left },
-                endPoint = { x: offsetLeft + parseFloat(that.rightMask.css("left"), 10) },
+                startPoint = { x: offsetLeft - paddingLeft + parseFloat(that.leftMask.width(), 10) + border.left },
+                endPoint = { x: offsetLeft - paddingLeft + parseFloat(that.rightMask.css("left"), 10) },
                 categoryAxis = that.categoryAxis,
                 startIndex, endIndex;
 
