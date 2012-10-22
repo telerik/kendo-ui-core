@@ -337,7 +337,7 @@
                 element = that.element.show()[0],
                 accessKey = element.accessKey,
                 wrapper = that.wrapper,
-                text;
+                DOMInput, text;
 
 
             text = wrapper.find(POINT + CLASSNAME);
@@ -346,9 +346,13 @@
                 text = $("<input />").insertBefore(element).addClass(CLASSNAME);
             }
 
+            DOMInput = text[0];
+            DOMInput.type = "text";
+            DOMInput.style.cssText = element.style.cssText;
+            DOMInput.tabIndex = element.tabIndex;
+
+            element.tabIndex = 0;
             element.type = "text";
-            text[0].type = "text";
-            text[0].style.cssText = element.style.cssText;
             text.attr("placeholder", that.options.placeholder);
 
             if (accessKey) {
