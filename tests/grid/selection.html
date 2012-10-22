@@ -54,6 +54,21 @@
                 equal(grid.table.attr("tabIndex"), 0);
             });
 
+            test("header table tabindex is -1", function() {
+                var grid = setup({
+                    columns: [ "foo" ]
+                });
+                equal(grid.thead.parent().attr("tabIndex"), -1);
+            });
+
+            test("header table tabindex is 0 in non scrollable grid", function() {
+                var grid = setup({
+                    columns: [ "foo" ],
+                    scrollable: false
+                });
+                equal(grid.thead.parent().attr("tabIndex"), 0);
+            });
+
             test("positive tabindex is retained", function() {
                 table.attr("tabIndex", 1);
                 var grid = setup();
@@ -66,6 +81,28 @@
                 var grid = setup();
 
                 equal(grid.table.attr("tabIndex"), 0);
+            });
+
+            test("focusing scrollable grid header set tabindex to 0 and body table to -1", function() {
+                var grid = setup({
+                    columns: ["foo"]
+                });
+
+                grid.thead.parent().focus();
+
+                equal(grid.thead.parent().attr("tabindex"), 0);
+                equal(grid.table.attr("tabindex"), -1);
+            });
+
+            test("focusing non scrollable grid header set tabindex to 0", function() {
+                var grid = setup({
+                    scrollable: false,
+                    columns: ["foo"]
+                });
+
+                grid.thead.parent().focus();
+
+                equal(grid.table.attr("tabindex"), 0);
             });
 
             test("footer table has negative tabindex", function() {
@@ -557,16 +594,6 @@
 
                 equal(document.activeElement, grid.table[0]);
                 ok(grid.table.find("td:first").hasClass("k-state-focused"));
-            });
-
-            test("pressing shift and tab on first cell", function() {
-                var grid = setup({ columns: [ "foo", "bar" ] });
-
-                grid.current(table.find("tr>td:first"));
-                grid.table.focus().press(kendo.keys.TAB, false, true);
-
-                ok(grid.thead.find("th:first").hasClass("k-state-focused"));
-                equal(document.activeElement, grid.thead.parent()[0]);
             });
 
             test("pressing alt and down opens filter menu", function() {

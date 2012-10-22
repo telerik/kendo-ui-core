@@ -1685,29 +1685,28 @@
 
             if (that.options.scrollable) {
                 dataTable = table.add(headerTable);
+                headerTable.attr(TABINDEX, -1);
 
                 //required for FF
                 //that.content.attr("tabindex", -1);
             }
 
             headerTable.on("keydown" + NS, function(e) {
-                if (!e.shiftKey && e.keyCode == keys.TAB) {
-                    that._removeCurrent();
-                }
-
                 if (e.altKey && e.keyCode == keys.DOWN) {
                     currentProxy().find(".k-grid-filter, .k-header-column-menu").click();
                     e.stopImmediatePropagation();
                 }
             });
 
-            table.on("mousedown" + NS + " keydown" + NS, ".k-detail-cell", function(e) {
+            table
+            .attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0))
+            .on("mousedown" + NS + " keydown" + NS, ".k-detail-cell", function(e) {
                 if (e.target !== e.currentTarget) {
                     e.stopImmediatePropagation();
                 }
             });
 
-            dataTable.attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0))
+            dataTable
             .on("mousedown" + NS, NAVROW + ">" + NAVCELL, proxy(tableClick, that))
             .on("focus" + NS, function(e) {
                 var current = currentProxy();
@@ -1715,6 +1714,14 @@
                     current.addClass(FOCUSED);
                 } else {
                     currentProxy($(this).find(FIRSTNAVITEM));
+                }
+
+                if (this == table[0]) {
+                    headerTable.attr(TABINDEX, -1);
+                    table.attr(TABINDEX, 0);
+                } else {
+                    table.attr(TABINDEX, -1);
+                    headerTable.attr(TABINDEX, 0);
                 }
             })
             .on("focusout" + NS, function(e) {
@@ -1856,9 +1863,6 @@
 
                     if (!current.is("th") && cell.length && that.options.editable && isInCell) {
                         that._handleEditing(current, cell);
-                        handled = true;
-                    } else if (shiftKey && that.content && that.table[0] === e.currentTarget) {
-                        currentProxy(that.thead.parent().focus().find(NAVROW).first().children(NAVCELL).first());
                         handled = true;
                     }
                 }
