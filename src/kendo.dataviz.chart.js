@@ -170,6 +170,10 @@
             Widget.fn.init.call(chart, element);
             options = deepExtend({}, chart.options, userOptions);
 
+            chart.element
+                .addClass("k-chart")
+                .css("position", "relative");
+
             chart._originalOptions = deepExtend({}, options);
 
             themeName = options.theme;
@@ -183,10 +187,6 @@
             applySeriesColors(chart.options);
 
             chart.bind(chart.events, chart.options);
-
-            chart.element
-                .addClass("k-chart")
-                .css("position", "relative");
 
             chart.wrapper = chart.element;
 

@@ -15,7 +15,7 @@
         toDate = dataviz.toDate;
 
     // Constants =============================================================
-    var AUTO_CATEGORY_WIDTH = 47,
+    var AUTO_CATEGORY_WIDTH = 28,
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE;
 
@@ -35,6 +35,15 @@
                 axisDefaults: {
                     categoryAxis: {
                         field: options.dateField,
+                        majorGridLines: {
+                            visible: false
+                        },
+                        labels: {
+                            step: 2
+                        },
+                        majorTicks: {
+                            visible: false
+                        },
                         maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH)
                     }
                 }
