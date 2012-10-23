@@ -459,6 +459,7 @@
                 { text: "Black", value: "black" },
                 { text: "Blue Opal", value: "blueopal" },
                 { text: "Default", value: "default" },
+                { text: "High Contrast", value: "highcontrast" },
                 { text: "Metro", value: "metro" },
                 { text: "Silver", value: "silver" }
             ],
