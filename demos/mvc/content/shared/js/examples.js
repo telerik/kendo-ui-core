@@ -3,7 +3,6 @@
         doc = document,
         extend = $.extend,
         kendo = window.kendo,
-        less = window.less,
         DETAILHANDLE = ".detailHandle",
         docsAnimation = {
             show: {
@@ -30,7 +29,7 @@
             }
         },
         initialFolder = location.href.match(/\//g).length,
-        skinRegex = /kendo\.\w+(\.min)?\.css/i,
+        skinRegex = /kendo\.\w+(\.min)?\.(.+)/i,
         supports = {
             sessionStorage: (function() {
                 // try-catch for obscure cases that do not allow "sessionStorage" in window
@@ -173,51 +172,65 @@
             }, 100);
         },
 
-        changeTheme: function(skinName, animate) {
-            var kendoLinks = $("link[href*='kendo.']", doc.getElementsByTagName("head")[0]),
-                commonLink = kendoLinks.filter("[href*='kendo.common']"),
-                skinLink = kendoLinks.filter(":not([href*='kendo.common'])").filter(":not([href*='rtl'])"),
-                currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
-                extension = /\.less$/.test(skinLink.attr("href")) ? ".less" : ".css",
-                url = currentFolder + commonLink.attr("href").replace(skinRegex, "kendo." + skinName + "$1" + extension),
+        getCurrentThemeLink: function() {
+            return $("head link").filter(function(x) {
+                return /kendo\./gi.test(this.href) && !/common|rtl|dataviz/gi.test(this.href);
+            });
+        },
+
+        getThemeUrl: function(themeName) {
+            var currentThemeUrl = Application.getCurrentThemeLink().attr("href");
+
+            return currentThemeUrl.replace(skinRegex, "kendo." + themeName + "$1.$2");
+        },
+
+        replaceTheme: function(themeName) {
+            var newThemeUrl = Application.getThemeUrl(themeName),
+                oldThemeName = $(doc).data("kendoSkin"),
+                newLink,
+                less = window.less,
+                themeLink = Application.getCurrentThemeLink(),
+                isLess = /\.less$/.test(themeLink.attr("href")),
                 exampleElement = $("#example");
 
-            function replaceTheme() {
-                var oldSkinName = $(doc).data("kendoSkin"),
-                    newLink;
-
-                if (kendo.support.browser.msie) {
-                    newLink = $(doc.createStyleSheet(url));
-                } else {
-                    newLink = skinLink.eq(0).clone().attr("href", url);
-                    skinLink.eq(0).before(newLink);
-                }
-
-                skinLink.remove();
-
-                if (extension === ".less") {
-                    $("head style[id^='less']").remove();
-                    less.sheets = [newLink[0]];
-                    less.refresh(true);
-                }
-
-                if (exampleElement.length) {
-                    exampleElement[0].style.cssText = exampleElement[0].style.cssText;
-                }
-
-                $(doc).data("kendoSkin", skinName);
-                $("#example").trigger("kendo:skinChange");
-                $(doc.documentElement).removeClass("k-" + oldSkinName).addClass("k-" + skinName);
+            if (kendo.support.browser.msie) {
+                newLink = $(doc.createStyleSheet(newThemeUrl));
+            } else {
+                newLink = themeLink.eq(0).clone().attr("href", newThemeUrl);
+                themeLink.eq(0).before(newLink);
             }
 
+            themeLink.remove();
+
+            if (isLess) {
+                $("head style[id^='less']").remove();
+
+                less.sheets = $("head link[href$='.less']").map(function(x) {
+                    return this;
+                });
+
+                less.refresh(true);
+            }
+
+            if (exampleElement.length) {
+                exampleElement[0].style.cssText = exampleElement[0].style.cssText;
+            }
+
+            $(doc).data("kendoSkin", themeName);
+            $("#example").trigger("kendo:skinChange");
+            $(doc.documentElement).removeClass("k-" + oldThemeName).addClass("k-" + themeName);
+        },
+
+        changeTheme: function(themeName, animate) {
             if (animate) {
-                Application.preloadStylesheet(url, function () {
-                    var animated = $("#exampleTitle").add(exampleElement);
+                Application.preloadStylesheet(Application.getThemeUrl(themeName), function () {
+                    var exampleElement = $("#example"),
+                        animated = $("#exampleTitle").add(exampleElement);
 
                     animated.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function(element) {
                         if (element[0] == exampleElement[0]) {
                             animated.css("visibility", "hidden"); // Hide the element with restored opacity.
-                            replaceTheme();
+                            Application.replaceTheme(themeName);
                             setTimeout(function() {
                                 animated
                                     .css("visibility", "visible")
@@ -228,7 +241,7 @@
                     }}));
                 });
             } else {
-                replaceTheme();
+                Application.replaceTheme(themeName);
             }
         },
 
