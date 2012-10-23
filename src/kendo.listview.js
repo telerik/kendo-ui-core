@@ -241,7 +241,9 @@
                     that.element.on("keydown" + NS, function(e) {
                         if (e.keyCode === keys.SPACEBAR) {
                             current = that.current();
-                            e.preventDefault();
+                            if (e.target == e.currentTarget) {
+                                e.preventDefault();
+                            }
                             if(multi) {
                                 if(!e.ctrlKey) {
                                     that.selectable.clear();
