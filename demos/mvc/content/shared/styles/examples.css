@@ -2556,17 +2556,19 @@ ul.keyboard-legend li {
 
 .button-preview {
     display: inline-block;
+    vertical-align: middle;
     width: 160px;
     height: 48px;
-    vertical-align: middle;
     text-align: right;
-    padding: 10px 10px 0 0;
+    padding: 0px 10px 0 0;
 }
 .button-descr {
     display: inline-block;
     height: 40px;
+    width: 140px;
     padding-align: middle;
+    vertical-align: middle;
     text-align: left;
-    padding: 10px 0 0 10px;
+    padding: 10px 10px 10px 10px;
     border-left: 1px solid #ccc;
 }

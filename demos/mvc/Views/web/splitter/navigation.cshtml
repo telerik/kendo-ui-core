@@ -1,36 +1,38 @@
         <div id="example" class="k-content">
-            <div id="vertical">
-                <div id="top-pane">
-                    <div id="horizontal" style="height: 100%; width: 100%;">
-                        <div id="left-pane">
-                            <div class="pane-content">
-                                <h3>Inner splitter / left pane</h3>
-                                <p>Resizable and collapsible.</p>
+            <div class="demo-section">
+                <div id="vertical">
+                    <div id="top-pane">
+                        <div id="horizontal" style="height: 100%; width: 100%;">
+                            <div id="left-pane">
+                                <div class="pane-content">
+                                    <h3>Inner splitter / left pane</h3>
+                                    <p>Resizable and collapsible.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div id="center-pane">
-                            <div class="pane-content">
-                                <h3>Inner splitter / center pane</h3>
-                                <p>Resizable only.</p>
+                            <div id="center-pane">
+                                <div class="pane-content">
+                                    <h3>Inner splitter / center pane</h3>
+                                    <p>Resizable only.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div id="right-pane">
-                            <div class="pane-content">
-                                <h3>Inner splitter / right pane</h3>
-                                <p>Resizable and collapsible.</p>
+                            <div id="right-pane">
+                                <div class="pane-content">
+                                    <h3>Inner splitter / right pane</h3>
+                                    <p>Resizable and collapsible.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="bottom-pane">
-                    <div class="pane-content">
-                        <h3>Outer splitter / bottom pane</h3>
-                        <p>Non-resizable and non-collapsible.</p>
+                    <div id="bottom-pane">
+                        <div class="pane-content">
+                            <h3>Outer splitter / bottom pane</h3>
+                            <p>Non-resizable and non-collapsible.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <ul class="keyboard-legend">
+            <ul id="keyboard-nav" class="keyboard-legend">
                 <li>
                     <span class="button-preview">
                         <span class="key-button leftAlign wider">Alt</span>
@@ -171,6 +173,21 @@
 
                 .pane-content {
                     padding: 0 10px;
+                }
+
+                #keyboard-nav
+                {
+                    padding-top: 35px;
+                }
+
+                ul.keyboard-legend li
+                {
+                    margin: 5px 0 15px 5px;
+                }
+
+                div.demo-section
+                {
+                    margin: 0px auto;
                 }
             </style>
         </div>

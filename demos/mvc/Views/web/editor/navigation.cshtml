@@ -9,7 +9,7 @@
                     &lt;/p&gt;
                 </textarea>
 
-            <ul class="keyboard-legend">
+            <ul id="keyboard-nav" class="keyboard-legend">
                 <li>
                     <span class="button-preview">
                         <span class="key-button">Tab</span>
@@ -36,4 +36,10 @@
                     $("#editor").kendoEditor();
                 });
             </script>
+            <style scoped>
+                #keyboard-nav
+                {
+                    padding-top: 35px;
+                }
+            </style>
         </div>
