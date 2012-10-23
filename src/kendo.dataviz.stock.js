@@ -210,7 +210,7 @@
                 chart = navi.chart,
                 axis = navi.mainAxis(),
                 groups = axis.options.categories,
-                select = navi.options.select,
+                select = navi.options.select || {},
                 min = 0,
                 max = groups.length - 1,
                 start = min,
@@ -239,7 +239,7 @@
 
         applySelection: function() {
             var navi = this,
-                select = navi.options.select,
+                select = navi.options.select || {},
                 chart = navi.chart,
                 slaveAxes = chart.options.categoryAxis,
                 i,
