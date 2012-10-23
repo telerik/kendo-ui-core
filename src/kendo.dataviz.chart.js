@@ -6431,7 +6431,7 @@
             }
         },
 
-        events:[
+        events: [
             SELECT
         ],
 
@@ -6518,64 +6518,48 @@
         },
 
         dragStart: function(e) {
-            var that = this;
+            var that = this,
+                options = that.options;
 
             that.dragHandle = $(e.currentTarget).css("cursor", "default");
             that.isFirst = that.dragHandle.hasClass(CSS_PREFIX + "leftHandle");
-            that.currentLocation = that.leftMask.width();
-            if (!that.isFirst) {
-                that.currentLocation += that.selection.outerWidth();
+            if (that.isFirst) {
+                that._state = {
+                    start: options.start
+                };
+            } else {
+                that._state = {
+                    start: options.end
+                };
             }
         },
 
         drag: function(e) {
             var that = this,
                 options = that.options,
-                position = that.currentLocation + (e.x.location - e.x.startLocation),
-                maxSelection = that.wrapper.width(),
-                border = options.selection.border,
-                distance;
+                delta = e.x.startLocation - e.x.location,
+                fullRange = options.max - options.min,
+                scale = that.wrapper.width() / fullRange,
+                offset = math.round(delta / scale),
+                state = that._state;
 
             if (that.isFirst) {
-                distance = round(math.min(math.max(position, 0), maxSelection - that.rightMask.width() - border.left));
-                that.leftMask.width(distance);
+                that.start = math.min(math.max(options.min, state.start - offset), options.max - 1);
+                that.end = options.end;
             } else {
-                distance = round(math.min(math.max(position, that.leftMask.width()), maxSelection));
-                that.rightMask.width(maxSelection - distance);
-                if (distance > 0) {
-                    distance = math.min(maxSelection, distance + border.right);
-                }
-                that.rightMask.css("left", distance);
+                that.start = options.start;
+                that.end = math.min(math.max(options.min + 1, state.start - offset), options.max);
             }
 
-            that.selection.css("left", that.leftMask.width());
-            that.selection.width(maxSelection - that.rightMask.width() - that.leftMask.width() - border.left);
-            that.position = distance;
+            that.setRange(that.start, that.end);
         },
 
-        dragEnd: function() {
-            var that = this,
-                options = that.options,
-                offsetLeft = options.offset.left,
-                paddingLeft = options.padding.left,
-                border = options.selection.border,
-                startPoint = { x: offsetLeft - paddingLeft + parseFloat(that.leftMask.width(), 10) + border.left },
-            endPoint = { x: offsetLeft - paddingLeft + parseFloat(that.rightMask.css("left"), 10) },
-                categoryAxis = that.categoryAxis,
-                startIndex, endIndex;
-
-            that.dragHandle.css("cursor", "e-resize");
-
-            //if (options.snap) {
-                startIndex = categoryAxis.getCategoryIndex(startPoint);
-                endIndex = categoryAxis.getCategoryIndex(endPoint);
-
-                that.setRange(startIndex, endIndex);
-            //}
+        dragEnd: function(e) {
+            var that = this;
 
             that.trigger(SELECT, {
-                start: startIndex,
-                end: endIndex
+                start: that.start,
+                end: that.end
             });
         },
 
