@@ -3327,7 +3327,13 @@
                 gradient: GLASS
             },
             tooltip: {
-                format: "{4:d}<br/>open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
+                format: "<table style='text-align: left;'>" +
+                        "<th colspan='2'>{4:d}</th>" +
+                        "<tr><td>Open:</td><td>{0:C}</td></tr>" +
+                        "<tr><td>High:</td><td>{1:C}</td></tr>" +
+                        "<tr><td>Low:</td><td>{2:C}</td></tr>" +
+                        "<tr><td>Close:</td><td>{3:C}</td></tr>" +
+                        "</table>"
             }
         },
 

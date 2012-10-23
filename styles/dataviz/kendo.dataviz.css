@@ -30,6 +30,19 @@ div.k-gauge
     z-index: 1000;
 }
 
+.k-chart .k-tooltip table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.k-chart .k-tooltip th {
+    text-align: center;
+}
+
+.k-chart .k-tooltip td {
+    padding: .1em .2em;
+}
+
 /* Selection */
 .k-selector {
     position: absolute;
