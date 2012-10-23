@@ -462,6 +462,7 @@
                 { text: "Default", value: "default" },
                 { text: "High Contrast", value: "highcontrast" },
                 { text: "Metro", value: "metro" },
+                { text: "Metro Black", value: "metroblack" },
                 { text: "Silver", value: "silver" }
             ],
             template = kendo.template("<li data-value='#=value#' class='skin-#=value#'><span>#= text #</span></li>"),
