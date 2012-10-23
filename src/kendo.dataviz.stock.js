@@ -323,13 +323,31 @@
                 labels: { visible: false },
                 majorTicks: { visible: false }
             }), deepExtend({}, base, {
+                name: NAVIGATOR_AXIS + "_labels",
                 // TODO: Width based
                 maxDateGroups: 20,
                 baseUnitStep: "auto",
+                autoBaseUnitSteps: {
+                    minutes: [],
+                    hours: [1],
+                    days: [1],
+                    weeks: [],
+                    months: [1],
+                    years: [1]
+                },
                 majorTicks: { visible: true }
             }), deepExtend({}, base, {
+                name: NAVIGATOR_AXIS + "_ticks",
                 // TODO: Width based
                 maxDateGroups: 200,
+                autoBaseUnitSteps: {
+                    minutes: [1],
+                    hours: [1],
+                    days: [1],
+                    weeks: [],
+                    months: [1],
+                    years: [1]
+                },
                 majorTicks: {
                     visible: true,
                     width: 0.5
