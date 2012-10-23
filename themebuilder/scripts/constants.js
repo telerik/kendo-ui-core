@@ -126,7 +126,7 @@
             "@draghandle-shadow":                   { readonly: true, value: "none" },
             "@draghandle-hover-border-color":       { readonly: true, value: "@hover-border-color" },
             "@draghandle-hover-background-color":   { readonly: true, value: "@hover-background-color" },
-            "@draghandle-hover-shadow:":            { readonly: true, value: "none" },
+            "@draghandle-hover-shadow":             { readonly: true, value: "none" },
 
             "@default-icon-opacity":            { readonly: true, value: "0.8" },
 
