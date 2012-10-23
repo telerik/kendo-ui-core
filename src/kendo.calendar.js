@@ -334,33 +334,33 @@
                 } else if (key == keys.DOWN) {
                     that._click($(that._cell[0].firstChild));
                     prevent = true;
-                }
-            } else {
-                if (key == keys.RIGHT) {
-                    value = 1;
-                    prevent = true;
-                } else if (key == keys.LEFT) {
-                    value = -1;
-                    prevent = true;
-                } else if (key == keys.UP) {
-                    value = index === 0 ? -7 : -4;
-                    prevent = true;
-                } else if (key == keys.DOWN) {
-                    value = index === 0 ? 7 : 4;
-                    prevent = true;
-                } else if (key == keys.ENTER) {
+                }
+            } else {
+                if (key == keys.RIGHT) {
+                    value = 1;
+                    prevent = true;
+                } else if (key == keys.LEFT) {
+                    value = -1;
+                    prevent = true;
+                } else if (key == keys.UP) {
+                    value = index === 0 ? -7 : -4;
+                    prevent = true;
+                } else if (key == keys.DOWN) {
+                    value = index === 0 ? 7 : 4;
+                    prevent = true;
+                } else if (key == keys.ENTER) {
                     that._click($(that._cell[0].firstChild));
-                    prevent = true;
+                    prevent = true;
                 } else if (key == keys.HOME || key == keys.END) {
                     method = key == keys.HOME ? "first" : "last";
                     currentValue = view[method](currentValue);
                     prevent = true;
-                } else if (key == keys.PAGEUP) {
-                    prevent = true;
-                    that.navigateToPast();
-                } else if (key == keys.PAGEDOWN) {
-                    prevent = true;
-                    that.navigateToFuture();
+                } else if (key == keys.PAGEUP) {
+                    prevent = true;
+                    that.navigateToPast();
+                } else if (key == keys.PAGEDOWN) {
+                    prevent = true;
+                    that.navigateToFuture();
                 }
 
                 if (value || method) {
