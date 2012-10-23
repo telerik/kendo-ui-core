@@ -335,6 +335,124 @@
             }
         }
     });
+    
+    registerTheme("highcontrast", {
+        chart: {
+            title: {
+                color: "#ffffff"
+            },
+            legend: {
+                labels: {
+                    color: "#ffffff"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: "#ffffff"
+                },
+                pie: {
+                    overlay: {
+                        gradient: "sharpGlass"
+                    }
+                },
+                donut: {
+                    overlay: {
+                        gradient: "sharpGlass"
+                    }
+                },
+                line: {
+                    markers: {
+                        background: "#1b141a"
+                    }
+                },
+                scatter: {
+                    markers: {
+                        background: "#1b141a"
+                    }
+                },
+                scatterLine: {
+                    markers: {
+                        background: "#1b141a"
+                    }
+                },
+                area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                },
+                candlestick: {
+                    downColor: "#664e62",
+                    line: {
+                        color: "#ffffff"
+                    },
+                    border: {
+                        _brightness: 1.5,
+                        opacity: 1
+                    },
+                    highlight: {
+                        border: {
+                            color: "#ffffff",
+                            opacity: 0.2
+                        }
+                    }
+                },
+                ohlc: {
+                    line: {
+                        color: "#ffffff"
+                    }
+                }
+            },
+            chartArea: {
+                background: "#1b141a"
+            },
+            seriesColors: ["#a7008f", "#ffb800", "#3aafff", "#99c900", "#b20753", "#ff4195"],
+            axisDefaults: {
+                line: {
+                    color: "#ffffff"
+                },
+                labels: {
+                    color: "#ffffff"
+                },
+                majorGridLines: {
+                    color: "#664e62"
+                },
+                minorGridLines: {
+                    color: "#2c232b"
+                },
+                title: {
+                    color: "#ffffff"
+                }
+            },
+            tooltip: {
+                background: "#1b141a",
+                color: "#ffffff",
+                opacity: 0.8
+            }
+        },
+        gauge: {
+            pointer: {
+                color: "#a7008f"
+            },
+            scale: {
+                rangePlaceholderColor: "#2c232b",
+
+                labels: {
+                    color: "#ffffff"
+                },
+                minorTicks: {
+                    color: "#2c232b"
+                },
+                majorTicks: {
+                    color: "#664e62"
+                },
+                line: {
+                    color: "#ffffff"
+                }
+            }
+        }
+    });
 
     registerTheme("default", {
         chart: {
@@ -543,7 +661,7 @@
                     }
                 }
             },
-            seriesColors: ["#25a0da", "#309b46", "#8ebc00", "#ff6900", "#e61e26", "#d8e404", "#16aba9", "#7e51a1", "#313131", "#ed1691"],
+            seriesColors: ["#8ebc00", "#309b46", "#25a0da", "#ff6900", "#e61e26", "#d8e404", "#16aba9", "#7e51a1", "#313131", "#ed1691"],
             axisDefaults: {
                 line: {
                     color: "#c7c7c7"
@@ -584,6 +702,83 @@
                 },
                 line: {
                     color: "#777"
+                }
+            }
+        }
+    });
+    
+    registerTheme("metroblack", {
+        chart: {
+            title: {
+                color: "#ffffff"
+            },
+            legend: {
+                labels: {
+                    color: "#ffffff"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: "#ffffff"
+                },
+                area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                },
+                candlestick: {
+                    downColor: "#828282",
+                    line: {
+                        color: "#ffffff"
+                    }
+                }
+            },
+            chartArea: {
+                background: "#0e0e0e"
+            },
+            seriesColors: ["#00aba9", "#309b46", "#8ebc00", "#ff6900", "#e61e26", "#d8e404", "#25a0da", "#7e51a1", "#313131", "#ed1691"],
+            axisDefaults: {
+                line: {
+                    color: "#cecece"
+                },
+                labels: {
+                    color: "#ffffff"
+                },
+                minorGridLines: {
+                    color: "#2d2d2d"
+                },
+                majorGridLines: {
+                    color: "#333333"
+                },
+                title: {
+                    color: "#ffffff"
+                }
+            },
+            tooltip: {
+                background: "#0e0e0e",
+                color: "#ffffff"
+            }
+        },
+        gauge: {
+            pointer: {
+                color: "#00aba9"
+            },
+            scale: {
+                rangePlaceholderColor: "#2d2d2d",
+
+                labels: {
+                    color: "#ffffff"
+                },
+                minorTicks: {
+                    color: "#333333"
+                },
+                majorTicks: {
+                    color: "#cecece"
+                },
+                line: {
+                    color: "#cecece"
                 }
             }
         }
