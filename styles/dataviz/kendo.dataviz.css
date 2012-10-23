@@ -68,6 +68,13 @@ div.k-gauge
     position: absolute;
 }
 
+.k-handle div {
+    width: 100%;
+    height: 100%;
+    margin-left: -12px;
+    padding-right: 24px;
+}
+
 .k-mask {
     background: #fff;
     filter:alpha(opacity=70);

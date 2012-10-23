@@ -6375,8 +6375,8 @@
                     "<div class='" + CSS_PREFIX + "mask'></div>" +
                     "<div class='" + CSS_PREFIX + "mask'></div>" +
                     "<div class='" + CSS_PREFIX + "selection'>" +
-                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "leftHandle'></div>" +
-                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "rightHandle'></div>" +
+                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "leftHandle'><div></div></div>" +
+                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "rightHandle'><div></div></div>" +
                     "</div></div>"
                 );
             }
@@ -6425,7 +6425,8 @@
             if (kendo.ui.Draggable) {
                 that.selection.kendoDraggable({
                     drag: proxy(that.dragSelection, that),
-                    dragstart: proxy(that.dragSelectionStart, that)
+                    dragstart: proxy(that.dragSelectionStart, that),
+                    dragend: proxy(that.dragSelectionEnd, that)
                 });
             }
         },
@@ -6613,10 +6614,15 @@
             var end = math.min(start + range, options.max);
 
             that.setRange(start, end);
+        },
+
+        dragSelectionEnd: function(e) {
+            var that = this,
+                options = that.options;
 
             that.trigger(SELECT, {
-                start: start,
-                end: end
+                start: options.start,
+                end: options.end
             });
         }
     });
