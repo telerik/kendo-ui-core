@@ -19,7 +19,7 @@ public class SeriesItemMarkersTag extends  BaseTag  /* interfaces *//* interface
 //>> doEndTag
 
 
-        SeriesSeriesItemTag parent = (SeriesSeriesItemTag)findParentWithClass(SeriesSeriesItemTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
         parent.setMarkers(this);

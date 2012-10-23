@@ -593,10 +593,9 @@ class Tag
             elements.slice(reference_index, elements.length)
                          .find { |e| e.type == type }
         end
-
         configuration.each_with_index do |e, index|
             if (e.type == :header && e.options[:level] == 3)
-                name = find_child_with_type.call(e, :text).value
+                name = find_child_with_type.call(e, :text).value.strip
 
                 type = find_child_with_type.call(e, :codespan)
 
@@ -604,7 +603,7 @@ class Tag
 
                 name.sub!(/\s*type\s*[=:][^\.]*\.?/, '') # skip exotic documentation like series.type="area".tooltip
 
-                name = name.strip
+                next if IGNORED[tag.name.downcase] && IGNORED[tag.name.downcase].include?(name)
 
                 type = type.value.strip
 
@@ -612,7 +611,9 @@ class Tag
 
                 description = find_child_with_type.call(paragraph, :text)
 
-                if type == 'Function'
+                types = type.split('|').map { |t| t.strip.strip_namespace }
+
+                if types.include?('Function') && types.size == 1
 
                     event = Event.new :name => name,
                                       :description => description.value
@@ -622,15 +623,11 @@ class Tag
                     next
                 end
 
-                type.split('|').each do |t|
-                    t = t.strip.strip_namespace
-
-                    next if t == 'Function'
-                    next if IGNORED[tag.name.downcase] && IGNORED[tag.name.downcase].include?(name)
+                types.each do |type|
 
                     option = Option.new :name => name,
                         :parent => tag,
-                        :type => t,
+                        :type => type,
                         :description => description.value
 
                     tag.options.push(option)
@@ -683,7 +680,19 @@ class Tag
     end
 
     def remove_duplicate_options
-        @options = @options.uniq { |o| o.name }
+        @options.dup.each do |option|
+            options_with_this_name = @options.find_all {|o| o.name == option.name && o.type != option.type }
+
+            if options_with_this_name.size > 1
+                options_with_this_name.each { |o| @options.delete(o) }
+
+                @options.push(Option.new :name => option.name,
+                              :description => option.description,
+                              :type => 'Object')
+            end
+        end
+
+        @options.uniq! { |option| option.name }
 
         @children.each { |child| child.remove_duplicate_options }
     end
@@ -698,7 +707,7 @@ class NestedTag < Tag
     end
 
     def java_type
-        return super if parent.name.downcase == namespace || @name == 'Item' || @name == 'Items'
+        return super if parent.name.downcase == namespace || @name == 'Item' || @name == 'Items' || (@name == parent.name.singular && !(name =~ /aggregate/i))
 
         return parent.name + @name + 'Tag'
     end

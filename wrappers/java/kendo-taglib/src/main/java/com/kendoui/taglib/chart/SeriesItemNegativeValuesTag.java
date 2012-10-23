@@ -19,7 +19,7 @@ public class SeriesItemNegativeValuesTag extends  BaseTag  /* interfaces *//* in
 //>> doEndTag
 
 
-        SeriesSeriesItemTag parent = (SeriesSeriesItemTag)findParentWithClass(SeriesSeriesItemTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
         parent.setNegativeValues(this);

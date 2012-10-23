@@ -19,7 +19,7 @@ public class SeriesItemConnectorsTag extends  BaseTag  /* interfaces *//* interf
 //>> doEndTag
 
 
-        SeriesSeriesItemTag parent = (SeriesSeriesItemTag)findParentWithClass(SeriesSeriesItemTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
         parent.setConnectors(this);

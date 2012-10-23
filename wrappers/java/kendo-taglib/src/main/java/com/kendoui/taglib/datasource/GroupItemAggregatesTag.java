@@ -21,7 +21,7 @@ public class GroupItemAggregatesTag extends BaseTag /* interfaces *//* interface
 //>> doEndTag
 
 
-        GroupGroupItemTag parent = (GroupGroupItemTag)findParentWithClass(GroupGroupItemTag.class);
+        GroupItemTag parent = (GroupItemTag)findParentWithClass(GroupItemTag.class);
 
 
         parent.setAggregates(this);

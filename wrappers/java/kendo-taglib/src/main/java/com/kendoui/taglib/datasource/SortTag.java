@@ -67,7 +67,7 @@ public class SortTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-sort";
     }
 
-    public void addSortItem(SortSortItemTag value) {
+    public void addSortItem(SortItemTag value) {
         sort.add(value.properties());
     }
 

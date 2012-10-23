@@ -67,7 +67,7 @@ public class GroupTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-group";
     }
 
-    public void addGroupItem(GroupGroupItemTag value) {
+    public void addGroupItem(GroupItemTag value) {
         group.add(value.properties());
     }
 

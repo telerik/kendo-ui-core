@@ -3874,7 +3874,7 @@ Template variables:
     <tag>
         <description>Array of series definitions.</description>
         <name>chart-seriesItem</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesSeriesItemTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -3945,13 +3945,6 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>A value indicating if the series should be stacked.</description>
-            <name>stack</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
             <description>The name of the value axis to use.</description>
             <name>axis</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4003,13 +3996,6 @@ The function return value is displayed instead of the individual points.</descri
         <attribute>
             <description>The data field containing the bubble size value.</description>
             <name>sizeField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>A boolean value indicating whether to show the bubble category name in the legend.</description>
-            <name>visibleInLegendField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4151,6 +4137,20 @@ The function return values are displayed instead of the individual points.</desc
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>A value indicating if the series should be stacked.</description>
+            <name>stack</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>A boolean value indicating whether to show the sector in the legend.</description>
+            <name>visibleInLegendField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
     </tag>
 
 
@@ -4189,30 +4189,8 @@ The function return values are displayed instead of the individual points.</desc
         </attribute>
 
         <attribute>
-            <description>The margin of the labels.</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding of the labels.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
             <description>Defines the position of the area labels.</description>
             <name>position</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The label template.
-Template variables:</description>
-            <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4236,6 +4214,28 @@ Template variables:</description>
             <name>distance</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the labels.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
         </attribute>
 
     </tag>
@@ -4373,10 +4373,10 @@ Template variables:</description>
         </attribute>
 
         <attribute>
-            <description>The padding of the tooltip.</description>
-            <name>padding</name>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
+            <type>boolean</type>
         </attribute>
 
         <attribute>
@@ -4384,14 +4384,14 @@ Template variables:</description>
 Template variables:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>Object</type>
         </attribute>
 
         <attribute>
-            <description>A value indicating if the tooltip should be displayed.</description>
-            <name>visible</name>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
+            <type>Object</type>
         </attribute>
 
     </tag>
@@ -5286,7 +5286,7 @@ hex and rgb.</description>
 return the aggregate results for the current response.</description>
             <name>aggregates</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5294,7 +5294,7 @@ return the aggregate results for the current response.</description>
 return the data items for the current response.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5302,7 +5302,7 @@ return the data items for the current response.</description>
 return the errors for the current response (if present). If there are any errors the</description>
             <name>errors</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5310,7 +5310,7 @@ return the errors for the current response (if present). If there are any errors
 return the groups for the current response.</description>
             <name>groups</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5325,7 +5325,7 @@ return the groups for the current response.</description>
 return the total number of data items for the current response.</description>
             <name>total</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>String</type>
         </attribute>
 
         <attribute>
@@ -5460,7 +5460,7 @@ return the total number of data items for the current response.</description>
     <tag>
         <description>Sets the initial filter.</description>
         <name>dataSource-filterItem</name>
-        <tag-class>com.kendoui.taglib.datasource.FilterFilterItemTag</tag-class>
+        <tag-class>com.kendoui.taglib.datasource.FilterItemTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5490,7 +5490,7 @@ return the total number of data items for the current response.</description>
     <tag>
         <description>Sets initial grouping</description>
         <name>dataSource-groupItem</name>
-        <tag-class>com.kendoui.taglib.datasource.GroupGroupItemTag</tag-class>
+        <tag-class>com.kendoui.taglib.datasource.GroupItemTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5553,7 +5553,7 @@ return the total number of data items for the current response.</description>
     <tag>
         <description>Sets initial sort order</description>
         <name>dataSource-sortItem</name>
-        <tag-class>com.kendoui.taglib.datasource.SortSortItemTag</tag-class>
+        <tag-class>com.kendoui.taglib.datasource.SortItemTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5594,14 +5594,6 @@ return the total number of data items for the current response.</description>
         </attribute>
 
         <attribute>
-            <description>Data to be send to the server.
-Refer to the</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5620,6 +5612,14 @@ Refer to the</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
         </attribute>
 
     </tag>
@@ -5646,14 +5646,6 @@ Refer to the</description>
         </attribute>
 
         <attribute>
-            <description>Data to be send to the server.
-Refer to the</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5672,6 +5664,14 @@ Refer to the</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
         </attribute>
 
     </tag>
@@ -5698,14 +5698,6 @@ Refer to the</description>
         </attribute>
 
         <attribute>
-            <description>Data to be send to the server.
-Refer to the</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5724,6 +5716,14 @@ Refer to the</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
         </attribute>
 
     </tag>
@@ -5750,14 +5750,6 @@ Refer to the</description>
         </attribute>
 
         <attribute>
-            <description>Data to be send to the server.
-Refer to the</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5776,6 +5768,14 @@ Refer to the</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
         </attribute>
 
     </tag>
@@ -6309,7 +6309,7 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
     <tag>
         <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
         <name>grid-column</name>
-        <tag-class>com.kendoui.taglib.grid.ColumnsColumnTag</tag-class>
+        <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -6512,7 +6512,7 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
         <description>This is a list of commands for which the corresponding buttons will be rendered.
 The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
         <name>grid-toolbarItem</name>
-        <tag-class>com.kendoui.taglib.grid.ToolbarToolbarItemTag</tag-class>
+        <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -7888,7 +7888,7 @@ format will also influence the appearance of the</description>
     <tag>
         <description>An array of pane definitions.</description>
         <name>splitter-pane</name>
-        <tag-class>com.kendoui.taglib.splitter.PanesPaneTag</tag-class>
+        <tag-class>com.kendoui.taglib.splitter.PaneTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>

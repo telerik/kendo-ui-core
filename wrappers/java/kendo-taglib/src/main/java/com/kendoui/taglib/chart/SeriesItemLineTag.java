@@ -19,7 +19,7 @@ public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces *
 //>> doEndTag
 
 
-        SeriesSeriesItemTag parent = (SeriesSeriesItemTag)findParentWithClass(SeriesSeriesItemTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
         parent.setLine(this);
