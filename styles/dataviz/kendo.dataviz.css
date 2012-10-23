@@ -91,6 +91,10 @@ div.k-gauge
     height: 100%;
 }
 
+.k-black .k-mask {
+    background: #222;
+}
+
 .k-border {
     background: #d2d2d2;
     width: 1px;
