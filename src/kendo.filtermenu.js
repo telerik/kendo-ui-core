@@ -115,7 +115,9 @@
                     link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
                 }
 
-                link.on("click" + NS, proxy(that._click, that));
+                link
+                .attr("tabindex", -1)
+                .on("click" + NS, proxy(that._click, that));
 
             } else {
                 that.link = $();

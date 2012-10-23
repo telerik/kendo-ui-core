@@ -100,6 +100,12 @@
                 ok(menu.wrapper.data("kendoPopup"));
             });
 
+            test("menu link has negative tabindex", function() {
+                var menu = setup();
+
+                equal(menu.link.attr("tabindex"), -1);
+            });
+
             test("clicking the link toggles popup visibility", function() {
                 var menu = setup();
 

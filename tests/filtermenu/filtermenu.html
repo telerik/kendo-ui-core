@@ -69,6 +69,12 @@
                 }
             });
 
+            test("menu link has negative tabindex", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                equal(filterMenu.link.attr("tabindex"), -1);
+            });
+
             test("binds the operator select from the field", function(){
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 

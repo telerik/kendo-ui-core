@@ -41,7 +41,9 @@
                 link = element.prepend('<a class="k-header-column-menu" href="#"><span class="k-icon k-i-arrowhead-s"/></a>').find(".k-header-column-menu");
             }
 
-            that.link = link.on("click" + NS, proxy(that._click, that));
+            that.link = link
+                .attr("tabindex", -1)
+                .on("click" + NS, proxy(that._click, that));
 
             that.wrapper = $('<div class="k-column-menu"/>');
 
