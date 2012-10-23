@@ -42,8 +42,40 @@
         END_EVENTS = "MSPointerUp MSPointerCancel";
     }
 
+    var DOMEvents = {
+        down: "touchstart mousedown",
+        move: "mousemove touchmove",
+        up: "mouseup touchend",
+        cancel: "mouseleave touchcancel"
+    };
+
+    var slice = Array.prototype.slice,
+        on = $.fn.on;
+
     function addNS(events) {
         return events.replace(/(\w+)/g, "$1" + NS);
+    }
+
+    function EventProxy(element, handler) {
+        this.element = element;
+        this.handler = handler;
+    }
+
+    EventProxy.prototype = {
+        on: function() {
+            var that = this,
+                handler = that.handler,
+                args = slice.call(arguments),
+                method = handler[args[args.length - 1]],
+                handler = function(e) {
+                    method.call(handler, e);
+                };
+
+            args[0] = args[0].replace(/\w+/g, function(e) { return DOMEvents[e] || e; });
+            args[args.length - 1] = handler;
+
+            on.apply(that.element, args);
+        }
     }
 
     function preventTrigger(e) {
@@ -521,4 +553,5 @@
     kendo.getTouches = getTouches;
     kendo.touchDelta = touchDelta;
     kendo.UserEvents = UserEvents;
+    kendo.EventProxy = EventProxy;
  })(jQuery);
