@@ -22,5 +22,9 @@ tests.push(
     {
         page: "textbox/lint.html",
         title: "textbox lint"
+    },
+    {
+        page: "textbox/aria.html",
+        title: "textbox aria"
     }
 );

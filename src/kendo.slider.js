@@ -1,4 +1,3 @@
-
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
@@ -321,6 +320,58 @@
             }
         },
 
+        _getFormattedValue: function(val, drag) {
+            var that = this,
+                html = "",
+                tooltip = that.options.tooltip,
+                tooltipTemplate,
+                selectionStart,
+                selectionEnd;
+
+            if (isArray(val)) {
+                selectionStart = val[0];
+                selectionEnd = val[1];
+            } else if (drag && drag.type) {
+                selectionStart = drag.selectionStart;
+                selectionEnd = drag.selectionEnd;
+            }
+        
+            if (drag) {
+                tooltipTemplate = drag.tooltipTemplate;
+            }
+
+            if (!tooltipTemplate && tooltip.template) {
+                tooltipTemplate = kendo.template(tooltip.template);
+            }
+
+            if (isArray(val) || (drag && drag.type)) {
+
+                if (tooltipTemplate) {
+                    html = tooltipTemplate({
+                        selectionStart: selectionStart,
+                        selectionEnd: selectionEnd
+                    });
+                } else {
+                    selectionStart = format(tooltip.format, selectionStart);
+                    selectionEnd = format(tooltip.format, selectionEnd);
+                    html = selectionStart + " - " + selectionEnd;
+                }
+            } else {
+                if (drag) {
+                    drag.val = val;
+                }
+
+                if (tooltipTemplate) {
+                    html = tooltipTemplate({
+                        value: val
+                    });
+                } else {
+                    html = format(tooltip.format, val);
+                }
+            }
+            return html;
+        },
+
         _getDragableArea: function() {
             var that = this,
                 offsetLeft = that._trackDiv.offset().left,
@@ -377,16 +428,23 @@
             if (drag) {
                 that._activeHandleDrag = drag;
 
-                if (drag.selectionStart === undefined) {
-                    drag.selectionStart = that.options.selectionStart;
-                }
-                if (drag.selectionEnd === undefined) {
-                    drag.selectionEnd = that.options.selectionEnd;
-                }
+                drag.selectionStart = that.options.selectionStart;
+                drag.selectionEnd = that.options.selectionEnd;
 
-                drag._createTooltip();
                 drag._updateTooltip(val);
             }
+        },
+
+        _focusWithMouse: function(e) {
+            var that = this,
+                target = $(e.target),
+                idx = target.is(DRAG_HANDLE) ? target.index() : 0;
+
+            window.setTimeout(function(){
+                that.wrapper.find(DRAG_HANDLE)[idx == 2 ? 1 : 0].focus();
+            }, 1);
+
+            that._setTooltipTimeout();
         },
 
         _blur: function(e) {
@@ -399,6 +457,25 @@
                 drag._removeTooltip();
                 delete that._activeHandleDrag;
                 delete that._activeHandle;
+            }
+        },
+
+        _setTooltipTimeout: function() {
+            var that = this;
+            that._tooltipTimeout = window.setTimeout(function(){
+                var drag = that._drag || that._activeHandleDrag;
+                if (drag) {
+                    drag._removeTooltip();
+                }
+            }, 300);
+        },
+
+        _clearTooltipTimeout: function() {
+            var that = this;
+            window.clearTimeout(this._tooltipTimeout);
+            var drag = that._drag || that._activeHandleDrag;
+            if (drag && drag.tooltipDiv) {
+                drag.tooltipDiv.stop(true, false).css("opacity", 1);
             }
         }
     });
@@ -441,7 +518,7 @@
             i;
 
         for(i = 0; i < count; i++) {
-            result += "<li class='k-tick'>&nbsp;</li>";
+            result += "<li class='k-tick' role='presentation'>&nbsp;</li>";
         }
 
         result += "</ul>";
@@ -454,8 +531,8 @@
             firstDragHandleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle;
 
         return "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
-               "<a href='#' class='k-draghandle' title='" + firstDragHandleTitle + "'>Drag</a>" +
-               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='" + options.rightDragHandleTitle + "'>Drag</a>" : "") +
+               "<a href='#' class='k-draghandle' title='" + firstDragHandleTitle + "' role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (dragHandleCount > 1 ? (options.selectionStart || options.min) : options.value || options.min) + "'>Drag</a>" +
+               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='" + options.rightDragHandleTitle + "'role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (options.selectionEnd || options.max) + "'>Drag</a>" : "") +
                "</div>";
     }
 
@@ -608,6 +685,8 @@
 
                 that._update(that._getValueFromPosition(mousePosition, dragableArea));
 
+                that._focusWithMouse(e);
+
                 that._drag.dragstart(e);
             };
 
@@ -622,20 +701,24 @@
             that.wrapper
                 .find(DRAG_HANDLE)
                 .on(MOUSE_UP + NS, function (e) {
-                    $(e.target).removeClass(STATE_SELECTED);
+                    that._setTooltipTimeout();
                 })
                 .on(CLICK + NS, function (e) {
+                    that._focusWithMouse(e);
                     e.preventDefault();
                 })
                 .on(FOCUS + NS, proxy(that._focus, that))
                 .on(BLUR + NS, proxy(that._blur, that));
 
             move = proxy(function (sign) {
-                that._setValueInRange(that._nextValueByIndex(that._valueIndex + (sign * 1)));
+                var newVal = that._nextValueByIndex(that._valueIndex + (sign * 1));
+                that._setValueInRange(newVal);
+                that._drag._updateTooltip(newVal);
             }, that);
 
             if (options.showButtons) {
                 var mouseDownHandler = proxy(function(e, sign) {
+                    this._clearTooltipTimeout();
                     if (e.which === 1 || (touch && e.which === 0)) {
                         move(sign);
 
@@ -650,6 +733,7 @@
                 that.wrapper.find(".k-button")
                     .on(MOUSE_UP + NS, proxy(function (e) {
                         this._clearTimer();
+                        that._focusWithMouse(e);
                     }, that))
                     .on(MOUSE_OVER + NS, function (e) {
                         $(e.currentTarget).addClass("k-state-hover");
@@ -668,7 +752,7 @@
                     .on(MOUSE_DOWN + NS, proxy(function (e) {
                         mouseDownHandler(e, -1);
                     }, that))
-                    .click(false);
+                    .click(kendo.preventDefault);
             }
 
             that.wrapper
@@ -708,12 +792,7 @@
                 .off(KEY_DOWN + NS)
                 .off(CLICK + NS)
                 .off(FOCUS + NS)
-                .off(BLUR + NS)
-                .on(KEY_DOWN + NS, function(e){
-                    if (e.keyCode != kendo.keys.TAB) {
-                        kendo.preventDefault(e);
-                    }
-                });
+                .off(BLUR + NS);
 
             that.options.enabled = false;
         },
@@ -742,6 +821,7 @@
                 if (options.value != value) {
                     that.element.attr("value", formatValue(value));
                     options.value = value;
+                    that._refreshAriaAttr(value);
                     that._refresh();
                 }
             }
@@ -749,6 +829,19 @@
 
         _refresh: function () {
             this.trigger(MOVE_SELECTION, { value: this.options.value });
+        },
+
+        _refreshAriaAttr: function(value) {
+            var that = this,
+                drag = that._drag,
+                formattedValue;
+
+            if (drag && drag._tooltipDiv) {
+                formattedValue = drag._tooltipDiv.text();
+            } else {
+                formattedValue = that._getFormattedValue(value, null);
+            }
+            this.wrapper.find(DRAG_HANDLE).attr("aria-valuenow", value).attr("aria-valuetext", formattedValue);
         },
 
         _clearTimer: function (e) {
@@ -760,6 +853,7 @@
             var that = this;
 
             if (e.keyCode in that._keyMap) {
+                that._clearTooltipTimeout();
                 that._setValueInRange(that._keyMap[e.keyCode](that.options.value));
                 that._drag._updateTooltip(that.value());
                 e.preventDefault();
@@ -874,7 +968,7 @@
                 that.oldVal = that.val = options.value;
             }
 
-            that._removeTooltip();
+            that._removeTooltip(true);
             that._createTooltip();
         },
 
@@ -883,9 +977,7 @@
                 owner = that.owner,
                 tooltip = that.options.tooltip,
                 html = '',
-                tooltipTemplate,
-                formattedSelectionStart,
-                formattedSelectionEnd;
+                tooltipTemplate;
 
             if (!tooltip.enabled) {
                 return;
@@ -895,31 +987,13 @@
                 tooltipTemplate = that.tooltipTemplate = kendo.template(tooltip.template);
             }
 
-
             $(".k-slider-tooltip").remove(); // if user changes window while tooltip is visible, a second one will be created
             that.tooltipDiv = $("<div class='k-widget k-tooltip k-slider-tooltip'><!-- --></div>").appendTo(document.body);
 
-            if (that.type) {
-                if (that.tooltipTemplate) {
-                    html = tooltipTemplate({
-                        selectionStart: that.selectionStart,
-                        selectionEnd: that.selectionEnd
-                    });
-                } else {
-                    formattedSelectionStart = format(tooltip.format, that.selectionStart);
-                    formattedSelectionEnd = format(tooltip.format, that.selectionEnd);
+            html = owner._getFormattedValue(that.val || owner.value(), that);
 
-                    html = formattedSelectionStart + ' - ' + formattedSelectionEnd;
-                }
-            } else {
+            if (!that.type) {
                 that.tooltipInnerDiv = "<div class='k-callout k-callout-" + (owner._isHorizontal ? 's' : 'e') + "'><!-- --></div>";
-                if (that.tooltipTemplate) {
-                    html = tooltipTemplate({
-                        value: that.val
-                    });
-                } else {
-                    html = format(tooltip.format, that.val);
-                }
                 html += that.tooltipInnerDiv;
             }
 
@@ -984,37 +1058,19 @@
             var that = this,
                 options = that.options,
                 tooltip = options.tooltip,
-                html = "",
-                tooltipTemplate = that.tooltipTemplate,
-                formattedSelectionStart,
-                formattedSelectionEnd;
-
-            that.val = val;
+                html = "";
 
             if (!tooltip.enabled) {
                 return;
             }
 
-            if (that.type) {
-                if (that.tooltipTemplate) {
-                    html = tooltipTemplate({
-                        selectionStart: that.selectionStart,
-                        selectionEnd: that.selectionEnd
-                });
-                } else {
-                    formattedSelectionStart = format(tooltip.format, that.selectionStart);
-                    formattedSelectionEnd = format(tooltip.format, that.selectionEnd);
-                    html = formattedSelectionStart + " - " + formattedSelectionEnd;
-                }
-            } else {
-                if (that.tooltipTemplate) {
-                    html = tooltipTemplate({
-                        value: that.val
-                    });
-                } else {
-                    html = format(tooltip.format, that.val);
-                }
+            if (!that.tooltipDiv) {
+                that._createTooltip();
+            }
 
+            html = that.owner._getFormattedValue(val, that);
+
+            if (!that.type) {
                 html += that.tooltipInnerDiv;
             }
 
@@ -1044,20 +1100,27 @@
             var that = this,
                 owner = that.owner;
 
-            that._removeTooltip();
+            owner._focusWithMouse({"target":that.dragHandle[0]});
 
-            that.dragHandle.removeClass(STATE_SELECTED);
             owner.element.on(MOUSE_OVER + NS);
 
             return false;
         },
 
-        _removeTooltip: function() {
+        _removeTooltip: function(noAnimation) {
             var that = this,
                 owner = that.owner;
 
             if (that.tooltipDiv && owner.options.tooltip.enabled && owner.options.enabled) {
-                that.tooltipDiv.remove();
+                if (noAnimation) {
+                    that.tooltipDiv.remove();
+                    that.tooltipDiv = null;
+                } else {
+                    that.tooltipDiv.fadeOut("slow", function(){
+                        that.tooltipDiv.remove();
+                        that.tooltipDiv = null;
+                    });
+                }
             }
         },
 
@@ -1194,7 +1257,8 @@
                     mousePosition = that._isHorizontal ? location.x : location.y,
                     dragableArea = that._getDragableArea(),
                     val = that._getValueFromPosition(mousePosition, dragableArea),
-                    target = $(e.target);
+                    target = $(e.target),
+                    idx;
 
                 if (target.hasClass("k-draghandle")) {
                     target.addClass(STATE_SELECTED);
@@ -1204,18 +1268,23 @@
                 if (val < options.selectionStart) {
                     that._setValueInRange(val, options.selectionEnd);
                     that._firstHandleDrag.dragstart(e);
+                    idx = 0;
                 } else if (val > that.selectionEnd) {
                     that._setValueInRange(options.selectionStart, val);
                     that._lastHandleDrag.dragstart(e);
+                    idx = 1;
                 } else {
                     if (val - options.selectionStart <= options.selectionEnd - val) {
                         that._setValueInRange(val, options.selectionEnd);
                         that._firstHandleDrag.dragstart(e);
+                        idx = 0;
                     } else {
                         that._setValueInRange(options.selectionStart, val);
                         that._lastHandleDrag.dragstart(e);
+                        idx = 1;
                     }
                 }
+                that._focusWithMouse({"target":that.wrapper.find(DRAG_HANDLE)[idx]});
             };
 
             that.wrapper
@@ -1229,9 +1298,10 @@
             that.wrapper
                 .find(DRAG_HANDLE)
                 .on(MOUSE_UP + NS, function (e) {
-                    $(e.target).removeClass(STATE_SELECTED);
+                    that._setTooltipTimeout();
                 })
                 .on(CLICK + NS, function (e) {
+                    that._focusWithMouse(e);
                     e.preventDefault();
                 })
                 .on(FOCUS + NS, proxy(that._focus, that))
@@ -1272,12 +1342,7 @@
                 .off(KEY_DOWN + NS)
                 .off(CLICK + NS)
                 .off(FOCUS + NS)
-                .off(BLUR + NS)
-                .on(KEY_DOWN + NS, function(e){
-                    if (e.keyCode != kendo.keys.TAB) {
-                        kendo.preventDefault(e);
-                    }
-                });
+                .off(BLUR + NS);
 
             that.options.enabled = false;
         },
@@ -1291,6 +1356,9 @@
                 activeHandleDrag;
 
             if (e.keyCode in that._keyMap) {
+
+                that._clearTooltipTimeout();
+
                 if (handle == "firstHandle") {
                     activeHandleDrag = that._activeHandleDrag = that._firstHandleDrag;
                     selectionStartValue = that._keyMap[e.keyCode](selectionStartValue);
@@ -1369,6 +1437,7 @@
                     options.selectionStart = start;
                     options.selectionEnd = end;
                     that._refresh();
+                    that._refreshAriaAttr(start, end);
                 }
             }
         },
@@ -1393,6 +1462,19 @@
             if (options.selectionStart == options.max && options.selectionEnd == options.max) {
                 that._setZIndex("firstHandle");
             }
+        },
+
+        _refreshAriaAttr: function(start, end) {
+            var that = this,
+                dragHandles = that.wrapper.find(DRAG_HANDLE),
+                drag = that._activeHandleDrag,
+                formattedValue;
+
+            formattedValue = that._getFormattedValue([start, end], drag);
+
+            dragHandles.eq(0).attr("aria-valuenow", start);
+            dragHandles.eq(1).attr("aria-valuenow", end);
+            dragHandles.attr("aria-valuetext", formattedValue);
         },
 
         _setValueInRange: function (selectionStart, selectionEnd) {

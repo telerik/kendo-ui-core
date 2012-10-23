@@ -393,4 +393,10 @@
   <data name="Editor_UploadFile" xml:space="preserve">
     <value>Enviar arquivo</value>
   </data>
+  <data name="Editor_BackColor" xml:space="preserve">
+    <value>Cor de Fundo</value>
+  </data>
+  <data name="Editor_ForeColor" xml:space="preserve">
+    <value>Cor</value>
+  </data>
 </root>

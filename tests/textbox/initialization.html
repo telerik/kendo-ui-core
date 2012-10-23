@@ -79,6 +79,22 @@
                 ok(textbox._text.attr("readonly"));
             });
 
+            test("Move accesskey to the visible input", function() {
+                input.attr("accesskey", "w");
+                var textbox = new NumericTextBox(input);
+
+                equal(textbox._text.attr("accesskey"), "w");
+                equal(textbox.element.attr("accesskey"), "");
+            });
+
+            test("Move tabindex to the visible input", function() {
+                input.attr("tabindex", 3);
+                var textbox = new NumericTextBox(input);
+
+                equal(textbox._text.prop("tabindex"), 3);
+                equal(textbox.element.prop("tabindex"), 0);
+            });
+
             test("Change type of the element", function() {
                 input[0].type = "number";
 

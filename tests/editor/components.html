@@ -56,6 +56,10 @@
                 ]
             });
 
+            $.fn.press = function(key, ctrl, shift) {
+                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
+            }
+
             module("Editor / Components", {
                 setup: function() {
                     editor = getEditor();
@@ -66,6 +70,33 @@
 
             test('colorpicker value returns black when no value has been selected', function() {
                 equal(colorpicker.value(), '#000000');
+            });
+
+            test('colorpicker renders aria-label for each color', function() {
+                colorpicker.open();
+                equal(colorpicker.popup.element.find("li[aria-label]").length, kendo.ui.editor.ColorPicker.fn.options.colors.length);
+            });
+
+            test('colorpicker renders aria-labelledby with the id of the selected color', function() {
+                equal(colorpicker.element.attr("aria-labelledby"), "Editor1_forecolor_cp");
+            });
+
+            test('colorpicker aria-labelledby id is set to the selected color ', function() {
+                colorpicker.open();
+                equal(colorpicker.popup.element.find("li.k-state-selected").attr("id"), "Editor1_forecolor_cp");
+            });
+
+            test('colorpicker aria-labelledby id is set to the selected color when navigated via the keyboard', function() {
+                colorpicker.open();
+                colorpicker.element.focus().press(kendo.keys.DOWN);
+                equal(colorpicker.popup.element.find("li.k-state-selected").attr("id"), "Editor1_forecolor_cp");
+            });
+
+            test('colorpicker aria-labelledby id is set to the selected color when navigated back via the keyboard', function() {
+                colorpicker.open();
+                colorpicker.element.focus().press(kendo.keys.DOWN);
+                colorpicker.element.focus().press(kendo.keys.UP);
+                equal(colorpicker.popup.element.find("li.k-state-selected").attr("id"), "Editor1_forecolor_cp");
             });
 
             test('FontName combobox accepts custom item collections and preserves the default value item', function() {

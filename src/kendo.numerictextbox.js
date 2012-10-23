@@ -43,7 +43,8 @@
              element = that.element.addClass(INPUT)
                            .on("keydown" + ns, proxy(that._keydown, that))
                            .on("paste" + ns, proxy(that._paste, that))
-                           .on("blur" + ns, proxy(that._focusout, that));
+                           .on("blur" + ns, proxy(that._focusout, that))
+                           .attr("role", "spinbutton");
 
              options.placeholder = options.placeholder || element.attr("placeholder");
 
@@ -75,6 +76,9 @@
              if (!isStep && step !== NULL) {
                  options.step = step;
              }
+
+             element.attr("aria-valuemin", options.min)
+                    .attr("aria-valuemax", options.max);
 
              options.format = extractFormat(options.format);
 
@@ -331,8 +335,9 @@
             var that = this,
                 CLASSNAME = "k-formatted-value",
                 element = that.element.show()[0],
+                accessKey = element.accessKey,
                 wrapper = that.wrapper,
-                text;
+                DOMInput, text;
 
 
             text = wrapper.find(POINT + CLASSNAME);
@@ -341,10 +346,19 @@
                 text = $("<input />").insertBefore(element).addClass(CLASSNAME);
             }
 
+            DOMInput = text[0];
+            DOMInput.type = "text";
+            DOMInput.style.cssText = element.style.cssText;
+            DOMInput.tabIndex = element.tabIndex;
+
+            element.tabIndex = 0;
             element.type = "text";
-            text[0].type = "text";
-            text[0].style.cssText = element.style.cssText;
             text.attr("placeholder", that.options.placeholder);
+
+            if (accessKey) {
+                text.attr("accesskey", accessKey);
+                element.accessKey = "";
+            }
 
             that._text = text.attr("readonly", true)
                              .addClass(element.className);
@@ -442,6 +456,7 @@
             }
 
             options[option] = that._parse(value);
+            that.element.attr("aria-value" + option, options[option]);
         },
 
         _spin: function(step, timeout) {
@@ -513,7 +528,8 @@
 
             that._value = value = that._adjust(value);
             that._placeholder(kendo.toString(value, format, culture));
-            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
+            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "")
+                        .attr("aria-valuenow", value);
         },
 
         _placeholder: function(value) {

@@ -12,7 +12,8 @@
         NS = ".kendoWindow",
         // classNames
         KWINDOW = ".k-window",
-        KWINDOWTITLEBAR = ".k-window-titlebar",
+        KWINDOWTITLE = ".k-window-title",
+        KWINDOWTITLEBAR = KWINDOWTITLE + "bar",
         KWINDOWCONTENT = ".k-window-content",
         KWINDOWRESIZEHANDLES = ".k-resize-handle",
         KOVERLAY = ".k-overlay",
@@ -36,6 +37,7 @@
         OVERFLOW = "overflow",
         ZINDEX = "zIndex",
         MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-minimize,.k-window-actions .k-i-maximize",
+        TITLEBAR_BUTTONS = ".k-window-titlebar .k-window-action",
         isLocalUrl = kendo.isLocalUrl;
 
     function defined(x) {
@@ -96,7 +98,7 @@
                 isVisible = false,
                 content,
                 windowContent,
-                titlebarButtons = ".k-window-titlebar .k-window-action";
+                id;
 
             Widget.fn.init.call(that, element, options);
             options = that.options;
@@ -160,9 +162,9 @@
             }
 
             wrapper
-                .on("mouseenter" + NS, titlebarButtons, function () { $(this).addClass(KHOVERSTATE); })
-                .on("mouseleave" + NS, titlebarButtons, function () { $(this).removeClass(KHOVERSTATE); })
-                .on("click" + NS, titlebarButtons, proxy(that._windowActionHandler, that));
+                .on("mouseenter" + NS, TITLEBAR_BUTTONS, function () { $(this).addClass(KHOVERSTATE); })
+                .on("mouseleave" + NS, TITLEBAR_BUTTONS, function () { $(this).removeClass(KHOVERSTATE); })
+                .on("click" + NS, TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that));
 
             windowContent
                 .on("keydown" + NS, proxy(that._keydown, that));
@@ -179,6 +181,20 @@
 
             if (options.draggable) {
                 that.dragging = new WindowDragging(that);
+            }
+
+            id = element.attr("id");
+            if (id) {
+                id = id + "_wnd_title";
+                wrapper.find(KWINDOWTITLEBAR)
+                       .children(KWINDOWTITLE)
+                       .attr("id", id);
+
+                windowContent
+                    .attr({
+                        "role": "dialog",
+                        "aria-labelledby": id
+                    });
             }
 
             wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
@@ -391,7 +407,7 @@
                 wrapper = that.wrapper,
                 options = that.options,
                 titleBar = wrapper.find(KWINDOWTITLEBAR),
-                title = titleBar.children(".k-window-title"),
+                title = titleBar.children(KWINDOWTITLE),
                 titleBarHeight = titleBar.outerHeight();
 
             if (!arguments.length) {
@@ -823,8 +839,8 @@
     templates = {
         wrapper: template("<div class='k-widget k-window' />"),
         action: template(
-            "<a href='\\#' class='k-window-action k-link'>" +
-                "<span class='k-icon k-i-#= name.toLowerCase() #'>#= name #</span>" +
+            "<a role='button' href='\\#' class='k-window-action k-link'>" +
+                "<span role='presentation' class='k-icon k-i-#= name.toLowerCase() #'>#= name #</span>" +
             "</a>"
         ),
         titlebar: template(

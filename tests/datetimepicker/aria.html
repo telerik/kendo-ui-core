@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DateTimePicker ARIA</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.datetimepicker.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DateTimePicker ARIA</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var DateTimePicker = kendo.ui.DateTimePicker,
+                input, instance;
+
+            module("kendo.ui.DateTimePicker ARIA", {
+                setup: function() {
+                    input = $("<input id='test' />").appendTo(document.body);
+                    instance = new DateTimePicker(input, {
+                        ARIATemplate: "#=kendo.toString(current, 'G')#"
+                    });
+                },
+                teardown: function() {
+                    input.data("kendoDateTimePicker").destroy();
+                    input.parents(".k-widget").remove();
+                }
+            });
+
+            test("DateTimePicker adds role to the input element", function() {
+                equal(input.attr("role"), "textbox");
+            });
+
+            test("DateTimePicker adds aria-haspopup", function() {
+                equal(input.attr("aria-haspopup"), "true");
+            });
+
+            test("DateTimePicker adds aria-expanded", function() {
+                equal(input.attr("aria-expanded"), "false");
+            });
+
+            test("DateTimePicker sets aria-expanded=true", function() {
+                instance.open();
+                equal(input.attr("aria-expanded"), "true");
+            });
+
+            test("DateTimePicker sets aria-expanded=false", function() {
+                instance.open();
+                instance.close();
+                equal(input.attr("aria-expanded"), "false");
+            });
+
+            test("DateTimePicker adds role to the toggle button", function() {
+                equal(instance._dateIcon.attr("role"), "button");
+                equal(instance._timeIcon.attr("role"), "button");
+            });
+
+            test("DateTimePicker adds aria-controls to the toggle button", function() {
+                equal(instance._dateIcon.attr("aria-controls"), instance.dateView.popup.element.attr("id"));
+                equal(instance._timeIcon.attr("aria-controls"), instance.timeView.ul.attr("id"));
+            });
+
+            test("DateTimePicker sets id to the ul element", function() {
+                equal(instance.timeView.ul.attr("id"), "test_timeview");
+            });
+
+            test("DateTimePicker sets id to the div element of the dateView", function() {
+                equal(instance.dateView.div.attr("id"), "test_dateview");
+            });
+
+            test("DateTimePicker sets aria-selected to the selected option", function() {
+                instance.open();
+                instance.value("12:00 AM");
+                equal(instance.timeView.current().attr("aria-selected"), "true");
+            });
+
+            test("DateTimePicker sets aria-owns to the DateView id", function() {
+                instance.open("date");
+                equal(instance.element.attr("aria-owns"), instance.dateView._dateViewID);
+            });
+
+            test("DateTimePicker removes aria-owns to the DateView id", function() {
+                instance.open("date");
+                instance.close("date");
+                equal(instance.element.attr("aria-owns"), undefined);
+            });
+
+            test("DateTimePicker sets aria-owns to the DateView id", function() {
+                instance.open("date");
+                instance.open("time");
+                equal(instance.element.attr("aria-owns"), instance.timeView._timeViewID);
+            });
+
+            test("DateTimePicker removes aria-owns to the DateView id", function() {
+                instance.open("time");
+                instance.close("time");
+                equal(instance.element.attr("aria-owns"), undefined);
+            });
+
+            test("DateTimePicker sets aria-label on change", function() {
+                instance.value(new Date());
+
+                ok(instance.element.attr("aria-label"));
+            });
+
+            test("DateTimePicker sets aria-label after navigation", function() {
+                instance.open();
+
+                instance.element.focus().trigger({
+                    type: "keydown",
+                    preventDefault: function() {},
+                    keyCode: 40
+                });
+
+                equal(instance.element.attr("aria-label"), kendo.toString(instance.dateView._current, "G"));
+            });
+
+            test("DateTimePicker sets aria-activedescendant", function() {
+                instance.open("time");
+                instance.value("10/10/2000 12:00 AM");
+                equal(instance.element.attr("aria-activedescendant"), instance.timeView._optionID);
+            });
+
+            test("DateTimePicker removes aria-activedescendant", function() {
+                instance.open();
+                instance.value("10/10/2000 12:00 AM");
+                instance.value("10/10/2000 12:10 AM");
+                equal(instance.element.attr("aria-activedescendant"), undefined);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

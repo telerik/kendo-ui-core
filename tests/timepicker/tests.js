@@ -22,5 +22,9 @@ tests.push(
     {
         page: "timepicker/lint.html",
         title: "timepicker lint"
+    },
+    {
+        page: "timepicker/aria.html",
+        title: "timepicker aria"
     }
 );

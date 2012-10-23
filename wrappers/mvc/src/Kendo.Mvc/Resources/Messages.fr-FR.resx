@@ -396,4 +396,10 @@
   <data name="Editor_UploadFile" xml:space="preserve">
     <value>Télécharger</value>
   </data>
+  <data name="Editor_BackColor" xml:space="preserve">
+    <value>Couleur de fond</value>
+  </data>
+  <data name="Editor_ForeColor" xml:space="preserve">
+    <value>Couleur</value>
+  </data>
 </root>

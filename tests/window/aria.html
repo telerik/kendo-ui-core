@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Window Aria</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link href="../../styles/web/kendo.common.css" rel="stylesheet"/>    </head>
+    <body>
+        <h1 id="qunit-header">DropDownList Aria</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Window = kendo.ui.Window;
+
+            module("initialization", {
+                setup: function() {
+                    $.mockjax({
+                        url: "echo",
+                        responseTime: 0,
+                        response: function(request) {
+                            this.contentType = "text/json";
+                            this.responseText = request.data;
+                        }
+                    });
+                    $.mockjax({
+                        url: /foo|telerik\.com/i,
+                        responseText: "foo bar baz",
+                    });
+                },
+                teardown: function() {
+                    $(".k-window,.k-overlay").remove();
+                    $.mockjaxClear();
+                }
+            });
+
+            function createWindow(options, element) {
+                element = element || $("<div class='wnd' />").appendTo(document.body);
+                return element.kendoWindow(options).data("kendoWindow");
+            }
+
+            test("Window adds role to the element", function() {
+                var window = createWindow({ title: "Test" }, $("<div id='window' />"));
+
+                equal(window.element.attr("role"), "dialog");
+            });
+
+            test("Window sets id to the title", function() {
+                var window = createWindow({ title: "Test" }, $("<div id='window' />"));
+
+                equal(window.wrapper.find("#window_wnd_title").html(), "Test");
+            });
+
+            test("Window adds aria-labelledby", function() {
+                var window = createWindow({ title: "Test" }, $("<div id='window' />"));
+
+                equal(window.element.attr("aria-labelledby"), "window_wnd_title");
+            });
+
+            test("Window adds role button to the titlebar buttons", function() {
+                var window = createWindow({ title: "Test", visible:true  }, $("<div id='window'>Content</div>"));
+                equal(window.wrapper.find(".k-window-action").attr("role"), "button");
+            });
+
+        </script>
+      <div id="qunit-fixture">test markup, will be hidden</div>
+      <ul id="log"></ul>
+  </body>
+</html>

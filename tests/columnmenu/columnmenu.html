@@ -100,6 +100,12 @@
                 ok(menu.wrapper.data("kendoPopup"));
             });
 
+            test("menu link has negative tabindex", function() {
+                var menu = setup();
+
+                equal(menu.link.attr("tabindex"), -1);
+            });
+
             test("clicking the link toggles popup visibility", function() {
                 var menu = setup();
 
@@ -392,6 +398,31 @@
                 menu.wrapper.find("[type=checkbox]:last").click();
 
                 strictEqual(colIndex, 0);
+            });
+
+            test("on open menu element is focused", function() {
+                var columnMenu = setup();
+
+                columnMenu.wrapper.data("kendoPopup").toggle();
+                columnMenu.link.click();
+
+                equal(document.activeElement, columnMenu.menu.element[0]);
+            });
+
+            test("closeCallback is called on popup close", function() {
+                var wasCalled = false,
+                    columnMenu = setup({
+                        closeCallback: function() {
+                            wasCalled = true;
+                        }
+                    }),
+                    popup = columnMenu.wrapper.data("kendoPopup");
+
+                popup.toggle();
+                columnMenu.link.click();
+                popup.close();
+
+                ok(wasCalled);
             });
 
         </script>

@@ -150,6 +150,18 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public EditorMessagesBuilder BackColor(string message)
+        {
+            messages.BackColor = message;
+            return this;
+        }
+
+        public EditorMessagesBuilder ForeColor(string message)
+        {
+            messages.ForeColor = message;
+            return this;
+        }
+
         public EditorMessagesBuilder Styles(string message)
         {
             messages.Styles = message;

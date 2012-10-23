@@ -187,6 +187,39 @@
                 equal(sort[0].field, "foo");
                 equal(sort[0].dir, "asc");
             });
+
+            test("aria-sort is not set when not sorted", function() {
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, aria: true } );
+
+                button;
+
+                ok(!button.attr("aria-sort"));
+            });
+
+            test("aria-sort ascending is set", function() {
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, aria: true } );
+
+                button.click();
+
+                equal(button.attr("aria-sort"), "ascending");
+            });
+
+            test("aria-sort descending is set", function() {
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, aria: true } );
+
+                button.click().click();
+
+                equal(button.attr("aria-sort"), "descending");
+            });
+
+            test("aria-sort is not applied when not enabled", function() {
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource } );
+
+                button.click();
+
+                equal(button.attr("aria-sort"), "ascending");
+            });
+
        </script>
     </body>
 </html>

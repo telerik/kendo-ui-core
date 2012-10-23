@@ -41,6 +41,8 @@
 
             that._tabindex();
 
+            that._aria();
+
             that._span();
 
             that._popup();
@@ -115,6 +117,7 @@
 
             this._template();
             this._accessors();
+            this._aria();
         },
 
         destroy: function() {
@@ -361,6 +364,13 @@
                 keys = kendo.keys,
                 ul = that.ul[0];
 
+            if (key === keys.LEFT) {
+                key = keys.UP;
+            } else if (key === keys.RIGHT) {
+                key = keys.DOWN;
+            }
+
+            e.keyCode = key;
             that._move(e);
 
             if (key === keys.HOME) {
@@ -425,6 +435,10 @@
                     that.text(text);
                     that._accessor(value !== undefined ? value : text, idx);
                     that.current(li.addClass(SELECTED));
+
+                    if (that._optionID) {
+                        that._current.attr("aria-selected", true);
+                    }
                 }
             }
         },
@@ -475,9 +489,14 @@
             element.hide();
 
             that._focused = that.wrapper = wrapper
-                              .attr("unselectable", "on")
                               .addClass("k-widget k-dropdown k-header")
-                              .addClass(DOMelement.className);
+                              .addClass(DOMelement.className)
+                              .attr({
+                                  unselectable: "on",
+                                  role: "listbox",
+                                  "aria-haspopup": true,
+                                  "aria-expanded": false
+                              });
         }
     });
 

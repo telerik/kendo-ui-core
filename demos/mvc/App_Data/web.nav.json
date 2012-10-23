@@ -52,6 +52,10 @@
                 {
                     "text": "RTL support",
                     "url": "autocomplete/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "autocomplete/navigation.html"
                 }
             ]
         },
@@ -85,6 +89,10 @@
                 {
                     "text": "RTL support",
                     "url": "calendar/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "calendar/navigation.html"
                 }
             ]
         },
@@ -133,6 +141,10 @@
                 {
                     "text": "RTL support",
                     "url": "combobox/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "combobox/navigation.html"
                 }
             ]
         },
@@ -170,6 +182,10 @@
                 {
                     "text": "RTL support",
                     "url": "datepicker/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "datepicker/navigation.html"
                 }
             ]
         },
@@ -208,6 +224,10 @@
                 {
                     "text": "RTL support",
                     "url": "datetimepicker/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "datetimepicker/navigation.html"
                 }
             ]
         },
@@ -244,6 +264,10 @@
                 {
                     "text": "RTL support",
                     "url": "dropdownlist/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "dropdownlist/navigation.html"
                 }
             ]
         },
@@ -294,6 +318,10 @@
                 {
                     "text": "RTL support",
                     "url": "editor/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "editor/navigation.html"
                 }
             ]
         },
@@ -479,7 +507,12 @@
                 {
                     "text": "RTL support",
                     "url": "grid/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "grid/navigation.html"
                 }
+
             ]
         },
         {
@@ -589,6 +622,10 @@
                 {
                     "text": "RTL support",
                     "url": "numerictextbox/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "numerictextbox/navigation.html"
                 }
             ]
         },
@@ -625,6 +662,10 @@
                 {
                     "text": "RTL support",
                     "url": "panelbar/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "panelbar/navigation.html"
                 }
             ]
         },
@@ -677,6 +718,10 @@
                 {
                     "text": "RTL support",
                     "url": "splitter/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "splitter/navigation.html"
                 }
             ]
         },
@@ -713,6 +758,10 @@
                 {
                     "text": "RTL support",
                     "url": "tabstrip/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "tabstrip/navigation.html"
                 }
             ]
         },
@@ -746,6 +795,10 @@
                 {
                     "text": "RTL support",
                     "url": "timepicker/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "timepicker/navigation.html"
                 }
             ]
         },
@@ -779,7 +832,7 @@
                 {
                     "packages": [ "!mvc" ],
                     "text": "Keyboard support",
-                    "url": "treeview/keyboard-support.html"
+                    "url": "treeview/navigation.html"
                 },
                 {
                     "packages": [ "!mvc" ],
@@ -878,6 +931,10 @@
                 {
                     "text": "RTL support",
                     "url": "window/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "window/navigation.html"
                 }
             ]
         }

@@ -30,9 +30,10 @@
         init: function(element, options) {
             var that = this,
                 ns = that.ns,
-                list, id;
+                id;
 
             Widget.fn.init.call(that, element, options);
+            element = that.element;
 
             that._template();
 
@@ -40,17 +41,25 @@
                         .css({ overflow: kendo.support.touch ? "": "auto" })
                         .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); })
-                        .on(CLICK + ns, LI, proxy(that._click, that));
+                        .on(CLICK + ns, LI, proxy(that._click, that))
+                        .attr({
+                            tabIndex: -1,
+                            role: "listbox",
+                            "aria-hidden": true
+                        });
 
-            that.list = list = $("<div class='k-list-container'/>")
+            that.list = $("<div class='k-list-container'/>")
                         .append(that.ul)
                         .on("mousedown" + ns, function(e) {
                             e.preventDefault();
                         });
 
-            id = that.element.attr(ID);
+            id = element.attr(ID);
+
             if (id) {
-                list.attr(ID, id + "-list");
+                that.list.attr(ID, id + "-list");
+                that.ul.attr(ID, id + "_listbox");
+                that._optionID = id + "_option_selected";
             }
         },
 
@@ -59,16 +68,28 @@
         },
 
         current: function(candidate) {
-            var that = this;
+            var that = this,
+                id = that._optionID;
 
             if (candidate !== undefined) {
                 if (that._current) {
-                    that._current.removeClass(FOCUSED);
+                    that._current
+                        .removeClass(FOCUSED)
+                        .removeAttr("aria-selected")
+                        .removeAttr(ID);
+
+                    that._focused
+                        .removeAttr("aria-activedescendant");
                 }
 
                 if (candidate) {
                     candidate.addClass(FOCUSED);
                     that._scroll(candidate);
+
+                    if (id) {
+                        candidate.attr("id", id);
+                        that._focused.attr("aria-activedescendant", id);
+                    }
                 }
 
                 that._current = candidate;
@@ -93,14 +114,6 @@
             if (that._form) {
                 that._form.off("reset", that._resetHandler);
             }
-        },
-
-        _unbindDataSource: function() {
-            var that = this;
-
-            that.dataSource.unbind(CHANGE, that._refreshHandler)
-                           .unbind(REQUESTSTART, that._requestStartHandler)
-                           .unbind(REQUESTEND, that._requestEndHandler);
         },
 
         dataItem: function(index) {
@@ -131,6 +144,22 @@
 
             that._text = getter(options.dataTextField);
             that._value = getter(options.dataValueField);
+        },
+
+        _aria: function() {
+            var that = this,
+                options = that.options,
+                element = that._focused;
+
+            if (options.suggest !== undefined) {
+                element.attr("aria-autocomplete", options.suggest ? "both" : "list");
+            }
+
+            if (that.element[0].id) {
+                element.attr("aria-owns", that.ul[0].id);
+            }
+
+            that.ul.attr("aria-live", !options.filter || options.filter === "none" ? "off" : "polite");
         },
 
         _blur: function() {
@@ -247,6 +276,7 @@
         _popup: function() {
             var that = this,
                 list = that.list,
+                focused = that._focused,
                 options = that.options,
                 wrapper = that.wrapper;
 
@@ -257,11 +287,17 @@
 
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
+                    } else {
+                        focused.attr("aria-expanded", true);
+                        that.ul.attr("aria-hidden", false);
                     }
                 },
                 close: function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
+                    } else {
+                        focused.attr("aria-expanded", false);
+                        that.ul.attr("aria-hidden", true);
                     }
                 },
                 animation: options.animation,
@@ -330,13 +366,21 @@
             }
 
             if (!template) {
-                that.template = kendo.template('<li unselectable="on" class="k-item">${data' + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
+                that.template = kendo.template('<li tabindex="-1" role="option" unselectable="on" class="k-item">${data' + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
             } else {
                 template = kendo.template(template);
                 that.template = function(data) {
-                    return '<li unselectable="on" class="k-item">' + template(data) + "</li>";
+                    return '<li tabindex="-1" role="option" unselectable="on" class="k-item">' + template(data) + "</li>";
                 };
             }
+        },
+
+       _unbindDataSource: function() {
+            var that = this;
+
+            that.dataSource.unbind(CHANGE, that._refreshHandler)
+                           .unbind(REQUESTSTART, that._requestStartHandler)
+                           .unbind(REQUESTEND, that._requestEndHandler);
         }
     });
 
@@ -441,6 +485,7 @@
             var that = this;
             clearTimeout(that._busy);
             that._arrow.removeClass(LOADING);
+            that._focused.attr("aria-busy", false);
             that._busy = null;
         },
 
@@ -454,6 +499,7 @@
             }
 
             that._busy = setTimeout(function () {
+                that._focused.attr("aria-busy", true);
                 that._arrow.addClass(LOADING);
             }, 100);
         },

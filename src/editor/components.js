@@ -11,12 +11,14 @@ var kendo = window.kendo,
     SELECTEDCOLORCLASS = ".k-selected-color",
     UNSELECTABLE = "unselectable",
     BACKGROUNDCOLOR = "background-color",
+    ARIASELECTED = "aria-selected",
+    ARIALABELLEDBY = "aria-labelledby",
     keys = kendo.keys,
     template = kendo.template(
 '<div class="k-colorpicker-popup">' +
    '<ul class="k-reset">'+
         '# for(var i = 0; i < colors.length; i++) { #' +
-            '<li class="k-item #= colors[i] == value ? "k-state-selected" : "" #">' +
+            '<li #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i] == value ? "k-state-selected" : "" #" aria-label="\\##= colors[i]#">' +
                 '<div style="background-color:\\##= colors[i] #"></div>'+
             '</li>' +
         '# } #' +
@@ -25,7 +27,8 @@ var kendo = window.kendo,
 
 var ColorPicker = Widget.extend({
     init: function(element, options) {
-        var that = this;
+        var that = this,
+            ariaId;
 
         Widget.fn.init.call(that, element, options);
 
@@ -33,10 +36,16 @@ var ColorPicker = Widget.extend({
         options = that.options;
 
         that._value = options.value;
+        that._ariaId = ariaId = options.ariaId;
+
+        if (ariaId) {
+            element.attr(ARIALABELLEDBY, ariaId);
+        }
 
         that.popup = $(template({
                         colors: options.colors,
-                        value: options.value.substring(1)
+                        value: options.value.substring(1),
+                        id: ariaId
                      }))
                      .kendoPopup({
                         anchor: element,
@@ -107,6 +116,22 @@ var ColorPicker = Widget.extend({
         this.popup.toggle();
     },
 
+    _applyAriaAttributes: function(prev, next) {
+        var that = this;
+
+        that.element.removeAttr(ARIALABELLEDBY);
+
+        that.element.attr(ARIALABELLEDBY, that._ariaId);
+
+        prev.removeAttr("id");
+        prev.attr(ARIASELECTED, false);
+
+        next.attr({
+            id: that._ariaId,
+            "aria-selected": true
+        });
+    },
+
     keydown: function(e) {
         var that = this,
             popup = that.popup.element,
@@ -132,6 +157,8 @@ var ColorPicker = Widget.extend({
                 if (next[0]) {
                     selected.removeClass(KSTATESELECTED);
                     next.addClass(KSTATESELECTED);
+
+                    that._applyAriaAttributes(selected, next);
                 }
             }
 
@@ -144,6 +171,8 @@ var ColorPicker = Widget.extend({
                 if (prev[0]) {
                     selected.removeClass(KSTATESELECTED);
                     prev.addClass(KSTATESELECTED);
+
+                    that._applyAriaAttributes(selected, prev);
                 }
             }
             preventDefault = true;

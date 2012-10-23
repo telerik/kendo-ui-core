@@ -49,14 +49,14 @@
     function preventTrigger(e) {
         e.preventDefault();
 
-        var target = $(e.target),   // Determine the correct parent to receive the event and bubble.
+        var target = $(e.currentTarget),   // Determine the correct parent to receive the event and bubble.
             parent = target.closest(".k-widget").parent();
 
         if (!parent[0]) {
             parent = target.parent();
         }
 
-        parent.trigger(e.type);
+        parent.trigger($.Event(e.type, { target: target }));
     }
 
     function touchDelta(touch1, touch2) {

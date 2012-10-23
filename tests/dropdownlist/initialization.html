@@ -291,7 +291,7 @@
             test("template should render item directly if datatextField is empty string", function(){
                 var dropdownlist = new DropDownList(input, { dataTextField : ""});
 
-                equal(dropdownlist.template("foo"), '<li unselectable="on" class="k-item">foo</li>');
+                equal(dropdownlist.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
             });
 
             test("template should use defined datatextField", function(){
@@ -299,7 +299,7 @@
                     dataTextField : "ProductName"
                 });
 
-                equal(dropdownlist.template({ProductName: "foo"}), '<li unselectable="on" class="k-item">foo</li>');
+                equal(dropdownlist.template({ProductName: "foo"}), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
             });
 
             test("changing the template", function() {
@@ -308,7 +308,7 @@
                     template: "#= data.toUpperCase() #"
                 });
 
-                equal(dropdownlist.template("foo"), '<li unselectable="on" class="k-item">FOO</li>');
+                equal(dropdownlist.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">FOO</li>');
                 equal(dropdownlist.options.template, "#= data.toUpperCase() #");
             });
 

@@ -649,6 +649,35 @@
                 ok(input.hasClass("k-invalid"));
             });
 
+            test("aria-invalid is added to the invalid input", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                validator.validate();
+
+                ok(input.filter("[aria-invalid]").length);
+            });
+
+            test("aria-alert is added to the invalid input message", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                validator.validate();
+
+                ok(input.next().filter("[role=alert]").length);
+            });
+
+            test("aria-invalid is remove after input become valid", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                validator.validate();
+                input.val("foo");
+                validator.validate();
+
+                ok(!input.filter("[aria-invalid]").length);
+            });
+
             test("validate class is not added to the valid inputs", function() {
                 var input = $('<input type="text" required />'),
                     validator = setup(input);

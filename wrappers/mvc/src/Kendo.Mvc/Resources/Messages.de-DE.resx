@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Editor_BackColor" xml:space="preserve">
+    <value>Hintergrundfarbe</value>
+  </data>
   <data name="Editor_Bold" xml:space="preserve">
     <value>Fett</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="Editor_FontSizeInherit" xml:space="preserve">
     <value>(Größe übernehmen)</value>
+  </data>
+  <data name="Editor_ForeColor" xml:space="preserve">
+    <value>Farbe</value>
   </data>
   <data name="Editor_FormatBlock" xml:space="preserve">
     <value>Absatzstil</value>

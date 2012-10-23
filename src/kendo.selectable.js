@@ -266,12 +266,15 @@
                     that.element.find(that.options.filter);
         },
         _selectElement: function(el) {
-            var selecee = $(el),
+            var selectee = $(el),
                 isPrevented = this.trigger("select", { element: el });
 
-            selecee.removeClass(ACTIVE);
+            selectee.removeClass(ACTIVE);
             if(!isPrevented) {
-                selecee.addClass(SELECTED);
+                selectee.addClass(SELECTED);
+                if (this.options.aria) {
+                    selectee.attr("aria-selected", true);
+                }
             }
         },
         clear: function() {
@@ -279,6 +282,11 @@
             that.element
                 .find(that.options.filter + "." + SELECTED)
                 .removeClass(SELECTED);
+
+            if (that.options.aria) {
+                that.element.children("[aria-selected=true]")
+                    .attr("aria-selected", false);
+            }
         },
         selectRange: function(start, end) {
             var that = this,

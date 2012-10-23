@@ -22,5 +22,13 @@ tests.push(
     {
         page: "calendar/lint.html",
         title: "calendar lint"
+    },
+    {
+        page: "calendar/navigation.html",
+        title: "calendar navigation"
+    },
+    {
+        page: "calendar/aria.html",
+        title: "calendar aria"
     }
 );

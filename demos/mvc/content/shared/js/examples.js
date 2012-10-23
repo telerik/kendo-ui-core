@@ -138,6 +138,7 @@
             }
 
             $(doc)
+                .off(".examples")
                 .find(".k-animation-container, .k-list-container, .k-calendar-container, .k-calendar")
                 .remove()
                 .end()

@@ -69,6 +69,12 @@
                 }
             });
 
+            test("menu link has negative tabindex", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                equal(filterMenu.link.attr("tabindex"), -1);
+            });
+
             test("binds the operator select from the field", function(){
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
@@ -572,6 +578,23 @@
                 filterMenu2.link.click();
 
                 ok(!filterMenu1.popup.visible());
+            });
+
+            test("first focusable element is foucused on popup activate", function() {
+                filterMenu = new FilterMenu(dom, {extra: false, dataSource: dataSource});
+
+                filterMenu.link.click();
+
+                equal(document.activeElement, filterMenu.form.find(":focusable")[0]);
+            });
+
+            test("pressing esc closes the menu", function() {
+                filterMenu = new FilterMenu(dom, {extra: false, dataSource: dataSource});
+
+                filterMenu.link.click();
+                filterMenu.form.trigger({ type: "keydown", keyCode: kendo.keys.ESC });
+
+                ok(!filterMenu.popup.visible());
             });
 
             test("destroy detaches click handle and removes objects from the element", function() {

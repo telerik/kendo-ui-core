@@ -7,8 +7,15 @@
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.filtermenu.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.sortable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -23,8 +30,8 @@
                 DataSource = kendo.data.DataSource,
                 table;
 
-            $.fn.press = function(key, ctrl, shift) {
-                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
+            $.fn.press = function(key, ctrl, shift, alt) {
+                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt } );
             }
 
             function setup(options) {
@@ -38,39 +45,78 @@
                 },
                 teardown: function() {
                     table.closest(".k-grid").remove();
+                    $(".k-animation-container").remove();
                 }
             });
 
             test("tabindex is set to 0", function() {
                 var grid = setup();
-                equal(grid.wrapper.attr("tabIndex"), 0);
+                equal(grid.table.attr("tabIndex"), 0);
             });
 
-            test("tabindex is removed from the table", function() {
-                table.attr("tabIndex", 1);
-                var grid = setup();
+            test("header table tabindex is -1", function() {
+                var grid = setup({
+                    columns: [ "foo" ]
+                });
+                equal(grid.thead.parent().attr("tabIndex"), -1);
+            });
 
-                equal(table.attr("tabIndex"), undefined);
+            test("header table tabindex is 0 in non scrollable grid", function() {
+                var grid = setup({
+                    columns: [ "foo" ],
+                    scrollable: false
+                });
+                equal(grid.thead.parent().attr("tabIndex"), 0);
             });
 
             test("positive tabindex is retained", function() {
                 table.attr("tabIndex", 1);
                 var grid = setup();
 
-                equal(grid.wrapper.attr("tabIndex"), 1);
+                equal(grid.table.attr("tabIndex"), 1);
             });
 
             test("negative tabindex is set to 0", function() {
                 table.attr("tabIndex", -1);
                 var grid = setup();
 
-                equal(grid.wrapper.attr("tabIndex"), 0);
+                equal(grid.table.attr("tabIndex"), 0);
+            });
+
+            test("focusing scrollable grid header set tabindex to 0 and body table to -1", function() {
+                var grid = setup({
+                    columns: ["foo"]
+                });
+
+                grid.thead.parent().focus();
+
+                equal(grid.thead.parent().attr("tabindex"), 0);
+                equal(grid.table.attr("tabindex"), -1);
+            });
+
+            test("focusing non scrollable grid header set tabindex to 0", function() {
+                var grid = setup({
+                    scrollable: false,
+                    columns: ["foo"]
+                });
+
+                grid.thead.parent().focus();
+
+                equal(grid.table.attr("tabindex"), 0);
+            });
+
+            test("footer table has negative tabindex", function() {
+                var grid = setup({
+                    columns: [ { field: "foo", footerTemplate: "foo" }]
+                });
+
+                equal(grid.footer.attr("tabindex"), -1);
             });
 
             test("focusing grid element focus first cell", function() {
                 var grid = setup();
-                grid.wrapper.focus();
-                ok(grid.element.find(">tbody>tr>td").first().is(".k-state-focused"));
+                grid.table.focus();
+                ok(grid.table.find(">tbody>tr>td").first().is(".k-state-focused"));
             });
 
             test("focused state is removed on blur", function() {
@@ -83,7 +129,7 @@
 
             test("focused state is maintained after refocus", function() {
                 var grid = setup();
-                grid.wrapper.focus().blur().focus();
+                grid.table.focus().blur().focus();
 
                 ok(table.find(">tbody>tr>td").first().is(".k-state-focused"));
             });
@@ -97,30 +143,50 @@
 
             test("down arrow moves focus on the next row same cell", function() {
                 var grid = setup();
-                grid.wrapper.focus().press(kendo.keys.DOWN);
+                grid.table.focus().press(kendo.keys.DOWN);
                 ok(table.find("tbody tr:eq(1)").find("td").hasClass("k-state-focused"));
                 equal(table.find(".k-state-focused").length, 1);
             });
 
+            test("moving down from header", function() {
+                var grid = setup({
+                    columns: [{ field: "foo" }]
+                });
+
+                grid.thead.parent().focus().press(kendo.keys.DOWN);
+
+                ok(table.find("td:first").hasClass("k-state-focused"));
+            });
+
             test("right arrow moves focus on the next cell on the same row", function() {
                 var grid = setup();
-                grid.wrapper.focus().press(kendo.keys.RIGHT);
+                grid.table.focus().press(kendo.keys.RIGHT);
                 ok(table.find("tbody tr:eq(0)").find("td:eq(1)").hasClass("k-state-focused"));
             });
 
             test("left arrow moves focus on the prev cell on the same row", function() {
                 var grid = setup();
-                grid.element.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
+                grid.table.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
                 ok(table.find("tbody tr:eq(0)").find("td:eq(0)").hasClass("k-state-focused"));
             });
 
             test("up arrow moves focus on the prev row same cell", function() {
                 var grid = setup();
-                grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
+                grid.table.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
                 ok(table.find("tbody tr:eq(0)").find("td").hasClass("k-state-focused"));
             });
 
-            test("pageDown should page to the next page", function() {
+            test("moving up to header", function() {
+                var grid = setup({
+                    columns: [{ field: "foo" }]
+                });
+
+                table.focus().press(kendo.keys.UP);
+
+                ok(grid.thead.find("th:first").hasClass("k-state-focused"));
+            });
+
+            test("pageDown page to the next page", function() {
                 var grid = setup({
                     pageable: {
                         pageSize: 1
@@ -130,7 +196,7 @@
                 equal(grid.dataSource.page(), 2);
             });
 
-            test("pageUp should page to the prev page", function() {
+            test("pageUp page to the prev page", function() {
                 var grid = setup({
                     pageable: {
                         pageSize: 1
@@ -141,7 +207,7 @@
                 equal(grid.dataSource.page(), 1);
             });
 
-            test("pageUp should not page to the pass first", function() {
+            test("pageUp should not page if on first page", function() {
                 var grid = setup({
                     pageable: {
                         pageSize: 1
@@ -149,6 +215,27 @@
                 });
                 table.focus().press(kendo.keys.PAGEUP);
                 equal(grid.dataSource.page(), 1);
+            });
+
+            test("page should focus first cell in the table", function() {
+                var grid = setup({
+                    pageable: {
+                        pageSize: 1
+                    }
+                });
+                table.focus().press(kendo.keys.PAGEDOWN);
+                ok(grid.table.find("td:first").hasClass("k-state-focused"));
+            });
+
+            test("page will persist the focus in header table", function() {
+                var grid = setup({
+                    pageable: {
+                        pageSize: 1
+                    },
+                    columns: [{ field: "foo" }]
+                });
+                grid.thead.parent().focus().press(kendo.keys.PAGEDOWN);
+                ok(grid.thead.find("th:first").hasClass("k-state-focused"));
             });
 
             test("down arrow after paging should select first cell", function() {
@@ -163,17 +250,17 @@
             });
 
             test("space key select the focused cell", function() {
-                var grid = setup({ selectable: "cell" });
+                setup({ selectable: "cell" });
 
-                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
+                table.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
-                ok(table.find("tbody tr:eq(1)").find("td").first().hasClass("k-state-selected"));
+                ok(table.find("tbody tr:eq(1) td:first").hasClass("k-state-selected"));
             });
 
             test("space key select the multiple focused cells if multiple selection is enabled", function() {
                 var grid = setup({ selectable: "multipleCell" });
 
-                grid.wrapper.focus()
+                table.focus()
                             .press(kendo.keys.DOWN)
                             .press(kendo.keys.SPACEBAR)
                             .press(kendo.keys.RIGHT)
@@ -186,7 +273,7 @@
             test("space key select single cells if multiple selection is enabled but ctrl is not active", function() {
                 var grid = setup({ selectable: "multipleCell" });
 
-                grid.wrapper.focus()
+                grid.table.focus()
                             .press(kendo.keys.DOWN)
                             .press(kendo.keys.SPACEBAR)
                             .press(kendo.keys.RIGHT)
@@ -223,68 +310,63 @@
                 ok(triggered);
             });
 
+            test("space key does not select the header cell", function() {
+                setup({ selectable: "cell", scrollable: false });
+
+                table.focus().press(kendo.keys.SPACEBAR);
+
+                equal(table.find(".k-state-selected").length, 0);
+            });
+
+
             test("last selected cell on blur is highlighted on focus", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().press(kendo.keys.DOWN);
-                grid.wrapper.trigger("focusout").trigger("focus");
+                grid.table.focus().press(kendo.keys.DOWN);
+                grid.table.trigger("focusout").trigger("focus");
 
                 var row = table.find("tbody tr").eq(1);
                 ok(row.find("td").first().hasClass("k-state-focused"));
             });
 
-            test("focus on grouped grid focus first non-group cell", function() {
+            test("left arrow on grouped grid", function() {
                 var grid = setup();
                 grid.dataSource.group({field: "foo"});
 
-                grid.wrapper.focus();
+                grid.table.focus().press(kendo.keys.LEFT);
 
-                var row = table.find("tbody tr:not(.k-grouping-row)").first();
-                ok(row.find("td:not(.k-group-cell)").first().hasClass("k-state-focused"));
+                var row = table.find("tbody tr:first");
+                ok(row.find("td").eq(0).hasClass("k-state-focused"));
             });
 
-            test("left arrow on grouped grid skips group cell", function() {
+            test("down arrow on grouped grid", function() {
                 var grid = setup();
                 grid.dataSource.group({field: "foo"});
 
-                grid.element.focus().press(kendo.keys.LEFT);
+                grid.table.focus().press(kendo.keys.DOWN);
 
-                var row = table.find("tbody tr:not(.k-grouping-row)").first();
+                var row = table.find("tbody tr:not(.k-grouping-row):first");
                 ok(!row.find("td").eq(0).hasClass("k-state-focused"));
                 ok(row.find("td").eq(1).hasClass("k-state-focused"));
             });
 
-            test("down arrow on grouped grid skips grouping row", function() {
+            test("up arrow on grouped grid", function() {
                 var grid = setup();
                 grid.dataSource.group({field: "foo"});
 
-                grid.wrapper.focus().press(kendo.keys.DOWN);
-
-                var row = table.find("tbody tr:not(.k-grouping-row)").eq(1);
-                ok(!row.find("td").eq(0).hasClass("k-state-focused"));
-                ok(row.find("td").eq(1).hasClass("k-state-focused"));
-            });
-
-            test("up arrow on grouped grid skips grouping row", function() {
-                var grid = setup();
-                grid.dataSource.group({field: "foo"});
-
-                grid.wrapper.focus()
-                    .press(kendo.keys.DOWN)
+                grid.table.focus()
                     .press(kendo.keys.DOWN)
                     .press(kendo.keys.UP);
 
-                var row = table.find("tbody tr:not(.k-grouping-row)").eq(1);
-                ok(!row.find("td").eq(0).hasClass("k-state-focused"));
-                ok(row.find("td").eq(1).hasClass("k-state-focused"));
+                var row = table.find("tbody tr.k-grouping-row:first");
+                ok(row.find("td").eq(0).hasClass("k-state-focused"));
             });
 
             test("focus after grid refresh selects first cell", function() {
                 var grid = setup();
 
-                grid.wrapper.focus().trigger("focusout");
+                grid.table.focus();
                 grid.refresh();
-                grid.wrapper.focus();
 
                 var row = table.find("tbody tr").eq(0);
                 ok(row.find("td:first").hasClass("k-state-focused"));
@@ -414,16 +496,22 @@
                         selectable: "multiple"
                     });
 
-                grid.wrapper.focus()
+                grid.table.focus()
                     .press(kendo.keys.SPACEBAR)
                     .press(kendo.keys.SPACEBAR, true);
 
                 ok(!table.find("tbody tr:first").hasClass("k-state-selected"));
             });
 
+            test("hierarchy cell links tabindex", function() {
+                var grid = setup({ detailTemplate: "template" });
+
+                equal(table.find(".k-hierarchy-cell>a").attr("tabindex"), -1);
+            });
+
             test("k-hierarchy-cell is not highlighted when grid is focused", function() {
                 var grid = setup({ detailTemplate: "template" });
-                grid.wrapper.focus();
+                grid.table.focus();
 
                 ok(!table.find("tbody tr:eq(0)").find("td:first").hasClass("k-state-focused"));
                 ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
@@ -432,27 +520,17 @@
 
             test("k-hierarchy-cell is not highlighted on left arrow press", function() {
                 var grid = setup({ detailTemplate: "template" });
-                grid.element.focus().press(kendo.keys.LEFT);
+                grid.table.focus().press(kendo.keys.LEFT);
 
                 ok(!table.find("tbody tr:eq(0)").find("td:first").hasClass("k-state-focused"));
                 ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
             });
 
-            test("detail row is skipped when down arrow is pressed", function() {
-                var grid = setup({ detailTemplate: "template" });
-                grid.expandRow(table.find("tbody tr:first"));
-                grid.wrapper.focus().press(kendo.keys.DOWN);
+            test("group cell links tabindex", function() {
+                var grid = setup();
+                grid.dataSource.group({ field: "foo" });
 
-                ok(table.find("tbody tr:not(.k-detail-row):eq(1)").find("td:nth(1)").hasClass("k-state-focused"));
-            });
-
-            test("detail row is skipepd when up arrow is pressed", function() {
-                var grid = setup({ detailTemplate: "template" });
-                grid.expandRow(table.find("tbody tr:first"));
-                grid.current(table.find("tbody tr:not(.k-detail-row):eq(1)").find("td:not(.k-hierarchy-cell):first"));
-                grid.element.focus().press(kendo.keys.UP);
-
-                ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
+                equal(table.find(".k-grouping-row a").attr("tabindex"), -1);
             });
 
             test("group footer row is not selected when clicked", function() {
@@ -471,12 +549,67 @@
                 ok(!grid.element.find(".k-state-selected").length)
             });
 
+            test("detail cell is not focused", function() {
+                var grid = setup({ detailTemplate: "<input class='foo' />" });
+                grid.expandRow(table.find(".k-master-row:first"));
+                grid.table.find(".foo").focus().mousedown();
+
+                ok(!table.find(".k-detail-cell").hasClass("k-state-focused"));
+            });
+
+            test("enter key on header on sortable grid", function() {
+                var grid = setup({ sortable: true, columns: [ { field: "foo" }] });
+                grid.thead.parent().focus().press(kendo.keys.ENTER);
+
+                equal(grid.dataSource.sort().length, 1);
+                equal(grid.dataSource.sort()[0].field, "foo");
+                equal(grid.dataSource.sort()[0].dir, "asc");
+            });
+
+            test("enter key on button column", function() {
+                var grid = setup({
+                    columns: [ {
+                        field: "foo"
+                    },
+                    {
+                        template: '<input id="button" />'
+                    }]
+                });
+
+                grid.table.focus().press(kendo.keys.RIGHT).press(kendo.keys.ENTER);
+
+                equal(document.activeElement, $("#button")[0]);
+            });
+
+            test("esc key on focused button in column", function() {
+                var grid = setup({
+                    columns: [ {
+                        field: "foo",
+                        template: '<input id="button" />'
+                    }]
+                });
+
+                grid.table.focus().press(kendo.keys.ENTER);
+                $("#button").press(kendo.keys.ESC);
+
+                equal(document.activeElement, grid.table[0]);
+                ok(grid.table.find("td:first").hasClass("k-state-focused"));
+            });
+
+            test("pressing alt and down opens filter menu", function() {
+                var grid = setup({ columns: [ "foo", "bar" ], filterable: true });
+
+                grid.thead.parent().focus().press(kendo.keys.DOWN, false, false, true);
+
+                ok(!grid.tbody.find("td:first").hasClass("k-state-focused"));
+            });
+            /*
             test("group footer row is skipped when up arrow is pressed", function() {
                 var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
                 grid.dataSource.group({ field: "foo" });
 
                 grid.current(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(1)").find("td:not(.k-group-cell):first"));
-                grid.element.focus().press(kendo.keys.UP);
+                grid.table.focus().press(kendo.keys.UP);
 
                 ok(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(0)").find("td:not(.k-group-cell):first").hasClass("k-state-focused"));
             });
@@ -486,10 +619,11 @@
                 grid.dataSource.group({ field: "foo" });
 
                 grid.current(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(0)").find("td:not(.k-group-cell):first"));
-                grid.element.focus().press(kendo.keys.DOWN);
+                grid.table.focus().press(kendo.keys.DOWN);
 
                 ok(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(1)").find("td:not(.k-group-cell):first").hasClass("k-state-focused"));
             });
+            */
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -33,6 +33,9 @@ namespace Kendo.Mvc.UI
             FontSizeInherit = Messages.Editor_FontSizeInherit;
             FormatBlock = Messages.Editor_FormatBlock;
             Styles = Messages.Editor_Styles;
+            ForeColor = Messages.Editor_ForeColor;
+            BackColor = Messages.Editor_BackColor;
+
 
             FileBrowserMessages = new EditorFileBrowserMessages();
         }
@@ -61,6 +64,8 @@ namespace Kendo.Mvc.UI
         public string FontSizeInherit { get; set; }
         public string FormatBlock { get; set; }
         public string Styles { get; set; }
+        public string ForeColor { get; set; }
+        public string BackColor { get; set; }
 
         public EditorFileBrowserMessages FileBrowserMessages { get; set; }
 
@@ -88,6 +93,8 @@ namespace Kendo.Mvc.UI
         private const string DefaultFontSizeInherit = "(inherited size)";
         private const string DefaultFormatBlock = "Format";
         private const string DefaultStyles = "Styles";
+        private const string DefaultBackColor = "Background color";
+        private const string DefaultForeColor = "Color";
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -214,6 +221,16 @@ namespace Kendo.Mvc.UI
             if (Styles != DefaultStyles)
             {
                 json["styles"] = Styles;
+            }
+
+            if (BackColor != DefaultBackColor)
+            {
+                json["backColor"] = BackColor;
+            }
+
+            if (ForeColor != DefaultForeColor)
+            {
+                json["foreColor"] = ForeColor;
             }
         }
     }

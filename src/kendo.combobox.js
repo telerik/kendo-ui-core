@@ -16,6 +16,7 @@
         FOCUSED = "k-state-focused",
         MOUSEDOWN = "mousedown" + ns,
         SELECT = "select",
+        ARIA_DISABLED = "aria-disabled",
         STATE_SELECTED = "k-state-selected",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
@@ -79,7 +80,13 @@
                     that._blur();
 
                     element.blur();
+                })
+                .attr({
+                    "role": "combobox",
+                    "aria-expanded": false
                 });
+
+            that._aria();
 
             that._oldIndex = that.selectedIndex = -1;
             that._old = that.value();
@@ -140,6 +147,7 @@
 
             this._template();
             this._accessors();
+            this._aria();
         },
 
         current: function(li) {
@@ -178,14 +186,17 @@
                     .removeClass(DEFAULT)
                     .addClass(DISABLED);
 
-                input.attr(ATTRIBUTE, ATTRIBUTE);
+                input.attr(ATTRIBUTE, ATTRIBUTE)
+                     .attr(ARIA_DISABLED, true);
             } else {
                 wrapper
                     .removeClass(DISABLED)
                     .addClass(DEFAULT)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                input.removeAttr(ATTRIBUTE);
+                input.removeAttr(ATTRIBUTE)
+                     .attr(ARIA_DISABLED, false);
+
                 arrow.on(CLICK, function() { that.toggle(); })
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
             }
@@ -397,7 +408,6 @@
                     that._custom(text);
                     input.value = text;
                 }
-
             } else {
                 return input.value;
             }
@@ -545,6 +555,7 @@
             var that = this,
                 element = that.element[0],
                 tabIndex = element.tabIndex,
+                accessKey = element.accessKey,
                 wrapper = that.wrapper,
                 SELECTOR = ".k-input",
                 input, DOMInput,
@@ -557,7 +568,7 @@
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
+                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
                        .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -583,9 +594,22 @@
                 input.attr("placeholder", that.options.placeholder);
             }
 
+            if (accessKey) {
+                element.accessKey = "";
+                input[0].accessKey = accessKey;
+            }
+
             that._focused = that.input = input;
-            that._arrow = wrapper.find(".k-icon");
             that._inputWrapper = $(wrapper[0].firstChild);
+            that._arrow = wrapper.find(".k-icon")
+                                 .attr({
+                                     "role": "button",
+                                     "tabIndex": -1
+                                 });
+
+            if (element.id) {
+                that._arrow.attr("aria-controls", that.ul[0].id);
+            }
         },
 
         _keydown: function(e) {
@@ -648,8 +672,8 @@
             var that = this,
                 text,
                 value,
-                idx = that._highlight(li),
-                data = that._data();
+                data = that._data(),
+                idx = that._highlight(li);
 
             that.selectedIndex = idx;
 
@@ -667,6 +691,10 @@
                 that._prev = that.input[0].value = text;
                 that._accessor(value !== undefined ? value : text, idx);
                 that._placeholder();
+
+                if (that._optionID) {
+                    that._current.attr("aria-selected", true);
+                }
             }
         },
 

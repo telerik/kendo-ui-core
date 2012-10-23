@@ -23,6 +23,11 @@
         MS_PER_DAY = 86400000,
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
+        ARIA_SELECTED = "aria-selected",
+        ARIA_EXPANDED = "aria-expanded",
+        ARIA_HIDDEN = "aria-hidden",
+        ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
+        ID = "id",
         isArray = $.isArray,
         extend = $.extend,
         proxy = $.proxy,
@@ -32,11 +37,12 @@
     TODAY = new DATE(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate(), 0, 0, 0);
 
     var TimeView = function(options) {
-        var that = this;
+        var that = this,
+            id = options.id;
 
         that.options = options;
 
-        that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
+        that.ul = $('<ul tabindex="-1" role="listbox" aria-hidden="true" unselectable="on" class="k-list k-reset"/>')
                     .css({ overflow: kendo.support.touch ? "": "auto" })
                     .on(CLICK, LI, proxy(that._click, that))
                     .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
@@ -46,27 +52,44 @@
                     .append(that.ul)
                     .on(MOUSEDOWN, preventDefault);
 
+        if (id) {
+            that._timeViewID = id + "_timeview";
+            that._optionID = id + "_option_selected";
+
+            that.ul.attr(ID, that._timeViewID);
+        }
+
         that._popup();
 
-        that.template = kendo.template('<li class="k-item" unselectable="on">#=data#</li>', { useWithBlock: false });
+        that.template = kendo.template('<li tabindex="-1" role="option" class="k-item" unselectable="on">#=data#</li>', { useWithBlock: false });
     };
 
     TimeView.prototype = {
         current: function(candidate) {
-            var that = this;
+            var that = this,
+                active = that.options.active;
 
             if (candidate !== undefined) {
                 if (that._current) {
-                    that._current.removeClass(SELECTED);
+                    that._current
+                        .removeClass(SELECTED)
+                        .removeAttr(ARIA_SELECTED)
+                        .removeAttr(ID);
                 }
 
                 if (candidate) {
-                    candidate = $(candidate);
-                    candidate.addClass(SELECTED);
+                    candidate = $(candidate).addClass(SELECTED)
+                                            .attr(ID, that._optionID)
+                                            .attr(ARIA_SELECTED, true);
+
                     that.scroll(candidate[0]);
                 }
 
                 that._current = candidate;
+
+                if (active) {
+                    active(candidate);
+                }
             } else {
                 return that._current;
             }
@@ -407,7 +430,7 @@
 
     var TimePicker = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, ul, timeView;
 
             Widget.fn.init.call(that, element, options);
 
@@ -418,7 +441,8 @@
 
             that._wrapper();
 
-            that.timeView = new TimeView(extend({}, options, {
+            that.timeView = timeView = new TimeView(extend({}, options, {
+                id: element.attr(ID),
                 anchor: that.wrapper,
                 format: options.format,
                 change: function(value, trigger) {
@@ -431,14 +455,27 @@
                 open: function(e) {
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
+                    } else {
+                        element.attr(ARIA_EXPANDED, true);
+                        ul.attr(ARIA_HIDDEN, false);
                     }
                 },
                 close: function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
+                    } else {
+                        element.attr(ARIA_EXPANDED, false);
+                        ul.attr(ARIA_HIDDEN, true);
+                    }
+                },
+                active: function(current) {
+                    element.removeAttr(ARIA_ACTIVEDESCENDANT);
+                    if (current) {
+                        element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
                     }
                 }
             }));
+            ul = timeView.ul;
 
             that._icon();
             that._reset();
@@ -449,6 +486,12 @@
                 .on("blur" + ns, proxy(that._blur, that))
                 .on("focus" + ns, function() {
                     that._inputWrapper.addClass(FOCUSED);
+                })
+                .attr({
+                    "role": "textbox",
+                    "aria-haspopup": true,
+                    "aria-expanded": false,
+                    "aria-owns": timeView._timeViewID
                 });
 
             that.enable(!element.is('[disabled]'));
@@ -606,7 +649,10 @@
                 arrow = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-clock">select</span></span>').insertAfter(element);
             }
 
-            that._arrow = arrow;
+            that._arrow = arrow.attr({
+                "role": "button",
+                "aria-controls": that.timeView._timeViewID
+            });
         },
 
         _keydown: function(e) {
@@ -651,7 +697,8 @@
         _update: function(value) {
             var that = this,
                 options = that.options,
-                date = that.timeView._parse(value);
+                timeView = that.timeView,
+                date = timeView._parse(value);
 
             if (!isInRange(date, options.min, options.max)) {
                 date = null;
@@ -659,7 +706,7 @@
 
             that._value = date;
             that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
-            that.timeView.value(date);
+            timeView.value(date);
 
             return date;
         },

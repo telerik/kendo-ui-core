@@ -33,15 +33,14 @@
         FOCUSEDSTATE = "k-state-focused",
         HOVERSTATE = "k-state-hover",
         TABONTOP = "k-tab-on-top",
-        ACTIVEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
-        CLICKABLEITEMS = ".k-tabstrip-items > " + ACTIVEITEMS,
-        NAVIGATABLEITEMS = ACTIVEITEMS + ":not(." + ACTIVESTATE + ")",
-        HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS,
+        NAVIGATABLEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
+        CLICKABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS,
+        HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS + ":not(." + ACTIVESTATE + ")",
         DISABLEDLINKS = ".k-tabstrip-items > .k-state-disabled .k-link",
 
         templates = {
             content: template(
-                "<div class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
+                "<div class='k-content'#= contentAttributes(data) # role='tabpanel'>#= content(item) #</div>"
             ),
             itemWrapper: template(
                 "<#= tag(item) # class='k-link'#= contentUrl(item) ##= textAttributes(item) #>" +
@@ -49,7 +48,7 @@
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li class='#= wrapperCssClass(group, item) #'>" +
+                "<li class='#= wrapperCssClass(group, item) #' role='tab' #=item.active ? \"aria-selected='true'\" : ''#>" +
                     "#= itemWrapper(data) #" +
                 "</li>"
             ),
@@ -89,7 +88,7 @@
                 return item.url ? "a" : "span";
             },
             contentAttributes: function(content) {
-                return content.active !== true ? " style='display:none'" : "";
+                return content.active !== true ? " style='display:none' aria-hidden='true' aria-expanded='false'" : "";
             },
             content: function(item) {
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
@@ -120,6 +119,11 @@
             .filter(":focus")
             .parent()
             .addClass(ACTIVESTATE + " " + TABONTOP);
+
+        tabs.attr("role", "tab");
+        tabs.filter("." + ACTIVESTATE)
+            .attr("aria-selected", true);
+
 
         tabs.each(function() {
             var item = $(this);
@@ -168,7 +172,7 @@
                 })
                 .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
-                .on("focus" + NS, function() { that._current(that._endItem("first")); })
+                .on("focus" + NS, $.proxy(that._active, that))
                 .on("blur" + NS, function() { that._current(null); });
 
             that._isRtl = kendo.support.isRtl(that.wrapper);
@@ -197,7 +201,18 @@
                 that.activateTab(selectedItems.eq(0));
             }
 
+            that.element.attr("role", "tablist");
+
+            if (that.element[0].id) {
+                that._ariaId = that.element[0].id + "_ts_active";
+            }
+
             kendo.notify(that);
+        },
+
+        _active: function() {
+            var item = this.tabGroup.children().filter("." + ACTIVESTATE);
+            this._current(item[0] ? item : this._endItem("first"));
         },
 
         _endItem: function(action) {
@@ -222,7 +237,7 @@
                 item = this._endItem(endItem);
             }
 
-            if (item.hasClass(DISABLEDSTATE) || item.hasClass(ACTIVESTATE)) {
+            if (item.hasClass(DISABLEDSTATE)) {
                 item = this._item(item, action);
             }
 
@@ -231,7 +246,8 @@
 
         _current: function(candidate) {
             var that = this,
-                focused = that._focused;
+                focused = that._focused,
+                id = that._ariaId;
 
             if (candidate === undefined) {
                 return focused;
@@ -239,10 +255,20 @@
 
             if (focused) {
                 focused.removeClass(FOCUSEDSTATE);
+                focused.removeAttr("id");
             }
 
-            if (candidate && !candidate.hasClass(ACTIVESTATE)) {
-                candidate.addClass(FOCUSEDSTATE);
+            if (candidate) {
+                if (!candidate.hasClass(ACTIVESTATE)) {
+                    candidate.addClass(FOCUSEDSTATE);
+                }
+
+                that.element.removeAttr("aria-activedescendant");
+
+                if (id) {
+                    candidate.attr("id", id);
+                    that.element.attr("aria-activedescendant", id);
+                }
             }
 
             that._focused = candidate;
@@ -266,10 +292,18 @@
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current);
                 e.preventDefault();
+            } else if (key == keys.HOME) {
+                that._click(that._endItem("first"));
+                e.preventDefault();
+                return;
+            } else if (key == keys.END) {
+                that._click(that._endItem("last"));
+                e.preventDefault();
+                return;
             }
 
             if (action) {
-                that._current(that._item(current, action));
+                that._click(that._item(current, action));
                 e.preventDefault();
             }
         },
@@ -660,11 +694,16 @@
                 var currentContent = contentElements.eq(idx),
                     id = tabStripID + "-" + (idx+1);
 
+                this.setAttribute("aria-controls", id);
+
                 if (!currentContent.length && contentUrls[idx]) {
                     $("<div id='"+ id +"' class='" + CONTENT + "'/>").appendTo(that.wrapper);
                 } else {
                     currentContent.attr("id", id);
                 }
+                currentContent.attr("role", "tabpanel");
+                currentContent.filter(":not(." + ACTIVESTATE + ")").attr("aria-hidden", true).attr("aria-expanded", false);
+                currentContent.filter("." + ACTIVESTATE).attr("aria-expanded", true);
             });
 
             that.contentElements = that.contentAnimators = that.wrapper.children("div"); // refresh the contents
@@ -741,11 +780,14 @@
                 item.removeClass(ACTIVESTATE);
             }
 
+            item.removeAttr("aria-selected");
+
             that.contentAnimators
                     .filter("." + ACTIVESTATE)
                     .kendoStop(true, true)
                     .kendoAnimate( close )
-                    .removeClass(ACTIVESTATE);
+                    .removeClass(ACTIVESTATE)
+                    .attr("aria-hidden", true);
         },
 
         activateTab: function (item) {
@@ -792,6 +834,7 @@
             if (content.length === 0) {
                 visibleContents
                     .removeClass( ACTIVESTATE )
+                    .attr("aria-hidden", true)
                     .kendoStop(true, true)
                     .kendoAnimate( close );
                 return false;
@@ -812,17 +855,20 @@
                         oldTab.addClass(DEFAULTSTATE);
                         item.addClass(ACTIVESTATE);
                     }
+                    oldTab.removeAttr("aria-selected");
+                    item.attr("aria-selected", true);
+
                     that._current(item);
 
                     content
                         .closest(".k-content")
                         .addClass(ACTIVESTATE)
+                        .removeAttr("aria-hidden")
                         .kendoStop(true, true)
+                        .attr("aria-expanded", true)
                         .kendoAnimate( extend({ init: function () {
                             that.trigger(ACTIVATE, { item: item[0], contentElement: content[0] });
-                        } }, animation, { complete: function () {
-                                                        item.removeAttr("data-animating");
-                                                    } } ) );
+                        } }, animation, { complete: function () { item.removeAttr("data-animating"); } } ) );
                 },
                 showContent = function() {
                     if (!isAjaxContent) {
@@ -838,6 +884,9 @@
 
             visibleContents
                     .removeClass(ACTIVESTATE);
+
+            visibleContents.attr("aria-hidden", true);
+            visibleContents.attr("aria-expanded", false);
 
             if (visibleContents.length) {
                 visibleContents

@@ -38,5 +38,9 @@ tests.push(
     {
         page: "splitter/lint.html",
         title: "splitter lint"
+    },
+    {
+        page: "splitter/aria.html",
+        title: "splitter aria"
     }
 );

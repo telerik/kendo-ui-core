@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.ListView ARIA</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.listview.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.ListView ARIA</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            kendo.ns = "kendo-";
+            var DataSource = kendo.data.DataSource,
+                dataSource;
+
+            function setup(options) {
+                options = $.extend({
+                    template: "<li></li>",
+                    navigatable: true,
+                    selectable: true,
+                    dataSource: dataSource = new DataSource({ data: [1,2,3,4,5] })
+                }, options);
+                return $("<ul id='test'/>").kendoListView(options);
+            }
+
+            module("listview ARIA", {
+                setup: function() {
+                    $("<div id=\"pager\"></div>").appendTo(document.body);
+                },
+                teardown: function() {
+                    $("#pager").remove();
+                }
+            });
+
+            test("ListView adds role list", function() {
+                var ul = setup();
+
+                equal(ul.attr("role"), "listbox");
+            });
+
+            test("ListView adds aria-multiselectable if selectable=multiple", function() {
+                var ul = setup({
+                    selectable: "multiple"
+                });
+
+                equal(ul.attr("aria-multiselectable"), "true");
+            });
+
+            test("ListView adds role listitem to all child elements", function() {
+                var ul = setup();
+
+                equal(ul.find("li").attr("role"), "option");
+            });
+
+            test("ListView adds aria-selected=false to all child elements", function() {
+                var ul = setup();
+
+                equal(ul.find("li").attr("aria-selected"), "false");
+            });
+
+            test("ListView adds aria-selected=true on SPACEBAR", function() {
+                var ul = setup();
+
+                ul.focus();
+                ul.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.SPACEBAR
+                });
+
+                equal(ul.data("kendoListView").current().attr("aria-selected"), "true");
+            });
+
+            test("ListView adds id to the last selected item", function() {
+                var ul = setup();
+
+                ul.focus();
+                ul.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.SPACEBAR
+                });
+
+                equal(ul.data("kendoListView").current().attr("id"), "test_lv_active");
+            });
+
+            test("ListView adds aria-activedescendant to the listview", function() {
+                var ul = setup();
+
+                ul.focus();
+                ul.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.SPACEBAR
+                });
+
+                equal(ul.attr("aria-activedescendant"), "test_lv_active");
+            });
+        </script>
+    </body>
+</html>

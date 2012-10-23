@@ -272,7 +272,7 @@
            test("template should render item directly if datatextField is empty string", function(){
                 var combobox = new ComboBox(input, { dataTextField : ""});
 
-                equal(combobox.template("foo"), '<li unselectable="on" class="k-item">foo</li>');
+                equal(combobox.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
            });
 
            test("template should use defined datatextField", function(){
@@ -280,7 +280,7 @@
                     dataTextField : "ProductName"
                 });
 
-                equal(combobox.template({ProductName: "foo"}), '<li unselectable="on" class="k-item">foo</li>');
+                equal(combobox.template({ProductName: "foo"}), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
            });
 
            test("changing the template", function() {
@@ -289,7 +289,7 @@
                    template: "#= data.toUpperCase() #"
                });
 
-               equal(combobox.template("foo"), '<li unselectable="on" class="k-item">FOO</li>');
+               equal(combobox.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">FOO</li>');
                equal(combobox.options.template, "#= data.toUpperCase() #");
            });
 
@@ -497,6 +497,14 @@
                 equal(input.attr("tabIndex"), 5);
             });
 
+            test("move accesskey to the visible input", function() {
+                var combobox = new ComboBox($("<input accesskey='w'/>"));
+
+                var input = combobox.input;
+
+                equal(input.attr("accesskey"), "w");
+            });
+
             test("ComboBox sets element value if option.value is defined", function() {
                 var dropdown = input.kendoComboBox({
                     dataSource: ["Item1", "Item2"],
@@ -577,6 +585,7 @@
                     start();
                 }, 150);
             });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

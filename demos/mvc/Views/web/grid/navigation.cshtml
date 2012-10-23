@@ -1,0 +1,177 @@
+        <script src="../../content/shared/js/people.js"></script>
+
+        <div id="example" class="k-content">
+
+            <div id="grid"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(50),
+                            group: [{ field: "FirstName" }],
+                            pageSize: 10,
+                            schema: {
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        FirstName: { type: "string" },
+                                        LastName: { type: "string" },
+                                        City: { type: "string" },
+                                        Age: { type: "number" },
+                                        BirthDate: { type: "date" }
+                                    }
+                                }
+                            }
+                        },
+                        selectable: "multiple cell",
+                        navigatable: true,
+                        filterable: true,
+                        sortable: true,
+                        pageable: true,
+                        columns: [ {
+                                field: "FirstName",
+                                width: 90,
+                                title: "First Name"
+                            } , {
+                                field: "LastName",
+                                width: 90,
+                                title: "Last Name"
+                            } , {
+                                width: 100,
+                                field: "City"
+                            } , {
+                                field: "BirthDate",
+                                title: "Birth Date",
+                                template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+                            } , {
+                                width: 50,
+                                field: "Age"
+                            }
+                        ]
+                    });
+
+                    $(document.body).keydown(function(e) {
+                        if (e.altKey && e.keyCode == 87) {
+                            $("#grid").data("kendoGrid").table.focus();
+                        }
+                    });
+                });
+            </script>
+
+            <ul class="keyboard-legend" style="padding-top: 25px">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">Alt</span>
+                        +
+                        <span class="key-button">w</span>
+                    </span>
+                    <span class="button-descr">
+                        focuses the widget
+                    </span>
+                </li>
+            </ul>
+
+            <h4>Actions applied on Grid header</h4>
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Enter</span>
+                    </span>
+                    <span class="button-descr">
+                        sort by the column
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">Alt</span>
+                        +
+                        <span class="key-button">Down</span>
+                    </span>
+                    <span class="button-descr">
+                        opens the filter menu
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Esc</span>
+                    </span>
+                    <span class="button-descr">
+                        closes the filter menu
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Tab</span>
+                    </span>
+                    <span class="button-descr">
+                        navigates through the elements in the filter menu(default browser behavior)
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">Shift</span>
+                        +
+                        <span class="key-button">Tab</span>
+                    </span>
+                    <span class="button-descr">
+                        same as Tab, but in reverse order
+                    </span>
+                </li>
+            </ul>
+
+            <h4>Actions applied on Grid data table</h4>
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button wider">Arrow Keys</span>
+                    </span>
+                    <span class="button-descr">
+                        to navigate over the cells
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Enter</span>
+                    </span>
+                    <span class="button-descr">
+                        on group row will toggle expand/collapse
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button wider">Page Up</span>
+                    </span>
+                    <span class="button-descr">
+                        pages on previouse page
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button wider">Page Down</span>
+                    </span>
+                    <span class="button-descr">
+                        pages on next page
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Space</span>
+                    </span>
+                    <span class="button-descr">
+                        selects currently highlighted cell
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">Ctrl</span>
+                        +
+                        <span class="key-button">Space</span>
+                    </span>
+                    <span class="button-descr">
+                        same as Space, but perists previously selected cells(only for selection mode "multiple")
+                    </span>
+                </li>
+            </ul>
+
+        </div>

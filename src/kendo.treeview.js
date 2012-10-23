@@ -11,6 +11,7 @@
         keys = kendo.keys,
         NS = ".kendoTreeView",
         SELECT = "select",
+        NAVIGATE = "navigate",
         EXPAND = "expand",
         CHANGE = "change",
         CHECKED = "checked",
@@ -27,6 +28,8 @@
         KTREEVIEW = "k-treeview",
         VISIBLE = ":visible",
         NODE = ".k-item",
+        ARIASELECTED = "aria-selected",
+        ARIADISABLED = "aria-disabled",
         rendering, TreeView,
         subGroup, nodeContents, nodeIcon,
         bindings = {
@@ -154,6 +157,10 @@
 
             that._tabindex();
 
+            if (!that.wrapper.filter("[role=tree]").length) {
+                that.wrapper.attr("role", "tree");
+            }
+
             that._dataSource(inferred);
 
             that._attachEvents();
@@ -169,6 +176,10 @@
                 }
             } else {
                 that._attachUids();
+            }
+
+            if (that.element[0].id) {
+                that._ariaId = kendo.format("{0}_tv_active", that.element[0].id);
             }
         },
 
@@ -217,6 +228,7 @@
 
             root.children("li").each(function(index, item) {
                 item = $(item).attr(uidAttr, data[index].uid);
+                item.attr("role", "treeitem");
                 that._attachUids(item.children("ul"), data[index].children);
             });
         },
@@ -256,7 +268,7 @@
                     "<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"
                 ),
                 group: template(
-                    "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) #>" +
+                    "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) # role='group'>" +
                         "#= renderItems(data) #" +
                     "</ul>"
                 ),
@@ -330,7 +342,8 @@
 
             EXPAND,
             COLLAPSE,
-            SELECT
+            SELECT,
+            NAVIGATE
         ],
 
         options: {
@@ -423,16 +436,18 @@
                     "# var url = " + that._fieldAccessor("url") + "(item); #" +
                     "# var imageUrl = " + that._fieldAccessor("imageUrl") + "(item); #" +
                     "# var spriteCssClass = " + that._fieldAccessor("spriteCssClass") + "(item); #" +
-                    "<li class='#= r.wrapperCssClass(group, item) #'" +
+                    "<li role='treeitem' class='#= r.wrapperCssClass(group, item) #'" +
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
+                        "#=item.selected ? \"aria-selected='true'\" : ''#" +
+                        "#=item.enabled === false ? \"aria-disabled='true'\" : ''#" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
                             "# if (item.hasChildren) { #" +
-                                "<span class='#= r.toggleButtonClass(item) #'></span>" +
+                                "<span class='#= r.toggleButtonClass(item) #' role='presentation'></span>" +
                             "# } #" +
 
                             "# if (treeview.checkboxes) { #" +
-                                "<span class='k-checkbox'>" +
+                                "<span class='k-checkbox' role='presentation'>" +
                                     "#= treeview.checkboxes.template(data) #" +
                                 "</span>" +
                             "# } #" +
@@ -440,7 +455,7 @@
                             "# var tag = url ? 'a' : 'span'; #" +
                             "# var textAttr = url ? ' href=\\'' + url + '\\'' : ''; #" +
 
-                            "<#=tag# class='#= r.textClass(item) #'#= textAttr #>" +
+                            "<#=tag#  class='#= r.textClass(item) #'#= textAttr # >" +
 
                                 "# if (imageUrl) { #" +
                                     "<img class='k-image' alt='' src='#= imageUrl #'>" +
@@ -525,7 +540,16 @@
         },
 
         _focus: function(e) {
-            this._oldSelection = this.select()[0];
+            var selected = this.select(),
+                current;
+
+            if (selected.length) {
+                this._oldSelection = selected[0];
+                this.current(selected);
+            } else {
+                current = this.current();
+                this.current(current);
+            }
         },
 
         focus: function() {
@@ -534,10 +558,10 @@
 
         _blur: function(e) {
             var that = this,
-                selection = that.select();
+                focused = that.current();
 
-            if (selection[0] != that._oldSelection) {
-                that._trigger(SELECT, selection);
+            if (focused.length) {
+                focused.find(".k-in:first").removeClass("k-state-focused");
             }
         },
 
@@ -554,7 +578,7 @@
                 expanded = that._expanded(node),
                 result;
 
-            if (!node.length) {
+            if (!node.length || !node.is(":visible")) {
                 result = that.root.children().eq(0);
             } else if (expanded) {
                 result = subGroup(node).children().first();
@@ -606,46 +630,47 @@
             var that = this,
                 key = e.keyCode,
                 target,
-                selection = that.select(),
-                expanded = that._expanded(selection),
-                checkbox = selection.find(":checkbox:first");
+                focused = that.current(),
+                expanded = that._expanded(focused),
+                checkbox = focused.find(":checkbox:first");
 
             if (e.target != e.currentTarget) {
                 return;
             }
 
             if (!that._oldSelection) {
-                that._oldSelection = selection[0];
+                that._oldSelection = that.select()[0];
             }
 
             if (key == keys.RIGHT) {
                 if (expanded) {
-                    target = that._nextVisible(selection);
+                    target = that._nextVisible(focused);
                 } else {
-                    that.expand(selection);
+                    that.expand(focused);
                 }
             } else if (key == keys.LEFT) {
                 if (expanded) {
-                    that.collapse(selection);
+                    that.collapse(focused);
                 } else {
-                    target = that.parent(selection);
+                    target = that.parent(focused);
 
                     if (!that._enabled(target)) {
                         target = undefined;
                     }
                 }
             } else if (key == keys.DOWN) {
-                target = that._nextVisible(selection);
+                target = that._nextVisible(focused);
             } else if (key == keys.UP) {
-                target = that._previousVisible(selection);
+                target = that._previousVisible(focused);
             } else if (key == keys.HOME) {
                 target = that._nextVisible($());
             } else if (key == keys.END) {
                 target = that._previousVisible($());
             } else if (key == keys.ENTER) {
-                if (selection[0] != that._oldSelection) {
+                if (focused[0] != that._oldSelection) {
                     delete that._oldSelection;
-                    that._trigger(SELECT, selection);
+                    that.select(focused);
+                    that._trigger(SELECT, focused);
                 }
             } else if (key == keys.SPACEBAR && checkbox.length) {
                 checkbox.prop(CHECKED, !checkbox.prop(CHECKED))
@@ -654,12 +679,17 @@
 
                 that._checkboxChange({ target: checkbox });
 
-                target = selection;
+                target = focused;
+                that.select(target);
             }
 
             if (target) {
                 e.preventDefault();
-                that.select(target);
+
+                if (focused[0] != target[0]) {
+                    that._trigger(NAVIGATE, target);
+                    that.current(target);
+                }
             }
         },
 
@@ -880,9 +910,17 @@
             if (field == "selected") {
                 item = items[0];
 
-                that.findByUid(item.uid).find(".k-in:first")
+                node = that.findByUid(item.uid).find(".k-in:first")
                         .removeClass("k-state-hover")
-                        .toggleClass("k-state-selected", item[field]);
+                        .toggleClass("k-state-selected", item[field])
+                        .end();
+
+                if (item[field]) {
+                    that.current(node);
+                    node.attr(ARIASELECTED, true);
+                } else {
+                    node.attr(ARIASELECTED, false);
+                }
             } else {
                 for (i = 0; i < items.length; i++) {
                     item = items[i];
@@ -995,14 +1033,49 @@
             this._processNodes(nodes, function (index, item) {
                 var isCollapsed = !nodeContents(item).is(VISIBLE);
 
+                item.removeAttr(ARIADISABLED);
+
                 if (!enable) {
                     this.collapse(item);
                     isCollapsed = true;
                     item.find(".k-in:first").removeClass("k-state-selected");
+                    item.removeAttr(ARIASELECTED);
+                    item.attr(ARIADISABLED, true);
                 }
 
                 this._updateNodeClasses(item, {}, { enabled: enable, expanded: !isCollapsed });
             });
+        },
+
+        current: function(node) {
+            var that = this,
+                element = that.element,
+                current = that._current,
+                id = that._ariaId;
+
+            if (node !== undefined && node.length) {
+              if (current) {
+                    current.find(".k-in:first")
+                        .removeClass("k-state-focused");
+
+                    current.removeAttr("id");
+                }
+
+                that._current = $(node, element).closest(NODE)
+                    .find(".k-in:first")
+                    .addClass("k-state-focused")
+                    .end();
+
+                if (id) {
+                    that.wrapper.removeAttr("aria-activedescendant");
+                    that._current.attr("id", id);
+                    that.wrapper.attr("aria-activedescendant", id);
+                }
+
+                return;
+            }
+
+            return current || $();
         },
 
         select: function (node) {
@@ -1111,8 +1184,10 @@
 
             if (value) {
                 node.attr(expandedAttr, "true");
+                node.attr("aria-expanded", "true");
             } else {
                 node.removeAttr(expandedAttr);
+                node.attr("aria-expanded", "false");
             }
         },
 

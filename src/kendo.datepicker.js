@@ -13,7 +13,6 @@
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
-    NAVIGATE = "navigate",
     DATEVIEW = "dateView",
     DISABLED = "disabled",
     DEFAULT = "k-state-default",
@@ -21,12 +20,16 @@
     SELECTED = "k-state-selected",
     STATEDISABLED = "k-state-disabled",
     HOVER = "k-state-hover",
+    KEYDOWN = "keydown" + ns,
     HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
     MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
+    ID = "id",
     MIN = "min",
     MAX = "max",
     MONTH = "month",
-    FIRST = "first",
+    ARIA_DISABLED = "aria-disabled",
+    ARIA_EXPANDED = "aria-expanded",
+    ARIA_HIDDEN = "aria-hidden",
     calendar = kendo.calendar,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
@@ -51,18 +54,31 @@
     }
 
     var DateView = function(options) {
-        var that = this,
+        var that = this, id,
             body = document.body,
-            sharedCalendar = DatePicker.sharedCalendar;
+            sharedCalendar = DatePicker.sharedCalendar,
+            div = $(DIV).attr(ARIA_HIDDEN, "true")
+                        .addClass("k-calendar-container")
+                        .appendTo(body);
 
         if (!sharedCalendar) {
-            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).hide().appendTo(body));
+            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr(ID, kendo.guid()).hide().appendTo(body), { focusOnNav: false });
             calendar.makeUnselectable(sharedCalendar.element);
         }
 
         that.calendar = sharedCalendar;
         that.options = options = options || {};
-        that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
+        id = options.id;
+
+        if (id) {
+            id += "_dateview";
+
+            div.attr(ID, id);
+            that._dateViewID = id;
+        }
+
+        that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
+        that.div = div;
 
         that._templates();
 
@@ -81,18 +97,13 @@
 
                 element.appendTo(popup.element)
                        .data(DATEVIEW, that)
-                       .off(CLICK + " " + MOUSEDOWN)
+                       .off(CLICK + " " + KEYDOWN)
                        .on(CLICK, "td:has(.k-link)", proxy(that._click, that))
                        .on(MOUSEDOWN, preventDefault)
                        .show();
 
                 calendar.unbind(CHANGE)
                         .bind(CHANGE, options);
-
-                if (!touch) {
-                    calendar.unbind(NAVIGATE)
-                            .bind(NAVIGATE, proxy(that._navigate, that));
-                }
 
                 calendar.month = that.month;
                 calendar.options.depth = options.depth;
@@ -156,13 +167,9 @@
 
         move: function(e) {
             var that = this,
-                options = that.options,
-                currentValue = new DATE(that._current),
-                calendar = that.calendar,
-                index = calendar._index,
-                view = calendar._view,
                 key = e.keyCode,
-                value, prevent, method;
+                calendar = that.calendar,
+                selectIsClicked = e.ctrlKey && key == keys.DOWN || key == keys.ENTER;
 
             if (key == keys.ESC) {
                 that.close();
@@ -172,74 +179,27 @@
             if (e.altKey) {
                 if (key == keys.DOWN) {
                     that.open();
-                    prevent = true;
+                    e.preventDefault();
                 } else if (key == keys.UP) {
                     that.close();
-                    prevent = true;
+                    e.preventDefault();
                 }
                 return;
             }
 
-            if (!that.popup.visible() || calendar._table.parent().data("animating")) {
+            if (!that.popup.visible()){
                 return;
             }
 
-            if (e.ctrlKey) {
-                if (key == keys.RIGHT) {
-                    calendar.navigateToFuture();
-                    prevent = true;
-                } else if (key == keys.LEFT) {
-                    calendar.navigateToPast();
-                    prevent = true;
-                } else if (key == keys.UP) {
-                    calendar.navigateUp();
-                    prevent = true;
-                } else if (key == keys.DOWN) {
-                    that._navigateDown();
-                    prevent = true;
-                }
-            } else {
-                if (key == keys.RIGHT) {
-                    value = 1;
-                    prevent = true;
-                } else if (key == keys.LEFT) {
-                    value = -1;
-                    prevent = true;
-                } else if (key == keys.UP) {
-                    value = index === 0 ? -7 : -4;
-                    prevent = true;
-                } else if (key == keys.DOWN) {
-                    value = index === 0 ? 7 : 4;
-                    prevent = true;
-                } else if (key == keys.ENTER) {
-                    that._navigateDown();
-                    prevent = true;
-                } else if (key == keys.HOME || key == keys.END) {
-                    method = key == keys.HOME ? FIRST : "last";
-                    currentValue = view[method](currentValue);
-                    prevent = true;
-                } else if (key == keys.PAGEUP) {
-                    prevent = true;
-                    calendar.navigateToPast();
-                } else if (key == keys.PAGEDOWN) {
-                    prevent = true;
-                    calendar.navigateToFuture();
-                }
-
-                if (value || method) {
-                    if (!method) {
-                        view.setDate(currentValue, value);
-                    }
-
-                    that._current = currentValue = restrictValue(currentValue, options.min, options.max);
-                    calendar._focus(currentValue);
-                }
-            }
-
-            if (prevent) {
+            if (selectIsClicked && calendar._cell.hasClass(SELECTED)) {
+                that.close();
                 e.preventDefault();
+                return;
             }
+
+            that._current = calendar._move(e);
         },
+
 
         value: function(value) {
             var that = this,
@@ -250,7 +210,6 @@
             that._current = new DATE(restrictValue(value, options.min, options.max));
 
             if (calendar.element.data(DATEVIEW) === that) {
-                calendar._focus(that._current);
                 calendar.value(value);
             }
         },
@@ -259,34 +218,6 @@
             if (e.currentTarget.className.indexOf(SELECTED) !== -1) {
                 this.close();
             }
-        },
-
-        _navigate: function() {
-            var that = this,
-                calendar = that.calendar;
-
-            that._current = new DATE(calendar._current);
-            calendar._focus(calendar._current);
-        },
-
-        _navigateDown: function() {
-            var that = this,
-                calendar = that.calendar,
-                currentValue = calendar._current,
-                cell = calendar._table.find("." + FOCUSED),
-                value = cell.children(":" + FIRST).attr(kendo.attr("value")).split("/");
-
-            //Safari cannot create corretly date from "1/1/2090"
-            value = new DATE(value[0], value[1], value[2]);
-            kendo._adjustDate(value);
-
-            if (!cell[0] || cell.hasClass(SELECTED)) {
-                that.close();
-                return;
-            }
-
-            calendar._view.setDate(currentValue, value);
-            calendar.navigateDown(currentValue);
         },
 
         _option: function(option, value) {
@@ -310,7 +241,7 @@
                 empty = month.empty;
 
             that.month = {
-                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                content: template('<td#=data.cssClass#><a tabindex="-1" class="k-link" href="\\#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
                 empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
 
@@ -326,7 +257,7 @@
 
     var DatePicker = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, div;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
@@ -337,6 +268,7 @@
             that._wrapper();
 
             that.dateView = new DateView(extend({}, options, {
+                id: element.attr(ID),
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope
@@ -346,6 +278,9 @@
                 close: function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
+                    } else {
+                        element.attr(ARIA_EXPANDED, false);
+                        div.attr(ARIA_HIDDEN, true);
                     }
                 },
                 open: function(e) {
@@ -361,9 +296,13 @@
                             that.dateView._current = date;
                             that.dateView.calendar._focus(date);
                         }
+
+                        element.attr(ARIA_EXPANDED, true);
+                        div.attr(ARIA_HIDDEN, false);
                     }
                 }
             }));
+            div = that.dateView.div;
 
             that._icon();
 
@@ -374,9 +313,16 @@
                 .on("blur" + ns, proxy(that._blur, that))
                 .on("focus" + ns, function(e) {
                     that._inputWrapper.addClass(FOCUSED);
+                })
+                .attr({
+                    role: "textbox",
+                    "aria-haspopup": true,
+                    "aria-expanded": false,
+                    "aria-owns": that.dateView._dateViewID
                 });
 
             that._reset();
+            that._template();
 
             that.enable(!element.is('[disabled]'));
             that.value(options.value || that.element.val());
@@ -399,7 +345,8 @@
             start: MONTH,
             depth: MONTH,
             animation: {},
-            month : {}
+            month : {},
+            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "D")#'
         },
 
         setOptions: function(options) {
@@ -423,7 +370,8 @@
                     .removeClass(DEFAULT)
                     .addClass(STATEDISABLED);
 
-                element.attr(DISABLED, DISABLED);
+                element.attr(DISABLED, DISABLED)
+                       .attr(ARIA_DISABLED, true);
             } else {
                 wrapper
                     .addClass(DEFAULT)
@@ -431,7 +379,8 @@
                     .on(HOVEREVENTS, that._toggleHover);
 
                 element
-                    .removeAttr(DISABLED);
+                    .removeAttr(DISABLED)
+                    .attr(ARIA_DISABLED, false);
 
                 icon.on(CLICK, proxy(that._click, that))
                     .on(MOUSEDOWN, preventDefault);
@@ -485,7 +434,7 @@
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
             }
         },
-
+    
         _blur: function() {
             var that = this;
 
@@ -527,6 +476,7 @@
                 that._change(that.element.val());
             } else {
                 dateView.move(e);
+                that._updateARIA(dateView._current);
             }
         },
 
@@ -541,7 +491,10 @@
                 icon = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar">select</span></span>').insertAfter(element);
             }
 
-            that._dateIcon = icon;
+            that._dateIcon = icon.attr({
+                "role": "button",
+                "aria-controls": that.dateView._dateViewID
+            });
         },
 
         _option: function(option, value) {
@@ -589,6 +542,7 @@
             that._value = date;
             that.dateView.value(date);
             that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
+            that._updateARIA(date);
 
             return date;
         },
@@ -630,6 +584,14 @@
 
                 that._form = form.on("reset", that._resetHandler);
             }
+        },
+
+        _template: function() {
+            this._ariaTemplate = template(this.options.ARIATemplate);
+        },
+
+        _updateARIA: function(date) {
+            this.element.attr("aria-label", this._ariaTemplate({ current: date }));
         }
     });
 

@@ -18,5 +18,9 @@ tests.push(
     {
         page: "window/lint.html",
         title: "window lint"
+    },
+    {
+        page: "window/aria.html",
+        title: "window aria"
     }
 );

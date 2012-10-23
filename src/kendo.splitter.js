@@ -193,16 +193,15 @@
             that.element
                 .addClass("k-widget").addClass("k-splitter")
                 .children()
-                    .addClass(KPANE)
-                    .each(function (index, pane) {
-                        var config = panesConfig && panesConfig[index];
+                .each(function (index, pane) {
+                    var config = panesConfig && panesConfig[index];
 
-                        pane = $(pane);
+                    pane = $(pane).attr("role", "group").addClass(KPANE);
 
-                        pane.data(PANE, config ? config : {})
-                            .toggleClass("k-scrollable", config ? config.scrollable !== false : true);
-                        that.ajaxRequest(pane);
-                    })
+                    pane.data(PANE, config ? config : {})
+                        .toggleClass("k-scrollable", config ? config.scrollable !== false : true);
+                    that.ajaxRequest(pane);
+                })
                 .end();
 
             that.trigger(RESIZE);
@@ -301,18 +300,20 @@
                 nextCollapsed = nextPane.collapsed;
 
             splitbar.addClass("k-splitbar k-state-default k-splitbar-" + orientation)
-                .removeClass("k-splitbar-" + orientation + "-hover")
-                .toggleClass("k-splitbar-draggable-" + orientation,
-                    draggable && !prevCollapsed && !nextCollapsed)
-                .toggleClass("k-splitbar-static-" + orientation,
-                    !draggable && !prevCollapsible && !nextCollapsible)
-                .html(
-                    catIconIf("k-collapse-prev", prevCollapsible && !prevCollapsed && !nextCollapsed) +
-                    catIconIf("k-expand-prev", prevCollapsible && prevCollapsed && !nextCollapsed) +
-                    catIconIf("k-resize-handle", draggable) +
-                    catIconIf("k-collapse-next", nextCollapsible && !nextCollapsed && !prevCollapsed) +
-                    catIconIf("k-expand-next", nextCollapsible && nextCollapsed && !prevCollapsed)
-                );
+                    .attr("role", "separator")
+                    .attr("aria-expanded", !(prevCollapsed || nextCollapsed))
+                    .removeClass("k-splitbar-" + orientation + "-hover")
+                    .toggleClass("k-splitbar-draggable-" + orientation,
+                        draggable && !prevCollapsed && !nextCollapsed)
+                    .toggleClass("k-splitbar-static-" + orientation,
+                        !draggable && !prevCollapsible && !nextCollapsible)
+                    .html(
+                        catIconIf("k-collapse-prev", prevCollapsible && !prevCollapsed && !nextCollapsed) +
+                        catIconIf("k-expand-prev", prevCollapsible && prevCollapsed && !nextCollapsed) +
+                        catIconIf("k-resize-handle", draggable) +
+                        catIconIf("k-collapse-next", nextCollapsible && !nextCollapsed && !prevCollapsed) +
+                        catIconIf("k-expand-next", nextCollapsible && nextCollapsed && !prevCollapsed)
+                    );
         },
         _updateSplitBars: function() {
             var that = this;

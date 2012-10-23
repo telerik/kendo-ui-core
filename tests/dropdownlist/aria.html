@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DropDownList Aria</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <h1 id="qunit-header">DropDownList Aria</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var DropDownList = kendo.ui.DropDownList,
+            input;
+
+            module("kendo.ui.DropDownList Aria", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    var ddl = input.data("kendoDropDownList");
+
+                    if (ddl) {
+                        ddl.destroy();
+                        ddl.wrapper.remove();
+                    } else {
+                        input.remove();
+                    }
+                }
+            });
+
+          test("DropDownList renders role='listbox'", function() {
+              var dropdownlist = new DropDownList(input);
+
+              equal(dropdownlist.wrapper.attr("role"), "listbox");
+          });
+
+          test("DropDownList renders aria-haspopup", function() {
+              var dropdownlist = new DropDownList(input);
+
+              equal(dropdownlist.wrapper.attr("aria-haspopup"), "true");
+          });
+
+          test("DropDownList renders aria-expanded", function() {
+              var dropdownlist = new DropDownList(input);
+
+              equal(dropdownlist.wrapper.attr("aria-expanded"), "false");
+          });
+
+          test("DropDownList renders aria-owns", function() {
+              var dropdownlist = new DropDownList(input.attr("id", "test"));
+
+              equal(dropdownlist.wrapper.attr("aria-owns"), dropdownlist.ul.attr("id"));
+          });
+
+          test("DropDownList renders aria-activedescendant", function() {
+              var dropdownlist = new DropDownList(input.attr("id", "test"), {
+                  dataSource: ["Item", "Item2"]
+              });
+
+              equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.current()[0].id);
+          });
+
+          test("DropDownList renders aria-selected", function() {
+              var dropdownlist = new DropDownList(input.attr("id", "test"), {
+                  dataSource: ["Item", "Item2"]
+              });
+
+              equal(dropdownlist.current().attr("aria-selected"), "true");
+          });
+      </script>
+      <div id="qunit-fixture">test markup, will be hidden</div>
+      <ul id="log"></ul>
+  </body>
+</html>

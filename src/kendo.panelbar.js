@@ -34,35 +34,39 @@
         CONTENTS = "> .k-content",
         FOCUSEDCLASS = "k-state-focused",
         DISABLEDCLASS = "k-state-disabled",
-        SELECTEDCLASS = ".k-state-selected",
-        HIGHLIGHTEDCLASS = ".k-state-highlighted",
+        SELECTEDCLASS = "k-state-selected",
+        SELECTEDSELECTOR = "." + SELECTEDCLASS,
+        HIGHLIGHTEDCLASS = "k-state-highlighted",
         ACTIVEITEMSELECTOR = ITEM + ":not(.k-state-disabled)",
         clickableItems = ACTIVEITEMSELECTOR + " > .k-link",
         disabledItems = ITEM + ".k-state-disabled > .k-link",
-        selectableItems = "> li > .k-state-selected, .k-panel > li > .k-state-selected",
-        highlightableItems = "> .k-state-highlighted, .k-panel > .k-state-highlighted",
+        selectableItems = "> li > " + SELECTEDSELECTOR + ", .k-panel > li > " + SELECTEDSELECTOR,
         defaultState = "k-state-default",
+        ARIA_DISABLED = "aria-disabled",
+        ARIA_EXPANDED = "aria-expanded",
+        ARIA_HIDDEN = "aria-hidden",
+        ARIA_SELECTED = "aria-selected",
         VISIBLE = ":visible",
         EMPTY = ":empty",
         SINGLE = "single",
 
         templates = {
             content: template(
-                "<div class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
+                "<div role='region' class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
             ),
             group: template(
-                "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+                "<ul role='group' aria-hidden='true' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
                     "#= renderItems(data) #" +
                 "</ul>"
             ),
             itemWrapper: template(
-                "<#= tag(item) # class='#= textClass(item, group) #'#= contentUrl(item) ##= textAttributes(item) #>" +
+                "<#= tag(item) # class='#= textClass(item, group) #' #= contentUrl(item) ##= textAttributes(item) #>" +
                     "#= image(item) ##= sprite(item) ##= text(item) #" +
                     "#= arrow(data) #" +
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li class='#= wrapperCssClass(group, item) #'>" +
+                "<li role='menuitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
@@ -76,6 +80,20 @@
         },
 
         rendering = {
+            aria: function(item) {
+                var attr = "";
+
+                if (item.items || item.content || item.contentUrl) {
+                    attr += ARIA_EXPANDED + "='" + (item.expanded ? "true" : "false") + "' ";
+                }
+
+                if (item.enabled === false) {
+                    attr += ARIA_DISABLED + "='true'";
+                }
+
+                return attr;
+            },
+
             wrapperCssClass: function (group, item) {
                 var result = "k-item",
                     index = item.index;
@@ -98,6 +116,7 @@
 
                 return result;
             },
+
             textClass: function(item, group) {
                 var result = LINK;
 
@@ -140,51 +159,6 @@
             }
         };
 
-    function updateItemClasses (item, panelElement) {
-        item = $(item).addClass("k-item");
-
-        item
-            .children(IMG)
-            .addClass(IMAGE);
-        item
-            .children("a")
-            .addClass(LINK)
-            .children(IMG)
-            .addClass(IMAGE);
-        item
-            .filter(":not([disabled]):not([class*=k-state])")
-            .addClass("k-state-default");
-        item
-            .filter("li[disabled]")
-            .addClass("k-state-disabled")
-            .removeAttr("disabled");
-        item
-            .filter(":not([class*=k-state])")
-            .children("a")
-            .filter(":focus")
-            .parent()
-            .addClass(ACTIVECLASS);
-        item
-            .find(">div")
-            .addClass(CONTENT)
-            .css({ display: "none" });
-
-        item.each(function() {
-            var item = $(this);
-
-            if (!item.children(LINKSELECTOR).length) {
-                item
-                    .contents()      // exclude groups, real links, templates and empty text nodes
-                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                    .wrapAll("<span class='" + LINK + "'/>");
-            }
-        });
-
-        panelElement
-            .find(" > li > ." + LINK)
-            .addClass("k-header");
-    }
-
     function updateArrow (items) {
         items = $(items);
 
@@ -217,12 +191,16 @@
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.wrapper = that.element;
+            element = that.wrapper = that.element.addClass("k-widget k-reset k-header k-panelbar");
             options = that.options;
 
             if (options.dataSource) {
                 that.element.empty();
                 that.append(options.dataSource, element);
+            }
+
+            if (element[0].id) {
+                that._itemId = element[0].id + "_pb_active";
             }
 
             that._tabindex();
@@ -242,12 +220,13 @@
                 .on(CLICK + NS, disabledItems, false)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, function() {
-                    var item = that.select().last();
+                    var item = that.select();
                     that._current(item[0] ? item : that._first());
                 })
                 .on("blur" + NS, function() {
                     that._current(null);
-                });
+                })
+                .attr("role", "menu");
 
             if (options.contentUrls) {
                 element.find("> .k-item")
@@ -311,8 +290,8 @@
                         return that;
                     }
 
-                    element.find(HIGHLIGHTEDCLASS).removeClass(HIGHLIGHTEDCLASS.substr(1));
-                    item.addClass(HIGHLIGHTEDCLASS.substr(1));
+                    element.find("." + HIGHLIGHTEDCLASS).removeClass(HIGHLIGHTEDCLASS);
+                    item.addClass(HIGHLIGHTEDCLASS);
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
@@ -343,7 +322,7 @@
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
 
                 if (!item.hasClass(DISABLEDCLASS) && groups.is(VISIBLE)) {
-                    item.removeClass(HIGHLIGHTEDCLASS.substr(1));
+                    item.removeClass(HIGHLIGHTEDCLASS);
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
@@ -368,7 +347,8 @@
             element = this.element.find(element);
             element
                 .toggleClass(defaultState, enable)
-                .toggleClass(DISABLEDCLASS, !enable);
+                .toggleClass(DISABLEDCLASS, !enable)
+                .attr(ARIA_DISABLED, !enable);
         },
 
         select: function (element) {
@@ -529,12 +509,21 @@
                 return focused;
             }
 
+            that.element.removeAttr("aria-activedescendant");
+
             if (focused) {
-                focused.children(LINKSELECTOR).removeClass(FOCUSEDCLASS);
+                focused
+                    .removeAttr("id")
+                    .children(LINKSELECTOR)
+                    .removeClass(FOCUSEDCLASS);
             }
 
             if (candidate) {
-                candidate.children(LINKSELECTOR).addClass(FOCUSEDCLASS);
+                candidate.attr("id", that._itemId)
+                         .children(LINKSELECTOR)
+                         .addClass(FOCUSEDCLASS);
+
+                that.element.attr("aria-activedescendant", that._itemId);
             }
 
             that._focused = candidate;
@@ -552,15 +541,17 @@
             if (key == keys.DOWN || key == keys.RIGHT) {
                 that._current(that._nextItem(current));
                 e.preventDefault();
-            }
-
-            if (key == keys.UP || key == keys.LEFT) {
+            } else if (key == keys.UP || key == keys.LEFT) {
                 that._current(that._prevItem(current));
                 e.preventDefault();
-            }
-
-            if (key == keys.ENTER || key == keys.SPACEBAR) {
+            } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current.children(LINKSELECTOR));
+                e.preventDefault();
+            } else if (key == keys.HOME) {
+                that._current(that._first());
+                e.preventDefault();
+            } else if (key == keys.END) {
+                that._current(that._last());
                 e.preventDefault();
             }
         },
@@ -624,20 +615,22 @@
 
         _insert: function (item, referenceItem, parent) {
             var that = this,
-                items, contents = [];
+                items, contents = [],
+                plain = $.isPlainObject(item),
+                isReferenceItem = referenceItem && referenceItem[0],
+                groupData;
 
-            if (!referenceItem || !referenceItem.length) {
+            if (!isReferenceItem) {
                 parent = that.element;
             }
 
-            var plain = $.isPlainObject(item),
-                groupData = {
-                    firstLevel: parent.hasClass("k-panelbar"),
-                    expanded: parent.parent().hasClass(ACTIVECLASS),
-                    length: parent.children().length
-                };
+            groupData = {
+                firstLevel: parent.hasClass("k-panelbar"),
+                expanded: parent.parent().hasClass(ACTIVECLASS),
+                length: parent.children().length
+            };
 
-            if (referenceItem && !parent.length) {
+            if (isReferenceItem && !parent.length) {
                 parent = $(PanelBar.renderGroup({ group: groupData })).appendTo(referenceItem);
             }
 
@@ -652,6 +645,7 @@
                                 }));
                             }
                         });
+
                 contents = $.map(plain ? [ item ] : item, function (value, idx) {
                             if (value.content || value.contentUrl) {
                                 return $(PanelBar.renderContent({
@@ -661,10 +655,13 @@
                                 return false;
                             }
                         });
+
+                if (isReferenceItem) {
+                    referenceItem.attr(ARIA_EXPANDED, false);
+                }
             } else {
                 items = $(item);
-
-                updateItemClasses(items, that.element);
+                that._updateItemsClasses(items);
             }
 
             return { items: items, group: parent, contents: contents };
@@ -679,30 +676,97 @@
         },
 
         _updateClasses: function() {
-            var that = this;
+            var that = this,
+                panels, items;
 
-            that.element.addClass("k-widget k-reset k-header k-panelbar");
+            panels = that.element
+                         .find("li > ul")
+                         .not(function () { return $(this).parentsUntil(".k-panelbar", "div").length; })
+                         .addClass("k-group k-panel")
+                         .attr("role", "group");
 
-            var panels = that.element
-                                .find("li > ul")
-                                .not(function () {
-                                        return $(this).parentsUntil(".k-panelbar", "div").length;
-                                    })
-                                .addClass("k-group k-panel")
-                                .add(that.element);
+            panels.parent()
+                  .attr(ARIA_EXPANDED, false)
+                  .not("." + ACTIVECLASS)
+                  .children("ul")
+                  .attr(ARIA_HIDDEN, true)
+                  .hide();
 
-            var items = panels
-                            .find("> li:not(." + ACTIVECLASS + ") > ul")
-                            .css({ display: "none" })
-                            .end()
-                            .find("> li");
+            items = that.element.add(panels).children();
 
-            items.each(function () {
-                updateItemClasses(this, that.element);
-            });
-
+            that._updateItemsClasses(items);
             updateArrow(items);
             updateFirstLast(items);
+        },
+
+        _updateItemsClasses: function(items) {
+            var length = items.length,
+                idx = 0;
+
+            for(; idx < length; idx++) {
+                this._updateItemClasses(items[idx]);
+            }
+        },
+
+        _updateItemClasses: function(item) {
+            var selected = this._selected,
+                link;
+
+            item = $(item).addClass("k-item").attr("role", "menuitem");
+
+            item
+                .children(IMG)
+                .addClass(IMAGE);
+
+            item
+                .children("a")
+                .addClass(LINK)
+                .children(IMG)
+                .addClass(IMAGE);
+
+            item
+                .filter(":not([disabled]):not([class*=k-state])")
+                .addClass("k-state-default");
+
+            item
+                .filter("li[disabled]")
+                .addClass("k-state-disabled")
+                .attr(ARIA_DISABLED, true)
+                .removeAttr("disabled");
+
+            item
+                .children("div")
+                .addClass(CONTENT)
+                .attr("role", "region")
+                .attr(ARIA_HIDDEN, true)
+                .hide()
+                .parent()
+                .attr(ARIA_EXPANDED, false);
+
+            link = item.children(SELECTEDSELECTOR);
+            if (link[0]) {
+                if (selected) {
+                    selected.removeAttr(ARIA_SELECTED)
+                            .children(SELECTEDSELECTOR)
+                            .removeClass(SELECTEDCLASS);
+                }
+
+                link.addClass(SELECTEDCLASS);
+                this._selected = item.attr(ARIA_SELECTED, true);
+            }
+
+            if (!item.children(LINKSELECTOR)[0]) {
+                item
+                    .contents()      // exclude groups, real links, templates and empty text nodes
+                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                    .wrapAll("<span class='" + LINK + "'/>");
+            }
+
+            if (item.parent(".k-panelbar")[0]) {
+                item
+                    .children(LINKSELECTOR)
+                    .addClass("k-header");
+            }
         },
 
         _click: function (target) {
@@ -795,6 +859,8 @@
 
             element
                 .parent()
+                .attr(ARIA_EXPANDED, !visibility)
+                .attr(ARIA_HIDDEN, visibility)
                 .toggleClass(defaultState, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-icon")
@@ -890,14 +956,23 @@
         },
 
         _updateSelected: function(link) {
-            var element = this.element;
+            var that = this,
+                element = that.element,
+                item = link.parent(ITEM),
+                selected = that._selected;
 
-            element.find(selectableItems).removeClass(SELECTEDCLASS.substr(1));
-            element.find(highlightableItems).removeClass(HIGHLIGHTEDCLASS.substr(1));
+            if (selected) {
+                selected.removeAttr(ARIA_SELECTED);
+            }
 
-            link.addClass(SELECTEDCLASS.substr(1));
-            link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
-            this._current(link.parent(ITEM));
+            that._selected = item.attr(ARIA_SELECTED, true);
+
+            element.find(selectableItems).removeClass(SELECTEDCLASS);
+            element.find("> .k-state-highlighted, .k-panel > .k-state-highlighted").removeClass(HIGHLIGHTEDCLASS);
+
+            link.addClass(SELECTEDCLASS);
+            link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS);
+            that._current(item);
         }
     });
 

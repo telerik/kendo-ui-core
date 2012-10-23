@@ -131,6 +131,14 @@
 
             });
 
+            test("press right arrow should focus next item", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.wrapper.focus().press(keys.RIGHT);
+
+                ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+            });
+
             test("press down arrow when last item is selected should not do anything", function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
@@ -156,6 +164,17 @@
                 equal(dropdownlist.text(), data[0]);
                 equal(dropdownlist.value(), data[0]);
 
+            });
+
+            test("press left arrow should focus prev item", function() {
+                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+                dropdownlist.dataSource.read();
+
+                dropdownlist.select(1);
+                dropdownlist.wrapper.focus().press(keys.LEFT);
+
+                ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
             });
 
             test("press up arrow when first item is selected should not do anything", function() {

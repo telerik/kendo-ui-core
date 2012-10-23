@@ -235,6 +235,8 @@
                 lbl = that._findMessageContainer(fieldName).add(input.next(className)).hide(),
                 messageText;
 
+            input.removeAttr("aria-invalid");
+
             if (!valid) {
                 messageText = that._extractMessage(input, result.key);
                 that._errors[fieldName] = messageText;
@@ -246,6 +248,8 @@
                     messageLabel.insertAfter(input);
                 }
                 messageLabel.show();
+
+                input.attr("aria-invalid", true);
             }
 
             input.toggleClass(INVALIDINPUT, !valid);
@@ -269,11 +273,14 @@
             var locators = kendo.ui.validator.messageLocators,
                 name;
 
-            container.addClass(INVALIDMSG).attr(kendo.attr("for"), fieldName || "");
+            container.addClass(INVALIDMSG)
+                .attr(kendo.attr("for"), fieldName || "");
 
             for (name in locators) {
                 locators[name].decorate(container, fieldName);
             }
+
+            container.attr("role", "alert");
         },
 
         _extractMessage: function(input, ruleKey) {

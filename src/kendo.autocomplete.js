@@ -6,6 +6,7 @@
         keys = kendo.keys,
         DataSource = kendo.data.DataSource,
         List = ui.List,
+        ARIA_DISABLED = "aria-disabled",
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         FOCUSED = "k-state-focused",
@@ -70,8 +71,11 @@
             element[0].type = "text";
             wrapper = that.wrapper;
 
+            that._enable();
+
+            that._popup();
+
             element
-                .attr("autocomplete", "off")
                 .addClass("k-input")
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on("paste" + ns, proxy(that._search, that))
@@ -84,6 +88,11 @@
                     that._change();
                     that._placeholder();
                     wrapper.removeClass(FOCUSED);
+                })
+                .attr({
+                    autocomplete: "off",
+                    role: "textbox",
+                    "aria-haspopup": true
                 });
 
             that._enable();
@@ -91,6 +100,12 @@
             that._popup();
 
             that._old = that._accessor();
+
+            if (element[0].id) {
+                element.attr("aria-owns", that.ul[0].id);
+            }
+
+            that._aria();
 
             that._placeholder();
 
@@ -146,6 +161,7 @@
 
             this._template();
             this._accessors();
+            this._aria();
         },
 
 
@@ -159,7 +175,8 @@
                     .removeClass(DEFAULT)
                     .addClass(STATEDISABLED);
 
-                element.attr(DISABLED, DISABLED);
+                element.attr(DISABLED, DISABLED)
+                       .attr(ARIA_DISABLED, true);
             } else {
                 wrapper
                     .removeClass(STATEDISABLED)
@@ -167,13 +184,14 @@
                     .on(HOVEREVENTS, that._toggleHover);
 
                 element
-                    .removeAttr(DISABLED);
+                    .removeAttr(DISABLED)
+                    .attr(ARIA_DISABLED, false);
             }
         },
 
         close: function () {
             var that = this;
-            that._current = null;
+            that.current(null);
             that.popup.close();
         },
 
@@ -508,6 +526,13 @@
             if (!wrapper.is("span.k-widget")) {
                 wrapper = element.wrap("<span />").parent();
             }
+
+            //aria
+
+            wrapper.attr("tabindex", -1);
+            wrapper.attr("role", "presentation");
+
+            //end
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.css({

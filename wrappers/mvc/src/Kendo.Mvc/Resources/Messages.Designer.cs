@@ -61,6 +61,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Background Color.
+        /// </summary>
+        public static string Editor_BackColor {
+            get {
+                return ResourceManager.GetString("Editor_BackColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bold.
         /// </summary>
         public static string Editor_Bold {
@@ -138,6 +147,15 @@ namespace Kendo.Mvc.Resources {
         public static string Editor_FontSizeInherit {
             get {
                 return ResourceManager.GetString("Editor_FontSizeInherit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color.
+        /// </summary>
+        public static string Editor_ForeColor {
+            get {
+                return ResourceManager.GetString("Editor_ForeColor", resourceCulture);
             }
         }
         

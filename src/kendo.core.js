@@ -2535,4 +2535,28 @@ function pad(number) {
         Saturday: 6
     };
 
+    function focusable(element, isTabIndexNotNaN) {
+        var nodeName = element.nodeName.toLowerCase();
+
+        return (/input|select|textarea|button|object/.test(nodeName) ?
+                !element.disabled :
+                "a" === nodeName ?
+                element.href || isTabIndexNotNaN :
+                isTabIndexNotNaN
+               ) &&
+            visible(element);
+    }
+
+    function visible(element) {
+        return !$(element).parents().andSelf().filter(function() {
+            return $.css(this,"visibility") === "hidden" || $.expr.filters.hidden(this);
+        }).length;
+    }
+
+    $.extend($.expr[ ":" ], {
+        focusable: function(element) {
+            var idx = $.attr(element, "tabindex");
+            return focusable(element, !isNaN(idx) && idx > -1);
+        }
+    });
 })(jQuery);

@@ -35,6 +35,10 @@
                         kendoConsole.log("Finished dragging " + this.text(e.sourceNode));
                     }
 
+                    function onNavigate(e) {
+                        kendoConsole.log("Navigate " + this.text(e.node));
+                    }
+
                     $("#treeview").kendoTreeView({
                         dataSource: [
                             { text: "Furniture", expanded: true, items: [
@@ -57,7 +61,8 @@
                         dragstart: onDragStart,
                         drag: onDrag,
                         drop: onDrop,
-                        dragend: onDragEnd
+                        dragend: onDragEnd,
+                        navigate: onNavigate
                     });
                 });
             </script>

@@ -8,6 +8,7 @@
         DESC = "desc",
         NS = ".kendoSortable",
         TLINK = ".k-link",
+        ARIASORT = "aria-sort",
         Widget = kendo.ui.Widget;
 
     var Sortable = Widget.extend({
@@ -58,6 +59,7 @@
                 field = element.attr(FIELD);
 
             element.removeAttr(DIR);
+            element.removeAttr(ARIASORT);
 
             for (idx = 0, length = sort.length; idx < length; idx++) {
                descriptor = sort[idx];
@@ -73,8 +75,10 @@
 
             if (dir === ASC) {
                 $('<span class="k-icon k-i-arrow-n" />').appendTo(that.link);
+                element.attr(ARIASORT, "ascending");
             } else if (dir === DESC) {
                 $('<span class="k-icon k-i-arrow-s" />').appendTo(that.link);
+                element.attr(ARIASORT, "descending");
             }
         },
 
