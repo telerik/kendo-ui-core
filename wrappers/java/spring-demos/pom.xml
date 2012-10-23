@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.kendoui</groupId>
         <artifactId>kendo</artifactId>
-        <version>2012.3.1022</version>
+        <version>2012.3.1023</version>
     </parent>
 
     <artifactId>spring-demos</artifactId>
@@ -85,7 +85,7 @@
         <dependency>
             <groupId>com.kendoui</groupId>
             <artifactId>kendo-taglib</artifactId>
-            <version>2012.3.1022</version>
+            <version>2012.3.1023</version>
         </dependency>
 
         <dependency>

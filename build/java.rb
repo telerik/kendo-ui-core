@@ -44,6 +44,13 @@ file SPRING_DEMOS_WAR => [POM, SPRING_DEMOS_SRC].flatten do
 
 end
 
+# Build the kendo-taglib-*.jar by running maven
+file JSP_TAGLIB_JAR => [POM, JSP_TAGLIB_SRC].flatten do
+
+    mvn(POM, 'clean package')
+
+end
+
 file_copy :to => 'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
           :from => SPRING_DEMOS_ROOT + 'pom.xml'
 
