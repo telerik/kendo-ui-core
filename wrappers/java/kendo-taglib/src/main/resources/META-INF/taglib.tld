@@ -6310,7 +6310,7 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
         <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
         <name>grid-column</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
@@ -6410,6 +6410,71 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>Provides a way to specify custom editor for this column.</description>
+            <name>editor</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+        <name>grid-column-command</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnCommandTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the editor event of Column.</description>
+        <name>grid-column-editor</name>
+        <tag-class>com.kendoui.taglib.grid.EditorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+        <name>grid-column-commandItem</name>
+        <tag-class>com.kendoui.taglib.grid.CommandItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The unique name of the command. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text displayed by the command.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The CSS class of the command.</description>
+            <name>className</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The JavaScript function executed when the user clicks the command button.</description>
+            <name>click</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the click event of CommandItem.</description>
+        <name>grid-column-commandItem-click</name>
+        <tag-class>com.kendoui.taglib.grid.ClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
 

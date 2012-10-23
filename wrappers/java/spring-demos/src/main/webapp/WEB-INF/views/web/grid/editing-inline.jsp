@@ -10,7 +10,8 @@
 
 
 <demo:header />
-    <kendo:grid name="grid" pageable="true" sortable="true" scrollable="true" navigatable="true" editable="inline">
+    <kendo:grid name="grid" pageable="true" sortable="true" scrollable="true" navigatable="true">
+    	<kendo:grid-editable mode="inline"/>
         <kendo:grid-toolbar>
             <kendo:grid-toolbarItem name="create"/>
         </kendo:grid-toolbar>
@@ -19,9 +20,14 @@
             <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
             <kendo:grid-column title="Units In Stock" field="unitsInStock" />
             <kendo:grid-column title="Discontinued" field="discontinued" />
-            <kendo:grid-column command='<%= new String[] { "edit", "destroy" } %>' title="&nbsp;" />
+            <kendo:grid-column title="&nbsp;" >
+            	<kendo:grid-column-command>
+            		<kendo:grid-column-commandItem name="edit" />
+            		<kendo:grid-column-commandItem name="destroy" />
+            	</kendo:grid-column-command>
+            </kendo:grid-column>
         </kendo:grid-columns>
-        <kendo:dataSource pageSize="10" batch="true">
+        <kendo:dataSource pageSize="10">
             <kendo:dataSource-transport parameterMap="parameterMap">
                 <kendo:dataSource-transport-create url="${createUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" />
@@ -51,7 +57,7 @@
         if (type == "read") {
             return options;
         } else {
-            return JSON.stringify(options.models);
+            return JSON.stringify(options);
         }
     }
     </script>

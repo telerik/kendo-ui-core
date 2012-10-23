@@ -541,7 +541,8 @@ class Tag
                     child =  NestedTagArray.new :name => option.name.sub(prefix, ''),
                               :parent => self,
                               :description => option.description,
-                              :options => child_options
+                              :options => child_options,
+                              :events => child_events
                 else
                     child =  NestedTag.new :name => option.name.sub(prefix, ''),
                               :parent => self,
@@ -785,10 +786,12 @@ class NestedTagArray < NestedTag
               :parent => self,
               :options => @options,
               :description => @description,
+              :events => @events,
               :children => @children
 
         @children = [@child]
         @options = []
+        @events = []
     end
 
     def is_item_container?

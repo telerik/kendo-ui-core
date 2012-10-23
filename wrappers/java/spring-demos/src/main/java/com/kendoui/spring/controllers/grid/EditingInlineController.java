@@ -32,61 +32,43 @@ public class EditingInlineController {
     }
     
     @RequestMapping(value = "/editing-inline/update", method = RequestMethod.POST)
-    public @ResponseBody List<Product> update(@RequestBody ArrayList<Map<String, Object>> models) {
-        List<Product> products = new ArrayList<Product>();
+    public @ResponseBody Product update(@RequestBody Map<String, Object> model) {
+        Product target = new Product();
         
-        for (Map<String, Object> model : models) {
-            Product product = new Product();
-            
-            product.setProductId((int)model.get("productId"));
-            product.setProductName((String)model.get("productName"));
-            product.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
-            product.setUnitsInStock((int)model.get("unitsInStock"));
-            product.setDiscontinued((boolean)model.get("discontinued"));
-            
-            products.add(product);
-        }
+        target.setProductId((int)model.get("productId"));
+        target.setProductName((String)model.get("productName"));
+        target.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
+        target.setUnitsInStock((int)model.get("unitsInStock"));
+        target.setDiscontinued((boolean)model.get("discontinued"));
         
-        product.saveOrUpdate(products);
+        product.saveOrUpdate(target);
         
-        return products;
+        return target;
     }
     
     @RequestMapping(value = "/editing-inline/create", method = RequestMethod.POST)
-    public @ResponseBody List<Product> create(@RequestBody ArrayList<Map<String, Object>> models) {
-        List<Product> products = new ArrayList<Product>();
+    public @ResponseBody Product create(@RequestBody Map<String, Object> model) {
+        Product target = new Product();
         
-        for (Map<String, Object> model : models) {
-            Product product = new Product();
+        target.setProductName((String)model.get("productName"));
+        target.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
+        target.setUnitsInStock((int)model.get("unitsInStock"));
+        target.setDiscontinued((boolean)model.get("discontinued"));
             
-            product.setProductName((String)model.get("productName"));
-            product.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
-            product.setUnitsInStock((int)model.get("unitsInStock"));
-            product.setDiscontinued((boolean)model.get("discontinued"));
-            
-            products.add(product);
-        }
+        product.saveOrUpdate(target);
         
-        product.saveOrUpdate(products);
-        
-        return products;
+        return target;
     }
     
     @RequestMapping(value = "/editing-inline/destroy", method = RequestMethod.POST)
-    public @ResponseBody List<Product> destroy(@RequestBody ArrayList<Map<String, Object>> models) {
-        List<Product> products = new ArrayList<Product>();
+    public @ResponseBody Product destroy(@RequestBody Map<String, Object> model) {
+        Product target = new Product();
         
-        for (Map<String, Object> model : models) {
-            Product product = new Product();
-            
-            product.setProductId((int)model.get("productId"));
-            
-            products.add(product);
-        }
+        target.setProductId((int)model.get("productId"));
         
-        product.delete(products);
+        product.delete(target);
         
-        return products;
+        return target;
     }    
 }
 

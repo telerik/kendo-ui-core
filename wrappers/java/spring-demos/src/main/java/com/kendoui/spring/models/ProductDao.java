@@ -9,5 +9,9 @@ public interface ProductDao {
     
     public void saveOrUpdate(List<Product> products);
     
+    public void saveOrUpdate(Product product);
+    
     public void delete(List<Product> products);
+    
+    public void delete(Product product);
 }
