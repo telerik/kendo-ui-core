@@ -2,12 +2,8 @@
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
-        support = kendo.support,
         ACTIVE_STATE_CLASS = "km-state-active",
-        SELECT = "select",
-        NS = ".kendoMobileTabStrip",
-        MOUSEDOWN = support.mousedown + NS,
-        proxy = $.proxy;
+        SELECT = "select";
 
     var TabStrip = Widget.extend({
         init: function(element, options) {
@@ -15,14 +11,12 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("km-tabstrip");
+            that.element
+               .addClass("km-tabstrip")
+               .find("a").each(that._buildButton)
+               .eq(that.options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
 
-            that._releaseProxy = proxy(that._release, that);
-
-            that.element.find("a")
-                            .each(that._buildButton)
-                            .on(MOUSEDOWN, that._releaseProxy)
-                            .eq(that.options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
+            that.eventProxy.on("down", "a", "_release");
         },
 
         events: [
@@ -97,7 +91,6 @@
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-            this.element.find("a").off(NS);
         },
 
         options: {
