@@ -15,7 +15,9 @@ public class SlideFunctionTag extends FunctionTag /* interfaces *//* interfaces 
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         RangeSliderTag parent = (RangeSliderTag)findParentWithClass(RangeSliderTag.class);
+
 
         parent.setSlide(this);
 

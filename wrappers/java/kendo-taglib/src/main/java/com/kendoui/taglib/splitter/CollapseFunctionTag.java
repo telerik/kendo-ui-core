@@ -15,7 +15,9 @@ public class CollapseFunctionTag extends FunctionTag /* interfaces *//* interfac
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         SplitterTag parent = (SplitterTag)findParentWithClass(SplitterTag.class);
+
 
         parent.setCollapse(this);
 

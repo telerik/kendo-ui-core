@@ -15,7 +15,9 @@ public class DataBoundFunctionTag extends FunctionTag /* interfaces *//* interfa
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ComboBoxTag parent = (ComboBoxTag)findParentWithClass(ComboBoxTag.class);
+
 
         parent.setDataBound(this);
 

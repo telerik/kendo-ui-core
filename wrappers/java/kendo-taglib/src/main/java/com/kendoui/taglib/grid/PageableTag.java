@@ -17,7 +17,9 @@ public class PageableTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         GridTag parent = (GridTag)findParentWithClass(GridTag.class);
+
 
         parent.setPageable(this);
 

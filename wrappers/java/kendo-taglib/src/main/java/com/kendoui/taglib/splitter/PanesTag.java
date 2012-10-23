@@ -19,7 +19,9 @@ public class PanesTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         SplitterTag parent = (SplitterTag)findParentWithClass(SplitterTag.class);
+
 
         parent.setPanes(this);
 

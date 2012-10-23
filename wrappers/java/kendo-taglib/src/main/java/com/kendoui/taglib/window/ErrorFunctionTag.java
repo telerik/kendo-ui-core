@@ -15,7 +15,9 @@ public class ErrorFunctionTag extends FunctionTag /* interfaces *//* interfaces 
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         WindowTag parent = (WindowTag)findParentWithClass(WindowTag.class);
+
 
         parent.setError(this);
 

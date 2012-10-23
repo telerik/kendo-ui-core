@@ -15,7 +15,9 @@ public class ContentLoadFunctionTag extends FunctionTag /* interfaces *//* inter
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         SplitterTag parent = (SplitterTag)findParentWithClass(SplitterTag.class);
+
 
         parent.setContentLoad(this);
 

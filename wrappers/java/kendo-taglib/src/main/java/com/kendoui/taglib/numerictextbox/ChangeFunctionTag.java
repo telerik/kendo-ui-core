@@ -15,7 +15,9 @@ public class ChangeFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         NumericTextBoxTag parent = (NumericTextBoxTag)findParentWithClass(NumericTextBoxTag.class);
+
 
         parent.setChange(this);
 

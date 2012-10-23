@@ -7885,7 +7885,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <description>Contains items of TabStrip</description>
         <name>tabStrip-item</name>
         <tag-class>com.kendoui.taglib.tabstrip.ItemTag</tag-class>
-        <body-content>JSP</body-content>
+        <body-content>empty</body-content>
 
         <attribute>
             <description>Specifies the text displayed by the item</description>

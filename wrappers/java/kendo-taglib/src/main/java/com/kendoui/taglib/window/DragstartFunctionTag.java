@@ -15,7 +15,9 @@ public class DragstartFunctionTag extends FunctionTag /* interfaces *//* interfa
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         WindowTag parent = (WindowTag)findParentWithClass(WindowTag.class);
+
 
         parent.setDragstart(this);
 

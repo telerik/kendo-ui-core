@@ -15,7 +15,9 @@ public class ExpandFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         SplitterTag parent = (SplitterTag)findParentWithClass(SplitterTag.class);
+
 
         parent.setExpand(this);
 

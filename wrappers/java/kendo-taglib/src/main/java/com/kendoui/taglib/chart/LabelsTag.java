@@ -15,7 +15,9 @@ public class LabelsTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         XAxisTag parent = (XAxisTag)findParentWithClass(XAxisTag.class);
+
 
         parent.setLabels(this);
 

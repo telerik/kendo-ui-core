@@ -15,7 +15,9 @@ public class DataBoundFunctionTag extends FunctionTag /* interfaces *//* interfa
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
+
 
         parent.setDataBound(this);
 

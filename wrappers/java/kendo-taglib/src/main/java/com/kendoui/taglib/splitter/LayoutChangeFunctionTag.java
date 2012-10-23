@@ -15,7 +15,9 @@ public class LayoutChangeFunctionTag extends FunctionTag /* interfaces *//* inte
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         SplitterTag parent = (SplitterTag)findParentWithClass(SplitterTag.class);
+
 
         parent.setLayoutChange(this);
 

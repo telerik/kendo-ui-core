@@ -95,6 +95,14 @@ JAVA_METHODS = %{
 //<< Attributes
 }
 
+JAVA_ITEMS_INTERFACE_TEMPLATE = ERB.new(%{
+package com.kendoui.taglib.<%= namespace %>;
+
+public interface Items {
+    void setItems(ItemsTag items);
+}
+})
+
 JAVA_WIDGET_TEMPLATE = ERB.new(%{
 package com.kendoui.taglib;
 
@@ -120,7 +128,12 @@ public class <%= java_type %> extends WidgetTag /* interfaces */ /* interfaces *
 JAVA_NESTED_TAG_TEMPLATE = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
 
+<% if is_item? %>
+import com.kendoui.taglib.BaseItemTag;
+<% else %>
 import com.kendoui.taglib.BaseTag;
+<% end %>
+
 <% if parent.namespace == parent.name.downcase %>
 import com.kendoui.taglib.<%= parent.java_type %>;
 <% end %>
@@ -132,7 +145,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class <%= java_type %> extends BaseTag /* interfaces */ /* interfaces */ {
+public class <%= java_type %> extends <% if is_item? %> BaseItemTag <% else %> BaseTag <% end %> /* interfaces */ /* interfaces */ {
     #{JAVA_METHODS}
 }
 })
@@ -156,8 +169,13 @@ public class <%= java_type %> extends FunctionTag /* interfaces */ /* interfaces
 JAVA_NESTED_TAG_ARRAY_TEMPLATE = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
 
+<% if is_item_container? %>
+import com.kendoui.taglib.ContentTag;
+<% else %>
 import com.kendoui.taglib.BaseTag;
-<% if parent.namespace == parent.name.downcase %>
+<% end %>
+
+<% if parent.namespace == parent.name.downcase && !is_item_container?%>
 import com.kendoui.taglib.<%= parent.java_type %>;
 <% end %>
 
@@ -168,7 +186,7 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class <%= java_type %> extends BaseTag /* interfaces */ /* interfaces */ {
+public class <%= java_type %> extends <% if is_item_container? %>ContentTag<% else %>BaseTag<% end %> /* interfaces */ /* interfaces */ {
     #{JAVA_METHODS}
 }
 })
@@ -238,7 +256,11 @@ JAVA_ARRAY_SETTER_TEMPLATE = ERB.new(%{
 })
 
 JAVA_PARENT_SETTER_TEMPLATE = ERB.new(%{
+<% if name == 'Items' %>
+        Items parent = (Items)findParentWithClass(Items.class);
+<% else %>
         <%= parent.java_type %> parent = (<%= parent.java_type %>)findParentWithClass(<%= parent.java_type %>.class);
+<% end %>
 
         parent.set<%= name %>(this);
 })
@@ -393,15 +415,19 @@ class Tag
     end
 
     def has_item_hierarchy?
-        has_items? && @name == 'Item' && namespace != 'tabstrip'
+        @name == 'Item' && namespace =~/panelbar|menu|treeview/
     end
 
     def has_item_content?
         has_items? && @name == 'Item'
     end
 
+    def is_item?
+        @name == 'Item' && namespace =~ /panelbar|menu|treeview|tabstrip/
+    end
+
     def has_items?
-        namespace =~ /panelbar|tabstrip|menu|treeview/
+        @name =~ /panelbar|menu|treeview|tabstrip/i || has_item_hierarchy?
     end
 
     def to_xml
@@ -438,10 +464,6 @@ class Tag
         end
     end
 
-    def generated_interfaces
-        @children.map{ |c| c.name }
-    end
-
     def add_implements_interfaces(code, interfaces)
         implements = 'implements ' + interfaces.join(", ") if interfaces.any?
 
@@ -461,10 +483,22 @@ class Tag
 
         $stderr.puts("Updating #{java_filename}") if VERBOSE
 
-        interfaces = [] # generated_interfaces
+        interfaces = []
 
         if @options.any? { |o| o.name == 'dataSource' }
             interfaces.push('DataBoundWidget')
+        end
+
+        if has_items?
+            interfaces.push('Items')
+
+            interface_filename =  "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{namespace}/Items.java"
+
+            ensure_path(interface_filename)
+
+            File.open(interface_filename, 'w') do |file|
+                file.write(JAVA_ITEMS_INTERFACE_TEMPLATE.result(binding))
+            end
         end
 
         java = add_implements_interfaces(java, interfaces)
@@ -742,6 +776,10 @@ class NestedTagArray < NestedTag
         @options = []
     end
 
+    def is_item_container?
+        return @child.is_item?
+    end
+
     def template
         JAVA_NESTED_TAG_ARRAY_TEMPLATE
     end
@@ -790,6 +828,17 @@ class NestedTagArrayItem < NestedTag
 
     def parent_setter_template
         JAVA_ARRAY_ADD_TO_PARENT_TEMPLATE
+    end
+
+    def java_attributes
+        return super if !has_item_hierarchy?
+
+        child = NestedTagArray.new :name => @parent.name,
+                            :description => @parent.description,
+                            :parent => self
+
+
+        JAVA_ARRAY_SETTER_TEMPLATE.result(binding) + super
     end
 end
 

@@ -15,7 +15,9 @@ public class ChangeFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         AutoCompleteTag parent = (AutoCompleteTag)findParentWithClass(AutoCompleteTag.class);
+
 
         parent.setChange(this);
 

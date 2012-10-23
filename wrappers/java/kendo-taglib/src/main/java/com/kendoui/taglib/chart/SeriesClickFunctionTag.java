@@ -15,7 +15,9 @@ public class SeriesClickFunctionTag extends FunctionTag /* interfaces *//* inter
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
+
 
         parent.setSeriesClick(this);
 

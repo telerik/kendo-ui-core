@@ -15,7 +15,9 @@ public class ActivateFunctionTag extends FunctionTag /* interfaces *//* interfac
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         TabStripTag parent = (TabStripTag)findParentWithClass(TabStripTag.class);
+
 
         parent.setActivate(this);
 

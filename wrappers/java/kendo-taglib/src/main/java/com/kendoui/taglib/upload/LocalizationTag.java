@@ -17,7 +17,9 @@ public class LocalizationTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         UploadTag parent = (UploadTag)findParentWithClass(UploadTag.class);
+
 
         parent.setLocalization(this);
 

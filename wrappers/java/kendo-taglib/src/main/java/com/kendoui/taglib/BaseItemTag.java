@@ -1,7 +1,9 @@
 package com.kendoui.taglib;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
@@ -15,9 +17,22 @@ import com.kendoui.taglib.html.Ul;
 @SuppressWarnings("serial")
 public abstract class BaseItemTag extends BaseTag {
     
-    protected abstract List<?> items();
+    protected List<Map<String,Object>> items;
+    
     protected abstract String getText();
     protected abstract String getSpriteCssClass();
+    
+    @Override
+    public void initialize() {
+        items = new ArrayList<Map<String,Object>>();
+        super.initialize();
+    }
+    
+    @Override
+    public void destroy() {
+        items = null;
+        super.destroy();
+    }
     
     protected void renderContents(Li element) {
         String spriteCssClass = getSpriteCssClass();
@@ -55,7 +70,7 @@ public abstract class BaseItemTag extends BaseTag {
     protected void appendContent(Element<?> element, String html) {
         Element<?> contentElement;
 
-        if (items().size() > 0) {
+        if (items.size() > 0) {
             contentElement = new Ul();
         } else {
             contentElement = new Div();

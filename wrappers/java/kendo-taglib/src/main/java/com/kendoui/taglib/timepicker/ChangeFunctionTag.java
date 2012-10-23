@@ -15,7 +15,9 @@ public class ChangeFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         TimePickerTag parent = (TimePickerTag)findParentWithClass(TimePickerTag.class);
+
 
         parent.setChange(this);
 

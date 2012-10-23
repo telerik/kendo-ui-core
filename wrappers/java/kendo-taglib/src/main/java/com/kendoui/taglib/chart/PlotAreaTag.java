@@ -17,7 +17,9 @@ public class PlotAreaTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
+
 
         parent.setPlotArea(this);
 

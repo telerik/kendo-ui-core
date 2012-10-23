@@ -17,7 +17,9 @@ public class MonthTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         CalendarTag parent = (CalendarTag)findParentWithClass(CalendarTag.class);
+
 
         parent.setMonth(this);
 

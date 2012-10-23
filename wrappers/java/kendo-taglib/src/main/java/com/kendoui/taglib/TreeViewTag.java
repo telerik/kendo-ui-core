@@ -10,7 +10,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements DataBoundWidget/* interfaces */ {
+public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements DataBoundWidget, Items/* interfaces */ {
 
     public TreeViewTag() {
         super("TreeView");

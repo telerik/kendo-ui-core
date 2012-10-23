@@ -17,7 +17,9 @@ public class MessagesTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         PagerTag parent = (PagerTag)findParentWithClass(PagerTag.class);
+
 
         parent.setMessages(this);
 

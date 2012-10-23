@@ -17,7 +17,9 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         WindowTag parent = (WindowTag)findParentWithClass(WindowTag.class);
+
 
         parent.setAnimation(this);
 

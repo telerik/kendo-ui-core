@@ -15,7 +15,9 @@ public class ChangeFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         SliderTag parent = (SliderTag)findParentWithClass(SliderTag.class);
+
 
         parent.setChange(this);
 

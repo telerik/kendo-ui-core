@@ -15,7 +15,9 @@ public class DetailInitFunctionTag extends FunctionTag /* interfaces *//* interf
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         GridTag parent = (GridTag)findParentWithClass(GridTag.class);
+
 
         parent.setDetailInit(this);
 

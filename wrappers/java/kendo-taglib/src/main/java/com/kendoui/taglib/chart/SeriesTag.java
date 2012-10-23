@@ -19,7 +19,9 @@ public class SeriesTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
+
 
         parent.setSeries(this);
 

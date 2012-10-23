@@ -15,7 +15,9 @@ public class MajorTicksTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ValueAxisTag parent = (ValueAxisTag)findParentWithClass(ValueAxisTag.class);
+
 
         parent.setMajorTicks(this);
 

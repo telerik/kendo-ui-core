@@ -17,7 +17,9 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         DateTimePickerTag parent = (DateTimePickerTag)findParentWithClass(DateTimePickerTag.class);
+
 
         parent.setAnimation(this);
 

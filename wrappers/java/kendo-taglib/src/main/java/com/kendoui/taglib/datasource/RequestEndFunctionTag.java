@@ -15,7 +15,9 @@ public class RequestEndFunctionTag extends FunctionTag /* interfaces *//* interf
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
+
 
         parent.setRequestEnd(this);
 

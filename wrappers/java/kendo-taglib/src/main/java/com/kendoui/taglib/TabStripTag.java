@@ -12,7 +12,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TabStripTag extends WidgetWithItemsTag /* interfaces *//* interfaces */ {
+public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements Items/* interfaces */ {
 
     public TabStripTag() {
         super("TabStrip");

@@ -17,7 +17,9 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ComboBoxTag parent = (ComboBoxTag)findParentWithClass(ComboBoxTag.class);
+
 
         parent.setAnimation(this);
 

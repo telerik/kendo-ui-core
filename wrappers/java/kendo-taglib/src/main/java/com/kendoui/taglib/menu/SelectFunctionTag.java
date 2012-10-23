@@ -15,7 +15,9 @@ public class SelectFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         MenuTag parent = (MenuTag)findParentWithClass(MenuTag.class);
+
 
         parent.setSelect(this);
 

@@ -15,7 +15,9 @@ public class MarkersTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
+
 
         parent.setMarkers(this);
 

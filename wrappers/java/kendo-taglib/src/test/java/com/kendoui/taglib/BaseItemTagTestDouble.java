@@ -1,7 +1,5 @@
 package com.kendoui.taglib;
 
-import java.util.List;
-
 @SuppressWarnings("serial")
 public class BaseItemTagTestDouble extends BaseItemTag {
     
@@ -10,11 +8,6 @@ public class BaseItemTagTestDouble extends BaseItemTag {
 
     public static String tagName() {
         return "baseTagTestDouble";
-    }
-
-    @Override
-    protected List<?> items() {
-        return null;
     }
 
     @Override

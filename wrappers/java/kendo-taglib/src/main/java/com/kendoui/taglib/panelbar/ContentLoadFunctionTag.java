@@ -15,7 +15,9 @@ public class ContentLoadFunctionTag extends FunctionTag /* interfaces *//* inter
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         PanelBarTag parent = (PanelBarTag)findParentWithClass(PanelBarTag.class);
+
 
         parent.setContentLoad(this);
 

@@ -15,7 +15,9 @@ public class OpenFunctionTag extends FunctionTag /* interfaces *//* interfaces *
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         DropDownListTag parent = (DropDownListTag)findParentWithClass(DropDownListTag.class);
+
 
         parent.setOpen(this);
 

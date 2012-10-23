@@ -15,7 +15,9 @@ public class PlotAreaClickFunctionTag extends FunctionTag /* interfaces *//* int
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
+
 
         parent.setPlotAreaClick(this);
 

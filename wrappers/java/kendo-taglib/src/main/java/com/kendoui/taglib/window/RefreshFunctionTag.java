@@ -15,7 +15,9 @@ public class RefreshFunctionTag extends FunctionTag /* interfaces *//* interface
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         WindowTag parent = (WindowTag)findParentWithClass(WindowTag.class);
+
 
         parent.setRefresh(this);
 

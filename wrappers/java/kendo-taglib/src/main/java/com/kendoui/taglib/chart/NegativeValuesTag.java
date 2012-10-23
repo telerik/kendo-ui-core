@@ -15,7 +15,9 @@ public class NegativeValuesTag extends BaseTag /* interfaces *//* interfaces */ 
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
+
 
         parent.setNegativeValues(this);
 

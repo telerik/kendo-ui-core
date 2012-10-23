@@ -15,7 +15,9 @@ public class DataBoundFunctionTag extends FunctionTag /* interfaces *//* interfa
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         AutoCompleteTag parent = (AutoCompleteTag)findParentWithClass(AutoCompleteTag.class);
+
 
         parent.setDataBound(this);
 

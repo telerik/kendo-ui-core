@@ -15,7 +15,9 @@ public class KeydownFunctionTag extends FunctionTag /* interfaces *//* interface
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         EditorTag parent = (EditorTag)findParentWithClass(EditorTag.class);
+
 
         parent.setKeydown(this);
 

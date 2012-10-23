@@ -17,7 +17,9 @@ public class TooltipTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         RangeSliderTag parent = (RangeSliderTag)findParentWithClass(RangeSliderTag.class);
+
 
         parent.setTooltip(this);
 

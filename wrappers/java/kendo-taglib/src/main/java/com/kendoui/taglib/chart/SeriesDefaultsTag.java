@@ -17,7 +17,9 @@ public class SeriesDefaultsTag extends BaseTag /* interfaces *//* interfaces */ 
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
+
 
         parent.setSeriesDefaults(this);
 

@@ -15,7 +15,9 @@ public class OpenFunctionTag extends FunctionTag /* interfaces *//* interfaces *
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         DateTimePickerTag parent = (DateTimePickerTag)findParentWithClass(DateTimePickerTag.class);
+
 
         parent.setOpen(this);
 

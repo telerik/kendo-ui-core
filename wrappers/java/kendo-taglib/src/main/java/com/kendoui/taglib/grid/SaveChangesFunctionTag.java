@@ -15,7 +15,9 @@ public class SaveChangesFunctionTag extends FunctionTag /* interfaces *//* inter
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         GridTag parent = (GridTag)findParentWithClass(GridTag.class);
+
 
         parent.setSaveChanges(this);
 

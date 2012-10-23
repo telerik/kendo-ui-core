@@ -15,7 +15,9 @@ public class CloseFunctionTag extends FunctionTag /* interfaces *//* interfaces 
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ComboBoxTag parent = (ComboBoxTag)findParentWithClass(ComboBoxTag.class);
+
 
         parent.setClose(this);
 

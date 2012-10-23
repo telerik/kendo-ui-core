@@ -15,7 +15,9 @@ public class TrackTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         PointerTag parent = (PointerTag)findParentWithClass(PointerTag.class);
+
 
         parent.setTrack(this);
 

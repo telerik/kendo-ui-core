@@ -15,7 +15,9 @@ public class TemplateFunctionTag extends FunctionTag /* interfaces *//* interfac
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ListViewTag parent = (ListViewTag)findParentWithClass(ListViewTag.class);
+
 
         parent.setTemplate(this);
 

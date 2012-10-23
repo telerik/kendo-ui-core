@@ -1,9 +1,10 @@
 
 package com.kendoui.taglib.panelbar;
 
-import com.kendoui.taglib.BaseTag;
 
-import com.kendoui.taglib.PanelBarTag;
+import com.kendoui.taglib.ContentTag;
+
+
 
 
 import java.util.ArrayList;
@@ -13,13 +14,15 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ItemsTag extends BaseTag /* interfaces *//* interfaces */ {
+public class ItemsTag extends ContentTag /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        PanelBarTag parent = (PanelBarTag)findParentWithClass(PanelBarTag.class);
+
+        Items parent = (Items)findParentWithClass(Items.class);
+
 
         parent.setItems(this);
 

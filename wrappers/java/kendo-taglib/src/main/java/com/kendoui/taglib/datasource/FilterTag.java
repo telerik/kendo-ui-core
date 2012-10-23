@@ -19,7 +19,9 @@ public class FilterTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
+
 
         parent.setFilter(this);
 

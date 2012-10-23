@@ -15,7 +15,9 @@ public class ActivateFunctionTag extends FunctionTag /* interfaces *//* interfac
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         PanelBarTag parent = (PanelBarTag)findParentWithClass(PanelBarTag.class);
+
 
         parent.setActivate(this);
 

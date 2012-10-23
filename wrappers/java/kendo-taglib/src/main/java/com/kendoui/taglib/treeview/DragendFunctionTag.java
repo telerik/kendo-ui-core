@@ -15,7 +15,9 @@ public class DragendFunctionTag extends FunctionTag /* interfaces *//* interface
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         TreeViewTag parent = (TreeViewTag)findParentWithClass(TreeViewTag.class);
+
 
         parent.setDragend(this);
 

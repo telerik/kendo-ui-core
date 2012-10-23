@@ -15,7 +15,9 @@ public class CollapseFunctionTag extends FunctionTag /* interfaces *//* interfac
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         TreeViewTag parent = (TreeViewTag)findParentWithClass(TreeViewTag.class);
+
 
         parent.setCollapse(this);
 

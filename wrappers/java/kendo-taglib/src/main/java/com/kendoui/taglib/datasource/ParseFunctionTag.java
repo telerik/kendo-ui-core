@@ -13,7 +13,9 @@ public class ParseFunctionTag extends FunctionTag /* interfaces *//* interfaces 
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         SchemaTag parent = (SchemaTag)findParentWithClass(SchemaTag.class);
+
 
         parent.setParse(this);
 

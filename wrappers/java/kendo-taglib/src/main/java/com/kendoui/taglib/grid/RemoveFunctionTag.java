@@ -15,7 +15,9 @@ public class RemoveFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         GridTag parent = (GridTag)findParentWithClass(GridTag.class);
+
 
         parent.setRemove(this);
 

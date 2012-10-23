@@ -17,7 +17,9 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         DropDownListTag parent = (DropDownListTag)findParentWithClass(DropDownListTag.class);
+
 
         parent.setAnimation(this);
 

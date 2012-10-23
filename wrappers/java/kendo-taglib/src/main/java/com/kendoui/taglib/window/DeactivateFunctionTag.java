@@ -15,7 +15,9 @@ public class DeactivateFunctionTag extends FunctionTag /* interfaces *//* interf
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         WindowTag parent = (WindowTag)findParentWithClass(WindowTag.class);
+
 
         parent.setDeactivate(this);
 

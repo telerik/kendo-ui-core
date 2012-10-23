@@ -15,7 +15,9 @@ public class ExpandFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         PanelBarTag parent = (PanelBarTag)findParentWithClass(PanelBarTag.class);
+
 
         parent.setExpand(this);
 

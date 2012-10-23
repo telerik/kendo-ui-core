@@ -15,7 +15,9 @@ public class SuccessFunctionTag extends FunctionTag /* interfaces *//* interface
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         UploadTag parent = (UploadTag)findParentWithClass(UploadTag.class);
+
 
         parent.setSuccess(this);
 

@@ -15,7 +15,9 @@ public class CollapseTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         AnimationTag parent = (AnimationTag)findParentWithClass(AnimationTag.class);
+
 
         parent.setCollapse(this);
 

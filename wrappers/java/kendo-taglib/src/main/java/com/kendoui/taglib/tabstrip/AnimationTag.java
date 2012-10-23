@@ -17,7 +17,9 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         TabStripTag parent = (TabStripTag)findParentWithClass(TabStripTag.class);
+
 
         parent.setAnimation(this);
 

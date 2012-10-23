@@ -15,7 +15,9 @@ public class NavigateFunctionTag extends FunctionTag /* interfaces *//* interfac
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         CalendarTag parent = (CalendarTag)findParentWithClass(CalendarTag.class);
+
 
         parent.setNavigate(this);
 

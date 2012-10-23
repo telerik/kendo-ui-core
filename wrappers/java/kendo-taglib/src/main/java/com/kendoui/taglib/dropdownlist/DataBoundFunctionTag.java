@@ -15,7 +15,9 @@ public class DataBoundFunctionTag extends FunctionTag /* interfaces *//* interfa
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         DropDownListTag parent = (DropDownListTag)findParentWithClass(DropDownListTag.class);
+
 
         parent.setDataBound(this);
 

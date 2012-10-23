@@ -15,7 +15,9 @@ public class RemoveFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ListViewTag parent = (ListViewTag)findParentWithClass(ListViewTag.class);
+
 
         parent.setRemove(this);
 

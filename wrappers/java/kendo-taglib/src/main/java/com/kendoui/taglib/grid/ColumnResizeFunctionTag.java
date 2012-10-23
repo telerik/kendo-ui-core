@@ -15,7 +15,9 @@ public class ColumnResizeFunctionTag extends FunctionTag /* interfaces *//* inte
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         GridTag parent = (GridTag)findParentWithClass(GridTag.class);
+
 
         parent.setColumnResize(this);
 

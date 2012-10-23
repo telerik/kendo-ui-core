@@ -15,7 +15,9 @@ public class BorderTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         LabelsTag parent = (LabelsTag)findParentWithClass(LabelsTag.class);
+
 
         parent.setBorder(this);
 

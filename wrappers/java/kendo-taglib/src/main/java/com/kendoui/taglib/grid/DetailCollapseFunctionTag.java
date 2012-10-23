@@ -15,7 +15,9 @@ public class DetailCollapseFunctionTag extends FunctionTag /* interfaces *//* in
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         GridTag parent = (GridTag)findParentWithClass(GridTag.class);
+
 
         parent.setDetailCollapse(this);
 

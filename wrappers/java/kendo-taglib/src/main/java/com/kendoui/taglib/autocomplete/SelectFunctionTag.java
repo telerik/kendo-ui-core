@@ -15,7 +15,9 @@ public class SelectFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         AutoCompleteTag parent = (AutoCompleteTag)findParentWithClass(AutoCompleteTag.class);
+
 
         parent.setSelect(this);
 

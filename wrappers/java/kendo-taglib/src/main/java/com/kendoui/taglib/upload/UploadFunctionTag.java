@@ -15,7 +15,9 @@ public class UploadFunctionTag extends FunctionTag /* interfaces *//* interfaces
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         UploadTag parent = (UploadTag)findParentWithClass(UploadTag.class);
+
 
         parent.setUpload(this);
 

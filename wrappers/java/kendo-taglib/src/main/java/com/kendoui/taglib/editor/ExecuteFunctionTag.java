@@ -15,7 +15,9 @@ public class ExecuteFunctionTag extends FunctionTag /* interfaces *//* interface
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         EditorTag parent = (EditorTag)findParentWithClass(EditorTag.class);
+
 
         parent.setExecute(this);
 

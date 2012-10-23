@@ -15,7 +15,9 @@ public class ContentLoadFunctionTag extends FunctionTag /* interfaces *//* inter
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         TabStripTag parent = (TabStripTag)findParentWithClass(TabStripTag.class);
+
 
         parent.setContentLoad(this);
 

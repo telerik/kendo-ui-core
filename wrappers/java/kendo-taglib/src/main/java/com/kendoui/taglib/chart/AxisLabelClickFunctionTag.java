@@ -15,7 +15,9 @@ public class AxisLabelClickFunctionTag extends FunctionTag /* interfaces *//* in
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
+
 
         parent.setAxisLabelClick(this);
 

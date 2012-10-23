@@ -12,7 +12,9 @@ public class CreateTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         TransportTag parent = (TransportTag)findParentWithClass(TransportTag.class);
+
 
         parent.setCreate(this);
 

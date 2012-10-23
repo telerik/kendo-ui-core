@@ -12,7 +12,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MenuTag extends WidgetWithItemsTag /* interfaces *//* interfaces */ {
+public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items/* interfaces */ {
 
     public MenuTag() {
         super("Menu");

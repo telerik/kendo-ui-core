@@ -15,7 +15,9 @@ public class PasteFunctionTag extends FunctionTag /* interfaces *//* interfaces 
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         EditorTag parent = (EditorTag)findParentWithClass(EditorTag.class);
+
 
         parent.setPaste(this);
 

@@ -15,7 +15,9 @@ public class MinorGridLinesTag extends BaseTag /* interfaces *//* interfaces */ 
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ValueAxisTag parent = (ValueAxisTag)findParentWithClass(ValueAxisTag.class);
+
 
         parent.setMinorGridLines(this);
 

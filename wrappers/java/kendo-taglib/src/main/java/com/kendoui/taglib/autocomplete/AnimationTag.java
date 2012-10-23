@@ -17,7 +17,9 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         AutoCompleteTag parent = (AutoCompleteTag)findParentWithClass(AutoCompleteTag.class);
+
 
         parent.setAnimation(this);
 

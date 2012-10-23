@@ -15,7 +15,9 @@ public class ProgressFunctionTag extends FunctionTag /* interfaces *//* interfac
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         UploadTag parent = (UploadTag)findParentWithClass(UploadTag.class);
+
 
         parent.setProgress(this);
 

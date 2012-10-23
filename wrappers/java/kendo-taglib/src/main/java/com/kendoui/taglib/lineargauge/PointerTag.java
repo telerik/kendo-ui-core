@@ -17,7 +17,9 @@ public class PointerTag extends BaseTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         LinearGaugeTag parent = (LinearGaugeTag)findParentWithClass(LinearGaugeTag.class);
+
 
         parent.setPointer(this);
 

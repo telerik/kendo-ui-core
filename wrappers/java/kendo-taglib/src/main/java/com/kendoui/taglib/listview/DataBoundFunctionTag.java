@@ -15,7 +15,9 @@ public class DataBoundFunctionTag extends FunctionTag /* interfaces *//* interfa
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         ListViewTag parent = (ListViewTag)findParentWithClass(ListViewTag.class);
+
 
         parent.setDataBound(this);
 

@@ -15,7 +15,9 @@ public class SyncFunctionTag extends FunctionTag /* interfaces *//* interfaces *
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+
         DataSourceTag parent = (DataSourceTag)findParentWithClass(DataSourceTag.class);
+
 
         parent.setSync(this);
 
