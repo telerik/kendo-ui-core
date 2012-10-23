@@ -1,22 +1,16 @@
 (function ($, undefined) {
     var kendo = window.kendo,
+        EventProxy = kendo.EventProxy,
         support = kendo.support,
         pointers = support.pointers,
         document = window.document,
         SURFACE = $(document.documentElement),
         Class = kendo.Class,
         Observable = kendo.Observable,
-        proxy = $.proxy,
         now = $.now,
         extend = $.extend,
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
-        START_EVENTS = "touchstart mousedown",
-        MOVE_EVENTS = "mousemove touchmove",
-        END_EVENTS = "mouseup mouseleave touchend touchcancel",
-
-        // Event namespace
-        NS = ".kendoUserEvents",
 
         // UserEvents events
         PRESS = "press",
@@ -29,54 +23,6 @@
         GESTURECHANGE = "gesturechange",
         GESTUREEND = "gestureend",
         GESTURETAP = "gesturetap";
-
-    if (support.ignoreMouseEvents) {
-        START_EVENTS = "touchstart";
-        MOVE_EVENTS = "touchmove";
-        END_EVENTS = "touchend touchcancel";
-    }
-
-    if (pointers) {
-        START_EVENTS = "MSPointerDown";
-        MOVE_EVENTS = "MSPointerMove";
-        END_EVENTS = "MSPointerUp MSPointerCancel";
-    }
-
-    var DOMEvents = {
-        down: "touchstart mousedown",
-        move: "mousemove touchmove",
-        up: "mouseup touchend",
-        cancel: "mouseleave touchcancel"
-    };
-
-    var slice = Array.prototype.slice,
-        on = $.fn.on;
-
-    function addNS(events) {
-        return events.replace(/(\w+)/g, "$1" + NS);
-    }
-
-    function EventProxy(element, handler) {
-        this.element = element;
-        this.handler = handler;
-    }
-
-    EventProxy.prototype = {
-        on: function() {
-            var that = this,
-                handler = that.handler,
-                args = slice.call(arguments),
-                method = handler[args[args.length - 1]],
-                handler = function(e) {
-                    method.call(handler, e);
-                };
-
-            args[0] = args[0].replace(/\w+/g, function(e) { return DOMEvents[e] || e; });
-            args[args.length - 1] = handler;
-
-            on.apply(that.element, args);
-        }
-    }
 
     function preventTrigger(e) {
         e.preventDefault();
@@ -285,7 +231,6 @@
             this._trigger(START, touchInfo);
         },
 
-
         _trigger: function(name, touchInfo) {
             var that = this,
                 jQueryEvent = touchInfo.event,
@@ -315,7 +260,8 @@
             var that = this,
                 filter,
                 preventIfMoving,
-                eventMap = {};
+                surfaceProxy,
+                elementProxy;
 
             options = options || {};
             filter = that.filter = options.filter;
@@ -327,36 +273,30 @@
             Observable.fn.init.call(that);
 
             extend(that, {
-                eventMap: eventMap,
                 element: element,
                 surface: options.global ? SURFACE : options.surface || element,
                 stopPropagation: options.stopPropagation,
                 pressed: false
             });
 
-            eventMap[MOVE_EVENTS] = function(e) { that._move(e); };
-            eventMap[END_EVENTS] = function(e) { that._end(e); };
+            that.surfaceProxy = surfaceProxy = new EventProxy(that.surface, that);
+            surfaceProxy.on("move", "_move");
+            surfaceProxy.on("up cancel", "_end");
 
-            element.on(addNS(START_EVENTS), filter, proxy(that._start, that));
+            that.elementProxy = elementProxy = new EventProxy(element, that);
 
-            that.surface.on(eventMap);
+            elementProxy.on("down", filter, "_start");
 
             if (pointers) {
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
             }
 
             if (options.preventDragEvent) {
-                element.on(addNS("dragstart"), false);
+                elementProxy.on("dragstart", kendo.preventDefault);
             }
 
             if (!options.allowSelection) {
-                var args = [addNS("mousedown selectstart"), filter, preventTrigger];
-
-                if (filter instanceof $) {
-                    args.splice(2, 0, null);
-                }
-
-                element.on.apply(element, args);
+                elementProxy.on("mousedown selectstart", filter, preventTrigger);
             }
 
             if (support.eventCapture) {
@@ -383,8 +323,8 @@
         },
 
         destroy: function() {
-            this.element.off(NS);
-            this.surface.off(this.eventMap);
+            this.elementProxy.off();
+            this.surfaceProxy.off();
             this._disposeAll();
         },
 
@@ -553,5 +493,4 @@
     kendo.getTouches = getTouches;
     kendo.touchDelta = touchDelta;
     kendo.UserEvents = UserEvents;
-    kendo.EventProxy = EventProxy;
  })(jQuery);

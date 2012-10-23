@@ -2580,4 +2580,101 @@ function pad(number, digits, end) {
             return focusable(element, !isNaN(idx) && idx > -1);
         }
     });
+
+    var DOMEvents = {
+        down: "touchstart mousedown",
+        move: "mousemove touchmove",
+        up: "mouseup touchend",
+        cancel: "mouseleave touchcancel"
+    };
+
+    if (support.pointers) {
+        DOMEvents = {
+            down: "MSPointerDown",
+            move: "MSPointerMove",
+            up: "MSPointerUp",
+            cancel: "MSPointerCancel"
+        };
+    }
+
+    var off = $.fn.off,
+        on = $.fn.on;
+
+    function EventProxy(element, handler) {
+        var that = this;
+        that.element = $(element);
+        that.handler = handler;
+        that.handlers = [];
+        that.mute = false;
+        that._touchStartProxy = $.proxy(that, "_touchStart");
+        that._touchEndProxy = $.proxy(that, "_touchEnd");
+
+        that.element.on("touchstart", that._touchStartProxy);
+        that.element.on("touchend", that._touchEndProxy);
+    }
+
+    EventProxy.prototype = {
+        on: function() {
+            var that = this,
+                handler = that.handler,
+                args = slice.call(arguments),
+                callback =  args[args.length - 1],
+                callbackIsFunction = $.isFunction(callback),
+                handlerProxy = callback;
+
+            args[0] = args[0].replace(/\w+/g, function(e) { return DOMEvents[e] || e; });
+
+            if (!callbackIsFunction) {
+                callback = handler[callback];
+
+                if (args[0].indexOf("mouse") > -1) {
+                    handlerProxy = function(e) {
+                        if (!(that.mute && e.type.indexOf("mouse") > -1)) {
+                            callback.call(handler, e);
+                        }
+                    };
+                } else {
+                    handlerProxy = function(e) {
+                        callback.call(handler, e);
+                    };
+                }
+            }
+
+            args[args.length - 1] = handlerProxy;
+
+            that.handlers.push(args);
+            on.apply(that.element, args);
+        },
+
+        off: function() {
+            var that = this,
+                handlers = this.handlers,
+                element = that.element,
+                length = handlers.length,
+                idx = 0;
+
+            for(; idx < length; idx ++) {
+                off.apply(element, handlers[idx]);
+            }
+        },
+
+        _touchStart: function(e) {
+            var that = this;
+            if (that.timeoutID) {
+                clearTimeout(that.timeoutID);
+                that.timeoutID = null;
+            }
+
+            that.mute = true;
+        },
+
+        _touchEnd: function(e) {
+            var that = this;
+            that.timeoutID = setTimeout(function() {
+                that.mute = false;
+            }, 400);
+        }
+    };
+
+    kendo.EventProxy = EventProxy;
 })(jQuery);
