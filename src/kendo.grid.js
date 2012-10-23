@@ -1492,7 +1492,7 @@
         _groupable: function() {
             var that = this;
 
-            if (!that.options.groupable) {
+            if (!that.groupable) {
                 that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", function(e) {
                     var element = $(this),
                     group = element.closest("tr");
