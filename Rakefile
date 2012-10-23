@@ -96,10 +96,10 @@ bundle :name => 'trial',
        :contents => {
             'js' => TRIAL_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
-       }.merge(MVC_CONTENT).merge(JSP_CONTENT),
+       }.merge(MVC_CONTENT), #.merge(JSP_CONTENT),
        :prerequisites => [
-           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
-           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
+#           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+#           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
            'mvc:assets',
            'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
        ]
