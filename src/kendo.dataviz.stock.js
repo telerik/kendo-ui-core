@@ -289,7 +289,7 @@
         );
 
         Navigator.attachAxes(options);
-        Navigator.attachSeries(options, naviOptions);
+        Navigator.attachSeries(options, naviOptions, themeOptions);
     };
 
     Navigator.attachAxes = function(options) {
@@ -349,15 +349,18 @@
         });
     };
 
-    Navigator.attachSeries = function(options, naviOptions) {
+    Navigator.attachSeries = function(options, naviOptions, themeOptions) {
         var series = options.series = options.series || [],
             navigatorSeries = [].concat(naviOptions.series),
+            seriesColors = themeOptions.seriesColors,
             defaults = naviOptions.seriesDefaults,
             i;
 
         for (i = 0; i < navigatorSeries.length; i++) {
             series.push(
-                deepExtend({}, defaults, navigatorSeries[i], {
+                deepExtend({
+                    color: seriesColors[i % seriesColors.length]
+                }, defaults, navigatorSeries[i], {
                     axis: NAVIGATOR_AXIS,
                     categoryAxis: NAVIGATOR_AXIS
                 })
