@@ -2,8 +2,9 @@
     var Application,
         doc = document,
         extend = $.extend,
+        kendo = window.kendo,
+        less = window.less,
         DETAILHANDLE = ".detailHandle",
-        pushState = "pushState" in history,
         docsAnimation = {
             show: {
                 effects: "expandVertical fadeIn",
@@ -29,8 +30,18 @@
             }
         },
         initialFolder = location.href.match(/\//g).length,
-        referenceUrl = "",
-        skinRegex = /kendo\.\w+(\.min)?\.css/i;
+        skinRegex = /kendo\.\w+(\.min)?\.css/i,
+        supports = {
+            sessionStorage: (function() {
+                // try-catch for obscure cases that do not allow "sessionStorage" in window
+                try {
+                    return !!sessionStorage.getItem;
+                } catch(e) {
+                    return false;
+                }
+            })(),
+            pushState: ("pushState" in history)
+        };
 
     Application = {
         load: function(href) {
@@ -38,9 +49,9 @@
 
             Application.fetch(href);
 
-            try {
+            if (supports.pushState) {
                 history.pushState({ href: href }, null, href);
-            } catch(err) {}
+            }
         },
 
         loadWidget: function(href) {
@@ -48,9 +59,9 @@
 
             this.fetchWidget(href);
 
-            try {
+            if (supports.pushState) {
                 history.pushState({ href: href }, null, href);
-            } catch(err) {}
+            }
         },
 
         fetch: function(href, forced) {
@@ -224,7 +235,7 @@
         init: function() {
             $("#exampleWrap").css("visibility", "visible");
 
-            if (pushState) {
+            if (supports.pushState) {
                 $(doc)
                     .on("click", "#examples-nav li a", function(e) {
                         var element = $(this),
@@ -356,38 +367,30 @@
         }
     };
 
-    var initialRelativePath = getInitialStylePath(),
-        kendoSkin = "default";
+    var kendoSkin = "default";
 
     window.kendoMobileOS = "ios";
 
     $(Application.init);
 
-    function getInitialStylePath() {
-        var head = doc.getElementsByTagName("head")[0];
-        return head.innerHTML.match(/href=\W(.*)examples(\.min)?\.css/i)[1];
-    }
-
     var mobileClasses = "km-ios km-android km-blackberry km-ios4";
 
     function applyCurrentTheme() {
-        try {
-            if (sessionStorage && sessionStorage.length) {
-                kendoSkin = sessionStorage.getItem("kendoSkin");
+        if (supports.sessionStorage) {
+            kendoSkin = sessionStorage.getItem("kendoSkin");
 
-                if (kendoSkin) {
-                    Application.changeTheme(kendoSkin);
-                }
+            if (kendoSkin) {
+                Application.changeTheme(kendoSkin);
             }
-        } catch(err) {}
+        }
     }
 
     function applyCurrentMobileOS(container) {
-        try {
-            if (sessionStorage && sessionStorage.length) {
-                kendoMobileOS = sessionStorage.getItem("kendoMobileOS") || kendoMobileOS;
-            }
-        } catch(err) {}
+        var kendoMobileOS = window.kendoMobileOS;
+
+        if (supports.sessionStorage) {
+            window.kendoMobileOS = sessionStorage.getItem("kendoMobileOS") || kendoMobileOS;
+        }
 
         $(container).removeClass(mobileClasses).addClass("km-" + kendoMobileOS);
         $("#device-wrapper").removeClass("ios android blackberry").addClass(kendoMobileOS);
@@ -436,7 +439,8 @@
 
         deviceList.find(".osName,.osThumb").click(function () {
             var li = $(this).closest("li");
-            try {
+
+            if (supports.sessionStorage) {
                 if (sessionStorage.getItem("kendoMobileOS") === li.children(".osThumb").text()) {
                     return;
                 }
@@ -447,7 +451,7 @@
                   .end().addClass("selectedThumb");
 
                 Application.fetch(location.href, true);
-            } catch(err) {}
+            }
         });
 
        return this;
@@ -469,17 +473,17 @@
             changeTheme = function(theme) {
                 Application.changeTheme(theme, true);
 
-                try {
+                if (supports.sessionStorage) {
                     sessionStorage.setItem("kendoSkin", theme);
-                } catch(err) {}
+                }
             };
 
         return this.each(function() {
             var theme;
 
-            try {
+            if (supports.sessionStorage) {
                 theme = sessionStorage.getItem("kendoSkin");
-            } catch(err) {}
+            }
 
             theme = theme || "default";
 
