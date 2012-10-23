@@ -118,7 +118,10 @@
             },
             navigator: {
                 pane: {
-                    height: 80
+                    height: 90,
+                    margin: {
+                        top: 10
+                    }
                 }
             }
         };
