@@ -6460,11 +6460,11 @@
                 selectionStart = options.start,
                 selectionEnd = options.end;
 
-            if (!defined(start)) {
+            if (start === null || !isFinite(start)) {
                 start = selectionStart;
             }
 
-            if (!defined(end)) {
+            if (start === null || !isFinite(end)) {
                 end = selectionEnd;
             }
 
