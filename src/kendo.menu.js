@@ -699,7 +699,7 @@
                 return;
             }
 
-            if (!e.handled && !isLink && !that.trigger(SELECT, { item: element[0] }) && !formNode) { // We shouldn't stop propagation and shoudn't prevent form elements.
+            if (!e.handled && that.trigger(SELECT, { item: element[0] }) && !formNode) { // We shouldn't stop propagation and shoudn't prevent form elements.
                 e.preventDefault();
             }
 
