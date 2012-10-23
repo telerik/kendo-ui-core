@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.buffer.CircularFifoBuffer;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -29,6 +30,7 @@ public class DataSourceRequest {
     private int skip;
     private List<SortDescriptor> sort;
     private List<GroupDescriptor> group;
+    private List<AggregateDescriptor> aggregate;
     
     private FilterDescriptor filter;
     
@@ -236,7 +238,6 @@ public class DataSourceRequest {
     	return result;
     }
 
-    @SuppressWarnings("serial")
     private List<Object> createGroupItem(Boolean hasSubgroups, Class<?> clazz, final Session session, ArrayList<Map<String, Object>> result,
             List<AggregateDescriptor> aggregates,
             final String field, 
@@ -264,44 +265,49 @@ public class DataSourceRequest {
                     criteria.add(simpleExpression);
                 }
             }
+            criteria.add(currentRestriction);
             
-            groupItem.put("aggregates", criteria
-                    .add(currentRestriction)                    
-                    .setProjection(createAggregatesProjection(aggregates))                    
-                    .setResultTransformer(new ResultTransformer() {                                    
-                        @Override
-                        public Object transformTuple(Object[] value, String[] aliases) {                            
-                            Map<String, Object> result = new HashMap<String, Object>();
-                            
-                            for (int i = 0; i < aliases.length; i++) {                                
-                                String alias = aliases[i];
-                                Map<String, Object> aggregate;
-                                
-                                String name = alias.split("_")[0];
-                                if (result.containsKey(name)) {
-                                    ((Map<String, Object>)result.get(name)).put(alias.split("_")[1], value[i]);
-                                } else {
-                                    aggregate = new HashMap<String, Object>();                                    
-                                    aggregate.put(alias.split("_")[1], value[i]);        
-                                    result.put(name, aggregate);
-                                }
-                            } 
-                            
-                            return result;
-                        }
-                        
-                        @Override
-                        public List transformList(List collection) {
-                            return collection;
-                        }
-                    })
-                    .list()
-                    .get(0));
+            groupItem.put("aggregates", calculateAggregates(criteria, aggregates));
         } else {
             groupItem.put("aggregates", new HashMap<String, Object>());
         }
         groupItem.put("items", groupItems);
         return groupItems;
+    }
+
+    @SuppressWarnings({ "serial", "unchecked" })
+    private static Map<String, Object> calculateAggregates(Criteria criteria, List<AggregateDescriptor> aggregates) {
+        return (Map<String, Object>)criteria                    
+                .setProjection(createAggregatesProjection(aggregates))                    
+                .setResultTransformer(new ResultTransformer() {                                    
+                    @Override
+                    public Object transformTuple(Object[] value, String[] aliases) {                            
+                        Map<String, Object> result = new HashMap<String, Object>();
+                        
+                        for (int i = 0; i < aliases.length; i++) {                                
+                            String alias = aliases[i];
+                            Map<String, Object> aggregate;
+                            
+                            String name = alias.split("_")[0];
+                            if (result.containsKey(name)) {
+                                ((Map<String, Object>)result.get(name)).put(alias.split("_")[1], value[i]);
+                            } else {
+                                aggregate = new HashMap<String, Object>();                                    
+                                aggregate.put(alias.split("_")[1], value[i]);        
+                                result.put(name, aggregate);
+                            }
+                        } 
+                        
+                        return result;
+                    }
+                    
+                    @Override
+                    public List transformList(List collection) {
+                        return collection;
+                    }
+                })
+                .list()
+                .get(0);
     }    
     
     private static ProjectionList createAggregatesProjection(List<AggregateDescriptor> aggregates) {
@@ -323,8 +329,9 @@ public class DataSourceRequest {
         return projections;
     }
     
-    private List<?>  group(final Criteria criteria, final List<GroupDescriptor> group, final Session session, final Class<?> clazz) {
+    private List<?>  group(final Criteria criteria, final Session session, final Class<?> clazz) {
     	List<?> result = new ArrayList<Object>();
+    	List<GroupDescriptor> group = getGroup();
     	
         if (group != null && !group.isEmpty()) {
             try {
@@ -358,8 +365,41 @@ public class DataSourceRequest {
         
         filter(criteria, getFilter(), clazz);
         
-        long total = total(criteria);
+        long total = total(criteria);       
+                
+        sort(criteria, sortDescriptors());
+    
+        page(criteria, getTake(), getSkip());        
         
+        DataSourceResult result = new DataSourceResult();
+        
+        result.setTotal(total);
+        
+        List<GroupDescriptor> groups = getGroup();
+        
+        if (groups != null && !groups.isEmpty()) {        	
+			result.setData(group(criteria, session, clazz));									
+        } else {
+        	result.setData(criteria.list());	
+        }
+        
+        List<AggregateDescriptor> aggregates = getAggregate();
+        if (aggregates != null && !aggregates.isEmpty()) {
+            result.setAggregates(aggregate(aggregates, getFilter(), session, clazz));
+        }
+        
+        return result;
+    }    
+    
+    private static Map<String, Object> aggregate(List<AggregateDescriptor> aggregates, FilterDescriptor filters, Session session, Class<?> clazz) {
+        Criteria criteria = session.createCriteria(clazz);
+        
+        filter(criteria, filters, clazz);
+        
+        return calculateAggregates(criteria, aggregates);                
+    }    
+    
+    private List<SortDescriptor> sortDescriptors() {
         List<SortDescriptor> sort = new ArrayList<SortDescriptor>();
         
         List<GroupDescriptor> groups = getGroup();
@@ -370,25 +410,11 @@ public class DataSourceRequest {
         }        
         
         if (sorts != null) {
-        	sort.addAll(sorts);
-        }       
-        
-        sort(criteria, sort);
-    
-        page(criteria, getTake(), getSkip());        
-        
-        DataSourceResult result = new DataSourceResult();
-        
-        result.setTotal(total);
-        
-        if (groups != null && !groups.isEmpty()) {        	
-			result.setData(group(criteria, groups, session, clazz));									
-        } else {
-        	result.setData(criteria.list());	
+            sort.addAll(sorts);
         }
-        return result;
+        return sort;        
     }
-
+    
     public List<GroupDescriptor> getGroup() {
         return group;
     }
@@ -397,6 +423,14 @@ public class DataSourceRequest {
         this.group = group;
     }
     
+    public List<AggregateDescriptor> getAggregate() {
+        return aggregate;
+    }
+
+    public void setAggregate(List<AggregateDescriptor> aggregate) {
+        this.aggregate = aggregate;
+    }
+
     public static class SortDescriptor {
         private String field;
         private String dir;
