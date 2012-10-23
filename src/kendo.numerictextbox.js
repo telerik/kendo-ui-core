@@ -556,7 +556,7 @@
             DOMElement.style.width = "";
             that.wrapper = wrapper.addClass("k-widget k-numerictextbox")
                                   .addClass(DOMElement.className)
-                                  .show();
+                                  .css("display", "");
 
             that._inputWrapper = $(wrapper[0].firstChild);
         },

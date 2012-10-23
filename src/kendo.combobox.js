@@ -726,7 +726,7 @@
 
             that.wrapper = wrapper.addClass("k-widget k-combobox k-header")
                                   .addClass(element[0].className)
-                                  .show();
+                                  .css("display", "");
         }
     });
 

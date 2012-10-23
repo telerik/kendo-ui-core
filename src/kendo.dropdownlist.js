@@ -492,6 +492,7 @@
             that._focused = that.wrapper = wrapper
                               .addClass("k-widget k-dropdown k-header")
                               .addClass(DOMelement.className)
+                              .css("display", "")
                               .attr({
                                   unselectable: "on",
                                   role: "listbox",

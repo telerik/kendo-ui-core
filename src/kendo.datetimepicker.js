@@ -556,8 +556,7 @@
             });
 
             that.wrapper = wrapper.addClass("k-widget k-datetimepicker k-header")
-                                  .addClass(element[0].className)
-                                  .show();
+                                  .addClass(element[0].className);
 
             that._inputWrapper = $(wrapper[0].firstChild);
         },
