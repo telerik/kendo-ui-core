@@ -4,14 +4,11 @@
         Shim = ui.Shim,
         Popup = ui.Popup,
         Widget = ui.Widget,
-        ns = ".kendoMobileActionSheet",
         OPEN = "open",
         BUTTONS = "li>a",
         CONTEXT_DATA = "actionsheetContext",
         WRAP = '<div class="km-actionsheet-wrapper" />',
-        cancelTemplate = kendo.template('<li class="km-actionsheet-cancel"><a href="\\#">#:cancel#</a></li>'),
-        MOUSEUP = kendo.support.mouseup + ns,
-        CLICK = "click" + ns;
+        cancelTemplate = kendo.template('<li class="km-actionsheet-cancel"><a href="\\#">#:cancel#</a></li>');
 
     var ActionSheet = Widget.extend({
         init: function(element, options) {
@@ -26,9 +23,11 @@
             element
                 .addClass("km-actionsheet")
                 .append(cancelTemplate({cancel: that.options.cancel}))
-                .wrap(WRAP)
-                .on(MOUSEUP, BUTTONS, $.proxy(that._click, that))
-                .on(CLICK, BUTTONS, kendo.preventDefault);
+                .wrap(WRAP);
+
+            that.eventProxy
+                .on("up", BUTTONS, "_click")
+                .on("click", BUTTONS, kendo.preventDefault);
 
             that.wrapper = element.parent();
             that.shim = new ShimClass(that.wrapper, $.extend({modal: !(os.android || os.meego)}, that.options.popup) );
@@ -79,7 +78,6 @@
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-            this.element.off(ns);
             this.shim.destroy();
         },
 

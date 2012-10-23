@@ -2478,6 +2478,12 @@ function pad(number, digits, end) {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
             this.wrapper = this.element;
+            this.eventProxy = new kendo.EventProxy(this.element, this);
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.eventProxy.off();
         },
 
         options: {
@@ -2644,6 +2650,8 @@ function pad(number, digits, end) {
 
             that.handlers.push(args);
             on.apply(that.element, args);
+
+            return that;
         },
 
         off: function() {
