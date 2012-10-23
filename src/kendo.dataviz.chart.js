@@ -6557,6 +6557,8 @@
         dragEnd: function(e) {
             var that = this;
 
+            that.dragHandle.css("cursor", "e-resize");
+
             that.trigger(SELECT, {
                 start: that.start,
                 end: that.end
