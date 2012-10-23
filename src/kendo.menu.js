@@ -719,6 +719,10 @@
                 return;
             }
 
+            if ((!element.parent().hasClass(MENU) || !options.openOnClick) && !kendo.support.touch) {
+                return;
+            }
+
             if (!isLink && !formNode) {
                 e.preventDefault();
             }
