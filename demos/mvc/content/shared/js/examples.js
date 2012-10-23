@@ -28,7 +28,6 @@
                 duration: 300
             }
         },
-        initialFolder = location.href.match(/\//g).length,
         skinRegex = /kendo\.\w+(\.min)?\.(.+)/i,
         supports = {
             sessionStorage: (function() {
@@ -174,7 +173,7 @@
 
         getCurrentThemeLink: function() {
             return $("head link").filter(function(x) {
-                return /kendo\./gi.test(this.href) && !/common|rtl|dataviz/gi.test(this.href);
+                return (/kendo\./gi).test(this.href) && !(/common|rtl|dataviz/gi).test(this.href);
             });
         },
 
