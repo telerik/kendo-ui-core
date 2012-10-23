@@ -1203,6 +1203,11 @@ namespace Kendo.Mvc.UI
                 throw new NotSupportedException(Exceptions.CannotUseVirtualScrollWithServerBinding);
             }
 
+            if (Scrollable.Enabled && Scrollable.Virtual && (Grouping.Enabled || DataSource.Groups.Any()))
+            {
+                throw new NotSupportedException(Exceptions.CannotUseGroupingAndVirtualization);
+            }
+
             if (AutoBind.HasValue)
             {
                 if (!IsClientBinding || (IsClientBinding && DataSource.Data != null))
