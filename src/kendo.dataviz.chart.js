@@ -6545,10 +6545,10 @@
 
             if (that.isFirst) {
                 that.start = math.min(math.max(options.min, state.start - offset), options.max - 1);
-                that.end = options.end;
+                that.end = math.max(that.start + 1, options.end);
             } else {
-                that.start = options.start;
                 that.end = math.min(math.max(options.min + 1, state.start - offset), options.max);
+                that.start = math.min(that.end - 1, options.start);
             }
 
             that.setRange(that.start, that.end);
