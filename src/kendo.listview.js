@@ -383,12 +383,12 @@
                             preventDefault(e);
                         } else if (keys.ENTER === key) {
                             if (editItem.length !== 0 && canHandle) {
-                                idx = that._items().index(editItem);
+                                idx = that.items().index(editItem);
                                 document.activeElement.blur();
                                 that.save();
                                 var focusAgain = function(){
                                     that.element.trigger("focus");
-                                    that.current(that._items().eq(idx));
+                                    that.current(that.items().eq(idx));
                                 };
                                 that.one("dataBound", focusAgain);
                             } else if (that.options.editTemplate !== "") {
@@ -400,10 +400,10 @@
                             if (editItem.length === 0) {
                                 return;
                             }
-                            idx = that._items().index(editItem);
+                            idx = that.items().index(editItem);
                             that.cancel();
                             that.element.trigger("focus");
-                            that.current(that._items().eq(idx));
+                            that.current(that.items().eq(idx));
                         }
                     });
 
