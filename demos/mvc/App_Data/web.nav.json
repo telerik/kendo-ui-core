@@ -542,6 +542,10 @@
                 {
                     "text": "RTL support",
                     "url": "listview/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "listview/navigation.html"
                 }
             ]
         },
@@ -594,6 +598,10 @@
                 {
                     "text": "RTL support",
                     "url": "menu/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "menu/navigation.html"
                 }
             ]
         },
@@ -691,6 +699,10 @@
                 {
                     "text": "RTL support",
                     "url": "slider/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "slider/navigation.html"
                 }
             ]
         },
