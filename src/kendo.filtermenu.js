@@ -164,15 +164,6 @@
                             .on("submit" + NS, proxy(that._submit, that))
                             .on("reset" + NS, proxy(that._reset, that));
 
-           that.form
-                .find("[" + kendo.attr("type") + "=number]")
-                .removeClass("k-textbox")
-                [NUMERICTEXTBOX]()
-                .end()
-                .find("[" + kendo.attr("type") + "=date]")
-                .removeClass("k-textbox")
-                [DATEPICKER]();
-
             if (!options.appendToElement) {
                 that.popup = that.form[POPUP]({
                     anchor: link,
@@ -186,6 +177,15 @@
                 element.append(that.form);
                 that.popup = that.element.closest(".k-popup").data(POPUP);
             }
+
+            that.form
+                 .find("[" + kendo.attr("type") + "=number]")
+                 .removeClass("k-textbox")
+                 [NUMERICTEXTBOX]()
+                 .end()
+                 .find("[" + kendo.attr("type") + "=date]")
+                 .removeClass("k-textbox")
+                 [DATEPICKER]();
 
             that.refresh();
         },
