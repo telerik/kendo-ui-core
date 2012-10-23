@@ -96,10 +96,13 @@
                 navigator = chart._navigator = new Navigator(chart);
             }
 
+            Chart.fn._redraw.call(chart);
+            navigator.redraw();
+
             // Add panning support to Axis
             if (!chart._panningSetup) {
                 if (kendo.ui.Draggable) {
-                    $(chart.element).kendoDraggable({
+                    $(chart._viewElement).kendoDraggable({
                         drag: $.proxy(chart._onDrag, chart),
                         dragstart: $.proxy(chart._onDragStart, chart),
                         dragend: $.proxy(chart._onDragEnd, chart)
@@ -108,9 +111,6 @@
 
                 chart._panningSetup = true;
             }
-
-            Chart.fn._redraw.call(chart);
-            navigator.redraw();
         },
 
         _onDragStart: function(e) {
