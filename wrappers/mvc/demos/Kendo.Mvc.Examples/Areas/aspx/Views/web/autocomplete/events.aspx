@@ -17,7 +17,7 @@ The AutoComplete is bound to a collection of strings: "Item1", "Item2", "Item3".
         })
         .Events(e =>
         {
-            e.Change("change").Select("select").Open("open").Close("close");
+            e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
         })
 %>
 
@@ -32,6 +32,10 @@ The AutoComplete is bound to a collection of strings: "Item1", "Item2", "Item3".
 
     function change() {
         kendoConsole.log("event: change");
+    };
+
+    function dataBound() {
+        kendoConsole.log("event: dataBound");
     };
 
     function select(e) {

@@ -22,7 +22,7 @@
         })
         .Events(e =>
         {
-            e.Change("change").Select("select").Open("open").Close("close");
+            e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
         })
 %>
 
@@ -37,6 +37,10 @@
 
     function change() {
         kendoConsole.log("event: change");
+    };
+
+    function dataBound() {
+        kendoConsole.log("event: dataBound");
     };
 
     function select(e) {
