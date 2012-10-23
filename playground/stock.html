@@ -20,6 +20,7 @@
         <h3>The Boeing Company (NYSE:BA)</h3>
         <div id="chart" style="width: 900px; height: 400px;"></div>
         <script>
+            // TODO: !!! Navigator range
             // TODO: StockChart demo(s)
             // TODO: StockChart docs
             // TODO: StockChart MVC Wrapper
@@ -33,6 +34,11 @@
                     dataSource: {
                         transport: {
                             read: "boeing-stock.json"
+                        },
+                        filter: {
+                            field: "Date",
+                            operator: "startswith",
+                            value: "2012/06"
                         }
                     },
                     dateField: "Date",

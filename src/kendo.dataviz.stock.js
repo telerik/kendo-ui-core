@@ -323,16 +323,13 @@
                 labels: { visible: false },
                 majorTicks: { visible: false }
             }), deepExtend({}, base, {
-                // TODO: Range-based
-                baseUnit: "years",
                 // TODO: Width based
                 maxDateGroups: 20,
                 baseUnitStep: "auto",
                 majorTicks: { visible: true }
             }), deepExtend({}, base, {
-                // TODO: Range-based
-                baseUnit: "months",
-                baseUnitStep: 1,
+                // TODO: Width based
+                maxDateGroups: 200,
                 majorTicks: {
                     visible: true,
                     width: 0.5
