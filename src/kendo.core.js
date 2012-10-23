@@ -1388,7 +1388,7 @@ function pad(number, digits, end) {
             }
 
             return globalize.parseDate(value, format, culture);
-        }
+        };
 
         kendo.parseFloat = function (value, culture, format) {
             if (typeof value === NUMBER) {
