@@ -1386,8 +1386,21 @@ function pad(number, digits, end) {
     };
 
     if (globalize) {
-        kendo.parseDate = proxy(globalize.parseDate, globalize);
-        kendo.parseFloat = proxy(globalize.parseFloat, globalize);
+        kendo.parseDate = function (value, format, culture) {
+            if (value instanceof Date) {
+                return value;
+            }
+
+            return globalize.parseDate(value, format, culture);
+        }
+
+        kendo.parseFloat = function (value, culture, format) {
+            if (typeof value === NUMBER) {
+                return value;
+            }
+
+            return globalize.parseFloat(value, culture);
+        };
     }
 })();
 
