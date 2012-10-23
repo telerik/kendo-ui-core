@@ -140,7 +140,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase Change(string handler)
+        public DropDownListEventBuilderBase DataBound(string handler)
         {
             Handler("dataBound", handler);
 
