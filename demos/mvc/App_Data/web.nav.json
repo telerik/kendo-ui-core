@@ -444,7 +444,8 @@
                 },
                 {
                     "text": "Aggregates",
-                    "url": "grid/aggregates.html"
+                    "url": "grid/aggregates.html",
+                    "packages": ["online", "offline", "jsp"]
                 },
                 {
                     "text": "Server aggregates",

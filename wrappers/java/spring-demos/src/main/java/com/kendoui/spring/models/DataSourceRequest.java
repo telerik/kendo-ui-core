@@ -12,12 +12,14 @@ import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import org.hibernate.transform.ResultTransformer;
 
 public class DataSourceRequest {
@@ -188,10 +190,12 @@ public class DataSourceRequest {
         }
     }   
     
-    private static List<?> groupBy(List<?> items, List<GroupDescriptor> group, Class<?> clazz, final Session session)  throws IntrospectionException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private List<?> groupBy(List<?> items, List<GroupDescriptor> group, Class<?> clazz, final Session session, List<SimpleExpression> parentRestrictions)  throws IntrospectionException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
     	ArrayList<Map<String, Object>> result = new ArrayList<Map<String,  Object>>();    	
     	                        
-        if (!items.isEmpty() && group != null && !group.isEmpty()) {
+        if (!items.isEmpty() && group != null && !group.isEmpty()) {            
+            List<List<SimpleExpression>> restrictions = new ArrayList<List<SimpleExpression>>();            
+                    
             GroupDescriptor descriptor = group.get(0);
             List<AggregateDescriptor> aggregates = descriptor.getAggregates();
                     
@@ -201,21 +205,30 @@ public class DataSourceRequest {
             
             Object groupValue = accessor.invoke(items.get(0));
                         
-            List<Object> groupItems = createGroupItem(group.size() > 1, clazz, session, result, aggregates, field, groupValue);
+            List<Object> groupItems = createGroupItem(group.size() > 1, clazz, session, result, aggregates, field, groupValue, parentRestrictions);            
+            
+            List<SimpleExpression> groupRestriction = new ArrayList<SimpleExpression>(parentRestrictions);
+            groupRestriction.add(Restrictions.eq(field, groupValue));
+            restrictions.add(groupRestriction);
             
             for (Object item : items) {            	
             	Object currentValue = accessor.invoke(item);
             	
 				if (!groupValue.equals(currentValue)) {
-					groupValue = currentValue;
-					groupItems = createGroupItem(group.size() > 1, clazz, session, result, aggregates, field, groupValue);
+					groupValue = currentValue;					
+					groupItems = createGroupItem(group.size() > 1, clazz, session, result, aggregates, field, groupValue, parentRestrictions);
+					
+					groupRestriction = new ArrayList<SimpleExpression>(parentRestrictions);
+		            groupRestriction.add(Restrictions.eq(field, groupValue));
+		            restrictions.add(groupRestriction);
 				}
 				groupItems.add(item);
 			}        
             
-            if (group.size() > 1) {
-            	for (Map<String,Object> g : result) {           		
-            		g.put("items", groupBy((List<?>)g.get("items"), group.subList(1, group.size()), clazz, session));
+            if (group.size() > 1) {   
+                Integer counter = 0;
+            	for (Map<String,Object> g : result) {            	    
+            		g.put("items", groupBy((List<?>)g.get("items"), group.subList(1, group.size()), clazz, session, restrictions.get(counter++)));
 				}
             }
         }
@@ -223,9 +236,12 @@ public class DataSourceRequest {
     	return result;
     }
 
-    private static List<Object> createGroupItem(Boolean hasSubgroups, Class<?> clazz, final Session session, ArrayList<Map<String, Object>> result,
+    @SuppressWarnings("serial")
+    private List<Object> createGroupItem(Boolean hasSubgroups, Class<?> clazz, final Session session, ArrayList<Map<String, Object>> result,
             List<AggregateDescriptor> aggregates,
-            final String field, Object groupValue) {
+            final String field, 
+            Object groupValue,
+            List<SimpleExpression> aggregateRestrictions) {
         
         Map<String, Object> groupItem = new HashMap<String, Object>();
         List<Object> groupItems = new ArrayList<Object>();
@@ -236,10 +252,22 @@ public class DataSourceRequest {
         groupItem.put("field", field);
         groupItem.put("hasSubgroups", hasSubgroups);
          
-        if (aggregates != null && !aggregates.isEmpty()) {            
-            groupItem.put("aggregates", session.createCriteria(clazz)
-                    .add(Restrictions.eq(field, groupValue))
-                    .setProjection(buildAggregatesProjection(aggregates))                    
+        if (aggregates != null && !aggregates.isEmpty()) {           
+            Criteria criteria = session.createCriteria(clazz);
+            
+            filter(criteria, getFilter(), clazz); // filter the set by the selected criteria            
+            
+            SimpleExpression currentRestriction = Restrictions.eq(field, groupValue);
+            
+            if (aggregateRestrictions != null && !aggregateRestrictions.isEmpty()) {
+                for (SimpleExpression simpleExpression : aggregateRestrictions) {                    
+                    criteria.add(simpleExpression);
+                }
+            }
+            
+            groupItem.put("aggregates", criteria
+                    .add(currentRestriction)                    
+                    .setProjection(createAggregatesProjection(aggregates))                    
                     .setResultTransformer(new ResultTransformer() {                                    
                         @Override
                         public Object transformTuple(Object[] value, String[] aliases) {                            
@@ -276,7 +304,7 @@ public class DataSourceRequest {
         return groupItems;
     }    
     
-    private static ProjectionList buildAggregatesProjection(List<AggregateDescriptor> aggregates) {
+    private static ProjectionList createAggregatesProjection(List<AggregateDescriptor> aggregates) {
         ProjectionList projections = Projections.projectionList();
         for (AggregateDescriptor aggregate : aggregates) {
             String alias = aggregate.getField() + "_" + aggregate.getAggregate();
@@ -295,12 +323,12 @@ public class DataSourceRequest {
         return projections;
     }
     
-    private static List<?>  group(final Criteria criteria, final List<GroupDescriptor> group, final Session session, final Class<?> clazz) {
+    private List<?>  group(final Criteria criteria, final List<GroupDescriptor> group, final Session session, final Class<?> clazz) {
     	List<?> result = new ArrayList<Object>();
     	
         if (group != null && !group.isEmpty()) {
             try {
-				result = groupBy(criteria.list(), group, clazz, session);
+				result = groupBy(criteria.list(), group, clazz, session, new ArrayList<SimpleExpression>());
 			} catch (IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | HibernateException
 					| IntrospectionException e) {
