@@ -2571,4 +2571,5 @@ ul.keyboard-legend li {
     text-align: left;
     padding: 10px 10px 10px 10px;
     border-left: 1px solid #ccc;
+    line-height: 1.3em;
 }
