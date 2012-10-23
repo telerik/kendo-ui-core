@@ -153,7 +153,7 @@
 
                 wrapper
                     .on("click" + ns, function(e) {
-                            clearTimeout(that._bluring);
+                            that._blured = false;
                             e.preventDefault();
                             that.toggle();
                     })
@@ -161,15 +161,16 @@
                     .on("keypress" + ns, proxy(that._keypress, that))
                     .on("focusin" + ns, function() {
                         dropDownWrapper.addClass(FOCUSED);
-                        clearTimeout(that._bluring);
+                        that._blured = false;
                     })
                     .on("focusout" + ns, function() {
-                        that._blur();
-                        dropDownWrapper.removeClass(FOCUSED);
+                        if (!that._blured) {
+                            that._blur();
+                            dropDownWrapper.removeClass(FOCUSED);
 
-                        that._bluring = setTimeout(function() {
+                            that._blured = true;
                             element.blur();
-                        });
+                        }
                     });
             }
         },
