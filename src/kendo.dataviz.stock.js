@@ -44,8 +44,6 @@
                         majorTicks: {
                             visible: false
                         },
-                        min: options.navigator.select.from,
-                        max: options.navigator.select.to,
                         maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH)
                     }
                 }
@@ -53,6 +51,10 @@
 
             if (themeOptions) {
                 deepExtend(themeOptions, stockDefaults);
+            }
+
+            if (!chart._navigator) {
+                Navigator.setup(options, themeOptions);
             }
 
             Chart.fn._applyDefaults.call(chart, options, themeOptions);
@@ -96,6 +98,7 @@
                 navigator = chart._navigator = new Navigator(chart);
             }
 
+            navigator.applySelection();
             Chart.fn._redraw.call(chart);
             navigator.redraw();
 
@@ -197,10 +200,6 @@
 
             navi.chart = chart;
             navi.options = chart.options.navigator;
-
-            navi.createPane();
-            navi.createAxes();
-            navi.createSeries();
         },
 
         redraw: function() {
@@ -239,9 +238,7 @@
             var navi = this,
                 select = navi.options.select,
                 chart = navi.chart,
-                plotArea = chart._plotArea,
-                slaveAxes = plotArea.options.categoryAxis,
-                slavePanes = plotArea.panes.slice(0, -1),
+                slaveAxes = chart.options.categoryAxis,
                 i,
                 axis;
 
@@ -252,119 +249,121 @@
                     axis.max = select.to;
                 }
             }
-
-            for (i = 0; i < slavePanes.length; i++) {
-                chart._plotArea.redrawPane(slavePanes[i]);
-            }
         },
 
         onSelect: function(e) {
             var navi = this,
                 axis = navi.mainAxis(),
                 groups = axis.options.categories,
-                select = navi.options.select;
+                select = navi.options.select,
+                chart = navi.chart,
+                plotArea = chart._plotArea,
+                slavePanes = plotArea.panes.slice(0, -1),
+                i;
 
             // TODO: Provide start and end date in arguments
             select.from = groups[e.start];
             select.to = groups[e.end];
 
             navi.applySelection();
+
+            for (i = 0; i < slavePanes.length; i++) {
+                chart._plotArea.redrawPane(slavePanes[i]);
+            }
         },
 
         mainAxis: function() {
             return this.chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
-        },
-
-        createPane: function() {
-            var navi = this,
-                chartOptions = navi.chart.options,
-                panes = chartOptions.panes = [].concat(chartOptions.panes);
-
-            panes.push(deepExtend(
-                {}, navi.options.pane, { name: NAVIGATOR_PANE })
-            );
-        },
-
-        createAxes: function() {
-            var navi = this,
-                chartOptions = navi.chart.options,
-                dateField = chartOptions.dateField,
-                categoryAxes,
-                valueAxes;
-
-            categoryAxes = chartOptions.categoryAxis = [].concat(chartOptions.categoryAxis);
-            valueAxes = chartOptions.valueAxis = [].concat(chartOptions.valueAxis);
-
-            var base = {
-                type: "date",
-                field: dateField,
-                pane: NAVIGATOR_PANE,
-                roundToBaseUnit: false,
-                justified: true,
-                tooltip: { visible: false },
-                labels: { step: 1 },
-                min: null,
-                max: null
-            };
-
-            categoryAxes.push(
-                deepExtend({}, base, {
-                    name: NAVIGATOR_AXIS,
-                    baseUnit: "fit",
-                    // TODO: Width based
-                    maxDateGroups: 200,
-                    baseUnitStep: "auto",
-                    labels: { visible: false },
-                    majorTicks: { visible: false }
-                }), deepExtend({}, base, {
-                    // TODO: Range-based
-                    baseUnit: "years",
-                    // TODO: Width based
-                    maxDateGroups: 20,
-                    baseUnitStep: "auto",
-                    majorTicks: { visible: true }
-                }), deepExtend({}, base, {
-                    // TODO: Range-based
-                    baseUnit: "months",
-                    baseUnitStep: 1,
-                    majorTicks: {
-                        visible: true,
-                        width: 0.5
-                    },
-                    labels: { visible: false, mirror: true }
-                })
-            );
-
-            valueAxes.push({
-                // TODO: Extend navigaor.valueAxis
-                name: NAVIGATOR_AXIS,
-                pane: NAVIGATOR_PANE,
-                majorGridLines: {
-                    visible: false
-                },
-                visible: false
-            });
-        },
-
-        createSeries: function() {
-            var navi = this,
-                options = navi.options,
-                chart = navi.chart,
-                series = chart.options.series,
-                navigatorSeries = [].concat(options.series),
-                defaults = options.seriesDefaults,
-                i;
-
-            for (i = 0; i < navigatorSeries.length; i++) {
-                series.push(
-                    deepExtend({}, defaults, navigatorSeries[i], {
-                        axis: NAVIGATOR_AXIS,
-                        categoryAxis: NAVIGATOR_AXIS,
-                    })
-                );
-            }
         }
     });
+
+    Navigator.setup = function(options, themeOptions) {
+        options = options || {};
+        themeOptions = themeOptions || {};
+
+        var naviOptions = deepExtend({}, options.navigator, themeOptions.navigator),
+            panes = options.panes = [].concat(options.panes);
+
+        panes.push(deepExtend(
+            {}, naviOptions.pane, { name: NAVIGATOR_PANE })
+        );
+
+        Navigator.attachAxes(options);
+        Navigator.attachSeries(options, naviOptions);
+    };
+
+    Navigator.attachAxes = function(options) {
+        var dateField = options.dateField,
+            categoryAxes,
+            valueAxes;
+
+        categoryAxes = options.categoryAxis = [].concat(options.categoryAxis);
+        valueAxes = options.valueAxis = [].concat(options.valueAxis);
+
+        var base = {
+            type: "date",
+            field: dateField,
+            pane: NAVIGATOR_PANE,
+            roundToBaseUnit: false,
+            justified: true,
+            tooltip: { visible: false },
+            labels: { step: 1 }
+        };
+
+        categoryAxes.push(
+            deepExtend({}, base, {
+                name: NAVIGATOR_AXIS,
+                baseUnit: "fit",
+                // TODO: Width based
+                maxDateGroups: 200,
+                baseUnitStep: "auto",
+                labels: { visible: false },
+                majorTicks: { visible: false }
+            }), deepExtend({}, base, {
+                // TODO: Range-based
+                baseUnit: "years",
+                // TODO: Width based
+                maxDateGroups: 20,
+                baseUnitStep: "auto",
+                majorTicks: { visible: true }
+            }), deepExtend({}, base, {
+                // TODO: Range-based
+                baseUnit: "months",
+                baseUnitStep: 1,
+                majorTicks: {
+                    visible: true,
+                    width: 0.5
+                },
+                labels: { visible: false, mirror: true }
+            })
+        );
+
+        valueAxes.push({
+            // TODO: Extend navigaor.valueAxis
+            name: NAVIGATOR_AXIS,
+            pane: NAVIGATOR_PANE,
+            majorGridLines: {
+                visible: false
+            },
+            visible: false
+        });
+    };
+
+    Navigator.attachSeries = function(options, naviOptions) {
+        var series = options.series = options.series || [],
+            navigatorSeries = [].concat(naviOptions.series),
+            defaults = naviOptions.seriesDefaults,
+            i;
+
+        for (i = 0; i < navigatorSeries.length; i++) {
+            series.push(
+                deepExtend({}, defaults, navigatorSeries[i], {
+                    axis: NAVIGATOR_AXIS,
+                    categoryAxis: NAVIGATOR_AXIS
+                })
+            );
+        }
+    };
 
     // Exports ================================================================
 
