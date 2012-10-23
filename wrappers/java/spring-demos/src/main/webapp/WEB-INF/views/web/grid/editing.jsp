@@ -26,7 +26,7 @@
         <kendo:dataSource pageSize="10" batch="true">
             <kendo:dataSource-transport parameterMap="parameterMap">
                 <kendo:dataSource-transport-create url="${createUrl}" dataType="json" type="POST" contentType="application/json" />
-                <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" />
+                <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-update url="${updateUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-destroy url="${destroyUrl}" dataType="json" type="POST" contentType="application/json" />
             </kendo:dataSource-transport>
@@ -51,7 +51,7 @@
     <script>
     function parameterMap(options, type) {
         if (type == "read") {
-            return options;
+            return JSON.stringify(options);
         } else {
             return JSON.stringify(options.models);
         }
