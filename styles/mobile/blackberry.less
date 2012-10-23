@@ -38,8 +38,13 @@
     text-align: center;
     color: #fff;
     font-size: 1.2em;
-    line-height: 1.8em;
+    line-height: 2.4em;
     font-weight: bold;
+}
+
+.km-blackberry.km-horizontal .km-view-title
+{
+    line-height: 2.74em;
 }
 
 .km-blackberry .km-badge,
@@ -219,17 +224,17 @@
 .km-blackberry .km-navbar .km-buttongroup
 {
     font-size: .8em;
-    margin-top: 2px;
+    top: 0;
     margin-bottom: 0;
     height: auto;
-    line-height: 1.4em;
+    line-height: 1.4rem;
 }
 
 .km-blackberry .km-buttongroup > .km-button
 {
     display: inline-block;
     border-right-width: 1px;
-    margin-right: 5px;
+    margin: 0 5px 0 0;
     float: left;
     .box-shadow(none);
 }
@@ -346,12 +351,11 @@
     .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.2) 73%, rgba(255,255,255,.05));
 }
 
-.km-blackberry .km-navbar .km-view-title,
 .km-blackberry .km-toolbar .km-button,
 .km-blackberry .km-navbar [class*=item] .km-button
 {
-    margin-top: .44rem;
-    margin-bottom: .44rem;
+    margin-top: .54rem;
+    margin-bottom: .54rem;
 }
 
 .km-blackberry.km-vertical .km-toolbar .km-button,
@@ -361,10 +365,16 @@
     margin-bottom: .34rem;
 }
 
-.km-blackberry.km-vertical .km-navbar .km-view-title
+.km-blackberry.km-horizontal .km-no-title
 {
-    margin-top: .32rem;
-    margin-bottom: .32rem;
+    padding-top: .45rem;
+    padding-bottom: .35rem;
+}
+
+.km-blackberry.km-vertical .km-no-title
+{
+    padding-top: .3rem;
+    padding-bottom: .2rem;
 }
 
 .km-blackberry .km-tabstrip
@@ -1129,6 +1139,12 @@
 .km-tablet .km-blackberry
 {
     font-size: 1.2em;
+}
+
+.km-tablet .km-blackberry .km-view-title,
+.km-tablet .km-blackberry .km-dialog-title
+{
+    line-height: 2.1em;
 }
 
 .km-tablet .km-blackberry .km-content .km-button

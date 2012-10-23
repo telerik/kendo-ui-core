@@ -155,6 +155,17 @@
     visibility: hidden;
 }
 
+.km-hide-title
+{
+    display: none;
+}
+
+.km-show-title:after
+{
+    display: block;
+    content: "\a0";
+}
+
 .km-toolbar,
 .km-navbar,
 .km-button,
@@ -173,18 +184,10 @@
     text-decoration: none;
 }
 
-.km-toolbar,
-.km-navbar,
 .km-buttongroup,
 .km-tabstrip
 {
     padding: .4rem .7rem;
-}
-
-.km-horizontal .km-toolbar,
-.km-horizontal .km-navbar
-{
-    padding: 0 .7rem;
 }
 
 .km-horizontal .km-tabstrip
@@ -570,7 +573,7 @@
 .km-toolbar,
 .km-navbar
 {
-    padding: 0 .5em;
+    padding: 0;
     .flex(1);
     position: relative;
     overflow: hidden;
@@ -583,27 +586,46 @@
     overflow: visible;
 }
 
-.km-navbar .km-view-title,
 .km-toolbar .km-button,
 .km-navbar .km-button
 {
-    margin-top: .5em;
     margin-top: .5rem;
-    margin-bottom: .5em;
     margin-bottom: .5rem;
 }
 
-.km-horizontal .km-navbar .km-view-title,
+.km-navbar .km-no-title
+{
+    padding-top: .7rem;
+    padding-bottom: .7rem;
+}
+
 .km-horizontal .km-toolbar .km-button,
 .km-horizontal .km-navbar .km-button
 {
-    margin-top: .3em;
     margin-top: .3rem;
-    margin-bottom: .3em;
     margin-bottom: .3rem;
 }
 
-.km-root .km-navbar .km-no-title
+.km-horizontal .km-navbar .km-no-title
+{
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.km-tablet.km-root .km-no-title
+{
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.km-tablet .km-navbar .km-button,
+.km-tablet .km-toolbar .km-button
+{
+    margin-top: .4rem;
+    margin-bottom: .4rem;
+}
+
+.km-root .km-pane .km-navbar .km-no-title
 {
     visibility: visible;
     line-height: 0;

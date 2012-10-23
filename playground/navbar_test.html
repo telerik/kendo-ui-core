@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Elements</title>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.history.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.mobile.button.js"></script>
+    <script src="../src/kendo.mobile.buttongroup.js"></script>
+    <script src="../src/kendo.mobile.scroller.js"></script>
+    <script src="../src/kendo.mobile.navbar.js"></script>
+    <script src="../src/kendo.mobile.view.js"></script>
+    <script src="../src/kendo.mobile.loader.js"></script>
+    <script src="../src/kendo.mobile.pane.js"></script>
+    <script src="../src/kendo.mobile.application.js"></script>
+    <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+</head>
+<body>
+    <div data-role="view" data-layout="main_layout" id="index" data-show="mobileSalesViewInit">
+        <header data-role="header">
+            <div data-role="navbar"></div>
+        </header>
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-align="left" data-role="backbutton" href="#">Back</a>
+            </div>
+        </header>
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-align="left" data-role="backbutton" href="#">Back</a>
+                <a data-align="right" data-role="button" href="#">Forward</a>
+            </div>
+        </header>
+        <header data-role="header">
+            <div data-role="navbar">
+                <div data-role="view-title"></div>
+            </div>
+        </header>
+        <header data-role="header">
+            <div data-role="navbar">
+                <div data-role="view-title">Test Title</div>
+            </div>
+        </header>
+        <header data-role="header">
+            <div data-role="navbar">
+                <div data-role="view-title">Test Title</div>
+                <a data-align="left" data-role="backbutton" href="#">Back</a>
+            </div>
+        </header>
+        <header data-role="header">
+            <div data-role="navbar">
+                <ul id="select-period" data-index="0">
+                    <li>
+                        Month
+                    </li>
+                    <li>
+                        Quarter
+                    </li>
+                    <li>
+                        Year
+                    </li>
+                </ul>
+            </div>
+        </header>
+    </div>
+
+    <script>
+        window.kendoMobileApplication = new kendo.mobile.Application(document.body);
+
+        function mobileSalesViewInit() {
+            var listviews = this.element.find("ul.km-listview");
+
+            $("#select-period").kendoMobileButtonGroup({
+                select: function() {
+                    listviews.hide()
+                             .eq(this.selectedIndex)
+                             .show();
+                },
+                index: 0
+            });
+        }
+    </script>
+</body>
+</html>

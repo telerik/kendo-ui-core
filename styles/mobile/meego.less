@@ -17,46 +17,37 @@
 .km-meego .km-view-title,
 .km-meego .km-dialog-title
 {
-    display: inline-block;
     visibility: visible;
     color: #fff;
     font-size: 1.5em;
-    line-height: 1.8em;
+    line-height: 2.2em;
     padding-left: .3em;
     padding-right: .3em;
-    float: left;
     width: 100%;
+    display: block;
+    .box-shadow(inset 0 -1px 0 rgba(255,255,255,.3));
 }
 
-.km-meego .km-leftitem,
-.km-meego .km-rightitem
+.km-meego .km-leftitem ~ .km-view-title
 {
-    position: relative;
-    float: left;
-    left: 0;
-}
-
-.km-meego .km-rightitem
-{
-    float: right;
-    right: 0;
-}
-
-.km-meego .km-navbar .km-view-title
-{
-    width: auto;
-    position: static;
+    padding-left: 2em;
 }
 
 .km-meego .km-navbar .km-no-title
 {
-    position: absolute;
+    position: relative;
     width: 100%;
     display: block;
-    font-size: 1.6em;
     left: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    .box-sizing(border-box);
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+}
+
+.km-meego .km-navbar .km-button
+{
+    margin-top: .4rem;
+    margin-bottom: .4rem;
 }
 
 .km-meego .km-tabstrip .km-button
@@ -304,6 +295,7 @@
     margin: 2px auto;
     font-size: 1.1rem;
     line-height: 1.2em;
+    top: 0;
 }
 
 .km-meego .km-buttongroup .km-button
@@ -363,10 +355,10 @@
 .km-meego .km-navbar,
 .km-meego .km-toolbar
 {
+    padding: 0 .5em;
     font-size: .8em;
     background: #207BC4;
     background-clip: border-box;
-    border-bottom: 1px solid rgba(255,255,255,.3);
     .border-radius(8px 8px 0 0);
 }
 
