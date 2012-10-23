@@ -64,7 +64,7 @@ public class PanesTag extends BaseTag /* interfaces *//* interfaces */ {
         return "splitter-panes";
     }
 
-    public void addPane(PaneTag value) {
+    public void addPane(PanesPaneTag value) {
         panes.add(value.properties());
     }
 

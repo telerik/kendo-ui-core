@@ -50,7 +50,7 @@ public class XAxisTag extends BaseTag /* interfaces *//* interfaces */ {
         return "chart-xAxis";
     }
 
-    public void setLabels(LabelsTag value) {
+    public void setLabels(XAxisLabelsTag value) {
         setProperty("labels", value);
     }
 

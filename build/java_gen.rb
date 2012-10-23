@@ -697,6 +697,12 @@ class NestedTag < Tag
         @parent.namespace
     end
 
+    def java_type
+        return super if parent.name.downcase == namespace || @name == 'Item' || @name == 'Items'
+
+        return parent.name + @name + 'Tag'
+    end
+
     def tag_name
         return "#{@parent.tag_name}-#{@name.camelize}"
     end

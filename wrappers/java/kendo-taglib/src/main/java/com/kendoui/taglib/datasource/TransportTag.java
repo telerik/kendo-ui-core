@@ -52,19 +52,19 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-transport";
     }
 
-    public void setCreate(CreateTag value) {
+    public void setCreate(TransportCreateTag value) {
         setProperty("create", value);
     }
 
-    public void setDestroy(DestroyTag value) {
+    public void setDestroy(TransportDestroyTag value) {
         setProperty("destroy", value);
     }
 
-    public void setRead(ReadTag value) {
+    public void setRead(TransportReadTag value) {
         setProperty("read", value);
     }
 
-    public void setUpdate(UpdateTag value) {
+    public void setUpdate(TransportUpdateTag value) {
         setProperty("update", value);
     }
 

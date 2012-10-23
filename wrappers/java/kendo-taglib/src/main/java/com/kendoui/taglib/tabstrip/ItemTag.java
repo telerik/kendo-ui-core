@@ -1,7 +1,10 @@
 
 package com.kendoui.taglib.tabstrip;
 
-import com.kendoui.taglib.BaseTag;
+
+import com.kendoui.taglib.BaseItemTag;
+
+
 
 
 
@@ -9,7 +12,7 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ItemTag extends BaseTag /* interfaces *//* interfaces */ {
+public class ItemTag extends  BaseItemTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {

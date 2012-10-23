@@ -50,11 +50,11 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
         return "treeView-animation";
     }
 
-    public void setCollapse(CollapseTag value) {
+    public void setCollapse(AnimationCollapseTag value) {
         setProperty("collapse", value);
     }
 
-    public void setExpand(ExpandTag value) {
+    public void setExpand(AnimationExpandTag value) {
         setProperty("expand", value);
     }
 

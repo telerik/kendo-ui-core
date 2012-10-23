@@ -1,7 +1,12 @@
 
 package com.kendoui.taglib.chart;
 
+
 import com.kendoui.taglib.BaseTag;
+
+
+
+import com.kendoui.taglib.ChartTag;
 
 
 
@@ -9,14 +14,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TitleTag extends BaseTag /* interfaces *//* interfaces */ {
+public class TitleTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ValueAxisTag parent = (ValueAxisTag)findParentWithClass(ValueAxisTag.class);
+        ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
 
 
         parent.setTitle(this);
@@ -45,11 +50,19 @@ public class TitleTag extends BaseTag /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "chart-valueAxis-title";
+        return "chart-title";
     }
 
-    public void setBorder(BorderTag value) {
+    public void setBorder(TitleBorderTag value) {
         setProperty("border", value);
+    }
+
+    public String getAlign() {
+        return (String)getProperty("align");
+    }
+
+    public void setAlign(String value) {
+        setProperty("align", value);
     }
 
     public String getBackground() {
@@ -58,14 +71,6 @@ public class TitleTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setBackground(String value) {
         setProperty("background", value);
-    }
-
-    public String getColor() {
-        return (String)getProperty("color");
-    }
-
-    public void setColor(String value) {
-        setProperty("color", value);
     }
 
     public String getFont() {
@@ -98,14 +103,6 @@ public class TitleTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setPosition(String value) {
         setProperty("position", value);
-    }
-
-    public float getRotation() {
-        return (float)getProperty("rotation");
-    }
-
-    public void setRotation(float value) {
-        setProperty("rotation", value);
     }
 
     public String getText() {

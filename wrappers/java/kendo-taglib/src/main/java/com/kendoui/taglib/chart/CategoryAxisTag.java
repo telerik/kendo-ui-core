@@ -50,31 +50,31 @@ public class CategoryAxisTag extends BaseTag /* interfaces *//* interfaces */ {
         return "chart-categoryAxis";
     }
 
-    public void setLabels(LabelsTag value) {
+    public void setLabels(CategoryAxisLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setLine(LineTag value) {
+    public void setLine(CategoryAxisLineTag value) {
         setProperty("line", value);
     }
 
-    public void setMajorGridLines(MajorGridLinesTag value) {
+    public void setMajorGridLines(CategoryAxisMajorGridLinesTag value) {
         setProperty("majorgridlines", value);
     }
 
-    public void setMajorTicks(MajorTicksTag value) {
+    public void setMajorTicks(CategoryAxisMajorTicksTag value) {
         setProperty("majorticks", value);
     }
 
-    public void setMinorGridLines(MinorGridLinesTag value) {
+    public void setMinorGridLines(CategoryAxisMinorGridLinesTag value) {
         setProperty("minorgridlines", value);
     }
 
-    public void setMinorTicks(MinorTicksTag value) {
+    public void setMinorTicks(CategoryAxisMinorTicksTag value) {
         setProperty("minorticks", value);
     }
 
-    public void setTitle(TitleTag value) {
+    public void setTitle(CategoryAxisTitleTag value) {
         setProperty("title", value);
     }
 

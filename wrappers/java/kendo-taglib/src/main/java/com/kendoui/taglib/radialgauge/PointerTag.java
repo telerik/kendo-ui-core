@@ -50,7 +50,7 @@ public class PointerTag extends BaseTag /* interfaces *//* interfaces */ {
         return "radialGauge-pointer";
     }
 
-    public void setCap(CapTag value) {
+    public void setCap(PointerCapTag value) {
         setProperty("cap", value);
     }
 

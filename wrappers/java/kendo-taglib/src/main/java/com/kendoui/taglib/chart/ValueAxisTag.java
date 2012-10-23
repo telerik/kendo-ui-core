@@ -50,31 +50,31 @@ public class ValueAxisTag extends BaseTag /* interfaces *//* interfaces */ {
         return "chart-valueAxis";
     }
 
-    public void setLabels(LabelsTag value) {
+    public void setLabels(ValueAxisLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setLine(LineTag value) {
+    public void setLine(ValueAxisLineTag value) {
         setProperty("line", value);
     }
 
-    public void setMajorGridLines(MajorGridLinesTag value) {
+    public void setMajorGridLines(ValueAxisMajorGridLinesTag value) {
         setProperty("majorgridlines", value);
     }
 
-    public void setMajorTicks(MajorTicksTag value) {
+    public void setMajorTicks(ValueAxisMajorTicksTag value) {
         setProperty("majorticks", value);
     }
 
-    public void setMinorGridLines(MinorGridLinesTag value) {
+    public void setMinorGridLines(ValueAxisMinorGridLinesTag value) {
         setProperty("minorgridlines", value);
     }
 
-    public void setMinorTicks(MinorTicksTag value) {
+    public void setMinorTicks(ValueAxisMinorTicksTag value) {
         setProperty("minorticks", value);
     }
 
-    public void setTitle(TitleTag value) {
+    public void setTitle(ValueAxisTitleTag value) {
         setProperty("title", value);
     }
 

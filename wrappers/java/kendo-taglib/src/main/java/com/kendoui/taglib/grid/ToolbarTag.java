@@ -64,7 +64,7 @@ public class ToolbarTag extends BaseTag /* interfaces *//* interfaces */ {
         return "grid-toolbar";
     }
 
-    public void addToolbarItem(ToolbarItemTag value) {
+    public void addToolbarItem(ToolbarToolbarItemTag value) {
         toolbar.add(value.properties());
     }
 

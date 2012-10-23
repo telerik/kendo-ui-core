@@ -50,7 +50,7 @@ public class PageableTag extends BaseTag /* interfaces *//* interfaces */ {
         return "grid-pageable";
     }
 
-    public void setMessages(MessagesTag value) {
+    public void setMessages(PageableMessagesTag value) {
         setProperty("messages", value);
     }
 

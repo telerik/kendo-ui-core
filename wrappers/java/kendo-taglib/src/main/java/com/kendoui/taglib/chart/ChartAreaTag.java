@@ -50,7 +50,7 @@ public class ChartAreaTag extends BaseTag /* interfaces *//* interfaces */ {
         return "chart-chartArea";
     }
 
-    public void setBorder(BorderTag value) {
+    public void setBorder(ChartAreaBorderTag value) {
         setProperty("border", value);
     }
 

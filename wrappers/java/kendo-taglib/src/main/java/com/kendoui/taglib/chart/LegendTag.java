@@ -50,11 +50,11 @@ public class LegendTag extends BaseTag /* interfaces *//* interfaces */ {
         return "chart-legend";
     }
 
-    public void setBorder(BorderTag value) {
+    public void setBorder(LegendBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setLabels(LabelsTag value) {
+    public void setLabels(LegendLabelsTag value) {
         setProperty("labels", value);
     }
 

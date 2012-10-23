@@ -64,7 +64,7 @@ public class SeriesTag extends BaseTag /* interfaces *//* interfaces */ {
         return "chart-series";
     }
 
-    public void addSeriesItem(SeriesItemTag value) {
+    public void addSeriesItem(SeriesSeriesItemTag value) {
         series.add(value.properties());
     }
 

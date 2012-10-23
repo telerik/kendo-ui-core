@@ -50,7 +50,7 @@ public class GaugeAreaTag extends BaseTag /* interfaces *//* interfaces */ {
         return "linearGauge-gaugeArea";
     }
 
-    public void setBorder(BorderTag value) {
+    public void setBorder(GaugeAreaBorderTag value) {
         setProperty("border", value);
     }
 

@@ -50,7 +50,7 @@ public class GroupableTag extends BaseTag /* interfaces *//* interfaces */ {
         return "grid-groupable";
     }
 
-    public void setMessages(MessagesTag value) {
+    public void setMessages(GroupableMessagesTag value) {
         setProperty("messages", value);
     }
 

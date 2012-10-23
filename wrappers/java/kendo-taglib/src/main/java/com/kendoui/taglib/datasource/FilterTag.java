@@ -64,7 +64,7 @@ public class FilterTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-filter";
     }
 
-    public void addFilterItem(FilterItemTag value) {
+    public void addFilterItem(FilterFilterItemTag value) {
         filter.add(value.properties());
     }
 

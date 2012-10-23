@@ -1,7 +1,12 @@
 
 package com.kendoui.taglib.chart;
 
+
 import com.kendoui.taglib.BaseTag;
+
+
+
+import com.kendoui.taglib.ChartTag;
 
 
 
@@ -9,14 +14,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TooltipTag extends BaseTag /* interfaces *//* interfaces */ {
+public class TooltipTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesDefaultsTag parent = (SeriesDefaultsTag)findParentWithClass(SeriesDefaultsTag.class);
+        ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
 
 
         parent.setTooltip(this);
@@ -45,10 +50,10 @@ public class TooltipTag extends BaseTag /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "chart-seriesDefaults-tooltip";
+        return "chart-tooltip";
     }
 
-    public void setBorder(BorderTag value) {
+    public void setBorder(TooltipBorderTag value) {
         setProperty("border", value);
     }
 
