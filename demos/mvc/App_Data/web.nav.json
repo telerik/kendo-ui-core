@@ -507,7 +507,12 @@
                 {
                     "text": "RTL support",
                     "url": "grid/rtl.html"
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "grid/navigation.html"
                 }
+
             ]
         },
         {
