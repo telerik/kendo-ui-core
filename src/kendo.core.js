@@ -200,7 +200,8 @@
         escapedCurlyRegExp = /\\\}/g,
         curlyRegExp = /__CURLY__/g,
         escapedSharpRegExp = /\\#/g,
-        sharpRegExp = /__SHARP__/g;
+        sharpRegExp = /__SHARP__/g,
+        zeros = ["", "0", "00", "000", "0000"];
 
     Template = {
         paramName: "data", // name of the parameter of the generated template
@@ -264,8 +265,16 @@
         }
     };
 
-function pad(number) {
-    return number < 10 ? "0" + number : number;
+function pad(number, digits, end) {
+    number = number + "";
+    digits = digits || 2;
+    end = digits - number.length;
+
+    if (end) {
+        return zeros[digits].substring(0, end) + number;
+    }
+
+    return number;
 }
 
     //JSON stringify
@@ -287,17 +296,16 @@ function pad(number) {
 
     if (typeof Date.prototype.toJSON !== FUNCTION) {
 
-
         Date.prototype.toJSON = function (key) {
             var that = this;
 
             return isFinite(that.valueOf()) ?
-                that.getUTCFullYear()     + "-" +
-                pad(that.getUTCMonth() + 1) + "-" +
-                pad(that.getUTCDate())      + "T" +
-                pad(that.getUTCHours())     + ":" +
-                pad(that.getUTCMinutes())   + ":" +
-                pad(that.getUTCSeconds())   + "Z" : null;
+                pad(that.getUTCFullYear(), 4) + "-" +
+                pad(that.getUTCMonth() + 1)   + "-" +
+                pad(that.getUTCDate())        + "T" +
+                pad(that.getUTCHours())       + ":" +
+                pad(that.getUTCMinutes())     + ":" +
+                pad(that.getUTCSeconds())     + "Z" : null;
         };
 
         String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function (key) {
@@ -561,7 +569,7 @@ function pad(number) {
             } else if (match === "yy") {
                 result = pad(date.getFullYear() % 100);
             } else if (match === "yyyy") {
-                result = date.getFullYear();
+                result = pad(date.getFullYear(), 4);
             } else if (match === "h" ) {
                 result = date.getHours() % 12 || 12;
             } else if (match === "hh") {
