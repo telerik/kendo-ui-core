@@ -529,7 +529,7 @@
         },
 
         focus: function() {
-            this.element.focus();
+            this.wrapper.focus();
         },
 
         _blur: function(e) {
