@@ -542,7 +542,6 @@
 
         options: {
             name: "Grid",
-            aria: true,
             columns: [],
             toolbar: null,
             autoBind: true,
@@ -550,7 +549,7 @@
             scrollable: true,
             sortable: false,
             selectable: false,
-            navigatable: true,
+            navigatable: false,
             pageable: false,
             editable: false,
             groupable: false,
@@ -1124,6 +1123,7 @@
             var that = this,
                 model = that._modelForContainer(row),
                 mode = that._editMode(),
+                navigatable = that.options.navigatable,
                 container;
 
             that.cancelRow();
@@ -1160,8 +1160,10 @@
 
                     that.cancelRow();
 
-                    that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                    that.table.focus();
+                    if (navigatable) {
+                        that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                        that.table.focus();
+                    }
                 });
 
                 container.on(CLICK + NS, "a.k-grid-update", function(e) {
@@ -1563,7 +1565,7 @@
 
                 that.selectable = new kendo.ui.Selectable(that.table, {
                     filter: ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr:not(.k-grouping-row,.k-detail-row,.k-group-footer)"),
-                    aria: that.options.aria,
+                    aria: true,
                     multiple: multi,
                     change: function() {
                         that.trigger(CHANGE);
@@ -1680,8 +1682,12 @@
             var that = this,
                 currentProxy = proxy(that.current, that),
                 table = that.table,
-                headerTable = that.thead.find("a.k-link").attr("tabIndex", -1).end().parent(),
+                headerTable = that.thead.parent(),
                 dataTable = table;
+
+            if (!that.options.navigatable) {
+                return;
+            }
 
             if (that.options.scrollable) {
                 dataTable = table.add(headerTable);
@@ -1696,7 +1702,8 @@
                     currentProxy().find(".k-grid-filter, .k-header-column-menu").click();
                     e.stopImmediatePropagation();
                 }
-            });
+            })
+            .find("a.k-link").attr("tabIndex", -1);
 
             table
             .attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0))
@@ -2373,7 +2380,7 @@
                         if (column.sortable !== false && !column.command && column.field) {
                             $(this)
                             .attr("data-" + kendo.ns +"field", column.field)
-                            .kendoSortable(extend({}, sortable, { dataSource: that.dataSource, aria: that.options.aria }));
+                            .kendoSortable(extend({}, sortable, { dataSource: that.dataSource, aria: true }));
                         }
                     });
             }
@@ -3212,6 +3219,7 @@
                 idx,
                 html = "",
                 data = that.dataSource.view(),
+                navigatable = that.options.navigatable,
                 tbody,
                 placeholder,
                 currentIndex,
@@ -3230,7 +3238,7 @@
                 return;
             }
 
-            if (that.table[0] === document.activeElement || $.contains(that.table[0], document.activeElement)) {
+            if (navigatable && (that.table[0] === document.activeElement || $.contains(that.table[0], document.activeElement))) {
                 isCurrentInHeader = current.is("th");
                 currentIndex = 0;
                 if (isCurrentInHeader) {

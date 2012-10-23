@@ -82,7 +82,10 @@
             });
 
             test("Grid sets active element on focus", function() {
-                var grid = new Grid(table, [ { foo: "foo", bar: "bar" } ]);
+                var grid = new Grid(table, {
+                        dataSource: [ { foo: "foo", bar: "bar" } ],
+                        navigatable: true
+                    });
 
                 grid.table.focus();
                 var item = grid.current();
@@ -93,6 +96,7 @@
 
             test("Grid sets active element on focus", function() {
                 var grid = new Grid(table, {
+                    navigatable: true,
                     dataSource: [ { foo: "foo", bar: "bar" } ],
                     columns: [ "foo"]
                 });
@@ -116,6 +120,7 @@
 
             test("Grid set expanded state on expand", function() {
                 var grid = new Grid(table, {
+                    navigatable: true,
                     dataSource: [ { foo: "foo", bar: "bar" } ],
                     columns: [ "foo"],
                     detailTemplate: "details"
@@ -128,6 +133,7 @@
 
             test("Grid set expanded state on collapse", function() {
                 var grid = new Grid(table, {
+                    navigatable: true,
                     dataSource: [ { foo: "foo", bar: "bar" } ],
                     columns: [ "foo"],
                     detailTemplate: "details"
