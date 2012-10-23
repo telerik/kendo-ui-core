@@ -59,6 +59,18 @@
                 ok(called);
                 equal(result, 1.1);
             });
+
+            test("kendo.parseDate supports parsing of Date value", function() {
+                var result = kendo.parseDate(new Date());
+
+                ok(result instanceof Date);
+            });
+
+            test("kendo.parseFloat should use Globalize.parseFloat", function() {
+                var result = kendo.parseFloat(1.1);
+
+                equal(result, 1.1);
+            });
         </script>
     </body>
 </html>
