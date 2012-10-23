@@ -71,8 +71,16 @@ div.k-gauge
 .k-handle div {
     width: 100%;
     height: 100%;
-    margin-left: -12px;
-    padding-right: 24px;
+}
+
+.k-leftHandle div {
+    margin-left: -15px;
+    padding-right: 20px;
+}
+
+.k-rightHandle div {
+    margin-left: -5px;
+    padding-right: 20px;
 }
 
 .k-mask {
