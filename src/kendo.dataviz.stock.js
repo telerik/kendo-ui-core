@@ -44,6 +44,8 @@
                         majorTicks: {
                             visible: false
                         },
+                        min: options.navigator.select.from,
+                        max: options.navigator.select.to,
                         maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH)
                     }
                 }
@@ -230,8 +232,6 @@
                     snap: true,
                     select: $.proxy(navi.onSelect, navi)
                 });
-
-                navi.applySelection();
             }
         },
 
@@ -301,7 +301,10 @@
                 pane: NAVIGATOR_PANE,
                 roundToBaseUnit: false,
                 justified: true,
-                tooltip: { visible: false }
+                tooltip: { visible: false },
+                labels: { step: 1 },
+                min: null,
+                max: null
             };
 
             categoryAxes.push(
@@ -318,12 +321,14 @@
                     baseUnit: "years",
                     // TODO: Width based
                     maxDateGroups: 20,
-                    baseUnitStep: "auto"
+                    baseUnitStep: "auto",
+                    majorTicks: { visible: true }
                 }), deepExtend({}, base, {
                     // TODO: Range-based
                     baseUnit: "months",
                     baseUnitStep: 1,
                     majorTicks: {
+                        visible: true,
                         width: 0.5
                     },
                     labels: { visible: false, mirror: true }
