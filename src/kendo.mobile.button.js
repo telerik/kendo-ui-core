@@ -6,18 +6,15 @@
         support = kendo.support,
         os = support.mobileOS,
         ANDROID3UP = os.android && os.flatVersion >= 300,
-        ns = ".kendoMobileButton",
-        MOUSECANCEL = support.mousecancel + ns,
-        MOUSEMOVE = support.mousemove + ns,
-        MOUSEUP = support.mouseup + ns,
-        MOUSEDOWN = support.mousedown,
-        MOUSEDOWN_NS = MOUSEDOWN + ns,
-        CLICK = "click",
-        removeActiveID = 0,
-        proxy = $.proxy;
+        CLICK = "click";
 
-    function hideDeviceKeyboard() {
-        document.activeElement.blur();
+    function highlightButton(event, highlight, widget) {
+        $(event.target).closest(".km-button,.km-detail").toggleClass("km-state-active", highlight);
+
+        if (ANDROID3UP && widget.deactivateTimeoutID) {
+            clearTimeout(widget.deactivateTimeoutID);
+            widget.deactivateTimeoutID = 0;
+        }
     }
 
     var Button = Widget.extend({
@@ -25,24 +22,16 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
-            element = that.element;
 
             that._wrap();
             that._style();
 
-            that._releaseProxy = proxy(that._release, that);
-            that._removeProxy = proxy(that._removeActive, that);
-
-            element.on(MOUSEUP, that._releaseProxy);
-            element.on(MOUSEDOWN_NS + " " + MOUSECANCEL + " " + MOUSEUP, that._removeProxy);
-            element.on(MOUSEDOWN_NS, hideDeviceKeyboard);
+            that.eventProxy.on("up", "_release")
+                .on("down", "_activate")
+                .on("up cancel", "_deactivate");
 
             if (ANDROID3UP) {
-                element.on(MOUSEMOVE, function (e) {
-                    if (!removeActiveID) {
-                        removeActiveID = setTimeout(that._removeProxy, 500, e);
-                    }
-                });
+                that.eventProxy.on("move", "_timeoutDeactivate");
             }
         },
 
@@ -56,18 +45,19 @@
             style: ""
         },
 
-        destroy: function() {
-            Widget.fn.destroy.call(this);
-            this.element.off(ns);
+        _timeoutDeactivate: function(e) {
+            if (!this.deactivateTimeoutID) {
+                this.deactivateTimeoutID = setTimeout(highlightButton, 500, this, e, false);
+            }
         },
 
-        _removeActive: function(e) {
-            $(e.target).closest(".km-button,.km-detail").toggleClass("km-state-active", e.type == MOUSEDOWN);
+        _activate: function(e) {
+            highlightButton(this, e, true);
+            document.activeElement.blur(); // Hide device keyboard
+        },
 
-            if (ANDROID3UP) {
-                clearTimeout(removeActiveID);
-                removeActiveID = 0;
-            }
+        _deactivate: function(e) {
+            highlightButton(this, e, false);
         },
 
         _release: function(e) {
