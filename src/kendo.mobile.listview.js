@@ -17,12 +17,6 @@
         WRAPPER = '<div class="km-listview-wrapper" />',
 
         NS = ".kendoMobileListView",
-        MOUSEUP = support.mouseup,
-        MOUSEUP_NS = MOUSEUP + NS,
-        MOUSEDOWN = support.mousedown,
-        MOUSEDOWN_NS = MOUSEDOWN + NS,
-        MOUSEMOVE = support.mousemove + NS,
-        MOUSECANCEL = support.mousecancel + NS,
         LAST_PAGE_REACHED = "lastPageReached",
         CLICK = "click",
         CLICK_NS = CLICK + NS,
@@ -33,6 +27,18 @@
 
         whitespaceRegExp = /^\s+$/,
         buttonRegExp = /button/;
+
+    function toggleiOSLabel(e) {
+        var input = $(e.target).find("input"),
+            value = !input[0].checked;
+
+        if (input.is(":radio")) {
+            value = true;
+        }
+
+        input.attr("checked", value) // check the input
+             .trigger("change"); // trigger the change event for any listeners (MVVM)
+    }
 
     function whitespace() {
         return this.nodeType === Node.TEXT_NODE && this.nodeValue.match(whitespaceRegExp);
@@ -79,29 +85,21 @@
 
     var ListView = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                eventProxy;
 
             Widget.fn.init.call(that, element, options);
 
+            eventProxy = that.eventProxy;
             options = that.options;
 
-            that.element
-                .on([MOUSEDOWN_NS, MOUSEUP_NS, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, that._toggleItemActiveClass)
-                .on(MOUSEUP_NS, ".km-listview-label", function (e) {
-                    // on touch devices clicking a label will not check the inner input
-                    if (support.mobileOS.ios) {
-                        var input = $(e.target).find("input"),
-                            value = !input[0].checked;
+            eventProxy
+                .on("down move up cancel", HIGHLIGHT_SELECTOR, "_toggleItemActiveClass")
+                .on("up", ITEM_SELECTOR, "_click");
 
-                        if (input.is(":radio")) {
-                            value = true;
-                        }
-
-                        input.attr("checked", value) // check the input
-                             .trigger("change"); // trigger the change event for any listeners (MVVM)
-                    }
-                })
-                .on(MOUSEUP_NS, ITEM_SELECTOR, proxy(that._click, that));
+            if (support.mobileOS.ios) {
+                eventProxy.on("up", ".km-listview-label", toggleiOSLabel);
+            }
 
             that.element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
@@ -168,8 +166,6 @@
             that._unbindDataSource();
             that.stopEndlessScrolling();
             that.stopLoadMore();
-
-            that.element.off(NS);
 
             kendo.destroy(that.element);
         },
@@ -321,7 +317,7 @@
                 prevented = e.isDefaultPrevented();
 
             if (plainItem) {
-                item.toggleClass(ACTIVE_CLASS, e.type === MOUSEDOWN && !prevented);
+                item.toggleClass(ACTIVE_CLASS, e.type === support.mousedown && !prevented);
             }
         },
 
