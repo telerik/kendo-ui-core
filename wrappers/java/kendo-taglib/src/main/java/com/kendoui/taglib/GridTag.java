@@ -76,6 +76,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     }
 
+    public void setAltRowTemplate(AltRowTemplateFunctionTag value) {
+        setEvent("altRowTemplate", value.getBody());
+    }
+
     public void setDetailTemplate(DetailTemplateFunctionTag value) {
         setEvent("detailTemplate", value.getBody());
     }
@@ -199,6 +203,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setSortable(boolean value) {
         setProperty("sortable", value);
+    }
+
+    public String getAltRowTemplate() {
+        return ((Function)getProperty("altRowTemplate")).getBody();
+    }
+
+    public void setAltRowTemplate(String value) {
+        setProperty("altRowTemplate", new Function(value));
     }
 
     public String getDetailTemplate() {

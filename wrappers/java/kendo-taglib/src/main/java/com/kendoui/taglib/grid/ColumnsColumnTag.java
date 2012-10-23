@@ -105,6 +105,46 @@ public class ColumnsColumnTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("template", value);
     }
 
+    public Object getAggregates() {
+        return (Object)getProperty("aggregates");
+    }
+
+    public void setAggregates(Object value) {
+        setProperty("aggregates", value);
+    }
+
+    public String getGroupHeaderTemplate() {
+        return (String)getProperty("groupHeaderTemplate");
+    }
+
+    public void setGroupHeaderTemplate(String value) {
+        setProperty("groupHeaderTemplate", value);
+    }
+
+    public String getGroupFooterTemplate() {
+        return (String)getProperty("groupFooterTemplate");
+    }
+
+    public void setGroupFooterTemplate(String value) {
+        setProperty("groupFooterTemplate", value);
+    }
+
+    public String getFooterTemplate() {
+        return (String)getProperty("footerTemplate");
+    }
+
+    public void setFooterTemplate(String value) {
+        setProperty("footerTemplate", value);
+    }
+
+    public String getHeaderTemplate() {
+        return (String)getProperty("headerTemplate");
+    }
+
+    public void setHeaderTemplate(String value) {
+        setProperty("headerTemplate", value);
+    }
+
     public String getTitle() {
         return (String)getProperty("title");
     }

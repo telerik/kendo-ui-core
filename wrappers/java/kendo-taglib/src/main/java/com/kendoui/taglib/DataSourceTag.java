@@ -47,14 +47,32 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource";
     }
 
+    public void setAggregate(AggregateTag value) {
+
+        setProperty("aggregate", value.aggregate());
+
+    }
+
     public void setFilter(FilterTag value) {
 
         setProperty("filter", value.filter());
 
     }
 
+    public void setGroup(GroupTag value) {
+
+        setProperty("group", value.group());
+
+    }
+
     public void setSchema(SchemaTag value) {
         setProperty("schema", value);
+    }
+
+    public void setSort(SortTag value) {
+
+        setProperty("sort", value.sort());
+
     }
 
     public void setTransport(TransportTag value) {

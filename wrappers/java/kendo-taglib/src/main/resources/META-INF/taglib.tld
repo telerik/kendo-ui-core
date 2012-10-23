@@ -501,7 +501,7 @@ and is about to render it.</description>
             <description>Sets fields on which initial aggregates should be calculated</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -536,7 +536,7 @@ and is about to render it.</description>
             <description>Sets initial grouping</description>
             <name>group</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -592,7 +592,7 @@ and is about to render it.</description>
             <description>Sets initial sort order</description>
             <name>sort</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -1136,6 +1136,11 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <type>boolean</type>
         </attribute>
 
+        <attribute>
+            <description>Template to be used for rendering the alternate rows in the grid.</description>
+            <name>altRowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <attribute>
             <description>Template to be used for rendering the detail rows in the grid.
 See the</description>
@@ -5244,9 +5249,27 @@ hex and rgb.</description>
 
 
     <tag>
+        <description>Sets fields on which initial aggregates should be calculated</description>
+        <name>dataSource-aggregate</name>
+        <tag-class>com.kendoui.taglib.datasource.AggregateTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>Sets the initial filter.</description>
         <name>dataSource-filter</name>
         <tag-class>com.kendoui.taglib.datasource.FilterTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Sets initial grouping</description>
+        <name>dataSource-group</name>
+        <tag-class>com.kendoui.taglib.datasource.GroupTag</tag-class>
         <body-content>JSP</body-content>
 
     </tag>
@@ -5317,6 +5340,15 @@ return the total number of data items for the current response.</description>
             <name>parse</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+    </tag>
+
+
+    <tag>
+        <description>Sets initial sort order</description>
+        <name>dataSource-sort</name>
+        <tag-class>com.kendoui.taglib.datasource.SortTag</tag-class>
+        <body-content>JSP</body-content>
+
     </tag>
 
 
@@ -5403,6 +5435,29 @@ return the total number of data items for the current response.</description>
 
 
     <tag>
+        <description>Sets fields on which initial aggregates should be calculated</description>
+        <name>dataSource-aggregateItem</name>
+        <tag-class>com.kendoui.taglib.datasource.AggregateAggregateItemTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the field on which the aggregate will be calculated.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the aggregate function. Possible values are: "min", "max", "count", "sum", "average"</description>
+            <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Sets the initial filter.</description>
         <name>dataSource-filterItem</name>
         <tag-class>com.kendoui.taglib.datasource.FilterFilterItemTag</tag-class>
@@ -5433,10 +5488,88 @@ return the total number of data items for the current response.</description>
 
 
     <tag>
+        <description>Sets initial grouping</description>
+        <name>dataSource-groupItem</name>
+        <tag-class>com.kendoui.taglib.datasource.GroupGroupItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies the field to group by.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the order of the groupped items.</description>
+            <name>dir</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies the aggregate function for this group.</description>
+        <name>dataSource-groupItem-aggregates</name>
+        <tag-class>com.kendoui.taglib.datasource.GroupItemAggregatesTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies the aggregate function for this group.</description>
+        <name>dataSource-groupItem-aggregate</name>
+        <tag-class>com.kendoui.taglib.datasource.AggregatesAggregateTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the field on which the aggregate will be calculated.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the aggregate function. Possible values are: "min", "max", "count", "sum", "average"</description>
+            <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Subscribes to the parse event of Schema.</description>
         <name>dataSource-schema-parse</name>
         <tag-class>com.kendoui.taglib.datasource.ParseFunctionTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Sets initial sort order</description>
+        <name>dataSource-sortItem</name>
+        <tag-class>com.kendoui.taglib.datasource.SortSortItemTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Sets the field to sort on.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets the sort direction. Possible values are: "asc", "desc", null. If null is set, the sort expression is removed.</description>
+            <name>dir</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
 
@@ -6070,6 +6203,14 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
 
 
     <tag>
+        <description>Subscribes to the altRowTemplate event of Grid.</description>
+        <name>grid-altRowTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.AltRowTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Subscribes to the detailTemplate event of Grid.</description>
         <name>grid-detailTemplate</name>
         <tag-class>com.kendoui.taglib.grid.DetailTemplateFunctionTag</tag-class>
@@ -6216,6 +6357,41 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
         <attribute>
             <description>The template for column's cells.</description>
             <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The aggregates to be used when grouping is applied</description>
+            <name>aggregates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The template for group header item.</description>
+            <name>groupHeaderTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The template for column's cell in group footer item.</description>
+            <name>groupFooterTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The template for column's cell in footer item.</description>
+            <name>footerTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The template for column's cell in header item.</description>
+            <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
