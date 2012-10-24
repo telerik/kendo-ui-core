@@ -556,7 +556,7 @@
             }
 
             if (!this._focusable(current)) {
-                current = this.current()
+                current = this.current();
             }
 
             if (!this._focusable(current)) {
@@ -1065,7 +1065,7 @@
 
                 current = that._current = $(node, element).closest(NODE);
 
-                current.find(".k-in:first").addClass("k-state-focused")
+                current.find(".k-in:first").addClass("k-state-focused");
 
                 if (id) {
                     that.wrapper.removeAttr("aria-activedescendant");
