@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Extensions;
 
     internal class ChartDateSelectionSerializer : IChartSerializer
     {
@@ -17,8 +18,8 @@ namespace Kendo.Mvc.UI
             var result = new Dictionary<string, object>();
             
             FluentDictionary.For(result)
-                .Add("from", selection.From, () => selection.From.HasValue)
-                .Add("to", selection.To, () => selection.To.HasValue);
+                .Add("from", selection.From.ToJavaScriptString(), () => selection.From.HasValue)
+                .Add("to", selection.To.ToJavaScriptString(), () => selection.To.HasValue);
 
             return result;
         }
