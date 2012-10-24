@@ -11,6 +11,7 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
+        Observable = kendo.Observable,
         DataSource = kendo.data.DataSource,
         Widget = kendo.ui.Widget,
         template = kendo.template,
@@ -107,6 +108,7 @@
         ROUNDED_GLASS = "roundedGlass",
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
+        SELECT = "select",
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
         STRING = "string",
@@ -168,25 +170,23 @@
             Widget.fn.init.call(chart, element);
             options = deepExtend({}, chart.options, userOptions);
 
+            chart.element
+                .addClass("k-chart")
+                .css("position", "relative");
+
             chart._originalOptions = deepExtend({}, options);
 
             themeName = options.theme;
             theme = themes[themeName] || themes[themeName.toLowerCase()];
             themeOptions = themeName && theme ? theme.chart : {};
 
-            applyDefaults(options, themeOptions);
+            chart._applyDefaults(options, themeOptions);
 
             chart.options = deepExtend({}, themeOptions, options);
 
             applySeriesColors(chart.options);
 
             chart.bind(chart.events, chart.options);
-
-            chart._stage = $("<div style='display: none' />")[0];
-            chart.element
-                .addClass("k-chart")
-                .css("position", "relative")
-                .append(chart._stage);
 
             chart.wrapper = chart.element;
 
@@ -262,7 +262,7 @@
         refresh: function() {
             var chart = this;
 
-            applyDefaults(chart.options);
+            chart._applyDefaults(chart.options);
 
             delete chart._sourceSeries;
             chart._onDataChanged();
@@ -273,7 +273,7 @@
                 pane,
                 plotArea;
 
-            applyDefaults(chart.options);
+            chart._applyDefaults(chart.options);
 
             if (paneName) {
                 plotArea = chart._model._plotArea;
@@ -289,9 +289,6 @@
             var chart = this,
                 options = chart.options,
                 element = chart.element,
-                viewElement,
-                existingViewElement = chart._viewElement,
-                stage = chart._stage,
                 model = chart._model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
@@ -300,23 +297,8 @@
 
             if (viewType) {
                 view = chart._view = viewType.fromModel(model);
-                view.renderTo(stage);
 
-                viewElement = stage.firstElementChild;
-                if (existingViewElement) {
-                    existingViewElement.parentNode.replaceChild(
-                        viewElement,
-                        existingViewElement
-                    );
-                } else {
-                    element.append(viewElement);
-                }
-
-                if (chart._tooltip) {
-                    chart._tooltip.element.remove();
-                }
-
-                chart._viewElement = viewElement;
+                chart._viewElement = view.renderTo(element[0]);
                 chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
                 chart._highlight = new Highlight(view, chart._viewElement);
             }
@@ -327,6 +309,11 @@
                 view = dataviz.SVGView.fromModel(model);
 
             return view.render();
+        },
+
+        _applyDefaults: function(options, themeOptions) {
+            applyAxisDefaults(options, themeOptions);
+            applySeriesDefaults(options, themeOptions);
         },
 
         _getModel: function() {
@@ -450,7 +437,7 @@
                 tooltipOptions,
                 point;
 
-            if (!highlight || highlight.overlayElement === e.target) {
+            if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
                 return;
             }
 
@@ -1224,8 +1211,9 @@
                 baseUnit = autoUnit ? BASE_UNITS[0] : options.baseUnit,
                 min = toTime(options.min),
                 max = toTime(options.max),
-                minCategory = toTime(sparseArrayMin(categories)),
-                maxCategory = toTime(sparseArrayMax(categories));
+                categoryLimits = sparseArrayLimits(categories),
+                minCategory = toTime(categoryLimits.min),
+                maxCategory = toTime(categoryLimits.max);
 
             if (options.roundToBaseUnit) {
                 return { min: addDuration(min || minCategory, 0, baseUnit, options.weekStartDay),
@@ -1675,7 +1663,7 @@
 
             bar.value = value;
             bar.options.id = uniqueId();
-            bar.makeDiscoverable();
+            bar.enableDiscovery();
         },
 
         options: {
@@ -2358,7 +2346,7 @@
 
             point.value = value;
             point.options.id = uniqueId();
-            point.makeDiscoverable();
+            point.enableDiscovery();
         },
 
         options: {
@@ -2597,7 +2585,7 @@
             segment.seriesIx = seriesIx;
             segment.options.id = uniqueId();
 
-            segment.makeDiscoverable();
+            segment.enableDiscovery();
         },
 
         options: {},
@@ -2746,7 +2734,7 @@
 
             chart._stackAxisRange = { min: MAX_VALUE, max: MIN_VALUE };
             chart._categoryTotals = [];
-            chart.makeDiscoverable();
+            chart.enableDiscovery();
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
@@ -2807,14 +2795,16 @@
             var chart = this,
                 isStacked = chart.options.isStacked,
                 stackAxisRange = chart._stackAxisRange,
-                totals = chart._categoryTotals;
+                totals = chart._categoryTotals,
+                totalsLimits;
 
             if (defined(value)) {
                 if (isStacked) {
                     incrementSlot(totals, categoryIx, value);
 
-                    stackAxisRange.min = math.min(stackAxisRange.min, sparseArrayMin(totals));
-                    stackAxisRange.max = math.max(stackAxisRange.max, sparseArrayMax(totals));
+                    totalsLimits = sparseArrayLimits(totals);
+                    stackAxisRange.min = math.min(stackAxisRange.min, totalsLimits.min);
+                    stackAxisRange.max = math.max(stackAxisRange.max, totalsLimits.max);
                 } else {
                     CategoricalChart.fn.updateRange.apply(chart, arguments);
                 }
@@ -3325,7 +3315,7 @@
             ChartElement.fn.init.call(point, options);
             point.value = value;
             point.options.id = uniqueId();
-            point.makeDiscoverable();
+            point.enableDiscovery();
         },
 
         options: {
@@ -3337,7 +3327,13 @@
                 gradient: GLASS
             },
             tooltip: {
-                format: "{4:d}<br/>open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
+                format: "<table style='text-align: left;'>" +
+                        "<th colspan='2'>{4:d}</th>" +
+                        "<tr><td>Open:</td><td>{0:C}</td></tr>" +
+                        "<tr><td>High:</td><td>{1:C}</td></tr>" +
+                        "<tr><td>Low:</td><td>{2:C}</td></tr>" +
+                        "<tr><td>Close:</td><td>{3:C}</td></tr>" +
+                        "</table>"
             }
         },
 
@@ -3504,7 +3500,7 @@
                 pointColor = data.fields.color || series.color,
                 point,
                 valueParts = this.splitValue(value),
-                hasValue = !inArray(undefined, valueParts) && !inArray(null, valueParts),
+                hasValue = validNumbers(valueParts),
                 cluster;
 
             if (hasValue) {
@@ -3678,7 +3674,7 @@
 
             segment.value = value;
             segment.sector = sector;
-            segment.makeDiscoverable();
+            segment.enableDiscovery();
 
             ChartElement.fn.init.call(segment, options);
         },
@@ -4585,7 +4581,9 @@
         empty: function() {
             var pane = this;
 
+            pane.content.disableDiscovery();
             pane.content.children = [];
+
             pane.axes = [];
             pane.charts = [];
         },
@@ -4613,12 +4611,44 @@
                 });
 
             group.children = elements.concat(
+                pane.renderGridLines(view),
                 pane.content.getViewElements(view)
             );
 
             pane.view = view;
 
             return [group];
+        },
+
+        renderGridLines: function(view) {
+            var pane = this,
+                axes = pane.axes,
+                allAxes = axes.concat(pane.parent.axes),
+                vGridLines = [],
+                hGridLines = [],
+                gridLines,
+                i,
+                j,
+                axis,
+                vertical,
+                altAxis;
+
+            for (i = 0; i < axes.length; i++) {
+                axis = axes[i];
+                vertical = axis.options.vertical;
+                gridLines = vertical ? vGridLines : hGridLines;
+
+                for (j = 0; j < allAxes.length; j++) {
+                    if (gridLines.length === 0) {
+                        altAxis = allAxes[j];
+                        if (vertical !== altAxis.options.vertical) {
+                            append(gridLines, axis.renderGridLines(view, altAxis, axis));
+                        }
+                    }
+                }
+            }
+
+            return vGridLines.concat(hGridLines);
         },
 
         refresh: function() {
@@ -4647,7 +4677,7 @@
             plotArea.axes = [];
 
             plotArea.options.id = uniqueId();
-            plotArea.makeDiscoverable();
+            plotArea.enableDiscovery();
 
             plotArea.createPanes();
             plotArea.render();
@@ -5153,109 +5183,6 @@
             }
         },
 
-        // TODO: Move to Axis class
-        renderGridLines: function(view, axis, secondaryAxis) {
-            var plotArea = this,
-                options = axis.options,
-                vertical = options.vertical,
-                lineBox = secondaryAxis.lineBox(),
-                lineStart = lineBox[vertical ? "x1" : "y1"],
-                lineEnd = lineBox[vertical ? "x2" : "y2" ],
-                majorTicks = axis.getMajorTickPositions(),
-                gridLines = [],
-                gridLine = function (pos, options) {
-                    return {
-                        pos: pos,
-                        options: options
-                    };
-                };
-
-            if (options.majorGridLines.visible) {
-                gridLines = map(majorTicks, function(pos) {
-                                return gridLine(pos, options.majorGridLines);
-                            });
-            }
-
-            if (options.minorGridLines.visible) {
-                gridLines = gridLines.concat(
-                    map(axis.getMinorTickPositions(), function(pos) {
-                        if (options.majorGridLines.visible) {
-                            if (!inArray(pos, majorTicks)) {
-                                return gridLine(pos, options.minorGridLines);
-                            }
-                        } else {
-                            return gridLine(pos, options.minorGridLines);
-                        }
-                    }
-                ));
-            }
-
-            return map(gridLines, function(line) {
-                var gridLineOptions = {
-                        data: { modelId: plotArea.options.modelId },
-                        strokeWidth: line.options.width,
-                        stroke: line.options.color,
-                        dashType: line.options.dashType
-                    },
-                    linePos = round(line.pos),
-                    secondaryAxisBox = secondaryAxis.lineBox();
-
-                if (vertical) {
-                    if (!secondaryAxis.options.line.visible || secondaryAxisBox.y1 !== linePos) {
-                        return view.createLine(
-                            lineStart, linePos, lineEnd, linePos,
-                            gridLineOptions);
-                    }
-                } else {
-                    if (!secondaryAxis.options.line.visible || secondaryAxisBox.x1 !== linePos) {
-                        return view.createLine(
-                            linePos, lineStart, linePos, lineEnd,
-                            gridLineOptions);
-                    }
-                }
-            });
-        },
-
-        renderAllGridLines: function(view) {
-            var plotArea = this,
-                axes = plotArea.axes,
-                gridLines = [],
-                processedPanes = {},
-                i,
-                j,
-                axis,
-                axisPane,
-                altAxis,
-                altAxisPane;
-
-            for (i = 0; i < axes.length; i++) {
-                axis = axes[i];
-                axisPane = axis.pane.options.name;
-
-                for (j = i; j < axes.length; j++) {
-                    altAxis = axes[j];
-                    altAxisPane = altAxis.pane.options.name;
-
-                    if (axis.options.vertical === altAxis.options.vertical) {
-                        continue;
-                    }
-
-                    if (processedPanes[axisPane] && processedPanes[altAxisPane]) {
-                        // Only render one set of gridlines per pane
-                        continue;
-                    }
-
-                    processedPanes[axisPane] = true;
-                    processedPanes[altAxisPane] = true;
-
-                    append(gridLines, plotArea.renderGridLines(view, axis, altAxis));
-                    append(gridLines, plotArea.renderGridLines(view, altAxis, axis));
-                }
-            }
-
-            return gridLines;
-        },
-
         backgroundBox: function() {
             var plotArea = this,
                 axes = plotArea.axes,
@@ -5294,9 +5221,8 @@
                 options = plotArea.options,
                 userOptions = options.plotArea,
                 border = userOptions.border || {},
-                elements = plotArea.renderAllGridLines(view);
+                elements = ChartElement.fn.getViewElements.call(plotArea, view);
 
-            append(elements, ChartElement.fn.getViewElements.call(plotArea, view));
             append(elements, [
                 view.createRect(bgBox, {
                     fill: userOptions.background,
@@ -5868,7 +5794,7 @@
         },
 
         reset: function(axisName) {
-            this.axisRanges[axisName] = { min: MAX_VALUE, max: MIN_VALUE };
+            delete this.axisRanges[axisName];
         },
 
         query: function(axisName) {
@@ -6423,7 +6349,7 @@
         }
     };
 
-    var Selection = Class.extend({
+    var Selection = Observable.extend({
         init: function(chartElement, categoryAxis, options) {
             var that = this,
                 categoryAxisLineBox = categoryAxis.lineBox(),
@@ -6431,6 +6357,8 @@
                 valueAxisLineBox = valueAxis.lineBox(),
                 selectorPrefix = "." + CSS_PREFIX,
                 wrapper;
+
+            Observable.fn.init.call(that);
 
             that.options = deepExtend({}, that.options, options);
             options = that.options;
@@ -6440,25 +6368,31 @@
 
             that.template = Selection.template;
             if (!that.template) {
-                that.template = Tooltip.template = renderTemplate(
+                that.template = Selection.template = renderTemplate(
                     "<div class='" + CSS_PREFIX + "selector' " +
                     "style='width: #= d.width #px; height: #= d.height #px;" +
                     " top: #= d.offset.top #px; left: #= d.offset.left #px;'>" +
                     "<div class='" + CSS_PREFIX + "mask'></div>" +
                     "<div class='" + CSS_PREFIX + "mask'></div>" +
                     "<div class='" + CSS_PREFIX + "selection'>" +
-                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "leftHandle'></div>" +
-                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "rightHandle'></div>" +
+                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "leftHandle'><div></div></div>" +
+                    "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "rightHandle'><div></div></div>" +
                     "</div></div>"
                 );
             }
 
+            var paddingLeft = parseInt(chartElement.css("paddingLeft"), 10);
+            var paddingTop = parseInt(chartElement.css("paddingTop"), 10);
             that.options = deepExtend({}, {
                 width: categoryAxisLineBox.width(),
                 height: valueAxisLineBox.height(),
+                padding: {
+                    left: paddingLeft,
+                    top: paddingTop
+                },
                 offset: {
-                    top: valueAxisLineBox.y1,
-                    left: valueAxisLineBox.x2
+                    left: valueAxisLineBox.x2 + paddingLeft,
+                    top: valueAxisLineBox.y1 + paddingTop
                 },
                 start: options.min,
                 end: options.max
@@ -6485,7 +6419,21 @@
             that.setUpDragHandle(that.rightHandle);
 
             that.setRange(options.start, options.end);
+
+            that.bind(that.events, that.options);
+
+            if (kendo.ui.Draggable) {
+                that.selection.kendoDraggable({
+                    drag: proxy(that.dragSelection, that),
+                    dragstart: proxy(that.dragSelectionStart, that),
+                    dragend: proxy(that.dragSelectionEnd, that)
+                });
+            }
         },
+
+        events: [
+            SELECT
+        ],
 
         options: {
             min: MIN_VALUE,
@@ -6513,11 +6461,11 @@
                 selectionStart = options.start,
                 selectionEnd = options.end;
 
-            if (!defined(start)) {
+            if (start === null || !isFinite(start)) {
                 start = selectionStart;
             }
 
-            if (!defined(end)) {
+            if (start === null || !isFinite(end)) {
                 end = selectionEnd;
             }
 
@@ -6525,16 +6473,13 @@
             options.end = end;
 
             that.moveSelection();
-            //that.trigger("moveSelection", {
-            //    start: start,
-            //    end: end
-            //});
         },
 
         moveSelection: function() {
             var that = this,
                 options = that.options,
                 offset = options.offset,
+                padding = options.padding,
                 border = options.selection.border,
                 start = options.start,
                 end = options.end,
@@ -6543,12 +6488,12 @@
                 distance;
 
             box = categoryAxis.getSlot(start);
-            leftMaskWidth = round(box.x1 - offset.left);
+            leftMaskWidth = round(box.x1 - offset.left + padding.left);
             that.leftMask.width(leftMaskWidth);
             that.selection.css("left", leftMaskWidth);
 
             box = categoryAxis.getSlot(end);
-            rightMaskWidth = round(options.width - (box.x1 - offset.left));
+            rightMaskWidth = round(options.width - (box.x1 - offset.left + padding.left));
             that.rightMask.width(rightMaskWidth);
             distance = options.width - rightMaskWidth;
             if (distance != options.width) {
@@ -6561,74 +6506,106 @@
         setUpDragHandle: function(handle) {
             var that = this;
 
-            return new kendo.ui.Draggable(handle, {
-                dragstart: proxy(that.dragStart, that),
-                drag: proxy(that.drag, that),
-                dragend: proxy(that.dragEnd, that)
-            });
+            if (kendo.ui.Draggable) {
+                return new kendo.ui.Draggable(handle, {
+                    dragstart: proxy(that.dragStart, that),
+                    drag: proxy(that.drag, that),
+                    dragend: proxy(that.dragEnd, that)
+                });
+            } else {
+                handle.removeClass(CSS_PREFIX + "handle");
+            }
         },
 
         dragStart: function(e) {
-            var that = this;
+            var that = this,
+                options = that.options;
 
             that.dragHandle = $(e.currentTarget).css("cursor", "default");
             that.isFirst = that.dragHandle.hasClass(CSS_PREFIX + "leftHandle");
-            that.currentLocation = that.leftMask.width();
-            if (!that.isFirst) {
-                that.currentLocation += that.selection.outerWidth();
+            if (that.isFirst) {
+                that._state = {
+                    start: options.start
+                };
+            } else {
+                that._state = {
+                    start: options.end
+                };
             }
         },
 
         drag: function(e) {
             var that = this,
                 options = that.options,
-                position = that.currentLocation + (e.x.location - e.x.startLocation),
-                maxSelection = that.wrapper.width(),
-                border = options.selection.border,
-                distance;
+                delta = e.x.startLocation - e.x.location,
+                fullRange = options.max - options.min,
+                scale = that.wrapper.width() / fullRange,
+                offset = math.round(delta / scale),
+                state = that._state;
 
             if (that.isFirst) {
-                distance = round(math.min(math.max(position, 0), maxSelection - that.rightMask.width() - border.left));
-                that.leftMask.width(distance);
+                that.start = math.min(math.max(options.min, state.start - offset), options.max - 1);
+                that.end = math.max(that.start + 1, options.end);
             } else {
-                distance = round(math.min(math.max(position, that.leftMask.width()), maxSelection));
-                that.rightMask.width(maxSelection - distance);
-                if (distance > 0) {
-                    distance = math.min(maxSelection, distance + border.right);
-                }
-                that.rightMask.css("left", distance);
+                that.end = math.min(math.max(options.min + 1, state.start - offset), options.max);
+                that.start = math.min(that.end - 1, options.start);
             }
 
-            that.selection.css("left", that.leftMask.width());
-            that.selection.width(maxSelection - that.rightMask.width() - that.leftMask.width() - border.left);
-            that.position = distance;
+            that.setRange(that.start, that.end);
         },
 
-        dragEnd: function() {
-            var that = this,
-                options = that.options,
-                offsetLeft = options.offset.left,
-                border = options.selection.border,
-                startPoint = { x: offsetLeft + parseFloat(that.leftMask.width(), 10) + border.left },
-                endPoint = { x: offsetLeft + parseFloat(that.rightMask.css("left"), 10) },
-                categoryAxis = that.categoryAxis,
-                startIndex, endIndex;
+        dragEnd: function(e) {
+            var that = this;
 
             that.dragHandle.css("cursor", "e-resize");
 
-            if (options.snap) {
-                startIndex = categoryAxis.getCategoryIndex(startPoint);
-                endIndex = categoryAxis.getCategoryIndex(endPoint);
+            that.trigger(SELECT, {
+                start: that.start,
+                end: that.end
+            });
+        },
 
-                that.setRange(startIndex, endIndex);
+        dragSelectionStart: function(e) {
+            var that = this,
+                options = that.options;
+
+            if ($(e.target).is(".k-selection")) {
+                that._dragSelectionState = {
+                    range: options.end - options.start,
+                    start: options.start
+                };
+            } else {
+                e.preventDefault();
             }
+        },
 
-            //var eventArgs = {
-            //    startSelection: parseFloat(that.selection.css("left")),
-            //    endSelection: parseFloat(that.rightMask.css("left")),
-            //    startIndex: options.start,
-            //    endIndex: options.end
-            //};
+        dragSelection: function(e) {
+            var that = this,
+                options = that.options,
+                delta = e.x.startLocation - e.x.location,
+                fullRange = options.max - options.min,
+                state = that._dragSelectionState,
+                range = state.range,
+                scale = that.wrapper.width() / fullRange,
+                offset = math.round(delta / scale);
+
+            that.start = math.min(
+                math.max(options.min, state.start - offset),
+                options.max - range);
+
+            that.end = math.min(that.start + range, options.max);
+
+            that.setRange(that.start, that.end);
+        },
+
+        dragSelectionEnd: function(e) {
+            var that = this,
+                options = that.options;
+
+            that.trigger(SELECT, {
+                start: options.start,
+                end: options.end
+            });
         }
     });
 
@@ -6699,7 +6676,7 @@
 
         for (i = 0; i < length; i++) {
             n = arr[i];
-            if (defined(n) && !isNaN(n)) {
+            if (n !== null && isFinite(n)) {
                 min = math.min(min, n);
                 max = math.max(max, n);
             }
@@ -6810,20 +6787,23 @@
     }
 
     function applyAxisDefaults(options, themeOptions) {
-        var themeAxisDefaults = deepExtend({}, (themeOptions || {}).axisDefaults);
+        var themeAxisDefaults = ((themeOptions || {}).axisDefaults) || {};
 
         resolveAxisAliases(options);
 
         each([CATEGORY, "value", X, Y], function() {
             var axisName = this + "Axis",
-                axes = [].concat(options[axisName]);
+                axes = [].concat(options[axisName]),
+                axisDefaults = options.axisDefaults || {};
 
             axes = $.map(axes, function(axisOptions) {
                 var axisColor = (axisOptions || {}).color;
                 return deepExtend({},
                     themeAxisDefaults,
                     themeAxisDefaults[axisName],
-                    options.axisDefaults, {
+                    axisDefaults,
+                    axisDefaults[axisName],
+                    {
                         line: { color: axisColor },
                         labels: { color: axisColor },
                         title: { color: axisColor }
@@ -6834,11 +6814,6 @@
 
             options[axisName] = axes.length > 1 ? axes : axes[0];
         });
-    }
-
-    function applyDefaults(options, themeOptions) {
-        applyAxisDefaults(options, themeOptions);
-        applySeriesDefaults(options, themeOptions);
     }
 
     function bindCategories(options, data) {
@@ -6964,6 +6939,10 @@
     }
 
     function addDuration(date, value, unit, weekStartDay) {
+        if (!date) {
+            return date;
+        }
+
         date = toDate(date);
 
         if (unit === YEARS) {
@@ -7257,6 +7236,23 @@
         }
     }
 
+    function validNumbers(values) {
+        var valid = true,
+            i,
+            val,
+            length = values.length;
+
+        for (i = 0; i < length; i++) {
+            val = values[i];
+            if (val === null || !isFinite(val)) {
+                valid = false;
+                break;
+            }
+        }
+
+        return valid;
+    }
+
     // Exports ================================================================
 
     dataviz.ui.plugin(Chart);
@@ -7301,6 +7297,7 @@
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
+        validNumbers: validNumbers,
         bindPoint: bindPoint,
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,

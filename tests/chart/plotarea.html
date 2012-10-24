@@ -1602,7 +1602,7 @@
                             }]
                     });
 
-                    equal(view.log.line.length, 15);
+                    equal(view.log.line.length, 13);
                 });
 
                 // ------------------------------------------------------------
@@ -2470,6 +2470,13 @@
                     plotArea.redrawPane(plotArea.panes[0]);
 
                     equals(plotArea.valueAxisRangeTracker.query("vAxis").max, 10);
+                });
+
+                test("Resets range tracker for pane value axes (empty series)", function() {
+                    plotArea.series[0].data[0] = undefined;
+                    plotArea.redrawPane(plotArea.panes[0]);
+
+                    equals(plotArea.valueAxisRangeTracker.query("vAxis").max, 1);
                 });
 
                 test("Updates plotArea.categoryAxis alias", function() {
@@ -3398,11 +3405,25 @@
                     equals(plotArea.xAxisRangeTracker.query("xAxis").max, 10);
                 });
 
+                test("Resets range tracker for pane x axes (empty series)", function() {
+                    plotArea.series[0].data[0][0] = undefined;
+                    plotArea.redrawPane(plotArea.panes[0]);
+
+                    equals(plotArea.xAxisRangeTracker.query("xAxis").max, 1);
+                });
+
                 test("Resets range tracker for pane y axes", function() {
                     plotArea.series[0].data[0][1] = 10;
                     plotArea.redrawPane(plotArea.panes[0]);
 
                     equals(plotArea.yAxisRangeTracker.query("yAxis").max, 10);
+                });
+
+                test("Resets range tracker for pane y axes (empty series)", function() {
+                    plotArea.series[0].data[0][1] = undefined;
+                    plotArea.redrawPane(plotArea.panes[0]);
+
+                    equals(plotArea.yAxisRangeTracker.query("yAxis").max, 1);
                 });
 
                 test("Updates plotArea.axisX alias", function() {

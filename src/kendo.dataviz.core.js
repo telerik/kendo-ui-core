@@ -426,7 +426,8 @@
                 child = children[i];
 
                 if (!child.discoverable) {
-                    child.options = deepExtend(child.options, { modelId: modelId });
+                    child.options = child.options || {};
+                    child.options.modelId = modelId;
                 }
 
                 viewElements.push.apply(
@@ -443,12 +444,28 @@
             return viewElements;
         },
 
-        makeDiscoverable: function() {
+        enableDiscovery: function() {
             var element = this,
                 options = element.options;
 
             options.modelId = uniqueId();
             element.discoverable = true;
+        },
+
+        disableDiscovery: function() {
+            var element = this,
+                children = element.children,
+                root = element.getRoot(),
+                modelId = element.options.modelId,
+                i;
+
+            if (root && modelId) {
+                delete root.modelMap[modelId];
+            }
+
+            for (i = 0; i < children.length; i++) {
+                children[i].disableDiscovery();
+            }
         },
 
         getRoot: function() {
@@ -834,7 +851,7 @@
                 deepExtend({ id: uniqueId() }, options)
             );
 
-            label.makeDiscoverable();
+            label.enableDiscovery();
         },
 
         formatValue: function(value, options) {
@@ -1140,6 +1157,69 @@
             return result;
         },
 
+        renderGridLines: function(view, altAxis) {
+            var axis = this,
+                modelId = axis.plotArea.options.modelId,
+                options = axis.options,
+                vertical = options.vertical,
+                lineBox = altAxis.lineBox(),
+                lineStart = lineBox[vertical ? "x1" : "y1"],
+                lineEnd = lineBox[vertical ? "x2" : "y2" ],
+                majorTicks = axis.getMajorTickPositions(),
+                gridLines = [],
+                gridLine = function (pos, options) {
+                    return {
+                        pos: pos,
+                        options: options
+                    };
+                };
+
+            if (options.majorGridLines.visible) {
+                gridLines = map(majorTicks, function(pos) {
+                                return gridLine(pos, options.majorGridLines);
+                            });
+            }
+
+            if (options.minorGridLines.visible) {
+                gridLines = gridLines.concat(
+                    map(axis.getMinorTickPositions(), function(pos) {
+                        if (options.majorGridLines.visible) {
+                            if (!inArray(pos, majorTicks)) {
+                                return gridLine(pos, options.minorGridLines);
+                            }
+                        } else {
+                            return gridLine(pos, options.minorGridLines);
+                        }
+                    }
+                ));
+            }
+
+            return map(gridLines, function(line) {
+                var gridLineOptions = {
+                        data: { modelId: modelId },
+                        strokeWidth: line.options.width,
+                        stroke: line.options.color,
+                        dashType: line.options.dashType
+                    },
+                    linePos = round(line.pos),
+                    altAxisBox = altAxis.lineBox();
+
+                if (vertical) {
+                    if (!altAxis.options.line.visible || altAxisBox.y1 !== linePos) {
+                        return view.createLine(
+                            lineStart, linePos, lineEnd, linePos,
+                            gridLineOptions);
+                    }
+                } else {
+                    if (!altAxis.options.line.visible || altAxisBox.x1 !== linePos) {
+                        return view.createLine(
+                            linePos, lineStart, linePos, lineEnd,
+                            gridLineOptions);
+                    }
+                }
+            });
+        },
+
         reflow: function(box) {
             var axis = this,
                 options = axis.options,
@@ -1311,8 +1391,9 @@
 
         initDefaults: function(seriesMin, seriesMax, options) {
             var axis = this,
-                autoMin = axis.autoAxisMin(seriesMin, seriesMax),
-                autoMax = axis.autoAxisMax(seriesMin, seriesMax),
+                narrowRange = options.narrowRange,
+                autoMin = axis.autoAxisMin(seriesMin, seriesMax, narrowRange),
+                autoMax = axis.autoAxisMax(seriesMin, seriesMax, narrowRange),
                 majorUnit = autoMajorUnit(autoMin, autoMax),
                 autoOptions = {
                     majorUnit: majorUnit
@@ -1363,21 +1444,23 @@
             return { min: options.min, max: options.max };
         },
 
-        autoAxisMax: function(min, max) {
+        autoAxisMax: function(min, max, narrow) {
+            var axisMax,
+                diff;
+
             if (!min && !max) {
                 return 1;
             }
 
-            var axisMax;
             if (min <= 0 && max <= 0) {
                 max = min == max ? 0 : max;
 
-                var diff = math.abs((max - min) / max);
-                if(diff > ZERO_THRESHOLD) {
+                diff = math.abs((max - min) / max);
+                if(!narrow && diff > ZERO_THRESHOLD) {
                     return 0;
                 }
 
-                axisMax = max - ((min - max) / 2);
+                axisMax = math.min(0, max - ((min - max) / 2));
             } else {
                 min = min == max ? 0 : min;
                 axisMax = max;
@@ -1386,21 +1469,23 @@
             return axisMax;
         },
 
-        autoAxisMin: function(min, max) {
+        autoAxisMin: function(min, max, narrow) {
+            var axisMin,
+                diff;
+
             if (!min && !max) {
                 return 0;
             }
 
-            var axisMin;
             if (min >= 0 && max >= 0) {
                 min = min == max ? 0 : min;
 
-                var diff = (max - min) / max;
-                if(diff > ZERO_THRESHOLD) {
+                diff = (max - min) / max;
+                if(!narrow && diff > ZERO_THRESHOLD) {
                     return 0;
                 }
 
-                axisMin = min - ((max - min) / 2);
+                axisMin = math.max(0, min - ((max - min) / 2));
             } else {
                 max = min == max ? 0 : max;
                 axisMin = min;

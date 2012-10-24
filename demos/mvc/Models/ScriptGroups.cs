@@ -29,6 +29,7 @@ namespace Kendo.Models
             "kendo.dataviz.svg.js",
             "kendo.dataviz.vml.js",
             "kendo.dataviz.gauge.js",
+            "kendo.dataviz.stock.js",
             "kendo.combobox.js",
             "kendo.datepicker.js",
             "kendo.dropdownlist.js",

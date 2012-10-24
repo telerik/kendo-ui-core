@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>Bar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+    </head>
+    <body>
+        <h3>The Boeing Company (NYSE:BA)</h3>
+        <div id="chart" style="width: 900px; height: 400px;"></div>
+        <script>
+            // TODO: StockChart MVC Wrapper
+            // TODO: StockChart demo(s)
+            // TODO: Navigator axis changes position during partial update
+            // TODO: Investigate glitch on iPad after scrolling
+            // TODO: Clear tooltip when changing selection
+            // TODO: Scroll to zoom
+            // TODO: (-) series.pane shortcut
+            // TODO: (-) Refresh multiple panes
+            $(function() {
+                $("#chart").kendoStockChart({
+                    dataSource: {
+                        transport: {
+                            read: "boeing-stock.json"
+                        },
+                        filter: {
+                            field: "Date",
+                            operator: "startswith",
+                            value: "2012/06/1"
+                        }
+                    },
+                    dateField: "Date",
+                    series: [{
+                        type: "candlestick",
+                        openField: "Open",
+                        highField: "High",
+                        lowField: "Low",
+                        closeField: "Close"
+                    }],
+                    navigator: {
+                        series: {
+                            type: "line",
+                            field: "Close"
+                        },
+                        select: {
+                            from: "2011/10/05",
+                            to: "2012/10/07"
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
+

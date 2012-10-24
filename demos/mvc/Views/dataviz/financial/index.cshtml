@@ -1,0 +1,52 @@
+
+        <div id="example" class="k-content">
+            <div id="stock-chart"></div>
+            <script>
+                function createChart() {
+                    $("#stock-chart").kendoStockChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../../content/dataviz/js/boeing-stock.json",
+                                    dataType: "json"
+                                }
+                            }
+                        },
+                        title: {
+                            text: "The Boeing Company (NYSE:BA)"
+                        },
+                        dateField: "Date",
+                        series: [{
+                            type: "candlestick",
+                            openField: "Open",
+                            highField: "High",
+                            lowField: "Low",
+                            closeField: "Close"
+                        }],
+                        navigator: {
+                            series: {
+                                type: "line",
+                                field: "Close"
+                            },
+                            select: {
+                                from: "2012/02/05",
+                                to: "2012/10/07"
+                            }
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                        createChart();
+
+                        $("#example").bind("kendo:skinChange", function(e) {
+                            createChart();
+                        });
+                    }, 400);
+                });
+            </script>
+        </div>

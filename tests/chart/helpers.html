@@ -820,6 +820,29 @@
                 });
             })();
 
+            (function() {
+                // ------------------------------------------------------------
+                var validNumbers = kendo.dataviz.validNumbers;
+
+                module("Misc");
+
+                test("validNumbers returns true if all numbers are finite", function() {
+                    ok(validNumbers([1, 2, 3]));
+                });
+
+                test("validNumbers returns false if array contains null", function() {
+                    ok(!validNumbers([1, 2, null]));
+                });
+
+                test("validNumbers returns false if array contains undefined", function() {
+                    ok(!validNumbers([1, 2, undefined]));
+                });
+
+                test("validNumbers returns false if array contains NaN", function() {
+                    ok(!validNumbers([1, 2, NaN]));
+                });
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

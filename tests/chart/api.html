@@ -178,18 +178,11 @@
                     ok(!chart.element.data("dirty") > 0);
                 });
 
-                test("redraw does not remove elements appended to container", function() {
+                test("redraw removes elements appended to container", function() {
                     chart.element.append("<div id='extra' />");
                     chart.redraw();
 
-                    equals(chart.element.find("#extra").length, 1);
-                });
-
-                test("redraw removes tooltip element", function() {
-                    chart.element.find(".k-tooltip").data("dirty", true);
-                    chart.redraw();
-
-                    ok(!chart.element.find(".k-tooltip").data("dirty"));
+                    equals(chart.element.find("#extra").length, 0);
                 });
 
                 test("refresh applies changes to data-bound series", function() {
