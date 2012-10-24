@@ -8,10 +8,7 @@
             <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
             <kendo:grid-column title="Units In Stock" field="unitsInStock" />
         </kendo:grid-columns>
-        <kendo:dataSource data="${products}" pageSize="10">
-        	<kendo:dataSource-filter>
-        		<kendo:dataSource-filterItem field="unitsInStock" operator="ge"/>
-        	</kendo:dataSource-filter>
+        <kendo:dataSource data="${products}" pageSize="10">        
             <kendo:dataSource-schema>
                 <kendo:dataSource-schema-model>
                     <kendo:dataSource-schema-model-fields>
