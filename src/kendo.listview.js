@@ -9,7 +9,6 @@
         REQUESTSTART = "requestStart",
         ERROR = "error",
         FOCUSED = "k-state-focused",
-        FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
         KEDITITEM = "k-edit-item",
         STRING = "string",
@@ -409,7 +408,7 @@
                         }
                     });
 
-                element.addClass(FOCUSABLE).on("mousedown" + NS, "." + FOCUSABLE + FOCUSSELECTOR, proxy(clickCallback, that));
+                element.on("mousedown" + NS, FOCUSSELECTOR, proxy(clickCallback, that));
             }
        },
 
