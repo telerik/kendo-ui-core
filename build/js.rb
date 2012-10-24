@@ -99,6 +99,7 @@ DATAVIZ_JS = FileList[
     "src/kendo.dataviz.themes.js",
     "src/kendo.dataviz.chart.js",
     "src/kendo.dataviz.gauge.js",
+    "src/kendo.dataviz.stock.js",
     "src/kendo.dataviz.svg.js",
     "src/kendo.dataviz.vml.js"
 ]
