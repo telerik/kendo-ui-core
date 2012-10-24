@@ -30,6 +30,10 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
         return json.containsKey(key);
     }
     
+    public boolean isValue(Object value) {
+        return json.containsValue(value);
+    }
+    
     public void setEvent(String name, String body) {
         setProperty(name, new Function(body));
     }
