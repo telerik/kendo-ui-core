@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public ChartDonutSeriesBuilderTests()
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
-            series = new ChartDonutSeries<SalesData, decimal>(chart, s => s.RepSales, s => s.RepName, null, null, null);
+            series = new ChartDonutSeries<SalesData, decimal>(s => s.RepSales, s => s.RepName, null, null, null);
             builder = new ChartDonutSeriesBuilder<SalesData>(series);
         }
 

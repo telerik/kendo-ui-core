@@ -11,11 +11,10 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="xValueExpression">The X expression.</param>
         /// <param name="yValueExpression">The Y expression.</param>
-        public ChartScatterSeries(Chart<TModel> chart, Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
-            : base(chart)
+        public ChartScatterSeries(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
+            : base()
         {
             if (typeof(TModel).IsPlainType() && !(xValueExpression.IsBindable() || yValueExpression.IsBindable()))
             {
@@ -31,10 +30,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
-        public ChartScatterSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart)
+        public ChartScatterSeries(IEnumerable data)
+            : base()
         {
             Data = data;
             Initialize();
@@ -44,8 +42,8 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
-        public ChartScatterSeries(Chart<TModel> chart)
-            : base(chart)
+        public ChartScatterSeries()
+            : base()
         {
             Initialize();
         }

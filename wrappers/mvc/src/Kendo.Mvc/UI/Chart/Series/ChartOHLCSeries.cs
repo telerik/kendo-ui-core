@@ -11,21 +11,19 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartOHLCSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="expressionOpen">The open expression.</param>
         /// <param name="expressionHigh">The high expression.</param>
         /// <param name="expressionLow">The open expression.</param>
         /// <param name="expressionClose">The high expression.</param>
         /// <param name="expressionColor">The color expression.</param>
         public ChartOHLCSeries(
-            Chart<TModel> chart,
             Expression<Func<TModel, TValue>> openExpression,
             Expression<Func<TModel, TValue>> highExpression,
             Expression<Func<TModel, TValue>> lowExpression,
             Expression<Func<TModel, TValue>> closeExpression,
             Expression<Func<TModel, string>> colorExpression
             )
-            : base(chart)
+            : base()
         {
             if (typeof(TModel).IsPlainType() && !openExpression.IsBindable() && !highExpression.IsBindable() && !lowExpression.IsBindable() && !closeExpression.IsBindable())
             {
@@ -48,10 +46,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartOHLCSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
-        public ChartOHLCSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart)
+        public ChartOHLCSeries(IEnumerable data)
+            : base()
         {
             Data = data;
             Initialize();
@@ -60,9 +57,8 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartOHLCSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
-        public ChartOHLCSeries(Chart<TModel> chart)
-            : base(chart)
+        public ChartOHLCSeries()
+            : base()
         {
             Initialize();
         }

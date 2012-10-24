@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI.Tests
 
         public ChartScatterLineSeriesSerializerTests()
         {
-            series = new ChartScatterLineSeries<XYData, float, float>(chart, s => s.X, s => s.Y);
+            series = new ChartScatterLineSeries<XYData, float, float>(s => s.X, s => s.Y);
         }
 
         [Fact]

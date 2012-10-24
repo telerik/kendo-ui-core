@@ -11,7 +11,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
             chart.Data = SalesDataBuilder.GetCollection();
-            series = new ChartBarSeries<SalesData, decimal>(chart, s => s.RepSales, s => s.Color);
+            series = new ChartBarSeries<SalesData, decimal>(s => s.RepSales, s => s.Color);
         }
 
         [Fact]

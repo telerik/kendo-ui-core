@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public ChartScatterLineSeriesBuilderTests()
         {
             var chart = ChartTestHelper.CreateChart<XYData>();
-            series = new ChartScatterLineSeries<XYData, float, float>(chart, s => s.X, s => s.Y);
+            series = new ChartScatterLineSeries<XYData, float, float>(s => s.X, s => s.Y);
             builder = new ChartScatterLineSeriesBuilder<XYData>(series);
         }
 

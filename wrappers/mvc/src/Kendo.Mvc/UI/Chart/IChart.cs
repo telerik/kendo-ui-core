@@ -1,7 +1,8 @@
 namespace Kendo.Mvc.UI
 {
     using System.Web.Mvc;
-    public interface IChart
+
+    public interface IChart : ISeriesContainer
     {
         /// <summary>
         /// The component UrlGenerator

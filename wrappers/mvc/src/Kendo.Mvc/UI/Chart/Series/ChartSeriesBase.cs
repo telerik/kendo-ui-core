@@ -5,21 +5,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartSeriesBase{T}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
-        protected ChartSeriesBase(Chart<T> chart)
+        protected ChartSeriesBase()
         {
-            Chart = chart;
             Tooltip = new ChartTooltip();
-        }
-
-        /// <summary>
-        /// Gets or sets the chart.
-        /// </summary>
-        /// <value>The chart.</value>
-        public Chart<T> Chart
-        {
-            get;
-            private set;
         }
 
         /// <summary>

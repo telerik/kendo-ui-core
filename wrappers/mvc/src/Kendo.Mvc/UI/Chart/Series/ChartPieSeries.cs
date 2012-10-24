@@ -11,20 +11,18 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPieSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="expressionValue">The value expression.</param>
         /// <param name="expressionCategory">The category expression.</param>
         /// <param name="expressionColor">The color expression.</param>
         /// <param name="expressionExplode">The explode expression.</param>
         /// <param name="expressionVisibleInLegend">The visibleInLegend expression.</param>
         public ChartPieSeries(
-            Chart<TModel> chart,
             Expression<Func<TModel, TValue>> expressionValue,
             Expression<Func<TModel, string>> expressionCategory,
             Expression<Func<TModel,string>> expressionColor,
             Expression<Func<TModel, bool>> expressionExplode,
             Expression<Func<TModel, bool>> expressionVisibleInLegend)
-            : base(chart)
+            : base()
         {
             if (typeof(TModel).IsPlainType() && !expressionValue.IsBindable())
             {
@@ -68,10 +66,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPieSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
-        public ChartPieSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart)
+        public ChartPieSeries(IEnumerable data)
+            : base()
         {
             Data = data;
             Initialize();
@@ -80,9 +77,8 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPieSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
-        public ChartPieSeries(Chart<TModel> chart)
-            : base(chart)
+        public ChartPieSeries()
+            : base()
         {
             Initialize();
         }

@@ -10,7 +10,6 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartCandlestickSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="expressionOpen">The open expression.</param>
         /// <param name="expressionHigh">The high expression.</param>
         /// <param name="expressionLow">The open expression.</param>
@@ -18,7 +17,6 @@ namespace Kendo.Mvc.UI
         /// <param name="expressionColor">The color expression.</param>
         /// <param name="expressionDownColor">The downColor expression.</param>
         public ChartCandlestickSeries(
-            Chart<TModel> chart,
             Expression<Func<TModel, TValue>> openExpression,
             Expression<Func<TModel, TValue>> highExpression,
             Expression<Func<TModel, TValue>> lowExpression,
@@ -26,7 +24,7 @@ namespace Kendo.Mvc.UI
             Expression<Func<TModel, string>> colorExpression,
             Expression<Func<TModel, string>> downColorExpression
             )
-            : base(chart, openExpression, highExpression, lowExpression, closeExpression, colorExpression)
+            : base(openExpression, highExpression, lowExpression, closeExpression, colorExpression)
         {
             if (downColorExpression != null)
             {
@@ -39,10 +37,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartCandlestickSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
-        public ChartCandlestickSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart)
+        public ChartCandlestickSeries(IEnumerable data)
+            : base()
         {
             Data = data;
             Initialize();
@@ -51,9 +48,8 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartCandlestickSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
-        public ChartCandlestickSeries(Chart<TModel> chart)
-            : base(chart)
+        public ChartCandlestickSeries()
+            : base()
         {
             Initialize();
         }

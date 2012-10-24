@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public ChartLineSeriesBuilderTests()
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
-            series = new ChartLineSeries<SalesData, decimal>(chart, s => s.RepSales);
+            series = new ChartLineSeries<SalesData, decimal>(s => s.RepSales);
             builder = new ChartLineSeriesBuilder<SalesData>(series);
         }
 

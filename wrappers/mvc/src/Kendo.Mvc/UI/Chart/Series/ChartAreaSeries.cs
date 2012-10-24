@@ -9,10 +9,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAreaSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The parent chart</param>
         /// <param name="expression">The expression used to extract the series value from the chart model.</param>
-        public ChartAreaSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> expression)
-            : base(chart, expression)
+        public ChartAreaSeries(Expression<Func<TModel, TValue>> expression)
+            : base(expression)
         {
             Initialize();
         }
@@ -20,10 +19,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAreaSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The parent chart</param>
         /// <param name="data">The data to bind to.</param>
-        public ChartAreaSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart, data)
+        public ChartAreaSeries(IEnumerable data)
+            : base(data)
         {
             Initialize();
         }
@@ -31,9 +29,8 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAreaSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
-        public ChartAreaSeries(Chart<TModel> chart)
-            : base(chart)
+        public ChartAreaSeries()
+            : base()
         {
             Initialize();
         }
