@@ -20,6 +20,7 @@
         KCONTENTFRAME = "k-content-frame",
         LOADING = "k-loading",
         KHOVERSTATE = "k-state-hover",
+        KFOCUSEDSTATE = "k-state-focused",
         // constants
         VISIBLE = ":visible",
         HIDDEN = "hidden",
@@ -167,7 +168,9 @@
                 .on("click" + NS, TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that));
 
             windowContent
-                .on("keydown" + NS, proxy(that._keydown, that));
+                .on("keydown" + NS, proxy(that._keydown, that))
+                .on("focus" + NS, function() { wrapper.addClass(KFOCUSEDSTATE); })
+                .on("blur" + NS, function() { wrapper.removeClass(KFOCUSEDSTATE); });
 
             if (options.resizable) {
                 wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(that.toggleMaximization, that));
