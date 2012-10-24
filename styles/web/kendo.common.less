@@ -2,7 +2,7 @@
 
 .fake{color:red;}
 
-.k-reset { margin:0;padding:0;border:0;/*outline:0;*/text-decoration:none;font-size:100%;list-style:none;}
+.k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
 
 .k-floatwrap:after,.k-slider-items:after,.k-grid-toolbar:after{content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
 .k-floatwrap,.k-slider-items,.k-grid-toolbar{display:inline-block;}
@@ -87,6 +87,7 @@
 .k-widget
 {
     line-height: normal;
+	outline: 0;
 }
 
 /* Block */
@@ -180,7 +181,7 @@ html body .k-button-bare
 .k-link
 {
     cursor: pointer;
-    outline: none;
+    outline: 0;
     text-decoration: none;
 }
 
@@ -200,7 +201,7 @@ html body .k-button-bare
 .k-state-disabled .k-upload-button input
 {
     cursor: default;
-    outline: none;
+    outline: 0;
 }
 
 .k-state-error
@@ -712,7 +713,6 @@ div.k-window-content
     display: inline-block;
     border-bottom-width: 0;
     padding: .5em .92em;
-    outline: 0;
 }
 
 .k-tabstrip-items .k-icon,
@@ -1142,11 +1142,6 @@ div.k-grid-footer
 div.k-grid-header .k-header
 {
     border-bottom-width: 0;
-}
-
-.k-grid
-{
-    outline: 0;
 }
 
 .k-grid-content
@@ -1947,11 +1942,6 @@ span.k-dropdown
     outline: 0;
 }
 
-.k-dropdown
-{
-    outline: 0;
-}
-
 .k-dropdown .k-input,
 .k-selectbox .k-input
 {
@@ -2652,7 +2642,7 @@ span.k-numerictextbox
     height: 100%;
     border-style: solid;
     border-width: 1px;
-    outline: none;
+    outline: 0;
 }
 
 .k-editor .k-content
@@ -2814,7 +2804,7 @@ div.k-slider
     height: 24px;
     margin: 0;
     padding: 0;
-    outline: none;
+    outline: 0;
 }
 
 .k-slider .k-button .k-icon
@@ -2905,6 +2895,7 @@ div.k-slider
     overflow: hidden;
     text-decoration: none;
     text-align: center;
+	outline: 0;
 }
 
 .k-slider-horizontal .k-draghandle

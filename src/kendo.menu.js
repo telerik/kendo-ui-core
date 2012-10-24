@@ -28,6 +28,7 @@
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "k-state-default",
         HOVERSTATE = "k-state-hover",
+        FOCUSEDSTATE = "k-state-focused",
         DISABLEDSTATE = "k-state-disabled",
         groupSelector = ".k-group",
         ACTIVESTATE = "k-state-active",
@@ -621,8 +622,8 @@
         _removeHoverItem: function() {
             var oldHoverItem = this._oldHoverItem;
 
-            if (oldHoverItem && oldHoverItem.hasClass(HOVERSTATE)) {
-                oldHoverItem.removeClass(HOVERSTATE);
+            if (oldHoverItem && oldHoverItem.hasClass(FOCUSEDSTATE)) {
+                oldHoverItem.removeClass(FOCUSEDSTATE);
                 this._oldHoverItem = null;
             }
         },
@@ -827,7 +828,7 @@
                 id = that._ariaId;
 
             if (item.length && nextItem.length) {
-                item.removeClass(HOVERSTATE);
+                item.removeClass(FOCUSEDSTATE);
                 if (item[0].id === id) {
                     item.removeAttr("id");
                 }
@@ -838,7 +839,7 @@
                     id = nextItem[0].id;
                 }
 
-                nextItem.addClass(HOVERSTATE);
+                nextItem.addClass(FOCUSEDSTATE);
                 that._oldHoverItem = nextItem;
 
                 if (id) {

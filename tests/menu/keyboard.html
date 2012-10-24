@@ -55,7 +55,9 @@
 <script type="text/javascript">
 
         var menu,
-            openedItem;
+            openedItem,
+            FOCUSEDSTATE = "k-state-focused",
+            FOCUSEDCLASS = "." + FOCUSEDSTATE;
 
         $("#Menu1").kendoMenu({ animation: false });
 
@@ -63,7 +65,7 @@
             setup: function () {
                 menu = getMenu();
                 menu._oldHoverItem = null;
-                menu.wrapper.find(".k-state-hover").removeClass("k-state-hover");
+                menu.wrapper.find(FOCUSEDCLASS).removeClass(FOCUSEDSTATE);
                 
             },
             teardown: function() {
@@ -74,17 +76,17 @@
         test('Menu focus makes first root item active', function() {
             menu.wrapper.focus();
 
-            ok(menu.wrapper.children(".k-item").first().hasClass("k-state-hover"));
+            ok(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
         });
 
         test('Left and right arrows move focus between first and second item', function() {
             menu.wrapper.focus().press(keys.RIGHT);
             var firstItem = menu.wrapper.children(".k-item").first();
 
-            ok(firstItem.next().hasClass("k-state-hover"));
+            ok(firstItem.next().hasClass(FOCUSEDSTATE));
 
             menu.wrapper.press(keys.LEFT);
-            ok(firstItem.hasClass("k-state-hover"));
+            ok(firstItem.hasClass(FOCUSEDSTATE));
         });
 
         test('Down arrow opens subitems group', function() {
@@ -97,7 +99,7 @@
         test('Left arrow moves focus from first to last item', function() {
             menu.wrapper.focus().press(keys.LEFT);
 
-            ok(menu.wrapper.children(".k-item").last().hasClass("k-state-hover"));
+            ok(menu.wrapper.children(".k-item").last().hasClass(FOCUSEDSTATE));
         });
 
         test('Mouse events reset the keyboard navigation active item', function() {
@@ -108,11 +110,11 @@
 
             firstItem.children(".k-link").mouseenter();
 
-            ok(!secondItem.hasClass("k-state-hover"));
+            ok(!secondItem.hasClass(FOCUSEDSTATE));
 
             menu.wrapper.press(keys.RIGHT);
 
-            ok(secondItem.hasClass("k-state-hover"));
+            ok(secondItem.hasClass(FOCUSEDSTATE));
         });
 
 </script>
