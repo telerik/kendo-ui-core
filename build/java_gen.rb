@@ -10,6 +10,51 @@ IGNORED = {
     'window' => ['content.template']
 }
 
+MD_METADATA_TEMPLATE = ERB.new(%{---
+title: <%= tag_name %>
+slug: <%= tag_name %>
+tags: api, java
+publish: true
+---
+})
+
+MD_OPTIONS_TEMPLATE = ERB.new(%{
+## Configuration Attributes
+<% options.each do |option| %><% if option.name != 'dataSource' %>
+
+### <%= option.name %> `<%= option.java_type.sub('java.lang.', '') %>`
+
+<%= option.description %>
+
+#### Example
+    <kendo:<%= tag_name %> <%= option.name %>="<%= option.name %>">
+    </kendo:<%= tag_name %>>
+    <% end %><% end %>
+})
+
+MD_EVENTS_TEMPLATE = ERB.new(%{
+## Event Attributes
+<% events.each do |event| %>
+### <%= event.name %> `String`
+
+<%= event.description %>
+
+#### Example
+    <kendo:<%= tag_name %> <%= event.name %>="handle_<%= event.name %>">
+    </kendo:<%= tag_name %>>
+    <script>
+        function handle_<%= event.name %>() {
+            // Code to handle the <%= event.name %> event.
+        }
+    </script>
+<% end %>
+})
+
+MD_DESCRIPTION_TEMPLATE = ERB.new(%{
+# <kendo:<%= tag_name %>>
+A JSP tag representing Kendo <%= name %>.
+})
+
 XML_EVENT_ATTRIBUTE_TEMPLATE = ERB.new(%{
         <attribute>
             <description><%= description %></description>
@@ -351,7 +396,6 @@ end
 class Option
     attr_reader :name, :type, :java_type, :description, :parent
 
-
     def initialize(options)
         @name = options[:name].strip
         @parent = options[:parent]
@@ -460,6 +504,10 @@ class Tag
         "wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/#{path}.java"
     end
 
+    def markdown_filename
+        "docs/api/wrappers/jsp/#{tag_name}.md"
+    end
+
     def java_source_code
         if File.exists?(java_filename)
             File.read(java_filename)
@@ -515,6 +563,25 @@ class Tag
         end
 
         @children.each { |child| child.sync_java }
+    end
+
+    def sync_markdown
+        $stderr.puts("Updating #{markdown_filename}") if VERBOSE
+
+        ensure_path(markdown_filename)
+
+        File.open(markdown_filename, 'w') do |file|
+            file.write(to_markdown)
+        end
+
+        @children.each { |child| child.sync_markdown }
+    end
+
+    def to_markdown
+        MD_METADATA_TEMPLATE.result(binding) +
+        MD_DESCRIPTION_TEMPLATE.result(binding) +
+        MD_OPTIONS_TEMPLATE.result(binding) +
+        MD_EVENTS_TEMPLATE.result(binding)
     end
 
     def namespace
@@ -621,7 +688,7 @@ class Tag
                 if types.include?('Function') && types.size == 1
 
                     event = Event.new :name => name,
-                                      :description => description.value
+                                      :description => description.value.strip
 
                     tag.events.push(event)
 
@@ -633,7 +700,7 @@ class Tag
                     option = Option.new :name => name,
                         :parent => tag,
                         :type => type,
-                        :description => description.value
+                        :description => description.value.strip
 
                     tag.options.push(option)
                 end
@@ -669,7 +736,7 @@ class Tag
                     description = find_child_with_type.call(paragraph, :text)
 
                     event = Event.new :name => name,
-                                      :description => description.value
+                                      :description => description.value.strip
 
                     tag.events.push(event)
 
@@ -715,6 +782,11 @@ class NestedTag < Tag
         return super if parent.name.downcase == namespace || @name == 'Item' || @name == 'Items' || (@name == parent.name.singular && !(name =~ /aggregate/i))
 
         return parent.name + @name + 'Tag'
+    end
+
+    def markdown_filename
+        filename = tag_name.downcase.sub(namespace + '-', '')
+        "docs/api/wrappers/jsp/#{namespace}/#{filename}.md"
     end
 
     def tag_name
@@ -888,10 +960,23 @@ def generate
     tags.each { |tag| tag.sync_java }
 end
 
+def api
+
+    tags = MARKDOWN.map{ |md| Tag.parse(md) }.sort{ |a, b| a.name <=> b.name }
+
+    tags.each { |tag| tag.sync_markdown }
+
+end
+
 namespace :java do
     desc('Generate JSP Wrappers from Markdown API reference')
     task :generate do
         generate
+    end
+
+    desc('Generate API reference for the JSP Wrappers')
+    task :api do
+        api
     end
 end
 
