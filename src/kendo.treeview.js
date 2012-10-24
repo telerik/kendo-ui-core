@@ -198,9 +198,7 @@
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("focus" + NS, proxy(that._focus, that))
                 .on("blur" + NS, proxy(that._blur, that))
-                .on("mousedown" + NS, ".k-in", function(e) {
-                    that._span = e.currentTarget;
-                })
+                .on("mousedown" + NS, ".k-in", proxy(that._mousedown, that))
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
                 .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
                 .on("click" + NS, function() { that.focus(); });
@@ -540,6 +538,10 @@
 
         _toggleButtonClick: function (e) {
             this.toggle($(e.target).closest(NODE));
+        },
+
+        _mousedown: function(e) {
+            this._span = e.currentTarget;
         },
 
         _focus: function(e) {
