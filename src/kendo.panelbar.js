@@ -572,7 +572,7 @@
                 next = item.parent(VISIBLEGROUP).parent(ITEM).next();
             }
 
-            if (!next[0]) {
+            if (!next[0] || !next.is(":visible")) {
                 next = this._first();
             }
 
