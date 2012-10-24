@@ -198,7 +198,7 @@
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("focus" + NS, proxy(that._focus, that))
                 .on("blur" + NS, proxy(that._blur, that))
-                .on("mousedown" + NS, ".k-in", proxy(that._mousedown, that))
+                .on("mousedown" + NS, ".k-in,.k-checkbox :checkbox", proxy(that._mousedown, that))
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
                 .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
                 .on("click" + NS, function() { that.focus(); });
@@ -541,20 +541,29 @@
         },
 
         _mousedown: function(e) {
-            this._span = e.currentTarget;
+            this._clickTarget = $(e.currentTarget).closest(NODE);
+        },
+
+        _focusable: function (node) {
+            return node && node.length && node.is(":visible") && !node.find(".k-in:first").hasClass("k-state-disabled");
         },
 
         _focus: function(e) {
-            var selected = this.select(),
-                current;
+            var current = this.select();
 
-            if (selected.length) {
-                this._oldSelection = selected[0];
-                this.current(selected);
-            } else {
-                current = this._span || this.current();
-                this.current(current);
+            if (!this._focusable(current)) {
+                current = this._clickTarget;
             }
+
+            if (!this._focusable(current)) {
+                current = this.current()
+            }
+
+            if (!this._focusable(current)) {
+                current = this._nextVisible($());
+            }
+
+            this.current(current);
         },
 
         focus: function() {
@@ -562,12 +571,7 @@
         },
 
         _blur: function(e) {
-            var that = this,
-                focused = that.current();
-
-            if (focused.length) {
-                focused.find(".k-in:first").removeClass("k-state-focused");
-            }
+            this.current().find(".k-in:first").removeClass("k-state-focused");
         },
 
         _enabled: function(node) {
@@ -643,10 +647,6 @@
                 return;
             }
 
-            if (!that._oldSelection) {
-                that._oldSelection = that.select()[0];
-            }
-
             if (key == keys.RIGHT) {
                 if (expanded) {
                     target = that._nextVisible(focused);
@@ -672,8 +672,7 @@
             } else if (key == keys.END) {
                 target = that._previousVisible($());
             } else if (key == keys.ENTER) {
-                if (focused[0] != that._oldSelection) {
-                    delete that._oldSelection;
+                if (!focused.find(".k-in:first").hasClass("k-state-selected")) {
                     that.select(focused);
                     that._trigger(SELECT, focused);
                 }
@@ -1058,29 +1057,30 @@
                 element = that.element,
                 id = that._ariaId;
 
-            if (node !== undefined && node.length) {
+            if (arguments.length > 0 && node && node.length) {
                 if (current) {
-                    current.find(".k-in:first")
-                        .removeClass("k-state-focused");
-
-                    current.removeAttr("id");
+                    current.removeAttr("id")
+                        .find(".k-in:first").removeClass("k-state-focused");
                 }
 
-                that._current = $(node, element).closest(NODE)
-                    .find(".k-in:first")
-                    .addClass("k-state-focused")
-                    .end();
+                current = that._current = $(node, element).closest(NODE);
+
+                current.find(".k-in:first").addClass("k-state-focused")
 
                 if (id) {
                     that.wrapper.removeAttr("aria-activedescendant");
-                    that._current.attr("id", id);
+                    current.attr("id", id);
                     that.wrapper.attr("aria-activedescendant", id);
                 }
 
                 return;
             }
 
-            return current || element.find(".k-in:first");
+            if (!current) {
+                current = that._nextVisible($());
+            }
+
+            return current;
         },
 
         select: function (node) {

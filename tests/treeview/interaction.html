@@ -391,6 +391,46 @@
                 equal(treeviewObject.current()[0], treeview.find(".k-item")[0]);
             });
 
+            test("focusing treeview shows focused state on first non-disabled item", function() {
+                createTreeView([
+                    { text: "foo", enabled: false },
+                    { text: "bar" }
+                ]);
+
+                treeview.focus();
+
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[1]);
+            });
+
+            test("subsequent focus does not focus disabled items", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
+
+                treeview.focus();
+                treeview.blur();
+
+                treeviewObject.enable(".k-item:first", false);
+
+                treeview.focus();
+
+                equal(treeviewObject.current()[0], treeview.find(".k-item")[1]);
+            });
+
+            test("focusing treeview with hidden selected item focuses first visible item", function() {
+                createTreeView([
+                    { text: "foo", expanded: false, items: [
+                        { text: "bar", selected: true }
+                    ] },
+                    { text: "baz" }
+                ]);
+
+                treeview.focus();
+
+                equal(treeview.find(".k-state-focused")[0], treeview.find(".k-in:first")[0]);
+            });
+
             test("up arrow moves focus to previous node", function() {
                 createTreeView([
                     { text: "foo" },
@@ -666,7 +706,7 @@
             test("checking checkboxes sets indeterminate state of parents", function() {
                 createTreeView({
                     dataSource: [
-                        { text: "foo", items: [
+                        { text: "foo", expanded: true, items: [
                             { text: "bar", selected: true },
                             { text: "baz" }
                         ] },
@@ -912,6 +952,7 @@
                     ]
                 });
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
 
                 equal(treeview.find(".k-state-focused").text(), "baz");
@@ -928,6 +969,7 @@
                     }
                 });
 
+                treeview.focus();
                 treeview.press(keys.DOWN);
             });
 
@@ -944,22 +986,6 @@
 
                 treeview.focus();
                 treeview.press(keys.UP);
-            });
-
-            test("down arrow when focused element is not visible focuses first node", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo", expanded: true, items: [ { text: "baz", selected: true } ] }
-                    ]
-                });
-
-                treeview.focus();
-
-                treeview.data("kendoTreeView").dataSource.data()[0].set("expanded", false);
-
-                treeview.press(keys.DOWN);
-
-                equal(treeview.find(".k-state-focused").text(), "foo");
             });
 
             test("focusing node set aria-activedescendent to the wrapper", function() {
