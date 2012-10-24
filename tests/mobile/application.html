@@ -248,7 +248,7 @@
                     platform: "android"
                 });
 
-                ok(application.element.hasClass("km-on-ios"));
+                ok(application.element.hasClass("km-on-ios"), "App element had to have km-on-ios, has " + application.element.attr("class"));
             });
 
             test("Raises meaningful error when the app can't find views", 1, function() {
