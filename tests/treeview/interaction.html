@@ -24,10 +24,6 @@
         <ol id="qunit-tests"></ol>
 
         <script>
-            function removeTreeViews() {
-                $(".k-treeview,.k-drag-clue").remove();
-            }
-
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             };
@@ -35,7 +31,7 @@
             var keys = kendo.keys;
 
             module("expand / collapse", {
-                teardown: removeTreeViews
+                teardown: cleanArtifacts
             });
 
             test("expanding disabled items does not expand them", function() {
@@ -94,7 +90,7 @@
             });
 
             module("selection", {
-                teardown: removeTreeViews
+                teardown: cleanArtifacts
             });
 
             test("clicking nodes selects them", function() {
@@ -134,7 +130,7 @@
             });
 
             module("drag & drop", {
-                teardown: removeTreeViews
+                teardown: cleanArtifacts
             });
 
             function moveNode(treeview, sourceText, destinationText, dropPosition) {
@@ -249,7 +245,7 @@
             });
 
             module("keyboard support", {
-                teardown: removeTreeViews
+                teardown: cleanArtifacts
             });
 
             test("right arrow expands node", 1, function() {
@@ -266,6 +262,22 @@
 
                 treeview.focus();
                 treeview.press(keys.RIGHT);
+            });
+
+            test("left arrow in RTL mode expands node", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { selected: true, text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ],
+                    expand: function(e) {
+                        ok(true);
+                    }
+                }, { rtl: true });
+
+                treeview.focus();
+                treeview.press(keys.LEFT);
             });
 
             test("right arrow at expanded node moves to first child", function() {
@@ -295,6 +307,22 @@
 
                 treeview.focus();
                 treeview.press(keys.LEFT);
+            });
+
+            test("right arrow in RTL mode collapses expanded nodes", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { selected: true, expanded: true, text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ],
+                    collapse: function(e) {
+                        ok(true);
+                    }
+                }, { rtl: true });
+
+                treeview.focus();
+                treeview.press(keys.RIGHT);
             });
 
             test("left arrow focuses parent node of already collapsed nodes", function() {
@@ -1087,7 +1115,7 @@
                         }
                     });
                 },
-                teardown: removeTreeViews
+                teardown: cleanArtifacts
             });
 
             asyncTest("dropping items over unfetched nodes fetches and appends node", function() {

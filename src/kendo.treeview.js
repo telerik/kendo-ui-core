@@ -641,19 +641,20 @@
                 target,
                 focused = that.current(),
                 expanded = that._expanded(focused),
-                checkbox = focused.find(":checkbox:first");
+                checkbox = focused.find(":checkbox:first"),
+                rtl = kendo.support.isRtl(that.element);
 
             if (e.target != e.currentTarget) {
                 return;
             }
 
-            if (key == keys.RIGHT) {
+            if ((!rtl && key == keys.RIGHT) || (rtl && key == keys.LEFT)) {
                 if (expanded) {
                     target = that._nextVisible(focused);
                 } else {
                     that.expand(focused);
                 }
-            } else if (key == keys.LEFT) {
+            } else if ((!rtl && key == keys.LEFT) || (rtl && key == keys.RIGHT)) {
                 if (expanded) {
                     that.collapse(focused);
                 } else {
