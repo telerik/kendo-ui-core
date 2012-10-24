@@ -82,7 +82,7 @@
                         visible: true,
                         template: "#= kendo.toString(category, 'd') #"
                     },
-                    width: 1
+                    width: 1.5
                 }
             },
             tooltip: {
