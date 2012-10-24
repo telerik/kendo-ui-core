@@ -2478,6 +2478,12 @@ function pad(number, digits, end) {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
             this.wrapper = this.element;
+            this.eventProxy = new kendo.EventProxy(this.element, this);
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.eventProxy.off();
         },
 
         options: {
@@ -2580,4 +2586,123 @@ function pad(number, digits, end) {
             return focusable(element, !isNaN(idx) && idx > -1);
         }
     });
+
+
+    var off = $.fn.off,
+        on = $.fn.on;
+
+    function EventProxy(element, handler) {
+        var that = this;
+        that.element = $(element);
+        that.handler = handler;
+        that.handlers = [];
+        that.mute = false;
+
+        if (support.touch) {
+            that._touchStartProxy = $.proxy(that, "_touchStart");
+            that._touchEndProxy = $.proxy(that, "_touchEnd");
+
+            that.element
+                .on("touchstart", that._touchStartProxy)
+                .on("touchend", that._touchEndProxy);
+        }
+    }
+
+    EventProxy.eventMap = {
+        down: "touchstart mousedown",
+        move: "mousemove touchmove",
+        up: "mouseup touchend",
+        cancel: "mouseleave touchcancel"
+    };
+
+    if (support.pointers) {
+        EventProxy.eventMap = {
+            down: "MSPointerDown",
+            move: "MSPointerMove",
+            up: "MSPointerUp",
+            cancel: "MSPointerCancel"
+        };
+    }
+
+    EventProxy.mapEvent = function(e) {
+        return EventProxy.eventMap[e] || e;
+    };
+
+    function containsMouse(string) {
+       return string.indexOf("mouse") > -1;
+    }
+
+    EventProxy.prototype = {
+        on: function() {
+            var that = this,
+                handler = that.handler,
+                args = slice.call(arguments),
+                callback =  args[args.length - 1],
+                callbackIsFunction = $.isFunction(callback),
+                events = args[0].replace(/\w+/g, EventProxy.mapEvent),
+                handlerProxy = callback;
+
+
+            if (!callbackIsFunction) {
+                callback = handler[callback];
+
+                if (support.touch && containsMouse(events)) {
+                    handlerProxy = function(e) {
+                        if (!(that.mute && containsMouse(e.type))) {
+                            callback.call(handler, e);
+                        }
+                    };
+                } else {
+                    handlerProxy = function(e) {
+                        callback.call(handler, e);
+                    };
+                }
+            }
+
+            args[args.length - 1] = handlerProxy;
+            args[0] = events;
+
+            that.handlers.push(args);
+            on.apply(that.element, args);
+
+            return that;
+        },
+
+        off: function() {
+            var that = this,
+                handlers = this.handlers,
+                element = that.element,
+                length = handlers.length,
+                idx = 0;
+
+            for(; idx < length; idx ++) {
+                off.apply(element, handlers[idx]);
+            }
+
+            if (support.touch) {
+                that.element
+                    .off("touchstart", that._touchStartProxy)
+                    .off("touchend", that._touchEndProxy);
+            }
+        },
+
+        _touchStart: function(e) {
+            var that = this;
+            if (that.timeoutID) {
+                clearTimeout(that.timeoutID);
+                that.timeoutID = null;
+            }
+
+            that.mute = true;
+        },
+
+        _touchEnd: function(e) {
+            var that = this;
+            that.timeoutID = setTimeout(function() {
+                that.mute = false;
+            }, 400);
+        }
+    };
+
+    kendo.EventProxy = EventProxy;
 })(jQuery);

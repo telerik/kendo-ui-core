@@ -1,4 +1,4 @@
-    var userEvents,
+var userEvents,
     UserEvents = kendo.UserEvents,
     element;
 

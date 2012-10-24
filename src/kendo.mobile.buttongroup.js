@@ -4,9 +4,7 @@
         Widget = ui.Widget,
         ACTIVE = "km-state-active",
         SELECT = "select",
-        SELECTOR = "li:not(." + ACTIVE +")",
-        ns = ".kendoMobileButtonGroup",
-        MOUSEDOWN = kendo.support.mousedown + ns;
+        SELECTOR = "li:not(." + ACTIVE +")";
 
     var ButtonGroup = Widget.extend({
         init: function(element, options) {
@@ -14,9 +12,9 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("km-buttongroup")
-                .on(MOUSEDOWN, SELECTOR, $.proxy(that._mousedown, that))
-                .find("li").each(that._button);
+            that.element.addClass("km-buttongroup").find("li").each(that._button);
+
+            that.eventProxy.on("down", SELECTOR, "_mousedown");
 
             that.select(that.options.index);
         },
@@ -32,11 +30,6 @@
 
         current: function() {
             return this.element.find("." + ACTIVE);
-        },
-
-        destroy: function() {
-            Widget.fn.destroy.call(this);
-            this.element.off(ns);
         },
 
         select: function (li) {

@@ -25,15 +25,12 @@
 
         <script>
             var Tabstrip = kendo.mobile.ui.TabStrip,
-                MOUSEDOWN = kendo.support.mousedown,
-                MOUSEUP = kendo.support.mouseup,
                 dom,
                 tabstrip;
 
-
             function click(dom) {
-                dom.trigger(MOUSEDOWN);
-                dom.trigger(MOUSEUP);
+                dom.trigger("mousedown");
+                dom.trigger("mouseup");
                 dom.trigger("click");
             }
 
