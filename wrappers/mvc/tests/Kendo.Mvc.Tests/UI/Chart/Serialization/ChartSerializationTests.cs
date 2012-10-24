@@ -76,7 +76,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Series_should_be_serialized_when_defined()
         {
-            chart.Series.Add(new ChartBarSeries<SalesData, decimal>(chart, s => s.RepSales, null));
+            chart.Series.Add(new ChartBarSeries<SalesData, decimal>(s => s.RepSales, null));
             chart.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{\"series\":[{\"name\":\"Rep Sales\",\"type\":\"bar\",\"field\":\"RepSales\"}]}");

@@ -9,10 +9,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}"/> class.
         /// </summary>
-        /// <param name="chart">The parent chart</param>
         /// <param name="expression">The expression used to extract the series value from the chart model.</param>
-        public ChartLineSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> expression)
-            : base(chart, expression)
+        public ChartLineSeries(Expression<Func<TModel, TValue>> expression)
+            : base(expression)
         {
             Initialize();
         }
@@ -20,10 +19,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartLineSeries{TModel, TValue}"/> class.
         /// </summary>
-        /// <param name="chart">The parent chart</param>
         /// <param name="data">The data to bind to.</param>
-        public ChartLineSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart, data)
+        public ChartLineSeries(IEnumerable data)
+            : base(data)
         {
             Initialize();
         }
@@ -32,8 +30,8 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="ChartLineSeries{TModel, TValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
-        public ChartLineSeries(Chart<TModel> chart)
-            : base(chart)
+        public ChartLineSeries()
+            : base()
         {
             Initialize();
         }

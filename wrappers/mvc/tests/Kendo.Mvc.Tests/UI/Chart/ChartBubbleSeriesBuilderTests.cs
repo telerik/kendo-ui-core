@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public ChartBubbleSeriesBuilderTests()
         {
             var chart = ChartTestHelper.CreateChart<BubbleData>();
-            series = new ChartBubbleSeries<BubbleData, float, float, float>(chart, s => s.X, s => s.Y, s => s.Size, null, null, null);
+            series = new ChartBubbleSeries<BubbleData, float, float, float>(s => s.X, s => s.Y, s => s.Size, null, null, null);
             builder = new ChartBubbleSeriesBuilder<BubbleData>(series);
         }
 

@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Initializes a new instance of the <see cref="ChartSeriesFactory{TModel}"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public ChartSeriesFactory(Chart<TModel> container)
+        public ChartSeriesFactory(ISeriesContainer container)
         {
             Container = container;
         }
@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The parent Chart
         /// </summary>
-        public Chart<TModel> Container
+        public ISeriesContainer Container
         {
             get;
             private set;
@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Bar<TValue>(Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression = null)
         {
-            ChartBarSeries<TModel, TValue> barSeries = new ChartBarSeries<TModel, TValue>(Container, valueExpression, colorExpression);
+            ChartBarSeries<TModel, TValue> barSeries = new ChartBarSeries<TModel, TValue>(valueExpression, colorExpression);
 
             Container.Series.Add(barSeries);
 
@@ -105,7 +105,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Bar(IEnumerable data)
         {
-            ChartBarSeries<TModel, object> barSeries = new ChartBarSeries<TModel, object>(Container, data);
+            ChartBarSeries<TModel, object> barSeries = new ChartBarSeries<TModel, object>(data);
 
             Container.Series.Add(barSeries);
 
@@ -185,7 +185,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartLineSeriesBuilder<TModel> Line<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            var lineSeries = new ChartLineSeries<TModel, TValue>(Container, expression);
+            var lineSeries = new ChartLineSeries<TModel, TValue>(expression);
 
             Container.Series.Add(lineSeries);
 
@@ -238,7 +238,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartLineSeriesBuilder<TModel> Line(IEnumerable data)
         {
-            ChartLineSeries<TModel, object> lineSeries = new ChartLineSeries<TModel, object>(Container, data);
+            ChartLineSeries<TModel, object> lineSeries = new ChartLineSeries<TModel, object>(data);
 
             Container.Series.Add(lineSeries);
 
@@ -312,7 +312,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartAreaSeriesBuilder<TModel> Area<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            ChartAreaSeries<TModel, TValue> areaSeries = new ChartAreaSeries<TModel, TValue>(Container, expression);
+            ChartAreaSeries<TModel, TValue> areaSeries = new ChartAreaSeries<TModel, TValue>(expression);
 
             Container.Series.Add(areaSeries);
 
@@ -365,7 +365,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartAreaSeriesBuilder<TModel> Area(IEnumerable data)
         {
-            ChartAreaSeries<TModel, object> areaSeries = new ChartAreaSeries<TModel, object>(Container, data);
+            ChartAreaSeries<TModel, object> areaSeries = new ChartAreaSeries<TModel, object>(data);
 
             Container.Series.Add(areaSeries);
 
@@ -442,7 +442,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
         {
-            var scatterSeries = new ChartScatterSeries<TModel, TXValue, TYValue>(Container, xValueExpression, yValueExpression);
+            var scatterSeries = new ChartScatterSeries<TModel, TXValue, TYValue>(xValueExpression, yValueExpression);
 
             Container.Series.Add(scatterSeries);
 
@@ -504,7 +504,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter(IEnumerable data)
         {
-            ChartScatterSeries<TModel, object, object> scatterSeries = new ChartScatterSeries<TModel, object, object>(Container, data);
+            ChartScatterSeries<TModel, object, object> scatterSeries = new ChartScatterSeries<TModel, object, object>(data);
 
             Container.Series.Add(scatterSeries);
 
@@ -522,7 +522,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
         {
-            var scatterLineSeries = new ChartScatterLineSeries<TModel, TXValue, TYValue>(Container, xValueExpression, yValueExpression);
+            var scatterLineSeries = new ChartScatterLineSeries<TModel, TXValue, TYValue>(xValueExpression, yValueExpression);
 
             Container.Series.Add(scatterLineSeries);
 
@@ -584,7 +584,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine(IEnumerable data)
         {
-            ChartScatterLineSeries<TModel, object, object> scatterLineSeries = new ChartScatterLineSeries<TModel, object, object>(Container, data);
+            ChartScatterLineSeries<TModel, object, object> scatterLineSeries = new ChartScatterLineSeries<TModel, object, object>(data);
 
             Container.Series.Add(scatterLineSeries);
 
@@ -604,7 +604,7 @@ namespace Kendo.Mvc.UI.Fluent
             )
         {
             var bubbleSeries = new ChartBubbleSeries<TModel, TXValue, TYValue, TSizeValue>(
-                Container, xValueExpression, yValueExpression, sizeExpression,
+                xValueExpression, yValueExpression, sizeExpression,
                 categoryExpression, colorExpression, visibleInLegendExpression
             );
 
@@ -675,7 +675,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBubbleSeriesBuilder<TModel> Bubble(IEnumerable data)
         {
-            var bubbleSeries = new ChartBubbleSeries<TModel, object, object, object>(Container, data);
+            var bubbleSeries = new ChartBubbleSeries<TModel, object, object, object>(data);
 
             Container.Series.Add(bubbleSeries);
 
@@ -693,7 +693,7 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, bool>> expressionVisibleInLegend = null
             )
         {
-            ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, expressionVisibleInLegend);
+            ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(expressionValue, expressionCategory, expressionColor, expressionExplode, expressionVisibleInLegend);
 
             Container.Series.Add(pieSeries);
 
@@ -778,7 +778,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartPieSeriesBuilder<TModel> Pie(IEnumerable data)
         {
-            ChartPieSeries<TModel, object> pieSeries = new ChartPieSeries<TModel, object>(Container, data);
+            ChartPieSeries<TModel, object> pieSeries = new ChartPieSeries<TModel, object>(data);
 
             Container.Series.Add(pieSeries);
 
@@ -796,7 +796,7 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, bool>> expressionVisibleInLegend = null
             )
         {
-            ChartDonutSeries<TModel, TValue> donutSeries = new ChartDonutSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, expressionVisibleInLegend);
+            ChartDonutSeries<TModel, TValue> donutSeries = new ChartDonutSeries<TModel, TValue>(expressionValue, expressionCategory, expressionColor, expressionExplode, expressionVisibleInLegend);
 
             Container.Series.Add(donutSeries);
 
@@ -881,7 +881,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartDonutSeriesBuilder<TModel> Donut(IEnumerable data)
         {
-            ChartDonutSeries<TModel, object> donutSeries = new ChartDonutSeries<TModel, object>(Container, data);
+            ChartDonutSeries<TModel, object> donutSeries = new ChartDonutSeries<TModel, object>(data);
 
             Container.Series.Add(donutSeries);
 
@@ -900,7 +900,7 @@ namespace Kendo.Mvc.UI.Fluent
             )
         {
             var ohlcSeries = new ChartOHLCSeries<TModel, TValue>(
-                Container, openExpression, highExpression, lowExpression, closeExpression, colorExpression
+                openExpression, highExpression, lowExpression, closeExpression, colorExpression
             );
 
             Container.Series.Add(ohlcSeries);
@@ -967,7 +967,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartOHLCSeriesBuilder<TModel> OHLC<TValue>(IEnumerable data)
         {
-            var ohlcSeries = new ChartOHLCSeries<TModel, TValue>(Container, data);
+            var ohlcSeries = new ChartOHLCSeries<TModel, TValue>(data);
 
             Container.Series.Add(ohlcSeries);
 
@@ -987,7 +987,7 @@ namespace Kendo.Mvc.UI.Fluent
             )
         {
             var ohlcSeries = new ChartCandlestickSeries<TModel, TValue>(
-                Container, openExpression, highExpression, lowExpression, closeExpression, colorExpression, downColorExpression
+                openExpression, highExpression, lowExpression, closeExpression, colorExpression, downColorExpression
             );
 
             Container.Series.Add(ohlcSeries);
@@ -1057,7 +1057,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartCandlestickSeriesBuilder<TModel> Candlestick<TValue>(IEnumerable data)
         {
-            var candlestickSeries = new ChartCandlestickSeries<TModel, TValue>(Container, data);
+            var candlestickSeries = new ChartCandlestickSeries<TModel, TValue>(data);
 
             Container.Series.Add(candlestickSeries);
 
@@ -1086,7 +1086,6 @@ namespace Kendo.Mvc.UI.Fluent
             var constructor = seriesType.GetConstructor(ctorTypeArgs.ToArray()) ?? seriesType.GetConstructors()[0];
 
             var ctorArgs = new List<object>();
-            ctorArgs.Add(Container);
             ctorArgs.AddRange(expressions);
 
             return constructor.Invoke(ctorArgs.ToArray());

@@ -18,12 +18,12 @@ namespace Kendo.Mvc.UI
             ChartArea = new ChartArea();
             PlotArea = new PlotArea();
             Legend = new ChartLegend();
-            Series = new List<ChartSeriesBase<T>>();
+            Series = new List<IChartSeries>();
             CategoryAxis = new ChartCategoryAxis<T>(this);
             ValueAxes = new List<IChartValueAxis>();
             XAxes = new List<IChartValueAxis>();
             YAxes = new List<IChartValueAxis>();
-            SeriesDefaults = new ChartSeriesDefaults<T>(this);
+            SeriesDefaults = new ChartSeriesDefaults<T>();
             AxisDefaults = new ChartAxisDefaults<T>(this);
             Tooltip = new ChartTooltip();
             Transitions = true;
@@ -129,7 +129,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets the chart series.
         /// </summary>
-        public IList<ChartSeriesBase<T>> Series
+        public IList<IChartSeries> Series
         {
             get;
             private set;
@@ -216,10 +216,26 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        protected virtual string WidgetName {
+            get
+            {
+                return "Chart";
+            }
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
 
+            Serialize(options);
+
+            writer.Write(Initializer.Initialize(Selector, WidgetName, options));
+
+            base.WriteInitializationScript(writer);
+        }
+
+        protected virtual void Serialize(IDictionary<string, object> options)
+        {
             SerializeData("chartArea", ChartArea.CreateSerializer().Serialize(), options);
             SerializeData("plotArea", PlotArea.CreateSerializer().Serialize(), options);
 
@@ -250,13 +266,9 @@ namespace Kendo.Mvc.UI
             SerializeSeriesColors(options);
 
             SerializeData("tooltip", Tooltip.CreateSerializer().Serialize(), options);
-
-            writer.Write(Initializer.Initialize(Selector, "Chart", options));
-
-            base.WriteInitializationScript(writer);
         }
 
-        private void SerializeData(string key, IDictionary<string, object> data, IDictionary<string, object> options)
+        protected void SerializeData(string key, IDictionary<string, object> data, IDictionary<string, object> options)
         {
             if (data.Count > 0)
             {

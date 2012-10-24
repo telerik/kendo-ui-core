@@ -11,30 +11,27 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="xValueExpression">The X expression.</param>
         /// <param name="yValueExpression">The Y expression.</param>
-        public ChartScatterLineSeries(Chart<TModel> chart, Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
-            : base(chart, xValueExpression, yValueExpression)
+        public ChartScatterLineSeries(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
+            : base(xValueExpression, yValueExpression)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
-        public ChartScatterLineSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart, data)
+        public ChartScatterLineSeries(IEnumerable data)
+            : base(data)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
-        public ChartScatterLineSeries(Chart<TModel> chart)
-            : base(chart)
+        public ChartScatterLineSeries()
+            : base()
         {
         }
 

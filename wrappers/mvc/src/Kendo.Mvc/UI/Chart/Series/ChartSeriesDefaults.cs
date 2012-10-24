@@ -5,20 +5,18 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartSeriesDefaults{T}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
-        public ChartSeriesDefaults(Chart<T> chart)
-            : base(chart)
+        public ChartSeriesDefaults()
         {
-            Bar = new ChartBarSeries<T, object>(chart);
-            Column = new ChartBarSeries<T, object>(chart);
-            Line = new ChartLineSeries<T, object>(chart);
-            VerticalLine = new ChartLineSeries<T, object>(chart);
-            Pie = new ChartPieSeries<T, object>(chart);
-            Scatter = new ChartScatterSeries<T, object, object>(chart);
-            ScatterLine = new ChartScatterLineSeries<T, object, object>(chart);
-            Area = new ChartAreaSeries<T, object>(chart);
-            VerticalArea = new ChartAreaSeries<T, object>(chart);
-            OHLC = new ChartOHLCSeries<T, object>(chart);
+            Bar = new ChartBarSeries<T, object>();
+            Column = new ChartBarSeries<T, object>();
+            Line = new ChartLineSeries<T, object>();
+            VerticalLine = new ChartLineSeries<T, object>();
+            Pie = new ChartPieSeries<T, object>();
+            Scatter = new ChartScatterSeries<T, object, object>();
+            ScatterLine = new ChartScatterLineSeries<T, object, object>();
+            Area = new ChartAreaSeries<T, object>();
+            VerticalArea = new ChartAreaSeries<T, object>();
+            OHLC = new ChartOHLCSeries<T, object>();
         }
 
         /// <summary>

@@ -697,7 +697,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart("sales")
+        /// &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => {
         ///                 series.Bar(new int[] { 1, 2, 3 }).Name("Total Sales");
@@ -712,7 +712,84 @@ namespace Kendo.Mvc.UI.Fluent
             return builder;
         }
 
+        /// <summary>
+        /// Creates a <see cref="Kendo.Mvc.UI.StockChart{T}"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart()
+        ///             .Name("StockChart")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual StockChartBuilder<T> StockChart<T>() where T : class
+        {
+            return new StockChartBuilder<T>(new StockChart<T>(ViewContext, Initializer, UrlGenerator));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Kendo.Mvc.UI.StockChart{T}"/> bound to the specified data source.
+        /// </summary>
+        /// <typeparam name="T">The type of the data item</typeparam>
+        /// <param name="data">The data source.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart(Model)
+        ///             .Name("StockChart")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual StockChartBuilder<T> StockChart<T>(IEnumerable<T> data) where T : class
+        {
+            StockChartBuilder<T> builder = StockChart<T>();
+
+            builder.Component.Data = data;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Kendo.Mvc.UI.StockChart{T}"/> bound an item in ViewData.
+        /// </summary>
+        /// <typeparam name="T">Type of the data item</typeparam>
+        /// <param name="dataSourceViewDataKey">The data source view data key.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart&lt;SalesData&gt;("sales")
+        ///             .Name("StockChart")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual StockChartBuilder<T> StockChart<T>(string dataViewDataKey) where T : class
+        {
+            StockChartBuilder<T> builder = StockChart<T>();
+
+            builder.Component.Data = ViewContext.ViewData.Eval(dataViewDataKey) as IEnumerable<T>;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Creates a new unbound <see cref="StockChart"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().StockChart()
+        ///             .Name("StockChart")
+        ///             .Series(series => {
+        ///                 series.Bar(new int[] { 1, 2, 3 }).Name("Total Sales");
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual StockChartBuilder<object> StockChart()
+        {
+            StockChartBuilder<object> builder = StockChart<object>();
+
+            return builder;
+        }
     }
+
     public class WidgetFactory<TModel> : WidgetFactory
     {
         private readonly string minimumValidator;

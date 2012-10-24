@@ -13,8 +13,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="chart">The chart.</param>
         /// <param name="expression">The expression.</param>
-        protected ChartBoundSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> expression)
-            : base(chart)
+        protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression)
         {
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
@@ -34,8 +33,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
-        protected ChartBoundSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart)
+        protected ChartBoundSeries(IEnumerable data)
         {
             Data = data;
         }
@@ -44,8 +42,7 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="ChartBoundSeries{TModel, TValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
-        protected ChartBoundSeries(Chart<TModel> chart)
-            : base(chart)
+        protected ChartBoundSeries()
         {
         }
 

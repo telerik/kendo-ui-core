@@ -11,7 +11,6 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TXValue, TYValue, TSizeValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="xValueExpression">The X expression.</param>
         /// <param name="yValueExpression">The Y expression.</param>
         /// <param name="sizeExpression">The Size expression.</param>
@@ -19,14 +18,13 @@ namespace Kendo.Mvc.UI
         /// <param name="colorExpression">The Color expression.</param>
         /// <param name="visibleInLegendExpression">The VisibleInLegend expression.</param>
         public ChartBubbleSeries(
-            Chart<TModel> chart,
             Expression<Func<TModel, TXValue>> xValueExpression,
             Expression<Func<TModel, TYValue>> yValueExpression,
             Expression<Func<TModel, TSizeValue>> sizeExpression,
             Expression<Func<TModel, string>> categoryExpression,
             Expression<Func<TModel, string>> colorExpression,
             Expression<Func<TModel, bool>> visibleInLegendExpression)
-            : base(chart, xValueExpression, yValueExpression)
+            : base(xValueExpression, yValueExpression)
         {
             if (typeof(TModel).IsPlainType() && !sizeExpression.IsBindable())
             {
@@ -54,19 +52,17 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TXValue, TYValue, TSizeValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
-        public ChartBubbleSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart, data)
+        public ChartBubbleSeries(IEnumerable data)
+            : base(data)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TXValue, TYValue, TSizeValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
-        public ChartBubbleSeries(Chart<TModel> chart)
-            : base(chart)
+        public ChartBubbleSeries()
+            : base()
         {
         }
 

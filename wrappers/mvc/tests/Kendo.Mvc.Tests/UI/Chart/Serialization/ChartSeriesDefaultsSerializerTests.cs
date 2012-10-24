@@ -11,8 +11,7 @@ namespace Kendo.Mvc.UI.Tests
 
         public ChartSeriesDefaultsSerializerTests()
         {
-            var chart = ChartTestHelper.CreateChart<SalesData>();
-            seriesDefaults = new ChartSeriesDefaults<SalesData>(chart);
+            seriesDefaults = new ChartSeriesDefaults<SalesData>();
         }
 
         [Fact]

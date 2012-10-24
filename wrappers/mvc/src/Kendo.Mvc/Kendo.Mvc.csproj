@@ -243,6 +243,7 @@
     <Compile Include="UI\Chart\ChartArea.cs" />
     <Compile Include="UI\Chart\ChartLine.cs" />
     <Compile Include="UI\Chart\ChartTooltip.cs" />
+    <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarLabelsPosition.cs" />
@@ -886,6 +887,13 @@
     <Compile Include="UI\Splitter\Splitter.cs" />
     <Compile Include="UI\Splitter\SplitterPane.cs" />
     <Compile Include="UI\NumericTextBox\Html\NumericTextBoxHtmlBuilder.cs" />
+    <Compile Include="UI\StockChart\ChartNavigator.cs" />
+    <Compile Include="UI\StockChart\ChartRange.cs" />
+    <Compile Include="UI\StockChart\Fluent\ChartNavigatorBuilder.cs" />
+    <Compile Include="UI\StockChart\Fluent\StockChartBuilder.cs" />
+    <Compile Include="UI\StockChart\Serialization\ChartRangeSerializer.cs" />
+    <Compile Include="UI\StockChart\Serialization\ChartNavigatorSerializer.cs" />
+    <Compile Include="UI\StockChart\StockChart.cs" />
     <Compile Include="UI\TextNode.cs" />
     <Compile Include="Infrastructure\IUrlGenerator.cs" />
     <Compile Include="UI\Grid\Settings\GridGroupableSettings.cs" />

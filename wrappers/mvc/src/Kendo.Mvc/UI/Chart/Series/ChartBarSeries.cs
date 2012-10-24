@@ -11,11 +11,10 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}"/> class.
         /// </summary>
-        /// <param name="chart">The parent chart</param>
         /// <param name="valueExpression">The expression used to extract the point value from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
-        public ChartBarSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression)
-            : base(chart, valueExpression)
+        public ChartBarSeries(Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression)
+            : base(valueExpression)
         {
             if (colorExpression != null) {
                 if (typeof(TModel).IsPlainType() && !colorExpression.IsBindable())
@@ -32,10 +31,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}"/> class.
         /// </summary>
-        /// <param name="chart">The parent chart</param>
         /// <param name="data">The data to bind to.</param>
-        public ChartBarSeries(Chart<TModel> chart, IEnumerable data)
-            : base(chart, data)
+        public ChartBarSeries(IEnumerable data)
+            : base(data)
         {
             Initialize();
         }
@@ -43,9 +41,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
-        public ChartBarSeries(Chart<TModel> chart)
-            : base(chart)
+        public ChartBarSeries()
         {
             Initialize();
         }

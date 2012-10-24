@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var chart = ChartTestHelper.CreateChart<OHLCData>();
             chart.Data = OHLCDataBuilder.GetCollection();
-            series = new ChartOHLCSeries<OHLCData, decimal>(chart, s => s.Open, s => s.High, s => s.Low, s => s.Close, s => s.Color);
+            series = new ChartOHLCSeries<OHLCData, decimal>(s => s.Open, s => s.High, s => s.Low, s => s.Close, s => s.Color);
         }
 
         [Fact]
