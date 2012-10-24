@@ -1156,7 +1156,8 @@
 .km-list input[type=time],
 .km-list input[type=datetime],
 .km-list select:not([multiple]),
-.km-list .k-dropdown
+.km-list .k-dropdown,
+.km-list textarea
 {
     width: 50%;
     .box-sizing(border-box);
@@ -1164,7 +1165,8 @@
 
 .km-root input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-root select:not([multiple]),
-.km-root .k-dropdown
+.km-root .k-dropdown,
+.km-root textarea
 {
     font-size: 1.2em;
 }
@@ -1177,7 +1179,8 @@
     background: none;
 }
 
-.km-root input
+.km-root input,
+.km-root textarea
 {
     .user-select(text);
 }
@@ -1190,7 +1193,8 @@
 
 .km-root .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not(.k-input):not(.k-button),
 .km-root .km-list select:not([multiple]),
-.km-root .km-list .k-dropdown
+.km-root .km-list .k-dropdown,
+.km-root .km-list textarea
 {
     position: absolute;
     right: .8em;
@@ -1202,10 +1206,22 @@
 
 .km-root .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-root .km-list select:not([multiple]),
-.km-root .km-list .k-dropdown
+.km-root .km-list .k-dropdown,
+.km-root .km-list textarea
 {
     right: 0;
     margin-top: -.95em;
+}
+
+.km-root .km-list .k-dropdown
+{
+    line-height: 1.4em;
+}
+
+.km-list .k-dropdown,
+.km-list .k-dropdown .k-input
+{
+    background-color: transparent;
 }
 
 .km-root .k-dropdown-wrap
@@ -1215,6 +1231,7 @@
 
 .km-root .km-listview-label:after,
 .km-root input ~ .km-listview-link:after,
+.km-root textarea ~ .km-listview-link:after,
 .km-root select ~ .km-listview-link:after,
 .km-root .k-dropdown ~ .km-listview-link:after
 {
@@ -1225,6 +1242,14 @@
 .km-root .k-dropdown .k-select
 {
     display: none;
+}
+
+.km-root .km-list textarea
+{
+    position: relative;
+    float: right;
+    margin-top: 0;
+    font-family: inherit;
 }
 
 /* PopUp + ActionSheet */
@@ -1446,7 +1471,7 @@
 
 /* Platform specific workarounds */
 
-.km-on-ios,
+.km-pane,
 .km-on-ios .km-view,
 .km-on-ios .km-header,
 .km-on-ios .km-footer,
@@ -1465,6 +1490,13 @@
 .km-on-blackberry .km-actionsheet-wrapper
 {
     -webkit-transform: translatez(0);
+}
+
+.km-on-meego,
+.km-on-android,
+.km-on-blackberry
+{
+    -webkit-transform: none;
 }
 
 //.km-on-android.km-4, /* Causes changing views to not refresh the screen in 4.0 */
