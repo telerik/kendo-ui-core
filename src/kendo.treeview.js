@@ -198,6 +198,9 @@
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("focus" + NS, proxy(that._focus, that))
                 .on("blur" + NS, proxy(that._blur, that))
+                .on("mousedown" + NS, ".k-in", function(e) {
+                    that._span = e.currentTarget;
+                })
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
                 .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
                 .on("click" + NS, function() { that.focus(); });
@@ -547,7 +550,7 @@
                 this._oldSelection = selected[0];
                 this.current(selected);
             } else {
-                current = this.current();
+                current = this._span || this.current();
                 this.current(current);
             }
         },
@@ -1049,12 +1052,12 @@
 
         current: function(node) {
             var that = this,
-                element = that.element,
                 current = that._current,
+                element = that.element,
                 id = that._ariaId;
 
             if (node !== undefined && node.length) {
-              if (current) {
+                if (current) {
                     current.find(".k-in:first")
                         .removeClass("k-state-focused");
 
@@ -1075,7 +1078,7 @@
                 return;
             }
 
-            return current || $();
+            return current || element.find(".k-in:first");
         },
 
         select: function (node) {

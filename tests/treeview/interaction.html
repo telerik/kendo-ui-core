@@ -380,28 +380,15 @@
                 equal(treeviewObject.current()[0], treeview.find(".k-item:last")[0]);
             });
 
-            test("down arrow in treeview without focused node focus first node", function() {
+            test("focusing a treeview without selection focuses first node", function() {
                 createTreeView([
                     { text: "foo" },
                     { text: "bar" }
                 ]);
 
                 treeview.focus();
-                treeview.press(keys.DOWN);
 
                 equal(treeviewObject.current()[0], treeview.find(".k-item")[0]);
-            });
-
-            test("up arrow in treeview without focused node focus last node", function() {
-                createTreeView([
-                    { text: "foo" },
-                    { text: "bar" }
-                ]);
-
-                treeview.focus();
-                treeview.press(keys.UP);
-
-                equal(treeviewObject.current()[0], treeview.find(".k-item")[1]);
             });
 
             test("up arrow moves focus to previous node", function() {
@@ -976,7 +963,7 @@
             });
 
             test("focusing node set aria-activedescendent to the wrapper", function() {
-                treeview = $("<div id=\"treeview\" />").appendTo(document.body)
+                treeview = $("<div id='treeview' />").appendTo(document.body)
                     .kendoTreeView({
                         dataSource: [
                             { text: "foo" },
@@ -993,7 +980,7 @@
             });
 
             test("focusing node sets its id", function() {
-                treeview = $("<div id=\"treeview\" />").appendTo(document.body)
+                treeview = $("<div id='treeview' />").appendTo(document.body)
                     .kendoTreeView({
                         dataSource: [
                             { text: "foo" },
