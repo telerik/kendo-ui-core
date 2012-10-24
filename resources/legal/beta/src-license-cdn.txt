@@ -1,0 +1,7 @@
+/*
+* Kendo UI Beta v#= version # (http://kendoui.com)
+* Copyright #= year # Telerik AD. All rights reserved.
+*
+* Kendo UI Beta license terms available at
+* http://www.kendoui.com/purchase/license-agreement/kendo-ui-beta.aspx
+*/
