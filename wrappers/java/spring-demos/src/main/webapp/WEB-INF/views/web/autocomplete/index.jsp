@@ -60,7 +60,7 @@
 	        "Vatican City"
 	    };
 	    %>
-	    <kendo:autoComplete name="autocomplete" filter="startswith" placeholder="Select country..." separator=", ">
+	    <kendo:autoComplete name="country" filter="startswith" placeholder="Select country..." separator=", ">
 	        <kendo:dataSource data="<%=countries%>">
 	        </kendo:dataSource>
 	    </kendo:autoComplete>
