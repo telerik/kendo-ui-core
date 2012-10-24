@@ -429,9 +429,8 @@
             var that = this,
                 container = that.container,
                 params = urlParams(url),
-                firstChar = url.charAt(0),
-                local = firstChar === "#",
-                remote = firstChar === "/",
+                local = url.charAt(0) === "#",
+                remote = !url.match(/^\w/),
                 view,
                 element,
                 urlPath = url.split("?")[0];
