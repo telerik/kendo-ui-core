@@ -298,6 +298,26 @@
 
                equal(resizing.calls("end"), 1);
            });
+
+           test("Splitter adds focused class on focus", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitterObject = splitter.data("kendoSplitter"),
+                    splitbar = splitter.find(".k-splitbar");
+
+                splitbar.focus();
+
+                ok(splitbar.hasClass("k-state-focused"));
+            });
+
+            test("Splitter removes focused class on focus", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter(),
+                    splitterObject = splitter.data("kendoSplitter"),
+                    splitbar = splitter.find(".k-splitbar");
+
+                splitbar.focus().blur();
+
+                ok(!splitbar.hasClass("k-state-focused"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

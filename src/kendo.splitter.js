@@ -19,6 +19,7 @@
         CLICK = "click",
         PANE = "pane",
         MOUSELEAVE = "mouseleave",
+        FOCUSED = "k-state-focused",
         KPANE = "k-" + PANE,
         PANECLASS = "." + KPANE;
 
@@ -109,8 +110,9 @@
 
             that.element
                 .on("keydown" + NS, splitbarSelector, proxy(that._keydown, that))
-                .on("blur" + NS, splitbarSelector, function(e) { that.resizing.end(); })
                 .on("mousedown" + NS, splitbarSelector, function(e) { e.currentTarget.focus(); })
+                .on("focus" + NS, splitbarSelector, function(e) { $(e.currentTarget).addClass(FOCUSED);  })
+                .on("blur" + NS, splitbarSelector, function(e) { $(e.currentTarget).removeClass(FOCUSED); that.resizing.end(); })
                 .on(MOUSEENTER + NS, splitbarDraggableSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on(MOUSELEAVE + NS, splitbarDraggableSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on("mousedown" + NS, splitbarDraggableSelector, function() { that.resizing.end(); that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
