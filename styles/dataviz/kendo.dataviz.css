@@ -86,14 +86,10 @@ div.k-gauge
 
 .k-mask {
     background: #fff;
-    filter:alpha(opacity=70);
-    opacity: 0.7;
+    filter:alpha(opacity=75);
+    opacity: 0.75;
     position: absolute;
     height: 100%;
-}
-
-.k-black .k-mask {
-    background: #222;
 }
 
 .k-border {
@@ -102,6 +98,73 @@ div.k-gauge
     height: 100%;
     position: absolute;
 }
+
+.k-black .k-mask {
+    background: #222;
+}
+
+.k-black .k-selection {
+    border-color: #8e8e8e;
+}
+
+.k-blueopal .k-mask {
+    background: #fff;
+}
+
+.k-blueopal .k-selection {
+    border-color: #9aabb2;
+}
+
+.k-default .k-mask {
+    background: #fff;
+}
+
+.k-default .k-selection {
+    border-color: #8e8e8e;
+}
+
+.k-highcontrast .k-mask {
+    background: #1b141a;
+}
+
+.k-highcontrast .k-selection {
+    border-color: #664e62;
+}
+
+.k-metro .k-mask {
+    background: #fff;
+}
+.k-metro .k-handle {
+    background: #8ebc00;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.k-metroblack .k-mask {
+    background: #0e0e0e;
+}
+
+.k-metroblack .k-selection {
+    border-color: #707070;
+}
+
+.k-metroblack .k-handle {
+    background: #00aba9;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.k-silver .k-mask {
+    background: #eaeaec;
+}
+
+.k-silver .k-selection {
+    border-color: #a7b2c1;
+}
+
+
 
 .k-leftHandle {
     left: -4px;

@@ -370,17 +370,17 @@
                 },
                 line: {
                     markers: {
-                        background: "#1b141a"
+                        background: "#2c232b"
                     }
                 },
                 scatter: {
                     markers: {
-                        background: "#1b141a"
+                        background: "#2c232b"
                     }
                 },
                 scatterLine: {
                     markers: {
-                        background: "#1b141a"
+                        background: "#2c232b"
                     }
                 },
                 area: {
@@ -413,7 +413,7 @@
                 }
             },
             chartArea: {
-                background: "#1b141a"
+                background: "#2c232b"
             },
             seriesColors: ["#a7008f", "#ffb800", "#3aafff", "#99c900", "#b20753", "#ff4195"],
             axisDefaults: {
@@ -427,7 +427,7 @@
                     color: "#664e62"
                 },
                 minorGridLines: {
-                    color: "#2c232b"
+                    color: "#4f394b"
                 },
                 title: {
                     color: "#ffffff"
