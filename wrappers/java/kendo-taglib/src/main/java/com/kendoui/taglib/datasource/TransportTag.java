@@ -32,7 +32,7 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
         if (getParameterMap() == null) {
             if (parent.isSet("batch") && parent.getBatch()) {
                 setParameterMap(BATCH_PARAMETERMAP);
-            } else {
+            } else if (!parent.isValue("odata")){
                 setParameterMap(PARAMETERMAP);
             }
         }
