@@ -684,7 +684,6 @@
                 that._checkboxChange({ target: checkbox });
 
                 target = focused;
-                that.select(target);
             }
 
             if (target) {
