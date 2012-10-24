@@ -4,7 +4,7 @@
             Background color
             <ul>
                 <li>
-                    <ul id="button-group">
+                    <ul data-role="buttongroup" data-index="0">
                         <li style="background-color: green">Green</li>
                         <li style="background-color: darkred">Red</li>
                     </ul>
@@ -60,14 +60,6 @@
         </li>
     </ul>
 </div>
-
-<script>
-    function mobileButtonGroupInit() {
-        $("#button-group").kendoMobileButtonGroup({
-            index: 0
-        });
-    }
-</script>
 
 <style scoped>
     #buttongroup-appearance .km-button:not(.km-back) {
