@@ -891,7 +891,7 @@
     <Compile Include="UI\StockChart\ChartRange.cs" />
     <Compile Include="UI\StockChart\Fluent\ChartNavigatorBuilder.cs" />
     <Compile Include="UI\StockChart\Fluent\StockChartBuilder.cs" />
-    <Compile Include="UI\StockChart\Serialization\ChartRangeSerializer.cs" />
+    <Compile Include="UI\StockChart\Serialization\ChartDateSelectionSerializer.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorSerializer.cs" />
     <Compile Include="UI\StockChart\StockChart.cs" />
     <Compile Include="UI\TextNode.cs" />

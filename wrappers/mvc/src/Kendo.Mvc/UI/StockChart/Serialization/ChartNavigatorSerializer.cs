@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI
             var selectData = navigator.Select.CreateSerializer().Serialize();
             if (selectData.Count > 0)
             {
-                selectData.Add("range", selectData);
+                result.Add("select", selectData);
             }
 
             return result;
