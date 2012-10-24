@@ -34,6 +34,7 @@
        element.find(selector)
               .parent()
               .attr(kendo.attr("page"), page)
+              .attr("tabindex", -1)
               .toggleClass("k-state-disabled", disabled);
     }
 
@@ -182,7 +183,7 @@
         options: {
             name: "Pager",
             selectTemplate: '<li><span class="k-state-selected">#=text#</span></li>',
-            linkTemplate: '<li><a href="\\#" class="k-link" data-#=ns#page="#=idx#">#=text#</a></li>',
+            linkTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#">#=text#</a></li>',
             buttonCount: 10,
             autoBind: true,
             numeric: true,
