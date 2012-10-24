@@ -703,9 +703,10 @@
                         });
                     } else {
                         var headerWrap = th.closest(".k-grid-header-wrap"),
+                            ieCorrection = $.browser.msie ? headerWrap.scrollLeft() : 0,
                             webkitCorrection = $.browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
                             firefoxCorrection = $.browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
-                        left = th.position().left - webkitCorrection + firefoxCorrection;
+                        left = th.position().left - webkitCorrection + firefoxCorrection - ieCorrection;
                     }
 
                     resizeHandle.css({
