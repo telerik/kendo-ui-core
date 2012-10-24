@@ -65,11 +65,28 @@
 
 .window-shadow(@shadow-color) when not (@shadow-color = transparent) {
     border-color: @shadow-color;
-    .box-shadow(1px 1px 7px 1px @shadow-color);
+    .box-shadow(1px 1px 7px 1px lighten(@shadow-color, 50%));
+
+    &.k-state-focused {
+        border-color: @shadow-color;
+        .box-shadow(1px 1px 7px 1px @shadow-color);
+    }
 }
 
-.window-shadow(@shadow-color) when (@shadow-color = transparent) {
+.window-shadow(@shadow-color) when (@shadow-color = transparent), (lightness(@widget-background-color) < 50) {
     border-color: @widget-border-color;
+
+    &.k-state-focused {
+        border-color: lighten(@widget-border-color, 20%);
+    }
+}
+
+.window-shadow(@shadow-color) when (@shadow-color = transparent), (lightness(@widget-background-color) >= 50) {
+    border-color: @widget-border-color;
+
+    &.k-state-focused {
+        border-color: darken(@widget-border-color, 10%);
+    }
 }
 
 .box-sizing(@type) {
@@ -575,6 +592,7 @@ textarea.k-textbox:hover,
 .k-window
 {
     .window-shadow(@shadow-color);
+    background-color: @widget-background-color;
 }
 
 .k-textbox > input,
