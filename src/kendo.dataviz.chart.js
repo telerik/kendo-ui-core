@@ -7254,7 +7254,6 @@
     }
 
     // Exports ================================================================
-
     dataviz.ui.plugin(Chart);
 
     deepExtend(dataviz, {
