@@ -103,6 +103,10 @@ namespace :mvc do
          :from => MIN_CSS_RESOURCES,
          :root => 'styles/'
 
+    tree :to => MVC_DEMOS_ROOT + 'App_Data',
+         :from => 'demos/mvc/App_Data/*.nav.json',
+         :root => 'demos/mvc/App_Data/'
+
     tree :to => MVC_DEMOS_ROOT + 'Content/web',
          :from => DEMO_SHARED_ROOT + 'web/**/*',
          :root => DEMO_SHARED_ROOT + 'web/'
@@ -123,7 +127,8 @@ namespace :mvc do
          :from => MVC_MIN_JS,
          :root => 'src/'
 
-    task :assets_js => [:js, MVC_DEMOS_ROOT + 'Scripts']
+    task :assets_js => [:js, MVC_DEMOS_ROOT + 'Scripts', MVC_DEMOS_ROOT + 'App_Data']
+
     task :assets_css => [
         :less,
         MVC_DEMOS_ROOT + 'Content',
