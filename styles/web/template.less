@@ -73,7 +73,7 @@
     }
 }
 
-.window-shadow(@shadow-color) when (@shadow-color = transparent), (lightness(@widget-background-color) < 50) {
+.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) < 50%) {
     border-color: @widget-border-color;
 
     &.k-state-focused {
@@ -81,7 +81,7 @@
     }
 }
 
-.window-shadow(@shadow-color) when (@shadow-color = transparent), (lightness(@widget-background-color) >= 50) {
+.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) >= 50%) {
     border-color: @widget-border-color;
 
     &.k-state-focused {
