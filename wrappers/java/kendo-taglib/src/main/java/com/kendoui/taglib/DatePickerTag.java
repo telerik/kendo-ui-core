@@ -141,7 +141,11 @@ public class DatePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {
@@ -149,7 +153,11 @@ public class DatePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getClose() {
-        return ((Function)getProperty("close")).getBody();
+        Function property = ((Function)getProperty("close"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setClose(String value) {
@@ -157,7 +165,11 @@ public class DatePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getOpen() {
-        return ((Function)getProperty("open")).getBody();
+        Function property = ((Function)getProperty("open"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setOpen(String value) {

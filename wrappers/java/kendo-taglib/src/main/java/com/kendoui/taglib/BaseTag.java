@@ -26,6 +26,10 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
         super.setPageContext(context);
     }
     
+    public boolean isSet(String key) {
+        return json.containsKey(key);
+    }
+    
     public void setEvent(String name, String body) {
         setProperty(name, new Function(body));
     }

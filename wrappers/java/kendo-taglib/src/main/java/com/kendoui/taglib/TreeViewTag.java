@@ -172,7 +172,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
     }
 
     public String getCollapse() {
-        return ((Function)getProperty("collapse")).getBody();
+        Function property = ((Function)getProperty("collapse"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setCollapse(String value) {
@@ -180,7 +184,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
     }
 
     public String getDataBound() {
-        return ((Function)getProperty("dataBound")).getBody();
+        Function property = ((Function)getProperty("dataBound"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDataBound(String value) {
@@ -188,7 +196,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
     }
 
     public String getDrag() {
-        return ((Function)getProperty("drag")).getBody();
+        Function property = ((Function)getProperty("drag"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDrag(String value) {
@@ -196,7 +208,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
     }
 
     public String getDragend() {
-        return ((Function)getProperty("dragend")).getBody();
+        Function property = ((Function)getProperty("dragend"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDragend(String value) {
@@ -204,7 +220,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
     }
 
     public String getDragstart() {
-        return ((Function)getProperty("dragstart")).getBody();
+        Function property = ((Function)getProperty("dragstart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDragstart(String value) {
@@ -212,7 +232,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
     }
 
     public String getDrop() {
-        return ((Function)getProperty("drop")).getBody();
+        Function property = ((Function)getProperty("drop"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDrop(String value) {
@@ -220,7 +244,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
     }
 
     public String getExpand() {
-        return ((Function)getProperty("expand")).getBody();
+        Function property = ((Function)getProperty("expand"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setExpand(String value) {
@@ -228,7 +256,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
     }
 
     public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSelect(String value) {

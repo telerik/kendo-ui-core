@@ -182,7 +182,11 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {
@@ -190,7 +194,11 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
     }
 
     public String getClose() {
-        return ((Function)getProperty("close")).getBody();
+        Function property = ((Function)getProperty("close"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setClose(String value) {
@@ -198,7 +206,11 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
     }
 
     public String getDataBound() {
-        return ((Function)getProperty("dataBound")).getBody();
+        Function property = ((Function)getProperty("dataBound"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDataBound(String value) {
@@ -206,7 +218,11 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
     }
 
     public String getOpen() {
-        return ((Function)getProperty("open")).getBody();
+        Function property = ((Function)getProperty("open"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setOpen(String value) {
@@ -214,7 +230,11 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
     }
 
     public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSelect(String value) {

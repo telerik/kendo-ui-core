@@ -142,7 +142,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {
@@ -150,7 +154,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
     }
 
     public String getSpin() {
-        return ((Function)getProperty("spin")).getBody();
+        Function property = ((Function)getProperty("spin"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSpin(String value) {

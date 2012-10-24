@@ -141,7 +141,11 @@ public class SliderTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {
@@ -149,7 +153,11 @@ public class SliderTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getSlide() {
-        return ((Function)getProperty("slide")).getBody();
+        Function property = ((Function)getProperty("slide"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSlide(String value) {

@@ -79,7 +79,11 @@ public class CommandItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
     }
 
     public String getClick() {
-        return ((Function)getProperty("click")).getBody();
+        Function property = ((Function)getProperty("click"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setClick(String value) {

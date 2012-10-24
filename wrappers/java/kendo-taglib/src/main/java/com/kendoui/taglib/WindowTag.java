@@ -206,7 +206,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getActivate() {
-        return ((Function)getProperty("activate")).getBody();
+        Function property = ((Function)getProperty("activate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setActivate(String value) {
@@ -214,7 +218,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getClose() {
-        return ((Function)getProperty("close")).getBody();
+        Function property = ((Function)getProperty("close"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setClose(String value) {
@@ -222,7 +230,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getDeactivate() {
-        return ((Function)getProperty("deactivate")).getBody();
+        Function property = ((Function)getProperty("deactivate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDeactivate(String value) {
@@ -230,7 +242,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getDragend() {
-        return ((Function)getProperty("dragend")).getBody();
+        Function property = ((Function)getProperty("dragend"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDragend(String value) {
@@ -238,7 +254,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getDragstart() {
-        return ((Function)getProperty("dragstart")).getBody();
+        Function property = ((Function)getProperty("dragstart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDragstart(String value) {
@@ -246,7 +266,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getError() {
-        return ((Function)getProperty("error")).getBody();
+        Function property = ((Function)getProperty("error"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setError(String value) {
@@ -254,7 +278,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getOpen() {
-        return ((Function)getProperty("open")).getBody();
+        Function property = ((Function)getProperty("open"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setOpen(String value) {
@@ -262,7 +290,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getRefresh() {
-        return ((Function)getProperty("refresh")).getBody();
+        Function property = ((Function)getProperty("refresh"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setRefresh(String value) {
@@ -270,7 +302,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getResize() {
-        return ((Function)getProperty("resize")).getBody();
+        Function property = ((Function)getProperty("resize"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setResize(String value) {

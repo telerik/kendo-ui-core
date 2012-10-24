@@ -28,9 +28,9 @@
             </kendo:grid-column>
         </kendo:grid-columns>
         <kendo:dataSource pageSize="10">
-            <kendo:dataSource-transport parameterMap="parameterMap">
+            <kendo:dataSource-transport>
                 <kendo:dataSource-transport-create url="${createUrl}" dataType="json" type="POST" contentType="application/json" />
-                <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" />
+                <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json"/>
                 <kendo:dataSource-transport-update url="${updateUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-destroy url="${destroyUrl}" dataType="json" type="POST" contentType="application/json" />
             </kendo:dataSource-transport>
@@ -51,14 +51,5 @@
                 </kendo:dataSource-schema-model>
             </kendo:dataSource-schema>
         </kendo:dataSource>
-    </kendo:grid>
-    <script>
-    function parameterMap(options, type) {
-        if (type == "read") {
-            return options;
-        } else {
-            return JSON.stringify(options);
-        }
-    }
-    </script>
+    </kendo:grid>    
 <demo:footer />

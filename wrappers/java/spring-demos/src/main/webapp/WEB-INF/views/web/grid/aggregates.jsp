@@ -1,4 +1,3 @@
-<%@page import="com.kendoui.spring.models.DataSourceRequest"%>
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
@@ -35,14 +34,7 @@
 			        <kendo:dataSource-aggregateItem aggregate="average" field="unitPrice"/>
 			        <kendo:dataSource-aggregateItem aggregate="count" field="productName"/>        		
 		        </kendo:dataSource-aggregate>
-            	<kendo:dataSource-transport>
-            	<kendo:dataSource-transport-parameterMap>
-            	<script>
-				    function parameterMap(options, type) {        
-				        return JSON.stringify(options);        
-				    }
-			    </script>
-            	</kendo:dataSource-transport-parameterMap>
+            	<kendo:dataSource-transport>            	
                 <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST"  contentType="application/json"/>                
             </kendo:dataSource-transport>            
             <kendo:dataSource-schema data="data" total="total" groups="data" aggregates="aggregates">

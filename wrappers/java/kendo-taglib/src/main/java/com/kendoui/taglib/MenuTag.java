@@ -128,7 +128,11 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
     }
 
     public String getClose() {
-        return ((Function)getProperty("close")).getBody();
+        Function property = ((Function)getProperty("close"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setClose(String value) {
@@ -136,7 +140,11 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
     }
 
     public String getOpen() {
-        return ((Function)getProperty("open")).getBody();
+        Function property = ((Function)getProperty("open"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setOpen(String value) {
@@ -144,7 +152,11 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
     }
 
     public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSelect(String value) {

@@ -140,7 +140,11 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getActivate() {
-        return ((Function)getProperty("activate")).getBody();
+        Function property = ((Function)getProperty("activate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setActivate(String value) {
@@ -148,7 +152,11 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getContentLoad() {
-        return ((Function)getProperty("contentLoad")).getBody();
+        Function property = ((Function)getProperty("contentLoad"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setContentLoad(String value) {
@@ -156,7 +164,11 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getError() {
-        return ((Function)getProperty("error")).getBody();
+        Function property = ((Function)getProperty("error"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setError(String value) {
@@ -164,7 +176,11 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSelect(String value) {

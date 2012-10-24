@@ -83,7 +83,11 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getCollapse() {
-        return ((Function)getProperty("collapse")).getBody();
+        Function property = ((Function)getProperty("collapse"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setCollapse(String value) {
@@ -91,7 +95,11 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getContentLoad() {
-        return ((Function)getProperty("contentLoad")).getBody();
+        Function property = ((Function)getProperty("contentLoad"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setContentLoad(String value) {
@@ -99,7 +107,11 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getExpand() {
-        return ((Function)getProperty("expand")).getBody();
+        Function property = ((Function)getProperty("expand"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setExpand(String value) {
@@ -107,7 +119,11 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getLayoutChange() {
-        return ((Function)getProperty("layoutChange")).getBody();
+        Function property = ((Function)getProperty("layoutChange"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setLayoutChange(String value) {
@@ -115,7 +131,11 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getResize() {
-        return ((Function)getProperty("resize")).getBody();
+        Function property = ((Function)getProperty("resize"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setResize(String value) {

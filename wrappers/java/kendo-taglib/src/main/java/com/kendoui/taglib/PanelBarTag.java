@@ -100,7 +100,11 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getActivate() {
-        return ((Function)getProperty("activate")).getBody();
+        Function property = ((Function)getProperty("activate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setActivate(String value) {
@@ -108,7 +112,11 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getCollapse() {
-        return ((Function)getProperty("collapse")).getBody();
+        Function property = ((Function)getProperty("collapse"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setCollapse(String value) {
@@ -116,7 +124,11 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getContentLoad() {
-        return ((Function)getProperty("contentLoad")).getBody();
+        Function property = ((Function)getProperty("contentLoad"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setContentLoad(String value) {
@@ -124,7 +136,11 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getError() {
-        return ((Function)getProperty("error")).getBody();
+        Function property = ((Function)getProperty("error"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setError(String value) {
@@ -132,7 +148,11 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getExpand() {
-        return ((Function)getProperty("expand")).getBody();
+        Function property = ((Function)getProperty("expand"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setExpand(String value) {
@@ -140,7 +160,11 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
     }
 
     public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSelect(String value) {

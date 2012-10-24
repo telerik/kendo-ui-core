@@ -113,7 +113,11 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public String getParse() {
-        return ((Function)getProperty("parse")).getBody();
+        Function property = ((Function)getProperty("parse"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setParse(String value) {

@@ -148,7 +148,11 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public String getAxisLabelClick() {
-        return ((Function)getProperty("axisLabelClick")).getBody();
+        Function property = ((Function)getProperty("axisLabelClick"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setAxisLabelClick(String value) {
@@ -156,7 +160,11 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public String getDataBound() {
-        return ((Function)getProperty("dataBound")).getBody();
+        Function property = ((Function)getProperty("dataBound"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDataBound(String value) {
@@ -164,7 +172,11 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public String getPlotAreaClick() {
-        return ((Function)getProperty("plotAreaClick")).getBody();
+        Function property = ((Function)getProperty("plotAreaClick"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setPlotAreaClick(String value) {
@@ -172,7 +184,11 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public String getSeriesClick() {
-        return ((Function)getProperty("seriesClick")).getBody();
+        Function property = ((Function)getProperty("seriesClick"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSeriesClick(String value) {
@@ -180,7 +196,11 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public String getSeriesHover() {
-        return ((Function)getProperty("seriesHover")).getBody();
+        Function property = ((Function)getProperty("seriesHover"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSeriesHover(String value) {

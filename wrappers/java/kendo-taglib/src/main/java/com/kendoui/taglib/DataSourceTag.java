@@ -220,7 +220,11 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {
@@ -228,7 +232,11 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public String getError() {
-        return ((Function)getProperty("error")).getBody();
+        Function property = ((Function)getProperty("error"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setError(String value) {
@@ -236,7 +244,11 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public String getSync() {
-        return ((Function)getProperty("sync")).getBody();
+        Function property = ((Function)getProperty("sync"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSync(String value) {
@@ -244,7 +256,11 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public String getRequestStart() {
-        return ((Function)getProperty("requestStart")).getBody();
+        Function property = ((Function)getProperty("requestStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setRequestStart(String value) {
@@ -252,7 +268,11 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public String getRequestEnd() {
-        return ((Function)getProperty("requestEnd")).getBody();
+        Function property = ((Function)getProperty("requestEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setRequestEnd(String value) {

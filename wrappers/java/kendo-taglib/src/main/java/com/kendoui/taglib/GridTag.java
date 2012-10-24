@@ -206,7 +206,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getAltRowTemplate() {
-        return ((Function)getProperty("altRowTemplate")).getBody();
+        Function property = ((Function)getProperty("altRowTemplate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setAltRowTemplate(String value) {
@@ -214,7 +218,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getDetailTemplate() {
-        return ((Function)getProperty("detailTemplate")).getBody();
+        Function property = ((Function)getProperty("detailTemplate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDetailTemplate(String value) {
@@ -222,7 +230,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getRowTemplate() {
-        return ((Function)getProperty("rowTemplate")).getBody();
+        Function property = ((Function)getProperty("rowTemplate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setRowTemplate(String value) {
@@ -230,7 +242,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {
@@ -238,7 +254,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getColumnResize() {
-        return ((Function)getProperty("columnResize")).getBody();
+        Function property = ((Function)getProperty("columnResize"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setColumnResize(String value) {
@@ -246,7 +266,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getDataBound() {
-        return ((Function)getProperty("dataBound")).getBody();
+        Function property = ((Function)getProperty("dataBound"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDataBound(String value) {
@@ -254,7 +278,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getDetailCollapse() {
-        return ((Function)getProperty("detailCollapse")).getBody();
+        Function property = ((Function)getProperty("detailCollapse"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDetailCollapse(String value) {
@@ -262,7 +290,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getDetailExpand() {
-        return ((Function)getProperty("detailExpand")).getBody();
+        Function property = ((Function)getProperty("detailExpand"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDetailExpand(String value) {
@@ -270,7 +302,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getDetailInit() {
-        return ((Function)getProperty("detailInit")).getBody();
+        Function property = ((Function)getProperty("detailInit"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDetailInit(String value) {
@@ -278,7 +314,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getEdit() {
-        return ((Function)getProperty("edit")).getBody();
+        Function property = ((Function)getProperty("edit"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setEdit(String value) {
@@ -286,7 +326,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getRemove() {
-        return ((Function)getProperty("remove")).getBody();
+        Function property = ((Function)getProperty("remove"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setRemove(String value) {
@@ -294,7 +338,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getSave() {
-        return ((Function)getProperty("save")).getBody();
+        Function property = ((Function)getProperty("save"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSave(String value) {
@@ -302,7 +350,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public String getSaveChanges() {
-        return ((Function)getProperty("saveChanges")).getBody();
+        Function property = ((Function)getProperty("saveChanges"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSaveChanges(String value) {

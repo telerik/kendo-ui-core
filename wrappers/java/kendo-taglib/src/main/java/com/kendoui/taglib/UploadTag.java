@@ -113,7 +113,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getCancel() {
-        return ((Function)getProperty("cancel")).getBody();
+        Function property = ((Function)getProperty("cancel"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setCancel(String value) {
@@ -121,7 +125,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getComplete() {
-        return ((Function)getProperty("complete")).getBody();
+        Function property = ((Function)getProperty("complete"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setComplete(String value) {
@@ -129,7 +137,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getError() {
-        return ((Function)getProperty("error")).getBody();
+        Function property = ((Function)getProperty("error"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setError(String value) {
@@ -137,7 +149,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getProgress() {
-        return ((Function)getProperty("progress")).getBody();
+        Function property = ((Function)getProperty("progress"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setProgress(String value) {
@@ -145,7 +161,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getRemove() {
-        return ((Function)getProperty("remove")).getBody();
+        Function property = ((Function)getProperty("remove"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setRemove(String value) {
@@ -153,7 +173,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSelect(String value) {
@@ -161,7 +185,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getSuccess() {
-        return ((Function)getProperty("success")).getBody();
+        Function property = ((Function)getProperty("success"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSuccess(String value) {
@@ -169,7 +197,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getUpload() {
-        return ((Function)getProperty("upload")).getBody();
+        Function property = ((Function)getProperty("upload"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setUpload(String value) {

@@ -211,7 +211,11 @@ JAVA_DATASOURCE_SETTER = %{
 
 JAVA_EVENT_GETTER_TEMPLATE = ERB.new(%{
     public String get<%= name.sub(/^./) { |c| c.capitalize } %>() {
-        return ((Function)getProperty("<%= name %>")).getBody();
+        Function property = ((Function)getProperty("<%= name %>"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 })
 

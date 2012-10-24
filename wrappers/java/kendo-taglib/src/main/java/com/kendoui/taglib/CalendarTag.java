@@ -133,7 +133,11 @@ public class CalendarTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {
@@ -141,7 +145,11 @@ public class CalendarTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getNavigate() {
-        return ((Function)getProperty("navigate")).getBody();
+        Function property = ((Function)getProperty("navigate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setNavigate(String value) {

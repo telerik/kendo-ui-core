@@ -142,7 +142,11 @@ public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {

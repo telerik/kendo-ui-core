@@ -170,7 +170,11 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
     }
 
     public String getEditor() {
-        return ((Function)getProperty("editor")).getBody();
+        Function property = ((Function)getProperty("editor"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setEditor(String value) {

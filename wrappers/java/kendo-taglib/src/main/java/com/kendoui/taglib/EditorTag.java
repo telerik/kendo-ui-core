@@ -104,7 +104,11 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {
@@ -112,7 +116,11 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getExecute() {
-        return ((Function)getProperty("execute")).getBody();
+        Function property = ((Function)getProperty("execute"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setExecute(String value) {
@@ -120,7 +128,11 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getKeydown() {
-        return ((Function)getProperty("keydown")).getBody();
+        Function property = ((Function)getProperty("keydown"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setKeydown(String value) {
@@ -128,7 +140,11 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getKeyup() {
-        return ((Function)getProperty("keyup")).getBody();
+        Function property = ((Function)getProperty("keyup"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setKeyup(String value) {
@@ -136,7 +152,11 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getPaste() {
-        return ((Function)getProperty("paste")).getBody();
+        Function property = ((Function)getProperty("paste"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setPaste(String value) {
@@ -144,7 +164,11 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public String getSelect() {
-        return ((Function)getProperty("select")).getBody();
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setSelect(String value) {

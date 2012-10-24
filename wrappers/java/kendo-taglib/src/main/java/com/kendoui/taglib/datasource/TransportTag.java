@@ -14,6 +14,8 @@ import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
+    private static final String BATCH_PARAMETERMAP = "function(options,type){if(type===\"read\"){return JSON.stringify(options);}else{return JSON.stringify(options.models);}}";
+    private static final String PARAMETERMAP = "function(options,type){return JSON.stringify(options);}";
     
     @Override
     public int doEndTag() throws JspException {
@@ -27,6 +29,13 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //<< doEndTag
 
+        if (getParameterMap() == null) {
+            if (parent.isSet("batch") && parent.getBatch()) {
+                setParameterMap(BATCH_PARAMETERMAP);
+            } else {
+                setParameterMap(PARAMETERMAP);
+            }
+        }
         return super.doEndTag();
     }
 
@@ -105,7 +114,11 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public String getParameterMap() {
-        return ((Function)getProperty("parameterMap")).getBody();
+        Function property = ((Function)getProperty("parameterMap"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setParameterMap(String value) {

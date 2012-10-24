@@ -100,7 +100,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     }
 
     public String getEditTemplate() {
-        return ((Function)getProperty("editTemplate")).getBody();
+        Function property = ((Function)getProperty("editTemplate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setEditTemplate(String value) {
@@ -108,7 +112,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     }
 
     public String getTemplate() {
-        return ((Function)getProperty("template")).getBody();
+        Function property = ((Function)getProperty("template"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setTemplate(String value) {
@@ -116,7 +124,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     }
 
     public String getChange() {
-        return ((Function)getProperty("change")).getBody();
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setChange(String value) {
@@ -124,7 +136,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     }
 
     public String getDataBound() {
-        return ((Function)getProperty("dataBound")).getBody();
+        Function property = ((Function)getProperty("dataBound"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setDataBound(String value) {
@@ -132,7 +148,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     }
 
     public String getEdit() {
-        return ((Function)getProperty("edit")).getBody();
+        Function property = ((Function)getProperty("edit"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setEdit(String value) {
@@ -140,7 +160,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     }
 
     public String getRemove() {
-        return ((Function)getProperty("remove")).getBody();
+        Function property = ((Function)getProperty("remove"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
     }
 
     public void setRemove(String value) {
