@@ -299,7 +299,7 @@
             }
 
             if (support.eventCapture) {
-                var downEvents = EventProxy.eventMap.down.split(" "),
+                var downEvents = EventProxy.eventMap.up.split(" "),
                     idx = 0,
                     length = downEvents.length,
                     surfaceElement = that.surface[0],
