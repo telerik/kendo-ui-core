@@ -260,6 +260,28 @@
                 equal(cal._today.attr("title"), kendo.toString(new Date(), "D", culture));
             });
 
+            test("Calendar removes focused style on initial rendering", function() {
+                var cal = new Calendar(div);
+
+                ok(!cal._cell.hasClass("k-state-focused"));
+            });
+
+            test("Calendar adds  focused on focus", function() {
+                var cal = new Calendar(div);
+
+                cal._table.focus();
+
+                ok(cal._cell.hasClass("k-state-focused"));
+            });
+
+            test("Calendar removes  focused on blur", function() {
+                var cal = new Calendar(div);
+
+                cal._table.focus();
+                cal._table.blur();
+
+                ok(!cal._cell.hasClass("k-state-focused"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

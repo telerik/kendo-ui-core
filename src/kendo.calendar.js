@@ -17,7 +17,7 @@
         isIE8 = browser.msie && (parseInt(browser.version, 10) < 9 || (document.documentMode && document.documentMode < 9)),
         ns = ".kendoCalendar",
         CLICK = (touch ? "touchend" : "click") + ns,
-        KEYDOWN = "keydown" + ns,
+        KEYDOWN_NS = "keydown" + ns,
         ID = "id",
         MIN = "min",
         LEFT = "left",
@@ -76,7 +76,7 @@
             id = element
                     .addClass("k-widget k-calendar")
                     .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
-                    .on(KEYDOWN, "table.k-content", proxy(that._move, that))
+                    .on(KEYDOWN_NS, "table.k-content", proxy(that._move, that))
                     .on(CLICK, CELLSELECTOR, function(e) {
                         var link = e.currentTarget.firstChild;
 
@@ -97,6 +97,14 @@
 
             that._index = views[options.start];
             that._current = new DATE(restrictValue(value, options.min, options.max));
+
+            that._addClassProxy = function() {
+                that._cell.addClass(FOCUSED);
+            };
+
+            that._removeClassProxy = function() {
+                that._cell.removeClass(FOCUSED);
+            };
 
             that.value(value);
 
@@ -159,6 +167,7 @@
             table = table || this._table;
             if (this.options.focusOnNav !== false) {
                 table.focus();
+                this._bindTable(table);
             }
         },
 
@@ -282,6 +291,10 @@
 
             that._class(FOCUSED, currentView.toDateString(value));
 
+            if (!from && that._cell) {
+                that._cell.removeClass(FOCUSED);
+            }
+
             that._changeView = true;
         },
 
@@ -386,6 +399,7 @@
 
             if (!from) {
                 to.insertAfter(that.element[0].firstChild);
+                that._bindTable(to);
             } else if (from.parent().data("animating")) {
                 from.parent().kendoStop(true, true).remove();
                 from.remove();
@@ -508,6 +522,12 @@
                 cell.attr(ID, id);
                 that._table.removeAttr("aria-activedescendant").attr("aria-activedescendant", id);
             }
+        },
+
+        _bindTable: function (table) {
+            table
+                .on(FOCUS_WITH_NS, this._addClassProxy)
+                .on(BLUR, this._removeClassProxy);
         },
 
         _click: function(link) {
