@@ -95,6 +95,7 @@ DATAVIZ_JS = FileList[
     "src/kendo.data.xml.js",
     "src/kendo.data.js",
     "src/kendo.binder.js",
+    "src/kendo.draganddrop.js",
     "src/kendo.dataviz.core.js",
     "src/kendo.dataviz.themes.js",
     "src/kendo.dataviz.chart.js",
