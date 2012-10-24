@@ -3,8 +3,7 @@
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         abs = Math.abs,
-        MAX_DOUBLE_TAP_DISTANCE = 3;
-
+        MAX_DOUBLE_TAP_DISTANCE = 8;
 
     var Swipe = kendo.Class.extend({
         init: function(element, callback, options) {
@@ -122,7 +121,7 @@
             maxYDelta: 20,
             maxDuration: 1000,
             minHold: 800,
-            doubleTapTimeout: 400
+            doubleTapTimeout: 800
         },
 
         _cancelHold: function() {
@@ -138,6 +137,7 @@
 
             that._triggerTouch("touchstart", e);
 
+            that._cancelHold();
             that.holdTimeout = setTimeout(function() {
                 that._triggerTouch("hold", e);
             }, that.options.minHold);
@@ -150,18 +150,17 @@
 
             that._cancelHold();
 
-            if (lastTap) {
-                if (
-                        touch.endTime - lastTap.endTime < that.options.doubleTapTimeout &&
-                        kendo.touchDelta(touch, lastTap).distance < MAX_DOUBLE_TAP_DISTANCE
-                   ) {
-                       that._triggerTouch("doubletap", e);
-                   }
 
-                that.lastTap = null;
+            if (lastTap &&
+                (touch.endTime - lastTap.endTime < that.options.doubleTapTimeout) &&
+                kendo.touchDelta(touch, lastTap).distance < MAX_DOUBLE_TAP_DISTANCE
+                ) {
+
+               that._triggerTouch("doubletap", e);
+               that.lastTap = null;
             } else {
                 that._triggerTouch("tap", e);
-                that.lastTap = e.touch;
+                that.lastTap = touch;
             }
         },
 
