@@ -222,7 +222,7 @@
             if (HIDEBAR) {
                 WINDOW.on("load", hideBar);
                 kendo.onResize(hideBar);
-                that.element[0].addEventListener(support.mousedown, hideBar, true);
+                that.element[0].addEventListener("touchstart", hideBar, true);
             }
         },
 

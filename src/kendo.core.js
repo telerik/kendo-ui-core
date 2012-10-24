@@ -2587,21 +2587,6 @@ function pad(number, digits, end) {
         }
     });
 
-    var DOMEvents = {
-        down: "touchstart mousedown",
-        move: "mousemove touchmove",
-        up: "mouseup touchend",
-        cancel: "mouseleave touchcancel"
-    };
-
-    if (support.pointers) {
-        DOMEvents = {
-            down: "MSPointerDown",
-            move: "MSPointerMove",
-            up: "MSPointerUp",
-            cancel: "MSPointerCancel"
-        };
-    }
 
     var off = $.fn.off,
         on = $.fn.on;
@@ -2612,11 +2597,39 @@ function pad(number, digits, end) {
         that.handler = handler;
         that.handlers = [];
         that.mute = false;
-        that._touchStartProxy = $.proxy(that, "_touchStart");
-        that._touchEndProxy = $.proxy(that, "_touchEnd");
 
-        that.element.on("touchstart", that._touchStartProxy);
-        that.element.on("touchend", that._touchEndProxy);
+        if (support.touch) {
+            that._touchStartProxy = $.proxy(that, "_touchStart");
+            that._touchEndProxy = $.proxy(that, "_touchEnd");
+
+            that.element
+                .on("touchstart", that._touchStartProxy)
+                .on("touchend", that._touchEndProxy);
+        }
+    }
+
+    EventProxy.eventMap = {
+        down: "touchstart mousedown",
+        move: "mousemove touchmove",
+        up: "mouseup touchend",
+        cancel: "mouseleave touchcancel"
+    };
+
+    if (support.pointers) {
+        EventProxy.eventMap = {
+            down: "MSPointerDown",
+            move: "MSPointerMove",
+            up: "MSPointerUp",
+            cancel: "MSPointerCancel"
+        };
+    }
+
+    EventProxy.mapEvent = function(e) {
+        return EventProxy.eventMap[e] || e;
+    };
+
+    function containsMouse(string) {
+       return string.indexOf("mouse") > -1;
     }
 
     EventProxy.prototype = {
@@ -2626,16 +2639,16 @@ function pad(number, digits, end) {
                 args = slice.call(arguments),
                 callback =  args[args.length - 1],
                 callbackIsFunction = $.isFunction(callback),
+                events = args[0].replace(/\w+/g, EventProxy.mapEvent),
                 handlerProxy = callback;
 
-            args[0] = args[0].replace(/\w+/g, function(e) { return DOMEvents[e] || e; });
 
             if (!callbackIsFunction) {
                 callback = handler[callback];
 
-                if (args[0].indexOf("mouse") > -1) {
+                if (support.touch && containsMouse(events)) {
                     handlerProxy = function(e) {
-                        if (!(that.mute && e.type.indexOf("mouse") > -1)) {
+                        if (!(that.mute && containsMouse(e.type))) {
                             callback.call(handler, e);
                         }
                     };
@@ -2647,6 +2660,7 @@ function pad(number, digits, end) {
             }
 
             args[args.length - 1] = handlerProxy;
+            args[0] = events;
 
             that.handlers.push(args);
             on.apply(that.element, args);
@@ -2663,6 +2677,12 @@ function pad(number, digits, end) {
 
             for(; idx < length; idx ++) {
                 off.apply(element, handlers[idx]);
+            }
+
+            if (support.touch) {
+                that.element
+                    .off("touchstart", that._touchStartProxy)
+                    .off("touchend", that._touchEndProxy);
             }
         },
 

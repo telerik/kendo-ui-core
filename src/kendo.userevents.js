@@ -259,7 +259,6 @@
         init: function(element, options) {
             var that = this,
                 filter,
-                preventIfMoving,
                 surfaceProxy,
                 elementProxy;
 
@@ -300,13 +299,19 @@
             }
 
             if (support.eventCapture) {
-                preventIfMoving = function(e) {
-                    if (that._isMoved()) {
-                        e.preventDefault();
-                    }
-                };
+                var downEvents = EventProxy.eventMap.down.split(" "),
+                    idx = 0,
+                    length = downEvents.length,
+                    surfaceElement = that.surface[0],
+                    preventIfMoving = function(e) {
+                        if (that._isMoved()) {
+                            e.preventDefault();
+                        }
+                    };
 
-                that.surface[0].addEventListener(support.mouseup, preventIfMoving, true);
+                for(; idx < length; idx ++) {
+                    surfaceElement.addEventListener(downEvents[idx], preventIfMoving, true);
+                }
             }
 
             that.bind([

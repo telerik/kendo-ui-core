@@ -94,7 +94,8 @@
             options = that.options;
 
             eventProxy
-                .on("down move up cancel", HIGHLIGHT_SELECTOR, "_toggleItemActiveClass")
+                .on("down", HIGHLIGHT_SELECTOR, "_highlight")
+                .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
                 .on("up", ITEM_SELECTOR, "_click");
 
             if (support.mobileOS.ios) {
@@ -305,7 +306,15 @@
            }
         },
 
-        _toggleItemActiveClass: function(e) {
+        _dim: function(e) {
+            this._toggle(e, false);
+        },
+
+        _highlight: function(e) {
+            this._toggle(e, true);
+        },
+
+        _toggle: function(e, highlight) {
             if (e.which > 1) {
                 return;
             }
@@ -317,7 +326,7 @@
                 prevented = e.isDefaultPrevented();
 
             if (plainItem) {
-                item.toggleClass(ACTIVE_CLASS, e.type === support.mousedown && !prevented);
+                item.toggleClass(ACTIVE_CLASS, highlight && !prevented);
             }
         },
 
