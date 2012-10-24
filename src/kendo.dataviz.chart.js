@@ -5794,7 +5794,7 @@
         },
 
         reset: function(axisName) {
-            this.axisRanges[axisName] = { min: MAX_VALUE, max: MIN_VALUE };
+            delete this.axisRanges[axisName];
         },
 
         query: function(axisName) {
