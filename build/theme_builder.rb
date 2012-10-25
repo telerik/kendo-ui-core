@@ -106,6 +106,8 @@ THEME_BUILDER_RESOURCES = FileList['themebuilder/scripts/themebuilder.all.min.js
                 .include('themebuilder/styles/sprite.png')
                 .include('themebuilder/styles/bootstrap.min.css')
                 .include('themebuilder/styles/themebuilder.all.min.css')
+                .include('themebuilder/index.html')
+                .include('themebuilder/web.config')
 
 tree :to => 'dist/themebuilder/production',
      :from =>  THEME_BUILDER_RESOURCES,
@@ -136,10 +138,10 @@ namespace :themebuilder do
     task :staging => 'dist/themebuilder/staging.zip'
 
     desc('Deploy the ThemeBuilder to live site')
-    task :upload do # => [ :production ] do
+    task :upload => [ :production ] do
         local = 'dist/themebuilder/production'
         remote = 'themebuilder'
-        system("lftp 172.16.80.87:33 -e 'mirror -R --just-print --delete #{local} #{remote}; bye'")
+        system("lftp 172.16.80.87:33 -e 'mirror -R -p --just-print --delete #{local} #{remote}; bye'")
     end
 
     zip 'dist/themebuilder/staging.zip' => [
