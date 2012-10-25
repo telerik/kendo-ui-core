@@ -990,6 +990,8 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                     draggedElement, css, widget = false,
                     color = "transparent";
 
+                $(document.documentElement).off("touchmove");
+
                 $(".color-holder .drop").kendoDraggable(events.color);
                 $(".gradient-holder .drop").kendoDraggable(events.gradient);
                 $(".pattern-holder .drop").kendoDraggable(events.pattern);
