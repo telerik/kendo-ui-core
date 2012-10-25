@@ -2896,7 +2896,7 @@
             ChartElement.fn.getViewElements.call(segment, view);
 
             return [
-                view.createPolyline(segment.points(), true, {
+                view.createPolyline(segment.points(), false, {
                     id: segment.options.id,
                     stroke: lineOptions.color,
                     strokeWidth: lineOptions.width,

@@ -34,6 +34,12 @@
                 line: {
                     width: 4
                 },
+                area: {
+                    line: {
+                        opacity: 1,
+                        width: 0
+                    }
+                },
                 candlestick: {
                     line: {
                         width: 1,
