@@ -408,9 +408,13 @@
 
         play: function(effects) {
             var that = this,
+                effect,
+                idx,
+                length = effects.length,
                 element = that.element,
                 options = that.options,
                 deferred = $.Deferred(),
+                state,
                 startState = {},
                 endState = {},
                 target;
@@ -421,14 +425,18 @@
 
             element.data("animating", true);
 
-            each(effects, function() {
-                that.addRestoreProperties(this.restore);
-                extend(startState, this.startState());
+            for (idx = 0; idx < length; idx ++) {
+                effect = effects[idx];
+                that.addRestoreProperties(effect.restore);
 
-                each(this.auxilaries(), function() {
+                state = effect.state();
+                extend(startState, state.start);
+                extend(endState, state.end);
+
+                each(effect.auxilaries(), function() {
                     fx.promise(this.element, extend(true, {}, options, this.options));
                 });
-            });
+            }
 
             if (!element.is(":visible")) {
                 extend(startState, { display: element.data("olddisplay") || "block" }); // Add show to the set
@@ -451,10 +459,9 @@
             element.css(startState)
                    .css(TRANSFORM); // Nudge
 
-            each(effects, function() {
-                this.setup();
-                extend(endState, this.endState());
-            });
+            for (idx = 0; idx < length; idx ++) {
+                effects[idx].setup();
+            }
 
             options.init();
 
@@ -699,21 +706,15 @@
             }
         },
 
-        endState: function() {
-            return {};
-        },
+        _applyReverse: function(state) {
+            var tmp;
+            if (this.options.reverse) {
+                tmp = state.start;
+                state.start = state.end;
+                state.end = tmp;
+            }
 
-        startState: function() {
-            return {};
-        },
-
-        initDirection: function() {
-            var that = this,
-                element = that.element,
-                direction = that.options.direction,
-                dir = directions[direction];
-
-            return { direction: dir, offset: -dir.modifier * (dir.vertical ? element.outerHeight() : element.outerWidth()) };
+            return state;
         },
 
         auxilaries: function() {
@@ -820,30 +821,25 @@
             }
         },
 
-        _state: function(startState) {
+        state: function() {
             var that = this,
                 options = that.options,
-                extender = {},
-                init = this.initDirection(),
-                reverse = startState ? !options.reverse : options.reverse,
-                offset = init.offset / (options.divisor || 1),
-                value = (reverse ? offset : 0) + PX;
+                element = that.element,
+                state = { start: {}, end: {} },
+                direction = directions[options.direction],
+                offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
+                start = offset / (options.divisor || 1) + PX,
+                end = "0px";
 
             if (transforms && options.transition !== false) {
-                extender[init.direction.transition] = value;
+                state.start[direction.transition] = start;
+                state.end[direction.transition] = end;
             } else {
-                extender[init.direction.property] = value;
+                state.start[direction.property] = start;
+                state.end[direction.property] = end;
             }
 
-            return extender;
-        },
-
-        startState: function() {
-            return this._state(true);
-        },
-
-        endState: function() {
-            return extend(this._state(false), this.options.properties);
+            return this._applyReverse(state);
         }
     });
 

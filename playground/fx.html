@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kendo FX</title>
+        <script src="../src/jquery.min.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <style>
+            .anime {
+                width: 150px;
+                height: 150px;
+                background: #e4e4e4;
+                border: 1px solid #999;
+            }
+
+            aside {
+                float: right;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <aside>
+                <button id="slideInPlay">Play</button>
+                <button id="slideInReverse">Reverse</button>
+            </aside>
+
+            <div class="anime">Slide In</div>
+
+            <hr />
+        </div>
+
+        <script>
+            $("#slideInPlay").click(function() { $(this).parent().siblings(".anime").kendoAnimate("slideIn:left"); });
+            $("#slideInReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({ effects: "slideIn:left", reverse: true }); });
+        </script>
+    </body>
+</html>
