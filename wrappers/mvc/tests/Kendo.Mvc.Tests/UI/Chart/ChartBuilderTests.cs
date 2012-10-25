@@ -113,6 +113,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void AutoBind_should_set_AutoBind()
+        {
+            builder.AutoBind(false);
+            chart.AutoBind.ShouldEqual(false);
+        }
+
+        [Fact]
+        public void AutoBind_should_return_builder()
+        {
+            builder.AutoBind(false).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void SeriesColors_should_return_builder()
         {
             builder.SeriesColors(new string[] { }).ShouldBeSameAs(builder);

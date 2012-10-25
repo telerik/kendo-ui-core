@@ -47,6 +47,32 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void AutoBind_true_serialized()
+        {
+            chart.AutoBind = false;
+            chart.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"autoBind\":false}");
+        }
+
+        [Fact]
+        public void AutoBind_false_serialized()
+        {
+            chart.AutoBind = true;
+            chart.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"autoBind\":true}");
+        }
+
+        [Fact]
+        public void AutoBind_default_not_serialized()
+        {
+            chart.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldNotContain("autoBind");
+        }
+
+        [Fact]
         public void Legend_serialized()
         {
             chart.Legend.Visible = false;

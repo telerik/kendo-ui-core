@@ -346,6 +346,33 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Enables or disables automatic binding.
+        /// </summary>
+        /// <param name="visible">
+        /// Gets or sets a value indicating if the chart
+        /// should be data bound during initialization.
+        /// The default value is true.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Chart()
+        ///             .Name("Chart")
+        ///             .DataSource(ds =>
+        ///             {
+        ///                 ds.Ajax().Read(r => r.Action("SalesData", "Chart"));
+        ///             })
+        ///             .AutoBind(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartBuilder<T> AutoBind(bool autoBind)
+        {
+            Component.AutoBind = autoBind;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the series colors.
         /// </summary>
         /// <param name="colors">A list of the series colors.</param>

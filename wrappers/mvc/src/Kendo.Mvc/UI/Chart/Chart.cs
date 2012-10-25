@@ -199,6 +199,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets a value indicating if the chart
+        /// should be data bound during initialization.
+        /// </summary>
+        public bool? AutoBind
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the series colors.
         /// </summary>
         public IEnumerable<string> SeriesColors
@@ -266,6 +276,10 @@ namespace Kendo.Mvc.UI
             SerializeSeriesColors(options);
 
             SerializeData("tooltip", Tooltip.CreateSerializer().Serialize(), options);
+
+            if (AutoBind.HasValue) {
+                options.Add("autoBind", AutoBind.Value);
+            }
         }
 
         protected void SerializeData(string key, IDictionary<string, object> data, IDictionary<string, object> options)
