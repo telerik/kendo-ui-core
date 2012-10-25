@@ -134,6 +134,13 @@ namespace :themebuilder do
     desc('Build the ThemeBuilder for staging')
     task :staging => 'dist/themebuilder/staging.zip'
 
+    desc('Deploy the ThemeBuilder to live site')
+    task :upload do # => [ :production ] do
+        local = 'dist/themebuilder/production'
+        remote = 'themebuilder'
+        system("lftp 172.16.80.87:33 -e 'mirror -R --just-print --delete #{local} #{remote}; bye'")
+    end
+
     zip 'dist/themebuilder/staging.zip' => [
         'dist/themebuilder/staging',
         'dist/themebuilder/staging/bootstrap.js'
