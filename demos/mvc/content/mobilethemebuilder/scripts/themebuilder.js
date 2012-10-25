@@ -97,7 +97,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                 },
                 viewtitle: {
                     name: "View Title",
-                    selector: ".km-view-title",
+                    selector: ".km-view-title > *",
                     whitelist: [ "color" ]
                 },
                 listitemactivelink: {
