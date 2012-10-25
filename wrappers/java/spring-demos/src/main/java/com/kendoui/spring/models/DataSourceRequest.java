@@ -13,6 +13,7 @@ import org.apache.commons.collections.buffer.CircularFifoBuffer;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
@@ -90,6 +91,7 @@ public class DataSourceRequest {
         String operator = filter.getOperator();
         String field = filter.getField();
         Object value = filter.getValue();
+        boolean ignoreCase = filter.isIgnoreCase();
         
         try {
             Class<?> type = new PropertyDescriptor(field, clazz).getPropertyType();
@@ -138,19 +140,29 @@ public class DataSourceRequest {
                 junction.add(Restrictions.le(field, value));
                 break;
             case "startswith":
-                junction.add(Restrictions.ilike(field, value.toString(), MatchMode.START));
+                junction.add(getLikeExpression(field, value.toString(), MatchMode.START, ignoreCase));
                 break;
             case "endswith":
-                junction.add(Restrictions.ilike(field, value.toString(), MatchMode.END));
+                junction.add(getLikeExpression(field, value.toString(), MatchMode.END, ignoreCase));
                 break;
             case "contains":
-                junction.add(Restrictions.ilike(field, value.toString(), MatchMode.ANYWHERE));
+                junction.add(getLikeExpression(field, value.toString(), MatchMode.ANYWHERE, ignoreCase));
                 break;                
             case "doesnotcontain":
                 junction.add(Restrictions.not(Restrictions.ilike(field, value.toString(), MatchMode.ANYWHERE)));
                 break;
         }
 
+    }
+    
+    private static Criterion getLikeExpression(String field, String value, MatchMode mode, boolean ignoreCase) {
+        SimpleExpression expression = Restrictions.like(field, value, mode);
+        
+        if (ignoreCase == true) {
+            expression = expression.ignoreCase();
+        }
+        
+        return expression;
     }
     
     private static void filter(Criteria criteria, FilterDescriptor filter, Class<?> clazz) {
@@ -490,6 +502,7 @@ public class DataSourceRequest {
         private String field;
         private Object value;        
         private String operator;
+        private boolean ignoreCase = true;
         
         public FilterDescriptor() {
             filters = new ArrayList<FilterDescriptor>();
@@ -522,6 +535,14 @@ public class DataSourceRequest {
             this.logic = logic;
         }
 
+        public boolean isIgnoreCase() {
+            return ignoreCase;
+        }
+
+        public void setIgnoreCase(boolean ignoreCase) {
+            this.ignoreCase = ignoreCase;
+        }
+        
         public List<FilterDescriptor> getFilters() {
             return filters;
         }

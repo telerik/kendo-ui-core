@@ -1,7 +1,7 @@
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <demo:header />
-    <div id="shipping">
+    <div>
         <p>Start typing the name of a European country</p>
     
         <label for="country">Shipping countries:</label>
