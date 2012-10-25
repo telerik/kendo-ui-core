@@ -7,7 +7,7 @@ THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')
 class MergeTask < Rake::FileTask
     def execute(args=nil)
         File.open(name, 'w') do |output|
-            dependencies = prerequisites.find_all{|file| !file.start_with?('build/')}
+            dependencies = prerequisites.find_all{|file| !/build\/.*\.rb$/i.match(file)}
             $stderr.puts "Merge\n\t#{dependencies.join("\n\t")} \nto #{name}" if VERBOSE
 
             dependencies.each do |src|
