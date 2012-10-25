@@ -1124,17 +1124,6 @@
         }
     });
 
-    createEffect("simple", {
-        endState: function() {
-            return this.options.properties;
-        }
-    });
-
-/////////////////////////////////////////////////////////
-
-
-    kendo.fx.expandVertical = kendo.fx.expand; // expandVertical is deprecated.
-
     var animationFrame  = window.requestAnimationFrame       ||
                           window.webkitRequestAnimationFrame ||
                           window.mozRequestAnimationFrame    ||
