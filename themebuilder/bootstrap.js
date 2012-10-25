@@ -15,6 +15,7 @@
         JQUERY_LOCATION = "/kendo-demos/src/js/jquery.js",
         requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/colorengine.js", "scripts/template.js"],
         requiredCss = ["styles/kendo.black.css", "styles/styles.css"],
+        bootstrapCss = "styles/bootstrap.css",
         // </generated variables>
         KENDO_COMMON_CSS_LOCATION = KENDO_LOCATION + "styles/kendo.common.min.css",
         KENDO_ALL_LOCATION = KENDO_LOCATION + "js/kendo.all.min.js";
@@ -25,7 +26,7 @@
 
         bootStyles = doc.createElement("link");
         bootStyles.setAttribute("rel", "stylesheet");
-        bootStyles.setAttribute("href", applicationRoot + "styles/bootstrap.css");
+        bootStyles.setAttribute("href", applicationRoot + bootstrapCss);
 
         doc.getElementsByTagName("head")[0].appendChild(bootStyles);
 
