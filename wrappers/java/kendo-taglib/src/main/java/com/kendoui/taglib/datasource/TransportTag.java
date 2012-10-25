@@ -29,10 +29,10 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //<< doEndTag
 
-        if (getParameterMap() == null) {
+        if (getParameterMap() == null && (parent.getType() == null || !parent.getType().equals("odata"))) {
             if (parent.isSet("batch") && parent.getBatch()) {
                 setParameterMap(BATCH_PARAMETERMAP);
-            } else if (!parent.isValue("odata")){
+            } else {
                 setParameterMap(PARAMETERMAP);
             }
         }

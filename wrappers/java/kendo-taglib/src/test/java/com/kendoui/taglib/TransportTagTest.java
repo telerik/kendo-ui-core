@@ -85,4 +85,21 @@ public class TransportTagTest {
         
         tag.doEndTag();  
     }
+    
+    @Test
+    public void emptyParameterMapIfTypeODATAIsSet() throws IOException, JspException {                
+        tag.doStartTag();
+        parent.doStartTag();
+        
+        parent.setType("odata");
+        
+        tag.setAsserts(new Assertion() {            
+            @Override
+            public void execute() {
+                assertNull(tag.getParameterMap());
+            }
+        });
+        
+        tag.doEndTag();
+    }
 }
