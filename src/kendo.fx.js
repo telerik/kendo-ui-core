@@ -729,88 +729,6 @@
         Effects[name] = Effect.extend(definition);
     }
 
-    createEffect("tile", {
-        auxilaries: function() {
-            var options = this.options,
-                reverse = options.reverse,
-                previous = options.previous,
-                direction = options.direction,
-                slideIn = "slideIn:" + direction,
-                slideOut = "slideIn:" + directions[direction].reverse,
-                aux = [{
-                    element: this.element,
-                    options: {
-                        effects: reverse ? slideOut : slideIn
-                    }
-                }];
-
-            if (previous) {
-                aux.push({
-                    element: previous,
-                    options: {
-                        effects: reverse ? slideIn : slideOut,
-                        reverse: !reverse
-                    }
-                });
-            }
-
-            return aux;
-        }
-    });
-
-    createEffect("fade", {
-        restore: [ "opacity" ],
-
-        _state: function(startState) {
-            var that = this,
-                element = that.element,
-                options = that.options,
-                opacity = element.data("opacity"),
-                value = isNaN(opacity) ? 1 : opacity,
-                out = options.direction === "out";
-
-                if (startState) {
-                    out = !out;
-                }
-
-            return { opacity: out ? 0 : value };
-        },
-
-        startState: function() {
-            return this._state(true);
-        },
-
-        endState: function() {
-            return extend(this._state(false), this.options.properties);
-        }
-    });
-
-    createEffect("zoom", {
-        restore: [ "scale" ],
-        _state: function(startState) {
-            var that = this,
-                element = that.element,
-                options = that.options,
-                scale = element.data("scale"),
-                value = isNaN(scale) ? 1 : scale,
-                out = options.direction === "out";
-
-            if (startState) {
-                out = !out;
-            }
-
-            return { scale: out ? 0.01 : value };
-        },
-
-        startState: function() {
-            return this._state(true);
-        },
-
-        endState: function() {
-            return extend(this._state(false), this.options.properties);
-        }
-    });
-
     createEffect("slideIn", {
         init: function(element, options) {
             Effect.prototype.init.call(this, element, options);
@@ -843,8 +761,75 @@
         }
     });
 
+    createEffect("tile", {
+        auxilaries: function() {
+            var options = this.options,
+                reverse = options.reverse,
+                previous = options.previous,
+                direction = options.direction,
+                slideIn = "slideIn:" + direction,
+                slideOut = "slideIn:" + directions[direction].reverse,
+                aux = [{
+                    element: this.element,
+                    options: {
+                        effects: reverse ? slideOut : slideIn
+                    }
+                }];
+
+            if (previous) {
+                aux.push({
+                    element: previous,
+                    options: {
+                        effects: reverse ? slideIn : slideOut,
+                        reverse: !reverse
+                    }
+                });
+            }
+
+            return aux;
+        }
+    });
+
+    createEffect("fade", {
+        restore: [ "opacity" ],
+
+        state: function() {
+            var that = this,
+                state = { start: { opacity: 0 }, end: { opacity: 0 } },
+                opacity = that.element.data("opacity"),
+                value = isNaN(opacity) ? 1 : opacity;
+
+                if (that.options.direction === "out") {
+                    state.start.opacity = value;
+                } else {
+                    state.end.opacity = value;
+                }
+
+            return state;
+        }
+    });
+
+    createEffect("zoom", {
+        restore: [ "scale" ],
+
+        state: function() {
+            var that = this,
+                state = { start: { scale: 0.01 }, end: { scale: 0.01 } },
+                scale = that.element.data("scale"),
+                value = isNaN(scale) ? 1 : scale;
+
+                if (that.options.direction === "out") {
+                    state.start.scale = value;
+                } else {
+                    state.end.scale = value;
+                }
+
+            return state;
+        }
+    });
+
     createEffect("slideMargin", {
-        endState: function() {
+        state: function() {
             var that = this,
                 element = that.element,
                 options = that.options,
@@ -860,18 +845,18 @@
 
             margin = (element.data(ORIGIN) || 0);
             extender["margin-" + options.axis] = !reverse ? margin + offset : margin;
-            return extend(extender, options.properties);
+            return { end: extender };
         }
     });
 
     createEffect("slideTo", {
-        endState: function() {
+        state: function() {
             var that = this,
                 element = that.element,
-                options = that.options;
-
-            var offset = (options.offset+"").split(","),
-                extender = {}, reverse = options.reverse;
+                options = that.options,
+                offset = options.offset.split(","),
+                extender = {},
+                reverse = options.reverse;
 
             if (transforms && options.transition !== false) {
                 extender.translatex = !reverse ? offset[0] : 0;
@@ -882,35 +867,30 @@
             }
             element.css("left");
 
-            return extend(extender, options.properties);
+            return { end: extender };
         }
     });
 
     createEffect("expand", {
-        startState: function() {
-            return { overflow: HIDDEN };
-        },
-
         restore: [ OVERFLOW ],
 
-        endState: function() {
+        state: function() {
             var that = this,
                 element = that.element,
-                options = that.options;
-
-            var reverse = options.reverse,
-                direction = options.direction,
-                property = (direction ? direction == "vertical" : true) ? HEIGHT : WIDTH,
+                options = that.options,
+                reverse = options.reverse,
+                property = options.direction === "vertical" ? HEIGHT : WIDTH,
                 setLength = element[0].style[property],
                 oldLength = element.data(property),
                 length = parseFloat(oldLength || setLength),
                 realLength = round(element.css(property, AUTO)[property]()),
-                completion = {};
+                completion = { start: { overflow: HIDDEN }, end: {} };
 
             length = options.reset ? realLength || length : length || realLength;
 
-            completion[property] = (reverse ? 0 : length) + PX;
-            element.css(property, reverse ? length : 0).css(property);
+            completion.end[property] = (reverse ? 0 : length) + PX;
+            completion.start[property] = (reverse ? length : 0) + PX;
+
             if (oldLength === undefined) {
                 element.data(property, setLength);
             }
@@ -921,96 +901,48 @@
         teardown: function() {
             var that = this,
                 element = that.element,
-                options = that.options;
-
-            var direction = options.direction,
-                property = (direction ? direction == "vertical" : true) ? HEIGHT : WIDTH,
+                options = that.options,
+                property = options.direction === "vertical" ? HEIGHT : WIDTH,
                 length = element.data(property);
+
             if (length == AUTO || length === BLANK) {
                 setTimeout(function() { element.css(property, AUTO).css(property); }, 0); // jQuery animate complete callback in IE is called before the last animation step!
             }
         }
     });
 
-    createEffect("flip", {
-        startState: function () {
-            var that = this,
-                options = that.options;
-
-            var value = options.reverse ? "180deg" : "0deg";
-            if (options.direction == "vertical") {
-                return { rotatex: value };
-            } else {
-                return { rotatey: value };
-            }
-        },
-
-        endState: function() {
-            var that = this,
-                element = that.element,
-                options = that.options;
-
-            var rotation = options.direction == "horizontal" ? "rotatey" : "rotatex",
-                reverse = options.reverse, parent = element.parent(),
-                degree = options.degree, face = options.face, back = options.back,
-                faceRotation = rotation + (reverse ? "(180deg)" : "(0deg)"),
-                backRotation = rotation + (reverse ? "(0deg)" : "(180deg)"),
-                completion = {};
-
-            if (support.hasHW3D) {
-                if (parent.css(PERSPECTIVE) == NONE) {
-                    parent.css(PERSPECTIVE, 500);
-                }
-
-                element.css(cssPrefix + "transform-style", "preserve-3d");
-                face.css(BACKFACE, HIDDEN).css(TRANSFORM, faceRotation).css("z-index", reverse ? 0 : -1);
-                back.css(BACKFACE, HIDDEN).css(TRANSFORM, backRotation).css("z-index", reverse ? -1 : 0);
-                completion[rotation] = (reverse ? "-" : "") + (degree ? degree : 180) + "deg";
-            } else {
-                if (kendo.size(options.effects) == 1) {
-                    options.duration = 0;
-                }
-            }
-            face.show();
-            back.show();
-
-            return extend(completion, options.properties);
-        },
-        teardown: function() {
-            var that = this,
-                element = that.element,
-                options = that.options;
-
-            options[options.reverse ? "back" : "face"].hide();
-
-            if (support.hasHW3D) {
-                $().add(options.face).add(options.back).add(element)
-                    .css(BACKFACE, "");
-            }
-        }
-    });
-
+    /**
+     * Intersection point formulas are taken from here - http://zonalandeducation.com/mmts/intersections/intersectionOfTwoLines1/intersectionOfTwoLines1.html
+     * Formula for a linear function from two points from here - http://demo.activemath.org/ActiveMath2/search/show.cmd?id=mbase://AC_UK_calculus/functions/ex_linear_equation_two_points
+     * The transform origin point is the intersection point of the two lines from the top left corners/top right corners of the element and target.
+     * The math and variables below MAY BE SIMPLIFIED (zeroes removed), but this would make the formula too cryptic.
+     */
     createEffect("transfer", {
         setup: function() {
             this.element.appendTo(document.body);
         },
 
-        _state: function(startState) {
+        state: function() {
             var that = this,
                 element = that.element,
                 options = that.options,
-                reverse = startState ? !options.reverse : options.reverse;
-
-            /**
-             * Intersection point formulas are taken from here - http://zonalandeducation.com/mmts/intersections/intersectionOfTwoLines1/intersectionOfTwoLines1.html
-             * Formula for a linear function from two points from here - http://demo.activemath.org/ActiveMath2/search/show.cmd?id=mbase://AC_UK_calculus/functions/ex_linear_equation_two_points
-             * The transform origin point is the intersection point of the two lines from the top left corners/top right corners of the element and target.
-             * The math and variables below MAY BE SIMPLIFIED (zeroes removed), but this would make the formula too cryptic.
-             */
-            var target = options.target,
+                reverse = options.reverse,
+                target = options.target,
                 offset,
                 currentScale = animationProperty(element, "scale"),
-                targetOffset = target.offset();
+                targetOffset = target.offset(),
+                state = {
+                    start: {
+                        position: "absolute",
+                        marginLeft: 0,
+                        marginTop: 0,
+                        scale: 1
+                    },
+                    end: {
+                        scale: 1
+                    }
+                },
+                scale = target.outerHeight() / element.outerHeight();
 
             element.css(TRANSFORM, "scale(1)").css(TRANSFORM);
             offset = element.offset();
@@ -1034,70 +966,61 @@
                 X = (y1 - y3 - Z1 * x1 + Z2 * x3) / (Z2 - Z1),
                 Y = y1 + Z1 * (X - x1);
 
+            state.start.top = offset.top;
+            state.start.left = offset.left;
+            state.start.transformOrigin = X + PX + " " + Y + PX;
 
-            return {
-                position: "absolute",
-                top: offset.top,
-                left: offset.left,
-                marginLeft: 0,
-                marginTop: 0,
-                scale: reverse ? 1 : target.outerHeight() / element.outerHeight(),
-                transformOrigin:  X + PX + " " + Y + PX
-            };
-        },
+            if (reverse) {
+                state.start.scale = scale;
+            } else {
+                state.end.scale = scale;
+            }
 
-        startState: function() {
-            return this._state(true);
-        },
-
-        endState: function() {
-            return extend(this._state(false), this.options.properties);
+            return state;
         }
     });
 
-var CLIPS = {
-    top: "rect(auto auto $size auto)",
-    bottom: "rect($size auto auto auto)",
-    left: "rect(auto $size auto auto)",
-    right: "rect(auto auto auto $size)"
-};
 
-var ROTATIONS = {
-    top: { start: "rotatex(0deg)", end: "rotatex(180deg)" },
-    bottom: { start: "rotatex(-180deg)", end: "rotatex(0deg)" },
-    left: { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
-    right: { start: "rotatey(180deg)", end: "rotatey(0deg)" }
-};
+    var CLIPS = {
+        top: "rect(auto auto $size auto)",
+        bottom: "rect($size auto auto auto)",
+        left: "rect(auto $size auto auto)",
+        right: "rect(auto auto auto $size)"
+    };
 
-function clipInHalf(container, direction) {
-    var vertical = kendo.directions[direction].vertical,
-        size = (container[vertical ? HEIGHT : WIDTH]() / 2) + "px";
+    var ROTATIONS = {
+        top: { start: "rotatex(0deg)", end: "rotatex(180deg)" },
+        bottom: { start: "rotatex(-180deg)", end: "rotatex(0deg)" },
+        left: { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
+        right: { start: "rotatey(180deg)", end: "rotatey(0deg)" }
+    };
 
-    return CLIPS[direction].replace("$size", size);
-}
+    function clipInHalf(container, direction) {
+        var vertical = kendo.directions[direction].vertical,
+            size = (container[vertical ? HEIGHT : WIDTH]() / 2) + "px";
+
+        return CLIPS[direction].replace("$size", size);
+    }
 
     createEffect("turningpage", {
-        startState: function() {
-            var that = this,
-                options = that.options,
-                direction = options.direction,
-                rotation = ROTATIONS[direction],
-                properties = {zIndex: 1};
-
-            properties.clip = clipInHalf(options.container, kendo.directions[direction].reverse);
-            properties[BACKFACE] = HIDDEN;
-            properties[TRANSFORM] = options.reverse ? rotation.end : rotation.start;
-            return properties;
-        },
-
-        endState: function() {
+        state: function() {
             var options = this.options,
-                rotation = ROTATIONS[options.direction],
-                extender = {};
+                direction = options.direction,
+                reverse = options.reverse,
+                rotation = ROTATIONS[direction],
+                start = { zIndex: 1 }
+                end = {};
 
-            extender[TRANSFORM] = options.reverse ? rotation.start : rotation.end;
+            if (options.clipInHalf) {
+               start.clip = clipInHalf(options.container, kendo.directions[direction].reverse);
+            }
 
-            return extend(extender, options.properties);
+            start[BACKFACE] = HIDDEN;
+
+            end[TRANSFORM] = reverse ? rotation.start : rotation.end;
+            start[TRANSFORM] = reverse ? rotation.end : rotation.start;
+
+            return { start: start, end: end };
         },
 
         setup: function() {
@@ -1105,16 +1028,21 @@ function clipInHalf(container, direction) {
         },
 
         teardown: function() {
-            this.element.remove();
+            if (this.options.temporary) {
+                this.element.remove();
+            }
         }
     });
 
     createEffect("staticpage", {
         restore: ["clip"],
 
-        startState: function() {
-            var options = this.options;
-            return { clip: clipInHalf(options.container, options.direction) };
+        state: function() {
+            return {
+                start: {
+                    clip: clipInHalf(this.options.container, this.options.direction)
+                }
+            };
         },
 
         teardown: function() {
@@ -1150,20 +1078,49 @@ function clipInHalf(container, direction) {
             return [
                 { element: options.face, options: { effects: "staticpage", face: true, container: element, direction: direction }},
                 { element: options.back, options: { effects: "staticpage", face: false, container: element, direction: reverseDirection }},
-                { element: faceClone, options: { effects: "turningpage", face: true, container: element, direction: direction }},
-                { element: backClone, options: { effects: "turningpage", face: false, container: element, direction: reverseDirection }}
+                { element: faceClone, options: { effects: "turningpage", face: true, container: element, direction: direction, clipInHalf: true, temporary: true }},
+                { element: backClone, options: { effects: "turningpage", face: false, container: element, direction: reverseDirection, clipInHalf: true, temporary: true }}
             ];
         },
 
-        startState: function() {
+        state: function() {
             var state = {};
             state[PERSPECTIVE] = 1000;
             state.transformStyle = "preserve-3d";
-            return state;
+            return { start: state };
         },
 
         teardown: function() {
             this.element.find(".temp-pages").remove();
+        }
+    });
+
+    createEffect("flip", {
+        auxilaries: function() {
+            var that = this,
+                options = that.options,
+                direction = options.direction === "horizontal" ? "left" : "top",
+                reverseDirection = kendo.directions[direction].reverse,
+                temp,
+                element = that.element;
+
+                if (options.reverse) {
+                    temp = direction;
+                    direction = reverseDirection;
+                    reverseDirection = temp;
+                }
+
+            return [
+                { element: options.face, options: { effects: "turningpage", face: true, container: element, direction: direction }},
+                { element: options.back, options: { effects: "turningpage", face: false, container: element, direction: reverseDirection }},
+            ];
+        },
+
+        state: function() {
+            var state = {};
+            state[PERSPECTIVE] = 1000;
+            state.transformStyle = "preserve-3d";
+            return { start: state };
         }
     });
 
