@@ -4827,7 +4827,7 @@
             plotArea.reflowPanes();
 
             if (plotArea.axes.length > 0) {
-                plotArea.reflowAxes();
+                plotArea.reflowAxes(filterPane);
             }
 
             plotArea.reflowCharts(filterPane);
@@ -4979,10 +4979,10 @@
             }
         },
 
-        shrinkAxisWidth: function() {
+        shrinkAxisWidth: function(filterPane) {
             var plotArea = this,
-                panes = plotArea.panes,
-                axes = plotArea.axes,
+                panes = filterPane ? [filterPane] : plotArea.panes,
+                axes = filterPane ? filterPane.axes : plotArea.axes,
                 axisBox = axisGroupBox(axes),
                 overflowX = 0,
                 i,
@@ -5009,9 +5009,9 @@
             }
         },
 
-        shrinkAxisHeight: function() {
+        shrinkAxisHeight: function(filterPane) {
             var plotArea = this,
-                panes = plotArea.panes,
+                panes = filterPane ? [filterPane] : plotArea.panes,
                 i,
                 currentPane,
                 axes,
@@ -5039,10 +5039,10 @@
             }
         },
 
-        fitAxes: function() {
+        fitAxes: function(filterPane) {
             var plotArea = this,
-                panes = plotArea.panes,
-                axes = plotArea.axes,
+                panes = filterPane ? [filterPane] : plotArea.panes,
+                axes = filterPane ? filterPane.axes : plotArea.axes,
                 paneAxes,
                 paneBox,
                 axisBox,
@@ -5086,7 +5086,7 @@
             }
         },
 
-        reflowAxes: function() {
+        reflowAxes: function(filterPane) {
             var plotArea = this,
                 panes = plotArea.panes,
                 i,
@@ -5094,16 +5094,24 @@
                 xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
                 yAxes = grep(axes, (function(axis) { return axis.options.vertical; }));
 
+            if (filterPane) {
+                panes = [filterPane];
+                xAxes = grep(filterPane.axes, (function(axis) { return !axis.options.vertical; }));
+                yAxes = grep(filterPane.axes, (function(axis) { return axis.options.vertical; }));
+            }
+
             for (i = 0; i < panes.length; i++) {
                 plotArea.reflowPaneAxes(panes[i]);
             }
 
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAxisWidth();
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAxisHeight();
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.fitAxes();
+            if (xAxes.length > 0 && yAxes.length > 0) {
+                plotArea.alignAxes(xAxes, yAxes);
+                plotArea.shrinkAxisWidth(filterPane);
+                plotArea.alignAxes(xAxes, yAxes);
+                plotArea.shrinkAxisHeight(filterPane);
+                plotArea.alignAxes(xAxes, yAxes);
+                plotArea.fitAxes(filterPane);
+            }
         },
 
         reflowPaneAxes: function(pane) {

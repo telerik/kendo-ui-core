@@ -2557,6 +2557,36 @@
                     destroyChart();
                 });
 
+                test("does not reflow axis in different pane", function() {
+                    createPlotArea({
+                        categoryAxis: {
+                            name: "cAxis"
+                        },
+                        valueAxis: [{
+                            name: "vAxis"
+                        }, {
+                            name: "vAxisB",
+                            pane: "b"
+                        }],
+                        panes: [{
+                            name: "a"
+                        }, {
+                            name: "b"
+                        }]
+                        }, [{
+                            type: "column",
+                            data: [1000],
+                            axis: "vAxis"
+                        }]
+                    );
+
+                    var box = plotArea.namedValueAxes.vAxisB.box;
+                    plotArea.series[0].data[0] = 10;
+                    plotArea.redrawPane(plotArea.panes[0]);
+
+                    sameBox(box, plotArea.namedValueAxes.vAxisB.box);
+                });
+
             })();
 
             (function() {
