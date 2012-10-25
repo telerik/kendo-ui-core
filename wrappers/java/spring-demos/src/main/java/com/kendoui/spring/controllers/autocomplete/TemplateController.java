@@ -4,12 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller("autocomplete-remotedata-controller")
+@Controller("autocomplete-template-controller")
 @RequestMapping(value="/web/autocomplete/")
-public class RemoteDataController {
+public class TemplateController {
     
-    @RequestMapping(value = {"/remotedatasource"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/template"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/autocomplete/remotedatasource";
+        return "web/autocomplete/template";
     }    
 }
