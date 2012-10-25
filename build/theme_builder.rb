@@ -1,3 +1,5 @@
+THEME_BUILDER_BUILDFILE = 'build/theme_builder.rb'
+
 file_merge 'themebuilder/scripts/less.js' => FileList[
      'themebuilder/scripts/prologue.js',
      'build/less-js/build/require.js',
@@ -9,6 +11,7 @@ file_merge 'themebuilder/scripts/less.js' => FileList[
      'build/less-js/lib/less/tree.js',
      'themebuilder/scripts/epilogue.js',
 ]
+file 'themebuilder/scripts/less.js' => THEME_BUILDER_BUILDFILE
 
 file_copy :to => 'themebuilder/styles/kendo.black.css',
           :from => 'styles/web/kendo.black.css'
@@ -84,6 +87,7 @@ file_merge 'themebuilder/scripts/themebuilder.all.js' => [
     'themebuilder/scripts/colorengine.js',
     'themebuilder/scripts/template.js'
 ]
+file 'themebuilder/scripts/themebuilder.all.js' => THEME_BUILDER_BUILDFILE
 
 CLEAN.include('themebuilder/scripts/themebuilder.all*js')
 CLEAN.include('themebuilder/scripts/themebuilder.all*css')
@@ -93,6 +97,7 @@ file_merge 'themebuilder/styles/themebuilder.all.css' => [
     'themebuilder/styles/kendo.black.css',
     'themebuilder/styles/styles.css',
 ]
+file 'themebuilder/styles/themebuilder.all.css' => THEME_BUILDER_BUILDFILE
 
 THEME_BUILDER_RESOURCES = FileList['themebuilder/scripts/themebuilder.all.min.js']
                 .include('themebuilder/styles/Black/**/*')

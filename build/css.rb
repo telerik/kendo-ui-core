@@ -24,6 +24,7 @@ file_merge 'styles/web/kendo.winjs.css' => [
     'styles/web/kendo.common.css',
     'styles/dataviz/kendo.dataviz.css',
 ]
+file 'styles/web/kendo.winjs.css' => 'build/css.rb'
 
 CLEAN.include(MIN_CSS)
     .include('styles/winjs/kendo.winjs.css')

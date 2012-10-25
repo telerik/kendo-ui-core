@@ -10,6 +10,8 @@ MIN_JS = SRC_JS.ext('min.js')
 
 CLEAN.include(MIN_JS)
 
+JS_BUILDFILE = 'build/js.rb'
+
 #Build src/*.min.js files by running uglifyjs over src/*.js
 rule '.min.js' => lambda { |t| t.sub('min.js', 'js') } do |t|
     uglifyjs(t.source, t.name)
@@ -33,6 +35,7 @@ file_merge "src/kendo.editor.js" => [
     "src/editor/viewhtml.js",
     "src/editor/pendingformats.js",
 ]
+file "src/kendo.editor.js" => JS_BUILDFILE
 
 file_merge "src/kendo.aspnetmvc.js" => [
     "src/aspnetmvc/kendo.data.aspnetmvc.js",
@@ -40,6 +43,7 @@ file_merge "src/kendo.aspnetmvc.js" => [
     "src/aspnetmvc/kendo.imagebrowser.aspnetmvc.js",
     "src/aspnetmvc/kendo.validator.aspnetmvc.js"
 ]
+file "src/kendo.aspnetmvc.js" => JS_BUILDFILE
 
 # Suites
 WEB_JS = FileList[
@@ -194,7 +198,16 @@ WIN_MIN_JS = FileList['src/kendo.winjs.min.js']
 WIN_SRC_JS = FileList['src/kendo.winjs.js']
 
 file_merge "src/kendo.web.js" => WEB_JS
+file "src/kendo.web.js" => JS_BUILDFILE
+
 file_merge "src/kendo.dataviz.js" => DATAVIZ_JS
+file "src/kendo.dataviz.js" => JS_BUILDFILE
+
 file_merge "src/kendo.mobile.js" => MOBILE_JS
+file "src/kendo.mobile.js" => JS_BUILDFILE
+
 file_merge "src/kendo.all.js" => (WEB_JS + DATAVIZ_JS + MOBILE_JS).uniq
+file "src/kendo.all.js" => JS_BUILDFILE
+
 file_merge "src/kendo.winjs.js" => WIN_JS
+file "src/kendo.winjs.js" => JS_BUILDFILE
