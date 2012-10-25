@@ -10,7 +10,7 @@
             return path.split("/").slice(0,-1).join("/") + "/";
         })(),
         FAST = "fast",
-        // caution: variables below are generated during builds. update build/themebuilder.js if you change them!
+        // caution: variables below are generated during builds. update build/theme_builder.rb if you change them!
         KENDO_LOCATION = "http://mvc-kendobuild/staging/content/cdn/",
         JQUERY_LOCATION = "/kendo-demos/src/js/jquery.js",
         requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/colorengine.js", "scripts/template.js"],
