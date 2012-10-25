@@ -28,7 +28,7 @@
                     "url": "autocomplete/remotedatasource.html"
                 },
                 {
-                    "packages": [ "mvc" ],
+                    "packages": [ "mvc", "jsp" ],
                     "text": "Server filtering",
                     "url": "autocomplete/serverfiltering.html"
                 },

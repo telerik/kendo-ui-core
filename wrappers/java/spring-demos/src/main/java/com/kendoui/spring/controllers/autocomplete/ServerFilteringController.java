@@ -11,15 +11,15 @@ import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
-@Controller("remote-server-filtering-controller")
+@Controller("remote-serverfiltering-controller")
 @RequestMapping(value="/web/autocomplete/")
 public class ServerFilteringController {
     @Autowired 
     private ProductDao product;
 
-    @RequestMapping(value = "/server-filtering", method = RequestMethod.GET)
+    @RequestMapping(value = "/serverfiltering", method = RequestMethod.GET)
     public String index() {
-        return "web/autocomplete/server-filtering";
+        return "web/autocomplete/serverfiltering";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
