@@ -43,16 +43,43 @@ MD_EVENTS_TEMPLATE = ERB.new(%{
     <kendo:<%= tag_name %> <%= event.name %>="handle_<%= event.name %>">
     </kendo:<%= tag_name %>>
     <script>
-        function handle_<%= event.name %>() {
+        function handle_<%= event.name %>(e) {
             // Code to handle the <%= event.name %> event.
         }
     </script>
 <% end %>
+
+## Event Tags
+<% children.each do |child| %><% if child.instance_of?(NestedTagEvent) %>
+### <kendo:<%= child.tag_name %>>
+
+<%= child.description %>
+
+#### Example
+    <kendo:<%= tag_name %>>
+        <kendo:<%= child.tag_name%>>
+            <script>
+                function(e) {
+                    // Code to handle the <%= child.name %> event.
+                }
+            </script>
+        </kendo:<%= child.tag_name%>>
+    </kendo:<%= tag_name %>>
+<% end %> <% end %>
 })
 
 MD_DESCRIPTION_TEMPLATE = ERB.new(%{
 # <kendo:<%= tag_name %>>
 A JSP tag representing Kendo <%= name %>.
+})
+
+MD_CHILDREN_TEMPLATE = ERB.new(%{
+## Child JSP Tags
+<% children.each do |child| %><% if !child.instance_of?(NestedTagEvent) %>
+### [<kendo:<%= child.tag_name %>>](<%= child.markdown_filename.sub('docs', '').sub('.md', '')%>)
+
+<%= child.description %>
+<% end %> <% end %>
 })
 
 XML_EVENT_ATTRIBUTE_TEMPLATE = ERB.new(%{
@@ -574,14 +601,15 @@ class Tag
             file.write(to_markdown)
         end
 
-        @children.each { |child| child.sync_markdown }
+        @children.each { |child| child.sync_markdown unless child.instance_of?(NestedTagEvent) }
     end
 
     def to_markdown
         MD_METADATA_TEMPLATE.result(binding) +
         MD_DESCRIPTION_TEMPLATE.result(binding) +
         MD_OPTIONS_TEMPLATE.result(binding) +
-        MD_EVENTS_TEMPLATE.result(binding)
+        MD_EVENTS_TEMPLATE.result(binding) +
+        MD_CHILDREN_TEMPLATE.result(binding)
     end
 
     def namespace
