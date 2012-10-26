@@ -66,15 +66,14 @@
         },
 
         open: function(target) {
-            this.openFor($(target));
+            this.target = $(target);
+            this.shim.show();
         },
 
         // Interface implementation, called from the pane click handlers
         openFor: function(target) {
-            var that = this;
-            that.target = target;
-            that.trigger(OPEN, { target: target });
-            that.shim.show();
+            this.open(target);
+            this.trigger(OPEN, { target: target });
         },
 
         close: function() {

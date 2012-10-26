@@ -59,9 +59,8 @@
             var that = this;
             that.target = $(target);
             that.context = context;
-            that.shim.show();
+            that.shim.show(target);
         },
-
 
         close: function() {
             this.context = this.target = null;
@@ -69,11 +68,11 @@
         },
 
         openFor: function(target) {
-            var that = this;
-            that.target = target;
-            that.context = target.data(CONTEXT_DATA);
-            that.trigger(OPEN, { target: that.target, context: that.context });
-            that.shim.show(target);
+            var that = this,
+                context = target.data(CONTEXT_DATA);
+
+            that.open(target, context);
+            that.trigger(OPEN, { target: target, context: context });
         },
 
         destroy: function() {
