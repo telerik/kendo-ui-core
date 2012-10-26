@@ -1,10 +1,17 @@
+.flexbox() {
+    display: ~"-moz-box";
+    display: ~"-webkit-box";
+    display: ~"-webkit-flex";
+    display: ~"-moz-flex";
+    display: ~"-ms-flexbox";
+    display: ~"flex";
+}
+
 .flexbox(@type) {
-    display: ~"-moz-@{type}";
-    display: ~"-webkit-@{type}";
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: ~"-moz-@{type}-box";
+    display: ~"-webkit-@{type}-box";
+    display: ~"-ms-@{type}-flexbox";
+    display: ~"@{type}-flex";
 }
 
 .box-orient(@direction) {
