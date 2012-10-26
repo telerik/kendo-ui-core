@@ -12,7 +12,7 @@
 @pull-to-refresh-shadow: rgba(255,255,255,.5);
 
 @tabstrip-icon-color: rgba(255,255,255,.3);
-@tabstrip-active-icon-color: #3F99D2;
+@tabstrip-active-icon-color: #33b5e5;
 @button-icon-gradient: top, rgba(255,255,255,.7), rgba(255,255,255,.9);
 @buttongroup-icon-gradient: top, rgba(0,0,0,.5), rgba(0,0,0,.3);
 @tabstrip-icon-gradient: top, rgba(255,255,255,.2), rgba(255,255,255,0);
@@ -30,6 +30,12 @@
 }
 
 /* CSS */
+
+.km-ios:after
+{
+     content: url("images/back.png");
+     display: none;
+}
 
 .km-ios
 {
@@ -114,7 +120,7 @@
     overflow: hidden;
     margin-left: -1em;
     padding-left: 2.1em;
-    -webkit-mask-image: url("images/icons.png");
+    -webkit-mask-image: url("images/back.png");
     -webkit-mask-size: auto 100%;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position-x: 1em;
@@ -146,7 +152,7 @@
     margin-left: 0;
     padding-left: 1.4em;
     background-size: auto 100%;
-    clip-path: url("images/iconmasks.svg#backbutton");
+    clip-path: url("images/back.svg#backbutton");
 }
 
 .km-ios :-moz-any(.km-back):after
@@ -220,11 +226,6 @@
     background-color: #BB0000;
     .linear-gradient-image(top, rgba(241, 150, 155, 1), rgba(230, 70, 78, .5) 50%, rgba(222, 11, 21, .5) 50%, rgba(183, 0, 0, 0));
     .box-shadow(0 2px 3px #333);
-}
-
-.km-ios .km-checkbox-checked:after
-{
-    background: transparent url("images/ios-sprite.png") 2px -117px no-repeat;
 }
 
 .km-ios .km-switch-handle
@@ -335,22 +336,22 @@
     margin-top: ~"-.85rem";
 }
 
-.km-ios .km-list .km-icon
+.km-ios .km-list .km-icon:after
+{
+    color: #000;
+}
+
+.km-ios :-webkit-any(.km-list) .km-icon:after
 {
     background-color: #000;
 }
 
-.km-font-icons.km-ios :-webkit-any(.km-list) .km-icon:after
+.km-ios li.km-state-active .km-icon:after
 {
-    background-color: #000;
+    color: #fff;
 }
 
-.km-ios li.km-state-active .km-icon
-{
-    background-color: #fff;
-}
-
-.km-font-icons.km-ios :-webkit-any(.km-state-active) .km-icon:after
+.km-ios :-webkit-any(.km-state-active) .km-icon:after
 {
     background-color: #fff;
 }
@@ -364,7 +365,12 @@
     background-color: #fff;
 }
 
-.km-font-icons.km-ios :-webkit-any(.km-detail) .km-icon:after
+.km-ios .km-detail .km-icon:after
+{
+    color: #fff;
+}
+
+.km-ios :-webkit-any(.km-detail) .km-icon:after
 {
     background-color: #fff;
 }
@@ -639,19 +645,8 @@
     background: #c4ccd5 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGklEQVR4Xm3DMREAAACCQKPYvySeO8MHML0BOrEVLMJmdzAAAAAASUVORK5CYII=");
 }
 
-.km-ios label.km-item-checked:after
-{
-    background: transparent url("images/ios-sprite.png") 0 -10px no-repeat;
-}
-
-.km-ios .km-button .km-icon,
-.km-ios .km-button.km-state-active .km-icon
-{
-    .linear-gradient-image(@button-icon-gradient);
-}
-
-.km-font-icons.km-ios :-webkit-any(.km-button) .km-icon:after,
-.km-font-icons.km-ios :-webkit-any(.km-button.km-state-active) .km-icon:after
+.km-ios :-webkit-any(.km-button) .km-icon:after,
+.km-ios :-webkit-any(.km-button.km-state-active) .km-icon:after
 {
     .linear-gradient-image(@button-icon-gradient);
 }
@@ -659,43 +654,30 @@
 .km-ios .km-buttongroup .km-icon
 {
     margin-top: .1em;
-    .linear-gradient-image(@buttongroup-icon-gradient);
 }
 
-.km-font-icons.km-ios :-webkit-any(.km-buttongroup) .km-icon:after
+.km-ios :-webkit-any(.km-buttongroup) .km-icon:after
 {
     .linear-gradient-image(@buttongroup-icon-gradient);
 }
 
-.km-ios .km-tabstrip .km-icon
-{
-    background: @tabstrip-icon-color;
-    .linear-gradient-image(@tabstrip-icon-gradient);
-}
-
-.km-font-icons.km-ios .km-tabstrip .km-icon:after
+.km-ios .km-tabstrip .km-icon:after
 {
     color: @tabstrip-icon-color;
 }
 
-.km-font-icons.km-ios :-webkit-any(.km-tabstrip) .km-icon:after
+.km-ios :-webkit-any(.km-tabstrip) .km-icon:after
 {
     background: @tabstrip-icon-color;
     .linear-gradient-image(@tabstrip-icon-gradient);
 }
 
-.km-ios .km-tabstrip .km-state-active .km-icon
-{
-    background: @tabstrip-active-icon-color;
-    .linear-gradient-image(@tabstrip-active-icon-gradient);
-}
-
-.km-font-icons.km-ios .km-tabstrip .km-state-active .km-icon:after
+.km-ios .km-tabstrip .km-state-active .km-icon:after
 {
     color: @tabstrip-active-icon-color;
 }
 
-.km-font-icons.km-ios :-webkit-any(.km-tabstrip) .km-state-active .km-icon:after
+.km-ios :-webkit-any(.km-tabstrip) .km-state-active .km-icon:after
 {
     background: @tabstrip-active-icon-color;
     .linear-gradient-image(@tabstrip-active-icon-gradient);
@@ -713,21 +695,20 @@
 .km-ios .km-load-more .km-icon,
 .km-ios .km-scroller-pull .km-icon
 {
-    background: @pull-to-refresh-color;
     width: 2.4rem;
     height: 2.4rem;
     font-size: 2.4rem;
 }
 
-.km-font-icons.km-ios .km-load-more .km-icon:after,
-.km-font-icons.km-ios .km-scroller-pull .km-icon:after
+.km-ios .km-load-more .km-icon:after,
+.km-ios .km-scroller-pull .km-icon:after
 {
     color: @pull-to-refresh-color;
     text-shadow: 0 1px 1px @pull-to-refresh-shadow;
 }
 
-.km-font-icons.km-ios :-webkit-any(.km-load-more) .km-icon:after,
-.km-font-icons.km-ios :-webkit-any(.km-scroller-pull) .km-icon:after
+.km-ios :-webkit-any(.km-load-more) .km-icon:after,
+.km-ios :-webkit-any(.km-scroller-pull) .km-icon:after
 {
     background: @pull-to-refresh-shadow;
     text-shadow: 0 1px 1px @pull-to-refresh-color;

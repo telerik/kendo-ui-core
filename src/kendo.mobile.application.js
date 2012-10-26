@@ -7,7 +7,7 @@
 
         DEFAULT_OS = "ios",
         OS = support.mobileOS,
-        OS_NAME_TEMPLATE = kendo.template("km-#=data.name##if(data.device){# km-on-#=data.device##}##if(data.icons){# km-font-icons#}##if(data.version){# km-#=data.name##=data.version.major# km-#=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
+        OS_NAME_TEMPLATE = kendo.template("km-#=data.name##if(data.device){# km-on-#=data.device##}##if(data.version){# km-#=data.name##=data.version.major# km-#=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = "km-vertical",
         HORIZONTAL = "km-horizontal",
@@ -28,7 +28,6 @@
 
         DEVICE = OS.name,
         HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.browser == "mobilesafari",
-        USEFONTICONS = !!(support.browser.msie || support.browser.opera || (OS.device == "blackberry" && OS.flatVersion >= 700 && OS.flatVersion < 710)),
         BARCOMPENSATION = 60,
 
         WINDOW = $(window),
@@ -63,8 +62,7 @@
             that.options = $.extend({
                 hideAddressBar: true,
                 transition: "",
-                updateDocumentTitle: true,
-                useFontIcons: false
+                updateDocumentTitle: true
             }, options);
             kendo.Observable.fn.init.call(that, that.options);
             that.element = $(element ? element : document.body);
@@ -136,7 +134,7 @@
                 version = false;
             }
 
-            that.osCssClass = OS_NAME_TEMPLATE({ name: that.os, device: DEVICE, icons: that.options.useFontIcons || USEFONTICONS, version: version });
+            that.osCssClass = OS_NAME_TEMPLATE({ name: that.os, device: DEVICE, version: version });
         },
 
         _startHistory: function() {
