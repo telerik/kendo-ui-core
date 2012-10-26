@@ -63,16 +63,16 @@
     vertical-align: top;
 }
 
-:-moz-any(.km-view,.km-vertical,.km-horizontal)
+:-moz-any(.km-view,.km-pane)
 {
     overflow: hidden;
     position: relative;
 }
 
-.km-splitview :-moz-any(.km-pane)
+:-moz-any(.km-view)
 {
-    overflow: hidden;
-    position: relative;
+    display: -moz-inline-box;
+    display: -moz-inline-flex;
 }
 
 .km-content
@@ -86,11 +86,11 @@
     position: relative;
 }
 
-:-moz-any(.km-content,.km-scroll-container,.km-scrollview)
+:-moz-any(.km-content,.km-scrollview)
 {
-    width: 0;
-    display: -moz-box;
-    -moz-box-orient: vertical;
+    display: block;
+    display: -moz-flex;
+    -moz-flex-direction: column;
 }
 
 .km-content p, .km-content h1, .km-content h2, .km-content h3,
@@ -108,6 +108,8 @@
     display: block;
     display: -moz-box;
     -moz-box-orient: vertical;
+    display: -moz-flex;
+    -moz-flex-direciton: column;
     width: 100%;
 }
 
@@ -510,6 +512,11 @@
     vertical-align: top;
     display: inline-block;
     min-height: 1px;
+}
+
+:-moz-any(.km-scrollview) > div
+{
+    width: 0;
 }
 
 .km-pages
@@ -1392,7 +1399,6 @@
 .km-split-vertical > .km-pane > .km-view
 {
     display: -webkit-box;
-    display: -moz-box;
 }
 
 .km-pane
