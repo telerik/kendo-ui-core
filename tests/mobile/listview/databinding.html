@@ -145,6 +145,45 @@
                 equal(dom.children().first().html(), "foo");
             });
 
+            test("calls mobile.init on refresh", function() {
+                var dom = $("<ul/>"),
+                    originInit = kendo.mobile.init;
+
+                stub(kendo.mobile, {
+                    init: originInit
+                });
+
+                var listView = new ListView(dom, {
+                    dataSource: [ { text: "foo" }, { text: "bar" } ],
+                    template: "#= text #"
+                });
+
+                equal(kendo.mobile.calls("init"), 1);
+
+                kendo.mobile.init = originInit;
+            });
+
+            test("ListView does not init elements twice", function() {
+                var dom = $("<ul/>"),
+                    originInit = kendo.initWidget;
+
+                var listView = new ListView(dom, {
+                    dataSource: [ { text: "foo" }, { text: "bar" } ],
+                    appendOnRefresh: true,
+                    template: "#= text #"
+                });
+
+                stub(kendo, {
+                    initWidget: originInit
+                });
+
+                listView.dataSource.data([ { text: "baz" } ]);
+
+                equal(kendo.calls("initWidget"), 1);
+
+                kendo.initWidget = originInit;
+            });
+
             var dom, dataSource, listView, subList, data;
 
             module("grouped datasource", {

@@ -224,6 +224,12 @@
 
             element[appendMethod](contents);
 
+            if (appendMethod === "html") {
+                mobile.init(element.children());
+            } else {
+                mobile.init($(contents));
+            }
+
             if (loading) {
                 that.loading = false;
                 that._calcTreshold();
@@ -233,8 +239,6 @@
             if (options.pullToRefresh) {
                 that._scroller().pullHandled();
             }
-
-            mobile.init(element.children());
 
             that._hideLoading();
 
