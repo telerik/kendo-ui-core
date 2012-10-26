@@ -155,7 +155,7 @@
         _onDrag: function(e) {
             var chart = this,
                 delta = e.x.startLocation - e.x.location,
-                panes = chart._plotArea.panes,
+                slavePanes = chart._plotArea.panes.slice(0, -1),
                 primaryAxis = chart._plotArea.categoryAxis,
                 navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
 
@@ -180,7 +180,7 @@
             var axisSettings = chart._plotArea.options.categoryAxis[0];
             axisSettings.min = rangeStart;
             axisSettings.max = rangeEnd;
-            chart._plotArea.redrawPane(panes[0]);
+            chart._plotArea.redraw(slavePanes);
 
             var selection = chart._selection;
             selection.setRange(
@@ -271,10 +271,7 @@
             select.to = groups[e.end];
 
             navi.applySelection();
-
-            for (i = 0; i < slavePanes.length; i++) {
-                chart._plotArea.redrawPane(slavePanes[i]);
-            }
+            chart._plotArea.redraw(slavePanes);
         },
 
         mainAxis: function() {

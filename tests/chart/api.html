@@ -69,7 +69,7 @@
                     });
 
                     var plotArea = chart._model._plotArea;
-                    plotArea.redrawPane = function(pane) {
+                    plotArea.redraw = function(pane) {
                         ok(pane === plotArea.panes[1]);
                     };
 
@@ -82,7 +82,7 @@
                     });
 
                     var plotArea = chart._model._plotArea;
-                    plotArea.redrawPane = function(pane) {
+                    plotArea.redraw = function(pane) {
                         ok(pane === plotArea.panes[0]);
                     };
 
