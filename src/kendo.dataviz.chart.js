@@ -131,6 +131,7 @@
         TOOLTIP_OFFSET = 5,
         TOOLTIP_SHOW_DELAY = 100,
         TRIANGLE = "triangle",
+        VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_LINE = "verticalLine",
         WEEKS = "weeks",
@@ -180,6 +181,7 @@
             theme = themes[themeName] || themes[themeName.toLowerCase()];
             themeOptions = themeName && theme ? theme.chart : {};
 
+            resolveAxisAliases(options);
             chart._applyDefaults(options, themeOptions);
 
             chart.options = deepExtend({}, themeOptions, options);
@@ -277,7 +279,6 @@
 
             if (paneName) {
                 plotArea = chart._model._plotArea;
-                resolveAxisAliases(plotArea.options);
                 pane = plotArea.findPane(paneName);
                 plotArea.redraw(pane);
             } else {
@@ -536,7 +537,7 @@
 
             for (i = 0; i < valueFields.length; i++) {
                 field = valueFields[i];
-                if (field === "value") {
+                if (field === VALUE) {
                     field = "field";
                 } else {
                     field = field + "Field";
@@ -6781,41 +6782,21 @@
     }
 
     function resolveAxisAliases(options) {
-        if (options.categoryAxes) {
-            var categories = [],
-                axes = [].concat(options.categoryAxis),
-                i;
+        var alias;
 
-            for (i = 0; i < axes.length; i++) {
-                categories.push(axes[i].categories);
+        each([CATEGORY, VALUE, X, Y], function() {
+            alias = options[this + "Axes"];
+            if (alias) {
+                options[this + "Axis"] = alias;
+                delete alias;
             }
-
-            options.categoryAxis = axes = options.categoryAxes;
-
-            for (i = 0; i < axes.length; i++) {
-                axes[i].categories = axes[i].categories || categories.shift();
-            }
-        }
-
-        if (options.valueAxes) {
-            options.valueAxis = options.valueAxes;
-        }
-
-        if (options.xAxes) {
-            options.xAxis = options.xAxes;
-        }
-
-        if (options.yAxes) {
-            options.yAxis = options.yAxes;
-        }
+        });
     }
 
     function applyAxisDefaults(options, themeOptions) {
         var themeAxisDefaults = ((themeOptions || {}).axisDefaults) || {};
 
-        resolveAxisAliases(options);
-
-        each([CATEGORY, "value", X, Y], function() {
+        each([CATEGORY, VALUE, X, Y], function() {
             var axisName = this + "Axis",
                 axes = [].concat(options[axisName]),
                 axisDefaults = options.axisDefaults || {};
@@ -7055,7 +7036,7 @@
     }
 
     function valueFieldsByChartType(type) {
-        var result = ["value"];
+        var result = [VALUE];
 
         if (inArray(type, [CANDLESTICK, OHLC])){
             result = ["open", "high", "low", "close"];
@@ -7158,7 +7139,7 @@
 
             for (i = 0; i < length; i++) {
                 fieldName = fields[i];
-                sourceFieldName = fieldName === "value" ? "field" : fieldName + "Field";
+                sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
 
                 sourceFields.push(series[sourceFieldName] || fieldName);
             }

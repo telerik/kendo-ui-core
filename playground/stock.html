@@ -39,12 +39,27 @@
                         }
                     },
                     dateField: "Date",
+                    panes: [{
+                        // Keep the top pane as it is
+                    }, {
+                        name: "volume"
+                    }],
+                    valueAxes: [{
+                        // Default axis
+                    }, {
+                        name: "volume",
+                        pane: "volume"
+                    }],
                     series: [{
                         type: "candlestick",
                         openField: "Open",
                         highField: "High",
                         lowField: "Low",
                         closeField: "Close"
+                    }, {
+                        type: "bar",
+                        field: "Volume",
+                        axis: "volume"
                     }],
                     navigator: {
                         series: {

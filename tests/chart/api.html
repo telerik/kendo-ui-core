@@ -89,7 +89,7 @@
                     chart.redraw("middle");
                 });
 
-                test("redraw applies category axis options set via aliases", 1, function() {
+                test("redraw ignores category axis options set via aliases", 1, function() {
                     createChart({
                         panes: [{ name: "top" }, { name: "bottom" }],
                         categoryAxes: [{
@@ -98,7 +98,7 @@
                     chart.options.categoryAxes[0].flag = true;
                     chart.redraw("top");
 
-                    ok(chart._model._plotArea.categoryAxis.options.flag);
+                    ok(!chart._model._plotArea.categoryAxis.options.flag);
                 });
 
                 test("redraw keeps categories when using categoryAxes alias", function() {
@@ -126,7 +126,7 @@
                     equals(chart._model._plotArea.categoryAxis.options.categories[0], "alpha");
                 });
 
-                test("redraw applies value axis options set via aliases", 1, function() {
+                test("redraw ignores value axis options set via aliases", 1, function() {
                     createChart({
                         series: [{
                             type: "column",
@@ -144,7 +144,7 @@
                     chart.options.valueAxes[0].flag = true;
                     chart.redraw("top");
 
-                    ok(chart._model._plotArea.valueAxis.options.flag);
+                    ok(!chart._model._plotArea.valueAxis.options.flag);
                 });
 
                 test("refresh applies series defaults", function() {
