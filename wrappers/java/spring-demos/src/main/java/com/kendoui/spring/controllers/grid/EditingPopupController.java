@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
-@Controller("grid-editing-inline-controller")
+@Controller("grid-editing-popup-controller")
 @RequestMapping(value="/web/grid/")
-public class EditingInlineController {
+public class EditingPopupController {
     
     @Autowired 
     private ProductDao product;
     
-    @RequestMapping(value = "/editing-inline", method = RequestMethod.GET)
+    @RequestMapping(value = "/editing-popup", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/editing-inline";
+        return "web/grid/editing-popup";
     }
     
-    @RequestMapping(value = "/editing-inline/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/editing-popup/read", method = RequestMethod.POST)
     public @ResponseBody List<Product> read() {
         return product.getList();
     }
     
-    @RequestMapping(value = "/editing-inline/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/editing-popup/update", method = RequestMethod.POST)
     public @ResponseBody Product update(@RequestBody Map<String, Object> model) {
         Product target = new Product();
         
@@ -45,7 +45,7 @@ public class EditingInlineController {
         return target;
     }
     
-    @RequestMapping(value = "/editing-inline/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/editing-popup/create", method = RequestMethod.POST)
     public @ResponseBody Product create(@RequestBody Map<String, Object> model) {
         Product target = new Product();
         
@@ -59,7 +59,7 @@ public class EditingInlineController {
         return target;
     }
     
-    @RequestMapping(value = "/editing-inline/destroy", method = RequestMethod.POST)
+    @RequestMapping(value = "/editing-popup/destroy", method = RequestMethod.POST)
     public @ResponseBody Product destroy(@RequestBody Map<String, Object> model) {
         Product target = new Product();
         
