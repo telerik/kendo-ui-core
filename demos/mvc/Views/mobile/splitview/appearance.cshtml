@@ -1,6 +1,7 @@
 <div data-role="splitview" id="appearance" data-style="vertical">
     <div id="main-panel" data-role="pane" data-layout="side-default">
-        <div data-role="view" data-title="Photo Gallery">
+        <div data-role="view" data-title="Photo Gallery" data-zoom="true">
+            <div class="zoom-image"></div>
         </div>
 
         <div data-role="layout" data-id="side-default" data-show="toggleBackButton">
@@ -40,13 +41,18 @@
 
 <script type="text/javascript">
     $(document).on("click", ".photo", function () {
-        $("#main-panel").find(".km-content").css("background-image", $(this).css("background-image").replace("220/", ""));
+        $("#main-panel").find(".zoom-image").css("background-image", $(this).css("background-image").replace("220/", ""));
     });
 </script>
 
 <style scoped>
     #bottom-panel {
         height: 140px;
+    }
+
+    .zoom-image {
+        width: 2048px;
+        height: 1024px;
     }
 
     #scrollview-container .photo {
@@ -75,7 +81,7 @@
     .photo13 {background-image: url("../../content/shared/images/photos/220/13.jpg");}
     .photo14 {background-image: url("../../content/shared/images/photos/220/14.jpg");}
 
-    #main-panel .km-content
+    #main-panel .zoom-image
     {
         background-image: url("../../content/shared/images/photos/1.jpg");
         background-position: 50% 50%;
