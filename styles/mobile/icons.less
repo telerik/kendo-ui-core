@@ -29,14 +29,15 @@ body:before
     font: 1em/1em "Kendo UI" !important;
 }
 
-.km-pane:not(.km-on-android):not(.km-on-blackberry):not(.km-on-meego) .km-icon:after
+:-webkit-any(.km-ios):not(.km-android):not(.km-blackberry):not(.km-meego) .km-icon:after
 {
     -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent;
 }
 
-.km-on-ios:-webkit-any(.km-5,.km-6,.km-7,.km-8,.km-9) .km-icon:after
+:-webkit-any(.km-root) .km-pane.km-on-ios.km-ios4 .km-icon:after
 {
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: inherit;
 }
 
  .km-action:after

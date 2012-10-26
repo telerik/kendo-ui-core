@@ -250,7 +250,7 @@
     width: 80%;
     height: 80%;
     font-size: 80%;
-    background-color: #282828;
+    color: #282828;
 }
 
 .km-meego .km-rowdelete:after,
@@ -638,24 +638,24 @@
 
 /* Icon styles */
 
-.km-meego .km-icon:after
+.km-meego .km-icon
 {
     text-shadow: 1px 1px 0 rgba(255,255,255,.5);
 }
 
-.km-meego .km-state-active .km-icon:after
+.km-meego .km-state-active .km-icon
 {
     text-shadow: none;
 }
 
-.km-meego .km-list .km-icon:after,
-.km-meego .km-navbar .km-icon:after,
-.km-meego .km-button .km-icon:after
+.km-meego .km-list .km-icon,
+.km-meego .km-navbar .km-icon,
+.km-meego .km-button .km-icon
 {
     color: rgba(0,0,0,.8);
 }
 
-.km-meego .km-button.km-state-active .km-icon:after
+.km-meego .km-button.km-state-active .km-icon
 {
     color: #96a6b4;
 }
@@ -667,17 +667,13 @@
     font-size: 1.8rem;
     position: relative;
     margin: .3rem auto .4rem;
+    color: #433f40;
 }
 
-.km-meego .km-listinset .km-state-active .km-listview-link > .km-icon:after,
-.km-meego .km-listgroupinset .km-state-active .km-listview-link > .km-icon:after
+.km-meego .km-listinset .km-state-active .km-listview-link > .km-icon,
+.km-meego .km-listgroupinset .km-state-active .km-listview-link > .km-icon
 {
     color: #fff;
-}
-
-.km-meego .km-tabstrip .km-button .km-icon:after
-{
-    color: #433f40;
 }
 
 /* Pull to refresh */
@@ -694,8 +690,8 @@
     font-size: 2.4rem;
 }
 
-.km-meego .km-load-more .km-icon:after,
-.km-meego .km-scroller-pull .km-icon:after
+.km-meego .km-load-more .km-icon,
+.km-meego .km-scroller-pull .km-icon
 {
     color: #333;
 }

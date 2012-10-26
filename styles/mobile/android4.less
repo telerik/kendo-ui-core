@@ -1,8 +1,6 @@
 /* Platform specific Android 4 CSS */
 
-
-
-@tabstrip-active-icon-color: #33b5e5;
+@android-tabstrip-active-icon-color: #33b5e5;
 
 .km-android
 {
@@ -259,7 +257,7 @@
 .km-android .km-list .km-icon,
 .km-android .km-detail .km-icon
 {
-    background-color: #fff;
+    color: #fff;
 }
 
 .km-root .km-android .km-detail
@@ -381,7 +379,7 @@
 {
     display: table;
     padding: 0;
-    background: @tabstrip-active-icon-color;
+    background: @android-tabstrip-active-icon-color;
     background-clip: padding-box;
     border-bottom: 1px solid rgba(255,255,255,.4);
 }
@@ -606,7 +604,7 @@
     .box-shadow(0 0 1px 2px #808080);
 }
 
-.km-android .km-button .km-icon:after
+.km-android .km-button .km-icon
 {
     color: rgba(0,0,0,.8);
 }
@@ -617,7 +615,7 @@
     margin-right: -.3rem;
 }
 
-.km-android .km-navbar .km-icon:after
+.km-android .km-navbar .km-icon
 {
     color: rgba(255,255,255,.8);
 }
@@ -628,6 +626,7 @@
     left: 0;
     margin-bottom: .3rem;
     z-index: 2;
+    color: #555;
 }
 
 .km-android.km-horizontal .km-tabstrip .km-icon
@@ -635,19 +634,14 @@
     margin-bottom: 0;
 }
 
-.km-android .km-tabstrip .km-icon:after
+.km-android .km-tabstrip .km-state-active .km-icon
 {
-    color: #555;
-}
-
-.km-android .km-tabstrip .km-state-active .km-icon:after
-{
-    color: @tabstrip-active-icon-color;
+    color: @android-tabstrip-active-icon-color;
 }
 
 /* Pull To Refresh */
 
-.km-android .km-scroller-pull .km-icon:after
+.km-android .km-scroller-pull .km-icon
 {
     color: #fff;
 }
