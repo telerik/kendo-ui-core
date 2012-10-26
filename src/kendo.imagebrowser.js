@@ -100,6 +100,31 @@
         }
     });
 
+    function bindDragEventWrappers(element, onDragEnter, onDragLeave) {
+        var hideInterval, lastDrag;
+
+        element
+            .on("dragenter" + NS, function(e) {
+                onDragEnter();
+                lastDrag = new Date();
+
+                if (!hideInterval) {
+                    hideInterval = setInterval(function() {
+                        var sinceLastDrag = new Date() - lastDrag;
+                        if (sinceLastDrag > 100) {
+                            onDragLeave();
+
+                            clearInterval(hideInterval);
+                            hideInterval = null;
+                        }
+                    }, 100);
+                }
+            })
+            .on("dragover" + NS, function(e) {
+                lastDrag = new Date();
+            });
+    }
+
     var offsetTop;
     if ($.browser.msie && parseFloat($.browser.version) < 8) {
         offsetTop = function (element) {
@@ -286,6 +311,51 @@
                 e.preventDefault();
                 popup.toggle();
             });
+
+            that._attachDropzoneEvents();
+        },
+
+        _attachDropzoneEvents: function() {
+            var that = this;
+
+            if (that.options.transport.uploadUrl) {
+                bindDragEventWrappers(that.element,
+                    $.proxy(that._dropEnter, that),
+                    $.proxy(that._dropLeave, that)
+                );
+                that._scrollHandler = proxy(that._positionDropzone, that);
+            }
+        },
+
+        _dropEnter: function() {
+            this._positionDropzone();
+            $(document).on("scroll" + NS, this._scrollHandler);
+        },
+
+        _dropLeave: function() {
+            this._removeDropzone();
+            $(document).off("scroll" + NS, this._scrollHandler);
+        },
+
+        _positionDropzone: function() {
+            var that = this,
+                element = that.element,
+                offset = element.offset();
+
+            that.toolbar.find(".k-dropzone")
+                .addClass("k-imagebrowser-dropzone")
+                .offset(offset)
+                .css({
+                    width: element[0].clientWidth,
+                    height: element[0].clientHeight,
+                    lineHeight: element[0].clientHeight + "px"
+                });
+        },
+
+        _removeDropzone: function() {
+            this.toolbar.find(".k-dropzone")
+                .removeClass("k-imagebrowser-dropzone")
+                .css({ width: "", height: "", lineHeight: "", top: "", left: "" });
         },
 
         _deleteClick: function() {
