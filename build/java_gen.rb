@@ -28,7 +28,7 @@ MD_CONFIGURATION_TEMPLATE = ERB.new(%{
 MD_OPTION_TEMPLATE = ERB.new(%{
 ### <%= name %> `<%= java_type.sub('java.lang.', '') %>`
 <% tag = parent.children.find {|c| c.name.camelize == name } %>
-<%= description %><% if tag %> Related tag: [kendo:<%= tag.tag_name %>](#kendo-<%= tag.tag_name %>). <% end %>
+<%= description %><% if tag %> Further configuration is available via [kendo:<%= tag.tag_name %>](#kendo-<%= tag.tag_name %>). <% end %>
 
 #### Example
     <kendo:<%= parent.tag_name %> <%= name %>="<%= name %>">
