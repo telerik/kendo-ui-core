@@ -71,8 +71,6 @@
             element[0].type = "text";
             wrapper = that.wrapper;
 
-            that._enable();
-
             that._popup();
 
             element
@@ -114,6 +112,7 @@
 
         options: {
             name: "AutoComplete",
+            enable: true,
             suggest: false,
             template: "",
             dataTextField: "",
