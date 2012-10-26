@@ -124,25 +124,29 @@
                 pageHTML = "",
                 dimension = that.dimension,
                 width = dimension.getSize(),
-                pages;
+                pages,
+                pageElements = that.element.find("[data-role=page]");
 
-            that.element.find("[data-role=page]").width(width);
-            dimension.update(true);
+                pageElements.width(width);
+                dimension.update(true);
 
-            that.page = Math.floor((-that.movable.x) / width);
-            that.scrollTo(that.page);
+                // if no pages present, try to retain the current position
+                if (!pageElements[0]) {
+                    that.page = Math.floor((-that.movable.x) / width);
+                    that.scrollTo(that.page);
+                }
 
-            pages = that.pages = ceil(dimension.getTotal() / width);
+                pages = that.pages = ceil(dimension.getTotal() / width);
 
-            that.minSnap = - (pages - 1) * width;
-            that.maxSnap = 0;
+                that.minSnap = - (pages - 1) * width;
+                that.maxSnap = 0;
 
-            for (var idx = 0; idx < pages; idx ++) {
-                pageHTML += "<li/>";
-            }
+                for (var idx = 0; idx < pages; idx ++) {
+                    pageHTML += "<li/>";
+                }
 
-            that.pager.html(pageHTML);
-            that._updatePager();
+                that.pager.html(pageHTML);
+                that._updatePager();
         },
 
         content: function(html) {
