@@ -13,6 +13,10 @@
         }
     }
 
+    function toggleTitle(centerElement) {
+        centerElement.toggleClass("km-hide-title", centerElement.css("visibility") == "hidden" && !centerElement.siblings().children().is(":visible"));
+    }
+
     var NavBar = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -28,12 +32,14 @@
             centerElement = element.find(".km-view-title");
 
             if(!element.find(roleSelector("view-title"))[0]) {
-                if (centerElement.is(":empty")) {
-                    centerElement.append($("<span>&nbsp;</span>"));
-                } else {
+                if (centerElement.siblings()[0]) {
+                    centerElement.addClass("km-show-title");
+                } else if (!centerElement.is(":empty")) {
                     centerElement.addClass("km-no-title");
                 }
             }
+
+            that.centerElement = centerElement;
         },
 
         options: {
@@ -42,10 +48,15 @@
 
         title: function(value) {
             this.element.find(roleSelector("view-title")).text(value);
+            toggleTitle(this.centerElement);
         },
 
         viewShow: function(view) {
-            this.title(view.options.title);
+            if (view.options.title) {
+                this.title(view.options.title);
+            } else {
+                toggleTitle(this.centerElement);
+            }
         },
 
         destroy: function() {
