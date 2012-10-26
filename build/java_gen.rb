@@ -12,73 +12,96 @@ IGNORED = {
 
 MD_METADATA_TEMPLATE = ERB.new(%{---
 title: <%= tag_name %>
-slug: <%= tag_name %>
+slug: jsp-<%= tag_name %>
 tags: api, java
 publish: true
 ---
 })
 
-MD_OPTIONS_TEMPLATE = ERB.new(%{
+MD_CONFIGURATION_TEMPLATE = ERB.new(%{
 ## Configuration Attributes
-<% options.each do |option| %><% if option.name != 'dataSource' %>
+<% (options + events).each do |option| %><% if option.name != 'dataSource' %>
+<%= option.to_markdown %>
+<% end %><% end %>
+})
 
-### <%= option.name %> `<%= option.java_type.sub('java.lang.', '') %>`
-
-<%= option.description %>
+MD_OPTION_TEMPLATE = ERB.new(%{
+### <%= name %> `<%= java_type.sub('java.lang.', '') %>`
+<% tag = parent.children.find {|c| c.name.camelize == name } %>
+<%= description %><% if tag %> Related tag: [kendo:<%= tag.tag_name %>](#kendo-<%= tag.tag_name %>). <% end %>
 
 #### Example
-    <kendo:<%= tag_name %> <%= option.name %>="<%= option.name %>">
-    </kendo:<%= tag_name %>>
-    <% end %><% end %>
+    <kendo:<%= parent.tag_name %> <%= name %>="<%= name %>">
+    </kendo:<%= parent.tag_name %>>
+})
+
+MD_EVENT_TEMPLATE = ERB.new(%{
+### <%= name %> `String`
+
+<%= description %>
+
+#### Example
+    <kendo:<%= parent.tag_name %> <%= name %>="handle_<%= name %>">
+    </kendo:<%= parent.tag_name %>>
+    <script>
+        function handle_<%= name %>(e) {
+            // Code to handle the <%= name %> event.
+        }
+    </script>
+})
+
+MD_EVENT_TAG_TEMPLATE = ERB.new(%{
+### kendo:<%= tag_name %>
+
+<%= description %>
+
+#### Example
+    <kendo:<%= parent.tag_name %>>
+        <kendo:<%= tag_name%>>
+            <script>
+                function(e) {
+                    // Code to handle the <%= name.camelize %> event.
+                }
+            </script>
+        </kendo:<%= tag_name%>>
+    </kendo:<%= parent.tag_name %>>
 })
 
 MD_EVENTS_TEMPLATE = ERB.new(%{
-## Event Attributes
+### Event Attributes
 <% events.each do |event| %>
-### <%= event.name %> `String`
-
-<%= event.description %>
-
-#### Example
-    <kendo:<%= tag_name %> <%= event.name %>="handle_<%= event.name %>">
-    </kendo:<%= tag_name %>>
-    <script>
-        function handle_<%= event.name %>(e) {
-            // Code to handle the <%= event.name %> event.
-        }
-    </script>
+<%= event.to_markdown %>
 <% end %>
-
 ## Event Tags
 <% children.each do |child| %><% if child.instance_of?(NestedTagEvent) %>
-### <kendo:<%= child.tag_name %>>
-
-<%= child.description %>
-
-#### Example
-    <kendo:<%= tag_name %>>
-        <kendo:<%= child.tag_name%>>
-            <script>
-                function(e) {
-                    // Code to handle the <%= child.name %> event.
-                }
-            </script>
-        </kendo:<%= child.tag_name%>>
-    </kendo:<%= tag_name %>>
+<%= child.to_markdown %>
 <% end %> <% end %>
 })
 
 MD_DESCRIPTION_TEMPLATE = ERB.new(%{
-# <kendo:<%= tag_name %>>
+# \\<kendo:<%= tag_name %>\\>
 A JSP tag representing Kendo <%= name %>.
+<% if defined? parent %>
+#### Example
+    <kendo:<%= parent.tag_name %>>
+        <kendo:<%= tag_name%>></kendo:<%= tag_name%>>
+    </kendo:<%= parent.tag_name %>>
+<% end %>
 })
+
 
 MD_CHILDREN_TEMPLATE = ERB.new(%{
 ## Child JSP Tags
 <% children.each do |child| %><% if !child.instance_of?(NestedTagEvent) %>
-### [<kendo:<%= child.tag_name %>>](<%= child.markdown_filename.sub('docs', '').sub('.md', '')%>)
+### [kendo:<%= child.tag_name %>](<%= child.markdown_filename.sub('docs', '').sub('.md', '')%>)
 
 <%= child.description %>
+
+#### Example
+
+    <kendo:<%= tag_name %>>
+        <kendo:<%= child.tag_name%>></kendo:<%= child.tag_name%>>
+    </kendo:<%= tag_name %>>
 <% end %> <% end %>
 })
 
@@ -402,11 +425,16 @@ class String
 end
 
 class Event
-    attr_reader :name, :description
+    attr_reader :name, :description, :parent
 
     def initialize(options)
         @name = options[:name].strip
         @description = options[:description].strip
+        @parent = options[:parent]
+    end
+
+    def to_markdown
+        MD_EVENT_TEMPLATE.result(binding)
     end
 
     def to_xml
@@ -417,6 +445,16 @@ class Event
         $stderr.puts("\t|- #{@name} (event)") if VERBOSE
 
         [JAVA_EVENT_GETTER_TEMPLATE.result(binding), JAVA_EVENT_SETTER_TEMPLATE.result(binding)].join
+    end
+end
+
+class Function < Event
+    attr_reader :type
+
+    def initialize(options)
+        super
+
+        @type = 'String'
     end
 end
 
@@ -438,6 +476,10 @@ class Option
 
     def required?
         @java_type
+    end
+
+    def to_markdown
+        return MD_OPTION_TEMPLATE.result(binding)
     end
 
     def to_xml
@@ -605,11 +647,12 @@ class Tag
     end
 
     def to_markdown
-        MD_METADATA_TEMPLATE.result(binding) +
-        MD_DESCRIPTION_TEMPLATE.result(binding) +
-        MD_OPTIONS_TEMPLATE.result(binding) +
-        MD_EVENTS_TEMPLATE.result(binding) +
-        MD_CHILDREN_TEMPLATE.result(binding)
+        markdown = MD_METADATA_TEMPLATE.result(binding) + MD_DESCRIPTION_TEMPLATE.result(binding)
+        markdown += MD_CONFIGURATION_TEMPLATE.result(binding) if @options.any?
+        markdown += MD_EVENTS_TEMPLATE.result(binding) if @events.any?
+        markdown += MD_CHILDREN_TEMPLATE.result(binding) if @children.any?
+
+        markdown
     end
 
     def namespace
@@ -663,6 +706,16 @@ class Tag
 
             @children.push(child);
         end
+
+        @options.each do |o|
+            if o.instance_of?(Function)
+                child = NestedTagEvent.new :name => o.name,
+                                      :parent => self,
+                                      :description => o.description
+
+                @children.push(child);
+            end
+        end
     end
 
     def all_children
@@ -683,7 +736,11 @@ class Tag
 
         end_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Methods' }
 
-        configuration = root.children.slice(start_element_index..end_element_index)
+        if end_element_index
+            configuration = root.children.slice(start_element_index..end_element_index)
+        else
+            configuration = root.children.slice(start_element_index, root.children.size)
+        end
 
         find_child_with_type = lambda do |element, type|
             element.children.find { |e| e.type == type }
@@ -715,10 +772,11 @@ class Tag
 
                 if types.include?('Function') && types.size == 1
 
-                    event = Event.new :name => name,
+                    event = Function.new :name => name,
+                                      :parent => tag,
                                       :description => description.value.strip
 
-                    tag.events.push(event)
+                    tag.options.push(event)
 
                     next
                 end
@@ -738,15 +796,18 @@ class Tag
 
         if tag.has_items?
             tag.options.push(Option.new :name => 'items',
+                                        :parent => tag,
                                         :type => 'Array',
                                         :description => "Contains items of #{tag.name}")
 
             tag.options.push(Option.new :name => 'items.text',
                                         :type => 'String',
+                                        :parent => tag,
                                         :description => "Specifies the text displayed by the item")
 
             tag.options.push(Option.new :name => 'items.spriteCssClass',
                                         :type => 'String',
+                                        :parent => tag,
                                         :description => "Specifies the class name for the sprite image displayed by the item")
         end
 
@@ -764,6 +825,7 @@ class Tag
                     description = find_child_with_type.call(paragraph, :text)
 
                     event = Event.new :name => name,
+                                      :parent => tag,
                                       :description => description.value.strip
 
                     tag.events.push(event)
@@ -787,6 +849,7 @@ class Tag
                 options_with_this_name.each { |o| @options.delete(o) }
 
                 @options.push(Option.new :name => option.name,
+                              :parent => self,
                               :description => option.description,
                               :type => 'Object')
             end
@@ -873,6 +936,10 @@ class NestedTagEvent < NestedTag
 
     def xml_template
         XML_EVENT_TAG_TEMPLATE
+    end
+
+    def to_markdown
+        MD_EVENT_TAG_TEMPLATE.result(binding)
     end
 
     def setter_template
