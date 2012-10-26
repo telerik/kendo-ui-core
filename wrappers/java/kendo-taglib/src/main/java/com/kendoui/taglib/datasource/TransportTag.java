@@ -97,6 +97,18 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("destroy", value);
     }
 
+    public String getParameterMap() {
+        Function property = ((Function)getProperty("parameterMap"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setParameterMap(String value) {
+        setProperty("parameterMap", new Function(value));
+    }
+
     public String getRead() {
         return (String)getProperty("read");
     }
@@ -111,18 +123,6 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setUpdate(String value) {
         setProperty("update", value);
-    }
-
-    public String getParameterMap() {
-        Function property = ((Function)getProperty("parameterMap"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setParameterMap(String value) {
-        setProperty("parameterMap", new Function(value));
     }
 
 //<< Attributes

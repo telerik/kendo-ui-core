@@ -1,9 +1,10 @@
 
 package com.kendoui.taglib.datepicker;
 
+
 import com.kendoui.taglib.BaseTag;
 
-import com.kendoui.taglib.DatePickerTag;
+
 
 
 
@@ -11,17 +12,17 @@ import com.kendoui.taglib.DatePickerTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
+public class AnimationCloseTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        DatePickerTag parent = (DatePickerTag)findParentWithClass(DatePickerTag.class);
+        AnimationTag parent = (AnimationTag)findParentWithClass(AnimationTag.class);
 
 
-        parent.setAnimation(this);
+        parent.setClose(this);
 
 //<< doEndTag
 
@@ -47,15 +48,23 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "datePicker-animation";
+        return "datePicker-animation-close";
     }
 
-    public void setClose(AnimationCloseTag value) {
-        setProperty("close", value);
+    public String getEffects() {
+        return (String)getProperty("effects");
     }
 
-    public void setOpen(AnimationOpenTag value) {
-        setProperty("open", value);
+    public void setEffects(String value) {
+        setProperty("effects", value);
+    }
+
+    public float getDuration() {
+        return (float)getProperty("duration");
+    }
+
+    public void setDuration(float value) {
+        setProperty("duration", value);
     }
 
 //<< Attributes

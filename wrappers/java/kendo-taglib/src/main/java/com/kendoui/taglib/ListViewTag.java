@@ -46,14 +46,6 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         return "listView";
     }
 
-    public void setEditTemplate(EditTemplateFunctionTag value) {
-        setEvent("editTemplate", value.getBody());
-    }
-
-    public void setTemplate(TemplateFunctionTag value) {
-        setEvent("template", value.getBody());
-    }
-
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
@@ -70,6 +62,14 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("remove", value.getBody());
     }
 
+    public void setEditTemplate(EditTemplateFunctionTag value) {
+        setEvent("editTemplate", value.getBody());
+    }
+
+    public void setTemplate(TemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }
@@ -81,6 +81,18 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
+    }
+
+    public String getEditTemplate() {
+        Function property = ((Function)getProperty("editTemplate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setEditTemplate(String value) {
+        setProperty("editTemplate", new Function(value));
     }
 
     public boolean getNavigatable() {
@@ -97,18 +109,6 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setSelectable(String value) {
         setProperty("selectable", value);
-    }
-
-    public String getEditTemplate() {
-        Function property = ((Function)getProperty("editTemplate"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setEditTemplate(String value) {
-        setProperty("editTemplate", new Function(value));
     }
 
     public String getTemplate() {

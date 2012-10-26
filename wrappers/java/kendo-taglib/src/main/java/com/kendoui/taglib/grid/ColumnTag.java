@@ -65,6 +65,18 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("command", value);
     }
 
+    public String getEditor() {
+        Function property = ((Function)getProperty("editor"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setEditor(String value) {
+        setProperty("editor", new Function(value));
+    }
+
     public boolean getEncoded() {
         return (boolean)getProperty("encoded");
     }
@@ -167,18 +179,6 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setWidth(String value) {
         setProperty("width", value);
-    }
-
-    public String getEditor() {
-        Function property = ((Function)getProperty("editor"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setEditor(String value) {
-        setProperty("editor", new Function(value));
     }
 
 //<< Attributes

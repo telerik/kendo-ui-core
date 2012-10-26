@@ -76,18 +76,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     }
 
-    public void setAltRowTemplate(AltRowTemplateFunctionTag value) {
-        setEvent("altRowTemplate", value.getBody());
-    }
-
-    public void setDetailTemplate(DetailTemplateFunctionTag value) {
-        setEvent("detailTemplate", value.getBody());
-    }
-
-    public void setRowTemplate(RowTemplateFunctionTag value) {
-        setEvent("rowTemplate", value.getBody());
-    }
-
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
@@ -128,6 +116,30 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("saveChanges", value.getBody());
     }
 
+    public void setAltRowTemplate(AltRowTemplateFunctionTag value) {
+        setEvent("altRowTemplate", value.getBody());
+    }
+
+    public void setDetailTemplate(DetailTemplateFunctionTag value) {
+        setEvent("detailTemplate", value.getBody());
+    }
+
+    public void setRowTemplate(RowTemplateFunctionTag value) {
+        setEvent("rowTemplate", value.getBody());
+    }
+
+    public String getAltRowTemplate() {
+        Function property = ((Function)getProperty("altRowTemplate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setAltRowTemplate(String value) {
+        setProperty("altRowTemplate", new Function(value));
+    }
+
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }
@@ -139,6 +151,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
+    }
+
+    public String getDetailTemplate() {
+        Function property = ((Function)getProperty("detailTemplate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDetailTemplate(String value) {
+        setProperty("detailTemplate", new Function(value));
     }
 
     public boolean getEditable() {
@@ -181,6 +205,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("pageable", value);
     }
 
+    public String getRowTemplate() {
+        Function property = ((Function)getProperty("rowTemplate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setRowTemplate(String value) {
+        setProperty("rowTemplate", new Function(value));
+    }
+
     public boolean getScrollable() {
         return (boolean)getProperty("scrollable");
     }
@@ -203,42 +239,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setSortable(boolean value) {
         setProperty("sortable", value);
-    }
-
-    public String getAltRowTemplate() {
-        Function property = ((Function)getProperty("altRowTemplate"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setAltRowTemplate(String value) {
-        setProperty("altRowTemplate", new Function(value));
-    }
-
-    public String getDetailTemplate() {
-        Function property = ((Function)getProperty("detailTemplate"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setDetailTemplate(String value) {
-        setProperty("detailTemplate", new Function(value));
-    }
-
-    public String getRowTemplate() {
-        Function property = ((Function)getProperty("rowTemplate"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setRowTemplate(String value) {
-        setProperty("rowTemplate", new Function(value));
     }
 
     public String getChange() {

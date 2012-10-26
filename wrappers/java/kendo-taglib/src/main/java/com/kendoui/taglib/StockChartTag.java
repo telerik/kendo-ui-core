@@ -1,28 +1,23 @@
 
-package com.kendoui.taglib.autocomplete;
+package com.kendoui.taglib;
 
-import com.kendoui.taglib.BaseTag;
 
-import com.kendoui.taglib.AutoCompleteTag;
-
+import com.kendoui.taglib.stockchart.*;
 
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
+public class StockChartTag extends WidgetTag /* interfaces *//* interfaces */ {
+
+    public StockChartTag() {
+        super("StockChart");
+    }
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
-
-
-        AutoCompleteTag parent = (AutoCompleteTag)findParentWithClass(AutoCompleteTag.class);
-
-
-        parent.setAnimation(this);
-
 //<< doEndTag
 
         return super.doEndTag();
@@ -47,15 +42,19 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "autoComplete-animation";
+        return "stockChart";
     }
 
-    public void setClose(AnimationCloseTag value) {
-        setProperty("close", value);
+    public void setNavigator(NavigatorTag value) {
+        setProperty("navigator", value);
     }
 
-    public void setOpen(AnimationOpenTag value) {
-        setProperty("open", value);
+    public String getDateField() {
+        return (String)getProperty("dateField");
+    }
+
+    public void setDateField(String value) {
+        setProperty("dateField", value);
     }
 
 //<< Attributes

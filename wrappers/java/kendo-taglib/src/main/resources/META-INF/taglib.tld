@@ -1074,12 +1074,23 @@ as a collection of required properties, while the insertHtml  tool requires a co
 
 
         <attribute>
+            <description>Template to be used for rendering the alternate rows in the grid.</description>
+            <name>altRowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Indicates whether the grid will call read on the DataSource initially.</description>
             <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
 
+        <attribute>
+            <description>Template to be used for rendering the detail rows in the grid.
+See the</description>
+            <name>detailTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <attribute>
             <description>Indicates whether editing is enabled/disabled.</description>
             <name>editable</name>
@@ -1116,6 +1127,11 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
+            <description>Template to be used for rendering the rows in the grid.</description>
+            <name>rowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Enable/disable grid scrolling. Possible values:</description>
             <name>scrollable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1136,22 +1152,6 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <type>boolean</type>
         </attribute>
 
-        <attribute>
-            <description>Template to be used for rendering the alternate rows in the grid.</description>
-            <name>altRowTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Template to be used for rendering the detail rows in the grid.
-See the</description>
-            <name>detailTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Template to be used for rendering the rows in the grid.</description>
-            <name>rowTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
         <attribute>
             <description>Fires when the grid selection has changed.</description>
             <name>change</name>
@@ -1253,6 +1253,11 @@ See the</description>
         </attribute>
 
         <attribute>
+            <description>Specifies ListView item template in edit mode.</description>
+            <name>editTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
             <name>navigatable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1266,11 +1271,6 @@ See the</description>
             <type>java.lang.String</type>
         </attribute>
 
-        <attribute>
-            <description>Specifies ListView item template in edit mode.</description>
-            <name>editTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
         <attribute>
             <description>Specifies ListView item template.</description>
             <name>template</name>
@@ -1905,6 +1905,32 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         
 
     <tag>
+        <description>StockChart</description>
+        <name>stockChart</name>
+        <tag-class>com.kendoui.taglib.StockChartTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+
+        <attribute>
+            <description>The field containing the point date.
+It is used as a default</description>
+            <name>dateField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+        
+
+    <tag>
         <description>TabStrip</description>
         <name>tabStrip</name>
         <tag-class>com.kendoui.taglib.TabStripTag</tag-class>
@@ -2458,21 +2484,7 @@ has been clicked on a window with static content.</description>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
         <name>autoComplete-animation</name>
         <tag-class>com.kendoui.taglib.autocomplete.AnimationTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Animation to be used for closing of the popup.</description>
-            <name>close</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>Animation to be used for opening of the popup.</description>
-            <name>open</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
+        <body-content>JSP</body-content>
 
     </tag>
 
@@ -2514,6 +2526,52 @@ has been clicked on a window with static content.</description>
         <name>autoComplete-select</name>
         <tag-class>com.kendoui.taglib.autocomplete.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Animation to be used for closing of the popup.</description>
+        <name>autoComplete-animation-close</name>
+        <tag-class>com.kendoui.taglib.autocomplete.AnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for closing of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Animation to be used for opening of the popup.</description>
+        <name>autoComplete-animation-open</name>
+        <tag-class>com.kendoui.taglib.autocomplete.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for opening of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 
@@ -5189,21 +5247,7 @@ hex and rgb.</description>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn off the animation.</description>
         <name>comboBox-animation</name>
         <tag-class>com.kendoui.taglib.combobox.AnimationTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Animation to be used for closing of the popup.</description>
-            <name>close</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>Animation to be used for opening of the popup.</description>
-            <name>open</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
+        <body-content>JSP</body-content>
 
     </tag>
 
@@ -5245,6 +5289,52 @@ hex and rgb.</description>
         <name>comboBox-select</name>
         <tag-class>com.kendoui.taglib.combobox.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Animation to be used for closing of the popup.</description>
+        <name>comboBox-animation-close</name>
+        <tag-class>com.kendoui.taglib.combobox.AnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for closing of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Animation to be used for opening of the popup.</description>
+        <name>comboBox-animation-open</name>
+        <tag-class>com.kendoui.taglib.combobox.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for opening of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 
@@ -5321,6 +5411,11 @@ return the groups for the current response.</description>
         </attribute>
 
         <attribute>
+            <description>Executed before the server response is used. Appropriate for preprocessing or parsing of the server response.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Specifies the field from the response which contains the total number of data items. If set to a function - the function will be called to
 return the total number of data items for the current response.</description>
             <name>total</name>
@@ -5335,11 +5430,6 @@ return the total number of data items for the current response.</description>
             <type>java.lang.String</type>
         </attribute>
 
-        <attribute>
-            <description>Executed before the server response is used. Appropriate for preprocessing or parsing of the server response.</description>
-            <name>parse</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
     </tag>
 
 
@@ -5373,6 +5463,11 @@ return the total number of data items for the current response.</description>
         </attribute>
 
         <attribute>
+            <description>Convert the request parameters from dataSource format to remote service specific format.</description>
+            <name>parameterMap</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Options for remote read data operation, or the URL of the remote service.</description>
             <name>read</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5386,11 +5481,6 @@ return the total number of data items for the current response.</description>
             <type>java.lang.String</type>
         </attribute>
 
-        <attribute>
-            <description>Convert the request parameters from dataSource format to remote service specific format.</description>
-            <name>parameterMap</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
     </tag>
 
 
@@ -5793,21 +5883,7 @@ Refer to the</description>
         <description>The animation(s) used for opening and/or closing the pop-up. Setting this value to</description>
         <name>datePicker-animation</name>
         <tag-class>com.kendoui.taglib.datepicker.AnimationTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The animation(s) used for hiding of the pop-up.</description>
-            <name>close</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The animation(s) used for displaying of the pop-up.</description>
-            <name>open</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
+        <body-content>JSP</body-content>
 
     </tag>
 
@@ -5861,24 +5937,56 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>The animation(s) used for opening and/or closing the pop-ups. Setting this value to</description>
-        <name>dateTimePicker-animation</name>
-        <tag-class>com.kendoui.taglib.datetimepicker.AnimationTag</tag-class>
+        <description>The animation(s) used for hiding of the pop-up.</description>
+        <name>datePicker-animation-close</name>
+        <tag-class>com.kendoui.taglib.datepicker.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The animation(s) used for hiding of the pop-up.</description>
-            <name>close</name>
+            <description>Effect to be used for closing of the popup.</description>
+            <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The animation(s) used for displaying of the pop-up.</description>
-            <name>open</name>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>float</type>
         </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation(s) used for displaying of the pop-up.</description>
+        <name>datePicker-animation-open</name>
+        <tag-class>com.kendoui.taglib.datepicker.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for opening of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation(s) used for opening and/or closing the pop-ups. Setting this value to</description>
+        <name>dateTimePicker-animation</name>
+        <tag-class>com.kendoui.taglib.datetimepicker.AnimationTag</tag-class>
+        <body-content>JSP</body-content>
 
     </tag>
 
@@ -5932,24 +6040,56 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
-        <name>dropDownList-animation</name>
-        <tag-class>com.kendoui.taglib.dropdownlist.AnimationTag</tag-class>
+        <description>The animation(s) used for hiding of the pop-up.</description>
+        <name>dateTimePicker-animation-close</name>
+        <tag-class>com.kendoui.taglib.datetimepicker.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Animation to be used for closing of the popup.</description>
-            <name>close</name>
+            <description>Effect to be used for closing of the popup.</description>
+            <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>Animation to be used for opening of the popup.</description>
-            <name>open</name>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>float</type>
         </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation(s) used for displaying of the pop-up.</description>
+        <name>dateTimePicker-animation-open</name>
+        <tag-class>com.kendoui.taglib.datetimepicker.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for opening of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
+        <name>dropDownList-animation</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.AnimationTag</tag-class>
+        <body-content>JSP</body-content>
 
     </tag>
 
@@ -5991,6 +6131,52 @@ the minimum and maximum values.</description>
         <name>dropDownList-select</name>
         <tag-class>com.kendoui.taglib.dropdownlist.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Animation to be used for closing of the popup.</description>
+        <name>dropDownList-animation-close</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.AnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for closing of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Animation to be used for opening of the popup.</description>
+        <name>dropDownList-animation-open</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for opening of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 
@@ -6203,30 +6389,6 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
 
 
     <tag>
-        <description>Subscribes to the altRowTemplate event of Grid.</description>
-        <name>grid-altRowTemplate</name>
-        <tag-class>com.kendoui.taglib.grid.AltRowTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the detailTemplate event of Grid.</description>
-        <name>grid-detailTemplate</name>
-        <tag-class>com.kendoui.taglib.grid.DetailTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the rowTemplate event of Grid.</description>
-        <name>grid-rowTemplate</name>
-        <tag-class>com.kendoui.taglib.grid.RowTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
         <description>Subscribes to the change event of Grid.</description>
         <name>grid-change</name>
         <tag-class>com.kendoui.taglib.grid.ChangeFunctionTag</tag-class>
@@ -6307,6 +6469,30 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
 
 
     <tag>
+        <description>Subscribes to the altRowTemplate event of Grid.</description>
+        <name>grid-altRowTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.AltRowTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the detailTemplate event of Grid.</description>
+        <name>grid-detailTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.DetailTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the rowTemplate event of Grid.</description>
+        <name>grid-rowTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.RowTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
         <name>grid-column</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
@@ -6319,6 +6505,11 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>Provides a way to specify custom editor for this column.</description>
+            <name>editor</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <attribute>
             <description>Specified whether the column content is escaped. Disable encoding if the data contains HTML markup.</description>
             <name>encoded</name>
@@ -6410,11 +6601,6 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
             <type>java.lang.String</type>
         </attribute>
 
-        <attribute>
-            <description>Provides a way to specify custom editor for this column.</description>
-            <name>editor</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
     </tag>
 
 
@@ -7068,22 +7254,6 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
-        <description>Subscribes to the editTemplate event of ListView.</description>
-        <name>listView-editTemplate</name>
-        <tag-class>com.kendoui.taglib.listview.EditTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the template event of ListView.</description>
-        <name>listView-template</name>
-        <tag-class>com.kendoui.taglib.listview.TemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
         <description>Subscribes to the change event of ListView.</description>
         <name>listView-change</name>
         <tag-class>com.kendoui.taglib.listview.ChangeFunctionTag</tag-class>
@@ -7116,24 +7286,26 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
+        <description>Subscribes to the editTemplate event of ListView.</description>
+        <name>listView-editTemplate</name>
+        <tag-class>com.kendoui.taglib.listview.EditTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the template event of ListView.</description>
+        <name>listView-template</name>
+        <tag-class>com.kendoui.taglib.listview.TemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>A collection of</description>
         <name>menu-animation</name>
         <tag-class>com.kendoui.taglib.menu.AnimationTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The animation that will be used when closing sub menus.</description>
-            <name>close</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The animation that will be used when opening sub menus.</description>
-            <name>open</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
+        <body-content>JSP</body-content>
 
     </tag>
 
@@ -7168,6 +7340,52 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
         <name>menu-select</name>
         <tag-class>com.kendoui.taglib.menu.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>The animation that will be used when closing sub menus.</description>
+        <name>menu-animation-close</name>
+        <tag-class>com.kendoui.taglib.menu.AnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for closing of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation that will be used when opening sub menus.</description>
+        <name>menu-animation-open</name>
+        <tag-class>com.kendoui.taglib.menu.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for opening of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 
@@ -8019,6 +8237,45 @@ value must not exceed</description>
 
 
     <tag>
+        <description>The data navigator configuration options.</description>
+        <name>stockChart-navigator</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Array of series definitions.</description>
+            <name>series</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies the initially selected range.</description>
+        <name>stockChart-navigator-select</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSelectTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The lower boundary of the selected range.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+        <attribute>
+            <description>The upper boundary of the selected range.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>A collection of visual animations used when</description>
         <name>tabStrip-animation</name>
         <tag-class>com.kendoui.taglib.tabstrip.AnimationTag</tag-class>
@@ -8149,21 +8406,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
         <name>timePicker-animation</name>
         <tag-class>com.kendoui.taglib.timepicker.AnimationTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Animation to be used for closing of the popup.</description>
-            <name>close</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>Animation to be used for opening of the popup.</description>
-            <name>open</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
+        <body-content>JSP</body-content>
 
     </tag>
 
@@ -8189,6 +8432,52 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <name>timePicker-open</name>
         <tag-class>com.kendoui.taglib.timepicker.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Animation to be used for closing of the popup.</description>
+        <name>timePicker-animation-close</name>
+        <tag-class>com.kendoui.taglib.timepicker.AnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for closing of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Animation to be used for opening of the popup.</description>
+        <name>timePicker-animation-open</name>
+        <tag-class>com.kendoui.taglib.timepicker.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for opening of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 
@@ -8577,21 +8866,7 @@ containing one or more fields with the same name as the original input name.</de
         <description>A collection of {Animation} objects, used to change default animations. A value of</description>
         <name>window-animation</name>
         <tag-class>com.kendoui.taglib.window.AnimationTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The animation that will be used when a Window closes.</description>
-            <name>close</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The animation that will be used when a Window opens.</description>
-            <name>open</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
+        <body-content>JSP</body-content>
 
     </tag>
 
@@ -8665,6 +8940,52 @@ containing one or more fields with the same name as the original input name.</de
         <name>window-resize</name>
         <tag-class>com.kendoui.taglib.window.ResizeFunctionTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>The animation that will be used when a Window closes.</description>
+        <name>window-animation-close</name>
+        <tag-class>com.kendoui.taglib.window.AnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for closing of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation that will be used when a Window opens.</description>
+        <name>window-animation-open</name>
+        <tag-class>com.kendoui.taglib.window.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Effect to be used for opening of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 

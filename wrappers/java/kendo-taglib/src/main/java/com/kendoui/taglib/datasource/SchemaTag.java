@@ -96,6 +96,18 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("model", value);
     }
 
+    public String getParse() {
+        Function property = ((Function)getProperty("parse"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setParse(String value) {
+        setProperty("parse", new Function(value));
+    }
+
     public String getTotal() {
         return (String)getProperty("total");
     }
@@ -110,18 +122,6 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setType(String value) {
         setProperty("type", value);
-    }
-
-    public String getParse() {
-        Function property = ((Function)getProperty("parse"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setParse(String value) {
-        setProperty("parse", new Function(value));
     }
 
 //<< Attributes
