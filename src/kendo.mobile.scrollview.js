@@ -36,6 +36,8 @@
             that.pager = element.children().last();
             that.page = 0;
 
+            that.inner.css("height", that.options.contentHeight);
+
             var movable,
                 transition,
                 userEvents,
@@ -97,6 +99,7 @@
             page: 0,
             duration: 300,
             velocityThreshold: 0.8,
+            contentHeight: "auto",
             bounceVelocityThreshold: 1.6
         },
 
