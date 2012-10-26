@@ -912,6 +912,22 @@
                 equal(calledCount, 0);
             });
 
+            test("validate skips readonly inputs elements", function() {
+                container.append('<input type="text" readonly="readonly" />');
+                var calledCount = 0,
+                    validator = setup(container, {
+                        rules: {
+                            custom: function() {
+                                calledCount++;
+                                return true;
+                            }
+                        }
+                    });
+
+                validator.validate();
+                equal(calledCount, 0);
+            });
+
 
 /* //Chrome type=date does not return value if it is not valid date
             test("validate returns false if input type=date value is not valid date", function() {
