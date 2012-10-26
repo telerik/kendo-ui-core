@@ -66,17 +66,13 @@
         },
 
         open: function(target) {
-            var that = this;
-            that.trigger(OPEN);
-            that.target = $(target);
-            that.shim.show();
+            this.target = $(target);
+            this.shim.show();
         },
 
         openFor: function(target) {
-            var that = this;
-            that.target = target;
-            that.trigger(OPEN, { target: that.target });
-            that.shim.show();
+            this.open(target);
+            this.trigger(OPEN, { target: target });
         },
 
         close: function() {

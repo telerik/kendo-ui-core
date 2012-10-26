@@ -8,6 +8,9 @@
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.popover.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.history.js"></script>
@@ -15,6 +18,8 @@
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.shim.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.actionsheet.js"></script>
@@ -22,29 +27,28 @@
         <style>
         </style>
 
-        <script>
-            $(function() {
-                new kendo.mobile.Application(document.body, {initial: "#bar" });
-            });
-
-            function bar() {
-                alert("You selected bar");
-            }
-
-            function baz() {
-                alert("You selected baz");
-            }
-        </script>
 
     </head>
     <body>
-        <div data-role="view" id="foo">
-            <a data-role="button" data-rel="actionsheet">Reply</a>
+        <div data-role="view" data-init="wireActionSheet">
+            <a data-role="button" id="button">Reply</a>
 
+            <ul data-role="actionsheet" id="foo">
+                <li>Foo</li>
+                <li>Bar</li>
+            </ul>
         </div>
+        <script>
+            $(function() {
+                new kendo.mobile.Application();
+            });
 
-        <div data-role="view" id="bar">
-            <a href="#foo" data-role="button">Go to index</a>
-        </div>
+            function wireActionSheet() {
+                $("#button").data("kendoMobileButton").bind("click", function(e) {
+                    $("#foo").data("kendoMobileActionSheet").open($("#button"));
+                    e.preventDefault();
+                });
+            }
+        </script>
     </body>
 </html>
