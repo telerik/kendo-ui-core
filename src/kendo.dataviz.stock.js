@@ -69,7 +69,10 @@
                     justified: true
                 },
                 valueAxis: {
-                    narrowRange: true
+                    narrowRange: true,
+                    labels: {
+                        format: "C"
+                    }
                 }
             },
             dateField: "date",
@@ -127,8 +130,16 @@
             var options = primaryAxis.options;
             var coords = chart._eventCoordinates(e);
             var baseUnit = primaryAxis.options.baseUnit;
+            var panes = chart._plotArea.panes;
+            var inPane = false;
 
-            if (!chart._plotArea.panes[0].box.containsPoint(coords)) {
+            for (var i = 0; i < panes.length - 1; i++) {
+                if (panes[i].box.containsPoint(coords)) {
+                    inPane = true;
+                }
+            }
+
+            if (!inPane) {
                 e.preventDefault();
                 return;
             }
