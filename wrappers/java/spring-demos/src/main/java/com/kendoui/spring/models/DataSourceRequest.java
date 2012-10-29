@@ -9,12 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.buffer.CircularFifoBuffer;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
@@ -313,6 +311,7 @@ public class DataSourceRequest {
                         return result;
                     }
                     
+                    @SuppressWarnings("rawtypes")
                     @Override
                     public List transformList(List collection) {
                         return collection;

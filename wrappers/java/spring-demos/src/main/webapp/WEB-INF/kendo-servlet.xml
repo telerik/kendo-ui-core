@@ -48,6 +48,7 @@
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>com.kendoui.spring.models.Product</beans:value>
+				<beans:value>com.kendoui.spring.models.Order</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
