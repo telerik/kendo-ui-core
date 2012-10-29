@@ -168,9 +168,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public EditorMessagesBuilder FileBrowser(Action<EditorFileBrowserMessagesBuilder> configurator)
+        public EditorMessagesBuilder ImageBrowser(Action<EditorImageBrowserMessagesBuilder> configurator)
         {
-            configurator(new EditorFileBrowserMessagesBuilder(messages.FileBrowserMessages));
+            configurator(new EditorImageBrowserMessagesBuilder(messages.ImageBrowserMessages));
 
             return this;
         } 

@@ -1,65 +1,71 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
-    public class EditorFileBrowserMessagesBuilder : IHideObjectMembers
+    public class EditorImageBrowserMessagesBuilder : IHideObjectMembers
     {
-        private readonly EditorFileBrowserMessages messages;
+        private readonly EditorImageBrowserMessages messages;
 
-        public EditorFileBrowserMessagesBuilder(EditorFileBrowserMessages messages)
+        public EditorImageBrowserMessagesBuilder(EditorImageBrowserMessages messages)
         {
             this.messages = messages;
         }
 
-        public EditorFileBrowserMessagesBuilder DeleteFile(string message)
+        public EditorImageBrowserMessagesBuilder DeleteFile(string message)
         {
             messages.DeleteFile = message;
             return this;
         }
 
-        public EditorFileBrowserMessagesBuilder DirectoryNotFound(string message)
+        public EditorImageBrowserMessagesBuilder DirectoryNotFound(string message)
         {
             messages.DirectoryNotFound = message;
             return this;
         }
 
-        public EditorFileBrowserMessagesBuilder EmptyFolder(string message)
+        public EditorImageBrowserMessagesBuilder EmptyFolder(string message)
         {
             messages.EmptyFolder = message;
             return this;
         }
 
-        public EditorFileBrowserMessagesBuilder InvalidFileType(string message)
+        public EditorImageBrowserMessagesBuilder InvalidFileType(string message)
         {
             messages.InvalidFileType = message;
             return this;
         }
 
-        public EditorFileBrowserMessagesBuilder OrderBy(string message)
+        public EditorImageBrowserMessagesBuilder OrderBy(string message)
         {
             messages.OrderBy = message;
             return this;
         }
 
-        public EditorFileBrowserMessagesBuilder OrderByName(string message)
+        public EditorImageBrowserMessagesBuilder OrderByName(string message)
         {
             messages.OrderByName = message;
             return this;
         }
 
-        public EditorFileBrowserMessagesBuilder OrderBySize(string message)
+        public EditorImageBrowserMessagesBuilder OrderBySize(string message)
         {
             messages.OrderBySize = message;
             return this;
         }
 
-        public EditorFileBrowserMessagesBuilder OverwriteFile(string message)
+        public EditorImageBrowserMessagesBuilder OverwriteFile(string message)
         {
             messages.OverwriteFile = message;
             return this;
         }
 
-        public EditorFileBrowserMessagesBuilder UploadFile(string message)
+        public EditorImageBrowserMessagesBuilder UploadFile(string message)
         {
             messages.UploadFile = message;
+            return this;
+        }
+
+        public EditorImageBrowserMessagesBuilder DropFilesHere(string message)
+        {
+            messages.DropFilesHere = message;
             return this;
         }
     }

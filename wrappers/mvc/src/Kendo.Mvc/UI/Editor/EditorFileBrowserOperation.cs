@@ -4,13 +4,13 @@ using System.Web.Routing;
 
 namespace Kendo.Mvc.UI
 {
-    public class EditorFileBrowserOperation : JsonObject, INavigatable
+    public class EditorImageBrowserOperation : JsonObject, INavigatable
     {
         private string routeName;
         private string controllerName;
         private string actionName;
 
-        public EditorFileBrowserOperation()
+        public EditorImageBrowserOperation()
         {            
             RouteValues = new RouteValueDictionary();            
         }

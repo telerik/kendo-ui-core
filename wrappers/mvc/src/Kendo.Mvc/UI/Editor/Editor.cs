@@ -35,7 +35,7 @@ namespace Kendo.Mvc.UI
                 .CreateLink().Unlink()
                 .InsertImage();
 
-            FileBrowserSettings = new EditorFileBrowserSettings(Messages.FileBrowserMessages);
+            ImageBrowserSettings = new EditorImageBrowserSettings(Messages.ImageBrowserMessages);
         }
 
         internal IUrlGenerator UrlGenerator
@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public EditorFileBrowserSettings FileBrowserSettings
+        public EditorImageBrowserSettings ImageBrowserSettings
         {
             get;
             private set;
@@ -181,7 +181,7 @@ namespace Kendo.Mvc.UI
                 options["stylesheets"] = StyleSheets;
             }
 
-            var fileSettings = FileBrowserSettings.ToJson();
+            var fileSettings = ImageBrowserSettings.ToJson();
             if (fileSettings.Any())
             {
                 options["imageBrowser"] = fileSettings;

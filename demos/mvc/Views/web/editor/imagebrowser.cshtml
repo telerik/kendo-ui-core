@@ -26,6 +26,9 @@
                     // create Editor from textarea HTML element with default set of tools
                     $("#editor").kendoEditor({
                         imageBrowser: {
+                           messages: {
+                            dropFilesHere: "Foo"
+                           },
                            transport: {
                                 read: "/service/ImageBrowser/Read",
                                 destroy: {

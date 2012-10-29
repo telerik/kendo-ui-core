@@ -37,7 +37,7 @@ namespace Kendo.Mvc.UI
             BackColor = Messages.Editor_BackColor;
 
 
-            FileBrowserMessages = new EditorFileBrowserMessages();
+            ImageBrowserMessages = new EditorImageBrowserMessages();
         }
 
         public string Bold { get; set; }
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI
         public string ForeColor { get; set; }
         public string BackColor { get; set; }
 
-        public EditorFileBrowserMessages FileBrowserMessages { get; set; }
+        public EditorImageBrowserMessages ImageBrowserMessages { get; set; }
 
         private const string DefaultBold = "Bold";
         private const string DefaultItalic = "Italic";

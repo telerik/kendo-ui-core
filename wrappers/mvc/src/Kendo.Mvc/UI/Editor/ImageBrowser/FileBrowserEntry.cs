@@ -1,6 +1,6 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    public class FileBrowserEntry
+    public class ImageBrowserEntry
     {
         public string Name
         {
@@ -14,7 +14,7 @@
             set;
         }
 
-        public FileBrowserEntryType EntryType
+        public ImageBrowserEntryType EntryType
         {
             get;
             set;

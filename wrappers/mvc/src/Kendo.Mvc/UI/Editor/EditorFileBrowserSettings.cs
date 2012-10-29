@@ -5,22 +5,22 @@ using System.Text.RegularExpressions;
 
 namespace Kendo.Mvc.UI
 {
-    public class EditorFileBrowserSettings : JsonObject
+    public class EditorImageBrowserSettings : JsonObject
     {
         public const string DefaultFilter = "*.png,*.gif,*.jpg,*.jpeg";
-        private readonly EditorFileBrowserMessages messages;
+        private readonly EditorImageBrowserMessages messages;
 
-        public EditorFileBrowserSettings(EditorFileBrowserMessages messages)
+        public EditorImageBrowserSettings(EditorImageBrowserMessages messages)
         {
             Filter = DefaultFilter;
             this.messages = messages;
 
-            Read = new EditorFileBrowserOperation();
-            Thumbnail = new EditorFileBrowserOperation();
-            Upload = new EditorFileBrowserOperation();
-            Create = new EditorFileBrowserOperation();
-            Destroy = new EditorFileBrowserOperation();
-            Image = new EditorFileBrowserOperation();
+            Read = new EditorImageBrowserOperation();
+            Thumbnail = new EditorImageBrowserOperation();
+            Upload = new EditorImageBrowserOperation();
+            Create = new EditorImageBrowserOperation();
+            Destroy = new EditorImageBrowserOperation();
+            Image = new EditorImageBrowserOperation();
         }
 
         public string Filter
@@ -29,37 +29,37 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public EditorFileBrowserOperation Read
+        public EditorImageBrowserOperation Read
         {
             get;
             set;
         }
 
-        public EditorFileBrowserOperation Thumbnail
+        public EditorImageBrowserOperation Thumbnail
         {
             get;
             set;
         }
 
-        public EditorFileBrowserOperation Upload
+        public EditorImageBrowserOperation Upload
         {
             get;
             set;
         }
 
-        public EditorFileBrowserOperation Create
+        public EditorImageBrowserOperation Create
         {
             get;
             set;
         }
 
-        public EditorFileBrowserOperation Destroy
+        public EditorImageBrowserOperation Destroy
         {
             get;
             set;
         }
 
-        public EditorFileBrowserOperation Image
+        public EditorImageBrowserOperation Image
         {
             get;
             set;

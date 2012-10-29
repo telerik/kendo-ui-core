@@ -7,29 +7,29 @@ namespace Kendo.Mvc.UI
 {
     public class DirectoryBrowser : IDirectoryBrowser
     {
-        public IEnumerable<FileBrowserEntry> GetFiles(string path, string filter)
+        public IEnumerable<ImageBrowserEntry> GetFiles(string path, string filter)
         {
             var directory = new DirectoryInfo(Server.MapPath(path));
 
             var extensions = (filter ?? "*").Split(",|;".ToCharArray(), System.StringSplitOptions.RemoveEmptyEntries);
 
             return extensions.SelectMany(directory.GetFiles)
-                .Select(file => new FileBrowserEntry
+                .Select(file => new ImageBrowserEntry
                 {
                     Name = file.Name,
                     Size = file.Length,
-                    EntryType = FileBrowserEntryType.File
+                    EntryType = ImageBrowserEntryType.File
                 });
         }
 
-        public IEnumerable<FileBrowserEntry> GetDirectories(string path)
+        public IEnumerable<ImageBrowserEntry> GetDirectories(string path)
         {
             var directory = new DirectoryInfo(Server.MapPath(path));
 
             return directory.GetDirectories()
-                .Select(subDirectory => new FileBrowserEntry { 
+                .Select(subDirectory => new ImageBrowserEntry { 
                     Name = subDirectory.Name,
-                    EntryType = FileBrowserEntryType.Directory
+                    EntryType = ImageBrowserEntryType.Directory
                 });
         }
 

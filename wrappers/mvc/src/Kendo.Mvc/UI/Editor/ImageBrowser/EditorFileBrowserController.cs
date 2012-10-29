@@ -8,7 +8,7 @@ using Kendo.Mvc.Infrastructure;
 
 namespace Kendo.Mvc.UI
 {
-    public abstract class EditorFileBrowserController : Controller, IImageBrowserController
+    public abstract class EditorImageBrowserController : Controller, IImageBrowserController
     {
         private readonly IDirectoryBrowser directoryBrowser;
         private readonly IDirectoryPermission permission;
@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI
         private const int ThumbnailHeight = 80;
         private const int ThumbnailWidth = 80;
 
-        protected EditorFileBrowserController()
+        protected EditorImageBrowserController()
             : this(DI.Current.Resolve<IDirectoryBrowser>(),
                    DI.Current.Resolve<IDirectoryPermission>(),
                    DI.Current.Resolve<IVirtualPathProvider>(),
@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI
         {
         }
 
-        protected EditorFileBrowserController(IDirectoryBrowser directoryBrowser,
+        protected EditorImageBrowserController(IDirectoryBrowser directoryBrowser,
             IDirectoryPermission permission,
             IVirtualPathProvider pathProvider,
             IThumbnailCreator thumbnailCreator)
@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return EditorFileBrowserSettings.DefaultFilter;
+                return EditorImageBrowserSettings.DefaultFilter;
             }
         }
 
@@ -167,14 +167,14 @@ namespace Kendo.Mvc.UI
         /// <returns>An empty <see cref="ContentResult"/>.</returns>
         /// <exception cref="HttpException">Forbidden</exception>
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult Destroy(string path, FileBrowserEntry entry)
+        public virtual ActionResult Destroy(string path, ImageBrowserEntry entry)
         {
             path = NormalizePath(path);
 
             if (entry != null)
             {
                 path = pathProvider.CombinePaths(path, entry.Name);
-                if (entry.EntryType == FileBrowserEntryType.File)
+                if (entry.EntryType == ImageBrowserEntryType.File)
                 {
                     DeleteFile(path);
                 } 
@@ -257,7 +257,7 @@ namespace Kendo.Mvc.UI
         /// <returns>An empty <see cref="ContentResult"/>.</returns>
         /// <exception cref="HttpException">Forbidden</exception>
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult Create(string path, FileBrowserEntry entry)
+        public virtual ActionResult Create(string path, ImageBrowserEntry entry)
         {
             path = NormalizePath(path);
             var name = entry.Name;
@@ -313,7 +313,7 @@ namespace Kendo.Mvc.UI
             {
                 file.SaveAs(Path.Combine(Server.MapPath(path), fileName));
 
-                return Json(new FileBrowserEntry
+                return Json(new ImageBrowserEntry
                 {
                     Size = file.ContentLength,
                     Name = fileName

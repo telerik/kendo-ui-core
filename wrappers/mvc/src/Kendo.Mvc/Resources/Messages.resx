@@ -402,4 +402,7 @@
   <data name="Editor_ForeColor" xml:space="preserve">
     <value>Color</value>
   </data>
+  <data name="Editor_DropFilesHere" xml:space="preserve">
+    <value>drop files here to upload</value>
+  </data>
 </root>

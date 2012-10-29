@@ -4,7 +4,7 @@ using Kendo.Mvc.UI;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public class ImageBrowserController : EditorFileBrowserController
+    public class ImageBrowserController : EditorImageBrowserController
     {
         private const string contentFolderRoot = "~/Content/";
         private const string prettyName = "Images/";        

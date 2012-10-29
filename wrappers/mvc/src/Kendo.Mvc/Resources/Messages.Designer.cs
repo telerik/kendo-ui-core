@@ -106,6 +106,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to drop files here to upload.
+        /// </summary>
+        public static string Editor_DropFilesHere {
+            get {
+                return ResourceManager.GetString("Editor_DropFilesHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Empty Folder.
         /// </summary>
         public static string Editor_EmptyFolder {

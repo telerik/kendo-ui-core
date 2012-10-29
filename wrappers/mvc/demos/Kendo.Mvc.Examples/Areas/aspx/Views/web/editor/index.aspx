@@ -33,7 +33,7 @@
                 &lt;a href="http://www.kendoui.com/forums.aspx"&gt;feedback&lt;/a&gt;!
             &lt;/p&gt;
       <% })
-      .FileBrowser(fileBrowser => fileBrowser
+      .ImageBrowser(imageBrowser => imageBrowser
         .Image("~/Content/UserFiles/Images/{0}")
         .Read("Read", "ImageBrowser")
         .Create("Create", "ImageBrowser")

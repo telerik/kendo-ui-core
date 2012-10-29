@@ -2,9 +2,9 @@
 
 namespace Kendo.Mvc.UI
 {
-    public class EditorFileBrowserMessages : JsonObject
+    public class EditorImageBrowserMessages : JsonObject
     {
-        public EditorFileBrowserMessages()
+        public EditorImageBrowserMessages()
         {
             DeleteFile = Messages.Editor_DeleteFile;
             DirectoryNotFound = Messages.Editor_DirectoryNotFound;
@@ -14,7 +14,8 @@ namespace Kendo.Mvc.UI
             OrderByName = Messages.Editor_OrderByName;
             OrderBySize = Messages.Editor_OrderBySize;
             OverwriteFile = Messages.Editor_OverwriteFile;
-            UploadFile = Messages.Editor_UploadFile;            
+            UploadFile = Messages.Editor_UploadFile;
+            DropFilesHere = Messages.Editor_DropFilesHere;
         }
 
         public string DeleteFile { get; set; }
@@ -26,6 +27,7 @@ namespace Kendo.Mvc.UI
         public string OrderBySize { get; set; }
         public string OverwriteFile { get; set; }
         public string UploadFile { get; set; }
+        public string DropFilesHere { get; set; }
 
         private const string DefaultDeleteFile = "Are you sure you want to delete \"{0}\"?";
         private const string DefaultDirectoryNotFound = "A directory with this name was not found.";
@@ -36,6 +38,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultOrderBySize = "Size";
         private const string DefaultOverwriteFile = "'A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?";
         private const string DefaultUploadFile = "Upload";
+        private const string DefaultDropFilesHere = "drop files here to upload";
 
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
@@ -82,6 +85,11 @@ namespace Kendo.Mvc.UI
             if (UploadFile != DefaultUploadFile)
             {
                 json["uploadFile"] = UploadFile;
+            }
+
+            if (DropFilesHere != DefaultDropFilesHere)
+            {
+                json["dropFilesHere"] = DropFilesHere;
             }
         }        
     }

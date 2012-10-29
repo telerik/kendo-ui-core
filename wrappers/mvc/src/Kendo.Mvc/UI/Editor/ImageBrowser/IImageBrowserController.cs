@@ -7,8 +7,8 @@ namespace Kendo.Mvc.UI
     {
         JsonResult Read(string path);
         ActionResult Thumbnail(string path);        
-        ActionResult Destroy(string path, FileBrowserEntry entry);
-        ActionResult Create(string path, FileBrowserEntry entry);
+        ActionResult Destroy(string path, ImageBrowserEntry entry);
+        ActionResult Create(string path, ImageBrowserEntry entry);
         ActionResult Upload(string path, HttpPostedFileBase file);
     }
 }
