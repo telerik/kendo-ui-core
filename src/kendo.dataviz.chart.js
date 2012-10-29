@@ -5527,7 +5527,7 @@
             return axis;
         },
 
-        createBarChart: function(series) {
+        createBarChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5542,7 +5542,7 @@
                     spacing: firstSeries.spacing
                 });
 
-            plotArea.appendChart(barChart);
+            plotArea.appendChart(barChart, pane);
         },
 
         createLineChart: function(series, pane) {

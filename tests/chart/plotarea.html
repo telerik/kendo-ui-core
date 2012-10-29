@@ -844,6 +844,10 @@
                     equal(chartSeries.options.series.length, 2);
                 });
 
+                test("bar chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
                 test("sets axis min/max to series limits", 2, function() {
                     stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
                         function() {
@@ -893,6 +897,10 @@
 
                 test("creates line chart", function() {
                     ok(chartSeries instanceof dataviz.LineChart);
+                });
+
+                test("line chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
                 });
 
                 test("sets isStacked when first series is stacked", function() {
@@ -955,7 +963,11 @@
 
                 test("creates area chart", function() {
                     ok(chartSeries instanceof dataviz.AreaChart);
-                });
+                })
+
+                test("area chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });;
 
                 test("sets isStacked when first series is stacked", function() {
                     createPlotArea([{ type: "area", data: [], stack: true }, { type: "area", data: [] }]);
@@ -1100,6 +1112,38 @@
                 test("does not set isStacked when first and only series is stacked", function() {
                     createPlotArea([{ type: "bar", data: [], stack: true }]);
                     ok(!chartSeries.options.isStacked);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / OHLC series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea([{
+                            type: "ohlc",
+                            data: [[]]
+                        }]);
+                    }
+                });
+
+                test("OHLC chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Candlestick series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea([{
+                            type: "candlestick",
+                            data: [[]]
+                        }]);
+                    }
+                });
+
+                test("Candlestick chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
                 });
 
                 // ------------------------------------------------------------
@@ -3422,6 +3466,48 @@
                     plotArea.reflow(chartBox);
 
                     ok(axisY.options.labels.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Scatter series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData);
+                    }
+                });
+
+                test("Scatter chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Bubble series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea([{
+                                      type: "bubble",
+                                      data: []
+                        }]);
+                    }
+                });
+
+                test("Bubble chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Scatter line series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea([{ type: "scatterLine", data: [] }]);
+                    }
+                });
+
+                test("Scatter line chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
                 });
 
                 // ------------------------------------------------------------
