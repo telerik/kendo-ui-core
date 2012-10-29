@@ -3,20 +3,32 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <demo:header />
+    <script>
+    function isInArray(date, dates) {
+    	for(var idx = 0, length = dates.length; idx < length; idx++) {
+    		if (+date === +dates[idx]) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
+    }
+    </script>
     <div>
         <%
-        String template = "# if ($.inArray(+data.date, data.dates) != -1) { #" +
-				                "<div class=\"" +
-				                "# if (data.value < 10) { #" +
-				                    "exhibition" +
-				                "# } else if ( data.value < 20 ) { #" +
-				                    "party" +
-				                "# } else { #" +
-				                    "cocktail" +
-				                "# } #" +
-				             "\"></div>" +
-				          "# } #" +
-				          "#= data.value #";
+        String template = "# if (isInArray(data.date, data.dates)) { #" +
+	      "<div class=\"" +
+	      "# if (data.value < 10) { #" +
+	          "exhibition" +
+	      "# } else if ( data.value < 20 ) { #" +
+	          "party" +
+	      "# } else { #" +
+	          "cocktail" +
+	      "# } #" +
+	   "\"></div>" +
+	"# } #" +
+	"#= data.value #";
+    
         String footer = "Today - #=kendo.toString(data, 'd') #";
         %>
         
