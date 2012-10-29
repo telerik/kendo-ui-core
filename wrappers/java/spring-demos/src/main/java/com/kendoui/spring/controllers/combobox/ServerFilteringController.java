@@ -1,4 +1,4 @@
-package com.kendoui.spring.controllers.autocomplete;
+package com.kendoui.spring.controllers.combobox;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,15 +11,15 @@ import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
-@Controller("autocomplete-serverfiltering-controller")
-@RequestMapping(value="/web/autocomplete/")
+@Controller("combobox-serverfiltering-controller")
+@RequestMapping(value="/web/combobox/")
 public class ServerFilteringController {
     @Autowired 
     private ProductDao product;
 
     @RequestMapping(value = "/serverfiltering", method = RequestMethod.GET)
     public String index() {
-        return "web/autocomplete/serverfiltering";
+        return "web/combobox/serverfiltering";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
