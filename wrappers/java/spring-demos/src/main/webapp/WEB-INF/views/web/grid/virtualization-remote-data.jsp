@@ -6,7 +6,8 @@
 <c:url value="/web/grid/virtualization-remote-data/read" var="transportReadUrl" />
 
 <demo:header />
-    <kendo:grid name="grid" sortable="true" scrollable="true">
+    <kendo:grid name="grid" sortable="true" height="200">
+    	<kendo:grid-scrollable virtual="true"/>
         <kendo:grid-columns>
             <kendo:grid-column title="OrderID" field="orderId" />
             <kendo:grid-column title="CustomerID" field="customerId" />

@@ -66,6 +66,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("pageable", value);
     }
 
+    public void setScrollable(ScrollableTag value) {
+        setProperty("scrollable", value);
+    }
+
     public void setSortable(SortableTag value) {
         setProperty("sortable", value);
     }
@@ -187,6 +191,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setGroupable(boolean value) {
         setProperty("groupable", value);
+    }
+
+    public float getHeight() {
+        return (float)getProperty("height");
+    }
+
+    public void setHeight(float value) {
+        setProperty("height", value);
     }
 
     public boolean getNavigatable() {

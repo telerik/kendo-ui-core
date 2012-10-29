@@ -1113,6 +1113,13 @@ See the</description>
         </attribute>
 
         <attribute>
+            <description>Sets the height of the grid.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
             <name>navigatable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1132,7 +1139,7 @@ See the</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Enable/disable grid scrolling. Possible values:</description>
+            <description>Enable/disable grid scrolling.</description>
             <name>scrollable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -6348,6 +6355,22 @@ the minimum and maximum values.</description>
         <attribute>
             <description>Defines if a label showing current paging information will be displayed.</description>
             <name>info</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/disable grid scrolling.</description>
+        <name>grid-scrollable</name>
+        <tag-class>com.kendoui.taglib.grid.ScrollableTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/disable virtual scrolling. When enabled the grid will display only a single page of data (configured via</description>
+            <name>virtual</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
