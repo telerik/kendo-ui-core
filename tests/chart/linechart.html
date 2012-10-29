@@ -69,7 +69,7 @@
             (function() {
                 var positiveSeries = { data: [1, 2], labels: {} },
                     negativeSeries = { data: [-1, -2], labels: {} },
-                    sparseSeries = { data: [1, 2, undefined, 2] },
+                    sparseSeries = { data: [1, 2, undefined, 2], width: 0 },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2;
 
@@ -621,9 +621,10 @@
 
                 test("line continues after missing value", function() {
                     setupLineChart(plotArea, {
-                        series: [
-                            { data: [ null, 1, 2 ] }
-                        ]
+                        series: [{
+                            data: [ null, 1, 2 ],
+                            width: 0
+                        }]
                     });
 
                     same(pointCoordinates, [

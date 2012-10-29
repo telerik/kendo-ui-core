@@ -2590,9 +2590,14 @@
 
         options: {},
 
+        lineWidth: function() {
+            return this.series.width;
+        },
+
         points: function(visualPoints) {
             var segment = this,
                 linePoints = segment.linePoints.concat(visualPoints || []),
+                lineWidth = segment.lineWidth(),
                 points = [],
                 i,
                 length = linePoints.length,
@@ -2600,6 +2605,13 @@
 
             for (i = 0; i < length; i++) {
                 pointCenter = linePoints[i].markerBox().center();
+
+                if (i === 0) {
+                    pointCenter.x += lineWidth / 2;
+                } else if (i === length - 1) {
+                    pointCenter.x -= lineWidth / 2;
+                }
+
                 points.push(new Point2D(pointCenter.x, pointCenter.y));
             }
 
@@ -2844,6 +2856,11 @@
             segment.stackPoints = stackPoints;
 
             LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
+        },
+
+        lineWidth: function() {
+            var line = this.series.line || {};
+            return line.width;
         },
 
         points: function() {

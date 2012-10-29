@@ -28,7 +28,6 @@
             // TODO: StockChart MVC Wrapper - Limit series, Tests
             // TODO: StockChart demo(s) (at least one more with panes)
             // TODO: series.pane shortcut
-            // TODO: Fix navigator to overlay area chart line
             // TODO: Don't throw error with empty selection
             // TODO: setOptions should resolve aliases
             $(function() {
@@ -65,9 +64,13 @@
                         field: "Volume",
                         axis: "volume"
                     }],
+                    legend: {
+                        // TODO: Investigate glitches
+                        //visible: false
+                    },
                     navigator: {
                         series: {
-                            type: "line",
+                            type: "area",
                             field: "Close"
                         },
                         select: {

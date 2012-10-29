@@ -529,6 +529,7 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Stack / Missing values", {
                     setup: function() {
+                        sparseSeries.line = { width: 0 };
                         setupAreaChart(plotArea, {
                             series: [ sparseSeries, sparseSeries ],
                             isStacked: true
@@ -615,7 +616,7 @@
                             series: [
                                 $.extend({
                                         line: {
-                                            width: 4,
+                                            width: 2,
                                             color: "lineColor",
                                             opacity: 0.5,
                                             dashType: "dot"
@@ -633,7 +634,7 @@
                 });
 
                 test("sets area line width", function() {
-                    equals(polyline.style.strokeWidth, 4);
+                    equals(polyline.style.strokeWidth, 2);
                 });
 
                 test("sets area line color", function() {
@@ -668,9 +669,22 @@
                     equals(view.log.group[0].options.animation.type, "clip");
                 });
 
+                test("area shape is open", function() {
+                    equals(polyline.closed, false);
+                });
+
+                test("first point is offset by one border width", function() {
+                    same(pointCoordinates[0], [ 1.5, 2 ]);
+                })
+
+                test("last point is offset by one border width", function() {
+                    same(pointCoordinates[3], [ 0.5, 2 ]);
+                });;
+
                 // ------------------------------------------------------------
                 module("Area Chart / Rendering / Missing Values", {
                     setup: function() {
+                        sparseSeries.line = { width: 0 };
                     }
                 });
 
@@ -699,9 +713,11 @@
 
                 test("area continues after missing value", function() {
                     setupAreaChart(plotArea, {
-                        series: [
-                            { missingValues: "gap", data: [ null, 1, 2 ] }
-                        ]
+                        series: [{
+                            missingValues: "gap",
+                            data: [ null, 1, 2 ],
+                            line: { width: 0 }
+                        }]
                     });
 
                     same(pointCoordinates, [

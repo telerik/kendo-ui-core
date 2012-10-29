@@ -45,7 +45,7 @@
                 var series = { data: [[1, 1], [2, 2]], labels: {}, type: "scatterLine" },
                     sparseSeries = { data: [
                                         [1, 1], [2, 2], undefined, [2, 2], [null, 1], [1, null]
-                                    ], labels: {}, type: "scatterLine" },
+                                    ], labels: {}, type: "scatterLine", width: 0 },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2;
 
@@ -338,7 +338,7 @@
                     setupScatterLineChart(plotArea, {
                         series: [{
                             data: [ null, [1, 1], [2, 2]],
-                            labels: {}, type: "scatterLine"
+                            labels: {}, type: "scatterLine", width: 0
                         }]
                     });
 
