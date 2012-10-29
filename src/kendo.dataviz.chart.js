@@ -3012,7 +3012,7 @@
             }
         },
 
-        createPoint: function(value, series, seriesIx) {
+        createPoint: function(value, series, seriesIx, fields) {
             var chart = this,
                 point;
 
@@ -3030,7 +3030,14 @@
                     labels: {
                         format: chart.options.labels.format
                     }
-                }, series)
+                }, series, {
+                    color: fields.color,
+                    markers: {
+                        border: {
+                            color: fields.color
+                        }
+                    }
+                })
             );
 
             chart.append(point);
@@ -3138,7 +3145,7 @@
         },
 
         bindableFields: function() {
-            return [];
+            return ["color"];
         },
 
         formatPointValue: function(point, format) {
@@ -3218,8 +3225,7 @@
                         animation: animationOptions
                     }
                 },
-                series,
-                {
+                series, {
                     color: fields.color,
                     markers: {
                         type: CIRCLE,
