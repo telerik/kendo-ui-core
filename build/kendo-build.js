@@ -277,7 +277,7 @@ function mkdir(newDir) {
 }
 
 function deployStyles(stylesRoot, outputRoot, header, compress) {
-    var resourcesRegex = compress ? /\.(png|jpg|jpeg|gif|svg)$/i : /\.(png|jpg|jpeg|gif|svg)$/i,
+    var resourcesRegex = compress ? /\.(png|jpg|jpeg|gif|svg|ttf|woff)$/i : /\.(png|jpg|jpeg|gif|svg|ttf|woff)$/i,
         lessTemp = path.join(outputRoot, "_less");
 
     mkdir(outputRoot);
