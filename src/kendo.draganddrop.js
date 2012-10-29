@@ -18,7 +18,7 @@
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
         mobileChrome = (invalidZeroEvents && OS.browser == "chrome"),
-        START_EVENTS = "mousedown",
+        START_EVENTS = "touchstart mousedown",
         MOVE_EVENTS = "mousemove touchmove",
         END_EVENTS = "mouseup mouseleave touchend touchcancel",
         KEYUP = "keyup",
