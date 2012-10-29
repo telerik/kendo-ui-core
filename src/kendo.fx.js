@@ -295,7 +295,6 @@
     }
 
     if (transitions) {
-
         extend(kendo.fx, {
             transition: function(element, properties, options) {
                 var css,
@@ -330,7 +329,6 @@
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
-
                 if (element.data(ABORT_ID)) {
                     clearTimeout(element.data(ABORT_ID));
                     element.removeData(ABORT_ID);
@@ -359,7 +357,6 @@
                 element.stop(clearQueue);
                 return element;
             }
-
         });
     }
 
@@ -409,7 +406,7 @@
         play: function(effects) {
             var that = this,
                 effect,
-                idx,
+                idx, jdx,
                 length = effects.length,
                 element = that.element,
                 options = that.options,
@@ -417,7 +414,10 @@
                 state,
                 startState = {},
                 endState = {},
-                target;
+                target,
+                auxilary,
+                auxilaries,
+                auxilariesLength;
 
             that.effects = effects;
 
@@ -433,9 +433,12 @@
                 extend(startState, state.start);
                 extend(endState, state.end);
 
-                each(effect.auxilaries(), function() {
-                    fx.promise(this.element, extend(true, {}, options, this.options));
-                });
+                auxilaries = effect.auxilaries();
+
+                for (jdx = 0, auxilariesLength = auxilaries.length; jdx < auxilariesLength; jdx ++) {
+                    auxilary = auxilaries[jdx];
+                    fx.promise(auxilary.element, extend(true, {}, options, auxilary.options));
+                }
             }
 
             if (!element.is(":visible")) {
@@ -512,7 +515,7 @@
             this.restoreCallback();
 
             if (hasZoom && !transforms) {
-                setTimeout($.proxy(this, "restoreCallback"), 0); // Again jQuery callback in IE8-.
+                setTimeout($.proxy(this, "restoreCallback"), 0); // Again jQuery callback in IE8-
             }
 
             each(effects, function() {
@@ -1008,7 +1011,7 @@
                 direction = options.direction,
                 reverse = options.reverse,
                 rotation = ROTATIONS[direction],
-                start = { zIndex: 1 }
+                start = { zIndex: 1 },
                 end = {};
 
             if (options.clipInHalf) {
@@ -1112,7 +1115,7 @@
 
             return [
                 { element: options.face, options: { effects: "turningpage", face: true, container: element, direction: direction }},
-                { element: options.back, options: { effects: "turningpage", face: false, container: element, direction: reverseDirection }},
+                { element: options.back, options: { effects: "turningpage", face: false, container: element, direction: reverseDirection }}
             ];
         },
 

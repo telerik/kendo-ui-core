@@ -76,14 +76,16 @@
                 var fooFinished = false, barFinished = false;
 
                 kendo.fx.createEffect("foo", {
-                    endState: function() {
+                    state: function() {
                         fooFinished = true;
+                        return { start: {}, end: {} };
                     }
                 });
 
                 kendo.fx.createEffect("bar", {
-                    endState: function() {
+                    state: function() {
                         barFinished = true;
+                        return { start: {}, end: {} };
                     }
                 });
 
@@ -98,7 +100,8 @@
                 var firstAnimationFinished = false;
 
                 kendo.fx.createEffect("foo", {
-                    endState: function() {
+                    state: function() {
+                        return { start: {}, end: {} };
                     }
                 });
 
@@ -116,8 +119,9 @@
                 var reverseWasCalled = false;
 
                 kendo.fx.createEffect("foo", {
-                    endState: function() {
+                    state: function() {
                         reverseWasCalled = this.options.reverse;
+                        return { start: {}, end: {} };
                     }
                 });
 
@@ -129,8 +133,9 @@
                 var reverseWasCalled = false, callbackWasCalled = false;
 
                 kendo.fx.createEffect("foo", {
-                    endState: function() {
+                    state: function() {
                         ok(this.options.reverse);
+                        return { start: {}, end: {} };
                     }
                 });
 
@@ -148,8 +153,9 @@
                 var reverseWasCalled = false, callbackWasCalled = false;
 
                 kendo.fx.createEffect("foo", {
-                    endState: function() {
+                    state: function() {
                         ok(this.options.reverse);
+                        return { start: {}, end: {} };
                     }
                 });
 
@@ -163,20 +169,18 @@
                 });
             });
 
-            asyncTest("make sure css, setup, teardown and restore are called in sequence", 3, function() {
+            // legacy test, not sure why
+            asyncTest("make sure css, setup, teardown and restore are called in sequence", 2, function() {
                 span.css("overflow", "visible");
 
                 kendo.fx.createEffect("foo", {
                     restore: [ "overflow" ],
 
-                    startState: function() {
+                    state: function() {
                         ok(this.element.data("overflow") == "visible")
-                        return { overflow: "hidden" };
+                        return { start: { overflow: "hidden" } };
                     },
 
-                    endState: function() {
-                        ok(this.element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
-                    },
                     teardown: function() {
                         ok(this.element.css("overflow") == "visible");
                         start();
@@ -190,8 +194,8 @@
                 var called = false;
 
                 kendo.fx.createEffect("moo", {
-                    endState: function() {
-                        return { translateX: "10px" };
+                    state: function() {
+                        return { end: { translateX: "10px" } };
                     }
                 });
 
@@ -215,11 +219,8 @@
                     var height = -1;
 
                     kendo.fx.createEffect("foo", {
-                        startState: function() {
-                            return { height: 0, display: "block" };
-                        },
-                        endState: function() {
-                            return { height: 100 };
+                        state: function() {
+                            return { start: { height: 0, display: "block" }, end: { height: 100 } };
                         }
                     });
 
