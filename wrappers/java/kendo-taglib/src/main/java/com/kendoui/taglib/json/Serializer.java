@@ -12,6 +12,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -118,8 +119,23 @@ public class Serializer {
     }
 
     private void serializeDate(Writer out, Date value) throws IOException {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(value);
+        
         out.append("new Date(")
-           .append(new Long(value.getTime()).toString())
+           .append(Integer.toString(cal.get(Calendar.YEAR)))
+           .append(",")
+           .append(Integer.toString(cal.get(Calendar.MONTH)))
+           .append(",")
+           .append(Integer.toString(cal.get(Calendar.DATE)))
+           .append(",")
+           .append(Integer.toString(cal.get(Calendar.HOUR_OF_DAY)))
+           .append(",")
+           .append(Integer.toString(cal.get(Calendar.MINUTE)))
+           .append(",")
+           .append(Integer.toString(cal.get(Calendar.SECOND)))
+           .append(",")
+           .append(Integer.toString(cal.get(Calendar.MILLISECOND)))
            .append(")");
     }
     

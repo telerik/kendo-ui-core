@@ -234,12 +234,13 @@ public class SerializerTest {
 
     @Test
     public void jsonsSerializesDates() throws IOException {
-        assertEquals("{\"foo\":new Date(949359661812)}", serializer.json(new Object() {
+        assertEquals("{\"foo\":new Date(2000,0,28,22,22,22,580)}", serializer.json(new Object() {
             @SuppressWarnings("unused")
             public Date getFoo() {
                 Calendar cal = Calendar.getInstance();
                 
-                cal.setTimeInMillis(949359661812l);
+                cal.set(2000, 0, 28, 22, 22, 22);
+                cal.set(Calendar.MILLISECOND, 580);
                 
                 return cal.getTime();
             }
