@@ -6356,7 +6356,7 @@
                 valueAxis = that.getValueAxis(categoryAxis),
                 valueAxisLineBox = valueAxis.lineBox(),
                 selectorPrefix = "." + CSS_PREFIX,
-                wrapper;
+                wrapper, padding;
 
             Observable.fn.init.call(that);
 
@@ -6381,18 +6381,18 @@
                 );
             }
 
-            var paddingLeft = parseInt(chartElement.css("paddingLeft"), 10);
-            var paddingTop = parseInt(chartElement.css("paddingTop"), 10);
+            padding = {
+                left: parseInt(chartElement.css("paddingLeft"), 10),
+                right: parseInt(chartElement.css("paddingTop"), 10)
+            };
+
             that.options = deepExtend({}, {
                 width: categoryAxisLineBox.width(),
                 height: valueAxisLineBox.height(),
-                padding: {
-                    left: paddingLeft,
-                    top: paddingTop
-                },
+                padding: padding,
                 offset: {
-                    left: valueAxisLineBox.x2 + paddingLeft,
-                    top: valueAxisLineBox.y1 + paddingTop
+                    left: valueAxisLineBox.x2 + padding.left,
+                    top: valueAxisLineBox.y1 + padding.right
                 },
                 start: options.min,
                 end: options.max
@@ -6426,7 +6426,7 @@
                 that.selection.kendoDraggable({
                     drag: proxy(that.dragSelection, that),
                     dragstart: proxy(that.dragSelectionStart, that),
-                    dragend: proxy(that.dragSelectionEnd, that)
+                    dragend: proxy(that._dragEnd, that)
                 });
             }
         },
@@ -6437,8 +6437,7 @@
 
         options: {
             min: MIN_VALUE,
-            max: MAX_VALUE,
-            snap: true
+            max: MAX_VALUE
         },
 
         getValueAxis: function(categoryAxis) {
@@ -6523,15 +6522,9 @@
 
             that.dragHandle = $(e.currentTarget).css("cursor", "default");
             that.isFirst = that.dragHandle.hasClass(CSS_PREFIX + "leftHandle");
-            if (that.isFirst) {
-                that._state = {
-                    start: options.start
-                };
-            } else {
-                that._state = {
-                    start: options.end
-                };
-            }
+            that._state = {
+                start: options[that.isFirst ? "start" : "end"]
+            };
         },
 
         drag: function(e) {
@@ -6556,12 +6549,17 @@
 
         dragEnd: function(e) {
             var that = this;
-
+            that._dragEnd(that, e);
             that.dragHandle.css("cursor", "e-resize");
+        },
+
+        _dragEnd: function(e) {
+            var that = this,
+                options = that.options;
 
             that.trigger(SELECT, {
-                start: that.start,
-                end: that.end
+                start: options.start,
+                end: options.end
             });
         },
 
@@ -6596,16 +6594,6 @@
             that.end = math.min(that.start + range, options.max);
 
             that.setRange(that.start, that.end);
-        },
-
-        dragSelectionEnd: function(e) {
-            var that = this,
-                options = that.options;
-
-            that.trigger(SELECT, {
-                start: options.start,
-                end: options.end
-            });
         }
     });
 
