@@ -2,6 +2,8 @@ package com.kendoui.spring.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,10 +21,10 @@ public class Customer {
     private String country;
     private String phone;
     private String fax;
-    private Boolean bool;
     
     @Id
     @Column(name="CustomerID")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public String getCustomerID() {
         return customerID;
     }
@@ -119,14 +121,5 @@ public class Customer {
     
     public void setFax(String fax) {
         this.fax = fax;
-    }
-    
-    @Column(name="Bool")
-    public Boolean getBool() {
-        return bool;
-    }
-    
-    public void setBool(Boolean bool) {
-        this.bool = bool;
     }
 }
