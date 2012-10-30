@@ -5,6 +5,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.dropdownlist.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 
@@ -17,6 +19,10 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
         super("DropDownList");
     }
 
+    @Override
+    protected Element<?> createElement() {
+        return new Input();
+    }
     
     @Override
     public int doEndTag() throws JspException {

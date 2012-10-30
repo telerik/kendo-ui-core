@@ -5,6 +5,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.datepicker.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 
@@ -17,6 +19,10 @@ public class DatePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         super("DatePicker");
     }
 
+    @Override
+    protected Element<?> createElement() {
+        return new Input();
+    }
     
     @Override
     public int doEndTag() throws JspException {

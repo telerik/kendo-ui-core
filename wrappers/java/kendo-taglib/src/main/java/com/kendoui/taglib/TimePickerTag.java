@@ -5,6 +5,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.timepicker.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 
@@ -17,6 +19,10 @@ public class TimePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         super("TimePicker");
     }
 
+    @Override
+    protected Element<?> createElement() {
+        return new Input();
+    }
     
     @Override
     public int doEndTag() throws JspException {

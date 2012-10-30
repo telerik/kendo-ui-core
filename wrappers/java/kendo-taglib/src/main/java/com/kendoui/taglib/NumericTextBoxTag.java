@@ -3,6 +3,8 @@ package com.kendoui.taglib;
 
 import com.kendoui.taglib.numerictextbox.*;
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 import javax.servlet.jsp.JspException;
@@ -14,6 +16,10 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         super("NumericTextBox");
     }
 
+    @Override
+    protected Element<?> createElement() {
+        return new Input();
+    }
     
     @Override
     public int doEndTag() throws JspException {
