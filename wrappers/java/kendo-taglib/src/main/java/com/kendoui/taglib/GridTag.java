@@ -375,4 +375,15 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
 //<< Attributes
 
+    public void setToolbarTemplate(ToolbarTemplateFunctionTag value) {        
+        setProperty("toolbar", value.getBody());
+    }
+    
+    public String getToolbarTemplate() {
+        Function property = ((Function)getProperty("toolbar"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
 }

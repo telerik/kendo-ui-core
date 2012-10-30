@@ -47,6 +47,10 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "editor";
     }
 
+    public void setImagebrowser(ImagebrowserTag value) {
+        setProperty("imagebrowser", value);
+    }
+
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }

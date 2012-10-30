@@ -6188,6 +6188,22 @@ the minimum and maximum values.</description>
 
 
     <tag>
+        <description>Configuration for image browser dialog.</description>
+        <name>editor-imagebrowser</name>
+        <tag-class>com.kendoui.taglib.editor.ImagebrowserTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Defines the allowed file extensions.</description>
+            <name>fileTypes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Subscribes to the change event of Editor.</description>
         <name>editor-change</name>
         <tag-class>com.kendoui.taglib.editor.ChangeFunctionTag</tag-class>
@@ -6231,6 +6247,271 @@ the minimum and maximum values.</description>
         <description>Subscribes to the select event of Editor.</description>
         <name>editor-select</name>
         <tag-class>com.kendoui.taglib.editor.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Specifies the settings for loading and saving data.</description>
+        <name>editor-imagebrowser-transport</name>
+        <tag-class>com.kendoui.taglib.editor.ImagebrowserTransportTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Options or URL for remote image retrieval.</description>
+            <name>read</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The URL for retrieving the thumbnail version of the image. If not specified a default image icon will be shown.</description>
+            <name>thumbnailUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The URL which will handle the upload of the new images. If not specified the Upload button will not be displayed.</description>
+            <name>uploadUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The URL responsible for serving the original image. A file name placeholder should be specifed.</description>
+            <name>imageUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.</description>
+            <name>destroy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.</description>
+            <name>create</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Set the object responsible for describing the image raw data format.</description>
+        <name>editor-imagebrowser-schema</name>
+        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines texts shown within the pager.</description>
+        <name>editor-imagebrowser-messages</name>
+        <tag-class>com.kendoui.taglib.editor.ImagebrowserMessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines text for upload button.</description>
+            <name>uploadFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines text for order by label.</description>
+            <name>orderBy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines text for Name item of order by drop down list.</description>
+            <name>orderByName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines text for Size item of order by drop down list.</description>
+            <name>orderBySize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines text for dialog shown when the directory not found error occurs.</description>
+            <name>directoryNotFound</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines text displayed when folder does not contain items.</description>
+            <name>emptyFolder</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines text for dialog shown when the file or directory is deleted.</description>
+            <name>deleteFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines text for dialog shown when an invalid file is set for upload.</description>
+            <name>invalidFileType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines text for dialog shown when an already existing file is set for upload.</description>
+            <name>overwriteFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Set the object which describes the image/directory entry fields. Note that a name, type and size fields should be set.</description>
+        <name>editor-imagebrowser-schema-model</name>
+        <tag-class>com.kendoui.taglib.editor.SchemaModelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The name of the field which acts as an identifier.</description>
+            <name>id</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The field which contains the name of the image/directory</description>
+        <name>editor-imagebrowser-schema-model-fields</name>
+        <tag-class>com.kendoui.taglib.editor.ModelFieldsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The field which contains the name of the image/directory</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The field which contains the type of the entry. Either</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The field which contains the size of image.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The field which contains the name of the image/directory</description>
+        <name>editor-imagebrowser-schema-model-fields-name</name>
+        <tag-class>com.kendoui.taglib.editor.FieldsNameTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The name of the field.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>The field which contains the type of the entry. Either</description>
+        <name>editor-imagebrowser-schema-model-fields-type</name>
+        <tag-class>com.kendoui.taglib.editor.FieldsTypeTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The name of the field.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The field which contains the size of image.</description>
+        <name>editor-imagebrowser-schema-model-fields-size</name>
+        <tag-class>com.kendoui.taglib.editor.FieldsSizeTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The name of the field.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the parse event of Name.</description>
+        <name>editor-imagebrowser-schema-model-fields-name-parse</name>
+        <tag-class>com.kendoui.taglib.editor.ParseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the parse event of Type.</description>
+        <name>editor-imagebrowser-schema-model-fields-type-parse</name>
+        <tag-class>com.kendoui.taglib.editor.ParseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the parse event of Size.</description>
+        <name>editor-imagebrowser-schema-model-fields-size-parse</name>
+        <tag-class>com.kendoui.taglib.editor.ParseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6403,7 +6684,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>This is a list of commands for which the corresponding buttons will be rendered.
-The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+The supported built-in commands are: "create", "cancel", "save", "destroy".
+Or template to be used for rendering the toolbar content.</description>
         <name>grid-toolbar</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarTag</tag-class>
         <body-content>JSP</body-content>
@@ -6522,6 +6804,13 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Definition of column cells' HTML attributes. Reserved words in Javascript should be enclosed in quotation marks.</description>
+            <name>attributes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
             <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
             <name>command</name>
             <rtexprvalue>true</rtexprvalue>
@@ -6557,6 +6846,20 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
         <attribute>
             <description>The format that will be applied on the column cells.</description>
             <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Definition of column header cell's HTML attributes. Reserved words in Javascript should be enclosed in quotation marks.</description>
+            <name>headerAttributes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The template for column's header cell. If sorting is enabled, it will be wrapped in a</description>
+            <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -6599,13 +6902,6 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
         <attribute>
             <description>The template for column's cell in footer item.</description>
             <name>footerTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The template for column's cell in header item.</description>
-            <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -6784,7 +7080,8 @@ The supported built-in commands are: "create", "cancel", "save", "destroy".</des
 
     <tag>
         <description>This is a list of commands for which the corresponding buttons will be rendered.
-The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+The supported built-in commands are: "create", "cancel", "save", "destroy".
+Or template to be used for rendering the toolbar content.</description>
         <name>grid-toolbarItem</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
         <body-content>empty</body-content>
@@ -9159,7 +9456,14 @@ containing one or more fields with the same name as the original input name.</de
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>double</type>
-        </attribute>
+        </attribute>        
         
     </tag>
+    
+    <tag>
+		<description>Template to be used for rendering the toolbar of the grid.</description>
+		<name>grid-toolbarTemplate</name>
+		<tag-class>com.kendoui.taglib.grid.ToolbarTemplateFunctionTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
 </taglib>
