@@ -7,18 +7,18 @@
 
     <kendo:treeView name="treeview">
         <kendo:treeView-items>
-            <kendo:treeView-item text="My Web Site" spriteCssClass="folder">
+            <kendo:treeView-item text="My Web Site" spriteCssClass="folder" expanded="true">
                 <kendo:treeView-items>
-                    <kendo:treeView-item text="images" spriteCssClass="folder">
+                    <kendo:treeView-item text="images" spriteCssClass="folder" expanded="true">
                         <kendo:treeView-items>
                             <kendo:treeView-item text="logo.png" spriteCssClass="image" />
                             <kendo:treeView-item text="body-back.png" spriteCssClass="image" />
                             <kendo:treeView-item text="my-photo.jpg" spriteCssClass="image" />
                         </kendo:treeView-items>
                     </kendo:treeView-item>
-                    <kendo:treeView-item text="resources" spriteCssClass="folder">
+                    <kendo:treeView-item text="resources" spriteCssClass="folder" expanded="true">
                         <kendo:treeView-items>
-                            <kendo:treeView-item text="pdf" spriteCssClass="folder">
+                            <kendo:treeView-item text="pdf" spriteCssClass="folder" expanded="true">
                                 <kendo:treeView-items>
                                     <kendo:treeView-item text="brochure.pdf" spriteCssClass="pdf" />
                                     <kendo:treeView-item text="prices.pdf" spriteCssClass="pdf" />

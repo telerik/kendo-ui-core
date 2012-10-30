@@ -809,6 +809,11 @@ class Tag
                                         :type => 'String',
                                         :parent => tag,
                                         :description => "Specifies the class name for the sprite image displayed by the item")
+
+            tag.options.push(Option.new :name => 'items.expanded',
+                                        :type => 'Boolean',
+                                        :parent => tag,
+                                        :description => "Specifies whether the item is initially expanded")
         end
 
         start_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Events' }

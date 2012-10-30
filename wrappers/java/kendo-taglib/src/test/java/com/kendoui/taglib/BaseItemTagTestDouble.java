@@ -5,6 +5,7 @@ public class BaseItemTagTestDouble extends BaseItemTag {
     
     public String text;
     public String spriteCssClass;
+    public boolean expanded;
 
     public static String tagName() {
         return "baseTagTestDouble";
@@ -18,6 +19,11 @@ public class BaseItemTagTestDouble extends BaseItemTag {
     @Override
     protected String getSpriteCssClass() {
         return spriteCssClass;
+    }
+
+    @Override
+    protected boolean getExpanded() {
+        return expanded;
     }
 
 }

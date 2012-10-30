@@ -65,6 +65,14 @@ public class ItemTag extends  BaseItemTag  /* interfaces *//* interfaces */ {
         setProperty("spriteCssClass", value);
     }
 
+    public boolean getExpanded() {
+        return (boolean)getProperty("expanded");
+    }
+
+    public void setExpanded(boolean value) {
+        setProperty("expanded", value);
+    }
+
 //<< Attributes
 
 }

@@ -21,6 +21,7 @@ public abstract class BaseItemTag extends BaseTag {
     
     protected abstract String getText();
     protected abstract String getSpriteCssClass();
+    protected abstract boolean getExpanded();
     
     @Override
     public void initialize() {
@@ -52,9 +53,17 @@ public abstract class BaseItemTag extends BaseTag {
         }
     }
     
+    public void addAttributes(Li element) {
+        if (this.isSet("expanded") && this.getExpanded()) {
+            element.attr("data-expanded", "true");
+        }
+    }
+    
     @Override
     public int doEndTag() throws JspException {
         Li element = new Li();
+        
+        addAttributes(element);
         
         renderContents(element);
 
