@@ -19,9 +19,4 @@ public class ClientFilteringController {
         model.addAttribute("products", product.getList());
         return "web/combobox/clientfiltering";
     }
-    
-//    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
-//    public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
-//        return product.getList(request);
-//    }
 }
