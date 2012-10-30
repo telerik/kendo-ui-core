@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Categories")
 public class Category{
-    private int categoryID;
+    private int categoryId;
     private String categoryName;
     private String description;
     
@@ -18,11 +18,11 @@ public class Category{
     @Column(name="CategoryID")
     @GeneratedValue(strategy=GenerationType.AUTO)
     public int getCategoryID() {
-        return categoryID;
+        return categoryId;
     }
 
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public void setCategoryID(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     @Column(name="CategoryName")
