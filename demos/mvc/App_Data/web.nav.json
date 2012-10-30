@@ -112,12 +112,12 @@
                     "url": "combobox/remotedatasource.html"
                 },
                 {
-                    "packages": [ "mvc" ],
+                    "packages": [ "mvc", "jsp" ],
                     "text": "Server filtering",
                     "url": "combobox/serverfiltering.html"
                 },
                 {
-                    "packages": [ "mvc" ],
+                    "packages": [ "mvc", "jsp" ],
                     "text": "Client filtering",
                     "url": "combobox/clientfiltering.html"
                 },
