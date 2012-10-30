@@ -1,5 +1,7 @@
 package com.kendoui.spring.models;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,5 +17,10 @@ public class CategoryDaoImpl implements CategoryDao {
     @Override
     public DataSourceResult getList(DataSourceRequest request) {
         return request.toDataSourceResult(sessionFactory.getCurrentSession(), Category.class);
+    }
+    
+    @Override
+    public List<?> getList() {    
+        return sessionFactory.getCurrentSession().createCriteria(Category.class).list();
     }
 }
