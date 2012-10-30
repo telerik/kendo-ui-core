@@ -49,7 +49,7 @@
 
                 setTimeout(function() {
                     start();
-                }, 200);
+                }, 2000);
             });
 
             asyncTest("multiple loading of iframe triggers one refresh per load", function() {
@@ -68,8 +68,8 @@
                     setTimeout(function() {
                         start();
                         equal(triggers, 2);
-                    }, 200);
-                }, 200);
+                    }, 2000);
+                }, 2000);
             });
 
             test("clicking the refresh button on a static window triggers refresh event", function() {
