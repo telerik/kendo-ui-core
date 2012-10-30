@@ -4,13 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller("treeview-home-controller")
+@Controller("treeview-dragdrop-controller")
 @RequestMapping(value="/web/treeview/")
-public class HomeController {
+public class DragDropController {
     
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/dragdrop", method = RequestMethod.GET)
     public String index() {
-        return "web/treeview/index";
+        return "web/treeview/dragdrop";
     }
 }
 
