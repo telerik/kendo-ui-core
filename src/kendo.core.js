@@ -1807,7 +1807,15 @@ function pad(number, digits, end) {
         return effects;
     }
 
-    var fx = {
+    var fx = function(element) {
+        return new kendo.fx.Element(element);
+    }
+
+    $.extend(fx, {
+        Element: function(element) {
+            this.element = $(element);
+        },
+
         promise: function (element, options) {
             if (!element.is(":visible")) {
                 element.css({ display: element.data("olddisplay") || "block" }).css("display");

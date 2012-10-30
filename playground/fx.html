@@ -29,6 +29,16 @@
             #container div, #flip-container div {
                 position: absolute;
             }
+
+            .tile-container {
+                position: relative;
+                height: 152px;
+                width: 152px;
+            }
+
+            #tileA, #tileB {
+                position: absolute;
+            }
         </style>
     </head>
     <body>
@@ -39,6 +49,20 @@
             </aside>
 
             <div class="anime">Slide In</div>
+
+            <hr />
+        </div>
+
+        <div>
+            <aside>
+                <button id="tilePlay">Play</button>
+                <button id="tileReverse">Reverse</button>
+            </aside>
+
+            <div class="tile-container">
+                <div id="tileA" class="anime">Tile A</div>
+                <div id="tileB" class="anime">Tile B</div>
+            </div>
 
             <hr />
         </div>
@@ -144,6 +168,9 @@
         <script>
             $("#slideInPlay").click(function() { $(this).parent().siblings(".anime").kendoAnimate("slideIn:left"); });
             $("#slideInReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({ effects: "slideIn:left", reverse: true }); });
+
+            $("#tilePlay").click(function() { $("#tileB").kendoAnimate({ effects: "tile:left", previous: $("#tileA") }); });
+            $("#tileReverse").click(function() { $("#tileB").kendoAnimate({ effects: "tile:left", previous: $("#tileA"), reverse: true }); });
 
             $("#fadePlay").click(function() { $(this).parent().siblings(".anime").kendoAnimate("fade:out"); });
             $("#fadeReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({ effects: "fade:out", reverse: true }); });

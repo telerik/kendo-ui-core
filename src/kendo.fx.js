@@ -411,11 +411,9 @@
                 element = that.element,
                 options = that.options,
                 deferred = $.Deferred(),
-                state,
-                startState = {},
-                endState = {},
+                start = {},
+                end = {},
                 target,
-                auxilary,
                 auxilaries,
                 auxilariesLength;
 
@@ -427,39 +425,40 @@
 
             for (idx = 0; idx < length; idx ++) {
                 effect = effects[idx];
+
+                effect.setReverse(options.reverse);
+                effect.setOptions(options);
+
                 that.addRestoreProperties(effect.restore);
 
-                state = effect.state();
-                extend(startState, state.start);
-                extend(endState, state.end);
+                effect.state(start, end);
 
                 auxilaries = effect.auxilaries();
 
                 for (jdx = 0, auxilariesLength = auxilaries.length; jdx < auxilariesLength; jdx ++) {
-                    auxilary = auxilaries[jdx];
-                    fx.promise(auxilary.element, extend(true, {}, options, auxilary.options));
+                    auxilaries[jdx].duration(options.duration).run();
                 }
             }
 
             if (!element.is(":visible")) {
-                extend(startState, { display: element.data("olddisplay") || "block" }); // Add show to the set
+                extend(start, { display: element.data("olddisplay") || "block" }); // Add show to the set
             }
 
             if (transforms && !options.reset) {
                 target = element.data("targetTransform");
 
                 if (target) {
-                    startState = extend(target, startState);
+                    start = extend(target, start);
                 }
             }
 
-            startState = normalizeCSS(element, startState);
+            start = normalizeCSS(element, start);
 
             if (transforms && !transitions) {
-                startState = strip3DTransforms(startState);
+                start = strip3DTransforms(start);
             }
 
-            element.css(startState)
+            element.css(start)
                    .css(TRANSFORM); // Nudge
 
             for (idx = 0; idx < length; idx ++) {
@@ -468,8 +467,8 @@
 
             options.init();
 
-            element.data("targetTransform", endState);
-            kendo.fx.animate(element, endState, extend({}, options, { complete: deferred.resolve }));
+            element.data("targetTransform", end);
+            kendo.fx.animate(element, end, extend({}, options, { complete: deferred.resolve }));
         },
 
         addRestoreProperties: function(restore) {
@@ -539,7 +538,7 @@
             var effectClass = Effects[effectName];
 
             if (effectClass) {
-                effect = new effectClass(element, extend(true, {}, options, settings));
+                effect = new effectClass(element, settings.direction);
                 effects.push(effect);
             }
         });
@@ -694,99 +693,186 @@
     });
 
     var Effect = kendo.Class.extend({
-        init: function(element, options) {
+        init: function(element, direction) {
             var that = this;
             that.element = element;
-            that.options = options;
-
-            var direction = options.direction;
-            if (direction && options.reverse) {
-                options.direction = directions[direction].reverse;
-            }
+            that._direction = direction;
 
             if (!that.restore) {
                 that.restore = [];
             }
         },
 
-        _applyReverse: function(state) {
-            var tmp;
-            if (this.options.reverse) {
-                tmp = state.start;
-                state.start = state.end;
-                state.end = tmp;
+        reverse: function() {
+            this._reverse = true;
+            this.run();
+        },
+
+        play: function() {
+            this._reverse = false;
+            this.run();
+        },
+
+        run: function() {
+            var that = this,
+                element = that.element,
+                idx = 0,
+                restore = that.restore,
+                length = restore.length,
+                value,
+                deferred = $.Deferred(),
+                start = {},
+                end = {},
+                target,
+                auxilaries,
+                auxilariesLength;
+
+            deferred.then($.proxy(that, "_complete"));
+
+            element.data("animating", true);
+
+            for (; idx < length; idx ++) {
+                value = restore[idx];
+
+                if (!element.data(value)) {
+                    element.data(value, element.css(value));
+                }
             }
 
-            return state;
+            that.state(start, end);
+
+            if (!element.is(":visible")) {
+                extend(start, { display: element.data("olddisplay") || "block" });
+            }
+
+            if (transforms) {
+                target = element.data("targetTransform");
+
+                if (target) {
+                    start = extend(target, start);
+                }
+            }
+
+            start = normalizeCSS(element, start);
+
+            if (transforms && !transitions) {
+                start = strip3DTransforms(start);
+            }
+
+            element.css(start).css(TRANSFORM); // Nudge
+
+            that.setup();
+
+            element.data("targetTransform", end);
+            kendo.fx.animate(element, end, { duration: that._duration, complete: deferred.resolve });
         },
+
+        restoreCallback: function() {
+            var element = this.element;
+
+            for (var i = 0, length = this.restore.length; i < length; i ++) {
+                var value = this.restore[i];
+                element.css(value, element.data(value));
+            }
+        },
+
+        _complete: function() {
+            var that = this,
+                element = that.element;
+
+            element
+                .removeData("animating")
+                .dequeue(); // call next animation from the queue
+
+            that.restoreCallback();
+
+            if (hasZoom && !transforms) {
+                setTimeout($.proxy(that, "restoreCallback"), 0); // Again jQuery callback in IE8-
+            }
+
+            that.teardown();
+        },
+
+        /////////////////////////// TMP
+        //
+
+        setOptions: function(options) {
+            this.options = extend(true, {}, options);
+        },
+        /////////////////////////// TMP
 
         auxilaries: function() {
             return [];
         },
 
         setup: $.noop,
-        teardown: $.noop
+        state: $.noop,
+        teardown: $.noop,
+
+
+        setReverse: function(reverse) {
+            this._reverse = reverse;
+            return this;
+        },
+
+        direction: function(value) {
+            this._direction = value;
+            return this;
+        },
+
+        duration: function(duration) {
+            this._duration = duration;
+            return this;
+        }
     });
 
     function createEffect(name, definition) {
-        Effects[name] = Effect.extend(definition);
+        var effectClass = Effect.extend(definition);
+        Effects[name] = effectClass;
+
+        fx.Element.prototype[name] = function(direction, opt1, opt2, opt3) {
+            return new effectClass(this.element, direction, opt1, opt2, opt3);
+        };
     }
 
     createEffect("slideIn", {
-        init: function(element, options) {
-            Effect.prototype.init.call(this, element, options);
-
-            // re-reverse the direction, as slideIn:left is not the reverse of slideIn:right
-            if (options.reverse) {
-                options.direction = directions[options.direction].reverse;
-            }
-        },
-
-        state: function() {
+        state: function(start, end) {
             var that = this,
-                options = that.options,
+                tmp,
                 element = that.element,
-                state = { start: {}, end: {} },
-                direction = directions[options.direction],
+                direction = directions[that._direction],
                 offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
-                start = offset / (options.divisor || 1) + PX,
-                end = "0px";
+                startValue = offset / (that.options && that.options.divisor || 1) + PX,
+                endValue = "0px";
 
-            if (transforms && options.transition !== false) {
-                state.start[direction.transition] = start;
-                state.end[direction.transition] = end;
-            } else {
-                state.start[direction.property] = start;
-                state.end[direction.property] = end;
+            if (that._reverse) {
+                tmp = start;
+                start = end;
+                end = tmp;
             }
 
-            return this._applyReverse(state);
+            if (transforms) {
+                start[direction.transition] = startValue;
+                end[direction.transition] = endValue;
+            } else {
+                start[direction.property] = startValue;
+                end[direction.property] = endValue;
+            }
         }
     });
 
     createEffect("tile", {
         auxilaries: function() {
-            var options = this.options,
-                reverse = options.reverse,
-                previous = options.previous,
-                direction = options.direction,
-                slideIn = "slideIn:" + direction,
-                slideOut = "slideIn:" + directions[direction].reverse,
-                aux = [{
-                    element: this.element,
-                    options: {
-                        effects: reverse ? slideOut : slideIn
-                    }
-                }];
+            var that = this,
+                tmp,
+                reverse = that._reverse,
+                previous = that.options.previous,
+                dir = that._direction;
+
+            var aux = [ fx(that.element).slideIn(dir).setReverse(reverse) ];
 
             if (previous) {
-                aux.push({
-                    element: previous,
-                    options: {
-                        effects: reverse ? slideIn : slideOut,
-                        reverse: !reverse
-                    }
-                });
+                aux.push( fx(previous).slideIn(directions[dir].reverse).setReverse(!reverse) );
             }
 
             return aux;
@@ -796,116 +882,108 @@
     createEffect("fade", {
         restore: [ "opacity" ],
 
-        state: function() {
+        state: function(start, end) {
             var that = this,
-                state = { start: { opacity: 0 }, end: { opacity: 0 } },
                 opacity = that.element.data("opacity"),
+                out = that.direction === "out" ? that._reverse : !that._reverse,
                 value = isNaN(opacity) ? 1 : opacity;
 
-                if (that.options.direction === "out") {
-                    state.start.opacity = value;
-                } else {
-                    state.end.opacity = value;
-                }
-
-            return state;
+            start.opacity = end.opacity = 0;
+            if (out) {
+                start.opacity = value;
+            } else {
+                end.opacity = value;
+            }
         }
     });
 
     createEffect("zoom", {
         restore: [ "scale" ],
 
-        state: function() {
+        state: function(start, end) {
             var that = this,
-                state = { start: { scale: 0.01 }, end: { scale: 0.01 } },
+                out = that.direction === "out" ? that._reverse : !that._reverse,
                 scale = that.element.data("scale"),
                 value = isNaN(scale) ? 1 : scale;
 
-                if (that.options.direction === "out") {
-                    state.start.scale = value;
-                } else {
-                    state.end.scale = value;
-                }
+            start.scale = end.scale = 0.01;
 
-            return state;
+            if (out) {
+                start.scale = value;
+            } else {
+                end.scale = value;
+            }
         }
     });
 
     createEffect("slideMargin", {
-        state: function() {
+        state: function(start, end) {
             var that = this,
                 element = that.element,
                 options = that.options,
                 origin = element.data(ORIGIN),
                 offset = options.offset,
                 margin,
-                extender = {},
-                reverse = options.reverse;
+                reverse = that._reverse;
 
             if (!reverse && origin === null) {
                 element.data(ORIGIN, parseFloat(element.css("margin-" + options.axis)));
             }
 
             margin = (element.data(ORIGIN) || 0);
-            extender["margin-" + options.axis] = !reverse ? margin + offset : margin;
-            return { end: extender };
+            end["margin-" + options.axis] = !reverse ? margin + offset : margin;
         }
     });
 
     createEffect("slideTo", {
-        state: function() {
+        state: function(start, end) {
             var that = this,
                 element = that.element,
                 options = that.options,
                 offset = options.offset.split(","),
-                extender = {},
-                reverse = options.reverse;
+                reverse = that._reverse;
 
-            if (transforms && options.transition !== false) {
-                extender.translatex = !reverse ? offset[0] : 0;
-                extender.translatey = !reverse ? offset[1] : 0;
+            if (transforms) {
+                end.translatex = !reverse ? offset[0] : 0;
+                end.translatey = !reverse ? offset[1] : 0;
             } else {
-                extender.left = !reverse ? offset[0] : 0;
-                extender.top = !reverse ? offset[1] : 0;
+                end.left = !reverse ? offset[0] : 0;
+                end.top = !reverse ? offset[1] : 0;
             }
             element.css("left");
-
-            return { end: extender };
         }
     });
 
     createEffect("expand", {
         restore: [ OVERFLOW ],
 
-        state: function() {
+        state: function(start, end) {
             var that = this,
                 element = that.element,
                 options = that.options,
-                reverse = options.reverse,
-                property = options.direction === "vertical" ? HEIGHT : WIDTH,
+                reverse = that._reverse,
+                property = that._direction === "vertical" ? HEIGHT : WIDTH,
                 setLength = element[0].style[property],
                 oldLength = element.data(property),
                 length = parseFloat(oldLength || setLength),
-                realLength = round(element.css(property, AUTO)[property]()),
-                completion = { start: { overflow: HIDDEN }, end: {} };
+                realLength = round(element.css(property, AUTO)[property]());
+
+            start.overflow = HIDDEN;
 
             length = options.reset ? realLength || length : length || realLength;
 
-            completion.end[property] = (reverse ? 0 : length) + PX;
-            completion.start[property] = (reverse ? length : 0) + PX;
+            end[property] = (reverse ? 0 : length) + PX;
+            start[property] = (reverse ? length : 0) + PX;
 
             if (oldLength === undefined) {
                 element.data(property, setLength);
             }
-
-            return extend(completion, options.properties);
         },
 
         teardown: function() {
             var that = this,
                 element = that.element,
-                options = that.options,
-                property = options.direction === "vertical" ? HEIGHT : WIDTH,
+                property = that._direction === "vertical" ? HEIGHT : WIDTH,
                 length = element.data(property);
 
             if (length == AUTO || length === BLANK) {
@@ -914,6 +992,7 @@
         }
     });
 
+    var TRANSFER_START_STATE = { position: "absolute", marginLeft: 0, marginTop: 0, scale: 1 };
     /**
      * Intersection point formulas are taken from here - http://zonalandeducation.com/mmts/intersections/intersectionOfTwoLines1/intersectionOfTwoLines1.html
      * Formula for a linear function from two points from here - http://demo.activemath.org/ActiveMath2/search/show.cmd?id=mbase://AC_UK_calculus/functions/ex_linear_equation_two_points
@@ -925,27 +1004,19 @@
             this.element.appendTo(document.body);
         },
 
-        state: function() {
+        state: function(start, end) {
             var that = this,
                 element = that.element,
                 options = that.options,
-                reverse = options.reverse,
+                reverse = that._reverse,
                 target = options.target,
                 offset,
                 currentScale = animationProperty(element, "scale"),
                 targetOffset = target.offset(),
-                state = {
-                    start: {
-                        position: "absolute",
-                        marginLeft: 0,
-                        marginTop: 0,
-                        scale: 1
-                    },
-                    end: {
-                        scale: 1
-                    }
-                },
                 scale = target.outerHeight() / element.outerHeight();
+
+            extend(start, TRANSFER_START_STATE);
+            end.scale = 1;
 
             element.css(TRANSFORM, "scale(1)").css(TRANSFORM);
             offset = element.offset();
@@ -969,17 +1040,15 @@
                 X = (y1 - y3 - Z1 * x1 + Z2 * x3) / (Z2 - Z1),
                 Y = y1 + Z1 * (X - x1);
 
-            state.start.top = offset.top;
-            state.start.left = offset.left;
-            state.start.transformOrigin = X + PX + " " + Y + PX;
+            start.top = offset.top;
+            start.left = offset.left;
+            start.transformOrigin = X + PX + " " + Y + PX;
 
             if (reverse) {
-                state.start.scale = scale;
+                start.scale = scale;
             } else {
-                state.end.scale = scale;
+                end.scale = scale;
             }
-
-            return state;
         }
     });
 
@@ -992,10 +1061,10 @@
     };
 
     var ROTATIONS = {
-        top: { start: "rotatex(0deg)", end: "rotatex(180deg)" },
+        top:    { start: "rotatex(0deg)", end: "rotatex(180deg)" },
         bottom: { start: "rotatex(-180deg)", end: "rotatex(0deg)" },
-        left: { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
-        right: { start: "rotatey(180deg)", end: "rotatey(0deg)" }
+        left:   { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
+        right:  { start: "rotatey(180deg)", end: "rotatey(0deg)" }
     };
 
     function clipInHalf(container, direction) {
@@ -1005,58 +1074,84 @@
         return CLIPS[direction].replace("$size", size);
     }
 
-    createEffect("turningpage", {
-        state: function() {
-            var options = this.options,
-                direction = options.direction,
-                reverse = options.reverse,
-                rotation = ROTATIONS[direction],
-                start = { zIndex: 1 },
-                end = {};
+    createEffect("turningPage", {
+        init: function(element, direction, container) {
+            Effect.prototype.init.call(this, element, direction);
+            this._container = container;
+        },
 
-            if (options.clipInHalf) {
-               start.clip = clipInHalf(options.container, kendo.directions[direction].reverse);
+        state: function(start, end) {
+            var that = this,
+                options = that.options,
+                reverse = that._reverse,
+                direction = reverse ? directions[that._direction].reverse : that._direction,
+                rotation = ROTATIONS[direction];
+
+            start.zIndex = 1;
+
+            if (that._clipInHalf) {
+               start.clip = clipInHalf(that._container, kendo.directions[direction].reverse);
             }
 
             start[BACKFACE] = HIDDEN;
 
             end[TRANSFORM] = reverse ? rotation.start : rotation.end;
             start[TRANSFORM] = reverse ? rotation.end : rotation.start;
-
-            return { start: start, end: end };
         },
 
         setup: function() {
-            this.options.container.append(this.element);
+            this._container.append(this.element);
+        },
+
+        face: function(value) {
+            this._face = value;
+            return this;
+        },
+
+        clipInHalf: function(value) {
+            this._clipInHalf = value;
+            return this;
+        },
+
+        temporary: function(value) {
+            this._temporary = value;
+            return this;
         },
 
         teardown: function() {
-            if (this.options.temporary) {
+            if (this._temporary) {
                 this.element.remove();
             }
         }
     });
 
-    createEffect("staticpage", {
+    createEffect("staticPage", {
+        init: function(element, direction, container) {
+            Effect.prototype.init.call(this, element, direction);
+            this._container = container;
+        },
+
         restore: ["clip"],
 
-        state: function() {
-            return {
-                start: {
-                    clip: clipInHalf(this.options.container, this.options.direction)
-                }
-            };
+        state: function(start, end) {
+            var that = this,
+                direction = that._reverse ? directions[that._direction].reverse : that._direction;
+
+            start.clip = clipInHalf(that._container, direction);
+        },
+
+        face: function(value) {
+            this._face = value;
+            return this;
         },
 
         teardown: function() {
             var that = this,
-                element = that.element,
-                options = that.options,
-                reverse = options.reverse,
-                face = options.face;
+                reverse = that._reverse,
+                face = that._face;
 
             if ((reverse && !face) || (!reverse && face)) {
-                element.hide();
+                that.element.hide();
             }
         }
     });
@@ -1065,32 +1160,31 @@
         auxilaries: function() {
             var that = this,
                 options = that.options,
-                direction = options.direction === "horizontal" ? "left" : "top",
+                direction = that._direction === "horizontal" ? "left" : "top",
                 reverseDirection = kendo.directions[direction].reverse,
+                reverse = that._reverse,
                 temp,
                 faceClone = options.face.clone(true).removeAttr("id"),
                 backClone = options.back.clone(true).removeAttr("id"),
                 element = that.element;
 
-                if (options.reverse) {
+                if (reverse) {
                     temp = direction;
                     direction = reverseDirection;
                     reverseDirection = temp;
                 }
 
             return [
-                { element: options.face, options: { effects: "staticpage", face: true, container: element, direction: direction }},
-                { element: options.back, options: { effects: "staticpage", face: false, container: element, direction: reverseDirection }},
-                { element: faceClone, options: { effects: "turningpage", face: true, container: element, direction: direction, clipInHalf: true, temporary: true }},
-                { element: backClone, options: { effects: "turningpage", face: false, container: element, direction: reverseDirection, clipInHalf: true, temporary: true }}
+                kendo.fx(options.face).staticPage(direction, element).face(true).setReverse(reverse),
+                kendo.fx(options.back).staticPage(reverseDirection, element).setReverse(reverse),
+                kendo.fx(faceClone).turningPage(direction, element).face(true).clipInHalf(true).temporary(true).setReverse(reverse),
+                kendo.fx(backClone).turningPage(reverseDirection, element).clipInHalf(true).temporary(true).setReverse(reverse)
             ];
         },
 
-        state: function() {
-            var state = {};
-            state[PERSPECTIVE] = 1000;
-            state.transformStyle = "preserve-3d";
-            return { start: state };
+        state: function(start, end) {
+            start[PERSPECTIVE] = 1000;
+            start.transformStyle = "preserve-3d";
         },
 
         teardown: function() {
@@ -1114,16 +1208,14 @@
                 }
 
             return [
-                { element: options.face, options: { effects: "turningpage", face: true, container: element, direction: direction }},
-                { element: options.back, options: { effects: "turningpage", face: false, container: element, direction: reverseDirection }}
+                { element: options.face, direction: direction, options: { effects: "turningpage", face: true, container: element }},
+                { element: options.back, direction: reverseDirection, options: { effects: "turningpage", face: false, container: element }}
             ];
         },
 
-        state: function() {
-            var state = {};
-            state[PERSPECTIVE] = 1000;
-            state.transformStyle = "preserve-3d";
-            return { start: state };
+        state: function(start, end) {
+            start[PERSPECTIVE] = 1000;
+            start.transformStyle = "preserve-3d";
         }
     });
 
