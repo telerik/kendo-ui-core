@@ -17,11 +17,11 @@ public class Category{
     @Id
     @Column(name="CategoryID")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    public int getCategoryID() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryID(int categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 

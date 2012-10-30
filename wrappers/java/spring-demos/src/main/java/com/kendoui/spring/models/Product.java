@@ -15,7 +15,7 @@ public class Product {
     private double unitPrice;
     private int unitsInStock;
     private boolean discontinued;
-    private int categoryID;
+    private int categoryId;
     
     @Id
     @Column(name="ProductID")
@@ -65,11 +65,11 @@ public class Product {
     }
 
     @Column(name="CategoryID")
-    public int getCategoryID() {
-        return categoryID;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }
