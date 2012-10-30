@@ -6559,14 +6559,24 @@
                 start = selectionStart;
             }
 
-            if (start === null || !isFinite(end)) {
+            if (end === null || !isFinite(end)) {
                 end = selectionEnd;
             }
 
-            options.start = start;
-            options.end = end;
+            options.start = math.max(options.min, start);
+            options.end = math.min(end, options.max);
 
             that.moveSelection();
+        },
+
+        expand: function(delta) {
+            var selection = this,
+                options = selection.options;
+
+            selection.setRange(
+                math.min(options.start - delta, options.end - 1),
+                math.max(options.end + delta, options.start + 1)
+            );
         },
 
         moveSelection: function() {

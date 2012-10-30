@@ -17,7 +17,8 @@
     // Constants =============================================================
     var AUTO_CATEGORY_WIDTH = 28,
         NAVIGATOR_PANE = "_navigator",
-        NAVIGATOR_AXIS = NAVIGATOR_PANE;
+        NAVIGATOR_AXIS = NAVIGATOR_PANE,
+        MOUSEWHEEL_DELAY = 150;
 
     // Stock chart ===========================================================
     var StockChart = Chart.extend({
@@ -125,6 +126,8 @@
 
                 chart._draggable = $(chart._viewElement).data("kendoDraggable");
             }
+
+            // TODO: Cleanup draggable in destroy
         },
 
         _onDragStart: function(e) {
@@ -251,6 +254,21 @@
                     select: $.proxy(navi.onSelect, navi)
                 });
             }
+
+            $(chart.element).bind("DOMMouseScroll mousewheel", $.proxy(navi.onMousewheel, navi));
+        },
+
+        readSelection: function() {
+            var navi = this,
+                axis = navi.mainAxis(),
+                groups = axis.options.categories,
+                chart = navi.chart,
+                selection = chart._selection,
+                src = selection.options,
+                dst = navi.options.select;
+
+            dst.from = groups[src.start];
+            dst.to = groups[src.end];
         },
 
         applySelection: function() {
@@ -270,22 +288,54 @@
             }
         },
 
-        onSelect: function(e) {
+        redrawSlaves: function() {
             var navi = this,
-                axis = navi.mainAxis(),
-                groups = axis.options.categories,
-                select = navi.options.select,
                 chart = navi.chart,
                 plotArea = chart._plotArea,
-                slavePanes = plotArea.panes.slice(0, -1),
-                i;
+                slavePanes = plotArea.panes.slice(0, -1);
 
-            // TODO: Provide start and end date in arguments
-            select.from = groups[e.start];
-            select.to = groups[e.end];
-
-            navi.applySelection();
             chart._plotArea.redraw(slavePanes);
+        },
+
+        onMousewheel: function(e) {
+            var navi = this,
+                chart = navi.chart,
+                selection = chart._selection,
+                orgEvent = e.originalEvent,
+                delta = 0;
+
+            if (orgEvent.wheelDelta) {
+              delta = orgEvent.wheelDelta / 120;
+            }
+
+            if (orgEvent.detail) {
+              delta = -orgEvent.detail / 3;
+            }
+
+            if (selection) {
+                selection.expand(delta);
+            }
+
+            navi.readSelection();
+
+            if (navi._mwTimeout) {
+                clearTimeout(navi._mwTimeout);
+            }
+
+            navi._mwTimeout = setTimeout(function() {
+                navi.applySelection();
+                navi.redrawSlaves();
+            }, MOUSEWHEEL_DELAY);
+
+            e.preventDefault();
+        },
+
+        onSelect: function(e) {
+            var navi = this;
+
+            navi.readSelection();
+            navi.applySelection();
+            navi.redrawSlaves();
         },
 
         mainAxis: function() {
