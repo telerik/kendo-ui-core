@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Customers")
 public class Customer {
-    private String customerID;
+    private String customerId;
     private String companyName;
     private String contactName;
     private String contactTitle;
@@ -26,11 +26,11 @@ public class Customer {
     @Column(name="CustomerID")
     @GeneratedValue(strategy=GenerationType.AUTO)
     public String getCustomerID() {
-        return customerID;
+        return customerId;
     }
     
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
+    public void setCustomerID(String customerId) {
+        this.customerId = customerId;
     }
     
     @Column(name="CompanyName")

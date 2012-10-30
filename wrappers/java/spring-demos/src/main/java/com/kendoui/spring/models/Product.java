@@ -15,6 +15,7 @@ public class Product {
     private double unitPrice;
     private int unitsInStock;
     private boolean discontinued;
+    private int categoryID;
     
     @Id
     @Column(name="ProductID")
@@ -62,6 +63,13 @@ public class Product {
     public void setDiscontinued(boolean discontinued) {
         this.discontinued = discontinued;
     }
-	
-	
+
+    @Column(name="CategoryID")
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
 }
