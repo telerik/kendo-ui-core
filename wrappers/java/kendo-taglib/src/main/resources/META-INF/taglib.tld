@@ -7831,13 +7831,6 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <type>java.lang.String</type>
         </attribute>
 
-        <attribute>
-            <description>Specifies whether the item is initially expanded</description>
-            <name>expanded</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
     </tag>
 
 
@@ -7986,6 +7979,13 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <name>spriteCssClass</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies whether the item is initially expanded</description>
+            <name>expanded</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
     </tag>
@@ -8434,13 +8434,6 @@ format will also influence the appearance of the</description>
             <type>java.lang.String</type>
         </attribute>
 
-        <attribute>
-            <description>Specifies whether the item is initially expanded</description>
-            <name>expanded</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
     </tag>
 
 
@@ -8687,13 +8680,6 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>java.lang.String</type>
         </attribute>
 
-        <attribute>
-            <description>Specifies whether the item is initially expanded</description>
-            <name>expanded</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
     </tag>
 
 
@@ -8745,6 +8731,13 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <name>spriteCssClass</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies whether the item is initially expanded</description>
+            <name>expanded</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
     </tag>
@@ -9007,6 +9000,13 @@ node is expanded.</description>
             <name>spriteCssClass</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies whether the item is initially expanded</description>
+            <name>expanded</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
     </tag>

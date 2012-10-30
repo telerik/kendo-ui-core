@@ -14,7 +14,7 @@
                     <kendo:treeView-item text="Occasional Furniture" />
                 </kendo:treeView-items>
             </kendo:treeView-item>
-            <kendo:treeView-item text="Decor" expanded="true">
+            <kendo:treeView-item text="Decor">
                 <kendo:treeView-items>
                     <kendo:treeView-item text="Bed Linen" />
                     <kendo:treeView-item text="Curtains & Blinds" />
@@ -33,7 +33,7 @@
                     <kendo:treeView-item text="Kids Storage" />
                 </kendo:treeView-items>
             </kendo:treeView-item>
-            <kendo:treeView-item text="Lights" expanded="true">
+            <kendo:treeView-item text="Lights">
                 <kendo:treeView-items>
                     <kendo:treeView-item text="Ceiling" />
                     <kendo:treeView-item text="Table" />
