@@ -11,7 +11,6 @@ import com.kendoui.taglib.json.Function;
 
 
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyContent;
 
 @SuppressWarnings("serial")
 public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
@@ -24,9 +23,7 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
     protected Element<?> createElement() {
         Div element = new Div();
 
-        BodyContent content = getBodyContent();
-
-        element.html(content.getString());
+        element.html(body());
 
         return element;
     }
