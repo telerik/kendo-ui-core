@@ -20,14 +20,14 @@
         <h3>The Boeing Company (NYSE:BA)</h3>
         <div id="chart" style="width: 900px; height: 500px;"></div>
         <script>
-            // TODO: Refresh multiple panes
+            // TODO: Scroll to zoom
+            // TODO: Axes overflow on update
+            // TODO: Clear tooltip when changing selection
             // TODO: Real time updates on rebind
             // TODO: Investigate glitch on iPad after scrolling
-            // TODO: Clear tooltip when changing selection
-            // TODO: Scroll to zoom
+            // TODO: StockChart Java Wrapper
             // TODO: StockChart MVC Wrapper - Limit series, Tests
             // TODO: StockChart demo(s) (at least one more with panes)
-            // TODO: series.pane shortcut
             // TODO: Don't throw error with empty selection
             // TODO: setOptions should resolve aliases
             $(function() {
@@ -39,18 +39,20 @@
                     },
                     dateField: "Date",
                     panes: [{
-                        // Keep the top pane as it is
                         title: "Value"
                     }, {
-                        name: "volume",
+                        name: "volumePane",
                         title: "Volume",
-                        height: 100
+                        height: 100 // pixels
                     }],
+                    categoryAxis: {
+                        pane: "volumePane"
+                    },
                     valueAxes: [{
                         // Default axis
                     }, {
                         name: "volume",
-                        pane: "volume",
+                        pane: "volumePane",
                         visible: false
                     }],
                     series: [{
@@ -64,10 +66,6 @@
                         field: "Volume",
                         axis: "volume"
                     }],
-                    legend: {
-                        // TODO: Investigate glitches
-                        //visible: false
-                    },
                     navigator: {
                         series: {
                             type: "area",

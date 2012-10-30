@@ -62,6 +62,7 @@
 
         options: {
             name: "StockChart",
+            dateField: "date",
             axisDefaults: {
                 categoryAxis: {
                     type: "date",
@@ -75,7 +76,6 @@
                     }
                 }
             },
-            dateField: "date",
             navigator: {
                 seriesDefaults: {
                     markers: {
@@ -92,6 +92,9 @@
             },
             tooltip: {
                 visible: true
+            },
+            legend: {
+                visible: false
             }
         },
 
@@ -306,8 +309,7 @@
     };
 
     Navigator.attachAxes = function(options) {
-        var dateField = options.dateField,
-            categoryAxes,
+        var categoryAxes,
             valueAxes;
 
         categoryAxes = options.categoryAxis = [].concat(options.categoryAxis);
@@ -315,7 +317,6 @@
 
         var base = {
             type: "date",
-            field: dateField,
             pane: NAVIGATOR_PANE,
             roundToBaseUnit: false,
             justified: true,

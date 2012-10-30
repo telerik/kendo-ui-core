@@ -2375,6 +2375,28 @@
                            plotArea.valueAxis.box.x1);
                 });
 
+                test("chart pane determined by series axis", function() {
+                    plotArea = new dataviz.CategoricalPlotArea([{
+                        type: "column",
+                        data: [1],
+                        name: "series",
+                        axis: "b"
+                    }], {
+                        panes: [{
+                            name: "top",
+                        }, {
+                            name: "bottom"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "b",
+                            pane: "bottom"
+                        }]
+                    });
+
+                    equals(plotArea.panes[1].charts[0].options.series[0].name, "series");
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Panes / Title", {
                     setup: function() {

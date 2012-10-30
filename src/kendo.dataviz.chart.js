@@ -5524,7 +5524,7 @@
                 axisOptions = [].concat(options.valueAxis),
                 axis = $.grep(axisOptions, function(a) { return a.name === axisName; })[0],
                 panes = options.panes || [{}],
-                defaultPaneName = panes[0].name || "default",
+                defaultPaneName = (panes[0] || {}).name || "default",
                 paneName = (axis || {}).pane || defaultPaneName;
 
             return paneName;

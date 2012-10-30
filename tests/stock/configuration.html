@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.stock.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz,
+                deepExtend = kendo.deepExtend,
+                StockChart = dataviz.ui.StockChart;
+
+            (function() {
+                var chart,
+                    plotArea;
+
+                function createStockChart(options) {
+                    $("#container").kendoStockChart(options);
+                    chart = $("#container").data("kendoStockChart");
+                }
+
+                function destroyChart() {
+                    var element = $("#container");
+                    kendo.destroy(element);
+                    element.unbind().empty();
+                }
+
+                // ------------------------------------------------------------
+                module("Options / Defaults", {
+                    setup: function() {
+                        createStockChart({ });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("tooltip is visible by default", function() {
+                    ok(chart.options.tooltip.visible);
+                });
+
+                test("legend is not visible by default", function() {
+                    ok(!chart.options.legend.visible);
+                });
+
+                // ------------------------------------------------------------
+                module("Options / Date Field", {
+                    setup: function() {
+                        createStockChart({ });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("default categoryAxis field is 'date'", function() {
+                    equals(chart.options.categoryAxis[0].field, "date");
+                });
+
+                test("dateField is applied as default categoryAxis field", function() {
+                    createStockChart({ dateField: "d" });
+                    equals(chart.options.categoryAxis[0].field, "d");
+                });
+
+                test("default axis field is applied", function() {
+                    createStockChart({
+                        axisDefaults: {
+                            field: "d"
+                        }
+                    });
+                    equals(chart.options.categoryAxis[0].field, "d");
+                });
+
+                test("default categoryAxis field is applied", function() {
+                    createStockChart({
+                        axisDefaults: {
+                            categoryAxis: {
+                                field: "d"
+                            }
+                        }
+                    });
+                    equals(chart.options.categoryAxis[0].field, "d");
+                });
+
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+    </body>
+</html>
