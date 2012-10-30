@@ -3503,7 +3503,32 @@ html .k-upload
 {
     border: 0;
     padding: 0;
-    background-color: transparent;
+}
+
+.k-toolbar-wrap .k-dropzone-active
+{
+	text-align: center;
+}
+
+.k-toolbar-wrap .k-dropzone-active em
+{
+	display: inline;
+	margin:0;
+	font-size: 5em;
+	font-style: normal;
+}
+
+.k-toolbar-wrap .k-dropzone-active .k-upload-button
+{
+	display: none;
+}
+
+.k-imagebrowser-dropzone
+{
+	z-index: 10010;
+	filter: alpha(opacity=40);
+	opacity: .4;
+	position: fixed;
 }
 
 .k-search-wrap
@@ -3598,6 +3623,7 @@ html .k-upload
 .k-imagebrowser .k-upload
 {
     float: left;
+	z-index: 10010;
 }
 
 .k-imagebrowser .k-upload-button

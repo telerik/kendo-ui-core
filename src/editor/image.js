@@ -102,7 +102,7 @@ var ImageCommand = Command.extend({
 
         windowContent =
             '<div class="k-editor-dialog">' +
-                (showBrowser ? '<div class="k-image-browser"></div>' : "") +
+                (showBrowser ? '<div class="k-imagebrowser"></div>' : "") +
                 '<ol>' +
                     '<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>' +
                     '<li class="k-form-text-row"><label for="k-editor-image-title">Tooltip</label><input type="text" class="k-input" id="k-editor-image-title"/></li>' +
@@ -125,7 +125,7 @@ var ImageCommand = Command.extend({
                     var that = this;
 
                     new kendo.ui.ImageBrowser(
-                        that.element.find(".k-image-browser"),
+                        that.element.find(".k-imagebrowser"),
                         extend({}, imageBrowser, {
                             change: function() {
                                 that.element.find(KEDITORIMAGEURL).val(this.value());
@@ -140,7 +140,6 @@ var ImageCommand = Command.extend({
                 .find(".k-dialog-insert").click(apply).end()
                 .find(".k-dialog-close").click(close).end()
                 .find(".k-form-text-row input").keydown(keyDown).end()
-                .toggleClass("k-imagebrowser", showBrowser)
                 // IE < 8 returns absolute url if getAttribute is not used
                 .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
                 .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()

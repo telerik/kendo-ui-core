@@ -323,7 +323,7 @@
             var that = this;
 
             if (that.options.transport.uploadUrl) {
-                bindDragEventWrappers(that.element,
+                bindDragEventWrappers($(document.documentElement),
                     $.proxy(that._dropEnter, that),
                     $.proxy(that._dropLeave, that)
                 );
