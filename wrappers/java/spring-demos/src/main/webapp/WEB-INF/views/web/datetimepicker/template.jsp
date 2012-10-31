@@ -39,16 +39,16 @@
     String footer = "Today - #=kendo.toString(data, 'd') #";
     %>
         
-        <kendo:datePicker name="datepicker" value="<%=new Date()%>" footer="<%=footer%>">
-            <kendo:datePicker-month content="<%=template%>"/>
-        </kendo:datePicker>
+        <kendo:dateTimePicker name="datetimepicker" value="<%=new Date()%>" footer="<%=footer%>">
+            <kendo:dateTimePicker-month content="<%=template%>"/>
+        </kendo:dateTimePicker>
         
     </div>
     <script>
 	    $(document).ready(function() {
-	        $("#datepicker").data("kendoDatePicker")
-	                        .dateView.calendar.element
-	                        .width(340);
+	        $("#datetimepicker").data("kendoDateTimePicker")
+	                            .dateView.calendar.element
+	                            .width(340);
 	    });
 	</script>
 	
