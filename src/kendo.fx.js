@@ -1175,10 +1175,10 @@
                 }
 
             return [
-                kendo.fx(options.face).staticPage(direction, element).face(true).setReverse(reverse),
-                kendo.fx(options.back).staticPage(reverseDirection, element).setReverse(reverse),
-                kendo.fx(faceClone).turningPage(direction, element).face(true).clipInHalf(true).temporary(true).setReverse(reverse),
-                kendo.fx(backClone).turningPage(reverseDirection, element).clipInHalf(true).temporary(true).setReverse(reverse)
+                fx(options.face).staticPage(direction, element).face(true).setReverse(reverse),
+                fx(options.back).staticPage(reverseDirection, element).setReverse(reverse),
+                fx(faceClone).turningPage(direction, element).face(true).clipInHalf(true).temporary(true).setReverse(reverse),
+                fx(backClone).turningPage(reverseDirection, element).clipInHalf(true).temporary(true).setReverse(reverse)
             ];
         },
 
@@ -1196,20 +1196,21 @@
         auxilaries: function() {
             var that = this,
                 options = that.options,
-                direction = options.direction === "horizontal" ? "left" : "top",
+                direction = that._direction === "horizontal" ? "left" : "top",
                 reverseDirection = kendo.directions[direction].reverse,
+                reverse = that._reverse,
                 temp,
                 element = that.element;
 
-                if (options.reverse) {
+                if (reverse) {
                     temp = direction;
                     direction = reverseDirection;
                     reverseDirection = temp;
                 }
 
             return [
-                { element: options.face, direction: direction, options: { effects: "turningpage", face: true, container: element }},
-                { element: options.back, direction: reverseDirection, options: { effects: "turningpage", face: false, container: element }}
+                fx(options.face).turningPage(direction, element).face(true).setReverse(reverse),
+                fx(options.back).turningPage(reverseDirection, element).setReverse(reverse)
             ];
         },
 
