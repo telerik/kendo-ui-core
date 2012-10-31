@@ -808,7 +808,7 @@
         setup: $.noop,
         state: $.noop,
         teardown: $.noop,
-
+        directions: [],
 
         setReverse: function(reverse) {
             this._reverse = reverse;
@@ -826,13 +826,33 @@
         }
     });
 
+    function toUpperCase(letter) {
+        return letter.toUpperCase();
+    }
+
+    function capitalize(word) {
+        return word.replace(/^./, toUpperCase);
+    }
+
     function createEffect(name, definition) {
-        var effectClass = Effect.extend(definition);
+        var effectClass = Effect.extend(definition),
+            directions = effectClass.prototype.directions,
+            length = directions.length,
+            theDirection,
+            idx;
+
         Effects[name] = effectClass;
 
         fx.Element.prototype[name] = function(direction, opt1, opt2, opt3) {
             return new effectClass(this.element, direction, opt1, opt2, opt3);
         };
+
+        each(directions, function() {
+            var theDirection = this;
+            fx.Element.prototype[name + capitalize(theDirection)] = function(opt1, opt2, opt3) {
+                return new effectClass(this.element, theDirection, opt1, opt2, opt3);
+            };
+        });
     }
 
     createEffect("slideIn", {
