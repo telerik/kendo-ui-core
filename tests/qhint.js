@@ -67,6 +67,7 @@
         if (!req) return;
         var method = "GET";
         req.open(method,url,true);
+        req.setRequestHeader("X-QHint", "true");
         req.onreadystatechange = function () {
             if (req.readyState != 4) return;
             if (req.status != 200 && req.status != 304) {
