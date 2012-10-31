@@ -278,6 +278,14 @@
                     equal(dom.find(".k-item .k-item").length, 1);
                 });
 
+                test("enable checkboxes through data attribute", function() {
+                    var dom = $('<ul data-role="treeview" data-checkboxes="true"></ul>');
+
+                    kendo.bind(dom);
+
+                    ok(dom.data("kendoTreeView").options.checkboxes);
+                });
+
             })();
 
         </script>
