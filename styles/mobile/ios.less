@@ -8,6 +8,9 @@
 @button-background-color: #496b9a;
 @button-active-background-color: #264e8c;
 
+@ios-list-border-color: #a0a1a8;
+@ios-list-background-color: #f0f0f0;
+
 @pull-to-refresh-color: #788193;
 @pull-to-refresh-shadow: rgba(255,255,255,.5);
 
@@ -511,35 +514,34 @@
 .km-ios .km-listinset > li:first-child,
 .km-ios .km-listgroupinset .km-list > li:first-child
 {
-    border: 1px solid #999;
+    border: 1px solid @ios-list-border-color;
     border-width: 1px 1px 0;
-    border-color: #999;
+    border-color: @ios-list-border-color;
     .border-radius(10px 10px 0 0);
-    box-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 1px 0 0 rgba(200,200,200,.4), inset 0 -1px 0 rgba(0,0,0,.1);
-    -moz-box-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 1px 0 0 rgba(200,200,200,.4), inset 0 -1px 0 rgba(0,0,0,.1);
-    -webkit-box-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 1px 0 0 rgba(200,200,200,.4), inset 0 -1px 0 rgba(0,0,0,.1);
+    .box-shadow(~"0 1px 0 0 rgba(255,255,255,.4), inset 0 1px 0 0 rgba(200,200,200,.4), inset 0 -1px 0 rgba(0,0,0,.2)");
 }
 
 .km-ios .km-list > li
 {
+    border-top: 1px solid rgba(255,255,255,.1);
     border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
 .km-ios .km-listinset > li,
 .km-ios .km-listgroupinset .km-list > li
 {
-    border: 1px solid #999;
+    border: 1px solid @ios-list-border-color;
     border-width: 0 1px;
-    .box-shadow(inset 0 -1px 0 rgba(0,0,0,.1));
+    .box-shadow(~"inset 0 -1px 0 rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.4)");
 }
 
 .km-ios .km-listinset > li:last-child,
 .km-ios .km-listgroupinset .km-list > li:last-child
 {
-    border: 1px solid #999;
+    border: 1px solid @ios-list-border-color;
     border-width: 0 1px 1px 1px;
     .border-radius(0 0 10px 10px);
-    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+    .box-shadow(~"0 1px 0 0 rgba(255,255,255,.4), inset 0 1px 0 rgba(255,255,255,.4)");
 }
 
 .km-ios .km-listinset > li:first-child:last-child,
@@ -557,9 +559,23 @@
     .linear-gradient-image(top, rgba(255,255,255,.28), rgba(255,255,255,.1) 50%, rgba(255,255,255,0));
 }
 
+.km-ios .km-listview-link:after
+{
+    color: #7b7b7b;
+}
+
 .km-ios .km-state-active .km-listview-link:after
 {
-    border-color: #fff;
+    color: #fff;
+    border-color: inherit;
+}
+
+.km-on-ios.km-ios6 .km-listview-link:after
+{
+    width: .66rem;
+    height: .64rem;
+    border-width: 0;
+    box-shadow: inset -.2rem .2rem 0;
 }
 
 .km-ios .km-listinset > li:first-child,
@@ -620,13 +636,13 @@
     font-size: 1.2em;
     font-weight: bold;
     overflow: hidden;
-    background: #f9f9f9;
+    background: @ios-list-background-color;
 }
 
 .km-ios,
 .km-ios .km-content
 {
-    background: #f9f9f9;
+    background: @ios-list-background-color;
     color: #000;
 }
 
