@@ -1,5 +1,7 @@
 package com.kendoui.spring.controllers.combobox;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +44,9 @@ public class CascadingComboBoxController {
     }
     
     @RequestMapping(value = "/cascadingcombobox/orders", method = RequestMethod.POST)
-    public @ResponseBody DataSourceResult orders(@RequestBody DataSourceRequest request) {
-        return order.getList(request);
+    public @ResponseBody List<?> orders(@RequestBody DataSourceRequest request) {
+        List<?> items = order.getListByProductId(request);
+        
+        return items;
     }
 }

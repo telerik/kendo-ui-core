@@ -26,7 +26,7 @@
     <p> 
         <label for="products">Products:</label>
         
-        <kendo:comboBox name="products" dataTextField="productName" dataValueField="productID"
+        <kendo:comboBox name="products" dataTextField="productName" dataValueField="productId"
                         placeholder="Select product..." cascadeFrom="categories" autoBind="false">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
@@ -40,16 +40,14 @@
     <p> 
         <label for="orders">Orders:</label>
         
-        <%--<kendo:comboBox name="orders" dataTextField="shipCity" dataValueField="orderID"
-                        placeholder="Select order...">
+        <kendo:comboBox name="orders" dataTextField="shipCity" dataValueField="orderId"
+                        placeholder="Select order..." cascadeFrom="products" autoBind="false">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${ordersUrl}" type="POST" contentType="application/json"/>
                 </kendo:dataSource-transport>
-                <kendo:dataSource-schema data="data" total="total">
-                </kendo:dataSource-schema>
             </kendo:dataSource>
-        </kendo:comboBox>--%>
+        </kendo:comboBox>
     </p>
     </div>
 <demo:footer />
