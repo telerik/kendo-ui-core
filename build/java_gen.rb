@@ -93,9 +93,11 @@ A JSP tag representing Kendo <%= name %>.
 MD_CHILDREN_TEMPLATE = ERB.new(%{
 ## Child JSP Tags
 <% children.each do |child| %><% if !child.instance_of?(NestedTagEvent) %>
-### [kendo:<%= child.tag_name %>](<%= child.markdown_filename.sub('docs', '').sub('.md', '')%>)
+### kendo:<%= child.tag_name %>
 
 <%= child.description %>
+
+More documentation is available at [kendo:<%= child.tag_name %>](<%= child.markdown_filename.sub('docs', '').sub('.md', '')%>).
 
 #### Example
 
