@@ -9,10 +9,6 @@
 
 <script>
 $(document).ready(function() {
-    $("#datepicker").kendoDatePicker()
-                  .closest(".k-widget")
-                  .attr("id", "datepicker_wrapper");
-
     var datepicker = $("#datepicker").data("kendoDatePicker");
 
     var setValue = function () {
