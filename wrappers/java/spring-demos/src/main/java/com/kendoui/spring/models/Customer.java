@@ -25,11 +25,11 @@ public class Customer {
     @Id
     @Column(name="CustomerID")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    public String getCustomerID() {
+    public String getCustomerId() {
         return customerId;
     }
     
-    public void setCustomerID(String customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
     
