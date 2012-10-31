@@ -28,10 +28,16 @@ module("FX integration tests")
 function verifyEffect(effectName, before, after, reverse) {
     var effect = kendo.fx($("<div style='width:200px' />"))[effectName]();
     effect.duration(0);
-    effect.before = before;
-    effect.after = after;
-    effect.setReverse(reverse);
-    effect.run();
+
+    var setup = effect.setup;
+    effect.setup = function() {
+        setup.call(this);
+        before(this.element);
+    };
+
+    effect.run().then(function() {
+        after(effect.element);
+    });
 }
 
 asyncTest("slideIn slides the element", 2, function() {
@@ -48,13 +54,11 @@ asyncTest("tile tiles the element", 2, function() {
 
     effect.duration(0);
 
-    effect.after = function() {
+    effect.run().then(function() {
         start();
         equal(foo.css("transform"), "translateX(0px)");
         equal(bar.css("transform"), "translateX(-200px)");
-    }
-
-    effect.run();
+    });
 });
 
 asyncTest("fade in fades the element", 2, function() {

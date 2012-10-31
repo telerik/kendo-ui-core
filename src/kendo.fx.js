@@ -705,12 +705,12 @@
 
         reverse: function() {
             this._reverse = true;
-            this.run();
+            return this.run();
         },
 
         play: function() {
             this._reverse = false;
-            this.run();
+            return this.run();
         },
 
         run: function() {
@@ -765,12 +765,12 @@
 
             element.css(start).css(TRANSFORM); // Nudge
 
-            that.before(element);
-
             that.setup();
 
             element.data("targetTransform", end);
             kendo.fx.animate(element, end, { duration: that._duration, complete: deferred.resolve });
+
+            return deferred.promise();
         },
 
         restoreCallback: function() {
@@ -801,8 +801,6 @@
             }
 
             that.teardown();
-
-            that.after(element);
         },
 
         /////////////////////////// Support for kendo.animate;
@@ -816,10 +814,6 @@
         },
 
         shouldHide: $.noop,
-
-        // hooks for test purposes only
-        before: $.noop,
-        after: $.noop,
 
         setup: $.noop,
         state: $.noop,
