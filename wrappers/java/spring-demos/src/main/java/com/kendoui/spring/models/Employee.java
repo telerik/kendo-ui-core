@@ -16,6 +16,7 @@ public class Employee {
     private String title;
     private String city;
     private String address;
+    private String country;
 
     @Id
     @Column(name="EmployeeID")
@@ -71,5 +72,14 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    
+    @Column(name="Country")
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
