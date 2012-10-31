@@ -95,7 +95,9 @@ public class Serializer {
     }
 
     public void serialize(Writer out, Object value) throws IOException {
-        if (value instanceof String) {
+        if (value == null) {
+            out.append("null");
+        } else if (value instanceof String) {
             quote(out, (String)value);
         } else if (value instanceof Number) {
             out.append(value.toString());
