@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.annotate.JsonAnySetter;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -30,11 +31,22 @@ public class DataSourceRequest {
     private List<SortDescriptor> sort;
     private List<GroupDescriptor> group;
     private List<AggregateDescriptor> aggregate;
+    private HashMap<String, Object> data;
     
     private FilterDescriptor filter;
     
     public DataSourceRequest() {
         filter = new FilterDescriptor();
+        data = new HashMap<String, Object>();
+    }
+    
+    public HashMap<String, Object> getData() {
+        return data;
+    }
+    
+    @JsonAnySetter
+    public void handleUnknown(String key, Object value) {
+        data.put(key, value);
     }
     
     public int getPage() {
