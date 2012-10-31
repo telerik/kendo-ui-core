@@ -283,23 +283,13 @@
         return cssValues;
     }
 
-    function stopTransition(element, callback) {
-        if (element.data(ABORT_ID)) {
-            clearTimeout(element.data(ABORT_ID));
-            element.removeData(ABORT_ID);
-        }
-
-        element.css(TRANSITION, "").css(TRANSITION);
-        element.dequeue();
-        callback.call(element);
-    }
-
     if (transitions) {
         extend(kendo.fx, {
             transition: function(element, properties, options) {
                 var css,
                     delay = 0,
-                    oldKeys = element.data("keys") || [];
+                    oldKeys = element.data("keys") || [],
+                    timeoutID;
 
                 options = extend({
                         duration: 200,
@@ -309,6 +299,16 @@
                     },
                     options
                 );
+
+                stopTransition = function() {
+                   if (timeoutID) {
+                       clearTimeout(timeoutID);
+                       timeoutID = null;
+                       element.css(TRANSITION, "").css(TRANSITION);
+                       element.dequeue();
+                       options.complete.call(element);
+                   }
+                }
 
                 options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
 
@@ -321,11 +321,11 @@
                 element.css(css).css(TRANSFORM);
 
                 if (browser.mozilla) {
-                    element.one(transitions.event, function () { stopTransition(element, options.complete); } );
+                    element.one(transitions.event, stopTransition);
                     delay = 50;
                 }
 
-                element.data(ABORT_ID, setTimeout(stopTransition, options.duration + delay, element, options.complete));
+                var timeoutID = setTimeout(stopTransition, options.duration + delay);
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
@@ -771,8 +771,6 @@
 
             element.data("targetTransform", end);
             kendo.fx.animate(element, end, { duration: that._duration, complete: deferred.resolve });
-
-            that.after(element);
         },
 
         restoreCallback: function() {
@@ -794,11 +792,17 @@
 
             that.restoreCallback();
 
+            if (that.shouldHide()) {
+                element.data("olddisplay", element.css("display")).hide();
+            }
+
             if (hasZoom && !transforms) {
                 setTimeout($.proxy(that, "restoreCallback"), 0); // Again jQuery callback in IE8-
             }
 
             that.teardown();
+
+            that.after(element);
         },
 
         /////////////////////////// Support for kendo.animate;
@@ -811,6 +815,7 @@
             return [];
         },
 
+        shouldHide: $.noop,
 
         // hooks for test purposes only
         before: $.noop,
@@ -858,8 +863,7 @@
             return new effectClass(this.element, direction, opt1, opt2, opt3);
         };
 
-        each(directions, function() {
-            var theDirection = this;
+        each(directions, function(idx, theDirection) {
             fx.Element.prototype[name + capitalize(theDirection)] = function(opt1, opt2, opt3) {
                 return new effectClass(this.element, theDirection, opt1, opt2, opt3);
             };
@@ -927,13 +931,18 @@
 
         restore: [ "opacity" ],
 
+        shouldHide: function() {
+           return this._direction === "out" ? !this._reverse : this._reverse;
+        },
+
         state: function(start, end) {
             var that = this,
                 opacity = that.element.data("opacity"),
-                out = that._direction === "out" ? !that._reverse : that._reverse,
+                out = that.shouldHide(),
                 value = isNaN(opacity) ? 1 : opacity;
 
             start.opacity = end.opacity = 0;
+
             if (out) {
                 start.opacity = value;
             } else {
@@ -947,9 +956,13 @@
 
         restore: [ "scale" ],
 
+        shouldHide: function() {
+           return this._direction === "out" ? !this._reverse : this._reverse;
+        },
+
         state: function(start, end) {
             var that = this,
-                out = that._direction === "out" ? !that._reverse : that._reverse,
+                out = that.shouldHide(),
                 scale = that.element.data("scale"),
                 value = isNaN(scale) ? 1 : scale;
 

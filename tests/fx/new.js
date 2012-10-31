@@ -34,36 +34,50 @@ function verifyEffect(effectName, before, after, reverse) {
     effect.run();
 }
 
-test("zoom in zooms the element", 2, function() {
-    verifyEffect("zoomIn",
-        function(element) { equal(element.css("transform"), "scale(0.01)") },
-        function(element) { equal(element.css("transform"), "scale(1)") }
-    );
-});
-
-test("slideIn slides the element", 2, function() {
+asyncTest("slideIn slides the element", 2, function() {
     verifyEffect("slideInLeft",
         function(element) { equal(element.css("transform"), "translateX(200px)") },
-        function(element) { equal(element.css("transform"), "translateX(0px)") }
+        function(element) { start(); equal(element.css("transform"), "translateX(0px)") }
     );
 });
 
-test("tile tiles the element", 2, function() {
+asyncTest("tile tiles the element", 2, function() {
     var foo = $("<div style='width: 200px' />"),
         bar = $("<div style='width: 200px' />"),
         effect = kendo.fx(foo).tile("left", bar);
 
+    effect.duration(0);
+
     effect.after = function() {
-        equal(foo.css("transform"), "translateX(0px)")
-        equal(bar.css("transform"), "translateX(-200px)")
+        start();
+        equal(foo.css("transform"), "translateX(0px)");
+        equal(bar.css("transform"), "translateX(-200px)");
     }
 
-    effect.play();
+    effect.run();
 });
 
-test("fade in fades the element", 2, function() {
+asyncTest("fade in fades the element", 2, function() {
     verifyEffect("fadeIn",
         function(element) { equal(element.css("opacity"), "0") },
-        function(element) { equal(element.css("opacity"), "1") }
+        function(element) { start(); equal(element.css("opacity"), "1") }
+    );
+});
+
+asyncTest("fade out fades the element and hides it", 3, function() {
+    verifyEffect("fadeOut",
+        function(element) { equal(element.css("opacity"), "1") },
+        function(element) {
+            start();
+            equal(element.css("opacity"), "1");
+            equal(element.css("display"), "none");
+        }
+    );
+});
+
+asyncTest("zoom in zooms the element", 2, function() {
+    verifyEffect("zoomIn",
+        function(element) { equal(element.css("transform"), "scale(0.01)") },
+        function(element) { start(); equal(element.css("transform"), "scale(1)") }
     );
 });
