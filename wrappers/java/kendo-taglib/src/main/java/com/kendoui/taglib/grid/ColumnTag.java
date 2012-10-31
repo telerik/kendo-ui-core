@@ -198,5 +198,8 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
-
+    
+    public void setValues(ColumnValuesTag value) {
+        setProperty("values", value.getValue());
+    }
 }

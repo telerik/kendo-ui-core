@@ -1,37 +1,46 @@
 package com.kendoui.spring.controllers.grid;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kendoui.spring.models.Category;
+import com.kendoui.spring.models.CategoryDao;
 import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
-@Controller("grid-editing-controller")
+@Controller("grid-foreignkeycolumn-controller")
 @RequestMapping(value="/web/grid/")
-public class EditingController {
+public class ForeignKeyColumnController {
     
-    @Autowired 
+    @Autowired
     private ProductDao product;
     
-    @RequestMapping(value = "/editing", method = RequestMethod.GET)
-    public String index() {
-        return "web/grid/editing";
+    @Autowired 
+    private CategoryDao category;
+    
+    @RequestMapping(value = "/foreignkeycolumn", method = RequestMethod.GET)
+    public String index(Model model) {
+        model.addAttribute("categories", populateCategories());
+        
+        return "web/grid/foreignkeycolumn";
     }
     
-    @RequestMapping(value = "/editing/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/foreignkeycolumn/read", method = RequestMethod.POST)
     public @ResponseBody List<Product> read() {
         return product.getList();
     }
     
-    @RequestMapping(value = "/editing/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/foreignkeycolumn/update", method = RequestMethod.POST)
     public @ResponseBody List<Product> update(@RequestBody ArrayList<Map<String, Object>> models) {
         List<Product> products = new ArrayList<Product>();
         
@@ -53,7 +62,7 @@ public class EditingController {
         return products;
     }
     
-    @RequestMapping(value = "/editing/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/foreignkeycolumn/create", method = RequestMethod.POST)
     public @ResponseBody List<Product> create(@RequestBody ArrayList<Map<String, Object>> models) {
         List<Product> products = new ArrayList<Product>();
         
@@ -62,8 +71,7 @@ public class EditingController {
             
             product.setProductName((String)model.get("productName"));
             product.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
-            product.setUnitsInStock((int)model.get("unitsInStock"));
-            product.setDiscontinued((boolean)model.get("discontinued"));            
+            product.setCategoryId((int)model.get("categoryId"));
             
             products.add(product);
         }
@@ -73,7 +81,7 @@ public class EditingController {
         return products;
     }
     
-    @RequestMapping(value = "/editing/destroy", method = RequestMethod.POST)
+    @RequestMapping(value = "/foreignkeycolumn/destroy", method = RequestMethod.POST)
     public @ResponseBody List<Product> destroy(@RequestBody ArrayList<Map<String, Object>> models) {
         List<Product> products = new ArrayList<Product>();
         
@@ -88,6 +96,18 @@ public class EditingController {
         product.delete(products);
         
         return products;
+    }
+    
+    @SuppressWarnings({ "unchecked", "serial" })
+    private List<?> populateCategories() {
+        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();        
+        for (final Category record : (List<Category>)category.getList()) {
+            result.add(new HashMap<String, Object>() {{
+              put("value", record.getCategoryId());
+              put("text", record.getCategoryName());
+            }});
+        }
+        return result;
     }    
 }
 

@@ -3,14 +3,14 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/editing/create" var="createUrl" />
-<c:url value="/web/grid/editing/read" var="readUrl" />
-<c:url value="/web/grid/editing/update" var="updateUrl" />
-<c:url value="/web/grid/editing/destroy" var="destroyUrl" />
+<c:url value="/web/grid/foreignkeycolumn/create" var="createUrl" />
+<c:url value="/web/grid/foreignkeycolumn/read" var="readUrl" />
+<c:url value="/web/grid/foreignkeycolumn/update" var="updateUrl" />
+<c:url value="/web/grid/foreignkeycolumn/destroy" var="destroyUrl" />
 
 
 <demo:header />
-    <kendo:grid name="grid" pageable="true" sortable="true" scrollable="true" navigatable="true" editable="true">
+    <kendo:grid name="grid" pageable="true" sortable="true" scrollable="true" editable="true">
         <kendo:grid-toolbar>
             <kendo:grid-toolbarItem name="create"/>
             <kendo:grid-toolbarItem name="save"/>
@@ -18,9 +18,10 @@
         </kendo:grid-toolbar>
         <kendo:grid-columns>
             <kendo:grid-column title="Product Name" field="productName" />
+            <kendo:grid-column title="Category" field="categoryId">
+            	<kendo:grid-column-values value="${categories}"/>
+            </kendo:grid-column>
             <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
-            <kendo:grid-column title="Units In Stock" field="unitsInStock" />
-            <kendo:grid-column title="Discontinued" field="discontinued" />
             <kendo:grid-column command="destroy" title="&nbsp;" />
         </kendo:grid-columns>
         <kendo:dataSource pageSize="10" batch="true">
@@ -33,19 +34,17 @@
             <kendo:dataSource-schema>
                 <kendo:dataSource-schema-model id="productId">
                     <kendo:dataSource-schema-model-fields>
+	                    <kendo:dataSource-schema-model-field name="productId" type="number" editable="false" />
                         <kendo:dataSource-schema-model-field name="productName" type="string">
                         	<kendo:dataSource-schema-model-field-validation required="true" />
                         </kendo:dataSource-schema-model-field>
                         <kendo:dataSource-schema-model-field name="unitPrice" type="number">
                         	<kendo:dataSource-schema-model-field-validation required="true" min="1" />
-                        </kendo:dataSource-schema-model-field>
-                        <kendo:dataSource-schema-model-field name="unitsInStock" type="number">
-                        	<kendo:dataSource-schema-model-field-validation required="true" min="0" />
-                        </kendo:dataSource-schema-model-field>
-                        <kendo:dataSource-schema-model-field name="discontinued" type="boolean" />
+                        </kendo:dataSource-schema-model-field>                       
+                        <kendo:dataSource-schema-model-field name="categoryId" defaultValue="1" />
                     </kendo:dataSource-schema-model-fields>
                 </kendo:dataSource-schema-model>
             </kendo:dataSource-schema>
         </kendo:dataSource>
-    </kendo:grid>
+    </kendo:grid> 
 <demo:footer />

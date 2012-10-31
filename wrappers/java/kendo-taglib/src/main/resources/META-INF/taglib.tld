@@ -9494,4 +9494,18 @@ containing one or more fields with the same name as the original input name.</de
 		<tag-class>com.kendoui.taglib.grid.ToolbarTemplateFunctionTag</tag-class>
 		<body-content>JSP</body-content>
 	</tag>
+	
+	<tag>
+		<description>List of possible values which to be matched to the column field value. The matched value will be displayed in the column cell. The items of the list should have value and taxt fields.</description>
+		<name>grid-column-values</name>
+		<tag-class>com.kendoui.taglib.grid.ColumnValuesTag</tag-class>
+		<body-content>empty</body-content>
+		
+		<attribute>
+            <description></description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute> 
+	</tag>
 </taglib>

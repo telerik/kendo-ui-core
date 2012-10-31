@@ -39,6 +39,7 @@ public class EditingInlineController {
         target.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
         target.setUnitsInStock((int)model.get("unitsInStock"));
         target.setDiscontinued((boolean)model.get("discontinued"));
+        target.setCategoryId((int)model.get("categoryId"));
         
         product.saveOrUpdate(target);
         
@@ -52,8 +53,8 @@ public class EditingInlineController {
         target.setProductName((String)model.get("productName"));
         target.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
         target.setUnitsInStock((int)model.get("unitsInStock"));
-        target.setDiscontinued((boolean)model.get("discontinued"));
-            
+        target.setDiscontinued((boolean)model.get("discontinued"));        
+        
         product.saveOrUpdate(target);
         
         return target;

@@ -2,7 +2,6 @@ package com.kendoui.spring.controllers.grid;
 
 import java.util.List;
 
-import org.junit.experimental.categories.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
