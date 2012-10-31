@@ -285,14 +285,6 @@ the dataSource.</description>
         </attribute>
 
         <attribute>
-            <description>The scatter charts Y-axis configuration options.
-See</description>
-            <name>yAxis</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
             <description>Fires when an axis label is clicked.</description>
             <name>axisLabelClick</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2629,20 +2621,6 @@ has been clicked on a window with static content.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Category index at which the first value axis crosses this axis.</description>
-            <name>axisCrossingValue</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>Category indicies at which the value axes cross the category axis.</description>
-            <name>axisCrossingValues</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>Array of category names.</description>
             <name>categories</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2731,7 +2709,7 @@ By default, the minimum date is the same as the last category.
 This is often used in combination with the</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.util.Date</type>
+            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -2740,7 +2718,7 @@ By default, the minimum date is the same as the first category.
 This is often used in combination with the</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.util.Date</type>
+            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -2771,6 +2749,13 @@ either</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Category index at which the first value axis crosses this axis. (Only for object)</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
         </attribute>
 
     </tag>
@@ -3293,10 +3278,65 @@ Includes</description>
         </attribute>
 
         <attribute>
-            <description>Date at which the Y axis crosses this axis.</description>
+            <description>The base time interval for the axis labels.
+The default baseUnit is determined automatically from the value range. Available options:</description>
+            <name>baseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between major divisions in base units.</description>
+            <name>majorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end date of the axis.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The maximum value of the axis.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between minor divisions in base units.
+It defaults to 1/5th of the majorUnit.</description>
+            <name>minorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.util.Date</type>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The axis type.</description>
+        <name>chart-yAxis</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The axis type.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -3319,15 +3359,15 @@ The default baseUnit is determined automatically from the value range. Available
 This is often used in combination with the</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.util.Date</type>
+            <type>Object</type>
         </attribute>
 
         <attribute>
-            <description>The start date of the axis.
+            <description>The maximum value of the axis.
 This is often used in combination with the</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.util.Date</type>
+            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -3338,6 +3378,12 @@ It defaults to 1/5th of the majorUnit.</description>
             <type>float</type>
         </attribute>
 
+        <attribute>
+            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
 
     </tag>
 
@@ -3972,6 +4018,7 @@ Template variables:</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
 
         <attribute>
             <description>Aggregate function for date series.
@@ -5232,6 +5279,29 @@ hex and rgb.</description>
         <description>Label settings specific to the date axis.</description>
         <name>chart-xAxis-labels</name>
         <tag-class>com.kendoui.taglib.chart.XAxisLabelsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Culture to use for formatting the dates. See</description>
+            <name>culture</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Date format strings</description>
+            <name>dateFormats</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Label settings specific to the date axis.</description>
+        <name>chart-yAxis-labels</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisLabelsTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -6904,6 +6974,13 @@ Or template to be used for rendering the toolbar content.</description>
             <name>title</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>An array of values that will be used in a foreign key column. Each item in the array should have a</description>
+            <name>values</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>

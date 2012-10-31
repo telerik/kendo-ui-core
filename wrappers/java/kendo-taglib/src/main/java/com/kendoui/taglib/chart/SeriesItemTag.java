@@ -113,6 +113,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("name", value);
     }
 
+    public Object get() {
+        return (Object)getProperty("");
+    }
+
+    public void set(Object value) {
+        setProperty("", value);
+    }
+
     public String getAggregate() {
         return (String)getProperty("aggregate");
     }

@@ -1,7 +1,10 @@
 
 package com.kendoui.taglib.chart;
 
+
 import com.kendoui.taglib.BaseTag;
+
+
 
 import com.kendoui.taglib.ChartTag;
 
@@ -11,7 +14,7 @@ import com.kendoui.taglib.ChartTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class XAxisTag extends BaseTag /* interfaces *//* interfaces */ {
+public class YAxisTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -21,7 +24,7 @@ public class XAxisTag extends BaseTag /* interfaces *//* interfaces */ {
         ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
 
 
-        parent.setXAxis(this);
+        parent.setYAxis(this);
 
 //<< doEndTag
 
@@ -47,10 +50,10 @@ public class XAxisTag extends BaseTag /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "chart-xAxis";
+        return "chart-yAxis";
     }
 
-    public void setLabels(XAxisLabelsTag value) {
+    public void setLabels(YAxisLabelsTag value) {
         setProperty("labels", value);
     }
 

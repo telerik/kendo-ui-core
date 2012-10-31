@@ -90,6 +90,10 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("xaxis", value);
     }
 
+    public void setYAxis(YAxisTag value) {
+        setProperty("yaxis", value);
+    }
+
     public void setAxisLabelClick(AxisLabelClickFunctionTag value) {
         setEvent("axisLabelClick", value.getBody());
     }
@@ -137,14 +141,6 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setTransitions(boolean value) {
         setProperty("transitions", value);
-    }
-
-    public Object getYAxis() {
-        return (Object)getProperty("yAxis");
-    }
-
-    public void setYAxis(Object value) {
-        setProperty("yAxis", value);
     }
 
     public String getAxisLabelClick() {

@@ -78,22 +78,6 @@ public class CategoryAxisTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("title", value);
     }
 
-    public float getAxisCrossingValue() {
-        return (float)getProperty("axisCrossingValue");
-    }
-
-    public void setAxisCrossingValue(float value) {
-        setProperty("axisCrossingValue", value);
-    }
-
-    public Object getAxisCrossingValues() {
-        return (Object)getProperty("axisCrossingValues");
-    }
-
-    public void setAxisCrossingValues(Object value) {
-        setProperty("axisCrossingValues", value);
-    }
-
     public Object getCategories() {
         return (Object)getProperty("categories");
     }
@@ -182,19 +166,19 @@ public class CategoryAxisTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("baseUnitStep", value);
     }
 
-    public java.util.Date getMax() {
-        return (java.util.Date)getProperty("max");
+    public Object getMax() {
+        return (Object)getProperty("max");
     }
 
-    public void setMax(java.util.Date value) {
+    public void setMax(Object value) {
         setProperty("max", value);
     }
 
-    public java.util.Date getMin() {
-        return (java.util.Date)getProperty("min");
+    public Object getMin() {
+        return (Object)getProperty("min");
     }
 
-    public void setMin(java.util.Date value) {
+    public void setMin(Object value) {
         setProperty("min", value);
     }
 
@@ -228,6 +212,14 @@ public class CategoryAxisTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
+    }
+
+    public Object getAxisCrossingValue() {
+        return (Object)getProperty("axisCrossingValue");
+    }
+
+    public void setAxisCrossingValue(Object value) {
+        setProperty("axisCrossingValue", value);
     }
 
 //<< Attributes
