@@ -12,8 +12,11 @@ import javax.persistence.Table;
 public class Order {
     private int orderId;
     private String customerId;
+    private int employeeId;
     private String shipName;
     private String shipCity;
+    private String shipAddress;
+    private String shipCountry;
     
     @Id
     @Column(name="OrderID")
@@ -35,6 +38,15 @@ public class Order {
         this.customerId = customerId;
     }
     
+    @Column(name="EmployeeID")
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+    
     @Column(name="ShipName")
     public String getShipName() {
         return shipName;
@@ -53,4 +65,21 @@ public class Order {
         this.shipCity = shipCity;
     }
 	
+    @Column(name="ShipCountry")
+    public String getShipCountry() {
+        return shipCountry;
+    }
+
+    public void setShipCountry(String shipCountry) {
+        this.shipCountry = shipCountry;
+    }
+    
+    @Column(name="ShipAddress")
+    public String getShipAddress() {
+        return shipAddress;
+    }
+
+    public void setShipAddress(String shipAddress) {
+        this.shipAddress = shipAddress;
+    }
 }

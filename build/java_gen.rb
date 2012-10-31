@@ -7,7 +7,8 @@ MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md').include('
 
 IGNORED = {
     'chart' => ['axisDefaults'],
-    'window' => ['content.template']
+    'window' => ['content.template'],
+    'grid' => ['detailTemplate']
 }
 
 MD_METADATA_TEMPLATE = ERB.new(%{---
@@ -629,8 +630,9 @@ class Tag
 
         ensure_path(java_filename)
 
+        new_line = RUBY_PLATFORM =~ /w32/ ? "\n" : "\r\n"
         File.open(java_filename, 'w') do |file|
-            file.write(java.gsub(/\r?\n/, "\r\n"))
+            file.write(java.gsub(/\r?\n/, new_line))
         end
 
         @children.each { |child| child.sync_java }
@@ -794,6 +796,12 @@ class Tag
                 end
 
             end
+        end
+
+        if tag.name.downcase == "grid"
+            tag.options.push(Option.new :name => 'detailTemplate',
+                                        :type => 'String',
+                                        :description => "The id of the template used for rendering the detail rows in the grid.")
         end
 
         if tag.has_items?

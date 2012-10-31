@@ -1086,12 +1086,6 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
-            <description>Template to be used for rendering the detail rows in the grid.
-See the</description>
-            <name>detailTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Indicates whether editing is enabled/disabled.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1157,6 +1151,13 @@ See the</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The id of the template used for rendering the detail rows in the grid.</description>
+            <name>detailTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -6782,14 +6783,6 @@ Or template to be used for rendering the toolbar content.</description>
 
 
     <tag>
-        <description>Subscribes to the detailTemplate event of Grid.</description>
-        <name>grid-detailTemplate</name>
-        <tag-class>com.kendoui.taglib.grid.DetailTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
         <description>Subscribes to the rowTemplate event of Grid.</description>
         <name>grid-rowTemplate</name>
         <tag-class>com.kendoui.taglib.grid.RowTemplateFunctionTag</tag-class>
@@ -9508,4 +9501,17 @@ containing one or more fields with the same name as the original input name.</de
             <type>Object</type>
         </attribute> 
 	</tag>
+	
+	<tag>
+        <description>Specifies detail template of the Grid</description>
+        <name>grid-detailTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.DetailTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Template to be used for rendering the detail rows in the grid.</description>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>        
+    </tag>
 </taglib>

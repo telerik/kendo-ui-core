@@ -23,6 +23,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 //>> doEndTag
 //<< doEndTag
 
+        if (properties().containsKey("detailTemplate")) {
+            String template = "kendo.template($(\"#" + getDetailTemplate() + "\").html())";
+            properties().put("detailTemplate", new Function(template));
+        }
         return super.doEndTag();
     }
 
@@ -124,10 +128,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("altRowTemplate", value.getBody());
     }
 
-    public void setDetailTemplate(DetailTemplateFunctionTag value) {
-        setEvent("detailTemplate", value.getBody());
-    }
-
     public void setRowTemplate(RowTemplateFunctionTag value) {
         setEvent("rowTemplate", value.getBody());
     }
@@ -155,18 +155,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
-    }
-
-    public String getDetailTemplate() {
-        Function property = ((Function)getProperty("detailTemplate"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setDetailTemplate(String value) {
-        setProperty("detailTemplate", new Function(value));
     }
 
     public boolean getEditable() {
@@ -251,6 +239,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setSortable(boolean value) {
         setProperty("sortable", value);
+    }
+
+    public String getDetailTemplate() {
+        return (String)getProperty("detailTemplate");
+    }
+
+    public void setDetailTemplate(String value) {
+        setProperty("detailTemplate", value);
     }
 
     public String getChange() {
