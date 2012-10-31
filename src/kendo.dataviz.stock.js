@@ -12,13 +12,17 @@
         Selection = dataviz.Selection,
         duration = dataviz.duration,
         lteDateIndex = dataviz.lteDateIndex,
-        toDate = dataviz.toDate;
+        renderTemplate = dataviz.renderTemplate,
+        toDate = dataviz.toDate,
+        toTime = dataviz.toTime;
 
     // Constants =============================================================
     var AUTO_CATEGORY_WIDTH = 28,
+        CSS_PREFIX = "k-",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
-        MOUSEWHEEL_DELAY = 150;
+        MOUSEWHEEL_DELAY = 150,
+        HINT_DELAY = 1000;
 
     // Stock chart ===========================================================
     var StockChart = Chart.extend({
@@ -139,11 +143,14 @@
             var panes = chart._plotArea.panes;
             var inPane = false;
 
+            /*
             for (var i = 0; i < panes.length - 1; i++) {
                 if (panes[i].box.containsPoint(coords)) {
                     inPane = true;
                 }
             }
+           */
+          inPane = true
 
             if (!inPane) {
                 e.preventDefault();
@@ -194,10 +201,9 @@
                 dataviz.last(navigatorAxis.options.categories)
             ));
 
-            var axisSettings = chart._plotArea.options.categoryAxis[0];
-            axisSettings.min = rangeStart;
-            axisSettings.max = rangeEnd;
-            chart._plotArea.redraw(slavePanes);
+            if (!kendo.support.touch) {
+                this._selection._dragEnd(e);
+            }
 
             var selection = chart._selection;
             selection.setRange(
@@ -212,6 +218,7 @@
         },
 
         _onDragEnd: function(e) {
+            this._selection._dragEnd(e);
             this._suppressHover = false;
         }
     });
@@ -251,8 +258,11 @@
                     min: min,
                     max: max,
                     snap: true,
-                    select: $.proxy(navi.onSelect, navi)
+                    select: $.proxy(navi.onSelect, navi),
+                    change: $.proxy(navi.onChange, navi)
                 });
+
+                navi.hint = new NavigatorHint(chart.element, { min: groups[0], max: dataviz.last(groups) });
             }
 
             $(chart.element).bind("DOMMouseScroll mousewheel", $.proxy(navi.onMousewheel, navi));
@@ -333,9 +343,20 @@
         onSelect: function(e) {
             var navi = this;
 
+            navi.hint.hide();
             navi.readSelection();
             navi.applySelection();
             navi.redrawSlaves();
+        },
+
+        onChange: function(e) {
+            var navi = this,
+                select = navi.options.select,
+                chart = navi.chart,
+                plotArea = chart._plotArea;
+
+            navi.readSelection();
+            navi.hint.show(select.from, select.to, plotArea.backgroundBox());
         },
 
         mainAxis: function() {
@@ -446,6 +467,83 @@
             );
         }
     };
+
+    var NavigatorHint = Class.extend({
+        init: function(container, options) {
+            var hint = this;
+
+            hint.options = deepExtend({}, hint.options, options);
+
+            hint.container = container;
+            hint.chartPadding = {
+                top: parseInt(container.css("paddingTop"), 10),
+                left: parseInt(container.css("paddingLeft"), 10)
+            };
+
+            hint.template = hint.template;
+            if (!hint.template) {
+                hint.template = hint.template = renderTemplate(
+                    "<div class='" + CSS_PREFIX + "navigator-hint' " +
+                    "style='display: none; position: absolute; top: 1px; left: 1px;'>" +
+                        "<div class='" + CSS_PREFIX + "tooltip'>&nbsp;</div>" +
+                        "<div class='" + CSS_PREFIX + "scroll' />" +
+                    "</div>"
+                );
+            }
+
+            hint.element = $(hint.template()).appendTo(container);
+        },
+
+        options: {
+            format: "{0:d} - {1:d}",
+            hideDelay: 1200
+        },
+
+        show: function(from, to, bbox) {
+            var hint = this,
+                middle = toDate(toTime(from) + toTime(to - from) / 2),
+                options = hint.options,
+                text = kendo.format(hint.options.format, from, to),
+                tooltip = hint.element.find("." + CSS_PREFIX + "tooltip"),
+                scroll = hint.element.find("." + CSS_PREFIX + "scroll"),
+                scrollWidth = bbox.width() * 0.4,
+                minPos = bbox.center().x - scrollWidth,
+                maxPos = bbox.center().x,
+                posRange = maxPos - minPos,
+                range = options.max - options.min,
+                scale = posRange / range,
+                offset = middle - options.min;
+
+            if (!hint._visible) {
+                hint.element.css("visibility", "hidden").show();
+                hint._visible = true;
+            }
+
+            tooltip
+                .text(text)
+                .css({
+                    left: bbox.center().x - tooltip.outerWidth() / 2,
+                    top: bbox.y1
+                });
+
+            scroll
+                .css({
+                    width: scrollWidth,
+                    left: minPos + offset * scale,
+                    top: bbox.y1 +
+                         parseInt(tooltip.css("margin-top"), 10) +
+                         parseInt(tooltip.css("border-top-width"), 10) +
+                         tooltip.height() / 2
+                })
+
+            hint.element.stop(false, true).css("visibility", "visible");
+        },
+
+        hide: function() {
+            this._visible = false;
+            this.element.fadeOut("slow");
+        }
+    });
 
     // Exports ================================================================
 

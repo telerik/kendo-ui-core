@@ -45,8 +45,6 @@
         renderTemplate = dataviz.renderTemplate,
         uniqueId = dataviz.uniqueId;
 
-    var CSS_PREFIX = "k-";
-
     // Constants ==============================================================
     var ABOVE = "above",
         AREA = "area",
@@ -68,6 +66,7 @@
         CLIP = dataviz.CLIP,
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
+        CSS_PREFIX = "k-",
         DATABOUND = "dataBound",
         DATE = "date",
         DATE_REGEXP = /^\/Date\((.*?)\)\/$/,
@@ -6527,7 +6526,8 @@
         },
 
         events: [
-            SELECT
+            SELECT,
+            "change"
         ],
 
         options: {
@@ -6567,6 +6567,11 @@
             options.end = math.min(end, options.max);
 
             that.moveSelection();
+
+            that.trigger("change", {
+                start: that.start,
+                end: that.end
+            });
         },
 
         expand: function(delta) {
@@ -6697,6 +6702,11 @@
                 options.max - range);
 
             that.end = math.min(that.start + range, options.max);
+
+            that.trigger("change", {
+                start: that.start,
+                end: that.end
+            });
 
             that.setRange(that.start, that.end);
         }
@@ -7369,6 +7379,7 @@
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
+        axisGroupBox: axisGroupBox,
         validNumbers: validNumbers,
         bindPoint: bindPoint,
         categoriesCount: categoriesCount,
@@ -7376,7 +7387,8 @@
         duration: duration,
         floorDate: floorDate,
         lteDateIndex: lteDateIndex,
-        toDate: toDate
+        toDate: toDate,
+        toTime: toTime
     });
 
 })(jQuery);
