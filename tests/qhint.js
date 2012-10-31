@@ -63,6 +63,8 @@
     // modified version of XHR script by PPK, http://www.quirksmode.org/js/xmlhttp.html
     // attached to qHint to allow substitution / mocking
     qHint.sendRequest = function (url, callback) {
+        if (!/\?/.test(url))
+            url += "?cacheBuster=" + new Date().getTime();
         var req = createXMLHTTPObject();
         if (!req) return;
         var method = "GET";

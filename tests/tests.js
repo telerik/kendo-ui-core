@@ -25,7 +25,8 @@ var fileServer = new static.Server(WEBROOT, {cache: false});
 
 function server_minified(request, response) {
     request.addListener("end", function(){
-        var pathname = decodeURI(url.parse(request.url).pathname);
+        var pathname = request.url.replace(/\?.*$/, "");
+        pathname = decodeURI(url.parse(pathname).pathname);
         pathname = fileServer.resolve(pathname);
         var useOrig = request.headers["x-qhint"];
         if (!useOrig && /(\.js|\.css)$/i.test(pathname)) {
@@ -33,7 +34,6 @@ function server_minified(request, response) {
             fs.exists(minified, function(exists){
                 if (exists)
                     request.url = request.url.replace(/(js|css)$/, "min.$1");
-                //console.log(request.url);
                 fileServer.serve(request, response);
             });
         } else {
