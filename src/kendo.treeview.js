@@ -342,6 +342,7 @@
                 }
             },
             dragAndDrop: false,
+            checkboxes: false,
             autoBind: true,
             loadOnDemand: true,
             template: ""

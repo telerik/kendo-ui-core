@@ -152,6 +152,14 @@
 
                 equal(dom.text(), "bar foo");
             });
+
+            test("enable checkboxes through data attribute", function() {
+                var dom = $('<ul data-role="treeview" data-checkboxes="true"></ul>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoTreeView").options.checkboxes);
+            });
         </script>
 
         <script id="fooTemplate" type="text/x-kendo-template">#:item.text# foo</script>
