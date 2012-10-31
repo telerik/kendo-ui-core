@@ -414,8 +414,8 @@
                 start = {},
                 end = {},
                 target,
-                auxilaries,
-                auxilariesLength;
+                children,
+                childrenLength;
 
             that.effects = effects;
 
@@ -433,10 +433,10 @@
 
                 effect.state(start, end);
 
-                auxilaries = effect.auxilaries();
+                children = effect.children();
 
-                for (jdx = 0, auxilariesLength = auxilaries.length; jdx < auxilariesLength; jdx ++) {
-                    auxilaries[jdx].duration(options.duration).run();
+                for (jdx = 0, childrenLength = children.length; jdx < childrenLength; jdx ++) {
+                    children[jdx].duration(options.duration).run();
                 }
             }
 
@@ -724,8 +724,8 @@
                 start = {},
                 end = {},
                 target,
-                auxilaries = that.auxilaries(),
-                auxilariesLength = auxilaries.length;
+                children = that.children(),
+                childrenLength = children.length;
 
             deferred.then($.proxy(that, "_complete"));
 
@@ -739,8 +739,8 @@
                 }
             }
 
-            for (idx = 0; idx < auxilariesLength; idx ++) {
-                auxilaries[idx].duration(that._duration).run();
+            for (idx = 0; idx < childrenLength; idx ++) {
+                children[idx].duration(that._duration).run();
             }
 
             that.state(start, end);
@@ -809,7 +809,7 @@
         },
         /////////////////////////// TMP
 
-        auxilaries: function() {
+        children: function() {
             return [];
         },
 
@@ -903,20 +903,20 @@
             this.options = { previous: previous };
         },
 
-        auxilaries: function() {
+        children: function() {
             var that = this,
                 tmp,
                 reverse = that._reverse,
                 previous = that.options.previous,
                 dir = that._direction;
 
-            var aux = [ fx(that.element).slideIn(dir).setReverse(reverse) ];
+            var children = [ fx(that.element).slideIn(dir).setReverse(reverse) ];
 
             if (previous) {
-                aux.push( fx(previous).slideIn(directions[dir].reverse).setReverse(!reverse) );
+                children.push( fx(previous).slideIn(directions[dir].reverse).setReverse(!reverse) );
             }
 
-            return aux;
+            return children;
         }
     });
 
@@ -1219,7 +1219,7 @@
     createEffect("pageturn", {
         directions: ["horizontal", "vertical"],
 
-        auxilaries: function() {
+        children: function() {
             var that = this,
                 options = that.options,
                 direction = that._direction === "horizontal" ? "left" : "top",
@@ -1230,11 +1230,11 @@
                 backClone = options.back.clone(true).removeAttr("id"),
                 element = that.element;
 
-                if (reverse) {
-                    temp = direction;
-                    direction = reverseDirection;
-                    reverseDirection = temp;
-                }
+            if (reverse) {
+                temp = direction;
+                direction = reverseDirection;
+                reverseDirection = temp;
+            }
 
             return [
                 fx(options.face).staticPage(direction, element).face(true).setReverse(reverse),
@@ -1257,7 +1257,7 @@
     createEffect("flip", {
         directions: ["horizontal", "vertical"],
 
-        auxilaries: function() {
+        children: function() {
             var that = this,
                 options = that.options,
                 direction = that._direction === "horizontal" ? "left" : "top",
@@ -1266,11 +1266,11 @@
                 temp,
                 element = that.element;
 
-                if (reverse) {
-                    temp = direction;
-                    direction = reverseDirection;
-                    reverseDirection = temp;
-                }
+            if (reverse) {
+                temp = direction;
+                direction = reverseDirection;
+                reverseDirection = temp;
+            }
 
             return [
                 fx(options.face).turningPage(direction, element).face(true).setReverse(reverse),
