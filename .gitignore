@@ -61,6 +61,7 @@ download-builder/service/App_Data
 wrappers/mvc/demos/**/Scripts
 wrappers/mvc/demos/**/Content
 wrappers/mvc/demos/**/App_Data
+wrappers/mvc/legacy-themes/*.min.css
 playground/chart*
 wrappers/java/**/target
 wrappers/java/spring-demos/src/main/webapp/resources

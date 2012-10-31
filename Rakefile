@@ -54,7 +54,7 @@ MVC_CONTENT = {
     'wrappers/aspnetmvc/Examples/Content/shared' => FileList['demos/mvc/content/shared/*'],
     'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
     'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
-    'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
+    'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'].include(LEGACY_MIN_CSS)
 }
 
 JSP_CONTENT = {
@@ -198,7 +198,7 @@ bundle :name => 'cdn.commercial',
        :contents => {
            'js' => COMPLETE_MIN_JS + MVC_MIN_JS,
            'styles' => MIN_CSS_RESOURCES,
-           'styles/telerik' => FileList['wrappers/mvc/legacy-themes/**/*']
+           'styles/telerik' => FileList['wrappers/mvc/legacy-themes/**/*'].include(LEGACY_MIN_CSS)
        }
 
 WIN_JS_RESOURCES = WIN_MIN_JS + WIN_SRC_JS + WIN_SRC_CSS + WIN_MIN_CSS

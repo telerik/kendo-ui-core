@@ -5,6 +5,9 @@ MIN_CSS = FileList['styles/**/kendo*.less']
     .exclude('**/*.min.css')
     .ext('min.css')
     .uniq
+LEGACY_MIN_CSS = FileList['wrappers/mvc/legacy-themes/*.css']
+    .exclude('**/*.min.css')
+    .ext('min.css')
 
 MIN_CSS_RESOURCES = FileList[MIN_CSS].include('styles/*/*/*').exclude('**/*.less').exclude('**/*.winjs.*')
 
@@ -29,6 +32,7 @@ file 'styles/web/kendo.winjs.css' => 'build/css.rb'
 CLEAN.include(MIN_CSS)
     .include('styles/winjs/kendo.winjs.css')
     .include(LESS.ext('css'))
+    .include(LEGACY_MIN_CSS)
 
 def find_less_src(lessfile)
     filename = lessfile.pathmap("%f")
