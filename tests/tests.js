@@ -8,7 +8,8 @@ var http       = require("http"),
     util       = require('util'),
     faye       = require("faye"),
     static     = require("node-static"),
-    builder    = require('xmlbuilder');
+    builder    = require('xmlbuilder'),
+    url        = require("url");
 
 var WEBROOT    = path.join(path.dirname(__filename), ".."),
     PORT       = process.argv[3] || 8880,
@@ -16,11 +17,32 @@ var WEBROOT    = path.join(path.dirname(__filename), ".."),
 
 var fileServer = new static.Server(WEBROOT, {cache: false});
 
-var server = http.createServer(function(request, response) {
-    request.addListener('end', function (argument) {
-        fileServer.serve(request, response);
+// var server = http.createServer(function(request, response) {
+//     request.addListener('end', function (argument) {
+//         fileServer.serve(request, response);
+//     });
+// });
+
+function server_minified(request, response) {
+    request.addListener("end", function(){
+        var pathname = decodeURI(url.parse(request.url).pathname);
+        pathname = fileServer.resolve(pathname);
+        var useOrig = request.headers["x-qhint"];
+        if (!useOrig && /(\.js|\.css)$/i.test(pathname)) {
+            var minified = pathname.replace(/(js|css)$/, "min.$1");
+            fs.exists(minified, function(exists){
+                if (exists)
+                    request.url = request.url.replace(/(js|css)$/, "min.$1");
+                //console.log(request.url);
+                fileServer.serve(request, response);
+            });
+        } else {
+            fileServer.serve(request, response);
+        }
     });
-});
+};
+
+var server = http.createServer(server_minified);
 
 bayeux.attach(server);
 
@@ -30,13 +52,12 @@ var client = bayeux.getClient(), browsers;
 var failures = 0, total = 0;
 
 client.subscribe("/ready", function(agent) {
+    var url = process.argv[2] || 'tests/';
     client.publish('/load', "/" + url);
 });
 
 var doc = builder.create();
 var root = doc.begin('testsuite');
-
-url = process.argv[2] || 'tests/';
 
 client.subscribe('/testDone', function(message) {
   var agent = message.agent.match(/(Firefox|Chrome)\/(\d+)/);
