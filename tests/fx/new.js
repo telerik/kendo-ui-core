@@ -23,8 +23,10 @@ test("Creating effects registers API constructor", 2, function() {
     ok($.isFunction(fx.fooRight));
 });
 
+module("FX integration tests")
+
 function verifyEffect(effectName, before, after, reverse) {
-    var effect = kendo.fx($("<i />"))[effectName]();
+    var effect = kendo.fx($("<div style='width:200px' />"))[effectName]();
     effect.duration(0);
     effect.before = before;
     effect.after = after;
@@ -36,5 +38,12 @@ test("zoom in zooms the element", 2, function() {
     verifyEffect("zoomIn",
         function(element) { equal(element.css("transform"), "scale(0.01)") },
         function(element) { equal(element.css("transform"), "scale(1)") }
+    );
+});
+
+test("slideIn slides the element", 2, function() {
+    verifyEffect("slideInLeft",
+        function(element) { equal(element.css("transform"), "translateX(200px)") },
+        function(element) { equal(element.css("transform"), "translateX(0px)") }
     );
 });
