@@ -48,6 +48,11 @@
     background-position: 0 -258px;
 }
 
+.k-state-highlight > .k-link
+{
+    color: inherit;
+}
+
 /* widget */
 
 .k-block,
