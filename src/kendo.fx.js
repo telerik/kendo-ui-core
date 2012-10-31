@@ -724,19 +724,23 @@
                 start = {},
                 end = {},
                 target,
-                auxilaries,
-                auxilariesLength;
+                auxilaries = that.auxilaries(),
+                auxilariesLength = auxilaries.length;
 
             deferred.then($.proxy(that, "_complete"));
 
             element.data("animating", true);
 
-            for (; idx < length; idx ++) {
+            for (idx = 0; idx < length; idx ++) {
                 value = restore[idx];
 
                 if (!element.data(value)) {
                     element.data(value, element.css(value));
                 }
+            }
+
+            for (idx = 0; idx < auxilariesLength; idx ++) {
+                auxilaries[idx].duration(that._duration).run();
             }
 
             that.state(start, end);
@@ -896,6 +900,11 @@
     createEffect("tile", {
         directions: FOUR_DIRECTIONS,
 
+        init: function(element, direction, previous) {
+            Effect.prototype.init.call(this, element, direction);
+            this.options = { previous: previous };
+        },
+
         auxilaries: function() {
             var that = this,
                 tmp,
@@ -921,7 +930,7 @@
         state: function(start, end) {
             var that = this,
                 opacity = that.element.data("opacity"),
-                out = that.direction === "out" ? that._reverse : !that._reverse,
+                out = that._direction === "out" ? !that._reverse : that._reverse,
                 value = isNaN(opacity) ? 1 : opacity;
 
             start.opacity = end.opacity = 0;

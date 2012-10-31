@@ -47,3 +47,23 @@ test("slideIn slides the element", 2, function() {
         function(element) { equal(element.css("transform"), "translateX(0px)") }
     );
 });
+
+test("tile tiles the element", 2, function() {
+    var foo = $("<div style='width: 200px' />"),
+        bar = $("<div style='width: 200px' />"),
+        effect = kendo.fx(foo).tile("left", bar);
+
+    effect.after = function() {
+        equal(foo.css("transform"), "translateX(0px)")
+        equal(bar.css("transform"), "translateX(-200px)")
+    }
+
+    effect.play();
+});
+
+test("fade in fades the element", 2, function() {
+    verifyEffect("fadeIn",
+        function(element) { equal(element.css("opacity"), "0") },
+        function(element) { equal(element.css("opacity"), "1") }
+    );
+});
