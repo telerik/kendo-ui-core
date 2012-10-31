@@ -761,10 +761,14 @@
 
             element.css(start).css(TRANSFORM); // Nudge
 
+            that.before(element);
+
             that.setup();
 
             element.data("targetTransform", end);
             kendo.fx.animate(element, end, { duration: that._duration, complete: deferred.resolve });
+
+            that.after(element);
         },
 
         restoreCallback: function() {
@@ -793,9 +797,7 @@
             that.teardown();
         },
 
-        /////////////////////////// TMP
-        //
-
+        /////////////////////////// Support for kendo.animate;
         setOptions: function(options) {
             this.options = extend(true, {}, options);
         },
@@ -804,6 +806,11 @@
         auxilaries: function() {
             return [];
         },
+
+
+        // hooks for test purposes only
+        before: $.noop,
+        after: $.noop,
 
         setup: $.noop,
         state: $.noop,
@@ -855,7 +862,12 @@
         });
     }
 
+    var FOUR_DIRECTIONS = ["left", "right", "up", "down"],
+        IN_OUT = ["in", "out"];
+
     createEffect("slideIn", {
+        directions: FOUR_DIRECTIONS,
+
         state: function(start, end) {
             var that = this,
                 tmp,
@@ -882,6 +894,8 @@
     });
 
     createEffect("tile", {
+        directions: FOUR_DIRECTIONS,
+
         auxilaries: function() {
             var that = this,
                 tmp,
@@ -900,6 +914,8 @@
     });
 
     createEffect("fade", {
+        directions: IN_OUT,
+
         restore: [ "opacity" ],
 
         state: function(start, end) {
@@ -918,11 +934,13 @@
     });
 
     createEffect("zoom", {
+        directions: IN_OUT,
+
         restore: [ "scale" ],
 
         state: function(start, end) {
             var that = this,
-                out = that.direction === "out" ? that._reverse : !that._reverse,
+                out = that._direction === "out" ? !that._reverse : that._reverse,
                 scale = that.element.data("scale"),
                 value = isNaN(scale) ? 1 : scale;
 
@@ -975,6 +993,8 @@
     });
 
     createEffect("expand", {
+        directions: ["horizontal", "vertical"],
+
         restore: [ OVERFLOW ],
 
         state: function(start, end) {
@@ -1095,6 +1115,8 @@
     }
 
     createEffect("turningPage", {
+        directions: FOUR_DIRECTIONS,
+
         init: function(element, direction, container) {
             Effect.prototype.init.call(this, element, direction);
             this._container = container;
@@ -1146,6 +1168,8 @@
     });
 
     createEffect("staticPage", {
+        directions: FOUR_DIRECTIONS,
+
         init: function(element, direction, container) {
             Effect.prototype.init.call(this, element, direction);
             this._container = container;
@@ -1177,6 +1201,8 @@
     });
 
     createEffect("pageturn", {
+        directions: ["horizontal", "vertical"],
+
         auxilaries: function() {
             var that = this,
                 options = that.options,
@@ -1213,6 +1239,8 @@
     });
 
     createEffect("flip", {
+        directions: ["horizontal", "vertical"],
+
         auxilaries: function() {
             var that = this,
                 options = that.options,
