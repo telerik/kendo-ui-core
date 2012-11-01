@@ -369,6 +369,7 @@ textarea.k-textbox:hover,
 .k-column-menu .k-sprite
 {
     background-image: url('@{image-folder}/sprite.png');
+    border-color: transparent;
 }
 
 .k-loading,
@@ -493,6 +494,12 @@ textarea.k-textbox:hover,
 .k-state-hover:hover
 {
     .composite-background(@hover-gradient);
+}
+
+.k-tool-icon,
+.k-tool-icon.k-state-hover
+{
+    background-image: url('@{image-folder}/sprite.png');
 }
 
 .k-autocomplete.k-state-active,
