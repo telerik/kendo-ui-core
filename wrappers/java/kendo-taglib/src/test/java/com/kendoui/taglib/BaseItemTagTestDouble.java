@@ -26,4 +26,10 @@ public class BaseItemTagTestDouble extends BaseItemTag {
         return expanded;
     }
 
+    @Override
+    protected String getImageUrl() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
