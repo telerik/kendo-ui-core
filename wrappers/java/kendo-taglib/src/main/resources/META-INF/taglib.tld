@@ -6977,13 +6977,6 @@ Or template to be used for rendering the toolbar content.</description>
         </attribute>
 
         <attribute>
-            <description>An array of values that will be used in a foreign key column. Each item in the array should have a</description>
-            <name>values</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>The width of the column.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>

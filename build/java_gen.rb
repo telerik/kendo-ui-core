@@ -347,6 +347,7 @@ JAVA_NESTED_EVENT_SETTER_TEMPLATE = ERB.new(%{
     }
 })
 
+# Refactoring
 JAVA_ARRAY_SETTER_TEMPLATE = ERB.new(%{
     public void set<%= child.name %>(<%= child.java_type %> value) {
 <% if has_items? %>
@@ -631,8 +632,12 @@ class Tag
         ensure_path(java_filename)
 
         new_line = RUBY_PLATFORM =~ /w32/ ? "\n" : "\r\n"
-        File.open(java_filename, 'w') do |file|
-            file.write(java.gsub(/\r?\n/, new_line))
+
+        # Prevent generation of SeriesTag and SeriesItemTag java classes
+        if java_filename.match(/\s*SeriesTag|SeriesItemTag+\s*/) == nil
+            File.open(java_filename, 'w') do |file|
+                file.write(java.gsub(/\r?\n/, new_line))
+            end
         end
 
         @children.each { |child| child.sync_java }
@@ -762,7 +767,7 @@ class Tag
 
                 next unless type
 
-                name.sub!(/\s*type\s*[=:][^\.]*\.?/, '') # skip exotic documentation like series.type="area".tooltip
+                name.sub!(/\s*type\s*="([^"]*)"/, '\1') # replace series.type="area" with series.type.area
 
                 next if IGNORED[tag.name.downcase] && IGNORED[tag.name.downcase].include?(name)
 
