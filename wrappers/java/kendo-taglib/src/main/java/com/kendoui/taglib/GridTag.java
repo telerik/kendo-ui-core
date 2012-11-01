@@ -108,6 +108,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("dataBound", value.getBody());
     }
 
+    public void setDataBinding(DataBindingFunctionTag value) {
+        setEvent("dataBinding", value.getBody());
+    }
+
     public void setDetailCollapse(DetailCollapseFunctionTag value) {
         setEvent("detailCollapse", value.getBody());
     }
@@ -295,6 +299,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setDataBound(String value) {
         setProperty("dataBound", new Function(value));
+    }
+
+    public String getDataBinding() {
+        Function property = ((Function)getProperty("dataBinding"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDataBinding(String value) {
+        setProperty("dataBinding", new Function(value));
     }
 
     public String getDetailCollapse() {
