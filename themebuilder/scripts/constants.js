@@ -112,23 +112,17 @@
             "@tooltip-border-color":            constant(BORDERCOLOR, ".k-tooltip"),
             "@tooltip-text-color":              constant(COLOR, ".k-tooltip"),
 
-            "@main-border-radius":              constant("border-radius", ".k-button"),
-            "@list-border-radius": {
-                readonly: true,
-                value: "@main-border-radius - 1"
-            },
-            "@inner-border-radius": {
-                readonly: true,
-                value: "@main-border-radius - 2"
-            },
-            "@slider-border-radius":                { readonly: true, value: "13px" },
-            "@draghandle-border-radius":            { readonly: true, value: "7px" },
-            "@draghandle-border-color":             { readonly: true, value: "@widget-border-color" },
-            "@draghandle-background-color":         { readonly: true, value: "@widget-background-color" },
-            "@draghandle-shadow":                   { readonly: true, value: "none" },
-            "@draghandle-hover-border-color":       { readonly: true, value: "@hover-border-color" },
-            "@draghandle-hover-background-color":   { readonly: true, value: "@hover-background-color" },
-            "@draghandle-hover-shadow":             { readonly: true, value: "none" },
+            "@main-border-radius":                constant("border-radius", ".k-button"),
+            "@list-border-radius":                { readonly: true, value: "@main-border-radius - 1" },
+            "@inner-border-radius":               { readonly: true, value: "@main-border-radius - 2" },
+            "@slider-border-radius":              { readonly: true, value: "13px" },
+            "@draghandle-border-radius":          { readonly: true, value: "7px" },
+            "@draghandle-border-color":           { readonly: true, value: "@widget-border-color" },
+            "@draghandle-background-color":       { readonly: true, value: "@widget-background-color" },
+            "@draghandle-shadow":                 { readonly: true, value: "none" },
+            "@draghandle-hover-border-color":     { readonly: true, value: "@hover-border-color" },
+            "@draghandle-hover-background-color": { readonly: true, value: "@hover-background-color" },
+            "@draghandle-hover-shadow":           { readonly: true, value: "none" },
 
             "@default-icon-opacity":            { readonly: true, value: "0.8" },
 
