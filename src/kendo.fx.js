@@ -1026,7 +1026,7 @@
 
             start.overflow = HIDDEN;
 
-            length = options.reset ? realLength || length : length || realLength;
+            length = (options && options.reset) ? realLength || length : length || realLength;
 
             end[property] = (reverse ? 0 : length) + PX;
             start[property] = (reverse ? length : 0) + PX;
@@ -1056,6 +1056,12 @@
      * The math and variables below MAY BE SIMPLIFIED (zeroes removed), but this would make the formula too cryptic.
      */
     createEffect("transfer", {
+        init: function(element, target) {
+            this.element = element;
+            this.options = { target: target };
+            this.restore = [];
+        },
+
         setup: function() {
             this.element.appendTo(document.body);
         },

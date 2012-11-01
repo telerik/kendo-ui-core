@@ -92,3 +92,17 @@ asyncTest("expanding expands the element", 2, function() {
         function(element) { start(); equal(element.css("height"), "200px") }
     );
 });
+
+asyncTest("transfer transfers the element", 2, function() {
+    var foo = $("<div style='width: 200px; height: 200px;' />"),
+        bar = $("<div style='width: 100px; height: 100px; margin-left: 300px; margin-right: 300px;' />").appendTo(document.body),
+        effect = kendo.fx(foo).transfer(bar);
+
+    effect.duration(0);
+
+    effect.run().then(function() {
+        start();
+        equal(foo.css("transform"), "matrix(0.5, 0, 0, 0.5, 0, 0)");
+        equal(foo.css("transformOrigin"), "kur");
+    });
+});
