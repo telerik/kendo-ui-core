@@ -219,8 +219,10 @@
                     var height = -1;
 
                     kendo.fx.createEffect("foo", {
-                        state: function() {
-                            return { start: { height: 0, display: "block" }, end: { height: 100 } };
+                        state: function(start, end) {
+                            start.height = 0;
+                            start.display = "block";
+                            end.height = 100;
                         }
                     });
 

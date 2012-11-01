@@ -300,7 +300,7 @@
                     options
                 );
 
-                stopTransition = function() {
+                var stopTransition = function() {
                    if (timeoutID) {
                        clearTimeout(timeoutID);
                        timeoutID = null;
@@ -308,7 +308,7 @@
                        element.dequeue();
                        options.complete.call(element);
                    }
-                }
+                };
 
                 options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
 
@@ -325,7 +325,7 @@
                     delay = 50;
                 }
 
-                var timeoutID = setTimeout(stopTransition, options.duration + delay);
+                timeoutID = setTimeout(stopTransition, options.duration + delay);
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
@@ -846,10 +846,7 @@
 
     function createEffect(name, definition) {
         var effectClass = Effect.extend(definition),
-            directions = effectClass.prototype.directions,
-            length = directions.length,
-            theDirection,
-            idx;
+            directions = effectClass.prototype.directions;
 
         Effects[name] = effectClass;
 
@@ -905,7 +902,6 @@
 
         children: function() {
             var that = this,
-                tmp,
                 reverse = that._reverse,
                 previous = that.options.previous,
                 dir = that._direction;
@@ -1146,7 +1142,6 @@
 
         state: function(start, end) {
             var that = this,
-                options = that.options,
                 reverse = that._reverse,
                 direction = reverse ? directions[that._direction].reverse : that._direction,
                 rotation = ROTATIONS[direction];
@@ -1206,19 +1201,17 @@
             start.clip = clipInHalf(that._container, direction);
         },
 
-        face: function(value) {
-            this._face = value;
-            return this;
-        },
-
-        teardown: function() {
+        shouldHide: function() {
             var that = this,
                 reverse = that._reverse,
                 face = that._face;
 
-            if ((reverse && !face) || (!reverse && face)) {
-                that.element.hide();
-            }
+            return (reverse && !face) || (!reverse && face);
+        },
+
+        face: function(value) {
+            this._face = value;
+            return this;
         }
     });
 
