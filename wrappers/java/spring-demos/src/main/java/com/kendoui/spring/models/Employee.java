@@ -1,5 +1,7 @@
 package com.kendoui.spring.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ public class Employee {
     private String city;
     private String address;
     private String country;
+    private Date birthDate;    
 
     @Id
     @Column(name="EmployeeID")
@@ -82,4 +85,13 @@ public class Employee {
     public void setCountry(String country) {
         this.country = country;
     }
+    
+    @Column(name="BirthDate")
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }       
 }

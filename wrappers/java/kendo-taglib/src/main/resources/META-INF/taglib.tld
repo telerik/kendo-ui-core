@@ -1087,6 +1087,20 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
+            <description>Indicates whether column reordering is enabled/disable.</description>
+            <name>reorderable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates whether column resizing is enabled/disable.</description>
+            <name>resizable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether grouping is enabled/disabled.</description>
             <name>groupable</name>
             <rtexprvalue>true</rtexprvalue>

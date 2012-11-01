@@ -165,6 +165,22 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("filterable", value);
     }
 
+    public boolean getReorderable() {
+        return (boolean)getProperty("reorderable");
+    }
+
+    public void setReorderable(boolean value) {
+        setProperty("reorderable", value);
+    }
+
+    public boolean getResizable() {
+        return (boolean)getProperty("resizable");
+    }
+
+    public void setResizable(boolean value) {
+        setProperty("resizable", value);
+    }
+
     public boolean getGroupable() {
         return (boolean)getProperty("groupable");
     }
