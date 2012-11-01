@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,9 +17,9 @@ import com.kendoui.spring.models.CategoryDao;
 import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
-@Controller("grid-foreignkeycolumn-controller")
+@Controller("grid-editing-custom-controller")
 @RequestMapping(value="/web/grid/")
-public class ForeignKeyColumnController {
+public class EditingCustomController {
     
     @Autowired
     private ProductDao product;
@@ -28,32 +27,36 @@ public class ForeignKeyColumnController {
     @Autowired 
     private CategoryDao category;
     
-    @RequestMapping(value = "/foreignkeycolumn", method = RequestMethod.GET)
-    public String index(Model model) {
-        model.addAttribute("categories", populateCategories());
-        
-        return "web/grid/foreignkeycolumn";
+    @RequestMapping(value = "/editing-custom", method = RequestMethod.GET)
+    public String index() {
+        return "web/grid/editing-custom";
     }
     
-    @RequestMapping(value = "/foreignkeycolumn/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/editing-custom/read", method = RequestMethod.POST)
     public @ResponseBody List<Product> read() {
         return product.getList();
     }
     
-    @RequestMapping(value = "/foreignkeycolumn/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/editing-custom/update", method = RequestMethod.POST)
     public @ResponseBody List<Product> update(@RequestBody ArrayList<Map<String, Object>> models) {
-        List<Product> products = new ArrayList<Product>();
+        List<Product> products = new ArrayList<Product>();        
         
         for (Map<String, Object> model : models) {
             Product product = new Product();
+            final Map<String, Object> categoryMap = (Map<String, Object>)model.get("category");
+            
+            Category category = new Category() {{
+                setCategoryId((int) categoryMap.get("categoryId"));
+                setCategoryName((String) categoryMap.get("categoryName"));
+            }};          
             
             product.setProductId((int)model.get("productId"));
             product.setProductName((String)model.get("productName"));
             product.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
             product.setUnitsInStock((int)model.get("unitsInStock"));
             product.setDiscontinued((boolean)model.get("discontinued"));
-            product.setCategoryId((int)model.get("categoryId"));
-            
+            product.setCategoryId(category.getCategoryId());
+            product.setCategory(category);
             products.add(product);
         }
         
@@ -62,7 +65,7 @@ public class ForeignKeyColumnController {
         return products;
     }
     
-    @RequestMapping(value = "/foreignkeycolumn/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/editing-custom/create", method = RequestMethod.POST)
     public @ResponseBody List<Product> create(@RequestBody ArrayList<Map<String, Object>> models) {
         List<Product> products = new ArrayList<Product>();
         
@@ -81,7 +84,7 @@ public class ForeignKeyColumnController {
         return products;
     }
     
-    @RequestMapping(value = "/foreignkeycolumn/destroy", method = RequestMethod.POST)
+    @RequestMapping(value = "/editing-custom/destroy", method = RequestMethod.POST)
     public @ResponseBody List<Product> destroy(@RequestBody ArrayList<Map<String, Object>> models) {
         List<Product> products = new ArrayList<Product>();
         
@@ -98,16 +101,10 @@ public class ForeignKeyColumnController {
         return products;
     }
     
-    @SuppressWarnings("serial")
-    private List<?> populateCategories() {
-        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();        
-        for (final Category record : category.getList()) {
-            result.add(new HashMap<String, Object>() {{
-              put("value", record.getCategoryId());
-              put("text", record.getCategoryName());
-            }});
-        }
-        return result;
-    }    
+    @RequestMapping(value = "/editing-custom/categories", method = RequestMethod.GET)
+    public @ResponseBody List<Category> categories() {
+        return category.getList();
+    }   
+        
 }
 

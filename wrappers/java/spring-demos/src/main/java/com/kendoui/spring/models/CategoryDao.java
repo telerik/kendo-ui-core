@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface CategoryDao {
     public DataSourceResult getList(DataSourceRequest request);
-    public List<?> getList();
+    public List<Category> getList();
 }

@@ -19,8 +19,9 @@ public class CategoryDaoImpl implements CategoryDao {
         return request.toDataSourceResult(sessionFactory.getCurrentSession(), Category.class);
     }
     
+    @SuppressWarnings("unchecked")
     @Override
-    public List<?> getList() {    
+    public List<Category> getList() {    
         return sessionFactory.getCurrentSession().createCriteria(Category.class).list();
     }
 }
