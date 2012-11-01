@@ -166,10 +166,21 @@
 
 .km-ios .km-switch
 {
+    width: 4.6rem;
+    height: 1.6rem;
+    line-height: 1.65rem;
+    overflow: hidden;
     font-family: HelveticaNeue, Arial, sans-serif;
 }
 
-.km-ios5 .km-switch-wrapper
+.km-ios4 .km-switch
+{
+    width: 6.4rem;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.km-ios .km-switch-wrapper
 {
     overflow: hidden;
     background-color: #f0f0f0;
@@ -178,41 +189,49 @@
 .km-ios .km-switch-background,
 .km-ios .km-slider-background
 {
-    background: 6.4em 0 no-repeat #3074e7;
+    background: 3.8rem 0 no-repeat #007EE9;
     .linear-gradient-image(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%);
+    margin-left: -3rem;
 }
 
-.km-ios5 .km-switch-background
+.km-ios4 .km-switch-background
 {
-    background-color: #007EE9;
-    background-position: 3.8rem 0;
-    margin-left: ~"-3rem";
+    background-color: #3074e7;
+    background-position: 6.4em 0;
+    margin-left: -6rem;
 }
 
 .km-ios .km-switch-background:after
 {
     content: "\a0";
     display: inline-block;
-    margin: 0;
-    width: 100%;
+    margin: 0 0 0 .3rem;
+    width: 78%;
     height: 50%;
     line-height: 100%;
     vertical-align: bottom;
     .linear-gradient-image(top,  rgba(255,255,255,.14) 0, rgba(255,255,255,.4));
 }
 
-.km-ios5 .km-switch-background:after
+.km-ios4 .km-switch-background:after
 {
-    margin: 0 0 0 .3rem;
-    width: 78%;
+    margin: 0;
+    width: 100%;
+    height: 58%;
 }
 
 .km-ios .km-switch-container
 {
-    padding: 0;
-    border: 1px solid #999;
+    padding: 1px 0 1px 1px;
+    border-width: 0;
     .box-shadow(inset 0 2px 2px 0 rgba(0,0,0,.3));
     .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,0) 95%, rgba(0,0,0,.2));
+}
+
+.km-ios4 .km-switch-container
+{
+    padding: 0;
+    border: 1px solid #999;
 }
 
 .km-ios .km-checkbox
@@ -233,71 +252,89 @@
 
 .km-ios .km-switch-handle
 {
+    width: 1.5rem;
     margin: -1px 1px 0 -1px;
     border: 1px solid #969696;
+    .box-shadow(~"inset 0 0 0 1px #fff");
     .linear-gradient-image(top, rgb(255, 255, 255), rgb(215, 215, 215) 5%, rgb(255, 255, 255));
+}
+
+.km-ios4 .km-switch-handle
+{
+    width: 2.72em;
+    margin: -1px 0 0 -1px;
 }
 
 .km-ios .km-switch-label-off
 {
+    left: 1.4rem;
     color: #7f7f7f;
 }
 
 .km-ios .km-switch-label-on
 {
+    left: ~"-2.9rem";
     color: #fff;
 }
 
-.km-ios5 .km-switch
+.km-ios .km-switch-label-on,
+.km-ios .km-switch-label-off
 {
-    width: 4.6rem;
-    height: 1.6rem;
-    line-height: 1.65rem;
-    overflow: hidden;
+    width: 200%;
+    font-size: 1.05rem;
+    line-height: 1.4em;
+    vertical-align: middle;
 }
 
-.km-ios5 .km-switch-container
+.km-ios4 .km-switch-label-on,
+.km-ios4 .km-switch-label-off
 {
-    padding: 1px 0 1px 1px;
-    border-width: 0;
+    width: 130%;
+    line-height: 1.8em;
 }
 
-.km-ios5 .km-switch-handle
+.km-ios4 .km-switch-label-off
 {
-    width: 1.5rem;
-    margin: -1px 1px 0 -1px;
-    .box-shadow(~"inset 0 0 0 1px #fff");
+    left: 104%;
 }
 
-.km-ios5 .km-switch-handle,
-.km-ios5 .km-switch-wrapper,
-.km-ios5 .km-switch-container,
-.km-ios5 .km-switch-background:after
+.km-ios4 .km-switch-label-on
 {
-    .border-radius(~"1rem");
+    left: -134%;
 }
 
-.km-ios5 .km-switch-background:after
+.km-ios .km-switch-handle,
+.km-ios .km-switch-wrapper,
+.km-ios .km-switch-container,
+.km-ios .km-switch-background
+{
+    .border-radius(1rem);
+}
+
+.km-ios .km-switch-wrapper
+{
+    .border-radius(1.5rem);
+    .box-sizing(border-box);
+    border: 1px solid #f0f0f0;
+    background-clip: content-box;
+}
+
+.km-ios4 .km-switch-handle,
+.km-ios4 .km-switch-wrapper,
+.km-ios4 .km-switch-container,
+.km-ios4 .km-switch-background
+{
+    .border-radius(5px);
+}
+
+.km-ios .km-switch-background:after
 {
     .border-radius(~"1rem 1rem .5rem .5rem");
 }
 
-.km-ios5 .km-switch-label-on,
-.km-ios5 .km-switch-label-off
+.km-ios4 .km-switch-background:after
 {
-    width: 200%;
-    font-size: 1.05rem;
-    line-height: 1.5rem;
-}
-
-.km-ios5 .km-switch-label-off
-{
-    left: 1.4rem;
-}
-
-.km-ios5 .km-switch-label-on
-{
-    left: ~"-2.9rem";
+    .border-radius(none);
 }
 
 .km-ios .km-badge,
@@ -334,9 +371,14 @@
     box-shadow: @detail-active-shadow;
 }
 
-.km-ios5 .km-listview .km-switch
+.km-ios .km-listview .km-switch
 {
-    margin-top: ~"-.85rem";
+    margin-top: -.85rem;
+}
+
+.km-ios4 .km-listview .km-switch
+{
+    margin-top: -1rem;
 }
 
 .km-ios .km-list .km-icon
