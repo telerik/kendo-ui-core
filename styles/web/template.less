@@ -109,16 +109,16 @@
     transform: @arguments;
 }
 
-.theme-background() when (@gradient-stops = none) {
+.composite-background(@gradient) when (@gradient = none) {
     background-image: @texture-url;
 }
 
-.theme-background() when not (@gradient-stops = none) {
+.composite-background(@gradient) when not (@gradient = none) {
     background-image: @texture-url;
-    background-image: @texture-url, -webkit-linear-gradient(top, ~"@{gradient-stops}");
-    background-image: @texture-url,    -moz-linear-gradient(top, ~"@{gradient-stops}");
-    background-image: @texture-url,      -o-linear-gradient(top, ~"@{gradient-stops}");
-    background-image: @texture-url,       ~"linear-gradient(to bottom, @{gradient-stops})";
+    background-image: @texture-url, -webkit-linear-gradient(top, ~"@{gradient}");
+    background-image: @texture-url,    -moz-linear-gradient(top, ~"@{gradient}");
+    background-image: @texture-url,      -o-linear-gradient(top, ~"@{gradient}");
+    background-image: @texture-url,       ~"linear-gradient(to bottom, @{gradient})";
 }
 
 /* main colors */
@@ -294,7 +294,7 @@ textarea.k-textbox:hover,
 .k-state-highlight,
 .k-tabstrip-items .k-item
 {
-    .theme-background();
+    .composite-background(@widget-gradient);
 }
 
 .k-block,
@@ -447,6 +447,12 @@ textarea.k-textbox:hover,
     color: @hover-text-color;
     background-color: @hover-background-color;
     border-color: @hover-border-color;
+}
+
+.k-state-hover,
+.k-state-hover:hover
+{
+    .composite-background(@hover-gradient);
 }
 
 .k-state-hover>.k-link,
