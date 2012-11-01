@@ -1066,11 +1066,6 @@ as a collection of required properties, while the insertHtml  tool requires a co
 
 
         <attribute>
-            <description>Template to be used for rendering the alternate rows in the grid.</description>
-            <name>altRowTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Indicates whether the grid will call read on the DataSource initially.</description>
             <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1150,6 +1145,13 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <attribute>
             <description>The id of the template used for rendering the rows in the grid.</description>
             <name>rowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The id of the template used for rendering the alternate rows in the grid.</description>
+            <name>altRowTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -6842,14 +6844,6 @@ Or template to be used for rendering the toolbar content.</description>
         <description>Subscribes to the saveChanges event of Grid.</description>
         <name>grid-saveChanges</name>
         <tag-class>com.kendoui.taglib.grid.SaveChangesFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the altRowTemplate event of Grid.</description>
-        <name>grid-altRowTemplate</name>
-        <tag-class>com.kendoui.taglib.grid.AltRowTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 

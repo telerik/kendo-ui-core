@@ -20,17 +20,23 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     
     @Override
     public int doEndTag() throws JspException {
+        String template;
 //>> doEndTag
-//<< doEndTag
-
-        if (properties().containsKey("detailTemplate")) {
-            String template = "kendo.template($(\"#" + getDetailTemplate() + "\").html())";
-            properties().put("detailTemplate", new Function(template));
+//<< doEndTag        
+        
+        if (isSet("detailTemplate")) {
+            template = "kendo.template($(\"#" + getDetailTemplate() + "\").html())";
+            setProperty("detailTemplate", new Function(template));
         }
         
-        if (properties().containsKey("rowTemplate")) {
-            String template = "kendo.template($(\"#" + getRowTemplate() + "\").html())";
-            properties().put("rowTemplate", new Function(template));
+        if (isSet("rowTemplate")) {
+            template = "kendo.template($(\"#" + getRowTemplate() + "\").html())";
+            setProperty("rowTemplate", new Function(template));
+        }
+        
+        if (isSet("altRowTemplate")) {
+            template = "kendo.template($(\"#" + getAltRowTemplate() + "\").html())";
+            setProperty("altRowTemplate", new Function(template));
         }
         
         return super.doEndTag();
@@ -128,22 +134,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setSaveChanges(SaveChangesFunctionTag value) {
         setEvent("saveChanges", value.getBody());
-    }
-
-    public void setAltRowTemplate(AltRowTemplateFunctionTag value) {
-        setEvent("altRowTemplate", value.getBody());
-    }
-
-    public String getAltRowTemplate() {
-        Function property = ((Function)getProperty("altRowTemplate"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setAltRowTemplate(String value) {
-        setProperty("altRowTemplate", new Function(value));
     }
 
     public boolean getAutoBind() {
@@ -245,6 +235,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setRowTemplate(String value) {
         setProperty("rowTemplate", value);
+    }
+
+    public String getAltRowTemplate() {
+        return (String)getProperty("altRowTemplate");
+    }
+
+    public void setAltRowTemplate(String value) {
+        setProperty("altRowTemplate", value);
     }
 
     public String getChange() {
