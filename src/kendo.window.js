@@ -462,10 +462,7 @@
                     overlay = that._overlay(false);
 
                     if (showOptions.duration) {
-                        overlay.kendoStop().kendoAnimate({
-                            effects: { fade: { direction: "in", properties: { opacity: 0.5 } } },
-                            duration: showOptions.duration
-                        });
+                        overlay.kendoStop().kendoAnimate({ effects: "fade:in", duration: showOptions.duration });
                     } else {
                         overlay.css("opacity", 0.5).show();
                     }
