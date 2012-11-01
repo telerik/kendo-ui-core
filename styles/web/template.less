@@ -121,6 +121,39 @@
     background-image: @texture-url,       ~"linear-gradient(to bottom, @{gradient})";
 }
 
+.transition(@transition) {
+    -webkit-transition: ~"@{transition}";
+    -moz-transition: ~"@{transition}";
+    -o-transition: ~"@{transition}";
+    transition: ~"@{transition}";
+}
+
+.k-button,
+.k-picker-wrap,
+.k-dropdown-wrap,
+.k-numeric-wrap,
+.k-autocomplete,
+.k-link,
+.k-textbox,
+.k-state-hover,
+.k-splitbar-horizontal-hover,
+.k-splitbar-vertical-hover
+{
+    .transition("background-color .2s ease-in-out, border-color .2s ease-in-out, color .2s ease-in-out");
+}
+
+.k-button:active,
+.k-state-selected
+{
+    .transition("none");
+}
+
+.k-in,
+.k-item
+{
+    border-color: transparent;
+}
+
 /* main colors */
 
 .k-block,
