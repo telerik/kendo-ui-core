@@ -431,7 +431,7 @@
 
                 that.addRestoreProperties(effect.restore);
 
-                effect.state(start, end);
+                effect.prepare(start, end);
 
                 children = effect.children();
 
@@ -743,7 +743,7 @@
                 children[idx].duration(that._duration).run();
             }
 
-            that.state(start, end);
+            that.prepare(start, end);
 
             if (!element.is(":visible")) {
                 extend(start, { display: element.data("olddisplay") || "block" });
@@ -816,7 +816,7 @@
         shouldHide: $.noop,
 
         setup: $.noop,
-        state: $.noop,
+        prepare: $.noop,
         teardown: $.noop,
         directions: [],
 
@@ -867,7 +867,7 @@
     createEffect("slideIn", {
         directions: FOUR_DIRECTIONS,
 
-        state: function(start, end) {
+        prepare: function(start, end) {
             var that = this,
                 tmp,
                 element = that.element,
@@ -925,7 +925,7 @@
            return this._direction === "out" ? !this._reverse : this._reverse;
         },
 
-        state: function(start, end) {
+        prepare: function(start, end) {
             var that = this,
                 opacity = that.element.data("opacity"),
                 out = that.shouldHide(),
@@ -950,7 +950,7 @@
            return this._direction === "out" ? !this._reverse : this._reverse;
         },
 
-        state: function(start, end) {
+        prepare: function(start, end) {
             var that = this,
                 out = that.shouldHide(),
                 scale = that.element.data("scale"),
@@ -967,7 +967,7 @@
     });
 
     createEffect("slideMargin", {
-        state: function(start, end) {
+        prepare: function(start, end) {
             var that = this,
                 element = that.element,
                 options = that.options,
@@ -986,7 +986,7 @@
     });
 
     createEffect("slideTo", {
-        state: function(start, end) {
+        prepare: function(start, end) {
             var that = this,
                 element = that.element,
                 options = that.options,
@@ -1009,7 +1009,7 @@
 
         restore: [ OVERFLOW ],
 
-        state: function(start, end) {
+        prepare: function(start, end) {
             var that = this,
                 element = that.element,
                 options = that.options,
@@ -1062,7 +1062,7 @@
             this.element.appendTo(document.body);
         },
 
-        state: function(start, end) {
+        prepare: function(start, end) {
             var that = this,
                 element = that.element,
                 options = that.options,
@@ -1140,7 +1140,7 @@
             this._container = container;
         },
 
-        state: function(start, end) {
+        prepare: function(start, end) {
             var that = this,
                 reverse = that._reverse,
                 direction = reverse ? directions[that._direction].reverse : that._direction,
@@ -1194,7 +1194,7 @@
 
         restore: ["clip"],
 
-        state: function(start, end) {
+        prepare: function(start, end) {
             var that = this,
                 direction = that._reverse ? directions[that._direction].reverse : that._direction;
 
@@ -1243,7 +1243,7 @@
             ];
         },
 
-        state: function(start, end) {
+        prepare: function(start, end) {
             start[PERSPECTIVE] = 1000;
             start.transformStyle = "preserve-3d";
         },
@@ -1277,7 +1277,7 @@
             ];
         },
 
-        state: function(start, end) {
+        prepare: function(start, end) {
             start[PERSPECTIVE] = 1000;
             start.transformStyle = "preserve-3d";
         }
