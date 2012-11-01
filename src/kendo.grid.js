@@ -739,7 +739,7 @@
                 col;
 
             if (options.resizable) {
-                container = options.scrollable ? that.wrapper.find(".k-grid-header-wrap") : that.wrapper;
+                container = options.scrollable ? that.wrapper.find(".k-grid-header-wrap:first") : that.wrapper;
 
                 that._positionColumnResizeHandle(container);
 
