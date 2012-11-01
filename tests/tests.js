@@ -7,42 +7,15 @@ var http       = require("http"),
     os         = require("os"),
     util       = require('util'),
     faye       = require("faye"),
-    static     = require("node-static"),
     builder    = require('xmlbuilder'),
-    url        = require("url");
+    url        = require("url"),
+    SS         = require("../tests/static-server");
 
 var WEBROOT    = path.join(path.dirname(__filename), ".."),
     PORT       = process.argv[3] || 8880,
     bayeux     = new faye.NodeAdapter({mount: "/faye", timeout: 100000});
 
-var fileServer = new static.Server(WEBROOT, {cache: false});
-
-var server = http.createServer(function(request, response) {
-    request.addListener('end', function (argument) {
-        fileServer.serve(request, response);
-    });
-});
-
-// function server_minified(request, response) {
-//     request.addListener("end", function(){
-//         var pathname = request.url.replace(/\?.*$/, "");
-//         pathname = decodeURI(url.parse(pathname).pathname);
-//         pathname = fileServer.resolve(pathname);
-//         var useOrig = request.headers["x-qhint"];
-//         if (!useOrig && /(\.js|\.css)$/i.test(pathname)) {
-//             var minified = pathname.replace(/(js|css)$/, "min.$1");
-//             fs.exists(minified, function(exists){
-//                 if (exists)
-//                     request.url = request.url.replace(/(js|css)$/, "min.$1");
-//                 fileServer.serve(request, response);
-//             });
-//         } else {
-//             fileServer.serve(request, response);
-//         }
-//     });
-// };
-
-// var server = http.createServer(server_minified);
+var server = http.createServer(SS.make_server(WEBROOT, true));
 
 bayeux.attach(server);
 
