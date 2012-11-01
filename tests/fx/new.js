@@ -26,7 +26,7 @@ test("Creating effects registers API constructor", 2, function() {
 module("FX integration tests")
 
 function verifyEffect(effectName, before, after, reverse) {
-    var effect = kendo.fx($("<div style='width:200px' />"))[effectName]();
+    var effect = kendo.fx($("<div style='width:200px; height: 200px' />"))[effectName]();
     effect.duration(0);
 
     var setup = effect.setup;
@@ -83,5 +83,12 @@ asyncTest("zoom in zooms the element", 2, function() {
     verifyEffect("zoomIn",
         function(element) { equal(element.css("transform"), "scale(0.01)") },
         function(element) { start(); equal(element.css("transform"), "scale(1)") }
+    );
+});
+
+asyncTest("expanding expands the element", 2, function() {
+    verifyEffect("expandVertical",
+        function(element) { equal(element.css("height"), "0px") },
+        function(element) { start(); equal(element.css("height"), "200px") }
     );
 });
