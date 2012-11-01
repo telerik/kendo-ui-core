@@ -6,15 +6,10 @@
 <c:url value="/web/grid/products/" var="transportReadUrl" />
 
 <demo:header />
-    <kendo:grid name="grid" pageable="true" sortable="true" height="400">
+    <kendo:grid name="grid" pageable="true" sortable="true" height="400" rowTemplate="row-template">
         <kendo:grid-columns>
             <kendo:grid-column title="Picture" field="customerId" />
-        </kendo:grid-columns>
-        <kendo:grid-rowTemplate>
-        	<script>
-        		$("#row-template").html()     		
-        	</script>
-        </kendo:grid-rowTemplate>
+        </kendo:grid-columns>        
         <kendo:dataSource data="${customers}" pageSize="10" />        
     </kendo:grid>
     

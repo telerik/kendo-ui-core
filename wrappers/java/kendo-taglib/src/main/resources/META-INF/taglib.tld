@@ -1120,11 +1120,6 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
-            <description>Template to be used for rendering the rows in the grid.</description>
-            <name>rowTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Enable/disable grid scrolling.</description>
             <name>scrollable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1148,6 +1143,13 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <attribute>
             <description>The id of the template used for rendering the detail rows in the grid.</description>
             <name>detailTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The id of the template used for rendering the rows in the grid.</description>
+            <name>rowTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -6853,14 +6855,6 @@ Or template to be used for rendering the toolbar content.</description>
 
 
     <tag>
-        <description>Subscribes to the rowTemplate event of Grid.</description>
-        <name>grid-rowTemplate</name>
-        <tag-class>com.kendoui.taglib.grid.RowTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
         <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
         <name>grid-column</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
@@ -6974,13 +6968,6 @@ Or template to be used for rendering the toolbar content.</description>
             <name>title</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>An array of values that will be used in a foreign key column. Each item in the array should have a</description>
-            <name>values</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>

@@ -27,6 +27,12 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
             String template = "kendo.template($(\"#" + getDetailTemplate() + "\").html())";
             properties().put("detailTemplate", new Function(template));
         }
+        
+        if (properties().containsKey("rowTemplate")) {
+            String template = "kendo.template($(\"#" + getRowTemplate() + "\").html())";
+            properties().put("rowTemplate", new Function(template));
+        }
+        
         return super.doEndTag();
     }
 
@@ -128,10 +134,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("altRowTemplate", value.getBody());
     }
 
-    public void setRowTemplate(RowTemplateFunctionTag value) {
-        setEvent("rowTemplate", value.getBody());
-    }
-
     public String getAltRowTemplate() {
         Function property = ((Function)getProperty("altRowTemplate"));
         if (property != null) {
@@ -205,18 +207,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("pageable", value);
     }
 
-    public String getRowTemplate() {
-        Function property = ((Function)getProperty("rowTemplate"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setRowTemplate(String value) {
-        setProperty("rowTemplate", new Function(value));
-    }
-
     public boolean getScrollable() {
         return (boolean)getProperty("scrollable");
     }
@@ -247,6 +237,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setDetailTemplate(String value) {
         setProperty("detailTemplate", value);
+    }
+
+    public String getRowTemplate() {
+        return (String)getProperty("rowTemplate");
+    }
+
+    public void setRowTemplate(String value) {
+        setProperty("rowTemplate", value);
     }
 
     public String getChange() {

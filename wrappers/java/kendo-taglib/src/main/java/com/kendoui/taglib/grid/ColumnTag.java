@@ -189,14 +189,6 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("title", value);
     }
 
-    public Object getValues() {
-        return (Object)getProperty("values");
-    }
-
-    public void setValues(Object value) {
-        setProperty("values", value);
-    }
-
     public String getWidth() {
         return (String)getProperty("width");
     }

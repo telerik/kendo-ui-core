@@ -8,7 +8,7 @@ MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md').include('
 IGNORED = {
     'chart' => ['axisDefaults'],
     'window' => ['content.template'],
-    'grid' => ['detailTemplate']
+    'grid' => ['detailTemplate', 'rowTemplate']
 }
 
 MD_METADATA_TEMPLATE = ERB.new(%{---
@@ -802,6 +802,10 @@ class Tag
             tag.options.push(Option.new :name => 'detailTemplate',
                                         :type => 'String',
                                         :description => "The id of the template used for rendering the detail rows in the grid.")
+
+            tag.options.push(Option.new :name => 'rowTemplate',
+                                        :type => 'String',
+                                        :description => "The id of the template used for rendering the rows in the grid.")
         end
 
         if tag.has_items?
