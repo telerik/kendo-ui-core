@@ -1,7 +1,6 @@
 package com.kendoui.spring.controllers.grid;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +36,7 @@ public class EditingCustomController {
         return product.getList();
     }
     
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/editing-custom/update", method = RequestMethod.POST)
     public @ResponseBody List<Product> update(@RequestBody ArrayList<Map<String, Object>> models) {
         List<Product> products = new ArrayList<Product>();        
