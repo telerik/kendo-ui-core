@@ -440,8 +440,14 @@
                 }
             }
 
+            // legacy support for options.properties
+            for (var effectName in options.effects) {
+                extend(end, options.effects[effectName].properties);
+            }
+
+            // Show the element initially
             if (!element.is(":visible")) {
-                extend(start, { display: element.data("olddisplay") || "block" }); // Add show to the set
+                extend(start, { display: element.data("olddisplay") || "block" });
             }
 
             if (transforms && !options.reset) {

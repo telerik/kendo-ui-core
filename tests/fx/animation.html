@@ -215,6 +215,34 @@
             });
 
             if (!kendo.support.browser.mozilla) {
+                asyncTest("Passing properties to the effect overrides the end state", 2, function() {
+                    var height = -1;
+
+                    kendo.fx.createEffect("foo", {
+                       prepare: function(start, end) {
+                            start.height = 0;
+                            start.display = "block";
+                            end.height = 100;
+                        }
+                    });
+
+                    span.kendoAnimate({
+                        effects: { foo: { properties: { height: 20 } } },
+
+                        duration: 20,
+
+                        init: function () {
+                            height = span.height();
+                        },
+
+                        complete: function(element) {
+                            equal(height, 0);
+                            equal(span.height(), 20);
+                            start();
+                        }
+                    });
+                });
+
                 asyncTest("animating height from 0 to 100 results in 100px high element", 2, function() {
                     var height = -1;
 
