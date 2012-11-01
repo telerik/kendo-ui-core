@@ -128,7 +128,7 @@
             if (that._animateBackground) {
                 that.background
                     .kendoStop(true, true)
-                    .kendoAnimate({ effects: "slideMargin", offset: distance, reset: true, reverse: !checked, axis: "left", duration: duration, ease: "linear" });
+                    .kendoAnimate({ effects: "slideMargin", offset: distance, reset: true, reverse: !checked, axis: "left", duration: duration });
             }
 
             handle
