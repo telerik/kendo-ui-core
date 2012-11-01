@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Styling playground</title>
+
+        <link rel="stylesheet/less" href="../styles/web/kendo.common.less">
+        <link rel="stylesheet/less" href="../styles/web/kendo.default.less">
+
+        <style>
+            body {
+                font-family: Tahoma,sans-serif;
+            }
+
+            div {
+                width: 100px;
+                height: 100px;
+                font-weight: bold;
+            }
+        </style>
+
+        <style type="text/less">
+            @texture-url: url("../../kendo-demos/src/styles/web/textures/dots8.png");
+            @gradient-stops: "#fcecfc 0%, #f99adb 50%, #fc53c4 51%, #ff7cd8 100%";
+
+            .theme-background() when (@gradient-stops = none) {
+                background-image: @texture-url;
+            }
+
+            .theme-background() when not (@gradient-stops = none) {
+                background-image: @texture-url;
+                background-image: @texture-url, -webkit-linear-gradient(top, ~"@{gradient-stops}");
+                background-image: @texture-url,    -moz-linear-gradient(top, ~"@{gradient-stops}");
+                background-image: @texture-url,      -o-linear-gradient(top, ~"@{gradient-stops}");
+                background-image: @texture-url,         ~"linear-gradient(to bottom, @{gradient-stops})";
+            }
+
+            .texture {
+                .theme-background();
+            }
+
+        </style>
+
+        <script src="../../kendo-demos/content/shared/js/less.js"></script>
+    </head>
+    <body>
+        <div class="texture"></div>
+    </body>
+</html>

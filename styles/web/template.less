@@ -109,6 +109,18 @@
     transform: @arguments;
 }
 
+.theme-background() when (@gradient-stops = none) {
+    background-image: @texture-url;
+}
+
+.theme-background() when not (@gradient-stops = none) {
+    background-image: @texture-url;
+    background-image: @texture-url, -webkit-linear-gradient(top, ~"@{gradient-stops}");
+    background-image: @texture-url,    -moz-linear-gradient(top, ~"@{gradient-stops}");
+    background-image: @texture-url,      -o-linear-gradient(top, ~"@{gradient-stops}");
+    background-image: @texture-url,       ~"linear-gradient(to bottom, @{gradient-stops})";
+}
+
 /* main colors */
 
 .k-block,
@@ -282,7 +294,7 @@ textarea.k-textbox:hover,
 .k-state-highlight,
 .k-tabstrip-items .k-item
 {
-    background-image: @texture-url;
+    .theme-background();
 }
 
 .k-block,

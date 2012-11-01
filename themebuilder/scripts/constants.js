@@ -64,6 +64,8 @@
                 )
             )),
 
+            "@gradient-stops":                  { readonly: true, value: "none" },
+
             "@widget-background-color":         constant(BGCOLOR, ".k-widget"),
             "@widget-border-color":             constant(BORDERCOLOR, ".k-widget"),
             "@widget-text-color":               constant(COLOR, ".k-widget"),
