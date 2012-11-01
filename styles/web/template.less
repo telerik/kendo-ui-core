@@ -59,8 +59,8 @@
 }
 
 .box-shadow(...) {
-    box-shadow: @arguments;
     -webkit-box-shadow: @arguments;
+    box-shadow: @arguments;
 }
 
 .window-shadow(@shadow-color) when not (@shadow-color = transparent) {
@@ -371,14 +371,14 @@ textarea.k-textbox:hover,
 {
     border-color: @draghandle-border-color;
     background-color: @draghandle-background-color;
-    box-shadow: @draghandle-shadow;
+    .box-shadow(@draghandle-shadow);
 }
 
 .k-draghandle:hover
 {
     border-color: @draghandle-hover-border-color;
     background-color: @draghandle-hover-background-color;
-    box-shadow: @draghandle-hover-shadow;
+    .box-shadow(@draghandle-hover-shadow);
 }
 
 /* states */
@@ -449,10 +449,25 @@ textarea.k-textbox:hover,
     border-color: @hover-border-color;
 }
 
+.k-textbox:hover,
+.k-autocomplete.k-state-hover,
+.k-picker-wrap.k-state-hover,
+.k-numeric-wrap.k-state-hover,
+.k-dropdown-wrap.k-state-hover,
 .k-state-hover,
 .k-state-hover:hover
 {
     .composite-background(@hover-gradient);
+}
+
+.k-autocomplete.k-state-active,
+.k-picker-wrap.k-state-active,
+.k-numeric-wrap.k-state-active,
+.k-dropdown-wrap.k-state-active,
+.k-state-active,
+.k-state-active:hover
+{
+    .composite-background(@active-gradient);
 }
 
 .k-state-hover>.k-link,
@@ -595,6 +610,27 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Shadows */
+
+.k-widget
+{
+    .box-shadow(@widget-shadow);
+}
+
+.k-state-hover,
+.k-state-focused
+{
+    .box-shadow(@hover-shadow);
+}
+
+.k-state-selected
+{
+    .box-shadow(@selected-shadow);
+}
+
+.k-state-active
+{
+    .box-shadow(@active-shadow);
+}
 
 .k-popup,
 .k-menu .k-group,

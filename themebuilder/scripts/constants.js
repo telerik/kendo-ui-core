@@ -68,6 +68,7 @@
             "@widget-gradient":                 { readonly: true, value: "none" },
             "@widget-border-color":             constant(BORDERCOLOR, ".k-widget"),
             "@widget-text-color":               constant(COLOR, ".k-widget"),
+            "@widget-shadow":                   { readonly: true, value: "none" },
 
             "@header-background-color":         constant(BGCOLOR, ".k-header"),
             "@header-text-color":               constant(COLOR, ".k-header"),
@@ -89,16 +90,19 @@
             "@hover-border-color":              constant(BORDERCOLOR, ".k-state-hover"),
             "@hover-text-color":                constant(COLOR, ".k-state-hover"),
             "@hover-gradient":                  { readonly: true, value: "none" },
+            "@hover-shadow":                    { readonly: true, value: "none" },
 
             "@selected-background-color":       constant(BGCOLOR, ".k-state-selected"),
             "@selected-border-color":           constant(BORDERCOLOR, ".k-state-selected"),
             "@selected-text-color":             constant(COLOR, ".k-state-selected"),
             "@selected-gradient":               { readonly: true, value: "none" },
+            "@selected-shadow":                 { readonly: true, value: "none" },
 
             "@active-background-color":         constant(BGCOLOR, ".k-state-active"),
             "@active-border-color":             constant(BORDERCOLOR, ".k-state-active"),
             "@active-text-color":               constant(COLOR, ".k-state-active"),
             "@active-gradient":                 { readonly: true, value: "none" },
+            "@active-shadow":                   { readonly: true, value: "none" },
 
             "@error-background-color":          constant(BGCOLOR, ".k-state-error"),
             "@error-border-color":              constant(BORDERCOLOR, ".k-state-error"),
