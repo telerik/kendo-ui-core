@@ -206,7 +206,7 @@
             }
 
             var selection = chart._selection;
-            selection.setRange(
+            selection.set(
                 lteDateIndex(
                     navigatorAxis.options.categories,
                     rangeStart
@@ -281,6 +281,18 @@
             dst.to = groups[src.end];
         },
 
+        indexToDate: function(index) {
+            var navi = this,
+                axis = navi.mainAxis(),
+                groups = axis.options.categories,
+                chart = navi.chart,
+                selection = chart._selection,
+                src = selection.options,
+                dst = navi.options.select;
+
+            return groups[index];
+        },
+
         applySelection: function() {
             var navi = this,
                 select = navi.options.select || {},
@@ -351,12 +363,14 @@
 
         onChange: function(e) {
             var navi = this,
-                select = navi.options.select,
                 chart = navi.chart,
                 plotArea = chart._plotArea;
 
-            navi.readSelection();
-            navi.hint.show(select.from, select.to, plotArea.backgroundBox());
+            navi.hint.show(
+                navi.indexToDate(e.from),
+                navi.indexToDate(e.to),
+                plotArea.backgroundBox()
+            );
         },
 
         mainAxis: function() {

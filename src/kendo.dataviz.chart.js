@@ -6509,19 +6509,21 @@
             that.leftHandle.css("top", (that.selection.height() - that.leftHandle.height()) / 2);
             that.rightHandle.css("top", (that.selection.height() - that.rightHandle.height()) / 2);
 
-            that.setUpDragHandle(that.leftHandle);
-            that.setUpDragHandle(that.rightHandle);
-
-            that.setRange(options.start, options.end);
+            that.move(options.start, options.end);
 
             that.bind(that.events, that.options);
 
-            if (kendo.ui.Draggable) {
-                that.selection.kendoDraggable({
-                    drag: proxy(that.dragSelection, that),
-                    dragstart: proxy(that.dragSelectionStart, that),
-                    dragend: proxy(that._dragEnd, that)
+            if (kendo.UserEvents) {
+                that.userEvents = new kendo.UserEvents(that.wrapper, {
+                    global: true,
+                    threshold: 5,
+                    start: proxy(that._start, that),
+                    move: proxy(that._move, that),
+                    end: proxy(that._end, that),
+                    gesturechange: proxy(that._gesturechange, that)
                 });
+            } else {
+                that.leftHandle.add(that.rightHandle).removeClass(CSS_PREFIX + "handle");
             }
         },
 
@@ -6533,6 +6535,134 @@
         options: {
             min: MIN_VALUE,
             max: MAX_VALUE
+        },
+
+        _start: function(e) {
+            var that = this,
+                options = that.options,
+                target = $(e.event.originalEvent.target);
+
+            //target.css("cursor", "default");
+            that._state = {
+                target: target.parents(".k-handle").add(target).first(),
+                range: {
+                    from: options.start,
+                    to: options.end
+                }
+            };
+        },
+
+        _move: function(e) {
+            var that = this,
+                options = that.options,
+                fullSpan = options.max - options.min,
+                delta = e.x.startLocation - e.x.location,
+                state = that._state,
+                range = state.range,
+                span = range.to - range.from,
+                target = state.target,
+                isSelection = target.is(".k-selection"),
+                scale = that.wrapper.width() / fullSpan,
+                offset = math.round(delta / scale);
+
+            if (target.is(".k-selection")) {
+                range.from = math.min(
+                    math.max(options.min, options.start - offset),
+                    options.max - span
+                );
+                range.to = math.min(
+                    range.from + span,
+                    options.max
+                );
+            } else if (target.is(".k-leftHandle")) {
+                range.from = math.min(
+                    math.max(options.min, options.start - offset),
+                    options.max - 1
+                );
+                range.to = math.max(range.from + 1, range.to);
+            } else if (target.is(".k-rightHandle")) {
+                range.to = math.min(
+                    math.max(options.min + 1, options.end - offset),
+                    options.max
+                );
+                range.from = math.min(range.to - 1, range.from);
+            }
+
+            that.trigger("change", {
+                from: range.from,
+                to: range.to
+            });
+
+            that.move(range.from, range.to);
+        },
+
+        _end: function(e) {
+            var that = this,
+                range = that._state.range;
+
+            that.set(range.from, range.to);
+            //that.dragHandle.css("cursor", "e-resize");
+        },
+
+        _gesturechange: function(e) {
+            console.log("gesturechange", e)
+        },
+
+        move: function(from, to) {
+            var that = this,
+                options = that.options,
+                offset = options.offset,
+                padding = options.padding,
+                border = options.selection.border,
+                categoryAxis = that.categoryAxis,
+                leftMaskWidth,
+                rightMaskWidth,
+                box,
+                distance;
+
+            box = categoryAxis.getSlot(from);
+            leftMaskWidth = round(box.x1 - offset.left + padding.left);
+            that.leftMask.width(leftMaskWidth);
+            that.selection.css("left", leftMaskWidth);
+
+            box = categoryAxis.getSlot(to);
+            rightMaskWidth = round(options.width - (box.x1 - offset.left + padding.left));
+            that.rightMask.width(rightMaskWidth);
+            distance = options.width - rightMaskWidth;
+            if (distance != options.width) {
+                distance += border.right;
+            }
+
+            that.rightMask.css("left", distance);
+            that.selection.width(math.max(
+                options.width - (leftMaskWidth + rightMaskWidth) - border.right,
+                0
+            ));
+        },
+
+        set: function(from, to) {
+            var that = this,
+                options = that.options;
+
+            that.move(from, to);
+
+            options.start = from;
+            options.end = to;
+
+            that.trigger(SELECT, {
+                start: from,
+                end: to
+            });
+        },
+
+        expand: function(delta) {
+            var selection = this,
+                options = selection.options;
+
+            selection.set(
+                math.min(options.start - delta, options.end - 1),
+                math.max(options.end + delta, options.start + 1)
+            );
         },
 
         getValueAxis: function(categoryAxis) {
@@ -6547,168 +6677,6 @@
                     return axis;
                 }
             }
-        },
-
-        setRange: function(start, end) {
-            var that = this,
-                options = that.options,
-                selectionStart = options.start,
-                selectionEnd = options.end;
-
-            if (start === null || !isFinite(start)) {
-                start = selectionStart;
-            }
-
-            if (end === null || !isFinite(end)) {
-                end = selectionEnd;
-            }
-
-            options.start = math.max(options.min, start);
-            options.end = math.min(end, options.max);
-
-            that.moveSelection();
-
-            that.trigger("change", {
-                start: that.start,
-                end: that.end
-            });
-        },
-
-        expand: function(delta) {
-            var selection = this,
-                options = selection.options;
-
-            selection.setRange(
-                math.min(options.start - delta, options.end - 1),
-                math.max(options.end + delta, options.start + 1)
-            );
-        },
-
-        moveSelection: function() {
-            var that = this,
-                options = that.options,
-                offset = options.offset,
-                padding = options.padding,
-                border = options.selection.border,
-                start = options.start,
-                end = options.end,
-                categoryAxis = that.categoryAxis,
-                leftMaskWidth, rightMaskWidth, box,
-                distance;
-
-            box = categoryAxis.getSlot(start);
-            leftMaskWidth = round(box.x1 - offset.left + padding.left);
-            that.leftMask.width(leftMaskWidth);
-            that.selection.css("left", leftMaskWidth);
-
-            box = categoryAxis.getSlot(end);
-            rightMaskWidth = round(options.width - (box.x1 - offset.left + padding.left));
-            that.rightMask.width(rightMaskWidth);
-            distance = options.width - rightMaskWidth;
-            if (distance != options.width) {
-                distance += border.right;
-            }
-            that.rightMask.css("left", distance);
-            that.selection.width(math.max(options.width - (leftMaskWidth + rightMaskWidth) - border.right, 0));
-        },
-
-        setUpDragHandle: function(handle) {
-            var that = this;
-
-            if (kendo.ui.Draggable) {
-                return new kendo.ui.Draggable(handle, {
-                    dragstart: proxy(that.dragStart, that),
-                    drag: proxy(that.drag, that),
-                    dragend: proxy(that.dragEnd, that)
-                });
-            } else {
-                handle.removeClass(CSS_PREFIX + "handle");
-            }
-        },
-
-        dragStart: function(e) {
-            var that = this,
-                options = that.options;
-
-            that.dragHandle = $(e.currentTarget).css("cursor", "default");
-            that.isFirst = that.dragHandle.hasClass(CSS_PREFIX + "leftHandle");
-            that._state = {
-                start: options[that.isFirst ? "start" : "end"]
-            };
-        },
-
-        drag: function(e) {
-            var that = this,
-                options = that.options,
-                delta = e.x.startLocation - e.x.location,
-                fullRange = options.max - options.min,
-                scale = that.wrapper.width() / fullRange,
-                offset = math.round(delta / scale),
-                state = that._state;
-
-            if (that.isFirst) {
-                that.start = math.min(math.max(options.min, state.start - offset), options.max - 1);
-                that.end = math.max(that.start + 1, options.end);
-            } else {
-                that.end = math.min(math.max(options.min + 1, state.start - offset), options.max);
-                that.start = math.min(that.end - 1, options.start);
-            }
-
-            that.setRange(that.start, that.end);
-        },
-
-        dragEnd: function(e) {
-            var that = this;
-            that._dragEnd(that, e);
-            that.dragHandle.css("cursor", "e-resize");
-        },
-
-        _dragEnd: function(e) {
-            var that = this,
-                options = that.options;
-
-            that.trigger(SELECT, {
-                start: options.start,
-                end: options.end
-            });
-        },
-
-        dragSelectionStart: function(e) {
-            var that = this,
-                options = that.options;
-
-            if ($(e.target).is(".k-selection")) {
-                that._dragSelectionState = {
-                    range: options.end - options.start,
-                    start: options.start
-                };
-            } else {
-                e.preventDefault();
-            }
-        },
-
-        dragSelection: function(e) {
-            var that = this,
-                options = that.options,
-                delta = e.x.startLocation - e.x.location,
-                fullRange = options.max - options.min,
-                state = that._dragSelectionState,
-                range = state.range,
-                scale = that.wrapper.width() / fullRange,
-                offset = math.round(delta / scale);
-
-            that.start = math.min(
-                math.max(options.min, state.start - offset),
-                options.max - range);
-
-            that.end = math.min(that.start + range, options.max);
-
-            that.trigger("change", {
-                start: that.start,
-                end: that.end
-            });
-
-            that.setRange(that.start, that.end);
         }
     });
 
