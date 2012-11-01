@@ -9,6 +9,7 @@ import javax.servlet.jsp.JspException;
 
 import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Img;
 import com.kendoui.taglib.html.Li;
 import com.kendoui.taglib.html.Span;
 import com.kendoui.taglib.html.Text;
@@ -21,6 +22,7 @@ public abstract class BaseItemTag extends BaseTag {
     
     protected abstract String getText();
     protected abstract String getSpriteCssClass();
+    protected abstract String getImageUrl();
     protected abstract boolean getExpanded();
     
     @Override
@@ -42,6 +44,16 @@ public abstract class BaseItemTag extends BaseTag {
             Span sprite = new Span();
             sprite.attr("class", "k-sprite " + spriteCssClass);
             element.append(sprite);
+        }
+        
+        String imageUrl = getImageUrl();
+        
+        if (imageUrl != null && imageUrl.trim().length() > 0) {
+            Img image = new Img();
+            image.attr("class", "k-image");
+            image.attr("alt", "");
+            image.attr("src", imageUrl);
+            element.append(image);
         }
 
         element.append(new Text(getText()));

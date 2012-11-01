@@ -823,6 +823,11 @@ class Tag
                                         :parent => tag,
                                         :description => "Specifies the text displayed by the item")
 
+            tag.options.push(Option.new :name => 'items.imageUrl',
+                                        :type => 'String',
+                                        :parent => tag,
+                                        :description => "Specifies the URL of the image displayed by the item")
+
             tag.options.push(Option.new :name => 'items.spriteCssClass',
                                         :type => 'String',
                                         :parent => tag,

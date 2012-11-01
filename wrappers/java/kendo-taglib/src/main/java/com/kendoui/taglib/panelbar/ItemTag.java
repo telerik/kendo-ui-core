@@ -63,6 +63,14 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         setProperty("text", value);
     }
 
+    public String getImageUrl() {
+        return (String)getProperty("imageUrl");
+    }
+
+    public void setImageUrl(String value) {
+        setProperty("imageUrl", value);
+    }
+
     public String getSpriteCssClass() {
         return (String)getProperty("spriteCssClass");
     }
