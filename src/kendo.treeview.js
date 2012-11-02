@@ -164,6 +164,12 @@
             } else {
                 that._attachUids();
             }
+
+            if (options.checkboxes && options.checkboxes.checkChildren) {
+                that.wrapper.find(":checkbox").closest(NODE).each(function(e) {
+                    that._updateIndeterminate($(this));
+                });
+            }
         },
 
         _attachEvents: function() {

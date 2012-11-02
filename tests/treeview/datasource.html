@@ -553,6 +553,22 @@
                 ok(treeviewObject.dataSource.data()[0].checked);
             });
 
+            test("initializing checked nodes sets indeterminate state of parents correctly", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", items: [
+                            { text: "bar" },
+                            { text: "baz", checked: true }
+                        ] }
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                ok(treeview.find(":checkbox").eq(0).prop("indeterminate"));
+            });
+
             test("setDataSource sets new datasource", function() {
                 createTreeView([
                     { text: "foo" }
