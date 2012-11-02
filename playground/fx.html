@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Kendo FX</title>
-        <script src="../src/jquery.min.js"></script>
+        <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.fx.js"></script>
         <style>
@@ -166,7 +166,11 @@
         </div>
 
         <script>
-            $("#slideInPlay").click(function() { $(this).parent().siblings(".anime").kendoAnimate("slideIn:left"); });
+            $("#slideInPlay").click(function() {
+                console.profile();
+                $(this).parent().siblings(".anime").kendoAnimate("slideIn:left");
+                console.profileEnd();
+            });
             $("#slideInReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({ effects: "slideIn:left", reverse: true }); });
 
             $("#tilePlay").click(function() { $("#tileB").kendoAnimate({ effects: "tile:left", previous: $("#tileA") }); });

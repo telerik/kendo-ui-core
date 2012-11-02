@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kendo FX</title>
+        <script src="../src/jquery.min.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <style>
+            .anime, #container div, #flip-container div {
+                width: 150px;
+                height: 150px;
+                background: #e4e4e4;
+                border: 1px solid #999;
+            }
+
+            h2 {
+                color: red;
+            }
+
+            aside {
+                float: right;
+            }
+
+            #container, #flip-container {
+                width: 152px;
+                height: 152px;
+                position: relative;
+            }
+            #container div, #flip-container div {
+                position: absolute;
+            }
+
+            .tile-container {
+                position: relative;
+                height: 152px;
+                width: 152px;
+            }
+
+            #tileA, #tileB {
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div>
+            <aside>
+                <button id="play">Play</button>
+                <button id="reverse">Reverse</button>
+            </aside>
+
+            <div class="anime">Fade and zoom</div>
+            <hr />
+        </div>
+
+        <script>
+            $("#play").click(function() {
+                var fx = kendo.fx($(this).parent().siblings(".anime"));
+
+                var fade = fx.fade("in").duration(1500);
+                var slide = fx.slideIn("left");
+                var zoom = fx.zoom("in");
+
+                fade.add(zoom).add(slide).play();
+            });
+
+            $("#reverse").click(function() {
+                var fx = kendo.fx($(this).parent().siblings(".anime"));
+
+                var fade = fx.fade("in").duration(1500);
+                var slide = fx.slideIn("left");
+                var zoom = fx.zoom("in");
+
+                fade.add(zoom).add(slide);
+
+                fade.reverse();
+
+            });
+        </script>
+    </body>
+</html>
