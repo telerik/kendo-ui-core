@@ -561,6 +561,13 @@
                 ok(!treeview.find("[aria-disabled]").length);
             });
 
+            test("server-rendered checkboxes are moved to k-checkbox container", function() {
+                var dom = $("<ul><li><input type='checkbox' />foo</li></ul>").appendTo("body");
+                dom.kendoTreeView();
+
+                ok(dom.find(".k-checkbox").next().is(".k-in"));
+            });
+
        </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

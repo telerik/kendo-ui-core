@@ -71,6 +71,7 @@
         var wrapper = node.children("div"),
             group = node.children("ul"),
             toggleButton = wrapper.children(".k-icon"),
+            checkbox = node.children(":checkbox"),
             innerWrapper = wrapper.children(".k-in"),
             currentNode, tmp;
 
@@ -87,6 +88,10 @@
         } else if (!group.length || !group.children().length) {
             toggleButton.remove();
             group.remove();
+        }
+
+        if (checkbox.length) {
+            $("<span class='k-checkbox' />").appendTo(wrapper).append(checkbox);
         }
 
         if (!innerWrapper.length) {
