@@ -17,9 +17,15 @@ body:before
     z-index: -1;
 }
 
+.km-icon
+{
+    -webkit-background-clip: text;
+}
+
 .km-icon:after,
 .km-loading:after
 {
+    opacity: 1;
     position: static;
     display: block;
     width: 100%;
@@ -31,12 +37,15 @@ body:before
 
 :-webkit-any(.km-ios):not(.km-android):not(.km-blackberry):not(.km-meego) .km-icon:after
 {
+    background: inherit;
+    background-color: currentcolor;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent;
 }
 
 :-webkit-any(.km-root) .km-pane.km-on-ios.km-ios4 .km-icon:after
 {
+    background-color: none;
     -webkit-text-fill-color: inherit;
 }
 

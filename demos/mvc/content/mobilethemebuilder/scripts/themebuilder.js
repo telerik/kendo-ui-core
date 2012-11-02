@@ -61,17 +61,17 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                 listitemactiveicon: {
                     name: "Active List Icon",
                     selector: ".km-state-active .km-listview-link .km-icon",
-                    whitelist: [ "color" ]
+                    whitelist: [ "color", "background-image" ]
                 },
                 activeicon: {
                     name: "Active Icon",
                     selector: ".km-state-active span.km-icon",
-                    whitelist: [ "color" ]
+                    whitelist: [ "color", "background-image" ]
                 },
                 icon: {
                     name: "Icon",
                     selector: ".km-icon",
-                    whitelist: [ "color", "width", "height" ]
+                    whitelist: [ "color", "background-image", "width", "height" ]
                 },
                 activetext: {
                     name: "Active Text",
