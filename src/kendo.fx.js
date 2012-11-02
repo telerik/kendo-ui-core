@@ -304,8 +304,12 @@
                    if (timeoutID) {
                        clearTimeout(timeoutID);
                        timeoutID = null;
-                       element.css(TRANSITION, "").css(TRANSITION);
-                       element.dequeue();
+                       element
+                           .removeData(ABORT_ID)
+                           .dequeue()
+                           .css(TRANSITION, "")
+                           .css(TRANSITION);
+
                        options.complete.call(element);
                    }
                 };
@@ -326,6 +330,7 @@
                 }
 
                 timeoutID = setTimeout(stopTransition, options.duration + delay);
+                element.data(ABORT_ID, timeoutID);
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
@@ -481,6 +486,10 @@
             return deferred.promise();
         },
 
+        stop: function() {
+            $(this.element).kendoStop();
+        },
+
         addRestoreProperties: function(restore) {
             var element = this.element,
                 value,
@@ -509,9 +518,11 @@
 
         complete: function() {
             var that = this,
+                idx = 0,
                 element = that.element,
                 options = that.options,
-                effects = that.effects;
+                effects = that.effects,
+                length = effects.length;
 
             element
                 .removeData("animating")
@@ -527,9 +538,9 @@
                 setTimeout($.proxy(this, "restoreCallback"), 0); // Again jQuery callback in IE8-
             }
 
-            each(effects, function() {
-                this.teardown();
-            });
+            for (; idx < length; idx ++) {
+                effects[idx].teardown();
+            }
 
             if (options.completeCallback) {
                 options.completeCallback(element);
@@ -539,19 +550,21 @@
 
     kendo.fx.promise = function(element, options) {
         var effects = [],
+            effectClass,
             effectSet = new EffectSet(element, options),
+            parsedEffects = kendo.parseEffects(options.effects),
             effect;
 
-        options.effects = kendo.parseEffects(options.effects);
+        options.effects = parsedEffects;
 
-        each(options.effects, function(effectName, settings) {
-            var effectClass = Effects[effectName];
+        for (var effectName in parsedEffects) {
+            effectClass = Effects[effectName];
 
             if (effectClass) {
-                effect = new effectClass(element, settings.direction);
+                effect = new effectClass(element, parsedEffects[effectName].direction);
                 effects.push(effect);
             }
-        });
+        }
 
         if (effects[0]) {
             effectSet.run(effects);
@@ -730,7 +743,7 @@
         },
 
         compositeRun: function() {
-            var that = this;
+            var that = this,
                 effectSet = new EffectSet(that.element, { reverse: that._reverse, duration: that._duration }),
                 effects = that._additionalEffects.concat([ that ]);
 
@@ -738,7 +751,7 @@
         },
 
         run: function() {
-            if (this._additionalEffects[0]) {
+            if (this._additionalEffects && this._additionalEffects[0]) {
                 return this.compositeRun();
             }
 
@@ -799,6 +812,10 @@
             kendo.fx.animate(element, end, { duration: that._duration, complete: deferred.resolve });
 
             return deferred.promise();
+        },
+
+        stop: function() {
+            $(this.element).kendoStop();
         },
 
         restoreCallback: function() {

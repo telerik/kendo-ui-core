@@ -138,3 +138,18 @@ asyncTest("flip flips the two pages, hiding the first one", 2, function() {
         equal(bar.css("display"), "block");
     });
 });
+
+asyncTest("stopping the effect stops it where it is", 1, function() {
+    var foo = $("<div style='width: 200px'>Foo</div>").appendTo(document.body);
+        effect = kendo.fx(foo).slideIn("left");
+
+    effect.duration(1000);
+
+    effect.run();
+
+    setTimeout(function() {
+        start();
+        effect.stop();
+        equal(foo.offset().left, 100, 80); // it should be 100, or so.
+    }, 500);
+});
