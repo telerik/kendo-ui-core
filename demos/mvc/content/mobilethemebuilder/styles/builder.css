@@ -1391,3 +1391,13 @@ input.k-checkbox
 {
     opacity: 1;
 }
+
+:-webkit-any(.km-blackberry) .km-icon:after
+{
+    background-image: inherit;
+    background-repeat: inherit;
+    background-position: inherit;
+    background-color: currentcolor;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+}
