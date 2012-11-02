@@ -2624,6 +2624,15 @@ function pad(number, digits, end) {
         };
     }
 
+    if (support.mobileOS.android) {
+        EventProxy.eventMap = {
+            down: "touchstart",
+            move: "touchmove",
+            up: "touchend",
+            cancel: "touchcancel"
+        };
+    }
+
     EventProxy.mapEvent = function(e) {
         return EventProxy.eventMap[e] || e;
     };
