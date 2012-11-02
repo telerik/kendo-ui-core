@@ -202,7 +202,7 @@
             ));
 
             if (!kendo.support.touch) {
-                this._selection._dragEnd(e);
+                //this._selection._dragEnd(e);
             }
 
             var selection = chart._selection;
@@ -218,7 +218,7 @@
         },
 
         _onDragEnd: function(e) {
-            this._selection._dragEnd(e);
+            //this._selection._dragEnd(e);
             this._suppressHover = false;
         }
     });
@@ -508,7 +508,7 @@
 
         options: {
             format: "{0:d} - {1:d}",
-            hideDelay: 1200
+            hideDelay: 500
         },
 
         show: function(from, to, bbox) {
@@ -526,10 +526,18 @@
                 scale = posRange / range,
                 offset = middle - options.min;
 
+            if (hint._hideTimeout) {
+                clearTimeout(hint._hideTimeout);
+            }
+
             if (!hint._visible) {
-                hint.element.css("visibility", "hidden").show();
+                hint.element
+                    .stop(false, true)
+                    .css("visibility", "hidden")
+                    .show();
                 hint._visible = true;
             }
+
 
             tooltip
                 .text(text)
@@ -548,12 +556,20 @@
                          tooltip.height() / 2
                 })
 
-            hint.element.stop(false, true).css("visibility", "visible");
+            hint.element.css("visibility", "visible");
         },
 
         hide: function() {
-            this._visible = false;
-            this.element.fadeOut("slow");
+            var hint = this;
+
+            if (hint._hideTimeout) {
+                clearTimeout(hint._hideTimeout);
+            }
+
+            hint._hideTimeout = setTimeout(function() {
+                hint._visible = false;
+                hint.element.fadeOut("slow");
+            }, hint.options.hideDelay);
         }
     });
 

@@ -6519,9 +6519,13 @@
                 that.userEvents = new kendo.UserEvents(that.wrapper, {
                     global: true,
                     threshold: 5,
+                    stopPropagation: true,
+                    multiTouch: true,
                     start: proxy(that._start, that),
                     move: proxy(that._move, that),
                     end: proxy(that._end, that),
+                    tap: proxy(that._tap, that),
+                    gesturestart: proxy(that._gesturechange, that),
                     gesturechange: proxy(that._gesturechange, that)
                 });
             } else {
@@ -6545,9 +6549,13 @@
                 options = that.options,
                 target = $(e.event.originalEvent.target);
 
-            //target.css("cursor", "default");
+            if (that._state) {
+                return;
+            }
+
             that._state = {
-                target: target.parents(".k-handle").add(target).first(),
+                moveTarget: target.parents(".k-handle").add(target).first(),
+                startLocation: e.x.location,
                 range: {
                     from: options.from,
                     to: options.to
@@ -6558,17 +6566,23 @@
         },
 
         _move: function(e) {
+            if (!this._state) {
+                return;
+            }
+
             var that = this,
+                state = that._state,
                 options = that.options,
                 fullSpan = options.max - options.min,
-                delta = e.x.startLocation - e.x.location,
-                state = that._state,
+                delta = state.startLocation - e.x.location,
                 range = state.range,
                 span = range.to - range.from,
-                target = state.target,
+                target = state.moveTarget,
                 isSelection = target.is(".k-selection"),
                 scale = that.wrapper.width() / fullSpan,
                 offset = math.round(delta / scale);
+
+            e.preventDefault();
 
             if (target.is(".k-selection")) {
                 range.from = math.min(
@@ -6605,13 +6619,70 @@
             var that = this,
                 range = that._state.range;
 
+            delete that._state;
             that.set(range.from, range.to);
-            //that.dragHandle.css("cursor", "e-resize");
             that.trigger(SELECT_END);
         },
 
         _gesturechange: function(e) {
-            console.log("gesturechange", e)
+            if (!this._state) {
+                return;
+            }
+
+            var that = this,
+                state = that._state,
+                options = that.options,
+                categoryAxis = that.categoryAxis,
+                range = state.range,
+                p0 = e.touches[0].x.location,
+                p1 = e.touches[1].x.location,
+                left = math.min(p0, p1),
+                right = math.max(p0, p1);
+
+            e.preventDefault();
+            state.moveTarget = null;
+
+            range.from =
+                categoryAxis.getCategoryIndex(new dataviz.Point2D(left)) ||
+                options.min;
+
+            range.to =
+                categoryAxis.getCategoryIndex(new dataviz.Point2D(right)) ||
+                options.max
+
+            that.move(range.from, range.to);
+        },
+
+        _tap: function(e) {
+            var that = this,
+                options = that.options,
+                categoryAxis = that.categoryAxis,
+                categoryIx = categoryAxis.getCategoryIndex(
+                    new dataviz.Point2D(e.x.location, categoryAxis.box.y1)
+                ),
+                span = options.to - options.from,
+                mid = options.from + span / 2,
+                offset = math.round(mid - categoryIx),
+                from,
+                to;
+
+            if (that._state) {
+                return;
+            }
+
+            e.preventDefault();
+
+            from = math.min(
+                math.max(options.min, options.from - offset),
+                options.max - span
+            );
+            to = math.min(
+                from + span,
+                options.max
+            );
+
+            that.set(from, to);
+            that.trigger(SELECT_END);
         },
 
         move: function(from, to) {
