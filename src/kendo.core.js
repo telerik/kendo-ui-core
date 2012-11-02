@@ -1893,12 +1893,16 @@ function pad(number, digits, end) {
     }
 
     function animate(element, options, duration, reverse, complete) {
-        element.each(function(idx, el) { // fire separate queues on every element to separate the callback elements
-            el = $(el);
-            el.queue(function() {
-                fx.promise(el, prepareAnimationOptions(options, duration, reverse, complete));
+        var idx = 0,
+            length = element.length,
+            instance;
+
+        for (; idx < length; idx ++) {
+            instance = $(element[idx]);
+            instance.queue(function() {
+                fx.promise(instance, prepareAnimationOptions(options, duration, reverse, complete));
             });
-        });
+        }
 
         return element;
     }
