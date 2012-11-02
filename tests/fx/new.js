@@ -95,7 +95,7 @@ asyncTest("expanding expands the element", 2, function() {
 
 asyncTest("transfer transfers the element", 3, function() {
     var foo = $("<div style='width: 200px; height: 200px;' />"),
-        bar = $("<div style='width: 100px; height: 100px; margin-left: 300px; margin-right: 300px;' />").appendTo(document.body),
+        bar = $("<div style='width: 100px; height: 100px; margin-left: 300px; margin-right: 300px;' />").prependTo(document.body),
         effect = kendo.fx(foo).transfer(bar);
 
     effect.duration(0);
@@ -105,6 +105,21 @@ asyncTest("transfer transfers the element", 3, function() {
         equal(foo.css("transform"), "matrix(0.5, 0, 0, 0.5, 0, 0)");
         var transformOrigin = foo.css("transformOrigin").match(/(\d+)\.?\d+px/g).map(function(px) { return parseInt(px) });
         equal(transformOrigin[0], 616);
-        equal(transformOrigin[1], 863);
+        equal(transformOrigin[1], 16);
+    });
+});
+
+asyncTest("page turn turns the two pages, hiding the first one", 2, function() {
+    var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        foo = container.find("#foo"),
+        bar = container.find("#bar"),
+        effect = kendo.fx(container).pageturn("horizontal", foo, bar);
+
+    effect.duration(0);
+
+    effect.run().then(function() {
+        start();
+        equal(foo.css("display"), "none");
+        equal(bar.css("display"), "block");
     });
 });

@@ -1224,6 +1224,13 @@
     createEffect("pageturn", {
         directions: ["horizontal", "vertical"],
 
+        init: function(element, direction, face, back) {
+            Effect.prototype.init.call(this, element, direction);
+            this.options = {};
+            this.options.face = face;
+            this.options.back = back;
+        },
+
         children: function() {
             var that = this,
                 options = that.options,
