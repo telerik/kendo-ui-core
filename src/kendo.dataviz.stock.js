@@ -239,27 +239,25 @@
                 select = navi.options.select || {},
                 min = 0,
                 max = groups.length - 1,
-                start = min,
-                end = max;
+                from = min,
+                to = max;
 
             if (groups.length > 0) {
                 if (select.from) {
-                    start = lteDateIndex(groups, toDate(select.from));
+                    from = lteDateIndex(groups, toDate(select.from));
                 }
 
                 if (select.to) {
-                    end = lteDateIndex(groups, toDate(select.to));
+                    to = lteDateIndex(groups, toDate(select.to));
                 }
 
                 var selection = chart._selection = new Selection(chart.element, axis, {
-                    // TODO: Start, end, min, max should be expressed in axis values
-                    start: start,
-                    end: end,
+                    from: from,
+                    to: to,
                     min: min,
                     max: max,
-                    snap: true,
-                    select: $.proxy(navi.onSelect, navi),
-                    change: $.proxy(navi.onChange, navi)
+                    select: $.proxy(navi._select, navi),
+                    selectEnd: $.proxy(navi._selectEnd, navi),
                 });
 
                 navi.hint = new NavigatorHint(chart.element, { min: groups[0], max: dataviz.last(groups) });
@@ -277,8 +275,8 @@
                 src = selection.options,
                 dst = navi.options.select;
 
-            dst.from = groups[src.start];
-            dst.to = groups[src.end];
+            dst.from = groups[src.from];
+            dst.to = groups[src.to];
         },
 
         indexToDate: function(index) {
@@ -352,16 +350,7 @@
             e.preventDefault();
         },
 
-        onSelect: function(e) {
-            var navi = this;
-
-            navi.hint.hide();
-            navi.readSelection();
-            navi.applySelection();
-            navi.redrawSlaves();
-        },
-
-        onChange: function(e) {
+        _select: function(e) {
             var navi = this,
                 chart = navi.chart,
                 plotArea = chart._plotArea;
@@ -371,6 +360,15 @@
                 navi.indexToDate(e.to),
                 plotArea.backgroundBox()
             );
+        },
+
+        _selectEnd: function(e) {
+            var navi = this;
+
+            navi.hint.hide();
+            navi.readSelection();
+            navi.applySelection();
+            navi.redrawSlaves();
         },
 
         mainAxis: function() {

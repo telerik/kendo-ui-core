@@ -106,7 +106,9 @@
         ROUNDED_GLASS = "roundedGlass",
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
+        SELECT_START = "selectStart",
         SELECT = "select",
+        SELECT_END = "selectEnd",
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
         STRING = "string",
@@ -6488,8 +6490,8 @@
                     left: valueAxisLineBox.x2 + padding.left,
                     top: valueAxisLineBox.y1 + padding.right
                 },
-                start: options.min,
-                end: options.max
+                from: options.min,
+                to: options.max
             }, options);
 
             that.wrapper = wrapper = $(that.template(that.options)).appendTo(chartElement);
@@ -6509,7 +6511,7 @@
             that.leftHandle.css("top", (that.selection.height() - that.leftHandle.height()) / 2);
             that.rightHandle.css("top", (that.selection.height() - that.rightHandle.height()) / 2);
 
-            that.move(options.start, options.end);
+            that.move(options.from, options.to);
 
             that.bind(that.events, that.options);
 
@@ -6528,8 +6530,9 @@
         },
 
         events: [
+            SELECT_START,
             SELECT,
-            "change"
+            SELECT_END
         ],
 
         options: {
@@ -6546,10 +6549,12 @@
             that._state = {
                 target: target.parents(".k-handle").add(target).first(),
                 range: {
-                    from: options.start,
-                    to: options.end
+                    from: options.from,
+                    to: options.to
                 }
             };
+
+            that.trigger(SELECT_START);
         },
 
         _move: function(e) {
@@ -6567,7 +6572,7 @@
 
             if (target.is(".k-selection")) {
                 range.from = math.min(
-                    math.max(options.min, options.start - offset),
+                    math.max(options.min, options.from - offset),
                     options.max - span
                 );
                 range.to = math.min(
@@ -6576,24 +6581,24 @@
                 );
             } else if (target.is(".k-leftHandle")) {
                 range.from = math.min(
-                    math.max(options.min, options.start - offset),
+                    math.max(options.min, options.from - offset),
                     options.max - 1
                 );
                 range.to = math.max(range.from + 1, range.to);
             } else if (target.is(".k-rightHandle")) {
                 range.to = math.min(
-                    math.max(options.min + 1, options.end - offset),
+                    math.max(options.min + 1, options.to - offset),
                     options.max
                 );
                 range.from = math.min(range.to - 1, range.from);
             }
 
-            that.trigger("change", {
+            that.move(range.from, range.to);
+
+            that.trigger(SELECT, {
                 from: range.from,
                 to: range.to
             });
-
-            that.move(range.from, range.to);
         },
 
         _end: function(e) {
@@ -6602,6 +6607,7 @@
 
             that.set(range.from, range.to);
             //that.dragHandle.css("cursor", "e-resize");
+            that.trigger(SELECT_END);
         },
 
         _gesturechange: function(e) {
@@ -6646,12 +6652,12 @@
 
             that.move(from, to);
 
-            options.start = from;
-            options.end = to;
+            options.from = from;
+            options.to = to;
 
             that.trigger(SELECT, {
-                start: from,
-                end: to
+                from: from,
+                to: to
             });
         },
 
@@ -6660,8 +6666,8 @@
                 options = selection.options;
 
             selection.set(
-                math.min(options.start - delta, options.end - 1),
-                math.max(options.end + delta, options.start + 1)
+                math.min(options.from - delta, options.to - 1),
+                math.max(options.to + delta, options.from + 1)
             );
         },
 
