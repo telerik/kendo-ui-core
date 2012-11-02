@@ -2,7 +2,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
     (function ($, undefined) {
 
         var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false,
-            originalToggleItemClass, visibleOSes, wasActive, helpRead,
+            originalToggle, visibleOSes, wasActive, helpRead,
             deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
             extend = $.extend, importWindow, exportWindow,
             each = $.each,
@@ -898,16 +898,16 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
             }
         };
 
-        originalToggleItemClass = kendo.mobile.ui.ListView.prototype._toggleItemActiveClass;
+        originalToggle = kendo.mobile.ui.ListView.prototype._toggle;
 
-        kendo.mobile.ui.ListView.prototype._toggleItemActiveClass = function(e) {
-            if ((!dragging && e.type != kendo.support.mousemove) && e.type != kendo.support.mousecancel) {
+        kendo.mobile.ui.ListView.prototype._toggle = function(e) {
+            if ((!dragging && e.type != "mousemove" && e.type != "touchmove") && e.type != kendo.support.mousecancel && e.type != "mouseleave") {
                 if (e.type != kendo.support.mouseup) {
                     wasActive = $(e.currentTarget).closest("li").hasClass("km-state-active");
-                    originalToggleItemClass(e);
+                    originalToggle(e);
                 } else {
                     if (!wasActive) {
-                        originalToggleItemClass(e);
+                        originalToggle(e);
                     }
                 }
             }
