@@ -1,6 +1,6 @@
 /* Platform specific Android 4 CSS */
 
-@android-tabstrip-active-icon-color: #33b5e5;
+@android-active-color: #33b5e5;
 
 .km-android
 {
@@ -379,7 +379,7 @@
 {
     display: table;
     padding: 0;
-    background: @android-tabstrip-active-icon-color;
+    background: @android-active-color;
     background-clip: padding-box;
     border-bottom: 1px solid rgba(255,255,255,.4);
 }
@@ -525,29 +525,33 @@
     margin: 0 1em;
 }
 
-.km-android .km-listview .km-list
-{
-    border-top: 1px solid #333;
-}
-
 .km-android .km-list > li
 {
     font-size: 1.3em;
     font-weight: normal;
     line-height: 2em;
-    border-bottom: 1px solid #404040;
+    -webkit-box-shadow: 0 1px 1px rgba(255,255,255,.1);
+    -moz-box-shadow: 0 -1px 0 rgba(255,255,255,.1);
+    box-shadow: 0 -1px 0 rgba(255,255,255,.1);
     overflow: hidden;
+}
+
+.km-android .km-list
+{
+    margin-bottom: 1em;
 }
 
 .km-android .km-group-title
 {
     margin-top: 0;
-    color: #ccc;
+    color: #777;
     background: transparent;
-    padding: .8em 0 .3em;
+    padding: .8em 0 .5em;
     line-height: inherit;
     text-transform: uppercase;
-    border-bottom: 2px solid rgba(255,255,255,.2);
+    -webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,.3);
+    -moz-box-shadow: inset 0 -1px 0 rgba(255,255,255,.3);
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,.3);
 }
 
 .km-android .km-scroll-header .km-group-title
@@ -638,7 +642,7 @@
 
 .km-android .km-tabstrip .km-state-active .km-icon
 {
-    color: @android-tabstrip-active-icon-color;
+    color: @android-active-color;
 }
 
 /* Pull To Refresh */
