@@ -376,6 +376,22 @@
                 equal(items.eq(1).attr(kendo.attr("uid")), view[1].uid);
             });
 
+            test("uid is set to item wrapper on dataSource change", function() {
+                var listView =  setup({
+                        dataSource: {
+                            data: [{ foo: 1 }, { foo: 2 }]
+                        }
+                    }).data("kendoListView");
+
+                listView.dataSource.view()[0].set("foo", 3);
+
+                var view = listView.dataSource.view(),
+                    items = listView.items();
+
+                equal(items.eq(0).attr(kendo.attr("uid")), view[0].uid);
+                equal(items.eq(1).attr(kendo.attr("uid")), view[1].uid);
+            });
+
         </script>
     </body>
 </html>
