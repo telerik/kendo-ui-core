@@ -178,6 +178,12 @@
                 that._attachUids();
             }
 
+            if (options.checkboxes && options.checkboxes.checkChildren) {
+                that.wrapper.find(":checkbox").closest(NODE).each(function(e) {
+                    that._updateIndeterminate($(this));
+                });
+            }
+
             if (that.element[0].id) {
                 that._ariaId = kendo.format("{0}_tv_active", that.element[0].id);
             }
