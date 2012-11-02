@@ -3,6 +3,10 @@ package com.kendoui.taglib.treeview;
 
 
 import com.kendoui.taglib.BaseItemTag;
+import com.kendoui.taglib.TreeViewTag;
+import com.kendoui.taglib.html.Input;
+import com.kendoui.taglib.html.Li;
+import com.kendoui.taglib.html.Span;
 
 
 
@@ -10,6 +14,7 @@ import com.kendoui.taglib.BaseItemTag;
 
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.Tag;
 
 @SuppressWarnings("serial")
 public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* interfaces */ {
@@ -26,12 +31,11 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
 
         return super.doEndTag();
     }
-
+    
     @Override
     public void initialize() {
 //>> initialize
 //<< initialize
-
         super.initialize();
     }
 
@@ -41,6 +45,34 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
 //<< destroy
 
         super.destroy();
+    }
+    
+    private boolean rendersCheckboxes() {
+        Tag parent = this.getParent();
+        
+        while (parent.getClass() != TreeViewTag.class) {
+            parent = parent.getParent();
+        }
+        
+        Object checkboxes = ((TreeViewTag)parent).getProperty("checkboxes");
+        
+        if (checkboxes.getClass() == boolean.class) {
+            return (boolean)checkboxes;
+        } else {
+            return true;
+        }
+    }
+    
+    @Override
+    protected void renderContents(Li element) {
+        
+        if (this.rendersCheckboxes()) {
+            Input checkbox = new Input();
+            checkbox.attr("type", "checkbox");            
+            element.append(checkbox);
+        }
+        
+        super.renderContents(element);
     }
 
 //>> Attributes
