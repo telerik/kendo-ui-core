@@ -151,7 +151,7 @@
                     idx = $.inArray(data, view);
 
                     if (idx >= 0) {
-                        item = $(template(data));
+                        item = $(template(data)).attr(kendo.attr("uid"), data.uid);
                         that.items().eq(idx).replaceWith(item);
 
                         that.trigger("itemChange", {
