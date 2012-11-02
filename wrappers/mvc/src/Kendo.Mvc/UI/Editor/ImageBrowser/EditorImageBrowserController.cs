@@ -181,9 +181,9 @@ namespace Kendo.Mvc.UI
                 else 
                 {
                     DeleteDirectory(path);
-                }                                
+                }
 
-                return Content("");
+                return Json(null);
             }
             throw new HttpException(404, "File Not Found");
         }
@@ -271,7 +271,7 @@ namespace Kendo.Mvc.UI
                     Directory.CreateDirectory(physicalPath);
                 }
 
-                return Content("");
+                return Json(entry);
             }
 
             throw new HttpException(403, "Forbidden");

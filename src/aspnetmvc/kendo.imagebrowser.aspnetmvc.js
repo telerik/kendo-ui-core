@@ -13,8 +13,8 @@
                 model: {
                     id: "Name",
                     fields: {
-                        name: "Name",
-                        size: "Size",
+                        name: { field: "Name" },
+                        size: { field: "Size" },
                         type: { field: "EntryType", parse: function(value) {  return value == 0 ? "f" : "d" } }
                     }
                 }

@@ -161,7 +161,7 @@ namespace KendoCRUDService.Controllers
                     DeleteDirectory(path);
                 }
 
-                return Content("");
+                return Json(null);
             }
             throw new HttpException(404, "File Not Found");
         }
@@ -226,7 +226,7 @@ namespace KendoCRUDService.Controllers
                     Directory.CreateDirectory(physicalPath);
                 }
 
-                return Content("");
+                return Json(null);
             }
 
             throw new HttpException(403, "Forbidden");
