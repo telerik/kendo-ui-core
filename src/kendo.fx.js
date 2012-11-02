@@ -403,7 +403,7 @@
             that.restore = [];
         },
 
-        play: function(effects) {
+        run: function(effects) {
             var that = this,
                 effect,
                 idx, jdx,
@@ -471,10 +471,14 @@
                 effects[idx].setup();
             }
 
-            options.init();
+            if (options.init) {
+                options.init();
+            }
 
             element.data("targetTransform", end);
             kendo.fx.animate(element, end, extend({}, options, { complete: deferred.resolve }));
+
+            return deferred.promise();
         },
 
         addRestoreProperties: function(restore) {
@@ -550,7 +554,7 @@
         });
 
         if (effects[0]) {
-            effectSet.play(effects);
+            effectSet.run(effects);
         } else { // Not sure how would an fx promise reach this state - means that you call kendoAnimate with no valid effects? Why?
             options.init();
             effectSet.complete();
@@ -703,6 +707,7 @@
             var that = this;
             that.element = element;
             that._direction = direction;
+            that._additionalEffects = [];
 
             if (!that.restore) {
                 that.restore = [];
@@ -719,7 +724,24 @@
             return this.run();
         },
 
+        add: function(additional) {
+            this._additionalEffects.push(additional);
+            return this;
+        },
+
+        compositeRun: function() {
+            var that = this;
+                effectSet = new EffectSet(that.element, { reverse: that._reverse, duration: that._duration }),
+                effects = that._additionalEffects.concat([ that ]);
+
+            return effectSet.run(effects);
+        },
+
         run: function() {
+            if (this._additionalEffects[0]) {
+                return this.compositeRun();
+            }
+
             var that = this,
                 element = that.element,
                 idx = 0,
