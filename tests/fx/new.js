@@ -123,3 +123,18 @@ asyncTest("page turn turns the two pages, hiding the first one", 2, function() {
         equal(bar.css("display"), "block");
     });
 });
+
+asyncTest("flip flips the two pages, hiding the first one", 2, function() {
+    var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        foo = container.find("#foo"),
+        bar = container.find("#bar"),
+        effect = kendo.fx(container).flip("horizontal", foo, bar);
+
+    effect.duration(0);
+
+    effect.run().then(function() {
+        start();
+        equal(foo.css("display"), "none");
+        equal(bar.css("display"), "block");
+    });
+});

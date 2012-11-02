@@ -1173,6 +1173,14 @@
             return this;
         },
 
+        shouldHide: function() {
+            var that = this,
+                reverse = that._reverse,
+                face = that._face;
+
+            return (reverse && !face) || (!reverse && face);
+        },
+
         clipInHalf: function(value) {
             this._clipInHalf = value;
             return this;
@@ -1268,6 +1276,13 @@
 
     createEffect("flip", {
         directions: ["horizontal", "vertical"],
+
+        init: function(element, direction, face, back) {
+            Effect.prototype.init.call(this, element, direction);
+            this.options = {};
+            this.options.face = face;
+            this.options.back = back;
+        },
 
         children: function() {
             var that = this,
