@@ -687,9 +687,11 @@
 
             that.thead.on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
                  var th = $(this),
+                    clientX = e.clientX,
+                    winScrollLeft = $(window).scrollLeft(),
                     position = th.offset().left + (!isRtl ? this.offsetWidth : 0);
 
-                if(e.clientX > position - indicatorWidth &&  e.clientX < position + indicatorWidth) {
+                if(clientX + winScrollLeft > position - indicatorWidth &&  clientX + winScrollLeft < position + indicatorWidth) {
                     if (!resizeHandle) {
                         resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"/>');
                         container.append(resizeHandle);
