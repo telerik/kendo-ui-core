@@ -1154,6 +1154,10 @@
         if (depth === undefined || depth > start) {
             options.depth = MONTH;
         }
+
+        if (!options.dates) {
+            options.dates = [];
+        }
     }
 
     function makeUnselectable(element) {

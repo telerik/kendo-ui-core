@@ -106,6 +106,7 @@
                         .bind(CHANGE, options);
 
                 calendar.month = that.month;
+                calendar.options.dates = options.dates;
                 calendar.options.depth = options.depth;
                 calendar.options.culture = options.culture;
 
@@ -346,6 +347,7 @@
             depth: MONTH,
             animation: {},
             month : {},
+            dates: [],
             ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "D")#'
         },
 

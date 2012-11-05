@@ -322,6 +322,17 @@
                 });
             }
 
+            test("DatePicker sets dates property of the calendar", function() {
+                var dates =  [new Date(2000, 10, 10)],
+                    datepicker = input.kendoDatePicker({
+                        dates: dates
+                    }).data("kendoDatePicker");
+
+                datepicker.open();
+
+                ok(datepicker.dateView.calendar.options.dates[0]);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
