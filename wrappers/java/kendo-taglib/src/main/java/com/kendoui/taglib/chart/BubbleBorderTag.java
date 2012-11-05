@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class BubbleBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ScatterLineMarkersTag parent = (ScatterLineMarkersTag)findParentWithClass(ScatterLineMarkersTag.class);
+        SeriesBubbleTag parent = (SeriesBubbleTag)findParentWithClass(SeriesBubbleTag.class);
 
 
         parent.setBorder(this);
@@ -48,7 +48,7 @@ public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-scatterLine-markers-border";
+        return "chart-series-bubble-border";
     }
 
     public String getColor() {

@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class DonutConnectorsTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ScatterLineMarkersTag parent = (ScatterLineMarkersTag)findParentWithClass(ScatterLineMarkersTag.class);
+        SeriesDonutTag parent = (SeriesDonutTag)findParentWithClass(SeriesDonutTag.class);
 
 
-        parent.setBorder(this);
+        parent.setConnectors(this);
 
 //<< doEndTag
 
@@ -48,7 +48,7 @@ public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-scatterLine-markers-border";
+        return "chart-series-donut-connectors";
     }
 
     public String getColor() {
@@ -57,6 +57,14 @@ public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 
     public void setColor(String value) {
         setProperty("color", value);
+    }
+
+    public float getPadding() {
+        return (float)getProperty("padding");
+    }
+
+    public void setPadding(float value) {
+        setProperty("padding", value);
     }
 
     public float getWidth() {

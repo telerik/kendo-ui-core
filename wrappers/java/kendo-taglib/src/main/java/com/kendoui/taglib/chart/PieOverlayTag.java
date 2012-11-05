@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class PieOverlayTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ScatterLineMarkersTag parent = (ScatterLineMarkersTag)findParentWithClass(ScatterLineMarkersTag.class);
+        SeriesPieTag parent = (SeriesPieTag)findParentWithClass(SeriesPieTag.class);
 
 
-        parent.setBorder(this);
+        parent.setOverlay(this);
 
 //<< doEndTag
 
@@ -48,23 +48,15 @@ public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-scatterLine-markers-border";
+        return "chart-series-pie-overlay";
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public String getGradient() {
+        return (String)getProperty("gradient");
     }
 
-    public void setColor(String value) {
-        setProperty("color", value);
-    }
-
-    public float getWidth() {
-        return (float)getProperty("width");
-    }
-
-    public void setWidth(float value) {
-        setProperty("width", value);
+    public void setGradient(String value) {
+        setProperty("gradient", value);
     }
 
 //<< Attributes

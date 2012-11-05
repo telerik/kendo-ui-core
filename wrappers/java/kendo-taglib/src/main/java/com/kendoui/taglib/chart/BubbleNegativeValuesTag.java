@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class BubbleNegativeValuesTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ScatterLineMarkersTag parent = (ScatterLineMarkersTag)findParentWithClass(ScatterLineMarkersTag.class);
+        SeriesBubbleTag parent = (SeriesBubbleTag)findParentWithClass(SeriesBubbleTag.class);
 
 
-        parent.setBorder(this);
+        parent.setNegativeValues(this);
 
 //<< doEndTag
 
@@ -48,7 +48,7 @@ public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-scatterLine-markers-border";
+        return "chart-series-bubble-negativeValues";
     }
 
     public String getColor() {
@@ -59,12 +59,12 @@ public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("color", value);
     }
 
-    public float getWidth() {
-        return (float)getProperty("width");
+    public boolean getVisible() {
+        return (boolean)getProperty("visible");
     }
 
-    public void setWidth(float value) {
-        setProperty("width", value);
+    public void setVisible(boolean value) {
+        setProperty("visible", value);
     }
 
 //<< Attributes

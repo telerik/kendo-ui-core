@@ -12,17 +12,15 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+        SeriesTag parent = (SeriesTag)findParentWithClass(SeriesTag.class);
 
-        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
-
-
-        parent.setLine(this);
+        parent.addArea(this);
 
 //<< doEndTag
 
@@ -48,18 +46,22 @@ public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces *
 //>> Attributes
 
     public static String tagName() {
-        return "chart-seriesItem-line";
+        return "chart-series-area";
     }
 
-    public void setLabels(LineLabelsTag value) {
+    public void setLabels(AreaLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setMarkers(LineMarkersTag value) {
+    public void setLine(AreaLineTag value) {
+        setProperty("line", value);
+    }
+
+    public void setMarkers(AreaMarkersTag value) {
         setProperty("markers", value);
     }
 
-    public void setTooltip(LineTooltipTag value) {
+    public void setTooltip(AreaTooltipTag value) {
         setProperty("tooltip", value);
     }
 
@@ -71,14 +73,6 @@ public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces *
         setProperty("aggregate", value);
     }
 
-    public String getAxis() {
-        return (String)getProperty("axis");
-    }
-
-    public void setAxis(String value) {
-        setProperty("axis", value);
-    }
-
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -87,12 +81,12 @@ public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces *
         setProperty("color", value);
     }
 
-    public String getDashType() {
-        return (String)getProperty("dashType");
+    public String getLine() {
+        return (String)getProperty("line");
     }
 
-    public void setDashType(String value) {
-        setProperty("dashType", value);
+    public void setLine(String value) {
+        setProperty("line", value);
     }
 
     public String getMissingValues() {
@@ -125,14 +119,6 @@ public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces *
 
     public void setStack(boolean value) {
         setProperty("stack", value);
-    }
-
-    public String getWidth() {
-        return (String)getProperty("width");
-    }
-
-    public void setWidth(String value) {
-        setProperty("width", value);
     }
 
 //<< Attributes
