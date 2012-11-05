@@ -31,9 +31,9 @@ public class SeriesDonutTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void initialize() {
 //>> initialize
 //<< initialize
-        setProperty("type", "donut");
         
         super.initialize();
+        setProperty("type", "donut");
     }
 
     @Override

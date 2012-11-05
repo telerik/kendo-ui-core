@@ -31,9 +31,9 @@ public class SeriesLineTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void initialize() {
 //>> initialize
 //<< initialize
-        setProperty("type", "line");
         
         super.initialize();
+        setProperty("type", "line");
     }
 
     @Override

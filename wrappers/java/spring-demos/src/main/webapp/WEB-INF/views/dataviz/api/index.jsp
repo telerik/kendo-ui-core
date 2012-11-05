@@ -33,7 +33,7 @@
          <div class="chart-wrapper">
          	 <kendo:chart name="chart">
          	 	 <kendo:chart-series>
-         	 	 	<kendo:chart-series-bar  data="<%= new int[] {1,2,3} %>"></kendo:chart-series-bar>
+         	 	 	<kendo:chart-series-bar data="<%= new int[] {1,2,3} %>"></kendo:chart-series-bar>
          	 	 </kendo:chart-series>
          	 </kendo:chart>
          </div>

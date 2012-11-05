@@ -31,9 +31,9 @@ public class SeriesScatterTag extends  BaseTag  /* interfaces *//* interfaces */
     public void initialize() {
 //>> initialize
 //<< initialize
-        setProperty("type", "scatter");
         
         super.initialize();
+        setProperty("type", "scatter");
     }
 
     @Override

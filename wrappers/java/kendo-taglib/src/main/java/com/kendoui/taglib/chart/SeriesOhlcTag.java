@@ -31,9 +31,9 @@ public class SeriesOhlcTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void initialize() {
 //>> initialize
 //<< initialize
-        setProperty("type", "ohlc");
         
         super.initialize();
+        setProperty("type", "ohlc");
     }
 
     @Override

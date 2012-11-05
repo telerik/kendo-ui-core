@@ -31,9 +31,9 @@ public class SeriesBubbleTag extends  BaseTag  /* interfaces *//* interfaces */ 
     public void initialize() {
 //>> initialize
 //<< initialize
-        setProperty("type", "bubble");
-        
+       
         super.initialize();
+        setProperty("type", "bubble");
     }
 
     @Override

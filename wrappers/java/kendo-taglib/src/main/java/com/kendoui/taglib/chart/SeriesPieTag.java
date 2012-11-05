@@ -31,9 +31,9 @@ public class SeriesPieTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void initialize() {
 //>> initialize
 //<< initialize
-        setProperty("type", "pie");
         
         super.initialize();
+        setProperty("type", "pie");
     }
 
     @Override

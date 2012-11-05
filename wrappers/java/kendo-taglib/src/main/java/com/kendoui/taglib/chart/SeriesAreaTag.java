@@ -31,9 +31,9 @@ public class SeriesAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void initialize() {
 //>> initialize
 //<< initialize
-        setProperty("type", "area");
-        
+
         super.initialize();
+        setProperty("type", "area");
     }
 
     @Override

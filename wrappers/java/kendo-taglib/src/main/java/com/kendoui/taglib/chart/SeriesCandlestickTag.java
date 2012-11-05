@@ -31,9 +31,9 @@ public class SeriesCandlestickTag extends  BaseTag  /* interfaces *//* interface
     public void initialize() {
 //>> initialize
 //<< initialize
-        setProperty("type", "candlestick");
         
         super.initialize();
+        setProperty("type", "candlestick");
     }
 
     @Override

@@ -31,10 +31,9 @@ public class SeriesBarTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void initialize() {
 //>> initialize
 //<< initialize
-
-        setProperty("type", "bar");
         
         super.initialize();
+        setProperty("type", "bar");
     }
 
     @Override
