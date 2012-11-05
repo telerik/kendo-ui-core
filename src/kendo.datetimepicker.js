@@ -305,6 +305,7 @@
                 options = that.options,
                 min = options.min,
                 max = options.max,
+                dates = options.dates,
                 timeView = that.timeView,
                 date = parse(value, options.parseFormats, options.culture),
                 rebind, timeViewOptions, old, skip, formattedValue;
@@ -333,22 +334,33 @@
                 old = that._old;
                 timeViewOptions = timeView.options;
 
-                if (isEqualDatePart(date, min)) {
-                    timeViewOptions.min = min;
-                    timeViewOptions.max = MAX;
-                    rebind = true;
+                if (dates[0]) {
+                    dates = $.grep(dates, function(d) { return isEqualDatePart(date, d); });
+
+                    if (dates[0]) {
+                        timeView.dataBind(dates);
+                        skip = true;
+                    }
                 }
 
-                if (isEqualDatePart(date, max)) {
-                    if (that._midnight) {
-                        timeView.dataBind([MAX]);
-                        skip = true;
-                    } else {
-                        timeViewOptions.max = max;
-                        if (!rebind) {
-                            timeViewOptions.min = MIN;
-                        }
+                if (!skip) {
+                    if (isEqualDatePart(date, min)) {
+                        timeViewOptions.min = min;
+                        timeViewOptions.max = MAX;
                         rebind = true;
+                    }
+
+                    if (isEqualDatePart(date, max)) {
+                        if (that._midnight) {
+                            timeView.dataBind([MAX]);
+                            skip = true;
+                        } else {
+                            timeViewOptions.max = max;
+                            if (!rebind) {
+                                timeViewOptions.min = MIN;
+                            }
+                            rebind = true;
+                        }
                     }
                 }
 
@@ -456,7 +468,6 @@
                 value: options.value,
                 anchor: that.wrapper,
                 animation: options.animation,
-                dates: options.dates,
                 format: options.timeFormat,
                 culture: options.culture,
                 height: options.height,

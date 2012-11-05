@@ -37,14 +37,6 @@
                 }
             });
 
-            /*test("get value of the input if", function() {
-                input.val("10/10/2000");
-
-                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
-
-                equal(+datetimepicker.value(), +new Date(2000, 9, 10));
-            });*/
-
             test("_wrapper() wraps input element", function() {
                 input.css("width", "200");
 
@@ -176,15 +168,56 @@
                 equal(datetimepicker.options.parseFormats[2], "MM/dd/yy");
             });
 
-            test("DateTimePicker uses options.dates instead of auto-generated hours", function() {
+            test("DateTimePicker uses options.dates if today is in dates", function() {
                 var datetimepicker = input.kendoDateTimePicker({
                     dates: [new Date(2000, 10, 10, 18, 0, 0)]
                 }).data("kendoDateTimePicker");
+
+                datetimepicker.value(new Date(2000, 10, 10));
 
                 datetimepicker.open("time");
 
                 equal(datetimepicker.timeView.ul.children().length, 1);
                 equal(datetimepicker.timeView.ul.children(":first").text(), "6:00 PM");
+            });
+
+            test("DateTimePicker does not use options.dates if today is not in dates", function() {
+                var datetimepicker = input.kendoDateTimePicker({
+                    dates: [new Date(2000, 10, 10, 18, 0, 0)]
+                }).data("kendoDateTimePicker");
+
+                datetimepicker.value(new Date(2000, 10, 11));
+
+                datetimepicker.open("time");
+
+                ok(datetimepicker.timeView.ul.children().length > 1);
+            });
+
+            test("DateTimePicker rebinds timeView if other day is selected", function() {
+                var datetimepicker = input.kendoDateTimePicker({
+                    dates: [new Date(2000, 10, 10, 18, 0, 0)]
+                }).data("kendoDateTimePicker");
+
+                datetimepicker.value(new Date(2000, 10, 10));
+                datetimepicker.open("time");
+
+                datetimepicker.value(new Date(2010, 10, 10));
+
+                ok(datetimepicker.timeView.ul.children().length > 1);
+            });
+
+            test("DateTimePicker uses options.dates even when edge date is selected", function() {
+                var datetimepicker = input.kendoDateTimePicker({
+                    dates: [new Date(2000, 10, 10, 18, 0, 0)],
+                    min: new Date(2000, 10, 10),
+                    max: new Date(2000, 10, 10)
+                }).data("kendoDateTimePicker");
+
+                datetimepicker.value(new Date(2000, 10, 10));
+                datetimepicker.open("time");
+
+                equal(datetimepicker.timeView.ul.children().length, 1);
+                equal(datetimepicker.timeView.ul.children().eq(0).html(), "6:00 PM");
             });
 
             test("DateTimePicker copies input's className to the wrapper", function() {
