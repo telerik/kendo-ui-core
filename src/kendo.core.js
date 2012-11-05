@@ -2588,15 +2588,49 @@ function pad(number, digits, end) {
     });
 
 
-    var off = $.fn.off,
-        on = $.fn.on;
+    var MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseout", "mouseup"];
+
+    kendo.setupMouseMute = function() {
+        var idx = 0,
+            length = MOUSE_EVENTS.length,
+            element = document.documentElement;
+
+        if (kendo.mouseTrap) {
+            return;
+        }
+
+        kendo.mouseTrap = true;
+        kendo.captureMouseEvents = false;
+
+        var handler = function(e) {
+            if (kendo.captureMouse) {
+                e.stopPropagation();
+            }
+        };
+
+        for (; idx < length; idx++) {
+            element.addEventListener(MOUSE_EVENTS[idx], handler, true);
+        }
+    };
+
+    kendo.muteMouse = function() {
+        kendo.captureMouse = true;
+        clearTimeout(kendo.mouseTrapTimeoutID);
+    };
+
+    kendo.unMuteMouse = function() {
+        kendo.mouseTrapTimeoutID = setTimeout(function() {
+            kendo.captureMouse = false;
+        }, 400);
+    };
 
     function EventProxy(element, handler) {
         var that = this;
         that.element = $(element);
         that.handler = handler;
         that.handlers = [];
-        that.mute = false;
+
+        kendo.setupMouseMute();
 
         if (support.touch) {
             that._touchStartProxy = $.proxy(that, "_touchStart");
@@ -2624,22 +2658,12 @@ function pad(number, digits, end) {
         };
     }
 
-    if (support.mobileOS.android) {
-        EventProxy.eventMap = {
-            down: "touchstart",
-            move: "touchmove",
-            up: "touchend",
-            cancel: "touchcancel"
-        };
-    }
-
     EventProxy.mapEvent = function(e) {
         return EventProxy.eventMap[e] || e;
     };
 
-    function containsMouse(string) {
-       return string.indexOf("mouse") > -1;
-    }
+    var off = $.fn.off,
+        on = $.fn.on;
 
     EventProxy.prototype = {
         on: function() {
@@ -2648,27 +2672,16 @@ function pad(number, digits, end) {
                 args = slice.call(arguments),
                 callback =  args[args.length - 1],
                 callbackIsFunction = $.isFunction(callback),
-                events = args[0].replace(/\w+/g, EventProxy.mapEvent),
-                handlerProxy = callback;
-
+                events = args[0].replace(/\w+/g, EventProxy.mapEvent);
 
             if (!callbackIsFunction) {
                 callback = handler[callback];
-
-                if (support.touch && containsMouse(events)) {
-                    handlerProxy = function(e) {
-                        if (!(that.mute && containsMouse(e.type))) {
-                            callback.call(handler, e);
-                        }
-                    };
-                } else {
-                    handlerProxy = function(e) {
-                        callback.call(handler, e);
-                    };
-                }
             }
 
-            args[args.length - 1] = handlerProxy;
+            args[args.length - 1] = function(e) {
+                callback.call(handler, e);
+            };
+
             args[0] = events;
 
             that.handlers.push(args);
@@ -2695,21 +2708,12 @@ function pad(number, digits, end) {
             }
         },
 
-        _touchStart: function(e) {
-            var that = this;
-            if (that.timeoutID) {
-                clearTimeout(that.timeoutID);
-                that.timeoutID = null;
-            }
-
-            that.mute = true;
+        _touchStart: function() {
+            kendo.muteMouse();
         },
 
-        _touchEnd: function(e) {
-            var that = this;
-            that.timeoutID = setTimeout(function() {
-                that.mute = false;
-            }, 400);
+        _touchEnd: function() {
+            kendo.unMuteMouse();
         }
     };
 
