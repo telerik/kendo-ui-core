@@ -207,7 +207,7 @@
                 options = that.options;
 
             that._value = value;
-            that._current = new DATE(restrictValue(value, options.min, options.max));
+            that._current = new DATE(+restrictValue(value, options.min, options.max));
 
             if (calendar.element.data(DATEVIEW) === that) {
                 calendar.value(value);
@@ -434,7 +434,7 @@
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
             }
         },
-    
+
         _blur: function() {
             var that = this;
 
@@ -511,7 +511,7 @@
                 return;
             }
 
-            options[option] = new DATE(value);
+            options[option] = new DATE(+value);
             that.dateView[option](value);
         },
 

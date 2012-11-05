@@ -272,7 +272,7 @@
                 return;
             }
 
-            options[option] = new DATE(value);
+            options[option] = new DATE(+value);
             that.dateView[option](value);
 
             that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
@@ -405,7 +405,7 @@
                         current;
 
                     if (msValue === msMin || msValue === msMax) {
-                        current = new DATE(that._value);
+                        current = new DATE(+that._value);
                         current.setFullYear(value.getFullYear());
                         current.setMonth(value.getMonth());
                         current.setDate(value.getDate());
@@ -467,10 +467,10 @@
                     value = timeView._parse(value);
 
                     if (value < options.min) {
-                        value = new DATE(options.min);
+                        value = new DATE(+options.min);
                         timeView.options.min = value;
                     } else if (value > options.max) {
-                        value = new DATE(options.max);
+                        value = new DATE(+options.max);
                         timeView.options.max = value;
                     }
 

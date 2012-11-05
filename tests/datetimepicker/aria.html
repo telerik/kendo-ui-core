@@ -80,7 +80,7 @@
             });
 
             test("DateTimePicker sets aria-selected to the selected option", function() {
-                instance.open();
+                instance.open("time");
                 instance.value("12:00 AM");
                 equal(instance.timeView.current().attr("aria-selected"), "true");
             });

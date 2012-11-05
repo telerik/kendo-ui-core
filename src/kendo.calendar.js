@@ -96,7 +96,7 @@
             normalize(options);
 
             that._index = views[options.start];
-            that._current = new DATE(restrictValue(value, options.min, options.max));
+            that._current = new DATE(+restrictValue(value, options.min, options.max));
 
             that._addClassProxy = function() {
                 that._cell.addClass(FOCUSED);
@@ -238,7 +238,7 @@
             if (!value) {
                 value = currentValue;
             } else {
-                that._current = value = new DATE(restrictValue(value, min, max));
+                that._current = value = new DATE(+restrictValue(value, min, max));
             }
 
             if (view === undefined) {
@@ -312,7 +312,7 @@
             value = parse(value, options.format, options.culture);
 
             if (value !== null) {
-                value = new DATE(value);
+                value = new DATE(+value);
 
                 if (!isInRange(value, min, max)) {
                     value = null;
@@ -331,7 +331,7 @@
                 key = e.keyCode,
                 view = that._view,
                 index = that._index,
-                currentValue = new DATE(that._current),
+                currentValue = new DATE(+that._current),
                 value, prevent, method;
 
             if (e.ctrlKey) {
@@ -610,7 +610,7 @@
         _navigate: function(arrow, modifier) {
             var that = this,
                 index = that._index + 1,
-                currentValue = new DATE(that._current);
+                currentValue = new DATE(+that._current);
 
             arrow = that[arrow];
 
@@ -641,7 +641,7 @@
                 return;
             }
 
-            options[option] = new DATE(value);
+            options[option] = new DATE(+value);
 
             navigate = that._view.compare(value, that._current);
 
@@ -1099,13 +1099,13 @@
         today = new DATE(today.getFullYear(), today.getMonth(), today.getDate());
 
         if (value) {
-            today = new DATE(value);
+            today = new DATE(+value);
         }
 
         if (min > today) {
-            today = new DATE(min);
+            today = new DATE(+min);
         } else if (max < today) {
-            today = new DATE(max);
+            today = new DATE(+max);
         }
         return today;
     }

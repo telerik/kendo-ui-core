@@ -156,7 +156,7 @@
                 msInterval = options.interval * MS_PER_MINUTE,
                 toString = kendo.toString,
                 template = that.template,
-                start = new DATE(min),
+                start = new DATE(+min),
                 idx = 0, length,
                 html = "";
 
@@ -180,7 +180,7 @@
                 }
 
                 if (msMax && getMilliseconds(start) > msMax) {
-                    start = new DATE(max);
+                    start = new DATE(+max);
                 }
 
                 html += template(toString(start, format, options.culture));
@@ -681,7 +681,7 @@
                 return;
             }
 
-            value = new DATE(value);
+            value = new DATE(+value);
 
             options[option] = value;
             that.timeView.options[option] = value;
