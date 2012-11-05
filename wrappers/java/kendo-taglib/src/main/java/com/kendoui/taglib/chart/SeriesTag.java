@@ -69,6 +69,10 @@ public class SeriesTag extends BaseTag /* interfaces *//* interfaces */ {
         series.add(value.properties());
     }
 
+    public void addColumn(SeriesColumnTag value) {
+        series.add(value.properties());
+    }
+
     public void addBubble(SeriesBubbleTag value) {
         series.add(value.properties());
     }
