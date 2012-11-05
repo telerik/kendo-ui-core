@@ -633,11 +633,9 @@ class Tag
 
         new_line = RUBY_PLATFORM =~ /w32/ ? "\n" : "\r\n"
 
-        # Prevent generation of SeriesTag and SeriesItemTag java classes
-        if java_filename.match(/\s*SeriesTag|SeriesItemTag+\s*/) == nil
-            File.open(java_filename, 'w') do |file|
-                file.write(java.gsub(/\r?\n/, new_line))
-            end
+        # Prevent generation of SeriesTag and SeriesItemTag
+        File.open(java_filename, 'w') do |file|
+            file.write(java.gsub(/\r?\n/, new_line))
         end
 
         @children.each { |child| child.sync_java }
@@ -689,17 +687,33 @@ class Tag
                 end
 
                 if option.type == 'Array'
-                    child =  NestedTagArray.new :name => option.name.sub(prefix, ''),
-                              :parent => self,
-                              :description => option.description,
-                              :options => child_options,
-                              :events => child_events
+                    if option.name.match(/\s*series+\s*/) == nil
+                        child =  NestedTagArray.new :name => option.name.sub(prefix, ''),
+                                  :parent => self,
+                                  :description => option.description,
+                                  :options => child_options,
+                                  :events => child_events
+                    else
+                        child = NestedSeriesTagArray.new :name => option.name.sub(prefix, ''),
+                                  :parent => self,
+                                  :description => option.description,
+                                  :options => child_options,
+                                  :events => child_events
+                    end
                 else
-                    child =  NestedTag.new :name => option.name.sub(prefix, ''),
-                              :parent => self,
-                              :description => option.description,
-                              :options => child_options,
-                              :events => child_events
+                    if self.java_type.match(/\s*SeriesTag+\s*/) == nil
+                        child = NestedTag.new :name => option.name.sub(prefix, ''),
+                                  :parent => self,
+                                  :description => option.description,
+                                  :options => child_options,
+                                  :events => child_events
+                    else
+                        child = NestedSeriesTag.new :name => option.name.sub(prefix, ''),
+                                  :parent => self,
+                                  :description => option.description,
+                                  :options => child_options,
+                                  :events => child_events
+                    end
                 end
 
                 @children.push(child)
@@ -958,6 +972,16 @@ class NestedTag < Tag
     end
 end
 
+class NestedSeriesTag < NestedTag
+    def java_type
+        return parent.name + @name + 'Tag'
+    end
+
+    def parent_setter_template
+        JAVA_ARRAY_ADD_TO_PARENT_TEMPLATE
+    end
+end
+
 class NestedTagEvent < NestedTag
     def template
         JAVA_EVENT_NESTED_TAG_TEMPLATE
@@ -977,6 +1001,56 @@ class NestedTagEvent < NestedTag
 
     def setter_template
         JAVA_NESTED_EVENT_SETTER_TEMPLATE
+    end
+end
+
+class NestedSeriesTagArray < NestedTag
+    attr_reader :child
+
+    def is_item_container?
+        return false
+    end
+
+    def template
+        JAVA_NESTED_TAG_ARRAY_TEMPLATE
+    end
+
+    def setter_template
+        JAVA_ARRAY_SETTER_TEMPLATE
+    end
+
+    def patch_java_source_code(code)
+        code = super(code)
+
+        initialize = JAVA_ARRAY_INIT_TEMPLATE.result(binding)
+
+        code.sub! /\/\/>> initialize(.|\n)*\/\/<< initialize/,
+                 "//>> initialize\n#{initialize}\n//<< initialize"
+
+        destroy = JAVA_ARRAY_DESTROY_TEMPLATE.result(binding)
+
+        code.sub! /\/\/>> destroy(.|\n)*\/\/<< destroy/,
+                 "//>> destroy\n#{destroy}\n//<< destroy"
+        code
+    end
+
+    def java_attributes
+        result = ''
+        @children.each do |child|
+            result += JAVA_ARRAY_ADD_CHILD_TEMPLATE.result(binding)
+        end
+
+        child = NestedTagArray.new :name => @name,
+                            :description => @description,
+                            :parent => self
+
+        result += JAVA_ARRAY_DECLARATION_TEMPLATE.result(binding)
+
+        return result += super
+    end
+
+    def child_setters
+        return ''
     end
 end
 
