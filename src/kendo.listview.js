@@ -332,7 +332,7 @@
                 that._tabindex();
                 element.on("focus" + NS, function() {
                         var current = that._current;
-                        if(!current ||  !current.is(":visible")) {
+                        if(!current || !current.is(":visible")) {
                             current = that._item("first");
                         }
 
@@ -345,13 +345,16 @@
                     })
                     .on("keydown" + NS, function(e) {
                         var key = e.keyCode,
-                            current = that._current,
-                            canHandle = !$(e.target).is(":button,textarea,a,a>.t-icon"),
+                            current = that.current(),
+                            target = $(e.target),
+                            canHandle = !target.is(":button,textarea,a,a>.t-icon,input"),
+                            isTextBox = target.is(":text"),
                             preventDefault = kendo.preventDefault,
                             editItem = element.find("." + KEDITITEM),
                             idx;
 
-                        if (!canHandle && keys.ESC != key) {
+                        if ((!canHandle && !isTextBox && keys.ESC != key) || (isTextBox && keys.ESC != key && keys.ENTER != key)) {
+                            //console.log("not handled");
                             return;
                         }
 
@@ -360,7 +363,7 @@
                                 current = current.prev();
                             }
 
-                            that.current(!current || !current[0] ? that._item("first") : current);
+                            that.current(!current || !current[0] ? that._item("last") : current);
                             preventDefault(e);
                         } else if (keys.DOWN === key || keys.RIGHT === key) {
                             if (current) {
@@ -383,7 +386,7 @@
                             that.current(that._item("last"));
                             preventDefault(e);
                         } else if (keys.ENTER === key) {
-                            if (editItem.length !== 0 && canHandle) {
+                            if (editItem.length !== 0 && (canHandle || isTextBox)) {
                                 idx = that.items().index(editItem);
                                 document.activeElement.blur();
                                 that.save();
@@ -393,7 +396,6 @@
                                 };
                                 that.one("dataBound", focusAgain);
                             } else if (that.options.editTemplate !== "") {
-                                that.current(null);
                                 that.edit(current);
                             }
                         } else if (keys.ESC === key) {
