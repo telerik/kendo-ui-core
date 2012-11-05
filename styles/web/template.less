@@ -121,33 +121,6 @@
     background-image: @texture-url,       ~"linear-gradient(to bottom, @{gradient})";
 }
 
-.transition(@transition) {
-    -webkit-transition: ~"@{transition}";
-    -moz-transition: ~"@{transition}";
-    -o-transition: ~"@{transition}";
-    transition: ~"@{transition}";
-}
-
-.k-button,
-.k-picker-wrap,
-.k-dropdown-wrap,
-.k-numeric-wrap,
-.k-autocomplete,
-.k-link,
-.k-textbox,
-.k-state-hover,
-.k-splitbar-horizontal-hover,
-.k-splitbar-vertical-hover
-{
-    .transition("background-color .2s ease-in-out, border-color .2s ease-in-out, color .2s ease-in-out");
-}
-
-.k-button:active,
-.k-state-selected
-{
-    .transition("none");
-}
-
 .k-in,
 .k-item,
 .k-window-action
@@ -315,20 +288,25 @@ textarea.k-textbox:hover,
 .k-dropdown-wrap,
 .k-picker-wrap,
 .k-grouping-header,
-.k-tooltip,
 .k-pager-wrap,
 .k-button,
 .k-draghandle,
 .k-tile,
-.k-textbox,
 .k-autocomplete,
-.k-state-hover,
-.k-state-selected,
-.k-state-focused,
 .k-state-highlight,
 .k-tabstrip-items .k-item
 {
     .composite-background(@widget-gradient);
+}
+
+.k-tabstrip-items .k-state-active
+{
+    background: @active-background-color;
+}
+
+.k-tooltip
+{
+    background-image: @texture-url;
 }
 
 .k-block,
@@ -415,6 +393,7 @@ textarea.k-textbox:hover,
 {
     border-color: @draghandle-hover-border-color;
     background-color: @draghandle-hover-background-color;
+    .composite-background(@hover-gradient);
     .box-shadow(@draghandle-hover-shadow);
 }
 
@@ -471,8 +450,12 @@ textarea.k-textbox:hover,
     color: @selected-text-color;
 }
 
+.k-state-selected
+{
+    .composite-background(@selected-gradient);
+}
+
 .k-state-hover,
-.k-state-hover:hover,
 .k-splitbar-horizontal-hover:hover,
 .k-splitbar-vertical-hover:hover,
 .k-list>.k-state-hover,
@@ -486,15 +469,30 @@ textarea.k-textbox:hover,
     border-color: @hover-border-color;
 }
 
-.k-textbox:hover,
+.k-button:hover,
 .k-autocomplete.k-state-hover,
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-hover,
 .k-state-hover,
-.k-state-hover:hover
+.k-state-hover:hover,
+.k-pager-wrap .k-link:hover,
+.k-other-month.k-state-hover .k-link,
+div.k-imagebrowser-dropzone em
 {
     .composite-background(@hover-gradient);
+}
+
+.k-autocomplete.k-state-active,
+.k-picker-wrap.k-state-active,
+.k-numeric-wrap.k-state-active,
+.k-dropdown-wrap.k-state-active,
+.k-state-active,
+.k-state-active:hover,
+.k-state-active>.k-link,
+.k-button:active
+{
+    .composite-background(@active-gradient);
 }
 
 .k-tool-icon,
@@ -505,16 +503,6 @@ textarea.k-textbox:hover,
     background-image: url('@{image-folder}/sprite.png');
 }
 
-.k-autocomplete.k-state-active,
-.k-picker-wrap.k-state-active,
-.k-numeric-wrap.k-state-active,
-.k-dropdown-wrap.k-state-active,
-.k-state-active,
-.k-state-active:hover
-{
-    .composite-background(@active-gradient);
-}
-
 .k-state-hover>.k-link,
 .k-other-month.k-state-hover .k-link,
 div.k-imagebrowser-dropzone em
@@ -522,7 +510,6 @@ div.k-imagebrowser-dropzone em
     color: @hover-text-color;
 }
 
-.k-textbox:hover,
 .k-autocomplete.k-state-hover,
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,

@@ -1,48 +1,840 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Styling playground</title>
+<head>
+    <title>Styling playground</title>
 
-        <link rel="stylesheet/less" href="../styles/web/kendo.common.less">
-        <link rel="stylesheet/less" href="../styles/web/kendo.default.less">
+    <link rel="stylesheet/less" href="../styles/web/kendo.common.less">
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less">
 
-        <style>
-            body {
-                font-family: Tahoma,sans-serif;
-            }
+    <style>
+        body {
+            font: 12px Tahoma,sans-serif;
+        }
 
-            div {
-                width: 100px;
-                height: 100px;
-                font-weight: bold;
-            }
-        </style>
+        body:after {
+            content: "";
+            display: block;
+            visibility: hidden;
+            height: 0;
+            font: 0/0;
+            -webkit-transform: translateZ( 0 );
+        }
+    </style>
 
-        <style type="text/less">
-            @texture-url: url("../../kendo-demos/src/styles/web/textures/dots8.png");
-            @gradient-stops: "#fcecfc 0%, #f99adb 50%, #fc53c4 51%, #ff7cd8 100%";
+    <script src="../../kendo-demos/content/shared/js/less.js"></script>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.all.min.js"></script>
+</head>
+<body class="k-group">
 
-            .theme-background() when (@gradient-stops = none) {
-                background-image: @texture-url;
-            }
+<table class="layout">
+      <tr>
+            <td class="lab">Buttons</td>
+            <td class="widget">
+                  <a href="#" class="k-button">Simple Button</a>
+                  <a href="#" class="k-button k-button-icontext k-grid-add"><span class="k-icon k-add"></span>Button with Icon</a>
+                  <br />
+                  <img src="less/KendoUI/Minimal/loading.gif" />
+                  <img src="less/KendoUI/Minimal/loading-image.gif" />
+            </td>
+      </tr>
+      <tr>
+            <td class="lab">AutoComplete</td>
+            <td class="widget"><input id="autoComplete" /></td>
+      </tr>
 
-            .theme-background() when not (@gradient-stops = none) {
-                background-image: @texture-url;
-                background-image: @texture-url, -webkit-linear-gradient(top, ~"@{gradient-stops}");
-                background-image: @texture-url,    -moz-linear-gradient(top, ~"@{gradient-stops}");
-                background-image: @texture-url,      -o-linear-gradient(top, ~"@{gradient-stops}");
-                background-image: @texture-url,         ~"linear-gradient(to bottom, @{gradient-stops})";
-            }
+      <tr>
+            <td class="lab">ComboBox</td>
+            <td class="widget"><div id="comboBox"></div></td>
+      </tr>
 
-            .texture {
-                .theme-background();
-            }
+      <tr>
+            <td class="lab">DropDownList</td>
+            <td class="widget">
+                  <select id="dropDownList">
+                        <option>Item 1</option>
+                        <option>Item 2</option>
+                        <option>Item 3</option>
+                  </select>
+            </td>
+      </tr>
 
-        </style>
+      <tr>
+            <td class="lab">NumericTextBox</td>
+            <td class="widget">
+                  <input id="textBox" />
+            </td>
+      </tr>
 
-        <script src="../../kendo-demos/content/shared/js/less.js"></script>
-    </head>
-    <body>
-        <div class="texture"></div>
-    </body>
+      <tr>
+            <td class="lab">DatePicker</td>
+            <td class="widget"><input id="datePicker" /></td>
+      </tr>
+
+      <tr>
+            <td class="lab">TimePicker</td>
+            <td class="widget">
+                  <input id="timePicker" />
+            </td>
+      </tr>
+
+      <tr>
+            <td class="lab">DateTimePicker</td>
+            <td class="widget"><input id="dateTimePicker" /> <br /><br />
+            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" data-for="Accept"><span class="k-icon k-warning"> </span> Acceptance is required</span></td>
+      </tr>
+
+      <tr>
+            <td class="lab">Calendar</td>
+            <td class="widget"><div id="calendar"></div></td>
+      </tr>
+
+      <tr>
+            <td class="lab">Editor</td>
+            <td class="widget">
+                  <textarea id="editor" rows="10" cols="60"></textarea>
+            </td>
+      </tr>
+
+      <tr>
+            <td class="lab">Grid</td>
+            <td class="widget">
+                  <table id="grid">
+                        <thead>
+                            <tr>
+                                <th data-field="title">Title</th>
+                                <th data-field="year">Year</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Star Wars: A New Hope</td>
+                                <td>1977</td>
+                            </tr>
+                            <tr>
+                                <td>Star Wars: The Empire Strikes Back</td>
+                                <td>1980</td>
+                            </tr>
+                            <tr>
+                                <td>Star Wars: A New Hope</td>
+                                <td>1977</td>
+                            </tr>
+                            <tr>
+                                <td>Star Wars: The Empire Strikes Back</td>
+                                <td>1980</td>
+                            </tr>
+                            <tr>
+                                <td>Star Wars: A New Hope</td>
+                                <td>1977</td>
+                            </tr>
+                            <tr>
+                                <td>Star Wars: The Empire Strikes Back</td>
+                                <td>1980</td>
+                            </tr>
+                            <tr>
+                                <td>Star Wars: A New Hope</td>
+                                <td>1977</td>
+                            </tr>
+                            <tr>
+                                <td>Star Wars: The Empire Strikes Back</td>
+                                <td>1980</td>
+                            </tr>
+                        </tbody>
+                  </table>
+            </td>
+      </tr>
+
+      <tr>
+            <td class="lab">ListView</td>
+            <td class="widget">
+                  <ul id="listView"></ul>
+            </td>
+      </tr>
+      <tr>
+            <td class="lab">Icons</td>
+            <td id="icons">
+                  <div class="k-block k-info">
+                    <div class="k-header">Normal icons, prefixed with .k-i-</div>
+                    <ul>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-arrow-n"></span></a>
+                            arrow-n
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-arrow-e"></span></a>
+                            arrow-e
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-arrow-s"></span></a>
+                            arrow-s
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-arrow-w"></span></a>
+                            arrow-w
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-seek-n"></span></a>
+                            seek-n
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-seek-e"></span></a>
+                            seek-e
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-seek-s"></span></a>
+                            seek-s
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-seek-w"></span></a>
+                            seek-w
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-arrowhead-n"></span></a>
+                            arrowhead-n
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-arrowhead-e"></span></a>
+                            arrowhead-e
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-arrowhead-s"></span></a>
+                            arrowhead-s
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-arrowhead-w"></span></a>
+                            arrowhead-w
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-expand"></span></a>
+                            expand
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-collapse"></span></a>
+                            collapse
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-expand-w"></span></a>
+                            expand-w
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-collapse-w"></span></a>
+                            collapse-w
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-plus"></span></a>
+                            plus
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-tick"></span></a>
+                            tick
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-close"></span></a>
+                            close
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-pencil"></span></a>
+                            pencil
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-cancel"></span></a>
+                            cancel
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-funnel"></span></a>
+                            funnel
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-funnel-clear"></span></a>
+                            funnel-clear
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-calendar"></span></a>
+                            calendar
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-clock"></span></a>
+                            clock
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-search"></span></a>
+                            search
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-refresh"></span></a>
+                            refresh
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-restore"></span></a>
+                            restore
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-maximize"></span></a>
+                            maximize
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-minimize"></span></a>
+                            minimize
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-custom"></span></a>
+                            custom
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-insert-n"></span></a>
+                            insert-n
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-insert-m"></span></a>
+                            insert-m
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-insert-s"></span></a>
+                            insert-s
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-note"></span></a>
+                            note
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-folder-add"></span></a>
+                            folder-add
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-i-folder-up"></span></a>
+                            folder-up
+                        </li>
+                    </ul>
+                </div><br />
+                <div class="k-block k-info">
+                    <div class="k-header">Small icons, prefixed with .k-si-</div>
+                    <ul>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-si-arrow-n"></span></a>
+                            arrow-n
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-si-arrow-e"></span></a>
+                            arrow-e
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-si-arrow-s"></span></a>
+                            arrow-s
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-si-arrow-w"></span></a>
+                            arrow-w
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-si-tick"></span></a>
+                            tick
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-si-refresh"></span></a>
+                            refresh
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-si-cancel"></span></a>
+                            cancel
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-si-plus"></span></a>
+                            plus
+                        </li>
+                        <li>
+                            <a class="k-button"><span class="k-icon k-si-minus"></span></a>
+                            minus
+                        </li>
+                    </ul>
+                </div>
+
+        </td>
+      </tr>
+
+      <tr>
+            <td class="lab">Menu</td>
+            <td class="widget">
+                  <ul id="menu">
+                  <li>
+                      Mens
+                      <ul>
+                          <li>Footwear
+                              <ul>
+                                  <li>Leisure Trainers</li>
+                                  <li>Running Shoes</li>
+                                  <li>Outdoor Footwear</li>
+                                  <li>Sandals/Flip Flops</li>
+                                  <li>Footwear Accessories</li>
+
+                              </ul>
+                          </li>
+                          <li>Leisure Clothing
+                              <ul>
+                                  <li>T-Shirts</li>
+                                  <li>Hoodies & Sweatshirts</li>
+                                  <li>Jackets</li>
+                                  <li>Pants</li>
+                                  <li>Shorts</li>
+                              </ul>
+                          </li>
+                          <li>Sports Clothing
+                              <ul>
+                                  <li>Football</li>
+                                  <li>Basketball</li>
+                                  <li>Golf</li>
+                                  <li>Tennis</li>
+                                  <li>Swimwear</li>
+                              </ul>
+                          </li>
+                          <li>Accessories
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                      Womens
+                      <ul>
+                          <li>Footwear
+                              <ul>
+                                  <li>Leisure Trainers</li>
+                                  <li>Running Shoes</li>
+                                  <li>Outdoor Footwear</li>
+                                  <li>Sandals/Flip Flops</li>
+                                  <li>Footwear Accessories</li>
+
+                              </ul>
+                          </li>
+                          <li>Leisure Clothing
+                              <ul>
+                                  <li>T-Shirts</li>
+                                  <li>Jackets</li>
+                              </ul>
+                          </li>
+                          <li>Sports Clothing
+                              <ul>
+                                  <li>Basketball</li>
+                                  <li>Golf</li>
+                                  <li>Tennis</li>
+                                  <li>Swimwear</li>
+                              </ul>
+                          </li>
+                          <li>Accessories
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                      Boys
+                      <ul>
+                          <li>Footwear
+                              <ul>
+                                  <li>Leisure Trainers</li>
+                                  <li>Running Shoes</li>
+                                  <li>Outdoor Footwear</li>
+                                  <li>Sandals/Flip Flops</li>
+                                  <li>Footwear Accessories</li>
+                              </ul>
+                          </li>
+                          <li>Leisure Clothing
+                              <ul>
+                                  <li>T-Shirts</li>
+                                  <li>Hoodies & Sweatshirts</li>
+                                  <li>Jackets</li>
+                                  <li>Pants</li>
+                                  <li>Shorts</li>
+                              </ul>
+                          </li>
+                          <li>Sports Clothing
+                              <ul>
+                                  <li>Football</li>
+                                  <li>Basketball</li>
+                                  <li>Rugby</li>
+                                  <li>Tennis</li>
+                                  <li>Swimwear</li>
+                              </ul>
+                          </li>
+                          <li>Accessories
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                      Girls
+                      <ul>
+                          <li>Footwear
+                              <ul>
+                                  <li>Leisure Trainers</li>
+                                  <li>Running Shoes</li>
+                                  <li>Fitness Trainers</li>
+                                  <li>Sandals/Flip Flops</li>
+                                  <li>Footwear Accessories</li>
+                              </ul>
+                          </li>
+                          <li>Leisure Clothing
+                              <ul>
+                                  <li>T-Shirts</li>
+                                  <li>Hoodies & Sweatshirts</li>
+                                  <li>Jackets</li>
+                                  <li>Pants</li>
+                                  <li>Shorts</li>
+                              </ul>
+                          </li>
+                          <li>Sports Clothing
+                              <ul>
+                                  <li>Basketball</li>
+                                  <li>Tennis</li>
+                                  <li>Swimwear</li>
+                              </ul>
+                          </li>
+                          <li>Accessories
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                      Footwear
+                      <ul>
+                          <li>Mens</li>
+                          <li>Womens</li>
+                          <li>Juniors</li>
+                          <li>Childrens</li>
+                      </ul>
+                  </li>
+                  </ul>
+            </td>
+      </tr>
+
+      <tr>
+            <td class="lab">PanelBar</td>
+            <td class="widget">
+                  <ul id="panelBar">
+                        <li class="k-state-active">
+                            First Item
+                            <ul>
+                                <li>Sub Item 1</li>
+                                <li>Sub Item 2</li>
+                                <li>Sub Item 3</li>
+                                <li>Sub Item 4</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Second Item
+                            <ul>
+                                <li>Sub Item 1</li>
+                                <li>Sub Item 2</li>
+                                <li>Sub Item 3</li>
+                                <li>Sub Item 4</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Third Item
+                            <ul>
+                                <li>Sub Item 1</li>
+                                <li>Sub Item 2</li>
+                                <li>Sub Item 3</li>
+                                <li>Sub Item 4</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Fourth Item
+                            <ul>
+                                <li>Sub Item 1</li>
+                                <li>Sub Item 2</li>
+                                <li>Sub Item 3</li>
+                                <li>Sub Item 4</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Fifth Item
+                            <ul>
+                                <li>Sub Item 1</li>
+                                <li>Sub Item 2</li>
+                                <li>Sub Item 3</li>
+                                <li>Sub Item 4</li>
+                            </ul>
+                        </li>
+                    </ul>
+            </td>
+      </tr>
+
+
+      <tr>
+            <td class="lab">TabStrip</td>
+            <td class="widget">
+                  <div id="tabStrip">
+                      <ul>
+                          <li class="k-state-active">
+                              First Tab
+                          </li>
+                          <li>
+                              Second Tab
+                          </li>
+                          <li>
+                              Third Tab
+                          </li>
+                          <li>
+                              Fourth Tab
+                          </li>
+                          <li>
+                              Fifth Tab
+                          </li>
+                      </ul>
+                      <div>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis libero, lobortis ac rutrum quis, varius a velit. Donec lacus erat, cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo diam eget risus. Integer facilisis, justo cursus venenatis vehicula, massa nisl tempor sem, in ullamcorper neque mauris in orci.</p>
+                      </div>
+                      <div>
+                          <p>Ut orci ligula, varius ac consequat in, rhoncus in dolor. Mauris pulvinar molestie accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean velit ligula, pharetra quis aliquam sed, scelerisque sed sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam dui mi, vulputate vitae pulvinar ac, condimentum sed eros.</p>
+                      </div>
+                      <div>
+                          <p>Aliquam at nisl quis est adipiscing bibendum. Nam malesuada eros facilisis arcu vulputate at aliquam nunc tempor. In commodo scelerisque enim, eget sodales lorem condimentum rutrum. Phasellus sem metus, ultricies at commodo in, tristique non est. Morbi vel mauris eget mauris commodo elementum. Nam eget libero lacus, ut sollicitudin ante. Nam odio quam, suscipit a fringilla eget, dignissim nec arcu. Donec tristique arcu ut sapien elementum pellentesque.</p>
+                      </div>
+                      <div>
+                          <p>Maecenas vitae eros vel enim molestie cursus. Proin ut lacinia ipsum. Nam at elit arcu, at porttitor ipsum. Praesent id viverra lorem. Nam lacinia elementum fermentum. Nulla facilisi. Nulla bibendum erat sed sem interdum suscipit. Vestibulum eget molestie leo. Aliquam erat volutpat. Ut sed nulla libero. Suspendisse id euismod quam. Aliquam interdum turpis vitae purus consectetur in pulvinar libero accumsan. In id augue dui, ac volutpat ante. Suspendisse purus est, ullamcorper id bibendum sed, placerat id leo.</p>
+                      </div>
+                      <div>
+                          <p>Fusce nec mauris enim, non pharetra neque. Etiam elementum nunc ut velit fermentum sed porta eros dignissim. Duis at nisl eros. Integer arcu nisl, accumsan non molestie at, elementum nec odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque arcu odio, aliquam vel viverra ac, varius at sapien. Nullam elementum nulla non libero interdum vestibulum at in lacus. Curabitur ac magna ac lacus dapibus convallis non at turpis.</p>
+                      </div>
+                  </div>
+            </td>
+      </tr>
+
+      <tr>
+            <td class="lab">Horizontal Sliders</td>
+            <td class="widget">
+                  <div id="rangeSlider" style="margin: 30px;">
+                      <input />
+                      <input />
+                  </div>
+                  <input id="slider" style="margin: 30px;"/>
+            </td>
+      </tr>
+
+      <tr>
+            <td class="lab">Slider</td>
+            <td class="widget">
+                  <div id="verticalrangeSlider" style="float: left; margin: 30px;">
+                      <input />
+                      <input />
+                  </div>
+                  <input id="verticalslider" style="float: left; margin: 30px;" />
+            </td>
+      </tr>
+
+      <tr>
+            <td class="lab">Splitter</td>
+            <td class="widget">
+                  <div id="vertical">
+                        <div id="top-pane">
+                            <div id="horizontal" style="height: 100%; width: 100%;">
+                                <div id="left-pane">
+                                    <div class="pane-content">
+                                        <h3>Inner splitter / left pane</h3>
+                                        <p>Resizable and collapsible.</p>
+                                    </div>
+                                </div>
+                                <div id="center-pane">
+                                    <div class="pane-content">
+                                        <h3>Inner splitter / center pane</h3>
+                                        <p>Resizable only.</p>
+                                    </div>
+                                </div>
+                                <div id="right-pane">
+                                    <div class="pane-content">
+                                        <h3>Inner splitter / right pane</h3>
+                                        <p>Resizable and collapsible.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="middle-pane">
+                            <div class="pane-content">
+                                <h3>Outer splitter / middle pane</h3>
+                                <p>Resizable only.</p>
+                            </div>
+                        </div>
+                        <div id="bottom-pane">
+                            <div class="pane-content">
+                                <h3>Outer splitter / bottom pane</h3>
+                                <p>Non-resizable and non-collapsible.</p>
+                            </div>
+                        </div>
+                    </div>
+            </td>
+      </tr>
+
+
+      <tr>
+            <td class="lab">TreeView</td>
+            <td class="widget">
+                  <ul id="treeView">
+                        <li>Furniture
+                            <ul>
+                                <li>Tables & Chairs</li>
+                                <li>Sofas</li>
+                                <li>Occasional Furniture</li>
+                                <li>Childerns Furniture</li>
+                                <li>Beds</li>
+                            </ul>
+                        </li>
+                        <li data-expanded="true">Decor
+                            <ul>
+                                <li>Bed Linen</li>
+                                <li>Throws</li>
+                                <li>Curtains & Blinds</li>
+                                <li>Rugs</li>
+                                <li>Carpets</li>
+                            </ul>
+                        </li>
+                        <li>Storage
+                            <ul>
+                                <li>Wall Shelving</li>
+                                <li>Kids Storage</li>
+                                <li>Baskets</li>
+                                <li>Multimedia Storage</li>
+                                <li>Floor Shelving</li>
+                                <li>Toilet Roll Holders</li>
+                                <li>Storage Jars</li>
+                                <li>Drawers</li>
+                                <li>Boxes</li>
+                            </ul>
+                        </li>
+                    </ul>
+            </td>
+      </tr>
+
+      <tr>
+            <td class="lab">Upload</td>
+            <td class="widget">
+                  <form method="post" action="handler.php">
+                        <div>
+                            <input name="photos[]" id="photos" type="file" />
+                        </div>
+                  </form>
+            </td>
+      </tr>
+
+      <tr>
+            <td class="lab">Window</td>
+            <td class="widget">
+                  <div id="window">
+                        Content of the Window
+                  </div>
+            </td>
+      </tr>
+
+
+</table>
+
+<script>
+
+    $(document).ready(function() {
+     $("#autoComplete").kendoAutoComplete(["Item1", "Item2", "Item3"]);
+
+     $("#calendar").kendoCalendar();
+
+     $("#comboBox").kendoComboBox({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "Item1", value: "1" },
+                { text: "Item2", value: "2" }
+            ]
+        });
+
+     $("#datePicker").kendoDatePicker();
+
+     $("#dateTimePicker").kendoDateTimePicker();
+
+     $("#dropDownList").kendoDropDownList();
+
+     $("#editor").kendoEditor();
+
+     $("#grid").kendoGrid({
+                selectable: "multiple cell",
+                filterable: true,
+                pageable: true,
+                groupable: true,
+                sortable: true,
+                toolbar: ["create", "save", "cancel"],
+                editable: true,
+                dataSource: {
+                      pageSize: 4
+                  }
+          });
+
+     $("#listView").kendoListView({
+                pageable: true,
+                selectable: true,
+                navigatable: true,
+                editable: true,
+                template: "<li>${FirstName} ${LastName}</li>",
+                dataSource: {
+                  data: [
+                      {
+                          FirstName: "Joe",
+                          LastName: "Smith"
+                      },
+                      {
+                          FirstName: "Jane",
+                          LastName: "Smith"
+                  }]
+              }
+          });
+
+     $("#menu").kendoMenu();
+
+     $("#textBox").kendoNumericTextBox();
+
+     $("#panelBar").kendoPanelBar();
+
+     $("#rangeSlider").kendoRangeSlider();
+
+     $("#verticalrangeSlider").kendoRangeSlider({
+          orientation: "vertical",
+          value: 6
+          });
+
+     $("#slider").kendoSlider({value: 6});
+
+     $("#verticalslider").kendoSlider({
+          orientation: "vertical",
+          value: 6,
+          });
+
+    $("#vertical").kendoSplitter({
+          orientation: "vertical",
+          panes: [
+          { collapsible: false },
+          { collapsible: false, size: "100px" },
+          { collapsible: false, resizable: false, size: "100px" }
+          ]
+          });
+    $("#horizontal").kendoSplitter({
+          panes: [
+          { collapsible: true, size: "220px" },
+          { collapsible: false },
+          { collapsible: true, size: "220px" }
+          ]
+          });
+
+    $("#tabStrip").kendoTabStrip();
+
+    $("#timePicker").kendoTimePicker();
+
+    $("#treeView").kendoTreeView();
+
+    $("#photos").kendoUpload();
+
+
+    $("#window").kendoWindow({
+        actions: ["Custom", "Refresh", "Maximize", "Minimize", "Close"],
+        draggable: true,
+        height: "100px",
+        modal: false,
+        resizable: true,
+        title: "Window",
+        width: "300px"
+    });
+
+
+    });
+</script>
+
+</body>
 </html>
