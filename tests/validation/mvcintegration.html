@@ -154,6 +154,13 @@
                 ok(!validator.validate());
             });
 
+            test("validate returns true if input is empty and range validation is enabled", function() {
+                var input = $('<input type="number" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10.10"/>'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
             test("validate returns true if input value does have same value as max attribute", function() {
                 var input = $('<input type="number" value="10" data-val-range="The field Number must be between 10 and 20." data-val-range-max="10" data-val-range-min="10"/>'),
                     validator = setup(input);

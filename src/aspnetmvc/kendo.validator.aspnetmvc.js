@@ -133,7 +133,10 @@
             return patternMatcher(input.val(), params.pattern);
         },
         range: function(input, params) {
-            return this.min(input, params) && this.max(input, params);
+            if (input.val() !== "") {
+                return this.min(input, params) && this.max(input, params);
+            }
+            return true;
         },
         min: function(input, params) {
             var min = parseFloat(params.min) || 0,
