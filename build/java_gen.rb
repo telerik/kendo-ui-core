@@ -337,7 +337,7 @@ JAVA_OPTION_SETTER_TEMPLATE = ERB.new(%{
 
 JAVA_NESTED_TAG_SETTER_TEMPLATE = ERB.new(%{
     public void set<%= child.name %>(<%= child.java_type %> value) {
-        setProperty("<%= child.name.downcase %>", value);
+        setProperty("<%= child.name == 'ColumnMenu' ? child.name.camelize : child.name.downcase %>", value);
     }
 })
 
@@ -548,7 +548,7 @@ class Tag
     end
 
     def has_items?
-        @name =~ /panelbar|menu|treeview|tabstrip/i || has_item_hierarchy?
+        @name != 'ColumnMenu' && @name =~ /panelbar|menu|treeview|tabstrip/i || has_item_hierarchy?
     end
 
     def to_xml
