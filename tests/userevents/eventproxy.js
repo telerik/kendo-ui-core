@@ -21,8 +21,16 @@ test("Recognizes event aliases", 2, function() {
     div.trigger("touchend");
 })
 
+// https://developer.mozilla.org/en/DOM/document.createEvent for the insanity below
+function dispatchRealEvent(element, eventType) {
+    var evt = document.createEvent("MouseEvents");
+      evt.initMouseEvent(eventType, true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+    element[0].dispatchEvent(evt);
+}
+
 test("Skips syntetic mouse events", 3, function() {
-    var div = $("<div />"),
+    var div = $("<div />").appendTo(document.body),
         proxy = new EventProxy(div, {
             _down: function() { ok(true) },
             _move: function() { ok(true) },
@@ -36,9 +44,9 @@ test("Skips syntetic mouse events", 3, function() {
     div.trigger("touchstart");
     div.trigger("touchmove");
     div.trigger("touchend");
-    div.trigger("mousedown");
-    div.trigger("mousemove");
-    div.trigger("mouseup");
+    dispatchRealEvent(div, "mousedown");
+    dispatchRealEvent(div, "mousemove");
+    dispatchRealEvent(div, "mouseup");
 })
 
 asyncTest("Registers real mouse events", 2, function() {
@@ -55,8 +63,8 @@ asyncTest("Registers real mouse events", 2, function() {
 
     setTimeout(function() {
         start();
-        div.trigger("mousedown");
-        div.trigger("mousemove");
-        div.trigger("mouseup");
+    dispatchRealEvent(div, "mousedown");
+    dispatchRealEvent(div, "mousemove");
+    dispatchRealEvent(div, "mouseup");
     }, 500);
 })
