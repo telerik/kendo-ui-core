@@ -335,10 +335,15 @@
     top: 50%;
     margin-top: -.7em;
     margin-top: ~"-.7rem";
-    width: 1.7em;
-    height: 1.7em;
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    font-size: 1rem;
+    .box-sizing(border-box);
+}
+
+.km-root .km-detaildisclose
+{
+    font-size: .8em;
 }
 
 :-moz-any(.km-detail)
@@ -347,8 +352,6 @@
     height: 1rem;
 }
 
-.km-detail:after,
-.km-detail:before,
 .km-listview-link:after
 {
     width: .4em;
@@ -360,8 +363,7 @@
     vertical-align: middle;
 }
 
-.km-listview-link:after,
-.km-detaildisclose:after
+.km-listview-link:after
 {
     margin-left: -.2em;
     margin-left: ~"-.2rem";
@@ -369,40 +371,6 @@
     border-width: .24em .24em 0 0;
     border-width: .24rem .24rem 0 0;
     .transform(rotate(45deg));
-}
-
-.km-detaildisclose:before { display: none; }
-
-.km-rowdelete:after,
-.km-rowinsert:after,
-.km-rowinsert:before,
-.km-contactadd:after,
-.km-contactadd:before
-{
-    width: .6em;
-    height: .1em;
-    width: .7rem;
-    height: .2rem;
-    background: #FFF;
-    margin-left: -.18em;
-    margin-left: ~"-.28rem";
-}
-
-.km-rowdelete:after
-{
-    margin-left: -.28em;
-    margin-left: ~"-.38rem";
-}
-
-.km-rowinsert:after,
-.km-contactadd:after
-{
-    width: .1em;
-    height: .6em;
-    width: .2rem;
-    height: .7rem;
-    margin-left: -.34em;
-    margin-left: ~"-.44rem";
 }
 
 .km-button::-moz-focus-inner
@@ -862,16 +830,29 @@
     margin-top: -1rem;
 }
 
+.km-root .km-rowinsert:after,
+.km-root .km-rowdelete:after,
+.km-root .km-contactadd:after,
+.km-root .km-detaildisclose:after,
+.km-root .km-rowinsert:before,
+.km-root .km-rowdelete:before,
+.km-root .km-contactadd:before,
+.km-root .km-detaildisclose:before,
 .km-detail .km-icon
 {
-    top: 20%;
-    left: 20%;
-    width: 60%;
-    height: 60%;
-    font-size: 60%;
-    margin: 0;
+    left: .15em;
+    top: .15em;
+    line-height: 1em;
+    font-size: 1em;
     position: absolute;
-    .box-sizing(border-box);
+}
+
+.km-root .km-detaildisclose:after
+{
+    left: .1em;
+    top: .25em;
+    text-align: center;
+    font-weight: bold;
 }
 
 .km-buttongroup .km-button .km-icon

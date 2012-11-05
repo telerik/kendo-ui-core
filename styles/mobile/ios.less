@@ -23,7 +23,8 @@
 
 @button-active-shadow: inset 0 0 0 1px rgba(0,0,0,.3), inset 0 0 0 1000px rgba(0,0,0,.2);
 @buttongroup-active-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
-@detail-active-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2);
+@ios-detail-shadow: ~"inset 0 0 0 .16rem #fff, 0 1px 3px rgba(0,0,0,.5)";
+@ios-detail-active-shadow: ~"inset 0 0 0 .16rem #fff, 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2)";
 
 /* Support for iOS6 */
 @media only screen and (height : 320px) and (orientation : landscape) {
@@ -342,33 +343,32 @@
 {
     .linear-gradient-image(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: #FFF;
-    border: .3em solid #FFF;
+    padding: 0;
+    background-color: #bc0404;
+    .border-radius(3em);
+    .box-shadow(@ios-detail-shadow);
+    background-clip: content-box;
+}
+
+.km-ios .km-badge
+{
     font-size: .72em;
     font-size: .82rem;
     line-height: 1.6em;
     line-height: 1rem;
-    padding: 0;
-    background-color: #bc0404;
-    .box-shadow(0 3px 3px #000);
-    .border-radius(2em);
-    background-clip: padding-box;
 }
 
 .km-ios .km-detail
 {
-    line-height: 1.4em;
-    line-height: .8rem;
-    border: .2em solid #FFF;
-    border-width: .15rem;
-    .box-shadow(0 1px 3px rgba(0,0,0,.5));
+    border: 0;
     background-color: #1F6DD8;
 }
 
 .km-ios .km-detail:active,
 .km-ios .km-detail.km-state-active
 {
-    -webkit-box-shadow: @detail-active-shadow;
-    box-shadow: @detail-active-shadow;
+    -webkit-box-shadow: @ios-detail-active-shadow;
+    box-shadow: @ios-detail-active-shadow;
 }
 
 .km-ios .km-listview .km-switch
@@ -393,10 +393,6 @@
 
 .km-ios .km-detail .km-icon
 {
-    left: 5%;
-    top: 10%;
-    width: 90%;
-    height: 90%;
     color: #fff;
 }
 
@@ -701,7 +697,6 @@
 .km-ios .km-button.km-state-active .km-icon
 {
     text-shadow: none;
-    background-color: currentcolor;
     .linear-gradient-image(@button-icon-gradient);
 }
 
@@ -723,9 +718,15 @@
     .linear-gradient-image(@tabstrip-active-icon-gradient);
 }
 
-:-webkit-any(.km-ios) .km-icon:after
+:-webkit-any(.km-root) .km-ios .km-icon:after
 {
     background-color: currentcolor;
+}
+
+.km-ios .km-tabstrip .km-icon:before
+{
+    display: block;
+    margin-top: 2px;
 }
 
 /* Pull To Refresh */
