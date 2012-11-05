@@ -197,6 +197,14 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("width", value);
     }
 
+    public boolean getMenu() {
+        return (boolean)getProperty("menu");
+    }
+
+    public void setMenu(boolean value) {
+        setProperty("menu", value);
+    }
+
 //<< Attributes
     
     public void setValues(ColumnValuesTag value) {

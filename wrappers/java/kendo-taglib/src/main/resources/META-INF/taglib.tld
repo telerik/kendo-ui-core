@@ -1073,6 +1073,13 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
 
         <attribute>
+            <description>Enables column header menu</description>
+            <name>columnMenu</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether editing is enabled/disabled.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2991,36 +2998,6 @@ upwards from the current position.</description>
         <name>chart-series</name>
         <tag-class>com.kendoui.taglib.chart.SeriesTag</tag-class>
         <body-content>JSP</body-content>
-
-        <attribute>
-            <description>Array of data points.</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the series value.</description>
-            <name>field</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Name template for auto-generated
-series when binding to grouped data.
-Template variables:</description>
-            <name>groupNameTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The series name visible in the legend.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
 
     </tag>
 
@@ -9119,6 +9096,29 @@ the minimum and maximum values.</description>
 
 
     <tag>
+        <description>Enables column header menu</description>
+        <name>grid-columnMenu</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnMenuTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/disable sorting section in column header menu.</description>
+            <name>sortable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/disable filter section in column header menu.</description>
+            <name>filterable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Indicates whether editing is enabled/disabled.</description>
         <name>grid-editable</name>
         <tag-class>com.kendoui.taglib.grid.EditableTag</tag-class>
@@ -9495,6 +9495,13 @@ Or template to be used for rendering the toolbar content.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates whether the column should be visible in column menu.</description>
+            <name>menu</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
     </tag>

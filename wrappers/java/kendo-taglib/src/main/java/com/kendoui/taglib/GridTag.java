@@ -70,6 +70,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     }
 
+    public void setColumnMenu(ColumnMenuTag value) {
+        setProperty("columnmenu", value);
+    }
+
     public void setEditable(EditableTag value) {
         setProperty("editable", value);
     }
@@ -146,6 +150,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setAutoBind(boolean value) {
         setProperty("autoBind", value);
+    }
+
+    public boolean getColumnMenu() {
+        return (boolean)getProperty("columnMenu");
+    }
+
+    public void setColumnMenu(boolean value) {
+        setProperty("columnMenu", value);
     }
 
     @Override
