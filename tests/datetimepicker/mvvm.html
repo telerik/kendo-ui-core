@@ -391,6 +391,42 @@
 
                 equal(datetimepicker.timeView.ul[0].firstChild, null);
             });
+
+            test("binding datetimepicker initialized before binding does not override change of calendar", 1, function() {
+                var dom = $('<input data-bind="value: value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                dom.kendoDateTimePicker({
+                    change: function() {
+                        equal(this, dom.data("kendoDateTimePicker"));
+                    }
+                });
+
+                dom.data("kendoDateTimePicker").open("date");
+                dom.data("kendoDateTimePicker").dateView.calendar.value(new Date());
+                dom.data("kendoDateTimePicker").dateView.calendar.trigger("change");
+            });
+
+            test("binding datetimepicker initialized before binding does not override change of timeView", 1, function() {
+                var dom = $('<input data-bind="value: value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                dom.kendoDateTimePicker({
+                    change: function() {
+                        equal(this, dom.data("kendoDateTimePicker"));
+                    }
+                });
+
+                dom.data("kendoDateTimePicker").open("time");
+                dom.data("kendoDateTimePicker").timeView.options.change("2:00 AM", true);
+            });
+
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

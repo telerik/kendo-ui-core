@@ -522,17 +522,17 @@
         setOptions: function(options) {
             var that = this,
                 timeView = that.timeView,
-                tvOptions = timeView.options;
+                timeViewOptions = timeView.options;
 
             Widget.fn.setOptions.call(that, options);
 
             normalize(that.options);
 
-            timeView.options = extend(tvOptions, that.options, {
-                active: tvOptions.active,
-                change: tvOptions.change,
-                close: tvOptions.close,
-                open: tvOptions.open
+            timeView.options = extend(timeViewOptions, that.options, {
+                active: timeViewOptions.active,
+                change: timeViewOptions.change,
+                close: timeViewOptions.close,
+                open: timeViewOptions.open
             });
 
             timeView.ul[0].innerHTML = "";

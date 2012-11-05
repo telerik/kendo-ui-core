@@ -352,16 +352,16 @@
         setOptions: function(options) {
             var that = this,
                 dateView = that.dateView,
-                dvOptions = dateView.options;
+                dateViewOptions = dateView.options;
 
             Widget.fn.setOptions.call(that, options);
 
             normalize(that.options);
 
-            dateView.options = extend(dvOptions, that.options, {
-                change: dvOptions.change,
-                close: dvOptions.close,
-                open: dvOptions.open
+            dateView.options = extend(dateViewOptions, that.options, {
+                change: dateViewOptions.change,
+                close: dateViewOptions.close,
+                open: dateViewOptions.open
             });
         },
 

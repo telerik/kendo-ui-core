@@ -125,6 +125,7 @@
 
             extend(timeViewOptions, options, {
                 format: options.timeFormat,
+                active: timeViewOptions.active,
                 change: timeViewOptions.change,
                 close: timeViewOptions.close,
                 open: timeViewOptions.open
