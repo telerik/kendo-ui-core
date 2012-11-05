@@ -350,13 +350,19 @@
         },
 
         setOptions: function(options) {
-            var that = this;
+            var that = this,
+                dateView = that.dateView,
+                dvOptions = dateView.options;
 
             Widget.fn.setOptions.call(that, options);
 
             normalize(that.options);
 
-            extend(that.dateView.options, that.options);
+            dateView.options = extend(dvOptions, that.options, {
+                change: dvOptions.change,
+                close: dvOptions.close,
+                open: dvOptions.open
+            });
         },
 
         enable: function(enable) {

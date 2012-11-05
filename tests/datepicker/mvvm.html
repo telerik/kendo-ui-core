@@ -54,7 +54,7 @@
                 equal(datepicker.dateView.options.start, "decade");
             });
 
-            test("initializes a options from data attributes after init of the widget", function() {
+            test("initializes options from data attributes after init of the widget", function() {
                 var dom = $('<input data-role="datepicker" data-format="{0:MM yyyy}" data-start="year" />');
                 dom.kendoDatePicker();
 
@@ -359,6 +359,26 @@
                 observable.set("invisible", false);
 
                 ok(dom.data("kendoDatePicker").wrapper.css("display") != "none", "display is not 'none'");
+            });
+
+            test("binding datepicker initialized before binding does not override change event handler of calendar", 1, function() {
+                var dom = $('<input data-bind="value: value" />');
+
+                var value = new Date(2011, 1, 2);
+                var observable = kendo.observable({ value: null });
+                observable.value = value;
+
+                kendo.bind(dom, observable);
+
+                dom.kendoDatePicker({
+                    change: function() {
+                        equal(this, dom.data("kendoDatePicker"));
+                    }
+                });
+
+                dom.data("kendoDatePicker").open();
+                dom.data("kendoDatePicker").dateView.calendar.value(new Date(2000, 10, 10));
+                dom.data("kendoDatePicker").dateView.calendar.trigger("change");
             });
         </script>
 
