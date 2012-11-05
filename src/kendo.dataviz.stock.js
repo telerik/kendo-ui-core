@@ -202,7 +202,7 @@
             ));
 
             if (!kendo.support.touch) {
-                //this._selection._dragEnd(e);
+                this._navigator._selectEnd(e);
             }
 
             var selection = chart._selection;
@@ -218,7 +218,7 @@
         },
 
         _onDragEnd: function(e) {
-            //this._selection._dragEnd(e);
+            this._navigator._selectEnd(e);
             this._suppressHover = false;
         }
     });
