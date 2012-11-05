@@ -78,6 +78,9 @@
         DEGREE = math.PI / 180,
         DONUT = "donut",
         DONUT_SECTOR_ANIM_DELAY = 50,
+        DRAG = "drag",
+        DRAG_END = "dragEnd",
+        DRAG_START = "dragStart",
         FADEIN = "fadeIn",
         GLASS = "glass",
         HOURS = "hours",
@@ -226,7 +229,10 @@
             SERIES_CLICK,
             SERIES_HOVER,
             AXIS_LABEL_CLICK,
-            PLOT_AREA_CLICK
+            PLOT_AREA_CLICK,
+            DRAG_START,
+            DRAG,
+            DRAG_END
         ],
 
         items: function() {
@@ -302,6 +308,22 @@
                 chart._viewElement = view.renderTo(element[0]);
                 chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
                 chart._highlight = new Highlight(view, chart._viewElement);
+
+                if (kendo.UserEvents) {
+                    if (chart._userEvents) {
+                        chart._userEvents.destroy();
+                    }
+
+                    chart._userEvents = new kendo.UserEvents(chart._viewElement, {
+                        global: true,
+                        threshold: 5,
+                        stopPropagation: true,
+                        multiTouch: true,
+                        start: proxy(chart._start, chart),
+                        move: proxy(chart._move, chart),
+                        end: proxy(chart._end, chart)
+                    });
+                }
             }
         },
 
@@ -386,6 +408,89 @@
 
             element.on(CLICK + NS, proxy(chart._click, chart));
             element.on(MOUSEOVER + NS, proxy(chart._mouseOver, chart));
+        },
+
+        _start: function(e) {
+            var chart = this,
+                origEvent = e.event.originalEvent,
+                coords = chart._eventCoordinates(origEvent),
+                plotArea = chart._model._plotArea,
+                axes = plotArea.axes,
+                pane = plotArea.findPointPane(coords),
+                i,
+                currentAxis,
+                inAxis = false;
+
+            for (i = 0; i < axes.length; i++) {
+                currentAxis = axes[i];
+                if (currentAxis.box.containsPoint(coords)) {
+                    inAxis = true;
+                    break;
+                }
+            }
+
+            if (!inAxis && plotArea.backgroundBox().containsPoint(coords)) {
+                chart.trigger(DRAG_START);
+                chart._dragState = {
+                    pane: pane
+                };
+            }
+        },
+
+        _move: function(e) {
+            var chart = this,
+                dragState = chart._dragState,
+                deltaX = e.x.initialDelta,
+                deltaY = e.y.initialDelta,
+                plotArea = chart._model._plotArea,
+                axes,
+                ranges = {};
+
+            if (dragState) {
+                e.preventDefault();
+
+                axes = dragState.pane.axes;
+                if (!inArray(plotArea.axisX, axes)) {
+                    axes.push(plotArea.axisX);
+                }
+                if (!inArray(plotArea.axisY, axes)) {
+                    axes.push(plotArea.axisY);
+                }
+
+                for (var i = 0; i < axes.length; i++) {
+                    var currentAxis = axes[i];
+                    var range = currentAxis.options.max - currentAxis.options.min;
+                    var scale;
+                    var delta;
+                    if(currentAxis.options.vertical) {
+                        scale = currentAxis.box.height() / range;
+                        delta = e.y.initialDelta;
+                    } else {
+                        scale = currentAxis.box.width() / range;
+                        delta = e.x.initialDelta;
+                    }
+
+                    if (delta != 0) {
+                        var offset = delta / scale;
+
+                        ranges[currentAxis.options.name] = {
+                            min: currentAxis.options.min + offset,
+                            max: currentAxis.options.max + offset
+                        }
+                    }
+                }
+
+                chart.trigger(ranges);
+            }
+        },
+
+        _end: function(e) {
+            var chart = this;
+
+            if (chart._dragState) {
+                chart.trigger(DRAG_END);
+                delete chart._dragState;
+            }
         },
 
         _getChartElement: function(e) {
@@ -588,6 +693,10 @@
 
             chart.wrapper.off(NS);
             dataSource.unbind(CHANGE, chart._dataChangeHandler);
+
+            if (chart._userEvents) {
+                chart._userEvents.destroy();
+            }
 
             Widget.fn.destroy.call(chart);
         }
@@ -4771,6 +4880,22 @@
             return matchingPane || panes[0];
         },
 
+        findPointPane: function(point) {
+            var plotArea = this,
+                panes = plotArea.panes,
+                i,
+                matchingPane;
+
+            for (i = 0; i < panes.length; i++) {
+                if (panes[i].box.containsPoint(point)) {
+                    matchingPane = panes[i];
+                    break;
+                }
+            }
+
+            return matchingPane;
+        },
+
         appendAxis: function(axis) {
             var plotArea = this,
                 pane = plotArea.findPane(axis.options.pane);
@@ -7377,7 +7502,7 @@
 
         for (i = 0; i < length; i++) {
             val = values[i];
-            if (val === null || !isFinite(val)) {
+            if (typeof val !== "number" || isNaN(val)) {
                 valid = false;
                 break;
             }
