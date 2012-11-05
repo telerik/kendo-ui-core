@@ -127,8 +127,8 @@ namespace Kendo.Mvc.UI
                 .Add("collapsible", Collapsible, false)
                 .Add("collapsed", Collapsed, false)
                 .Add("size", Size, "*")
-                .Add("minSize", MinSize, () => !string.IsNullOrEmpty(MinSize))
-                .Add("maxSize", MaxSize, () => !string.IsNullOrEmpty(MaxSize))
+                .Add("min", MinSize, () => !string.IsNullOrEmpty(MinSize))
+                .Add("max", MaxSize, () => !string.IsNullOrEmpty(MaxSize))
                 .Add("contentUrl", ContentUrl, () => !string.IsNullOrEmpty(ContentUrl));
 
             return result;
