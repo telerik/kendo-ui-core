@@ -348,6 +348,23 @@
 
                 equal(timepicker.timeView.ul[0].firstChild, null);
             });
+
+            test("binding timepicker initialized before binding does not override change event handler of timeView", 1, function() {
+                var dom = $('<input data-bind="value: value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                dom.kendoTimePicker({
+                    change: function() {
+                        equal(this, dom.data("kendoTimePicker"));
+                    }
+                });
+
+                dom.data("kendoTimePicker").open();
+                dom.data("kendoTimePicker").timeView.options.change("2:00 AM", true);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

@@ -520,15 +520,22 @@
         ],
 
         setOptions: function(options) {
-            var that = this;
+            var that = this,
+                timeView = that.timeView,
+                tvOptions = timeView.options;
 
             Widget.fn.setOptions.call(that, options);
 
             normalize(that.options);
 
-            extend(that.timeView.options, that.options);
+            timeView.options = extend(tvOptions, that.options, {
+                active: tvOptions.active,
+                change: tvOptions.change,
+                close: tvOptions.close,
+                open: tvOptions.open
+            });
 
-            that.timeView.ul[0].innerHTML = "";
+            timeView.ul[0].innerHTML = "";
         },
 
         dataBind: function(dates) {
