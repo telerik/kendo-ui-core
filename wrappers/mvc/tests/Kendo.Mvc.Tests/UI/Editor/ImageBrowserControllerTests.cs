@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI.Tests
         public void Destroy_returns_empty_content()
         {
             var result = controller.Destroy("", new ImageBrowserEntry());
-            Assert.IsType<ContentResult>(result);
+            Assert.IsType<JsonResult>(result);
         }
 
         [Fact]
@@ -163,7 +163,7 @@ namespace Kendo.Mvc.UI.Tests
         public void DeleteDirectory_returns_empty_content()
         {
             var result = controller.Destroy("", new ImageBrowserEntry { EntryType = ImageBrowserEntryType.Directory });
-            Assert.IsType<ContentResult>(result);
+            Assert.IsType<JsonResult>(result);
         }
 
         [Fact]
