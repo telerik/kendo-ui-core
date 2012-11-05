@@ -1017,9 +1017,14 @@
                 p2,
                 slotSize;
 
-            from = clipValue(from, 0, intervals);
+            from = defined(from) ? from : 0;
             to = defined(to) ? to : from;
+            from = clipValue(from, 0, intervals);
             to = clipValue(to - 1, from, intervals);
+            // Fixes transient bug caused by iOS 6.0 JIT
+            // (one can never be too sure)
+            to = math.max(from, to);
+
             p1 = from === 0 ? lineStart : majorTicks[from];
             p2 = justified ? p1 : majorTicks[to];
             slotSize = to - from;
