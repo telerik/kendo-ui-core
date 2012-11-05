@@ -1,5 +1,12 @@
 /* Kendo base CSS */
 
+.transition(@transition) {
+    -webkit-transition: ~"@{transition}";
+    -moz-transition: ~"@{transition}";
+    -o-transition: ~"@{transition}";
+    transition: ~"@{transition}";
+}
+
 .fake{color:red;}
 
 .k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
@@ -250,13 +257,17 @@ html body .k-button-bare
     width: @grid-size;
     height: @grid-size;
     overflow: hidden;
-    background-color: transparent;
     background-repeat: no-repeat;
     font-size: 0;
     line-height: 0;
     text-indent: -3333px;
     text-align: center;
     vertical-align: middle;
+}
+.k-icon,
+.k-sprite
+{
+    background-color: transparent;
 }
 *+html .k-icon, *+html .k-sprite { text-indent: 0; }
 
@@ -1916,11 +1927,7 @@ span.k-dropdown
 .k-numeric-wrap.k-state-focused,
 .k-numeric-wrap.k-state-hover
 {
-    -webkit-transition: -webkit-box-shadow .15s ease-out;
-    -moz-transition: -moz-box-shadow .15s ease-out;
-    -o-transition: box-shadow .15s ease-out;
-    -ms-transition: box-shadow .15s ease-out;
-    transition: box-shadow .15s ease-out;
+    .transition("box-shadow .15s ease-out");
 }
 
 .k-textbox > input,
@@ -3881,10 +3888,7 @@ html .k-upload
     width: .3em;
     background-color: rgba(0,0,0,.7);
     opacity: 0;
-    -webkit-transition: opacity 0.3s linear;
-    -moz-transition: opacity 0.3s linear;
-    -ms-transition: opacity 0.3s linear;
-    -o-transition: opacity 0.3s linear;
+    .transition("opacity 0.3s linear");
 }
 
 .km-vertical-scrollbar
