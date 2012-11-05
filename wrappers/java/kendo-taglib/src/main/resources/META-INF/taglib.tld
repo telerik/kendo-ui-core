@@ -4020,6 +4020,35 @@ Template variables:
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Aggregate function for date series.
 This function is used when a category (an year, month, etc.) contains two or more points.
 The function return value is displayed instead of the individual points.</description>
@@ -4050,13 +4079,6 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>The series name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>The series opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4078,6 +4100,35 @@ The function return value is displayed instead of the individual points.</descri
         <name>chart-series-line</name>
         <tag-class>com.kendoui.taglib.chart.SeriesLineTag</tag-class>
         <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
         <attribute>
             <description>Aggregate function for date series.
@@ -4117,13 +4168,6 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>The series name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>The series opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4152,6 +4196,35 @@ The function return value is displayed instead of the individual points.</descri
         <name>chart-series-bar</name>
         <tag-class>com.kendoui.taglib.chart.SeriesBarTag</tag-class>
         <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
         <attribute>
             <description>Aggregate function for date series.
@@ -4191,13 +4264,6 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>The series name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>The series opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4228,6 +4294,35 @@ The function return value is displayed instead of the individual points.</descri
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The data field containing the bubble category name.</description>
             <name>categoryField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4249,14 +4344,6 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>Array of data items (optional).
-The bubble chart can be bound to an array of arrays with three numbers (X, Y and Size).</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>The max size of the bubble.</description>
             <name>maxSize</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4268,13 +4355,6 @@ The bubble chart can be bound to an array of arrays with three numbers (X, Y and
             <name>minSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The series name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -4336,6 +4416,35 @@ The bubble chart can be bound to an array of arrays with three numbers (X, Y and
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The data field containing the sector category name.</description>
             <name>categoryField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4347,15 +4456,6 @@ The bubble chart can be bound to an array of arrays with three numbers (X, Y and
             <name>colorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Array of data items (optional).
-The donut chart can be bound to an array of numbers or an array of objects
-with the following fields:</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -4419,6 +4519,35 @@ with the following fields:</description>
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The data field containing the sector category name.</description>
             <name>categoryField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4430,15 +4559,6 @@ with the following fields:</description>
             <name>colorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Array of data items (optional).
-The pie chart can be bound to an array of numbers or an array of objects
-with the following fields:</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -4486,23 +4606,37 @@ with the following fields:</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The series base color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Array of data items (optional).
-The scatter chart can be bound to an array of arrays with two numbers (X and Y).</description>
+            <description>Array of data points.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
-            <description>The series name.</description>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
             <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series base color.</description>
+            <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4538,6 +4672,35 @@ The scatter chart can be bound to an array of arrays with two numbers (X and Y).
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The series base color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4552,23 +4715,8 @@ The scatter chart can be bound to an array of arrays with two numbers (X and Y).
         </attribute>
 
         <attribute>
-            <description>Array of data items (optional).
-The scatter chart can be bound to an array of arrays with two numbers (X and Y).</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>Configures the behavior for handling missing values in scatter series.</description>
             <name>missingValues</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The series name.</description>
-            <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4609,6 +4757,35 @@ The scatter chart can be bound to an array of arrays with two numbers (X and Y).
         <name>chart-series-candlestick</name>
         <tag-class>com.kendoui.taglib.chart.SeriesCandlestickTag</tag-class>
         <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
         <attribute>
             <description>Aggregate function for date series.
@@ -4690,13 +4867,6 @@ The function return values are displayed instead of the individual points.</desc
         </attribute>
 
         <attribute>
-            <description>The series name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>The series opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4725,6 +4895,35 @@ The function return values are displayed instead of the individual points.</desc
         <name>chart-series-ohlc</name>
         <tag-class>com.kendoui.taglib.chart.SeriesOhlcTag</tag-class>
         <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
         <attribute>
             <description>Aggregate function for date series.
@@ -4789,13 +4988,6 @@ The function return values are displayed instead of the individual points.</desc
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The series name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
         </attribute>
 
         <attribute>

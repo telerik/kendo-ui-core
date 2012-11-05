@@ -31,7 +31,8 @@ public class SeriesBubbleTag extends  BaseTag  /* interfaces *//* interfaces */ 
     public void initialize() {
 //>> initialize
 //<< initialize
-
+        setProperty("type", "bubble");
+        
         super.initialize();
     }
 
@@ -65,6 +66,38 @@ public class SeriesBubbleTag extends  BaseTag  /* interfaces *//* interfaces */ 
         setProperty("tooltip", value);
     }
 
+    public Object getData() {
+        return (Object)getProperty("data");
+    }
+
+    public void setData(Object value) {
+        setProperty("data", value);
+    }
+
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
+    }
+
+    public String getGroupNameTemplate() {
+        return (String)getProperty("groupNameTemplate");
+    }
+
+    public void setGroupNameTemplate(String value) {
+        setProperty("groupNameTemplate", value);
+    }
+
+    public String getName() {
+        return (String)getProperty("name");
+    }
+
+    public void setName(String value) {
+        setProperty("name", value);
+    }
+
     public String getCategoryField() {
         return (String)getProperty("categoryField");
     }
@@ -89,14 +122,6 @@ public class SeriesBubbleTag extends  BaseTag  /* interfaces *//* interfaces */ 
         setProperty("colorField", value);
     }
 
-    public Object getData() {
-        return (Object)getProperty("data");
-    }
-
-    public void setData(Object value) {
-        setProperty("data", value);
-    }
-
     public float getMaxSize() {
         return (float)getProperty("maxSize");
     }
@@ -111,14 +136,6 @@ public class SeriesBubbleTag extends  BaseTag  /* interfaces *//* interfaces */ 
 
     public void setMinSize(float value) {
         setProperty("minSize", value);
-    }
-
-    public String getName() {
-        return (String)getProperty("name");
-    }
-
-    public void setName(String value) {
-        setProperty("name", value);
     }
 
     public float getOpacity() {

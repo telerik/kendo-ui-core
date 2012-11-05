@@ -31,7 +31,8 @@ public class SeriesScatterTag extends  BaseTag  /* interfaces *//* interfaces */
     public void initialize() {
 //>> initialize
 //<< initialize
-
+        setProperty("type", "scatter");
+        
         super.initialize();
     }
 
@@ -61,14 +62,6 @@ public class SeriesScatterTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("tooltip", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
-    }
-
-    public void setColor(String value) {
-        setProperty("color", value);
-    }
-
     public Object getData() {
         return (Object)getProperty("data");
     }
@@ -77,12 +70,36 @@ public class SeriesScatterTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("data", value);
     }
 
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
+    }
+
+    public String getGroupNameTemplate() {
+        return (String)getProperty("groupNameTemplate");
+    }
+
+    public void setGroupNameTemplate(String value) {
+        setProperty("groupNameTemplate", value);
+    }
+
     public String getName() {
         return (String)getProperty("name");
     }
 
     public void setName(String value) {
         setProperty("name", value);
+    }
+
+    public String getColor() {
+        return (String)getProperty("color");
+    }
+
+    public void setColor(String value) {
+        setProperty("color", value);
     }
 
     public float getOpacity() {

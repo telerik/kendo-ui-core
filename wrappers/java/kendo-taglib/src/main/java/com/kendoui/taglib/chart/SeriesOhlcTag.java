@@ -31,7 +31,8 @@ public class SeriesOhlcTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void initialize() {
 //>> initialize
 //<< initialize
-
+        setProperty("type", "ohlc");
+        
         super.initialize();
     }
 
@@ -59,6 +60,38 @@ public class SeriesOhlcTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setLine(OhlcLineTag value) {
         setProperty("line", value);
+    }
+
+    public Object getData() {
+        return (Object)getProperty("data");
+    }
+
+    public void setData(Object value) {
+        setProperty("data", value);
+    }
+
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
+    }
+
+    public String getGroupNameTemplate() {
+        return (String)getProperty("groupNameTemplate");
+    }
+
+    public void setGroupNameTemplate(String value) {
+        setProperty("groupNameTemplate", value);
+    }
+
+    public String getName() {
+        return (String)getProperty("name");
+    }
+
+    public void setName(String value) {
+        setProperty("name", value);
     }
 
     public Object getAggregates() {
@@ -131,14 +164,6 @@ public class SeriesOhlcTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setGap(float value) {
         setProperty("gap", value);
-    }
-
-    public String getName() {
-        return (String)getProperty("name");
-    }
-
-    public void setName(String value) {
-        setProperty("name", value);
     }
 
     public float getOpacity() {

@@ -31,7 +31,8 @@ public class SeriesAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void initialize() {
 //>> initialize
 //<< initialize
-
+        setProperty("type", "area");
+        
         super.initialize();
     }
 
@@ -65,6 +66,38 @@ public class SeriesAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("tooltip", value);
     }
 
+    public Object getData() {
+        return (Object)getProperty("data");
+    }
+
+    public void setData(Object value) {
+        setProperty("data", value);
+    }
+
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
+    }
+
+    public String getGroupNameTemplate() {
+        return (String)getProperty("groupNameTemplate");
+    }
+
+    public void setGroupNameTemplate(String value) {
+        setProperty("groupNameTemplate", value);
+    }
+
+    public String getName() {
+        return (String)getProperty("name");
+    }
+
+    public void setName(String value) {
+        setProperty("name", value);
+    }
+
     public String getAggregate() {
         return (String)getProperty("aggregate");
     }
@@ -95,14 +128,6 @@ public class SeriesAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setMissingValues(String value) {
         setProperty("missingValues", value);
-    }
-
-    public String getName() {
-        return (String)getProperty("name");
-    }
-
-    public void setName(String value) {
-        setProperty("name", value);
     }
 
     public float getOpacity() {

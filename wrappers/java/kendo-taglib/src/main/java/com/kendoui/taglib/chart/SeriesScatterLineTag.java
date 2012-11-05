@@ -31,7 +31,8 @@ public class SeriesScatterLineTag extends  BaseTag  /* interfaces *//* interface
     public void initialize() {
 //>> initialize
 //<< initialize
-
+        setProperty("type", "scatterLine");
+        
         super.initialize();
     }
 
@@ -61,6 +62,38 @@ public class SeriesScatterLineTag extends  BaseTag  /* interfaces *//* interface
         setProperty("tooltip", value);
     }
 
+    public Object getData() {
+        return (Object)getProperty("data");
+    }
+
+    public void setData(Object value) {
+        setProperty("data", value);
+    }
+
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
+    }
+
+    public String getGroupNameTemplate() {
+        return (String)getProperty("groupNameTemplate");
+    }
+
+    public void setGroupNameTemplate(String value) {
+        setProperty("groupNameTemplate", value);
+    }
+
+    public String getName() {
+        return (String)getProperty("name");
+    }
+
+    public void setName(String value) {
+        setProperty("name", value);
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -77,28 +110,12 @@ public class SeriesScatterLineTag extends  BaseTag  /* interfaces *//* interface
         setProperty("dashType", value);
     }
 
-    public Object getData() {
-        return (Object)getProperty("data");
-    }
-
-    public void setData(Object value) {
-        setProperty("data", value);
-    }
-
     public String getMissingValues() {
         return (String)getProperty("missingValues");
     }
 
     public void setMissingValues(String value) {
         setProperty("missingValues", value);
-    }
-
-    public String getName() {
-        return (String)getProperty("name");
-    }
-
-    public void setName(String value) {
-        setProperty("name", value);
     }
 
     public float getOpacity() {
