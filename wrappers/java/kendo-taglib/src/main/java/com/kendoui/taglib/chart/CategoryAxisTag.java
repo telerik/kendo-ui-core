@@ -59,19 +59,19 @@ public class CategoryAxisTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public void setMajorGridLines(CategoryAxisMajorGridLinesTag value) {
-        setProperty("majorgridlines", value);
+        setProperty("majorGridLines", value);
     }
 
     public void setMajorTicks(CategoryAxisMajorTicksTag value) {
-        setProperty("majorticks", value);
+        setProperty("majorTicks", value);
     }
 
     public void setMinorGridLines(CategoryAxisMinorGridLinesTag value) {
-        setProperty("minorgridlines", value);
+        setProperty("minorGridLines", value);
     }
 
     public void setMinorTicks(CategoryAxisMinorTicksTag value) {
-        setProperty("minorticks", value);
+        setProperty("minorTicks", value);
     }
 
     public void setTitle(CategoryAxisTitleTag value) {

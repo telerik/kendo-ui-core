@@ -59,7 +59,7 @@ public class SeriesBubbleTag extends  BaseTag  /* interfaces *//* interfaces */ 
     }
 
     public void setNegativeValues(BubbleNegativeValuesTag value) {
-        setProperty("negativevalues", value);
+        setProperty("negativeValues", value);
     }
 
     public void setTooltip(BubbleTooltipTag value) {

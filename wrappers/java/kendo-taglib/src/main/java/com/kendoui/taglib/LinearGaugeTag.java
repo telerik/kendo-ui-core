@@ -47,7 +47,7 @@ public class LinearGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
     }
 
     public void setGaugeArea(GaugeAreaTag value) {
-        setProperty("gaugearea", value);
+        setProperty("gaugeArea", value);
     }
 
     public void setPointer(PointerTag value) {

@@ -49,7 +49,7 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public void setCategoryAxis(CategoryAxisTag value) {
-        setProperty("categoryaxis", value);
+        setProperty("categoryAxis", value);
     }
 
     public void setTitle(TitleTag value) {
@@ -57,7 +57,7 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public void setChartArea(ChartAreaTag value) {
-        setProperty("chartarea", value);
+        setProperty("chartArea", value);
     }
 
     public void setLegend(LegendTag value) {
@@ -65,7 +65,7 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public void setPlotArea(PlotAreaTag value) {
-        setProperty("plotarea", value);
+        setProperty("plotArea", value);
     }
 
     public void setSeries(SeriesTag value) {
@@ -79,19 +79,19 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public void setSeriesDefaults(SeriesDefaultsTag value) {
-        setProperty("seriesdefaults", value);
+        setProperty("seriesDefaults", value);
     }
 
     public void setValueAxis(ValueAxisTag value) {
-        setProperty("valueaxis", value);
+        setProperty("valueAxis", value);
     }
 
     public void setXAxis(XAxisTag value) {
-        setProperty("xaxis", value);
+        setProperty("xAxis", value);
     }
 
     public void setYAxis(YAxisTag value) {
-        setProperty("yaxis", value);
+        setProperty("yAxis", value);
     }
 
     public void setAxisLabelClick(AxisLabelClickFunctionTag value) {

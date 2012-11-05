@@ -55,11 +55,11 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public void setMajorTicks(ScaleMajorTicksTag value) {
-        setProperty("majorticks", value);
+        setProperty("majorTicks", value);
     }
 
     public void setMinorTicks(ScaleMinorTicksTag value) {
-        setProperty("minorticks", value);
+        setProperty("minorTicks", value);
     }
 
     public float getEndAngle() {

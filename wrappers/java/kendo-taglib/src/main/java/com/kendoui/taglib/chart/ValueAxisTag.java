@@ -59,19 +59,19 @@ public class ValueAxisTag extends BaseTag /* interfaces *//* interfaces */ {
     }
 
     public void setMajorGridLines(ValueAxisMajorGridLinesTag value) {
-        setProperty("majorgridlines", value);
+        setProperty("majorGridLines", value);
     }
 
     public void setMajorTicks(ValueAxisMajorTicksTag value) {
-        setProperty("majorticks", value);
+        setProperty("majorTicks", value);
     }
 
     public void setMinorGridLines(ValueAxisMinorGridLinesTag value) {
-        setProperty("minorgridlines", value);
+        setProperty("minorGridLines", value);
     }
 
     public void setMinorTicks(ValueAxisMinorTicksTag value) {
-        setProperty("minorticks", value);
+        setProperty("minorTicks", value);
     }
 
     public void setTitle(ValueAxisTitleTag value) {
