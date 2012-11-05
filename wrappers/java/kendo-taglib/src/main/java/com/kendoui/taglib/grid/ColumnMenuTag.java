@@ -14,7 +14,7 @@ import com.kendoui.taglib.GridTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ColumnMenuTag extends  BaseTag  /* interfaces */implements Items/* interfaces */ {
+public class ColumnMenuTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {

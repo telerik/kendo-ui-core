@@ -71,7 +71,7 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
     }
 
     public void setColumnMenu(ColumnMenuTag value) {
-        setProperty("columnmenu", value);
+        setProperty("columnMenu", value);
     }
 
     public void setEditable(EditableTag value) {
