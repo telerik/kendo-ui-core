@@ -337,7 +337,7 @@ JAVA_OPTION_SETTER_TEMPLATE = ERB.new(%{
 
 JAVA_NESTED_TAG_SETTER_TEMPLATE = ERB.new(%{
     public void set<%= child.name %>(<%= child.java_type %> value) {
-        setProperty("<%= child.name == 'ColumnMenu' ? child.name.camelize : child.name.downcase %>", value);
+        setProperty("<%= child.name.camelize %>", value);
     }
 })
 
