@@ -645,6 +645,13 @@ and is about to render it.</description>
         </attribute>
 
         <attribute>
+            <description>Specifies a list of dates, which will be passed to the month template.</description>
+            <name>dates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies the navigation depth. The following
 settings are available for the</description>
             <name>depth</name>
@@ -743,7 +750,7 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
-            <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
+            <description>Specifies a list of dates, which will be passed to the month template of the DateView. All dates, which match the date portion of the selected date will be used to re-bind the TimeView.</description>
             <name>dates</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
