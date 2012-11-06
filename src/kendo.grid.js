@@ -226,7 +226,7 @@
                 maxHeight = 250000,
                 dataSource = that.dataSource,
                 rangeStart = that._rangeStart,
-                scrollbar = kendo.support.scrollbar(),
+                scrollbar = !kendo.support.touch ? kendo.support.scrollbar() : 0,
                 wrapperElement = that.wrapper[0],
                 totalHeight,
                 idx,
@@ -1850,7 +1850,8 @@
                 table,
                 options = that.options,
                 scrollable = options.scrollable,
-                scrollbar = kendo.support.scrollbar();
+                hasVirtualScroll = scrollable !== true && scrollable.virtual && !that.virtualScrollable,
+                scrollbar = !kendo.support.touch || hasVirtualScroll ? kendo.support.scrollbar() : 0;
 
             if (scrollable) {
                 header = that.wrapper.children(".k-grid-header");
@@ -1874,7 +1875,7 @@
                 if (!that.content.is(".k-grid-content, .k-virtual-scrollable-wrap")) {
                     that.content = that.table.wrap('<div class="k-grid-content" />').parent();
                 }
-                if (scrollable !== true && scrollable.virtual && !that.virtualScrollable) {
+                if (hasVirtualScroll) {
                     that.virtualScrollable = new VirtualScrollable(that.content, {
                         dataSource: that.dataSource,
                         itemHeight: proxy(that._averageRowHeight, that)
@@ -2138,12 +2139,13 @@
 
         _wrapFooter: function(footerRow) {
             var that = this,
-                html = "";
+                html = "",
+                scrollbar = !kendo.support.touch ? kendo.support.scrollbar() : 0;
 
             if (that.options.scrollable) {
                 html = $('<div class="k-grid-footer"><div class="k-grid-footer-wrap"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div></div>');
                 that._appendCols(html.find("table"));
-                html.css("padding-right", kendo.support.scrollbar()); // Update inner fix.
+                html.css("padding-right", scrollbar); // Update inner fix.
 
                 return html;
             }
