@@ -22,7 +22,7 @@
         container.find(":input:not(:button, [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "]), select").each(function() {
             var bindAttr = kendo.attr("bind"),
                 binding = this.getAttribute(bindAttr) || "",
-                bindingName = this.type === "checkbox" ? "checked:" : "value:",
+                bindingName = this.type === "checkbox" ||  this.type === "radio" ? "checked:" : "value:",
                 fieldName = this.name;
 
             if (binding.indexOf(bindingName) === -1 && fieldName) {
