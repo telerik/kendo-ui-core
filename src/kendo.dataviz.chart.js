@@ -442,8 +442,6 @@
         _move: function(e) {
             var chart = this,
                 dragState = chart._dragState,
-                deltaX = e.x.initialDelta,
-                deltaY = e.y.initialDelta,
                 plotArea = chart._model._plotArea,
                 axes,
                 ranges = {};
@@ -472,13 +470,13 @@
                         delta = e.x.initialDelta;
                     }
 
-                    if (delta != 0) {
+                    if (delta !== 0) {
                         var offset = delta / scale;
 
                         ranges[currentAxis.options.name] = {
                             min: currentAxis.options.min + offset,
                             max: currentAxis.options.max + offset
-                        }
+                        };
                     }
                 }
 
@@ -6681,7 +6679,7 @@
                 options = that.options,
                 target = $(e.event.originalEvent.target);
 
-            if (that._state) {
+            if (that._state || !target) {
                 return;
             }
 
@@ -6710,7 +6708,6 @@
                 range = state.range,
                 span = range.to - range.from,
                 target = state.moveTarget,
-                isSelection = target.is(".k-selection"),
                 scale = that.wrapper.width() / fullSpan,
                 offset = math.round(delta / scale);
 
@@ -6780,7 +6777,7 @@
 
             range.to =
                 categoryAxis.getCategoryIndex(new dataviz.Point2D(right)) ||
-                options.max
+                options.max;
 
             that.move(range.from, range.to);
         },
