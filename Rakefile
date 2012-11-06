@@ -62,6 +62,14 @@ JSP_CONTENT = {
     'wrappers/jsp/spring-demos/src' => SPRING_DEMOS_SRC
 }
 
+task :npm do
+    dir = Rake.application.original_dir
+    sh "cd #{dir} && npm install"
+end
+
+task :js => :npm
+task :less => :npm
+
 # Rake tasks
 desc('JavaScript')
 multitask :js => MIN_JS

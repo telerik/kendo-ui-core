@@ -30,7 +30,7 @@
 
                 if (scripts.length > 0) {
                     var src = SOURCE_DIR + scripts.shift().replace(".min", "");
-                    $.ajax({ url: src, dataType: "text" })
+                    $.ajax({ url: src, dataType: "text", headers: { "X-QHint": true }})
                         .success(function(data) {
                             loadScripts(scripts, callback, error, source + data);
                         })

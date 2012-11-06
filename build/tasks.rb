@@ -2,6 +2,9 @@ require 'rbconfig'
 
 README_DIR = 'resources'
 THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')
+UGLIFYJS = File.join(Rake.application.original_dir, "node_modules", "uglify-js2", "bin", "uglifyjs2");
+LESSC = File.join(Rake.application.original_dir, "build", "less-js", "bin", "lessc");
+CSSMIN = File.join(Rake.application.original_dir, "node_modules", "cssmin", "bin", "cssmin");
 
 class MergeTask < Rake::FileTask
     def execute(args=nil)
@@ -71,22 +74,15 @@ def mvn(name, options)
 end
 
 def uglifyjs(from, to)
-    sh "uglifyjs #{from} > #{to}", :verbose => VERBOSE
-
-    minjs = File.read(to)
-
-    File.open(to, 'w') do |file|
-        file.write(';')
-        file.write(minjs)
-    end
+    sh "#{UGLIFYJS} #{from} -o #{to} -mc warnings=1", :verbose => VERBOSE
 end
 
 def less(from, to)
-    sh "node build/less-js/bin/lessc #{from} #{to}", :verbose => VERBOSE
+    sh "#{LESSC} #{from} #{to}", :verbose => VERBOSE
 end
 
 def cssmin(from, to)
-    sh "cssmin #{from} > #{to}", :verbose => VERBOSE
+    sh "#{CSSMIN} #{from} > #{to}", :verbose => VERBOSE
 end
 
 # Copy file when it is modified

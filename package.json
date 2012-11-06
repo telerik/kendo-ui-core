@@ -2,11 +2,13 @@
    "name": "kendo",
    "version": "1.0.0",
    "dependencies": {
-       "uglify-js": "",
+       "uglify-js2": "",
        "cssmin": "",
        "faye": "",
-       "node-static": "",
        "xmlbuilder": "",
-       "colors": ""
+       "colors": "",
+       "cookiejar": "",
+       "faye-websocket": "",
+       "less": ""
    }
 }
