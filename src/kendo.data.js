@@ -2795,18 +2795,19 @@
         init: function(value) {
             var that = this,
                 hasChildren = that.hasChildren || value && value.hasChildren,
-                data = "items",
-                children = {};
+                childrenField = "items",
+                childrenOptions = {};
 
             kendo.data.Model.fn.init.call(that, value);
 
+
             if (typeof that.children === STRING) {
-               data = that.children;
+                childrenField = that.children;
             }
 
-            children = {
+            childrenOptions = {
                 schema: {
-                    data: data,
+                    data: childrenField,
                     model: {
                         hasChildren: hasChildren,
                         id: that.idField
@@ -2815,13 +2816,13 @@
             };
 
             if (typeof that.children !== STRING) {
-                extend(children, that.children);
+                extend(childrenOptions, that.children);
             }
 
-            children.data = value;
+            childrenOptions.data = value;
 
             if (!hasChildren) {
-                hasChildren = children.schema.data;
+                hasChildren = childrenOptions.schema.data;
             }
 
             if (typeof hasChildren === STRING) {
@@ -2832,13 +2833,13 @@
                 that.hasChildren = !!hasChildren.call(that, that);
             }
 
-            that._childrenOptions = children;
+            that._childrenOptions = childrenOptions;
 
             if (that.hasChildren) {
                 that._initChildren();
             }
 
-            that._loaded = !!(value && value[data]);
+            that._loaded = !!(value && value[childrenField]);
         },
 
         _initChildren: function() {
