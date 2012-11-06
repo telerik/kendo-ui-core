@@ -6,4 +6,6 @@ public interface EmployeeDao {
     public DataSourceResult getList(DataSourceRequest request);
     
     public List<Employee> getList();
+    
+    public List<Employee> getListByEmployeeId(Integer employeeId);
 }

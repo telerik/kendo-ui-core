@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/remote-data/read" var="transportReadUrl" />
+<c:url value="/web/treeview/remote-data/read" var="transportReadUrl" />
 
 <demo:header />
     <kendo:grid name="grid" pageable="true" sortable="true" filterable="true" groupable="true">

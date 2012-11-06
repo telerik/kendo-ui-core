@@ -1,13 +1,21 @@
 package com.kendoui.spring.models;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="Employees")
@@ -19,7 +27,7 @@ public class Employee {
     private String city;
     private String address;
     private String country;
-    private Date birthDate;    
+    private Date birthDate;
 
     @Id
     @Column(name="EmployeeID")
@@ -48,6 +56,23 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    
+    @Transient
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    @ManyToOne(cascade={CascadeType.ALL}, optional=true)
+    @JoinColumn(name="ReportsTo")
+    private Employee manager;
+ 
+    @OneToMany(mappedBy="manager")
+    private Set<Employee> employees = new HashSet<Employee>();
+
+    @Transient
+    public Boolean getHasEmployees() {
+        return !employees.isEmpty();
     }
 
     @Column(name="Title")

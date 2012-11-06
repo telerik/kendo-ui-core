@@ -56,7 +56,9 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         
         Object checkboxes = ((TreeViewTag)parent).getProperty("checkboxes");
         
-        if (checkboxes.getClass() == boolean.class) {
+        if (checkboxes == null) {
+            return false;
+        } else if (checkboxes.getClass() == boolean.class) {
             return (boolean)checkboxes;
         } else {
             return true;

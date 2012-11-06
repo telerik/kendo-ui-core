@@ -9558,6 +9558,27 @@ containing one or more fields with the same name as the original input name.</de
     </tag>
     
     <tag>
+    	<description>Hierarchical model definition</description>
+    	<name>dataSource-schema-hierarchical-model</name>
+    	<tag-class>com.kendoui.taglib.datasource.HierarchicalModelTag</tag-class>
+    	<body-content>JSP</body-content>
+    	
+    	<attribute>
+    	 	<description>The name of the field which acts as an identifier of the model.</description>
+            <name>id</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+    	</attribute>
+    	
+    	<attribute>
+    	 	<description>The name of the field which describes if the data item has child items.</description>
+            <name>hasChildren</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+    	</attribute>
+    </tag>
+    
+    <tag>
     	<description>Configures model fields</description>
     	<name>dataSource-schema-model-fields</name>
     	<tag-class>com.kendoui.taglib.datasource.FieldsTag</tag-class>
