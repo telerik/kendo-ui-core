@@ -816,6 +816,7 @@
 
         stop: function() {
             $(this.element).kendoStop();
+            return this;
         },
 
         restoreCallback: function() {
@@ -1075,6 +1076,10 @@
             if (oldLength === undefined) {
                 element.data(property, setLength);
             }
+        },
+
+        shouldHide: function() {
+           return this._reverse;
         },
 
         teardown: function() {

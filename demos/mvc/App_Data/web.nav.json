@@ -1056,6 +1056,10 @@
             "spriteCssClass": "mvvmIcon",
             "items": [
                 {
+                    "text": "Expand",
+                    "url": "fx/expand.html"
+                },
+                {
                     "text": "Slide In",
                     "url": "fx/slidein.html"
                 }
