@@ -674,7 +674,7 @@
                 var th = $(this),
                     clientX = e.clientX,
                     winScrollLeft = $(window).scrollLeft(),
-                    position = th.offset().left + (!isRtl ? this.offsetWidth : 0);
+                    position = th.offset().left + this.offsetWidth;
 
                 if(clientX + winScrollLeft > position - indicatorWidth &&  clientX + winScrollLeft < position + indicatorWidth) {
                     if (!resizeHandle) {
