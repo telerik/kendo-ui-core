@@ -81,6 +81,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("connectors", value);
     }
 
+    public String getType() {
+        return (String)getProperty("type");
+    }
+
+    public void setType(String value) {
+        setProperty("type", value);
+    }
+
     public Object get() {
         return (Object)getProperty("");
     }

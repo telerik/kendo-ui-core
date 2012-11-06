@@ -4026,6 +4026,13 @@ Template variables:
         <tag-class>com.kendoui.taglib.chart.SeriesItemTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>The type of the series.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
 
         <attribute>
             <description>Array of data points.</description>
