@@ -1,7 +1,6 @@
 (function ($, undefined) {
     // Imports ================================================================
     var each = $.each,
-        grep = $.grep,
         isArray = $.isArray,
         map = $.map,
         math = Math,
@@ -46,8 +45,6 @@
         renderTemplate = dataviz.renderTemplate,
         uniqueId = dataviz.uniqueId;
 
-    var CSS_PREFIX = "k-";
-
     // Constants ==============================================================
     var ABOVE = "above",
         AREA = "area",
@@ -69,6 +66,7 @@
         CLIP = dataviz.CLIP,
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
+        CSS_PREFIX = "k-",
         DATABOUND = "dataBound",
         DATE = "date",
         DATE_REGEXP = /^\/Date\((.*?)\)\/$/,
@@ -80,6 +78,9 @@
         DEGREE = math.PI / 180,
         DONUT = "donut",
         DONUT_SECTOR_ANIM_DELAY = 50,
+        DRAG = "drag",
+        DRAG_END = "dragEnd",
+        DRAG_START = "dragStart",
         FADEIN = "fadeIn",
         GLASS = "glass",
         HOURS = "hours",
@@ -108,7 +109,9 @@
         ROUNDED_GLASS = "roundedGlass",
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
+        SELECT_START = "selectStart",
         SELECT = "select",
+        SELECT_END = "selectEnd",
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
         STRING = "string",
@@ -131,6 +134,7 @@
         TOOLTIP_OFFSET = 5,
         TOOLTIP_SHOW_DELAY = 100,
         TRIANGLE = "triangle",
+        VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_LINE = "verticalLine",
         WEEKS = "weeks",
@@ -180,6 +184,7 @@
             theme = themes[themeName] || themes[themeName.toLowerCase()];
             themeOptions = themeName && theme ? theme.chart : {};
 
+            resolveAxisAliases(options);
             chart._applyDefaults(options, themeOptions);
 
             chart.options = deepExtend({}, themeOptions, options);
@@ -224,7 +229,10 @@
             SERIES_CLICK,
             SERIES_HOVER,
             AXIS_LABEL_CLICK,
-            PLOT_AREA_CLICK
+            PLOT_AREA_CLICK,
+            DRAG_START,
+            DRAG,
+            DRAG_END
         ],
 
         items: function() {
@@ -277,9 +285,8 @@
 
             if (paneName) {
                 plotArea = chart._model._plotArea;
-                resolveAxisAliases(plotArea.options);
                 pane = plotArea.findPane(paneName);
-                plotArea.redrawPane(pane);
+                plotArea.redraw(pane);
             } else {
                 chart._redraw();
             }
@@ -301,6 +308,24 @@
                 chart._viewElement = view.renderTo(element[0]);
                 chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
                 chart._highlight = new Highlight(view, chart._viewElement);
+
+                /*
+                if (kendo.UserEvents) {
+                    if (chart._userEvents) {
+                        chart._userEvents.destroy();
+                    }
+
+                    chart._userEvents = new kendo.UserEvents(chart._viewElement, {
+                        global: true,
+                        threshold: 5,
+                        stopPropagation: true,
+                        multiTouch: true,
+                        start: proxy(chart._start, chart),
+                        move: proxy(chart._move, chart),
+                        end: proxy(chart._end, chart)
+                    });
+                }
+               */
             }
         },
 
@@ -385,6 +410,87 @@
 
             element.on(CLICK + NS, proxy(chart._click, chart));
             element.on(MOUSEOVER + NS, proxy(chart._mouseOver, chart));
+        },
+
+        _start: function(e) {
+            var chart = this,
+                origEvent = e.event.originalEvent,
+                coords = chart._eventCoordinates(origEvent),
+                plotArea = chart._model._plotArea,
+                axes = plotArea.axes,
+                pane = plotArea.findPointPane(coords),
+                i,
+                currentAxis,
+                inAxis = false;
+
+            for (i = 0; i < axes.length; i++) {
+                currentAxis = axes[i];
+                if (currentAxis.box.containsPoint(coords)) {
+                    inAxis = true;
+                    break;
+                }
+            }
+
+            if (!inAxis && plotArea.backgroundBox().containsPoint(coords)) {
+                chart.trigger(DRAG_START);
+                chart._dragState = {
+                    pane: pane
+                };
+            }
+        },
+
+        _move: function(e) {
+            var chart = this,
+                dragState = chart._dragState,
+                plotArea = chart._model._plotArea,
+                axes,
+                ranges = {};
+
+            if (dragState) {
+                e.preventDefault();
+
+                axes = dragState.pane.axes;
+                if (!inArray(plotArea.axisX, axes)) {
+                    axes.push(plotArea.axisX);
+                }
+                if (!inArray(plotArea.axisY, axes)) {
+                    axes.push(plotArea.axisY);
+                }
+
+                for (var i = 0; i < axes.length; i++) {
+                    var currentAxis = axes[i];
+                    var range = currentAxis.options.max - currentAxis.options.min;
+                    var scale;
+                    var delta;
+                    if(currentAxis.options.vertical) {
+                        scale = currentAxis.box.height() / range;
+                        delta = e.y.initialDelta;
+                    } else {
+                        scale = currentAxis.box.width() / range;
+                        delta = e.x.initialDelta;
+                    }
+
+                    if (delta !== 0) {
+                        var offset = delta / scale;
+
+                        ranges[currentAxis.options.name] = {
+                            min: currentAxis.options.min + offset,
+                            max: currentAxis.options.max + offset
+                        };
+                    }
+                }
+
+                chart.trigger(ranges);
+            }
+        },
+
+        _end: function(e) {
+            var chart = this;
+
+            if (chart._dragState) {
+                chart.trigger(DRAG_END);
+                delete chart._dragState;
+            }
         },
 
         _getChartElement: function(e) {
@@ -536,7 +642,7 @@
 
             for (i = 0; i < valueFields.length; i++) {
                 field = valueFields[i];
-                if (field === "value") {
+                if (field === VALUE) {
                     field = "field";
                 } else {
                     field = field + "Field";
@@ -587,6 +693,10 @@
 
             chart.wrapper.off(NS);
             dataSource.unbind(CHANGE, chart._dataChangeHandler);
+
+            if (chart._userEvents) {
+                chart._userEvents.destroy();
+            }
 
             Widget.fn.destroy.call(chart);
         }
@@ -1016,9 +1126,14 @@
                 p2,
                 slotSize;
 
-            from = clipValue(from, 0, intervals);
+            from = defined(from) ? from : 0;
             to = defined(to) ? to : from;
+            from = clipValue(from, 0, intervals);
             to = clipValue(to - 1, from, intervals);
+            // Fixes transient bug caused by iOS 6.0 JIT
+            // (one can never be too sure)
+            to = math.max(from, to);
+
             p1 = from === 0 ? lineStart : majorTicks[from];
             p2 = justified ? p1 : majorTicks[to];
             slotSize = to - from;
@@ -2590,9 +2705,14 @@
 
         options: {},
 
+        lineWidth: function() {
+            return this.series.width;
+        },
+
         points: function(visualPoints) {
             var segment = this,
                 linePoints = segment.linePoints.concat(visualPoints || []),
+                lineWidth = segment.lineWidth(),
                 points = [],
                 i,
                 length = linePoints.length,
@@ -2600,6 +2720,13 @@
 
             for (i = 0; i < length; i++) {
                 pointCenter = linePoints[i].markerBox().center();
+
+                if (i === 0) {
+                    pointCenter.x += lineWidth / 2;
+                } else if (i === length - 1) {
+                    pointCenter.x -= lineWidth / 2;
+                }
+
                 points.push(new Point2D(pointCenter.x, pointCenter.y));
             }
 
@@ -2846,6 +2973,11 @@
             LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
         },
 
+        lineWidth: function() {
+            var line = this.series.line || {};
+            return line.width;
+        },
+
         points: function() {
             var segment = this,
                 chart = segment.parent,
@@ -2896,7 +3028,7 @@
             ChartElement.fn.getViewElements.call(segment, view);
 
             return [
-                view.createPolyline(segment.points(), true, {
+                view.createPolyline(segment.points(), false, {
                     id: segment.options.id,
                     stroke: lineOptions.color,
                     strokeWidth: lineOptions.width,
@@ -4585,13 +4717,25 @@
         },
 
         empty: function() {
-            var pane = this;
+            var pane = this,
+                plotArea = pane.parent,
+                i;
 
-            pane.content.disableDiscovery();
-            pane.content.children = [];
+            if (plotArea) {
+                for (i = 0; i < pane.axes.length; i++) {
+                    plotArea.removeAxis(pane.axes[i]);
+                }
+
+                for (i = 0; i < pane.charts.length; i++) {
+                    plotArea.removeChart(pane.charts[i]);
+                }
+            }
 
             pane.axes = [];
             pane.charts = [];
+
+            pane.content.disableDiscovery();
+            pane.content.children = [];
         },
 
         reflow: function(targetBox) {
@@ -4736,6 +4880,22 @@
             return matchingPane || panes[0];
         },
 
+        findPointPane: function(point) {
+            var plotArea = this,
+                panes = plotArea.panes,
+                i,
+                matchingPane;
+
+            for (i = 0; i < panes.length; i++) {
+                if (panes[i].box.containsPoint(point)) {
+                    matchingPane = panes[i];
+                    break;
+                }
+            }
+
+            return matchingPane;
+        },
+
         appendAxis: function(axis) {
             var plotArea = this,
                 pane = plotArea.findPane(axis.options.pane);
@@ -4818,38 +4978,97 @@
             append(this.options.legend.items, data);
         },
 
-        reflow: function(targetBox, filterPane) {
+        groupAxes: function(panes) {
+            var xAxes = [],
+                yAxes = [],
+                paneAxes,
+                axis,
+                paneIx,
+                axisIx;
+
+            for (paneIx = 0; paneIx < panes.length; paneIx++) {
+                paneAxes = panes[paneIx].axes;
+                for (axisIx = 0; axisIx < paneAxes.length; axisIx++) {
+                    axis = paneAxes[axisIx];
+                    if (axis.options.vertical) {
+                        yAxes.push(axis);
+                    } else {
+                        xAxes.push(axis);
+                    }
+                }
+            }
+
+            return { x: xAxes, y: yAxes, any: xAxes.concat(yAxes) };
+        },
+
+        groupSeriesByPane: function() {
+            var plotArea = this,
+                series = plotArea.series,
+                seriesByPane = {},
+                i,
+                pane,
+                currentSeries;
+
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                pane = plotArea.seriesPaneName(currentSeries);
+
+                if (seriesByPane[pane]) {
+                    seriesByPane[pane].push(currentSeries);
+                } else {
+                    seriesByPane[pane] = [currentSeries];
+                }
+            }
+
+            return seriesByPane;
+        },
+
+        filterSeriesByType: function(series, types) {
+            var i,
+                currentSeries,
+                result = [];
+
+            types = [].concat(types);
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                if (inArray(currentSeries.type, types)) {
+                    result.push(currentSeries);
+                }
+            }
+
+            return result;
+        },
+
+        reflow: function(targetBox) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
+                panes = plotArea.panes,
                 margin = getSpacing(options.margin);
 
             plotArea.box = targetBox.clone().unpad(margin);
             plotArea.reflowPanes();
 
-            if (plotArea.axes.length > 0) {
-                plotArea.reflowAxes();
-            }
-
-            plotArea.reflowCharts(filterPane);
+            plotArea.reflowAxes(panes);
+            plotArea.reflowCharts(panes);
         },
 
-        redrawPane: function(pane) {
+        redraw: function(panes) {
             var plotArea = this,
                 i;
 
-            for (i = 0; i < pane.axes.length; i++) {
-                plotArea.removeAxis(pane.axes[i]);
+            panes = [].concat(panes);
+
+            for (i = 0; i < panes.length; i++) {
+                panes[i].empty();
             }
 
-            for (i = 0; i < pane.charts.length; i++) {
-                plotArea.removeChart(pane.charts[i]);
+            plotArea.render(panes);
+            plotArea.reflowAxes(panes);
+            plotArea.reflowCharts(panes);
+
+            for (i = 0; i < panes.length; i++) {
+                panes[i].refresh();
             }
-
-            pane.empty();
-            plotArea.render(pane);
-
-            plotArea.reflow(plotArea.box, pane);
-            pane.refresh();
         },
 
         axisCrossingValues: function(axis, crossingAxes) {
@@ -4979,10 +5198,9 @@
             }
         },
 
-        shrinkAxisWidth: function() {
+        shrinkAxisWidth: function(panes) {
             var plotArea = this,
-                panes = plotArea.panes,
-                axes = plotArea.axes,
+                axes = plotArea.groupAxes(panes).any,
                 axisBox = axisGroupBox(axes),
                 overflowX = 0,
                 i,
@@ -5009,10 +5227,8 @@
             }
         },
 
-        shrinkAxisHeight: function() {
-            var plotArea = this,
-                panes = plotArea.panes,
-                i,
+        shrinkAxisHeight: function(panes) {
+            var i,
                 currentPane,
                 axes,
                 overflowY,
@@ -5039,10 +5255,9 @@
             }
         },
 
-        fitAxes: function() {
+        fitAxes: function(panes) {
             var plotArea = this,
-                panes = plotArea.panes,
-                axes = plotArea.axes,
+                axes = plotArea.groupAxes(panes).any,
                 paneAxes,
                 paneBox,
                 axisBox,
@@ -5086,24 +5301,23 @@
             }
         },
 
-        reflowAxes: function() {
+        reflowAxes: function(panes) {
             var plotArea = this,
-                panes = plotArea.panes,
                 i,
-                axes = plotArea.axes,
-                xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
-                yAxes = grep(axes, (function(axis) { return axis.options.vertical; }));
+                axes = plotArea.groupAxes(panes);
 
             for (i = 0; i < panes.length; i++) {
                 plotArea.reflowPaneAxes(panes[i]);
             }
 
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAxisWidth();
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAxisHeight();
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.fitAxes();
+            if (axes.x.length > 0 && axes.y.length > 0) {
+                plotArea.alignAxes(axes.x, axes.y);
+                plotArea.shrinkAxisWidth(panes);
+                plotArea.alignAxes(axes.x, axes.y);
+                plotArea.shrinkAxisHeight(panes);
+                plotArea.alignAxes(axes.x, axes.y);
+                plotArea.fitAxes(panes);
+            }
         },
 
         reflowPaneAxes: function(pane) {
@@ -5118,15 +5332,17 @@
             }
         },
 
-        reflowCharts: function(filterPane) {
+        reflowCharts: function(panes) {
             var plotArea = this,
                 charts = plotArea.charts,
                 count = charts.length,
                 box = plotArea.box,
+                chartPane,
                 i;
 
             for (i = 0; i < count; i++) {
-                if (!filterPane || charts[i].pane == filterPane) {
+                chartPane = charts[i].pane;
+                if (!chartPane || inArray(chartPane, panes)) {
                     charts[i].reflow(box);
                 }
             }
@@ -5277,13 +5493,15 @@
             valueAxis: {}
         },
 
-        render: function(pane) {
+        render: function(panes) {
             var plotArea = this;
 
-            plotArea.createCategoryAxes(pane);
-            plotArea.aggregateDateSeries(pane);
-            plotArea.createCharts(pane);
-            plotArea.createValueAxes(pane);
+            panes = panes || plotArea.panes;
+
+            plotArea.createCategoryAxes(panes);
+            plotArea.aggregateDateSeries(panes);
+            plotArea.createCharts(panes);
+            plotArea.createValueAxes(panes);
         },
 
         removeAxis: function(axis) {
@@ -5308,39 +5526,20 @@
             }
         },
 
-        createCharts: function(filterPane) {
+        createCharts: function(panes) {
             var plotArea = this,
-                series = plotArea.series,
-                seriesByPane = {},
-                paneNames = [],
+                seriesByPane = plotArea.groupSeriesByPane(),
                 i,
                 pane,
-                currentSeries,
-                paneSeries,
-                firstPane = plotArea.panes[0],
-                defaultPaneMatch;
+                paneSeries;
 
-            for (i = 0; i < series.length; i++) {
-                currentSeries = series[i];
-                pane = plotArea.seriesPaneName(currentSeries);
-                defaultPaneMatch = pane === "default" && firstPane === filterPane;
+            for (i = 0; i < panes.length; i++) {
+                pane = panes[i];
+                paneSeries = seriesByPane[pane.options.name || "default"];
 
-                if (!filterPane || (defaultPaneMatch || filterPane.options.name === pane)) {
-                    if (!inArray(pane, paneNames)) {
-                        paneNames.push(pane);
-                    }
-
-                    if (seriesByPane[pane]) {
-                        seriesByPane[pane].push(currentSeries);
-                    } else {
-                        seriesByPane[pane] = [currentSeries];
-                    }
+                if (!paneSeries) {
+                    continue;
                 }
-            }
-
-            for (i = 0; i < paneNames.length; i++) {
-                paneSeries = seriesByPane[paneNames[i]];
-                pane = plotArea.findPane(paneNames[i]);
 
                 plotArea.createAreaChart(
                     plotArea.filterSeriesByType(paneSeries, [AREA, VERTICAL_AREA]),
@@ -5358,33 +5557,18 @@
                 );
 
                 plotArea.createCandlestickChart(
-                    plotArea.filterSeriesByType(paneSeries, [CANDLESTICK]),
+                    plotArea.filterSeriesByType(paneSeries, CANDLESTICK),
                     pane
                 );
 
                 plotArea.createOHLCChart(
-                    plotArea.filterSeriesByType(paneSeries, [OHLC]),
+                    plotArea.filterSeriesByType(paneSeries, OHLC),
                     pane
                 );
             }
         },
 
-        filterSeriesByType: function(series, types) {
-            var i,
-                currentSeries,
-                result = [];
-
-            for (i = 0; i < series.length; i++) {
-                currentSeries = series[i];
-                if (inArray(currentSeries.type, types)) {
-                    result.push(currentSeries);
-                }
-            }
-
-            return result;
-        },
-
-        aggregateDateSeries: function(filterPane) {
+        aggregateDateSeries: function(panes) {
             var plotArea = this,
                 series = plotArea.srcSeries || plotArea.series,
                 processedSeries = [],
@@ -5401,7 +5585,6 @@
                 data,
                 srcValues,
                 i,
-                match,
                 categoryIx,
                 pointData,
                 value;
@@ -5411,9 +5594,8 @@
                 seriesClone = deepExtend({}, currentSeries);
                 categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
                 axisPane = plotArea.findPane(categoryAxis.options.pane);
-                match = !filterPane || (filterPane === axisPane);
 
-                if (match && equalsIgnoreCase(categoryAxis.options.type, DATE)) {
+                if (inArray(axisPane, panes) && equalsIgnoreCase(categoryAxis.options.type, DATE)) {
                     categories = categoryAxis.options.categories;
                     categoryMap = categoryAxis.categoryMap;
 
@@ -5465,13 +5647,16 @@
             PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
         },
 
+        // TODO: Refactor, optionally use series.pane option
         seriesPaneName: function(series) {
             var plotArea = this,
                 options = plotArea.options,
                 axisName = series.axis,
                 axisOptions = [].concat(options.valueAxis),
                 axis = $.grep(axisOptions, function(a) { return a.name === axisName; })[0],
-                paneName = (axis || {}).pane || "default";
+                panes = options.panes || [{}],
+                defaultPaneName = (panes[0] || {}).name || "default",
+                paneName = (axis || {}).pane || defaultPaneName;
 
             return paneName;
         },
@@ -5490,7 +5675,7 @@
             return axis;
         },
 
-        createBarChart: function(series) {
+        createBarChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
@@ -5505,7 +5690,7 @@
                     spacing: firstSeries.spacing
                 });
 
-            plotArea.appendChart(barChart);
+            plotArea.appendChart(barChart, pane);
         },
 
         createLineChart: function(series, pane) {
@@ -5590,13 +5775,13 @@
             }
         },
 
-        createCategoryAxes: function(filterPane) {
+        createCategoryAxes: function(panes) {
             var plotArea = this,
                 invertAxes = plotArea.invertAxes,
                 definitions = [].concat(plotArea.options.categoryAxis),
                 i,
                 axisOptions,
-                pane,
+                axisPane,
                 categories,
                 type,
                 name,
@@ -5607,9 +5792,9 @@
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
-                pane = plotArea.findPane(axisOptions.pane);
+                axisPane = plotArea.findPane(axisOptions.pane);
 
-                if (!filterPane || filterPane === pane) {
+                if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
                     categories = axisOptions.categories || [];
                     dateCategory = categories[0] instanceof Date;
@@ -5655,13 +5840,13 @@
             }
         },
 
-        createValueAxes: function(filterPane) {
+        createValueAxes: function(panes) {
             var plotArea = this,
                 definitions = [].concat(plotArea.options.valueAxis),
                 invertAxes = plotArea.invertAxes,
                 baseOptions = { vertical: !invertAxes },
                 axisOptions,
-                pane,
+                axisPane,
                 valueAxis,
                 primaryAxis,
                 axes = [],
@@ -5671,9 +5856,9 @@
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
-                pane = plotArea.findPane(axisOptions.pane);
+                axisPane = plotArea.findPane(axisOptions.pane);
 
-                if (!filterPane || filterPane === pane) {
+                if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
                     range = plotArea.valueAxisRangeTracker.query(name);
 
@@ -5829,23 +6014,40 @@
             yAxis: {}
         },
 
-        render: function(pane) {
+        render: function(panes) {
             var plotArea = this,
-                series = plotArea.series;
+                seriesByPane = plotArea.groupSeriesByPane(),
+                i,
+                pane,
+                paneSeries;
 
-            plotArea.createScatterChart(grep(series, function(s) {
-                return s.type === SCATTER;
-            }), pane);
+            panes = panes || plotArea.panes;
 
-            plotArea.createScatterLineChart(grep(series, function(s) {
-                return s.type === SCATTER_LINE;
-            }), pane);
+            for (i = 0; i < panes.length; i++) {
+                pane = panes[i];
+                paneSeries = seriesByPane[pane.options.name || "default"];
 
-            plotArea.createBubbleChart(grep(series, function(s) {
-                return s.type === BUBBLE;
-            }), pane);
+                if (!paneSeries) {
+                    continue;
+                }
 
-            plotArea.createAxes(pane);
+                plotArea.createScatterChart(
+                    plotArea.filterSeriesByType(paneSeries, SCATTER),
+                    pane
+                );
+
+                plotArea.createScatterLineChart(
+                    plotArea.filterSeriesByType(paneSeries, SCATTER_LINE),
+                    pane
+                );
+
+                plotArea.createBubbleChart(
+                    plotArea.filterSeriesByType(paneSeries, BUBBLE),
+                    pane
+                );
+            }
+
+            plotArea.createAxes(panes);
         },
 
         appendChart: function(chart, pane) {
@@ -5878,6 +6080,23 @@
             if (axis === plotArea.axisY) {
                 delete plotArea.axisY;
             }
+        },
+
+        // TODO: Refactor, optionally use series.pane option
+        seriesPaneName: function(series) {
+            var plotArea = this,
+                options = plotArea.options,
+                xAxisName = series.xAxis,
+                xAxisOptions = [].concat(options.xAxis),
+                xAxis = $.grep(xAxisOptions, function(a) { return a.name === xAxisName; })[0],
+                yAxisName = series.yAxis,
+                yAxisOptions = [].concat(options.yAxis),
+                yAxis = $.grep(yAxisOptions, function(a) { return a.name === yAxisName; })[0],
+                panes = options.panes || [{}],
+                defaultPaneName = panes[0].name || "default",
+                paneName = (xAxis || {}).pane || (yAxis || {}).pane || defaultPaneName;
+
+            return paneName;
         },
 
         createScatterChart: function(series, pane) {
@@ -5958,24 +6177,25 @@
             return axis;
         },
 
-        createAxes: function(filterPane) {
+        createAxes: function(panes) {
             var plotArea = this,
                 options = plotArea.options,
+                axisPane,
                 xAxesOptions = [].concat(options.xAxis),
                 xAxes = [],
                 yAxesOptions = [].concat(options.yAxis),
                 yAxes = [];
 
             each(xAxesOptions, function() {
-                var pane = plotArea.findPane(this.pane);
-                if (!filterPane || filterPane === pane) {
+                axisPane = plotArea.findPane(this.pane);
+                if (inArray(axisPane, panes)) {
                     xAxes.push(plotArea.createXYAxis(this, false));
                 }
             });
 
             each(yAxesOptions, function() {
-                var pane = plotArea.findPane(this.pane);
-                if (!filterPane || filterPane === pane) {
+                axisPane = plotArea.findPane(this.pane);
+                if (inArray(axisPane, panes)) {
                     yAxes.push(plotArea.createXYAxis(this, true));
                 }
             });
@@ -6400,8 +6620,8 @@
                     left: valueAxisLineBox.x2 + padding.left,
                     top: valueAxisLineBox.y1 + padding.right
                 },
-                start: options.min,
-                end: options.max
+                from: options.min,
+                to: options.max
             }, options);
 
             that.wrapper = wrapper = $(that.template(that.options)).appendTo(chartElement);
@@ -6421,29 +6641,234 @@
             that.leftHandle.css("top", (that.selection.height() - that.leftHandle.height()) / 2);
             that.rightHandle.css("top", (that.selection.height() - that.rightHandle.height()) / 2);
 
-            that.setUpDragHandle(that.leftHandle);
-            that.setUpDragHandle(that.rightHandle);
-
-            that.setRange(options.start, options.end);
+            that.move(options.from, options.to);
 
             that.bind(that.events, that.options);
 
-            if (kendo.ui.Draggable) {
-                that.selection.kendoDraggable({
-                    drag: proxy(that.dragSelection, that),
-                    dragstart: proxy(that.dragSelectionStart, that),
-                    dragend: proxy(that._dragEnd, that)
+            if (kendo.UserEvents) {
+                that.userEvents = new kendo.UserEvents(that.wrapper, {
+                    global: true,
+                    threshold: 5,
+                    stopPropagation: true,
+                    multiTouch: true,
+                    start: proxy(that._start, that),
+                    move: proxy(that._move, that),
+                    end: proxy(that._end, that),
+                    tap: proxy(that._tap, that),
+                    gesturestart: proxy(that._gesturechange, that),
+                    gesturechange: proxy(that._gesturechange, that)
                 });
+            } else {
+                that.leftHandle.add(that.rightHandle).removeClass(CSS_PREFIX + "handle");
             }
         },
 
         events: [
-            SELECT
+            SELECT_START,
+            SELECT,
+            SELECT_END
         ],
 
         options: {
             min: MIN_VALUE,
             max: MAX_VALUE
+        },
+
+        _start: function(e) {
+            var that = this,
+                options = that.options,
+                target = $(e.event.originalEvent.target);
+
+            if (that._state || !target) {
+                return;
+            }
+
+            that._state = {
+                moveTarget: target.parents(".k-handle").add(target).first(),
+                startLocation: e.x.location,
+                range: {
+                    from: options.from,
+                    to: options.to
+                }
+            };
+
+            that.trigger(SELECT_START);
+        },
+
+        _move: function(e) {
+            if (!this._state) {
+                return;
+            }
+
+            var that = this,
+                state = that._state,
+                options = that.options,
+                fullSpan = options.max - options.min,
+                delta = state.startLocation - e.x.location,
+                range = state.range,
+                span = range.to - range.from,
+                target = state.moveTarget,
+                scale = that.wrapper.width() / fullSpan,
+                offset = math.round(delta / scale);
+
+            e.preventDefault();
+
+            if (target.is(".k-selection")) {
+                range.from = math.min(
+                    math.max(options.min, options.from - offset),
+                    options.max - span
+                );
+                range.to = math.min(
+                    range.from + span,
+                    options.max
+                );
+            } else if (target.is(".k-leftHandle")) {
+                range.from = math.min(
+                    math.max(options.min, options.from - offset),
+                    options.max - 1
+                );
+                range.to = math.max(range.from + 1, range.to);
+            } else if (target.is(".k-rightHandle")) {
+                range.to = math.min(
+                    math.max(options.min + 1, options.to - offset),
+                    options.max
+                );
+                range.from = math.min(range.to - 1, range.from);
+            }
+
+            that.move(range.from, range.to);
+
+            that.trigger(SELECT, {
+                from: range.from,
+                to: range.to
+            });
+        },
+
+        _end: function(e) {
+            var that = this,
+                range = that._state.range;
+
+            delete that._state;
+            that.set(range.from, range.to);
+            that.trigger(SELECT_END);
+        },
+
+        _gesturechange: function(e) {
+            if (!this._state) {
+                return;
+            }
+
+            var that = this,
+                state = that._state,
+                options = that.options,
+                categoryAxis = that.categoryAxis,
+                range = state.range,
+                p0 = e.touches[0].x.location,
+                p1 = e.touches[1].x.location,
+                left = math.min(p0, p1),
+                right = math.max(p0, p1);
+
+            e.preventDefault();
+            state.moveTarget = null;
+
+            range.from =
+                categoryAxis.getCategoryIndex(new dataviz.Point2D(left)) ||
+                options.min;
+
+            range.to =
+                categoryAxis.getCategoryIndex(new dataviz.Point2D(right)) ||
+                options.max;
+
+            that.move(range.from, range.to);
+        },
+
+        _tap: function(e) {
+            var that = this,
+                options = that.options,
+                categoryAxis = that.categoryAxis,
+                categoryIx = categoryAxis.getCategoryIndex(
+                    new dataviz.Point2D(e.x.location, categoryAxis.box.y1)
+                ),
+                span = options.to - options.from,
+                mid = options.from + span / 2,
+                offset = math.round(mid - categoryIx),
+                from,
+                to;
+
+            if (that._state) {
+                return;
+            }
+
+            e.preventDefault();
+
+            from = math.min(
+                math.max(options.min, options.from - offset),
+                options.max - span
+            );
+            to = math.min(
+                from + span,
+                options.max
+            );
+
+            that.set(from, to);
+            that.trigger(SELECT_END);
+        },
+
+        move: function(from, to) {
+            var that = this,
+                options = that.options,
+                offset = options.offset,
+                padding = options.padding,
+                border = options.selection.border,
+                categoryAxis = that.categoryAxis,
+                leftMaskWidth,
+                rightMaskWidth,
+                box,
+                distance;
+
+            box = categoryAxis.getSlot(from);
+            leftMaskWidth = round(box.x1 - offset.left + padding.left);
+            that.leftMask.width(leftMaskWidth);
+            that.selection.css("left", leftMaskWidth);
+
+            box = categoryAxis.getSlot(to);
+            rightMaskWidth = round(options.width - (box.x1 - offset.left + padding.left));
+            that.rightMask.width(rightMaskWidth);
+            distance = options.width - rightMaskWidth;
+            if (distance != options.width) {
+                distance += border.right;
+            }
+
+            that.rightMask.css("left", distance);
+            that.selection.width(math.max(
+                options.width - (leftMaskWidth + rightMaskWidth) - border.right,
+                0
+            ));
+        },
+
+        set: function(from, to) {
+            var that = this,
+                options = that.options;
+
+            that.move(from, to);
+
+            options.from = from;
+            options.to = to;
+
+            that.trigger(SELECT, {
+                from: from,
+                to: to
+            });
+        },
+
+        expand: function(delta) {
+            var selection = this,
+                options = selection.options;
+
+            selection.set(
+                math.min(options.from - delta, options.to - 1),
+                math.max(options.to + delta, options.from + 1)
+            );
         },
 
         getValueAxis: function(categoryAxis) {
@@ -6458,148 +6883,6 @@
                     return axis;
                 }
             }
-        },
-
-        setRange: function(start, end) {
-            var that = this,
-                options = that.options,
-                selectionStart = options.start,
-                selectionEnd = options.end;
-
-            if (start === null || !isFinite(start)) {
-                start = selectionStart;
-            }
-
-            if (start === null || !isFinite(end)) {
-                end = selectionEnd;
-            }
-
-            options.start = start;
-            options.end = end;
-
-            that.moveSelection();
-        },
-
-        moveSelection: function() {
-            var that = this,
-                options = that.options,
-                offset = options.offset,
-                padding = options.padding,
-                border = options.selection.border,
-                start = options.start,
-                end = options.end,
-                categoryAxis = that.categoryAxis,
-                leftMaskWidth, rightMaskWidth, box,
-                distance;
-
-            box = categoryAxis.getSlot(start);
-            leftMaskWidth = round(box.x1 - offset.left + padding.left);
-            that.leftMask.width(leftMaskWidth);
-            that.selection.css("left", leftMaskWidth);
-
-            box = categoryAxis.getSlot(end);
-            rightMaskWidth = round(options.width - (box.x1 - offset.left + padding.left));
-            that.rightMask.width(rightMaskWidth);
-            distance = options.width - rightMaskWidth;
-            if (distance != options.width) {
-                distance += border.right;
-            }
-            that.rightMask.css("left", distance);
-            that.selection.width(math.max(options.width - (leftMaskWidth + rightMaskWidth) - border.right, 0));
-        },
-
-        setUpDragHandle: function(handle) {
-            var that = this;
-
-            if (kendo.ui.Draggable) {
-                return new kendo.ui.Draggable(handle, {
-                    dragstart: proxy(that.dragStart, that),
-                    drag: proxy(that.drag, that),
-                    dragend: proxy(that.dragEnd, that)
-                });
-            } else {
-                handle.removeClass(CSS_PREFIX + "handle");
-            }
-        },
-
-        dragStart: function(e) {
-            var that = this,
-                options = that.options;
-
-            that.dragHandle = $(e.currentTarget).css("cursor", "default");
-            that.isFirst = that.dragHandle.hasClass(CSS_PREFIX + "leftHandle");
-            that._state = {
-                start: options[that.isFirst ? "start" : "end"]
-            };
-        },
-
-        drag: function(e) {
-            var that = this,
-                options = that.options,
-                delta = e.x.startLocation - e.x.location,
-                fullRange = options.max - options.min,
-                scale = that.wrapper.width() / fullRange,
-                offset = math.round(delta / scale),
-                state = that._state;
-
-            if (that.isFirst) {
-                that.start = math.min(math.max(options.min, state.start - offset), options.max - 1);
-                that.end = math.max(that.start + 1, options.end);
-            } else {
-                that.end = math.min(math.max(options.min + 1, state.start - offset), options.max);
-                that.start = math.min(that.end - 1, options.start);
-            }
-
-            that.setRange(that.start, that.end);
-        },
-
-        dragEnd: function(e) {
-            var that = this;
-            that._dragEnd(that, e);
-            that.dragHandle.css("cursor", "e-resize");
-        },
-
-        _dragEnd: function(e) {
-            var that = this,
-                options = that.options;
-
-            that.trigger(SELECT, {
-                start: options.start,
-                end: options.end
-            });
-        },
-
-        dragSelectionStart: function(e) {
-            var that = this,
-                options = that.options;
-
-            if ($(e.target).is(".k-selection")) {
-                that._dragSelectionState = {
-                    range: options.end - options.start,
-                    start: options.start
-                };
-            } else {
-                e.preventDefault();
-            }
-        },
-
-        dragSelection: function(e) {
-            var that = this,
-                options = that.options,
-                delta = e.x.startLocation - e.x.location,
-                fullRange = options.max - options.min,
-                state = that._dragSelectionState,
-                range = state.range,
-                scale = that.wrapper.width() / fullRange,
-                offset = math.round(delta / scale);
-
-            that.start = math.min(
-                math.max(options.min, state.start - offset),
-                options.max - range);
-
-            that.end = math.min(that.start + range, options.max);
-
-            that.setRange(that.start, that.end);
         }
     });
 
@@ -6751,41 +7034,21 @@
     }
 
     function resolveAxisAliases(options) {
-        if (options.categoryAxes) {
-            var categories = [],
-                axes = [].concat(options.categoryAxis),
-                i;
+        var alias;
 
-            for (i = 0; i < axes.length; i++) {
-                categories.push(axes[i].categories);
+        each([CATEGORY, VALUE, X, Y], function() {
+            alias = this + "Axes";
+            if (options[alias]) {
+                options[this + "Axis"] = options[alias];
+                delete options[alias];
             }
-
-            options.categoryAxis = axes = options.categoryAxes;
-
-            for (i = 0; i < axes.length; i++) {
-                axes[i].categories = axes[i].categories || categories.shift();
-            }
-        }
-
-        if (options.valueAxes) {
-            options.valueAxis = options.valueAxes;
-        }
-
-        if (options.xAxes) {
-            options.xAxis = options.xAxes;
-        }
-
-        if (options.yAxes) {
-            options.yAxis = options.yAxes;
-        }
+        });
     }
 
     function applyAxisDefaults(options, themeOptions) {
         var themeAxisDefaults = ((themeOptions || {}).axisDefaults) || {};
 
-        resolveAxisAliases(options);
-
-        each([CATEGORY, "value", X, Y], function() {
+        each([CATEGORY, VALUE, X, Y], function() {
             var axisName = this + "Axis",
                 axes = [].concat(options[axisName]),
                 axisDefaults = options.axisDefaults || {};
@@ -7025,7 +7288,7 @@
     }
 
     function valueFieldsByChartType(type) {
-        var result = ["value"];
+        var result = [VALUE];
 
         if (inArray(type, [CANDLESTICK, OHLC])){
             result = ["open", "high", "low", "close"];
@@ -7128,7 +7391,7 @@
 
             for (i = 0; i < length; i++) {
                 fieldName = fields[i];
-                sourceFieldName = fieldName === "value" ? "field" : fieldName + "Field";
+                sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
 
                 sourceFields.push(series[sourceFieldName] || fieldName);
             }
@@ -7238,7 +7501,7 @@
 
         for (i = 0; i < length; i++) {
             val = values[i];
-            if (val === null || !isFinite(val)) {
+            if (typeof val !== "number" || isNaN(val)) {
                 valid = false;
                 break;
             }
@@ -7290,6 +7553,7 @@
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
+        axisGroupBox: axisGroupBox,
         validNumbers: validNumbers,
         bindPoint: bindPoint,
         categoriesCount: categoriesCount,
@@ -7297,7 +7561,8 @@
         duration: duration,
         floorDate: floorDate,
         lteDateIndex: lteDateIndex,
-        toDate: toDate
+        toDate: toDate,
+        toTime: toTime
     });
 
 })(jQuery);

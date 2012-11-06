@@ -164,12 +164,33 @@ div.k-gauge
     border-color: #a7b2c1;
 }
 
-
-
 .k-leftHandle {
     left: -4px;
 }
 
 .k-rightHandle {
     right: -4px;
+}
+
+/* Navigator hint */
+.k-navigator-hint {
+}
+
+.k-navigator-hint div {
+    position: absolute;
+}
+
+.k-navigator-hint .k-scroll {
+    background: #bbb;
+    position: absolute;
+    height: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.k-navigator-hint .k-tooltip {
+    margin-top: 20px;
+    border: 3px solid #bbb;
+    background: #fff;
 }

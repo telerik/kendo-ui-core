@@ -844,6 +844,10 @@
                     equal(chartSeries.options.series.length, 2);
                 });
 
+                test("bar chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
                 test("sets axis min/max to series limits", 2, function() {
                     stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
                         function() {
@@ -893,6 +897,10 @@
 
                 test("creates line chart", function() {
                     ok(chartSeries instanceof dataviz.LineChart);
+                });
+
+                test("line chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
                 });
 
                 test("sets isStacked when first series is stacked", function() {
@@ -955,7 +963,11 @@
 
                 test("creates area chart", function() {
                     ok(chartSeries instanceof dataviz.AreaChart);
-                });
+                })
+
+                test("area chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });;
 
                 test("sets isStacked when first series is stacked", function() {
                     createPlotArea([{ type: "area", data: [], stack: true }, { type: "area", data: [] }]);
@@ -1100,6 +1112,38 @@
                 test("does not set isStacked when first and only series is stacked", function() {
                     createPlotArea([{ type: "bar", data: [], stack: true }]);
                     ok(!chartSeries.options.isStacked);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / OHLC series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea([{
+                            type: "ohlc",
+                            data: [[]]
+                        }]);
+                    }
+                });
+
+                test("OHLC chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Candlestick series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea([{
+                            type: "candlestick",
+                            data: [[]]
+                        }]);
+                    }
+                });
+
+                test("Candlestick chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
                 });
 
                 // ------------------------------------------------------------
@@ -2331,6 +2375,28 @@
                            plotArea.valueAxis.box.x1);
                 });
 
+                test("chart pane determined by series axis", function() {
+                    plotArea = new dataviz.CategoricalPlotArea([{
+                        type: "column",
+                        data: [1],
+                        name: "series",
+                        axis: "b"
+                    }], {
+                        panes: [{
+                            name: "top",
+                        }, {
+                            name: "bottom"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "b",
+                            pane: "bottom"
+                        }]
+                    });
+
+                    equals(plotArea.panes[1].charts[0].options.series[0].name, "series");
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Panes / Title", {
                     setup: function() {
@@ -2406,7 +2472,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Panes / Redraw", {
+                module("Categorical PlotArea / Panes / redraw", {
                     setup: function() {
                         moduleSetup();
 
@@ -2433,21 +2499,21 @@
 
                 test("Removes pane axes from plotArea.axes collection", function() {
                     plotArea.axes[1].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.axes[1].dirty);
                 });
 
                 test("Removes pane axes from namedCategoryAxes collection", function() {
                     plotArea.namedCategoryAxes["cAxis"].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.namedCategoryAxes["cAxis"].dirty);
                 });
 
                 test("Removes pane axes from namedValueAxes collection", function() {
                     plotArea.namedValueAxes["vAxis"].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.namedValueAxes["vAxis"].dirty);
                 });
@@ -2460,70 +2526,70 @@
                     });
 
                     plotArea.panes[0].axes[0].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.panes[0].axes[0].dirty);
                 });
 
                 test("Resets range tracker for pane value axes", function() {
                     plotArea.series[0].data[0] = 10;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     equals(plotArea.valueAxisRangeTracker.query("vAxis").max, 10);
                 });
 
                 test("Resets range tracker for pane value axes (empty series)", function() {
                     plotArea.series[0].data[0] = undefined;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     equals(plotArea.valueAxisRangeTracker.query("vAxis").max, 1);
                 });
 
                 test("Updates plotArea.categoryAxis alias", function() {
                     plotArea.panes[0].axes[0].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.categoryAxis.dirty);
                 });
 
                 test("Updates plotArea.valueAxis alias", function() {
                     plotArea.panes[0].axes[1].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.valueAxis.dirty);
                 });
 
                 test("Updates plotArea.axisX alias", function() {
                     plotArea.panes[0].axes[0].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.axisX.dirty);
                 });
 
                 test("Does not update plotArea.axisX alias if axis is not primary", function() {
                     plotArea.axisX.dirty = true;
-                    plotArea.redrawPane(plotArea.panes[1]);
+                    plotArea.redraw(plotArea.panes[1]);
 
                     ok(plotArea.axisX.dirty);
                 });
 
                 test("Updates plotArea.axisY alias", function() {
                     plotArea.panes[0].axes[1].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.axisY.dirty);
                 });
 
                 test("Does not update plotArea.axisY alias if axis is not primary", function() {
                     plotArea.axisY.dirty = true;
-                    plotArea.redrawPane(plotArea.panes[1]);
+                    plotArea.redraw(plotArea.panes[1]);
 
                     ok(plotArea.axisY.dirty);
                 });
 
                 test("clears pane", function() {
                     plotArea.panes[0].content.children[0].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.panes[0].content.children[0].dirty);
                 });
@@ -2532,7 +2598,7 @@
                     var x = plotArea.axes[0].box.x1;
 
                     plotArea.series[0].data[0] = 10;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     notEqual(plotArea.axes[0].box.x1, x);
                 });
@@ -2550,11 +2616,101 @@
                     var element = document.getElementById(paneId);
 
                     plotArea.series[0].data[0] = 10;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     notEqual(document.getElementById(paneId), element);
 
                     destroyChart();
+                });
+
+                test("does not reflow axis in different pane", function() {
+                    createPlotArea({
+                        categoryAxis: {
+                            name: "cAxis"
+                        },
+                        valueAxis: [{
+                            name: "vAxis"
+                        }, {
+                            name: "vAxisB",
+                            pane: "b"
+                        }],
+                        panes: [{
+                            name: "a"
+                        }, {
+                            name: "b"
+                        }]
+                        }, [{
+                            type: "column",
+                            data: [1000],
+                            axis: "vAxis"
+                        }]
+                    );
+
+                    var box = plotArea.namedValueAxes.vAxisB.box;
+                    plotArea.series[0].data[0] = 10;
+                    plotArea.redraw(plotArea.panes[0]);
+
+                    sameBox(box, plotArea.namedValueAxes.vAxisB.box);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Panes / redraw / batch", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea({
+                            categoryAxis: {
+                                name: "cAxis"
+                            },
+                            valueAxis: {
+                                name: "vAxis"
+                            },
+                            panes: [{
+                                name: "a"
+                            }, {
+                                name: "b"
+                            }]
+                            }, [{
+                                type: "column",
+                                data: [1000],
+                                axis: "vAxis"
+                            }]
+                        );
+                    }
+                });
+
+                test("redraws multiple panes", function() {
+                    createPlotArea({
+                        categoryAxis: {
+                            name: "cAxis"
+                        },
+                        valueAxis: [{
+                            name: "vAxis"
+                        }, {
+                            name: "vAxisB",
+                            pane: "b"
+                        }, {
+                            name: "vAxisC",
+                            pane: "c"
+                        }],
+                        panes: [{
+                            name: "a"
+                        }, {
+                            name: "b"
+                        }, {
+                            name: "c"
+                        }]
+                        }, [{
+                            type: "column",
+                            data: [1000],
+                            axis: "vAxis"
+                        }]
+                    );
+
+                    plotArea.namedValueAxes.vAxisC.dirty = true;
+                    plotArea.redraw([plotArea.panes[0], plotArea.panes[1]]);
+
+                    ok(plotArea.namedValueAxes.vAxisC.dirty);
                 });
 
             })();
@@ -3335,6 +3491,48 @@
                 });
 
                 // ------------------------------------------------------------
+                module("XY PlotArea / Scatter series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData);
+                    }
+                });
+
+                test("Scatter chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Bubble series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea([{
+                                      type: "bubble",
+                                      data: []
+                        }]);
+                    }
+                });
+
+                test("Bubble chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Scatter line series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea([{ type: "scatterLine", data: [] }]);
+                    }
+                });
+
+                test("Scatter line chart added to pane content", function() {
+                    ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
+                // ------------------------------------------------------------
                 module("XY PlotArea / Panes / Redraw", {
                     setup: function() {
                         moduleSetup();
@@ -3365,21 +3563,21 @@
 
                 test("Removes pane axes from plotArea.axes collection", function() {
                     plotArea.axes[1].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.axes[1].dirty);
                 });
 
                 test("Removes pane axes from namedXAxes collection", function() {
                     plotArea.namedXAxes["xAxis"].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.namedXAxes["xAxis"].dirty);
                 });
 
                 test("Removes pane axes from namedYAxes collection", function() {
                     plotArea.namedYAxes["yAxis"].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.namedYAxes["yAxis"].dirty);
                 });
@@ -3393,70 +3591,70 @@
                     plotArea.reflow(chartBox);
 
                     plotArea.panes[0].axes[0].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.panes[0].axes[0].dirty);
                 });
 
                 test("Resets range tracker for pane x axes", function() {
                     plotArea.series[0].data[0][0] = 10;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     equals(plotArea.xAxisRangeTracker.query("xAxis").max, 10);
                 });
 
                 test("Resets range tracker for pane x axes (empty series)", function() {
                     plotArea.series[0].data[0][0] = undefined;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     equals(plotArea.xAxisRangeTracker.query("xAxis").max, 1);
                 });
 
                 test("Resets range tracker for pane y axes", function() {
                     plotArea.series[0].data[0][1] = 10;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     equals(plotArea.yAxisRangeTracker.query("yAxis").max, 10);
                 });
 
                 test("Resets range tracker for pane y axes (empty series)", function() {
                     plotArea.series[0].data[0][1] = undefined;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     equals(plotArea.yAxisRangeTracker.query("yAxis").max, 1);
                 });
 
                 test("Updates plotArea.axisX alias", function() {
                     plotArea.panes[0].axes[0].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.axisX.dirty);
                 });
 
                 test("Does not update plotArea.axisX alias if axis is not primary", function() {
                     plotArea.axisX.dirty = true;
-                    plotArea.redrawPane(plotArea.panes[1]);
+                    plotArea.redraw(plotArea.panes[1]);
 
                     ok(plotArea.axisX.dirty);
                 });
 
                 test("Updates plotArea.axisY alias", function() {
                     plotArea.panes[0].axes[1].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.axisY.dirty);
                 });
 
                 test("Does not update plotArea.axisY alias if axis is not primary", function() {
                     plotArea.axisY.dirty = true;
-                    plotArea.redrawPane(plotArea.panes[1]);
+                    plotArea.redraw(plotArea.panes[1]);
 
                     ok(plotArea.axisY.dirty);
                 });
 
                 test("clears pane", function() {
                     plotArea.panes[0].content.children[0].dirty = true;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     ok(!plotArea.panes[0].content.children[0].dirty);
                 });
@@ -3465,7 +3663,7 @@
                     var x = plotArea.axes[0].box.x1;
 
                     plotArea.series[0].data[0] = 10;
-                    plotArea.redrawPane(plotArea.panes[0]);
+                    plotArea.redraw(plotArea.panes[0]);
 
                     notEqual(plotArea.axes[0].box.x1, x);
                 });

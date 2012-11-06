@@ -18,44 +18,51 @@
     </head>
     <body>
         <h3>The Boeing Company (NYSE:BA)</h3>
-        <div id="chart" style="width: 900px; height: 400px;"></div>
+        <div id="chart" style="width: 900px; height: 500px;"></div>
         <script>
-            // TODO: StockChart MVC Wrapper
-            // TODO: StockChart demo(s)
-            // TODO: Navigator axis changes position during partial update
-            // TODO: Investigate glitch on iPad after scrolling
-            // TODO: Clear tooltip when changing selection
-            // TODO: Scroll to zoom
-            // TODO: (-) series.pane shortcut
-            // TODO: (-) Refresh multiple panes
             $(function() {
                 $("#chart").kendoStockChart({
                     dataSource: {
                         transport: {
                             read: "boeing-stock.json"
-                        },
-                        filter: {
-                            field: "Date",
-                            operator: "startswith",
-                            value: "2012/06/1"
                         }
                     },
                     dateField: "Date",
+                    panes: [{
+                        title: "Value"
+                    }, {
+                        name: "volumePane",
+                        title: "Volume",
+                        height: 100 // pixels
+                    }],
+                    categoryAxis: {
+                        pane: "volumePane"
+                    },
+                    valueAxes: [{
+                        // Default axis
+                    }, {
+                        name: "volume",
+                        pane: "volumePane",
+                        visible: false
+                    }],
                     series: [{
                         type: "candlestick",
                         openField: "Open",
                         highField: "High",
                         lowField: "Low",
                         closeField: "Close"
+                    }, {
+                        type: "bar",
+                        field: "Volume",
+                        axis: "volume"
                     }],
                     navigator: {
                         series: {
-                            type: "line",
+                            type: "area",
                             field: "Close"
                         },
                         select: {
-                            from: "2011/10/05",
-                            to: "2012/10/07"
+                            from: "2011/10/05"
                         }
                     }
                 });
