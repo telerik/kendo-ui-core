@@ -183,7 +183,7 @@
                 equal(typeof m.get("bar"), "boolean");
             });
 
-            test("setting  boolean as null is converted to false", function() {
+            test("setting  boolean as null returns null", function() {
                 var MyModel = kendo.data.Model.define({
                     fields: {
                         bar: { field: "bar", type: "boolean" }
@@ -191,8 +191,7 @@
                 }), m = new MyModel();
 
                 m.set("bar", null);
-                ok(m.get("bar") === false);
-                equal(typeof m.get("bar"), "boolean");
+                equal(m.get("bar"), null);
             });
 
             test("setting boolean as invalid string value is converted to false", function() {

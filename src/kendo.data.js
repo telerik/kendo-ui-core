@@ -407,7 +407,7 @@
             if (typeof value === STRING) {
                 return value.toLowerCase() === "true";
             }
-            return !!value;
+            return value != null ? !!value : value;
         },
 
         "string": function(value) {
