@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ScatterLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesScatterTag parent = (SeriesScatterTag)findParentWithClass(SeriesScatterTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
         parent.setLabels(this);
@@ -48,7 +48,7 @@ public class ScatterLabelsTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-scatter-labels";
+        return "chart-seriesItem-labels";
     }
 
     public void setBorder(LabelsBorderTag value) {
@@ -87,22 +87,6 @@ public class ScatterLabelsTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("format", value);
     }
 
-    public float getMargin() {
-        return (float)getProperty("margin");
-    }
-
-    public void setMargin(float value) {
-        setProperty("margin", value);
-    }
-
-    public float getPadding() {
-        return (float)getProperty("padding");
-    }
-
-    public void setPadding(float value) {
-        setProperty("padding", value);
-    }
-
     public String getPosition() {
         return (String)getProperty("position");
     }
@@ -111,20 +95,52 @@ public class ScatterLabelsTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("position", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
-    }
-
-    public void setTemplate(String value) {
-        setProperty("template", value);
-    }
-
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
+    }
+
+    public String getAlign() {
+        return (String)getProperty("align");
+    }
+
+    public void setAlign(String value) {
+        setProperty("align", value);
+    }
+
+    public float getDistance() {
+        return (float)getProperty("distance");
+    }
+
+    public void setDistance(float value) {
+        setProperty("distance", value);
+    }
+
+    public Object getTemplate() {
+        return (Object)getProperty("template");
+    }
+
+    public void setTemplate(Object value) {
+        setProperty("template", value);
+    }
+
+    public Object getMargin() {
+        return (Object)getProperty("margin");
+    }
+
+    public void setMargin(Object value) {
+        setProperty("margin", value);
+    }
+
+    public Object getPadding() {
+        return (Object)getProperty("padding");
+    }
+
+    public void setPadding(Object value) {
+        setProperty("padding", value);
     }
 
 //<< Attributes

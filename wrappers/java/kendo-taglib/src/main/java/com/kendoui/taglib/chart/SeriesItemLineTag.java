@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class BubbleNegativeValuesTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesBubbleTag parent = (SeriesBubbleTag)findParentWithClass(SeriesBubbleTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
-        parent.setNegativeValues(this);
+        parent.setLine(this);
 
 //<< doEndTag
 
@@ -48,7 +48,7 @@ public class BubbleNegativeValuesTag extends  BaseTag  /* interfaces *//* interf
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-bubble-negativeValues";
+        return "chart-seriesItem-line";
     }
 
     public String getColor() {
@@ -59,12 +59,20 @@ public class BubbleNegativeValuesTag extends  BaseTag  /* interfaces *//* interf
         setProperty("color", value);
     }
 
-    public boolean getVisible() {
-        return (boolean)getProperty("visible");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setVisible(boolean value) {
-        setProperty("visible", value);
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
+    }
+
+    public String getWidth() {
+        return (String)getProperty("width");
+    }
+
+    public void setWidth(String value) {
+        setProperty("width", value);
     }
 
 //<< Attributes

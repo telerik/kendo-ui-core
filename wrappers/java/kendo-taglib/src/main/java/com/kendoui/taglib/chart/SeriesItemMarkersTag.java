@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class AreaMarkersTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesItemMarkersTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesAreaTag parent = (SeriesAreaTag)findParentWithClass(SeriesAreaTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
         parent.setMarkers(this);
@@ -48,7 +48,7 @@ public class AreaMarkersTag extends  BaseTag  /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-area-markers";
+        return "chart-seriesItem-markers";
     }
 
     public void setBorder(MarkersBorderTag value) {

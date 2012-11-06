@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class PieConnectorsTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesItemConnectorsTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesPieTag parent = (SeriesPieTag)findParentWithClass(SeriesPieTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
         parent.setConnectors(this);
@@ -48,7 +48,7 @@ public class PieConnectorsTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-pie-connectors";
+        return "chart-seriesItem-connectors";
     }
 
     public String getColor() {

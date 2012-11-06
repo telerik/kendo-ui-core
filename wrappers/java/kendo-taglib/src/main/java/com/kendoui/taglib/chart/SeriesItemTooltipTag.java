@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ColumnLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesItemTooltipTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesColumnTag parent = (SeriesColumnTag)findParentWithClass(SeriesColumnTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
-        parent.setLabels(this);
+        parent.setTooltip(this);
 
 //<< doEndTag
 
@@ -48,10 +48,10 @@ public class ColumnLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ 
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-column-labels";
+        return "chart-seriesItem-tooltip";
     }
 
-    public void setBorder(LabelsBorderTag value) {
+    public void setBorder(TooltipBorderTag value) {
         setProperty("border", value);
     }
 
@@ -87,44 +87,28 @@ public class ColumnLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ 
         setProperty("format", value);
     }
 
-    public float getMargin() {
-        return (float)getProperty("margin");
-    }
-
-    public void setMargin(float value) {
-        setProperty("margin", value);
-    }
-
-    public float getPadding() {
-        return (float)getProperty("padding");
-    }
-
-    public void setPadding(float value) {
-        setProperty("padding", value);
-    }
-
-    public String getPosition() {
-        return (String)getProperty("position");
-    }
-
-    public void setPosition(String value) {
-        setProperty("position", value);
-    }
-
-    public String getTemplate() {
-        return (String)getProperty("template");
-    }
-
-    public void setTemplate(String value) {
-        setProperty("template", value);
-    }
-
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
+    }
+
+    public Object getTemplate() {
+        return (Object)getProperty("template");
+    }
+
+    public void setTemplate(Object value) {
+        setProperty("template", value);
+    }
+
+    public Object getPadding() {
+        return (Object)getProperty("padding");
+    }
+
+    public void setPadding(Object value) {
+        setProperty("padding", value);
     }
 
 //<< Attributes

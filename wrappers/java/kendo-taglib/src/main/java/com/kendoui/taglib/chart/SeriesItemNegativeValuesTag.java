@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class PieOverlayTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesItemNegativeValuesTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesPieTag parent = (SeriesPieTag)findParentWithClass(SeriesPieTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
-        parent.setOverlay(this);
+        parent.setNegativeValues(this);
 
 //<< doEndTag
 
@@ -48,15 +48,23 @@ public class PieOverlayTag extends  BaseTag  /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-pie-overlay";
+        return "chart-seriesItem-negativeValues";
     }
 
-    public String getGradient() {
-        return (String)getProperty("gradient");
+    public String getColor() {
+        return (String)getProperty("color");
     }
 
-    public void setGradient(String value) {
-        setProperty("gradient", value);
+    public void setColor(String value) {
+        setProperty("color", value);
+    }
+
+    public boolean getVisible() {
+        return (boolean)getProperty("visible");
+    }
+
+    public void setVisible(boolean value) {
+        setProperty("visible", value);
     }
 
 //<< Attributes

@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class DonutBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesItemBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesDonutTag parent = (SeriesDonutTag)findParentWithClass(SeriesDonutTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
         parent.setBorder(this);
@@ -48,7 +48,7 @@ public class DonutBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-donut-border";
+        return "chart-seriesItem-border";
     }
 
     public String getColor() {

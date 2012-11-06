@@ -57,50 +57,6 @@ public class SeriesTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
-    public void addArea(SeriesAreaTag value) {
-        series.add(value.properties());
-    }
-
-    public void addLine(SeriesLineTag value) {
-        series.add(value.properties());
-    }
-
-    public void addBar(SeriesBarTag value) {
-        series.add(value.properties());
-    }
-
-    public void addColumn(SeriesColumnTag value) {
-        series.add(value.properties());
-    }
-
-    public void addBubble(SeriesBubbleTag value) {
-        series.add(value.properties());
-    }
-
-    public void addDonut(SeriesDonutTag value) {
-        series.add(value.properties());
-    }
-
-    public void addPie(SeriesPieTag value) {
-        series.add(value.properties());
-    }
-
-    public void addScatter(SeriesScatterTag value) {
-        series.add(value.properties());
-    }
-
-    public void addScatterLine(SeriesScatterLineTag value) {
-        series.add(value.properties());
-    }
-
-    public void addCandlestick(SeriesCandlestickTag value) {
-        series.add(value.properties());
-    }
-
-    public void addOhlc(SeriesOhlcTag value) {
-        series.add(value.properties());
-    }
-
     private List<Map<String, Object>> series;
 
     public List<Map<String, Object>> series() {
@@ -109,6 +65,10 @@ public class SeriesTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public static String tagName() {
         return "chart-series";
+    }
+
+    public void addSeriesItem(SeriesItemTag value) {
+        series.add(value.properties());
     }
 
 //<< Attributes

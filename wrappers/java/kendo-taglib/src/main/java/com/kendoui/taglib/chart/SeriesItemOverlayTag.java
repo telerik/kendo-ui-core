@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ColumnOverlayTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesItemOverlayTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesColumnTag parent = (SeriesColumnTag)findParentWithClass(SeriesColumnTag.class);
+        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
 
 
         parent.setOverlay(this);
@@ -48,7 +48,7 @@ public class ColumnOverlayTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-column-overlay";
+        return "chart-seriesItem-overlay";
     }
 
     public String getGradient() {

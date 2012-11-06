@@ -19,7 +19,7 @@ public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> doEndTag
 
 
-        ScatterLineMarkersTag parent = (ScatterLineMarkersTag)findParentWithClass(ScatterLineMarkersTag.class);
+        SeriesItemMarkersTag parent = (SeriesItemMarkersTag)findParentWithClass(SeriesItemMarkersTag.class);
 
 
         parent.setBorder(this);
@@ -48,7 +48,7 @@ public class MarkersBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-series-scatterLine-markers-border";
+        return "chart-seriesItem-markers-border";
     }
 
     public String getColor() {
