@@ -596,7 +596,7 @@
                 a = selector(a);
                 b = selector(b);
 
-                if (a && !b) {
+                if ((a && !b) || b == null) {
                     return 1;
                 }
 
@@ -614,11 +614,11 @@
                 a = selector(a);
                 b = selector(b);
 
-                if (a && !b) {
+                if ((a && !b) || b == null) {
                     return -1;
                 }
 
-                if (b && !a) {
+                if ((b && !a) || a == null) {
                     return 1;
                 }
 

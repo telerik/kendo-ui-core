@@ -188,6 +188,34 @@
                 ok(!result[2]);
             });
 
+            test("orderBy sorts booleans and nulls", function () {
+                var data = [true, false, null, true];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 4);
+                equal(result[0], null);
+                equal(result[1], false);
+                equal(result[2], true);
+                equal(result[3], true);
+            });
+
+            test("orderByDescending sorts booleans and nulls", function () {
+                var data = [true, false, null, false];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 4);
+                equal(result[0], true);
+                equal(result[1], false);
+                equal(result[2], false);
+                equal(result[3], null);
+            });
+
             test("orderBy uses selector when sorting", function () {
                 var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
 
