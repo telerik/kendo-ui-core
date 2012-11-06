@@ -309,6 +309,7 @@
                 chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
                 chart._highlight = new Highlight(view, chart._viewElement);
 
+                /*
                 if (kendo.UserEvents) {
                     if (chart._userEvents) {
                         chart._userEvents.destroy();
@@ -324,6 +325,7 @@
                         end: proxy(chart._end, chart)
                     });
                 }
+               */
             }
         },
 
