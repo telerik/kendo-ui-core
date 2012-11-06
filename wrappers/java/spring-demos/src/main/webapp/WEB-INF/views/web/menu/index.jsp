@@ -64,7 +64,7 @@
 		                    <li>Canada</li>
 		                    <li>Australia</li>
 		                </ol>
-		                <img src="<c:url value="resources/web/menu/map.png" />" alt="Stores Around the Globe" />
+		                <img src="<c:url value="/resources/web/menu/map.png" />" alt="Stores Around the Globe" />
 		                <button class="k-button">See full list</button>
 		            </kendo:menu-item-content>
 	            </kendo:menu-item>
