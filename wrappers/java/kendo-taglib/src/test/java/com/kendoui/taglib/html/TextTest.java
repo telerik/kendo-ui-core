@@ -46,10 +46,23 @@ public class TextTest {
     }
     
     @Test
-    public void valuePreventsServerExceptionIfNullIsPassed() {
+    public void valueDoesNotRaiseExceptionWhenSetNull() {
         Boolean thrown = false;
         try {
             text.value(null);
+        } catch(Exception e) {
+            thrown = true;
+        }
+        assertEquals(thrown, false);
+    }
+    
+    @Test
+    public void writeDoesNotRaiseExceptionWhenValueIsNull() {
+        Boolean thrown = false;
+        try {
+            text.value(null);
+            Writer out = new StringWriter();
+            text.write(out);
         } catch(Exception e) {
             thrown = true;
         }

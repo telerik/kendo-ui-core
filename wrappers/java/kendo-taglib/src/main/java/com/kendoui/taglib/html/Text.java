@@ -7,7 +7,7 @@ public class Text implements Node {
     private String value;
 
     public Text() {
-    
+        value = "";
     }
     
     public Text(String value) {
@@ -16,7 +16,9 @@ public class Text implements Node {
     
     @Override
     public void write(Writer out) throws IOException {
-        out.write(value);
+        if (value != null) {
+            out.write(value);
+        }
     }
 
     public Text value(String value) {
