@@ -1888,6 +1888,7 @@
 
         _handleEditing: function(current, next) {
             var that = this,
+                activeElement = $(document.activeElement),
                 mode = that._editMode(),
                 editContainer = that._editContainer,
                 focusable,
@@ -1900,8 +1901,11 @@
             }
 
             if (that.editable) {
-                if ($.contains(editContainer[0], document.activeElement)) {
-                    $(document.activeElement).blur();
+                if ($.contains(editContainer[0], activeElement[0])) {
+                    activeElement.blur();
+                    if (kendo.support.browser.opera) {
+                        activeElement.change();
+                    }
                 }
 
                 if (!that.editable) {
