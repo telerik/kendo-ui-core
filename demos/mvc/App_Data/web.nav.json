@@ -1050,6 +1050,19 @@
         },
         {
             "packages": ["!mvc"],
+            "text": "Effects",
+            "name": "fx",
+            "documentation": "framework/kendo",
+            "spriteCssClass": "mvvmIcon",
+            "items": [
+                {
+                    "text": "Slide In",
+                    "url": "fx/slidein.html"
+                }
+            ]
+        },
+        {
+            "packages": ["!mvc"],
             "text": "Drag & Drop",
             "name": "dragdrop",
             "documentation": "framework/draggable",
