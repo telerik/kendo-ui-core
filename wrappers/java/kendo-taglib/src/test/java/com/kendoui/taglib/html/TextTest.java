@@ -44,4 +44,15 @@ public class TextTest {
 
         assertEquals("&lt;a&gt;&amp;", out.toString());
     }
+    
+    @Test
+    public void valuePreventsServerExceptionIfNullIsPassed() {
+        Boolean thrown = false;
+        try {
+            text.value(null);
+        } catch(Exception e) {
+            thrown = true;
+        }
+        assertEquals(thrown, false);
+    }
 }

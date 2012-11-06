@@ -20,7 +20,9 @@ public class Text implements Node {
     }
 
     public Text value(String value) {
-        this.value = Text.escapeHtml(value);
+        if (value != null) {
+            this.value = Text.escapeHtml(value);
+        }
 
         return this;
     }

@@ -57,9 +57,9 @@ public abstract class BaseItemTag extends BaseTag {
         }
 
         element.append(new Text(getText()));
-
+        
         String html = body();
-
+        
         if (!html.isEmpty()) {
             appendContent(element, html);
         }
