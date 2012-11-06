@@ -95,8 +95,7 @@
     <div class="flowers-left"><div class="flowers-right">
         <div class='centerWrap floatWrap@(Request.Path.IndexOf("overview") != -1 || Request.Path.IndexOf("dashboards") > -1 ? " widgetOverview" : "")@(ViewBag.suite == "mobile" ? " mobileDemos" : "")' id="mainWrap">
             <div id="themeWrap" style="@(ViewBag.suite == "mobile" || Request.Path.IndexOf("overview") > -1 || ViewBag.CurrentExample.Url.IndexOf("dashboard") != -1  ? "display:none" : "")">
-                <p class="choose-theme">Theme:</p>
-                <ul id="themeChooser"><li></li></ul>
+                <span id="themeChooser"></span>
             </div>
 
             <div id="mainWrapInner" class="floatWrap clear">
@@ -131,7 +130,7 @@
             });
         }
 
-        $("#themeChooser").themeChooser();
+        $("#themeChooser").kendoThemeChooser();
 
         $("#deviceChooser").mobileOsChooser({
             container: "#mobile-application-container"
