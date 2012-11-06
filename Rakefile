@@ -96,7 +96,7 @@ bundle :name => 'trial',
        :contents => {
             'js' => TRIAL_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
-       }.merge(MVC_CONTENT), #.merge(JSP_CONTENT),
+       }.merge(MVC_CONTENT), #.merge(JSP_CONTENT), uncomment when jsp goes official
        :prerequisites => [
 #           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
 #           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
@@ -211,12 +211,12 @@ bundle :name => 'winjs.commercial',
 bundle :name => 'jsp.beta',
        :license => 'src-license-complete',
        :eula => 'jsp',
-       :vsdoc => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework jsp),
        :beta => true,
        :contents => {
             'js' => MVC_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
+# not required for the beta
 #            'src/js' => COMPLETE_SRC_JS,
 #            'src/styles' => SRC_CSS,
 #            'src/kendo-taglib/src' => JSP_TAGLIB_SRC
