@@ -5,6 +5,7 @@
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
         math = Math,
+        proxy = $.proxy,
 
         dataviz = kendo.dataviz,
         Chart = dataviz.ui.Chart,
@@ -39,6 +40,7 @@
             var stockDefaults = {
                 axisDefaults: {
                     categoryAxis: {
+                        name: "default",
                         field: options.dateField,
                         majorGridLines: {
                             visible: false
@@ -114,125 +116,6 @@
             navigator.applySelection();
             Chart.fn._redraw.call(chart);
             navigator.redraw();
-
-            // Add panning support to Axis
-
-            if (kendo.ui.Draggable) {
-                if (chart._draggable) {
-                    chart._draggable.destroy();
-                }
-
-                $(chart._viewElement).kendoDraggable({
-                    drag: $.proxy(chart._onDrag, chart),
-                    dragstart: $.proxy(chart._onDragStart, chart),
-                    dragend: $.proxy(chart._onDragEnd, chart)
-                });
-
-                chart._draggable = $(chart._viewElement).data("kendoDraggable");
-            }
-
-            // TODO: Cleanup draggable in destroy
-        },
-
-        _onDragStart: function(e) {
-            var chart = this;
-            var primaryAxis = chart._plotArea.categoryAxis;
-            var options = primaryAxis.options;
-            var coords = chart._eventCoordinates(e);
-            var baseUnit = primaryAxis.options.baseUnit;
-            var panes = chart._plotArea.panes;
-            var inPane = false;
-
-            /*
-            for (var i = 0; i < panes.length - 1; i++) {
-                if (panes[i].box.containsPoint(coords)) {
-                    inPane = true;
-                }
-            }
-           */
-          inPane = true
-
-            if (!inPane) {
-                e.preventDefault();
-                return;
-            }
-
-            var range = duration(options.categories[0],
-                                dataviz.last(options.categories),
-                                baseUnit);
-
-            // TODO: Duplicate from mouseMove
-                delete chart._activePoint;
-                chart._tooltip.hide();
-                chart._highlight.hide();
-                chart._suppressHover = true;
-
-            chart._dragState = {
-                min: options.min,
-                max: options.max,
-                range: range,
-                scale: primaryAxis.box.width() / range,
-                baseUnit: baseUnit
-            };
-        },
-
-        _onDrag: function(e) {
-            var chart = this,
-                delta = e.x.startLocation - e.x.location,
-                slavePanes = chart._plotArea.panes.slice(0, -1),
-                primaryAxis = chart._plotArea.categoryAxis,
-                navigatorAxis = chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
-
-                var dragState = chart._dragState,
-                baseUnit = dragState.baseUnit;
-
-                var offset = math.round(delta / dragState.scale);
-
-            var rangeStart = toDate(math.min(
-                math.max(navigatorAxis.options.categories[0],
-                    dataviz.addDuration(dragState.min, offset, baseUnit)
-                ),
-                dataviz.addDuration(
-                    dataviz.last(navigatorAxis.options.categories), -dragState.range, baseUnit
-                )
-            ));
-            var rangeEnd = toDate(math.min(
-                dataviz.addDuration(rangeStart, dragState.range, baseUnit),
-                dataviz.last(navigatorAxis.options.categories)
-            ));
-
-            this._navigator.options.select = {
-                from: rangeStart,
-                to: rangeEnd
-            };
-
-            if (!kendo.support.touch) {
-                this._navigator.applySelection();
-                this._navigator.redrawSlaves();
-            }
-
-            var selection = chart._selection;
-            selection.set(
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    rangeStart
-                ),
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    rangeEnd
-            ));
-
-            this._navigator.showHint(
-                rangeStart,
-                rangeEnd
-            );
-        },
-
-        _onDragEnd: function(e) {
-            this._navigator.applySelection();
-            this._navigator.redrawSlaves();
-            this._navigator.hideHint();
-            this._suppressHover = false;
         }
     });
 
@@ -242,6 +125,9 @@
 
             navi.chart = chart;
             navi.options = chart.options.navigator;
+
+            chart.bind("drag", proxy(navi._drag, navi));
+            chart.bind("dragEnd", proxy(navi._dragEnd, navi));
         },
 
         redraw: function() {
@@ -277,6 +163,59 @@
             }
 
             $(chart.element).bind("DOMMouseScroll mousewheel", $.proxy(navi.onMousewheel, navi));
+        },
+
+        _drag: function(e) {
+            var navi = this,
+                chart = navi.chart,
+                navigatorAxis = navi.mainAxis(),
+                groups = navigatorAxis.options.categories,
+                axis = chart._plotArea.categoryAxis,
+                baseUnit = axis.options.baseUnit,
+                range = e.axisRanges[axis.options.name],
+                selection = chart._selection,
+                selectionDuration = duration(axis.options.min, axis.options.max, axis.options.baseUnit),
+                from,
+                to;
+
+            from = toDate(math.min(
+                math.max(groups[0], range.from),
+                dataviz.addDuration(
+                    dataviz.last(groups), -selectionDuration, baseUnit
+                )
+            ));
+
+            to = toDate(math.min(
+                dataviz.addDuration(from, selectionDuration, baseUnit),
+                dataviz.last(navigatorAxis.options.categories)
+            ));
+
+            navi.options.select = { from: from, to: to };
+
+            if (!kendo.support.touch) {
+                navi.applySelection();
+                navi.redrawSlaves();
+            }
+
+            selection.set(
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    from
+                ),
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    to
+            ));
+
+            navi.showHint(from, to);
+        },
+
+        _dragEnd: function() {
+            var navi = this;
+
+            navi.applySelection();
+            navi.redrawSlaves();
+            navi.hint.hide();
         },
 
         readSelection: function() {
@@ -375,16 +314,12 @@
             );
         },
 
-        hideHint: function() {
-            this.hint.hide();
-        },
-
         _select: function(e) {
             var navi = this,
                 chart = navi.chart,
                 plotArea = chart._plotArea;
 
-            this.showHint(
+            navi.showHint(
                 navi.indexToDate(e.from),
                 navi.indexToDate(e.to)
             );
