@@ -448,9 +448,7 @@
         _move: function(e) {
             var chart = this,
                 dragState = chart._dragState,
-                plotArea = chart._model._plotArea,
                 axes,
-                hasRanges = false,
                 ranges = {};
 
             if (dragState) {
