@@ -189,7 +189,7 @@ tree :to => 'dist/demos/staging/sources/razor',
      :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
 
 tree :to => 'dist/demos/staging/content/cdn/js',
-     :from => COMPLETE_MIN_JS,
+     :from => COMPLETE_MIN_JS + MVC_MIN_JS,
      :root => 'src/'
 
 tree :to => 'dist/demos/staging/content/cdn/styles',
