@@ -1,0 +1,47 @@
+<div id="example" class="k-content">
+
+    <h2>Groceries</h2>
+    <ul id="listView"></ul>
+
+    <h2>Done</h2>
+    <ul id="done"></ul>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <li><label><input type="checkbox" />${ProductName}</label></li>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://demos.kendoui.com/service/Products",
+                            dataType: "jsonp"
+                        }
+                    },
+                    pageSize: 15
+                });
+
+            $("#listView").kendoListView({
+                dataSource: dataSource,
+                template: kendo.template($("#template").html())
+            });
+
+            $("#listView").on("change", "input", function(e) {
+                var el = $(e.currentTarget).closest("li"),
+                    effect = kendo.fx(el).fadeOut().duration(700);
+
+                effect.play().then(function() {
+                    $("#done").append(el);
+                    effect.reverse();
+                    el.find("input").remove();
+                });
+            });
+        });
+    </script>
+    <style>
+        #done {
+            text-decoration: line-through;
+        }
+    </style>
+</div>

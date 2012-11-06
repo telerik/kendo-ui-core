@@ -1060,8 +1060,20 @@
                     "url": "fx/expand.html"
                 },
                 {
+                    "text": "Fade",
+                    "url": "fx/fade.html"
+                },
+                {
                     "text": "Slide In",
                     "url": "fx/slidein.html"
+                },
+                {
+                    "text": "Transfer",
+                    "url": "fx/transfer.html"
+                },
+                {
+                    "text": "Tile",
+                    "url": "fx/tile.html"
                 }
             ]
         },

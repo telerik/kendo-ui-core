@@ -815,6 +815,14 @@
         },
 
         stop: function() {
+            var idx = 0,
+                children = this.children(),
+                childrenLength = children.length;
+
+            for (idx = 0; idx < childrenLength; idx ++) {
+                children[idx].stop();
+            }
+
             $(this.element).kendoStop();
             return this;
         },

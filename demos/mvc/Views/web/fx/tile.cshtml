@@ -1,0 +1,73 @@
+<div id="example" class="k-content">
+    <div id="chessboard">
+    <div>
+        <span class="icon">♚</span>
+        <span class="description">Black King</span>
+    </div>
+
+    <div>
+        <span class="icon">♛</span>
+        <span class="description">Black Queen</span>
+    </div>
+    <div>
+        <span class="icon">♜</span>
+        <span class="description">Black Rook</span>
+    </div>
+    <div>
+        <span class="icon">♝</span>
+        <span class="description">Black Bishop</span>
+    </div>
+    <div>
+        <span class="icon">♞</span>
+        <span class="description">Black Knight</span>
+    </div>
+    <div>
+        <span class="icon">♟</span>
+        <span class="description">Black Pawn</span>
+    </div>
+    </div>
+</div>
+
+<style>
+    #chessboard div {
+        float: left;
+        width: 200px;
+        height: 200px;
+        float: left;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid black;
+    }
+    #chessboard div .icon {
+        font-size: 64px;
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        display: block;
+    }
+
+    #chessboard div .description {
+        display: none;
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 0;
+        font-size: 32px;
+    }
+</style>
+
+<script>
+    $("#chessboard div").hover(
+        function(e) {
+            var div = $(e.currentTarget);
+            kendo.fx(div.find(".description").show()).tile("left", div.find(".icon")).stop().play();
+        },
+
+       function(e) {
+            var div = $(e.currentTarget);
+            kendo.fx(div.find(".description")).tile("left", div.find(".icon")).stop().reverse();
+    });
+</script>
