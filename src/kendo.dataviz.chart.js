@@ -397,8 +397,9 @@
                 chart._userEvents = new kendo.UserEvents(chart.wrapper, {
                     global: true,
                     threshold: 5,
+                    filter: ":not(.k-selector)",
                     stopPropagation: true,
-                    multiTouch: true,
+                    multiTouch: false,
                     start: proxy(chart._start, chart),
                     move: proxy(chart._move, chart),
                     end: proxy(chart._end, chart)
