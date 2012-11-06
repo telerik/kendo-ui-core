@@ -39,7 +39,7 @@
     String footer = "Today - #=kendo.toString(data, 'd') #";
     %>
         
-        <kendo:datePicker name="datepicker" value="<%=new Date()%>" footer="<%=footer%>">
+        <kendo:datePicker name="datepicker" value="<%=new Date()%>" dates="${dates}" footer="<%=footer%>">
             <kendo:datePicker-month content="<%=template%>"/>
         </kendo:datePicker>
         
