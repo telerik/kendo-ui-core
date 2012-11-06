@@ -201,8 +201,14 @@
                 dataviz.last(navigatorAxis.options.categories)
             ));
 
+            this._navigator.options.select = {
+                from: rangeStart,
+                to: rangeEnd
+            };
+
             if (!kendo.support.touch) {
-                this._navigator._selectEnd(e);
+                this._navigator.applySelection();
+                this._navigator.redrawSlaves();
             }
 
             var selection = chart._selection;
@@ -215,10 +221,17 @@
                     navigatorAxis.options.categories,
                     rangeEnd
             ));
+
+            this._navigator.showHint(
+                rangeStart,
+                rangeEnd
+            );
         },
 
         _onDragEnd: function(e) {
-            this._navigator._selectEnd(e);
+            this._navigator.applySelection();
+            this._navigator.redrawSlaves();
+            this._navigator.hideHint();
             this._suppressHover = false;
         }
     });
@@ -350,15 +363,30 @@
             e.preventDefault();
         },
 
-        _select: function(e) {
+        showHint: function(from, to) {
             var navi = this,
                 chart = navi.chart,
                 plotArea = chart._plotArea;
 
             navi.hint.show(
-                navi.indexToDate(e.from),
-                navi.indexToDate(e.to),
+                from,
+                to,
                 plotArea.backgroundBox()
+            );
+        },
+
+        hideHint: function() {
+            this.hint.hide();
+        },
+
+        _select: function(e) {
+            var navi = this,
+                chart = navi.chart,
+                plotArea = chart._plotArea;
+
+            this.showHint(
+                navi.indexToDate(e.from),
+                navi.indexToDate(e.to)
             );
         },
 
