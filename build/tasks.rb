@@ -1,6 +1,5 @@
 require 'rbconfig'
 
-LEGAL_DIR = File.join('resources', 'legal', BETA ? 'beta' : 'official')
 README_DIR = 'resources'
 THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')
 

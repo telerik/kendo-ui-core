@@ -208,17 +208,18 @@ bundle :name => 'winjs.commercial',
             '.' => WIN_JS_RESOURCES
        }
 
-bundle :name => 'jsp.commercial',
+bundle :name => 'jsp.beta',
        :license => 'src-license-complete',
-       :eula => 'aspnetmvc',
+       :eula => 'jsp',
        :vsdoc => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework jsp),
+       :beta => true,
        :contents => {
             'js' => MVC_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
-            'src/js' => COMPLETE_SRC_JS,
-            'src/styles' => SRC_CSS,
-            'src/kendo-taglib/src' => JSP_TAGLIB_SRC
+#            'src/js' => COMPLETE_SRC_JS,
+#            'src/styles' => SRC_CSS,
+#            'src/kendo-taglib/src' => JSP_TAGLIB_SRC
        }.merge(JSP_CONTENT),
        :prerequisites => [
            "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
@@ -234,7 +235,7 @@ BUNDLES = [
     'mobile.commercial',
     'dataviz.commercial',
     'aspnetmvc.commercial',
-#    'jsp.commercial',
+    'jsp.beta',
     'aspnetmvc.hotfix.commercial',
     'winjs.commercial',
     'cdn.commercial'
@@ -320,5 +321,3 @@ desc 'Build all bundles'
 task :bundles =>  "bundles:all"
 
 task :default => :bundles
-
-task :CI => :js

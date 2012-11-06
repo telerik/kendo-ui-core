@@ -12,13 +12,15 @@ def bundle(options)
     changelog_suites = options[:changelog]
     demo_suites = options[:demos]
     path = "dist/bundles/#{name}"
+    beta = options[:beta] || BETA
+    legal_dir = File.join('resources', 'legal', beta ? 'beta' : 'official')
     license = nil
 
     prerequisites = [:js, :less] + options[:prerequisites].to_a
 
     if options[:license]
         license = "#{path}.license"
-        file_license license => File.join(LEGAL_DIR, "#{options[:license]}.txt")
+        file_license license => File.join(legal_dir, "#{options[:license]}.txt")
     end
 
     options[:contents].each do |target, contents|
@@ -40,7 +42,7 @@ def bundle(options)
     if eula
         license_agreements_path = File.join(path, "license-agreements")
         third_party_path = File.join(license_agreements_path, "third-party")
-        source_path = File.join(LEGAL_DIR, eula + "-eula")
+        source_path = File.join(legal_dir, eula + "-eula")
 
         tree :to => license_agreements_path,
              :from =>  File.join(source_path, "*"),
