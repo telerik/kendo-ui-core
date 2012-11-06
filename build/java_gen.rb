@@ -839,6 +839,11 @@ class Tag
                                         :type => 'Boolean',
                                         :parent => tag,
                                         :description => "Specifies whether the item is initially expanded")
+
+            tag.options.push(Option.new :name => 'items.enabled',
+                                        :type => 'Boolean',
+                                        :parent => tag,
+                                        :description => "Specifies whether the item is initially enabled")
         end
 
         start_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Events' }

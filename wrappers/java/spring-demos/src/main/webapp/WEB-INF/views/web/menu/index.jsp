@@ -73,7 +73,7 @@
         <kendo:menu-item text="Blog"></kendo:menu-item>
         <kendo:menu-item text="Company"></kendo:menu-item>
         <kendo:menu-item text="Events"></kendo:menu-item>
-        <kendo:menu-item text="News"></kendo:menu-item>
+        <kendo:menu-item text="News" enabled="false"></kendo:menu-item>
     </kendo:menu-items>
 </kendo:menu>
 

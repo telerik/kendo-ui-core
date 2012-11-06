@@ -24,6 +24,7 @@ public abstract class BaseItemTag extends BaseTag {
     protected abstract String getSpriteCssClass();
     protected abstract String getImageUrl();
     protected abstract boolean getExpanded();
+    protected abstract boolean getEnabled();
     
     @Override
     public void initialize() {
@@ -68,6 +69,10 @@ public abstract class BaseItemTag extends BaseTag {
     public void addAttributes(Li element) {
         if (this.isSet("expanded") && this.getExpanded()) {
             element.attr("data-expanded", "true");
+        }
+        
+        if (this.isSet("enabled") && this.getEnabled() == false) {
+            element.attr("disabled", "disabled");
         }
     }
     

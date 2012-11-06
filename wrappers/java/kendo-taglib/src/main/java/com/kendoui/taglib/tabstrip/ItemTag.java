@@ -81,6 +81,14 @@ public class ItemTag extends  BaseItemTag  /* interfaces *//* interfaces */ {
         setProperty("expanded", value);
     }
 
+    public boolean getEnabled() {
+        return (boolean)getProperty("enabled");
+    }
+
+    public void setEnabled(boolean value) {
+        setProperty("enabled", value);
+    }
+
 //<< Attributes
 
 }

@@ -7871,6 +7871,13 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <type>boolean</type>
         </attribute>
 
+        <attribute>
+            <description>Specifies whether the item is initially enabled</description>
+            <name>enabled</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
     </tag>
 
 
@@ -8126,6 +8133,13 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
         <attribute>
             <description>Specifies whether the item is initially expanded</description>
             <name>expanded</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies whether the item is initially enabled</description>
+            <name>enabled</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -8889,6 +8903,13 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>boolean</type>
         </attribute>
 
+        <attribute>
+            <description>Specifies whether the item is initially enabled</description>
+            <name>enabled</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
     </tag>
 
 
@@ -9161,6 +9182,13 @@ node is expanded.</description>
         <attribute>
             <description>Specifies whether the item is initially expanded</description>
             <name>expanded</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies whether the item is initially enabled</description>
+            <name>enabled</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
