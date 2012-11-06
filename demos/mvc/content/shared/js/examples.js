@@ -475,6 +475,7 @@
         var themes = [
                 { text: "Black", value: "black" },
                 { text: "Blue Opal", value: "blueopal" },
+                { text: "Bootstrap", value: "bootstrap" },
                 { text: "Default", value: "default" },
                 { text: "High Contrast", value: "highcontrast" },
                 { text: "Metro", value: "metro" },
