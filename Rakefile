@@ -264,10 +264,10 @@ namespace :build do
             zip_bundles.push(versioned_zip_filename)
         end
 
-        zip_demos = "#{ARCHIVE_ROOT}/#{destination}/production.zip"
+        zip_demos = "#{ARCHIVE_ROOT}/#{destination}/online-examples.zip"
 
         file_copy :to => zip_demos,
-                  :from => "dist/demos/production.zip"
+                  :from => "dist/demos/online-examples.zip"
 
         zip_bundles.push(zip_demos)
 
