@@ -26,7 +26,7 @@
         transform2d = ["rotate", "scale", "scalex", "scaley", "skew", "skewx", "skewy", "translate", "translatex", "translatey", "matrix"],
         transform2units = { "rotate": "deg", scale: "", skew: "px", translate: "px" },
         cssPrefix = transforms.css,
-        Effects = [],
+        Effects = {},
         round = Math.round,
         BLANK = "",
         PX = "px",
