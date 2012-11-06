@@ -409,8 +409,7 @@
 
         _start: function(e) {
             var chart = this,
-                origEvent = e.event.originalEvent,
-                coords = chart._eventCoordinates(origEvent),
+                coords = chart._eventCoordinates(e),
                 plotArea = chart._model._plotArea,
                 allAxes = plotArea.axes,
                 pane = plotArea.findPointPane(coords),
@@ -506,11 +505,13 @@
                 offset = element.offset(),
                 paddingLeft = parseInt(element.css("paddingLeft"), 10),
                 paddingTop = parseInt(element.css("paddingTop"), 10),
-                win = $(window);
+                win = $(window),
+                clientX = e.clientX || e.x.client,
+                clientY = e.clientY || e.y.client;
 
             return {
-                x: e.clientX - offset.left - paddingLeft + win.scrollLeft(),
-                y: e.clientY - offset.top - paddingTop + win.scrollTop()
+                x: clientX - offset.left - paddingLeft + win.scrollLeft(),
+                y: clientY - offset.top - paddingTop + win.scrollTop()
             };
         },
 
