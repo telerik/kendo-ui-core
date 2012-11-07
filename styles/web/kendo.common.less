@@ -7,6 +7,16 @@
     transition: ~"@{transition}";
 }
 
+/* fix for chrome 22&23 transition bugs */
+body:after {
+    content: "";
+    display: block;
+    visibility: hidden;
+    height: 0;
+    font: 0/0;
+    -webkit-transform: translateZ(0);
+}
+
 .fake{color:red;}
 
 .k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
