@@ -15,7 +15,7 @@ SPRING_DEMOS_SRC_ROOT = SPRING_DEMOS_ROOT + 'src/'
 SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*')
 SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/**/*'].exclude('**/globalization/**/*')
 SPRING_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
-SPRING_DEMOS_RESOURCES = SPRING_DEMOS_SRC_ROOT + 'main/webapp/resources'
+SPRING_DEMOS_RESOURCES = SPRING_DEMOS_SRC_ROOT + 'main/webapp/resources/'
 
 # Update a pom.xml file when the VERSION changes
 class PomTask < Rake::FileTask
@@ -143,14 +143,26 @@ tree :to => SPRING_DEMOS_RESOURCES,
      :from => SPRING_DEMOS_SHARED_CONTENT,
      :root => 'demos/mvc/content/'
 
+tree :to => SPRING_DEMOS_RESOURCES + "js",
+     :from => FileList[MIN_JS].include('src/jquery.min.js'),
+     :root => 'src/'
+
+tree :to => SPRING_DEMOS_RESOURCES + "css",
+     :from => MIN_CSS_RESOURCES,
+     :root => 'styles/'
+
 tree :to => SPRING_DEMOS_RESOURCES,
      :from => SPRING_DEMOS_NAVIGATION,
      :root => 'demos/mvc/App_Data/'
 
 namespace :java do
+    task :assets_js => [:js, SPRING_DEMOS_RESOURCES + "js"]
+
+    task :assets_css => [:less, SPRING_DEMOS_RESOURCES + "css"]
+
     desc('Copy demo resource files')
-    task :assets => [SPRING_DEMOS_RESOURCES]
+    task :assets => [:assets_js, :assets_css, SPRING_DEMOS_RESOURCES]
 
     desc('Build the Kendo Spring Demos')
-    task :spring => [SPRING_DEMOS_RESOURCES, SPRING_DEMOS_WAR]
+    task :spring => [:assets, SPRING_DEMOS_WAR]
 end
