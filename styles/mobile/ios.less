@@ -22,8 +22,8 @@
 @tabstrip-icon-gradient: top, rgba(255,255,255,.4), rgba(255,255,255,0);
 @tabstrip-active-icon-gradient: top, rgba(255,255,255,.6) 0, rgba(255,255,255,0) 50%, rgba(255,255,255,.3) 100%;
 
-@button-active-shadow: inset 0 0 0 1px rgba(0,0,0,.3), inset 0 0 0 1000px rgba(0,0,0,.2);
-@buttongroup-active-shadow: 0 1px 0 0 rgba(255,255,255,.4), inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+@button-active-shadow: ~"inset 0 0 0 1px rgba(0,0,0,.3), inset 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2)";
+@buttongroup-active-shadow: ~"0 1px 0 0 rgba(255,255,255,.4), inset 0 0 0 1000px rgba(0, 0, 0, 0.2)";
 @ios-detail-shadow: ~"inset 0 0 0 .16rem #fff, 0 1px 3px rgba(0,0,0,.5)";
 @ios-detail-active-shadow: ~"inset 0 0 0 .16rem #fff, 0 1px 3px rgba(0,0,0,.5), inset 0 0 0 1000px rgba(0,0,0,.2)";
 
@@ -67,7 +67,7 @@
     text-shadow: 0 -1px rgba(0,0,0,.3);
     margin-left: auto;
     margin-right: auto;
-    .box-shadow(inset 0 -1px 0 rgba(0, 0, 0, 0.6));
+    .box-shadow(inset 0 -1px 0 rgba(0,0,0,.3));
 }
 
 .km-ios.km-horizontal .km-view-title
@@ -86,7 +86,7 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     color: #FFF;
     overflow: visible;
-    .border-radius(5pt);
+    .border-radius(5px);
     text-shadow: 0 -1px rgba(0,0,0,.3);
     text-decoration: none;
     border: 1px solid #394d68;
@@ -103,15 +103,14 @@
     background: transparent, @button-background-color;
     .linear-gradient-image(top, rgba(0,0,0,.3), rgba(0,0,0,0) 10%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5),
                      top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
-    .box-shadow(inset 0 0 0 1px rgba(0,0,0,.3));
+    .box-shadow(~"inset 0 0 0 1px rgba(0,0,0,.3), inset 0 1px 3px rgba(0,0,0,.5)");
 }
 
 .km-ios .km-button:active,
 .km-ios .km-button.km-state-active
 {
     background-color: @button-active-background-color;
-    -webkit-box-shadow: @button-active-shadow;
-    box-shadow: @button-active-shadow;
+    .box-shadow(@button-active-shadow);
 }
 
 .km-ios li.km-state-active
@@ -310,7 +309,7 @@
 .km-ios .km-switch-container,
 .km-ios .km-switch-background
 {
-    .border-radius(1.1em);
+    .border-radius(1.3em);
 }
 
 .km-ios .km-switch-container,
@@ -1170,7 +1169,7 @@
 .km-tablet .km-ios .km-view-title,
 .km-tablet .km-ios .km-modalview .km-view-title
 {
-    line-height: 2.1em;
+    line-height: 2.2em;
     color: #848B92;
     text-shadow: 0 1px rgba(255,255,255,.8);
 }
@@ -1178,7 +1177,7 @@
 .km-tablet .km-ios .km-navbar .km-button,
 .km-tablet .km-ios :not(.km-tabstrip):not(.km-buttongroup) > .km-button
 {
-    background: #606060;
+    background: #6A727D;
 }
 
 .km-ios6 .km-navbar .km-button,
