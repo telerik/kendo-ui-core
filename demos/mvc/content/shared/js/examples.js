@@ -223,15 +223,14 @@
         changeTheme: function(themeName, animate) {
             if (animate) {
                 Application.preloadStylesheet(Application.getThemeUrl(themeName), function () {
-                    var exampleElement = $("#example"),
-                        animated = $("#exampleTitle").add(exampleElement);
+                    var example = $("#example");
 
-                    animated.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function(element) {
-                        if (element[0] == exampleElement[0]) {
-                            animated.css("visibility", "hidden"); // Hide the element with restored opacity.
+                    example.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function(element) {
+                        if (element[0] == example[0]) {
+                            example.css("visibility", "hidden"); // Hide the element with restored opacity.
                             Application.replaceTheme(themeName);
                             setTimeout(function() {
-                                animated
+                                example
                                     .css("visibility", "visible")
                                     .kendoStop()
                                     .kendoAnimate(animation.show);
@@ -469,53 +468,128 @@
        return this;
     };
 
-    $.fn.themeChooser = function(options) {
-        options = extend({ largeIcons: true }, options);
+    var Widget = kendo.ui.Widget,
+        ThemeChooser = Widget.extend({
+            init: function(element, options) {
+                options = options || {};
 
-        var themes = [
-                { text: "Black", value: "black" },
-                { text: "Blue Opal", value: "blueopal" },
-                { text: "Bootstrap", value: "bootstrap" },
-                { text: "Default", value: "default" },
-                { text: "High Contrast", value: "highcontrast" },
-                { text: "Metro", value: "metro" },
-                { text: "Metro Black", value: "metroblack" },
-                { text: "Silver", value: "silver" },
-                { text: "Uniform", value: "uniform" }
-            ],
-            template = kendo.template("<li data-value='#=value#' class='skin-#=value#'><span>#= text #</span></li>"),
-            changeTheme = function(theme) {
-                Application.changeTheme(theme, true);
+                var themeChooser = this;
 
                 if (supports.sessionStorage) {
-                    sessionStorage.setItem("kendoSkin", theme);
+                    options.theme = sessionStorage.getItem("kendoSkin") || options.theme || ThemeChooser.prototype.options.theme;
                 }
-            };
 
-        return this.each(function() {
-            var theme;
+                Widget.prototype.init.call(this, element, options);
 
-            if (supports.sessionStorage) {
-                theme = sessionStorage.getItem("kendoSkin");
+                this._render();
+
+                this.setTheme(options.theme);
+
+                this.element.on("click", ".tc-link", $.proxy(function(e) {
+                    e.preventDefault();
+
+                    var icon = $(e.target).closest(".tc-link").find(".k-icon");
+
+                    if (icon.hasClass("k-i-arrow-s")) {
+                        icon.removeClass("k-i-arrow-s").addClass("k-i-arrow-n");
+                    } else {
+                        icon.removeClass("k-i-arrow-n").addClass("k-i-arrow-s");
+                    }
+
+                    this._ensureThemes();
+
+                    this._themeContainer.animate({ height: "toggle", margin: "toggle", paddingBottom: "toggle" }, "fast");
+
+                    //kendo.fx(this._themeContainer).expand("vertical").stop().toggle();
+                }, this));
+
+                this._themeContainer.on("click", ".tc-link", function(e) {
+                    e.preventDefault();
+
+                    var link = $(this);
+
+                    if (link.hasClass("active")) {
+                        return;
+                    }
+
+                    link.addClass("active").parent().siblings().find(".tc-link").removeClass("active");
+
+                    themeChooser.setTheme(link.attr("data-value"));
+                });
+            },
+
+            _ensureThemes: function() {
+                var options = this.options;
+
+                this._themeContainer
+                        .html(kendo.render(options.itemTemplate, options.themes))
+                        .find(".tc-link[data-value='" + options.theme + "']").addClass("active");
+            },
+
+            setTheme: function(themeName) {
+                var themes = this.options.themes,
+                    theme;
+
+                for (var i = 0; i < themes.length; i++) {
+                    if (themes[i].value == themeName) {
+                        theme = themes[i];
+                    } else {
+                        themes[i].selected = false;
+                    }
+                }
+
+                this.element.find(".tc-theme-name").text(theme.text);
+
+                Application.changeTheme(themeName, true);
+
+                if (supports.sessionStorage) {
+                    sessionStorage.setItem("kendoSkin", themeName);
+                }
+            },
+
+            _render: function() {
+                this.element
+                    .addClass("k-theme-chooser")
+                    .html(
+                        "<span class='tc-choose-theme'>Choose theme:</span>" +
+                        "<a class='tc-link k-state-selected' href='#'>" +
+                            "<span class='tc-theme-name'></span>" +
+                            "<span class='k-icon k-i-arrow-s'></span>" +
+                        "</a>"
+                    );
+
+                this._themeContainer = $("<ul class='tc-theme-container' />").prependTo(this.options.listContainer);
+            },
+
+            options: {
+                name: "ThemeChooser",
+                theme: "default",
+                listContainer: "#mainWrapInner",
+                itemTemplate: kendo.template(
+                    "<li class='tc-theme'>" +
+                        "<a href='\\#' class='tc-link#= data.selected ? ' active' : '' #' data-value='#= data.value #'>" +
+                            "# for (var i = 0; i < data.colors.length; i++) { #" +
+                                "<span class='tc-color' style='background-color: #= data.colors[i] #'></span>" +
+                            "# } #" +
+                            "<span class='tc-theme-name'>#= data.text #</span>" +
+                        "</a>" +
+                    "</li>",
+                { useWithBlock: false }),
+                themes: [
+                    { text: "Black", value: "black", colors: ["#0167cc","#4698e9","#272727","#000000"] },
+                    { text: "Blue Opal", value: "blueopal", colors: ["#076186","#7ed3f6","#94c0d2","#daecf4"] },
+                    { text: "Bootstrap", value: "bootstrap", colors: ["#ff67cc","#ff98e9","#ff2727","#ff0000"] },
+                    { text: "Default", value: "default", colors: ["#ef6f1c","#e24b17","#5a4b43","#ededed"] },
+                    { text: "High Contrast", value: "highcontrast", colors: ["#b11e9c","#880275","#664e62","#1b141a"] },
+                    { text: "Metro", value: "metro", colors: ["#8ebc00","#787878","#e5e5e5","#ffffff"] },
+                    { text: "Metro Black", value: "metroblack", colors: ["#00aba9","#0e0e0e","#333333","#565656"] },
+                    { text: "Silver", value: "silver", colors: ["#298bc8","#515967","#bfc6d0","#eaeaec"] },
+                    { text: "Uniform", value: "uniform", colors: ["#298bc8","#515967","#bfc6d0","#eaeaec"] }
+                ]
             }
-
-            theme = theme || "default";
-
-            $(this).html(kendo.render(template, themes))
-                   .on("click", "li", function() {
-                       var li = $(this).children("span").addClass("k-state-selected").end(),
-                           theme = themes[li.index()];
-
-                       li.siblings().children("span").removeClass("k-state-selected");
-
-                       changeTheme(theme.value);
-                   })
-                   .children()
-                   .filter(function() {
-                       return $(this).data("value") === theme;
-                   }).children("span").addClass("k-state-selected");
         });
-    };
+
+    kendo.ui.plugin(ThemeChooser);
 
     extend(window, {
         Application: Application,
