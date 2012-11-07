@@ -4,6 +4,10 @@ public class DropDownListItem {
     private String text;
     private String value;
     
+    public DropDownListItem() {
+        
+    }
+    
     public DropDownListItem(String text, String value) {
         setValue(value);
         setText(text);
