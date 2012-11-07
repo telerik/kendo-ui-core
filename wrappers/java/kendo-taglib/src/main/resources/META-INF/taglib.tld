@@ -3090,7 +3090,8 @@ Includes</description>
 
 
     <tag>
-        <description>The axis type.</description>
+        <description>Scatter charts Y-axis configuration options.
+Includes</description>
         <name>chart-yAxis</name>
         <tag-class>com.kendoui.taglib.chart.YAxisTag</tag-class>
         <body-content>JSP</body-content>
@@ -5310,7 +5311,8 @@ It defaults to 1/5th of the majorUnit.</description>
 
 
     <tag>
-        <description>The axis type.</description>
+        <description>Scatter charts Y-axis configuration options.
+Includes</description>
         <name>chart-yAxisItem</name>
         <tag-class>com.kendoui.taglib.chart.YAxisItemTag</tag-class>
         <body-content>JSP</body-content>
