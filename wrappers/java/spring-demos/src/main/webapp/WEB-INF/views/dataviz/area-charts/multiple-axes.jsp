@@ -18,11 +18,24 @@
 		         // Right alignment is done by specifying a
 		         // crossing value greater than or equal to
 		         // the number of categories.
-         	 	 <kendo:chart-categoryAxis axisCrossingValue="<%= new int[] { 0, 0, 10, 10 } %>" categories="<%= new String[] { \"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\" } %>"></kendo:chart-categoryAxis>
+		         <kendo:chart-categoryAxis>
+         	 	 	<kendo:chart-categoryAxisItem axisCrossingValue="<%= new int[] { 0, 0, 10, 10 } %>" categories="<%= new String[] { \"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\" } %>">
+         	 	 	</kendo:chart-categoryAxisItem>
+         	 	 </kendo:chart-categoryAxis>
          	 	 <kendo:chart-valueAxis>
-         	 	 	<kendo:chart-valueAxis-labels format="{0}%"></kendo:chart-valueAxis-labels>
+         	 	 	<kendo:chart-valueAxisItem min="0" max="100">
+         	 	 		<kendo:chart-valueAxisItem-title text="miles"></kendo:chart-valueAxisItem-title>
+         	 	 	</kendo:chart-valueAxisItem>
+         	 	 	<kendo:chart-valueAxisItem name="km" min="0" max="161" majorUnit="32">
+         	 	 		<kendo:chart-valueAxisItem-title text="km"></kendo:chart-valueAxisItem-title>
+         	 	 	</kendo:chart-valueAxisItem>
+         	 	 	<kendo:chart-valueAxisItem name="mpg" color="#DE7E42">
+         	 	 		<kendo:chart-valueAxisItem-title text="miles per gallon"></kendo:chart-valueAxisItem-title>
+         	 	 	</kendo:chart-valueAxisItem>
+         	 	 	<kendo:chart-valueAxisItem name="l100km" color="#057589">
+         	 	 		<kendo:chart-valueAxisItem-title text="liters per 100km"></kendo:chart-valueAxisItem-title>
+         	 	 	</kendo:chart-valueAxisItem>
          	 	 </kendo:chart-valueAxis>
-         	 	 <kendo:chart-tooltip visible="true" format="{0}%"></kendo:chart-tooltip>
          	 </kendo:chart>
          </div>
     </div>

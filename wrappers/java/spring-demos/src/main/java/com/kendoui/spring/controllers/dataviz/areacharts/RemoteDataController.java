@@ -18,7 +18,7 @@ public class RemoteDataController {
         return "/dataviz/area-charts/remote-data";
     }
     
-    @RequestMapping(value = "/events/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
     public @ResponseBody List<ElectricityProduction> read() {
         return ChartDataRepository.SpainElectricityProduction();
     }
