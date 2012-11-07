@@ -507,14 +507,15 @@
             },
 
             _getThemeContainer: function() {
-                var options = this.options,
+                var themeChooser = this,
+                    options = this.options,
                     container = $(options.listContainer).children(".tc-theme-container");
 
                 if (container.length) {
                     return container;
                 }
 
-                container = $("<ul class='tc-theme-container' />").prependTo(this.options.listContainer);
+                container = $("<ul class='tc-theme-container' />").prependTo(options.listContainer);
 
                 container.on("click", ".tc-link", function(e) {
                     e.preventDefault();
