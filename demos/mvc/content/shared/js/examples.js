@@ -221,6 +221,10 @@
         },
 
         changeTheme: function(themeName, animate) {
+            if (Application.getThemeUrl(themeName) == Application.getCurrentThemeLink().attr("href")) {
+                return;
+            }
+
             if (animate) {
                 Application.preloadStylesheet(Application.getThemeUrl(themeName), function () {
                     var example = $("#example");
