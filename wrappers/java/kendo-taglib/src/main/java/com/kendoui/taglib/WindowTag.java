@@ -202,6 +202,14 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("visible", value);
     }
 
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
+    }
+
     public String getActivate() {
         Function property = ((Function)getProperty("activate"));
         if (property != null) {
