@@ -138,76 +138,51 @@
 .km-android .km-switch
 {
     background: transparent;
-    width: 6em;
-    height: 1.6em;
-    line-height: 1.6em;
+    width: 7em;
+    height: 1.8em;
+    line-height: 1.8em;
 }
 
 .km-android .km-switch-container
 {
     overflow: hidden;
-    border: 0;
-    width: 10em;
     .border-radius(0);
     background: #222;
+    border: 2px solid transparent;
+    border-left-width: 1px;
 }
 
 .km-android .km-switch-handle
 {
     width: 3em;
-    border-color: #646464;
     color: #bbb;
-    margin-right: 0;
-    .border-radius(0);
+    margin: 0 3px 1px 1px;
+    border: 1px solid transparent;
+    border-color: rgba(255,255,255,.2) rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(255,255,255,.2);
+    background: #5B5B5B;
+    .border-radius(2px);
     .box-shadow(none);
     .box-sizing(border-box);
+}
+
+.km-android2 .km-switch-handle
+{
+    .border-radius(0);
 }
 
 .km-android .km-switch-on .km-switch-handle
 {
     color: #fff;
-    border-color: #2F97BE;
-}
-
-.km-android .km-switch-handle:after,
-.km-android .km-switch-handle:before
-{
-    border: 1.4em solid black;
-    border-color: inherit;
-    width: 0;
-    margin: 0;
-    height: 0;
-    content: "\a0";
-    display: block;
-    position: absolute;
-}
-
-.km-android .km-switch-handle:before
-{
-    left: -1em;
-    border-left-color: transparent;
-    border-width: 0 1.6em 2em 1em;
-}
-
-.km-android .km-switch-handle:after
-{
-    left: 1.5em;
-    border-right-color: transparent;
-    border-width: 2em 1em 0 1.6em;
-}
-
-:-moz-any(.km-android) .km-switch-handle:before
-{
-    border-right-width: 1.44em;
+    background-color: #2F97BE;
 }
 
 .km-android .km-switch-label-on,
 .km-android .km-switch-label-off
 {
-    font-size: .88em;
+    font-size: .8em;
     left: 0;
     width: 100%;
-    line-height: 2em;
+    line-height: 1.9em;
     height: 100%;
     text-align: center;
     text-shadow: none;
