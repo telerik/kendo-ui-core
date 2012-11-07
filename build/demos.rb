@@ -196,6 +196,10 @@ tree :to => 'dist/demos/staging/content/cdn/styles',
      :from => MIN_CSS_RESOURCES,
      :root => /styles\/.+?\//
 
+tree :to => 'dist/demos/staging/content/cdn/styles/telerik',
+     :from => FileList['wrappers/mvc/legacy-themes/**/*'].include(LEGACY_MIN_CSS),
+     :root => 'wrappers/mvc/legacy-themes/'
+
 tree :to => 'dist/demos/staging/content/cdn/themebuilder',
      :from => FileList[THEME_BUILDER_RESOURCES]
                 .include('themebuilder/bootstrap.js')
@@ -237,7 +241,8 @@ namespace :demos do
         'dist/demos/staging/sources/razor',
         'dist/demos/staging/content/cdn/js',
         'dist/demos/staging/content/cdn/themebuilder',
-        'dist/demos/staging/content/cdn/styles'] do
+        'dist/demos/staging/content/cdn/styles',
+        'dist/demos/staging/content/cdn/styles/telerik'] do
         patch_web_config('dist/demos/staging/Web.config', '~/content/cdn', '~/content/cdn/themebuilder')
     end
 
