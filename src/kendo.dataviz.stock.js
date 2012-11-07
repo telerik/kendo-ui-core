@@ -55,7 +55,7 @@
             };
 
             if (themeOptions) {
-                deepExtend(themeOptions, stockDefaults);
+                themeOptions = deepExtend({}, themeOptions, stockDefaults);
             }
 
             if (!chart._navigator) {
