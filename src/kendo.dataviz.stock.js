@@ -499,7 +499,8 @@
         for (i = 0; i < navigatorSeries.length; i++) {
             series.push(
                 deepExtend({
-                    color: seriesColors[i % seriesColors.length]
+                    color: seriesColors[i % seriesColors.length],
+                    visibleInLegend: false
                 }, defaults, navigatorSeries[i], {
                     axis: NAVIGATOR_AXIS,
                     categoryAxis: NAVIGATOR_AXIS
