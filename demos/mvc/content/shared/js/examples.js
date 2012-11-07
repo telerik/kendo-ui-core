@@ -488,6 +488,14 @@
                 this.element.on("click", ".tc-link", $.proxy(function(e) {
                     e.preventDefault();
 
+                    var icon = $(e.target).closest(".tc-link").find(".k-icon");
+
+                    if (icon.hasClass("k-i-arrow-s")) {
+                        icon.removeClass("k-i-arrow-s").addClass("k-i-arrow-n");
+                    } else {
+                        icon.removeClass("k-i-arrow-n").addClass("k-i-arrow-s");
+                    }
+
                     kendo.fx(this._themeContainer).expand("vertical").stop().toggle();
                 }, this));
 
