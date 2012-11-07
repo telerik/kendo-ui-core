@@ -500,14 +500,23 @@
                         icon.removeClass("k-i-arrow-n").addClass("k-i-arrow-s");
                     }
 
-                    this._ensureThemes();
-
-                    this._themeContainer.animate({ height: "toggle", margin: "toggle", paddingBottom: "toggle" }, "fast");
+                    this._getThemeContainer().animate({ height: "toggle", margin: "toggle", paddingBottom: "toggle" }, "fast");
 
                     //kendo.fx(this._themeContainer).expand("vertical").stop().toggle();
                 }, this));
+            },
 
-                this._themeContainer.on("click", ".tc-link", function(e) {
+            _getThemeContainer: function() {
+                var options = this.options,
+                    container = $(options.listContainer).children(".tc-theme-container");
+
+                if (container.length) {
+                    return container;
+                }
+
+                container = $("<ul class='tc-theme-container' />").prependTo(this.options.listContainer);
+
+                container.on("click", ".tc-link", function(e) {
                     e.preventDefault();
 
                     var link = $(this);
@@ -520,14 +529,11 @@
 
                     themeChooser.setTheme(link.attr("data-value"));
                 });
-            },
 
-            _ensureThemes: function() {
-                var options = this.options;
+                container.html(kendo.render(options.itemTemplate, options.themes))
+                    .find(".tc-link[data-value='" + options.theme + "']").addClass("active");
 
-                this._themeContainer
-                        .html(kendo.render(options.itemTemplate, options.themes))
-                        .find(".tc-link[data-value='" + options.theme + "']").addClass("active");
+                return container;
             },
 
             setTheme: function(themeName) {
@@ -564,8 +570,6 @@
                             "<span class='k-icon k-i-arrow-s'></span>" +
                         "</a>"
                     );
-
-                this._themeContainer = $("<ul class='tc-theme-container' />").prependTo(this.options.listContainer);
             },
 
             options: {
