@@ -583,15 +583,16 @@
                     "</li>",
                 { useWithBlock: false }),
                 themes: [
-                    { text: "Black", value: "black", colors: ["#0167cc","#4698e9","#272727","#000000"] },
-                    { text: "Blue Opal", value: "blueopal", colors: ["#076186","#7ed3f6","#94c0d2","#daecf4"] },
-                    { text: "Bootstrap", value: "bootstrap", colors: ["#ff67cc","#ff98e9","#ff2727","#ff0000"] },
                     { text: "Default", value: "default", colors: ["#ef6f1c","#e24b17","#5a4b43","#ededed"] },
-                    { text: "High Contrast", value: "highcontrast", colors: ["#b11e9c","#880275","#664e62","#1b141a"] },
-                    { text: "Metro", value: "metro", colors: ["#8ebc00","#787878","#e5e5e5","#ffffff"] },
-                    { text: "Metro Black", value: "metroblack", colors: ["#00aba9","#0e0e0e","#333333","#565656"] },
+                    { text: "Blue Opal", value: "blueopal", colors: ["#076186","#7ed3f6","#94c0d2","#daecf4"] },
+                    { text: "Bootstrap", value: "bootstrap", colors: ["#0044cc","#0088cc","#333333","#e6e6e6"] },
                     { text: "Silver", value: "silver", colors: ["#298bc8","#515967","#bfc6d0","#eaeaec"] },
-                    { text: "Uniform", value: "uniform", colors: ["#298bc8","#515967","#bfc6d0","#eaeaec"] }
+                    { text: "Uniform", value: "uniform", colors: ["#666666","#cccccc","#e7e7e7","#ffffff"] },
+                    { text: "Metro", value: "metro", colors: ["#8ebc00","#787878","#e5e5e5","#ffffff"] },
+                    { text: "Black", value: "black", colors: ["#0167cc","#4698e9","#272727","#000000"] },
+                    { text: "Metro Black", value: "metroblack", colors: ["#00aba9","#0e0e0e","#333333","#565656"] },
+                    { text: "High Contrast", value: "highcontrast", colors: ["#b11e9c","#880275","#664e62","#1b141a"] },
+                    { text: "Moonlight", value: "moonlight", colors: ["#ee9f05","#40444f","#2f3640","#212a33"] }
                 ]
             }
         });
