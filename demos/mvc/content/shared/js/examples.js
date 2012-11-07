@@ -537,6 +537,7 @@
                 for (var i = 0; i < themes.length; i++) {
                     if (themes[i].value == themeName) {
                         theme = themes[i];
+                        theme.selected = true;
                     } else {
                         themes[i].selected = false;
                     }
