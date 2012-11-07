@@ -49,7 +49,9 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public void setCategoryAxis(CategoryAxisTag value) {
-        setProperty("categoryAxis", value);
+
+        setProperty("categoryAxis", value.categoryAxis());
+
     }
 
     public void setTitle(TitleTag value) {
@@ -83,15 +85,21 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
     }
 
     public void setValueAxis(ValueAxisTag value) {
-        setProperty("valueAxis", value);
+
+        setProperty("valueAxis", value.valueAxis());
+
     }
 
     public void setXAxis(XAxisTag value) {
-        setProperty("xAxis", value);
+
+        setProperty("xAxis", value.xAxis());
+
     }
 
     public void setYAxis(YAxisTag value) {
-        setProperty("yAxis", value);
+
+        setProperty("yAxis", value.yAxis());
+
     }
 
     public void setAxisLabelClick(AxisLabelClickFunctionTag value) {

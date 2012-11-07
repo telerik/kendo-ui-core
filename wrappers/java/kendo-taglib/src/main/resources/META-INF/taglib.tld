@@ -2657,144 +2657,6 @@ has been clicked on a window with static content.</description>
         <tag-class>com.kendoui.taglib.chart.CategoryAxisTag</tag-class>
         <body-content>JSP</body-content>
 
-        <attribute>
-            <description>Array of category names.</description>
-            <name>categories</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
-            <description>Color to apply to all axis elements. Any valid CSS color string will work here, including hex and rgb.
-Individual color settings for line and labels take priority.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the category name.</description>
-            <name>field</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Positions categories and series points on major ticks. This removes the empty space before and after the series.</description>
-            <name>justified</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>The unique axis name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The plot bands of category axis.
-The plot band fields:</description>
-            <name>plotBands</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
-            <description>Reverses the axis direction -
-categories are listed from right to left and from top to bottom.</description>
-            <name>reverse</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>The axis type.</description>
-            <name>type</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies the discrete</description>
-            <name>autoBaseUnitSteps</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The base time interval for the axis.
-The default baseUnit is determined automatically from the minimum difference
-between subsequent categories. Available options:</description>
-            <name>baseUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Sets the step (interval) between categories in base units.
-Specifiying "auto" will set the step to such value that the total number of categories does not exceed</description>
-            <name>baseUnitStep</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The last date displayed on the axis.
-By default, the minimum date is the same as the last category.
-This is often used in combination with the</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The first date displayed on the axis.
-By default, the minimum date is the same as the first category.
-This is often used in combination with the</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>By default, the first and last dates will be rounded off to the nearest base unit.
-Specifying</description>
-            <name>roundToBaseUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies the week start day when</description>
-            <name>weekStartDay</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>Specifies the maximum number of groups (categories) to produce when
-either</description>
-            <name>maxDateGroups</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The visibility of the axis.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>Category index at which the first value axis crosses this axis. (Only for object)</description>
-            <name>axisCrossingValue</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
     </tag>
 
 
@@ -3214,89 +3076,6 @@ The default options for all vertical line series. For more details see the serie
         <tag-class>com.kendoui.taglib.chart.ValueAxisTag</tag-class>
         <body-content>JSP</body-content>
 
-        <attribute>
-            <description>Value at which the category axis crosses this axis.</description>
-            <name>axisCrossingValue</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>Value indicies at which the category axes cross the value axis.</description>
-            <name>axisCrossingValues</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
-            <description>Color to apply to all axis elements.
-Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The interval between major divisions.</description>
-            <name>majorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The maximum value of the axis.
-This is often used in combination with the</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The minimum value of the axis.
-This is often used in combination with the</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The interval between minor divisions.
-It defaults to 1/5th of the majorUnit.</description>
-            <name>minorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The unique axis name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The plot bands of the value axis.
-The plot band fields:</description>
-            <name>plotBands</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
-            <description>Reverses the axis direction -
-values increase from right to left and from top to bottom.</description>
-            <name>reverse</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>The visibility of the axis.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
     </tag>
 
 
@@ -3307,59 +3086,6 @@ Includes</description>
         <tag-class>com.kendoui.taglib.chart.XAxisTag</tag-class>
         <body-content>JSP</body-content>
 
-        <attribute>
-            <description>The axis type.</description>
-            <name>type</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The base time interval for the axis labels.
-The default baseUnit is determined automatically from the value range. Available options:</description>
-            <name>baseUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The interval between major divisions in base units.</description>
-            <name>majorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The end date of the axis.
-This is often used in combination with the</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The maximum value of the axis.
-This is often used in combination with the</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The interval between minor divisions in base units.
-It defaults to 1/5th of the majorUnit.</description>
-            <name>minorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
-            <name>axisCrossingValue</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
     </tag>
 
 
@@ -3368,59 +3094,6 @@ It defaults to 1/5th of the majorUnit.</description>
         <name>chart-yAxis</name>
         <tag-class>com.kendoui.taglib.chart.YAxisTag</tag-class>
         <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The axis type.</description>
-            <name>type</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The base time interval for the axis labels.
-The default baseUnit is determined automatically from the value range. Available options:</description>
-            <name>baseUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The interval between major divisions in base units.</description>
-            <name>majorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The end date of the axis.
-This is often used in combination with the</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The maximum value of the axis.
-This is often used in combination with the</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The interval between minor divisions in base units.
-It defaults to 1/5th of the majorUnit.</description>
-            <name>minorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
-            <name>axisCrossingValue</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
 
     </tag>
 
@@ -3466,9 +3139,156 @@ It defaults to 1/5th of the majorUnit.</description>
 
 
     <tag>
+        <description>The category axis configuration options.</description>
+        <name>chart-categoryAxisItem</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Array of category names.</description>
+            <name>categories</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Color to apply to all axis elements. Any valid CSS color string will work here, including hex and rgb.
+Individual color settings for line and labels take priority.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the category name.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Positions categories and series points on major ticks. This removes the empty space before and after the series.</description>
+            <name>justified</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The unique axis name.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The plot bands of category axis.
+The plot band fields:</description>
+            <name>plotBands</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Reverses the axis direction -
+categories are listed from right to left and from top to bottom.</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The axis type.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the discrete</description>
+            <name>autoBaseUnitSteps</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The base time interval for the axis.
+The default baseUnit is determined automatically from the minimum difference
+between subsequent categories. Available options:</description>
+            <name>baseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Sets the step (interval) between categories in base units.
+Specifiying "auto" will set the step to such value that the total number of categories does not exceed</description>
+            <name>baseUnitStep</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The last date displayed on the axis.
+By default, the minimum date is the same as the last category.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The first date displayed on the axis.
+By default, the minimum date is the same as the first category.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>By default, the first and last dates will be rounded off to the nearest base unit.
+Specifying</description>
+            <name>roundToBaseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the week start day when</description>
+            <name>weekStartDay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies the maximum number of groups (categories) to produce when
+either</description>
+            <name>maxDateGroups</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the axis.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Category index at which the first value axis crosses this axis. (Only for object)</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Configures the axis labels.</description>
-        <name>chart-categoryAxis-labels</name>
-        <tag-class>com.kendoui.taglib.chart.CategoryAxisLabelsTag</tag-class>
+        <name>chart-categoryAxisItem-labels</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemLabelsTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -3579,8 +3399,8 @@ Template variables:</description>
 
     <tag>
         <description>Configures the axis line. This will also effect major and minor ticks, but not gridlines.</description>
-        <name>chart-categoryAxis-line</name>
-        <tag-class>com.kendoui.taglib.chart.CategoryAxisLineTag</tag-class>
+        <name>chart-categoryAxisItem-line</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemLineTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -3618,8 +3438,8 @@ not the grid lines.</description>
     <tag>
         <description>Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.</description>
-        <name>chart-categoryAxis-majorGridLines</name>
-        <tag-class>com.kendoui.taglib.chart.CategoryAxisMajorGridLinesTag</tag-class>
+        <name>chart-categoryAxisItem-majorGridLines</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemMajorGridLinesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -3655,8 +3475,8 @@ body of the chart.</description>
 
     <tag>
         <description>The major ticks of the axis.</description>
-        <name>chart-categoryAxis-majorTicks</name>
-        <tag-class>com.kendoui.taglib.chart.CategoryAxisMajorTicksTag</tag-class>
+        <name>chart-categoryAxisItem-majorTicks</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemMajorTicksTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -3680,8 +3500,8 @@ on the chart.</description>
     <tag>
         <description>Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
 the body of the chart.</description>
-        <name>chart-categoryAxis-minorGridLines</name>
-        <tag-class>com.kendoui.taglib.chart.CategoryAxisMinorGridLinesTag</tag-class>
+        <name>chart-categoryAxisItem-minorGridLines</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemMinorGridLinesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -3718,8 +3538,8 @@ rgb.</description>
 
     <tag>
         <description>The minor ticks of the axis.</description>
-        <name>chart-categoryAxis-minorTicks</name>
-        <tag-class>com.kendoui.taglib.chart.CategoryAxisMinorTicksTag</tag-class>
+        <name>chart-categoryAxisItem-minorTicks</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemMinorTicksTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -3742,8 +3562,8 @@ on the chart.</description>
 
     <tag>
         <description>The title of the category axis.</description>
-        <name>chart-categoryAxis-title</name>
-        <tag-class>com.kendoui.taglib.chart.CategoryAxisTitleTag</tag-class>
+        <name>chart-categoryAxisItem-title</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemTitleTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -3808,7 +3628,7 @@ hex and rgb.</description>
 
     <tag>
         <description>The border of the labels.</description>
-        <name>chart-categoryAxis-labels-border</name>
+        <name>chart-categoryAxisItem-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
         <body-content>empty</body-content>
 
@@ -3838,7 +3658,7 @@ hex and rgb.</description>
 
     <tag>
         <description>The border of the title.</description>
-        <name>chart-categoryAxis-title-border</name>
+        <name>chart-categoryAxisItem-title-border</name>
         <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
         <body-content>empty</body-content>
 
@@ -4933,9 +4753,94 @@ Template variables:</description>
 
 
     <tag>
+        <description>The value axis configuration options.</description>
+        <name>chart-valueAxisItem</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Color to apply to all axis elements.
+Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between major divisions.</description>
+            <name>majorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The maximum value of the axis.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The minimum value of the axis.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between minor divisions.
+It defaults to 1/5th of the majorUnit.</description>
+            <name>minorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The unique axis name.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The plot bands of the value axis.
+The plot band fields:</description>
+            <name>plotBands</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Reverses the axis direction -
+values increase from right to left and from top to bottom.</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the axis.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Value at which the category axis crosses this axis. (Only for object)</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Configures the axis labels.</description>
-        <name>chart-valueAxis-labels</name>
-        <tag-class>com.kendoui.taglib.chart.ValueAxisLabelsTag</tag-class>
+        <name>chart-valueAxisItem-labels</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemLabelsTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5033,8 +4938,8 @@ Template variables:</description>
 
     <tag>
         <description>Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.</description>
-        <name>chart-valueAxis-line</name>
-        <tag-class>com.kendoui.taglib.chart.ValueAxisLineTag</tag-class>
+        <name>chart-valueAxisItem-line</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemLineTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5073,8 +4978,8 @@ not the grid lines.</description>
     <tag>
         <description>Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.</description>
-        <name>chart-valueAxis-majorGridLines</name>
-        <tag-class>com.kendoui.taglib.chart.ValueAxisMajorGridLinesTag</tag-class>
+        <name>chart-valueAxisItem-majorGridLines</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemMajorGridLinesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5103,8 +5008,8 @@ body of the chart.</description>
 
     <tag>
         <description>The major ticks of the axis.</description>
-        <name>chart-valueAxis-majorTicks</name>
-        <tag-class>com.kendoui.taglib.chart.ValueAxisMajorTicksTag</tag-class>
+        <name>chart-valueAxisItem-majorTicks</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemMajorTicksTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5126,8 +5031,8 @@ body of the chart.</description>
 
     <tag>
         <description>Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through the</description>
-        <name>chart-valueAxis-minorGridLines</name>
-        <tag-class>com.kendoui.taglib.chart.ValueAxisMinorGridLinesTag</tag-class>
+        <name>chart-valueAxisItem-minorGridLines</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemMinorGridLinesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5163,8 +5068,8 @@ body of the chart.</description>
 
     <tag>
         <description>The minor ticks of the axis.</description>
-        <name>chart-valueAxis-minorTicks</name>
-        <tag-class>com.kendoui.taglib.chart.ValueAxisMinorTicksTag</tag-class>
+        <name>chart-valueAxisItem-minorTicks</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemMinorTicksTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5186,8 +5091,8 @@ body of the chart.</description>
 
     <tag>
         <description>The title of the value axis.</description>
-        <name>chart-valueAxis-title</name>
-        <tag-class>com.kendoui.taglib.chart.ValueAxisTitleTag</tag-class>
+        <name>chart-valueAxisItem-title</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemTitleTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5259,7 +5164,7 @@ hex and rgb.</description>
 
     <tag>
         <description>The border of the labels.</description>
-        <name>chart-valueAxis-labels-border</name>
+        <name>chart-valueAxisItem-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
         <body-content>empty</body-content>
 
@@ -5290,7 +5195,7 @@ hex and rgb.</description>
 
     <tag>
         <description>The border of the title.</description>
-        <name>chart-valueAxis-title-border</name>
+        <name>chart-valueAxisItem-title-border</name>
         <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
         <body-content>empty</body-content>
 
@@ -5319,9 +5224,72 @@ hex and rgb.</description>
 
 
     <tag>
+        <description>Scatter charts X-axis configuration options.
+Includes</description>
+        <name>chart-xAxisItem</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The axis type.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The base time interval for the axis labels.
+The default baseUnit is determined automatically from the value range. Available options:</description>
+            <name>baseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between major divisions in base units.</description>
+            <name>majorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end date of the axis.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The maximum value of the axis.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between minor divisions in base units.
+It defaults to 1/5th of the majorUnit.</description>
+            <name>minorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Label settings specific to the date axis.</description>
-        <name>chart-xAxis-labels</name>
-        <tag-class>com.kendoui.taglib.chart.XAxisLabelsTag</tag-class>
+        <name>chart-xAxisItem-labels</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemLabelsTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5342,9 +5310,71 @@ hex and rgb.</description>
 
 
     <tag>
+        <description>The axis type.</description>
+        <name>chart-yAxisItem</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The axis type.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The base time interval for the axis labels.
+The default baseUnit is determined automatically from the value range. Available options:</description>
+            <name>baseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between major divisions in base units.</description>
+            <name>majorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end date of the axis.
+This is often used in combination with the</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The maximum value of the axis.
+This is often used in combination with the</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The interval between minor divisions in base units.
+It defaults to 1/5th of the majorUnit.</description>
+            <name>minorUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Label settings specific to the date axis.</description>
-        <name>chart-yAxis-labels</name>
-        <tag-class>com.kendoui.taglib.chart.YAxisLabelsTag</tag-class>
+        <name>chart-yAxisItem-labels</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemLabelsTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>

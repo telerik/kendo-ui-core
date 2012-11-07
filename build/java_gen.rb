@@ -351,9 +351,9 @@ JAVA_NESTED_EVENT_SETTER_TEMPLATE = ERB.new(%{
 JAVA_ARRAY_SETTER_TEMPLATE = ERB.new(%{
     public void set<%= child.name %>(<%= child.java_type %> value) {
 <% if has_items? %>
-        <%= child.name.downcase %> = value.<%= child.name.downcase %>();
+        <%= child.name.camelize %> = value.<%= child.name.camelize %>();
 <% else %>
-        setProperty("<%= child.name.downcase %>", value.<%= child.name.downcase %>());
+        setProperty("<%= child.name.camelize %>", value.<%= child.name.camelize %>());
 <% end %>
     }
 })
@@ -422,7 +422,7 @@ class String
     end
 
     def singular
-        return self + 'Item' if end_with?('ies') || !end_with?('s')
+        return self + 'Item' if end_with?('ies') || !end_with?('s') || self.match(/\s*Axis+\s*/)
 
         self.sub(/s$/, '')
     end
@@ -686,7 +686,7 @@ class Tag
                 end
 
                 if option.type == 'Array'
-                    child =  NestedTagArray.new :name => option.name.sub(prefix, ''),
+                    child = NestedTagArray.new :name => option.name.sub(prefix, ''),
                               :parent => self,
                               :description => option.description,
                               :options => child_options,

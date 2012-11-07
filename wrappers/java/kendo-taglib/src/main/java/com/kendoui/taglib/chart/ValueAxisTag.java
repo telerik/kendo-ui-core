@@ -1,12 +1,17 @@
 
 package com.kendoui.taglib.chart;
 
+
 import com.kendoui.taglib.BaseTag;
+
+
 
 import com.kendoui.taglib.ChartTag;
 
 
-
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.List;
 
 import javax.servlet.jsp.JspException;
 
@@ -31,6 +36,9 @@ public class ValueAxisTag extends BaseTag /* interfaces *//* interfaces */ {
     @Override
     public void initialize() {
 //>> initialize
+
+        valueAxis = new ArrayList<Map<String, Object>>();
+
 //<< initialize
 
         super.initialize();
@@ -39,6 +47,9 @@ public class ValueAxisTag extends BaseTag /* interfaces *//* interfaces */ {
     @Override
     public void destroy() {
 //>> destroy
+
+        valueAxis = null;
+
 //<< destroy
 
         super.destroy();
@@ -46,124 +57,18 @@ public class ValueAxisTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    private List<Map<String, Object>> valueAxis;
+
+    public List<Map<String, Object>> valueAxis() {
+        return valueAxis;
+    }
+
     public static String tagName() {
         return "chart-valueAxis";
     }
 
-    public void setLabels(ValueAxisLabelsTag value) {
-        setProperty("labels", value);
-    }
-
-    public void setLine(ValueAxisLineTag value) {
-        setProperty("line", value);
-    }
-
-    public void setMajorGridLines(ValueAxisMajorGridLinesTag value) {
-        setProperty("majorGridLines", value);
-    }
-
-    public void setMajorTicks(ValueAxisMajorTicksTag value) {
-        setProperty("majorTicks", value);
-    }
-
-    public void setMinorGridLines(ValueAxisMinorGridLinesTag value) {
-        setProperty("minorGridLines", value);
-    }
-
-    public void setMinorTicks(ValueAxisMinorTicksTag value) {
-        setProperty("minorTicks", value);
-    }
-
-    public void setTitle(ValueAxisTitleTag value) {
-        setProperty("title", value);
-    }
-
-    public float getAxisCrossingValue() {
-        return (float)getProperty("axisCrossingValue");
-    }
-
-    public void setAxisCrossingValue(float value) {
-        setProperty("axisCrossingValue", value);
-    }
-
-    public Object getAxisCrossingValues() {
-        return (Object)getProperty("axisCrossingValues");
-    }
-
-    public void setAxisCrossingValues(Object value) {
-        setProperty("axisCrossingValues", value);
-    }
-
-    public String getColor() {
-        return (String)getProperty("color");
-    }
-
-    public void setColor(String value) {
-        setProperty("color", value);
-    }
-
-    public float getMajorUnit() {
-        return (float)getProperty("majorUnit");
-    }
-
-    public void setMajorUnit(float value) {
-        setProperty("majorUnit", value);
-    }
-
-    public float getMax() {
-        return (float)getProperty("max");
-    }
-
-    public void setMax(float value) {
-        setProperty("max", value);
-    }
-
-    public float getMin() {
-        return (float)getProperty("min");
-    }
-
-    public void setMin(float value) {
-        setProperty("min", value);
-    }
-
-    public float getMinorUnit() {
-        return (float)getProperty("minorUnit");
-    }
-
-    public void setMinorUnit(float value) {
-        setProperty("minorUnit", value);
-    }
-
-    public Object getName() {
-        return (Object)getProperty("name");
-    }
-
-    public void setName(Object value) {
-        setProperty("name", value);
-    }
-
-    public Object getPlotBands() {
-        return (Object)getProperty("plotBands");
-    }
-
-    public void setPlotBands(Object value) {
-        setProperty("plotBands", value);
-    }
-
-    public boolean getReverse() {
-        return (boolean)getProperty("reverse");
-    }
-
-    public void setReverse(boolean value) {
-        setProperty("reverse", value);
-    }
-
-    public boolean getVisible() {
-        return (boolean)getProperty("visible");
-    }
-
-    public void setVisible(boolean value) {
-        setProperty("visible", value);
+    public void addValueAxisItem(ValueAxisItemTag value) {
+        valueAxis.add(value.properties());
     }
 
 //<< Attributes

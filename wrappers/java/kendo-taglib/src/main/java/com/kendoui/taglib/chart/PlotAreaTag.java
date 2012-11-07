@@ -1,7 +1,10 @@
 
 package com.kendoui.taglib.chart;
 
+
 import com.kendoui.taglib.BaseTag;
+
+
 
 import com.kendoui.taglib.ChartTag;
 
@@ -11,7 +14,7 @@ import com.kendoui.taglib.ChartTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class PlotAreaTag extends BaseTag /* interfaces *//* interfaces */ {
+public class PlotAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {

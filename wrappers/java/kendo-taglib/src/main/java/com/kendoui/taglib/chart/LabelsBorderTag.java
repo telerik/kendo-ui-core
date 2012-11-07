@@ -19,7 +19,7 @@ public class LabelsBorderTag extends  BaseTag  /* interfaces *//* interfaces */ 
 //>> doEndTag
 
 
-        ValueAxisLabelsTag parent = (ValueAxisLabelsTag)findParentWithClass(ValueAxisLabelsTag.class);
+        ValueAxisItemLabelsTag parent = (ValueAxisItemLabelsTag)findParentWithClass(ValueAxisItemLabelsTag.class);
 
 
         parent.setBorder(this);
@@ -48,7 +48,7 @@ public class LabelsBorderTag extends  BaseTag  /* interfaces *//* interfaces */ 
 //>> Attributes
 
     public static String tagName() {
-        return "chart-valueAxis-labels-border";
+        return "chart-valueAxisItem-labels-border";
     }
 
     public String getColor() {
