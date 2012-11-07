@@ -2595,7 +2595,7 @@ function pad(number, digits, end) {
             length = MOUSE_EVENTS.length,
             element = document.documentElement;
 
-        if (kendo.mouseTrap) {
+        if (kendo.mouseTrap || !support.eventCapture) {
             return;
         }
 
