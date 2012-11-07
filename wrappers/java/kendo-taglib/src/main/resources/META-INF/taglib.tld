@@ -2475,6 +2475,13 @@ container iframe element is automatically created.</description>
         </attribute>
 
         <attribute>
+            <description>Specifies height of the window.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
             <description>Triggered when a Window has finished its opening animation.</description>
             <name>activate</name>
             <rtexprvalue>true</rtexprvalue>
