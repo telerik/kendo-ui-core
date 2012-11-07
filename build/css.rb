@@ -61,5 +61,5 @@ end
 
 #Build styles/kendo*.min.css by running cssmin over styles/kendo*.css
 rule '.min.css' => lambda { |target| target.sub('min.css', 'css') } do |t|
-    sh "cssmin #{t.source} > #{t.name}", :verbose => VERBOSE
+    sh "#{CSSMIN} #{t.source} > #{t.name}", :verbose => VERBOSE
 end
