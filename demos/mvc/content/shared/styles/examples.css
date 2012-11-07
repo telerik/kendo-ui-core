@@ -961,6 +961,7 @@ p#copy
 #themeChooser .skin-metro .k-state-selected{background-color:#8ebc00;color:#fff;}
 #themeChooser .skin-metroblack .k-state-selected{background-color:#00aba9;color:#fff;}
 #themeChooser .skin-silver .k-state-selected{background-color:#0879C0;color:#fff;}
+#themeChooser .skin-uniform .k-state-selected{background-color:#ccc;color:#666;}
 
 /*nav-pager*/
 
