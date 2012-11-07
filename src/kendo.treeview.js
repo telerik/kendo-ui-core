@@ -686,8 +686,9 @@
                 target = that._previousVisible($());
             } else if (key == keys.ENTER) {
                 if (!focused.find(".k-in:first").hasClass("k-state-selected")) {
-                    that.select(focused);
-                    that._trigger(SELECT, focused);
+                    if (!that._trigger(SELECT, focused)) {
+                        that.select(focused);
+                    }
                 }
             } else if (key == keys.SPACEBAR && checkbox.length) {
                 checkbox.prop(CHECKED, !checkbox.prop(CHECKED))

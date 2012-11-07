@@ -986,6 +986,24 @@
                 equal(treeview.find(".k-state-focused").text(), "baz");
             });
 
+            test("selection from enter key can be prevented", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "baz" }
+                    ],
+                    select: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                treeview.focus();
+                treeview.press(keys.DOWN);
+                treeview.press(keys.ENTER);
+
+                equal(treeview.find(".k-state-selected").text(), "foo");
+            });
+
             test("down arrow triggers navigate event", 1, function() {
                 createTreeView({
                     dataSource: [
