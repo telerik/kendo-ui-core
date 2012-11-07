@@ -7,17 +7,21 @@
 <div id="instructions-box">
     <h3>Instructions</h3>
     <ol id="instructions-list">
-        <li>Select a theme to modify
-            <ul id="themeChooser"><li></li></ul>
+        <li>
+            Select a theme to modify: <span id="themeChooser"></span>
+            <div id="themeChooser-container"></div>
         </li>
-        <li>Start the <a class="k-button" id="bookmarklet" href="">Kendo ThemeBuilder</a></li>
+        <li>Start the <a class="k-button" id="bookmarklet" href="#">Kendo ThemeBuilder</a></li>
         <li>Use the ThemeBuilder as a <strong>bookmarklet</strong> on your own pages! (Drag the button to your bookmarks bar)</li>
     </ol>
 </div>
 
 <script>
     window.applyCurrentTheme();
-    $("#themeChooser").themeChooser();
+    $("#themeChooser").kendoThemeChooser({
+        label: false,
+        listContainer: $("#themeChooser-container")
+    });
 
     $("#bookmarklet").attr("href", ("javascript:(function(){" +
             "var ktb=window.kendoThemeBuilder,s,d=document;" +

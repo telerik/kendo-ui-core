@@ -548,10 +548,12 @@
             },
 
             _render: function() {
+                var label = this.options.label;
+
                 this.element
                     .addClass("k-theme-chooser")
                     .html(
-                        "<span class='tc-choose-theme'>Choose theme:</span>" +
+                        (label ? "<span class='tc-choose-theme'>" + label + "</span>" : "") +
                         "<a class='tc-link k-state-selected' href='#'>" +
                             "<span class='tc-theme-name'></span>" +
                             "<span class='k-icon k-i-arrow-s'></span>" +
@@ -563,6 +565,7 @@
 
             options: {
                 name: "ThemeChooser",
+                label: "Choose theme:",
                 theme: "default",
                 listContainer: "#mainWrapInner",
                 itemTemplate: kendo.template(
