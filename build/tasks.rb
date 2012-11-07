@@ -74,7 +74,9 @@ def mvn(name, options)
 end
 
 def uglifyjs(from, to)
-    sh "#{UGLIFYJS} #{from} -o #{to} -mc warnings=1", :verbose => VERBOSE
+    cmd = "#{UGLIFYJS} #{from} -o #{to} -mc";
+    cmd = cmd + " warnings=false" unless VERBOSE;
+    sh cmd, :verbose => VERBOSE
 end
 
 def less(from, to)
