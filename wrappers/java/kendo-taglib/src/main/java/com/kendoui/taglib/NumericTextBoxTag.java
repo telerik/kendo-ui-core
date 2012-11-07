@@ -18,7 +18,7 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
 
     @Override
     protected Element<?> createElement() {
-        return new Input();
+        return new Input().attr("name", getName());
     }
     
     @Override

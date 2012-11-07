@@ -5,6 +5,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.slider.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 
@@ -17,6 +19,9 @@ public class SliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         super("Slider");
     }
 
+    protected Element<?> createElement() {
+        return new Input().attr("name", getName());
+    }
     
     @Override
     public int doEndTag() throws JspException {

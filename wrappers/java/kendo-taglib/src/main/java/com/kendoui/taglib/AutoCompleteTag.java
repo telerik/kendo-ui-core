@@ -21,7 +21,7 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBo
 
     @Override
     public Element<?> createElement() {
-        return new Input();
+        return new Input().attr("name", getName());
     }
     
     @Override

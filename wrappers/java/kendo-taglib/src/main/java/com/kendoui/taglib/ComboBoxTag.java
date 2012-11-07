@@ -21,7 +21,7 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
 
     @Override
     protected Element<?> createElement() {
-        return new Input();
+        return new Input().attr("name", getName());
     }
     
     @Override

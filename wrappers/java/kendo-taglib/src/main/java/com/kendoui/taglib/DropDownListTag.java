@@ -21,7 +21,7 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
 
     @Override
     protected Element<?> createElement() {
-        return new Input();
+        return new Input().attr("name", getName());
     }
     
     @Override
