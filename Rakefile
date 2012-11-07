@@ -64,7 +64,7 @@ JSP_CONTENT = {
 
 task :npm do
     dir = Rake.application.original_dir
-    sh "cd #{dir} && npm install"
+    sh "cd #{dir} && npm install", :verbose => VERBOSE
 end
 
 task :js => :npm
