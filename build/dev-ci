@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-export FIREFOX_PROFILE="ci"
-export CHROME_USER_DATA_DIR="/tmp/ci"
-
-./tests/tests.js
