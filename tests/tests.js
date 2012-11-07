@@ -15,7 +15,7 @@ var WEBROOT    = path.join(path.dirname(__filename), ".."),
     PORT       = process.argv[3] || 8880,
     bayeux     = new faye.NodeAdapter({mount: "/faye", timeout: 100000});
 
-var server = http.createServer(SS.make_server(WEBROOT, false));
+var server = http.createServer(SS.make_server(WEBROOT, true));
 
 bayeux.attach(server);
 
