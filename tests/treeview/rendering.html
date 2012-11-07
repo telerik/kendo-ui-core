@@ -427,6 +427,21 @@
                 ok(!checkboxes.eq(1).is(":checked"));
             });
 
+            test("checkboxes.name renders name attribute for checkbox inputs", function() {
+                treeview.kendoTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo" }
+                    ],
+                    checkboxes: {
+                        name: "bar[]"
+                    }
+                });
+
+                var checkboxes = treeview.find(":checkbox");
+
+                equal(checkboxes.eq(0).attr("name"), "bar[]");
+            });
+
             module("aria generation", moduleOptions);
 
             test("treeview role is added to the wrapper", function() {

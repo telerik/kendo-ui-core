@@ -788,13 +788,26 @@
         },
 
         _checkboxes: function() {
-            var that = this,
-                options = that.options,
-                checkboxOptions = options.checkboxes;
+            var options = this.options,
+                checkboxOptions = options.checkboxes,
+                checkboxTemplate;
 
             if (checkboxOptions || options.checkboxTemplate) {
+
+                if (options.checkboxTemplate) {
+                    checkboxTemplate = options.checkboxTemplate;
+                } else {
+                    checkboxTemplate = "<input type='checkbox' #= item.checked ? 'checked' : '' #";
+
+                    if (checkboxOptions.name) {
+                        checkboxTemplate += " name='" + checkboxOptions.name + "'";
+                    }
+
+                    checkboxTemplate += " />";
+                }
+
                 checkboxOptions = extend({
-                    template: options.checkboxTemplate || "<input type='checkbox' #= item.checked ? 'checked' : '' # />"
+                    template: checkboxTemplate
                 }, options.checkboxes);
 
                 if (typeof checkboxOptions.template == "string") {
