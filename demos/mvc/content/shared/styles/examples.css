@@ -886,6 +886,7 @@ p#copy
 
 .tc-theme-name
 {
+    vertical-align: middle;
     padding-right: 4px;
     width: 80px;
 }
