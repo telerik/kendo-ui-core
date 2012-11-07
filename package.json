@@ -4,7 +4,7 @@
    "dependencies": {
        "uglify-js2": "",
        "cssmin": "",
-       "faye": "",
+       "faye": "0.8.3",
        "xmlbuilder": "",
        "colors": "",
        "cookiejar": "",
