@@ -1,0 +1,112 @@
+@image-folder: "Moonlight";
+@texture-url: url("textures/brushed-metal.png");
+
+/* Widget Base Styles */
+@widget-text-color: #fff;
+@widget-gradient: "#2f3640 0%, #212a33 100%";
+@widget-background-color: #212a33;
+@widget-border-color: #171e28;
+@widget-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+
+/* Selects, Dropdowns */
+@select-background-color: #212a33;
+@select-border-color: #171e28;
+@select-hover-background-color: @hover-background-color;
+@select-group-background-color: @select-background-color;
+
+/* Inputs */
+@input-background-color: #f6f6f6;
+@input-text-color: #232a32;
+
+/* Links */
+@link-text-color: @widget-text-color;
+
+/* Headers */
+@header-text-color: @widget-text-color;
+@header-background-color: #212a33;
+
+/* Buttons */
+@button-text-color: @widget-text-color;
+@button-background-color: @header-background-color;
+
+/* Group Base Styles */
+@group-background-color: #2f3640;
+@group-border-color: @widget-border-color;
+
+/* Content */
+@content-background-color: @widget-background-color;
+
+
+/* Widget States */
+
+/* Hover State */
+@hover-text-color: #fff;
+@hover-gradient: "#5b5f6b 0%, #40444f 100%";
+@hover-background-color: #40444f;
+@hover-border-color: #212a33;
+@hover-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+
+/* Selected State */
+@selected-text-color: #171e28;
+@selected-gradient: "#ee9f05 0%, #f4af03 100%";
+@selected-background-color: #f4af03;
+@selected-border-color: #ee9f05;
+@selected-shadow: none;
+
+/* Active State */
+@active-text-color: @widget-text-color;
+@active-gradient:  none;
+@active-background-color: @widget-background-color;
+@active-border-color: #ffa800;
+@active-shadow: none;
+
+/* Error State */
+@error-text-color: #fff;
+@error-background-color: #ff5252;
+@error-border-color: #e20000;
+
+/* Disabled State */
+@disabled-text-color: #535a63;
+
+/* ToolTip */
+@tooltip-text-color: #171e28;
+@tooltip-background-color: #f5bb04;
+@tooltip-border-color: #f5bb04;
+
+/* Validation Message */
+@validation-text-color: #ffa800;
+@validation-background-color: @widget-background-color;
+@validation-border-color: #ffa800;
+
+/* Splitter */
+@splitbar-background-color: @header-background-color;
+
+/* Slider */
+@draghandle-border-radius: 8px;
+@draghandle-border-color: @selected-background-color;
+@draghandle-background-color: @selected-background-color;
+@draghandle-shadow: none;
+@draghandle-hover-border-color: @selected-background-color;
+@draghandle-hover-background-color: @selected-background-color;
+@draghandle-hover-shadow: none;
+
+/* Grid */
+@alt-background-color: #2f3640;
+
+/* Loading Indicators */
+@loading-panel-color: #fff;
+
+/* Shadows */
+@shadow-color: rgba(0, 0, 0, .3);
+@shadow-inset-color: #ddd;
+
+/* Border Radii */
+@main-border-radius: 2px;
+@list-border-radius: @main-border-radius - 1;
+@inner-border-radius: @main-border-radius - 2;
+@slider-border-radius: 13px;
+
+/* Icons */
+@default-icon-opacity: 1;
+
+@import "template.less";
