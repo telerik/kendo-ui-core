@@ -8,7 +8,7 @@
         ANDROID3UP = os.android && os.flatVersion >= 300,
         CLICK = "click";
 
-    function highlightButton(event, highlight, widget) {
+    function highlightButton(widget, event, highlight) {
         $(event.target).closest(".km-button,.km-detail").toggleClass("km-state-active", highlight);
 
         if (ANDROID3UP && widget.deactivateTimeoutID) {

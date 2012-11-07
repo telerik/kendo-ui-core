@@ -68,6 +68,7 @@
 {
     .border-radius(1px);
 
+    padding: .6em 1em;
     border: 1px solid transparent;
     border-color: rgba(255,255,255,.2) rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(255,255,255,.2);
     background: #5B5B5B;
@@ -106,7 +107,6 @@
     border: 4px solid transparent;
     background: inherit;
     .border-radius(2px);
-    z-index: -1;
     opacity: .5;
 }
 
@@ -129,11 +129,6 @@
     display: none;
 }
 
-.km-android .km-switch
-{
-    width: 6em;
-}
-
 .km-android .km-switch-background,
 .km-android .km-slider-background
 {
@@ -143,7 +138,9 @@
 .km-android .km-switch
 {
     background: transparent;
-    height: 1.4em;
+    width: 6em;
+    height: 1.6em;
+    line-height: 1.6em;
 }
 
 .km-android .km-switch-container
@@ -189,14 +186,14 @@
 {
     left: -1em;
     border-left-color: transparent;
-    border-width: 0 1.4em 2em 1em;
+    border-width: 0 1.6em 2em 1em;
 }
 
 .km-android .km-switch-handle:after
 {
-    left: 1.3em;
+    left: 1.5em;
     border-right-color: transparent;
-    border-width: 2em 1em 0 1.4em;
+    border-width: 2em 1em 0 1.6em;
 }
 
 :-moz-any(.km-android) .km-switch-handle:before
@@ -207,10 +204,10 @@
 .km-android .km-switch-label-on,
 .km-android .km-switch-label-off
 {
-    font-size: .9em;
+    font-size: .88em;
     left: 0;
     width: 100%;
-    line-height: 1.7em;
+    line-height: 2em;
     height: 100%;
     text-align: center;
     text-shadow: none;
@@ -312,6 +309,7 @@
 {
     .border-radius(1px);
 
+    padding: .6em 1em;
     border-style: solid;
     border-width: 1px 0 1px 1px;
     border-color: rgba(255,255,255,.2) rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(255,255,255,.2);
@@ -334,7 +332,7 @@
 .km-android .km-buttongroup .km-state-active,
 .km-android .km-navbar .km-buttongroup .km-state-active
 {
-    background: #4cbee8;
+    background: #42BEE1;
     overflow: visible;
     z-index: 1;
 }
@@ -352,6 +350,7 @@
     height: 1.1em;
 }
 
+.km-android .km-buttongroup .km-button:active:after,
 .km-android .km-buttongroup .km-button.km-state-active:after
 {
     content: "\a0";
@@ -365,7 +364,6 @@
     background: inherit;
     .border-radius(3px);
     opacity: .5;
-    z-index: -1;
 }
 
 .km-root .km-android .km-buttongroup .km-button:first-child

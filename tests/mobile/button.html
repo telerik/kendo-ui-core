@@ -94,6 +94,16 @@
                 click(dom);
             });
 
+            test("Sets active css class on 'down'", 1, function() {
+                var dom = $("<button>foo</button>");
+
+                var button = new Button(dom);
+
+                dom.trigger(MOUSEDOWN);
+
+                ok(dom.hasClass("km-state-active"), "Should set the active class");
+            });
+
             test("icon only button", function() {
                 var dom = $('<button data-role="button" data-icon="history"></button>');
                 kendo.mobile.init(dom);
