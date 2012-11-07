@@ -907,7 +907,7 @@ p#copy
 
 .tc-theme-container
 {
-    /*display: none;*/
+    display: none;
     list-style-type: none;
     margin: 0 0 18px;
     padding: 0 0 18px 10px;

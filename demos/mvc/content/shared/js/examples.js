@@ -496,7 +496,11 @@
                         icon.removeClass("k-i-arrow-n").addClass("k-i-arrow-s");
                     }
 
-                    kendo.fx(this._themeContainer).expand("vertical").stop().toggle();
+                    this._ensureThemes();
+
+                    this._themeContainer.animate({ height: "toggle", margin: "toggle", paddingBottom: "toggle" }, "fast");
+
+                    //kendo.fx(this._themeContainer).expand("vertical").stop().toggle();
                 }, this));
 
                 this._themeContainer.on("click", ".tc-link", function(e) {
@@ -512,14 +516,14 @@
 
                     themeChooser.setTheme(link.attr("data-value"));
                 });
-
-                this._ensureThemes();
             },
 
             _ensureThemes: function() {
                 var options = this.options;
 
-                this._themeContainer.html(kendo.render(options.itemTemplate, options.themes));
+                this._themeContainer
+                        .html(kendo.render(options.itemTemplate, options.themes))
+                        .find(".tc-link[data-value='" + options.theme + "']").addClass("active");
             },
 
             setTheme: function(themeName) {
