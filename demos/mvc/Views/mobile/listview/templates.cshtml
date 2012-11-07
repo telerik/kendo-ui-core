@@ -30,7 +30,13 @@
 </script>
 
 <style scoped>
-#listview-templates .head {
+#listview-templates .km-content
+{
+    background-color: #f0f0f0;
+}
+
+#listview-templates .head
+{
 	display: block;
 	margin: 0 auto;
 	width: 100%;
@@ -40,20 +46,19 @@
     background-size: 100% auto;
 }
 
-.km-ios #listview-templates .km-navbar .km-button
+#listview-templates .km-navbar .km-button
 {
     background-color: #974d2e;
 }
 
-.km-ios #listview-templates .km-navbar, .km-ios #listview-templates .km-content .km-button {
-	    background: url(../../content/shared/images/patterns/pattern9.png);
+#listview-templates .km-navbar,
+#listview-templates .km-content .km-button
+{
+    background: url(../../content/shared/images/patterns/pattern9.png);
 }
 
-.km-ios #listview-templates .km-content .km-button {
-	    border: none;
-}
-
-.item-photo {
+#listview-templates .item-photo
+{
     width: 4em;
     height: 4em;
     float: left;
@@ -64,14 +69,16 @@
     border-radius: 8px;
 }
 
-#custom-listview .item-title {
+#custom-listview .item-title
+{
 	float: left;
 	font-size: 1em;
     line-height: 1.4em;
     margin: .3em 1em 0 .6em;
     width: 50%;
 }
-#custom-listview .item-info {
+#custom-listview .item-info
+{
 	float: left;
 	font-size: .7em;
 	line-height: 1em;
@@ -79,39 +86,52 @@
     width: 45%;
 }
 
-.km-ios #custom-listview .item-title, .km-ios #custom-listview .item-info {
+#custom-listview .item-title,
+#custom-listview .item-info
+{
     color: #4c2a1b;
 }
 
-.km-ios #custom-listview .item-info {
+#custom-listview .item-info
+{
     color: #974d2e;
 }
 
-.details-link {
+#custom-listview
+{
+    margin: 0;
+}
+
+#listview-templates .details-link
+{
     margin-top: -1em;
     position: absolute;
     right: 0.6em;
     top: 50%;
 }
-.km-listview .km-list {
+
+#listview-templates .km-listview .km-list
+{
     margin: 0;
 }
 
-.km-root .km-listview .km-group-title {
+#listview-templates .km-listview .km-group-title
+{
 	padding: 0;
 	border-top: 0;
 	box-shadow: none;
 }
 
-.km-root .km-group-title h2 {
+#listview-templates .km-group-title h2
+{
 	margin: 0;
 	padding-top: .2em;
 	padding-bottom: .2em;
-	color: #fff;
 	text-shadow: none;
 }
 
-.km-ios .km-group-title h2 {
+#listview-templates .km-group-title h2
+{
 	color: #974d2e;
 	font-weight: normal;
 	font-size: 1.4em;
@@ -119,17 +139,20 @@
 	background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0))), url(../../content/shared/images/patterns/pattern4.png);
 }
 
-.km-ios #listview-templates .km-listview .km-list {
+#listview-templates .km-listview .km-list
+{
 	border-top-color: #dcbe87;
 	background-image: url(../../content/shared/images/patterns/pattern8.png);
 }
 
-.km-blackberry .km-group-title h2 {
+.km-blackberry #listview-templates .km-group-title h2
+{
 	color: #000;
 	background-image: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
 	background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0)));
 }
-.km-tablet .km-ios #listview-templates .km-view-title {
+.km-tablet .km-ios #listview-templates .km-view-title
+{
     color: #fff;
     text-shadow: 0 -1px rgba(0,0,0,.5);
 }
