@@ -1130,6 +1130,99 @@
 
             });
 
+            test("group by nullable boolean", function() {
+                var data = [
+                    {
+                        foo: 1,
+                        bar: true
+
+                    },
+                    {
+                        foo: 2,
+                        bar: false
+
+                    },
+                    {
+                        foo: 3,
+                        bar: null
+
+                    },
+                    {
+                        foo: 5,
+                        bar: false
+
+                    }
+                ];
+
+                var result = new Query(data).sort({ field: "foo", dir: "desc" }).group({ field: "bar" }).toArray();
+
+                equal(result.length, 3);
+
+                equal(result[0].field, "bar");
+                equal(result[0].value, null);
+                equal(result[0].items.length, 1);
+
+                equal(result[1].field, "bar");
+                equal(result[1].value, false);
+                equal(result[1].items.length, 2);
+
+                equal(result[2].field, "bar");
+                equal(result[2].value, true);
+                equal(result[2].items.length, 1);
+            });
+
+            test("sort desc when group by nullable boolean", function() {
+                var data = [
+                    {
+                        foo: 1,
+                        bar: null
+
+                    },
+                    {
+                        foo: 2,
+                        bar: null
+
+                    }
+                ];
+
+                var result = new Query(data).sort({ field: "foo", dir: "desc" }).group({ field: "bar" }).toArray();
+
+                equal(result.length, 1);
+
+                equal(result[0].field, "bar");
+                equal(result[0].value, null);
+                equal(result[0].items.length, 2);
+
+                equal(result[0].items[0].foo, 2);
+                equal(result[0].items[1].foo, 1);
+            });
+
+            test("sort asc when group by nullable boolean", function() {
+                var data = [
+                    {
+                        foo: 2,
+                        bar: null
+
+                    },
+                    {
+                        foo: 1,
+                        bar: null
+
+                    }
+                ];
+
+                var result = new Query(data).sort({ field: "foo", dir: "asc" }).group({ field: "bar" }).toArray();
+
+                equal(result.length, 1);
+
+                equal(result[0].field, "bar");
+                equal(result[0].value, null);
+                equal(result[0].items.length, 2);
+
+                equal(result[0].items[0].foo, 1);
+                equal(result[0].items[1].foo, 2);
+            });
+
             test("group aggregates are calculated if provided", function() {
                 var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
 

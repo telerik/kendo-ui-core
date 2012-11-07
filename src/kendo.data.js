@@ -596,6 +596,10 @@
                 a = selector(a);
                 b = selector(b);
 
+                if (a == null && b ==null) {
+                    return 0;
+                }
+
                 if ((a && !b) || b == null) {
                     return 1;
                 }
@@ -614,19 +618,15 @@
                 a = selector(a);
                 b = selector(b);
 
+                if (a == null && b == null) {
+                    return 0;
+                }
+
                 if ((a && !b) || b == null) {
                     return -1;
                 }
 
                 if ((b && !a) || a == null) {
-                    return 1;
-                }
-
-                if (a === 0 && b == null) {
-                    return -1;
-                }
-
-                if (b === 0 && a == null) {
                     return 1;
                 }
 
@@ -668,6 +668,11 @@
                 if (valueA === valueB) {
                     return a.__position - b.__position;
                 }
+
+                if (valueB == null) {
+                    return 1;
+                }
+
                 return valueA > valueB ? 1 : (valueA < valueB ? -1 : 0);
             };
         },
