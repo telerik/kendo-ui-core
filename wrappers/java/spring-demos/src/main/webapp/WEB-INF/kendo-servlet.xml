@@ -29,6 +29,13 @@
 
     <context:component-scan base-package="com.kendoui.spring" />
 
+	<beans:bean id="multipartResolver"
+	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	
+	    <!-- one of the properties available; the maximum file size in bytes -->
+	    <beans:property name="maxUploadSize" value="100000"/>
+	</beans:bean>
+
 	<!-- The servletContext is required by the ServerContextResource  -->
 	<beans:bean id="servletContext" class="org.springframework.web.context.support.ServletContextFactoryBean"/>
 	
