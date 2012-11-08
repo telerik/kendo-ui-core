@@ -9,7 +9,8 @@ var kendo = window.kendo,
 var fontSizeMappings = 'xx-small,x-small,small,medium,large,x-large,xx-large'.split(','),
     quoteRe = /"/g,
     brRe = /<br[^>]*>/i,
-    emptyPRe = /<p><\/p>/i;
+    emptyPRe = /<p><\/p>/i,
+    cssDeclaration = /([\w|\-]+)\s*:\s*([^;]+);?/i;
 
 var Serializer = {
     domToXhtml: function(root) {
@@ -111,9 +112,9 @@ var Serializer = {
                     for (var cssIndex = 0, len = css.length; cssIndex < len; cssIndex++) {
                         var pair = css[cssIndex];
                         if (pair.length) {
-                            var propertyAndValue = pair.split(':');
-                            var property = trim(propertyAndValue[0].toLowerCase()),
-                                value = trim(propertyAndValue[1]);
+                            var match = cssDeclaration.exec(pair);
+                            var property = trim(match[1].toLowerCase()),
+                                value = trim(match[2]);
 
                             if (property == "font-size-adjust" || property == "font-stretch") {
                                 continue;
