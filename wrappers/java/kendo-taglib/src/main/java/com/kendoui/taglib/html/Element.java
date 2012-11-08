@@ -56,7 +56,7 @@ public abstract class Element<T extends Element<T>> implements Node {
     @SuppressWarnings("unchecked")
     public T attr(String attribute, Object value) {
         attributes.put(attribute, value);
-
+        
         return (T)this;
     }
 

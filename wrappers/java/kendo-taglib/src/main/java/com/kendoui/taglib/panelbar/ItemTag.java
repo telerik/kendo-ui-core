@@ -3,6 +3,7 @@ package com.kendoui.taglib.panelbar;
 
 
 import com.kendoui.taglib.BaseItemTag;
+import com.kendoui.taglib.html.Li;
 
 
 
@@ -27,6 +28,15 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         return super.doEndTag();
     }
 
+    @Override
+    public void addAttributes(Li element) {
+        if (this.isSet("expanded") && this.getExpanded()) {
+            element.attr("class", "k-state-active");
+        }
+        
+        super.addAttributes(element);
+    }
+    
     @Override
     public void initialize() {
 //>> initialize
