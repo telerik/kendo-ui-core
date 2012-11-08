@@ -26,7 +26,7 @@ public class BaseItemTagTest {
 
         tag.renderContents(element);
         
-        assertEquals(element.outerHtml(), "<li><span class=\"k-sprite foo\"></span>bar</li>");
+        assertEquals("<li><span class=\"k-sprite foo\"></span>bar</li>", element.outerHtml());
     }
 
     @Test
@@ -38,6 +38,6 @@ public class BaseItemTagTest {
 
         tag.renderContents(element);
         
-        assertEquals(element.outerHtml(), "<li>bar</li>");
+        assertEquals("<li>bar</li>", element.outerHtml());
     }
 }

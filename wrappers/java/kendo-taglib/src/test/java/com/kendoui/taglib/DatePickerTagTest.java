@@ -19,6 +19,6 @@ public class DatePickerTagTest {
     
     @Test
     public void createElementCreatedInputElement() throws IOException {
-        assertEquals(tag.html().outerHtml(), "<input id=\"foo\" name=\"foo\" />");         
+        assertEquals("<input id=\"foo\" name=\"foo\" />", tag.html().outerHtml());         
     }
 }

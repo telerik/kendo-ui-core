@@ -43,7 +43,7 @@ public class WidgetTagTest {
 
     @Test
     public void htmlSetsTheIdAttributeToTheValueOfTheNameProperty() throws IOException {
-        assertEquals(tag.html().outerHtml(), "<div id=\"foo\"></div>");
+        assertEquals("<div id=\"foo\"></div>", tag.html().outerHtml());
     }
 
     @Test
