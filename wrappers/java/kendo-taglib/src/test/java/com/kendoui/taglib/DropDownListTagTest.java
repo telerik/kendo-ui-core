@@ -19,6 +19,6 @@ public class DropDownListTagTest {
     
     @Test
     public void createElementCreatedInputElement() throws IOException {
-        assertEquals(tag.html().outerHtml(), "<input id=\"foo\" />");         
+        assertEquals(tag.html().outerHtml(), "<input id=\"foo\" name=\"foo\" />");         
     }
 }
