@@ -1,3 +1,5 @@
+package com.kendoui.taglib.editor;
+
 
 
 import com.kendoui.taglib.BaseTag;
