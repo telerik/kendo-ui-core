@@ -142,7 +142,9 @@ XML_WIDGET_TAG_TEMPLATE = ERB.new(%{
         </attribute>
 <% end %>
 <%= (options + events).map {|o| o.to_xml }.join %>
+<% if name != 'DataSource' %>
         <dynamic-attributes>true</dynamic-attributes>
+<% end %>
     </tag>
         })
 

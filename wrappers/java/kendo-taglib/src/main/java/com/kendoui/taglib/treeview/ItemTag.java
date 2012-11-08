@@ -4,6 +4,7 @@ package com.kendoui.taglib.treeview;
 
 import com.kendoui.taglib.BaseItemTag;
 import com.kendoui.taglib.TreeViewTag;
+import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.html.Li;
 import com.kendoui.taglib.html.Span;
@@ -66,7 +67,7 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
     }
     
     @Override
-    protected void renderContents(Li element) {
+    protected void renderContents(Element<?> element) {
         
         if (this.rendersCheckboxes()) {
             Input checkbox = new Input();

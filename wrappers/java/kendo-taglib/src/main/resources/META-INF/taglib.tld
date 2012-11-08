@@ -147,7 +147,9 @@ the dataSource.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -239,7 +241,9 @@ the dataSource.</description>
             <name>navigate</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -312,7 +316,9 @@ and is about to render it.</description>
             <name>seriesHover</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -482,7 +488,9 @@ and is about to render it.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -623,7 +631,7 @@ and is about to render it.</description>
             <name>requestEnd</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
-        <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -729,7 +737,9 @@ The following settings are available for the</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -849,7 +859,9 @@ The following settings are available for the</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -984,7 +996,9 @@ The following settings are available for the</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1054,7 +1068,9 @@ The following settings are available for the</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1240,7 +1256,9 @@ The following settings are available for the</description>
             <name>saveChanges</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1266,7 +1284,9 @@ The following settings are available for the</description>
             <type>boolean</type>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1337,7 +1357,9 @@ and is about to render it.</description>
             <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1415,7 +1437,9 @@ its sub menus to the left.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1521,7 +1545,9 @@ its sub menus to the left.</description>
             <name>spin</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1615,7 +1641,9 @@ its sub menus to the left.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1671,7 +1699,9 @@ its sub menus to the left.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1711,7 +1741,9 @@ its sub menus to the left.</description>
             <type>boolean</type>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1798,7 +1830,9 @@ The orientation of a</description>
             <name>slide</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1898,7 +1932,9 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <name>slide</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1949,7 +1985,9 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -1976,7 +2014,9 @@ It is used as a default</description>
             <type>java.lang.String</type>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -2069,7 +2109,9 @@ tab.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -2159,7 +2201,9 @@ tab.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -2288,7 +2332,9 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -2371,7 +2417,9 @@ Cancelling the event will prevent the upload.</description>
             <name>upload</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -2545,7 +2593,9 @@ has been clicked on a window with static content.</description>
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
         <dynamic-attributes>true</dynamic-attributes>
+
     </tag>
         
 
@@ -3214,8 +3264,7 @@ Individual color settings for line and labels take priority.</description>
         </attribute>
 
         <attribute>
-            <description>The plot bands of category axis.
-The plot band fields:</description>
+            <description>The plot bands of the category axis.</description>
             <name>plotBands</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -4838,8 +4887,7 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
-            <description>The plot bands of the value axis.
-The plot band fields:</description>
+            <description>The plot bands of the value axis.</description>
             <name>plotBands</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -5325,8 +5373,7 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
-            <description>The plot bands of the value axis.
-The plot band fields:</description>
+            <description>The plot bands of the xAxis.</description>
             <name>plotBands</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -5765,8 +5812,7 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
-            <description>The plot bands of the value axis.
-The plot band fields:</description>
+            <description>The plot bands of the yAxis.</description>
             <name>plotBands</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
