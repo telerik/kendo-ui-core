@@ -2,6 +2,18 @@ QUnit.config.reorder = false;
 
 module("new FX API");
 
+function getTransform(element) {
+    var chunks = $.grep(element.css("transform").split(/[\(, \)]/), function(chunk) {
+        return chunk.length > 0;
+    });
+
+    return {
+        scale: chunks[1],
+        translateX: chunks[5],
+        translateY: chunks[6]
+    };
+}
+
 test("Creating effects registers API constructor", 1, function() {
     kendo.fx.createEffect("foo", {
 
@@ -26,7 +38,7 @@ test("Creating effects registers API constructor", 2, function() {
 module("FX integration tests")
 
 function verifyEffect(effectName, before, after, reverse) {
-    var effect = kendo.fx($("<div style='width:200px; height: 200px' />"))[effectName]();
+    var effect = kendo.fx($("<div style='width:200px; height: 200px' />").appendTo(document.body))[effectName]();
     effect.duration(0);
 
     var setup = effect.setup;
@@ -42,22 +54,22 @@ function verifyEffect(effectName, before, after, reverse) {
 
 asyncTest("slideIn slides the element", 2, function() {
     verifyEffect("slideInLeft",
-        function(element) { equal(element.css("transform"), "translateX(200px)") },
-        function(element) { start(); equal(element.css("transform"), "translateX(0px)") }
+        function(element) { ; equal(getTransform(element).translateX, 200); },
+        function(element) { start(); equal(getTransform(element).translateX, 0); }
     );
 });
 
 asyncTest("tile tiles the element", 2, function() {
-    var foo = $("<div style='width: 200px' />"),
-        bar = $("<div style='width: 200px' />"),
+    var foo = $("<div style='width: 200px' />").appendTo(document.body),
+        bar = $("<div style='width: 200px' />").appendTo(document.body),
         effect = kendo.fx(foo).tile("left", bar);
 
     effect.duration(0);
 
     effect.run().then(function() {
         start();
-        equal(foo.css("transform"), "translateX(0px)");
-        equal(bar.css("transform"), "translateX(-200px)");
+        equal(getTransform(foo).translateX, 0);
+        equal(getTransform(bar).translateX, -200);
     });
 });
 
@@ -81,8 +93,8 @@ asyncTest("fade out fades the element and hides it", 3, function() {
 
 asyncTest("zoom in zooms the element", 2, function() {
     verifyEffect("zoomIn",
-        function(element) { equal(element.css("transform"), "scale(0.01)") },
-        function(element) { start(); equal(element.css("transform"), "scale(1)") }
+        function(element) { equal(getTransform(element).scale, 0.01) },
+        function(element) { start(); equal(getTransform(element).scale, 1) }
     );
 });
 
