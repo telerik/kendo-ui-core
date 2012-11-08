@@ -72,10 +72,8 @@
     .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.1));
     .border-radius(~".8rem");
 
-    border: 1px solid transparent;
-    border-color: rgba(0,0,0,.1) rgba(0,0,0,.2) rgba(0,0,0,.4);
     background: #f5f5f5;
-    .box-shadow(0 1px 1px rgba(0,0,0,.4));
+    .box-shadow(~"inset 0 1px 1px rgba(255,255,255,.5), 0 1px 1px rgba(0,0,0,.4)");
 }
 
 .km-meego .km-button:active,
@@ -83,8 +81,7 @@
 {
     color: #768694;
     background: #0a4d85;
-    overflow: visible;
-    .box-shadow(inset 0 0 2px rgba(0,0,0,.4));
+    .box-shadow(~"inset 0 0 2px rgba(0,0,0,.4)");
 }
 
 .km-meego .km-button .km-text
@@ -365,9 +362,19 @@
 
 .km-meego .km-tabstrip
 {
-    .flexbox();
-    .box-orient(horizontal);
-    .flex-direction(row);
+    display: table;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.km-meego .km-tabstrip .km-button
+{
+    display: table-cell;
+}
+
+.km-meego .km-tabstrip
+{
     padding: 0;
     background: #e5e5e5;
     .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.2));
@@ -380,9 +387,6 @@
 .km-meego .km-tabstrip .km-button
 {
     color: #999;
-    .flex(1);
-    .flex-align(stretch);
-    display: block;
     padding: .5rem 0 .4rem;
     .border-radius(0);
     border-style: solid;

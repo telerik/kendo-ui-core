@@ -1632,7 +1632,7 @@ function pad(number, digits, end) {
                     ipad: /(iPad).*OS\s+(\d+)[\._]([\d_]+)/,
                     meego: /(MeeGo).+NokiaBrowser\/(\d+)\.([\d\._]+)/,
                     webos: /(webOS)\/(\d+)\.(\d+(\.\d+)?)/,
-                    blackberry: /(BlackBerry).*?Version\/(\d+)\.(\d+(\.\d+)?)/,
+                    blackberry: /(BlackBerry|BB10).*?Version\/(\d+)\.(\d+(\.\d+)?)/,
                     playbook: /(PlayBook).*?Tablet\s*OS\s*(\d+)\.(\d+(\.\d+)?)/,
                     winphone: /(IEMobile)\/(\d+)\.(\d+(\.\d+)?)/,
                     windows: /(MSIE)\s+(\d+)\.(\d+(\.\d+)?)/
