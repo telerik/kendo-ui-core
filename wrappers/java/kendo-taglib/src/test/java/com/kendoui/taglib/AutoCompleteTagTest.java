@@ -14,6 +14,7 @@ public class AutoCompleteTagTest {
     public void setUp() throws IOException {
         tag = spy(new AutoCompleteTag());
 
+        tag.initialize();
         tag.setName("foo");
     }
     

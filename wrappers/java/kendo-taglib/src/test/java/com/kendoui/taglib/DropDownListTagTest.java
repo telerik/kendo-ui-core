@@ -14,6 +14,8 @@ public class DropDownListTagTest {
     public void setUp() throws IOException {
         tag = spy(new DropDownListTag());
 
+        tag.initialize();
+        
         tag.setName("foo");
     }
     

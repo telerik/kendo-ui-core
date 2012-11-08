@@ -14,6 +14,7 @@ public class TimePickerTagTest {
     public void setUp() throws IOException {
         tag = spy(new TimePickerTag());
 
+        tag.initialize();
         tag.setName("foo");
     }
     

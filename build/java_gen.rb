@@ -142,6 +142,7 @@ XML_WIDGET_TAG_TEMPLATE = ERB.new(%{
         </attribute>
 <% end %>
 <%= (options + events).map {|o| o.to_xml }.join %>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         })
 

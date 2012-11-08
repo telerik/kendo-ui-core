@@ -13,6 +13,8 @@ public class UploadTagTest {
     @Before
     public void setUp() throws IOException {
         tag = spy(new UploadTag());
+        
+        tag.initialize();
 
         tag.setName("foo");
     }

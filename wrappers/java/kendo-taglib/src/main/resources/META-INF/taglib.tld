@@ -147,6 +147,7 @@ the dataSource.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -238,6 +239,7 @@ the dataSource.</description>
             <name>navigate</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -310,6 +312,7 @@ and is about to render it.</description>
             <name>seriesHover</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -479,6 +482,7 @@ and is about to render it.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -619,6 +623,7 @@ and is about to render it.</description>
             <name>requestEnd</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -724,6 +729,7 @@ The following settings are available for the</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -843,6 +849,7 @@ The following settings are available for the</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -977,6 +984,7 @@ The following settings are available for the</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1054,6 +1062,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1239,6 +1248,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <name>saveChanges</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1264,6 +1274,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <type>boolean</type>
         </attribute>
 
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1334,6 +1345,7 @@ and is about to render it.</description>
             <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1411,6 +1423,7 @@ its sub menus to the left.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1516,6 +1529,7 @@ its sub menus to the left.</description>
             <name>spin</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1609,6 +1623,7 @@ its sub menus to the left.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1664,6 +1679,7 @@ its sub menus to the left.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1703,6 +1719,7 @@ its sub menus to the left.</description>
             <type>boolean</type>
         </attribute>
 
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1789,6 +1806,7 @@ The orientation of a</description>
             <name>slide</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1888,6 +1906,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <name>slide</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1938,6 +1957,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -1964,6 +1984,7 @@ It is used as a default</description>
             <type>java.lang.String</type>
         </attribute>
 
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -2056,6 +2077,7 @@ tab.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -2145,6 +2167,7 @@ tab.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -2273,6 +2296,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -2355,6 +2379,7 @@ Cancelling the event will prevent the upload.</description>
             <name>upload</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -2528,6 +2553,7 @@ has been clicked on a window with static content.</description>
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
     </tag>
         
 
@@ -9772,4 +9798,12 @@ containing one or more fields with the same name as the original input name.</de
             <rtexprvalue>true</rtexprvalue>
         </attribute>        
     </tag>
+    
+    <tag>
+        <description>Specifies the HTML content of the editor</description>
+        <name>editor-value</name>
+        <tag-class>com.kendoui.taglib.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    
 </taglib>

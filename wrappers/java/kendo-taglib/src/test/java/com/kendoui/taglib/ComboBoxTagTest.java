@@ -14,6 +14,7 @@ public class ComboBoxTagTest {
     public void setUp() throws IOException {
         tag = spy(new ComboBoxTag());
 
+        tag.initialize();
         tag.setName("foo");
     }
     

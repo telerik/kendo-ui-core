@@ -14,6 +14,7 @@ public class DatePickerTagTest {
     public void setUp() throws IOException {
         tag = spy(new DatePickerTag());
 
+        tag.initialize();
         tag.setName("foo");
     }
     

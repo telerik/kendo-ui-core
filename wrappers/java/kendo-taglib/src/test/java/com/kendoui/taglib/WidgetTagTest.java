@@ -23,6 +23,7 @@ public class WidgetTagTest {
     public void setUp() throws IOException {
         tag = spy(new WidgetTagTestDouble());
 
+        tag.initialize();
         tag.setName("foo");
 
         JspWriter out = mock(JspWriter.class);
@@ -39,6 +40,13 @@ public class WidgetTagTest {
     @Test
     public void htmlReturnsElement() {
         assertTrue(tag.html() instanceof Element);
+    }
+    
+    @Test
+    public void dynamicAttributesAreTreatedAsHtmlAttributes() throws JspException, IOException {
+        tag.setDynamicAttribute(null, "bar", "baz");
+        
+        assertEquals("<div id=\"foo\" bar=\"baz\"></div>", tag.html().outerHtml());
     }
 
     @Test
