@@ -4,13 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller("window-rtl-controller")
+@Controller("window-navigation-controller")
 @RequestMapping(value="/web/window/")
-public class RtlController {    
+public class NavigationController {    
     
-    @RequestMapping(value = "/rtl", method = RequestMethod.GET)
+    @RequestMapping(value = "/navigation", method = RequestMethod.GET)
     public String index() {
-        return "web/window/rtl";
+        return "web/window/navigation";
     }
 }
-
