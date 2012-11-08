@@ -1621,6 +1621,17 @@
             };
         },
 
+        scaleRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                offset = -delta * options.majorUnit;
+
+            return {
+                from: options.min - offset,
+                to: options.max + offset
+            };
+        },
+
         labelsCount: function() {
             return this.getDivisions(this.options.majorUnit);
         },

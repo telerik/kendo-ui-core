@@ -128,6 +128,8 @@
 
             chart.bind("drag", proxy(navi._drag, navi));
             chart.bind("dragEnd", proxy(navi._dragEnd, navi));
+            chart.bind("zoom", proxy(navi._zoom, navi));
+            chart.bind("zoomEnd", proxy(navi._zoomEnd, navi));
         },
 
         redraw: function() {
@@ -161,8 +163,6 @@
 
                 navi.hint = new NavigatorHint(chart.element, { min: groups[0], max: dataviz.last(groups) });
             }
-
-            $(chart.element).bind("DOMMouseScroll mousewheel", $.proxy(navi.onMousewheel, navi));
         },
 
         _drag: function(e) {
@@ -213,6 +213,7 @@
         _dragEnd: function() {
             var navi = this;
 
+            return;
             navi.applySelection();
             navi.redrawSlaves();
             navi.hint.hide();
@@ -269,37 +270,48 @@
             chart._plotArea.redraw(slavePanes);
         },
 
-        onMousewheel: function(e) {
+        _zoom: function(e) {
             var navi = this,
                 chart = navi.chart,
+                navigatorAxis = navi.mainAxis(),
+                groups = navigatorAxis.options.categories,
+                axis = chart._plotArea.categoryAxis,
+                range = e.axisRanges[axis.options.name],
                 selection = chart._selection,
-                orgEvent = e.originalEvent,
-                delta = 0;
-
-            if (orgEvent.wheelDelta) {
-              delta = orgEvent.wheelDelta / 120;
-            }
-
-            if (orgEvent.detail) {
-              delta = -orgEvent.detail / 3;
-            }
-
-            if (selection) {
-                selection.expand(delta);
-            }
-
-            navi.readSelection();
-
-            if (navi._mwTimeout) {
-                clearTimeout(navi._mwTimeout);
-            }
-
-            navi._mwTimeout = setTimeout(function() {
-                navi.applySelection();
-                navi.redrawSlaves();
-            }, MOUSEWHEEL_DELAY);
+                from,
+                to;
 
             e.preventDefault();
+
+            from = toDate(math.max(groups[0], range.from));
+
+            to = toDate(math.min(
+                range.to,
+                dataviz.last(navigatorAxis.options.categories)
+            ));
+
+            navi.options.select = { from: from, to: to };
+
+            if (!kendo.support.touch) {
+                navi.applySelection();
+                navi.redrawSlaves();
+            }
+
+            selection.set(
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    from
+                ),
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    to
+            ));
+
+            navi.showHint(from, to);
+        },
+
+        _zoomEnd: function(e) {
+            this._dragEnd(e);
         },
 
         showHint: function(from, to) {

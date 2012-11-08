@@ -46,7 +46,9 @@
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
-    var ABOVE = "above",
+    var NS = ".kendoChart",
+
+        ABOVE = "above",
         AREA = "area",
         AUTO = "auto",
         FIT = "fit",
@@ -62,7 +64,7 @@
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
-        CLICK = "click",
+        CLICK_NS = "click" + NS,
         CLIP = dataviz.CLIP,
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
@@ -96,8 +98,9 @@
         MINUTES = "minutes",
         MONTHS = "months",
         MOUSEMOVE_TRACKING = "mousemove.tracking",
-        MOUSEOVER = "mouseover",
-        NS = ".kendoChart",
+        MOUSEOVER_NS = "mouseover" + NS,
+        MOUSEWHEEL_DELAY = 150,
+        MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
@@ -142,11 +145,17 @@
         X = "x",
         Y = "y",
         YEARS = "years",
-        ZERO = "zero";
+        ZERO = "zero",
+        ZOOM_START = "zoomStart",
+        ZOOM = "zoom",
+        ZOOM_END = "zoomEnd",
 
-    var CATEGORICAL_CHARTS =
-            [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC],
-        XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE],
+        CATEGORICAL_CHARTS = [
+            BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC
+        ],
+        XY_CHARTS = [
+            SCATTER, SCATTER_LINE, BUBBLE
+        ],
         BASE_UNITS = [
             MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ];
@@ -390,11 +399,12 @@
             var chart = this,
                 element = chart.element;
 
-            element.on(CLICK + NS, proxy(chart._click, chart));
-            element.on(MOUSEOVER + NS, proxy(chart._mouseOver, chart));
+            element.on(CLICK_NS, proxy(chart._click, chart));
+            element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
+            element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
 
             if (kendo.UserEvents) {
-                chart._userEvents = new kendo.UserEvents(chart.wrapper, {
+                chart._userEvents = new kendo.UserEvents(element, {
                     global: true,
                     threshold: 5,
                     filter: ":not(.k-selector)",
@@ -483,6 +493,83 @@
             }
         },
 
+        _mousewheel: function(e) {
+            var chart = this,
+                origEvent = e.originalEvent,
+                delta = 0,
+                dragState = chart._dragState,
+                axes,
+                ranges = {};
+
+            if (origEvent.wheelDelta) {
+              delta = origEvent.wheelDelta / 120;
+            }
+
+            if (origEvent.detail) {
+              delta = -origEvent.detail / 3;
+            }
+
+            if (!dragState) {
+                var coords = chart._eventCoordinates(origEvent),
+                    plotArea = chart._model._plotArea,
+                    allAxes = plotArea.axes,
+                    pane = plotArea.findPointPane(coords),
+                    axes = pane.axes.slice(0),
+                    i,
+                    currentAxis,
+                    inAxis = false;
+
+                for (i = 0; i < allAxes.length; i++) {
+                    currentAxis = allAxes[i];
+                    if (currentAxis.box.containsPoint(coords)) {
+                        inAxis = true;
+                        break;
+                    }
+                }
+
+                if (!inArray(plotArea.axisX, axes)) {
+                    axes.push(plotArea.axisX);
+                }
+                if (!inArray(plotArea.axisY, axes)) {
+                    axes.push(plotArea.axisY);
+                }
+
+                if (pane && !inAxis && plotArea.backgroundBox().containsPoint(coords)) {
+                    chart.trigger(ZOOM_START);
+                    chart._suppressHover = true;
+                    chart._unsetActivePoint();
+                    chart._dragState = dragState = {
+                        pane: pane,
+                        axes: axes
+                    };
+                }
+            }
+            axes = dragState.axes;
+
+            for (var i = 0; i < axes.length; i++) {
+                var currentAxis = axes[i];
+                var axisName = currentAxis.options.name;
+                if (axisName) {
+                    ranges[currentAxis.options.name] =
+                        currentAxis.scaleRange(-delta);
+                }
+            }
+
+            chart.trigger(ZOOM, { axisRanges: ranges });
+
+            if (chart._mwTimeout) {
+                clearTimeout(chart._mwTimeout);
+            }
+
+            chart._mwTimeout = setTimeout(function() {
+                if (chart._dragState) {
+                    chart.trigger(ZOOM_END);
+                    chart._suppressHover = false;
+                    delete chart._dragState;
+                }
+            }, MOUSEWHEEL_DELAY);
+        },
+
         _getChartElement: function(e) {
             var chart = this,
                 modelId = $(e.target).data("modelId"),
@@ -530,7 +617,7 @@
             }
         },
 
-        _mouseOver: function(e) {
+        _mouseover: function(e) {
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
@@ -692,7 +779,7 @@
             var chart = this,
                 dataSource = chart.dataSource;
 
-            chart.wrapper.off(NS);
+            chart.element.off(NS);
             dataSource.unbind(CHANGE, chart._dataChangeHandler);
 
             if (chart._userEvents) {
@@ -1228,6 +1315,17 @@
             };
         },
 
+        scaleRange: function(scale) {
+            var axis = this,
+                range = options.categories.length,
+                delta = scale * range;
+
+            return {
+                from: -delta,
+                to: range + delta
+            };
+        },
+
         labelsCount: function() {
             return this.options.categories.length;
         },
@@ -1307,6 +1405,19 @@
             return {
                 from: addDuration(options.min, offset, baseUnit, weekStartDay),
                 to: addDuration(options.max, offset, baseUnit, weekStartDay)
+            };
+        },
+
+        scaleRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                options = axis.options,
+                baseUnit = options.baseUnit,
+                weekStartDay = options.weekStartDay;
+
+            return {
+                from: addDuration(options.min, delta, baseUnit, weekStartDay),
+                to: addDuration(options.max, -delta, baseUnit, weekStartDay)
             };
         },
 
