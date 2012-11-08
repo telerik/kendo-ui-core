@@ -1,30 +1,29 @@
 <div id="example" class="k-content">
     <div id="chessboard">
-    <div>
-        <span class="icon">♚</span>
-        <span class="description">Black King</span>
-    </div>
-
-    <div>
-        <span class="icon">♛</span>
-        <span class="description">Black Queen</span>
-    </div>
-    <div>
-        <span class="icon">♜</span>
-        <span class="description">Black Rook</span>
-    </div>
-    <div>
-        <span class="icon">♝</span>
-        <span class="description">Black Bishop</span>
-    </div>
-    <div>
-        <span class="icon">♞</span>
-        <span class="description">Black Knight</span>
-    </div>
-    <div>
-        <span class="icon">♟</span>
-        <span class="description">Black Pawn</span>
-    </div>
+        <div>
+            <span class="icon">&#x265A;</span>
+            <span class="description">Black King</span>
+        </div>
+        <div>
+            <span class="icon">&#x265B;</span>
+            <span class="description">Black Queen</span>
+        </div>
+        <div>
+            <span class="icon">&#x265C;</span>
+            <span class="description">Black Rook</span>
+        </div>
+        <div>
+            <span class="icon">&#x265D;</span>
+            <span class="description">Black Bishop</span>
+        </div>
+        <div>
+            <span class="icon">&#x265E;</span>
+            <span class="description">Black Knight</span>
+        </div>
+        <div>
+            <span class="icon">&#x265F;</span>
+            <span class="description">Black Pawn</span>
+        </div>
     </div>
 </div>
 
@@ -63,11 +62,11 @@
     $("#chessboard div").hover(
         function(e) {
             var div = $(e.currentTarget);
-            kendo.fx(div.find(".description").show()).tile("left", div.find(".icon")).stop().play();
+            kendo.fx(div.find(".description").show()).tile("left", div.find(".icon")).play();
         },
 
        function(e) {
             var div = $(e.currentTarget);
-            kendo.fx(div.find(".description")).tile("left", div.find(".icon")).stop().reverse();
+            kendo.fx(div.find(".description")).tile("left", div.find(".icon")).reverse();
     });
 </script>

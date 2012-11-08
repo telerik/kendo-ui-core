@@ -319,7 +319,9 @@
                 css = normalizeCSS(element, properties);
 
                 $.merge(oldKeys, keys(css));
-                element.data("keys", $.unique(oldKeys));
+                element
+                    .data("keys", $.unique(oldKeys))
+                    .height();
 
                 element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease).css(TRANSITION);
                 element.css(css).css(TRANSFORM);
@@ -1212,7 +1214,6 @@
 
             end[TRANSFORM] = reverse ? rotation.start : rotation.end;
             start[TRANSFORM] = reverse ? rotation.end : rotation.start;
-            console.log(start, end, that.element);
         },
 
         setup: function() {

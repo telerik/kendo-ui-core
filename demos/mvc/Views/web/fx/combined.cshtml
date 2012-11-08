@@ -51,11 +51,13 @@
                 flip = el.flip("horizontal", $("#album-cover"), $("#album-contents")),
                 zoom = el.zoomIn().startValue(1).endValue(0.5);
 
-            flip.add(zoom).duration(2000);
+            flip.add(zoom).duration(200);
 
-            $("#album").mouseenter(function() {
+            $("#album-cover").mouseenter(function() {
                 flip.stop().play();
-            }).mouseleave(function() {
+            });
+
+            $("#album-contents").mouseleave(function() {
                 flip.stop().reverse();
             });
         });
