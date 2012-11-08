@@ -110,15 +110,15 @@
 }
 
 .composite-background(@gradient) when (@gradient = none) {
-    background-image: @texture-url;
+    background-image: @texture;
 }
 
 .composite-background(@gradient) when not (@gradient = none) {
-    background-image: @texture-url;
-    background-image: @texture-url, -webkit-linear-gradient(top, ~"@{gradient}");
-    background-image: @texture-url,    -moz-linear-gradient(top, ~"@{gradient}");
-    background-image: @texture-url,      -o-linear-gradient(top, ~"@{gradient}");
-    background-image: @texture-url,       ~"linear-gradient(to bottom, @{gradient})";
+    background-image: @fallback-texture;
+    background-image: @texture, -webkit-linear-gradient(top, ~"@{gradient}");
+    background-image: @texture,    -moz-linear-gradient(top, ~"@{gradient}");
+    background-image: @texture,      -o-linear-gradient(top, ~"@{gradient}");
+    background-image: @texture,       ~"linear-gradient(to bottom, @{gradient})";
 }
 
 .k-in,
@@ -306,7 +306,7 @@ textarea.k-textbox:hover,
 
 .k-tooltip
 {
-    background-image: @texture-url;
+    background-image: @texture;
 }
 
 .k-block,
