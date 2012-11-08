@@ -151,7 +151,7 @@ the dataSource.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Calendar</description>
@@ -245,7 +245,7 @@ the dataSource.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Chart</description>
@@ -320,7 +320,7 @@ and is about to render it.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>ComboBox</description>
@@ -492,7 +492,7 @@ and is about to render it.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>DataSource</description>
@@ -633,7 +633,7 @@ and is about to render it.</description>
         </attribute>
 
     </tag>
-
+        
 
     <tag>
         <description>DatePicker</description>
@@ -741,7 +741,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>DateTimePicker</description>
@@ -863,7 +863,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>DropDownList</description>
@@ -1000,7 +1000,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Editor</description>
@@ -1072,7 +1072,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Grid</description>
@@ -1260,7 +1260,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>LinearGauge</description>
@@ -1288,7 +1288,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>ListView</description>
@@ -1361,7 +1361,7 @@ and is about to render it.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Menu</description>
@@ -1441,7 +1441,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>NumericTextBox</description>
@@ -1549,7 +1549,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Pager</description>
@@ -1645,7 +1645,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>PanelBar</description>
@@ -1703,7 +1703,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>RadialGauge</description>
@@ -1745,7 +1745,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>RangeSlider</description>
@@ -1834,7 +1834,7 @@ The orientation of a</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Slider</description>
@@ -1936,7 +1936,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Splitter</description>
@@ -1989,7 +1989,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>StockChart</description>
@@ -2018,7 +2018,7 @@ It is used as a default</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>TabStrip</description>
@@ -2113,7 +2113,7 @@ tab.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>TimePicker</description>
@@ -2205,7 +2205,7 @@ tab.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>TreeView</description>
@@ -2336,7 +2336,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Upload</description>
@@ -2421,7 +2421,7 @@ Cancelling the event will prevent the upload.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Window</description>
@@ -2597,7 +2597,7 @@ has been clicked on a window with static content.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-
+        
 
     <tag>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
