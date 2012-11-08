@@ -46,6 +46,7 @@ div.k-gauge
 /* Selection */
 .k-selector {
     position: absolute;
+    -webkit-transform: translateZ(0);
 }
 
 .k-selection {
