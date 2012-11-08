@@ -38,7 +38,7 @@ public abstract class BaseItemTag extends BaseTag {
         super.destroy();
     }
     
-    protected void renderContents(Li element) {
+    protected void renderContents(Element<?> element) {
         String spriteCssClass = getSpriteCssClass();
         
         if (spriteCssClass != null && spriteCssClass.trim().length() > 0) {
@@ -56,7 +56,7 @@ public abstract class BaseItemTag extends BaseTag {
             image.attr("src", imageUrl);
             element.append(image);
         }
-
+        
         element.append(new Text(getText()));
         
         String html = body();

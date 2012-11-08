@@ -1,0 +1,8 @@
+<p>Two-seat, two-door coupe</p>
+<p>Carbon fibre monocoque structure</p>
+<p>Hand crafted aluminium body panels</p>
+<p>Single bi-xenon headlamps with integrated LED side lights and direction indicators</p>
+<p>Carbon fibre front splitters</p>
+<p>Carbon fibre rear diffuser with integrated transaxle cooler</p>
+<p>LED rear lamps (fog and reverse)</p>
+<p>Active aerodynamics with deployable spoiler</p>

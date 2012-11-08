@@ -8963,6 +8963,13 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <type>boolean</type>
         </attribute>
 
+        <attribute>
+            <description>Specifies the url from which the item content will be loaded</description>
+            <name>contentUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
 

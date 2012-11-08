@@ -3,6 +3,8 @@ package com.kendoui.taglib.panelbar;
 
 
 import com.kendoui.taglib.BaseItemTag;
+import com.kendoui.taglib.html.Anchor;
+import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Li;
 
 
@@ -29,11 +31,30 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
     }
 
     @Override
+    protected void renderContents(Element<?> element) {
+        boolean ajax = this.isSet("contentUrl") && !this.getContentUrl().isEmpty();
+        Element<?> container = element;
+        
+        if (ajax) {
+            Anchor a = new Anchor();
+            a.attr("class", "k-link k-header");
+            a.attr("href", this.getContentUrl());
+            container.append(a);
+            container = a;
+        }        
+        
+        super.renderContents(container);
+        
+        if (ajax && body().isEmpty()) {
+            appendContent(element, "");
+        }
+    }
+    
+    @Override
     public void addAttributes(Li element) {
         if (this.isSet("expanded") && this.getExpanded()) {
             element.attr("class", "k-state-active");
         }
-        
         super.addAttributes(element);
     }
     
@@ -103,6 +124,14 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
 
     public void setEnabled(boolean value) {
         setProperty("enabled", value);
+    }
+
+    public String getContentUrl() {
+        return (String)getProperty("contentUrl");
+    }
+
+    public void setContentUrl(String value) {
+        setProperty("contentUrl", value);
     }
 
 //<< Attributes

@@ -548,6 +548,10 @@ class Tag
         @name == 'Item' && namespace =~ /panelbar|menu|treeview|tabstrip/
     end
 
+    def is_panelbar?
+        namespace =~ /panelbar/
+    end
+
     def has_items?
         @name != 'ColumnMenu' && @name =~ /panelbar|menu|treeview|tabstrip/i || has_item_hierarchy?
     end
@@ -845,6 +849,13 @@ class Tag
                                         :type => 'Boolean',
                                         :parent => tag,
                                         :description => "Specifies whether the item is initially enabled")
+
+            if tag.is_panelbar?
+                tag.options.push(Option.new :name => 'items.contentUrl',
+                                        :type => 'String',
+                                        :parent => tag,
+                                        :description => "Specifies the url from which the item content will be loaded")
+            end
         end
 
         start_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Events' }
