@@ -727,6 +727,7 @@
             }
         },
 
+// Public API
         reverse: function() {
             this._reverse = true;
             return this.run();
@@ -739,6 +740,16 @@
 
         add: function(additional) {
             this._additionalEffects.push(additional);
+            return this;
+        },
+
+        direction: function(value) {
+            this._direction = value;
+            return this;
+        },
+
+        duration: function(duration) {
+            this._duration = duration;
             return this;
         },
 
@@ -861,7 +872,6 @@
         setOptions: function(options) {
             this.options = extend(true, {}, options);
         },
-        /////////////////////////// TMP
 
         children: function() {
             return [];
@@ -876,16 +886,6 @@
 
         setReverse: function(reverse) {
             this._reverse = reverse;
-            return this;
-        },
-
-        direction: function(value) {
-            this._direction = value;
-            return this;
-        },
-
-        duration: function(duration) {
-            this._duration = duration;
             return this;
         }
     });
@@ -970,55 +970,53 @@
         }
     });
 
-    createEffect("fade", {
-        directions: IN_OUT,
+    function createToggleEffect(name, property, endValue) {
+        createEffect(name, {
+            directions: IN_OUT,
 
-        restore: [ "opacity" ],
+            restore: [ property ],
 
-        shouldHide: function() {
-           return this._direction === "out" ? !this._reverse : this._reverse;
-        },
+            startValue: function(value) {
+                this._startValue = value;
+                return this;
+            },
 
-        prepare: function(start, end) {
-            var that = this,
-                opacity = that.element.data("opacity"),
-                out = that.shouldHide(),
-                value = isNaN(opacity) ? 1 : opacity;
+            endValue: function(value) {
+                this._endValue = value;
+                return this;
+            },
 
-            start.opacity = end.opacity = 0;
+            shouldHide: function() {
+               return (this._direction === "out" && this._end() === endValue) ? !this._reverse : this._reverse;
+            },
 
-            if (out) {
-                start.opacity = value;
-            } else {
-                end.opacity = value;
+            _end: function() {
+                return this._endValue || endValue;
+            },
+
+            _start: function() {
+                return this._startValue || 1;
+            },
+
+            prepare: function(start, end) {
+                var that = this,
+                    opacity = that.element.data(property),
+                    out = that.shouldHide(),
+                    value = isNaN(opacity) ? that._start() : opacity;
+
+                start[property] = end[property] = that._end();
+
+                if (out) {
+                    start[property] = value;
+                } else {
+                    end[property] = value;
+                }
             }
-        }
-    });
+        });
+    }
 
-    createEffect("zoom", {
-        directions: IN_OUT,
-
-        restore: [ "scale" ],
-
-        shouldHide: function() {
-           return this._direction === "out" ? !this._reverse : this._reverse;
-        },
-
-        prepare: function(start, end) {
-            var that = this,
-                out = that.shouldHide(),
-                scale = that.element.data("scale"),
-                value = isNaN(scale) ? 1 : scale;
-
-            start.scale = end.scale = 0.01;
-
-            if (out) {
-                start.scale = value;
-            } else {
-                end.scale = value;
-            }
-        }
-    });
+    createToggleEffect("fade", "opacity", 0);
+    createToggleEffect("zoom", "scale", 0.01);
 
     createEffect("slideMargin", {
         prepare: function(start, end) {
