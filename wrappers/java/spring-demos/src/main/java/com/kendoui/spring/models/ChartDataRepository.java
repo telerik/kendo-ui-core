@@ -1,6 +1,5 @@
 package com.kendoui.spring.models;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -541,5 +540,36 @@ public class ChartDataRepository {
                 setSymbol("1. GOOG");
             }});
         }};
+    }
+    
+    public static List<ElectricitySource> SpainElectricityBreakdown() {
+        List<ElectricitySource> result =  new ArrayList<ElectricitySource>();
+        result.add(new ElectricitySource("Hydro", 22, true));
+        result.add(new ElectricitySource("Solar", 2, false));
+        result.add(new ElectricitySource("Nuclear", 49, false));
+        result.add(new ElectricitySource("Wind", 27, false));
+        
+        return result;
+    }
+    
+    public static List<ScreenResolution> WorldScreenResolution() {
+        List<ScreenResolution> result =  new ArrayList<ScreenResolution>();
+        result.add(new ScreenResolution("2006", "Higher", 17, true, 1));
+        result.add(new ScreenResolution("2006", "1024x768", 57, true, 2));
+        result.add(new ScreenResolution("2006", "800x600", 20, true, 3));
+        result.add(new ScreenResolution("2006", "640x480", 0, true, 4));
+        result.add(new ScreenResolution("2006", "Unknown", 6, true, 5));
+        result.add(new ScreenResolution("2008", "Higher", 38, false, 1));
+        result.add(new ScreenResolution("2008", "1024x768", 48, false, 2));
+        result.add(new ScreenResolution("2008", "800x600", 8, false, 3));
+        result.add(new ScreenResolution("2008", "640x480", 0, false, 4));
+        result.add(new ScreenResolution("2008", "Unknown", 6, false, 5));
+        result.add(new ScreenResolution("2010", "Higher", 76, false, 1));
+        result.add(new ScreenResolution("2010", "1024x768", 20, false, 2));
+        result.add(new ScreenResolution("2010", "800x600", 3, false, 3));
+        result.add(new ScreenResolution("2010", "640x480", 0, false, 4));
+        result.add(new ScreenResolution("2010", "Unknown", 3, false, 5));
+        
+        return result;
     }
 }
