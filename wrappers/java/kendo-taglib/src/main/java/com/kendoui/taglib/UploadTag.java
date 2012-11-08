@@ -5,6 +5,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.upload.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 
@@ -16,7 +18,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
     public UploadTag() {
         super("Upload");
     }
-
+    
+    @Override
+    public Element<?> createElement() {
+        return new Input().attr("name", getName()).attr("type", "file");
+    }
     
     @Override
     public int doEndTag() throws JspException {
