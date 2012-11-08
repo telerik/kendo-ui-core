@@ -5320,10 +5320,99 @@ It defaults to 1/5th of the majorUnit.</description>
 
 
     <tag>
-        <description>Label settings specific to the date axis.</description>
+        <description>Configures the axis labels.</description>
         <name>chart-xAxisItem-labels</name>
         <tag-class>com.kendoui.taglib.chart.XAxisItemLabelsTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the labels. Any valid CSS color string will work here, including
+hex and rgb</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text color of the labels. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The font style of the labels.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The format of the labels.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the labels.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Mirrors the axis labels and ticks.
+If the labels are normally on the left side of the axis,
+mirroring the axis will render them to the right.</description>
+            <name>mirror</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The rotation angle of the labels.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Number of labels to skip.
+Skips rendering the first n labels.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Label rendering step.
+Every n-th label is rendered where n is the step</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the labels.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
         <attribute>
             <description>Culture to use for formatting the dates. See</description>
@@ -5337,6 +5426,37 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>dateFormats</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the labels.</description>
+        <name>chart-xAxisItem-labels-border</name>
+        <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Any valid CSS color string will work here, including
+hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5360,6 +5480,14 @@ Includes</description>
             <description>The base time interval for the axis labels.
 The default baseUnit is determined automatically from the value range. Available options:</description>
             <name>baseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Color to apply to all axis elements.
+Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -5406,10 +5534,99 @@ It defaults to 1/5th of the majorUnit.</description>
 
 
     <tag>
-        <description>Label settings specific to the date axis.</description>
+        <description>Configures the axis labels.</description>
         <name>chart-yAxisItem-labels</name>
         <tag-class>com.kendoui.taglib.chart.YAxisItemLabelsTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the labels. Any valid CSS color string will work here, including
+hex and rgb</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text color of the labels. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The font style of the labels.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The format of the labels.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the labels.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Mirrors the axis labels and ticks.
+If the labels are normally on the left side of the axis,
+mirroring the axis will render them to the right.</description>
+            <name>mirror</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The rotation angle of the labels.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Number of labels to skip.
+Skips rendering the first n labels.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Label rendering step.
+Every n-th label is rendered where n is the step</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the labels.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
         <attribute>
             <description>Culture to use for formatting the dates. See</description>
@@ -5423,6 +5640,37 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>dateFormats</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the labels.</description>
+        <name>chart-yAxisItem-labels-border</name>
+        <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Any valid CSS color string will work here, including
+hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>

@@ -1,6 +1,4 @@
 
-package com.kendoui.taglib.editor;
-
 
 import com.kendoui.taglib.BaseTag;
 import com.kendoui.taglib.json.Function;

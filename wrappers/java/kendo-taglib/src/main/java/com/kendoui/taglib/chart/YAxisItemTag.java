@@ -69,6 +69,14 @@ public class YAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("baseUnit", value);
     }
 
+    public String getColor() {
+        return (String)getProperty("color");
+    }
+
+    public void setColor(String value) {
+        setProperty("color", value);
+    }
+
     public float getMajorUnit() {
         return (float)getProperty("majorUnit");
     }
