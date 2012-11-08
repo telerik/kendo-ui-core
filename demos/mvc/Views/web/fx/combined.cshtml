@@ -1,0 +1,84 @@
+<div id="example" class="k-content">
+
+    <div id="album">
+        <div id="album-contents">
+            <ol>
+            <li> The Return of Sathington Willoughby</li>
+            <li> Fisticuffs</li>
+            <li> Golden Boy</li>
+            <li> Over the Falls</li>
+            <li>Shake Hands with Beef</li>
+            <li> Camelback Cinema</li>
+            <li> Hats Off</li>
+            <li> Puddin' Taine</li>
+            <li>Bob's Party Time Lounge</li>
+            <li>Duchess and the Proverbial Mind Spread</li>
+            <li>Restin' Bones</li>
+            <li>Coddingtown</li>
+            <li>Kalamazoo</li>
+            <li>The Chastising of Renegade</li>
+            <li>Arnie</li>
+            </ol>
+        </div>
+        <div id="album-cover">
+            <img src="../../content/web/brown_album.jpg">
+        </div>
+    </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    <script>
+        $(document).ready(function() {
+            var el = kendo.fx($("#album")),
+                flip = el.flip("horizontal", $("#album-cover"), $("#album-contents")),
+                zoom = el.zoomIn().startValue(1).endValue(0.5);
+
+            flip.add(zoom).duration(2000);
+
+            $("#album").mouseenter(function() {
+                flip.stop().play();
+            }).mouseleave(function() {
+                flip.stop().reverse();
+            });
+        });
+    </script>
+
+    <style scoped>
+        #album {
+            position: absolute;
+            width: 301px;
+            height: 300px;
+            -webkit-transform: scale(0.5);
+            -moz-transform: scale(0.5);
+            -ms-transform: scale(0.5);
+        }
+
+        #album-cover, #album-contents {
+            position: absolute;
+            width: 301px;
+            height: 300px;
+        }
+
+        #album-contents {
+            background: white;
+        }
+    </style>
+</div>

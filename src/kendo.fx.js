@@ -870,7 +870,7 @@
 
         /////////////////////////// Support for kendo.animate;
         setOptions: function(options) {
-            this.options = extend(true, {}, options);
+            extend(true, this.options, options);
         },
 
         children: function() {
@@ -1212,6 +1212,7 @@
 
             end[TRANSFORM] = reverse ? rotation.start : rotation.end;
             start[TRANSFORM] = reverse ? rotation.end : rotation.start;
+            console.log(start, end, that.element);
         },
 
         setup: function() {

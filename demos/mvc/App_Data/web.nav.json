@@ -1074,6 +1074,10 @@
                 {
                     "text": "Tile",
                     "url": "fx/tile.html"
+                },
+                {
+                    "text": "Combined Effects",
+                    "url": "fx/combined.html"
                 }
             ]
         },
