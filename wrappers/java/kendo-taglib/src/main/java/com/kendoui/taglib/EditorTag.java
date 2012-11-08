@@ -1,9 +1,9 @@
 
 package com.kendoui.taglib;
 
-
-
 import com.kendoui.taglib.editor.*;
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Textarea;
 import com.kendoui.taglib.json.Function;
 
 
@@ -16,6 +16,10 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         super("Editor");
     }
 
+    @Override
+    public Element<?> createElement() {
+        return new Textarea().attr("name", getName()).html(body());
+    }
     
     @Override
     public int doEndTag() throws JspException {
@@ -45,6 +49,12 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public static String tagName() {
         return "editor";
+    }
+
+    public void setTools(ToolsTag value) {
+
+        setProperty("tools", value.tools());
+
     }
 
     public void setImagebrowser(ImagebrowserTag value) {
@@ -97,14 +107,6 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setStylesheets(Object value) {
         setProperty("stylesheets", value);
-    }
-
-    public Object getTools() {
-        return (Object)getProperty("tools");
-    }
-
-    public void setTools(Object value) {
-        setProperty("tools", value);
     }
 
     public String getChange() {

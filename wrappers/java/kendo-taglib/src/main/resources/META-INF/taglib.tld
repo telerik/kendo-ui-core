@@ -1025,14 +1025,6 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
-            <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
-as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs</description>
-            <name>tools</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>Fires when Editor is blurred and its content has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -6374,6 +6366,16 @@ the minimum and maximum values.</description>
 
 
     <tag>
+        <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
+as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs</description>
+        <name>editor-tools</name>
+        <tag-class>com.kendoui.taglib.editor.ToolsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>Configuration for image browser dialog.</description>
         <name>editor-imagebrowser</name>
         <tag-class>com.kendoui.taglib.editor.ImagebrowserTag</tag-class>
@@ -6433,6 +6435,43 @@ the minimum and maximum values.</description>
         <description>Subscribes to the select event of Editor.</description>
         <name>editor-select</name>
         <tag-class>com.kendoui.taglib.editor.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
+as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs</description>
+        <name>editor-tool</name>
+        <tag-class>com.kendoui.taglib.editor.ToolTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The mandatory name of the tool. The built-in tools are "bold", "italic", "underline", "strikethrough", "fontName", "fontSize", "foreColor", "backColor", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "formatBlock", "createLink", "unlink", "insertImage", "insertHtml", "viewHtml".</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text which will be displayed when the end-user hovers the tool button with the mouse.</description>
+            <name>tooltip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The JavaScript function which will be executed when the end-user clicks the tool button.</description>
+            <name>exec</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the exec event of Tool.</description>
+        <name>editor-tool-exec</name>
+        <tag-class>com.kendoui.taglib.editor.ExecFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
