@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TitleBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class XAxisItemLineTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        YAxisItemTitleTag parent = (YAxisItemTitleTag)findParentWithClass(YAxisItemTitleTag.class);
+        XAxisItemTag parent = (XAxisItemTag)findParentWithClass(XAxisItemTag.class);
 
 
-        parent.setBorder(this);
+        parent.setLine(this);
 
 //<< doEndTag
 
@@ -48,7 +48,7 @@ public class TitleBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "chart-yAxisItem-title-border";
+        return "chart-xAxisItem-line";
     }
 
     public String getColor() {
@@ -65,6 +65,14 @@ public class TitleBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setDashType(String value) {
         setProperty("dashType", value);
+    }
+
+    public boolean getVisible() {
+        return (boolean)getProperty("visible");
+    }
+
+    public void setVisible(boolean value) {
+        setProperty("visible", value);
     }
 
     public float getWidth() {

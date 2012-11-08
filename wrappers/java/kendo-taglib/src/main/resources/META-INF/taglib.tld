@@ -5264,6 +5264,14 @@ Includes</description>
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Color to apply to all axis elements.
+Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The axis type.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5307,6 +5315,36 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The unique axis name.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The plot bands of the value axis.
+The plot band fields:</description>
+            <name>plotBands</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Reverses the axis direction -
+values increase from right to left and from top to bottom.</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the axis.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
         <attribute>
@@ -5432,6 +5470,172 @@ Every n-th label is rendered where n is the step</description>
 
 
     <tag>
+        <description>Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.</description>
+        <name>chart-xAxisItem-line</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the line. This will also effect the major and minor ticks, but
+not the grid lines.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the line.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the line.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the line. This will also effect the major and minor ticks, but
+not the grid lines.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Configures the major grid lines. These are the lines that are an extension of the major ticks through the
+body of the chart.</description>
+        <name>chart-xAxisItem-majorGridLines</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemMajorGridLinesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the lines.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the lines.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the lines.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The major ticks of the axis.</description>
+        <name>chart-xAxisItem-majorTicks</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemMajorTicksTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the major ticks.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The title of the value axis.</description>
+        <name>chart-xAxisItem-title</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemTitleTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the title. Any valid CSS color string will work here, including
+hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text color of the title. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The font style of the title.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the title.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the title.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The position of the title.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The rotation angle of the title.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The text of the title.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the title.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The border of the labels.</description>
         <name>chart-xAxisItem-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
@@ -5440,6 +5644,36 @@ Every n-th label is rendered where n is the step</description>
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including
 hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the title.</description>
+        <name>chart-xAxisItem-title-border</name>
+        <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -5521,6 +5755,36 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>minorUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The unique axis name.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The plot bands of the value axis.
+The plot band fields:</description>
+            <name>plotBands</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Reverses the axis direction -
+values increase from right to left and from top to bottom.</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the axis.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
         <attribute>
@@ -5646,6 +5910,172 @@ Every n-th label is rendered where n is the step</description>
 
 
     <tag>
+        <description>Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.</description>
+        <name>chart-yAxisItem-line</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the line. This will also effect the major and minor ticks, but
+not the grid lines.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the line.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the line.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the line. This will also effect the major and minor ticks, but
+not the grid lines.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Configures the major grid lines. These are the lines that are an extension of the major ticks through the
+body of the chart.</description>
+        <name>chart-yAxisItem-majorGridLines</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemMajorGridLinesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the lines.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the lines.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the lines.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The major ticks of the axis.</description>
+        <name>chart-yAxisItem-majorTicks</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemMajorTicksTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the major ticks.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The title of the value axis.</description>
+        <name>chart-yAxisItem-title</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemTitleTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the title. Any valid CSS color string will work here, including
+hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text color of the title. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The font style of the title.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the title.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the title.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The position of the title.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The rotation angle of the title.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The text of the title.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the title.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The border of the labels.</description>
         <name>chart-yAxisItem-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
@@ -5654,6 +6084,36 @@ Every n-th label is rendered where n is the step</description>
         <attribute>
             <description>The color of the border. Any valid CSS color string will work here, including
 hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the title.</description>
+        <name>chart-yAxisItem-title-border</name>
+        <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
