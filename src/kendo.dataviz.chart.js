@@ -506,8 +506,10 @@
                 paddingLeft = parseInt(element.css("paddingLeft"), 10),
                 paddingTop = parseInt(element.css("paddingTop"), 10),
                 win = $(window),
-                clientX = e.clientX || e.x.client,
-                clientY = e.clientY || e.y.client;
+                x = e.x || { client: e.clientX },
+                y = e.y || { client: e.clientY },
+                clientX = x.client,
+                clientY = y.client;
 
             return {
                 x: clientX - offset.left - paddingLeft + win.scrollLeft(),
