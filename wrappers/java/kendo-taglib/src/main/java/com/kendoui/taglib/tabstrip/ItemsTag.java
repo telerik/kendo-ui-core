@@ -90,6 +90,12 @@ public class ItemsTag extends ContentTag /* interfaces *//* interfaces */ {
         if (this.isSet("enabled") && (Boolean) item.get("enabled") == false) {
             element.attr("disabled", "disabled");
         }
+        
+        Object selected = item.get("selected");
+        
+        if (selected != null && (Boolean) selected) {
+            element.attr("class", "k-state-active");
+        }
     }
 
     @Override

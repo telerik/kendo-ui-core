@@ -858,6 +858,11 @@ class Tag
                                         :parent => tag,
                                         :description => "Specifies the url from which the item content will be loaded")
             end
+
+            tag.options.push(Option.new :name => 'items.selected',
+                                        :type => 'Boolean',
+                                        :parent => tag,
+                                        :description => "Specifies whether the item is initially selected")
         end
 
         start_element_index = root.children.find_index { |e| e.options[:raw_text] == 'Events' }
