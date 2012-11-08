@@ -537,7 +537,7 @@ class Tag
     end
 
     def has_item_hierarchy?
-        @name == 'Item' && namespace =~/panelbar|menu|treeview/
+        @name == 'Item' && namespace =~/panelbar|menu|treeview|tabstrip/
     end
 
     def has_item_content?
