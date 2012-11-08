@@ -308,24 +308,6 @@
                 chart._viewElement = view.renderTo(element[0]);
                 chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
                 chart._highlight = new Highlight(view, chart._viewElement);
-
-                /*
-                if (kendo.UserEvents) {
-                    if (chart._userEvents) {
-                        chart._userEvents.destroy();
-                    }
-
-                    chart._userEvents = new kendo.UserEvents(chart._viewElement, {
-                        global: true,
-                        threshold: 5,
-                        stopPropagation: true,
-                        multiTouch: true,
-                        start: proxy(chart._start, chart),
-                        move: proxy(chart._move, chart),
-                        end: proxy(chart._end, chart)
-                    });
-                }
-               */
             }
         },
 
@@ -410,31 +392,54 @@
 
             element.on(CLICK + NS, proxy(chart._click, chart));
             element.on(MOUSEOVER + NS, proxy(chart._mouseOver, chart));
+
+            if (kendo.UserEvents) {
+                chart._userEvents = new kendo.UserEvents(chart.wrapper, {
+                    global: true,
+                    threshold: 5,
+                    filter: ":not(.k-selector)",
+                    stopPropagation: true,
+                    multiTouch: false,
+                    start: proxy(chart._start, chart),
+                    move: proxy(chart._move, chart),
+                    end: proxy(chart._end, chart)
+                });
+            }
         },
 
         _start: function(e) {
             var chart = this,
-                origEvent = e.event.originalEvent,
-                coords = chart._eventCoordinates(origEvent),
+                coords = chart._eventCoordinates(e),
                 plotArea = chart._model._plotArea,
-                axes = plotArea.axes,
+                allAxes = plotArea.axes,
                 pane = plotArea.findPointPane(coords),
+                axes = pane.axes.slice(0),
                 i,
                 currentAxis,
                 inAxis = false;
 
-            for (i = 0; i < axes.length; i++) {
-                currentAxis = axes[i];
+            for (i = 0; i < allAxes.length; i++) {
+                currentAxis = allAxes[i];
                 if (currentAxis.box.containsPoint(coords)) {
                     inAxis = true;
                     break;
                 }
             }
 
-            if (!inAxis && plotArea.backgroundBox().containsPoint(coords)) {
+            if (!inArray(plotArea.axisX, axes)) {
+                axes.push(plotArea.axisX);
+            }
+            if (!inArray(plotArea.axisY, axes)) {
+                axes.push(plotArea.axisY);
+            }
+
+            if (pane && !inAxis && plotArea.backgroundBox().containsPoint(coords)) {
                 chart.trigger(DRAG_START);
+                chart._suppressHover = true;
+                chart._unsetActivePoint();
                 chart._dragState = {
-                    pane: pane
+                    pane: pane,
+                    axes: axes
                 };
             }
         },
@@ -442,45 +447,29 @@
         _move: function(e) {
             var chart = this,
                 dragState = chart._dragState,
-                plotArea = chart._model._plotArea,
                 axes,
                 ranges = {};
 
             if (dragState) {
                 e.preventDefault();
 
-                axes = dragState.pane.axes;
-                if (!inArray(plotArea.axisX, axes)) {
-                    axes.push(plotArea.axisX);
-                }
-                if (!inArray(plotArea.axisY, axes)) {
-                    axes.push(plotArea.axisY);
-                }
+                axes = dragState.axes;
 
                 for (var i = 0; i < axes.length; i++) {
                     var currentAxis = axes[i];
-                    var range = currentAxis.options.max - currentAxis.options.min;
-                    var scale;
-                    var delta;
-                    if(currentAxis.options.vertical) {
-                        scale = currentAxis.box.height() / range;
-                        delta = e.y.initialDelta;
-                    } else {
-                        scale = currentAxis.box.width() / range;
-                        delta = e.x.initialDelta;
-                    }
+                    var axisName = currentAxis.options.name;
+                    if (axisName) {
+                        var axis = currentAxis.options.vertical ? e.y : e.x;
+                        var delta = axis.startLocation - axis.location;
 
-                    if (delta !== 0) {
-                        var offset = delta / scale;
-
-                        ranges[currentAxis.options.name] = {
-                            min: currentAxis.options.min + offset,
-                            max: currentAxis.options.max + offset
-                        };
+                        if (delta !== 0) {
+                            ranges[currentAxis.options.name] =
+                                currentAxis.translateRange(delta);
+                        }
                     }
                 }
 
-                chart.trigger(ranges);
+                chart.trigger(DRAG, { axisRanges: ranges });
             }
         },
 
@@ -489,6 +478,7 @@
 
             if (chart._dragState) {
                 chart.trigger(DRAG_END);
+                chart._suppressHover = false;
                 delete chart._dragState;
             }
         },
@@ -515,11 +505,15 @@
                 offset = element.offset(),
                 paddingLeft = parseInt(element.css("paddingLeft"), 10),
                 paddingTop = parseInt(element.css("paddingTop"), 10),
-                win = $(window);
+                win = $(window),
+                x = e.x || { client: e.clientX },
+                y = e.y || { client: e.clientY },
+                clientX = x.client,
+                clientY = y.client;
 
             return {
-                x: e.clientX - offset.left - paddingLeft + win.scrollLeft(),
-                y: e.clientY - offset.top - paddingTop + win.scrollTop()
+                x: clientX - offset.left - paddingLeft + win.scrollLeft(),
+                y: clientY - offset.top - paddingTop + win.scrollTop()
             };
         },
 
@@ -590,11 +584,18 @@
                 }
             } else {
                 $(doc.body).off(MOUSEMOVE_TRACKING);
-
-                delete chart._activePoint;
-                tooltip.hide();
-                highlight.hide();
+                chart._unsetActivePoint();
             }
+        },
+
+        _unsetActivePoint: function() {
+            var chart = this,
+                tooltip = chart._tooltip,
+                highlight = chart._highlight;
+
+            delete chart._activePoint;
+            tooltip.hide();
+            highlight.hide();
         },
 
         _onDataChanged: function() {
@@ -1212,6 +1213,21 @@
             return this.options.categories[index];
         },
 
+        translateRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                lineBox = axis.lineBox(),
+                size = options.vertical ? lineBox.height() : lineBox.width(),
+                range = options.categories.length,
+                scale = size / range,
+                offset = round(delta / scale, DEFAULT_PRECISION);
+
+            return {
+                from: offset,
+                to: range + offset
+            };
+        },
+
         labelsCount: function() {
             return this.options.categories.length;
         },
@@ -1278,6 +1294,20 @@
                 years: [1, 2, 3, 5, 10, 25, 50]
             },
             maxDateGroups: 10
+        },
+
+        translateRange: function(delta) {
+            var axis = this,
+                range = CategoryAxis.fn.translateRange.call(axis, delta),
+                options = axis.options,
+                baseUnit = options.baseUnit,
+                offset = math.round(range.from),
+                weekStartDay = options.weekStartDay;
+
+            return {
+                from: addDuration(options.min, offset, baseUnit, weekStartDay),
+                to: addDuration(options.max, offset, baseUnit, weekStartDay)
+            };
         },
 
         defaultBaseUnit: function(options) {
@@ -6854,11 +6884,6 @@
 
             options.from = from;
             options.to = to;
-
-            that.trigger(SELECT, {
-                from: from,
-                to: to
-            });
         },
 
         expand: function(delta) {

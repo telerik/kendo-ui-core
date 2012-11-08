@@ -1606,6 +1606,21 @@
             return round(value, DEFAULT_PRECISION);
         },
 
+        translateRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                lineBox = axis.lineBox(),
+                size = options.vertical ? lineBox.height() : lineBox.width(),
+                range = options.max - options.min,
+                scale = size / range,
+                offset = round(delta / scale, DEFAULT_PRECISION);
+
+            return {
+                from: options.min + offset,
+                to: options.max + offset
+            };
+        },
+
         labelsCount: function() {
             return this.getDivisions(this.options.majorUnit);
         },
