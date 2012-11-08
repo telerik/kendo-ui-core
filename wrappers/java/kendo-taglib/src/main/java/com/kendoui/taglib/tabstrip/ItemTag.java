@@ -2,6 +2,9 @@
 package com.kendoui.taglib.tabstrip;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import com.kendoui.taglib.BaseTag;
 import com.kendoui.taglib.html.Div;
@@ -10,7 +13,9 @@ import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interfaces */ {
-       
+    
+    protected List<Map<String,Object>> items;
+    
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
@@ -18,6 +23,12 @@ public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interf
         ItemsTag parent = (ItemsTag)findParentWithClass(ItemsTag.class);
 
         parent.addItem(this);
+        
+        try {
+            this.setProperty("content", getContent());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 //<< doEndTag
         
@@ -42,7 +53,7 @@ public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interf
     public void initialize() {
 //>> initialize
 //<< initialize
-
+        items = new ArrayList<Map<String,Object>>();
         super.initialize();
     }
 
@@ -50,7 +61,7 @@ public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interf
     public void destroy() {
 //>> destroy
 //<< destroy
-
+        items = null;
         super.destroy();
     }
 
