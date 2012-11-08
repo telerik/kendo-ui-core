@@ -50,7 +50,7 @@
                 }
             },
 
-            "@texture-url": constant("background-image", ".k-header",
+            "@fallback-texture": constant("background-image", ".k-header",
                 [ { text: "flat", value: "none" } ].concat(
                     [
                         "highlight", "glass", "brushed-metal", "noise",
@@ -63,6 +63,8 @@
                     }
                 )
             )),
+
+            "@texture":                         { readonly: true, value: "none" },
 
             "@widget-background-color":         constant(BGCOLOR, ".k-widget"),
             "@widget-gradient":                 { readonly: true, value: "none" },
@@ -179,7 +181,7 @@
 
                 "@link-text-color":               "Link text color",
 
-                "@texture-url":                   "Texture"
+                "@fallback-texture":              "Texture"
             },
             "Buttons": {
                 "@button-background-color":       "Background",
