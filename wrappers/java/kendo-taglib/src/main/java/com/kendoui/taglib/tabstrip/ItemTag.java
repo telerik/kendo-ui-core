@@ -23,14 +23,14 @@ public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interf
         ItemsTag parent = (ItemsTag)findParentWithClass(ItemsTag.class);
 
         parent.addItem(this);
+
+//<< doEndTag
         
         try {
             this.setProperty("content", getContent());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//<< doEndTag
         
         return super.doEndTag();
     }
