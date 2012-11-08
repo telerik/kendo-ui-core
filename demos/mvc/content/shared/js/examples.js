@@ -478,7 +478,7 @@
                 options = options || {};
 
                 if (supports.sessionStorage) {
-                    options.theme = sessionStorage.getItem("kendoSkin") || options.theme || this.prototype.options.theme;
+                    options.theme = sessionStorage.getItem("kendoSkin") || options.theme || ThemeChooser.prototype.options.theme;
                 }
 
                 Widget.prototype.init.call(this, element, options);
