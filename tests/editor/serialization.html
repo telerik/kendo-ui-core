@@ -499,6 +499,11 @@
         editor.body.innerHTML = '<span class="k-marker"></span>foo<span class="k-marker"></span>';
         equal(editor.value(), "foo");
     });
+
+    test("absolute background-image values are properly serialized", function() {
+        editor.value('<div style="background-image:url(http://example.com/foo.gif);">foo</div>');
+        equal(editor.value(), '<div style="background-image:url(http://example.com/foo.gif);">foo</div>');
+    });
 </script>
 
 <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
