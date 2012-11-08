@@ -213,7 +213,6 @@
         _dragEnd: function() {
             var navi = this;
 
-            return;
             navi.applySelection();
             navi.redrawSlaves();
             navi.hint.hide();
@@ -274,14 +273,43 @@
             var navi = this,
                 chart = navi.chart,
                 navigatorAxis = navi.mainAxis(),
-                groups = navigatorAxis.options.categories,
                 axis = chart._plotArea.categoryAxis,
                 range = e.axisRanges[axis.options.name],
                 selection = chart._selection,
+                selectionLength = selection.options.to - selection.options.from;
+
+            e.preventDefault();
+
+            if (selectionLength > 1) {
+                selection.expandLeft(e.delta);
+                navi.readSelection();
+            } else {
+                navi.options.select.from = range.from;
+            }
+
+            if (!kendo.support.touch) {
+                navi.applySelection();
+                navi.redrawSlaves();
+            }
+            navi.showHint(navi.options.select.from, navi.options.select.to);
+
+            selection.set(
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    navi.options.select.from
+                ),
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    navi.options.select.to
+            ));
+            /*
+                navigatorAxis = navi.mainAxis(),
+                groups = navigatorAxis.options.categories,
+                axis = chart._plotArea.categoryAxis,
+                range = e.axisRanges[axis.options.name],
                 from,
                 to;
 
-            e.preventDefault();
 
             from = toDate(math.max(groups[0], range.from));
 
@@ -292,22 +320,8 @@
 
             navi.options.select = { from: from, to: to };
 
-            if (!kendo.support.touch) {
-                navi.applySelection();
-                navi.redrawSlaves();
-            }
 
-            selection.set(
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    from
-                ),
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    to
-            ));
-
-            navi.showHint(from, to);
+           */
         },
 
         _zoomEnd: function(e) {

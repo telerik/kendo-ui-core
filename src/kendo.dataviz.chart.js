@@ -502,19 +502,21 @@
                 ranges = {};
 
             if (origEvent.wheelDelta) {
-              delta = origEvent.wheelDelta / 120;
+              delta = -origEvent.wheelDelta / 120;
             }
 
             if (origEvent.detail) {
-              delta = -origEvent.detail / 3;
+              delta = origEvent.detail / 3;
             }
 
             if (!dragState) {
                 var coords = chart._eventCoordinates(origEvent),
                     plotArea = chart._model._plotArea,
                     allAxes = plotArea.axes,
-                    pane = plotArea.findPointPane(coords),
-                    axes = pane.axes.slice(0),
+                    pane = plotArea.findPointPane(coords);
+
+                if (!pane) return;
+                var axes = pane.axes.slice(0),
                     i,
                     currentAxis,
                     inAxis = false;
@@ -551,11 +553,11 @@
                 var axisName = currentAxis.options.name;
                 if (axisName) {
                     ranges[currentAxis.options.name] =
-                        currentAxis.scaleRange(-delta);
+                        currentAxis.scaleRange(delta);
                 }
             }
 
-            chart.trigger(ZOOM, { axisRanges: ranges });
+            chart.trigger(ZOOM, { delta: delta, axisRanges: ranges });
 
             if (chart._mwTimeout) {
                 clearTimeout(chart._mwTimeout);
@@ -593,10 +595,9 @@
                 paddingLeft = parseInt(element.css("paddingLeft"), 10),
                 paddingTop = parseInt(element.css("paddingTop"), 10),
                 win = $(window),
-                x = e.x || { client: e.clientX },
-                y = e.y || { client: e.clientY },
-                clientX = x.client,
-                clientY = y.client;
+                isTouch = defined((e.x || {}).client),
+                clientX = isTouch ? e.x.client : e.clientX,
+                clientY = isTouch ? e.y.client : e.clientY;
 
             return {
                 x: clientX - offset.left - paddingLeft + win.scrollLeft(),
@@ -1385,7 +1386,7 @@
             },
             autoBaseUnitSteps: {
                 minutes: [1, 2, 5, 15, 30],
-                hours: [1, 2, 3, 6, 12],
+                hours: [1, 2, 3],
                 days: [1, 2, 3],
                 weeks: [1, 2],
                 months: [1, 2, 3, 6],
@@ -1411,13 +1412,25 @@
         scaleRange: function(delta) {
             var axis = this,
                 options = axis.options,
-                options = axis.options,
                 baseUnit = options.baseUnit,
-                weekStartDay = options.weekStartDay;
+                weekStartDay = options.weekStartDay,
+                range = duration(options.min, options.max, baseUnit),
+                half = math.round(range / 2),
+                quart = math.round(range / 4),
+                from,
+                to;
+
+            if (delta < 0) {
+                from = addDuration(options.min, quart, baseUnit, weekStartDay);
+                to = addDuration(options.max, -quart, baseUnit, weekStartDay);
+            } else {
+                from = addDuration(options.min, -quart, baseUnit, weekStartDay);
+                to = addDuration(options.max, quart, baseUnit, weekStartDay);
+            }
 
             return {
-                from: addDuration(options.min, delta, baseUnit, weekStartDay),
-                to: addDuration(options.max, -delta, baseUnit, weekStartDay)
+                from: from,
+                to: to
             };
         },
 
@@ -6991,19 +7004,22 @@
             var that = this,
                 options = that.options;
 
+            from = clipValue(from, options.min, options.max);
+            to = clipValue(to, from + 1, options.max);
+
             that.move(from, to);
 
             options.from = from;
             options.to = to;
         },
 
-        expand: function(delta) {
+        expandLeft: function(delta) {
             var selection = this,
                 options = selection.options;
 
             selection.set(
                 math.min(options.from - delta, options.to - 1),
-                math.max(options.to + delta, options.from + 1)
+                options.to
             );
         },
 
