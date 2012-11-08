@@ -1334,7 +1334,7 @@
                 destinationNode: destinationNode[0],
                 valid: valid,
                 setValid: function(newValid) { valid = newValid; },
-                dropTarget: e.target,
+                dropTarget: that.dropTarget[0],
                 dropPosition: dropPosition
             });
 
