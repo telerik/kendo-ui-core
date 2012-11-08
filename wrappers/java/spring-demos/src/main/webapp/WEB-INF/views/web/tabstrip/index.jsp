@@ -6,9 +6,17 @@
 
 <kendo:tabStrip name="tabStrip">
 	<kendo:tabStrip-items>
-	    <kendo:tabStrip-item text="Tab1" />
-	    <kendo:tabStrip-item text="Tab2" />
-	</kendo:tabStrip-items>
+	    <kendo:tabStrip-item text="Tab1">
+			<kendo:tabStrip-item-content>
+		        test
+		    </kendo:tabStrip-item-content>    
+	    </kendo:tabStrip-item>
+        <kendo:tabStrip-item text="Tab2">
+            <kendo:tabStrip-item-content>
+                test2
+            </kendo:tabStrip-item-content>    
+        </kendo:tabStrip-item>
+    </kendo:tabStrip-items>
 </kendo:tabStrip>
 
 <demo:footer />

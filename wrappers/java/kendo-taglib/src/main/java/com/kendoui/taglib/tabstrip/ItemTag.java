@@ -1,19 +1,16 @@
 
 package com.kendoui.taglib.tabstrip;
 
+import java.io.IOException;
 
-import com.kendoui.taglib.BaseItemTag;
-
-
-
-
-
+import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.html.Div;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ItemTag extends  BaseItemTag  /* interfaces *//* interfaces */ {
-    
+public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interfaces */ {
+       
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
@@ -23,8 +20,22 @@ public class ItemTag extends  BaseItemTag  /* interfaces *//* interfaces */ {
         parent.addItem(this);
 
 //<< doEndTag
-
+        
         return super.doEndTag();
+    }
+    
+    public String getContent() throws IOException {
+        String html = body();
+        
+        if (!html.isEmpty()) {               
+            Div div = new Div();
+            
+            div.html(html);
+            
+            return div.outerHtml();
+        }
+        
+        return "";
     }
 
     @Override
@@ -44,6 +55,12 @@ public class ItemTag extends  BaseItemTag  /* interfaces *//* interfaces */ {
     }
 
 //>> Attributes
+
+    public void setItems(ItemsTag value) {
+
+        items = value.items();
+
+    }
 
     public static String tagName() {
         return "tabStrip-item";
