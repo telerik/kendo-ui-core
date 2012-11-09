@@ -1616,8 +1616,8 @@
                 offset = round(delta / scale, DEFAULT_PRECISION);
 
             return {
-                from: options.min + offset,
-                to: options.max + offset
+                min: options.min + offset,
+                max: options.max + offset
             };
         },
 
@@ -1627,8 +1627,8 @@
                 offset = -delta * options.majorUnit;
 
             return {
-                from: options.min - offset,
-                to: options.max + offset
+                min: options.min - offset,
+                max: options.max + offset
             };
         },
 

@@ -1301,8 +1301,8 @@
                 offset = round(delta / scale, DEFAULT_PRECISION);
 
             return {
-                from: offset,
-                to: range + offset
+                min: offset,
+                max: range + offset
             };
         },
 
@@ -1312,8 +1312,8 @@
                 delta = scale * range;
 
             return {
-                from: -delta,
-                to: range + delta
+                min: -delta,
+                max: range + delta
             };
         },
 
@@ -1390,12 +1390,12 @@
                 range = CategoryAxis.fn.translateRange.call(axis, delta),
                 options = axis.options,
                 baseUnit = options.baseUnit,
-                offset = math.round(range.from),
+                offset = math.round(range.min),
                 weekStartDay = options.weekStartDay;
 
             return {
-                from: addDuration(options.min, offset, baseUnit, weekStartDay),
-                to: addDuration(options.max, offset, baseUnit, weekStartDay)
+                min: addDuration(options.min, offset, baseUnit, weekStartDay),
+                max: addDuration(options.max, offset, baseUnit, weekStartDay)
             };
         },
 
@@ -1419,8 +1419,8 @@
             }
 
             return {
-                from: from,
-                to: to
+                min: from,
+                max: to
             };
         },
 

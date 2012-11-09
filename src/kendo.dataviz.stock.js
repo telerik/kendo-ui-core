@@ -183,7 +183,7 @@
                 to;
 
             from = toDate(math.min(
-                math.max(groups[0], range.from),
+                math.max(groups[0], range.min),
                 dataviz.addDuration(
                     dataviz.last(groups), -selectionDuration, baseUnit
                 )
@@ -288,7 +288,7 @@
                 selection.expandLeft(e.delta);
                 navi.readSelection();
             } else {
-                navi.options.select.from = range.from;
+                navi.options.select.from = range.min;
             }
 
             if (!kendo.support.touch) {
@@ -306,26 +306,6 @@
                     navigatorAxis.options.categories,
                     navi.options.select.to
             ));
-            /*
-                navigatorAxis = navi.mainAxis(),
-                groups = navigatorAxis.options.categories,
-                axis = chart._plotArea.categoryAxis,
-                range = e.axisRanges[axis.options.name],
-                from,
-                to;
-
-
-            from = toDate(math.max(groups[0], range.from));
-
-            to = toDate(math.min(
-                range.to,
-                dataviz.last(navigatorAxis.options.categories)
-            ));
-
-            navi.options.select = { from: from, to: to };
-
-
-           */
         },
 
         _zoomEnd: function(e) {
