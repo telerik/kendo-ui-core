@@ -390,7 +390,7 @@
                     }
                 },
                 area: {
-                    opacity: 0.4,
+                    opacity: 0.5,
                     markers: {
                         visible: false,
                         size: 6
@@ -408,7 +408,7 @@
                     highlight: {
                         border: {
                             color: "#ffffff",
-                            opacity: 0.2
+                            opacity: 1
                         }
                     }
                 },
@@ -442,7 +442,7 @@
             tooltip: {
                 background: "#1b141a",
                 color: "#ffffff",
-                opacity: 0.8
+                opacity: 1
             }
         },
         gauge: {
@@ -735,6 +735,24 @@
                 labels: {
                     color: "#ffffff"
                 },
+                line: {
+                    markers: {
+                        background: "#0e0e0e"
+                    }
+                },
+                bubble: {
+                    opacity: 0.6      
+                },
+                scatter: {
+                    markers: {
+                        background: "#0e0e0e"
+                    }
+                },
+                scatterLine: {
+                    markers: {
+                        background: "#0e0e0e"
+                    }
+                },
                 area: {
                     opacity: 0.4,
                     markers: {
@@ -793,6 +811,386 @@
                 },
                 line: {
                     color: "#cecece"
+                }
+            }
+        }
+    });
+    
+    registerTheme("moonlight", {
+        chart: {
+            title: {
+                color: "#ffffff"
+            },
+            legend: {
+                labels: {
+                    color: "#ffffff"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: "#ffffff"
+                },
+                pie: {
+                    overlay: {
+                        gradient: "sharpBevel"
+                    }
+                },
+                donut: {
+                    overlay: {
+                        gradient: "sharpGlass"
+                    }
+                },
+                line: {
+                    markers: {
+                        background: "#212a33"
+                    }
+                },
+                bubble: {
+                    opacity: 0.6      
+                },
+                scatter: {
+                    markers: {
+                        background: "#212a33"
+                    }
+                },
+                scatterLine: {
+                    markers: {
+                        background: "#212a33"
+                    }
+                },
+                area: {
+                    opacity: 0.3,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                },
+                candlestick: {
+                    downColor: "#757d87",
+                    line: {
+                        color: "#ea9d06"
+                    },
+                    border: {
+                        _brightness: 1.5,
+                        opacity: 1
+                    },
+                    highlight: {
+                        border: {
+                            color: WHITE,
+                            opacity: 0.2
+                        }
+                    }
+                },
+                ohlc: {
+                    line: {
+                        color: "#ea9d06"
+                    }
+                }
+            },
+            chartArea: {
+                background: "#212a33"
+            },
+            seriesColors: ["#ffca08", "#ff710f", "#ed2e24", "#ff9f03", "#e13c02", "#a00201"],
+            axisDefaults: {
+                line: {
+                    color: "#8c909e"
+                },
+                minorTicks: {
+                    color: "#8c909e"
+                },
+                majorTicks: {
+                    color: "#8c909e"
+                },
+                labels: {
+                    color: "#ffffff"
+                },
+                majorGridLines: {
+                    color: "#3e424d"
+                },
+                minorGridLines: {
+                    color: "#2f3640"
+                },
+                title: {
+                    color: "#ffffff"
+                }
+            },
+            tooltip: {
+                background: "#212a33",
+                color: "#ffffff",
+                opacity: 1
+            }
+        },
+        gauge: {
+            pointer: {
+                color: "#f4af03"
+            },
+            scale: {
+                rangePlaceholderColor: "#2f3640",
+
+                labels: {
+                    color: WHITE
+                },
+                minorTicks: {
+                    color: "#8c909e"
+                },
+                majorTicks: {
+                    color: "#8c909e"
+                },
+                line: {
+                    color: "#8c909e"
+                }
+            }
+        }
+    });
+    registerTheme("uniform", {
+        chart: {
+            title: {
+                color: "#686868"
+            },
+            legend: {
+                labels: {
+                    color: "#686868"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: "#686868"
+                },
+                pie: {
+                    overlay: {
+                        gradient: "sharpBevel"
+                    }
+                },
+                donut: {
+                    overlay: {
+                        gradient: "sharpGlass"
+                    }
+                },
+                line: {
+                    markers: {
+                        background: "#ffffff"
+                    }
+                },
+                bubble: {
+                    opacity: 0.6      
+                },
+                scatter: {
+                    markers: {
+                        background: "#ffffff"
+                    }
+                },
+                scatterLine: {
+                    markers: {
+                        background: "#ffffff"
+                    }
+                },
+                area: {
+                    opacity: 0.3,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                },
+                candlestick: {
+                    downColor: "#cccccc",
+                    line: {
+                        color: "#cccccc"
+                    },
+                    border: {
+                        _brightness: 1.5,
+                        opacity: 1
+                    },
+                    highlight: {
+                        border: {
+                            color: "#cccccc",
+                            opacity: 0.2
+                        }
+                    }
+                },
+                ohlc: {
+                    line: {
+                        color: "#cccccc"
+                    }
+                }
+            },
+            chartArea: {
+                background: "#ffffff"
+            },
+            seriesColors: ["#527aa3", "#6f91b3", "#8ca7c2", "#a8bdd1", "#c5d3e0", "#e2e9f0"],
+            axisDefaults: {
+                line: {
+                    color: "#9e9e9e"
+                },
+                minorTicks: {
+                    color: "#aaaaaa"
+                },
+                majorTicks: {
+                    color: "#888888"
+                },
+                labels: {
+                    color: "#686868"
+                },
+                majorGridLines: {
+                    color: "#dadada"
+                },
+                minorGridLines: {
+                    color: "#e7e7e7"
+                },
+                title: {
+                    color: "#686868"
+                }
+            },
+            tooltip: {
+                background: "#ffffff",
+                color: "#686868",
+                opacity: 0.8
+            }
+        },
+        gauge: {
+            pointer: {
+                color: "#527aa3"
+            },
+            scale: {
+                rangePlaceholderColor: "#e7e7e7",
+
+                labels: {
+                    color: "#686868"
+                },
+                minorTicks: {
+                    color: "#aaaaaa"
+                },
+                majorTicks: {
+                    color: "#888888"
+                },
+                line: {
+                    color: "#9e9e9e"
+                }
+            }
+        }
+    });
+    
+    registerTheme("bootstrap", {
+        chart: {
+            title: {
+                color: "#343434"
+            },
+            legend: {
+                labels: {
+                    color: "#343434"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: "#343434"
+                },
+                pie: {
+                    overlay: {
+                        gradient: "sharpBevel"
+                    }
+                },
+                donut: {
+                    overlay: {
+                        gradient: "sharpGlass"
+                    }
+                },
+                line: {
+                    markers: {
+                        background: "#ffffff"
+                    }
+                },
+                bubble: {
+                    opacity: 0.6      
+                },
+                scatter: {
+                    markers: {
+                        background: "#ffffff"
+                    }
+                },
+                scatterLine: {
+                    markers: {
+                        background: "#ffffff"
+                    }
+                },
+                area: {
+                    opacity: 0.3,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                },
+                candlestick: {
+                    downColor: "#d0d0d0",
+                    line: {
+                        color: "#d0d0d0"
+                    },
+                    border: {
+                        _brightness: 1.5,
+                        opacity: 1
+                    },
+                    highlight: {
+                        border: {
+                            color: "#b8b8b8",
+                            opacity: 0.2
+                        }
+                    }
+                },
+                ohlc: {
+                    line: {
+                        color: "#d0d0d0"
+                    }
+                }
+            },
+            chartArea: {
+                background: "#ffffff"
+            },
+            seriesColors: ["#006dcc", "#49AFCD", "#5BB75B", "#FAA732", "#DA4F49", "#363636"],
+            axisDefaults: {
+                line: {
+                    color: "#b8b8b8"
+                },
+                minorTicks: {
+                    color: "#dddddd"
+                },
+                majorTicks: {
+                    color: "#b8b8b8"
+                },
+                labels: {
+                    color: "#343434"
+                },
+                majorGridLines: {
+                    color: "#b8b8b8"
+                },
+                minorGridLines: {
+                    color: "#dddddd"
+                },
+                title: {
+                    color: "#343434"
+                }
+            },
+            tooltip: {
+                background: "#ffffff",
+                color: "#343434",
+                opacity: 0.8
+            }
+        },
+        gauge: {
+            pointer: {
+                color: "#0044cc"
+            },
+            scale: {
+                rangePlaceholderColor: "#b8b8b8",
+
+                labels: {
+                    color: "#343434"
+                },
+                minorTicks: {
+                    color: "#dddddd"
+                },
+                majorTicks: {
+                    color: "#b8b8b8"
+                },
+                line: {
+                    color: "#b8b8b8"
                 }
             }
         }
