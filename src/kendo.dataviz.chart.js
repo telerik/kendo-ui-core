@@ -46,7 +46,9 @@
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
-    var ABOVE = "above",
+    var NS = ".kendoChart",
+
+        ABOVE = "above",
         AREA = "area",
         AUTO = "auto",
         FIT = "fit",
@@ -62,7 +64,7 @@
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
-        CLICK = "click",
+        CLICK_NS = "click" + NS,
         CLIP = dataviz.CLIP,
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
@@ -96,8 +98,9 @@
         MINUTES = "minutes",
         MONTHS = "months",
         MOUSEMOVE_TRACKING = "mousemove.tracking",
-        MOUSEOVER = "mouseover",
-        NS = ".kendoChart",
+        MOUSEOVER_NS = "mouseover" + NS,
+        MOUSEWHEEL_DELAY = 150,
+        MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
@@ -142,11 +145,17 @@
         X = "x",
         Y = "y",
         YEARS = "years",
-        ZERO = "zero";
+        ZERO = "zero",
+        ZOOM_START = "zoomStart",
+        ZOOM = "zoom",
+        ZOOM_END = "zoomEnd",
 
-    var CATEGORICAL_CHARTS =
-            [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC],
-        XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE],
+        CATEGORICAL_CHARTS = [
+            BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC
+        ],
+        XY_CHARTS = [
+            SCATTER, SCATTER_LINE, BUBBLE
+        ],
         BASE_UNITS = [
             MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ];
@@ -232,7 +241,10 @@
             PLOT_AREA_CLICK,
             DRAG_START,
             DRAG,
-            DRAG_END
+            DRAG_END,
+            ZOOM_START,
+            ZOOM,
+            ZOOM_END
         ],
 
         items: function() {
@@ -390,11 +402,12 @@
             var chart = this,
                 element = chart.element;
 
-            element.on(CLICK + NS, proxy(chart._click, chart));
-            element.on(MOUSEOVER + NS, proxy(chart._mouseOver, chart));
+            element.on(CLICK_NS, proxy(chart._click, chart));
+            element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
+            element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
 
             if (kendo.UserEvents) {
-                chart._userEvents = new kendo.UserEvents(chart.wrapper, {
+                chart._userEvents = new kendo.UserEvents(element, {
                     global: true,
                     threshold: 5,
                     filter: ":not(.k-selector)",
@@ -408,45 +421,12 @@
         },
 
         _start: function(e) {
-            var chart = this,
-                coords = chart._eventCoordinates(e),
-                plotArea = chart._model._plotArea,
-                allAxes = plotArea.axes,
-                pane = plotArea.findPointPane(coords),
-                axes = pane.axes.slice(0),
-                i,
-                currentAxis,
-                inAxis = false;
-
-            for (i = 0; i < allAxes.length; i++) {
-                currentAxis = allAxes[i];
-                if (currentAxis.box.containsPoint(coords)) {
-                    inAxis = true;
-                    break;
-                }
-            }
-
-            if (!inArray(plotArea.axisX, axes)) {
-                axes.push(plotArea.axisX);
-            }
-            if (!inArray(plotArea.axisY, axes)) {
-                axes.push(plotArea.axisY);
-            }
-
-            if (pane && !inAxis && plotArea.backgroundBox().containsPoint(coords)) {
-                chart.trigger(DRAG_START);
-                chart._suppressHover = true;
-                chart._unsetActivePoint();
-                chart._dragState = {
-                    pane: pane,
-                    axes: axes
-                };
-            }
+            this._startNavigation(e, DRAG_START);
         },
 
         _move: function(e) {
             var chart = this,
-                dragState = chart._dragState,
+                dragState = chart._navState,
                 axes,
                 ranges = {};
 
@@ -474,12 +454,118 @@
         },
 
         _end: function(e) {
+            this._endNavigation(e, DRAG_END);
+        },
+
+        _mousewheel: function(e) {
+            var chart = this,
+                origEvent = e.originalEvent,
+                delta = 0,
+                totalDelta,
+                state = chart._navState,
+                axes,
+                i,
+                currentAxis,
+                axisName,
+                ranges = {};
+
+            if (origEvent.wheelDelta) {
+              delta = -origEvent.wheelDelta / 120;
+            }
+
+            if (origEvent.detail) {
+              delta = origEvent.detail / 3;
+            }
+
+            if (!state) {
+                chart._startNavigation(origEvent, ZOOM_START);
+                state = chart._navState;
+            }
+
+            if (state) {
+                totalDelta = state.totalDelta || delta;
+                state.totalDelta = totalDelta + delta;
+
+                axes = chart._navState.axes;
+
+                for (i = 0; i < axes.length; i++) {
+                    currentAxis = axes[i];
+                    axisName = currentAxis.options.name;
+                    if (axisName) {
+                        ranges[axisName] = currentAxis.scaleRange(totalDelta);
+                    }
+                }
+
+                chart.trigger(ZOOM, { delta: delta, axisRanges: ranges });
+
+                if (chart._mwTimeout) {
+                    clearTimeout(chart._mwTimeout);
+                }
+
+                chart._mwTimeout = setTimeout(function() {
+                    chart._endNavigation(e, ZOOM_END);
+                }, MOUSEWHEEL_DELAY);
+            }
+        },
+
+        _startNavigation: function(e, chartEvent) {
+            var chart = this,
+                coords = chart._eventCoordinates(e),
+                plotArea = chart._model._plotArea,
+                pane = plotArea.findPointPane(coords),
+                axes,
+                i,
+                currentAxis,
+                inAxis = false,
+                prevented;
+
+            if (!pane) {
+                return;
+            }
+
+            axes = pane.axes.slice(0);
+
+            if (!inArray(plotArea.axisX, axes)) {
+                axes.push(plotArea.axisX);
+            }
+
+            if (!inArray(plotArea.axisY, axes)) {
+                axes.push(plotArea.axisY);
+            }
+
+            for (i = 0; i < axes.length; i++) {
+                currentAxis = axes[i];
+                if (currentAxis.box.containsPoint(coords)) {
+                    inAxis = true;
+                    break;
+                }
+            }
+
+            if (!inAxis && plotArea.backgroundBox().containsPoint(coords)) {
+                prevented = chart.trigger(chartEvent, {
+                    axisRanges: axisRanges(axes)
+                });
+
+                if(prevented) {
+                    chart._userEvents.cancel();
+                } else {
+                    chart._suppressHover = true;
+                    chart._unsetActivePoint();
+                    chart._navState = {
+                        pane: pane,
+                        axes: axes
+                    };
+                }
+            }
+        },
+
+        _endNavigation: function(e, chartEvent) {
             var chart = this;
 
-            if (chart._dragState) {
-                chart.trigger(DRAG_END);
+            if (chart._navState) {
+                chart.trigger(chartEvent);
                 chart._suppressHover = false;
-                delete chart._dragState;
+                delete chart._navState;
             }
         },
 
@@ -506,10 +592,9 @@
                 paddingLeft = parseInt(element.css("paddingLeft"), 10),
                 paddingTop = parseInt(element.css("paddingTop"), 10),
                 win = $(window),
-                x = e.x || { client: e.clientX },
-                y = e.y || { client: e.clientY },
-                clientX = x.client,
-                clientY = y.client;
+                isTouch = defined((e.x || {}).client),
+                clientX = isTouch ? e.x.client : e.clientX,
+                clientY = isTouch ? e.y.client : e.clientY;
 
             return {
                 x: clientX - offset.left - paddingLeft + win.scrollLeft(),
@@ -530,7 +615,7 @@
             }
         },
 
-        _mouseOver: function(e) {
+        _mouseover: function(e) {
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
@@ -692,7 +777,7 @@
             var chart = this,
                 dataSource = chart.dataSource;
 
-            chart.wrapper.off(NS);
+            chart.element.off(NS);
             dataSource.unbind(CHANGE, chart._dataChangeHandler);
 
             if (chart._userEvents) {
@@ -1223,8 +1308,20 @@
                 offset = round(delta / scale, DEFAULT_PRECISION);
 
             return {
-                from: offset,
-                to: range + offset
+                min: offset,
+                max: range + offset
+            };
+        },
+
+        scaleRange: function(scale) {
+            var axis = this,
+                options = axis.options,
+                range = options.categories.length,
+                delta = scale * range;
+
+            return {
+                min: -delta,
+                max: range + delta
             };
         },
 
@@ -1287,7 +1384,7 @@
             },
             autoBaseUnitSteps: {
                 minutes: [1, 2, 5, 15, 30],
-                hours: [1, 2, 3, 6, 12],
+                hours: [1, 2, 3],
                 days: [1, 2, 3],
                 weeks: [1, 2],
                 months: [1, 2, 3, 6],
@@ -1301,13 +1398,37 @@
                 range = CategoryAxis.fn.translateRange.call(axis, delta),
                 options = axis.options,
                 baseUnit = options.baseUnit,
-                offset = math.round(range.from),
+                offset = math.round(range.min),
                 weekStartDay = options.weekStartDay;
 
             return {
-                from: addDuration(options.min, offset, baseUnit, weekStartDay),
-                to: addDuration(options.max, offset, baseUnit, weekStartDay)
+                min: addDuration(options.min, offset, baseUnit, weekStartDay),
+                max: addDuration(options.max, offset, baseUnit, weekStartDay)
             };
+        },
+
+        scaleRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                rounds = math.abs(delta),
+                from = options.min,
+                to = options.max,
+                range,
+                step;
+
+            while (rounds--) {
+                range = dateDiff(from, to);
+                step = math.round(range * 0.1);
+                if (delta < 0) {
+                    from = addTicks(from, step);
+                    to = addTicks(to, -step);
+                } else {
+                    from = addTicks(from, -step);
+                    to = addTicks(to, step);
+                }
+            }
+
+            return { min: from, max: to };
         },
 
         defaultBaseUnit: function(options) {
@@ -1351,6 +1472,8 @@
         },
 
         range: function(options) {
+            options = options || this.options;
+
             var categories = toDate(options.categories),
                 autoUnit = options.baseUnit === FIT,
                 baseUnit = autoUnit ? BASE_UNITS[0] : options.baseUnit,
@@ -4886,6 +5009,7 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = new Pane(paneOptions[i]);
+                currentPane.paneIndex = i;
 
                 panes.push(currentPane);
                 plotArea.append(currentPane);
@@ -6880,19 +7004,22 @@
             var that = this,
                 options = that.options;
 
+            from = clipValue(from, options.min, options.max);
+            to = clipValue(to, from + 1, options.max);
+
             that.move(from, to);
 
             options.from = from;
             options.to = to;
         },
 
-        expand: function(delta) {
+        expandLeft: function(delta) {
             var selection = this,
                 options = selection.options;
 
             selection.set(
                 math.min(options.from - delta, options.to - 1),
-                math.max(options.to + delta, options.from + 1)
+                options.to
             );
         },
 
@@ -7533,6 +7660,23 @@
         }
 
         return valid;
+    }
+
+    function axisRanges(axes) {
+        var i,
+            axis,
+            axisName,
+            ranges = {};
+
+        for (i = 0; i < axes.length; i++) {
+            axis = axes[i];
+            axisName = axis.options.name;
+            if (axisName) {
+                ranges[axisName] = axis.range();
+            }
+        }
+
+        return ranges;
     }
 
     // Exports ================================================================

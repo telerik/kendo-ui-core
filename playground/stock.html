@@ -44,6 +44,7 @@
                     },
                     valueAxes: [{
                         // Default axis
+                        name: "price"
                     }, {
                         name: "volume",
                         pane: "volumePane",
@@ -54,7 +55,9 @@
                         openField: "Open",
                         highField: "High",
                         lowField: "Low",
-                        closeField: "Close"
+                        closeField: "Close",
+                        // TODO: Shouldn't be necessary
+                        axis: "price"
                     }, {
                         type: "bar",
                         field: "Volume",

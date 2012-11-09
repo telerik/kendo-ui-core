@@ -20,10 +20,15 @@
     // Constants =============================================================
     var AUTO_CATEGORY_WIDTH = 28,
         CSS_PREFIX = "k-",
+        DRAG = "drag",
+        DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
         MOUSEWHEEL_DELAY = 150,
-        HINT_DELAY = 1000;
+        HINT_DELAY = 1000,
+        ZOOM_ACCELERATION = 3,
+        ZOOM = "zoom",
+        ZOOM_END = "zoomEnd";
 
     // Stock chart ===========================================================
     var StockChart = Chart.extend({
@@ -126,8 +131,10 @@
             navi.chart = chart;
             navi.options = chart.options.navigator;
 
-            chart.bind("drag", proxy(navi._drag, navi));
-            chart.bind("dragEnd", proxy(navi._dragEnd, navi));
+            chart.bind(DRAG, proxy(navi._drag, navi));
+            chart.bind(DRAG_END, proxy(navi._dragEnd, navi));
+            chart.bind(ZOOM, proxy(navi._zoom, navi));
+            chart.bind(ZOOM_END, proxy(navi._zoomEnd, navi));
         },
 
         redraw: function() {
@@ -161,8 +168,6 @@
 
                 navi.hint = new NavigatorHint(chart.element, { min: groups[0], max: dataviz.last(groups) });
             }
-
-            $(chart.element).bind("DOMMouseScroll mousewheel", $.proxy(navi.onMousewheel, navi));
         },
 
         _drag: function(e) {
@@ -179,7 +184,7 @@
                 to;
 
             from = toDate(math.min(
-                math.max(groups[0], range.from),
+                math.max(groups[0], range.min),
                 dataviz.addDuration(
                     dataviz.last(groups), -selectionDuration, baseUnit
                 )
@@ -269,37 +274,48 @@
             chart._plotArea.redraw(slavePanes);
         },
 
-        onMousewheel: function(e) {
+        _zoom: function(e) {
             var navi = this,
                 chart = navi.chart,
+                delta = e.delta,
+                navigatorAxis = navi.mainAxis(),
+                axis = chart._plotArea.categoryAxis,
+                range = e.axisRanges[axis.options.name],
+                select = navi.options.select,
                 selection = chart._selection,
-                orgEvent = e.originalEvent,
-                delta = 0;
+                selectionLength = selection.options.to - selection.options.from;
 
-            if (orgEvent.wheelDelta) {
-              delta = orgEvent.wheelDelta / 120;
+            if (math.abs(delta) > 1) {
+                delta *= ZOOM_ACCELERATION;
             }
 
-            if (orgEvent.detail) {
-              delta = -orgEvent.detail / 3;
+            if (selectionLength > 1) {
+                selection.expandLeft(delta);
+                navi.readSelection();
+            } else {
+                axis.options.min = select.from;
+                select.from = axis.scaleRange(-e.delta).min;
             }
 
-            if (selection) {
-                selection.expand(delta);
-            }
-
-            navi.readSelection();
-
-            if (navi._mwTimeout) {
-                clearTimeout(navi._mwTimeout);
-            }
-
-            navi._mwTimeout = setTimeout(function() {
+            if (!kendo.support.touch) {
                 navi.applySelection();
                 navi.redrawSlaves();
-            }, MOUSEWHEEL_DELAY);
+            }
+            navi.showHint(navi.options.select.from, navi.options.select.to);
 
-            e.preventDefault();
+            selection.set(
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    navi.options.select.from
+                ),
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    navi.options.select.to
+            ));
+        },
+
+        _zoomEnd: function(e) {
+            this._dragEnd(e);
         },
 
         showHint: function(from, to) {
