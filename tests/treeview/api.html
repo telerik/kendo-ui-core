@@ -752,6 +752,18 @@
 
                 equal(foo.find(".k-item").length, 0);
             });
+
+            test("text() changes item text, honoring templates", function() {
+                createTreeView({
+                    dataSource: [ { text: "foo", value: "bar" } ],
+                    template: "#: item.text #<input type='hidden' value='#= item.value #'>"
+                });
+
+                treeviewObject.text(".k-item", "baz");
+
+                equal(treeview.find(":hidden").length, 1);
+                equal(treeview.text(), "baz");
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

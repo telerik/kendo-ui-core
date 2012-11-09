@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
     </head>
     <body>
-        <h1 id="qunit-header"></h1>
+        <h1 id="qunit-header">TreeView MVVM</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -260,6 +260,28 @@
 
                     equal(dom.find(".k-group").length, 2);
                     ok(dom.find(".k-group:last").is(":visible"));
+                });
+
+                test("changing spriteCssClass updates item", function() {
+                    setupObservableBinding([
+                        { text: "foo", spriteCssClass: "folder" }
+                    ]);
+
+                    viewModel.products[0].set("spriteCssClass", "file");
+
+                    ok(dom.find(".k-sprite").hasClass("file"));
+                    ok(!dom.find(".k-sprite").hasClass("folder"));
+                });
+
+                test("changing imageUrl updates item", function() {
+                    setupObservableBinding([
+                        { text: "foo", imageUrl: "folder.png" }
+                    ]);
+
+                    viewModel.products[0].set("imageUrl", "file.png");
+
+                    ok(dom.find(".k-image").attr("src").indexOf("file") >= 0);
+                    ok(!dom.find(".k-image").attr("src").indexOf("folder") >= 0);
                 });
 
                 test("declarative binding", function() {

@@ -365,10 +365,21 @@
                         "#= renderItems(data) #" +
                     "</ul>"
                 ),
-                itemElement: template(
-                    "# var url = " + fieldAccessor("url") + "(item); #" +
+                itemContent: template(
                     "# var imageUrl = " + fieldAccessor("imageUrl") + "(item); #" +
                     "# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(item); #" +
+                    "# if (imageUrl) { #" +
+                        "<img class='k-image' alt='' src='#= imageUrl #'>" +
+                    "# } #" +
+
+                    "# if (spriteCssClass) { #" +
+                        "<span class='k-sprite #= spriteCssClass #'></span>" +
+                    "# } #" +
+
+                    "#= treeview.template(data) #"
+                ),
+                itemElement: template(
+                    "# var url = " + fieldAccessor("url") + "(item); #" +
                     "<div class='#= r.cssClass(group, item) #'>" +
                         "# if (item.hasChildren) { #" +
                             "<span class='#= r.toggleButtonClass(item) #' role='presentation'></span>" +
@@ -384,16 +395,7 @@
                         "# var textAttr = url ? ' href=\\'' + url + '\\'' : ''; #" +
 
                         "<#=tag#  class='#= r.textClass(item) #'#= textAttr #>" +
-
-                            "# if (imageUrl) { #" +
-                                "<img class='k-image' alt='' src='#= imageUrl #'>" +
-                            "# } #" +
-
-                            "# if (spriteCssClass) { #" +
-                                "<span class='k-sprite #= spriteCssClass #'></span>" +
-                            "# } #" +
-
-                            "#= treeview.template(data) #" +
+                            "#= r.itemContent(data) #" +
                         "</#=tag#>" +
                     "</div>"
                 ),
@@ -541,7 +543,7 @@
                             }).join(",") + "];";
 
                 // generates levels[level < 3 ? level : 2](item);
-                result += "return levels[level < " + count + " ? level : " + (count-1) + "](item)";
+                result += "return levels[Math.min(level, " + count + "-1)](item)";
             }
 
             result += "})";
@@ -999,7 +1001,8 @@
         },
 
         _updateNode: function(field, items) {
-            var that = this, i, node, item;
+            var that = this, i, node, item,
+                context = { treeview: that.options, item: item };
 
             if (field == "selected") {
                 item = items[0];
@@ -1017,11 +1020,11 @@
                 }
             } else {
                 for (i = 0; i < items.length; i++) {
-                    item = items[i];
+                    context.item = item = items[i];
 
-                    if ($.inArray(field, that.options.dataTextField) >= 0) {
-                        node = that.findByUid(item.uid);
-                        that.text(node, item[field]);
+                    if (field == "spriteCssClass" || field == "imageUrl" ||
+                        $.inArray(field, that.options.dataTextField) >= 0) {
+                        that.findByUid(item.uid).find(">div>.k-in").html(that.templates.itemContent(context));
                     } else if (field == CHECKED) {
                         node = that.findByUid(item.uid);
                         node.children("div").find(":checkbox")
@@ -1303,12 +1306,16 @@
         },
 
         text: function (node, text) {
-            node = $(node).closest(NODE).find(">div>.k-in");
+            var dataItem = this.dataItem(node),
+                fieldBindings = this.options[bindings.text],
+                level = dataItem.level(),
+                length = fieldBindings.length,
+                field = fieldBindings[Math.min(level, length-1)];
 
             if (text) {
-                node.text(text);
+                dataItem.set(field, text);
             } else {
-                return node.text();
+                return dataItem[field];
             }
         },
 
