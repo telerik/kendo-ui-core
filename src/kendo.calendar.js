@@ -696,7 +696,15 @@
                 return calendar.firstDayOfMonth(date);
             },
             last: function(date) {
-                return new DATE(date.getFullYear(), date.getMonth() + 1, 0);
+                var last = new DATE(date.getFullYear(), date.getMonth() + 1, 0),
+                    first = calendar.firstDayOfMonth(date),
+                    timeOffset = Math.abs(last.getTimezoneOffset() - first.getTimezoneOffset());
+
+                if (timeOffset) {
+                    last.setHours(first.getHours() + (timeOffset / 60));
+                }
+
+                return last;
             },
             compare: function(date1, date2) {
                 var result,
