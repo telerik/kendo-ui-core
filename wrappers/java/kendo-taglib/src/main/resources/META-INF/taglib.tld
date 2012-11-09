@@ -10,7 +10,6 @@
     <uri>http://www.kendoui.com/jsp/tags</uri>
 
     <!-- !!! Omit the <type> for attributes which are Kendo events !!! -->
-
     <!-- Auto-generated -->
 
 
@@ -151,7 +150,7 @@ the dataSource.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Calendar</description>
@@ -245,7 +244,7 @@ the dataSource.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Chart</description>
@@ -320,7 +319,7 @@ and is about to render it.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>ComboBox</description>
@@ -492,7 +491,7 @@ and is about to render it.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>DataSource</description>
@@ -633,7 +632,7 @@ and is about to render it.</description>
         </attribute>
 
     </tag>
-        
+
 
     <tag>
         <description>DatePicker</description>
@@ -741,7 +740,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>DateTimePicker</description>
@@ -863,7 +862,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>DropDownList</description>
@@ -1000,7 +999,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Editor</description>
@@ -1072,7 +1071,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Grid</description>
@@ -1260,7 +1259,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>LinearGauge</description>
@@ -1288,7 +1287,7 @@ The following settings are available for the</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>ListView</description>
@@ -1332,12 +1331,10 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
-            <description>The id of the template used for rendering the items in the listview.</description>
+            <description>Specifies ListView item template.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
         </attribute>
-
         <attribute>
             <description>Fires when the list view selection has changed.</description>
             <name>change</name>
@@ -1363,7 +1360,7 @@ and is about to render it.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Menu</description>
@@ -1443,7 +1440,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>NumericTextBox</description>
@@ -1551,7 +1548,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Pager</description>
@@ -1647,7 +1644,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>PanelBar</description>
@@ -1663,13 +1660,6 @@ its sub menus to the left.</description>
             <type>java.lang.String</type>
         </attribute>
 
-
-        <attribute>
-            <description>A collection of visual animations used when</description>
-            <name>animation</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
 
         <attribute>
             <description>Specifies how the</description>
@@ -1712,7 +1702,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>RadialGauge</description>
@@ -1754,7 +1744,7 @@ its sub menus to the left.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>RangeSlider</description>
@@ -1843,7 +1833,7 @@ The orientation of a</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Slider</description>
@@ -1945,7 +1935,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Splitter</description>
@@ -1998,7 +1988,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>StockChart</description>
@@ -2027,7 +2017,7 @@ It is used as a default</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>TabStrip</description>
@@ -2122,7 +2112,7 @@ tab.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>TimePicker</description>
@@ -2214,7 +2204,7 @@ tab.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>TreeView</description>
@@ -2345,7 +2335,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Upload</description>
@@ -2430,7 +2420,7 @@ Cancelling the event will prevent the upload.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Window</description>
@@ -2606,7 +2596,7 @@ has been clicked on a window with static content.</description>
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
-        
+
 
     <tag>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
@@ -8744,6 +8734,14 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
+        <description>Subscribes to the template event of ListView.</description>
+        <name>listView-template</name>
+        <tag-class>com.kendoui.taglib.listview.TemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>A collection of</description>
         <name>menu-animation</name>
         <tag-class>com.kendoui.taglib.menu.AnimationTag</tag-class>
@@ -9053,8 +9051,8 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>The visual animation(s) that will be used when</description>
-        <name>panelBar-animation-collapse</name>
-        <tag-class>com.kendoui.taglib.panelbar.AnimationCollapseTag</tag-class>
+        <name>panelBar-animation-close</name>
+        <tag-class>com.kendoui.taglib.panelbar.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -9076,8 +9074,8 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>The visual animation(s) that will be used when opening items.</description>
-        <name>panelBar-animation-expand</name>
-        <tag-class>com.kendoui.taglib.panelbar.AnimationExpandTag</tag-class>
+        <name>panelBar-animation-open</name>
+        <tag-class>com.kendoui.taglib.panelbar.AnimationOpenTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -9926,6 +9924,13 @@ is closed. By default not specified - uses the opening animation with reverse.</
         </attribute>
 
         <attribute>
+            <description>Specifies the url from which the item content will be loaded</description>
+            <name>contentUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies whether the item is initially selected</description>
             <name>selected</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10755,4 +10760,12 @@ containing one or more fields with the same name as the original input name.</de
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
+
+    <tag>
+        <description>Specifies the HTML content of the editor</description>
+        <name>editor-value</name>
+        <tag-class>com.kendoui.taglib.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
 </taglib>

@@ -551,8 +551,8 @@ class Tag
         @name == 'Item' && namespace =~ /panelbar|menu|treeview|tabstrip/
     end
 
-    def is_panelbar?
-        namespace =~ /panelbar/
+    def has_contentUrl?
+        namespace =~ /panelbar|tabstrip/
     end
 
     def has_items?
@@ -859,7 +859,7 @@ class Tag
                                         :parent => tag,
                                         :description => "Specifies whether the item is initially enabled")
 
-            if tag.is_panelbar?
+            if tag.has_contentUrl?
                 tag.options.push(Option.new :name => 'items.contentUrl',
                                         :type => 'String',
                                         :parent => tag,

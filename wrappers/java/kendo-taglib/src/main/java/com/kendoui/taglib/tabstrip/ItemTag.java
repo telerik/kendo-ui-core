@@ -117,6 +117,14 @@ public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interf
         setProperty("enabled", value);
     }
 
+    public String getContentUrl() {
+        return (String)getProperty("contentUrl");
+    }
+
+    public void setContentUrl(String value) {
+        setProperty("contentUrl", value);
+    }
+
     public boolean getSelected() {
         return (boolean)getProperty("selected");
     }
