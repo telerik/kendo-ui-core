@@ -2192,7 +2192,7 @@ function pad(number, digits, end) {
         init: function(element, options) {
             var that = this;
 
-            that.element = $(element);
+            that.element = kendo.jQuery(element);
 
             Observable.fn.init.call(that);
 
@@ -2489,12 +2489,11 @@ function pad(number, digits, end) {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
             this.wrapper = this.element;
-            this.eventProxy = new kendo.EventProxy(this.element, this);
         },
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-            this.eventProxy.off();
+            this.element.kendoDestroy();
         },
 
         options: {
@@ -2601,59 +2600,43 @@ function pad(number, digits, end) {
 
     var MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseout", "mouseup"];
 
-    kendo.setupMouseMute = function() {
-        var idx = 0,
-            length = MOUSE_EVENTS.length,
-            element = document.documentElement;
+    $.extend(kendo, {
+        setupMouseMute: function() {
+            var idx = 0,
+                length = MOUSE_EVENTS.length,
+                element = document.documentElement;
 
-        if (kendo.mouseTrap || !support.eventCapture) {
-            return;
-        }
-
-        kendo.mouseTrap = true;
-        kendo.captureMouseEvents = false;
-
-        var handler = function(e) {
-            if (kendo.captureMouse) {
-                e.stopPropagation();
+            if (kendo.mouseTrap || !support.eventCapture) {
+                return;
             }
-        };
 
-        for (; idx < length; idx++) {
-            element.addEventListener(MOUSE_EVENTS[idx], handler, true);
+            kendo.mouseTrap = true;
+            kendo.captureMouseEvents = false;
+
+            var handler = function(e) {
+                if (kendo.captureMouse) {
+                    e.stopPropagation();
+                }
+            };
+
+            for (; idx < length; idx++) {
+                element.addEventListener(MOUSE_EVENTS[idx], handler, true);
+            }
+        },
+
+        muteMouse: function() {
+            kendo.captureMouse = true;
+            clearTimeout(kendo.mouseTrapTimeoutID);
+        },
+
+        unMuteMouse: function() {
+            kendo.mouseTrapTimeoutID = setTimeout(function() {
+                kendo.captureMouse = false;
+            }, 400);
         }
-    };
+    });
 
-    kendo.muteMouse = function() {
-        kendo.captureMouse = true;
-        clearTimeout(kendo.mouseTrapTimeoutID);
-    };
-
-    kendo.unMuteMouse = function() {
-        kendo.mouseTrapTimeoutID = setTimeout(function() {
-            kendo.captureMouse = false;
-        }, 400);
-    };
-
-    function EventProxy(element, handler) {
-        var that = this;
-        that.element = $(element);
-        that.handler = handler;
-        that.handlers = [];
-
-        kendo.setupMouseMute();
-
-        if (support.touch) {
-            that._touchStartProxy = $.proxy(that, "_touchStart");
-            that._touchEndProxy = $.proxy(that, "_touchEnd");
-
-            that.element
-                .on("touchstart", that._touchStartProxy)
-                .on("touchend", that._touchEndProxy);
-        }
-    }
-
-    EventProxy.eventMap = {
+    var eventMap = {
         down: "touchstart mousedown",
         move: "mousemove touchmove",
         up: "mouseup touchend",
@@ -2661,7 +2644,7 @@ function pad(number, digits, end) {
     };
 
     if (support.pointers) {
-        EventProxy.eventMap = {
+        eventMap = {
             down: "MSPointerDown",
             move: "MSPointerMove",
             up: "MSPointerUp",
@@ -2669,64 +2652,80 @@ function pad(number, digits, end) {
         };
     }
 
-    EventProxy.mapEvent = function(e) {
-        return EventProxy.eventMap[e] || e;
+    function applyEventMap(e) {
+        return (eventMap[e] || e);
+    }
+
+    var on = $.fn.on;
+
+    var rootKendoJQuery,
+        kendoJQuery = function(selector, context) {
+            return new kendoJQuery.fn.init(selector, context, rootKendoJQuery);
     };
 
-    var off = $.fn.off,
-        on = $.fn.on;
+    $.extend(kendoJQuery, $);
 
-    EventProxy.prototype = {
+    kendoJQuery.fn = kendoJQuery.prototype = $.extend(true, {}, $.fn, {
+        init: function(selector, context, rootKendoJQuery) {
+            $.fn.init.call(this, selector, context, rootKendoJQuery);
+            if (!this.data("kendoNS")) {
+                this.data("kendoNS", "." + kendo.guid());
+            }
+        },
+
+        handler: function(handler) {
+            this.data("handler", handler);
+            return this;
+        },
+
         on: function() {
-            var that = this,
-                handler = that.handler,
-                args = slice.call(arguments),
-                callback =  args[args.length - 1],
-                callbackIsFunction = $.isFunction(callback),
-                events = args[0].replace(/\w+/g, EventProxy.mapEvent);
-
-            if (!callbackIsFunction) {
-                callback = handler[callback];
+            // support for event map signature
+            if (arguments.length === 1) {
+                return on.call(this, arguments[0]);
             }
 
+            var that = this,
+                context = that,
+                args = slice.call(arguments),
+                ns = that.data("kendoNS"),
+                callback =  args[args.length - 1],
+                callbackIsFunction = $.isFunction(callback),
+                events = args[0].replace(/(\w+)/g, applyEventMap).replace(/( |$)/g, ns + " ");
+
+            // setup mouse trap
+            if (support.touch && events.indexOf("mouse") > -1) {
+                kendo.setupMouseMute();
+
+                on.call(this, {
+                    touchstart: kendo.muteMouse,
+                    touchend: kendo.unMuteMouse
+                });
+            }
+
+            if (!callbackIsFunction) {
+                context = that.data("handler");
+                callback = context[callback];
+            }
+
+
             args[args.length - 1] = function(e) {
-                callback.call(handler, e);
+                callback.call(context, e);
             };
 
             args[0] = events;
 
-            that.handlers.push(args);
-            on.apply(that.element, args);
+            on.apply(that, args);
 
             return that;
         },
 
-        off: function() {
-            var that = this,
-                handlers = this.handlers,
-                element = that.element,
-                length = handlers.length,
-                idx = 0;
-
-            for(; idx < length; idx ++) {
-                off.apply(element, handlers[idx]);
-            }
-
-            if (support.touch) {
-                that.element
-                    .off("touchstart", that._touchStartProxy)
-                    .off("touchend", that._touchEndProxy);
-            }
-        },
-
-        _touchStart: function() {
-            kendo.muteMouse();
-        },
-
-        _touchEnd: function() {
-            kendo.unMuteMouse();
+        kendoDestroy: function() {
+            this.off(this.data("kendoNS"));
         }
-    };
+    });
 
-    kendo.EventProxy = EventProxy;
+    kendoJQuery.fn.init.prototype = kendoJQuery.fn;
+
+    kendo.jQuery = kendoJQuery;
+    kendo.eventMap = eventMap;
 })(jQuery);
