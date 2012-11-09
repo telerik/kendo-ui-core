@@ -3,6 +3,7 @@ package com.kendoui.taglib.tabstrip;
 
 import com.kendoui.taglib.tabstrip.ItemTag;
 import com.kendoui.taglib.ContentTag;
+import com.kendoui.taglib.TabStripTag;
 import com.kendoui.taglib.html.Img;
 import com.kendoui.taglib.html.Li;
 import com.kendoui.taglib.html.Span;
@@ -21,19 +22,14 @@ import javax.servlet.jsp.JspWriter;
 public class ItemsTag extends ContentTag /* interfaces *//* interfaces */ {
     
     @Override
-    public int doEndTag() throws JspException {
-//>> doEndTag
-
-
-        Items parent = (Items)findParentWithClass(Items.class);
-
+    public int doEndTag() throws JspException {       
+        TabStripTag parent = (TabStripTag)findParentWithClass(TabStripTag.class);
 
         parent.setItems(this);
-
-//<< doEndTag
         
         Ul ul = new Ul();
-        StringBuilder contents = new StringBuilder(); 
+        StringBuilder contents = new StringBuilder();
+        List<String> contentUrls = new ArrayList<String>();
         
         for (Map<String, Object> item : items) {
             Li li = new Li();
@@ -42,10 +38,13 @@ public class ItemsTag extends ContentTag /* interfaces *//* interfaces */ {
             renderContents(li, item);
                         
             contents.append(item.get("content"));
+            contentUrls.add((String) item.get("contentUrl"));
             
             ul.append(li);
         }
-                       
+
+        parent.setProperty("contentUrls", contentUrls);
+        
         try {
             JspWriter out = pageContext.getOut();
             
