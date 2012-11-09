@@ -1,10 +1,17 @@
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
-<demo:header />
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:url value="/web/listview/products/" var="transportReadUrl" />
+
+<demo:header />
 <kendo:listView name="listView" template="template">
-	<kendo:dataSource pageSize="12" data="${products}">		
+	<kendo:dataSource pageSize="12" serverPaging="true">
+		<kendo:dataSource-transport>
+			<kendo:dataSource-transport-read url="${transportReadUrl}" contentType="application/json" type="POST"/>
+		</kendo:dataSource-transport>
+		<kendo:dataSource-schema data="data" total="total"></kendo:dataSource-schema>
 	</kendo:dataSource>		
 </kendo:listView>
 
