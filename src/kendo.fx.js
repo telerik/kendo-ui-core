@@ -730,6 +730,7 @@
             var that = this;
             that.element = element;
             that._direction = direction;
+            that.options = {};
             that._additionalEffects = [];
 
             if (!that.restore) {
