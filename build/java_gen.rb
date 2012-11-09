@@ -1109,8 +1109,10 @@ def generate
              "\n\n<!-- Auto-generated -->"
         )
 
+    new_line = RUBY_PLATFORM =~ /w32/ ? "\n" : "\r\n"
+
     File.open(TLD, 'w') do |file|
-        file.write(tld)
+        file.write(tld.gsub(/\r?\n/, new_line))
     end
 
     tags.each { |tag| tag.sync_java }
