@@ -461,7 +461,12 @@
             var chart = this,
                 origEvent = e.originalEvent,
                 delta = 0,
+                totalDelta,
+                state = chart._navState,
                 axes,
+                i,
+                currentAxis,
+                axisName,
                 ranges = {};
 
             if (origEvent.wheelDelta) {
@@ -472,19 +477,22 @@
               delta = origEvent.detail / 3;
             }
 
-            if (!chart._navState) {
+            if (!state) {
                 chart._startNavigation(origEvent, ZOOM_START);
+                state = chart._navState;
             }
 
-            if (chart._navState) {
+            if (state) {
+                totalDelta = state.totalDelta || delta;
+                state.totalDelta = totalDelta + delta;
+
                 axes = chart._navState.axes;
 
-                for (var i = 0; i < axes.length; i++) {
-                    var currentAxis = axes[i];
-                    var axisName = currentAxis.options.name;
+                for (i = 0; i < axes.length; i++) {
+                    currentAxis = axes[i];
+                    axisName = currentAxis.options.name;
                     if (axisName) {
-                        ranges[currentAxis.options.name] =
-                            currentAxis.scaleRange(delta);
+                        ranges[axisName] = currentAxis.scaleRange(totalDelta);
                     }
                 }
 
@@ -495,9 +503,8 @@
                 }
 
                 chart._mwTimeout = setTimeout(function() {
-                        chart._endNavigation(e, ZOOM_END);
-                    }, MOUSEWHEEL_DELAY
-                );
+                    chart._endNavigation(e, ZOOM_END);
+                }, MOUSEWHEEL_DELAY);
             }
         },
 
@@ -1404,18 +1411,22 @@
                 options = axis.options,
                 baseUnit = options.baseUnit,
                 weekStartDay = options.weekStartDay,
-                range = duration(options.min, options.max, baseUnit),
-                half = math.round(range / 2),
-                quart = math.round(range / 4),
-                from,
-                to;
+                range,
+                step,
+                rounds = math.abs(delta),
+                from = options.min,
+                to = options.max;
 
-            if (delta < 0) {
-                from = addDuration(options.min, quart, baseUnit, weekStartDay);
-                to = addDuration(options.max, -quart, baseUnit, weekStartDay);
-            } else {
-                from = addDuration(options.min, -quart, baseUnit, weekStartDay);
-                to = addDuration(options.max, quart, baseUnit, weekStartDay);
+            while (rounds--) {
+                range = dateDiff(from, to);
+                step = math.round(range * 0.1);
+                if (delta < 0) {
+                    from = addTicks(from, step);
+                    to = addTicks(to, -step);
+                } else {
+                    from = addTicks(from, -step);
+                    to = addTicks(to, step);
+                }
             }
 
             return {

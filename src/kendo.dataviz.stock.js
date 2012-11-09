@@ -26,6 +26,7 @@
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
         MOUSEWHEEL_DELAY = 150,
         HINT_DELAY = 1000,
+        ZOOM_ACCELERATION = 3,
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd";
 
@@ -276,19 +277,24 @@
         _zoom: function(e) {
             var navi = this,
                 chart = navi.chart,
+                delta = e.delta,
                 navigatorAxis = navi.mainAxis(),
                 axis = chart._plotArea.categoryAxis,
                 range = e.axisRanges[axis.options.name],
+                select = navi.options.select,
                 selection = chart._selection,
                 selectionLength = selection.options.to - selection.options.from;
 
-            e.preventDefault();
+            if (math.abs(delta) > 1) {
+                delta *= ZOOM_ACCELERATION;
+            }
 
             if (selectionLength > 1) {
-                selection.expandLeft(e.delta);
+                selection.expandLeft(delta);
                 navi.readSelection();
             } else {
-                navi.options.select.from = range.min;
+                axis.options.min = select.from;
+                select.from = axis.scaleRange(-e.delta).min;
             }
 
             if (!kendo.support.touch) {
