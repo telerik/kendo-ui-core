@@ -18,9 +18,15 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     
     @Override
     public int doEndTag() throws JspException {
+        String template;
 //>> doEndTag
 //<< doEndTag
 
+        if (isSet("template")) {
+            template = "kendo.template($(\"#" + getTemplate() + "\").html())";
+            setProperty("template", new Function(template));
+        }
+        
         return super.doEndTag();
     }
 
@@ -66,10 +72,6 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("editTemplate", value.getBody());
     }
 
-    public void setTemplate(TemplateFunctionTag value) {
-        setEvent("template", value.getBody());
-    }
-
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }
@@ -112,15 +114,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     }
 
     public String getTemplate() {
-        Function property = ((Function)getProperty("template"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
+        return (String)getProperty("template");
     }
 
     public void setTemplate(String value) {
-        setProperty("template", new Function(value));
+        setProperty("template", value);
     }
 
     public String getChange() {

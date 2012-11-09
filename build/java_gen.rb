@@ -8,7 +8,8 @@ MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md').include('
 IGNORED = {
     'chart' => ['axisDefaults'],
     'window' => ['content.template'],
-    'grid' => ['detailTemplate', 'rowTemplate', 'altRowTemplate']
+    'grid' => ['detailTemplate', 'rowTemplate', 'altRowTemplate'],
+    'listview' => ['template']
 }
 
 MD_METADATA_TEMPLATE = ERB.new(%{---
@@ -819,6 +820,12 @@ class Tag
             tag.options.push(Option.new :name => 'altRowTemplate',
                                         :type => 'String',
                                         :description => "The id of the template used for rendering the alternate rows in the grid.")
+        end
+
+        if tag.name.downcase == "listview"
+            tag.options.push(Option.new :name => 'template',
+                                        :type => 'String',
+                                        :description => "The id of the template used for rendering the items in the listview.")
         end
 
         if tag.has_items?
