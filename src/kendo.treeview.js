@@ -30,7 +30,7 @@
         NODE = ".k-item",
         ARIASELECTED = "aria-selected",
         ARIADISABLED = "aria-disabled",
-        rendering, TreeView,
+        TreeView,
         subGroup, nodeContents, nodeIcon,
         bindings = {
             text: "dataTextField",
@@ -265,17 +265,98 @@
 
         _templates: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                fieldAccessor = proxy(that._fieldAccessor, that);
 
             if (options.template && typeof options.template == "string") {
                 options.template = template(options.template);
             } else if (!options.template) {
-                options.template = that._textTemplate();
+                options.template = template(
+                    "# var text = " + fieldAccessor("text") + "(item); #" +
+                    "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
+                        "#= text #" +
+                    "# } else { #" +
+                        "#: text #" +
+                    "# } #"
+                );
             }
 
             that._checkboxes();
 
             that.templates = {
+                wrapperCssClass: function (group, item) {
+                    var result = "k-item",
+                        index = item.index;
+
+                    if (group.firstLevel && index === 0) {
+                        result += " k-first";
+                    }
+
+                    if (index == group.length-1) {
+                        result += " k-last";
+                    }
+
+                    return result;
+                },
+                cssClass: function(group, item) {
+                    var result = "",
+                        index = item.index,
+                        groupLength = group.length - 1;
+
+                    if (group.firstLevel && index === 0) {
+                        result += "k-top ";
+                    }
+
+                    if (index === 0 && index != groupLength) {
+                        result += "k-top";
+                    } else if (index == groupLength) {
+                        result += "k-bot";
+                    } else {
+                        result += "k-mid";
+                    }
+
+                    return result;
+                },
+                textClass: function(item) {
+                    var result = "k-in";
+
+                    if (item.enabled === false) {
+                        result += " k-state-disabled";
+                    }
+
+                    if (item.selected === true) {
+                        result += " k-state-selected";
+                    }
+
+                    return result;
+                },
+                toggleButtonClass: function(item) {
+                    var result = "k-icon";
+
+                    if (item.expanded !== true) {
+                        result += " k-plus";
+                    } else {
+                        result += " k-minus";
+                    }
+
+                    if (item.enabled === false) {
+                        result += "-disabled";
+                    }
+
+                    return result;
+                },
+                groupAttributes: function(group) {
+                    return group.expanded !== true ? " style='display:none'" : "";
+                },
+                groupCssClass: function(group) {
+                    var cssClass = "k-group";
+
+                    if (group.firstLevel) {
+                        cssClass += " k-treeview-lines";
+                    }
+
+                    return cssClass;
+                },
                 dragClue: template(
                     "<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"
                 ),
@@ -284,8 +365,50 @@
                         "#= renderItems(data) #" +
                     "</ul>"
                 ),
-                item: that._itemTemplate(),
-                loading: that._loadingTemplate()
+                itemElement: template(
+                    "# var url = " + fieldAccessor("url") + "(item); #" +
+                    "# var imageUrl = " + fieldAccessor("imageUrl") + "(item); #" +
+                    "# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(item); #" +
+                    "<div class='#= r.cssClass(group, item) #'>" +
+                        "# if (item.hasChildren) { #" +
+                            "<span class='#= r.toggleButtonClass(item) #' role='presentation'></span>" +
+                        "# } #" +
+
+                        "# if (treeview.checkboxes) { #" +
+                            "<span class='k-checkbox' role='presentation'>" +
+                                "#= treeview.checkboxes.template(data) #" +
+                            "</span>" +
+                        "# } #" +
+
+                        "# var tag = url ? 'a' : 'span'; #" +
+                        "# var textAttr = url ? ' href=\\'' + url + '\\'' : ''; #" +
+
+                        "<#=tag#  class='#= r.textClass(item) #'#= textAttr #>" +
+
+                            "# if (imageUrl) { #" +
+                                "<img class='k-image' alt='' src='#= imageUrl #'>" +
+                            "# } #" +
+
+                            "# if (spriteCssClass) { #" +
+                                "<span class='k-sprite #= spriteCssClass #'></span>" +
+                            "# } #" +
+
+                            "#= treeview.template(data) #" +
+                        "</#=tag#>" +
+                    "</div>"
+                ),
+                item: template(
+                    "<li role='treeitem' class='#= r.wrapperCssClass(group, item) #'" +
+                        " " + kendo.attr("uid") + "='#= item.uid #'" +
+                        "#=item.selected ? \"aria-selected='true'\" : ''#" +
+                        "#=item.enabled === false ? \"aria-disabled='true'\" : ''#" +
+                    ">" +
+                        "#= r.itemElement(data) #" +
+                    "</li>"
+                ),
+                loading: template(
+                    "<div class='k-icon k-loading' /> Loading..."
+                )
             };
         },
 
@@ -424,66 +547,6 @@
             result += "})";
 
             return result;
-        },
-
-        _textTemplate: function() {
-            var that = this,
-                templateText =
-                    "# var text = " + that._fieldAccessor("text") + "(item); #" +
-                    "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
-                        "#= text #" +
-                    "# } else { #" +
-                        "#: text #" +
-                    "# } #";
-
-            return template(templateText);
-        },
-
-        _loadingTemplate: function() {
-            return template("<div class='k-icon k-loading' /> Loading...");
-        },
-
-        _itemTemplate: function() {
-            var that = this,
-                templateText =
-                    "# var url = " + that._fieldAccessor("url") + "(item); #" +
-                    "# var imageUrl = " + that._fieldAccessor("imageUrl") + "(item); #" +
-                    "# var spriteCssClass = " + that._fieldAccessor("spriteCssClass") + "(item); #" +
-                    "<li role='treeitem' class='#= r.wrapperCssClass(group, item) #'" +
-                        " " + kendo.attr("uid") + "='#= item.uid #'" +
-                        "#=item.selected ? \"aria-selected='true'\" : ''#" +
-                        "#=item.enabled === false ? \"aria-disabled='true'\" : ''#" +
-                    ">" +
-                        "<div class='#= r.cssClass(group, item) #'>" +
-                            "# if (item.hasChildren) { #" +
-                                "<span class='#= r.toggleButtonClass(item) #' role='presentation'></span>" +
-                            "# } #" +
-
-                            "# if (treeview.checkboxes) { #" +
-                                "<span class='k-checkbox' role='presentation'>" +
-                                    "#= treeview.checkboxes.template(data) #" +
-                                "</span>" +
-                            "# } #" +
-
-                            "# var tag = url ? 'a' : 'span'; #" +
-                            "# var textAttr = url ? ' href=\\'' + url + '\\'' : ''; #" +
-
-                            "<#=tag#  class='#= r.textClass(item) #'#= textAttr # >" +
-
-                                "# if (imageUrl) { #" +
-                                    "<img class='k-image' alt='' src='#= imageUrl #'>" +
-                                "# } #" +
-
-                                "# if (spriteCssClass) { #" +
-                                    "<span class='k-sprite #= spriteCssClass #'></span>" +
-                                "# } #" +
-
-                                "#= treeview.template(data) #" +
-                            "</#=tag#>" +
-                        "</div>" +
-                    "</li>";
-
-            return template(templateText);
         },
 
         setOptions: function(options) {
@@ -760,7 +823,7 @@
                 groupElement = item.children("ul");
 
             groupElement
-                .addClass(rendering.groupCssClass(group))
+                .addClass(that.templates.groupCssClass(group))
                 .css("display", group.expanded ? "" : "none");
 
             that._nodes(groupElement, group);
@@ -820,7 +883,8 @@
 
         _updateNodeClasses: function (node, groupData, nodeData) {
             var wrapper = node.children("div"),
-                group = node.children("ul");
+                group = node.children("ul"),
+                templates = this.templates;
 
             if (node.hasClass("k-treeview")) {
                 return;
@@ -837,20 +901,20 @@
 
             // li
             node.removeClass("k-first k-last")
-                .addClass(rendering.wrapperCssClass(groupData, nodeData));
+                .addClass(templates.wrapperCssClass(groupData, nodeData));
 
             // div
             wrapper.removeClass("k-top k-mid k-bot")
-                   .addClass(rendering.cssClass(groupData, nodeData));
+                   .addClass(templates.cssClass(groupData, nodeData));
 
             // span
             wrapper.children(".k-in").removeClass("k-in k-state-default k-state-disabled")
-                .addClass(rendering.textClass(nodeData));
+                .addClass(templates.textClass(nodeData));
 
             // toggle button
             if (group.length || node.attr("data-hasChildren") == "true") {
                 wrapper.children(".k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
-                    .addClass(rendering.toggleButtonClass(nodeData));
+                    .addClass(templates.toggleButtonClass(nodeData));
 
                 group.addClass("k-group");
             }
@@ -1403,7 +1467,7 @@
 
             options.treeview = this.options;
 
-            options.r = rendering;
+            options.r = this.templates;
 
             return this.templates.item(options);
         },
@@ -1430,7 +1494,7 @@
                     return html;
                 };
 
-            options.r = rendering;
+            options.r = that.templates;
 
             return that.templates.group(options);
         }
@@ -1572,7 +1636,6 @@
 
         dragcancel: function(e) {
             this.dropHint.remove();
-            //treeview.trigger("nodeDragCancelled", { item: sourceNode[0] });
         },
 
         dragend: function (e) {
@@ -1630,84 +1693,6 @@
 
         destroy: function() {
             this._draggable.destroy();
-        }
-    };
-
-    // client-side rendering
-
-    rendering = {
-        wrapperCssClass: function (group, item) {
-            var result = "k-item",
-                index = item.index;
-
-            if (group.firstLevel && index === 0) {
-                result += " k-first";
-            }
-
-            if (index == group.length-1) {
-                result += " k-last";
-            }
-
-            return result;
-        },
-        cssClass: function(group, item) {
-            var result = "",
-                index = item.index,
-                groupLength = group.length - 1;
-
-            if (group.firstLevel && index === 0) {
-                result += "k-top ";
-            }
-
-            if (index === 0 && index != groupLength) {
-                result += "k-top";
-            } else if (index == groupLength) {
-                result += "k-bot";
-            } else {
-                result += "k-mid";
-            }
-
-            return result;
-        },
-        textClass: function(item) {
-            var result = "k-in";
-
-            if (item.enabled === false) {
-                result += " k-state-disabled";
-            }
-
-            if (item.selected === true) {
-                result += " k-state-selected";
-            }
-
-            return result;
-        },
-        toggleButtonClass: function(item) {
-            var result = "k-icon";
-
-            if (item.expanded !== true) {
-                result += " k-plus";
-            } else {
-                result += " k-minus";
-            }
-
-            if (item.enabled === false) {
-                result += "-disabled";
-            }
-
-            return result;
-        },
-        groupAttributes: function(group) {
-            return group.expanded !== true ? " style='display:none'" : "";
-        },
-        groupCssClass: function(group) {
-            var cssClass = "k-group";
-
-            if (group.firstLevel) {
-                cssClass += " k-treeview-lines";
-            }
-
-            return cssClass;
         }
     };
 
