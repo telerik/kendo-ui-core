@@ -1807,7 +1807,7 @@ function pad(number, digits, end) {
         return effects;
     }
 
-    var fx = function(element) {
+    function fx(element) {
         return new kendo.fx.Element(element);
     }
 
@@ -1849,7 +1849,7 @@ function pad(number, digits, end) {
 
             return element;
         }
-    };
+    });
 
     function prepareAnimationOptions(options, duration, reverse, complete) {
         if (typeof options === STRING) {

@@ -115,18 +115,17 @@
                 });
             });
 
-            test("reverse method of the effect is called if reverse = true", function() {
+            test("reverse method of the effect is called if reverse = true", 1, function() {
                 var reverseWasCalled = false;
 
                 kendo.fx.createEffect("foo", {
                    prepare: function() {
-                        reverseWasCalled = this.options.reverse;
+                        equal(this._reverse, true);
                         return { start: {}, end: {} };
                     }
                 });
 
                 animate(span, "foo", true);
-                ok(reverseWasCalled);
             });
 
             asyncTest("passing options to animate works", 2, function() {
@@ -134,7 +133,7 @@
 
                 kendo.fx.createEffect("foo", {
                    prepare: function() {
-                        ok(this.options.reverse);
+                       equal(this._reverse, true);
                         return { start: {}, end: {} };
                     }
                 });
@@ -154,7 +153,7 @@
 
                 kendo.fx.createEffect("foo", {
                    prepare: function() {
-                        ok(this.options.reverse);
+                        equal(this._reverse, true);
                         return { start: {}, end: {} };
                     }
                 });
