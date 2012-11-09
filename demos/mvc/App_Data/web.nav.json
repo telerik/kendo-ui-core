@@ -1050,6 +1050,39 @@
         },
         {
             "packages": ["!mvc"],
+            "text": "Effects",
+            "name": "fx",
+            "documentation": "framework/kendo",
+            "spriteCssClass": "mvvmIcon",
+            "items": [
+                {
+                    "text": "Expand",
+                    "url": "fx/expand.html"
+                },
+                {
+                    "text": "Fade",
+                    "url": "fx/fade.html"
+                },
+                {
+                    "text": "Slide In",
+                    "url": "fx/slidein.html"
+                },
+                {
+                    "text": "Transfer",
+                    "url": "fx/transfer.html"
+                },
+                {
+                    "text": "Tile",
+                    "url": "fx/tile.html"
+                },
+                {
+                    "text": "Combined Effects",
+                    "url": "fx/combined.html"
+                }
+            ]
+        },
+        {
+            "packages": ["!mvc"],
             "text": "Drag & Drop",
             "name": "dragdrop",
             "documentation": "framework/draggable",

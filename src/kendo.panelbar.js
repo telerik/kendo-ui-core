@@ -207,7 +207,7 @@
             that._updateClasses();
 
             if (options.animation === false) {
-                options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
+                options.animation = { expand: { effects: {} }, collapse: { hide:true, effects: {} } };
             }
 
             element
@@ -257,8 +257,7 @@
             animation: {
                 expand: {
                     effects: "expand:vertical",
-                    duration: 200,
-                    show: true
+                    duration: 200
                 },
                 collapse: { // if collapse animation effects are defined, they will be used instead of expand.reverse
                     duration: 200
@@ -295,7 +294,7 @@
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
-                        that.options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
+                        that.options.animation = { expand: { effects: {} }, collapse: { hide: true, effects: {} } };
                     }
 
                     if (!that._triggerEvent(EXPAND, item)) {
@@ -326,7 +325,7 @@
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
-                        that.options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
+                        that.options.animation = { expand: { effects: {} }, collapse: { hide: true, effects: {} } };
                     }
 
                     if (!that._triggerEvent(COLLAPSE, item)) {
@@ -871,7 +870,7 @@
 
             if (visibility) {
                 animation = extend( hasCollapseAnimation ? collapse
-                                    : extend({ reverse: true }, animation), { show: false, hide: true });
+                                    : extend({ reverse: true }, animation), { hide: true });
             } else {
                 animation = extend( { complete: function (element) {
                     that._triggerEvent(ACTIVATE, element.closest(ITEM));

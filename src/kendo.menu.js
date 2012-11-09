@@ -248,7 +248,7 @@
             that._updateClasses();
 
             if (options.animation === false) {
-                options.animation = { open: { show: true, effects: {} }, close: { hide: true, effects: {} } };
+                options.animation = { open: { effects: {} }, close: { hide: true, effects: {} } };
             }
 
             that.nextItemZIndex = 100;
@@ -300,8 +300,7 @@
             name: "Menu",
             animation: {
                 open: {
-                    duration: 200,
-                    show: true
+                    duration: 200
                 },
                 close: { // if close animation effects are defined, they will be used instead of open.reverse
                     duration: 100

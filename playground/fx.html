@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kendo FX</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <style>
+            .anime, #container div, #flip-container div {
+                width: 150px;
+                height: 150px;
+                background: #e4e4e4;
+                border: 1px solid #999;
+            }
+
+            h2 {
+                color: red;
+            }
+
+            aside {
+                float: right;
+            }
+
+            #container, #flip-container {
+                width: 152px;
+                height: 152px;
+                position: relative;
+            }
+            #container div, #flip-container div {
+                position: absolute;
+            }
+
+            .tile-container {
+                position: relative;
+                height: 152px;
+                width: 152px;
+            }
+
+            #tileA, #tileB {
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <aside>
+                <button id="slideInPlay">Play</button>
+                <button id="slideInReverse">Reverse</button>
+            </aside>
+
+            <div class="anime">Slide In</div>
+
+            <hr />
+        </div>
+
+        <div>
+            <aside>
+                <button id="tilePlay">Play</button>
+                <button id="tileReverse">Reverse</button>
+            </aside>
+
+            <div class="tile-container">
+                <div id="tileA" class="anime">Tile A</div>
+                <div id="tileB" class="anime">Tile B</div>
+            </div>
+
+            <hr />
+        </div>
+
+        <div>
+            <aside>
+                <button id="fadePlay">Play</button>
+                <button id="fadeReverse">Reverse</button>
+            </aside>
+
+            <div class="anime">Fade</div>
+
+            <hr />
+        </div>
+
+        <div>
+            <aside>
+                <button id="zoomPlay">Play</button>
+                <button id="zoomReverse">Reverse</button>
+            </aside>
+
+            <div class="anime">Zoom</div>
+
+            <hr />
+        </div>
+
+        <div>
+            <h2>Internal</h2>
+            <aside>
+                <button id="slideMarginPlay">Play</button>
+                <button id="slideMarginReverse">Reverse</button>
+            </aside>
+
+            <div class="anime">SlideMargin</div>
+
+            <hr />
+        </div>
+
+        <div>
+            <h2>Internal</h2>
+            <aside>
+                <button id="slideToPlay">Play</button>
+                <button id="slideToReverse">Reverse</button>
+            </aside>
+
+            <div class="anime">SlideTo</div>
+
+            <hr />
+        </div>
+
+        <div>
+            <aside>
+                <button id="expandPlay">Play</button>
+                <button id="expandReverse">Reverse</button>
+            </aside>
+
+            <div class="anime">Expand</div>
+
+            <hr />
+        </div>
+
+        <div>
+            <aside>
+                <button id="transferPlay">Play</button>
+                <button id="transferReverse">Reverse</button>
+            </aside>
+
+            <div style="margin-left: 200px; float: left; height: 70px; width: 70px; border: 1px solid blue; margin-top: 20px;" id="target" >target</div>
+
+            <div class="anime" id="transferAnime">Transfer</div>
+
+            <hr />
+        </div>
+
+        <div>
+            <aside>
+                <button id="pageTurnPlay">Play</button>
+                <button id="pageTurnReverse">Reverse</button>
+            </aside>
+
+            <div id="container">
+                <div id="page1">Page 1</div>
+                <div id="page2">Page 2</div>
+            </div>
+
+            <hr />
+        </div>
+
+        <div>
+            <aside>
+                <button id="flipPlay">Play</button>
+                <button id="flipReverse">Reverse</button>
+            </aside>
+
+            <div id="flip-container">
+                <div id="flip-page2">Page 2</div>
+                <div id="flip-page1">Page 1</div>
+            </div>
+
+            <hr />
+        </div>
+
+        <script>
+            $("#slideInPlay").click(function() {
+                console.profile();
+                $(this).parent().siblings(".anime").kendoAnimate("slideIn:left");
+                console.profileEnd();
+            });
+            $("#slideInReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({ effects: "slideIn:left", reverse: true }); });
+
+            $("#tilePlay").click(function() { $("#tileB").kendoAnimate({ effects: "tile:left", previous: $("#tileA") }); });
+            $("#tileReverse").click(function() { $("#tileB").kendoAnimate({ effects: "tile:left", previous: $("#tileA"), reverse: true }); });
+
+            $("#fadePlay").click(function() { $(this).parent().siblings(".anime").kendoAnimate("fade:out"); });
+            $("#fadeReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({ effects: "fade:out", reverse: true }); });
+
+            $("#zoomPlay").click(function() { $(this).parent().siblings(".anime").kendoAnimate("zoom:out"); });
+            $("#zoomReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({ effects: "zoom:out", reverse: true }); });
+
+            $("#slideMarginPlay").click(function() { $(this).parent().siblings(".anime").kendoAnimate({effects: "slideMargin", offset: 100, axis: "left" } ); });
+            $("#slideMarginReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({effects: "slideMargin", offset: 100, axis: "left", reverse: true }); });
+
+            $("#slideToPlay").click(function() { $(this).parent().siblings(".anime").kendoAnimate({effects: "slideTo", offset: "100px,0" } ); });
+            $("#slideToReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({effects: "slideTo", offset: "100px,0", reverse: true }); });
+
+            $("#expandPlay").click(function() { $(this).parent().siblings(".anime").kendoAnimate({effects: "expand:vertical" } ); });
+            $("#expandReverse").click(function() { $(this).parent().siblings(".anime").kendoAnimate({effects: "expand:vertical", reverse: true }); });
+
+            $("#transferPlay").click(function() { $("#transferAnime").kendoAnimate({effects: "transfer", target: $("#target") } ); });
+            $("#transferReverse").click(function() { $("#transferAnime").kendoAnimate({effects: "transfer", target: $("#target"), reverse: true }); });
+
+            $("#pageTurnPlay").click(function() { $("#container").kendoAnimate({effects: "pageturn:horizontal", face: $("#page1"), back: $("#page2") } ); });
+            $("#pageTurnReverse").click(function() { $("#container").kendoAnimate({effects: "pageturn:horizontal", face: $("#page1"), back: $("#page2"), reverse: true } ); });
+
+            $("#flipPlay").click(function() { $("#flip-container").kendoAnimate({effects: "flip:horizontal", face: $("#flip-page1"), back: $("#flip-page2"), duration: 1500 } ); });
+            $("#flipReverse").click(function() { $("#flip-container").kendoAnimate({effects: "flip:horizontal", face: $("#flip-page1"), back: $("#flip-page2"), reverse: true, duration: 1500 } ); });
+        </script>
+    </body>
+</html>

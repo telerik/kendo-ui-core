@@ -1,0 +1,83 @@
+
+<div id="example" class="k-content">
+
+    <div id="listView"></div>
+
+    <div id="pager" class="k-pager-wrap">
+    </div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div class="product">
+            <img src="../../content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
+            <div class="product-description">
+                <h3>${ProductName}</h3>
+                <p>${kendo.toString(UnitPrice, "c")}</p>
+            </div>
+        </div>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://demos.kendoui.com/service/Products",
+                            dataType: "jsonp"
+                        }
+                    },
+                    pageSize: 15
+                });
+
+            $("#listView").kendoListView({
+                dataSource: dataSource,
+                template: kendo.template($("#template").html())
+            });
+        });
+    </script>
+
+    <style scoped>
+        #listView {
+            min-height: 610px;
+        }
+
+        .product {
+            float: left;
+            position: relative;
+            width: 110px;
+            height: 120px;
+            padding: 7px 7px 0 7px;
+            background-color: rgba(255,255,255,0.8)
+        }
+
+        .product-description {
+            position: absolute;
+            top: 7px;
+            width: 110px;
+            height: 0;
+            overflow: hidden;
+            background-color: rgba(255,255,255,0.8)
+        }
+
+        .product img {
+            width: 110px;
+            height: 110px;
+        }
+
+        .product h3 {
+            margin: 0;
+            padding: 0;
+            line-height: 1.1em;
+            font-size: .9em;
+            font-weight: normal;
+            text-transform: uppercase;
+            color: #777;
+        }
+    </style>
+    <script>
+        $("#listView").on("mouseenter", ".product", function(e) {
+            kendo.fx($(e.currentTarget).find(".product-description")).expand("vertical").stop().play();
+        }).on("mouseleave", ".product", function(e) {
+            kendo.fx($(e.currentTarget).find(".product-description")).expand("vertical").stop().reverse();
+        });
+    </script>
+</div>

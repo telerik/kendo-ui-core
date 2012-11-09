@@ -53,7 +53,7 @@
                 });
             });
 
-            test("element is shown when show is true", function() {
+            test("element is shown every time", function() {
                 span.hide();
 
                 kendo.fx.foo = {
@@ -63,8 +63,7 @@
                 };
 
                 animate(span, {
-                    effects: "foo",
-                    show: true
+                    effects: "foo"
                 });
                 ok(span.is(":visible"));
             });

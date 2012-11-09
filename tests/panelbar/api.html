@@ -14,6 +14,8 @@
 
    <script type="text/javascript">
 
+        QUnit.config.reorder = false;
+
        var isRaised, isExpandRaised, isCollapseRaised, isSelectRaised, isActivateRaised;
 
         function getRootItem(index) {
@@ -260,18 +262,7 @@
             equal(item.find('> .k-group').css("display"), "none");
         });
 
-        test('expand method should expand last item', function() {
-
-            var panel = getPanelBar();
-
-            var item = getRootItem(4);
-
-            panel.expand(item);
-
-            equal(item.find('> .k-group').css("display"), "block");
-        });
-
-         test('client object is available in on load', function() {
+        test('client object is available in on load', function() {
             ok(null !== onLoadPanelBar);
             ok(undefined !== onLoadPanelBar);
         });

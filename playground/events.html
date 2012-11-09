@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVVM</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+    </head>
+    <body>
+
+        <button> Touch me
+            </button>
+
+        <script>
+            var ep = new kendo.EventProxy($("button"));
+
+            ep.on("up", function(e) {
+                $("<i>" + e.type + "</i>").appendTo(document.body);
+                $("<b>" + ep.mute + "</b>").appendTo(document.body);
+            });
+                $("<b>" + kendo.support.touch + "</b>").appendTo(document.body);
+        </script>
+    </body>
+</html>

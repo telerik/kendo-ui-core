@@ -1,0 +1,81 @@
+<div id="example" class="k-content">
+    <div id="slide-in-content">
+        <div id="slide-in-share">
+            <a id="slide-in-handle" href="#">Share</a>
+            <ul>
+                <li><a href="#">Share in Facebook</a></li>
+                <li><a href="#">Post in Twitter</a></li>
+                <li><a href="#">Reblog in Tumblr</a></li>
+            </ul>
+        </div>
+        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
+        <p> Pellentesque vulputate aliquam feugiat. Donec eget faucibus eros. Nunc auctor lacus eget nisi gravida a lobortis nulla pellentesque. Vivamus id nibh neque, eu sagittis lectus. Etiam dictum sem auctor quam aliquam et porttitor urna sollicitudin. Aenean ultricies libero non ipsum tristique ac placerat risus pellentesque. Phasellus at ligula odio.</p>
+
+        <h2>Sed lectus quam, dignissim vel faucibus vel, imperdiet non nisi. Ut sed malesuada libero</h2>
+        <p> Vestibulum euismod euismod enim, at auctor elit interdum vitae. Curabitur eu elit eros. Ut dignissim congue neque et tincidunt. In hac habitasse platea dictumst. Sed commodo odio eu nisl interdum nec lobortis ipsum porta. Phasellus elementum, eros quis vestibulum semper, enim massa gravida ipsum, id mattis velit nunc non diam. Nulla vitae dolor quis lacus viverra posuere. Praesent molestie massa vitae sapien ultricies mollis condimentum nec quam. Aliquam ac nunc a mauris accumsan semper ac ac ligula. Nullam vel mauris quam, ut viverra lectus. In dictum faucibus mattis.</p>
+
+        <h2>Nulla ut ipsum sem</h2>
+        <p> Nunc at orci lorem, sed tempus odio. Proin feugiat rutrum purus ac semper. Cras pellentesque, sapien vel accumsan lacinia, felis leo ultrices elit, sed tincidunt tellus nisi a erat. Sed quis ipsum nisi. Sed eu velit lacus. Praesent sit amet nulla velit.</p>
+
+        <h2>Suspendisse mollis, metus sit amet convallis elementum, justo massa sagittis nunc, venenatis egestas nulla metus in magna</h2>
+        <p>Aliquam erat volutpat. Duis ultricies aliquet sapien porta scelerisque. Nulla quis sem vel mauris sollicitudin sagittis et sit amet enim. Phasellus vehicula vehicula elit. Proin placerat ligula eget mi convallis vitae volutpat felis porttitor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam tincidunt ultrices tortor quis malesuada. Phasellus ut turpis vitae tellus mattis semper nec sed ipsum.</p>
+
+        <h2>Maecenas commodo, dui eget vehicula tincidunt, nibh purus ultrices sem, vitae condimentum diam elit sollicitudin ligula</h2>
+        <p>In vulputate egestas libero, quis consequat nulla semper nec. Maecenas blandit, diam vitae tincidunt aliquet, nisi nibh vehicula eros, ut sollicitudin ligula arcu et nibh. Vestibulum blandit iaculis ultricies. Aenean gravida elit nec nunc fringilla vitae faucibus lorem mollis. Aliquam iaculis eros in ipsum ultricies sit amet elementum est placerat. Ut vel turpis metus, et porttitor sem. Maecenas quam diam, lacinia nec eleifend vel, porta eu sem.</p>
+    </div>
+</div>
+
+<style scoped>
+    #slide-in-content {
+        font-family: Georgia, serif;
+        line-height: 1.8em;
+        width: 500px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        padding-left: 50px;
+    }
+
+    #slide-in-share {
+        position: absolute;
+        top: 300px;
+        margin-left: -200px;
+        left: 0px;
+        width: 200px;
+    }
+
+    #slide-in-share ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        background: white;
+        height: 100px;
+        border: 1px solid grey;
+        border-left: 0;
+    }
+
+    #slide-in-handle {
+        position: absolute;
+        left: 200px;
+        height: 102px;
+        background: black;
+        padding: 0 5px;
+        color: white;
+    }
+</style>
+
+<script>
+    var slide = kendo.fx($("#slide-in-share")).slideIn("left"),
+        visible = true;
+
+    $("#slide-in-handle").click(function(e) {
+        if (visible) {
+            slide.reverse();
+        } else {
+            slide.play();
+        }
+        visible = !visible;
+        e.preventDefault();
+    });
+
+</script>

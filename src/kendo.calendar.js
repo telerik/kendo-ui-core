@@ -21,7 +21,7 @@
         ID = "id",
         MIN = "min",
         LEFT = "left",
-        SLIDE = "slide",
+        SLIDE = "slideIn",
         MONTH = "month",
         CENTURY = "century",
         CHANGE = "change",
@@ -127,6 +127,7 @@
             animation: {
                 horizontal: {
                     effects: SLIDE,
+                    reverse: true,
                     duration: 500,
                     divisor: 2
                 },
@@ -438,7 +439,7 @@
                 to[future ? "insertAfter" : "insertBefore"](from);
 
                 extend(horizontal, {
-                    effects: SLIDE + ":" + (future ? LEFT : "right"),
+                    effects: SLIDE + ":" + (future ? "right" : LEFT),
                     complete: function() {
                         from.remove();
                         to.unwrap();

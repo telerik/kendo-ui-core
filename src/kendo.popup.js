@@ -87,7 +87,7 @@
             that.wrapper = $();
 
             if (options.animation === false) {
-                options.animation = { open: { show: true, effects: {} }, close: { hide: true, effects: {} } };
+                options.animation = { open: { effects: {} }, close: { hide: true, effects: {} } };
             }
 
             extend(options.animation.open, {
@@ -161,12 +161,10 @@
                 open: {
                     effects: "slideIn:down",
                     transition: true,
-                    duration: 200,
-                    show: true
+                    duration: 200
                 },
                 close: { // if close animation effects are defined, they will be used instead of open.reverse
                     duration: 100,
-                    show: false,
                     hide: true
                 }
             }

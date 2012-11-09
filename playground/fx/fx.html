@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Animations</title>
+        <script src="../../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+            #container {
+                height: 500px;
+                padding: 40px;
+                border-bottom: 3px double black;
+                margin-left: 20px;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <button id="play"       style=" z-index: 3">Start the transfer</button>
+            <button id="reverse"    style=" z-index: 3">Reverse the transfer</button>
+
+            <div id="target">
+                I will transfer myself to the destination
+            </div>
+        </div>
+
+
+        <script>
+        $("#play").click(function() {
+            $("#target").kendoStop().kendoAnimate({ effects: "slideMargin", axis: "left", offset: 500, duration: 3000  });
+        });
+
+        $("#reverse").click(function() {
+            $("#target").kendoStop().kendoAnimate({ effects: "slideMargin", axis: "left", offset: 500 , reverse: true, duration: 3000 });
+        });
+        </script>
+    </body>
+</html>
+</body>
+</html>

@@ -28,6 +28,8 @@
 
             QUnit.config.reorder = false;
 
+            $.fx = { speeds : {400: 1} };
+
             function animationProperty(element, property) {
                 if (transforms) {
                     var transform = element.css(TRANSFORM);
@@ -73,19 +75,19 @@
             asyncTest("animate waits all effects to finish", function() {
                 var fooFinished = false, barFinished = false;
 
-                kendo.fx.foo = {
-                    setup: function(element, options) {
+                kendo.fx.createEffect("foo", {
+                    prepare: function() {
                         fooFinished = true;
-                        options.complete();
+                        return { start: {}, end: {} };
                     }
-                };
+                });
 
-                kendo.fx.bar = {
-                    setup: function(element, options) {
+                kendo.fx.createEffect("bar", {
+                   prepare: function() {
                         barFinished = true;
-                        options.complete();
+                        return { start: {}, end: {} };
                     }
-                };
+                });
 
                 animate(span, "foo bar", function() {
                     ok(fooFinished);
@@ -97,11 +99,11 @@
             asyncTest("animations play in sequence", function() {
                 var firstAnimationFinished = false;
 
-                kendo.fx.foo = {
-                    setup: function(element, options) {
-                        options.complete();
+                kendo.fx.createEffect("foo", {
+                   prepare: function() {
+                        return { start: {}, end: {} };
                     }
-                };
+                });
 
                 animate(span, "foo", function() {
                     firstAnimationFinished = true;
@@ -113,110 +115,88 @@
                 });
             });
 
-            test("reverse method of the effect is called if reverse = true", function() {
+            test("reverse method of the effect is called if reverse = true", 1, function() {
                 var reverseWasCalled = false;
 
-                kendo.fx.foo = {
-                    setup: function(element, options) {
-                        reverseWasCalled = options.reverse;
-                        options.complete();
-                    }
-                };
-
-                animate(span, "foo", true);
-                ok(reverseWasCalled);
-            });
-
-            test("passing options to animate", function() {
-                var reverseWasCalled = false, callbackWasCalled = false;
-
-                kendo.fx.foo = {
-                    setup: function(element, options) {
-                        reverseWasCalled = options.reverse;
-                        options.complete();
-                    }
-                };
-
-                animate(span, {
-                    reverse: true,
-                    complete: function() {
-                        callbackWasCalled = true;
-                    },
-                    effects: {
-                        foo: {}
+                kendo.fx.createEffect("foo", {
+                   prepare: function() {
+                        equal(this._reverse, true);
+                        return { start: {}, end: {} };
                     }
                 });
-                ok(reverseWasCalled);
-                ok(callbackWasCalled);
+
+                animate(span, "foo", true);
             });
 
-            test("passing options to animate effects as string", function() {
+            asyncTest("passing options to animate works", 2, function() {
                 var reverseWasCalled = false, callbackWasCalled = false;
 
-                kendo.fx.foo = {
-                    setup: function(element, options) {
-                        reverseWasCalled = options.reverse;
-                        options.complete();
+                kendo.fx.createEffect("foo", {
+                   prepare: function() {
+                       equal(this._reverse, true);
+                        return { start: {}, end: {} };
                     }
-                };
+                });
+
+                animate(span, {
+                    effects: { foo: {} },
+                    reverse: true,
+                    complete: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+            });
+
+            asyncTest("passing options to animate effects as string", 2, function() {
+                var reverseWasCalled = false, callbackWasCalled = false;
+
+                kendo.fx.createEffect("foo", {
+                   prepare: function() {
+                        equal(this._reverse, true);
+                        return { start: {}, end: {} };
+                    }
+                });
 
                 animate(span, {
                     reverse: true,
                     complete: function() {
-                        callbackWasCalled = true;
+                        ok(true);
+                        start();
                     },
                     effects: "foo"
                 });
-                ok(reverseWasCalled);
-                ok(callbackWasCalled);
             });
 
-            test("make sure keep, css, setup, teardown and restore are called in sequence", function() {
-                var cssWasKept = false, cssWasSet = false, setupWasCalled = false, teardownWasCalled = false, cssWasRestored = false;
+            // legacy test, not sure why
+            asyncTest("make sure css, setup, teardown and restore are called in sequence", 2, function() {
                 span.css("overflow", "visible");
 
-                kendo.fx.foo = {
-                    keep: [ "overflow" ],
+                kendo.fx.createEffect("foo", {
                     restore: [ "overflow" ],
-                    css: {
-                        overflow: function (element) {
-                            if (element.data("overflow") == "visible")
-                                cssWasKept = true;
 
-                            return "hidden";
-                        }
+                   prepare: function() {
+                        ok(this.element.data("overflow") == "visible")
+                        return { start: { overflow: "hidden" } };
                     },
-                    setup: function(element, options) {
-                        if (element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
-                            cssWasSet = true;
 
-                        setupWasCalled = true;
-                        options.complete();
-                    },
-                    teardown: function(element, options) {
-                        if (element.css("overflow") == "visible")
-                            cssWasRestored = true;
-
-                        teardownWasCalled = true;
+                    teardown: function() {
+                        ok(this.element.css("overflow") == "visible");
+                        start();
                     }
-                };
+                });
 
                 animate(span, "foo");
-                ok(cssWasKept);
-                ok(cssWasSet);
-                ok(setupWasCalled);
-                ok(cssWasRestored);
-                ok(teardownWasCalled);
             });
 
-            asyncTest("callback is fired asynchronously after animate", function() {
+            asyncTest("callback is fired asynchronously after animate", 1, function() {
                 var called = false;
 
-                kendo.fx.moo = {
-                    setup: function(element, options) {
-                        return { translateX: "10px" };
+                kendo.fx.createEffect("moo", {
+                   prepare: function() {
+                        return { end: { translateX: "10px" } };
                     }
-                };
+                });
 
                 span.kendoAnimate({
                     effects: "moo",
@@ -226,7 +206,6 @@
                     },
                     complete: function() {
                         called = true;
-                        ok(true);
                         start();
                     }
                 });
@@ -235,15 +214,44 @@
             });
 
             if (!kendo.support.browser.mozilla) {
-                asyncTest("animating height from 0 to 100 results in 100px high element", function() {
+                asyncTest("Passing properties to the effect overrides the end state", 2, function() {
                     var height = -1;
 
-                    kendo.fx.foo = {
-                        css: { height: 0, display: "block" },
-                        setup: function(element, options) {
-                            return { height: 100 };
+                    kendo.fx.createEffect("foo", {
+                       prepare: function(start, end) {
+                            start.height = 0;
+                            start.display = "block";
+                            end.height = 100;
                         }
-                    };
+                    });
+
+                    span.kendoAnimate({
+                        effects: { foo: { properties: { height: 20 } } },
+
+                        duration: 20,
+
+                        init: function () {
+                            height = span.height();
+                        },
+
+                        complete: function(element) {
+                            equal(height, 0);
+                            equal(span.height(), 20);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("animating height from 0 to 100 results in 100px high element", 2, function() {
+                    var height = -1;
+
+                    kendo.fx.createEffect("foo", {
+                       prepare: function(start, end) {
+                            start.height = 0;
+                            start.display = "block";
+                            end.height = 100;
+                        }
+                    });
 
                     span.kendoAnimate({
                         effects: "foo",
@@ -252,8 +260,8 @@
                             height = span.height();
                         },
                         complete: function(element) {
-                            ok(height == 0);
-                            ok(span.height() == 100);
+                            equal(height, 0);
+                            equal(span.height(), 100);
                             start();
                         }
                     });
@@ -283,17 +291,13 @@
 
                     var opacity = 5;
 
-                    kendo.fx.fade.restore = [];
+                    kendo.fx.Effects.fade.prototype.restore = [];
 
                     span.kendoAnimate({
                         effects: "fadeOut",
                         duration: 10,
-                        init: function () {
-                            opacity = span.css("opacity");
-                        },
                         complete: function () {
-                            ok(opacity == 1);
-                            ok(span.css("opacity") == 0);
+                            equal(span.css("opacity"), 0);
                             start();
                         }
                     });
@@ -318,26 +322,6 @@
                             }
                         });
                     });
-
-                asyncTest("slide:right moves the element right with its width", function() {
-                    span.css({ left: 10, width: 20 });
-                    var position = span.offset().left;
-
-                    span.kendoAnimate("slide:right", 20, function () {
-                        ok((transforms ? animationProperty(span, "translatex") : span.offset().left - position) == span.width());
-                        start();
-                    });
-                });
-
-                asyncTest("slide:down moves the element down with its height", function() {
-                    span.css({ top: 10, height: 20 });
-                    var position = span.offset().top;
-
-                    span.kendoAnimate("slide:down", 20, function () {
-                        ok((transforms ? animationProperty(span, "translatey") : span.offset().top - position) == span.height());
-                        start();
-                    });
-                });
 
                 asyncTest("slideIn:right moves the element right from - its width to 0", function() {
                     span.css({ position: "absolute", display: "block", left: 10 });

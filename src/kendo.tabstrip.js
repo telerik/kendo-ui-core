@@ -329,7 +329,7 @@
 
         _animations: function(options) {
             if (options && ("animation" in options) && !options.animation) {
-                options.animation = { open: { effects: {}, show: true }, close: { effects: {} } }; // No animation
+                options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
             }
         },
 
@@ -459,8 +459,7 @@
             animation: {
                 open: {
                     effects: "expand:vertical fadeIn",
-                    duration: 200,
-                    show: true
+                    duration: 200
                 },
                 close: { // if close animation effects are defined, they will be used instead of open.reverse
                     duration: 200
@@ -770,7 +769,7 @@
                 hasCloseAnimation = close && "effects" in close;
             item = that.tabGroup.find(item);
 
-            close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { show: false, hide: true });
+            close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { hide: true });
 
             if (kendo.size(animation.effects)) {
                 item.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
@@ -802,7 +801,7 @@
                 oldTab = neighbours.filter("." + ACTIVESTATE),
                 itemIndex = neighbours.index(item);
 
-            close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { show: false, hide: true });
+            close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { hide: true });
             // deactivate previously active tab
             if (kendo.size(animation.effects)) {
                 oldTab.kendoRemoveClass(ACTIVESTATE, { duration: close.duration });

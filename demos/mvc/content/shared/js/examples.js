@@ -7,8 +7,7 @@
         docsAnimation = {
             show: {
                 effects: "expandVertical fadeIn",
-                duration: 300,
-                show: true
+                duration: 300
             },
             hide: {
                 effects: "expandVertical fadeIn",
@@ -20,8 +19,7 @@
         animation = {
             show: {
                 effects: "fadeIn",
-                duration: 300,
-                show: true
+                duration: 300
             },
             hide: {
                 effects: "fadeOut",

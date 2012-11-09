@@ -1807,9 +1807,17 @@ function pad(number, digits, end) {
         return effects;
     }
 
-    var fx = {
+    function fx(element) {
+        return new kendo.fx.Element(element);
+    }
+
+    $.extend(fx, {
+        Element: function(element) {
+            this.element = $(element);
+        },
+
         promise: function (element, options) {
-            if (options.show) {
+            if (!element.is(":visible")) {
                 element.css({ display: element.data("olddisplay") || "block" }).css("display");
             }
 
@@ -1841,7 +1849,7 @@ function pad(number, digits, end) {
 
             return element;
         }
-    };
+    });
 
     function prepareAnimationOptions(options, duration, reverse, complete) {
         if (typeof options === STRING) {
@@ -1879,19 +1887,22 @@ function pad(number, digits, end) {
             reverse: false,
             init: noop,
             teardown: noop,
-            hide: false,
-            show: false
+            hide: false
         }, options, { completeCallback: options.complete, complete: noop }); // Move external complete callback, so deferred.resolve can be always executed.
 
     }
 
     function animate(element, options, duration, reverse, complete) {
-        element.each(function (idx, el) { // fire separate queues on every element to separate the callback elements
-            el = $(el);
-            el.queue(function () {
-                fx.promise(el, prepareAnimationOptions(options, duration, reverse, complete));
+        var idx = 0,
+            length = element.length,
+            instance;
+
+        for (; idx < length; idx ++) {
+            instance = $(element[idx]);
+            instance.queue(function() {
+                fx.promise(instance, prepareAnimationOptions(options, duration, reverse, complete));
             });
-        });
+        }
 
         return element;
     }
