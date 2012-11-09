@@ -1217,6 +1217,10 @@
                 if (loaded && contents.children().length > 0) {
                     that._updateNodeClasses(node, {}, { expanded: expand });
 
+                    if (contents.is(":visible") == expand) {
+                        return;
+                    }
+
                     if (!expand) {
                         contents.css("height", contents.height()).css("height");
                     }
