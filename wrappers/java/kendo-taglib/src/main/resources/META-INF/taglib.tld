@@ -2340,6 +2340,11 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <description>Triggered when the user moves the focus on another node</description>
+            <name>navigate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -10158,6 +10163,14 @@ Setting this option to</description>
         <description>Subscribes to the select event of TreeView.</description>
         <name>treeView-select</name>
         <tag-class>com.kendoui.taglib.treeview.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the navigate event of TreeView.</description>
+        <name>treeView-navigate</name>
+        <tag-class>com.kendoui.taglib.treeview.NavigateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 

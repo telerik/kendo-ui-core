@@ -241,11 +241,11 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("sizeField", value);
     }
 
-    public String getXaxis() {
+    public String getXAxis() {
         return (String)getProperty("xAxis");
     }
 
-    public void setXaxis(String value) {
+    public void setXAxis(String value) {
         setProperty("xAxis", value);
     }
 
