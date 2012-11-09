@@ -181,35 +181,15 @@ public class ChartDataRepository {
         }};
     }
     
-    @SuppressWarnings("serial")
     public static List<InternetUsers> InternetUsers() {
-        return new ArrayList<InternetUsers>() {{
-            add(new InternetUsers() {{
-                setYear(2005);
-                setCountry("United States");
-                setValue(67.96);
-            }});
-            add(new InternetUsers() {{
-                setYear(2006);
-                setCountry("United States");
-                setValue(68.93);
-            }});
-            add(new InternetUsers() {{
-                setYear(2007);
-                setCountry("United States");
-                setValue(75);
-            }});
-            add(new InternetUsers() {{
-                setYear(2008);
-                setCountry("United States");
-                setValue(74);
-            }});
-            add(new InternetUsers() {{
-                setYear(2009);
-                setCountry("United States");
-                setValue(78);
-            }});
-        }};
+        List<InternetUsers> result =  new ArrayList<InternetUsers>();
+        result.add(new InternetUsers(2005, 67.96, "United States"));
+        result.add(new InternetUsers(2006, 68.93, "United States"));
+        result.add(new InternetUsers(2007, 75, "United States"));
+        result.add(new InternetUsers(2008, 74, "United States"));
+        result.add(new InternetUsers(2009, 78, "United States"));
+        
+        return result;
     }
     
     @SuppressWarnings("serial")
@@ -569,6 +549,33 @@ public class ChartDataRepository {
         result.add(new ScreenResolution("2010", "800x600", 3, false, 3));
         result.add(new ScreenResolution("2010", "640x480", 0, false, 4));
         result.add(new ScreenResolution("2010", "Unknown", 3, false, 5));
+        
+        return result;
+    }
+    
+    public static List<JobGrowth> JobGrowthData() {
+        List<JobGrowth> result =  new ArrayList<JobGrowth>();
+        result.add(new JobGrowth(-2500, 50000, 500000, "Microsoft", 0));
+        result.add(new JobGrowth(500, 110000, 7600000, "Starbucks", 0));
+        result.add(new JobGrowth(7000, 19000, 700000, "Google", 0));
+        result.add(new JobGrowth(1400, 150000, 700000, "Publix Super Markets", 0));
+        result.add(new JobGrowth(2400, 30000, 300000, "PricewaterhouseCoopers", 0));
+        result.add(new JobGrowth(2450, 34000, 90000, "Cisco", 0));
+        result.add(new JobGrowth(2700, 34000, 400000, "Accenture", 0));
+        result.add(new JobGrowth(2900, 40000,450000, "Deloitte", 0));
+        result.add(new JobGrowth(3000, 55000, 900000, "Whole Foods Market", 0));
+        
+        return result;
+    }
+    
+    public static List<JobGrowth> JobGrowthDataComparative() {
+        List<JobGrowth> result =  new ArrayList<JobGrowth>();
+        result.add(new JobGrowth(-2500, 50000, 500000, "Microsoft", 2011));
+        result.add(new JobGrowth(500, 110000, 7600000, "Starbucks", 2011));
+        result.add(new JobGrowth(7000, 19000, 700000, "Google", 2011));
+        result.add(new JobGrowth(-2000, 60000, 900000, "Microsoft", 2012));
+        result.add(new JobGrowth(4000, 130000, 8600000, "Starbucks", 2012));
+        result.add(new JobGrowth(9000, 29000, 2200000, "Google", 2012));
         
         return result;
     }

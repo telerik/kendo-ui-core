@@ -5,6 +5,12 @@ public class InternetUsers {
     private double value;
     private String country;
     
+    public InternetUsers(int year, double value, String country) {
+        setYear(year);
+        setValue(value);
+        setCountry(country);
+    }
+    
     public int getYear() {
         return year;
     }

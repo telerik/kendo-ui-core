@@ -73,6 +73,14 @@ public class PlotBandTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("color", value);
     }
 
+    public float getOpacity() {
+        return (float)getProperty("opacity");
+    }
+
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
+    }
+
 //<< Attributes
 
 }

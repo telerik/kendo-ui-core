@@ -2,7 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/dataviz/area-charts/grouped-data/read" var="readUrl" />
+<c:url value="/dataviz/bar-charts/grouped-data/read" var="readUrl" />
 
 <demo:header />
 	<div id="example" class="k-content">
@@ -29,7 +29,7 @@
         	 	 	 </kendo:dataSource-schema>
                  </kendo:dataSource>
          	 	 <kendo:chart-series>
-         	 	 	<kendo:chart-seriesItem type="area" field="close" name="close" groupNameTemplate="#= group.value # (#= series.name #)" />
+         	 	 	<kendo:chart-seriesItem type="column" field="close" name="close" groupNameTemplate="#= group.value # (#= series.name #)" />
          	 	 </kendo:chart-series>
          	 	  <kendo:chart-categoryAxis>
          	 	 	<kendo:chart-categoryAxisItem field="date">

@@ -3775,6 +3775,13 @@ hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>The opacity of the plot band.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 
@@ -4068,6 +4075,14 @@ The function return value is displayed instead of the individual points.</descri
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>aField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -5343,6 +5358,13 @@ hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>The opacity of the plot band.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 
@@ -5814,6 +5836,13 @@ hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>The opacity of the plot band.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 
@@ -6283,6 +6312,13 @@ hex and rgb.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the plot band.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>

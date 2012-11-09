@@ -201,6 +201,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("spacing", value);
     }
 
+    public String getAField() {
+        return (String)getProperty("aField");
+    }
+
+    public void setAField(String value) {
+        setProperty("aField", value);
+    }
+
     public String getCategoryField() {
         return (String)getProperty("categoryField");
     }
@@ -233,11 +241,11 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("sizeField", value);
     }
 
-    public String getXAxis() {
+    public String getXaxis() {
         return (String)getProperty("xAxis");
     }
 
-    public void setXAxis(String value) {
+    public void setXaxis(String value) {
         setProperty("xAxis", value);
     }
 
