@@ -100,7 +100,7 @@
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER_NS = "mouseover" + NS,
         MOUSEWHEEL_DELAY = 150,
-        MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS
+        MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
@@ -555,7 +555,7 @@
                         pane: pane,
                         axes: axes
                     };
-                };
+                }
             }
         },
 
@@ -1315,6 +1315,7 @@
 
         scaleRange: function(scale) {
             var axis = this,
+                options = axis.options,
                 range = options.categories.length,
                 delta = scale * range;
 
@@ -1409,13 +1410,11 @@
         scaleRange: function(delta) {
             var axis = this,
                 options = axis.options,
-                baseUnit = options.baseUnit,
-                weekStartDay = options.weekStartDay,
-                range,
-                step,
                 rounds = math.abs(delta),
                 from = options.min,
-                to = options.max;
+                to = options.max,
+                range,
+                step;
 
             while (rounds--) {
                 range = dateDiff(from, to);
@@ -1429,10 +1428,7 @@
                 }
             }
 
-            return {
-                min: from,
-                max: to
-            };
+            return { min: from, max: to };
         },
 
         defaultBaseUnit: function(options) {
