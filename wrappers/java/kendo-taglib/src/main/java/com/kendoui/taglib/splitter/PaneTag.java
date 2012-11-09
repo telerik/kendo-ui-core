@@ -2,12 +2,10 @@
 package com.kendoui.taglib.splitter;
 
 
+import java.io.IOException;
+
 import com.kendoui.taglib.BaseTag;
-
-
-
-
-
+import com.kendoui.taglib.html.Div;
 
 import javax.servlet.jsp.JspException;
 
@@ -24,6 +22,20 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
 //<< doEndTag
 
+        String html = body();
+        
+        if (!html.isEmpty()) {               
+            Div div = new Div();
+            
+            div.html(html);
+            
+            try {
+                div.write(pageContext.getOut());                
+            } catch (IOException exception) {
+                throw new JspException(exception);
+            }   
+        }
+        
         return super.doEndTag();
     }
 

@@ -5,6 +5,7 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.splitter.*;
 
 
+import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.json.Function;
 
 
@@ -17,6 +18,14 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
         super("Splitter");
     }
 
+    @Override
+    protected Element<?> createElement() {
+        Element<?> element = super.createElement();
+
+        element.html(body());
+
+        return element;
+    }
     
     @Override
     public int doEndTag() throws JspException {

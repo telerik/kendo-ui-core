@@ -9717,7 +9717,7 @@ format will also influence the appearance of the</description>
         <description>An array of pane definitions.</description>
         <name>splitter-pane</name>
         <tag-class>com.kendoui.taglib.splitter.PaneTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>Specifies whether a pane is initially collapsed (</description>
@@ -10612,6 +10612,13 @@ containing one or more fields with the same name as the original input name.</de
 		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
 		<body-content>JSP</body-content>
 	</tag>
+
+    <tag>
+        <description>Splitter Pane content</description>
+        <name>splitter-pane-content</name>
+        <tag-class>com.kendoui.taglib.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
 	<tag>
 		<description>TabStrip Item content</description>

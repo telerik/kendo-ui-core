@@ -16,6 +16,11 @@ import javax.servlet.jsp.JspException;
 public class PanesTag extends BaseTag /* interfaces *//* interfaces */ {
     
     @Override
+    public int doStartTag() {
+        return EVAL_BODY_INCLUDE;
+    }
+    
+    @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
