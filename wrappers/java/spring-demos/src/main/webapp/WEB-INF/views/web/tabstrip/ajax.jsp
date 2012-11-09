@@ -4,66 +4,62 @@
 
 <demo:header />
 
-<kendo:tabStrip name="tabstrip">
-	<kendo:tabStrip-items>
-	    <kendo:tabStrip-item text="Dimensions & Weights" selected="true">    
-	    </kendo:tabStrip-item>
-        <kendo:tabStrip-item text="Engine">
-        </kendo:tabStrip-item>
-        <kendo:tabStrip-item text="Chassis">
-        </kendo:tabStrip-item>
-    </kendo:tabStrip-items>
-</kendo:tabStrip>
+<c:url value="/resources/web/tabstrip/ajax/ajaxContent1.html" var="ajaxContent1" />
+<c:url value="/resources/web/tabstrip/ajax/ajaxContent2.html" var="ajaxContent2" />
+<c:url value="/resources/web/tabstrip/ajax/ajaxContent3.html" var="ajaxContent3" />
 
-<style scoped>
-	#forecast {
-	    width: 360px;
-	    height: 337px;
-	    margin: 30px auto;
-	    padding: 80px 15px 0 15px;
-	    background: url('<c:url value="/resources/web/tabstrip/forecast.png" />') transparent no-repeat 0 0;
-	}
-	
-	.sunny, .cloudy, .rainy {
-	    display: inline-block;
-	    margin: 20px 0 20px 10px;
-	    width: 128px;
-	    height: 128px;
-	    background: url('<c:url value="/resources/web/tabstrip/weather.png" />') transparent no-repeat 0 0;
-	}
-	
-	.cloudy{
-	    background-position: -128px 0;
-	}
-	
-	.rainy{
-	    background-position: -256px 0;
-	}
-	
-	.weather {
-	    width: 160px;
-	    padding: 40px 0 0 0;
-	    float: right;
-	}
-	
-	#forecast h2 {
-	    font-weight: lighter;
-	    font-size: 5em;
-	    padding: 0;
-	    margin: 0;
-	}
-	
-	#forecast h2 span {
-	    background: none;
-	    padding-left: 5px;
-	    font-size: .5em;
-	    vertical-align: top;
-	}
-	
-	#forecast p {
-	    margin: 0;
-	    padding: 0;
-	}
+<div class="wrapper">
+	<kendo:tabStrip name="tabstrip">
+		<kendo:tabStrip-items>
+		    <kendo:tabStrip-item text="Dimensions & Weights" selected="true" contentUrl="${ajaxContent1}"></kendo:tabStrip-item>
+	        <kendo:tabStrip-item text="Engine" contentUrl="${ajaxContent2}"></kendo:tabStrip-item>
+	        <kendo:tabStrip-item text="Chassis" contentUrl="${ajaxContent3}"></kendo:tabStrip-item>
+	    </kendo:tabStrip-items>
+	</kendo:tabStrip>
+</div>
+
+<style scoped="scoped">
+    .wrapper {
+        width: 270px;
+        height: 455px;
+        margin: 20px auto;
+        padding: 20px 0 0 390px;
+        background: url('<c:url value="/resources/web/tabstrip/bmw.png" />') no-repeat 40px 60px transparent;
+    }
+    #tabstrip {
+        width: 320px;
+        float: right;
+        margin-bottom: 20px;
+    }
+    .specification {
+        max-width: 670px;
+        margin: 10px 0;
+        padding: 0;
+        height:360px;
+        overflow:auto;
+    }
+    .specification dt, dd {
+        width: 140px;
+        float: left;
+        margin: 0;
+        padding: 5px 0 7px 0;
+        border-top: 1px solid rgba(0,0,0,0.3);
+    }
+    .specification dt {
+        clear: left;
+        width: 120px;
+        margin-right: 7px;
+        padding-right: 0;
+        text-align: right;
+        opacity: 0.7;
+    }
+    .specification:after, .wrapper:after {
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+    }
 </style>
 
 <demo:footer />
