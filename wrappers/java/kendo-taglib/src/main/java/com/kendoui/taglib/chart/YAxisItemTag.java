@@ -65,6 +65,12 @@ public class YAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("majorTicks", value);
     }
 
+    public void setPlotBands(YAxisItemPlotBandsTag value) {
+
+        setProperty("plotBands", value.plotBands());
+
+    }
+
     public void setTitle(YAxisItemTitleTag value) {
         setProperty("title", value);
     }
@@ -131,14 +137,6 @@ public class YAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setName(Object value) {
         setProperty("name", value);
-    }
-
-    public Object getPlotBands() {
-        return (Object)getProperty("plotBands");
-    }
-
-    public void setPlotBands(Object value) {
-        setProperty("plotBands", value);
     }
 
     public boolean getReverse() {

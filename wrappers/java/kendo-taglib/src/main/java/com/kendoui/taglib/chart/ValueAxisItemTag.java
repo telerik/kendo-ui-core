@@ -73,6 +73,12 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("minorTicks", value);
     }
 
+    public void setPlotBands(ValueAxisItemPlotBandsTag value) {
+
+        setProperty("plotBands", value.plotBands());
+
+    }
+
     public void setTitle(ValueAxisItemTitleTag value) {
         setProperty("title", value);
     }
@@ -123,14 +129,6 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
 
     public void setName(Object value) {
         setProperty("name", value);
-    }
-
-    public Object getPlotBands() {
-        return (Object)getProperty("plotBands");
-    }
-
-    public void setPlotBands(Object value) {
-        setProperty("plotBands", value);
     }
 
     public boolean getReverse() {

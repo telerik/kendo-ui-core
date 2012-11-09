@@ -3264,13 +3264,6 @@ Individual color settings for line and labels take priority.</description>
         </attribute>
 
         <attribute>
-            <description>The plot bands of the category axis.</description>
-            <name>plotBands</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>Reverses the axis direction -
 categories are listed from right to left and from top to bottom.</description>
             <name>reverse</name>
@@ -3643,6 +3636,15 @@ on the chart.</description>
 
 
     <tag>
+        <description>The plot bands of the category axis.</description>
+        <name>chart-categoryAxisItem-plotBands</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemPlotBandsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>The title of the category axis.</description>
         <name>chart-categoryAxisItem-title</name>
         <tag-class>com.kendoui.taglib.chart.CategoryAxisItemTitleTag</tag-class>
@@ -3733,6 +3735,36 @@ hex and rgb.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The plot bands of the category axis.</description>
+        <name>chart-categoryAxisItem-plotBand</name>
+        <tag-class>com.kendoui.taglib.chart.PlotBandTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The start position of the plot band in axis units.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end position of the plot band in axis units.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The color of the plot band.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -4887,13 +4919,6 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
-            <description>The plot bands of the value axis.</description>
-            <name>plotBands</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>Reverses the axis direction -
 values increase from right to left and from top to bottom.</description>
             <name>reverse</name>
@@ -5171,6 +5196,15 @@ body of the chart.</description>
 
 
     <tag>
+        <description>The plot bands of the value axis.</description>
+        <name>chart-valueAxisItem-plotBands</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemPlotBandsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>The title of the value axis.</description>
         <name>chart-valueAxisItem-title</name>
         <tag-class>com.kendoui.taglib.chart.ValueAxisItemTitleTag</tag-class>
@@ -5275,6 +5309,36 @@ hex and rgb.</description>
 
 
     <tag>
+        <description>The plot bands of the value axis.</description>
+        <name>chart-valueAxisItem-plotBand</name>
+        <tag-class>com.kendoui.taglib.chart.PlotBandTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The start position of the plot band in axis units.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end position of the plot band in axis units.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The color of the plot band.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The border of the title.</description>
         <name>chart-valueAxisItem-title-border</name>
         <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
@@ -5370,13 +5434,6 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The plot bands of the xAxis.</description>
-            <name>plotBands</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -5610,6 +5667,15 @@ body of the chart.</description>
 
 
     <tag>
+        <description>The plot bands of the xAxis.</description>
+        <name>chart-xAxisItem-plotBands</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemPlotBandsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>The title of the value axis.</description>
         <name>chart-xAxisItem-title</name>
         <tag-class>com.kendoui.taglib.chart.XAxisItemTitleTag</tag-class>
@@ -5714,6 +5780,36 @@ hex and rgb.</description>
 
 
     <tag>
+        <description>The plot bands of the xAxis.</description>
+        <name>chart-xAxisItem-plotBand</name>
+        <tag-class>com.kendoui.taglib.chart.PlotBandTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The start position of the plot band in axis units.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end position of the plot band in axis units.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The color of the plot band.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The border of the title.</description>
         <name>chart-xAxisItem-title-border</name>
         <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
@@ -5809,13 +5905,6 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The plot bands of the yAxis.</description>
-            <name>plotBands</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
         </attribute>
 
         <attribute>
@@ -6049,6 +6138,15 @@ body of the chart.</description>
 
 
     <tag>
+        <description>The plot bands of the yAxis.</description>
+        <name>chart-yAxisItem-plotBands</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemPlotBandsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>The title of the value axis.</description>
         <name>chart-yAxisItem-title</name>
         <tag-class>com.kendoui.taglib.chart.YAxisItemTitleTag</tag-class>
@@ -6147,6 +6245,36 @@ hex and rgb.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The plot bands of the yAxis.</description>
+        <name>chart-yAxisItem-plotBand</name>
+        <tag-class>com.kendoui.taglib.chart.PlotBandTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The start position of the plot band in axis units.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end position of the plot band in axis units.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The color of the plot band.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>

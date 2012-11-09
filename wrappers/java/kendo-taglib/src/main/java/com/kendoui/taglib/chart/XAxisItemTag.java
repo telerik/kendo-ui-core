@@ -65,6 +65,12 @@ public class XAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("majorTicks", value);
     }
 
+    public void setPlotBands(XAxisItemPlotBandsTag value) {
+
+        setProperty("plotBands", value.plotBands());
+
+    }
+
     public void setTitle(XAxisItemTitleTag value) {
         setProperty("title", value);
     }
@@ -131,14 +137,6 @@ public class XAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setName(Object value) {
         setProperty("name", value);
-    }
-
-    public Object getPlotBands() {
-        return (Object)getProperty("plotBands");
-    }
-
-    public void setPlotBands(Object value) {
-        setProperty("plotBands", value);
     }
 
     public boolean getReverse() {
