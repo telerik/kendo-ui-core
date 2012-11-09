@@ -575,10 +575,6 @@
                 element.css({ display: element.data("olddisplay") || "block" }).css("display");
             }
 
-            if (options.hide) {
-                element.data("olddisplay", element.css("display")).hide();
-            }
-
             if (options.init) {
                 options.init();
             }
