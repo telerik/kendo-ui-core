@@ -105,8 +105,6 @@
             });
 
             test("accepts rgba values", function() {
-                var called = 0;
-
                 colorPicker = $("<input value='rgba(0,0,0,.25)' />").appendTo(document.body).kendoColorPicker();
 
                 equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-input").val()), "rgba(0,0,0,.25)");
