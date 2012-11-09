@@ -1,21 +1,17 @@
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <demo:header />
 
-<form class="configuration k-widget k-header">
+<form class="configuration k-widget k-header" method="Post">
     <span class="configHead">Animation Settings</span>
     <ul class="options">
         <li>
-            <input name="animation" type="radio" value="toggle" /> <label for="toggle">toggle animation</label>
+            <input name="animation" type="radio" ${ animation == "toggle" ? "checked=\"checked\"" : "" } value="toggle" /> <label for="toggle">toggle animation</label>
         </li>
         <li>
-            <input name="animation" type="radio" value="expand" /> <label for="expand">expand animation</label>
-        </li>
-        <li>            
-            <label for="opacity">animate opacity</label>
-        </li>
+            <input name="animation" type="radio" ${ animation != "toggle" ? "checked=\"checked\"" : "" } value="expand" /> <label for="expand">expand animation</label>
+        </li>        
     </ul>
 
     <button class="k-button">Apply</button>
@@ -24,6 +20,9 @@
 <h3>Conversation history</h3>
 
 <kendo:tabStrip name="tabstrip" style="width: 500px">
+    <kendo:tabStrip-animation>      
+        <kendo:tabStrip-animation-open effects="${ (animation != \"toggle\" ? \"expand:vertical\" : \"\") }" duration="200"/>
+    </kendo:tabStrip-animation>
     <kendo:tabStrip-items>
         <kendo:tabStrip-item text="First tab" selected="true">
             <kendo:tabStrip-item-content>
