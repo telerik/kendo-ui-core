@@ -1,0 +1,24 @@
+package com.kendoui.spring.controllers.panelbar;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller("panelbar-animation-controller")
+@RequestMapping(value="/web/panelbar/")
+public class AnimationController {
+    
+    @RequestMapping(value = "/animation", method = RequestMethod.GET)
+    public String index(Model model) {        
+        return "web/panelbar/animation";
+    }
+    
+    @RequestMapping(value = "/animation", method = RequestMethod.POST)
+    public String index(@RequestParam String animation, Model model) {
+        model.addAttribute("animation", animation);        
+        return "web/panelbar/animation";
+    }
+}

@@ -12,7 +12,7 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class AnimationOpenTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class AnimationCollapseTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -22,7 +22,7 @@ public class AnimationOpenTag extends  BaseTag  /* interfaces *//* interfaces */
         AnimationTag parent = (AnimationTag)findParentWithClass(AnimationTag.class);
 
 
-        parent.setOpen(this);
+        parent.setCollapse(this);
 
 //<< doEndTag
 
@@ -48,7 +48,7 @@ public class AnimationOpenTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "panelBar-animation-open";
+        return "panelBar-animation-collapse";
     }
 
     public float getDuration() {
@@ -65,14 +65,6 @@ public class AnimationOpenTag extends  BaseTag  /* interfaces *//* interfaces */
 
     public void setEffects(String value) {
         setProperty("effects", value);
-    }
-
-    public boolean getShow() {
-        return (boolean)getProperty("show");
-    }
-
-    public void setShow(boolean value) {
-        setProperty("show", value);
     }
 
 //<< Attributes

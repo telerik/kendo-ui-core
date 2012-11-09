@@ -50,12 +50,12 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
         return "panelBar-animation";
     }
 
-    public void setClose(AnimationCloseTag value) {
-        setProperty("close", value);
+    public void setCollapse(AnimationCollapseTag value) {
+        setProperty("collapse", value);
     }
 
-    public void setOpen(AnimationOpenTag value) {
-        setProperty("open", value);
+    public void setExpand(AnimationExpandTag value) {
+        setProperty("expand", value);
     }
 
 //<< Attributes

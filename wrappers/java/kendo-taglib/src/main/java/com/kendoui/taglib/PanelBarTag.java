@@ -91,6 +91,14 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
         setEvent("select", value.getBody());
     }
 
+    public boolean getAnimation() {
+        return (boolean)getProperty("animation");
+    }
+
+    public void setAnimation(boolean value) {
+        setProperty("animation", value);
+    }
+
     public String getExpandMode() {
         return (String)getProperty("expandMode");
     }

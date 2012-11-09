@@ -1665,6 +1665,13 @@ its sub menus to the left.</description>
 
 
         <attribute>
+            <description>A collection of visual animations used when</description>
+            <name>animation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>Specifies how the</description>
             <name>expandMode</name>
             <rtexprvalue>true</rtexprvalue>
@@ -9046,8 +9053,8 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>The visual animation(s) that will be used when</description>
-        <name>panelBar-animation-close</name>
-        <tag-class>com.kendoui.taglib.panelbar.AnimationCloseTag</tag-class>
+        <name>panelBar-animation-collapse</name>
+        <tag-class>com.kendoui.taglib.panelbar.AnimationCollapseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -9069,8 +9076,8 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
     <tag>
         <description>The visual animation(s) that will be used when opening items.</description>
-        <name>panelBar-animation-open</name>
-        <tag-class>com.kendoui.taglib.panelbar.AnimationOpenTag</tag-class>
+        <name>panelBar-animation-expand</name>
+        <tag-class>com.kendoui.taglib.panelbar.AnimationExpandTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
