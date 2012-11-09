@@ -230,9 +230,9 @@ bundle :name => 'jsp.beta',
 #            'src/kendo-taglib/src' => JSP_TAGLIB_SRC
        }.merge(JSP_CONTENT),
        :prerequisites => [
-           "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
-           'dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml',
-           'dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml'
+           "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+           "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/pom.xml",
+           #"dist/bundles/#{JSP_BUNDLE}/src/kendo-taglib/pom.xml"
        ]
 
 BUNDLES = [

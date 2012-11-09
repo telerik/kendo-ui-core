@@ -17,6 +17,8 @@ SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/*
 SPRING_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
 SPRING_DEMOS_RESOURCES = SPRING_DEMOS_SRC_ROOT + 'main/webapp/resources/'
 
+JSP_BUNDLE = 'jsp.beta'
+
 # Update a pom.xml file when the VERSION changes
 class PomTask < Rake::FileTask
     include Rake::DSL
@@ -51,19 +53,23 @@ file JSP_TAGLIB_JAR => [POM, JSP_TAGLIB_SRC].flatten do
 
 end
 
+=begin
 file_copy :to => 'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
           :from => SPRING_DEMOS_ROOT + 'pom.xml'
 
 file_copy :to => "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
           :from => JSP_TAGLIB_JAR
+=end
 
-file_copy :to => 'dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml',
+file_copy :to => "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/pom.xml",
           :from => SPRING_DEMOS_ROOT + 'pom.xml'
 
-file_copy :to => 'dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml',
+=begin
+file_copy :to => "dist/bundles/#{JSP_BUNDLE}/src/kendo-taglib/pom.xml",
           :from => JSP_TAGLIB_POM
+=end
 
-file_copy :to => "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+file_copy :to => "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
           :from => JSP_TAGLIB_JAR
 
 PROJECT = <<-eos
@@ -125,19 +131,19 @@ end
 
 
 # Prepare the demos pom.xml for end users (trial package)
-file 'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml' do |t|
-    patch_demos_pom(t.name)
-end
+#file 'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml' do |t|
+#    patch_demos_pom(t.name)
+#end
 
 # Prepare the demos pom.xml for end users (commercial package)
-file 'dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml' do |t|
+file "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/pom.xml" do |t|
     patch_demos_pom(t.name)
 end
 
 # Prepare the src pom.xml for end users
-file 'dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml' do |t|
-    patch_taglib_pom(t.name)
-end
+#file "dist/bundles/#{JSP_BUNDLE}/src/kendo-taglib/pom.xml" do |t|
+#    patch_taglib_pom(t.name)
+#end
 
 tree :to => SPRING_DEMOS_RESOURCES,
      :from => SPRING_DEMOS_SHARED_CONTENT,
