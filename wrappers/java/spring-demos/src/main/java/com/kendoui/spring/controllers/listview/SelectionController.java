@@ -11,20 +11,20 @@ import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
-@Controller("listview-home-controller")
+@Controller("listview-selection-controller")
 @RequestMapping(value="/web/listview/")
-public class HomeController {
+public class SelectionController {
     @Autowired 
     private ProductDao product;
     
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/selection", method = RequestMethod.GET)
     public String index() {        
         
-        return "web/listview/index";
+        return "web/listview/selection";
     }
     
-    @RequestMapping(value = "/products", method = RequestMethod.POST)
-    public @ResponseBody DataSourceResult products(@RequestBody DataSourceRequest request) {
+    @RequestMapping(value = "/selection_read", method = RequestMethod.POST)
+    public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
 
         return product.getList(request);
     }
