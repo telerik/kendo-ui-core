@@ -241,7 +241,10 @@
             PLOT_AREA_CLICK,
             DRAG_START,
             DRAG,
-            DRAG_END
+            DRAG_END,
+            ZOOM_START,
+            ZOOM,
+            ZOOM_END
         ],
 
         items: function() {
@@ -418,45 +421,12 @@
         },
 
         _start: function(e) {
-            var chart = this,
-                coords = chart._eventCoordinates(e),
-                plotArea = chart._model._plotArea,
-                allAxes = plotArea.axes,
-                pane = plotArea.findPointPane(coords),
-                axes = pane.axes.slice(0),
-                i,
-                currentAxis,
-                inAxis = false;
-
-            for (i = 0; i < allAxes.length; i++) {
-                currentAxis = allAxes[i];
-                if (currentAxis.box.containsPoint(coords)) {
-                    inAxis = true;
-                    break;
-                }
-            }
-
-            if (!inArray(plotArea.axisX, axes)) {
-                axes.push(plotArea.axisX);
-            }
-            if (!inArray(plotArea.axisY, axes)) {
-                axes.push(plotArea.axisY);
-            }
-
-            if (pane && !inAxis && plotArea.backgroundBox().containsPoint(coords)) {
-                chart.trigger(DRAG_START);
-                chart._suppressHover = true;
-                chart._unsetActivePoint();
-                chart._dragState = {
-                    pane: pane,
-                    axes: axes
-                };
-            }
+            this._startNavigation(e, DRAG_START);
         },
 
         _move: function(e) {
             var chart = this,
-                dragState = chart._dragState,
+                dragState = chart._navState,
                 axes,
                 ranges = {};
 
@@ -484,20 +454,13 @@
         },
 
         _end: function(e) {
-            var chart = this;
-
-            if (chart._dragState) {
-                chart.trigger(DRAG_END);
-                chart._suppressHover = false;
-                delete chart._dragState;
-            }
+            this._endNavigation(e, DRAG_END);
         },
 
         _mousewheel: function(e) {
             var chart = this,
                 origEvent = e.originalEvent,
                 delta = 0,
-                dragState = chart._dragState,
                 axes,
                 ranges = {};
 
@@ -509,67 +472,94 @@
               delta = origEvent.detail / 3;
             }
 
-            if (!dragState) {
-                var coords = chart._eventCoordinates(origEvent),
-                    plotArea = chart._model._plotArea,
-                    allAxes = plotArea.axes,
-                    pane = plotArea.findPointPane(coords);
+            if (!chart._navState) {
+                chart._startNavigation(origEvent, ZOOM_START);
+            }
 
-                if (!pane) return;
-                var axes = pane.axes.slice(0),
-                    i,
-                    currentAxis,
-                    inAxis = false;
+            if (chart._navState) {
+                axes = chart._navState.axes;
 
-                for (i = 0; i < allAxes.length; i++) {
-                    currentAxis = allAxes[i];
-                    if (currentAxis.box.containsPoint(coords)) {
-                        inAxis = true;
-                        break;
+                for (var i = 0; i < axes.length; i++) {
+                    var currentAxis = axes[i];
+                    var axisName = currentAxis.options.name;
+                    if (axisName) {
+                        ranges[currentAxis.options.name] =
+                            currentAxis.scaleRange(delta);
                     }
                 }
 
-                if (!inArray(plotArea.axisX, axes)) {
-                    axes.push(plotArea.axisX);
-                }
-                if (!inArray(plotArea.axisY, axes)) {
-                    axes.push(plotArea.axisY);
+                chart.trigger(ZOOM, { delta: delta, axisRanges: ranges });
+
+                if (chart._mwTimeout) {
+                    clearTimeout(chart._mwTimeout);
                 }
 
-                if (pane && !inAxis && plotArea.backgroundBox().containsPoint(coords)) {
-                    chart.trigger(ZOOM_START);
+                chart._mwTimeout = setTimeout(function() {
+                        chart._endNavigation(e, ZOOM_END);
+                    }, MOUSEWHEEL_DELAY
+                );
+            }
+        },
+
+        _startNavigation: function(e, chartEvent) {
+            var chart = this,
+                coords = chart._eventCoordinates(e),
+                plotArea = chart._model._plotArea,
+                pane = plotArea.findPointPane(coords),
+                axes,
+                i,
+                currentAxis,
+                inAxis = false,
+                prevented;
+
+            if (!pane) {
+                return;
+            }
+
+            axes = pane.axes.slice(0);
+
+            if (!inArray(plotArea.axisX, axes)) {
+                axes.push(plotArea.axisX);
+            }
+
+            if (!inArray(plotArea.axisY, axes)) {
+                axes.push(plotArea.axisY);
+            }
+
+            for (i = 0; i < axes.length; i++) {
+                currentAxis = axes[i];
+                if (currentAxis.box.containsPoint(coords)) {
+                    inAxis = true;
+                    break;
+                }
+            }
+
+            if (!inAxis && plotArea.backgroundBox().containsPoint(coords)) {
+                prevented = chart.trigger(chartEvent, {
+                    axisRanges: axisRanges(axes)
+                });
+
+                if(prevented) {
+                    chart._userEvents.cancel();
+                } else {
                     chart._suppressHover = true;
                     chart._unsetActivePoint();
-                    chart._dragState = dragState = {
+                    chart._navState = {
                         pane: pane,
                         axes: axes
                     };
-                }
+                };
             }
-            axes = dragState.axes;
+        },
 
-            for (var i = 0; i < axes.length; i++) {
-                var currentAxis = axes[i];
-                var axisName = currentAxis.options.name;
-                if (axisName) {
-                    ranges[currentAxis.options.name] =
-                        currentAxis.scaleRange(delta);
-                }
+        _endNavigation: function(e, chartEvent) {
+            var chart = this;
+
+            if (chart._navState) {
+                chart.trigger(chartEvent);
+                chart._suppressHover = false;
+                delete chart._navState;
             }
-
-            chart.trigger(ZOOM, { delta: delta, axisRanges: ranges });
-
-            if (chart._mwTimeout) {
-                clearTimeout(chart._mwTimeout);
-            }
-
-            chart._mwTimeout = setTimeout(function() {
-                if (chart._dragState) {
-                    chart.trigger(ZOOM_END);
-                    chart._suppressHover = false;
-                    delete chart._dragState;
-                }
-            }, MOUSEWHEEL_DELAY);
         },
 
         _getChartElement: function(e) {
@@ -1475,6 +1465,8 @@
         },
 
         range: function(options) {
+            options = options || this.options;
+
             var categories = toDate(options.categories),
                 autoUnit = options.baseUnit === FIT,
                 baseUnit = autoUnit ? BASE_UNITS[0] : options.baseUnit,
@@ -5010,6 +5002,7 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = new Pane(paneOptions[i]);
+                currentPane.paneIndex = i;
 
                 panes.push(currentPane);
                 plotArea.append(currentPane);
@@ -7660,6 +7653,23 @@
         }
 
         return valid;
+    }
+
+    function axisRanges(axes) {
+        var i,
+            axis,
+            axisName,
+            ranges = {};
+
+        for (i = 0; i < axes.length; i++) {
+            axis = axes[i];
+            axisName = axis.options.name;
+            if (axisName) {
+                ranges[axisName] = axis.range();
+            }
+        }
+
+        return ranges;
     }
 
     // Exports ================================================================

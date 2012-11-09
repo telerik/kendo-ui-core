@@ -20,10 +20,14 @@
     // Constants =============================================================
     var AUTO_CATEGORY_WIDTH = 28,
         CSS_PREFIX = "k-",
+        DRAG = "drag",
+        DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
         MOUSEWHEEL_DELAY = 150,
-        HINT_DELAY = 1000;
+        HINT_DELAY = 1000,
+        ZOOM = "zoom",
+        ZOOM_END = "zoomEnd";
 
     // Stock chart ===========================================================
     var StockChart = Chart.extend({
@@ -126,10 +130,10 @@
             navi.chart = chart;
             navi.options = chart.options.navigator;
 
-            chart.bind("drag", proxy(navi._drag, navi));
-            chart.bind("dragEnd", proxy(navi._dragEnd, navi));
-            chart.bind("zoom", proxy(navi._zoom, navi));
-            chart.bind("zoomEnd", proxy(navi._zoomEnd, navi));
+            chart.bind(DRAG, proxy(navi._drag, navi));
+            chart.bind(DRAG_END, proxy(navi._dragEnd, navi));
+            chart.bind(ZOOM, proxy(navi._zoom, navi));
+            chart.bind(ZOOM_END, proxy(navi._zoomEnd, navi));
         },
 
         redraw: function() {
