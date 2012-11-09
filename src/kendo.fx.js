@@ -571,7 +571,19 @@
         if (effects[0]) {
             effectSet.run(effects);
         } else { // Not sure how would an fx promise reach this state - means that you call kendoAnimate with no valid effects? Why?
-            options.init();
+            if (!element.is(":visible")) {
+                element.css({ display: element.data("olddisplay") || "block" }).css("display");
+            }
+
+            if (options.hide) {
+                element.data("olddisplay", element.css("display")).hide();
+            }
+
+            if (options.init) {
+                options.init();
+            }
+
+            element.dequeue();
             effectSet.complete();
         }
     };
