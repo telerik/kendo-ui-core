@@ -32,7 +32,6 @@
         float: left;
         width: 200px;
         height: 200px;
-        float: left;
         margin-left: 20px;
         margin-bottom: 20px;
         position: relative;
@@ -41,8 +40,8 @@
     }
     #chessboard div .icon {
         font-size: 64px;
-        width: 200px;
-        height: 200px;
+        width: 100%;
+        height: 100%;
         line-height: 200px;
         position: absolute;
         text-align: center;
@@ -51,8 +50,8 @@
 
     #chessboard div .description {
         display: none;
-        width: 200px;
-        height: 200px;
+        width: 100%;
+        height: 100%;
         position: absolute;
         top: 0;
         font-size: 32px;
@@ -63,7 +62,7 @@
     $("#chessboard div").hover(
         function(e) {
             var div = $(e.currentTarget);
-            kendo.fx(div.find(".description").show()).tile("left", div.find(".icon")).play();
+            kendo.fx(div.find(".description").css("display", "block")).tile("left", div.find(".icon")).play();
         },
 
        function(e) {
