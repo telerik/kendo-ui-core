@@ -1,0 +1,21 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask AssemblyFile="ResourceUploader.MSBuildTasks.dll" TaskName="UploadResources" />
+  <Target Name="MyTarget">
+    <PropertyGroup>
+		<SourceDirectory>C:\Work\Temp\KendoUI_2011_1_728</SourceDirectory>
+		<Version>2011.1.728</Version>
+		<CDNAccessKeyId>AKIAJSDTTSFPVFUMHBGA</CDNAccessKeyId>
+		<CDNSecretAccessKey>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</CDNSecretAccessKey>
+		<CDNBucketName>testtelerik</CDNBucketName>
+	</PropertyGroup>
+	  <UploadResources SourcePath="$(SourceDirectory)\js\" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+					  BucketName="$(CDNBucketName)" DestinationPath="$(Version)/js" Compress="True" />
+	  <UploadResources SourcePath="$(SourceDirectory)\styles\" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+					  BucketName="$(CDNBucketName)" DestinationPath="$(Version)/styles" Compress="True" />
+
+	  <UploadResources SourcePath="$(SourceDirectory)\js\" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+					  BucketName="$(CDNBucketName)" DestinationPath="nc/$(Version)/js" Compress="False" />
+	  <UploadResources SourcePath="$(SourceDirectory)\styles\" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+					  BucketName="$(CDNBucketName)" DestinationPath="nc/$(Version)/styles" Compress="False" />
+  </Target>
+</Project>
