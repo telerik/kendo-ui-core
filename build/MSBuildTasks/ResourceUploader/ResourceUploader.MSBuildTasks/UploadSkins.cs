@@ -8,7 +8,7 @@ namespace ResourceUploader.MSBuildTasks
     {
         protected override string[] SupportedExtensions
         {
-            get { return new[] { ".css", ".gif", ".png", ".jpeg", ".jpg", ".ico", ".cur", "*.ttf", "*.woff" }; }
+            get { return new[] { ".css", ".gif", ".png", ".jpeg", ".jpg", ".ico", ".cur", ".ttf", ".woff" }; }
         }
 
         public override bool Execute()

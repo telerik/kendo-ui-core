@@ -51,7 +51,7 @@ namespace ResourceUploader.MSBuildTasks
 
         protected string[] SupportedExtensions
         {
-            get { return new[] { ".js", ".css", ".gif", ".png", ".jpeg", ".jpg", ".ico", ".cur", "*.ttf", "*.woff" }; }
+            get { return new[] { ".js", ".css", ".gif", ".png", ".jpeg", ".jpg", ".ico", ".cur", ".ttf", ".woff" }; }
         }
 
         public override bool Execute()
