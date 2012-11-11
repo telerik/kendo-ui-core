@@ -8,8 +8,8 @@
 	<div id="example" class="k-content">
          <div class="chart-wrapper">
          	 <kendo:chart name="chart">
-        	 	 <kendo:chart-title text="Spain electricity production (GWh)"></kendo:chart-title>
-        	 	 <kendo:chart-legend position="top"></kendo:chart-legend>
+        	 	 <kendo:chart-title text="Spain electricity production (GWh)" />
+        	 	 <kendo:chart-legend position="top" />
         	 	 <kendo:dataSource>
         	 	 	 <kendo:dataSource-sort>
         	 	 	 	 <kendo:dataSource-sortItem field="year" dir="asc" />
@@ -19,9 +19,9 @@
 	                 </kendo:dataSource-transport>
                  </kendo:dataSource>
         	 	 <kendo:chart-series>
-        	 	 	<kendo:chart-seriesItem type="pie" field="nuclear" categoryField="year"></kendo:chart-seriesItem>
+        	 	 	<kendo:chart-seriesItem type="pie" field="nuclear" categoryField="year" />
         	 	 </kendo:chart-series>
-        	 	 <kendo:chart-tooltip visible="true" format="{0:N0}"></kendo:chart-tooltip>
+        	 	 <kendo:chart-tooltip visible="true" format="{0:N0}" />
         	 </kendo:chart>
         </div>
     </div>

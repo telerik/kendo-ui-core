@@ -4,14 +4,14 @@
 	<div id="example" class="k-content">
          <div class="chart-wrapper">
          	 <kendo:chart name="chart">
-         	 	 <kendo:chart-title text="Break-up of Spain Electricity Production for 2008"></kendo:chart-title>
-         	 	 <kendo:chart-legend position="bottom"></kendo:chart-legend>
+         	 	 <kendo:chart-title text="Break-up of Spain Electricity Production for 2008" />
+         	 	 <kendo:chart-legend position="bottom" />
          	 	 <kendo:dataSource data="${spainElectricityBreakdown}">
             	 </kendo:dataSource>
          	 	 <kendo:chart-series>
-         	 	 	<kendo:chart-seriesItem type="pie" field="percentage" categoryField="source" explodeField="explode"></kendo:chart-seriesItem>
+         	 	 	<kendo:chart-seriesItem type="pie" field="percentage" categoryField="source" explodeField="explode" />
          	 	 </kendo:chart-series>
-         	 	 <kendo:chart-tooltip visible="true" template="${ category } - ${ value }%"></kendo:chart-tooltip>
+         	 	 <kendo:chart-tooltip visible="true" template="${ category } - ${ value }%" />
          	 </kendo:chart>
          </div>
     </div>

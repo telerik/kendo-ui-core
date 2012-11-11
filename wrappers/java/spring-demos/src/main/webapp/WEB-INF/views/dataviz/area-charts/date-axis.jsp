@@ -57,13 +57,20 @@
 	</div>
 	<div id="example" class="k-content">
          <div class="chart-wrapper">
+             <% 
+			 	 String[] categories = {
+            		 "2011/12/30", "2011/12/31",
+            		 "2012/01/01", "2012/01/02",
+            		 "2012/01/03"
+				 };
+			 %>
          	 <kendo:chart name="chart">
-         	 	 <kendo:chart-title text="Units sold"></kendo:chart-title>
+         	 	 <kendo:chart-title text="Units sold" />
          	 	 <kendo:chart-series>
-         	 	 	<kendo:chart-seriesItem type="area" data="<%= new int[] { 20, 40, 45, 30, 50 } %>" aggregate="sum"></kendo:chart-seriesItem>
+         	 	 	<kendo:chart-seriesItem type="area" data="<%= new int[] { 20, 40, 45, 30, 50 } %>" aggregate="sum" />
          	 	 </kendo:chart-series>
          	 	 <kendo:chart-categoryAxis>
-         	 	 	<kendo:chart-categoryAxisItem type="date" categories="<%= new String[] { \"2011/12/30\", \"2011/12/31\", \"2012/01/01\", \"2012/01/02\", \"2012/01/03\" } %>" baseUnit="months"></kendo:chart-categoryAxisItem>
+         	 	 	<kendo:chart-categoryAxisItem type="date" categories="<%= categories %>" baseUnit="months" />
          	 	 </kendo:chart-categoryAxis>
          	 </kendo:chart>
          </div>

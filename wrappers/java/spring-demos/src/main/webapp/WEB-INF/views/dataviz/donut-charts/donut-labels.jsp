@@ -25,14 +25,14 @@
 	
          <div class="chart-wrapper">
          	 <kendo:chart name="chart">
-         	 	 <kendo:chart-title text="Break-up of Spain Electricity Production for 2008"></kendo:chart-title>
-         	 	 <kendo:chart-legend position="bottom"></kendo:chart-legend>
+         	 	 <kendo:chart-title text="Break-up of Spain Electricity Production for 2008" />
+         	 	 <kendo:chart-legend position="bottom" />
          	 	 <kendo:chart-series>
          	 	 	<kendo:chart-seriesItem type="donut" data="${donutData}">
-         	 	 		<kendo:chart-seriesItem-labels visible="true" template="#= kendo.format('{0:P}', percentage)#" position="outsideEnd"></kendo:chart-seriesItem-labels>
+         	 	 		<kendo:chart-seriesItem-labels visible="true" template="#= kendo.format('{0:P}', percentage)#" position="outsideEnd" />
          	 	 	</kendo:chart-seriesItem>
          	 	 </kendo:chart-series>
-         	 	 <kendo:chart-tooltip visible="true" template="#= kendo.format('{0:P}', percentage)#"></kendo:chart-tooltip>
+         	 	 <kendo:chart-tooltip visible="true" template="#= kendo.format('{0:P}', percentage)#" />
          	 </kendo:chart>
          </div>
     </div>
