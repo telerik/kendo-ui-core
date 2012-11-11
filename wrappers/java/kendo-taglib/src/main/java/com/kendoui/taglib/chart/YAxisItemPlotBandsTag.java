@@ -65,7 +65,7 @@ public class YAxisItemPlotBandsTag extends BaseTag /* interfaces *//* interfaces
         return "chart-yAxisItem-plotBands";
     }
 
-    public void addPlotBand(PlotBandTag value) {
+    public void addPlotBand(PlotBandsPlotBandTag value) {
         plotBands.add(value.properties());
     }
 
