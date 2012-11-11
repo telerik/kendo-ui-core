@@ -4085,7 +4085,7 @@ The function return value is displayed instead of the individual points.</descri
         <attribute>
             <description>Name template for auto-generated
 series when binding to grouped data.</description>
-            <name>aField</name>
+            <name>afield</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4120,28 +4120,28 @@ series when binding to grouped data.</description>
 
         <attribute>
             <description>The name of the X axis to use.</description>
-            <name>xAxis</name>
+            <name>xaxis</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
             <description>The data field containing the bubble x value.</description>
-            <name>xField</name>
+            <name>xfield</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
             <description>The name of the Y axis to use.</description>
-            <name>yAxis</name>
+            <name>yaxis</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
             <description>The data field containing the bubble y value.</description>
-            <name>yField</name>
+            <name>yfield</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

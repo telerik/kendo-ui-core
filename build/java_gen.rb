@@ -120,7 +120,7 @@ XML_OPTION_TEMPLATE = ERB.new(%{
 <% if (name != '') %>
         <attribute>
             <description><%= description %></description>
-            <name><%= name %></name>
+            <name><%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
             <rtexprvalue>true</rtexprvalue>
             <type><%= java_type %></type>
         </attribute>
@@ -322,7 +322,7 @@ JAVA_EVENT_GETTER_TEMPLATE = ERB.new(%{
 })
 
 JAVA_OPTION_GETTER_TEMPLATE = ERB.new(%{
-    public <%= java_type.sub('java.lang.', '') %> get<%= name.sub(/^./) { |c| c.capitalize } %>() {
+    public <%= java_type.sub('java.lang.', '') %> get<%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase}.sub(/^./) { |c| c.capitalize } %>() {
         return (<%= java_type.sub('java.lang.', '') %>)getProperty("<%= name %>");
     }
 })
@@ -334,7 +334,7 @@ JAVA_EVENT_SETTER_TEMPLATE = ERB.new(%{
 })
 
 JAVA_OPTION_SETTER_TEMPLATE = ERB.new(%{
-    public void set<%= name.sub(/^./) { |c| c.capitalize } %>(<%= java_type.sub('java.lang.', '') %> value) {
+    public void set<%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase}.sub(/^./) { |c| c.capitalize } %>(<%= java_type.sub('java.lang.', '') %> value) {
         setProperty("<%= name %>", value);
     }
 })

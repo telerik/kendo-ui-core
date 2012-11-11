@@ -8,7 +8,7 @@
          	 	 <kendo:chart-legend visible="false" />
          	 	 <kendo:dataSource data="${jobGrowth}" />
          	 	 <kendo:chart-series>
-         	 	 	<kendo:chart-seriesItem type="bubble" xAxis="a" sizeField="applications" categoryField="company" />
+         	 	 	<kendo:chart-seriesItem type="bubble" xField="growth" yField="jobs" sizeField="applications" categoryField="company" />
          	 	 </kendo:chart-series>
          	 	 <kendo:chart-xAxis>
          	 	 	<kendo:chart-xAxisItem axisCrossingValue="-5000" majorUnit="2000">

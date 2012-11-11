@@ -201,11 +201,11 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("spacing", value);
     }
 
-    public String getAField() {
+    public String getAfield() {
         return (String)getProperty("aField");
     }
 
-    public void setAField(String value) {
+    public void setAfield(String value) {
         setProperty("aField", value);
     }
 
@@ -241,35 +241,35 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("sizeField", value);
     }
 
-    public String getXAxis() {
+    public String getXaxis() {
         return (String)getProperty("xAxis");
     }
 
-    public void setXAxis(String value) {
+    public void setXaxis(String value) {
         setProperty("xAxis", value);
     }
 
-    public String getXField() {
+    public String getXfield() {
         return (String)getProperty("xField");
     }
 
-    public void setXField(String value) {
+    public void setXfield(String value) {
         setProperty("xField", value);
     }
 
-    public String getYAxis() {
+    public String getYaxis() {
         return (String)getProperty("yAxis");
     }
 
-    public void setYAxis(String value) {
+    public void setYaxis(String value) {
         setProperty("yAxis", value);
     }
 
-    public String getYField() {
+    public String getYfield() {
         return (String)getProperty("yField");
     }
 
-    public void setYField(String value) {
+    public void setYfield(String value) {
         setProperty("yField", value);
     }
 
