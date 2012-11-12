@@ -9,7 +9,7 @@ IGNORED = {
     'chart' => ['axisDefaults'],
     'window' => ['content.template'],
     'grid' => ['detailTemplate', 'rowTemplate', 'altRowTemplate'],
-    'listview' => ['template']
+    'listview' => ['template', 'editTemplate']
 }
 
 MD_METADATA_TEMPLATE = ERB.new(%{---
@@ -832,6 +832,10 @@ class Tag
             tag.options.push(Option.new :name => 'pageable',
                                         :type => 'Boolean',
                                         :description => "Indicates whether paging is enabled/disabled.")
+
+            tag.options.push(Option.new :name => 'editTemplate',
+                                        :type => 'String',
+                                        :description => "Specifies ListView item template in edit mode.")
         end
 
         if tag.has_items?

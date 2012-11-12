@@ -1312,11 +1312,6 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
-            <description>Specifies ListView item template in edit mode.</description>
-            <name>editTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Indicates whether keyboard navigation is enabled/disabled.</description>
             <name>navigatable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1342,6 +1337,13 @@ The following settings are available for the</description>
             <name>pageable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies ListView item template in edit mode.</description>
+            <name>editTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -8778,14 +8780,6 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
         <description>Subscribes to the remove event of ListView.</description>
         <name>listView-remove</name>
         <tag-class>com.kendoui.taglib.listview.RemoveFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-
-    <tag>
-        <description>Subscribes to the editTemplate event of ListView.</description>
-        <name>listView-editTemplate</name>
-        <tag-class>com.kendoui.taglib.listview.EditTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 

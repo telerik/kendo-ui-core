@@ -46,6 +46,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
             setProperty("template", new Function(template));
         }
         
+        if (isSet("editTemplate")) {
+            template = "kendo.template($(\"#" + getEditTemplate() + "\").html())";
+            setProperty("editTemplate", new Function(template));
+        }
+        
         if (isSet("pageable")) {
             if (getProperty("pageable") instanceof HashMap<?, ?>) {
                 pagable = (HashMap<String, Object>)getProperty("pageable");
@@ -116,10 +121,6 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("remove", value.getBody());
     }
 
-    public void setEditTemplate(EditTemplateFunctionTag value) {
-        setEvent("editTemplate", value.getBody());
-    }
-
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }
@@ -131,18 +132,6 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
-    }
-
-    public String getEditTemplate() {
-        Function property = ((Function)getProperty("editTemplate"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setEditTemplate(String value) {
-        setProperty("editTemplate", new Function(value));
     }
 
     public boolean getNavigatable() {
@@ -175,6 +164,14 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setPageable(boolean value) {
         setProperty("pageable", value);
+    }
+
+    public String getEditTemplate() {
+        return (String)getProperty("editTemplate");
+    }
+
+    public void setEditTemplate(String value) {
+        setProperty("editTemplate", value);
     }
 
     public String getChange() {
