@@ -6,7 +6,7 @@
 
 <c:url value="/web/splitter/content/1" var="ajaxContent1" />
 
-<kendo:splitter name="splitter" style="width: 400px" expand="onExpand" collapse="onCollapse" contentLoad="onContentLoad" resize="onResize">
+<kendo:splitter name="splitter" expand="onExpand" collapse="onCollapse" contentLoad="onContentLoad" resize="onResize">
     <kendo:splitter-panes>
 	    <kendo:splitter-pane id="top_pane" size="100px" collapsible="true">
 	        <p>

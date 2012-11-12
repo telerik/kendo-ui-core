@@ -3,14 +3,18 @@ package com.kendoui.taglib.splitter;
 
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.kendoui.taglib.BaseTag;
 import com.kendoui.taglib.html.Div;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 @SuppressWarnings("serial")
-public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class PaneTag extends  BaseTag implements DynamicAttributes /* interfaces *//* interfaces */ {
+    private Map<String, Object> attributes;
     
     @Override
     public int doEndTag() throws JspException {
@@ -21,27 +25,40 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         parent.addPane(this);
 
 //<< doEndTag
-
-        String html = body();
-        Div div = new Div();
-        
-        if (!html.isEmpty()) {                
-            div.html(html);
-        }
         
         try {
-            div.write(pageContext.getOut());                
+            html().write(pageContext.getOut());                
         } catch (IOException exception) {
             throw new JspException(exception);
         }
         
         return super.doEndTag();
     }
+    
+    public Div html() {
+        Div element = new Div();
+        String content = body();
+
+        for (String attribute : attributes.keySet()) {
+            Object value = attributes.get(attribute);
+            
+            if (value != null) {
+                element.attr(attribute, value);
+            }
+        }
+        
+        if (!content.isEmpty()) {                
+            element.html(content);
+        }
+
+        return element;
+    }
 
     @Override
     public void initialize() {
 //>> initialize
 //<< initialize
+        attributes = new HashMap<String, Object>();
 
         super.initialize();
     }
@@ -50,6 +67,7 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void destroy() {
 //>> destroy
 //<< destroy
+        attributes = null;
 
         super.destroy();
     }
@@ -125,5 +143,9 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
     }
 
 //<< Attributes
-
+    
+    @Override
+    public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+        attributes.put(localName, value);
+    }
 }

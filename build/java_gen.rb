@@ -164,7 +164,9 @@ XML_NESTED_TAG_TEMPLATE = ERB.new(%{
         <name><%= tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= java_type %></tag-class>
         <body-content><%= body_content %></body-content>
-<%= (options + events).map {|o| o.to_xml }.join %>
+<%= (options + events).map {|o| o.to_xml }.join %><% if name == 'Pane' %>
+        <dynamic-attributes>true</dynamic-attributes>
+    <% end %>
     </tag>
 })
 

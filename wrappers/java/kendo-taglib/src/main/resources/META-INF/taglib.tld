@@ -9785,6 +9785,8 @@ value must not exceed</description>
             <type>java.lang.String</type>
         </attribute>
 
+        <dynamic-attributes>true</dynamic-attributes>
+    
     </tag>
 
 
