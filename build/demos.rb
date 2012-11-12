@@ -164,29 +164,20 @@ MVC_RAZOR_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.csh
                     .exclude('**/_ViewStart.cshtml')
 MVC_ASPX_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.as*x']
 
-tree :to => 'dist/demos/production',
-     :from => PRODUCTION_RESOURCES,
-     :root => 'demos/mvc/'
+%w{production staging}.each do |flavor|
 
-tree :to => 'dist/demos/production/sources/aspx',
-     :from => MVC_ASPX_VIEWS,
-     :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
+    tree :to => "dist/demos/#{flavor}",
+         :from => PRODUCTION_RESOURCES,
+         :root => 'demos/mvc/'
 
-tree :to => 'dist/demos/production/sources/razor',
-     :from => MVC_RAZOR_VIEWS,
-     :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
+    tree :to => "dist/demos/#{flavor}/src/aspnetmvc/aspx",
+         :from => MVC_ASPX_VIEWS,
+         :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
 
-tree :to => 'dist/demos/staging',
-     :from => PRODUCTION_RESOURCES,
-     :root => 'demos/mvc/'
-
-tree :to => 'dist/demos/staging/sources/aspx',
-     :from => MVC_ASPX_VIEWS,
-     :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
-
-tree :to => 'dist/demos/staging/sources/razor',
-     :from => MVC_RAZOR_VIEWS,
-     :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
+    tree :to => "dist/demos/#{flavor}/src/aspnetmvc/razor",
+         :from => MVC_RAZOR_VIEWS,
+         :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
+end
 
 tree :to => 'dist/demos/staging/content/cdn/js',
      :from => COMPLETE_MIN_JS + MVC_MIN_JS,
@@ -237,8 +228,8 @@ namespace :demos do
         :release,
         'themebuilder:staging',
         'dist/demos/staging',
-        'dist/demos/staging/sources/aspx',
-        'dist/demos/staging/sources/razor',
+        'dist/demos/staging/src/aspnetmvc/aspx',
+        'dist/demos/staging/src/aspnetmvc/razor',
         'dist/demos/staging/content/cdn/js',
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
@@ -253,8 +244,8 @@ namespace :demos do
 
     task :production_site => [:release,
         'dist/demos/production',
-        'dist/demos/production/sources/aspx',
-        'dist/demos/production/sources/razor'] do
+        'dist/demos/production/src/aspnetmvc/aspx',
+        'dist/demos/production/src/aspnetmvc/razor'] do
         patch_web_config('dist/demos/production/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT)
     end
 
