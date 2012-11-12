@@ -83,6 +83,9 @@
 
     function onZoom(e) {
         kendoConsole.log(kendo.format("Zoom :: {0}", e.delta));
+
+        // Prevent scrolling
+        e.originalEvent.preventDefault();
     }
 
     function onZoomEnd(e) {
