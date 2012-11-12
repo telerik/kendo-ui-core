@@ -51,7 +51,7 @@ public class YAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         return "chart-yAxisItem-labels";
     }
 
-    public void setBorder(LabelsBorderTag value) {
+    public void setBorder(YAxisItemLabelsBorderTag value) {
         setProperty("border", value);
     }
 

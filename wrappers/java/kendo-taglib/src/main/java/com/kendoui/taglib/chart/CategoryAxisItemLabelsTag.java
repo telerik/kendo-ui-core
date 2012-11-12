@@ -51,7 +51,7 @@ public class CategoryAxisItemLabelsTag extends  BaseTag  /* interfaces *//* inte
         return "chart-categoryAxisItem-labels";
     }
 
-    public void setBorder(LabelsBorderTag value) {
+    public void setBorder(CategoryAxisItemLabelsBorderTag value) {
         setProperty("border", value);
     }
 

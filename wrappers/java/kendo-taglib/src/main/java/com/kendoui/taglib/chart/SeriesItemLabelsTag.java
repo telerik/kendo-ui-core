@@ -51,7 +51,7 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces
         return "chart-seriesItem-labels";
     }
 
-    public void setBorder(LabelsBorderTag value) {
+    public void setBorder(SeriesItemLabelsBorderTag value) {
         setProperty("border", value);
     }
 

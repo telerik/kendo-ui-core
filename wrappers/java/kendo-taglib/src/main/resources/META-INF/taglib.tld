@@ -3726,7 +3726,7 @@ hex and rgb.</description>
     <tag>
         <description>The border of the labels.</description>
         <name>chart-categoryAxisItem-labels-border</name>
-        <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemLabelsBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -3756,7 +3756,7 @@ hex and rgb.</description>
     <tag>
         <description>The plot bands of the category axis.</description>
         <name>chart-categoryAxisItem-plotBand</name>
-        <tag-class>com.kendoui.taglib.chart.PlotBandsPlotBandTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemPlotBandsPlotBandTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -3793,7 +3793,7 @@ hex and rgb.</description>
     <tag>
         <description>The border of the title.</description>
         <name>chart-categoryAxisItem-title-border</name>
-        <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemTitleBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -4587,7 +4587,7 @@ Template variables:</description>
     <tag>
         <description>The border of the labels.</description>
         <name>chart-seriesItem-labels-border</name>
-        <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -4617,7 +4617,7 @@ Template variables:</description>
     <tag>
         <description>The border of the markers.</description>
         <name>chart-seriesItem-markers-border</name>
-        <tag-class>com.kendoui.taglib.chart.MarkersBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -4640,7 +4640,7 @@ Template variables:</description>
     <tag>
         <description>The border configuration options.</description>
         <name>chart-seriesItem-tooltip-border</name>
-        <tag-class>com.kendoui.taglib.chart.TooltipBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTooltipBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -4844,7 +4844,7 @@ Template variables:</description>
     <tag>
         <description>The border of the labels.</description>
         <name>chart-seriesDefaults-labels-border</name>
-        <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.SeriesDefaultsLabelsBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -4874,7 +4874,7 @@ Template variables:</description>
     <tag>
         <description>The border configuration options.</description>
         <name>chart-seriesDefaults-tooltip-border</name>
-        <tag-class>com.kendoui.taglib.chart.TooltipBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.SeriesDefaultsTooltipBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5308,7 +5308,7 @@ hex and rgb.</description>
     <tag>
         <description>The border of the labels.</description>
         <name>chart-valueAxisItem-labels-border</name>
-        <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemLabelsBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5339,7 +5339,7 @@ hex and rgb.</description>
     <tag>
         <description>The plot bands of the value axis.</description>
         <name>chart-valueAxisItem-plotBand</name>
-        <tag-class>com.kendoui.taglib.chart.PlotBandsPlotBandTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemPlotBandsPlotBandTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5376,7 +5376,7 @@ hex and rgb.</description>
     <tag>
         <description>The border of the title.</description>
         <name>chart-valueAxisItem-title-border</name>
-        <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemTitleBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5786,7 +5786,7 @@ hex and rgb.</description>
     <tag>
         <description>The border of the labels.</description>
         <name>chart-xAxisItem-labels-border</name>
-        <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemLabelsBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5817,7 +5817,7 @@ hex and rgb.</description>
     <tag>
         <description>The plot bands of the xAxis.</description>
         <name>chart-xAxisItem-plotBand</name>
-        <tag-class>com.kendoui.taglib.chart.PlotBandsPlotBandTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemPlotBandsPlotBandTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5854,7 +5854,7 @@ hex and rgb.</description>
     <tag>
         <description>The border of the title.</description>
         <name>chart-xAxisItem-title-border</name>
-        <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemTitleBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -6264,7 +6264,7 @@ hex and rgb.</description>
     <tag>
         <description>The border of the labels.</description>
         <name>chart-yAxisItem-labels-border</name>
-        <tag-class>com.kendoui.taglib.chart.LabelsBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemLabelsBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -6295,7 +6295,7 @@ hex and rgb.</description>
     <tag>
         <description>The plot bands of the yAxis.</description>
         <name>chart-yAxisItem-plotBand</name>
-        <tag-class>com.kendoui.taglib.chart.PlotBandsPlotBandTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemPlotBandsPlotBandTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -6332,7 +6332,7 @@ hex and rgb.</description>
     <tag>
         <description>The border of the title.</description>
         <name>chart-yAxisItem-title-border</name>
-        <tag-class>com.kendoui.taglib.chart.TitleBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemTitleBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>

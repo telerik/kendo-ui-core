@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TooltipBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class YAxisItemTitleBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        TooltipTag parent = (TooltipTag)findParentWithClass(TooltipTag.class);
+        YAxisItemTitleTag parent = (YAxisItemTitleTag)findParentWithClass(YAxisItemTitleTag.class);
 
 
         parent.setBorder(this);
@@ -48,7 +48,7 @@ public class TooltipBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-tooltip-border";
+        return "chart-yAxisItem-title-border";
     }
 
     public String getColor() {
@@ -57,6 +57,14 @@ public class TooltipBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 
     public void setColor(String value) {
         setProperty("color", value);
+    }
+
+    public String getDashType() {
+        return (String)getProperty("dashType");
+    }
+
+    public void setDashType(String value) {
+        setProperty("dashType", value);
     }
 
     public float getWidth() {

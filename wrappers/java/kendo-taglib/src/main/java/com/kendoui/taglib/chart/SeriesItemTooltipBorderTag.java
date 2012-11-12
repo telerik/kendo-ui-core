@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TooltipBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class SeriesItemTooltipBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        TooltipTag parent = (TooltipTag)findParentWithClass(TooltipTag.class);
+        SeriesItemTooltipTag parent = (SeriesItemTooltipTag)findParentWithClass(SeriesItemTooltipTag.class);
 
 
         parent.setBorder(this);
@@ -48,7 +48,7 @@ public class TooltipBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-tooltip-border";
+        return "chart-seriesItem-tooltip-border";
     }
 
     public String getColor() {

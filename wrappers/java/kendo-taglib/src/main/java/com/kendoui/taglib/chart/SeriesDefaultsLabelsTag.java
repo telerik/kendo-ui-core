@@ -51,7 +51,7 @@ public class SeriesDefaultsLabelsTag extends  BaseTag  /* interfaces *//* interf
         return "chart-seriesDefaults-labels";
     }
 
-    public void setBorder(LabelsBorderTag value) {
+    public void setBorder(SeriesDefaultsLabelsBorderTag value) {
         setProperty("border", value);
     }
 

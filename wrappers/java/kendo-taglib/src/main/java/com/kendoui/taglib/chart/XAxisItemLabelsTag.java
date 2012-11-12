@@ -51,7 +51,7 @@ public class XAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         return "chart-xAxisItem-labels";
     }
 
-    public void setBorder(LabelsBorderTag value) {
+    public void setBorder(XAxisItemLabelsBorderTag value) {
         setProperty("border", value);
     }
 

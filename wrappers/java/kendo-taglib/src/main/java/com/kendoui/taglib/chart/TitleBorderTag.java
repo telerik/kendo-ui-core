@@ -19,7 +19,7 @@ public class TitleBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
 //>> doEndTag
 
 
-        YAxisItemTitleTag parent = (YAxisItemTitleTag)findParentWithClass(YAxisItemTitleTag.class);
+        TitleTag parent = (TitleTag)findParentWithClass(TitleTag.class);
 
 
         parent.setBorder(this);
@@ -48,7 +48,7 @@ public class TitleBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "chart-yAxisItem-title-border";
+        return "chart-title-border";
     }
 
     public String getColor() {

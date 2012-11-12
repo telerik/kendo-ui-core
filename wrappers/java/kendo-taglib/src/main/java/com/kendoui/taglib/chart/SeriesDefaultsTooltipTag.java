@@ -51,7 +51,7 @@ public class SeriesDefaultsTooltipTag extends  BaseTag  /* interfaces *//* inter
         return "chart-seriesDefaults-tooltip";
     }
 
-    public void setBorder(TooltipBorderTag value) {
+    public void setBorder(SeriesDefaultsTooltipBorderTag value) {
         setProperty("border", value);
     }
 

@@ -12,17 +12,15 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TooltipBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class XAxisItemPlotBandsPlotBandTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
+        XAxisItemPlotBandsTag parent = (XAxisItemPlotBandsTag)findParentWithClass(XAxisItemPlotBandsTag.class);
 
-        TooltipTag parent = (TooltipTag)findParentWithClass(TooltipTag.class);
-
-
-        parent.setBorder(this);
+        parent.addPlotBand(this);
 
 //<< doEndTag
 
@@ -48,7 +46,23 @@ public class TooltipBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "chart-tooltip-border";
+        return "chart-xAxisItem-plotBand";
+    }
+
+    public float getFrom() {
+        return (float)getProperty("from");
+    }
+
+    public void setFrom(float value) {
+        setProperty("from", value);
+    }
+
+    public float getTo() {
+        return (float)getProperty("to");
+    }
+
+    public void setTo(float value) {
+        setProperty("to", value);
     }
 
     public String getColor() {
@@ -59,12 +73,12 @@ public class TooltipBorderTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("color", value);
     }
 
-    public float getWidth() {
-        return (float)getProperty("width");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setWidth(float value) {
-        setProperty("width", value);
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
     }
 
 //<< Attributes

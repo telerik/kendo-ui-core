@@ -51,7 +51,7 @@ public class ValueAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfa
         return "chart-valueAxisItem-labels";
     }
 
-    public void setBorder(LabelsBorderTag value) {
+    public void setBorder(ValueAxisItemLabelsBorderTag value) {
         setProperty("border", value);
     }
 
