@@ -153,5 +153,161 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.PlotAreaClick(handlerName).ShouldBeType<ChartEventBuilder>();
         }
+
+        [Fact]
+        public void DragStart_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.DragStart(nullFunc);
+            clientEvents["dragStart"].ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void DragStart_with_Func_should_return_builder()
+        {
+            builder.DragStart(nullFunc).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void DragStart_with_string_should_set_HandlerName()
+        {
+            builder.DragStart(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["dragStart"]).HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void DragStart_with_string_should_return_builder()
+        {
+            builder.DragStart(handlerName).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void Drag_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.Drag(nullFunc);
+            clientEvents["drag"].ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void Drag_with_Func_should_return_builder()
+        {
+            builder.Drag(nullFunc).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void Drag_with_string_should_set_HandlerName()
+        {
+            builder.Drag(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["drag"]).HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void Drag_with_string_should_return_builder()
+        {
+            builder.Drag(handlerName).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void DragEnd_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.DragEnd(nullFunc);
+            clientEvents["dragEnd"].ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void DragEnd_with_Func_should_return_builder()
+        {
+            builder.DragEnd(nullFunc).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void DragEnd_with_string_should_set_HandlerName()
+        {
+            builder.DragEnd(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["dragEnd"]).HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void DragEnd_with_string_should_return_builder()
+        {
+            builder.DragEnd(handlerName).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void ZoomStart_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.ZoomStart(nullFunc);
+            clientEvents["zoomStart"].ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void ZoomStart_with_Func_should_return_builder()
+        {
+            builder.ZoomStart(nullFunc).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void ZoomStart_with_string_should_set_HandlerName()
+        {
+            builder.ZoomStart(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["zoomStart"]).HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void ZoomStart_with_string_should_return_builder()
+        {
+            builder.ZoomStart(handlerName).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void Zoom_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.Zoom(nullFunc);
+            clientEvents["zoom"].ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void Zoom_with_Func_should_return_builder()
+        {
+            builder.Zoom(nullFunc).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void Zoom_with_string_should_set_HandlerName()
+        {
+            builder.Zoom(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["zoom"]).HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void Zoom_with_string_should_return_builder()
+        {
+            builder.Zoom(handlerName).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void ZoomEnd_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.ZoomEnd(nullFunc);
+            clientEvents["zoomEnd"].ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void ZoomEnd_with_Func_should_return_builder()
+        {
+            builder.ZoomEnd(nullFunc).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void ZoomEnd_with_string_should_set_HandlerName()
+        {
+            builder.ZoomEnd(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["zoomEnd"]).HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void ZoomEnd_with_string_should_return_builder()
+        {
+            builder.ZoomEnd(handlerName).ShouldBeType<ChartEventBuilder>();
+        }
     }
 }

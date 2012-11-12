@@ -179,9 +179,15 @@
                 baseUnit = axis.options.baseUnit,
                 range = e.axisRanges[axis.options.name],
                 selection = chart._selection,
-                selectionDuration = duration(axis.options.min, axis.options.max, axis.options.baseUnit),
+                selectionDuration = duration(
+                    axis.options.min, axis.options.max, axis.options.baseUnit
+                ),
                 from,
                 to;
+
+            if (!range) {
+                return;
+            }
 
             from = toDate(math.min(
                 math.max(groups[0], range.min),

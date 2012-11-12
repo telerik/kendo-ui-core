@@ -426,14 +426,14 @@
 
         _move: function(e) {
             var chart = this,
-                dragState = chart._navState,
+                state = chart._navState,
                 axes,
                 ranges = {};
 
-            if (dragState) {
+            if (state) {
                 e.preventDefault();
 
-                axes = dragState.axes;
+                axes = state.axes;
 
                 for (var i = 0; i < axes.length; i++) {
                     var currentAxis = axes[i];
@@ -449,7 +449,11 @@
                     }
                 }
 
-                chart.trigger(DRAG, { axisRanges: ranges });
+                state.axisRanges = ranges;
+                chart.trigger(DRAG, {
+                   axisRanges: ranges,
+                   originalEvent: e
+                });
             }
         },
 
@@ -460,6 +464,7 @@
         _mousewheel: function(e) {
             var chart = this,
                 origEvent = e.originalEvent,
+                prevented,
                 delta = 0,
                 totalDelta,
                 state = chart._navState,
@@ -478,8 +483,10 @@
             }
 
             if (!state) {
-                chart._startNavigation(origEvent, ZOOM_START);
-                state = chart._navState;
+                prevented = chart._startNavigation(origEvent, ZOOM_START);
+                if (!prevented) {
+                    state = chart._navState;
+                }
             }
 
             if (state) {
@@ -496,7 +503,11 @@
                     }
                 }
 
-                chart.trigger(ZOOM, { delta: delta, axisRanges: ranges });
+                chart.trigger(ZOOM, {
+                    delta: delta,
+                    axisRanges: ranges,
+                    originalEvent: e
+                });
 
                 if (chart._mwTimeout) {
                     clearTimeout(chart._mwTimeout);
@@ -513,7 +524,7 @@
                 coords = chart._eventCoordinates(e),
                 plotArea = chart._model._plotArea,
                 pane = plotArea.findPointPane(coords),
-                axes,
+                axes = plotArea.axes.slice(0),
                 i,
                 currentAxis,
                 inAxis = false,
@@ -521,16 +532,6 @@
 
             if (!pane) {
                 return;
-            }
-
-            axes = pane.axes.slice(0);
-
-            if (!inArray(plotArea.axisX, axes)) {
-                axes.push(plotArea.axisX);
-            }
-
-            if (!inArray(plotArea.axisY, axes)) {
-                axes.push(plotArea.axisY);
             }
 
             for (i = 0; i < axes.length; i++) {
@@ -543,7 +544,8 @@
 
             if (!inAxis && plotArea.backgroundBox().containsPoint(coords)) {
                 prevented = chart.trigger(chartEvent, {
-                    axisRanges: axisRanges(axes)
+                    axisRanges: axisRanges(axes),
+                    originalEvent: e
                 });
 
                 if(prevented) {
@@ -563,9 +565,12 @@
             var chart = this;
 
             if (chart._navState) {
-                chart.trigger(chartEvent);
+                chart.trigger(chartEvent, {
+                    axisRanges: chart._navState.axisRanges,
+                    originalEvent: e
+                });
                 chart._suppressHover = false;
-                delete chart._navState;
+                chart._navState = null;
             }
         },
 
