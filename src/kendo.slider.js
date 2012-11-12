@@ -718,7 +718,7 @@
             if (options.showButtons) {
                 var mouseDownHandler = proxy(function(e, sign) {
                     this._clearTooltipTimeout();
-                    if (e.which === 1 || (touch && e.which === 0)) {
+                    if (e.which === 1 || (support.touch && e.which === 0)) {
                         move(sign);
 
                         this.timeout = setTimeout(proxy(function () {

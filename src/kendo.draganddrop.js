@@ -1,7 +1,6 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
-        pointers = support.pointers,
         document = window.document,
         Class = kendo.Class,
         Widget = kendo.ui.Widget,

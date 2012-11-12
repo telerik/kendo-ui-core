@@ -1,7 +1,6 @@
 
 (function($, undefined) {
     var kendo = window.kendo,
-        touch = kendo.support.touch,
         keys = kendo.keys,
         extractFormat = kendo._extractFormat,
         ui = kendo.ui,
@@ -10,7 +9,7 @@
         CLOSE = "close",
         CHANGE = "change",
         ns = ".kendoTimePicker",
-        CLICK = (touch ? "touchend" : "click") + ns,
+        CLICK = "touchend" + ns + " click" + ns,
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         LI = "li",
@@ -43,7 +42,7 @@
         that.options = options;
 
         that.ul = $('<ul tabindex="-1" role="listbox" aria-hidden="true" unselectable="on" class="k-list k-reset"/>')
-                    .css({ overflow: kendo.support.touch ? "": "auto" })
+                    .css({ overflow: kendo.support.kineticScrollNeeded ? "": "auto" })
                     .on(CLICK, LI, proxy(that._click, that))
                     .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                     .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); });
@@ -620,13 +619,13 @@
             that._inputWrapper.removeClass(FOCUSED);
         },
 
-        _click: function() {
+        _click: function(e) {
             var that = this,
                 element = that.element;
 
             that.timeView.toggle();
 
-            if (!touch && element[0] !== document.activeElement) {
+            if (e.type === "click" && element[0] !== document.activeElement) {
                 element.focus();
             }
         },
@@ -696,9 +695,7 @@
         },
 
         _toggleHover: function(e) {
-            if (!touch) {
-                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
-            }
+            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
         _update: function(value) {
