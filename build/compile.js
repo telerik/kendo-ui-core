@@ -60,7 +60,9 @@ files.forEach(function(file){
         return "./" + dep.replace(/\.js$/, "");
     });
     var ast = u2.parse(code, { filename: file });
-    ast = get_wrapper().wrap(deps, ast);
+    if (ARGV.amd) {
+        ast = get_wrapper().wrap(deps, ast);
+    }
     var compressor = u2.Compressor({ warnings: false });
     ast.figure_out_scope();
     ast = ast.transform(compressor);
