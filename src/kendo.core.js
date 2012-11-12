@@ -2599,7 +2599,7 @@ function pad(number, digits, end) {
     });
 
 
-    var MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseout", "mouseup"];
+    var MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseover", "mouseout", "mouseup"];
 
     $.extend(kendo, {
         setupMouseMute: function() {
@@ -2714,7 +2714,6 @@ function pad(number, digits, end) {
                 };
             }
 
-            console.log(events);
             args[0] = events;
 
             on.apply(that, args);
