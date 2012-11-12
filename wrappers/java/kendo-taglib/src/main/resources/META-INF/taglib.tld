@@ -1384,6 +1384,13 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Specifies ListView wrapper element tag name.</description>
+            <name>tagName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Fires when the list view selection has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>

@@ -840,6 +840,10 @@ class Tag
             tag.options.push(Option.new :name => 'altTemplate',
                                         :type => 'String',
                                         :description => "Template to be used for rendering the alternate items in the listview.")
+
+            tag.options.push(Option.new :name => 'tagName',
+                                        :type => 'String',
+                                        :description => "Specifies ListView wrapper element tag name.")
         end
 
         if tag.has_items?

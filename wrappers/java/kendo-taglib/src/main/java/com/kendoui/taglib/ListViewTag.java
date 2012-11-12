@@ -30,6 +30,15 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         return html;
     }
     
+    @Override
+    protected Element<?> createElement() {
+        if (isSet("tagName")) {
+            return new ListViewElement(getTagName().toLowerCase());
+        }
+        
+        return super.createElement();
+    }
+    
     @SuppressWarnings("unchecked")
     @Override
     public int doEndTag() throws JspException {
@@ -185,6 +194,14 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setAltTemplate(String value) {
         setProperty("altTemplate", value);
+    }
+
+    public String getTagName() {
+        return (String)getProperty("tagName");
+    }
+
+    public void setTagName(String value) {
+        setProperty("tagName", value);
     }
 
     public String getChange() {
