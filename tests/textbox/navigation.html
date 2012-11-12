@@ -213,18 +213,6 @@
                 ok(textbox._prevent(192 /* ` */, shiftKey));
                 equal(input.val(), "");
             });
-
-            asyncTest("pressing mousedown of the up arrow increment value", 1, function() {
-                var textbox = new NumericTextBox(input);
-
-                textbox._upArrow.mousedown();
-
-                setTimeout(function() {
-                    clearTimeout(textbox._spinning);
-                    ok(textbox.value() > 1);
-                    start();
-                }, 500);
-            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
