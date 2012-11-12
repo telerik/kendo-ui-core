@@ -1031,7 +1031,7 @@
                             .data("indeterminate", false)
                             .prop("indeterminate", false);
                     } else if (field == "expanded") {
-                        that._toggle(that.findByUid(item.uid), item[field]);
+                        that._toggle(that.findByUid(item.uid), item, item[field]);
                     }
                 }
             }
@@ -1196,13 +1196,12 @@
             }
         },
 
-        _toggle: function(node, expand) {
+        _toggle: function(node, dataItem, expand) {
             var that = this,
                 options = that.options,
                 contents = nodeContents(node),
                 direction = expand ? "expand" : "collapse",
                 animation = options.animation[direction],
-                dataItem = that.dataItem(node),
                 loaded;
 
             if (contents.data("animating")) {
