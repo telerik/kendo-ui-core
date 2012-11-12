@@ -6,6 +6,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using IOFile = System.IO.File;
+using System.IO;
 
 namespace Kendo.Controllers
 {
@@ -31,6 +32,7 @@ namespace Kendo.Controllers
             ViewBag.Suite = suite;
             ViewBag.Section = section;
             ViewBag.Example = example;
+            ViewBag.Frameworks = Frameworks(suite, section, example);
 #if DEBUG
             ViewBag.Debug = true;
 #else
@@ -56,6 +58,60 @@ namespace Kendo.Controllers
             return View(
                 string.Format("~/Views/{0}/{1}/{2}.cshtml", suite, section, example)
             );
+        }
+
+        private class FrameworkDescription
+        {
+            public string Name { get; set; }
+
+            public String[] Patterns { get; set; }
+        }
+
+        private static IDictionary<String, FrameworkDescription> frameworkConfiguration = new Dictionary<String, FrameworkDescription>
+        {
+            { "aspnetmvc", new FrameworkDescription { Name = "ASP.NET MVC", Patterns = new[] {"~/src/{0}/aspx/{1}/{2}/{3}.aspx", "~/src/{0}/razor/{1}/{2}/{3}.cshtml" } } }
+        };
+
+        private IEnumerable<ExampleFramework> Frameworks(string suite, string section, string example)
+        {
+            var frameworks = new List<ExampleFramework>();
+
+            frameworks.Add(new ExampleFramework
+            {
+                Name = "HTML",
+                Files = new [] {
+                    new ExampleFile
+                    {
+                        Name = example + ".html",
+                        Url = string.Format("~/Views/{0}/{1}/{2}.cshtml", suite, section, example)
+                    }
+                }
+            });
+
+            foreach (var description in frameworkConfiguration)
+            {
+                var framework = description.Key;
+                var patterns = description.Value.Patterns;
+
+                var files = patterns
+                             .Select(pattern => new ExampleFile
+                             {
+                                 Name = example + Path.GetExtension(pattern),
+                                 Url = String.Format(pattern, framework, suite, section, example)
+                             })
+                             .Where(file => file.Exists(Server));
+
+                if (files.Any())
+                {
+                    frameworks.Add(new ExampleFramework
+                    {
+                        Name = description.Value.Name,
+                        Files = files
+                    });
+                }
+            }
+
+            return frameworks;
         }
 
         public ActionResult SectionIndex(string suite, string section)

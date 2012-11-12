@@ -64,28 +64,57 @@
             }
 
             <ul>
-                <li>Demo source code</li>
+                @foreach (ExampleFramework framework in ViewBag.Frameworks)
+                {
+                    <li>@framework.Name</li>
+                }
             </ul>
+            @foreach (ExampleFramework framework in ViewBag.Frameworks)
+            {
+               <div id="@framework.Name.Replace(".", "-").Replace(" ", "-")">
+               <ul>
+                    @foreach (ExampleFile file in framework.Files)
+                    {
+                        <li>@file.Name</li>
+                    }
+               </ul> 
+               </div>
+               <script>
+               $("#@framework.Name.Replace(".", "-").Replace(" ", "-")").kendoTabStrip({
+                    animation: {
+                        open: {
+                            effects: "fadeIn"
+                        }
+                    },
+                    contentUrls: [
+                        @Html.Raw(String.Join(",", framework.Files.Select(file => "\"" + Url.Action("index", "source", new { path = file.Url } ) + "\"").ToArray()))
+                    ],
+                    contentLoad: function() {
+                        prettyPrint();
+                    }
+               });
+               </script>
+            }
         </div>
 
-        <!-- @RenderSection("Description", false) -->
-
         <script>
-            var codestrip = $("#codeStrip").kendoTabStrip({
-                contentUrls: [
-                    "@Html.Raw(Url.RouteUrl(ViewBag.suite == "mobile" ? "Source" : "SourceView", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example }))"
-                ],
-                contentLoad: function() {
-                    prettyPrint();
-                },
+            $("#codeStrip").kendoTabStrip({
                 animation: {
                     open: {
                         effects: "fadeIn"
                     }
-                }
-            }).data("kendoTabStrip");
+                },
+                select: function(e) {
+                    var tabstrip = $(e.contentElement).data("kendoTabStrip");
 
-            codestrip.select(0);
+                    console.log(tabstrip.select());
+
+                    if (tabstrip.select().length == 0) {
+                        tabstrip.select(0);
+                    }
+                }
+            }).find("li:first").click();
+
         </script>
     }
 </div>

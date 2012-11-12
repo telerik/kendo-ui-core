@@ -86,7 +86,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ExampleFile.cs" />
     <Compile Include="Models\NavigationItem.cs" />
+    <Compile Include="Models\ExampleFramework.cs" />
     <Compile Include="Models\StyleGroups.cs" />
     <Compile Include="Models\NavigationExample.cs" />
     <Compile Include="Models\NavigationWidget.cs" />
@@ -651,6 +653,8 @@
     <Content Include="Views\web\editor\custom-tools.cshtml" />
     <Content Include="Views\web\editor\snippets.cshtml" />
     <Content Include="Views\web\editor\styles.cshtml" />
+    <Content Include="Views\Shared\SourceView.cshtml" />
+    <Content Include="Views\Shared\ThemeBuilderLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
