@@ -2108,22 +2108,10 @@
         },
 
         _averageRowHeight: function() {
-            var that = this,
-                rowHeight = that._rowHeight;
+            var rowHeight = this._rowHeight;
 
-            if (!that._rowHeight) {
-                that._rowHeight = rowHeight = that.table.outerHeight() / that.table[0].rows.length;
-                that._sum = rowHeight;
-                that._measures = 1;
-            }
+            this._rowHeight = rowHeight = this.table.outerHeight() / this.table[0].rows.length;
 
-            var currentRowHeight = that.table.outerHeight() / that.table[0].rows.length;
-
-            if (rowHeight !== currentRowHeight) {
-                that._measures ++;
-                that._sum += currentRowHeight;
-                that._rowHeight = that._sum / that._measures;
-            }
             return rowHeight;
         },
 
