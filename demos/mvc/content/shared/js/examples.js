@@ -189,8 +189,9 @@
 
         getDVThemeUrl: function(themeName) {
             var currentThemeUrl = Application.getCurrentDVThemeLink().attr("href");
-
-            return currentThemeUrl.replace(skinRegex, "kendo.dataviz." + themeName + ".css");
+            if (currentThemeUrl) {
+                return currentThemeUrl.replace(skinRegex, "kendo.dataviz." + themeName + ".css");
+            }
         },
 
         replaceWebTheme: function(themeName) {
@@ -225,7 +226,9 @@
             var newThemeUrl = Application.getDVThemeUrl(themeName),
                 themeLink = Application.getCurrentDVThemeLink();
 
-            Application.updateLink(themeLink, newThemeUrl);
+            if (newThemeUrl) {
+                Application.updateLink(themeLink, newThemeUrl);
+            }
         },
 
         updateLink: function(link, url) {

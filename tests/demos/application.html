@@ -109,6 +109,19 @@
                 ok(links[1].href.indexOf("blueopal") >= 0);
             });
 
+            test("replaceTheme replaces current DataViz theme with new link", function() {
+                appendLink("kendo.dataviz.css");
+                appendLink("kendo.dataviz.default.css");
+
+                Application.replaceDVTheme("blueopal");
+
+                var links = $("head link");
+
+                equal(links.length, 2);
+                ok(links[0].href.indexOf("common") >= 0);
+                ok(links[1].href.indexOf("blueopal") >= 0);
+            });
+
             test("replaceTheme changes LessCss sheets", function() {
                 appendLink("kendo.common.less");
                 appendLink("kendo.default.less");
