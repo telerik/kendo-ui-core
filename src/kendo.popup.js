@@ -27,7 +27,7 @@
         ACTIVE = "k-state-active",
         ACTIVEBORDER = "k-state-border",
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
-        MOUSEDOWN = touch ? "touchstart" : "mousedown",
+        MOUSEDOWN = "down",
         DOCUMENT= $(document),
         WINDOW = $(window),
         DOCUMENT_ELEMENT = $(document.documentElement),
@@ -216,7 +216,9 @@
 
                 DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy)
                                 .bind(MOUSEDOWN, that._mousedownProxy);
-                if (!touch) {
+
+                // this binding hangs iOS in editor
+                if (!support.mobileOS.ios) {
                     WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy)
                           .bind(RESIZE_SCROLL, that._resizeProxy);
                 }
