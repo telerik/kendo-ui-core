@@ -464,6 +464,7 @@
         _mousewheel: function(e) {
             var chart = this,
                 origEvent = e.originalEvent,
+                prevented,
                 delta = 0,
                 totalDelta,
                 state = chart._navState,
@@ -482,8 +483,10 @@
             }
 
             if (!state) {
-                chart._startNavigation(origEvent, ZOOM_START);
-                state = chart._navState;
+                prevented = chart._startNavigation(origEvent, ZOOM_START);
+                if (!prevented) {
+                    state = chart._navState;
+                }
             }
 
             if (state) {
@@ -500,7 +503,11 @@
                     }
                 }
 
-                chart.trigger(ZOOM, { delta: delta, axisRanges: ranges });
+                chart.trigger(ZOOM, {
+                    delta: delta,
+                    axisRanges: ranges,
+                    originalEvent: e
+                });
 
                 if (chart._mwTimeout) {
                     clearTimeout(chart._mwTimeout);
