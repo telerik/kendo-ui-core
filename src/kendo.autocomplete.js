@@ -509,9 +509,7 @@
         },
 
         _toggleHover: function(e) {
-            if (!support.touch) {
-                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
-            }
+            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
         _wrapper: function () {
