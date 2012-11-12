@@ -56,10 +56,10 @@ end
 
 #Build styles/kendo*.css files by running less over styles/kendo*.less
 rule '.css' => ['.less', lambda { |target| find_less_prerequisites(target.ext('less')) } ] do |t|
-    sh "node build/less-js/bin/lessc #{t.source} #{t.name}", :verbose => VERBOSE
+    less(t.source, t.name);
 end
 
 #Build styles/kendo*.min.css by running cssmin over styles/kendo*.css
 rule '.min.css' => lambda { |target| target.sub('min.css', 'css') } do |t|
-    sh "#{CSSMIN} #{t.source} > #{t.name}", :verbose => VERBOSE
+    cssmin(t.source, t.name)
 end

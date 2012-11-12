@@ -2,9 +2,9 @@ require 'rbconfig'
 
 README_DIR = 'resources'
 THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')
-UGLIFYJS = RUBY_PLATFORM =~ /w32/ ? "uglifyjs2" : File.join(Rake.application.original_dir, "node_modules", "uglify-js2", "bin", "uglifyjs2");
-LESSC = File.join(Rake.application.original_dir, "build", "less-js", "bin", "lessc");
-CSSMIN = RUBY_PLATFORM =~ /w32/ ? "cssmin" : File.join(Rake.application.original_dir, "node_modules", "cssmin", "bin", "cssmin");
+UGLIFYJS = File.join(Rake.application.original_dir, "node_modules", "uglify-js2", "bin", "uglifyjs2")
+LESSC = File.join(Rake.application.original_dir, "build", "less-js", "bin", "lessc")
+CSSMIN = File.join(Rake.application.original_dir, "node_modules", "cssmin", "bin", "cssmin")
 
 class MergeTask < Rake::FileTask
     def execute(args=nil)
@@ -74,17 +74,17 @@ def mvn(name, options)
 end
 
 def uglifyjs(from, to)
-    cmd = "#{UGLIFYJS} #{from} -o #{to} -mc";
+    cmd = "node #{UGLIFYJS} #{from} -o #{to} -mc";
     cmd = cmd + " warnings=false" unless VERBOSE;
     sh cmd, :verbose => VERBOSE
 end
 
 def less(from, to)
-    sh "#{LESSC} #{from} #{to}", :verbose => VERBOSE
+    sh "node #{LESSC} #{from} #{to}", :verbose => VERBOSE
 end
 
 def cssmin(from, to)
-    sh "#{CSSMIN} #{from} > #{to}", :verbose => VERBOSE
+    sh "node #{CSSMIN} #{from} > #{to}", :verbose => VERBOSE
 end
 
 # Copy file when it is modified
