@@ -242,6 +242,141 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the DragStart client-side event.
+        /// </summary>
+        /// <param name="onDragStartHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.DragStart("onDragStart"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder DragStart(string onDragStartHandlerName)
+        {
+            Handler("dragStart", onDragStartHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the DragStart client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.DragStart(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder DragStart(Func<object, object> inlineCodeBlock)
+        {
+            Handler("dragStart", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the Drag client-side event.
+        /// </summary>
+        /// <param name="onDragHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.Drag("onDrag"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder Drag(string onDragHandlerName)
+        {
+            Handler("drag", onDragHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the Drag client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.Drag(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder Drag(Func<object, object> inlineCodeBlock)
+        {
+            Handler("drag", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the DragEnd client-side event.
+        /// </summary>
+        /// <param name="onDragEndHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.DragEnd("onDragEnd"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder DragEnd(string onDragEndHandlerName)
+        {
+            Handler("dragEnd", onDragEndHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the DragEnd client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.DragEnd(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder DragEnd(Func<object, object> inlineCodeBlock)
+        {
+            Handler("dragEnd", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the inline handler of the PlotAreaClick client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
@@ -282,6 +417,141 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartEventBuilder PlotAreaClick(string onPlotAreaClickHandlerName)
         {
             Handler("plotAreaClick", onPlotAreaClickHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the ZoomStart client-side event.
+        /// </summary>
+        /// <param name="onZoomStartHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.ZoomStart("onZoomStart"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder ZoomStart(string onZoomStartHandlerName)
+        {
+            Handler("zoomStart", onZoomStartHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the ZoomStart client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.ZoomStart(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder ZoomStart(Func<object, object> inlineCodeBlock)
+        {
+            Handler("zoomStart", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the Zoom client-side event.
+        /// </summary>
+        /// <param name="onZoomHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.Zoom("onZoom"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder Zoom(string onZoomHandlerName)
+        {
+            Handler("zoom", onZoomHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the Zoom client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.Zoom(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder Zoom(Func<object, object> inlineCodeBlock)
+        {
+            Handler("zoom", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the ZoomEnd client-side event.
+        /// </summary>
+        /// <param name="onZoomEndHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.ZoomEnd("onZoomEnd"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder ZoomEnd(string onZoomEndHandlerName)
+        {
+            Handler("zoomEnd", onZoomEndHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the ZoomEnd client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.ZoomEnd(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder ZoomEnd(Func<object, object> inlineCodeBlock)
+        {
+            Handler("zoomEnd", inlineCodeBlock);
 
             return this;
         }

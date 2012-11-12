@@ -34,7 +34,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> Events(Action<ChartEventBuilder> configurator)
         {
-
             configurator(new ChartEventBuilder(Component.Events));
 
             return this;
