@@ -3,7 +3,6 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         support = kendo.support,
-        touch = support.touch,
         getOffset = kendo.getOffset,
         browser = kendo.support.browser,
         appendingToBodyTriggersResize = browser.msie && browser.version < 9,

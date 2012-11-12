@@ -2270,7 +2270,7 @@
         _wrapFooter: function(footerRow) {
             var that = this,
                 html = "",
-                scrollbar = !kendo.support.touch ? kendo.support.scrollbar() : 0;
+                scrollbar = !kendo.support.mobileOS ? kendo.support.scrollbar() : 0;
 
             if (that.options.scrollable) {
                 html = $('<div class="k-grid-footer"><div class="k-grid-footer-wrap"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div></div>');

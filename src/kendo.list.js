@@ -3,7 +3,6 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
-        touch = kendo.support.touch,
         htmlEncode = kendo.htmlEncode,
         ID = "id",
         LI = "li",
@@ -320,7 +319,7 @@
             var that = this;
             open = open !== undefined? open : !that.popup.visible();
 
-            if (!touch && that._focused[0] !== document.activeElement) {
+            if (!kendo.support.mobileOS && that._focused[0] !== document.activeElement) {
                 that._focused.focus();
             }
 
