@@ -23,17 +23,16 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
 //<< doEndTag
 
         String html = body();
+        Div div = new Div();
         
-        if (!html.isEmpty()) {               
-            Div div = new Div();
-            
+        if (!html.isEmpty()) {                
             div.html(html);
-            
-            try {
+        }
+        
+        try {
                 div.write(pageContext.getOut());                
-            } catch (IOException exception) {
-                throw new JspException(exception);
-            }   
+        } catch (IOException exception) {
+            throw new JspException(exception);
         }
         
         return super.doEndTag();
