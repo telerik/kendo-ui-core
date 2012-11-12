@@ -474,7 +474,7 @@
 
             params[removeField] = fileNames;
 
-            $.ajax({
+            jQuery.ajax({
                   type: this.options.async.removeVerb,
                   dataType: "json",
                   url: this.options.async.removeUrl,

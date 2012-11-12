@@ -109,7 +109,7 @@
                 expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)";
 
             that.element
-                .on("keydown" + NS, splitbarSelector, proxy(that._keydown, that))
+                .on("keydown" + NS, splitbarSelector, "_keydown")
                 .on("mousedown" + NS, splitbarSelector, function(e) { e.currentTarget.focus(); })
                 .on("focus" + NS, splitbarSelector, function(e) { $(e.currentTarget).addClass(FOCUSED);  })
                 .on("blur" + NS, splitbarSelector, function(e) { $(e.currentTarget).removeClass(FOCUSED); that.resizing.end(); })
@@ -221,7 +221,7 @@
                 pane.append("<span class='k-icon k-loading k-pane-loading' />");
 
                 if (kendo.isLocalUrl(url)) {
-                    $.ajax({
+                    jQuery.ajax({
                         url: url,
                         data: data || {},
                         type: "GET",

@@ -15,6 +15,7 @@ test("Executes listener event handler", 1, function() {
 test("Unbinds all listeners", 1, function() {
     var div = $$("<div />").handler({ _click: function() { ok(true) } });
 
+    div.autoApplyNS();
     div.on("click", "_click");
 
     div.trigger("click");

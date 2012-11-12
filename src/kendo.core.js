@@ -2488,6 +2488,7 @@ function pad(number, digits, end) {
     var MobileWidget = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
+            this.element.autoApplyNS();
             this.wrapper = this.element;
         },
 
@@ -2666,6 +2667,10 @@ function pad(number, digits, end) {
             return this;
         },
 
+        autoApplyNS: function() {
+            this.data("kendoNS", "." + kendo.guid());
+        },
+
         on: function() {
             var that = this,
                 ns = that.data("kendoNS");
@@ -2673,11 +2678,6 @@ function pad(number, digits, end) {
             // support for event map signature
             if (arguments.length === 1) {
                 return on.call(that, arguments[0]);
-            }
-
-            if (!ns) {
-                ns = "." + kendo.guid();
-                this.data("kendoNS", ns);
             }
 
             var context = that,
@@ -2688,7 +2688,12 @@ function pad(number, digits, end) {
             }
 
             var callback =  args[args.length - 1],
-                events = args[0].replace(/(\w+)/g, applyEventMap).replace(/( |$)/g, ns + " ");
+                events = args[0].replace(/([^ ]+)/g, applyEventMap);
+
+            if (ns) {
+
+                events = events.replace(/( |$)/g, ns + " ");
+            }
 
             // setup mouse trap
             if (support.touch && events.indexOf("mouse") > -1) {
@@ -2709,6 +2714,7 @@ function pad(number, digits, end) {
                 };
             }
 
+            console.log(events);
             args[0] = events;
 
             on.apply(that, args);
@@ -2716,8 +2722,12 @@ function pad(number, digits, end) {
             return that;
         },
 
+
         kendoDestroy: function() {
-            this.off(this.data("kendoNS"));
+            var ns = this.data("kendoNS");
+            if (ns) {
+                this.off(ns);
+            }
         }
     });
 
