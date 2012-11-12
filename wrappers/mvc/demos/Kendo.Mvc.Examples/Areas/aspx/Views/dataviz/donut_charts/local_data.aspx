@@ -5,7 +5,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.Electric
 <div class="chart-wrapper">
     <%= Html.Kendo().Chart(Model)
         .Name("chart")
-        .Title("Internet Users")
+        .Title("Break-up of Spain Electricity Production for 2008")
         .Legend(legend => legend
             .Position(ChartLegendPosition.Bottom)
         )

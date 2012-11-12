@@ -3,17 +3,22 @@
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
     <style>
         #gauge-container {
-            background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/gauge-container.png") %>) no-repeat 50% 50%;
+            background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/gauge-container.png") %>) no-repeat 50% 0;
             width: 404px;
             height: 404px;
             text-align: center;
             margin: auto;
+            padding-top: 27px;
         }
 
         #gauge {
             width: 330px;
             height: 330px;
             margin: 0 auto 0;
+        }
+
+        #gauge svg {
+            left: 0 !important;
         }
     </style>
 </asp:Content>
@@ -49,8 +54,8 @@
             .Pointer(pointer => pointer.Value(65))
             .Scale(scale => scale
                 .MinorUnit(5)
-                .StartAngle(-30)
-                .EndAngle(210)
+                .StartAngle(-60)
+                .EndAngle(240)
                 .Max(180)
                 .Labels(labels => labels
                     .Position(GaugeRadialScaleLabelsPosition.Inside)
