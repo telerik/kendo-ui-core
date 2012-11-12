@@ -118,8 +118,8 @@
                 var links = $("head link");
 
                 equal(links.length, 2);
-                ok(links[0].href.indexOf("common") >= 0);
-                ok(links[1].href.indexOf("blueopal") >= 0);
+                ok(links[0].href.indexOf("kendo.dataviz.css") >= 0);
+                ok(links[1].href.indexOf("kendo.dataviz.blueopal.css") >= 0);
             });
 
             test("replaceTheme changes LessCss sheets", function() {
