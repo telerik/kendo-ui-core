@@ -21,7 +21,7 @@ MVC_DLL = FileList[MVC_SRC_ROOT + 'Kendo.Mvc/Resources/Messages.*.resx']
 CLEAN.include(FileList['wrappers/mvc/**/Kendo*.dll'])
 
 # Delete all ~/Scripts/**/kendo*.js files when `rake clean`. They are copied by `rake mvc:assets`
-CLEAN.include(FileList[MVC_DEMOS_ROOT + 'Scripts/**/kendo*.js'])
+CLEAN.include(FileList[MVC_DEMOS_ROOT + 'Scripts/**/*.js'])
 
 # Delete all ~/Content/**/kendo*.css files when `rake clean`. They are copied by `rake mvc:assets`
 CLEAN.include(FileList[MVC_DEMOS_ROOT + 'Content/**/kendo*.css'])
@@ -46,6 +46,11 @@ MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                 )
                 .include(FileList[MIN_CSS_RESOURCES]
                     .sub('styles', MVC_DEMOS_ROOT + 'Content')
+                )
+                .include(FileList[DEMO_SHARED_ROOT + 'shared/js/**/*']
+                    .reject { |f| File.directory? f }
+                    .sub(DEMO_SHARED_ROOT + 'shared/js', MVC_DEMOS_ROOT + 'Scripts')
+                    .sub('.js', '.min.js')
                 )
                 .include(
                     FileList[DEMO_SHARED_ROOT + '{web,dataviz}/**/*']
@@ -126,6 +131,10 @@ namespace :mvc do
     tree :to => MVC_DEMOS_ROOT + 'Scripts',
          :from => MVC_MIN_JS,
          :root => 'src/'
+
+    tree :to => MVC_DEMOS_ROOT + 'Scripts',
+         :from => DEMO_SHARED_ROOT + 'shared/js/**/*',
+         :root => DEMO_SHARED_ROOT + 'shared/js'
 
     task :assets_js => [:js, MVC_DEMOS_ROOT + 'Scripts', MVC_DEMOS_ROOT + 'App_Data']
 
