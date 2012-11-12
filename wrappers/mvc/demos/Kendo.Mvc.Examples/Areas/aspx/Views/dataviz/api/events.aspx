@@ -37,6 +37,12 @@
             .DataBound("onDataBound")
             .AxisLabelClick("onAxisLabelClick")
             .PlotAreaClick("onPlotAreaClick")
+            .DragStart("onDragStart")
+            .Drag("onDrag")
+            .DragEnd("onDragEnd")
+            .ZoomStart("onZoomStart")
+            .Zoom("onZoom")
+            .ZoomEnd("onZoomEnd")
         )
     %>
 </div>
@@ -64,6 +70,30 @@
     function onPlotAreaClick(e) {
         kendoConsole.log(kendo.format("Plot area click :: {0} : {1:N0}",
             e.category, e.value));
+    }
+
+    function onDragStart(e) {
+        kendoConsole.log("Drag start");
+    }
+
+    function onDrag(e) {
+        kendoConsole.log("Drag");
+    }
+
+    function onDragEnd(e) {
+        kendoConsole.log("Drag end");
+    }
+
+    function onZoomStart(e) {
+        kendoConsole.log("Zoom start");
+    }
+
+    function onZoom(e) {
+        kendoConsole.log(kendo.format("Zoom :: {0}", e.delta));
+    }
+
+    function onZoomEnd(e) {
+        kendoConsole.log("Zoom end");
     }
 </script>
 
