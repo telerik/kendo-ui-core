@@ -2373,3 +2373,26 @@ ul.keyboard-legend li {
     border-left: 1px solid #ccc;
     line-height: 1.3em;
 }
+
+/* Font-face for FF/IE10 */
+@font-face {
+    font-family: "Kendo UI Examples";
+    src: url("KendoUI.woff") format("woff"),
+         url("KendoUI.ttf") format("truetype");
+}
+
+#device-wrapper .km-icon:after,
+#device-wrapper .km-icon:before,
+#device-wrapper .km-contactadd:after,
+#device-wrapper .km-contactadd:before,
+#device-wrapper .km-rowdelete:after,
+#device-wrapper .km-rowdelete:before,
+#device-wrapper .km-rowinsert:after,
+#device-wrapper .km-rowinsert:before,
+#device-wrapper .km-detaildisclose:after,
+#device-wrapper .km-detaildisclose:before,
+#device-wrapper .km-loading:after
+{
+    font: 1em/1em "Kendo UI Examples";
+}
+
