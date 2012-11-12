@@ -943,7 +943,7 @@ class NestedTag < Tag
     def java_type
         return super if parent.name.downcase == namespace || @name == 'Item' || @name == 'Items' || (@name == parent.name.singular && !(name =~ /aggregate|plotband/i))
 
-        return parent.java_type.sub(/Tag/, "") + @name + 'Tag' if namespace == "chart"
+        return parent.java_type.sub(/Tag/, "") + @name + 'Tag' if namespace =~ /chart|stockchart/
 
         return parent.name + @name + 'Tag'
     end

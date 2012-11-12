@@ -9,7 +9,7 @@ import com.kendoui.taglib.stockchart.*;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class StockChartTag extends WidgetTag /* interfaces *//* interfaces */ {
+public class StockChartTag extends WidgetTag /* interfaces */implements DataBoundWidget/* interfaces */ {
 
     public StockChartTag() {
         super("StockChart");
@@ -49,12 +49,103 @@ public class StockChartTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("navigator", value);
     }
 
+    public void setSeries(SeriesTag value) {
+
+        setProperty("series", value.series());
+
+    }
+
+    public void setCategoryAxis(CategoryAxisTag value) {
+
+        setProperty("categoryAxis", value.categoryAxis());
+
+    }
+
+    public void setTitle(TitleTag value) {
+        setProperty("title", value);
+    }
+
+    public void setChartArea(ChartAreaTag value) {
+        setProperty("chartArea", value);
+    }
+
+    public void setLegend(LegendTag value) {
+        setProperty("legend", value);
+    }
+
+    public void setPlotArea(PlotAreaTag value) {
+        setProperty("plotArea", value);
+    }
+
+    public void setTooltip(TooltipTag value) {
+        setProperty("tooltip", value);
+    }
+
+    public void setSeriesDefaults(SeriesDefaultsTag value) {
+        setProperty("seriesDefaults", value);
+    }
+
+    public void setValueAxis(ValueAxisTag value) {
+
+        setProperty("valueAxis", value.valueAxis());
+
+    }
+
+    public void setXAxis(XAxisTag value) {
+
+        setProperty("xAxis", value.xAxis());
+
+    }
+
+    public void setYAxis(YAxisTag value) {
+
+        setProperty("yAxis", value.yAxis());
+
+    }
+
     public String getDateField() {
         return (String)getProperty("dateField");
     }
 
     public void setDateField(String value) {
         setProperty("dateField", value);
+    }
+
+    public Object getAxisDefaults() {
+        return (Object)getProperty("axisDefaults");
+    }
+
+    public void setAxisDefaults(Object value) {
+        setProperty("axisDefaults", value);
+    }
+
+    @Override
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
+    }
+
+    public Object getSeriesColors() {
+        return (Object)getProperty("seriesColors");
+    }
+
+    public void setSeriesColors(Object value) {
+        setProperty("seriesColors", value);
+    }
+
+    public String getTheme() {
+        return (String)getProperty("theme");
+    }
+
+    public void setTheme(String value) {
+        setProperty("theme", value);
+    }
+
+    public boolean getTransitions() {
+        return (boolean)getProperty("transitions");
+    }
+
+    public void setTransitions(boolean value) {
+        setProperty("transitions", value);
     }
 
 //<< Attributes
