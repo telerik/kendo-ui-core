@@ -2669,6 +2669,7 @@ function pad(number, digits, end) {
 
         autoApplyNS: function() {
             this.data("kendoNS", "." + kendo.guid());
+            return this;
         },
 
         on: function() {
@@ -2727,6 +2728,7 @@ function pad(number, digits, end) {
             if (ns) {
                 this.off(ns);
             }
+            return this;
         }
     });
 
