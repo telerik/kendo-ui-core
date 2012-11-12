@@ -2,7 +2,6 @@
 
     var kendo = window.kendo,
         TimeView = kendo.TimeView,
-        touch = kendo.support.touch,
         parse = kendo.parseDate,
         extractFormat = kendo._extractFormat,
         calendar = kendo.calendar,
@@ -16,14 +15,14 @@
         CLOSE = "close",
         CHANGE = "change",
         ns = ".kendoDateTimePicker",
-        CLICK = (touch ? "touchend" : "click") + ns,
+        CLICK = "touchend" + ns + " click" + ns,
         DISABLED = "disabled",
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         STATEDISABLED = "k-state-disabled",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
-        MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
+        MOUSEDOWN = "touchstart" + ns + " mousedown" + ns,
         MONTH = "month",
         SPAN = "<span/>",
         ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
@@ -157,20 +156,20 @@
                     .removeAttr(DISABLED);
 
                 dateIcon.on(MOUSEDOWN, preventDefault)
-                        .on(CLICK, function() {
+                        .on(CLICK, function(e) {
                             that.toggle("date");
 
-                            if (!touch && element[0] !== document.activeElement) {
+                            if (e.type === "click" && element[0] !== document.activeElement) {
                                 element.focus();
                             }
                         });
 
 
                 timeIcon.on(MOUSEDOWN, preventDefault)
-                        .on(CLICK, function() {
+                        .on(CLICK, function(e) {
                             that.toggle("time");
 
-                            if (!touch && element[0] !== document.activeElement) {
+                            if (e.type === "click" && element[0] !== document.activeElement) {
                                 element.focus();
                             }
                         });
@@ -295,9 +294,7 @@
         },
 
         _toggleHover: function(e) {
-            if (!touch) {
-                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
-            }
+            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
         _update: function(value) {
