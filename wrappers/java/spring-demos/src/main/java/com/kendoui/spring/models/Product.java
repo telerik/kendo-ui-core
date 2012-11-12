@@ -17,7 +17,7 @@ public class Product {
     private double unitPrice;
     private int unitsInStock;
     private boolean discontinued;
-    private int categoryId;
+    private int categoryId = 1;
     private Category category;
     
     @Id

@@ -1,5 +1,6 @@
 package com.kendoui.spring.controllers.listview;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +48,22 @@ public class EditingController {
         return target;
     }
     
+    @SuppressWarnings("serial")
     @RequestMapping(value = "/editing/create", method = RequestMethod.POST)
-    public @ResponseBody Product create(@RequestBody Map<String, Object> model) {
-        Product target = new Product();
+    public @ResponseBody Map<String,Object> create(@RequestBody Map<String, Object> model) {
+        final Product target = new Product();
         
         target.setProductName((String)model.get("productName"));
         target.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
         target.setUnitsInStock((int)model.get("unitsInStock"));
         target.setDiscontinued((boolean)model.get("discontinued"));        
         
-        product.saveOrUpdate(target);
+        product.saveOrUpdate(target);        
         
-        return target;
+        
+        return new HashMap<String, Object>() {{
+            put("data", target);
+        }};      
     }
     
     @RequestMapping(value = "/editing/destroy", method = RequestMethod.POST)
