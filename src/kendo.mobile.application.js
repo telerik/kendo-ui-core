@@ -80,7 +80,7 @@
 
                 that._startHistory();
 
-                if (support.touch) {
+                if (support.kineticScrollNeeded) {
                     $(document.documentElement).on("touchmove", false);
                 }
             });

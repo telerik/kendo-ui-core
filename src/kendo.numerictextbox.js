@@ -6,7 +6,6 @@
         extractFormat = kendo._extractFormat,
         parse = kendo.parseFloat,
         placeholderSupported = kendo.support.placeholder,
-        touch = kendo.support.touch,
         getCulture = kendo.getCulture,
         CHANGE = "change",
         DISABLED = "disabled",
@@ -15,8 +14,8 @@
         ns = ".kendoNumericTextBox",
         TOUCHEND = "touchend",
         MOUSELEAVE = "mouseleave" + ns,
-        MOUSEDOWN = (touch ? "touchstart": "mousedown") + ns,
-        MOUSEUP = touch ? "touchmove" + ns + " " + TOUCHEND + ns : "mouseup" + ns + " " + MOUSELEAVE,
+        MOUSEDOWN = "touchstart" + ns + " mousedown" + ns,
+        MOUSEUP = "touchcancel " + ns + " " + "touchend " + ns + " mouseup" + ns + " " + MOUSELEAVE,
         HOVEREVENTS = "mouseenter" + ns + " " + MOUSELEAVE,
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
@@ -53,11 +52,11 @@
              that._arrows();
              that._input();
 
-             if (touch) {
-                that._text.on(TOUCHEND + ns, function() {
-                    that._toggleText(false);
-                });
-             } else {
+            that._text.on(TOUCHEND + ns, function() {
+                that._toggleText(false);
+            });
+
+             if (!kendo.support.mobileOS) {
                  that._text.on("focus" + ns, proxy(that._click, that));
              }
 
@@ -232,9 +231,7 @@
             }
 
             arrows.on(MOUSEUP, function(e) {
-                if (!touch || kendo.eventTarget(e) != e.currentTarget || e.type === TOUCHEND) {
-                    clearTimeout( that._spinning );
-                }
+                clearTimeout( that._spinning );
                 arrows.removeClass(SELECTED);
             });
 
@@ -489,9 +486,7 @@
         },
 
         _toggleHover: function(e) {
-            if (!touch) {
-                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
-            }
+            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
         _toggleText: function(toggle) {
