@@ -30,7 +30,10 @@
         supports = {
             sessionStorage: (function() {
                 // try-catch for obscure cases that do not allow "sessionStorage" in window
+                // also for Safari private mode
                 try {
+                    sessionStorage.setItem("kendo-test", "success!");
+                    sessionStorage.removeItem("kendo-test");
                     return !!sessionStorage.getItem;
                 } catch(e) {
                     return false;
@@ -525,17 +528,13 @@
                 this.element.on("click", ".tc-link", $.proxy(function(e) {
                     e.preventDefault();
 
-                    var icon = $(e.target).closest(".tc-link").find(".k-icon");
+                    var icon = $(e.target).closest(".tc-link").find(".k-icon"),
+                        expand = icon.hasClass("k-i-arrow-s");
 
-                    if (icon.hasClass("k-i-arrow-s")) {
-                        icon.removeClass("k-i-arrow-s").addClass("k-i-arrow-n");
-                    } else {
-                        icon.removeClass("k-i-arrow-n").addClass("k-i-arrow-s");
-                    }
+                    icon.toggleClass("k-i-arrow-s", !expand)
+                        .toggleClass("k-i-arrow-n", expand);
 
                     this._getThemeContainer().animate({ height: "toggle", margin: "toggle", paddingBottom: "toggle" }, "fast");
-
-                    //kendo.fx(this._themeContainer).expand("vertical").stop().toggle();
                 }, this));
             },
 
