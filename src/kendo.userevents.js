@@ -257,9 +257,7 @@
     var UserEvents = Observable.extend({
         init: function(element, options) {
             var that = this,
-                filter,
-                surfaceProxy,
-                elementProxy;
+                filter;
 
             options = options || {};
             filter = that.filter = options.filter;
