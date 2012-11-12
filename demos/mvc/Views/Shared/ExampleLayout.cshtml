@@ -106,9 +106,6 @@
                 },
                 select: function(e) {
                     var tabstrip = $(e.contentElement).data("kendoTabStrip");
-
-                    console.log(tabstrip.select());
-
                     if (tabstrip.select().length == 0) {
                         tabstrip.select(0);
                     }

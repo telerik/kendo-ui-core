@@ -86,7 +86,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetMvcDescription.cs" />
+    <Compile Include="Models\JspDescription.cs" />
     <Compile Include="Models\ExampleFile.cs" />
+    <Compile Include="Models\IFrameworkDescription.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\ExampleFramework.cs" />
     <Compile Include="Models\StyleGroups.cs" />

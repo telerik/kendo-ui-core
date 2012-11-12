@@ -1,12 +1,10 @@
-﻿using Kendo.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using IOFile = System.IO.File;
-using System.IO;
+using Kendo.Models;
 
 namespace Kendo.Controllers
 {
@@ -60,16 +58,10 @@ namespace Kendo.Controllers
             );
         }
 
-        private class FrameworkDescription
+        private static readonly IFrameworkDescription[] frameworkDescriptions = new IFrameworkDescription []
         {
-            public string Name { get; set; }
-
-            public String[] Patterns { get; set; }
-        }
-
-        private static IDictionary<String, FrameworkDescription> frameworkConfiguration = new Dictionary<String, FrameworkDescription>
-        {
-            { "aspnetmvc", new FrameworkDescription { Name = "ASP.NET MVC", Patterns = new[] {"~/src/{0}/aspx/{1}/{2}/{3}.aspx", "~/src/{0}/razor/{1}/{2}/{3}.cshtml" } } }
+            new AspNetMvcDescription(),
+            new JspDescription()
         };
 
         private IEnumerable<ExampleFramework> Frameworks(string suite, string section, string example)
@@ -88,24 +80,15 @@ namespace Kendo.Controllers
                 }
             });
 
-            foreach (var description in frameworkConfiguration)
+            foreach (var framework in frameworkDescriptions)
             {
-                var framework = description.Key;
-                var patterns = description.Value.Patterns;
-
-                var files = patterns
-                             .Select(pattern => new ExampleFile
-                             {
-                                 Name = example + Path.GetExtension(pattern),
-                                 Url = String.Format(pattern, framework, suite, section, example)
-                             })
-                             .Where(file => file.Exists(Server));
+                var files = framework.GetFiles(Server, example, suite, section).Where(file => file.Exists(Server));
 
                 if (files.Any())
                 {
                     frameworks.Add(new ExampleFramework
                     {
-                        Name = description.Value.Name,
+                        Name = framework.Name,
                         Files = files
                     });
                 }
