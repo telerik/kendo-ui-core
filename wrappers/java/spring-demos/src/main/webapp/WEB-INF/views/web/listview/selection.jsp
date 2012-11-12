@@ -6,7 +6,7 @@
 <c:url value="/web/listview/selection_read" var="transportReadUrl" />
 
 <demo:header />
-<kendo:listView name="listView" template="template" selectable="multiple">	
+<kendo:listView name="listView" template="template" selectable="multiple" pageable="true">	
 	<kendo:dataSource pageSize="12" serverPaging="true">
 		<kendo:dataSource-transport>
 			<kendo:dataSource-transport-read url="${transportReadUrl}" contentType="application/json" type="POST"/>

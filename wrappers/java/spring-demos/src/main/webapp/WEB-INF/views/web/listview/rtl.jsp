@@ -8,7 +8,7 @@
 <demo:header />
 
 <div class="k-rtl">
-	<kendo:listView name="listView" template="template" selectable="multiple">	
+	<kendo:listView name="listView" template="template" selectable="multiple" pageable="true">	
 		<kendo:dataSource pageSize="12" serverPaging="true">
 			<kendo:dataSource-transport>
 				<kendo:dataSource-transport-read url="${transportReadUrl}" contentType="application/json" type="POST"/>

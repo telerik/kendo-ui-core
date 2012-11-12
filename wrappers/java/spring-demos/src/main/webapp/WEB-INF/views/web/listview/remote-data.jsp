@@ -6,7 +6,7 @@
 <c:url value="/web/listview/products/" var="transportReadUrl" />
 
 <demo:header />
-<kendo:listView name="listView" template="template">
+<kendo:listView name="listView" template="template" pageable="true">
 	<kendo:dataSource pageSize="12" serverPaging="true">
 		<kendo:dataSource-transport>
 			<kendo:dataSource-transport-read url="${transportReadUrl}" contentType="application/json" type="POST"/>
@@ -25,7 +25,7 @@
 
 <style scoped="scoped">
 #listView {
-    min-height: 610px;
+    min-height: 300px;
 }
 
 .product {
