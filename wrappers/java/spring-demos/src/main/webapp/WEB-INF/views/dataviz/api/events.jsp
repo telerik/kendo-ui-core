@@ -9,7 +9,15 @@
 	<div id="example" class="k-content">
         <div class="chart-wrapper">
         	 <kendo:chart name="chart" seriesClick="onSeriesClick" seriesHover="onSeriesHover"
-        	 			  dataBound="onDataBound" axisLabelClick="onAxisLabelClick" plotAreaClick="onPlotAreaClick">
+        	 			  dataBound="onDataBound"
+        	 			  axisLabelClick="onAxisLabelClick"
+        	 			  plotAreaClick="onPlotAreaClick"
+        	 			  dragStart="onDragStart"
+        	 			  drag="onDrag"
+        	 			  dragEnd="onDragEnd"
+        	 			  zoomStart="onZoomStart"
+        	 			  zoom="onZoom"
+        	 			  zoomEnd="onZoomEnd">
         	 	 <kendo:chart-title text="Spain electricity production (GWh)" />
         	 	 <kendo:chart-legend position="top"></kendo:chart-legend>
         	 	 <kendo:dataSource>
@@ -63,6 +71,30 @@
 	    function onPlotAreaClick(e) {
 	        kendoConsole.log(kendo.format("Plot area click :: {0} : {1:N0}",
 	            e.category, e.value));
+	    }
+
+	    function onDragStart(e) {
+	        kendoConsole.log("Drag start");
+	    }
+
+	    function onDrag(e) {
+	        kendoConsole.log("Drag");
+	    }
+
+	    function onDragEnd(e) {
+	        kendoConsole.log("Drag end");
+	    }
+
+	    function onZoomStart(e) {
+	        kendoConsole.log("Zoom start");
+	    }
+
+	    function onZoom(e) {
+	        kendoConsole.log(kendo.format("Zoom :: {0}", e.delta));
+	    }
+
+	    function onZoomEnd(e) {
+	        kendoConsole.log("Zoom end");
 	    }
 	</script>
 <demo:footer />
