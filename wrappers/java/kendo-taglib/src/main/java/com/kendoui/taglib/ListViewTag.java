@@ -4,6 +4,7 @@ package com.kendoui.taglib;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.kendoui.taglib.listview.*;
 import com.kendoui.taglib.html.Div;
@@ -29,11 +30,13 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         return html;
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     public int doEndTag() throws JspException {
         String template;
         int result;
         JspWriter writer;
+        Map<String, Object> pagable;
         
 //>> doEndTag
 //<< doEndTag
@@ -43,10 +46,16 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
             setProperty("template", new Function(template));
         }
         
-        if (isSet("pageable") && getPageable() == true) {
-            HashMap<String, Object> pagable = new HashMap<String, Object>();
-            pagable.put("pagerId", getName() + "_pager");
+        if (isSet("pageable")) {
+            if (getProperty("pageable") instanceof HashMap<?, ?>) {
+                pagable = (HashMap<String, Object>)getProperty("pageable");
+            } 
+            else
+            {
+                pagable = new HashMap<String, Object>();
+            }
             
+            pagable.put("pagerId", getName() + "_pager");
             setProperty("pageable", pagable);    
             
             result = super.doEndTag();
@@ -81,6 +90,10 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         super.destroy();
     }
 
+    public void setPageable(PageableTag value) {
+        setProperty("pageable", value);
+    }
+    
 //>> Attributes
 
     public static String tagName() {

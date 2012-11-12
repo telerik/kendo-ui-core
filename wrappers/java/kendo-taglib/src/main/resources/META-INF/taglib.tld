@@ -10831,5 +10831,145 @@ containing one or more fields with the same name as the original input name.</de
         <tag-class>com.kendoui.taglib.ContentTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+    
+	<tag>
+        <description>Indicates whether paging is enabled/disabled.</description>
+        <name>listview-pageable</name>
+        <tag-class>com.kendoui.taglib.listview.PageableTag</tag-class>
+        <body-content>JSP</body-content>
 
+        <attribute>
+            <description>Defines the number of records which will be displyed.</description>
+            <name>pageSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines if buttons for navigating to the first, last, previous and next pages will be shown.</description>
+            <name>previousNext</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines if numeric portion of the pager will be shown.</description>
+            <name>numeric</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the number of buttons displayed in the numeric pager.</description>
+            <name>buttonCount</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines if an input element which allows the user to navigate to given page will be displayed.</description>
+            <name>input</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Displayes a list with predefined page sizes. An array of values to be displayed can be provided.</description>
+            <name>pageSizes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines if a refresh button will be displayed.</description>
+            <name>refresh</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines if a label showing current paging information will be displayed.</description>
+            <name>info</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <description>Defines texts shown within the pager.</description>
+        <name>listview-pageable-messages</name>
+        <tag-class>com.kendoui.taglib.listview.PageableMessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the info text.</description>
+            <name>display</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the info text shown when there are no records to be displayed.</description>
+            <name>empty</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the first part of the text of the input option.</description>
+            <name>page</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the last part of the text of the input option.</description>
+            <name>of</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the text displayed after the select element of the pageSizes mode.</description>
+            <name>itemsPerPage</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the text of the first page button tooltip.</description>
+            <name>first</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the text of the previous page button tooltip.</description>
+            <name>previous</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the text of the next page button tooltip.</description>
+            <name>next</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the text of the last page button tooltip.</description>
+            <name>last</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the text of the refresh button tooltip.</description>
+            <name>refresh</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    
 </taglib>
