@@ -1377,6 +1377,13 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Template to be used for rendering the alternate items in the listview.</description>
+            <name>altTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Fires when the list view selection has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>

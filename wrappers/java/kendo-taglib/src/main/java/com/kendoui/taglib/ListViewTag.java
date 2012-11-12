@@ -46,6 +46,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
             setProperty("template", new Function(template));
         }
         
+        if (isSet("altTemplate")) {
+            template = "kendo.template($(\"#" + getAltTemplate() + "\").html())";
+            setProperty("altTemplate", new Function(template));
+        }
+        
         if (isSet("editTemplate")) {
             template = "kendo.template($(\"#" + getEditTemplate() + "\").html())";
             setProperty("editTemplate", new Function(template));
@@ -172,6 +177,14 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setEditTemplate(String value) {
         setProperty("editTemplate", value);
+    }
+
+    public String getAltTemplate() {
+        return (String)getProperty("altTemplate");
+    }
+
+    public void setAltTemplate(String value) {
+        setProperty("altTemplate", value);
     }
 
     public String getChange() {

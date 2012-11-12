@@ -9,7 +9,7 @@ IGNORED = {
     'chart' => ['axisDefaults'],
     'window' => ['content.template'],
     'grid' => ['detailTemplate', 'rowTemplate', 'altRowTemplate'],
-    'listview' => ['template', 'editTemplate']
+    'listview' => ['template', 'editTemplate', 'altTemplate']
 }
 
 MD_METADATA_TEMPLATE = ERB.new(%{---
@@ -836,6 +836,10 @@ class Tag
             tag.options.push(Option.new :name => 'editTemplate',
                                         :type => 'String',
                                         :description => "Specifies ListView item template in edit mode.")
+
+            tag.options.push(Option.new :name => 'altTemplate',
+                                        :type => 'String',
+                                        :description => "Template to be used for rendering the alternate items in the listview.")
         end
 
         if tag.has_items?

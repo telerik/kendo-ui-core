@@ -15,7 +15,7 @@
 		class="k-icon k-add"></span>Add new record</a>
 </div>
 
-<kendo:listView name="listView" template="template" pageable="true"
+<kendo:listView name="listView" template="template" pageable="true" altTemplate="template1"
 	editTemplate="editTemplate" selectable="true" navigatable="true">
 	<kendo:dataSource pageSize="4" serverPaging="true">
 		<kendo:dataSource-transport>
@@ -62,6 +62,12 @@
 			<a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span>Edit</a>
             <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-delete"></span>Delete</a>
         </div>
+	</div>
+</script>
+
+<script type="text/x-kendo-tmpl" id="template1">
+	<div class="product-view">
+		asdasdas
 	</div>
 </script>
 
