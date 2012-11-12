@@ -635,4 +635,23 @@ public class ChartDataRepository {
         
         return result;
     }
+    
+    public static List<EngineDataPoint> EngineData() {
+        List<EngineDataPoint> result = new ArrayList<EngineDataPoint>();
+        result.add(new EngineDataPoint(1000, 50, 10));
+        result.add(new EngineDataPoint(1500, 65, 19));
+        result.add(new EngineDataPoint(2000, 80, 30));
+        result.add(new EngineDataPoint(2500, 92, 44));
+        result.add(new EngineDataPoint(3000, 104, 59));
+        result.add(new EngineDataPoint(3500, 114, 76));
+        result.add(new EngineDataPoint(4000, 120, 91));
+        result.add(new EngineDataPoint(4500, 125, 107));
+        result.add(new EngineDataPoint(5000, 130, 124));
+        result.add(new EngineDataPoint(5500, 133, 139));
+        result.add(new EngineDataPoint(6000, 130, 149));
+        result.add(new EngineDataPoint(6500, 122, 151));
+        result.add(new EngineDataPoint(7000, 110, 147));
+                    
+        return result;
+    }
 }

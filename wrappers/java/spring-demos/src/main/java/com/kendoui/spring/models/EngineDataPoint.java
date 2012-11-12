@@ -1,9 +1,15 @@
 package com.kendoui.spring.models;
 
-public class EngineDataPoint{
+public class EngineDataPoint {
     private int rpm;
     private double torque;
     private double power;
+    
+    public EngineDataPoint(int rpm, double torque, double power) {
+        setRPM(rpm);
+        setTorque(torque);
+        setPower(power);
+    }
     
     public int getRPM() {
         return rpm;
