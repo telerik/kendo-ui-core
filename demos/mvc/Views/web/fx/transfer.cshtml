@@ -1,16 +1,18 @@
 <div id="example" class="k-content">
+    <div id="panel">
+        <h2>Add images to your Lightbox</h2>
 
-    <h2>Select Images below for your flickr export:</h2>
-    <div id="listView"></div>
+        <ul id="listView"></ul>
 
-    <div id="flickrBin">
-        Flickr
+        <div id="lightbox">
+            Lightbox
+        </div>
     </div>
 
     <script type="text/x-kendo-tmpl" id="template">
-        <div class="product">
+        <li class="product">
             <img src="../../content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
-        </div>
+        </li>
     </script>
 
     <script>
@@ -30,32 +32,70 @@
                 template: kendo.template($("#template").html())
             });
         });
+
+        $("#listView").on("click", ".product", function(e) {
+            kendo.fx($(e.currentTarget)).transfer($("#lightbox")).play();
+        });
     </script>
 
     <style scoped>
+        #panel {
+            border: 1px solid #e9e9e9;
+            border-top: 3px solid #da2d7d;
+            position: relative;
+            width: 473px;
+            margin: 0 auto;
+            -webkit-box-shadow: 0 0 4px rgba(0,0,0,.25);
+            -moz-box-shadow: 0 0 4px rgba(0,0,0,.25);
+            -o-box-shadow: 0 0 4px rgba(0,0,0,.25);
+            box-shadow: 0 0 4px rgba(0,0,0,.25);
+            padding: 35px;
+        }
+
+        #panel > h2 {
+            color: #4f4f4f;
+            font-size: 18px;
+            font-weight: normal;
+            width: 370px;
+            border-bottom: 1px solid #dfdfdf;
+            padding-bottom: 9px;
+        }
+
+        #lightbox {
+            position: absolute;
+            width: 69px;
+            height: 88px;
+            top: 0;
+            right: 34px;
+            background: #da2d7d url(../../content/web/fx/cart.png) no-repeat 50% 23px;
+            overflow: hidden;
+            font-size: 9px;
+            line-height: 150px;
+            text-align: center;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
         #listView {
             min-height: 610px;
+            list-style-type: none;
+            margin: 0;
+            padding: 55px 0 0;
+            border: 0;
+            background: none;
         }
 
         .product {
             float: left;
-            position: relative;
             width: 110px;
             height: 110px;
-            margin: 20px;
+            margin: 0 11px 11px 0;
             background-color: rgba(255,255,255,0.8)
         }
 
-        #flickrBin {
-            width: 30px;
-            height: 30px;
-            float: right;
-            background: grey;
+        .product:nth-child(4n) {
+            margin: 0 0 11px 0;
         }
+
     </style>
-    <script>
-        $("#listView").on("click", ".product", function(e) {
-            kendo.fx($(e.currentTarget)).transfer($("#flickrBin")).play();
-        });
-    </script>
 </div>
