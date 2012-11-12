@@ -3,11 +3,16 @@
     <h2>Groceries</h2>
     <ul id="listView"></ul>
 
-    <h2>Done</h2>
-    <ul id="done"></ul>
+    <ul id="list"></ul>
 
-    <script type="text/x-kendo-tmpl" id="template">
-        <li><label><input type="checkbox" />${ProductName}</label></li>
+    <script type="text/x-kendo-tmpl" id="images-template">
+        # if (typeof done == "undefined" || !done) { #
+        <li><img src="../../content/web/foods/${ProductID}.jpg" alt="${ProductName} image" /></li>
+        # } #
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="list-template">
+        <li#= typeof done != "undefined" && done ? " class='done'" : "" #>${ProductName}</li>
     </script>
 
     <script>
@@ -19,29 +24,81 @@
                             dataType: "jsonp"
                         }
                     },
-                    pageSize: 15
+                    pageSize: 8,
+                    page: 2
                 });
 
             $("#listView").kendoListView({
+                autoBind: false,
                 dataSource: dataSource,
-                template: kendo.template($("#template").html())
+                template: kendo.template($("#images-template").html())
             });
 
-            $("#listView").on("change", "input", function(e) {
+            $("#list").kendoListView({
+                dataSource: dataSource,
+                template: kendo.template($("#list-template").html())
+            });
+
+            $("#listView").on("click", "img", function(e) {
                 var el = $(e.currentTarget).closest("li"),
                     effect = kendo.fx(el).fadeOut().duration(700);
 
                 effect.play().then(function() {
-                    $("#done").append(el);
-                    effect.reverse();
-                    el.find("input").remove();
+                    dataSource.getByUid(el.attr("data-uid")).set("done", true);
                 });
             });
         });
     </script>
     <style>
-        #done {
+        #listView, #list {
+            position: absolute;
+            border: 0;
+            background: transparent;
+            top: 100px;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #listView {
+            left: 75px;
+            width: 340px;
+        }
+
+        #listView li {
+            display: inline-block;
+            width: 68px;
+            height: 68px;
+            margin: 0 12px 20px 0;
+            -webkit-box-shadow: 4px 2px 5px rgba(0,0,0,.6);
+            -moz-box-shadow: 4px 2px 5px rgba(0,0,0,.6);
+            -o-box-shadow: 4px 2px 5px rgba(0,0,0,.6);
+            box-shadow: 4px 2px 5px rgba(0,0,0,.6);
+        }
+
+        #listView li,
+        #listView img {
+            overflow: hidden;
+            width: 68px;
+            height: 68px;
+            cursor: pointer;
+            -webkit-border-radius: 34px;
+            -moz-border-radius: 34px;
+            -o-border-radius: 34px;
+            border-radius: 34px;
+        }
+
+        #list {
+            left: 523px;
+        }
+
+        #list .done {
             text-decoration: line-through;
+        }
+
+        #example {
+            background: url(../../content/web/fx/groceries.jpg) no-repeat 0 0;
+            height: 363px;
         }
     </style>
 </div>
