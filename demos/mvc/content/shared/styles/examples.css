@@ -36,7 +36,17 @@ h3>a,
 html
 {
     overflow-y:scroll;
-    font:75% 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
+    font:75% Arial,Helvetica,sans-serif;
+}
+
+#header, #banner, .suite-demos-nav, .demos-nav,
+.flowers-left, #footer, .centerWrap
+{
+    font-family: 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
+}
+
+#example {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .overview,
