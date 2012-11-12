@@ -20,7 +20,7 @@ import com.kendoui.taglib.json.Serializer;
 public abstract class WidgetTag extends BaseTag implements Serializable, DynamicAttributes  {
     private String name;
     private String widget;
-    private Map<String, Object> attributes;
+    protected Map<String, Object> attributes;
 
 
     public WidgetTag(String widget) {

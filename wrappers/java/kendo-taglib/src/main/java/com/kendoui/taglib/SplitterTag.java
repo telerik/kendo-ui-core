@@ -31,7 +31,17 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
-
+        
+        String cssClass = ""; 
+        
+        if (attributes.containsKey("class")) {
+            cssClass = (String) attributes.get("class");
+        }
+        
+        if (cssClass.indexOf("k-splitter") == -1) {
+            attributes.put("class", cssClass.concat(" k-splitter"));
+        }
+        
         return super.doEndTag();
     }
 
