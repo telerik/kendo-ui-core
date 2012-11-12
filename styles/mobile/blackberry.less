@@ -569,11 +569,19 @@
 .km-blackberry .k-dropdown,
 .km-blackberry textarea
 {
+    font-size: 1em;
     .appearance(none);
     border: 1px solid rgba(0,0,0,.5);
     padding: .4em;
     outline: none;
     .border-radius(~".3em");
+}
+
+.km-phone .km-blackberry input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
+.km-phone .km-blackberry select:not([multiple]),
+.km-phone .km-blackberry .k-dropdown
+{
+    margin-top: -1.1em;
 }
 
 .km-blackberry .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
@@ -660,9 +668,15 @@
 .km-blackberry select:not([multiple]),
 .km-blackberry .k-dropdown-wrap
 {
+    .linear-gradient-image(left, rgba(0,0,0,.3), rgba(0,0,0,.3),
+                           top, rgba(0,0,0,0), rgba(0,0,0,.2));
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    background-size: 1.8em 100%, auto;
+
     background: 100% 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAMAAAB28zu6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIVBMVEX////19fT19fX19fX19fT19fT19fX19fP19fT19fT19fRLB2KYAAAACnRSTlMA7xBQr5/PMN+AkwDcBAAAANFJREFUeF7t2LuVwzAAA0HKpPxh/wVfiFS+SPCbqQDBRhg/BAAAAAAAAAAAAAAAAACA13Nf93yNW3jvb7zHLezvGP1v5/7GOW7hcezrjse4h7mvm+Mu1r5qjSgIJHHcxSyKI1ZTHAmkJ46YRXHEaoojgfTEEbMojlhNcSSQnjhiFsURqymOBNITR8yiOGI1xZFAeuKIWRRHrKY4EkhPHDGL4ojVFkcCSRwdZlEcsZriSCCJo8dMHEXOPKRFPsc+PuO3AQAAAAAAAAAAAAAAAADwB5LFJn8OLOPPAAAAAElFTkSuQmCC"),
-                100% 0 no-repeat -webkit-linear-gradient(left, rgba(0,0,0,.3), rgba(0,0,0,.3)), -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2)) #eee;
-    background-size: auto 100%, 1.8em 100%, auto;
+                100% 0 no-repeat -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0,0,0,.3)), to(rgba(0,0,0,.3))), -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(0,0,0,.2))) #eee;
+    -webkit-background-size: auto 100%, 1.8em 100%, auto;
     .box-shadow(~"inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.2)");
 }
 
