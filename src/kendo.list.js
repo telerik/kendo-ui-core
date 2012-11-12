@@ -7,7 +7,6 @@
         htmlEncode = kendo.htmlEncode,
         ID = "id",
         LI = "li",
-        CLICK = touch ? "touchend" : "click",
         CHANGE = "change",
         CHARACTER = "character",
         FOCUSED = "k-state-focused",
@@ -38,10 +37,10 @@
             that._template();
 
             that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
-                        .css({ overflow: kendo.support.touch ? "": "auto" })
+                        .css({ overflow: kendo.support.kineticScrollNeeded ? "": "auto" })
                         .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); })
-                        .on(CLICK + ns, LI, proxy(that._click, that))
+                        .on("touchend" + ns + " click" + ns, LI, proxy(that._click, that))
                         .attr({
                             tabIndex: -1,
                             role: "listbox",
@@ -196,9 +195,10 @@
             if (!e.isDefaultPrevented()) {
                 this._accept($(e.currentTarget));
 
+                /*
                 if (e.type === "touchend") {
                     e.preventDefault();
-                }
+                }*/
             }
         },
 
@@ -314,9 +314,7 @@
         },
 
         _toggleHover: function(e) {
-            if (!touch) {
-                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
-            }
+            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
         _toggle: function(open) {
