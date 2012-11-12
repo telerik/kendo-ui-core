@@ -2,7 +2,8 @@
    "name": "kendo",
    "version": "1.0.0",
    "dependencies": {
-       "uglify-js2": "",
+       "optimist": "",
+       "uglify-js2": "2.1.11",
        "cssmin": "",
        "faye": "0.8.3",
        "xmlbuilder": "",
