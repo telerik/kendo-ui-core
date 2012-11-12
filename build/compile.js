@@ -8,10 +8,13 @@ var OPT = require("optimist");
 var ARGV = OPT
     .describe("amd", "Wrap for RequireJS")
     .describe("deps", "List dependencies")
+    .describe("decl", "Add the component declarations in the source code")
     .boolean("amd")
     .boolean("deps")
     .wrap(80)
     .argv;
+
+var KENDO_SRCDIR = path.join(path.dirname(fs.realpathSync(__filename)), "..");
 
 var get_wrapper = (function(wrapper){
     var code = '((typeof define == "function" && define.amd) ? define : function(a, b){ return b() })($DEPS, $CONT)';
@@ -44,10 +47,56 @@ var get_wrapper = (function(wrapper){
 
 var files = ARGV._.slice();
 
-var deps_file = path.join(path.dirname(fs.realpathSync(__filename)),
-                          "../download-builder/config/kendo-config.VERSION_NUMBER.json");
+var deps_file = path.join(KENDO_SRCDIR, "download-builder/config/kendo-config.VERSION_NUMBER.json");
 deps_file = fs.readFileSync(deps_file, "utf8");
 deps_file = JSON.parse(deps_file);
+
+if (ARGV.decl) {
+    deps_file.components.forEach(function(c){
+        if (!c.source) {
+            sys.error("No source declaration for component " + c.id);
+            return;
+        }
+        var orig = c.source.replace(/\.min/, "");
+        var orig_full = path.join(KENDO_SRCDIR, "src", orig);
+        sys.error(c.id + ": " + orig);
+        if (!fs.existsSync(orig_full)) {
+            sys.error("File " + orig + " not found for component " + c.id);
+            return;
+        }
+        var orig_code = fs.readFileSync(orig_full, "utf8");
+        var ast = u2.parse(orig_code, {
+            filename: orig
+        });
+        var component_stat = null;
+        try {
+            ast.walk(new u2.TreeWalker(function(node){
+                if (node instanceof u2.AST_Lambda) return true;
+                if (node instanceof u2.AST_SimpleStatement
+                    && node.body instanceof u2.AST_Call
+                    && node.body.expression instanceof u2.AST_SymbolRef
+                    && node.body.expression.name == "KENDO_COMPONENT") {
+                    component_stat = node;
+                    throw "ok";
+                }
+            }));
+        } catch(ex) {
+            if (ex !== "ok") throw ex;
+        }
+        delete c.source;        // no point keeping that in the file itself
+        var comp = u2.parse("KENDO_COMPONENT(" + JSON.stringify(c) + ")"), code;
+        if (component_stat) {
+            code = orig_code.substring(0, component_stat.start.pos) +
+                comp.body[0].print_to_string({ beautify: true }) +
+                orig_code.substr(component_stat.end.endpos).replace(/^[\n\t\s;]*/, "\n\n");
+        } else {
+            code = comp.body[0].print_to_string({ beautify: true }) +
+                orig_code.replace(/^[\n\t\s;]*/, "\n\n");
+        }
+        fs.writeFileSync(orig_full, code);
+    });
+    process.exit(0);
+}
 
 files.forEach(function(file){
     var code = fs.readFileSync(file, "utf8");

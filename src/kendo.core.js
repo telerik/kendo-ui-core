@@ -2758,3 +2758,40 @@ function pad(number, digits, end) {
     kendo.jQuery = kendoJQuery;
     kendo.eventMap = eventMap;
 })(jQuery);
+
+// this function, along with calls to it, will not exist in compressed builds
+var KENDO_COMPONENT = (function(cache, $, base_url){
+    function url(file){
+        return base_url + file;
+    };
+    function load_file(file) {
+        var addr = url(file);
+        // no point to load it if there's a <script> that already asked for it.
+        var scripts = $("script").filter(function(){
+            return this.src.indexOf(addr) == 0;
+        });
+        if (scripts.length == 0) {
+            var req = $.ajax({ url: addr, async: false });
+            if (req.status == 200) {
+                (1, eval)(req.responseText);
+            } else {
+                console.error("Failed to load dependency: " + addr);
+            }
+        }
+    };
+    return function(comp) {
+        if (!cache[comp.id]) {
+            cache[comp.id] = comp;
+            if (comp.depends) comp.depends.forEach(function(id){
+                if (!cache[id])
+                    load_file("kendo." + id + ".js");
+            });
+            if (comp.files) comp.files.forEach(load_file);
+            console.log("Defined " + comp.id);
+        }
+    };
+})({}, jQuery,
+   // the following figures out the base URL of the running script.
+   (function(x){
+       return x[x.length - 1].src.replace(/\/+[^\/]*$/, "/");
+   })(document.getElementsByTagName("script")));
