@@ -132,14 +132,16 @@
                 equal(toolbar.find(".k-tiles-arrange a span:first").html(), "Size");
             });
 
-            test("items are sorted by type", function() {
+            test("items are sorted by type and name", function() {
                 var browser = setup();
 
                 var sortDescriptors = browser.dataSource.sort();
 
-                equal(sortDescriptors.length, 1);
+                equal(sortDescriptors.length, 2);
                 equal(sortDescriptors[0].field, "type");
                 equal(sortDescriptors[0].dir, "asc");
+                equal(sortDescriptors[1].field, "name");
+                equal(sortDescriptors[1].dir, "asc");
             });
 
             test("items are sorted by with custom schema", function() {
@@ -164,9 +166,11 @@
 
                 var sortDescriptors = browser.dataSource.sort();
 
-                equal(sortDescriptors.length, 1);
+                equal(sortDescriptors.length, 2);
                 equal(sortDescriptors[0].field, "Kind");
                 equal(sortDescriptors[0].dir, "asc");
+                equal(sortDescriptors[1].field, "FileName");
+                equal(sortDescriptors[1].dir, "asc");
             });
 
             test("items are sorted by with custom global schema", function() {
@@ -198,9 +202,11 @@
 
                 var sortDescriptors = browser.dataSource.sort();
 
-                equal(sortDescriptors.length, 1);
+                equal(sortDescriptors.length, 2);
                 equal(sortDescriptors[0].field, "Kind");
                 equal(sortDescriptors[0].dir, "asc");
+                equal(sortDescriptors[1].field, "FileName");
+                equal(sortDescriptors[1].dir, "asc");
             });
 
             test("selecting item from arrangeby popup changes the sort order and persist default order", function() {
@@ -550,7 +556,7 @@
 
                 browser.createDirectory();
 
-                equal(browser.list.find("li:last input").val(), "New folder");
+                equal(browser.list.find("li:first input").val(), "New folder");
             });
 
             test("bluring the new directory input set the value", 2, function() {

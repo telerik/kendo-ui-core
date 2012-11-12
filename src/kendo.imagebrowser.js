@@ -641,11 +641,12 @@
             var that = this,
                 options = that.options,
                 transport = options.transport,
-                sortOrder = extend({}, DEFAULTSORTORDER),
+                typeSortOrder = extend({}, DEFAULTSORTORDER),
+                nameSortOrder = { field: NAMEFIELD, dir: "asc" },
                 schema,
                 dataSource = {
                     type: transport.type || "imagebrowser",
-                    sort: sortOrder
+                    sort: [typeSortOrder, nameSortOrder]
                 };
 
             if (isPlainObject(transport)) {
@@ -656,12 +657,14 @@
             if (isPlainObject(options.schema)) {
                 dataSource.schema = options.schema;
                 if (isPlainObject(options.schema.model) && options.schema.model.fields) {
-                    sortOrder.field = fieldName(options.schema.model.fields, TYPEFIELD);
+                    typeSortOrder.field = fieldName(options.schema.model.fields, TYPEFIELD);
+                    nameSortOrder.field = fieldName(options.schema.model.fields, NAMEFIELD);
                 }
             } else if (transport.type && isPlainObject(kendo.data.schemas[transport.type])) {
                 schema = kendo.data.schemas[transport.type];
                 if (isPlainObject(schema.model) && schema.model.fields) {
-                    sortOrder.field = fieldName(schema.model.fields, TYPEFIELD);
+                    typeSortOrder.field = fieldName(schema.model.fields, TYPEFIELD);
+                    nameSortOrder.field = fieldName(schema.model.fields, NAMEFIELD);
                 }
             }
 
