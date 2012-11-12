@@ -15,7 +15,7 @@
 	                 </kendo:dataSource-transport>
                  </kendo:dataSource>
          	 	 <kendo:chart-series>
-         	 	 	<kendo:chart-seriesItem type="bubble" xField="growth" yField="jobs" sizeField="population" categoryField="state" />
+         	 	 	<kendo:chart-seriesItem type="bubble" xfield="murder" yfield="burglary" sizeField="population" categoryField="state" />
          	 	 </kendo:chart-series>
          	 	 <kendo:chart-xAxis>
          	 	 	<kendo:chart-xAxisItem>

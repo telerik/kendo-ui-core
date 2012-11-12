@@ -13,7 +13,7 @@
          	 	 	<kendo:chart-xAxisItem axisCrossingValue="-5000" majorUnit="2000">
          	 	 		<kendo:chart-xAxisItem-labels format="{0:N0}" skip="1" />
          	 	 		<kendo:chart-xAxisItem-plotBands>
-         	 	 			<kendo:chart-xAxisItem-plotBand from="-5000" to="0" color="#00f" />
+         	 	 			<kendo:chart-xAxisItem-plotBand from="-5000" to="0" color="#00f" opacity="0.05" />
          	 	 		</kendo:chart-xAxisItem-plotBands>
          	 	 	</kendo:chart-xAxisItem>
          	 	 </kendo:chart-xAxis>

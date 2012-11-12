@@ -579,4 +579,60 @@ public class ChartDataRepository {
         
         return result;
     }
+    
+    public static List<CrimeData> CrimeStats() {
+        List<CrimeData> result = new ArrayList<CrimeData>();
+        result.add(new CrimeData("Alabama", 8.2, 953.8, 4627851));
+        result.add(new CrimeData("Alaska", 4.8, 622.5, 686293));
+        result.add(new CrimeData("Arizona", 7.5, 948.4, 6500180));
+        result.add(new CrimeData("Arkansas", 6.7, 1084.6, 2855390));
+        result.add(new CrimeData("California", 6.9, 693.3, 36756666));
+        result.add(new CrimeData("Colorado", 3.7, 744.8, 4861515));
+        result.add(new CrimeData("Connecticut", 2.9, 437.1, 3501252));
+        result.add(new CrimeData("Delaware", 4.4, 688.9, 873092));
+        result.add(new CrimeData("Florida", 5, 926.3, 18328340));
+        result.add(new CrimeData("Georgia", 6.2, 931, 9685744));
+        result.add(new CrimeData("Hawaii", 1.9, 767.9, 1288198));
+        result.add(new CrimeData("Idaho", 2.4, 564.4, 1523816));
+        result.add(new CrimeData("Illinois", 6, 606.9, 12901563));
+        result.add(new CrimeData("Indiana", 5.7, 697.6, 6376792));
+        result.add(new CrimeData("Iowa", 1.3, 606.4, 3002555));
+        result.add(new CrimeData("Kansas", 3.7, 689.2, 2802134));
+        result.add(new CrimeData("Kentucky", 4.6, 634, 4269245));
+        result.add(new CrimeData("Louisiana", 9.9, 870.6, 4410796));
+        result.add(new CrimeData("Maine", 1.4, 478.5, 1316456));
+        result.add(new CrimeData("Maryland", 9.9, 641.4, 5633597));
+        result.add(new CrimeData("Massachusetts", 2.7, 541.1, 6497967));
+        result.add(new CrimeData("Michigan", 6.1, 696.8, 10003422));
+        result.add(new CrimeData("Minnesota", 2.2, 578.9, 5220393));
+        result.add(new CrimeData("Mississippi", 7.3, 919.7, 2938618));
+        result.add(new CrimeData("Missouri", 6.9, 738.3, 5911605));
+        result.add(new CrimeData("Montana", 1.9, 389.2, 967440));
+        result.add(new CrimeData("Nebraska", 2.5, 532.4, 1783432));
+        result.add(new CrimeData("Nevada", 8.5, 972.4, 2600167));
+        result.add(new CrimeData("New Hampshire", 1.4, 317, 1315809));
+        result.add(new CrimeData("New Jersey", 4.8, 447.1, 8682661));
+        result.add(new CrimeData("New Mexico", 7.4, 1093.9, 1984356));
+        result.add(new CrimeData("New York", 4.5, 353.3, 19490297));
+        result.add(new CrimeData("North Carolina", 6.7, 1201.1, 9222414));
+        result.add(new CrimeData("North Dakota", 1.1, 311.9, 641481));
+        result.add(new CrimeData("Ohio", 5.1, 872.8, 11485910));
+        result.add(new CrimeData("Oklahoma", 5.3, 1006, 3642361));
+        result.add(new CrimeData("Oregon", 2.2, 758.6, 3790060));
+        result.add(new CrimeData("Pennsylvania", 6.1, 451.6, 12448279));
+        result.add(new CrimeData("Rhode Island", 3.2, 494.2, 1050788));
+        result.add(new CrimeData("South Carolina", 7.4, 1000.9, 4479800));
+        result.add(new CrimeData("South Dakota", 2.3, 324.4, 804194));
+        result.add(new CrimeData("Tennessee", 7.2, 1026.9, 6214888));
+        result.add(new CrimeData("Texas", 6.2, 961.6, 24326974));
+        result.add(new CrimeData("Utah", 2.3, 606.2, 2736424));
+        result.add(new CrimeData("Vermont", 1.3, 491.8, 621270));
+        result.add(new CrimeData("Virginia", 6.1, 392.1, 7769089));
+        result.add(new CrimeData("Washington", 3.3, 959.7, 6549224));
+        result.add(new CrimeData("West Virginia", 4.4, 621.2, 1814468));
+        result.add(new CrimeData("Wisconsin", 3.5, 440.8, 5627967));
+        result.add(new CrimeData("Wyoming", 2.7, 476.3, 532668));
+        
+        return result;
+    }
 }

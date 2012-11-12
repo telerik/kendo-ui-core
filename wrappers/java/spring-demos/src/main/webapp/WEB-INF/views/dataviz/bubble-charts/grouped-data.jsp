@@ -19,7 +19,7 @@
 	                 </kendo:dataSource-group>
                  </kendo:dataSource>
          	 	 <kendo:chart-series>
-         	 	 	<kendo:chart-seriesItem type="bubble" xField="growth" yField="jobs" sizeField="applications" categoryField="company" />
+         	 	 	<kendo:chart-seriesItem type="bubble" xfield="growth" yfield="jobs" sizeField="applications" categoryField="company" />
          	 	 </kendo:chart-series>
          	 	 <kendo:chart-xAxis>
          	 	 	<kendo:chart-xAxisItem axisCrossingValue="-10000" majorUnit="2000">

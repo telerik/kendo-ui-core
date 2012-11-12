@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kendoui.spring.models.ChartDataRepository;
-import com.kendoui.spring.models.JobGrowth;
+import com.kendoui.spring.models.CrimeData;
 
 @Controller("dataviz-bubble_charts_remote_data-controller")
 @RequestMapping(value="/dataviz/bubble-charts/")
@@ -19,7 +19,7 @@ public class RemoteDataController {
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
-    public @ResponseBody List<JobGrowth> read() {
-        return ChartDataRepository.JobGrowthData();
+    public @ResponseBody List<CrimeData> read() {
+        return ChartDataRepository.CrimeStats();
     }
 }
