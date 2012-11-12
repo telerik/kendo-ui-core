@@ -1,14 +1,13 @@
 <div id="example" class="k-content">
 
-    <h2>Groceries</h2>
     <ul id="listView"></ul>
 
     <ul id="list"></ul>
 
     <script type="text/x-kendo-tmpl" id="images-template">
-        # if (typeof done == "undefined" || !done) { #
-        <li><img src="../../content/web/foods/${ProductID}.jpg" alt="${ProductName} image" /></li>
-        # } #
+        <li#= typeof done != "undefined" && done ? " class='done'" : "" #>
+            <img src="../../content/web/foods/${ProductID}.jpg" alt="${ProductName} image">
+        </li>
     </script>
 
     <script type="text/x-kendo-tmpl" id="list-template">
@@ -24,8 +23,7 @@
                             dataType: "jsonp"
                         }
                     },
-                    pageSize: 8,
-                    page: 2
+                    pageSize: 8
                 });
 
             $("#listView").kendoListView({
@@ -44,7 +42,7 @@
                     effect = kendo.fx(el).fadeOut().duration(700);
 
                 effect.play().then(function() {
-                    dataSource.getByUid(el.attr("data-uid")).set("done", true);
+                    dataSource.getByUid($(this).attr("data-uid")).set("done", true);
                 });
             });
         });
@@ -63,6 +61,10 @@
         #listView {
             left: 75px;
             width: 340px;
+        }
+
+        #listView .done {
+            display: none;
         }
 
         #listView li {
