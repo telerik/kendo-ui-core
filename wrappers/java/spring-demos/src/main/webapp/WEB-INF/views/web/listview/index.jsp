@@ -3,7 +3,7 @@
 
 <demo:header />
 
-<kendo:listView name="listView" template="template">
+<kendo:listView name="listView" template="template" pageable="true">
 	<kendo:dataSource pageSize="12" data="${products}">		
 	</kendo:dataSource>		
 </kendo:listView>
@@ -18,7 +18,7 @@
 
 <style scoped="scoped">
 #listView {
-    min-height: 610px;
+    min-height: 300px;
 }
 
 .product {

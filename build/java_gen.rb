@@ -826,6 +826,10 @@ class Tag
             tag.options.push(Option.new :name => 'template',
                                         :type => 'String',
                                         :description => "The id of the template used for rendering the items in the listview.")
+
+            tag.options.push(Option.new :name => 'pageable',
+                                        :type => 'Boolean',
+                                        :description => "Indicates whether paging is enabled/disabled.")
         end
 
         if tag.has_items?

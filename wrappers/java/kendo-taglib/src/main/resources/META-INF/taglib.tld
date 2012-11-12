@@ -1338,6 +1338,13 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Indicates whether paging is enabled/disabled.</description>
+            <name>pageable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>Fires when the list view selection has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>

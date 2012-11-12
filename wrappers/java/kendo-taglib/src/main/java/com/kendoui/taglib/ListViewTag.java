@@ -2,11 +2,17 @@
 package com.kendoui.taglib;
 
 
+import java.io.IOException;
+import java.util.HashMap;
+
 import com.kendoui.taglib.listview.*;
+import com.kendoui.taglib.html.Div;
+import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.json.Function;
 
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 
 @SuppressWarnings("serial")
 public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundWidget/* interfaces */ {
@@ -15,10 +21,20 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         super("ListView");
     }
 
+    protected Element<?> pagerHtml() {
+        Element<?> html = new Div();
+        html.attr("id", getName() + "_pager");
+        html.attr("class", "k-pager-wrap");
+        
+        return html;
+    }
     
     @Override
     public int doEndTag() throws JspException {
         String template;
+        int result;
+        JspWriter writer;
+        
 //>> doEndTag
 //<< doEndTag
 
@@ -27,7 +43,26 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
             setProperty("template", new Function(template));
         }
         
-        return super.doEndTag();
+        if (isSet("pageable") && getPageable() == true) {
+            HashMap<String, Object> pagable = new HashMap<String, Object>();
+            pagable.put("pagerId", getName() + "_pager");
+            
+            setProperty("pageable", pagable);    
+            
+            result = super.doEndTag();
+            
+            writer = pageContext.getOut();        
+            try {
+                pagerHtml().write(writer);
+            } catch (IOException exception) {
+                throw new JspException(exception);
+            }
+            
+            return result;
+        }
+        else {
+            return super.doEndTag();
+        }
     }
 
     @Override
@@ -119,6 +154,14 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setTemplate(String value) {
         setProperty("template", value);
+    }
+
+    public boolean getPageable() {
+        return (boolean)getProperty("pageable");
+    }
+
+    public void setPageable(boolean value) {
+        setProperty("pageable", value);
     }
 
     public String getChange() {
