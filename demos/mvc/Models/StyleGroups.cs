@@ -12,12 +12,13 @@ namespace Kendo.Models
             "web/kendo.common.less",
             "web/kendo.rtl.css",
             "web/kendo.default.less",
-            "dataviz/kendo.dataviz.css"
+            "dataviz/kendo.dataviz.css",
+            "dataviz/kendo.dataviz.default.css"
 #else
             "kendo.common.min.css",
             "kendo.rtl.min.css",
             "kendo.default.min.css",
-            "kendo.dataviz.min.css"
+            "kendo.dataviz.default.min.css"
 #endif
         };
 

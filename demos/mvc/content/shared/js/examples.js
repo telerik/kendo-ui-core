@@ -175,29 +175,33 @@
             });
         },
 
+        getCurrentDVThemeLink: function() {
+            return $("head link").filter(function(x) {
+                return (/kendo\.dataviz\..+\.css/gi).test(this.href);
+            });
+        },
+
         getThemeUrl: function(themeName) {
             var currentThemeUrl = Application.getCurrentThemeLink().attr("href");
 
             return currentThemeUrl.replace(skinRegex, "kendo." + themeName + "$1.$2");
         },
 
-        replaceTheme: function(themeName) {
+        getDVThemeUrl: function(themeName) {
+            var currentThemeUrl = Application.getCurrentDVThemeLink().attr("href");
+
+            return currentThemeUrl.replace(skinRegex, "kendo.dataviz." + themeName + ".css");
+        },
+
+        replaceWebTheme: function(themeName) {
             var newThemeUrl = Application.getThemeUrl(themeName),
                 oldThemeName = $(doc).data("kendoSkin"),
-                newLink,
                 less = window.less,
                 themeLink = Application.getCurrentThemeLink(),
                 isLess = /\.less$/.test(themeLink.attr("href")),
                 exampleElement = $("#example");
 
-            if (kendo.support.browser.msie) {
-                newLink = $(doc.createStyleSheet(newThemeUrl));
-            } else {
-                newLink = themeLink.eq(0).clone().attr("href", newThemeUrl);
-                themeLink.eq(0).before(newLink);
-            }
-
-            themeLink.remove();
+            Application.updateLink(themeLink, newThemeUrl);
 
             if (isLess) {
                 $("head style[id^='less']").remove();
@@ -214,8 +218,38 @@
             }
 
             $(doc).data("kendoSkin", themeName);
-            $("#example").trigger("kendo:skinChange");
             $(doc.documentElement).removeClass("k-" + oldThemeName).addClass("k-" + themeName);
+        },
+
+        replaceDVTheme: function(themeName) {
+            var newThemeUrl = Application.getDVThemeUrl(themeName),
+                themeLink = Application.getCurrentDVThemeLink();
+
+            Application.updateLink(themeLink, newThemeUrl);
+        },
+
+        updateLink: function(link, url) {
+            var newLink,
+                exampleElement = $("#example");
+
+            if (kendo.support.browser.msie) {
+                newLink = $(doc.createStyleSheet(url));
+            } else {
+                newLink = link.eq(0).clone().attr("href", url);
+                link.eq(0).before(newLink);
+            }
+
+            if (exampleElement.length) {
+                exampleElement[0].style.cssText = exampleElement[0].style.cssText;
+            }
+
+            link.remove();
+        },
+
+        replaceTheme: function(themeName) {
+            Application.replaceWebTheme(themeName);
+            Application.replaceDVTheme(themeName);
+            $("#example").trigger("kendo:skinChange");
         },
 
         changeTheme: function(themeName, animate) {
