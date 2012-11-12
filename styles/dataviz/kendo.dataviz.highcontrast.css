@@ -1,0 +1,44 @@
+/* HighContrast Theme */
+
+.k-highcontrast .k-mask {
+    background: rgba(44,35,43,.6);
+}
+
+.k-highcontrast .k-selection {
+    border-color: #664e62;
+    box-shadow: inset 0 1px 12px rgba(0,0,0,.7);
+    transition: box-shadow .2s linear, border-color .2s linear;
+    -moz-transition: box-shadow .2s linear, border-color .2s linear;
+    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
+    -o-transition: box-shadow .2s linear, border-color .2s linear;
+}
+
+.k-highcontrast .k-selection:hover {
+    border-color: #ffffff;
+    box-shadow: inset 0 0 20px rgba(250,0,214,.5);
+}
+
+.k-highcontrast .k-handle {
+    background-color: #ffffff;
+    width: 11px;
+    height: 11px;
+}
+
+.k-highcontrast .k-leftHandle {
+    left: -6px;
+}
+
+.k-highcontrast .k-rightHandle {
+    right: -6px;
+}
+
+.k-highcontrast .k-navigator-hint .k-tooltip {
+    border: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,.7);
+    background: #a7008f;
+    color: #ffffff;
+}
+
+.k-highcontrast .k-navigator-hint .k-scroll {
+    background: #ffffff;
+}

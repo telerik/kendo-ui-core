@@ -1,0 +1,50 @@
+/* BlueOpal Theme */
+
+.k-blueopal .k-mask {
+    background: rgba(255,255,255,.8);
+}
+
+.k-blueopal .k-selection {
+    border-color: #94c0d2;
+    box-shadow: inset 0 3px 10px rgba(148,192,210,.2);
+    transition: box-shadow .2s linear, border-color .2s linear;
+    -moz-transition: box-shadow .2s linear, border-color .2s linear;
+    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
+    -o-transition: box-shadow .2s linear, border-color .2s linear;
+}
+
+.k-blueopal .k-selection:hover {
+    border-color: #7dd3f6;
+    box-shadow: inset 0 0 15px rgba(125,211,246,.8);
+}
+
+.k-blueopal .k-handle {
+    background-color: #e9f3f8;
+    border: 1px solid #94c0d2;
+    width: 9px;
+    height: 9px;
+}
+
+.k-blueopal .k-handle:hover {
+    background-color: #92daf7;
+    border-color: #7ec6e3;
+}
+
+.k-blueopal .k-leftHandle {
+    left: -6px;
+}
+
+.k-blueopal .k-rightHandle {
+    right: -6px;
+}
+
+.k-blueopal .k-navigator-hint .k-tooltip {
+    border: 0;
+    box-shadow: 0 1px 3px rgba(154,171,178,.7);
+    background: #ffffff;
+    color: #2a3236;
+}
+
+.k-blueopal .k-navigator-hint .k-scroll {
+    background: #3387b7;
+}

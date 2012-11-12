@@ -80,14 +80,6 @@ div.k-gauge
     padding: 40px 20px 0 0;
 }
 
-.k-leftHandle {
-    left: -4px;
-}
-
-.k-rightHandle {
-    right: -4px;
-}
-
 .k-leftHandle div {
     margin: -20px 0 0 -15px;
 }
@@ -97,7 +89,7 @@ div.k-gauge
 }
 
 .k-mask {
-    background: rgba(255,255,255,.85);
+    background: rgba(255,255,255,.75);
     position: absolute;
     height: 100%;
 }
@@ -109,8 +101,97 @@ div.k-gauge
     position: absolute;
 }
 
+.k-black .k-mask {
+    background: #222;
+}
+
+.k-black .k-selection {
+    border-color: #8e8e8e;
+}
+
+.k-blueopal .k-mask {
+    background: #fff;
+}
+
+.k-blueopal .k-selection {
+    border-color: #9aabb2;
+}
+
+.k-default .k-mask {
+    background: rgba(255,255,255,.7);
+}
+
+.k-default .k-selection {
+    border-color: #bababa;
+    box-shadow: inset 0 0 15px rgba(0,0,0,.10);
+}
+.k-default .k-leftHandle {
+    left: -6px;
+}
+.k-default .k-rightHandle {
+    right: -6px;
+}
+.k-default .k-handle {
+    background: #fff;
+    border: 1px solid #bababa;
+    width: 9px;
+    height: 10px;
+}
+
+.k-default .k-handle:hover, .k-default .k-handle:active {
+    background: #b7aeaa;
+    border: 1px solid #a99f9a;
+}
 
 
+.k-highcontrast .k-mask {
+    background: #1b141a;
+}
+
+.k-highcontrast .k-selection {
+    border-color: #664e62;
+}
+
+.k-metro .k-mask {
+    background: #fff;
+}
+.k-metro .k-handle {
+    background: #8ebc00;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.k-metroblack .k-mask {
+    background: #0e0e0e;
+}
+
+.k-metroblack .k-selection {
+    border-color: #707070;
+}
+
+.k-metroblack .k-handle {
+    background: #00aba9;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.k-silver .k-mask {
+    background: #eaeaec;
+}
+
+.k-silver .k-selection {
+    border-color: #a7b2c1;
+}
+
+.k-leftHandle {
+    left: -4px;
+}
+
+.k-rightHandle {
+    right: -4px;
+}
 
 /* Navigator hint */
 .k-navigator-hint {
@@ -136,53 +217,9 @@ div.k-gauge
     min-width: 160px;
     opacity: 1;
     text-align: center;
+    
+    /*Skin Specific*/
     border: 0;
     box-shadow: 0 1px 2px rgba(0,0,0,.5);
     background: #fff;
-}
-
-
-/* Silver Theme */
-
-.k-silver .k-mask {
-    background: rgba(234,234,236,.7);
-}
-
-.k-silver .k-selection {
-    border-color: #a6b1c0;
-    box-shadow: inset 0 1px 12px rgba(0,0,0,.1);
-    transition: box-shadow .2s linear, border-color .2s linear;
-    -moz-transition: box-shadow .2s linear, border-color .2s linear;
-    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
-    -o-transition: box-shadow .2s linear, border-color .2s linear;
-}
-
-.k-silver .k-selection:hover {
-    border-color: #a6b1c0;
-    box-shadow: inset 0 0 20px rgba(255,255,255,.7);
-}
-
-.k-silver .k-handle {
-    background-color: #c7c7c7;
-    width: 1px;
-}
-
-.k-silver .k-handle:hover {
-    background-color: #8ebc00;
-    width: 3px;
-}
-
-.k-silver .k-navigator-hint .k-tooltip {
-    border: 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,.3);
-    background: #8ebc00;
-    color: #ffffff;
-}
-
-.k-silver .k-navigator-hint .k-scroll {
-    background: rgba(0,0,0,.3);
-    height: 4px;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
 }

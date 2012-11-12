@@ -1,0 +1,50 @@
+/* Metro Theme */
+
+.k-metro .k-mask {
+    background: rgba(255,255,255,.7);
+}
+
+.k-metro .k-selection {
+    border-color: #c7c7c7;
+    box-shadow: inset 0 1px 12px rgba(0,0,0,.05);
+    transition: box-shadow .2s linear, border-color .2s linear;
+    -moz-transition: box-shadow .2s linear, border-color .2s linear;
+    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
+    -o-transition: box-shadow .2s linear, border-color .2s linear;
+}
+
+.k-metro .k-selection:hover {
+    border-color: #8ebc00;
+    box-shadow: inset 0 0 20px rgba(142,188,0,.5);
+}
+
+.k-metro .k-handle {
+    background-color: #c7c7c7;
+    width: 1px;
+}
+
+.k-metro .k-handle:hover {
+    background-color: #8ebc00;
+    width: 3px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.k-metro .k-navigator-hint .k-tooltip {
+    border: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    background: #8ebc00;
+    color: #ffffff;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.k-metro .k-navigator-hint .k-scroll {
+    background: rgba(0,0,0,.3);
+    height: 4px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}

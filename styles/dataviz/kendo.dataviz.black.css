@@ -1,0 +1,40 @@
+/* Black Theme */
+
+.k-black .k-mask {
+    background: rgba(61,61,61,.7);
+}
+
+.k-black .k-selection {
+    border-color: #8e8e8e;
+    box-shadow: inset 0 0 15px rgba(0,0,0,.3);
+    transition: box-shadow .2s linear, border-color .2s linear;
+    -moz-transition: box-shadow .2s linear, border-color .2s linear;
+    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
+    -o-transition: box-shadow .2s linear, border-color .2s linear;
+}
+
+.k-black .k-selection:hover {
+    border-color: #ffffff;
+    box-shadow: inset 0 0 15px rgba(255,255,255,.4);
+}
+
+.k-black .k-handle {
+    background-color: #8e8e8e;
+    width: 1px;
+}
+
+.k-black .k-handle:hover {
+    background-color: #ffffff;
+    width: 3px;
+}
+
+.k-black .k-navigator-hint .k-tooltip {
+    border: 0;
+    box-shadow: inset 0 5px 10px rgba(255,255,255,.4);
+    background: #3d3d3d;
+    color: #ffffff;
+}
+
+.k-black .k-navigator-hint .k-scroll {
+    background: #ffffff;
+}
