@@ -5,6 +5,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.rangeslider.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 
@@ -17,7 +19,42 @@ public class RangeSliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         super("RangeSlider");
     }
 
+    @Override
+    public Element<?> html() {
+        Element<?> element = super.html();
+
+        String id = getName();
+        
+        element.append(createInput(id.concat("[0]"), "selectionStart"));
+        element.append(createInput(id.concat("[1]"), "selectionEnd"));
+        
+        return element;
+    }
     
+    private Input createInput(String name, String propertyName) {
+        Input element = new Input();
+        
+        element.attr("name", name);
+        element.attr("type", "range");
+        
+        if (this.isSet("min")) {
+            element.attr("min", getProperty("min"));
+        }
+        
+        if (this.isSet("max")) {
+            element.attr("max", getProperty("max"));
+        }
+        
+        if (this.isSet("step")) {
+            element.attr("step", getProperty("step"));
+        }
+        
+        if (this.isSet(propertyName)) {
+            element.attr("value", getProperty(propertyName));            
+        }
+        
+        return element;
+    }    
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag

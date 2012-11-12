@@ -9,9 +9,9 @@
                   min="0" max="30" smallStep="1" largeStep="10" value="18">
 	</kendo:slider>
 	
-	<kendo:slider name="rangeSlider" class="humidity" change="rangeSliderOnChange" slide="rangeSliderOnSlide"
+	<kendo:rangeSlider name="rangeSlider" class="humidity" change="rangeSliderOnChange" slide="rangeSliderOnSlide"
                   min="0" max="10" smallStep="1" largeStep="2" tickPlacement="both">
-    </kendo:slider>
+    </kendo:rangeSlider>
 </div>
 
 <script>
