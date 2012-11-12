@@ -1687,7 +1687,7 @@ function pad(number, digits, end) {
 
         support.mobileOS = support.detectOS(navigator.userAgent);
 
-        support.ignoreMouseEvents = support.mobileOS.ios || support.mobileOS.android;
+        support.kineticScrollNeeded = support.mobileOS && support.touch;
 
         function detectBrowser(ua) {
             var browser = false, match = [],
@@ -2529,7 +2529,7 @@ function pad(number, digits, end) {
         // return the first touch scroller
         return $(elements).map(function(idx, element) {
             element = $(element);
-            if (support.touch && kendo.mobile.ui.Scroller && !element.data("kendoMobileScroller")) {
+            if (support.kineticScrollNeeded && kendo.mobile.ui.Scroller && !element.data("kendoMobileScroller")) {
                 element.kendoMobileScroller(options);
                 return element.data("kendoMobileScroller");
             } else {
@@ -2640,7 +2640,7 @@ function pad(number, digits, end) {
     var eventMap = {
         down: "touchstart mousedown",
         move: "mousemove touchmove",
-        up: "mouseup touchend",
+        up: "mouseup touchend touchcancel",
         cancel: "mouseleave touchcancel"
     };
 
