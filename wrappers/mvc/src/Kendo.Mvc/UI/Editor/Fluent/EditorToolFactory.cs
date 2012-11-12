@@ -123,6 +123,11 @@ namespace Kendo.Mvc.UI.Fluent
             return Button("superscript");
         }
 
+        public EditorToolFactory ViewHtml()
+        {
+            return Button("viewHtml");
+        }
+
         public EditorToolFactory FontName()
         {
             return ComboBox("fontName", null);
@@ -208,13 +213,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         private EditorToolFactory ComboBox(string identifier, IList<DropDownListItem> items)
-        {
-            group.Tools.Add(new EditorListTool(identifier, items));
-
-            return this;
-        }
-
-        private EditorToolFactory DropDown(string identifier, IList<DropDownListItem> items)
         {
             group.Tools.Add(new EditorListTool(identifier, items));
 

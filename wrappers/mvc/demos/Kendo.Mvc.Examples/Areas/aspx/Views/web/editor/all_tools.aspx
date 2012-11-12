@@ -11,6 +11,7 @@
       .Tools(tools => tools
           .SubScript()
           .SuperScript()
+          .ViewHtml()
       )
       .Value(() =>
            { %>
