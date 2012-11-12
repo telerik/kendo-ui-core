@@ -1,7 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
     ui = kendo.ui,
-    touch = kendo.support.touch,
     Widget = ui.Widget,
     parse = kendo.parseDate,
     keys = kendo.keys,
@@ -9,7 +8,7 @@
     DIV = "<div />",
     SPAN = "<span />",
     ns = ".kendoDatePicker",
-    CLICK = (touch ? "touchend" : "click") + ns,
+    CLICK = "touchend" + ns + " click" + ns,
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
@@ -22,7 +21,7 @@
     HOVER = "k-state-hover",
     KEYDOWN = "keydown" + ns,
     HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
-    MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
+    MOUSEDOWN = "touchstart" + ns + " mousedown" + ns,
     ID = "id",
     MIN = "min",
     MAX = "max",
@@ -438,9 +437,7 @@
         },
 
         _toggleHover: function(e) {
-            if (!touch) {
-                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
-            }
+            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
         _blur: function() {
@@ -451,13 +448,13 @@
             that._inputWrapper.removeClass(FOCUSED);
         },
 
-        _click: function() {
+        _click: function(e) {
             var that = this,
                 element = that.element;
 
             that.dateView.toggle();
 
-            if (!touch && element[0] !== document.activeElement) {
+            if (e.type === "click" && element[0] !== document.activeElement) {
                 element.focus();
             }
         },
