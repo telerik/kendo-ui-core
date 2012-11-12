@@ -9,19 +9,19 @@
         isArray = $.isArray,
         math = Math,
         support = kendo.support,
-        touch = support.touch,
         pointers = support.pointers,
         CHANGE = "change",
         SLIDE = "slide",
-        MOUSE_DOWN = touch ? "touchstart" : "mousedown",
-        TRACK_MOUSE_DOWN = touch ? "touchstart" : pointers ? "MSPointerDown" : "mousedown",
-        MOUSE_UP = touch ? "touchend" : "mouseup",
+        NS = ".slider",
+        MOUSE_DOWN = "touchstart" + NS + " mousedown" + NS,
+        TRACK_MOUSE_DOWN = pointers ? "MSPointerDown" + NS : "mousedown" + NS + " touchstart" + NS,
+        MOUSE_UP = "touchend" + NS + " mouseup" + NS,
         MOVE_SELECTION = "moveSelection",
-        KEY_DOWN = "keydown",
-        CLICK = "click",
-        MOUSE_OVER = "mouseover",
-        FOCUS = "focus",
-        BLUR = "blur",
+        KEY_DOWN = "keydown" + NS,
+        CLICK = "click" + NS,
+        MOUSE_OVER = "mouseover" + NS,
+        FOCUS = "focus" + NS,
+        BLUR = "blur" + NS,
         DRAG_HANDLE = ".k-draghandle",
         TRACK_SELECTOR = ".k-slider-track",
         TICK_SELECTOR = ".k-tick",
@@ -30,8 +30,7 @@
         STATE_DISABLED = "k-state-disabled",
         PRECISION = 3,
         DISABLED = "disabled",
-        UNDEFINED = "undefined",
-        NS = ".slider";
+        UNDEFINED = "undefined";
 
     var SliderBase = Widget.extend({
         init: function(element, options) {
@@ -692,23 +691,23 @@
 
             that.wrapper
                 .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
-                    .on(TRACK_MOUSE_DOWN + NS, clickHandler)
+                    .on(TRACK_MOUSE_DOWN, clickHandler)
                     .end()
-                    .on(TRACK_MOUSE_DOWN + NS, function() {
+                    .on(TRACK_MOUSE_DOWN, function() {
                         $(document.documentElement).one("selectstart", kendo.preventDefault);
                     });
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .on(MOUSE_UP + NS, function (e) {
+                .on(MOUSE_UP, function (e) {
                     that._setTooltipTimeout();
                 })
-                .on(CLICK + NS, function (e) {
+                .on(CLICK, function (e) {
                     that._focusWithMouse(e);
                     e.preventDefault();
                 })
-                .on(FOCUS + NS, proxy(that._focus, that))
-                .on(BLUR + NS, proxy(that._blur, that));
+                .on(FOCUS, proxy(that._focus, that))
+                .on(BLUR, proxy(that._blur, that));
 
             move = proxy(function (sign) {
                 var newVal = that._nextValueByIndex(that._valueIndex + (sign * 1));
@@ -731,11 +730,11 @@
                 }, that);
 
                 that.wrapper.find(".k-button")
-                    .on(MOUSE_UP + NS, proxy(function (e) {
+                    .on(MOUSE_UP, proxy(function (e) {
                         this._clearTimer();
                         that._focusWithMouse(e);
                     }, that))
-                    .on(MOUSE_OVER + NS, function (e) {
+                    .on(MOUSE_OVER, function (e) {
                         $(e.currentTarget).addClass("k-state-hover");
                     })
                     .on("mouseout" + NS, proxy(function (e) {
@@ -743,13 +742,13 @@
                         this._clearTimer();
                     }, that))
                     .eq(0)
-                    .on(MOUSE_DOWN + NS, proxy(function (e) {
+                    .on(MOUSE_DOWN, proxy(function (e) {
                         mouseDownHandler(e, 1);
                     }, that))
                     .click(false)
                     .end()
                     .eq(1)
-                    .on(MOUSE_DOWN + NS, proxy(function (e) {
+                    .on(MOUSE_DOWN, proxy(function (e) {
                         mouseDownHandler(e, -1);
                     }, that))
                     .click(kendo.preventDefault);
@@ -757,8 +756,8 @@
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .off(KEY_DOWN + NS, false)
-                .on(KEY_DOWN + NS, proxy(this._keydown, that));
+                .off(KEY_DOWN, false)
+                .on(KEY_DOWN, proxy(this._keydown, that));
 
             options.enabled = true;
         },
@@ -774,25 +773,25 @@
 
             that.wrapper
                 .find(".k-button")
-                .off(MOUSE_DOWN + NS)
-                .on(MOUSE_DOWN + NS, kendo.preventDefault)
-                .off(MOUSE_UP + NS)
-                .on(MOUSE_UP + NS, kendo.preventDefault)
+                .off(MOUSE_DOWN)
+                .on(MOUSE_DOWN, kendo.preventDefault)
+                .off(MOUSE_UP)
+                .on(MOUSE_UP, kendo.preventDefault)
                 .off("mouseleave" + NS)
                 .on("mouseleave" + NS, kendo.preventDefault)
-                .off(MOUSE_OVER + NS)
-                .on(MOUSE_OVER + NS, kendo.preventDefault);
+                .off(MOUSE_OVER)
+                .on(MOUSE_OVER, kendo.preventDefault);
 
             that.wrapper
-                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN + NS);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN);
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .off(MOUSE_UP + NS)
-                .off(KEY_DOWN + NS)
-                .off(CLICK + NS)
-                .off(FOCUS + NS)
-                .off(BLUR + NS);
+                .off(MOUSE_UP)
+                .off(KEY_DOWN)
+                .off(CLICK)
+                .off(FOCUS)
+                .off(BLUR);
 
             that.options.enabled = false;
         },
@@ -954,7 +953,7 @@
                 return;
             }
 
-            owner.element.off(MOUSE_OVER + NS);
+            owner.element.off(MOUSE_OVER);
             that.dragHandle.addClass(STATE_SELECTED);
 
             that.dragableArea = owner._getDragableArea();
@@ -1102,7 +1101,7 @@
 
             owner._focusWithMouse({"target":that.dragHandle[0]});
 
-            owner.element.on(MOUSE_OVER + NS);
+            owner.element.on(MOUSE_OVER);
 
             return false;
         },
@@ -1289,33 +1288,33 @@
 
             that.wrapper
                 .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
-                    .on(TRACK_MOUSE_DOWN + NS, clickHandler)
+                    .on(TRACK_MOUSE_DOWN, clickHandler)
                     .end()
-                    .on(TRACK_MOUSE_DOWN + NS, function() {
+                    .on(TRACK_MOUSE_DOWN, function() {
                         $(document.documentElement).one("selectstart", kendo.preventDefault);
                     });
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .on(MOUSE_UP + NS, function (e) {
+                .on(MOUSE_UP, function (e) {
                     that._setTooltipTimeout();
                 })
-                .on(CLICK + NS, function (e) {
+                .on(CLICK, function (e) {
                     that._focusWithMouse(e);
                     e.preventDefault();
                 })
-                .on(FOCUS + NS, proxy(that._focus, that))
-                .on(BLUR + NS, proxy(that._blur, that));
+                .on(FOCUS, proxy(that._focus, that))
+                .on(BLUR, proxy(that._blur, that));
 
             that.wrapper.find(DRAG_HANDLE)
-                .off(KEY_DOWN + NS, kendo.preventDefault)
-                .eq(0).on(KEY_DOWN + NS,
+                .off(KEY_DOWN, kendo.preventDefault)
+                .eq(0).on(KEY_DOWN,
                     proxy(function(e) {
                         this._keydown(e, "firstHandle");
                     }, that)
                 )
                 .end()
-                .eq(1).on(KEY_DOWN + NS,
+                .eq(1).on(KEY_DOWN,
                     proxy(function(e) {
                         this._keydown(e, "lastHandle");
                     }, that)
@@ -1334,15 +1333,15 @@
             that.wrapper.find("input").attr(DISABLED, DISABLED);
 
             that.wrapper
-                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN + NS);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN);
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .off(MOUSE_UP + NS)
-                .off(KEY_DOWN + NS)
-                .off(CLICK + NS)
-                .off(FOCUS + NS)
-                .off(BLUR + NS);
+                .off(MOUSE_UP)
+                .off(KEY_DOWN)
+                .off(CLICK)
+                .off(FOCUS)
+                .off(BLUR);
 
             that.options.enabled = false;
         },
