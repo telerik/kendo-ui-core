@@ -8,7 +8,6 @@
         extractFormat = kendo._extractFormat,
         template = kendo.template,
         getCulture = kendo.getCulture,
-        touch = kendo.support.touch,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
@@ -16,7 +15,7 @@
         browser = kendo.support.browser,
         isIE8 = browser.msie && (parseInt(browser.version, 10) < 9 || (document.documentMode && document.documentMode < 9)),
         ns = ".kendoCalendar",
-        CLICK = (touch ? "touchend" : "click") + ns,
+        CLICK = "click" + ns,
         KEYDOWN_NS = "keydown" + ns,
         ID = "id",
         MIN = "min",
@@ -37,9 +36,9 @@
         BLUR = "blur" + ns,
         FOCUS = "focus",
         FOCUS_WITH_NS = FOCUS + ns,
-        MOUSEENTER = touch ? "touchstart" : "mouseenter",
-        MOUSEENTER_WITH_NS = MOUSEENTER + ns,
-        MOUSELEAVE = (touch ? "touchend" : "mouseleave") + ns,
+        MOUSEENTER = "touchstart mouseenter",
+        MOUSEENTER_WITH_NS = "touchstart" + ns + " mouseenter" + ns,
+        MOUSELEAVE = "touchend" + ns + " mouseleave" + ns,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
         PREVARROW = "_prevArrow",
@@ -1133,11 +1132,11 @@
     }
 
     function mousetoggle(e) {
-        if (!touch) {
+        if (e.type.indexOf("touch") === -1) {
             e.stopImmediatePropagation();
         }
 
-        $(this).toggleClass(HOVER, e.type == MOUSEENTER || e.type == FOCUS);
+        $(this).toggleClass(HOVER, MOUSEENTER.indexOf(e.type) > -1 || e.type == FOCUS);
     }
 
     function prevent (e) {
