@@ -673,13 +673,31 @@
                     equals(polyline.closed, false);
                 });
 
-                test("first point is offset by one border width", function() {
+                test("first point is offset by one line width", function() {
                     same(pointCoordinates[0], [ 1.5, 2 ]);
-                })
+                });
 
-                test("last point is offset by one border width", function() {
+                test("last point is offset by one line width", function() {
                     same(pointCoordinates[3], [ 0.5, 2 ]);
-                });;
+                });
+
+                test("first point is not offset when no line width is set", function() {
+                    setupAreaChart(plotArea, {
+                        series: [
+                            positiveSeries
+                        ]
+                    });
+                    same(pointCoordinates[0], [ 0.5, 2 ]);
+                });
+
+                test("last point is not offset when no line width is set", function() {
+                    setupAreaChart(plotArea, {
+                        series: [
+                            positiveSeries
+                        ]
+                    });
+                    same(pointCoordinates[3], [ 1.5, 2 ]);
+                });
 
                 // ------------------------------------------------------------
                 module("Area Chart / Rendering / Missing Values", {

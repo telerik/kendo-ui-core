@@ -2879,10 +2879,12 @@
             for (i = 0; i < length; i++) {
                 pointCenter = linePoints[i].markerBox().center();
 
-                if (i === 0) {
-                    pointCenter.x += lineWidth / 2;
-                } else if (i === length - 1) {
-                    pointCenter.x -= lineWidth / 2;
+                if (defined(lineWidth)) {
+                    if (i === 0) {
+                        pointCenter.x += lineWidth / 2;
+                    } else if (i === length - 1) {
+                        pointCenter.x -= lineWidth / 2;
+                    }
                 }
 
                 points.push(new Point2D(pointCenter.x, pointCenter.y));
