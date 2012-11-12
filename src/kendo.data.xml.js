@@ -203,4 +203,4 @@
             xml: XmlDataReader
         }
     });
-})(jQuery);
+})(window.kendo.jQuery);

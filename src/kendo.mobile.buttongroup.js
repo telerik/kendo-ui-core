@@ -14,7 +14,7 @@
 
             that.element.addClass("km-buttongroup").find("li").each(that._button);
 
-            that.eventProxy.on("down", SELECTOR, "_mousedown");
+            that.element.on("down", SELECTOR, "_mousedown");
 
             that.select(that.options.index);
         },
@@ -83,4 +83,4 @@
     });
 
     ui.plugin(ButtonGroup);
-})(jQuery);
+})(window.kendo.jQuery);

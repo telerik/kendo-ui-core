@@ -69,4 +69,4 @@
     });
 
     ui.plugin(Loader);
-})(jQuery);
+})(window.kendo.jQuery);

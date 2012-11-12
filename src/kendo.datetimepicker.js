@@ -611,4 +611,4 @@
 
     ui.plugin(DateTimePicker);
 
-})(jQuery);
+})(window.kendo.jQuery);

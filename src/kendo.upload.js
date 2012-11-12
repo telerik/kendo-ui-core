@@ -1152,4 +1152,4 @@
         return tokens;
     }
     kendo.ui.plugin(Upload);
-})(jQuery);
+})(window.kendo.jQuery);

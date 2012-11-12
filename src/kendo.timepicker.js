@@ -773,4 +773,4 @@
 
     ui.plugin(TimePicker);
 
-})(jQuery);
+})(window.kendo.jQuery);

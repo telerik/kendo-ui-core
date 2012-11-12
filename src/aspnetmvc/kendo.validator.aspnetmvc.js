@@ -200,4 +200,4 @@
             }
         }
     });
-})(jQuery);
+})(window.kendo.jQuery);

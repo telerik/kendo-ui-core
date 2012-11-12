@@ -256,4 +256,4 @@
     });
 
     kendo.mobile.Application = Application;
-})(jQuery);
+})(window.kendo.jQuery);

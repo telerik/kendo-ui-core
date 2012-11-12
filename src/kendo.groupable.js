@@ -343,4 +343,4 @@
 
     kendo.ui.plugin(Groupable);
 
-})(jQuery);
+})(window.kendo.jQuery);

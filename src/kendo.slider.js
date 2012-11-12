@@ -335,7 +335,7 @@
                 selectionStart = drag.selectionStart;
                 selectionEnd = drag.selectionEnd;
             }
-        
+
             if (drag) {
                 tooltipTemplate = drag.tooltipTemplate;
             }
@@ -1557,4 +1557,4 @@
 
     kendo.ui.plugin(RangeSlider);
 
-})(jQuery);
+})(window.kendo.jQuery);

@@ -240,4 +240,4 @@ extend(Editor, {
     Serializer: Serializer
 });
 
-})(jQuery);
+})(window.kendo.jQuery);

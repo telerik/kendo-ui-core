@@ -46,13 +46,6 @@
         }
     });
 
-    $.fn.kendoMobileSwipe = function(callback, options) {
-        this.each(function() {
-            new Swipe(this, callback, options);
-        });
-    };
-
-
     var Touch = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -201,5 +194,12 @@
         }
     });
 
+
+    window.jQuery.fn.kendoMobileSwipe = function(callback, options) {
+        this.each(function() {
+            new Swipe(this, callback, options);
+        });
+    };
+
     kendo.ui.plugin(Touch);
-})(jQuery);
+})(window.kendo.jQuery);

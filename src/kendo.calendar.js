@@ -1202,4 +1202,4 @@
     calendar.viewsEnum = views;
 
     kendo.calendar = calendar;
-})(jQuery);
+})(window.kendo.jQuery);

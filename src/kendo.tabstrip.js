@@ -993,4 +993,4 @@
 
     kendo.ui.plugin(TabStrip);
 
-})(jQuery);
+})(window.kendo.jQuery);

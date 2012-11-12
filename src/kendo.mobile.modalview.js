@@ -82,4 +82,4 @@
     });
 
     ui.plugin(ModalView);
-})(jQuery);
+})(window.kendo.jQuery);

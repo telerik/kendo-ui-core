@@ -947,4 +947,4 @@
         blendGradient: blendGradient
     });
 
-})(jQuery);
+})(window.kendo.jQuery);

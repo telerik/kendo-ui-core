@@ -3353,4 +3353,4 @@
 
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);
-})(jQuery);
+})(window.kendo.jQuery);

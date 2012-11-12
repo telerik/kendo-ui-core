@@ -824,4 +824,4 @@
 
     ui.Select.removeFiltersForField = removeFiltersForField;
 
-})(jQuery);
+})(window.kendo.jQuery);

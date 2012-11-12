@@ -610,4 +610,4 @@
         }
     };
 
-})(jQuery);
+})(window.kendo.jQuery);

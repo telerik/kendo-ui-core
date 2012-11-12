@@ -2738,4 +2738,4 @@
         uniqueId: uniqueId
     });
 
-})(jQuery);
+})(window.kendo.jQuery);

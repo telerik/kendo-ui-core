@@ -1011,7 +1011,7 @@
         }
     });
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($) {
 
 var kendo = window.kendo,
@@ -1505,7 +1505,7 @@ var Dom = {
 
 kendo.ui.editor.Dom = Dom;
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($, undefined) {
 
 // Imports ================================================================
@@ -1748,7 +1748,7 @@ extend(Editor, {
     Serializer: Serializer
 });
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($) {
 
     // Imports ================================================================
@@ -2787,7 +2787,7 @@ extend(Editor, {
     RangeUtils: RangeUtils
 });
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($) {
 
     // Imports ================================================================
@@ -3458,7 +3458,7 @@ extend(Editor, {
 
 registerTool("insertHtml", new InsertHtmlTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Insert HTML", initialValue: "Insert HTML"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($) {
 
 var kendo = window.kendo,
@@ -3977,7 +3977,7 @@ registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFami
 
 registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", defaultValue: [{ text: "fontSizeInherit",  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($) {
 
 var kendo = window.kendo,
@@ -4310,7 +4310,7 @@ registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight, 
 registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: "justify"}} } ]);
 registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($) {
 
 // Imports ================================================================
@@ -4498,7 +4498,7 @@ extend(Editor, {
 registerTool("insertLineBreak", new Tool({ key: 13, shift: true, command: NewLineCommand }));
 registerTool("insertParagraph", new Tool({ key: 13, command: ParagraphCommand }));
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($) {
 
 // Imports ================================================================
@@ -4926,7 +4926,7 @@ extend(Editor, {
 registerTool("insertUnorderedList", new ListTool({tag:'ul', template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
 registerTool("insertOrderedList", new ListTool({tag:'ol', template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($, undefined) {
 
 var kendo = window.kendo,
@@ -5144,7 +5144,7 @@ extend(kendo.ui.editor, {
 registerTool("createLink", new Tool({ key: "K", ctrl: true, command: LinkCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Create Link"})}));
 registerTool("unlink", new UnlinkTool({ key: "K", ctrl: true, shift: true, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($, undefined) {
 
 var kendo = window.kendo,
@@ -5319,7 +5319,7 @@ kendo.ui.editor.ImageCommand = ImageCommand;
 
 registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: INSERTIMAGE}) }));
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($, undefined) {
 
 var kendo = window.kendo,
@@ -5557,7 +5557,7 @@ var SelectBox = DropDownList.extend({
 kendo.ui.editor.ColorPicker = ColorPicker;
 kendo.ui.editor.SelectBox = SelectBox;
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($, undefined) {
 
 // Imports ================================================================
@@ -5785,7 +5785,7 @@ extend(Editor, {
 registerTool("indent", new Tool({ command: IndentCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Indent"}) }));
 registerTool("outdent", new OutdentTool({template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Outdent"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($, undefined) {
 
 var kendo = window.kendo,
@@ -5872,7 +5872,7 @@ kendo.ui.editor.ViewHtmlCommand = ViewHtmlCommand;
 
 Editor.EditorUtils.registerTool("viewHtml", new Tool({ command: ViewHtmlCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "View HTML"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);
 (function($) {
 
 // Imports ================================================================
@@ -5992,4 +5992,4 @@ extend(Editor, {
     PendingFormats: PendingFormats
 });
 
-})(jQuery);
+})(window.kendo.jQuery);

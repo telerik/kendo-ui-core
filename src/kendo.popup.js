@@ -528,4 +528,4 @@
     });
 
     ui.plugin(Popup);
-})(jQuery);
+})(window.kendo.jQuery);

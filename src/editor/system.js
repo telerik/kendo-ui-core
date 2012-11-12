@@ -668,4 +668,4 @@ extend(Editor, {
 
 registerTool("insertHtml", new InsertHtmlTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Insert HTML", initialValue: "Insert HTML"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);

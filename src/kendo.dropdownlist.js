@@ -521,4 +521,4 @@
     }
 
     ui.plugin(DropDownList);
-})(jQuery);
+})(window.kendo.jQuery);

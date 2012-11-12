@@ -491,4 +491,4 @@ var Dom = {
 
 kendo.ui.editor.Dom = Dom;
 
-})(jQuery);
+})(window.kendo.jQuery);

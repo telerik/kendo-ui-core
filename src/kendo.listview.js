@@ -584,4 +584,4 @@
     });
 
     kendo.ui.plugin(ListView);
-})(jQuery);
+})(window.kendo.jQuery);

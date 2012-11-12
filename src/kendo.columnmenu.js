@@ -342,4 +342,4 @@
                     '</ul>';
 
     ui.plugin(ColumnMenu);
-})(jQuery);
+})(window.kendo.jQuery);

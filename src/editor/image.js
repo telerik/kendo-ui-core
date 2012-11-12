@@ -172,4 +172,4 @@ kendo.ui.editor.ImageCommand = ImageCommand;
 
 registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: INSERTIMAGE}) }));
 
-})(jQuery);
+})(window.kendo.jQuery);

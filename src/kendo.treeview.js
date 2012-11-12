@@ -1706,4 +1706,4 @@
     };
 
     ui.plugin(TreeView);
-})(jQuery);
+})(window.kendo.jQuery);

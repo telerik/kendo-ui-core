@@ -604,4 +604,4 @@
 
     ui.plugin(DatePicker);
 
-})(jQuery);
+})(window.kendo.jQuery);

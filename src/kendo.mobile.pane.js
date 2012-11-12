@@ -109,7 +109,7 @@
         },
 
         _setupAppLinks: function() {
-            this.eventProxy
+            this.element.handler(this)
                 .on("down", roleSelector(linkRoles), "_mouseup")
                 .on("up", roleSelector(buttonRoles), "_mouseup")
                 .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick)
@@ -155,4 +155,4 @@
     });
 
     ui.plugin(Pane);
-})(jQuery);
+})(window.kendo.jQuery);

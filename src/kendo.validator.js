@@ -319,4 +319,4 @@
     });
 
     kendo.ui.plugin(Validator);
-})(jQuery);
+})(window.kendo.jQuery);

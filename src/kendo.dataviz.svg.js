@@ -977,4 +977,4 @@
         SVGView: SVGView
     });
 
-})(jQuery);
+})(window.kendo.jQuery);

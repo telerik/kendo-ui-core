@@ -731,4 +731,4 @@
     });
 
     ui.plugin(ComboBox);
-})(jQuery);
+})(window.kendo.jQuery);

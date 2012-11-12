@@ -235,4 +235,4 @@ var SelectBox = DropDownList.extend({
 kendo.ui.editor.ColorPicker = ColorPicker;
 kendo.ui.editor.SelectBox = SelectBox;
 
-})(jQuery);
+})(window.kendo.jQuery);

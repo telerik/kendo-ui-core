@@ -1306,4 +1306,4 @@
         return dataSource._data;
     };
 
-})(jQuery);
+})(window.kendo.jQuery);

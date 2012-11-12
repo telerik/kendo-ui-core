@@ -1397,4 +1397,4 @@
         BarIndicatorAnimationDecorator: BarIndicatorAnimationDecorator
     });
 
-})(jQuery);
+})(window.kendo.jQuery);

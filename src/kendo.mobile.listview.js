@@ -85,24 +85,24 @@
 
     var ListView = Widget.extend({
         init: function(element, options) {
-            var that = this,
-                eventProxy;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
-            eventProxy = that.eventProxy;
+            element = that.element;
+
             options = that.options;
 
-            eventProxy
+            element
                 .on("down", HIGHLIGHT_SELECTOR, "_highlight")
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
                 .on("up", ITEM_SELECTOR, "_click");
 
             if (support.mobileOS.ios) {
-                eventProxy.on("up", ".km-listview-label", toggleiOSLabel);
+                element.on("up", ".km-listview-label", toggleiOSLabel);
             }
 
-            that.element.wrap(WRAPPER);
+            element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
 
             that._footer();
@@ -674,4 +674,4 @@
     });
 
     ui.plugin(ListView);
-})(jQuery);
+})(window.kendo.jQuery);

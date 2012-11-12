@@ -16,4 +16,4 @@
         };
     }
 
-})(jQuery);
+})(window.kendo.jQuery);

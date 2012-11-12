@@ -616,4 +616,4 @@
     }
 
     ui.plugin(NumericTextBox);
-})(jQuery);
+})(window.kendo.jQuery);

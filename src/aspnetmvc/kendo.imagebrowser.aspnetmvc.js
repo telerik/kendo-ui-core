@@ -74,4 +74,4 @@
     });
 
 
-})(jQuery);
+})(window.kendo.jQuery);

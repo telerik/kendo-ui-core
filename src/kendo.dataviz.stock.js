@@ -568,4 +568,4 @@
     deepExtend(dataviz, {
     });
 
-})(jQuery);
+})(window.kendo.jQuery);

@@ -198,4 +198,4 @@
     });
 
     ui.plugin(Switch);
-})(jQuery);
+})(window.kendo.jQuery);

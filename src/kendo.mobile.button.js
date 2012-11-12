@@ -26,12 +26,13 @@
             that._wrap();
             that._style();
 
-            that.eventProxy.on("up", "_release")
+            that.element
+                .on("up", "_release")
                 .on("down", "_activate")
                 .on("up cancel", "_deactivate");
 
             if (ANDROID3UP) {
-                that.eventProxy.on("move", "_timeoutDeactivate");
+                that.element.on("move", "_timeoutDeactivate");
             }
         },
 
@@ -164,4 +165,4 @@
     ui.plugin(Button);
     ui.plugin(BackButton);
     ui.plugin(DetailButton);
-})(jQuery);
+})(window.kendo.jQuery);

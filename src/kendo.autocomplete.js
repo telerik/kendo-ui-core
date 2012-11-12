@@ -547,4 +547,4 @@
     });
 
     ui.plugin(AutoComplete);
-})(jQuery);
+})(window.kendo.jQuery);

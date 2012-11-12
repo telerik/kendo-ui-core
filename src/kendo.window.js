@@ -1055,4 +1055,4 @@
 
     kendo.ui.plugin(Window);
 
-})(jQuery);
+})(window.kendo.jQuery);

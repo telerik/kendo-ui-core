@@ -2192,7 +2192,7 @@ function pad(number, digits, end) {
         init: function(element, options) {
             var that = this;
 
-            that.element = kendo.jQuery(element);
+            that.element = kendo.jQuery(element).handler(that);
 
             Observable.fn.init.call(that);
 
@@ -2658,38 +2658,36 @@ function pad(number, digits, end) {
 
     var on = $.fn.on;
 
-    var rootKendoJQuery,
-        kendoJQuery = function(selector, context) {
-            return new kendoJQuery.fn.init(selector, context, rootKendoJQuery);
-    };
+    var kendoJQuery = $.sub();
 
-    $.extend(kendoJQuery, $);
-
-    kendoJQuery.fn = kendoJQuery.prototype = $.extend(true, {}, $.fn, {
-        init: function(selector, context, rootKendoJQuery) {
-            $.fn.init.call(this, selector, context, rootKendoJQuery);
-            if (!this.data("kendoNS")) {
-                this.data("kendoNS", "." + kendo.guid());
-            }
-        },
-
+    extend(kendoJQuery.fn, {
         handler: function(handler) {
             this.data("handler", handler);
             return this;
         },
 
         on: function() {
+            var that = this,
+                ns = that.data("kendoNS");
+
             // support for event map signature
             if (arguments.length === 1) {
-                return on.call(this, arguments[0]);
+                return on.call(that, arguments[0]);
             }
 
-            var that = this,
-                context = that,
-                args = slice.call(arguments),
-                ns = that.data("kendoNS"),
-                callback =  args[args.length - 1],
-                callbackIsFunction = $.isFunction(callback),
+            if (!ns) {
+                ns = "." + kendo.guid();
+                this.data("kendoNS", ns);
+            }
+
+            var context = that,
+                args = slice.call(arguments);
+
+            if (typeof args[args.length -1] === UNDEFINED) {
+                args.pop();
+            }
+
+            var callback =  args[args.length - 1],
                 events = args[0].replace(/(\w+)/g, applyEventMap).replace(/( |$)/g, ns + " ");
 
             // setup mouse trap
@@ -2702,15 +2700,14 @@ function pad(number, digits, end) {
                 });
             }
 
-            if (!callbackIsFunction) {
+            if (typeof callback === STRING) {
                 context = that.data("handler");
                 callback = context[callback];
+
+                args[args.length - 1] = function(e) {
+                    callback.call(context, e);
+                };
             }
-
-
-            args[args.length - 1] = function(e) {
-                callback.call(context, e);
-            };
 
             args[0] = events;
 
@@ -2723,8 +2720,6 @@ function pad(number, digits, end) {
             this.off(this.data("kendoNS"));
         }
     });
-
-    kendoJQuery.fn.init.prototype = kendoJQuery.fn;
 
     kendo.jQuery = kendoJQuery;
     kendo.eventMap = eventMap;

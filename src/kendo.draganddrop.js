@@ -791,4 +791,4 @@
         Movable: Movable
     });
 
- })(jQuery);
+ })(window.kendo.jQuery);
