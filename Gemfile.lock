@@ -33,6 +33,8 @@ GEM
       em-websocket (>= 0.2.0)
       guard (>= 1.1.0)
       multi_json (~> 1.0)
+    guard-shell (0.5.1)
+      guard (>= 1.1.0)
     hashie (1.2.0)
     httpauth (0.1)
     jwt (0.1.5)
@@ -70,6 +72,7 @@ DEPENDENCIES
   github_api
   guard
   guard-livereload
+  guard-shell
   kramdown
   rake
   rb-inotify (~> 0.8.8)
