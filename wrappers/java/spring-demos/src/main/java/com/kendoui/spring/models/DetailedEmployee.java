@@ -1,18 +1,59 @@
 package com.kendoui.spring.models;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name="Employees")
-public class Employee {
+public class DetailedEmployee {    
+    @ManyToOne()
+    @JoinColumn(name="ReportsTo")
+    @JsonIgnore
+    public DetailedEmployee getManager() {
+        return manager;
+    }
+
+    @JsonIgnore
+    public void setManager(DetailedEmployee manager) {
+        this.manager = manager;
+    }
+    
+    private DetailedEmployee manager;
+ 
+    @OneToMany(mappedBy="manager", fetch=FetchType.EAGER)
+    @JsonIgnore    
+    public Set<DetailedEmployee> getEmployees() {
+        return employees;
+    }
+    
+    @JsonIgnore
+    public void setEmployees(Set<DetailedEmployee> employees) {
+        this.employees = employees;
+    }
+    
+    @JsonIgnore
+    private Set<DetailedEmployee> employees = new HashSet<DetailedEmployee>();
+
+    @Transient
+    public Boolean getHasEmployees() {
+        return getEmployees().isEmpty();
+    }  
+    
     private int employeeId;
     private String firstName;
     private String lastName;
@@ -99,5 +140,5 @@ public class Employee {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }       
+    }
 }

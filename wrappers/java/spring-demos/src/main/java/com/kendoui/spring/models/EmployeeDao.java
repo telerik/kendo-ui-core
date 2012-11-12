@@ -8,4 +8,8 @@ public interface EmployeeDao {
     public List<Employee> getList();
     
     public List<Employee> getListByEmployeeId(Integer employeeId);
+
+    List<DetailedEmployee> getDetailedListByEmployeeId(Integer employeeId);
+
+    List<DetailedEmployee> getDetaliedList();
 }

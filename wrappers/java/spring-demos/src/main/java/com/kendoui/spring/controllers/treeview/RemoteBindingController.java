@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kendoui.spring.models.Employee;
+import com.kendoui.spring.models.DetailedEmployee;
 import com.kendoui.spring.models.EmployeeDao;
 
 @Controller("treeview-remote-binding-controller")
@@ -23,7 +23,7 @@ public class RemoteBindingController {
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
-    public @ResponseBody List<Employee> read(Integer employeeId) {
-        return employee.getListByEmployeeId(employeeId);
+    public @ResponseBody List<DetailedEmployee> read(Integer employeeId) {
+        return employee.getDetailedListByEmployeeId(employeeId);
     }
 }
