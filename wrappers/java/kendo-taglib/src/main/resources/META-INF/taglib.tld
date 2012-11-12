@@ -8501,14 +8501,6 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
         </attribute>
 
         <attribute>
-            <description>The ranges of the scale.
-The range fields:</description>
-            <name>ranges</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>Reverses the axis direction - values increase from right to left and from top to bottom.</description>
             <name>reverse</name>
             <rtexprvalue>true</rtexprvalue>
@@ -8801,6 +8793,15 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
+        <description>The ranges of the scale.</description>
+        <name>linearGauge-scale-ranges</name>
+        <tag-class>com.kendoui.taglib.lineargauge.ScaleRangesTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>The border of the labels.</description>
         <name>linearGauge-scale-labels-border</name>
         <tag-class>com.kendoui.taglib.lineargauge.LabelsBorderTag</tag-class>
@@ -8825,6 +8826,44 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The ranges of the scale.</description>
+        <name>linearGauge-scale-range</name>
+        <tag-class>com.kendoui.taglib.lineargauge.RangeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The start position of the range in scale units.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end position of the range in scale units.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the range.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The color of the range.
+Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -9387,14 +9426,6 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
         </attribute>
 
         <attribute>
-            <description>The ranges of the scale.
-The range fields:</description>
-            <name>ranges</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-        <attribute>
             <description>Reverses the scale direction - values are increase anticlockwise.</description>
             <name>reverse</name>
             <rtexprvalue>true</rtexprvalue>
@@ -9620,6 +9651,15 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 
     <tag>
+        <description>The ranges of the scale.</description>
+        <name>radialGauge-scale-ranges</name>
+        <tag-class>com.kendoui.taglib.radialgauge.ScaleRangesTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>The border of the labels.</description>
         <name>radialGauge-scale-labels-border</name>
         <tag-class>com.kendoui.taglib.radialgauge.LabelsBorderTag</tag-class>
@@ -9644,6 +9684,44 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The ranges of the scale.</description>
+        <name>radialGauge-scale-range</name>
+        <tag-class>com.kendoui.taglib.radialgauge.RangeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The start position of the range in scale units.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The end position of the range in scale units.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the range.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The color of the range.
+Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>

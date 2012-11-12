@@ -62,6 +62,12 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("minorTicks", value);
     }
 
+    public void setRanges(ScaleRangesTag value) {
+
+        setProperty("ranges", value.ranges());
+
+    }
+
     public float getEndAngle() {
         return (float)getProperty("endAngle");
     }
@@ -100,14 +106,6 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setMinorUnit(float value) {
         setProperty("minorUnit", value);
-    }
-
-    public Object getRanges() {
-        return (Object)getProperty("ranges");
-    }
-
-    public void setRanges(Object value) {
-        setProperty("ranges", value);
     }
 
     public boolean getReverse() {
