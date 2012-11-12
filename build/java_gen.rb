@@ -544,7 +544,7 @@ class Tag
     end
 
     def has_item_content?
-        has_items? && @name == 'Item'
+        has_items? && @name == 'Item' || @name == 'Pane'
     end
 
     def is_item?
