@@ -301,6 +301,21 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when the user has used the mouse or a swipe gesture to drag the chart.</description>
+            <name>dragStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires as long as the user is dragging the chart using the mouse or swipe gestures.</description>
+            <name>drag</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user stops dragging the chart.</description>
+            <name>dragEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when plot area is clicked.</description>
             <name>plotAreaClick</name>
             <rtexprvalue>true</rtexprvalue>
@@ -313,6 +328,21 @@ and is about to render it.</description>
         <attribute>
             <description>Fires when chart series are hovered.</description>
             <name>seriesHover</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user has used the mousewheel to zoom the chart.</description>
+            <name>zoomStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires as long as the user is zooming the chart using the mousewheel.</description>
+            <name>zoom</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user stops zooming the chart.</description>
+            <name>zoomEnd</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
@@ -3218,6 +3248,30 @@ Includes</description>
 
 
     <tag>
+        <description>Subscribes to the dragStart event of Chart.</description>
+        <name>chart-dragStart</name>
+        <tag-class>com.kendoui.taglib.chart.DragStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the drag event of Chart.</description>
+        <name>chart-drag</name>
+        <tag-class>com.kendoui.taglib.chart.DragFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dragEnd event of Chart.</description>
+        <name>chart-dragEnd</name>
+        <tag-class>com.kendoui.taglib.chart.DragEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Subscribes to the plotAreaClick event of Chart.</description>
         <name>chart-plotAreaClick</name>
         <tag-class>com.kendoui.taglib.chart.PlotAreaClickFunctionTag</tag-class>
@@ -3237,6 +3291,30 @@ Includes</description>
         <description>Subscribes to the seriesHover event of Chart.</description>
         <name>chart-seriesHover</name>
         <tag-class>com.kendoui.taglib.chart.SeriesHoverFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the zoomStart event of Chart.</description>
+        <name>chart-zoomStart</name>
+        <tag-class>com.kendoui.taglib.chart.ZoomStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the zoom event of Chart.</description>
+        <name>chart-zoom</name>
+        <tag-class>com.kendoui.taglib.chart.ZoomFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the zoomEnd event of Chart.</description>
+        <name>chart-zoomEnd</name>
+        <tag-class>com.kendoui.taglib.chart.ZoomEndFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
