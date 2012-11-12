@@ -291,6 +291,8 @@
                 selection = chart._selection,
                 selectionLength = selection.options.to - selection.options.from;
 
+            e.originalEvent.preventDefault();
+
             if (math.abs(delta) > 1) {
                 delta *= ZOOM_ACCELERATION;
             }
