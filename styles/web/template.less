@@ -165,7 +165,6 @@
 .k-pager-refresh,
 .k-grouping-header,
 .k-grouping-header .k-group-indicator,
-.k-dropdown-wrap,
 .k-panelbar > .k-item > .k-link,
 .k-panel > .k-item > .k-link,
 .k-panelbar .k-panel,
@@ -177,7 +176,6 @@
 .k-upload-files,
 .k-tiles,
 .k-toolbar,
-.k-dropdown-wrap,
 .k-tooltip,
 .k-progress
 {
@@ -251,6 +249,15 @@ span.k-numeric-wrap.k-state-active,
     border-color: @widget-border-color;
 }
 
+input.k-textbox,
+textarea.k-textbox,
+input.k-textbox:hover,
+textarea.k-textbox:hover,
+.k-textbox > input
+{
+    background: none;
+}
+
 .k-input,
 input.k-textbox,
 textarea.k-textbox,
@@ -289,6 +296,7 @@ textarea.k-textbox:hover,
 .k-picker-wrap,
 .k-grouping-header,
 .k-pager-wrap,
+.k-textbox,
 .k-button,
 .k-draghandle,
 .k-tile,
@@ -476,6 +484,7 @@ textarea.k-textbox:hover,
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-hover,
+.k-textbox:hover,
 .k-state-hover,
 .k-state-hover:hover,
 .k-pager-wrap .k-link:hover,
