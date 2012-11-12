@@ -394,7 +394,12 @@
         invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}.",
         deleteFile: 'Are you sure you want to delete "{0}"?',
         overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?',
-        directoryNotFound: "A directory with this name was not found."
+        directoryNotFound: "A directory with this name was not found.",
+        imageWebAddress: "Web address",
+        imageAltText: "Alternate text",
+        dialogInsert: "Insert",
+        dialogButtonSeparator: "or",
+        dialogCancel: "Cancel"
     };
 
     var supportedBrowser = !os || (os.ios && os.flatVersion >= 500) || (!os.ios && typeof(document.documentElement.contentEditable) != 'undefined');

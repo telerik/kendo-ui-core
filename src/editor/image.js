@@ -48,6 +48,34 @@ var ImageCommand = Command.extend({
         return false;
     },
 
+    _dialogTemplate: function(showBrowser) {
+        return kendo.template(
+            '<div class="k-editor-dialog">' +
+                '# if (showBrowser) { #' +
+                    '<div class="k-imagebrowser"></div>' +
+                '# } #' +
+                '<ol>' +
+                    '<li class="k-form-text-row">' +
+                        '<label for="k-editor-image-url">#: messages.imageWebAddress #</label>' +
+                        '<input type="text" class="k-input" id="k-editor-image-url">' +
+                    '</li>' +
+                    '<li class="k-form-text-row">' +
+                        '<label for="k-editor-image-title">#: messages.imageAltText #</label>' +
+                        '<input type="text" class="k-input" id="k-editor-image-title">' +
+                    '</li>' +
+                '</ol>' +
+                '<div class="k-button-wrapper">' +
+                    '<button class="k-dialog-insert k-button">#: messages.dialogInsert #</button>' +
+                    '&nbsp;#: messages.dialogButtonSeparator #&nbsp;' +
+                    '<a href="\\#" class="k-dialog-close k-link">#: messages.dialogCancel #</a>' +
+                '</div>' +
+            '</div>'
+        )({
+            messages: this.editor.options.messages,
+            showBrowser: showBrowser
+        });
+    },
+
     redo: function () {
         var that = this,
             range = that.lockRange();
@@ -62,7 +90,8 @@ var ImageCommand = Command.extend({
             range = that.lockRange(),
             applied = false,
             img = RangeUtils.image(range),
-            windowContent, dialog, dialogWidth;
+            dialog, dialogWidth,
+            options = that.editor.options;
 
         function apply(e) {
             that.attributes = {
@@ -97,26 +126,13 @@ var ImageCommand = Command.extend({
             }
         }
 
-        var imageBrowser = that.editor.options.imageBrowser;
+        var imageBrowser = options.imageBrowser;
         var showBrowser = !!(kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined);
 
-        windowContent =
-            '<div class="k-editor-dialog">' +
-                (showBrowser ? '<div class="k-imagebrowser"></div>' : "") +
-                '<ol>' +
-                    '<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>' +
-                    '<li class="k-form-text-row"><label for="k-editor-image-title">Tooltip</label><input type="text" class="k-input" id="k-editor-image-title"/></li>' +
-                '</ol>' +
-                '<div class="k-button-wrapper">' +
-                    '<button class="k-dialog-insert k-button">Insert</button>' +
-                    '&nbsp;or&nbsp;' +
-                    '<a href="#" class="k-dialog-close k-link">Close</a>' +
-                '</div>' +
-            '</div>';
 
         dialogWidth = showBrowser ? { width: "960px" } : {};
 
-        dialog = EditorUtils.createDialog(windowContent, that.editor, extend(dialogWidth, that.editor.options.dialogOptions, {
+        dialog = EditorUtils.createDialog(that._dialogTemplate(showBrowser), that.editor, extend(dialogWidth, options.dialogOptions, {
             title: INSERTIMAGE,
             close: close,
             resizable: showBrowser,
