@@ -9744,7 +9744,7 @@ format will also influence the appearance of the</description>
             <description>Specifies the URL from which to load the content of a pane.</description>
             <name>contentUrl</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>

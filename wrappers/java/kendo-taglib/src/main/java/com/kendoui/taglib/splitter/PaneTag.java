@@ -30,7 +30,7 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         }
         
         try {
-                div.write(pageContext.getOut());                
+            div.write(pageContext.getOut());                
         } catch (IOException exception) {
             throw new JspException(exception);
         }
@@ -76,11 +76,11 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("collapsible", value);
     }
 
-    public boolean getContentUrl() {
-        return (boolean)getProperty("contentUrl");
+    public String getContentUrl() {
+        return (String)getProperty("contentUrl");
     }
 
-    public void setContentUrl(boolean value) {
+    public void setContentUrl(String value) {
         setProperty("contentUrl", value);
     }
 
