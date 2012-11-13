@@ -9,6 +9,8 @@
 
 .k-silver .k-selection {
     border-color: #a6b1c0;
+    -moz-box-shadow: inset 0 1px 12px rgba(0,0,0,.1);
+    -webkit-box-shadow: inset 0 1px 12px rgba(0,0,0,.1);
     box-shadow: inset 0 1px 12px rgba(0,0,0,.1);
     transition: box-shadow .2s linear, border-color .2s linear;
     -moz-transition: box-shadow .2s linear, border-color .2s linear;
@@ -18,6 +20,8 @@
 
 .k-silver .k-selection:hover {
     border-color: #a6b1c0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
     box-shadow: none;
 }
 
@@ -35,6 +39,8 @@
 
 .k-silver .k-navigator-hint .k-tooltip {
     border: 0;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3);
     box-shadow: 0 1px 3px rgba(0,0,0,.3);
     background: #ffffff;
     color: #4f5a69;

@@ -9,6 +9,8 @@
 
 .k-highcontrast .k-selection {
     border-color: #664e62;
+    -moz-box-shadow: inset 0 1px 12px rgba(0,0,0,.7);
+    -webkit-box-shadow: inset 0 1px 12px rgba(0,0,0,.7);
     box-shadow: inset 0 1px 12px rgba(0,0,0,.7);
     transition: box-shadow .2s linear, border-color .2s linear;
     -moz-transition: box-shadow .2s linear, border-color .2s linear;
@@ -18,6 +20,8 @@
 
 .k-highcontrast .k-selection:hover {
     border-color: #ffffff;
+    -moz-box-shadow: inset 0 0 20px rgba(250,0,214,.5);
+    -webkit-box-shadow: inset 0 0 20px rgba(250,0,214,.5);
     box-shadow: inset 0 0 20px rgba(250,0,214,.5);
 }
 
@@ -37,6 +41,8 @@
 
 .k-highcontrast .k-navigator-hint .k-tooltip {
     border: 0;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.7);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.7);
     box-shadow: 0 1px 3px rgba(0,0,0,.7);
     background: #a7008f;
     color: #ffffff;

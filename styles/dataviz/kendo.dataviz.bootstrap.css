@@ -2,6 +2,8 @@
 
 .k-bootstrap .k-selection {
     border-color: #b8b8b8;
+    -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
+    -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
     box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
     transition: box-shadow .2s linear, border-color .2s linear;
     -moz-transition: box-shadow .2s linear, border-color .2s linear;
@@ -11,6 +13,8 @@
 
 .k-bootstrap .k-selection:hover {
     border-color: #9e9e9e;
+    -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,.05);
+    -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,.05);
     box-shadow: inset 0 3px 8px rgba(0,0,0,.05);
 }
 
@@ -18,6 +22,8 @@
     background-color: #fcfcfc;
     width: 15px;
     height: 15px;
+    -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.1);
     box-shadow: 0 0 0 2px rgba(0,0,0,.1);
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -27,6 +33,8 @@
 .k-bootstrap .k-handle:hover {
     background-color: #ffffff;
     border-color: #b8b8b8;
+    -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.3);
     box-shadow: 0 0 0 2px rgba(0,0,0,.3);
 }
 
@@ -40,6 +48,8 @@
 
 .k-bootstrap .k-navigator-hint .k-tooltip {
     border: 3px solid #ffffff;
+    -moz-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
     box-shadow: 0 0 0 3px rgba(0,0,0,.2);
     background: #ffffff;
     color: #676767;

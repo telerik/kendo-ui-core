@@ -9,6 +9,8 @@
 
 .k-metro .k-selection {
     border-color: #c7c7c7;
+    -moz-box-shadow: inset 0 1px 12px rgba(0,0,0,.05);
+    -webkit-box-shadow: inset 0 1px 12px rgba(0,0,0,.05);
     box-shadow: inset 0 1px 12px rgba(0,0,0,.05);
     transition: box-shadow .2s linear, border-color .2s linear;
     -moz-transition: box-shadow .2s linear, border-color .2s linear;
@@ -18,6 +20,8 @@
 
 .k-metro .k-selection:hover {
     border-color: #8ebc00;
+    -moz-box-shadow: inset 0 0 20px rgba(142,188,0,.5);
+    -webkit-box-shadow: inset 0 0 20px rgba(142,188,0,.5);
     box-shadow: inset 0 0 20px rgba(142,188,0,.5);
 }
 
@@ -36,6 +40,8 @@
 
 .k-metro .k-navigator-hint .k-tooltip {
     border: 0;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3);
     box-shadow: 0 1px 3px rgba(0,0,0,.3);
     background: #8ebc00;
     color: #ffffff;
