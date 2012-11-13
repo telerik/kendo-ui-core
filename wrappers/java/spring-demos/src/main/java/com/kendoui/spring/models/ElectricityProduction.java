@@ -1,6 +1,6 @@
 package com.kendoui.spring.models;
 
-public class ElectricityProduction{
+public class ElectricityProduction {
     private String country;
     private String year;
     private String unit;
@@ -8,6 +8,16 @@ public class ElectricityProduction{
     private int nuclear;
     private int hydro;
     private int wind;
+    
+    public ElectricityProduction(String country, String year, String unit, int hydro, int wind, int solar, int nuclear) {
+        setCountry(country);
+        setYear(year);
+        setUnit(unit);
+        setHydro(hydro);
+        setWind(wind);
+        setSolar(solar);
+        setNuclear(nuclear);
+    }
     
     public String getYear() {
         return year;

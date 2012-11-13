@@ -53,16 +53,14 @@ public class NavigatorTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "stockChart-navigator";
     }
 
+    public void setSeries(NavigatorSeriesTag value) {
+
+        setProperty("series", value.series());
+
+    }
+
     public void setSelect(NavigatorSelectTag value) {
         setProperty("select", value);
-    }
-
-    public Object getSeries() {
-        return (Object)getProperty("series");
-    }
-
-    public void setSeries(Object value) {
-        setProperty("series", value);
     }
 
 //<< Attributes

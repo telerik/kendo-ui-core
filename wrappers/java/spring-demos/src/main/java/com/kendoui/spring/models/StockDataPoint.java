@@ -14,6 +14,25 @@ public class StockDataPoint {
     private double low;
 
     private String symbol;
+    
+    public StockDataPoint(String date, double open, double high, double low, double close, int volume) {
+        setDate(date);
+        setOpen(open);
+        setHigh(high);
+        setLow(low);
+        setClose(close);
+        setVolume(volume);
+    }
+    
+    public StockDataPoint(String date, double close, int volume, double open, double high, double low, String symbol) {
+        setDate(date);
+        setOpen(open);
+        setHigh(high);
+        setLow(low);
+        setClose(close);
+        setVolume(volume);
+        setSymbol(symbol);
+    }
 
     public String getDate() {
         return date;

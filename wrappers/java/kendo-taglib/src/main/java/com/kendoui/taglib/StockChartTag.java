@@ -55,6 +55,10 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     }
 
+    public void setTooltip(TooltipTag value) {
+        setProperty("tooltip", value);
+    }
+
     public void setCategoryAxis(CategoryAxisTag value) {
 
         setProperty("categoryAxis", value.categoryAxis());
@@ -75,10 +79,6 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     public void setPlotArea(PlotAreaTag value) {
         setProperty("plotArea", value);
-    }
-
-    public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value);
     }
 
     public void setSeriesDefaults(SeriesDefaultsTag value) {

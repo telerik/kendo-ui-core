@@ -9995,13 +9995,6 @@ value must not exceed</description>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorTag</tag-class>
         <body-content>JSP</body-content>
 
-        <attribute>
-            <description>Array of series definitions.</description>
-            <name>series</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
     </tag>
 
 
@@ -10010,6 +10003,65 @@ value must not exceed</description>
         <name>stockChart-series</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesTag</tag-class>
         <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>The data point tooltip configuration options.</description>
+        <name>stockChart-tooltip</name>
+        <tag-class>com.kendoui.taglib.stockchart.TooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip. The default is determined from the series color.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text color of the tooltip. The default is the same as the series labels color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
     </tag>
 
@@ -10226,65 +10278,6 @@ upwards from the current position.</description>
 
 
     <tag>
-        <description>The data point tooltip configuration options.</description>
-        <name>stockChart-tooltip</name>
-        <tag-class>com.kendoui.taglib.stockchart.TooltipTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The background color of the tooltip. The default is determined from the series color.</description>
-            <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The text color of the tooltip. The default is the same as the series labels color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The tooltip font.</description>
-            <name>font</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The tooltip format.</description>
-            <name>format</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding of the tooltip.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The tooltip template.
-Template variables:</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>A value indicating if the tooltip should be displayed.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
         <description>Default values for each series.</description>
         <name>stockChart-seriesDefaults</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesDefaultsTag</tag-class>
@@ -10454,6 +10447,15 @@ Includes</description>
 
 
     <tag>
+        <description>Array of series definitions.</description>
+        <name>stockChart-navigator-series</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>Specifies the initially selected range.</description>
         <name>stockChart-navigator-select</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSelectTag</tag-class>
@@ -10471,6 +10473,459 @@ Includes</description>
             <name>to</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.util.Date</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Array of series definitions.</description>
+        <name>stockChart-navigator-seriesItem</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The type of the series.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+
+        <attribute>
+            <description>Array of data points.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the series value.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Name template for auto-generated
+series when binding to grouped data.</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series name visible in the legend.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Aggregate function for date series.
+This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.</description>
+            <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The name of the value axis to use.</description>
+            <name>axis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series base color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the line.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Configures the behavior for handling missing values in line series.</description>
+            <name>missingValues</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The series opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The line width of the line chart.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The line of the area chart.</description>
+            <name>line</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the column color.</description>
+            <name>colorField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The distance between category clusters.</description>
+            <name>gap</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Space between columns.</description>
+            <name>spacing</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates that the series should be stacked in a group with the specified name.</description>
+            <name>stack</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Configures the series data labels.</description>
+        <name>stockChart-navigator-seriesItem-labels</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the labels.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text color of the labels.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The font style of the labels.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The format of the labels.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the position of the line labels.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the labels.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the labels.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the labels.</description>
+        <name>stockChart-navigator-seriesItem-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Configures the line markers.</description>
+        <name>stockChart-navigator-seriesItem-markers</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the current series markers.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The marker size.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Configures the markers shape type.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The markers visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The data point tooltip configuration options.</description>
+        <name>stockChart-navigator-seriesItem-tooltip</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip. The default is determined from the series color.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text color of the tooltip. The default is the same as the series labels color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The line of the area chart.</description>
+        <name>stockChart-navigator-seriesItem-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the area chart.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The line opacity of the area chart.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The line width of the area chart.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The effects overlay.</description>
+        <name>stockChart-navigator-seriesItem-overlay</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemOverlayTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The gradient name.</description>
+            <name>gradient</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the labels.</description>
+        <name>stockChart-navigator-seriesItem-labels-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the markers.</description>
+        <name>stockChart-navigator-seriesItem-markers-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>stockChart-navigator-seriesItem-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -11143,6 +11598,29 @@ Template variables:</description>
         <description>The border configuration options.</description>
         <name>stockChart-seriesItem-tooltip-border</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>stockChart-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.TooltipBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -11888,29 +12366,6 @@ Template variables:
         <attribute>
             <description>The dash type of the border.</description>
             <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The border configuration options.</description>
-        <name>stockChart-tooltip-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.TooltipBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the border.</description>
-            <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
