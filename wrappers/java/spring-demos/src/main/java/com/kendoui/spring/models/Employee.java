@@ -21,6 +21,7 @@ public class Employee {
     private String address;
     private String country;
     private Date birthDate;
+    private String homePhone;
 
     @Id
     @Column(name="EmployeeID")
@@ -99,5 +100,14 @@ public class Employee {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }       
+    }  
+    
+    @Column(name="HomePhone")
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public void setHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+    }
 }
