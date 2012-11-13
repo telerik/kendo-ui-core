@@ -131,6 +131,14 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("name", value);
     }
 
+    public String getPane() {
+        return (String)getProperty("pane");
+    }
+
+    public void setPane(String value) {
+        setProperty("pane", value);
+    }
+
     public boolean getReverse() {
         return (boolean)getProperty("reverse");
     }
