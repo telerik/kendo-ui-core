@@ -346,6 +346,32 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Renders the axis in the pane with the specified name.
+        /// </summary>
+        /// <param name="pane">The pane name.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Panes(panes => {
+        ///                panes.Add().Title("Value");
+        ///                panes.Add("volumePane").Title("Volume");
+        ///            })
+        ///            .CategoryAxis(axis => axis
+        ///                .Categories(s => s.DateString)
+        ///                .Pane("volumePane")
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TAxisBuilder Pane(string pane)
+        {
+            Axis.Pane = pane;
+
+            return this as TAxisBuilder;
+        }
+
+        /// <summary>
         /// Sets the color for all axis elements. Can be overriden by individual settings.
         /// </summary>
         /// <param name="color">The axis color.</param>
@@ -386,6 +412,16 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Axis.Reverse = reverse;
 
+            return this as TAxisBuilder;
+        }
+
+        /// <summary>
+        /// Sets the axis visibility
+        /// </summary>
+        /// <param name="visible">The axis visibility.</param>
+        public TAxisBuilder Visible(bool visible)
+        {
+            Axis.Visible = visible;
             return this as TAxisBuilder;
         }
     }

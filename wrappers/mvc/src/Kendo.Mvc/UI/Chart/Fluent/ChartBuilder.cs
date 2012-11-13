@@ -218,6 +218,30 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the chart panes.
+        /// </summary>
+        /// <param name="configurator">The add action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Chart(Model)
+        ///             .Name("Chart")
+        ///             .Panes(panes =>
+        ///             {
+        ///                 panes.Add("volume");
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartBuilder<T> Panes(Action<ChartPanesFactory> configurator)
+        {
+            ChartPanesFactory factory = new ChartPanesFactory(Component);
+
+            configurator(factory);
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the options for all chart axes of the specified type.
         /// </summary>
         /// <param name="configurator">The configurator.</param>

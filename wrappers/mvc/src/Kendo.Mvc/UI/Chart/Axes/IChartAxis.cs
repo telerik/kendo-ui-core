@@ -9,5 +9,19 @@ namespace Kendo.Mvc.UI
         /// The axis plot bands.
         /// </summary>
         IList<ChartPlotBand<TValue>> PlotBands { get; set; }
+
+        /// <summary>
+        /// The name of the pane that the axis should be rendered in.
+        /// </summary>
+        string Pane { get; set; }
+
+        /// <summary>
+        /// Gets or sets the axis visibility.
+        /// </summary>
+        bool? Visible
+        {
+            get;
+            set;
+        }
     }
 }

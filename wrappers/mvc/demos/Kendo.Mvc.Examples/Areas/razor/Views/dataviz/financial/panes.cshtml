@@ -6,9 +6,19 @@
             .Action("_BoeingStockData", "Financial")
         ))
         .DateField("Date")
+        .Panes(panes =>
+        {
+            panes.Add().Title("Value");
+            panes.Add("volumePane").Title("Volume").Height(100);
+        })
+        .CategoryAxis(axis => axis.Pane("volumePane"))
+        .ValueAxis(axis => axis.Numeric())
+        .ValueAxis(axis => axis.Numeric("volumeAxis").Pane("volumePane").Visible(false))
         .Series(series =>
         {
             series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+            series.Column(s => s.Volume).Axis("volumeAxis")
+                  .Tooltip(tooltip => tooltip.Format("{0:C0}"));
         })
         .Navigator(nav => nav
             .Series(series =>
@@ -20,5 +30,6 @@
                 DateTime.Parse("2011/10/07")
             )
         )
-    ) 
+        .HtmlAttributes(new { style = "height:500px;" })
+    )
 </div>
