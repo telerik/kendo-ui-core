@@ -14,7 +14,6 @@
         LINK = "k-link",
         LINKSELECTOR = "." + LINK,
         ERROR = "error",
-        CLICK = "click",
         ITEM = ".k-item",
         GROUP = ".k-group",
         VISIBLEGROUP = GROUP + ":visible",
