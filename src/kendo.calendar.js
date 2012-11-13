@@ -78,7 +78,6 @@
                     .on(KEYDOWN_NS, "table.k-content", proxy(that._move, that))
                     .on(CLICK, CELLSELECTOR, function(e) {
                         var link = e.currentTarget.firstChild;
-                        console.log(link);
 
                         if (link.href.indexOf("#") != -1) {
                             e.preventDefault();
