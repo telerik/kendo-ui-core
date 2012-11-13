@@ -153,12 +153,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines the inline handler of the dragend client-side event
         /// </summary>
-        /// <param name="onDragendAction">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="onDragEndAction">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().TreeView()
         ///           .Name("TreeView")
-        ///           .Events(events => events.Dragend(
+        ///           .Events(events => events.DragEnd(
         ///                @&lt;text&gt;
         ///                function(e) {
         ///                    // event handling code
@@ -169,9 +169,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TreeViewEventBuilder Dragend(Func<object, object> onDragendAction)
+        public TreeViewEventBuilder DragEnd(Func<object, object> onDragEndAction)
         {
-            Handler("dragend", onDragendAction);
+            Handler("dragend", onDragEndAction);
 
             return this;
         }
@@ -179,18 +179,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines the name of the JavaScript function that will handle the the dragend client-side event.
         /// </summary>
-        /// <param name="onDragendHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="onDragEndHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().TreeView()
         ///            .Name("TreeView")
-        ///            .Events(events => events.Dragend("onExpand"))
+        ///            .Events(events => events.DragEnd("onExpand"))
         /// %&gt;
         /// </code>
         /// </example>
-        public TreeViewEventBuilder Dragend(string onDragendHandlerName)
+        public TreeViewEventBuilder DragEnd(string onDragEndHandlerName)
         {
-            Handler("dragend", onDragendHandlerName);
+            Handler("dragend", onDragEndHandlerName);
 
             return this;
         }
