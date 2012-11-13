@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder Checkboxes(bool enabled)
         {
-            return Checkboxes(config => config.Enabled(true));
+            return Checkboxes(config => config.Enabled(enabled));
         }
 
         /// <summary>
