@@ -593,6 +593,16 @@
             ]
         },
         {
+            "id": "stock-chart",
+            "name": "StockChart",
+            "category": "dataviz",
+            "description": "StockChart widget and associated financial series.",
+            "source": "kendo.dataviz.stock.min.js",
+            "depends": [
+                "chart"
+            ]
+        },
+        {
             "id": "gauge",
             "name": "Gauge",
             "category": "dataviz",
