@@ -230,6 +230,16 @@
             "hidden": true
         },
         {
+            "id": "userevents",
+            "name": "User Events",
+            "category": "framework",
+            "source": "kendo.userevents.min.js",
+            "depends": [
+                "core"
+            ],
+            "hidden": true
+        },
+        {
             "id": "autocomplete",
             "name": "AutoComplete",
             "category": "web",
@@ -588,6 +598,7 @@
             "source": "kendo.dataviz.chart.min.js",
             "depends": [
                 "data",
+                "userevents",
                 "dataviz-core",
                 "dataviz-svg"
             ]
