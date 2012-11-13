@@ -24,23 +24,28 @@ namespace Kendo.Models
                 Url = String.Format("~/src/jsp/views/{0}/{1}/{2}.jsp", suite, section, example)
             };
 
-            var sections = Directory.GetDirectories(server.MapPath("~/src/jsp/controllers/"));
+            var path = server.MapPath("~/src/jsp/controllers/");
 
-            var directory = sections.FirstOrDefault(s => s.ToLower().EndsWith(section.Replace("-", "")));
-
-            if (directory != null)
+            if (Directory.Exists(path))
             {
-                var controllers = Directory.GetFiles(directory);
+                var sections = Directory.GetDirectories(path);
 
-                var controller = controllers.FirstOrDefault(c => Path.GetFileName(c).ToLower() == example.Replace("-", "") + "controller.java");
+                var directory = sections.FirstOrDefault(s => s.ToLower().EndsWith(section.Replace("-", "")));
 
-                if (controller != null)
+                if (directory != null)
                 {
-                    yield return new ExampleFile
+                    var controllers = Directory.GetFiles(directory);
+
+                    var controller = controllers.FirstOrDefault(c => Path.GetFileName(c).ToLower() == example.Replace("-", "") + "controller.java");
+
+                    if (controller != null)
                     {
-                        Name = Path.GetFileName(controller),
-                        Url = "~/src/jsp/controllers/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
-                    };
+                        yield return new ExampleFile
+                        {
+                            Name = Path.GetFileName(controller),
+                            Url = "~/src/jsp/controllers/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
+                        };
+                    }
                 }
             }
         }
