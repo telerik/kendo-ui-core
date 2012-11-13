@@ -238,7 +238,7 @@
     <value>Actualizar</value>
   </data>
   <data name="Filter_StringDoesNotContain" xml:space="preserve">
-    <value>Does not contain</value>
+    <value>No contiene</value>
   </data>
   <data name="Filter_Or" xml:space="preserve">
     <value>Or</value>

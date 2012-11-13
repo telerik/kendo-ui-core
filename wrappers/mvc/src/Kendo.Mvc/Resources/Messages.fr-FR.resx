@@ -151,7 +151,7 @@
     <value>Et</value>
   </data>
   <data name="Filter_Clear" xml:space="preserve">
-    <value>Effacer Filtrer</value>
+    <value>Effacer filtre</value>
   </data>
   <data name="Filter_DateIsEqualTo" xml:space="preserve">
     <value>Est égal à</value>
@@ -175,10 +175,10 @@
     <value>Est égal à</value>
   </data>
   <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
-    <value>Est supérieur à</value>
+    <value>Est supérieur ou égal à</value>
   </data>
   <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
-    <value>est supérieur à</value>
+    <value>Est supérieur à</value>
   </data>
   <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
     <value>Est inférieur ou égal à</value>
@@ -370,7 +370,7 @@
     <value>Tri décroissant</value>
   </data>
   <data name="Editor_DeleteFile" xml:space="preserve">
-    <value>Êtes-vous spur de vouloir supprimer "{0}"?</value>
+    <value>Êtes-vous sûr de vouloir supprimer "{0}"?</value>
   </data>
   <data name="Editor_DirectoryNotFound" xml:space="preserve">
     <value>Un répertoire avec ce nom n'a pas été trouvé.</value>
