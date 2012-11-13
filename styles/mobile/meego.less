@@ -224,16 +224,18 @@
 .km-meego .km-detail
 {
     line-height: .95rem;
-    background: #ccc;
+    background: #999;
+    text-shadow: none;
     .box-shadow(none);
     .border-radius(~".5rem");
-    border: 1px solid rgba(0,0,0,.1);
+    .box-sizing(border-box);
+    border: 1px solid rgba(0,0,0,.2);
 }
 
 .km-root .km-meego .km-detail
 {
-    width: 1.35rem;
-    height: 1.35rem;
+    width: 1.4rem;
+    height: 1.4rem;
 }
 
 .km-meego .km-detail .km-text
@@ -241,29 +243,38 @@
     display: none;
 }
 
-.km-meego .km-detail .km-icon
+.km-meego .km-detail span.km-icon
 {
-    left: 10%;
-    top: 12%;
-    width: 80%;
-    height: 80%;
-    font-size: 80%;
-    color: #282828;
+    color: #fff;
+    text-shadow: none;
 }
 
-.km-meego .km-rowdelete:after,
-.km-meego .km-rowinsert:after,
-.km-meego .km-rowinsert:before,
-.km-meego .km-contactadd:after,
-.km-meego .km-contactadd:before
+.km-root .km-pane.km-meego .km-detail:before,
+.km-meego .km-detail span.km-icon:before
 {
-    background: #282828;
+    color: #000;
+    display: block;
 }
 
-.km-meego .km-listview-link:after,
-.km-meego .km-detaildisclose:after
+.km-meego .km-detail .km-icon:after,
+.km-meego .km-detail .km-icon:before,
+.km-root .km-meego .km-detail:after,
+.km-root .km-meego .km-detail:before
 {
-    border-color: #282828;
+    color: inherit;
+    line-height: 1.1rem;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.km-meego .km-detail .km-icon:after,
+.km-meego .km-detail .km-icon:before
+{
+    line-height: .8rem;
 }
 
 .km-meego .km-rowinsert
@@ -526,6 +537,8 @@
     background: #d7d8d8;
 }
 
+.km-meego .km-detail.km-state-active,
+.km-meego .km-state-active .km-detail,
 .km-meego .km-listinset .km-state-active .km-listview-link,
 .km-meego .km-listgroupinset .km-state-active .km-listview-link,
 .km-meego .km-listinset .km-state-active .km-listview-label,
