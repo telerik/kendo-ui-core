@@ -115,6 +115,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The name of the pane that the axis should be rendered in.
+        /// </summary>
+        public string Pane
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The color for all axis elements. Can be overriden by individual settings.
         /// </summary>
         public string Color
@@ -127,6 +136,15 @@ namespace Kendo.Mvc.UI
         /// A value indicating if the axis labels should be rendered in reverse.
         /// </summary>
         public bool? Reverse
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the axis visibility.
+        /// </summary>
+        public bool? Visible
         {
             get;
             set;

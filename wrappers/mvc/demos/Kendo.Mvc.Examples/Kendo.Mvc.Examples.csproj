@@ -90,6 +90,7 @@
     <Compile Include="Controllers\DataViz\Donut_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Donut_LabelsController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Financial\PanesController.cs" />
     <Compile Include="Controllers\DataViz\Financial\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Grouped_DataController.cs" />
@@ -354,6 +355,7 @@
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\customization\plotbands.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\dashboards\car_dashboard.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\financial\panes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\financial\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\grouped_data.aspx" />
@@ -810,6 +812,7 @@
     <Content Include="Areas\aspx\Views\web\treeview\custom_data.aspx" />
     <Content Include="Areas\razor\Views\dataviz\financial\index.cshtml" />
     <Content Include="Areas\razor\Views\web\timepicker\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\financial\panes.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

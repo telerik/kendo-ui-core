@@ -19,6 +19,7 @@ namespace Kendo.Mvc.UI
             PlotArea = new PlotArea();
             Legend = new ChartLegend();
             Series = new List<IChartSeries>();
+            Panes = new List<ChartPane>();
             CategoryAxis = new ChartCategoryAxis<T>(this);
             ValueAxes = new List<IChartValueAxis>();
             XAxes = new List<IChartValueAxis>();
@@ -130,6 +131,15 @@ namespace Kendo.Mvc.UI
         /// Gets the chart series.
         /// </summary>
         public IList<IChartSeries> Series
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the chart panes.
+        /// </summary>
+        public IList<ChartPane> Panes
         {
             get;
             private set;
@@ -257,6 +267,8 @@ namespace Kendo.Mvc.UI
 
             SerializeSeries(options);
 
+            SerializePanes(options);
+
             SerializeData("seriesDefaults", SeriesDefaults.CreateSerializer().Serialize(), options);
 
             SerializeData("axisDefaults", AxisDefaults.CreateSerializer().Serialize(), options);
@@ -309,6 +321,20 @@ namespace Kendo.Mvc.UI
                 }
 
                 options.Add("series", serializedSeries);
+            }
+        }
+
+        private void SerializePanes(IDictionary<string, object> options)
+        {
+            if (Panes.Count > 0)
+            {
+                var serializedPanes = new List<IDictionary<string, object>>();
+                foreach (var p in Panes)
+                {
+                    serializedPanes.Add(p.CreateSerializer().Serialize());
+                }
+
+                options.Add("panes", serializedPanes);
             }
         }
 

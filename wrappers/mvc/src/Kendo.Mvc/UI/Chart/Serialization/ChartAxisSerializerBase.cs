@@ -20,7 +20,9 @@ namespace Kendo.Mvc.UI
             
             FluentDictionary.For(result)
                 .Add("name", axis.Name, string.Empty)
+                .Add("pane", axis.Pane, string.Empty)
                 .Add("color", axis.Color, string.Empty)
+                .Add("visible", axis.Visible, () => axis.Visible.HasValue)
                 .Add("reverse", axis.Reverse, () => axis.Reverse.HasValue);
 
             var labelsData = axis.Labels.CreateSerializer().Serialize();

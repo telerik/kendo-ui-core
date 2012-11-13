@@ -243,6 +243,9 @@
     <Compile Include="UI\Chart\ChartArea.cs" />
     <Compile Include="UI\Chart\ChartLine.cs" />
     <Compile Include="UI\Chart\ChartTooltip.cs" />
+    <Compile Include="UI\Chart\ChartPane.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
     <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
@@ -313,6 +316,7 @@
     <Compile Include="UI\Chart\Serialization\ChartOHLCSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartOHLCAggregatesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartCandlestickSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartPaneSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
