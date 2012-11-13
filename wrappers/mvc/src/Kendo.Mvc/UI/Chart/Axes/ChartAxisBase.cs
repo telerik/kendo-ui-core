@@ -142,6 +142,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// A value indicating if the automatic axis range should snap to 0.
+        /// </summary>
+        public bool? NarrowRange
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the axis visibility.
         /// </summary>
         public bool? Visible

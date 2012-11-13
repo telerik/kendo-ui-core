@@ -424,5 +424,15 @@ namespace Kendo.Mvc.UI.Fluent
             Axis.Visible = visible;
             return this as TAxisBuilder;
         }
+
+        /// <summary>
+        /// A value indicating if the automatic axis range should snap to 0.
+        /// </summary>
+        /// <param name="narrowRange">The narrowRange value.</param>
+        public TAxisBuilder NarrowRange(bool narrowRange)
+        {
+            Axis.NarrowRange = narrowRange;
+            return this as TAxisBuilder;
+        }
     }
 }

@@ -52,6 +52,11 @@ namespace Kendo.Mvc.UI
         /// </summary>
         bool? Reverse { get; set; }
 
+        /// <summary>
+        /// A value indicating if the automatic axis range should snap to 0.
+        /// </summary>
+        bool? NarrowRange { get; set; }
+
         IChartSerializer CreateSerializer();
     }
 }
