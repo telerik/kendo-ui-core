@@ -1,86 +1,74 @@
 <div id="example" class="k-content">
 
-    <div id="album">
-        <div id="album-contents">
-            <ol>
-            <li> The Return of Sathington Willoughby</li>
-            <li> Fisticuffs</li>
-            <li> Golden Boy</li>
-            <li> Over the Falls</li>
-            <li>Shake Hands with Beef</li>
-            <li> Camelback Cinema</li>
-            <li> Hats Off</li>
-            <li> Puddin' Taine</li>
-            <li>Bob's Party Time Lounge</li>
-            <li>Duchess and the Proverbial Mind Spread</li>
-            <li>Restin' Bones</li>
-            <li>Coddingtown</li>
-            <li>Kalamazoo</li>
-            <li>The Chastising of Renegade</li>
-            <li>Arnie</li>
-            </ol>
-        </div>
-        <div id="album-cover">
-            <img src="../../content/web/brown_album.jpg">
+    <div id="music-albums">
+        <div id="album">
+            <div id="album-contents">
+                <p>"Gangnam Style" is a single by the South Korean pop artist PSY. The song was released on July 15, 2012, as the lead single of his sixth studio album PSY 6 (Six Rules), Part 1. "Gangnam Style" debuted at number one on the Gaon Chart, the national record chart of South Korea. As of November 12, 2012, the music video has been viewed over 710 million times on YouTube, and is the site's most watched K-pop video and second most watched video ever.
+                <br /><br />
+                Source: <a href="http://en.wikipedia.org/wiki/Gangnam_Style" title="Gangnam Style - Wikipedia">Wikipedia</a>
+                </p>
+            </div>
+            <div id="album-cover">
+                <img src="../../content/web/psy-album.jpg">
+            </div>
         </div>
     </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
     <script>
         $(document).ready(function() {
             var el = kendo.fx($("#album")),
                 flip = el.flip("horizontal", $("#album-cover"), $("#album-contents")),
-                zoom = el.zoomIn().startValue(1).endValue(0.5);
+                zoom = el.zoomIn().startValue(1).endValue(0.7);
 
             flip.add(zoom).duration(200);
 
-            $("#album-cover").mouseenter(function() {
+            $("#album-cover").click(function() {
                 flip.stop().play();
             });
 
-            $("#album-contents").mouseleave(function() {
+            $("#album-contents").click(function() {
                 flip.stop().reverse();
             });
         });
     </script>
 
     <style scoped>
+        #music-albums {
+            width: 320px;
+            height: 320px;
+            margin: 0 auto;
+        }
         #album {
             position: absolute;
-            width: 301px;
-            height: 300px;
-            -webkit-transform: scale(0.5);
-            -moz-transform: scale(0.5);
-            -ms-transform: scale(0.5);
+            width: 320px;
+            height: 320px;
+            -webkit-transform: scale(0.7);
+            -moz-transform: scale(0.7);
+            -ms-transform: scale(0.7);
         }
-
-        #album-cover, #album-contents {
+        #album-cover {
             position: absolute;
-            width: 301px;
+            width: 300px;
             height: 300px;
+            border: 10px solid #626262;
+        }
+        #album-cover:hover {
+            border: 10px solid #ffb100;
         }
 
         #album-contents {
-            background: white;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            background: #2e2e2e;
+            color: #ffffff;
+            padding: 30px;
+            width: 240px;
+            height: 240px;
+        }
+        
+        #album-contents a {
+            color: #d8a42e;
         }
     </style>
 </div>
