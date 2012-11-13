@@ -430,7 +430,7 @@
                 container = that.container,
                 params = urlParams(url),
                 local = url.charAt(0) === "#",
-                remote = !local && !url.match(/^\w/),
+                remote = !local && !url.match(/^([\w\-]+)$/),
                 view,
                 element,
                 urlPath = url.split("?")[0];
