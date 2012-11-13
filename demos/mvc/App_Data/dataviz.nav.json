@@ -127,7 +127,7 @@
                     "text": "Binding to local data",
                     "url": "bubble-charts/local-data.html",
                     "title": "Local data binding mode in Kendo UI Bubble chart widget",
-                    "meta": "This demo illustrates the powerful "Binding to local data" feature, supported in Kendo UI Bubble Chart widget."
+                    "meta": "This demo illustrates the powerful \"Binding to local data\" feature, supported in Kendo UI Bubble Chart widget."
                 }, {
                     "text": "Binding to grouped data",
                     "url": "bubble-charts/grouped-data.html",
