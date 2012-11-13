@@ -118,7 +118,8 @@
             "source": "kendo.draganddrop.min.js",
             "description": "Drag & drop functionality for any DOM element.",
             "depends": [
-                "core"
+                "core",
+                "userevents"
             ]
         },
         {
@@ -673,6 +674,17 @@
             "hidden": true
         },
         {
+            "id": "mobile.shim",
+            "name": "Shim",
+            "category": "mobile",
+            "description": "Mobile Shim",
+            "source": "kendo.mobile.shim.min.js",
+            "depends": [
+                "popup"
+            ],
+            "hidden": true
+        },
+        {
             "id": "mobile.application",
             "name": "Application",
             "category": "mobile",
@@ -680,6 +692,16 @@
             "source": "kendo.mobile.application.min.js",
             "depends": [
                 "mobile.pane"
+            ]
+        },
+        {
+            "id": "mobile.actionsheet",
+            "name": "ActionSheet",
+            "category": "mobile",
+            "description": "The mobile ActionSheet widget displays a set of choices related to a task the user initiates.",
+            "source": "kendo.mobile.actionsheet.min.js",
+            "depends": [
+                "mobile.popover"
             ]
         },
         {
@@ -713,11 +735,31 @@
             ]
         },
         {
+            "id": "mobile.modalview",
+            "name": "ModalView",
+            "category": "mobile",
+            "description": "The Kendo ModalView is used to present self-contained functionality in the context of the current task.",
+            "source": "kendo.mobile.modalview.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
             "id": "mobile.navbar",
             "name": "NavBar",
             "category": "mobile",
             "description": "The Kendo mobile NavBar widget is used inside a mobile View or Layout Header element to display an application navigation bar.",
             "source": "kendo.mobile.navbar.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
+            "id": "mobile.popover",
+            "name": "PopOver",
+            "category": "mobile",
+            "description": "The mobile PopOver widget represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. ",
+            "source": "kendo.mobile.popover.min.js",
             "depends": [
                 "mobile.application"
             ]
@@ -740,16 +782,6 @@
             "category": "mobile",
             "description": "The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.",
             "source": "kendo.mobile.scrollview.min.js",
-            "depends": [
-                "mobile.application"
-            ]
-        },
-        {
-            "id": "mobile.modalview",
-            "name": "ModalView",
-            "category": "mobile",
-            "description": "The Kendo ModalView is used to present self-contained functionality in the context of the current task.",
-            "source": "kendo.mobile.modalview.min.js",
             "depends": [
                 "mobile.application"
             ]
@@ -782,6 +814,17 @@
             "source": "kendo.mobile.tabstrip.min.js",
             "depends": [
                 "mobile.application"
+            ]
+        },
+        {
+            "id": "touch",
+            "name": "Touch",
+            "category": "mobile",
+            "description": "The kendo Touch widget provides a cross-platform compatible API for handling user-initiated touch events, multi-touch gestures and event sequences (drag, swipe, etc.). ",
+            "source": "kendo.touch.min.js",
+            "depends": [
+                "core",
+                "userevents"
             ]
         },
         {
