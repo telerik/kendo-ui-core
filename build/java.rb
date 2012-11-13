@@ -52,8 +52,8 @@ file JSP_TAGLIB_JAR => [POM, JSP_TAGLIB_SRC].flatten do
     mvn(POM, 'clean package')
 
     # remove older tag library jars
-    rm_rf "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/kendo-taglib"
-    rm_rf "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/"
+    rm_rf "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/kendo-taglib", :verbose => VERBOSE
+    rm_rf "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/", :verbose => VERBOSE
 end
 
 =begin
