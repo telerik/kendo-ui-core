@@ -256,7 +256,7 @@
 
             test("checking a checkbox updates the view-model", function() {
                 var dom = $('<ul data-role="listview" ><li><label><input type="checkbox" data-bind="checked: foo"/>Foo</label></li></ul>');
-                var mobileOS = kendo.support.mobileOS;
+                var touch = kendo.support.touch;
 
                 try {
 
@@ -264,11 +264,11 @@
                         foo: true
                     });
 
-                    kendo.support.mobileOS = { ios: true };
+                    kendo.support.touch = true;
                     kendo.bind(dom, observable, kendo.mobile.ui);
                     dom.find("label").trigger("mouseup");
                 } finally {
-                    kendo.support.mobileOS = mobileOS;
+                    kendo.support.touch = touch;
                 }
 
                 equal(observable.foo, false);
