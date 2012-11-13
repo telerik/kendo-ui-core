@@ -51,7 +51,7 @@ public class DetailedEmployee {
 
     @Transient
     public Boolean getHasEmployees() {
-        return getEmployees().isEmpty();
+        return !getEmployees().isEmpty();
     }  
     
     private int employeeId;
@@ -62,6 +62,7 @@ public class DetailedEmployee {
     private String address;
     private String country;
     private Date birthDate;
+    private Integer reportsTo;
 
     @Id
     @Column(name="EmployeeID")
@@ -81,6 +82,15 @@ public class DetailedEmployee {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+    
+    @Column(name="ReportsTo", insertable=false, updatable=false)
+    public Integer getReportsTo() {
+        return reportsTo;
+    }
+
+    public void setReportsTo(Integer reportsTo) {
+        this.reportsTo = reportsTo;
     }
 
     @Column(name="LastName")

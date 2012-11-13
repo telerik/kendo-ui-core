@@ -2,8 +2,10 @@ package com.kendoui.spring.models;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,11 +35,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return result;
     }  
     
+    @SuppressWarnings("unchecked")
     @Override
     public List<DetailedEmployee> getDetailedListByEmployeeId(Integer employeeId) {
-        List<DetailedEmployee> result = getDetaliedList();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DetailedEmployee.class);
         
-        return result;
+        if (employeeId == null) {
+            criteria.add(Restrictions.isNull("reportsTo"));       
+        } else {
+            criteria.add(Restrictions.eq("reportsTo", employeeId));
+        }
+        
+        return criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
     } 
     
     @SuppressWarnings("unchecked")
@@ -46,22 +55,4 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return sessionFactory.getCurrentSession().createCriteria(DetailedEmployee.class)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
     }
-    
-//
-//    @SuppressWarnings("unchecked")
-//    @Override
-//    public List<Employee> getListByEmployeeId(Integer employeeId) {
-//        if (employeeId == null) {
-//            return sessionFactory.getCurrentSession()
-//                    .createSQLQuery("select * from Employees where ReportsTo = 2")
-//                    .addEntity(Employee.class)
-//                    .list();
-//        } else {
-//            return sessionFactory.getCurrentSession()
-//                          .createSQLQuery("select * from Employees where ReportsTo = :employeeId")
-//                          .addEntity(Employee.class)
-//                          .setParameter("employeeId", employeeId)
-//                          .list();
-//        }
-//    }    
 }

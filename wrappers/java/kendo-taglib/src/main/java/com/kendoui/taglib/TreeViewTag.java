@@ -3,6 +3,7 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.treeview.*;
 
 
+import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Ul;
 import com.kendoui.taglib.json.Function;
@@ -18,11 +19,17 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
 
     @Override
     protected Element<?> createElement() {
-        Ul ul = new Ul();
+        Element<?> wrapper;
         
-        ul.html(body());
+        if (items.isEmpty()) {
+            wrapper = new Div();
+        } else {
+            wrapper = new Ul();
+            
+            wrapper.html(body());
+        }
                
-        return ul;
+        return wrapper;
     }
     
     @Override
