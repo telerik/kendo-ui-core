@@ -131,6 +131,14 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("name", value);
     }
 
+    public boolean getNarrowRange() {
+        return (boolean)getProperty("narrowRange");
+    }
+
+    public void setNarrowRange(boolean value) {
+        setProperty("narrowRange", value);
+    }
+
     public String getPane() {
         return (String)getProperty("pane");
     }

@@ -4862,6 +4862,13 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
+            <description>Prevents the automatic axis range from snapping to 0.</description>
+            <name>narrowRange</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>The name of the pane that the axis should be rendered in.
 The axis will be rendered in the first (default) pane if not set.</description>
             <name>pane</name>
@@ -5395,6 +5402,13 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
+            <description>Prevents the automatic axis range from snapping to 0.</description>
+            <name>narrowRange</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>The name of the pane that the axis should be rendered in.
 The axis will be rendered in the first (default) pane if not set.</description>
             <name>pane</name>
@@ -5878,6 +5892,13 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Prevents the automatic axis range from snapping to 0.</description>
+            <name>narrowRange</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
         <attribute>
@@ -12270,6 +12291,13 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
+            <description>Prevents the automatic axis range from snapping to 0.</description>
+            <name>narrowRange</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>The name of the pane that the axis should be rendered in.
 The axis will be rendered in the first (default) pane if not set.</description>
             <name>pane</name>
@@ -12803,6 +12831,13 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
+            <description>Prevents the automatic axis range from snapping to 0.</description>
+            <name>narrowRange</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>The name of the pane that the axis should be rendered in.
 The axis will be rendered in the first (default) pane if not set.</description>
             <name>pane</name>
@@ -13286,6 +13321,13 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Prevents the automatic axis range from snapping to 0.</description>
+            <name>narrowRange</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
         <attribute>
