@@ -232,9 +232,6 @@
             }, {
                 "text": "Scale options",
                 "url": "radial-gauge/scale-options.html"
-            }, {
-                "text": "Car Dashboard",
-                "url": "radial-gauge/car-dashboard.html"
             }],
             "name": "radial-gauge"
         }, {
@@ -273,6 +270,17 @@
                 "url": "dashboards/stock-history.html"
             }],
             "name": "stock-history"
+        },
+        {
+            "text": "Car Dashboard",
+            "spriteCssClass": "gaugeRadialIcon",
+            "thumbnailUrl": "content/dataviz/dashboards/car.gif",
+            "expanded": "true",
+            "items": [{
+                "text": "Launch",
+                "url": "dashboards/car-dashboard.html"
+            }],
+            "name": "car-dashboard"
         }
     ]
 }

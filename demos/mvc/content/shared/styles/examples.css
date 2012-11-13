@@ -1246,7 +1246,7 @@ p#copy
 
 .widgetGrid .dataviz .dashboards
 {
-    width:200px;
+    width:370px;
 }
 
 .widgetGrid .gauges
@@ -1257,7 +1257,7 @@ p#copy
 
 .widgetGrid .financial
 {
-    width:180px;
+    width:150px;
     min-height: 176px;
     background:rgba(221, 221, 221, 0.2);
 }
