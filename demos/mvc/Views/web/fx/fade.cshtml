@@ -52,15 +52,15 @@
             position: absolute;
             border: 0;
             background: transparent;
-            top: 100px;
+            top: 90px;
             margin: 0;
             padding: 0;
             list-style-type: none;
         }
 
         #listView {
-            left: 75px;
-            width: 340px;
+            left: 50px;
+            width: 370px;
         }
 
         #listView .done {
@@ -69,29 +69,37 @@
 
         #listView li {
             display: inline-block;
-            width: 68px;
-            height: 68px;
-            margin: 0 12px 20px 0;
-            -webkit-box-shadow: 4px 2px 5px rgba(0,0,0,.6);
-            -moz-box-shadow: 4px 2px 5px rgba(0,0,0,.6);
-            -o-box-shadow: 4px 2px 5px rgba(0,0,0,.6);
-            box-shadow: 4px 2px 5px rgba(0,0,0,.6);
+            width: 80px;
+            height: 80px;
+            margin: 0 10px 10px 0;
+            -webkit-box-shadow: 0 2px 5px rgba(168,126,68,.8);
+            -moz-box-shadow: 0 2px 5px rgba(168,126,68,.8);
+            -o-box-shadow: 0 2px 5px rgba(168,126,68,.8);
+            box-shadow: 0 2px 5px rgba(168,126,68,.8);
         }
 
         #listView li,
         #listView img {
             overflow: hidden;
-            width: 68px;
-            height: 68px;
+            width: 80px;
+            height: 80px;
             cursor: pointer;
-            -webkit-border-radius: 34px;
-            -moz-border-radius: 34px;
-            -o-border-radius: 34px;
-            border-radius: 34px;
+            -webkit-border-radius: 40px;
+            -moz-border-radius: 40px;
+            -o-border-radius: 40px;
+            border-radius: 40px;
+        }
+        
+        #listView li:hover {
+            -webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.8);
+            -moz-box-shadow: 0 0 0 3px rgba(255,255,255,.8);
+            -o-box-shadow: 0 0 0 3px rgba(255,255,255,.8);
+            box-shadow: 0 0 0 3px rgba(255,255,255,.8);
         }
 
         #list {
             left: 523px;
+            color: #666;
         }
 
         #list .done {
@@ -100,7 +108,7 @@
 
         #example {
             background: url(../../content/web/fx/groceries.jpg) no-repeat 0 0;
-            height: 363px;
+            height: 330px;
         }
     </style>
 </div>

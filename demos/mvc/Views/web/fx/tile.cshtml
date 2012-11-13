@@ -1,26 +1,26 @@
 <div id="example" class="k-content">
     <div id="chessboard">
-        <div>
+        <div class="king">
             <span class="icon">&#x265A;</span>
             <span class="description">Black King</span>
         </div>
-        <div>
+        <div class="queen">
             <span class="icon">&#x265B;</span>
             <span class="description">Black Queen</span>
         </div>
-        <div>
+        <div class="rook">
             <span class="icon">&#x265C;</span>
             <span class="description">Black Rook</span>
         </div>
-        <div>
+        <div class="bishop">
             <span class="icon">&#x265D;</span>
             <span class="description">Black Bishop</span>
         </div>
-        <div>
+        <div class="knight">
             <span class="icon">&#x265E;</span>
             <span class="description">Black Knight</span>
         </div>
-        <div>
+        <div class="pawn">
             <span class="icon">&#x265F;</span>
             <span class="description">Black Pawn</span>
         </div>
@@ -28,24 +28,35 @@
 </div>
 
 <style>
+    #chessboard {
+        background-color: #0e0e0e;
+        width: 340px;
+        height: 230px;
+        margin: 0 auto;
+    }
     #chessboard div {
         float: left;
-        width: 200px;
-        height: 200px;
-        margin-left: 20px;
-        margin-bottom: 20px;
+        width: 100px;
+        height: 100px;
+        margin: 10px 0 0 10px;
         position: relative;
         overflow: hidden;
-        border: 1px solid black;
+        background-image: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%);
+        background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.2)));
+        background-image: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.2) 100%);
+        background-image: -o-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.2) 100%);
+        background-image: -ms-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.2) 100%);
+        background-image: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.2) 100%);
     }
     #chessboard div .icon {
-        font-size: 64px;
+        font-size: 48px;
         width: 100%;
         height: 100%;
-        line-height: 200px;
+        line-height: 100px;
         position: absolute;
         text-align: center;
         display: block;
+        color: #ffffff;
     }
 
     #chessboard div .description {
@@ -53,8 +64,29 @@
         width: 100%;
         height: 100%;
         position: absolute;
-        top: 0;
-        font-size: 32px;
+        padding-left: 10px;
+        top: 70px;
+        font-size: 12px;
+        color: #ffffff;
+    }
+    
+    .king {
+        background-color: #00aba9;
+    }
+    .queen {
+        background-color: #910091;
+    }
+    .rook {
+        background-color: #8cbf26;
+    }
+    .bishop {
+        background-color: #f09609;
+    }
+    .knight {
+        background-color: #a05000;
+    }
+    .pawn {
+        background-color: #1ba1e2;
     }
 </style>
 
