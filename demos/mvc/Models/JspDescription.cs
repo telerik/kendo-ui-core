@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -22,6 +23,28 @@ namespace Kendo.Models
                 Name = example + ".jsp",
                 Url = String.Format("~/src/jsp/views/{0}/{1}/{2}.jsp", suite, section, example)
             };
+
+            var path = server.MapPath("~/src/jsp/controllers/");
+
+            var sections = Directory.GetDirectories(path);
+
+            var directory = sections.FirstOrDefault(s => s.ToLower().EndsWith(section));
+
+            if (directory != null)
+            {
+                var controllers = Directory.GetFiles(directory);
+
+                var controller = controllers.FirstOrDefault(c => Path.GetFileName(c).ToLower() == example + "controller.java");
+
+                if (controller != null)
+                {
+                    yield return new ExampleFile
+                    {
+                        Name = Path.GetFileName(controller),
+                        Url = "~/src/jsp/controllers/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
+                    };
+                }
+            }
         }
     }
 }
