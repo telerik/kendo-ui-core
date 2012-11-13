@@ -654,7 +654,7 @@
                     that._fetch = true;
                     that.value(value);
                     that.trigger(SELECTED);
-                });
+                 });
 
                 if (!that._request) { // if request is started do not fetch again
                     that.dataSource.fetch();
@@ -751,9 +751,17 @@
                 change = function() {
                     var value = that.value();
                     if (value) {
-                        that.value(value);
-                        if (that.selectedIndex == -1) {
+                        if (that.dataSource.view()[0]) {
+                            that.value(value);
+                            if (that.selectedIndex == -1) {
+                                that.value("");
+                            }
+                        } else {
                             that.value("");
+                            if (that.value()) {
+                                that.element.val("");
+                                that.text("");
+                            }
                         }
                     } else {
                         that.select(options.index);

@@ -410,6 +410,45 @@
                 equal(ds.view()[0].childID, "1");
                 equal(ds.view()[0].id, 1);
             });
+
+            test("Clear child combo if no data after filtration", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 }
+                    ]
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "id",
+                    dataSource:  [
+                        { parentID: 1, childID: "1", id: 1 },
+                        { parentID: 1, childID: "3", id: 2 }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox");
+
+                //select first item
+                parentCB.select(0);
+                parentCB.trigger("change");
+
+                //select first item
+                childCB.select(0);
+                parentCB.trigger("change");
+
+                //select second item
+                parentCB.select(1);
+                parentCB.trigger("change");
+
+                equal(childCB.value(), "");
+                equal(childCB.text(), "");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cascading DropDownLists</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DropDownList cascading</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var DropDownList = kendo.ui.DropDownList,
+                parent, child;
+
+            module("kendo.ui.DropDownLists Cascading DropDownLists", {
+                setup: function() {
+                    parent = $("<input id='parent' />").appendTo(document.body);
+                    child = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    parent.data("kendoDropDownList").destroy();
+                    child.data("kendoDropDownList").destroy();
+               }
+            });
+
+            test("Clear child ddl if no data after filtration", function() {
+                parent.kendoDropDownList({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 }
+                    ]
+                });
+
+                child.kendoDropDownList({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "id",
+                    dataSource:  [
+                        { parentID: 1, childID: "1", id: 1 },
+                        { parentID: 1, childID: "3", id: 2 }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoDropDownList"),
+                    childCB = child.data("kendoDropDownList");
+
+                //select first item
+                parentCB.select(0);
+                parentCB.trigger("change");
+
+                //select first item
+                childCB.select(0);
+                parentCB.trigger("change");
+
+                //select second item
+                parentCB.select(1);
+                parentCB.trigger("change");
+
+                equal(childCB.value(), "");
+                equal(childCB.text(), "");
+            });
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

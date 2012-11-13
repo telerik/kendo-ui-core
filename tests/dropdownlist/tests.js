@@ -34,5 +34,9 @@ tests.push(
     {
         page: "dropdownlist/aria.html",
         title: "dropdownlist aria"
+    },
+    {
+        page: "dropdownlist/cascadingdropdownlists.html",
+        title: "dropdownlist cascading"
     }
 );
