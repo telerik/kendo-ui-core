@@ -50,6 +50,10 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
         return "linearGauge-scale";
     }
 
+    public void setLine(ScaleLineTag value) {
+        setProperty("line", value);
+    }
+
     public void setLabels(ScaleLabelsTag value) {
         setProperty("labels", value);
     }

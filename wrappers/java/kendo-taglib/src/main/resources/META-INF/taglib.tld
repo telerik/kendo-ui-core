@@ -8338,6 +8338,43 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
 
     <tag>
+        <description>Configures the axis line.</description>
+        <name>linearGauge-scale-line</name>
+        <tag-class>com.kendoui.taglib.lineargauge.ScaleLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the lines. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the line.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the lines.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the line..</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Configures the scale labels.</description>
         <name>linearGauge-scale-labels</name>
         <tag-class>com.kendoui.taglib.lineargauge.ScaleLabelsTag</tag-class>
