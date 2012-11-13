@@ -1748,7 +1748,7 @@ pre.prettyprint
 #codeStrip>.k-tabstrip-items>li.k-state-active:before
 {
     border-color: #ccc transparent;
-    bottom: 1px;
+    bottom: 0px;
 }
 
 #codeStrip>.k-tabstrip-items>li.k-state-active>.k-link,
@@ -1767,7 +1767,7 @@ pre.prettyprint
 #codeStrip .k-tabstrip .k-link:hover,
 #codeStrip .k-tabstrip .k-state-active .k-link
 {
-    border:1px solid #dadada;
+    border:1px solid #d0d0d0;
     border-radius: 14px;
     padding:5px 9px;
     
