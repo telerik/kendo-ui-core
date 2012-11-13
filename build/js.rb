@@ -100,7 +100,6 @@ DATAVIZ_JS = FileList[
     "src/kendo.data.js",
     "src/kendo.binder.js",
     "src/kendo.userevents.js",
-    "src/kendo.draganddrop.js",
     "src/kendo.dataviz.core.js",
     "src/kendo.dataviz.themes.js",
     "src/kendo.dataviz.chart.js",
@@ -191,6 +190,7 @@ WIN_JS = FileList[
     "src/kendo.dataviz.themes.js",
     "src/kendo.dataviz.chart.js",
     "src/kendo.dataviz.gauge.js",
+    "src/kendo.dataviz.stock.js",
     "src/kendo.dataviz.svg.js"
 ]
 
