@@ -404,6 +404,15 @@
                 equal(dropdownlist.dataItem(1), dropdownlist.dataSource.view()[1]);
             });
 
+            test("DropDownList re-binds on dataSource.data([])", function() {
+                var input = $("<input />");
+                dropdownlist = new DropDownList(input, ["item1", "item2"]);
+
+                dropdownlist.dataSource.data([]);
+
+                equal(dropdownlist.ul.children().length, 0);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

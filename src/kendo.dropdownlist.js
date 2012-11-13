@@ -229,10 +229,11 @@
             that._hideBusy();
             that._makeUnselectable();
 
-            if (!that._valueCalled) {
+            if (!that._valueCalled && data[0]) {
                 that._selectItem();
-                that._valueCalled = false;
             }
+
+            that._valueCalled = false;
 
             that.trigger("dataBound");
         },

@@ -283,8 +283,8 @@
 
             if ((!that._valueCalled && state !== STATE_FILTER) || state === STATE_REBIND) {
                 that._selectItem(value);
-                that._valueCalled = false;
             }
+            that._valueCalled = false;
 
             that._hideBusy();
             that.trigger("dataBound");
