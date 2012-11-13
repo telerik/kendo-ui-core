@@ -272,7 +272,7 @@
                     "text": "Binding to grouped data",
                     "url": "scatter-charts/grouped-data.html",
                     "title": "Example of Kendo UI Scatter Charts bound to grouped data",
-                    "meta": "This demo shows how define a group of values in Kendo UI Scatter Charts by configuring the parameters in the DataSource component."
+                    "meta": "This demo shows how define a group of values in Kendo UI Scatter Charts by configuring the parameters in the DataSource component.",
                     "packages": [ "!offline" ]
             }],
             "name": "scatter-charts"

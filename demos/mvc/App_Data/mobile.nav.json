@@ -108,7 +108,7 @@
                     "text": "Pull to refresh",
                     "url": "listview/pull-to-refresh.html",
                     "title": "Kendo UI jQuery Mobile ListView Refresh Function Demo",
-                    "meta": "This demo shows how the refresh function in Kendo UI Mobile ListView actually works. Once the new elements are appended to the list, you simply invoke the function "pull to refresh"."
+                    "meta": "This demo shows how the refresh function in Kendo UI Mobile ListView actually works. Once the new elements are appended to the list, you simply invoke the function \"pull to refresh\"."
                 },
                 {
                     "text": "Endless scrolling",
@@ -208,7 +208,7 @@
                     "text": "Pull to refresh",
                     "url": "scroller/pull-to-refresh.html",
                     "title": "Pull to Refresh function | Kendo UI Mobile Content Scrolling widget demo",
-                    "meta": "This example shows the option "Pull to Refresh" in Kendo UI Scroller. If the value is true, then the scroller will display a hint when user pulls the container beyond the top limit."
+                    "meta": "This example shows the option \"Pull to Refresh\" in Kendo UI Scroller. If the value is true, then the scroller will display a hint when user pulls the container beyond the top limit."
                 }
             ]
         },
