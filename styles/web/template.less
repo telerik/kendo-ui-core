@@ -225,14 +225,9 @@ td.k-group-cell,
 .k-widget .k-numeric-wrap,
 .k-textbox,
 .k-autocomplete.k-header,
-.k-autocomplete.k-state-focused,
 span.k-dropdown-wrap.k-state-active,
 span.k-picker-wrap.k-state-active,
-.k-picker-wrap.k-state-focused,
-.k-picker-wrap.k-state-focused:hover,
-span.k-numeric-wrap.k-state-active,
-.k-numeric-wrap.k-state-focused,
-.k-numeric-wrap.k-state-focused:hover
+span.k-numeric-wrap.k-state-active
 {
     border-color: @widget-border-color;
     background-color: @select-background-color;
@@ -240,11 +235,7 @@ span.k-numeric-wrap.k-state-active,
 
 .k-textbox > input,
 .k-autocomplete .k-input,
-.k-dropdown-wrap .k-input,
-.k-autocomplete.k-state-focused .k-input,
-.k-dropdown-wrap.k-state-focused .k-input,
-.k-picker-wrap.k-state-focused .k-input,
-.k-numeric-wrap.k-state-focused .k-input
+.k-dropdown-wrap .k-input
 {
     border-color: @widget-border-color;
 }
@@ -423,18 +414,9 @@ textarea.k-textbox:hover,
     color: @active-text-color;
 }
 
-.k-state-focused,
-.k-grouping-row .k-state-focused
-{
-    color: @hover-text-color;
-    background-color: @hover-background-color;
-    border-color: @hover-border-color;
-}
-
 .k-state-selected,
 .k-state-selected:link,
 .k-list>.k-state-selected,
-.k-list>.k-state-focused,
 .k-list>.k-state-highlight,
 .k-panel > .k-state-selected,
 .k-button:active,
@@ -445,13 +427,6 @@ textarea.k-textbox:hover,
     color: @selected-text-color;
     background-color: @selected-background-color;
     border-color: @selected-border-color;
-}
-
-.k-state-selected.k-state-focused,
-.k-state-selected.k-state-highlight
-{
-    background-color: darken(@selected-background-color, 8%);
-    border-color: darken(@selected-background-color, 8%);
 }
 
 .k-state-selected>.k-link
@@ -471,7 +446,6 @@ textarea.k-textbox:hover,
 .k-list>.k-state-hover,
 .k-marquee,
 .k-pager-wrap .k-link:hover,
-.k-dropdown .k-state-focused,
 .k-imagebrowser-dropzone
 {
     color: @hover-text-color;
@@ -615,6 +589,11 @@ div.k-imagebrowser-dropzone em
     background-color: @splitbar-background-color;
 }
 
+.k-splitbar.k-state-focused
+{
+    background-color: darken(@splitbar-background-color, 10%);
+}
+
 .k-restricted-size-vertical,
 .k-restricted-size-horizontal
 {
@@ -667,8 +646,7 @@ div.k-imagebrowser-dropzone em
     .box-shadow(none);
 }
 
-.k-state-hover,
-.k-state-focused
+.k-state-hover
 {
     .box-shadow(@hover-shadow);
 }
@@ -681,6 +659,63 @@ div.k-imagebrowser-dropzone em
 .k-state-active
 {
     .box-shadow(@active-shadow);
+}
+
+.k-state-focused,
+.k-grouping-row .k-state-focused,
+.k-button:focus
+{
+    /*color: @hover-text-color;
+    background-color: @hover-background-color;
+    border-color: @hover-border-color;*/
+	.box-shadow(0 0 4px @selected-border-color);
+}
+
+.k-list .k-state-focused
+{
+	.box-shadow(inset 0 0 3px @selected-border-color);
+}
+
+.k-grid-header .k-header.k-state-focused,
+.k-grid td.k-state-focused
+{
+	.box-shadow(inset 0 0 6px @hover-border-color);
+}
+
+.k-grid td.k-state-selected.k-state-focused
+{
+	.box-shadow(0 0 4px @selected-border-color);
+}
+
+.k-state-focused
+{
+	outline: 1px solid\9;
+	outline-color: @selected-border-color;
+}
+
+.k-list .k-state-focused
+{
+	outline: 0;
+	border: 1px solid\9;
+	border-color: @selected-border-color;
+}
+
+@media all and (min-width:0) {
+    .k-state-focused
+    {
+	    outline: 0 \0/;
+    }
+
+	.k-list .k-state-focused
+	{
+		outline: 0;
+		border-width: 0;
+	}
+
+	.k-list .k-state-focused.k-state-hover
+	{
+		border-width:1px;
+	}
 }
 
 .k-popup,
