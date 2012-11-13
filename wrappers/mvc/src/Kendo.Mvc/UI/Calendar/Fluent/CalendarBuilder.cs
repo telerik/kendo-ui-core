@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Specifies the culture info used by the NumericTextBox widget.
+        /// Specifies the culture info used by the Calendar widget.
         /// </summary>
         /// <example>
         /// <code lang="CS">

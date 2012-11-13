@@ -23,7 +23,13 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-                
+
+        public string Culture
+        {
+            get;
+            set;
+        }
+
         public string Format
         {
             get;

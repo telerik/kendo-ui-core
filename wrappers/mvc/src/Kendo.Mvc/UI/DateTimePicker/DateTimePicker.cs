@@ -96,7 +96,12 @@ namespace Kendo.Mvc.UI
             {
                 options["animation"] = animation["animation"];
             }
-            
+
+            if (Culture.HasValue())
+            {
+                options["culture"] = Culture;
+            }
+
             options["format"] = Format;
 
             if (TimeFormat.HasValue())

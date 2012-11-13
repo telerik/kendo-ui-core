@@ -48,6 +48,11 @@ namespace Kendo.Mvc.UI
                 options["animation"] = animation["animation"];
             }
 
+            if (!string.IsNullOrEmpty(Culture))
+            {
+                options["culture"] = Culture;
+            }
+
             if (!string.IsNullOrEmpty(Format))
             {
                 options["format"] = Format;

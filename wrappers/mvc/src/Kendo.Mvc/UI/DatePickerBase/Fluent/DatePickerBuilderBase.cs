@@ -64,6 +64,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies the culture info used by the widget.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .Culture("de-DE")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TPickerBuilder Culture(string culture)
+        {
+            Component.Culture = culture;
+
+            return this as TPickerBuilder;
+        }
+
+        /// <summary>
         /// Configures the client-side events.
         /// </summary>
         /// <param name="clientEventsAction">The client events action.</param>
