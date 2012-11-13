@@ -27,6 +27,7 @@
             }
         },
         skinRegex = /kendo\.\w+(\.min)?\.(.+)/i,
+        dvSkinRegex = /kendo\.dataviz\.(?!min)\w+?(\.css|\.min.css)/gi,
         supports = {
             sessionStorage: (function() {
                 // try-catch for obscure cases that do not allow "sessionStorage" in window
@@ -180,7 +181,7 @@
 
         getCurrentDVThemeLink: function() {
             return $("head link").filter(function(x) {
-                return (/kendo\.dataviz\..+\.css/gi).test(this.href);
+                return dvSkinRegex.test(this.href);
             });
         },
 
@@ -193,7 +194,7 @@
         getDVThemeUrl: function(themeName) {
             var currentThemeUrl = Application.getCurrentDVThemeLink().attr("href");
             if (currentThemeUrl) {
-                return currentThemeUrl.replace(skinRegex, "kendo.dataviz." + themeName + ".css");
+                return currentThemeUrl.replace(dvSkinRegex, "kendo.dataviz." + themeName + "$1");
             }
         },
 
