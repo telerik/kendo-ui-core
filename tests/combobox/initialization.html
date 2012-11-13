@@ -83,6 +83,14 @@
                equal(text.attr("name"), "combo1_input");
            });
 
+           test("ComboBox creates fake input", function() {
+               input.addClass("k-input").kendoComboBox();
+
+               var wrapper = input.data("kendoComboBox").wrapper;
+
+               equal(wrapper.find("input").length, 2);
+           });
+
            test("text input should wrapped with span", function(){
                input.kendoComboBox();
 

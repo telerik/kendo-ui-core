@@ -553,11 +553,11 @@
 
         _input: function() {
             var that = this,
-                element = that.element[0],
+                element = that.element.removeClass("k-input")[0],
                 tabIndex = element.tabIndex,
                 accessKey = element.accessKey,
                 wrapper = that.wrapper,
-                SELECTOR = ".k-input",
+                SELECTOR = "input.k-input",
                 input, DOMInput,
                 name = element.name || "";
 
