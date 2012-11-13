@@ -8,7 +8,9 @@
             "packages": [ "online" ],
             "items": [{
                     "text": "Overview",
-                    "url": "overview/index.html"
+                    "url": "overview/index.html",
+                    "title": "jQuery and HTML5 Data Visualization Demos | Kendo UI DataViz widgets",
+                    "meta": "Find demos for Kendo UI jQuery data visualization widgets, included in Kendo UI DataViz. Learn how to create sleek business apps with HTML5 charts, Kendo UI Gauge widgets, etc."
                 }],
             "name": "overview"
         }, {
@@ -17,23 +19,35 @@
             "spriteCssClass": "chartAreaIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "area-charts/index.html"
+                    "url": "area-charts/index.html",
+                    "title": "Kendo UI jQuery-based Area Charts Demo",
+                    "meta": "This demo illustrates how Kendo UI Area Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your area chart."
                 }, {
                     "text": "Stacked area",
-                    "url": "area-charts/stacked-area.html"
+                    "url": "area-charts/stacked-area.html",
+                    "title": "Kendo UI jQuery stacked area chart example",
+                    "meta": "This demo shows how the stacked area is created with KendoChart. Learn how to visualize series that should be stacked in the chart."
                 }, {
                     "text": "Date axis",
-                    "url": "area-charts/date-axis.html"
+                    "url": "area-charts/date-axis.html",
+                    "title": "Date axis sample for Kendo UI Area Charts",
+                    "meta": "This demo shows how you can set specific base date units in your Kendo UI Area Chart to help you visualize a seasonal trend in your app."
                 }, {
                     "text": "Multi-axis",
-                    "url": "area-charts/multiple-axes.html"
+                    "url": "area-charts/multiple-axes.html",
+                    "title": "Multi-axis demo for Kendo UI Area Charts component",
+                    "meta": "Ensure the best performance of HTML5 charting and visualize data on multiple axis with Kendo UI Area Charts  in order to provide solid business reports for end users."
                 }, {
                     "text": "Binding to remote data",
                     "url": "area-charts/remote-data.html",
+                    "title": "Example of jQuery & HTML5 Kendo UI Area Chart bound to remote data",
+                    "meta": "This demo shows how Kendo UI Area Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data.",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
-                    "url": "area-charts/local-data.html"
+                    "url": "area-charts/local-data.html",
+                    "title": "Kendo UI Area Charts binding to local data example",
+                    "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
                 }, {
                     "text": "Binding to grouped data",
                     "url": "area-charts/grouped-data.html",
@@ -46,32 +60,50 @@
             "spriteCssClass": "chartBarIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "bar-charts/index.html"
+                    "url": "bar-charts/index.html",
+                    "title": "Kendo UI Bar Chart widget demo",
+                    "meta": "This example illustrates the basic usage of Kendo UI Bar Chart which enables the user to show customized bar charts."
                 }, {
                     "text": "Column chart",
-                    "url": "bar-charts/column.html"
+                    "url": "bar-charts/column.html",
+                    "title": "Example of a basic Kendo UI Column Chart control",
+                    "meta": "This demo shows how some settings of Kendo UI chart widget can be changed in order to display the bar Chart as a Column chart."
                 }, {
                     "text": "Stacked bars",
-                    "url": "bar-charts/stacked-bar.html"
+                    "url": "bar-charts/stacked-bar.html",
+                    "title": "Kendo UI jQuery-powered Stacked Bar Charts | Kendo UI DataViz Demos",
+                    "meta": "This example shows how Kendo UI Bar Charts component supports a stacked bar. The feature of the widget is enabled by setting the stacked property to true."
                 }, {
                     "text": "Stacked and grouped bars",
-                    "url": "bar-charts/grouped-stacked-bar.html"
+                    "url": "bar-charts/grouped-stacked-bar.html",
+                    "title": "Kendo UI Stacked and Grouped Bar Chart Example",
+                    "meta": "This sample demonstrates the implementation of Kendo UI stacked and grouped bars in various data visualization-driven web apps."
                 }, {
                     "text": "Date axis",
-                    "url": "bar-charts/date-axis.html"
+                    "url": "bar-charts/date-axis.html",
+                    "title": "Date axis example in Kendo UI jQuery chart control",
+                    "meta": "This sample shows how you can configure the base date unit for your date axis in Kendo UI HTML5 business bar chart."
                 }, {
                     "text": "Multi-axis",
-                    "url": "bar-charts/multiple-axes.html"
+                    "url": "bar-charts/multiple-axes.html",
+                    "title": "Example of multiple axes implementation in Kendo UI Bar Chart",
+                    "meta": "This sample illustrates how you can display a data series, using multiple axes in your business chart, built with Kendo UI HTML5 Bar Chart widget."
                 }, {
                     "text": "Binding to remote data",
                     "url": "bar-charts/remote-data.html",
+                    "title": "Binding to remote data demo | Kendo UI HTML5 jQuery Bar Charts",
+                    "meta": "This demo shows how Kendo UI Bar Charts widget can be bound to remote data to produce high-performance report in your business app.",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
-                    "url": "bar-charts/local-data.html"
+                    "url": "bar-charts/local-data.html",
+                    "title": "Local data-binding example | Kendo UI Bar Charts",
+                    "meta": "This demo shows how the local data-binding is supported in Kendo UI Bar Charts. Use the demo source code to try the feature of the widget."
                 }, {
                     "text": "Binding to grouped data",
                     "url": "bar-charts/grouped-data.html",
+                    "title": "Grouped data binding demo for Kendo UI HTML5 Bar Charts",
+                    "meta": "This example shows the feature of binding to grouped data in Kendo UI Bar Charts. See the source code to find how to use name templates for the data group.",
                     "packages": [ "!offline" ]
             }],
             "name": "bar-charts"
@@ -82,17 +114,25 @@
             "spriteCssClass": "chartBubbleIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "bubble-charts/index.html"
+                    "url": "bubble-charts/index.html",
+                    "title": "Kendo UI Bubble Charts demo",
+                    "meta": "This example demonstrates the basic usage and core features of Kendo UI jQuery & HTML5 Bubble Charts widget."
                 }, {
                     "text": "Binding to remote data",
                     "url": "bubble-charts/remote-data.html",
+                    "title": "Binding to remote data example | Kendo UI Bubble Chart demo",
+                    "meta": "This demo illustrates binding to remote data feature of Kendo UI Bubble Chart for rich HTML5 visualizations.",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
-                    "url": "bubble-charts/local-data.html"
+                    "url": "bubble-charts/local-data.html",
+                    "title": "Local data binding mode in Kendo UI Bubble chart widget",
+                    "meta": "This demo illustrates the powerful "Binding to local data" feature, supported in Kendo UI Bubble Chart widget."
                 }, {
                     "text": "Binding to grouped data",
                     "url": "bubble-charts/grouped-data.html",
+                    "title": "Binding to grouped data example | Kendo UI HTML5 Bubble Charts",
+                    "meta": "This demo shows how to bind Kendo UI Bubble Charts component to grouped data. See how you can implement the feature in your rich web app.",
                     "packages": [ "!offline" ]
             }]
         }, {
@@ -101,26 +141,40 @@
             "spriteCssClass": "chartLineIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "line-charts/index.html"
+                    "url": "line-charts/index.html",
+                    "title": "Kendo UI Line Charts Demo",
+                    "meta": "This example illustrates the features and core functionality of Kendo UI Line Charts component. HTML5 line graphs show trends over a specific time period."
                 }, {
                     "text": "Stacked line",
-                    "url": "line-charts/stacked-line.html"
+                    "url": "line-charts/stacked-line.html",
+                    "title": "Kendo UI Stacked Line Charts Demo",
+                    "meta": "This demo shows how you can easily implement Kendo UI Stacked Line Charts in your business webapp."
                 }, {
                     "text": "Date axis",
-                    "url": "line-charts/date-axis.html"
+                    "url": "line-charts/date-axis.html",
+                    "title": "Example of Kendo UI HTML5 Line Charts Date Axis",
+                    "meta": "This demo illustrates the date axis in Kendo UI Line Charts can be easily changed by setting the configuration and specifying the aggregate function value."
                 }, {
                     "text": "Multi-axis",
-                    "url": "line-charts/multiple-axes.html"
+                    "url": "line-charts/multiple-axes.html",
+                    "title": "Multi-axes feature example | Kendo UI Line Charts widget",
+                    "meta": "This demo shows how easily Kendo UI Line Charts can be customized to achieve what you want in your app. Apply multiple axes to your Kendo UI Line Charts."
                 }, {
                     "text": "Binding to remote data",
                     "url": "line-charts/remote-data.html",
+                    "title": "Binding to remote data example | Kendo UI Line Charts features",
+                    "meta": "This example illustrates how binding to remote data works in Kendo UI Line Charts and the demo source code would guide you how to apply it to your line chart.",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
-                    "url": "line-charts/local-data.html"
+                    "url": "line-charts/local-data.html",
+                    "title": "Binding to local data example | Kendo UI Line Charts",
+                    "meta": "This example illustrates how Kendo UI Line Charts use existing objects as data points."
                 }, {
                     "text": "Binding to grouped data",
                     "url": "line-charts/grouped-data.html",
+                    "title": "Binding to grouped data demo | Kendo UI Line Charts",
+                    "meta": "This example illustrates how binding to grouped data feature works in Kendo UI Line Charts.",
                     "packages": [ "!offline" ]
             }],
             "name": "line-charts"
@@ -130,17 +184,25 @@
             "spriteCssClass": "chartDonutIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "donut-charts/index.html"
+                    "url": "donut-charts/index.html",
+                    "title": "Kendo UI Donut Charts Example",
+                    "meta": "This demo shows the core functionality of Kendo UI jQuery Donut Charts which visualize the breakdown of data into its elements."
                 }, {
                     "text": "Donut labels",
-                    "url": "donut-charts/donut-labels.html"
+                    "url": "donut-charts/donut-labels.html",
+                    "title": "Donut labels demo | Kendo UI Donut Charts",
+                    "meta": "This example shows how to configure the values of Kendo UI jQuery Donut Charts, enable/disable donut labels and specify how they are aligned to the chart."
                 }, {
                     "text": "Binding to remote data",
                     "url": "donut-charts/remote-data.html",
+                    "title": "Binding to remote data demo for Kendo UI Donut Charts",
+                    "meta": "This example shows how to bind Kendo UI Donut Charts to remote data.",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
-                    "url": "donut-charts/local-data.html"
+                    "url": "donut-charts/local-data.html",
+                    "title": "Kendo UI Donut Charts binding to local data example",
+                    "meta": "This demo illustrates how Kendo UI Donut Charts widget can be bound to local data to deliver high-performance business application."
             }],
             "name": "donut-charts"
         }, {
@@ -149,17 +211,25 @@
             "spriteCssClass": "chartPieIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "pie-charts/index.html"
+                    "url": "pie-charts/index.html",
+                    "title": "Kendo UI HTML5 Pie Charts Example",
+                    "meta": "This demo shows how Kendo UI Pie Charts is easily applied to web apps. The control draws data series in slices in order to create rich HTML5 visualizations."
                 }, {
                     "text": "Pie labels",
-                    "url": "pie-charts/pie-labels.html"
+                    "url": "pie-charts/pie-labels.html",
+                    "title": "Pie labels demo | Kendo UI jQuery Pie Charts",
+                    "meta": "This demo shows how the animated pie labels work in Kendo UI Pie Charts and lets you play with the configuration of the labels."
                 }, {
                     "text": "Binding to remote data",
                     "url": "pie-charts/remote-data.html",
+                    "title": "Binding to remote data example | Kendo UI Pie Charts",
+                    "meta": "This demo illustrates how Kendo UI Pie Charts can be bound to remote data by configuring Kendo UI DataSource component.",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
-                    "url": "pie-charts/local-data.html"
+                    "url": "pie-charts/local-data.html",
+                    "title": "Kendo UI jQuery Pie Charts binding to local data demo",
+                    "meta": "This demo shows how Kendo UI Pie Charts use existing objects as data points. The example illustrates binding to local data feature of the widget."
             }],
             "name": "pie-charts"
         }, {
@@ -168,27 +238,41 @@
             "spriteCssClass": "chartScatterIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "scatter-charts/index.html"
+                    "url": "scatter-charts/index.html",
+                    "title": "Kendo UI jQuery-powered Scatter Charts Demo",
+                    "meta": "This example shows the most important features and functionality of Kendo UI Scatter Charts."
                 }, {
                     "text": "Scatter line chart",
-                    "url": "scatter-charts/scatter-line.html"
+                    "url": "scatter-charts/scatter-line.html",
+                    "title": "Kendo UI Scatter Line Charts Demo",
+                    "meta": "This sample demonstrates how Kendo UI Scatter Line Charts combines Line and Scatter chart types in your rich HTML5 data visualizations."
                 }, {
                     "text": "Date axis",
                     "url": "scatter-charts/date-axis.html",
+                    "title": "Date Axis demo in Kendo UI Scatter Charts ",
+                    "meta": "This example illustrates all properties, specific to date value axis of Kendo UI jQuery Scatter Charts.",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Multi-axis",
-                    "url": "scatter-charts/multiple-axes.html"
+                    "url": "scatter-charts/multiple-axes.html",
+                    "title": "Multiple axes in Kendo UI HTML5 Scatter Charts | Kendo UI DataViz Demos",
+                    "meta": "This demo illustrates how array of values for multi-axis Kendo UI Scatter Charts are displayed on the plot area."
                 }, {
                     "text": "Binding to remote data",
                     "url": "scatter-charts/remote-data.html",
+                    "title": "Remote data-bound scatter series example | Kendo UI Scatter Charts",
+                    "meta": "This demo shows how scatter series of Kendo UI Scatter Charts can be bound to remote data source items.",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
-                    "url": "scatter-charts/local-data.html"
+                    "url": "scatter-charts/local-data.html",
+                    "title": "Example of binding to local data in Kendo UI jQuery Scatter Charts",
+                    "meta": "This demo shows how Kendo UI Scatter Charts can use local objects as data points in the HTML5 visualization."
                 }, {
                     "text": "Binding to grouped data",
                     "url": "scatter-charts/grouped-data.html",
+                    "title": "Example of Kendo UI Scatter Charts bound to grouped data",
+                    "meta": "This demo shows how define a group of values in Kendo UI Scatter Charts by configuring the parameters in the DataSource component."
                     "packages": [ "!offline" ]
             }],
             "name": "scatter-charts"
@@ -199,6 +283,8 @@
             "items": [{
                     "text": "PlotBands",
                     "url": "customization/plotbands.html",
+                    "title": "Kendo UI jQuery Plotting - Kendo UI jQuery Plot Bands Example",
+                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders.",
                     "packages": [ "!offline" ]
                 }],
             "name": "customization"
@@ -208,10 +294,14 @@
             "spriteCssClass": "chartIcon",
             "items": [{
                     "text": "Methods",
-                    "url": "api/index.html"
+                    "url": "api/index.html",
+                    "title": "Kendo UI Charts API methods",
+                    "meta": "This demo shows how the API manipulates the methods, applicable to Kendo UI jQuery-based chart components."
                 }, {
                     "text": "Events",
                     "url": "api/events.html",
+                    "title": "Events API for Kendo UI HTML5 charting components | Kendo UI DataViz Demos",
+                    "meta": "This sample demonstrates the events which are specific to Kendo UI HTML5 chart components.",
                     "packages": [ "!offline" ]
             }, {
                 "text": "Benchmark",
@@ -228,10 +318,14 @@
             "documentation": "dataviz/radialgauge",
             "items": [{
                 "text": "Basic usage",
-                "url": "radial-gauge/index.html"
+                "url": "radial-gauge/index.html",
+                "title": "Kendo UI Radial Gauge Demo",
+                "meta": "This sample demonstrates the core functionality of Kendo UI Radial Gauge which helps you easily visualize an indicator within a range of values."
             }, {
                 "text": "Scale options",
-                "url": "radial-gauge/scale-options.html"
+                "url": "radial-gauge/scale-options.html",
+                "title": "Kendo UI Radial Gauge scale customization demo",
+                "meta": "This example shows how you can easily use simple options to configure the gauge, enable/disable scale ranges and gauge labels."
             }],
             "name": "radial-gauge"
         }, {
@@ -240,10 +334,14 @@
             "documentation": "dataviz/lineargauge",
             "items": [{
                 "text": "Basic usage",
-                "url": "linear-gauge/index.html"
+                "url": "linear-gauge/index.html",
+                "title": "Kendo UI jQuery-powered Linear Gauge Example",
+                "meta": "This example shows how you can easily implement Kendo UI Linear Gauge in your HTML5 web application. Draw end users attention to a certain range of values."
             }, {
                 "text": "Scale options",
-                "url": "linear-gauge/scale-options.html"
+                "url": "linear-gauge/scale-options.html",
+                "title": "Scale customization example for Kendo UI Linear Gauge",
+                "meta": "This sample illustrates how you can customize Kendo UI Linear Gauge by changing the location of the gauge scale and its appearance."
             }],
             "name": "linear-gauge"
         }
@@ -267,7 +365,9 @@
             "packages": [ "!mvc" ],
             "items": [{
                 "text": "Launch",
-                "url": "dashboards/stock-history.html"
+                "url": "dashboards/stock-history.html",
+                "title": "Kendo UI Chart controls application sample | Stock History",
+                "meta": "The Stock History Dashboard demonstrates how the charting components in Kendo UI DataViz HTML5 framework are used to build a complex finance application."
             }],
             "name": "stock-history"
         },
@@ -278,7 +378,9 @@
             "expanded": "true",
             "items": [{
                 "text": "Launch",
-                "url": "dashboards/car-dashboard.html"
+                "url": "dashboards/car-dashboard.html",
+                "title": "Sample car dashboard, built with Kendo UI DataViz components",
+                "meta": "This sample demonstrates the use of Kendo UI jQuery Gauges in the Car Dashboard app."
             }],
             "name": "car-dashboard"
         }
