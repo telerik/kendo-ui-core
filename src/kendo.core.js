@@ -2618,6 +2618,10 @@ function pad(number, digits, end) {
                 if (kendo.captureMouse) {
                     e.stopPropagation();
                 }
+                // Android mobile listview navigates!
+                if (e.type === "click") {
+                    e.preventDefault();
+                }
             };
 
             for (; idx < length; idx++) {
