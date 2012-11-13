@@ -15,6 +15,8 @@ namespace Kendo.Mvc.UI.Tests
             datePicker = DatePickerTestHelper.CreateDatePicker(null);
             datePicker.Name = "DatePicker";
 
+            datePicker.Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+
             renderer = new DatePickerHtmlBuilderBase(datePicker, "date");
         }
 
