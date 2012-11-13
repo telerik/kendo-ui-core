@@ -436,7 +436,8 @@ class String
 end
 
 class Event
-    attr_reader :name, :description, :parent
+    attr_reader :name, :description
+    attr_accessor :parent
 
     def initialize(options)
         @name = options[:name].strip
@@ -470,7 +471,8 @@ class Function < Event
 end
 
 class Option
-    attr_reader :name, :type, :java_type, :description, :parent
+    attr_reader :name, :type, :java_type, :description
+    attr_accessor :parent
 
     def initialize(options)
         @name = options[:name].strip
@@ -1013,6 +1015,11 @@ class NestedTag < Tag
         @parent = options[:parent]
         @name = options[:name].pascalize
         @options = options[:options] if options[:options]
+
+        if @options
+            @options.each { |o| o.parent = self }
+        end
+
         @events = options[:events] if options[:events]
         @description = options[:description]
     end
