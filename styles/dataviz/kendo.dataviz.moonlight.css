@@ -1,13 +1,13 @@
 /* Moonlight Theme */
 
-.k-moonlight .k-mask {
+.k-chart .k-mask {
     background-color: #212a33;
     filter: alpha(opacity=68);
     -moz-opacity: 0.68;
     opacity: 0.68;
 }
 
-.k-moonlight .k-selection {
+.k-chart .k-selection {
     border-color: rgba(255,255,255,.3);
     -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
     -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
@@ -18,27 +18,27 @@
     -o-transition: box-shadow .2s linear, border-color .2s linear;
 }
 
-.k-moonlight .k-selection:hover {
+.k-chart .k-selection:hover {
     border-color: #ffcb0b;
     -moz-box-shadow: inset 0 3px 8px rgba(255,203,11,.4);
     -webkit-box-shadow: inset 0 3px 8px rgba(255,203,11,.4);
     box-shadow: inset 0 3px 8px rgba(255,203,11,.4);
 }
 
-.k-moonlight .k-handle {
+.k-chart .k-handle {
     background-color: #212a33;
     -moz-box-shadow: 0 0 0 1px rgba(255,255,255,.3);
     -webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.3);
     box-shadow: 0 0 0 1px rgba(255,255,255,.3);
 }
 
-.k-moonlight .k-handle:hover {
+.k-chart .k-handle:hover {
     background-color: #ffcb0b;
     -moz-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
     -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
     box-shadow: 0 0 0 1px rgba(0,0,0,.1);
 }
-.k-moonlight .k-navigator-hint .k-tooltip {
+.k-chart .k-navigator-hint .k-tooltip {
     border: 2px solid #212a33;
     -moz-box-shadow: 0 0 0 3px rgba(255,255,255,.3);
     -webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.3);
@@ -47,7 +47,7 @@
     color: #fefefe;
 }
 
-.k-moonlight .k-navigator-hint .k-scroll {
+.k-chart .k-navigator-hint .k-scroll {
     background: rgba(254,203,11,.9);
     height: 4px;
 }

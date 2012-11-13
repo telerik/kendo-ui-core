@@ -1,13 +1,13 @@
 /* Black Theme */
 
-.k-black .k-mask {
+.k-chart .k-mask {
     background-color: #3d3d3d;
     filter: alpha(opacity=70);
     -moz-opacity: 0.70;
     opacity: 0.70;
 }
 
-.k-black .k-selection {
+.k-chart .k-selection {
     border-color: #8e8e8e;
     -moz-box-shadow: inset 0 0 15px rgba(0,0,0,.3);
     -webkit-box-shadow: inset 0 0 15px rgba(0,0,0,.3);
@@ -18,24 +18,24 @@
     -o-transition: box-shadow .2s linear, border-color .2s linear;
 }
 
-.k-black .k-selection:hover {
+.k-chart .k-selection:hover {
     border-color: #ffffff;
     -moz-box-shadow: inset 0 0 15px rgba(255,255,255,.4);
     -webkit-box-shadow: inset 0 0 15px rgba(255,255,255,.4);
     box-shadow: inset 0 0 15px rgba(255,255,255,.4);
 }
 
-.k-black .k-handle {
+.k-chart .k-handle {
     background-color: #8e8e8e;
     width: 1px;
 }
 
-.k-black .k-handle:hover {
+.k-chart .k-handle:hover {
     background-color: #ffffff;
     width: 3px;
 }
 
-.k-black .k-navigator-hint .k-tooltip {
+.k-chart .k-navigator-hint .k-tooltip {
     border: 0;
     -moz-box-shadow: inset 0 5px 10px rgba(255,255,255,.4);
     -webkit-box-shadow: inset 0 5px 10px rgba(255,255,255,.4);
@@ -44,6 +44,6 @@
     color: #ffffff;
 }
 
-.k-black .k-navigator-hint .k-scroll {
+.k-chart .k-navigator-hint .k-scroll {
     background: #ffffff;
 }

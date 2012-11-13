@@ -1,13 +1,13 @@
 /* HighContrast Theme */
 
-.k-highcontrast .k-mask {
+.k-chart .k-mask {
     background-color: #2c232b;
     filter: alpha(opacity=60);
     -moz-opacity: 0.60;
     opacity: 0.60;
 }
 
-.k-highcontrast .k-selection {
+.k-chart .k-selection {
     border-color: #664e62;
     -moz-box-shadow: inset 0 1px 12px rgba(0,0,0,.7);
     -webkit-box-shadow: inset 0 1px 12px rgba(0,0,0,.7);
@@ -18,28 +18,28 @@
     -o-transition: box-shadow .2s linear, border-color .2s linear;
 }
 
-.k-highcontrast .k-selection:hover {
+.k-chart .k-selection:hover {
     border-color: #ffffff;
     -moz-box-shadow: inset 0 0 20px rgba(250,0,214,.5);
     -webkit-box-shadow: inset 0 0 20px rgba(250,0,214,.5);
     box-shadow: inset 0 0 20px rgba(250,0,214,.5);
 }
 
-.k-highcontrast .k-handle {
+.k-chart .k-handle {
     background-color: #ffffff;
     width: 11px;
     height: 11px;
 }
 
-.k-highcontrast .k-leftHandle {
+.k-chart .k-leftHandle {
     left: -6px;
 }
 
-.k-highcontrast .k-rightHandle {
+.k-chart .k-rightHandle {
     right: -6px;
 }
 
-.k-highcontrast .k-navigator-hint .k-tooltip {
+.k-chart .k-navigator-hint .k-tooltip {
     border: 0;
     -moz-box-shadow: 0 1px 3px rgba(0,0,0,.7);
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.7);
@@ -48,6 +48,6 @@
     color: #ffffff;
 }
 
-.k-highcontrast .k-navigator-hint .k-scroll {
+.k-chart .k-navigator-hint .k-scroll {
     background: #ffffff;
 }

@@ -1,13 +1,13 @@
 /* Silver Theme */
 
-.k-silver .k-mask {
+.k-chart .k-mask {
     background-color: #eaeaec;
     filter: alpha(opacity=70);
     -moz-opacity: 0.70;
     opacity: 0.70;
 }
 
-.k-silver .k-selection {
+.k-chart .k-selection {
     border-color: #a6b1c0;
     -moz-box-shadow: inset 0 1px 12px rgba(0,0,0,.1);
     -webkit-box-shadow: inset 0 1px 12px rgba(0,0,0,.1);
@@ -18,26 +18,26 @@
     -o-transition: box-shadow .2s linear, border-color .2s linear;
 }
 
-.k-silver .k-selection:hover {
+.k-chart .k-selection:hover {
     border-color: #a6b1c0;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 
-.k-silver .k-handle {
+.k-chart .k-handle {
     background-color: #f4f4f4;
     border: 1px solid #a6b1c0;
     width: 5px;
     height: 24px;
 }
 
-.k-silver .k-handle:hover {
+.k-chart .k-handle:hover {
     background-color: #3093d3;
     border-color: #3093d3;
 }
 
-.k-silver .k-navigator-hint .k-tooltip {
+.k-chart .k-navigator-hint .k-tooltip {
     border: 0;
     -moz-box-shadow: 0 1px 3px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3);
@@ -46,7 +46,7 @@
     color: #4f5a69;
 }
 
-.k-silver .k-navigator-hint .k-scroll {
+.k-chart .k-navigator-hint .k-scroll {
     background: rgba(166,177,193,.7);
     height: 4px;
 }
