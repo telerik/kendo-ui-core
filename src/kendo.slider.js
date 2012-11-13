@@ -1116,7 +1116,7 @@
                     that.tooltipDiv = null;
                 } else {
                     that.tooltipDiv.fadeOut("slow", function(){
-                        that.tooltipDiv.remove();
+                        $(this).remove();
                         that.tooltipDiv = null;
                     });
                 }
