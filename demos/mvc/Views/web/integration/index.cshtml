@@ -1,12 +1,6 @@
         <script src="../../content/web/integration/jquery.tmpl.js"></script>
         <script src="../../content/web/integration/knockout-1.2.1.js"></script>
 
-@{ ViewBag.UseStaticDescription = true; }
-@section Description {
-    This sample demonstrates the integration between Kendo UI and KnockoutJS libraries. KnockoutJS is used
-    to bind the inputs while Kendo UI provides the widgets.
-}
-
         <div id="example" class="k-content">
             <div id="options" class="k-widget k-header">
                 <label for="ticket">Ticket class:</label>
@@ -31,7 +25,7 @@
                     <span class="seat-card">${ quantity() } </span>
                     <button class="clear-button" data-bind="click: resetTicket">Clear</button>
                 {{else}}
-                    
+
                 {{/if}}
             </script>
             <script>
@@ -83,7 +77,7 @@
                 }
                 #options label {
                 	padding-left: 5px;
-                }                
+                }
                 #boardingpass {
                 	width: 575px;
                 	min-height: 270px;
@@ -91,35 +85,35 @@
                 	position: relative;
                 	background: url('../../content/web/integration/boardingPass.png') transparent no-repeat 0 0;
                 }
-                
+
                 .class-ticket {
                     position: absolute;
-                    margin: 26px 0 0 45px;	
+                    margin: 26px 0 0 45px;
                 }
-                
+
                 .class-card {
                     position: absolute;
-                    margin: 58px 0 0 430px;	
+                    margin: 58px 0 0 430px;
                 }
-                
+
                 .date {
                     position: absolute;
-                    margin: 58px 0 0 45px;	
+                    margin: 58px 0 0 45px;
                 }
-                
+
                 .seat-ticket {
                     position: absolute;
-                    margin: 58px 0 0 270px;	
+                    margin: 58px 0 0 270px;
                 }
-                
+
                 .seat-card {
                     position: absolute;
-                    margin: 58px 0 0 530px;	
+                    margin: 58px 0 0 530px;
                 }
-                
+
                 .clear-button {
                     position: absolute;
-                    margin: 240px 0 0 0;	
+                    margin: 240px 0 0 0;
                 }
             </style>
         </div>

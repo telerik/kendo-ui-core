@@ -1,7 +1,3 @@
-@{ ViewBag.UseStaticDescription = true; }
-@section Description {
-        This sample shows how to define source binding.
-}
 <div id="example" class="k-content">
     <div class="demo-section">
         <div class="configuration k-widget k-header">
@@ -20,7 +16,7 @@
                     <button class="k-button" data-bind="click: addProduct">Add a new product</button>
                 </li>
             </ul>
-        </div>   
+        </div>
 
         <table id="products" class="metrotable">
             <thead>
@@ -248,11 +244,11 @@ kendo.bind($(&quot;#example&quot;), viewModel);
         	font-size: 14px;
         	padding-top: 0;
         }
-        
+
         .metrotable > tfoot > tr > td {
         	padding-right: 10px;
         }
-        
+
         #example .configuration {
             margin-bottom: 10px;
             width: 190px;
