@@ -77,6 +77,13 @@
                 ok(!input.is(":visible"));
             });
 
+            test("DropDownList creates span when input has k-input class", function() {
+                input.addClass("k-input");
+                input.kendoDropDownList();
+
+                equal(input.data("kendoDropDownList").wrapper.find(".k-input")[0].nodeName, "SPAN");
+            });
+
             test("set tabIndex to the wrapper", function() {
                 input.kendoDropDownList();
 

@@ -457,7 +457,7 @@
         _span: function() {
             var that = this,
                 wrapper = that.wrapper,
-                SELECTOR = ".k-input",
+                SELECTOR = "span.k-input",
                 span;
 
             span = wrapper.find(SELECTOR);
