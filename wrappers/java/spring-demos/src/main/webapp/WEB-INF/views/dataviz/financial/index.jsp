@@ -6,7 +6,7 @@
 
 <demo:header />
 	<div id="example" class="k-content">
-         <kendo:stockChart name="stockChart" dateField="Date">
+         <kendo:stockChart name="stockChart" dateField="date">
          	<kendo:stockChart-title text="The Boeing Company (NYSE:BA)" />
 			<kendo:dataSource>
         	 	 <kendo:dataSource-transport>
@@ -18,9 +18,9 @@
             </kendo:stockChart-series>
             <kendo:stockChart-navigator>
             	<kendo:stockChart-navigator-series>
-            		<kendo:stockChart-navigator-seriesItem type="line" field="volume" />
+            		<kendo:stockChart-navigator-seriesItem type="line" field="close" />
             	</kendo:stockChart-navigator-series>
-            	
+            	<kendo:stockChart-navigator-select from="${from}" to="${to}" />
             </kendo:stockChart-navigator>
          </kendo:stockChart>
     </div>
