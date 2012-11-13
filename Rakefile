@@ -275,7 +275,7 @@ namespace :build do
         zip_demos = "#{ARCHIVE_ROOT}/#{destination}/online-examples.zip"
 
         file_copy :to => zip_demos,
-                  :from => "dist/demos/online-examples.zip"
+                  :from => "dist/demos/production.zip"
 
         zip_bundles.push(zip_demos)
 

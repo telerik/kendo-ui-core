@@ -274,9 +274,9 @@ namespace :demos do
         patch_web_config('dist/demos/production/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT)
     end
 
-    zip 'dist/demos/online-examples.zip' => :production_site
+    zip 'dist/demos/production.zip' => :production_site
 
     desc('Build online demo site')
-    task :production => 'dist/demos/online-examples.zip'
+    task :production => 'dist/demos/production.zip'
 end
 
