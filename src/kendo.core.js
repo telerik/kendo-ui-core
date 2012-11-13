@@ -2617,10 +2617,9 @@ function pad(number, digits, end) {
             var handler = function(e) {
                 if (kendo.captureMouse) {
                     e.stopPropagation();
-                }
-                // Android mobile listview navigates!
-                if (e.type === "click") {
-                    e.preventDefault();
+                    if (e.type === "click") {
+                        e.preventDefault();
+                    }
                 }
             };
 
@@ -2701,7 +2700,7 @@ function pad(number, digits, end) {
             }
 
             // setup mouse trap
-            if (support.touch && events.indexOf("mouse") > -1) {
+            if (support.touch && events.indexOf("mouse") > -1 && this[0] !== document.documentElement) {
                 kendo.setupMouseMute();
 
                 on.call(this, {
