@@ -69,7 +69,7 @@
 .km-blackberry .km-detail
 {
     line-height: .95rem;
-    background: #ccc;
+    background: #999;
     .box-shadow(inset 0 1px 3px rgba(0,0,0,.4));
     .border-radius(~".2rem");
 }
@@ -80,33 +80,46 @@
     height: 1.4rem;
 }
 
+.km-blackberry .km-rowinsert
+{
+    background-color: #24870D;
+}
+
+.km-blackberry .km-rowdelete
+{
+    background-color: #B01B1A;
+}
+
+.km-blackberry .km-detail .km-icon,
+.km-blackberry .km-detail .km-icon:after,
+.km-blackberry .km-detail .km-icon:before,
+.km-root .km-blackberry .km-detail:before,
+.km-root .km-blackberry .km-detail:after
+{
+    line-height: 1.4rem;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.km-blackberry .km-detail .km-icon:after,
+.km-blackberry .km-detail .km-icon:before
+{
+    text-shadow: none;
+}
+
+.km-blackberry .km-detail .km-icon:before,
+.km-root .km-blackberry .km-detail:before
+{
+    display: block;
+}
+
 .km-blackberry .km-detail .km-text
 {
     display: none;
-}
-
-.km-blackberry .km-detail .km-icon
-{
-    left: 10%;
-    top: 12%;
-    width: 80%;
-    height: 80%;
-    font-size: 80%;
-}
-
-.km-blackberry .km-rowdelete:after,
-.km-blackberry .km-rowinsert:after,
-.km-blackberry .km-rowinsert:before,
-.km-blackberry .km-contactadd:after,
-.km-blackberry .km-contactadd:before
-{
-    background: #fff;
-}
-
-.km-blackberry .km-listview-link:after,
-.km-blackberry .km-detaildisclose:after
-{
-    border-color: #fff;
 }
 
 .km-blackberry .km-button:not([disabled]):active,
@@ -1224,4 +1237,13 @@
     color: #fff;
     background: #0868b2;
     .linear-gradient-image(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+}
+
+.km-tablet .km-blackberry .km-detail .km-icon,
+.km-tablet .km-blackberry .km-detail .km-icon:after,
+.km-tablet .km-blackberry .km-detail .km-icon:before,
+.km-tablet .km-blackberry .km-detail:before,
+.km-tablet .km-blackberry .km-detail:after
+{
+    line-height: 1.5rem;
 }
