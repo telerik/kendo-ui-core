@@ -8,7 +8,9 @@
             "items": [
                 {
                     "text": "Overview",
-                    "url": "overview/index.html"
+                    "url": "overview/index.html",
+                    "title": "jQuery framework for building HTML5 web apps | Kendo UI Web Demos",
+                    "meta": "Kendo UI Web Demos will show you specific examples of jQuery Widgets and framework components."
                 }
             ]
         },
@@ -20,12 +22,16 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "autocomplete/index.html"
+                    "url": "autocomplete/index.html",
+                    "title": "Demo and source code for Kendo UI Autocomplete widget",
+                    "meta": "How jQuery-based Autocomplete widget works, view demo source code of Kendo UI Autocomplete."
                 },
                 {
                     "packages": [ "!mvc" ],
                     "text": "Binding to remote data",
-                    "url": "autocomplete/remotedatasource.html"
+                    "url": "autocomplete/remotedatasource.html",
+                    "title": "Example of binding to remote data in Kendo UI jQuery-powered Autocomplete widget",
+                    "meta": "This demo of Kendo UI Autocomplete control shows how autocomplete suggestions are given upon typing and the data is loaded from OData remote data source."
                 },
                 {
                     "packages": [ "mvc", "jsp" ],
@@ -47,11 +53,15 @@
                 },
                 {
                     "text": "API",
-                    "url": "autocomplete/api.html"
+                    "url": "autocomplete/api.html",
+                    "title": "Example of Kendo UI Autocomplete widget API",
+                    "meta": "The API Functions of Kendo UI Autocomplete widget give you the option to set a specific value, attribute a value for the string, starting with a symbol or a digit."
                 },
                 {
                     "text": "RTL support",
-                    "url": "autocomplete/rtl.html"
+                    "url": "autocomplete/rtl.html",
+                    "title": "Example of Right-to-left support enabled in Kendo UI AutoComplete ",
+                    "meta": "This example demonstrates how right-to-left typing feature is implemented in the text input field of Kendo UI jQuery-powered AutoComplete control."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -67,19 +77,27 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "calendar/index.html"
+                    "url": "calendar/index.html",
+                    "title": "Example of Kendo UI jQuery-based Calendar",
+                    "meta": "Explore the example of HTML5 calendar widget, included in Kendo UI Web, to find how easy it is to add a calendar to your website or web app."
                 },
                 {
                     "text": "Customizing templates",
-                    "url": "calendar/template.html"
+                    "url": "calendar/template.html",
+                    "title": "Customize the template of Kendo UI Calendar widget | Kendo UI Web demos",
+                    "meta": "This demo shows how Kendo UI Calendar allows you to customize the content in your template."
                 },
                 {
                     "text": "Events",
-                    "url": "calendar/events.html"
+                    "url": "calendar/events.html",
+                    "title": "Demo for events in Kendo UI Calendar widget",
+                    "meta": "This example of Kendo UI Calendar widget shows events which are available in the component."
                 },
                 {
                     "text": "API",
-                    "url": "calendar/api.html"
+                    "url": "calendar/api.html",
+                    "title": "Demo for Kendo UI Calendar Widget API",
+                    "meta": "This demo shows how Kendo UI Calendar Widget API works and what kind of functions it supports."
                 },
                 {
                     "packages": [ "mvc" ],
@@ -88,7 +106,9 @@
                 },
                 {
                     "text": "RTL support",
-                    "url": "calendar/rtl.html"
+                    "url": "calendar/rtl.html",
+                    "title": "Right-to-left support demo in Kendo UI Calendar widget",
+                    "meta": "This demo shows how the RTL feature in Kendo UI Calendar component works. Easily apply RTL support to the widget."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -104,12 +124,16 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "combobox/index.html"
+                    "url": "combobox/index.html",
+                    "title": "jQuery-based Combobox widget Demo | Kendo UI Web Demos",
+                    "meta": "This Combobox UI example shows how you can easily apply an editable text box with flexible auto-searchable functionality of the dropdown list into your web app."
                 },
                 {
                     "packages": [ "!mvc" ],
                     "text": "Binding to remote data",
-                    "url": "combobox/remotedatasource.html"
+                    "url": "combobox/remotedatasource.html",
+                    "title": "Kendo UI jQuery ComboBox example of binding to remote data",
+                    "meta": "Example of Kendo UI ComboBox remote data binding.  This demo shows how the auto-searchable dropdown list of the ComboBox is populated with remote data."
                 },
                 {
                     "packages": [ "mvc", "jsp" ],
@@ -124,23 +148,33 @@
 
                 {
                     "text": "Customizing templates",
-                    "url": "combobox/template.html"
+                    "url": "combobox/template.html",
+                    "title": "Demo for customizing jQuery ComboBox Templates | Kendo UI Web Demos",
+                    "meta": "This Kendo UI ComboBox demo shows how the template of the control can be customized to change the appearance of items in the auto-searchable list."
                 },
                 {
                     "text": "Cascading ComboBox",
-                    "url": "combobox/cascadingcombobox.html"
+                    "url": "combobox/cascadingcombobox.html",
+                    "title": "Cascading jQuery ComboBox sample | Kendo UI Web demos",
+                    "meta": "This demo shows how the cascading Kendo UI ComboBox control would fit any web application or website."
                 },
                 {
                     "text": "Events",
-                    "url": "combobox/events.html"
+                    "url": "combobox/events.html",
+                    "title": "Examples of events in Kendo UI jQuery ComboBox component",
+                    "meta": "This demo demonstrates useful events which are triggered in Kendo UI ComboBox upon user's selection of an item from the drop-down list."
                 },
                 {
                     "text": "API",
-                    "url": "combobox/api.html"
+                    "url": "combobox/api.html",
+                    "title": "Demo for Kendo UI ComboBox widget API",
+                    "meta": "This sample shows all API functions for Kendo UI ComboBox widget."
                 },
                 {
                     "text": "RTL support",
-                    "url": "combobox/rtl.html"
+                    "url": "combobox/rtl.html",
+                    "title": "Kendo UI ComboBox control RTL support demo",
+                    "meta": "This example shows how RTL support is enabled in Kendo UI jQuery-based ComboBox. Any application or mobile website will be now intuitive for RTL language users."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -156,23 +190,33 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "datepicker/index.html"
+                    "url": "datepicker/index.html",
+                    "title": "Kendo UI jQuery DatePicker Demo",
+                    "meta": "The demo shows how users can effortlessly edit and select dates in the calendar. Combine date editing functionality and animated dropdown in a jQuery Datepicker control for your web app."
                 },
                 {
                     "text": "Range selection",
-                    "url": "datepicker/rangeselection.html"
+                    "url": "datepicker/rangeselection.html",
+                    "title": "jQuery UI Datepicker Range Selection | Kendo UI Web Demos",
+                    "meta": "This demo shows how the Datepicker component works for range selections. You can easily enable users to select a date range in a handy manner."
                 },
                 {
                     "text": "Customizing templates",
-                    "url": "datepicker/template.html"
+                    "url": "datepicker/template.html",
+                    "title": "Demo for customizing the template of Kendo UI DatePicker control",
+                    "meta": "This example demonstrates how you can use a custom template for your jQuery Kendo UI DatePicker control in your web app. Easily apply a special style for your template."
                 },
                 {
                     "text": "Events",
-                    "url": "datepicker/events.html"
+                    "url": "datepicker/events.html",
+                    "title": "Attach an event to Kendo UI jQuery DatePicker | Kendo UI Web Demos",
+                    "meta": "This sample shows how to access the events, attached to a date, as well as use Kendo UI Date Picker widget to pick a date or change it manually from the dropdown calendar."
                 },
                 {
                     "text": "API",
-                    "url": "datepicker/api.html"
+                    "url": "datepicker/api.html",
+                    "title": "Kendo UI DatePicker API Demo",
+                    "meta": "DatePicker API example shows how the API functions can be used to apply enable/disable functionality to jQuery-powered date picker control or open/close the calendar."
                 },
                 {
                     "packages": [ "mvc" ],
@@ -181,7 +225,9 @@
                 },
                 {
                     "text": "RTL support",
-                    "url": "datepicker/rtl.html"
+                    "url": "datepicker/rtl.html",
+                    "title": "RTL date direction support in Kendo UI DatePicker control",
+                    "meta": "This demo illustrates how right-to-left visualization of dates is supported in Kendo UI DatePicker component."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -197,24 +243,34 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "datetimepicker/index.html"
+                    "url": "datetimepicker/index.html",
+                    "title": "Kendo UI Date and Time picker example",
+                    "meta": "The example illustrates how DateTimePicker UI handles both dates and times. Usable interface and date/time selection functionality in a single jQuery UI Control for your web app."
                 },
                 {
                     "packages": [ "!mvc" ],
                     "text": "Range selection",
-                    "url": "datetimepicker/rangeselection.html"
+                    "url": "datetimepicker/rangeselection.html",
+                    "title": "Date range selection functionality in Kendo UI DateTimePicker",
+                    "meta": "In Kendo UI DateTimePicker control, dates and times are handled in two different input boxes so that the user can easily select different date ranges."
                 },
                 {
                     "text": "Customizing templates",
-                    "url": "datetimepicker/template.html"
+                    "url": "datetimepicker/template.html",
+                    "title": "Templates customization example | Kendo UI DateTimePicker widget",
+                    "meta": "This example shows how templates of Kendo HTML5-based DateTimePicker widget can be customized to fit your application."
                 },
                 {
                     "text": "Events",
-                    "url": "datetimepicker/events.html"
+                    "url": "datetimepicker/events.html",
+                    "title": "Events in Kendo UI Date and Timepicker component",
+                    "meta": "This example shows which events are triggered when you change the date and time in Kendo UI DateTimePicker component."
                 },
                 {
                     "text": "API",
-                    "url": "datetimepicker/api.html"
+                    "url": "datetimepicker/api.html",
+                    "title": "Kendo UI DateTimePicker API Demo",
+                    "meta": "Play with the demo to explore Kendo UI DateTimePicker API and all API functions."
                 },
                 {
                     "packages": [ "mvc" ],
@@ -223,7 +279,9 @@
                 },
                 {
                     "text": "RTL support",
-                    "url": "datetimepicker/rtl.html"
+                    "url": "datetimepicker/rtl.html",
+                    "title": "Kendo UI DateTimePicker control RTL support",
+                    "meta": "Learn how right-to-left visualization of dates and time is supported in Kendo UI DateTimePicker widget."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -239,31 +297,45 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "dropdownlist/index.html"
+                    "url": "dropdownlist/index.html",
+                    "title": "Demo for jQuery-powered DropDownList widget in Kendo UI Web",
+                    "meta": "This example shows how you can easily implement interactive jQuery UI DropDownlist in your web app. Use the demo source code to try Kendo UI DropDownList."
                 },
                 {
                     "text": "Binding to remote data",
-                    "url": "dropdownlist/remotedatasource.html"
+                    "url": "dropdownlist/remotedatasource.html",
+                    "title": "Remote Data binding demo | Kendo UI DropDownList widget",
+                    "meta": "The dropdown list of Kendo HTML5 widget can load data from a remote source. This example shows binding to remote data functionality of the component."
                 },
                 {
                     "text": "Customizing templates",
-                    "url": "dropdownlist/template.html"
+                    "url": "dropdownlist/template.html",
+                    "title": "Customize items in Kendo UI DropDownList component",
+                    "meta": "This example shows how you can customize the appearance of the items and easily customize templates in jQuery-based Kendo UI DropDownList widget."
                 },
                 {
                     "text": "Cascading DropDownList",
-                    "url": "dropdownlist/cascadingdropdownlist.html"
+                    "url": "dropdownlist/cascadingdropdownlist.html",
+                    "title": "Example of cascading DropDownList | Kendo UI Dropdownlist Demo",
+                    "meta": "This demo shows how the cascading jQuery dropdown works in Kendo UI DropDownList widget."
                 },
                 {
                     "text": "Events",
-                    "url": "dropdownlist/events.html"
+                    "url": "dropdownlist/events.html",
+                    "title": "Demo for events in Kendo UI DropDownList component",
+                    "meta": "This demo explains how the cascading jQuery dropdown works in Kendo UI DropDownList widget."
                 },
                 {
                     "text": "API",
-                    "url": "dropdownlist/api.html"
+                    "url": "dropdownlist/api.html",
+                    "title": "Example of Kendo UI jQuery DropDownList API",
+                    "meta": "Explore API functions of Kendo UI DropDownList to find how to enable or disable the dropdown list, open and close it or just manipulate the items."
                 },
                 {
                     "text": "RTL support",
-                    "url": "dropdownlist/rtl.html"
+                    "url": "dropdownlist/rtl.html",
+                    "title": "Example of RTL text direction support in Kendo UI DropDownList control",
+                    "meta": "This demo shows how right-to-left text typing is supported in Kendo UI DropDownList component."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -279,32 +351,46 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "editor/index.html"
+                    "url": "editor/index.html",
+                    "title": "Demo for jQuery WYSIWYG editor in Kendo UI Web framework",
+                    "meta": "This example of Kendo UI WYSIWYG editor component shows how you can implement this easy-to-use and beautiful editor in your web app."
                 },
                 {
                     "text": "Custom tools",
-                    "url": "editor/custom-tools.html"
+                    "url": "editor/custom-tools.html",
+                    "title": "Custom tools for Kendo UI WYSIWYG jQuery Editor",
+                    "meta": "This example shows how you can easily customize some of Kendo UI Editor native tools. You can also create completely custom tools for the component."
                 },
                 {
                     "text": "Image browser",
                     "url": "editor/imagebrowser.html",
+                    "title": "Interactive image browser demo in Kendo UI Editor",
+                    "meta": "This demo shows the new appearance and functionality of the image browser, integrated in Kendo UI Editor for sophisticated webapps and mobile websites.",
                     "packages": [ "mvc", "online" ]
                 },
                 {
                     "text": "All tools",
-                    "url": "editor/all-tools.html"
+                    "url": "editor/all-tools.html",
+                    "title": "All tools demo in Kendo UI HTML5-based Editor widget",
+                    "meta": "This example illustrates the core HTML editing engine in Kendo UI Editor widget. Get familiar with all features of the component for any HTML5 website or web app."
                 },
                 {
                     "text": "Snippets",
-                    "url": "editor/snippets.html"
+                    "url": "editor/snippets.html",
+                    "title": "Demo for snippets feature of Kendo UI Editor widget",
+                    "meta": "This example demonstrates the snippet feature of Kendo UI Editor. See how you can quickly insert HTML code snippet into web-based editor in your app."
                 },
                 {
                     "text": "Styles",
-                    "url": "editor/styles.html"
+                    "url": "editor/styles.html",
+                    "title": "Style tool demo for Kendo UI HTML5-based web editor | Kendo UI Demos",
+                    "meta": "This example shows how you can use Kendo UI Editor's style tool to customize the content of the widget with CSS classes."
                 },
                 {
                     "text": "Events",
-                    "url": "editor/events.html"
+                    "url": "editor/events.html",
+                    "title": "Example for events in Kendo UI Editor component ",
+                    "meta": "This demo illustrates which events are fired when the editor is blurred, its content is changed or a command is executed."
                 },
                 {
                     "packages" : [ "mvc" ],
@@ -313,11 +399,15 @@
                 },
                 {
                     "text": "API",
-                    "url": "editor/api.html"
+                    "url": "editor/api.html",
+                    "title": "API demo for Kendo UI Web Editor component",
+                    "meta": "This examples show how the API of Kendo UI Editor works in action and how the content in the editor can be easily manipulated via the API."
                 },
                 {
                     "text": "RTL support",
-                    "url": "editor/rtl.html"
+                    "url": "editor/rtl.html",
+                    "title": "Right-to-left text input in Kendo UI Editor | Kendo UI Web Demos",
+                    "meta": "This demo shows how users can type text from right-to-left with the advanced features of Kendo UI Editor."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -333,20 +423,28 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "grid/index.html"
+                    "url": "grid/index.html",
+                    "title": "jQuery Grid control example | Kendo UI Grid Demos",
+                    "meta": "This demo for Kendo UI jQuery-based Grid component shows how you can make your static HTML tables and raw data much more interactive to match your modern web app."
                 },
                 {
                     "text": "Initialization from table",
                     "url": "grid/from-table.html",
+                    "title": "jQuery Grid Initialization from a table | KendoGrid demo",
+                    "meta": "This demo shows how jQuery Grid widget in Kendo UI Web displays tabular data once the grid is created from HTML5 element with defined columns and table elements.",
                     "packages": ["!mvc", "!jsp"]
                 },
                 {
                     "text": "Binding to local data",
-                    "url": "grid/local-data.html"
+                    "url": "grid/local-data.html",
+                    "title": "Kendo UI jQuery Grid Control Example - binding to local data",
+                    "meta": "This sample demonstrates how we can bind Kendo UI Grid widget to local JSON Data by using Kendo UI DataSource component."
                 },
                 {
                     "text": "Binding to remote data",
                     "url": "grid/remote-data.html",
+                    "title": "Remote data binding example in KendoGrid",
+                    "meta": "This example and demo source code illustrate how KendoGrid component can be bound to remote data by using the DataSource component.",
                     "packages": ["online", "offline", "jsp"]
                 },
                 {
@@ -371,20 +469,28 @@
                 },
                 {
                     "text": "Batch editing",
-                    "url": "grid/editing.html"
+                    "url": "grid/editing.html",
+                    "title": "Batch editing example for Kendo UI jQuery Grid control",
+                    "meta": "This demo illustrates the batch editing feature of Kendo UI jQuery Grid. Find the source code which shows how to send changes to the server as a batch."
                 },
                 {
                     "text": "Inline editing",
-                    "url": "grid/editing-inline.html"
+                    "url": "grid/editing-inline.html",
+                    "title": "Kendo UI jQuery Grid Cells editing sample",
+                    "meta": "This sample demonstrates how the values in the cells of KendoGrid can be easily changed. Try the demo source code to find how inline data grid can be deleted and modified."
                 },
                 {
                     "text": "Popup editing",
                     "url": "grid/editing-popup.html",
+                    "title": "Popup data editing example for Kendo UI Grid widget",
+                    "meta": "This demo illustrates how the records in KendoGrid can be easily modified in a pop-up dialog.",
                     "packages": ["!mvc"]
                 },
                 {
                     "text": "Editing custom editor",
-                    "url": "grid/editing-custom.html"
+                    "url": "grid/editing-custom.html",
+                    "title": "jQuery Grid Custom Editing example | Kendo UI Grid Demo",
+                    "meta": " This example illustrates how editing in KendoGrid can be further customized with the custom editor and using DataSource component."
                 },
                 {
                     "text": "Server editing",
@@ -404,15 +510,21 @@
                 {
                     "text": "Virtualization of local data",
                     "url": "grid/virtualization-local-data.html",
+                    "title": "Example of local data virtualization in Kendo UI Grid control",
+                    "meta": "This demo shows how built-in UI virtualization for highly optimized binding to large data sets is enabled in KendoGrid widget. Demo source code helps you reproduce and utilize the functionality.",
                     "packages": ["!mvc"]
                 },
                 {
                     "text": "Virtualization of remote data",
-                    "url": "grid/virtualization-remote-data.html"
+                    "url": "grid/virtualization-remote-data.html",
+                    "title": "Demo for Kendo UI Grid virtualization to remote data",
+                    "meta": "This sample shows how KendoGrid UI virtualization is enabled to remote data."
                 },
                 {
                     "text": "Hierarchy",
-                    "url": "grid/hierarchy.html"
+                    "url": "grid/hierarchy.html",
+                    "title": "Kendo UI jQuery hierarchical Grid control example",
+                    "meta": "This demo illustrates the hierarchical data grid feature of Kendo UI Grid widget. Try the demo source code to play with the grid in your web app."
                 },
                 {
                     "text": "Server hierarchy",
@@ -421,7 +533,9 @@
                 },
                 {
                     "text": "Detail template",
-                    "url": "grid/detailtemplate.html"
+                    "url": "grid/detailtemplate.html",
+                    "title": "Detail template demo in Kendo UI Grid control",
+                    "meta": "This example shows how records in the data grid widget can be presented with a detailed template."
                 },
                 {
                     "text": "Server detail template",
@@ -431,6 +545,8 @@
                 {
                     "text": "Toolbar template",
                     "url": "grid/toolbar-template.html",
+                    "title": "Toolbar template demo for Kendo UI HTML5 Grid control",
+                    "meta": "This Kendo UI Grid example shows how you can add custom toolbars to the grid and create toolbar templates.",
                     "packages": ["!mvc"]
                 },
                 {
@@ -440,11 +556,15 @@
                 },
                 {
                     "text": "Custom command",
-                    "url": "grid/custom-command.html"
+                    "url": "grid/custom-command.html",
+                    "title": "Custom commands demo for Kendo UI Grid widget",
+                    "meta": "This demo demonstrates the functionality to apply custom commands to KendoGrid. Look at the source code to find how to set the text attribute and command name for the grid component."
                 },
                 {
                     "text": "Aggregates",
                     "url": "grid/aggregates.html",
+                    "title": "Aggregating option demo for KendoGrid jQuery control",
+                    "meta": "This example demonstrates the aggregate option for KendoGrid. Use demo source code to enable the grid to calculate aggregated values.",
                     "packages": ["online", "offline", "jsp"]
                 },
                 {
@@ -455,27 +575,39 @@
                 {
                     "text": "Sorting",
                     "url": "grid/sorting.html",
+                    "title": "Demo for the sorting functionality of Kendo UI Grid control",
+                    "meta": "This example demonstrates how to sort the data in KendoGrid. Use the demo source code to look into the logic of the grid sorting and implement it easily in your app.",
                     "packages": ["!mvc"]
                 },
                 {
                     "text": "Selection",
-                    "url": "grid/selection.html"
+                    "url": "grid/selection.html",
+                    "title": "Example of selection modes for KendoGrid component",
+                    "meta": "This example demonstrates different selection modes, supported by KendoGrid. Review the available selection options and apply the functionality to KendoGrid in your app."
                 },
                 {
                     "text": "ForeignKey column",
-                    "url": "grid/foreignkeycolumn.html"
+                    "url": "grid/foreignkeycolumn.html",
+                    "title": "Foreign Key Column demo in KendoGrid jQuery control",
+                    "meta": "This example shows the foreign key column functionality to cross-reference tables in KendoGrid component."
                 },
                 {
                     "text": "Column reordering",
-                    "url": "grid/column-reordering.html"
+                    "url": "grid/column-reordering.html",
+                    "title": "Reorder columns in KendoGrid |Kendo UI Grid Demo",
+                    "meta": "This demo shows column moving and reordering feature of KendoGrid control."
                 },
                 {
                     "text": "Column resizing",
-                    "url": "grid/column-resizing.html"
+                    "url": "grid/column-resizing.html",
+                    "title": "Column resizing feature of KendoGrid |Kendo UI Grid Example",
+                    "meta": "This example demonstrates how resizing of columns in KendoGrid is enabled in the widget. Use the demo source code to change width/height of the column."
                 },
                 {
                     "text": "Column menu",
-                    "url": "grid/column-menu.html"
+                    "url": "grid/column-menu.html",
+                    "title": "Column menu in Kendo UI Grid",
+                    "meta": "This demo shows column menu functionality of KendoGrid widget."
                 },
                 {
                     "text": "Column Settings",
@@ -484,7 +616,9 @@
                 },
                 {
                     "text": "Row template",
-                    "url": "grid/rowtemplate.html"
+                    "url": "grid/rowtemplate.html",
+                    "title": "Row template formatting in KendoGrid |Kendo UI Grid Demo",
+                    "meta": "This sample shows how to change the style and concert of row cells with KendoGrid Row templates."
                 },
                 {
                     "text": "Server row template",
@@ -494,11 +628,15 @@
                 {
                     "text": "Events",
                     "url": "grid/events.html",
+                    "title": "Kendo UI Grid Events Demo",
+                    "meta": "This example demonstrates different events which are available in KendoGrid widget and the code explains how you can use them for  your project.",
                     "packages": ["!mvc"]
                 },
                 {
                     "text": "API",
-                    "url": "grid/api.html"
+                    "url": "grid/api.html",
+                    "title": "KendoGrid API Demo",
+                    "meta": "This demo shows how API Functions can manipulate the contents and behavior of Kendo UI Grid widget."
                 },
                 {
                     "text": "Globalization",
@@ -507,7 +645,9 @@
                 },
                 {
                     "text": "RTL support",
-                    "url": "grid/rtl.html"
+                    "url": "grid/rtl.html",
+                    "title": "RTL Text Direction feature in Kendo UI Grid component",
+                    "meta": "This demo illustrates how Kendo UI Grid widget supports right-to-left spreadsheet grid for better user experience."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -524,24 +664,34 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "listview/index.html"
+                    "url": "listview/index.html",
+                    "title": "jQuery ListView control example| KendoListView Demo",
+                    "meta": "This KendoListView example demonstrates the basic functionality of the widget. With jQuery-based ListView widget in Kendo UI, you can specify custom layout for the items in the control."
                 },
                 {
                     "text": "Binding to remote data",
                     "url": "listview/remote-data.html",
+                    "title": "Example for Jquery UI Listview binding to remote data | Kendo UI demos",
+                    "meta": "This Kendo UI ListView demo shows how the control can be bound to remote data by using Kendo UI DataSource component.",
                     "packages": ["!mvc"]
                 },
                 {
                     "text": "Editing",
-                    "url": "listview/editing.html"
+                    "url": "listview/editing.html",
+                    "title": "Editing records in Kendo UI ListView widget",
+                    "meta": "This example demonstrates the option to easily edit records in Kendo UI ListView widget. Learn how to edit records and manipulate the behavior of the contents."
                 },
                 {
                     "text": "Selection",
-                    "url": "listview/selection.html"
+                    "url": "listview/selection.html",
+                    "title": "Items selection demo for Kendo UI ListView widget",
+                    "meta": "This demo shows items in KendoListView can be selected. Find how to select multiple items and configure the behavior of the widget."
                 },
                 {
                     "text": "RTL support",
-                    "url": "listview/rtl.html"
+                    "url": "listview/rtl.html",
+                    "title": "Example of RTL Kendo UI jQuery-based ListView",
+                    "meta": "This demo shows how right-to-left feature is supported in Kendo UI ListView component."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -557,15 +707,21 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "menu/index.html"
+                    "url": "menu/index.html",
+                    "title": "jQuery Menu Navigation widget demo |KendoMenu Basic usage",
+                    "meta": "Example of jQuery UI Menu in Kendo UI Web framework. Look at the basic usage of the control which can be used for navigation and executing JS commands."
                 },
                 {
                     "text": "Images",
-                    "url": "menu/images.html"
+                    "url": "menu/images.html",
+                    "title": "Images in KendoMenu control | Kendo UI Demo",
+                    "meta": "This KendoMenu example shows the feature which allows you to use menu with images. They can be loaded from a specific URL or be arranged in image sprite CSS class."
                 },
                 {
                     "text": "Direction",
-                    "url": "menu/direction.html"
+                    "url": "menu/direction.html",
+                    "title": "Kendo UI Menu direction demo",
+                    "meta": "This demo shows how the pop-up direction of the items in Kendo UI dropdown jQuery menu can be changed, depending on your web app development needs."
                 },
                 {
                     "packages": [ "mvc" ],
@@ -585,19 +741,27 @@
                 {
                     "packages": [ "!mvc" ],
                     "text": "Animation effects",
-                    "url": "menu/animation.html"
+                    "url": "menu/animation.html",
+                    "title": "Animation effects example in KendoMenu widget",
+                    "meta": "This sample demonstrates how KendoMenu HTML dropdown control supports animation effects which can be easily customized to change the desired animation effect."
                 },
                 {
                     "text": "Events",
-                    "url": "menu/events.html"
+                    "url": "menu/events.html",
+                    "title": "Kendo UI jQuery Menu Events Sample | KendoMenu Demos",
+                    "meta": "This sample shows KendoMenu events which are enabled and the demo source code guides you how you can handle the events in your dropdown menu."
                 },
                 {
                     "text": "API",
-                    "url": "menu/api.html"
+                    "url": "menu/api.html",
+                    "title": "API functions demo for KendoMenu",
+                    "meta": "This demo illustrates how API functions of KendoMenu control operate and how you can configure them for your web project."
                 },
                 {
                     "text": "RTL support",
-                    "url": "menu/rtl.html"
+                    "url": "menu/rtl.html",
+                    "title": "Example of right-to-left Kendo UI Menu control",
+                    "meta": "This demo shows how the RTL feature is enabled for the dropdown items in Kendo UI Menu and the menu labels of the widget."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -613,15 +777,21 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "numerictextbox/index.html"
+                    "url": "numerictextbox/index.html",
+                    "title": "Kendo jQuery Numeric TextBox Demo |Kendo UI demos",
+                    "meta": "This demo shows the core functionality of KendoNumericTextBox component."
                 },
                 {
                     "text": "Events",
-                    "url": "numerictextbox/events.html"
+                    "url": "numerictextbox/events.html",
+                    "title": "Events in Kendo UI NumericTextBox widget",
+                    "meta": "This example shows events which are triggered in Kendo UI NumericTextBox widget."
                 },
                 {
                     "text": "API",
-                    "url": "numerictextbox/api.html"
+                    "url": "numerictextbox/api.html",
+                    "title": "API Functions Demo for KendoNumericTextBox",
+                    "meta": "This demo shows specific API functions for KendoNumericTextBox component."
                 },
                 {
                     "packages": [ "mvc" ],
@@ -630,7 +800,9 @@
                 },
                 {
                     "text": "RTL support",
-                    "url": "numerictextbox/rtl.html"
+                    "url": "numerictextbox/rtl.html",
+                    "title": "Example of Kendo UI NumericTextBox right-to-left input",
+                    "meta": "This demo shows how right-to-left input is implemented in Kendo UI Numeric TextBox component to ensure the satisfaction of RTL language users."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -646,31 +818,45 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "panelbar/index.html"
+                    "url": "panelbar/index.html",
+                    "title": "jQuery Collapsible Panel Overview | Kendo UI Demo",
+                    "meta": "This example shows the core features of Kendo UI jQuery-based Accordion widget."
                 },
                 {
                     "text": "Images",
-                    "url": "panelbar/images.html"
+                    "url": "panelbar/images.html",
+                    "title": "Example of images in KendoPanelBar widget",
+                    "meta": "This demo shows how images and sprites can implemented in Kendo Expandable PanelBar component."
                 },
                 {
                     "text": "Loading content with AJAX",
-                    "url": "panelbar/ajax.html"
+                    "url": "panelbar/ajax.html",
+                    "title": "Example of loading content with AJAX in Kendo UI Accordion",
+                    "meta": "This example shows how content is loaded in KendoPanelBar component with AJAX."
                 },
                 {
                     "text": "Animation effects",
-                    "url": "panelbar/animation.html"
+                    "url": "panelbar/animation.html",
+                    "title": "Animation effects example in Kendo UI Accordion component",
+                    "meta": "This demo shows how animations effects can be easily implemented into KendoPanelBar widget."
                 },
                 {
                     "text": "Events",
-                    "url": "panelbar/events.html"
+                    "url": "panelbar/events.html",
+                    "title": "Kendo Accordion jQuery component events demo",
+                    "meta": "This example demonstrates how events in KendoPanelBar widget work and you can set them to expand the content area of the accordion."
                 },
                 {
                     "text": "API",
-                    "url": "panelbar/api.html"
+                    "url": "panelbar/api.html",
+                    "title": "Kendo UI Accordion Widget API Demo",
+                    "meta": "This sample shows the API functions of Kendo UI PanelBar component."
                 },
                 {
                     "text": "RTL support",
-                    "url": "panelbar/rtl.html"
+                    "url": "panelbar/rtl.html",
+                    "title": "Example of Kendo UI jQuery & CSS3 Accordion RTL",
+                    "meta": "This demo shows how directions of the arrows in Kendo UI PanelBar are easily changed when moving from right to left."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -686,19 +872,27 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "slider/index.html"
+                    "url": "slider/index.html",
+                    "title": "Kendo jQuery Slider Control Demo",
+                    "meta": "This demo shows the basic functionality of Kendo UI slider widget, included in Kendo UI Web framework."
                 },
                 {
                     "text": "Events",
-                    "url": "slider/events.html"
+                    "url": "slider/events.html",
+                    "title": "Events demo in Kendo UI Slider Widget",
+                    "meta": "This demo shows how events are handled and triggered in Kendo UI HTML&jQuery Slider."
                 },
                 {
                     "text": "API",
-                    "url": "slider/api.html"
+                    "url": "slider/api.html",
+                    "title": "Kendo UI Slider API Functions Example",
+                    "meta": "This demo shows API Functions of KendoSlider. Demo Source Code will help you find out how to handle events and the behavior of the component."
                 },
                 {
                     "text": "RTL support",
-                    "url": "slider/rtl.html"
+                    "url": "slider/rtl.html",
+                    "title": "Right-to-left Kendo UI Slider | Kendo UI Web Demos",
+                    "meta": "This demo illustrates how the right-to-left feature is enabled in Kendo UI Slider widget."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -714,23 +908,33 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "splitter/index.html"
+                    "url": "splitter/index.html",
+                    "title": "jQuery Splitter control | KendoSplitter Demo",
+                    "meta": "This demo illustrates the basic usage and core functionality of Kendo UI Splitter."
                 },
                 {
                     "text": "Loading content with AJAX",
-                    "url": "splitter/ajax.html"
+                    "url": "splitter/ajax.html",
+                    "title": "AJAX content example for KendoSplitter widget",
+                    "meta": "This demo shows how AJAX content is loaded in the container's display area of Kendo UI Splitter control."
                 },
                 {
                     "text": "Events",
-                    "url": "splitter/events.html"
+                    "url": "splitter/events.html",
+                    "title": "Kendo jQuery Splitter Events Demo",
+                    "meta": "This demo shows the events which change the behavior of Kendo UI Splitter. Find more about resize events and Javascript function names to be called before the panel is collapsed."
                 },
                 {
                     "text": "API",
-                    "url": "splitter/api.html"
+                    "url": "splitter/api.html",
+                    "title": "Kendo UI Splitter API Demo",
+                    "meta": "This example shows how API of Kendo UI Splitter widget works. Find all API functions to expand/collapse content and resize the pane."
                 },
                 {
                     "text": "RTL support",
-                    "url": "splitter/rtl.html"
+                    "url": "splitter/rtl.html",
+                    "title": "Right-to-left support in Kendo UI Splitter control",
+                    "meta": "This demo shows how Kendo UI Splitter component supports right-to-left text input and visualization."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -746,31 +950,45 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "tabstrip/index.html"
+                    "url": "tabstrip/index.html",
+                    "title": "Kendo UI TabStrip Demo",
+                    "meta": "This demo shows how Kendo UI jQuery Tabs control works. KendoTabStrup divides the content into multiple sections which the user can navigate through clicking on the tab pane."
                 },
                 {
                     "text": "Images",
-                    "url": "tabstrip/images.html"
+                    "url": "tabstrip/images.html",
+                    "title": "Example of images in Kendo UI Tabs",
+                    "meta": "This example shows how images are displayed in Kendo UI TabStrip component."
                 },
                 {
                     "text": "Loading content with AJAX",
-                    "url": "tabstrip/ajax.html"
+                    "url": "tabstrip/ajax.html",
+                    "title": "AJAX loaded content demo in Kendo UI TabStrip widget",
+                    "meta": "This sample shows how the tabs in Kendo UI TabStrip control are dynamically loaded with AJAX upon selection of a tab."
                 },
                 {
                     "text": "Animation effects",
-                    "url": "tabstrip/animation.html"
+                    "url": "tabstrip/animation.html",
+                    "title": "Kendo UI jQuery Tabs animation effects demo",
+                    "meta": "This sample shows the supported animation effects in Kendo UI TabStrip. You can play with the sample by changing the settings of the animation."
                 },
                 {
                     "text": "Events",
-                    "url": "tabstrip/events.html"
+                    "url": "tabstrip/events.html",
+                    "title": "Example of Kendo UI TabStrip Events",
+                    "meta": "This sample shows how you can trigger select event in Kendo UI TabStrip. Find demo source code for all types of events in KendoTabStrip."
                 },
                 {
                     "text": "API",
-                    "url": "tabstrip/api.html"
+                    "url": "tabstrip/api.html",
+                    "title": "API example for Kendo UI TabStrip widget",
+                    "meta": "This sample shows how API functions in KendoTabStrip control work. Find the demo source code to play with Kendo UI TabStrip API."
                 },
                 {
                     "text": "RTL support",
-                    "url": "tabstrip/rtl.html"
+                    "url": "tabstrip/rtl.html",
+                    "title": "RTL support example in Kendo UI TabStrip widget",
+                    "meta": "This demo shows the right-to-left feature, enabled in Kendo UI TabStrip. Now users can easily reorder the tabs from right to left."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -786,19 +1004,27 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "timepicker/index.html"
+                    "url": "timepicker/index.html",
+                    "title": "Kendo UI jQuery Time Picker Example",
+                    "meta": "This demo shows the basic usage and core functionality of Kendo UI TimePicker widget."
                 },
                 {
                     "text": "Range selection",
-                    "url": "timepicker/rangeselection.html"
+                    "url": "timepicker/rangeselection.html",
+                    "title": "Kendo UI jQuery TimePicker Demo for selecting a time range",
+                    "meta": "This example shows the flexible functionality of Kendo UI TimePicker. You can specify a range of visible hours and enable the user to select them from the dropdown list."
                 },
                 {
                     "text": "Events",
-                    "url": "timepicker/events.html"
+                    "url": "timepicker/events.html",
+                    "title": "Events demo for Kendo UI jQuery TimePicker",
+                    "meta": "This sample shows all events which are triggered upon time select, close and time change in Kendo UI TimePicker widget."
                 },
                 {
                     "text": "API",
-                    "url": "timepicker/api.html"
+                    "url": "timepicker/api.html",
+                    "title": "API demo for Kendo UI Time Picker",
+                    "meta": "This example shows API functions of Kendo UI HTML5 TimePicker component."
                 },
                 {
                     "packages": [ "mvc" ],
@@ -807,7 +1033,9 @@
                 },
                 {
                     "text": "RTL support",
-                    "url": "timepicker/rtl.html"
+                    "url": "timepicker/rtl.html",
+                    "title": "Example of Right-to-left time input in Kendo UI TimePicker",
+                    "meta": "This demo shows how users of your webapp can type and change time values from the right to the left. Enhance the experience with RTL support in Kendo UI TimePicker."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -823,24 +1051,34 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "treeview/index.html"
+                    "url": "treeview/index.html",
+                    "title": "Kendo UI TreeView control Demo",
+                    "meta": "This demo illustrates the basic usage and functionality of Kendo UI jQuery Tree widget which represents items in a hierarchical tree structure."
                 },
                 {
                     "text": "Drag & drop",
-                    "url": "treeview/dragdrop.html"
+                    "url": "treeview/dragdrop.html",
+                    "title": "jQuery drag & drop Treeview Demo in Kendo UI Web framework",
+                    "meta": "This example shows how items in Kendo TreeView can be dragged and dropped to a specific place. Use the demo source code to try this functionality of the HTML5 component."
                 },
                 {
                     "packages": [ "!mvc" ],
                     "text": "Animation effects",
-                    "url": "treeview/animation.html"
+                    "url": "treeview/animation.html",
+                    "title": "Animation effects sample for Kendo UI jQuery Tree component",
+                    "meta": "This sample shows how you can add animation effects and expand animation by setting the specific options for Kendo UI TreeView widget."
                 },
                 {
                     "text": "Images",
-                    "url": "treeview/images.html"
+                    "url": "treeview/images.html",
+                    "title": "Example of customized Kendo UI TreeView using images",
+                    "meta": "This demo shows you can add images to your Kendo UI TreeView control, as well as implement TreeView with sprites in your website or project."
                 },
                 {
                     "text": "Checkboxes",
-                    "url": "treeview/checkboxes.html"
+                    "url": "treeview/checkboxes.html",
+                    "title": "Creating tree nodes with checkboxes | Kendo UI TreeView Demo",
+                    "meta": "This sample illustrates how you can easily create tree nodes with checkboxes by simply setting the child item of the checkboxes to true."
                 },
                 {
                     "packages": [ "!mvc" ],
@@ -850,34 +1088,48 @@
                 {
                     "packages": [ "!mvc" ],
                     "text": "Binding to local data",
-                    "url": "treeview/local-data.html"
+                    "url": "treeview/local-data.html",
+                    "title": "Binding to local data demo for Kendo UI TreeView control",
+                    "meta": "This demo shows how items in the tree are displayed with the default settings of Kendo UI TreeView and how the component can be easily bound to local data."
                 },
                 {
                     "text": "Binding to remote data",
-                    "url": "treeview/remote-data.html"
+                    "url": "treeview/remote-data.html",
+                    "title": "Binding Kendo UI tree component to remote data",
+                    "meta": "This example illustrates how the hierarchical tree can be bound to remote data and thus the items in the tree are populated from the external source."
                 },
                 {
                     "packages": [ "!mvc" ],
                     "text": "Binding to OData service",
-                    "url": "treeview/odata-binding.html"
+                    "url": "treeview/odata-binding.html",
+                    "title": "Example of binding Kendo UI TreeView to OData service",
+                    "meta": "This sample shows how Kendo UI TreeView widget can be bound to oData service."
                 },
                 {
                     "packages": [ "!mvc" ],
                     "text": "Templates",
-                    "url": "treeview/templates.html"
+                    "url": "treeview/templates.html",
+                    "title": "Example of templates for Kendo UI TreeView",
+                    "meta": "This demo illustrates how tree nodes in Kendo UI TreeView component can be further customized by using templates."
                 },
                 {
                     "text": "Events",
-                    "url": "treeview/events.html"
+                    "url": "treeview/events.html",
+                    "title": "Demo for Kendo UI TreeView widget events ",
+                    "meta": "This sample shows built-in events in Kendo jQuery tree widget. Events are triggered when the user selects, collapses, expands, adds or removes an item on the list."
                 },
                 {
                     "packages": [ "!mvc" ],
                     "text": "API",
-                    "url": "treeview/api.html"
+                    "url": "treeview/api.html",
+                    "title": "Kendo UI TreeView API Example",
+                    "meta": "This demo shows the specific API functions, as well as DataSource interaction options, which control the behaviour of Kendo UI TreeView."
                 },
                 {
                     "text": "RTL support",
-                    "url": "treeview/rtl.html"
+                    "url": "treeview/rtl.html",
+                    "title": "Demo for Kendo UI TreeView widget with RTL Support",
+                    "meta": "This example shows how Right-to-Left support works in Kendo UI TreeView component."
                 }
             ]
         },
@@ -890,23 +1142,33 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "upload/index.html"
+                    "url": "upload/index.html",
+                    "title": "Kendo UI Upload widget demo",
+                    "meta": "This example shows the basic functionality and core features of Kendo UI jQuery file upload control."
                 },
                 {
                     "text": "Asynchronous Upload",
-                    "url": "upload/async.html"
+                    "url": "upload/async.html",
+                    "title": "jQuery Asynchronous File Upload Example | Kendo UI Upload Demo",
+                    "meta": "This example shows the async upload functionality of Kendo UI Upload control."
                 },
                 {
                     "text": "Events",
-                    "url": "upload/events.html"
+                    "url": "upload/events.html",
+                    "title": "Example of handling events in Kendo UI Upload",
+                    "meta": "This example demonstrates how to handle events, triggered by kendoUpload widget."
                 },
                 {
                     "text": "API",
-                    "url": "upload/api.html"
+                    "url": "upload/api.html",
+                    "title": "API example for Kendo UI File Upload Control",
+                    "meta": "This demo shows API Functions of Kendo UI Upload component. Try the sample to see how to enable, disable the upload option and toggle the enabled state."
                 },
                 {
                     "text": "RTL support",
-                    "url": "upload/rtl.html"
+                    "url": "upload/rtl.html",
+                    "title": "Example of Kendo UI jQuery-powered Upload widget with RTL support",
+                    "meta": "This demo illustrates how you can facilitate your RTL app users by using the RTL feature of Kendo UI Upload component."
                 }
             ]
         },
@@ -918,32 +1180,46 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "window/index.html"
+                    "url": "window/index.html",
+                    "title": "Kendo UI Window Example | Kendo UI Web Demos",
+                    "meta": "This example demonstrates the basic usage of KendoWindow widget, one of the components which you can use to enhance the interaction in your web app."
                 },
                 {
                     "text": "Customizing actions",
-                    "url": "window/actions.html"
+                    "url": "window/actions.html",
+                    "title": "Example of customizing actions in Kendo UI Window control",
+                    "meta": "This Kendo UI Window sample illustrates how client-side actions can be further customized in order to bring interactivity in your web app to a higher level."
                 },
                 {
                     "text": "Loading content with AJAX",
-                    "url": "window/ajax.html"
+                    "url": "window/ajax.html",
+                    "title": "AJAX loaded content with Kendo UI Window widget",
+                    "meta": "This example illustrates how content in Kendo UI window widget can be loaded, using AJAX."
                 },
                 {
                     "packages": [ "!mvc" ],
                     "text": "Animation effects",
-                    "url": "window/animation.html"
+                    "url": "window/animation.html",
+                    "title": "Animation effects demo for Kendo UI window widget",
+                    "meta": "This sample illustrates the animation effects in Kendo UI window control. Just play with animation settings to change the interactivity of the control."
                 },
                 {
                     "text": "Events",
-                    "url": "window/events.html"
+                    "url": "window/events.html",
+                    "title": "Events in Kendo UI Window demo",
+                    "meta": "This demo shows how to fire events in  Kendo UI jQuery window control. Refresh, activate, open, dragend, dragstart are some of the events which you can trigger."
                 },
                 {
                     "text": "API",
-                    "url": "window/api.html"
+                    "url": "window/api.html",
+                    "title": "Example of Kendo UI Window API",
+                    "meta": "This sample shows how you can use the API of kendoWindow widget to refresh the content of the window, open and close it."
                 },
                 {
                     "text": "RTL support",
-                    "url": "window/rtl.html"
+                    "url": "window/rtl.html",
+                    "title": "Right-to-Left window position of Kendo UI Window control",
+                    "meta": "This demo shows how Kendo UI Window widget supports right-to-left direction of the window to provide best end user experience."
                 },
                 {
                     "text": "Keyboard navigation",
@@ -962,27 +1238,39 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "datasource/index.html"
+                    "url": "datasource/index.html",
+                    "title": "Kendo UI DataSource Demo",
+                    "meta": "This example demonstrates the basic functionality of Kendo UI DataSource which is used for data operations and manipulations in Kendo jQuery web widgets."
                 },
                 {
                     "text": "Binding to remote data",
-                    "url": "datasource/remote-data.html"
+                    "url": "datasource/remote-data.html",
+                    "title": "Kendo UI DataSource binding to a remote data service",
+                    "meta": "This sample illustrates how Kendo UI DataSource component can be bound to a remote data service."
                 },
                 {
                     "text": "Binding to XML",
-                    "url": "datasource/xml-data.html"
+                    "url": "datasource/xml-data.html",
+                    "title": "Kendo UI DataSource bound to XML | Kendo UI Web Demos",
+                    "meta": "This example shows how you can bind Kendo UI Data Source control to XML Data format."
                 },
                 {
                     "text": "Remote data operations",
-                    "url": "datasource/remote-operations.html"
+                    "url": "datasource/remote-operations.html",
+                    "title": "Remote data operations | Kendo UI DataSource Demo",
+                    "meta": "This sample demonstrates how to configure remote data operations such as paging and sorting of Kendo UI jQuery Data Source."
                 },
                 {
                     "text": "Local data operations",
-                    "url": "datasource/local-operations.html"
+                    "url": "datasource/local-operations.html",
+                    "title": "Example of local data operations in Kendo UI DataSource component",
+                    "meta": "This sample shows how to configure the functionality of local data operations in Kendo UI DataSource. The component supports paging, sorting and filtering."
                 },
                 {
                     "text": "Shared DataSource",
-                    "url": "datasource/shared-datasource.html"
+                    "url": "datasource/shared-datasource.html",
+                    "title": " Shared DataSource Demo | Kendo UI Web demos",
+                    "meta": "This example demonstrates a shared DataSource which can be created to enable multiple UI widgets to bind to the same data collection."
                 }
             ]
         },
@@ -995,11 +1283,15 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "templates/index.html"
+                    "url": "templates/index.html",
+                    "title": "Kendo UI jQuery Templates Demo",
+                    "meta": "This example demonstrates the basic functionality of Kendo UI jQuery templates which can be used in Kendo UI Web framework."
                 },
                 {
                     "text": "Expressions",
-                    "url": "templates/expressions.html"
+                    "url": "templates/expressions.html",
+                    "title": "Examples of different Kendo UI jQuery templates",
+                    "meta": "These examples show different expressions of Kendo UI Templates which can be represented as a basic template, script elements, encoding HTML and JS code inside the template definition."
                 }
             ]
         },
@@ -1012,39 +1304,57 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "mvvm/index.html"
+                    "url": "mvvm/index.html",
+                    "title": "Kendo UI MVVM Demo",
+                    "meta": "This example demonstrates the basic usage and functionality of Kendo UI MVVM which helps you separate the data from the UI."
                 },
                 {
                     "text": "HTML element binding",
-                    "url": "mvvm/elements.html"
+                    "url": "mvvm/elements.html",
+                    "title": "Example of HTML element binding in Kendo UI MVVM",
+                    "meta": "This Kendo UI MVVM demo shows how the html binding sets the HTML content of the target DOM element to a View-Model state."
                 },
                 {
                     "text": "Widget binding",
-                    "url": "mvvm/widgets.html"
+                    "url": "mvvm/widgets.html",
+                    "title": "Example of jQuery widgets bound to Kendo UI MVVM",
+                    "meta": "This example shows how Kendo UI jQuery widgets can be bound to Kendo UI MVVM."
                 },
                 {
                     "text": "Attribute binding",
-                    "url": "mvvm/attributes.html"
+                    "url": "mvvm/attributes.html",
+                    "title": "Kendo UI MVVM attribute binding example",
+                    "meta": "This demo illustrates how attributes are bound in Kendo UI MVVM."
                 },
                 {
                     "text": "Style binding",
-                    "url": "mvvm/style.html"
+                    "url": "mvvm/style.html",
+                    "title": "Example of using the style binding in Kendo UI MVVM",
+                    "meta": "This demo shows how the style binding sets the style attributes to the target DOM element."
                 },
                 {
                     "text": "Event binding",
-                    "url": "mvvm/event.html"
+                    "url": "mvvm/event.html",
+                    "title": "Kendo UI MVVM event binding demo",
+                    "meta": "This example shows the events which are bound to an attribute in MVVM."
                 },
                 {
                     "text": "Source and template binding",
-                    "url": "mvvm/source.html"
+                    "url": "mvvm/source.html",
+                    "title": "Source and template binding demo | Kendo UI MVVM",
+                    "meta": "This demo shows how the source binding sets the HTML content of the target element by rendering a template with a View-model value."
                 },
                 {
                     "text": "Remote binding",
-                    "url": "mvvm/remote-binding.html"
+                    "url": "mvvm/remote-binding.html",
+                    "title": "Remote binding in Kendo UI MVVM framework",
+                    "meta": "This example shows how remote data is bound  in Kendo UI MVVM framework."
                 },
                 {
                     "text": "Custom binding",
-                    "url": "mvvm/custom.html"
+                    "url": "mvvm/custom.html",
+                    "title": "Example of creating custom bindings in Kendo UI MVVM",
+                    "meta": "This example demonstrates how custom bindings can be created in Kendo UI MVVM. Try the demo to see how a custom binding is declared in the View."
                 }
             ]
         },
@@ -1090,19 +1400,27 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "dragdrop/index.html"
+                    "url": "dragdrop/index.html",
+                    "title": "Demo for Drag & Drop Component in Kendo UI jQuery framework",
+                    "meta": "This example illustrates the basic functionality of Kendo UI Drag & Drop component which provides a cross-browser, touch-friendly way to handle mouse and touch drag events."
                 },
                 {
                     "text": "Container",
-                    "url": "dragdrop/container.html"
+                    "url": "dragdrop/container.html",
+                    "title": "Example of Kendo UI Drag and Drop Component in a container",
+                    "meta": "This demo illustrates how Kendo UI Drag and Drop component is used for draggable items in a container."
                 },
                 {
                     "text": "Area",
-                    "url": "dragdrop/area.html"
+                    "url": "dragdrop/area.html",
+                    "title": "Example of jQuery Draggable Area | Kendo UI MVVM Demo",
+                    "meta": "This demo shows how the draggable functionality in an area is enabled in Kendo UI MVVM framework."
                 },
                 {
                     "text": "Events",
-                    "url": "dragdrop/events.html"
+                    "url": "dragdrop/events.html",
+                    "title": "Events example for Kendo UI jQuery Draggable functionality",
+                    "meta": "Learn more about draggable interaction with this events example for Kendo UI Draggable in Kendo UI MVVM."
                 }
             ]
         },
@@ -1115,7 +1433,9 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "validator/index.html"
+                    "url": "validator/index.html",
+                    "title": "Kendo UI Validator Demo",
+                    "meta": "This demo illustrates the core functionality of Kendo UI Validator component in Kendo UI Web framework."
                 }
             ]
         },
@@ -1128,7 +1448,9 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "globalization/index.html"
+                    "url": "globalization/index.html",
+                    "title": "Globalization example in Kendo UI Web framework",
+                    "meta": "This is an example of globalization which is supported in Kendo UI Web framework."
                 }
             ]
         },
@@ -1140,15 +1462,21 @@
             "items": [
                 {
                     "text": "Forms",
-                    "url": "styling/index.html"
+                    "url": "styling/index.html",
+                    "title": "jQuery forms styling demo | Kendo UI Web framework",
+                    "meta": "This example illustrates how jQuery and HTML5-based forms can be styled with Kendo UI Web."
                 },
                 {
                     "text": "Panels",
-                    "url": "styling/panels.html"
+                    "url": "styling/panels.html",
+                    "title": "Panels styling example | Kendo UI Web app framework",
+                    "meta": "This demo shows how different styling can be applied to panels in Kendo UI Web."
                 },
                 {
                     "text": "Icons",
-                    "url": "styling/icons.html"
+                    "url": "styling/icons.html",
+                    "title": "jQuery icons styling example | Kendo UI Web demos",
+                    "meta": "This example shows how different styling can be applied to icons by using Kendo UI Web framework."
                 }
             ]
         },
@@ -1160,11 +1488,15 @@
             "items": [
                 {
                     "text": "Using KnockoutJS with Kendo",
-                    "url": "integration/index.html"
+                    "url": "integration/index.html",
+                    "title": "Example of KnockoutJS integration with Kendo UI Web framework",
+                    "meta": "This demo illustrates how KnockoutJS dynamic JavaScript UIs can be integrated with Kendo UI HTML5 & CSS3 Web framework."
                 },
                 {
                     "text": "Using jQuery templates with Kendo",
-                    "url": "integration/jquery-templates.html"
+                    "url": "integration/jquery-templates.html",
+                    "title": "Integrating jQuery templates with Kendo UI Web examples",
+                    "meta": "This demo illustrates how jQuery templates can be integrated with the robust Kendo UI framework for web app development."
                 }
             ]
         }
