@@ -30,7 +30,18 @@ MVC_RAZOR_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTempl
 MVC_ASCX_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTemplates/*.ascx']
 
 # Satellite assemblies (<culture>\Kendo.Mvc.ressources.dll) depend on Kendo.Mvc.dll
-rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
+rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' do |t|
+    platform = RbConfig::CONFIG['host_os']
+
+    # xbuild can't set the version of satellite assemblies so we build them using `al`
+    if platform =~ /linux|darwin/
+        culture = t.name.pathmap("%-1d")
+        obj = "wrappers/mvc/src/Kendo.Mvc/obj/Release/Kendo.Mvc.Resources.Messages.#{culture}.resources";
+        key = 'wrappers/mvc/src/shared/Kendo.snk'
+
+        sh "al /t:lib /embed:#{obj} /culture:#{culture} /out:#{t.name} /template:#{t.prerequisites[0]} /keyfile:#{key}", :verbose => VERBOSE
+    end
+end
 
 # XML API documentation depends on Kendo.Mvc.Dll
 rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
