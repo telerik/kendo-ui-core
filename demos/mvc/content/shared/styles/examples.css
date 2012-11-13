@@ -369,7 +369,8 @@ html
 /*featured demos and demos-nav*/
 
 .demos-nav,
-.sourceChooser
+.sourceChooser,
+#codeStrip .k-content.k-tabstrip .k-tabstrip-items
 {
     border-bottom:1px solid #b2b2b2;
 
@@ -1728,13 +1729,8 @@ pre.prettyprint
     position:relative;
 }
 
-#codeStrip li.k-state-active .k-link
-{
-    color:#e26b1d;
-}
-
-#codeStrip li.k-state-active:before,
-#codeStrip li.k-state-active:after
+#codeStrip>.k-tabstrip-items>li.k-state-active:before,
+#codeStrip>.k-tabstrip-items>li.k-state-active:after
 {
     content:" ";
     display:block;
@@ -1749,19 +1745,52 @@ pre.prettyprint
     height:0;
 }
 
-#codeStrip li.k-state-active:before
+#codeStrip>.k-tabstrip-items>li.k-state-active:before
 {
     border-color: #ccc transparent;
     bottom: 1px;
 }
 
-#codeStrip .k-state-active .k-link,
-#codeStrip .k-state-hover .k-link
+#codeStrip>.k-tabstrip-items>li.k-state-active>.k-link,
+#codeStrip>.k-tabstrip-items>li.k-state-hover>.k-link
 {
     color: #e26b1d;
 }
 
-#codeStrip div.k-content
+#codeStrip .k-tabstrip .k-link
+{
+    padding:6px 10px;
+    margin:10px 0 10px 14px;
+    line-height:1.2;
+}
+
+#codeStrip .k-tabstrip .k-link:hover,
+#codeStrip .k-tabstrip .k-state-active .k-link
+{
+    border:1px solid #dadada;
+    border-radius: 14px;
+    padding:5px 9px;
+    
+    background:#ececec;
+    background: -moz-linear-gradient(top, #f5f5f5 0%, #ececec 50%, #e3e3e3 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(50%,#ececec), color-stop(100%,#e3e3e3)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f5f5f5 0%,#ececec 50%,#e3e3e3 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f5f5f5 0%,#ececec 50%,#e3e3e3 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f5f5f5 0%,#ececec 50%,#e3e3e3 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #f5f5f5 0%,#ececec 50%,#e3e3e3 100%); /* W3C */
+}
+
+#codeStrip .k-tabstrip .k-link:hover
+{
+    box-shadow:0 0 2px #dadada;
+}
+
+#codeStrip .k-tabstrip .k-state-active .k-link
+{
+    box-shadow:inset 0 1px 2px #b0b0b0,0 1px 0 #fff;
+}
+
+#codeStrip .k-content .k-content
 {
     background: #fff;
 }
@@ -1805,7 +1834,7 @@ pre.prettyprint
     border-radius: 0 0 5px 5px;
 }
 
-#codeStrip .codeContainer
+#codeStrip .prettyprint
 {
     padding: 20px;
 }
