@@ -1250,7 +1250,7 @@
             }
 
             if (arguments.length == 1) {
-                expand = !nodeContents(node).is(VISIBLE);
+                expand = !this._expanded(node);
             }
 
             this._expanded(node, expand);
@@ -1276,6 +1276,10 @@
 
             if (arguments.length == 1) {
                 return node.attr(expandedAttr) === "true" || (dataItem && dataItem.expanded);
+            }
+
+            if (nodeContents(node).data("animating")) {
+                return;
             }
 
             if (dataItem) {
