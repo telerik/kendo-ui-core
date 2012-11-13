@@ -180,6 +180,10 @@
             CLOSE
         ],
 
+        open: function(target) {
+            this.openFor(target);
+        },
+
         openFor: function(target) {
             this.popup.show(target);
         },
