@@ -21,8 +21,8 @@ public class HomeController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) throws ParseException {      
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-        Date from = (Date)formatter.parse("2012/02/05");
-        Date to = (Date)formatter.parse("2012/10/07");
+        Date from = (Date)formatter.parse("2009/02/05");
+        Date to = (Date)formatter.parse("2011/10/07");
         model.addAttribute("from", from);
         model.addAttribute("to", to);
         return "/dataviz/financial/index";

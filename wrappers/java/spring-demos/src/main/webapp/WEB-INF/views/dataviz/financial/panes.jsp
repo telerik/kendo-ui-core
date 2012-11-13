@@ -26,7 +26,9 @@
          	</kendo:stockChart-valueAxis>
             <kendo:stockChart-series>
             	<kendo:stockChart-seriesItem type="candlestick" openField="open" highField="high" lowField="low" closeField="close" />
-            	<kendo:stockChart-seriesItem type="column" field="volume" axis="volumeAxis" />
+            	<kendo:stockChart-seriesItem type="column" field="volume" axis="volumeAxis">
+            		<kendo:stockChart-seriesItem-tooltip format="{0:C0}" />
+            	</kendo:stockChart-seriesItem>
             </kendo:stockChart-series>
             <kendo:stockChart-navigator>
             	<kendo:stockChart-navigator-series>
