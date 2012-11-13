@@ -490,6 +490,7 @@ class Option
     end
 
     def to_markdown
+        p @name unless @parent
         return MD_OPTION_TEMPLATE.result(binding)
     end
 
@@ -813,36 +814,44 @@ class Tag
 
         if tag.name.downcase == "grid"
             tag.options.push(Option.new :name => 'detailTemplate',
+                                        :parent => tag,
                                         :type => 'String',
                                         :description => "The id of the template used for rendering the detail rows in the grid.")
 
             tag.options.push(Option.new :name => 'rowTemplate',
+                                        :parent => tag,
                                         :type => 'String',
                                         :description => "The id of the template used for rendering the rows in the grid.")
 
             tag.options.push(Option.new :name => 'altRowTemplate',
+                                        :parent => tag,
                                         :type => 'String',
                                         :description => "The id of the template used for rendering the alternate rows in the grid.")
         end
 
         if tag.name.downcase == "listview"
             tag.options.push(Option.new :name => 'template',
+                                        :parent => tag,
                                         :type => 'String',
                                         :description => "The id of the template used for rendering the items in the listview.")
 
             tag.options.push(Option.new :name => 'pageable',
+                                        :parent => tag,
                                         :type => 'Boolean',
                                         :description => "Indicates whether paging is enabled/disabled.")
 
             tag.options.push(Option.new :name => 'editTemplate',
+                                        :parent => tag,
                                         :type => 'String',
                                         :description => "Specifies ListView item template in edit mode.")
 
             tag.options.push(Option.new :name => 'altTemplate',
+                                        :parent => tag,
                                         :type => 'String',
                                         :description => "Template to be used for rendering the alternate items in the listview.")
 
             tag.options.push(Option.new :name => 'tagName',
+                                        :parent => tag,
                                         :type => 'String',
                                         :description => "Specifies ListView wrapper element tag name.")
         end
