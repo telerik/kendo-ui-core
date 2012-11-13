@@ -108,6 +108,11 @@
     margin: 4px 4px 0 10px;
 }
 
+.k-rtl .k-imagebrowser .k-state-hover .k-i-arrow-e,
+.k-rtl .k-imagebrowser .k-button:hover .k-i-arrow-e {
+  background-position: -16px -48px;
+}
+
 .k-rtl .k-tile strong
 {
     float: right;
@@ -253,6 +258,28 @@
 {
     left: auto;
     right: 34px;
+}
+
+.k-rtl .k-slider .k-i-arrow-w {
+  background-position: 0 -16px;
+}
+
+.k-rtl .k-slider .k-state-hover .k-i-arrow-w,
+.k-rtl .k-slider .k-button:hover .k-i-arrow-w,
+.k-rtl .k-slider .k-textbox:hover .k-i-arrow-w,
+.k-rtl .k-slider .k-button:active .k-i-arrow-w {
+  background-position: -16px -16px;
+}
+
+.k-rtl .k-slider .k-i-arrow-e {
+  background-position: 0 -48px;
+}
+
+.k-rtl .k-slider .k-state-hover .k-i-arrow-e,
+.k-rtl .k-slider .k-button:hover .k-i-arrow-e,
+.k-rtl .k-slider .k-button:active .k-i-arrow-e,
+.k-rtl .k-slider .k-button:active .k-i-arrow-e {
+  background-position: -16px -48px;
 }
 
 /* TabStrip */
