@@ -24,17 +24,15 @@ namespace Kendo.Models
                 Url = String.Format("~/src/jsp/views/{0}/{1}/{2}.jsp", suite, section, example)
             };
 
-            var path = server.MapPath("~/src/jsp/controllers/");
+            var sections = Directory.GetDirectories(server.MapPath("~/src/jsp/controllers/"));
 
-            var sections = Directory.GetDirectories(path);
-
-            var directory = sections.FirstOrDefault(s => s.ToLower().EndsWith(section));
+            var directory = sections.FirstOrDefault(s => s.ToLower().EndsWith(section.Replace("-", "")));
 
             if (directory != null)
             {
                 var controllers = Directory.GetFiles(directory);
 
-                var controller = controllers.FirstOrDefault(c => Path.GetFileName(c).ToLower() == example + "controller.java");
+                var controller = controllers.FirstOrDefault(c => Path.GetFileName(c).ToLower() == example.Replace("-", "") + "controller.java");
 
                 if (controller != null)
                 {

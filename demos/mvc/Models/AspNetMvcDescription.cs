@@ -29,32 +29,29 @@ namespace Kendo.Models
                 };
             }
 
-            suite = suite[0].ToString().ToUpper() + suite.Substring(1);
+            var sections = Directory.GetDirectories(server.MapPath("~/src/aspnetmvc/controllers/"));
 
-            var path = server.MapPath("~/src/aspnetmvc/controllers/" + suite);
+            var directory = sections.FirstOrDefault(s => {
+                var path = s.ToLower().Replace("_", "-");
 
-            if (Directory.Exists(path))
+                return path.EndsWith(section) || path.EndsWith(section + "s");
+            });
+
+            if (directory != null)
             {
-                var sections = Directory.GetDirectories(path);
+                var controllers = Directory.GetFiles(directory);
 
-                var directory = sections.FirstOrDefault(s => s.ToLower().EndsWith(section));
+                var controller = controllers.FirstOrDefault(c => Path.GetFileName(c).ToLower().Replace("_", "-") == example + "controller.cs");
 
-                if (directory != null)
+                if (controller != null)
                 {
-                    var controllers = Directory.GetFiles(directory);
-
-                    var controller = controllers.FirstOrDefault(c => Path.GetFileName(c).ToLower().Replace("_", "-") == example + "controller.cs");
-
-                    if (controller != null)
+                    yield return new ExampleFile
                     {
-                        yield return new ExampleFile
-                        {
-                            Name = Path.GetFileName(controller),
-                            Url = "~/src/aspnetmvc/controllers/" + suite + "/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
-                        };
-                    }
+                        Name = Path.GetFileName(controller),
+                        Url = "~/src/aspnetmvc/controllers/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
+                    };
                 }
             }
-        }
+    }
     }
 }
