@@ -17,8 +17,7 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var TreeView = kendo.ui.TreeView,
-                list;
+            var TreeView = kendo.ui.TreeView, dom;
 
             module("initialization from div");
 
@@ -35,50 +34,49 @@
             });
 
             module("initialization from ul", {
-                setup: function() {
-                    list = $("<ul><li>foo</li></ul>").appendTo(document.body);
-                },
                 teardown: function() {
-                    list.remove();
+                    if (dom) {
+                        dom.remove();
+                    }
                     $(".k-treeview").remove();
                 }
             });
 
             test("attaches treeview object to ul", function() {
-                list.kendoTreeView();
+                dom = $("<ul><li>foo</li></ul>").appendTo("body").kendoTreeView();
 
-                ok(list.data("kendoTreeView") instanceof TreeView);
+                ok(dom.data("kendoTreeView") instanceof TreeView);
             });
 
             test("toggle buttons work when initializing from ul", function() {
-                list.find("li").append("<ul><li>bar</li></ul>");
+                dom = $("<ul><li>foo<ul><li>bar</li></ul></li></ul>").appendTo("body");
 
-                list.kendoTreeView();
+                dom.kendoTreeView();
 
-                list.find(".k-plus").trigger("click");
+                dom.find(".k-plus").trigger("click");
 
-                ok(list.find(".k-minus").length);
+                ok(dom.find(".k-minus").length);
             });
 
             test("kendoTreeView extends passed options", function() {
-               list.kendoTreeView({ foo: "bar" });
+                dom = $("<ul><li>foo</li></ul>").appendTo("body");
+                dom.kendoTreeView({ foo: "bar" });
 
-               var options = list.data("kendoTreeView").options;
-               notEqual(options.foo, undefined)
-               equal(options.foo, "bar");
+                var options = dom.data("kendoTreeView").options;
+                notEqual(options.foo, undefined)
+                equal(options.foo, "bar");
             });
 
             test("unneeded whitespace is stripped from item text", function() {
-                list.remove();
-                list = $("<ul><li>foo    </li></ul>").appendTo(document.body);
+                dom = $("<ul><li>foo    </li></ul>").appendTo(document.body);
 
-                list.kendoTreeView();
+                dom.kendoTreeView();
 
-                equal(list.data("kendoTreeView").findByText("foo").length, 1);
+                equal(dom.data("kendoTreeView").findByText("foo").length, 1);
             });
 
             test("initialization from fully rendered treeview", function() {
-                list = $('<div class="k-widget k-treeview" id="treeview">' +
+                dom = $('<div class="k-widget k-treeview" id="treeview">' +
                     '<ul class="k-group">' +
                         '<li class="k-item k-first k-last">' +
                             '<div class="k-top k-bot"><span class="k-icon k-minus"></span>' +
@@ -89,47 +87,46 @@
                 '</div>');
 
 
-                list.kendoTreeView();
+                dom.kendoTreeView();
 
-                equal(list.find(".k-item").length, 1);
+                equal(dom.find(".k-item").length, 1);
             });
 
             test("toggle buttons are rendered correctly when initializing from html", function() {
-                list.remove();
-                list = $("<ul>" +
+                dom = $("<ul>" +
                     "<li>foo<ul><li>baz</li></ul></li>" +
                     "<li data-expanded='true'>bar<ul><li>qux</li></ul></li>" +
                 "</ul>").appendTo(document.body);
 
-                list.kendoTreeView();
+                dom.kendoTreeView();
 
-                equal(list.find(".k-icon.k-plus").length, 1);
-                equal(list.find(".k-icon.k-minus").length, 1);
+                equal(dom.find(".k-icon.k-plus").length, 1);
+                equal(dom.find(".k-icon.k-minus").length, 1);
             });
 
             test("initialization sets tabindex=0 by default", function() {
-                list = $("<div />").kendoTreeView();
+                dom = $("<div />").kendoTreeView();
 
-                equal(list.attr("tabindex"), 0);
+                equal(dom.attr("tabindex"), 0);
             });
 
             test("initialization leaves wrapper tabindex, if available", function() {
-                list = $("<div tabindex=3 />").kendoTreeView();
+                dom = $("<div tabindex=3 />").kendoTreeView();
 
-                equal(list.attr("tabindex"), 3);
+                equal(dom.attr("tabindex"), 3);
             });
 
             test("initialization leaves tabindex=-1", function() {
-                list = $("<div tabindex='-1' />").kendoTreeView();
+                dom = $("<div tabindex='-1' />").kendoTreeView();
 
-                equal(list.attr("tabindex"), -1);
+                equal(dom.attr("tabindex"), -1);
             });
 
             test("initialization gets tabindex from list", function() {
-                list = $("<ul tabindex='42'></ul>").kendoTreeView();
+                dom = $("<ul tabindex='42'></ul>").kendoTreeView();
 
-                equal(list.closest(".k-treeview").attr("tabindex"), 42);
-                ok(!list.attr("tabindex"))
+                equal(dom.closest(".k-treeview").attr("tabindex"), 42);
+                ok(!dom.attr("tabindex"))
             });
 
             module("initialization from array");
