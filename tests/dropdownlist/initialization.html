@@ -674,7 +674,7 @@
                 div.show();
                 dropdown.popup.open();
 
-                equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width());
+                equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width(), 2);
             });
 
             test("DropDownList does not set width if list has style.width", function() {
