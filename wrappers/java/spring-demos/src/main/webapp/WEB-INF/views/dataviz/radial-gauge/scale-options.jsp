@@ -67,7 +67,7 @@
 	</script>
 	<style>
         #gauge-container {
-        	background: transparent url(<c:url value="/resources/dataviz/gauge/gauge-container.png" />) no-repeat 50% 50%;
+        	background: transparent url(<c:url value="/resources/dataviz/gauge/gauge-container.png" />) no-repeat 50% 0;
             width: 404px;
             height: 404px;
             text-align: center;

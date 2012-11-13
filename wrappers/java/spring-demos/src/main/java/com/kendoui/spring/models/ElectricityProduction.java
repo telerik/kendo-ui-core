@@ -9,7 +9,7 @@ public class ElectricityProduction {
     private int hydro;
     private int wind;
     
-    public ElectricityProduction(String country, String year, String unit, int hydro, int wind, int solar, int nuclear) {
+    public ElectricityProduction(String country, String year, String unit, int solar, int hydro, int wind, int nuclear) {
         setCountry(country);
         setYear(year);
         setUnit(unit);

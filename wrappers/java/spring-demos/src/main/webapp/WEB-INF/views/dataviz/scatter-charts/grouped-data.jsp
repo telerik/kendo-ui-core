@@ -33,12 +33,12 @@
          	 	 </kendo:chart-series>
          	 	 <kendo:chart-xAxis>
          	 	 	<kendo:chart-xAxisItem>
-         	 	 		<kendo:chart-xAxisItem-labels format="\${0}" skip="2" step="2" />
+         	 	 		<kendo:chart-xAxisItem-labels format="MMM" />
          	 	 	</kendo:chart-xAxisItem>
          	 	 </kendo:chart-xAxis>
          	 	 <kendo:chart-yAxis>
          	 	 	<kendo:chart-yAxisItem>
-         	 	 		<kendo:chart-yAxisItem-labels format="MMM" />
+         	 	 		<kendo:chart-yAxisItem-labels format="\${0}" skip="2" step="2" />
          	 	 	</kendo:chart-yAxisItem>
          	 	 </kendo:chart-yAxis>
          	 </kendo:chart>
