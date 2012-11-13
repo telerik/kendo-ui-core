@@ -417,7 +417,7 @@
         var style = attr.style;
 
         if(style) {
-            attr.style = style.replace(/((.*)?)(display\s*:\s*none)\s*;?/i, "$1");
+            attr.style = style.replace(/(display\s*:\s*none\s*;?)*/ig, "");
         }
 
         return attr;
