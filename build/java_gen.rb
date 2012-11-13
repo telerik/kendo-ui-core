@@ -6,7 +6,8 @@ TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md').include('docs/api/framework/datasource.md')
 
 IGNORED = {
-    'chart' => ['axisDefaults'],
+    'chart' => ['axisDefaults', 'seriesDefaults'],
+    'stockchart' => ['axisDefaults', 'seriesDefaults'],
     'window' => ['content.template'],
     'grid' => ['detailTemplate', 'rowTemplate', 'altRowTemplate'],
     'listview' => ['template', 'editTemplate', 'altTemplate']
@@ -776,7 +777,7 @@ class Tag
 
                 name.sub!(/\s*type\s*[=:][^\.]*\.?/, '') # skip exotic documentation like series.type="area".tooltip
 
-                next if IGNORED[tag.name.downcase] && IGNORED[tag.name.downcase].include?(name)
+                next if IGNORED[tag.name.downcase] && IGNORED[tag.name.downcase].any? { |i| name.match %r{^#{i}} }
 
                 type = type.value.strip
 

@@ -81,10 +81,6 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
         setProperty("plotArea", value);
     }
 
-    public void setSeriesDefaults(SeriesDefaultsTag value) {
-        setProperty("seriesDefaults", value);
-    }
-
     public void setValueAxis(ValueAxisTag value) {
 
         setProperty("valueAxis", value.valueAxis());
@@ -109,14 +105,6 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     public void setDateField(String value) {
         setProperty("dateField", value);
-    }
-
-    public Object getAxisDefaults() {
-        return (Object)getProperty("axisDefaults");
-    }
-
-    public void setAxisDefaults(Object value) {
-        setProperty("axisDefaults", value);
     }
 
     @Override

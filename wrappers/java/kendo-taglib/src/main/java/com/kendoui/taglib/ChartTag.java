@@ -80,10 +80,6 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("tooltip", value);
     }
 
-    public void setSeriesDefaults(SeriesDefaultsTag value) {
-        setProperty("seriesDefaults", value);
-    }
-
     public void setValueAxis(ValueAxisTag value) {
 
         setProperty("valueAxis", value.valueAxis());
