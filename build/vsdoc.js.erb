@@ -1,9 +1,9 @@
 var kendo = {
     ui: {},
-    mobile: { ui: {}},
-    dataviz: {ui: {}}
+    mobile: {ui: {}},
+    dataviz: {ui: {}},
+    data: {}
 };
-
 
 % classes.each do |the_class|
 
@@ -70,13 +70,13 @@ $.fn.<%= the_class.plugin %> = function(options) {
     /// Instantiates a <%= the_class.name %> widget based the DOM elements that match the selector.
 
 % if the_class.configuration.length
-    /// &\#10;Accepts an object with the following configuration options:
-    /// &\#10;
+    /// &#10;Accepts an object with the following configuration options:
+    /// &#10;
 % the_class.configuration.each do |option|
 % next if option.name.include? "."
-    /// &\#10;<%= option.name %> — <%= option.type.gsub(/\*/, '') %> <%= option.default %>
-    /// &\#10;<%= option.description.strip.gsub(/\n/, "\n/// &\\#10;").gsub(/<(?:.|\n)*?>/, '') %>
-    /// &\#10;
+    /// &#10;<%= option.name %> — <%= option.type.gsub(/\*/, '') %> <%= option.default %>
+    /// &#10;<%= option.description.strip.gsub(/\n/, "\n/// &#10;").gsub(/<(?:.|\n)*?>/, '') %>
+    /// &#10;
 % end
 % end
     /// </summary>
@@ -86,6 +86,8 @@ $.fn.<%= the_class.plugin %> = function(options) {
 };
 
 % else # namespace
-<%= the_class.name %> = {};
+if (!<%= the_class.name %>) {
+    <%= the_class.name %> = {};
+}
 % end
 % end
