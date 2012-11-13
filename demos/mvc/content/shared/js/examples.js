@@ -553,7 +553,7 @@
                 container.on("click", ".tc-link", function(e) {
                     e.preventDefault();
 
-                    var link = $(this);
+                    var link = $(this), theme = link.attr("data-value");
 
                     if (link.hasClass("active")) {
                         return;
@@ -561,7 +561,10 @@
 
                     link.addClass("active").parent().siblings().find(".tc-link").removeClass("active");
 
-                    themeChooser.setTheme(link.attr("data-value"));
+                    themeChooser.setTheme(theme);
+
+                    Application.changeTheme(theme, true);
+
                 });
 
                 container.html(kendo.render(options.itemTemplate, options.themes))
@@ -584,8 +587,6 @@
                 }
 
                 this.element.find(".tc-theme-name").text(theme.text);
-
-                Application.changeTheme(themeName, true);
 
                 if (supports.sessionStorage) {
                     sessionStorage.setItem("kendoSkin", themeName);
