@@ -32,11 +32,10 @@
                     var original = $("#window").clone(true);
 
                     $(".configuration input").change( function() {
-                        var element = $("#window").parent(),
-                            clone = original.clone(true);
+                        var clone = original.clone(true);
 
                         undo.hide();
-                        element.empty().remove();
+                        window.destroy();
 
                         setTimeout( function () {
                             $("#example").append(clone);

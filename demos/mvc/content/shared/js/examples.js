@@ -148,19 +148,22 @@
                 kendo.ui.DatePicker.sharedCalendar = null;
             }
 
-            $(doc)
-                .off(".examples")
-                .find(".k-animation-container, .k-list-container, .k-calendar-container, .k-calendar")
-                .remove()
-                .end()
+            kendo.destroy("body > .k-popup");
+
+            $(doc.body)
                 .find(".k-window-content")
                 .each(function(index, kendoWindow) {
                     kendoWindow = $(kendoWindow).data("kendoWindow");
                     if (kendoWindow) {
+                        kendoWindow.setOptions({ deactivate: function () { kendoWindow.destroy(); } });
                         kendoWindow.close();
                     }
-                })
-                .end()
+                });
+
+            kendo.destroy("#example");
+
+            $(doc)
+                .off(".examples")
                 .trigger("kendo:pageUnload");
         },
 
