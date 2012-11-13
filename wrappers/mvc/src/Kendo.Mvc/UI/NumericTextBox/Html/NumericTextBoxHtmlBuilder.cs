@@ -4,6 +4,7 @@ namespace Kendo.Mvc.UI.Html
     using Kendo.Mvc.UI;
     using System;
     using System.Web.Mvc;
+    using System.Globalization;
 
     public class NumericTextBoxHtmlBuilder<T> where T : struct 
     {
@@ -31,7 +32,14 @@ namespace Kendo.Mvc.UI.Html
                 T? result = Component.GetValue(converter);
                 if (result != null)
                 {
-                    value = "{0}".FormatWith(result);
+                    CultureInfo info = CultureInfo.CurrentCulture;
+
+                    if (Component.Culture.HasValue())
+                    {
+                        info = new CultureInfo(Component.Culture);
+                    }
+
+                    value = string.Format(info, "{0}", result);
                 }
             }
             
