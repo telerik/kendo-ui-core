@@ -1,0 +1,73 @@
+
+        <div id="example" class="k-content">
+            <div id="stock-chart" style="height: 500px;"></div>
+            <script>
+                function createChart() {
+                    $("#stock-chart").kendoStockChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../../content/dataviz/js/boeing-stock.json",
+                                    dataType: "json"
+                                }
+                            }
+                        },
+                        title: {
+                            text: "The Boeing Company (NYSE:BA)"
+                        },
+                        dateField: "Date",
+                        panes: [{
+                            title: "Value"
+                        }, {
+                            name: "volumePane",
+                            title: "Volume",
+                            height: 100 // pixels
+                        }],
+                        categoryAxis: {
+                            pane: "volumePane"
+                        },
+                        valueAxes: [{
+                            // Default axis
+                        }, {
+                            name: "volume",
+                            pane: "volumePane",
+                            visible: false
+                        }],
+                        series: [{
+                            type: "candlestick",
+                            openField: "Open",
+                            highField: "High",
+                            lowField: "Low",
+                            closeField: "Close"
+                        }, {
+                            type: "bar",
+                            field: "Volume",
+                            axis: "volume"
+                        }],
+                        navigator: {
+                            series: {
+                                type: "area",
+                                field: "Close"
+                            },
+                            select: {
+                                from: "2012/02/05",
+                                to: "2012/10/07"
+                            }
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                        createChart();
+
+                        $("#example").bind("kendo:skinChange", function(e) {
+                            createChart();
+                        });
+                    }, 400);
+                });
+            </script>
+        </div>
