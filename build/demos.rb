@@ -162,7 +162,14 @@ PRODUCTION_RESOURCES = FileList['demos/mvc/**/*']
 MVC_RAZOR_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.cshtml']
                     .exclude('**/Shared/**/*')
                     .exclude('**/_ViewStart.cshtml')
+
+MVC_CONTROLLERS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Controllers/{DataViz,Web}/**/*.cs']
+
 MVC_ASPX_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.as*x']
+
+SPRING_VIEWS = FileList['wrappers/java/spring-demos/src/main/webapp/WEB-INF/views/**/*.jsp']
+
+SPRING_CONTROLLERS = FileList['wrappers/java/spring-demos/src/main/java/com/kendoui/spring/controllers/**/*.java']
 
 %w{production staging}.each do |flavor|
 
@@ -170,11 +177,23 @@ MVC_ASPX_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.as*x
          :from => PRODUCTION_RESOURCES,
          :root => 'demos/mvc/'
 
-    tree :to => "dist/demos/#{flavor}/src/aspnetmvc/aspx",
+    tree :to => "dist/demos/#{flavor}/src/jsp/views",
+         :from => SPRING_VIEWS,
+         :root => 'wrappers/java/spring-demos/src/main/webapp/WEB-INF/views/'
+
+    tree :to => "dist/demos/#{flavor}/src/jsp/controllers",
+         :from => SPRING_CONTROLLERS,
+         :root => 'wrappers/java/spring-demos/src/main/java/com/kendoui/spring/controllers/'
+
+    tree :to => "dist/demos/#{flavor}/src/aspnetmvc/controllers",
+         :from => MVC_CONTROLLERS,
+         :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Controllers\/.+?\//
+
+    tree :to => "dist/demos/#{flavor}/src/aspnetmvc/views/aspx",
          :from => MVC_ASPX_VIEWS,
          :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
 
-    tree :to => "dist/demos/#{flavor}/src/aspnetmvc/razor",
+    tree :to => "dist/demos/#{flavor}/src/aspnetmvc/views/razor",
          :from => MVC_RAZOR_VIEWS,
          :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Areas\/.+?\/Views\//
 end
@@ -228,8 +247,11 @@ namespace :demos do
         :release,
         'themebuilder:staging',
         'dist/demos/staging',
-        'dist/demos/staging/src/aspnetmvc/aspx',
-        'dist/demos/staging/src/aspnetmvc/razor',
+        'dist/demos/staging/src/aspnetmvc/controllers',
+        'dist/demos/staging/src/aspnetmvc/views/aspx',
+        'dist/demos/staging/src/aspnetmvc/views/razor',
+        'dist/demos/staging/src/jsp/views',
+        'dist/demos/staging/src/jsp/controllers',
         'dist/demos/staging/content/cdn/js',
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
@@ -244,8 +266,11 @@ namespace :demos do
 
     task :production_site => [:release,
         'dist/demos/production',
-        'dist/demos/production/src/aspnetmvc/aspx',
-        'dist/demos/production/src/aspnetmvc/razor'] do
+        'dist/demos/production/src/jsp/views',
+        'dist/demos/production/src/jsp/controllers',
+        'dist/demos/production/src/aspnetmvc/controllers',
+        'dist/demos/production/src/aspnetmvc/views/aspx',
+        'dist/demos/production/src/aspnetmvc/views/razor'] do
         patch_web_config('dist/demos/production/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT)
     end
 
