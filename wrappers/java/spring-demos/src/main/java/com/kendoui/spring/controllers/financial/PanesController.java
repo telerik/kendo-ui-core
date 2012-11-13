@@ -15,20 +15,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.StockDataPoint;
 
-@Controller("dataviz-financial-home-controller")
+@Controller("dataviz-financial-panes-controller")
 @RequestMapping(value="/dataviz/financial/")
-public class HomeController {
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+public class PanesController {
+    @RequestMapping(value = "/panes", method = RequestMethod.GET)
     public String index(Model model) throws ParseException {      
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         Date from = (Date)formatter.parse("2009/02/05");
         Date to = (Date)formatter.parse("2011/10/07");
         model.addAttribute("from", from);
         model.addAttribute("to", to);
-        return "/dataviz/financial/index";
+        return "/dataviz/financial/panes";
     }
     
-    @RequestMapping(value = "/index/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/panes/read", method = RequestMethod.POST)
     public @ResponseBody List<StockDataPoint> read() {
         return ChartDataRepository.BoeingStockData();
     }

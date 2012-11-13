@@ -352,6 +352,9 @@
             "items": [{
                 "text": "Basic usage",
                 "url": "financial/index.html"
+            }, {
+                "text": "Multiple panes",
+                "url": "financial/panes.html"
             }],
             "name": "stock-chart"
         }

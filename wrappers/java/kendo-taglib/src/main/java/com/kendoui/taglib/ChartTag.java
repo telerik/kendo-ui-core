@@ -66,6 +66,12 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("legend", value);
     }
 
+    public void setPanes(PanesTag value) {
+
+        setProperty("panes", value.panes());
+
+    }
+
     public void setPlotArea(PlotAreaTag value) {
         setProperty("plotArea", value);
     }
