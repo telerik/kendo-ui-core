@@ -19,7 +19,7 @@
             meego: { meego: true, appMode: false, browser: "default", device: "meego", flatVersion: "850", majorVersion: "8", minorVersion: "5.0", name: "meego", tablet: false }
         },
 
-        viewportTemplate = kendo.template('<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width#=data.height#" name="viewport" />', {usedWithBlock: false}),
+        viewportTemplate = kendo.template('<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no#=data.height#" name="viewport" />', {usedWithBlock: false}),
         systemMeta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +
                      '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ',
         viewportMeta = viewportTemplate({ height: "" }),
