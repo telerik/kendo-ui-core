@@ -15,7 +15,7 @@
         browser = kendo.support.browser,
         isIE8 = browser.msie && (parseInt(browser.version, 10) < 9 || (document.documentMode && document.documentMode < 9)),
         ns = ".kendoCalendar",
-        CLICK = "click" + ns,
+        CLICK = "touchend" + ns + " click" + ns,
         KEYDOWN_NS = "keydown" + ns,
         ID = "id",
         MIN = "min",
@@ -78,6 +78,7 @@
                     .on(KEYDOWN_NS, "table.k-content", proxy(that._move, that))
                     .on(CLICK, CELLSELECTOR, function(e) {
                         var link = e.currentTarget.firstChild;
+                        console.log(link);
 
                         if (link.href.indexOf("#") != -1) {
                             e.preventDefault();
