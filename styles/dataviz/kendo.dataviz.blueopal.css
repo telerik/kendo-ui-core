@@ -1,9 +1,5 @@
 /* BlueOpal Theme */
 
-.k-blueopal .k-mask {
-    background: rgba(255,255,255,.8);
-}
-
 .k-blueopal .k-selection {
     border-color: #94c0d2;
     box-shadow: inset 0 3px 10px rgba(148,192,210,.2);

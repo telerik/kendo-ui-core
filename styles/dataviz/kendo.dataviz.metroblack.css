@@ -1,7 +1,10 @@
 /* MetroBlack Theme */
 
 .k-metroblack .k-mask {
-    background: rgba(14,14,14,.6);
+    background-color: #0e0e0e;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.60;
+    opacity: 0.60;
 }
 
 .k-metroblack .k-selection {

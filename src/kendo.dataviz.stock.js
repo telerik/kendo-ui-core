@@ -157,13 +157,13 @@
                     to = lteDateIndex(groups, toDate(select.to));
                 }
 
-                var selection = chart._selection = new Selection(chart.element, axis, {
+                var selection = chart._selection = new Selection(chart, axis, {
                     from: from,
                     to: to,
                     min: min,
                     max: max,
                     select: $.proxy(navi._select, navi),
-                    selectEnd: $.proxy(navi._selectEnd, navi),
+                    selectEnd: $.proxy(navi._selectEnd, navi)
                 });
 
                 navi.hint = new NavigatorHint(chart.element, { min: groups[0], max: dataviz.last(groups) });
@@ -173,7 +173,9 @@
         _drag: function(e) {
             var navi = this,
                 chart = navi.chart,
+                coords = chart._eventCoordinates(e.originalEvent),
                 navigatorAxis = navi.mainAxis(),
+                inNavigator = navigatorAxis.pane.box.containsPoint(coords),
                 groups = navigatorAxis.options.categories,
                 axis = chart._plotArea.categoryAxis,
                 baseUnit = axis.options.baseUnit,
@@ -185,7 +187,7 @@
                 from,
                 to;
 
-            if (!range) {
+            if (!range || inNavigator) {
                 return;
             }
 
@@ -459,7 +461,10 @@
             series.push(
                 deepExtend({
                     color: seriesColors[i % seriesColors.length],
-                    visibleInLegend: false
+                    visibleInLegend: false,
+                    tooltip: {
+                        visible: false
+                    }
                 }, defaults, navigatorSeries[i], {
                     axis: NAVIGATOR_AXIS,
                     categoryAxis: NAVIGATOR_AXIS

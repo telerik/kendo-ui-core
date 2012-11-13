@@ -1,7 +1,10 @@
 /* Metro Theme */
 
 .k-metro .k-mask {
-    background: rgba(255,255,255,.7);
+    background-color: #fff;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.70;
+    opacity: 0.70;
 }
 
 .k-metro .k-selection {

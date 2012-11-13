@@ -1,7 +1,10 @@
 /* Default Theme */
 
 .k-default .k-mask {
-    background: rgba(255,255,255,.68);
+    background-color: #fff;
+    filter: alpha(opacity=68);
+    -moz-opacity: 0.68;
+    opacity: 0.68;
 }
 
 .k-default .k-selection {

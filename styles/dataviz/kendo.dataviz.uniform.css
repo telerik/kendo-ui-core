@@ -1,9 +1,5 @@
 /* Uniform Theme */
 
-.k-uniform .k-mask {
-    background: rgba(255,255,255,.8);
-}
-
 .k-uniform .k-selection {
     border-color: #cccccc;
     transition: box-shadow .2s linear, border-color .2s linear;

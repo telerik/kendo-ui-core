@@ -1,7 +1,10 @@
 /* HighContrast Theme */
 
 .k-highcontrast .k-mask {
-    background: rgba(44,35,43,.6);
+    background-color: #2c232b;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.60;
+    opacity: 0.60;
 }
 
 .k-highcontrast .k-selection {

@@ -1,7 +1,10 @@
 /* Black Theme */
 
 .k-black .k-mask {
-    background: rgba(61,61,61,.7);
+    background-color: #3d3d3d;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.70;
+    opacity: 0.70;
 }
 
 .k-black .k-selection {

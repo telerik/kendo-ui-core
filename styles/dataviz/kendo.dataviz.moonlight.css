@@ -1,7 +1,10 @@
 /* Moonlight Theme */
 
 .k-moonlight .k-mask {
-    background: rgba(33,42,51,.68);
+    background-color: #212a33;
+    filter: alpha(opacity=68);
+    -moz-opacity: 0.68;
+    opacity: 0.68;
 }
 
 .k-moonlight .k-selection {

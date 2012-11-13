@@ -59,6 +59,7 @@ div.k-gauge
     border-color: #d2d2d2;
     border-bottom: 0;
     height: 100%;
+    background-color: transparent;
     background-color: rgba(255, 255, 255, 0.01);
 }
 
@@ -78,6 +79,7 @@ div.k-gauge
     width: 100%;
     height: 100%;
     padding: 40px 20px 0 0;
+    background-color: transparent;
 }
 
 .k-leftHandle {
@@ -97,9 +99,12 @@ div.k-gauge
 }
 
 .k-mask {
-    background: rgba(255,255,255,.85);
     position: absolute;
     height: 100%;
+    background-color: #fff;
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.80;
+    opacity: 0.80;
 }
 
 .k-border {
@@ -122,8 +127,6 @@ div.k-gauge
 
 .k-navigator-hint .k-scroll {
     position: absolute;
-    
-    /*Skin Specific*/
     height: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;

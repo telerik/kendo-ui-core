@@ -1,7 +1,10 @@
 /* Silver Theme */
 
 .k-silver .k-mask {
-    background: rgba(234,234,236,.7);
+    background-color: #eaeaec;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.70;
+    opacity: 0.70;
 }
 
 .k-silver .k-selection {

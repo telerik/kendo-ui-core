@@ -6737,8 +6737,9 @@
     };
 
     var Selection = Observable.extend({
-        init: function(chartElement, categoryAxis, options) {
+        init: function(chart, categoryAxis, options) {
             var that = this,
+                chartElement = chart.element,
                 categoryAxisLineBox = categoryAxis.lineBox(),
                 valueAxis = that.getValueAxis(categoryAxis),
                 valueAxisLineBox = valueAxis.lineBox(),
@@ -6749,6 +6750,7 @@
 
             that.options = deepExtend({}, that.options, options);
             options = that.options;
+            that.chart = chart;
             that.chartElement = chartElement;
             that.categoryAxis = categoryAxis;
             that.valueAxis = valueAxis;
@@ -6805,6 +6807,7 @@
             that.move(options.from, options.to);
 
             that.bind(that.events, that.options);
+            that.wrapper[0].style.cssText = that.wrapper[0].style.cssText;
 
             if (kendo.UserEvents) {
                 that.userEvents = new kendo.UserEvents(that.wrapper, {
@@ -6838,7 +6841,7 @@
         _start: function(e) {
             var that = this,
                 options = that.options,
-                target = $(e.event.originalEvent.target);
+                target = $(e.event.target);
 
             if (that._state || !target) {
                 return;
@@ -6946,9 +6949,10 @@
         _tap: function(e) {
             var that = this,
                 options = that.options,
+                coords = that.chart._eventCoordinates(e.event),
                 categoryAxis = that.categoryAxis,
                 categoryIx = categoryAxis.getCategoryIndex(
-                    new dataviz.Point2D(e.x.location, categoryAxis.box.y1)
+                    new dataviz.Point2D(coords.x, categoryAxis.box.y1)
                 ),
                 span = options.to - options.from,
                 mid = options.from + span / 2,

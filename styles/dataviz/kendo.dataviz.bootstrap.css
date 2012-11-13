@@ -1,9 +1,5 @@
 /* Bootstrap Theme */
 
-.k-bootstrap .k-mask {
-    background: rgba(255,255,255,.8);
-}
-
 .k-bootstrap .k-selection {
     border-color: #b8b8b8;
     box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
