@@ -30,7 +30,7 @@
                         valueAxes: [{
                             // Default axis
                         }, {
-                            name: "volume",
+                            name: "volumeAxis",
                             pane: "volumePane",
                             visible: false
                         }],
@@ -41,9 +41,12 @@
                             lowField: "Low",
                             closeField: "Close"
                         }, {
-                            type: "bar",
+                            type: "column",
                             field: "Volume",
-                            axis: "volume"
+                            axis: "volumeAxis",
+                            tooltip: {
+                                format: "{0:C0}"
+                            }
                         }],
                         navigator: {
                             series: {
@@ -51,8 +54,8 @@
                                 field: "Close"
                             },
                             select: {
-                                from: "2012/02/05",
-                                to: "2012/10/07"
+                                from: "2009/02/05",
+                                to: "2011/10/07"
                             }
                         }
                     });
