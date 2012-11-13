@@ -901,7 +901,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
         originalToggle = kendo.mobile.ui.ListView.prototype._toggle;
 
         kendo.mobile.ui.ListView.prototype._toggle = function(e) {
-            if ((!dragging && e.type != "mousemove" && e.type != "touchmove") && e.type != kendo.support.mousecancel && e.type != "mouseleave") {
+            if ((!dragging && "mousemove touchmove".indexOf(e.type) == -1) && "mouseleave touchcancel".indexOf(e.type) == -1) {
                 if (e.type != kendo.support.mouseup) {
                     wasActive = $(e.currentTarget).closest("li").hasClass("km-state-active");
                     originalToggle(e);
@@ -917,7 +917,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
             wasActive = $(e.currentTarget).hasClass("km-state-active") || $(e.currentTarget).parent().hasClass("km-state-active");
         });
 
-        kendo.mobile.ui.Button.prototype._removeActive = function (e) {
+        kendo.mobile.ui.Button.prototype._deactivate = function (e) {
             if ((!dragging && e.type != kendo.support.mousemove) && e.type != kendo.support.mousecancel) {
                 if (e.type !== kendo.support.mouseup) {
                     wasActive = $(e.currentTarget).closest(".km-button,.km-detail").hasClass("km-state-active");
