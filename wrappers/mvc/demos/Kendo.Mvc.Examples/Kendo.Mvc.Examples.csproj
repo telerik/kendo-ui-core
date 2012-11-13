@@ -809,6 +809,7 @@
     <Content Include="Areas\razor\Views\web\treeview\custom_data.cshtml" />
     <Content Include="Areas\aspx\Views\web\treeview\custom_data.aspx" />
     <Content Include="Areas\razor\Views\dataviz\financial\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\timepicker\rtl.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
