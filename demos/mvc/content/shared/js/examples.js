@@ -526,7 +526,7 @@
 
                 this.setTheme(options.theme);
 
-                this.element.on("click", ".tc-link", $.proxy(function(e) {
+                this.element.on("up", ".tc-link", $.proxy(function(e) {
                     e.preventDefault();
 
                     var icon = $(e.target).closest(".tc-link").find(".k-icon"),
@@ -550,7 +550,7 @@
 
                 container = $("<ul class='tc-theme-container' />").prependTo(options.listContainer);
 
-                container.on("click", ".tc-link", function(e) {
+                container.on("up", ".tc-link", function(e) {
                     e.preventDefault();
 
                     var link = $(this), theme = link.attr("data-value");
