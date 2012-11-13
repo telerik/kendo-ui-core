@@ -9,6 +9,7 @@
        "colors": "",
        "cookiejar": "",
        "faye-websocket": "",
-       "less": ""
+       "less": "",
+       "jshint": ""
    }
 }

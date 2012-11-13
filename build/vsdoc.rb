@@ -137,8 +137,7 @@ def get_vsdoc(sources)
 
         name = root.title
 
-        plugin = name.sub('.ui', '').gsub(/\.(.)/) { |match| match.upcase }
-
+        plugin = name.gsub(/\.(ui|dataviz)/, '').gsub(/\.(.)/) { |match| match[1].upcase }
 
         the_class = VsDocClass.new(name,  plugin)
 
@@ -197,7 +196,7 @@ namespace :vsdoc do
 
                 File.open("dist/kendo.vsdoc-#{branch}.js", "w") do |f|
                     f.write get_vsdoc(VSDOC_SOURCES)
-                    sh "/usr/lib/node_modules/jshint/bin/hint #{f.path}"
+                    sh "node_modules/jshint/bin/hint #{f.path}"
                 end
             end
         end
