@@ -23,6 +23,12 @@ namespace Kendo.Mvc.UI
             SelectionSettings = new CalendarSelectionSettings();
         }
 
+        public string Culture
+        {
+            get;
+            set;
+        }
+
         public MonthTemplate MonthTemplate
         {
             get;
@@ -90,6 +96,11 @@ namespace Kendo.Mvc.UI
             var idPrefix = "#";
             if (IsInClientTemplate) {
                 idPrefix = "\\" + idPrefix;
+            }
+
+            if (Culture.HasValue())
+            {
+                options["culture"] = Culture;
             }
 
             if (Value.HasValue)

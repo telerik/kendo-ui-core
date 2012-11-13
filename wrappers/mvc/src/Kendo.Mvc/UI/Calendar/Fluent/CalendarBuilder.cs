@@ -20,6 +20,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies the culture info used by the NumericTextBox widget.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Calendar()
+        ///             .Name("calendar")
+        ///             .Culture("de-DE")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public CalendarBuilder Culture(string culture)
+        {
+            Component.Culture = culture;
+
+            return this;
+        }
+
+        /// <summary>
         /// Configures the client-side events.
         /// </summary>
         /// <param name="clientEventsAction">The client events action.</param>
