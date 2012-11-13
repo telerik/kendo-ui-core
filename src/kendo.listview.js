@@ -410,7 +410,7 @@
                         }
                     });
 
-                element.on("mousedown" + NS, FOCUSSELECTOR, proxy(clickCallback, that));
+                element.on("mousedown" + NS + " touchstart" + NS, FOCUSSELECTOR, proxy(clickCallback, that));
             }
        },
 
@@ -535,7 +535,7 @@
 
        _crudHandlers: function() {
            var that = this,
-               clickNS = CLICK + NS;
+               clickNS = "touchend" + NS + " " + CLICK + NS;
 
            that.element.on(clickNS, ".k-edit-button", function(e) {
                var item = $(this).closest("[" + kendo.attr("uid") + "]");
