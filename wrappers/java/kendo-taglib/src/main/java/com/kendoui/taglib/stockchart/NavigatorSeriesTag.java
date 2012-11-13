@@ -65,7 +65,7 @@ public class NavigatorSeriesTag extends BaseTag /* interfaces *//* interfaces */
         return "stockChart-navigator-series";
     }
 
-    public void addSeriesItem(SeriesItemTag value) {
+    public void addSeriesItem(NavigatorSeriesItemTag value) {
         series.add(value.properties());
     }
 

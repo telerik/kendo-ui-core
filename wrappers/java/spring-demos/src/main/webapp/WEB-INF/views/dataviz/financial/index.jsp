@@ -2,7 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/dataviz/area-charts/remote-data/read" var="readUrl" />
+<c:url value="/dataviz/financial/index/read" var="readUrl" />
 
 <demo:header />
 	<div id="example" class="k-content">
@@ -20,7 +20,7 @@
             	<kendo:stockChart-navigator-series>
             		<kendo:stockChart-navigator-seriesItem type="line" field="volume" />
             	</kendo:stockChart-navigator-series>
-            	<kendo:stockChart-navigator-select from="2012/02/05" to="2012/10/07" />
+            	
             </kendo:stockChart-navigator>
          </kendo:stockChart>
     </div>

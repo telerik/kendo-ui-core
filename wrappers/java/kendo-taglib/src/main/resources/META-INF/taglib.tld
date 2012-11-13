@@ -10481,7 +10481,7 @@ Includes</description>
     <tag>
         <description>Array of series definitions.</description>
         <name>stockChart-navigator-seriesItem</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -10613,7 +10613,7 @@ The function return value is displayed instead of the individual points.</descri
     <tag>
         <description>Configures the series data labels.</description>
         <name>stockChart-navigator-seriesItem-labels</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemLabelsTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -10686,7 +10686,7 @@ Template variables:</description>
     <tag>
         <description>The border of the labels.</description>
         <name>stockChart-navigator-seriesItem-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -10716,7 +10716,7 @@ Template variables:</description>
     <tag>
         <description>Configures the line markers.</description>
         <name>stockChart-navigator-seriesItem-markers</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemMarkersTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -10753,7 +10753,7 @@ Template variables:</description>
     <tag>
         <description>The data point tooltip configuration options.</description>
         <name>stockChart-navigator-seriesItem-tooltip</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTooltipTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemTooltipTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -10812,7 +10812,7 @@ Template variables:</description>
     <tag>
         <description>The line of the area chart.</description>
         <name>stockChart-navigator-seriesItem-line</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLineTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemLineTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -10842,7 +10842,7 @@ Template variables:</description>
     <tag>
         <description>The effects overlay.</description>
         <name>stockChart-navigator-seriesItem-overlay</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemOverlayTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemOverlayTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -10858,7 +10858,7 @@ Template variables:</description>
     <tag>
         <description>The border of the labels.</description>
         <name>stockChart-navigator-seriesItem-labels-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemLabelsBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -10888,7 +10888,7 @@ Template variables:</description>
     <tag>
         <description>The border of the markers.</description>
         <name>stockChart-navigator-seriesItem-markers-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemMarkersBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -10911,7 +10911,7 @@ Template variables:</description>
     <tag>
         <description>The border configuration options.</description>
         <name>stockChart-navigator-seriesItem-tooltip-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTooltipBorderTag</tag-class>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemTooltipBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
