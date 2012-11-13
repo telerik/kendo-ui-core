@@ -8,7 +8,9 @@
             "items": [
                 {
                     "text": "Overview",
-                    "url": "overview/index.html"
+                    "url": "overview/index.html",
+                    "title": "jQuery-powered mobile app framework demos | Kendo UI Mobile widgets demos",
+                    "meta": "Get instantly familiar with Kendo UI Mobile web framework and a suite of jQuery mobile widgets by exploring Kendo UI Mobile demos."
                 }
             ]
         },
@@ -20,7 +22,9 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "actionsheet/index.html"
+                    "url": "actionsheet/index.html",
+                    "title": "Kendo UI jQuery Mobile ActionSheet Demo",
+                    "meta": "This demo shows how Mobile ActionSheet component in Kendo UI Mobile framework works in your app in order to provide iOS-like experience."
                 }
             ]
         },
@@ -32,15 +36,21 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "button/index.html"
+                    "url": "button/index.html",
+                    "title": "Kendo UI jQuery Mobile Button Demo",
+                    "meta": "This example shows the core functionality of the flexible Kendo UI jQuery mobile button which would perfectly blend into any app and on any mobile device."
                 },
                 {
                     "text": "Events",
-                    "url": "button/events.html"
+                    "url": "button/events.html",
+                    "title": "Events in Kendo UI jQuery Mobile Button",
+                    "meta": "This sample demonstrates which events can be triggered in Kendo UI Mobile Button. The component has events enabled for your ease of use and flexibility."
                 },
                 {
                     "text": "Customizing Appearance",
-                    "url": "button/appearance.html"
+                    "url": "button/appearance.html",
+                    "title": "Example of Kendo UI Mobile Button Customization ",
+                    "meta": "This demo shows how you can easily customize the appearance and styling of Kendo UI Mobile Button to deliver rich experience for end users of the mobile app."
                 }
             ]
         },
@@ -52,15 +62,21 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "buttongroup/index.html"
+                    "url": "buttongroup/index.html",
+                    "title": "Example of Kendo UI jQuery Mobile Button Group",
+                    "meta": "This demo shows the core functionality of Kendo UI Mobile Button Group. When the horizontal group button is active, its corresponding items are visualized on the screen."
                 },
                 {
                     "text": "Events",
-                    "url": "buttongroup/events.html"
+                    "url": "buttongroup/events.html",
+                    "title": "Events in Kendo UI jQuery Mobile Button Group | Kendo ButtonGroup Demo",
+                    "meta": "This demo shows the events which can be bound to Kendo UI ButtonGroup widget."
                 },
                 {
                     "text": "Customizing Appearance",
-                    "url": "buttongroup/appearance.html"
+                    "url": "buttongroup/appearance.html",
+                    "title": "Kendo UI jQuery Mobile Button Group Theming",
+                    "meta": "This demo shows how you can customize the appearance of Kendo UI ButtonGroup mobile widget. You have full control over the style of the buttons group."
                 }
             ]
         },
@@ -72,39 +88,57 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "listview/index.html"
+                    "url": "listview/index.html",
+                    "title": "Kendo UI jQuery Mobile ListView Demo",
+                    "meta": "This demo illustrates the core functionality of Kendo UI jQuery List widget. It allows you to display flat or grouped list of items in your mobile application."
                 },
                 {
                     "text": "Detail Buttons",
-                    "url": "listview/detailbuttons.html"
+                    "url": "listview/detailbuttons.html",
+                    "title": "Detail buttons, nested in Kendo UI jQuery Mobile ListView example",
+                    "meta": "This demo illustrates how nested DetailButton widgets can be integrated in Kendo UI Mobile ListView control in order to enable your users to execute more than one action on a given row."
                 },
                 {
                     "text": "Data binding",
-                    "url": "listview/databinding.html"
+                    "url": "listview/databinding.html",
+                    "title": "Data Binding Demo for Kendo UI Mobile List View",
+                    "meta": "This example shows how Kendo UI Mobile ListView can be bound to remote data and local JS arrays by using Kendo UI DataSource component."
                 },
                 {
                     "text": "Pull to refresh",
-                    "url": "listview/pull-to-refresh.html"
+                    "url": "listview/pull-to-refresh.html",
+                    "title": "Kendo UI jQuery Mobile ListView Refresh Function Demo",
+                    "meta": "This demo shows how the refresh function in Kendo UI Mobile ListView actually works. Once the new elements are appended to the list, you simply invoke the function "pull to refresh"."
                 },
                 {
                     "text": "Endless scrolling",
-                    "url": "listview/endless-scrolling.html"
+                    "url": "listview/endless-scrolling.html",
+                    "title": "Infinite scrolling demo for Kendo UI Mobile ListView",
+                    "meta": "This example shows the endless scrolling functionality which Kendo UI Mobile ListView supports. It illustrates how more list items are automatically loaded and displayed on the screen."
                 },
                 {
                     "text": "Pull to refresh + Endless scrolling",
-                    "url": "listview/pull-with-endless.html"
+                    "url": "listview/pull-with-endless.html",
+                    "title": "Pull to refresh and endless scrolling demo | Kendo UI Mobile ListView widget",
+                    "meta": "This example shows how the pull to refresh function of Kendo UI Mobile ListView works out of the box with the endless scrolling feature."
                 },
                 {
                     "text": "Press to load more",
-                    "url": "listview/press-to-load-more.html"
+                    "url": "listview/press-to-load-more.html",
+                    "title": "Demo for Load More option in Kendo UI Mobile ListView",
+                    "meta": "This example demonstrates how the load more option in Kendo UI ListView can be implemented for applications in which the user needs to pull much data."
                 },
                 {
                     "text": "Fixed Headers",
-                    "url": "listview/fixedheaders.html"
+                    "url": "listview/fixedheaders.html",
+                    "title": "Fixed header option demo | Kendo UI Mobile ListView",
+                    "meta": "This demo shows how you can get a fixed header in Kendo UI Mobile ListView. It allows the native scrolling, but the header is always positioned on top."
                 },
                 {
                     "text": "Custom templates",
-                    "url": "listview/templates.html"
+                    "url": "listview/templates.html",
+                    "title": "Custom templates for group items | Kendo UI Mobile List View",
+                    "meta": "This demo shows how custom templates can be applied to Kendo UI ListView widget to override the appearance of the group items."
                 }
 
             ]
@@ -117,7 +151,9 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "modalview/index.html"
+                    "url": "modalview/index.html",
+                    "title": "Kendo UI jQuery Mobile ModalView Demo",
+                    "meta": "The demo shows how Kendo UI ModalView widget can be opened when any other mobile navigational widget is tapped."
                 }
             ]
         },
@@ -129,11 +165,15 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "navbar/index.html"
+                    "url": "navbar/index.html",
+                    "title": "Example of Kendo UI Mobile NavBar widget",
+                    "meta": "This demo illustrates the core functionality of Kendo UI Mobile NavBar component which provides buttons, displayed in the navigation bar of a mobile application."
                 },
                 {
                     "text": "Customizing appearance",
-                    "url": "navbar/appearance.html"
+                    "url": "navbar/appearance.html",
+                    "title": "Example of customizing Kendo UI Mobile NavBar appearance",
+                    "meta": "This demo shows how the background color of Kendo UI jQuery Mobile NavBar can be customized by setting the CSS properties of the background color."
                 }
             ]
         },
@@ -146,7 +186,9 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "popover/index.html"
+                    "url": "popover/index.html",
+                    "title": "Kendo UI jQuery Mobile Layout demo | Kendo UI PopOver widget demo",
+                    "meta": "This demo shows the core function of Kendo UI Popover which is a transient view, displayed when the user taps on a navigational jQuery mobile widget or area on the screen."
                 }
             ]
         },
@@ -158,11 +200,15 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "scroller/index.html"
+                    "url": "scroller/index.html",
+                    "title": "Content scrolling example | Kendo UI Mobile Scroller Demo",
+                    "meta": "This demo shows how Kendo UI Mobile Scroller widget enables the touch-friendly kinetic content scrolling."
                 },
                 {
                     "text": "Pull to refresh",
-                    "url": "scroller/pull-to-refresh.html"
+                    "url": "scroller/pull-to-refresh.html",
+                    "title": "Pull to Refresh function | Kendo UI Mobile Content Scrolling widget demo",
+                    "meta": "This example shows the option "Pull to Refresh" in Kendo UI Scroller. If the value is true, then the scroller will display a hint when user pulls the container beyond the top limit."
                 }
             ]
         },
@@ -174,7 +220,9 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "scrollview/index.html"
+                    "url": "scrollview/index.html",
+                    "title": "Kendo UI jQuery Mobile ScrollView Example",
+                    "meta": "This demo illustrates the intuitive scrolling on a touch device by using Kendo UI ScrollView widget in your HTML5 app."
                 }
             ]
         },
@@ -186,11 +234,15 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "switch/index.html"
+                    "url": "switch/index.html",
+                    "title": "Kendo UI Mobile Flip Switch Demo",
+                    "meta": "This demo shows how Kendo UI Switch widget is used on apps for binary on/off or true/false (yes/no) data input."
                 },
                 {
                     "text": "Events",
-                    "url": "switch/events.html"
+                    "url": "switch/events.html",
+                    "title": "Kendo UI Mobile Switch widget events examples",
+                    "meta": "This demo shows all events, enabled for Kendo UI Mobile Switch component. The events correlate to the value of the switch widget."
                 }
             ]
         },
@@ -202,11 +254,15 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "tabstrip/index.html"
+                    "url": "tabstrip/index.html",
+                    "title": "Kendo UI Mobile TabStrip Demo",
+                    "meta": "This sample demonstrates how Kendo UI Mobile TabStrip widget is used inside a mobile view to show an application-wide group of navigation buttons."
                 },
                 {
                     "text": "Customizing Appearance",
-                    "url": "tabstrip/appearance.html"
+                    "url": "tabstrip/appearance.html",
+                    "title": "Example of Kendo UI TabStrip Customized Appearance",
+                    "meta": "This demo shows how the application-wide group of navigation buttons in Kendo UI TabStrip can be easily customized by using custom icons."
                 }
             ]
         }
@@ -221,15 +277,21 @@
             "items": [
                 {
                     "text": "Overview",
-                    "url": "application/index.html"
+                    "url": "application/index.html",
+                    "title": "Example of a web-based mobile app, built with Kendo UI jQuery mobile framework",
+                    "meta": "This example shows how Kendo UI Mobile Application provides all tools for native-like web-based mobile app development."
                 },
                 {
                     "text": "Loading popup",
-                    "url": "application/loadingpopup.html"
+                    "url": "application/loadingpopup.html",
+                    "title": "Loading popup demo for Kendo UI Mobile Application",
+                    "meta": "This demo illustrates how the loading popup in Kendo UI Mobile application can be disabled/enabled, and how a popup effect can be added by using the respective values."
                 },
                 {
                     "text": "View transitions",
-                    "url": "application/transitions.html"
+                    "url": "application/transitions.html",
+                    "title": "View transitions demo for Kendo UI Mobile Application",
+                    "meta": "This example shows which transition needs to be applied when navigating in Kendo UI Mobile Application."
                 }
 
             ]
@@ -242,11 +304,15 @@
             "items": [
                 {
                     "text": "Overview",
-                    "url": "forms/index.html"
+                    "url": "forms/index.html",
+                    "title": "Kendo UI jQuery Mobile Forms Demo",
+                    "meta": "This demo shows which form elements, added to a mobile view, are supported and styled in Kendo UI Mobile framework."
                 },
                 {
                     "text": "Checks and Radios",
-                    "url": "forms/checkboxes.html"
+                    "url": "forms/checkboxes.html",
+                    "title": "Checkboxes example for Kendo UI Mobile Application",
+                    "meta": "This demo illustrates how checkboxes and radio buttons are enabled in Kendo UI Mobile Application."
                 }
             ]
         },
@@ -258,7 +324,9 @@
             "items": [
                 {
                     "text": "Touch Events",
-                    "url": "touch/index.html"
+                    "url": "touch/index.html",
+                    "title": "Kendo UI jQuery Mobile Touch Events Demo",
+                    "meta": "This example shows the touch events, enabled in Kendo UI mobile framework. Power your mobile application with Kendo UI jQuery mobile events such as touch, swipe, tap."
                 }
             ]
         },
@@ -270,11 +338,15 @@
             "items": [
                 {
                     "text": "Overview",
-                    "url": "view/index.html"
+                    "url": "view/index.html",
+                    "title": "Kendo UI Mobile View widget demo",
+                    "meta": "This example shows how Kendo UI Mobile View component is used to represent a screen in Kendo UI Mobile Application."
                 },
                 {
                     "text": "Zoomable View",
-                    "url": "view/zoomable.html"
+                    "url": "view/zoomable.html",
+                    "title": "Zoomable view in Kendo UI Mobile Framework",
+                    "meta": "This demo shows how the contents of the mobile view can be zoomed by simply using pinch/zoom gestures."
                 }
             ]
         },
@@ -287,11 +359,15 @@
             "items": [
                 {
                     "text": "Overview",
-                    "url": "splitview/index.html"
+                    "url": "splitview/index.html",
+                    "title": "Kendo UI jQuery Mobile SplitView component demo",
+                    "meta": "This example illustrates the core functionality of Kendo UI SplitView which is a tablet-specific view, consisting of two or more jQuery-based mobile pane widgets."
                 },
                 {
                     "text": "Customizing Appearance",
-                    "url": "splitview/appearance.html"
+                    "url": "splitview/appearance.html",
+                    "title": "Customizing the appearance of Kendo UI Mobile SplitView",
+                    "meta": "This demo shows how the appearance of Kendo UI SplitView widget can be easily customized."
                 }
             ]
         },
@@ -303,7 +379,9 @@
             "items": [
                 {
                     "text": "Overview",
-                    "url": "layout/index.html"
+                    "url": "layout/index.html",
+                    "title": "Kendo UI jQuery-based Mobile Layout Demo",
+                    "meta": "This sample shows how Kendo UI Mobile Layout is used to share headers and footers between multiple views on different mobile devices."
                 }
             ]
         }
