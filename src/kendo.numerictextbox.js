@@ -15,7 +15,7 @@
         TOUCHEND = "touchend",
         MOUSELEAVE = "mouseleave" + ns,
         MOUSEDOWN = "touchstart" + ns + " mousedown" + ns,
-        MOUSEUP = "touchcancel " + ns + " " + "touchend " + ns + " mouseup" + ns + " " + MOUSELEAVE,
+        MOUSEUP = "touchcancel" + ns + " " + "touchend" + ns + " mouseup" + ns + " " + MOUSELEAVE,
         HOVEREVENTS = "mouseenter" + ns + " " + MOUSELEAVE,
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
