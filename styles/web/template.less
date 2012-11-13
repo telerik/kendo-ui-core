@@ -159,6 +159,7 @@
 .k-grid-header-wrap,
 .k-grid-header,
 .k-grid td,
+.k-grid td.k-state-selected,
 .k-grid-footer-wrap,
 .k-pager-wrap,
 .k-pager-wrap .k-link,
@@ -426,7 +427,6 @@ textarea.k-textbox:hover,
 .k-state-focused,
 .k-grouping-row .k-state-focused
 {
-    color: @hover-text-color;
     background-color: @hover-background-color;
     border-color: @hover-border-color;
 }
@@ -692,7 +692,8 @@ div.k-imagebrowser-dropzone em
 
 .k-grid td.k-state-selected.k-state-focused
 {
-	.box-shadow(0 0 4px @selected-border-color);
+	.box-shadow(inset 0 0 6px darken(@selected-background-color, 30%));
+	background-color: lighten(@selected-background-color, 3%);
 }
 
 .k-popup,
