@@ -98,7 +98,7 @@
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
                 .on("up", ITEM_SELECTOR, "_click");
 
-            if (support.mobileOS.ios) {
+            if (support.touch) {
                 element.on("up", ".km-listview-label", toggleiOSLabel);
             }
 
