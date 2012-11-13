@@ -8,13 +8,13 @@
         removeFiltersForField = Select.removeFiltersForField,
         keys = kendo.keys,
         ns = ".kendoComboBox",
-        CLICK = (support.touch ? "touchend" : "click") + ns,
+        CLICK = "touchend" + ns + " click" + ns,
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         DEFAULT = "k-state-default",
         DISABLED = "k-state-disabled",
         FOCUSED = "k-state-focused",
-        MOUSEDOWN = "mousedown" + ns,
+        MOUSEDOWN = "mousedown" + ns + " touchstart" + ns,
         SELECT = "select",
         ARIA_DISABLED = "aria-disabled",
         STATE_SELECTED = "k-state-selected",
@@ -731,4 +731,4 @@
     });
 
     ui.plugin(ComboBox);
-})(jQuery);
+})(window.kendo.jQuery);

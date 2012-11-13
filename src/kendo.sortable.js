@@ -119,4 +119,4 @@
     });
 
     kendo.ui.plugin(Sortable);
-})(jQuery);
+})(window.kendo.jQuery);

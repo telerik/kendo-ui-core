@@ -3,11 +3,9 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
-        touch = kendo.support.touch,
         htmlEncode = kendo.htmlEncode,
         ID = "id",
         LI = "li",
-        CLICK = touch ? "touchend" : "click",
         CHANGE = "change",
         CHARACTER = "character",
         FOCUSED = "k-state-focused",
@@ -38,10 +36,10 @@
             that._template();
 
             that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
-                        .css({ overflow: kendo.support.touch ? "": "auto" })
+                        .css({ overflow: kendo.support.kineticScrollNeeded ? "": "auto" })
                         .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); })
-                        .on(CLICK + ns, LI, proxy(that._click, that))
+                        .on("touchend" + ns + " click" + ns, LI, proxy(that._click, that))
                         .attr({
                             tabIndex: -1,
                             role: "listbox",
@@ -314,16 +312,14 @@
         },
 
         _toggleHover: function(e) {
-            if (!touch) {
-                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
-            }
+            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
         _toggle: function(open) {
             var that = this;
             open = open !== undefined? open : !that.popup.visible();
 
-            if (!touch && that._focused[0] !== document.activeElement) {
+            if (!kendo.support.mobileOS && that._focused[0] !== document.activeElement) {
                 that._focused.focus();
             }
 
@@ -824,4 +820,4 @@
 
     ui.Select.removeFiltersForField = removeFiltersForField;
 
-})(jQuery);
+})(window.kendo.jQuery);

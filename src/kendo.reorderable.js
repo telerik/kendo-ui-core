@@ -117,4 +117,4 @@
 
     kendo.ui.plugin(Reorderable);
 
-})(jQuery);
+})(window.kendo.jQuery);

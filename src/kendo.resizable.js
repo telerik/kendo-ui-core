@@ -174,4 +174,4 @@
 
     kendo.ui.plugin(Resizable);
 
-})(jQuery);
+})(window.kendo.jQuery);

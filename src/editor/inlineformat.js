@@ -516,4 +516,4 @@ registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFami
 
 registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", defaultValue: [{ text: "fontSizeInherit",  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);

@@ -149,4 +149,4 @@
     });
 
     kendo.history = new History();
-})(jQuery);
+})(window.kendo.jQuery);

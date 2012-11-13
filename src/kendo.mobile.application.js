@@ -80,7 +80,7 @@
 
                 that._startHistory();
 
-                if (support.touch) {
+                if (support.kineticScrollNeeded) {
                     $(document.documentElement).on("touchmove", false);
                 }
             });
@@ -256,4 +256,4 @@
     });
 
     kendo.mobile.Application = Application;
-})(jQuery);
+})(window.kendo.jQuery);

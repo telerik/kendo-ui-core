@@ -1472,4 +1472,4 @@
     fx.Transition = Transition;
     fx.createEffect = createEffect;
     fx.Effects = Effects;
-})(jQuery);
+})(window.kendo.jQuery);

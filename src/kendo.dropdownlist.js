@@ -152,7 +152,7 @@
                     .on(HOVEREVENTS, that._toggleHover);
 
                 wrapper
-                    .on("click" + ns, function(e) {
+                    .on("touchend" + ns + " click" + ns, function(e) {
                             that._blured = false;
                             e.preventDefault();
                             that.toggle();
@@ -521,4 +521,4 @@
     }
 
     ui.plugin(DropDownList);
-})(jQuery);
+})(window.kendo.jQuery);

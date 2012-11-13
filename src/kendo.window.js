@@ -729,7 +729,7 @@
                     refreshIcon.addClass(LOADING);
                 }, 100);
 
-            $.ajax(extend({
+            jQuery.ajax(extend({
                 type: "GET",
                 dataType: "html",
                 cache: false,
@@ -1055,4 +1055,4 @@
 
     kendo.ui.plugin(Window);
 
-})(jQuery);
+})(window.kendo.jQuery);

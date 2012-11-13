@@ -16,7 +16,7 @@
                .find("a").each(that._buildButton)
                .eq(that.options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
 
-            that.eventProxy.on("down", "a", "_release");
+            that.element.on("down", "a", "_release");
         },
 
         events: [
@@ -101,4 +101,4 @@
     });
 
     ui.plugin(TabStrip);
-})(jQuery);
+})(window.kendo.jQuery);

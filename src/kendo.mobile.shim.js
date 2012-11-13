@@ -1,4 +1,3 @@
-
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
@@ -13,16 +12,15 @@
                 align = options.align || (ios ?  "bottom center" : "center center"),
                 position = options.position || (ios ? "bottom center" : "center center"),
                 effect = options.effect || (ios ? "slideIn:up" : "fade:in"),
-                shim = $(SHIM).hide();
+                shim = $(SHIM).handler(that).hide();
 
             Widget.fn.init.call(that, element, options);
 
             that.shim = shim;
             that.element = element;
-            that.shimProxy = new kendo.EventProxy(shim, that);
 
             if (!that.options.modal) {
-                that.shimProxy.on("up", "hide");
+                that.shim.on("up", "hide");
             }
 
             kendo.mobile.application.element.append(shim);
@@ -71,10 +69,10 @@
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-            this.shimProxy.off();
+            this.shim.kendoDestroy();
             this.popup.destroy();
         }
     });
 
     ui.plugin(Shim);
-})(jQuery);
+})(window.kendo.jQuery);

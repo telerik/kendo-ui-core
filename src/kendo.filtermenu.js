@@ -424,4 +424,4 @@
     });
 
     ui.plugin(FilterMenu);
-})(jQuery);
+})(window.kendo.jQuery);

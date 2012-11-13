@@ -364,4 +364,4 @@
     });
 
     ui.plugin(Pager);
-})(jQuery);
+})(window.kendo.jQuery);

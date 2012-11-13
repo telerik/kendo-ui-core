@@ -329,4 +329,4 @@
 
     kendo.ui.plugin(Selectable);
 
-})(jQuery);
+})(window.kendo.jQuery);

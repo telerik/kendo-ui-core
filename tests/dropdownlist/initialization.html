@@ -658,12 +658,13 @@
             });
 
             test("dropdownlist initializes a touch scroller when in mobile", function() {
-                kendo.support.touch = true;
+                kendo.support.kineticScrollNeeded = true;
                 kendo.support.mobileOS = kendo.support.detectOS("iPhone OS 4_3");
 
                 var dropdownlist = new DropDownList($("<input/>"));
 
                 ok(dropdownlist.popup.element.hasClass("km-scroll-wrapper"));
+                kendo.support.kineticScrollNeeded = false;
             });
 
             test("dropdownlist can be initialized in hidden container", function() {
@@ -673,7 +674,7 @@
                 div.show();
                 dropdown.popup.open();
 
-                equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width());
+                equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width(), 2);
             });
 
             test("DropDownList does not set width if list has style.width", function() {

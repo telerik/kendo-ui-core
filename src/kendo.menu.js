@@ -1040,4 +1040,4 @@
 
     kendo.ui.plugin(Menu);
 
-})(jQuery);
+})(window.kendo.jQuery);

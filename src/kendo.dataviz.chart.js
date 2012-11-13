@@ -7741,4 +7741,4 @@
         toTime: toTime
     });
 
-})(jQuery);
+})(window.kendo.jQuery);

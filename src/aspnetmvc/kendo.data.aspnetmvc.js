@@ -295,4 +295,4 @@
             })
         }
     });
-})(jQuery);
+})(window.kendo.jQuery);

@@ -59,4 +59,4 @@
     });
 
     ui.plugin(NavBar);
-})(jQuery);
+})(window.kendo.jQuery);

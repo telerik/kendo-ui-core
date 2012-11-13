@@ -117,4 +117,4 @@ extend(Editor, {
     PendingFormats: PendingFormats
 });
 
-})(jQuery);
+})(window.kendo.jQuery);

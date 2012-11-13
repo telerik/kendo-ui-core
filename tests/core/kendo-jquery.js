@@ -1,21 +1,33 @@
-var EventProxy = kendo.EventProxy;
+var $$ = kendo.jQuery;
 
-module("Event Proxy");
+kendo.support.touch = true;
+
+module("kendo jQuery");
 
 test("Executes listener event handler", 1, function() {
-    var div = $("<div />"),
-        proxy = new EventProxy(div, { _click: function() { ok(true) } });
+    var div = $$("<div />").handler({ _click: function() { ok(true) } });
 
-    proxy.on("click", "_click");
+    div.on("click", "_click");
 
     div.trigger("click");
 })
 
-test("Recognizes event aliases", 2, function() {
-    var div = $("<div />"),
-        proxy = new EventProxy(div, { _up: function() { ok(true) } });
+test("Unbinds all listeners", 1, function() {
+    var div = $$("<div />").handler({ _click: function() { ok(true) } });
 
-    proxy.on("up", "_up");
+    div.autoApplyNS();
+    div.on("click", "_click");
+
+    div.trigger("click");
+    div.kendoDestroy();
+    div.trigger("click");
+})
+
+
+test("Recognizes event aliases", 2, function() {
+    var div = $$("<div />").handler({ _up: function() { ok(true) } });
+
+    div.on("up", "_up");
 
     div.trigger("mouseup");
     div.trigger("touchend");
@@ -30,16 +42,15 @@ function dispatchRealEvent(element, eventType) {
 }
 
 test("Skips syntetic mouse events", 3, function() {
-    var div = $("<div />").appendTo(document.body),
-        proxy = new EventProxy(div, {
+    var div = $$("<div />").appendTo(document.body).handler({
             _down: function() { ok(true) },
             _move: function() { ok(true) },
             _up: function() { ok(true) }
         });
 
-    proxy.on("up", "_up");
-    proxy.on("move", "_move");
-    proxy.on("down", "_down");
+    div.on("up", "_up");
+    div.on("move", "_move");
+    div.on("down", "_down");
 
     div.trigger("touchstart");
     div.trigger("touchmove");
@@ -50,12 +61,9 @@ test("Skips syntetic mouse events", 3, function() {
 })
 
 asyncTest("Registers real mouse events", 2, function() {
-    var div = $("<div />"),
-        proxy = new EventProxy(div, {
-            _down: function() { ok(true) }
-        });
+    var div = $$("<div />").handler({ _down: function() { ok(true) } });
 
-    proxy.on("down", "_down");
+    div.on("down", "_down");
 
     div.trigger("touchstart");
     div.trigger("touchmove");
@@ -63,8 +71,8 @@ asyncTest("Registers real mouse events", 2, function() {
 
     setTimeout(function() {
         start();
-    dispatchRealEvent(div, "mousedown");
-    dispatchRealEvent(div, "mousemove");
-    dispatchRealEvent(div, "mouseup");
+        dispatchRealEvent(div, "mousedown");
+        dispatchRealEvent(div, "mousemove");
+        dispatchRealEvent(div, "mouseup");
     }, 500);
 })

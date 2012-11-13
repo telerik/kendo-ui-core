@@ -269,4 +269,4 @@
    });
 
    ui.plugin(Editable);
-})(jQuery);
+})(window.kendo.jQuery);

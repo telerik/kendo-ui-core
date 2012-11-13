@@ -1020,4 +1020,4 @@
 
     kendo.ui.plugin(PanelBar);
 
-})(jQuery);
+})(window.kendo.jQuery);

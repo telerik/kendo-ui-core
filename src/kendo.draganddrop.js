@@ -1,7 +1,6 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
-        pointers = support.pointers,
         document = window.document,
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
@@ -17,8 +16,6 @@
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
         mobileChrome = (invalidZeroEvents && OS.browser == "chrome"),
-        START_EVENTS = "mousedown",
-        END_EVENTS = "mouseup mouseleave",
         KEYUP = "keyup",
         CHANGE = "change",
 
@@ -32,16 +29,6 @@
         DRAGENTER = "dragenter",
         DRAGLEAVE = "dragleave",
         DROP = "drop";
-
-    if (support.touch) {
-        START_EVENTS = "touchstart";
-        END_EVENTS = "touchend touchcancel";
-    }
-
-    if(pointers) {
-        START_EVENTS = "MSPointerDown";
-        END_EVENTS = "MSPointerUp MSPointerCancel";
-    }
 
     function contains(parent, child) {
         try {
@@ -112,8 +99,10 @@
                 domElement = element[0];
 
             that.capture = false;
-            domElement.addEventListener(START_EVENTS, proxy(that._press, that), true);
-            $.each(END_EVENTS.split(" "), function() {
+            $.each(kendo.eventMap.down.split(" "), function() {
+                domElement.addEventListener(this, proxy(that._press, that), true);
+            });
+            $.each(kendo.eventMap.up.split(" "), function() {
                 domElement.addEventListener(this, proxy(that._release, that), true);
             });
 
@@ -791,4 +780,4 @@
         Movable: Movable
     });
 
- })(jQuery);
+ })(window.kendo.jQuery);

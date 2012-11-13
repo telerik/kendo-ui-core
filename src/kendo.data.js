@@ -3109,4 +3109,4 @@
         DataReader: DataReader,
         Model: Model
     });
-})(jQuery);
+})(window.kendo.jQuery);

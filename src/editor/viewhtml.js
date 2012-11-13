@@ -84,4 +84,4 @@ kendo.ui.editor.ViewHtmlCommand = ViewHtmlCommand;
 
 Editor.EditorUtils.registerTool("viewHtml", new Tool({ command: ViewHtmlCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "View HTML"})}));
 
-})(jQuery);
+})(window.kendo.jQuery);

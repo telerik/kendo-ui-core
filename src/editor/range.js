@@ -1036,4 +1036,4 @@ extend(Editor, {
     RangeUtils: RangeUtils
 });
 
-})(jQuery);
+})(window.kendo.jQuery);

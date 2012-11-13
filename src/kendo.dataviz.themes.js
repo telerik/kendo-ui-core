@@ -349,7 +349,7 @@
             }
         }
     });
-    
+
     registerTheme("highcontrast", {
         chart: {
             title: {
@@ -720,7 +720,7 @@
             }
         }
     });
-    
+
     registerTheme("metroblack", {
         chart: {
             title: {
@@ -1196,5 +1196,5 @@
         }
     });
 
-})(jQuery);
+})(window.kendo.jQuery);
 

@@ -6,4 +6,4 @@
         // TODO: add custom treeview checkbox templates
     }
 
-})(jQuery);
+})(window.kendo.jQuery);

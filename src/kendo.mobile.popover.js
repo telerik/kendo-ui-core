@@ -199,4 +199,4 @@
 
     ui.plugin(Popup);
     ui.plugin(PopOver);
-})(jQuery);
+})(window.kendo.jQuery);

@@ -108,7 +108,7 @@
                                 .parent()
                                 .bind("DOMMouseScroll" + NS + " mousewheel" + NS, proxy(that._wheelScroll, that));
 
-            if (kendo.support.touch) {
+            if (kendo.support.kineticScrollNeeded) {
                 that.drag = new kendo.UserEvents(that.wrapper, {
                     global: true,
                     move: function(e) {
@@ -229,7 +229,7 @@
                 maxHeight = 250000,
                 dataSource = that.dataSource,
                 rangeStart = that._rangeStart,
-                scrollbar = !kendo.support.touch ? kendo.support.scrollbar() : 0,
+                scrollbar = !kendo.support.kineticScrollNeeded ? kendo.support.scrollbar() : 0,
                 wrapperElement = that.wrapper[0],
                 totalHeight,
                 idx,
@@ -1991,7 +1991,7 @@
                 options = that.options,
                 scrollable = options.scrollable,
                 hasVirtualScroll = scrollable !== true && scrollable.virtual && !that.virtualScrollable,
-                scrollbar = !kendo.support.touch || hasVirtualScroll ? kendo.support.scrollbar() : 0;
+                scrollbar = !kendo.support.kineticScrollNeeded || hasVirtualScroll ? kendo.support.scrollbar() : 0;
 
             if (scrollable) {
                 header = that.wrapper.children(".k-grid-header");
@@ -2270,7 +2270,7 @@
         _wrapFooter: function(footerRow) {
             var that = this,
                 html = "",
-                scrollbar = !kendo.support.touch ? kendo.support.scrollbar() : 0;
+                scrollbar = !kendo.support.mobileOS ? kendo.support.scrollbar() : 0;
 
             if (that.options.scrollable) {
                 html = $('<div class="k-grid-footer"><div class="k-grid-footer-wrap"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div></div>');
@@ -3353,4 +3353,4 @@
 
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);
-})(jQuery);
+})(window.kendo.jQuery);

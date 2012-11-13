@@ -424,4 +424,4 @@
     });
 
     ui.plugin(Scroller);
-})(jQuery);
+})(window.kendo.jQuery);

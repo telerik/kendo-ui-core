@@ -1347,7 +1347,7 @@
                 }
             }
 
-            if (nodeData instanceof $ || isDomElement(nodeData)) {
+            if (nodeData instanceof window.jQuery || isDomElement(nodeData)) {
                 // move node within or between treeviews
                 nodeData = $(nodeData);
                 srcDataSource = srcTreeView.dataSource;
@@ -1706,4 +1706,4 @@
     };
 
     ui.plugin(TreeView);
-})(jQuery);
+})(window.kendo.jQuery);

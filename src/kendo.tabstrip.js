@@ -165,7 +165,7 @@
 
             that.wrapper
                 .on(CLICK + NS, DISABLEDLINKS, false)
-                .on(CLICK + NS, CLICKABLEITEMS, function(e) {
+                .on("touchend" + NS + " click" + NS, CLICKABLEITEMS, function(e) {
                     if (that._click($(e.currentTarget))) {
                         e.preventDefault();
                     }
@@ -707,7 +707,7 @@
 
             that.contentElements = that.contentAnimators = that.wrapper.children("div"); // refresh the contents
 
-            if (kendo.support.touch && kendo.mobile.ui.Scroller) {
+            if (kendo.kineticScrollNeeded && kendo.mobile.ui.Scroller) {
                 kendo.touchScroller(that.contentElements);
                 that.contentElements = that.contentElements.children(".km-scroll-container");
             }
@@ -905,7 +905,7 @@
                 return undefined;
             }
 
-            var contentElements = this.contentElements && this.contentElements[0] && !kendo.support.touch ? this.contentElements : this.contentAnimators,
+            var contentElements = this.contentElements && this.contentElements[0] && !kendo.kineticScrollNeeded ? this.contentElements : this.contentAnimators,
                 idTest = new RegExp("-" + (itemIndex + 1) + "$");
 
             if (contentElements) {
@@ -993,4 +993,4 @@
 
     kendo.ui.plugin(TabStrip);
 
-})(jQuery);
+})(window.kendo.jQuery);

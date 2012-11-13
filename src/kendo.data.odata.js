@@ -203,4 +203,4 @@
             }
         }
     });
-})(jQuery);
+})(window.kendo.jQuery);

@@ -1011,4 +1011,4 @@
         }
     });
 
-})(jQuery);
+})(window.kendo.jQuery);

@@ -68,4 +68,4 @@
     });
 
     ui.plugin(SplitView);
-})(jQuery);
+})(window.kendo.jQuery);

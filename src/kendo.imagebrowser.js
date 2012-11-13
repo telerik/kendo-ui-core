@@ -1140,4 +1140,4 @@
     kendo.ui.plugin(ImageBrowser);
     kendo.ui.plugin(Breadcrumbs);
     kendo.ui.plugin(SearchBox);
-})(jQuery);
+})(window.kendo.jQuery);

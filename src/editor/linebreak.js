@@ -185,4 +185,4 @@ extend(Editor, {
 registerTool("insertLineBreak", new Tool({ key: 13, shift: true, command: NewLineCommand }));
 registerTool("insertParagraph", new Tool({ key: 13, command: ParagraphCommand }));
 
-})(jQuery);
+})(window.kendo.jQuery);

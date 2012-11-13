@@ -23,9 +23,7 @@
             element
                 .addClass("km-actionsheet")
                 .append(cancelTemplate({cancel: that.options.cancel}))
-                .wrap(WRAP);
-
-            that.eventProxy
+                .wrap(WRAP)
                 .on("up", BUTTONS, "_click")
                 .on("click", BUTTONS, kendo.preventDefault);
 
@@ -100,4 +98,4 @@
     });
 
     ui.plugin(ActionSheet);
-})(jQuery);
+})(window.kendo.jQuery);

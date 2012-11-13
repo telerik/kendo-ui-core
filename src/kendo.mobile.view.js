@@ -576,4 +576,4 @@
 
     ui.plugin(View);
     ui.plugin(Layout);
-})(jQuery);
+})(window.kendo.jQuery);

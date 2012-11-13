@@ -1,6 +1,5 @@
 (function ($, undefined) {
     var kendo = window.kendo,
-        EventProxy = kendo.EventProxy,
         support = kendo.support,
         pointers = support.pointers,
         document = window.document,
@@ -258,9 +257,7 @@
     var UserEvents = Observable.extend({
         init: function(element, options) {
             var that = this,
-                filter,
-                surfaceProxy,
-                elementProxy;
+                filter;
 
             options = options || {};
             filter = that.filter = options.filter;
@@ -268,7 +265,7 @@
             that.touches = [];
             that._maxTouches = options.multiTouch ? 2 : 1;
 
-            element = $(element);
+            element = $(element).handler(that);
             Observable.fn.init.call(that);
 
             extend(that, {
@@ -278,28 +275,26 @@
                 pressed: false
             });
 
-            that.surfaceProxy = surfaceProxy = new EventProxy(that.surface, that);
-            surfaceProxy.on("move", "_move");
-            surfaceProxy.on("up cancel", "_end");
+            that.surface.handler(that)
+                .on("move", "_move")
+                .on("up cancel", "_end");
 
-            that.elementProxy = elementProxy = new EventProxy(element, that);
-
-            elementProxy.on("down", filter, "_start");
+            element.on("down", filter, "_start");
 
             if (pointers) {
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
             }
 
             if (options.preventDragEvent) {
-                elementProxy.on("dragstart", kendo.preventDefault);
+                element.on("dragstart", kendo.preventDefault);
             }
 
             if (!options.allowSelection) {
-                elementProxy.on("mousedown selectstart", filter, preventTrigger);
+                element.on("mousedown selectstart", filter, preventTrigger);
             }
 
             if (support.eventCapture) {
-                var downEvents = EventProxy.eventMap.up.split(" "),
+                var downEvents = kendo.eventMap.up.split(" "),
                     idx = 0,
                     length = downEvents.length,
                     surfaceElement = that.surface[0],
@@ -328,8 +323,8 @@
         },
 
         destroy: function() {
-            this.elementProxy.off();
-            this.surfaceProxy.off();
+            this.element.kendoDestroy();
+            this.surface.kendoDestroy();
             this._disposeAll();
         },
 
@@ -498,4 +493,4 @@
     kendo.getTouches = getTouches;
     kendo.touchDelta = touchDelta;
     kendo.UserEvents = UserEvents;
- })(jQuery);
+ })(window.kendo.jQuery);

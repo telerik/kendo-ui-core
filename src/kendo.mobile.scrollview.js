@@ -205,4 +205,4 @@
     });
 
     ui.plugin(ScrollView);
-})(jQuery);
+})(window.kendo.jQuery);
