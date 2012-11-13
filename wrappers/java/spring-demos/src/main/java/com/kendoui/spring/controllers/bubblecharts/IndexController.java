@@ -12,7 +12,7 @@ import com.kendoui.spring.models.BubblePoint;
 
 @Controller("dataviz-bubble_charts-home-controller")
 @RequestMapping(value="/dataviz/bubble-charts/")
-public class HomeController {
+public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
         List<BubblePoint> bubbleData = new ArrayList<BubblePoint>();

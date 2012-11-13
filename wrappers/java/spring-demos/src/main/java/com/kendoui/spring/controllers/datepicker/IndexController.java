@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("datepicker-home-controller")
 @RequestMapping(value="/web/datepicker/")
-public class HomeController {
+public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {

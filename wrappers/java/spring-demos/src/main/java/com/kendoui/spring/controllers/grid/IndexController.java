@@ -15,7 +15,7 @@ import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-home-controller")
 @RequestMapping(value="/web/grid/")
-public class HomeController {
+public class IndexController {
     @Autowired 
     private ProductDao product;
     

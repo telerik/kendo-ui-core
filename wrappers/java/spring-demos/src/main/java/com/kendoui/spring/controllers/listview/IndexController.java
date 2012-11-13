@@ -12,7 +12,7 @@ import com.kendoui.spring.models.ProductDao;
 
 @Controller("listview-home-controller")
 @RequestMapping(value="/web/listview/")
-public class HomeController {
+public class IndexController {
     @Autowired 
     private ProductDao product;
     

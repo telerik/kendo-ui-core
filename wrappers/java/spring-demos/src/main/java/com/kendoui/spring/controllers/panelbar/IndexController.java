@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("panelbar-home-controller")
 @RequestMapping(value="/web/panelbar/")
-public class HomeController {
+public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {       

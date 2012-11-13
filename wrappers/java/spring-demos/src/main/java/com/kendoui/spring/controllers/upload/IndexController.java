@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller("upload-home-controller")
 @RequestMapping(value="/web/upload/")
-public class HomeController {
+public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {

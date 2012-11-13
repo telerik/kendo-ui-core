@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-line_charts-home-controller")
 @RequestMapping(value="/dataviz/line-charts/")
-public class HomeController {
+public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
         return "/dataviz/line-charts/index";

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-api-home-controller")
 @RequestMapping(value="/dataviz/api/")
-public class HomeController {
+public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {       
         return "/dataviz/api/index";

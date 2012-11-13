@@ -12,7 +12,7 @@ import com.kendoui.spring.models.PiePoint;
 
 @Controller("dataviz-pie_charts-home-controller")
 @RequestMapping(value="/dataviz/pie-charts/")
-public class HomeController {
+public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
         List<PiePoint> pieChartData = new ArrayList<PiePoint>();
