@@ -6875,6 +6875,10 @@
                 scale = that.wrapper.width() / fullSpan,
                 offset = math.round(delta / scale);
 
+            if (!target) {
+                return;
+            }
+
             e.preventDefault();
 
             if (target.is(".k-selection")) {
