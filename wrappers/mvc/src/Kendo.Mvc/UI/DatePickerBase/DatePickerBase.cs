@@ -1,9 +1,12 @@
 namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
+
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using System.Globalization;
 
     public class DatePickerBase : WidgetBase, IPicker
     {
@@ -28,6 +31,24 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
+        }
+
+        public CultureInfo CultureInfo
+        {
+            get
+            {
+                CultureInfo info = null;
+                if (Culture.HasValue())
+                {
+                    info = new CultureInfo(Culture);
+                }
+                else
+                {
+                    info = CultureInfo.CurrentCulture;
+                }
+
+                return info;
+            }
         }
 
         public string Format

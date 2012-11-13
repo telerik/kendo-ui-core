@@ -1,16 +1,15 @@
 namespace Kendo.Mvc.UI
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using System.Web.Mvc;
-    using System.Web.UI;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Html;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Web.Mvc;
+    using System.Web.UI;
 
     public class DatePicker : DatePickerBase
     {
@@ -20,8 +19,6 @@ namespace Kendo.Mvc.UI
         public DatePicker(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
             : base(viewContext, initializer, viewData)
         {
-            Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
-
             Min = defaultMinDate;
             Max = defaultMaxDate;
             MonthTemplate = new MonthTemplate();
@@ -124,6 +121,10 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
+            if (string.IsNullOrEmpty(Format))
+            {
+                Format = CultureInfo.DateTimeFormat.ShortDatePattern;
+            }
 
             DatePickerHtmlBuilderBase renderer = new DatePickerHtmlBuilderBase(this, "date");
 

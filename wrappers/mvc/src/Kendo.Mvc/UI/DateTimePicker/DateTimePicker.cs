@@ -19,9 +19,6 @@ namespace Kendo.Mvc.UI
         public DateTimePicker(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
             : base(viewContext, initializer, viewData)
         {
-            DateTimeFormatInfo dateTimeFormats = CultureInfo.CurrentCulture.DateTimeFormat;
-            Format = dateTimeFormats.ShortDatePattern + " " + dateTimeFormats.ShortTimePattern;
-
             Min = defaultMinDate;
             Max = defaultMaxDate;
 
@@ -159,6 +156,11 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
+            if (string.IsNullOrEmpty(Format))
+            {
+                DateTimeFormatInfo dateTimeFormats = CultureInfo.DateTimeFormat;
+                Format = dateTimeFormats.ShortDatePattern + " " + dateTimeFormats.ShortTimePattern;
+            }
 
             DatePickerHtmlBuilderBase renderer = new DatePickerHtmlBuilderBase(this, "datetime");
 

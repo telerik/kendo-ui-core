@@ -1,22 +1,18 @@
 namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc.UI.Html;
     using Kendo.Mvc.Infrastructure;
-
+    using Kendo.Mvc.UI.Html;
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Globalization;
-    using System.Collections.Generic;
 
     public class TimePicker : DatePickerBase
     {
         public TimePicker(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
             : base(viewContext, initializer, viewData)
         {
-            Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern;
-
             Min = DateTime.Today;
             Max = DateTime.Today;
 
@@ -79,6 +75,11 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
+            if (string.IsNullOrEmpty(Format))
+            {
+                Format = CultureInfo.DateTimeFormat.ShortTimePattern;
+            }
+
             DatePickerHtmlBuilderBase renderer = new DatePickerHtmlBuilderBase(this, "time");
 
             renderer.Build().WriteTo(writer);

@@ -31,8 +31,9 @@ namespace Kendo.Mvc.UI.Html
         {
             Func<object, DateTime?> converter = val => 
             {
-                DateTime parsedDate;
-                if (DateTime.TryParse(val.ToString(), CultureInfo.CurrentCulture.DateTimeFormat, System.Globalization.DateTimeStyles.None, out parsedDate))
+                DateTime parsedDate;            
+
+                if (DateTime.TryParse(val.ToString(), Component.CultureInfo.DateTimeFormat, System.Globalization.DateTimeStyles.None, out parsedDate))
                 {
                     return parsedDate.AsNullable();
                 }
@@ -47,7 +48,7 @@ namespace Kendo.Mvc.UI.Html
 
                 if (date != null)
                 {
-                    value = date.Value.ToString(Component.Format);
+                    value = date.Value.ToString(Component.Format, Component.CultureInfo);
                 }
             }
 
