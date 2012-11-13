@@ -683,9 +683,15 @@
                 tooltip = chart._tooltip,
                 highlight = chart._highlight;
 
-            delete chart._activePoint;
-            tooltip.hide();
-            highlight.hide();
+            chart._activePoint = null;
+
+            if (tooltip) {
+                tooltip.hide();
+            }
+
+            if (highlight) {
+                highlight.hide();
+            }
         },
 
         _onDataChanged: function() {
@@ -6847,6 +6853,7 @@
                 return;
             }
 
+            that.chart._unsetActivePoint();
             that._state = {
                 moveTarget: target.parents(".k-handle").add(target).first(),
                 startLocation: e.x.location,
@@ -6969,6 +6976,7 @@
             }
 
             e.preventDefault();
+            that.chart._unsetActivePoint();
 
             from = math.min(
                 math.max(options.min, options.from - offset),
