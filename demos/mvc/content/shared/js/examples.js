@@ -553,7 +553,7 @@
 
                 container = $("<ul class='tc-theme-container' />").prependTo(options.listContainer);
 
-                container.on("up", ".tc-link", function(e) {
+                container.on("click", ".tc-link", function(e) {
                     e.preventDefault();
 
                     var link = $(this), theme = link.attr("data-value");
