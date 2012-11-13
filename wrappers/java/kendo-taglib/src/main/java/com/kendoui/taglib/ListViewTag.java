@@ -32,11 +32,13 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
     
     @Override
     protected Element<?> createElement() {
-        if (isSet("tagName")) {
-            return new ListViewElement(getTagName().toLowerCase());
+        String tagName = "div";
+        if (isSet("tagName")) {            
+            tagName = getTagName().toLowerCase();
+            properties().remove("tagName");
         }
         
-        return super.createElement();
+        return new ListViewElement(tagName);
     }
     
     @SuppressWarnings("unchecked")
