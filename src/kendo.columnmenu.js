@@ -246,6 +246,10 @@
                     }
 
                     input = item.find(":checkbox");
+                    if (input.attr("disabled")) {
+                        return;
+                    }
+
                     field = input.attr(kendo.attr("field"));
 
                     column = grep(columns, function(column) {
