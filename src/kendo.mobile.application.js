@@ -65,9 +65,9 @@
                 updateDocumentTitle: true
             }, options);
             kendo.Observable.fn.init.call(that, that.options);
-            that.element = $(element ? element : document.body);
 
             $(function(){
+                that.element = $(element ? element : document.body);
                 that._setupPlatform();
                 that._attachHideBarHandlers();
                 that.pane = new Pane(that.element, that.options);
