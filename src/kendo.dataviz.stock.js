@@ -205,7 +205,7 @@
 
             navi.options.select = { from: from, to: to };
 
-            if (!kendo.support.touch) {
+            if (navi._realtimeDrag()) {
                 navi.applySelection();
                 navi.redrawSlaves();
             }
@@ -229,6 +229,16 @@
             navi.applySelection();
             navi.redrawSlaves();
             navi.hint.hide();
+        },
+
+        _realtimeDrag: function() {
+            var support = kendo.support,
+                isTouch = support.touch,
+                browser = support.browser,
+                isFirefox = browser.mozilla,
+                isOldIE = browser.msie && browser.version < 9;
+
+            return !isTouch && !isFirefox && !isOldIE;
         },
 
         readSelection: function() {
