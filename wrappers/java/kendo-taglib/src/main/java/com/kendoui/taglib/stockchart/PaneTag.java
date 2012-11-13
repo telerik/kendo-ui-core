@@ -49,6 +49,10 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "stockChart-pane";
     }
 
+    public void setBorder(PaneBorderTag value) {
+        setProperty("border", value);
+    }
+
     public void setTitle(PaneTitleTag value) {
         setProperty("title", value);
     }
@@ -59,6 +63,30 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setName(String value) {
         setProperty("name", value);
+    }
+
+    public float getMargin() {
+        return (float)getProperty("margin");
+    }
+
+    public void setMargin(float value) {
+        setProperty("margin", value);
+    }
+
+    public float getPadding() {
+        return (float)getProperty("padding");
+    }
+
+    public void setPadding(float value) {
+        setProperty("padding", value);
+    }
+
+    public String getBackground() {
+        return (String)getProperty("background");
+    }
+
+    public void setBackground(String value) {
+        setProperty("background", value);
     }
 
     public float getHeight() {

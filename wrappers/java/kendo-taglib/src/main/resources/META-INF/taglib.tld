@@ -3964,6 +3964,27 @@ Template variables:
         </attribute>
 
         <attribute>
+            <description>The margin of the pane.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the pane.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The background color of the pane.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The pane height in pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
@@ -3975,6 +3996,36 @@ Template variables:
             <name>title</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the pane.</description>
+        <name>chart-pane-border</name>
+        <tag-class>com.kendoui.taglib.chart.PaneBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -12102,6 +12153,27 @@ Template variables:
         </attribute>
 
         <attribute>
+            <description>The margin of the pane.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the pane.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The background color of the pane.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The pane height in pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12113,6 +12185,36 @@ Template variables:
             <name>title</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the pane.</description>
+        <name>stockChart-pane-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.PaneBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
