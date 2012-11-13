@@ -3009,6 +3009,15 @@ upwards from the current position.</description>
 
 
     <tag>
+        <description>The chart panes configuration.</description>
+        <name>chart-panes</name>
+        <tag-class>com.kendoui.taglib.chart.PanesTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
         <description>The plot area configuration options. This is the area containing the plotted series.</description>
         <name>chart-plotArea</name>
         <tag-class>com.kendoui.taglib.chart.PlotAreaTag</tag-class>
@@ -3261,6 +3270,14 @@ Individual color settings for line and labels take priority.</description>
         <attribute>
             <description>The unique axis name.</description>
             <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The name of the pane that the axis should be rendered in.
+The axis will be rendered in the first (default) pane if not set.</description>
+            <name>pane</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -3928,6 +3945,126 @@ Template variables:
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The chart panes configuration.</description>
+        <name>chart-pane</name>
+        <tag-class>com.kendoui.taglib.chart.PaneTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The unique pane name.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The pane height in pixels.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The pane title text or configuration.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The pane title text or configuration.</description>
+        <name>chart-pane-title</name>
+        <tag-class>com.kendoui.taglib.chart.PaneTitleTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the title. Any valid CSS color string will work here, including
+hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text color of the title. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The font style of the title.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the title.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The position of the title.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text of the title.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the title.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of the title.</description>
+        <name>chart-pane-title-border</name>
+        <tag-class>com.kendoui.taglib.chart.PaneTitleBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Any valid CSS color string will work here, including
+hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -4725,6 +4862,14 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
+            <description>The name of the pane that the axis should be rendered in.
+The axis will be rendered in the first (default) pane if not set.</description>
+            <name>pane</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Reverses the axis direction -
 values increase from right to left and from top to bottom.</description>
             <name>reverse</name>
@@ -5250,6 +5395,14 @@ It defaults to 1/5th of the majorUnit.</description>
         </attribute>
 
         <attribute>
+            <description>The name of the pane that the axis should be rendered in.
+The axis will be rendered in the first (default) pane if not set.</description>
+            <name>pane</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Reverses the axis direction -
 values increase from right to left and from top to bottom.</description>
             <name>reverse</name>
@@ -5725,6 +5878,14 @@ It defaults to 1/5th of the majorUnit.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The name of the pane that the axis should be rendered in.
+The axis will be rendered in the first (default) pane if not set.</description>
+            <name>pane</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -8329,6 +8490,43 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
         <attribute>
             <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Configures the axis line.</description>
+        <name>linearGauge-scale-line</name>
+        <tag-class>com.kendoui.taglib.lineargauge.ScaleLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the lines. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the line.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the lines.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the line..</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
