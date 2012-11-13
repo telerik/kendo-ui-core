@@ -962,9 +962,10 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
         each(devices, function () {
             var that = this.toString(),
                 deviceId = "#" + that + "Device",
+                device = $(deviceId),
                 checkbox = $("#" + that + "box")[0];
 
-            applications[that] = new kendo.mobile.Application(deviceId, {
+            applications[that] = new kendo.mobile.Application(device, {
                 platform: that,
                 icon: {
                   "72x72" : "../content/mobilethemebuilder/images/Icon-72.png",
@@ -972,9 +973,9 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                 },
                 updateDocumentTitle: false
             });
-            engineTool = $(deviceId).kendoStyleEngine({ restoreFromStorage: true, platform: that }).data("kendoStyleEngine");
+            engineTool = device.kendoStyleEngine({ restoreFromStorage: true, platform: that }).data("kendoStyleEngine");
 
-            applications[that].element.toggleClass("hiddenOS", !checkbox.checked);
+            device.toggleClass("hiddenOS", !checkbox.checked);
         });
 
         pickers = {
