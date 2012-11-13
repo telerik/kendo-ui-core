@@ -692,6 +692,23 @@
                 equal(combobox.calls("toggle"), 1);
                 equal(combobox.args("toggle", 0)[0], true);
             });
+
+            test("ComboBox rebinds if after search value method is called", function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    filter: "contains"
+                });
+
+                combobox.search("Foo");
+                combobox.value("");
+                combobox.close();
+
+                combobox.open();
+
+                equal(combobox.ul.children().length, 3);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
