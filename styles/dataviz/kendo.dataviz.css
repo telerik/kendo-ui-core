@@ -142,47 +142,4 @@ div.k-gauge
 }
 
 
-/* Silver Theme */
 
-.k-silver .k-mask {
-    background: rgba(234,234,236,.7);
-}
-
-.k-silver .k-selection {
-    border-color: #a6b1c0;
-    box-shadow: inset 0 1px 12px rgba(0,0,0,.1);
-    transition: box-shadow .2s linear, border-color .2s linear;
-    -moz-transition: box-shadow .2s linear, border-color .2s linear;
-    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
-    -o-transition: box-shadow .2s linear, border-color .2s linear;
-}
-
-.k-silver .k-selection:hover {
-    border-color: #a6b1c0;
-    box-shadow: inset 0 0 20px rgba(255,255,255,.7);
-}
-
-.k-silver .k-handle {
-    background-color: #c7c7c7;
-    width: 1px;
-}
-
-.k-silver .k-handle:hover {
-    background-color: #8ebc00;
-    width: 3px;
-}
-
-.k-silver .k-navigator-hint .k-tooltip {
-    border: 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,.3);
-    background: #8ebc00;
-    color: #ffffff;
-}
-
-.k-silver .k-navigator-hint .k-scroll {
-    background: rgba(0,0,0,.3);
-    height: 4px;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-}

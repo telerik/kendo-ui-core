@@ -1,225 +1,41 @@
-.k-chart,
-.k-gauge
-{
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-div.k-chart,
-div.k-gauge
-{
-    background-color: transparent;
-}
-
-.k-gauge
-{
-    text-align: left;
-}
-
-.k-baseline-marker {
-    zoom: 1;
-    *display: inline;
-}
-
-.k-chart .k-tooltip {
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    padding: 2px 6px;
-    white-space: nowrap;
-    z-index: 1000;
-}
-
-.k-chart .k-tooltip table {
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-
-.k-chart .k-tooltip th {
-    text-align: center;
-}
-
-.k-chart .k-tooltip td {
-    padding: .1em .2em;
-}
-
-/*Stock Charts*/
-
-/* Selection */
-.k-selector {
-    position: absolute;
-    -webkit-transform: translateZ(0);
-}
-
-.k-selection {
-    border-bottom: 0;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #d2d2d2;
-    border-bottom: 0;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.01);
-}
-
-.k-handle {
-    background: #d2d2d2;
-    width: 7px;
-    height: 26px;
-    cursor: e-resize;
-    z-index: 1;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    position: absolute;
-}
-
-.k-handle div {
-    width: 100%;
-    height: 100%;
-    padding: 40px 20px 0 0;
-}
-
-.k-leftHandle div {
-    margin: -20px 0 0 -15px;
-}
-
-.k-rightHandle div {
-    margin: -20px 0 0 -5px;
-}
-
-.k-mask {
-    background: rgba(255,255,255,.75);
-    position: absolute;
-    height: 100%;
-}
-
-.k-border {
-    background: #d2d2d2;
-    width: 1px;
-    height: 100%;
-    position: absolute;
-}
-
-.k-black .k-mask {
-    background: #222;
-}
-
-.k-black .k-selection {
-    border-color: #8e8e8e;
-}
-
-.k-blueopal .k-mask {
-    background: #fff;
-}
-
-.k-blueopal .k-selection {
-    border-color: #9aabb2;
-}
+/* Default Theme */
 
 .k-default .k-mask {
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.68);
 }
 
 .k-default .k-selection {
-    border-color: #bababa;
-    box-shadow: inset 0 0 15px rgba(0,0,0,.10);
+    border-color: rgba(0,0,0,.2);
+    box-shadow: inset 0 1px 8px rgba(0,0,0,.1);
+    transition: box-shadow .2s linear, border-color .2s linear;
+    -moz-transition: box-shadow .2s linear, border-color .2s linear;
+    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
+    -o-transition: box-shadow .2s linear, border-color .2s linear;
 }
-.k-default .k-leftHandle {
-    left: -6px;
+
+.k-default .k-selection:hover {
+    border-color: rgba(0,0,0,.3);
+    box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
 }
-.k-default .k-rightHandle {
-    right: -6px;
-}
+
 .k-default .k-handle {
-    background: #fff;
-    border: 1px solid #bababa;
-    width: 9px;
-    height: 10px;
+    background-color: #fcfcfc;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
 }
 
-.k-default .k-handle:hover, .k-default .k-handle:active {
-    background: #b7aeaa;
-    border: 1px solid #a99f9a;
+.k-default .k-handle:hover {
+    background-color: #ffffff;
+    border-color: #b8b8b8;
+    box-shadow: 0 0 0 2px rgba(111,101,96,.5);
+}
+.k-default .k-navigator-hint .k-tooltip {
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    background: #ffffff;
+    color: #242424;
 }
 
-
-.k-highcontrast .k-mask {
-    background: #1b141a;
-}
-
-.k-highcontrast .k-selection {
-    border-color: #664e62;
-}
-
-.k-metro .k-mask {
-    background: #fff;
-}
-.k-metro .k-handle {
-    background: #8ebc00;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-}
-
-.k-metroblack .k-mask {
-    background: #0e0e0e;
-}
-
-.k-metroblack .k-selection {
-    border-color: #707070;
-}
-
-.k-metroblack .k-handle {
-    background: #00aba9;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-}
-
-.k-silver .k-mask {
-    background: #eaeaec;
-}
-
-.k-silver .k-selection {
-    border-color: #a7b2c1;
-}
-
-.k-leftHandle {
-    left: -4px;
-}
-
-.k-rightHandle {
-    right: -4px;
-}
-
-/* Navigator hint */
-.k-navigator-hint {
-}
-
-.k-navigator-hint div {
-    position: absolute;
-}
-
-.k-navigator-hint .k-scroll {
-    position: absolute;
-    
-    /*Skin Specific*/
+.k-default .k-navigator-hint .k-scroll {
+    background: rgba(252,116,26,.7);
     height: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    background: #d2d2d2;
-}
-
-.k-navigator-hint .k-tooltip {
-    margin-top: 20px;
-    min-width: 160px;
-    opacity: 1;
-    text-align: center;
-    
-    /*Skin Specific*/
-    border: 0;
-    box-shadow: 0 1px 2px rgba(0,0,0,.5);
-    background: #fff;
 }
