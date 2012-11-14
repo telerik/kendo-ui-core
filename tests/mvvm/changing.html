@@ -592,6 +592,29 @@
                 equal(templateEvaluationCounter, 1);
             });
 
+            test("does not attach multiple event handlers to nested object", function() {
+                var parent = kendo.observable({});
+                var child = kendo.observable({});
+
+                parent.set("child", child);
+                parent.set("child", kendo.observable({}));
+                parent.set("child", child);
+
+                equal(child._events["change"].length, 1);
+                equal(child._events["get"].length, 1);
+            });
+
+            test("does not attach multiple event handlers to nested array", function() {
+                var parent = kendo.observable({});
+                var child = new kendo.data.ObservableArray([]);
+
+                parent.set("child", child);
+                parent.set("child", kendo.observable({}));
+                parent.set("child", child);
+
+                equal(child._events["change"].length, 1);
+            });
+
             test("tracking changes when direct access and set are used", function() {
                 var dom = $('<div data-template="nested-field-template" data-bind="source:this"/>');
 
