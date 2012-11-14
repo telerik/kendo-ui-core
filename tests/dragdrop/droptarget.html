@@ -151,6 +151,15 @@
 
                 ok(!DropTarget._cache["qux"]);
             });
+
+            test("DropTarget destroy destroys the Target", function() {
+                var target = new DropTarget(targetElement),
+                    element = target.element;
+
+                target.destroy();
+
+                ok(!element.data("kendoDropTarget"));
+            });
        </script>
     </body>
 </html>
