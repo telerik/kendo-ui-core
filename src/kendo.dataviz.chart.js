@@ -592,14 +592,20 @@
         },
 
         _eventCoordinates: function(e) {
+            var chart = this,
+                isTouch = defined((e.x || {}).client),
+                clientX = isTouch ? e.x.client : e.clientX,
+                clientY = isTouch ? e.y.client : e.clientY;
+
+            return chart._toModelCoordinates(clientX, clientY);
+        },
+
+        _toModelCoordinates: function(clientX, clientY) {
             var element = this.element,
                 offset = element.offset(),
                 paddingLeft = parseInt(element.css("paddingLeft"), 10),
                 paddingTop = parseInt(element.css("paddingTop"), 10),
-                win = $(window),
-                isTouch = defined((e.x || {}).client),
-                clientX = isTouch ? e.x.client : e.clientX,
-                clientY = isTouch ? e.y.client : e.clientY;
+                win = $(window);
 
             return {
                 x: clientX - offset.left - paddingLeft + win.scrollLeft(),
@@ -6934,12 +6940,13 @@
             }
 
             var that = this,
+                chart = that.chart,
                 state = that._state,
                 options = that.options,
                 categoryAxis = that.categoryAxis,
                 range = state.range,
-                p0 = e.touches[0].x.location,
-                p1 = e.touches[1].x.location,
+                p0 = chart._toModelCoordinates(e.touches[0].x.location).x,
+                p1 = chart._toModelCoordinates(e.touches[1].x.location).x,
                 left = math.min(p0, p1),
                 right = math.max(p0, p1);
 
