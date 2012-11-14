@@ -490,7 +490,7 @@
     });
 
     DropTarget.destroyGroup = function(groupName) {
-        var group = dropTargets[groupName],
+        var group = dropTargets[groupName] || dropAreas[groupName],
             i;
 
         if (group) {
@@ -500,6 +500,7 @@
 
             group.length = 0;
             delete dropTargets[groupName];
+            delete dropAreas[groupName];
         }
     };
 

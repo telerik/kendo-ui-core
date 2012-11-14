@@ -130,6 +130,15 @@
 
                 ok(draggable.dropped);
             });
+
+            test("DropTargetArea destroy destroys the Area", function() {
+                var target = new DropTargetArea(targetElement),
+                    element = target.element;
+
+                target.destroy();
+
+                ok(!element.data("kendoDropTargetArea"));
+            });
        </script>
     </body>
 </html>

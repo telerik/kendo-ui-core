@@ -160,7 +160,9 @@
                     }
                 });
 
-            kendo.destroy("#example");
+            if (!$("#example").find("[data-role=droptargetarea]").length) {
+                kendo.destroy("#example");
+            }
 
             $(doc)
                 .off(".examples")
