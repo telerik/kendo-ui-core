@@ -1717,6 +1717,29 @@ function pad(number, digits, end) {
 
         support.browser = detectBrowser(navigator.userAgent);
 
+        (function(browser) {
+            // add browser-specific CSS class
+            var cssClass,
+                version = "" + browser.version,
+                majorVersion = version.substring(0, version.indexOf("."));
+
+            if (browser.msie) {
+                cssClass = "ie";
+            } else if (browser.mozilla) {
+                cssClass = "ff";
+            } else if (browser.safari) {
+                cssClass = "safari";
+            } else if (browser.webkit) {
+                cssClass = "webkit";
+            } else if (browser.opera) {
+                cssClass = "opera";
+            }
+
+            if (cssClass) {
+                $(document.documentElement).addClass("k-" + cssClass + " k-" + cssClass + majorVersion);
+            }
+        })(support.browser);
+
         support.zoomLevel = function() {
             return support.touch ? (document.documentElement.clientWidth / window.innerWidth) : 1;
         };
