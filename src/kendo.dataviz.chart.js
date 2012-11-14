@@ -6960,7 +6960,7 @@
         _tap: function(e) {
             var that = this,
                 options = that.options,
-                coords = that.chart._eventCoordinates(e.event),
+                coords = that.chart._eventCoordinates(e),
                 categoryAxis = that.categoryAxis,
                 categoryIx = categoryAxis.getCategoryIndex(
                     new dataviz.Point2D(coords.x, categoryAxis.box.y1)
