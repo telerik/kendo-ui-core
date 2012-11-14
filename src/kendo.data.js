@@ -333,30 +333,36 @@
                     object = new ObservableObject(object);
                 }
 
-                object.parent = parent;
+                if (object.parent() != parent()) {
 
-                (function(field) {
-                    object.bind(GET, function(e) {
-                        e.field = field + "." + e.field;
-                        that.trigger(GET, e);
-                    });
+                    object.parent = parent;
 
-                    object.bind(CHANGE, function(e) {
-                        e.field = field + "." + e.field;
-                        that.trigger(CHANGE, e);
-                    });
-                })(field);
+                    (function(field) {
+                        object.bind(GET, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(GET, e);
+                        });
+
+                        object.bind(CHANGE, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(CHANGE, e);
+                        });
+                    })(field);
+                }
             } else if (object !== null && (type === "[object Array]" || isObservableArray)) {
                 if (!isObservableArray) {
                     object = new ObservableArray(object);
                 }
-                object.parent = parent;
 
-                (function(field) {
-                    object.bind(CHANGE, function(e) {
-                        that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
-                    });
-                })(field);
+                if (object.parent() != parent()) {
+                    object.parent = parent;
+
+                    (function(field) {
+                        object.bind(CHANGE, function(e) {
+                            that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
+                        });
+                    })(field);
+                }
             } else if (object !== null && object instanceof DataSource) {
                 object._parent = parent; // assign parent to the DataSource if part of observable object
             }
