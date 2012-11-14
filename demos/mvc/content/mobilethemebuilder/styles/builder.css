@@ -1401,3 +1401,25 @@ input.k-checkbox
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent;
 }
+
+/* Font-face for FF/IE10 */
+@font-face {
+    font-family: "Kendo UI Examples";
+    src: url("../../shared/styles/KendoUI.woff") format("woff"),
+         url("../../shared/styles/KendoUI.ttf") format("truetype");
+}
+
+.device .km-icon:after,
+.device .km-icon:before,
+.device .km-contactadd:after,
+.device .km-contactadd:before,
+.device .km-rowdelete:after,
+.device .km-rowdelete:before,
+.device .km-rowinsert:after,
+.device .km-rowinsert:before,
+.device .km-detaildisclose:after,
+.device .km-detaildisclose:before,
+.device .km-loading:after
+{
+    font: 1em/1em "Kendo UI Examples";
+}
