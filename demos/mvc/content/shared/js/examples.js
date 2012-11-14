@@ -529,7 +529,7 @@
 
                 this.setTheme(options.theme);
 
-                this.element.on("up", ".tc-link", $.proxy(function(e) {
+                this.element.on("click touchend", ".tc-link", $.proxy(function(e) {
                     e.preventDefault();
 
                     var icon = $(e.target).closest(".tc-link").find(".k-icon"),
@@ -562,7 +562,9 @@
                         return;
                     }
 
-                    link.addClass("active").parent().siblings().find(".tc-link").removeClass("active");
+                    container.find(".tc-link").removeClass("active");
+
+                    link.addClass("active");
 
                     themeChooser.setTheme(theme);
 
@@ -570,8 +572,7 @@
 
                 });
 
-                container.html(kendo.render(options.itemTemplate, options.themes))
-                    .find(".tc-link[data-value='" + options.theme + "']").addClass("active");
+                container.html(kendo.render(options.itemTemplate, options.themes));
 
                 return container;
             },
