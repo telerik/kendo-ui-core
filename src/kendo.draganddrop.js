@@ -442,7 +442,7 @@
 
         destroy: function() {
             var groupName = this.options.group,
-                group = dropTargets[groupName],
+                group = dropTargets[groupName] || dropAreas[groupName],
                 i;
 
             if (group.length > 1) {
