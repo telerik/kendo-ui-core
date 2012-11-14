@@ -157,6 +157,7 @@ THEME_BUILDER_ROOT = 'http://themebuilder.kendoui.com'
 
 PRODUCTION_RESOURCES = FileList['demos/mvc/**/*']
             .exclude('**/*.cs')
+            .exclude('**/Web.config')
             .exclude('**/obj/**/*')
 
 MVC_RAZOR_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.cshtml']
@@ -218,15 +219,29 @@ tree :to => 'dist/demos/staging/content/cdn/themebuilder',
 
 def patch_web_config(name, cdn_root, themebuilder_root)
 
-    config = File.read(name)
+end
 
-    config.sub!('$CDN_ROOT', cdn_root)
-    config.sub!('$THEMEBUILDER_ROOT', themebuilder_root)
+class PatchedWebConfigTask < Rake::FileTask
+    attr_accessor :cdn_root, :themebuilder_root
+    def execute(args=nil)
+        ensure_path(name)
 
-    File.open(name, 'w') do |file|
-        file.write(config)
+        File.open(name, "w") do |file|
+            file.write(File.read(prerequisites[0]).sub('$CDN_ROOT', cdn_root).sub('$THEMEBUILDER_ROOT', themebuilder_root))
+        end
     end
 
+    def needed?
+        contents = File.read(name)
+        super || !contents.include?(cdn_root) || !contents.include?(themebuilder_root)
+    end
+end
+
+def patched_web_config(name, source, cdn_root, themebuilder_root)
+    task = PatchedWebConfigTask.define_task(name => source)
+    task.cdn_root = cdn_root
+    task.themebuilder_root = themebuilder_root
+    task
 end
 
 namespace :demos do
@@ -255,9 +270,9 @@ namespace :demos do
         'dist/demos/staging/content/cdn/js',
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
-        'dist/demos/staging/content/cdn/styles/telerik'] do
-        patch_web_config('dist/demos/staging/Web.config', '~/content/cdn', '~/content/cdn/themebuilder')
-    end
+        'dist/demos/staging/content/cdn/styles/telerik',
+        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', '~/content/cdn', '~/content/cdn/themebuilder')
+    ]
 
     zip 'dist/demos/staging.zip' => :staging_site
 
@@ -270,13 +285,12 @@ namespace :demos do
         'dist/demos/production/src/jsp/controllers',
         'dist/demos/production/src/aspnetmvc/controllers',
         'dist/demos/production/src/aspnetmvc/views/aspx',
-        'dist/demos/production/src/aspnetmvc/views/razor'] do
-        patch_web_config('dist/demos/production/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT)
-    end
+        'dist/demos/production/src/aspnetmvc/views/razor',
+        patched_web_config('dist/demos/production/Web.config', 'demos/mvc/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT)
+    ]
 
     zip 'dist/demos/production.zip' => :production_site
 
     desc('Build online demo site')
     task :production => 'dist/demos/production.zip'
 end
-
