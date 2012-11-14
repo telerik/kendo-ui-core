@@ -122,7 +122,7 @@
     .border-box;
 }
 
-*+html .k-button { line-height: normal; }
+.k-ie7 .k-button { line-height: normal; }
 
 a.k-button
 {
@@ -135,9 +135,9 @@ a.k-button
     padding-top: 0.37em;
 }
 
-*+html .k-button { overflow: visible; margin-right: 4px; }
-*+html a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
-*+html .k-button-expand { margin-left: 0; margin-right: 0; }
+.k-ie7 .k-button { overflow: visible; margin-right: 4px; }
+.k-ie7 a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
+.k-ie7 .k-button-expand { margin-left: 0; margin-right: 0; }
 
 button.k-button::-moz-focus-inner,
 input.k-button::-moz-focus-inner
@@ -164,7 +164,7 @@ body .k-button-icon
     padding-left: 4px;
     padding-right: 4px;
 }
-*+html a.k-button-icon { padding-left: 5px; padding-right: 5px;/*+1*/ }
+.k-ie7 a.k-button-icon { padding-left: 5px; padding-right: 5px;/*+1*/ }
 
 .k-button-icontext
 {
@@ -177,7 +177,7 @@ body .k-button-icon
     margin: 0 3px 0 -3px;
     vertical-align: text-top;
 }
-*+html .k-button-icontext .k-icon { margin-right: 4px; }
+.k-ie7 .k-button-icontext .k-icon { margin-right: 4px; }
 
 html body .k-button-bare
 {
@@ -281,7 +281,7 @@ html body .k-button-bare
 {
     background-color: transparent;
 }
-*+html .k-icon, *+html .k-sprite { text-indent: 0; }
+.k-ie7 .k-icon, .k-ie7 .k-sprite { text-indent: 0; }
 
 .k-numerictextbox .k-i-arrow-n  { background-position: 0 -2px; }
 .k-numerictextbox .k-i-arrow-s { background-position: 0 -35px; }
@@ -595,7 +595,7 @@ div.k-window-content
 }
 
 /* Compensate for content padding in IE7 */
-*+html .k-window { padding-bottom: 1.16em; }
+.k-ie7 .k-window { padding-bottom: 1.16em; }
 
 .k-window-titlebar .k-window-actions
 {
@@ -746,8 +746,8 @@ div.k-window-content
     vertical-align: middle;
 }
 
-*+html .k-tabstrip-items .k-item .k-image,
-*+html .k-tabstrip-items .k-item .k-sprite
+.k-ie7 .k-tabstrip-items .k-item .k-image,
+.k-ie7 .k-tabstrip-items .k-item .k-sprite
 {
     margin-top: -1px;
     vertical-align: top;
@@ -904,7 +904,7 @@ ul.k-menu-vertical > .k-item
     border-width: 0;
 }
 
-*+html .k-menu .k-item .k-item
+.k-ie7 .k-menu .k-item .k-item
 {
     zoom: normal;
 }
@@ -922,9 +922,9 @@ ul.k-menu-vertical > .k-item
     margin: -2px 0 0;
 }
 
-*+html .k-menu .k-item > .k-link > .k-i-arrow-s,
-*+html .k-menu .k-image,
-*+html .k-menu .k-sprite { margin-top: 0; }
+.k-ie7 .k-menu .k-item > .k-link > .k-i-arrow-s,
+.k-ie7 .k-menu .k-image,
+.k-ie7 .k-menu .k-sprite { margin-top: 0; }
 
 .k-menu .k-item > .k-link
 {
@@ -966,7 +966,7 @@ ul.k-menu-vertical > .k-item
     padding: .28em 1.8em .38em .9em;
 }
 
-*+html .k-menu .k-group .k-link
+.k-ie7 .k-menu .k-group .k-link
 {
     width: 100%;
 }
@@ -1203,7 +1203,7 @@ div.k-grid-header .k-header
     table-layout: fixed;
 }
 
-*+html .k-grid-content table { width: auto; }
+.k-ie7 .k-grid-content table { width: auto; }
 
 .k-grid-toolbar
 {
@@ -1372,7 +1372,7 @@ div.k-grid-header .k-header
     width:40px;
 }
 
-*+html .k-pager-wrap .k-textbox
+.k-ie7 .k-pager-wrap .k-textbox
 {
     height:16px;
     margin-top:2px;
@@ -1395,7 +1395,7 @@ div.k-grid-header .k-header
     padding:0 17px;
 }
 
-*+html .k-pager-sizes
+.k-ie7 .k-pager-sizes
 {
     float:left;
 }
@@ -1638,7 +1638,7 @@ div.k-grid-header .k-header
     display: inline-block;
 }
 
-*+html .k-grid-actions{ vertical-align: bottom; }
+.k-ie7 .k-grid-actions{ vertical-align: bottom; }
 
 .k-grid .k-button,
 .k-edit-form-container .k-button
@@ -1646,19 +1646,22 @@ div.k-grid-header .k-header
     margin: 0 .2em;
 }
 
-.k-grid tbody .k-button
+@grid-button-min-width: 64px;
+
+.k-grid tbody .k-button,
+.k-ie8 .k-grid tbody button.k-button
 {
-    min-width: 64px; /*main setting*/
+    min-width: @grid-button-min-width;
 }
 
-.k-grid tbody button.k-button, #ie8#skips
+.k-grid tbody button.k-button
 {
-    min-width: 78px; /*+14 for buttons, except IE8*/
+    min-width: @grid-button-min-width + 14; /* for all except IE8 */
 }
 
-*+html .k-grid tbody a.k-button
+.k-ie7 .k-grid tbody a.k-button
 {
-    min-width: 62px; /*-2 for links for IE7*/
+    min-width: @grid-button-min-width - 2; /* for IE7 link buttons */
 }
 
 html body .k-grid tbody .k-button-icon
@@ -1696,17 +1699,18 @@ html body .k-grid tbody .k-button-icon
     .border-box;
 }
 
-*+html .k-edit-cell>.k-textbox,
-*+html .k-edit-cell>.k-widget,
-*+html .k-grid-edit-row>td>.k-textbox,
-*+html .k-grid-edit-row>td>.k-widget
+.k-ie7 .k-edit-cell>.k-textbox,
+.k-ie7 .k-edit-cell>.k-widget,
+.k-ie7 .k-grid-edit-row>td>.k-textbox,
+.k-ie7 .k-grid-edit-row>td>.k-widget
 {
     display: block;
     width: 90%;
 }
 
-*+html .k-edit-cell .k-textbox,
-*+html .k-grid-edit-row .k-textbox
+
+.k-ie7 .k-edit-cell .k-textbox,
+.k-ie7 .k-grid-edit-row .k-textbox
 {
 }
 
@@ -1979,7 +1983,7 @@ span.k-datetimepicker
     background: transparent;
 }
 
-*+html .k-picker-wrap .k-input, *+html .k-numeric-wrap .k-input, *+html .k-combobox .k-input { margin: -1px 0; } /* removes excessive spacing */
+.k-ie7 .k-picker-wrap .k-input, .k-ie7 .k-numeric-wrap .k-input, .k-ie7 .k-combobox .k-input { margin: -1px 0; } /* removes excessive spacing */
 
 .k-picker-wrap .k-select,
 .k-numeric-wrap .k-select,
@@ -2064,11 +2068,11 @@ span.k-datetimepicker .k-select+.k-select
     margin: 0;
 }
 
-*+html .k-autocomplete .k-input,
-*+html .k-picker-wrap .k-input,
-*+html .k-numeric-wrap .k-input,
-*+html .k-dropdown-wrap .k-input,
-*+html .k-selectbox .k-input
+.k-ie7 .k-autocomplete .k-input,
+.k-ie7 .k-picker-wrap .k-input,
+.k-ie7 .k-numeric-wrap .k-input,
+.k-ie7 .k-dropdown-wrap .k-input,
+.k-ie7 .k-selectbox .k-input
 {
     text-indent: 0;
 }
@@ -2424,14 +2428,14 @@ input.k-textbox
     line-height: 1.6em;
 }
 
-*+html input.k-textbox { display: block; line-height: 1.72em; height: 1.72em; text-indent: .3em; }
+.k-ie7 input.k-textbox { display: block; line-height: 1.72em; height: 1.72em; text-indent: .3em; }
 
 textarea.k-textbox
 {
     height: auto;
 }
 
-*+html .k-textbox
+.k-ie7 .k-textbox
 {
     padding: 1px 0;
     text-indent: 0;
@@ -2880,7 +2884,7 @@ div.k-slider
     cursor: pointer;
 }
 
-*+html .k-slider .k-icon { margin-top: 2px; }
+.k-ie7 .k-slider .k-icon { margin-top: 2px; }
 
 .k-slider-track,
 .k-slider-selection
@@ -2990,7 +2994,7 @@ div.k-slider
 }
 
 /* fixes ticks position and removes spacing between them in IE7 */
-*+html .k-slider-vertical .k-tick { float: left; clear: left; width: 100%; }
+.k-ie7 .k-slider-vertical .k-tick { float: left; clear: left; width: 100%; }
 
 .k-slider-horizontal .k-tick { background-position: center -92px; }
 .k-slider-horizontal .k-slider-topleft .k-tick { background-position: center -122px; }
@@ -3369,7 +3373,7 @@ html .k-upload
     vertical-align: middle;
 }
 
-*+html .k-dropzone em, *+html .k-upload-button { vertical-align: baseline; }
+.k-ie7 .k-dropzone em, .k-ie7 .k-upload-button { vertical-align: baseline; }
 
 .k-dropzone
 {
@@ -3437,7 +3441,7 @@ html .k-upload
     font-size: 84%;
 }
 
-*+html .k-upload-files .k-button{line-height: 1;} /*IE7*/
+.k-ie7 .k-upload-files .k-button{line-height: 1;} /*IE7*/
 
 .k-upload .k-upload-action .k-icon
 {
@@ -3506,7 +3510,7 @@ html .k-upload
     -ms-box-sizing: content-box;
     box-sizing: content-box;
 }
-*+html .k-upload-selected { min-width: 100px; }
+.k-ie7 .k-upload-selected { min-width: 100px; }
 
 /* ImageBrowser */
 
@@ -3654,11 +3658,11 @@ html .k-upload
     vertical-align: bottom;
 }
 
-*+html .k-imagebrowser .k-upload-button, *+html .k-imagebrowser .k-upload .k-icon { vertical-align: baseline; position: relative; top: 1px; }
+.k-ie7 .k-imagebrowser .k-upload-button, .k-ie7 .k-imagebrowser .k-upload .k-icon { vertical-align: baseline; position: relative; top: 1px; }
 
-*+html .k-imagebrowser .k-upload .k-icon { top: 2px; }
+.k-ie7 .k-imagebrowser .k-upload .k-icon { top: 2px; }
 
-*+html .k-imagebrowser .k-toolbar .k-button-icon { vertical-align: middle; }
+.k-ie7 .k-imagebrowser .k-toolbar .k-button-icon { vertical-align: middle; }
 
 .k-toolbar .k-state-disabled,
 .k-plus-disabled, .k-minus-disabled
@@ -3825,65 +3829,65 @@ html .k-upload
 
 /* IE7 inline-block behavior */
 
-*+html .k-button,
+.k-ie7 .k-button,
 
-*+html .k-grid-filter,
-*+html .k-header-column-menu,
-*+html .k-grid .k-pager-numbers,
-*+html .k-grid .k-status-text,
-*+html .k-pager-numbers .k-link,
-*+html .k-pager-numbers span,
-*+html .k-pager-numbers input,
-*+html .k-grouping-row p,
-*+html .k-grouping-header a,
-*+html .k-grouping-header .k-group-indicator,
-*+html .k-grouping-header .k-link,
-*+html .k-grouping-header .k-button,
-*+html .k-grid-actions,
-*+html .k-edit-label,
-*+html .k-edit-field,
-*+html .k-edit-form-container .editor-label,
-*+html .k-edit-form-container .editor-field,
+.k-ie7 .k-grid-filter,
+.k-ie7 .k-header-column-menu,
+.k-ie7 .k-grid .k-pager-numbers,
+.k-ie7 .k-grid .k-status-text,
+.k-ie7 .k-pager-numbers .k-link,
+.k-ie7 .k-pager-numbers span,
+.k-ie7 .k-pager-numbers input,
+.k-ie7 .k-grouping-row p,
+.k-ie7 .k-grouping-header a,
+.k-ie7 .k-grouping-header .k-group-indicator,
+.k-ie7 .k-grouping-header .k-link,
+.k-ie7 .k-grouping-header .k-button,
+.k-ie7 .k-grid-actions,
+.k-ie7 .k-edit-label,
+.k-ie7 .k-edit-field,
+.k-ie7 .k-edit-form-container .editor-label,
+.k-ie7 .k-edit-form-container .editor-field,
 
-*+html .k-combobox,
-*+html .k-dropdown,
-*+html .k-selectbox,
-*+html .k-picker-wrap .k-select,
-*+html .k-dropdown-wrap .k-select,
+.k-ie7 .k-combobox,
+.k-ie7 .k-dropdown,
+.k-ie7 .k-selectbox,
+.k-ie7 .k-picker-wrap .k-select,
+.k-ie7 .k-dropdown-wrap .k-select,
 
-*+html .k-numerictextbox,
+.k-ie7 .k-numerictextbox,
 
-*+html .k-timepicker,
-*+html .k-datepicker,
-*+html .k-datetimepicker,
-*+html .k-calendar,
-*+html .k-calendar .k-nav-fast,
+.k-ie7 .k-timepicker,
+.k-ie7 .k-datepicker,
+.k-ie7 .k-datetimepicker,
+.k-ie7 .k-calendar,
+.k-ie7 .k-calendar .k-nav-fast,
 
-*+html .k-treeview .k-icon,
-*+html .k-treeview .k-image,
-*+html .k-treeview .k-sprite,
-*+html .k-treeview .k-in,
+.k-ie7 .k-treeview .k-icon,
+.k-ie7 .k-treeview .k-image,
+.k-ie7 .k-treeview .k-sprite,
+.k-ie7 .k-treeview .k-in,
 
-*+html .k-colorpicker,
-*+html .k-colorpicker .k-tool-icon,
-*+html .k-colorpicker-popup .k-reset,
+.k-ie7 .k-colorpicker,
+.k-ie7 .k-colorpicker .k-tool-icon,
+.k-ie7 .k-colorpicker-popup .k-reset,
 
-*+html .k-editor-dialog .k-button,
+.k-ie7 .k-editor-dialog .k-button,
 
 .k-form-text-row label,
 
-*+html .k-tabstrip-items .k-item,
-*+html .k-tabstrip-items .k-link,
+.k-ie7 .k-tabstrip-items .k-item,
+.k-ie7 .k-tabstrip-items .k-link,
 
-*+html .k-slider-horizontal,
+.k-ie7 .k-slider-horizontal,
 
-*+html .k-splitbar-draggable-vertical .k-resize-handle,
-*+html .k-splitbar-draggable-horizontal .k-resize-handle,
+.k-ie7 .k-splitbar-draggable-vertical .k-resize-handle,
+.k-ie7 .k-splitbar-draggable-horizontal .k-resize-handle,
 
-*+html .t-filename,
+.k-ie7 .t-filename,
 
-*+html div.k-window,
-*+html .k-window-titlebar .k-window-action
+.k-ie7 div.k-window,
+.k-ie7 .k-window-titlebar .k-window-action
 
 { display: inline; zoom: 1; }
 
