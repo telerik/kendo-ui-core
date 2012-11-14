@@ -1,5 +1,5 @@
 
-def run_tests(port)
+def run_tests(output, port)
     sh <<-SH
 export BROWSER_TEMP=`mktemp -dt tests.XXXXXXXXXXXXXXXXXXXXXXXXX`
 export FIREFOX_PROFILE=${BROWSER_TEMP##*.}
@@ -13,15 +13,19 @@ case `uname -a` in
     ;;
 esac
 
-tests/tests.js tests/ #{port} 1>test-results.xml || exit 1
+tests/tests.js tests/ #{port} 1>#{output} || exit 1
     SH
 end
 
 namespace :tests do
     { CI: 8884, Production: 8885 }.each do |env, port|
-        desc "Run #{env} tests"
-        task env => [:less, :js] do
-            run_tests(port)
+        output = "#{env}-test-results.xml"
+
+        file output => [MIN_JS, MIN_CSS].flatten do |t|
+            run_tests(t.name, port)
         end
+
+        desc "Run #{env} tests"
+        task env => [:npm, output]
     end
 end

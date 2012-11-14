@@ -67,15 +67,12 @@ task :npm do
     sh "cd #{dir} && npm install", :verbose => VERBOSE
 end
 
-task :js => :npm
-task :less => :npm
-
 # Rake tasks
 desc('JavaScript')
-multitask :js => MIN_JS
+multitask :js => [:npm, MIN_JS].flatten
 
 desc('Less')
-multitask :less => MIN_CSS
+multitask :less => [:npm, MIN_CSS].flatten
 
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
