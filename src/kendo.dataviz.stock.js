@@ -89,6 +89,7 @@
                 }
             },
             navigator: {
+                select: {},
                 seriesDefaults: {
                     markers: {
                         visible: false
