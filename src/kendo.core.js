@@ -2598,7 +2598,6 @@ function pad(number, digits, end) {
         }
     });
 
-
     var MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseover", "mouseout", "mouseup", "click"];
 
     $.extend(kendo, {
@@ -2724,7 +2723,6 @@ function pad(number, digits, end) {
 
             return that;
         },
-
 
         kendoDestroy: function() {
             var ns = this.data("kendoNS");
