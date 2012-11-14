@@ -2875,14 +2875,9 @@
 
         options: {},
 
-        lineWidth: function() {
-            return this.series.width;
-        },
-
         points: function(visualPoints) {
             var segment = this,
                 linePoints = segment.linePoints.concat(visualPoints || []),
-                lineWidth = segment.lineWidth(),
                 points = [],
                 i,
                 length = linePoints.length,
@@ -2890,14 +2885,6 @@
 
             for (i = 0; i < length; i++) {
                 pointCenter = linePoints[i].markerBox().center();
-
-                if (defined(lineWidth)) {
-                    if (i === 0) {
-                        pointCenter.x += lineWidth / 2;
-                    } else if (i === length - 1) {
-                        pointCenter.x -= lineWidth / 2;
-                    }
-                }
 
                 points.push(new Point2D(pointCenter.x, pointCenter.y));
             }
@@ -3145,11 +3132,6 @@
             LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
         },
 
-        lineWidth: function() {
-            var line = this.series.line || {};
-            return line.width;
-        },
-
         points: function() {
             var segment = this,
                 chart = segment.parent,
@@ -3195,21 +3177,29 @@
                         color: series.color,
                         opacity: series.opacity
                     }, series.line
-                );
+                ),
+                linePoints = LineSegment.fn.points.call(segment),
+                areaPoints = segment.points();
 
             ChartElement.fn.getViewElements.call(segment, view);
 
             return [
-                view.createPolyline(segment.points(), false, {
+                view.createPolyline(areaPoints, false, {
+                    id: segment.options.id,
+                    fillOpacity: series.opacity,
+                    fill: series.color,
+                    stack: series.stack,
+                    data: { modelId: segment.options.modelId },
+                    zIndex: -1
+                }),
+                view.createPolyline(linePoints, false, {
                     id: segment.options.id,
                     stroke: lineOptions.color,
                     strokeWidth: lineOptions.width,
                     strokeOpacity: lineOptions.opacity,
                     dashType: lineOptions.dashType,
-                    fillOpacity: series.opacity,
-                    fill: series.color,
-                    stack: series.stack,
                     data: { modelId: segment.options.modelId },
+                    strokeLineCap: "butt",
                     zIndex: -1
                 })
             ];
