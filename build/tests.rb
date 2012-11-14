@@ -26,6 +26,8 @@ namespace :tests do
         end
 
         desc "Run #{env} tests"
-        task env => [:npm, output]
+        task env => [:npm, output] do
+            sh "touch #{output}"
+        end
     end
 end
