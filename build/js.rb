@@ -186,6 +186,7 @@ WIN_JS = FileList[
     "src/kendo.filtermenu.js",
     "src/kendo.timepicker.js",
     "src/kendo.slider.js",
+    "src/kendo.userevents.js",
     "src/kendo.dataviz.core.js",
     "src/kendo.dataviz.themes.js",
     "src/kendo.dataviz.chart.js",
