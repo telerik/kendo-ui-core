@@ -1602,7 +1602,7 @@ pre.prettyprint
 {
     overflow: auto;
     font-family:courier,monospace;
-    max-height:600px;
+    height:400px;
 }
 
 /*console*/
@@ -1922,10 +1922,14 @@ pre.prettyprint
 
 #codeStrip .k-content
 {
-    margin: -1px 0 0;
     padding:0;
     overflow: hidden;
     color:#2e2e2e;
+}
+
+#codeStrip
+{
+    background:#fff none;
 }
 
 #codeStrip h3

@@ -80,6 +80,7 @@
                </ul> 
                </div>
                <script>
+               var minHeightFlag = false;
                $("#@framework.Name.Replace(".", "-").Replace(" ", "-")").kendoTabStrip({
                     animation: {
                         open: {
@@ -89,8 +90,12 @@
                     contentUrls: [
                         @Html.Raw(String.Join(",", framework.Files.Select(file => "\"" + Url.Action("index", "source", new { path = file.Url } ) + "\"").ToArray()))
                     ],
-                    contentLoad: function() {
+                    contentLoad: function(e) {
                         prettyPrint();
+                        if (!minHeightFlag) {
+                            var cs = $("#codeStrip");
+                            cs.css("min-height", cs.height());
+                        }
                     }
                });
                </script>
