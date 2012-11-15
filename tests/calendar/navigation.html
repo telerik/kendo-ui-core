@@ -438,6 +438,73 @@
                 equal(calendar.calls("navigateDown"), 1);
             });
 
+            test("Click on cell persists the time portion", function() {
+                calendar.focus();
+                calendar.value(new Date(2000, 10, 10, 14, 30));
+
+                var link = calendar._table.find(".k-state-selected").next().find(".k-link");
+
+                calendar._click(link);
+
+                var value = calendar.value();
+
+                equal(value.getHours(), 14);
+                equal(value.getMinutes(), 30);
+            });
+
+            test("Click on cell from other month persists the time portion", function() {
+                calendar.focus();
+                calendar.value(new Date(2000, 10, 10, 14, 30));
+
+                var link = calendar._table.find(".k-other-month").next().find(".k-link");
+
+                calendar._click(link);
+
+                var value = calendar.value();
+
+                equal(value.getHours(), 14);
+                equal(value.getMinutes(), 30);
+            });
+
+            test("Calendar persits time portion when select date with navigation", function() {
+                calendar.focus();
+                calendar.value(new Date(2000, 10, 10, 14, 30));
+
+                calendar._move({ keyCode: keys.UPARROW, preventDefault: $.noop });
+                calendar._move({ keyCode: keys.ENTER, preventDefault: $.noop });
+
+                var value = calendar.value();
+
+                equal(value.getHours(), 14);
+                equal(value.getMinutes(), 30);
+            });
+
+            test("Calendar persits time portion when select first day of the month", function() {
+                calendar.focus();
+                calendar.value(new Date(2000, 10, 10, 14, 30));
+
+                calendar._move({ keyCode: keys.HOME, preventDefault: $.noop });
+                calendar._move({ keyCode: keys.ENTER, preventDefault: $.noop });
+
+                var value = calendar.value();
+
+                equal(value.getHours(), 14);
+                equal(value.getMinutes(), 30);
+            });
+
+            test("Calendar persits time portion when select last day of the month", function() {
+                calendar.focus();
+                calendar.value(new Date(2000, 10, 10, 14, 30));
+
+                calendar._move({ keyCode: keys.END, preventDefault: $.noop });
+                calendar._move({ keyCode: keys.ENTER, preventDefault: $.noop });
+
+                var value = calendar.value();
+
+                equal(value.getHours(), 14);
+                equal(value.getMinutes(), 30);
+            });
+
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
