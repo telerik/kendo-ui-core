@@ -297,6 +297,10 @@
             maxHeight: Infinity
         },
 
+        _closable: function() {
+            return $.inArray("close", $.map(this.options.actions, function(x) { return x.toLowerCase(); })) > -1;
+        },
+
         _keydown: function(e) {
             var that = this,
                 options = that.options,
@@ -311,7 +315,7 @@
                 return;
             }
 
-            if (keyCode == keys.ESC) {
+            if (keyCode == keys.ESC && that._closable()) {
                 that._close(true);
             }
 
