@@ -259,13 +259,19 @@ textarea.k-textbox:hover,
     background: none;
 }
 
-// Bootstrap readonly input styling has more specificity than ours.
-.k-widget .k-input,
+.k-input,
 input.k-textbox,
 textarea.k-textbox,
 input.k-textbox:hover,
 textarea.k-textbox:hover,
 .k-textbox > input
+{
+    background-color: @input-background-color;
+    color: @input-text-color;
+}
+
+// Bootstrap readonly input styling has more specificity than ours.
+.k-input[readonly]
 {
     background-color: @input-background-color;
     color: @input-text-color;
