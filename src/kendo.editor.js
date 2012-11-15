@@ -4712,7 +4712,7 @@ var ListFormatter = Class.extend({
         }
 
         if (!commonAncestor) {
-            commonAncestor = dom.parentOfType(nodes[0], ["td"]) || nodes[0].ownerDocument.body;
+            commonAncestor = dom.parentOfType(nodes[0], ["p", "td"]) || nodes[0].ownerDocument.body;
         }
 
         if (dom.isInline(commonAncestor)) {
