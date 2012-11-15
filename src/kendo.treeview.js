@@ -203,16 +203,16 @@
                 .on(MOUSEENTER + NS, ".k-in.k-state-selected", function(e) { e.preventDefault(); })
                 .on(MOUSEENTER + NS, clickableItems, function () { $(this).addClass(KSTATEHOVER); })
                 .on("mouseleave" + NS, clickableItems, function () { $(this).removeClass(KSTATEHOVER); })
-                .on(CLICK + NS, clickableItems, proxy(that._click, that))
+                .on("touchend" + NS + " " + CLICK + NS, clickableItems, proxy(that._click, that))
                 .on("dblclick" + NS, ".k-in:not(.k-state-disabled)", proxy(that._toggleButtonClick, that))
-                .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that))
+                .on("touchend" + NS + " " + CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that))
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("focus" + NS, proxy(that._focus, that))
                 .on("blur" + NS, proxy(that._blur, that))
                 .on("mousedown" + NS, ".k-in,.k-checkbox :checkbox", proxy(that._mousedown, that))
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
-                .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
-                .on("click" + NS, function() { that.focus(); });
+                .on("touchend" + NS + " click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
+                .on("touchend" + NS + " click" + NS, function() { that.focus(); });
         },
 
         _checkboxClick: function(e) {
