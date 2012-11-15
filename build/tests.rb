@@ -26,8 +26,12 @@ namespace :tests do
             run_tests(t.name, port)
         end
 
+        task :java_tests do
+            mvn(POM, 'test')
+        end
+
         desc "Run #{env} tests"
-        task env => [:npm, output] do
+        task env => [:npm, output, :java_tests] do
             sh "touch #{output}"
         end
     end
