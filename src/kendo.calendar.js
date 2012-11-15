@@ -332,7 +332,7 @@
                 view = that._view,
                 index = that._index,
                 currentValue = new DATE(+that._current),
-                value, prevent, method;
+                value, prevent, method, temp;
 
             if (e.ctrlKey) {
                 if (key == keys.RIGHT) {
@@ -366,7 +366,8 @@
                     prevent = true;
                 } else if (key == keys.HOME || key == keys.END) {
                     method = key == keys.HOME ? "first" : "last";
-                    currentValue = view[method](currentValue);
+                    temp = view[method](currentValue);
+                    currentValue = new DATE(temp.getFullYear(), temp.getMonth(), temp.getDate(), currentValue.getHours(), currentValue.getMinutes(), currentValue.getSeconds(), currentValue.getMilliseconds());
                     prevent = true;
                 } else if (key == keys.PAGEUP) {
                     prevent = true;
@@ -533,18 +534,14 @@
         _click: function(link) {
             var that = this,
                 options = that.options,
-                currentValue = that._current,
+                currentValue = new Date(+that._current),
                 value = link.attr(kendo.attr(VALUE)).split("/");
 
-            //Safari cannot create corretly date from "1/1/2090"
+            //Safari cannot create correctly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
             adjustDate(value);
 
-            if (link.parent().hasClass(OTHERMONTH)) {
-                currentValue = value;
-            } else {
-                that._view.setDate(currentValue, value);
-            }
+            that._view.setDate(currentValue, value);
 
             that.navigateDown(restrictValue(currentValue, options.min, options.max));
         },
