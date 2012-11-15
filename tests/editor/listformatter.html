@@ -559,6 +559,15 @@ test("empty list item is removed", function() {
     equal(editor.value(), "<ul><li>foo</li></ul><p></p>");
 });
 
+test("divs are not converted to lists", function() {
+    var range = createRangeFromText(editor, "<div><p>foo</p><p>|bar|</p></div>");
+
+    var formatter = new ListFormatter("ul");
+
+    formatter.toggle(range);
+    equal(editor.value(), "<div><p>foo</p><ul><li>bar</li></ul></div>");
+});
+
 </script>
 
 <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
