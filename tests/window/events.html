@@ -310,6 +310,21 @@
 
                 equal(dialogObject.wrapper.offset().top, offset.top);
             });
+
+            test("hitting escape in a non-closable window does not close it", function() {
+                var triggered = false;
+
+                createWindow({
+                    actions: ["custom"],
+                    close: function() {
+                        triggered = true;
+                    }
+                });
+
+                dialog.press(keys.ESC);
+
+                ok(!triggered);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
