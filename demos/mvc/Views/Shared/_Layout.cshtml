@@ -13,7 +13,7 @@
     } else {
     @Html.Partial("GoogleAnalytics")
     }
-    <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/content/shared/styles/examples.css?20121115")" rel="stylesheet" />
     @foreach (string scriptName in ViewBag.scripts) {
     <script src="@Url.Script(scriptName)"></script>
     }

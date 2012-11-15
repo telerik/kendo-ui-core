@@ -516,6 +516,30 @@
        return this;
     };
 
+    // sub menu dropdowns
+
+    $(document).ready(function(){
+        var dropdown = $("#header a[href=#expand]"),
+            submenus = $("#header").find(".submenu-box");
+
+        //sub menu dropdowns functionality
+        dropdown.click(function (e) {
+            var $this = $(this);
+            submenus.fadeOut(); //close all dropdowns
+            $this.toggleClass("expanded"); //set active state to dropdown link
+            dropdown.not($this).removeClass("expanded"); //for closed dropdown menus - remove active state of their link
+            $this.siblings(".submenu-box").not(":animated").fadeToggle(250); //display needed dropdown menu
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        //on click outside of dropdowns, they disappear
+        $(document).click(function () {
+            submenus.fadeOut();
+            dropdown.removeClass("expanded");
+        });
+    });
+
     var Widget = kendo.ui.Widget,
         ThemeChooser = Widget.extend({
             init: function(element, options) {

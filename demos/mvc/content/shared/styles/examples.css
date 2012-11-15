@@ -103,7 +103,7 @@ html
 {
     width:223px;
     height:73px;
-    margin:20px 0 0;
+    margin:16px 0 0;
 }
 
 #logo
@@ -138,12 +138,14 @@ html
     min-width:648px;
 }
 
-#header li
+.main-nav>li,
+.kendo-nav>li
 {
     float:left;
+    position:relative;
 }
 
-.main-nav li
+.main-nav>li
 {
     border-left:1px solid #dcdcdc;
     padding:0 8px;
@@ -187,7 +189,7 @@ html
 
 .kendo-nav
 {
-    margin:12px 0;
+    margin:14px 0 10px;
 }
 
 .overview .kendo-nav
@@ -195,17 +197,24 @@ html
     margin:22px 0;
 }
 
-.kendo-nav li
+.kendo-nav>li
 {
-    margin-left:32px;
+    margin-left:48px;
 }
 
 .kendo-nav a
 {
     display:block;
-    font-size:20px;
-    line-height:34px;
+    font:21px/1.6 Lucida Sans, Tahoma, Arial, Sans-serif;
     color:#2e2e2e;
+}
+
+.main-nav a>span,
+.kendo-nav a>span
+{
+    font:.55em/1 sans-serif;
+    position:relative;
+    top:-.2em;
 }
 
 .get-kendoui
@@ -234,7 +243,8 @@ html
 
 .kendo-nav .get-kendoui
 {
-    font-size:18px;
+    font-size:17px;
+    line-height:34px;
 }
 
 .get-kendoui:hover,
@@ -262,7 +272,7 @@ html
     left: 50%;
     margin: 0 0 0 -7px;
     position: absolute;
-    top: 39px;
+    top: 37px;
     width: 0;
     height:0;
 }
@@ -270,6 +280,120 @@ html
 .overview .kendo-nav .active:after
 {
     top: 49px;
+}
+
+/*popup submenus*/
+
+.submenu-box {
+    margin-bottom: 15px;
+    padding: 0 0 0 20px;
+}
+
+.submenu-box {
+    border: 1px solid #22252D;
+    display: none;
+    left: 50%;
+    margin-left: -144px;
+    min-width: 240px;
+    padding: 20px;
+    position: absolute;
+    top: 34px;
+    z-index: 100;
+
+	background:#22252d url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIyMjUyZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzOTNlNGEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #22252d 0%, #474c57 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#22252d), color-stop(100%,#474c57)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #22252d 0%,#474c57 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #22252d 0%,#474c57 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #22252d 0%,#474c57 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #22252d 0%,#474c57 100%); /* W3C */
+	
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+
+.submenu-box:before {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: transparent transparent #22252D;
+    border-image: none;
+    border-style: solid;
+    border-width: 11px;
+    content: "";
+    height: 0;
+    left: 50%;
+    margin-left: -11px;
+    position: absolute;
+    top: -23px;
+    width: 0;
+}
+
+.kendo-nav .submenu-box {
+    min-width: 175px;
+    margin-left: -115px;
+    padding-bottom: 13px;
+    padding-top: 13px;
+    top: 40px;
+}
+
+.submenu-box ol,
+.submenu-box li {
+    clear: both;
+    float: none;
+    list-style: none;
+    padding: 0;
+}
+
+.main-nav .submenu-box a {
+    font: 400 14px/22px Segoe UI,Tahoma,Arial,sans-serif;
+}
+
+.main-nav div.submenu-box h3 a,
+.submenu-box a {
+    color: #C1C1C1;
+    font: 18px/30px Segoe UI,Tahoma,Arial,Sans-serif;
+}
+
+.submenu-box a:hover,
+.main-nav div.submenu-box h3 a:hover {
+    color: #fff;
+}
+
+div.submenu-box h4 {
+    color: #787A7F;
+    font: 400 9px/1.4 Segoe UI Semibold,Segoe UI,Tahoma,Arial,Sans-serif;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+div.submenu-box h3,
+div.submenu-box h3 a {
+    color: #D1D1D1;
+    font: 400 20px/1.4 Segoe UI,Tahoma,Arial,Sans-serif;
+    margin: 0;
+}
+
+.submenu-box hr {
+    border-color: #1B1D23 transparent #3E4149;
+    border-style: solid none;
+    border-width: 1px 0;
+    margin: 13px 0;
+    padding: 0;
+}
+
+div.submenu-box ol {
+    clear: none;
+    float: right;
+    margin: 0;
+    min-width: 95px;
+}
+
+#resources-first {
+    float: left;
+    width: 140px;
 }
 
 /*orange bar*/

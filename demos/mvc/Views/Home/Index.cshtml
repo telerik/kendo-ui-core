@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <title>Kendo UI Demos</title>
     <link rel="shortcut icon" href="@Url.Content("~/content/shared/styles/favicon.ico")"/>
-    <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/content/shared/styles/examples.css?20121115")" rel="stylesheet" />
     @Html.Partial("GoogleAnalytics")
 </head>
 <body class="overview">
@@ -19,19 +19,48 @@
     <div class="centerWrap floatWrap">
         <h1><a href="http://www.kendoui.com/" id="logo">Kendo UI - the Art of Web Development</a></h1>
         <ul class="main-nav">
-            <li><a href="http://try.kendoui.com/">Kendo UI Dojo</a></li>
             <li><a href="http://www.kendoui.com/blogs">Blogs</a></li>
-            <li><a href="http://www.kendoui.com/forums">Forums</a></li>
             <li><a href="http://docs.kendoui.com">Documentation</a></li>
-            <li><a href="http://www.kendoui.com/get-help">Support &amp; Resources</a></li>
-            <li><a href="http://www.kendoui.com/roadmap">Roadmap</a></li>
-            <li><a href="http://www.kendoui.com/faq" title="Frequently Asked Questions">FAQ</a></li>
+            <li><a href="#expand">Support <span>&#9660;</span></a>
+                <ol class="submenu-box support-menu">
+	                <li><a href="/forums.aspx">Forums</a></li>
+	                <li><a href="http://stackoverflow.com/questions/tagged/kendo-ui">StackOverflow Forums</a></li>
+                </ol>
+            </li>
+            <li><a href="#expand">Resources <span>&#9660;</span></a>
+                <div class="submenu-box">
+	                <h4>Featured Resource</h4>
+	                <h3><a href="http://www.kendoui.com/dojo.aspx">Kendo UI Dojo</a></h3>
+	                <hr />
+	                <ol id="resources-first">
+		                <li><a target="_blank" href="http://www.telerik.com/automated-testing-tools/campaigns/testing-kendoui-apps.aspx">Automated Testing</a></li>
+		                <li><a href="/blogs.aspx">Blogs</a></li>
+		                <li><a href="/code-library.aspx">Code Library</a></li>
+		                <li><a href="http://demos.kendoui.com/">Demos</a></li>
+		                <li><a href="http://docs.kendoui.com/">Documentation</a></li>
+		                <li><a href="http://www.kendoui.com/faq/faq.aspx">FAQ</a></li>
+	                </ol>
+	                <ol>
+		                <li><a href="http://www.kendoui.com/forums.aspx">Forums</a></li>
+		                <li><a href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
+		                <li><a target="_blank" href="http:/kendo.uservoice.com/forums/127393-kendo-ui-feedback">User Voice</a></li>
+		                <li><a href="http://www.kendoui.com/videos.aspx">Videos</a></li>
+		                <li><a href="http://www.kendoui.com/webinars.aspx">Webinars</a></li>
+	                </ol>
+                </div>
+            </li>
+            <li><a href="http://www.kendoui.com/contact.aspx">Contact Us</a></li>
         </ul>
 
         <ul class="kendo-nav">
-            <li><a href="http://www.kendoui.com/web">Web</a></li>
-            <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
-            <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
+            <li><a href="#expand">Products <span>&#9660;</span></a>
+                <ol class="submenu-box">
+                    <li><a href="http://www.kendoui.com/web">Kendo UI Web</a></li>
+                    <li><a href="http://www.kendoui.com/mobile">Kendo UI Mobile</a></li>
+                    <li><a href="http://www.kendoui.com/dataviz">Kendo UI DataViz</a></li>
+                    <li><a href="http://www.kendoui.com/server-wrappers.aspx">Server Side Wrappers</a></li>
+                </ol>
+            </li>
             <li class="active"><a href="http://demos.kendoui.com/">Demos</a></li>
             <li><a href="http://www.kendoui.com/get-kendo-ui/purchase.aspx" onclick="_gaq.push(['_trackPageview', '/top-nav/purchase']);">Purchase</a></li>
             <li><a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui" onclick="_gaq.push(['_trackPageview','/download-button']);">Download</a></li>
@@ -157,6 +186,36 @@
 </div>
 
 @Html.Partial("Footer")
+
+<script src="/kendo/src/js/jquery.js"></script>
+
+<script>
+
+// sub menu dropdowns
+
+$(document).ready(function(){
+    var dropdown = $("#header a[href=#expand]"),
+        submenus = $("#header").find(".submenu-box");
+
+    //sub menu dropdowns functionality
+    dropdown.click(function (e) {
+        var $this = $(this);
+        submenus.fadeOut(); //close all dropdowns
+        $this.toggleClass("expanded"); //set active state to dropdown link
+        dropdown.not($this).removeClass("expanded"); //for closed dropdown menus - remove active state of their link
+        $this.siblings(".submenu-box").not(":animated").fadeToggle(250); //display needed dropdown menu
+        e.stopPropagation();
+        e.preventDefault();
+    });
+
+    //on click outside of dropdowns, they disappear
+    $(document).click(function () {
+        submenus.fadeOut();
+        dropdown.removeClass("expanded");
+    });
+});
+
+</script>
 
 </body>
 </html>
