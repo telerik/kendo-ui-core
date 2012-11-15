@@ -430,7 +430,6 @@
         _bindScroller: function() {
             var that = this,
                 options = that.options,
-                dataSource = that.dataSource,
                 scroller = that._scroller();
 
             if (!scroller) {
@@ -449,7 +448,7 @@
                         }
 
                         that._pulled = true;
-                        dataSource.read(params);
+                        that.dataSource.read(params);
                     },
                     pullTemplate: options.pullTemplate,
                     releaseTemplate: options.releaseTemplate,
