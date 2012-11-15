@@ -955,6 +955,7 @@
 
             owner.element.off(MOUSE_OVER);
             that.dragHandle.addClass(STATE_SELECTED);
+            $(document.documentElement).css("cursor", "pointer");
 
             that.dragableArea = owner._getDragableArea();
             that.step = math.max(options.smallStep * (owner._maxSelection / owner._distance), 0);
@@ -1079,12 +1080,15 @@
 
         dragcancel: function(e) {
             this.owner._refresh();
+            $(document.documentElement).css("cursor", "");
             return this._end();
         },
 
         dragend: function(e) {
             var that = this,
                 owner = that.owner;
+
+            $(document.documentElement).css("cursor", "");
 
             if (that.type) {
                 owner._update(that.selectionStart, that.selectionEnd);
