@@ -1,4 +1,3 @@
-
 def run_tests(output, port)
     sh <<-SH
 export BROWSER_TEMP=`mktemp -dt tests.XXXXXXXXXXXXXXXXXXXXXXXXX`
@@ -26,8 +25,17 @@ namespace :tests do
             run_tests(t.name, port)
         end
 
+        task :java do
+            mvn(POM, 'test')
+        end
+
+        task :aspnetmvc do
+            msbuild "wrappers/mvc/Kendo.Mvc.sln"
+            sh "mono build/xunit/xunit.console.clr4.exe wrappers/mvc/tests/Kendo.Mvc.Tests/bin/Release/Kendo.Mvc.Tests.dll"
+        end
+
         desc "Run #{env} tests"
-        task env => [:npm, output] do
+        task env => [:npm, output, :java, :aspnetmvc] do
             sh "touch #{output}"
         end
     end
