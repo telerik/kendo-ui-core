@@ -638,6 +638,7 @@
                 options.value = options.min;
                 element.val(options.min);
             }
+            options.value = math.max(math.min(options.value, options.max), options.min);
 
             dragHandle = that.wrapper.find(DRAG_HANDLE);
 
@@ -1068,7 +1069,7 @@
                 that._createTooltip();
             }
 
-            html = that.owner._getFormattedValue(val, that);
+            html = that.owner._getFormattedValue(round(val), that);
 
             if (!that.type) {
                 html += that.tooltipInnerDiv;

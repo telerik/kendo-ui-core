@@ -4,6 +4,7 @@
         <title>slider</title>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="../src/kendo.core.js"></script>
+        <script type="text/javascript" src="../src/kendo.userevents.js"></script>
         <script type="text/javascript" src="../src/kendo.draganddrop.js"></script>
         <script type="text/javascript" src="../src/kendo.slider.js"></script>
         <link href="../styles/web/kendo.common.css" rel="stylesheet"/>
@@ -28,7 +29,7 @@
             $(document).ready(function() {
                 $("#rangeslider").kendoRangeSlider({ tooltip: { template: "#= selectionStart #aaaaaaaaaaaa#= selectionEnd #" , format: "{0}"}, min: -10 });
                 $("#rangeslider1").kendoRangeSlider();
-                $("#slider").kendoSlider({ min: -10 });
+                $("#slider").kendoSlider({ min: 10, smallStep: 0.1, max: 200, lageStep: 1 });
             });
         </script>
 
