@@ -109,7 +109,6 @@
     <Compile Include="UI\Chart\ChartPieConnectorsBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisTitleBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAreaSeriesBuilderTests.cs" />
-    <Compile Include="UI\Chart\ChartAxisBuilderBaseTests.cs" />
     <Compile Include="UI\Chart\ChartSeriesBuilderBaseTests.cs" />
     <Compile Include="UI\Chart\ChartDateCategoryAxisBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartPlotBandsFactoryTests.cs" />
@@ -173,7 +172,6 @@
     <Compile Include="UI\Gauge\GaugeLinearScaleBuilderTests.cs" />
     <Compile Include="UI\Gauge\GaugeTestHelper.cs" />
     <Compile Include="UI\Gauge\GaugeRadialScaleBuilderTests.cs" />
-    <Compile Include="UI\Gauge\GaugeScaleBuilderBaseTests.cs" />
     <Compile Include="UI\Gauge\GaugeScaleRangesBuilderTests.cs" />
     <Compile Include="UI\Gauge\GaugeScaleTicksBuilderTests.cs" />
     <Compile Include="UI\Gauge\GaugeRadialCapTests.cs" />
