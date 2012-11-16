@@ -41,6 +41,20 @@
                 equal(dom.text(), "bar");
             });
 
+            test("field name of nested view model remains the same", 1, function() {
+                var viewModel = kendo.observable({
+                    foo: {
+                        bar: "bar"
+                    }
+                });
+
+                viewModel.foo.bind("change", function(e) {
+                    equal(e.field, "bar");
+                });
+
+                viewModel.foo.set("bar", "baz");
+            });
+
             test("changing a view model field from a view model function bound to UI reflects UI", function() {
                 var viewModel = kendo.observable( {
                     foo: "foo",
