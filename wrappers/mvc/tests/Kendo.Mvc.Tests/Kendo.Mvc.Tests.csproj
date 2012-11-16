@@ -125,7 +125,6 @@
     <Compile Include="UI\Chart\ChartHtmlBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\ChartTestHelper.cs" />
-    <Compile Include="UI\Chart\ChartSeriesFactoryTests.cs" />
     <Compile Include="UI\Chart\ChartBarSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartCategoryAxisBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartCategoryAxisSerializerTests.cs" />
@@ -304,7 +303,6 @@
     <Compile Include="UI\Grid\GridToolBarCustomCommandTests.cs" />
     <Compile Include="UI\Grid\GridActionCommandBuilderTests.cs" />
     <Compile Include="UI\Grid\GridActionColumnTests.cs" />
-    <Compile Include="UI\Grid\GridColumnGeneratorTests.cs" />
     <Compile Include="UI\Grid\GridColumnBaseTests.cs" />
     <Compile Include="UI\Grid\GridEditingSettingsTests.cs" />
     <Compile Include="UI\Grid\GridInlineEditRowHtmlBuilderTests.cs" />
