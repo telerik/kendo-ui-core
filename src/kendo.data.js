@@ -225,6 +225,24 @@
         }
     });
 
+    function eventHandler(context, type, field, prefix) {
+        return function(e) {
+            var event = {}, key;
+
+            for (key in e) {
+                event[key] = e[key];
+            }
+
+            if (prefix) {
+                event.field = field + "." + e.field;
+            } else {
+                event.field = field;
+            }
+
+            context.trigger(type, event);
+        };
+    }
+
     var ObservableObject = Observable.extend({
         init: function(value) {
             var that = this,
@@ -337,17 +355,8 @@
 
                     object.parent = parent;
 
-                    (function(field) {
-                        object.bind(GET, function(e) {
-                            e.field = field + "." + e.field;
-                            that.trigger(GET, e);
-                        });
-
-                        object.bind(CHANGE, function(e) {
-                            e.field = field + "." + e.field;
-                            that.trigger(CHANGE, e);
-                        });
-                    })(field);
+                    object.bind(GET, eventHandler(that, GET, field, true));
+                    object.bind(CHANGE, eventHandler(that, CHANGE, field, true));
                 }
             } else if (object !== null && (type === "[object Array]" || isObservableArray)) {
                 if (!isObservableArray) {
@@ -357,11 +366,7 @@
                 if (object.parent() != parent()) {
                     object.parent = parent;
 
-                    (function(field) {
-                        object.bind(CHANGE, function(e) {
-                            that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
-                        });
-                    })(field);
+                    object.bind(CHANGE, eventHandler(that, CHANGE, field, false));
                 }
             } else if (object !== null && object instanceof DataSource) {
                 object._parent = parent; // assign parent to the DataSource if part of observable object
