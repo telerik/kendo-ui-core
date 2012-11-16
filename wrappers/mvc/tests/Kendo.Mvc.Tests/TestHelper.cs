@@ -37,7 +37,7 @@ namespace Kendo.Mvc
             {
                 return result;
             }
-            
+
             return null;
         }
 
@@ -166,7 +166,7 @@ namespace Kendo.Mvc
             routes.MapRoute("ProductDetail", "Products/Detail/{id}", new { controller = "Product", action = "Detail", id = string.Empty });
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = string.Empty });
         }
-        
+
         public static ViewContext CreateViewContext()
         {
             return new ViewContext(CreateControllerContext(), new Mock<IView>().Object, new ViewDataDictionary(), new TempDataDictionary()
@@ -176,12 +176,18 @@ namespace Kendo.Mvc
 
         public static ControllerContext CreateControllerContext()
         {
-            return new ControllerContext(CreateRequestContext(), new ControllerTestDouble(new Dictionary<string, 
+            return new ControllerContext(CreateRequestContext(), new ControllerTestDouble(new Dictionary<string,
                 ValueProviderResult>(), new Mock<IViewDataContainer>().Object.ViewData));
         }
+
+        private static bool dummyRoutesRegistered = false;
+
         public static void RegisterDummyRoutes()
         {
-            RegisterDummyRoutes(RouteTable.Routes);
+            if (!dummyRoutesRegistered) {
+                RegisterDummyRoutes(RouteTable.Routes);
+                dummyRoutesRegistered = true;
+            }
         }
 
         private static XmlSiteMap siteMap;
