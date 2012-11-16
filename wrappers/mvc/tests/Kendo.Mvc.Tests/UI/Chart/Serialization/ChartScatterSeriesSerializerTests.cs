@@ -1,12 +1,13 @@
 namespace Kendo.Mvc.UI.Tests
 {
     using System.Collections;
+    using System.Collections.Generic;
     using Kendo.Mvc.UI.Tests.Chart;
     using Xunit;
 
     public class ChartScatterSeriesSerializerTests
-        : ChartSeriesSerializerBaseTests<ChartScatterSeries<XYData, float, float>>
     {
+        protected ChartScatterSeries<XYData, float, float> series;
         protected Chart<XYData> chart;
 
         public ChartScatterSeriesSerializerTests()
@@ -16,6 +17,78 @@ namespace Kendo.Mvc.UI.Tests
             series = new ChartScatterSeries<XYData, float, float>(s => s.X, s => s.Y);
         }
 
+        [Fact]
+        public void Serializes_name()
+        {
+            series.Name = "SeriesA";
+            GetJson(series)["name"].ShouldEqual("SeriesA");
+        }
+
+        [Fact]
+        public void Should_not_serialize_empty_name()
+        {
+            series.Name = string.Empty;
+            GetJson(series).ContainsKey("name").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_groupNameTemplate()
+        {
+            series.GroupNameTemplate = "#= series.name #";
+            GetJson(series)["groupNameTemplate"].ShouldEqual("#= series.name #");
+        }
+
+        [Fact]
+        public void Should_not_serialize_empty_groupNameTemplate()
+        {
+            series.GroupNameTemplate = string.Empty;
+            GetJson(series).ContainsKey("groupNameTemplate").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_opacity()
+        {
+            series.Opacity = 0.5;
+            GetJson(series)["opacity"].ShouldEqual(0.5);
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_opacity()
+        {
+            GetJson(series).ContainsKey("opacity").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_axis()
+        {
+            series.Axis = "Axis";
+            GetJson(series)["axis"].ShouldEqual("Axis");
+        }
+
+        [Fact]
+        public void Should_not_serialize_empty_axis()
+        {
+            series.Axis = string.Empty;
+            GetJson(series).ContainsKey("axis").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_Tooltip()
+        {
+            series.Tooltip.Visible = true;
+            GetJson(series).ContainsKey("tooltip").ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_tooltip()
+        {
+            GetJson(series).ContainsKey("tooltip").ShouldBeFalse();
+        }
+
+        protected static IDictionary<string, object> GetJson(IChartSeries series)
+        {
+            return series.CreateSerializer().Serialize();
+        }
         [Fact]
         public virtual void Serializes_type()
         {

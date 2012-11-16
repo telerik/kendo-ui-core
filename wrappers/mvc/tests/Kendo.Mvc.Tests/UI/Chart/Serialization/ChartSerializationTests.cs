@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             var urlGeneratorMock = new Mock<IUrlGenerator>();
             urlGeneratorMock.Setup(g => g.Generate(It.IsAny<RequestContext>(), It.IsAny<INavigatable>()))
                 .Returns<RequestContext, INavigatable>(
-                    (context, navigatable) => 
+                    (context, navigatable) =>
                         navigatable.Url ?? navigatable.ControllerName + "/" + navigatable.ActionName
                 );
 
@@ -100,7 +100,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void SeriesDefaults_should_be_serialized_when_set() 
+        public void SeriesDefaults_should_be_serialized_when_set()
         {
             chart.SeriesDefaults.Bar.Gap = 4;
             chart.WriteInitializationScript(textWriter.Object);
@@ -187,15 +187,6 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{\"yAxis\":[{\"name\":\"sec\"},{\"name\":\"tri\"}]}");
-        }
-
-        [Fact]
-        public void DataBinding_should_be_serialized_when_using_Server_binding()
-        {
-            chart.Data = new SalesData[] { new SalesData() };
-            chart.WriteInitializationScript(textWriter.Object);
-
-            output.ShouldContain("\"data\":[{\"RepName\":null,\"DateString\":null,\"Date\":\"\\/Date(-62135596800000)\\/\",\"TotalSales\":0,\"RepSales\":0,\"Explode\":false,\"VisibleInLegend\":false,\"Color\":null}]");
         }
 
         [Fact]

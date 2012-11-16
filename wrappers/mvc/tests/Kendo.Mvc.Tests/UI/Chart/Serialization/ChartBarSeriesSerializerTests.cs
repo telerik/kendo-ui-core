@@ -1,12 +1,14 @@
 namespace Kendo.Mvc.UI.Tests
 {
+    using System.Collections;
     using System.Collections.Generic;
     using Kendo.Mvc.UI.Tests.Chart;
     using Xunit;
 
     public class ChartBarSeriesSerializerTests
-        : ChartBoundSeriesSerializerTests<ChartBarSeries<SalesData, decimal>, SalesData, decimal>
     {
+        protected ChartBarSeries<SalesData, decimal> series;
+
         public ChartBarSeriesSerializerTests()
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
@@ -14,6 +16,106 @@ namespace Kendo.Mvc.UI.Tests
             series = new ChartBarSeries<SalesData, decimal>(s => s.RepSales, s => s.Color);
         }
 
+        [Fact]
+        public void Serializes_name()
+        {
+            series.Name = "SeriesA";
+            GetJson(series)["name"].ShouldEqual("SeriesA");
+        }
+
+        [Fact]
+        public void Should_not_serialize_empty_name()
+        {
+            series.Name = string.Empty;
+            GetJson(series).ContainsKey("name").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_groupNameTemplate()
+        {
+            series.GroupNameTemplate = "#= series.name #";
+            GetJson(series)["groupNameTemplate"].ShouldEqual("#= series.name #");
+        }
+
+        [Fact]
+        public void Should_not_serialize_empty_groupNameTemplate()
+        {
+            series.GroupNameTemplate = string.Empty;
+            GetJson(series).ContainsKey("groupNameTemplate").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_opacity()
+        {
+            series.Opacity = 0.5;
+            GetJson(series)["opacity"].ShouldEqual(0.5);
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_opacity()
+        {
+            GetJson(series).ContainsKey("opacity").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_axis()
+        {
+            series.Axis = "Axis";
+            GetJson(series)["axis"].ShouldEqual("Axis");
+        }
+
+        [Fact]
+        public void Should_not_serialize_empty_axis()
+        {
+            series.Axis = string.Empty;
+            GetJson(series).ContainsKey("axis").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_Tooltip()
+        {
+            series.Tooltip.Visible = true;
+            GetJson(series).ContainsKey("tooltip").ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_tooltip()
+        {
+            GetJson(series).ContainsKey("tooltip").ShouldBeFalse();
+        }
+
+        protected static IDictionary<string, object> GetJson(IChartSeries series)
+        {
+            return series.CreateSerializer().Serialize();
+        }
+
+        [Fact]
+        public void Should_serialize_data_if_set()
+        {
+            series.Data = new decimal[] { default(decimal) };
+            (GetJson(series)["data"] is IEnumerable).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Should_not_serialize_data_if_not_set()
+        {
+            series.Data = null;
+            GetJson(series).ContainsKey("data").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_field_if_member_is_set()
+        {
+            series.Member = "RepSales";
+            GetJson(series)["field"].ShouldEqual("RepSales");
+        }
+
+        [Fact]
+        public void Should_not_serialize_field_if_member_is_not_set()
+        {
+            series.Member = null;
+            GetJson(series).ContainsKey("field").ShouldBeFalse();
+        }
         [Fact]
         public void Bar_serializes_type()
         {
