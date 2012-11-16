@@ -50,6 +50,26 @@
                 ok(model.fields.foo);
             });
 
+            test("define assigns the fields as array of object", function() {
+                var MyModel = Model.define({
+                    fields: [ { field: "foo" } ]
+                });
+
+                var model = new MyModel();
+
+                ok(model.fields.foo);
+            });
+
+            test("define assigns the fields as array of strings", function() {
+                var MyModel = Model.define({
+                    fields: [ "foo" ]
+                });
+
+                var model = new MyModel();
+
+                ok(model.fields.foo);
+            });
+
             test("define assigns field type", function() {
                 var MyModel = Model.define({
                     fields: {
