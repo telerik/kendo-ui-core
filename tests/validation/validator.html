@@ -702,6 +702,32 @@
                 ok(!input.hasClass("k-invalid"));
             });
 
+            test("checkbox field is revalidated on click", function() {
+                var input = $('<input type="checkbox" required />'),
+                    validator = setup(input);
+
+                input.trigger("click");
+                ok(input.hasClass("k-invalid"));
+            });
+
+            test("checkbox field is revalidated on click", function() {
+                var container = $('<div><input type="checkbox" required /></div>'),
+                    validator = setup(container),
+                    input = container.find("input");
+
+                input.trigger("click");
+                ok(input.hasClass("k-invalid"));
+            });
+
+            test("input fields are not revalidated on click", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                input.trigger("click");
+                ok(!input.hasClass("k-invalid"));
+            });
+
+
             test("field is revalidated on blur", function() {
                 var input = $('<input type="text" required />'),
                     validator = setup(input);
