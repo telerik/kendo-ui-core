@@ -57,8 +57,9 @@
 
     function openedModalWindows(name) {
         return $(KWINDOW).filter(function() {
-            var wnd = $(this);
-            return wnd.is(VISIBLE) && windowObject(wnd, name).options.modal;
+            var wnd = $(this),
+                winObj = windowObject(wnd, name);
+            return winObj.options.modal && wnd.is(VISIBLE) && winObj.options.visible;
         }).sort(function(a, b){
             return +$(a).css("zIndex") - +$(b).css("zIndex");
         });
@@ -508,7 +509,7 @@
 
                 modalWindows = openedModalWindows(options.name);
 
-                shouldHideOverlay = options.modal && modalWindows.length == 1 && modalWindows[0] == that.wrapper[0];
+                shouldHideOverlay = options.modal && !modalWindows.length;
 
                 overlay = options.modal ? that._overlay(true) : $(undefined);
 
