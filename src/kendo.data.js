@@ -549,6 +549,9 @@
             field,
             type,
             value,
+            idx,
+            length,
+            fields = {},
             id = proto.id;
 
         if (id) {
@@ -561,6 +564,18 @@
 
         if (id) {
             proto.defaults[id] = proto._defaultId = "";
+        }
+
+        if (toString.call(proto.fields) === "[object Array]") {
+            for (idx = 0, length = proto.fields.length; idx < length; idx++) {
+                field = proto.fields[idx];
+                if (typeof field === STRING) {
+                    fields[field] = {};
+                } else if (field.field) {
+                    fields[field.field] = field;
+                }
+            }
+            proto.fields = fields;
         }
 
         for (name in proto.fields) {
