@@ -29,23 +29,6 @@ namespace Kendo.Mvc.Tests.Data
         }
 
         [Fact]
-        public void Filter_string_equals_with_nulls()
-        {
-            IEnumerable<Person> people = new[] { new Person { Name = "A" }, new Person { Name = null } };
-
-            var quearyablePeople = people.AsQueryable();
-
-            var filteredPeople = quearyablePeople.Where(new[] { new FilterDescriptor
-            {
-                Member = "Name",
-                Operator = FilterOperator.IsEqualTo,
-                Value = ""
-            }}).Cast<Person>();
-
-            Assert.Same(people.ElementAt(1), filteredPeople.FirstOrDefault());
-        }
-
-        [Fact]
         public void Filter_string_equals_caseinsensitive()
         {
             IEnumerable<Person> people = new[] { new Person { Name = "A" }, new Person { Name = "B" } };
@@ -103,26 +86,26 @@ namespace Kendo.Mvc.Tests.Data
 
             var quearyablePeople = people.AsQueryable();
 
-            var sortedPeople = quearyablePeople.Sort(new[] { 
-                new SortDescriptor { 
-                    Member = "Name", 
-                    SortDirection = ListSortDirection.Descending 
-                } 
+            var sortedPeople = quearyablePeople.Sort(new[] {
+                new SortDescriptor {
+                    Member = "Name",
+                    SortDirection = ListSortDirection.Descending
+                }
             }).Cast<Person>();
 
             Assert.Equal("B", sortedPeople.First().Name);
         }
-        
+
         [Fact]
         public void Sort_without_member()
         {
             var strings = new[] { "One", "Two" };
             var queryableStrings = strings.AsQueryable();
 
-            var sortedStrings = queryableStrings.Sort(new[] { 
-                new SortDescriptor { 
-                    SortDirection = ListSortDirection.Descending 
-                } 
+            var sortedStrings = queryableStrings.Sort(new[] {
+                new SortDescriptor {
+                    SortDirection = ListSortDirection.Descending
+                }
             }).Cast<string>();
 
             Assert.Equal("Two", sortedStrings.First());
@@ -141,7 +124,7 @@ namespace Kendo.Mvc.Tests.Data
         public void Filter_with_composite_descriptor_should_filter_the_data()
         {
             var people = CreateTestData();
-            var filteredPeople = people.Where(new[] { 
+            var filteredPeople = people.Where(new[] {
                 new CompositeFilterDescriptor {
                     FilterDescriptors = new FilterDescriptorCollection {
                            new FilterDescriptor("ID", FilterOperator.IsGreaterThanOrEqualTo, 0),
@@ -251,9 +234,9 @@ namespace Kendo.Mvc.Tests.Data
 
             var result = queryablePeople.GroupBy(queryablePeople, groupDescriptors);
             var groups = result.Cast<AggregateFunctionsGroup>();
-            
+
             groups.Count().ShouldEqual(2);
-            
+
             var firstGroupHeader = FindGroupHeader(groups, 0);
             var secondGroupHeader = FindGroupHeader(groups, 1);
 
@@ -274,10 +257,10 @@ namespace Kendo.Mvc.Tests.Data
 
         [Fact]
         public void Should_filter_a_list_of_dynamic_types()
-        {            
+        {
             dynamic expando = new System.Dynamic.ExpandoObject();
             expando.Foo = "Bar";
-            var enumerable = 
+            var enumerable =
                 new System.Dynamic.IDynamicMetaObjectProvider[] { expando };
 
             var data = enumerable.AsQueryable()
@@ -285,7 +268,7 @@ namespace Kendo.Mvc.Tests.Data
                                                         {
                                                             Member = "Foo",
                                                             Operator = FilterOperator.IsEqualTo,
-                                                            Value = "Bar"                
+                                                            Value = "Bar"
                                                         }
                                                     }
                                              );
@@ -299,12 +282,12 @@ namespace Kendo.Mvc.Tests.Data
             dynamic expando = new System.Dynamic.ExpandoObject();
             expando.Foo = new Customer { Name = "Name1"};
             IEnumerable<object> enumerable = new[] { expando };
-            
+
             var data = enumerable.AsQueryable().Where(new[] { new FilterDescriptor
             {
                 Member = "Foo.Name",
                 Operator = FilterOperator.IsEqualTo,
-                Value = "Name1",                    
+                Value = "Name1",
             }});
 
             Assert.NotNull(data.ElementAt(0));
@@ -335,7 +318,7 @@ namespace Kendo.Mvc.Tests.Data
         {
             var people = CreateTestData() as IQueryable<Person>;
 
-            var result = people.ToDataSourceResult(new UI.DataSourceRequest() { Page = 1, PageSize = 1, Groups = new [] { new GroupDescriptor { Member = "Name" } }  }, 
+            var result = people.ToDataSourceResult(new UI.DataSourceRequest() { Page = 1, PageSize = 1, Groups = new [] { new GroupDescriptor { Member = "Name" } }  },
                 (person) => new Person { Name = person.ID.ToString() });
 
             result.Data.Cast<AggregateFunctionsGroup>().First().Items.Cast<Person>().First().Name.ShouldEqual(people.First().ID.ToString());

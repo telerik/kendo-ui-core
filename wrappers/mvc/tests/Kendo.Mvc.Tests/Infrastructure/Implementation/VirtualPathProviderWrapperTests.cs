@@ -16,15 +16,9 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         [Fact]
         public void GetDirectory_should_return_the_directory_part_from_the_provided_path()
         {
-            string directory = provider.GetDirectory("~/Content/site,css");
+            string directory = provider.GetDirectory("~/Content/site.css");
 
             Assert.Equal("~/Content/", directory);
-        }
-
-        [Fact]
-        public void GetFile_should_return_the_file_part_from_the_provided_path()
-        {
-            Assert.Throws<HttpException>(() => provider.GetFile("~/Content/site,css"));
         }
 
         [Fact]

@@ -109,7 +109,6 @@
     <Compile Include="UI\Chart\ChartPieConnectorsBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisTitleBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAreaSeriesBuilderTests.cs" />
-    <Compile Include="UI\Chart\ChartSeriesBuilderBaseTests.cs" />
     <Compile Include="UI\Chart\ChartDateCategoryAxisBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartPlotBandsFactoryTests.cs" />
     <Compile Include="UI\Chart\ChartDonutSeriesBuilderTests.cs" />
@@ -127,7 +126,6 @@
     <Compile Include="UI\Chart\ChartBarSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartCategoryAxisBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartCategoryAxisSerializerTests.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBaseTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartNumericAxisSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartTitleSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLegendSerializerTests.cs" />
@@ -148,10 +146,7 @@
     <Compile Include="UI\Chart\Serialization\ChartPieConnectorsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisTitleSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaSeriesSerializerTests.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartBoundSeriesSerializerTests.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartSeriesSerializerBaseTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisLabelsDateFormatsSerializerTests.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartDonutSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBubbleSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartNegativeValueSettingsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartOHLCSeriesSerializerTests.cs" />

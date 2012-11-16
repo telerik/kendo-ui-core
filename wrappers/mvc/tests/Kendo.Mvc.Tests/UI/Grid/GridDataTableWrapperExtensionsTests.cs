@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var result = groups.AsQueryable().SerializeToDictionary(dataTable);
 
             Assert.Equal(2, result.Cast<Dictionary<string, object>>().Count());
-        }        
+        }
 
         [Fact]
         public void Should_serialize_group_header_item_properties()
@@ -45,11 +45,11 @@ namespace Kendo.Mvc.UI.Tests.Grid
             Assert.Equal(42, firstHeaderItem["Key"]);
             Assert.False((bool)firstHeaderItem["HasSubgroups"]);
             Assert.NotNull(firstHeaderItem["Items"]);
-            Assert.NotNull(firstHeaderItem["Subgroups"]);            
+            Assert.NotNull(firstHeaderItem["Subgroups"]);
         }
 
         [Fact]
-        public void Should_serialize_group_items() 
+        public void Should_serialize_group_items()
         {
             var groups = GetGroupedData();
             var result = groups.AsQueryable().SerializeToDictionary(dataTable);
@@ -74,7 +74,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
                     ItemCount = 1,
                     AggregateFunctionsProjection = null,
                     Items = Enumerable.Empty<DataRowView>()
-                }               
+                }
             };
 
             var result = groups.AsQueryable().SerializeToDictionary(dataTable);
@@ -84,7 +84,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         }
 
         [Fact]
-        public void Should_serialize_inner_groups() 
+        public void Should_serialize_inner_groups()
         {
             var firstGroup = new Mock<IGroup>();
             firstGroup.SetupGet(g => g.Subgroups)
@@ -122,7 +122,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var firstGroupItem = result.Cast<Dictionary<string, object>>().First();
             Assert.True(((IEnumerable<Dictionary<string, object>>)firstGroupItem["Subgroups"]).Any());
             var secondGroupItem = result.Cast<Dictionary<string, object>>().ElementAt(1);
-            Assert.True(((IEnumerable<Dictionary<string, object>>)secondGroupItem["Subgroups"]).Any());            
+            Assert.True(((IEnumerable<Dictionary<string, object>>)secondGroupItem["Subgroups"]).Any());
         }
 
         private AggregateFunctionsGroup[] GetGroupedData()
@@ -152,7 +152,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
 
 
         private DataRowView ConstructDataRow(int field1Value, string field2Value)
-        {              
+        {
             dataTable.Rows.Add(field1Value, field2Value);
             return dataTable.DefaultView[dataTable.DefaultView.Count - 1];
         }
@@ -162,7 +162,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             var dataTable = GetDataTable(1);
             var result = dataTable.WrapAsEnumerable().SerializeToDictionary(dataTable);
-            var firstRow = result.Cast<Dictionary<string, object>>().First();           
+            var firstRow = result.Cast<Dictionary<string, object>>().First();
 
             Assert.Equal("value0", firstRow["Field1"]);
             Assert.Equal(0, firstRow["Field2"]);
@@ -179,15 +179,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var resultCount = result.Cast<Dictionary<string, object>>().Count();
             Assert.Equal(expectedItemsCount, resultCount);
         }
-
-        [Fact]
-        public void Should_not_throw_if_DataTable_has_no_columns()
-        {
-            var dataSource = new DataTable();
-            var result = dataTable.WrapAsEnumerable().SerializeToDictionary(dataSource);
-
-            Assert.DoesNotThrow(() => result.Cast<Dictionary<string, object>>().Any());
-        }        
 
         private static DataTable GetDataTable(int howMany)
         {
