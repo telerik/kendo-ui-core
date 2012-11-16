@@ -410,7 +410,6 @@ textarea.k-textbox:hover,
 {
     border-color: @draghandle-hover-border-color;
     background-color: @draghandle-hover-background-color;
-    .composite-background(@hover-gradient);
     .box-shadow(@draghandle-hover-shadow);
 }
 
@@ -467,7 +466,8 @@ textarea.k-textbox:hover,
 }
 
 .k-state-selected,
-.k-button:active
+.k-button:active,
+.k-draghandle.k-state-selected:hover
 {
     .composite-background(@selected-gradient);
 }
@@ -496,7 +496,8 @@ textarea.k-textbox:hover,
 .k-state-hover:hover,
 .k-pager-wrap .k-link:hover,
 .k-other-month.k-state-hover .k-link,
-div.k-imagebrowser-dropzone em
+div.k-imagebrowser-dropzone em,
+.k-draghandle:hover
 {
     .composite-background(@hover-gradient);
 }
