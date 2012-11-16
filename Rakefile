@@ -294,11 +294,8 @@ namespace :build do
         zip_bundles
     end
 
-    desc('Runs a build over the stable branch')
-    task :stable => [:bundles, 'demos:production', 'demos:staging', 'download_builder:staging', zip_targets("Stable")].flatten do
-        sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
-        sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
-    end
+    desc 'Packages and publishes bundles to the Stable directory'
+    task :stable => [:bundles, 'demos:production', zip_targets("Stable")].flatten
 
     write_changelog "#{WEB_ROOT}/changelog/index.html", %w(web mobile dataviz framework aspnetmvc)
 
@@ -307,8 +304,14 @@ namespace :build do
         sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
     end
 
+    desc 'Updates the staging web site'
+    task 'staging-demos' => [ 'demos:staging', 'download_builder:staging' ] do
+        sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
+        sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
+    end
+
     desc('Runs test suite over the master branch')
-    task "ci" => ["tests:CI", "vsdoc:master:test"]
+    task :ci => ["tests:CI", "vsdoc:master:test"]
 end
 
 namespace :bundles do
