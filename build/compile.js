@@ -17,15 +17,17 @@ var ARGV = OPT
 var KENDO_SRCDIR = path.join(path.dirname(fs.realpathSync(__filename)), "..");
 
 var get_wrapper = (function(wrapper){
-    var code = '((typeof define == "function" && define.amd) ? define : function(a, b){ return b() })($DEPS, $CONT)';
+    var code = '((typeof define == "function" && define.amd) ? define : function(id, deps, body){ return body() })($ID, $DEPS, $CONT)';
     return function() {
         if (wrapper) return wrapper;
         wrapper = u2.parse(code);
-        wrapper.wrap = function(deps, cont) {
+        wrapper.wrap = function(id, deps, cont) {
             return wrapper.transform(new u2.TreeTransformer(
                 null,           // need no 'before'
                 function after(node){
                     if (node instanceof u2.AST_SymbolRef) switch (node.name) {
+                      case "$ID":
+                        return new u2.AST_String({ value: id });
                       case "$DEPS":
                         return new u2.AST_Array({
                             elements: deps.map(function(x){
@@ -52,6 +54,7 @@ deps_file = fs.readFileSync(deps_file, "utf8");
 deps_file = JSON.parse(deps_file);
 
 if (ARGV.decl) {
+    throw new Error("Don't run this.");
     deps_file.components.forEach(function(c){
         if (!c.source) {
             sys.error("No source declaration for component " + c.id);
@@ -99,18 +102,23 @@ if (ARGV.decl) {
 }
 
 files.forEach(function(file){
+    var output = file.replace(/\.js$/i, ".min.js");
+    if (output == file)
+        throw new Error("Won't overwrite " + file);
     var code = fs.readFileSync(file, "utf8");
-    var deps = fetch_dependencies(file);
+    var ast = u2.parse(code, { filename: file });
+    ast = extract_deps(ast, file);
+    var deps = ast.deps;
+    var id = "kendo." + ast.component.id;
     if (ARGV.deps) {
         sys.puts(file + ": " + deps.join(", "));
         return;
     }
     deps = deps.map(function(dep){
-        return "./" + dep.replace(/\.js$/, "");
+        return "./kendo." + dep + ".min";
     });
-    var ast = u2.parse(code, { filename: file });
     if (ARGV.amd) {
-        ast = get_wrapper().wrap(deps, ast);
+        ast = get_wrapper().wrap(id, deps, ast);
     }
     var compressor = u2.Compressor({ warnings: false });
     ast.figure_out_scope();
@@ -118,38 +126,55 @@ files.forEach(function(file){
     ast.figure_out_scope();
     ast.compute_char_frequency();
     ast.mangle_names();
-    var output = ast.print_to_string();
-    sys.print(output);
+    code = ast.print_to_string();
+    fs.writeFileSync(output, code);
 });
 
-function assert(cond, msg) {
-    if (!cond) throw new Error(msg || "Failed assertion");
-};
+function extract_deps(ast, comp_filename) {
+    var component;
+    var tt = new u2.TreeTransformer(function before(node, descend){
+        if (node !== ast) {
+            if (node instanceof u2.AST_Lambda) return node; // don't search subscopes
+            if (node instanceof u2.AST_SimpleStatement &&
+                node.body instanceof u2.AST_Call
+                && node.body.expression instanceof u2.AST_SymbolRef
+                && node.body.expression.name == "KENDO_COMPONENT")
+            {
+                if (component) throw new Error("Component already initialized!");
+                component = node.body.args[0].print_to_string();
+                component = (1, eval)("(" + component + ")");
 
-function fetch_dependencies(file) {
-    var deps = {};
-    var done = {};
+                // discard KENDO_COMPONENT calls
+                if (!component.files || component.files.length == 0)
+                    return new u2.AST_EmptyStatement(node);
 
-    function add_component(c) {
-        if (done[c.id]) return;
-        done[c.id] = true;
-        if (c.source) deps[c.source] = true;
-    }
-
-    var comp = find_component_by_source(file);
-    comp.forEach(function(c){
-        add_component(c);
-        if (c.depends) c.depends.forEach(function(id){
-            add_component(find_component(id));
-        });
-        if (c.features) c.features.forEach(function(c){
-            if (c.depends) c.depends.forEach(function(id){
-                add_component(find_component(id));
-            });
-        });
+                // however, if we have a split component, better load those files now.
+                var block = new u2.AST_BlockStatement({ body: [] });
+                component.files.forEach(function(file){
+                    var full = path.join(path.dirname(comp_filename), file);
+                    var code = fs.readFileSync(full, "utf8");
+                    u2.parse(code, {
+                        filename: file,
+                        toplevel: block
+                    });
+                });
+                return block;
+            }
+            if (node instanceof u2.AST_Var && node.definitions[0].name.name == "KENDO_COMPONENT") {
+                // discard the KENDO_COMPONENT function
+                return new u2.AST_EmptyStatement(node);
+            }
+            return node;
+        }
     });
-
-    return Object.keys(deps).slice(1); // because the first is `file` itself.
+    ast = ast.transform(tt);
+    var deps = component.depends ? component.depends.slice() : [];
+    if (component.features) component.features.forEach(function(f){
+        if (f.depends) deps = deps.concat(f.depends);
+    });
+    ast.deps = deps;
+    ast.component = component;
+    return ast;
 };
 
 function find_component(id) {

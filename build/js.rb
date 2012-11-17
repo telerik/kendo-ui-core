@@ -17,34 +17,6 @@ rule '.min.js' => lambda { |t| t.sub('min.js', 'js') } do |t|
     uglifyjs(t.source, t.name)
 end
 
-#Composite JavaScript files
-file_merge "src/kendo.editor.js" => [
-    "src/editor/main.js",
-    "src/editor/dom.js",
-    "src/editor/serializer.js",
-    "src/editor/range.js",
-    "src/editor/system.js",
-    "src/editor/inlineformat.js",
-    "src/editor/formatblock.js",
-    "src/editor/linebreak.js",
-    "src/editor/lists.js",
-    "src/editor/link.js",
-    "src/editor/image.js",
-    "src/editor/components.js",
-    "src/editor/indent.js",
-    "src/editor/viewhtml.js",
-    "src/editor/pendingformats.js",
-]
-file "src/kendo.editor.js" => JS_BUILDFILE
-
-file_merge "src/kendo.aspnetmvc.js" => [
-    "src/aspnetmvc/kendo.data.aspnetmvc.js",
-    "src/aspnetmvc/kendo.combobox.aspnetmvc.js",
-    "src/aspnetmvc/kendo.imagebrowser.aspnetmvc.js",
-    "src/aspnetmvc/kendo.validator.aspnetmvc.js"
-]
-file "src/kendo.aspnetmvc.js" => JS_BUILDFILE
-
 # Suites
 WEB_JS = FileList[
     "src/kendo.core.js",
