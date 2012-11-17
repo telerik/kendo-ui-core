@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "dataviz-svg",
+    name: "Output: SVG",
+    description: "Support for SVG rendering",
+    category: "dataviz",
+    depends: [ "dataviz-core" ]
+});
+
 (function () {
 
     // Imports ================================================================

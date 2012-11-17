@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "fx",
+    name: "Effects",
+    category: "framework",
+    description: "Required for animation effects in all Kendo UI widgets.",
+    depends: [ "core" ]
+});
+
 (function($, undefined) {
     /**
      * @name kendo.fx

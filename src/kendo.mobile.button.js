@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "mobile.button",
+    name: "Button",
+    category: "mobile",
+    description: "The Button widget navigates between mobile Application views when pressed.",
+    depends: [ "mobile.application" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,

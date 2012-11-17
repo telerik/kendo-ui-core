@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "window",
+    name: "Window",
+    category: "web",
+    description: "The Window widget displays content in a modal or non-modal HTML window.",
+    depends: [ "draganddrop" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,

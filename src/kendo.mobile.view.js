@@ -1,3 +1,12 @@
+KENDO_COMPONENT({
+    id: "mobile.view",
+    name: "View",
+    category: "mobile",
+    description: "Mobile View",
+    depends: [ "core", "fx", "history", "mobile.scroller" ],
+    hidden: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,

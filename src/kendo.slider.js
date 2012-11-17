@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "slider",
+    name: "Slider",
+    category: "web",
+    description: "The Slider widget provides a rich input for selecting values or ranges of values.",
+    depends: [ "draganddrop" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,

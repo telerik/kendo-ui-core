@@ -1,3 +1,10 @@
+KENDO_COMPONENT({
+    id: "dropdownlist",
+    name: "DropDownList",
+    category: "web",
+    description: "The DropDownList widget displays a list of values and allows the selection of a single value from the list.",
+    depends: [ "list" ]
+});
 
 (function($, undefined) {
     var kendo = window.kendo,

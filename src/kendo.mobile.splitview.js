@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "mobile.spitview",
+    name: "SplitView",
+    category: "mobile",
+    description: "The mobile SplitView is a tablet-specific view that consists of two or more mobile Pane widgets.",
+    depends: [ "mobile.application" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,

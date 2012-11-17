@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "list",
+    name: "List",
+    category: "framework",
+    depends: [ "data", "popup" ],
+    hidden: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

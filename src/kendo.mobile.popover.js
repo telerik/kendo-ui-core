@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "mobile.popover",
+    name: "PopOver",
+    category: "mobile",
+    description: "The mobile PopOver widget represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. ",
+    depends: [ "mobile.application" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,

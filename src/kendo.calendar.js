@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "calendar",
+    name: "Calendar",
+    category: "web",
+    description: "The Calendar widget renders a graphical calendar that supports navigation and selection.",
+    depends: [ "core" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

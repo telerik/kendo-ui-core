@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "panelbar",
+    name: "PanelBar",
+    category: "web",
+    description: "The PanelBar widget displays hierarchical data as a multi-level expandable panel bar.",
+    depends: [ "core" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

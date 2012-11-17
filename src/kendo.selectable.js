@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "selectable",
+    name: "Selectable",
+    category: "framework",
+    depends: [ "core" ],
+    advanced: true
+});
+
 (function ($, undefined) {
     var kendo = window.kendo,
         touch = kendo.support.touch,

@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "pager",
+    name: "Pager",
+    category: "framework",
+    depends: [ "data" ],
+    advanced: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

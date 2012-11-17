@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "menu",
+    name: "Menu",
+    category: "web",
+    description: "The Menu widget displays hierarchical data as a multi-level menu.",
+    depends: [ "popup" ]
+});
+
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

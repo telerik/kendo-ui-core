@@ -1,3 +1,10 @@
+KENDO_COMPONENT({
+    id: "timepicker",
+    name: "TimePicker",
+    category: "web",
+    description: "The TimePicker widget allows the end user to select a value from a list of predefined values or to type a new value.",
+    depends: [ "popup" ]
+});
 
 (function($, undefined) {
     var kendo = window.kendo,

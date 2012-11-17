@@ -1,4 +1,4 @@
-;(function($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
         each = $.each,
@@ -2780,14 +2780,17 @@ var KENDO_COMPONENT = (function(cache, $, base_url){
         }
     };
     return function(comp) {
-        if (!cache[comp.id]) {
-            cache[comp.id] = comp;
-            if (comp.depends) comp.depends.forEach(function(id){
+        if (!cache[comp.id] || !comp.id) {
+            if (comp.id) cache[comp.id] = comp;
+            var deps = comp.depends ? comp.depends.slice(0) : [];
+            if (comp.features) comp.features.forEach(function(f){
+                if (f.depends) deps = deps.concat(f.depends);
+            });
+            deps.forEach(function(id){
                 if (!cache[id])
                     load_file("kendo." + id + ".js");
             });
             if (comp.files) comp.files.forEach(load_file);
-            console.log("Defined " + comp.id);
         }
     };
 })({}, jQuery,
@@ -2795,3 +2798,10 @@ var KENDO_COMPONENT = (function(cache, $, base_url){
    (function(x){
        return x[x.length - 1].src.replace(/\/+[^\/]*$/, "/");
    })(document.getElementsByTagName("script")));
+
+KENDO_COMPONENT({
+    id: "core",
+    name: "Core",
+    category: "framework",
+    description: "The core of the Kendo framework."
+});

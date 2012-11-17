@@ -22,7 +22,6 @@ demos/mvc/sources
 !src/jquery.min.js
 src/**/*.min.js
 src/*.min.js
-src/kendo.aspnetmvc.js
 src/kendo.all.js
 src/kendo.winjs.js
 src/kendo.dataviz.js

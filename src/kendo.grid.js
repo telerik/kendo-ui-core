@@ -1,3 +1,57 @@
+KENDO_COMPONENT({
+    id: "grid",
+    name: "Grid",
+    category: "web",
+    description: "The Grid widget displays tabular data and offers rich support for interacting with data,including paging, sorting, grouping, and selection.",
+    depends: [ "data" ],
+    features: [ {
+        id: "grid-editing",
+        name: "Editing",
+        description: "Support for record editing",
+        depends: [ "editable", "window" ]
+    }, {
+        id: "grid-filtering",
+        name: "Filtering",
+        description: "Support for record filtering",
+        depends: [ "filtermenu" ]
+    }, {
+        id: "grid-columnmenu",
+        name: "Column menu",
+        description: "Support for header column menu",
+        depends: [ "columnmenu" ]
+    }, {
+        id: "grid-grouping",
+        name: "Grouping",
+        description: "Support for grid grouping",
+        depends: [ "groupable" ]
+    }, {
+        id: "grid-paging",
+        name: "Paging",
+        description: "Suppot for grid paging",
+        depends: [ "pager" ]
+    }, {
+        id: "grid-selection",
+        name: "Selection",
+        description: "Support for row selection",
+        depends: [ "selectable" ]
+    }, {
+        id: "grid-sorting",
+        name: "Sorting",
+        description: "Support for grid sorting",
+        depends: [ "sortable" ]
+    }, {
+        id: "grid-column-reorder",
+        name: "Column reordering",
+        description: "Support for column reordering",
+        depends: [ "reorderable" ]
+    }, {
+        id: "grid-column-resize",
+        name: "Column resizing",
+        description: "Support for column resizing",
+        depends: [ "resizable" ]
+    } ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

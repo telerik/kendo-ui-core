@@ -1,3 +1,12 @@
+KENDO_COMPONENT({
+    id: "history",
+    name: "History",
+    category: "mobile",
+    description: "History",
+    depends: [ "core" ],
+    hidden: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         location = window.location,

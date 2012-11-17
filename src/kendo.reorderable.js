@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "reorderable",
+    name: "Reorderable",
+    category: "framework",
+    depends: [ "core", "draganddrop" ],
+    advanced: true
+});
+
 (function ($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,

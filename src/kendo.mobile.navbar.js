@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "mobile.navbar",
+    name: "NavBar",
+    category: "mobile",
+    description: "The Kendo mobile NavBar widget is used inside a mobile View or Layout Header element to display an application navigation bar.",
+    depends: [ "mobile.application" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,

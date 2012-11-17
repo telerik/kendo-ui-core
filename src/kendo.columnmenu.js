@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "columnmenu",
+    name: "Column Menu",
+    category: "framework",
+    depends: [ "popup", "filtermenu", "menu" ],
+    advanced: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

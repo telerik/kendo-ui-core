@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "data.odata",
+    name: "OData",
+    category: "framework",
+    depends: [ "core" ],
+    hidden: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         extend = $.extend,

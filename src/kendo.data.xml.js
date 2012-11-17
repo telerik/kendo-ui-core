@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "data.xml",
+    name: "XML",
+    category: "framework",
+    depends: [ "core" ],
+    hidden: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         isArray = $.isArray,

@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "chart",
+    name: "Chart",
+    category: "dataviz",
+    description: "The Chart widget uses modern browser technologies to render high-quality data visualizations in the browser.",
+    depends: [ "data", "userevents", "dataviz-core", "dataviz-svg" ]
+});
+
 (function ($, undefined) {
     // Imports ================================================================
     var each = $.each,

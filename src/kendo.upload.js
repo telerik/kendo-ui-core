@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "upload",
+    name: "Upload",
+    category: "web",
+    description: "The Upload widget uses progressive enhancement to deliver the best possible uploading experience to users.",
+    depends: [ "core" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,

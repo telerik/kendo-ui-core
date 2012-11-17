@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "splitter",
+    name: "Splitter",
+    category: "web",
+    description: "The Splitter widget provides an easy way to create a dynamic layout of resizable and collapsible panes.",
+    depends: [ "resizable" ]
+});
+
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

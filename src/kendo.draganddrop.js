@@ -1,3 +1,11 @@
+KENDO_COMPONENT({
+    id: "draganddrop",
+    name: "Drag & drop",
+    category: "framework",
+    description: "Drag & drop functionality for any DOM element.",
+    depends: [ "core", "userevents" ]
+});
+
 (function ($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
