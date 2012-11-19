@@ -74,6 +74,41 @@ var LinkCommand = Command.extend({
         cmd.formatter = new LinkFormatter();
     },
 
+    _dialogTemplate: function(showText) {
+        return kendo.template(
+            '<div class="k-editor-dialog">' +
+                "<ol>" +
+                    "<li class='k-form-text-row'>" +
+                        "<label for='k-editor-link-url'>#: messages.linkWebAddress #</label>" +
+                        "<input type='text' class='k-input' id='k-editor-link-url'>" +
+                    "</li>" +
+                    "# if (showText) { #" +
+                        "<li class='k-form-text-row'>" +
+                            "<label for='k-editor-link-text'>#: messages.linkText #</label>" +
+                            "<input type='text' class='k-input' id='k-editor-link-text'>" +
+                        "</li>" +
+                    "# } #" +
+                    "<li class='k-form-text-row'>" +
+                        "<label for='k-editor-link-title'>#: messages.linkToolTip #</label>" +
+                        "<input type='text' class='k-input' id='k-editor-link-title'>" +
+                    "</li>" +
+                    "<li class='k-form-checkbox-row'>" +
+                        "<input type='checkbox' id='k-editor-link-target'>" +
+                        "<label for='k-editor-link-target'>#: messages.linkOpenInNewWindow #</label>" +
+                    "</li>" +
+                "</ol>" +
+                "<div class='k-button-wrapper'>" +
+                    '<button class="k-dialog-insert k-button">#: messages.dialogInsert #</button>' +
+                    '&nbsp;#: messages.dialogButtonSeparator #&nbsp;' +
+                    '<a href="\\#" class="k-dialog-close k-link">#: messages.dialogCancel #</a>' +
+                "</div>" +
+            "</div>"
+        )({
+            messages: this.editor.options.messages,
+            showText: showText
+        });
+    },
+
     exec: function () {
         var that = this,
             range = that.getRange(),
@@ -85,23 +120,24 @@ var LinkCommand = Command.extend({
         nodes = textNodes(range);
 
         function apply(e) {
-            var href = $("#k-editor-link-url", dialog.element).val(),
+            var element = dialog.element,
+                href = $("#k-editor-link-url", element).val(),
                 title, text, target;
 
             if (href && href != "http://") {
                 that.attributes = { href: href };
 
-                title = $("#k-editor-link-title", dialog.element).val();
+                title = $("#k-editor-link-title", element).val();
                 if (title) {
                     that.attributes.title = title;
                 }
 
-                text = $("#k-editor-link-text", dialog.element).val();
+                text = $("#k-editor-link-text", element).val();
                 if (text !== initialText) {
                     that.attributes.innerHTML = text || href;
                 }
 
-                target = $("#k-editor-link-target", dialog.element).is(":checked");
+                target = $("#k-editor-link-target", element).is(":checked");
                 if (target) {
                     that.attributes.target = "_blank";
                 }
@@ -127,24 +163,9 @@ var LinkCommand = Command.extend({
 
         var a = nodes.length ? that.formatter.finder.findSuitable(nodes[0]) : null;
 
-        var shouldShowText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
+        var showText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
-        var windowContent =
-            "<div class='k-editor-dialog'>" +
-                "<ol>" +
-                    "<li class='k-form-text-row'><label for='k-editor-link-url'>Web address</label><input type='text' class='k-input' id='k-editor-link-url'></li>" +
-                    (shouldShowText ? "<li class='k-form-text-row'><label for='k-editor-link-text'>Text</label><input type='text' class='k-input' id='k-editor-link-text'></li>" : "") +
-                    "<li class='k-form-text-row'><label for='k-editor-link-title'>Tooltip</label><input type='text' class='k-input' id='k-editor-link-title'></li>" +
-                    "<li class='k-form-checkbox-row'><input type='checkbox' id='k-editor-link-target'><label for='k-editor-link-target'>Open link in new window</label></li>" +
-                "</ol>" +
-                "<div class='k-button-wrapper'>" +
-                    "<button class='k-dialog-insert k-button'>Insert</button>" +
-                    "&nbsp;or&nbsp;" +
-                    "<a href='#' class='k-dialog-close k-link'>Close</a>" +
-                "</div>" +
-            "</div>";
-
-        var dialog = EditorUtils.createDialog(windowContent, that.editor, $.extend({}, that.editor.options.dialogOptions, {
+        var dialog = EditorUtils.createDialog(that._dialogTemplate(showText), that.editor, extend({}, that.editor.options.dialogOptions, {
             title: "Insert link",
             close: close
         }))
@@ -168,7 +189,7 @@ var LinkCommand = Command.extend({
             .data("kendoWindow")
             .center();
 
-        if (shouldShowText && nodes.length > 0) {
+        if (showText && nodes.length > 0) {
             initialText = $("#k-editor-link-text", dialog.element).val();
         }
 
