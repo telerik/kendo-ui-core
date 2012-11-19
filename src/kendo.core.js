@@ -2616,9 +2616,13 @@ function pad(number, digits, end) {
 
             var handler = function(e) {
                 if (kendo.captureMouse) {
-                    e.stopPropagation();
                     if (e.type === "click") {
-                        e.preventDefault();
+                        if (kendo.bustClick) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    } else {
+                        e.stopPropagation();
                     }
                 }
             };
@@ -2628,8 +2632,9 @@ function pad(number, digits, end) {
             }
         },
 
-        muteMouse: function() {
+        muteMouse: function(e) {
             kendo.captureMouse = true;
+            kendo.bustClick = $(e.currentTarget).data("shouldBustClick");
             clearTimeout(kendo.mouseTrapTimeoutID);
         },
 
@@ -2695,13 +2700,16 @@ function pad(number, digits, end) {
                 events = args[0].replace(/([^ ]+)/g, applyEventMap);
 
             if (ns) {
-
                 events = events.replace(/( |$)/g, ns + " ");
             }
 
             // setup mouse trap
-            if (support.touch && events.indexOf("mouse") > -1 && this[0] !== document.documentElement) {
+            if (support.touch && events.search(/mouse|click/) > -1 && this[0] !== document.documentElement) {
                 kendo.setupMouseMute();
+
+                if (events.indexOf("click") > -1 && events.indexOf("touchend") > -1) {
+                    this.data("shouldBustClick", true);
+                }
 
                 on.call(this, {
                     touchstart: kendo.muteMouse,
