@@ -5902,12 +5902,16 @@ var PendingFormats = Class.extend({
 
         var target = caret.previousSibling;
 
-        /* under IE, target is a zero-length text node. go figure. */
-        if (!target.nodeValue) {
-            target = target.previousSibling;
-        }
+        if (target) {
+            /* under IE, target may be a zero-length text node */
+            if (!target.nodeValue) {
+                target = target.previousSibling;
+            }
 
-        range.setStart(target, target.nodeValue.length - 1);
+            range.setStart(target, target.nodeValue.length - 1);
+        } else {
+            range.setStart(target, 0);
+        }
 
         marker.add(range);
 
