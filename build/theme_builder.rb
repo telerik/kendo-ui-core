@@ -1,18 +1,5 @@
 THEME_BUILDER_BUILDFILE = 'build/theme_builder.rb'
 
-file_merge 'themebuilder/scripts/less.js' => FileList[
-     'themebuilder/scripts/prologue.js',
-     'build/less-js/build/require.js',
-     'build/less-js/build/ecma-5.js',
-     'build/less-js/lib/less/parser.js',
-     'build/less-js/lib/less/functions.js',
-     'build/less-js/lib/less/colors.js',
-     'build/less-js/lib/less/tree/*.js',
-     'build/less-js/lib/less/tree.js',
-     'themebuilder/scripts/epilogue.js',
-]
-file 'themebuilder/scripts/less.js' => THEME_BUILDER_BUILDFILE
-
 file_copy :to => 'themebuilder/styles/kendo.black.css',
           :from => 'styles/web/kendo.black.css'
 
