@@ -178,6 +178,7 @@
 
             that.groupContainer
                 .off(NS)
+                .kendoDropTarget("destroy")
                 .kendoDraggable("destroy");
 
             if (that.dataSource && that._refreshHandler) {
