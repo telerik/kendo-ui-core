@@ -3042,7 +3042,8 @@
                 categoryPoints = chart.categoryPoints[categoryIx],
                 missingValues = chart.seriesMissingValues(series),
                 stackPoint,
-                plotValue = 0;
+                plotValue = 0,
+                fields = data.fields;
 
             if (!defined(value) || value === null) {
                 if (missingValues === ZERO) {
@@ -3060,7 +3061,14 @@
                             color: series.color
                         }
                     }
-                }, series)
+                }, series, {
+                    color: fields.color,
+                    markers: {
+                        border: {
+                            color: fields.color
+                        }
+                    }
+                })
             );
 
             if (isStacked) {
@@ -3119,6 +3127,10 @@
 
             group.children = elements;
             return [group];
+        },
+
+        bindableFields: function() {
+            return ["color"];
         }
     });
     deepExtend(LineChart.fn, LineChartMixin);
