@@ -2774,7 +2774,13 @@ var KENDO_COMPONENT = (function(cache, $, base_url, evil){
         if (scripts.length === 0) {
             var req = $.ajax({ url: addr, async: false });
             if (req.status == 200) {
-                evil(req.responseText);
+                try {
+                    evil(req.responseText);
+                } catch(ex) {
+                    console.error("Failed to evaluate file %s", file);
+                    console.error(ex);
+                    console.log(ex.stack);
+                }
             } else {
                 console.error("Failed to load dependency: " + addr);
             }
