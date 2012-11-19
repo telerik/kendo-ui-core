@@ -475,11 +475,11 @@
                 ranges = {};
 
             if (origEvent.wheelDelta) {
-              delta = -origEvent.wheelDelta / 120;
+                delta = round(-origEvent.wheelDelta / 120);
             }
 
             if (origEvent.detail) {
-              delta = origEvent.detail / 3;
+                delta = round(origEvent.detail / 3);
             }
 
             if (!state) {
