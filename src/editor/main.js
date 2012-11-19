@@ -397,6 +397,10 @@
         directoryNotFound: "A directory with this name was not found.",
         imageWebAddress: "Web address",
         imageAltText: "Alternate text",
+        linkWebAddress: "Web address",
+        linkText: "Text",
+        linkToolTip: "ToolTip",
+        linkOpenInNewWindow: "Open link in new window",
         dialogInsert: "Insert",
         dialogButtonSeparator: "or",
         dialogCancel: "Cancel"
