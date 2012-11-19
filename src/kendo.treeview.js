@@ -211,8 +211,8 @@
                 .on("blur" + NS, proxy(that._blur, that))
                 .on("mousedown" + NS, ".k-in,.k-checkbox :checkbox", proxy(that._mousedown, that))
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
-                .on("touchend" + NS + " click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
-                .on("touchend" + NS + " click" + NS, function() { that.focus(); });
+                .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
+                .on("click" + NS, function() { that.focus(); });
         },
 
         _checkboxClick: function(e) {
