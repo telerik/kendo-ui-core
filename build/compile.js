@@ -9,10 +9,29 @@ var ARGV = OPT
     .describe("amd", "Wrap for RequireJS")
     .describe("deps", "List dependencies")
     .describe("decl", "Add the component declarations in the source code")
+    .describe("bundle", "Create a bundle")
     .boolean("amd")
     .boolean("deps")
     .wrap(80)
     .argv;
+
+if (ARGV.bundle) {
+    var files = ARGV._.slice();
+    var destination = files.shift();
+    var destination_min = destination.replace(/\.js$/i, ".min.js");
+    var toplevel = new u2.AST_Toplevel({ body: [] });
+    files.forEach(function(file){
+        var ast = compile_one_file(file, ast);
+        toplevel.body = toplevel.body.concat(ast.body);
+    });
+    fs.writeFileSync(destination, toplevel.print_to_string({ beautify: true }));
+    toplevel = squeeze(toplevel);
+    toplevel.figure_out_scope();
+    toplevel.compute_char_frequency();
+    toplevel.mangle_names();
+    fs.writeFileSync(destination_min, toplevel.print_to_string());
+    process.exit(0);
+}
 
 var KENDO_SRCDIR = path.join(path.dirname(fs.realpathSync(__filename)), "..");
 
@@ -101,10 +120,7 @@ if (ARGV.decl) {
     process.exit(0);
 }
 
-files.forEach(function(file){
-    var output = file.replace(/\.js$/i, ".min.js");
-    if (output == file)
-        throw new Error("Won't overwrite " + file);
+function compile_one_file(file) {
     var code = fs.readFileSync(file, "utf8");
     var ast = u2.parse(code, { filename: file });
     ast = extract_deps(ast, file);
@@ -125,9 +141,22 @@ files.forEach(function(file){
         sys.puts(file + " is a bundle");
         return;
     }
+    return ast;
+}
+
+function squeeze(ast) {
     var compressor = u2.Compressor({ warnings: false });
     ast.figure_out_scope();
     ast = ast.transform(compressor);
+    return ast;
+}
+
+files.forEach(function (file){
+    var output = file.replace(/\.js$/i, ".min.js");
+    if (output == file)
+        throw new Error("Won't overwrite " + file);
+    var ast = compile_one_file(file);
+    ast = squeeze(ast);
     ast.figure_out_scope();
     ast.compute_char_frequency();
     ast.mangle_names();
