@@ -220,6 +220,19 @@
 
                 ok(e.pageX);
             });
+
+            test("the hint is not active after destroy", function() {
+                setup({
+                    hint: $("<div></div>").addClass("hint")
+                });
+
+                draggable.destroy();
+
+                trigger("mousedown", { pageX: 1, pageY: 1 });
+                trigger("mousemove", { pageX: 10, pageY: 1 });
+
+                equal($(".hint").length, 0);
+            });
         </script>
     </body>
 </html>

@@ -817,6 +817,10 @@
         _draggable: function() {
             var that = this;
             if (that.options.reorderable) {
+                if (that._draggableInstance) {
+                    that._draggableInstance.destroy();
+                }
+
                 that._draggableInstance = that.wrapper.kendoDraggable({
                     group: kendo.guid(),
                     filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)",

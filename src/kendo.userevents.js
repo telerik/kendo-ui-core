@@ -265,7 +265,7 @@
             that.touches = [];
             that._maxTouches = options.multiTouch ? 2 : 1;
 
-            element = $(element).handler(that);
+            element = $(element).handler(that).autoApplyNS();
             Observable.fn.init.call(that);
 
             extend(that, {
