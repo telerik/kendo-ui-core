@@ -116,6 +116,9 @@
             }
 
             if (!element.parent().is(that.appendTo)) {
+                // remove script blocks to prevent double-execution
+                element.find("script").remove();
+
                 if (element.is(VISIBLE)) {
                     offset = element.offset();
                     isVisible = true;
