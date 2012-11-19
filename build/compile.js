@@ -192,7 +192,7 @@ function extract_deps(ast, comp_filename) {
                         toplevel: block
                     });
                 });
-                return block;
+                return u2.MAP.splice(block.body);
             }
             if (node instanceof u2.AST_Var && node.definitions[0].name.name == "KENDO_COMPONENT") {
                 // discard the KENDO_COMPONENT function
