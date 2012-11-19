@@ -294,24 +294,35 @@ namespace :build do
         zip_bundles
     end
 
-    desc 'Packages and publishes bundles to the Stable directory'
-    task :stable => [:bundles, 'demos:production', zip_targets("Stable")].flatten
+    namespace :production do
+        desc 'Run tests and VSDoc'
+        task :tests => ["tests:Production", "vsdoc:production:test"]
 
-    write_changelog "#{WEB_ROOT}/changelog/index.html", %w(web mobile dataviz framework aspnetmvc)
+        desc 'Update the /production build machine web site'
+        task :demos => [ 'demos:staging', 'download_builder:staging' ] do
+            sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
+        end
 
-    desc('Runs a build over the production branch')
-    task "production" => ["tests:Production", "vsdoc:production:test", :bundles, 'demos:production', 'demos:staging', 'download_builder:staging', zip_targets("Production"), "#{WEB_ROOT}/changelog/index.html"].flatten do
-        sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
+        changelog = "#{WEB_ROOT}/changelog/index.html"
+        write_changelog changelog, %w(web mobile dataviz framework aspnetmvc)
+
+        desc 'Package and publish bundles to the Production directory, and update the changelog'
+        task :bundles => [:bundles, 'demos:production',  zip_targets("Production"), changelog].flatten
     end
 
-    desc 'Updates the staging web site'
-    task 'staging-demos' => [ 'demos:staging', 'download_builder:staging' ] do
-        sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
-        sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
-    end
+    namespace :master do
+        desc 'Runs test suite over the master branch'
+        task :tests => ["tests:CI", "vsdoc:master:test"]
 
-    desc('Runs test suite over the master branch')
-    task :ci => ["tests:CI", "vsdoc:master:test"]
+        desc 'Update the /staging build machine web site'
+        task :demos => [ 'demos:staging', 'download_builder:staging' ] do
+            sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
+            sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
+        end
+
+        desc 'Package and publish bundles to the Stable directory'
+        task :bundles => [:bundles, 'demos:production', zip_targets("Stable")].flatten
+    end
 end
 
 namespace :bundles do
