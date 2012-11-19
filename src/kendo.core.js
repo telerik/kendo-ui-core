@@ -2601,23 +2601,23 @@ function pad(number, digits, end) {
 
     var MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseover", "mouseout", "mouseup", "click"];
 
-    $.extend(kendo, {
+    var MouseEventNormalizer = {
         setupMouseMute: function() {
             var idx = 0,
                 length = MOUSE_EVENTS.length,
                 element = document.documentElement;
 
-            if (kendo.mouseTrap || !support.eventCapture) {
+            if (this.mouseTrap || !support.eventCapture) {
                 return;
             }
 
-            kendo.mouseTrap = true;
-            kendo.captureMouseEvents = false;
+            MouseEventNormalizer.mouseTrap = true;
+            MouseEventNormalizer.captureMouseEvents = false;
 
             var handler = function(e) {
-                if (kendo.captureMouse) {
+                if (MouseEventNormalizer.captureMouse) {
                     if (e.type === "click") {
-                        if (kendo.bustClick) {
+                        if (MouseEventNormalizer.bustClick) {
                             e.preventDefault();
                             e.stopPropagation();
                         }
@@ -2633,17 +2633,17 @@ function pad(number, digits, end) {
         },
 
         muteMouse: function(e) {
-            kendo.captureMouse = true;
-            kendo.bustClick = $(e.currentTarget).data("shouldBustClick");
-            clearTimeout(kendo.mouseTrapTimeoutID);
+            MouseEventNormalizer.captureMouse = true;
+            MouseEventNormalizer.bustClick = e.data.bustClick;
+            clearTimeout(MouseEventNormalizer.mouseTrapTimeoutID);
         },
 
         unMuteMouse: function() {
-            kendo.mouseTrapTimeoutID = setTimeout(function() {
-                kendo.captureMouse = false;
+            MouseEventNormalizer.mouseTrapTimeoutID = setTimeout(function() {
+                MouseEventNormalizer.captureMouse = false;
             }, 400);
         }
-    });
+    };
 
     var eventMap = {
         down: "touchstart mousedown",
@@ -2705,16 +2705,19 @@ function pad(number, digits, end) {
 
             // setup mouse trap
             if (support.touch && events.search(/mouse|click/) > -1 && this[0] !== document.documentElement) {
-                kendo.setupMouseMute();
+                MouseEventNormalizer.setupMouseMute();
+                selector = args.length === 2 ? null : args[1],
+                bustClick = events.indexOf("click") > -1 && events.indexOf("touchend") > -1;
 
-                if (events.indexOf("click") > -1 && events.indexOf("touchend") > -1) {
-                    this.data("shouldBustClick", true);
-                }
-
-                on.call(this, {
-                    touchstart: kendo.muteMouse,
-                    touchend: kendo.unMuteMouse
-                });
+                on.call(this,
+                    {
+                        touchstart: MouseEventNormalizer.muteMouse,
+                        touchend: MouseEventNormalizer.unMuteMouse
+                    },
+                    selector,
+                    {
+                        bustClick: bustClick
+                    } );
             }
 
             if (typeof callback === STRING) {
