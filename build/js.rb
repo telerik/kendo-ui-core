@@ -14,7 +14,7 @@ JS_BUILDFILE = 'build/js.rb'
 
 #Build src/*.min.js files by running uglifyjs over src/*.js
 rule '.min.js' => lambda { |t| t.sub('min.js', 'js') } do |t|
-    uglifyjs(t.source, t.name)
+    compilejs(t.source, t.name)
 end
 
 # Suites

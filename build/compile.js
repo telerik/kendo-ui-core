@@ -108,17 +108,22 @@ files.forEach(function(file){
     var code = fs.readFileSync(file, "utf8");
     var ast = u2.parse(code, { filename: file });
     ast = extract_deps(ast, file);
-    var deps = ast.deps;
-    var id = "kendo." + ast.component.id;
-    if (ARGV.deps) {
-        sys.puts(file + ": " + deps.join(", "));
+    if (!ast.is_bundle) {
+        var deps = ast.deps;
+        var id = "kendo." + ast.component.id;
+        if (ARGV.deps) {
+            sys.puts(file + ": " + deps.join(", "));
+            return;
+        }
+        deps = deps.map(function(dep){
+            return "./kendo." + dep + ".min";
+        });
+        if (ARGV.amd) {
+            ast = get_wrapper().wrap(id, deps, ast);
+        }
+    } else if (ARGV.deps) {
+        sys.puts(file + " is a bundle");
         return;
-    }
-    deps = deps.map(function(dep){
-        return "./kendo." + dep + ".min";
-    });
-    if (ARGV.amd) {
-        ast = get_wrapper().wrap(id, deps, ast);
     }
     var compressor = u2.Compressor({ warnings: false });
     ast.figure_out_scope();
@@ -131,7 +136,7 @@ files.forEach(function(file){
 });
 
 function extract_deps(ast, comp_filename) {
-    var component;
+    var component, is_bundle = false;
     var tt = new u2.TreeTransformer(function before(node, descend){
         if (node !== ast) {
             if (node instanceof u2.AST_Lambda) return node; // don't search subscopes
@@ -140,7 +145,7 @@ function extract_deps(ast, comp_filename) {
                 && node.body.expression instanceof u2.AST_SymbolRef
                 && node.body.expression.name == "KENDO_COMPONENT")
             {
-                if (component) throw new Error("Component already initialized!");
+                if (component) is_bundle = true;
                 component = node.body.args[0].print_to_string();
                 component = (1, eval)("(" + component + ")");
 
@@ -168,12 +173,19 @@ function extract_deps(ast, comp_filename) {
         }
     });
     ast = ast.transform(tt);
-    var deps = component.depends ? component.depends.slice() : [];
-    if (component.features) component.features.forEach(function(f){
-        if (f.depends) deps = deps.concat(f.depends);
-    });
-    ast.deps = deps;
-    ast.component = component;
+    ast.is_bundle = is_bundle;
+    if (!component && !is_bundle) {
+        ast.is_bundle = true;
+        return ast;
+    }
+    if (!is_bundle) {
+        var deps = component.depends ? component.depends.slice() : [];
+        if (component.features) component.features.forEach(function(f){
+            if (f.depends) deps = deps.concat(f.depends);
+        });
+        ast.deps = deps;
+        ast.component = component;
+    }
     return ast;
 };
 
