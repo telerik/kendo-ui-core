@@ -36,7 +36,7 @@ if (ARGV.bundle) {
 var KENDO_SRCDIR = path.join(path.dirname(fs.realpathSync(__filename)), "..");
 
 var get_wrapper = (function(wrapper){
-    var code = '((typeof define == "function" && define.amd) ? define : function(id, deps, body){ return body() })($ID, $DEPS, $CONT)';
+    var code = '((typeof define == "function" && define.amd) ? define : function(deps, body){ return body() })($DEPS, $CONT)';
     return function() {
         if (wrapper) return wrapper;
         wrapper = u2.parse(code);
