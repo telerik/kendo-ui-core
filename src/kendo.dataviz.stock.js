@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "stock-chart",
     name: "StockChart",
     category: "dataviz",

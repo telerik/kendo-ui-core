@@ -97,7 +97,7 @@ if (ARGV.decl) {
                 if (node instanceof u2.AST_SimpleStatement
                     && node.body instanceof u2.AST_Call
                     && node.body.expression instanceof u2.AST_SymbolRef
-                    && node.body.expression.name == "KENDO_COMPONENT") {
+                    && node.body.expression.name == "kendo_module") {
                     component_stat = node;
                     throw "ok";
                 }
@@ -106,7 +106,7 @@ if (ARGV.decl) {
             if (ex !== "ok") throw ex;
         }
         delete c.source;        // no point keeping that in the file itself
-        var comp = u2.parse("KENDO_COMPONENT(" + JSON.stringify(c) + ")"), code;
+        var comp = u2.parse("kendo_module(" + JSON.stringify(c) + ")"), code;
         if (component_stat) {
             code = orig_code.substring(0, component_stat.start.pos) +
                 comp.body[0].print_to_string({ beautify: true }) +
@@ -172,13 +172,13 @@ function extract_deps(ast, comp_filename) {
             if (node instanceof u2.AST_SimpleStatement &&
                 node.body instanceof u2.AST_Call
                 && node.body.expression instanceof u2.AST_SymbolRef
-                && node.body.expression.name == "KENDO_COMPONENT")
+                && node.body.expression.name == "kendo_module")
             {
                 if (component) is_bundle = true;
                 component = node.body.args[0].print_to_string();
                 component = (1, eval)("(" + component + ")");
 
-                // discard KENDO_COMPONENT calls
+                // discard kendo_module calls
                 if (!component.files || component.files.length == 0)
                     return new u2.AST_EmptyStatement(node);
 
@@ -194,8 +194,8 @@ function extract_deps(ast, comp_filename) {
                 });
                 return u2.MAP.splice(block.body);
             }
-            if (node instanceof u2.AST_Var && node.definitions[0].name.name == "KENDO_COMPONENT") {
-                // discard the KENDO_COMPONENT function
+            if (node instanceof u2.AST_Var && node.definitions[0].name.name == "kendo_module") {
+                // discard the kendo_module function
                 return new u2.AST_EmptyStatement(node);
             }
             return node;

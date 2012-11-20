@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "grid",
     name: "Grid",
     category: "web",

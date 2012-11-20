@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "mobile.shim",
     name: "Shim",
     category: "mobile",

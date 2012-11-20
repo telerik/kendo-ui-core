@@ -2760,7 +2760,7 @@ function pad(number, digits, end) {
 })(jQuery);
 
 // this function, along with calls to it, will not exist in compressed builds
-var KENDO_COMPONENT = (function(cache, $, base_url, evil){
+var kendo_module = (function(cache, $, base_url, evil){
     /*global console:true */
     function url(file){
         return base_url + file;
@@ -2815,7 +2815,7 @@ var KENDO_COMPONENT = (function(cache, $, base_url, evil){
        return x[x.length - 1].src.replace(/\/+[^\/]*$/, "/");
    })(document.getElementsByTagName("script")), eval);
 
-KENDO_COMPONENT({
+kendo_module({
     id: "core",
     name: "Core",
     category: "framework",

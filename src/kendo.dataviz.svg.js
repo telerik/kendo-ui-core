@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "dataviz-svg",
     name: "Output: SVG",
     description: "Support for SVG rendering",

@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "panelbar",
     name: "PanelBar",
     category: "web",

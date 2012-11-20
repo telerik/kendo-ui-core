@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "mobile.actionsheet",
     name: "ActionSheet",
     category: "mobile",

@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "reorderable",
     name: "Reorderable",
     category: "framework",

@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "data.odata",
     name: "OData",
     category: "framework",

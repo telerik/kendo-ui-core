@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "dataviz-vml",
     name: "Output: VML",
     description: "Support for VML rendering",

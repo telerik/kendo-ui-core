@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "mobile.loader",
     name: "Loader",
     category: "mobile",

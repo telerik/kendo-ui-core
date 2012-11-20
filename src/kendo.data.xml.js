@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "data.xml",
     name: "XML",
     category: "framework",

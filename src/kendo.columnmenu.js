@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "columnmenu",
     name: "Column Menu",
     category: "framework",

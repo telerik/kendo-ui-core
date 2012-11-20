@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "dropdownlist",
     name: "DropDownList",
     category: "web",

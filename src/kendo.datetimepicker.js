@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "datetimepicker",
     name: "DateTimePicker",
     category: "web",

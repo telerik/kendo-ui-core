@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "popup",
     name: "Pop-up",
     category: "framework",

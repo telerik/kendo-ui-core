@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "mobile.modalview",
     name: "ModalView",
     category: "mobile",

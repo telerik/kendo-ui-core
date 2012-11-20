@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "draganddrop",
     name: "Drag & drop",
     category: "framework",

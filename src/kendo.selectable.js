@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "selectable",
     name: "Selectable",
     category: "framework",

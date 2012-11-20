@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "themes",
     name: "Themes",
     description: "Built-in themes for the DataViz widgets",

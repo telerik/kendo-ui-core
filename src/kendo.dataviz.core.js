@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "dataviz-core",
     name: "Core",
     description: "The DataViz core functions",

@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "filtermenu",
     name: "Filtering Menu",
     category: "framework",

@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "mobile.scrollview",
     name: "ScrollView",
     category: "mobile",

@@ -1,4 +1,4 @@
-KENDO_COMPONENT({
+kendo_module({
     id: "tabstrip",
     name: "TabStrip",
     category: "web",
