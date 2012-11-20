@@ -2859,8 +2859,7 @@
         },
 
         _initChildren: function() {
-            var that = this,
-                childrenField = that._childrenOptions.schema.data;
+            var that = this;
 
             if (!(that.children instanceof HierarchicalDataSource)) {
                 that.children = new HierarchicalDataSource(that._childrenOptions);
@@ -2873,9 +2872,7 @@
                     that.trigger(CHANGE, e);
                 });
 
-                if (childrenField) {
-                    that[childrenField] = that.children.data();
-                }
+                that._updateChildrenField();
             }
         },
 
@@ -2899,6 +2896,12 @@
             return level;
         },
 
+        _updateChildrenField: function() {
+            var fieldName = this._childrenOptions.schema.data;
+
+            this[fieldName || "items"] = this.children.data();
+        },
+
         load: function() {
             var that = this,
                 options = {};
@@ -2914,6 +2917,8 @@
 
                 that.children.one(CHANGE, function() {
                             that._loaded = true;
+
+                            that._updateChildrenField();
                         })
                         ._query(options);
             }
