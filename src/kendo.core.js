@@ -2674,8 +2674,9 @@ function pad(number, digits, end) {
             return this;
         },
 
-        autoApplyNS: function() {
-            this.data("kendoNS", "." + kendo.guid());
+        autoApplyNS: function(ns) {
+            ns = ns || kendo.guid();
+            this.data("kendoNS", "." + ns);
             return this;
         },
 
@@ -2735,8 +2736,12 @@ function pad(number, digits, end) {
             return that;
         },
 
-        kendoDestroy: function() {
-            var ns = this.data("kendoNS");
+        kendoDestroy: function(ns) {
+            if (ns) {
+                ns = "." + ns;
+            } else {
+                ns = this.data("kendoNS");
+            }
             if (ns) {
                 this.off(ns);
             }
