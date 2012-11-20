@@ -29,7 +29,8 @@
         buttonRegExp = /button/;
 
     function toggleiOSLabel(e) {
-        var input = $(e.target).find("input"),
+        var target = $(e.target),
+            input = target.is("input") ? target : target.find("input"),
             value = !input[0].checked;
 
         if (input.is(":radio")) {
