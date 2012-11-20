@@ -264,8 +264,9 @@
             that.threshold = options.threshold || 0;
             that.touches = [];
             that._maxTouches = options.multiTouch ? 2 : 1;
+            that.eventNS = kendo.guid();
 
-            element = $(element).handler(that).autoApplyNS();
+            element = $(element).handler(that).autoApplyNS(that.eventNS);
             Observable.fn.init.call(that);
 
             extend(that, {
@@ -275,7 +276,7 @@
                 pressed: false
             });
 
-            that.surface.handler(that)
+            that.surface.handler(that).autoApplyNS(that.eventNS)
                 .on("move", "_move")
                 .on("up cancel", "_end");
 
@@ -323,9 +324,10 @@
         },
 
         destroy: function() {
-            this.element.kendoDestroy();
-            this.surface.kendoDestroy();
-            this._disposeAll();
+            var that = this;
+            that.element.kendoDestroy(that.eventNS);
+            that.surface.kendoDestroy(that.eventNS);
+            that._disposeAll();
         },
 
         capture: function() {
