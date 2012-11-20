@@ -110,6 +110,23 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// If set to false, the min and max dates will not be rounded off to
+        /// the nearest baseUnit. 
+        /// This option is most useful in combination with explicit min and max dates.
+        /// It will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
+        /// </summary>
+        /// <param name="roundToBaseUnit">
+        /// A boolean value that indicates if the axis range should be rounded to the nearest base unit.
+        /// The default value is true.
+        /// </param>
+        public ChartDateCategoryAxisBuilder<TModel> RoundToBaseUnit(bool roundToBaseUnit)
+        {
+            Axis.RoundToBaseUnit = roundToBaseUnit;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the date category axis minimum (start) date.
         /// </summary>
         /// <param name="min">

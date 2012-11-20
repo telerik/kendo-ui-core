@@ -48,6 +48,22 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// If set to false, the min and max dates will not be rounded off to
+        /// the nearest baseUnit. 
+        /// This option is most useful in combination with explicit min and max dates.
+        /// It will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
+        /// </summary>
+        /// <value>
+        /// A boolean value that indicates if the axis range should be rounded to the nearest base unit.
+        /// The default value is true.
+        /// </value>
+        bool? RoundToBaseUnit
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Specifies the date category axis minimum (start) date.
         /// </summary>
         DateTime? Min

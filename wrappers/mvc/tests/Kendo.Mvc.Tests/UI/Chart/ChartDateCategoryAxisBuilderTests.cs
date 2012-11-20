@@ -223,6 +223,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void RoundToBaseUnit_should_set_flag()
+        {
+            builder.RoundToBaseUnit(false);
+            axis.RoundToBaseUnit.ShouldEqual(false);
+        }
+
+        [Fact]
+        public void RoundToBaseUnit_should_return_builder()
+        {
+            builder.RoundToBaseUnit(false).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Min_should_set_min_date()
         {
             var min = DateTime.Parse("2012/01/01");

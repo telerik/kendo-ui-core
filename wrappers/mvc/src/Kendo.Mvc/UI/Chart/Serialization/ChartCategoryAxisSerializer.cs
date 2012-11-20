@@ -26,7 +26,8 @@ namespace Kendo.Mvc.UI
                 .Add("field", axis.Member, () => axis.Categories == null && axis.Member != null)
                 .Add("axisCrossingValue", axis.AxisCrossingValues, () => axis.AxisCrossingValues.Count() > 0)
                 .Add("min", axis.Min.ToJavaScriptString(), () => axis.Min != null)
-                .Add("max", axis.Max.ToJavaScriptString(), () => axis.Max != null);
+                .Add("max", axis.Max.ToJavaScriptString(), () => axis.Max != null)
+                .Add("roundToBaseUnit", axis.RoundToBaseUnit, () => axis.RoundToBaseUnit.HasValue);
 
             if (axis.BaseUnit != null)
             {

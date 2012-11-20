@@ -188,6 +188,20 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_serialize_RoundToBaseUnit()
+        {
+            axisMock.SetupGet(a => a.RoundToBaseUnit).Returns(false);
+            serializer.Serialize()["roundToBaseUnit"].ShouldEqual(false);
+        }
+
+        [Fact]
+        public void Should_not_serialize_RoundToBaseUnit_if_not_set()
+        {
+            axisMock.SetupGet(a => a.RoundToBaseUnit).Returns((bool?)null);
+            serializer.Serialize().ContainsKey("roundToBaseUnit").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Should_serialize_Min_if_set()
         {
             axisMock.SetupGet(a => a.Min).Returns(DateTime.Parse("2012/01/01"));
