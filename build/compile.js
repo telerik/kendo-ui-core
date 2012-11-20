@@ -10,7 +10,7 @@ var ARGV = OPT
     .describe("deps", "List dependencies")
     .describe("decl", "Add the component declarations in the source code")
     .describe("bundle", "Create a bundle")
-    .describe("build-json-deps", "Rebuild download-builder/kendo-config.VERSION_NUMBER.json")
+    .describe("kendo-config", "Generate download-builder/kendo-config.VERSION_NUMBER.json (to STDOUT)")
     .boolean("amd")
     .boolean("deps")
     .wrap(80)
@@ -42,7 +42,7 @@ if (ARGV.bundle) {
     process.exit(0);
 }
 
-if (ARGV["build-json-deps"]) {
+if (ARGV["kendo-config"]) {
     var js_dir = path.join(KENDO_SRCDIR, "src")
     , js_files = fs.readdirSync(js_dir)
         .filter(function(filename){
@@ -66,7 +66,7 @@ if (ARGV["build-json-deps"]) {
         }
     });
     deps_file.components = components;
-    fs.writeFileSync(deps_file_name, JSON.stringify(deps_file, null, 4));
+    sys.puts(JSON.stringify(deps_file, null, 4));
     process.exit(0);
 }
 
