@@ -2606,12 +2606,14 @@ function pad(number, digits, end) {
                 length = MOUSE_EVENTS.length,
                 element = document.documentElement;
 
-            if (this.mouseTrap || !support.eventCapture) {
+            if (MouseEventNormalizer.mouseTrap || !support.eventCapture) {
                 return;
             }
 
             MouseEventNormalizer.mouseTrap = true;
-            MouseEventNormalizer.captureMouseEvents = false;
+
+            MouseEventNormalizer.bustClick = false;
+            MouseEventNormalizer.captureMouse = false;
 
             var handler = function(e) {
                 if (MouseEventNormalizer.captureMouse) {
@@ -2633,13 +2635,17 @@ function pad(number, digits, end) {
 
         muteMouse: function(e) {
             MouseEventNormalizer.captureMouse = true;
-            MouseEventNormalizer.bustClick = e.data.bustClick;
+            if (e.data.bustClick) {
+                MouseEventNormalizer.bustClick = true;
+            }
             clearTimeout(MouseEventNormalizer.mouseTrapTimeoutID);
         },
 
         unMuteMouse: function() {
+            clearTimeout(MouseEventNormalizer.mouseTrapTimeoutID);
             MouseEventNormalizer.mouseTrapTimeoutID = setTimeout(function() {
                 MouseEventNormalizer.captureMouse = false;
+                MouseEventNormalizer.bustClick = false;
             }, 400);
         }
     };
@@ -2707,7 +2713,7 @@ function pad(number, digits, end) {
             if (support.touch && events.search(/mouse|click/) > -1 && this[0] !== document.documentElement) {
                 MouseEventNormalizer.setupMouseMute();
                 var selector = args.length === 2 ? null : args[1],
-                    bustClick = events.indexOf("click") > -1 && events.indexOf("touchend") > -1;
+                    bustClick = (events.indexOf("click") > -1 || events.indexOf("mouseup") > -1) && events.indexOf("touchend") > -1;
 
                 on.call(this,
                     {
