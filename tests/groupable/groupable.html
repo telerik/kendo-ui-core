@@ -316,6 +316,62 @@
 
                 equal(groupContainer.children().length, 1);
             });
+
+            test("group container draggable is destroyed", function() {
+                div.remove();
+                div = $("<div><div class='container' style='height:10px;'></div><table><thead><th data-kendo-field='field1.foo'></th><th data-kendo-field='field2.foo'></th></thead></table></div>").prependTo(document.body);
+
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: new kendo.data.DataSource() }),
+                    draggable = stub(groupContainer.data("kendoDraggable"), "destroy");
+
+                groupable.destroy();
+
+                equal(draggable.calls("destroy"), 1);
+            });
+
+            test("group container drop target is destroyed", function() {
+                div.remove();
+                div = $("<div><div class='container' style='height:10px;'></div><table><thead><th data-kendo-field='field1.foo'></th><th data-kendo-field='field2.foo'></th></thead></table></div>").prependTo(document.body);
+
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: new kendo.data.DataSource() }),
+                    dropTarget = stub(groupContainer.data("kendoDropTarget"), "destroy");
+
+                groupable.destroy();
+
+                equal(dropTarget.calls("destroy"), 1);
+            });
+
+            test("draggable is destroyed", function() {
+                div.remove();
+                div = $("<div><div class='container' style='height:10px;'></div><table><thead><th data-kendo-field='field1.foo'></th><th data-kendo-field='field2.foo'></th></thead></table></div>").prependTo(document.body);
+
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: new kendo.data.DataSource() }),
+                    draggable = stub(groupable.draggable, "destroy");
+
+                groupable.destroy();
+
+                equal(draggable.calls("destroy"), 1);
+            });
+
+            test("external draggable is not destroyed", function() {
+                div.remove();
+                div = $("<div><div class='container' style='height:10px;'></div><table><thead><th data-kendo-field='field1.foo'></th><th data-kendo-field='field2.foo'></th></thead></table></div>").prependTo(document.body);
+
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, {
+                        groupContainer:  groupContainer,
+                        dataSource: new kendo.data.DataSource(),
+                        draggable: new kendo.ui.Draggable($("<div></div>"))
+                    }),
+                    draggable = stub(groupable.draggable, "destroy");
+
+                groupable.destroy();
+
+                equal(draggable.calls("destroy"), 0);
+            });
         </script>
     </body>
 </html>

@@ -43,7 +43,7 @@
 
             Widget.fn.init.call(that, element, options);
 
-            draggable = that.options.draggable || new kendo.ui.Draggable(that.element, {
+            that.draggable = draggable = that.options.draggable || new kendo.ui.Draggable(that.element, {
                 filter: that.options.filter,
                 hint: hint,
                 group: group
@@ -180,6 +180,10 @@
                 .off(NS)
                 .kendoDropTarget("destroy")
                 .kendoDraggable("destroy");
+
+            if (!that.options.draggable) {
+                that.draggable.destroy();
+            }
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler);
