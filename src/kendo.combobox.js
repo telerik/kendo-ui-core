@@ -282,6 +282,10 @@
             that._makeUnselectable();
 
             if ((!that._valueCalled && state !== STATE_FILTER) || state === STATE_REBIND) {
+                if (state === STATE_REBIND) {
+                    that._state = undefined;
+                }
+
                 that._selectItem(value);
             }
             that._valueCalled = false;

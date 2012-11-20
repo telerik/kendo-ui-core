@@ -5,6 +5,7 @@
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -573,6 +574,34 @@
 
                 equal(combo.calls("suggest"), 0);
                 equal(combo.text(), "Item2");
+            });
+
+            asyncTest("ComboBox does not fall in infinite loop if no data", function() {
+                $.mockjaxSettings.responseTime = 0;
+                $.mockjaxSettings.contentType = "text/html";
+                $.mockjax({ url: "foo.json", responseText: [] });
+
+                var called = 0;
+                var combo = new kendo.ui.ComboBox(input.val("Item2"), {
+                    autoBind: false,
+                    dataSource: {
+                        transport: {
+                            read: "foo.json"
+                        },
+                        requestStart: function() {
+                            called += 1;
+                        }
+                    }
+                });
+
+                combo.open();
+
+                setTimeout(function() {
+                    start();
+                    $.mockjaxClear();
+
+                    ok(called < 4);
+                }, 500);
             });
 
             asyncTest("form reset support", 2, function() {
