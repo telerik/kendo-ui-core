@@ -10,10 +10,19 @@ var ARGV = OPT
     .describe("deps", "List dependencies")
     .describe("decl", "Add the component declarations in the source code")
     .describe("bundle", "Create a bundle")
+    .describe("build-json-deps", "Rebuild download-builder/kendo-config.VERSION_NUMBER.json")
     .boolean("amd")
     .boolean("deps")
     .wrap(80)
     .argv;
+
+var KENDO_SRCDIR = path.join(path.dirname(fs.realpathSync(__filename)), "..");
+
+var deps_file_name = path.join(KENDO_SRCDIR, "download-builder/config/kendo-config.VERSION_NUMBER.json");
+var deps_file = fs.readFileSync(deps_file_name, "utf8");
+deps_file = JSON.parse(deps_file);
+
+var files = ARGV._.slice();
 
 if (ARGV.bundle) {
     var files = ARGV._.slice();
@@ -24,7 +33,7 @@ if (ARGV.bundle) {
         var ast = compile_one_file(file, ast);
         toplevel.body = toplevel.body.concat(ast.body);
     });
-    fs.writeFileSync(destination, toplevel.print_to_string({ beautify: true }));
+    fs.writeFileSync(destination, toplevel.print_to_string({ beautify: true, comments: true }));
     toplevel = squeeze(toplevel);
     toplevel.figure_out_scope();
     toplevel.compute_char_frequency();
@@ -33,7 +42,32 @@ if (ARGV.bundle) {
     process.exit(0);
 }
 
-var KENDO_SRCDIR = path.join(path.dirname(fs.realpathSync(__filename)), "..");
+if (ARGV["build-json-deps"]) {
+    var js_dir = path.join(KENDO_SRCDIR, "src")
+    , js_files = fs.readdirSync(js_dir)
+        .filter(function(filename){
+            // only source files
+            return /^kendo\..*\.js$/i.test(filename) && !/\.min\.js$/i.test(filename);
+        })
+        .filter(function(filename){
+            // discard bundles
+            return !/^kendo\.(web|dataviz|mobile|all|winjs)\.js$/.test(filename);
+        });
+    var components = [];
+    js_files.forEach(function(filename){
+        var code = fs.readFileSync(path.join(js_dir, filename), "utf8");
+        var ast = u2.parse(code, { filename: filename });
+        ast = extract_deps(ast, filename);
+        var c = ast.component;
+        if (c) {
+            c.source = filename.replace(/\.js$/i, ".min.js");
+            components.push(c);
+        }
+    });
+    deps_file.components = components;
+    fs.writeFileSync(deps_file_name, JSON.stringify(deps_file, null, 4));
+    process.exit(0);
+}
 
 var get_wrapper = (function(wrapper){
     var code = '((typeof define == "function" && define.amd) ? define : function(deps, body){ return body() })($DEPS, $CONT)';
@@ -65,12 +99,6 @@ var get_wrapper = (function(wrapper){
         return wrapper;
     };
 })();
-
-var files = ARGV._.slice();
-
-var deps_file = path.join(KENDO_SRCDIR, "download-builder/config/kendo-config.VERSION_NUMBER.json");
-deps_file = fs.readFileSync(deps_file, "utf8");
-deps_file = JSON.parse(deps_file);
 
 if (ARGV.decl) {
     throw new Error("Don't run this.");
