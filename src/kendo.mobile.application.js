@@ -81,7 +81,11 @@
                 that._startHistory();
 
                 if (support.kineticScrollNeeded) {
-                    $(document.documentElement).on("touchmove", false);
+                    $(document.documentElement).on("touchmove", function(e){
+                        if (!$(e.target).is("textarea")) {
+                            kendo.preventDefault(e);
+                        }
+                    });
                 }
             });
         },
