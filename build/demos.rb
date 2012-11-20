@@ -217,10 +217,6 @@ tree :to => 'dist/demos/staging/content/cdn/themebuilder',
                 .sub('themebuilder', 'dist/themebuilder/staging'),
      :root => 'dist/themebuilder/staging/'
 
-def patch_web_config(name, cdn_root, themebuilder_root)
-
-end
-
 class PatchedWebConfigTask < Rake::FileTask
     attr_accessor :cdn_root, :themebuilder_root
     def execute(args=nil)
@@ -232,8 +228,9 @@ class PatchedWebConfigTask < Rake::FileTask
     end
 
     def needed?
+        return true if super
         contents = File.read(name)
-        super || !contents.include?(cdn_root) || !contents.include?(themebuilder_root)
+        !contents.include?(cdn_root) || !contents.include?(themebuilder_root)
     end
 end
 
