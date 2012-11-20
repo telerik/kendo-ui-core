@@ -297,7 +297,12 @@
             }
 
             if (options.pageSizes) {
-                that.element.find(".k-pager-sizes select").val(pageSize);
+                that.element
+                    .find(".k-pager-sizes select")
+                    .val(pageSize)
+                    .filter("[" + kendo.attr("role") + "=dropdownlist]")
+                    .kendoDropDownList("value", pageSize)
+                    .kendoDropDownList("text", pageSize); // handles custom values
             }
         },
 
