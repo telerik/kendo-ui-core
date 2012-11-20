@@ -1,5 +1,5 @@
 // this function, along with calls to it, will not exist in compressed builds
-var kendo_module = (function(cache, $, base_url, evil){
+var kendo_module = (function(cache, $, base_url){
     /*global console:true */
     function url(file){
         return base_url + file;
@@ -11,18 +11,7 @@ var kendo_module = (function(cache, $, base_url, evil){
             return this.src.indexOf(addr) === 0;
         });
         if (scripts.length === 0) {
-            var req = $.ajax({ url: addr, async: false });
-            if (req.status == 200) {
-                try {
-                    evil(req.responseText);
-                } catch(ex) {
-                    console.error("Failed to evaluate file %s", file);
-                    console.error(ex);
-                    console.log(ex.stack);
-                }
-            } else {
-                console.error("Failed to load dependency: " + addr);
-            }
+            $.ajax({ url: addr, async: false, script: true });
         }
     }
     return function(comp) {
@@ -52,4 +41,4 @@ var kendo_module = (function(cache, $, base_url, evil){
    // the following figures out the base URL of the running script.
    (function(x){
        return x[x.length - 1].src.replace(/\/+[^\/]*$/, "/");
-   })(document.getElementsByTagName("script")), eval);
+   })(document.getElementsByTagName("script")));
