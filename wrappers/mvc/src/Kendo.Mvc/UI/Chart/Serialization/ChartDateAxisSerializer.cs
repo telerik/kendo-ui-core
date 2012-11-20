@@ -33,10 +33,11 @@ namespace Kendo.Mvc.UI
 
             if (axis.AxisCrossingValues.Count() > 0)
             {
-                result.Add("axisCrossingValue",
+                var crossingValues =
                     from ac in axis.AxisCrossingValues.AsQueryable()
-                    select ac.ToJavaScriptString()
-                );
+                    select ac.ToJavaScriptString();
+
+                result.Add("axisCrossingValue", crossingValues.ToArray());
             }
 
             return result;

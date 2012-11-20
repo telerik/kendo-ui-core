@@ -151,6 +151,7 @@
     <Compile Include="UI\Chart\Serialization\ChartNegativeValueSettingsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartOHLCSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartCandlestickSeriesSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartDateAxisSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
     <Compile Include="UI\Editor\ImageBrowserControllerTests.cs" />
