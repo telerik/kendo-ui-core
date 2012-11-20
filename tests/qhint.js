@@ -16,7 +16,7 @@
         }, options);
 
         function validateFile(source) {
-            source = "/*global KENDO_COMPONENT:true */\n" + source;
+            source = "/*global kendo_module:true */\n" + source;
             var i, len, err,
                 result = JSHINT(source, options),
                 unused = JSHINT.data().unused,
