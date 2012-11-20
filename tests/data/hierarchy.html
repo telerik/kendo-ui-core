@@ -880,6 +880,27 @@
                 equal(data[2].text, "ghamma");
                 equal(data[3].text, "alpha");
             });
+
+            test("loading of child datasources updates items field of parent", function() {
+                var i = 0,
+                    dataSource = new HierarchicalDataSource({
+                        transport: {
+                            read: function(options) {
+                                options.success([
+                                    { foo: i++ }
+                                ]);
+                            }
+                        }
+                    });
+
+                dataSource.read();
+
+                var root = dataSource.data()[0];
+                root.load();
+
+                ok("items" in root);
+                equal(root.items, root.children.data());
+            });
         </script>
     </body>
 </html>
