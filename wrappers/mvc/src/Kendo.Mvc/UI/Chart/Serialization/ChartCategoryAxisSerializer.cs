@@ -39,6 +39,12 @@ namespace Kendo.Mvc.UI
                result.Add("categories", SerializeCategories());
             }
 
+            var autoBaseUnits = axis.AutoBaseUnitSteps.CreateSerializer().Serialize();
+            if (autoBaseUnits.Count > 0)
+            {
+                result.Add("autoBaseUnitSteps", autoBaseUnits);
+            }
+
             return result;
         }
 

@@ -17,6 +17,7 @@ namespace Kendo.Mvc.UI
             MajorGridLines = new ChartLine();
             MinorGridLines = new ChartLine();
             AxisCrossingValues = new List<double>();
+            AutoBaseUnitSteps = new ChartAxisBaseUnitSteps();
         }
 
         /// <summary>
@@ -76,6 +77,16 @@ namespace Kendo.Mvc.UI
         /// The default value is true.
         /// </value>
         public bool? RoundToBaseUnit
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Specifies the discrete BaseUnitStep values
+        /// when either BaseUnit is set to Fit or BaseUnitStep is set to Auto.
+        /// </summary>
+        public ChartAxisBaseUnitSteps AutoBaseUnitSteps
         {
             get;
             set;

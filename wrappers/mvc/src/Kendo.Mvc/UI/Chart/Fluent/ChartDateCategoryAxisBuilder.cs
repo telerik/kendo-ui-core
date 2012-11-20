@@ -127,6 +127,20 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies the discrete baseUnitStep values when
+        /// either BaseUnit is set to Fit or BaseUnitStep is set to Auto.
+        /// </summary>
+        /// <param name="configurator">
+        /// The configuration action.
+        /// </param>
+        public ChartDateCategoryAxisBuilder<TModel> AutoBaseUnitSteps(Action<ChartAxisBaseUnitStepsBuilder> configurator)
+        {
+            configurator(new ChartAxisBaseUnitStepsBuilder(Axis.AutoBaseUnitSteps));
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the date category axis minimum (start) date.
         /// </summary>
         /// <param name="min">

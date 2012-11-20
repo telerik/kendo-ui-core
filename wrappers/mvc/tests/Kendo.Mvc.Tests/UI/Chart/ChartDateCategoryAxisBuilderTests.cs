@@ -236,6 +236,12 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void AutoBaseUnitSteps_should_return_builder()
+        {
+            builder.AutoBaseUnitSteps(steps => steps.Minutes(1, 2)).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Min_should_set_min_date()
         {
             var min = DateTime.Parse("2012/01/01");

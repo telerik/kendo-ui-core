@@ -64,6 +64,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Specifies the discrete BaseUnitStep values
+        /// when either BaseUnit is set to Fit or BaseUnitStep is set to Auto.
+        /// </summary>
+        ChartAxisBaseUnitSteps AutoBaseUnitSteps
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Specifies the date category axis minimum (start) date.
         /// </summary>
         DateTime? Min

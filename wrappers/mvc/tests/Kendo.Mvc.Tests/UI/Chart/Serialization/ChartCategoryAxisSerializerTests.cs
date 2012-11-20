@@ -24,6 +24,7 @@ namespace Kendo.Mvc.UI.Tests
             axisMock.SetupGet(a => a.Labels).Returns(new ChartAxisLabels());
             axisMock.SetupGet(a => a.PlotBands).Returns(new List<ChartPlotBand<int>>());
             axisMock.SetupGet(a => a.Title).Returns(new ChartAxisTitle());
+            axisMock.SetupGet(a => a.AutoBaseUnitSteps).Returns(new ChartAxisBaseUnitSteps());
         }
 
         [Fact]
@@ -199,6 +200,19 @@ namespace Kendo.Mvc.UI.Tests
         {
             axisMock.SetupGet(a => a.RoundToBaseUnit).Returns((bool?)null);
             serializer.Serialize().ContainsKey("roundToBaseUnit").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_AutoBaseUnitSteps()
+        {
+            axisMock.SetupGet(a => a.AutoBaseUnitSteps).Returns(new ChartAxisBaseUnitSteps { Hours = new int[] { 1, 2 } });
+            ((Dictionary<string, object>)((Dictionary<string, object>)(serializer.Serialize()))["autoBaseUnitSteps"])["hours"].ShouldEqual(new int[] { 1, 2 });
+        }
+
+        [Fact]
+        public void Should_not_serialize_AutoBaseUnitSteps_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("autoBaseUnitSteps").ShouldBeFalse();
         }
 
         [Fact]
