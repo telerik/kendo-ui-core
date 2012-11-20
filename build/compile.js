@@ -52,7 +52,8 @@ if (ARGV["build-json-deps"]) {
         .filter(function(filename){
             // discard bundles
             return !/^kendo\.(web|dataviz|mobile|all|winjs)\.js$/.test(filename);
-        });
+        })
+        .sort();
     var components = [];
     js_files.forEach(function(filename){
         var code = fs.readFileSync(path.join(js_dir, filename), "utf8");
