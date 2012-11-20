@@ -770,7 +770,7 @@
                 firstDayIdx = currentCalendar.firstDay,
                 days = currentCalendar.days,
                 names = shiftArray(days.names, firstDayIdx),
-                short = shiftArray(days.namesShort, firstDayIdx),
+                shortNames = shiftArray(days.namesShort, firstDayIdx),
                 start = calendar.firstVisibleDay(date, currentCalendar),
                 firstDayOfMonth = that.first(date),
                 lastDayOfMonth = that.last(date),
@@ -779,7 +779,7 @@
                 html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0"><thead><tr role="row">';
 
                 for (; idx < 7; idx++) {
-                    html += '<th scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';
+                    html += '<th scope="col" title="' + names[idx] + '">' + shortNames[idx] + '</th>';
                 }
 
                 today = new DATE(today.getFullYear(), today.getMonth(), today.getDate());
