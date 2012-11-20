@@ -223,6 +223,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void BaseUnitStep_should_set_base_unit()
+        {
+            builder.BaseUnitStep(1);
+            axis.BaseUnitStep.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void BaseUnitStep_should_return_builder()
+        {
+            builder.BaseUnitStep(1).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void RoundToBaseUnit_should_set_flag()
         {
             builder.RoundToBaseUnit(false);

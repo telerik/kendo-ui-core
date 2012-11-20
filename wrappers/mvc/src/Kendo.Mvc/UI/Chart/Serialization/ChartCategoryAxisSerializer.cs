@@ -34,6 +34,18 @@ namespace Kendo.Mvc.UI
                 result.Add("baseUnit", axis.BaseUnit.ToString().ToLowerInvariant());
             }
 
+            if (axis.BaseUnitStep.HasValue)
+            {
+                if (axis.BaseUnitStep > 0)
+                {
+                    result.Add("baseUnitStep", axis.BaseUnitStep);
+                }
+                else
+                {
+                    result.Add("baseUnitStep", "auto");
+                }
+            }
+
             if (axis.Categories != null)
             {
                result.Add("categories", SerializeCategories());

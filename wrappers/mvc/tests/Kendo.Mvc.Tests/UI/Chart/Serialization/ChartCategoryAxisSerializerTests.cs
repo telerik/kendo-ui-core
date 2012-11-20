@@ -189,6 +189,28 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_serialize_BaseUnitStep_if_set()
+        {
+            axisMock.SetupGet(a => a.BaseUnitStep).Returns(4);
+
+            serializer.Serialize()["baseUnitStep"].ShouldEqual(4);
+        }
+
+        [Fact]
+        public void Should_serialize_BaseUnitStep_auto_if_set_to_0()
+        {
+            axisMock.SetupGet(a => a.BaseUnitStep).Returns(0);
+
+            serializer.Serialize()["baseUnitStep"].ShouldEqual("auto");
+        }
+
+        [Fact]
+        public void Should_not_serialize_BaseUnitStep_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("baseUnitStep").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Should_serialize_RoundToBaseUnit()
         {
             axisMock.SetupGet(a => a.RoundToBaseUnit).Returns(false);

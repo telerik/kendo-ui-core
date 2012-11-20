@@ -48,6 +48,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Sets the step (interval) between categories in base units.
+        /// </summary>
+        int? BaseUnitStep
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// If set to false, the min and max dates will not be rounded off to
         /// the nearest baseUnit. 
         /// This option is most useful in combination with explicit min and max dates.
