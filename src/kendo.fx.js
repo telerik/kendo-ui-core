@@ -1013,7 +1013,7 @@
                 var that = this,
                     opacity = that.element.data(property),
                     out = that.shouldHide(),
-                    value = isNaN(opacity) ? that._start() : opacity;
+                    value = isNaN(opacity) || opacity === "" ? that._start() : opacity;
 
                 start[property] = end[property] = that._end();
 
