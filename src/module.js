@@ -14,6 +14,11 @@ var kendo_module = (function(cache, $, base_url){
             $.ajax({ url: addr, async: false, script: true });
         }
     }
+    function each(a, f) {
+        for (var i = 0; i < a.length; ++i) {
+            f(a[i], i);
+        }
+    }
     return function(comp) {
         if (!cache[comp.id] || !comp.id) {
             if (comp.id) {
@@ -21,19 +26,19 @@ var kendo_module = (function(cache, $, base_url){
             }
             var deps = comp.depends ? comp.depends.slice(0) : [];
             if (comp.features) {
-                comp.features.forEach(function(f){
+                each(comp.features, function(f){
                     if (f.depends) {
                         deps = deps.concat(f.depends);
                     }
                 });
             }
-            deps.forEach(function(id){
+            each(deps, function(id){
                 if (!cache[id]) {
                     load_file("kendo." + id + ".js");
                 }
             });
             if (comp.files) {
-                comp.files.forEach(load_file);
+                each(comp.files, load_file);
             }
         }
     };
