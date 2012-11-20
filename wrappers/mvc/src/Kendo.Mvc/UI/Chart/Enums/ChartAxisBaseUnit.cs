@@ -23,6 +23,12 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Years.
         /// </summary>
-        Years
+        Years,
+
+        /// <summary>
+        /// Automatic base unit based on limit set from MaxDataGroups.
+        /// Note that the BaseUnitStep setting will be disregarded.
+        /// </summary>
+        Fit
     }
 }
