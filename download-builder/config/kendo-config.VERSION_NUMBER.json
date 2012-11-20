@@ -20,5 +20,820 @@
             "name": "Server Wrappers",
             "description": "Supplementary scripts for integration with server-side technologies"
         }
-    }
+    },
+    "components": [
+        {
+            "id": "aspnetmvc",
+            "name": "ASP.NET MVC",
+            "category": "wrappers",
+            "description": "Scripts required by Kendo UI for ASP.NET MVC",
+            "depends": [
+                "data"
+            ],
+            "source": "kendo.aspnetmvc.min.js"
+        },
+        {
+            "id": "autocomplete",
+            "name": "AutoComplete",
+            "category": "web",
+            "description": "The AutoComplete widget provides suggestions depending on the typed text.It also allows multiple value entries.",
+            "depends": [
+                "list"
+            ],
+            "source": "kendo.autocomplete.min.js"
+        },
+        {
+            "id": "binder",
+            "name": "MVVM",
+            "category": "framework",
+            "description": "Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model (the data) from the View (the UI).",
+            "depends": [
+                "core",
+                "data"
+            ],
+            "source": "kendo.binder.min.js"
+        },
+        {
+            "id": "calendar",
+            "name": "Calendar",
+            "category": "web",
+            "description": "The Calendar widget renders a graphical calendar that supports navigation and selection.",
+            "depends": [
+                "core"
+            ],
+            "source": "kendo.calendar.min.js"
+        },
+        {
+            "id": "columnmenu",
+            "name": "Column Menu",
+            "category": "framework",
+            "depends": [
+                "popup",
+                "filtermenu",
+                "menu"
+            ],
+            "advanced": true,
+            "source": "kendo.columnmenu.min.js"
+        },
+        {
+            "id": "combobox",
+            "name": "ComboBox",
+            "category": "web",
+            "description": "The ComboBox widget allows the selection from pre-defined values or entering a new value.",
+            "depends": [
+                "list"
+            ],
+            "source": "kendo.combobox.min.js"
+        },
+        {
+            "id": "core",
+            "name": "Core",
+            "category": "framework",
+            "description": "The core of the Kendo framework.",
+            "source": "kendo.core.min.js"
+        },
+        {
+            "id": "data",
+            "name": "Data source",
+            "category": "framework",
+            "description": "Powerful component for using local and remote data.Fully supports CRUD, Sorting, Paging, Filtering, Grouping, and Aggregates.",
+            "depends": [
+                "core"
+            ],
+            "features": [
+                {
+                    "id": "data-odata",
+                    "name": "OData",
+                    "description": "Support for accessing Open Data Protocol (OData) services.",
+                    "depends": [
+                        "data.odata"
+                    ]
+                },
+                {
+                    "id": "data-XML",
+                    "name": "XML",
+                    "description": "Support for binding to XML.",
+                    "depends": [
+                        "data.xml"
+                    ]
+                }
+            ],
+            "source": "kendo.data.min.js"
+        },
+        {
+            "id": "data.odata",
+            "name": "OData",
+            "category": "framework",
+            "depends": [
+                "core"
+            ],
+            "hidden": true,
+            "source": "kendo.data.odata.min.js"
+        },
+        {
+            "id": "data.xml",
+            "name": "XML",
+            "category": "framework",
+            "depends": [
+                "core"
+            ],
+            "hidden": true,
+            "source": "kendo.data.xml.min.js"
+        },
+        {
+            "id": "chart",
+            "name": "Chart",
+            "category": "dataviz",
+            "description": "The Chart widget uses modern browser technologies to render high-quality data visualizations in the browser.",
+            "depends": [
+                "data",
+                "userevents",
+                "dataviz-core",
+                "dataviz-svg"
+            ],
+            "source": "kendo.dataviz.chart.min.js"
+        },
+        {
+            "id": "dataviz-core",
+            "name": "Core",
+            "description": "The DataViz core functions",
+            "category": "dataviz",
+            "depends": [
+                "core"
+            ],
+            "source": "kendo.dataviz.core.min.js"
+        },
+        {
+            "id": "gauge",
+            "name": "Gauge",
+            "category": "dataviz",
+            "description": "Radial gauge.",
+            "depends": [
+                "dataviz-core",
+                "dataviz-svg"
+            ],
+            "source": "kendo.dataviz.gauge.min.js"
+        },
+        {
+            "id": "stock-chart",
+            "name": "StockChart",
+            "category": "dataviz",
+            "description": "StockChart widget and associated financial series.",
+            "depends": [
+                "chart"
+            ],
+            "source": "kendo.dataviz.stock.min.js"
+        },
+        {
+            "id": "dataviz-svg",
+            "name": "Output: SVG",
+            "description": "Support for SVG rendering",
+            "category": "dataviz",
+            "depends": [
+                "dataviz-core"
+            ],
+            "source": "kendo.dataviz.svg.min.js"
+        },
+        {
+            "id": "themes",
+            "name": "Themes",
+            "description": "Built-in themes for the DataViz widgets",
+            "category": "dataviz",
+            "depends": [
+                "dataviz-core"
+            ],
+            "source": "kendo.dataviz.themes.min.js"
+        },
+        {
+            "id": "dataviz-vml",
+            "name": "Output: VML",
+            "description": "Support for VML rendering",
+            "category": "dataviz",
+            "depends": [
+                "dataviz-core"
+            ],
+            "source": "kendo.dataviz.vml.min.js"
+        },
+        {
+            "id": "datepicker",
+            "name": "DatePicker",
+            "category": "web",
+            "description": "The DatePicker widget allows the user to select a date from a calendar or by direct input.",
+            "depends": [
+                "calendar",
+                "popup"
+            ],
+            "source": "kendo.datepicker.min.js"
+        },
+        {
+            "id": "datetimepicker",
+            "name": "DateTimePicker",
+            "category": "web",
+            "description": "The DateTimePicker allows the end user to select a value from a calendar or a time drop-down list.",
+            "depends": [
+                "datepicker",
+                "timepicker"
+            ],
+            "source": "kendo.datetimepicker.min.js"
+        },
+        {
+            "id": "draganddrop",
+            "name": "Drag & drop",
+            "category": "framework",
+            "description": "Drag & drop functionality for any DOM element.",
+            "depends": [
+                "core",
+                "userevents"
+            ],
+            "source": "kendo.draganddrop.min.js"
+        },
+        {
+            "id": "dropdownlist",
+            "name": "DropDownList",
+            "category": "web",
+            "description": "The DropDownList widget displays a list of values and allows the selection of a single value from the list.",
+            "depends": [
+                "list"
+            ],
+            "source": "kendo.dropdownlist.min.js"
+        },
+        {
+            "id": "editable",
+            "name": "Editable",
+            "category": "framework",
+            "depends": [
+                "datepicker",
+                "numerictextbox",
+                "validator",
+                "binder"
+            ],
+            "hidden": true,
+            "source": "kendo.editable.min.js"
+        },
+        {
+            "id": "editor",
+            "name": "Editor",
+            "category": "web",
+            "description": "Rich text editor component",
+            "depends": [
+                "combobox",
+                "dropdownlist",
+                "window"
+            ],
+            "source": "kendo.editor.min.js"
+        },
+        {
+            "id": "filtermenu",
+            "name": "Filtering Menu",
+            "category": "framework",
+            "depends": [
+                "datepicker",
+                "numerictextbox",
+                "dropdownlist"
+            ],
+            "advanced": true,
+            "source": "kendo.filtermenu.min.js"
+        },
+        {
+            "id": "fx",
+            "name": "Effects",
+            "category": "framework",
+            "description": "Required for animation effects in all Kendo UI widgets.",
+            "depends": [
+                "core"
+            ],
+            "source": "kendo.fx.min.js"
+        },
+        {
+            "id": "grid",
+            "name": "Grid",
+            "category": "web",
+            "description": "The Grid widget displays tabular data and offers rich support for interacting with data,including paging, sorting, grouping, and selection.",
+            "depends": [
+                "data"
+            ],
+            "features": [
+                {
+                    "id": "grid-editing",
+                    "name": "Editing",
+                    "description": "Support for record editing",
+                    "depends": [
+                        "editable",
+                        "window"
+                    ]
+                },
+                {
+                    "id": "grid-filtering",
+                    "name": "Filtering",
+                    "description": "Support for record filtering",
+                    "depends": [
+                        "filtermenu"
+                    ]
+                },
+                {
+                    "id": "grid-columnmenu",
+                    "name": "Column menu",
+                    "description": "Support for header column menu",
+                    "depends": [
+                        "columnmenu"
+                    ]
+                },
+                {
+                    "id": "grid-grouping",
+                    "name": "Grouping",
+                    "description": "Support for grid grouping",
+                    "depends": [
+                        "groupable"
+                    ]
+                },
+                {
+                    "id": "grid-paging",
+                    "name": "Paging",
+                    "description": "Suppot for grid paging",
+                    "depends": [
+                        "pager"
+                    ]
+                },
+                {
+                    "id": "grid-selection",
+                    "name": "Selection",
+                    "description": "Support for row selection",
+                    "depends": [
+                        "selectable"
+                    ]
+                },
+                {
+                    "id": "grid-sorting",
+                    "name": "Sorting",
+                    "description": "Support for grid sorting",
+                    "depends": [
+                        "sortable"
+                    ]
+                },
+                {
+                    "id": "grid-column-reorder",
+                    "name": "Column reordering",
+                    "description": "Support for column reordering",
+                    "depends": [
+                        "reorderable"
+                    ]
+                },
+                {
+                    "id": "grid-column-resize",
+                    "name": "Column resizing",
+                    "description": "Support for column resizing",
+                    "depends": [
+                        "resizable"
+                    ]
+                }
+            ],
+            "source": "kendo.grid.min.js"
+        },
+        {
+            "id": "groupable",
+            "name": "Groupable",
+            "category": "framework",
+            "depends": [
+                "core",
+                "draganddrop"
+            ],
+            "advanced": true,
+            "source": "kendo.groupable.min.js"
+        },
+        {
+            "id": "history",
+            "name": "History",
+            "category": "mobile",
+            "description": "History",
+            "depends": [
+                "core"
+            ],
+            "hidden": true,
+            "source": "kendo.history.min.js"
+        },
+        {
+            "id": "imagebrowser",
+            "name": "ImageBrowser",
+            "category": "web",
+            "description": "",
+            "depends": [
+                "listview",
+                "upload"
+            ],
+            "source": "kendo.imagebrowser.min.js"
+        },
+        {
+            "id": "list",
+            "name": "List",
+            "category": "framework",
+            "depends": [
+                "data",
+                "popup"
+            ],
+            "hidden": true,
+            "source": "kendo.list.min.js"
+        },
+        {
+            "id": "listview",
+            "name": "ListView",
+            "category": "web",
+            "description": "The ListView widget offers rich support for interacting with data.",
+            "depends": [
+                "data"
+            ],
+            "features": [
+                {
+                    "id": "listview-editing",
+                    "name": "Editing",
+                    "description": "Support for record editing",
+                    "depends": [
+                        "editable"
+                    ]
+                },
+                {
+                    "id": "listview-selection",
+                    "name": "Selection",
+                    "description": "Support for selection",
+                    "depends": [
+                        "selectable"
+                    ]
+                }
+            ],
+            "source": "kendo.listview.min.js"
+        },
+        {
+            "id": "menu",
+            "name": "Menu",
+            "category": "web",
+            "description": "The Menu widget displays hierarchical data as a multi-level menu.",
+            "depends": [
+                "popup"
+            ],
+            "source": "kendo.menu.min.js"
+        },
+        {
+            "id": "mobile.actionsheet",
+            "name": "ActionSheet",
+            "category": "mobile",
+            "description": "The mobile ActionSheet widget displays a set of choices related to a task the user initiates.",
+            "depends": [
+                "mobile.popover"
+            ],
+            "source": "kendo.mobile.actionsheet.min.js"
+        },
+        {
+            "id": "mobile.application",
+            "name": "Application",
+            "category": "mobile",
+            "description": "The Mobile application provides a framework to build native looking web applications on mobile devices.",
+            "depends": [
+                "mobile.pane"
+            ],
+            "source": "kendo.mobile.application.min.js"
+        },
+        {
+            "id": "mobile.button",
+            "name": "Button",
+            "category": "mobile",
+            "description": "The Button widget navigates between mobile Application views when pressed.",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.button.min.js"
+        },
+        {
+            "id": "mobile.buttongroup",
+            "name": "ButtonGroup",
+            "category": "mobile",
+            "description": "The Kendo mobile ButtonGroup widget is a linear set of grouped buttons.",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.buttongroup.min.js"
+        },
+        {
+            "id": "mobile.listview",
+            "name": "ListView",
+            "category": "mobile",
+            "description": "The Kendo Mobile ListView widget is used to display flat or grouped list of items.",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.listview.min.js"
+        },
+        {
+            "id": "mobile.loader",
+            "name": "Loader",
+            "category": "mobile",
+            "description": "Mobile Loader",
+            "depends": [
+                "core"
+            ],
+            "hidden": true,
+            "source": "kendo.mobile.loader.min.js"
+        },
+        {
+            "id": "mobile.modalview",
+            "name": "ModalView",
+            "category": "mobile",
+            "description": "The Kendo ModalView is used to present self-contained functionality in the context of the current task.",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.modalview.min.js"
+        },
+        {
+            "id": "mobile.navbar",
+            "name": "NavBar",
+            "category": "mobile",
+            "description": "The Kendo mobile NavBar widget is used inside a mobile View or Layout Header element to display an application navigation bar.",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.navbar.min.js"
+        },
+        {
+            "id": "mobile.pane",
+            "name": "Pane",
+            "category": "mobile",
+            "description": "Mobile Pane",
+            "depends": [
+                "mobile.view",
+                "mobile.loader"
+            ],
+            "hidden": true,
+            "source": "kendo.mobile.pane.min.js"
+        },
+        {
+            "id": "mobile.popover",
+            "name": "PopOver",
+            "category": "mobile",
+            "description": "The mobile PopOver widget represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. ",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.popover.min.js"
+        },
+        {
+            "id": "mobile.scroller",
+            "name": "Scroller",
+            "category": "mobile",
+            "description": "The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.",
+            "depends": [
+                "core",
+                "fx",
+                "draganddrop"
+            ],
+            "source": "kendo.mobile.scroller.min.js"
+        },
+        {
+            "id": "mobile.scrollview",
+            "name": "ScrollView",
+            "category": "mobile",
+            "description": "The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.scrollview.min.js"
+        },
+        {
+            "id": "mobile.shim",
+            "name": "Shim",
+            "category": "mobile",
+            "description": "Mobile Shim",
+            "depends": [
+                "popup"
+            ],
+            "hidden": true,
+            "source": "kendo.mobile.shim.min.js"
+        },
+        {
+            "id": "mobile.spitview",
+            "name": "SplitView",
+            "category": "mobile",
+            "description": "The mobile SplitView is a tablet-specific view that consists of two or more mobile Pane widgets.",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.splitview.min.js"
+        },
+        {
+            "id": "mobile.switch",
+            "name": "Switch",
+            "category": "mobile",
+            "description": "The mobile Switch widget is used to display two exclusive choices.",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.switch.min.js"
+        },
+        {
+            "id": "mobile.tabstrip",
+            "name": "TabStrip",
+            "category": "mobile",
+            "description": "The mobile TabStrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.",
+            "depends": [
+                "mobile.application"
+            ],
+            "source": "kendo.mobile.tabstrip.min.js"
+        },
+        {
+            "id": "mobile.view",
+            "name": "View",
+            "category": "mobile",
+            "description": "Mobile View",
+            "depends": [
+                "core",
+                "fx",
+                "history",
+                "mobile.scroller"
+            ],
+            "hidden": true,
+            "source": "kendo.mobile.view.min.js"
+        },
+        {
+            "id": "numerictextbox",
+            "name": "NumericTextBox",
+            "category": "web",
+            "description": "The NumericTextBox widget can format and display numeric, percentage or currency textbox.",
+            "depends": [
+                "core"
+            ],
+            "source": "kendo.numerictextbox.min.js"
+        },
+        {
+            "id": "pager",
+            "name": "Pager",
+            "category": "framework",
+            "depends": [
+                "data"
+            ],
+            "advanced": true,
+            "source": "kendo.pager.min.js"
+        },
+        {
+            "id": "panelbar",
+            "name": "PanelBar",
+            "category": "web",
+            "description": "The PanelBar widget displays hierarchical data as a multi-level expandable panel bar.",
+            "depends": [
+                "core"
+            ],
+            "source": "kendo.panelbar.min.js"
+        },
+        {
+            "id": "popup",
+            "name": "Pop-up",
+            "category": "framework",
+            "depends": [
+                "core"
+            ],
+            "advanced": true,
+            "source": "kendo.popup.min.js"
+        },
+        {
+            "id": "reorderable",
+            "name": "Reorderable",
+            "category": "framework",
+            "depends": [
+                "core",
+                "draganddrop"
+            ],
+            "advanced": true,
+            "source": "kendo.reorderable.min.js"
+        },
+        {
+            "id": "resizable",
+            "name": "Resizable",
+            "category": "framework",
+            "depends": [
+                "core",
+                "draganddrop"
+            ],
+            "advanced": true,
+            "source": "kendo.resizable.min.js"
+        },
+        {
+            "id": "selectable",
+            "name": "Selectable",
+            "category": "framework",
+            "depends": [
+                "core"
+            ],
+            "advanced": true,
+            "source": "kendo.selectable.min.js"
+        },
+        {
+            "id": "slider",
+            "name": "Slider",
+            "category": "web",
+            "description": "The Slider widget provides a rich input for selecting values or ranges of values.",
+            "depends": [
+                "draganddrop"
+            ],
+            "source": "kendo.slider.min.js"
+        },
+        {
+            "id": "sortable",
+            "name": "Sortable",
+            "category": "framework",
+            "depends": [
+                "data"
+            ],
+            "advanced": true,
+            "source": "kendo.sortable.min.js"
+        },
+        {
+            "id": "splitter",
+            "name": "Splitter",
+            "category": "web",
+            "description": "The Splitter widget provides an easy way to create a dynamic layout of resizable and collapsible panes.",
+            "depends": [
+                "resizable"
+            ],
+            "source": "kendo.splitter.min.js"
+        },
+        {
+            "id": "tabstrip",
+            "name": "TabStrip",
+            "category": "web",
+            "description": "The TabStrip widget displays a collection of tabs with associated tab content.",
+            "depends": [
+                "data"
+            ],
+            "source": "kendo.tabstrip.min.js"
+        },
+        {
+            "id": "timepicker",
+            "name": "TimePicker",
+            "category": "web",
+            "description": "The TimePicker widget allows the end user to select a value from a list of predefined values or to type a new value.",
+            "depends": [
+                "popup"
+            ],
+            "source": "kendo.timepicker.min.js"
+        },
+        {
+            "id": "touch",
+            "name": "Touch",
+            "category": "mobile",
+            "description": "The kendo Touch widget provides a cross-platform compatible API for handling user-initiated touch events, multi-touch gestures and event sequences (drag, swipe, etc.). ",
+            "depends": [
+                "core",
+                "userevents"
+            ],
+            "source": "kendo.touch.min.js"
+        },
+        {
+            "id": "treeview",
+            "name": "TreeView",
+            "category": "web",
+            "description": "The TreeView widget displays hierarchical data in a traditional tree structure,with support for interactive drag-and-drop operations.",
+            "depends": [
+                "data",
+                "draganddrop"
+            ],
+            "source": "kendo.treeview.min.js"
+        },
+        {
+            "id": "upload",
+            "name": "Upload",
+            "category": "web",
+            "description": "The Upload widget uses progressive enhancement to deliver the best possible uploading experience to users.",
+            "depends": [
+                "core"
+            ],
+            "source": "kendo.upload.min.js"
+        },
+        {
+            "id": "userevents",
+            "name": "User Events",
+            "category": "framework",
+            "depends": [
+                "core"
+            ],
+            "hidden": true,
+            "source": "kendo.userevents.min.js"
+        },
+        {
+            "id": "validator",
+            "name": "Validator",
+            "category": "web",
+            "description": "The Validator offers an easy way to do a client-side form validation.",
+            "depends": [
+                "core"
+            ],
+            "source": "kendo.validator.min.js"
+        },
+        {
+            "id": "window",
+            "name": "Window",
+            "category": "web",
+            "description": "The Window widget displays content in a modal or non-modal HTML window.",
+            "depends": [
+                "draganddrop"
+            ],
+            "source": "kendo.window.min.js"
+        }
+    ]
 }
