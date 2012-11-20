@@ -180,7 +180,7 @@ function extract_deps(ast, comp_filename) {
 
                 // discard kendo_module calls
                 if (!component.files || component.files.length == 0)
-                    return new u2.AST_EmptyStatement(node);
+                    return u2.MAP.skip;
 
                 // however, if we have a split component, better load those files now.
                 var block = new u2.AST_BlockStatement({ body: [] });
