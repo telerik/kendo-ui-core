@@ -1,3 +1,11 @@
+kendo_module({
+    id: "editor",
+    name: "Editor",
+    category: "web",
+    description: "Rich text editor component",
+    depends: [ "combobox", "dropdownlist", "window" ]
+});
+
 (function($,undefined) {
 
     // Imports ================================================================

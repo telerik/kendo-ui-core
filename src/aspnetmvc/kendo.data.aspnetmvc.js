@@ -1,3 +1,11 @@
+kendo_module({
+    id: "aspnetmvc",
+    name: "ASP.NET MVC",
+    category: "wrappers",
+    description: "Scripts required by Kendo UI for ASP.NET MVC",
+    depends: [ "data" ]
+});
+
 (function ($, undefined) {
     var kendo = window.kendo,
         escapeQuoteRegExp = /'/ig,
