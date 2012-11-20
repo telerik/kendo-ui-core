@@ -32,9 +32,21 @@ file 'themebuilder/scripts/template.js' => [ 'styles/web/template.less',
     end
 end
 
+def live_cdn_version()
+    if (BETA)
+        demo_html = `curl http://demos.kendoui.com/beta/web/overview/index.html`
+    else
+        demo_html = `curl http://demos.kendoui.com/web/overview/index.html`
+    end
+
+    /cdn\.kendostatic\.com\/(\d+\.\d+\.\d+)\//.match(demo_html)[1]
+end
+
 file 'dist/themebuilder/production/bootstrap.js' => 'themebuilder/bootstrap.js' do |t|
 
-    patch_bootstrap(t.name, t.prerequisites[0], "#{CDN_ROOT}#{VERSION}")
+    version = live_cdn_version()
+
+    patch_bootstrap(t.name, t.prerequisites[0], "#{CDN_ROOT}#{version}")
 
 end
 
