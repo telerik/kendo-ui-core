@@ -10,6 +10,8 @@ JS_BUNDLES_MIN = JS_BUNDLES.ext('min.js');
 
 # All JavaScript files from src/
 SRC_JS = FileList['src/kendo*.js']
+    .include('src/kendo.editor.js')
+    .include('src/kendo.aspnetmvc.js')
     .include('src/cultures/*.js')
     .exclude('**/*.min.js')
     .exclude(JS_BUNDLES)
