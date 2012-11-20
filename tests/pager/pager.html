@@ -574,6 +574,24 @@
                 equal(pager.find(".k-pager-sizes select").val(), "2");
             });
 
+            test("changing the page size of the data source selects the corresponding option", 2, function() {
+                var pager = setup({}, { pageSizes: [1, 2] });
+
+                dataSource.pageSize(2);
+
+                equal(pager.find(".k-pager-sizes select").val(), "2");
+                equal(pager.find(".k-pager-sizes select").kendoDropDownList("text"), 2);
+            });
+
+            test("changing the page size of the data source to a custom value is displayed", function() {
+                var pager = setup({}, { pageSizes: [1, 2] });
+
+                dataSource.pageSize(5);
+
+                equal(pager.find(".k-pager-sizes select").kendoDropDownList("text"), 5);
+            });
+
+
             test("changing the page size from the select changes the page size in the data source", function() {
                 var pager = setup({}, { pageSizes: [1, 2] });
 
