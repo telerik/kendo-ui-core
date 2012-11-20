@@ -28,8 +28,12 @@ namespace :download_builder do
             :from => MIN_CSS_RESOURCES,
             :root => /styles\/.+?\//
 
-        config_file_path = File.join(dist_path, 'config',  "kendo-config.#{VERSION}.json")
-        file_copy :to => config_file_path, :from => File.join('download-builder', BUILDER_CONFIG_NAME)
+        config_file_dir = File.join(dist_path, 'config')
+        config_file_path = File.join(config_file_dir,  "kendo-config.#{VERSION}.json")
+        directory config_file_dir
+        task config_file_path => config_file_dir do |t|
+            sh "node #{COMPILEJS} --kendo-config > #{config_file_path}", :verbose => VERBOSE
+        end
 
         index_path = File.join(dist_path, 'index.html')
         task index_path do |t|
