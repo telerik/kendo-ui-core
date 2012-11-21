@@ -6,7 +6,7 @@
         @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
         {
             if (!example.ShouldInclude) { continue; }
-            
+
             <li class="@(Request.Path.EndsWith(example.Url) ? "active" : "")">
                 <a href="@Url.Content("~/" + ViewBag.Suite + "/" + example.Url)">@example.Text</a>
                 </li>
@@ -20,7 +20,7 @@
         <a href="#" id="qr"><em>Show QR Code</em><span class="k-icon k-qr"></span></a>
     </p>
     <img src="@Url.Content("~/content/mobile/shared/qr.png")" id="qrBig" />
-        
+
 }
 
 <a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui">Get KendoUI</a>
