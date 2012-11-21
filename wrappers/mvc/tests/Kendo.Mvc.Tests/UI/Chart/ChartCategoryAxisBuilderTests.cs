@@ -175,6 +175,13 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Reverse_should_set_reverse_to_true()
+        {
+            builder.Reverse();
+            axis.Reverse.ShouldEqual(true);
+        }
+
+        [Fact]
         public void Reverse_should_return_builder()
         {
             builder.Reverse(true).ShouldBeSameAs(builder);

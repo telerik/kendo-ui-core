@@ -416,6 +416,27 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Reverse the axis.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .CategoryAxis(axis => axis
+        ///                .Categories(s => s.DateString)
+        ///                .Reverse()
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TAxisBuilder Reverse()
+        {
+            Axis.Reverse = true;
+
+            return this as TAxisBuilder;
+        }
+
+        /// <summary>
         /// Sets the axis visibility
         /// </summary>
         /// <param name="visible">The axis visibility.</param>
