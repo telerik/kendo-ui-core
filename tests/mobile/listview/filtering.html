@@ -1,0 +1,180 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileListView Filtering Tests</title>
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.userevents.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.history.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
+        <script src="../../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../../src/kendo.mobile.listview.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.ListView Filtering Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var ListView = kendo.mobile.ui.ListView,
+                application;
+
+            module("mobile listview filtering", {
+                setup: function() {
+                },
+                teardown: function() {
+                }
+            });
+
+            function setup(html, options) {
+                $("#qunit-fixture").html(html);
+                application = new kendo.mobile.Application($("#qunit-fixture"), options);
+            }
+
+            test("filterable creates search input", function() {
+                var listview = new ListView($("<ul/>"), {
+                    filterable: true
+                });
+
+                equal(listview.wrapper.children().length, 2);
+                ok(listview.wrapper.children().first().is("input"));
+            });
+
+            test("filterable does not creates search input if disabled", function() {
+                var listview = new ListView($("<ul/>"), {});
+
+                equal(listview.wrapper.children()[0], listview.element[0]);
+            });
+
+            test("filterable input default placeholder", function() {
+                var listview = new ListView($("<ul/>"), {
+                    filterable: true
+                });
+
+                var input = listview.wrapper.find("input");
+
+                ok(input.attr("placeholder"));
+            });
+
+            test("filterable input placeholder", function() {
+                var listview = new ListView($("<ul/>"), {
+                    filterable: {
+                        placeholder: "foo"
+                    }
+                });
+
+                var input = listview.wrapper.find("input");
+
+                equal(input.attr("placeholder"), "foo");
+            });
+
+            test("dataSource filter is called on keyup", function() {
+                var listview = new ListView($("<ul/>"), {
+                        filterable: true
+                    }),
+                    input = listview.wrapper.find("input");
+
+                var filter = stub(listview.dataSource, "filter");
+
+                input.trigger({ type: "keyup" });
+
+                equal(filter.calls("filter"), 1);
+                ok(filter.args("filter", 0)[0]);
+            });
+
+            test("dataSource filter is called on change", function() {
+                var listview = new ListView($("<ul/>"), {
+                        filterable: true
+                    }),
+                    input = listview.wrapper.find("input");
+
+                var filter = stub(listview.dataSource, "filter");
+
+                input.trigger({ type: "change" });
+
+                equal(filter.calls("filter"), 1);
+                ok(filter.args("filter", 0)[0]);
+            });
+
+            test("default filter expression is build on change", function() {
+                var listview = new ListView($("<ul/>"), {
+                        filterable: true
+                    }),
+                    input = listview.wrapper.find("input");
+
+                var filter = stub(listview.dataSource, "filter");
+
+                input.val("foo").trigger({ type: "change" });
+
+                var expr = filter.args("filter", 0)[0];
+                equal(expr.field, undefined);
+                equal(expr.operator, "startsWith");
+                equal(expr.value, "foo");
+            });
+
+            test("field is used for the expression", function() {
+                var listview = new ListView($("<ul/>"), {
+                        filterable: {
+                            field: "field"
+                        }
+                    }),
+                    input = listview.wrapper.find("input");
+
+                var filter = stub(listview.dataSource, "filter");
+
+                input.val("foo").trigger({ type: "change" });
+
+                var descriptor = filter.args("filter", 0)[0];
+                equal(descriptor.field, "field");
+            });
+
+            test("operator is used for the expression", function() {
+                var listview = new ListView($("<ul/>"), {
+                        filterable: {
+                            operator: "eq"
+                        }
+                    }),
+                    input = listview.wrapper.find("input");
+
+                var filter = stub(listview.dataSource, "filter");
+
+                input.val("foo").trigger({ type: "change" });
+
+                var descriptor = filter.args("filter", 0)[0];
+                equal(descriptor.operator, "eq");
+            });
+
+            test("ignoreCase is used for the expression", function() {
+                var listview = new ListView($("<ul/>"), {
+                        filterable: {
+                            ignoreCase: false
+                        }
+                    }),
+                    input = listview.wrapper.find("input");
+
+                var filter = stub(listview.dataSource, "filter");
+
+                input.val("foo").trigger({ type: "change" });
+
+                var descriptor = filter.args("filter", 0)[0];
+                equal(descriptor.ignoreCase, false);
+            });
+        </script>
+    </body>
+</html>
+

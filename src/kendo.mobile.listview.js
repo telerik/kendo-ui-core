@@ -102,6 +102,8 @@ kendo_module({
 
             that._fixHeaders();
 
+            that._filterable();
+
             if (options.dataSource && that.options.autoBind) {
                 that.dataSource.fetch();
             } else {
@@ -654,6 +656,29 @@ kendo_module({
             var view = this.view();
             if (view && view.loader) {
                 view.loader.hide();
+            }
+        },
+
+        _filterable: function() {
+            var that = this,
+                filterable = that.options.filterable,
+                input;
+
+            if (filterable) {
+                input = $('<input type="search"/>').attr("placeholder", filterable.placeholder || "Search");
+
+                this.element.before(input);
+
+                input.on("keyup change", function() {
+                    var expr = {
+                        field: filterable.field,
+                        operator: filterable.operator || "startsWith",
+                        ignoreCase: filterable.ignoreCase,
+                        value: input.val()
+                    };
+
+                    that.dataSource.filter(expr);
+                });
             }
         }
     });

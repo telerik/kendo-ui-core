@@ -8,6 +8,10 @@ tests.push(
         title: "mobile listview databinding"
     },
     {
+        page: "../mobile/listview/filtering.html",
+        title: "mobile listview filtering"
+    },
+    {
         page: "../mobile/listview/mvvm.html",
         title: "mobile listview mvvm"
     }
