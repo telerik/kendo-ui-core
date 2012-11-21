@@ -216,6 +216,7 @@
     <Compile Include="Controllers\Web\Grid\ServerBindingController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomServerBindingController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomAjaxBindingController.cs" />
+    <Compile Include="Controllers\Web\ListView\NavigationController.cs" />
     <Compile Include="Controllers\Web\ListView\RtlController.cs" />
     <Compile Include="Controllers\Web\ListView\SelectionController.cs" />
     <Compile Include="Controllers\Web\ListView\EditingController.cs" />
@@ -442,6 +443,7 @@
     <Content Include="Areas\aspx\Views\web\grid\editing.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\customserverbinding.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\customajaxbinding.aspx" />
+    <Content Include="Areas\aspx\Views\web\listview\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\listview\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\listview\editing.aspx" />
     <Content Include="Areas\aspx\Views\web\listview\EditorTemplates\ProductViewModel.ascx" />
@@ -472,11 +474,13 @@
     <Content Include="Areas\aspx\Views\web\combobox\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\navigation.aspx" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <None Include="Areas\razor\Views\web\listview\navigation.cshtml" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />
     <Content Include="Views\The-views-are-in-the-Areas-folder.txt" />
