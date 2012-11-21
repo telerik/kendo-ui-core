@@ -89,6 +89,14 @@
                 visible("#foo");
             });
 
+            asyncTest("provides target in event handler", 1, function(){
+                popOver.bind("open", function(e) {
+                    start();
+                    equal(e.target[0], $("#fooAnchor")[0]);
+                });
+                root.find("#fooAnchor").trigger("mouseup");
+            });
+
             asyncTest("is closed when closed", 1, function(){
                 popOver.openFor(root.find("#fooAnchor"));
                 popOver.close();
