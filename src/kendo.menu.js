@@ -1,7 +1,8 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        touch = (kendo.support.touch && kendo.support.mobileOS) || kendo.support.pointers,
+        touch = (kendo.support.touch && kendo.support.mobileOS),
+        mobile = touch || kendo.support.pointers,
         MOUSEDOWN = kendo.support.mousedown,
         CLICK = kendo.support.click,
         extend = $.extend,
@@ -23,8 +24,8 @@
         IMAGE = "k-image",
         SELECT = "select",
         ZINDEX = "zIndex",
-        MOUSEENTER = "mouseenter",
-        MOUSELEAVE = "mouseleave",
+        MOUSEENTER = kendo.support.pointers ? "MSPointerOver" : "mouseenter",
+        MOUSELEAVE = kendo.support.pointers ? "MSPointerOut" : "mouseleave",
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "k-state-default",
         HOVERSTATE = "k-state-hover",
@@ -657,7 +658,7 @@
                 }
             }
 
-            if (that.options.openOnClick && that.clicked || touch) {
+            if (that.options.openOnClick && that.clicked || mobile) {
                 element.siblings().each(proxy(function (_, sibling) {
                     that.close(sibling);
                 }, that));
@@ -674,7 +675,7 @@
                 return;
             }
 
-            if (!that.options.openOnClick && !touch && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
+            if (!that.options.openOnClick && !touch && !(kendo.support.pointers && e.originalEvent.pointerType == 2) && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                 that.close(element);
             }
         },
