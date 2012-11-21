@@ -172,6 +172,7 @@
     <Compile Include="Controllers\Web\DropDownList\TemplateController.cs" />
     <Compile Include="Controllers\Web\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\Web\DropDownList\IndexController.cs" />
+    <Compile Include="Controllers\Web\Editor\NavigationController.cs" />
     <Compile Include="Controllers\Web\Editor\RtlController.cs" />
     <Compile Include="Controllers\Web\Editor\Custom_ToolsController.cs" />
     <Compile Include="Controllers\Web\Editor\ImageBrowserController.cs" />
@@ -469,6 +470,7 @@
     <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\navigation.aspx" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml">
@@ -835,6 +837,7 @@
     <Content Include="Areas\razor\Views\web\datetimepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\timepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\numerictextbox\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\editor\navigation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
