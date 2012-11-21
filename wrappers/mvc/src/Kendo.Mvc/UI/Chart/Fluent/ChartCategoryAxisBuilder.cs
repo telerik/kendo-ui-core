@@ -162,5 +162,31 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Positions categories and series points on major ticks. This removes the empty space before and after the series.
+        /// This option will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
+        /// </summary>
+        /// <param name="justified">
+        /// A boolean value that indicates if the empty space before and after the series should be removed.
+        /// The default value is false.
+        /// </param>
+        public ChartCategoryAxisBuilder<TModel> Justify(bool justified)
+        {
+            Axis.Justified = justified;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Positions categories and series points on major ticks. This removes the empty space before and after the series.
+        /// This option will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
+        /// </summary>
+        public ChartCategoryAxisBuilder<TModel> Justify()
+        {
+            Axis.Justified = true;
+
+            return this;
+        }
     }
 }

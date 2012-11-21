@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPaneBuilder"/> class.
         /// </summary>
-        /// <param name="Pane">The Chart Pane.</param>
+        /// <param name="pane">The phart pane.</param>
         public ChartPaneBuilder(ChartPane pane)
         {
             Pane = pane;

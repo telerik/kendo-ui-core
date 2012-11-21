@@ -1,21 +1,16 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Linq.Expressions;
-    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
     /// <summary>
     /// Creates panes for the <see cref="Chart{TModel}" />.
     /// </summary>
-    /// <typeparam name="TModel">The type of the data item to which the chart is bound to</typeparam>
     public class ChartPanesFactory : IHideObjectMembers
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartPanesFactory{TModel}"/> class.
+        /// Initializes a new instance of the <see cref="ChartPanesFactory"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
         public ChartPanesFactory(IChart container)

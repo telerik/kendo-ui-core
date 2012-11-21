@@ -1,9 +1,6 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using System.Linq.Expressions;
-    using System.Web.Mvc;
-    using System.Web.Routing;
 
     /// <summary>
     /// A builder class for <see cref="UploadMessages"/>
@@ -15,7 +12,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Initializes a new instance of the <see cref="UploadMessagesBuilder" /> class.
         /// </summary>
-        /// <param name="asyncSettings">The messages.</param>
+        /// <param name="messages">The messages.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Upload()

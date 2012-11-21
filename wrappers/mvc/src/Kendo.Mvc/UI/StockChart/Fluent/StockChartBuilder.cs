@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the field used by all date axes (including the navigator).
         /// </summary>
-        /// <param name="theme">The date field.</param>
+        /// <param name="dateField">The date field.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().StockChart(Model)
