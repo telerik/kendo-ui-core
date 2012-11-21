@@ -255,6 +255,26 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Justify_should_set_justified()
+        {
+            builder.Justify(false);
+            axis.Justified.ShouldEqual(false);
+        }
+
+        [Fact]
+        public void Justify_should_set_justified_to_true()
+        {
+            builder.Justify();
+            axis.Justified.ShouldEqual(true);
+        }
+
+        [Fact]
+        public void Justify_should_return_builder()
+        {
+            builder.Justify(false).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Min_should_set_min_date()
         {
             var min = DateTime.Parse("2012/01/01");
