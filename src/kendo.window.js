@@ -216,6 +216,7 @@
             $(window).on("resize", that._resizeHandler);
 
             if (options.visible) {
+                that.element.focus();
                 that.trigger(OPEN);
                 that.trigger(ACTIVATE);
             }
@@ -464,6 +465,8 @@
             if (!that.trigger(OPEN)) {
                 that.toFront();
 
+                that.element.focus();
+
                 options.visible = true;
 
                 if (options.modal) {
@@ -581,8 +584,6 @@
                 wrapper.css(ZINDEX, zIndex + 2);
                 that.element.find("> .k-overlay").remove();
             }
-
-            that.element.focus();
 
             return that;
         },
