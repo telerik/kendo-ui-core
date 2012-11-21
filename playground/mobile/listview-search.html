@@ -18,6 +18,12 @@
         <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
+        <style type="text/css">
+            input[type=search]::-webkit-search-decoration,
+            input[type=search]::-webkit-search-cancel-button {
+                display: none;
+            }
+        </style>
     </head>
     <body>
         <div data-role="view" id="flat" data-init="mobileListViewDataBindInitFlat" data-title="ListView" data-layout="databinding" >
@@ -54,12 +60,13 @@
                 var listview = $("#flat-listview").kendoMobileListView({
                     dataSource: {
                         data: groupedData,
-                       group: "letter"
+                        group: "letter"
                     },
                     template: "${name}",
                     filterable: {
                         field: "name",
-                        ignoreCase: false
+                        ignoreCase: true,
+                        autoFilter: false
                     }
                 }).data("kendoMobileListView");
             }

@@ -52,7 +52,8 @@
                 });
 
                 equal(listview.wrapper.children().length, 2);
-                ok(listview.wrapper.children().first().is("input"));
+                ok(listview.wrapper.children().first().is("form"));
+                equal(listview.wrapper.find(">form>[type=search]").length, 1);
             });
 
             test("filterable does not creates search input if disabled", function() {
@@ -174,6 +175,22 @@
                 var descriptor = filter.args("filter", 0)[0];
                 equal(descriptor.ignoreCase, false);
             });
+
+            test("disabling auto filter", function() {
+                var listview = new ListView($("<ul/>"), {
+                        filterable: {
+                            autoFilter: false
+                        }
+                    }),
+                    input = listview.wrapper.find("input");
+
+                var filter = stub(listview.dataSource, "filter");
+
+                input.trigger({ type: "keyup" });
+
+                equal(filter.calls("filter"), 0);
+            });
+
         </script>
     </body>
 </html>

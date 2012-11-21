@@ -662,14 +662,26 @@ kendo_module({
         _filterable: function() {
             var that = this,
                 filterable = that.options.filterable,
+                events = "change",
+                form,
                 input;
 
             if (filterable) {
-                input = $('<input type="search"/>').attr("placeholder", filterable.placeholder || "Search");
+                input = $('<input type="search"/>')
+                    .attr("placeholder", filterable.placeholder || "Search...")
+                    .wrap("<form />");
 
-                this.element.before(input);
+                form = input.parent().on("submit", function(e) {
+                    e.preventDefault();
+                });
 
-                input.on("keyup change", function() {
+                this.element.before(form);
+
+                if (filterable.autoFilter !== false) {
+                    events += " keyup";
+                }
+
+                input.on(events, function() {
                     var expr = {
                         field: filterable.field,
                         operator: filterable.operator || "startsWith",
