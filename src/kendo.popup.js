@@ -217,7 +217,7 @@
                                 .bind(MOUSEDOWN, that._mousedownProxy);
 
                 // this binding hangs iOS in editor
-                if (!support.mobileOS.ios) {
+                if (!(support.mobileOS.ios || support.mobileOS.android)) {
                     WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy)
                           .bind(RESIZE_SCROLL, that._resizeProxy);
                 }
