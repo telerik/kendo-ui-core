@@ -237,6 +237,7 @@
     <Compile Include="Controllers\Web\PanelBar\AjaxController.cs" />
     <Compile Include="Controllers\Web\PanelBar\ApiController.cs" />
     <Compile Include="Controllers\Web\PanelBar\AnimationController.cs" />
+    <Compile Include="Controllers\Web\PanelBar\NavigationController.cs" />
     <Compile Include="Controllers\Web\PanelBar\RtlController.cs" />
     <Compile Include="Controllers\Web\PanelBar\EventsController.cs" />
     <Compile Include="Controllers\Web\PanelBar\ImagesController.cs" />
@@ -477,6 +478,7 @@
     <Content Include="Areas\aspx\Views\web\editor\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\menu\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\panelbar\navigation.aspx" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml">
@@ -847,6 +849,7 @@
     <Content Include="Areas\razor\Views\web\editor\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\panelbar\navigation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
