@@ -90,6 +90,7 @@
                 DateTime.Parse("2012/01/01"), DateTime.Parse("2012/01/02"),
                 DateTime.Parse("2012/01/03")
             )
+            .Justify()
         )
     %>
 </div>

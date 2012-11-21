@@ -110,6 +110,98 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the step (interval) between categories in base units.
+        /// Specifiying 0 (auto) will set the step to such value that the total
+        /// number of categories does not exceed MaxDateGroups.
+        /// </summary>
+        /// <remarks>
+        /// This option is ignored if baseUnit is set to "fit".
+        /// </remarks>
+        /// <param name="baseUnitStep">
+        /// the step (interval) between categories in base units.
+        /// Set 0 for automatic step. The default value is 1.
+        /// </param>
+        public ChartDateCategoryAxisBuilder<TModel> BaseUnitStep(int baseUnitStep)
+        {
+            Container.CategoryAxis.BaseUnitStep = baseUnitStep;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the maximum number of groups (categories) that the chart will attempt to
+        /// produce when either BaseUnit is set to Fit or BaseUnitStep is set to 0 (auto).
+        /// This option is ignored in all other cases.
+        /// </summary>
+        /// <param name="maxDateGroups">
+        /// the maximum number of groups (categories).
+        /// The default value is 10.
+        /// </param>
+        public ChartDateCategoryAxisBuilder<TModel> MaxDateGroups(int maxDateGroups)
+        {
+            Container.CategoryAxis.MaxDateGroups = maxDateGroups;
+
+            return this;
+        }
+
+        /// <summary>
+        /// If set to false, the min and max dates will not be rounded off to
+        /// the nearest baseUnit. 
+        /// This option is most useful in combination with explicit min and max dates.
+        /// It will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
+        /// </summary>
+        /// <param name="roundToBaseUnit">
+        /// A boolean value that indicates if the axis range should be rounded to the nearest base unit.
+        /// The default value is true.
+        /// </param>
+        public ChartDateCategoryAxisBuilder<TModel> RoundToBaseUnit(bool roundToBaseUnit)
+        {
+            Axis.RoundToBaseUnit = roundToBaseUnit;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Positions categories and series points on major ticks. This removes the empty space before and after the series.
+        /// This option will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
+        /// </summary>
+        /// <param name="justified">
+        /// A boolean value that indicates if the empty space before and after the series should be removed.
+        /// The default value is false.
+        /// </param>
+        public ChartDateCategoryAxisBuilder<TModel> Justify(bool justified)
+        {
+            Axis.Justified = justified;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Positions categories and series points on major ticks. This removes the empty space before and after the series.
+        /// This option will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
+        /// </summary>
+        public ChartDateCategoryAxisBuilder<TModel> Justify()
+        {
+            Axis.Justified = true;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the discrete baseUnitStep values when
+        /// either BaseUnit is set to Fit or BaseUnitStep is set to 0 (auto).
+        /// </summary>
+        /// <param name="configurator">
+        /// The configuration action.
+        /// </param>
+        public ChartDateCategoryAxisBuilder<TModel> AutoBaseUnitSteps(Action<ChartAxisBaseUnitStepsBuilder> configurator)
+        {
+            configurator(new ChartAxisBaseUnitStepsBuilder(Axis.AutoBaseUnitSteps));
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the date category axis minimum (start) date.
         /// </summary>
         /// <param name="min">

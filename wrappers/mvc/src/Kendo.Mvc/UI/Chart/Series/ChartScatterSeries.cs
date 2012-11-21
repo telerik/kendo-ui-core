@@ -41,7 +41,6 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         public ChartScatterSeries()
             : base()
         {

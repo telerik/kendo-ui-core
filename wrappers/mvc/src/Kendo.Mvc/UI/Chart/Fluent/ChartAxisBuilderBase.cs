@@ -159,6 +159,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="color">The minor gridlines width</param>
         /// <param name="width">The minor gridlines color (CSS syntax)</param>
+        /// <param name="dashType">The minor grid lines dash type</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()
@@ -411,6 +412,27 @@ namespace Kendo.Mvc.UI.Fluent
         public TAxisBuilder Reverse(bool reverse)
         {
             Axis.Reverse = reverse;
+
+            return this as TAxisBuilder;
+        }
+
+        /// <summary>
+        /// Reverse the axis.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .CategoryAxis(axis => axis
+        ///                .Categories(s => s.DateString)
+        ///                .Reverse()
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TAxisBuilder Reverse()
+        {
+            Axis.Reverse = true;
 
             return this as TAxisBuilder;
         }

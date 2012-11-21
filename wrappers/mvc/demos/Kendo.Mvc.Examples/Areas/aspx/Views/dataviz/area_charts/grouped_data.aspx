@@ -29,6 +29,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDat
         .CategoryAxis(axis => axis
             .Categories(model => model.Date)
             .Labels(labels => labels.Format("MMM"))
+            .Justify()
         )
     %>
 </div>

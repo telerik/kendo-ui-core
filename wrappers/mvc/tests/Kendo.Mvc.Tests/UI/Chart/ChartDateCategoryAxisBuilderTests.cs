@@ -223,6 +223,71 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void BaseUnitStep_should_set_base_unit()
+        {
+            builder.BaseUnitStep(1);
+            axis.BaseUnitStep.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void BaseUnitStep_should_return_builder()
+        {
+            builder.BaseUnitStep(1).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void MaxDateGroups_should_set_base_unit()
+        {
+            builder.MaxDateGroups(1);
+            axis.MaxDateGroups.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void MaxDateGroups_should_return_builder()
+        {
+            builder.MaxDateGroups(1).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void RoundToBaseUnit_should_set_flag()
+        {
+            builder.RoundToBaseUnit(false);
+            axis.RoundToBaseUnit.ShouldEqual(false);
+        }
+
+        [Fact]
+        public void RoundToBaseUnit_should_return_builder()
+        {
+            builder.RoundToBaseUnit(false).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void AutoBaseUnitSteps_should_return_builder()
+        {
+            builder.AutoBaseUnitSteps(steps => steps.Minutes(1, 2)).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Justify_should_set_justified()
+        {
+            builder.Justify(false);
+            axis.Justified.ShouldEqual(false);
+        }
+
+        [Fact]
+        public void Justify_should_set_justified_to_true()
+        {
+            builder.Justify();
+            axis.Justified.ShouldEqual(true);
+        }
+
+        [Fact]
+        public void Justify_should_return_builder()
+        {
+            builder.Justify(false).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Min_should_set_min_date()
         {
             var min = DateTime.Parse("2012/01/01");
