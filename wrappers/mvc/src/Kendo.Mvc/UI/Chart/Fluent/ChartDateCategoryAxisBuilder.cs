@@ -111,15 +111,15 @@ namespace Kendo.Mvc.UI.Fluent
 
         /// <summary>
         /// Sets the step (interval) between categories in base units.
+        /// Specifiying 0 (auto) will set the step to such value that the total
+        /// number of categories does not exceed MaxDateGroups.
         /// </summary>
         /// <remarks>
-        /// Specifiying 0 will set the step to such value that the total
-        /// number of categories does not exceed MaxDateGroups.
         /// This option is ignored if baseUnit is set to "fit".
         /// </remarks>
         /// <param name="baseUnitStep">
         /// the step (interval) between categories in base units.
-        /// The default value is 1.
+        /// Set 0 for automatic step. The default value is 1.
         /// </param>
         public ChartDateCategoryAxisBuilder<TModel> BaseUnitStep(int baseUnitStep)
         {
@@ -129,8 +129,8 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Specifies the maximum number of groups (categories) to produce when
-        /// either BaseUnit is set to Fit or BaseUnitStep is set to 0 (auto).
+        /// Specifies the maximum number of groups (categories) that the chart will attempt to
+        /// produce when either BaseUnit is set to Fit or BaseUnitStep is set to 0 (auto).
         /// This option is ignored in all other cases.
         /// </summary>
         /// <param name="maxDateGroups">
