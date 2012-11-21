@@ -181,23 +181,23 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Justified_should_set_flag()
+        public void Justify_should_set_justified()
         {
-            builder.Justified(false);
+            builder.Justify(false);
             axis.Justified.ShouldEqual(false);
         }
 
         [Fact]
-        public void Justified_should_set_flag_to_true()
+        public void Justify_should_set_justified_to_true()
         {
-            builder.Justified();
+            builder.Justify();
             axis.Justified.ShouldEqual(true);
         }
 
         [Fact]
-        public void Justified_should_return_builder()
+        public void Justify_should_return_builder()
         {
-            builder.Justified(false).ShouldBeSameAs(builder);
+            builder.Justify(false).ShouldBeSameAs(builder);
         }
 
         [Fact]
