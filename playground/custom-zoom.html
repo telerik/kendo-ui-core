@@ -53,8 +53,14 @@
                             format: "{0:N1}"
                         }
                     },
+                    yAxis: {
+                        name: "yAxis",
+                        min: -2,
+                        max: 2
+                    },
                     series: [{
                         type: "scatterLine",
+                        yAxis: "yAxis",
                         xField: "x",
                         yField: "y",
                         markers: {
@@ -90,6 +96,34 @@
                         // Filters the data source and rebinds the chart
                         // which also applies the axis limits set above
                         ds.filter(getFilter(xMin, xMax));
+                    }
+
+                    var yRange = e.axisRanges.yAxis;
+                    if (yRange) {
+                        // Suggested axis ranges
+                        var yMin = yRange.min;
+                        var yMax = yRange.max;
+
+                        // Limit maximum zoom-in
+                        if (yMax - yMin < 2) {
+                            return;
+                        }
+
+                        // Set x axis range in chart options
+                        options.yAxis.min = yMin;
+                        options.yAxis.max = yMax;
+
+                        // Filters the data source and rebinds the chart
+                        // which also applies the axis limits set above
+                        ds.filter([{
+                            field: "y",
+                            operator: "gt",
+                            value: yMin
+                        }, {
+                            field: "y",
+                            operator: "lt",
+                            value: yMax
+                        }]);
                     }
                 }
             });
