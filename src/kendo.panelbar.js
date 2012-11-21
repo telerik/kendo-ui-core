@@ -501,7 +501,8 @@
 
         _current: function(candidate) {
             var that = this,
-                focused = that._focused;
+                focused = that._focused,
+                id = that._itemId;
 
             if (candidate === undefined) {
                 return focused;
@@ -510,18 +511,23 @@
             that.element.removeAttr("aria-activedescendant");
 
             if (focused) {
+                if (focused[0].id === id) {
+                    focused.removeAttr("id");
+                }
+
                 focused
-                    .removeAttr("id")
                     .children(LINKSELECTOR)
                     .removeClass(FOCUSEDCLASS);
             }
 
             if (candidate) {
-                candidate.attr("id", that._itemId)
+                id = candidate[0].id || id;
+
+                candidate.attr("id", id)
                          .children(LINKSELECTOR)
                          .addClass(FOCUSEDCLASS);
 
-                that.element.attr("aria-activedescendant", that._itemId);
+                that.element.attr("aria-activedescendant", id);
             }
 
             that._focused = candidate;

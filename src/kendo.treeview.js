@@ -1151,13 +1151,18 @@
 
             if (arguments.length > 0 && node && node.length) {
                 if (current) {
-                    current.removeAttr("id")
-                        .find(".k-in:first").removeClass("k-state-focused");
+                    if (current[0].id === id) {
+                        current.removeAttr("id");
+                    }
+
+                    current.find(".k-in:first").removeClass("k-state-focused");
                 }
 
                 current = that._current = $(node, element).closest(NODE);
 
                 current.find(".k-in:first").addClass("k-state-focused");
+
+                id = current[0].id || id;
 
                 if (id) {
                     that.wrapper.removeAttr("aria-activedescendant");

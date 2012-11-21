@@ -280,6 +280,26 @@
             equal(links.parent().index(), 1);
         });
 
+        test("PanelBar preserves the id of the LI elements", function() {
+            var panelbar = $("<ul id='test'><li id='custom'><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").kendoPanelBar().data("kendoPanelBar");
+
+            panelbar.select("li:last");
+            panelbar.select("li:first");
+
+            var li = panelbar.element.find(".k-state-selected").closest(".k-item");
+
+            equal(li.attr("id"), "custom");
+        });
+
+        test("PanelBar uses id of the LI element", function() {
+            var panelbar = $("<ul id='test'><li id='custom'><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").kendoPanelBar().data("kendoPanelBar");
+
+            panelbar.select("li:last");
+            panelbar.select("li:first");
+
+            equal(panelbar.element.attr("aria-activedescendant"), "custom");
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>

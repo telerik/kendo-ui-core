@@ -236,6 +236,26 @@
 
             equal(div.find("div[aria-expanded=true]").text(), "foo content");
         });
+
+        test("TabStrip preserves the id of the LI elements", function() {
+            var tabstrip = $("<ul id='test'><li id='custom' class='k-state-active'>Test</li><li>Test2</li></ul>").kendoTabStrip().data("kendoTabStrip");
+
+            tabstrip.select("li:last");
+            tabstrip.select("li:first");
+
+            var li = tabstrip.element.find(".k-state-active");
+
+            equal(li.attr("id"), "custom");
+        });
+
+        test("TabStrip uses id of the LI element for the aria-activedescendant", function() {
+            var tabstrip = $("<ul id='test'><li id='custom' class='k-state-active'>Test</li><li>Test2</li></ul>").kendoTabStrip().data("kendoTabStrip");
+
+            tabstrip.select("li:last");
+            tabstrip.select("li:first");
+
+            equal(tabstrip.element.attr("aria-activedescendant"), "custom");
+        });
     </script>
 
     <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>
