@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>Bar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+        <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet" />
+    </head>
+    <body class="k-default">
+        <h3>The Boeing Company (NYSE:BA)</h3>
+        <div id="chart" style="width: 900px; height: 500px;"></div>
+        <script>
+            // Sample data
+            var data = [];
+            for (var i = -100; i < 100; i += 0.2) {
+                data.push({ x: i, y: Math.sin(i) });
+            }
+
+            // Helper function that constructs DataSource filter
+            // for the x value
+            function getFilter(xMin, xMax) {
+                return [{
+                    field: "x",
+                    operator: "gt",
+                    value: xMin
+                }, {
+                    field: "x",
+                    operator: "lt",
+                    value: xMax
+                }]
+            }
+
+            $(function() {
+                $("#chart").kendoChart({
+                    dataSource: {
+                        data: data,
+                        filter: getFilter(-10, 10)
+                    },
+                    xAxis: {
+                        name: "xAxis",
+                        min: -10,
+                        max: 10,
+                        labels: {
+                            format: "{0:N1}"
+                        }
+                    },
+                    series: [{
+                        type: "scatterLine",
+                        xField: "x",
+                        yField: "y",
+                        markers: {
+                            visible: false
+                        }
+                    }],
+                    transitions: false,
+                    drag: onDrag,
+                    zoom: onDrag
+                });
+
+                var chart = $("#chart").data("kendoChart");
+
+                function onDrag(e) {
+                    var ds = chart.dataSource;
+                    var options = chart.options;
+
+                    var xRange = e.axisRanges.xAxis;
+                    if (xRange) {
+                        // Suggested axis ranges
+                        var xMin = xRange.min;
+                        var xMax = xRange.max;
+
+                        // Limit maximum zoom-in
+                        if (xMax - xMin < 2) {
+                            return;
+                        }
+
+                        // Set x axis range in chart options
+                        options.xAxis.min = xMin;
+                        options.xAxis.max = xMax;
+
+                        // Filters the data source and rebinds the chart
+                        // which also applies the axis limits set above
+                        ds.filter(getFilter(xMin, xMax));
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+
