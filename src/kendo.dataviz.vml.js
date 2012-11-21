@@ -609,7 +609,8 @@
         },
 
         options: {
-            fill: ""
+            fill: "",
+            fillOpacity: 1
         },
 
         refresh: function(domElement) {
