@@ -288,7 +288,7 @@
 
         value: function(value) {
             var that = this,
-                idx;
+                idx, hasValue;
 
             if (value !== undefined) {
                 if (value !== null) {
@@ -296,8 +296,9 @@
                 }
 
                 that._valueCalled = true;
+                hasValue = value || (that.options.optionLabel && value === "");
 
-                if (value && that._valueOnFetch(value)) {
+                if (hasValue && that._valueOnFetch(value)) {
                     return;
                 }
 

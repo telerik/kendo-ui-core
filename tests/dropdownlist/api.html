@@ -297,6 +297,20 @@
                 equal(select[0].selectedIndex, 1);
             });
 
+            test("value method with empty string calls dataSource.fetch if no data", function() {
+                var dropdownlist = new DropDownList(input, {
+                    optionLabel: "Select"
+                });
+
+                stub(dropdownlist.dataSource, {
+                    fetch: dropdownlist.dataSource.fetch
+                });
+
+                dropdownlist.value("");
+
+                equal(dropdownlist.dataSource.calls("fetch"), 1);
+            });
+
             test("value(value) calls dataSource.fetch if no data", function() {
                 var dropdownlist = new DropDownList(input);
 
