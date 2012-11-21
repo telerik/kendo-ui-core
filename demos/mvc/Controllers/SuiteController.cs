@@ -120,7 +120,7 @@ namespace Kendo.Controllers
                 {
                     foreach (NavigationExample example in widget.Items)
                     {
-                        if (!example.Url.Contains("overview")) {
+                        if (!example.Url.Contains("overview") && example.ShouldInclude) {
                             examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
                         }
 
