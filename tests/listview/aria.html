@@ -106,6 +106,30 @@
 
                 equal(ul.attr("aria-activedescendant"), "test_lv_active");
             });
+
+            test("ListView preserves the id of the LI elements", function() {
+                var listview = setup({
+                    template: "<li id='custom[#=data#]'>#=data#</li>",
+                    selectable: true,
+                    navigatable: true
+                }).data("kendoListView");
+
+                var li = listview.element.focus().find(".k-state-focused");
+
+                equal(li.attr("id"), "custom[1]");
+            });
+
+            test("ListView uses id of the LI element for the aria-activedescendant", function() {
+                var listview = setup({
+                    template: "<li id='custom[#=data#]'>#=data#</li>",
+                    selectable: true,
+                    navigatable: true
+                }).data("kendoListView");
+
+                listview.element.focus();
+
+                equal(listview.element.attr("aria-activedescendant"), "custom[1]");
+            });
         </script>
     </body>
 </html>

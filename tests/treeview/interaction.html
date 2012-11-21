@@ -129,6 +129,26 @@
                 ok(!item.hasClass("k-state-selected"));
             });
 
+            test("TreeView preserves id attributes of the enhanced html", function() {
+                var treeview = $('<ul id="treeview"><li id="custom">text<li/></ul>').kendoTreeView().data("kendoTreeView");
+
+                treeview.wrapper.focus();
+
+                var li = treeview.element.find(".k-state-focused").closest(".k-item");
+
+                equal(li.attr("id"), "custom");
+            });
+
+            test("TreeView uses id of the LI as value for aria-activedescendant", function() {
+                var treeview = $('<ul id="treeview"><li id="custom">text<li/></ul>').kendoTreeView().data("kendoTreeView");
+
+                treeview.wrapper.focus();
+
+                var li = treeview.element.find(".k-state-focused").closest(".k-item");
+
+                equal(treeview.wrapper.attr("aria-activedescendant"), "custom");
+            });
+
             module("drag & drop", {
                 teardown: cleanArtifacts
             });
@@ -1034,7 +1054,7 @@
                 treeview.press(keys.UP);
             });
 
-            test("focusing node set aria-activedescendent to the wrapper", function() {
+            test("focusing node set aria-activedescendant to the wrapper", function() {
                 treeview = $("<div id='treeview' />").appendTo(document.body)
                     .kendoTreeView({
                         dataSource: [
@@ -1083,7 +1103,7 @@
                 ok(!treeview.find("#" + treeview.data("kendoTreeView")._ariaId).length);
             });
 
-            test("aria-activedescendent is not set if id is not set", function() {
+            test("aria-activedescendant is not set if id is not set", function() {
                 treeview = $("<div/>").appendTo(document.body)
                     .kendoTreeView({
                         dataSource: [

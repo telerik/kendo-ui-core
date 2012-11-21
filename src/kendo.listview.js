@@ -266,21 +266,29 @@
         current: function(candidate) {
             var that = this,
                 element = that.element,
-                current = that._current;
+                current = that._current,
+                id = that._itemId;
 
             if (candidate === undefined) {
                 return current;
             }
 
             if (current) {
-                current.removeClass(FOCUSED).removeAttr("id");
+                if (current[0].id === id) {
+                    current.removeAttr("id");
+                }
+
+                current.removeClass(FOCUSED);
                 element.removeAttr("aria-activedescendant");
             }
 
             if (candidate && candidate[0]) {
+                id = candidate[0].id || id;
+
                 that._scrollTo(candidate[0]);
-                element.attr("aria-activedescendant", that._itemId);
-                candidate.addClass(FOCUSED).attr("id", that._itemId);
+
+                element.attr("aria-activedescendant", id);
+                candidate.addClass(FOCUSED).attr("id", id);
             }
 
             that._current = candidate;
