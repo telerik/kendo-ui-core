@@ -57,6 +57,17 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Specifies the maximum number of groups (categories) to produce when
+        /// either BaseUnit is set to Fit or BaseUnitStep is set to 0 (auto).
+        /// This option is ignored in all other cases.
+        /// </summary>
+        int? MaxDateGroups
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// If set to false, the min and max dates will not be rounded off to
         /// the nearest baseUnit. 
         /// This option is most useful in combination with explicit min and max dates.
@@ -80,7 +91,7 @@ namespace Kendo.Mvc.UI
 
         /// <summary>
         /// Specifies the discrete BaseUnitStep values
-        /// when either BaseUnit is set to Fit or BaseUnitStep is set to Auto.
+        /// when either BaseUnit is set to Fit or BaseUnitStep is set to 0 (auto).
         /// </summary>
         ChartAxisBaseUnitSteps AutoBaseUnitSteps
         {

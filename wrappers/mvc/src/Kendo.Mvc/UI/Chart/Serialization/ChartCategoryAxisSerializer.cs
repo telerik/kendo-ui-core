@@ -28,7 +28,8 @@ namespace Kendo.Mvc.UI
                 .Add("min", axis.Min.ToJavaScriptString(), () => axis.Min != null)
                 .Add("max", axis.Max.ToJavaScriptString(), () => axis.Max != null)
                 .Add("roundToBaseUnit", axis.RoundToBaseUnit, () => axis.RoundToBaseUnit.HasValue)
-                .Add("justified", axis.Justified, () => axis.Justified.HasValue);
+                .Add("justified", axis.Justified, () => axis.Justified.HasValue)
+                .Add("maxDateGroups", axis.MaxDateGroups, () => axis.MaxDateGroups.HasValue);
 
             if (axis.BaseUnit != null)
             {

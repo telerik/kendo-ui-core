@@ -129,6 +129,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies the maximum number of groups (categories) to produce when
+        /// either BaseUnit is set to Fit or BaseUnitStep is set to 0 (auto).
+        /// This option is ignored in all other cases.
+        /// </summary>
+        /// <param name="maxDateGroups">
+        /// the maximum number of groups (categories).
+        /// The default value is 10.
+        /// </param>
+        public ChartDateCategoryAxisBuilder<TModel> MaxDateGroups(int maxDateGroups)
+        {
+            Container.CategoryAxis.MaxDateGroups = maxDateGroups;
+
+            return this;
+        }
+
+        /// <summary>
         /// If set to false, the min and max dates will not be rounded off to
         /// the nearest baseUnit. 
         /// This option is most useful in combination with explicit min and max dates.
@@ -173,7 +189,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         /// <summary>
         /// Specifies the discrete baseUnitStep values when
-        /// either BaseUnit is set to Fit or BaseUnitStep is set to Auto.
+        /// either BaseUnit is set to Fit or BaseUnitStep is set to 0 (auto).
         /// </summary>
         /// <param name="configurator">
         /// The configuration action.

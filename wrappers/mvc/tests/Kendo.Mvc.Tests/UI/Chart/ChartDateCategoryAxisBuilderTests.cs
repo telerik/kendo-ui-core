@@ -236,6 +236,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void MaxDateGroups_should_set_base_unit()
+        {
+            builder.MaxDateGroups(1);
+            axis.MaxDateGroups.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void MaxDateGroups_should_return_builder()
+        {
+            builder.MaxDateGroups(1).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void RoundToBaseUnit_should_set_flag()
         {
             builder.RoundToBaseUnit(false);

@@ -211,6 +211,20 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_serialize_MaxDateGroups_if_set()
+        {
+            axisMock.SetupGet(a => a.MaxDateGroups).Returns(4);
+
+            serializer.Serialize()["maxDateGroups"].ShouldEqual(4);
+        }
+
+        [Fact]
+        public void Should_not_serialize_MaxDateGroups_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("maxDateGroups").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Should_serialize_RoundToBaseUnit()
         {
             axisMock.SetupGet(a => a.RoundToBaseUnit).Returns(false);
