@@ -119,6 +119,10 @@
             popup.open();
         },
 
+        target: function() {
+            return this.popup.options.anchor;
+        },
+
         hide: function() {
             this.popup.close();
         },
@@ -157,7 +161,7 @@
             options = that.options;
 
             popupOptions = $.extend({
-                "show": function() { that.trigger(OPEN); },
+                "show": function() { that.trigger(OPEN, { target: that.popup.target() }); },
                 "hide": function() { that.trigger(CLOSE); }
             }, this.options.popup);
 
