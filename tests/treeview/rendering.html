@@ -442,6 +442,21 @@
                 equal(checkboxes.eq(0).attr("name"), "bar[]");
             });
 
+            test("fetching remote nodes renders them as checked if parent checkboxes are checked and checkChildren is true", function() {
+                treeview.kendoTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", checked: true }
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                treeview.data("kendoTreeView").append({ id: 2, text: "bar" }, $(".k-item"));
+
+                ok(treeview.find(":checkbox:last").prop("checked"));
+            });
+
             module("aria generation", moduleOptions);
 
             test("treeview role is added to the wrapper", function() {
