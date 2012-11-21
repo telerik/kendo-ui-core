@@ -3,16 +3,16 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="ChartNavigator"/>.
+    /// Defines the fluent interface for configuring the <see cref="ChartNavigator{T}"/>.
     /// </summary>
     public class ChartNavigatorBuilder<T> : IHideObjectMembers where T : class
     {
         private readonly ChartNavigator<T> navigator;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartNavigatorBuilder" /> class.
+        /// Initializes a new instance of the <see cref="ChartNavigatorBuilder{T}" /> class.
         /// </summary>
-        /// <param name="chartTitle">The stock chart navigator.</param>
+        /// <param name="chartNavigator">The stock chart navigator.</param>
         public ChartNavigatorBuilder(ChartNavigator<T> chartNavigator)
         {
             navigator = chartNavigator;
@@ -21,7 +21,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the selection range
         /// </summary>
-        /// <param name="text">The selection range.</param>
+        /// <param name="from">The selection range start.</param>
+        /// <param name="to">The selection range end.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().StockChart(Model)

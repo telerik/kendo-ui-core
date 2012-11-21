@@ -17,10 +17,10 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The discrete baseUnitStep values when baseUnit is set to Minutes and
-        /// baseUnitStep is set to Auto.
+        /// The discrete BaseUnitStep values when BaseUnit is set to Minutes and
+        /// BaseUnitStep is set to 0 (auto).
         /// </summary>
-        /// <param name="visible">The ticks visibility.</param>
+        /// <param name="steps">The discrete steps when BaseUnit is set to Minutes.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///     })
         ///     .CategoryAxis(axis => axis
         ///         .Date()
-        ///         .BaseUnit(ChartAxisBaseUnit.Auto)
+        ///         .BaseUnit(ChartAxisBaseUnit.Fit)
         ///         .AutoBaseUnitSteps(steps => steps.Minutes(1, 2))
         ///     )
         /// %&gt;
@@ -46,10 +46,10 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The discrete baseUnitStep values when baseUnit is set to Hours and
-        /// baseUnitStep is set to Auto.
+        /// The discrete BaseUnitStep values when BaseUnit is set to Hours and
+        /// BaseUnitStep is set to 0 (auto).
         /// </summary>
-        /// <param name="visible">The ticks visibility.</param>
+        /// <param name="steps">The discrete steps when BaseUnit is set to Hours.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
@@ -61,7 +61,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///     })
         ///     .CategoryAxis(axis => axis
         ///         .Date()
-        ///         .BaseUnit(ChartAxisBaseUnit.Auto)
+        ///         .BaseUnit(ChartAxisBaseUnit.Fit)
         ///         .AutoBaseUnitSteps(steps => steps.Hours(1, 2))
         ///     )
         /// %&gt;
@@ -75,10 +75,10 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The discrete baseUnitStep values when baseUnit is set to Days and
-        /// baseUnitStep is set to Auto.
+        /// The discrete BaseUnitStep values when BaseUnit is set to Days and
+        /// BaseUnitStep is set to 0 (auto).
         /// </summary>
-        /// <param name="visible">The ticks visibility.</param>
+        /// <param name="steps">The discrete steps when BaseUnit is set to Days.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///     })
         ///     .CategoryAxis(axis => axis
         ///         .Date()
-        ///         .BaseUnit(ChartAxisBaseUnit.Auto)
+        ///         .BaseUnit(ChartAxisBaseUnit.Fit)
         ///         .AutoBaseUnitSteps(steps => steps.Days(1, 2))
         ///     )
         /// %&gt;
@@ -104,10 +104,10 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The discrete baseUnitStep values when baseUnit is set to Weeks and
-        /// baseUnitStep is set to Auto.
+        /// The discrete BaseUnitStep values when BaseUnit is set to Weeks and
+        /// BaseUnitStep is set to 0 (auto).
         /// </summary>
-        /// <param name="visible">The ticks visibility.</param>
+        /// <param name="steps">The discrete steps when BaseUnit is set to Weeks.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///     })
         ///     .CategoryAxis(axis => axis
         ///         .Date()
-        ///         .BaseUnit(ChartAxisBaseUnit.Auto)
+        ///         .BaseUnit(ChartAxisBaseUnit.Fit)
         ///         .AutoBaseUnitSteps(steps => steps.Weeks(1, 2))
         ///     )
         /// %&gt;
@@ -133,10 +133,10 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The discrete baseUnitStep values when baseUnit is set to Months and
-        /// baseUnitStep is set to Auto.
+        /// The discrete BaseUnitStep values when BaseUnit is set to Months and
+        /// BaseUnitStep is set to 0 (auto).
         /// </summary>
-        /// <param name="visible">The ticks visibility.</param>
+        /// <param name="steps">The discrete steps when BaseUnit is set to Months.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///     })
         ///     .CategoryAxis(axis => axis
         ///         .Date()
-        ///         .BaseUnit(ChartAxisBaseUnit.Auto)
+        ///         .BaseUnit(ChartAxisBaseUnit.Fit)
         ///         .AutoBaseUnitSteps(steps => steps.Months(1, 2))
         ///     )
         /// %&gt;
@@ -162,10 +162,10 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The discrete baseUnitStep values when baseUnit is set to Years and
-        /// baseUnitStep is set to Auto.
+        /// The discrete BaseUnitStep values when BaseUnit is set to Years and
+        /// BaseUnitStep is set to 0 (auto).
         /// </summary>
-        /// <param name="visible">The ticks visibility.</param>
+        /// <param name="steps">The discrete steps when BaseUnit is set to Years.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
@@ -177,7 +177,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///     })
         ///     .CategoryAxis(axis => axis
         ///         .Date()
-        ///         .BaseUnit(ChartAxisBaseUnit.Auto)
+        ///         .BaseUnit(ChartAxisBaseUnit.Fit)
         ///         .AutoBaseUnitSteps(steps => steps.Years(1, 2))
         ///     )
         /// %&gt;

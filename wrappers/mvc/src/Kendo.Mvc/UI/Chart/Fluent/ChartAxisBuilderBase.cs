@@ -159,6 +159,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="color">The minor gridlines width</param>
         /// <param name="width">The minor gridlines color (CSS syntax)</param>
+        /// <param name="dashType">The minor grid lines dash type</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()

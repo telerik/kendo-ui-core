@@ -58,7 +58,8 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Serializes the asynchronous uploading settings to the writer.
         /// </summary>
-        /// <param name="writer">The writer object.</param>
+        /// <param name="key">The serialization key.</param>
+        /// <param name="options">The target dictionary.</param>
         public void SerializeTo(string key, IDictionary<string, object> options)
         {
             if (Save.HasValue())

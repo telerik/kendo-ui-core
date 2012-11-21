@@ -29,7 +29,6 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartLineSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="chart">The chart.</param>
         public ChartLineSeries()
             : base()
         {

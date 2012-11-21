@@ -675,7 +675,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Creates a new <see cref="Kendo.Mvc.UI.Chart{T}"/> bound an item in ViewData.
         /// </summary>
         /// <typeparam name="T">Type of the data item</typeparam>
-        /// <param name="dataSourceViewDataKey">The data source view data key.</param>
+        /// <param name="dataViewDataKey">The data source view data key.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Chart&lt;SalesData&gt;("sales")
@@ -752,7 +752,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Creates a new <see cref="Kendo.Mvc.UI.StockChart{T}"/> bound an item in ViewData.
         /// </summary>
         /// <typeparam name="T">Type of the data item</typeparam>
-        /// <param name="dataSourceViewDataKey">The data source view data key.</param>
+        /// <param name="dataViewDataKey">The data source view data key.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().StockChart&lt;SalesData&gt;("sales")

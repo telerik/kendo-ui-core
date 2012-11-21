@@ -371,7 +371,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Enables or disables automatic binding.
         /// </summary>
-        /// <param name="visible">
+        /// <param name="autoBind">
         /// Gets or sets a value indicating if the chart
         /// should be data bound during initialization.
         /// The default value is true.

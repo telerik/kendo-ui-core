@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
     public class ChartNavigator<T> : ISeriesContainer where T : class
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartNavigator" /> class.
+        /// Initializes a new instance of the <see cref="ChartNavigator{T}" /> class.
         /// </summary>
         public ChartNavigator()
         {

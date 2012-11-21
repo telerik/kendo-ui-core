@@ -10,12 +10,12 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartCandlestickSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="expressionOpen">The open expression.</param>
-        /// <param name="expressionHigh">The high expression.</param>
-        /// <param name="expressionLow">The open expression.</param>
-        /// <param name="expressionClose">The high expression.</param>
-        /// <param name="expressionColor">The color expression.</param>
-        /// <param name="expressionDownColor">The downColor expression.</param>
+        /// <param name="openExpression">The open expression.</param>
+        /// <param name="highExpression">The high expression.</param>
+        /// <param name="lowExpression">The low expression.</param>
+        /// <param name="closeExpression">The close expression.</param>
+        /// <param name="colorExpression">The color expression.</param>
+        /// <param name="downColorExpression">The down color expression.</param>
         public ChartCandlestickSeries(
             Expression<Func<TModel, TValue>> openExpression,
             Expression<Func<TModel, TValue>> highExpression,
