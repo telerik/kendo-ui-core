@@ -254,8 +254,10 @@
             }
 
             if (focused) {
+                if (focused[0].id === id) {
+                    focused.removeAttr("id");
+                }
                 focused.removeClass(FOCUSEDSTATE);
-                focused.removeAttr("id");
             }
 
             if (candidate) {
@@ -264,6 +266,8 @@
                 }
 
                 that.element.removeAttr("aria-activedescendant");
+
+                id = candidate[0].id || id;
 
                 if (id) {
                     candidate.attr("id", id);
