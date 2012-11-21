@@ -557,12 +557,13 @@
             return this;
         },
 
-        toFront: function () {
+        toFront: function (e) {
             var that = this,
                 wrapper = that.wrapper,
                 currentWindow = wrapper[0],
                 zIndex = +wrapper.css(ZINDEX),
-                originalZIndex = zIndex;
+                originalZIndex = zIndex,
+                target = e && e.target ? e.target : null;
 
             $(KWINDOW).each(function(i, element) {
                 var windowObject = $(element),
@@ -583,6 +584,10 @@
             if (zIndex == 10001 || originalZIndex < zIndex) {
                 wrapper.css(ZINDEX, zIndex + 2);
                 that.element.find("> .k-overlay").remove();
+            }
+
+            if (!that.element.find(document.activeElement).length || !that.element.find(target).length) {
+                that.element.focus();
             }
 
             return that;
