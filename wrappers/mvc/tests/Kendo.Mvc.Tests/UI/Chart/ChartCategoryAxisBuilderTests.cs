@@ -181,6 +181,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Justified_should_set_flag()
+        {
+            builder.Justified(false);
+            axis.Justified.ShouldEqual(false);
+        }
+
+        [Fact]
+        public void Justified_should_return_builder()
+        {
+            builder.Justified(false).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Categories_should_bind_categories_with_expression()
         {
             builder.Categories(s => s.DateString);

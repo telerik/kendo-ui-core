@@ -225,6 +225,20 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_serialize_Justified()
+        {
+            axisMock.SetupGet(a => a.Justified).Returns(false);
+            serializer.Serialize()["justified"].ShouldEqual(false);
+        }
+
+        [Fact]
+        public void Should_not_serialize_Justified_if_not_set()
+        {
+            axisMock.SetupGet(a => a.Justified).Returns((bool?)null);
+            serializer.Serialize().ContainsKey("justified").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Should_serialize_AutoBaseUnitSteps()
         {
             axisMock.SetupGet(a => a.AutoBaseUnitSteps).Returns(new ChartAxisBaseUnitSteps { Hours = new int[] { 1, 2 } });

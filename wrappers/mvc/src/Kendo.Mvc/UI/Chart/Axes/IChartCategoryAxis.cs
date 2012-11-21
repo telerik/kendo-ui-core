@@ -62,11 +62,17 @@ namespace Kendo.Mvc.UI
         /// This option is most useful in combination with explicit min and max dates.
         /// It will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
         /// </summary>
-        /// <value>
-        /// A boolean value that indicates if the axis range should be rounded to the nearest base unit.
-        /// The default value is true.
-        /// </value>
         bool? RoundToBaseUnit
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Positions categories and series points on major ticks. This removes the empty space before and after the series.
+        /// This option will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
+        /// </summary>
+        bool? Justified
         {
             get;
             set;

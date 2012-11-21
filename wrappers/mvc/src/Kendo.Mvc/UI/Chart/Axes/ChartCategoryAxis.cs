@@ -92,6 +92,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Positions categories and series points on major ticks. This removes the empty space before and after the series.
+        /// This option will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
+        /// </summary>
+        public bool? Justified
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Specifies the discrete BaseUnitStep values
         /// when either BaseUnit is set to Fit or BaseUnitStep is set to Auto.
         /// </summary>
