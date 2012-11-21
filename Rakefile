@@ -69,7 +69,7 @@ end
 
 # Rake tasks
 desc('JavaScript')
-task :js => [:npm, MIN_JS, JS_BUNDLES].flatten
+task :js => [:npm, MIN_JS, JS_BUNDLES, KENDO_CONFIG_FILE].flatten
 
 desc('Less')
 multitask :less => [:npm, MIN_CSS].flatten

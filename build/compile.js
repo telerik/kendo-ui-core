@@ -11,8 +11,13 @@ var ARGV = OPT
     .describe("decl", "Add the component declarations in the source code")
     .describe("bundle", "Create a bundle")
     .describe("kendo-config", "Generate download-builder/kendo-config.VERSION_NUMBER.json (to STDOUT)")
+    .describe("overwrite", "Only for kendo-config, if specified the file will be overwritten")
     .boolean("amd")
     .boolean("deps")
+    .boolean("decl")
+    .boolean("bundle")
+    .boolean("kendo-config")
+    .boolean("overwrite")
     .wrap(80)
     .argv;
 
@@ -66,7 +71,11 @@ if (ARGV["kendo-config"]) {
         }
     });
     deps_file.components = components;
-    sys.puts(JSON.stringify(deps_file, null, 4));
+    if (ARGV.overwrite) {
+        fs.writeFileSync(deps_file_name, JSON.stringify(deps_file, null, 4));
+    } else {
+        sys.puts(JSON.stringify(deps_file, null, 4));
+    }
     process.exit(0);
 }
 

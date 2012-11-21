@@ -27,6 +27,12 @@ rule '.min.js' => lambda { |t| t.sub('min.js', 'js') } do |t|
     compilejs(t.source, t.name)
 end
 
+#Rebuild kendo-config.VERSION_NUMBER.json based on data present in the source code
+KENDO_CONFIG_FILE = File.join(Rake.application.original_dir, "download-builder", "config", "kendo-config.VERSION_NUMBER.json")
+file KENDO_CONFIG_FILE => SRC_JS do |t|
+    sh "node #{COMPILEJS} --kendo-config --overwrite", :verbose => VERBOSE
+end
+
 #Composite JavaScript files
 file_merge "src/kendo.editor.js" => [
     "src/editor/main.js",
