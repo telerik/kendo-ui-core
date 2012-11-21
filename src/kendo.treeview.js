@@ -1044,7 +1044,9 @@
                 action = e.action,
                 items = e.items,
                 index = e.index,
-                loadOnDemand = that.options.loadOnDemand,
+                options = that.options,
+                loadOnDemand = options.loadOnDemand,
+                checkChildren = options.checkboxes && options.checkboxes.checkChildren,
                 i;
 
             function append(items, parentNode) {
@@ -1078,6 +1080,12 @@
             if (node) {
                 parentNode = that.findByUid(node.uid);
                 that._progress(parentNode, false);
+            }
+
+            if (checkChildren && action != "remove" && node && node.checked) {
+                for (i = 0; i < items.length; i++) {
+                    items[i].checked = true;
+                }
             }
 
             if (action == "add") {
