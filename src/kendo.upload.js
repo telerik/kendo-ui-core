@@ -656,8 +656,8 @@ kendo_module({
 
             try {
                 responseText = iframe.contents().text();
-            } catch (e) {
-                responseText = "Error trying to get server response: " + e;
+            } catch (ex) {
+                responseText = "Error trying to get server response: " + ex;
             }
 
             this.processResponse(iframe, responseText);
