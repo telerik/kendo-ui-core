@@ -222,6 +222,7 @@
     <Compile Include="Controllers\Web\ListView\EditingController.cs" />
     <Compile Include="Controllers\Web\ListView\IndexController.cs" />
     <Compile Include="Controllers\Web\Menu\ApiController.cs" />
+    <Compile Include="Controllers\Web\Menu\NavigationController.cs" />
     <Compile Include="Controllers\Web\Menu\RtlController.cs" />
     <Compile Include="Controllers\Web\Menu\DirectionController.cs" />
     <Compile Include="Controllers\Web\Menu\ModelBindingController.cs" />
@@ -475,6 +476,7 @@
     <Content Include="Areas\aspx\Views\web\numerictextbox\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\menu\navigation.aspx" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml">
@@ -844,6 +846,7 @@
     <Content Include="Areas\razor\Views\web\numerictextbox\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\editor\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\menu\navigation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
