@@ -302,6 +302,25 @@
                 move(15, 25, 2)
             });
 
+            test("provides distance in the gesture start event", 1, function(){
+                touch.bind("gesturestart", function(e) {
+                    equal(e.distance, 10);
+                });
+
+                press(15, 15, 2);
+                move(30, 30, 2);
+            });
+
+            test("provides center in the gesture start event", 2, function(){
+                touch.bind("gesturestart", function(e) {
+                    equal(e.center.x, 20);
+                    equal(e.center.y, 20);
+                });
+
+                press(25, 15, 2);
+                move(30, 30, 2);
+            });
+
             test("triggers gesturechange", 1, function(){
                 touch.bind("gesturechange", function(e) {
                     ok(true);

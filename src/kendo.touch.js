@@ -63,7 +63,7 @@
 
             function gestureEventProxy(name) {
                 return function(e) {
-                    that.trigger(name, { touches: e.touches });
+                    that.trigger(name, { touches: e.touches, distance: e.distance, center: e.center });
                 };
             }
 
