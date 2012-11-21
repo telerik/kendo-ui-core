@@ -100,10 +100,12 @@
     <Compile Include="Controllers\DataViz\Scatter_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
+    <Compile Include="Controllers\Web\AutoComplete\NavigationController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\EventsController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\RtlController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ServerFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\TemplateController.cs" />
+    <Compile Include="Controllers\Web\Calendar\NavigationController.cs" />
     <Compile Include="Controllers\Web\Calendar\RtlController.cs" />
     <Compile Include="Controllers\Web\Calendar\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\Calendar\SelectActionController.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="Controllers\Web\ComboBox\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ApiController.cs" />
     <Compile Include="Controllers\Web\ComboBox\CascadingComboBoxController.cs" />
+    <Compile Include="Controllers\Web\ComboBox\NavigationController.cs" />
     <Compile Include="Controllers\Web\ComboBox\RtlController.cs" />
     <Compile Include="Controllers\Web\ComboBox\EventsController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ServerFilteringController.cs" />
@@ -149,12 +152,14 @@
     <Compile Include="Controllers\DataViz\Radial_Gauge\Scale_OptionsController.cs" />
     <Compile Include="Controllers\DataViz\Radial_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Web\DatePicker\ApiController.cs" />
+    <Compile Include="Controllers\Web\DatePicker\NavigationController.cs" />
     <Compile Include="Controllers\Web\DatePicker\RtlController.cs" />
     <Compile Include="Controllers\Web\DatePicker\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\DatePicker\EventsController.cs" />
     <Compile Include="Controllers\Web\DatePicker\TemplateController.cs" />
     <Compile Include="Controllers\Web\DatePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\ApiController.cs" />
+    <Compile Include="Controllers\Web\DateTimePicker\NavigationController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\RtlController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\EventsController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\GlobalizationController.cs" />
@@ -222,6 +227,7 @@
     <Compile Include="Controllers\Web\Menu\OrientationController.cs" />
     <Compile Include="Controllers\Web\Menu\ImagesController.cs" />
     <Compile Include="Controllers\Web\Menu\IndexController.cs" />
+    <Compile Include="Controllers\Web\NumericTextBox\NavigationController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\RtlController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\PanelBar\AjaxController.cs" />
@@ -246,6 +252,7 @@
     <Compile Include="Controllers\Web\TabStrip\IndexController.cs" />
     <Compile Include="Controllers\Web\Grid\AggregatesController.cs" />
     <Compile Include="Controllers\Web\Grid\ServerAggregatesController.cs" />
+    <Compile Include="Controllers\Web\TimePicker\NavigationController.cs" />
     <Compile Include="Controllers\Web\TimePicker\RtlController.cs" />
     <Compile Include="Controllers\Web\TimePicker\EventsController.cs" />
     <Compile Include="Controllers\Web\TimePicker\ApiController.cs" />
@@ -378,10 +385,13 @@
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\autocomplete\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\datepicker\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\datetimepicker\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\events.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\index.aspx" />
@@ -449,12 +459,18 @@
     <Content Include="Areas\aspx\Views\web\splitter\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\tabstrip\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\web\timepicker\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\timepicker\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\async.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\index.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\index.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
+    <Content Include="Areas\aspx\Views\web\combobox\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\numerictextbox\navigation.aspx" />
+    <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
+    <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -813,6 +829,12 @@
     <Content Include="Areas\razor\Views\dataviz\financial\index.cshtml" />
     <Content Include="Areas\razor\Views\web\timepicker\rtl.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\financial\panes.cshtml" />
+    <Content Include="Areas\razor\Views\web\autocomplete\navigation.cshtml" />
+    <Content Include="Areas\aspx\Views\web\calendar\navigation.aspx" />
+    <Content Include="Areas\razor\Views\web\combobox\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\datetimepicker\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\timepicker\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\numerictextbox\navigation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
