@@ -191,6 +191,7 @@
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
     <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_MenuController.cs" />
+    <Compile Include="Controllers\Web\Grid\NavigationController.cs" />
     <Compile Include="Controllers\Web\Grid\RtlController.cs" />
     <Compile Include="Controllers\Web\Grid\ForeignKeyColumnController.cs" />
     <Compile Include="Controllers\Web\Grid\Editing_CustomController.cs" />
@@ -838,6 +839,7 @@
     <Content Include="Areas\razor\Views\web\timepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\numerictextbox\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\editor\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\navigation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
