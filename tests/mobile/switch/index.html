@@ -159,6 +159,15 @@
                 ok(!theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
             });
 
+            test("Tapping checks the switch", function() {
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(MOUSEUP);
+                ok(theSwitch.element[0].checked);
+            });
+
             test("Switch check the input depending on the checked option", function() {
                 var theSwitch = new Switch(dom, {
                     checked: true
@@ -213,6 +222,16 @@
 
                 ok(!theSwitch.wrapper.hasClass("km-switch-on"));
             });
+
+            test("Destroying removes event handling", function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.destroy();
+                theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(MOUSEUP);
+                ok(!theSwitch.element[0].checked);
+            });
+
         </script>
     </body>
 </html>
