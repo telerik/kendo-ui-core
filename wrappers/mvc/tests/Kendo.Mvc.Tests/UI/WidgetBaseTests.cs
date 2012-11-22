@@ -71,5 +71,31 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.True(component.HasWrittenHtml);
         }
+
+        [Fact]
+        public void HasDeferredInitialization_should_add_scripts_to_the_context()
+        {
+            WidgetBaseTestDouble component = new WidgetBaseTestDouble(_viewContext, null) { Name = "dummyComponent", HasDeferredInitialization = true };
+                        
+            component.Render();
+
+            _httpContext.Object.Items.Contains(WidgetBase.DeferredScriptsKey).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void HasDeferredInitialization_should_not_render_scripts()
+        {
+            WidgetBaseTestDouble component = new WidgetBaseTestDouble(_viewContext, null) { Name = "dummyComponent", HasDeferredInitialization = true };
+
+            component.ToHtmlString().Contains("<script>").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void HasDeferredInitialization_false_should_render_scripts()
+        {
+            WidgetBaseTestDouble component = new WidgetBaseTestDouble(_viewContext, null) { Name = "dummyComponent", HasDeferredInitialization = false };
+
+            component.ToHtmlString().Contains("<script>").ShouldBeTrue();
+        }
     }
 }

@@ -66,6 +66,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TBuilder;
         }
 
+        public virtual TBuilder Deferred()
+        {
+            Component.HasDeferredInitialization = true;
+
+            return this as TBuilder;
+        }
+
         internal TBuilder ModelMetadata(ModelMetadata modelMetadata)
         {
             Component.ModelMetadata = modelMetadata;

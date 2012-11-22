@@ -80,5 +80,23 @@ namespace Kendo.Mvc.UI.Tests
         {
             Assert.NotNull(_factory.RangeSlider<float>());
         }
+
+        [Fact]
+        public void RenderDeferredScripts_returns_deferred_scripts()
+        {
+            _factory.RangeSlider<float>()
+                .Deferred().Name("foo").Render();
+
+            _factory.RenderDeferredScripts().ToHtmlString().ShouldContain("<script>");
+        }
+
+        [Fact]
+        public void RenderDeferredScripts_does_not_return_non_deferred_scripts()
+        {
+            _factory.RangeSlider<float>()
+                .Name("foo").Render();
+
+            _factory.RenderDeferredScripts().ToHtmlString().ShouldNotContain("<script>");
+        }
     }
 }
