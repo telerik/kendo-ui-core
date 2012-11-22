@@ -204,6 +204,28 @@
                 ok(checkboxes.eq(0).prop("indeterminate"));
             });
 
+            test("checkboxes.checkChildren sets indeterminate state of all parents", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", items: [
+                            { text: "bar", items: [
+                                { text: "baz" },
+                                { text: "qux" }
+                            ] }
+                        ] }
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                var checkboxes = treeview.find(":checkbox");
+
+                checkboxes.eq(3).prop("checked", true).trigger("change");
+
+                ok(checkboxes.eq(0).prop("indeterminate"));
+            });
+
             test("indaterminate state is propagated across parents", function() {
                 createTreeView({
                     dataSource: [

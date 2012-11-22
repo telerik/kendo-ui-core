@@ -572,18 +572,23 @@
 
         _updateIndeterminate: function(node) {
             var parentNode = node.parent().closest(NODE),
-                siblingCheckboxes, i,
+                siblingCheckboxes, i, length,
                 all = true;
 
             if (parentNode.length) {
                 siblingCheckboxes = checkboxes(node.siblings().andSelf());
+                length = siblingCheckboxes.length;
 
-                for (i = 1; i < siblingCheckboxes.length; i++) {
-                    if (siblingCheckboxes[i].checked != siblingCheckboxes[i-1].checked ||
-                        siblingCheckboxes[i].indeterminate || siblingCheckboxes[i-1].indeterminate) {
-                        all = false;
-                        break;
+                if (length > 1) {
+                    for (i = 1; i < length; i++) {
+                        if (siblingCheckboxes[i].checked != siblingCheckboxes[i-1].checked ||
+                            siblingCheckboxes[i].indeterminate || siblingCheckboxes[i-1].indeterminate) {
+                            all = false;
+                            break;
+                        }
                     }
+                } else {
+                    all = !siblingCheckboxes[0].indeterminate;
                 }
 
                 checkboxes(parentNode)
