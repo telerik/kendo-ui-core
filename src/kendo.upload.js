@@ -1,3 +1,11 @@
+kendo_module({
+    id: "upload",
+    name: "Upload",
+    category: "web",
+    description: "The Upload widget uses progressive enhancement to deliver the best possible uploading experience to users.",
+    depends: [ "core" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
@@ -648,8 +656,8 @@
 
             try {
                 responseText = iframe.contents().text();
-            } catch (e) {
-                responseText = "Error trying to get server response: " + e;
+            } catch (ex) {
+                responseText = "Error trying to get server response: " + ex;
             }
 
             this.processResponse(iframe, responseText);

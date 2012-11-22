@@ -1,3 +1,11 @@
+kendo_module({
+    id: "filtermenu",
+    name: "Filtering Menu",
+    category: "framework",
+    depends: [ "datepicker", "numerictextbox", "dropdownlist" ],
+    advanced: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

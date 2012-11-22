@@ -1,3 +1,11 @@
+kendo_module({
+    id: "stock-chart",
+    name: "StockChart",
+    category: "dataviz",
+    description: "StockChart widget and associated financial series.",
+    depends: [ "chart" ]
+});
+
 (function ($, undefined) {
     // Imports ================================================================
     var kendo = window.kendo,

@@ -1,3 +1,11 @@
+kendo_module({
+    id: "popup",
+    name: "Pop-up",
+    category: "framework",
+    depends: [ "core" ],
+    advanced: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

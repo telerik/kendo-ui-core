@@ -1,4 +1,12 @@
-;(function($, undefined) {
+kendo_module({
+    id: "imagebrowser",
+    name: "ImageBrowser",
+    category: "web",
+    description: "",
+    depends: [ "listview", "upload" ]
+});
+
+(function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         isPlainObject = $.isPlainObject,

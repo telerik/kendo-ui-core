@@ -1,3 +1,11 @@
+kendo_module({
+    id: "binder",
+    name: "MVVM",
+    category: "framework",
+    description: "Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model (the data) from the View (the UI).",
+    depends: [ "core", "data" ]
+});
+
 (function ($, unefined) {
     var kendo = window.kendo,
         Observable = kendo.Observable,

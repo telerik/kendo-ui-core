@@ -1,3 +1,11 @@
+kendo_module({
+    id: "dataviz-vml",
+    name: "Output: VML",
+    description: "Support for VML rendering",
+    category: "dataviz",
+    depends: [ "dataviz-core" ]
+});
+
 (function () {
 
     // Imports ================================================================

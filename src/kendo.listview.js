@@ -1,3 +1,22 @@
+kendo_module({
+    id: "listview",
+    name: "ListView",
+    category: "web",
+    description: "The ListView widget offers rich support for interacting with data.",
+    depends: [ "data" ],
+    features: [ {
+        id: "listview-editing",
+        name: "Editing",
+        description: "Support for record editing",
+        depends: [ "editable" ]
+    }, {
+        id: "listview-selection",
+        name: "Selection",
+        description: "Support for selection",
+        depends: [ "selectable" ]
+    } ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         CHANGE = "change",

@@ -1,20 +1,36 @@
 require 'tasks'
 
-# All JavaScript files from src/
-SRC_JS = FileList['src/kendo*.js'].include('src/cultures/*.js').exclude('**/*.min.js')
-MIN_JS = SRC_JS.ext('min.js')
-    .include('src/kendo.web.min.js')
-    .include('src/kendo.dataviz.min.js')
-    .include('src/kendo.mobile.min.js')
-    .include('src/kendo.all.min.js')
+JS_BUNDLES = FileList[ 'src/kendo.web.js',
+                       'src/kendo.dataviz.js',
+                       'src/kendo.mobile.js',
+                       'src/kendo.all.js',
+                       'src/kendo.winjs.js' ]
 
-CLEAN.include(MIN_JS)
+JS_BUNDLES_MIN = JS_BUNDLES.ext('min.js');
+
+# All JavaScript files from src/
+SRC_JS = FileList['src/kendo*.js']
+    .include('src/kendo.editor.js')
+    .include('src/kendo.aspnetmvc.js')
+    .include('src/cultures/*.js')
+    .exclude('**/*.min.js')
+    .exclude(JS_BUNDLES)
+
+MIN_JS = SRC_JS.ext('min.js').exclude(JS_BUNDLES_MIN)
+
+CLEAN.include(MIN_JS).include(JS_BUNDLES).include(JS_BUNDLES_MIN)
 
 JS_BUILDFILE = 'build/js.rb'
 
 #Build src/*.min.js files by running uglifyjs over src/*.js
 rule '.min.js' => lambda { |t| t.sub('min.js', 'js') } do |t|
-    uglifyjs(t.source, t.name)
+    compilejs(t.source, t.name)
+end
+
+#Rebuild kendo-config.VERSION_NUMBER.json based on data present in the source code
+KENDO_CONFIG_FILE = File.join(Rake.application.original_dir, "download-builder", "config", "kendo-config.VERSION_NUMBER.json")
+file KENDO_CONFIG_FILE => SRC_JS do |t|
+    sh "node #{COMPILEJS} --kendo-config --overwrite", :verbose => VERBOSE
 end
 
 #Composite JavaScript files
@@ -198,17 +214,37 @@ WIN_JS = FileList[
 WIN_MIN_JS = FileList['src/kendo.winjs.min.js']
 WIN_SRC_JS = FileList['src/kendo.winjs.js']
 
-file_merge "src/kendo.web.js" => WEB_JS
-file "src/kendo.web.js" => JS_BUILDFILE
+# file_merge "src/kendo.web.js" => WEB_JS
+# file "src/kendo.web.js" => JS_BUILDFILE
 
-file_merge "src/kendo.dataviz.js" => DATAVIZ_JS
-file "src/kendo.dataviz.js" => JS_BUILDFILE
+# file_merge "src/kendo.dataviz.js" => DATAVIZ_JS
+# file "src/kendo.dataviz.js" => JS_BUILDFILE
 
-file_merge "src/kendo.mobile.js" => MOBILE_JS
-file "src/kendo.mobile.js" => JS_BUILDFILE
+# file_merge "src/kendo.mobile.js" => MOBILE_JS
+# file "src/kendo.mobile.js" => JS_BUILDFILE
 
-file_merge "src/kendo.all.js" => (WEB_JS + DATAVIZ_JS + MOBILE_JS).uniq
-file "src/kendo.all.js" => JS_BUILDFILE
+# file_merge "src/kendo.all.js" => (WEB_JS + DATAVIZ_JS + MOBILE_JS).uniq
+# file "src/kendo.all.js" => JS_BUILDFILE
 
-file_merge "src/kendo.winjs.js" => WIN_JS
-file "src/kendo.winjs.js" => JS_BUILDFILE
+# file_merge "src/kendo.winjs.js" => WIN_JS
+# file "src/kendo.winjs.js" => JS_BUILDFILE
+
+file "src/kendo.web.js" => WEB_JS do |t|
+    compilejs_bundle(t)
+end
+
+file "src/kendo.dataviz.js" => DATAVIZ_JS do |t|
+    compilejs_bundle(t)
+end
+
+file "src/kendo.mobile.js" => MOBILE_JS do |t|
+    compilejs_bundle(t)
+end
+
+file "src/kendo.all.js" => (WEB_JS + DATAVIZ_JS + MOBILE_JS).uniq do |t|
+    compilejs_bundle(t)
+end
+
+file "src/kendo.winjs.js" => WIN_JS do |t|
+    compilejs_bundle(t)
+end

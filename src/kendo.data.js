@@ -1,3 +1,22 @@
+kendo_module({
+    id: "data",
+    name: "Data source",
+    category: "framework",
+    description: "Powerful component for using local and remote data.Fully supports CRUD, Sorting, Paging, Filtering, Grouping, and Aggregates.",
+    depends: [ "core" ],
+    features: [ {
+        id: "data-odata",
+        name: "OData",
+        description: "Support for accessing Open Data Protocol (OData) services.",
+        depends: [ "data.odata" ]
+    }, {
+        id: "data-XML",
+        name: "XML",
+        description: "Support for binding to XML.",
+        depends: [ "data.xml" ]
+    } ]
+});
+
 (function($, undefined) {
     var extend = $.extend,
         proxy = $.proxy,

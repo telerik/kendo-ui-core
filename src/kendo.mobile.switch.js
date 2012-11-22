@@ -1,3 +1,11 @@
+kendo_module({
+    id: "mobile.switch",
+    name: "Switch",
+    category: "mobile",
+    description: "The mobile Switch widget is used to display two exclusive choices.",
+    depends: [ "mobile.application" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,

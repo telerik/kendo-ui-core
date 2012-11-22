@@ -1,4 +1,4 @@
-;(function($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
         each = $.each,
@@ -2758,3 +2758,15 @@ function pad(number, digits, end) {
     kendo.jQuery = kendoJQuery;
     kendo.eventMap = eventMap;
 })(jQuery);
+
+/*global kendo_module:true */
+if (typeof kendo_module === "undefined") {
+    kendo_module = function(){};
+}
+
+kendo_module({
+    id: "core",
+    name: "Core",
+    category: "framework",
+    description: "The core of the Kendo framework."
+});

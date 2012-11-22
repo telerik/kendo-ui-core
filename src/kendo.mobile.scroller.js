@@ -1,3 +1,11 @@
+kendo_module({
+    id: "mobile.scroller",
+    name: "Scroller",
+    category: "mobile",
+    description: "The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.",
+    depends: [ "core", "fx", "draganddrop" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,

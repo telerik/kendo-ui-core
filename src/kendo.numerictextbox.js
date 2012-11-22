@@ -1,3 +1,11 @@
+kendo_module({
+    id: "numerictextbox",
+    name: "NumericTextBox",
+    category: "web",
+    description: "The NumericTextBox widget can format and display numeric, percentage or currency textbox.",
+    depends: [ "core" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         keys = kendo.keys,

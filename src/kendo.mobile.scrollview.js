@@ -1,3 +1,11 @@
+kendo_module({
+    id: "mobile.scrollview",
+    name: "ScrollView",
+    category: "mobile",
+    description: "The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.",
+    depends: [ "mobile.application" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,

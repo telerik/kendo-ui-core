@@ -12,16 +12,15 @@
             undef: true,
             latedef: true,
             browser: true,
-            jquery: true
+            jquery: true,
+            unused: false
         }, options);
 
         function validateFile(source) {
+            source = "/*global kendo_module:true */\n" + source;
             var i, len, err,
                 result = JSHINT(source, options),
-                unused = JSHINT.data().unused,
                 unvar;
-
-            result = result && !unused;
 
             ok(result);
 
@@ -38,12 +37,6 @@
                 ok(false, err.reason + " on line " + err.line + ", character " + err.character);
             }
 
-            if (unused) {
-                for (i = 0, len = unused.length; i < len; i++) {
-                    unvar = unused[i];
-                    ok(false, "unused variable " + unvar.name + " on line " + unvar.line);
-                }
-            }
         }
 
         if (typeof JSHINT == "undefined") {

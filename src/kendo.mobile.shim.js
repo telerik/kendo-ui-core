@@ -1,3 +1,12 @@
+kendo_module({
+    id: "mobile.shim",
+    name: "Shim",
+    category: "mobile",
+    description: "Mobile Shim",
+    depends: [ "popup" ],
+    hidden: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,

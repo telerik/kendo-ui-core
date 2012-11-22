@@ -1,3 +1,11 @@
+kendo_module({
+    id: "mobile.application",
+    name: "Application",
+    category: "mobile",
+    description: "The Mobile application provides a framework to build native looking web applications on mobile devices.",
+    depends: [ "mobile.pane" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,

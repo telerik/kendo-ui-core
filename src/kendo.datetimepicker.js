@@ -1,3 +1,11 @@
+kendo_module({
+    id: "datetimepicker",
+    name: "DateTimePicker",
+    category: "web",
+    description: "The DateTimePicker allows the end user to select a value from a calendar or a time drop-down list.",
+    depends: [ "datepicker", "timepicker" ]
+});
+
 (function($, undefined) {
 
     var kendo = window.kendo,

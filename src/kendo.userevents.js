@@ -1,3 +1,11 @@
+kendo_module({
+    id: "userevents",
+    name: "User Events",
+    category: "framework",
+    depends: [ "core" ],
+    hidden: true
+});
+
 (function ($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,

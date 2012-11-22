@@ -1,3 +1,11 @@
+kendo_module({
+    id: "dataviz-core",
+    name: "Core",
+    description: "The DataViz core functions",
+    category: "dataviz",
+    depends: [ "core" ]
+});
+
 (function ($, undefined) {
 
     // Imports ================================================================

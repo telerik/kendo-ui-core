@@ -1,4 +1,12 @@
-;(function($, undefined) {
+kendo_module({
+    id: "validator",
+    name: "Validator",
+    category: "web",
+    description: "The Validator offers an easy way to do a client-side form validation.",
+    depends: [ "core" ]
+});
+
+(function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         NS = ".kendoValidator",

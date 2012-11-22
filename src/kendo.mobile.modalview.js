@@ -1,3 +1,11 @@
+kendo_module({
+    id: "mobile.modalview",
+    name: "ModalView",
+    category: "mobile",
+    description: "The Kendo ModalView is used to present self-contained functionality in the context of the current task.",
+    depends: [ "mobile.application" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,

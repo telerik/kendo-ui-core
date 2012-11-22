@@ -1,3 +1,11 @@
+kendo_module({
+    id: "autocomplete",
+    name: "AutoComplete",
+    category: "web",
+    description: "The AutoComplete widget provides suggestions depending on the typed text.It also allows multiple value entries.",
+    depends: [ "list" ]
+});
+
 (function ($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,

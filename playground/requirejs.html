@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" href="../styles/web/kendo.common.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+    <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+
+    <!--
+         this sets the baseUrl to ../src/ and loads jQuery.
+
+         We could specify jQuery as a dependency of kendo.core, but I'm not
+         sure that'd be the right thing to do.  Since so many apps depend on
+         jQuery, it's likely that KendoUI users would have jQuery already
+         loaded somehow and we shouldn't force it to load ourselves.
+    -->
+    <script data-main="../src/jquery.min.js" src="require.js"></script>
+
+    <script>//<![CDATA[
+      require([ "kendo.menu.min" ], function(){
+        $("#menu").kendoMenu({
+          select: function(e) {
+            alert("You clicked: " + $(e.item).text());
+          }
+        });
+      });
+    //]]></script>
+
+  </head>
+  <body>
+    <ul id="menu">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>
+        Item 3
+        <ul>
+          <li>SubItem 3.1</li>
+          <li>SubItem 3.2</li>
+          <li>SubItem 3.3</li>
+        </ul>
+      </li>
+      <li>Item 4</li>
+    </ul>
+  </body>
+</html>

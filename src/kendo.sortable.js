@@ -1,3 +1,11 @@
+kendo_module({
+    id: "sortable",
+    name: "Sortable",
+    category: "framework",
+    depends: [ "data" ],
+    advanced: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         proxy = $.proxy,

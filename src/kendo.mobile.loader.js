@@ -1,3 +1,12 @@
+kendo_module({
+    id: "mobile.loader",
+    name: "Loader",
+    category: "mobile",
+    description: "Mobile Loader",
+    depends: [ "core" ],
+    hidden: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,

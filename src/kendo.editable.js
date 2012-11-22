@@ -1,3 +1,11 @@
+kendo_module({
+    id: "editable",
+    name: "Editable",
+    category: "framework",
+    depends: [ "datepicker", "numerictextbox", "validator", "binder" ],
+    hidden: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

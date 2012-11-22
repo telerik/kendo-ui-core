@@ -1,3 +1,11 @@
+kendo_module({
+    id: "mobile.buttongroup",
+    name: "ButtonGroup",
+    category: "mobile",
+    description: "The Kendo mobile ButtonGroup widget is a linear set of grouped buttons.",
+    depends: [ "mobile.application" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,

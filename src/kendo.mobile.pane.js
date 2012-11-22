@@ -1,3 +1,12 @@
+kendo_module({
+    id: "mobile.pane",
+    name: "Pane",
+    category: "mobile",
+    description: "Mobile Pane",
+    depends: [ "mobile.view", "mobile.loader" ],
+    hidden: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,

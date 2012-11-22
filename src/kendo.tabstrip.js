@@ -1,3 +1,11 @@
+kendo_module({
+    id: "tabstrip",
+    name: "TabStrip",
+    category: "web",
+    description: "The TabStrip widget displays a collection of tabs with associated tab content.",
+    depends: [ "data" ]
+});
+
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

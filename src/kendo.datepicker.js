@@ -1,3 +1,11 @@
+kendo_module({
+    id: "datepicker",
+    name: "DatePicker",
+    category: "web",
+    description: "The DatePicker widget allows the user to select a date from a calendar or by direct input.",
+    depends: [ "calendar", "popup" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
     ui = kendo.ui,

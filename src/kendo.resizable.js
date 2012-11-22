@@ -1,3 +1,11 @@
+kendo_module({
+    id: "resizable",
+    name: "Resizable",
+    category: "framework",
+    depends: [ "core", "draganddrop" ],
+    advanced: true
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

@@ -4,9 +4,6 @@
 [submodule "tests/qunit"]
 	path = tests/qunit
 	url = https://github.com/telerik/qunit.git
-[submodule "tests/jshint"]
-	path = tests/jshint
-	url = https://github.com/jshint/jshint.git
 [submodule "docs"]
 	path = docs
 	url = git@github.com:telerik/kendo-docs.git

@@ -22,12 +22,13 @@ demos/mvc/sources
 !src/jquery.min.js
 src/**/*.min.js
 src/*.min.js
-src/kendo.aspnetmvc.js
 src/kendo.all.js
 src/kendo.winjs.js
 src/kendo.dataviz.js
 src/kendo.mobile.js
 src/kendo.web.js
+src/kendo.editor.js
+src/kendo.aspnetmvc.js
 styles/**/*.css
 !styles/web/kendo.rtl.css
 !styles/dataviz/kendo.dataviz.css

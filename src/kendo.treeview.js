@@ -1,3 +1,11 @@
+kendo_module({
+    id: "treeview",
+    name: "TreeView",
+    category: "web",
+    description: "The TreeView widget displays hierarchical data in a traditional tree structure,with support for interactive drag-and-drop operations.",
+    depends: [ "data", "draganddrop" ]
+});
+
 (function($, undefined){
     var kendo = window.kendo,
         ui = kendo.ui,

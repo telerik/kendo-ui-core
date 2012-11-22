@@ -1,3 +1,11 @@
+kendo_module({
+    id: "mobile.actionsheet",
+    name: "ActionSheet",
+    category: "mobile",
+    description: "The mobile ActionSheet widget displays a set of choices related to a task the user initiates.",
+    depends: [ "mobile.popover" ]
+});
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
