@@ -97,10 +97,10 @@
             element
                 .on("down", HIGHLIGHT_SELECTOR, "_highlight")
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
-                .on("up", ITEM_SELECTOR, "_click");
+                .on("touchend click", ITEM_SELECTOR, "_click");
 
             if (support.touch) {
-                element.on("up", ".km-listview-label", toggleiOSLabel);
+                element.on("touchend click", ".km-listview-label", toggleiOSLabel);
             }
 
             element.wrap(WRAPPER);

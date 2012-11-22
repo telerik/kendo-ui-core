@@ -263,7 +263,7 @@
                 link = dom.find("li");
 
                 link.trigger(kendo.support.mousedown);
-                link.trigger(kendo.support.mouseup);
+                link.trigger("click");
             });
 
             test("resetting dataSource detaches the previouse events", function() {

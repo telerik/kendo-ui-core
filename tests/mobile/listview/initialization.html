@@ -151,7 +151,7 @@
                 setTimeout(function() {
                     ok(foo.parent().is(".km-state-active"), "list item is marked as active");
 
-                    foo.trigger(kendo.support.mouseup);
+                    foo.trigger("click");
                     ok(!foo.parent().is(".km-state-active"), "list item is unmarked");
                 }, 200);
             });
@@ -190,7 +190,7 @@
                 });
 
                 link.trigger(kendo.support.mousedown);
-                link.trigger(kendo.support.mouseup);
+                link.trigger("click");
             });
 
             test("Allows event cancelation", function() {
@@ -204,11 +204,11 @@
                     e.preventDefault();
                 });
 
-                dom.bind(kendo.support.mouseup, function(e) {
+                dom.bind("click", function(e) {
                     ok(e.isDefaultPrevented());
                 });
 
-                link.trigger(kendo.support.mouseup);
+                link.trigger("click");
             });
 
             test("passes button if a button is clicked", function() {
@@ -224,7 +224,7 @@
                 });
 
                 link.trigger(kendo.support.mousedown);
-                link.trigger(kendo.support.mouseup);
+                link.trigger("click");
             });
 
             test("wraps group headers", function() {
