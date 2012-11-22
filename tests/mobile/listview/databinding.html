@@ -707,7 +707,7 @@
                 ds.bind("change", firstAssert);
             });
 
-            asyncTest("ListView cache original first item and the last item", 4, function(){
+            asyncTest("ListView caches original first item and the last item", 4, function(){
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
 
                 var ds = kendo.data.DataSource.create({
@@ -791,7 +791,7 @@
                 });
             });
 
-            asyncTest("stopEndlessScrolling method stops endlessScrolling functionality", function() {
+            test("stopEndlessScrolling method stops endlessScrolling functionality", 2, function() {
                 window.initListView = function(e) {
                     var listview = e.view.element.find("#listview");
                     listview.kendoMobileListView({
@@ -803,7 +803,6 @@
 
                     var scroller = listview.data("kendoMobileListView")._scroller();
 
-                    start();
                     equal(scroller._events["resize"][0], undefined);
                     ok(scroller._events["scroll"].length < 2);
                 }
@@ -834,14 +833,13 @@
                 lv.stopLoadMore();
             });
 
-            asyncTest("stopEndlessScrolling method raises event", function() {
+            test("stopEndlessScrolling method raises event", 1, function() {
                 window.initListView = function(e) {
                     var listview = e.view.element.find("#listview");
                     listview.kendoMobileListView({
                         dataSource: [],
                         endlessScroll: true,
                         lastPageReached: function() {
-                            start();
                             ok(true);
                         }
                     });
