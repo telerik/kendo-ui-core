@@ -412,51 +412,6 @@
                 equal(uidNodes.data("kendo-uid"), node.uid);
             });
 
-            test("items with set checked state are rendered checked", function() {
-                treeview.kendoTreeView({
-                    dataSource: [
-                        { id: 1, checked: true, text: "foo" },
-                        { id: 2, checked: false, text: "bar" }
-                    ],
-                    checkboxes: true
-                });
-
-                var checkboxes = treeview.find(":checkbox");
-
-                ok(checkboxes.eq(0).is(":checked"));
-                ok(!checkboxes.eq(1).is(":checked"));
-            });
-
-            test("checkboxes.name renders name attribute for checkbox inputs", function() {
-                treeview.kendoTreeView({
-                    dataSource: [
-                        { id: 1, text: "foo" }
-                    ],
-                    checkboxes: {
-                        name: "bar[]"
-                    }
-                });
-
-                var checkboxes = treeview.find(":checkbox");
-
-                equal(checkboxes.eq(0).attr("name"), "bar[]");
-            });
-
-            test("fetching remote nodes renders them as checked if parent checkboxes are checked and checkChildren is true", function() {
-                treeview.kendoTreeView({
-                    dataSource: [
-                        { id: 1, text: "foo", checked: true }
-                    ],
-                    checkboxes: {
-                        checkChildren: true
-                    }
-                });
-
-                treeview.data("kendoTreeView").append({ id: 2, text: "bar" }, $(".k-item"));
-
-                ok(treeview.find(":checkbox:last").prop("checked"));
-            });
-
             module("aria generation", moduleOptions);
 
             test("treeview role is added to the wrapper", function() {

@@ -643,11 +643,17 @@
                 treeview.focus();
                 treeview.press(keys.SPACEBAR);
 
-                ok(treeview.find(":checkbox").is(":checked"));
+                var checkbox = treeview.find(":checkbox");
+
+                ok(treeviewObject.dataItem(checkbox).checked);
+                ok(checkbox.is(":checked"));
 
                 treeview.press(keys.SPACEBAR);
 
-                ok(!treeview.find(":checkbox").is(":checked"));
+                checkbox = treeview.find(":checkbox");
+
+                ok(!treeviewObject.dataItem(checkbox).checked);
+                ok(!checkbox.is(":checked"));
             });
 
             test("space on item without checkbox does nothing", function() {
@@ -749,121 +755,6 @@
                 treeview.blur();
 
                 equal(triggeredCount, 0);
-            });
-
-            test("checking checkboxes sets indeterminate state of parents", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo", expanded: true, items: [
-                            { text: "bar", selected: true },
-                            { text: "baz" }
-                        ] },
-                    ],
-                    checkboxes: {
-                        checkChildren: true
-                    }
-                });
-
-                treeview.focus();
-                treeview.press(keys.SPACEBAR);
-
-                ok(treeview.find(":checkbox:first").prop("indeterminate"));
-            });
-
-            test("checking checkboxes sets checked state of parents", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo", items: [
-                            { text: "bar", selected: true }
-                        ] },
-                    ],
-                    checkboxes: {
-                        checkChildren: true
-                    }
-                });
-
-                treeview.focus();
-                treeview.press(keys.SPACEBAR);
-
-                ok(treeview.find(":checkbox:first").prop("checked"));
-            });
-
-            test("checking checkboxes sets checked state of children", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo", selected: true, items: [
-                            { text: "bar" },
-                            { text: "baz" }
-                        ] },
-                    ],
-                    checkboxes: {
-                        checkChildren: true
-                    }
-                });
-
-                treeview.focus();
-                treeview.press(keys.SPACEBAR);
-
-                var checkboxes = treeview.find(":checkbox");
-
-                ok(checkboxes.eq(1).prop("checked"));
-                ok(checkboxes.eq(2).prop("checked"));
-            });
-
-            test("checking checkboxes clears indeterminate flag", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo", items: [
-                            { text: "bar", selected: true },
-                            { text: "baz" }
-                        ] },
-                    ],
-                    checkboxes: {
-                        checkChildren: true
-                    }
-                });
-
-                treeview.focus();
-
-                // check selected item
-                treeview.press(keys.SPACEBAR);
-
-                // move to 'foo'
-                treeview.press(keys.UP);
-
-                // check 'foo'
-                treeview.press(keys.SPACEBAR);
-
-                ok(!treeview.find(":checkbox:first").prop("indeterminate"));
-            });
-
-            test("checking parent clears indeterminate state of children", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo", items: [
-                            { text: "bar", items: [
-                                { text: "baz", selected: true },
-                                { text: "cat" }
-                            ] }
-                        ] }
-                    ],
-                    checkboxes: {
-                        checkChildren: true
-                    }
-                });
-
-                // check selected item
-                treeview.press(keys.SPACEBAR);
-
-                // move to 'foo'
-                treeview.press(keys.UP);
-                treeview.press(keys.UP);
-
-                // check 'foo'
-                treeview.press(keys.SPACEBAR);
-
-                ok(!treeview.find(":checkbox").eq(1).prop("indeterminate"));
-                ok(!treeview.find(":checkbox").eq(1).data("indeterminate"));
             });
 
             test("down arrow skips disabled items on same level", function() {
