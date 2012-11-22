@@ -40,7 +40,7 @@
 <ul class="keyboard-legend">
     <li>
         <span class="button-preview">
-            <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+            <span class="key-button leftAlign wider">Access key</span>
             +
             <span class="key-button">w</span>
         </span>
@@ -116,6 +116,14 @@
         </span>
     </li>
 </ul>
+
+<script>
+    $(document.body).keydown(function (e) {
+        if (e.altKey && e.keyCode == 87) {
+            $("#panelbar").focus();
+        }
+    });
+</script>
 
 <style scoped>
     .demo-section

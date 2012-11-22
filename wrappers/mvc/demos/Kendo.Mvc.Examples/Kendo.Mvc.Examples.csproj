@@ -253,6 +253,7 @@
     <Compile Include="Controllers\Web\TabStrip\AjaxController.cs" />
     <Compile Include="Controllers\Web\TabStrip\ApiController.cs" />
     <Compile Include="Controllers\Web\TabStrip\AnimationController.cs" />
+    <Compile Include="Controllers\Web\TabStrip\NavigationController.cs" />
     <Compile Include="Controllers\Web\TabStrip\RtlController.cs" />
     <Compile Include="Controllers\Web\TabStrip\EventsController.cs" />
     <Compile Include="Controllers\Web\TabStrip\ImagesController.cs" />
@@ -466,6 +467,7 @@
     <Content Include="Areas\aspx\Views\web\slider\events.aspx" />
     <Content Include="Areas\aspx\Views\web\splitter\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\splitter\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\tabstrip\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\tabstrip\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\navigation.aspx" />
@@ -856,6 +858,7 @@
     <Content Include="Areas\razor\Views\web\panelbar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\slider\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\splitter\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\tabstrip\navigation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
