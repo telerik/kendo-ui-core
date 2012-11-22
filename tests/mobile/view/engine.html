@@ -252,6 +252,14 @@
                 viewEngine.showView("#foo?foo=bar");
             });
 
+            test("recognizes url as a local view when  url params are present", 1, function() {
+                viewEngine.bind("viewShow", function(e) {
+                    equal(e.view.params["foo"], "bar");
+                });
+
+                viewEngine.showView("foo?foo=bar");
+            });
+
             asyncTest("hides given view", 4, function() {
                 viewEngine.bind("viewShow", function() {
                     visible("#foo");
