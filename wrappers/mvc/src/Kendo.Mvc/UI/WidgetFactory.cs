@@ -788,6 +788,16 @@ namespace Kendo.Mvc.UI.Fluent
 
             return builder;
         }
+
+        public virtual MvcHtmlString RenderDeferredScripts()
+        {
+            var items = ViewContext.HttpContext.Items;
+            if (items.Contains(WidgetBase.DeferredScriptsKey))
+            {
+                return new MvcHtmlString(string.Format("<script>{0}</script>", items[WidgetBase.DeferredScriptsKey]));
+            }
+            return MvcHtmlString.Empty;
+        }
     }
 
     public class WidgetFactory<TModel> : WidgetFactory

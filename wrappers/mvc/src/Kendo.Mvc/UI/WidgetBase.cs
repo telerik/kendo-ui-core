@@ -13,6 +13,8 @@ namespace Kendo.Mvc.UI
 
     public abstract class WidgetBase : IWidget, IScriptableComponent
     {
+        internal static readonly string DeferredScriptsKey = "$DeferredScriptsKey$";
+
         private string name;        
 
         /// <summary>
@@ -145,6 +147,12 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
+        public bool HasDeferredInitialization
+        {
+            get;
+            set;
+        }
+
         public string Selector
         {
             get
@@ -186,12 +194,37 @@ namespace Kendo.Mvc.UI
 
             if (IsSelfInitialized)
             {
-                writer.RenderBeginTag(HtmlTextWriterTag.Script);
-                WriteInitializationScript(writer);
-                writer.RenderEndTag();
+                if (HasDeferredInitialization)
+                {
+                    WriteDeferredScriptInitialization();            
+                }
+                else 
+                {
+                    writer.RenderBeginTag(HtmlTextWriterTag.Script);
+                    WriteInitializationScript(writer);
+                    writer.RenderEndTag();
+                }
             }
         }
-        
+
+        protected virtual void WriteDeferredScriptInitialization() 
+        {
+            var scripts = new StringWriter();
+            WriteInitializationScript(scripts);
+            AppendScriptToContext(scripts.ToString());
+        }
+
+        private void AppendScriptToContext(string script)
+        {
+            var items = ViewContext.HttpContext.Items;
+            var current = "";
+            if (items.Contains(DeferredScriptsKey))
+            {
+                current = (string)items[DeferredScriptsKey];
+            }
+            items[DeferredScriptsKey] = current + script;
+        }
+
         public MvcHtmlString ToClientTemplate()
         {
             IsInClientTemplate = true;
