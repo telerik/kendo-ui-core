@@ -66,6 +66,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TBuilder;
         }
 
+        /// <summary>
+        /// Suppress initialization script rendering. Note that this options should be used in conjunction with <see cref="WidgetFactory.RenderDeferredScripts"/>
+        /// </summary>        
+        /// <returns></returns>
         public virtual TBuilder Deferred()
         {
             Component.HasDeferredInitialization = true;
