@@ -57,12 +57,11 @@ end
         <%= output("What's new", suite.features) %>
         <%= output("What's fixed", suite.bugs) %>
 
+% suite.components.each do |component_title, component|
+        <h3><%= encode(component_title) %></h3>
 
-% suite.widgets.each do |widget_title, widget|
-        <h3><%= encode(widget_title) %></h3>
-
-        <%= output("What's new", widget.features) %>
-        <%= output("What's fixed", widget.bugs) %>
+        <%= output("What's new", component.features) %>
+        <%= output("What's fixed", component.bugs) %>
 
 % end
 % end

@@ -5,7 +5,7 @@ require 'erb'
 CHANGELOG_TEMPLATE = ERB.new(File.read(File.join(File.dirname(__FILE__), 'changelog.html.erb')), 0, '%<>')
 
 class Issue
-    attr_reader :title, :suites, :widgets, :internal, :framework, :bug
+    attr_reader :title, :suites, :components, :internal, :framework, :bug
     def initialize(issue)
         @title = issue.title
         @labels = issue.labels.map {|l| l.name }
@@ -17,8 +17,7 @@ class Issue
 
         @suites.push "Framework" if @suites.length == 0
 
-        @widgets = filtered_labels :w
-        @framework = filtered_labels :f
+        @components = filtered_labels(:w) | filtered_labels(:f)
     end
 
     def add_to(set)
@@ -34,7 +33,7 @@ class Issue
     end
 end
 
-class Widget
+class Component
     attr_reader :bugs, :features
     def initialize
         @features = []
@@ -52,25 +51,25 @@ end
 
 class Suite
     attr_reader :bugs, :features, :title, :key
-    attr_accessor :widgets
+    attr_accessor :components
     def initialize(title, key)
         @title = title
         @key = key
         @features = []
         @bugs = []
-        @widgets = {}
+        @components = {}
     end
 
     def add(issue)
-        if issue.widgets.length == 0
+        if issue.components.length == 0
             if issue.bug
                 @bugs.push issue
             else
                 @features.push issue
             end
-        else
-            issue.widgets.each do |widget_name|
-                (@widgets[widget_name] ||= Widget.new).add(issue)
+        elsif issue.components
+            issue.components.each do |component_name|
+                (@components[component_name] ||= Component.new).add(issue)
             end
         end
     end
@@ -101,7 +100,7 @@ class ChangeLog
             end
         end
         suites.each do |suite|
-            suite.widgets = Hash[suite.widgets.sort]
+            suite.components = Hash[suite.components.sort]
         end
     end
 
