@@ -172,6 +172,7 @@
     <Compile Include="Controllers\Web\DropDownList\TemplateController.cs" />
     <Compile Include="Controllers\Web\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\Web\DropDownList\IndexController.cs" />
+    <Compile Include="Controllers\Web\Editor\NavigationController.cs" />
     <Compile Include="Controllers\Web\Editor\RtlController.cs" />
     <Compile Include="Controllers\Web\Editor\Custom_ToolsController.cs" />
     <Compile Include="Controllers\Web\Editor\ImageBrowserController.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
     <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_MenuController.cs" />
+    <Compile Include="Controllers\Web\Grid\NavigationController.cs" />
     <Compile Include="Controllers\Web\Grid\RtlController.cs" />
     <Compile Include="Controllers\Web\Grid\ForeignKeyColumnController.cs" />
     <Compile Include="Controllers\Web\Grid\Editing_CustomController.cs" />
@@ -214,11 +216,13 @@
     <Compile Include="Controllers\Web\Grid\ServerBindingController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomServerBindingController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomAjaxBindingController.cs" />
+    <Compile Include="Controllers\Web\ListView\NavigationController.cs" />
     <Compile Include="Controllers\Web\ListView\RtlController.cs" />
     <Compile Include="Controllers\Web\ListView\SelectionController.cs" />
     <Compile Include="Controllers\Web\ListView\EditingController.cs" />
     <Compile Include="Controllers\Web\ListView\IndexController.cs" />
     <Compile Include="Controllers\Web\Menu\ApiController.cs" />
+    <Compile Include="Controllers\Web\Menu\NavigationController.cs" />
     <Compile Include="Controllers\Web\Menu\RtlController.cs" />
     <Compile Include="Controllers\Web\Menu\DirectionController.cs" />
     <Compile Include="Controllers\Web\Menu\ModelBindingController.cs" />
@@ -233,19 +237,23 @@
     <Compile Include="Controllers\Web\PanelBar\AjaxController.cs" />
     <Compile Include="Controllers\Web\PanelBar\ApiController.cs" />
     <Compile Include="Controllers\Web\PanelBar\AnimationController.cs" />
+    <Compile Include="Controllers\Web\PanelBar\NavigationController.cs" />
     <Compile Include="Controllers\Web\PanelBar\RtlController.cs" />
     <Compile Include="Controllers\Web\PanelBar\EventsController.cs" />
     <Compile Include="Controllers\Web\PanelBar\ImagesController.cs" />
     <Compile Include="Controllers\Web\PanelBar\IndexController.cs" />
+    <Compile Include="Controllers\Web\Slider\NavigationController.cs" />
     <Compile Include="Controllers\Web\Slider\RtlController.cs" />
     <Compile Include="Controllers\Web\Splitter\AjaxController.cs" />
     <Compile Include="Controllers\Web\Splitter\ApiController.cs" />
+    <Compile Include="Controllers\Web\Splitter\NavigationController.cs" />
     <Compile Include="Controllers\Web\Splitter\RtlController.cs" />
     <Compile Include="Controllers\Web\Splitter\EventsController.cs" />
     <Compile Include="Controllers\Web\Splitter\IndexController.cs" />
     <Compile Include="Controllers\Web\TabStrip\AjaxController.cs" />
     <Compile Include="Controllers\Web\TabStrip\ApiController.cs" />
     <Compile Include="Controllers\Web\TabStrip\AnimationController.cs" />
+    <Compile Include="Controllers\Web\TabStrip\NavigationController.cs" />
     <Compile Include="Controllers\Web\TabStrip\RtlController.cs" />
     <Compile Include="Controllers\Web\TabStrip\EventsController.cs" />
     <Compile Include="Controllers\Web\TabStrip\ImagesController.cs" />
@@ -270,6 +278,7 @@
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Web\TreeView\CheckboxesController.cs" />
+    <Compile Include="Controllers\Web\TreeView\NavigationController.cs" />
     <Compile Include="Controllers\Web\TreeView\Custom_DataController.cs" />
     <Compile Include="Controllers\Web\TreeView\RtlController.cs" />
     <Compile Include="Controllers\Web\TreeView\Remote_DataController.cs" />
@@ -285,6 +294,7 @@
     <Compile Include="Controllers\Web\Window\ActionsController.cs" />
     <Compile Include="Controllers\Web\Window\AjaxController.cs" />
     <Compile Include="Controllers\Web\Window\ApiController.cs" />
+    <Compile Include="Controllers\Web\Window\NavigationController.cs" />
     <Compile Include="Controllers\Web\Window\RtlController.cs" />
     <Compile Include="Controllers\Web\Window\EventsController.cs" />
     <Compile Include="Controllers\Web\Window\IndexController.cs" />
@@ -440,6 +450,7 @@
     <Content Include="Areas\aspx\Views\web\grid\editing.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\customserverbinding.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\customajaxbinding.aspx" />
+    <Content Include="Areas\aspx\Views\web\listview\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\listview\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\listview\editing.aspx" />
     <Content Include="Areas\aspx\Views\web\listview\EditorTemplates\ProductViewModel.ascx" />
@@ -456,11 +467,14 @@
     <Content Include="Areas\aspx\Views\web\slider\api.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\splitter\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\splitter\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\tabstrip\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\tabstrip\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\async.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
@@ -469,11 +483,20 @@
     <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\menu\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\panelbar\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\slider\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\navigation.aspx" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
+    <Content Include="Areas\aspx\Views\web\window\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\window\rtl.aspx" />
     <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <None Include="Areas\razor\Views\web\listview\navigation.cshtml" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />
     <Content Include="Views\The-views-are-in-the-Areas-folder.txt" />
@@ -835,6 +858,17 @@
     <Content Include="Areas\razor\Views\web\datetimepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\timepicker\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\numerictextbox\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\editor\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\menu\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\panelbar\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\slider\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\splitter\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\tabstrip\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\treeview\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\web\treeview\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\navigation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
