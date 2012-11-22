@@ -4,6 +4,10 @@ tests.push(
         title: "treeview initialization"
     },
     {
+        page: "treeview/checkboxes.html",
+        title: "treeview checkboxes"
+    },
+    {
         page: "treeview/datasource.html",
         title: "treeview datasource binding"
     },
