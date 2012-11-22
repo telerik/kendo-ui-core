@@ -5,7 +5,7 @@ using System.Security;
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Telerik")]
-[assembly: AssemblyCopyright("Copyright © Telerik 2012")]
+[assembly: AssemblyCopyright("Copyright © 2012 Telerik AD")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
