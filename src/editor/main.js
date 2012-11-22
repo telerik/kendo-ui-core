@@ -67,8 +67,8 @@
 
         wrapTextarea: function(textarea) {
 
-            var w = textarea.width(),
-                h = textarea.height(),
+            var w = textarea[0].style.width,
+                h = textarea[0].style.height,
                 template = EditorUtils.editorWrapperTemplate,
                 editorWrap = $(template).insertBefore(textarea).width(w).height(h),
                 editArea = editorWrap.find(".k-editable-area");
