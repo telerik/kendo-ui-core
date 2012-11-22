@@ -87,7 +87,7 @@ namespace Kendo.Mvc.UI.Tests
             _factory.RangeSlider<float>()
                 .Deferred().Name("foo").Render();
 
-            _factory.RenderDeferredScripts().ToHtmlString().ShouldContain("<script>");
+            _factory.DeferredScripts().ToHtmlString().ShouldContain("<script>");
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Tests
             _factory.RangeSlider<float>()
                 .Name("foo").Render();
 
-            _factory.RenderDeferredScripts().ToHtmlString().ShouldNotContain("<script>");
+            _factory.DeferredScripts().ToHtmlString().ShouldNotContain("<script>");
         }
     }
 }

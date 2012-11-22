@@ -790,10 +790,10 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Renders the initialization scripts for widgets set as deferred
+        /// Returns the initialization scripts for widgets set as deferred
         /// </summary>
         /// <returns></returns>
-        public virtual MvcHtmlString RenderDeferredScripts()
+        public virtual MvcHtmlString DeferredScripts()
         {
             var items = ViewContext.HttpContext.Items;
             if (items.Contains(WidgetBase.DeferredScriptsKey))
