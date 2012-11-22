@@ -673,6 +673,12 @@
                     line: {
                         color: "#787878"
                     }
+                },
+                overlay: {
+                    gradient: "none"
+                },
+                border: {
+                    _brightness: 1
                 }
             },
             seriesColors: ["#8ebc00", "#309b46", "#25a0da", "#ff6900", "#e61e26", "#d8e404", "#16aba9", "#7e51a1", "#313131", "#ed1691"],
@@ -732,6 +738,9 @@
                 }
             },
             seriesDefaults: {
+                border: {
+                    _brightness: 1
+                },
                 labels: {
                     color: "#ffffff"
                 },
@@ -741,7 +750,7 @@
                     }
                 },
                 bubble: {
-                    opacity: 0.6      
+                    opacity: 0.6
                 },
                 scatter: {
                     markers: {
@@ -765,6 +774,9 @@
                     line: {
                         color: "#ffffff"
                     }
+                },
+                overlay: {
+                    gradient: "none"
                 }
             },
             chartArea: {
@@ -815,7 +827,7 @@
             }
         }
     });
-    
+
     registerTheme("moonlight", {
         chart: {
             title: {
@@ -846,7 +858,7 @@
                     }
                 },
                 bubble: {
-                    opacity: 0.6      
+                    opacity: 0.6
                 },
                 scatter: {
                     markers: {
@@ -972,7 +984,7 @@
                     }
                 },
                 bubble: {
-                    opacity: 0.6      
+                    opacity: 0.6
                 },
                 scatter: {
                     markers: {
@@ -1068,7 +1080,7 @@
             }
         }
     });
-    
+
     registerTheme("bootstrap", {
         chart: {
             title: {
@@ -1099,7 +1111,7 @@
                     }
                 },
                 bubble: {
-                    opacity: 0.6      
+                    opacity: 0.6
                 },
                 scatter: {
                     markers: {

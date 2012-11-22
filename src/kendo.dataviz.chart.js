@@ -2076,11 +2076,13 @@
             var bar = this,
                 options = bar.options,
                 color = options.color,
-                borderColor = options.border.color;
+                border = options.border,
+                borderColor = border.color,
+                brightness = border._brightness || BAR_BORDER_BRIGHTNESS;
 
             if (!defined(borderColor)) {
                 borderColor =
-                    new Color(color).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+                    new Color(color).brightness(brightness).toHex();
             }
 
             return borderColor;
