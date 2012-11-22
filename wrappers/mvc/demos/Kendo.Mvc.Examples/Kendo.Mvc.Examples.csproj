@@ -294,6 +294,7 @@
     <Compile Include="Controllers\Web\Window\ActionsController.cs" />
     <Compile Include="Controllers\Web\Window\AjaxController.cs" />
     <Compile Include="Controllers\Web\Window\ApiController.cs" />
+    <Compile Include="Controllers\Web\Window\NavigationController.cs" />
     <Compile Include="Controllers\Web\Window\RtlController.cs" />
     <Compile Include="Controllers\Web\Window\EventsController.cs" />
     <Compile Include="Controllers\Web\Window\IndexController.cs" />
@@ -490,6 +491,8 @@
     <Content Include="Areas\aspx\Views\web\treeview\navigation.aspx" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
+    <Content Include="Areas\aspx\Views\web\window\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\window\rtl.aspx" />
     <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -864,6 +867,8 @@
     <Content Include="Areas\razor\Views\web\tabstrip\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\treeview\rtl.cshtml" />
     <Content Include="Areas\razor\Views\web\treeview\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\navigation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
