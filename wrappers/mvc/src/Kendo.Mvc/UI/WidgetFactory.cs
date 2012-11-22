@@ -789,6 +789,10 @@ namespace Kendo.Mvc.UI.Fluent
             return builder;
         }
 
+        /// <summary>
+        /// Renders the initialization scripts for widgets set as deferred
+        /// </summary>
+        /// <returns></returns>
         public virtual MvcHtmlString RenderDeferredScripts()
         {
             var items = ViewContext.HttpContext.Items;
