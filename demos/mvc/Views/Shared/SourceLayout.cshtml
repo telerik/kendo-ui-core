@@ -6,6 +6,10 @@
     <script src="source/kendo.all.js"></script>
     <link href="styles/kendo.common.css" rel="stylesheet" />
     <link href="styles/kendo.default.css" rel="stylesheet" />
+    @if (ViewBag.suite == "mobile")
+    {
+    <link href="styles/kendo.mobile.all.css" rel="stylesheet" />
+    }
 </head>
 <body>
     @{ WriteTo(new StringWriter(), RenderSection("Description", false)); }
