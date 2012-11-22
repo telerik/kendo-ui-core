@@ -1081,7 +1081,6 @@
                     "meta": "This sample illustrates how you can easily create tree nodes with checkboxes by simply setting the child item of the checkboxes to true."
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "Keyboard support",
                     "url": "treeview/navigation.html"
                 },
