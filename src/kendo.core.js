@@ -1,4 +1,4 @@
-(function($, undefined) {
+(function($, evil, undefined) {
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
         each = $.each,
@@ -2303,7 +2303,7 @@ function pad(number, digits, end) {
         } else if (!isNaN(parseFloat(value))) {
             value = parseFloat(value);
         } else if (jsonRegExp.test(value) && !jsonFormatRegExp.test(value)) {
-            value = (1, eval)("(" + value + ")");
+            value = evil("(" + value + ")");
         }
 
         return value;
@@ -2780,7 +2780,7 @@ function pad(number, digits, end) {
 
     kendo.jQuery = kendoJQuery;
     kendo.eventMap = eventMap;
-})(jQuery);
+})(jQuery, eval);
 
 /*global kendo_module:true */
 if (typeof kendo_module === "undefined") {
