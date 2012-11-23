@@ -753,6 +753,37 @@
                 equal(foo.find(".k-item").length, 0);
             });
 
+            test("parent() gets parent node", function() {
+                createTreeView([
+                    { text: "foo", items: [
+                        { text: "bar" }
+                    ] }
+                ]);
+
+                equal(treeviewObject.parent(".k-item .k-item")[0], treeview.find(".k-item")[0]);
+            });
+
+            test("parent() does not get nodes outside of the treeview", function() {
+                createTreeView([
+                    { text: "foo" }
+                ]);
+
+                var wrap = $("<div class='k-item' />").appendTo("body").append(treeview);
+
+                equal(treeviewObject.parent(treeview.find(".k-item")).length, 0);
+            });
+
+            test("parent() works for non-node selectors", function() {
+                createTreeView([
+                    { text: "foo", items: [
+                        { text: "bar", selected: true }
+                    ] }
+                ]);
+
+                equal(treeviewObject.parent(".k-state-selected")[0], treeview.find(".k-item")[0]);
+            });
+
+
             test("text() changes item text, honoring templates", function() {
                 createTreeView({
                     dataSource: [ { text: "foo", value: "bar" } ],
