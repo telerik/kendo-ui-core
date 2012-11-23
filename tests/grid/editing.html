@@ -798,6 +798,27 @@
                 equal(dataSource.data().length, 2);
             });
 
+            test("addRow set the first editable set in edit mode", function() {
+                var grid = setup({
+                    editable: { mode: "incell" },
+                    dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo",
+                                fields: {
+                                    foo: { editable: false },
+                                    name: "name",
+                                }
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }],
+                    })
+                });
+
+                grid.addRow();
+
+                ok(grid.table.find("tr:first td:last input").length);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
