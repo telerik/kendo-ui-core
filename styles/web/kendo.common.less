@@ -2512,34 +2512,31 @@ span.k-numerictextbox
 
 .k-colorpicker-popup
 {
-    width: 136px;
+    width: 140px;
+    padding: .25em;
     line-height: 0;
-}
-
-.k-colorpicker-popup .k-reset
-{
+    .k-reset {
     display: inline-block;
     margin: 0;
-    padding: .25em;
-}
-
-.k-colorpicker-popup .k-item
-{
+    }
+    .k-item {
     display: block;
     float: left;
     width: 12px;
     height: 12px;
     overflow: hidden;
     font-size: 0;
-    margin: 0 1px 1px 0;
+        margin: 1px;
     padding: 0;
-}
-
-.k-colorpicker-popup .k-item div
-{
+        div {
     height: 100%;
-    margin: 1px;
     width: 100%;
+        }
+        &.k-state-selected {
+            background: transparent;
+            outline: 1px dotted black;
+        }
+    }
 }
 
 /* Editor */

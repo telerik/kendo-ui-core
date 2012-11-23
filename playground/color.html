@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Editor playground</title>
+
+    <link rel="stylesheet/less" href="../styles/web/kendo.common.less" />
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less" />
+    <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css" />
+
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+    <script src="../src/jquery.js"></script>
+    <script src="../src/module.js"></script>
+    <script src="../src/kendo.color.js"></script>
+
+    <style type="text/css">
+      html, body {
+        background-color: #e0e0e0;
+      }
+      #test .k-colorpicker-popup {
+        border: 1px solid #000;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="padding: 3em">
+      <div id="test"></div>
+    </div>
+
+    <script>
+      window.cs = $("#test").kendoColorSelectorSimple().data("kendoColorSelectorSimple");
+      cs.bind("change", function(ev){
+        console.log(ev.value.toHex());
+      });
+    </script>
+  </body>
+</html>
