@@ -357,6 +357,22 @@
                 ok(treeview.find(":checkbox:last").prop("checked"));
             });
 
+            test("checking root node items does not propagate state outside of treeview", function() {
+                var dom = $('<div class="k-item"><div><input type="checkbox" /></div><div class="t"></div></div>').appendTo("body");
+
+                var tree = dom.find(".t").kendoTreeView({
+                    checkboxes: {
+                        checkChildren: true
+                    },
+                    dataSource: [{ id: 1, text: "foo", selected: true }]
+                });
+
+                check();
+
+                ok(!dom.find(":checkbox").eq(0).is(":checked"));
+
+                dom.remove();
+            });
 
 
         </script>

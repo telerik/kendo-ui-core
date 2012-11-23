@@ -580,7 +580,7 @@ kendo_module({
         },
 
         _updateIndeterminate: function(node) {
-            var parentNode = node.parent().closest(NODE),
+            var parentNode = this.parent(node),
                 siblingCheckboxes, i, length,
                 all = true;
 
