@@ -6,4 +6,8 @@ class Field
         @description = options[:description]
         @type = options[:type]
     end
+
+    def accept(visitor)
+        visitor.field(self)
+    end
 end

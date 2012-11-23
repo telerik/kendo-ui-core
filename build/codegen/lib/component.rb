@@ -26,6 +26,13 @@ class Component
         end
     end
 
+    def accept(visitor)
+        visitor.component(self)
+
+        @fields.each {|f| f.accept(visitor)}
+
+        @events.each {|e| e.accept(visitor)}
+    end
 
     def add_event(options)
         @events.push Event.new(options)
@@ -80,7 +87,6 @@ class Component
         component.import_events(events)
 
         component.promote_members
-
         component
     end
 end

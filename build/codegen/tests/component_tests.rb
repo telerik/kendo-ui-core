@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'mocha/setup'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 
@@ -94,5 +95,38 @@ class ComponentTests < Test::Unit::TestCase
         component = @component.fields[0]
 
         assert_equal 'baz', component.events[0].name
+    end
+
+    def test_accept_calls_component
+        @component = Component.new(:name => 'foo')
+
+        visitor = stub(:component)
+        visitor.expects(:component).with(@component)
+
+        @component.accept(visitor)
+    end
+
+    def test_accept_calls_field
+        @component = Component.new(:name => 'foo')
+        @component.add_field(:name => 'foo', :type => 'String')
+
+        visitor = stub(:field, :component)
+
+        visitor.expects(:component)
+        visitor.expects(:field).with(@component.fields[0])
+
+        @component.accept(visitor)
+    end
+
+    def test_accept_calls_event
+        @component = Component.new(:name => 'foo')
+        @component.add_event(:name => 'foo')
+
+        visitor = stub(:event, :component)
+
+        visitor.expects(:component)
+        visitor.expects(:event).with(@component.events[0])
+
+        @component.accept(visitor)
     end
 end

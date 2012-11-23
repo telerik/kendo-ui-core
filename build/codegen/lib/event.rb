@@ -5,4 +5,8 @@ class Event
         @name = options[:name]
         @description = options[:description]
     end
+
+    def accept(visitor)
+        visitor.event(self)
+    end
 end
