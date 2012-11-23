@@ -16,7 +16,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 
 ## Configuration
 
-### foo
+### foo `String`
         })
 
         assert_equal 'foo', result.fields[0].name
@@ -28,9 +28,9 @@ class MarkdownParserTests < Test::Unit::TestCase
 
 ## Configuration
 
-### foo
+### foo `String`
 
-### bar
+### bar `Number`
         })
 
         assert_equal 2, result.fields.size
@@ -54,7 +54,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 
 ## Configuration
 
-### foo
+### foo `String`
 bar
         })
 
@@ -67,7 +67,7 @@ bar
 
 ## Configuration
 
-### foo
+### foo `String`
 
 ## Events
 
@@ -83,7 +83,7 @@ bar
 
 ## Configuration
 
-### foo
+### foo `String`
 
 ## Events
 
@@ -101,7 +101,7 @@ bar
 
 ## Configuration
 
-### foo
+### foo `String`
 
 ## Events
 

@@ -36,6 +36,8 @@ class MarkdownParser
 
         end_index = child_index(element, 'Methods')
 
+        end_index = child_index(element, 'Events') if end_index = element.children.size
+
         element.children.slice(start_index..end_index)
     end
 
