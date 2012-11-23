@@ -79,6 +79,8 @@ class Component
 
         component.import_events(events)
 
+        component.promote_members
+
         component
     end
 end

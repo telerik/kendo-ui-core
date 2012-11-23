@@ -60,6 +60,18 @@ class ComponentTests < Test::Unit::TestCase
         assert_equal 1, @component.fields.size
     end
 
+    def test_promote_creates_nested_components
+        @component = Component.new(:name => 'foo')
+
+        @component.add_field(:name => 'foo', :type => 'Object')
+        @component.add_field(:name => 'foo.bar', :type => 'Object')
+        @component.add_field(:name => 'foo.bar.baz', :type => 'Object')
+
+        @component.promote_members
+
+        assert_equal true, @component.fields[0].fields[0].instance_of?(Component)
+    end
+
     def test_promote_creates_components
         @component.promote_members
 
