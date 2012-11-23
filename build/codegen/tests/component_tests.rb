@@ -9,18 +9,26 @@ class ComponentTests < Test::Unit::TestCase
         @component = Component.new(:name => 'foo')
 
         @component.add_field(:name => 'foo', :type => 'Object')
-        @component.add_field(:name => 'foo.bar', :type => 'String')
+        @component.add_field(:name => 'foo.bar', :type => 'Object')
     end
 
     def test_promote_removes_nested_fields
-        @component.promote
+        @component.promote_members
 
         assert_equal 1, @component.fields.size
     end
 
     def test_promote_creates_components
-        @component.promote
+        @component.promote_members
 
         assert_equal true, @component.fields[0].instance_of?(Component)
+    end
+
+    def test_promote_adds_fields_to_child_component
+        @component.promote_members
+
+        component = @component.fields[0]
+
+        assert_equal 'bar', component.fields[0].name
     end
 end
