@@ -138,26 +138,26 @@ kendo_module({
         toHSV: function() {
             var min, max, delta, h, s, v;
             var r = this.r, g = this.g, b = this.b;
-	    min = Math.min(r, g, b);
-	    max = Math.max(r, g, b);
-	    v = max;
-	    delta = max - min;
-	    if (max != 0) {
-		s = delta / max;
-		if (r == max)
-		    h = (g - b) / delta;
-		else if (g == max)
-		    h = 2 + (b - r) / delta;
-		else
-		    h = 4 + (r - g) / delta;
-		h *= 60;
-		if (h < 0)
-		    h += 360;
-	    } else {
-		s = 0;
-		h = -1;
-	    }
-	    return new ColorHSV(h, s, v, this.a);
+            min = Math.min(r, g, b);
+            max = Math.max(r, g, b);
+            v = max;
+            delta = max - min;
+            if (max != 0) {
+                s = delta / max;
+                if (r == max)
+                    h = (g - b) / delta;
+                else if (g == max)
+                    h = 2 + (b - r) / delta;
+                else
+                    h = 4 + (r - g) / delta;
+                h *= 60;
+                if (h < 0)
+                    h += 360;
+            } else {
+                s = 0;
+                h = -1;
+            }
+            return new ColorHSV(h, s, v, this.a);
         },
         toBytes: function() {
             return new ColorBytes(this.r * 255, this.g * 255, this.b * 255, this.a);
@@ -185,26 +185,26 @@ kendo_module({
         },
         toRGB: function() {
             var h = this.h, s = this.s, v = this.v;
-	    var i, r, g, b, f, p, q, t;
-	    if (s == 0)
-		r = g = b = v;
-	    else {
-		h /= 60;
-		i = Math.floor(h);
-		f = h - i;
-		p = v * (1 - s);
-		q = v * (1 - s * f);
-		t = v * (1 - s * (1 - f));
-		switch (i) {
-		  case 0  : r = v; g = t; b = p; break;
-		  case 1  : r = q; g = v; b = p; break;
-		  case 2  : r = p; g = v; b = t; break;
-		  case 3  : r = p; g = q; b = v; break;
-		  case 4  : r = t; g = p; b = v; break;
-		  default : r = v; g = p; b = q; break;
-		}
-	    }
-	    return new ColorRGB(r, g, b, this.a);
+            var i, r, g, b, f, p, q, t;
+            if (s == 0)
+                r = g = b = v;
+            else {
+                h /= 60;
+                i = Math.floor(h);
+                f = h - i;
+                p = v * (1 - s);
+                q = v * (1 - s * f);
+                t = v * (1 - s * (1 - f));
+                switch (i) {
+                  case 0  : r = v; g = t; b = p; break;
+                  case 1  : r = q; g = v; b = p; break;
+                  case 2  : r = p; g = v; b = t; break;
+                  case 3  : r = p; g = q; b = v; break;
+                  case 4  : r = t; g = p; b = v; break;
+                  default : r = v; g = p; b = q; break;
+                }
+            }
+            return new ColorRGB(r, g, b, this.a);
         },
         toBytes: function() {
             return this.toRGB().toBytes();
