@@ -11,7 +11,7 @@ class Component
     end
 
     def add_field(options)
-        name = options[:name].strip
+        name = options[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
 
         description = options[:description]
 

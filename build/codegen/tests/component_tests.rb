@@ -30,6 +30,14 @@ class ComponentTests < Test::Unit::TestCase
         assert_equal 0, @component.fields.size
     end
 
+    def test_add_field_ignores_type_in_name
+        @component = Component.new(:name => 'foo')
+
+        @component.add_field(:name => 'foo.type=bar.baz', :type => 'String')
+
+        assert_equal 'foo.baz', @component.fields[0].name
+    end
+
     def test_add_field_trims_name
         @component = Component.new(:name => 'foo')
 
