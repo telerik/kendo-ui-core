@@ -508,6 +508,7 @@ kendo_module({
             }, 100);
         },
 
+        //TODO: check whehter this is called when error occurs
         _requestEnd: function() {
             this._request = false;
         },
@@ -657,21 +658,18 @@ kendo_module({
         _valueOnFetch: function(value) {
             var that = this;
 
-            if (!that.ul[0].firstChild && !that._fetch) {
+            if (!that._request && !that._fetch && !that.ul[0].firstChild) {
                 that.dataSource.one(CHANGE, function() {
-                    that._fetch = true;
                     that.value(value);
+                    that._fetch = false;
                     that.trigger(SELECTED);
-                 });
+                });
 
-                if (!that._request) { // if request is started do not fetch again
-                    that.dataSource.fetch();
-                }
+                that._fetch = true;
+                that.dataSource.fetch();
 
                 return true;
             }
-
-            that._fetch = false;
         },
 
         _options: function(data, optionLabel) {
@@ -811,8 +809,8 @@ kendo_module({
                           select();
                       });
 
-
-                if (parent._valueCalled !== undefined) {
+                //refresh was called
+                if (parent._request !== undefined) {
                     select();
                 } else if (!parent.value()) {
                     that.enable(false);

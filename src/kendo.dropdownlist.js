@@ -236,11 +236,9 @@ kendo_module({
             that._hideBusy();
             that._makeUnselectable();
 
-            if (!that._valueCalled && data[0]) {
+            if (!that._fetch && length /*do set value when no data*/) {
                 that._selectItem();
             }
-
-            that._valueCalled = false;
 
             that.trigger("dataBound");
         },
@@ -302,7 +300,6 @@ kendo_module({
                     value = value.toString();
                 }
 
-                that._valueCalled = true;
                 hasValue = value || (that.options.optionLabel && value === "");
 
                 if (hasValue && that._valueOnFetch(value)) {

@@ -576,7 +576,7 @@
                 equal(combo.text(), "Item2");
             });
 
-            asyncTest("ComboBox does not fall in infinite loop if no data", function() {
+            asyncTest("ComboBox fetches only once on open and not data is returned", function() {
                 $.mockjaxSettings.responseTime = 0;
                 $.mockjaxSettings.contentType = "text/html";
                 $.mockjax({ url: "foo.json", responseText: [] });
@@ -600,8 +600,8 @@
                     start();
                     $.mockjaxClear();
 
-                    ok(called < 4);
-                }, 500);
+                    equal(called, 1);
+                }, 200);
             });
 
             asyncTest("form reset support", 2, function() {
