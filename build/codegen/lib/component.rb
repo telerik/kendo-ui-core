@@ -23,11 +23,13 @@ class Component
         @fields.clone.each do |field|
             prefix = field.name + '.'
 
-            children = @fields.find_all {|f| f.name.start_with?(prefix)}
+            fields = @fields.find_all {|f| f.name.start_with?(prefix)}
 
-            next unless children.any?
+            events = @events.find_all {|e| e.name.start_with?(prefix)}
 
-            @fields.push promote_field_to_component(field, children)
+            next unless fields.any? || events.any?
+
+            @fields.push promote_field_to_component(field, fields, events)
         end
     end
 
@@ -41,16 +43,29 @@ class Component
         end
     end
 
+    def import_events(events)
+        prefix = @name + "."
+
+        events.each do |event|
+            add_event(:name => event.name.sub(prefix, ''),
+                      :description => event.description)
+        end
+    end
+
     private
 
-    def promote_field_to_component(field, children)
-        children.each {|f| @fields.delete(f)}
+    def promote_field_to_component(field, fields, events)
+        fields.each {|f| @fields.delete(f)}
+
+        events.each {|e| @events.delete(e)}
 
         @fields.delete(field)
 
         component = Component.new(:name => field.name)
 
-        component.import_fields(children)
+        component.import_fields(fields)
+
+        component.import_events(events)
 
         component
     end

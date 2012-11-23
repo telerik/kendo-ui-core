@@ -31,4 +31,14 @@ class ComponentTests < Test::Unit::TestCase
 
         assert_equal 'bar', component.fields[0].name
     end
+
+    def test_promote_adds_events_to_child_component
+        @component.add_event(:name => 'foo.baz')
+
+        @component.promote_members
+
+        component = @component.fields[0]
+
+        assert_equal 'baz', component.events[0].name
+    end
 end
