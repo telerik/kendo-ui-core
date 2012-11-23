@@ -751,8 +751,8 @@ kendo_module({
 
                 valueField = parent.options.dataValueField;
                 deactivate = function() {
-                    that.value("");
                     that.enable(false);
+                    that.value("");
                 };
                 change = function() {
                     var value = that.value();
