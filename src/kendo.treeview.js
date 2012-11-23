@@ -36,6 +36,7 @@ kendo_module({
         KTREEVIEW = "k-treeview",
         VISIBLE = ":visible",
         NODE = ".k-item",
+        STRING = "string",
         ARIASELECTED = "aria-selected",
         ARIADISABLED = "aria-disabled",
         TreeView,
@@ -49,7 +50,7 @@ kendo_module({
         isDomElement = function (o){
             return (
                 typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
-                o && typeof o === "object" && o.nodeType === 1 && typeof o.nodeName === "string"
+                o && typeof o === "object" && o.nodeType === 1 && typeof o.nodeName === STRING
             );
         };
 
@@ -276,7 +277,7 @@ kendo_module({
                 options = that.options,
                 fieldAccessor = proxy(that._fieldAccessor, that);
 
-            if (options.template && typeof options.template == "string") {
+            if (options.template && typeof options.template == STRING) {
                 options.template = template(options.template);
             } else if (!options.template) {
                 options.template = template(
@@ -668,7 +669,34 @@ kendo_module({
         },
 
         parent: function(node) {
-            return $(node).parent().closest(NODE);
+            var wrapperRe = /\bk-treeview\b/,
+                itemRe = /\bk-item\b/,
+                result,
+                skipSelf;
+
+            if (typeof node == STRING) {
+                node = this.element.find(node);
+            }
+
+            if (!isDomElement(node)) {
+                node = node[0];
+            }
+
+            skipSelf = itemRe.test(node.className);
+
+            do {
+                node = node.parentNode;
+
+                if (itemRe.test(node.className)) {
+                    if (skipSelf) {
+                        result = node;
+                    } else {
+                        skipSelf = true;
+                    }
+                }
+            } while (!wrapperRe.test(node.className) && !result);
+
+            return $(result);
         },
 
         _nextVisible: function(node) {
@@ -887,7 +915,7 @@ kendo_module({
                     template: checkboxTemplate
                 }, options.checkboxes);
 
-                if (typeof checkboxOptions.template == "string") {
+                if (typeof checkboxOptions.template == STRING) {
                     checkboxOptions.template = template(checkboxOptions.template);
                 }
 
