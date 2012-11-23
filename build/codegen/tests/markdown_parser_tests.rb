@@ -112,4 +112,18 @@ Bar
 
         assert_equal 'Bar', result.events[0].description
     end
+
+    def test_parse_nested_components
+        result = MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Configuration
+
+### foo `Object`
+
+### foo.bar `Object`
+        })
+
+        assert_equal 'bar', result.fields[0].fields[0].name
+    end
 end
