@@ -1,4 +1,5 @@
 require 'rake/clean'
+require 'rake/testtask'
 
 require 'bundler/setup'
 require 'tempfile'
@@ -6,6 +7,7 @@ require 'tempfile'
 VERBOSE = verbose == true
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
+$LOAD_PATH << File.join(File.dirname(__FILE__), "build", "codegen", "lib")
 
 CDN_ROOT = 'http://cdn.kendostatic.com/'
 
@@ -334,6 +336,10 @@ namespace :bundles do
     end
 
     task :all => BUNDLES
+end
+
+Rake::TestTask.new do |t|
+    t.test_files = FileList['build/codegen/tests/*.rb']
 end
 
 desc 'Build all bundles'
