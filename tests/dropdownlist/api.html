@@ -361,8 +361,12 @@
                 $.mockjaxClear();
             });
 
-            test("value('') clears selection and do not fetch", function() {
-                var dropdownlist = new DropDownList(input);
+            test("value method does not fetch if widget is disabled", function() {
+                var dropdownlist = new DropDownList(input, {
+                    optionLabel: "Select"
+                });
+
+                dropdownlist.enable(false);
 
                 stub(dropdownlist.dataSource, {
                     fetch: dropdownlist.dataSource.fetch
@@ -370,7 +374,6 @@
 
                 dropdownlist.value("");
 
-                equal(dropdownlist.selectedIndex, -1);
                 equal(dropdownlist.dataSource.calls("fetch"), 0);
             });
 

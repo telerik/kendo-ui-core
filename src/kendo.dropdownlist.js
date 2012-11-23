@@ -292,7 +292,7 @@
                     value = value.toString();
                 }
 
-                hasValue = value || (that.options.optionLabel && value === "");
+                hasValue = value || (that.options.optionLabel && !that.element[0].disabled && value === "");
 
                 if (hasValue && that._valueOnFetch(value)) {
                     return;
