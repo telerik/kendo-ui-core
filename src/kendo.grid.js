@@ -1433,7 +1433,7 @@
                 var model = dataSource.insert(index, {}),
                     id = model.uid,
                     row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
-                    cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").first();
+                    cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").eq(that._firstEditableColumnIndex(row));
 
                 if ((mode === "inline" || mode === "popup") && row.length) {
                     that.editRow(row);
@@ -1441,6 +1441,24 @@
                     that.editCell(cell);
                 }
             }
+        },
+
+        _firstEditableColumnIndex: function(container) {
+            var that = this,
+                column,
+                columns = that.columns,
+                idx,
+                length,
+                model = that._modelForContainer(container);
+
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                column = columns[idx];
+
+                if (model && (!model.editable || model.editable(column.field)) && !column.command && column.field) {
+                    return idx;
+                }
+            }
+            return -1;
         },
 
         _toolbar: function() {
