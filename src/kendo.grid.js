@@ -823,7 +823,7 @@
 
                 that._draggableInstance = that.wrapper.kendoDraggable({
                     group: kendo.guid(),
-                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)",
+                    filter: "th.k-header:not(.k-group-cell,.k-hierarchy-cell)",
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
                             .css({
