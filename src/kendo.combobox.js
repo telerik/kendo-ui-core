@@ -258,9 +258,13 @@
                     that.current($(ul.firstChild));
                 }
 
-                if (options.suggest && that.input.val() && that._valueCalled !== undefined) {
+                if (options.suggest && that.input.val() && that._request !== undefined /*first refresh ever*/) {
                     that.suggest($(ul.firstChild));
                 }
+            }
+
+            if (state !== STATE_FILTER && !that._fetch) {
+                that._selectItem(value);
             }
 
             if (that._open) {
@@ -280,15 +284,6 @@
             }
 
             that._makeUnselectable();
-
-            if ((!that._valueCalled && state !== STATE_FILTER) || state === STATE_REBIND) {
-                if (state === STATE_REBIND) {
-                    that._state = undefined;
-                }
-
-                that._selectItem(value);
-            }
-            that._valueCalled = false;
 
             that._hideBusy();
             that.trigger("dataBound");
@@ -432,9 +427,7 @@
                     value = value.toString();
                 }
 
-                that._valueCalled = true;
-
-                if (value && that._valueOnFetch(value)) {
+                if (!that._open && value && that._valueOnFetch(value)) {
                     return;
                 }
 
