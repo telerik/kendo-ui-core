@@ -30,6 +30,22 @@ class ComponentTests < Test::Unit::TestCase
         assert_equal 0, @component.fields.size
     end
 
+    def test_add_field_trims_name
+        @component = Component.new(:name => 'foo')
+
+        @component.add_field(:name => '  foo  ', :type => 'String|Object')
+
+        assert_equal 'foo', @component.fields[0].name
+    end
+
+    def test_add_field_trims_type
+        @component = Component.new(:name => 'foo')
+
+        @component.add_field(:name => '  foo  ', :type => ' String |Object')
+
+        assert_equal 'String', @component.fields[0].type
+    end
+
     def test_promote_removes_nested_fields
         @component.promote_members
 

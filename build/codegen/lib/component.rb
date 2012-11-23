@@ -11,7 +11,7 @@ class Component
     end
 
     def add_field(options)
-        name = options[:name]
+        name = options[:name].strip
 
         description = options[:description]
 
@@ -20,7 +20,7 @@ class Component
         if types
             types.split('|').each do |type|
                 @fields.push Field.new(:name => name,
-                                       :type => type,
+                                       :type => type.strip,
                                        :description => description)
             end
         end
