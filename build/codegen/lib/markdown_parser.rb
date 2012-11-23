@@ -1,21 +1,29 @@
 require 'kramdown'
 
 class MarkdownParser
-    def self.parse(markdown)
+    def parse(markdown)
         root = Kramdown::Parser::Markdown.parse(markdown)[0]
 
         header = root.children.find { |e| e.type == :header && e.options[:level] == 1 }
 
-        component = Component.new header.options[:raw_text]
+        component = Component.new(:name => component_name(root))
 
-        configuration = self.configuration_section(root)
+        configuration = configuration_section(root)
 
-        self.parse_configuration(configuration) do |field, index|
-            name = self.field_name(field)
+        each_section(configuration) do |field, index|
 
-            description = self.field_description(index, configuration)
+            component.add_field(:name => section_name(field),
+                                :type => field_type(field),
+                                :description => section_description(index, configuration))
+        end
 
-            component.add_field(:name => name, :description => description)
+        events = events_section(root)
+
+        each_section(events) do |event, index|
+
+            component.add_event(:name => section_name(event),
+                                :description => section_description(index, events))
+
         end
 
         component
@@ -23,19 +31,29 @@ class MarkdownParser
 
     private
 
-    def self.configuration_section(element)
-        start_index = element.children.find_index {|e| e.options[:raw_text] == 'Configuration'}
+    def configuration_section(element)
+        start_index = child_index(element, 'Configuration')
 
-        start_index = element.children.size unless start_index
-
-        end_index = element.children.find_index {|e| e.options[:raw_text] == 'Methods'}
-
-        end_index = element.children.size unless end_index
+        end_index = child_index(element, 'Methods')
 
         element.children.slice(start_index..end_index)
     end
 
-    def self.parse_configuration(configuration)
+    def events_section(element)
+        start_index = child_index(element, 'Events')
+
+        element.children.slice(start_index..element.children.size)
+    end
+
+    def child_index(element, text)
+        index = element.children.find_index {|e| e.options[:raw_text] == text}
+
+        index = element.children.size unless index
+
+        index
+    end
+
+    def each_section(configuration)
         configuration.each_with_index do |element, index|
             if element.type == :header && element.options[:level] == 3
                 yield element, index
@@ -43,21 +61,33 @@ class MarkdownParser
         end
     end
 
-    def self.field_name(element)
-        self.element_text self.find_text_child(element)
+    def component_name(element)
+        header = element.children.find {|e| e.type == :header && e.options[:level] == 1}
+
+        header.options[:raw_text]
     end
 
-    def self.field_description(index, siblings)
+    def section_name(element)
+        element_text find_text_child(element)
+    end
+
+    def field_type(element)
+        child = element.children.find {|e| e.type == :codespan }
+
+        element_text child
+    end
+
+    def section_description(index, siblings)
         element = siblings.slice(index, siblings.size).find {|e| e.type == :p}
 
-        self.element_text self.find_text_child(element)
+        element_text find_text_child(element)
     end
 
-    def self.find_text_child(element)
+    def find_text_child(element)
         element.children.find {|e| e.type == :text } if element
     end
 
-    def self.element_text(element)
+    def element_text(element)
         element.value.strip if element
     end
 end
