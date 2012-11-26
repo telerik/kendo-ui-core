@@ -5,89 +5,87 @@
 <c:url value="/dataviz/donut-charts/remote-data/read" var="readUrl" />
 
 <demo:header />
-	<div id="example" class="k-content">
-         <div class="chart-wrapper">
-         	 <kendo:chart name="chart" class="combined-donuts">
-        	 	 <kendo:chart-title text="Screen resolution trends" />
-        	 	 <kendo:chart-legend position="top" />
-        	 	 <kendo:dataSource>
-	        	 	 <kendo:dataSource-transport>
-	             		 <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
-	                 </kendo:dataSource-transport>
-	                 <kendo:dataSource-group>
-        	 	 	 	 <kendo:dataSource-groupItem field="year" dir="asc" />
-        	 	 	 </kendo:dataSource-group>
-	                 <kendo:dataSource-sort>
-        	 	 	 	 <kendo:dataSource-sortItem field="orderNumber" dir="asc" />
-        	 	 	 </kendo:dataSource-sort>
+     <div class="chart-wrapper">
+         <kendo:chart name="chart" class="combined-donuts">
+             <kendo:chart-title text="Screen resolution trends" />
+             <kendo:chart-legend position="top" />
+             <kendo:dataSource>
+                 <kendo:dataSource-transport>
+                     <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
+                 </kendo:dataSource-transport>
+                 <kendo:dataSource-group>
+                     <kendo:dataSource-groupItem field="year" dir="asc" />
+                 </kendo:dataSource-group>
+                 <kendo:dataSource-sort>
+                     <kendo:dataSource-sortItem field="orderNumber" dir="asc" />
+                 </kendo:dataSource-sort>
+             </kendo:dataSource>
+             <kendo:chart-series>
+                <kendo:chart-seriesItem type="donut" field="share" categoryField="resolution" visibleInLegendField="visibleInLegend" padding="10" />
+             </kendo:chart-series>
+             <kendo:chart-tooltip visible="true" template="#= dataItem.Resolution #: #= value #%" />
+         </kendo:chart>
+         <div class="single-donuts">
+             <kendo:chart name="chart2006" class="donut">
+                 <kendo:chart-title text="2006" />
+                 <kendo:chart-legend visible="false" />
+                 <kendo:dataSource>
+                     <kendo:dataSource-transport>
+                         <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
+                     </kendo:dataSource-transport>
+                     <kendo:dataSource-filter>
+                         <kendo:dataSource-filterItem field="year" operator="eq" value="2006" />
+                     </kendo:dataSource-filter>
+                     <kendo:dataSource-sort>
+                         <kendo:dataSource-sortItem field="orderNumber" dir="asc" />
+                     </kendo:dataSource-sort>
                  </kendo:dataSource>
-        	 	 <kendo:chart-series>
-        	 	 	<kendo:chart-seriesItem type="donut" field="share" categoryField="resolution" visibleInLegendField="visibleInLegend" padding="10" />
-        	 	 </kendo:chart-series>
-        	 	 <kendo:chart-tooltip visible="true" template="#= dataItem.Resolution #: #= value #%" />
-        	 </kendo:chart>
-        	 <div class="single-donuts">
-	        	 <kendo:chart name="chart2006" class="donut">
-	        	 	 <kendo:chart-title text="2006" />
-	        	 	 <kendo:chart-legend visible="false" />
-	        	 	 <kendo:dataSource>
-		        	 	 <kendo:dataSource-transport>
-		             		 <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
-		                 </kendo:dataSource-transport>
-		                 <kendo:dataSource-filter>
-	        	 	 	 	 <kendo:dataSource-filterItem field="year" operator="eq" value="2006" />
-	        	 	 	 </kendo:dataSource-filter>
-		                 <kendo:dataSource-sort>
-	        	 	 	 	 <kendo:dataSource-sortItem field="orderNumber" dir="asc" />
-	        	 	 	 </kendo:dataSource-sort>
-	                 </kendo:dataSource>
-	        	 	 <kendo:chart-series>
-	        	 	 	<kendo:chart-seriesItem type="donut" field="share" categoryField="resolution" visibleInLegendField="visibleInLegend" padding="0" />
-	        	 	 </kendo:chart-series>
-	        	 	 <kendo:chart-tooltip visible="true" template="#= dataItem.Resolution #: #= value #%" />
-	        	 </kendo:chart>
-	        	 
-	        	 <kendo:chart name="chart2008" class="donut">
-	        	 	 <kendo:chart-title text="2008" />
-	        	 	 <kendo:chart-legend visible="false" />
-	        	 	 <kendo:dataSource>
-		        	 	 <kendo:dataSource-transport>
-		             		 <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
-		                 </kendo:dataSource-transport>
-		                 <kendo:dataSource-filter>
-	        	 	 	 	 <kendo:dataSource-filterItem field="year" operator="eq" value="2008" />
-	        	 	 	 </kendo:dataSource-filter>
-		                 <kendo:dataSource-sort>
-	        	 	 	 	 <kendo:dataSource-sortItem field="orderNumber" dir="asc" />
-	        	 	 	 </kendo:dataSource-sort>
-	                 </kendo:dataSource>
-	        	 	 <kendo:chart-series>
-	        	 	 	<kendo:chart-seriesItem type="donut" field="share" categoryField="resolution" visibleInLegendField="visibleInLegend" padding="0" />
-	        	 	 </kendo:chart-series>
-	        	 	 <kendo:chart-tooltip visible="true" template="#= dataItem.Resolution #: #= value #%" />
-	        	 </kendo:chart>
-	        	 
-	        	 <kendo:chart name="chart2010" class="donut">
-	        	 	 <kendo:chart-title text="2010" />
-	        	 	 <kendo:chart-legend visible="false" />
-	        	 	 <kendo:dataSource>
-		        	 	 <kendo:dataSource-transport>
-		             		 <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
-		                 </kendo:dataSource-transport>
-		                 <kendo:dataSource-filter>
-	        	 	 	 	 <kendo:dataSource-filterItem field="year" operator="eq" value="2010" />
-	        	 	 	 </kendo:dataSource-filter>
-		                 <kendo:dataSource-sort>
-	        	 	 	 	 <kendo:dataSource-sortItem field="orderNumber" dir="asc" />
-	        	 	 	 </kendo:dataSource-sort>
-	                 </kendo:dataSource>
-	        	 	 <kendo:chart-series>
-	        	 	 	<kendo:chart-seriesItem type="donut" field="share" categoryField="resolution" visibleInLegendField="visibleInLegend" padding="0" />
-	        	 	 </kendo:chart-series>
-	        	 	 <kendo:chart-tooltip visible="true" template="#= dataItem.Resolution #: #= value #%" />
-	        	 </kendo:chart>
-        	 </div>
-        </div>
+                 <kendo:chart-series>
+                    <kendo:chart-seriesItem type="donut" field="share" categoryField="resolution" visibleInLegendField="visibleInLegend" padding="0" />
+                 </kendo:chart-series>
+                 <kendo:chart-tooltip visible="true" template="#= dataItem.Resolution #: #= value #%" />
+             </kendo:chart>
+             
+             <kendo:chart name="chart2008" class="donut">
+                 <kendo:chart-title text="2008" />
+                 <kendo:chart-legend visible="false" />
+                 <kendo:dataSource>
+                     <kendo:dataSource-transport>
+                         <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
+                     </kendo:dataSource-transport>
+                     <kendo:dataSource-filter>
+                         <kendo:dataSource-filterItem field="year" operator="eq" value="2008" />
+                     </kendo:dataSource-filter>
+                     <kendo:dataSource-sort>
+                         <kendo:dataSource-sortItem field="orderNumber" dir="asc" />
+                     </kendo:dataSource-sort>
+                 </kendo:dataSource>
+                 <kendo:chart-series>
+                    <kendo:chart-seriesItem type="donut" field="share" categoryField="resolution" visibleInLegendField="visibleInLegend" padding="0" />
+                 </kendo:chart-series>
+                 <kendo:chart-tooltip visible="true" template="#= dataItem.Resolution #: #= value #%" />
+             </kendo:chart>
+             
+             <kendo:chart name="chart2010" class="donut">
+                 <kendo:chart-title text="2010" />
+                 <kendo:chart-legend visible="false" />
+                 <kendo:dataSource>
+                     <kendo:dataSource-transport>
+                         <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
+                     </kendo:dataSource-transport>
+                     <kendo:dataSource-filter>
+                         <kendo:dataSource-filterItem field="year" operator="eq" value="2010" />
+                     </kendo:dataSource-filter>
+                     <kendo:dataSource-sort>
+                         <kendo:dataSource-sortItem field="orderNumber" dir="asc" />
+                     </kendo:dataSource-sort>
+                 </kendo:dataSource>
+                 <kendo:chart-series>
+                    <kendo:chart-seriesItem type="donut" field="share" categoryField="resolution" visibleInLegendField="visibleInLegend" padding="0" />
+                 </kendo:chart-series>
+                 <kendo:chart-tooltip visible="true" template="#= dataItem.Resolution #: #= value #%" />
+             </kendo:chart>
+         </div>
     </div>
     
     <style scoped>

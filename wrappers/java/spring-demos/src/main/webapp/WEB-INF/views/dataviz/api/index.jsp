@@ -2,61 +2,59 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <demo:header />
-	<div id="example" class="k-content">
-         <div class="configuration k-widget k-header" style="width:170px;">
-             <span class="configHead">API Functions</span>
-             <ul class="options">
-                 <li>
-                     <input id="typeColumn" name="seriesType"
-                             type="radio" value="column" checked="checked" autocomplete="off" />
-                     <label for="typeColumn">Columns</label>
-                 </li>
-                 <li>
-                     <input id="typeBar" name="seriesType"
-                             type="radio" value="bar" autocomplete="off" />
-                     <label for="typeBar">Bars</label>
-                 </li>
-                 <li>
-                     <input id="typeLine" name="seriesType"
-                             type="radio" value="line" autocomplete="off" />
-                     <label for="typeLine">Lines</label>
-                 </li>
-                 <li>
-                     <input id="stack" type="checkbox" autocomplete="off" checked="checked" />
-                     <label for="stack">Stacked</label>
-                 </li>
-             </ul>
-             <p>
-                 <strong>refresh()</strong> will be called on each configuration change
-             </p>
-         </div>
+    <div class="configuration k-widget k-header" style="width:170px;">
+        <span class="configHead">API Functions</span>
+        <ul class="options">
+            <li>
+                <input id="typeColumn" name="seriesType"
+                        type="radio" value="column" checked="checked" autocomplete="off" />
+                <label for="typeColumn">Columns</label>
+            </li>
+            <li>
+                <input id="typeBar" name="seriesType"
+                        type="radio" value="bar" autocomplete="off" />
+                <label for="typeBar">Bars</label>
+            </li>
+            <li>
+                <input id="typeLine" name="seriesType"
+                        type="radio" value="line" autocomplete="off" />
+                <label for="typeLine">Lines</label>
+            </li>
+            <li>
+                <input id="stack" type="checkbox" autocomplete="off" checked="checked" />
+                <label for="stack">Stacked</label>
+            </li>
+        </ul>
+        <p>
+            <strong>refresh()</strong> will be called on each configuration change
+        </p>
+    </div>
 
-         <div class="chart-wrapper">
-         	 <% 
-			 	 String[] categories = {
-					 "2005", "2006",
-					 "2007", "2008",
-					 "2009"
-				 };
-			 %>
-         	 <kendo:chart name="chart">
-         	 	 <kendo:chart-title text="Internet Usersl" />
-         	 	 <kendo:chart-legend position="bottom" />
-         	 	 <kendo:chart-series>
-         	 	 	<kendo:chart-seriesItem type="column" data="<%= new double[] { 67.96, 68.93, 75, 74, 78 } %>" name="United States" />
-         	 	 	<kendo:chart-seriesItem type="column" data="<%= new double[] { 15.7, 16.7, 20, 23.5, 26.6 } %>" name="World" />
-         	 	 </kendo:chart-series>
-         	 	 <kendo:chart-categoryAxis>
-         	 	 	<kendo:chart-categoryAxisItem categories="<%= categories %>" />
-         	 	 </kendo:chart-categoryAxis>
-         	 	 <kendo:chart-valueAxis>
-         	 	 	<kendo:chart-valueAxisItem>
-         	 	 		<kendo:chart-valueAxisItem-labels format="{0}%" />
-         	 	 	</kendo:chart-valueAxisItem>
-         	 	 </kendo:chart-valueAxis>
-         	 	 <kendo:chart-tooltip visible="true" format="{0}%" />
-         	 </kendo:chart>
-         </div>
+    <div class="chart-wrapper">
+    	 <% 
+ String[] categories = {
+ "2005", "2006",
+ "2007", "2008",
+ "2009"
+};
+%>
+    	 <kendo:chart name="chart">
+    	 	 <kendo:chart-title text="Internet Usersl" />
+    	 	 <kendo:chart-legend position="bottom" />
+    	 	 <kendo:chart-series>
+    	 	 	<kendo:chart-seriesItem type="column" data="<%= new double[] { 67.96, 68.93, 75, 74, 78 } %>" name="United States" />
+    	 	 	<kendo:chart-seriesItem type="column" data="<%= new double[] { 15.7, 16.7, 20, 23.5, 26.6 } %>" name="World" />
+    	 	 </kendo:chart-series>
+    	 	 <kendo:chart-categoryAxis>
+    	 	 	<kendo:chart-categoryAxisItem categories="<%= categories %>" />
+    	 	 </kendo:chart-categoryAxis>
+    	 	 <kendo:chart-valueAxis>
+    	 	 	<kendo:chart-valueAxisItem>
+    	 	 		<kendo:chart-valueAxisItem-labels format="{0}%" />
+    	 	 	</kendo:chart-valueAxisItem>
+    	 	 </kendo:chart-valueAxis>
+    	 	 <kendo:chart-tooltip visible="true" format="{0}%" />
+    	 </kendo:chart>
     </div>
     <script>
 	     $(document).ready(function() {
