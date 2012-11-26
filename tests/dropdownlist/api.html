@@ -430,6 +430,37 @@
                 equal(dropdownlist.ul.children().length, 0);
             });
 
+            test("DropDownList re-binds on dataSource.data([])", function() {
+                var input = $("<input />");
+                dropdownlist = new DropDownList(input, ["item1", "item2"]);
+
+                dropdownlist.dataSource.data([]);
+
+                equal(dropdownlist.ul.children().length, 0);
+            });
+
+            asyncTest("select value after datasource fetch", 1, function() {
+                $.mockjaxSettings.responseTime = 0;
+                $.mockjaxSettings.contentType = "text/html";
+                $.mockjax({ url: "fake.json", responseText: ["item1", "item2"] });
+
+                var ddl = new DropDownList($("<input />"), {
+                    optionLabel: "Select",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    dataBound: function() {
+                        $.mockjaxClear();
+                        equal(ddl.value(), "item2");
+                        start();
+                    }
+                });
+
+                ddl.value("item2");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

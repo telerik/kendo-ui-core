@@ -5,6 +5,7 @@
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -71,6 +72,42 @@
 
                 equal(childCB.value(), "");
                 equal(childCB.text(), "");
+            });
+
+            test("Select optionLabel if no data", function() {
+                parent.kendoDropDownList({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    autoBind: false,
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 },
+                        { parentID: 3 }
+                    ]
+                });
+
+                child.kendoDropDownList({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "id",
+                    optionLabel: "Select",
+                    autoBind: false,
+                    dataSource:  [
+                        { parentID: 1, childID: "1", id: 1 },
+                        { parentID: 1, childID: "3", id: 2 }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoDropDownList"),
+                    childCB = child.data("kendoDropDownList");
+
+
+                //select first item
+                parentCB.select(2);
+                parentCB.trigger("change");
+
+                equal(childCB.value(), "");
+                equal(childCB.text(), "Select");
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
