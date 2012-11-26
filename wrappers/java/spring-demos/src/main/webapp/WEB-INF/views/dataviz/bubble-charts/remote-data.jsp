@@ -29,7 +29,7 @@
          	 	 		<kendo:chart-yAxisItem-title text="Murders per 100,000 population" />
          	 	 	</kendo:chart-yAxisItem>
          	 	 </kendo:chart-yAxis>
-         	 	 <kendo:chart-tooltip visible="true" template="#= {3}: Population {2:N0}" />
+         	 	 <kendo:chart-tooltip visible="true" format="{3}: Population {2:N0}" />
          	 </kendo:chart>
         </div>
     </div>
