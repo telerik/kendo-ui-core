@@ -19,7 +19,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 ### foo `String`
         })
 
-        assert_equal 'foo', result.fields[0].name
+        assert_equal 'foo', result.members[0].name
     end
 
     def test_parse_fields
@@ -33,7 +33,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 ### bar `Number`
         })
 
-        assert_equal 2, result.fields.size
+        assert_equal 2, result.members.size
     end
 
     def test_parse_field_type
@@ -45,7 +45,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 ### foo `String`
         })
 
-        assert_equal 'String', result.fields[0].type
+        assert_equal 'String', result.members[0].type
     end
 
     def test_parse_field_description
@@ -58,7 +58,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 bar
         })
 
-        assert_equal 'bar', result.fields[0].description
+        assert_equal 'bar', result.members[0].description
     end
 
     def test_parse_event_from_events_section
@@ -74,7 +74,7 @@ bar
 ### bar
         })
 
-        assert_equal 'bar', result.events[0].name
+        assert_equal 'bar', result.members[1].name
     end
 
     def test_parse_events
@@ -92,7 +92,7 @@ bar
 ### baz
         })
 
-        assert_equal 2, result.events.size
+        assert_equal 3, result.members.size
     end
 
     def test_parse_event_description
@@ -110,7 +110,7 @@ bar
 Bar
         })
 
-        assert_equal 'Bar', result.events[0].description
+        assert_equal 'Bar', result.members[1].description
     end
 
     def test_parse_nested_components
@@ -124,6 +124,6 @@ Bar
 ### foo.bar `Object`
         })
 
-        assert_equal 'bar', result.fields[0].fields[0].name
+        assert_equal 'bar', result.members[0].members[0].name
     end
 end

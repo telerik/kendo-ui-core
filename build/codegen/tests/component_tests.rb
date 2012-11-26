@@ -18,9 +18,9 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_field(:name => 'foo', :type => 'String|Object')
 
-        assert_equal 2, @component.fields.size
-        assert_equal 'String', @component.fields[0].type
-        assert_equal 'Object', @component.fields[1].type
+        assert_equal 2, @component.members.size
+        assert_equal 'String', @component.members[0].type
+        assert_equal 'Object', @component.members[1].type
     end
 
     def test_add_field_adds_field_only_if_type_is_specified
@@ -28,7 +28,7 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_field(:name => 'foo')
 
-        assert_equal 0, @component.fields.size
+        assert_equal 0, @component.members.size
     end
 
     def test_add_field_ignores_type_in_name
@@ -36,7 +36,7 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_field(:name => 'foo.type=bar.baz', :type => 'String')
 
-        assert_equal 'foo.baz', @component.fields[0].name
+        assert_equal 'foo.baz', @component.members[0].name
     end
 
     def test_add_field_trims_name
@@ -44,7 +44,7 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_field(:name => '  foo  ', :type => 'String|Object')
 
-        assert_equal 'foo', @component.fields[0].name
+        assert_equal 'foo', @component.members[0].name
     end
 
     def test_add_field_trims_type
@@ -52,13 +52,13 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_field(:name => '  foo  ', :type => ' String |Object')
 
-        assert_equal 'String', @component.fields[0].type
+        assert_equal 'String', @component.members[0].type
     end
 
     def test_promote_removes_nested_fields
         @component.promote_members
 
-        assert_equal 1, @component.fields.size
+        assert_equal 1, @component.members.size
     end
 
     def test_promote_creates_nested_components
@@ -70,21 +70,21 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.promote_members
 
-        assert_equal true, @component.fields[0].fields[0].instance_of?(Component)
+        assert_equal true, @component.members[0].members[0].instance_of?(Component)
     end
 
     def test_promote_creates_components
         @component.promote_members
 
-        assert_equal true, @component.fields[0].instance_of?(Component)
+        assert_equal true, @component.members[0].instance_of?(Component)
     end
 
     def test_promote_adds_fields_to_child_component
         @component.promote_members
 
-        component = @component.fields[0]
+        component = @component.members[0]
 
-        assert_equal 'bar', component.fields[0].name
+        assert_equal 'bar', component.members[0].name
     end
 
     def test_promote_adds_events_to_child_component
@@ -92,9 +92,9 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.promote_members
 
-        component = @component.fields[0]
+        component = @component.members[0]
 
-        assert_equal 'baz', component.events[0].name
+        assert_equal 'baz', component.members[1].name
     end
 
     def test_accept_calls_component
@@ -113,7 +113,7 @@ class ComponentTests < Test::Unit::TestCase
         visitor = stub(:field, :component)
 
         visitor.expects(:component)
-        visitor.expects(:field).with(@component.fields[0])
+        visitor.expects(:field).with(@component.members[0])
 
         @component.accept(visitor)
     end
@@ -125,7 +125,7 @@ class ComponentTests < Test::Unit::TestCase
         visitor = stub(:event, :component)
 
         visitor.expects(:component)
-        visitor.expects(:event).with(@component.events[0])
+        visitor.expects(:event).with(@component.members[0])
 
         @component.accept(visitor)
     end

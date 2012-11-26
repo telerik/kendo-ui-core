@@ -2,12 +2,11 @@ require 'field'
 require 'event'
 
 class Component
-    attr_reader :fields, :name, :events
+    attr_reader :members, :name
 
-    def initialize(fields)
-        @name = fields[:name]
-        @fields = []
-        @events = []
+    def initialize(members)
+        @name = members[:name]
+        @members = []
     end
 
     def add_field(options)
@@ -19,74 +18,57 @@ class Component
 
         if types
             types.split('|').each do |type|
-                @fields.push Field.new(:name => name,
+                @members.push Field.new(:name => name,
                                        :type => type.strip,
                                        :description => description)
             end
         end
     end
 
+    def add_event(options)
+        @members.push Event.new(options)
+    end
+
     def accept(visitor)
         visitor.component(self)
 
-        @fields.each {|f| f.accept(visitor)}
-
-        @events.each {|e| e.accept(visitor)}
-    end
-
-    def add_event(options)
-        @events.push Event.new(options)
+        @members.each {|f| f.accept(visitor)}
     end
 
     def promote_members
-        @fields.clone.each do |field|
-            prefix = field.name + '.'
+        @members.clone.each do |member|
+            prefix = member.name + '.'
 
-            fields = @fields.find_all {|f| f.name.start_with?(prefix)}
+            members = @members.find_all {|m| m.name.start_with?(prefix)}
 
-            events = @events.find_all {|e| e.name.start_with?(prefix)}
+            next unless members.any?
 
-            next unless fields.any? || events.any?
-
-            @fields.push promote_field_to_component(field, fields, events)
+            @members.push promote_member_to_component(member, members)
         end
     end
 
-    def import_fields(fields)
+    def import_members(members)
         prefix = @name + "."
 
-        fields.each do |field|
-            add_field(:name => field.name.sub(prefix, ''),
-                      :type => field.type,
-                      :description => field.description)
-        end
-    end
-
-    def import_events(events)
-        prefix = @name + "."
-
-        events.each do |event|
-            add_event(:name => event.name.sub(prefix, ''),
-                      :description => event.description)
+        members.each do |member|
+            member.name.sub!(prefix, '')
+            @members.push(member)
         end
     end
 
     private
 
-    def promote_field_to_component(field, fields, events)
-        fields.each {|f| @fields.delete(f)}
+    def promote_member_to_component(member, members)
+        members.each {|m| @members.delete(m)}
 
-        events.each {|e| @events.delete(e)}
+        @members.delete(member)
 
-        @fields.delete(field)
+        component = Component.new(:name => member.name)
 
-        component = Component.new(:name => field.name)
-
-        component.import_fields(fields)
-
-        component.import_events(events)
+        component.import_members(members)
 
         component.promote_members
+
         component
     end
 end
