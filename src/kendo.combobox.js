@@ -286,6 +286,7 @@
             that._makeUnselectable();
 
             that._hideBusy();
+            that._bound = true;
             that.trigger("dataBound");
         },
 
