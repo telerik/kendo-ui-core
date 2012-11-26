@@ -1,4 +1,7 @@
-class Field
+module CodeGen
+end
+
+class CodeGen::Field
     attr_reader :name, :description, :type
 
     def initialize(options)

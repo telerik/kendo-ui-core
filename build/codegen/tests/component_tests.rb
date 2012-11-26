@@ -7,14 +7,14 @@ require 'component'
 
 class ComponentTests < Test::Unit::TestCase
     def setup
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_field(:name => 'foo', :type => 'Object')
         @component.add_field(:name => 'foo.bar', :type => 'Object')
     end
 
     def test_add_field_creates_multiple_fields_for_multiple_types
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_field(:name => 'foo', :type => 'String|Object')
 
@@ -24,7 +24,7 @@ class ComponentTests < Test::Unit::TestCase
     end
 
     def test_add_field_adds_field_only_if_type_is_specified
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_field(:name => 'foo')
 
@@ -32,7 +32,7 @@ class ComponentTests < Test::Unit::TestCase
     end
 
     def test_add_field_ignores_type_in_name
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_field(:name => 'foo.type=bar.baz', :type => 'String')
 
@@ -40,7 +40,7 @@ class ComponentTests < Test::Unit::TestCase
     end
 
     def test_add_field_trims_name
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_field(:name => '  foo  ', :type => 'String|Object')
 
@@ -48,7 +48,7 @@ class ComponentTests < Test::Unit::TestCase
     end
 
     def test_add_field_trims_type
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_field(:name => '  foo  ', :type => ' String |Object')
 
@@ -62,7 +62,7 @@ class ComponentTests < Test::Unit::TestCase
     end
 
     def test_promote_creates_nested_components
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_field(:name => 'foo', :type => 'Object')
         @component.add_field(:name => 'foo.bar', :type => 'Object')
@@ -70,13 +70,13 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.promote_members
 
-        assert_equal true, @component.members[0].members[0].instance_of?(Component)
+        assert_equal true, @component.members[0].members[0].instance_of?(CodeGen::Component)
     end
 
     def test_promote_creates_components
         @component.promote_members
 
-        assert_equal true, @component.members[0].instance_of?(Component)
+        assert_equal true, @component.members[0].instance_of?(CodeGen::Component)
     end
 
     def test_promote_adds_fields_to_child_component
@@ -98,7 +98,7 @@ class ComponentTests < Test::Unit::TestCase
     end
 
     def test_accept_calls_component
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
 
         visitor = stub(:component)
         visitor.expects(:component).with(@component)
@@ -107,7 +107,7 @@ class ComponentTests < Test::Unit::TestCase
     end
 
     def test_accept_calls_field
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
         @component.add_field(:name => 'foo', :type => 'String')
 
         visitor = stub(:field, :component)
@@ -119,7 +119,7 @@ class ComponentTests < Test::Unit::TestCase
     end
 
     def test_accept_calls_event
-        @component = Component.new(:name => 'foo')
+        @component = CodeGen::Component.new(:name => 'foo')
         @component.add_event(:name => 'foo')
 
         visitor = stub(:event, :component)

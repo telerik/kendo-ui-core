@@ -5,13 +5,13 @@ require 'component'
 class MarkdownParserTests < Test::Unit::TestCase
 
     def test_parse_sets_component_name
-        result = MarkdownParser.new.parse("# kendo.ui.AutoComplete")
+        result = CodeGen::MarkdownParser.new.parse("# kendo.ui.AutoComplete")
 
         assert_equal 'kendo.ui.AutoComplete', result.name
     end
 
     def test_parse_field_from_configuration_section
-        result = MarkdownParser.new.parse(%{
+        result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
 
 ## Configuration
@@ -23,7 +23,7 @@ class MarkdownParserTests < Test::Unit::TestCase
     end
 
     def test_parse_fields
-        result = MarkdownParser.new.parse(%{
+        result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
 
 ## Configuration
@@ -37,7 +37,7 @@ class MarkdownParserTests < Test::Unit::TestCase
     end
 
     def test_parse_field_type
-        result = MarkdownParser.new.parse(%{
+        result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
 
 ## Configuration
@@ -49,7 +49,7 @@ class MarkdownParserTests < Test::Unit::TestCase
     end
 
     def test_parse_field_description
-        result = MarkdownParser.new.parse(%{
+        result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
 
 ## Configuration
@@ -62,7 +62,7 @@ bar
     end
 
     def test_parse_event_from_events_section
-        result = MarkdownParser.new.parse(%{
+        result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
 
 ## Configuration
@@ -78,7 +78,7 @@ bar
     end
 
     def test_parse_events
-        result = MarkdownParser.new.parse(%{
+        result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
 
 ## Configuration
@@ -96,7 +96,7 @@ bar
     end
 
     def test_parse_event_description
-        result = MarkdownParser.new.parse(%{
+        result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
 
 ## Configuration
@@ -114,7 +114,7 @@ Bar
     end
 
     def test_parse_nested_components
-        result = MarkdownParser.new.parse(%{
+        result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
 
 ## Configuration

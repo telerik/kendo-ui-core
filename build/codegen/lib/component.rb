@@ -1,7 +1,10 @@
 require 'field'
 require 'event'
 
-class Component
+module CodeGen
+end
+
+class CodeGen::Component
     attr_reader :members, :name
 
     def initialize(members)
@@ -18,7 +21,7 @@ class Component
 
         if types
             types.split('|').each do |type|
-                @members.push Field.new(:name => name,
+                @members.push CodeGen::Field.new(:name => name,
                                        :type => type.strip,
                                        :description => description)
             end
@@ -26,7 +29,7 @@ class Component
     end
 
     def add_event(options)
-        @members.push Event.new(options)
+        @members.push CodeGen::Event.new(options)
     end
 
     def accept(visitor)
@@ -63,7 +66,7 @@ class Component
 
         @members.delete(member)
 
-        component = Component.new(:name => member.name)
+        component = CodeGen::Component.new(:name => member.name)
 
         component.import_members(members)
 

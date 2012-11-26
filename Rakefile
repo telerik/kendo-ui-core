@@ -27,6 +27,7 @@ require 'demos'
 require 'download_builder'
 require 'cdn'
 require 'tests'
+require 'codegen'
 
 ROOT_MAP = {
     '.' => /(src|styles\/.+?)\//,

@@ -1,12 +1,24 @@
 require 'kramdown'
 
-class MarkdownParser
+module CodeGen
+    MARKDOWN = FileList['docs/api/{web,dataviz}/*.md']
+        .exclude('**/ui.md')
+        .include('docs/api/framework/datasource.md')
+end
+
+class CodeGen::MarkdownParser
+    def self.each
+        MARKDOWN.map do |markdown|
+            yield CodeGen::MarkdownParser.new.parse File.read(markdown)
+        end
+    end
+
     def parse(markdown)
         root = Kramdown::Parser::Markdown.parse(markdown)[0]
 
         header = root.children.find { |e| e.type == :header && e.options[:level] == 1 }
 
-        component = Component.new(:name => component_name(root))
+        component = CodeGen::Component.new(:name => component_name(root))
 
         configuration = configuration_section(root)
 

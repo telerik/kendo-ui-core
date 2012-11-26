@@ -1,4 +1,6 @@
-class Event
+module CodeGen
+end
+class CodeGen::Event
     attr_reader :name, :description
 
     def initialize(options)
