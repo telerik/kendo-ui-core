@@ -232,6 +232,7 @@
                 that._selectItem();
             }
 
+            that._bound = true;
             that.trigger("dataBound");
         },
 

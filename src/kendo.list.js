@@ -636,7 +636,7 @@
             var that = this,
                 options = that.options;
 
-            value = value || options.value || that.value();
+            value = value || options.value || that.value() || that._deferredValue;
 
             if (value) {
                 that.value(value);
@@ -649,6 +649,8 @@
 
         _valueOnFetch: function(value) {
             var that = this;
+
+            that._deferredValue = value;
 
             if (!that._request && !that._fetch && !that.ul[0].firstChild) {
                 that.dataSource.one(CHANGE, function() {
@@ -727,6 +729,18 @@
             }
         },
 
+        _clearSelection: function() {
+            var that = this,
+                optionLabel = that.options.optionLabel;
+
+            that.value("");
+
+            if (optionLabel !== undefined) {
+                that.text(optionLabel);
+                that.element.val("");
+            }
+        },
+
         _cascade: function() {
             var that = this,
                 options = that.options,
@@ -744,22 +758,20 @@
                 valueField = parent.options.dataValueField;
                 deactivate = function() {
                     that.enable(false);
-                    that.value("");
+                    that._clearSelection();
                 };
                 change = function() {
                     var value = that.value();
+
+                    if (!value && that._deferredValue) {
+                        value = that._deferredValue;
+                        that._deferredValue = undefined;
+                    }
+
                     if (value) {
-                        if (that.dataSource.view()[0]) {
-                            that.value(value);
-                            if (that.selectedIndex == -1) {
-                                that.value("");
-                            }
-                        } else {
-                            that.value("");
-                            if (that.value()) {
-                                that.element.val("");
-                                that.text("");
-                            }
+                        that.value(value);
+                        if (!that.dataSource.view()[0] || that.selectedIndex == -1) {
+                            that._clearSelection();
                         }
                     } else {
                         that.select(options.index);
@@ -802,7 +814,7 @@
                       });
 
                 //refresh was called
-                if (parent._request !== undefined) {
+                if (parent._bound !== undefined) {
                     select();
                 } else if (!parent.value()) {
                     that.enable(false);
