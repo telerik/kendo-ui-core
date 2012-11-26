@@ -153,17 +153,27 @@
                 teardown: cleanArtifacts
             });
 
-            function moveNode(treeview, sourceText, destinationText, dropPosition) {
-                var sourceNode = treeview.findByText(sourceText).find(".k-in:first"),
-                    destinationNode = treeview.findByText(destinationText).find(".k-in:first"),
-                    startOffset = sourceNode.offset(),
-                    endOffset = destinationNode.offset(),
-                    extend = $.extend,
+            function moveTo(element, destination) {
+                var extend = $.extend,
+                    startOffset = element.offset(),
                     sourcePosition = {
                         pageX: startOffset.left + 5,
                         pageY: startOffset.top + 5,
-                        relatedTarget: sourceNode[0]
-                    },
+                        relatedTarget: element[0]
+                    };
+
+                element
+                    .trigger(extend({ type: "mousedown" }, sourcePosition));
+
+                $(document.documentElement)
+                    .trigger(extend({ type: "mousemove"}, destination))
+                    .trigger(extend({ type: "mouseup"}, destination));
+            }
+
+            function moveNode(treeview, sourceText, destinationText, dropPosition) {
+                var sourceNode = treeview.findByText(sourceText).find(".k-in:first"),
+                    destinationNode = treeview.findByText(destinationText).find(".k-in:first"),
+                    endOffset = destinationNode.offset(),
                     nodeHeight = destinationNode.height(),
                     endOffsetDelta = dropPosition == "below" ? nodeHeight-1 :
                                      dropPosition == "above" ? 1 :
@@ -174,12 +184,7 @@
                         target: destinationNode[0]
                     };
 
-                sourceNode
-                    .trigger(extend({ type: "mousedown" }, sourcePosition));
-
-                $(document.documentElement)
-                    .trigger(extend({ type: "mousemove"}, destinationPosition))
-                    .trigger(extend({ type: "mouseup"}, destinationPosition));
+                moveTo(sourceNode, destinationPosition);
             }
 
             test("moving item across parents", function () {
@@ -262,6 +267,29 @@
 
                 ok(treeviewObject.findByText("bar").find(".k-icon:first").hasClass("k-minus"));
                 ok(treeviewObject.findByText("bar").find(".k-group").is(":visible"));
+            });
+
+            test("moving nodes to empty treeview", function() {
+                var tree1 = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [ { text: "foo" } ]
+                    }),
+                    tree2 = createTreeView({
+                        dragAndDrop: true
+                    });
+
+                tree2.width(100).height(100);
+
+                var offset = tree2.offset();
+
+                moveTo(tree1.find(".k-in"), {
+                    pageX: offset.left + 25,
+                    pageY: offset.top + 25,
+                    target: tree2[0]
+                });
+
+                equal(tree2.find(".k-item").length, 1);
+                equal(tree1.find(".k-item").length, 0);
             });
 
             module("keyboard support", {

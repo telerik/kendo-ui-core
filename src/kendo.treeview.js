@@ -1384,7 +1384,7 @@
                 destTreeview = that._objectOrSelf(parentNode || group),
                 destDataSource = destTreeview.dataSource;
 
-            if (parentNode) {
+            if (parentNode && parentNode[0] != destTreeview.element[0]) {
                 referenceDataItem = destTreeview.dataItem(parentNode);
 
                 if (!referenceDataItem.loaded()) {
@@ -1671,7 +1671,12 @@
                         }
                     }
                 } else if (dropTarget[0] != that.dropHint[0]) {
-                    statusClass = "k-denied";
+                    if (closestTree[0] != treeview.element[0]) {
+                        // moving node to different treeview without children
+                        statusClass = "k-add";
+                    } else {
+                        statusClass = "k-denied";
+                    }
                 }
             }
 
@@ -1711,6 +1716,11 @@
                 destinationNode = dropHint.closest(NODE);
             } else if (that.dropTarget) {
                 destinationNode = that.dropTarget.closest(NODE);
+
+                if (!destinationNode.length) {
+                    // moving node to root element
+                    destinationNode = that.dropTarget;
+                }
             }
 
             valid = that._hintStatus() != "k-denied";
