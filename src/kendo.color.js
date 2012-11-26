@@ -6,11 +6,12 @@ kendo_module({
     depends: [ "core" ]
 });
 
-(function($, undefined){
+(function($, parseInt, undefined){
     var kendo = window.kendo;
     var Class = kendo.Class;
     var ui = kendo.ui;
     var Widget = ui.Widget;
+    var KEYS = kendo.keys;
     var CHANGE = "change";
     var ARIALABELLEDBY = "aria-labelledby";
     var BACKGROUNDCOLOR = "background-color";
@@ -53,26 +54,81 @@ kendo_module({
             ColorSelectorBase.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
-            var colors = options.colors;
+            var colors = options.palette;
             if (typeof colors == "string") {
                 colors = colors.split(",");
             }
             if ($.isArray(colors)) {
                 colors = colors.map(parse);
             }
-            that._content = $(that._template({
+
+            var content = $(that._template({
                 colors : colors,
                 value  : that._value,
                 id     : options.ariaId
-            })).on("click", ".k-item", function(ev){
-                that.select($(ev.currentTarget).find("div").css(BACKGROUNDCOLOR));
-            }).find("*").attr(UNSELECTABLE, "on").end();
-            this.element.html(this._content);
+            }))
+                .on("click", ".k-item", function(ev){
+                    that.select($(ev.currentTarget).find("div").css(BACKGROUNDCOLOR));
+                })
+                .find("*").attr(UNSELECTABLE, "on").end();
+
+            element.html(content);
+            that.element = element = content;
+
+            element
+                .attr("tabIndex", 0)
+                .keydown($.proxy(that.keydown, that));
+        },
+        keydown: function(ev) {
+            function preventDefault(){ ev.preventDefault() };
+            var selected
+            , that = this
+            , el = that.element
+            , all = el.find(".k-item")
+            , init = el.find(".k-item." + ITEMSELECTEDCLASS).get(0);
+
+            switch (ev.keyCode) {
+              case KEYS.LEFT:
+                preventDefault();
+                selected = get_relative(all, init, -1);
+                break;
+              case KEYS.RIGHT:
+                preventDefault();
+                selected = get_relative(all, init, 1);
+                break;
+
+              case KEYS.DOWN:
+                // XXX: this is assuming we have 10 colors per row.
+                // it depends on the CSS, in fact.
+                preventDefault();
+                selected = get_relative(all, init, 10);
+                break;
+              case KEYS.UP:
+                preventDefault();
+                selected = get_relative(all, init, -10);
+                break;
+
+              case KEYS.ENTER:
+                preventDefault();
+                if (init) {
+                    this.select($("div", init).css(BACKGROUNDCOLOR));
+                }
+                break;
+            }
+            if (selected) {
+                selected = $(selected);
+                $(init).removeClass(ITEMSELECTEDCLASS)
+                    .removeAttr("aria-selected");
+                selected.addClass(ITEMSELECTEDCLASS)
+                    .attr("aria-selected", true);
+            }
         },
         select: function(color) {
             var that = this;
             color = ColorSelectorBase.fn.select.call(that, color);
-            that.element.find(".k-item." + ITEMSELECTEDCLASS).removeClass(ITEMSELECTEDCLASS);
+            that.element.find(".k-item." + ITEMSELECTEDCLASS)
+                .removeClass(ITEMSELECTEDCLASS)
+                .removeAttr("aria-selected");
             var el = null, best = null, min = null;
             that.element.find(".k-item div").each(function(){
                 var c = parse($(this).css(BACKGROUNDCOLOR));
@@ -87,11 +143,12 @@ kendo_module({
                 }
             });
             if (!el) el = best;
-            if (el) $(el).addClass(ITEMSELECTEDCLASS);
+            if (el) $(el).addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
+            return color;
         },
         options: {
-            name   : "ColorSelectorSimple",
-            colors : "000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7"
+            name    : "ColorSelectorSimple",
+            palette : "000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7"
         },
         _template: kendo.template
         ('<div class="k-colorpicker-popup">' +
@@ -126,8 +183,8 @@ kendo_module({
         diff: function(c2) {
             var c1 = this.toBytes(), c2 = c2.toBytes();
             return Math.sqrt(Math.pow((c1.r - c2.r) * 0.30, 2)
-                             +  Math.pow((c1.g - c2.g) * 0.59, 2)
-                             +  Math.pow((c1.b - c2.b) * 0.11, 2));
+                             + Math.pow((c1.g - c2.g) * 0.59, 2)
+                             + Math.pow((c1.b - c2.b) * 0.11, 2));
         }
     });
 
@@ -253,4 +310,20 @@ kendo_module({
         throw new Error("Cannot parse color: " + color);
     };
 
-})(jQuery);
+    function get_relative(array, element, delta) {
+        array = Array.prototype.slice.call(array);
+        var n = array.length;
+        var pos = array.indexOf(element);
+        if (pos < 0) {
+            return delta < 0 ? array[n - 1] : array[0];
+        }
+        pos += delta;
+        if (pos < 0) {
+            pos += n;
+        } else {
+            pos %= n;
+        }
+        return array[pos];
+    };
+
+})(jQuery, parseInt);
