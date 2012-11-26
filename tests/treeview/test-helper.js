@@ -11,6 +11,8 @@ function createTreeView(treeviewOptions, options) {
 
     treeview = $("<div />").appendTo(container).kendoTreeView(treeviewOptions);
     treeviewObject = treeview.data("kendoTreeView");
+
+    return treeview;
 }
 
 function cleanArtifacts() {
