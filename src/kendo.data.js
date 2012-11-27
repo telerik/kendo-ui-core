@@ -2380,6 +2380,7 @@ kendo_module({
 
                 that._view = result.data;
                 that._aggregateResult = calculateAggregates(that._data, options);
+                that.trigger(REQUESTEND, { });
                 that.trigger(CHANGE, { items: result.data });
             }
         },
