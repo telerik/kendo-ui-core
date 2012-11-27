@@ -97,7 +97,7 @@ kendo_module({
             that._aria();
 
             that._oldIndex = that.selectedIndex = -1;
-            that._old = that.value();
+            that.selectedValue = that._old = options.value || that._accessor();
 
             if (options.autoBind) {
                 that._filterSource();
@@ -248,8 +248,8 @@ kendo_module({
 
             if (that.element.is(SELECT)) {
                 if (state === STATE_REBIND) {
-                    value = that.value();
                     that._state = "";
+                    value = that.selectedValue;
                 }
 
                 custom = that._option;
@@ -258,6 +258,8 @@ kendo_module({
 
                 if (custom && custom[0].selected) {
                     that._custom(custom.val());
+                } else {
+                    that.selectedValue = value || that._accessor();
                 }
             }
 
@@ -272,7 +274,7 @@ kendo_module({
             }
 
             if (state !== STATE_FILTER && !that._fetch) {
-                that._selectItem(value);
+                that._selectItem();
             }
 
             if (that._open) {
@@ -307,6 +309,8 @@ kendo_module({
                 that._select(li);
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
+
+                that.trigger("selected");
             }
         },
 
@@ -436,6 +440,8 @@ kendo_module({
                     value = value.toString();
                 }
 
+                that.selectedValue = value;
+
                 if (!that._open && value && that._valueOnFetch(value)) {
                     return;
                 }
@@ -454,7 +460,7 @@ kendo_module({
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
             } else {
-                return that._accessor();
+                return that.selectedValue;
             }
         },
 
@@ -488,6 +494,7 @@ kendo_module({
             } else {
                 element.val(value);
             }
+            that.selectedValue = value;
         },
 
         _filter: function(word) {
@@ -696,6 +703,7 @@ kendo_module({
 
                 that._prev = that.input[0].value = text;
                 that._accessor(value !== undefined ? value : text, idx);
+                that.selectedValue = that._accessor();
                 that._placeholder();
 
                 if (that._optionID) {

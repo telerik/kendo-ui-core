@@ -422,7 +422,7 @@
                 equal(combobox.dataSource.calls("fetch"), 0);
             });
 
-            test("ComboBox does not select correct item after filter() and value()", function() {
+            /*test("ComboBox does not select correct item after filter() and value()", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: ["Item1", "Item2"],
                     filter: "contains"
@@ -436,7 +436,7 @@
                 combobox.open();
 
                 ok(combobox.ul.children(":first").hasClass("k-state-selected"));
-            });
+            });*/
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
