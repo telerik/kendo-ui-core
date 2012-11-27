@@ -731,7 +731,9 @@ kendo_module({
                 currentSeries = series[seriesIx];
 
                 if (chart.isBindable(currentSeries)) {
-                    currentSeries.data = data;
+                    if (currentSeries.autoBind !== false) {
+                        currentSeries.data = data;
+                    }
 
                     append(processedSeries, grouped ?
                         chart._createGroupedSeries(currentSeries, data) :

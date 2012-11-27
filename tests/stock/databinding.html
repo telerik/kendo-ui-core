@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.stock.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz,
+                deepExtend = kendo.deepExtend,
+                StockChart = dataviz.ui.StockChart;
+
+            (function() {
+                var chart,
+                    plotArea,
+                    defaultOptions = {
+                        dataSource: {
+                            data: [{
+                                    date: new Date("2012/09/01"),
+                                    sales: 100
+                                }, {
+                                    date: new Date("2012/09/02"),
+                                    sales: 110
+                                }, {
+                                    date: new Date("2012/09/03"),
+                                    sales: 105
+                                }, {
+                                    date: new Date("2012/09/04"),
+                                    sales: 100
+                                }, {
+                                    date: new Date("2012/09/05"),
+                                    sales: 110
+                                }, {
+                                    date: new Date("2012/09/06"),
+                                    sales: 105
+                                }]
+                        },
+                        dateField: "date",
+                        navigator: {
+                            dataSource: {
+                                data: [{
+                                    date: new Date("2012/09/01"),
+                                    volume: 100
+                                }, {
+                                    date: new Date("2012/10/01"),
+                                    volume: 150
+                                }, {
+                                    date: new Date("2012/11/01"),
+                                    volume: 200
+                                }]
+                            }
+                        }
+                    };
+
+                function createStockChart(options) {
+                    $("#container").kendoStockChart(deepExtend({
+                        series: [{
+                            field: "sales"
+                        }],
+                        navigator: {
+                            series: [{
+                                field: "volume"
+                            }]
+                        }
+                    }, defaultOptions, options));
+
+                    chart = $("#container").data("kendoStockChart");
+                }
+
+                function destroyChart() {
+                    var element = $("#container");
+                    kendo.destroy(element);
+                    element.unbind().empty();
+                }
+
+                // ------------------------------------------------------------
+                module("Data Binding / Navigator Data Source", {
+                    setup: function() {
+                        createStockChart();
+                    },
+                    teardown: destroyChart
+                });
+
+                test("data source is created", function() {
+                    ok(chart._navigator.dataSource);
+                });
+
+                test("navigator series are bound from its data source", function() {
+                    equal(chart.options.series[1].data.length, 3);
+                });
+
+                asyncTest("data binding is not performed when autoBind is false", function() {
+                    createStockChart({
+                        navigator: {
+                            autoBind: false,
+                        }
+                    });
+
+                    setTimeout(function() {
+                        equal(chart.options.series[1].data.length, 0);
+                        start();
+                    }, 50);
+                });
+
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+    </body>
+</html>

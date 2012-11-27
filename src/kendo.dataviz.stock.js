@@ -27,6 +27,7 @@ kendo_module({
 
     // Constants =============================================================
     var AUTO_CATEGORY_WIDTH = 28,
+        CHANGE = "change",
         CSS_PREFIX = "k-",
         DRAG = "drag",
         DRAG_END = "dragEnd",
@@ -133,6 +134,14 @@ kendo_module({
             navigator.applySelection();
             Chart.fn._redraw.call(chart);
             navigator.redraw();
+        },
+
+        destroy: function() {
+            var chart = this;
+
+            chart._navigator.destroy();
+
+            Chart.fn.destroy.call(chart);
         }
     });
 
@@ -141,7 +150,9 @@ kendo_module({
             var navi = this;
 
             navi.chart = chart;
-            navi.options = chart.options.navigator;
+            navi.options = deepExtend(navi.options, chart.options.navigator);
+
+            navi._initDataSource();
 
             if (!defined(navi.options.hint.visible)) {
                 navi.options.hint.visible = navi.options.visible;
@@ -151,6 +162,63 @@ kendo_module({
             chart.bind(DRAG_END, proxy(navi._dragEnd, navi));
             chart.bind(ZOOM, proxy(navi._zoom, navi));
             chart.bind(ZOOM_END, proxy(navi._zoomEnd, navi));
+        },
+
+        options: {
+            autoBind: true
+        },
+
+        _initDataSource: function() {
+            var navi = this,
+                options = navi.options,
+                dsOptions = options.dataSource;
+
+            navi._dataChangedHandler = proxy(navi._onDataChanged, navi);
+
+            if (dsOptions) {
+                navi.dataSource = kendo.data.DataSource
+                    .create(dsOptions)
+                    .bind(CHANGE, navi._dataChangedHandler);
+
+                if (options.autoBind) {
+                    navi.dataSource.fetch();
+                }
+            }
+        },
+
+        _onDataChanged: function() {
+            var navi = this,
+                chart = navi.chart,
+                series = chart.options.series,
+                seriesIx,
+                seriesLength = series.length,
+                data = navi.dataSource.view(),
+                currentSeries;
+
+            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+                currentSeries = series[seriesIx];
+
+                if (currentSeries.axis == NAVIGATOR_AXIS && chart.isBindable(currentSeries)) {
+                    currentSeries.data = data;
+                }
+            }
+
+            //applySeriesColors(navi.options);
+
+            //navi._categoriesData = grouped ? data[0].items : data;
+            //bindCategories(navi.options, navi._categoriesData);
+
+            //navi.trigger(DATABOUND);
+            //chart._redraw();
+        },
+
+        destroy: function() {
+            var navi = this,
+                dataSource = navi.dataSource;
+
+            if (dataSource) {
+                dataSource.unbind(CHANGE, navi._dataChangeHandler);
+            }
         },
 
         redraw: function() {
@@ -523,7 +591,8 @@ kendo_module({
                     }
                 }, defaults, navigatorSeries[i], {
                     axis: NAVIGATOR_AXIS,
-                    categoryAxis: NAVIGATOR_AXIS
+                    categoryAxis: NAVIGATOR_AXIS,
+                    autoBind: false
                 })
             );
         }
