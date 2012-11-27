@@ -2549,6 +2549,7 @@ span.k-numerictextbox
 .k-colorpicker-hsv
 {
     display: inline-block;
+    width: 250px;
     padding: 10px 10px 5px 10px;
     line-height: 0;
 
@@ -2557,6 +2558,52 @@ span.k-numerictextbox
         box-shadow: @arguments;
     }
 
+    .border-radius(...) {
+        border-radius: @arguments;
+        -webkit-border-radius: @arguments;
+        -o-border-radius: @arguments;
+        -moz-border-radius: @arguments;
+    }
+
+    .k-selected-color {
+        .k-selected-color-display {
+            padding: 3px;
+        }
+        background-image: url("textures/transtexture.png");
+        input.k-color-value {
+            text-align: center;
+            border: 0px;
+            margin-left: 100%;
+            width: 150px;
+            position: relative;
+            left: -150px;
+        }
+    }
+
+    .k-hsv-rectangle {
+        position: relative;
+        .k-draghandle {
+            cursor: pointer;
+            position: absolute;
+            z-index: 10;
+            left: 50%;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            border: 2px solid #eee;
+            margin-left: -5px;
+            margin-top: -5px;
+            .border-radius(6px);
+            .box-shadow(0, 1px, 4px, #444);
+            background: transparent;
+            &:hover, &:focus {
+                background: transparent;
+                border-color: #fff;
+                .box-shadow(0 1px 5px #000);
+            }
+        }
+    }
+
     .hue-slider, .transparency-slider {
         width: 250px;
         display: block;
@@ -2569,10 +2616,10 @@ span.k-numerictextbox
             height: 8px;
             width: 8px;
             .box-shadow(0 1px 4px #444);
-            &:hover {
+            &:hover, &:focus {
                 background: transparent;
                 border-color: #fff;
-                .box-shadow(0 1px 4px #000);
+                .box-shadow(0 1px 5px #000);
             }
         }
     }

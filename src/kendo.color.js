@@ -18,101 +18,13 @@ kendo_module({
     var ITEMSELECTEDCLASS = "k-state-selected";
     var SIMPLEPALETTE = "000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7";
 
-    var ColorPicker = Widget.extend({
-        init: function(element, options) {
-            var that = this;
-            Widget.fn.init.call(that, element, options);
-            options = that.options;
-            element = that.element;
-            var value = parse(options.value);
-            that._value = value;
-            var content = that._content = $(that._template({ value: value }));
-            element.hide().after(content);
-
-            content.attr("tabIndex", 0)
-                .keydown($.proxy(that.keydown, that))
-                .on("click", ".k-icon", $.proxy(that.open, that));
-        },
-        _template: kendo.template
-        ('<div class="k-widget k-colorpicker">' +
-           '<span class="k-selected-color"></span>' +
-           '<span class="k-icon k-i-arrow-s"></span>' +
-         '</div>'),
-        options: {
-            name    : "ColorPicker",
-            palette : SIMPLEPALETTE,
-            value   : null
-        },
-        events: [ "change", "select" ],
-        open: function() {
-            this._getPopup().open();
-            this._selector.select(this.value(), true);
-        },
-        close: function() {
-            this._getPopup().close();
-        },
-        toggle: function() {
-            this._getPopup().toggle();
-        },
-        select: function(value) {
-            value = this.value(value);
-            this.trigger("select", { value: value });
-        },
-        value: function(value) {
-            if (value !== undefined) {
-                value = parse(value);
-                this._value = value;
-                this._content.find(".k-selected-color").css(
-                    BACKGROUNDCOLOR,
-                    value ? value.toCssRgba() : "transparent"
-                );
-            }
-            return this._value;
-        },
-        keydown: function(ev) {
-            var key = ev.keyCode;
-            if (this._getPopup().visible()) {
-                if (key == KEYS.ESC) {
-                    this.close();
-                } else {
-                    this._selector.keydown(ev);
-                }
-            }
-            else if (key == KEYS.ENTER || key == KEYS.DOWN) {
-                this.open();
-                ev.preventDefault();
-            }
-        },
-        _getPopup: function() {
-            var that = this, p = that._popup;
-            if (!p) {
-                var sel = this._selector = new ColorSelectorSimple(null, {
-                    palette : that.options.palette,
-                    value   : that._value
-                });
-                that._popup = p = sel.element.kendoPopup({
-                    anchor       : that._content,
-                    toggleTarget : that._content.find(".k-icon")
-                }).data("kendoPopup");
-                sel.bind("change", function(ev){
-                    p.close();
-                    that.select(ev.value);
-                });
-                p.bind("close", function(ev){
-                    that._content.focus();
-                });
-            }
-            return p;
-        }
-    });
-
     var ColorSelectorBase = Widget.extend({
         init: function(element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
-            that._value = parse(options.value);
+            that._value = options.value = parse(options.value);
             var ariaId = that._ariaId = options.ariaId;
             if (ariaId) {
                 element.attr(ARIALABELLEDBY, ariaId);
@@ -136,8 +48,6 @@ kendo_module({
             return color;
         }
     });
-
-    ui.plugin(ColorPicker);
 
     var ColorSelectorSimple = ColorSelectorBase.extend({
         init: function(element, options) {
@@ -163,7 +73,7 @@ kendo_module({
                 })
                 .find("*").attr(UNSELECTABLE, "on").end();
 
-            if (element) element.html(content);
+            if (element) element.append(content);
             that.element = element = content;
 
             element
@@ -255,6 +165,141 @@ kendo_module({
 
     ui.plugin(ColorSelectorSimple);
 
+    var ColorSelectorHSV = ColorSelectorBase.extend({
+        init: function(element, options) {
+            var that = this;
+            ColorSelectorBase.fn.init.call(that, element, options);
+            options = that.options;
+            element = that.element;
+
+            var content = $(that._template({
+                showOpacity  : options.showOpacity,
+                showButtons  : options.showButtons,
+                showSelected : options.showSelected
+            })).find("*").attr(UNSELECTABLE, "on").end();
+
+            if (element) element.append(content);
+            element = that.element = content;
+
+            var hueSlider = that._hueSlider = $(".hue-slider", content).kendoSlider({
+                min: 0,
+                max: 359,
+                tickPlacement: "none",
+                showButtons: false,
+            }).data("kendoSlider");
+
+            var opSlider = that._opacitySlider = $(".transparency-slider", content).kendoSlider({
+                min: 0,
+                max: 100,
+                tickPlacement: "none",
+                showButtons: false,
+            }).data("kendoSlider");
+
+            var hsvRect = that._hsvRect = $(".k-hsv-rectangle", content);
+
+            var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect);
+
+            var hueElements = that._hueElements = $(".k-hsv-rectangle, .transparency-slider .k-slider-track", content);
+
+            var selectedColor = that._selectedColor = $(".k-selected-color-display", content);
+
+            var colorAsText = that._colorAsText = $("input.k-color-value", content);
+
+            hueSlider.bind([ "slide", "change" ], function(ev){
+                that._updateUI(that._getHSV(ev.value, null, null, null));
+            });
+
+            opSlider.bind([ "slide", "change" ], function(ev){
+                that._updateUI(that._getHSV(null, null, null, ev.value / 100));
+            });
+
+            that._updateUI(that._value || new ColorRGB(1, 0, 0, 1));
+
+            hsvRect.mousedown(function(ev){
+                function preventDefault(ev) { ev.preventDefault(); }
+                var r = hsvRect.offset();
+                var rw = hsvRect.width();
+                var rh = hsvRect.height();
+                function onmove(ev) {
+                    var pex = ev.pageX;
+                    var pey = ev.pageY;
+                    var dx = pex - r.left - 1;
+                    var dy = pey - r.top - 1;
+                    if (dx < 0) dx = 0;
+                    if (dx > rw) dx = rw;
+                    if (dy < 0) dy = 0;
+                    if (dy > rh) dy = rh;
+                    hsvHandle.css({
+                        left: dx + "px",
+                        top: dy + "px"
+                    });
+                    that._svChange(dx / rw, 1 - dy / rh);
+                    preventDefault(ev);
+                }
+                function onup(ev) {
+                    $(document)
+                        .unbind("mousemove", onmove)
+                        .unbind("mouseup", onup);
+                    preventDefault(ev);
+                }
+                onmove(ev);
+                $(document).mousemove(onmove).mouseup(onup);
+            });
+        },
+        options: {
+            name: "ColorSelectorHSV",
+            showOpacity: true,
+            showButtons: true,
+            showSelected: true
+        },
+        events: [
+            "change", "slide"
+        ],
+        _getHSV: function(h, s, v, a) {
+            var handle = this._hsvHandle;
+            var rect = this._hsvRect;
+            var width = rect.width(), height = rect.height();
+            var hpos = handle.position();
+            if (h === null) h = this._hueSlider.value();
+            if (s === null) s = hpos.left / width;
+            if (v === null) v = 1 - hpos.top / height;
+            if (a === null) a = this._opacitySlider.value() / 100;
+            return new ColorHSV(h, s, v, a);
+        },
+        _svChange: function(s, v) {
+            this._updateUI(this._getHSV(null, s, v, null));
+        },
+        _updateUI: function(color) {
+            this._selectedColor.css(BACKGROUNDCOLOR, color.toCssRgba());
+            this._colorAsText.val(color.toCssRgba());
+            color = color.toHSV();
+            var handle = this._hsvHandle;
+            var rect = this._hsvRect;
+            var width = rect.width(), height = rect.height();
+            // saturation is 0 on the left side, full (1) on the right
+            // value is 0 on the bottom, full on the top.
+            var attr = {
+                left: color.s * width + "px",
+                top: (1 - color.v) * height + "px"
+            };
+            handle.css(attr);
+            this._hueElements.css(BACKGROUNDCOLOR, new ColorHSV(color.h, 1, 1, 1).toString());
+            this._hueSlider.value(color.h);
+            this._opacitySlider.value(100 * color.a);
+        },
+        _template: kendo.template
+        ('<div class="k-colorpicker-hsv">' +
+           '# if (showSelected) { #' +
+             '<div class="k-selected-color"><div class="k-selected-color-display"><input class="k-color-value" /></div></div>' +
+           '# } #' +
+           '<div class="k-hsv-rectangle"><div class="hsv-gradient"></div><div class="k-draghandle"></div></div>' +
+           '<input class="hue-slider" />' +
+           '<input class="transparency-slider" />' +
+         '</div>')
+    });
+
+    ui.plugin(ColorSelectorHSV);
+
     /* -----[ color utils ]----- */
 
     function hex(n, width, pad) {
@@ -265,6 +310,7 @@ kendo_module({
     }
 
     var Color = Class.extend({
+        init: function(){ throw new Error("kendo.Color is an abstract base class"); },
         toHSV: function() { return this; },
         toRGB: function() { return this; },
         toHex: function() { return this.toBytes().toHex(); },
@@ -430,5 +476,109 @@ kendo_module({
     kendo.ColorRGB = ColorRGB;
     kendo.ColorHSV = ColorHSV;
     kendo.ColorBytes = ColorBytes;
+
+    /* -----[ The ColorPicker widget ]----- */
+
+    var ColorPicker = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+            Widget.fn.init.call(that, element, options);
+            options = that.options;
+            element = that.element;
+            var value = parse(options.value);
+            that._value = value;
+            var content = that._content = $(that._template({ value: value }));
+            element.hide().after(content);
+
+            content.attr("tabIndex", 0)
+                .keydown($.proxy(that.keydown, that))
+                .on("click", ".k-icon", $.proxy(that.open, that));
+        },
+        _template: kendo.template
+        ('<div class="k-widget k-colorpicker">' +
+           '<span class="k-selected-color"></span>' +
+           '<span class="k-icon k-i-arrow-s"></span>' +
+         '</div>'),
+        options: {
+            name     : "ColorPicker",
+            selector : "simple",
+            palette  : SIMPLEPALETTE,
+            value    : null
+        },
+        events: [ "change", "select" ],
+        open: function() {
+            this._getPopup().open();
+            this._selector.select(this.value(), true);
+        },
+        close: function() {
+            this._getPopup().close();
+        },
+        toggle: function() {
+            this._getPopup().toggle();
+        },
+        select: function(value) {
+            value = this.value(value);
+            this.trigger("select", { value: value });
+        },
+        value: function(value) {
+            if (value !== undefined) {
+                value = parse(value);
+                this._value = value;
+                this._content.find(".k-selected-color").css(
+                    BACKGROUNDCOLOR,
+                    value ? value.toCssRgba() : "transparent"
+                );
+            }
+            return this._value;
+        },
+        keydown: function(ev) {
+            var key = ev.keyCode;
+            if (this._getPopup().visible()) {
+                if (key == KEYS.ESC) {
+                    this.close();
+                } else {
+                    this._selector.keydown(ev);
+                }
+            }
+            else if (key == KEYS.ENTER || key == KEYS.DOWN) {
+                this.open();
+                ev.preventDefault();
+            }
+        },
+        _getPopup: function() {
+            var that = this, p = that._popup;
+            if (!p) {
+                var ctor = {
+                    simple : ColorSelectorSimple,
+                    hsv    : ColorSelectorHSV
+                }[this.options.selector];
+                var sel = this._selector = new ctor(document.body, {
+                    palette : that.options.palette,
+                    value   : that._value
+                });
+                that._popup = p = sel.element.kendoPopup({
+                    anchor       : that._content,
+                    toggleTarget : that._content.find(".k-icon")
+                }).data("kendoPopup");
+                sel.bind("change", function(ev){
+                    p.close();
+                    that.select(ev.value);
+                });
+                p.bind("close", function(ev){
+                    that._content.focus();
+                });
+            }
+            return p;
+        }
+    });
+
+    var HIDDEN = null;
+    function getHiddenContainer() {
+        if (!HIDDEN)
+            HIDDEN = $("<div style='visibility:hidden;left:-15000px;top:-15000px'>").appendTo("document");
+        return HIDDEN;
+    };
+
+    ui.plugin(ColorPicker);
 
 })(jQuery, parseInt);
