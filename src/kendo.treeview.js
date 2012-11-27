@@ -1712,22 +1712,23 @@ kendo_module({
 
         dragend: function (e) {
             var that = this,
-            treeview = that.treeview,
-            dropPosition = "over",
-            sourceNode = that.sourceNode,
-            destinationNode,
-            dropHint = that.dropHint,
-            valid, dropPrevented;
+                treeview = that.treeview,
+                dropPosition = "over",
+                sourceNode = that.sourceNode,
+                destinationNode,
+                dropHint = that.dropHint,
+                dropTarget = that.dropTarget,
+                valid, dropPrevented;
 
             if (dropHint.css(VISIBILITY) == "visible") {
                 dropPosition = dropHint.prevAll(".k-in").length > 0 ? "after" : "before";
                 destinationNode = dropHint.closest(NODE);
-            } else if (that.dropTarget) {
-                destinationNode = that.dropTarget.closest(NODE);
+            } else if (dropTarget) {
+                destinationNode = dropTarget.closest(NODE);
 
+                // moving node to root element
                 if (!destinationNode.length) {
-                    // moving node to root element
-                    destinationNode = that.dropTarget;
+                    destinationNode = dropTarget.closest(".k-treeview");
                 }
             }
 
@@ -1738,7 +1739,7 @@ kendo_module({
                 destinationNode: destinationNode[0],
                 valid: valid,
                 setValid: function(newValid) { valid = newValid; },
-                dropTarget: that.dropTarget[0],
+                dropTarget: dropTarget[0],
                 dropPosition: dropPosition
             });
 
