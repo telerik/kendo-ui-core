@@ -388,7 +388,7 @@ kendo_module({
         options = options || {};
         themeOptions = themeOptions || {};
 
-        var naviOptions = deepExtend({}, options.navigator, themeOptions.navigator),
+        var naviOptions = deepExtend({}, themeOptions.navigator, options.navigator),
             panes = options.panes = [].concat(options.panes);
 
         panes.push(deepExtend(
