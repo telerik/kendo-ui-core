@@ -677,7 +677,9 @@ kendo_module({
                     .remove();
             }
 
-            tabs.eq(activeItem).addClass(TABONTOP);
+            if (activeItem >= 0) {
+                tabs.eq(activeItem).addClass(TABONTOP);
+            }
 
             that.contentElements = that.wrapper.children("div");
 
