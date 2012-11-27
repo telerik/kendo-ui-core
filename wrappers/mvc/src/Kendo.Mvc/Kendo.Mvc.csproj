@@ -300,6 +300,7 @@
     <Compile Include="UI\Chart\Serialization\ChartLabelsBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLineSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisLabelsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartOHLCAggregatesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPieLabelsSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPieSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartTooltipSerializer.cs" />
@@ -316,7 +317,6 @@
     <Compile Include="UI\Chart\Serialization\ChartBubbleSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartNegativeValueSettingsSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartOHLCSeriesSerializer.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartOHLCAggregatesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartCandlestickSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPaneSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisBaseUnitStepsSerializer.cs" />

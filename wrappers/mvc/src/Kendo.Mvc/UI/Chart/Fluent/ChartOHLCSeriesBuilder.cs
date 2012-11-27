@@ -31,11 +31,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
-        ///             .Series(series => series.OHLC(s => s.Sales).Aggregates(ChartSeriesAggregate.Avg))
+        ///             .Series(series => series.OHLC(s => s.Sales).Aggregate(ChartSeriesAggregate.Avg))
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartOHLCSeriesBuilder<T> Aggregates(
+        public ChartOHLCSeriesBuilder<T> Aggregate(
             ChartSeriesAggregate? open = null,
             ChartSeriesAggregate? high = null,
             ChartSeriesAggregate? low = null,

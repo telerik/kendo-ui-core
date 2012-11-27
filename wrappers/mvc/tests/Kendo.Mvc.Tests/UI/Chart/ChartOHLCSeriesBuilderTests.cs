@@ -19,14 +19,14 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Aggregate_should_set_Aggregate()
         {
-            builder.Aggregates(ChartSeriesAggregate.Max);
+            builder.Aggregate(ChartSeriesAggregate.Max);
             series.Aggregates.Open.ShouldEqual(ChartSeriesAggregate.Max);
         }
 
         [Fact]
         public void Aggregate_should_return_builder()
         {
-            builder.Aggregates(ChartSeriesAggregate.Max).ShouldBeSameAs(builder);
+            builder.Aggregate(ChartSeriesAggregate.Max).ShouldBeSameAs(builder);
         }
 
         [Fact]
