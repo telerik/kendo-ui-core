@@ -3,7 +3,7 @@ kendo_module({
     name: "Color tools",
     category: "web",
     description: "Color selection widgets",
-    depends: [ "core" ]
+    depends: [ "core", "popup" ]
 });
 
 (function($, parseInt, undefined){
@@ -12,11 +12,96 @@ kendo_module({
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var KEYS = kendo.keys;
-    var CHANGE = "change";
     var ARIALABELLEDBY = "aria-labelledby";
     var BACKGROUNDCOLOR = "background-color";
     var UNSELECTABLE = "unselectable";
     var ITEMSELECTEDCLASS = "k-state-selected";
+    var SIMPLEPALETTE = "000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7";
+
+    var ColorPicker = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+            Widget.fn.init.call(that, element, options);
+            options = that.options;
+            element = that.element;
+            var value = parse(options.value);
+            that._value = value;
+            var content = that._content = $(that._template({ value: value }));
+            element.hide().after(content);
+
+            content.attr("tabIndex", 0)
+                .keydown($.proxy(that.keydown, that))
+                .on("click", ".k-icon", $.proxy(that.open, that));
+        },
+        _template: kendo.template
+        ('<div class="k-widget k-colorpicker">' +
+           '<span class="k-selected-color"></span>' +
+           '<span class="k-icon k-i-arrow-s"></span>' +
+         '</div>'),
+        options: {
+            name    : "ColorPicker",
+            palette : SIMPLEPALETTE,
+            value   : null
+        },
+        events: [ "change", "select" ],
+        open: function() {
+            this._getPopup().open();
+            this._selector.select(this.value(), true);
+        },
+        close: function() {
+            this._getPopup().close();
+        },
+        toggle: function() {
+            this._getPopup().toggle();
+        },
+        select: function(value) {
+            value = this.value(value);
+            this.trigger("select", { value: value });
+        },
+        value: function(value) {
+            if (value !== undefined) {
+                value = parse(value);
+                this._value = value;
+                this._content.find(".k-selected-color").css(
+                    BACKGROUNDCOLOR,
+                    value ? value.toCssRgba() : "transparent"
+                );
+            }
+            return this._value;
+        },
+        keydown: function(ev) {
+            var key = ev.keyCode;
+            if (this._getPopup().visible()) {
+                if (key == KEYS.ESC) {
+                    this.close();
+                } else {
+                    this._selector.keydown(ev);
+                }
+            }
+            else if (key == KEYS.ENTER || key == KEYS.DOWN) {
+                this.open();
+                ev.preventDefault();
+            }
+        },
+        _getPopup: function() {
+            var that = this, p = that._popup;
+            if (!p) {
+                var sel = this._selector = new ColorSelectorSimple(null, {
+                    palette : that.options.palette,
+                    value   : that._value
+                });
+                that._popup = p = sel.element.kendoPopup({
+                    anchor       : that._content,
+                    toggleTarget : that._content.find(".k-icon")
+                }).data("kendoPopup");
+                sel.bind("change", function(ev){
+                    p.close();
+                    that.select(ev.value);
+                });
+            }
+            return p;
+        }
+    });
 
     var ColorSelectorBase = Widget.extend({
         init: function(element, options) {
@@ -33,20 +118,23 @@ kendo_module({
         options: {
             value : null
         },
-        events: [ CHANGE ],
+        events: [ "change" ],
         value: function(v) {
             var that = this;
             if (v === undefined) return that._value;
             v = parse(v);
             that._value = v;
         },
-        select: function(color) {
+        select: function(color, nohooks) {
             color = parse(color);
             this.value(color);
-            this.trigger(CHANGE, { value: this.value() });
+            if (!nohooks)
+                this.trigger("change", { value: this.value() });
             return color;
         }
     });
+
+    ui.plugin(ColorPicker);
 
     var ColorSelectorSimple = ColorSelectorBase.extend({
         init: function(element, options) {
@@ -72,7 +160,7 @@ kendo_module({
                 })
                 .find("*").attr(UNSELECTABLE, "on").end();
 
-            element.html(content);
+            if (element) element.html(content);
             that.element = element = content;
 
             element
@@ -123,9 +211,9 @@ kendo_module({
                     .attr("aria-selected", true);
             }
         },
-        select: function(color) {
+        select: function(color, nohooks) {
             var that = this;
-            color = ColorSelectorBase.fn.select.call(that, color);
+            color = ColorSelectorBase.fn.select.call(that, color, nohooks);
             that.element.find(".k-item." + ITEMSELECTEDCLASS)
                 .removeClass(ITEMSELECTEDCLASS)
                 .removeAttr("aria-selected");
@@ -148,7 +236,7 @@ kendo_module({
         },
         options: {
             name    : "ColorSelectorSimple",
-            palette : "000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7"
+            palette : SIMPLEPALETTE
         },
         _template: kendo.template
         ('<div class="k-colorpicker-popup">' +
@@ -179,8 +267,13 @@ kendo_module({
         toHex: function() { return this.toBytes().toHex() },
         toBytes: function() { return this },
         toString: function() { return "#" + this.toHex() },
+        toCssRgba: function() {
+            var rgb = this.toBytes();
+            return "rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + "," + this.a + ")";
+        },
         equals: function(c) { return c === this || c !== null && this.toHex() == parse(c).toHex() },
         diff: function(c2) {
+            if (c2 == null) return NaN;
             var c1 = this.toBytes(), c2 = c2.toBytes();
             return Math.sqrt(Math.pow((c1.r - c2.r) * 0.30, 2)
                              + Math.pow((c1.g - c2.g) * 0.59, 2)

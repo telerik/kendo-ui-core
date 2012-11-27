@@ -2485,29 +2485,36 @@ span.k-numerictextbox
 {
     display: inline-block;
     vertical-align: middle;
-}
-
-.k-colorpicker .k-tool-icon
-{
+    border: 1px solid #ccc;
+    padding: 2px;
+    .k-tool-icon {
     display: inline-block;
     vertical-align: top;
     padding: 2px 3px;
     font-size: 0;
     line-height: 0;
-}
-
-.k-colorpicker .k-selected-color
-{
-    display: block;
+    }
+    .k-selected-color {
+        font-size: 0;
+        vertical-align: top;
+        line-height: 0;
+        display: inline-block;
     height: 16px;
     width: 16px;
-}
-
-.k-colorpicker .k-icon
-{
-    margin-top: 4px;
+        border: 1px solid #ccc;
+    }
+    .k-icon {
+        display: inline-block;
+        border-style: solid;
+        border-width: 0 0 0 1px;
+        border-color: #ccc;
     vertical-align: middle;
     cursor: pointer;
+        margin-left: 2px;
+    }
+    &:focus {
+        outline: 1px dotted #000;
+    }
 }
 
 .k-colorpicker-popup

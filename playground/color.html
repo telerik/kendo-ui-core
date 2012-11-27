@@ -12,31 +12,39 @@
 
     <script src="../src/jquery.js"></script>
     <script src="../src/module.js"></script>
+    <!-- <script src="../src/kendo.fx.js"></script> -->
     <script src="../src/kendo.color.js"></script>
 
     <style type="text/css">
       html, body {
         background-color: #e0e0e0;
       }
-      #test .k-colorpicker-popup {
+      #flat .k-colorpicker-popup {
         border: 1px solid #000;
         background-color: #fff;
       }
+      
     </style>
   </head>
 
   <body>
-    <div style="padding: 3em">
-      <div id="test"></div>
+    <div style="padding: 1em">
+      <div id="flat"></div>
+    </div>
+
+    <div style="padding: 1em">
+      <input type="color" value="#ff0000" id="dropdown" />
     </div>
 
     <script>
-      window.cs = $("#test").kendoColorSelectorSimple().data("kendoColorSelectorSimple");
+      window.cs = $("#flat").kendoColorSelectorSimple().data("kendoColorSelectorSimple");
       cs.bind("change", function(ev){
         var color = ev.value.toString();
         console.log(color);
         //cs._content.css("background-color", color);
       });
+
+      $("#dropdown").kendoColorPicker();
     </script>
   </body>
 </html>
