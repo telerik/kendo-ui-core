@@ -306,6 +306,10 @@
 
                 idx = that._index(value);
                 that.select(idx > -1 ? idx : 0);
+
+                if (that.element.is(SELECT)) {
+                    that.selectedValue = that._accessor();
+                }
             } else {
                 return that.selectedValue;
             }
