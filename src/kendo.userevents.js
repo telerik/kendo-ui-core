@@ -41,7 +41,7 @@ kendo_module({
             parent = target.parent();
         }
 
-        parent.trigger($.Event(e.type, { target: target }));
+        parent.trigger($.Event(e.type, { target: target[0] }));
     }
 
     function touchDelta(touch1, touch2) {
