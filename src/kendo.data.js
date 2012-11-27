@@ -1709,27 +1709,7 @@ kendo_module({
 
             Observable.fn.init.call(that);
 
-            transport = options.transport;
-
-            if (transport) {
-                transport.read = typeof transport.read === STRING ? { url: transport.read } : transport.read;
-
-                if (options.type) {
-                    if (kendo.data.transports[options.type] && !isPlainObject(kendo.data.transports[options.type])) {
-                       that.transport = new kendo.data.transports[options.type](extend(transport, { data: data }));
-                    } else {
-                        transport = extend(true, {}, kendo.data.transports[options.type], transport);
-                    }
-
-                    options.schema = extend(true, {}, kendo.data.schemas[options.type], options.schema);
-                }
-
-                if (!that.transport) {
-                    that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
-                }
-            } else {
-                that.transport = new LocalTransport({ data: options.data });
-            }
+            that.transport = Transport.create(options, data);
 
             that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
 
@@ -2750,6 +2730,34 @@ kendo_module({
             return false;
         }
     });
+
+    var Transport = {};
+
+    Transport.create = function(options, data) {
+        var transport,
+            transportOptions = options.transport;
+
+        if (transportOptions) {
+            transportOptions.read = typeof transportOptions.read === STRING ? { url: transportOptions.read } : transportOptions.read;
+
+            if (options.type) {
+                if (kendo.data.transports[options.type] && !isPlainObject(kendo.data.transports[options.type])) {
+                    transport = new kendo.data.transports[options.type](extend(transportOptions, { data: data }));
+                } else {
+                    transportOptions = extend(true, {}, kendo.data.transports[options.type], transportOptions);
+                }
+
+                options.schema = extend(true, {}, kendo.data.schemas[options.type], options.schema);
+            }
+
+            if (!transport) {
+                transport = isFunction(transportOptions.read) ? transportOptions: new RemoteTransport(transportOptions);
+            }
+        } else {
+            transport = new LocalTransport({ data: options.data });
+        }
+        return transport;
+    };
 
     DataSource.create = function(options) {
         options = options && options.push ? { data: options } : options;
