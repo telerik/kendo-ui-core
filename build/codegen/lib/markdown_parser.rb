@@ -22,10 +22,10 @@ class CodeGen::MarkdownParser
 
         configuration = configuration_section(root)
 
-        each_section(configuration) do |field, index|
+        each_section(configuration) do |option, index|
 
-            component.add_field(:name => section_name(field),
-                                :type => field_type(field),
+            component.add_option(:name => section_name(option),
+                                :type => option_type(option),
                                 :description => section_description(index, configuration))
         end
 
@@ -87,7 +87,7 @@ class CodeGen::MarkdownParser
         element_text find_text_child(element)
     end
 
-    def field_type(element)
+    def option_type(element)
         child = element.children.find {|e| e.type == :codespan }
 
         element_text child

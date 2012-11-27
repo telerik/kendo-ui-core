@@ -1,7 +1,6 @@
 source "http://rubygems.org"
 
 gem "rake"
-gem "mocha"
 gem "debugger"
 gem "github_api"
 gem "kramdown"

@@ -5,14 +5,16 @@ module CodeGen
 end
 
 class CodeGen::Component
-    attr_reader :members, :name
+    attr_reader :members, :name, :configuration, :events
 
-    def initialize(members)
-        @name = members[:name]
-        @members = []
+    def initialize(options)
+        @name = options[:name]
+        @configuration = []
+        @events = []
+        @members = @configuration
     end
 
-    def add_field(options)
+    def add_option(options)
         name = options[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
 
         description = options[:description]
@@ -21,7 +23,8 @@ class CodeGen::Component
 
         if types
             types.split('|').each do |type|
-                @members.push CodeGen::Field.new(:name => name,
+
+                @configuration.push CodeGen::Field.new(:name => name,
                                        :type => type.strip,
                                        :description => description)
             end
@@ -30,23 +33,26 @@ class CodeGen::Component
 
     def add_event(options)
         @members.push CodeGen::Event.new(options)
+        @events.push CodeGen::Event.new(options)
     end
 
     def accept(visitor)
-        visitor.component(self)
+        visitor.component_start(self)
 
         @members.each {|f| f.accept(visitor)}
+
+        visitor.component_end(self)
     end
 
     def promote_members
-        @members.clone.each do |member|
+        @configuration.clone.each do |member|
             prefix = member.name + '.'
 
-            members = @members.find_all {|m| m.name.start_with?(prefix)}
+            members = @configuration.find_all {|m| m.name.start_with?(prefix)}
 
             next unless members.any?
 
-            @members.push promote_member_to_component(member, members)
+            @configuration.push promote_member_to_component(member, members)
         end
     end
 
@@ -55,16 +61,16 @@ class CodeGen::Component
 
         members.each do |member|
             member.name.sub!(prefix, '')
-            @members.push(member)
+            @configuration.push(member)
         end
     end
 
     private
 
     def promote_member_to_component(member, members)
-        members.each {|m| @members.delete(m)}
+        members.each {|m| @configuration.delete(m) }
 
-        @members.delete(member)
+        @configuration.delete(member)
 
         component = CodeGen::Component.new(:name => member.name)
 
@@ -75,3 +81,4 @@ class CodeGen::Component
         component
     end
 end
+
