@@ -185,14 +185,14 @@ kendo_module({
                 min: 0,
                 max: 359,
                 tickPlacement: "none",
-                showButtons: false,
+                showButtons: false
             }).data("kendoSlider");
 
             var opSlider = that._opacitySlider = $(".transparency-slider", content).kendoSlider({
                 min: 0,
                 max: 100,
                 tickPlacement: "none",
-                showButtons: false,
+                showButtons: false
             }).data("kendoSlider");
 
             var hsvRect = that._hsvRect = $(".k-hsv-rectangle", content);
@@ -255,6 +255,10 @@ kendo_module({
         events: [
             "change", "slide"
         ],
+        select: function(color, nohooks) {
+            color = ColorSelectorBase.fn.select.call(this, color, nohooks);
+            this._updateUI(color);
+        },
         _getHSV: function(h, s, v, a) {
             var handle = this._hsvHandle;
             var rect = this._hsvRect;
@@ -318,7 +322,7 @@ kendo_module({
         toString: function() { return "#" + this.toHex(); },
         toCssRgba: function() {
             var rgb = this.toBytes();
-            return "rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + "," + this.a + ")";
+            return "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", " + this.a + ")";
         },
         equals: function(c) { return c === this || c !== null && this.toHex() == parse(c).toHex(); },
         diff: function(c2) {
@@ -571,13 +575,6 @@ kendo_module({
             return p;
         }
     });
-
-    var HIDDEN = null;
-    function getHiddenContainer() {
-        if (!HIDDEN)
-            HIDDEN = $("<div style='visibility:hidden;left:-15000px;top:-15000px'>").appendTo("document");
-        return HIDDEN;
-    };
 
     ui.plugin(ColorPicker);
 
