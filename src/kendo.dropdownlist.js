@@ -65,6 +65,7 @@ kendo_module({
             that._cascade();
 
             that.selectedIndex = -1;
+            that.selectedValue = options.value || that._accessor();
 
             if (index !== undefined) {
                 options.index = index;
@@ -279,6 +280,8 @@ kendo_module({
                 that._select(li);
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
+
+                that.trigger("selected");
             }
         },
 
@@ -301,6 +304,9 @@ kendo_module({
                     value = value.toString();
                 }
 
+                that.selectedValue = value;
+
+                //TODO: simplify
                 hasValue = value || (that.options.optionLabel && !that.element[0].disabled && value === "");
 
                 if (hasValue && that._valueOnFetch(value)) {
@@ -308,10 +314,9 @@ kendo_module({
                 }
 
                 idx = that._index(value);
-
                 that.select(idx > -1 ? idx : 0);
             } else {
-                return that._accessor();
+                return that.selectedValue;
             }
         },
 
@@ -442,6 +447,8 @@ kendo_module({
 
                     that.text(text);
                     that._accessor(value !== undefined ? value : text, idx);
+                    that.selectedValue = that._accessor(); //update value
+
                     that.current(li.addClass(SELECTED));
 
                     if (that._optionID) {

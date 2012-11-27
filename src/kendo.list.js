@@ -22,7 +22,6 @@ kendo_module({
         OPEN = "open",
         CLOSE = "close",
         SELECT = "select",
-        SELECTED = "selected",
         REQUESTSTART = "requestStart",
         REQUESTEND = "requestEnd",
         WIDTH = "width",
@@ -508,7 +507,6 @@ kendo_module({
             }, 100);
         },
 
-        //TODO: check whehter this is called when error occurs
         _requestEnd: function() {
             this._request = false;
         },
@@ -644,27 +642,30 @@ kendo_module({
             var that = this,
                 options = that.options;
 
-            value = value || options.value || that.value() || that._deferredValue;
+            value = value || that.value();
 
             if (value) {
                 that.value(value);
             } else {
                 that.select(options.index);
             }
-
-            that.trigger(SELECTED);
         },
 
         _valueOnFetch: function(value) {
             var that = this;
 
-            that._deferredValue = value;
+            if (that.options.cascadeFrom) {
+                return;
+            }
 
-            if (!that._request && !that._fetch && !that.ul[0].firstChild) {
+            if (that._request) {
+                return true;
+            }
+
+            if (!that._fetch && !that.ul[0].firstChild) {
                 that.dataSource.one(CHANGE, function() {
                     that.value(value);
                     that._fetch = false;
-                    that.trigger(SELECTED);
                 });
 
                 that._fetch = true;
@@ -771,11 +772,6 @@ kendo_module({
                 change = function() {
                     var value = that.value();
 
-                    if (!value && that._deferredValue) {
-                        value = that._deferredValue;
-                        that._deferredValue = undefined;
-                    }
-
                     if (value) {
                         that.value(value);
                         if (!that.dataSource.view()[0] || that.selectedIndex == -1) {
@@ -784,7 +780,7 @@ kendo_module({
                     } else {
                         that.select(options.index);
                     }
-                    that.trigger(SELECTED);
+
                     that.enable();
                 };
                 select = function() {
@@ -817,12 +813,12 @@ kendo_module({
                           select();
                           that.trigger("cascade");
                       })
-                      .bind(SELECTED, function() {
+                      .bind("selected", function() {
                           select();
                       });
 
                 //refresh was called
-                if (parent._bound !== undefined) {
+                if (parent._bound) {
                     select();
                 } else if (!parent.value()) {
                     that.enable(false);
