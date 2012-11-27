@@ -1,7 +1,7 @@
 module CodeGen
 end
 
-class CodeGen::Field
+class CodeGen::Option
     attr_reader :name, :description, :type
 
     def initialize(options)
@@ -10,7 +10,4 @@ class CodeGen::Field
         @type = options[:type]
     end
 
-    def accept(visitor)
-        visitor.field(self)
-    end
 end

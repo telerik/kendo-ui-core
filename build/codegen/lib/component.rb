@@ -1,4 +1,4 @@
-require 'field'
+require 'option'
 require 'event'
 
 module CodeGen
@@ -24,7 +24,7 @@ class CodeGen::Component
         if types
             types.split('|').each do |type|
 
-                @configuration.push CodeGen::Field.new(:name => name,
+                @configuration.push CodeGen::Option.new(:name => name,
                                        :type => type.strip,
                                        :description => description)
             end
