@@ -496,7 +496,7 @@
                 element = that.tabGroup.children().get(element);
             }
 
-            element = that.tabGroup.children(element);
+            element = that.tabGroup.find(element);
             $(element).each(function (index, item) {
                 item = $(item);
                 if (!item.hasClass(ACTIVESTATE) && !that.trigger(SELECT, { item: item[0], contentElement: that.contentHolder(item.index())[0] })) {
