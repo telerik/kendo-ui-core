@@ -7,12 +7,6 @@
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript" src="../src/kendo.userevents.js"></script>
-        <script type="text/javascript" src="../src/kendo.draganddrop.js"></script>
-        <script type="text/javascript" src="../src/kendo.slider.js"></script>
-        <link href="../styles/web/kendo.common.css" rel="stylesheet"/>
-        <link href="../styles/web/kendo.default.less" rel="stylesheet/less" type="text/css"/>
-        <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
         <style type="text/css" media="screen">
             .anchor
             {
@@ -36,22 +30,44 @@
     </head>
     <body>
         <button>open</button>
+        <div style="margin:50px; background:yellow;width:500px; height:500px;">
             <div class="anchor"></div>
-        <div id="popup" class="popup">
-            <input id="input" />
         </div>
+        <div id="popup" class="popup">
+            <input id="input"/>
+        </div>
+        <div id="popup2" class="popup">popup<input/></div>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                $("#popup").kendoPopup({
+                $("#popup").kendoPopup( {
                     toggleTarget: $("button"),
                     toggleEvent: "click",
                     origin: "bottom left",
                     position: "top left",
                     anchor: ".anchor",
-                    collision: "flip"
+                    collision: "flip",
+                    animation: {
+                        open: {
+                            effects: "zoom:in"
+                        },
+                        close: {
+                            effects: "fade:out",
+                            duration: 1000
+                        }
+                    },
+                    open: function () {
+                        this.element.css("opacity", 1);
+                    }
                 });
 
-                $("#input").kendoSlider({ tooltip: {visible: false} });
+                $("#popup2").kendoPopup({
+                    anchor: $("#input")
+                });
+
+                $("#input").focus(function() {
+                    $("#popup2").data("kendoPopup").open();
+                });
+
             });
         </script>
     </body>
