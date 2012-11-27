@@ -650,13 +650,15 @@ kendo_module({
             }
         },
 
-        _valueOnFetch: function(value) {
+        _fetchItems: function(value) {
             var that = this;
 
+            //Do not fetch if combobox will cascade
             if (that.options.cascadeFrom) {
                 return;
             }
 
+            //if request is started avoid datasource.fetch
             if (that._request) {
                 return true;
             }
