@@ -566,7 +566,7 @@ kendo_module({
                          parseInt(tooltip.css("margin-top"), 10) +
                          parseInt(tooltip.css("border-top-width"), 10) +
                          tooltip.height() / 2
-                })
+                });
 
             hint.element.css("visibility", "visible");
         },
