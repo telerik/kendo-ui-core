@@ -98,6 +98,9 @@ kendo_module({
                     p.close();
                     that.select(ev.value);
                 });
+                p.bind("close", function(ev){
+                    that._content.focus();
+                });
             }
             return p;
         }
@@ -168,12 +171,12 @@ kendo_module({
                 .keydown($.proxy(that.keydown, that));
         },
         keydown: function(ev) {
-            function preventDefault(){ ev.preventDefault() };
-            var selected
-            , that = this
-            , el = that.element
-            , all = el.find(".k-item")
-            , init = el.find(".k-item." + ITEMSELECTEDCLASS).get(0);
+            function preventDefault(){ ev.preventDefault(); }
+            var selected;
+            var that = this;
+            var el = that.element;
+            var all = el.find(".k-item");
+            var init = el.find(".k-item." + ITEMSELECTEDCLASS).get(0);
 
             switch (ev.keyCode) {
               case KEYS.LEFT:
@@ -224,7 +227,7 @@ kendo_module({
                     el = this.parentNode;
                 } else {
                     var d = c.diff(color);
-                    if (min == null || d < min) {
+                    if (min === null || d < min) {
                         min = d;
                         best = this.parentNode;
                     }
@@ -262,22 +265,23 @@ kendo_module({
     }
 
     var Color = Class.extend({
-        toHSV: function() { return this },
-        toRGB: function() { return this },
-        toHex: function() { return this.toBytes().toHex() },
-        toBytes: function() { return this },
-        toString: function() { return "#" + this.toHex() },
+        toHSV: function() { return this; },
+        toRGB: function() { return this; },
+        toHex: function() { return this.toBytes().toHex(); },
+        toBytes: function() { return this; },
+        toString: function() { return "#" + this.toHex(); },
         toCssRgba: function() {
             var rgb = this.toBytes();
             return "rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + "," + this.a + ")";
         },
-        equals: function(c) { return c === this || c !== null && this.toHex() == parse(c).toHex() },
+        equals: function(c) { return c === this || c !== null && this.toHex() == parse(c).toHex(); },
         diff: function(c2) {
-            if (c2 == null) return NaN;
-            var c1 = this.toBytes(), c2 = c2.toBytes();
-            return Math.sqrt(Math.pow((c1.r - c2.r) * 0.30, 2)
-                             + Math.pow((c1.g - c2.g) * 0.59, 2)
-                             + Math.pow((c1.b - c2.b) * 0.11, 2));
+            if (c2 === null) return NaN;
+            var c1 = this.toBytes();
+            c2 = c2.toBytes();
+            return Math.sqrt(Math.pow((c1.r - c2.r) * 0.30, 2) +
+                             Math.pow((c1.g - c2.g) * 0.59, 2) +
+                             Math.pow((c1.b - c2.b) * 0.11, 2));
         }
     });
 
@@ -292,7 +296,7 @@ kendo_module({
             max = Math.max(r, g, b);
             v = max;
             delta = max - min;
-            if (max != 0) {
+            if (max !== 0) {
                 s = delta / max;
                 if (r == max)
                     h = (g - b) / delta;
@@ -336,7 +340,7 @@ kendo_module({
         toRGB: function() {
             var h = this.h, s = this.s, v = this.v;
             var i, r, g, b, f, p, q, t;
-            if (s == 0)
+            if (s === 0)
                 r = g = b = v;
             else {
                 h /= 60;
@@ -417,6 +421,6 @@ kendo_module({
             pos %= n;
         }
         return array[pos];
-    };
+    }
 
 })(jQuery, parseInt);
