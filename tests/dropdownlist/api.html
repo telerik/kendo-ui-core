@@ -79,15 +79,7 @@
 
                dropdownlist.value(2);
 
-               equal(dropdownlist.calls("_accessor"), 2); //call select and set _old value
-           });
-
-           test("value() should call _accessor", function() {
-               stub(dropdownlist, "_accessor");
-
-               dropdownlist.value();
-
-               equal(dropdownlist.calls("_accessor"), 1);
+               equal(dropdownlist.calls("_accessor"), 3); //init() andd call select and set _old value
            });
 
            test("value should update the selectedIndex", function() {
@@ -130,7 +122,7 @@
 
                 dropdownlist.select(1);
 
-                equal(dropdownlist.calls("_accessor"), 2);
+                equal(dropdownlist.calls("_accessor"), 3);
             });
 
             test("select() should return index", function() {
