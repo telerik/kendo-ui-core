@@ -434,7 +434,7 @@
 
                 that.selectedValue = value;
 
-                if (!that._open && value && that._valueOnFetch(value)) {
+                if (!that._open && value && that._fetchItems(value)) {
                     return;
                 }
 

@@ -219,6 +219,7 @@
                 }
 
                 that._options(data, optionLabel);
+                that.selectedValue = that._accessor();
             }
 
             if (that._open) {
@@ -270,7 +271,7 @@
                 return that.selectedIndex;
             } else {
                 that._select(li);
-                that._old = that._accessor();
+                that._old = that.selectedValue;
                 that._oldIndex = that.selectedIndex;
 
                 that.trigger("selected");
@@ -298,10 +299,8 @@
 
                 that.selectedValue = value;
 
-                //TODO: simplify
-                hasValue = value || (that.options.optionLabel && !that.element[0].disabled && value === "");
-
-                if (hasValue && that._valueOnFetch(value)) {
+                hasValue = value || (that.options.optionLabel && value === "");
+                if (hasValue && that._fetchItems(value)) {
                     return;
                 }
 
@@ -439,7 +438,7 @@
 
                     that.text(text);
                     that._accessor(value !== undefined ? value : text, idx);
-                    that.selectedValue = that._accessor(); //update value
+                    that.selectedValue = that._accessor();
 
                     that.current(li.addClass(SELECTED));
 
