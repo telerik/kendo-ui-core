@@ -202,8 +202,8 @@ kendo_module({
                     });
             }
 
-            var selectedItems = that.wrapper.find("li." + ACTIVESTATE),
-                content = $(that.contentElement(selectedItems.parent().children().index(selectedItems)));
+            var selectedItems = that.tabGroup.children("li." + ACTIVESTATE),
+                content = that.contentHolder(selectedItems.index());
 
             if (content.length > 0 && content[0].childNodes.length === 0) {
                 that.activateTab(selectedItems.eq(0));
@@ -497,17 +497,17 @@ kendo_module({
             var that = this;
 
             if (arguments.length === 0) {
-                return that.tabGroup.find("li." + ACTIVESTATE);
+                return that.tabGroup.children("li." + ACTIVESTATE);
             }
 
             if (!isNaN(element)) {
                 element = that.tabGroup.children().get(element);
             }
 
-            element = that.tabGroup.find(element);
+            element = that.tabGroup.children(element);
             $(element).each(function (index, item) {
                 item = $(item);
-                if (!item.hasClass(ACTIVESTATE) && !that.trigger(SELECT, { item: item[0], contentElement: that.contentElement(item.index()) })) {
+                if (!item.hasClass(ACTIVESTATE) && !that.trigger(SELECT, { item: item[0], contentElement: that.contentHolder(item.index())[0] })) {
                     that.activateTab(item);
                 }
             });
@@ -534,7 +534,7 @@ kendo_module({
             element.each(function () {
                 var item = $(this),
                     contentUrl = item.find("." + LINK).data(CONTENTURL),
-                    content = $(that.contentElement(item.index()));
+                    content = that.contentHolder(item.index());
 
                 if (contentUrl) {
                     that.ajaxRequest(item, content, null, contentUrl);
@@ -734,7 +734,7 @@ kendo_module({
                 link = item.find("." + LINK),
                 href = link.attr(HREF),
                 collapse = that.options.collapsible,
-                content = $(that.contentElement(item.index())),
+                contentHolder = that.contentHolder(item.index()),
                 prevent, isAnchor;
 
             if (item.closest(".k-widget")[0] != that.wrapper[0]) {
@@ -749,7 +749,7 @@ kendo_module({
                 return;
             }
 
-            if (that.trigger(SELECT, { item: item[0], contentElement: content[0] })) {
+            if (that.trigger(SELECT, { item: item[0], contentElement: contentHolder[0] })) {
                 return true;
             }
 
@@ -840,9 +840,10 @@ kendo_module({
             }
 
             var visibleContents = contentAnimators.filter("." + ACTIVESTATE),
-                content = $(that.contentElement(itemIndex));
+                contentHolder = that.contentHolder(itemIndex),
+                contentElement = contentHolder.closest(".k-content");
 
-            if (content.length === 0) {
+            if (contentHolder.length === 0) {
                 visibleContents
                     .removeClass( ACTIVESTATE )
                     .attr("aria-hidden", true)
@@ -853,7 +854,7 @@ kendo_module({
 
             item.attr("data-animating", true);
 
-            var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || false) && content.is(EMPTY),
+            var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || false) && contentHolder.is(EMPTY),
                 showContentElement = function () {
                     oldTab.removeClass(TABONTOP);
                     item.addClass(TABONTOP) // change these directly to bring the tab on top.
@@ -871,14 +872,13 @@ kendo_module({
 
                     that._current(item);
 
-                    content
-                        .closest(".k-content")
+                    contentElement
                         .addClass(ACTIVESTATE)
                         .removeAttr("aria-hidden")
                         .kendoStop(true, true)
                         .attr("aria-expanded", true)
                         .kendoAnimate( extend({ init: function () {
-                            that.trigger(ACTIVATE, { item: item[0], contentElement: content[0] });
+                            that.trigger(ACTIVATE, { item: item[0], contentElement: contentHolder[0] });
                         } }, animation, { complete: function () { item.removeAttr("data-animating"); } } ) );
                 },
                 showContent = function() {
@@ -886,7 +886,7 @@ kendo_module({
                         showContentElement();
                         that.trigger("change");
                     } else {
-                        that.ajaxRequest(item, content, function () {
+                        that.ajaxRequest(item, contentHolder, function () {
                             showContentElement();
                             that.trigger("change");
                         });
@@ -929,6 +929,12 @@ kendo_module({
             }
 
             return undefined;
+        },
+
+        contentHolder: function (itemIndex) {
+            var contentElement = $(this.contentElement(itemIndex));
+
+            return kendo.support.touch ? contentElement.children(".km-scroll-container") : contentElement;
         },
 
         ajaxRequest: function (element, content, complete, url) {
