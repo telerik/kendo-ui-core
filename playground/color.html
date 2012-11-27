@@ -23,7 +23,6 @@
         border: 1px solid #000;
         background-color: #fff;
       }
-      
     </style>
   </head>
 
@@ -36,15 +35,45 @@
       <input type="color" value="#ff0000" id="dropdown" />
     </div>
 
+    <div style="padding: 1em">
+      <div class="k-colorpicker-hsv" style="border: 1px solid #888">
+        <div class="k-hsv-rectangle">
+          <div class="hsv-gradient" id="color"></div>
+        </div>
+        <input class="hue-slider" />
+        <input class="transparency-slider" />
+      </div>
+    </div>
+
     <script>
       window.cs = $("#flat").kendoColorSelectorSimple().data("kendoColorSelectorSimple");
       cs.bind("change", function(ev){
         var color = ev.value.toString();
         console.log(color);
-        //cs._content.css("background-color", color);
+        $("#color").css("background-color", color);
       });
 
       $("#dropdown").kendoColorPicker();
+
+      $(".hue-slider").kendoSlider({
+        min: 0,
+        max: 359,
+        tickPlacement: "none",
+        showButtons: false
+      }).data("kendoSlider").bind([ "slide", "change" ], function(ev){
+        var c = new kendo.ColorHSV(ev.value, 1, 1, 1).toString();
+        $("#color").css("background-color", c);
+        $(".transparency-slider .k-slider-track").css("background-color", c);
+      });
+
+      $(".transparency-slider").kendoSlider({
+        min: 0,
+        max: 100,
+        tickPlacement: "none",
+        showButtons: false
+      }).data("kendoSlider").bind("change", function(ev){
+        console.log(ev.value);
+      });
     </script>
   </body>
 </html>

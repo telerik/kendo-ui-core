@@ -3,7 +3,7 @@ kendo_module({
     name: "Color tools",
     category: "web",
     description: "Color selection widgets",
-    depends: [ "core", "popup" ]
+    depends: [ "core", "popup", "slider" ]
 });
 
 (function($, parseInt, undefined){
@@ -319,6 +319,9 @@ kendo_module({
     });
 
     var ColorBytes = ColorRGB.extend({
+        init: function(r, g, b, a) {
+            this.r = Math.round(r); this.g = Math.round(g); this.b = Math.round(b); this.a = a;
+        },
         toRGB: function() {
             return new ColorRGB(this.r / 255, this.g / 255, this.b / 255, this.a);
         },
@@ -422,5 +425,10 @@ kendo_module({
         }
         return array[pos];
     }
+
+    kendo.Color = Color;
+    kendo.ColorRGB = ColorRGB;
+    kendo.ColorHSV = ColorHSV;
+    kendo.ColorBytes = ColorBytes;
 
 })(jQuery, parseInt);
