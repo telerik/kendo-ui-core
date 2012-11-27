@@ -33,7 +33,7 @@
             parent = target.parent();
         }
 
-        parent.trigger($.Event(e.type, { target: target[0] }));
+        parent.trigger($.Event(e.type, { target: target }));
     }
 
     function touchDelta(touch1, touch2) {
