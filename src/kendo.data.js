@@ -1690,22 +1690,20 @@ kendo_module({
 
             options = that.options = extend({}, that.options, options);
 
-            extend(that, {
-                _map: {},
-                _prefetch: {},
-                _data: [],
-                _ranges: [],
-                _view: [],
-                _pristine: [],
-                _destroyed: [],
-                _pageSize: options.pageSize,
-                _page: options.page  || (options.pageSize ? 1 : undefined),
-                _sort: normalizeSort(options.sort),
-                _filter: normalizeFilter(options.filter),
-                _group: normalizeGroup(options.group),
-                _aggregate: options.aggregate,
-                _total: options.total
-            });
+            that._map = {};
+            that._prefetch = {};
+            that._data = [];
+            that._ranges = [];
+            that._view = [];
+            that._pristine = [];
+            that._destroyed = [];
+            that._pageSize = options.pageSize;
+            that._page = options.page  || (options.pageSize ? 1 : undefined);
+            that._sort = normalizeSort(options.sort);
+            that._filter = normalizeFilter(options.filter);
+            that._group = normalizeGroup(options.group);
+            that._aggregate = options.aggregate;
+            that._total = options.total;
 
             Observable.fn.init.call(that);
 
