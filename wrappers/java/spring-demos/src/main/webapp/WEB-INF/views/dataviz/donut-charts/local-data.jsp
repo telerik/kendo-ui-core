@@ -16,7 +16,7 @@
              <kendo:chart-series>
                 <kendo:chart-seriesItem type="donut" field="percentage" categoryField="source" explodeField="explode" />
              </kendo:chart-series>
-             <kendo:chart-tooltip visible="true" template="${ category } - ${ value }%" />
+             <kendo:chart-tooltip visible="true" template="#= category # - #= value #%" />
          </kendo:chart>
      </div>
 <demo:footer />
