@@ -89,7 +89,7 @@
             that._aria();
 
             that._oldIndex = that.selectedIndex = -1;
-            that._old = that.value();
+            that.selectedValue = that._old = options.value || that._accessor();
 
             if (options.autoBind) {
                 that._filterSource();
@@ -240,8 +240,8 @@
 
             if (that.element.is(SELECT)) {
                 if (state === STATE_REBIND) {
-                    value = that.value();
                     that._state = "";
+                    value = that.selectedValue;
                 }
 
                 custom = that._option;
@@ -250,6 +250,8 @@
 
                 if (custom && custom[0].selected) {
                     that._custom(custom.val());
+                } else {
+                    that.selectedValue = value || that._accessor();
                 }
             }
 
@@ -264,7 +266,7 @@
             }
 
             if (state !== STATE_FILTER && !that._fetch) {
-                that._selectItem(value);
+                that._selectItem();
             }
 
             if (that._open) {
@@ -299,6 +301,8 @@
                 that._select(li);
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
+
+                that.trigger("selected");
             }
         },
 
@@ -428,6 +432,8 @@
                     value = value.toString();
                 }
 
+                that.selectedValue = value;
+
                 if (!that._open && value && that._valueOnFetch(value)) {
                     return;
                 }
@@ -446,7 +452,7 @@
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
             } else {
-                return that._accessor();
+                return that.selectedValue;
             }
         },
 
@@ -480,6 +486,7 @@
             } else {
                 element.val(value);
             }
+            that.selectedValue = value;
         },
 
         _filter: function(word) {
@@ -688,6 +695,7 @@
 
                 that._prev = that.input[0].value = text;
                 that._accessor(value !== undefined ? value : text, idx);
+                that.selectedValue = that._accessor();
                 that._placeholder();
 
                 if (that._optionID) {

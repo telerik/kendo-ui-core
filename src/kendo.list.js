@@ -630,11 +630,10 @@
             return pressed;
         },
 
-        _selectItem: function(value) {
+        _selectItem: function() {
             var that = this,
-                options = that.options;
-
-            value = value || that.value();
+                options = that.options,
+                value = that.value() || options.value;
 
             if (value) {
                 that.value(value);

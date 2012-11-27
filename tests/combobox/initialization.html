@@ -340,21 +340,17 @@
                });
            });
 
-           test("value with space should be added to option", function() {
+           test("value with space should be added to option", 1, function() {
                var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>"),
-               combobox = new ComboBox(select, {
-                   index: 0,
-                   dataTextField: "text",
-                   dataValueField: "value",
-                   dataSource: [{text: "Foo", value: "Foo 1"}, {text: "Foo 2", value:"Foo 2"}]
-               });
-
-               setTimeout(function() {
-                   equal(combobox.value(), "Foo 1");
-                   start();
-               }, 100);
-
-               stop(1);
+                   combobox = new ComboBox(select, {
+                       index: 0,
+                       dataTextField: "text",
+                       dataValueField: "value",
+                       dataSource: [{text: "Foo", value: "Foo 1"}, {text: "Foo 2", value:"Foo 2"}],
+                       dataBound: function() {
+                           equal(this.value(), "Foo 1");
+                       }
+                   });
            });
 
            test("copy input styles to the visible input", function() {
