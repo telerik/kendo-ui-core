@@ -2723,6 +2723,8 @@ function pad(number, digits, end) {
         }
     };
 
+    var kendoJQuery = $.sub();
+
     var eventMap = {
         down: "touchstart mousedown",
         move: "mousemove touchmove",
@@ -2744,8 +2746,36 @@ function pad(number, digits, end) {
             down: "MSPointerDown",
             move: "MSPointerMove",
             up: "MSPointerUp",
-            cancel: "MSPointerCancel"
+            cancel: "MSPointerCancel MSPointerLeave"
         };
+
+        // Create MSPointerEnter/MSPointerLeave events using mouseover/out and event-time checks
+        jQuery.each({
+            MSPointerEnter: "MSPointerOver",
+            MSPointerLeave: "MSPointerOut"
+        }, function( orig, fix ) {
+            jQuery.event.special[ orig ] = {
+                delegateType: fix,
+                bindType: fix,
+
+                handle: function( event ) {
+                    var ret,
+                        target = this,
+                        related = event.relatedTarget,
+                        handleObj = event.handleObj,
+                        selector = handleObj.selector;
+
+                    // For mousenter/leave call the handler if related is outside the target.
+                    // NB: No relatedTarget if the mouse left/entered the browser window
+                    if ( !related || (related !== target && !jQuery.contains( target, related )) ) {
+                        event.type = handleObj.origType;
+                        ret = handleObj.handler.apply( this, arguments );
+                        event.type = fix;
+                    }
+                    return ret;
+                }
+            };
+        });
     }
 
 
