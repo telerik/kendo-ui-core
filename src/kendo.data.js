@@ -2050,16 +2050,16 @@ kendo_module({
 
         _params: function(data) {
             var that = this,
-            options =  extend({
-                take: that.take(),
-                skip: that.skip(),
-                page: that.page(),
-                pageSize: that.pageSize(),
-                sort: that._sort,
-                filter: that._filter,
-                group: that._group,
-                aggregate: that._aggregate
-            }, data);
+                options =  extend({
+                    take: that.take(),
+                    skip: that.skip(),
+                    page: that.page(),
+                    pageSize: that.pageSize(),
+                    sort: that._sort,
+                    filter: that._filter,
+                    group: that._group,
+                    aggregate: that._aggregate
+                }, data);
 
             if (!that.options.serverPaging) {
                 delete options.take;
