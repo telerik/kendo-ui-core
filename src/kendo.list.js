@@ -748,9 +748,14 @@ kendo_module({
             }
         },
 
-        _clearSelection: function() {
+        _clearSelection: function(parent) {
             var that = this,
-                optionLabel = that.options.optionLabel;
+                optionLabel = that.options.optionLabel,
+                hasValue = parent._selectedValue || parent.value();
+
+            if (hasValue) {
+                return;
+            }
 
             that.value("");
 
@@ -777,11 +782,10 @@ kendo_module({
                 valueField = parent.options.dataValueField;
                 change = function() {
                     var value = that._selectedValue || that.value();
-
                     if (value) {
                         that.value(value);
                         if (!that.dataSource.view()[0] || that.selectedIndex == -1) {
-                            that._clearSelection();
+                            that._clearSelection(parent);
                         }
                     } else {
                         that.select(options.index);
@@ -811,7 +815,7 @@ kendo_module({
 
                     } else {
                         that.enable(false);
-                        that._clearSelection();
+                        that._clearSelection(parent);
                     }
 
                     that._triggerCascade();
