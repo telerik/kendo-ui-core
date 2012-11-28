@@ -5,13 +5,12 @@ module CodeGen
 end
 
 class CodeGen::Component
-    attr_reader :members, :name, :configuration, :events
+    attr_reader :name, :configuration, :events
 
     def initialize(options)
         @name = options[:name]
         @configuration = []
         @events = []
-        @members = @configuration
     end
 
     def add_option(options)
@@ -22,26 +21,19 @@ class CodeGen::Component
         types = options[:type]
 
         if types
+
             types.split('|').each do |type|
 
                 @configuration.push CodeGen::Option.new(:name => name,
                                        :type => type.strip,
                                        :description => description)
             end
+
         end
     end
 
     def add_event(options)
-        @members.push CodeGen::Event.new(options)
         @events.push CodeGen::Event.new(options)
-    end
-
-    def accept(visitor)
-        visitor.component_start(self)
-
-        @members.each {|f| f.accept(visitor)}
-
-        visitor.component_end(self)
     end
 
     def promote_members

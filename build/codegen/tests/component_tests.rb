@@ -27,7 +27,7 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_option(:name => 'foo')
 
-        assert_equal 0, @component.members.size
+        assert_equal 0, @component.configuration.size
     end
 
     def test_add_option_ignores_type_in_name
