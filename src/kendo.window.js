@@ -314,6 +314,7 @@
                 wrapper = that.wrapper,
                 offset, handled,
                 distance = 10,
+                isMaximized = that.options.isMaximized,
                 newWidth, newHeight;
 
             if (e.target != e.currentTarget) {
@@ -324,7 +325,7 @@
                 that._close(true);
             }
 
-            if (options.draggable && !e.ctrlKey) {
+            if (options.draggable && !e.ctrlKey && !isMaximized) {
                 offset = wrapper.offset();
 
                 if (keyCode == keys.UP) {
@@ -338,7 +339,7 @@
                 }
             }
 
-            if (options.resizable && e.ctrlKey) {
+            if (options.resizable && e.ctrlKey && !isMaximized) {
                 if (keyCode == keys.UP) {
                     handled = true;
                     newHeight = wrapper.height() - distance;
@@ -586,7 +587,8 @@
                 that.element.find("> .k-overlay").remove();
             }
 
-            if (!that.element.find(document.activeElement).length || !that.element.find(target).length) {
+            if (!$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon") &&
+                (!that.element.find(document.activeElement).length || !that.element.find(target).length)) {
                 that.element.focus();
             }
 
