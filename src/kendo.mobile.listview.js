@@ -33,6 +33,11 @@
             input = target.is("input") ? target : target.find("input"),
             value = !input[0].checked;
 
+        if (support.touch && e.type === CLICK) {
+            e.preventDefault();
+            return;
+        }
+
         if (input.is(":radio")) {
             value = true;
         }

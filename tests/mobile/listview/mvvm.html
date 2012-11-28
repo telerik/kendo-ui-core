@@ -266,7 +266,7 @@
 
                     kendo.support.touch = true;
                     kendo.bind(dom, observable, kendo.mobile.ui);
-                    dom.find("label").trigger("click");
+                    dom.find("label").trigger("touchend");
                 } finally {
                     kendo.support.touch = touch;
                 }

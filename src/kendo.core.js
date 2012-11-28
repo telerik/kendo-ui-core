@@ -2642,7 +2642,7 @@ function pad(number, digits, end) {
             var handler = function(e) {
                 if (MouseEventNormalizer.captureMouse) {
                     if (e.type === "click") {
-                        if (MouseEventNormalizer.bustClick) {
+                        if (MouseEventNormalizer.bustClick && !$(e.target).is("label")) {
                             e.preventDefault();
                             e.stopPropagation();
                         }
