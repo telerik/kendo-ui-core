@@ -497,6 +497,11 @@ kendo_module({
                                   "aria-haspopup": true,
                                   "aria-expanded": false
                               });
+        },
+
+        _clearSelection: function() {
+            this.text(this.options.optionLabel);
+            this.element.val("");
         }
     });
 

@@ -730,6 +730,16 @@ kendo_module({
             that.wrapper = wrapper.addClass("k-widget k-combobox k-header")
                                   .addClass(element[0].className)
                                   .css("display", "");
+        },
+
+        _clearSelection: function(parent, isFiltered) {
+            var that = this,
+                hasValue = parent._selectedValue || parent.value(),
+                custom = hasValue && parent.selectedIndex === -1;
+
+            if (isFiltered || !hasValue || custom) {
+                that.value("");
+            }
         }
     });
 

@@ -761,22 +761,6 @@ kendo_module({
             }
         },
 
-        _clearSelection: function(parent, isFiltered) {
-            var that = this,
-                optionLabel = that.options.optionLabel,
-                hasValue = parent._selectedValue || parent.value();
-
-            if (optionLabel !== undefined) { //TODO: move to ddl
-                that.text(optionLabel);
-                that.element.val("");
-                return;
-            }
-
-            if (isFiltered || !hasValue || (hasValue && parent.selectedIndex === -1)) {
-                that.value("");
-            }
-        },
-
         _cascade: function() {
             var that = this,
                 options = that.options,
