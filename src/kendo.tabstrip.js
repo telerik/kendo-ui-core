@@ -934,9 +934,10 @@ kendo_module({
         },
 
         contentHolder: function (itemIndex) {
-            var contentElement = $(this.contentElement(itemIndex));
+            var contentElement = $(this.contentElement(itemIndex)),
+                scrollContainer = contentElement.children(".km-scroll-container");
 
-            return kendo.support.touch ? contentElement.children(".km-scroll-container") : contentElement;
+            return kendo.support.touch && scrollContainer[0] ? scrollContainer : contentElement;
         },
 
         ajaxRequest: function (element, content, complete, url) {
