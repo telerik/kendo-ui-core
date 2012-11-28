@@ -2656,15 +2656,14 @@ span.k-numerictextbox
             background-size: 100% auto;
             background-position: 0 50%;
             background-repeat: no-repeat;
+
+            // XXX: absolute URL!
+            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/styles/web/textures/transparency.png', sizingMethod='scale');
+            -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/styles/web/textures/transparency.png', sizingMethod='scale')";
         }
     }
 
     .hsv-gradient {
-        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-        background:
-        url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+),
-        url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-
         background:
         -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%), /* FF3.6+ */
         -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
@@ -2689,16 +2688,36 @@ span.k-numerictextbox
         linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%), /* W3C */
         linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
 
-        filter:
-        progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ), /* IE6-8 */
-        progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-8 */
-
         width: 250px;
         height: 180px;
         margin-bottom: 5px;
     }
 }
 
+.k-ie7, .k-ie8, .k-ie9 {
+    .k-colorpicker-hsv {
+        .hue-slider {
+            .k-slider-track {
+                // XXX: absolute URL!
+                filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/styles/web/textures/hue.png', sizingMethod='scale');
+                -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/styles/web/textures/hue.png', sizingMethod='scale')";
+            }
+        }
+        .transparency-slider {
+            .k-slider-track {
+                // XXX: absolute URL!
+                filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/styles/web/textures/transparency.png', sizingMethod='scale');
+                -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/styles/web/textures/transparency.png', sizingMethod='scale')";
+            }
+        }
+        .hsv-gradient {
+            // XXX: Internet Explorer (IE8 here) cannot find the image with a relative link.  This is pretty bad.
+            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/styles/web/textures/hsv-gradient.png', sizingMethod='scale');
+            -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/styles/web/textures/hsv-gradient.png', sizingMethod='scale')";
+        }
+    }
+}
+
 /* Editor */
 
 .k-editor
