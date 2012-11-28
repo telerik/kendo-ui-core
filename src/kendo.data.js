@@ -389,7 +389,7 @@ kendo_module({
                     object.bind(CHANGE, eventHandler(that, CHANGE, field, false));
                 }
             } else if (object !== null && object instanceof DataSource) {
-                object._parent = parent; // assign parent to the DataSource if part of observable object
+                object.parent = parent; // assign parent to the DataSource if part of observable object
             }
 
 
@@ -2143,7 +2143,7 @@ kendo_module({
             return false;
         },
 
-        _parent: noop,
+        parent: noop,
 
         success: function(data) {
             var that = this,
@@ -2201,7 +2201,7 @@ kendo_module({
                 }
             } else {
                 data = new ObservableArray(data, that.reader.model);
-                data.parent = function() { return that._parent(); };
+                data.parent = function() { return that.parent(); };
             }
 
             if (that.group() && that.group().length && that.options.serverGrouping) {
@@ -2918,7 +2918,7 @@ kendo_module({
 
             if (!(that.children instanceof HierarchicalDataSource)) {
                 that.children = new HierarchicalDataSource(that._childrenOptions);
-                that.children._parent = function(){
+                that.children.parent = function(){
                     return that;
                 };
 
@@ -3030,7 +3030,7 @@ kendo_module({
         },
 
         insert: function(index, model) {
-            var parentNode = this._parent();
+            var parentNode = this.parent();
 
             if (parentNode) {
                 parentNode.hasChildren = true;
