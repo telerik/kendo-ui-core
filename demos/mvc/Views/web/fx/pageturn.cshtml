@@ -1,0 +1,54 @@
+<div id="example" class="k-content">
+    <ul id="book">
+        <li>Page 6</li>
+        <li>Page 5</li>
+        <li>Page 4</li>
+        <li>Page 3</li>
+        <li>Page 2</li>
+        <li class="current">Page 1</li>
+    </ul>
+
+    <button class="k-button" id="previous">&laquo; Previous page</button>
+
+    <button class="k-button" id="next">Next page &raquo;</button>
+
+    <script>
+        function current(page) {
+            var book = $("#book"),
+                pages = book.children(),
+                current = pages.filter(".current");
+
+            if (!arguments.length) {
+                return 6 - current.index();
+            }
+
+            current.removeClass("current");
+            pages.eq(page).addClass("current");
+        }
+    </script>
+
+    <style>
+        #example {
+            text-align: center;
+        }
+
+        #book {
+            position: relative;
+            width: 650px;
+            height: 477px;
+            margin: 0 auto 2em;
+            padding: 0;
+            background-color: #000;
+            border: 3px solid black;
+            list-style-type: none;
+        }
+
+        #book > li {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+        }
+    </style>
+</div>
+

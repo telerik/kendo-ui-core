@@ -1385,6 +1385,10 @@
                     "url": "fx/transfer.html"
                 },
                 {
+                    "text": "Page Turn",
+                    "url": "fx/pageturn.html"
+                },
+                {
                     "text": "Tile",
                     "url": "fx/tile.html"
                 },
