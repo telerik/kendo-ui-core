@@ -184,8 +184,10 @@
                     equals(e.value, color);
                 };
 
-                themebuilder.element.find("[id='@foo']").val(color)
-                    .data("kendoColorPicker").trigger("change");
+                var colorPicker = themebuilder.element.find("[id='@foo']").data("kendoColorPicker");
+
+                colorPicker.value(color);
+                colorPicker.trigger("change");
             });
 
             test("_propertyChange updates dataviz constant", function() {
