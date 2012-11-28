@@ -660,19 +660,19 @@ kendo_module({
         },
 
         _fetchItems: function(value) {
-            var that = this;
-
-            //Do not fetch if combobox will cascade
-            if (that.options.cascadeFrom) {
-                return;
-            }
+            var that = this,
+                hasItems = that.ul[0].firstChild;
 
             //if request is started avoid datasource.fetch
             if (that._request) {
                 return true;
             }
 
-            if (!that._fetch && !that.ul[0].firstChild) {
+            if (!that._fetch && !hasItems) {
+                if (that.options.cascadeFrom) {
+                    return !hasItems;
+                }
+
                 that.dataSource.one(CHANGE, function() {
                     that.value(value);
                     that._fetch = false;

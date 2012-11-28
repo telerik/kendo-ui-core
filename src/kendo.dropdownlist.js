@@ -227,8 +227,6 @@ kendo_module({
                 }
 
                 that._options(data, optionLabel);
-
-                that._selectedValue = that._accessor(); //check if neccessary
             }
 
             if (that._open) {
