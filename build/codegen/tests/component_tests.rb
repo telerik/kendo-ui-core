@@ -12,6 +12,13 @@ class ComponentTests < Test::Unit::TestCase
         @component.add_option(:name => 'foo.bar', :type => 'Object')
     end
 
+    def test_add_option_ignores_uknown_types
+        @component = CodeGen::Component.new(:name => 'foo')
+        @component.add_option(:name => 'foo', :type => 'foo')
+
+        assert_equal 0, @component.configuration.size
+    end
+
     def test_add_option_creates_multiple_options_for_multiple_types
         @component = CodeGen::Component.new(:name => 'foo')
 

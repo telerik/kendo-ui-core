@@ -2,6 +2,7 @@ require 'option'
 require 'event'
 
 module CodeGen
+    TYPES = ['Object', 'Array', 'String', 'Number', 'Boolean']
 end
 
 class CodeGen::Component
@@ -24,10 +25,13 @@ class CodeGen::Component
         if types
 
             types.split('|').each do |type|
+                type = type.strip
 
-                @configuration.push CodeGen::Option.new(:name => name,
-                                       :type => type.strip,
+                if CodeGen::TYPES.include?(type)
+                    @configuration.push CodeGen::Option.new(:name => name,
+                                       :type => type,
                                        :description => description)
+                end
             end
 
         end
