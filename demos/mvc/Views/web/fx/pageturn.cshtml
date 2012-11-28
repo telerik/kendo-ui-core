@@ -1,12 +1,12 @@
 <div id="example" class="k-content">
     <div id="wrap" class="first-page">
         <ul id="book">
-            <li><img src="../../content/web/fx/pageturn/6-maserati.jpg" alt="Page 6" /></li>
-            <li><img src="../../content/web/fx/pageturn/5-mazda.jpg" alt="Page 5" /></li>
-            <li><img src="../../content/web/fx/pageturn/4-mini.jpg" alt="Page 4" /></li>
-            <li><img src="../../content/web/fx/pageturn/3-mercedes.jpg" alt="Page 3" /></li>
-            <li><img src="../../content/web/fx/pageturn/2-audi.jpg" alt="Page 2" /></li>
-            <li class="current"><img src="../../content/web/fx/pageturn/1-ferrari.jpg" alt="Page 1" /></li>
+            <li><img src="../../content/web/fx/pageturn/maserati.jpg" alt="Page 6" /></li>
+            <li><img src="../../content/web/fx/pageturn/mazda.jpg" alt="Page 5" /></li>
+            <li><img src="../../content/web/fx/pageturn/mercedes.jpg" alt="Page 4" /></li>
+            <li><img src="../../content/web/fx/pageturn/audi.jpg" alt="Page 3" /></li>
+            <li><img src="../../content/web/fx/pageturn/ferrari.jpg" alt="Page 2" /></li>
+            <li class="current"><img src="../../content/web/fx/pageturn/mini.jpg" alt="Page 1" /></li>
         </ul>
 
         <a href="#" id="previous">Previous page</a>
@@ -61,7 +61,7 @@
             background-image: url("../../content/web/fx/pageturn/book.png");
             width: 657px;
             height: 482px;
-            margin: 0 auto 4em;
+            margin: 2.5em auto 4em;
             position: relative;
         }
 
@@ -98,6 +98,11 @@
             top: 0;
             background-repeat: no-repeat;
             background-position: 50% 50%;
+            opacity: .5
+        }
+
+        #previous:hover, #next:hover {
+            opacity: 1;
         }
 
         #previous {
