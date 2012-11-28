@@ -925,7 +925,8 @@
             line: {
                 width: 1,
                 color: BLACK,
-                visible: true
+                visible: true,
+                zIndex: 2
             },
             title: {
                 visible: true,
