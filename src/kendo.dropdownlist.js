@@ -271,19 +271,6 @@ kendo_module({
             }
         },
 
-        select: function(li) {
-            var that = this;
-
-            if (li === undefined) {
-                return that.selectedIndex;
-            } else {
-                that._select(li);
-                that._triggerCascade();
-                that._old = that._accessor();
-                that._oldIndex = that.selectedIndex;
-            }
-        },
-
         text: function (text) {
             var span = this.span;
 

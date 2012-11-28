@@ -461,6 +461,19 @@ kendo_module({
             this.popup.close();
         },
 
+        select: function(li) {
+            var that = this;
+
+            if (li === undefined) {
+                return that.selectedIndex;
+            } else {
+                that._select(li);
+                that._triggerCascade();
+                that._old = that._accessor();
+                that._oldIndex = that.selectedIndex;
+            }
+        },
+
         _accessor: function(value, idx) {
             var element = this.element,
                 isSelect = element.is(SELECT),
@@ -748,20 +761,19 @@ kendo_module({
             }
         },
 
-        _clearSelection: function(parent) {
+        _clearSelection: function(parent, isFiltered) {
             var that = this,
                 optionLabel = that.options.optionLabel,
                 hasValue = parent._selectedValue || parent.value();
 
-            if (hasValue) {
+            if (optionLabel !== undefined) { //TODO: move to ddl
+                that.text(optionLabel);
+                that.element.val("");
                 return;
             }
 
-            that.value("");
-
-            if (optionLabel !== undefined) {
-                that.text(optionLabel);
-                that.element.val("");
+            if (isFiltered || !hasValue || (hasValue && parent.selectedIndex === -1)) {
+                that.value("");
             }
         },
 
@@ -784,8 +796,8 @@ kendo_module({
                     var value = that._selectedValue || that.value();
                     if (value) {
                         that.value(value);
-                        if (!that.dataSource.view()[0] || that.selectedIndex == -1) {
-                            that._clearSelection(parent);
+                        if (!that.dataSource.view()[0] || that.selectedIndex === -1) {
+                            that._clearSelection(parent, true);
                         }
                     } else {
                         that.select(options.index);
