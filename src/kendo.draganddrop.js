@@ -619,7 +619,7 @@ kendo_module({
             that.currentTargetOffset = getOffset(that.currentTarget);
 
             if (hint) {
-                that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
+                that.hint = $.isFunction(hint) ? $(hint.call(that, that.currentTarget)) : hint;
 
                 var offset = getOffset(that.currentTarget);
                 that.hintOffset = offset;
