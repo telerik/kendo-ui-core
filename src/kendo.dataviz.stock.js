@@ -10,14 +10,12 @@ kendo_module({
     // Imports ================================================================
     var kendo = window.kendo,
         Class = kendo.Class,
-        Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
         math = Math,
         proxy = $.proxy,
 
         dataviz = kendo.dataviz,
         Chart = dataviz.ui.Chart,
-        DateCategoryAxis = dataviz.DateCategoryAxis,
         Selection = dataviz.Selection,
         duration = dataviz.duration,
         lteDateIndex = dataviz.lteDateIndex,
@@ -32,8 +30,6 @@ kendo_module({
         DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
-        MOUSEWHEEL_DELAY = 150,
-        HINT_DELAY = 1000,
         ZOOM_ACCELERATION = 3,
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd";
@@ -166,7 +162,7 @@ kendo_module({
                     to = lteDateIndex(groups, toDate(select.to));
                 }
 
-                var selection = chart._selection = new Selection(chart, axis, {
+                chart._selection = new Selection(chart, axis, {
                     from: from,
                     to: to,
                     min: min,
@@ -266,11 +262,7 @@ kendo_module({
         indexToDate: function(index) {
             var navi = this,
                 axis = navi.mainAxis(),
-                groups = axis.options.categories,
-                chart = navi.chart,
-                selection = chart._selection,
-                src = selection.options,
-                dst = navi.options.select;
+                groups = axis.options.categories;
 
             return groups[index];
         },
@@ -307,7 +299,6 @@ kendo_module({
                 delta = e.delta,
                 navigatorAxis = navi.mainAxis(),
                 axis = chart._plotArea.categoryAxis,
-                range = e.axisRanges[axis.options.name],
                 select = navi.options.select,
                 selection = chart._selection,
                 selectionLength = selection.options.to - selection.options.from;
@@ -360,9 +351,7 @@ kendo_module({
         },
 
         _select: function(e) {
-            var navi = this,
-                chart = navi.chart,
-                plotArea = chart._plotArea;
+            var navi = this;
 
             navi.showHint(
                 navi.indexToDate(e.from),
