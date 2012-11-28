@@ -1,45 +1,76 @@
 <div id="example" class="k-content">
-    <ul id="book">
-        <li>Page 6</li>
-        <li>Page 5</li>
-        <li>Page 4</li>
-        <li>Page 3</li>
-        <li>Page 2</li>
-        <li class="current">Page 1</li>
-    </ul>
+    <div id="wrap" class="first-page">
+        <ul id="book">
+            <li><img src="../../content/web/fx/pageturn/6-maserati.jpg" alt="Page 6" /></li>
+            <li><img src="../../content/web/fx/pageturn/5-mazda.jpg" alt="Page 5" /></li>
+            <li><img src="../../content/web/fx/pageturn/4-mini.jpg" alt="Page 4" /></li>
+            <li><img src="../../content/web/fx/pageturn/3-mercedes.jpg" alt="Page 3" /></li>
+            <li><img src="../../content/web/fx/pageturn/2-audi.jpg" alt="Page 2" /></li>
+            <li class="current"><img src="../../content/web/fx/pageturn/1-ferrari.jpg" alt="Page 1" /></li>
+        </ul>
 
-    <button class="k-button" id="previous">&laquo; Previous page</button>
-
-    <button class="k-button" id="next">Next page &raquo;</button>
+        <a href="#" id="previous">Previous page</a>
+        <a href="#" id="next">Next page</a>
+    </div>
 
     <script>
         function current(page) {
             var book = $("#book"),
                 pages = book.children(),
-                current = pages.filter(".current");
+                pagesCount = pages.length,
+                current = pages.filter(".current"),
+                currentIndex = pagesCount - current.index(),
+                newPage;
 
             if (!arguments.length) {
-                return 6 - current.index();
+                return currentIndex;
             }
 
-            current.removeClass("current");
-            pages.eq(page).addClass("current");
+            if (book.data("animating")) {
+                return;
+            }
+
+            $("#wrap").toggleClass("first-page", page == 1)
+                      .toggleClass("last-page", page == pagesCount);
+
+            if (page != currentIndex) {
+                current.removeClass("current");
+                newPage = pages.eq(pagesCount - page).addClass("current");
+
+                if (page > currentIndex) {
+                    kendo.fx(book).pageturnHorizontal(current, newPage).play();
+                } else {
+                    kendo.fx(book).pageturnHorizontal(newPage, current).reverse();
+                }
+            }
         }
+
+        $("#previous").click(function(e) {
+            e.preventDefault();
+            current(Math.max(1, current() - 1));
+        });
+
+        $("#next").click(function(e) {
+            e.preventDefault();
+            current(Math.min(6, current() + 1));
+        });
     </script>
 
     <style>
-        #example {
-            text-align: center;
+        #wrap {
+            background-image: url("../../content/web/fx/pageturn/book.png");
+            width: 657px;
+            height: 482px;
+            margin: 0 auto 4em;
+            position: relative;
         }
 
         #book {
             position: relative;
             width: 650px;
             height: 477px;
-            margin: 0 auto 2em;
+            margin: 0 auto;
             padding: 0;
-            background-color: #000;
-            border: 3px solid black;
             list-style-type: none;
         }
 
@@ -48,6 +79,40 @@
             width: 100%;
             height: 100%;
             background-color: #fff;
+        }
+
+        #actions {
+            overflow: hidden;
+            margin: 0 auto 3em;
+            width: 650px;
+        }
+
+        #previous, #next {
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            display: block;
+            height: 100%;
+            width: 90px;
+            position: absolute;
+            top: 0;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+
+        #previous {
+            left: 0;
+            background-image: url("../../content/web/fx/pageturn/arrow-left.png");
+        }
+
+        #next {
+            right: 0;
+            background-image: url("../../content/web/fx/pageturn/arrow-right.png");
+        }
+
+        .first-page #previous,
+        .last-page #next {
+            display: none;
         }
     </style>
 </div>
