@@ -405,6 +405,32 @@ kendo_module({
             }
         },
 
+        _filterSlaves: function() {
+            var navi = this,
+                select = navi.options.select || {},
+                chart = navi.chart,
+                chartDataSource = chart.dataSource,
+                filters = [];
+
+            if (navi.dataSource && chartDataSource) {
+                if (select.from) {
+                    filters.push({
+                        field: "Date", operator: "gt", value: toDate(select.from)
+                    });
+                }
+
+                if (select.to) {
+                    filters.push({
+                        field: "Date", operator: "lt", value: toDate(select.to)
+                    });
+                }
+
+                if (filters.length) {
+                    chartDataSource.filter(filters);
+                }
+            }
+        },
+
         _zoom: function(e) {
             var navi = this,
                 chart = navi.chart,

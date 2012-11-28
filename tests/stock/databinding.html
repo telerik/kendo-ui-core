@@ -171,6 +171,32 @@
                     }, 50);
                 });
 
+                test("navigator filters main data source (from)", function() {
+                    createStockChart({
+                        navigator: {
+                            select: {
+                                from: "2012/01/01",
+                                to: null
+                            }
+                        }
+                    });
+
+                    same(chart.dataSource._filter.filters[0].value, new Date("2012/01/01"));
+                });
+
+                test("navigator filters main data source (to)", function() {
+                    createStockChart({
+                        navigator: {
+                            select: {
+                                from: null,
+                                to: "2012/01/02"
+                            }
+                        }
+                    });
+
+                    same(chart.dataSource._filter.filters[0].value, new Date("2012/01/02"));
+                });
+
             })();
         </script>
 

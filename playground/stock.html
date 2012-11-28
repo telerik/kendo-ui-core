@@ -29,6 +29,15 @@
                     dataSource: {
                         transport: {
                             read: "boeing-stock.json"
+                        },
+                        schema:{
+                            model: {
+                                fields: {
+                                    Date: {
+                                        type: "date"
+                                    }
+                                }
+                            }
                         }
                     },
                     dateField: "Date",
@@ -68,6 +77,15 @@
                         dataSource: {
                             transport: {
                                 read: "boeing-stock.json"
+                            },
+                            schema:{
+                                model: {
+                                    fields: {
+                                        Date: {
+                                            type: "date"
+                                        }
+                                    }
+                                }
                             }
                         },
                         series: {
