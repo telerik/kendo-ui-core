@@ -438,7 +438,7 @@ kendo_module({
                 target = $(touch.target);
 
                 if (filter) {
-                    target = target.is(filter) ? target : target.closest(filter);
+                    target = target.is(filter) ? target : target.closest(filter, that.element);
                 } else {
                     target = that.element;
                 }
