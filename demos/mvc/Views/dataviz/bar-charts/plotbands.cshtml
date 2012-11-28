@@ -1,0 +1,70 @@
+
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+            </div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../../content/dataviz/js/spain-electricity.json",
+                                    dataType: "json"
+                                }
+                            },
+                            sort: {
+                                field: "year",
+                                dir: "asc"
+                            }
+                        },
+                        title: {
+                            text: "Spain electricity production (GWh)"
+                        },
+                        series: [{
+                            field: "nuclear",
+                            name: "Nuclear"
+                        }, {
+                            field: "hydro",
+                            name: "Hydro"
+                        }, {
+                            field: "wind",
+                            name: "Wind"
+                        }],
+                        categoryAxis: {
+                            field: "year"
+                        },
+                        valueAxis: {
+                            labels: {
+                                format: "N0"
+                            },
+                            majorUnit: 10000,
+                            plotBands: [{
+                                from: 7500,
+                                to: 25000,
+                                color: "#000",
+                                opacity: 0.2
+                            }],
+                            max: 80000
+                        },
+                        tooltip: {
+                            visible: true,
+                            format: "N0"
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                        createChart();
+
+                        $("#example").bind("kendo:skinChange", function(e) {
+                            createChart();
+                        });
+                    }, 400);
+                });
+            </script>
+        </div>

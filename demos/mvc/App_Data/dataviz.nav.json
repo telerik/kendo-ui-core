@@ -105,6 +105,15 @@
                     "title": "Grouped data binding demo for Kendo UI HTML5 Bar Charts",
                     "meta": "This example shows the feature of binding to grouped data in Kendo UI Bar Charts. See the source code to find how to use name templates for the data group.",
                     "packages": [ "!offline" ]
+				}, {
+                    "text": "Plot bands",
+                    "url": "bar-charts/plotbands.html",
+                    "title": "Kendo UI jQuery Plotting - Kendo UI jQuery Plot Bands Example",
+                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders.",
+                    "packages": [ "!offline" ]
+				}, {
+                    "text": "Gap and spacing",
+                    "url": "bar-charts/gap-spacing.html"
             }],
             "name": "bar-charts"
         }, {
@@ -276,18 +285,6 @@
                     "packages": [ "!offline" ]
             }],
             "name": "scatter-charts"
-        }, {
-            "text": "Customization",
-            "documentation": "dataviz/chart",
-            "spriteCssClass": "chartIcon",
-            "items": [{
-                    "text": "PlotBands",
-                    "url": "customization/plotbands.html",
-                    "title": "Kendo UI jQuery Plotting - Kendo UI jQuery Plot Bands Example",
-                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders.",
-                    "packages": [ "!offline" ]
-                }],
-            "name": "customization"
         }, {
             "text": "API",
             "documentation": "dataviz/chart",
