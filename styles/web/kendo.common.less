@@ -2517,9 +2517,14 @@ span.k-numerictextbox
     }
 }
 
+.box-shadow(...) {
+    -webkit-box-shadow: @arguments;
+    box-shadow: @arguments;
+}
+
 .k-colorpicker-popup
 {
-    width: 140px;
+    width: 120px;
     padding: .25em;
     line-height: 0;
     .k-reset {
@@ -2529,19 +2534,28 @@ span.k-numerictextbox
     .k-item {
     display: block;
     float: left;
-    width: 12px;
-    height: 12px;
+        width: 14px;
+        height: 14px;
     overflow: hidden;
     font-size: 0;
-        margin: 1px;
     padding: 0;
+        z-index: 0;
+        position: relative;     // what do you know, the drop-shadow
+                                // is not properly visible without
+                                // this.  both chrome and FF exhibit
+                                // this bug, I suppose it's "essential
+                                // complexity"
         div {
     height: 100%;
     width: 100%;
         }
         &.k-state-selected {
+            z-index: 100;
             background: transparent;
-            outline: 1px dotted black;
+            .box-shadow(0 1px 4px #000);
+            border: 1px solid #fff;
+            width: 12px;
+            height: 12px;
         }
     }
 }
@@ -2552,11 +2566,6 @@ span.k-numerictextbox
     width: 250px;
     padding-bottom: 5px;
     line-height: 0;
-
-    .box-shadow(...) {
-        -webkit-box-shadow: @arguments;
-        box-shadow: @arguments;
-    }
 
     .border-radius(...) {
         border-radius: @arguments;
@@ -2608,7 +2617,7 @@ span.k-numerictextbox
 
     .k-slider-horizontal {
         height: 20px;
-        width: 220px;
+        width: 85%;
         margin: 0 auto;
     }
 
