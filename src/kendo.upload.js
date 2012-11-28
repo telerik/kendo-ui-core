@@ -637,7 +637,7 @@ kendo_module({
             }
         },
 
-        onSaveSelected: function(e) {
+        onSaveSelected: function() {
             var module = this;
 
             $(".k-file", this.element).each(function() {
@@ -881,7 +881,7 @@ kendo_module({
             }
         },
 
-        onSaveSelected: function(e) {
+        onSaveSelected: function() {
             var module = this;
 
             $(".k-file", this.element).each(function() {
@@ -1080,7 +1080,7 @@ kendo_module({
                     XMLHttpRequest: xhr });
             },
 
-            function onError(xhr, textStatus) {
+            function onError(xhr) {
                 upload.trigger(ERROR, {
                     operation: "remove",
                     files: files,
@@ -1115,7 +1115,7 @@ kendo_module({
         var hideInterval, lastDrag;
 
         element
-            .on("dragenter" + namespace, function(e) {
+            .on("dragenter" + namespace, function() {
                 onDragEnter();
                 lastDrag = new Date();
 
@@ -1131,7 +1131,7 @@ kendo_module({
                     }, 100);
                 }
             })
-            .on("dragover" + namespace, function(e) {
+            .on("dragover" + namespace, function() {
                 lastDrag = new Date();
             });
     }

@@ -1271,7 +1271,7 @@ kendo_module({
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
         },
 
-        arrangeLabels: function(maxLabelWidth, maxLabelHeight) {
+        arrangeLabels: function() {
             var axis = this,
                 options = axis.options,
                 labelOptions = options.labels,
@@ -2586,7 +2586,7 @@ kendo_module({
         window.mozRequestAnimationFrame    ||
         window.oRequestAnimationFrame      ||
         window.msRequestAnimationFrame     ||
-        function(callback, element) {
+        function(callback) {
             setTimeout(callback, ANIMATION_STEP);
         };
 

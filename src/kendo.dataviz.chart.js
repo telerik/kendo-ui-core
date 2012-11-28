@@ -2337,7 +2337,7 @@ kendo_module({
             chart.computeAxisRanges();
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
+        createPoint: function(data, category, categoryIx, series) {
             var barChart = this,
                 value = data.value,
                 options = barChart.options,
@@ -2855,7 +2855,7 @@ kendo_module({
             });
         },
 
-        toggleHighlight: function(view, on) {
+        toggleHighlight: function(view) {
             var element = this,
                 opacity = element.options.highlight.opacity;
 
@@ -3044,7 +3044,7 @@ kendo_module({
             chart.renderSegments();
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
+        createPoint: function(data, category, categoryIx, series) {
             var chart = this,
                 value = data.value,
                 options = chart.options,
@@ -3095,7 +3095,7 @@ kendo_module({
             return point;
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(value, categoryIx) {
             var chart = this,
                 isStacked = chart.options.isStacked,
                 stackAxisRange = chart._stackAxisRange,
@@ -3782,7 +3782,7 @@ kendo_module({
             return group;
         },
 
-        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+        tooltipAnchor: function() {
             var point = this,
                 box = point.box;
 
@@ -3960,7 +3960,7 @@ kendo_module({
             return [group];
         },
 
-        highlightOverlay: function(view, options) {
+        highlightOverlay: function(view) {
             var point = this,
                 pointOptions = point.options,
                 highlight = pointOptions.highlight,
@@ -4714,7 +4714,7 @@ kendo_module({
             return autoFormat(format, point.value);
         },
 
-        animationDelay: function(categoryIndex, seriesIndex, seriesCount) {
+        animationDelay: function(categoryIndex) {
             return categoryIndex * PIE_SECTOR_ANIM_DELAY;
         }
     });
@@ -6937,7 +6937,7 @@ kendo_module({
             });
         },
 
-        _end: function(e) {
+        _end: function() {
             var that = this,
                 range = that._state.range;
 

@@ -359,7 +359,7 @@ kendo_module({
             );
         },
 
-        _selectEnd: function(e) {
+        _selectEnd: function() {
             var navi = this;
 
             navi.hint.hide();
