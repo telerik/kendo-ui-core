@@ -1776,9 +1776,15 @@ pre.prettyprint
 }
 
 .configuration input,
-.configuration select
+.configuration select,
+.configuration .k-numerictextbox
 {
     float: right;
+}
+
+.configuration input.k-input
+{
+    float: none;
 }
 
 .configuration .k-button,
