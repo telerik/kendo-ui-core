@@ -87,7 +87,6 @@ kendo_module({
             }
         },
         keydown: function(ev) {
-            function preventDefault(){ ev.preventDefault(); }
             var selected;
             var that = this;
             var el = that.element;
@@ -96,25 +95,25 @@ kendo_module({
 
             switch (ev.keyCode) {
               case KEYS.LEFT:
-                preventDefault();
+                preventDefault(ev);
                 selected = get_relative(all, init, -1);
                 break;
               case KEYS.RIGHT:
-                preventDefault();
+                preventDefault(ev);
                 selected = get_relative(all, init, 1);
                 break;
 
               case KEYS.DOWN:
-                preventDefault();
+                preventDefault(ev);
                 selected = get_relative(all, init, that.options.columns);
                 break;
               case KEYS.UP:
-                preventDefault();
+                preventDefault(ev);
                 selected = get_relative(all, init, -that.options.columns);
                 break;
 
               case KEYS.ENTER:
-                preventDefault();
+                preventDefault(ev);
                 if (init) {
                     this.select($("div", init).css(BACKGROUNDCOLOR));
                 }
@@ -141,7 +140,7 @@ kendo_module({
                     el = this.parentNode;
                 } else {
                     var d = c.diff(color);
-                    if (min === null || d < min) {
+                    if (min == null || d < min) {
                         min = d;
                         best = this.parentNode;
                     }
@@ -202,7 +201,7 @@ kendo_module({
 
             var hsvRect = that._hsvRect = $(".k-hsv-rectangle", content);
 
-            var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect);
+            var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).keydown($.proxy(that.keydown, that));
 
             var hueElements = that._hueElements = $(".k-hsv-rectangle, .transparency-slider .k-slider-track", content);
 
@@ -221,7 +220,7 @@ kendo_module({
             that._updateUI(that._value || new ColorRGB(1, 0, 0, 1));
 
             hsvRect.mousedown(function(ev){
-                function preventDefault(ev) { ev.preventDefault(); }
+                hsvHandle.focus();
                 var r = hsvRect.offset();
                 var rw = hsvRect.width();
                 var rh = hsvRect.height();
@@ -250,6 +249,19 @@ kendo_module({
                 onmove(ev);
                 $(document).mousemove(onmove).mouseup(onup);
             });
+
+            element.find("input.k-color-value").keydown(function(ev){
+                if (ev.keyCode == KEYS.ENTER) {
+                    try {
+                        var color = parse(this.value);
+                        var val = that.value();
+                        $(this).removeClass("k-state-error");
+                        that.select(color, !color.equals(val));
+                    } catch(ex) {
+                        $(this).addClass("k-state-error");
+                    }
+                }
+            });
         },
         options: {
             name: "ColorSelectorHSV",
@@ -261,21 +273,68 @@ kendo_module({
             color = ColorSelectorBase.fn.select.call(this, color, nohooks);
             this._updateUI(color);
         },
+        keydown: function(ev){
+            var that = this;
+            function move(prop, d) {
+                var c = that._getHSV();
+                c[prop] += d * (ev.shiftKey ? 0.01 : 0.05);
+                if (c[prop] < 0) c[prop] = 0;
+                if (c[prop] > 1) c[prop] = 1;
+                that._updateUI(c);
+                preventDefault(ev);
+            }
+            function hue(d) {
+                var c = that._getHSV();
+                c.h += d * (ev.shiftKey ? 1 : 5);
+                if (c.h < 0) c.h = 0;
+                if (c.h > 359) c.h = 359;
+                that._updateUI(c);
+                preventDefault(ev);
+            }
+            switch (ev.keyCode) {
+              case KEYS.LEFT:
+                if (ev.ctrlKey) {
+                    hue(-1);
+                } else {
+                    move("s", -1);
+                }
+                break;
+              case KEYS.RIGHT:
+                if (ev.ctrlKey) {
+                    hue(1);
+                } else {
+                    move("s", 1);
+                }
+                break;
+              case KEYS.UP:
+                move(ev.ctrlKey ? "a" : "v", 1);
+                break;
+              case KEYS.DOWN:
+                move(ev.ctrlKey ? "a" : "v", -1);
+                break;
+              case KEYS.ENTER:
+                that.select(that._getHSV());
+                break;
+              case KEYS.F2:
+                that.element.find("input.k-color-value").focus().select();
+                break;
+            }
+        },
         _getHSV: function(h, s, v, a) {
             var handle = this._hsvHandle;
             var rect = this._hsvRect;
             var width = rect.width(), height = rect.height();
             var hpos = handle.position();
-            if (h === null) {
+            if (h == null) {
                 h = this._hueSlider.value();
             }
-            if (s === null) {
+            if (s == null) {
                 s = hpos.left / width;
             }
-            if (v === null) {
+            if (v == null) {
                 v = 1 - hpos.top / height;
             }
-            if (a === null) {
+            if (a == null) {
                 a = this._opacitySlider.value() / 100;
             }
             return new ColorHSV(h, s, v, a);
@@ -285,6 +344,7 @@ kendo_module({
             this._updateUI(color);
         },
         _updateUI: function(color) {
+            if (!color) return;
             this._selectedColor.css(BACKGROUNDCOLOR, color.toCssRgba());
             this._colorAsText.val(color.toCssRgba());
             this.trigger("slide", { value: color });
@@ -325,6 +385,10 @@ kendo_module({
         return n;
     }
 
+    function fixed(n) {
+        return (+n).toFixed(3);
+    }
+
     var Color = Class.extend({
         init: function(){ throw new Error("kendo.Color is an abstract base class"); },
         toHSV: function() { return this; },
@@ -334,11 +398,11 @@ kendo_module({
         toString: function() { return "#" + this.toHex(); },
         toCssRgba: function() {
             var rgb = this.toBytes();
-            return "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", " + this.a + ")";
+            return "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", " + fixed(this.a) + ")";
         },
         equals: function(c) { return c === this || c !== null && this.toHex() == parse(c).toHex(); },
         diff: function(c2) {
-            if (c2 === null) return NaN;
+            if (c2 == null) return NaN;
             var c1 = this.toBytes();
             c2 = c2.toBytes();
             return Math.sqrt(Math.pow((c1.r - c2.r) * 0.30, 2) +
@@ -431,7 +495,7 @@ kendo_module({
     });
 
     var parse = Color.parse = function(color, m) {
-        if (color === null) return color;
+        if (color == null) return color;
         if (color instanceof Color) return color;
         m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(color);
         if (m) {
@@ -556,7 +620,7 @@ kendo_module({
             }
             else if (key == KEYS.ENTER || key == KEYS.DOWN) {
                 this.open();
-                ev.preventDefault();
+                preventDefault(ev);
             }
         },
         _getPopup: function() {
@@ -596,5 +660,7 @@ kendo_module({
     });
 
     ui.plugin(ColorPicker);
+
+    function preventDefault(ev) { ev.preventDefault(); }
 
 })(jQuery, parseInt);
