@@ -231,7 +231,8 @@ kendo_module({
             }
 
             that._select(li);
-            that.trigger("cascade");
+            that._triggerCascade();
+
             that._blur();
         },
 
@@ -376,6 +377,12 @@ kendo_module({
                 that.template = function(data) {
                     return '<li tabindex="-1" role="option" unselectable="on" class="k-item">' + template(data) + "</li>";
                 };
+            }
+        },
+
+       _triggerCascade: function() {
+            if (this._old !== this.value()) {
+                this.trigger("cascade");
             }
         },
 
@@ -807,7 +814,7 @@ kendo_module({
                         that._clearSelection();
                     }
 
-                    that.trigger("cascade");
+                    that._triggerCascade();
                 };
 
                 parent.bind("cascade", function() { select(); });

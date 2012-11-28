@@ -397,6 +397,17 @@
 
                 ddl.value("bar");
             });
+
+            test("DropDownList does not trigger cascade if item is not changed", 1, function() {
+                input.kendoDropDownList({
+                    dataSource: ["foo", "bar"],
+                    cascade: function() {
+                        ok(true);
+                    }
+                });
+
+                input.data("kendoDropDownList").value("foo");
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -280,10 +280,9 @@ kendo_module({
                 return that.selectedIndex;
             } else {
                 that._select(li);
+                that._triggerCascade();
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
-
-                that.trigger("cascade");
             }
         },
 
