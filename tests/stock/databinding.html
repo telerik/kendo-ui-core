@@ -86,6 +86,28 @@
                 }
 
                 // ------------------------------------------------------------
+                module("Data Binding / Chart Data Source", {
+                    setup: function() {
+                        createStockChart({
+                            navigator: {
+                                dataSource: null
+                            }
+                        });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("navigator series are bound to the chart data source", function() {
+                    equal(chart.options.series[1].data.length, 6);
+                });
+
+                test("navigator axes are bound to the chart data source", function() {
+                    equal(chart.options.categoryAxis[1].categories.length, 6);
+                    equal(chart.options.categoryAxis[2].categories.length, 6);
+                    equal(chart.options.categoryAxis[3].categories.length, 6);
+                });
+
+                // ------------------------------------------------------------
                 module("Data Binding / Navigator Data Source", {
                     setup: function() {
                         createStockChart();
@@ -97,15 +119,50 @@
                     ok(chart._navigator.dataSource);
                 });
 
+                test("regular series are bound from the chart data source", function() {
+                    equal(chart.options.series[0].data.length, 6);
+                });
+
+                test("navigator series are excluded from main data binding", function() {
+                    equal(chart.options.series[1].autoBind, false);
+                });
+
                 test("navigator series are bound from its data source", function() {
                     equal(chart.options.series[1].data.length, 3);
+                });
+
+                test("regular axes are bound from the chart data source", function() {
+                    equal(chart.options.categoryAxis[0].categories.length, 6);
+                });
+
+                test("navigator axes are excluded from main data binding", function() {
+                    equal(chart.options.categoryAxis[1].autoBind, false);
+                    equal(chart.options.categoryAxis[2].autoBind, false);
+                    equal(chart.options.categoryAxis[3].autoBind, false);
+                });
+
+                test("navigator axes are bound to the chart data source", function() {
+                    equal(chart.options.categoryAxis[1].categories.length, 3);
+                    equal(chart.options.categoryAxis[2].categories.length, 3);
+                    equal(chart.options.categoryAxis[3].categories.length, 3);
                 });
 
                 asyncTest("data binding is not performed when autoBind is false", function() {
                     createStockChart({
                         navigator: {
-                            autoBind: false,
+                            autoBind: false
                         }
+                    });
+
+                    setTimeout(function() {
+                        equal(chart.options.series[1].data.length, 0);
+                        start();
+                    }, 50);
+                });
+
+                asyncTest("data binding is not performed when chart autoBind is false", function() {
+                    createStockChart({
+                        autoBind: false
                     });
 
                     setTimeout(function() {

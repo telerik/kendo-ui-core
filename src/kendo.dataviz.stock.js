@@ -19,7 +19,9 @@ kendo_module({
         defined = dataviz.defined,
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
+        defined = dataviz.defined,
         duration = dataviz.duration,
+        last = dataviz.last,
         lteDateIndex = dataviz.lteDateIndex,
         renderTemplate = dataviz.renderTemplate,
         toDate = dataviz.toDate,
@@ -164,14 +166,17 @@ kendo_module({
             chart.bind(ZOOM_END, proxy(navi._zoomEnd, navi));
         },
 
-        options: {
-            autoBind: true
-        },
+        options: { },
 
         _initDataSource: function() {
             var navi = this,
                 options = navi.options,
+                autoBind = options.autoBind,
                 dsOptions = options.dataSource;
+
+            if(!defined(autoBind)) {
+               autoBind = navi.chart.options.autoBind;
+            }
 
             navi._dataChangedHandler = proxy(navi._onDataChanged, navi);
 
@@ -180,7 +185,7 @@ kendo_module({
                     .create(dsOptions)
                     .bind(CHANGE, navi._dataChangedHandler);
 
-                if (options.autoBind) {
+                if (autoBind) {
                     navi.dataSource.fetch();
                 }
             }
@@ -192,8 +197,12 @@ kendo_module({
                 series = chart.options.series,
                 seriesIx,
                 seriesLength = series.length,
+                categoryAxes = chart.options.categoryAxis,
+                axisIx,
+                axesLength = categoryAxes.length,
                 data = navi.dataSource.view(),
-                currentSeries;
+                currentSeries,
+                currentAxis;
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
@@ -203,13 +212,16 @@ kendo_module({
                 }
             }
 
-            //applySeriesColors(navi.options);
+            for (axisIx = 0; axisIx < axesLength; axisIx++) {
+                currentAxis = categoryAxes[axisIx];
 
-            //navi._categoriesData = grouped ? data[0].items : data;
-            //bindCategories(navi.options, navi._categoriesData);
+                if (currentAxis.pane == NAVIGATOR_PANE) {
+                    chart._bindCategoryAxis(currentAxis, data);
+                }
+            }
 
             //navi.trigger(DATABOUND);
-            //chart._redraw();
+            navi._redrawPane();
         },
 
         destroy: function() {
@@ -262,6 +274,23 @@ kendo_module({
                     });
                 }
             }
+        },
+
+        _redrawPane: function() {
+            var plotArea = this.chart._plotArea;
+
+            if (plotArea) {
+                plotArea.redraw(last(plotArea.panes));
+            }
+        },
+
+        redrawSlaves: function() {
+            var navi = this,
+                chart = navi.chart,
+                plotArea = chart._plotArea,
+                slavePanes = plotArea.panes.slice(0, -1);
+
+            chart._plotArea.redraw(slavePanes);
         },
 
         _drag: function(e) {
@@ -374,15 +403,6 @@ kendo_module({
                     axis.max = select.to;
                 }
             }
-        },
-
-        redrawSlaves: function() {
-            var navi = this,
-                chart = navi.chart,
-                plotArea = chart._plotArea,
-                slavePanes = plotArea.panes.slice(0, -1);
-
-            chart._plotArea.redraw(slavePanes);
         },
 
         _zoom: function(e) {
@@ -500,11 +520,11 @@ kendo_module({
 
         panes.push(paneOptions);
 
-        Navigator.attachAxes(options);
+        Navigator.attachAxes(options, naviOptions);
         Navigator.attachSeries(options, naviOptions, themeOptions);
     };
 
-    Navigator.attachAxes = function(options) {
+    Navigator.attachAxes = function(options, naviOptions) {
         var categoryAxes,
             valueAxes;
 
@@ -517,7 +537,8 @@ kendo_module({
             roundToBaseUnit: false,
             justified: true,
             tooltip: { visible: false },
-            labels: { step: 1 }
+            labels: { step: 1 },
+            autoBind: !naviOptions.dataSource
         };
 
         categoryAxes.push(
@@ -592,7 +613,7 @@ kendo_module({
                 }, defaults, navigatorSeries[i], {
                     axis: NAVIGATOR_AXIS,
                     categoryAxis: NAVIGATOR_AXIS,
-                    autoBind: false
+                    autoBind: !naviOptions.dataSource
                 })
             );
         }

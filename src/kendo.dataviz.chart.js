@@ -724,6 +724,7 @@ kendo_module({
                 seriesLength = series.length,
                 data = chart.dataSource.view(),
                 grouped = (chart.dataSource.group() || []).length > 0,
+                categoriesData = grouped ? data[0].items : data,
                 processedSeries = [],
                 currentSeries;
 
@@ -749,11 +750,46 @@ kendo_module({
 
             applySeriesColors(chart.options);
 
-            chart._categoriesData = grouped ? data[0].items : data;
-            bindCategories(chart.options, chart._categoriesData);
+            chart._bindCategories(categoriesData);
 
             chart.trigger(DATABOUND);
             chart._redraw();
+        },
+
+        _bindCategories: function(data) {
+            var chart = this,
+                options = chart.options,
+                definitions = [].concat(options.categoryAxis),
+                axisIx,
+                axis;
+
+            for (axisIx = 0; axisIx < definitions.length; axisIx++) {
+                axis = definitions[axisIx];
+                if (axis.autoBind !== false) {
+                    chart._bindCategoryAxis(axis, data);
+                }
+            }
+        },
+
+        _bindCategoryAxis: function(axis, data) {
+            var categoryIx,
+                category,
+                row;
+
+            if (axis.field) {
+                for (categoryIx = 0; categoryIx < data.length; categoryIx++) {
+                    row = data[categoryIx];
+
+                    category = getField(axis.field, row);
+                    if (categoryIx === 0) {
+                        axis.categories = [category];
+                        axis.dataItems = [row];
+                    } else {
+                        axis.categories.push(category);
+                        axis.dataItems.push(row);
+                    }
+                }
+            }
         },
 
         isBindable: function(series) {
@@ -7302,33 +7338,6 @@ kendo_module({
 
             options[axisName] = axes.length > 1 ? axes : axes[0];
         });
-    }
-
-    function bindCategories(options, data) {
-        var definitions = [].concat(options.categoryAxis),
-            axisIx,
-            axis,
-            categoryIx,
-            category,
-            row;
-
-        for (axisIx = 0; axisIx < definitions.length; axisIx++) {
-            axis = definitions[axisIx];
-            if (axis.field) {
-                for (categoryIx = 0; categoryIx < data.length; categoryIx++) {
-                    row = data[categoryIx];
-
-                    category = getField(axis.field, row);
-                    if (categoryIx === 0) {
-                        axis.categories = [category];
-                        axis.dataItems = [row];
-                    } else {
-                        axis.categories.push(category);
-                        axis.dataItems.push(row);
-                    }
-                }
-            }
-        }
     }
 
     function incrementSlot(slots, index, value) {

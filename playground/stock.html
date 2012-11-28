@@ -64,8 +64,11 @@
                         axis: "volume"
                     }],
                     navigator: {
+                        // TODO: Investigate faulty rendering
                         dataSource: {
-                            data: []
+                            transport: {
+                                read: "boeing-stock.json"
+                            }
                         },
                         series: {
                             type: "area",
