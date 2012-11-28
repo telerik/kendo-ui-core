@@ -369,6 +369,37 @@
                 equal(dropdownlist.dataSource.calls("fetch"), 0);
             });
 
+            test("value method does not fetch if request is already started", function() {
+                var dropdownlist = new DropDownList(input, {
+                    optionLabel: "Select"
+                });
+
+                dropdownlist.dataSource.trigger("requestStart");
+
+                stub(dropdownlist.dataSource, {
+                    fetch: dropdownlist.dataSource.fetch
+                });
+
+                dropdownlist.value("10");
+
+                equal(dropdownlist.dataSource.calls("fetch"), 0);
+            });
+
+            test("value method does not fetch widget cascades", function() {
+                var dropdownlist = new DropDownList(input, {
+                    optionLabel: "Select",
+                    cascadeFrom: "parent"
+                });
+
+                stub(dropdownlist.dataSource, {
+                    fetch: dropdownlist.dataSource.fetch
+                });
+
+                dropdownlist.value("10");
+
+                equal(dropdownlist.dataSource.calls("fetch"), 0);
+            });
+
             test("value() returns value of the OPTION element", function() {
                 var select = $("<select><option value=''>Chai</option><option>Bar</option></select>");
                 dropdownlist = new DropDownList(select);
