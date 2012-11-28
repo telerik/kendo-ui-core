@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Runs all unit tests on Firefox and Chrome		</description>
+  <logRotator>
+    <daysToKeep>10</daysToKeep>
+    <numToKeep>20</numToKeep>
+    <artifactDaysToKeep>10</artifactDaysToKeep>
+    <artifactNumToKeep>20</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty>
+      <projectUrl>https://github.com/telerik/kendo/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name></name>
+        <refspec></refspec>
+        <url>git@github.com:telerik/kendo.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <disableSubmodules>false</disableSubmodules>
+    <recursiveSubmodules>false</recursiveSubmodules>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
+    <clean>false</clean>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <pruneBranches>false</pruneBranches>
+    <remotePoll>false</remotePoll>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
+    <browser class="hudson.plugins.git.browser.GithubWeb">
+      <url>https://github.com/telerik/kendo/</url>
+    </browser>
+    <submoduleCfg class="list"/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
+    <skipTag>false</skipTag>
+    <scmName></scmName>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <com.cloudbees.jenkins.GitHubPushTrigger>
+      <spec></spec>
+    </com.cloudbees.jenkins.GitHubPushTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>~/.gem/ruby/1.9.1/bin/bundle &amp;&amp; rake build:master:tests</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder>
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>*-test-results.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.plugins.git.GitPublisher>
+      <configVersion>2</configVersion>
+      <pushMerge>false</pushMerge>
+      <pushOnlyIfSuccess>true</pushOnlyIfSuccess>
+      <branchesToPush>
+        <hudson.plugins.git.GitPublisher_-BranchToPush>
+          <targetRepoName>origin</targetRepoName>
+          <branchName>stable</branchName>
+        </hudson.plugins.git.GitPublisher_-BranchToPush>
+      </branchesToPush>
+    </hudson.plugins.git.GitPublisher>
+    <hudson.plugins.campfire.CampfireNotifier>
+      <room>
+        <name>Dev Daily</name>
+        <id>488924</id>
+      </room>
+      <hudsonUrl>http://mvc-kendobuild/build/</hudsonUrl>
+    </hudson.plugins.campfire.CampfireNotifier>
+  </publishers>
+  <buildWrappers/>
+</project>
