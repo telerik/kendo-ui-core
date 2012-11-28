@@ -30,12 +30,12 @@ module CodeGen::Java::TLD
             }, 0, '<>%')
 
     OPTION = ERB.new(%{
-        <attribute>
-            <description><%= option.description %></description>
-            <name><%= option.name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
-            <rtexprvalue>true</rtexprvalue>
-            <type><%= CodeGen::Java::TYPES[option.type] %></type>
-        </attribute>
+            <attribute>
+                <description><%= option.description %></description>
+                <name><%= option.name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
+                <rtexprvalue>true</rtexprvalue>
+                <type><%= CodeGen::Java::TYPES[option.type] %></type>
+            </attribute>
     }, 0, '<>%')
 end
 
@@ -48,7 +48,9 @@ class CodeGen::Java::TLD::Generator
     def component(component)
         @tld += CodeGen::Java::TLD::COMPONENT.result(binding)
 
-        component.configuration.each do |option|
+        options = component.configuration.sort { |a, b| a.name <=> b.name }
+
+        options.each do |option|
             next unless option.instance_of? CodeGen::Option
 
             @tld += CodeGen::Java::TLD::OPTION.result(binding)
