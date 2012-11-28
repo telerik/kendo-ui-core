@@ -231,6 +231,7 @@ kendo_module({
             }
 
             that._select(li);
+            that.trigger("cascade");
             that._blur();
         },
 
@@ -638,10 +639,11 @@ kendo_module({
             return pressed;
         },
 
-        _selectItem: function() {
+        _selectItem: function(value) {
             var that = this,
-                options = that.options,
-                value = that.value() || options.value;
+                options = that.options;
+
+            value = that._selectedValue || options.value || that._accessor();
 
             if (value) {
                 that.value(value);
@@ -756,7 +758,7 @@ kendo_module({
                 options = that.options,
                 cascade = options.cascadeFrom,
                 parent, select, valueField,
-                deactivate, change;
+                change;
 
             if (cascade) {
                 parent = $("#" + cascade).data("kendo" + options.name);
@@ -766,12 +768,8 @@ kendo_module({
                 }
 
                 valueField = parent.options.dataValueField;
-                deactivate = function() {
-                    that.enable(false);
-                    that._clearSelection();
-                };
                 change = function() {
-                    var value = that.value();
+                    var value = that._selectedValue || that.value();
 
                     if (value) {
                         that.value(value);
@@ -805,18 +803,14 @@ kendo_module({
                             .filter(filters);
 
                     } else {
-                        deactivate();
+                        that.enable(false);
+                        that._clearSelection();
                     }
+
+                    that.trigger("cascade");
                 };
 
-                parent.bind("cascade", deactivate)
-                      .bind(CHANGE, function() {
-                          select();
-                          that.trigger("cascade");
-                      })
-                      .bind("selected", function() {
-                          select();
-                      });
+                parent.bind("cascade", function() { select(); });
 
                 //refresh was called
                 if (parent._bound) {
