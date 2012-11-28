@@ -7,7 +7,8 @@ class MarkdownParserTests < Test::Unit::TestCase
     def test_parse_sets_component_name
         result = CodeGen::MarkdownParser.new.parse("# kendo.ui.AutoComplete")
 
-        assert_equal 'kendo.ui.AutoComplete', result.name
+        assert_equal 'AutoComplete', result.name
+        assert_equal 'kendo.ui.AutoComplete', result.full_name
     end
 
     def test_parse_option_from_configuration_section

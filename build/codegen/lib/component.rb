@@ -5,10 +5,11 @@ module CodeGen
 end
 
 class CodeGen::Component
-    attr_reader :name, :configuration, :events
+    attr_reader :name, :full_name, :configuration, :events
 
     def initialize(options)
-        @name = options[:name]
+        @full_name = options[:name]
+        @name = @full_name.split('.').last
         @configuration = []
         @events = []
     end

@@ -7,10 +7,13 @@ module CodeGen
 end
 
 class CodeGen::MarkdownParser
-    def self.each
-        MARKDOWN.map do |markdown|
-            yield CodeGen::MarkdownParser.new.parse File.read(markdown)
-        end
+
+    def self.all
+        MARKDOWN.map { |filename| self.read(filename) }
+    end
+
+    def self.read(filename)
+        CodeGen::MarkdownParser.new.parse File.read(filename)
     end
 
     def parse(markdown)
