@@ -34,14 +34,14 @@ kendo_module({
     function preventTrigger(e) {
         e.preventDefault();
 
-        var target = $(e.currentTarget),   // Determine the correct parent to receive the event and bubble.
+        var target = $(e.data.root),   // Determine the correct parent to receive the event and bubble.
             parent = target.closest(".k-widget").parent();
 
         if (!parent[0]) {
             parent = target.parent();
         }
 
-        parent.trigger($.Event(e.type, { target: target }));
+        parent.trigger($.Event(e.type, { target: target[0] }));
     }
 
     function touchDelta(touch1, touch2) {
@@ -299,7 +299,7 @@ kendo_module({
             }
 
             if (!options.allowSelection) {
-                element.on("mousedown selectstart", filter, preventTrigger);
+                element.on("mousedown selectstart", filter, { root: element }, preventTrigger);
             }
 
             if (support.eventCapture) {
