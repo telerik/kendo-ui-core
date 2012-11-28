@@ -294,7 +294,7 @@ kendo_module({
         _template: kendo.template
         ('<div class="k-colorpicker-hsv">' +
            '# if (showSelected) { #' +
-             '<div class="k-selected-color"><div class="k-selected-color-display"><input class="k-color-value" /></div></div>' +
+             '<div class="k-selected-color"><div class="k-selected-color-display"><input spellcheck="false" class="k-color-value" /></div></div>' +
            '# } #' +
            '<div class="k-hsv-rectangle"><div class="hsv-gradient"></div><div class="k-draghandle"></div></div>' +
            '<input class="hue-slider" />' +

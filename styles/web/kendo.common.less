@@ -2550,7 +2550,7 @@ span.k-numerictextbox
 {
     display: inline-block;
     width: 250px;
-    padding: 10px 10px 5px 10px;
+    padding-bottom: 5px;
     line-height: 0;
 
     .box-shadow(...) {
@@ -2571,6 +2571,7 @@ span.k-numerictextbox
         }
         background-image: url("textures/transtexture.png");
         input.k-color-value {
+            font-size: 90%;
             text-align: center;
             border: 0px;
             margin-left: 100%;
@@ -2605,15 +2606,21 @@ span.k-numerictextbox
         }
     }
 
+    .k-slider-horizontal {
+        height: 20px;
+        width: 220px;
+        margin: 0 auto;
+    }
+
     .hue-slider, .transparency-slider {
-        width: 250px;
         display: block;
         .k-slider-selection {
             background: transparent;
         }
         .k-draghandle {
             background: transparent;
-            border: 4px solid #eee;
+            border: 3px solid #eee;
+            margin-top: 1px;
             height: 8px;
             width: 8px;
             .box-shadow(0 1px 4px #444);
