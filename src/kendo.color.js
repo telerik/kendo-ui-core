@@ -218,7 +218,7 @@ kendo_module({
                 that._updateUI(that._getHSV(ev.value, null, null, null));
             });
 
-            opSlider.bind([ "slide", "change" ], function(ev){
+            if (opSlider) opSlider.bind([ "slide", "change" ], function(ev){
                 that._updateUI(that._getHSV(null, null, null, ev.value / 100));
             });
 
@@ -312,10 +312,10 @@ kendo_module({
                 }
                 break;
               case KEYS.UP:
-                move(ev.ctrlKey ? "a" : "v", 1);
+                move(ev.ctrlKey && that._opacitySlider ? "a" : "v", 1);
                 break;
               case KEYS.DOWN:
-                move(ev.ctrlKey ? "a" : "v", -1);
+                move(ev.ctrlKey && that._opacitySlider ? "a" : "v", -1);
                 break;
               case KEYS.ENTER:
                 that.select(that._getHSV());
@@ -340,7 +340,7 @@ kendo_module({
                 v = 1 - hpos.top / height;
             }
             if (a == null) {
-                a = this._opacitySlider.value() / 100;
+                a = this._opacitySlider ? this._opacitySlider.value() / 100 : 1;
             }
             return new ColorHSV(h, s, v, a);
         },
@@ -351,7 +351,7 @@ kendo_module({
         _updateUI: function(color) {
             if (!color) return;
             this._selectedColor.css(BACKGROUNDCOLOR, color.toCssWithOpacity());
-            this._colorAsText.val(color.toCssRgba());
+            this._colorAsText.val(this._opacitySlider ? color.toCssRgba() : color.toCss());
             this.trigger("slide", { value: color });
             color = color.toHSV();
             var handle = this._hsvHandle;
@@ -366,7 +366,7 @@ kendo_module({
             handle.css(attr);
             this._hueElements.css(BACKGROUNDCOLOR, new ColorHSV(color.h, 1, 1, 1).toCss());
             this._hueSlider.value(color.h);
-            this._opacitySlider.value(100 * color.a);
+            if (this._opacitySlider) this._opacitySlider.value(100 * color.a);
         },
         _template: kendo.template
         ('<div class="k-colorpicker-hsv">' +
@@ -375,7 +375,9 @@ kendo_module({
            '# } #' +
            '<div class="k-hsv-rectangle"><div class="hsv-gradient"></div><div class="k-draghandle"></div></div>' +
            '<input class="hue-slider" />' +
-           '<input class="transparency-slider" />' +
+           '# if (showOpacity) { #' +
+             '<input class="transparency-slider" />' +
+           '# } #' +
          '</div>')
     });
 

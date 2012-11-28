@@ -40,6 +40,8 @@
       <input type="color" value="#ff0000" id="dropdown2" />
       <input type="color" value="#ff0000" id="dropdown3" />
       <input type="color" value="#ff0000" id="dropdown4" />
+      <input type="color" value="#ff0000" id="dropdown5" />
+      <input type="color" value="#ff0000" id="dropdown6" />
     </div>
 
     <script>
@@ -54,6 +56,8 @@
       $("#dropdown2").kendoColorPicker({ palette: "web" });
       $("#dropdown3").kendoColorPicker();
       $("#dropdown4").kendoColorPicker({ showSelected: false });
+      $("#dropdown5").kendoColorPicker({ showOpacity: false });
+      $("#dropdown6").kendoColorPicker({ showSelected: false, showOpacity: false });
 
       window.hsv = $("#hsv").kendoColorSelectorHSV().data("kendoColorSelectorHSV");
     </script>
