@@ -1176,14 +1176,18 @@ kendo_module({
             enable = arguments.length == 2 ? !!enable : true;
 
             this._processNodes(nodes, function (index, item) {
-                var isCollapsed = !nodeContents(item).is(VISIBLE);
+                var isCollapsed = !nodeContents(item).is(VISIBLE),
+                    dataItem = this.dataItem(item);
 
                 item.removeAttr(ARIADISABLED);
 
                 if (!enable) {
+                    if (dataItem.selected) {
+                        dataItem.set("selected", false);
+                    }
+
                     this.collapse(item);
                     isCollapsed = true;
-                    item.find(".k-in:first").removeClass("k-state-selected");
                     item.removeAttr(ARIASELECTED);
                     item.attr(ARIADISABLED, true);
                 }
