@@ -2626,24 +2626,54 @@ kendo_module({
         },
 
         take: function() {
+            return this._take || this._pageSize;
+        },
+
+        _prefetchSuccessHandler: function (skip, size, callback) {
             var that = this;
-            return that._take || that._pageSize;
+            return function(data) {
+                var found = false,
+                    range = { start: skip, end: size, data: [] },
+                    idx,
+                    length;
+
+                that._dequeueRequest();
+
+                for (idx = 0, length = that._ranges.length; idx < length; idx++) {
+                    if (that._ranges[idx].start === skip) {
+                        found = true;
+                        range = that._ranges[idx];
+                        break;
+                    }
+                }
+                if (!found) {
+                    that._ranges.push(range);
+                }
+
+                data = that.reader.parse(data);
+                range.data = that._observe(that.reader.data(data));
+                range.end = range.start + range.data.length;
+                that._ranges.sort( function(x, y) { return x.start - y.start; } );
+                that._total = that.reader.total(data);
+                if (callback) {
+                    callback();
+                }
+            };
         },
 
         prefetch: function(skip, take, callback) {
             var that = this,
-            size = math.min(skip + take, that.total()),
-            range = { start: skip, end: size, data: [] },
-            options = {
-                take: take,
-                skip: skip,
-                page: skip / take + 1,
-                pageSize: take,
-                sort: that._sort,
-                filter: that._filter,
-                group: that._group,
-                aggregate: that._aggregate
-            };
+                size = math.min(skip + take, that.total()),
+                options = {
+                    take: take,
+                    skip: skip,
+                    page: skip / take + 1,
+                    pageSize: take,
+                    sort: that._sort,
+                    filter: that._filter,
+                    group: that._group,
+                    aggregate: that._aggregate
+                };
 
             if (!that._rangeExists(skip, size)) {
                 clearTimeout(that._timeout);
@@ -2652,29 +2682,7 @@ kendo_module({
                     that._queueRequest(options, function() {
                         that.transport.read({
                             data: options,
-                            success: function (data) {
-                                that._dequeueRequest();
-                                var found = false;
-                                for (var i = 0, len = that._ranges.length; i < len; i++) {
-                                    if (that._ranges[i].start === skip) {
-                                        found = true;
-                                        range = that._ranges[i];
-                                        break;
-                                    }
-                                }
-                                if (!found) {
-                                    that._ranges.push(range);
-                                }
-
-                                data = that.reader.parse(data);
-                                range.data = that._observe(that.reader.data(data));
-                                range.end = range.start + range.data.length;
-                                that._ranges.sort( function(x, y) { return x.start - y.start; } );
-                                that._total = that.reader.total(data);
-                                if (callback) {
-                                    callback();
-                                }
-                            }
+                            success: that._prefetchSuccessHandler(skip, size, callback)
                         });
                     });
                 }, 100);
