@@ -1,5 +1,6 @@
 package "libxml2-devel"
 package "libxslt-devel"
+
 gem_package "bundler"
 
 [ '', '/cache', '/gems', '/docs', '/specifications' ].each do | dir |

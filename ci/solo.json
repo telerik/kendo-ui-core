@@ -1,5 +1,6 @@
 { "run_list": [
     "recipe[git]",
     "recipe[ruby]",
-    "recipe[jenkins]"
+    "recipe[jenkins]",
+    "recipe[ci-runner]"
 ]}
