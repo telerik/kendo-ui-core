@@ -70,6 +70,8 @@ class CodeGen::Java::TLD::Generator
 
             next if ignored && ignored.any? { |ignore| option.name.start_with?(ignore) }
 
+            $stderr.puts "#{option.name} (#{option.type})" if component.name == 'Chart'
+
             @tld += CodeGen::Java::TLD::OPTION.result(binding)
 
         end

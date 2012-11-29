@@ -8,7 +8,6 @@ class MarkdownParserTests < Test::Unit::TestCase
         result = CodeGen::MarkdownParser.new.parse("# kendo.ui.AutoComplete")
 
         assert_equal 'AutoComplete', result.name
-        assert_equal 'kendo.ui.AutoComplete', result.full_name
     end
 
     def test_parse_option_from_configuration_section
@@ -20,7 +19,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 ### foo `String`
         })
 
-        assert_equal 'foo', result.configuration[0].name
+        assert_equal 'foo', result.options[0].name
     end
 
     def test_parse_multiple_options
@@ -34,7 +33,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 ### bar `Number`
         })
 
-        assert_equal 2, result.configuration.size
+        assert_equal 2, result.options.size
     end
 
     def test_parse_option_type
@@ -46,7 +45,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 ### foo `String`
         })
 
-        assert_equal 'String', result.configuration[0].type
+        assert_equal 'String', result.options[0].type
     end
 
     def test_parse_option_description
@@ -59,7 +58,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 bar
         })
 
-        assert_equal 'bar', result.configuration[0].description
+        assert_equal 'bar', result.options[0].description
     end
 
     def test_parse_event_from_events_section
@@ -125,6 +124,6 @@ Bar
 ### foo.bar `Object`
         })
 
-        assert_equal 'bar', result.configuration[0].configuration[0].name
+        assert_equal 'bar', result.options[0].options[0].name
     end
 end

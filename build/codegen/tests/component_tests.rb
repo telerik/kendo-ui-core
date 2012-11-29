@@ -16,7 +16,15 @@ class ComponentTests < Test::Unit::TestCase
         @component = CodeGen::Component.new(:name => 'foo')
         @component.add_option(:name => 'foo', :type => 'foo')
 
-        assert_equal 0, @component.configuration.size
+        assert_equal 0, @component.options.size
+    end
+
+    def test_add_option_ignores_options_with_same_name_and_type
+        @component = CodeGen::Component.new(:name => 'foo')
+        @component.add_option(:name => 'foo', :type => 'String')
+        @component.add_option(:name => 'foo', :type => 'String')
+
+        assert_equal 1, @component.options.size
     end
 
     def test_add_option_creates_multiple_options_for_multiple_types
@@ -24,9 +32,9 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_option(:name => 'foo', :type => 'String|Object')
 
-        assert_equal 2, @component.configuration.size
-        assert_equal 'String', @component.configuration[0].type
-        assert_equal 'Object', @component.configuration[1].type
+        assert_equal 2, @component.options.size
+        assert_equal 'String', @component.options[0].type
+        assert_equal 'Object', @component.options[1].type
     end
 
     def test_add_option_adds_option_only_if_type_is_specified
@@ -34,7 +42,7 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_option(:name => 'foo')
 
-        assert_equal 0, @component.configuration.size
+        assert_equal 0, @component.options.size
     end
 
     def test_add_option_ignores_type_in_name
@@ -42,7 +50,7 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_option(:name => 'foo.type=bar.baz', :type => 'String')
 
-        assert_equal 'foo.baz', @component.configuration[0].name
+        assert_equal 'foo.baz', @component.options[0].name
     end
 
     def test_add_option_trims_name
@@ -50,7 +58,7 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_option(:name => '  foo  ', :type => 'String|Object')
 
-        assert_equal 'foo', @component.configuration[0].name
+        assert_equal 'foo', @component.options[0].name
     end
 
     def test_add_option_trims_type
@@ -58,16 +66,16 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_option(:name => '  foo  ', :type => ' String |Object')
 
-        assert_equal 'String', @component.configuration[0].type
+        assert_equal 'String', @component.options[0].type
     end
 
     def test_promote_removes_nested_options
         @component.promote_members
 
-        assert_equal 1, @component.configuration.size
+        assert_equal 1, @component.options.size
     end
 
-    def test_promote_creates_nested_components
+    def test_promote_creates_nested_options
         @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_option(:name => 'foo', :type => 'Object')
@@ -76,20 +84,14 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.promote_members
 
-        assert_equal true, @component.configuration[0].configuration[0].instance_of?(CodeGen::Component)
-    end
-
-    def test_promote_creates_components
-        @component.promote_members
-
-        assert_equal true, @component.configuration[0].instance_of?(CodeGen::Component)
+        assert_equal true, @component.options[0].options[0].instance_of?(CodeGen::CompositeOption)
     end
 
     def test_promote_adds_options_to_child_component
         @component.promote_members
 
-        component = @component.configuration[0]
+        component = @component.options[0]
 
-        assert_equal 'bar', component.configuration[0].name
+        assert_equal 'bar', component.options[0].name
     end
 end

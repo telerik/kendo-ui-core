@@ -1,4 +1,5 @@
 require 'option'
+require 'composite_option'
 require 'event'
 
 module CodeGen
@@ -6,21 +7,21 @@ module CodeGen
 end
 
 class CodeGen::Component
-    attr_reader :name, :full_name, :configuration, :events
+    attr_reader :name, :full_name, :options, :events
 
-    def initialize(options)
-        @full_name = options[:name]
+    def initialize(settings)
+        @full_name = settings[:name]
         @name = @full_name.split('.').last
-        @configuration = []
+        @options = []
         @events = []
     end
 
-    def add_option(options)
-        name = options[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
+    def add_option(settings)
+        name = settings[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
 
-        description = options[:description]
+        description = settings[:description]
 
-        types = options[:type]
+        types = settings[:type]
 
         if types
 
@@ -28,54 +29,50 @@ class CodeGen::Component
                 type = type.strip
 
                 if CodeGen::TYPES.include?(type)
-                    @configuration.push CodeGen::Option.new(:name => name,
-                                       :type => type,
-                                       :description => description)
+
+                    unless @options.any? { |option| option.name == name && option.type == type }
+
+                        @options.push CodeGen::Option.new(:name => name,
+                                           :type => type,
+                                           :description => description)
+
+                    end
                 end
             end
 
         end
     end
 
-    def add_event(options)
-        @events.push CodeGen::Event.new(options)
+    def add_event(settings)
+        @events.push CodeGen::Event.new(settings)
     end
 
     def promote_members
-        @configuration.clone.each do |member|
+        @options.clone.each do |member|
             prefix = member.name + '.'
 
-            members = @configuration.find_all {|m| m.name.start_with?(prefix)}
+            members = @options.find_all {|m| m.name.start_with?(prefix)}
 
             next unless members.any?
 
-            @configuration.push promote_member_to_component(member, members)
-        end
-    end
-
-    def import_members(members)
-        prefix = @name + "."
-
-        members.each do |member|
-            member.name.sub!(prefix, '')
-            @configuration.push(member)
+            @options.push composite_option(member, members)
         end
     end
 
     private
 
-    def promote_member_to_component(member, members)
-        members.each {|m| @configuration.delete(m) }
+    def composite_option(member, members)
+        members.each {|m| @options.delete(m) }
 
-        @configuration.delete(member)
+        @options.delete(member)
 
-        component = CodeGen::Component.new(:name => member.name)
+        option = CodeGen::CompositeOption.new(:name => member.name,
+                                              :description => member.description,
+                                              :type => member.type)
 
-        component.import_members(members)
+        option.add_options(members)
 
-        component.promote_members
-
-        component
+        option
     end
 end
 
