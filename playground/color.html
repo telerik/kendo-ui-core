@@ -32,7 +32,10 @@
     </div>
 
     <div style="padding: 1em">
-      <div id="hsv"></div>
+      <table><tr>
+        <td><div id="hsv1"></div></td>
+        <td style="padding-left: 20px"><div id="hsv2"></div></td>
+      </tr></table>
     </div>
 
     <div style="padding: 1em">
@@ -45,12 +48,7 @@
     </div>
 
     <script>
-      window.cs = $("#flat").kendoColorSelectorSimple().data("kendoColorSelectorSimple");
-      cs.bind("change", function(ev){
-        var color = ev.value.toString();
-        console.log(color);
-        $("#color").css("background-color", color);
-      });
+      $("#flat").kendoColorSelectorSimple();
 
       $("#dropdown").kendoColorPicker({ palette: "basic" });
       $("#dropdown2").kendoColorPicker({ palette: "web" });
@@ -59,7 +57,12 @@
       $("#dropdown5").kendoColorPicker({ showOpacity: false });
       $("#dropdown6").kendoColorPicker({ showSelected: false, showOpacity: false });
 
-      window.hsv = $("#hsv").kendoColorSelectorHSV().data("kendoColorSelectorHSV");
+      window.hsv1 = $("#hsv1").kendoColorSelectorHSV({ showButtons: false }).data("kendoColorSelectorHSV");
+      window.hsv2 = $("#hsv2").kendoColorSelectorHSV({ showButtons: false }).data("kendoColorSelectorHSV");
+
+      hsv1.bind("slide", function(ev){
+        hsv2.select(ev.value, true);
+      });
     </script>
   </body>
 </html>

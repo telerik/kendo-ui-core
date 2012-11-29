@@ -255,23 +255,35 @@ kendo_module({
                 $(document).mousemove(onmove).mouseup(onup);
             });
 
-            element.find("input.k-color-value").keydown(function(ev){
-                if (ev.keyCode == KEYS.ENTER) {
-                    try {
-                        var color = parse(this.value);
-                        var val = that.value();
-                        $(this).removeClass("k-state-error");
-                        that.select(color, !color.equals(val));
-                    } catch(ex) {
-                        $(this).addClass("k-state-error");
+            element
+                .find("input.k-color-value").keydown(function(ev){
+                    if (ev.keyCode == KEYS.ENTER) {
+                        try {
+                            var color = parse(this.value);
+                            var val = that.value();
+                            $(this).removeClass("k-state-error");
+                            that.select(color, !color.equals(val));
+                        } catch(ex) {
+                            $(this).addClass("k-state-error");
+                        }
                     }
-                }
-            });
+                }).end()
+                .find(".controls")
+                .find("button.apply").click(function(){
+                    // calling select for the currently displayed
+                    // color will trigger the "change" event.
+                    that.select(that._getHSV());
+                }).end()
+                .find("button.cancel").click(function(){
+                    // but on cancel, we simply select the previous
+                    // value (again, triggers "change" event).
+                    that.select(that.value());
+                });
         },
         options: {
             name: "ColorSelectorHSV",
             showOpacity: true,
-            showButtons: false,
+            showButtons: true,
             showSelected: true
         },
         select: function(color, nohooks) {
@@ -376,6 +388,9 @@ kendo_module({
            '<input class="hue-slider" />' +
            '# if (showOpacity) { #' +
              '<input class="transparency-slider" />' +
+           '# } #' +
+           '# if (showButtons) { #' +
+             '<div class="controls"><button class="k-button apply">Apply</button> <button class="k-button cancel">Cancel</button></div>' +
            '# } #' +
          '</div>')
     });
