@@ -404,7 +404,7 @@ var ColorTool = Tool.extend({
     },
 
     update: function(ui) {
-        ui.data("kendoColorPicker").close();
+        this._widget.close();
     },
 
     command: function (commandArguments) {
@@ -427,15 +427,21 @@ var ColorTool = Tool.extend({
         var editor = initOptions.editor,
             toolName = this.name;
 
-        ui.attr("title", initOptions.title);
-
-        new Editor.ColorPicker(ui, {
-            value: "#000000",
-            ariaId: editor.element[0].id ? kendo.format("{0}_{1}_cp", editor.element[0].id, toolName) : "",
-            change: function (e) {
-                Tool.exec(editor, toolName, e.value);
+        ui = this._widget = new kendo.ui.ColorPicker(ui, {
+            toolIcon: "k-" + this.options.name,
+            palette: "web",
+            change: function(e) {
+                Tool.exec(editor, toolName, e.value.toDisplay());
+            },
+            click: function(e) {
+                // this is a click on the icon; use previous color, if any
+                var color = ui.value();
+                if (color) {
+                    Tool.exec(editor, toolName, color.toDisplay());
+                }
             }
         });
+        ui.element.attr("title", initOptions.title);
     }
 });
 

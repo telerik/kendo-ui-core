@@ -604,11 +604,19 @@ kendo_module({
             var value = parse(options.value);
             that._value = options.value = value;
             var content = that._content = $(that._template(options));
-            element.hide().after(content);
+            if (options.replace) {
+                element.replaceWith(content);
+                this.element = content;
+            } else {
+                element.hide().after(content);
+            }
 
             content.attr("tabIndex", 0)
                 .keydown($.proxy(that.keydown, that))
-                .on("click", ".k-icon", $.proxy(that.open, that));
+                .on("click", ".k-icon", $.proxy(that.open, that))
+                .on("click", options.toolIcon ? ".k-tool-icon" : ".k-icon", function(){
+                    that.trigger("click");
+                });
         },
         _template: kendo.template
         ('<div class="k-widget k-colorpicker">' +
@@ -624,9 +632,10 @@ kendo_module({
         options: {
             name         : "ColorPicker",
             toolIcon     : null,
-            value        : null
+            value        : null,
+            replace      : true
         },
-        events: [ "change", "select" ],
+        events: [ "change", "click", "select" ],
         open: function() {
             this._getPopup().open();
             this._selector.select(this.value(), true);

@@ -3,7 +3,7 @@ kendo_module({
     name: "Editor",
     category: "web",
     description: "Rich text editor component",
-    depends: [ "combobox", "dropdownlist", "window" ]
+    depends: [ "combobox", "dropdownlist", "window", "color" ]
 });
 
 (function($,undefined) {
@@ -53,10 +53,7 @@ kendo_module({
             '</li>',
 
         colorPickerTemplate:
-            '<li class="k-editor-colorpicker" role="presentation">' +
-                '<div class="k-widget k-colorpicker k-header #= cssClass #" role="combobox" title="#=tooltip#">' +
-                    '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-i-arrow-s"></span>' +
-            '</div></li>',
+            '<li class="k-editor-colorpicker" role="presentation"><div class="k-colorpicker #= cssClass #"></div></li>',
 
         comboBoxTemplate:
             '<li class="k-editor-combobox">' +
