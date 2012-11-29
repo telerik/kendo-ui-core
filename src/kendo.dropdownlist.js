@@ -492,8 +492,17 @@
         },
 
         _clearSelection: function() {
-            this.text(this.options.optionLabel);
-            this.element.val("");
+            var that = this,
+                optionLabel = that.options.optionLabel;
+
+            if (that.dataSource.view()[0] && optionLabel) {
+                that.select(0);
+                return;
+            }
+
+            that.text(optionLabel);
+            that.element.val("");
+            that.selectedIndex = -1;
         }
     });
 
