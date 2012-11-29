@@ -134,8 +134,20 @@ kendo_module({
             }
 
             navigator.applySelection();
-            Chart.fn._redraw.call(chart);
-            navigator.redraw();
+
+            if (chart._dataBound) {
+                navigator.redrawSlaves();
+            } else {
+                Chart.fn._redraw.call(chart);
+                navigator.redraw();
+            }
+        },
+
+        _onDataChanged: function() {
+            var chart = this;
+
+            Chart.fn._onDataChanged.call(chart);
+            chart._dataBound = true;
         },
 
         destroy: function() {
@@ -220,8 +232,8 @@ kendo_module({
                 }
             }
 
-            //navi.trigger(DATABOUND);
             navi._redrawPane();
+            navi.redraw();
         },
 
         destroy: function() {
@@ -245,6 +257,7 @@ kendo_module({
                 from = min,
                 to = max;
 
+            console.log(groups.length)
             if (groups.length > 0) {
                 if (select.from) {
                     from = lteDateIndex(groups, toDate(select.from));
@@ -518,6 +531,7 @@ kendo_module({
             }
             navi.readSelection();
             navi.applySelection();
+            navi._filterSlaves();
             navi.redrawSlaves();
 
             navi.chart.trigger(SELECT_END, {
