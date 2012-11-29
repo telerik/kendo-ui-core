@@ -1,7 +1,6 @@
 require 'rake/clean'
 
 require 'bundler/setup'
-require 'debugger'
 require 'tempfile'
 
 VERBOSE = verbose == true
