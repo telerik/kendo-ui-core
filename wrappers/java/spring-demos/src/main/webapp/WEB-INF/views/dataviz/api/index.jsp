@@ -32,12 +32,12 @@
 
     <div class="chart-wrapper">
     	 <% 
- String[] categories = {
- "2005", "2006",
- "2007", "2008",
- "2009"
-};
-%>
+			 String[] categories = {
+				 "2005", "2006",
+				 "2007", "2008",
+				 "2009"
+			 };
+		 %>
     	 <kendo:chart name="chart">
     	 	 <kendo:chart-title text="Internet Usersl" />
     	 	 <kendo:chart-legend position="bottom" />

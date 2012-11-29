@@ -1,4 +1,4 @@
-package com.kendoui.spring.controllers.customization;
+package com.kendoui.spring.controllers.barcharts;
 
 import java.util.List;
 
@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.ElectricityProduction;
 
-@Controller("dataviz-customization_plotbands-controller")
-@RequestMapping(value="/dataviz/customization/")
+@Controller("dataviz-bar_charts-plotbands-controller")
+@RequestMapping(value="/dataviz/bar-charts/")
 public class PlotBandsController {
-    @RequestMapping(value = {"/", "/plotbands"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/plotbands", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/customization/plotbands";
+        return "/dataviz/bar-charts/plotbands";
     }
     
-    @RequestMapping(value = "/customization/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/plotbands/read", method = RequestMethod.POST)
     public @ResponseBody List<ElectricityProduction> read() {
         return ChartDataRepository.SpainElectricityProduction();
     }
