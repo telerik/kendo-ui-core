@@ -27,12 +27,10 @@
   </head>
 
   <body>
-    <div style="padding: 1em">
-      <div id="flat"></div>
-    </div>
 
-    <div style="padding: 1em">
-      <table><tr>
+    <div style="padding: 1em; float: right; width: 50%">
+      <div id="flat"></div>
+      <table style="margin-top: 1em"><tr>
         <td><div id="hsv1"></div></td>
         <td style="padding-left: 20px"><div id="hsv2"></div></td>
       </tr></table>
@@ -50,10 +48,10 @@
     <script>
       $("#flat").kendoColorSelectorSimple();
 
-      $("#dropdown").kendoColorPicker({ palette: "basic" });
-      $("#dropdown2").kendoColorPicker({ palette: "web" });
+      $("#dropdown").kendoColorPicker({ palette: "basic", toolIcon: "k-foreColor" });
+      $("#dropdown2").kendoColorPicker({ palette: "web", toolIcon: "k-backColor" });
       $("#dropdown3").kendoColorPicker();
-      $("#dropdown4").kendoColorPicker({ showSelected: false });
+      $("#dropdown4").kendoColorPicker({ showSelected: false, toolIcon: "k-bold" });
       $("#dropdown5").kendoColorPicker({ showOpacity: false });
       $("#dropdown6").kendoColorPicker({ showSelected: false, showOpacity: false });
 

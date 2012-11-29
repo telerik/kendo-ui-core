@@ -2487,21 +2487,33 @@ span.k-numerictextbox
     vertical-align: middle;
     border: 1px solid #ccc;
     padding: 2px;
-    .k-tool-icon {
-    display: inline-block;
-    vertical-align: top;
-    padding: 2px 3px;
-    font-size: 0;
-    line-height: 0;
-    }
     .k-selected-color {
         font-size: 0;
         vertical-align: top;
         line-height: 0;
         display: inline-block;
-    height: 16px;
-    width: 16px;
+        height: @grid-size;
+        width: @grid-size;
         border: 1px solid #ccc;
+    }
+    .k-tool-icon {
+        position: relative;
+        top: -3px;
+        display: inline-block;
+        padding: 2px 3px;
+        font-size: 0;
+        line-height: 0;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+        width: @grid-size;
+        height: @grid-size;
+        .k-selected-color {
+            display: block;
+            height: 3px;
+            width: @grid-size;
+            position: absolute;
+            bottom: -2px;
+        }
     }
     .k-icon {
         display: inline-block;
@@ -2845,8 +2857,8 @@ span.k-numerictextbox
 .k-italic { background-position: -64px -22px; }
 .k-underline { background-position: -64px -44px; }
 .k-strikethrough { background-position: -64px -66px; }
-.k-foreColor .k-tool-icon { background-position: -64px -88px; }
-.k-backColor .k-tool-icon { background-position: -64px -110px; }
+.k-foreColor { background-position: -64px -88px; }
+.k-backColor { background-position: -64px -110px; }
 .k-justifyLeft { background-position: -64px -132px; }
 .k-justifyCenter { background-position: -64px -154px; }
 .k-justifyRight { background-position: -64px -176px; }

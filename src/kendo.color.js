@@ -602,8 +602,8 @@ kendo_module({
             options = that.options;
             element = that.element;
             var value = parse(options.value);
-            that._value = value;
-            var content = that._content = $(that._template({ value: value }));
+            that._value = options.value = value;
+            var content = that._content = $(that._template(options));
             element.hide().after(content);
 
             content.attr("tabIndex", 0)
@@ -612,11 +612,18 @@ kendo_module({
         },
         _template: kendo.template
         ('<div class="k-widget k-colorpicker">' +
-           '<span class="k-selected-color"></span>' +
+           '# if (toolIcon) { #' +
+             '<span class="k-tool-icon #= toolIcon #">' +
+               '<span class="k-selected-color"></span>' +
+             '</span>' +
+           '# } else { #' +
+             '<span class="k-selected-color"></span>' +
+           '# } #' +
            '<span class="k-icon k-i-arrow-s"></span>' +
          '</div>'),
         options: {
             name         : "ColorPicker",
+            toolIcon     : null,
             value        : null
         },
         events: [ "change", "select" ],
