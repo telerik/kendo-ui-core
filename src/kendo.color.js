@@ -232,8 +232,8 @@ kendo_module({
                 function onmove(ev) {
                     var pex = ev.pageX;
                     var pey = ev.pageY;
-                    var dx = pex - r.left - 1;
-                    var dy = pey - r.top - 1;
+                    var dx = pex - r.left;
+                    var dy = pey - r.top;
                     if (dx < 0) dx = 0;
                     if (dx > rw) dx = rw;
                     if (dy < 0) dy = 0;
@@ -350,20 +350,19 @@ kendo_module({
         },
         _updateUI: function(color) {
             if (!color) return;
-            this._selectedColor.css(BACKGROUNDCOLOR, color.toCssWithOpacity());
+            this._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
             this._colorAsText.val(this._opacitySlider ? color.toCssRgba() : color.toCss());
             this.trigger("slide", { value: color });
             color = color.toHSV();
             var handle = this._hsvHandle;
             var rect = this._hsvRect;
             var width = rect.width(), height = rect.height();
-            // saturation is 0 on the left side, full (1) on the right
-            // value is 0 on the bottom, full on the top.
-            var attr = {
+            handle.css({
+                // saturation is 0 on the left side, full (1) on the right
                 left: color.s * width + "px",
+                // value is 0 on the bottom, full on the top.
                 top: (1 - color.v) * height + "px"
-            };
-            handle.css(attr);
+            });
             this._hueElements.css(BACKGROUNDCOLOR, new ColorHSV(color.h, 1, 1, 1).toCss());
             this._hueSlider.value(color.h);
             if (this._opacitySlider) this._opacitySlider.value(100 * color.a);
@@ -393,7 +392,7 @@ kendo_module({
     }
 
     function fixed(n) {
-        return (+n).toFixed(3);
+        return parseFloat((+n).toFixed(3));
     }
 
     var Color = Class.extend({
@@ -407,7 +406,7 @@ kendo_module({
             var rgb = this.toBytes();
             return "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", " + fixed(this.a) + ")";
         },
-        toCssWithOpacity: function() {
+        toDisplay: function() {
             if (isIE8) {
                 return this.toCss(); // no RGBA support; does it support any opacity in colors?
             }
@@ -421,6 +420,11 @@ kendo_module({
             return Math.sqrt(Math.pow((c1.r - c2.r) * 0.30, 2) +
                              Math.pow((c1.g - c2.g) * 0.59, 2) +
                              Math.pow((c1.b - c2.b) * 0.11, 2));
+        },
+        clone: function() {
+            var c = this.toBytes();
+            if (c === this) c = new ColorBytes(c.r, c.g, c.b, c.a);
+            return c;
         }
     });
 
@@ -621,7 +625,7 @@ kendo_module({
                 this._value = value;
                 this._content.find(".k-selected-color").css(
                     BACKGROUNDCOLOR,
-                    value ? value.toCssWithOpacity() : "transparent"
+                    value ? value.toDisplay() : "transparent"
                 );
             }
             return this._value;
