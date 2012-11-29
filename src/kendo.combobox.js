@@ -249,8 +249,6 @@
 
                 if (custom && custom[0].selected) {
                     that._custom(custom.val());
-                } else {
-                    //that._selectedValue = value; //TODO: test for that
                 }
             }
 
