@@ -2,7 +2,7 @@ require 'option'
 require 'event'
 
 module CodeGen
-    TYPES = ['Object', 'Array', 'String', 'Number', 'Boolean']
+    TYPES = ['Object', 'Date', 'Array', 'String', 'Number', 'Boolean']
 end
 
 class CodeGen::Component
