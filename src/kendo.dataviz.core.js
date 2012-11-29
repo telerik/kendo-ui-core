@@ -933,8 +933,7 @@ kendo_module({
             line: {
                 width: 1,
                 color: BLACK,
-                visible: true,
-                zIndex: 2
+                visible: true
             },
             title: {
                 visible: true,
@@ -1272,7 +1271,7 @@ kendo_module({
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
         },
 
-        arrangeLabels: function() {
+        arrangeLabels: function(maxLabelWidth, maxLabelHeight) {
             var axis = this,
                 options = axis.options,
                 labelOptions = options.labels,
@@ -2603,7 +2602,7 @@ kendo_module({
         window.mozRequestAnimationFrame    ||
         window.oRequestAnimationFrame      ||
         window.msRequestAnimationFrame     ||
-        function(callback) {
+        function(callback, element) {
             setTimeout(callback, ANIMATION_STEP);
         };
 

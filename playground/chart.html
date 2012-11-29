@@ -16,10 +16,24 @@
         <script>
             $(function() {
                 $("#chart").kendoChart({
+<<<<<<< HEAD
                     series: [{
                         type: "area",
                         data: [1,2]
                     }]
+=======
+                    theme: "blueopal",
+                    seriesDefaults: {
+                        type: "line"
+                    },
+                    series: [{
+                        data: [ 1,2,3 ]
+                    }],
+                    tooltip: {
+                        visible: true,
+                        crosshair: true
+                    }
+>>>>>>> Add crosshair base functionality.
                 });
             });
         </script>

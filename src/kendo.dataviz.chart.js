@@ -454,19 +454,20 @@ kendo_module({
             var chart = this,
                 state = chart._navState,
                 axes,
-                ranges = {};
+                ranges = {},
+                i, currentAxis, axisName, axis, delta;
 
             if (state) {
                 e.preventDefault();
 
                 axes = state.axes;
 
-                for (var i = 0; i < axes.length; i++) {
-                    var currentAxis = axes[i];
-                    var axisName = currentAxis.options.name;
+                for (i = 0; i < axes.length; i++) {
+                    currentAxis = axes[i];
+                    axisName = currentAxis.options.name;
                     if (axisName) {
-                        var axis = currentAxis.options.vertical ? e.y : e.x;
-                        var delta = axis.startLocation - axis.location;
+                        axis = currentAxis.options.vertical ? e.y : e.x;
+                        delta = axis.startLocation - axis.location;
 
                         if (delta !== 0) {
                             ranges[currentAxis.options.name] =
@@ -2433,7 +2434,7 @@ kendo_module({
             chart.computeAxisRanges();
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var barChart = this,
                 value = data.value,
                 options = barChart.options,
@@ -2952,7 +2953,7 @@ kendo_module({
             });
         },
 
-        toggleHighlight: function(view) {
+        toggleHighlight: function(view, on) {
             var element = this,
                 opacity = element.options.highlight.opacity;
 
@@ -3141,7 +3142,7 @@ kendo_module({
             chart.renderSegments();
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.value,
                 options = chart.options,
@@ -3192,7 +3193,7 @@ kendo_module({
             return point;
         },
 
-        updateRange: function(value, categoryIx) {
+        updateRange: function(value, categoryIx, series) {
             var chart = this,
                 isStacked = chart.options.isStacked,
                 stackAxisRange = chart._stackAxisRange,
@@ -3895,7 +3896,7 @@ kendo_module({
             return group;
         },
 
-        tooltipAnchor: function() {
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
             var point = this,
                 box = point.box;
 
@@ -4073,7 +4074,7 @@ kendo_module({
             return [group];
         },
 
-        highlightOverlay: function(view) {
+        highlightOverlay: function(view, options) {
             var point = this,
                 pointOptions = point.options,
                 highlight = pointOptions.highlight,
@@ -4827,7 +4828,7 @@ kendo_module({
             return autoFormat(format, point.value);
         },
 
-        animationDelay: function(categoryIndex) {
+        animationDelay: function(categoryIndex, seriesIndex, seriesCount) {
             return categoryIndex * PIE_SECTOR_ANIM_DELAY;
         }
     });
@@ -5133,6 +5134,7 @@ kendo_module({
             plotArea.enableDiscovery();
 
             plotArea.createPanes();
+            plotArea.createCrosshairs();
             plotArea.render();
         },
 
@@ -5166,6 +5168,19 @@ kendo_module({
             }
 
             plotArea.panes = panes;
+        },
+
+        createCrosshairs: function() {
+            var plotArea = this,
+                panes = plotArea.panes,
+                i, j, pane, axis;
+
+            for (i = 0; i < panes.length; i++) {
+                pane = panes[i];
+                for (j = 0; j < pane.axes[]length; pane.axes[]Idx++) {
+                    pane.axes[][pane.axes[]Idx]
+                }
+            }
         },
 
         findPane: function(name) {
@@ -6859,6 +6874,115 @@ kendo_module({
         }
     });
 
+    var Crosshair = ChartElement.extend({
+        init: function(axis, options) {
+            var crosshair = this;
+
+            ChartElement.fn.init.call(legend, options);
+
+            crosshair.chartElement = chartElement;
+            crosshair.chartPadding = {
+                top: parseInt(chartElement.css("paddingTop"), 10),
+                left: parseInt(chartElement.css("paddingLeft"), 10)
+            };
+
+            if (!options.id) {
+                options.id = uniqueId();
+            }
+        },
+
+        options: {
+            color: BLACK,
+            width: 2,
+            visible: false
+        },
+
+        repaint: function() {
+            var crosshair = this,
+                options = crosshair.options,
+                element = crosshair.element;
+
+            crosshair.getViewElements(crosshair._view);
+            element.pointers = crosshair.element.pointers;
+            element.refresh(doc.getElementById(options.id));
+        },
+
+        show: function() {
+            var crosshair = this,
+                options = crosshair.options;
+
+            if (!options.visible) {
+                options.visible = true;
+                crosshair.repaint();
+            }
+        },
+
+        hide: function() {
+            var crosshair = this,
+                options = crosshair.options;
+
+            if (options.visible) {
+                options.visible = false;
+                crosshair.repaint();
+            }
+        },
+
+        linePoints: function() {
+            var crosshair = this,
+                options = crosshair.options,
+                point = crosshair.point,
+                axis = crosshair.axis,
+                vertical = axis.options.vertical,
+                plotAreaBox = axis.plotArea.box,
+                halfWidth = options.width / 2,
+                result = [];
+
+            if (point) {
+                if (vertucal) {
+                    result.add(plotAreaBox.x1 - halfWidth, plotAreaBox.y1);
+                    result.add(plotAreaBox.x1 + halfWidth, plotAreaBox.y2);
+                } else {
+                    result.add(point.x - halfWidth, plotAreaBox.y1);
+                    result.add(point.x + halfWidth, plotAreaBox.y2);
+                }
+            } else {
+                if (vertucal) {
+                    result.add(plotAreaBox.x1, plotAreaBox.y1 - halfWidth);
+                    result.add(plotAreaBox.x2, plotAreaBox.y1 + halfWidth);
+                } else {
+                    result.add(plotAreaBox.x1, point.y - halfWidth);
+                    result.add(plotAreaBox.x2, point.y + halfWidth);
+                }
+            }
+
+            return result;
+        },
+
+        getViewElements: function(view) {
+            var crosshair = this,
+                options = crosshair.options,
+                elements,
+                points = crosshair.linePoints();
+
+            crosshair.element = view.createPolyline(points, false, {
+                id: options.id,
+                stroke: options.color,
+                strokeWidth: options.width,
+                fill: "",
+                dashType: options.dashType,
+                zIndex: 2,
+                visibility: options.visible
+            });
+
+            elements.push(crosshair.element);
+            crosshair._view = view;
+
+            append(elements, ChartElement.fn.getViewElements.call(bar, view));
+
+            return elements;
+        }
+    });
+
     var Aggregates = {
         max: function(values) {
             var result = math.max.apply(math, values);
@@ -7091,7 +7215,7 @@ kendo_module({
             that.trigger(SELECT, range);
         },
 
-        _end: function() {
+        _end: function(e) {
             var that = this,
                 range = that._state.range;
 
