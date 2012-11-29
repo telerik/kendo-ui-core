@@ -39,7 +39,7 @@
              Widget.fn.init.call(that, element, options);
 
              options = that.options;
-             element = that.element.addClass(INPUT)
+             element = that.element
                            .on("keydown" + ns, proxy(that._keydown, that))
                            .on("paste" + ns, proxy(that._paste, that))
                            .on("blur" + ns, proxy(that._focusout, that))
@@ -331,7 +331,7 @@
         _input: function() {
             var that = this,
                 CLASSNAME = "k-formatted-value",
-                element = that.element.show()[0],
+                element = that.element.addClass(INPUT).show()[0],
                 accessKey = element.accessKey,
                 wrapper = that.wrapper,
                 DOMInput, text;

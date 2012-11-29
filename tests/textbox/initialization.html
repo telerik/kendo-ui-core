@@ -35,7 +35,7 @@
                     wrapper = textbox.wrapper,
                     innerWrapper = wrapper.children();
 
-                ok(wrapper.hasClass("k-widget k-numerictextbox"));
+                equal(wrapper[0].className, "k-widget k-numerictextbox");
 
                 ok(innerWrapper.eq(0).hasClass("k-numeric-wrap"));
                 equal(innerWrapper.length, 1);
