@@ -32,6 +32,8 @@ namespace Kendo.Mvc.UI
 
         public bool HasChildren { get; set; }
 
+        public bool Checked { get; set; }
+
         public List<TreeViewItemModel> Items { get; set; }
 
         public IDictionary<string, string> HtmlAttributes { get; set; }
