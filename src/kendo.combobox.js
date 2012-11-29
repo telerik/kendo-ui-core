@@ -141,13 +141,12 @@ kendo_module({
 
         events:[
             "open",
-
             "close",
-
             CHANGE,
             "select",
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "cascade"
         ],
 
         setOptions: function(options) {
@@ -405,8 +404,9 @@ kendo_module({
                 if (that.selectedIndex < 0) {
                     that._custom(text);
                     input.value = text;
-                    that._triggerCascade();
                 }
+
+                that._triggerCascade();
             } else {
                 return input.value;
             }

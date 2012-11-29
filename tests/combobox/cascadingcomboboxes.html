@@ -437,6 +437,23 @@
                 equal(childCB.value(), "");
                 equal(childCB.text(), "");
             });
+
+            test("Parent trigger cascade when enter value with text method", 1, function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 }
+                    ],
+                    cascade: function() {
+                        ok(true);
+                    }
+                });
+
+                parent.data("kendoComboBox").text("1");
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
