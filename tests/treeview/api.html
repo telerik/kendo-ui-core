@@ -57,7 +57,7 @@
                 ok(!node.find(".k-in").hasClass("k-state-disabled"));
             });
 
-            test("enable(node, false) removes selected class", function() {
+            test("enable(node, false) clears selected field", function() {
                 createTreeView([
                     { text: "foo", selected: true }
                 ]);
@@ -66,6 +66,7 @@
 
                 treeviewObject.enable(node, false);
 
+                ok(!treeviewObject.dataItem(node).selected);
                 ok(!node.find(".k-in").hasClass("k-state-selected"));
             });
 
@@ -782,7 +783,6 @@
 
                 equal(treeviewObject.parent(".k-state-selected")[0], treeview.find(".k-item")[0]);
             });
-
 
             test("text() changes item text, honoring templates", function() {
                 createTreeView({
