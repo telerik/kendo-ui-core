@@ -224,6 +224,88 @@
                 ddl2.value("item4");
                 ddl3.value("item4");
             });
+
+            test("DropDownList clears value if parent has no value", function() {
+                var ddl = new DropDownList(parent, {
+                    optionLabel: "Select",
+                    dataValueField: "id",
+                    dataTextField: "text2",
+                    dataSource: [
+                        {text: "item1", id: "1", text2: "i"},
+                        {text: "item3", id: "2", text2: "i"}
+                    ],
+                    autoBind: false
+                });
+
+                var ddl2 = new DropDownList(child.attr("id", "child"), {
+                    optionLabel: "Select",
+                    dataValueField: "text",
+                    dataTextField: "text",
+                    dataSource: [
+                        {text: "item1", id: "1"},
+                        {text: "item2", id: "1"},
+                        {text: "item3", id: "2"},
+                        {text: "item4", id: "2"}
+                    ],
+                    cascadeFrom: "parent",
+                    autoBind: false
+                });
+
+                var ddl3 = new DropDownList($("<input />"), {
+                    optionLabel: "Select",
+                    dataValueField: "text",
+                    dataTextField: "text",
+                    dataSource: [
+                        {text: "item1", id: "1"},
+                        {text: "item2", id: "1"},
+                        {text: "item3", id: "2"},
+                        {text: "item4", id: "2"}
+                    ],
+                    cascadeFrom: "child",
+                    autoBind: false
+                });
+
+                ddl.value("2");
+                ddl2.value("item4");
+                ddl3.value("item4");
+
+                ddl.value("");
+
+                equal(ddl2.value(), "Select");
+            });
+
+            test("DropDownList clears value if parent has no value and child has no data", function() {
+                var ddl = new DropDownList(parent, {
+                    optionLabel: "Select",
+                    dataValueField: "id",
+                    dataTextField: "text2",
+                    dataSource: [
+                        {text: "item1", id: "1", text2: "i"},
+                        {text: "item2", id: "2", text2: "i"},
+                        {text: "item3", id: "3", text2: "i"}
+                    ],
+                    autoBind: false
+                });
+
+                var ddl2 = new DropDownList(child.attr("id", "child"), {
+                    optionLabel: "Select",
+                    dataValueField: "text",
+                    dataTextField: "text",
+                    dataSource: [
+                        {text: "item1", id: "1"},
+                        {text: "item2", id: "1"},
+                        {text: "item3", id: "2"},
+                        {text: "item4", id: "2"}
+                    ],
+                    cascadeFrom: "parent",
+                    autoBind: false
+                });
+
+                ddl.value("3");
+
+                equal(ddl2.value(), "");
+                equal(ddl2.dataItem(), null);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
