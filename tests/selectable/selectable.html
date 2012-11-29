@@ -162,7 +162,7 @@
                 ok(selectees.eq(1).hasClass(SELECTED));
             });
 
-            test("single selection ctrlKey click on selected items does not unselects it", function() {
+            test("single selection ctrlKey click on item when another is selected", function() {
                 var selectable = new Selectable(ul);
                 var selectees = ul.find(">li");
 
@@ -350,6 +350,20 @@
                 ok(selectee.hasClass(SELECTED));
             });
 
+            test("ctrlKey click on selected triggers change event", function() {
+                var wasCalled = false,
+                    selectable = new Selectable(ul, {
+                        change: function() {
+                            wasCalled = true;
+                        }
+                    });
+
+                ul.children().first().addClass(SELECTED).tap({ ctrlKey: true });
+
+                ok(wasCalled);
+                ok(!ul.children().first().hasClass(SELECTED));
+            });
+
             test("selectRange accept arguments as jQuery object", function() {
                 var selectable = new Selectable(ul, {multiple: true}),
                     start = $(ul.find(">li")[1]),
@@ -453,6 +467,52 @@
                 equal(selectable.value().length, 2);
                 ok(changeWasFired);
             });
+
+            test("select element adds aria attribute", function() {
+                new Selectable(ul, { aria: true });
+
+                ul.children().first().tap();
+
+                equal(ul.children().first().attr("aria-selected"), "true");
+            });
+
+            test("unselecting element sets aria attribute to false", function() {
+                new Selectable(ul, { aria: true });
+
+                ul.children().first().tap().tap({ ctrlKey: true });
+
+                equal(ul.children().first().attr("aria-selected"), "false");
+            });
+
+            test("multiple selection unselecting element sets aria attribute to false", function() {
+                new Selectable(ul, { aria: true, multiple: true});
+
+                ul.children().first().tap().tap({ ctrlKey: true });
+
+                equal(ul.children().first().attr("aria-selected"), "false");
+            });
+
+            test("select another element invalidates aria attribute", function() {
+                new Selectable(ul, { aria: true });
+
+                ul.children().first().tap();
+                ul.children().eq(1).tap();
+
+                equal(ul.children().first().attr("aria-selected"), "false");
+                equal(ul.children().eq(1).attr("aria-selected"), "true");
+            });
+
+            test("moving over item sets aria attribute", function() {
+                var selectable = new Selectable(ul, { aria:true, multiple: true });
+                var selectees = ul.find(">li");
+                var position = selectees.eq(1).offset();
+
+                selectees.eq(0).tap().press().move(position.left, position.top).release();
+
+                equal(selectees.eq(0).attr("aria-selected"), "true");
+                equal(selectees.eq(1).attr("aria-selected"), "true");
+            });
+
         </script>
     </body>
 </html>
