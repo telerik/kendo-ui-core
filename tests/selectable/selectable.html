@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -31,12 +32,40 @@
                   ul = $("<ul><li>1</li><li>2</li><li>3</li></ul>").appendTo(document.body);
                 },
                 teardown: function() {
+                    ul.kendoSelectable("destroy");
                     ul.remove();
                 }
             });
 
-            function ev(options) {
-                return $.extend(new $.Event, options);
+            function triggerEvent(element, type, info) {
+                element.trigger($.Event(type, info));
+
+                return element;
+            };
+
+            $.fn.press = function(x, y, ctrlKey) {
+                return triggerEvent(this, "mousedown", {
+                    pageX: x,
+                    pageY: y,
+                    ctrlKey: ctrlKey
+                });
+            }
+
+            $.fn.move = function(x, y, ctrlKey) {
+                return triggerEvent(this, "mousemove", {
+                    pageX: x,
+                    pageY: y,
+                    ctrlKey: ctrlKey
+                });
+            }
+
+            $.fn.release = function(info) {
+                info = $.extend({}, info);
+                return triggerEvent(this, "mouseup", info);
+            }
+
+            $.fn.tap = function(info) {
+                return this.press().release(info);
             }
 
             test("selectable class is applied on the element when initialized", function() {
@@ -44,36 +73,25 @@
                 ok(ul.hasClass(SELECTABLE));
             });
 
-            test("stores the current position on mousedown", function() {
-                var selectable = new Selectable(ul);
-                var selectee = $(ul.find(">li")[0]);
-
-                $(selectee).trigger("mousedown");
-                ok(selectable._originalPosition !== undefined);
-            });
-
             test("single selection does not attach the marquee", function() {
                 var selectable = new Selectable(ul);
-                var selectee = $(ul.find(">li")[0]);
 
-                $(selectee).trigger("mousedown");
-                equal(selectable._marquee.parent().length, 0);
+                ul.children().eq(0).press();
+                equal($(".k-marquee").length, 0);
             });
 
             test("multiple selection attach the marquee to the document", function() {
-                var selectable = new Selectable(ul, {multiple: true});
-                var selectee = $(ul.find(">li")[0]);
+                var selectable = new Selectable(ul, { multiple: true });
 
-                $(selectee).trigger("mousedown");
-                ok(selectable._marquee.parent()[0] === document.body);
+                ul.children().eq(0).press().move(10, 10);
+                equal($(".k-marquee").length, 1);
             });
 
-            test("element get selected after mouseup", function() {
+            test("element get selected on mouseup", function() {
                 var selectable = new Selectable(ul);
                 var selectee = $(ul.find(">li")[0]);
 
-                selectee.trigger("mousedown");
-                $(document).trigger("mouseup");
+                selectee.tap();
 
                 ok(selectee.hasClass(SELECTED));
             });
@@ -82,140 +100,129 @@
                 var selectable = new Selectable(ul);
                 var selectees = ul.find(">li");
 
-                $(selectees[0]).trigger("mousedown");
-                $(document).trigger("mouseup");
+                selectees.eq(0).tap();
+                selectees.eq(1).tap();
 
-                $(selectees[1]).trigger("mousedown");
-                $(document).trigger("mouseup");
-
-                equal($(selectees[0]).hasClass(SELECTED), false);
-                equal($(selectees[1]).hasClass(SELECTED), true);
+                equal(selectees.eq(0).hasClass(SELECTED), false);
+                equal(selectees.eq(1).hasClass(SELECTED), true);
             });
 
-            test("selecting css class is applied on mousedown", function() {
-                var selectable = new Selectable(ul);
-                var selectee = $(ul.find(">li")[0]);
+            test("item is marked for selection on start", function() {
+                var selectable = new Selectable(ul, { multiple: true });
+                var selectee = ul.find(">li:first");
+                var position = selectee.offset();
 
-                selectee.trigger("mousedown");
+                selectee.press(0, 0).move(position.left, position.top).move(position.left + 1, position.top);
+
                 ok(selectee.hasClass(ACTIVE));
             });
 
-            test("mousemove on selectable element mark it as selecting", function() {
-                var selectable = new Selectable(ul, {multiple: true});
+            test("moving over item marks it for selection", function() {
+                var selectable = new Selectable(ul, { multiple: true });
                 var selectees = ul.find(">li");
-                var position = $(selectees[1]).offset();
+                var position = selectees.eq(1).offset();
 
-                $(selectees[0]).trigger("mousedown");
-                selectable._move({ pageX: position.left, pageY: position.top});
+                selectees.eq(0).press().move(position.left, position.top);
 
-                ok($(selectees[0]).hasClass(ACTIVE));
-                ok($(selectees[1]).hasClass(ACTIVE));
+                ok(selectees.eq(0).hasClass(ACTIVE));
+                ok(selectees.eq(1).hasClass(ACTIVE));
             });
 
-            test("mousemove away from  selectable element removes selecting class", function() {
-                var selectable = new Selectable(ul, {multiple: true});
+            test("moving away from selectable item removes selection mark", function() {
+                var selectable = new Selectable(ul, { multiple: true });
                 var selectees = ul.find(">li");
-                var position = $(selectees[1]).offset();
+                var position = selectees.eq(1).offset();
 
-                $(selectees[0]).trigger("mousedown");
-                selectable._move({ pageX: position.left, pageY: position.top});
-                selectable._move({ pageX: position.left, pageY: position.top - 1});
+                selectees.eq(0).press(0, 0).move(position.left, position.top).move(position.left, position.top - 1);
 
-                ok($(selectees[0]).hasClass(ACTIVE));
-                ok(!$(selectees[1]).hasClass(ACTIVE));
+                ok(selectees.eq(0).hasClass(ACTIVE));
+                ok(!selectees.eq(1).hasClass(ACTIVE));
             });
 
-            test("values returns all selected elements", function() {
+            test("value returns all selected items", function() {
                 var selectable = new Selectable(ul);
                 var selectees = ul.find(">li");
 
-                $(selectees[0]).trigger("mousedown");
-                $(document).trigger("mouseup");
+                selectees.eq(0).tap();
 
                 var values = selectable.value();
+
                 equal(values.length, 1);
                 ok(values[0], selectees[0]);
             });
 
-            test("multiple selection click item with ctrl key pressed does not unselect previosly selected", function() {
-                var selectable = new Selectable(ul, {multiple: true});
+            test("multiple selection ctrlKey click on selected items does not unselects it", function() {
+                var selectable = new Selectable(ul, { multiple: true });
                 var selectees = ul.find(">li");
 
-                $(selectees[0]).trigger("mousedown");
-                $(document).trigger("mouseup");
-                $(selectees[1]).trigger(ev({ type: "mousedown", ctrlKey: true }));
-                $(document).trigger("mouseup");
+                selectees.eq(0).tap();
+                selectees.eq(1).tap({ ctrlKey: true });
 
-                ok($(selectees[0]).hasClass(SELECTED));
-                ok($(selectees[1]).hasClass(SELECTED));
+                ok(selectees.eq(0).hasClass(SELECTED));
+                ok(selectees.eq(1).hasClass(SELECTED));
             });
 
-            test("single selection click item with ctrl key pressed does unselect previosly selected", function() {
+            test("single selection ctrlKey click on item when another is selected", function() {
                 var selectable = new Selectable(ul);
                 var selectees = ul.find(">li");
 
-                $(selectees[0]).trigger("mousedown");
-                $(document).trigger("mouseup");
-                $(selectees[1]).trigger(ev({ type: "mousedown", ctrlKey: true }));
-                $(document).trigger("mouseup");
+                selectees.eq(0).tap();
+                selectees.eq(1).tap({ ctrlKey: true });
 
-                ok(!$(selectees[0]).hasClass(SELECTED));
-                ok($(selectees[1]).hasClass(SELECTED));
+                ok(!selectees.eq(0).hasClass(SELECTED));
+                ok(selectees.eq(1).hasClass(SELECTED));
             });
 
-            test("single selection mousedown on selected item with ctrl key pressed persist selected state", function() {
+            test("single selection ctrlKey click on selected item unselects it", function() {
                 var selectable = new Selectable(ul);
                 var selectee = $(ul.find(">li")[0]);
 
-                selectee.addClass(SELECTED);
-                selectee.trigger(ev({ type: "mousedown", ctrlKey: true }));
+                selectee.tap();
+                selectee.tap({ ctrlKey: true });
 
-                ok(selectee.hasClass(SELECTED));
+                ok(!selectee.hasClass(SELECTED));
                 ok(!selectee.hasClass(ACTIVE));
             });
 
-            test("multiple selection mousedown on selected item with ctrl key pressed persist selected state", function() {
-                var selectable = new Selectable(ul, {multiple: true});
+            test("multiple selection mousedown with ctrlKey on selected item persist selection", function() {
+                var selectable = new Selectable(ul, { multiple: true });
                 var selectee = $(ul.find(">li")[0]);
 
-                selectee.addClass(SELECTED);
-                selectee.trigger(ev({ type: "mousedown", ctrlKey: true }));
+                selectee.tap();
+                selectee.press(0, 0, true);
 
                 ok(selectee.hasClass(SELECTED));
                 ok(!selectee.hasClass(ACTIVE));
             });
 
             test("multiple selection click on selected item with ctrl key pressed unselect it", function() {
-                var selectable = new Selectable(ul, {multiple: true});
+                var selectable = new Selectable(ul, { multiple: true });
                 var selectee = $(ul.find(">li")[0]);
 
                 selectee.addClass(SELECTED);
-                selectee.trigger(ev({ type: "mousedown", ctrlKey: true }));
-                $(document).trigger("mouseup");
+                selectee.tap({ ctrlKey: true });
 
                 ok(!selectee.hasClass(SELECTED));
                 ok(!selectee.hasClass(ACTIVE));
             });
 
-            test("mousemove on selected item with ctrl key pressed unselect it", function() {
-                var selectable = new Selectable(ul, {multiple: true}),
+            test("moving after selected item with ctrlKey pressed", function() {
+                var selectable = new Selectable(ul, { multiple: true }),
                     firstSelectee = $(ul.find(">li")[0]),
                     secondSelectee = $(ul.find(">li")[1]),
-                    position = secondSelectee.offset();;
+                    position = secondSelectee.offset();
 
                 firstSelectee.addClass(SELECTED);
                 secondSelectee.addClass(SELECTED);
 
-                $(firstSelectee).trigger(ev({ type: "mousedown", ctrlKey: true }));
-                selectable._move({ pageX: position.left, pageY: position.top, ctrlKey: true});
-                selectable._move({ pageX: position.left, pageY: position.top + 10, ctrlKey: true});
+                firstSelectee.press(0, 0, true).move(position.left, position.top, true).move(position.left, position.top + 1, true);
 
                 ok(firstSelectee.hasClass(SELECTED));
                 ok(!secondSelectee.hasClass(ACTIVE));
                 ok(!secondSelectee.hasClass(SELECTED));
             });
 
-            test("mousemove out of previosly selected item with ctrl key pressed restores selected state", function() {
+            test("moving back from selected item with ctrlKey pressed", function() {
                 var selectable = new Selectable(ul, {multiple: true}),
                     firstSelectee = $(ul.find(">li")[0]),
                     secondSelectee = $(ul.find(">li")[1]),
@@ -224,9 +231,9 @@
                 firstSelectee.addClass(SELECTED);
                 secondSelectee.addClass(SELECTED);
 
-                $(firstSelectee).trigger(ev({ type: "mousedown", ctrlKey: true }));
-                selectable._move({ pageX: position.left, pageY: position.top, ctrlKey: true});
-                selectable._move({ pageX: position.left, pageY: position.top - 1, ctrlKey: true});
+
+                firstSelectee.press(0, 0, true).move(position.left, position.top, true).move(position.left, position.top - 1, true);
+
 
                 ok(firstSelectee.hasClass(SELECTED));
                 ok(!secondSelectee.hasClass(ACTIVE));
@@ -234,37 +241,23 @@
                 ok(!secondSelectee.hasClass(UNSELECTING));
             });
 
-            test("mouseup on selected item with ctrl key pressed unselect it on single selection", function() {
-                var selectable = new Selectable(ul);
-                var selectee = $(ul.find(">li")[0]);
-
-                selectee.addClass(SELECTED);
-                selectee.trigger(ev({ type: "mousedown", ctrlKey: true }));
-                $(document).trigger(ev({ type: "mouseup", ctrlKey: true }));
-
-                ok(!selectee.hasClass(SELECTED));
-                ok(!selectee.hasClass(ACTIVE));
-            });
-
             test("select range between two selected elements when shift key is pressed", function() {
-                var selectable = new Selectable(ul, {multiple: true}),
+                var selectable = new Selectable(ul, { multiple: true }),
                     firstSelectee = $(ul.find(">li")[0]),
                     secondSelectee = $(ul.find(">li")[2]);
 
                 firstSelectee.addClass(SELECTED);
-                secondSelectee.trigger(ev({ type: "mousedown", shiftKey: true }));
-                $(document).trigger(ev({ type: "mouseup", shiftKey: true }));
+                secondSelectee.tap({ shiftKey: true });
 
                 var selected = selectable.value();
                 equal(selected.length, 3);
             });
 
             test("select range when no item selected with shift key pressed select from first selectable", function() {
-                var selectable = new Selectable(ul, {multiple: true}),
+                var selectable = new Selectable(ul, { multiple: true }),
                     selectee = $(ul.find(">li")[2]);
 
-                selectee.trigger(ev({ type: "mousedown", shiftKey: true }));
-                $(document).trigger("mouseup");
+                selectee.tap({ shiftKey: true });
 
                 var selected = selectable.value();
                 equal(selected.length, 3);
@@ -281,15 +274,12 @@
             });
 
             test("shift and click clears selected items outside the selected range", function() {
-                var selectable = new Selectable(ul, {multiple: true}),
+                var selectable = new Selectable(ul, { multiple: true }),
                     selectees = ul.find(">li");
 
-                $(selectees[0]).addClass(SELECTED);
-                $(selectees[1]).addClass(SELECTED);
-                $(selectees[1]).trigger(ev({ type: "mousedown", ctrlKey: true }));
-                $(document).trigger("mouseup");
-                $(selectees[2]).trigger(ev({ type: "mousedown", shiftKey: true }));
-                $(document).trigger("mouseup");
+                selectees.eq(0).addClass(SELECTED);
+                selectees.eq(1).tap();
+                selectees.eq(2).tap({ shiftKey: true });
 
                 var selected = selectable.value();
                 equal(selected.length, 2);
@@ -297,13 +287,12 @@
                 ok(selectees[2] === selected[1]);
             });
 
-            test("selectRange when start and end are same element element selects it", function() {
-                var selectable = new Selectable(ul, {multiple: true}),
+            test("selecting range with equal start and end element", function() {
+                var selectable = new Selectable(ul, { multiple: true }),
                     selectee = $(ul.find(">li")[0]);
 
-                $(ul.find(">li")).addClass(SELECTED);
-                selectee.trigger(ev({ type: "mousedown", shiftKey: true }));
-                $(document).trigger("mouseup");
+                ul.children().addClass(SELECTED);
+                selectee.tap({ shiftKey: true });
 
                 var selected = selectable.value();
                 equal(selected.length, 1);
@@ -316,8 +305,7 @@
                     selectWasCalled = false;
 
                 selectable.bind("select", function () { selectWasCalled = true; });
-                selectee.trigger("mousedown");
-                $(document).trigger("mouseup");
+                selectee.tap();
 
                 ok(selectWasCalled);
             });
@@ -330,10 +318,9 @@
                 selectable.bind("select", function (arg) {
                     elementToSelect = arg.element;
                 });
-                selectee.trigger("mousedown");
-                $(document).trigger("mouseup");
+                selectee.tap();
 
-                ok(elementToSelect === selectee[0]);
+                equal(elementToSelect, selectee[0]);
             });
 
             test("cancel select event will prevent element selection", function() {
@@ -343,8 +330,7 @@
                 selectable.bind("select", function (arg) {
                     arg.preventDefault();
                 });
-                selectee.trigger("mousedown");
-                $(document).trigger("mouseup");
+                selectee.tap();
 
                 var selected = selectable.value();
                 equal(selected.length, 0);
@@ -358,11 +344,24 @@
                     changetWasCalled = false;
 
                 selectable.bind("change", function () { changetWasCalled = true; });
-                selectee.trigger("mousedown");
-                $(document).trigger("mouseup");
+                selectee.tap();
 
                 ok(changetWasCalled);
                 ok(selectee.hasClass(SELECTED));
+            });
+
+            test("ctrlKey click on selected triggers change event", function() {
+                var wasCalled = false,
+                    selectable = new Selectable(ul, {
+                        change: function() {
+                            wasCalled = true;
+                        }
+                    });
+
+                ul.children().first().addClass(SELECTED).tap({ ctrlKey: true });
+
+                ok(wasCalled);
+                ok(!ul.children().first().hasClass(SELECTED));
             });
 
             test("selectRange accept arguments as jQuery object", function() {
@@ -468,6 +467,53 @@
                 equal(selectable.value().length, 2);
                 ok(changeWasFired);
             });
+
+            test("select element adds aria attribute", function() {
+                new Selectable(ul, { aria: true });
+
+                ul.children().first().tap();
+
+                equal(ul.children().first().attr("aria-selected"), "true");
+            });
+
+            test("unselecting element sets aria attribute to false", function() {
+                new Selectable(ul, { aria: true });
+
+                ul.children().first().tap().tap({ ctrlKey: true });
+
+                equal(ul.children().first().attr("aria-selected"), "false");
+            });
+
+            test("multiple selection unselecting element sets aria attribute to false", function() {
+                new Selectable(ul, { aria: true, multiple: true});
+
+                ul.children().first().tap().tap({ ctrlKey: true });
+
+                equal(ul.children().first().attr("aria-selected"), "false");
+            });
+
+            test("select another element invalidates aria attribute", function() {
+                new Selectable(ul, { aria: true });
+
+                ul.children().first().tap();
+                ul.children().eq(1).tap();
+
+                equal(ul.children().first().attr("aria-selected"), "false");
+                equal(ul.children().eq(1).attr("aria-selected"), "true");
+            });
+
+            test("moving over item sets aria attribute", function() {
+                var selectable = new Selectable(ul, { aria:true, multiple: true });
+                var selectees = ul.find(">li");
+                var position = selectees.eq(1).offset();
+
+                selectees.eq(0).tap().press().move(position.left, position.top).release();
+
+                equal(selectees.eq(0).attr("aria-selected"), "true");
+                equal(selectees.eq(1).attr("aria-selected"), "true");
+            });
+
         </script>
     </body>
 </html>
+

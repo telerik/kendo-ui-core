@@ -1,16 +1,12 @@
 (function ($, undefined) {
     var kendo = window.kendo,
-        touch = kendo.support.touch,
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
-        MOUSEUP = touch? "touchend" : "mouseup",
-        MOUSEDOWN = touch? "touchstart" : "mousedown",
-        MOUSEMOVE = touch? "touchmove" : "mousemove",
+        abs = Math.abs,
+        ARIASELECTED = "aria-selected",
         SELECTED = "k-state-selected",
         ACTIVE = "k-state-selecting",
         SELECTABLE = "k-selectable",
-        SELECTSTART = "selectstart",
-        DOCUMENT = $(document),
         CHANGE = "change",
         NS = ".kendoSelectable",
         UNSELECTING = "k-state-unselecting",
@@ -29,18 +25,29 @@
 
     var Selectable = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                multiple;
 
             Widget.fn.init.call(that, element, options);
 
             that._marquee = $("<div class='k-marquee'></div>");
             that._lastActive = null;
-
-            that._moveDelegate = proxy(that._move, that);
-            that._upDelegate = proxy(that._up, that);
-
             that.element.addClass(SELECTABLE);
-            that.element.on(MOUSEDOWN + NS, (!supportEventDelegation ? "." + SELECTABLE + " " : "") + that.options.filter, proxy(that._down, that));
+
+            multiple = that.options.multiple;
+            that.userEvents = new kendo.UserEvents(that.element, {
+                global: true,
+                allowSelection: !multiple,
+                filter: (!supportEventDelegation ? "." + SELECTABLE + " " : "") + that.options.filter,
+                tap: proxy(that._tap, that)
+            });
+
+            if (multiple) {
+                that.userEvents
+                   .bind("start", proxy(that._start, that))
+                   .bind("move", proxy(that._move, that))
+                   .bind("end", proxy(that._end, that));
+            }
         },
 
         events: [CHANGE],
@@ -50,194 +57,105 @@
             filter: ">*",
             multiple: false
         },
-        _collide: function(element, marqueePos) {
-            var pos = element.offset(),
-                selectee = {
-                    left: pos.left,
-                    top: pos.top,
-                    right: pos.left + element.outerWidth(),
-                    bottom: pos.top + element.outerHeight()
-                };
 
-            return (!(selectee.left > marqueePos.right ||
-                selectee.right < marqueePos.left ||
-                selectee.top > marqueePos.bottom ||
-                selectee.bottom < marqueePos.top));
-        },
-        _position: function(event) {
-            var pos = this._originalPosition,
-                left = pos.x,
-                top = pos.y,
-                right = event.pageX,
-                bottom = event.pageY,
-                tmp;
+        _tap: function(e) {
+            var target = $(e.target),
+                that = this,
+                ctrlKey = e.event.ctrlKey,
+                multiple = that.options.multiple,
+                shiftKey = multiple && e.event.shiftKey,
+                selected;
 
-            if (left > right) {
-                tmp = right;
-                right = left;
-                left = tmp;
-            }
-
-            if (top > bottom) {
-                tmp = bottom;
-                bottom = top;
-                top = tmp;
-            }
-
-            return {
-                top: top,
-                right: right,
-                left: left,
-                bottom: bottom
-            };
-        },
-        _down: function (event) {
-            var that = this,
-                selected,
-                ctrlKey = event.ctrlKey,
-                shiftKey = event.shiftKey,
-                single = !that.options.multiple;
-
-            that._downTarget = $(event.currentTarget);
-            that._shiftPressed = shiftKey;
-
-            if (that._downTarget.closest("." + SELECTABLE)[0] !== that.element[0]) {
+            //in case of hierarchy
+            if (target.closest("." + SELECTABLE)[0] !== that.element[0]) {
                 return;
             }
 
-            DOCUMENT
-                .unbind(MOUSEUP, that._upDelegate) // more cancel friendly
-                .bind(MOUSEUP, that._upDelegate);
-
-            that._originalPosition = {
-                x: event.pageX,
-                y: event.pageY
-            };
-
-            if(!single && $(event.target).is(":not(:input, a)")) {
-                DOCUMENT
-                    .unbind(MOUSEMOVE, that._moveDelegate)
-                    .bind(MOUSEMOVE, that._moveDelegate)
-                    .unbind(SELECTSTART, false)
-                    .bind(SELECTSTART, false);
-
-                if (!kendo.support.touch) {
-                    event.preventDefault();
-                }
+            selected = target.hasClass(SELECTED);
+            if (!multiple || !ctrlKey) {
+                that.clear();
             }
 
-            if (!single) {
-                $("body").append(that._marquee);
-                that._marquee.css({
-                    left: event.clientX + 1,
-                    top: event.clientY + 1,
+            if (shiftKey) {
+                that.selectRange(that._firstSelectee(), target);
+            } else {
+                if (selected && ctrlKey) {
+                    that._unselect(target);
+                    that._notify(CHANGE);
+                } else {
+                    that.value(target);
+                }
+
+                that._lastActive = that._downTarget = target;
+            }
+        },
+
+        _start: function(e) {
+            var that = this,
+                target = $(e.target),
+                selected = target.hasClass(SELECTED),
+                ctrlKey = e.event.ctrlKey;
+
+            that._downTarget = target;
+
+            //in case of hierarchy
+            if (target.closest("." + SELECTABLE)[0] !== that.element[0]) {
+                that.userEvents.cancel();
+                that._downTarget = null;
+                return;
+            }
+
+            that._marquee
+                .appendTo(document.body)
+                .css({
+                    left: e.x.client + 1,
+                    top: e.y.client + 1,
                     width: 0,
                     height: 0
                 });
+
+            if (!ctrlKey) {
+                that.clear();
             }
 
-            selected = that._downTarget.hasClass(SELECTED);
-            if(single || !(ctrlKey || shiftKey)) {
-                that.element
-                .find(that.options.filter + "." + SELECTED)
-                .not(that._downTarget)
-                .removeClass(SELECTED);
-            }
-            if(ctrlKey) {
-                that._lastActive = that._downTarget;
-            }
-
-            if(selected && (ctrlKey || shiftKey)) {
-                that._downTarget.addClass(SELECTED);
-                if(!shiftKey) {
-                    that._downTarget.addClass(UNSELECTING);
-                }
-            }
-            else {
-                if (!(kendo.support.touch && single)) {
-                    that._downTarget.addClass(ACTIVE);
-
-                    if (single && that._downTarget.hasClass(SELECTED)) {
-                        that._downTarget.removeClass(ACTIVE);
-                    }
+            if (selected) {
+                that._selectElement(target, true);
+                if (ctrlKey) {
+                    target.addClass(UNSELECTING);
                 }
             }
         },
-        _move: function (event) {
+
+        _move: function(e) {
             var that = this,
-                pos = that._position(event),
-                ctrlKey = event.ctrlKey,
-                selectee, collide;
+                position = {
+                    left: e.x.startLocation > e.x.location ? e.x.location : e.x.startLocation,
+                    top: e.y.startLocation > e.y.location ? e.y.location : e.y.startLocation,
+                    width: abs(e.x.initialDelta),
+                    height: abs(e.y.initialDelta)
+                },
+                items = that.element.find(that.options.filter);
 
-                that._marquee.css({
-                    left: pos.left,
-                    top: pos.top,
-                    width: pos.right - pos.left,
-                    height: pos.bottom - pos.top
-                });
+            that._marquee.css(position);
 
-            that.element.find(that.options.filter).each(function () {
-                selectee = $(this);
-                collide = that._collide(selectee, pos);
+            invalidateSelectables(items, that._downTarget[0], position, e.event.ctrlKey);
 
-                if (collide) {
-                    if(selectee.hasClass(SELECTED)) {
-                        if(that._downTarget[0] !== selectee[0] && ctrlKey) {
-                            selectee
-                                .removeClass(SELECTED)
-                                .addClass(UNSELECTING);
-                        }
-                    } else if (!selectee.hasClass(ACTIVE) && !selectee.hasClass(UNSELECTING)) {
-                        selectee.addClass(ACTIVE);
-                    }
-                }
-                else {
-                    if (selectee.hasClass(ACTIVE)) {
-                        selectee.removeClass(ACTIVE);
-                    }
-                    else if(ctrlKey && selectee.hasClass(UNSELECTING)) {
-                        selectee
-                            .removeClass(UNSELECTING)
-                            .addClass(SELECTED);
-                    }
-                }
-            });
+            e.preventDefault();
         },
-        _up: function (event) {
-            var that = this,
-                options = that.options,
-                single = !options.multiple;
 
-            DOCUMENT
-                .unbind(SELECTSTART, false)
-                .unbind(MOUSEMOVE, that._moveDelegate)
-                .unbind(MOUSEUP, that._upDelegate);
+        _end: function() {
+            var that = this;
 
-            if (!single) {
-                that._marquee.remove();
-            }
+            that._marquee.remove();
 
-            if (kendo.support.touch && single) {
-                that._downTarget.addClass(ACTIVE);
-            }
+            that._unselect(that.element
+                .find(that.options.filter + "." + UNSELECTING))
+                .removeClass(UNSELECTING);
 
-            if(!single && that._shiftPressed === true) {
-                that.selectRange(that._firstSelectee(), that._downTarget);
-            }
-            else {
-                that.element
-                    .find(options.filter + "." + UNSELECTING)
-                    .removeClass(UNSELECTING)
-                    .removeClass(SELECTED);
-
-                that.value(that.element.find(options.filter + "." + ACTIVE));
-            }
-            if(!that._shiftPressed) {
-                that._lastActive = that._downTarget;
-            }
-            that._downTarget = null;
-            that._shiftPressed = false;
+            that.value(that.element.find(that.options.filter + "." + ACTIVE));
+            that._lastActive = that._downTarget;
         },
+
         value: function(val) {
             var that = this,
                 selectElement = proxy(that._selectElement, that);
@@ -247,15 +165,17 @@
                     selectElement(this);
                 });
 
-                that.trigger(CHANGE, {});
+                that._notify(CHANGE);
                 return;
             }
 
-            return that.element
-                    .find(that.options.filter + "." + SELECTED);
+            return that.element.find(that.options.filter + "." + SELECTED);
         },
+
         _firstSelectee: function() {
-            var that = this, selected;
+            var that = this,
+                selected;
+
             if(that._lastActive !== null) {
                 return that._lastActive;
             }
@@ -265,68 +185,128 @@
                     selected[0] :
                     that.element.find(that.options.filter);
         },
-        _selectElement: function(el) {
-            var selectee = $(el),
-                isPrevented = this.trigger("select", { element: el });
 
-            selectee.removeClass(ACTIVE);
+        _selectElement: function(element, preventNotify) {
+            var toSelect = $(element),
+                isPrevented =  !preventNotify && this._notify("select", { element: element });
+
+            toSelect.removeClass(ACTIVE);
             if(!isPrevented) {
-                selectee.addClass(SELECTED);
+                 toSelect.addClass(SELECTED);
+
                 if (this.options.aria) {
-                    selectee.attr("aria-selected", true);
+                    toSelect.attr(ARIASELECTED, true);
                 }
             }
         },
-        clear: function() {
-            var that = this;
-            that.element
-                .find(that.options.filter + "." + SELECTED)
-                .removeClass(SELECTED);
 
-            if (that.options.aria) {
-                that.element.children("[aria-selected=true]")
-                    .attr("aria-selected", false);
-            }
+        _notify: function(name, args) {
+            args = args || { };
+            return this.trigger(name, args);
         },
+
+        _unselect: function(element) {
+            element.removeClass(SELECTED);
+
+            if (this.options.aria) {
+                element.attr(ARIASELECTED, false);
+            }
+
+            return element;
+        },
+
+        clear: function() {
+            var items = this.element.find(this.options.filter + "." + SELECTED);
+            this._unselect(items);
+        },
+
         selectRange: function(start, end) {
             var that = this,
                 found = false,
-                selectElement = proxy(that._selectElement, that),
-                selectee;
+                idx,
+                length,
+                tmp,
+                toSelect,
+                items = that.element.find(that.options.filter),
+                selectElement = proxy(that._selectElement, that);
+
             start = $(start)[0];
             end = $(end)[0];
-            that.element.find(that.options.filter).each(function () {
-                selectee = $(this);
+
+            for (idx = 0, length = items.length; idx < length; idx ++) {
+                toSelect = items[idx];
                 if(found) {
-                    selectElement(this);
-                    found = this !== end;
-                }
-                else if(this === start) {
+                    selectElement(toSelect);
+                    found = toSelect !== end;
+                } else if(toSelect === start) {
                     found = start !== end;
-                    selectElement(this);
-                }
-                else if(this === end) {
-                    var tmp = start;
+                    selectElement(toSelect);
+                } else if(toSelect === end) {
+                    tmp = start;
                     start = end;
                     end = tmp;
                     found = true;
-                    selectElement(this);
+                    selectElement(toSelect);
+                } else {
+                    $(toSelect).removeClass(SELECTED);
                 }
-                else {
-                    selectee.removeClass(SELECTED);
-                }
-            });
-            that.trigger(CHANGE, {});
+            }
+
+            that._notify(CHANGE);
         },
+
         destroy: function() {
             var that = this;
 
             Widget.fn.destroy.call(that);
 
             that.element.off(NS);
+
+            that.userEvents.destroy();
         }
     });
+
+    function collision(element, position) {
+        var elementPosition = element.offset(),
+            right = position.left + position.width,
+            bottom = position.top + position.height;
+
+        elementPosition.right = elementPosition.left + element.outerWidth();
+        elementPosition.bottom = elementPosition.top + element.outerHeight();
+
+        return !(elementPosition.left > right||
+            elementPosition.right < position.left ||
+            elementPosition.top > bottom ||
+            elementPosition.bottom < position.top);
+    }
+
+    function invalidateSelectables(items, target, position, ctrlKey) {
+        var idx,
+            length,
+            toSelect;
+
+        for (idx = 0, length = items.length; idx < length; idx ++) {
+            toSelect = items.eq(idx);
+
+            if (collision(toSelect, position)) {
+                if(toSelect.hasClass(SELECTED)) {
+                    if(ctrlKey && target !== toSelect[0]) {
+                        toSelect.removeClass(SELECTED).addClass(UNSELECTING);
+                    }
+                } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING)) {
+                    toSelect.addClass(ACTIVE);
+                }
+            } else {
+                if (toSelect.hasClass(ACTIVE)) {
+                    toSelect.removeClass(ACTIVE);
+                } else if(ctrlKey && toSelect.hasClass(UNSELECTING)) {
+                    toSelect.removeClass(UNSELECTING).addClass(SELECTED);
+                }
+            }
+        }
+    }
 
     kendo.ui.plugin(Selectable);
 
 })(window.kendo.jQuery);
+
