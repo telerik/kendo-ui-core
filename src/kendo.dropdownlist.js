@@ -117,7 +117,7 @@ kendo_module({
             "select",
             "dataBinding",
             "dataBound",
-            "cascade" //TODO: document it!!!
+            "cascade"
         ],
 
         setOptions: function(options) {
