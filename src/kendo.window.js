@@ -572,6 +572,8 @@ kendo_module({
                 currentWindow = wrapper[0],
                 zIndex = +wrapper.css(ZINDEX),
                 originalZIndex = zIndex,
+                activeElement = document.activeElement,
+                winElement = that.element,
                 target = e && e.target ? e.target : null;
 
             $(KWINDOW).each(function(i, element) {
@@ -595,9 +597,20 @@ kendo_module({
                 that.element.find("> .k-overlay").remove();
             }
 
-            if (!$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon") &&
-                (!that.element.find(document.activeElement).length || !that.element.find(target).length)) {
-                that.element.focus();
+            if (!$(activeElement).is(winElement) &&
+                !$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon") &&
+                (!winElement.find(activeElement).length || !winElement.find(target).length)) {
+                winElement.focus();
+
+                var scrollTop = $(window).scrollTop(),
+                    windowTop = parseInt(that.wrapper.position().top, 10);
+                if (windowTop - scrollTop < 0) {
+                    if (scrollTop > 0) {
+                        $(window).scrollTop(windowTop);
+                    } else {
+                        that.wrapper.css("top", scrollTop);
+                    }
+                }
             }
 
             return that;
