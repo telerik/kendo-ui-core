@@ -1385,6 +1385,10 @@
                     "url": "fx/transfer.html"
                 },
                 {
+                    "text": "Zoom",
+                    "url": "fx/zoom.html"
+                },
+                {
                     "text": "Page Turn",
                     "url": "fx/pageturn.html"
                 },
