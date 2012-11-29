@@ -46,7 +46,7 @@
     </div>
 
     <script>
-      $("#flat").kendoColorSelectorSimple();
+      window.flat = $("#flat").kendoColorSelectorSimple().data("kendoColorSelectorSimple");
 
       $("#dropdown").kendoColorPicker({ palette: "basic", toolIcon: "k-foreColor" });
       $("#dropdown2").kendoColorPicker({ palette: "web", toolIcon: "k-backColor" });
@@ -58,7 +58,10 @@
       window.hsv1 = $("#hsv1").kendoColorSelectorHSV({ showButtons: false }).data("kendoColorSelectorHSV");
       window.hsv2 = $("#hsv2").kendoColorSelectorHSV({ showButtons: false }).data("kendoColorSelectorHSV");
 
-      hsv1.bind("slide", function(ev){
+      flat.bind("change", function(ev){
+        hsv1.select(ev.value);
+      });
+      hsv1.bind(["slide", "change"], function(ev){
         hsv2.select(ev.value, true);
       });
     </script>
