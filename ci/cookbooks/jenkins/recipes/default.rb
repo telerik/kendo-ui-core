@@ -51,6 +51,12 @@ end
 bash "setup_CI_job" do
     code %Q{
         java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' create-job CI < CI.xml;
-        java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' restart;
+        if [[ ! $? -eq 0 ]]
+
+        then
+            java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' update-job CI < CI.xml;
+        fi
+
+        # java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' restart;
     }
 end

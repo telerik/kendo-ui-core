@@ -25,7 +25,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>master</name>
+        <name>centos-build</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <disableSubmodules>false</disableSubmodules>
@@ -63,7 +63,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>~/.gem/ruby/1.9.1/bin/bundle &amp;&amp; rake build:master:tests</command>
+      <command>bundle --without development &amp;&amp; rake build:master:tests</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
