@@ -89,7 +89,7 @@
             that._aria();
 
             that._oldIndex = that.selectedIndex = -1;
-            that.selectedValue = that._old = options.value || that._accessor();
+            that._old = options.value || that._accessor();
 
             if (options.autoBind) {
                 that._filterSource();
@@ -133,13 +133,12 @@
 
         events:[
             "open",
-
             "close",
-
             CHANGE,
             "select",
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "cascade"
         ],
 
         setOptions: function(options) {
@@ -241,7 +240,7 @@
             if (that.element.is(SELECT)) {
                 if (state === STATE_REBIND) {
                     that._state = "";
-                    value = that.selectedValue;
+                    value = that.value();
                 }
 
                 custom = that._option;
@@ -251,7 +250,7 @@
                 if (custom && custom[0].selected) {
                     that._custom(custom.val());
                 } else {
-                    that.selectedValue = value || that._accessor();
+                    //that._selectedValue = value; //TODO: test for that
                 }
             }
 
@@ -290,20 +289,6 @@
             that._hideBusy();
             that._bound = true;
             that.trigger("dataBound");
-        },
-
-        select: function(li) {
-            var that = this;
-
-            if (li === undefined) {
-                return that.selectedIndex;
-            } else {
-                that._select(li);
-                that._old = that._accessor();
-                that._oldIndex = that.selectedIndex;
-
-                that.trigger("selected");
-            }
         },
 
         search: function(word) {
@@ -412,6 +397,8 @@
                     that._custom(text);
                     input.value = text;
                 }
+
+                that._triggerCascade();
             } else {
                 return input.value;
             }
@@ -432,7 +419,7 @@
                     value = value.toString();
                 }
 
-                that.selectedValue = value;
+                that._selectedValue = value;
 
                 if (!that._open && value && that._fetchItems(value)) {
                     return;
@@ -445,6 +432,7 @@
                 } else {
                     that.current(NULL);
                     that._custom(value);
+
                     that.text(value);
                     that._placeholder();
                 }
@@ -452,7 +440,7 @@
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
             } else {
-                return that.selectedValue;
+                return that._accessor();
             }
         },
 
@@ -486,7 +474,8 @@
             } else {
                 element.val(value);
             }
-            that.selectedValue = value;
+
+            that._selectedValue = value;
         },
 
         _filter: function(word) {
@@ -695,7 +684,7 @@
 
                 that._prev = that.input[0].value = text;
                 that._accessor(value !== undefined ? value : text, idx);
-                that.selectedValue = that._accessor();
+                that._selectedValue = that._accessor();
                 that._placeholder();
 
                 if (that._optionID) {
@@ -733,6 +722,16 @@
             that.wrapper = wrapper.addClass("k-widget k-combobox k-header")
                                   .addClass(element[0].className)
                                   .css("display", "");
+        },
+
+        _clearSelection: function(parent, isFiltered) {
+            var that = this,
+                hasValue = parent._selectedValue || parent.value(),
+                custom = hasValue && parent.selectedIndex === -1;
+
+            if (isFiltered || !hasValue || custom) {
+                that.value("");
+            }
         }
     });
 

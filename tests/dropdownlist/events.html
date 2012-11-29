@@ -352,6 +352,62 @@
 
                 ok(!dropdownlist.popup.visible());
             });
+
+            test("DropDownList triggers cascade when item is selected", 1, function() {
+                input.kendoDropDownList({
+                    dataSource: ["foo", "bar"],
+                    cascade: function() {
+                        ok(true);
+                    }
+                });
+            });
+
+            test("DropDownList triggers cascade on initial load", 1, function() {
+                input.kendoDropDownList({
+                    dataSource: ["foo", "bar"],
+                    cascade: function() {
+                        ok(true);
+                    }
+                });
+            });
+
+            test("DropDownList triggers cascade when item is selected", 1, function() {
+                input.kendoDropDownList({
+                    dataSource: ["foo", "bar"],
+                });
+
+                var ddl = input.data("kendoDropDownList");
+                ddl.bind("cascade", function() {
+                    ok(true);
+                });
+
+                ddl.open();
+                ddl.ul.children(":last").click();
+            });
+
+            test("DropDownList triggers cascade value method is used", 1, function() {
+                input.kendoDropDownList({
+                    dataSource: ["foo", "bar"],
+                });
+
+                var ddl = input.data("kendoDropDownList");
+                ddl.bind("cascade", function() {
+                    ok(true);
+                });
+
+                ddl.value("bar");
+            });
+
+            test("DropDownList does not trigger cascade if item is not changed", 1, function() {
+                input.kendoDropDownList({
+                    dataSource: ["foo", "bar"],
+                    cascade: function() {
+                        ok(true);
+                    }
+                });
+
+                input.data("kendoDropDownList").value("foo");
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
