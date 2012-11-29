@@ -75,8 +75,6 @@
                     ds = childCB.dataSource;
 
                 parentCB.select(0);
-                parentCB.trigger("change");
-
 
                 equal(ds.view().length, 2);
                 equal(ds.view()[0].parentID, 1);
@@ -110,12 +108,10 @@
                     ds = childCB.dataSource;
 
                 parentCB.select(0);
-                parentCB.trigger("change");
                 childCB.select(0);
 
                 //clear parent
                 parentCB.value("");
-                parentCB.trigger("change");
 
                 equal(childCB.selectedIndex, -1);
                 equal(childCB.element.attr("disabled"), "disabled");
@@ -148,11 +144,9 @@
                     ds = childCB.dataSource;
 
                 parentCB.select(0);
-                parentCB.trigger("change");
                 childCB.select(0);
 
                 parentCB.value("custom");
-                parentCB.trigger("change");
 
                 equal(childCB.selectedIndex, -1);
                 equal(childCB.element.attr("disabled"), "disabled");
@@ -434,21 +428,32 @@
                 var parentCB = parent.data("kendoComboBox"),
                     childCB = child.data("kendoComboBox");
 
-                //select first item
                 parentCB.select(0);
-                parentCB.trigger("change");
-
-                //select first item
                 childCB.select(0);
-                parentCB.trigger("change");
 
                 //select second item
                 parentCB.select(1);
-                parentCB.trigger("change");
 
                 equal(childCB.value(), "");
                 equal(childCB.text(), "");
             });
+
+            test("Parent trigger cascade when enter value with text method", 1, function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 }
+                    ],
+                    cascade: function() {
+                        ok(true);
+                    }
+                });
+
+                parent.data("kendoComboBox").text("1");
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

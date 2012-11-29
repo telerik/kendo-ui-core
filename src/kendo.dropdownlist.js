@@ -65,7 +65,6 @@ kendo_module({
             that._cascade();
 
             that.selectedIndex = -1;
-            that.selectedValue = options.value || that._accessor();
 
             if (index !== undefined) {
                 options.index = index;
@@ -117,7 +116,8 @@ kendo_module({
             CHANGE,
             "select",
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "cascade" //TODO: document it!!!
         ],
 
         setOptions: function(options) {
@@ -227,7 +227,6 @@ kendo_module({
                 }
 
                 that._options(data, optionLabel);
-                that.selectedValue = that._accessor();
             }
 
             if (that._open) {
@@ -272,20 +271,6 @@ kendo_module({
             }
         },
 
-        select: function(li) {
-            var that = this;
-
-            if (li === undefined) {
-                return that.selectedIndex;
-            } else {
-                that._select(li);
-                that._old = that.selectedValue;
-                that._oldIndex = that.selectedIndex;
-
-                that.trigger("selected");
-            }
-        },
-
         text: function (text) {
             var span = this.span;
 
@@ -305,7 +290,7 @@ kendo_module({
                     value = value.toString();
                 }
 
-                that.selectedValue = value;
+                that._selectedValue = value;
 
                 hasValue = value || (that.options.optionLabel && !that.element[0].disabled && value === "");
                 if (hasValue && that._fetchItems(value)) {
@@ -314,12 +299,8 @@ kendo_module({
 
                 idx = that._index(value);
                 that.select(idx > -1 ? idx : 0);
-
-                if (that.element.is(SELECT)) {
-                    that.selectedValue = that._accessor();
-                }
             } else {
-                return that.selectedValue;
+                return that._accessor();
             }
         },
 
@@ -450,7 +431,7 @@ kendo_module({
 
                     that.text(text);
                     that._accessor(value !== undefined ? value : text, idx);
-                    that.selectedValue = that._accessor();
+                    that._selectedValue = that._accessor();
 
                     that.current(li.addClass(SELECTED));
 
@@ -516,6 +497,11 @@ kendo_module({
                                   "aria-haspopup": true,
                                   "aria-expanded": false
                               });
+        },
+
+        _clearSelection: function() {
+            this.text(this.options.optionLabel);
+            this.element.val("");
         }
     });
 

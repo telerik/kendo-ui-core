@@ -32,6 +32,9 @@
                 teardown: function() {
                     parent.data("kendoDropDownList").destroy();
                     child.data("kendoDropDownList").destroy();
+
+                    parent.closest(".k-widget").remove();
+                    child.closest(".k-widget").remove();
                }
             });
 
@@ -49,6 +52,7 @@
                     cascadeFrom: "parent", //id of the parent
                     dataTextField: "childID",
                     dataValueField: "id",
+                    optionLabel: "Select",
                     dataSource:  [
                         { parentID: 1, childID: "1", id: 1 },
                         { parentID: 1, childID: "3", id: 2 }
@@ -71,7 +75,7 @@
                 parentCB.trigger("change");
 
                 equal(childCB.value(), "");
-                equal(childCB.text(), "");
+                equal(childCB.text(), "Select");
             });
 
             test("Select optionLabel if no data", function() {
@@ -108,6 +112,117 @@
 
                 equal(childCB.value(), "");
                 equal(childCB.text(), "Select");
+            });
+
+            asyncTest("Cascading DDLs handles consecutive calls of value method", 2, function() {
+                $.mockjaxSettings.responseTime = 0;
+                $.mockjaxSettings.contentType = "text/html";
+                $.mockjax({ url: "fake.json", responseText: [
+                    {text: "item1", id: 1},
+                    {text: "item2", id: 1},
+                    {text: "item3", id: 2},
+                    {text: "item4", id: 2}
+                ] });
+
+                var ddl = new DropDownList(parent, {
+                    optionLabel: "Select",
+                    dataValueField: "id",
+                    dataTextField: "id",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    autoBind: false
+                });
+
+                var ddl2 = new DropDownList(child, {
+                    optionLabel: "Select",
+                    dataValueField: "text",
+                    dataTextField: "text",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    cascadeFrom: "parent",
+                    autoBind: false,
+                    cascade: function() {
+                        ddl2.dataSource.bind("change", function() {
+                            start();
+                            $.mockjaxClear();
+
+                            equal(ddl.value(), "2");
+                            equal(ddl2.value(), "item4");
+                        });
+                    }
+                });
+
+                ddl.value("2");
+                ddl2.value("item4");
+            });
+
+            asyncTest("DropDownList does not clear value if parent has value", function() {
+                $.mockjaxSettings.responseTime = 0;
+                $.mockjaxSettings.contentType = "text/html";
+                $.mockjax({ url: "fake.json", responseText: [
+                    {text: "item1", id: 1},
+                    {text: "item2", id: 1},
+                    {text: "item3", id: 2},
+                    {text: "item4", id: 2}
+                ] });
+
+                var ddl = new DropDownList(parent, {
+                    optionLabel: "Select",
+                    dataValueField: "id",
+                    dataTextField: "id",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    autoBind: false
+                });
+
+                var ddl2 = new DropDownList(child.attr("id", "child"), {
+                    optionLabel: "Select",
+                    dataValueField: "text",
+                    dataTextField: "text",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    cascadeFrom: "parent",
+                    autoBind: false
+                });
+
+                var ddl3 = new DropDownList($("<input />"), {
+                    optionLabel: "Select",
+                    dataValueField: "text",
+                    dataTextField: "text",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    cascadeFrom: "child",
+                    autoBind: false,
+                    cascade: function() {
+                        ddl3.dataSource.bind("change", function() {
+                            start();
+                            $.mockjaxClear();
+
+                            equal(ddl.value(), "2");
+                            equal(ddl2.value(), "item4");
+                            equal(ddl3.value(), "item4");
+                        });
+                    }
+                });
+
+                ddl.value("2");
+                ddl2.value("item4");
+                ddl3.value("item4");
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

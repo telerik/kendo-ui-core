@@ -231,6 +231,8 @@ kendo_module({
             }
 
             that._select(li);
+            that._triggerCascade();
+
             that._blur();
         },
 
@@ -378,6 +380,12 @@ kendo_module({
             }
         },
 
+       _triggerCascade: function() {
+            if (this._old !== this.value()) {
+                this.trigger("cascade");
+            }
+        },
+
        _unbindDataSource: function() {
             var that = this;
 
@@ -451,6 +459,19 @@ kendo_module({
 
         close: function() {
             this.popup.close();
+        },
+
+        select: function(li) {
+            var that = this;
+
+            if (li === undefined) {
+                return that.selectedIndex;
+            } else {
+                that._select(li);
+                that._triggerCascade();
+                that._old = that._accessor();
+                that._oldIndex = that.selectedIndex;
+            }
         },
 
         _accessor: function(value, idx) {
@@ -638,10 +659,11 @@ kendo_module({
             return pressed;
         },
 
-        _selectItem: function() {
+        _selectItem: function(value) {
             var that = this,
-                options = that.options,
-                value = that.value() || options.value;
+                options = that.options;
+
+            value = that._selectedValue || options.value || that._accessor();
 
             if (value) {
                 that.value(value);
@@ -651,19 +673,19 @@ kendo_module({
         },
 
         _fetchItems: function(value) {
-            var that = this;
-
-            //Do not fetch if combobox will cascade
-            if (that.options.cascadeFrom) {
-                return;
-            }
+            var that = this,
+                hasItems = that.ul[0].firstChild;
 
             //if request is started avoid datasource.fetch
             if (that._request) {
                 return true;
             }
 
-            if (!that._fetch && !that.ul[0].firstChild) {
+            if (!that._fetch && !hasItems) {
+                if (that.options.cascadeFrom) {
+                    return !hasItems;
+                }
+
                 that.dataSource.one(CHANGE, function() {
                     that.value(value);
                     that._fetch = false;
@@ -739,24 +761,12 @@ kendo_module({
             }
         },
 
-        _clearSelection: function() {
-            var that = this,
-                optionLabel = that.options.optionLabel;
-
-            that.value("");
-
-            if (optionLabel !== undefined) {
-                that.text(optionLabel);
-                that.element.val("");
-            }
-        },
-
         _cascade: function() {
             var that = this,
                 options = that.options,
                 cascade = options.cascadeFrom,
                 parent, select, valueField,
-                deactivate, change;
+                change;
 
             if (cascade) {
                 parent = $("#" + cascade).data("kendo" + options.name);
@@ -766,17 +776,12 @@ kendo_module({
                 }
 
                 valueField = parent.options.dataValueField;
-                deactivate = function() {
-                    that.enable(false);
-                    that._clearSelection();
-                };
                 change = function() {
-                    var value = that.value();
-
+                    var value = that._selectedValue || that.value();
                     if (value) {
                         that.value(value);
-                        if (!that.dataSource.view()[0] || that.selectedIndex == -1) {
-                            that._clearSelection();
+                        if (!that.dataSource.view()[0] || that.selectedIndex === -1) {
+                            that._clearSelection(parent, true);
                         }
                     } else {
                         that.select(options.index);
@@ -805,18 +810,14 @@ kendo_module({
                             .filter(filters);
 
                     } else {
-                        deactivate();
+                        that.enable(false);
+                        that._clearSelection(parent);
                     }
+
+                    that._triggerCascade();
                 };
 
-                parent.bind("cascade", deactivate)
-                      .bind(CHANGE, function() {
-                          select();
-                          that.trigger("cascade");
-                      })
-                      .bind("selected", function() {
-                          select();
-                      });
+                parent.bind("cascade", function() { select(); });
 
                 //refresh was called
                 if (parent._bound) {

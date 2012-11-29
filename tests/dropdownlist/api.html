@@ -79,7 +79,7 @@
 
                dropdownlist.value(2);
 
-               equal(dropdownlist.calls("_accessor"), 2); //init() andd call select and set _old value
+               ok(dropdownlist.calls("_accessor"));
            });
 
            test("value should update the selectedIndex", function() {
@@ -122,7 +122,7 @@
 
                 dropdownlist.select(1);
 
-                equal(dropdownlist.calls("_accessor"), 2);
+                ok(dropdownlist.calls("_accessor"));
             });
 
             test("select() should return index", function() {
@@ -365,6 +365,37 @@
                 });
 
                 dropdownlist.value("");
+
+                equal(dropdownlist.dataSource.calls("fetch"), 0);
+            });
+
+            test("value method does not fetch if request is already started", function() {
+                var dropdownlist = new DropDownList(input, {
+                    optionLabel: "Select"
+                });
+
+                dropdownlist.dataSource.trigger("requestStart");
+
+                stub(dropdownlist.dataSource, {
+                    fetch: dropdownlist.dataSource.fetch
+                });
+
+                dropdownlist.value("10");
+
+                equal(dropdownlist.dataSource.calls("fetch"), 0);
+            });
+
+            test("value method does not fetch widget cascades", function() {
+                var dropdownlist = new DropDownList(input, {
+                    optionLabel: "Select",
+                    cascadeFrom: "parent"
+                });
+
+                stub(dropdownlist.dataSource, {
+                    fetch: dropdownlist.dataSource.fetch
+                });
+
+                dropdownlist.value("10");
 
                 equal(dropdownlist.dataSource.calls("fetch"), 0);
             });
