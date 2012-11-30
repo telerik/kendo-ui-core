@@ -86,7 +86,7 @@
 
                         that._click($(link));
                     })
-                    .on(CLICK, function() {
+                    .on("click" + ns, function() {
                         that._focusView(that.options.focusOnNav !== false);
                     })
                     .attr(ID);
