@@ -454,6 +454,7 @@
                 var value = new Date(2000,10,10),
                     cal = new Calendar(div, {animation: false});
 
+                cal.focus();
                 cal._focus(value);
 
                 equal(cal._table.find(".k-state-focused").length, 1);
@@ -467,6 +468,7 @@
 
                 cal.navigate(null, 1);
 
+                cal.focus();
                 cal._focus(value);
 
                 equal(cal._table.find(".k-state-focused").length, 1);
@@ -483,6 +485,7 @@
 
                 stub(cal, {navigate: cal.navigate});
 
+                cal.focus();
                 cal._focus(value);
 
                 equal(cal.calls("navigate"), 0);
@@ -664,18 +667,12 @@
                 equal(+cal.value(), +value);
             });
 
-            test("navigate method focuses calendar even when it is not necessary", 1, function() {
-                document.body.focus();
+            test("calendar is not focused when value changed with API", 1, function() {
+                var calendar = new Calendar(div);
+                calendar.value(null);
 
-                var cal = new Calendar(div);
-
-                cal.bind("navigate", function() {
-                    equal(document.activeElement, document.body);
-                });
-
-                cal.value(null);
+                equal(document.activeElement, document.body);
             });
-
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -29,6 +29,7 @@
                         max: new Date(2200, 0, 1)
                     });
                     calendar = div.data("kendoCalendar");
+                    calendar.focus();
                 },
                 teardown: function() {
                     calendar.destroy();
@@ -562,12 +563,6 @@
                 });
 
                 equal(document.activeElement, calendar._table[0]);
-            });
-
-            test("calendar is not focused when value changed with API", 1, function() {
-                calendar.value(null);
-
-                equal(document.activeElement, document.body);
             });
         </script>
 
