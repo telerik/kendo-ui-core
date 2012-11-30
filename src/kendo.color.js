@@ -7,6 +7,9 @@ kendo_module({
 });
 
 (function($, parseInt, undefined){
+    // WARNING: removing the following jshint declaration and turning
+    // == into === to make JSHint happy will break functionality.
+    /*jshint eqnull:true  */
     var kendo = window.kendo;
     var Class = kendo.Class;
     var ui = kendo.ui;
@@ -40,15 +43,18 @@ kendo_module({
         events: [ "change", "slide" ],
         value: function(v) {
             var that = this;
-            if (v === undefined) return that._value;
+            if (v === undefined) {
+                return that._value;
+            }
             v = parse(v);
             that._value = v;
         },
         select: function(color, nohooks) {
             color = parse(color);
             this.value(color);
-            if (!nohooks)
+            if (!nohooks) {
                 this.trigger("change", { value: this.value() });
+            }
             return color;
         }
     });
@@ -77,7 +83,9 @@ kendo_module({
                 })
                 .find("*").attr(UNSELECTABLE, "on").end();
 
-            if (element) element.append(content);
+            if (element) {
+                element.append(content);
+            }
             that.element = element = content;
 
             element
@@ -155,8 +163,12 @@ kendo_module({
                     }
                 }
             });
-            if (!el) el = best;
-            if (el) $(el).addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
+            if (!el) {
+                el = best;
+            }
+            if (el) {
+                $(el).addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
+            }
             return color;
         },
         options: {
@@ -191,7 +203,9 @@ kendo_module({
                 showSelected : options.showSelected
             })).find("*").attr(UNSELECTABLE, "on").end();
 
-            if (element) element.append(content);
+            if (element) {
+                element.append(content);
+            }
             element = that.element = content;
 
             var hueSlider = that._hueSlider = $(".hue-slider", content).kendoSlider({
@@ -222,9 +236,11 @@ kendo_module({
                 that._updateUI(that._getHSV(ev.value, null, null, null));
             });
 
-            if (opSlider) opSlider.bind([ "slide", "change" ], function(ev){
-                that._updateUI(that._getHSV(null, null, null, ev.value / 100));
-            });
+            if (opSlider) {
+                opSlider.bind([ "slide", "change" ], function(ev){
+                    that._updateUI(that._getHSV(null, null, null, ev.value / 100));
+                });
+            }
 
             that._updateUI(that._value || new ColorRGB(1, 0, 0, 1));
 
@@ -238,10 +254,10 @@ kendo_module({
                     var pey = ev.pageY;
                     var dx = pex - r.left;
                     var dy = pey - r.top;
-                    if (dx < 0) dx = 0;
-                    if (dx > rw) dx = rw;
-                    if (dy < 0) dy = 0;
-                    if (dy > rh) dy = rh;
+                    if (dx < 0) { dx = 0; }
+                    if (dx > rw) { dx = rw; }
+                    if (dy < 0) { dy = 0; }
+                    if (dy > rh) { dy = rh; }
                     hsvHandle.css({
                         left: dx + "px",
                         top: dy + "px"
@@ -299,16 +315,16 @@ kendo_module({
             function move(prop, d) {
                 var c = that._getHSV();
                 c[prop] += d * (ev.shiftKey ? 0.01 : 0.05);
-                if (c[prop] < 0) c[prop] = 0;
-                if (c[prop] > 1) c[prop] = 1;
+                if (c[prop] < 0) { c[prop] = 0; }
+                if (c[prop] > 1) { c[prop] = 1; }
                 that._updateUI(c);
                 preventDefault(ev);
             }
             function hue(d) {
                 var c = that._getHSV();
                 c.h += d * (ev.shiftKey ? 1 : 5);
-                if (c.h < 0) c.h = 0;
-                if (c.h > 359) c.h = 359;
+                if (c.h < 0) { c.h = 0; }
+                if (c.h > 359) { c.h = 359; }
                 that._updateUI(c);
                 preventDefault(ev);
             }
@@ -365,7 +381,9 @@ kendo_module({
             this._updateUI(color);
         },
         _updateUI: function(color) {
-            if (!color) return;
+            if (!color) {
+                return;
+            }
             this._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
             this._colorAsText.val(this._opacitySlider ? color.toCssRgba() : color.toCss());
             this.trigger("slide", { value: color });
@@ -381,7 +399,9 @@ kendo_module({
             });
             this._hueElements.css(BACKGROUNDCOLOR, new ColorHSV(color.h, 1, 1, 1).toCss());
             this._hueSlider.value(color.h);
-            if (this._opacitySlider) this._opacitySlider.value(100 * color.a);
+            if (this._opacitySlider) {
+                this._opacitySlider.value(100 * color.a);
+            }
         },
         _template: kendo.template
         ('<div class="k-colorpicker-hsv">' +
@@ -404,9 +424,11 @@ kendo_module({
     /* -----[ color utils ]----- */
 
     function hex(n, width, pad) {
-        if (!pad) pad = "0";
+        if (!pad) { pad = "0"; }
         n = n.toString(16);
-        while (width > n.length) n = "0" + n;
+        while (width > n.length) {
+            n = "0" + n;
+        }
         return n;
     }
 
@@ -433,7 +455,9 @@ kendo_module({
         },
         equals: function(c) { return c === this || c !== null && this.toHex() == parse(c).toHex(); },
         diff: function(c2) {
-            if (c2 == null) return NaN;
+            if (c2 == null) {
+                return NaN;
+            }
             var c1 = this.toBytes();
             c2 = c2.toBytes();
             return Math.sqrt(Math.pow((c1.r - c2.r) * 0.30, 2) +
@@ -442,7 +466,9 @@ kendo_module({
         },
         clone: function() {
             var c = this.toBytes();
-            if (c === this) c = new ColorBytes(c.r, c.g, c.b, c.a);
+            if (c === this) {
+                c = new ColorBytes(c.r, c.g, c.b, c.a);
+            }
             return c;
         }
     });
@@ -460,15 +486,17 @@ kendo_module({
             delta = max - min;
             if (max !== 0) {
                 s = delta / max;
-                if (r == max)
+                if (r == max) {
                     h = (g - b) / delta;
-                else if (g == max)
+                } else if (g == max) {
                     h = 2 + (b - r) / delta;
-                else
+                } else {
                     h = 4 + (r - g) / delta;
+                }
                 h *= 60;
-                if (h < 0)
+                if (h < 0) {
                     h += 360;
+                }
             } else {
                 s = 0;
                 h = -1;
@@ -505,9 +533,9 @@ kendo_module({
         toRGB: function() {
             var h = this.h, s = this.s, v = this.v;
             var i, r, g, b, f, p, q, t;
-            if (s === 0)
+            if (s === 0) {
                 r = g = b = v;
-            else {
+            } else {
                 h /= 60;
                 i = Math.floor(h);
                 f = h - i;
@@ -536,7 +564,9 @@ kendo_module({
         {
             return null;
         }
-        if (color instanceof Color) return color;
+        if (color instanceof Color) {
+            return color;
+        }
         m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(color);
         if (m) {
             return new ColorBytes(parseInt(m[1], 16),
