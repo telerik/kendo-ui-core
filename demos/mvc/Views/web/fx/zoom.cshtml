@@ -1,0 +1,52 @@
+
+<div id="example" class="k-content">
+    <div id="wrap">
+        <img id="mathew" src="../../content/web/fx/zoom/mathew.png" />
+        <img class="focused" id="andreas" src="../../content/web/fx/zoom/andreas.png" />
+        <img id="lysa" src="../../content/web/fx/zoom/lysa.png" />
+    </div>
+
+    <script>
+        $("#wrap img").click(function() {
+            var img = $(this),
+                effect = kendo.fx(this);
+
+            if (!img.hasClass("focused")) {
+                effect.zoom("out").startValue(2).endValue(1).play();
+            } else {
+                effect.zoom("in").startValue(1).endValue(2).play();
+            }
+
+            img.toggleClass("focused");
+        });
+    </script>
+
+    <style>
+        #wrap {
+            background-image: url("../../content/web/fx/zoom/background.png");
+            width: 655px;
+            height: 298px;
+            margin: 2.5em auto;
+            position: relative;
+            -webkit-transform: translateZ(0);
+        }
+
+        #wrap img {
+            position: absolute;
+            width: 82px;
+            bottom: 65px;
+        }
+
+        #mathew { left: 50px; }
+        #lysa { left: 450px; }
+        #andreas {
+            left: 243px;
+            -webkit-transform: scale(2);
+               -moz-transform: scale(2);
+                -ms-transform: scale(2);
+                 -o-transform: scale(2);
+                    transform: scale(2);
+        }
+    </style>
+</div>
+

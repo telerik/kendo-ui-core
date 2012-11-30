@@ -1377,8 +1377,20 @@
                     "url": "fx/slidein.html"
                 },
                 {
+                    "text": "Flip",
+                    "url": "fx/flip.html"
+                },
+                {
                     "text": "Transfer",
                     "url": "fx/transfer.html"
+                },
+                {
+                    "text": "Zoom",
+                    "url": "fx/zoom.html"
+                },
+                {
+                    "text": "Page Turn",
+                    "url": "fx/pageturn.html"
                 },
                 {
                     "text": "Tile",
