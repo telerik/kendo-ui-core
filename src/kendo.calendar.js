@@ -46,6 +46,7 @@ kendo_module({
         FOCUS_WITH_NS = FOCUS + ns,
         MOUSEENTER = "touchstart mouseenter",
         MOUSEENTER_WITH_NS = "touchstart" + ns + " mouseenter" + ns,
+        MOUSEDOWN_WITH_NS = "touchstart" + ns + " mousedown" + ns,
         MOUSELEAVE = "touchend" + ns + " mouseleave" + ns,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
@@ -93,6 +94,9 @@ kendo_module({
 
                         that._click($(link));
                     })
+                    .on(CLICK, function() {
+                        that.focus();
+                    })
                     .attr(ID);
 
             if (id) {
@@ -106,10 +110,12 @@ kendo_module({
             that._current = new DATE(+restrictValue(value, options.min, options.max));
 
             that._addClassProxy = function() {
+                that._active = true;
                 that._cell.addClass(FOCUSED);
             };
 
             that._removeClassProxy = function() {
+                that._active = false;
                 that._cell.removeClass(FOCUSED);
             };
 
@@ -173,10 +179,10 @@ kendo_module({
 
         focus: function(table) {
             table = table || this._table;
-            if (this.options.focusOnNav !== false) {
+            //if (this.options.focusOnNav !== false) {
                 table.focus();
                 this._bindTable(table);
-            }
+            //}
         },
 
         min: function(value) {
@@ -342,6 +348,10 @@ kendo_module({
                 currentValue = new DATE(+that._current),
                 value, prevent, method, temp;
 
+            if (e.target === that._table[0]) {
+                that._active = true;
+            }
+
             if (e.ctrlKey) {
                 if (key == keys.RIGHT) {
                     that.navigateToFuture();
@@ -404,7 +414,8 @@ kendo_module({
         _animate: function(options) {
             var that = this,
                 from = options.from,
-                to = options.to;
+                to = options.to,
+                active = that._active;
 
             if (!from) {
                 to.insertAfter(that.element[0].firstChild);
@@ -414,11 +425,12 @@ kendo_module({
                 from.remove();
 
                 to.insertAfter(that.element[0].firstChild);
-                that.focus();
+                that._focusView(active);
             } else if (!from.is(":visible") || that.options.animation === false) {
                 to.insertAfter(from);
-                that.focus();
                 from.remove();
+
+                that._focusView(active);
             } else {
                 that[options.vertical ? "_vertical" : "_horizontal"](from, to, options.future);
             }
@@ -426,6 +438,7 @@ kendo_module({
 
         _horizontal: function(from, to, future) {
             var that = this,
+                active = that._active,
                 horizontal = that.options.animation.horizontal,
                 effects = horizontal.effects,
                 viewWidth = from.outerWidth();
@@ -434,7 +447,8 @@ kendo_module({
                 from.add(to).css({ width: viewWidth });
 
                 from.wrap("<div/>");
-                that.focus(from);
+
+                that._focusView(active, from);
 
                 from.parent()
                     .css({
@@ -451,7 +465,8 @@ kendo_module({
                     complete: function() {
                         from.remove();
                         to.unwrap();
-                        that.focus();
+
+                        that._focusView(active);
                     }
                 });
 
@@ -463,6 +478,7 @@ kendo_module({
             var that = this,
                 vertical = that.options.animation.vertical,
                 effects = vertical.effects,
+                active = that._active, //active state before from's blur
                 cell, position;
 
             if (effects && effects.indexOf("zoom") != -1) {
@@ -489,7 +505,8 @@ kendo_module({
                             top: 0,
                             left: 0
                         });
-                        that.focus();
+
+                        that._focusView(active);
                     }
                 });
 
@@ -566,6 +583,12 @@ kendo_module({
             }
         },
 
+        _focusView: function(active, table) {
+            if (active) {
+                this.focus(table);
+            }
+        },
+
         _footer: function(template) {
             var that = this,
                 element = that.element,
@@ -607,9 +630,9 @@ kendo_module({
                            .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE + " " + FOCUS_WITH_NS + " " + BLUR, mousetoggle)
                            .click(false);
 
-            that._title = links.eq(1).on(CLICK, proxy(that.navigateUp, that));
-            that[PREVARROW] = links.eq(0).on(CLICK, proxy(that.navigateToPast, that));
-            that[NEXTARROW] = links.eq(2).on(CLICK, proxy(that.navigateToFuture, that));
+            that._title = links.eq(1).on(CLICK, function() { that.focus(); that.navigateUp(); });
+            that[PREVARROW] = links.eq(0).on(CLICK, function() { that.focus(); that.navigateToPast(); });
+            that[NEXTARROW] = links.eq(2).on(CLICK, function() { that.focus(); that.navigateToFuture(); });
         },
 
         _navigate: function(arrow, modifier) {
