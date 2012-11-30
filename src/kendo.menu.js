@@ -219,7 +219,7 @@ kendo_module({
     function updateArrow (item) {
         item = $(item);
 
-        item.find(".k-icon").remove();
+        item.find("> .k-link > .k-icon").remove();
 
         item.filter(":has(.k-group)")
             .children(".k-link:not(:has([class*=k-i-arrow]))")
