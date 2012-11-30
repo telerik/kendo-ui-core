@@ -140,8 +140,10 @@ kendo_module({
                                 .bind(ERROR, that._errorHandler);
         },
 
-        _requestStart: function() {
-            progress(this.element, true);
+        _requestStart: function(e) {
+            if (!e.isDefaultPrevented()) {
+                progress(this.element, true);
+            }
         },
 
         _error: function() {
