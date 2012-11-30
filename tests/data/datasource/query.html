@@ -984,6 +984,93 @@
                 ok(called);
             });
 
+            test("canceling requestStart prevents read", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4,
+                    requestStart: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                dataSource.read();
+
+                ok(!dataSource.data().length);
+            });
+
+            test("canceling requestStart does not block subsequent reads", function() {
+                var count = 1,
+                    dataSource = new DataSource({
+                        data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                        pageSize: 4,
+                        requestStart: function(e) {
+                            if (count) {
+                                e.preventDefault();
+                                count--;
+                            }
+                        }
+                    });
+
+                dataSource.read();
+
+                dataSource.read();
+
+                ok(dataSource.data().length);
+            });
+
+            test("canceling requestStart from read does not modify datasource state", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4,
+                    requestStart: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                dataSource.read({page: 2 });
+
+                equal(dataSource.page(), 1);
+            });
+
+            test("canceling requestStart prevents query", function() {
+                var count = 0,
+                    dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4,
+                    requestStart: function(e) {
+                        if (count) {
+                            e.preventDefault();
+                        }
+                        count++;
+                    }
+                });
+
+                dataSource.read();
+                dataSource.page(2);
+
+                equal(dataSource.view()[0].age, 1);
+            });
+
+            test("canceling requestStart on query does not modify the datasource state", function() {
+                var count = 0,
+                    dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4,
+                    requestStart: function(e) {
+                        if (count) {
+                            e.preventDefault();
+                        }
+                        count++;
+                    }
+                });
+
+                dataSource.read();
+                dataSource.page(2);
+
+                equal(dataSource.page(), 1);
+            });
+
+
             test("query raised requestEnd", 1, function() {
                 var called = false,
                     dataSource = new DataSource({
