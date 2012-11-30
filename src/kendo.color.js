@@ -128,6 +128,10 @@ kendo_module({
                     .removeAttr("aria-selected");
                 selected.addClass(ITEMSELECTEDCLASS)
                     .attr("aria-selected", true);
+                try {
+                    var color = selected.find("div").css(BACKGROUNDCOLOR);
+                    that.trigger("slide", { value: parse(color) });
+                } catch(ex) {}
             }
         },
         select: function(color, nohooks) {
@@ -653,18 +657,21 @@ kendo_module({
         value: function(value) {
             if (value !== undefined) {
                 value = parse(value);
-                this._value = value;
-                this._content.find(".k-selected-color").css(
-                    BACKGROUNDCOLOR,
-                    value ? value.toDisplay() : "transparent"
-                );
+                this._updateUI(this._value = value);
             }
             return this._value;
+        },
+        _updateUI: function(value) {
+            this._content.find(".k-selected-color").css(
+                BACKGROUNDCOLOR,
+                value ? value.toDisplay() : "transparent"
+            );
         },
         keydown: function(ev) {
             var key = ev.keyCode;
             if (this._getPopup().visible()) {
                 if (key == KEYS.ESC) {
+                    this.select(this.value());
                     this.close();
                 } else {
                     this._selector.keydown(ev);
@@ -697,7 +704,7 @@ kendo_module({
                     toggleTarget : that._content.find(".k-icon")
                 }).data("kendoPopup");
                 sel.bind("slide", function(ev){
-                    that.select(ev.value);
+                    that._updateUI(ev.value);
                 });
                 sel.bind("change", function(ev){
                     p.close();
@@ -705,6 +712,7 @@ kendo_module({
                 });
                 p.bind("close", function(ev){
                     that._content.focus();
+                    that._updateUI(that._value);
                 });
             }
             return p;
