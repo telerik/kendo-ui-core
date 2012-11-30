@@ -513,8 +513,12 @@ kendo_module({
             that._busy = null;
         },
 
-        _showBusy: function () {
+        _showBusy: function (e) {
             var that = this;
+
+            if (e && e.isDefaultPrevented()) {
+                return;
+            }
 
             that._request = true;
 
