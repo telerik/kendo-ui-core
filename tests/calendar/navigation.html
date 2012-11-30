@@ -505,6 +505,70 @@
                 equal(value.getMinutes(), 30);
             });
 
+            module("kendo.ui.Calendar focus persistance", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body).kendoCalendar({
+                        min: new Date(1800, 0, 1),
+                        max: new Date(2200, 0, 1)
+                    });
+                    calendar = div.data("kendoCalendar");
+                },
+                teardown: function() {
+                    calendar.destroy();
+                    div.remove();
+                }
+            });
+
+            test("click to change view", 1, function() {
+                document.body.focus();
+
+                calendar.bind("navigate", function() {
+                    equal(document.activeElement, calendar._table[0]);
+                });
+
+                div.find(".k-nav-prev").mousedown();
+                div.find(".k-nav-prev").click();
+            });
+
+            test("click on calendar will focus the table", 1, function() {
+                calendar.element.click();
+
+                equal(document.activeElement, calendar._table[0]);
+            });
+
+            test("click on title focuses the table", 1, function() {
+                calendar._title.click();
+
+                equal(document.activeElement, calendar._table[0]);
+            });
+
+            test("click on prev arrow focuses the table", 1, function() {
+                calendar._prevArrow.click();
+
+                equal(document.activeElement, calendar._table[0]);
+            });
+
+            test("click on next arrow focuses the table", 1, function() {
+                calendar._nextArrow.click();
+
+                equal(document.activeElement, calendar._table[0]);
+            });
+
+            test("_move focuses the table", 1, function() {
+                calendar._table.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.RIGHT,
+                    ctrlKey: true
+                });
+
+                equal(document.activeElement, calendar._table[0]);
+            });
+
+            test("calendar is not focused when value changed with API", 1, function() {
+                calendar.value(null);
+
+                equal(document.activeElement, document.body);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
