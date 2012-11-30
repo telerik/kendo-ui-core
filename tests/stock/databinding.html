@@ -175,8 +175,7 @@
                     createStockChart({
                         navigator: {
                             select: {
-                                from: "2012/01/01",
-                                to: null
+                                from: "2012/01/01"
                             }
                         }
                     });
@@ -188,13 +187,30 @@
                     createStockChart({
                         navigator: {
                             select: {
-                                from: null,
                                 to: "2012/01/02"
                             }
                         }
                     });
 
                     same(chart.dataSource._filter.filters[0].value, new Date("2012/01/02"));
+                });
+
+                test("navigator preserves existing filters", function() {
+                    createStockChart({
+                        dataSource: {
+                            filter: {
+                                field: "Sales", operator: "gt", value: 100
+                            }
+                        },
+                        navigator: {
+                            select: {
+                                from: "2012/01/01"
+                            }
+                        }
+                    });
+
+                    same(chart.dataSource._filter.filters[0].value, new Date("2012/01/01"));
+                    same(chart.dataSource._filter.filters[1].value, 100);
                 });
 
             })();

@@ -135,7 +135,7 @@ kendo_module({
 
             navigator.applySelection();
 
-            if (chart._dataBound) {
+            if (chart._dataBound && navigator.dataSource) {
                 navigator.redrawSlaves();
             } else {
                 Chart.fn._redraw.call(chart);
@@ -217,6 +217,7 @@ kendo_module({
                 currentAxis;
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+            navi._redrawPane();
                 currentSeries = series[seriesIx];
 
                 if (currentSeries.axis == NAVIGATOR_AXIS && chart.isBindable(currentSeries)) {
@@ -232,8 +233,11 @@ kendo_module({
                 }
             }
 
-            navi._redrawPane();
-            navi.redraw();
+            console.log("Navigator: dataChanged");
+            if (chart._model && chart.dataSource) {
+                console.log("Navigator: redrawing");
+                navi.redraw();
+            }
         },
 
         destroy: function() {
@@ -257,7 +261,6 @@ kendo_module({
                 from = min,
                 to = max;
 
-            console.log(groups.length)
             if (groups.length > 0) {
                 if (select.from) {
                     from = lteDateIndex(groups, toDate(select.from));
@@ -423,24 +426,10 @@ kendo_module({
                 select = navi.options.select || {},
                 chart = navi.chart,
                 chartDataSource = chart.dataSource,
-                filters = [];
+                filter = Navigator.buildFilter(select.from, select.to);
 
-            if (navi.dataSource && chartDataSource) {
-                if (select.from) {
-                    filters.push({
-                        field: "Date", operator: "gt", value: toDate(select.from)
-                    });
-                }
-
-                if (select.to) {
-                    filters.push({
-                        field: "Date", operator: "lt", value: toDate(select.to)
-                    });
-                }
-
-                if (filters.length) {
-                    chartDataSource.filter(filters);
-                }
+            if (navi.dataSource && chartDataSource && filter.length) {
+                chartDataSource.filter(filter);
             }
         },
 
@@ -560,6 +549,16 @@ kendo_module({
 
         panes.push(paneOptions);
 
+        var dataSource = options.dataSource,
+            select = naviOptions.select;
+        if (dataSource && select) {
+            var filter = [].concat(dataSource.filter || []);
+
+            dataSource.filter =
+                Navigator.buildFilter(select.from, select.to)
+                .concat(filter);
+        }
+
         Navigator.attachAxes(options, naviOptions);
         Navigator.attachSeries(options, naviOptions, themeOptions);
     };
@@ -658,6 +657,24 @@ kendo_module({
             );
         }
     };
+
+    Navigator.buildFilter = function(from, to) {
+        var filters = [];
+
+        if (from) {
+            filters.push({
+                field: "Date", operator: "gt", value: toDate(from)
+            });
+        }
+
+        if (to) {
+            filters.push({
+                field: "Date", operator: "lt", value: toDate(to)
+            });
+        }
+
+        return filters;
+    }
 
     var NavigatorHint = Class.extend({
         init: function(container, options) {

@@ -185,8 +185,7 @@ kendo_module({
                 themeOptions,
                 themes = dataviz.ui.themes || {},
                 theme,
-                themeName,
-                dataSourceOptions = (userOptions || {}).dataSource;
+                themeName;
 
             Widget.fn.init.call(chart, element);
             options = deepExtend({}, chart.options, userOptions);
@@ -212,6 +211,15 @@ kendo_module({
 
             chart.wrapper = chart.element;
 
+            chart._initDataSource(chart.options);
+
+            kendo.notify(chart, dataviz.ui);
+        },
+
+        _initDataSource: function(options) {
+            var chart = this,
+                dataSourceOptions = (options || {}).dataSource;
+
             chart._dataChangeHandler = proxy(chart._onDataChanged, chart);
 
             chart.dataSource = DataSource
@@ -224,8 +232,6 @@ kendo_module({
             if (dataSourceOptions && options.autoBind) {
                 chart.dataSource.fetch();
             }
-
-            kendo.notify(chart, dataviz.ui);
         },
 
         setDataSource: function(dataSource) {
@@ -752,6 +758,7 @@ kendo_module({
 
             chart._bindCategories(categoriesData);
 
+            console.log("Chart: dataChanged");
             chart.trigger(DATABOUND);
             chart._redraw();
         },
