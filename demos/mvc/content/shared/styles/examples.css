@@ -1846,6 +1846,11 @@ pre.prettyprint
     border-radius:0;
 }
 
+#codeStrip .k-content
+{
+    margin: 0;
+}
+
 #codeStrip .k-link
 {
     background:none;
