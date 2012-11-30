@@ -5323,7 +5323,8 @@ kendo_module({
             }
 
             plotArea.render(panes);
-            plotArea.reflowAxes(panes);
+            // TODO: TEST
+            plotArea.reflowAxes(plotArea.panes);
             plotArea.reflowCharts(panes);
 
             for (i = 0; i < panes.length; i++) {
@@ -5385,6 +5386,11 @@ kendo_module({
                 paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
+                // TODO: TEST
+                if (axis.options._overlap) {
+                    continue;
+                }
+
                 if (round(axis.lineBox().x1) === round(xAnchor.lineBox().x1)) {
                     if (leftAnchors[paneId]) {
                         axis.reflow(axis.box
@@ -5423,6 +5429,11 @@ kendo_module({
                 pane = axis.pane;
                 paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
+
+                // TODO: TEST
+                if (axis.options._overlap) {
+                    continue;
+                }
 
                 if (round(axis.lineBox().y1) === round(yAnchor.lineBox().y1)) {
                     if (!axis._mirrored) {

@@ -68,7 +68,7 @@ kendo_module({
                         majorTicks: {
                             visible: false
                         },
-                        maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH)
+                        maxDateGroups: math.floor(width / AUTO_CATEGORY_WIDTH)
                     }
                 }
             };
@@ -133,7 +133,7 @@ kendo_module({
                 navigator = chart._navigator = new Navigator(chart);
             }
 
-            navigator.applySelection();
+            navigator.filterAxes();
 
             if (chart._dataBound && navigator.dataSource) {
                 navigator.redrawSlaves();
@@ -235,6 +235,7 @@ kendo_module({
 
             if (chart._model && chart.dataSource) {
                 console.log("Navigator: redrawing");
+                navi._redrawPane();
                 navi.redraw();
             }
         },
@@ -344,7 +345,8 @@ kendo_module({
             navi.options.select = { from: from, to: to };
 
             if (navi._realtimeDrag()) {
-                navi.applySelection();
+                navi.filterAxes();
+                navi.filterDataSource();
                 navi.redrawSlaves();
             }
 
@@ -364,7 +366,8 @@ kendo_module({
         _dragEnd: function() {
             var navi = this;
 
-            navi.applySelection();
+            navi.filterAxes();
+            navi.filterDataSource();
             navi.redrawSlaves();
 
             if (navi.hint) {
@@ -403,7 +406,7 @@ kendo_module({
             return groups[index];
         },
 
-        applySelection: function() {
+        filterAxes: function() {
             var navi = this,
                 select = navi.options.select || {},
                 chart = navi.chart,
@@ -420,7 +423,7 @@ kendo_module({
             }
         },
 
-        _filterSlaves: function() {
+        filterDataSource: function() {
             var navi = this,
                 select = navi.options.select || {},
                 chart = navi.chart,
@@ -456,7 +459,8 @@ kendo_module({
             }
 
             if (!kendo.support.touch) {
-                navi.applySelection();
+                navi.filterAxes();
+                navi.filterDataSource();
                 navi.redrawSlaves();
             }
 
@@ -518,8 +522,8 @@ kendo_module({
                 navi.hint.hide();
             }
             navi.readSelection();
-            navi.applySelection();
-            navi._filterSlaves();
+            navi.filterAxes();
+            navi.filterDataSource();
             navi.redrawSlaves();
 
             navi.chart.trigger(SELECT_END, {
@@ -581,7 +585,8 @@ kendo_module({
             justified: true,
             tooltip: { visible: false },
             labels: { step: 1 },
-            autoBind: !naviOptions.dataSource
+            autoBind: !naviOptions.dataSource,
+            _overlap: false
         };
 
         categoryAxes.push(

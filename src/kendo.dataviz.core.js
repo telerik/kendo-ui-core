@@ -999,6 +999,8 @@ kendo_module({
                 box = axis.box,
                 vertical = options.vertical,
                 labels = axis.labels,
+                firstLabel = labels[0],
+                lastLabel = last(labels),
                 labelSize = vertical ? HEIGHT : WIDTH,
                 justified = options.justified,
                 mirror = options.labels.mirror,
@@ -1008,8 +1010,15 @@ kendo_module({
                 endMargin = options.line.width;
 
             if (justified && labels.length > 1) {
-                startMargin = labels[0].box[labelSize]() / 2;
-                endMargin = last(labels).box[labelSize]() / 2;
+                // TODO: Can we use label boxes for accurate calculation?
+
+                if (firstLabel.options.visible) {
+                    startMargin = firstLabel.box[labelSize]() / 2;
+                }
+
+                if (lastLabel.options.visible) {
+                    endMargin = lastLabel.box[labelSize]() / 2;
+                }
             }
 
             return vertical ?
