@@ -79,29 +79,39 @@ kendo_module({
     }
 
     // Geometric primitives ===================================================
-    var Point2D = Class.extend({
-        init: function(x, y) {
-            var point = this;
-            point.x = round(x || 0, COORD_PRECISION);
-            point.y = round(y || 0, COORD_PRECISION);
-        },
 
+    var Point2D = function(x, y) {
+        var point = this;
+        if (!(point instanceof arguments.callee)) {
+            return new Point2D(x, y);
+        }
+
+        point.x = round(x || 0, COORD_PRECISION);
+        point.y = round(y || 0, COORD_PRECISION);
+    };
+
+    Point2D.fn = Point2D.prototype = {
         clone: function() {
             var point = this;
 
             return new Point2D(point.x, point.y);
         }
-    });
+    };
 
-    var Box2D = Class.extend({
-        init: function(x1, y1, x2, y2) {
-            var box = this;
-            box.x1 = x1 || 0;
-            box.x2 = x2 || 0;
-            box.y1 = y1 || 0;
-            box.y2 = y2 || 0;
-        },
+    var Box2D = function(x1, y1, x2, y2) {
+        var box = this;
 
+        if (!(box instanceof arguments.callee)) {
+            return new Box2D(x1, y1, x2, y2);
+        }
+
+        box.x1 = x1 || 0;
+        box.x2 = x2 || 0;
+        box.y1 = y1 || 0;
+        box.y2 = y2 || 0;
+    };
+
+    Box2D.fn = Box2D.prototype = {
         width: function() {
             return this.x2 - this.x1;
         },
@@ -268,7 +278,7 @@ kendo_module({
 
             return [box.x1, box.y1, box.x2, box.y2].join(",");
         }
-    });
+    };
 
     var Ring = Class.extend({
         init: function(center, innerRadius, radius, startAngle, angle) {
@@ -2658,6 +2668,14 @@ kendo_module({
         }
 
         return kendo.toString(value, format);
+    }
+
+    function point(x, y) {
+        return new Point2D(x, y);
+    }
+
+    function box(x1, y1, x2, y2) {
+        return new Box2D(x1, y1, x2, y2);
     }
 
     // Exports ================================================================

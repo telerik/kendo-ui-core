@@ -6913,6 +6913,8 @@ kendo_module({
             if (!crosshair.options.id) {
                 crosshair.options.id = uniqueId();
             }
+
+            crosshair.stickyMode = axis instanceof CategoryAxis;
         },
 
         options: {
@@ -6960,23 +6962,35 @@ kendo_module({
                 plotAreaBox = axis.plotArea.backgroundBox(),
                 point = crosshair.point,
                 halfWidth = options.width / 2,
-                result = [];
+                result = [],
+                slot;
 
             if (point) {
-                if (vertical) {
-                    result.push(new Point2D(plotAreaBox.x1, point.y));
-                    result.push(new Point2D(plotAreaBox.x2, point.y));
+                if (crosshair.stickyMode) {
+                    slot = axis.getSlot(axis.getCategoryIndex(point));
+                    if (vertical) {
+                        result.push(Point2D(plotAreaBox.x1, slot.y1 + slot.height() / 2));
+                        result.push(Point2D(plotAreaBox.x2, slot.y1 + slot.height() / 2));
+                    } else {
+                        result.push(Point2D(slot.x1 + slot.width() / 2, plotAreaBox.y1));
+                        result.push(Point2D(slot.x1 + slot.width() / 2, plotAreaBox.y2));
+                    }
                 } else {
-                    result.push(new Point2D(point.x, plotAreaBox.y1));
-                    result.push(new Point2D(point.x, plotAreaBox.y2));
+                    if (vertical) {
+                        result.push(Point2D(plotAreaBox.x1, point.y));
+                        result.push(Point2D(plotAreaBox.x2, point.y));
+                    } else {
+                        result.push(Point2D(point.x, plotAreaBox.y1));
+                        result.push(Point2D(point.x, plotAreaBox.y2));
+                    }
                 }
             } else {
                 if (vertical) {
-                    result.push(new Point2D(plotAreaBox.x1, plotAreaBox.y1));
-                    result.push(new Point2D(plotAreaBox.x2, plotAreaBox.y1));
+                    result.push(Point2D(plotAreaBox.x1, plotAreaBox.y1));
+                    result.push(Point2D(plotAreaBox.x2, plotAreaBox.y1));
                 } else {
-                    result.push(new Point2D(plotAreaBox.x1, plotAreaBox.y1));
-                    result.push(new Point2D(plotAreaBox.x1, plotAreaBox.y2));
+                    result.push(Point2D(plotAreaBox.x1, plotAreaBox.y1));
+                    result.push(Point2D(plotAreaBox.x1, plotAreaBox.y2));
                 }
             }
 
