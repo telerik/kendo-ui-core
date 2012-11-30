@@ -87,7 +87,7 @@
                         that._click($(link));
                     })
                     .on(CLICK, function() {
-                        that.focus();
+                        that._focusView(that.options.focusOnNav !== false);
                     })
                     .attr(ID);
 
@@ -171,10 +171,8 @@
 
         focus: function(table) {
             table = table || this._table;
-            //if (this.options.focusOnNav !== false) {
-                table.focus();
-                this._bindTable(table);
-            //}
+            this._bindTable(table);
+            table.focus();
         },
 
         min: function(value) {
@@ -529,8 +527,13 @@
                        .filter(function() {
                           return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
                        })
-                       .addClass(className)
                        .attr(ARIA_SELECTED, true);
+
+            if (className === FOCUSED && !that._active && that.options.focusOnNav !== false) {
+                className = "";
+            }
+
+            cell.addClass(className);
 
             if (cell[0]) {
                 that._cell = cell;
@@ -608,6 +611,7 @@
         _header: function() {
             var that = this,
             element = that.element,
+            active = that.options.focusOnNav !== false,
             links;
 
             if (!element.find(".k-header")[0]) {
@@ -622,9 +626,9 @@
                            .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE + " " + FOCUS_WITH_NS + " " + BLUR, mousetoggle)
                            .click(false);
 
-            that._title = links.eq(1).on(CLICK, function() { that.focus(); that.navigateUp(); });
-            that[PREVARROW] = links.eq(0).on(CLICK, function() { that.focus(); that.navigateToPast(); });
-            that[NEXTARROW] = links.eq(2).on(CLICK, function() { that.focus(); that.navigateToFuture(); });
+            that._title = links.eq(1).on(CLICK, function() { that._focusView(active); that.navigateUp(); });
+            that[PREVARROW] = links.eq(0).on(CLICK, function() { that._focusView(active); that.navigateToPast(); });
+            that[NEXTARROW] = links.eq(2).on(CLICK, function() { that._focusView(active); that.navigateToFuture(); });
         },
 
         _navigate: function(arrow, modifier) {
