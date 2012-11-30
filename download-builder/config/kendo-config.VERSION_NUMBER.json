@@ -195,7 +195,8 @@
             "category": "framework",
             "source": "kendo.selectable.min.js",
             "depends": [
-                "core"
+                "core",
+                "userevents"
             ],
             "advanced": true
         },
