@@ -2229,8 +2229,10 @@ kendo_module({
             this._progress(false);
         },
 
-        _requestStart: function() {
-            this._progress(true);
+        _requestStart: function(e) {
+            if (!e.isDefaultPrevented()) {
+                this._progress(true);
+            }
         },
 
         _modelChange: function(e) {
