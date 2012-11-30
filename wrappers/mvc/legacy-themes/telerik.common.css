@@ -2042,9 +2042,10 @@ span.k-numerictextbox
     zoom:1;
 }
 
-.k-numerictextbox .k-input /*alignment of arrows in WebKit*/
+.k-numerictextbox .k-input
 {
-    margin: 0;
+    margin: 0; /*alignment of arrows in WebKit*/
+    width: 100%;
 }
 
 .k-grid-edit-row .k-numerictextbox .k-input
