@@ -217,7 +217,7 @@
                 var dataSource = new HierarchicalDataSource({
                     transport: {
                         read: function(options) {
-                            options.success([ { categoryId: 1 }])
+                            options.success([ { hasChildren: true, categoryId: 1 }])
                         }
                     },
                     schema: {
@@ -502,7 +502,7 @@
                 var dataSource = new HierarchicalDataSource({
                     transport: {
                         read: function(options) {
-                            options.success([ { categoryId: 1 }])
+                            options.success([ { hasChildren: true, categoryId: 1 }])
                         }
                     },
                     schema: {
@@ -887,7 +887,7 @@
                         transport: {
                             read: function(options) {
                                 options.success([
-                                    { foo: i++ }
+                                    { hasChildren: true, foo: i++ }
                                 ]);
                             }
                         }

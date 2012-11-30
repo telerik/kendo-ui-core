@@ -64,7 +64,7 @@
 
                 var foo = treeviewObject.dataSource.get(1);
 
-                foo.children.add({ id: 3, text: "baz" });
+                foo.append({ id: 3, text: "baz" });
 
                 equal(treeview.find(".k-item").length, 3);
                 equal(treeview.find(".k-item:first .k-item").length, 1);
@@ -669,6 +669,20 @@
                 });
 
                 equals(treeview.find(".k-item").length, 2);
+            });
+
+            test("items without children do not initialize empty datasource", function() {
+                var root = new Node({ text: "foo" });
+
+                createTreeView({
+                    dataSource: {
+                        data: [root]
+                    },
+
+                    loadOnDemand: false
+                });
+
+                ok(!root.children);
             });
 
             test("binding to HDS in observable object", function() {

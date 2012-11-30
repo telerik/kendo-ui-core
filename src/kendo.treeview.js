@@ -1455,6 +1455,11 @@ kendo_module({
 
                 if (parentNode != this.root) {
                     destDataSource = referenceDataItem.children;
+
+                    if (!destDataSource || $.isPlainObject(destDataSource)) {
+                        referenceDataItem._initChildren();
+                        destDataSource = referenceDataItem.children;
+                    }
                 }
             }
 

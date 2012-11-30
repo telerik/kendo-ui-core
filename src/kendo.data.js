@@ -3116,9 +3116,9 @@ kendo_module({
             var that = this,
                 options = {};
 
-            that._initChildren();
+            if (that.hasChildren) {
+                that._initChildren();
 
-            if (!that._loaded || that.hasChildren) {
                 options[that.idField || "id"] = that.id;
 
                 if (!that._loaded) {
