@@ -758,7 +758,6 @@ kendo_module({
 
             chart._bindCategories(categoriesData);
 
-            console.log("Chart: dataChanged");
             chart.trigger(DATABOUND);
             chart._redraw();
         },

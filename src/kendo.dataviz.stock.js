@@ -233,7 +233,6 @@ kendo_module({
                 }
             }
 
-            console.log("Navigator: dataChanged");
             if (chart._model && chart.dataSource) {
                 console.log("Navigator: redrawing");
                 navi.redraw();
@@ -549,18 +548,23 @@ kendo_module({
 
         panes.push(paneOptions);
 
+        Navigator.setupDataSource(options, naviOptions);
+        Navigator.attachAxes(options, naviOptions);
+        Navigator.attachSeries(options, naviOptions, themeOptions);
+    };
+
+    Navigator.setupDataSource = function(options, naviOptions) {
         var dataSource = options.dataSource,
-            select = naviOptions.select;
+            select = naviOptions.select,
+            filter;
+
         if (dataSource && select) {
-            var filter = [].concat(dataSource.filter || []);
+            filter = [].concat(dataSource.filter || []);
 
             dataSource.filter =
                 Navigator.buildFilter(select.from, select.to)
                 .concat(filter);
         }
-
-        Navigator.attachAxes(options, naviOptions);
-        Navigator.attachSeries(options, naviOptions, themeOptions);
     };
 
     Navigator.attachAxes = function(options, naviOptions) {
