@@ -270,6 +270,12 @@ kendo_module({
             disabled = compare(value, max) > -1;
             that[NEXTARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
 
+            if (from && from.data("animating")) {
+                that._from.remove();
+            }
+
+            that._from = from;
+
             if (!from || that._changeView) {
                 title.html(currentView.title(value, culture));
 
