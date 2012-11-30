@@ -108,6 +108,7 @@ kendo_module({
         MONTHS = "months",
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER_NS = "mouseover" + NS,
+        MOUSEMOVE_NS = "mousemove" + NS,
         MOUSEWHEEL_DELAY = 150,
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
         OHLC = "ohlc",
@@ -425,6 +426,7 @@ kendo_module({
 
             element.on(CLICK_NS, proxy(chart._click, chart));
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
+            element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
             element.on(TOUCH_START_NS, proxy(chart._tap, chart));
 
@@ -658,6 +660,7 @@ kendo_module({
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
+                crosshairs = chart._plotArea.crosshairs,
                 tooltipOptions,
                 point;
 
@@ -684,11 +687,11 @@ kendo_module({
             var chart = this;
 
             if (chart._startHover(e)) {
-                $(doc.body).on(MOUSEMOVE_TRACKING, proxy(chart._mouseMove, chart));
+                $(doc.body).on(MOUSEMOVE_TRACKING, proxy(chart._mouseMoveTracking, chart));
             }
         },
 
-        _mouseMove: function(e) {
+        _mouseMoveTracking: function(e) {
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
@@ -716,6 +719,26 @@ kendo_module({
             } else {
                 $(doc.body).off(MOUSEMOVE_TRACKING);
                 chart._unsetActivePoint();
+            }
+        },
+
+        _mousemove: function(e) {
+            var chart = this,
+                plotArea = chart._plotArea,
+                crosshairs = plotArea.crosshairs,
+                length = crosshairs.length,
+                coords = chart._eventCoordinates(e),
+                point = new Point2D(coords.x, coords.y),
+                i, crosshair;
+
+            if (length && plotArea.backgroundBox().containsPoint(coords)) {
+                for (i = 0; i < length; i++) {
+                    crosshair = crosshairs[i];
+                    if (!crosshair.options.visibility) {
+                        crosshair.show(point);
+                    }
+                    crosshair.repaint(point);
+                }
             }
         },
 
@@ -5129,13 +5152,14 @@ kendo_module({
             plotArea.charts = [];
             plotArea.options.legend.items = [];
             plotArea.axes = [];
+            plotArea.crosshairs = [];
 
             plotArea.options.id = uniqueId();
             plotArea.enableDiscovery();
 
             plotArea.createPanes();
-            plotArea.createCrosshairs();
             plotArea.render();
+            plotArea.createCrosshairs();
         },
 
         options: {
@@ -5173,12 +5197,17 @@ kendo_module({
         createCrosshairs: function() {
             var plotArea = this,
                 panes = plotArea.panes,
-                i, j, pane, axis;
+                i, j, pane, axis, currentCrosshair;
 
             for (i = 0; i < panes.length; i++) {
                 pane = panes[i];
-                for (j = 0; j < pane.axes[]length; pane.axes[]Idx++) {
-                    pane.axes[][pane.axes[]Idx]
+                for (j = 0; j < pane.axes.length; j++) {
+                    axis = pane.axes[j];
+                    if (axis.options.crosshair && axis.options.crosshair.visible) {
+                        currentCrosshair = new Crosshair(axis, axis.options.crosshair);
+                        plotArea.crosshairs.push(currentCrosshair);
+                        plotArea.append(currentCrosshair);
+                    }
                 }
             }
         },
@@ -6878,80 +6907,76 @@ kendo_module({
         init: function(axis, options) {
             var crosshair = this;
 
-            ChartElement.fn.init.call(legend, options);
+            ChartElement.fn.init.call(crosshair, options);
+            crosshair.axis = axis;
 
-            crosshair.chartElement = chartElement;
-            crosshair.chartPadding = {
-                top: parseInt(chartElement.css("paddingTop"), 10),
-                left: parseInt(chartElement.css("paddingLeft"), 10)
-            };
-
-            if (!options.id) {
-                options.id = uniqueId();
+            if (!crosshair.options.id) {
+                crosshair.options.id = uniqueId();
             }
         },
 
         options: {
             color: BLACK,
             width: 2,
-            visible: false
+            visibility: false
         },
 
-        repaint: function() {
+        repaint: function(point) {
             var crosshair = this,
                 options = crosshair.options,
                 element = crosshair.element;
 
+            crosshair.point = point;
             crosshair.getViewElements(crosshair._view);
-            element.pointers = crosshair.element.pointers;
+            element.points = crosshair.element.points;
             element.refresh(doc.getElementById(options.id));
         },
 
-        show: function() {
+        show: function(point) {
             var crosshair = this,
                 options = crosshair.options;
 
-            if (!options.visible) {
-                options.visible = true;
-                crosshair.repaint();
+            if (!options.visibility) {
+                options.visibility = true;
+                crosshair.repaint(point);
             }
         },
 
-        hide: function() {
+        hide: function(point) {
             var crosshair = this,
                 options = crosshair.options;
 
-            if (options.visible) {
-                options.visible = false;
-                crosshair.repaint();
+            if (options.visibility) {
+                options.visibility = false;
+                crosshair.repaint(point);
             }
         },
 
         linePoints: function() {
             var crosshair = this,
                 options = crosshair.options,
-                point = crosshair.point,
                 axis = crosshair.axis,
                 vertical = axis.options.vertical,
-                plotAreaBox = axis.plotArea.box,
+                plotAreaBox = axis.plotArea.backgroundBox(),
+                point = crosshair.point,
                 halfWidth = options.width / 2,
                 result = [];
 
             if (point) {
-                if (vertucal) {
-                    result.add(plotAreaBox.x1 - halfWidth, plotAreaBox.y1);
-                    result.add(plotAreaBox.x1 + halfWidth, plotAreaBox.y2);
+                if (vertical) {
+                    result.push(new Point2D(plotAreaBox.x1, point.y));
+                    result.push(new Point2D(plotAreaBox.x2, point.y));
                 } else {
-                    result.add(point.x - halfWidth, plotAreaBox.y1);
-                    result.add(point.x + halfWidth, plotAreaBox.y2);
+                    result.push(new Point2D(point.x, plotAreaBox.y1));
+                    result.push(new Point2D(point.x, plotAreaBox.y2));
                 }
             } else {
-                if (vertucal) {
-                    result.add(plotAreaBox.x1, plotAreaBox.y1 - halfWidth);
-                    result.add(plotAreaBox.x2, plotAreaBox.y1 + halfWidth);
+                if (vertical) {
+                    result.push(new Point2D(plotAreaBox.x1, plotAreaBox.y1));
+                    result.push(new Point2D(plotAreaBox.x2, plotAreaBox.y1));
                 } else {
-                    result.add(plotAreaBox.x1, point.y - halfWidth);
-                    result.add(plotAreaBox.x2, point.y + halfWidth);
+                    result.push(new Point2D(plotAreaBox.x1, plotAreaBox.y1));
+                    result.push(new Point2D(plotAreaBox.x1, plotAreaBox.y2));
                 }
             }
 
@@ -6961,7 +6986,7 @@ kendo_module({
         getViewElements: function(view) {
             var crosshair = this,
                 options = crosshair.options,
-                elements,
+                elements = [],
                 points = crosshair.linePoints();
 
             crosshair.element = view.createPolyline(points, false, {
@@ -6977,7 +7002,7 @@ kendo_module({
             elements.push(crosshair.element);
             crosshair._view = view;
 
-            append(elements, ChartElement.fn.getViewElements.call(bar, view));
+            append(elements, ChartElement.fn.getViewElements.call(crosshair, view));
 
             return elements;
         }
