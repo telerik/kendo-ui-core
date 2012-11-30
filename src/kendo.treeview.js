@@ -1388,12 +1388,9 @@ kendo_module({
         },
 
         _dataSourceMove: function(nodeData, group, parentNode, callback) {
-            var that = this,
-                srcTreeView = that._objectOrSelf(nodeData),
-                srcDataSource,
-                dataItem,
+            var dataItem,
                 referenceDataItem, i,
-                destTreeview = that._objectOrSelf(parentNode || group),
+                destTreeview = this._objectOrSelf(parentNode || group),
                 destDataSource = destTreeview.dataSource;
 
             if (parentNode && parentNode[0] != destTreeview.element[0]) {
@@ -1404,23 +1401,14 @@ kendo_module({
                     referenceDataItem.load();
                 }
 
-                if (parentNode != that.root) {
+                if (parentNode != this.root) {
                     destDataSource = referenceDataItem.children;
                 }
             }
 
-            if (nodeData instanceof window.jQuery || isDomElement(nodeData)) {
-                // move node within or between treeviews
-                nodeData = $(nodeData);
-                srcDataSource = srcTreeView.dataSource;
-                dataItem = srcDataSource.getByUid(nodeData.attr(kendo.attr("uid")));
+            nodeData = this._toObservableData(nodeData);
 
-                if (dataItem) {
-                    dataItem = srcDataSource.remove(dataItem);
-                }
-
-                dataItem = callback(destDataSource, dataItem);
-            } else if (isArray(nodeData) || nodeData instanceof data.ObservableArray){
+            if (isArray(nodeData) || nodeData instanceof data.ObservableArray){
                 // insert array of nodes
                 for (i = 0; i < nodeData.length; i++) {
                     dataItem = callback(destDataSource, nodeData[i]);
@@ -1430,7 +1418,24 @@ kendo_module({
                 dataItem = callback(destDataSource, nodeData);
             }
 
-            return dataItem && that.findByUid(dataItem.uid);
+            return dataItem && this.findByUid(dataItem.uid);
+        },
+
+        _toObservableData: function(node) {
+            var dataItem = node, dataSource, uid;
+
+            if (node instanceof window.jQuery || isDomElement(node)) {
+                dataSource = this._objectOrSelf(node).dataSource,
+
+                uid = $(node).attr(kendo.attr("uid"));
+                dataItem = dataSource.getByUid(uid);
+
+                if (dataItem) {
+                    dataItem = dataSource.remove(dataItem);
+                }
+            }
+
+            return dataItem;
         },
 
         insertAfter: function (nodeData, referenceNode) {
