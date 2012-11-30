@@ -497,8 +497,15 @@
 
        save: function() {
            var that = this,
-               editable = that.editable.element,
-               model = that._modelFromElement(editable);
+               editable = that.editable,
+               model;
+
+           if (!editable) {
+               return;
+           }
+
+           editable = editable.element;
+           model = that._modelFromElement(editable);
 
            if (!that.trigger(SAVE, { model: model, item: editable }) && that._closeEditable(true)) {
                that.dataSource.sync();
