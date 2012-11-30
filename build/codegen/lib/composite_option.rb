@@ -11,44 +11,26 @@ class CodeGen::CompositeOption
         @options = []
     end
 
-    def add_options(options)
-        prefix = @name + "."
+    def add_option(option)
+        option.name.sub!(@name + '.', '')
 
-        options.each do |option|
-            option.name.sub!(prefix, '')
+        parent = @options.find { |parent| option.name.start_with?(parent.name + '.') }
 
+        if parent
+
+            unless parent.instance_of?(CodeGen::CompositeOption)
+                @options.delete(parent)
+
+                parent = CodeGen::CompositeOption.new(:name => parent.name,
+                                                      :type => parent.type,
+                                                      :description => parent.description)
+                @options.push(parent)
+            end
+
+            parent.add_option(option)
+
+        else
             @options.push(option)
         end
-
-        promote_members
-    end
-
-
-    private
-
-    def promote_members
-        @options.clone.each do |member|
-            prefix = member.name + '.'
-
-            members = @options.find_all {|m| m.name.start_with?(prefix)}
-
-            next unless members.any?
-
-            @options.push composite_option(member, members)
-        end
-    end
-
-    def composite_option(member, members)
-        members.each {|m| @options.delete(m) }
-
-        @options.delete(member)
-
-        option = CodeGen::CompositeOption.new(:name => member.name,
-                                              :type => member.type,
-                                              :description => member.description)
-
-        option.add_options(members)
-
-        option
     end
 end

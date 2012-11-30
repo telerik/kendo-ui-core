@@ -70,8 +70,6 @@ class ComponentTests < Test::Unit::TestCase
     end
 
     def test_promote_removes_nested_options
-        @component.promote_members
-
         assert_equal 1, @component.options.size
     end
 
@@ -82,14 +80,10 @@ class ComponentTests < Test::Unit::TestCase
         @component.add_option(:name => 'foo.bar', :type => 'Object')
         @component.add_option(:name => 'foo.bar.baz', :type => 'Object')
 
-        @component.promote_members
-
         assert_equal true, @component.options[0].options[0].instance_of?(CodeGen::CompositeOption)
     end
 
     def test_promote_adds_options_to_child_component
-        @component.promote_members
-
         component = @component.options[0]
 
         assert_equal 'bar', component.options[0].name

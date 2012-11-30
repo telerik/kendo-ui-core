@@ -23,56 +23,42 @@ class CodeGen::Component
 
         types = settings[:type]
 
-        if types
+        return unless types
 
-            types.split('|').each do |type|
-                type = type.strip
+        parent = @options.find { |parent| name.start_with?(parent.name + '.') }
 
-                if CodeGen::TYPES.include?(type)
+        if parent
+            unless parent.instance_of?(CodeGen::CompositeOption)
+                @options.delete(parent)
 
-                    unless @options.any? { |option| option.name == name && option.type == type }
-
-                        @options.push CodeGen::Option.new(:name => name,
-                                           :type => type,
-                                           :description => description)
-
-                    end
-                end
+                parent = CodeGen::CompositeOption.new(:name => parent.name,
+                                                      :type => parent.type,
+                                                      :description => parent.description)
+                @options.push(parent)
             end
+        end
 
+        types.split('|').each do |type|
+            type = type.strip
+
+            next unless CodeGen::TYPES.include?(type)
+
+            next if @options.any? { |option| option.name == name && option.type == type }
+
+            option = CodeGen::Option.new(:name => name,
+                                         :type => type,
+                                         :description => description)
+
+            if parent
+                parent.add_option(option)
+            else
+                @options.push(option)
+            end
         end
     end
 
     def add_event(settings)
         @events.push CodeGen::Event.new(settings)
-    end
-
-    def promote_members
-        @options.clone.each do |member|
-            prefix = member.name + '.'
-
-            members = @options.find_all {|m| m.name.start_with?(prefix)}
-
-            next unless members.any?
-
-            @options.push composite_option(member, members)
-        end
-    end
-
-    private
-
-    def composite_option(member, members)
-        members.each {|m| @options.delete(m) }
-
-        @options.delete(member)
-
-        option = CodeGen::CompositeOption.new(:name => member.name,
-                                              :description => member.description,
-                                              :type => member.type)
-
-        option.add_options(members)
-
-        option
     end
 end
 

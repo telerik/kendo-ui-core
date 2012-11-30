@@ -41,8 +41,6 @@ class CodeGen::MarkdownParser
 
         end
 
-        component.promote_members
-
         component
     end
 

@@ -63,7 +63,7 @@ class CodeGen::Java::TLD::Generator
     def component(component)
         @tld += CodeGen::Java::TLD::COMPONENT.result(binding)
 
-        component.configuration.each do |option|
+        component.options.each do |option|
             next unless option.instance_of? CodeGen::Option
 
             ignored = CodeGen::Java::IGNORED[component.name.downcase]
