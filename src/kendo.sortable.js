@@ -9,10 +9,10 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         proxy = $.proxy,
-        DIR = "data-dir",
+        DIR = "dir",
         ASC = "asc",
         SINGLE = "single",
-        FIELD = "data-field",
+        FIELD = "field",
         DESC = "desc",
         NS = ".kendoSortable",
         TLINK = ".k-link",
@@ -64,20 +64,20 @@ kendo_module({
                 descriptor,
                 dir,
                 element = that.element,
-                field = element.attr(FIELD);
+                field = element.attr(kendo.attr(FIELD));
 
-            element.removeAttr(DIR);
+            element.removeAttr(kendo.attr(DIR));
             element.removeAttr(ARIASORT);
 
             for (idx = 0, length = sort.length; idx < length; idx++) {
                descriptor = sort[idx];
 
                if (field == descriptor.field) {
-                   element.attr(DIR, descriptor.dir);
+                   element.attr(kendo.attr(DIR), descriptor.dir);
                }
             }
 
-            dir = element.attr(DIR);
+            dir = element.attr(kendo.attr(DIR));
 
             element.find(".k-i-arrow-n,.k-i-arrow-s").remove();
 
@@ -93,8 +93,8 @@ kendo_module({
         _click: function(e) {
             var that = this,
                 element = that.element,
-                field = element.attr(FIELD),
-                dir = element.attr(DIR),
+                field = element.attr(kendo.attr(FIELD)),
+                dir = element.attr(kendo.attr(DIR)),
                 options = that.options,
                 sort = that.dataSource.sort() || [],
                 idx,
