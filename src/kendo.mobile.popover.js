@@ -164,6 +164,8 @@ kendo_module({
             var that = this,
                 popupOptions;
 
+            that.initialOpen = false;
+
             Widget.fn.init.call(that, element, options);
 
             options = that.options;
@@ -176,7 +178,6 @@ kendo_module({
             that.popup = new Popup(that.element, popupOptions);
 
             that.pane = new ui.Pane(that.element, this.options.pane);
-            that.pane.navigate("");
 
             kendo.notify(that, ui);
         },
@@ -198,6 +199,10 @@ kendo_module({
 
         openFor: function(target) {
             this.popup.show(target);
+            if (!this.initialOpen) {
+                this.pane.navigate("");
+                this.initialOpen = true;
+            }
         },
 
         close: function() {
