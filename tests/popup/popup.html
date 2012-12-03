@@ -6,8 +6,13 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -667,6 +672,16 @@
 
                 popup.open();
                 equal(div.parent().css("zIndex"), "3");
+            });
+
+            test("gets biggest zindex if sibling container does not have zIndex", function() {
+                var anchor = $("<div style='background:blue'>anchor</div>").appendTo($("<div />").appendTo(document.body));
+                anchor.wrap('<div style="z-index:2; position: relative;" />');
+
+                var popup = new Popup(div, { anchor: anchor });
+                popup.open();
+
+                ok(div.parent().css("zIndex") > 2);
             });
 
             test("copy font styles from anchor", function() {
