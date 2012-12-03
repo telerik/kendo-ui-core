@@ -49,7 +49,7 @@
                 start();
 
                 var sourceText = source.responseText;
-                if (sourceFile.indexOf("..\/..\/src\/kendo\.") === 0 || sourceFile.indexOf("editor/\main.js") !== -1) {
+                if (sourceText.indexOf("kendo_module") !== -1) {
                     sourceText = "/*global kendo_module:true */\n" + sourceText;
                 }
                 validateFile(sourceText);
