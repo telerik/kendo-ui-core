@@ -78,22 +78,6 @@
                 setup('<div data-role="view" id="page1"><div data-role="content">Content</div></div>');
                 equal(root.find("[data-role=content]").length, 1);
             });
-
-            test("View notifies widget on show", 1, function(){
-                var Foo = kendo.mobile.ui.Widget.extend({
-                    options: {
-                        name: "Foo"
-                    },
-                    viewShow: function() {
-                        ok(true);
-                    }
-                });
-
-                kendo.mobile.ui.plugin(Foo);
-
-                setup('<div data-role="view"><i data-role="foo" /></div>');
-                view.switchWith(null, '', {}, $.noop);
-            });
         </script>
     </body>
 </html>

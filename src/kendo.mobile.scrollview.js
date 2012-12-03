@@ -45,6 +45,7 @@ kendo_module({
             that.page = 0;
 
             that.inner.css("height", that.options.contentHeight);
+            that.container().bind("show", $.proxy(this, "viewShow"));
 
             var movable,
                 transition,
