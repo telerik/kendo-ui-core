@@ -70,10 +70,6 @@
                 that.layout.attach(that);
             }
 
-            that._eachWidget(function(widget) {
-                widget.viewShow(that);
-            });
-
             that.trigger(SHOW, {view: that});
         },
 
@@ -207,16 +203,6 @@
             if (that.layout) {
                 that.layout.setup(that);
             }
-        },
-
-        _eachWidget: function(callback) {
-            var widget;
-            this.element.find("[data-" + kendo.ns + "role]").each(function() {
-                widget = kendo.widgetInstance($(this), ui);
-                if (widget) {
-                    callback(widget);
-                }
-            });
         }
     });
 

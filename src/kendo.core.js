@@ -2508,6 +2508,8 @@ function pad(number, digits, end) {
         }
     });
 
+    var ContainerNullObject = { bind: $.noop };
+
     var MobileWidget = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
@@ -2526,11 +2528,14 @@ function pad(number, digits, end) {
 
         events: [],
 
-        viewShow: $.noop,
-
         view: function() {
-            var viewElement = this.element.closest(kendo.roleSelector("view") + "," + kendo.roleSelector("splitview"));
+            var viewElement = this.element.closest(kendo.roleSelector("view splitview"));
             return viewElement.data("kendoMobileView") || viewElement.data("kendoMobileSplitView");
+        },
+
+        container: function() {
+            var element = this.element.closest(kendo.roleSelector("view layout"));
+            return kendo.widgetInstance(element, kendo.mobile.ui) || ContainerNullObject;
         }
     });
 

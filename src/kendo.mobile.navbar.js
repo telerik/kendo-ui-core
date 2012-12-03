@@ -29,6 +29,8 @@
 
             element = that.element;
 
+            that.container().bind("show", $.proxy(this, "viewShow"));
+
             element.addClass("km-navbar").wrapInner($('<div class="km-view-title" />'));
             createContainer("left", element);
             createContainer("right", element);
@@ -44,7 +46,8 @@
             toggleTitle(this.centerElement);
         },
 
-        viewShow: function(view) {
+        viewShow: function(e) {
+            var view = e.view;
             if (view.options.title) {
                 this.title(view.options.title);
             } else {
