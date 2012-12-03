@@ -50,7 +50,7 @@
 
                 var sourceText = source.responseText;
                 if (sourceFile.indexOf("..\/..\/src\/") === 0) {
-                    sourceText = "/* global kendo_module:true */\n" + sourceText;
+                    sourceText = "/*global kendo_module:true */\n" + sourceText;
                 }
                 validateFile(sourceText);
             });
