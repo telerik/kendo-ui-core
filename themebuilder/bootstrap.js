@@ -92,7 +92,7 @@
                             top: e.pageY - start.top
                         });
                     },
-                    dragend: function(e) {
+                    dragend: function() {
                         dialog.find("#ktb-overlay").remove();
                     }
                 });

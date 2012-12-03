@@ -91,7 +91,7 @@
                     .find(".k-colorpicker").removeClass(".k-colorpicker");
             },
 
-            _colorChange: function(e) {
+            _colorChange: function() {
                 var changeHandler = this.options.colorPickerChange,
                     value = this._updateColorPreview();
 
@@ -355,7 +355,7 @@
                 }
             },
 
-            deserialize: function(themeContent, targetDocument) {
+            deserialize: function(themeContent) {
                 var json, constant,
                     constants = this.constants;
 
@@ -496,7 +496,7 @@
 
                 this.element = $("#kendo-themebuilder");
 
-                function changeHandler(e) {
+                function changeHandler() {
                     var value = this.value();
 
                     if (/^\d+$/.test(value) && this.element.is(".ktb-numeric")) {
@@ -558,7 +558,7 @@
 
                 this._track();
             },
-            showSuiteChooser: function(e) {
+            showSuiteChooser: function() {
                 $("#suite-chooser").slideDown("fast", function() {
                     $(".ktb-view[data-suite]").hide();
                 });

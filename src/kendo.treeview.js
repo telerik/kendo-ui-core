@@ -193,7 +193,7 @@ kendo_module({
             }
 
             if (options.checkboxes && options.checkboxes.checkChildren) {
-                that.wrapper.find(":checkbox").closest(NODE).each(function(e) {
+                that.wrapper.find(":checkbox").closest(NODE).each(function() {
                     that._updateIndeterminate($(this));
                 });
             }
@@ -638,7 +638,7 @@ kendo_module({
             return node && node.length && node.is(":visible") && !node.find(".k-in:first").hasClass("k-state-disabled");
         },
 
-        _focus: function(e) {
+        _focus: function() {
             var current = this.select();
 
             if (!this._focusable(current)) {
@@ -660,7 +660,7 @@ kendo_module({
             this.wrapper.focus();
         },
 
-        _blur: function(e) {
+        _blur: function() {
             this.current().find(".k-in:first").removeClass("k-state-focused");
         },
 
@@ -1715,11 +1715,11 @@ kendo_module({
             that._hintStatus(statusClass);
         },
 
-        dragcancel: function(e) {
+        dragcancel: function() {
             this.dropHint.remove();
         },
 
-        dragend: function (e) {
+        dragend: function () {
             var that = this,
                 treeview = that.treeview,
                 dropPosition = "over",
