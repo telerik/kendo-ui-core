@@ -26,6 +26,7 @@
 
 .k-widget,
 .k-input[type="text"],
+.k-input[type="number"],
 .k-input[type="password"]
 {
     border-style: solid;
@@ -276,6 +277,7 @@ html body .k-button-bare
 }
 
 .k-input[type="text"],
+.k-input[type="number"],
 .k-input[type="password"]
 {
     padding:2px 1px 3px;
