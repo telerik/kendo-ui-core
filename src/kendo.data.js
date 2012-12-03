@@ -1742,6 +1742,8 @@ kendo_module({
             return data;
         },
 
+        parent: noop,
+
         get: function(id) {
             var idx, length, data = this._flatData(this._data);
 
@@ -1764,6 +1766,75 @@ kendo_module({
                     return data[idx];
                 }
             }
+        },
+
+        indexOf: function(model) {
+            return indexOfModel(this._data, model);
+        },
+
+        at: function(index) {
+            return this._data[index];
+        },
+
+        data: function(value) {
+            var that = this;
+            if (value !== undefined) {
+                that._data = this._observe(value);
+
+                that._total = that._data.length;
+
+                that._process(that._data);
+            } else {
+                return that._data;
+            }
+        },
+
+        view: function() {
+            return this._view;
+        },
+
+        add: function(model) {
+            return this.insert(this._data.length, model);
+        },
+
+        insert: function(index, model) {
+            if (!model) {
+                model = index;
+                index = 0;
+            }
+
+            if (!(model instanceof Model)) {
+                if (this.reader.model) {
+                    model = new this.reader.model(model);
+                } else {
+                    model = new ObservableObject(model);
+                }
+            }
+
+            if (this._isServerGrouped()) {
+                this._data.splice(index, 0, wrapInEmptyGroup(this.group(), model));
+            } else {
+                this._data.splice(index, 0, model);
+            }
+
+            return model;
+        },
+
+        remove: function(model) {
+            var result,
+                that = this,
+                hasGroups = that._isServerGrouped();
+
+            this._eachItem(that._data, function(items) {
+                result = removeModel(items, model);
+                if (result && hasGroups) {
+                    if (!result.isNew || !result.isNew()) {
+                        that._destroyed.push(result);
+                    }
+                    return true;
+                }
+            });
+            return model;
         },
 
         sync: function() {
@@ -1804,6 +1875,19 @@ kendo_module({
 
                     that.trigger(SYNC);
                 });
+        },
+
+        cancelChanges: function(model) {
+            var that = this,
+                pristine = that._readData(that._pristine);
+
+            if (model instanceof kendo.data.Model) {
+                that._cancelModel(model);
+            } else {
+                that._destroyed = [];
+                that._data = that._observe(pristine);
+                that._change();
+            }
         },
 
         _accept: function(result) {
@@ -1881,19 +1965,6 @@ kendo_module({
             return read(data);
         },
 
-        cancelChanges: function(model) {
-            var that = this,
-                pristine = that._readData(that._pristine);
-
-            if (model instanceof kendo.data.Model) {
-                that._cancelModel(model);
-            } else {
-                that._destroyed = [];
-                that._data = that._observe(pristine);
-                that._change();
-            }
-        },
-
         _eachPristineItem: function(callback) {
             this._eachItem(this._readData(this._pristine), callback);
         },
@@ -1940,10 +2011,6 @@ kendo_module({
             });
         },
 
-        indexOf: function(model) {
-            return indexOfModel(this._data, model);
-        },
-
         _promise: function(data, models, type) {
             var that = this,
             transport = that.transport;
@@ -1985,33 +2052,6 @@ kendo_module({
             return promises;
         },
 
-        add: function(model) {
-            return this.insert(this._data.length, model);
-        },
-
-        insert: function(index, model) {
-            if (!model) {
-                model = index;
-                index = 0;
-            }
-
-            if (!(model instanceof Model)) {
-                if (this.reader.model) {
-                    model = new this.reader.model(model);
-                } else {
-                    model = new ObservableObject(model);
-                }
-            }
-
-            if (this._isServerGrouped()) {
-                this._data.splice(index, 0, wrapInEmptyGroup(this.group(), model));
-            } else {
-                this._data.splice(index, 0, model);
-            }
-
-            return model;
-        },
-
         read: function(data) {
             var that = this, params = that._params(data);
 
@@ -2030,6 +2070,48 @@ kendo_module({
                 }
             });
         },
+
+        success: function(data) {
+            var that = this,
+                options = that.options;
+
+            that.trigger(REQUESTEND, { response: data, type: "read" });
+
+            data = that.reader.parse(data);
+
+            if (that._handleCustomErrors(data)) {
+                that._dequeueRequest();
+                return;
+            }
+
+            that._pristine = isPlainObject(data) ? $.extend(true, {}, data) : data.slice ? data.slice(0) : data;
+
+            that._total = that.reader.total(data);
+
+            if (that._aggregate && options.serverAggregates) {
+                that._aggregateResult = that.reader.aggregates(data);
+            }
+
+            data = that._readData(data);
+
+            that._data = that._observe(data);
+
+            var start = that._skip || 0,
+            end = start + that._data.length;
+
+            that._ranges.push({ start: start, end: end, data: that._data });
+            that._ranges.sort( function(x, y) { return x.start - y.start; } );
+
+            that._dequeueRequest();
+            that._process(that._data);
+        },
+
+        error: function(xhr, status, errorThrown) {
+            this._dequeueRequest();
+            this.trigger(REQUESTEND, { });
+            this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
+        },
+
         _params: function(data) {
             var that = this,
                 options =  extend({
@@ -2083,29 +2165,6 @@ kendo_module({
             }
         },
 
-        remove: function(model) {
-            var result,
-                that = this,
-                hasGroups = that._isServerGrouped();
-
-            this._eachItem(that._data, function(items) {
-                result = removeModel(items, model);
-                if (result && hasGroups) {
-                    if (!result.isNew || !result.isNew()) {
-                        that._destroyed.push(result);
-                    }
-                    return true;
-                }
-            });
-            return model;
-        },
-
-        error: function(xhr, status, errorThrown) {
-            this._dequeueRequest();
-            this.trigger(REQUESTEND, { });
-            this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
-        },
-
         _handleCustomErrors: function(response) {
             if (this.reader.errors) {
                 var errors = this.reader.errors(response);
@@ -2116,44 +2175,6 @@ kendo_module({
             }
             return false;
         },
-
-        parent: noop,
-
-        success: function(data) {
-            var that = this,
-                options = that.options;
-
-            that.trigger(REQUESTEND, { response: data, type: "read" });
-
-            data = that.reader.parse(data);
-
-            if (that._handleCustomErrors(data)) {
-                that._dequeueRequest();
-                return;
-            }
-
-            that._pristine = isPlainObject(data) ? $.extend(true, {}, data) : data.slice ? data.slice(0) : data;
-
-            that._total = that.reader.total(data);
-
-            if (that._aggregate && options.serverAggregates) {
-                that._aggregateResult = that.reader.aggregates(data);
-            }
-
-            data = that._readData(data);
-
-            that._data = that._observe(data);
-
-            var start = that._skip || 0,
-            end = start + that._data.length;
-
-            that._ranges.push({ start: start, end: end, data: that._data });
-            that._ranges.sort( function(x, y) { return x.start - y.start; } );
-
-            that._dequeueRequest();
-            that._process(that._data);
-        },
-
         _observe: function(data) {
             var that = this,
                 model = that.reader.model,
@@ -2253,27 +2274,6 @@ kendo_module({
             e.items = e.items || that._view;
 
             that.trigger(CHANGE, e);
-        },
-
-        at: function(index) {
-            return this._data[index];
-        },
-
-        data: function(value) {
-            var that = this;
-            if (value !== undefined) {
-                that._data = this._observe(value);
-
-                that._total = that._data.length;
-
-                that._process(that._data);
-            } else {
-                return that._data;
-            }
-        },
-
-        view: function() {
-            return this._view;
         },
 
         _mergeState: function(options) {
