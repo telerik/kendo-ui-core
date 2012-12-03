@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().DropDownList()
+        ///  @(Html.Kendo().DropDownList()
         ///            .Name("DropDownList")
         ///            .Events(events => events.Select(
         ///                 @&lt;text&gt;
@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DropDownListEventBuilderBase Select(Func<object, object> handler)
@@ -46,10 +46,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().DropDownList()
+        ///  @(Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Events(events => events.Select("select"))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DropDownListEventBuilderBase Select(string handler)
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().DropDownList()
+        ///  @(Html.Kendo().DropDownList()
         ///            .Name("DropDownList")
         ///            .Events(events => events.Change(
         ///                 @&lt;text&gt;
@@ -74,7 +74,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DropDownListEventBuilderBase Change(Func<object, object> handler)
@@ -90,10 +90,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().DropDownList()
+        ///  @(Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Events(events => events.Change("change"))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DropDownListEventBuilderBase Change(string handler)
@@ -109,7 +109,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().DropDownList()
+        ///  @(Html.Kendo().DropDownList()
         ///            .Name("DropDownList")
         ///            .Events(events => events.DataBound(
         ///                 @&lt;text&gt;
@@ -118,7 +118,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DropDownListEventBuilderBase DataBound(Func<object, object> handler)
@@ -153,10 +153,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().DropDownList()
+        ///  @(Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Events(events => events.Open("open"))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DropDownListEventBuilderBase Open(string handler)
@@ -172,7 +172,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().DropDownList()
+        ///  @(Html.Kendo().DropDownList()
         ///            .Name("DropDownList")
         ///            .Events(events => events.Open(
         ///                 @&lt;text&gt;
@@ -181,7 +181,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DropDownListEventBuilderBase Open(Func<object, object> handler)
@@ -197,7 +197,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().DropDownList()
+        ///  @(Html.Kendo().DropDownList()
         ///            .Name("DropDownList")
         ///            .Events(events => events.Close(
         ///                 @&lt;text&gt;
@@ -206,7 +206,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DropDownListEventBuilderBase Close(Func<object, object> handler)
@@ -222,10 +222,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().DropDownList()
+        ///  @(Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Events(events => events.Close("close"))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DropDownListEventBuilderBase Close(string handler)
