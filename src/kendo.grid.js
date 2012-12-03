@@ -2230,9 +2230,7 @@ kendo_module({
         },
 
         _requestStart: function(e) {
-            if (!e.isDefaultPrevented()) {
-                this._progress(true);
-            }
+            this._progress(true);
         },
 
         _modelChange: function(e) {

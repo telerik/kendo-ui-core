@@ -141,9 +141,7 @@ kendo_module({
         },
 
         _progress: function(e) {
-            if (!e.isDefaultPrevented()) {
-                progress(this.element, true);
-            }
+            progress(this.element, true);
         },
 
         _error: function() {
