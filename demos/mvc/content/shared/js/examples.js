@@ -179,13 +179,13 @@
         },
 
         getCurrentThemeLink: function() {
-            return $("head link").filter(function(x) {
+            return $("head link").filter(function() {
                 return (/kendo\./gi).test(this.href) && !(/common|rtl|dataviz/gi).test(this.href);
             });
         },
 
         getCurrentDVThemeLink: function() {
-            return $("head link").filter(function(x) {
+            return $("head link").filter(function() {
                 return dvSkinRegex.test(this.href);
             });
         },
@@ -216,7 +216,7 @@
             if (isLess) {
                 $("head style[id^='less']").remove();
 
-                less.sheets = $("head link[href$='.less']").map(function(x) {
+                less.sheets = $("head link[href$='.less']").map(function() {
                     return this;
                 });
 
@@ -374,7 +374,7 @@
                         element.toggleClass("detailHover", e.type == "mouseenter");
                     }
                 })
-                .on("click", DETAILHANDLE, function (e) {
+                .on("click", DETAILHANDLE, function () {
                     var element = $(this),
                         extender = element.next(),
                         visible = extender.is(":visible");

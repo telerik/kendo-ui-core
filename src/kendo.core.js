@@ -296,7 +296,7 @@ function pad(number, digits, end) {
 
     if (typeof Date.prototype.toJSON !== FUNCTION) {
 
-        Date.prototype.toJSON = function (key) {
+        Date.prototype.toJSON = function () {
             var that = this;
 
             return isFinite(that.valueOf()) ?
@@ -308,7 +308,7 @@ function pad(number, digits, end) {
                 pad(that.getUTCSeconds())     + "Z" : null;
         };
 
-        String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function (key) {
+        String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function () {
             return this.valueOf();
         };
     }
@@ -1394,7 +1394,7 @@ function pad(number, digits, end) {
             return globalize.parseDate(value, format, culture);
         };
 
-        kendo.parseFloat = function (value, culture, format) {
+        kendo.parseFloat = function (value, culture) {
             if (typeof value === NUMBER) {
                 return value;
             }

@@ -1216,7 +1216,7 @@ kendo_module({
         sum: function(accumulator, item, accessor) {
             return (accumulator || 0) + accessor.get(item);
         },
-        count: function(accumulator, item, accessor) {
+        count: function(accumulator) {
             return (accumulator || 0) + 1;
         },
         average: function(accumulator, item, accessor, index, length) {
@@ -1899,7 +1899,7 @@ kendo_module({
                 index;
 
             eachGroupItems(pristineData,
-                function(items, group) {
+                function(items) {
                     index = indexOfPristineModel(items, model);
                     if (index > -1) {
                         extend(true, items[index], values);
@@ -1913,7 +1913,7 @@ kendo_module({
                 index;
 
             eachGroupItems(pristineData,
-                function(items, group) {
+                function(items) {
                     index = indexOfPristineModel(items, model);
                     if (index > -1) {
                         items.splice(index, 1);
@@ -2038,7 +2038,7 @@ kendo_module({
                 idx;
 
             eachGroupItems(pristineData,
-                function(items, group) {
+                function(items) {
                     idx = indexOfPristineModel(items, model);
                     if (idx > -1) {
                         pristine = items[idx];
@@ -2047,7 +2047,7 @@ kendo_module({
                 });
 
             if (idx > -1) {
-                eachGroupItems(this._data, function(items, group) {
+                eachGroupItems(this._data, function(items) {
                     idx = indexOfModel(items, model);
                     if (idx > -1) {
                         if (!model.isNew()) {
@@ -2130,7 +2130,7 @@ kendo_module({
             var result,
                 that = this;
 
-            eachGroupItems(data, function(items, group) {
+            eachGroupItems(data, function(items) {
                 result = removeModel(items, model);
                 if (result) {
                     if (!result.isNew || !result.isNew()) {
