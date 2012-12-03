@@ -16,9 +16,19 @@ namespace Kendo.Mvc.UI
         Days,
 
         /// <summary>
+        /// Minutes.
+        /// </summary>
+        Minutes,
+
+        /// <summary>
         /// Months.
         /// </summary>
         Months,
+
+        /// <summary>
+        /// Weeks.
+        /// </summary>
+        Weeks,
 
         /// <summary>
         /// Years.
