@@ -154,6 +154,23 @@
                 equal(filterMenu.form.find("select option:first").val(), "foo");
             });
 
+            test("custom operator is selected when submiting the form", function(){
+                filterMenu = new FilterMenu(dom, {
+                    operators: {
+                        string: {
+                            startswith: "bar"
+                        }
+                    },
+                    dataSource: dataSource
+                });
+
+                filterMenu.form.find("input[type=text]:first").val("bar").change();
+                filterMenu.form.submit();
+
+                equal(dataSource.filter().filters[0].operator, "startswith");
+            });
+
+
             test("submitting the form sets the filterMenu of the datasource", function() {
                 filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
