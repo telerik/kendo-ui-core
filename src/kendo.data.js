@@ -1259,7 +1259,7 @@ kendo_module({
         return result;
     }
 
-    function process(data, options) {
+    Query.process = function(data, options) {
         options = options || {};
 
         var query = new Query(data),
@@ -1295,7 +1295,7 @@ kendo_module({
             total: total,
             data: query.toArray()
         };
-    }
+    };
 
     function calculateAggregates(data, options) {
         options = options || {};
@@ -1680,7 +1680,7 @@ kendo_module({
 
     var DataSource = Observable.extend({
         init: function(options) {
-            var that = this, model, transport, data;
+            var that = this, model, data;
 
             if (options) {
                 data = options.data;
@@ -2240,7 +2240,7 @@ kendo_module({
                 that._aggregateResult = calculateAggregates(data, options);
             }
 
-            result = process(data, options);
+            result = Query.process(data, options);
 
             that._view = result.data;
 
@@ -2328,7 +2328,7 @@ kendo_module({
                 if (!that.trigger(REQUESTSTART)) {
                     that.trigger(PROGRESS);
 
-                    result = process(that._data, that._mergeState(options));
+                    result = Query.process(that._data, that._mergeState(options));
 
                     if (!that.options.serverFiltering) {
                         if (result.total !== undefined) {
@@ -2586,7 +2586,7 @@ kendo_module({
                             rangeEnd = range.end;
 
                             if (!remote) {
-                                processed = process(range.data, { sort: that.sort(), filter: that.filter() });
+                                processed = Query.process(range.data, { sort: that.sort(), filter: that.filter() });
                                 rangeData = processed.data;
 
                                 if (processed.total !== undefined) {
