@@ -24,6 +24,7 @@
         GET = "get",
         ERROR = "error",
         REQUESTSTART = "requestStart",
+        PROGRESS = "progress",
         REQUESTEND = "requestEnd",
         crud = [CREATE, READ, UPDATE, DESTROY],
         identity = function(o) { return o; },
@@ -1702,7 +1703,7 @@
 
             that._data = that._observe(that._data);
 
-            that.bind([ERROR, CHANGE, REQUESTSTART, SYNC, REQUESTEND], options);
+            that.bind([ERROR, CHANGE, REQUESTSTART, SYNC, REQUESTEND, PROGRESS], options);
         },
 
         options: {
@@ -1988,13 +1989,18 @@
             var that = this, params = that._params(data);
 
             that._queueRequest(params, function() {
-                that.trigger(REQUESTSTART);
-                that._ranges = [];
-                that.transport.read({
-                    data: params,
-                    success: proxy(that.success, that),
-                    error: proxy(that.error, that)
-                });
+                if (!that.trigger(REQUESTSTART)) {
+                    that.trigger(PROGRESS);
+
+                    that._ranges = [];
+                    that.transport.read({
+                        data: params,
+                        success: proxy(that.success, that),
+                        error: proxy(that.error, that)
+                    });
+                } else {
+                    that._dequeueRequest();
+                }
             });
         },
 
@@ -2289,10 +2295,8 @@
             return this._view;
         },
 
-        query: function(options) {
-            var that = this,
-            result,
-            remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering || that.options.serverGrouping || that.options.serverAggregates;
+        _mergeState: function(options) {
+            var that = this;
 
             if (options !== undefined) {
                 that._pageSize = options.pageSize;
@@ -2329,25 +2333,35 @@
                     that._aggregate = options.aggregate = normalizeAggregate(options.aggregate);
                 }
             }
+            return options;
+        },
+
+        query: function(options) {
+            var that = this,
+                result,
+                remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering || that.options.serverGrouping || that.options.serverAggregates;
 
             if (remote || (that._data === undefined || that._data.length === 0)) {
-                that.read(options);
+                that.read(that._mergeState(options));
             } else {
-                that.trigger(REQUESTSTART);
-                result = process(that._data, options);
+                if (!that.trigger(REQUESTSTART)) {
+                    that.trigger(PROGRESS);
 
-                if (!that.options.serverFiltering) {
-                    if (result.total !== undefined) {
-                        that._total = result.total;
-                    } else {
-                        that._total = that._data.length;
+                    result = process(that._data, that._mergeState(options));
+
+                    if (!that.options.serverFiltering) {
+                        if (result.total !== undefined) {
+                            that._total = result.total;
+                        } else {
+                            that._total = that._data.length;
+                        }
                     }
-                }
 
-                that._view = result.data;
-                that._aggregateResult = calculateAggregates(that._data, options);
-                that.trigger(REQUESTEND, { });
-                that.trigger(CHANGE, { items: result.data });
+                    that._view = result.data;
+                    that._aggregateResult = calculateAggregates(that._data, options);
+                    that.trigger(REQUESTEND, { });
+                    that.trigger(CHANGE, { items: result.data });
+                }
             }
         },
 

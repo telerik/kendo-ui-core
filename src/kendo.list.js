@@ -14,7 +14,7 @@
         OPEN = "open",
         CLOSE = "close",
         SELECT = "select",
-        REQUESTSTART = "requestStart",
+        PROGRESS = "progress",
         REQUESTEND = "requestEnd",
         WIDTH = "width",
         extend = $.extend,
@@ -382,7 +382,7 @@
             var that = this;
 
             that.dataSource.unbind(CHANGE, that._refreshHandler)
-                           .unbind(REQUESTSTART, that._requestStartHandler)
+                           .unbind(PROGRESS, that._progressHandler)
                            .unbind(REQUESTEND, that._requestEndHandler);
         }
     });
@@ -548,13 +548,13 @@
                 that._unbindDataSource();
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
-                that._requestStartHandler = proxy(that._showBusy, that);
+                that._progressHandler = proxy(that._showBusy, that);
                 that._requestEndHandler = proxy(that._requestEnd, that);
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
                                    .bind(CHANGE, that._refreshHandler)
-                                   .bind(REQUESTSTART, that._requestStartHandler)
+                                   .bind(PROGRESS, that._progressHandler)
                                    .bind(REQUESTEND, that._requestEndHandler);
         },
 

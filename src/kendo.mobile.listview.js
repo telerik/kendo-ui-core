@@ -22,7 +22,7 @@
         CLICK_NS = CLICK + NS,
 
         CHANGE = "change",
-        REQUEST_START = "requestStart",
+        PROGRESS = "progress",
         FUNCTION = "function",
 
         whitespaceRegExp = /^\s+$/,
@@ -344,7 +344,7 @@
             var that = this;
 
             that.dataSource.unbind(CHANGE, that._refreshHandler)
-                           .unbind(REQUEST_START, that._requestStartHandler);
+                           .unbind(PROGRESS, that._progressHandler);
         },
 
         _dataSource: function() {
@@ -355,14 +355,14 @@
                 that._unbindDataSource();
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
-                that._requestStartHandler = proxy(that._showLoading, that);
+                that._progressHandler = proxy(that._showLoading, that);
             }
 
             that.dataSource = DataSource.create(options.dataSource)
                                         .bind(CHANGE, that._refreshHandler);
 
             if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
-                that.dataSource.bind(REQUEST_START, that._requestStartHandler);
+                that.dataSource.bind(PROGRESS, that._progressHandler);
             }
         },
 
