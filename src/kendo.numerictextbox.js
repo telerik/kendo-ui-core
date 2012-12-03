@@ -230,7 +230,7 @@
                 arrows.wrapAll('<span class="k-select"/>');
             }
 
-            arrows.on(MOUSEUP, function(e) {
+            arrows.on(MOUSEUP, function() {
                 clearTimeout( that._spinning );
                 arrows.removeClass(SELECTED);
             });
