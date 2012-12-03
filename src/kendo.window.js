@@ -780,7 +780,7 @@ kendo_module({
                     clearTimeout(loadingIconTimeout);
                     refreshIcon.removeClass(LOADING);
                 },
-                success: proxy(function (data, textStatus) {
+                success: proxy(function (data) {
                     if (contentTemplate) {
                         data = template(contentTemplate)(data || {});
                     }
@@ -848,7 +848,7 @@ kendo_module({
 
             // Collect the src attributes of all iframes and then set them to empty string.
             // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
-            iframeSrcAttributes = contentHtml.find("iframe:not(.k-content)").map(function(iframe) {
+            iframeSrcAttributes = contentHtml.find("iframe:not(.k-content)").map(function() {
                 var src = this.getAttribute("src");
                 this.src = "";
                 return src;
@@ -1078,7 +1078,7 @@ kendo_module({
             e.currentTarget.closest(KWINDOW).css(this.owner.initialWindowPosition);
         },
 
-        dragend: function (e) {
+        dragend: function () {
             this._finishDrag();
 
             this.owner.trigger(DRAGEND);

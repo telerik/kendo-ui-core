@@ -708,7 +708,7 @@ kendo_module({
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .on(MOUSE_UP, function (e) {
+                .on(MOUSE_UP, function () {
                     that._setTooltipTimeout();
                 })
                 .on(CLICK, function (e) {
@@ -852,7 +852,7 @@ kendo_module({
             this.wrapper.find(DRAG_HANDLE).attr("aria-valuenow", value).attr("aria-valuetext", formattedValue);
         },
 
-        _clearTimer: function (e) {
+        _clearTimer: function () {
             clearTimeout(this.timeout);
             clearInterval(this.timer);
         },
@@ -1087,13 +1087,13 @@ kendo_module({
             that.moveTooltip();
         },
 
-        dragcancel: function(e) {
+        dragcancel: function() {
             this.owner._refresh();
             $(document.documentElement).css("cursor", "");
             return this._end();
         },
 
-        dragend: function(e) {
+        dragend: function() {
             var that = this,
                 owner = that.owner;
 
@@ -1309,7 +1309,7 @@ kendo_module({
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .on(MOUSE_UP, function (e) {
+                .on(MOUSE_UP, function () {
                     that._setTooltipTimeout();
                 })
                 .on(CLICK, function (e) {
