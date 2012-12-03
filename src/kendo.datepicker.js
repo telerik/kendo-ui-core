@@ -319,7 +319,7 @@ kendo_module({
                 .addClass("k-input")
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on("blur" + ns, proxy(that._blur, that))
-                .on("focus" + ns, function(e) {
+                .on("focus" + ns, function() {
                     that._inputWrapper.addClass(FOCUSED);
                 })
                 .attr({

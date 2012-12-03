@@ -314,7 +314,7 @@ kendo_module({
             that._touchScroller = kendo.touchScroller(that.popup.element);
         },
 
-        _makeUnselectable: function(element) {
+        _makeUnselectable: function() {
             if (isIE8) {
                 this.list.find("*").attr("unselectable", "on");
             }

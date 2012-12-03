@@ -46,7 +46,6 @@ kendo_module({
         FOCUS_WITH_NS = FOCUS + ns,
         MOUSEENTER = "touchstart mouseenter",
         MOUSEENTER_WITH_NS = "touchstart" + ns + " mouseenter" + ns,
-        MOUSEDOWN_WITH_NS = "touchstart" + ns + " mousedown" + ns,
         MOUSELEAVE = "touchend" + ns + " mouseleave" + ns,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
@@ -831,7 +830,7 @@ kendo_module({
                     content: options.content,
                     empty: options.empty,
                     setter: that.setDate,
-                    build: function(date, idx) {
+                    build: function(date) {
                         var cssClass = [],
                             day = date.getDay(),
                             linkClass = "",
