@@ -313,7 +313,7 @@
             }
         },
 
-        _resize: function(e) {
+        _resize: function() {
             var that = this;
 
             if (appendingToBodyTriggersResize) {
@@ -389,14 +389,24 @@
                 positions = options.position.toLowerCase().split(" "),
                 collisions = that.collisions,
                 zoomLevel = support.zoomLevel(),
-                zIndex = 10002;
+                siblingContainer, parents,
+                parentZIndex, zIndex = 10002,
+                idx = 0, length;
 
-            var siblingContainer = anchor.parents().filter(wrapper.siblings());
+            siblingContainer = anchor.parents().filter(wrapper.siblings());
 
             if (siblingContainer[0]) {
-                var parentZIndex = Number($(siblingContainer).css("zIndex"));
+                parentZIndex = Number($(siblingContainer).css("zIndex"));
                 if (parentZIndex) {
                     zIndex = parentZIndex + 1;
+                } else {
+                    parents = anchor.parentsUntil(siblingContainer);
+                    for (length = parents.length; idx < length; idx++) {
+                        parentZIndex = Number($(parents[idx]).css("zIndex"));
+                        if (parentZIndex && zIndex < parentZIndex) {
+                            zIndex = parentZIndex + 1;
+                        }
+                    }
                 }
             }
 
