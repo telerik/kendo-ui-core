@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().NumericTextBox()
+        ///  @(Html.Kendo().NumericTextBox()
         ///            .Name("NumericTextBox")
         ///            .Events(events => events.Change(
         ///                 @&lt;text&gt;
@@ -27,8 +27,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        ///            .Render();
-        /// %&gt;
+        ///  )
         /// </code>
         /// </example>
         public NumericTextBoxEventBuilder Change(Func<object, object> handler)
@@ -44,10 +43,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().NumericTextBox()
+        ///  @(Html.Kendo().NumericTextBox()
         ///             .Name("NumericTextBox")
         ///             .Events(events => events.Change("change"))
-        /// %&gt;
+        ///  )
         /// </code>
         /// </example>
         public NumericTextBoxEventBuilder Change(string handler)
@@ -63,7 +62,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().NumericTextBox()
+        ///  @(Html.Kendo().NumericTextBox()
         ///            .Name("NumericTextBox")
         ///            .Events(events => events.Spin(
         ///                 @&lt;text&gt;
@@ -72,8 +71,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        ///            .Render();
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public NumericTextBoxEventBuilder Spin(Func<object, object> handler)
@@ -89,10 +87,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().NumericTextBox()
+        ///  @(Html.Kendo().NumericTextBox()
         ///             .Name("NumericTextBox")
         ///             .Events(events => events.Spin("spin"))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public NumericTextBoxEventBuilder Spin(string handler)

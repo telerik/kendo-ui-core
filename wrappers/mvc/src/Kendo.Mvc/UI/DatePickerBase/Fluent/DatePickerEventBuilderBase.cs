@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().DatePicker()
+        ///  @(Html.Kendo().DatePicker()
         ///            .Name("DatePicker")
         ///            .Events(events => events.Change(
         ///                 @&lt;text&gt;
@@ -28,8 +28,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        ///            .Render();
-        /// %&gt;
+        ///  )
         /// </code>
         /// </example>
         public DatePickerEventBuilderBase Change(Func<object, object> handler)
@@ -45,10 +44,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().DatePicker()
+        /// @(Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
         ///             .Events(events => events.Change("change"))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DatePickerEventBuilderBase Change(string handler)
@@ -64,7 +63,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().DatePicker()
+        ///  @(Html.Kendo().DatePicker()
         ///            .Name("DatePicker")
         ///            .Events(events => events.Open(
         ///                 @&lt;text&gt;
@@ -74,8 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        ///            .Render();
-        /// %&gt;
+        ///   )
         /// </code>
         /// </example>
         public DatePickerEventBuilderBase Open(Func<object, object> handler)
@@ -91,10 +89,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().DatePicker()
+        ///  @(Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
         ///             .Events(events => events.Open("open"))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DatePickerEventBuilderBase Open(string handler)
@@ -110,7 +108,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Kendo().DatePicker()
+        ///  @(Html.Kendo().DatePicker()
         ///            .Name("DatePicker")
         ///            .Events(events => events.Close(
         ///                 @&lt;text&gt;
@@ -119,8 +117,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 }
         ///                 &lt;/text&gt;
         ///            ))
-        ///            .Render();
-        /// %&gt;
+        ///  )
         /// </code>
         /// </example>
         public DatePickerEventBuilderBase Close(Func<object, object> handler)
@@ -136,10 +133,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().DatePicker()
+        ///  @(Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
         ///             .Events(events => events.Close("close"))
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public DatePickerEventBuilderBase Close(string handler)
