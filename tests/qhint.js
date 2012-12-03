@@ -13,7 +13,7 @@
             latedef: true,
             browser: true,
             jquery: true,
-            unused: false
+            unused: true
         }, options);
 
         function validateFile(source) {
