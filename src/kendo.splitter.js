@@ -572,10 +572,10 @@ kendo_module({
             that._maxPosition = Math.min(nextBoundary - nextMinSize, prevBoundary + prevMaxSize);
             that._minPosition = Math.max(prevBoundary + prevMinSize, nextBoundary - nextMaxSize);
         },
-        _max: function(e) {
+        _max: function() {
               return this._maxPosition;
         },
-        _min: function(e) {
+        _min: function() {
             return this._minPosition;
         },
         _stop: function(e) {

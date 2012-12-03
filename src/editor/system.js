@@ -101,7 +101,7 @@ var InsertHtmlTool = Tool.extend({
             dataSource: editor.options.insertHtml || [],
             dataTextField: "text",
             dataValueField: "value",
-            change: function (e) {
+            change: function () {
                 Tool.exec(editor, 'insertHtml', this.value());
             },
             title: editor.options.messages.insertHtml,
@@ -113,7 +113,7 @@ var InsertHtmlTool = Tool.extend({
         return new InsertHtmlCommand(commandArguments);
     },
 
-    update: function(ui, nodes) {
+    update: function(ui) {
         var selectbox = ui.data("kendoSelectBox") || ui.find("select").data("kendoSelectBox");
         selectbox.close();
         selectbox.value(selectbox.options.title);
@@ -385,7 +385,7 @@ var Clipboard = Class.extend({
         return (/<(div|p|ul|ol|table|h[1-6])/i).test(html);
     },
 
-    oncut: function(e) {
+    oncut: function() {
         var editor = this.editor,
             startRestorePoint = new RestorePoint(editor.getRange());
         setTimeout(function() {

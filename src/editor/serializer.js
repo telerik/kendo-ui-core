@@ -49,7 +49,7 @@ var Serializer = {
 
                     result.push('">');
                 },
-                end: function (node) {
+                end: function () {
                     result.push('</span>');
                 }
             }

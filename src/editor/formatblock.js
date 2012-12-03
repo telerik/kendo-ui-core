@@ -297,7 +297,7 @@ var FormatBlockTool = Tool.extend({
             dataValueField: "value",
             dataSource: this.options.items ? this.options.items : editor.options.formatBlock,
             title: editor.options.messages.formatBlock,
-            change: function (e) {
+            change: function () {
                 Tool.exec(editor, toolName, this.value());
             },
             highlightFirst: false
