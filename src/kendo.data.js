@@ -389,7 +389,7 @@ kendo_module({
                     object.bind(CHANGE, eventHandler(that, CHANGE, field, false));
                 }
             } else if (object !== null && object instanceof DataSource) {
-                object._parent = parent; // assign parent to the DataSource if part of observable object
+                object.parent = parent; // assign parent to the DataSource if part of observable object
             }
 
 
@@ -1259,7 +1259,7 @@ kendo_module({
         return result;
     }
 
-    function process(data, options) {
+    Query.process = function(data, options) {
         options = options || {};
 
         var query = new Query(data),
@@ -1295,7 +1295,7 @@ kendo_module({
             total: total,
             data: query.toArray()
         };
-    }
+    };
 
     function calculateAggregates(data, options) {
         options = options || {};
@@ -1610,10 +1610,8 @@ kendo_module({
                 if (eachGroupItems(data[idx].items, func)) {
                     return true;
                 }
-            } else {
-                if (func(data[idx].items, data[idx])) {
-                    return true;
-                }
+            } else if (func(data[idx].items, data[idx])) {
+                return true;
             }
         }
     }
@@ -1682,7 +1680,7 @@ kendo_module({
 
     var DataSource = Observable.extend({
         init: function(options) {
-            var that = this, model, transport, data;
+            var that = this, model, data;
 
             if (options) {
                 data = options.data;
@@ -1690,46 +1688,24 @@ kendo_module({
 
             options = that.options = extend({}, that.options, options);
 
-            extend(that, {
-                _map: {},
-                _prefetch: {},
-                _data: [],
-                _ranges: [],
-                _view: [],
-                _pristine: [],
-                _destroyed: [],
-                _pageSize: options.pageSize,
-                _page: options.page  || (options.pageSize ? 1 : undefined),
-                _sort: normalizeSort(options.sort),
-                _filter: normalizeFilter(options.filter),
-                _group: normalizeGroup(options.group),
-                _aggregate: options.aggregate,
-                _total: options.total
-            });
+            that._map = {};
+            that._prefetch = {};
+            that._data = [];
+            that._ranges = [];
+            that._view = [];
+            that._pristine = [];
+            that._destroyed = [];
+            that._pageSize = options.pageSize;
+            that._page = options.page  || (options.pageSize ? 1 : undefined);
+            that._sort = normalizeSort(options.sort);
+            that._filter = normalizeFilter(options.filter);
+            that._group = normalizeGroup(options.group);
+            that._aggregate = options.aggregate;
+            that._total = options.total;
 
             Observable.fn.init.call(that);
 
-            transport = options.transport;
-
-            if (transport) {
-                transport.read = typeof transport.read === STRING ? { url: transport.read } : transport.read;
-
-                if (options.type) {
-                    if (kendo.data.transports[options.type] && !isPlainObject(kendo.data.transports[options.type])) {
-                       that.transport = new kendo.data.transports[options.type](extend(transport, { data: data }));
-                    } else {
-                        transport = extend(true, {}, kendo.data.transports[options.type], transport);
-                    }
-
-                    options.schema = extend(true, {}, kendo.data.schemas[options.type], options.schema);
-                }
-
-                if (!that.transport) {
-                    that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
-                }
-            } else {
-                that.transport = new LocalTransport({ data: options.data });
-            }
+            that.transport = Transport.create(options, data);
 
             that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
 
@@ -1750,16 +1726,23 @@ kendo_module({
             serverFiltering: false,
             serverGrouping: false,
             serverAggregates: false,
-            sendAllFields: true,
             batch: false
         },
 
+        _isServerGrouped: function() {
+            var group = this.group() || [];
+
+            return this.options.serverGrouping && group.length;
+        },
+
         _flatData: function(data) {
-            if (this.options.serverGrouping && this.group().length) {
+            if (this._isServerGrouped()) {
                 return flattenGroups(data);
             }
             return data;
         },
+
+        parent: noop,
 
         get: function(id) {
             var idx, length, data = this._flatData(this._data);
@@ -1783,6 +1766,75 @@ kendo_module({
                     return data[idx];
                 }
             }
+        },
+
+        indexOf: function(model) {
+            return indexOfModel(this._data, model);
+        },
+
+        at: function(index) {
+            return this._data[index];
+        },
+
+        data: function(value) {
+            var that = this;
+            if (value !== undefined) {
+                that._data = this._observe(value);
+
+                that._total = that._data.length;
+
+                that._process(that._data);
+            } else {
+                return that._data;
+            }
+        },
+
+        view: function() {
+            return this._view;
+        },
+
+        add: function(model) {
+            return this.insert(this._data.length, model);
+        },
+
+        insert: function(index, model) {
+            if (!model) {
+                model = index;
+                index = 0;
+            }
+
+            if (!(model instanceof Model)) {
+                if (this.reader.model) {
+                    model = new this.reader.model(model);
+                } else {
+                    model = new ObservableObject(model);
+                }
+            }
+
+            if (this._isServerGrouped()) {
+                this._data.splice(index, 0, wrapInEmptyGroup(this.group(), model));
+            } else {
+                this._data.splice(index, 0, model);
+            }
+
+            return model;
+        },
+
+        remove: function(model) {
+            var result,
+                that = this,
+                hasGroups = that._isServerGrouped();
+
+            this._eachItem(that._data, function(items) {
+                result = removeModel(items, model);
+                if (result && hasGroups) {
+                    if (!result.isNew || !result.isNew()) {
+                        that._destroyed.push(result);
+                    }
+                    return true;
+                }
+            });
+            return model;
         },
 
         sync: function() {
@@ -1813,8 +1865,7 @@ kendo_module({
 
             $.when.apply(null, promises)
                 .then(function() {
-                    var idx,
-                    length;
+                    var idx, length;
 
                     for (idx = 0, length = arguments.length; idx < length; idx++){
                         that._accept(arguments[idx]);
@@ -1826,13 +1877,26 @@ kendo_module({
                 });
         },
 
+        cancelChanges: function(model) {
+            var that = this,
+                pristine = that._readData(that._pristine);
+
+            if (model instanceof kendo.data.Model) {
+                that._cancelModel(model);
+            } else {
+                that._destroyed = [];
+                that._data = that._observe(pristine);
+                that._change();
+            }
+        },
+
         _accept: function(result) {
             var that = this,
                 models = result.models,
                 response = result.response,
                 idx = 0,
-                serverGroup = that.options.serverGrouping && that.group() && that.group().length,
-                pristine = that.reader.data(that._pristine),
+                serverGroup = that._isServerGrouped(),
+                pristine = that._readData(that._pristine),
                 type = result.type,
                 length;
 
@@ -1865,63 +1929,88 @@ kendo_module({
                     if (type === "create") {
                         pristine.push(serverGroup ? wrapInEmptyGroup(that.group(), models[idx]) : response[idx]);
                     } else if (type === "update") {
-                        if (serverGroup) {
-                            that._updatePristineGroupModel(models[idx], response[idx]);
-                        } else {
-                            extend(pristine[that._pristineIndex(models[idx])], response[idx]);
-                        }
+                        that._updatePristineForModel(models[idx], response[idx]);
                     }
                 } else {
-                    if (serverGroup) {
-                        that._removePristineGroupModel(models[idx]);
-                    } else {
-                        pristine.splice(that._pristineIndex(models[idx]), 1);
-                    }
+                    that._removePristineForModel(models[idx]);
                 }
             }
         },
 
-        _pristineIndex: function(model) {
-            var that = this,
+        _updatePristineForModel: function(model, values) {
+            this._executeOnPristineForModel(model, function(index, items) {
+                extend(true, items[index], values);
+            });
+        },
+
+        _executeOnPristineForModel: function(model, callback) {
+            this._eachPristineItem(
+                function(items) {
+                    var index = indexOfPristineModel(items, model);
+                    if (index > -1) {
+                        callback(index, items);
+                        return true;
+                    }
+                });
+        },
+
+        _removePristineForModel: function(model) {
+            this._executeOnPristineForModel(model, function(index, items) {
+                items.splice(index, 1);
+            });
+        },
+
+        _readData: function(data) {
+            var read = !this._isServerGrouped() ? this.reader.data : this.reader.groups;
+            return read(data);
+        },
+
+        _eachPristineItem: function(callback) {
+            this._eachItem(this._readData(this._pristine), callback);
+        },
+
+       _eachItem: function(data, callback) {
+            if (data && data.length) {
+                if (this._isServerGrouped()) {
+                    eachGroupItems(data, callback);
+                } else {
+                    callback(data);
+                }
+            }
+        },
+
+        _pristineForModel: function(model) {
+            var pristine,
                 idx,
-                length,
-                pristine = that.reader.data(that._pristine);
+                callback = function(items) {
+                    idx = indexOfPristineModel(items, model);
+                    if (idx > -1) {
+                        pristine = items[idx];
+                        return true;
+                    }
+                };
 
-            for (idx = 0, length = pristine.length; idx < length; idx++) {
-                if (pristine[idx][model.idField] === model.id) {
-                    return idx;
+            this._eachPristineItem(callback);
+
+            return pristine;
+        },
+
+        _cancelModel: function(model) {
+            var pristine = this._pristineForModel(model),
+                idx;
+
+           this._eachItem(this._data, function(items) {
+                idx = indexOfModel(items, model);
+                if (idx != -1) {
+                    if (!model.isNew() && pristine) {
+                        items[idx].accept(pristine);
+                    } else {
+                        items.splice(idx, 1);
+                    }
                 }
-            }
-            return -1;
+            });
         },
 
-        _updatePristineGroupModel: function(model, values) {
-            var pristineData = this.reader.groups(this._pristine),
-                index;
-
-            eachGroupItems(pristineData,
-                function(items) {
-                    index = indexOfPristineModel(items, model);
-                    if (index > -1) {
-                        extend(true, items[index], values);
-                        return true;
-                    }
-                });
-        },
-
-        _removePristineGroupModel: function(model) {
-            var pristineData = this.reader.groups(this._pristine),
-                index;
-
-            eachGroupItems(pristineData,
-                function(items) {
-                    index = indexOfPristineModel(items, model);
-                    if (index > -1) {
-                        items.splice(index, 1);
-                        return true;
-                    }
-                });
-        },
         _promise: function(data, models, type) {
             var that = this,
             transport = that.transport;
@@ -1963,62 +2052,6 @@ kendo_module({
             return promises;
         },
 
-        add: function(model) {
-            return this.insert(this._data.length, model);
-        },
-
-        insert: function(index, model) {
-            if (!model) {
-                model = index;
-                index = 0;
-            }
-
-            if (!(model instanceof Model)) {
-                if (this.reader.model) {
-                    model = new this.reader.model(model);
-                } else {
-                    model = new ObservableObject(model);
-                }
-            }
-
-            if (this.options.serverGrouping && this.group() && this.group().length) {
-                this._data.splice(index, 0, wrapInEmptyGroup(this.group(), model));
-            } else {
-                this._data.splice(index, 0, model);
-            }
-
-            return model;
-        },
-
-        cancelChanges: function(model) {
-            var that = this,
-                pristineIndex,
-                serverGroup = that.options.serverGrouping && that.group() && that.group().length,
-                read = !serverGroup ? that.reader.data : that.reader.groups,
-                pristine = read(that._pristine),
-                index;
-
-            if (model instanceof kendo.data.Model) {
-                if (serverGroup) {
-                    that._cancelGroupModel(model);
-                } else {
-                    index = that.indexOf(model);
-                    pristineIndex = that._pristineIndex(model);
-                    if (index != -1) {
-                        if (pristineIndex != -1 && !model.isNew()) {
-                           that._data[index].accept(pristine[pristineIndex]);
-                        } else {
-                            that._data.splice(index, 1);
-                        }
-                    }
-                }
-            } else {
-                that._destroyed = [];
-                that._data = that._observe(pristine);
-                that._change();
-            }
-        },
-
         read: function(data) {
             var that = this, params = that._params(data);
 
@@ -2038,50 +2071,59 @@ kendo_module({
             });
         },
 
-        _cancelGroupModel: function(model) {
-            var pristineData = this.reader.groups(this._pristine),
-                pristine,
-                idx;
+        success: function(data) {
+            var that = this,
+                options = that.options;
 
-            eachGroupItems(pristineData,
-                function(items) {
-                    idx = indexOfPristineModel(items, model);
-                    if (idx > -1) {
-                        pristine = items[idx];
-                        return true;
-                    }
-                });
+            that.trigger(REQUESTEND, { response: data, type: "read" });
 
-            if (idx > -1) {
-                eachGroupItems(this._data, function(items) {
-                    idx = indexOfModel(items, model);
-                    if (idx > -1) {
-                        if (!model.isNew()) {
-                            extend(true, items[idx], pristine);
-                        } else {
-                            items.splice(idx, 1);
-                        }
-                    }
-                });
+            data = that.reader.parse(data);
+
+            if (that._handleCustomErrors(data)) {
+                that._dequeueRequest();
+                return;
             }
+
+            that._pristine = isPlainObject(data) ? $.extend(true, {}, data) : data.slice ? data.slice(0) : data;
+
+            that._total = that.reader.total(data);
+
+            if (that._aggregate && options.serverAggregates) {
+                that._aggregateResult = that.reader.aggregates(data);
+            }
+
+            data = that._readData(data);
+
+            that._data = that._observe(data);
+
+            var start = that._skip || 0,
+            end = start + that._data.length;
+
+            that._ranges.push({ start: start, end: end, data: that._data });
+            that._ranges.sort( function(x, y) { return x.start - y.start; } );
+
+            that._dequeueRequest();
+            that._process(that._data);
         },
 
-        indexOf: function(model) {
-            return indexOfModel(this._data, model);
+        error: function(xhr, status, errorThrown) {
+            this._dequeueRequest();
+            this.trigger(REQUESTEND, { });
+            this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
         },
 
         _params: function(data) {
             var that = this,
-            options =  extend({
-                take: that.take(),
-                skip: that.skip(),
-                page: that.page(),
-                pageSize: that.pageSize(),
-                sort: that._sort,
-                filter: that._filter,
-                group: that._group,
-                aggregate: that._aggregate
-            }, data);
+                options =  extend({
+                    take: that.take(),
+                    skip: that.skip(),
+                    page: that.page(),
+                    pageSize: that.pageSize(),
+                    sort: that._sort,
+                    filter: that._filter,
+                    group: that._group,
+                    aggregate: that._aggregate
+                }, data);
 
             if (!that.options.serverPaging) {
                 delete options.take;
@@ -2123,37 +2165,6 @@ kendo_module({
             }
         },
 
-        remove: function(model) {
-            var data = this._data;
-
-            if (this.options.serverGrouping && this.group() && this.group().length) {
-                return this._removeGroupItem(data, model);
-            }
-            return removeModel(data, model);
-        },
-
-        _removeGroupItem: function(data, model) {
-            var result,
-                that = this;
-
-            eachGroupItems(data, function(items) {
-                result = removeModel(items, model);
-                if (result) {
-                    if (!result.isNew || !result.isNew()) {
-                        that._destroyed.push(result);
-                    }
-                    return true;
-                }
-            });
-            return model;
-        },
-
-        error: function(xhr, status, errorThrown) {
-            this._dequeueRequest();
-            this.trigger(REQUESTEND, { });
-            this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
-        },
-
         _handleCustomErrors: function(response) {
             if (this.reader.errors) {
                 var errors = this.reader.errors(response);
@@ -2164,49 +2175,6 @@ kendo_module({
             }
             return false;
         },
-
-        _parent: noop,
-
-        success: function(data) {
-            var that = this,
-                options = that.options,
-                hasGroups = options.serverGrouping === true && that._group && that._group.length > 0;
-
-            that.trigger(REQUESTEND, { response: data, type: "read" });
-
-            data = that.reader.parse(data);
-
-            if (that._handleCustomErrors(data)) {
-                that._dequeueRequest();
-                return;
-            }
-
-            that._pristine = isPlainObject(data) ? $.extend(true, {}, data) : data.slice ? data.slice(0) : data;
-
-            that._total = that.reader.total(data);
-
-            if (that._aggregate && options.serverAggregates) {
-                that._aggregateResult = that.reader.aggregates(data);
-            }
-
-            if (hasGroups) {
-                data = that.reader.groups(data);
-            } else {
-                data = that.reader.data(data);
-            }
-
-            that._data = that._observe(data);
-
-            var start = that._skip || 0,
-            end = start + that._data.length;
-
-            that._ranges.push({ start: start, end: end, data: that._data });
-            that._ranges.sort( function(x, y) { return x.start - y.start; } );
-
-            that._dequeueRequest();
-            that._process(that._data);
-        },
-
         _observe: function(data) {
             var that = this,
                 model = that.reader.model,
@@ -2223,10 +2191,10 @@ kendo_module({
                 }
             } else {
                 data = new ObservableArray(data, that.reader.model);
-                data.parent = function() { return that._parent(); };
+                data.parent = function() { return that.parent(); };
             }
 
-            if (that.group() && that.group().length && that.options.serverGrouping) {
+            if (that._isServerGrouped()) {
                 wrapGroupItems(data, model);
             }
 
@@ -2293,7 +2261,7 @@ kendo_module({
                 that._aggregateResult = calculateAggregates(data, options);
             }
 
-            result = process(data, options);
+            result = Query.process(data, options);
 
             that._view = result.data;
 
@@ -2306,27 +2274,6 @@ kendo_module({
             e.items = e.items || that._view;
 
             that.trigger(CHANGE, e);
-        },
-
-        at: function(index) {
-            return this._data[index];
-        },
-
-        data: function(value) {
-            var that = this;
-            if (value !== undefined) {
-                that._data = this._observe(value);
-
-                that._total = that._data.length;
-
-                that._process(that._data);
-            } else {
-                return that._data;
-            }
-        },
-
-        view: function() {
-            return this._view;
         },
 
         _mergeState: function(options) {
@@ -2381,7 +2328,7 @@ kendo_module({
                 if (!that.trigger(REQUESTSTART)) {
                     that.trigger(PROGRESS);
 
-                    result = process(that._data, that._mergeState(options));
+                    result = Query.process(that._data, that._mergeState(options));
 
                     if (!that.options.serverFiltering) {
                         if (result.total !== undefined) {
@@ -2639,7 +2586,7 @@ kendo_module({
                             rangeEnd = range.end;
 
                             if (!remote) {
-                                processed = process(range.data, { sort: that.sort(), filter: that.filter() });
+                                processed = Query.process(range.data, { sort: that.sort(), filter: that.filter() });
                                 rangeData = processed.data;
 
                                 if (processed.total !== undefined) {
@@ -2679,24 +2626,54 @@ kendo_module({
         },
 
         take: function() {
+            return this._take || this._pageSize;
+        },
+
+        _prefetchSuccessHandler: function (skip, size, callback) {
             var that = this;
-            return that._take || that._pageSize;
+            return function(data) {
+                var found = false,
+                    range = { start: skip, end: size, data: [] },
+                    idx,
+                    length;
+
+                that._dequeueRequest();
+
+                for (idx = 0, length = that._ranges.length; idx < length; idx++) {
+                    if (that._ranges[idx].start === skip) {
+                        found = true;
+                        range = that._ranges[idx];
+                        break;
+                    }
+                }
+                if (!found) {
+                    that._ranges.push(range);
+                }
+
+                data = that.reader.parse(data);
+                range.data = that._observe(that.reader.data(data));
+                range.end = range.start + range.data.length;
+                that._ranges.sort( function(x, y) { return x.start - y.start; } );
+                that._total = that.reader.total(data);
+                if (callback) {
+                    callback();
+                }
+            };
         },
 
         prefetch: function(skip, take, callback) {
             var that = this,
-            size = math.min(skip + take, that.total()),
-            range = { start: skip, end: size, data: [] },
-            options = {
-                take: take,
-                skip: skip,
-                page: skip / take + 1,
-                pageSize: take,
-                sort: that._sort,
-                filter: that._filter,
-                group: that._group,
-                aggregate: that._aggregate
-            };
+                size = math.min(skip + take, that.total()),
+                options = {
+                    take: take,
+                    skip: skip,
+                    page: skip / take + 1,
+                    pageSize: take,
+                    sort: that._sort,
+                    filter: that._filter,
+                    group: that._group,
+                    aggregate: that._aggregate
+                };
 
             if (!that._rangeExists(skip, size)) {
                 clearTimeout(that._timeout);
@@ -2705,29 +2682,7 @@ kendo_module({
                     that._queueRequest(options, function() {
                         that.transport.read({
                             data: options,
-                            success: function (data) {
-                                that._dequeueRequest();
-                                var found = false;
-                                for (var i = 0, len = that._ranges.length; i < len; i++) {
-                                    if (that._ranges[i].start === skip) {
-                                        found = true;
-                                        range = that._ranges[i];
-                                        break;
-                                    }
-                                }
-                                if (!found) {
-                                    that._ranges.push(range);
-                                }
-
-                                data = that.reader.parse(data);
-                                range.data = that._observe(that.reader.data(data));
-                                range.end = range.start + range.data.length;
-                                that._ranges.sort( function(x, y) { return x.start - y.start; } );
-                                that._total = that.reader.total(data);
-                                if (callback) {
-                                    callback();
-                                }
-                            }
+                            success: that._prefetchSuccessHandler(skip, size, callback)
                         });
                     });
                 }, 100);
@@ -2750,6 +2705,34 @@ kendo_module({
             return false;
         }
     });
+
+    var Transport = {};
+
+    Transport.create = function(options, data) {
+        var transport,
+            transportOptions = options.transport;
+
+        if (transportOptions) {
+            transportOptions.read = typeof transportOptions.read === STRING ? { url: transportOptions.read } : transportOptions.read;
+
+            if (options.type) {
+                if (kendo.data.transports[options.type] && !isPlainObject(kendo.data.transports[options.type])) {
+                    transport = new kendo.data.transports[options.type](extend(transportOptions, { data: data }));
+                } else {
+                    transportOptions = extend(true, {}, kendo.data.transports[options.type], transportOptions);
+                }
+
+                options.schema = extend(true, {}, kendo.data.schemas[options.type], options.schema);
+            }
+
+            if (!transport) {
+                transport = isFunction(transportOptions.read) ? transportOptions: new RemoteTransport(transportOptions);
+            }
+        } else {
+            transport = new LocalTransport({ data: options.data });
+        }
+        return transport;
+    };
 
     DataSource.create = function(options) {
         options = options && options.push ? { data: options } : options;
@@ -2912,7 +2895,7 @@ kendo_module({
 
             if (!(that.children instanceof HierarchicalDataSource)) {
                 that.children = new HierarchicalDataSource(that._childrenOptions);
-                that.children._parent = function(){
+                that.children.parent = function(){
                     return that;
                 };
 
@@ -3024,7 +3007,7 @@ kendo_module({
         },
 
         insert: function(index, model) {
-            var parentNode = this._parent();
+            var parentNode = this.parent();
 
             if (parentNode) {
                 parentNode.hasChildren = true;

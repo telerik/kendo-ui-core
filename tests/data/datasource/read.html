@@ -644,6 +644,76 @@
                 equal(dataSource.data()[0], 6);
                 equal(dataSource._pristine[0], 1);
             });
+
+            test("paging info is not passed to the transport if serverpaging is false", 4, function() {
+                var dataSource = new DataSource({
+                    page: 3,
+                    pageSize: 20,
+                    transport: {
+                        read: function(data) {
+                            ok(!("page" in data.data));
+                            ok(!("skip" in data.data));
+                            ok(!("take" in data.data));
+                            ok(!("pageSize" in data.data));
+                        }
+                    }
+                });
+
+                dataSource.read();
+            });
+
+            test("filter info is not passed to the transport if serverfiltering is false", 1, function() {
+                var dataSource = new DataSource({
+                    filter: { field: "foo", op: "eq", value: "bar" },
+                    transport: {
+                        read: function(data) {
+                            ok(!("filter" in data.data));
+                        }
+                    }
+                });
+
+                dataSource.read();
+            });
+
+            test("sort info is not passed to the transport if serversorting is false", 1, function() {
+                var dataSource = new DataSource({
+                    sort: { field: "foo", dir: "asc" },
+                    transport: {
+                        read: function(data) {
+                            ok(!("sort" in data.data));
+                        }
+                    }
+                });
+
+                dataSource.read();
+            });
+
+            test("aggregate info is not passed to the transport if serveraggregates is false", 1, function() {
+                var dataSource = new DataSource({
+                    aggregate: { field: "foo" },
+                    transport: {
+                        read: function(data) {
+                            ok(!("aggregate" in data.data));
+                        }
+                    }
+                });
+
+                dataSource.read();
+            });
+
+
+            test("group info is not passed to the transport if servergrouping is false", 1, function() {
+                var dataSource = new DataSource({
+                    group: { field: "foo" },
+                    transport: {
+                        read: function(data) {
+                            ok(!("group" in data.data));
+                        }
+                    }
+                });
+
+                dataSource.read();
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
