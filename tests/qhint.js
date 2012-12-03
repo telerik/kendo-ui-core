@@ -17,7 +17,6 @@
         }, options);
 
         function validateFile(source) {
-            source = "/*global kendo_module:true */\n" + source;
             var i, len, err,
                 result = JSHINT(source, options),
                 unvar;
@@ -48,7 +47,12 @@
         return asyncTest(name, function() {
             qHint.sendRequest(sourceFile, function(source) {
                 start();
-                validateFile(source.responseText);
+
+                var sourceText = source.responseText;
+                if (sourceFile.indexOf("..\/..\/src\/") === 0) {
+                    sourceText = "/* global kendo_module:true */\n" + sourceText;
+                }
+                validateFile(sourceText);
             });
         });
     }
