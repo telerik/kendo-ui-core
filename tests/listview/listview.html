@@ -136,7 +136,7 @@
             test("progress mask is shown when request starts", function() {
                 var ul = setup();
 
-                dataSource.bind("requestStart", function() {
+                dataSource.bind("progress", function() {
                     equal(ul.find("div.k-loading-mask").length, 1);
                 });
                 dataSource.read();

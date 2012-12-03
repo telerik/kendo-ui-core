@@ -25,7 +25,7 @@ kendo_module({
         Widget = kendo.ui.Widget,
         keys = kendo.keys,
         FOCUSSELECTOR =  ">*",
-        REQUESTSTART = "requestStart",
+        PROGRESS = "progress",
         ERROR = "error",
         FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
@@ -119,7 +119,7 @@ kendo_module({
             var that = this;
 
             that.dataSource.unbind(CHANGE, that._refreshHandler)
-                            .unbind(REQUESTSTART, that._requestStartHandler)
+                            .unbind(PROGRESS, that._progressHandler)
                             .unbind(ERROR, that._errorHandler);
         },
 
@@ -130,17 +130,17 @@ kendo_module({
                 that._unbindDataSource();
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
-                that._requestStartHandler = proxy(that._requestStart, that);
+                that._progressHandler = proxy(that._progress, that);
                 that._errorHandler = proxy(that._error, that);
             }
 
             that.dataSource = DataSource.create(that.options.dataSource)
                                 .bind(CHANGE, that._refreshHandler)
-                                .bind(REQUESTSTART, that._requestStartHandler)
+                                .bind(PROGRESS, that._progressHandler)
                                 .bind(ERROR, that._errorHandler);
         },
 
-        _requestStart: function() {
+        _progress: function(e) {
             progress(this.element, true);
         },
 

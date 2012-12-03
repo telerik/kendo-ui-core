@@ -70,7 +70,7 @@ kendo_module({
         isFunction = $.isFunction,
         isEmptyObject = $.isEmptyObject,
         math = Math,
-        REQUESTSTART = "requestStart",
+        PROGRESS = "progress",
         ERROR = "error",
         //ROW_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer):visible",
         DATA_CELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
@@ -656,7 +656,7 @@ kendo_module({
             that._destroyEditable();
 
             that.dataSource.unbind(CHANGE, that._refreshHandler)
-                           .unbind(REQUESTSTART, that._requestStartHandler)
+                           .unbind(PROGRESS, that._progressHandler)
                            .unbind(ERROR, that._errorHandler);
 
             that.element
@@ -2211,17 +2211,17 @@ kendo_module({
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler)
-                                .unbind(REQUESTSTART, that._requestStartHandler)
+                                .unbind(PROGRESS, that._progressHandler)
                                 .unbind(ERROR, that._errorHandler);
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
-                that._requestStartHandler = proxy(that._requestStart, that);
+                that._progressHandler = proxy(that._requestStart, that);
                 that._errorHandler = proxy(that._error, that);
             }
 
             that.dataSource = DataSource.create(dataSource)
                                 .bind(CHANGE, that._refreshHandler)
-                                .bind(REQUESTSTART, that._requestStartHandler)
+                                .bind(PROGRESS, that._progressHandler)
                                 .bind(ERROR, that._errorHandler);
         },
 
@@ -2229,7 +2229,7 @@ kendo_module({
             this._progress(false);
         },
 
-        _requestStart: function() {
+        _requestStart: function(e) {
             this._progress(true);
         },
 
