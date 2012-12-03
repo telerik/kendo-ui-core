@@ -429,7 +429,7 @@
                 }
             } else if (decimals[key] === separator && precision > 0 && value.indexOf(separator) == -1) {
                 prevent = false;
-            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109) && idx === 0) { //sign
+            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109 || key == 173) && idx === 0) { //sign
                 prevent = false;
             } else if (key == 110 && precision > 0 && value.indexOf(separator) == -1) {
                 element.value = value.substring(0, idx) + separator + value.substring(idx);
