@@ -8,6 +8,7 @@
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.history.js"></script>
@@ -22,132 +23,35 @@
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.actionsheet.js"></script>
         <script src="../../src/kendo.mobile.navbar.js"></script>
-
-        <style>
-            .km-popup-wrapper {
-                position: relative;
-            }
-
-            .km-popup-overlay {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-            }
-
-            .km-popup-arrow {
-                position: absolute;
-                width: 10px;
-                height: 10px;
-                background: black;
-                top: 0;
-                left: 0;
-            }
-
-            .km-down .km-popup {
-                -webkit-transform: translateY(10px);
-            }
-
-            .km-up .km-popup {
-                -webkit-transform: translateY(-10px);
-            }
-
-            .km-left .km-popup {
-                -webkit-transform: translateX(-10px);
-            }
-
-            .km-right .km-popup {
-                -webkit-transform: translateX(10px);
-            }
-
-            .km-up .km-popup-arrow {
-                top: auto;
-                bottom: 0;
-            }
-
-            .km-left .km-popup-arrow {
-                left: auto;
-                right: 0;
-            }
-
-            .km-popup {
-                width: 100%;
-                height: 100%;
-                border: 5px solid black;
-                box-sizing: border-box;
-            }
-        </style>
-
         <script>
             $(function() {
                 new kendo.mobile.Application();
             });
-
-            function logOpen() {
-                console.log("popover open");
-            }
-
-            function logClose() {
-                console.log("popover close");
-            }
         </script>
-
     </head>
     <body>
-        <div data-role="view" id="foo">
-            <a data-role="button" href="#bar" data-rel="popover">Reply</a> ----- <a data-role="button" href="#bar" data-rel="popover">Reply</a> -----
-
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            -------------------------------------------------- <a data-role="button" href="#baz" data-rel="popover">Reply</a><br />
-            -------------------------------------------------- <a data-role="button" href="#baa" data-rel="popover">Reply</a><br />
-            -------------------------------------------------- <a data-role="button" href="#bab" data-rel="popover">Reply</a><br />
-
-            <div data-role="popover" id="bar" data-pane='{"layout": "myLayout", "transition": "slide"}' data-open="logOpen" data-close="logClose">
-                <div data-role="view">
-                    <a data-role="button" href="#aa">AA</a>
-                    <a data-role="button" data-click="closePopOver">Close</a>
+        <div data-role="layout" data-id="default">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">Foo</span>
+                    <a data-role="button" data-align="right" data-rel="popover" href="#bar">Open popover</a>
                 </div>
 
-                <div data-role="view" id="aa">
-                    Popover
+                <div data-role="popover" id="bar">
+                    <div data-role="view">
+                    <header data-role="header">
+                        <div data-role="navbar">
+                            <span data-role="viewtitle">Bar</span>
+                        </div>
+                    </header>
+                    </div>
                 </div>
-
-                <div data-role="layout" data-id="myLayout">
-                   <div data-role="header">
-                       <div data-role="navbar">
-                           <a data-role="button" data-align="right">Close</a>
-                       </div>
-                   </div>
-                </div>
-            </div>
-
-            <div data-role="popover" id="baz" data-direction="up" data-height="80">
-                <div data-role="view">
-                    Popover
-                </div>
-            </div>
-
-            <div data-role="popover" id="baa" data-direction="left" data-height="80" data-width="200">
-                <div data-role="view">
-                    Popover
-                </div>
-            </div>
-
-            <div data-role="popover" id="bab" data-direction="right" data-height="80" data-width="300">
-                <div data-role="view">
-                    Popover
-                </div>
-            </div>
+            </header>
         </div>
 
-        <script>
-            function closePopOver() {
-                $("#bar").data("kendoMobilePopOver").close()
-            }
-        </script>
+        <div data-role="view" id="foo" data-layout="default" data-title="Kur">
+            Confide in me
+        </div>
+
     </body>
 </html>
