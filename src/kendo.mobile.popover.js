@@ -156,6 +156,8 @@
             var that = this,
                 popupOptions;
 
+            that.initialOpen = false;
+
             Widget.fn.init.call(that, element, options);
 
             options = that.options;
@@ -168,7 +170,6 @@
             that.popup = new Popup(that.element, popupOptions);
 
             that.pane = new ui.Pane(that.element, this.options.pane);
-            that.pane.navigate("");
 
             kendo.notify(that, ui);
         },
@@ -190,6 +191,10 @@
 
         openFor: function(target) {
             this.popup.show(target);
+            if (!this.initialOpen) {
+                this.pane.navigate("");
+                this.initialOpen = true;
+            }
         },
 
         close: function() {
