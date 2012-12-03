@@ -15,7 +15,6 @@ kendo_module({
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var KEYS = kendo.keys;
-    var ARIALABELLEDBY = "aria-labelledby";
     var BACKGROUNDCOLOR = "background-color";
     var UNSELECTABLE = "unselectable";
     var ITEMSELECTEDCLASS = "k-state-selected";
@@ -34,7 +33,7 @@ kendo_module({
             that._value = options.value = parse(options.value);
             var ariaId = that._ariaId = options.ariaId;
             if (ariaId) {
-                element.attr(ARIALABELLEDBY, ariaId);
+                element.attr("aria-labelledby", ariaId);
             }
         },
         options: {
