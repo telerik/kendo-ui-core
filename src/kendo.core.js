@@ -2622,6 +2622,7 @@ function pad(number, digits, end) {
     });
 
     var MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseover", "mouseout", "mouseup", "click"];
+    var EXCLUDE_BUST_CLICK_SELECTOR = "label, input[type=file]";
 
     var MouseEventNormalizer = {
         setupMouseMute: function() {
@@ -2641,7 +2642,7 @@ function pad(number, digits, end) {
             var handler = function(e) {
                 if (MouseEventNormalizer.captureMouse) {
                     if (e.type === "click") {
-                        if (MouseEventNormalizer.bustClick && !$(e.target).is("label")) {
+                        if (MouseEventNormalizer.bustClick && !$(e.target).is(EXCLUDE_BUST_CLICK_SELECTOR)) {
                             e.preventDefault();
                             e.stopPropagation();
                         }
