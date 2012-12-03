@@ -157,6 +157,14 @@ kendo_module({
             }
 
             operators = operators[type] || options.operators[type];
+            var initial;
+            for (initial in operators) { // get the first operator
+                break;
+            }
+
+            that._defaultFilter = function() {
+                return { field: that.field, operator: initial || "eq", value: "" };
+            };
 
             that.form = $('<form class="k-filter-menu"/>')
                             .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
@@ -204,7 +212,7 @@ kendo_module({
 
             that.filterModel = kendo.observable({
                 logic: "and",
-                filters: [{ field: that.field, operator: "eq", value: "" }, { field: that.field, operator: "eq", value: "" }]
+                filters: [ that._defaultFilter(), that._defaultFilter()]
             });
 
             //NOTE: binding the form element directly causes weird error in IE when grid is bound through MVVM and column is sorted
@@ -351,7 +359,7 @@ kendo_module({
             that.popup.close();
         },
 
-        _reset: function(e) {
+        _reset: function() {
             this.clear();
             this.popup.close();
         },
