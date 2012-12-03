@@ -140,7 +140,7 @@ kendo_module({
                                 .bind(ERROR, that._errorHandler);
         },
 
-        _progress: function(e) {
+        _progress: function() {
             progress(this.element, true);
         },
 

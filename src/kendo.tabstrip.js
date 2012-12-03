@@ -979,7 +979,7 @@ kendo_module({
                     }
                 },
 
-                success: function (data, textStatus) {
+                success: function (data) {
                     content.html(data);
 
                     if (complete) {

@@ -123,7 +123,7 @@ kendo_module({
             kendo.destroy(this.element);
         },
 
-        viewShow: function(view) {
+        viewShow: function() {
             this.dimensions.refresh();
         },
 

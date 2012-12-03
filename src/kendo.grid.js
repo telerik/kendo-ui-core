@@ -1007,11 +1007,11 @@ kendo_module({
                             }
 
                         })
-                        .on("focusin" + NS, function(e) {
+                        .on("focusin" + NS, function() {
                             clearTimeout(that.timer);
                             that.timer = null;
                         })
-                        .on("focusout" + NS, function(e) {
+                        .on("focusout" + NS, function() {
                             that.timer = setTimeout(handler, 1);
                         });
                     }
@@ -1794,7 +1794,7 @@ kendo_module({
 
             dataTable
             .on("mousedown" + NS, NAVROW + ">" + NAVCELL, proxy(tableClick, that))
-            .on("focus" + NS, function(e) {
+            .on("focus" + NS, function() {
                 var current = currentProxy();
                 if (current && current.is(":visible")) {
                     current.addClass(FOCUSED);
@@ -1810,7 +1810,7 @@ kendo_module({
                     headerTable.attr(TABINDEX, 0);
                 }
             })
-            .on("focusout" + NS, function(e) {
+            .on("focusout" + NS, function() {
                 var current = currentProxy();
                 if (current) {
                     current.removeClass(FOCUSED);
@@ -2229,7 +2229,7 @@ kendo_module({
             this._progress(false);
         },
 
-        _requestStart: function(e) {
+        _requestStart: function() {
             this._progress(true);
         },
 

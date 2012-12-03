@@ -81,7 +81,7 @@ kendo_module({
             return window.history && window.history.pushState;
         },
 
-        _checkUrl: function(e) {
+        _checkUrl: function() {
             var that = this, current = that._currentLocation();
 
             if (current != that.current) {

@@ -696,7 +696,7 @@ kendo_module({
             that._cancel(e.event);
         },
 
-        _cancel: function(e) {
+        _cancel: function() {
             var that = this;
 
             if (that.hint && !that.dropped) {

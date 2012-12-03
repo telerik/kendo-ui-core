@@ -1277,7 +1277,7 @@ kendo_module({
 
         restore: ["clip"],
 
-        prepare: function(start, end) {
+        prepare: function(start) {
             var that = this,
                 direction = that._reverse ? directions[that._direction].reverse : that._direction;
 
@@ -1333,7 +1333,7 @@ kendo_module({
             ];
         },
 
-        prepare: function(start, end) {
+        prepare: function(start) {
             start[PERSPECTIVE] = 1000;
             start.transformStyle = "preserve-3d";
         },
@@ -1374,7 +1374,7 @@ kendo_module({
             ];
         },
 
-        prepare: function(start, end) {
+        prepare: function(start) {
             start[PERSPECTIVE] = 1000;
             start.transformStyle = "preserve-3d";
         }

@@ -100,7 +100,7 @@ kendo_module({
                 return result;
             },
 
-            textClass: function(item) {
+            textClass: function() {
                 return LINK;
             },
 
@@ -132,7 +132,7 @@ kendo_module({
                 return group.expanded !== true ? " style='display:none'" : "";
             },
 
-            groupCssClass: function(group) {
+            groupCssClass: function() {
                 return "k-group";
             },
 
@@ -905,7 +905,7 @@ kendo_module({
             return nextItem;
         },
 
-        _itemLeft: function (item, belongsToVertical, hasChildren) {
+        _itemLeft: function (item, belongsToVertical) {
             var that = this,
                 nextItem;
 
@@ -964,7 +964,7 @@ kendo_module({
             return nextItem;
         },
 
-        _itemUp: function (item, belongsToVertical, hasChildren) {
+        _itemUp: function (item, belongsToVertical) {
             var that = this,
                 nextItem;
 

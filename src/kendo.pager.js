@@ -46,11 +46,11 @@ kendo_module({
               .toggleClass("k-state-disabled", disabled);
     }
 
-    function first(element, page, totalPages) {
+    function first(element, page) {
         update(element, FIRST, 1, page <= 1);
     }
 
-    function prev(element, page, totalPages) {
+    function prev(element, page) {
         update(element, PREV, Math.max(1, page - 1), page <= 1);
     }
 

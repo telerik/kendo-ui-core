@@ -6,7 +6,7 @@ kendo_module({
     depends: [ "core", "data" ]
 });
 
-(function ($, unefined) {
+(function ($, undefined) {
     var kendo = window.kendo,
         Observable = kendo.Observable,
         ObservableObject = kendo.data.ObservableObject,

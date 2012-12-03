@@ -152,7 +152,7 @@ kendo_module({
             groupAttributes: function(group) {
                 return group.expanded !== true ? " style='display:none'" : "";
             },
-            groupCssClass: function(group) {
+            groupCssClass: function() {
                 return "k-group k-panel";
             },
             contentAttributes: function(content) {
@@ -366,7 +366,7 @@ kendo_module({
 
             that.element
                 .find(element)
-                .each(function (index) {
+                .each(function () {
                     var item = $(this),
                         link = item.children(LINKSELECTOR);
 
@@ -952,7 +952,7 @@ kendo_module({
                     statusIcon.removeClass("k-loading");
                 },
 
-                success: function (data, textStatus) {
+                success: function (data) {
                     contentElement.html(data);
                     that._toggleGroup(contentElement, isVisible);
 

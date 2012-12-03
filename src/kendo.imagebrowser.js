@@ -112,7 +112,7 @@ kendo_module({
         var hideInterval, lastDrag;
 
         element
-            .on("dragenter" + NS, function(e) {
+            .on("dragenter" + NS, function() {
                 onDragEnter();
                 lastDrag = new Date();
 
@@ -128,7 +128,7 @@ kendo_module({
                     }, 100);
                 }
             })
-            .on("dragover" + NS, function(e) {
+            .on("dragover" + NS, function() {
                 lastDrag = new Date();
             });
     }
@@ -521,7 +521,7 @@ kendo_module({
             }
         },
 
-        _directoryBlur: function(e) {
+        _directoryBlur: function() {
             this.listView.save();
         },
 
@@ -759,7 +759,7 @@ kendo_module({
             li.loaded = true;
         },
 
-        _scroll: function(e) {
+        _scroll: function() {
             var that = this;
             if (that.options.transport && that.options.transport.thumbnailUrl) {
                 clearTimeout(that._timeout);

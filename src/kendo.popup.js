@@ -321,7 +321,7 @@ kendo_module({
             }
         },
 
-        _resize: function(e) {
+        _resize: function() {
             var that = this;
 
             if (appendingToBodyTriggersResize) {

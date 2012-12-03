@@ -107,12 +107,12 @@ kendo_module({
             }
         },
 
-        _start: function(e) {
+        _start: function() {
             this.userEvents.capture();
             this.handle.addClass(ACTIVE_STATE);
         },
 
-        _stop: function(e) {
+        _stop: function() {
             var that = this;
 
             that.handle.removeClass(ACTIVE_STATE);
