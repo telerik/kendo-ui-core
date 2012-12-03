@@ -43,6 +43,7 @@ kendo_module({
         GET = "get",
         ERROR = "error",
         REQUESTSTART = "requestStart",
+        PROGRESS = "progress",
         REQUESTEND = "requestEnd",
         crud = [CREATE, READ, UPDATE, DESTROY],
         identity = function(o) { return o; },
@@ -1736,7 +1737,7 @@ kendo_module({
 
             that._data = that._observe(that._data);
 
-            that.bind([ERROR, CHANGE, REQUESTSTART, SYNC, REQUESTEND], options);
+            that.bind([ERROR, CHANGE, REQUESTSTART, SYNC, REQUESTEND, PROGRESS], options);
         },
 
         options: {
@@ -2023,6 +2024,8 @@ kendo_module({
 
             that._queueRequest(params, function() {
                 if (!that.trigger(REQUESTSTART)) {
+                    that.trigger(PROGRESS);
+
                     that._ranges = [];
                     that.transport.read({
                         data: params,
@@ -2376,6 +2379,8 @@ kendo_module({
                 that.read(that._mergeState(options));
             } else {
                 if (!that.trigger(REQUESTSTART)) {
+                    that.trigger(PROGRESS);
+
                     result = process(that._data, that._mergeState(options));
 
                     if (!that.options.serverFiltering) {

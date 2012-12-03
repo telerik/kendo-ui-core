@@ -971,6 +971,17 @@
                 ok(called);
             });
 
+            test("query raised progress event", 1, function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4
+                });
+                dataSource.read();
+                dataSource.bind("progress", function() { ok(true); });
+
+                dataSource.query({ take: 3 });
+            });
+
             test("read raised requestStart", function() {
                 var called = false,
                     dataSource = new DataSource({
@@ -982,6 +993,17 @@
                 });
                 dataSource.read();
                 ok(called);
+            });
+
+            test("read raised progress", 1, function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}],
+                    pageSize: 4,
+                    progress: function() {
+                        ok(true);
+                    }
+                });
+                dataSource.read();
             });
 
             test("canceling requestStart prevents read", function() {
