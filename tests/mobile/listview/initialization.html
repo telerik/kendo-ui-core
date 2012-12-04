@@ -193,6 +193,22 @@
                 link.trigger("click");
             });
 
+            test("handles contents' click events in grouped mode", 1, function() {
+
+                var dom = $('<ul><li>Foo <ul><li>Bar</li></ul> </li></ul>'),
+                    item = dom.find("li li");
+
+                var listView = new ListView(dom, {type: "group"} );
+
+                listView.bind("click", function(e) {
+                    equal(e.item[0], item[0], "event passes the current item");
+                });
+
+                console.log(dom.html());
+                item.trigger("click");
+            });
+
+
             test("Allows event cancelation", function() {
                 expect(1);
                 var dom = $('<ul><li><a href="#">Foo</a></li></ul>'),

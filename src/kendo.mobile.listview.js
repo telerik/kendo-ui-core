@@ -14,7 +14,7 @@ kendo_module({
         support = kendo.support,
         DataSource = kendo.data.DataSource,
         Widget = ui.Widget,
-        ITEM_SELECTOR = ".km-list > li, > li",
+        ITEM_SELECTOR = ".km-list > li, > li:not(.km-group-container)",
         HIGHLIGHT_SELECTOR = ".km-listview-link, .km-listview-label",
         proxy = $.proxy,
         attrValue = kendo.attrValue,
@@ -580,7 +580,9 @@ kendo_module({
                     .addClass("km-list");
 
                 element.children("li").each(function() {
-                    var groupHeader = $(this).contents().first();
+                    var li = $(this),
+                        groupHeader = li.contents().first();
+                    li.addClass("km-group-container");
                     if (!groupHeader.is("ul") && !groupHeader.is("div." + GROUP_CLASS)) {
                         groupHeader.wrap(GROUP_WRAPPER);
                     }
