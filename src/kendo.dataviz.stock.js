@@ -582,6 +582,7 @@ kendo_module({
         var base = {
             type: "date",
             pane: NAVIGATOR_PANE,
+            field: naviOptions.dateField,
             roundToBaseUnit: false,
             justified: true,
             tooltip: { visible: false },
