@@ -1059,10 +1059,14 @@
                         that.findByUid(item.uid).find(">div>.k-in").html(that.templates.itemContent(context));
                     } else if (field == CHECKED) {
                         node = that.findByUid(item.uid);
+
                         node.children("div").find(":checkbox")
                             .prop(CHECKED, item[field])
                             .data("indeterminate", false)
                             .prop("indeterminate", false);
+
+                        that._updateIndeterminate(node);
+
                     } else if (field == "expanded") {
                         that._toggle(that.findByUid(item.uid), item, item[field]);
                     }
