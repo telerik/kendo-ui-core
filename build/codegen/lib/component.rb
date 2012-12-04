@@ -25,7 +25,7 @@ class CodeGen::Component
 
         return unless types
 
-        parents = @options.find_all { |option| name.start_with?(option.name + '.') }
+        parents = @options.find_all { |option| name.start_with?(option.name + '.') && option.type =~ /Object|Array/ }
 
         parents.map! do |parent|
             unless parent.instance_of?(CodeGen::CompositeOption)

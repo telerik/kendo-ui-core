@@ -60,10 +60,30 @@ class CodeGen::Java::TLD::Generator
         @tld = ''
     end
 
+    def unique_options(options)
+        options = options.find_all { |o| o.instance_of?(CodeGen::Option) }
+
+        options.clone.each do |option|
+
+            homonyms = options.find_all {|o| o.name == option.name }
+
+            if homonyms.size > 1
+
+                homonyms.each { |option| options.delete(option) }
+
+                options.push(CodeGen::Option.new :name => option.name,
+                                                 :description => option.description,
+                                                 :type => 'Object')
+            end
+        end
+
+        options.sort{ |a, b| a.name <=> b.name }
+    end
+
     def component(component)
         @tld += CodeGen::Java::TLD::COMPONENT.result(binding)
 
-        component.options.each do |option|
+        unique_options(component.options).each do |option|
             next unless option.instance_of? CodeGen::Option
 
             ignored = CodeGen::Java::IGNORED[component.name.downcase]

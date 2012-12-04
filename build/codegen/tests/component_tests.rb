@@ -83,6 +83,15 @@ class ComponentTests < Test::Unit::TestCase
         assert_equal 1, @component.options[1].options.size
     end
 
+    def test_add_option_leaves_options_of_primitive_types_when_creating_nested_options
+        @component = CodeGen::Component.new(:name => 'foo')
+
+        @component.add_option(:name => 'foo', :type => 'Boolean |Object')
+        @component.add_option(:name => 'foo.bar', :type => 'Object')
+
+        assert_equal true, @component.options[0].instance_of?(CodeGen::Option)
+    end
+
     def test_add_option_creates_nested_options
         @component = CodeGen::Component.new(:name => 'foo')
 
