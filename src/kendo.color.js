@@ -235,11 +235,11 @@ kendo_module({
 
             var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).on(KEYDOWN_NS, bind(that.keydown, that));
 
-            var hueElements = that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", content);
+            that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", content);
 
-            var selectedColor = that._selectedColor = $(".k-selected-color-display", content);
+            that._selectedColor = $(".k-selected-color-display", content);
 
-            var colorAsText = that._colorAsText = $("input.k-color-value", content);
+            that._colorAsText = $("input.k-color-value", content);
 
             hueSlider.bind([ "slide", "change" ], function(ev){
                 that._updateUI(that._getHSV(ev.value, null, null, null));
@@ -670,7 +670,7 @@ kendo_module({
 
             content.attr("tabIndex", 0)
                 .on(KEYDOWN_NS, bind(that.keydown, that))
-                .on(CLICK_NS, ".k-icon", bind(that.open, that))
+                .one(CLICK_NS, ".k-icon", bind(that.open, that))
                 .on(CLICK_NS, options.toolIcon ? ".k-tool-icon" : ".k-icon", function(){
                     that.trigger("click");
                 });
@@ -712,7 +712,6 @@ kendo_module({
 
         open: function() {
             this._getPopup().open();
-            this._selector.select(this.value(), true);
         },
         close: function() {
             this._getPopup().close();
@@ -776,16 +775,23 @@ kendo_module({
                     anchor       : that._content,
                     toggleTarget : that._content.find(".k-icon")
                 }).data("kendoPopup");
-                sel.bind("slide", function(ev){
-                    that._updateUI(ev.value);
+                sel.bind([ "slide", "change" ], {
+                    slide: function(ev){
+                        that._updateUI(ev.value);
+                    },
+                    change: function(ev){
+                        p.close();
+                        that.select(ev.value);
+                    }
                 });
-                sel.bind("change", function(ev){
-                    p.close();
-                    that.select(ev.value);
-                });
-                p.bind("close", function(ev){
-                    that._content.focus();
-                    that._updateUI(that._value);
+                p.bind([ "close", "activate" ], {
+                    close: function(ev){
+                        that._content.focus();
+                        that._updateUI(that._value);
+                    },
+                    activate: function(){
+                        sel.select(that.value(), true);
+                    }
                 });
             }
             return p;
