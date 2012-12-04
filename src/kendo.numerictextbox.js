@@ -342,22 +342,20 @@ kendo_module({
                 element = that.element.addClass(INPUT).show()[0],
                 accessKey = element.accessKey,
                 wrapper = that.wrapper,
-                DOMInput, text;
+                text;
 
 
             text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
-                text = $("<input />").insertBefore(element).addClass(CLASSNAME);
+                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME);
             }
 
-            DOMInput = text[0];
-            DOMInput.type = "text";
-            DOMInput.style.cssText = element.style.cssText;
-            DOMInput.tabIndex = element.tabIndex;
+            text[0].style.cssText = element.style.cssText;
+            text[0].tabIndex = element.tabIndex;
 
             element.tabIndex = 0;
-            element.type = "text";
+            element.setAttribute("type", "text");
             text.attr("placeholder", that.options.placeholder);
 
             if (accessKey) {
