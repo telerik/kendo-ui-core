@@ -3,7 +3,6 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
     using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
@@ -20,11 +19,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// Initializes a new instance of the <see cref="ChartCategoryAxisBuilder{TModel}"/> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
-        public ChartDateCategoryAxisBuilder(Chart<TModel> chart)
-            : base(chart.CategoryAxis)
+        public ChartDateCategoryAxisBuilder(Chart<TModel> chart, IChartCategoryAxis axis)
+            : base(axis)
         {
             Container = chart;
-            Container.CategoryAxis.Type = ChartCategoryAxisType.Date;
+            axis.Type = ChartCategoryAxisType.Date;
         }
 
         /// <summary>
@@ -60,11 +59,11 @@ namespace Kendo.Mvc.UI.Fluent
                     dataList.Add(dataPoint != null ? value(dataPoint) : new Nullable<DateTime>());
                 }
 
-                Container.CategoryAxis.Categories = dataList;
+                Axis.Categories = dataList;
             }
             else
             {
-                Container.CategoryAxis.Member = expression.MemberWithoutInstance();
+                Axis.Member = expression.MemberWithoutInstance();
             }
 
             return this;
@@ -78,7 +77,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartDateCategoryAxisBuilder<TModel> Categories(IEnumerable<DateTime> categories)
         {
-            Container.CategoryAxis.Categories = categories;
+            Axis.Categories = categories;
 
             return this;
         }
@@ -91,7 +90,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartDateCategoryAxisBuilder<TModel> Categories(params DateTime[] categories)
         {
-            Container.CategoryAxis.Categories = categories;
+            Axis.Categories = categories;
 
             return this;
         }
@@ -104,7 +103,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartDateCategoryAxisBuilder<TModel> BaseUnit(ChartAxisBaseUnit baseUnit)
         {
-            Container.CategoryAxis.BaseUnit = baseUnit;
+            Axis.BaseUnit = baseUnit;
 
             return this;
         }
@@ -123,7 +122,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartDateCategoryAxisBuilder<TModel> BaseUnitStep(int baseUnitStep)
         {
-            Container.CategoryAxis.BaseUnitStep = baseUnitStep;
+            Axis.BaseUnitStep = baseUnitStep;
 
             return this;
         }
@@ -139,7 +138,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartDateCategoryAxisBuilder<TModel> MaxDateGroups(int maxDateGroups)
         {
-            Container.CategoryAxis.MaxDateGroups = maxDateGroups;
+            Axis.MaxDateGroups = maxDateGroups;
 
             return this;
         }
@@ -209,7 +208,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartDateCategoryAxisBuilder<TModel> Min(DateTime min)
         {
-            Container.CategoryAxis.Min = min;
+            Axis.Min = min;
 
             return this;
         }
@@ -222,7 +221,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartDateCategoryAxisBuilder<TModel> Max(DateTime max)
         {
-            Container.CategoryAxis.Max = max;
+            Axis.Max = max;
 
             return this;
         }

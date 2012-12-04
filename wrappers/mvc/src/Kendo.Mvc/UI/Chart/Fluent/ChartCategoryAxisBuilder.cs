@@ -3,7 +3,6 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
@@ -20,8 +19,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// Initializes a new instance of the <see cref="ChartCategoryAxisBuilder{TModel}"/> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
-        public ChartCategoryAxisBuilder(Chart<TModel> chart)
-            : base(chart.CategoryAxis)
+        public ChartCategoryAxisBuilder(Chart<TModel> chart, IChartCategoryAxis axis)
+            : base(axis)
         {
             Container = chart;
         }
@@ -37,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public ChartDateCategoryAxisBuilder<TModel> Date()
         {
-            return new ChartDateCategoryAxisBuilder<TModel>(Container);
+            return new ChartDateCategoryAxisBuilder<TModel>(Container, Axis);
         }
 
         /// <summary>
@@ -64,11 +63,11 @@ namespace Kendo.Mvc.UI.Fluent
                     dataList.Add(dataPoint != null ? value(dataPoint).ToString() : string.Empty);
                 }
 
-                Container.CategoryAxis.Categories = dataList;
+                Axis.Categories = dataList;
             }
             else
             {
-                Container.CategoryAxis.Member = expression.MemberWithoutInstance();
+                Axis.Member = expression.MemberWithoutInstance();
             }
 
             return this;
@@ -82,7 +81,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartCategoryAxisBuilder<TModel> Categories(IEnumerable categories)
         {
-            Container.CategoryAxis.Categories = categories;
+            Axis.Categories = categories;
 
             return this;
         }
@@ -95,7 +94,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartCategoryAxisBuilder<TModel> Categories(params string[] categories)
         {
-            Container.CategoryAxis.Categories = categories;
+            Axis.Categories = categories;
 
             return this;
         }

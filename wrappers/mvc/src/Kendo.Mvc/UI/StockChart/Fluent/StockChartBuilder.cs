@@ -320,8 +320,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public StockChartBuilder<T> CategoryAxis(Action<ChartCategoryAxisBuilder<T>> configurator)
         {
+            var categoryAxis = new ChartCategoryAxis<T>(Component);
 
-            configurator(new ChartCategoryAxisBuilder<T>(Component));
+            configurator(new ChartCategoryAxisBuilder<T>(Component, categoryAxis));
+            Component.CategoryAxes.Add(categoryAxis);
 
             return this;
         }

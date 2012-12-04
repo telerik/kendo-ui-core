@@ -1,6 +1,5 @@
 namespace Kendo.Mvc.UI.Tests.Chart
 {
-    using System;
     using System.Collections.Generic;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
@@ -15,9 +14,9 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
             axis = new ChartCategoryAxis<SalesData>(chart);
-            chart.CategoryAxis = axis;
+            chart.CategoryAxes.Add(axis);
             chart.Data = SalesDataBuilder.GetCollection();
-            builder = new ChartCategoryAxisBuilder<SalesData>(chart);
+            builder = new ChartCategoryAxisBuilder<SalesData>(chart, axis);
         }
 
         [Fact]
