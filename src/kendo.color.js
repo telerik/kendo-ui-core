@@ -89,21 +89,21 @@ kendo_module({
             if (element) {
                 element.append(content);
             }
-            that.element = element = content;
+            this._content = content;
 
-            element
+            content
                 .attr("tabIndex", 0)
                 .keydown(bind(that.keydown, that));
 
             if (options.columns) {
                 // XXX: assuming 14px per cell; depends on CSS.
-                element.css("width", options.columns * 14 + "px");
+                content.css("width", options.columns * 14 + "px");
             }
         },
         keydown: function(ev) {
             var selected;
             var that = this;
-            var el = that.element;
+            var el = that._content;
             var all = el.find(".k-item");
             var init = el.find(".k-item." + ITEMSELECTEDCLASS).get(0);
 
@@ -148,11 +148,11 @@ kendo_module({
         select: function(color, nohooks) {
             var that = this;
             color = ColorSelectorBase.fn.select.call(that, color, nohooks);
-            that.element.find(".k-item." + ITEMSELECTEDCLASS)
+            that._content.find(".k-item." + ITEMSELECTEDCLASS)
                 .removeClass(ITEMSELECTEDCLASS)
                 .removeAttr("aria-selected");
             var el = null, best = null, min = null;
-            that.element.find(".k-item div").each(function(){
+            that._content.find(".k-item div").each(function(){
                 var c = parse($(this).css(BACKGROUNDCOLOR));
                 if (c) {
                     if (c.equals(color)) {
@@ -210,7 +210,7 @@ kendo_module({
             if (element) {
                 element.append(content);
             }
-            element = that.element = content;
+            that._content = content;
 
             var hueSlider = that._hueSlider = $(".hue-slider", content).kendoSlider({
                 min: 0,
@@ -279,7 +279,7 @@ kendo_module({
                 $(document).mousemove(onmove).mouseup(onup);
             });
 
-            element
+            content
                 .find("input.k-color-value").keydown(function(ev){
                     if (ev.keyCode == KEYS.ENTER) {
                         try {
@@ -306,7 +306,7 @@ kendo_module({
         },
         options: {
             name         : "ColorSelectorHSV",
-            showOpacity  : true,
+            showOpacity  : false,
             showButtons  : true,
             showPreview  : true,
             messages     : APPLY_CANCEL
@@ -358,7 +358,7 @@ kendo_module({
                 that.select(that._getHSV());
                 break;
               case KEYS.F2:
-                that.element.find("input.k-color-value").focus().select();
+                that._content.find("input.k-color-value").focus().select();
                 break;
             }
         },
@@ -749,7 +749,7 @@ kendo_module({
                     ctor = ColorSelectorHSV;
                 }
                 var sel = this._selector = new ctor(document.body, opt);
-                that._popup = p = sel.element.kendoPopup({
+                that._popup = p = sel._content.kendoPopup({
                     anchor       : that._content,
                     toggleTarget : that._content.find(".k-icon")
                 }).data("kendoPopup");

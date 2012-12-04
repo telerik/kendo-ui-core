@@ -50,13 +50,13 @@
 
       $("#dropdown").kendoColorPicker({ palette: "basic", toolIcon: "k-foreColor" });
       $("#dropdown2").kendoColorPicker({ palette: "web", toolIcon: "k-backColor" });
-      $("#dropdown3").kendoColorPicker();
-      $("#dropdown4").kendoColorPicker({ showPreview: false, toolIcon: "k-bold" });
+      $("#dropdown3").kendoColorPicker({ showOpacity: true });
+      $("#dropdown4").kendoColorPicker({ showOpacity: true, showPreview: false, toolIcon: "k-bold" });
       $("#dropdown5").kendoColorPicker({ showOpacity: false });
       $("#dropdown6").kendoColorPicker({ showPreview: false, showOpacity: false });
 
-      window.hsv1 = $("#hsv1").kendoColorSelectorHSV({ showButtons: false }).data("kendoColorSelectorHSV");
-      window.hsv2 = $("#hsv2").kendoColorSelectorHSV({ showButtons: false }).data("kendoColorSelectorHSV");
+      window.hsv1 = $("#hsv1").kendoColorSelectorHSV({ showButtons: false, showOpacity: true }).data("kendoColorSelectorHSV");
+      window.hsv2 = $("#hsv2").kendoColorSelectorHSV({ showButtons: false, showOpacity: true }).data("kendoColorSelectorHSV");
 
       flat.bind("change", function(ev){
         hsv1.select(ev.value);
