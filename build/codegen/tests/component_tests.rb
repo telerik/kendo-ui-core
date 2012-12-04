@@ -69,11 +69,21 @@ class ComponentTests < Test::Unit::TestCase
         assert_equal 'String', @component.options[0].type
     end
 
-    def test_promote_removes_nested_options
+    def test_nested_options_are_removed_from_top_parent
         assert_equal 1, @component.options.size
     end
 
-    def test_promote_creates_nested_options
+    def test_add_option_creates_nested_options_for_all_parents_with_same_name
+        @component = CodeGen::Component.new(:name => 'foo')
+
+        @component.add_option(:name => 'foo', :type => 'Array|Object')
+        @component.add_option(:name => 'foo.bar', :type => 'Object')
+
+        assert_equal 1, @component.options[0].options.size
+        assert_equal 1, @component.options[1].options.size
+    end
+
+    def test_add_option_creates_nested_options
         @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_option(:name => 'foo', :type => 'Object')
