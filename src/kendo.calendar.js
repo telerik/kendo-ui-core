@@ -660,7 +660,8 @@ kendo_module({
             var that = this,
                 options = that.options,
                 selectedValue = +that._value,
-                bigger, navigate;
+                bigger, navigate,
+                arrow = NEXTARROW;
 
             if (value === undefined) {
                 return options[option];
@@ -679,6 +680,7 @@ kendo_module({
             if (option === MIN) {
                 bigger = +value > selectedValue;
                 navigate = navigate > -1;
+                arrow = PREVARROW;
             } else {
                 bigger = selectedValue > +value;
                 navigate = navigate < 1;
@@ -688,6 +690,10 @@ kendo_module({
                 that.value(null);
             } else if (navigate) {
                 that.navigate();
+            } else {
+                that[arrow]
+                    .toggleClass(DISABLED, false)
+                    .attr(ARIA_DISABLED, false);
             }
 
             that._toggle();
