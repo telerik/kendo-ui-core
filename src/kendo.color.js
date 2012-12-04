@@ -24,6 +24,10 @@ kendo_module({
         apply  : "Apply",
         cancel : "Cancel"
     };
+    var NS = ".kendoColorTools";
+    var CLICK_NS = "click" + NS;
+    var MOUSEDOWN_NS = "mousedown" + NS;
+    var KEYDOWN_NS = "keydown" + NS;
 
     var browser = kendo.support.browser;
     var isIE8 = browser.msie && parseInt(browser.version, 10) < 9;
@@ -59,6 +63,12 @@ kendo_module({
                 this.trigger("change", { value: this.value() });
             }
             return color;
+        },
+        destroy: function() {
+            this.element.off(NS);
+            this._content.off(NS).find("*").off(NS);
+            this._content = null;
+            Widget.fn.destroy.call(this);
         }
     });
 
@@ -81,7 +91,7 @@ kendo_module({
                 value  : that._value,
                 id     : options.ariaId
             }))
-                .on("click", ".k-item", function(ev){
+                .on(CLICK_NS, ".k-item", function(ev){
                     that.select($(ev.currentTarget).find("div").css(BACKGROUNDCOLOR));
                 })
                 .find("*").attr(UNSELECTABLE, "on").end();
@@ -93,7 +103,7 @@ kendo_module({
 
             content
                 .attr("tabIndex", 0)
-                .keydown(bind(that.keydown, that));
+                .on(KEYDOWN_NS, bind(that.keydown, that));
 
             if (options.columns) {
                 // XXX: assuming 14px per cell; depends on CSS.
@@ -228,7 +238,7 @@ kendo_module({
 
             var hsvRect = that._hsvRect = $(".k-hsv-rectangle", content);
 
-            var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).keydown(bind(that.keydown, that));
+            var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).on(KEYDOWN_NS, bind(that.keydown, that));
 
             var hueElements = that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", content);
 
@@ -248,7 +258,7 @@ kendo_module({
 
             that._updateUI(that._value || new ColorRGB(1, 0, 0, 1));
 
-            hsvRect.mousedown(function(ev){
+            hsvRect.on(MOUSEDOWN_NS, function(ev){
                 hsvHandle.focus();
                 var r = hsvRect.offset();
                 var rw = hsvRect.width();
@@ -280,7 +290,7 @@ kendo_module({
             });
 
             content
-                .find("input.k-color-value").keydown(function(ev){
+                .find("input.k-color-value").on(KEYDOWN_NS, function(ev){
                     if (ev.keyCode == KEYS.ENTER) {
                         try {
                             var color = parse(this.value);
@@ -292,16 +302,25 @@ kendo_module({
                         }
                     }
                 }).end()
-                .on("click", ".k-controls button.apply", function(){
+                .on(CLICK_NS, ".k-controls button.apply", function(){
                     // calling select for the currently displayed
                     // color will trigger the "change" event.
                     that.select(that._getHSV());
                 })
-                .on("click", ".k-controls button.cancel", function(){
+                .on(CLICK_NS, ".k-controls button.cancel", function(){
                     // but on cancel, we simply select the previous
                     // value (again, triggers "change" event).
                     that.select(that.value());
                 });
+        },
+        destroy: function() {
+            this._hueSlider.destroy();
+            if (this._opacitySlider) {
+                this._opacitySlider.destroy();
+            }
+            this._hueSlider = this._opacitySlider = this._hsvRect = this._hsvHandle =
+                this._hueElements = this._selectedColor = this._colorAsText = null;
+            ColorSelectorBase.fn.destroy.call(this);
         },
         options: {
             name         : "ColorSelectorHSV",
@@ -607,8 +626,9 @@ kendo_module({
                                 parseInt(m[2], 10) / 100,
                                 parseInt(m[3], 10) / 100, parseFloat(m[4]));
         }
-        if (!nothrow)
+        if (!nothrow) {
             throw new Error("Cannot parse color: " + color);
+        }
         return null;
     };
 
@@ -654,13 +674,22 @@ kendo_module({
             element.hide().after(content);
 
             content.attr("tabIndex", 0)
-                .keydown(bind(that.keydown, that))
-                .on("click", ".k-icon", bind(that.open, that))
-                .on("click", options.toolIcon ? ".k-tool-icon" : ".k-icon", function(){
+                .on(KEYDOWN_NS, bind(that.keydown, that))
+                .on(CLICK_NS, ".k-icon", bind(that.open, that))
+                .on(CLICK_NS, options.toolIcon ? ".k-tool-icon" : ".k-icon", function(){
                     that.trigger("click");
                 });
 
             that._updateUI(value);
+        },
+        destroy: function() {
+            this._content.off(NS).find("*").off(NS);
+            if (this._popup) {
+                this._selector.destroy();
+                this._popup.destroy();
+            }
+            this._selector = this._popup = this._content = null;
+            Widget.fn.destroy.call(this);
         },
 
         _template: kendo.template
@@ -776,6 +805,6 @@ kendo_module({
         return function() {
             return callback.apply(obj, arguments);
         };
-    };
+    }
 
 })(jQuery, parseInt);
