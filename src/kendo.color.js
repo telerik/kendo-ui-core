@@ -775,7 +775,7 @@ kendo_module({
                     anchor       : that._content,
                     toggleTarget : that._content.find(".k-icon")
                 }).data("kendoPopup");
-                sel.bind([ "slide", "change" ], {
+                sel.bind({
                     slide: function(ev){
                         that._updateUI(ev.value);
                     },
@@ -784,7 +784,7 @@ kendo_module({
                         that.select(ev.value);
                     }
                 });
-                p.bind([ "close", "activate" ], {
+                p.bind({
                     close: function(ev){
                         that._content.focus();
                         that._updateUI(that._value);
