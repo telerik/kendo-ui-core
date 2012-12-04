@@ -212,14 +212,14 @@ kendo_module({
             }
             that._content = content;
 
-            var hueSlider = that._hueSlider = $(".hue-slider", content).kendoSlider({
+            var hueSlider = that._hueSlider = $(".k-hue-slider", content).kendoSlider({
                 min: 0,
                 max: 359,
                 tickPlacement: "none",
                 showButtons: false
             }).data("kendoSlider");
 
-            var opSlider = that._opacitySlider = $(".transparency-slider", content).kendoSlider({
+            var opSlider = that._opacitySlider = $(".k-transparency-slider", content).kendoSlider({
                 min: 0,
                 max: 100,
                 tickPlacement: "none",
@@ -230,7 +230,7 @@ kendo_module({
 
             var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).keydown(bind(that.keydown, that));
 
-            var hueElements = that._hueElements = $(".k-hsv-rectangle, .transparency-slider .k-slider-track", content);
+            var hueElements = that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", content);
 
             var selectedColor = that._selectedColor = $(".k-selected-color-display", content);
 
@@ -292,13 +292,12 @@ kendo_module({
                         }
                     }
                 }).end()
-                .find(".controls")
-                .on("click", "button.apply", function(){
+                .on("click", ".k-controls button.apply", function(){
                     // calling select for the currently displayed
                     // color will trigger the "change" event.
                     that.select(that._getHSV());
                 })
-                .on("click", "button.cancel", function(){
+                .on("click", ".k-controls button.cancel", function(){
                     // but on cancel, we simply select the previous
                     // value (again, triggers "change" event).
                     that.select(that.value());
@@ -413,13 +412,13 @@ kendo_module({
            '# if (showPreview) { #' +
              '<div class="k-selected-color"><div class="k-selected-color-display"><input spellcheck="false" class="k-color-value" /></div></div>' +
            '# } #' +
-           '<div class="k-hsv-rectangle"><div class="hsv-gradient"></div><div class="k-draghandle"></div></div>' +
-           '<input class="hue-slider" />' +
+           '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
+           '<input class="k-hue-slider" />' +
            '# if (showOpacity) { #' +
-             '<input class="transparency-slider" />' +
+             '<input class="k-transparency-slider" />' +
            '# } #' +
            '# if (showButtons) { #' +
-             '<div class="controls"><button class="k-button apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
+             '<div class="k-controls"><button class="k-button apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
            '# } #' +
          '</div>')
     });
