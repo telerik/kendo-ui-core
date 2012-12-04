@@ -50,13 +50,13 @@
 
       $("#dropdown").kendoColorPicker({ palette: "basic", toolIcon: "k-foreColor" });
       $("#dropdown2").kendoColorPicker({ palette: "web", toolIcon: "k-backColor" });
-      $("#dropdown3").kendoColorPicker({ showOpacity: true });
-      $("#dropdown4").kendoColorPicker({ showOpacity: true, showPreview: false, toolIcon: "k-bold" });
-      $("#dropdown5").kendoColorPicker({ showOpacity: false });
-      $("#dropdown6").kendoColorPicker({ showPreview: false, showOpacity: false });
+      $("#dropdown3").kendoColorPicker({ opacity: true });
+      $("#dropdown4").kendoColorPicker({ opacity: true, preview: false, toolIcon: "k-bold" });
+      $("#dropdown5").kendoColorPicker({ opacity: false });
+      $("#dropdown6").kendoColorPicker({ preview: false, opacity: false });
 
-      window.hsv1 = $("#hsv1").kendoColorSelectorHSV({ showButtons: false, showOpacity: true }).data("kendoColorSelectorHSV");
-      window.hsv2 = $("#hsv2").kendoColorSelectorHSV({ showButtons: false, showOpacity: true }).data("kendoColorSelectorHSV");
+      window.hsv1 = $("#hsv1").kendoColorSelectorHSV({ buttons: false, opacity: true }).data("kendoColorSelectorHSV");
+      window.hsv2 = $("#hsv2").kendoColorSelectorHSV({ buttons: false, opacity: true }).data("kendoColorSelectorHSV");
 
       flat.bind("change", function(ev){
         hsv1.select(ev.value);

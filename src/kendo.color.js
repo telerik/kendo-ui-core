@@ -210,12 +210,7 @@ kendo_module({
             options = that.options;
             element = that.element;
 
-            var content = $(that._template({
-                showOpacity  : options.showOpacity,
-                showButtons  : options.showButtons,
-                showPreview  : options.showPreview,
-                messages     : options.messages
-            })).find("*").attr(UNSELECTABLE, "on").end();
+            var content = $(that._template(options)).find("*").attr(UNSELECTABLE, "on").end();
 
             if (element) {
                 element.append(content);
@@ -323,11 +318,11 @@ kendo_module({
             ColorSelectorBase.fn.destroy.call(this);
         },
         options: {
-            name         : "ColorSelectorHSV",
-            showOpacity  : false,
-            showButtons  : true,
-            showPreview  : true,
-            messages     : APPLY_CANCEL
+            name     : "ColorSelectorHSV",
+            opacity  : false,
+            buttons  : true,
+            preview  : true,
+            messages : APPLY_CANCEL
         },
         select: function(color, nohooks) {
             color = ColorSelectorBase.fn.select.call(this, color, nohooks);
@@ -428,15 +423,15 @@ kendo_module({
         },
         _template: kendo.template
         ('<div class="k-colorpicker-hsv">' +
-           '# if (showPreview) { #' +
+           '# if (preview) { #' +
              '<div class="k-selected-color"><div class="k-selected-color-display"><input spellcheck="false" class="k-color-value" /></div></div>' +
            '# } #' +
            '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
            '<input class="k-hue-slider" />' +
-           '# if (showOpacity) { #' +
+           '# if (opacity) { #' +
              '<input class="k-transparency-slider" />' +
            '# } #' +
-           '# if (showButtons) { #' +
+           '# if (buttons) { #' +
              '<div class="k-controls"><button class="k-button apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
            '# } #' +
          '</div>')
