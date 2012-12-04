@@ -82,7 +82,7 @@ kendo_module({
 
     var Point2D = function(x, y) {
         var point = this;
-        if (!(point instanceof arguments.callee)) {
+        if (!(point instanceof Point2D)) {
             return new Point2D(x, y);
         }
 
@@ -101,7 +101,7 @@ kendo_module({
     var Box2D = function(x1, y1, x2, y2) {
         var box = this;
 
-        if (!(box instanceof arguments.callee)) {
+        if (!(box instanceof Box2D)) {
             return new Box2D(x1, y1, x2, y2);
         }
 
