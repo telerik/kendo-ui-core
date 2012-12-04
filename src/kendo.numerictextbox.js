@@ -347,7 +347,7 @@
             text[0].tabIndex = element.tabIndex;
 
             element.tabIndex = 0;
-            element.setAttribute("type", "text");
+            element.type = "text";
             text.attr("placeholder", that.options.placeholder);
 
             if (accessKey) {

@@ -307,7 +307,7 @@
 
             that._icon();
 
-            element[0].setAttribute("type", "text");
+            element[0].type = "text";
             element
                 .addClass("k-input")
                 .on("keydown" + ns, proxy(that._keydown, that))
