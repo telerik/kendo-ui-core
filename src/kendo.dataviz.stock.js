@@ -10,6 +10,7 @@ kendo_module({
     // Imports ================================================================
     var kendo = window.kendo,
         Class = kendo.Class,
+        Observable = kendo.Observable,
         deepExtend = kendo.deepExtend,
         math = Math,
         proxy = $.proxy,
@@ -159,7 +160,7 @@ kendo_module({
         }
     });
 
-    var Navigator = Class.extend({
+    var Navigator = Observable.extend({
         init: function(chart) {
             var navi = this;
 
@@ -344,7 +345,7 @@ kendo_module({
 
             navi.options.select = { from: from, to: to };
 
-            if (navi._realtimeDrag()) {
+            if (navi._liveDrag()) {
                 navi.filterAxes();
                 navi.filterDataSource();
                 navi.redrawSlaves();
@@ -375,14 +376,14 @@ kendo_module({
             }
         },
 
-        _realtimeDrag: function() {
+        _liveDrag: function() {
             var support = kendo.support,
                 isTouch = support.touch,
                 browser = support.browser,
                 isFirefox = browser.mozilla,
                 isOldIE = browser.msie && browser.version < 9;
 
-            return !isTouch && !isFirefox && !isOldIE;
+            return !isTouch && !isFirefox && !isOldIE && !this.dataSource;
         },
 
         readSelection: function() {

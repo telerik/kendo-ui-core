@@ -90,6 +90,39 @@
                     equals(chart.options.categoryAxis[0].field, "d");
                 });
 
+                // ------------------------------------------------------------
+                var support = deepExtend({}, kendo.support);
+                module("Live drag", {
+                    setup: function() {
+                        createStockChart();
+                    },
+                    teardown: function() {
+                        kendo.support = support;
+                    }
+                });
+
+                test("disabled on touch", function() {
+                    kendo.support.touch = true;
+                    ok(!chart._navigator._liveDrag());
+                });
+
+                test("disabled on firefox", function() {
+                    kendo.support.browser.mozilla = true;
+                    ok(!chart._navigator._liveDrag());
+                });
+
+                test("disabled on old IEs", function() {
+                    kendo.support.browser.msie = true;
+                    kendo.support.browser.version = 8;
+                    ok(!chart._navigator._liveDrag());
+                });
+
+                test("enabled on everything else", function() {
+                    kendo.support.browser.touch = false;
+                    kendo.support.browser.mozilla = false;
+                    kendo.support.browser.version = 9;
+                    ok(chart._navigator._liveDrag());
+                });
             })();
         </script>
 

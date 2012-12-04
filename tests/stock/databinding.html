@@ -327,6 +327,10 @@
                     });
                 });
 
+                test("live drag is disabled", function() {
+                    equals(chart._navigator._liveDrag(), false);
+                });
+
             })();
 
         </script>
