@@ -64,7 +64,7 @@ kendo_module({
             that._reset();
             that._template();
 
-            element[0].type = "text";
+            element[0].setAttribute("type", "text");
             element.addClass("k-input")
                    .on("keydown" + ns, $.proxy(that._keydown, that))
                    .on("focus" + ns, function() {
