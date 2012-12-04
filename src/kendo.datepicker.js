@@ -123,9 +123,10 @@
             var that = this,
                 calendar = that.calendar,
                 element = calendar.element,
+                dv = element.data(DATEVIEW),
                 popups;
 
-            if (element.data(DATEVIEW) === that) {
+            if (dv === undefined || dv === that) {
                 popups = $(".k-calendar-container");
 
                 if (popups.length > 1) {

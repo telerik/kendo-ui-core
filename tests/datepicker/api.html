@@ -394,6 +394,14 @@
                 equal(+datepicker._value, +midnight);
             });
 
+            test("destroy deletes shared calendar if it has never been opened", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.destroy();
+
+                equal(kendo.ui.DatePicker.sharedCalendar, null);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
