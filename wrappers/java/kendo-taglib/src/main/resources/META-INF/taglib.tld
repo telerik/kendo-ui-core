@@ -147,6 +147,7 @@ the dataSource.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -240,6 +241,7 @@ the dataSource.</description>
             <name>navigate</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -346,6 +348,7 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -444,6 +447,7 @@ picker.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -765,6 +769,7 @@ picker.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
     </tag>
         
 
@@ -870,6 +875,7 @@ The following settings are available for the</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -992,6 +998,7 @@ The following settings are available for the</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -1135,6 +1142,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -1207,6 +1215,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -1228,6 +1237,13 @@ The following settings are available for the</description>
 
 
         <attribute>
+            <description>The id of the template used for rendering the alternate rows in the grid.</description>
+            <name>altRowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether the grid will call read on the DataSource initially.</description>
             <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1242,6 +1258,13 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>The id of the template used for rendering the detail rows in the grid.</description>
+            <name>detailTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether editing is enabled/disabled.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1251,20 +1274,6 @@ The following settings are available for the</description>
         <attribute>
             <description>Indicates whether filtering is enabled/disabled.</description>
             <name>filterable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>Indicates whether column reordering is enabled/disable.</description>
-            <name>reorderable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>Indicates whether column resizing is enabled/disable.</description>
-            <name>resizable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -1298,6 +1307,27 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
+            <description>Indicates whether column reordering is enabled/disable.</description>
+            <name>reorderable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates whether column resizing is enabled/disable.</description>
+            <name>resizable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The id of the template used for rendering the rows in the grid.</description>
+            <name>rowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Enable/disable grid scrolling.</description>
             <name>scrollable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1316,27 +1346,6 @@ The following settings are available for the</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>The id of the template used for rendering the detail rows in the grid.</description>
-            <name>detailTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The id of the template used for rendering the rows in the grid.</description>
-            <name>rowTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The id of the template used for rendering the alternate rows in the grid.</description>
-            <name>altRowTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -1405,6 +1414,7 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -1433,6 +1443,7 @@ The following settings are available for the</description>
         </attribute>
 
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -1454,36 +1465,15 @@ The following settings are available for the</description>
 
 
         <attribute>
+            <description>Template to be used for rendering the alternate items in the listview.</description>
+            <name>altTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Indicates whether the list view will call read on the DataSource initially.</description>
             <name>autoBind</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>Indicates whether keyboard navigation is enabled/disabled.</description>
-            <name>navigatable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>Indicates whether selection is enabled/disabled. Possible values:</description>
-            <name>selectable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The id of the template used for rendering the items in the listview.</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Indicates whether paging is enabled/disabled.</description>
-            <name>pageable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -1496,8 +1486,22 @@ The following settings are available for the</description>
         </attribute>
 
         <attribute>
-            <description>Template to be used for rendering the alternate items in the listview.</description>
-            <name>altTemplate</name>
+            <description>Indicates whether keyboard navigation is enabled/disabled.</description>
+            <name>navigatable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates whether paging is enabled/disabled.</description>
+            <name>pageable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates whether selection is enabled/disabled. Possible values:</description>
+            <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -1505,6 +1509,13 @@ The following settings are available for the</description>
         <attribute>
             <description>Specifies ListView wrapper element tag name.</description>
             <name>tagName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The id of the template used for rendering the items in the listview.</description>
+            <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -1535,6 +1546,7 @@ and is about to render it.</description>
             <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -1615,6 +1627,7 @@ its sub menus to the left.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -1724,6 +1737,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -1759,20 +1773,6 @@ its sub menus to the left.</description>
         </attribute>
 
         <attribute>
-            <description>The template for selectbox with predefined page sizes.</description>
-            <name>selectTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The template for page number links.</description>
-            <name>linkTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>Defines if a label showing current paging information will be displayed.</description>
             <name>info</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1784,6 +1784,13 @@ its sub menus to the left.</description>
             <name>input</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The template for page number links.</description>
+            <name>linkTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -1815,10 +1822,18 @@ its sub menus to the left.</description>
         </attribute>
 
         <attribute>
+            <description>The template for selectbox with predefined page sizes.</description>
+            <name>selectTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>Fires when the current page has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -1885,6 +1900,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -1906,15 +1922,15 @@ its sub menus to the left.</description>
 
 
         <attribute>
-            <description>The width of the range indicators.</description>
-            <name>rangeSize</name>
+            <description>The distance from the range indicators to the ticks.</description>
+            <name>rangeDistance</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
 
         <attribute>
-            <description>The distance from the range indicators to the ticks.</description>
-            <name>rangeDistance</name>
+            <description>The width of the range indicators.</description>
+            <name>rangeSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -1925,6 +1941,7 @@ its sub menus to the left.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
+
 
 
         <dynamic-attributes>true</dynamic-attributes>
@@ -2015,6 +2032,7 @@ The orientation of a</description>
             <name>slide</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -2118,6 +2136,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -2171,6 +2190,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -2192,18 +2212,18 @@ handle must be focused). Note: The allied largeStep will also set large tick for
 
 
         <attribute>
+            <description>DataSource configuration or instance.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
             <description>The field containing the point date.
 It is used as a default</description>
             <name>dateField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>DataSource configuration or instance.</description>
-            <name>dataSource</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -2226,6 +2246,7 @@ It is used as a default</description>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
+
 
 
         <dynamic-attributes>true</dynamic-attributes>
@@ -2323,6 +2344,7 @@ tab.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -2414,6 +2436,7 @@ tab.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -2551,6 +2574,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -2636,6 +2660,7 @@ Cancelling the event will prevent the upload.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
 
+
         <dynamic-attributes>true</dynamic-attributes>
 
     </tag>
@@ -2685,6 +2710,13 @@ container iframe element is automatically created.</description>
             <name>draggable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies height of the window.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -2758,13 +2790,6 @@ container iframe element is automatically created.</description>
         </attribute>
 
         <attribute>
-            <description>Specifies height of the window.</description>
-            <name>height</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
             <description>Triggered when a Window has finished its opening animation.</description>
             <name>activate</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2811,6 +2836,7 @@ has been clicked on a window with static content.</description>
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+
 
         <dynamic-attributes>true</dynamic-attributes>
 
