@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI
             Legend = new ChartLegend();
             Series = new List<IChartSeries>();
             Panes = new List<ChartPane>();
-            CategoryAxis = new ChartCategoryAxis<T>(this);
+            CategoryAxes = new List<IChartCategoryAxis>();
             ValueAxes = new List<IChartValueAxis>();
             XAxes = new List<IChartValueAxis>();
             YAxes = new List<IChartValueAxis>();
@@ -155,9 +155,9 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Configuration for the default category axis (if any)
+        /// Configuration for all category axes
         /// </summary>
-        public IChartCategoryAxis CategoryAxis
+        public IList<IChartCategoryAxis> CategoryAxes
         {
             get;
             set;
@@ -273,7 +273,7 @@ namespace Kendo.Mvc.UI
 
             SerializeData("axisDefaults", AxisDefaults.CreateSerializer().Serialize(), options);
 
-            SerializeData("categoryAxis", CategoryAxis.CreateSerializer().Serialize(), options);
+            SerializeAxes("categoryAxis", CategoryAxes, options);
 
             SerializeAxes("valueAxis", ValueAxes, options);
 

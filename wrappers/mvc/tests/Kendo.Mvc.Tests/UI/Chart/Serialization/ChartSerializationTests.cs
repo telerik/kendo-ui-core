@@ -111,19 +111,24 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void CategoryAxis_should_be_serialized_when_categories_are_defined()
         {
-            chart.CategoryAxis.Categories = new string[] { "A" };
+            var categoryAxis = new ChartCategoryAxis<SalesData>(chart);
+            categoryAxis.Categories = new string[] { "A" };
+            chart.CategoryAxes.Add(categoryAxis);
+            
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{\"categoryAxis\":{\"categories\":[\"A\"]}}");
+            output.ShouldContain("{\"categoryAxis\":[{\"categories\":[\"A\"]}]}");
         }
 
         [Fact]
         public void CategoryAxis_should_be_serialized_when_bound()
         {
-            chart.CategoryAxis.Member = "RepName";
+            var categoryAxis = new ChartCategoryAxis<SalesData>(chart);
+            categoryAxis.Member = "RepName";
+            chart.CategoryAxes.Add(categoryAxis);
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{\"categoryAxis\":{\"field\":\"RepName\"}}");
+            output.ShouldContain("{\"categoryAxis\":[{\"field\":\"RepName\"}]}");
         }
 
         [Fact]

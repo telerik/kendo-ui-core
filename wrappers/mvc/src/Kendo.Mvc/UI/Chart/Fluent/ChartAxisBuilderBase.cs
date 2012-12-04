@@ -19,7 +19,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="axis">The axis.</param>
         protected ChartAxisBuilderBase(TAxis axis)
         {
-
             Axis = axis;
         }
 
@@ -51,8 +50,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder MajorTicks(Action<ChartAxisTicksBuilder> configurator)
         {
-
             configurator(new ChartAxisTicksBuilder(Axis.MajorTicks));
+
+            return this as TAxisBuilder;
+        }
+
+        /// <summary>
+        /// Sets the axis name.
+        /// </summary>
+        /// <param name="name">The axis name.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .ValueAxis(axis => axis
+        ///                .Name("axisName")
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TAxisBuilder Name(string name)
+        {
+            Axis.Name = name;
 
             return this as TAxisBuilder;
         }
@@ -75,7 +94,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder MinorTicks(Action<ChartAxisTicksBuilder> configurator)
         {
-
             configurator(new ChartAxisTicksBuilder(Axis.MinorTicks));
 
             return this as TAxisBuilder;
@@ -148,7 +166,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder MinorGridLines(Action<ChartLineBuilder> configurator)
         {
-
             configurator(new ChartLineBuilder(Axis.MinorGridLines));
 
             return this as TAxisBuilder;
@@ -198,7 +215,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder Line(Action<ChartLineBuilder> configurator)
         {
-
             configurator(new ChartLineBuilder(Axis.Line));
 
             return this as TAxisBuilder;
@@ -250,7 +266,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual TAxisBuilder Labels(Action<ChartAxisLabelsBuilder> configurator)
         {
-
             configurator(new ChartAxisLabelsBuilder(Axis.Labels));
 
             return this as TAxisBuilder;
@@ -293,7 +308,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder PlotBands(Action<ChartAxisPlotBandsFactory<TAxis, TValue>> configurator)
         {
-
             var factory = new ChartAxisPlotBandsFactory<TAxis, TValue>(Axis);
 
             configurator(factory);
@@ -318,7 +332,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder Title(Action<ChartAxisTitleBuilder> configurator)
         {
-
             configurator(new ChartAxisTitleBuilder(Axis.Title));
 
             return this as TAxisBuilder;

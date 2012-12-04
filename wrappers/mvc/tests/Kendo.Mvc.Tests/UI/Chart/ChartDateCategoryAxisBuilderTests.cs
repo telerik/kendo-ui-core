@@ -15,9 +15,9 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
             axis = new ChartCategoryAxis<SalesData>(chart);
-            chart.CategoryAxis = axis;
+            chart.CategoryAxes.Add(axis);
             chart.Data = SalesDataBuilder.GetCollection();
-            builder = new ChartDateCategoryAxisBuilder<SalesData>(chart);
+            builder = new ChartDateCategoryAxisBuilder<SalesData>(chart, axis);
         }
 
         [Fact]
