@@ -7,7 +7,7 @@ module CodeGen::Java
         'Boolean' => 'boolean',
         'Object' => 'Object',
         'Array' => 'java.lang.Object',
-        'Function' => 'String',
+        'Function' => 'java.lang.String',
         'Date' => 'java.util.Date'
     }
 
@@ -84,7 +84,6 @@ class CodeGen::Java::TLD::Generator
         @tld += CodeGen::Java::TLD::COMPONENT.result(binding)
 
         unique_options(component.options).each do |option|
-            next unless option.instance_of? CodeGen::Option
 
             ignored = CodeGen::Java::IGNORED[component.name.downcase]
 
