@@ -16,10 +16,13 @@
         <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../chart/util.js"></script>
         <script type="text/javascript">
 
             var dataviz = kendo.dataviz,
                 deepExtend = kendo.deepExtend,
+                Navigator = dataviz.Navigator,
+                Chart = dataviz.ui.Chart,
                 StockChart = dataviz.ui.StockChart;
 
             (function() {
@@ -86,7 +89,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Data Binding / Chart Data Source", {
+                module("Data Binding", {
                     setup: function() {
                         createStockChart({
                             navigator: {
@@ -107,8 +110,23 @@
                     equal(chart.options.categoryAxis[3].categories.length, 6);
                 });
 
+                test("chart is redrawn fully on subsequent main DS changes", 3, function() {
+                    stubMethod(Chart.fn, "_redraw", function() {
+                        ok(true);
+                        Chart.fn._stubbed._redraw.call(this);
+                    }, function() {
+                        createStockChart({
+                            navigator: {
+                                dataSource: null
+                            }
+                        });
+
+                        chart.dataSource.fetch();
+                    });
+                });
+
                 // ------------------------------------------------------------
-                module("Data Binding / Navigator Data Source", {
+                module("Data Binding / With Navigator Data Source", {
                     setup: function() {
                         createStockChart();
                     },
@@ -213,7 +231,104 @@
                     same(chart.dataSource._filter.filters[1].value, 100);
                 });
 
+                test("chart is redrawn fully during first main DS change", 2, function() {
+                    var partialRedrawCalls = 0,
+                        redrawCalls = 0;
+
+                    stubMethod(StockChart.fn, "_partialRedraw", function() {
+                        ok(false, "Should not execute partial redraw");
+                    }, function() {
+                        stubMethod(Chart.fn, "_redraw", function() {
+                            ok(++redrawCalls <= 2, "Too many redraws");
+                            Chart.fn._stubbed._redraw.call(this);
+                        }, function() {
+                            createStockChart({
+                                navigator: {
+                                    dataSource: null
+                                }
+                            });
+                        });
+                    });
+                });
+
+                test("slave panes are redrawn on subsequent main DS changes", 3, function() {
+                    var partialRedrawCalls = 0,
+                        redrawCalls = 0;
+
+                    stubMethod(Navigator.fn, "redrawSlaves", function() {
+                        ok(++partialRedrawCalls === 1, "More than one partial redraw");
+                    }, function() {
+                        stubMethod(Chart.fn, "_redraw", function() {
+                            ok(++redrawCalls <= 2, "Too many redraws");
+                            Chart.fn._stubbed._redraw.call(this);
+                        }, function() {
+                            createStockChart();
+                            chart.dataSource.fetch();
+                        });
+                    });
+                });
+
+                test("navigator is redrawn partially during navigator DS change", 3, function() {
+                    var partialRedrawCalls = 0,
+                        redrawCalls = 0;
+
+                    stubMethod(Navigator.fn, "_redrawSelf", function() {
+                        ok(++partialRedrawCalls === 1, "More than one partial redraw");
+                    }, function() {
+                        stubMethod(Chart.fn, "_redraw", function() {
+                            ok(++redrawCalls <= 2, "Too many redraws");
+                            Chart.fn._stubbed._redraw.call(this);
+                        }, function() {
+                            createStockChart();
+                            chart._navigator.dataSource.fetch();
+                        });
+                    });
+                });
+
+                test("navigator is redrawn during navigator DS change (unbound chart)", 2, function() {
+                    var partialRedrawCalls = 0,
+                        redrawCalls = 0;
+
+                    stubMethod(Navigator.fn, "_redrawSelf", function() {
+                        ok(++partialRedrawCalls === 1, "More than one partial redraw");
+                    }, function() {
+                        stubMethod(Chart.fn, "_redraw", function() {
+                            ok(++redrawCalls <= 1, "Too many redraws");
+                            Chart.fn._stubbed._redraw.call(this);
+                        }, function() {
+                            createStockChart({
+                                dataSource: null
+                            });
+                            chart._navigator.dataSource.fetch();
+                        });
+                    });
+                });
+
+                test("chart is not redrawn during early navigator DS change", 2, function() {
+                    var partialRedrawCalls = 0,
+                        redrawCalls = 0;
+
+                    stubMethod(Navigator.fn, "_redrawSelf", function() {
+                        ok(false, "Should not execute a partial redraw");
+                    }, function() {
+                        stubMethod(Chart.fn, "_redraw", function() {
+                            ok(++redrawCalls <= 2, "More than one redraw");
+                            Chart.fn._stubbed._redraw.call(this);
+                        }, function() {
+                            createStockChart({
+                                autoBind: false,
+                                navigator: {
+                                    autoBind: false
+                                }
+                            });
+                            chart._navigator.dataSource.fetch();
+                            chart.dataSource.fetch();
+                        });
+                    });
+                });
+
             })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

@@ -217,7 +217,6 @@ kendo_module({
                 currentAxis;
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
-            navi._redrawPane();
                 currentSeries = series[seriesIx];
 
                 if (currentSeries.axis == NAVIGATOR_AXIS && chart.isBindable(currentSeries)) {
@@ -233,9 +232,10 @@ kendo_module({
                 }
             }
 
-            if (chart._model && chart.dataSource) {
-                console.log("Navigator: redrawing");
-                navi._redrawPane();
+            if (chart._model &&
+                (!chart.options.dataSource ||
+                    (chart.options.dataSource && chart._dataBound))) {
+                navi._redrawSelf();
                 navi.redraw();
             }
         },
@@ -292,7 +292,7 @@ kendo_module({
             }
         },
 
-        _redrawPane: function() {
+        _redrawSelf: function() {
             var plotArea = this.chart._plotArea;
 
             if (plotArea) {
@@ -791,6 +791,7 @@ kendo_module({
     dataviz.ui.plugin(StockChart);
 
     deepExtend(dataviz, {
+        Navigator: Navigator
     });
 
 })(window.kendo.jQuery);
