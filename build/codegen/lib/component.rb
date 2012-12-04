@@ -25,7 +25,7 @@ class CodeGen::Component
 
         return unless types
 
-        parents = @options.find_all { |parent| name.start_with?(parent.name + '.') }
+        parents = @options.find_all { |option| name.start_with?(option.name + '.') }
 
         parents.map! do |parent|
             unless parent.instance_of?(CodeGen::CompositeOption)
@@ -51,7 +51,7 @@ class CodeGen::Component
                                          :type => type,
                                          :description => description)
 
-            if parents.size
+            if parents.any?
                 parents.each { |parent| parent.add_option(option) }
             else
                 @options.push(option)
