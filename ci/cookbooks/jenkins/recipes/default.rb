@@ -1,5 +1,6 @@
 JENKINS_URL = 'http://localhost:8080/'
-package "java-1.6.0-openjdk"
+package "java-1.7.0-openjdk"
+package "java-1.7.0-openjdk-devel"
 
 remote_file "/tmp/jenkins.rpm" do
     source "http://pkg.jenkins-ci.org/redhat/jenkins-1.492-1.1.noarch.rpm"
