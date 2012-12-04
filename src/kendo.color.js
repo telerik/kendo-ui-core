@@ -110,20 +110,20 @@ kendo_module({
             switch (ev.keyCode) {
               case KEYS.LEFT:
                 preventDefault(ev);
-                selected = get_relative(all, init, -1);
+                selected = relative(all, init, -1);
                 break;
               case KEYS.RIGHT:
                 preventDefault(ev);
-                selected = get_relative(all, init, 1);
+                selected = relative(all, init, 1);
                 break;
 
               case KEYS.DOWN:
                 preventDefault(ev);
-                selected = get_relative(all, init, that.options.columns);
+                selected = relative(all, init, that.options.columns);
                 break;
               case KEYS.UP:
                 preventDefault(ev);
-                selected = get_relative(all, init, -that.options.columns);
+                selected = relative(all, init, -that.options.columns);
                 break;
 
               case KEYS.ENTER:
@@ -612,7 +612,7 @@ kendo_module({
         return null;
     };
 
-    function get_relative(array, element, delta) {
+    function relative(array, element, delta) {
         array = Array.prototype.slice.call(array);
         var n = array.length;
         var pos = array.indexOf(element);
