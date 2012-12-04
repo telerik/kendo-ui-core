@@ -140,7 +140,9 @@
 
                 if (field) {
                     type = field.type || "string";
-                    that._parse = proxy(field.parse, field);
+                    if (field.parse) {
+                        that._parse = proxy(field.parse, field);
+                    }
                 }
             }
 

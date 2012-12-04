@@ -806,6 +806,26 @@
                 equal(ddl.value(), 0);
                 equal(ddl.text(), "foo ' bar");
             });
+
+            test("default parse is used if model with only field specified", function() {
+                dataSource = new kendo.data.DataSource( {
+                    data: [ { foo : "foo" }, { foo: "bar"} ],
+                    schema: {
+                        model: {
+                            fields: { foo: "foo" }
+                        }
+                    }
+                });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.form.find("[type=text]:first").val("foo").change();
+                filterMenu.form.submit();
+
+                strictEqual(dataSource.filter().filters[0].value, "foo");
+            });
       </script>
     </body>
 </html>
