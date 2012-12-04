@@ -8726,6 +8726,293 @@ Or template to be used for rendering the toolbar content.</description>
         <body-content>empty</body-content>
 
         <attribute>
+            <description>Set the text of the columns section in column header menu.</description>
+            <name>columns</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the filter section in column header menu.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the sortAscending section in column header menu.</description>
+            <name>sortAscending</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the sortDescending section in column header menu.</description>
+            <name>sortDescending</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Sets the filter menu messages.</description>
+        <name>grid-filterable-messages</name>
+        <tag-class>com.kendoui.taglib.grid.FilterableMessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Set the text of the "and" option from logic drop down list.</description>
+            <name>and</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the clear button of the filter menu.</description>
+            <name>clear</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the filter button of the filter menu.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the information message on top of the filter menu.</description>
+            <name>info</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the isFalse radio button of the filter menu for boolean values.</description>
+            <name>isFalse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the isTrue radio button of the filter menu for boolean values.</description>
+            <name>isTrue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the "or" option from logic drop down list.</description>
+            <name>or</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the option label for foreign key drop down list.</description>
+            <name>selectValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators.</description>
+        <name>grid-filterable-operators</name>
+        <tag-class>com.kendoui.taglib.grid.FilterableOperatorsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators for fields of type string.</description>
+        <name>grid-filterable-operators-string</name>
+        <tag-class>com.kendoui.taglib.grid.OperatorsStringTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is equal to" filter option for columns with string values.</description>
+            <name>eq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is not equal to" filter option for columns with string values.</description>
+            <name>neq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Starts with" filter option for columns with string values.</description>
+            <name>startswith</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Contains" filter option for columns with string values.</description>
+            <name>contains</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Does not contain" filter option for columns with string values.</description>
+            <name>doesnotcontain</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Ends with" filter option for columns with string values.</description>
+            <name>endswith</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators for fields of type number.</description>
+        <name>grid-filterable-operators-number</name>
+        <tag-class>com.kendoui.taglib.grid.OperatorsNumberTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is equal to" filter option for columns with number values.</description>
+            <name>eq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is not equal to" filter option for columns with number values.</description>
+            <name>neq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is greater than or equal to" filter option for columns with number values.</description>
+            <name>gte</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is greater than" filter option for columns with number values.</description>
+            <name>gt</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is less than or equal to" filter option for columns with number values.</description>
+            <name>lte</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is less than" filter option for columns with number values.</description>
+            <name>lt</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators for fields of type date.</description>
+        <name>grid-filterable-operators-date</name>
+        <tag-class>com.kendoui.taglib.grid.OperatorsDateTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is equal to" filter option for columns with date values.</description>
+            <name>eq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is not equal to" filter option for columns with date values.</description>
+            <name>neq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is after or equal to" filter option for columns with date values.</description>
+            <name>gte</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is after" filter option for columns with date values.</description>
+            <name>gt</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is before or equal to" filter option for columns with date values.</description>
+            <name>lte</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is before" filter option for columns with date values.</description>
+            <name>lt</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators for foreign key columns.</description>
+        <name>grid-filterable-operators-enums</name>
+        <tag-class>com.kendoui.taglib.grid.OperatorsEnumsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is equal to" filter option for foreign key columns.</description>
+            <name>eq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is not equal to" filter option for foreign key columns.</description>
+            <name>neq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Sets the messages displayed during grouping.</description>
+        <name>grid-groupable-messages</name>
+        <tag-class>com.kendoui.taglib.grid.GroupableMessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
             <description>Sets the text of the empty grouping area message</description>
             <name>empty</name>
             <rtexprvalue>true</rtexprvalue>
