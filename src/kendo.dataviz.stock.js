@@ -685,7 +685,7 @@ kendo_module({
         }
 
         return filters;
-    }
+    };
 
     var NavigatorHint = Class.extend({
         init: function(container, options) {
