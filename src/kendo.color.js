@@ -93,7 +93,7 @@ kendo_module({
 
             element
                 .attr("tabIndex", 0)
-                .keydown($.proxy(that.keydown, that));
+                .keydown(bind(that.keydown, that));
 
             if (options.columns) {
                 // XXX: assuming 14px per cell; depends on CSS.
@@ -228,7 +228,7 @@ kendo_module({
 
             var hsvRect = that._hsvRect = $(".k-hsv-rectangle", content);
 
-            var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).keydown($.proxy(that.keydown, that));
+            var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).keydown(bind(that.keydown, that));
 
             var hueElements = that._hueElements = $(".k-hsv-rectangle, .transparency-slider .k-slider-track", content);
 
@@ -293,12 +293,12 @@ kendo_module({
                     }
                 }).end()
                 .find(".controls")
-                .find("button.apply").click(function(){
+                .on("click", "button.apply", function(){
                     // calling select for the currently displayed
                     // color will trigger the "change" event.
                     that.select(that._getHSV());
-                }).end()
-                .find("button.cancel").click(function(){
+                })
+                .on("click", "button.cancel", function(){
                     // but on cancel, we simply select the previous
                     // value (again, triggers "change" event).
                     that.select(that.value());
@@ -563,7 +563,7 @@ kendo_module({
         }
     });
 
-    var parse = Color.parse = function(color, m) {
+    var parse = Color.parse = function(color, nothrow) {
         if (color == null ||
             color == "transparent" /* IE8 does this */)
         {
@@ -572,7 +572,7 @@ kendo_module({
         if (color instanceof Color) {
             return color;
         }
-        m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(color);
+        var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(color);
         if (m) {
             return new ColorBytes(parseInt(m[1], 16),
                                   parseInt(m[2], 16),
@@ -608,7 +608,9 @@ kendo_module({
                                 parseInt(m[2], 10) / 100,
                                 parseInt(m[3], 10) / 100, parseFloat(m[4]));
         }
-        throw new Error("Cannot parse color: " + color);
+        if (!nothrow)
+            throw new Error("Cannot parse color: " + color);
+        return null;
     };
 
     function get_relative(array, element, delta) {
@@ -640,23 +642,28 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
             options = that.options;
             element = that.element;
-            var value = parse(options.value);
-            that._value = options.value = value;
-            var content = that._content = $(that._template(options));
-            if (options.replace) {
-                element.replaceWith(content);
-                this.element = content;
+
+            var value;
+            if (element.val()) {
+                value = parse(element.val(), true);
             } else {
-                element.hide().after(content);
+                value = parse(options.value, true);
             }
+            that._value = options.value = value;
+
+            var content = that._content = $(that._template(options));
+            element.hide().after(content);
 
             content.attr("tabIndex", 0)
-                .keydown($.proxy(that.keydown, that))
-                .on("click", ".k-icon", $.proxy(that.open, that))
+                .keydown(bind(that.keydown, that))
+                .on("click", ".k-icon", bind(that.open, that))
                 .on("click", options.toolIcon ? ".k-tool-icon" : ".k-icon", function(){
                     that.trigger("click");
                 });
+
+            that._updateUI(value);
         },
+
         _template: kendo.template
         ('<div class="k-widget k-colorpicker">' +
            '# if (toolIcon) { #' +
@@ -668,16 +675,18 @@ kendo_module({
            '# } #' +
            '<span class="k-icon k-i-arrow-s"></span>' +
          '</div>'),
+
         options: {
             name         : "ColorPicker",
             palette      : null,
             columns      : 10,
             toolIcon     : null,
             value        : null,
-            replace      : true,
             messages     : APPLY_CANCEL
         },
+
         events: [ "change", "click", "select" ],
+
         open: function() {
             this._getPopup().open();
             this._selector.select(this.value(), true);
@@ -690,6 +699,9 @@ kendo_module({
         },
         select: function(value) {
             value = this.value(value);
+            // seems that input type="color" doesn't support opacity
+            // in colors; the only accepted format is hex #RRGGBB
+            this.element.val(value.toCss());
             this.trigger("select", { value: value });
         },
         value: function(value) {
@@ -760,5 +772,11 @@ kendo_module({
     ui.plugin(ColorPicker);
 
     function preventDefault(ev) { ev.preventDefault(); }
+
+    function bind(callback, obj) {
+        return function() {
+            return callback.apply(obj, arguments);
+        };
+    };
 
 })(jQuery, parseInt);
