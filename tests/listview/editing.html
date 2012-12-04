@@ -182,6 +182,18 @@
                 equal(listView.element.children().first().html(), "foo 0");
             });
 
+            test("save renders item alternating template", function() {
+                var listView = setup({
+                    editTemplate: "<li>edit ${foo}</li>",
+                    altTemplate: "<li>bar</li>"
+                });
+
+                listView.edit(listView.element.children().eq(1));
+                listView.save();
+
+                equal(listView.element.children().eq(1).html(), "bar");
+            });
+
             test("edit closes previous edited item", function() {
                 var listView = setup({ editTemplate: "<li>${foo}</li>" });
 
@@ -397,6 +409,18 @@
                 listView.cancel();
 
                equal(ul.children().eq(0).html(), "foo 0");
+            });
+
+            test("cancel revert the item to item alternative template", function() {
+                var listView = setup({
+                    editTemplate: '<li><input data-bind="value:foo" /></li>',
+                    altTemplate: "<li>bar</li>"
+                });
+
+                listView.edit(ul.children().eq(1));
+                listView.cancel();
+
+               equal(ul.children().eq(1).html(), "bar");
             });
 
             test("save event is triggered", function() {

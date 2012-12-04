@@ -483,6 +483,7 @@ kendo_module({
                editable = that.editable,
                data,
                container,
+               template = that.template,
                valid = true;
 
            if (editable) {
@@ -491,8 +492,12 @@ kendo_module({
                }
 
                if (valid) {
+                   if (editable.element.index() % 2) {
+                       template = that.altTemplate;
+                   }
+
                    data = that._modelFromElement(editable.element);
-                   container = $(that.template(data)).attr(kendo.attr("uid"), data.uid);
+                   container = $(template(data)).attr(kendo.attr("uid"), data.uid);
                    that._destroyEditable();
                    editable.element.replaceWith(container);
                }
