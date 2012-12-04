@@ -107,4 +107,14 @@ class ComponentTests < Test::Unit::TestCase
 
         assert_equal 'bar', component.options[0].name
     end
+
+    def test_import_creates_options_from_metadata
+        @component = CodeGen::Component.new(:name => 'foo')
+
+        metadata = { :options => [ {:name => 'bar', :type => 'String' } ] }
+
+        @component.import(metadata)
+
+        assert_equal 'bar', @component.options[0].name
+    end
 end

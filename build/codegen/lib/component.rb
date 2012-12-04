@@ -16,6 +16,14 @@ class CodeGen::Component
         @events = []
     end
 
+    def import(metadata)
+        metadata[:options].each do |option|
+
+            add_option(option)
+
+        end
+    end
+
     def add_option(settings)
         name = settings[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
 

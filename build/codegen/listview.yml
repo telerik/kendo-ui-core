@@ -1,0 +1,8 @@
+:options:
+    - :name: pageable
+      :type: Boolean
+      :description: Indicates whether paging is enabled/disabled.
+
+    - :name: tagName
+      :type: String
+      :description: Specifies ListView wrapper element tag name.
