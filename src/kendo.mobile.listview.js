@@ -236,13 +236,9 @@ kendo_module({
                 appendMethod = "prepend";
             }
 
+            contents = $(contents);
             element[appendMethod](contents);
-
-            if (appendMethod === "html") {
-                mobile.init(element.children());
-            } else {
-                mobile.init($(contents));
-            }
+            mobile.init(contents);
 
             if (loading) {
                 that.loading = false;
