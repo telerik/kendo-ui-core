@@ -2627,7 +2627,7 @@ function pad(number, digits, end) {
     });
 
     var MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseover", "mouseout", "mouseup", "click"];
-    var EXCLUDE_BUST_CLICK_SELECTOR = "label, input[type=file]";
+    var EXCLUDE_BUST_CLICK_SELECTOR = "label, input[type=file], [data-rel=external]";
 
     var MouseEventNormalizer = {
         setupMouseMute: function() {
