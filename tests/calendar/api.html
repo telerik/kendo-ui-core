@@ -673,6 +673,28 @@
 
                 equal(document.activeElement, document.body);
             });
+
+            test("min method enables prev link", 1, function() {
+                var calendar = new Calendar(div, {
+                    min: new Date(2000, 10, 10),
+                    value: new Date(2000, 10, 10)
+                });
+
+                calendar.min(new Date(2000, 9, 10));
+
+                ok(!calendar._prevArrow.hasClass("k-state-disabled"));
+            });
+
+            test("max method enables prev link", 1, function() {
+                var calendar = new Calendar(div, {
+                    max: new Date(2000, 10, 10),
+                    value: new Date(2000, 10, 10)
+                });
+
+                calendar.max(new Date(2000, 11, 10));
+
+                ok(!calendar._nextArrow.hasClass("k-state-disabled"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
