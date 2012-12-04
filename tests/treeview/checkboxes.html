@@ -58,6 +58,27 @@
                 ok(treeview.find(":checkbox:first").prop("indeterminate"));
             });
 
+            test("checking checkboxes via the api indeterminate state of their parents", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar", selected: true },
+                            { text: "baz" }
+                        ] },
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                var node = treeview.find(".k-item:last");
+                var dataItem = treeview.kendoTreeView("dataItem", node);
+
+                dataItem.set("checked", true);
+
+                ok(treeview.find(":checkbox:first").prop("indeterminate"));
+            });
+
             test("checking checkboxes sets checked state of parents", function() {
                 createTreeView({
                     dataSource: [
