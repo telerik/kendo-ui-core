@@ -1281,7 +1281,7 @@ kendo_module({
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
         },
 
-        arrangeLabels: function(maxLabelWidth, maxLabelHeight) {
+        arrangeLabels: function() {
             var axis = this,
                 options = axis.options,
                 labelOptions = options.labels,
@@ -2612,7 +2612,7 @@ kendo_module({
         window.mozRequestAnimationFrame    ||
         window.oRequestAnimationFrame      ||
         window.msRequestAnimationFrame     ||
-        function(callback, element) {
+        function(callback) {
             setTimeout(callback, ANIMATION_STEP);
         };
 
@@ -2668,14 +2668,6 @@ kendo_module({
         }
 
         return kendo.toString(value, format);
-    }
-
-    function point(x, y) {
-        return new Point2D(x, y);
-    }
-
-    function box(x1, y1, x2, y2) {
-        return new Box2D(x1, y1, x2, y2);
     }
 
     // Exports ================================================================

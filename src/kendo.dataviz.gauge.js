@@ -861,7 +861,7 @@ kendo_module({
             }
         },
 
-        reflow: function(box) {
+        reflow: function() {
             var pointer = this,
                 options = pointer.options,
                 scale = pointer.scale,
@@ -1003,7 +1003,7 @@ kendo_module({
             return shape;
         },
 
-        pointerSize: function(shape) {
+        pointerSize: function() {
             var pointer = this,
                 options = pointer.options,
                 scale = pointer.scale,
