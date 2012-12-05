@@ -1667,7 +1667,8 @@ kendo_module({
                                 } else {
                                     if(current.hasClass(SELECTED)) {
                                         current.removeClass(SELECTED);
-                                        current = null;
+                                        that.trigger(CHANGE);
+                                        return;
                                     }
                                 }
                             } else {
