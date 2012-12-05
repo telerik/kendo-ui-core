@@ -1,7 +1,6 @@
 module CodeGen
-end
 
-class CodeGen::CompositeOption
+class CompositeOption
     attr_reader :name, :description, :type, :options
 
     def initialize(settings)
@@ -18,12 +17,12 @@ class CodeGen::CompositeOption
 
         if parent
 
-            unless parent.instance_of?(CodeGen::CompositeOption)
+            unless parent.instance_of?(CompositeOption)
                 @options.delete(parent)
 
-                parent = CodeGen::CompositeOption.new(:name => parent.name,
-                                                      :type => parent.type,
-                                                      :description => parent.description)
+                parent = CompositeOption.new(:name => parent.name,
+                                             :type => parent.type,
+                                             :description => parent.description)
                 @options.push(parent)
             end
 
@@ -34,3 +33,5 @@ class CodeGen::CompositeOption
         end
     end
 end
+
+end # module CodeGen

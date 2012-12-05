@@ -16,10 +16,9 @@ module CodeGen::Java
         'stockchart' => ['axisDefaults', 'seriesDefaults'],
         'window' => ['content.template'],
     }
-end
 
-module CodeGen::Java::TLD
-    COMPONENT = ERB.new(%{
+module TLD
+    COMPONENT_START = ERB.new(%{
         <tag>
             <description><%= component.name %></description>
             <name><%= component.name.camelize %></name>
@@ -34,6 +33,13 @@ module CodeGen::Java::TLD
                 <type>java.lang.String</type>
             </attribute>
 <% end %>
+            }, 0, '<>%')
+
+    COMPONENT_END = ERB.new(%{
+<% if component.name != 'DataSource' %>
+            <dynamic-attributes>true</dynamic-attributes>
+<% end %>
+        </tag>
             }, 0, '<>%')
 
     OPTION = ERB.new(%{
@@ -52,9 +58,8 @@ module CodeGen::Java::TLD
                 <rtexprvalue>true</rtexprvalue>
             </attribute>
     }, 0, '<>%')
-end
 
-class CodeGen::Java::TLD::Generator
+class Generator
     def initialize(filename)
         @filename = filename
         @tld = ''
@@ -80,30 +85,34 @@ class CodeGen::Java::TLD::Generator
         options.sort{ |a, b| a.name <=> b.name }
     end
 
+    def composite_options(options)
+        options.find_all { |option| option.instance_of?(CodeGen::CompositeOption) }
+    end
+
+    def ignored?(component_name, option_name)
+        ignored = IGNORED[component_name.downcase]
+
+        ignored && ignored.any? { |ignore| option_name.start_with?(ignore) }
+    end
+
     def component(component)
-        @tld += CodeGen::Java::TLD::COMPONENT.result(binding)
+        @tld += COMPONENT_START.result(binding)
 
         unique_options(component.options).each do |option|
 
-            ignored = CodeGen::Java::IGNORED[component.name.downcase]
+            next if ignored?(component.name, option.name)
 
-            next if ignored && ignored.any? { |ignore| option.name.start_with?(ignore) }
-
-            @tld += CodeGen::Java::TLD::OPTION.result(binding)
+            @tld += OPTION.result(binding)
 
         end
 
         component.events.each do |event|
 
-            @tld += CodeGen::Java::TLD::EVENT.result(binding)
+            @tld += EVENT.result(binding)
 
         end
 
-        if component.name != 'DataSource'
-            @tld += "        <dynamic-attributes>true</dynamic-attributes>\n"
-        end
-
-        @tld += '       </tag>'
+        @tld += COMPONENT_END.result(binding)
     end
 
     def sync()
@@ -118,3 +127,6 @@ class CodeGen::Java::TLD::Generator
         File.write(@filename, src)
     end
 end
+
+end # module CodeGen::Java::TLD
+end # module CodeGen::Java

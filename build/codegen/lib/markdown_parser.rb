@@ -4,16 +4,15 @@ module CodeGen
     MARKDOWN = FileList['docs/api/{web,dataviz}/*.md']
         .exclude('**/ui.md')
         .include('docs/api/framework/datasource.md')
-end
 
-class CodeGen::MarkdownParser
+class MarkdownParser
 
     def self.all
-        MARKDOWN.map { |filename| self.read(filename) }
+        MARKDOWN.map { |filename| self.read(filename) }.sort { |a, b| a.name <=> b.name }
     end
 
     def self.read(filename)
-        CodeGen::MarkdownParser.new.parse File.read(filename)
+        MarkdownParser.new.parse File.read(filename)
     end
 
     def parse(markdown)
@@ -21,7 +20,7 @@ class CodeGen::MarkdownParser
 
         header = root.children.find { |e| e.type == :header && e.options[:level] == 1 }
 
-        component = CodeGen::Component.new(:name => component_name(root))
+        component = Component.new(:name => component_name(root))
 
         configuration = configuration_section(root)
 
@@ -108,3 +107,5 @@ class CodeGen::MarkdownParser
         element.value.strip if element
     end
 end
+
+end # module CodeGen

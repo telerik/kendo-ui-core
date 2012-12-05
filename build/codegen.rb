@@ -10,14 +10,14 @@ namespace :generate do
 
             generator = CodeGen::Java::TLD::Generator.new('wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld')
 
-            CodeGen::MarkdownParser.all.sort {|a, b| a.name <=> b.name}.each do |component|
+            components = CodeGen::MarkdownParser.all
+
+            components.each do |component|
 
                 metadata = "build/codegen/#{component.name.downcase}.yml"
 
                 if File.exists?(metadata)
                     yaml = YAML.load(File.read(metadata))
-
-                    p yaml
 
                     component.import(yaml)
                 end
