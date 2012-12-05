@@ -567,7 +567,11 @@ class Tag
     end
 
     def to_xml
-        xml_template.result(binding)
+        xml = xml_template.result(binding)
+
+        xml += all_children.map { |child| child.to_xml }.join("\n")
+
+        xml
     end
 
     def child_setters
@@ -1139,9 +1143,7 @@ def generate
 
     $stderr.puts("Updating #{TLD}") if VERBOSE
 
-    children = tags.map{ |t| t.all_children }.flatten
-
-    xml = (tags + children).map{ |t| t.to_xml }.join("\n")
+    xml = tags.map{ |t| t.to_xml }.join("\n")
 
     tld.sub!(/<!-- Auto-generated -->(.|\n)*<!-- Auto-generated -->/,
              "<!-- Auto-generated -->\n\n" +
