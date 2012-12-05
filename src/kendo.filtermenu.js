@@ -107,12 +107,12 @@ kendo_module({
             var that = this,
                 type = "string",
                 link,
-                field,
-                operators;
+                field;
 
             Widget.fn.init.call(that, element, options);
 
-            operators = options.operators || {};
+            that.operators = options.operators || {};
+
             element = that.element;
             options = that.options;
 
@@ -123,17 +123,12 @@ kendo_module({
                     link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
                 }
 
-                link
-                .attr("tabindex", -1)
-                .on("click" + NS, proxy(that._click, that));
-
-            } else {
-                that.link = $();
+                link.attr("tabindex", -1).on("click" + NS, proxy(that._click, that));
             }
 
-            that._refreshHandler = proxy(that.refresh, that);
+            that.link = link || $();
 
-            that.dataSource = options.dataSource.bind("change", that._refreshHandler);
+            that.dataSource = options.dataSource;
 
             that.field = options.field || element.attr(kendo.attr("field"));
 
@@ -158,8 +153,22 @@ kendo_module({
                 type = "enums";
             }
 
+            that.type = type;
+        },
+
+        _init: function() {
+            var that = this,
+                options = that.options,
+                operators = that.operators || {},
+                initial,
+                type = that.type;
+
+            that._refreshHandler = proxy(that.refresh, that);
+
+            that.dataSource.bind("change", that._refreshHandler);
+
             operators = operators[type] || options.operators[type];
-            var initial;
+
             for (initial in operators) { // get the first operator
                 break;
             }
@@ -169,30 +178,28 @@ kendo_module({
             };
 
             that.form = $('<form class="k-filter-menu"/>')
-                            .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
-                                field: that.field,
-                                ns: kendo.ns,
-                                messages: options.messages,
-                                extra: options.extra,
-                                operators: operators,
-                                type: type,
-                                values: convertItems(options.values)
-                            }))
-                            .on("keydown" + NS, proxy(that._keydown, that))
-                            .on("submit" + NS, proxy(that._submit, that))
-                            .on("reset" + NS, proxy(that._reset, that));
+                .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
+                    field: that.field,
+                    ns: kendo.ns,
+                    messages: options.messages,
+                    extra: options.extra,
+                    operators: operators,
+                    type: type,
+                    values: convertItems(options.values)
+                }))
+                .on("keydown" + NS, proxy(that._keydown, that))
+                .on("submit" + NS, proxy(that._submit, that))
+                .on("reset" + NS, proxy(that._reset, that));
 
             if (!options.appendToElement) {
                 that.popup = that.form[POPUP]({
-                    anchor: link,
+                    anchor: that.link,
                     open: proxy(that._open, that),
                     activate: proxy(that._activate, that),
                     close: that.options.closeCallback
                 }).data(POPUP);
-
-                that.link = link;
             } else {
-                element.append(that.form);
+                that.element.append(that.form);
                 that.popup = that.element.closest(".k-popup").data(POPUP);
             }
 
@@ -231,12 +238,12 @@ kendo_module({
             var that = this;
 
             Widget.fn.destroy.call(that);
-
-            kendo.unbind(that.form);
-            kendo.destroy(that.form);
-            that.form.unbind(NS);
-
-            that.popup.destroy();
+            if (that.form) {
+                kendo.unbind(that.form);
+                kendo.destroy(that.form);
+                that.form.unbind(NS);
+                that.popup.destroy();
+            }
 
             that.link.unbind(NS);
 
@@ -369,6 +376,11 @@ kendo_module({
         _click: function(e) {
             e.preventDefault();
             e.stopPropagation();
+
+            if (!this.popup) {
+                this._init();
+            }
+
             this.popup.toggle();
         },
 
