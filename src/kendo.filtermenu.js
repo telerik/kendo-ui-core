@@ -156,6 +156,10 @@ kendo_module({
             }
 
             that.type = type;
+
+            if (options.appendToElement) { // force creation if used in column menu
+                that._init();
+            }
         },
 
         _init: function() {
