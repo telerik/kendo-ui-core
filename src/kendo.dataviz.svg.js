@@ -322,12 +322,12 @@ kendo_module({
             if (!path.template) {
                 path.template = SVGPath.template = renderTemplate(
                     "<path #= d.renderAttr(\"id\", d.options.id) #" +
+                    "style='display: #= d.renderDisplay() #' " +
                     "#= d.renderDataAttributes() # " +
                     "d='#= d.renderPoints() #' " +
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
                     "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
                     "#= d.renderDashType() # " +
-                    "#= d.renderVisibility() #" +
                     "stroke-linecap='#= d.renderLinecap() #' " +
                     "stroke-linejoin='round' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
@@ -343,7 +343,7 @@ kendo_module({
             strokeOpacity: 1,
             rotation: [0,0,0],
             strokeLineCap: SQUARE,
-            visibility: "visible"
+            visible: true
         },
 
         refresh: function(domElement) {
@@ -352,14 +352,12 @@ kendo_module({
             $(domElement).attr({
                 "d": this.renderPoints(),
                 "fill-opacity": options.fillOpacity,
-                "stroke-opacity": options.strokeOpacity,
-                "visibility": options.visibility
-            });
+                "stroke-opacity": options.strokeOpacity
+            }).css("display", this.renderDisplay());
         },
 
         clone: function() {
-            var path = this;
-            return new SVGPath(deepExtend({}, path.options));
+            return new SVGPath(deepExtend({}, this.options));
         },
 
         renderPoints: function() {
@@ -391,15 +389,8 @@ kendo_module({
             return NONE;
         },
 
-        renderVisibility: function() {
-            var options = this.options,
-                result = "";
-
-            if (options.visibility === "hidden") {
-                result = "visibility='hidden' ";
-            }
-
-            return result;
+        renderDisplay: function() {
+            return this.options.visible ? "block" : "none";
         },
 
         destroy: function() {

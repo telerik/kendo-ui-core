@@ -599,9 +599,9 @@
                     ok(path.render().indexOf("fill='#f00'") > -1);
                 });
 
-                test("renders visibility", function() {
-                    path.options.visibility = "hidden";
-                    ok(path.render().indexOf("visibility='hidden'") > -1);
+                test("renders display", function() {
+                    path.options.visible = false;
+                    ok(path.render().indexOf("display: none") > -1);
                 });
 
                 test("renders empty fill when no fill is set", function() {
@@ -716,11 +716,11 @@
                     equals(domElement.attr("stroke-opacity"), "0.4");
                 });
 
-                test("refresh updates stroke-opacity attribute", function() {
+                test("refresh updates display style property", function() {
                     var domElement = $("<div />");
-                    path.options.visibility = "hidden";
+                    path.options.visible = false;
                     path.refresh(domElement);
-                    equals(domElement.attr("visibility"), "hidden");
+                    equals(domElement.css("display"), "none");
                 });
 
             })();

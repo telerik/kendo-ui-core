@@ -94,7 +94,6 @@ kendo_module({
         DRAG_START = "dragStart",
         FADEIN = "fadeIn",
         GLASS = "glass",
-        HIDDEN = "hidden",
         HOURS = "hours",
         INITIAL_ANIMATION_DURATION = dataviz.INITIAL_ANIMATION_DURATION,
         INSIDE_BASE = "insideBase",
@@ -152,7 +151,6 @@ kendo_module({
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_LINE = "verticalLine",
-        VISIBLE = "visible",
         WEEKS = "weeks",
         WHITE = "#fff",
         X = "x",
@@ -736,8 +734,7 @@ kendo_module({
                 for (i = 0; i < length; i++) {
                     crosshair = crosshairs[i];
                     if (plotArea.backgroundBox().containsPoint(coords)) {
-                        crosshair.show(point);
-                        crosshair.repaint(point);
+                        crosshair.showAt(point);
                     } else {
                         crosshair.hide();
                     }
@@ -6916,44 +6913,38 @@ kendo_module({
             if (!crosshair.options.id) {
                 crosshair.options.id = uniqueId();
             }
-
+            crosshair._visible = false;
             crosshair.stickyMode = axis instanceof CategoryAxis;
         },
 
         options: {
             color: BLACK,
-            width: 2,
-            visibility: HIDDEN
+            width: 2
         },
 
-        repaint: function(point) {
+        repaint: function() {
             var crosshair = this,
-                options = crosshair.options,
                 element = crosshair.element;
 
-            crosshair.point = point;
             crosshair.getViewElements(crosshair._view);
             element = crosshair.element;
-            element.refresh(doc.getElementById(options.id));
+            element.refresh(doc.getElementById(crosshair.options.id));
         },
 
-        show: function(point) {
-            var crosshair = this,
-                options = crosshair.options;
+        showAt: function(point) {
+            var crosshair = this;
 
-            if (options.visibility === HIDDEN) {
-                options.visibility = VISIBLE;
-                crosshair.repaint(point);
-            }
+            crosshair._visible = true;
+            crosshair.point = point;
+            crosshair.repaint();
         },
 
-        hide: function(point) {
-            var crosshair = this,
-                options = crosshair.options;
+        hide: function() {
+            var crosshair = this;
 
-            if (options.visibility === VISIBLE) {
-                options.visibility = HIDDEN;
-                crosshair.repaint(point);
+            if (crosshair._visible) {
+                crosshair._visible = false;
+                crosshair.repaint();
             }
         },
 
@@ -7011,7 +7002,7 @@ kendo_module({
                 fill: "",
                 dashType: options.dashType,
                 zIndex: 2,
-                visibility: options.visibility
+                visible: crosshair._visible
             });
 
             elements.push(crosshair.element);
