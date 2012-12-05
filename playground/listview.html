@@ -1,119 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>listview</title>
+        <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.binder.js"></script>
-        <script src="../src/kendo.pager.js"></script>
-        <script src="../src/kendo.selectable.js"></script>
-        <script src="../src/kendo.validator.js"></script>
-        <script src="../src/kendo.editable.js"></script>
-        <script src="../src/kendo.listView.js"></script>
-        <link href="../styles/kendo.common.css" type="text/css"/>
-        <link href="../styles/web/kendo.default.less" type="text/css" rel="stylesheet/less"/>
-        <script src="../demos/mvc/content/shared/js/less.js"></script>
-
-        <style type="text/css">
-            .k-marquee
-            {
-                position:absolute;
-                border:1px dotted black;
-                background: rgba(200, 200, 255, 0.7);
-                border: 1px solid rgba(100, 100, 255, 0.8);
-            }
-            .k-state-focused
-            {
-                background: #C8E844;
-            }
-            ul{
-                margin:0;
-                padding:0;
-                width: 200px;
-            }
-            li
-            {
-                border: 1px solid black;
-                list-style:none;
-                background-color: #EFDFEF;
-            }
-            li:nth-child(2n+1)
-            {
-                background-color: #BAEAEA;
-            }
-       </style>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.history.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.mobile.scroller.js"></script>
+        <script src="../src/kendo.mobile.shim.js"></script>
+        <script src="../src/kendo.mobile.loader.js"></script>
+        <script src="../src/kendo.mobile.popover.js"></script>
+        <script src="../src/kendo.mobile.view.js"></script>
+        <script src="../src/kendo.mobile.pane.js"></script>
+        <script src="../src/kendo.mobile.application.js"></script>
+        <script src="../src/kendo.mobile.button.js"></script>
+        <script src="../src/kendo.mobile.actionsheet.js"></script>
+        <script src="../src/kendo.mobile.navbar.js"></script>
+        <script src="../src/kendo.mobile.listview.js"></script>
     </head>
     <body>
-        <button class="k-add-button">Add new item</button>
-        <ul id="listView"></ul>
-        <div class="pager"></div>
-
-        <script id="editTemplate" type="text/x-kendo-tmpl">
-            <li>Editing: <input type="text" data-bind="value:foo" name="foo" required/><div><span data-for="foo"></span></div>
-            <input type="number" data-bind="value:id" name="id" min="1"/>
-            <button class='k-close-button'>Save</button>
-            <button class='k-cancel-button'>Cancel</button></li>
-        </script>
-
+        <div data-role="view">
+            <ul data-role="listview" data-source="foo" data-template="foo-template">
+            </ul>
+            <script type="text/x-kendo-template" id="foo-template">
+                #: data #
+                <span><a data-rel="external" href="#:data#">#: data #</a></span>
+            </script>
+        </div>
         <script>
-            $(document).ready(function() {
-                var data = [];
-                for (var i = 1; i <= 20; i++ ) {
-                    data.push( { mid: i, id: i, foo: "foo" + i, bar: "bar" + i, baz: { foo: "baz.foo" + i } } );
-                }
-                var dataSource = new kendo.data.DataSource({
-                    schema: {
-                        model: {
-                            id: "mid",
-                            fields: {
-                                mid: { type: "number" },
-                                id: { type: "number" },
-                                foo: "foo"
-                            }
-                        }
-                    },
-                    data: data,
-                    pageSize: 10
-                });
-
-                $(".pager").kendoPager({
-                    dataSource: dataSource,
-                    selectTemplate: '<span class="currentPage">#=text#</span>',
-                    linkTemplate: '<a href="##" data-page="#=idx #">#=text#</a>'
-                });
-
-                var listView = $("#listView").kendoListView({
-                    dataSource: dataSource,
-                    selectable: false,
-                    navigatable: true,
-                    template: "<li>#=foo# <button class='k-edit-button'>Edit</button><button class='k-delete-button'>Delete</button></li>",
-                    editTemplate: kendo.template($("#editTemplate").html())
-                }).delegate(".k-edit-button", "click", function(e) {
-                    var item = $(this).parent();
-
-                    listView.edit(item);
-
-                }).delegate(".k-close-button", "click", function(e) {
-                    var item = $(this).parent();
-
-                    listView.save(item);
-
-                }).delegate(".k-delete-button", "click", function(e) {
-                    var item = $(this).parent();
-
-                    if (confirm("Delete?")) {
-                        listView.remove(item);
-                    }
-                }).delegate(".k-cancel-button", "click", function() {
-                    listView.cancel();
-                }).data("kendoListView");
-
-                $(".k-add-button").click(function() {
-                    listView.add();
-                });
-
-            });
+            new kendo.mobile.Application();
+            var foo = [ "http://google.com", "http://yahoo.com", "http://msn.com" ]
         </script>
     </body>
 </html>
