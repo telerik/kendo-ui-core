@@ -125,6 +125,32 @@
                     });
                 });
 
+                test("slave axis min is set to selected range start", function() {
+                    createStockChart({
+                        navigator: {
+                            dataSource: null,
+                            select: {
+                                from: new Date("2012/01/01")
+                            }
+                        }
+                    });
+
+                    same(chart.options.categoryAxis[0].min, new Date("2012/01/01"));
+                });
+
+                test("slave axis max is set to selected range end", function() {
+                    createStockChart({
+                        navigator: {
+                            dataSource: null,
+                            select: {
+                                to: new Date("2012/01/01")
+                            }
+                        }
+                    });
+
+                    same(chart.options.categoryAxis[0].max, new Date("2012/01/01"));
+                });
+
                 // ------------------------------------------------------------
                 module("Data Binding / With Navigator Data Source", {
                     setup: function() {
@@ -163,6 +189,34 @@
                     equal(chart.options.categoryAxis[1].categories.length, 3);
                     equal(chart.options.categoryAxis[2].categories.length, 3);
                     equal(chart.options.categoryAxis[3].categories.length, 3);
+                });
+
+                test("slave axis min is limited to actual navigator range", function() {
+                    createStockChart({
+                        navigator: {
+                            autoBind: false,
+                            select: {
+                                from: new Date("2012/01/01")
+                            }
+                        }
+                    });
+
+                    chart._navigator.dataSource.fetch();
+                    same(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
+                });
+
+                test("slave axis max is limited to actual navigator range", function() {
+                    createStockChart({
+                        navigator: {
+                            autoBind: false,
+                            select: {
+                                to: new Date("2012/01/01")
+                            }
+                        }
+                    });
+
+                    chart._navigator.dataSource.fetch();
+                    same(chart.options.categoryAxis[0].max, new Date("2012/11/01"));
                 });
 
                 asyncTest("data binding is not performed when autoBind is false", function() {

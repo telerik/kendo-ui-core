@@ -238,6 +238,9 @@ kendo_module({
                     (chart.options.dataSource && chart._dataBound))) {
                 navi._redrawSelf();
                 navi.redraw();
+
+                navi.filterAxes();
+                navi.redrawSlaves();
             }
         },
 
@@ -409,17 +412,39 @@ kendo_module({
 
         filterAxes: function() {
             var navi = this,
+                mainAxis = navi.mainAxis(),
+                categories,
                 select = navi.options.select || {},
                 chart = navi.chart,
                 slaveAxes = chart.options.categoryAxis,
+                from = select.from,
+                to = select.to,
                 i,
                 axis;
+
+            if (mainAxis) {
+                categories = mainAxis.options.categories;
+                if (categories.length > 0) {
+                    var min = toTime(categories[0]),
+                        max = toTime(last(categories));
+
+                    from = toTime(from);
+                    if (from < min || from > max) {
+                        from = toDate(min);
+                    }
+
+                    to = toTime(to);
+                    if (to < min || to > max) {
+                        to = toDate(max);
+                    }
+                }
+            }
 
             for (i = 0; i < slaveAxes.length; i++) {
                 axis = slaveAxes[i];
                 if (axis.pane !== NAVIGATOR_PANE) {
-                    axis.min = select.from;
-                    axis.max = select.to;
+                    axis.min = from;
+                    axis.max = to;
                 }
             }
         },
@@ -534,7 +559,11 @@ kendo_module({
         },
 
         mainAxis: function() {
-            return this.chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            var plotArea = this.chart._plotArea;
+
+            if (plotArea) {
+                return plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            }
         }
     });
 
