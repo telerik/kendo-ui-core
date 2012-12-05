@@ -39,6 +39,7 @@ class Component
                 @options.delete(parent)
 
                 parent = CompositeOption.new(:name => parent.name,
+                                             :owner => self,
                                              :type => parent.type,
                                              :description => parent.description)
                 @options.push(parent)
@@ -54,14 +55,22 @@ class Component
 
             next if @options.any? { |option| option.name == name && option.type == type }
 
-            option = Option.new(:name => name,
-                                :type => type,
-                                :description => description)
-
             if parents.any?
-                parents.each { |parent| parent.add_option(option) }
+
+                parents.each do |parent|
+
+                    parent.add_option(:name => name,
+                                      :type => type,
+                                      :description => description)
+                end
+
             else
-                @options.push(option)
+
+                @options.push Option.new(:name => name,
+                                         :owner => self,
+                                         :type => type,
+                                         :description => description)
+
             end
         end
     end

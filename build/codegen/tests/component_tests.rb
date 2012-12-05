@@ -19,6 +19,16 @@ class ComponentTests < Test::Unit::TestCase
         assert_equal 0, @component.options.size
     end
 
+    def test_add_option_sets_owner
+
+        assert_equal @component, @component.options[0].owner
+    end
+
+    def test_add_option_sets_owner_of_nested_options
+
+        assert_equal @component.options[0], @component.options[0].options[0].owner
+    end
+
     def test_add_option_ignores_options_with_same_name_and_type
         @component = CodeGen::Component.new(:name => 'foo')
         @component.add_option(:name => 'foo', :type => 'String')

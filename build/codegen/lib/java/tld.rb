@@ -17,12 +17,53 @@ module CodeGen::Java
         'window' => ['content.template'],
     }
 
+    def self.tag_name(target)
+        return target.name.camelize if target.instance_of?(CodeGen::Component)
+
+        self.tag_name(target.owner) + '-' + target.name
+    end
+
+    def self.namespace(target)
+        return target.name.downcase if target.instance_of?(CodeGen::Component)
+
+        self.namespace(target.owner)
+    end
+
+    def self.body_content(target)
+        return 'JSP' if target.options.any { |option| option.instance_of?(CodeGen::CompositeOption) }
+
+        'empty'
+    end
+
+    def self.tag_class(target)
+        return target.name + 'Tag' if target.instance_of?(CodeGen::Component)
+
+        return target.name.pascalize + 'Tag' if target.owner.instance_of?(CodeGen::Component)
+
+        target.owner.name.pascalize + target.name.pascalize + 'Tag'
+    end
+
 module TLD
+    COMPOSITE_OPTION_START = ERB.new(%{
+        <tag>
+            <description><%= option.description %></description>
+            <name><%= CodeGen::Java.tag_name(option) %></name>
+            <tag-class>com.kendoui.taglib.<%= CodeGen::Java.namespace(option) %>.<%= CodeGen::Java.tag_class(option) %></tag-class>
+            <body-content>JSP</body-content>
+    }, 0, '<>%')
+
+    COMPOSITE_OPTION_END = ERB.new(%{
+<% if option.name == 'pane' && component.name == 'Splitter' %>
+            <dynamic-attributes>true</dynamic-attributes>
+<% end %>
+        </tag>
+    }, 0, '<>%')
+
     COMPONENT_START = ERB.new(%{
         <tag>
             <description><%= component.name %></description>
-            <name><%= component.name.camelize %></name>
-            <tag-class>com.kendoui.taglib.<%= component.name %>Tag</tag-class>
+            <name><%= CodeGen::Java.tag_name(component) %></name>
+            <tag-class>com.kendoui.taglib.<%= CodeGen::Java.tag_class(component) %></tag-class>
             <body-content>JSP</body-content>
 <% if component.name != 'DataSource' %>
             <attribute>
@@ -113,6 +154,24 @@ class Generator
         end
 
         @tld += COMPONENT_END.result(binding)
+
+        composite_options(component.options).each do |option|
+
+            composite_option(component, option)
+
+        end
+    end
+
+    def composite_option(component, option)
+        @tld += COMPOSITE_OPTION_START.result(binding)
+
+        @tld += COMPOSITE_OPTION_END.result(binding)
+
+        composite_options(option.options).each do |option|
+
+            composite_option(component, option)
+
+        end
     end
 
     def sync()
@@ -126,6 +185,7 @@ class Generator
 
         File.write(@filename, src)
     end
+
 end
 
 end # module CodeGen::Java::TLD
