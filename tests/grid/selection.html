@@ -504,6 +504,22 @@
                 ok(!table.find("tbody tr:first").hasClass("k-state-selected"));
             });
 
+            test("ctrl space on selected item triggers change", function() {
+                var wasCalled = false,
+                    grid = setup({
+                        selectable: "multiple",
+                        change: function() {
+                            wasCalled = true;
+                        }
+                    });
+
+                table.find("tbody tr:first").addClass("k-state-selected");
+                grid.table.focus()
+                    .press(kendo.keys.SPACEBAR, true);
+
+                ok(wasCalled);
+            });
+
             test("hierarchy cell links tabindex", function() {
                 var grid = setup({ detailTemplate: "template" });
 
