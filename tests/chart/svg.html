@@ -599,6 +599,11 @@
                     ok(path.render().indexOf("fill='#f00'") > -1);
                 });
 
+                test("renders visibility", function() {
+                    path.options.visibility = "hidden";
+                    ok(path.render().indexOf("visibility='hidden'") > -1);
+                });
+
                 test("renders empty fill when no fill is set", function() {
                     path.options.fill = "";
                     ok(path.render().indexOf("fill='none") > -1);
@@ -709,6 +714,13 @@
                     path.options.strokeOpacity = 0.4;
                     path.refresh(domElement);
                     equals(domElement.attr("stroke-opacity"), "0.4");
+                });
+
+                test("refresh updates stroke-opacity attribute", function() {
+                    var domElement = $("<div />");
+                    path.options.visibility = "hidden";
+                    path.refresh(domElement);
+                    equals(domElement.attr("visibility"), "hidden");
                 });
 
             })();

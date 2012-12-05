@@ -94,6 +94,7 @@ kendo_module({
         DRAG_START = "dragStart",
         FADEIN = "fadeIn",
         GLASS = "glass",
+        HIDDEN = "hidden",
         HOURS = "hours",
         INITIAL_ANIMATION_DURATION = dataviz.INITIAL_ANIMATION_DURATION,
         INSIDE_BASE = "insideBase",
@@ -151,6 +152,7 @@ kendo_module({
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_LINE = "verticalLine",
+        VISIBLE = "visible",
         WEEKS = "weeks",
         WHITE = "#fff",
         X = "x",
@@ -728,16 +730,19 @@ kendo_module({
                 crosshairs = plotArea.crosshairs,
                 length = crosshairs.length,
                 coords = chart._eventCoordinates(e),
-                point = new Point2D(coords.x, coords.y),
+                point = Point2D(coords.x, coords.y),
+                inPlotArea = plotArea.backgroundBox().containsPoint(coords),
                 i, crosshair;
 
-            if (length && plotArea.backgroundBox().containsPoint(coords)) {
+            if (length) {
                 for (i = 0; i < length; i++) {
                     crosshair = crosshairs[i];
-                    if (!crosshair.options.visibility) {
+                    if (plotArea.backgroundBox().containsPoint(coords)) {
                         crosshair.show(point);
+                        crosshair.repaint(point);
+                    } else {
+                        crosshair.hide();
                     }
-                    crosshair.repaint(point);
                 }
             }
         },
@@ -6920,7 +6925,7 @@ kendo_module({
         options: {
             color: BLACK,
             width: 2,
-            visibility: false
+            visibility: HIDDEN
         },
 
         repaint: function(point) {
@@ -6930,7 +6935,7 @@ kendo_module({
 
             crosshair.point = point;
             crosshair.getViewElements(crosshair._view);
-            element.points = crosshair.element.points;
+            element = crosshair.element;
             element.refresh(doc.getElementById(options.id));
         },
 
@@ -6938,8 +6943,8 @@ kendo_module({
             var crosshair = this,
                 options = crosshair.options;
 
-            if (!options.visibility) {
-                options.visibility = true;
+            if (options.visibility === HIDDEN) {
+                options.visibility = VISIBLE;
                 crosshair.repaint(point);
             }
         },
@@ -6948,8 +6953,8 @@ kendo_module({
             var crosshair = this,
                 options = crosshair.options;
 
-            if (options.visibility) {
-                options.visibility = false;
+            if (options.visibility === VISIBLE) {
+                options.visibility = HIDDEN;
                 crosshair.repaint(point);
             }
         },
@@ -7010,7 +7015,7 @@ kendo_module({
                 fill: "",
                 dashType: options.dashType,
                 zIndex: 2,
-                visibility: options.visible
+                visibility: options.visibility
             });
 
             elements.push(crosshair.element);

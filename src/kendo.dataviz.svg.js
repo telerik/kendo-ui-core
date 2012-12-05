@@ -327,6 +327,7 @@ kendo_module({
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
                     "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
                     "#= d.renderDashType() # " +
+                    "#= d.renderVisibility() #" +
                     "stroke-linecap='#= d.renderLinecap() #' " +
                     "stroke-linejoin='round' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
@@ -341,7 +342,8 @@ kendo_module({
             fillOpacity: 1,
             strokeOpacity: 1,
             rotation: [0,0,0],
-            strokeLineCap: SQUARE
+            strokeLineCap: SQUARE,
+            visibility: "visible"
         },
 
         refresh: function(domElement) {
@@ -350,7 +352,8 @@ kendo_module({
             $(domElement).attr({
                 "d": this.renderPoints(),
                 "fill-opacity": options.fillOpacity,
-                "stroke-opacity": options.strokeOpacity
+                "stroke-opacity": options.strokeOpacity,
+                "visibility": options.visibility
             });
         },
 
@@ -386,6 +389,17 @@ kendo_module({
             }
 
             return NONE;
+        },
+
+        renderVisibility: function() {
+            var options = this.options,
+                result = "";
+
+            if (options.visibility === "hidden") {
+                result = "visibility='hidden' ";
+            }
+
+            return result;
         },
 
         destroy: function() {

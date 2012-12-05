@@ -364,8 +364,8 @@ kendo_module({
                 path.template = VMLPath.template = renderTemplate(
                     "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
                     "#= d.renderDataAttributes() #" +
-                    "style='position:absolute; #= d.renderSize() #' " +
-                    "coordorigin='0 0' #= d.renderCoordsize() # >" +
+                    "style='position:absolute; #= d.renderSize() # visibility:#= d.renderVisibility() #;' " +
+                    "coordorigin='0 0' #= d.renderCoordsize() #>" +
                         "<kvml:path v='#= d.renderPoints() # e' />" +
                         "#= d.fill.render() + d.stroke.render() #" +
                     "</kvml:shape>"
@@ -380,7 +380,8 @@ kendo_module({
             fill: "",
             fillOpacity: 1,
             strokeOpacity: 1,
-            rotation: [0,0,0]
+            rotation: [0,0,0],
+            visibility: "visible"
         },
 
         renderCoordsize: function() {
@@ -399,6 +400,10 @@ kendo_module({
             path.stroke.options.strokeOpacity = path.options.strokeOpacity;
 
             return ViewElement.fn.render.call(path);
+        },
+
+        renderVisibility: function() {
+            return this.options.visibility === "hidden" ? "hidden" : "visible";
         },
 
         renderPoints: function() {
@@ -422,6 +427,8 @@ kendo_module({
                 fill.options = stroke.options = path.options;
                 fill.refresh(element.find("fill")[0]);
                 stroke.refresh(element.find("stroke")[0]);
+
+                element.css("visibility", path.renderVisibility());
 
                 // Force redraw in order to remove artifacts in IE < 7
                 parentNode.style.cssText = parentNode.style.cssText;
