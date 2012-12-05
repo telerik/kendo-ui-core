@@ -11,6 +11,7 @@ kendo_module({
         ui = kendo.ui,
         proxy = $.proxy,
         POPUP = "kendoPopup",
+        INIT = "init",
         NS = ".kendoFilterMenu",
         EQ = "Is equal to",
         NEQ = "Is not equal to",
@@ -218,6 +219,8 @@ kendo_module({
                  .removeClass("k-textbox");
 
             that.refresh();
+
+            that.trigger(INIT, { field: that.field, container: that.form });
         },
 
         refresh: function() {
@@ -243,6 +246,7 @@ kendo_module({
             var that = this;
 
             Widget.fn.destroy.call(that);
+
             if (that.form) {
                 kendo.unbind(that.form);
                 kendo.destroy(that.form);
@@ -409,6 +413,8 @@ kendo_module({
                 this.popup.close();
             }
         },
+
+        events: [ INIT ],
 
         options: {
             name: "FilterMenu",

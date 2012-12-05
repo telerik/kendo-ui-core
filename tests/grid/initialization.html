@@ -588,6 +588,16 @@
                 equal(grid.thead.find("th").data("kendoFilterMenu"), undefined, "Column is not filterable");
             });
 
+            test("filter menu initialized event is raised", 1, function() {
+                var grid = new Grid(table, {
+                    filterable: true,
+                    columns: [{ field: "foo"}],
+                    filterMenuInit: function() { ok(true); }
+                });
+
+                grid.thead.find("th").data("kendoFilterMenu").link.click();
+            });
+
             test("unfilterable column from html attribute", function() {
                 $(table).html("<thead><tr><th data-kendo-filterable=false data-kendo-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {

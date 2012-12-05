@@ -85,6 +85,7 @@ kendo_module({
         SAVE = "save",
         REMOVE = "remove",
         DETAILINIT = "detailInit",
+        FILTERMENUINIT = "filterMenuInit",
         CHANGE = "change",
         COLUMNHIDE = "columnHide",
         COLUMNSHOW = "columnShow",
@@ -560,6 +561,7 @@ kendo_module({
            DETAILEXPAND,
            DETAILCOLLAPSE,
            DETAILINIT,
+           FILTERMENUINIT,
            EDIT,
            SAVE,
            REMOVE,
@@ -2433,7 +2435,10 @@ kendo_module({
                             cell.kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, {
                                 dataSource: that.dataSource,
                                 values: columns[index].values,
-                                closeCallback: closeCallback
+                                closeCallback: closeCallback,
+                                init: function(e) {
+                                    that.trigger(FILTERMENUINIT, { field: e.field, container: e.container });
+                                }
                             }));
                         }
                     });

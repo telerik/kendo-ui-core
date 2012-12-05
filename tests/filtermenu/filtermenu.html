@@ -859,6 +859,17 @@
 
                 equal(form, filterMenu.form);
             });
+
+            test("init event is raised when form is created", 2, function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, field: "foo" });
+
+                filterMenu.bind("init", function(e) {
+                    equal(e.field, "foo");
+                    equal(e.container, filterMenu.form);
+                });
+
+                filterMenu.link.click();
+            });
       </script>
     </body>
 </html>
