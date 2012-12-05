@@ -36,8 +36,8 @@ namespace Kendo.Mvc.UI
             save.HtmlAttributes = HtmlAttributes;
 
             //TODO: Implement command button image html attributes
-            //save.ImageHtmlAttributes = ImageHtmlAttributes;
-            save.Url = delegate { return "#"; };
+            //save.ImageHtmlAttributes = ImageHtmlAttributes;           
+            save.Url = delegate { return "javascript:void(0)"; };
 
             var cancel = factory.CreateButton<GridLinkButtonBuilder>(ButtonType);
 
@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI
 
             //TODO: Implement command button image html attributes
             //cancel.ImageHtmlAttributes = ImageHtmlAttributes;
-            cancel.Url = delegate { return "#"; };
+            cancel.Url = delegate { return "javascript:void(0)"; };
 
             return new[] { save, cancel };
         }
