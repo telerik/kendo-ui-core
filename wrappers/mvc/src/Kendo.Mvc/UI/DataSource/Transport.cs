@@ -19,11 +19,8 @@ namespace Kendo.Mvc.UI
         protected override void Serialize(IDictionary<string, object> json)
         {
             var read = Read.ToJson();
-
-            if (Prefix.HasValue())
-            {
-                json["prefix"] = Prefix;
-            }
+            
+            json["prefix"] = Prefix.HasValue() ? Prefix : string.Empty;            
 
             if (read.Keys.Any())
             {

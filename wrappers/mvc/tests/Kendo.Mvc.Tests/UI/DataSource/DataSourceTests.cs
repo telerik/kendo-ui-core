@@ -11,7 +11,7 @@
 
         public DataSourceTests()
         {
-            dataSource = new DataSource();
+            dataSource = new DataSource();            
         }
 
         [Fact]
@@ -216,7 +216,29 @@
 
             groups.ElementAt(1)["field"].ShouldEqual("Bar");
             groups.ElementAt(1)["dir"].ShouldEqual("asc");
-        }                
+        }
+
+        [Fact]
+        public void ToJson_serialize_transport_prefix_as_empty_string()
+        {
+            var result = dataSource.ToJson();
+            var transport = ((IDictionary<string, object>)result["transport"]);
+
+            transport.ContainsKey("prefix").ShouldBeTrue();
+            transport["prefix"].ShouldEqual(string.Empty);
+        }
+
+        [Fact]
+        public void ToJson_serialize_transport_prefix_when_set()
+        {
+            dataSource.Transport.Prefix = "foo";
+
+            var result = dataSource.ToJson();
+            var transport = ((IDictionary<string, object>)result["transport"]);
+
+            transport.ContainsKey("prefix").ShouldBeTrue();
+            transport["prefix"].ShouldEqual("foo");
+        }
 
         /*
                 [Fact]
