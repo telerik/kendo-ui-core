@@ -9,13 +9,15 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        NUMERICTEXTBOX = "kendoNumericTextBox",
-        DATEPICKER = "kendoDatePicker",
         proxy = $.proxy,
         POPUP = "kendoPopup",
         NS = ".kendoFilterMenu",
         EQ = "Is equal to",
         NEQ = "Is not equal to",
+        roles = {
+            "number": "numerictextbox",
+            "date": "datepicker"
+        },
         Widget = ui.Widget;
 
     var booleanTemplate =
@@ -45,7 +47,7 @@ kendo_module({
                     '<select data-#=ns#bind="value:filters[0].value" data-#=ns#text-field="text" data-#=ns#value-field="value" data-#=ns#source=\'#=kendo.stringify(values).replace(/\'/g,"&\\#39;")#\' data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
                     '</select>' +
                 '#}else{#' +
-                    '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
+                    '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" #=roles[type] ? "data-" + ns + "role=\'" + roles[type] + "\'" : ""# />'+
                 '#}#' +
                 '#if(extra){#'+
                     '<select class="k-filter-and" data-#=ns#bind="value: logic" data-#=ns#role="dropdownlist">'+
@@ -61,7 +63,7 @@ kendo_module({
                         '<select data-#=ns#bind="value:filters[1].value" data-#=ns#text-field="text" data-#=ns#value-field="value" data-#=ns#source=\'#=kendo.stringify(values).replace(/\'/g,"&\\#39;")#\' data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
                         '</select>'+
                     '#}else{#' +
-                        '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
+                        '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" #=roles[type] ? "data-" + ns + "role=\'" + roles[type] + "\'" : ""#/>'+
                     '#}#' +
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
@@ -185,6 +187,7 @@ kendo_module({
                     extra: options.extra,
                     operators: operators,
                     type: type,
+                    roles: roles,
                     values: convertItems(options.values)
                 }))
                 .on("keydown" + NS, proxy(that._keydown, that))
@@ -204,13 +207,11 @@ kendo_module({
             }
 
             that.form
-                 .find("[" + kendo.attr("type") + "=number]")
+                 .find("[" + kendo.attr("role") + "=numerictextbox]")
                  .removeClass("k-textbox")
-                 [NUMERICTEXTBOX]()
                  .end()
-                 .find("[" + kendo.attr("type") + "=date]")
-                 .removeClass("k-textbox")
-                 [DATEPICKER]();
+                 .find("[" + kendo.attr("role") + "=datepicker]")
+                 .removeClass("k-textbox");
 
             that.refresh();
         },

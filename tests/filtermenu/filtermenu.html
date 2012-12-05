@@ -536,13 +536,14 @@
                 dataSource.filter(null);
                 ok(!filterMenu.link.hasClass("k-state-active"));
             });
+
             test("creates numerictextbox for number fields", function() {
                 var filterMenu = setup(
                     dom.attr("data-kendo-field", "bar"), {
                         dataSource: dataSource
                     });
 
-                ok(filterMenu.form.find("[" + kendo.attr("type") + "=number]:first").data("kendoNumericTextBox"));
+                ok(filterMenu.form.find("[" + kendo.attr("role") + "=numerictextbox]:first").data("kendoNumericTextBox"));
             });
 
             test("creates datepicker for date fields", function() {
@@ -551,7 +552,7 @@
                         dataSource: dataSource
                     });
 
-                ok(filterMenu.form.find("[" + kendo.attr("type") + "=date]:first").data("kendoDatePicker"));
+                ok(filterMenu.form.find("[" + kendo.attr("role") + "=datepicker]:first").data("kendoDatePicker"));
             });
 
             test("updates dropdownlists", function() {
@@ -572,7 +573,7 @@
                 });
 
                 dataSource.filter({ field: "bar", value: 1 });
-                equal(filterMenu.form.find("[" + kendo.attr("type") + "=number]:first").data("kendoNumericTextBox")._text.val(), "1.00");
+                equal(filterMenu.form.find("[" + kendo.attr("role") + "=numerictextbox]:first").data("kendoNumericTextBox")._text.val(), "1.00");
             });
 
             test("updates datepickers", function() {
@@ -582,7 +583,7 @@
 
                 var date = new Date(2011, 1, 1);
                 dataSource.filter({ field: "baz", value:date });
-                equal(filterMenu.form.find("[" + kendo.attr("type") + "=date]:first").data("kendoDatePicker").value().getTime(), date.getTime());
+                equal(filterMenu.form.find("[" + kendo.attr("role") + "=datepicker]:first").data("kendoDatePicker").value().getTime(), date.getTime());
             });
 
             test("closes sibling filtering menus", function() {
