@@ -93,6 +93,7 @@ end
 
 remote_file "/tmp/mono.tar.gz" do
     source "http://download.mono-project.com/sources/mono/mono-2.10.8.tar.gz"
+    action :create_if_missing
 end
 
 bash "install mono" do
@@ -107,3 +108,19 @@ bash "install mono" do
 end
 
 package 'xorg-x11-server-Xvfb'
+package 'xorg-x11-xauth'
+
+
+remote_file "/tmp/remi-release-6.rpm" do
+    source "http://rpms.famillecollet.com/enterprise/remi-release-6.rpm"
+    action :create_if_missing
+end
+
+package "remi-repository" do
+    source "/tmp/remi-release-6.rpm"
+    action :install
+end
+
+package "firefox" do
+    options "--enablerepo=remi --disablerepo=updates"
+end
