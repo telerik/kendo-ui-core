@@ -809,7 +809,7 @@ kendo_module({
             },
 
             itemChange: function(e) {
-                bindElement(e.item[0], e.data, (e.ns || kendo.ui).roles);
+                bindElement(e.item[0], e.data, this._ns(e.ns));
             },
 
             dataBinding: function() {
@@ -823,6 +823,15 @@ kendo_module({
                 }
             },
 
+            _ns: function(ns) {
+                ns = ns || kendo.ui;
+                var all = [ kendo.ui, kendo.dataviz.ui, kendo.mobile.ui ];
+                all.splice($.inArray(ns, all), 1);
+                all.unshift(ns);
+
+                return kendo.rolesFromNamespaces(all);
+            },
+
             dataBound: function(e) {
                 var idx,
                     length,
@@ -830,7 +839,6 @@ kendo_module({
                     items = widget.items(),
                     dataSource = widget.dataSource,
                     view = dataSource.view(),
-                    ns = e.ns || kendo.ui,
                     groups = dataSource.group() || [];
 
                 if (items.length) {
@@ -839,7 +847,7 @@ kendo_module({
                     }
 
                     for (idx = 0, length = view.length; idx < length; idx++) {
-                        bindElement(items[idx], view[idx], ns.roles);
+                        bindElement(items[idx], view[idx], this._ns(e.ns));
                     }
                 }
             },

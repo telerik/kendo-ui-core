@@ -2406,15 +2406,19 @@ function pad(number, digits, end) {
     };
 
     kendo.rolesFromNamespaces = function(namespaces) {
-        var roles;
+        var roles = [],
+            idx,
+            length;
 
         if (!namespaces[0]) {
             namespaces = [kendo.ui, kendo.dataviz.ui];
         }
 
-        roles = $.map(namespaces, function(namespace) { return namespace.roles; }).reverse();
+        for (idx = 0, length = namespaces.length; idx < length; idx ++) {
+            roles[idx] = namespaces[idx].roles;
+        }
 
-        return extend.apply(null, [{}].concat(roles));
+        return extend.apply(null, [{}].concat(roles.reverse()));
     };
 
     kendo.init = function(element) {
