@@ -61,3 +61,48 @@ bash "setup_CI_job" do
         # java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' restart;
     }
 end
+
+# Mono
+
+%w[bison
+gettext
+glib2
+freetype
+fontconfig
+libpng
+libpng-devel
+libX11
+libX11-devel
+glib2-devel
+libgdiplus-devel
+libgdiplus
+libexif
+glibc-devel
+urw-fonts
+unzip
+gcc
+gcc-c++
+automake
+autoconf
+libtool
+make
+bzip2
+wget].each do |package_name|
+    package package_name
+end
+
+remote_file "/tmp/mono.tar.gz" do
+    source "http://download.mono-project.com/sources/mono/mono-2.10.8.tar.gz"
+end
+
+bash "install mono" do
+    code %Q{
+        cd tmp;
+        tar xf mono.tar.gz;
+        cd mono-*;
+        ./configure --prefix=/usr/local && make && make install
+    }
+
+    only_if { !File.exists?("/usr/local/bin/mono") }
+end
+
