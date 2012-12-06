@@ -18,6 +18,7 @@ kendo_module({
         ASC = "asc",
         DESC = "desc",
         CHANGE = "change",
+        INIT = "init",
         POPUP = "kendoPopup",
         FILTERMENU = "kendoFilterMenu",
         MENU = "kendoMenu",
@@ -54,6 +55,11 @@ kendo_module({
                 .on("click" + NS, proxy(that._click, that));
 
             that.wrapper = $('<div class="k-column-menu"/>');
+        },
+
+        _init: function() {
+            var that = this,
+                options = that.options;
 
             that.wrapper.html(kendo.template(template)({
                 ns: kendo.ns,
@@ -65,7 +71,7 @@ kendo_module({
             }));
 
             that.popup = that.wrapper[POPUP]({
-                anchor: link,
+                anchor: that.link,
                 open: proxy(that._open, that),
                 activate: proxy(that._activate, that),
                 close: that.options.closeCallback
@@ -78,7 +84,11 @@ kendo_module({
             that._columns();
 
             that._filter();
+
+            that.trigger(INIT, { field: that.field });
         },
+
+        events: [ INIT ],
 
         options: {
             name: "ColumnMenu",
@@ -109,12 +119,16 @@ kendo_module({
                 that.owner.unbind("columnHide", that._updateColumnsMenuHandler);
             }
 
-            that.menu.element.off(NS);
-            that.menu.destroy();
+            if (that.menu) {
+                that.menu.element.off(NS);
+                that.menu.destroy();
+            }
 
             that.wrapper.off(NS);
 
-            that.popup.destroy();
+            if (that.popup) {
+                that.popup.destroy();
+            }
 
             that.link.off(NS);
         },
@@ -128,6 +142,11 @@ kendo_module({
         _click: function(e) {
             e.preventDefault();
             e.stopPropagation();
+
+            if (!this.popup) {
+                this._init();
+            }
+
             this.popup.toggle();
         },
 

@@ -195,6 +195,17 @@
                 equal(grid.thead.find(".k-grid-filter").length, 0);
             });
 
+            test("column menu init event", 1, function() {
+                var grid = setup({
+                    columns: ["foo"],
+                    columnMenu: true,
+                    columnMenuInit: function(e) {
+                        equal(e.field, "foo");
+                    }
+                });
+
+                grid.thead.find("th:first").data("kendoColumnMenu").link.click();
+            });
         </script>
     </body>
 </html>

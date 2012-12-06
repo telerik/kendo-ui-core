@@ -72,11 +72,8 @@ kendo_module({
         math = Math,
         PROGRESS = "progress",
         ERROR = "error",
-        //ROW_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer):visible",
         DATA_CELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
         SELECTION_CELL_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer) > td:not(.k-group-cell):not(.k-hierarchy-cell)",
-        //CELL_SELECTOR =  ROW_SELECTOR + ">td" + DATA_CELL,
-        //FIRST_CELL_SELECTOR = ROW_SELECTOR + ":first" + ">td" + DATA_CELL + ":first",
         NAVROW = "tr:not(.k-footer-template):visible",
         NAVCELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
         FIRSTNAVITEM = NAVROW + ":first>" + NAVCELL + ":first",
@@ -86,6 +83,7 @@ kendo_module({
         REMOVE = "remove",
         DETAILINIT = "detailInit",
         FILTERMENUINIT = "filterMenuInit",
+        COLUMNMENUINIT = "columnMenuInit",
         CHANGE = "change",
         COLUMNHIDE = "columnHide",
         COLUMNSHOW = "columnShow",
@@ -94,7 +92,6 @@ kendo_module({
         DETAILEXPAND = "detailExpand",
         DETAILCOLLAPSE = "detailCollapse",
         FOCUSED = "k-state-focused",
-        //FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
         COLUMNRESIZE = "columnResize",
         COLUMNREORDER = "columnReorder",
@@ -562,6 +559,7 @@ kendo_module({
            DETAILCOLLAPSE,
            DETAILINIT,
            FILTERMENUINIT,
+           COLUMNMENUINIT,
            EDIT,
            SAVE,
            REMOVE,
@@ -2403,7 +2401,8 @@ kendo_module({
                                 filterable: filterable,
                                 messages: columnMenu.messages,
                                 owner: that,
-                                closeCallback: closeCallback
+                                closeCallback: closeCallback,
+                                init: function(e) { that.trigger(COLUMNMENUINIT, { field: e.field }); }
                             };
 
                             cell.kendoColumnMenu(menuOptions);

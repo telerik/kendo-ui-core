@@ -81,6 +81,8 @@
                 }, options);
 
                 var menu = new ColumnMenu(dom, options);
+                menu._init();
+
                 menu.menu.options.hoverDelay = 1;
 
                 return menu;
@@ -423,6 +425,60 @@
                 popup.close();
 
                 ok(wasCalled);
+            });
+
+            test("menu is not created before link is clicked", function() {
+                var columnMenu = new ColumnMenu(dom, { dataSource: dataSource });
+
+                ok(!columnMenu.menu);
+            });
+
+            test("menu is created after link is clicked", function() {
+                var columnMenu = new ColumnMenu(dom, {
+                    dataSource: dataSource,
+                    owner: {
+                        columns: [{ field: "foo" }, { field: "bar", hidden: true}],
+                        bind: $.noop,
+                        unbind: $.noop
+                    }
+                });
+                columnMenu.link.click();
+
+                ok(columnMenu.menu);
+            });
+
+            test("single menu instance is created on multiple link clicks", function() {
+                var columnMenu = new ColumnMenu(dom, {
+                    dataSource: dataSource,
+                    owner: {
+                        columns: [{ field: "foo" }, { field: "bar", hidden: true}],
+                        bind: $.noop,
+                        unbind: $.noop
+                    }
+                });
+                columnMenu.link.click();
+                var menu = columnMenu.menu;
+
+                columnMenu.link.click();
+
+                equal(columnMenu.menu, menu);
+            });
+
+            test("init event is raised when initialized", 1, function() {
+                var columnMenu = new ColumnMenu(dom, {
+                    dataSource: dataSource,
+                    owner: {
+                        columns: [{ field: "foo" }, { field: "bar", hidden: true}],
+                        bind: $.noop,
+                        unbind: $.noop
+                    }
+                });
+
+                columnMenu.bind("init", function(e) {
+                    equal(e.field, columnMenu.field);
+                });
+
+                columnMenu.link.click();
             });
 
         </script>
