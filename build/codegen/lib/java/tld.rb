@@ -17,7 +17,19 @@ module CodeGen::Java
         'window' => ['content.template'],
     }
 
+    def self.ignored?(component, option)
+        ignored = IGNORED[component.downcase]
+
+        ignored && ignored.any? { |ignore| option.start_with?(ignore) }
+    end
+
+module TLD
+
     module Options
+
+        def component_class
+            Component
+        end
 
         def composite_option_class
             CompositeOption
@@ -27,112 +39,38 @@ module CodeGen::Java
             Option
         end
 
-        def unique_options
-            options = @options.find_all { |o| o.instance_of?(Option) }
+        def event_class
+            Event
+        end
+    end
 
-            options.clone.each do |option|
+    class Component < CodeGen::Java::Component
+        include Options
 
-                homonyms = options.find_all {|o| o.name == option.name }
-
-                if homonyms.size > 1
-
-                    homonyms.each { |option| options.delete(option) }
-
-                    options.push Option.new(:name => option.name,
-                                            :owner => self,
-                                            :description => option.description,
-                                            :type => 'Object')
-                end
-            end
-
-            options.sort{ |a, b| a.name <=> b.name }
+        def tag_name
+            @name.camelize
         end
 
     end
 
-class Event < CodeGen::Event
-
-    def tag_name
-        @owner.tag_name + '-' + @name
+    class Event < CodeGen::Java::Event
+        include Options
     end
 
-    def tag_class
-        @name.pascalize + 'FunctionTag'
+    class Option < CodeGen::Java::Option
+        include Options
     end
 
-    def namespace
-        @owner.namespace
-    end
-end
+    class CompositeOption < CodeGen::Java::CompositeOption
+        include Options
 
-class Option < CodeGen::Option
+        def body_content
+            return 'JSP' if @options.any? { |option| option.instance_of?(CompositeOption) }
 
-    def composite_option_class
-        CompositeOption
-    end
-
-    def tag_name
-        @owner.tag_name + '-' + @name
+            'empty'
+        end
     end
 
-end
-
-class CompositeOption < CodeGen::CompositeOption
-    include Options
-
-    def tag_name
-        @owner.tag_name + '-' + @name
-    end
-
-    def namespace
-        @owner.namespace
-    end
-
-    def tag_class
-        name = @name.pascalize
-
-        return name + 'Tag' if @owner.instance_of?(Component)
-
-        @owner.name.pascalize + name + 'Tag'
-    end
-
-    def body_content
-        return 'JSP' if @options.any? { |option| option.instance_of?(CompositeOption) }
-
-        'empty'
-    end
-end
-
-class Component < CodeGen::Component
-
-    include Options
-
-    def event_class
-        Event
-    end
-
-    def tag_name
-        @name.camelize
-    end
-
-    def namespace
-        @name.downcase
-    end
-
-    def tag_class
-        @name + 'Tag'
-    end
-
-end
-
-
-    def self.ignored?(component, option)
-        ignored = IGNORED[component.downcase]
-
-        ignored && ignored.any? { |ignore| option.start_with?(ignore) }
-    end
-
-module TLD
     EVENT = ERB.new(%{
         <tag>
             <description>Subscribes to the <%=event.name.camelize%> event of <%=component.name%>.</description>
@@ -205,6 +143,7 @@ class Generator
     end
 
     def component(component)
+
         @tld += COMPONENT_START.result(binding)
 
         options(component, component)

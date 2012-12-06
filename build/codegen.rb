@@ -1,5 +1,10 @@
 require 'codegen/lib/markdown_parser'
 require 'codegen/lib/component'
+require 'codegen/lib/java/options'
+require 'codegen/lib/java/event'
+require 'codegen/lib/java/option'
+require 'codegen/lib/java/composite_option'
+require 'codegen/lib/java/component'
 require 'codegen/lib/java/tld'
 
 namespace :generate do
@@ -10,7 +15,7 @@ namespace :generate do
 
             generator = CodeGen::Java::TLD::Generator.new('wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld')
 
-            components = CodeGen::MarkdownParser.all(CodeGen::Java::Component)
+            components = CodeGen::MarkdownParser.all(CodeGen::Java::TLD::Component)
 
             components.each do |component|
 
