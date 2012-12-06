@@ -11,6 +11,10 @@ class CompositeOption
         @options = []
     end
 
+    def composite_options
+        @options.find_all { |option| option.instance_of?(composite_option_class) }
+    end
+
     def composite_option_class
         CompositeOption
     end

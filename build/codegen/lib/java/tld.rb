@@ -17,6 +17,39 @@ module CodeGen::Java
         'window' => ['content.template'],
     }
 
+    module Options
+
+        def composite_option_class
+            CompositeOption
+        end
+
+        def option_class
+            Option
+        end
+
+        def unique_options
+            options = @options.find_all { |o| o.instance_of?(Option) }
+
+            options.clone.each do |option|
+
+                homonyms = options.find_all {|o| o.name == option.name }
+
+                if homonyms.size > 1
+
+                    homonyms.each { |option| options.delete(option) }
+
+                    options.push Option.new(:name => option.name,
+                                            :owner => self,
+                                            :description => option.description,
+                                            :type => 'Object')
+                end
+            end
+
+            options.sort{ |a, b| a.name <=> b.name }
+        end
+
+    end
+
 class Event < CodeGen::Event
 
     def tag_name
@@ -41,17 +74,10 @@ class Option < CodeGen::Option
 end
 
 class CompositeOption < CodeGen::CompositeOption
+    include Options
 
     def tag_name
         @owner.tag_name + '-' + @name
-    end
-
-    def composite_option_class
-        CompositeOption
-    end
-
-    def option_class
-        Option
     end
 
     def namespace
@@ -65,17 +91,17 @@ class CompositeOption < CodeGen::CompositeOption
 
         @owner.name.pascalize + name + 'Tag'
     end
+
+    def body_content
+        return 'JSP' if @options.any? { |option| option.instance_of?(CompositeOption) }
+
+        'empty'
+    end
 end
 
 class Component < CodeGen::Component
 
-    def composite_option_class
-        CompositeOption
-    end
-
-    def option_class
-        Option
-    end
+    include Options
 
     def event_class
         Event
@@ -92,42 +118,14 @@ class Component < CodeGen::Component
     def tag_class
         @name + 'Tag'
     end
+
 end
 
-    def self.composite_options(options)
-        options.find_all { |option| option.instance_of?(CompositeOption) }
-    end
-
-    def self.unique_options(options)
-        options = options.find_all { |o| o.instance_of?(Option) }
-
-        options.clone.each do |option|
-
-            homonyms = options.find_all {|o| o.name == option.name }
-
-            if homonyms.size > 1
-
-                homonyms.each { |option| options.delete(option) }
-
-                options.push(Option.new :name => option.name,
-                             :description => option.description,
-                             :type => 'Object')
-            end
-        end
-
-        options.sort{ |a, b| a.name <=> b.name }
-    end
 
     def self.ignored?(component, option)
         ignored = IGNORED[component.downcase]
 
         ignored && ignored.any? { |ignore| option.start_with?(ignore) }
-    end
-
-    def self.body_content(target)
-        return 'JSP' if target.options.any? { |option| option.instance_of?(CompositeOption) }
-
-        'empty'
     end
 
 module TLD
@@ -145,7 +143,7 @@ module TLD
             <description><%= option.description %></description>
             <name><%= option.tag_name %></name>
             <tag-class>com.kendoui.taglib.<%=option.namespace%>.<%=option.tag_class%></tag-class>
-            <body-content><%=CodeGen::Java.body_content(option)%></body-content>
+            <body-content><%=option.body_content%></body-content>
     }, 0, '<>%')
 
     COMPOSITE_OPTION_END = ERB.new(%{
@@ -226,7 +224,7 @@ class Generator
     end
 
     def options(component, owner)
-        CodeGen::Java.unique_options(owner.options).each do |option|
+        owner.unique_options.each do |option|
 
             next if CodeGen::Java.ignored?(component.name, option.name)
 
@@ -237,7 +235,7 @@ class Generator
 
     def composite_options(component, owner)
 
-        CodeGen::Java.composite_options(owner.options).each do |option|
+        owner.composite_options.each do |option|
 
             @tld += COMPOSITE_OPTION_START.result(binding)
 
