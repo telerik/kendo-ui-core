@@ -201,8 +201,6 @@ kendo_module({
          '</div>')
     });
 
-    ui.plugin(ColorSelectorSimple);
-
     var ColorSelectorHSV = ColorSelectorBase.extend({
         init: function(element, options) {
             var that = this;
@@ -437,8 +435,6 @@ kendo_module({
          '</div>')
     });
 
-    ui.plugin(ColorSelectorHSV);
-
     /* -----[ color utils ]----- */
 
     function hex(n, width, pad) {
@@ -643,11 +639,6 @@ kendo_module({
         return array[pos];
     }
 
-    kendo.Color = Color;
-    kendo.ColorRGB = ColorRGB;
-    kendo.ColorHSV = ColorHSV;
-    kendo.ColorBytes = ColorBytes;
-
     /* -----[ The ColorPicker widget ]----- */
 
     var ColorPicker = Widget.extend({
@@ -785,7 +776,7 @@ kendo_module({
                     }
                 });
                 p.bind({
-                    close: function(ev){
+                    close: function(){
                         that._content.focus();
                         that._updateUI(that._value);
                     },
@@ -798,8 +789,6 @@ kendo_module({
         }
     });
 
-    ui.plugin(ColorPicker);
-
     function preventDefault(ev) { ev.preventDefault(); }
 
     function bind(callback, obj) {
@@ -807,5 +796,14 @@ kendo_module({
             return callback.apply(obj, arguments);
         };
     }
+
+    ui.plugin(ColorSelectorSimple);
+    ui.plugin(ColorSelectorHSV);
+    ui.plugin(ColorPicker);
+
+    kendo.Color = Color;
+    kendo.ColorRGB = ColorRGB;
+    kendo.ColorHSV = ColorHSV;
+    kendo.ColorBytes = ColorBytes;
 
 })(jQuery, parseInt);
