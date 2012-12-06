@@ -2373,6 +2373,9 @@ kendo_module({
                 closeCallback = function() {
                     that.thead.parent().focus();
                 },
+                initCallback = function(e) {
+                    that.trigger(COLUMNMENUINIT, { field: e.field, container: e.container });
+                },
                 cell;
 
             if (columnMenu) {
@@ -2402,7 +2405,7 @@ kendo_module({
                                 messages: columnMenu.messages,
                                 owner: that,
                                 closeCallback: closeCallback,
-                                init: function(e) { that.trigger(COLUMNMENUINIT, { field: e.field }); }
+                                init: initCallback
                             };
 
                             cell.kendoColumnMenu(menuOptions);

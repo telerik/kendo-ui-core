@@ -464,7 +464,7 @@
                 equal(columnMenu.menu, menu);
             });
 
-            test("init event is raised when initialized", 1, function() {
+            test("init event is raised when initialized", 2, function() {
                 var columnMenu = new ColumnMenu(dom, {
                     dataSource: dataSource,
                     owner: {
@@ -476,6 +476,7 @@
 
                 columnMenu.bind("init", function(e) {
                     equal(e.field, columnMenu.field);
+                    equal(e.container, columnMenu.wrapper);
                 });
 
                 columnMenu.link.click();

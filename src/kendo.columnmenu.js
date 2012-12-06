@@ -85,7 +85,7 @@ kendo_module({
 
             that._filter();
 
-            that.trigger(INIT, { field: that.field });
+            that.trigger(INIT, { field: that.field, container: that.wrapper });
         },
 
         events: [ INIT ],
