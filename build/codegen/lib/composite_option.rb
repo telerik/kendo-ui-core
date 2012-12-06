@@ -15,6 +15,10 @@ class CompositeOption
         @options.find_all { |option| option.instance_of?(composite_option_class) }
     end
 
+    def to_composite
+        self
+    end
+
     def composite_option_class
         CompositeOption
     end

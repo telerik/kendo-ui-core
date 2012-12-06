@@ -50,19 +50,7 @@ class Component
 
         parents = @options.find_all { |option| name.start_with?(option.name + '.') && option.type =~ /Object|Array/ }
 
-        parents.map! do |parent|
-            unless parent.instance_of?(composite_option_class)
-                @options.delete(parent)
-
-                parent = composite_option_class.new(:name => parent.name,
-                                                    :owner => self,
-                                                    :type => parent.type,
-                                                    :description => parent.description)
-                @options.push(parent)
-            end
-
-            parent
-        end
+        parents.map! { |parent| parent.to_composite }
 
         types.split('|').each do |type|
             type = type.strip
