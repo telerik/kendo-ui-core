@@ -76,6 +76,7 @@ class Component
     end
 
     def add_event(settings)
+        settings[:owner] = self
         @events.push Event.new(settings)
     end
 end

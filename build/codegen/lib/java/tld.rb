@@ -66,19 +66,39 @@ module CodeGen::Java
     end
 
     def self.tag_class(target)
+
         return target.name + 'Tag' if target.instance_of?(CodeGen::Component)
 
-        return target.name.pascalize + 'Tag' if target.owner.instance_of?(CodeGen::Component)
+        owner_name = target.owner.name.pascalize
 
-        target.owner.name.pascalize + target.name.pascalize + 'Tag'
+        name = target.name.pascalize
+
+        return name + 'FunctionTag' if target.instance_of?(CodeGen::Event)
+
+        return name + 'Tag' if target.owner.instance_of?(CodeGen::Component)
+
+        owner_name + name + 'Tag'
+    end
+
+    def self.package_and_class(target)
+        self.namespace(target) + '.' + self.tag_class(target)
     end
 
 module TLD
+    EVENT = ERB.new(%{
+        <tag>
+            <description>Subscribes to the <%=event.name.camelize%> event of <%=component.name%>.</description>
+            <name><%=CodeGen::Java.tag_name(event)%></name>
+            <tag-class>com.kendoui.taglib.<%=CodeGen::Java.package_and_class(event)%></tag-class>
+            <body-content>JSP</body-content>
+        </tag>
+    }, 0, '<>%')
+
     COMPOSITE_OPTION_START = ERB.new(%{
         <tag>
             <description><%= option.description %></description>
             <name><%= CodeGen::Java.tag_name(option) %></name>
-            <tag-class>com.kendoui.taglib.<%= CodeGen::Java.namespace(option) %>.<%= CodeGen::Java.tag_class(option) %></tag-class>
+            <tag-class>com.kendoui.taglib.<%=CodeGen::Java.package_and_class(option)%></tag-class>
             <body-content><%=CodeGen::Java.body_content(option)%></body-content>
     }, 0, '<>%')
 
@@ -113,7 +133,7 @@ module TLD
         </tag>
             }, 0, '<>%')
 
-    OPTION = ERB.new(%{
+    OPTION_ATTRIBUTE = ERB.new(%{
             <attribute>
                 <description><%= option.description %></description>
                 <name><%= option.name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
@@ -122,7 +142,7 @@ module TLD
             </attribute>
     }, 0, '<>%')
 
-    EVENT = ERB.new(%{
+    EVENT_ATTRIBUTE = ERB.new(%{
             <attribute>
                 <description><%= event.description %></description>
                 <name><%= event.name %></name>
@@ -143,13 +163,19 @@ class Generator
 
         component.events.each do |event|
 
-            @tld += EVENT.result(binding)
+            @tld += EVENT_ATTRIBUTE.result(binding)
 
         end
 
         @tld += COMPONENT_END.result(binding)
 
         composite_options(component, component)
+
+        component.events.each do |event|
+
+            @tld += EVENT.result(binding)
+
+        end
 
     end
 
@@ -158,7 +184,7 @@ class Generator
 
             next if CodeGen::Java.ignored?(component.name, option.name)
 
-            @tld += OPTION.result(binding)
+            @tld += OPTION_ATTRIBUTE.result(binding)
 
         end
     end
@@ -166,6 +192,8 @@ class Generator
     def composite_options(component, owner)
 
         CodeGen::Java.composite_options(owner.options).each do |option|
+
+            p option.name if component.name == 'AutoComplete'
 
             @tld += COMPOSITE_OPTION_START.result(binding)
 
