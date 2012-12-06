@@ -593,7 +593,7 @@ kendo_module({
             filter,
             dummyAxis;
 
-        if (dataSource && select) {
+        if (dataSource && select && select.from && select.to) {
             filter = [].concat(dataSource.filter || []);
 
             dummyAxis = new dataviz.DateCategoryAxis(deepExtend({
@@ -706,19 +706,11 @@ kendo_module({
     };
 
     Navigator.buildFilter = function(from, to) {
-        var filters = [];
-
-        if (from && to) {
-            filters.push({
-                field: "Date", operator: "gte", value: toDate(from)
-            });
-
-            filters.push({
-                field: "Date", operator: "lt", value: toDate(to)
-            });
-        }
-
-        return filters;
+        return [{
+            field: "Date", operator: "gte", value: toDate(from)
+        }, {
+            field: "Date", operator: "lt", value: toDate(to)
+        }];
     };
 
     var NavigatorHint = Class.extend({
