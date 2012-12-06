@@ -232,11 +232,12 @@
                     }, 50);
                 });
 
-                test("navigator filters main data source (from)", function() {
+                test("navigator filters main data source (from - 1BU)", function() {
                     createStockChart({
                         navigator: {
                             select: {
-                                from: "2012/01/01"
+                                from: "2012/01/02",
+                                to: "2012/03/01"
                             }
                         }
                     });
@@ -248,6 +249,7 @@
                     createStockChart({
                         navigator: {
                             select: {
+                                from: "2012/01/02",
                                 to: "2012/01/02"
                             }
                         }

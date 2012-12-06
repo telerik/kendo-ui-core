@@ -590,13 +590,20 @@ kendo_module({
     Navigator.setupDataSource = function(options, naviOptions) {
         var dataSource = options.dataSource,
             select = naviOptions.select,
-            filter;
+            filter,
+            dummyAxis;
 
         if (dataSource && select) {
             filter = [].concat(dataSource.filter || []);
 
+            dummyAxis = new dataviz.DateCategoryAxis(deepExtend({
+                baseUnit: "fit"
+            }, options.categoryAxis[0], {
+                categories: [select.from, select.to]
+            }));
+
             dataSource.filter =
-                Navigator.buildFilter(select.from, select.to)
+                Navigator.buildFilter(dummyAxis.options.min, select.to)
                 .concat(filter);
         }
     };
@@ -703,7 +710,7 @@ kendo_module({
 
         if (from) {
             filters.push({
-                field: "Date", operator: "gt", value: toDate(from)
+                field: "Date", operator: "gte", value: toDate(from)
             });
         }
 
