@@ -584,6 +584,49 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the ColumnMenuInit client-side event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///           .Name("Grid")
+        ///           .Events(events => events.ColumnMenuInit(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder ColumnMenuInit(Func<object, object> handler)
+        {
+            Handler("columnMenuInit", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the ColumnMenuInit client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///            .Name("Grid")
+        ///            .Events(events => events.ColumnMenuInit("gridColumnMenuInit"))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder ColumnMenuInit(string handler)
+        {
+            Handler("columnMenuInit", handler);
+
+            return this;
+        }
 
         /// <summary>
         /// Defines the name of the JavaScript function that will handle the FilterMenuInit client-side event.
