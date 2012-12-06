@@ -6954,39 +6954,26 @@ kendo_module({
                 vertical = axis.options.vertical,
                 plotAreaBox = axis.plotArea.backgroundBox(),
                 point = crosshair.point,
-                result = [],
-                slot;
+                dim = vertical ? Y : X,
+                slot, lineStart, lineEnd;
+
+            lineStart = Point2D(plotAreaBox.x1, plotAreaBox.y1);
+            if (vertical) {
+                lineEnd = Point2D(plotAreaBox.x2, plotAreaBox.y1);
+            } else {
+                lineEnd = Point2D(plotAreaBox.x1, plotAreaBox.y2);
+            }
 
             if (point) {
                 if (crosshair.stickyMode) {
                     slot = axis.getSlot(axis.getCategoryIndex(point));
-                    if (vertical) {
-                        result.push(Point2D(plotAreaBox.x1, slot.y1 + slot.height() / 2));
-                        result.push(Point2D(plotAreaBox.x2, slot.y1 + slot.height() / 2));
-                    } else {
-                        result.push(Point2D(slot.x1 + slot.width() / 2, plotAreaBox.y1));
-                        result.push(Point2D(slot.x1 + slot.width() / 2, plotAreaBox.y2));
-                    }
+                    lineStart[dim] = lineEnd[dim] = slot.center()[dim];
                 } else {
-                    if (vertical) {
-                        result.push(Point2D(plotAreaBox.x1, point.y));
-                        result.push(Point2D(plotAreaBox.x2, point.y));
-                    } else {
-                        result.push(Point2D(point.x, plotAreaBox.y1));
-                        result.push(Point2D(point.x, plotAreaBox.y2));
-                    }
-                }
-            } else {
-                if (vertical) {
-                    result.push(Point2D(plotAreaBox.x1, plotAreaBox.y1));
-                    result.push(Point2D(plotAreaBox.x2, plotAreaBox.y1));
-                } else {
-                    result.push(Point2D(plotAreaBox.x1, plotAreaBox.y1));
-                    result.push(Point2D(plotAreaBox.x1, plotAreaBox.y2));
+                    lineStart[dim] = lineEnd[dim] = point[dim];
                 }
             }
 
-            return result;
+            return [lineStart, lineEnd];
         },
 
         getViewElements: function(view) {
