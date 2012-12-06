@@ -569,7 +569,7 @@ class Tag
     def to_xml
         xml = xml_template.result(binding)
 
-        xml += all_children.map { |child| child.to_xml }.join("\n")
+        xml += children.map { |child| child.to_xml }.join("\n")
 
         xml
     end
