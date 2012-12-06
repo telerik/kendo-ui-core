@@ -17,6 +17,36 @@ module CodeGen::Java
         'window' => ['content.template'],
     }
 
+    def self.composite_options(options)
+        options.find_all { |option| option.instance_of?(CodeGen::CompositeOption) }
+    end
+
+    def self.unique_options(options)
+        options = options.find_all { |o| o.instance_of?(CodeGen::Option) }
+
+        options.clone.each do |option|
+
+            homonyms = options.find_all {|o| o.name == option.name }
+
+            if homonyms.size > 1
+
+                homonyms.each { |option| options.delete(option) }
+
+                options.push(CodeGen::Option.new :name => option.name,
+                                                 :description => option.description,
+                                                 :type => 'Object')
+            end
+        end
+
+        options.sort{ |a, b| a.name <=> b.name }
+    end
+
+    def self.ignored?(component, option)
+        ignored = IGNORED[component.downcase]
+
+        ignored && ignored.any? { |ignore| option.start_with?(ignore) }
+    end
+
     def self.tag_name(target)
         return target.name.camelize if target.instance_of?(CodeGen::Component)
 
@@ -30,7 +60,7 @@ module CodeGen::Java
     end
 
     def self.body_content(target)
-        return 'JSP' if target.options.any { |option| option.instance_of?(CodeGen::CompositeOption) }
+        return 'JSP' if target.options.any? { |option| option.instance_of?(CodeGen::CompositeOption) }
 
         'empty'
     end
@@ -49,7 +79,7 @@ module TLD
             <description><%= option.description %></description>
             <name><%= CodeGen::Java.tag_name(option) %></name>
             <tag-class>com.kendoui.taglib.<%= CodeGen::Java.namespace(option) %>.<%= CodeGen::Java.tag_class(option) %></tag-class>
-            <body-content>JSP</body-content>
+            <body-content><%=CodeGen::Java.body_content(option)%></body-content>
     }, 0, '<>%')
 
     COMPOSITE_OPTION_END = ERB.new(%{
@@ -106,46 +136,10 @@ class Generator
         @tld = ''
     end
 
-    def unique_options(options)
-        options = options.find_all { |o| o.instance_of?(CodeGen::Option) }
-
-        options.clone.each do |option|
-
-            homonyms = options.find_all {|o| o.name == option.name }
-
-            if homonyms.size > 1
-
-                homonyms.each { |option| options.delete(option) }
-
-                options.push(CodeGen::Option.new :name => option.name,
-                                                 :description => option.description,
-                                                 :type => 'Object')
-            end
-        end
-
-        options.sort{ |a, b| a.name <=> b.name }
-    end
-
-    def composite_options(options)
-        options.find_all { |option| option.instance_of?(CodeGen::CompositeOption) }
-    end
-
-    def ignored?(component_name, option_name)
-        ignored = IGNORED[component_name.downcase]
-
-        ignored && ignored.any? { |ignore| option_name.start_with?(ignore) }
-    end
-
     def component(component)
         @tld += COMPONENT_START.result(binding)
 
-        unique_options(component.options).each do |option|
-
-            next if ignored?(component.name, option.name)
-
-            @tld += OPTION.result(binding)
-
-        end
+        options(component, component)
 
         component.events.each do |event|
 
@@ -155,21 +149,31 @@ class Generator
 
         @tld += COMPONENT_END.result(binding)
 
-        composite_options(component.options).each do |option|
+        composite_options(component, component)
 
-            composite_option(component, option)
+    end
+
+    def options(component, owner)
+        CodeGen::Java.unique_options(owner.options).each do |option|
+
+            next if CodeGen::Java.ignored?(component.name, option.name)
+
+            @tld += OPTION.result(binding)
 
         end
     end
 
-    def composite_option(component, option)
-        @tld += COMPOSITE_OPTION_START.result(binding)
+    def composite_options(component, owner)
 
-        @tld += COMPOSITE_OPTION_END.result(binding)
+        CodeGen::Java.composite_options(owner.options).each do |option|
 
-        composite_options(option.options).each do |option|
+            @tld += COMPOSITE_OPTION_START.result(binding)
 
-            composite_option(component, option)
+            options(component, option)
+
+            @tld += COMPOSITE_OPTION_END.result(binding)
+
+            composite_options(component, option)
 
         end
     end
