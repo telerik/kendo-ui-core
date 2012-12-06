@@ -69,56 +69,62 @@
                 }
             });
 
+            function setup(dom, options) {
+                var menu = new FilterMenu(dom, options);
+                menu._init();
+                return menu;
+            }
+
             test("menu link has negative tabindex", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+                filterMenu = setup(dom, {dataSource: dataSource});
 
                 equal(filterMenu.link.attr("tabindex"), -1);
             });
 
             test("binds the operator select from the field", function(){
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+                filterMenu = setup(dom, {dataSource: dataSource});
 
                 equal(filterMenu.form.find("select").attr(kendo.attr("bind")), "value: filters[0].operator");
             });
 
             test("renders binding for the value input from the field", function(){
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+                filterMenu = setup(dom, {dataSource: dataSource});
 
                 equal(filterMenu.form.find("input[" + kendo.attr("bind") + "='value:filters[0].value']").length, 1);
             });
 
             test("renders binding for the extra value input from the field", function(){
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+                filterMenu = setup(dom, {dataSource: dataSource});
 
                 equal(filterMenu.form.find("input[" + kendo.attr("bind") + "='value:filters[0].value']").length, 1);
             });
 
             test("renders binding for the logical operation select from the field", function(){
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+                filterMenu = setup(dom, {dataSource: dataSource});
 
                 equal(filterMenu.form.find("select:eq(1)").attr(kendo.attr("bind")), "value: logic");
             });
 
             test("renders binding for the extra operator select", function(){
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+                filterMenu = setup(dom, {dataSource: dataSource});
 
                 equal(filterMenu.form.find("select:eq(2)").attr(kendo.attr("bind")), "value: filters[1].operator");
             });
 
             test("display extra filtering options by default", function(){
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+                filterMenu = setup(dom, {dataSource: dataSource});
 
                 equal(filterMenu.form.find("select").length, 3);
             });
 
             test("does not display extra filtering options if extra is set to false", function(){
-                filterMenu = new FilterMenu(dom, {extra: false, dataSource: dataSource});
+                filterMenu = setup(dom, {extra: false, dataSource: dataSource});
 
                 equal(filterMenu.form.find("select").length, 1);
             });
 
             test("can change the filtering messages", function(){
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     messages: {
                         info: "info"
                     },
@@ -129,7 +135,7 @@
             });
 
             test("can change the and and or messages", function(){
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     messages: {
                         and: "foo",
                         or: "bar"
@@ -142,7 +148,7 @@
             });
 
             test("can change the operators", function(){
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     operators: {
                         string: {
                             foo: "bar"
@@ -155,7 +161,7 @@
             });
 
             test("custom operator is selected when submiting the form", function(){
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     operators: {
                         string: {
                             startswith: "bar"
@@ -172,7 +178,7 @@
 
 
             test("submitting the form sets the filterMenu of the datasource", function() {
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -185,7 +191,7 @@
             });
 
             test("submitting the form does not send the extra filterMenu if it is empty", function() {
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -198,7 +204,7 @@
             test("parses filterMenu value according to field type", function() {
                 dom = $("<th data-kendo-field=bar />");
 
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -212,7 +218,7 @@
             });
 
             test("filtering twice", function() {
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -233,7 +239,7 @@
             });
 
             test("filtering by two expressions", function() {
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -250,7 +256,7 @@
             });
 
             test("filtering by more then two expressions", function() {
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -269,7 +275,7 @@
             });
 
             test("or filtering", function() {
-                filterMenu = new FilterMenu(dom, {
+                filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -287,7 +293,7 @@
             });
 
             test("filtering by multiple fields", function() {
-                var filter1 = new FilterMenu(dom, {
+                var filter1 = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -299,7 +305,7 @@
 
                 dom = $("<th data-kendo-field=bar />");
 
-                var filter2 = new FilterMenu(dom, {
+                var filter2 = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -316,7 +322,7 @@
             });
 
             test("filtering on multiple fields twice", function() {
-                new FilterMenu(dom, {
+                setup(dom, {
                     dataSource: dataSource
                 }).filter({
                     logic: "and",
@@ -328,7 +334,7 @@
 
                 dom = $("<th data-kendo-field=bar />");
 
-                var filter = new FilterMenu(dom, {
+                var filter = setup(dom, {
                     dataSource: dataSource
                 });
                 filter.filter({
@@ -358,7 +364,7 @@
                     called = true;
                 });
 
-                var filter1 = new FilterMenu(dom, {
+                var filter1 = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -370,7 +376,7 @@
             });
 
            test("filtering multiple fields and different logic", function() {
-                var filter1 = new FilterMenu(dom, {
+                var filter1 = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -384,7 +390,7 @@
 
                 dom = $("<th data-kendo-field=bar />");
 
-                var filter2 = new FilterMenu(dom, {
+                var filter2 = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -402,7 +408,7 @@
             });
 
             test("resetting the form clears the filterMenu", function() {
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -418,7 +424,7 @@
             });
 
             test("clear removes two expression filter with multiple filtering", function() {
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -442,7 +448,7 @@
             test("populates the first field value from the datasource", function() {
                 dataSource.filter( { field: "foo", value: "1" });
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -452,7 +458,7 @@
             test("populates the second field value from the datasource", function() {
                 dataSource.filter( { logic: "or", filters: [{ field: "foo", value: "1" }, { field: "foo", value: "2" }]});
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -463,7 +469,7 @@
             test("populates the logic value from the datasource", function() {
                 dataSource.filter( { logic: "or", filters: [{ field: "foo", value: "1" }, { field: "foo", value: "2" }]});
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -473,7 +479,7 @@
             test("populates the logic value from the datasource nested expression", function() {
                 dataSource.filter( { logic: "and", filters: [{logic: "or", filters: [{ field: "foo", value: "1" }, { field: "foo", value: "2" }]}]});
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -483,7 +489,7 @@
             test("populates the logic value from the last expression", function() {
                 dataSource.filter( { logic: "and", filters: [{logic: "or", filters: [{ field: "foo", value: "1" }]}, { field: "foo", value: "2" }]});
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -493,7 +499,7 @@
             test("populates the operator from the datasource", function() {
                 dataSource.filter( { field: "foo", value: "1", operator: "neq" });
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -503,7 +509,7 @@
             test("applies active state", function() {
                 dataSource.filter( { field: "foo", value: "1", operator: "neq" });
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -513,7 +519,7 @@
             test("applies active state on nested expressions", function() {
                 dataSource.filter( { filters: [{ filters: [{ field: "foo", value: "1", operator: "neq" }] }] });
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -523,33 +529,34 @@
             test("removes active state", function() {
                 dataSource.filter( { field: "foo", value: "1", operator: "neq" });
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
                 dataSource.filter(null);
                 ok(!filterMenu.link.hasClass("k-state-active"));
             });
+
             test("creates numerictextbox for number fields", function() {
-                var filterMenu = new FilterMenu(
+                var filterMenu = setup(
                     dom.attr("data-kendo-field", "bar"), {
                         dataSource: dataSource
                     });
 
-                ok(filterMenu.form.find("[" + kendo.attr("type") + "=number]:first").data("kendoNumericTextBox"));
+                ok(filterMenu.form.find("[" + kendo.attr("role") + "=numerictextbox]:first").data("kendoNumericTextBox"));
             });
 
             test("creates datepicker for date fields", function() {
-                var filterMenu = new FilterMenu(
+                var filterMenu = setup(
                     dom.attr("data-kendo-field", "baz"), {
                         dataSource: dataSource
                     });
 
-                ok(filterMenu.form.find("[" + kendo.attr("type") + "=date]:first").data("kendoDatePicker"));
+                ok(filterMenu.form.find("[" + kendo.attr("role") + "=datepicker]:first").data("kendoDatePicker"));
             });
 
             test("updates dropdownlists", function() {
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -561,33 +568,33 @@
             });
 
             test("updates numerictextboxes", function() {
-                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "bar"), {
+                var filterMenu = setup(dom.attr("data-kendo-field", "bar"), {
                     dataSource: dataSource
                 });
 
                 dataSource.filter({ field: "bar", value: 1 });
-                equal(filterMenu.form.find("[" + kendo.attr("type") + "=number]:first").data("kendoNumericTextBox")._text.val(), "1.00");
+                equal(filterMenu.form.find("[" + kendo.attr("role") + "=numerictextbox]:first").data("kendoNumericTextBox")._text.val(), "1.00");
             });
 
             test("updates datepickers", function() {
-                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "baz"), {
+                var filterMenu = setup(dom.attr("data-kendo-field", "baz"), {
                     dataSource: dataSource
                 });
 
                 var date = new Date(2011, 1, 1);
                 dataSource.filter({ field: "baz", value:date });
-                equal(filterMenu.form.find("[" + kendo.attr("type") + "=date]:first").data("kendoDatePicker").value().getTime(), date.getTime());
+                equal(filterMenu.form.find("[" + kendo.attr("role") + "=datepicker]:first").data("kendoDatePicker").value().getTime(), date.getTime());
             });
 
             test("closes sibling filtering menus", function() {
                 var dom1 = $("<div data-kendo-field=foo />").appendTo(document.body);
                 var dom2 = $("<div data-kendo-field=bar />").appendTo(document.body);
 
-                var filterMenu1 = new FilterMenu(dom1, {
+                var filterMenu1 = setup(dom1, {
                     dataSource: dataSource
                 });
 
-                var filterMenu2 = new FilterMenu(dom2, {
+                var filterMenu2 = setup(dom2, {
                     dataSource: dataSource
                 });
 
@@ -598,7 +605,7 @@
             });
 
             test("first focusable element is foucused on popup activate", function() {
-                filterMenu = new FilterMenu(dom, {extra: false, dataSource: dataSource});
+                filterMenu = setup(dom, {extra: false, dataSource: dataSource});
 
                 filterMenu.link.click();
 
@@ -606,7 +613,7 @@
             });
 
             test("pressing esc closes the menu", function() {
-                filterMenu = new FilterMenu(dom, {extra: false, dataSource: dataSource});
+                filterMenu = setup(dom, {extra: false, dataSource: dataSource});
 
                 filterMenu.link.click();
                 filterMenu.form.trigger({ type: "keydown", keyCode: kendo.keys.ESC });
@@ -617,7 +624,7 @@
             test("destroy detaches click handle and removes objects from the element", function() {
                 var dom1 = $("<div data-kendo-field=foo />").appendTo(document.body);
 
-                var filterMenu = new FilterMenu(dom1, {
+                var filterMenu = setup(dom1, {
                     dataSource: dataSource
                 });
                 var popup = filterMenu.popup;
@@ -633,7 +640,7 @@
 
 
             test("boolean filter template", function() {
-                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                var filterMenu = setup(dom.attr("data-kendo-field", "boo"), {
                     dataSource: dataSource
                 });
 
@@ -641,7 +648,7 @@
             });
 
             test("boolean filtering true values", function() {
-                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                var filterMenu = setup(dom.attr("data-kendo-field", "boo"), {
                     dataSource: dataSource
                 });
 
@@ -654,7 +661,7 @@
             });
 
             test("boolean filtering false values", function() {
-                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                var filterMenu = setup(dom.attr("data-kendo-field", "boo"), {
                     dataSource: dataSource
                 });
 
@@ -667,7 +674,7 @@
             });
 
             test("updates boolean true radio button", function() {
-                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                var filterMenu = setup(dom.attr("data-kendo-field", "boo"), {
                     dataSource: dataSource
                 });
 
@@ -677,7 +684,7 @@
             });
 
             test("updates boolean false radio button", function() {
-                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                var filterMenu = setup(dom.attr("data-kendo-field", "boo"), {
                     dataSource: dataSource
                 });
 
@@ -689,7 +696,7 @@
             test("filtering without specified model defaults to string type", function() {
                 dataSource = new kendo.data.DataSource( { data: [ { foo : "foo" }, { foo: "bar"} ] });
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -707,7 +714,7 @@
                     }
                 });
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -718,14 +725,14 @@
             });
 
             test("values are displayed as select if set", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" } ]});
+                filterMenu = setup(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" } ]});
 
                 equal(filterMenu.form.find("select").length, 5);
                 strictEqual(filterMenu.form.find("select").eq(1).data("kendoDropDownList").value(), "");
             });
 
             test("values as plain array", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ "foo", "bar" ]});
+                filterMenu = setup(dom, {dataSource: dataSource, values: [ "foo", "bar" ]});
 
                 var view = filterMenu.form.find("select").eq(1).data("kendoDropDownList").dataSource.view(),
                     firstItem = view[0];
@@ -736,7 +743,7 @@
             });
 
             test("values as array with text only", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { text: "foo" }, { text:"bar" } ]});
+                filterMenu = setup(dom, {dataSource: dataSource, values: [ { text: "foo" }, { text:"bar" } ]});
 
                 var view = filterMenu.form.find("select").eq(1).data("kendoDropDownList").dataSource.view(),
                     firstItem = view[0];
@@ -747,7 +754,7 @@
             });
 
             test("values as array with text value pair", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { text: "foo", value: 0 }, { text:"bar", value: 1 } ]});
+                filterMenu = setup(dom, {dataSource: dataSource, values: [ { text: "foo", value: 0 }, { text:"bar", value: 1 } ]});
 
                 var view = filterMenu.form.find("select").eq(1).data("kendoDropDownList").dataSource.view(),
                     firstItem = view[0];
@@ -758,7 +765,7 @@
             });
 
             test("submitting the form sets DataSource filter if values are set ", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { text: "foo", value: 0 }, { text:"bar", value: 1 } ]});
+                filterMenu = setup(dom, {dataSource: dataSource, values: [ { text: "foo", value: 0 }, { text:"bar", value: 1 } ]});
 
                 var select = filterMenu.form.find("select").eq(1).data("kendoDropDownList");
                 select.select(1); // first item skipping the optionLabel
@@ -771,13 +778,13 @@
             });
 
             test("operators are constrained if values are set", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" } ]});
+                filterMenu = setup(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" } ]});
 
                 equal(filterMenu.form.find("select:first").find("option").length, 2);
             });
 
             test("filter value is selected from values", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" },{ value: 42, text: "bar" }]});
+                filterMenu = setup(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" },{ value: 42, text: "bar" }]});
 
                 dataSource.filter({ field: "foo", value: 42, op: "eq" });
 
@@ -785,7 +792,7 @@
             });
 
             test("filter is populated with selected value from values list", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" },{ value: 42, text: "bar" }]});
+                filterMenu = setup(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" },{ value: 42, text: "bar" }]});
 
                 var operators = filterMenu.form.find("select").eq(1).data("kendoDropDownList");
                 operators.value(42);
@@ -798,7 +805,7 @@
             });
 
             test("filter is populated when text have literal symbol", function() {
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo ' bar" },{ value: 42, text: "bar" }]});
+                filterMenu = setup(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo ' bar" },{ value: 42, text: "bar" }]});
 
                 var ddl = filterMenu.form.find("select").eq(1).data("kendoDropDownList");
                 ddl.value(0);
@@ -817,7 +824,7 @@
                     }
                 });
 
-                var filterMenu = new FilterMenu(dom, {
+                var filterMenu = setup(dom, {
                     dataSource: dataSource
                 });
 
@@ -825,6 +832,43 @@
                 filterMenu.form.submit();
 
                 strictEqual(dataSource.filter().filters[0].value, "foo");
+            });
+
+            test("form is not created before link is click", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                ok(!filterMenu.form);
+            });
+
+            test("form is created on link is click", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                filterMenu.link.click();
+
+                ok(filterMenu.form);
+            });
+
+            test("form is created once on multiple link clicks", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                filterMenu.link.click();
+
+                var form = filterMenu.form;
+
+                filterMenu.link.click();
+
+                equal(form, filterMenu.form);
+            });
+
+            test("init event is raised when form is created", 2, function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, field: "foo" });
+
+                filterMenu.bind("init", function(e) {
+                    equal(e.field, "foo");
+                    equal(e.container, filterMenu.form);
+                });
+
+                filterMenu.link.click();
             });
       </script>
     </body>

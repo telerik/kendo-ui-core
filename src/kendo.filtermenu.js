@@ -9,13 +9,16 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        NUMERICTEXTBOX = "kendoNumericTextBox",
-        DATEPICKER = "kendoDatePicker",
         proxy = $.proxy,
         POPUP = "kendoPopup",
+        INIT = "init",
         NS = ".kendoFilterMenu",
         EQ = "Is equal to",
         NEQ = "Is not equal to",
+        roles = {
+            "number": "numerictextbox",
+            "date": "datepicker"
+        },
         Widget = ui.Widget;
 
     var booleanTemplate =
@@ -45,7 +48,7 @@ kendo_module({
                     '<select data-#=ns#bind="value:filters[0].value" data-#=ns#text-field="text" data-#=ns#value-field="value" data-#=ns#source=\'#=kendo.stringify(values).replace(/\'/g,"&\\#39;")#\' data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
                     '</select>' +
                 '#}else{#' +
-                    '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
+                    '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" #=roles[type] ? "data-" + ns + "role=\'" + roles[type] + "\'" : ""# />'+
                 '#}#' +
                 '#if(extra){#'+
                     '<select class="k-filter-and" data-#=ns#bind="value: logic" data-#=ns#role="dropdownlist">'+
@@ -61,7 +64,7 @@ kendo_module({
                         '<select data-#=ns#bind="value:filters[1].value" data-#=ns#text-field="text" data-#=ns#value-field="value" data-#=ns#source=\'#=kendo.stringify(values).replace(/\'/g,"&\\#39;")#\' data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
                         '</select>'+
                     '#}else{#' +
-                        '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
+                        '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" #=roles[type] ? "data-" + ns + "role=\'" + roles[type] + "\'" : ""#/>'+
                     '#}#' +
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
@@ -107,12 +110,12 @@ kendo_module({
             var that = this,
                 type = "string",
                 link,
-                field,
-                operators;
+                field;
 
             Widget.fn.init.call(that, element, options);
 
-            operators = options.operators || {};
+            that.operators = options.operators || {};
+
             element = that.element;
             options = that.options;
 
@@ -123,17 +126,12 @@ kendo_module({
                     link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
                 }
 
-                link
-                .attr("tabindex", -1)
-                .on("click" + NS, proxy(that._click, that));
-
-            } else {
-                that.link = $();
+                link.attr("tabindex", -1).on("click" + NS, proxy(that._click, that));
             }
 
-            that._refreshHandler = proxy(that.refresh, that);
+            that.link = link || $();
 
-            that.dataSource = options.dataSource.bind("change", that._refreshHandler);
+            that.dataSource = options.dataSource;
 
             that.field = options.field || element.attr(kendo.attr("field"));
 
@@ -158,8 +156,26 @@ kendo_module({
                 type = "enums";
             }
 
+            that.type = type;
+
+            if (options.appendToElement) { // force creation if used in column menu
+                that._init();
+            }
+        },
+
+        _init: function() {
+            var that = this,
+                options = that.options,
+                operators = that.operators || {},
+                initial,
+                type = that.type;
+
+            that._refreshHandler = proxy(that.refresh, that);
+
+            that.dataSource.bind("change", that._refreshHandler);
+
             operators = operators[type] || options.operators[type];
-            var initial;
+
             for (initial in operators) { // get the first operator
                 break;
             }
@@ -169,43 +185,42 @@ kendo_module({
             };
 
             that.form = $('<form class="k-filter-menu"/>')
-                            .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
-                                field: that.field,
-                                ns: kendo.ns,
-                                messages: options.messages,
-                                extra: options.extra,
-                                operators: operators,
-                                type: type,
-                                values: convertItems(options.values)
-                            }))
-                            .on("keydown" + NS, proxy(that._keydown, that))
-                            .on("submit" + NS, proxy(that._submit, that))
-                            .on("reset" + NS, proxy(that._reset, that));
+                .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
+                    field: that.field,
+                    ns: kendo.ns,
+                    messages: options.messages,
+                    extra: options.extra,
+                    operators: operators,
+                    type: type,
+                    roles: roles,
+                    values: convertItems(options.values)
+                }))
+                .on("keydown" + NS, proxy(that._keydown, that))
+                .on("submit" + NS, proxy(that._submit, that))
+                .on("reset" + NS, proxy(that._reset, that));
 
             if (!options.appendToElement) {
                 that.popup = that.form[POPUP]({
-                    anchor: link,
+                    anchor: that.link,
                     open: proxy(that._open, that),
                     activate: proxy(that._activate, that),
                     close: that.options.closeCallback
                 }).data(POPUP);
-
-                that.link = link;
             } else {
-                element.append(that.form);
+                that.element.append(that.form);
                 that.popup = that.element.closest(".k-popup").data(POPUP);
             }
 
             that.form
-                 .find("[" + kendo.attr("type") + "=number]")
+                 .find("[" + kendo.attr("role") + "=numerictextbox]")
                  .removeClass("k-textbox")
-                 [NUMERICTEXTBOX]()
                  .end()
-                 .find("[" + kendo.attr("type") + "=date]")
-                 .removeClass("k-textbox")
-                 [DATEPICKER]();
+                 .find("[" + kendo.attr("role") + "=datepicker]")
+                 .removeClass("k-textbox");
 
             that.refresh();
+
+            that.trigger(INIT, { field: that.field, container: that.form });
         },
 
         refresh: function() {
@@ -232,11 +247,12 @@ kendo_module({
 
             Widget.fn.destroy.call(that);
 
-            kendo.unbind(that.form);
-            kendo.destroy(that.form);
-            that.form.unbind(NS);
-
-            that.popup.destroy();
+            if (that.form) {
+                kendo.unbind(that.form);
+                kendo.destroy(that.form);
+                that.form.unbind(NS);
+                that.popup.destroy();
+            }
 
             that.link.unbind(NS);
 
@@ -369,6 +385,11 @@ kendo_module({
         _click: function(e) {
             e.preventDefault();
             e.stopPropagation();
+
+            if (!this.popup) {
+                this._init();
+            }
+
             this.popup.toggle();
         },
 
@@ -392,6 +413,8 @@ kendo_module({
                 this.popup.close();
             }
         },
+
+        events: [ INIT ],
 
         options: {
             name: "FilterMenu",
