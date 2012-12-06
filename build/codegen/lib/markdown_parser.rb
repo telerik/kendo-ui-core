@@ -7,20 +7,23 @@ module CodeGen
 
 class MarkdownParser
 
-    def self.all
-        MARKDOWN.map { |filename| self.read(filename) }.sort { |a, b| a.name <=> b.name }
+    def self.all(component_class = nil)
+        MARKDOWN.map { |filename| self.read(filename, component_class) }
+                .sort { |a, b| a.name <=> b.name }
     end
 
-    def self.read(filename)
-        MarkdownParser.new.parse File.read(filename)
+    def self.read(filename, component_class = nil)
+        MarkdownParser.new.parse(File.read(filename), component_class)
     end
 
-    def parse(markdown)
+    def parse(markdown, component_class = nil)
+        component_class ||= Component
+
         root = Kramdown::Parser::Markdown.parse(markdown)[0]
 
         header = root.children.find { |e| e.type == :header && e.options[:level] == 1 }
 
-        component = Component.new(:name => component_name(root))
+        component = component_class.new(:name => component_name(root))
 
         configuration = configuration_section(root)
 

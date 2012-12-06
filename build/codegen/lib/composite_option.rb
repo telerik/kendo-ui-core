@@ -11,6 +11,14 @@ class CompositeOption
         @options = []
     end
 
+    def composite_option_class
+        CompositeOption
+    end
+
+    def option_class
+        Option
+    end
+
     def add_option(settings)
         name = settings[:name].sub(@name + '.', '')
         type = settings[:type]
@@ -20,13 +28,13 @@ class CompositeOption
 
         if parent
 
-            unless parent.instance_of?(CompositeOption)
+            unless parent.instance_of?(composite_option_class)
                 @options.delete(parent)
 
-                parent = CompositeOption.new(:name => parent.name,
-                                             :owner => self,
-                                             :type => parent.type,
-                                             :description => parent.description)
+                parent = composite_option_class.new(:name => parent.name,
+                                                    :owner => self,
+                                                    :type => parent.type,
+                                                    :description => parent.description)
                 @options.push(parent)
             end
 
@@ -35,10 +43,10 @@ class CompositeOption
                               :description => description)
 
         else
-            @options.push Option.new(:name => name,
-                                     :owner => self,
-                                     :type => type,
-                                     :description => description)
+            @options.push option_class.new(:name => name,
+                                           :owner => self,
+                                           :type => type,
+                                           :description => description)
         end
     end
 end

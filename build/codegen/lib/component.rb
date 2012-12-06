@@ -23,6 +23,18 @@ class Component
         end
     end
 
+    def composite_option_class
+        CompositeOption
+    end
+
+    def option_class
+        Option
+    end
+
+    def event_class
+        Event
+    end
+
     def add_option(settings)
         name = settings[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
 
@@ -35,13 +47,13 @@ class Component
         parents = @options.find_all { |option| name.start_with?(option.name + '.') && option.type =~ /Object|Array/ }
 
         parents.map! do |parent|
-            unless parent.instance_of?(CompositeOption)
+            unless parent.instance_of?(composite_option_class)
                 @options.delete(parent)
 
-                parent = CompositeOption.new(:name => parent.name,
-                                             :owner => self,
-                                             :type => parent.type,
-                                             :description => parent.description)
+                parent = composite_option_class.new(:name => parent.name,
+                                                    :owner => self,
+                                                    :type => parent.type,
+                                                    :description => parent.description)
                 @options.push(parent)
             end
 
@@ -66,10 +78,10 @@ class Component
 
             else
 
-                @options.push Option.new(:name => name,
-                                         :owner => self,
-                                         :type => type,
-                                         :description => description)
+                @options.push option_class.new(:name => name,
+                                               :owner => self,
+                                               :type => type,
+                                               :description => description)
 
             end
         end
@@ -77,7 +89,7 @@ class Component
 
     def add_event(settings)
         settings[:owner] = self
-        @events.push Event.new(settings)
+        @events.push event_class.new(settings)
     end
 end
 
