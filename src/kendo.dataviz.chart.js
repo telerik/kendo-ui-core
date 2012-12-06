@@ -5206,7 +5206,7 @@ kendo_module({
                     if (axis.options.crosshair && axis.options.crosshair.visible) {
                         currentCrosshair = new Crosshair(axis, axis.options.crosshair);
                         plotArea.crosshairs.push(currentCrosshair);
-                        plotArea.append(currentCrosshair);
+                        pane.content.append(currentCrosshair);
                     }
                 }
             }
@@ -6919,7 +6919,8 @@ kendo_module({
 
         options: {
             color: BLACK,
-            width: 2
+            width: 1,
+            zIndex: -1
         },
 
         repaint: function() {
@@ -6950,6 +6951,8 @@ kendo_module({
 
         linePoints: function() {
             var crosshair = this,
+                options = crosshair.options,
+                width = options.width,
                 axis = crosshair.axis,
                 vertical = axis.options.vertical,
                 plotAreaBox = axis.plotArea.backgroundBox(),
@@ -6988,7 +6991,7 @@ kendo_module({
                 strokeWidth: options.width,
                 fill: "",
                 dashType: options.dashType,
-                zIndex: 2,
+                zIndex: options.zIndex,
                 visible: crosshair._visible
             });
 

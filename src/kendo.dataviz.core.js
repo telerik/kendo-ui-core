@@ -1217,7 +1217,8 @@ kendo_module({
                         data: { modelId: modelId },
                         strokeWidth: line.options.width,
                         stroke: line.options.color,
-                        dashType: line.options.dashType
+                        dashType: line.options.dashType,
+                        zIndex: -1
                     },
                     linePos = round(line.pos),
                     altAxisBox = altAxis.lineBox();

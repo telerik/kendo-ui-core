@@ -12,7 +12,8 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
     </head>
     <body>
-        <div id="chart"></div>
+        <div id="chart" style="width: 700px; float: left;"></div>
+        <div id="scatterchart" style="width: 700px; float: left;"></div>
         <script>
             $(function() {
                 $("#chart").kendoChart({
@@ -23,10 +24,17 @@
                     }]
 =======
                     theme: "blueopal",
-                    seriesDefaults: {
-                        type: "line"
-                    },
                     series: [{
+                        type: "line",
+                        data: [ 1,2,3 ]
+                    },{
+                        type: "bar",
+                        data: [ 1,2,3 ]
+                    },{
+                        type: "bar",
+                        data: [ 1,2,3 ]
+                    },{
+                        type: "bar",
                         data: [ 1,2,3 ]
                     }],
                     tooltip: {
@@ -44,6 +52,28 @@
                         }
                     }
 >>>>>>> Add crosshair base functionality.
+                });
+
+                $("#scatterchart").kendoChart({
+                    theme: "blueopal",
+                    series: [{
+                        type: "scatter",
+                        data: [ [1,2], [2,3], [3,4] ]
+                    }],
+                    tooltip: {
+                        visible: true,
+                        crosshair: true
+                    },
+                    xAxis: {
+                        crosshair: {
+                            visible: true
+                        }
+                    },
+                    yAxis: {
+                        crosshair: {
+                            visible: true
+                        }
+                    }
                 });
             });
         </script>
