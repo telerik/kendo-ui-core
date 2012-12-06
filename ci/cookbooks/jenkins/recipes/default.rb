@@ -106,3 +106,4 @@ bash "install mono" do
     only_if { !File.exists?("/usr/local/bin/mono") }
 end
 
+package 'xorg-x11-server-Xvfb'
