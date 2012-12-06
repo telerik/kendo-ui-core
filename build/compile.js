@@ -2,7 +2,7 @@
 
 var fs = require("fs");
 var sys = require("util");
-var u2 = require("uglify-js2");
+var u2 = require("uglify-js");
 var path = require("path");
 var OPT = require("optimist");
 var ARGV = OPT
@@ -183,7 +183,10 @@ function compile_one_file(file) {
 }
 
 function squeeze(ast) {
-    var compressor = u2.Compressor({ warnings: false });
+    var compressor = u2.Compressor({
+        warnings: false,
+        hoist_vars: true,
+    });
     ast.figure_out_scope();
     ast = ast.transform(compressor);
     return ast;

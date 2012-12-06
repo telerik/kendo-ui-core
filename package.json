@@ -3,7 +3,7 @@
    "version": "1.0.0",
    "dependencies": {
        "optimist": "",
-       "uglify-js2": "2.1.11",
+       "uglify-js": "2.2.2",
        "cssmin": "",
        "faye": "0.8.3",
        "xmlbuilder": "",

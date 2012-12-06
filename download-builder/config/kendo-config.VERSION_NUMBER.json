@@ -718,7 +718,8 @@
             "name": "Selectable",
             "category": "framework",
             "depends": [
-                "core"
+                "core",
+                "userevents"
             ],
             "advanced": true,
             "source": "kendo.selectable.min.js"

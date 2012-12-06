@@ -5,7 +5,7 @@ THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')
 LESSC = File.join(Rake.application.original_dir, "build", "less-js", "bin", "lessc")
 CSSMIN = File.join(Rake.application.original_dir, "node_modules", "cssmin", "bin", "cssmin")
 COMPILEJS = File.join(Rake.application.original_dir, "build", "compile.js");
-UGLIFYJS = File.join(Rake.application.original_dir, "node_modules", "uglify-js2", "bin", "uglifyjs2");
+UGLIFYJS = File.join(Rake.application.original_dir, "node_modules", "uglify-js", "bin", "uglifyjs");
 
 class MergeTask < Rake::FileTask
     def execute(args=nil)
