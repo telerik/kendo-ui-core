@@ -10,7 +10,7 @@ namespace :generate do
 
             generator = CodeGen::Java::TLD::Generator.new('wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld')
 
-            components = CodeGen::MarkdownParser.all
+            components = CodeGen::MarkdownParser.all(CodeGen::Java::Component)
 
             components.each do |component|
 

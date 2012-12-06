@@ -17,12 +17,89 @@ module CodeGen::Java
         'window' => ['content.template'],
     }
 
+class Event < CodeGen::Event
+
+    def tag_name
+        @owner.tag_name + '-' + @name
+    end
+
+    def tag_class
+        @name.pascalize + 'FunctionTag'
+    end
+
+    def namespace
+        @owner.namespace
+    end
+end
+
+class Option < CodeGen::Option
+
+    def tag_name
+        @owner.tag_name + '-' + @name
+    end
+
+end
+
+class CompositeOption < CodeGen::CompositeOption
+
+    def tag_name
+        @owner.tag_name + '-' + @name
+    end
+
+    def composite_option_class
+        CompositeOption
+    end
+
+    def option_class
+        Option
+    end
+
+    def namespace
+        @owner.namespace
+    end
+
+    def tag_class
+        name = @name.pascalize
+
+        return name + 'Tag' if @owner.instance_of?(Component)
+
+        @owner.name.pascalize + name + 'Tag'
+    end
+end
+
+class Component < CodeGen::Component
+
+    def composite_option_class
+        CompositeOption
+    end
+
+    def option_class
+        Option
+    end
+
+    def event_class
+        Event
+    end
+
+    def tag_name
+        @name.camelize
+    end
+
+    def namespace
+        @name.downcase
+    end
+
+    def tag_class
+        @name + 'Tag'
+    end
+end
+
     def self.composite_options(options)
-        options.find_all { |option| option.instance_of?(CodeGen::CompositeOption) }
+        options.find_all { |option| option.instance_of?(CompositeOption) }
     end
 
     def self.unique_options(options)
-        options = options.find_all { |o| o.instance_of?(CodeGen::Option) }
+        options = options.find_all { |o| o.instance_of?(Option) }
 
         options.clone.each do |option|
 
@@ -32,9 +109,9 @@ module CodeGen::Java
 
                 homonyms.each { |option| options.delete(option) }
 
-                options.push(CodeGen::Option.new :name => option.name,
-                                                 :description => option.description,
-                                                 :type => 'Object')
+                options.push(Option.new :name => option.name,
+                             :description => option.description,
+                             :type => 'Object')
             end
         end
 
@@ -47,49 +124,18 @@ module CodeGen::Java
         ignored && ignored.any? { |ignore| option.start_with?(ignore) }
     end
 
-    def self.tag_name(target)
-        return target.name.camelize if target.instance_of?(CodeGen::Component)
-
-        self.tag_name(target.owner) + '-' + target.name
-    end
-
-    def self.namespace(target)
-        return target.name.downcase if target.instance_of?(CodeGen::Component)
-
-        self.namespace(target.owner)
-    end
-
     def self.body_content(target)
-        return 'JSP' if target.options.any? { |option| option.instance_of?(CodeGen::CompositeOption) }
+        return 'JSP' if target.options.any? { |option| option.instance_of?(CompositeOption) }
 
         'empty'
-    end
-
-    def self.tag_class(target)
-
-        return target.name + 'Tag' if target.instance_of?(CodeGen::Component)
-
-        owner_name = target.owner.name.pascalize
-
-        name = target.name.pascalize
-
-        return name + 'FunctionTag' if target.instance_of?(CodeGen::Event)
-
-        return name + 'Tag' if target.owner.instance_of?(CodeGen::Component)
-
-        owner_name + name + 'Tag'
-    end
-
-    def self.package_and_class(target)
-        self.namespace(target) + '.' + self.tag_class(target)
     end
 
 module TLD
     EVENT = ERB.new(%{
         <tag>
             <description>Subscribes to the <%=event.name.camelize%> event of <%=component.name%>.</description>
-            <name><%=CodeGen::Java.tag_name(event)%></name>
-            <tag-class>com.kendoui.taglib.<%=CodeGen::Java.package_and_class(event)%></tag-class>
+            <name><%=event.tag_name%></name>
+            <tag-class>com.kendoui.taglib.<%=event.namespace%>.<%=event.tag_class%></tag-class>
             <body-content>JSP</body-content>
         </tag>
     }, 0, '<>%')
@@ -97,8 +143,8 @@ module TLD
     COMPOSITE_OPTION_START = ERB.new(%{
         <tag>
             <description><%= option.description %></description>
-            <name><%= CodeGen::Java.tag_name(option) %></name>
-            <tag-class>com.kendoui.taglib.<%=CodeGen::Java.package_and_class(option)%></tag-class>
+            <name><%= option.tag_name %></name>
+            <tag-class>com.kendoui.taglib.<%=option.namespace%>.<%=option.tag_class%></tag-class>
             <body-content><%=CodeGen::Java.body_content(option)%></body-content>
     }, 0, '<>%')
 
@@ -112,8 +158,8 @@ module TLD
     COMPONENT_START = ERB.new(%{
         <tag>
             <description><%= component.name %></description>
-            <name><%= CodeGen::Java.tag_name(component) %></name>
-            <tag-class>com.kendoui.taglib.<%= CodeGen::Java.tag_class(component) %></tag-class>
+            <name><%= component.tag_name %></name>
+            <tag-class>com.kendoui.taglib.<%=component.tag_class%></tag-class>
             <body-content>JSP</body-content>
 <% if component.name != 'DataSource' %>
             <attribute>
@@ -192,8 +238,6 @@ class Generator
     def composite_options(component, owner)
 
         CodeGen::Java.composite_options(owner.options).each do |option|
-
-            p option.name if component.name == 'AutoComplete'
 
             @tld += COMPOSITE_OPTION_START.result(binding)
 
