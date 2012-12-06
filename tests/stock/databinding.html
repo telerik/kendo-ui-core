@@ -258,6 +258,32 @@
                     same(chart.dataSource._filter.filters[0].value, new Date("2012/01/02"));
                 });
 
+                test("navigator does not filter main data source when from is missing", function() {
+                    createStockChart({
+                        navigator: {
+                            select: {
+                                from: null,
+                                to: "2012/01/02"
+                            }
+                        }
+                    });
+
+                    ok(!chart.dataSource._filter);
+                });
+
+                test("navigator does not filter main data source when to is missing", function() {
+                    createStockChart({
+                        navigator: {
+                            select: {
+                                from: "2012/01/02",
+                                to: null
+                            }
+                        }
+                    });
+
+                    ok(!chart.dataSource._filter);
+                });
+
                 test("navigator preserves existing filters", function() {
                     createStockChart({
                         dataSource: {
@@ -267,13 +293,15 @@
                         },
                         navigator: {
                             select: {
-                                from: "2012/01/01"
+                                from: "2012/01/01",
+                                to: "2012/01/02"
                             }
                         }
                     });
 
                     same(chart.dataSource._filter.filters[0].value, new Date("2012/01/01"));
-                    same(chart.dataSource._filter.filters[1].value, 100);
+                    same(chart.dataSource._filter.filters[1].value, new Date("2012/01/02"));
+                    same(chart.dataSource._filter.filters[2].value, 100);
                 });
 
                 test("chart is redrawn fully during first main DS change", 2, function() {

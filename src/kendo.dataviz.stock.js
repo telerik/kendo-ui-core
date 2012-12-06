@@ -708,13 +708,11 @@ kendo_module({
     Navigator.buildFilter = function(from, to) {
         var filters = [];
 
-        if (from) {
+        if (from && to) {
             filters.push({
                 field: "Date", operator: "gte", value: toDate(from)
             });
-        }
 
-        if (to) {
             filters.push({
                 field: "Date", operator: "lt", value: toDate(to)
             });
