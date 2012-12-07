@@ -109,14 +109,14 @@ kendo_module({
 
             content
                 .attr("tabIndex", 0)
-                .on(KEYDOWN_NS, bind(that.keydown, that));
+                .on(KEYDOWN_NS, bind(that._keydown, that));
 
             if (options.columns) {
                 // XXX: assuming 14px per cell; depends on CSS.
                 content.css("width", options.columns * 14 + "px");
             }
         },
-        keydown: function(ev) {
+        _keydown: function(ev) {
             var selected;
             var that = this;
             var el = that._content;
@@ -243,7 +243,7 @@ kendo_module({
 
             var hsvRect = that._hsvRect = $(".k-hsv-rectangle", content);
 
-            var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).on(KEYDOWN_NS, bind(that.keydown, that));
+            var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).on(KEYDOWN_NS, bind(that._keydown, that));
 
             that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", content);
 
@@ -339,7 +339,7 @@ kendo_module({
             color = ColorSelectorBase.fn.select.call(this, color, nohooks);
             this._updateUI(color);
         },
-        keydown: function(ev) {
+        _keydown: function(ev) {
             var that = this;
             function move(prop, d) {
                 var c = that._getHSV();
@@ -683,7 +683,7 @@ kendo_module({
             element.hide().after(content);
 
             content.attr("tabIndex", 0)
-                .on(KEYDOWN_NS, bind(that.keydown, that))
+                .on(KEYDOWN_NS, bind(that._keydown, that))
                 .one(CLICK_NS, ".k-icon", bind(that.open, that))
                 .on(CLICK_NS, options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
                     that.trigger("change", { value: that.value() });
@@ -754,13 +754,13 @@ kendo_module({
                 value ? value.toDisplay() : "transparent"
             );
         },
-        keydown: function(ev) {
+        _keydown: function(ev) {
             var key = ev.keyCode;
             if (this._getPopup().visible()) {
                 if (key == KEYS.ESC) {
                     this._selector._cancel();
                 } else {
-                    this._selector.keydown(ev);
+                    this._selector._keydown(ev);
                 }
                 preventDefault(ev);
             }
