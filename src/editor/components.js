@@ -201,6 +201,11 @@ var ColorPicker = Widget.extend({
             that.element.find(SELECTEDCOLORCLASS)
                         .css(BACKGROUNDCOLOR, value);
         }
+    },
+
+    destroy: function() {
+        this.popup.destroy();
+        Widget.fn.destroy.call(this);
     }
 });
 
@@ -231,6 +236,9 @@ var SelectBox = DropDownList.extend({
         }
     }
 });
+
+kendo.ui.plugin(ColorPicker);
+kendo.ui.plugin(SelectBox);
 
 kendo.ui.editor.ColorPicker = ColorPicker;
 kendo.ui.editor.SelectBox = SelectBox;
