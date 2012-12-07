@@ -32,7 +32,9 @@ class CompositeOption
         type = settings[:type]
         description = settings[:description]
 
-        parent = @options.find { |parent| name.start_with?(parent.name + '.') }
+        return if @options.any? { |option| option.name == name && option.type == type }
+
+        parent = @options.find { |option| name.start_with?(option.name + '.') }
 
         if parent
 
@@ -56,6 +58,8 @@ class CompositeOption
                                            :type => type,
                                            :description => description)
         end
+
+        p @options.find_all { |o| o.name == 'labels' }.size if @name == 'categoryAxis' && name == 'labels'
     end
 end
 

@@ -62,6 +62,8 @@ module CodeGen::Java::TLD
         end
 
         def to_tag
+            return ARRAY.result(binding) if @type == 'Array'
+
             COMPOSITE_OPTION.result(binding)
         end
     end
@@ -80,15 +82,35 @@ module CodeGen::Java::TLD
             <description><%= description %></description>
             <name><%= tag_name %></name>
             <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
-            <body-content><%=body_content%></body-content>
+            <body-content><%= body_content %></body-content>
 
-<%= unique_options.map { |option| option.to_attribute }.join("\n") %>
+<%= unique_options.map { |option| option.to_attribute }.join %>
 <% if name == 'pane' && namespace == 'splitter' %>
             <dynamic-attributes>true</dynamic-attributes>
 <% end %>
         </tag>
 
-<%= composite_options.map { |option| option.to_tag }.join("\n") %>
+<%= composite_options.map { |option| option.to_tag }.join %>
+    }, 0, '<>%')
+
+    ARRAY = ERB.new(%{
+        <tag>
+            <description><%= description %></description>
+            <name><%= tag_name %></name>
+            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
+            <body-content>JSP</body-content>
+        </tag>
+
+        <tag>
+            <description><%= description %></description>
+            <name><%= item_tag_name %></name>
+            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= item_tag_class %></tag-class>
+            <body-content><%= body_content %></body-content>
+
+<%= unique_options.map { |option| option.to_attribute }.join %>
+        </tag>
+
+<%= composite_options.map { |option| option.to_tag }.join %>
     }, 0, '<>%')
 
     COMPONENT = ERB.new(%{
@@ -106,8 +128,8 @@ module CodeGen::Java::TLD
                 <type>java.lang.String</type>
             </attribute>
 <% end %>
-<%= unique_options.map { |option| option.to_attribute }.join("\n") %>
-<%= events.map { |event| event.to_attribute }.join("\n") %>
+<%= unique_options.map { |option| option.to_attribute }.join %>
+<%= events.map { |event| event.to_attribute }.join %>
 
 <% if name != 'DataSource' %>
             <dynamic-attributes>true</dynamic-attributes>

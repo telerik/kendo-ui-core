@@ -19,6 +19,13 @@ module CodeGen::Java
             @owner.name.pascalize + name + 'Tag'
         end
 
+        def item_tag_class
+            @name.singular.pascalize + 'Tag'
+        end
+
+        def item_tag_name
+            tag_name.sub(@name.camelize, @name.singular.camelize)
+        end
     end
 
 end
