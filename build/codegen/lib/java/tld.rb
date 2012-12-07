@@ -42,6 +42,7 @@ module TLD
         def event_class
             Event
         end
+
     end
 
     class Component < CodeGen::Java::Component
@@ -51,14 +52,29 @@ module TLD
             @name.camelize
         end
 
+        def to_tld
+            COMPONENT.result(binding)
+        end
     end
 
     class Event < CodeGen::Java::Event
         include Options
+
+        def to_attribute
+            EVENT_ATTRIBUTE.result(binding)
+        end
+
+        def to_tag
+            EVENT.result(binding)
+        end
     end
 
     class Option < CodeGen::Java::Option
         include Options
+
+        def to_attribute
+            OPTION_ATTRIBUTE.result(binding)
+        end
     end
 
     class CompositeOption < CodeGen::Java::CompositeOption
@@ -69,39 +85,44 @@ module TLD
 
             'empty'
         end
+
+        def to_tag
+            COMPOSITE_OPTION.result(binding)
+        end
     end
 
     EVENT = ERB.new(%{
         <tag>
-            <description>Subscribes to the <%=event.name.camelize%> event of <%=component.name%>.</description>
-            <name><%=event.tag_name%></name>
-            <tag-class>com.kendoui.taglib.<%=event.namespace%>.<%=event.tag_class%></tag-class>
+            <description>Subscribes to the <%= name.camelize %> event of <%= owner.name %>.</description>
+            <name><%= tag_name %></name>
+            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
             <body-content>JSP</body-content>
         </tag>
     }, 0, '<>%')
 
-    COMPOSITE_OPTION_START = ERB.new(%{
+    COMPOSITE_OPTION = ERB.new(%{
         <tag>
-            <description><%= option.description %></description>
-            <name><%= option.tag_name %></name>
-            <tag-class>com.kendoui.taglib.<%=option.namespace%>.<%=option.tag_class%></tag-class>
-            <body-content><%=option.body_content%></body-content>
-    }, 0, '<>%')
+            <description><%= description %></description>
+            <name><%= tag_name %></name>
+            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
+            <body-content><%=body_content%></body-content>
 
-    COMPOSITE_OPTION_END = ERB.new(%{
-<% if option.name == 'pane' && component.name == 'Splitter' %>
+<%= unique_options.map { |option| option.to_attribute }.join("\n") %>
+<% if name == 'pane' && namespace == 'splitter' %>
             <dynamic-attributes>true</dynamic-attributes>
 <% end %>
         </tag>
+
+<%= composite_options.map { |option| option.to_tag }.join("\n") %>
     }, 0, '<>%')
 
-    COMPONENT_START = ERB.new(%{
+    COMPONENT = ERB.new(%{
         <tag>
-            <description><%= component.name %></description>
-            <name><%= component.tag_name %></name>
-            <tag-class>com.kendoui.taglib.<%=component.tag_class%></tag-class>
+            <description><%= name %></description>
+            <name><%= tag_name %></name>
+            <tag-class>com.kendoui.taglib.<%= tag_class %></tag-class>
             <body-content>JSP</body-content>
-<% if component.name != 'DataSource' %>
+<% if name != 'DataSource' %>
             <attribute>
                 <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
                 <name>name</name>
@@ -110,28 +131,33 @@ module TLD
                 <type>java.lang.String</type>
             </attribute>
 <% end %>
-            }, 0, '<>%')
+<%= unique_options.map { |option| option.to_attribute }.join("\n") %>
+<%= events.map { |event| event.to_attribute }.join("\n") %>
 
-    COMPONENT_END = ERB.new(%{
-<% if component.name != 'DataSource' %>
+<% if name != 'DataSource' %>
             <dynamic-attributes>true</dynamic-attributes>
 <% end %>
         </tag>
+
+<%= composite_options.map { |option| option.to_tag }.join("\n") %>
+
+<%= events.map { |event| event.to_tag }.join("\n") %>
+
             }, 0, '<>%')
 
     OPTION_ATTRIBUTE = ERB.new(%{
             <attribute>
-                <description><%= option.description %></description>
-                <name><%= option.name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
+                <description><%= description %></description>
+                <name><%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
                 <rtexprvalue>true</rtexprvalue>
-                <type><%= CodeGen::Java::TYPES[option.type] %></type>
+                <type><%= CodeGen::Java::TYPES[type] %></type>
             </attribute>
     }, 0, '<>%')
 
     EVENT_ATTRIBUTE = ERB.new(%{
             <attribute>
-                <description><%= event.description %></description>
-                <name><%= event.name %></name>
+                <description><%= description %></description>
+                <name><%= name %></name>
                 <rtexprvalue>true</rtexprvalue>
             </attribute>
     }, 0, '<>%')
@@ -144,51 +170,8 @@ class Generator
 
     def component(component)
 
-        @tld += COMPONENT_START.result(binding)
+        @tld += component.to_tld
 
-        options(component, component)
-
-        component.events.each do |event|
-
-            @tld += EVENT_ATTRIBUTE.result(binding)
-
-        end
-
-        @tld += COMPONENT_END.result(binding)
-
-        composite_options(component, component)
-
-        component.events.each do |event|
-
-            @tld += EVENT.result(binding)
-
-        end
-
-    end
-
-    def options(component, owner)
-        owner.unique_options.each do |option|
-
-            next if CodeGen::Java.ignored?(component.name, option.name)
-
-            @tld += OPTION_ATTRIBUTE.result(binding)
-
-        end
-    end
-
-    def composite_options(component, owner)
-
-        owner.composite_options.each do |option|
-
-            @tld += COMPOSITE_OPTION_START.result(binding)
-
-            options(component, option)
-
-            @tld += COMPOSITE_OPTION_END.result(binding)
-
-            composite_options(component, option)
-
-        end
     end
 
     def sync()
