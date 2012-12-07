@@ -211,14 +211,14 @@ kendo_module({
 
             chart.wrapper = chart.element;
 
-            chart._initDataSource(chart.options);
+            chart._initDataSource(userOptions);
 
             kendo.notify(chart, dataviz.ui);
         },
 
-        _initDataSource: function(options) {
+        _initDataSource: function(userOptions) {
             var chart = this,
-                dataSourceOptions = (options || {}).dataSource;
+                dataSourceOptions = (userOptions || {}).dataSource;
 
             chart._dataChangeHandler = proxy(chart._onDataChanged, chart);
 
@@ -229,7 +229,7 @@ kendo_module({
             chart._redraw();
             chart._attachEvents();
 
-            if (dataSourceOptions && options.autoBind) {
+            if (dataSourceOptions && chart.options.autoBind) {
                 chart.dataSource.fetch();
             }
         },
