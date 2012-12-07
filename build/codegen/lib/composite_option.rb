@@ -12,7 +12,7 @@ class CompositeOption
     end
 
     def composite_options
-        @options.find_all { |option| option.instance_of?(composite_option_class) }
+        @options.find_all { |option| option.kind_of?(composite_option_class) }
     end
 
     def to_composite
@@ -27,9 +27,13 @@ class CompositeOption
         Option
     end
 
-    def add_option(settings)
-        name = settings[:name].sub(@name + '.', '')
+    def add_option(settings, prefix = nil)
+        prefix ||= @name + '.'
+
+        name = settings[:name].sub(prefix, '')
+
         type = settings[:type]
+
         description = settings[:description]
 
         return if @options.any? { |option| option.name == name && option.type == type }
@@ -38,15 +42,7 @@ class CompositeOption
 
         if parent
 
-            unless parent.instance_of?(composite_option_class)
-                @options.delete(parent)
-
-                parent = composite_option_class.new(:name => parent.name,
-                                                    :owner => self,
-                                                    :type => parent.type,
-                                                    :description => parent.description)
-                @options.push(parent)
-            end
+            parent = parent.to_composite
 
             parent.add_option(:name => name,
                               :type => type,

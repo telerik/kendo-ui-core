@@ -1,9 +1,9 @@
 require 'codegen/lib/markdown_parser'
 require 'codegen/lib/component'
 require 'codegen/lib/java/module'
+require 'codegen/lib/java/composite_option'
 require 'codegen/lib/java/event'
 require 'codegen/lib/java/option'
-require 'codegen/lib/java/composite_option'
 require 'codegen/lib/java/component'
 require 'codegen/lib/java/tld'
 

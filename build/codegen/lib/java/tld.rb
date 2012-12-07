@@ -44,11 +44,16 @@ module CodeGen::Java::TLD
         end
     end
 
+
     class Option < CodeGen::Java::Option
         include Options
 
         def to_attribute
             OPTION_ATTRIBUTE.result(binding)
+        end
+
+        def array_option_class
+            ArrayOption
         end
     end
 
@@ -56,15 +61,21 @@ module CodeGen::Java::TLD
         include Options
 
         def body_content
-            return 'JSP' if @options.any? { |option| option.instance_of?(CompositeOption) }
+            return 'JSP' if @options.any? { |option| option.kind_of?(CompositeOption) }
 
             'empty'
         end
 
         def to_tag
-            return ARRAY.result(binding) if @type == 'Array'
-
             COMPOSITE_OPTION.result(binding)
+        end
+    end
+
+    class ArrayOption < CompositeOption
+        include CodeGen::Array
+
+        def to_tag
+            ARRAY.result(binding)
         end
     end
 
@@ -102,15 +113,15 @@ module CodeGen::Java::TLD
         </tag>
 
         <tag>
-            <description><%= description %></description>
-            <name><%= item_tag_name %></name>
-            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= item_tag_class %></tag-class>
-            <body-content><%= body_content %></body-content>
+            <description><%= item.description %></description>
+            <name><%= item.tag_name %></name>
+            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= item.tag_class %></tag-class>
+            <body-content><%= item.body_content %></body-content>
 
-<%= unique_options.map { |option| option.to_attribute }.join %>
+<%= item.unique_options.map { |option| option.to_attribute }.join %>
         </tag>
 
-<%= composite_options.map { |option| option.to_tag }.join %>
+<%= item.composite_options.map { |option| option.to_tag }.join %>
     }, 0, '<>%')
 
     COMPONENT = ERB.new(%{

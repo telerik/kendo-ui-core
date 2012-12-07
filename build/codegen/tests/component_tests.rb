@@ -112,6 +112,24 @@ class ComponentTests < Test::Unit::TestCase
         assert_equal true, @component.options[0].options[0].instance_of?(CodeGen::CompositeOption)
     end
 
+    def test_add_option_creates_array_option
+        @component = CodeGen::Component.new(:name => 'foo')
+
+        @component.add_option(:name => 'foo', :type => 'Array')
+        @component.add_option(:name => 'foo.bar', :type => 'Object')
+
+        assert_equal true, @component.options[0].instance_of?(CodeGen::ArrayOption)
+    end
+
+    def test_add_option_to_array_item
+        @component = CodeGen::Component.new(:name => 'foo')
+
+        @component.add_option(:name => 'foo', :type => 'Array')
+        @component.add_option(:name => 'foo.bar', :type => 'Object')
+
+        assert_equal 'bar', @component.options[0].options[0].options[0].name
+    end
+
     def test_promote_adds_options_to_child_component
         component = @component.options[0]
 

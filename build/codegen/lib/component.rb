@@ -1,5 +1,7 @@
-require 'option'
+require 'string'
 require 'composite_option'
+require 'array_option'
+require 'option'
 require 'event'
 
 module CodeGen
@@ -24,7 +26,7 @@ class Component
     end
 
     def composite_options
-        @options.find_all { |option| option.instance_of?(composite_option_class) }
+        @options.find_all { |option| option.kind_of?(composite_option_class) }
     end
 
     def composite_option_class
