@@ -1,29 +1,4 @@
-module CodeGen::Java
-    TYPES = {
-        'Number' => 'float',
-        'number' => 'float',
-        'String' => 'java.lang.String',
-        'string' => 'java.lang.String',
-        'Boolean' => 'boolean',
-        'Object' => 'Object',
-        'Array' => 'java.lang.Object',
-        'Function' => 'java.lang.String',
-        'Date' => 'java.util.Date'
-    }
-
-    IGNORED = {
-        'chart' => ['axisDefaults', 'seriesDefaults'],
-        'stockchart' => ['axisDefaults', 'seriesDefaults'],
-        'window' => ['content.template'],
-    }
-
-    def self.ignored?(component, option)
-        ignored = IGNORED[component.downcase]
-
-        ignored && ignored.any? { |ignore| option.start_with?(ignore) }
-    end
-
-module TLD
+module CodeGen::Java::TLD
 
     module Options
 
@@ -189,4 +164,3 @@ class Generator
 end
 
 end # module CodeGen::Java::TLD
-end # module CodeGen::Java
