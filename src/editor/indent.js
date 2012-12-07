@@ -187,11 +187,6 @@ var OutdentTool = Tool.extend({
         this.finder = new BlockFormatFinder([{tags:blockElements}]);
     },
 
-//    initialize: function(ui) {
-//        ui.attr({ unselectable: "on", title: this.options.title })
-//           .addClass("k-state-disabled");
-//    },
-
     update: function (ui, nodes) {
         var suitable = this.finder.findSuitable(nodes),
             isOutdentable, listParentsCount, i, len;
