@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="../qunit.ico" />
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
@@ -2623,16 +2624,16 @@
                     destroyChart();
                 });
 
-                test("does not reflow axis in different pane", function() {
+                test("partial reflows account for axes in other panes", function() {
                     createPlotArea({
-                        categoryAxis: {
+                        categoryAxis: [{
                             name: "cAxis"
-                        },
-                        valueAxis: [{
-                            name: "vAxis"
                         }, {
-                            name: "vAxisB",
-                            pane: "b"
+                            name: "cAxisB",
+                            pane: "b",
+                            categories: [
+                                "Looooooooooooooooooooooooooooooooooooooooooooooooooooooong"
+                            ]
                         }],
                         panes: [{
                             name: "a"
@@ -2641,16 +2642,14 @@
                         }]
                         }, [{
                             type: "column",
-                            data: [1000],
-                            axis: "vAxis"
+                            data: [1000]
                         }]
                     );
 
-                    var box = plotArea.namedValueAxes.vAxisB.box;
-                    plotArea.series[0].data[0] = 10;
-                    plotArea.redraw(plotArea.panes[0]);
+                    var box = plotArea.namedCategoryAxes.cAxisB.box;
+                    plotArea.redraw(plotArea.panes[1]);
 
-                    sameBox(box, plotArea.namedValueAxes.vAxisB.box);
+                    sameBox(plotArea.namedCategoryAxes.cAxisB.box, box);
                 });
 
                 // ------------------------------------------------------------

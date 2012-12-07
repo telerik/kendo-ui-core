@@ -5323,7 +5323,6 @@ kendo_module({
             }
 
             plotArea.render(panes);
-            // TODO: TEST
             plotArea.reflowAxes(plotArea.panes);
             plotArea.reflowCharts(panes);
 
