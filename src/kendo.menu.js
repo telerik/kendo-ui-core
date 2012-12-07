@@ -330,7 +330,7 @@ kendo_module({
             that.element.off(NS);
 
             if (that._documentClickHandler) {
-                $(document).unbind(that._documentClickHandler);
+                $(document).unbind("click", that._documentClickHandler);
             }
         },
 
