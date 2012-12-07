@@ -431,11 +431,7 @@ var ColorTool = Tool.extend({
             toolIcon: "k-" + this.options.name,
             palette: "web",
             change: function(e) {
-                Tool.exec(editor, toolName, e.value.toDisplay());
-            },
-            click: function(e) {
-                // this is a click on the icon; use previous color, if any
-                var color = ui.value();
+                var color = e.value;
                 if (color) {
                     Tool.exec(editor, toolName, color.toDisplay());
                 }

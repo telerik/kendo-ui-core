@@ -66,6 +66,15 @@
       hsv1.bind(["slide", "change"], function(ev){
         hsv2.select(ev.value, true);
       });
+
+      $("#dropdown3").data("kendoColorPicker").bind({
+        select: function(ev) {
+          console.log("SELECT: ", ev.value ? ev.value.toCssRgba() : null);
+        },
+        change: function(ev) {
+          console.log("CHANGE: ", ev.value ? ev.value.toCssRgba() : null);
+        }
+      });
     </script>
   </body>
 </html>

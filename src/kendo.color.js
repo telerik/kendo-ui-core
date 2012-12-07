@@ -47,7 +47,7 @@ kendo_module({
         options: {
             value : null
         },
-        events: [ "change", "slide" ],
+        events: [ "change", "select", "cancel" ],
         value: function(v) {
             var that = this;
             if (v === undefined) {
@@ -70,7 +70,12 @@ kendo_module({
             this._content = null;
             Widget.fn.destroy.call(this);
         },
-        _selectOnHide: function(){ return null; }
+        _selectOnHide: function() {
+            return null;
+        },
+        _cancel: function() {
+            this.trigger("cancel", { value: this.value() });
+        }
     });
 
     var ColorSelectorSimple = ColorSelectorBase.extend({
@@ -143,6 +148,9 @@ kendo_module({
                     this.select($("div", init).css(BACKGROUNDCOLOR));
                 }
                 break;
+              case KEYS.ESC:
+                this._cancel();
+                break;
             }
             if (selected) {
                 selected = $(selected);
@@ -152,7 +160,7 @@ kendo_module({
                     .attr("aria-selected", true);
                 try {
                     var color = selected.find("div").css(BACKGROUNDCOLOR);
-                    that.trigger("slide", { value: parse(color) });
+                    that.trigger("select", { value: parse(color) });
                 } catch(ex) {}
             }
         },
@@ -184,6 +192,9 @@ kendo_module({
                 $(el).addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
             }
             return color;
+        },
+        focus: function(){
+            this._content.focus();
         },
         options: {
             name    : "ColorSelectorSimple",
@@ -304,7 +315,8 @@ kendo_module({
                 .on(CLICK_NS, ".k-controls button.cancel", function(){
                     // but on cancel, we simply select the previous
                     // value (again, triggers "change" event).
-                    that.select(that.value());
+                    that._updateUI(that.value());
+                    that._cancel();
                 });
         },
         destroy: function() {
@@ -327,7 +339,7 @@ kendo_module({
             color = ColorSelectorBase.fn.select.call(this, color, nohooks);
             this._updateUI(color);
         },
-        keydown: function(ev){
+        keydown: function(ev) {
             var that = this;
             function move(prop, d) {
                 var c = that._getHSV();
@@ -372,7 +384,13 @@ kendo_module({
               case KEYS.F2:
                 that._content.find("input.k-color-value").focus().select();
                 break;
+              case KEYS.ESC:
+                that._cancel();
+                break;
             }
+        },
+        focus: function() {
+            this._hsvHandle.focus();
         },
         _getHSV: function(h, s, v, a) {
             var handle = this._hsvHandle;
@@ -404,7 +422,7 @@ kendo_module({
             }
             that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
             that._colorAsText.val(that._opacitySlider ? color.toCssRgba() : color.toCss());
-            that.trigger("slide", { value: color });
+            that.trigger("select", { value: color });
             color = color.toHSV();
             var handle = that._hsvHandle;
             var rect = that._hsvRect;
@@ -667,8 +685,8 @@ kendo_module({
             content.attr("tabIndex", 0)
                 .on(KEYDOWN_NS, bind(that.keydown, that))
                 .one(CLICK_NS, ".k-icon", bind(that.open, that))
-                .on(CLICK_NS, options.toolIcon ? ".k-tool-icon" : ".k-icon", function(){
-                    that.trigger("click");
+                .on(CLICK_NS, options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
+                    that.trigger("change", { value: that.value() });
                 });
 
             that._updateUI(value);
@@ -704,7 +722,7 @@ kendo_module({
             messages     : APPLY_CANCEL
         },
 
-        events: [ "change", "click", "select" ],
+        events: [ "change", "select" ],
 
         open: function() {
             this._getPopup().open();
@@ -720,7 +738,7 @@ kendo_module({
             // seems that input type="color" doesn't support opacity
             // in colors; the only accepted format is hex #RRGGBB
             this.element.val(value.toCss());
-            this.trigger("select", { value: value });
+            this.trigger("change", { value: value });
         },
         value: function(value) {
             if (value !== undefined) {
@@ -730,6 +748,7 @@ kendo_module({
             return this._value;
         },
         _updateUI: function(value) {
+            this.trigger("select", { value: value });
             this._content.find(".k-selected-color").css(
                 BACKGROUNDCOLOR,
                 value ? value.toDisplay() : "transparent"
@@ -739,11 +758,11 @@ kendo_module({
             var key = ev.keyCode;
             if (this._getPopup().visible()) {
                 if (key == KEYS.ESC) {
-                    this.select(this.value());
-                    this.close();
+                    this._selector._cancel();
                 } else {
                     this._selector.keydown(ev);
                 }
+                preventDefault(ev);
             }
             else if (key == KEYS.ENTER || key == KEYS.DOWN) {
                 this.open();
@@ -772,12 +791,15 @@ kendo_module({
                     toggleTarget : that._content.find(".k-icon")
                 }).data("kendoPopup");
                 sel.bind({
-                    slide: function(ev){
+                    select: function(ev){
                         that._updateUI(ev.value);
                     },
                     change: function(ev){
-                        p.close();
                         that.select(ev.value);
+                        p.close();
+                    },
+                    cancel: function(ev) {
+                        p.close();
                     }
                 });
                 p.bind({
@@ -792,6 +814,7 @@ kendo_module({
                     },
                     activate: function(){
                         sel.select(that.value(), true);
+                        sel.focus();
                     }
                 });
             }
