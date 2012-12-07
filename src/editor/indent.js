@@ -182,15 +182,15 @@ var OutdentCommand = Command.extend({
 
 var OutdentTool = Tool.extend({
     init: function(options) {
-        Tool.fn.init.call(this, extend(options, {command:OutdentCommand}));
+        Tool.fn.init.call(this, options);
 
         this.finder = new BlockFormatFinder([{tags:blockElements}]);
     },
 
-    initialize: function(ui) {
-        ui.attr("unselectable", "on")
-           .addClass("k-state-disabled");
-    },
+//    initialize: function(ui) {
+//        ui.attr({ unselectable: "on", title: this.options.title })
+//           .addClass("k-state-disabled");
+//    },
 
     update: function (ui, nodes) {
         var suitable = this.finder.findSuitable(nodes),
@@ -223,6 +223,6 @@ extend(Editor, {
 });
 
 registerTool("indent", new Tool({ command: IndentCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Indent"}) }));
-registerTool("outdent", new OutdentTool({template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Outdent"})}));
+registerTool("outdent", new OutdentTool({ command: OutdentCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Outdent"})}));
 
 })(window.kendo.jQuery);
