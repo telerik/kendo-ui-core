@@ -69,7 +69,8 @@ kendo_module({
             this._content.off(NS).find("*").off(NS);
             this._content = null;
             Widget.fn.destroy.call(this);
-        }
+        },
+        _selectOnHide: function(){ return null; }
     });
 
     var ColorSelectorSimple = ColorSelectorBase.extend({
@@ -397,15 +398,16 @@ kendo_module({
             this._updateUI(color);
         },
         _updateUI: function(color) {
+            var that = this;
             if (!color) {
                 return;
             }
-            this._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
-            this._colorAsText.val(this._opacitySlider ? color.toCssRgba() : color.toCss());
-            this.trigger("slide", { value: color });
+            that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
+            that._colorAsText.val(that._opacitySlider ? color.toCssRgba() : color.toCss());
+            that.trigger("slide", { value: color });
             color = color.toHSV();
-            var handle = this._hsvHandle;
-            var rect = this._hsvRect;
+            var handle = that._hsvHandle;
+            var rect = that._hsvRect;
             var width = rect.width(), height = rect.height();
             handle.css({
                 // saturation is 0 on the left side, full (1) on the right
@@ -413,11 +415,14 @@ kendo_module({
                 // value is 0 on the bottom, full on the top.
                 top: (1 - color.v) * height + "px"
             });
-            this._hueElements.css(BACKGROUNDCOLOR, new ColorHSV(color.h, 1, 1, 1).toCss());
-            this._hueSlider.value(color.h);
-            if (this._opacitySlider) {
-                this._opacitySlider.value(100 * color.a);
+            that._hueElements.css(BACKGROUNDCOLOR, new ColorHSV(color.h, 1, 1, 1).toCss());
+            that._hueSlider.value(color.h);
+            if (that._opacitySlider) {
+                that._opacitySlider.value(100 * color.a);
             }
+        },
+        _selectOnHide: function() {
+            return this.options.buttons ? null : this._getHSV();
         },
         _template: kendo.template
         ('<div class="k-colorpicker-hsv">' +
@@ -777,8 +782,13 @@ kendo_module({
                 });
                 p.bind({
                     close: function(){
-                        that._content.focus();
-                        that._updateUI(that._value);
+                        var color = sel._selectOnHide();
+                        if (!color) {
+                            that._content.focus();
+                            that._updateUI(that._value);
+                        } else {
+                            that.select(color);
+                        }
                     },
                     activate: function(){
                         sel.select(that.value(), true);
