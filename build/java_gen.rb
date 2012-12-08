@@ -3,7 +3,10 @@ require 'erb'
 
 TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 
-MARKDOWN = FileList['docs/api/{web,dataviz}/*.md'].exclude('**/ui.md').include('docs/api/framework/datasource.md')
+MARKDOWN = FileList['docs/api/{web,dataviz}/*.md']
+                .exclude('**/ui.md')
+                .exclude('**/color*')
+                .include('docs/api/framework/datasource.md')
 
 IGNORED = {
     'chart' => ['axisDefaults', 'seriesDefaults'],
@@ -569,7 +572,7 @@ class Tag
     def to_xml
         xml = xml_template.result(binding)
 
-        xml += children.map { |child| child.to_xml }.join("\n")
+        xml += children.sort {|a,b| a.name <=> b.name }.map { |child| child.to_xml }.join("\n")
 
         xml
     end
