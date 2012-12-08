@@ -10,6 +10,10 @@ module CodeGen
             @owner = options[:owner]
         end
 
+        def composite?
+            false
+        end
+
         def composite_option_class
             CodeGen::CompositeOption
         end

@@ -12,7 +12,11 @@ class CompositeOption
     end
 
     def composite_options
-        @options.find_all { |option| option.kind_of?(composite_option_class) }
+        @options.find_all { |option| option.composite? }
+    end
+
+    def composite?
+        true
     end
 
     def to_composite

@@ -61,7 +61,7 @@ module CodeGen::Java::TLD
         include Options
 
         def body_content
-            return 'JSP' if @options.any? { |option| option.kind_of?(CompositeOption) }
+            return 'JSP' if @options.any? { |option| option.composite? }
 
             'empty'
         end

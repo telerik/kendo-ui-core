@@ -5,7 +5,13 @@ require 'option'
 require 'event'
 
 module CodeGen
-    TYPES = ['Object', 'Date', 'Array', 'String', 'Number', 'Boolean', 'Function']
+    TYPES = ['Object',
+             'Date',
+             'Array',
+             'String',
+             'Number',
+             'Boolean',
+             'Function']
 
 class Component
     attr_reader :name, :full_name, :options, :events
@@ -26,7 +32,7 @@ class Component
     end
 
     def composite_options
-        @options.find_all { |option| option.kind_of?(composite_option_class) }
+        @options.find_all { |option| option.composite? }
     end
 
     def composite_option_class
