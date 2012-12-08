@@ -572,7 +572,7 @@ class Tag
     def to_xml
         xml = xml_template.result(binding)
 
-        xml += children.sort {|a,b| a.name <=> b.name }.map { |child| child.to_xml }.join("\n")
+        xml += children.map { |child| child.to_xml }.join("\n")
 
         xml
     end
