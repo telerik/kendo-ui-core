@@ -12,7 +12,7 @@ class CompositeOption
     end
 
     def composite_options
-        @options.find_all { |option| option.composite? }
+        @options.find_all { |option| option.composite? }.sort {|a, b| a.name <=> b.name }
     end
 
     def composite?

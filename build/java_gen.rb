@@ -577,7 +577,6 @@ class Tag
                        .map { |child| child.to_xml }.join("\n")
 
         xml +=  children.find_all {|child| child.instance_of?(NestedTagEvent) }
-                        .sort { |a, b| a.name <=> b.name }
                         .map { |child| child.to_xml }.join("\n")
 
         xml
