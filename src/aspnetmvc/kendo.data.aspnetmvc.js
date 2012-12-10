@@ -269,15 +269,24 @@
                 },
                 read: function(options) {
                     var url,
-                        regExp = new RegExp(this.options.prefix + "[^&]*&?", "g"),
+                        prefix = this.options.prefix,
+                        params = [prefix + "sort",
+                            prefix + "page",
+                            prefix + "pageSize",
+                            prefix + "group",
+                            prefix + "aggregate",
+                            prefix + "filter"],
+                        regExp = new RegExp("(" + params.join('|') + ")=[^&]*&?", "g"),
                         query;
 
                     query = location.search.replace(regExp, "").replace("?", "");
+
                     if (query.length && !(/&$/.test(query))) {
                         query += "&";
                     }
 
                     options = this.setup(options, "read");
+
                     url = options.url;
 
                     if (url.indexOf("?") >= 0) {
