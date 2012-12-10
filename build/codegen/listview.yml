@@ -1,4 +1,16 @@
 :options:
+    - :name: template
+      :type: String
+      :description : The id of the template used for rendering the items in the listview.
+
+    - :name: editTemplate
+      :type: String
+      :description: Specifies ListView item template in edit mode.
+
+    - :name: altTemplate
+      :type : String
+      :description: Template to be used for rendering the alternate items in the listview.
+
     - :name: pageable
       :type: Boolean
       :description: Indicates whether paging is enabled/disabled.
