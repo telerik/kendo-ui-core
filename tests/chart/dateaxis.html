@@ -342,6 +342,20 @@
                     ]);
                 });
 
+                test("User set max value smaller than last category (rounding off)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05"), new Date("2012/02/06")
+                        ],
+                        max: new Date("2012/02/05"),
+                        roundToBaseUnit: false
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/05")
+                    ]);
+                });
+
                 test("User set max value larger than last category", function() {
                     createDateCategoryAxis({
                         categories: [
@@ -475,6 +489,17 @@
                         categories: [],
                         roundToBaseUnit: false
                     });
+                });
+
+                test("Preserves all categories when they match base units exactly", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/02/01"), new Date("2012/03/01")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    same(dataviz.last(dateAxis.options.categories), new Date("2012/03/01"));
                 });
 
                 // ------------------------------------------------------------

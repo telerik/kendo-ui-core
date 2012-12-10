@@ -1671,6 +1671,10 @@ kendo_module({
                 addDuration(range.max, baseUnitStep - 1, baseUnit, options.weekStartDay) :
                 range.max;
 
+            if (dateEquals(range.min, range.max)) {
+                end = toDate(toTime(end) + 1);
+            }
+
             for (date = range.min; date < end; date = nextDate) {
                 nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
 
@@ -1688,6 +1692,8 @@ kendo_module({
                             } else {
                                 categoryIndicies.push(categoryIx);
                             }
+                        } else if (!round && dateEquals(nextDate, end)) {
+                            lastCategoryIndicies.push(categoryIx);
                         } else {
                             break;
                         }
