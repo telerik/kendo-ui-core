@@ -26,13 +26,15 @@ class Component
     def import(metadata)
         metadata[:options].each do |option|
 
+            @options.delete_if { |o| o.name == option[:name] }
+
             add_option(option)
 
         end
     end
 
     def composite_options
-        @options.find_all { |option| option.composite? }
+        @options.find_all { |option| option.composite? }.sort {|a, b| a.name <=> b.name }
     end
 
     def composite_option_class

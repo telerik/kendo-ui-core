@@ -145,4 +145,16 @@ class ComponentTests < Test::Unit::TestCase
 
         assert_equal 'bar', @component.options[0].name
     end
+
+    def test_import_overrides_options_by_name
+        @component = CodeGen::Component.new(:name => 'foo')
+
+        @component.add_option(:name => 'foo', :type => 'Array')
+        metadata = { :options => [ {:name => 'foo', :type => 'String' } ] }
+
+        @component.import(metadata)
+
+        assert_equal 1, @component.options.size
+        assert_equal 'String', @component.options[0].type
+    end
 end
