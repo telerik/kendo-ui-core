@@ -317,6 +317,8 @@ namespace Kendo.Mvc.UI
             }
             else if (request.Aggregates.Any())
             {
+                MergeAggregateTypes(request);
+
                 Aggregates.Clear();
                 Aggregates.AddRange(request.Aggregates);
             }
@@ -361,6 +363,28 @@ namespace Kendo.Mvc.UI
             else
             {
                 TotalPages = (Total + PageSize - 1) / PageSize;
+            }
+        }
+
+        private void MergeAggregateTypes(DataSourceRequest request)
+        {
+            if (Aggregates.Any())
+            {
+                foreach (var requestAggregate in request.Aggregates)
+                {
+                    var match = Aggregates.SingleOrDefault(agg => agg.Member.Equals(requestAggregate.Member, StringComparison.InvariantCultureIgnoreCase));
+                    if (match != null)
+                    {
+                        requestAggregate.Aggregates.Each(function =>
+                        {
+                            var innerFunction = match.Aggregates.SingleOrDefault(matchFunction => matchFunction.AggregateMethodName == function.AggregateMethodName);
+                            if (innerFunction != null && innerFunction.MemberType != null)
+                            {
+                                function.MemberType = innerFunction.MemberType;
+                            }
+                        });
+                    }
+                }
             }
         }
     }
