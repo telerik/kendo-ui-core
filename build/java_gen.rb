@@ -572,7 +572,13 @@ class Tag
     def to_xml
         xml = xml_template.result(binding)
 
-        xml += children.map { |child| child.to_xml }.join("\n")
+        xml += children.find_all {|child| !child.instance_of?(NestedTagEvent) }
+                       .sort { |a, b| a.name <=> b.name }
+                       .map { |child| child.to_xml }.join("\n")
+
+        xml +=  children.find_all {|child| child.instance_of?(NestedTagEvent) }
+                        .sort { |a, b| a.name <=> b.name }
+                        .map { |child| child.to_xml }.join("\n")
 
         xml
     end
