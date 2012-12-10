@@ -3,6 +3,7 @@
     var kendo = window.kendo,
         keys = kendo.keys,
         extractFormat = kendo._extractFormat,
+        browser = kendo.support.browser,
         ui = kendo.ui,
         Widget = ui.Widget,
         OPEN = "open",
@@ -318,12 +319,37 @@
             return value;
         },
 
+        _adjustListWidth: function() {
+            var list = this.list,
+                width = list[0].style.width,
+                wrapper = this.options.anchor,
+                computedStyle, computedWidth;
+
+            if (!list.data("width") && width) {
+                return;
+            }
+
+            computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
+            computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
+
+            if (computedStyle && (browser.mozilla || browser.msie)) { // getComputedStyle returns different box in FF and IE.
+                computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
+            }
+
+            width = computedWidth - (list.outerWidth() - list.width());
+
+            list.css({
+                fontFamily: wrapper.css("font-family"),
+                width: width
+            })
+            .data("width", width);
+        },
+
         _popup: function() {
             var that = this,
                 list = that.list,
                 options = that.options,
-                anchor = options.anchor,
-                width;
+                anchor = options.anchor;
 
             that.popup = new ui.Popup(list, extend(options.popup, {
                 anchor: anchor,
@@ -332,13 +358,6 @@
                 animation: options.animation,
                 isRtl: kendo.support.isRtl(options.anchor)
             }));
-
-            width = anchor.outerWidth() - (list.outerWidth() - list.width());
-
-            list.css({
-                fontFamily: anchor.css("font-family"),
-                width: width
-            });
 
             kendo.touchScroller(that.popup.element);
         },
@@ -452,6 +471,8 @@
                     }
                 },
                 open: function(e) {
+                    that.timeView._adjustListWidth();
+
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
                     } else {
@@ -728,13 +749,13 @@
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
+            that.wrapper = wrapper.addClass("k-widget k-timepicker k-header")
+                                  .addClass(element[0].className);
+
             element.css({
                 width: "100%",
                 height: element[0].style.height
             });
-
-            that.wrapper = wrapper.addClass("k-widget k-timepicker k-header")
-                                  .addClass(element[0].className);
 
             that._inputWrapper = $(wrapper[0].firstChild);
         },
