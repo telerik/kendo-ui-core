@@ -513,6 +513,7 @@ kendo_module({
                     }
                 },
                 open:  function(e) {
+                    timeView._adjustListWidth();
                     if (that.trigger(OPEN, timeViewParams)) {
                         e.preventDefault();
                     } else {

@@ -223,6 +223,16 @@
                 });
             }
 
+            test("TimePicker does not set width if list has style.width", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.timeView.list.width(400);
+
+                timepicker.open();
+
+                equal(timepicker.timeView.list.width(), 400);
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
