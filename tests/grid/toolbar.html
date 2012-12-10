@@ -237,6 +237,21 @@
 
                 ok(method.calls("cancelChanges"));
             });
+
+            test("toolbar function is called only once", 1, function() {
+                var grid = setup({
+                    toolbar: function() { ok(true) }
+                });
+            });
+
+            test("toolbar function containing #", 1, function() {
+                var grid = setup({
+                    toolbar: function() { return '<a class="mylink" href="#">foo</a>'; }
+                });
+
+                ok(toolbar.find(".mylink").length);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

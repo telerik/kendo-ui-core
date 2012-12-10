@@ -1520,19 +1520,19 @@ kendo_module({
                 wrapper = that.wrapper,
                 toolbar = that.options.toolbar,
                 editable = that.options.editable,
-                container,
-                template;
+                container;
 
             if (toolbar) {
                 container = that.wrapper.find(".k-grid-toolbar");
 
                 if (!container.length) {
-                    toolbar = isFunction(toolbar) ? toolbar({}) : (typeof toolbar === STRING ? toolbar : that._toolbarTmpl(toolbar).replace(templateHashRegExp, "\\#"));
-
-                    template = proxy(kendo.template(toolbar), that);
+                    if (!isFunction(toolbar)) {
+                        toolbar = (typeof toolbar === STRING ? toolbar : that._toolbarTmpl(toolbar).replace(templateHashRegExp, "\\#"));
+                        toolbar = proxy(kendo.template(toolbar), that);
+                    }
 
                     container = $('<div class="k-toolbar k-grid-toolbar" />')
-                        .html(template({}))
+                        .html(toolbar({}))
                         .prependTo(wrapper);
                 }
 
