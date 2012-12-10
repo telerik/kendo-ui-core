@@ -23,6 +23,7 @@ namespace Kendo.Models
             "kendo.list.js",
             "kendo.autocomplete.js",
             "kendo.calendar.js",
+            "kendo.color.js",
             "kendo.dataviz.core.js",
             "kendo.dataviz.chart.js",
             "kendo.dataviz.themes.js",
