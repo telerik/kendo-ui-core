@@ -1,0 +1,36 @@
+<div id="example" class="k-content">
+
+  <p>
+    The <tt>"select"</tt> event triggers whenever a color is selected in the
+    drop-down.  The <tt>"change"</tt> event triggers on a “final” selection,
+    which means a color is clicked in the simple selector, or the “Apply”
+    button is clicked in the HSV picker.
+  </p>
+
+  <input type="color" id="basic" value="#cc2222"
+         data-role="colorpicker" data-palette="basic" />
+
+  <input type="color" id="hsv" value="#22cc22"
+         data-role="colorpicker" />
+
+  <script> 
+    // initialize widgets
+    kendo.init($("#example"));
+
+    // log events
+    $("#basic, #hsv").each(function(){
+        var colorPicker = $(this).data("kendoColorPicker");
+        colorPicker.bind({
+            select: function(){
+                kendoConsole.log("Select in " + this.element.attr("id"));
+            },
+            change: function(){
+                kendoConsole.log("Change in " + this.element.attr("id"));
+            }
+        });
+    });
+  </script>
+
+</div>
+
+<div class="console"></div>

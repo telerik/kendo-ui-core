@@ -121,11 +121,27 @@
             name: "colorpicker",
             documentation: "web/colorpicker",
             spriteCssClass: "colorPickerIcon",
-            items: [ {
+            items: [
+                {
                     "text": "Basic usage",
                     "url": "colorpicker/index.html",
                     "title": "jQuery-based ColorPicker widget Demo | Kendo UI Web Demos",
                     "meta": "This example shows the basic usage of Kendo ColorPicker"
+                },{
+                    "text": "HSV picker options",
+                    "url": "colorpicker/hsv-options.html",
+                    "title": "Demo of various options supported by the HSV selector",
+                    "meta": "Demo of various options supported by the HSV selector"
+                },{
+                    "text": "Events",
+                    "url": "colorpicker/events.html",
+                    "title": "ColorPicker events",
+                    "meta": "ColorPicker events"
+                },{
+                    "text": "Keyboard",
+                    "url": "colorpicker/navigation.html",
+                    "title": "ColorPicker keyboard navigation",
+                    "meta": "ColorPicker keyboard navigation"
                 }
             ]
         },

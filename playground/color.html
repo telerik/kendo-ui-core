@@ -13,11 +13,12 @@
     <script src="../src/jquery.js"></script>
     <script src="../src/module.js"></script>
     <!-- <script src="../src/kendo.fx.js"></script> -->
+    <script src="../src/kendo.binder.js"></script>
     <script src="../src/kendo.color.js"></script>
 
     <style type="text/css">
       html, body {
-        background-color: #e0e0e0;
+        background-color: #fff;
       }
       #flat .k-colorpicker-popup {
         border: 1px solid #000;
@@ -37,13 +38,26 @@
     </div>
 
     <div style="padding: 1em">
-      <input type="color" value="#ff0000" id="dropdown" />
-      <input type="color" id="dropdown2" />
       <input type="color" value="#22cc22" id="dropdown3" />
       <input type="color" value="#2255cc" id="dropdown4" />
-      <input type="color" value="#ff8822" id="dropdown5" />
       <input type="color" value="#cc88ee" id="dropdown6" />
       <input type="color" id="dropdown7" />
+
+      <br /><br />
+
+      <input type="color" value="#ff8822" id="dropdown5" />
+      <br /><br />
+
+      <input type="color" value="#ff0000" id="dropdown" />
+      <br /><br />
+      <input type="color" id="dropdown2" />
+
+    </div>
+
+    <div id="mvvm" style="border: 1px solid #888; background: #e0e0e0; padding: 1em">
+      <input data-role="colorpicker" value="#cc6633" />
+      <input data-role="colorpicker" data-palette="web" data-tool-icon="k-foreColor" value="#cc6633" />
+      <input data-role="colorpicker" data-palette="eee,e22,ee2,2e2,2ee,e2e" data-columns="3" />
     </div>
 
     <script>
@@ -60,6 +74,9 @@
       window.hsv1 = $("#hsv1").kendoColorSelectorHSV({ buttons: false, opacity: true }).data("kendoColorSelectorHSV");
       window.hsv2 = $("#hsv2").kendoColorSelectorHSV({ buttons: false, opacity: true }).data("kendoColorSelectorHSV");
 
+      window.dd1 = $("#dropdown5").data("kendoColorPicker");
+      window.dd2 = $("#dropdown").data("kendoColorPicker");
+
       flat.bind("change", function(ev){
         hsv1.select(ev.value);
       });
@@ -75,6 +92,8 @@
           console.log("CHANGE: ", ev.value ? ev.value.toCssRgba() : null);
         }
       });
+
+      kendo.bind($("#mvvm"));
     </script>
   </body>
 </html>

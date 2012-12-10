@@ -159,8 +159,10 @@ kendo_module({
                 selected.addClass(ITEMSELECTEDCLASS)
                     .attr("aria-selected", true);
                 try {
-                    var color = selected.find("div").css(BACKGROUNDCOLOR);
-                    that.trigger("select", { value: parse(color) });
+                    var color = parse(selected.find("div").css(BACKGROUNDCOLOR));
+                    if (!color.equals(that.value())) {
+                        that.trigger("select", { value: color });
+                    }
                 } catch(ex) {}
             }
         },
@@ -422,7 +424,9 @@ kendo_module({
             }
             that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
             that._colorAsText.val(that._opacitySlider ? color.toCssRgba() : color.toCss());
-            that.trigger("select", { value: color });
+            if (!color.equals(that.value())) {
+                that.trigger("select", { value: color });
+            }
             color = color.toHSV();
             var handle = that._hsvHandle;
             var rect = that._hsvRect;
@@ -689,6 +693,12 @@ kendo_module({
                     that.trigger("change", { value: that.value() });
                 });
 
+            var accesskey = element.attr("accesskey");
+            if (accesskey) {
+                element.attr("accesskey", null);
+                content.attr("accesskey", accesskey);
+            }
+
             that._updateUI(value);
         },
         destroy: function() {
@@ -719,7 +729,10 @@ kendo_module({
             columns      : 10,
             toolIcon     : null,
             value        : null,
-            messages     : APPLY_CANCEL
+            messages     : APPLY_CANCEL,
+            opacity      : false,
+            buttons      : true,
+            preview      : true
         },
 
         events: [ "change", "select" ],
@@ -748,7 +761,9 @@ kendo_module({
             return this._value;
         },
         _updateUI: function(value) {
-            this.trigger("select", { value: value });
+            if (value && !value.equals(this.value())) {
+                this.trigger("select", { value: value });
+            }
             this._content.find(".k-selected-color").css(
                 BACKGROUNDCOLOR,
                 value ? value.toDisplay() : "transparent"
@@ -798,7 +813,7 @@ kendo_module({
                         that.select(ev.value);
                         p.close();
                     },
-                    cancel: function(ev) {
+                    cancel: function() {
                         p.close();
                     }
                 });

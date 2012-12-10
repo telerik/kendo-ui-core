@@ -64,6 +64,18 @@
             "source": "kendo.calendar.min.js"
         },
         {
+            "id": "color",
+            "name": "Color tools",
+            "category": "web",
+            "description": "Color selection widgets",
+            "depends": [
+                "core",
+                "popup",
+                "slider"
+            ],
+            "source": "kendo.color.min.js"
+        },
+        {
             "id": "columnmenu",
             "name": "Column Menu",
             "category": "framework",
@@ -278,7 +290,8 @@
             "depends": [
                 "combobox",
                 "dropdownlist",
-                "window"
+                "window",
+                "color"
             ],
             "source": "kendo.editor.min.js"
         },
