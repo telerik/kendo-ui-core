@@ -110,7 +110,6 @@ end
 package 'xorg-x11-server-Xvfb'
 package 'xorg-x11-xauth'
 
-
 remote_file "/tmp/remi-release-6.rpm" do
     source "http://rpms.famillecollet.com/enterprise/remi-release-6.rpm"
     action :create_if_missing
@@ -124,3 +123,17 @@ end
 package "firefox" do
     options "--enablerepo=remi --disablerepo=updates"
 end
+
+yum_key "google-chrome" do
+    url "https://dl-ssl.google.com/linux/linux_signing_key.pub"
+    action :add
+end
+
+yum_repository "google-chrome" do
+    description "google-chrome - 64-bit"
+    url "http://dl.google.com/linux/chrome/rpm/stable/x86_64"
+    key "google-chrome"
+    action :add
+end
+
+package "google-chrome-stable"
