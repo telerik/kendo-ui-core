@@ -85,6 +85,32 @@ kendo_module({
             Chart.fn._applyDefaults.call(chart, options, themeOptions);
         },
 
+        _initDataSource: function(userOptions) {
+            var options = userOptions || {},
+                dataSource = options.dataSource,
+                mainAxis = [].concat(options.categoryAxis)[0],
+                naviOptions = options.navigator || {},
+                select = naviOptions.select,
+                filter,
+                dummyAxis;
+
+            if (dataSource && select && select.from && select.to) {
+                filter = [].concat(dataSource.filter || []);
+
+                dummyAxis = new dataviz.DateCategoryAxis(deepExtend({
+                    baseUnit: "fit"
+                }, mainAxis, {
+                    categories: [select.from, select.to]
+                }));
+
+                dataSource.filter =
+                    Navigator.buildFilter(dummyAxis.options.min, select.to)
+                    .concat(filter);
+            }
+
+            Chart.fn._initDataSource.call(this, userOptions);
+        },
+
         options: {
             name: "StockChart",
             dateField: "date",
@@ -233,14 +259,14 @@ kendo_module({
                 }
             }
 
-            if (chart._model &&
-                (!chart.options.dataSource ||
-                    (chart.options.dataSource && chart._dataBound))) {
-                navi._redrawSelf();
-                navi.redraw();
+            if (chart._model) {
+               navi._redrawSelf(true);
+               navi.filterAxes();
 
-                navi.filterAxes();
-                navi.redrawSlaves();
+               if (!chart.options.dataSource || (chart.options.dataSource && chart._dataBound)) {
+                   navi.redraw();
+                   navi.redrawSlaves();
+                }
             }
         },
 
@@ -296,11 +322,11 @@ kendo_module({
             }
         },
 
-        _redrawSelf: function() {
+        _redrawSelf: function(silent) {
             var plotArea = this.chart._plotArea;
 
             if (plotArea) {
-                plotArea.redraw(last(plotArea.panes));
+                plotArea.redraw(last(plotArea.panes), silent);
             }
         },
 
@@ -440,6 +466,10 @@ kendo_module({
                 }
             }
 
+            if (navi.dataSource && chart.dataSource) {
+                return;
+            }
+
             for (i = 0; i < slaveAxes.length; i++) {
                 axis = slaveAxes[i];
                 if (axis.pane !== NAVIGATOR_PANE) {
@@ -457,6 +487,13 @@ kendo_module({
                 filter = Navigator.buildFilter(select.from, select.to);
 
             if (navi.dataSource && chartDataSource && filter.length) {
+                var dummyAxis = new dataviz.DateCategoryAxis(deepExtend({
+                    baseUnit: "fit"
+                }, chart.options.categoryAxis[0], {
+                    categories: [select.from, select.to]
+                }));
+
+                chartDataSource.options.transport.read.data.baseUnit = dummyAxis.options.baseUnit;
                 chartDataSource.filter(filter);
             }
         },
@@ -582,30 +619,8 @@ kendo_module({
 
         panes.push(paneOptions);
 
-        Navigator.setupDataSource(options, naviOptions);
         Navigator.attachAxes(options, naviOptions);
         Navigator.attachSeries(options, naviOptions, themeOptions);
-    };
-
-    Navigator.setupDataSource = function(options, naviOptions) {
-        var dataSource = options.dataSource,
-            select = naviOptions.select,
-            filter,
-            dummyAxis;
-
-        if (dataSource && select && select.from && select.to) {
-            filter = [].concat(dataSource.filter || []);
-
-            dummyAxis = new dataviz.DateCategoryAxis(deepExtend({
-                baseUnit: "fit"
-            }, options.categoryAxis[0], {
-                categories: [select.from, select.to]
-            }));
-
-            dataSource.filter =
-                Navigator.buildFilter(dummyAxis.options.min, select.to)
-                .concat(filter);
-        }
     };
 
     Navigator.attachAxes = function(options, naviOptions) {

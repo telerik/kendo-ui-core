@@ -1708,6 +1708,11 @@ kendo_module({
                 categoryMap.push(lastCategoryIndicies);
             }
 
+            if (categoryMap.length > 0 && last(categoryMap).length === 0) {
+                categoryMap.pop();
+                groups.pop();
+            }
+
             options.min = groups[0];
             options.max = round ? last(groups) : end;
             options.categories = groups;
@@ -5318,7 +5323,7 @@ kendo_module({
             plotArea.reflowCharts(panes);
         },
 
-        redraw: function(panes) {
+        redraw: function(panes, silent) {
             var plotArea = this,
                 i;
 
@@ -5332,8 +5337,10 @@ kendo_module({
             plotArea.reflowAxes(plotArea.panes);
             plotArea.reflowCharts(panes);
 
-            for (i = 0; i < panes.length; i++) {
-                panes[i].refresh();
+            if (!silent) {
+                for (i = 0; i < panes.length; i++) {
+                    panes[i].refresh();
+                }
             }
         },
 
