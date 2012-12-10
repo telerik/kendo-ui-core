@@ -28,9 +28,16 @@ namespace Kendo.Mvc.UI.Fluent
             return AddDescriptor(expression.MemberWithoutInstance(), typeof(TValue));
         }
 
+        /// <summary>
+        /// Specifies member on which aggregates to be calculated.
+        /// </summary>
+        public DataSourceAggregatesFactory Add(string memberName, Type memberType)
+        {
+            return AddDescriptor(memberName, memberType);
+        }
+
         private DataSourceAggregatesFactory AddDescriptor(string memberName, Type memberType)
         {
-
             var descriptor = new AggregateDescriptor();
             descriptor.Member = memberName;                        
 
