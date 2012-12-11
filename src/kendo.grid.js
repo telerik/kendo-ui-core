@@ -3384,7 +3384,10 @@ kendo_module({
                 } else {
                     that.current(that.thead.find("th:not(.k-group-cell)").eq(currentIndex));
                 }
-                that._current.closest("table")[0].focus();
+
+                if (that._current) {
+                    that._current.closest("table")[0].focus();
+                }
             }
 
             that.trigger(DATABOUND);
