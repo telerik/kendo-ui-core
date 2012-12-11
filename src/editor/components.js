@@ -1,29 +1,7 @@
 (function($, undefined) {
 
 var kendo = window.kendo,
-    Widget = kendo.ui.Widget,
-    DropDownList = kendo.ui.DropDownList,
-    Editor = kendo.ui.editor,
-    dom = Editor.Dom,
-    CHANGE = "change",
-    KSTATESELECTED = "k-state-selected",
-    SELECTEDCLASS = "." + KSTATESELECTED,
-    SELECTEDCOLORCLASS = ".k-selected-color",
-    UNSELECTABLE = "unselectable",
-    BACKGROUNDCOLOR = "background-color",
-    ARIASELECTED = "aria-selected",
-    ARIALABELLEDBY = "aria-labelledby",
-    keys = kendo.keys,
-    template = kendo.template(
-'<div class="k-colorpicker-popup">' +
-   '<ul class="k-reset">'+
-        '# for(var i = 0; i < colors.length; i++) { #' +
-            '<li #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i] == value ? "k-state-selected" : "" #" aria-label="\\##= colors[i]#">' +
-                '<div style="background-color:\\##= colors[i] #"></div>'+
-            '</li>' +
-        '# } #' +
-   '</ul>' +
-'</div>');
+    DropDownList = kendo.ui.DropDownList;
 
 var SelectBox = DropDownList.extend({
     init: function(element, options) {
@@ -53,6 +31,7 @@ var SelectBox = DropDownList.extend({
     }
 });
 
+kendo.ui.plugin(SelectBox);
 kendo.ui.editor.SelectBox = SelectBox;
 
 })(window.kendo.jQuery);
