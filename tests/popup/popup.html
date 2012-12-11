@@ -221,7 +221,7 @@
                 });
 
                 popup.open();
-                equal(round100(div.parent().offset().top), round100(anchor.offset().top));
+                equal(round100(div.parent().offset().top), round100(anchor.offset().top), 2);
             });
 
             test("origin top and position bottom", function() {
@@ -236,7 +236,7 @@
                 scrollTo(0, anchor.offset().top);
                 popup.open();
                 scrollTo(0, 0);
-                equal(round100(div.parent().offset().top) + Math.round(div.outerHeight()), round100(anchor.offset().top));
+                equal(round100(div.parent().offset().top) + Math.round(div.outerHeight()), round100(anchor.offset().top), 2);
             });
 
             test("origin top and position center", function() {
@@ -249,7 +249,7 @@
                 });
 
                 popup.open();
-                equal(round100(div.parent().offset().top + Math.round(div.outerHeight() / 2)), round100(anchor.offset().top));
+                equal(round100(div.parent().offset().top + Math.round(div.outerHeight() / 2)), round100(anchor.offset().top), 2);
             });
 
             test("origin center and position top", function() {
@@ -261,7 +261,7 @@
                 });
 
                 popup.open();
-                equal(round100(div.parent().offset().top), Math.round(anchor.offset().top + round100(anchor.outerHeight() / 2 )));
+                equal(round100(div.parent().offset().top), Math.round(anchor.offset().top + round100(anchor.outerHeight() / 2 )), 2);
             });
 
             test("origin center and position bottom", function() {
@@ -274,7 +274,7 @@
                 });
 
                 popup.open();
-                equal(round100(div.parent().offset().top + div.outerHeight()), round100(anchor.offset().top + Math.round(anchor.outerHeight() / 2 )));
+                equal(round100(div.parent().offset().top + div.outerHeight()), round100(anchor.offset().top + Math.round(anchor.outerHeight() / 2 )), 2);
             });
 
             test("origin center and position center", function() {
@@ -287,7 +287,7 @@
                 });
 
                 popup.open();
-                equal(round100(div.parent().offset().top + Math.round(div.outerHeight() / 2)), round100(anchor.offset().top + Math.round(anchor.outerHeight() / 2 )));
+                equal(round100(div.parent().offset().top + Math.round(div.outerHeight() / 2)), round100(anchor.offset().top + Math.round(anchor.outerHeight() / 2 )), 2);
             });
 
             test("origin left and position left", function() {
