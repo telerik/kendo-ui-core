@@ -6,7 +6,7 @@ chkconfig iptables off
 # EPEL
 rpm -ivh 'http://mirror.telepoint.bg/fedora/epel/6/i386/epel-release-6-7.noarch.rpm'
 yum update -y
-yum install -y glib-devel gcc gcc-c++ rpm-build rpmdevtools readline-devel ncurses-devel gdbm-devel tcl-devel openssl-devel db4-devel byacc libyaml-devel libffi-devel make
+yum install -y glib-devel gcc gcc-c++ rpm-build rpmdevtools readline-devel ncurses-devel gdbm-devel tcl-devel openssl-devel db4-devel byacc libyaml-devel libffi-devel make zlib zlib-devel
 
 rpmdev-setuptree
 
@@ -18,11 +18,10 @@ then
 fi
 
 cd ~/rpmbuild/SPECS
-if [[ ! -f ruby19.spec ]]
-then
-        wget https://raw.github.com/imeyer/ruby-1.9.3-rpm/master/ruby19.spec
-        wget https://raw.github.com/kazuhisya/nodejs-rpm/master/nodejs.spec
-fi
+rm *spec
+
+wget https://raw.github.com/imeyer/ruby-1.9.3-rpm/master/ruby19.spec
+wget https://raw.github.com/kazuhisya/nodejs-rpm/36f9410581c8dd6db957e91c190c90dd9735c89f/nodejs.spec
 
 rpmbuild -bb ruby19.spec
 rpmbuild -bb nodejs.spec
