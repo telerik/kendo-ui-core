@@ -352,6 +352,105 @@ and is about to render it.</description>
         
 
     <tag>
+        <description>ColorPicker</description>
+        <name>colorPicker</name>
+        <tag-class>com.kendoui.taglib.ColorPickerTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+
+        <attribute>
+            <description>When a non-null</description>
+            <name>palette</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The number of columns to show in the simple color dropdown.  For the
+"basic" and "web" palettes this is automatically initialized; if you
+pass a custom palette then you can set this to some value that makes
+sense for your colors.</description>
+            <name>columns</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The initially selected color.  This can be a string supported by</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>A CSS class name to display an icon in the color picker button.  If
+specified, the HTML for the element will look like this:</description>
+            <name>toolIcon</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Applicable only for the HSV selector (that is, when</description>
+            <name>buttons</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Only for the HSV selector.  Displays the color preview element, along
+with an input field where the end user can paste a color in a
+CSS-supported notation.</description>
+            <name>preview</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Only for the HSV selector.  If</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Allows customization of "Apply" / "Cancel" labels.</description>
+            <name>messages</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Fires as a new color is displayed in the drop-down picker.  This is
+not necessarily the "final" value; for example this event triggers
+when the sliders in the HSV selector are dragged, but then pressing
+ESC would cancel the selection and the color will revert to the
+original value.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when a color was selected, either by clicking on it (in the
+simple picker), by clicking ENTER or by pressing "Apply" in the HSV
+picker.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <dynamic-attributes>true</dynamic-attributes>
+
+    </tag>
+        
+
+    <tag>
         <description>ComboBox</description>
         <name>comboBox</name>
         <tag-class>com.kendoui.taglib.ComboBoxTag</tag-class>
@@ -517,6 +616,11 @@ and is about to render it.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <description>Triggered when value of the widget is changed via API or user interaction.</description>
+            <name>cascade</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -641,7 +745,7 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when an error occurs during data read or sync. The event arguments are the same as the ones of the error event of $.ajax().</description>
+            <description>Fires when an error occurs during data read or sync.</description>
             <name>error</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -1025,6 +1129,11 @@ The following settings are available for the</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <description>Triggered when value of the widget is changed via API or user interaction.</description>
+            <name>cascade</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
 
         <dynamic-attributes>true</dynamic-attributes>
 
@@ -1271,6 +1380,16 @@ The following settings are available for the</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when the grid column filter menu is initialized.</description>
+            <name>filterMenuInit</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the grid column menu is initialized.</description>
+            <name>columnMenuInit</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires before the grid item is removed.</description>
             <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1399,6 +1518,11 @@ The following settings are available for the</description>
             <description>Fires when the list view has received data from the data source.
 and is about to render it.</description>
             <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the grid is about to be rendered.</description>
+            <name>dataBinding</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -4195,15 +4319,6 @@ series when binding to grouped data.</description>
         </attribute>
 
         <attribute>
-            <description>Aggregate function for date series.
-This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.</description>
-            <name>aggregate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>The series base color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4378,16 +4493,7 @@ series when binding to grouped data.</description>
             <description>The line width of the line chart.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Aggregate function for date series.
-This function is used when a category (an year, month, etc.) contains two or more points.
-The function return values are displayed instead of the individual points.</description>
-            <name>aggregates</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4430,6 +4536,15 @@ The function return values are displayed instead of the individual points.</desc
             <name>closeField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Aggregate function for date series.
+This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.</description>
+            <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -4709,6 +4824,29 @@ Template variables:</description>
 
 
     <tag>
+        <description>Configures the appearance of highlighted points.</description>
+        <name>chart-seriesItem-highlight</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The opacity of the highlighted points.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The segment color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The settings for negative values.</description>
         <name>chart-seriesItem-negativeValues</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemNegativeValuesTag</tag-class>
@@ -4830,6 +4968,59 @@ Template variables:</description>
         <attribute>
             <description>The width of the border.</description>
             <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <name>chart-seriesItem-highlight-border</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The border opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The border color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <name>chart-seriesItem-highlight-line</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the line.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -6371,6 +6562,22 @@ hex and rgb.</description>
 
 
     <tag>
+        <description>Subscribes to the select event of ColorPicker.</description>
+        <name>colorPicker-select</name>
+        <tag-class>com.kendoui.taglib.colorpicker.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the change event of ColorPicker.</description>
+        <name>colorPicker-change</name>
+        <tag-class>com.kendoui.taglib.colorpicker.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Animations to be used for opening/closing the popup. Setting to false will turn off the animation.</description>
         <name>comboBox-animation</name>
         <tag-class>com.kendoui.taglib.combobox.AnimationTag</tag-class>
@@ -6415,6 +6622,14 @@ hex and rgb.</description>
         <description>Subscribes to the select event of ComboBox.</description>
         <name>comboBox-select</name>
         <tag-class>com.kendoui.taglib.combobox.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the cascade event of ComboBox.</description>
+        <name>comboBox-cascade</name>
+        <tag-class>com.kendoui.taglib.combobox.CascadeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6590,7 +6805,7 @@ return the total number of data items for the current response.</description>
         </attribute>
 
         <attribute>
-            <description>Convert the request parameters from dataSource format to remote service specific format.</description>
+            <description>Converts the request parameters and data from the internal format to a format suitable for the remote service.</description>
             <name>parameterMap</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -7262,6 +7477,14 @@ the minimum and maximum values.</description>
 
 
     <tag>
+        <description>Subscribes to the cascade event of DropDownList.</description>
+        <name>dropDownList-cascade</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.CascadeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Animation to be used for closing of the popup.</description>
         <name>dropDownList-animation-close</name>
         <tag-class>com.kendoui.taglib.dropdownlist.AnimationCloseTag</tag-class>
@@ -7326,6 +7549,13 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <attribute>
             <description>Defines the allowed file extensions.</description>
             <name>fileTypes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the initial folder to display, relative to the root.</description>
+            <name>path</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -7696,11 +7926,11 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <description>Enables column header menu</description>
         <name>grid-columnMenu</name>
         <tag-class>com.kendoui.taglib.grid.ColumnMenuTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
-            <description>Enable/disable sorting section in column header menu.</description>
-            <name>sortable</name>
+            <description>Enable/disable columns section in column header menu.</description>
+            <name>columns</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -7708,6 +7938,13 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <attribute>
             <description>Enable/disable filter section in column header menu.</description>
             <name>filterable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/disable sorting section in column header menu.</description>
+            <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -7752,6 +7989,22 @@ as a collection of required properties, while the insertHtml  tool requires a co
         <attribute>
             <description>Indicates whether item should be switched to edit mode on click.</description>
             <name>update</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Indicates whether filtering is enabled/disabled.</description>
+        <name>grid-filterable</name>
+        <tag-class>com.kendoui.taglib.grid.FilterableTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Indicates whether second filter input is enabled/disabled.</description>
+            <name>extra</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -7948,6 +8201,22 @@ Or template to be used for rendering the toolbar content.</description>
 
 
     <tag>
+        <description>Subscribes to the filterMenuInit event of Grid.</description>
+        <name>grid-filterMenuInit</name>
+        <tag-class>com.kendoui.taglib.grid.FilterMenuInitFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the columnMenuInit event of Grid.</description>
+        <name>grid-columnMenuInit</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnMenuInitFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Subscribes to the remove event of Grid.</description>
         <name>grid-remove</name>
         <tag-class>com.kendoui.taglib.grid.RemoveFunctionTag</tag-class>
@@ -8036,6 +8305,13 @@ Or template to be used for rendering the toolbar content.</description>
             <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Specifies whether given column is hidden.</description>
+            <name>hidden</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
         <attribute>
@@ -8161,6 +8437,293 @@ Or template to be used for rendering the toolbar content.</description>
         <name>grid-column-commandItem-click</name>
         <tag-class>com.kendoui.taglib.grid.ClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Sets the columnMenu messages.</description>
+        <name>grid-columnMenu-messages</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnMenuMessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Set the text of the columns section in column header menu.</description>
+            <name>columns</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the filter section in column header menu.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the sortAscending section in column header menu.</description>
+            <name>sortAscending</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the sortDescending section in column header menu.</description>
+            <name>sortDescending</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Sets the filter menu messages.</description>
+        <name>grid-filterable-messages</name>
+        <tag-class>com.kendoui.taglib.grid.FilterableMessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Set the text of the "and" option from logic drop down list.</description>
+            <name>and</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the clear button of the filter menu.</description>
+            <name>clear</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the filter button of the filter menu.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the information message on top of the filter menu.</description>
+            <name>info</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the isFalse radio button of the filter menu for boolean values.</description>
+            <name>isFalse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the isTrue radio button of the filter menu for boolean values.</description>
+            <name>isTrue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the "or" option from logic drop down list.</description>
+            <name>or</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Set the text of the option label for foreign key drop down list.</description>
+            <name>selectValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators.</description>
+        <name>grid-filterable-operators</name>
+        <tag-class>com.kendoui.taglib.grid.FilterableOperatorsTag</tag-class>
+        <body-content>JSP</body-content>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators for fields of type string.</description>
+        <name>grid-filterable-operators-string</name>
+        <tag-class>com.kendoui.taglib.grid.OperatorsStringTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is equal to" filter option for columns with string values.</description>
+            <name>eq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is not equal to" filter option for columns with string values.</description>
+            <name>neq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Starts with" filter option for columns with string values.</description>
+            <name>startswith</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Contains" filter option for columns with string values.</description>
+            <name>contains</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Does not contain" filter option for columns with string values.</description>
+            <name>doesnotcontain</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Ends with" filter option for columns with string values.</description>
+            <name>endswith</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators for fields of type number.</description>
+        <name>grid-filterable-operators-number</name>
+        <tag-class>com.kendoui.taglib.grid.OperatorsNumberTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is equal to" filter option for columns with number values.</description>
+            <name>eq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is not equal to" filter option for columns with number values.</description>
+            <name>neq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is greater than or equal to" filter option for columns with number values.</description>
+            <name>gte</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is greater than" filter option for columns with number values.</description>
+            <name>gt</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is less than or equal to" filter option for columns with number values.</description>
+            <name>lte</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is less than" filter option for columns with number values.</description>
+            <name>lt</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators for fields of type date.</description>
+        <name>grid-filterable-operators-date</name>
+        <tag-class>com.kendoui.taglib.grid.OperatorsDateTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is equal to" filter option for columns with date values.</description>
+            <name>eq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is not equal to" filter option for columns with date values.</description>
+            <name>neq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is after or equal to" filter option for columns with date values.</description>
+            <name>gte</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is after" filter option for columns with date values.</description>
+            <name>gt</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is before or equal to" filter option for columns with date values.</description>
+            <name>lte</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is before" filter option for columns with date values.</description>
+            <name>lt</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enable/Disable and set the text of filter operators for foreign key columns.</description>
+        <name>grid-filterable-operators-enums</name>
+        <tag-class>com.kendoui.taglib.grid.OperatorsEnumsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is equal to" filter option for foreign key columns.</description>
+            <name>eq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Enable/Disable and set the text of the "Is not equal to" filter option for foreign key columns.</description>
+            <name>neq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
 
@@ -8842,6 +9405,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
         <description>Subscribes to the dataBound event of ListView.</description>
         <name>listView-dataBound</name>
         <tag-class>com.kendoui.taglib.listview.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
+        <description>Subscribes to the dataBinding event of ListView.</description>
+        <name>listView-dataBinding</name>
+        <tag-class>com.kendoui.taglib.listview.DataBindingFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -11270,6 +11841,29 @@ Template variables:</description>
 
 
     <tag>
+        <description>Configures the appearance of highlighted points.</description>
+        <name>stockChart-seriesItem-highlight</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The opacity of the highlighted points.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The segment color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The settings for negative values.</description>
         <name>stockChart-seriesItem-negativeValues</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemNegativeValuesTag</tag-class>
@@ -11391,6 +11985,59 @@ Template variables:</description>
         <attribute>
             <description>The width of the border.</description>
             <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-seriesItem-highlight-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The border opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The border color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-seriesItem-highlight-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the line.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -14106,6 +14753,13 @@ Setting this option to</description>
         <name>treeView-checkboxes</name>
         <tag-class>com.kendoui.taglib.treeview.CheckboxesTag</tag-class>
         <body-content>empty</body-content>
+
+        <attribute>
+            <description>Indicates the name of the checkbox inputs that will be posted to the server.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
         <attribute>
             <description>Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked.</description>

@@ -78,6 +78,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("editable", value);
     }
 
+    public void setFilterable(FilterableTag value) {
+        setProperty("filterable", value);
+    }
+
     public void setGroupable(GroupableTag value) {
         setProperty("groupable", value);
     }
@@ -130,6 +134,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setEdit(EditFunctionTag value) {
         setEvent("edit", value.getBody());
+    }
+
+    public void setFilterMenuInit(FilterMenuInitFunctionTag value) {
+        setEvent("filterMenuInit", value.getBody());
+    }
+
+    public void setColumnMenuInit(ColumnMenuInitFunctionTag value) {
+        setEvent("columnMenuInit", value.getBody());
     }
 
     public void setRemove(RemoveFunctionTag value) {
@@ -371,6 +383,30 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setEdit(String value) {
         setProperty("edit", new Function(value));
+    }
+
+    public String getFilterMenuInit() {
+        Function property = ((Function)getProperty("filterMenuInit"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setFilterMenuInit(String value) {
+        setProperty("filterMenuInit", new Function(value));
+    }
+
+    public String getColumnMenuInit() {
+        Function property = ((Function)getProperty("columnMenuInit"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setColumnMenuInit(String value) {
+        setProperty("columnMenuInit", new Function(value));
     }
 
     public String getRemove() {

@@ -78,6 +78,10 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("select", value.getBody());
     }
 
+    public void setCascade(CascadeFunctionTag value) {
+        setEvent("cascade", value.getBody());
+    }
+
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }
@@ -277,6 +281,18 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setSelect(String value) {
         setProperty("select", new Function(value));
+    }
+
+    public String getCascade() {
+        Function property = ((Function)getProperty("cascade"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setCascade(String value) {
+        setProperty("cascade", new Function(value));
     }
 
 //<< Attributes

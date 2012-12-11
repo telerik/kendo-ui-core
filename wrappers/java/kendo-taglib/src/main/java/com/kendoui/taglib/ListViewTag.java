@@ -129,6 +129,10 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("dataBound", value.getBody());
     }
 
+    public void setDataBinding(DataBindingFunctionTag value) {
+        setEvent("dataBinding", value.getBody());
+    }
+
     public void setEdit(EditFunctionTag value) {
         setEvent("edit", value.getBody());
     }
@@ -228,6 +232,18 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setDataBound(String value) {
         setProperty("dataBound", new Function(value));
+    }
+
+    public String getDataBinding() {
+        Function property = ((Function)getProperty("dataBinding"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDataBinding(String value) {
+        setProperty("dataBinding", new Function(value));
     }
 
     public String getEdit() {

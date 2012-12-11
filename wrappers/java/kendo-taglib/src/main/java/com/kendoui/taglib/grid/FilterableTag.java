@@ -14,7 +14,7 @@ import com.kendoui.taglib.GridTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ColumnMenuTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class FilterableTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -24,7 +24,7 @@ public class ColumnMenuTag extends  BaseTag  /* interfaces *//* interfaces */ {
         GridTag parent = (GridTag)findParentWithClass(GridTag.class);
 
 
-        parent.setColumnMenu(this);
+        parent.setFilterable(this);
 
 //<< doEndTag
 
@@ -50,35 +50,23 @@ public class ColumnMenuTag extends  BaseTag  /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "grid-columnMenu";
+        return "grid-filterable";
     }
 
-    public void setMessages(ColumnMenuMessagesTag value) {
+    public void setMessages(FilterableMessagesTag value) {
         setProperty("messages", value);
     }
 
-    public boolean getColumns() {
-        return (boolean)getProperty("columns");
+    public void setOperators(FilterableOperatorsTag value) {
+        setProperty("operators", value);
     }
 
-    public void setColumns(boolean value) {
-        setProperty("columns", value);
+    public boolean getExtra() {
+        return (boolean)getProperty("extra");
     }
 
-    public boolean getFilterable() {
-        return (boolean)getProperty("filterable");
-    }
-
-    public void setFilterable(boolean value) {
-        setProperty("filterable", value);
-    }
-
-    public boolean getSortable() {
-        return (boolean)getProperty("sortable");
-    }
-
-    public void setSortable(boolean value) {
-        setProperty("sortable", value);
+    public void setExtra(boolean value) {
+        setProperty("extra", value);
     }
 
 //<< Attributes

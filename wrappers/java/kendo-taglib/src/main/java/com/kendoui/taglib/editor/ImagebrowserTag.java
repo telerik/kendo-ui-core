@@ -73,6 +73,14 @@ public class ImagebrowserTag extends  BaseTag  /* interfaces *//* interfaces */ 
         setProperty("fileTypes", value);
     }
 
+    public String getPath() {
+        return (String)getProperty("path");
+    }
+
+    public void setPath(String value) {
+        setProperty("path", value);
+    }
+
 //<< Attributes
 
 }
