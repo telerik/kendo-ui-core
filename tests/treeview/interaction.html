@@ -1063,6 +1063,23 @@
                 ok(!treeview.filter("[aria-activedescendant]").length);
             });
 
+            test("TreeView does not focus item if clicked element is focusable", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                    ],
+                    template: "<input />"
+                });
+
+                var input = treeview.find("input");
+
+                input.mousedown();
+                input.mouseup();
+                input.click();
+
+                notEqual(treeview[0], document.activeElement);
+            });
+
 
             module("drag & drop with load-on-demand", {
                 setup: function() {
