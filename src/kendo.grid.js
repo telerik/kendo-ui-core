@@ -580,24 +580,7 @@
                 that.virtualScrollable.destroy();
             }
 
-            that.thead.find("th").each(function(){
-                var th = $(this),
-                    filterMenu = th.data("kendoFilterMenu"),
-                    sortable = th.data("kendoSortable"),
-                    columnMenu = th.data("kendoColumnMenu");
-
-                if (filterMenu) {
-                    filterMenu.destroy();
-                }
-
-                if (sortable) {
-                    sortable.destroy();
-                }
-
-                if (columnMenu) {
-                    columnMenu.destroy();
-                }
-            });
+            that._destroyColumnAttachments();
 
             that._destroyEditable();
 
@@ -632,6 +615,29 @@
 
         items: function() {
             return this.tbody.children(':not(.k-grouping-row,.k-detail-row,.k-group-footer)');
+        },
+
+        _destroyColumnAttachments: function() {
+            var that = this;
+
+            that.thead.find("th").each(function(){
+                var th = $(this),
+                    filterMenu = th.data("kendoFilterMenu"),
+                    sortable = th.data("kendoSortable"),
+                    columnMenu = th.data("kendoColumnMenu");
+
+                if (filterMenu) {
+                    filterMenu.destroy();
+                }
+
+                if (sortable) {
+                    sortable.destroy();
+                }
+
+                if (columnMenu) {
+                    columnMenu.destroy();
+                }
+            });
         },
 
         _attachCustomCommandsEvent: function() {
@@ -2390,6 +2396,8 @@
             var that = this,
                 columns = that.columns,
                 column,
+                cell,
+                sortableInstance,
                 sortable = that.options.sortable;
 
             if (sortable) {
@@ -2398,9 +2406,16 @@
                     .each(function(index) {
                         column = columns[index];
                         if (column.sortable !== false && !column.command && column.field) {
-                            $(this)
-                            .attr("data-" + kendo.ns +"field", column.field)
-                            .kendoSortable(extend({}, sortable, { dataSource: that.dataSource, aria: true }));
+                            cell = $(this);
+
+                            sortableInstance = cell.data("kendoSortable");
+
+                            if (sortableInstance) {
+                                sortableInstance.destroy();
+                            }
+
+                            cell.attr("data-" + kendo.ns +"field", column.field)
+                                .kendoSortable(extend({}, sortable, { dataSource: that.dataSource, aria: true }));
                         }
                     });
             }
@@ -2853,6 +2868,10 @@
             }
 
             tr.find("script").remove().end().appendTo(thead);
+
+            if (that.thead) {
+                that._destroyColumnAttachments();
+            }
 
             that.thead = thead;
 

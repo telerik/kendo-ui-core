@@ -114,6 +114,20 @@
                 notStrictEqual(grid.thead.find("th:first").data("kendoSortable"), sortable);
             });
 
+            test("resetting DataSource destroyes the old Sortable", 1, function() {
+                var grid = new Grid("<table />", { sortable: true, columns: ["text", "value"] });
+
+                var sortable = grid.thead.find("th:first").data("kendoSortable");
+
+                var destroy = stub(sortable, "destroy");
+
+                grid.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}]
+                }));
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
             test("sortable is not attached if column does not have field", 1, function() {
                 var grid = new Grid("<table />", { sortable: true, columns: [ { title: "foo" } ] });
 
