@@ -113,6 +113,10 @@ bash "install mono" do
     only_if { !File.exists?("/usr/local/bin/mono") }
 end
 
+remote_directory '/usr/local/lib/mono/xbuild/Microsoft/VisualStudio/v10.0' do
+    source 'v10.0'
+end
+
 package 'xorg-x11-server-Xvfb'
 package 'xorg-x11-xauth'
 
