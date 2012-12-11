@@ -3,6 +3,9 @@ service iptables save
 service iptables stop
 chkconfig iptables off
 
+# Set selinux in permissive
+echo 0 > /selinux/enforce
+
 # EPEL
 rpm -ivh 'http://mirror.telepoint.bg/fedora/epel/6/i386/epel-release-6-7.noarch.rpm'
 yum update -y
