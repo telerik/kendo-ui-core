@@ -741,7 +741,6 @@
                 frame.stop();
             } else if (frame.document) {
                 frame.document.execCommand("Stop");
-                frame.contentWindow.location.href = frame.contentWindow.location.href;
             }
         },
 
