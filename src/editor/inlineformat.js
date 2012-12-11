@@ -403,7 +403,7 @@ var ColorTool = Tool.extend({
         this.format = [{ tags: ["span"] }];
     },
 
-    update: function(ui) {
+    update: function() {
         this._widget.close();
     },
 
