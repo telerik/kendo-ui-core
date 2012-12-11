@@ -91,7 +91,7 @@
         <name>Dev Daily</name>
         <id>488924</id>
       </room>
-      <hudsonUrl>http://mvc-kendobuild/build/</hudsonUrl>
+      <hudsonUrl>http://kendobuild/build/</hudsonUrl>
     </hudson.plugins.campfire.CampfireNotifier>
   </publishers>
   <buildWrappers/>

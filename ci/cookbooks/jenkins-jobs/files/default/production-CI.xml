@@ -63,21 +63,13 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>~/.gem/ruby/1.9.1/bin/bundle &amp;&amp; rake build:production:tests</command>
+      <command>export PATH=/usr/local/bin/:$PATH; bundle --without development &amp;&amp; rake build:production:tests</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.chucknorris.CordellWalkerRecorder>
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>production-bundles, production-demos</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
     <hudson.tasks.junit.JUnitResultArchiver>
       <testResults>*-test-results.xml</testResults>
       <keepLongStdio>false</keepLongStdio>
@@ -88,7 +80,7 @@
         <name>Dev Daily</name>
         <id>488924</id>
       </room>
-      <hudsonUrl>http://mvc-kendobuild/build/</hudsonUrl>
+      <hudsonUrl>http://kendobuild/build/</hudsonUrl>
     </hudson.plugins.campfire.CampfireNotifier>
   </publishers>
   <buildWrappers/>
