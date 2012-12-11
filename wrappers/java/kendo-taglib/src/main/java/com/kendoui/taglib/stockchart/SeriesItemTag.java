@@ -73,6 +73,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("overlay", value);
     }
 
+    public void setHighlight(SeriesItemHighlightTag value) {
+        setProperty("highlight", value);
+    }
+
     public void setNegativeValues(SeriesItemNegativeValuesTag value) {
         setProperty("negativeValues", value);
     }
