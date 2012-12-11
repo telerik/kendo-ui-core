@@ -73,6 +73,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("overlay", value);
     }
 
+    public void setHighlight(SeriesItemHighlightTag value) {
+        setProperty("highlight", value);
+    }
+
     public void setNegativeValues(SeriesItemNegativeValuesTag value) {
         setProperty("negativeValues", value);
     }
@@ -127,14 +131,6 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setName(String value) {
         setProperty("name", value);
-    }
-
-    public String getAggregate() {
-        return (String)getProperty("aggregate");
-    }
-
-    public void setAggregate(String value) {
-        setProperty("aggregate", value);
     }
 
     public String getColor() {
@@ -329,20 +325,12 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("dashType", value);
     }
 
-    public String getWidth() {
-        return (String)getProperty("width");
+    public float getWidth() {
+        return (float)getProperty("width");
     }
 
-    public void setWidth(String value) {
+    public void setWidth(float value) {
         setProperty("width", value);
-    }
-
-    public Object getAggregates() {
-        return (Object)getProperty("aggregates");
-    }
-
-    public void setAggregates(Object value) {
-        setProperty("aggregates", value);
     }
 
     public String getDownColor() {
@@ -391,6 +379,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setCloseField(String value) {
         setProperty("closeField", value);
+    }
+
+    public Object getAggregate() {
+        return (Object)getProperty("aggregate");
+    }
+
+    public void setAggregate(Object value) {
+        setProperty("aggregate", value);
     }
 
     public Object getStack() {
