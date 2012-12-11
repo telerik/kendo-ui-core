@@ -1,6 +1,7 @@
 JENKINS_URL = 'http://localhost:8080/'
 package "java-1.7.0-openjdk"
 package "java-1.7.0-openjdk-devel"
+package "dejavu-sans-fonts"
 
 remote_file "/tmp/jenkins.rpm" do
     source "http://pkg.jenkins-ci.org/redhat/jenkins-1.492-1.1.noarch.rpm"
@@ -9,6 +10,7 @@ end
 
 package "jenkins" do
     source "/tmp/jenkins.rpm"
+    version "1.492-1.1"
     action :install
 end
 
@@ -36,31 +38,35 @@ remote_file "/tmp/jenkins-cli.jar" do
     action :create_if_missing
 end
 
-=begin
 bash "install_jenkins_plugins" do
     code %Q{
         java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' install-plugin git github chucknorris campfire;
         java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' restart;
     }
 end
-=end
 
-cookbook_file 'CI.xml' do
-    source 'CI.xml'
+def jenkins_job(name)
+    cookbook_file "#{name}.xml" do
+        source "#{name}.xml"
+    end
+
+    bash "setup #{name} jenkins job" do
+        code %Q{
+            sleep 10;
+            java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' create-job #{name} < #{name}.xml;
+            if [[ ! $? -eq 0 ]]
+
+            then
+                java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' update-job #{name} < #{name}.xml;
+            fi
+
+            # java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' restart;
+        }
+    end
 end
 
-bash "setup_CI_job" do
-    code %Q{
-        java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' create-job CI < CI.xml;
-        if [[ ! $? -eq 0 ]]
-
-        then
-            java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' update-job CI < CI.xml;
-        fi
-
-        # java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' restart;
-    }
-end
+jenkins_job "CI"
+jenkins_job "production-bundles"
 
 # Mono
 
@@ -120,8 +126,10 @@ package "remi-repository" do
     action :install
 end
 
-package "firefox" do
-    options "--enablerepo=remi --disablerepo=updates"
+bash "install firefox" do
+    code %q{
+        yum install -y --enablerepo=remi --disablerepo=updates firefox
+    }
 end
 
 yum_key "google-chrome" do
