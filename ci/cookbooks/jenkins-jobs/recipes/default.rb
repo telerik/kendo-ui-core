@@ -26,5 +26,5 @@ def jenkins_job(name)
 end
 
 jenkins_job "CI"
-jenkins_job "production-bundles"
+jenkins_job "production-CI"
 

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.campfire.DescriptorImpl>
+  <helpRedirect/>
+  <enabled>false</enabled>
+  <subdomain>kendoui</subdomain>
+  <token>9a0d90b779802e8cb4112897897ed94e36a3f72c</token>
+  <room>Dev Daily</room>
+  <hudsonUrl>http://mvc-kendobuild/build/</hudsonUrl>
+  <ssl>true</ssl>
+</hudson.plugins.campfire.DescriptorImpl>

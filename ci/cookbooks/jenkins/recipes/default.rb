@@ -43,3 +43,10 @@ bash "install_jenkins_plugins" do
         java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' restart;
     }
 end
+
+cookbook_file "/var/lib/jenkins/hudson.plugins.campfire.CampfireNotifier.xml" do
+    source "hudson.plugins.campfire.CampfireNotifier.xml"
+    owner "jenkins"
+    group "jenkins"
+    mode "0600"
+end
