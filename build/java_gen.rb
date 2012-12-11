@@ -562,7 +562,7 @@ class Tag
     end
 
     def has_items?
-        @name != 'ColumnMenu' && @name =~ /panelbar|menu|treeview|tabstrip/i || has_item_hierarchy?
+        @name != 'ColumnMenu' && @name != 'FilterMenuInit' && @name != 'ColumnMenuInit' && @name =~ /panelbar|menu|treeview|tabstrip/i || has_item_hierarchy?
     end
 
     def to_xml
