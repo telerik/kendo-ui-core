@@ -7,3 +7,6 @@
 [submodule "docs"]
 	path = docs
 	url = git@github.com:telerik/kendo-docs.git
+[submodule "ci/cookbooks/yum"]
+	path = ci/cookbooks/yum
+	url = https://github.com/cookbooks/yum.git

@@ -1,0 +1,11 @@
+{ "run_list": [
+    "recipe[git]",
+    "recipe[ruby]",
+    "recipe[java]",
+    "recipe[mono]",
+    "recipe[x11]",
+    "recipe[firefox]",
+    "recipe[google-chrome]",
+    "recipe[jenkins]",
+    "recipe[jenkins-jobs]"
+]}

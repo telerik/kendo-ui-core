@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Usage: ./deploy [host]
+
+tar cj . | ssh -o 'StrictHostKeyChecking no' "$1" '
+rm -rf ~/chef &&
+mkdir ~/chef &&
+cd ~/chef &&
+tar xj &&
+chef-solo -c solo.rb -j solo.json
+'

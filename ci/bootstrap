@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ssh $1 'bash -s' < chef-setup.sh
