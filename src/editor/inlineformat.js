@@ -428,6 +428,7 @@ var ColorTool = Tool.extend({
             toolName = this.name;
 
         ui = this._widget = new kendo.ui.ColorPicker(ui, {
+            value: "#000",
             toolIcon: "k-" + this.options.name,
             palette: "web",
             change: function(e) {
