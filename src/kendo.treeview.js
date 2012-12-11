@@ -221,7 +221,11 @@ kendo_module({
                 .on("mousedown" + NS, ".k-in,.k-checkbox :checkbox", proxy(that._mousedown, that))
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
                 .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
-                .on("click" + NS, function() { that.focus(); });
+                .on("click" + NS, function(e) {
+                    if (!$(e.target).is(":focusable")) {
+                        that.focus();
+                    }
+                });
         },
 
         _checkboxClick: function(e) {
