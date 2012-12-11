@@ -386,6 +386,19 @@
                 ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
                 equal(document.activeElement.parentNode, table.find(".k-edit-cell")[0]);
             });
+
+            test("pressing enter on destroy command button of the only item", function() {
+                var grid = setup({
+                    editable: { confirmation: false },
+                    columns: ["foo", { command: "destroy" }],
+                    dataSource: [{ foo: "bar", name: "tom", id: 0 }]
+                });
+
+                focusCell(grid).table.press(kendo.keys.ENTER).find(".k-grid-delete").click();
+
+                ok(!grid._current);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
