@@ -16,13 +16,7 @@
         <div id="scatterchart" style="width: 700px; float: left;"></div>
         <script>
             $(function() {
-                $("#chart").kendoChart({
-<<<<<<< HEAD
-                    series: [{
-                        type: "area",
-                        data: [1,2]
-                    }]
-=======
+                var chart = $("#chart").kendoChart({
                     theme: "blueopal",
                     series: [{
                         type: "line",
@@ -51,7 +45,6 @@
                             visible: true
                         }
                     }
->>>>>>> Add crosshair base functionality.
                 });
 
                 $("#scatterchart").kendoChart({

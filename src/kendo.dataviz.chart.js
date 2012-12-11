@@ -368,6 +368,8 @@ kendo_module({
                     }, options.chartArea)),
                 plotArea;
 
+            model.parent = chart;
+
             Title.buildTitle(options.title, model);
 
             plotArea = model._plotArea = chart._createPlotArea();
@@ -6938,6 +6940,16 @@ kendo_module({
             crosshair._visible = true;
             crosshair.point = point;
             crosshair.repaint();
+
+            if (crosshair.options.tooltip.visible) {
+                if (!crosshair.tooltip) {
+                    crosshair.tooltip = new CrosshairTooltip(
+                        crosshair,
+                        deepExtend({}, crosshair.options.tooltip, { stickyMode: crosshair.stickyMode } )
+                    );
+                }
+                crosshair.tooltip.showAt(point);
+            }
         },
 
         hide: function() {
@@ -6946,6 +6958,7 @@ kendo_module({
             if (crosshair._visible) {
                 crosshair._visible = false;
                 crosshair.repaint();
+                crosshair.tooltip.hide();
             }
         },
 
@@ -6982,10 +6995,10 @@ kendo_module({
         getViewElements: function(view) {
             var crosshair = this,
                 options = crosshair.options,
-                elements = [],
-                points = crosshair.linePoints();
+                elements = [];
 
-            crosshair.element = view.createPolyline(points, false, {
+            crosshair.points = crosshair.linePoints();
+            crosshair.element = view.createPolyline(crosshair.points, false, {
                 id: options.id,
                 stroke: options.color,
                 strokeWidth: options.width,
@@ -7001,6 +7014,138 @@ kendo_module({
             append(elements, ChartElement.fn.getViewElements.call(crosshair, view));
 
             return elements;
+        }
+    });
+
+    var CrosshairTooltip = Class.extend({
+        init: function(crosshair, options) {
+            var tooltip = this,
+                chartElement = crosshair.axis.getRoot().parent.element;
+
+            tooltip.options = deepExtend({}, tooltip.options, options);
+            tooltip.axis = crosshair.axis;
+            tooltip.crosshair = crosshair;
+            options = tooltip.options;
+
+            tooltip.chartPadding = {
+                top: parseInt(chartElement.css("paddingTop"), 10),
+                left: parseInt(chartElement.css("paddingLeft"), 10)
+            };
+
+            tooltip.template = CrosshairTooltip.template;
+            if (!tooltip.template) {
+                tooltip.template = Tooltip.template = renderTemplate(
+                    "<div class='" + CSS_PREFIX + "tooltip' " +
+                    "style='display:none; position: absolute; font: #= d.font #;" +
+                    "border: #= d.border.width #px solid;" +
+                    "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);'>" +
+                    "</div>"
+                );
+            }
+            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(chartElement);
+        },
+
+        options: {
+            background: BLACK,
+            color: WHITE,
+            border: {
+                width: 3
+            },
+            opacity: 1,
+            animation: {
+                duration: TOOLTIP_ANIMATION_DURATION
+            }
+        },
+
+        showAt: function(point) {
+            var tooltip = this;
+
+            tooltip.point = point;
+            tooltip.showTimeout =
+                setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
+        },
+
+        _show: function() {
+            var tooltip = this,
+                options = tooltip.options,
+                point = tooltip.point,
+                axis = tooltip.axis,
+                element = tooltip.element,
+                chartPadding = tooltip.chartPadding,
+                value, width, height, content,
+                anchor, top, left, template;
+
+            if (!point) {
+                return;
+            }
+
+            value = content = axis[options.stickyMode ? "getCategory" : "getValue"](point);
+
+            if (options.template) {
+                template = template(options.template);
+                content = template({
+                    value: value
+                });
+            } else if (options.format) {
+                content = autoFormat(options.format, value);
+            }
+
+            element.html(content);
+
+            anchor = tooltip.tooltipPosition(element.outerWidth(), element.outerHeight());
+            top = round(anchor.y + chartPadding.top) + "px";
+            left = round(anchor.x + chartPadding.left) + "px";
+
+            if (!tooltip.visible) {
+                tooltip.element.css({ top: top, left: left });
+            }
+
+            element
+                .css({
+                   backgroundColor: options.background,
+                   borderColor: options.border.color,
+                   font: options.font,
+                   color: options.color,
+                   opacity: options.opacity,
+                   borderWidth: options.border.width
+                })
+                .stop(true, true)
+                .show()
+                .animate({
+                    left: left,
+                    top: top
+                }, options.animation.duration);
+
+            tooltip.visible = true;
+        },
+
+        hide: function() {
+            var tooltip = this;
+
+            clearTimeout(tooltip.showTimeout);
+            if (tooltip.visible) {
+                tooltip.element.fadeOut();
+
+                tooltip.point = null;
+                tooltip.visible = false;
+            }
+        },
+
+        tooltipPosition: function(width, height) {
+            var tooltip = this,
+                vertical = tooltip.axis.options.vertical,
+                points = tooltip.crosshair.points,
+                x, y;
+
+            if (vertical) {
+                x = points[1].x;
+                y = points[1].y - height / 2;
+            } else {
+                x = points[0].x + 10;
+                y = points[0].y;
+            }
+
+            return Point2D(x, y);
         }
     });
 
