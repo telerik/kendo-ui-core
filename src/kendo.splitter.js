@@ -104,8 +104,8 @@
         _attachEvents: function() {
             var that = this,
                 orientation = that.options.orientation,
-                splitbarSelector = ".k-splitbar-" + orientation,
-                splitbarDraggableSelector = ".k-splitbar-draggable-" + orientation,
+                splitbarSelector = " > .k-splitbar-" + orientation,
+                splitbarDraggableSelector = " > .k-splitbar-draggable-" + orientation,
                 expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)";
 
             that.element
@@ -115,7 +115,7 @@
                 .on("blur" + NS, splitbarSelector, function(e) { $(e.currentTarget).removeClass(FOCUSED); that.resizing.end(); })
                 .on(MOUSEENTER + NS, splitbarDraggableSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on(MOUSELEAVE + NS, splitbarDraggableSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                .on("mousedown" + NS, splitbarDraggableSelector, function() { that.resizing.end(); that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
+                .on("mousedown" + NS, splitbarDraggableSelector, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
                 .on("mouseup" + NS, splitbarDraggableSelector, function() { that._panes().children(".k-splitter-overlay").remove(); })
                 .on(MOUSEENTER + NS, expandCollapseSelector, function() { $(this).addClass("k-state-hover"); })
                 .on(MOUSELEAVE + NS, expandCollapseSelector, function() { $(this).removeClass('k-state-hover'); })
@@ -515,6 +515,11 @@
         },
 
         move: function(delta, target) {
+            if (!this.pressed) {
+                this.press(target);
+                this.pressed = true;
+            }
+
             if (!this._resizable.target) {
                 this._resizable.press(target);
             }
@@ -524,6 +529,7 @@
 
         end: function() {
             this._resizable.end();
+            this.pressed = false;
         },
 
         destroy: function() {
@@ -601,10 +607,6 @@
 
                 owner.trigger(RESIZE);
             }
-
-            setTimeout(function() {
-                that.press(splitbar);
-            });
 
             return false;
         }

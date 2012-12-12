@@ -395,10 +395,6 @@
             }).length;
         },
 
-        _isPressed: function() {
-            return this.touches.length;
-        },
-
         _start: function(e) {
             var that = this,
                 idx = 0,
