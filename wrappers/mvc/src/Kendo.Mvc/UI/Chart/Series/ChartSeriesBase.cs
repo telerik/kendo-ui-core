@@ -8,6 +8,7 @@ namespace Kendo.Mvc.UI
         protected ChartSeriesBase()
         {
             Tooltip = new ChartTooltip();
+            Highlight = new ChartSeriesHighlight();
         }
 
         /// <summary>
@@ -62,6 +63,15 @@ namespace Kendo.Mvc.UI
         /// Name template for auto-generated series when binding to grouped data.
         /// </summary>
         public string GroupNameTemplate
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the series highlight options
+        /// </summary>
+        public ChartSeriesHighlight Highlight
         {
             get;
             set;

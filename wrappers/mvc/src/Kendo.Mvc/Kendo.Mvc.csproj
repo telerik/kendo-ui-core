@@ -248,6 +248,7 @@
     <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisBaseUnitStepsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartBubbleSeriesHighlightBuilder.cs" />
     <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
@@ -320,6 +321,7 @@
     <Compile Include="UI\Chart\Serialization\ChartCandlestickSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPaneSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisBaseUnitStepsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartSeriesHighlightSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
@@ -382,6 +384,7 @@
     <Compile Include="UI\Chart\Series\ChartOHLCSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartOHLCAggregates.cs" />
     <Compile Include="UI\Chart\Series\ChartCandlestickSeries.cs" />
+    <Compile Include="UI\Chart\Series\ChartSeriesHighlight.cs" />
     <Compile Include="UI\Chart\Series\IChartCandlestickSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartOHLCSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartBubbleSeries.cs" />

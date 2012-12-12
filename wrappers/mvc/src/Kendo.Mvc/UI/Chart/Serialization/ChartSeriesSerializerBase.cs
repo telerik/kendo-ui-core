@@ -23,7 +23,13 @@ namespace Kendo.Mvc.UI
 
             var tooltipData = series.Tooltip.CreateSerializer().Serialize();
             if (tooltipData.Count > 0) {
-                  result.Add("tooltip", tooltipData);
+                result.Add("tooltip", tooltipData);
+            }
+
+            var highlightData = series.Highlight.CreateSerializer().Serialize();
+            if (highlightData.Count > 0)
+            {
+                result.Add("highlight", highlightData);
             }
 
             return result;

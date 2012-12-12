@@ -118,6 +118,7 @@
     <Compile Include="UI\Chart\ChartOHLCSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartCandlestickSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisBaseUnitStepsBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartBubbleSeriesHighlightBuilderTests.cs" />
     <Compile Include="UI\Chart\OHLCData.cs" />
     <Compile Include="UI\Chart\PlotAreaBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSerializationTests.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="UI\Chart\Serialization\ChartCandlestickSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartDateAxisSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisBaseUnitStepsSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartSeriesHighlightSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
     <Compile Include="UI\Editor\ImageBrowserControllerTests.cs" />

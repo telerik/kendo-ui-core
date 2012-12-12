@@ -85,5 +85,15 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return base.Markers(visible);
         }
+
+        /// <summary>
+        /// Configures the bubble highlight
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>        
+        public ChartBubbleSeriesBuilder<T> Highlight(Action<ChartBubbleSeriesHighlightBuilder> configurator)
+        {
+            configurator(new ChartBubbleSeriesHighlightBuilder(Series.Highlight));
+            return this;
+        }
     }
 }
