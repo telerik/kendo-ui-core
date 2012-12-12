@@ -1,5 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PlotArea"/>.
     /// </summary>
@@ -98,6 +100,16 @@ namespace Kendo.Mvc.UI.Fluent
         public PlotAreaBuilder Border(int width, string color, ChartDashType dashType)
         {
             plotArea.Border = new ChartElementBorder(width, color, dashType);
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the plot area border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public PlotAreaBuilder Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(plotArea.Border));
             return this;
         }
     }

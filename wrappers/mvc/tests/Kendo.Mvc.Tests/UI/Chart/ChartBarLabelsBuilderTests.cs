@@ -92,6 +92,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Border_builder_should_configure_border()
+        {
+            builder.Border(b => b.Opacity(0.5));
+            labels.Border.Opacity.ShouldEqual(0.5);
+        }
+
+        [Fact]
+        public void Border_builder_should_return_builder()
+        {
+            builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Format_sets_format()
         {
             builder.Format("{0:C}");

@@ -1,5 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+
     /// <summary>
     /// Defines the fluent interface for configuring the linear gauge track.
     /// </summary>
@@ -99,6 +101,16 @@ namespace Kendo.Mvc.UI.Fluent
         public GaugeLinearTrackBuilder Border(int width, string color, ChartDashType dashType)
         {
             track.Border = new ChartElementBorder(width, color, dashType);
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the track border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public GaugeLinearTrackBuilder Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(track.Border));
             return this;
         }
     }

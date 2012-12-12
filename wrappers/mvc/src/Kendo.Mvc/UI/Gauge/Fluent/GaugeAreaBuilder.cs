@@ -1,5 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="GaugeArea"/>.
     /// </summary>
@@ -98,6 +100,16 @@ namespace Kendo.Mvc.UI.Fluent
         public GaugeAreaBuilder Border(int width, string color, ChartDashType dashType)
         {
             gaugeArea.Border = new ChartElementBorder(width, color, dashType);
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the gauge area border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public GaugeAreaBuilder Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(gaugeArea.Border));
             return this;
         }
     }

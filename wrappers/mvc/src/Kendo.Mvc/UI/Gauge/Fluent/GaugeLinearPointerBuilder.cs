@@ -131,6 +131,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the pointer border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public GaugeLinearPointerBuilder Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(pointer.Border));
+            return this;
+        }
+
+        /// <summary>
         /// Sets the pointer opacity.
         /// </summary>
         /// <param name="opacity">
