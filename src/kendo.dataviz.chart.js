@@ -3642,7 +3642,9 @@ kendo_module({
         },
 
         options: {
-            border: {},
+            border: {
+                _brightness: 0.8
+            },
             line: {
                 width: 2
             },
@@ -3657,6 +3659,17 @@ kendo_module({
                         "<tr><td>Low:</td><td>{2:C}</td></tr>" +
                         "<tr><td>Close:</td><td>{3:C}</td></tr>" +
                         "</table>"
+            },
+            highlight: {
+                opacity: 1,
+                border: {
+                    width: 1,
+                    opacity: 1
+                },
+                line: {
+                    width: 1,
+                    opacity: 1
+                }
             }
         },
 
@@ -3762,16 +3775,19 @@ kendo_module({
             var point = this,
                 pointOptions = point.options,
                 highlight = pointOptions.highlight,
-                border = highlight.border || {},
+                border = highlight.border,
+                borderColor = point.getBorderColor(),
+                line = highlight.line,
                 data = { data: { modelId: pointOptions.modelId } },
-                rectStyle = deepExtend(data, options, {
-                    stroke: point.getBorderColor(),
+                rectStyle = deepExtend({}, data, options, {
+                    stroke: borderColor,
                     strokeOpacity: border.opacity,
                     strokeWidth: border.width
                 }),
-                lineStyle = deepExtend(data, {
-                    stroke: point.getBorderColor(),
-                    strokeWidth: highlight.line.width,
+                lineStyle = deepExtend({}, data, {
+                    stroke: line.color || borderColor,
+                    strokeWidth: line.width,
+                    strokeOpacity: line.opacity,
                     strokeLineCap: "butt"
                 }),
                 group = view.createGroup();
