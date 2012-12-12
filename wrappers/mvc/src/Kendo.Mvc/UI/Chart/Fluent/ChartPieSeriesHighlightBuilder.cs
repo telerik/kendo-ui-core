@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the pie highlight color.
         /// </summary>
         /// <param name="color">The highlight color</param>
-        public ChartSeriesHighlightBuilderBase Color(string color)
+        public ChartPieSeriesHighlightBuilder Color(string color)
         {
             Highlight.Color = color;
             return this;
