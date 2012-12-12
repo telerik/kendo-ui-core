@@ -145,6 +145,28 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the ohlc line width.
+        /// </summary>
+        /// <param name="width">The lines width.</param>      
+        public ChartOHLCSeriesBuilder<T> Line(int width)
+        {
+            return Line(width, null);
+        }
+
+        /// <summary>
+        /// Configures the ohlc lines.
+        /// </summary>
+        /// <param name="width">The lines width.</param>
+        /// <param name="color">The lines color.</param>    
+        public ChartOHLCSeriesBuilder<T> Line(int width, string color)
+        {
+            Series.Line.Width = width;
+            Series.Line.Color = color;
+
+            return this;
+        }
+
+        /// <summary>
         /// Configures the ohlc chart lines.
         /// </summary>
         /// <param name="configurator">The configuration action.</param>

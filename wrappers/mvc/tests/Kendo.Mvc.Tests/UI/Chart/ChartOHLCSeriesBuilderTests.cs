@@ -62,16 +62,55 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Highlight_with_builder_should_configure_highlight()
+        public void Line_should_set_line_width()
         {
-            builder.Highlight(highlight => { highlight.Line(1); });
+            builder.Line(1);
+            series.Line.Width.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void Line_should_return_builder()
+        {
+            builder.Line(1).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Line_color_should_set_line_width_and_color()
+        {
+            builder.Line(1, "red");
+            series.Line.Color.ShouldEqual("red");
+            series.Line.Width.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void Line_color_should_return_builder()
+        {
+            builder.Line(1, "red").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Line_builder_should_configure_line()
+        {
+            builder.Line(l => l.Color("red")).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Line_builder_should_return_builder()
+        {
+            builder.Line(l => l.Color("red")).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Highlight_with_builder_should_configure_series()
+        {
+            builder.Highlight(s => { s.Line(1); });
             series.Highlight.Line.Width.ShouldEqual(1);
         }
 
         [Fact]
         public void Highlight_with_builder_should_return_builder()
         {
-            builder.Highlight(highlight => { }).ShouldBeSameAs(builder);
+            builder.Highlight(series => { }).ShouldBeSameAs(builder);
         }
     }
 }
