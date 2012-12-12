@@ -180,30 +180,72 @@
                     }
                 });
 
-                test("highlightOverlay returns a circle", function() {
+                test("highlightOverlay renders a circle", function() {
                     ok(firstPoint.highlightOverlay(view).c);
-                });
-
-                test("highlightOverlay returns a transparent circle", function() {
-                    equals(firstPoint.highlightOverlay(view).options.fill, undefined);
-                });
-
-                test("highlightOverlay returns a circle with 1px border", function() {
-                    var outline = firstPoint.highlightOverlay(view);
-
-                    equals(outline.options.strokeWidth, 1);
-                });
-
-                test("highlightOverlay returns a circle with 1px smaller diameter", function() {
-                    var outline = firstPoint.highlightOverlay(view);
-
-                    equals(outline.r, firstPoint.options.markers.size / 2 - 0.5);
                 });
 
                 test("renders top-level group", function() {
                     equals(view.log.group.length, 1);
                 });
 
+                // ------------------------------------------------------------
+                module("Bubble Chart / Points / Highlight", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBubbleChart(plotArea, { series: [ series ] });
+                    }
+                });
+
+                test("highlightOverlay renders a transparent circle", function() {
+                    equals(firstPoint.highlightOverlay(view).options.fill, undefined);
+                });
+
+                test("highlightOverlay renders a circle with 1 border smaller diameter", function() {
+                    firstPoint.options.highlight.border.width = 2;
+                    var outline = firstPoint.highlightOverlay(view);
+
+                    equals(outline.r, firstPoint.options.markers.size / 2 - 1);
+                });
+
+                test("highlightOverlay renders default border width", function() {
+                    var outline = firstPoint.highlightOverlay(view);
+
+                    equals(outline.options.strokeWidth, 1);
+                });
+
+                test("highlightOverlay renders custom border width", function() {
+                    firstPoint.options.highlight.border.width = 2;
+                    var outline = firstPoint.highlightOverlay(view);
+
+                    equals(outline.options.strokeWidth, 2);
+                });
+
+                test("highlightOverlay renders default border color (computed)", function() {
+                    firstPoint.options.markers.background = "#ffffff";
+                    var outline = firstPoint.highlightOverlay(view);
+
+                    equals(outline.options.stroke, "#cccccc");
+                });
+
+                test("highlightOverlay renders custom border color", function() {
+                    firstPoint.options.highlight.border.color = "red";
+                    var outline = firstPoint.highlightOverlay(view);
+
+                    equals(outline.options.stroke, "red");
+                });
+
+                test("highlightOverlay renders default border opacity", function() {
+                    var outline = firstPoint.highlightOverlay(view);
+
+                    equals(outline.options.strokeOpacity, 1);
+                });
+
+                test("highlightOverlay renders custom border color", function() {
+                    firstPoint.options.highlight.border.opacity = 0.5;
+                    var outline = firstPoint.highlightOverlay(view);
+
+                    equals(outline.options.strokeOpacity, 0.5);
+                });
             })();
 
             (function() {

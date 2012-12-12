@@ -2830,7 +2830,8 @@ kendo_module({
             highlight: {
                 opacity: 1,
                 border: {
-                    width: 1
+                    width: 1,
+                    opacity: 1
                 }
             }
         },
@@ -2844,14 +2845,14 @@ kendo_module({
                 center = element.box.center(),
                 radius = markers.size / 2 - borderWidth / 2,
                 borderColor =
-                    new Color(markers.background)
-                    .brightness(BAR_BORDER_BRIGHTNESS)
-                    .toHex();
+                    highlight.border.color ||
+                    new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex();
 
             return view.createCircle(center, radius, {
                 data: { modelId: element.options.modelId },
                 stroke: borderColor,
-                strokeWidth: borderWidth
+                strokeWidth: borderWidth,
+                strokeOpacity: highlight.border.opacity
             });
         },
 
