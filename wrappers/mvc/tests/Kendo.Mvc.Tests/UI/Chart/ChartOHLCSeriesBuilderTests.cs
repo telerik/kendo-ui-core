@@ -60,5 +60,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
             series.Line.Width.ShouldEqual(1);
             series.Line.DashType.ShouldEqual(ChartDashType.Dot);
         }
+
+        [Fact]
+        public void Highlight_with_builder_should_configure_highlight()
+        {
+            builder.Highlight(highlight => { highlight.Line(1); });
+            series.Highlight.Line.Width.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void Highlight_with_builder_should_return_builder()
+        {
+            builder.Highlight(highlight => { }).ShouldBeSameAs(builder);
+        }
     }
 }

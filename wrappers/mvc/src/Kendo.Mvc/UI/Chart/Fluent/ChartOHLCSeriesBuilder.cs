@@ -166,5 +166,15 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Configures the series highlight
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>        
+        public ChartOHLCSeriesBuilder<T> Highlight(Action<ChartOHLCSeriesHighlightBuilder> configurator)
+        {
+            configurator(new ChartOHLCSeriesHighlightBuilder(Series.Highlight));
+            return this;
+        }
     }
 }

@@ -121,6 +121,7 @@
     <Compile Include="UI\Chart\ChartSeriesHighlightBuilderBaseTests.cs" />
     <Compile Include="UI\Chart\ChartPieSeriesHighlightBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartCandlestickSeriesHighlightBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartOHLCSeriesHighlightBuilderTests.cs" />
     <Compile Include="UI\Chart\OHLCData.cs" />
     <Compile Include="UI\Chart\PlotAreaBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSerializationTests.cs" />

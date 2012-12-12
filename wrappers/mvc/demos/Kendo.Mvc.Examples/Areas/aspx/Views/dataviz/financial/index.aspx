@@ -12,7 +12,7 @@
         ))
         .DateField("Date")
         .Series(series => {
-            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+            series.OHLC(s => s.Open, s => s.High, s => s.Low, s => s.Close);
         })
         .Navigator(nav => nav
             .Series(series => {
