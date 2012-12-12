@@ -619,10 +619,6 @@ kendo_module({
             that.currentTargetOffset = getOffset(that.currentTarget);
 
             if (hint) {
-                if (that.hint) {
-                    that.hint.stop(true, true).remove();
-                }
-
                 that.hint = $.isFunction(hint) ? $(hint.call(that, that.currentTarget)) : hint;
 
                 var offset = getOffset(that.currentTarget);
@@ -704,10 +700,7 @@ kendo_module({
             var that = this;
 
             if (that.hint && !that.dropped) {
-                setTimeout(function() {
-                    that.hint.stop(true, true).animate(that.currentTargetOffset, "fast", that._afterEndHandler);
-                }, 0);
-
+                that.hint.animate(that.currentTargetOffset, "fast", that._afterEndHandler);
             } else {
                 that._afterEnd();
             }
