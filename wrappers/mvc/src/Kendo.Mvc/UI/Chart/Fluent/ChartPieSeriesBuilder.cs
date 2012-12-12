@@ -227,5 +227,15 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Configures the pie highlight
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>        
+        public ChartPieSeriesBuilder<T> Highlight(Action<ChartPieSeriesHighlightBuilder> configurator)
+        {
+            configurator(new ChartPieSeriesHighlightBuilder(Series.Highlight));
+            return this;
+        }
     }
 }

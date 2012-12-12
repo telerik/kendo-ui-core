@@ -4,12 +4,12 @@ namespace Kendo.Mvc.UI.Tests.Chart
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
-    public class ChartBubbleSeriesHighlightBuilderTests
+    public class ChartSeriesHighlightBuilderTests
     {
         protected ChartSeriesHighlight highlight;
         protected ChartBubbleSeriesHighlightBuilder builder;
 
-        public ChartBubbleSeriesHighlightBuilderTests()
+        public ChartSeriesHighlightBuilderTests()
         {
             highlight = new ChartSeriesHighlight();
             builder = new ChartBubbleSeriesHighlightBuilder(highlight);

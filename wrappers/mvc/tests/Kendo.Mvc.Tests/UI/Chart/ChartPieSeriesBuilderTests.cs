@@ -97,5 +97,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Connectors(c => { }).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Highlight_with_builder_should_configure_highlight()
+        {
+            builder.Highlight(highlight => { highlight.Border(1); });
+            series.Highlight.Border.Width.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void Highlight_with_builder_should_return_builder()
+        {
+            builder.Highlight(highlight => { }).ShouldBeSameAs(builder);
+        }
     }
 }
