@@ -3,11 +3,11 @@ namespace Kendo.Mvc.UI.Tests
     using System.Collections.Generic;
     using Xunit;
 
-    public class ChartMarginSerializerTests
+    public class ChartSpacingSerializerTests
     {
         private readonly ChartSpacing margin;
 
-        public ChartMarginSerializerTests()
+        public ChartSpacingSerializerTests()
         {
             margin = new ChartSpacing();
         }

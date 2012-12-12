@@ -135,7 +135,7 @@
     <Compile Include="UI\Chart\Serialization\ChartNumericAxisSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartTitleSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLegendSerializerTests.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartMarginSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartSpacingSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarLabelsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSeriesDefaultsSerializerTests.cs" />
@@ -160,6 +160,7 @@
     <Compile Include="UI\Chart\Serialization\ChartDateAxisSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisBaseUnitStepsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSeriesHighlightSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartElementBorderSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
     <Compile Include="UI\Editor\ImageBrowserControllerTests.cs" />
