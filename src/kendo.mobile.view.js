@@ -13,6 +13,16 @@
         attrValue = kendo.attrValue,
         roleSelector = kendo.roleSelector;
 
+    function initPopOvers(element) {
+        var popovers = element.find(roleSelector("popover")),
+            idx, length,
+            roles = ui.roles;
+
+        for (idx = 0, length = popovers.length; idx < length; idx ++) {
+            kendo.initWidget(popovers[idx], {}, ui.roles);
+        }
+    }
+
     var View = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -166,10 +176,7 @@
 
             that.model = model;
 
-            // PopOver widgets have to be initialized first, as they move their element out of the DOM.
-            element.find(roleSelector("popover")).each(function(){
-                kendo.initWidget(this, {}, ui.roles);
-            });
+            initPopOvers(element);
 
             if (model) {
                 kendo.bind(element.children(), model, ui, kendo.ui, kendo.dataviz.ui);
@@ -303,6 +310,9 @@
             that.header = element.children(roleSelector("header")).addClass("km-header");
             that.footer = element.children(roleSelector("footer")).addClass("km-footer");
             that.elements = that.header.add(that.footer);
+
+            initPopOvers(element);
+
             kendo.mobile.init(that.element.children());
             that.trigger(INIT, {layout: that});
         },
