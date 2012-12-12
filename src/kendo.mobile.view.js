@@ -28,7 +28,7 @@ kendo_module({
             roles = ui.roles;
 
         for (idx = 0, length = popovers.length; idx < length; idx ++) {
-            kendo.initWidget(popovers[idx], {}, ui.roles);
+            kendo.initWidget(popovers[idx], {}, roles);
         }
     }
 
