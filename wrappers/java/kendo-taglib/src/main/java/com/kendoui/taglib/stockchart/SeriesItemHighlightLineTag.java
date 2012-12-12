@@ -59,6 +59,14 @@ public class SeriesItemHighlightLineTag extends  BaseTag  /* interfaces *//* int
         setProperty("width", value);
     }
 
+    public String getColor() {
+        return (String)getProperty("color");
+    }
+
+    public void setColor(String value) {
+        setProperty("color", value);
+    }
+
     public float getOpacity() {
         return (float)getProperty("opacity");
     }

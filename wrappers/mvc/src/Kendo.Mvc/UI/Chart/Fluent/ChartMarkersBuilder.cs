@@ -1,5 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+
     /// <summary>
     /// Defines the fluent interface for configuring the chart data labels.
     /// </summary>
@@ -111,6 +113,16 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartMarkersBuilder Border(int width, string color, ChartDashType dashType)
         {
             lineMarkers.Border = new ChartElementBorder(width, color, dashType);
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the markers border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public ChartMarkersBuilder Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(lineMarkers.Border));
             return this;
         }
 

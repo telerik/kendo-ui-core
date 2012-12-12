@@ -85,10 +85,19 @@ namespace Kendo.Mvc.UI.Tests
             GetJson(series).ContainsKey("tooltip").ShouldBeFalse();
         }
 
-        protected static IDictionary<string, object> GetJson(IChartSeries series)
+        [Fact]
+        public void Should_serialize_highlight()
         {
-            return series.CreateSerializer().Serialize();
+            series.Highlight.Color = "red";
+            GetJson(series).ContainsKey("highlight").ShouldBeTrue();
         }
+
+        [Fact]
+        public void Should_not_serialize_default_highlight()
+        {
+            GetJson(series).ContainsKey("highlight").ShouldBeFalse();
+        }
+
         [Fact]
         public virtual void Serializes_type()
         {
@@ -303,6 +312,11 @@ namespace Kendo.Mvc.UI.Tests
         public void Should_not_serialize_border_settings_by_default()
         {
             GetJson(series).ContainsKey("border").ShouldEqual(false);
+        }
+
+        protected static IDictionary<string, object> GetJson(IChartSeries series)
+        {
+            return series.CreateSerializer().Serialize();
         }
     }
 }

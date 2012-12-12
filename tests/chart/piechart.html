@@ -379,20 +379,6 @@
                     ok(!sector.style.overlay);
                 });
 
-                test("highlightOverlay returns segment outline", function() {
-                    view = new ViewStub();
-
-                    segment.highlightOverlay(view);
-                    equals(view.log.sector.length, 1);
-                });
-
-                test("outline element has same model id", function() {
-                    view = new ViewStub();
-
-                    segment.highlightOverlay(view);
-                    equals(view.log.sector[0].style.data.modelId, segment.options.modelId);
-                });
-
                 test("sector has same model id", function() {
                     equals(sector.style.data.modelId, segment.options.modelId);
                 });
@@ -400,6 +386,58 @@
                 test("label has same model id", function() {
                     createSegment({ labels: { visible: true } });
                     equals(segment.label.options.modelId, segment.options.modelId);
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Segment / Highlight", {
+                    setup: function() {
+                        createSegment();
+                        view = new ViewStub();
+                    }
+                });
+
+                test("highlightOverlay renders a sector", function() {
+                    segment.highlightOverlay(view);
+                    equals(view.log.sector.length, 1);
+                });
+
+                test("highlightOverlay element has same model id", function() {
+                    segment.highlightOverlay(view);
+                    equals(view.log.sector[0].style.data.modelId, segment.options.modelId);
+                });
+
+                test("highlightOverlay renders default border width", function() {
+                    var outline = segment.highlightOverlay(view);
+
+                    equals(outline.options.strokeWidth, 1);
+                });
+
+                test("highlightOverlay renders custom border width", function() {
+                    segment.options.highlight.border.width = 2;
+                    var outline = segment.highlightOverlay(view);
+
+                    equals(outline.options.strokeWidth, 2);
+                });
+
+                test("highlightOverlay renders custom highlight color", function() {
+                    segment.options.highlight.color = "red";
+                    var outline = segment.highlightOverlay(view);
+
+                    equals(outline.options.fill, "red");
+                });
+
+                test("highlightOverlay renders custom border color", function() {
+                    segment.options.highlight.border.color = "red";
+                    var outline = segment.highlightOverlay(view);
+
+                    equals(outline.options.stroke, "red");
+                });
+
+                test("highlightOverlay renders custom border opacity", function() {
+                    segment.options.highlight.border.opacity = 0.5;
+                    var outline = segment.highlightOverlay(view);
+
+                    equals(outline.options.strokeOpacity, 0.5);
                 });
 
             })();

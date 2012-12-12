@@ -48,6 +48,19 @@ namespace Kendo.Mvc.UI.Tests.Gauge
         }
 
         [Fact]
+        public void Border_builder_should_configure_border()
+        {
+            builder.Border(b => b.Opacity(0.5));
+            pointer.Border.Opacity.ShouldEqual(0.5);
+        }
+
+        [Fact]
+        public void Border_builder_should_return_builder()
+        {
+            builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Shape_sets_Shape()
         {
             builder.Shape(GaugeLinearPointerShape.Arrow);

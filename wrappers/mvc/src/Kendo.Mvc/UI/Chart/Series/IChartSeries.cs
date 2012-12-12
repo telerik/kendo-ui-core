@@ -55,6 +55,15 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets the series highlight options
+        /// </summary>
+        ChartSeriesHighlight Highlight
+        {
+            get;
+            set;
+        }
         
         IChartSerializer CreateSerializer();
     }

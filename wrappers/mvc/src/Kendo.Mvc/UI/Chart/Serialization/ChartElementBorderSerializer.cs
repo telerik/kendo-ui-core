@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("width", border.Width, () => border.Width.HasValue)
-                .Add("opacity", border.Width, () => border.Opacity.HasValue)
+                .Add("opacity", border.Opacity, () => border.Opacity.HasValue)
                 .Add("dashType", border.DashType.ToString().ToLowerInvariant(), () => border.DashType.HasValue)
                 .Add("color", border.Color, () => border.Color.HasValue());
 
