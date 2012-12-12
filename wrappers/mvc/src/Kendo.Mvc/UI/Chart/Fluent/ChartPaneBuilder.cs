@@ -130,5 +130,15 @@ namespace Kendo.Mvc.UI.Fluent
             Pane.Border = new ChartElementBorder(width, color, dashType);
             return this;
         }
+
+        /// <summary>
+        /// Configures the pane border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public ChartPaneBuilder Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(Pane.Border));
+            return this;
+        }
     }
 }

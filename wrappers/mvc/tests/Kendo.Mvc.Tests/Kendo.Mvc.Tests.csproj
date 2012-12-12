@@ -118,6 +118,11 @@
     <Compile Include="UI\Chart\ChartOHLCSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartCandlestickSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisBaseUnitStepsBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartSeriesHighlightBuilderBaseTests.cs" />
+    <Compile Include="UI\Chart\ChartPieSeriesHighlightBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartCandlestickSeriesHighlightBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartOHLCSeriesHighlightBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartPaneBuilderTests.cs" />
     <Compile Include="UI\Chart\OHLCData.cs" />
     <Compile Include="UI\Chart\PlotAreaBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSerializationTests.cs" />
@@ -130,7 +135,7 @@
     <Compile Include="UI\Chart\Serialization\ChartNumericAxisSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartTitleSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLegendSerializerTests.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartMarginSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartSpacingSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarLabelsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSeriesDefaultsSerializerTests.cs" />
@@ -154,6 +159,8 @@
     <Compile Include="UI\Chart\Serialization\ChartCandlestickSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartDateAxisSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisBaseUnitStepsSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartSeriesHighlightSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartElementBorderSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
     <Compile Include="UI\Editor\ImageBrowserControllerTests.cs" />

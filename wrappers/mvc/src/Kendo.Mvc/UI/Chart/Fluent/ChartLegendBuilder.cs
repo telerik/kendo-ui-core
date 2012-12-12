@@ -1,5 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="ChartLegend"/>.
     /// </summary>
@@ -238,6 +240,16 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartLegendBuilder Border(int width, string color, ChartDashType dashType)
         {
             legend.Border = new ChartElementBorder(width, color, dashType);
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the legend border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public ChartLegendBuilder Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(legend.Border));
             return this;
         }
     }

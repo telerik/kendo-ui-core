@@ -24,6 +24,7 @@
                 candlestickChart,
                 root,
                 view,
+                firstPoint,
                 TOLERANCE = 1;
 
             function setupCandlestickChart(plotArea, options) {
@@ -36,6 +37,8 @@
 
                 candlestickChart.reflow();
                 candlestickChart.getViewElements(view);
+
+                firstPoint = candlestickChart.points[0];
             }
 
             function stubPlotArea(getCategorySlot, getValueSlot, options) {
@@ -236,6 +239,95 @@
 
                 test("sets group animation", function() {
                     equals(view.log.group[0].options.animation.type, "clip");
+                });
+
+                // ------------------------------------------------------------
+                module("Candlestick Chart / Rendering / Highlight", {
+                    setup: function() {
+                        setupCandlestickChart(plotArea, {
+                            series: [series]
+                        });
+                    }
+                });
+
+                test("highlightOverlay renders default border width", function() {
+                    var rect = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(rect.options.strokeWidth, 1);
+                });
+
+                test("highlightOverlay renders custom border width", function() {
+                    firstPoint.options.highlight.border.width = 2;
+                    var rect = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(rect.options.strokeWidth, 2);
+                });
+
+                test("highlightOverlay renders default border color (computed)", function() {
+                    firstPoint.color = "#ffffff";
+                    var rect = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(rect.options.stroke, "#cccccc");
+                });
+
+                test("highlightOverlay renders custom border color", function() {
+                    firstPoint.options.border.color = "red";
+                    var rect = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(rect.options.stroke, "red");
+                });
+
+                test("highlightOverlay renders default border opacity", function() {
+                    var rect = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(rect.options.strokeOpacity, 1);
+                });
+
+                test("highlightOverlay renders custom border opacity", function() {
+                    firstPoint.options.highlight.border.opacity = 0.5;
+                    var rect = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(rect.options.strokeOpacity, 0.5);
+                });
+
+                test("highlightOverlay renders default border width", function() {
+                    var rect = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(rect.options.strokeWidth, 1);
+                });
+
+                test("highlightOverlay renders custom line width", function() {
+                    firstPoint.options.highlight.line.width = 2;
+                    var line = firstPoint.highlightOverlay(view).children[1];
+
+                    equals(line.options.strokeWidth, 2);
+                });
+
+                test("highlightOverlay renders default line color (computed)", function() {
+                    firstPoint.color = "#ffffff";
+                    var line = firstPoint.highlightOverlay(view).children[1];
+
+                    equals(line.options.stroke, "#cccccc");
+                });
+
+                test("highlightOverlay renders custom line color", function() {
+                    firstPoint.options.highlight.line.color = "red";
+                    var line = firstPoint.highlightOverlay(view).children[1];
+
+                    equals(line.options.stroke, "red");
+                });
+
+                test("highlightOverlay renders default line opacity", function() {
+                    var line = firstPoint.highlightOverlay(view).children[1];
+
+                    equals(line.options.strokeOpacity, 1);
+                });
+
+                test("highlightOverlay renders custom line opacity", function() {
+                    firstPoint.options.highlight.line.opacity = 0.5;
+                    var line = firstPoint.highlightOverlay(view).children[1];
+
+                    equals(line.options.strokeOpacity, 0.5);
                 });
 
             })();

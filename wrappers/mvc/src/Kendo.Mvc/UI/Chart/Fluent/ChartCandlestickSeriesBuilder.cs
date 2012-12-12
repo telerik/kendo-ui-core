@@ -1,5 +1,6 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
     using Kendo.Mvc.UI;
 
     /// <summary>
@@ -46,6 +47,16 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Series.Overlay = overlay;
 
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the series highlight
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>        
+        public ChartCandlestickSeriesBuilder<T> Highlight(Action<ChartCandlestickSeriesHighlightBuilder> configurator)
+        {
+            configurator(new ChartCandlestickSeriesHighlightBuilder(Series.Highlight));
             return this;
         }
     }

@@ -87,5 +87,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
             builder.Opacity(0.5);
             tooltip.Opacity.ShouldEqual(0.5);
         }
+
+        [Fact]
+        public void Border_builder_should_configure_border()
+        {
+            builder.Border(b => b.Opacity(0.5));
+            tooltip.Border.Opacity.ShouldEqual(0.5);
+        }
+
+        [Fact]
+        public void Border_builder_should_return_builder()
+        {
+            builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
@@ -226,6 +227,16 @@ namespace Kendo.Mvc.UI.Fluent
         public TBuilder Border(int width, string color, ChartDashType dashType)
         {
             labels.Border = new ChartElementBorder(width, color, dashType);
+            return this as TBuilder;
+        }
+
+        /// <summary>
+        /// Configures the label border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public TBuilder Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(labels.Border));
             return this as TBuilder;
         }
 

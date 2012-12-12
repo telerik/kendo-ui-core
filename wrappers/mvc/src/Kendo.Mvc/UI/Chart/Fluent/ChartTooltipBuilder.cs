@@ -1,5 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+
     /// <summary>
     /// Defines the fluent interface for configuring the chart data points tooltip.
     /// </summary>
@@ -178,6 +180,16 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartTooltipBuilder Border(int width, string color)
         {
             tooltip.Border = new ChartElementBorder(width, color, ChartDashType.Solid);
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the tooltip border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public ChartTooltipBuilder Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(tooltip.Border));
             return this;
         }
 
