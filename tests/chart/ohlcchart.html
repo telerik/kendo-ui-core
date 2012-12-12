@@ -24,6 +24,7 @@
                 ohlcChart,
                 root,
                 view,
+                firstPoint,
                 TOLERANCE = 1;
 
             function setupOHLCChart(plotArea, options) {
@@ -36,6 +37,8 @@
 
                 ohlcChart.reflow();
                 ohlcChart.getViewElements(view);
+
+                firstPoint = ohlcChart.points[0];
             }
 
             function stubPlotArea(getCategorySlot, getValueSlot, options) {
@@ -204,6 +207,55 @@
 
                 test("sets group animation", function() {
                     equals(view.log.group[0].options.animation.type, "clip");
+                });
+
+                // ------------------------------------------------------------
+                module("OHLC Chart / Rendering / Highlight", {
+                    setup: function() {
+                        setupOHLCChart(plotArea, {
+                            series: [series]
+                        });
+                    }
+                });
+
+                test("highlightOverlay renders default line width", function() {
+                    var line = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(line.options.strokeWidth, 1);
+                });
+
+                test("highlightOverlay renders custom line width", function() {
+                    firstPoint.options.highlight.line.width = 2;
+                    var line = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(line.options.strokeWidth, 2);
+                });
+
+                test("highlightOverlay renders default line color", function() {
+                    firstPoint.color = "#ffffff";
+                    var line = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(line.options.stroke, "#ffffff");
+                });
+
+                test("highlightOverlay renders custom line color", function() {
+                    firstPoint.options.highlight.line.color = "red";
+                    var line = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(line.options.stroke, "red");
+                });
+
+                test("highlightOverlay renders default line opacity", function() {
+                    var line = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(line.options.strokeOpacity, 1);
+                });
+
+                test("highlightOverlay renders custom line opacity", function() {
+                    firstPoint.options.highlight.line.opacity = 0.5;
+                    var line = firstPoint.highlightOverlay(view).children[0];
+
+                    equals(line.options.strokeOpacity, 0.5);
                 });
 
             })();

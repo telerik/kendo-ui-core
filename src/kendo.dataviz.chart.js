@@ -3985,7 +3985,7 @@ kendo_module({
                 lineStyle = deepExtend(data, {
                     strokeWidth: highlight.line.width,
                     strokeOpacity: highlight.line.opacity,
-                    stroke: point.color
+                    stroke: highlight.line.color || point.color
                 }),
                 group = view.createGroup();
 
