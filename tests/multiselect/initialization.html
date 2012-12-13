@@ -36,6 +36,15 @@
                 }
             });
 
+            test("MultiSelect wraps input element", function() {
+                var multiselect = new MultiSelect(select),
+                    wrapper = multiselect.wrapper;
+
+                equal(wrapper[0].nodeName, "DIV");
+                ok(wrapper.hasClass("k-widget"));
+                ok(wrapper.hasClass("k-multiselect"));
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

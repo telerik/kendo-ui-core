@@ -14,15 +14,35 @@ kendo_module({
     var MultiSelect = Widget.extend({
 
         init: function(element, options) {
+            var that = this;
 
+            Widget.fn.init.call(that, element, options);
+
+            that._wrapper();
         },
 
         options: {
             name: "MultiSelect"
         },
 
+        events: [
+
+        ],
+
         destroy: function() {
 
+        },
+
+        _wrapper: function() {
+            var that = this,
+                element = that.element,
+                wrapper = element.parent("span.k-multiselect");
+
+            if (!wrapper[0]) {
+                wrapper = element.wrap('<div class="k-widget k-multiselect" />').parent();
+            }
+
+            that.wrapper = wrapper;
         }
     });
 
