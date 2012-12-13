@@ -50,3 +50,10 @@ cookbook_file "/var/lib/jenkins/hudson.plugins.campfire.CampfireNotifier.xml" do
     group "jenkins"
     mode "0600"
 end
+
+cookbook_file "/etc/sysconfig/jenkins" do
+    source "sysconfig-jenkins"
+    owner "root"
+    group "root"
+    mode "0600"
+end
