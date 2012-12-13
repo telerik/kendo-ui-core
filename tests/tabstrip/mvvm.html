@@ -212,7 +212,7 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.find("li:first").click();
+                dom.find("li:first").trigger('mouseup');
 
                 equal(viewModel.tab, "foo");
             });
@@ -227,7 +227,7 @@
                 viewModel.tab = viewModel.tabs[1];
                 kendo.bind(dom, viewModel);
 
-                dom.find("li:first").click();
+                dom.find("li:first").trigger("mouseup");
 
                 equal(viewModel.tab, viewModel.tabs[0]);
             });

@@ -180,7 +180,7 @@
                 .toggleClass("k-state-default", false)
                 .toggleClass("k-state-disabled", true);
 
-        item.find("> .k-link").trigger("click");
+        item.find("> .k-link").trigger("mouseup");
 
         equal(item.find(".k-group").css("display"), "none");
     });
@@ -188,7 +188,7 @@
     test("clicking expanded items should toggle arrow", function() {
         var item = getRootItem(3);
 
-        item.find("> .k-link").trigger("click");
+        item.find("> .k-link").trigger("mouseup");
 
         ok(item.find(".k-icon").hasClass("k-i-arrow-s"));
     });
@@ -196,7 +196,7 @@
     test("clicking collapsed items should expand them", function() {
         var item = getRootItem(2);
 
-        item.find("> .k-link").trigger("click");
+        item.find("> .k-link").trigger("mouseup");
 
         equal(item.find(".k-group").css("display"), "block");
     });
@@ -204,7 +204,7 @@
     test("clicking collapsed items should toggle arrow", function() {
         var item = getRootItem(0);
 
-        item.find("> .k-link").trigger("click");
+        item.find("> .k-link").trigger("mouseup");
 
         ok(item.find(".k-icon").hasClass("k-i-arrow-n"));
     });
@@ -212,7 +212,7 @@
     test("clicking collapsed items should not expand child groups", function() {
         var item = getRootItem(4);
 
-        item.find("> .k-link").trigger("click");
+        item.find("> .k-link").trigger("mouseup");
 
         equal(item.find(".k-group .k-group").css("display"), "none");
     });
@@ -222,7 +222,7 @@
 
         getPanelBar().expand(item);
 
-        item.find(".k-item > .k-link").trigger("click");
+        item.find(".k-item > .k-link").trigger("mouseup");
 
         equal(item.find(".k-group").css("display"), "block");
     });
@@ -230,7 +230,7 @@
     test("clicking arrows toggles child groups", function() {
         var item = getRootItem(3);
 
-        item.find("> .k-link > .k-icon").trigger("click");
+        item.find("> .k-link > .k-icon").trigger("mouseup");
 
         equal(item.find(".k-group").css("display"), "block");
     });

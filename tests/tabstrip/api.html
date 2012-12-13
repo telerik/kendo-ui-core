@@ -43,7 +43,7 @@
                 $("#TabStrip1").kendoTabStrip({ animation: false, select: Select, activate: Activate });
                 $("#parentTabStrip").kendoTabStrip({ animation: false });
                 $("#childTabStrip").kendoTabStrip({ animation: false });
-                
+
             });
 
         </script>
@@ -165,7 +165,7 @@
             var tabstrip = getTabStrip();
             var $item = $(getRootItem(6));
 
-            var e = new $.Event('click');
+            var e = new $.Event('mouseup');
 
             $item.find('> .k-link').trigger(e);
 
@@ -206,7 +206,7 @@
 
             isRaised = false;
 
-            item.find('> .k-link').trigger('click');
+            item.find('> .k-link').trigger('mouseup');
 
             ok(isRaised);
         });
@@ -217,7 +217,7 @@
 
             isActivateRaised = false;
 
-            item.find('> .k-link').trigger('click');
+            item.find('> .k-link').trigger('mouseup');
 
             setTimeout(function () {
                 ok(isActivateRaised);
@@ -228,7 +228,7 @@
         test('clicking first item should select it', function() {
             var item = getRootItem(0);
 
-            item.find('.k-link').trigger('click');
+            item.find('.k-link').trigger('mouseup');
 
             ok(item.hasClass('k-state-active'));
         });
@@ -323,7 +323,7 @@
 
             isRaised = false;
 
-            item.find('> .k-link').trigger('click');
+            item.find('> .k-link').trigger('mouseup');
 
             ok(isRaised);
         });
