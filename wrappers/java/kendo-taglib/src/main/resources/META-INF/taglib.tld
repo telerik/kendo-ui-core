@@ -4375,14 +4375,6 @@ series when binding to grouped data.</description>
         </attribute>
 
         <attribute>
-            <description>Name template for auto-generated
-series when binding to grouped data.</description>
-            <name>afield</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>The data field containing the bubble category name.</description>
             <name>categoryField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4989,17 +4981,17 @@ Template variables:</description>
         </attribute>
 
         <attribute>
-            <description>The border opacity.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
             <description>The border color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The border opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -5016,6 +5008,13 @@ Template variables:</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The line color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -11392,14 +11391,6 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>Name template for auto-generated
-series when binding to grouped data.</description>
-            <name>afield</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>The data field containing the bubble category name.</description>
             <name>categoryField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12006,17 +11997,17 @@ Template variables:</description>
         </attribute>
 
         <attribute>
-            <description>The border opacity.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
             <description>The border color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The border opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -12033,6 +12024,13 @@ Template variables:</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The line color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>

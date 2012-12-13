@@ -197,14 +197,6 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("spacing", value);
     }
 
-    public String getAfield() {
-        return (String)getProperty("aField");
-    }
-
-    public void setAfield(String value) {
-        setProperty("aField", value);
-    }
-
     public String getCategoryField() {
         return (String)getProperty("categoryField");
     }
