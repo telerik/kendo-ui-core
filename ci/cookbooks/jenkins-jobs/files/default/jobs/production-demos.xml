@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Runs all unit tests on Firefox and Chrome		</description>
+  <description>Update the demos on http://mvc-kendobuild/production/ </description>
   <logRotator>
-    <daysToKeep>10</daysToKeep>
-    <numToKeep>20</numToKeep>
-    <artifactDaysToKeep>10</artifactDaysToKeep>
-    <artifactNumToKeep>20</artifactNumToKeep>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
@@ -25,7 +25,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>master</name>
+        <name>production</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <disableSubmodules>false</disableSubmodules>
@@ -55,43 +55,20 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
-    <com.cloudbees.jenkins.GitHubPushTrigger>
-      <spec></spec>
-    </com.cloudbees.jenkins.GitHubPushTrigger>
-  </triggers>
+  <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-        <command>export PATH=/usr/local/bin/:$PATH; bundle --without development &amp;&amp; rake build:master:tests</command>
+    <command>export PATH=/usr/local/bin:$PATH; bundle --without development &amp;&amp; npm install &amp;&amp; rake build:production:demos</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder>
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
-    <hudson.tasks.junit.JUnitResultArchiver>
-      <testResults>*-test-results.xml</testResults>
-      <keepLongStdio>false</keepLongStdio>
-      <testDataPublishers/>
-    </hudson.tasks.junit.JUnitResultArchiver>
-    <hudson.plugins.git.GitPublisher>
-      <configVersion>2</configVersion>
-      <pushMerge>false</pushMerge>
-      <pushOnlyIfSuccess>true</pushOnlyIfSuccess>
-      <branchesToPush>
-        <hudson.plugins.git.GitPublisher_-BranchToPush>
-          <targetRepoName>origin</targetRepoName>
-          <branchName>stable</branchName>
-        </hudson.plugins.git.GitPublisher_-BranchToPush>
-      </branchesToPush>
-    </hudson.plugins.git.GitPublisher>
     <hudson.plugins.campfire.CampfireNotifier>
       <room>
         <name>Dev Daily</name>
         <id>488924</id>
       </room>
-      <hudsonUrl>http://kendobuild/build/</hudsonUrl>
+      <hudsonUrl>http://mvc-kendobuild/build/</hudsonUrl>
     </hudson.plugins.campfire.CampfireNotifier>
   </publishers>
   <buildWrappers/>

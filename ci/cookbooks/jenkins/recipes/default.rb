@@ -1,4 +1,4 @@
-JENKINS_URL = 'http://localhost:8080/'
+JENKINS_URL = 'http://localhost:8080/build/'
 
 package "dejavu-sans-fonts"
 
