@@ -210,13 +210,13 @@
             }
 
             element
-                .on("touchend" + NS + " click" + NS, clickableItems, function(e) {
+                .on("touchend" + NS + " mouseup" + NS, clickableItems, function(e) {
                     if (that._click($(e.currentTarget))) {
                         e.preventDefault();
                     }
                 })
                 .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
-                .on("touchend" + NS + " click" + NS, disabledItems, false)
+                .on("touchend" + NS + " mouseup" + NS, disabledItems, false)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, function() {
                     var item = that.select();

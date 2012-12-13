@@ -165,7 +165,7 @@
 
             that.wrapper
                 .on(CLICK + NS, DISABLEDLINKS, false)
-                .on("touchend" + NS + " click" + NS, CLICKABLEITEMS, function(e) {
+                .on("touchend" + NS + " mouseup" + NS, CLICKABLEITEMS, function(e) {
                     if (that._click($(e.currentTarget))) {
                         e.preventDefault();
                     }
