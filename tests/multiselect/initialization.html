@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MultiSelect initialization</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">MultiSelect Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var MultiSelect = kendo.ui.MultiSelect,
+                select;
+
+            module("kendo.ui.MultiSelect initialization", {
+                setup: function() {
+                    select = $("<select />").appendTo(document.body);
+                },
+                teardown: function() {
+                    if (select.data("kendoMultiSelect")) {
+                        select.data("kendoMultiSelect").destroy();
+                    }
+
+                    select.parents(".k-widget").remove();
+                }
+            });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
