@@ -11,7 +11,7 @@ puts %Q{
         [High] DECIMAL(9,3) NOT NULL,
         [Low] DECIMAL(9,3) NOT NULL,
         [Close] DECIMAL(9,3) NOT NULL,
-        [Volume] INT NOT NULL
+        [Volume] BIGINT NOT NULL
     )
 }
 
