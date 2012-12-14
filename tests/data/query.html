@@ -134,8 +134,36 @@
                 equal(result[2], "b");
             });
 
-            test("orderBy sorts numbers and nulls", function () {
-                var data = [1, null, 0, 3];
+            test("orderBy sorts negative numbers and zeros", function () {
+                var data = [1, -2, 0, 3];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 4);
+                equal(result[0], -2);
+                equal(result[1], 0);
+                equal(result[2], 1);
+                equal(result[3], 3);
+            });
+
+            test("orderBy sorts multiple negative numbers and zeros", function () {
+                var data = [1, -2, 0, -5];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 4);
+                equal(result[0], -5);
+                equal(result[1], -2);
+                equal(result[2], 0);
+                equal(result[3], 1);
+            });
+
+            test("orderBy sorts multiple negative numbers zeros and nulls", function () {
+                var data = [1, -2, 0, null];
 
                 var result = new Query(data).orderBy(function (item) {
                     return item;
@@ -143,10 +171,93 @@
 
                 equal(result.length, 4);
                 equal(result[0], null);
-                equal(result[1], 0);
-                equal(result[2], 1);
-                equal(result[3], 3);
+                equal(result[1], -2);
+                equal(result[2], 0);
+                equal(result[3], 1);
             });
+
+            test("orderBy sorts multiple negative numbers", function () {
+                var data = [-2, -33, -5];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0], -33);
+                equal(result[1], -5);
+                equal(result[2], -2);
+            });
+
+            test("orderByDescending sorts numbers and nulls", function () {
+                var data = [1, null, 0, 3];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 4);
+                equal(result[3], null);
+                equal(result[2], 0);
+                equal(result[1], 1);
+                equal(result[0], 3);
+            });
+
+            test("orderByDescending sorts negative numbers and zeros", function () {
+                var data = [1, -2, 0, 3];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 4);
+                equal(result[3], -2);
+                equal(result[2], 0);
+                equal(result[1], 1);
+                equal(result[0], 3);
+            });
+
+            test("orderByDescending sorts multiple negative numbers and zeros", function () {
+                var data = [1, -2, 0, -5];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 4);
+                equal(result[3], -5);
+                equal(result[2], -2);
+                equal(result[1], 0);
+                equal(result[0], 1);
+            });
+
+            test("orderByDescending sorts multiple negative numbers zeros and nulls", function () {
+                var data = [1, -2, 0, null];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 4);
+                equal(result[3], null);
+                equal(result[2], -2);
+                equal(result[1], 0);
+                equal(result[0], 1);
+            });
+
+            test("orderByDescending sorts multiple negative numbers", function () {
+                var data = [-2, -33, -5];
+
+                var result = new Query(data).orderByDescending(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[2], -33);
+                equal(result[1], -5);
+                equal(result[0], -2);
+            });
+
 
             test("orderByDescending sorts numbers and nulls", function () {
                 var data = [1, null, 0, 3];

@@ -612,11 +612,11 @@
                     return 0;
                 }
 
-                if ((a && !b) || b == null) {
+                if ((a && !b && a > 0) || b == null) {
                     return 1;
                 }
 
-                if (b && !a) {
+                if (b && !a && b > 0) {
                     return -1;
                 }
 
@@ -634,11 +634,11 @@
                     return 0;
                 }
 
-                if ((a && !b) || b == null) {
+                if ((a && !b && a > 0) || b == null) {
                     return -1;
                 }
 
-                if ((b && !a) || a == null) {
+                if ((b && !a && b > 0) || a == null) {
                     return 1;
                 }
 
