@@ -60,6 +60,7 @@ kendo_module({
         options: {
             name: "View",
             title: "",
+            reload: false,
             defaultTransition: "",
             stretch: false,
             zoom: false,
@@ -74,6 +75,11 @@ kendo_module({
             }
 
             kendo.destroy(this.element);
+        },
+
+        purge: function() {
+            this.destroy();
+            this.element.remove();
         },
 
         showStart: function() {
@@ -450,7 +456,7 @@ kendo_module({
             if (!url) {
                 element = that.rootView;
             } else {
-                element = container.children("[" + attr("url") + "='" + url + "']");
+                element = container.children("[" + attr("url") + "='" + urlPath + "']");
 
                 if (!element[0] && !remote) {
                     element = container.children(local ? urlPath : "#" + urlPath);
@@ -458,6 +464,11 @@ kendo_module({
             }
 
             view = element.data("kendoView");
+
+            if (view && view.reload) {
+                view.purge();
+                element = [];
+            }
 
             if (element[0]) {
                 if (!view) {
@@ -487,7 +498,8 @@ kendo_module({
                 defaultTransition: that.transition,
                 loader: that.loader,
                 container: that.container,
-                layout: layout
+                layout: layout,
+                reload: attrValue(element, "reload")
             };
 
             return kendo.initWidget(element, viewOptions, ui.roles);
@@ -517,6 +529,7 @@ kendo_module({
         _createRemoteView: function(url, html) {
             var that = this,
                 sandbox = that.sandbox,
+                urlPath = url.split("?")[0],
                 container = that.container,
                 views,
                 modalViews,
@@ -532,7 +545,7 @@ kendo_module({
 
             views = that._hideViews(sandbox);
             view = views.first();
-            view.hide().attr(attr("url"), url);
+            view.hide().attr(attr("url"), urlPath);
 
             that._setupLayouts(sandbox);
 
