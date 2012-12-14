@@ -1708,7 +1708,8 @@ kendo_module({
                 categoryMap.push(lastCategoryIndicies);
             }
 
-            if (categoryMap.length > 0 && last(categoryMap).length === 0) {
+            if (!options.max && (last(categoryMap) || []).length === 0) {
+                // Drop the last group if the user has not requested it
                 categoryMap.pop();
                 groups.pop();
             }

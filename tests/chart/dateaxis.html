@@ -159,6 +159,21 @@
                     });
 
                     same(categories, [
+                        new Date("2012/02/01"), new Date("2012/02/04")
+                    ]);
+                });
+
+                test("Empty categories are kept when max value is specified", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/05")
+                        ],
+                        max: new Date("2012/02/05"),
+                        baseUnit: "days",
+                        baseUnitStep: 3
+                    });
+
+                    same(categories, [
                         new Date("2012/02/01"), new Date("2012/02/04"),
                         new Date("2012/02/07")
                     ]);
