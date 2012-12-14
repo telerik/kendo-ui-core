@@ -60,6 +60,7 @@ kendo_module({
         options: {
             name: "View",
             title: "",
+            reload: false,
             defaultTransition: "",
             stretch: false,
             zoom: false,
@@ -74,6 +75,11 @@ kendo_module({
             }
 
             kendo.destroy(this.element);
+        },
+
+        purge: function() {
+            this.destroy();
+            this.element.remove();
         },
 
         showStart: function() {
@@ -459,6 +465,11 @@ kendo_module({
 
             view = element.data("kendoView");
 
+            if (view && view.reload) {
+                view.purge();
+                element = [];
+            }
+
             if (element[0]) {
                 if (!view) {
                     view = that._createView(element);
@@ -487,7 +498,8 @@ kendo_module({
                 defaultTransition: that.transition,
                 loader: that.loader,
                 container: that.container,
-                layout: layout
+                layout: layout,
+                reload: attrValue(element, "reload")
             };
 
             return kendo.initWidget(element, viewOptions, ui.roles);

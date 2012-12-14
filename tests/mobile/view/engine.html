@@ -168,6 +168,31 @@
                 viewEngine.showView("page2.html");
             });
 
+            asyncTest("Reloads remote view if reload configuration is set", 1, function() {
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><div data-reload="true" data-role="view" id="page2">Page 2</div></body>'
+                });
+
+                var view,
+                    callback3 = function(e) {
+                        start();
+                        notEqual(view, e.view);
+                    },
+                    callback2 = function(e) {
+                        viewEngine.one("viewShow", callback3);
+                        viewEngine.showView("page2.html");
+                    },
+                    callback1 = function(e) {
+                        view = e.view;
+                        viewEngine.one("viewShow", callback2);
+                        viewEngine.showView("#foo");
+                    };
+
+                viewEngine.one("viewShow", callback1);
+                viewEngine.showView("page2.html");
+            });
+
             asyncTest("Reuses remote view with different parameters", 1, function() {
                 var responseText =  '<body><div data-role="view" id="page2">Page 2</div></body>';
                 $.mockjax({
