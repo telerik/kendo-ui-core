@@ -6964,8 +6964,6 @@ kendo_module({
 
         linePoints: function() {
             var crosshair = this,
-                options = crosshair.options,
-                width = options.width,
                 axis = crosshair.axis,
                 vertical = axis.options.vertical,
                 plotAreaBox = axis.plotArea.backgroundBox(),
@@ -7072,7 +7070,7 @@ kendo_module({
                 axis = tooltip.axis,
                 element = tooltip.element,
                 chartPadding = tooltip.chartPadding,
-                value, width, height, content,
+                value, content,
                 anchor, top, left, template;
 
             if (!point) {
