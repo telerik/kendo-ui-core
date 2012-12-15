@@ -42,8 +42,51 @@
 
                 equal(wrapper[0].nodeName, "DIV");
                 ok(wrapper.hasClass("k-widget"));
+                ok(wrapper.hasClass("k-header"));
                 ok(wrapper.hasClass("k-multiselect"));
             });
+
+            test("MultiSelect copies className of the element to the wrapper", function() {
+                var multiselect = new MultiSelect(select.addClass("test")),
+                    wrapper = multiselect.wrapper;
+
+                ok(wrapper.hasClass("test"));
+            });
+
+            test("MultiSelect shows wrapper even if element is hidden", function() {
+                var multiselect = new MultiSelect(select.hide()),
+                    wrapper = multiselect.wrapper;
+
+                ok(wrapper.is(":visible"));
+            });
+
+            test("MultiSelect creates list", function() {
+                var multiselect = new MultiSelect(select);
+
+                ok(multiselect.list);
+            });
+
+            test("MultiSelect appends list to the wrapper", function() {
+                var multiselect = new MultiSelect(select);
+
+                equal(multiselect._innerWraper.children().first()[0], multiselect.list[0]);
+            });
+
+            test("MultiSelect creates input element", function() {
+                var multiselect = new MultiSelect(select);
+
+                ok(multiselect.input);
+            });
+
+            test("MultiSelect appends input to the wrapper", function() {
+                var multiselect = new MultiSelect(select);
+
+                equal(multiselect._innerWraper.children().eq(1)[0], multiselect.input[0]);
+            });
+
+            /*test("MultiSelect creates DataSource", function() {
+
+            });*/
 
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

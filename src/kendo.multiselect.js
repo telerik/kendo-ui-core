@@ -19,6 +19,10 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that._wrapper();
+            that._list();
+            that._input();
+
+            that.element.hide();
         },
 
         options: {
@@ -33,16 +37,32 @@ kendo_module({
 
         },
 
+        _input: function() {
+            this.input = $('<input class="k-input" style="width: 100%" />')
+                            .appendTo(this._innerWraper);
+        },
+
+        _list: function() {
+            this.list = $('<ul unselectable="on" class="k-list k-reset"/>')
+                            .appendTo(this._innerWraper);
+        },
+
         _wrapper: function() {
             var that = this,
                 element = that.element,
                 wrapper = element.parent("span.k-multiselect");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap('<div class="k-widget k-multiselect" />').parent();
+                wrapper = element.wrap('<div class="k-widget k-multiselect k-header" />').parent();
+                wrapper[0].style.cssText = element[0].style.cssText;
+
+                $('<div class="k-multiselect-wrap" />').insertBefore(element);
             }
 
-            that.wrapper = wrapper;
+            that.wrapper = wrapper.addClass(element[0].className)
+                                  .css("display", "");
+
+            that._innerWraper = $(wrapper[0].firstChild);
         }
     });
 
