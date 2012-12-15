@@ -19,7 +19,7 @@ puts %Q{
     )
     GO
 
-    CREATE CLUSTERED INDEX IX_Intraday_Date
+    CREATE INDEX IX_Intraday_Date
         ON Intraday ([Date])
     GO
 }
