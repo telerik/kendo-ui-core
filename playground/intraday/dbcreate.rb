@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 require 'csv'
 
 # Switch to CRLF in output
