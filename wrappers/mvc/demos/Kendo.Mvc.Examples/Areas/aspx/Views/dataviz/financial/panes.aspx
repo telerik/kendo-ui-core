@@ -21,6 +21,7 @@
         .Series(series => {
             series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
             series.Column(s => s.Volume).Axis("volumeAxis")
+                  .Aggregate(ChartSeriesAggregate.Sum)
                   .Tooltip(tooltip => tooltip.Format("{0:C0}"));
         })
         .Navigator(nav => nav
