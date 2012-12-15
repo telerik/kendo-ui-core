@@ -154,67 +154,67 @@
     <value>Wyczyść filtr</value>
   </data>
   <data name="Filter_DateIsEqualTo" xml:space="preserve">
-    <value>jest równe</value>
+    <value>są równe</value>
   </data>
   <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
-    <value>jest późniejsze lub równe</value>
+    <value>są późniejsze lub równe</value>
   </data>
   <data name="Filter_DateIsGreaterThan" xml:space="preserve">
-    <value>jest późniejsze</value>
+    <value>są późniejsze niż</value>
   </data>
   <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
-    <value>jest wcześniejsze lub równe</value>
+    <value>są wcześniejsze lub równe</value>
   </data>
   <data name="Filter_DateIsLessThan" xml:space="preserve">
-    <value>jest wcześniejsze</value>
+    <value>są wcześniejsze niż</value>
   </data>
   <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
-    <value>jest inne niż</value>
+    <value>są inne niż</value>
   </data>
   <data name="Filter_NumberIsEqualTo" xml:space="preserve">
-    <value>jest równe</value>
+    <value>są równe</value>
   </data>
   <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
-    <value>jest większe lub równe</value>
+    <value>są większe lub równe</value>
   </data>
   <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
-    <value>jest większe</value>
+    <value>są większe niż</value>
   </data>
   <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
-    <value>jest mniejsze lub równe</value>
+    <value>są mniejsze lub równe</value>
   </data>
   <data name="Filter_NumberIsLessThan" xml:space="preserve">
-    <value>jest mniejsze niż</value>
+    <value>są mniejsze niż</value>
   </data>
   <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
-    <value>jest inne niż</value>
+    <value>są inne niż</value>
   </data>
   <data name="Filter_Info" xml:space="preserve">
     <value>Pokaż wiersze o wartościach które</value>
   </data>
   <data name="Filter_StringEndsWith" xml:space="preserve">
-    <value>Kończy się na</value>
+    <value>kończą się na</value>
   </data>
   <data name="Filter_StringIsEqualTo" xml:space="preserve">
-    <value>jest równe</value>
+    <value>są równe</value>
   </data>
   <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
-    <value>jest inne niż</value>
+    <value>są inne niż</value>
   </data>
   <data name="Filter_StringStartsWith" xml:space="preserve">
-    <value>Zaczyna się od</value>
+    <value>zaczynają się od</value>
   </data>
   <data name="Filter_StringContains" xml:space="preserve">
-    <value>Zawiera</value>
+    <value>zawierają</value>
   </data>
   <data name="Group_Empty" xml:space="preserve">
     <value>Przeciągnij nagłówek kolumny i upuść go tutaj aby pogrupować według tej kolumny</value>
   </data>
   <data name="Filter_EnumIsEqualTo" xml:space="preserve">
-    <value>jest równe</value>
+    <value>są równe</value>
   </data>
   <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
-    <value>jest inne niż</value>
+    <value>są inne niż</value>
   </data>
   <data name="Grid_Confirmation" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć ten rekord?</value>
@@ -241,10 +241,10 @@
     <value>Odśwież</value>
   </data>
   <data name="Filter_StringDoesNotContain" xml:space="preserve">
-    <value>Does not contain</value>
+    <value>nie zawierają</value>
   </data>
   <data name="Filter_Or" xml:space="preserve">
-    <value>Or</value>
+    <value>lub</value>
   </data>
   <data name="Editor_Bold" xml:space="preserve">
     <value>Wytłuszczenie</value>
