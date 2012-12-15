@@ -23,6 +23,15 @@
             var MultiSelect = kendo.ui.MultiSelect,
                 select;
 
+            function popuplateSelect() {
+                var options = [];
+                for (var i=0; i < 5; i++) {
+                    options.push("<option value='" + i + "'>Option" + i + "</option>");
+                }
+
+                select.html(options);
+            }
+
             module("kendo.ui.MultiSelect initialization", {
                 setup: function() {
                     select = $("<select />").appendTo(document.body);
@@ -60,16 +69,16 @@
                 ok(wrapper.is(":visible"));
             });
 
-            test("MultiSelect creates list", function() {
+            test("MultiSelect creates ul", function() {
                 var multiselect = new MultiSelect(select);
 
-                ok(multiselect.list);
+                ok(multiselect.container);
             });
 
-            test("MultiSelect appends list to the wrapper", function() {
+            test("MultiSelect appends ul to the wrapper", function() {
                 var multiselect = new MultiSelect(select);
 
-                equal(multiselect._innerWraper.children().first()[0], multiselect.list[0]);
+                equal(multiselect._innerWraper.children().first()[0], multiselect.container[0]);
             });
 
             test("MultiSelect creates input element", function() {
@@ -84,9 +93,31 @@
                 equal(multiselect._innerWraper.children().eq(1)[0], multiselect.input[0]);
             });
 
-            /*test("MultiSelect creates DataSource", function() {
+            test("MultiSelect builds templates", function() {
+                var multiselect = new MultiSelect(select);
 
-            });*/
+                ok(multiselect.itemTemplate);
+                ok(multiselect.tagTemplate);
+            });
+
+            test("MultiSelect creates DataSource", function() {
+                var multiselect = new MultiSelect(select);
+
+                ok(multiselect.dataSource);
+            });
+
+            test("MultiSelect binds DataSource if autoBind: true", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                equal(multiselect.ul.children().length, select.children().length);
+            });
+
+            test("MultiSelect creates popup", function() {
+                var multiselect = new MultiSelect(select);
+
+                ok(multiselect.popup);
+            });
 
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
