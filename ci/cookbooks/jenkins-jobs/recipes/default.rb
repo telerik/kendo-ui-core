@@ -26,16 +26,16 @@ bash "Update jenkins jobs" do
     }
 end
 
-[ "", "/staging", "/production", "/functional-tests/custom-sites", "/download-builder-staging" ].each do |dir|
+[ "", "/staging", "/production", "/functional-tests", "/functional-tests/custom-sites", "/download-builder-staging" ].each do |dir|
     directory "/var/www#{dir}" do
         owner "jenkins"
-        group "jenkins"
+        group "nogroup"
     end
 end
 
 [ "", "/Stable", "/Production", "/WinJS" ].each do |dir|
     directory "/kendo-builds#{dir}" do
         owner "jenkins"
-        group "jenkins"
+        group "nogroup"
     end
 end

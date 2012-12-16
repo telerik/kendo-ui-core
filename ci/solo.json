@@ -1,6 +1,8 @@
 { "run_list": [
+    "recipe[apt]",
     "recipe[git]",
     "recipe[ruby]",
+    "recipe[nodejs]",
     "recipe[java]",
     "recipe[mono]",
     "recipe[x11]",
