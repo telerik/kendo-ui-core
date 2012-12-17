@@ -162,14 +162,6 @@ module CodeGen::Java::TLD
             }, 0, '<>%')
 
     OPTION_ATTRIBUTE = ERB.new(%{
-<<<<<<< HEAD
-            <attribute>
-                <description><%= description %></description>
-                <name><%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
-                <rtexprvalue>true</rtexprvalue>
-                <type><%= CodeGen::Java::TYPES[type] %></type>
-            </attribute>
-=======
         <attribute>
             <description><%= description %></description>
             <name><%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
@@ -178,7 +170,6 @@ module CodeGen::Java::TLD
             <type><%= java_type %></type>
 <% end %>
         </attribute>
->>>>>>> Use unique composite options.
     }, 0, '<>%')
 
     EVENT_ATTRIBUTE = ERB.new(%{
@@ -196,6 +187,8 @@ class Generator
     end
 
     def component(component)
+
+        component.delete_ignored
 
         @tld += component.to_tld
 

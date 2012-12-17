@@ -18,6 +18,9 @@ module CodeGen::Java::JSP
             Event
         end
 
+        def array_option_class
+            ArrayOption
+        end
     end
 
     class Component < CodeGen::Java::Component
@@ -88,6 +91,9 @@ module CodeGen::Java::JSP
     class ArrayOption < CompositeOption
         include CodeGen::Array
 
+        def to_setter
+            ARRAY_SETTER.result(binding)
+        end
     end
 
     class ArrayItem < CompositeOption
@@ -116,6 +122,15 @@ EVENT_SETTER = ERB.new(%{
     }
 })
 
+ARRAY_SETTER = ERB.new(%{
+    public void set<%= name.pascalize %>(<%= tag_class %> value) {
+<% if name == 'items' %>
+        <%= name %> = value.<%= name %>();
+<% else %>
+        setProperty("<%= name %>", value.<%= name %>());
+<% end %>
+    }
+})
 EVENT_GETTER_AND_SETTER = ERB.new(%{
     public String get<%= name.pascalize %>() {
         Function property = ((Function)getProperty("<%= name %>"));
@@ -130,7 +145,8 @@ EVENT_GETTER_AND_SETTER = ERB.new(%{
     }
 })
 
-DATA_SOURCE_SETTER = %{    @Override
+DATA_SOURCE_SETTER = %{
+    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }
@@ -141,8 +157,7 @@ COMPONENT_ATTRIBUTES = ERB.new(%{//>> Attributes
     public static String tagName() {
         return "<%= tag_name %>";
     }
-<%= unique_composite_options.map { |option| option.to_setter }.join %><%= events.map { |event| event.to_setter }.join %>
-<%= unique_options.map { |option| option.to_getter_and_setter }.join %><%= events.map { |event| event.to_getter_and_setter }.join %>
+<%= unique_composite_options.map { |option| option.to_setter }.join %><%= events.map { |event| event.to_setter }.join %><%= unique_options.map { |option| option.to_getter_and_setter }.join %><%= events.map { |event| event.to_getter_and_setter }.join %>
 //<< Attributes})
 
 METHODS = %{
@@ -205,6 +220,8 @@ public class <%= tag_class %> extends WidgetTag /* interfaces */ /* interfaces *
             filename = "#{@path}#{component.tag_class}.java"
 
             $stderr.puts("Updating #{filename}") if VERBOSE
+
+            component.delete_ignored
 
             java = component.to_java(filename)
 

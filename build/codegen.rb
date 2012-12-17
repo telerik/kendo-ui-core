@@ -33,7 +33,6 @@ namespace :generate do
 
                 generator.component(component)
 
-                break
             end
         end
 
