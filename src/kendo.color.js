@@ -66,8 +66,8 @@ kendo_module({
         },
         destroy: function() {
             this.element.off(NS);
-            this._content.off(NS).find("*").off(NS);
-            this._content = null;
+            this.wrapper.off(NS).find("*").off(NS);
+            this.wrapper = null;
             Widget.fn.destroy.call(this);
         },
         _selectOnHide: function() {
@@ -105,7 +105,7 @@ kendo_module({
             if (element) {
                 element.append(content);
             }
-            this._content = content;
+            this.wrapper = content;
 
             content
                 .attr("tabIndex", 0)
@@ -119,7 +119,7 @@ kendo_module({
         _keydown: function(ev) {
             var selected;
             var that = this;
-            var el = that._content;
+            var el = that.wrapper;
             var all = el.find(".k-item");
             var init = el.find(".k-item." + ITEMSELECTEDCLASS).get(0);
 
@@ -169,11 +169,11 @@ kendo_module({
         select: function(color, nohooks) {
             var that = this;
             color = ColorSelectorBase.fn.select.call(that, color, nohooks);
-            that._content.find(".k-item." + ITEMSELECTEDCLASS)
+            that.wrapper.find(".k-item." + ITEMSELECTEDCLASS)
                 .removeClass(ITEMSELECTEDCLASS)
                 .removeAttr("aria-selected");
             var el = null, best = null, min = null;
-            that._content.find(".k-item div").each(function(){
+            that.wrapper.find(".k-item div").each(function(){
                 var c = parse($(this).css(BACKGROUNDCOLOR));
                 if (c) {
                     if (c.equals(color)) {
@@ -196,7 +196,7 @@ kendo_module({
             return color;
         },
         focus: function(){
-            this._content.focus();
+            this.wrapper.focus();
         },
         options: {
             name    : "ColorSelectorSimple",
@@ -227,7 +227,7 @@ kendo_module({
             if (element) {
                 element.append(content);
             }
-            that._content = content;
+            that.wrapper = content;
 
             var hueSlider = that._hueSlider = $(".k-hue-slider", content).kendoSlider({
                 min: 0,
@@ -384,7 +384,7 @@ kendo_module({
                 that.select(that._getHSV());
                 break;
               case KEYS.F2:
-                that._content.find("input.k-color-value").focus().select();
+                that.wrapper.find("input.k-color-value").focus().select();
                 break;
               case KEYS.ESC:
                 that._cancel();
@@ -683,7 +683,7 @@ kendo_module({
             }
             that._value = options.value = value;
 
-            var content = that._content = $(that._template(options));
+            var content = that.wrapper = $(that._template(options));
             element.hide().after(content);
 
             content.attr("tabIndex", 0)
@@ -702,12 +702,12 @@ kendo_module({
             that._updateUI(value);
         },
         destroy: function() {
-            this._content.off(NS).find("*").off(NS);
+            this.wrapper.off(NS).find("*").off(NS);
             if (this._popup) {
                 this._selector.destroy();
                 this._popup.destroy();
             }
-            this._selector = this._popup = this._content = null;
+            this._selector = this._popup = this.wrapper = null;
             Widget.fn.destroy.call(this);
         },
 
@@ -764,7 +764,7 @@ kendo_module({
             if (value && !value.equals(this.value())) {
                 this.trigger("select", { value: value });
             }
-            this._content.find(".k-selected-color").css(
+            this.wrapper.find(".k-selected-color").css(
                 BACKGROUNDCOLOR,
                 value ? value.toDisplay() : "transparent"
             );
@@ -801,9 +801,9 @@ kendo_module({
                     ctor = ColorSelectorHSV;
                 }
                 var sel = this._selector = new ctor(document.body, opt);
-                that._popup = p = sel._content.kendoPopup({
-                    anchor       : that._content,
-                    toggleTarget : that._content.find(".k-icon")
+                that._popup = p = sel.wrapper.kendoPopup({
+                    anchor       : that.wrapper,
+                    toggleTarget : that.wrapper.find(".k-icon")
                 }).data("kendoPopup");
                 sel.bind({
                     select: function(ev){
@@ -821,7 +821,7 @@ kendo_module({
                     close: function(){
                         var color = sel._selectOnHide();
                         if (!color) {
-                            that._content.focus();
+                            that.wrapper.focus();
                             that._updateUI(that._value);
                         } else {
                             that.select(color);
