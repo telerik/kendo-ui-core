@@ -306,6 +306,14 @@
                 equal(dataSource._ranges[0].end, 16);
             });
 
+            test("data adds result as range", function() {
+                var dataSource = remoteDataSource();
+                dataSource.data([{ id:1, bar: "foo" },{ id: 2, bar: "foo" }, { id: 3, bar: "foo" }]);
+                equal(dataSource._ranges.length, 1);
+                equal(dataSource._ranges[0].start, 0);
+                equal(dataSource._ranges[0].end, 3);
+            });
+
             test("read clear previous ranges", function() {
                 var dataSource = remoteDataSource();
                 dataSource.prefetch(20, 20);

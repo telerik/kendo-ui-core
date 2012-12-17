@@ -1781,6 +1781,9 @@ kendo_module({
             if (value !== undefined) {
                 that._data = this._observe(value);
 
+                that._ranges = [];
+                that._addRange(that._data);
+
                 that._total = that._data.length;
 
                 that._process(that._data);
@@ -2114,14 +2117,19 @@ kendo_module({
 
             that._data = that._observe(data);
 
-            var start = that._skip || 0,
-            end = start + that._data.length;
-
-            that._ranges.push({ start: start, end: end, data: that._data });
-            that._ranges.sort( function(x, y) { return x.start - y.start; } );
+            that._addRange(that._data);
 
             that._dequeueRequest();
             that._process(that._data);
+        },
+
+        _addRange: function(data) {
+            var that = this,
+                start = that._skip || 0,
+                end = start + data.length;
+
+            that._ranges.push({ start: start, end: end, data: data });
+            that._ranges.sort( function(x, y) { return x.start - y.start; } );
         },
 
         error: function(xhr, status, errorThrown) {
