@@ -665,6 +665,16 @@
             "source": "kendo.mobile.view.min.js"
         },
         {
+            "id": "multiselect",
+            "name": "MultiSelect",
+            "category": "web",
+            "description": "The MultiSelect widget allows the selection from pre-defined values.",
+            "depends": [
+                "list"
+            ],
+            "source": "kendo.multiselect.min.js"
+        },
+        {
             "id": "numerictextbox",
             "name": "NumericTextBox",
             "category": "web",

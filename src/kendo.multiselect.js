@@ -169,7 +169,7 @@ kendo_module({
         _resultList: function() {
             var that = this;
 
-            that.resultList = $('<ul unselectable="on" />')
+            that.resultList = $('<ul unselectable="on" class="k-list k-reset"/>')
                                 .appendTo(that._innerWraper)
                                 .on("click" + ns, ".k-delete", function(e) {
                                     var item = $(e.target).closest("li");

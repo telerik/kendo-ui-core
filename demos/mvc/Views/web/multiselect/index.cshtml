@@ -1,0 +1,88 @@
+<div id="example" class="k-content" role="application">
+    <div id="tshirt-view" class="k-header">
+        <h2>Customize your Kendo T-shirt</h2>
+        <div id="options">
+            <h3>T-shirt Size</h3>
+            <select id="select" placeholder="Select size...">
+                <option>X-Small</option>
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>X-Large</option>
+                <option>2X-Large</option>
+            </select>
+        </div>
+    </div>
+    <style scoped>
+        #example h2 {
+            font-weight: normal;
+        }
+        #tshirt-view {
+            border-radius: 10px 10px 10px 10px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            width: 500px;
+            margin: 30px auto;
+            padding: 20px 20px 0 20px;
+            background-position: 0 -255px;
+        }
+        #tshirt {
+            float: left;
+            margin: 30px 40px 30px 20px;
+        }
+        #options {
+            padding: 30px;
+        }
+        #options h3 {
+            font-size: 1em;
+            font-weight: bold;
+            margin: 25px 0 8px 0;
+        }
+        #get {
+            margin-top: 25px;
+        }
+
+        .k-readonly
+        {
+            color: gray;
+        }
+
+        .k-multiselect-wrap
+        {
+            border-width: 0px;
+            border-style: solid;
+            border-radius: 4px;
+            border-color: #C5C5C5;
+            background-color: #E9E9E9;
+        }
+
+        .k-multiselect-wrap .k-input
+        {
+            height: 1.31em;
+            line-height: 1.31em;
+            padding: 0.18em 0;
+            text-indent: 4px;
+            border: 0;
+            margin: 0;
+        }
+
+        .k-multiselect-wrap li
+        {
+            display: inline-block;
+            border-style: solid;
+            border-width: 1px;
+            margin: 5px 3px;
+            padding: .15em .15em .15em .4em;
+            line-height: 1.5em;
+            float: left;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            // create ComboBox from select HTML element
+            $("#select").kendoMultiSelect();
+        });
+    </script>
+</div>

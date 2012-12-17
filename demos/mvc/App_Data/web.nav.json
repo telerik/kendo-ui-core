@@ -819,6 +819,20 @@
             ]
         },
         {
+            "text": "MultiSelect",
+            "name": "multiselect",
+            "documentation": "web/multiselect",
+            "spriteCssClass": "multiselectIcon",
+            "items": [
+                {
+                    "text": "Basic Usage",
+                    "url": "multiselect/index.html",
+                    "title": "Kendo MultiSelect demo",
+                    "meta": "This demo shows the core functionality of KendoMultiSelect widget."
+                }
+            ]
+        },
+        {
             "text": "NumericTextBox",
             "name": "numerictextbox",
             "documentation": "web/numerictextbox",
