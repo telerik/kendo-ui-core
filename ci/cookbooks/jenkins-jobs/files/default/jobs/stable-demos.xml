@@ -63,7 +63,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-        <command>export PATH=/usr/local/bin:$PATH; bundle --without development &amp;&amp; npm install &amp;&amp; rake build:master:demos;</command>
+        <command>bundle --without development --path ~/gems &amp;&amp; npm install &amp;&amp; bundle exec rake build:master:demos</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

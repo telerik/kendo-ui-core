@@ -10,5 +10,6 @@
     "recipe[google-chrome]",
     "recipe[jenkins]",
     "recipe[jenkins-jobs]",
+    "recipe[mono-fcgi]",
     "recipe[nginx]"
 ]}
