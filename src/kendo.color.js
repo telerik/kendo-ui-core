@@ -53,16 +53,14 @@ kendo_module({
             if (v === undefined) {
                 return that._value;
             }
-            v = parse(v);
-            that._value = v;
+            that._updateUI(that._value = v = parse(v));
+            return v;
         },
-        select: function(color, nohooks) {
-            color = parse(color);
-            this.value(color);
+        _select: function(color, nohooks) {
+            color = this.value(color);
             if (!nohooks) {
                 this.trigger("change", { value: this.value() });
             }
-            return color;
         },
         destroy: function() {
             this.element.off(NS);
@@ -70,6 +68,7 @@ kendo_module({
             this.wrapper = null;
             Widget.fn.destroy.call(this);
         },
+        _updateUI: $.noop,
         _selectOnHide: function() {
             return null;
         },
@@ -98,7 +97,7 @@ kendo_module({
                 id     : options.ariaId
             }))
                 .on(CLICK_NS, ".k-item", function(ev){
-                    that.select($(ev.currentTarget).find("div").css(BACKGROUNDCOLOR));
+                    that._select($(ev.currentTarget).find("div").css(BACKGROUNDCOLOR));
                 })
                 .find("*").attr(UNSELECTABLE, "on").end();
 
@@ -145,7 +144,7 @@ kendo_module({
               case KEYS.ENTER:
                 preventDefault(ev);
                 if (init) {
-                    this.select($("div", init).css(BACKGROUNDCOLOR));
+                    this._select($("div", init).css(BACKGROUNDCOLOR));
                 }
                 break;
               case KEYS.ESC:
@@ -166,9 +165,8 @@ kendo_module({
                 } catch(ex) {}
             }
         },
-        select: function(color, nohooks) {
+        _updateUI: function(color) {
             var that = this;
-            color = ColorSelectorBase.fn.select.call(that, color, nohooks);
             that.wrapper.find(".k-item." + ITEMSELECTEDCLASS)
                 .removeClass(ITEMSELECTEDCLASS)
                 .removeAttr("aria-selected");
@@ -193,7 +191,6 @@ kendo_module({
             if (el) {
                 $(el).addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
             }
-            return color;
         },
         focus: function(){
             this.wrapper.focus();
@@ -303,7 +300,7 @@ kendo_module({
                             var color = parse(this.value);
                             var val = that.value();
                             $(this).removeClass("k-state-error");
-                            that.select(color, !color.equals(val));
+                            that._select(color, !color.equals(val));
                         } catch(ex) {
                             $(this).addClass("k-state-error");
                         }
@@ -312,7 +309,7 @@ kendo_module({
                 .on(CLICK_NS, ".k-controls button.apply", function(){
                     // calling select for the currently displayed
                     // color will trigger the "change" event.
-                    that.select(that._getHSV());
+                    that._select(that._getHSV());
                 })
                 .on(CLICK_NS, ".k-controls button.cancel", function(){
                     // but on cancel, we simply select the previous
@@ -336,10 +333,6 @@ kendo_module({
             buttons  : true,
             preview  : true,
             messages : APPLY_CANCEL
-        },
-        select: function(color, nohooks) {
-            color = ColorSelectorBase.fn.select.call(this, color, nohooks);
-            this._updateUI(color);
         },
         _keydown: function(ev) {
             var that = this;
@@ -381,7 +374,7 @@ kendo_module({
                 move(ev.ctrlKey && that._opacitySlider ? "a" : "v", -1);
                 break;
               case KEYS.ENTER:
-                that.select(that._getHSV());
+                that._select(that._getHSV());
                 break;
               case KEYS.F2:
                 that.wrapper.find("input.k-color-value").focus().select();
@@ -746,11 +739,8 @@ kendo_module({
         toggle: function() {
             this._getPopup().toggle();
         },
-        select: function(value) {
+        _select: function(value) {
             value = this.value(value);
-            // seems that input type="color" doesn't support opacity
-            // in colors; the only accepted format is hex #RRGGBB
-            this.element.val(value.toCss());
             this.trigger("change", { value: value });
         },
         value: function(value) {
@@ -761,6 +751,9 @@ kendo_module({
             return this._value;
         },
         _updateUI: function(value) {
+            // seems that input type="color" doesn't support opacity
+            // in colors; the only accepted format is hex #RRGGBB
+            this.element.val(value.toCss());
             if (value && !value.equals(this.value())) {
                 this.trigger("select", { value: value });
             }
@@ -810,7 +803,7 @@ kendo_module({
                         that._updateUI(ev.value);
                     },
                     change: function(ev){
-                        that.select(ev.value);
+                        that._select(ev.value);
                         p.close();
                     },
                     cancel: function() {
@@ -824,11 +817,11 @@ kendo_module({
                             that.wrapper.focus();
                             that._updateUI(that._value);
                         } else {
-                            that.select(color);
+                            that._select(color);
                         }
                     },
                     activate: function(){
-                        sel.select(that.value(), true);
+                        sel._select(that.value(), true);
                         sel.focus();
                     }
                 });
