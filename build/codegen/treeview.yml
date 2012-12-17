@@ -1,0 +1,30 @@
+:options:
+    - :name: items
+      :type: Array
+      :recursive: true
+      :description: Contains the items of the treeview widget
+
+    - :name: items.text
+      :type: String
+      :description: Specifies the text displayed by the item
+
+    - :name: items.imageUrl
+      :type: String
+      :description: Specifies the URL of the image displayed by the item
+
+    - :name: items.spriteCssClass
+      :type: String
+      :parent: tag
+      :description: Specifies the class name for the sprite image displayed by the item
+
+    - :name: items.enabled
+      :type: Boolean
+      :description: Specifies whether the item is initially enabled
+
+    - :name: items.selected
+      :type: Boolean
+      :description: Specifies whether the item is initially selected
+
+    - :name : items.expanded
+      :type : Boolean
+      :description : Specifies whether the item is initially expanded
