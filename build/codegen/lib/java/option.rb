@@ -10,6 +10,9 @@ module CodeGen::Java
             @owner.tag_name + '-' + @name
         end
 
+        def java_type
+            CodeGen::Java::TYPES[@type]
+        end
     end
 
 end

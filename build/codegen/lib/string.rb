@@ -16,5 +16,13 @@ class String
 
         self.sub(/s$/, '')
     end
+
+    def dos
+
+        new_line = RUBY_PLATFORM =~ /w32/ ? "\n" : "\r\n"
+
+        self.gsub(/\r?\n/, new_line)
+
+    end
 end
 

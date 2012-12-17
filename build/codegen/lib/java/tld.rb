@@ -23,10 +23,6 @@ module CodeGen::Java::TLD
     class Component < CodeGen::Java::Component
         include Options
 
-        def tag_name
-            @name.camelize
-        end
-
         def to_tld
             COMPONENT.result(binding)
         end
@@ -179,7 +175,7 @@ module CodeGen::Java::TLD
             <name><%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
             <rtexprvalue>true</rtexprvalue>
 <% if type != 'Function' %>
-            <type><%= CodeGen::Java::TYPES[type] %></type>
+            <type><%= java_type %></type>
 <% end %>
         </attribute>
 >>>>>>> Use unique composite options.
@@ -212,9 +208,8 @@ class Generator
                      "<!-- Auto-generated -->\n\n" +
                      @tld +
                      "\n\n<!-- Auto-generated -->")
-                 .gsub(/\r?\n/, RUBY_PLATFORM =~ /w32/ ? "\n" : "\r\n")
 
-        File.write(@filename, src)
+        File.write(@filename, src.dos)
     end
 
 end

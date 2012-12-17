@@ -19,6 +19,14 @@ module CodeGen::Java
             @owner.name.pascalize + name + 'Tag'
         end
 
+        def tag_name
+            @owner.tag_name + '-' + @name
+        end
+
+        def events
+            @options.find_all { |option| option.type == 'Function' }
+                    .map { |option | event_class.new(:name => option.name, :owner => self, :description => option.description) }
+        end
     end
 
 end
