@@ -9,5 +9,6 @@
     "recipe[firefox]",
     "recipe[google-chrome]",
     "recipe[jenkins]",
-    "recipe[jenkins-jobs]"
+    "recipe[jenkins-jobs]",
+    "recipe[nginx]"
 ]}
