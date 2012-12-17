@@ -96,9 +96,6 @@ module CodeGen::Java::TLD
         <body-content><%= body_content %></body-content>
 
 <%= unique_options.map { |option| option.to_attribute }.join %>
-<% if name == 'pane' && namespace == 'splitter' %>
-        <dynamic-attributes>true</dynamic-attributes>
-<% end %>
 
     </tag>
 
@@ -120,8 +117,17 @@ module CodeGen::Java::TLD
         <description><%= item.description %></description>
         <name><%= item.tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= item.tag_class %></tag-class>
+
+<% if item.tag_name == 'splitter-pane' %>
+        <body-content>JSP</body-content>
+<% else %>
         <body-content><%= item.body_content %></body-content>
+<% end %>
 <%= item.unique_options.map { |option| option.to_attribute }.join %>
+
+<% if item.tag_name == 'splitter-pane' %>
+        <dynamic-attributes>true</dynamic-attributes>
+<% end %>
 
     </tag>
 
