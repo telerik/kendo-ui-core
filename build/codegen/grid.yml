@@ -1,0 +1,12 @@
+:options:
+    - :name: detailTemplate
+      :type: String
+      :description: The id of the template used for rendering the detail rows in the grid.
+
+    - :name: rowTemplate
+      :type: String
+      :description: The id of the template used for rendering the rows in the grid.
+
+    - :name: altRowTemplate
+      :type: String
+      :description: The id of the template used for rendering the alternate rows in the grid.
