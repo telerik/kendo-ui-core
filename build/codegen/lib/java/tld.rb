@@ -132,6 +132,8 @@ module CodeGen::Java::TLD
     </tag>
 
 <%= item.unique_composite_options.map { |option| option.to_tag }.join %>
+
+<%= item.events.map { |event| event.to_tag }.join %>
     }, 0, '<>%')
 
     COMPONENT = ERB.new(%{
