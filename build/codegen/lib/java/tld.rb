@@ -80,94 +80,109 @@ module CodeGen::Java::TLD
     end
 
     EVENT = ERB.new(%{
-        <tag>
-            <description>Subscribes to the <%= name.camelize %> event of <%= owner.name %>.</description>
-            <name><%= tag_name %></name>
-            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
-            <body-content>JSP</body-content>
-        </tag>
+    <tag>
+        <description>Subscribes to the <%= name.camelize %> event of <%= owner.name %>.</description>
+        <name><%= tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     }, 0, '<>%')
 
     COMPOSITE_OPTION = ERB.new(%{
-        <tag>
-            <description><%= description %></description>
-            <name><%= tag_name %></name>
-            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
-            <body-content><%= body_content %></body-content>
+    <tag>
+        <description><%= description %></description>
+        <name><%= tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
+        <body-content><%= body_content %></body-content>
 
 <%= unique_options.map { |option| option.to_attribute }.join %>
 <% if name == 'pane' && namespace == 'splitter' %>
-            <dynamic-attributes>true</dynamic-attributes>
+        <dynamic-attributes>true</dynamic-attributes>
 <% end %>
-        </tag>
 
-<%= composite_options.map { |option| option.to_tag }.join %>
+    </tag>
+
+<%= unique_composite_options.map { |option| option.to_tag }.join %>
+
+<%= events.map { |event| event.to_tag }.join %>
+
     }, 0, '<>%')
 
     ARRAY = ERB.new(%{
-        <tag>
-            <description><%= description %></description>
-            <name><%= tag_name %></name>
-            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
-            <body-content>JSP</body-content>
-        </tag>
+    <tag>
+        <description><%= description %></description>
+        <name><%= tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
-        <tag>
-            <description><%= item.description %></description>
-            <name><%= item.tag_name %></name>
-            <tag-class>com.kendoui.taglib.<%= namespace %>.<%= item.tag_class %></tag-class>
-            <body-content><%= item.body_content %></body-content>
-
+    <tag>
+        <description><%= item.description %></description>
+        <name><%= item.tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= item.tag_class %></tag-class>
+        <body-content><%= item.body_content %></body-content>
 <%= item.unique_options.map { |option| option.to_attribute }.join %>
-        </tag>
 
-<%= item.composite_options.map { |option| option.to_tag }.join %>
+    </tag>
+
+<%= item.unique_composite_options.map { |option| option.to_tag }.join %>
     }, 0, '<>%')
 
     COMPONENT = ERB.new(%{
-        <tag>
-            <description><%= name %></description>
-            <name><%= tag_name %></name>
-            <tag-class>com.kendoui.taglib.<%= tag_class %></tag-class>
-            <body-content>JSP</body-content>
+    <tag>
+        <description><%= name %></description>
+        <name><%= tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= tag_class %></tag-class>
+        <body-content>JSP</body-content>
 <% if name != 'DataSource' %>
-            <attribute>
-                <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
-                <name>name</name>
-                <required>true</required>
-                <rtexprvalue>true</rtexprvalue>
-                <type>java.lang.String</type>
-            </attribute>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 <% end %>
 <%= unique_options.map { |option| option.to_attribute }.join %>
 <%= events.map { |event| event.to_attribute }.join %>
 
 <% if name != 'DataSource' %>
-            <dynamic-attributes>true</dynamic-attributes>
+        <dynamic-attributes>true</dynamic-attributes>
 <% end %>
-        </tag>
+    </tag>
 
-<%= composite_options.map { |option| option.to_tag }.join("\n") %>
+<%= unique_composite_options.map { |option| option.to_tag }.join("\n") %>
 
 <%= events.map { |event| event.to_tag }.join("\n") %>
 
             }, 0, '<>%')
 
     OPTION_ATTRIBUTE = ERB.new(%{
+<<<<<<< HEAD
             <attribute>
                 <description><%= description %></description>
                 <name><%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
                 <rtexprvalue>true</rtexprvalue>
                 <type><%= CodeGen::Java::TYPES[type] %></type>
             </attribute>
+=======
+        <attribute>
+            <description><%= description %></description>
+            <name><%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
+            <rtexprvalue>true</rtexprvalue>
+<% if type != 'Function' %>
+            <type><%= CodeGen::Java::TYPES[type] %></type>
+<% end %>
+        </attribute>
+>>>>>>> Use unique composite options.
     }, 0, '<>%')
 
     EVENT_ATTRIBUTE = ERB.new(%{
-            <attribute>
-                <description><%= description %></description>
-                <name><%= name %></name>
-                <rtexprvalue>true</rtexprvalue>
-            </attribute>
+        <attribute>
+            <description><%= description %></description>
+            <name><%= name %></name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     }, 0, '<>%')
 
 class Generator

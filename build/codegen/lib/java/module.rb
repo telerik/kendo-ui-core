@@ -34,6 +34,25 @@ module CodeGen::Java
             Option
         end
 
+        def unique_composite_options
+            options = composite_options
+
+            options.clone.each do |option|
+
+                next if option.type == 'Array'
+
+                homonyms = options.find_all {|o| o.name == option.name }
+
+                if homonyms.size > 1
+
+                    options.delete(option)
+
+                end
+            end
+
+            options
+        end
+
         def unique_options
             options = @options.find_all { |o| o.instance_of?(option_class) }
                               .find_all { |o| !CodeGen::Java.ignored?(@name, o.name) }
