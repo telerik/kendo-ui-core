@@ -158,15 +158,12 @@ kendo_module({
 
             if (!navigator) {
                 navigator = chart._navigator = new Navigator(chart);
-            }
-
-            navigator.filterAxes();
-
-            if (chart._dataBound && navigator.dataSource) {
-                navigator.redrawSlaves();
-            } else {
+                navigator.filterAxes();
                 Chart.fn._redraw.call(chart);
                 navigator.redraw();
+            } else {
+                navigator.filterAxes();
+                navigator.redrawSlaves();
             }
         },
 
@@ -260,13 +257,13 @@ kendo_module({
             }
 
             if (chart._model) {
-               navi._redrawSelf(true);
+               navi._redrawSelf();
                navi.filterAxes();
+               navi.redraw();
 
                if (!chart.options.dataSource || (chart.options.dataSource && chart._dataBound)) {
-                   navi.redraw();
                    navi.redrawSlaves();
-                }
+               }
             }
         },
 

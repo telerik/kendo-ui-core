@@ -5324,7 +5324,7 @@ kendo_module({
             plotArea.reflowCharts(panes);
         },
 
-        redraw: function(panes, silent) {
+        redraw: function(panes) {
             var plotArea = this,
                 i;
 
@@ -5338,10 +5338,8 @@ kendo_module({
             plotArea.reflowAxes(plotArea.panes);
             plotArea.reflowCharts(panes);
 
-            if (!silent) {
-                for (i = 0; i < panes.length; i++) {
-                    panes[i].refresh();
-                }
+            for (i = 0; i < panes.length; i++) {
+                panes[i].refresh();
             }
         },
 
