@@ -596,7 +596,7 @@
 
                 var scrollTop = $(window).scrollTop(),
                     windowTop = parseInt(that.wrapper.position().top, 10);
-                if (windowTop - scrollTop < 0) {
+                if (windowTop > 0 && windowTop - scrollTop < 0) {
                     if (scrollTop > 0) {
                         $(window).scrollTop(windowTop);
                     } else {
