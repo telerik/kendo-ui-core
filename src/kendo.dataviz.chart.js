@@ -421,7 +421,11 @@
         },
 
         _start: function(e) {
-            this._startNavigation(e, DRAG_START);
+            var chart = this;
+
+            if (defined(chart._events[DRAG_START])) {
+                chart._startNavigation(e, DRAG_START);
+            }
         },
 
         _move: function(e) {
