@@ -135,6 +135,7 @@ var ImageCommand = Command.extend({
         dialog = EditorUtils.createDialog(that._dialogTemplate(showBrowser), that.editor, extend(dialogWidth, options.dialogOptions, {
             title: INSERTIMAGE,
             close: close,
+            visible: false,
             resizable: showBrowser,
             activate: function() {
                 if (showBrowser) {
@@ -152,16 +153,14 @@ var ImageCommand = Command.extend({
                 }
             }
         }))
-                .hide()
                 .find(".k-dialog-insert").click(apply).end()
                 .find(".k-dialog-close").click(close).end()
                 .find(".k-form-text-row input").keydown(keyDown).end()
                 // IE < 8 returns absolute url if getAttribute is not used
                 .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
                 .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()
-                .show()
                 .data("kendoWindow")
-                .center();
+                .center().open();
 
         $(KEDITORIMAGEURL, dialog.element).focus().select();
     }

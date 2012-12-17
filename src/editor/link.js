@@ -167,9 +167,9 @@ var LinkCommand = Command.extend({
 
         var dialog = EditorUtils.createDialog(that._dialogTemplate(showText), that.editor, extend({}, that.editor.options.dialogOptions, {
             title: "Insert link",
-            close: close
+            close: close,
+            visible: false
         }))
-            .hide()
             .find(".k-dialog-insert").click(apply).end()
             .find(".k-dialog-close").click(close).end()
             .find(".k-form-text-row input").keydown(function (e) {
@@ -185,9 +185,8 @@ var LinkCommand = Command.extend({
             .find("#k-editor-link-text").val(nodes.length > 0 ? (nodes.length == 1 ? nodes[0].nodeValue : nodes[0].nodeValue + nodes[1].nodeValue) : "").end()
             .find("#k-editor-link-title").val(a ? a.title : "").end()
             .find("#k-editor-link-target").attr("checked", a ? a.target == "_blank" : false).end()
-            .show()
             .data("kendoWindow")
-            .center();
+            .center().open();
 
         if (showText && nodes.length > 0) {
             initialText = $("#k-editor-link-text", dialog.element).val();
