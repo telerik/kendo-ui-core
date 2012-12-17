@@ -67,7 +67,7 @@ public class AggregateTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-aggregate";
     }
 
-    public void addAggregateItem(AggregateAggregateItemTag value) {
+    public void addAggregateItem(AggregateItemTag value) {
         aggregate.add(value.properties());
     }
 

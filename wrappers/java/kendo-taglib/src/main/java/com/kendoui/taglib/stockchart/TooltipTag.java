@@ -57,6 +57,10 @@ public class TooltipTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
+    public void setTemplate(TemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public String getBackground() {
         return (String)getProperty("background");
     }
@@ -89,11 +93,11 @@ public class TooltipTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("format", value);
     }
 
-    public float getPadding() {
-        return (float)getProperty("padding");
+    public Object getPadding() {
+        return (Object)getProperty("padding");
     }
 
-    public void setPadding(float value) {
+    public void setPadding(Object value) {
         setProperty("padding", value);
     }
 

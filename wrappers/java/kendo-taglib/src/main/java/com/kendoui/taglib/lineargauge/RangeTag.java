@@ -49,20 +49,20 @@ public class RangeTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "linearGauge-scale-range";
     }
 
+    public String getColor() {
+        return (String)getProperty("color");
+    }
+
+    public void setColor(String value) {
+        setProperty("color", value);
+    }
+
     public float getFrom() {
         return (float)getProperty("from");
     }
 
     public void setFrom(float value) {
         setProperty("from", value);
-    }
-
-    public float getTo() {
-        return (float)getProperty("to");
-    }
-
-    public void setTo(float value) {
-        setProperty("to", value);
     }
 
     public float getOpacity() {
@@ -73,12 +73,12 @@ public class RangeTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("opacity", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public float getTo() {
+        return (float)getProperty("to");
     }
 
-    public void setColor(String value) {
-        setProperty("color", value);
+    public void setTo(float value) {
+        setProperty("to", value);
     }
 
 //<< Attributes

@@ -65,7 +65,7 @@ public class GroupItemAggregatesTag extends BaseTag /* interfaces *//* interface
         return "dataSource-groupItem-aggregates";
     }
 
-    public void addAggregate(AggregatesAggregateTag value) {
+    public void addAggregate(GroupItemAggregateTag value) {
         aggregates.add(value.properties());
     }
 

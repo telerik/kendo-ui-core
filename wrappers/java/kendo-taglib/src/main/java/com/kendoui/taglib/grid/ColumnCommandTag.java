@@ -65,7 +65,7 @@ public class ColumnCommandTag extends BaseTag /* interfaces *//* interfaces */ {
         return "grid-column-command";
     }
 
-    public void addCommandItem(CommandItemTag value) {
+    public void addCommandItem(ColumnCommandItemTag value) {
         command.add(value.properties());
     }
 

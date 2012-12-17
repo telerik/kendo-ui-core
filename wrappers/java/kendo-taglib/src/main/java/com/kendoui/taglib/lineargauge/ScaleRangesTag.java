@@ -65,7 +65,7 @@ public class ScaleRangesTag extends BaseTag /* interfaces *//* interfaces */ {
         return "linearGauge-scale-ranges";
     }
 
-    public void addRange(RangeTag value) {
+    public void addRange(ScaleRangeTag value) {
         ranges.add(value.properties());
     }
 

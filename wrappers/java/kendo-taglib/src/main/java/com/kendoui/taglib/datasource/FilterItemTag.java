@@ -49,20 +49,20 @@ public class FilterItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "dataSource-filterItem";
     }
 
-    public String getOperator() {
-        return (String)getProperty("operator");
-    }
-
-    public void setOperator(String value) {
-        setProperty("operator", value);
-    }
-
     public String getField() {
         return (String)getProperty("field");
     }
 
     public void setField(String value) {
         setProperty("field", value);
+    }
+
+    public String getOperator() {
+        return (String)getProperty("operator");
+    }
+
+    public void setOperator(String value) {
+        setProperty("operator", value);
     }
 
     public Object getValue() {

@@ -50,12 +50,8 @@ public class CheckboxesTag extends BaseTag /* interfaces *//* interfaces */ {
         return "treeView-checkboxes";
     }
 
-    public String getName() {
-        return (String)getProperty("name");
-    }
-
-    public void setName(String value) {
-        setProperty("name", value);
+    public void setTemplate(TemplateFunctionTag value) {
+        setEvent("template", value.getBody());
     }
 
     public boolean getCheckChildren() {
@@ -64,6 +60,14 @@ public class CheckboxesTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setCheckChildren(boolean value) {
         setProperty("checkChildren", value);
+    }
+
+    public String getName() {
+        return (String)getProperty("name");
+    }
+
+    public void setName(String value) {
+        setProperty("name", value);
     }
 
     public String getTemplate() {

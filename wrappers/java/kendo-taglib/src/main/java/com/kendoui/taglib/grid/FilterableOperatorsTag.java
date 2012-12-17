@@ -51,20 +51,20 @@ public class FilterableOperatorsTag extends  BaseTag  /* interfaces *//* interfa
         return "grid-filterable-operators";
     }
 
-    public void setString(OperatorsStringTag value) {
-        setProperty("string", value);
-    }
-
-    public void setNumber(OperatorsNumberTag value) {
-        setProperty("number", value);
-    }
-
-    public void setDate(OperatorsDateTag value) {
+    public void setDate(FilterableOperatorsDateTag value) {
         setProperty("date", value);
     }
 
-    public void setEnums(OperatorsEnumsTag value) {
+    public void setEnums(FilterableOperatorsEnumsTag value) {
         setProperty("enums", value);
+    }
+
+    public void setNumber(FilterableOperatorsNumberTag value) {
+        setProperty("number", value);
+    }
+
+    public void setString(FilterableOperatorsStringTag value) {
+        setProperty("string", value);
     }
 
 //<< Attributes

@@ -51,7 +51,7 @@ public class ImagebrowserSchemaTag extends  BaseTag  /* interfaces *//* interfac
         return "editor-imagebrowser-schema";
     }
 
-    public void setModel(SchemaModelTag value) {
+    public void setModel(ImagebrowserSchemaModelTag value) {
         setProperty("model", value);
     }
 

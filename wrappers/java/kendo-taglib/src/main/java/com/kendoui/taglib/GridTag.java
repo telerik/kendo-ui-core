@@ -64,14 +64,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         return "grid";
     }
 
+    public void setColumnMenu(ColumnMenuTag value) {
+        setProperty("columnMenu", value);
+    }
+
     public void setColumns(ColumnsTag value) {
 
         setProperty("columns", value.columns());
 
-    }
-
-    public void setColumnMenu(ColumnMenuTag value) {
-        setProperty("columnMenu", value);
     }
 
     public void setEditable(EditableTag value) {
@@ -108,16 +108,20 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("change", value.getBody());
     }
 
+    public void setColumnMenuInit(ColumnMenuInitFunctionTag value) {
+        setEvent("columnMenuInit", value.getBody());
+    }
+
     public void setColumnResize(ColumnResizeFunctionTag value) {
         setEvent("columnResize", value.getBody());
     }
 
-    public void setDataBound(DataBoundFunctionTag value) {
-        setEvent("dataBound", value.getBody());
-    }
-
     public void setDataBinding(DataBindingFunctionTag value) {
         setEvent("dataBinding", value.getBody());
+    }
+
+    public void setDataBound(DataBoundFunctionTag value) {
+        setEvent("dataBound", value.getBody());
     }
 
     public void setDetailCollapse(DetailCollapseFunctionTag value) {
@@ -140,10 +144,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("filterMenuInit", value.getBody());
     }
 
-    public void setColumnMenuInit(ColumnMenuInitFunctionTag value) {
-        setEvent("columnMenuInit", value.getBody());
-    }
-
     public void setRemove(RemoveFunctionTag value) {
         setEvent("remove", value.getBody());
     }
@@ -154,6 +154,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setSaveChanges(SaveChangesFunctionTag value) {
         setEvent("saveChanges", value.getBody());
+    }
+
+    public String getAltRowTemplate() {
+        return (String)getProperty("altRowTemplate");
+    }
+
+    public void setAltRowTemplate(String value) {
+        setProperty("altRowTemplate", value);
     }
 
     public boolean getAutoBind() {
@@ -177,6 +185,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("dataSource", dataSource);
     }
 
+    public String getDetailTemplate() {
+        return (String)getProperty("detailTemplate");
+    }
+
+    public void setDetailTemplate(String value) {
+        setProperty("detailTemplate", value);
+    }
+
     public boolean getEditable() {
         return (boolean)getProperty("editable");
     }
@@ -191,6 +207,38 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setFilterable(boolean value) {
         setProperty("filterable", value);
+    }
+
+    public boolean getGroupable() {
+        return (boolean)getProperty("groupable");
+    }
+
+    public void setGroupable(boolean value) {
+        setProperty("groupable", value);
+    }
+
+    public Object getHeight() {
+        return (Object)getProperty("height");
+    }
+
+    public void setHeight(Object value) {
+        setProperty("height", value);
+    }
+
+    public boolean getNavigatable() {
+        return (boolean)getProperty("navigatable");
+    }
+
+    public void setNavigatable(boolean value) {
+        setProperty("navigatable", value);
+    }
+
+    public boolean getPageable() {
+        return (boolean)getProperty("pageable");
+    }
+
+    public void setPageable(boolean value) {
+        setProperty("pageable", value);
     }
 
     public boolean getReorderable() {
@@ -209,36 +257,12 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("resizable", value);
     }
 
-    public boolean getGroupable() {
-        return (boolean)getProperty("groupable");
+    public String getRowTemplate() {
+        return (String)getProperty("rowTemplate");
     }
 
-    public void setGroupable(boolean value) {
-        setProperty("groupable", value);
-    }
-
-    public float getHeight() {
-        return (float)getProperty("height");
-    }
-
-    public void setHeight(float value) {
-        setProperty("height", value);
-    }
-
-    public boolean getNavigatable() {
-        return (boolean)getProperty("navigatable");
-    }
-
-    public void setNavigatable(boolean value) {
-        setProperty("navigatable", value);
-    }
-
-    public boolean getPageable() {
-        return (boolean)getProperty("pageable");
-    }
-
-    public void setPageable(boolean value) {
-        setProperty("pageable", value);
+    public void setRowTemplate(String value) {
+        setProperty("rowTemplate", value);
     }
 
     public boolean getScrollable() {
@@ -265,30 +289,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("sortable", value);
     }
 
-    public String getDetailTemplate() {
-        return (String)getProperty("detailTemplate");
-    }
-
-    public void setDetailTemplate(String value) {
-        setProperty("detailTemplate", value);
-    }
-
-    public String getRowTemplate() {
-        return (String)getProperty("rowTemplate");
-    }
-
-    public void setRowTemplate(String value) {
-        setProperty("rowTemplate", value);
-    }
-
-    public String getAltRowTemplate() {
-        return (String)getProperty("altRowTemplate");
-    }
-
-    public void setAltRowTemplate(String value) {
-        setProperty("altRowTemplate", value);
-    }
-
     public String getChange() {
         Function property = ((Function)getProperty("change"));
         if (property != null) {
@@ -299,6 +299,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setChange(String value) {
         setProperty("change", new Function(value));
+    }
+
+    public String getColumnMenuInit() {
+        Function property = ((Function)getProperty("columnMenuInit"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setColumnMenuInit(String value) {
+        setProperty("columnMenuInit", new Function(value));
     }
 
     public String getColumnResize() {
@@ -313,18 +325,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("columnResize", new Function(value));
     }
 
-    public String getDataBound() {
-        Function property = ((Function)getProperty("dataBound"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setDataBound(String value) {
-        setProperty("dataBound", new Function(value));
-    }
-
     public String getDataBinding() {
         Function property = ((Function)getProperty("dataBinding"));
         if (property != null) {
@@ -335,6 +335,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setDataBinding(String value) {
         setProperty("dataBinding", new Function(value));
+    }
+
+    public String getDataBound() {
+        Function property = ((Function)getProperty("dataBound"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDataBound(String value) {
+        setProperty("dataBound", new Function(value));
     }
 
     public String getDetailCollapse() {
@@ -395,18 +407,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setFilterMenuInit(String value) {
         setProperty("filterMenuInit", new Function(value));
-    }
-
-    public String getColumnMenuInit() {
-        Function property = ((Function)getProperty("columnMenuInit"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setColumnMenuInit(String value) {
-        setProperty("columnMenuInit", new Function(value));
     }
 
     public String getRemove() {

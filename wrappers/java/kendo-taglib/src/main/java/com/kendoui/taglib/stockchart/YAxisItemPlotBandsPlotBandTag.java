@@ -49,22 +49,6 @@ public class YAxisItemPlotBandsPlotBandTag extends  BaseTag  /* interfaces *//* 
         return "stockChart-yAxisItem-plotBand";
     }
 
-    public float getFrom() {
-        return (float)getProperty("from");
-    }
-
-    public void setFrom(float value) {
-        setProperty("from", value);
-    }
-
-    public float getTo() {
-        return (float)getProperty("to");
-    }
-
-    public void setTo(float value) {
-        setProperty("to", value);
-    }
-
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -73,12 +57,28 @@ public class YAxisItemPlotBandsPlotBandTag extends  BaseTag  /* interfaces *//* 
         setProperty("color", value);
     }
 
+    public float getFrom() {
+        return (float)getProperty("from");
+    }
+
+    public void setFrom(float value) {
+        setProperty("from", value);
+    }
+
     public float getOpacity() {
         return (float)getProperty("opacity");
     }
 
     public void setOpacity(float value) {
         setProperty("opacity", value);
+    }
+
+    public float getTo() {
+        return (float)getProperty("to");
+    }
+
+    public void setTo(float value) {
+        setProperty("to", value);
     }
 
 //<< Attributes

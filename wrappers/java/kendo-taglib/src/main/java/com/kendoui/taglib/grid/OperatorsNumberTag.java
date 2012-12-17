@@ -59,12 +59,12 @@ public class OperatorsNumberTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("eq", value);
     }
 
-    public String getNeq() {
-        return (String)getProperty("neq");
+    public String getGt() {
+        return (String)getProperty("gt");
     }
 
-    public void setNeq(String value) {
-        setProperty("neq", value);
+    public void setGt(String value) {
+        setProperty("gt", value);
     }
 
     public String getGte() {
@@ -75,12 +75,12 @@ public class OperatorsNumberTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("gte", value);
     }
 
-    public String getGt() {
-        return (String)getProperty("gt");
+    public String getLt() {
+        return (String)getProperty("lt");
     }
 
-    public void setGt(String value) {
-        setProperty("gt", value);
+    public void setLt(String value) {
+        setProperty("lt", value);
     }
 
     public String getLte() {
@@ -91,12 +91,12 @@ public class OperatorsNumberTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("lte", value);
     }
 
-    public String getLt() {
-        return (String)getProperty("lt");
+    public String getNeq() {
+        return (String)getProperty("neq");
     }
 
-    public void setLt(String value) {
-        setProperty("lt", value);
+    public void setNeq(String value) {
+        setProperty("neq", value);
     }
 
 //<< Attributes

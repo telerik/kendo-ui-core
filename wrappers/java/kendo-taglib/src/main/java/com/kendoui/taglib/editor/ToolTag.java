@@ -54,6 +54,18 @@ public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setEvent("exec", value.getBody());
     }
 
+    public String getExec() {
+        Function property = ((Function)getProperty("exec"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setExec(String value) {
+        setProperty("exec", new Function(value));
+    }
+
     public String getName() {
         return (String)getProperty("name");
     }
@@ -68,18 +80,6 @@ public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setTooltip(String value) {
         setProperty("tooltip", value);
-    }
-
-    public String getExec() {
-        Function property = ((Function)getProperty("exec"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setExec(String value) {
-        setProperty("exec", new Function(value));
     }
 
 //<< Attributes

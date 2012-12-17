@@ -6,8 +6,7 @@ import com.kendoui.taglib.BaseItemTag;
 import com.kendoui.taglib.TreeViewTag;
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Input;
-import com.kendoui.taglib.html.Li;
-import com.kendoui.taglib.html.Span;
+
 
 
 
@@ -79,7 +78,6 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
     }
 
 //>> Attributes
-
     public void setItems(ItemsTag value) {
 
         items = value.items();
@@ -90,28 +88,12 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         return "treeView-item";
     }
 
-    public String getText() {
-        return (String)getProperty("text");
+    public boolean getEnabled() {
+        return (boolean)getProperty("enabled");
     }
 
-    public void setText(String value) {
-        setProperty("text", value);
-    }
-
-    public String getImageUrl() {
-        return (String)getProperty("imageUrl");
-    }
-
-    public void setImageUrl(String value) {
-        setProperty("imageUrl", value);
-    }
-
-    public String getSpriteCssClass() {
-        return (String)getProperty("spriteCssClass");
-    }
-
-    public void setSpriteCssClass(String value) {
-        setProperty("spriteCssClass", value);
+    public void setEnabled(boolean value) {
+        setProperty("enabled", value);
     }
 
     public boolean getExpanded() {
@@ -122,12 +104,12 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         setProperty("expanded", value);
     }
 
-    public boolean getEnabled() {
-        return (boolean)getProperty("enabled");
+    public String getImageUrl() {
+        return (String)getProperty("imageUrl");
     }
 
-    public void setEnabled(boolean value) {
-        setProperty("enabled", value);
+    public void setImageUrl(String value) {
+        setProperty("imageUrl", value);
     }
 
     public boolean getSelected() {
@@ -136,6 +118,22 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
 
     public void setSelected(boolean value) {
         setProperty("selected", value);
+    }
+
+    public String getSpriteCssClass() {
+        return (String)getProperty("spriteCssClass");
+    }
+
+    public void setSpriteCssClass(String value) {
+        setProperty("spriteCssClass", value);
+    }
+
+    public String getText() {
+        return (String)getProperty("text");
+    }
+
+    public void setText(String value) {
+        setProperty("text", value);
     }
 
 //<< Attributes

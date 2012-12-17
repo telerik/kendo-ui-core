@@ -55,6 +55,10 @@ public class XAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("border", value);
     }
 
+    public void setTemplate(TemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public String getBackground() {
         return (String)getProperty("background");
     }
@@ -69,6 +73,22 @@ public class XAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
 
     public void setColor(String value) {
         setProperty("color", value);
+    }
+
+    public String getCulture() {
+        return (String)getProperty("culture");
+    }
+
+    public void setCulture(String value) {
+        setProperty("culture", value);
+    }
+
+    public Object getDateFormats() {
+        return (Object)getProperty("dateFormats");
+    }
+
+    public void setDateFormats(Object value) {
+        setProperty("dateFormats", value);
     }
 
     public String getFont() {
@@ -87,11 +107,11 @@ public class XAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("format", value);
     }
 
-    public float getMargin() {
-        return (float)getProperty("margin");
+    public Object getMargin() {
+        return (Object)getProperty("margin");
     }
 
-    public void setMargin(float value) {
+    public void setMargin(Object value) {
         setProperty("margin", value);
     }
 
@@ -103,11 +123,11 @@ public class XAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("mirror", value);
     }
 
-    public float getPadding() {
-        return (float)getProperty("padding");
+    public Object getPadding() {
+        return (Object)getProperty("padding");
     }
 
-    public void setPadding(float value) {
+    public void setPadding(Object value) {
         setProperty("padding", value);
     }
 
@@ -149,22 +169,6 @@ public class XAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
-    }
-
-    public String getCulture() {
-        return (String)getProperty("culture");
-    }
-
-    public void setCulture(String value) {
-        setProperty("culture", value);
-    }
-
-    public Object getDateFormats() {
-        return (Object)getProperty("dateFormats");
-    }
-
-    public void setDateFormats(Object value) {
-        setProperty("dateFormats", value);
     }
 
 //<< Attributes

@@ -7,18 +7,11 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ParseFunctionTag extends FunctionTag /* interfaces *//* interfaces */ {
+public class ParseFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
-
-
-        FieldsSizeTag parent = (FieldsSizeTag)findParentWithClass(FieldsSizeTag.class);
-
-
-        parent.setParse(this);
-
 //<< doEndTag
 
         return super.doEndTag();
@@ -41,11 +34,6 @@ public class ParseFunctionTag extends FunctionTag /* interfaces *//* interfaces 
     }
 
 //>> Attributes
-
-    public static String tagName() {
-        return "editor-imagebrowser-schema-model-fields-size-parse";
-    }
-
 //<< Attributes
 
 }

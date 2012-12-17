@@ -583,9 +583,16 @@ class Tag
     end
 
     def child_setters
-        children = @children.map do |child|
-            child.setter_template.result(binding)
-        end.join
+        children = []
+
+        children += @children.find_all {|child| !child.instance_of?(NestedTagEvent) }
+                       .sort { |a, b| a.name <=> b.name }
+
+        children += @children.find_all {|child| child.instance_of?(NestedTagEvent) }
+                       .sort { |a, b| a.name <=> b.name }
+
+        children.map { |child| child.setter_template.result(binding) }.join
+
     end
 
     def setter_template
@@ -593,7 +600,7 @@ class Tag
     end
 
     def java_attributes
-        JAVA_TAG_NAME_TEMPLATE.result(binding) + child_setters + (@options + @events).map {|attr| attr.to_java }.join
+        JAVA_TAG_NAME_TEMPLATE.result(binding) + child_setters + (@options.sort {|a,b| a.name <=> b.name} + @events.sort {|a,b| a.name <=> b.name}).map {|attr| attr.to_java }.join
     end
 
     def template

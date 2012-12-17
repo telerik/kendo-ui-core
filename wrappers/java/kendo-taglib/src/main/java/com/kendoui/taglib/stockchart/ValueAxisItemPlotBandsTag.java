@@ -65,7 +65,7 @@ public class ValueAxisItemPlotBandsTag extends BaseTag /* interfaces *//* interf
         return "stockChart-valueAxisItem-plotBands";
     }
 
-    public void addPlotBand(ValueAxisItemPlotBandsPlotBandTag value) {
+    public void addPlotBand(ValueAxisItemPlotBandTag value) {
         plotBands.add(value.properties());
     }
 

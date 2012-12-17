@@ -55,20 +55,20 @@ public class GroupItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     }
 
-    public String getField() {
-        return (String)getProperty("field");
-    }
-
-    public void setField(String value) {
-        setProperty("field", value);
-    }
-
     public String getDir() {
         return (String)getProperty("dir");
     }
 
     public void setDir(String value) {
         setProperty("dir", value);
+    }
+
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
     }
 
 //<< Attributes

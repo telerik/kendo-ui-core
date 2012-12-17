@@ -13,6 +13,10 @@ import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* interfaces */ {
+    @Override
+    protected boolean getExpanded() {
+        return false;
+    }
     
     @Override
     public int doEndTag() throws JspException {
@@ -44,7 +48,6 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
     }
 
 //>> Attributes
-
     public void setItems(ItemsTag value) {
 
         items = value.items();
@@ -55,12 +58,12 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         return "menu-item";
     }
 
-    public String getText() {
-        return (String)getProperty("text");
+    public boolean getEnabled() {
+        return (boolean)getProperty("enabled");
     }
 
-    public void setText(String value) {
-        setProperty("text", value);
+    public void setEnabled(boolean value) {
+        setProperty("enabled", value);
     }
 
     public String getImageUrl() {
@@ -71,6 +74,14 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         setProperty("imageUrl", value);
     }
 
+    public boolean getSelected() {
+        return (boolean)getProperty("selected");
+    }
+
+    public void setSelected(boolean value) {
+        setProperty("selected", value);
+    }
+
     public String getSpriteCssClass() {
         return (String)getProperty("spriteCssClass");
     }
@@ -79,28 +90,12 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         setProperty("spriteCssClass", value);
     }
 
-    public boolean getExpanded() {
-        return (boolean)getProperty("expanded");
+    public String getText() {
+        return (String)getProperty("text");
     }
 
-    public void setExpanded(boolean value) {
-        setProperty("expanded", value);
-    }
-
-    public boolean getEnabled() {
-        return (boolean)getProperty("enabled");
-    }
-
-    public void setEnabled(boolean value) {
-        setProperty("enabled", value);
-    }
-
-    public boolean getSelected() {
-        return (boolean)getProperty("selected");
-    }
-
-    public void setSelected(boolean value) {
-        setProperty("selected", value);
+    public void setText(String value) {
+        setProperty("text", value);
     }
 
 //<< Attributes

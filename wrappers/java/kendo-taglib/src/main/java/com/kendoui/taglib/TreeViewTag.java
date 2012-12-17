@@ -105,12 +105,12 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setEvent("expand", value.getBody());
     }
 
-    public void setSelect(SelectFunctionTag value) {
-        setEvent("select", value.getBody());
-    }
-
     public void setNavigate(NavigateFunctionTag value) {
         setEvent("navigate", value.getBody());
+    }
+
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
     }
 
     public boolean getCheckboxes() {
@@ -266,18 +266,6 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setProperty("expand", new Function(value));
     }
 
-    public String getSelect() {
-        Function property = ((Function)getProperty("select"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setSelect(String value) {
-        setProperty("select", new Function(value));
-    }
-
     public String getNavigate() {
         Function property = ((Function)getProperty("navigate"));
         if (property != null) {
@@ -288,6 +276,18 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
 
     public void setNavigate(String value) {
         setProperty("navigate", new Function(value));
+    }
+
+    public String getSelect() {
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
     }
 
 //<< Attributes

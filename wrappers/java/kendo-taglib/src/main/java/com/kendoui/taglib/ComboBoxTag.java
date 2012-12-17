@@ -58,6 +58,10 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("animation", value);
     }
 
+    public void setCascade(CascadeFunctionTag value) {
+        setEvent("cascade", value.getBody());
+    }
+
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
@@ -76,10 +80,6 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setSelect(SelectFunctionTag value) {
         setEvent("select", value.getBody());
-    }
-
-    public void setCascade(CascadeFunctionTag value) {
-        setEvent("cascade", value.getBody());
     }
 
     public boolean getAutoBind() {
@@ -223,6 +223,18 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("value", value);
     }
 
+    public String getCascade() {
+        Function property = ((Function)getProperty("cascade"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setCascade(String value) {
+        setProperty("cascade", new Function(value));
+    }
+
     public String getChange() {
         Function property = ((Function)getProperty("change"));
         if (property != null) {
@@ -281,18 +293,6 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setSelect(String value) {
         setProperty("select", new Function(value));
-    }
-
-    public String getCascade() {
-        Function property = ((Function)getProperty("cascade"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setCascade(String value) {
-        setProperty("cascade", new Function(value));
     }
 
 //<< Attributes

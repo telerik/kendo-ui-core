@@ -87,24 +87,16 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         setEvent("error", value.getBody());
     }
 
-    public void setSync(SyncFunctionTag value) {
-        setEvent("sync", value.getBody());
+    public void setRequestEnd(RequestEndFunctionTag value) {
+        setEvent("requestEnd", value.getBody());
     }
 
     public void setRequestStart(RequestStartFunctionTag value) {
         setEvent("requestStart", value.getBody());
     }
 
-    public void setRequestEnd(RequestEndFunctionTag value) {
-        setEvent("requestEnd", value.getBody());
-    }
-
-    public Object getAggregate() {
-        return (Object)getProperty("aggregate");
-    }
-
-    public void setAggregate(Object value) {
-        setProperty("aggregate", value);
+    public void setSync(SyncFunctionTag value) {
+        setEvent("sync", value.getBody());
     }
 
     public boolean getAutoSync() {
@@ -129,22 +121,6 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setData(Object value) {
         setProperty("data", value);
-    }
-
-    public Object getFilter() {
-        return (Object)getProperty("filter");
-    }
-
-    public void setFilter(Object value) {
-        setProperty("filter", value);
-    }
-
-    public Object getGroup() {
-        return (Object)getProperty("group");
-    }
-
-    public void setGroup(Object value) {
-        setProperty("group", value);
     }
 
     public float getPage() {
@@ -203,14 +179,6 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("serverSorting", value);
     }
 
-    public Object getSort() {
-        return (Object)getProperty("sort");
-    }
-
-    public void setSort(Object value) {
-        setProperty("sort", value);
-    }
-
     public String getType() {
         return (String)getProperty("type");
     }
@@ -243,16 +211,16 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("error", new Function(value));
     }
 
-    public String getSync() {
-        Function property = ((Function)getProperty("sync"));
+    public String getRequestEnd() {
+        Function property = ((Function)getProperty("requestEnd"));
         if (property != null) {
             return property.getBody();
         }
         return null;
     }
 
-    public void setSync(String value) {
-        setProperty("sync", new Function(value));
+    public void setRequestEnd(String value) {
+        setProperty("requestEnd", new Function(value));
     }
 
     public String getRequestStart() {
@@ -267,16 +235,16 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("requestStart", new Function(value));
     }
 
-    public String getRequestEnd() {
-        Function property = ((Function)getProperty("requestEnd"));
+    public String getSync() {
+        Function property = ((Function)getProperty("sync"));
         if (property != null) {
             return property.getBody();
         }
         return null;
     }
 
-    public void setRequestEnd(String value) {
-        setProperty("requestEnd", new Function(value));
+    public void setSync(String value) {
+        setProperty("sync", new Function(value));
     }
 
 //<< Attributes

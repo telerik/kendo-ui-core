@@ -70,11 +70,11 @@ public class GaugeAreaTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("height", value);
     }
 
-    public float getMargin() {
-        return (float)getProperty("margin");
+    public Object getMargin() {
+        return (Object)getProperty("margin");
     }
 
-    public void setMargin(float value) {
+    public void setMargin(Object value) {
         setProperty("margin", value);
     }
 

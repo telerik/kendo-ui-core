@@ -51,6 +51,14 @@ public class TransportCreateTag extends  BaseTag  /* interfaces *//* interfaces 
         return "dataSource-transport-create";
     }
 
+    public void setData(DataFunctionTag value) {
+        setEvent("data", value.getBody());
+    }
+
+    public void setUrl(UrlFunctionTag value) {
+        setEvent("url", value.getBody());
+    }
+
     public boolean getCache() {
         return (boolean)getProperty("cache");
     }
@@ -65,6 +73,14 @@ public class TransportCreateTag extends  BaseTag  /* interfaces *//* interfaces 
 
     public void setContentType(String value) {
         setProperty("contentType", value);
+    }
+
+    public Object getData() {
+        return (Object)getProperty("data");
+    }
+
+    public void setData(Object value) {
+        setProperty("data", value);
     }
 
     public String getDataType() {
@@ -89,14 +105,6 @@ public class TransportCreateTag extends  BaseTag  /* interfaces *//* interfaces 
 
     public void setUrl(String value) {
         setProperty("url", value);
-    }
-
-    public Object getData() {
-        return (Object)getProperty("data");
-    }
-
-    public void setData(Object value) {
-        setProperty("data", value);
     }
 
 //<< Attributes

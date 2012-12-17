@@ -55,12 +55,12 @@ public class ModelFieldsTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("name", value);
     }
 
-    public void setType(FieldsTypeTag value) {
-        setProperty("type", value);
-    }
-
     public void setSize(FieldsSizeTag value) {
         setProperty("size", value);
+    }
+
+    public void setType(FieldsTypeTag value) {
+        setProperty("type", value);
     }
 
     public String getName() {
@@ -71,20 +71,20 @@ public class ModelFieldsTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("name", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
-    }
-
-    public void setType(String value) {
-        setProperty("type", value);
-    }
-
     public String getSize() {
         return (String)getProperty("size");
     }
 
     public void setSize(String value) {
         setProperty("size", value);
+    }
+
+    public String getType() {
+        return (String)getProperty("type");
+    }
+
+    public void setType(String value) {
+        setProperty("type", value);
     }
 
 //<< Attributes

@@ -75,7 +75,6 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
     }
 
 //>> Attributes
-
     public void setItems(ItemsTag value) {
 
         items = value.items();
@@ -86,36 +85,12 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         return "panelBar-item";
     }
 
-    public String getText() {
-        return (String)getProperty("text");
+    public String getContentUrl() {
+        return (String)getProperty("contentUrl");
     }
 
-    public void setText(String value) {
-        setProperty("text", value);
-    }
-
-    public String getImageUrl() {
-        return (String)getProperty("imageUrl");
-    }
-
-    public void setImageUrl(String value) {
-        setProperty("imageUrl", value);
-    }
-
-    public String getSpriteCssClass() {
-        return (String)getProperty("spriteCssClass");
-    }
-
-    public void setSpriteCssClass(String value) {
-        setProperty("spriteCssClass", value);
-    }
-
-    public boolean getExpanded() {
-        return (boolean)getProperty("expanded");
-    }
-
-    public void setExpanded(boolean value) {
-        setProperty("expanded", value);
+    public void setContentUrl(String value) {
+        setProperty("contentUrl", value);
     }
 
     public boolean getEnabled() {
@@ -126,12 +101,20 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         setProperty("enabled", value);
     }
 
-    public String getContentUrl() {
-        return (String)getProperty("contentUrl");
+    public boolean getExpanded() {
+        return (boolean)getProperty("expanded");
     }
 
-    public void setContentUrl(String value) {
-        setProperty("contentUrl", value);
+    public void setExpanded(boolean value) {
+        setProperty("expanded", value);
+    }
+
+    public String getImageUrl() {
+        return (String)getProperty("imageUrl");
+    }
+
+    public void setImageUrl(String value) {
+        setProperty("imageUrl", value);
     }
 
     public boolean getSelected() {
@@ -140,6 +123,22 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
 
     public void setSelected(boolean value) {
         setProperty("selected", value);
+    }
+
+    public String getSpriteCssClass() {
+        return (String)getProperty("spriteCssClass");
+    }
+
+    public void setSpriteCssClass(String value) {
+        setProperty("spriteCssClass", value);
+    }
+
+    public String getText() {
+        return (String)getProperty("text");
+    }
+
+    public void setText(String value) {
+        setProperty("text", value);
     }
 
 //<< Attributes

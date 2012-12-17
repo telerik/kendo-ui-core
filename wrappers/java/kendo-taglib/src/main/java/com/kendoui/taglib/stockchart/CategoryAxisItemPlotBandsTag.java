@@ -65,7 +65,7 @@ public class CategoryAxisItemPlotBandsTag extends BaseTag /* interfaces *//* int
         return "stockChart-categoryAxisItem-plotBands";
     }
 
-    public void addPlotBand(CategoryAxisItemPlotBandsPlotBandTag value) {
+    public void addPlotBand(CategoryAxisItemPlotBandTag value) {
         plotBands.add(value.properties());
     }
 

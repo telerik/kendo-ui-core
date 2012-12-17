@@ -53,16 +53,16 @@ public class ImagebrowserTag extends  BaseTag  /* interfaces *//* interfaces */ 
         return "editor-imagebrowser";
     }
 
-    public void setTransport(ImagebrowserTransportTag value) {
-        setProperty("transport", value);
+    public void setMessages(ImagebrowserMessagesTag value) {
+        setProperty("messages", value);
     }
 
     public void setSchema(ImagebrowserSchemaTag value) {
         setProperty("schema", value);
     }
 
-    public void setMessages(ImagebrowserMessagesTag value) {
-        setProperty("messages", value);
+    public void setTransport(ImagebrowserTransportTag value) {
+        setProperty("transport", value);
     }
 
     public String getFileTypes() {

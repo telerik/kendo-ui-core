@@ -54,22 +54,6 @@ public class CommandItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setEvent("click", value.getBody());
     }
 
-    public String getName() {
-        return (String)getProperty("name");
-    }
-
-    public void setName(String value) {
-        setProperty("name", value);
-    }
-
-    public String getText() {
-        return (String)getProperty("text");
-    }
-
-    public void setText(String value) {
-        setProperty("text", value);
-    }
-
     public String getClassName() {
         return (String)getProperty("className");
     }
@@ -88,6 +72,22 @@ public class CommandItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setClick(String value) {
         setProperty("click", new Function(value));
+    }
+
+    public String getName() {
+        return (String)getProperty("name");
+    }
+
+    public void setName(String value) {
+        setProperty("name", value);
+    }
+
+    public String getText() {
+        return (String)getProperty("text");
+    }
+
+    public void setText(String value) {
+        setProperty("text", value);
     }
 
 //<< Attributes

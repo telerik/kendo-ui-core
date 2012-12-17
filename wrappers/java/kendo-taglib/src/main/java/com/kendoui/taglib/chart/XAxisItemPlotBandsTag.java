@@ -65,7 +65,7 @@ public class XAxisItemPlotBandsTag extends BaseTag /* interfaces *//* interfaces
         return "chart-xAxisItem-plotBands";
     }
 
-    public void addPlotBand(XAxisItemPlotBandsPlotBandTag value) {
+    public void addPlotBand(XAxisItemPlotBandTag value) {
         plotBands.add(value.properties());
     }
 

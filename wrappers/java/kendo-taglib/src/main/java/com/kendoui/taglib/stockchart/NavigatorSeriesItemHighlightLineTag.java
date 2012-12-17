@@ -51,14 +51,6 @@ public class NavigatorSeriesItemHighlightLineTag extends  BaseTag  /* interfaces
         return "stockChart-navigator-seriesItem-highlight-line";
     }
 
-    public float getWidth() {
-        return (float)getProperty("width");
-    }
-
-    public void setWidth(float value) {
-        setProperty("width", value);
-    }
-
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -73,6 +65,14 @@ public class NavigatorSeriesItemHighlightLineTag extends  BaseTag  /* interfaces
 
     public void setOpacity(float value) {
         setProperty("opacity", value);
+    }
+
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
 //<< Attributes

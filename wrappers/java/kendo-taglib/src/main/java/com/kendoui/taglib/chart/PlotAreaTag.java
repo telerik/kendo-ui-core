@@ -65,20 +65,20 @@ public class PlotAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("background", value);
     }
 
+    public Object getMargin() {
+        return (Object)getProperty("margin");
+    }
+
+    public void setMargin(Object value) {
+        setProperty("margin", value);
+    }
+
     public float getOpacity() {
         return (float)getProperty("opacity");
     }
 
     public void setOpacity(float value) {
         setProperty("opacity", value);
-    }
-
-    public float getMargin() {
-        return (float)getProperty("margin");
-    }
-
-    public void setMargin(float value) {
-        setProperty("margin", value);
     }
 
 //<< Attributes

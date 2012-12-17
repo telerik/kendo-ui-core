@@ -51,12 +51,36 @@ public class ImagebrowserMessagesTag extends  BaseTag  /* interfaces *//* interf
         return "editor-imagebrowser-messages";
     }
 
-    public String getUploadFile() {
-        return (String)getProperty("uploadFile");
+    public String getDeleteFile() {
+        return (String)getProperty("deleteFile");
     }
 
-    public void setUploadFile(String value) {
-        setProperty("uploadFile", value);
+    public void setDeleteFile(String value) {
+        setProperty("deleteFile", value);
+    }
+
+    public String getDirectoryNotFound() {
+        return (String)getProperty("directoryNotFound");
+    }
+
+    public void setDirectoryNotFound(String value) {
+        setProperty("directoryNotFound", value);
+    }
+
+    public String getEmptyFolder() {
+        return (String)getProperty("emptyFolder");
+    }
+
+    public void setEmptyFolder(String value) {
+        setProperty("emptyFolder", value);
+    }
+
+    public String getInvalidFileType() {
+        return (String)getProperty("invalidFileType");
+    }
+
+    public void setInvalidFileType(String value) {
+        setProperty("invalidFileType", value);
     }
 
     public String getOrderBy() {
@@ -83,44 +107,20 @@ public class ImagebrowserMessagesTag extends  BaseTag  /* interfaces *//* interf
         setProperty("orderBySize", value);
     }
 
-    public String getDirectoryNotFound() {
-        return (String)getProperty("directoryNotFound");
-    }
-
-    public void setDirectoryNotFound(String value) {
-        setProperty("directoryNotFound", value);
-    }
-
-    public String getEmptyFolder() {
-        return (String)getProperty("emptyFolder");
-    }
-
-    public void setEmptyFolder(String value) {
-        setProperty("emptyFolder", value);
-    }
-
-    public String getDeleteFile() {
-        return (String)getProperty("deleteFile");
-    }
-
-    public void setDeleteFile(String value) {
-        setProperty("deleteFile", value);
-    }
-
-    public String getInvalidFileType() {
-        return (String)getProperty("invalidFileType");
-    }
-
-    public void setInvalidFileType(String value) {
-        setProperty("invalidFileType", value);
-    }
-
     public String getOverwriteFile() {
         return (String)getProperty("overwriteFile");
     }
 
     public void setOverwriteFile(String value) {
         setProperty("overwriteFile", value);
+    }
+
+    public String getUploadFile() {
+        return (String)getProperty("uploadFile");
+    }
+
+    public void setUploadFile(String value) {
+        setProperty("uploadFile", value);
     }
 
 //<< Attributes

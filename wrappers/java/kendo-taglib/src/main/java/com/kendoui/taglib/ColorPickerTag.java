@@ -47,44 +47,12 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "colorPicker";
     }
 
-    public void setSelect(SelectFunctionTag value) {
-        setEvent("select", value.getBody());
-    }
-
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
 
-    public String getPalette() {
-        return (String)getProperty("palette");
-    }
-
-    public void setPalette(String value) {
-        setProperty("palette", value);
-    }
-
-    public float getColumns() {
-        return (float)getProperty("columns");
-    }
-
-    public void setColumns(float value) {
-        setProperty("columns", value);
-    }
-
-    public String getValue() {
-        return (String)getProperty("value");
-    }
-
-    public void setValue(String value) {
-        setProperty("value", value);
-    }
-
-    public String getToolIcon() {
-        return (String)getProperty("toolIcon");
-    }
-
-    public void setToolIcon(String value) {
-        setProperty("toolIcon", value);
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
     }
 
     public boolean getButtons() {
@@ -95,20 +63,12 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("buttons", value);
     }
 
-    public boolean getPreview() {
-        return (boolean)getProperty("preview");
+    public float getColumns() {
+        return (float)getProperty("columns");
     }
 
-    public void setPreview(boolean value) {
-        setProperty("preview", value);
-    }
-
-    public boolean getOpacity() {
-        return (boolean)getProperty("opacity");
-    }
-
-    public void setOpacity(boolean value) {
-        setProperty("opacity", value);
+    public void setColumns(float value) {
+        setProperty("columns", value);
     }
 
     public Object getMessages() {
@@ -119,16 +79,44 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("messages", value);
     }
 
-    public String getSelect() {
-        Function property = ((Function)getProperty("select"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
+    public boolean getOpacity() {
+        return (boolean)getProperty("opacity");
     }
 
-    public void setSelect(String value) {
-        setProperty("select", new Function(value));
+    public void setOpacity(boolean value) {
+        setProperty("opacity", value);
+    }
+
+    public String getPalette() {
+        return (String)getProperty("palette");
+    }
+
+    public void setPalette(String value) {
+        setProperty("palette", value);
+    }
+
+    public boolean getPreview() {
+        return (boolean)getProperty("preview");
+    }
+
+    public void setPreview(boolean value) {
+        setProperty("preview", value);
+    }
+
+    public String getToolIcon() {
+        return (String)getProperty("toolIcon");
+    }
+
+    public void setToolIcon(String value) {
+        setProperty("toolIcon", value);
+    }
+
+    public String getValue() {
+        return (String)getProperty("value");
+    }
+
+    public void setValue(String value) {
+        setProperty("value", value);
     }
 
     public String getChange() {
@@ -141,6 +129,18 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setChange(String value) {
         setProperty("change", new Function(value));
+    }
+
+    public String getSelect() {
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
     }
 
 //<< Attributes

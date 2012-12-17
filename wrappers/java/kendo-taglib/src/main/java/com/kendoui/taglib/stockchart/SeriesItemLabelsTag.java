@@ -55,6 +55,10 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("border", value);
     }
 
+    public void setTemplate(TemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public String getBackground() {
         return (String)getProperty("background");
     }
@@ -87,19 +91,19 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("format", value);
     }
 
-    public float getMargin() {
-        return (float)getProperty("margin");
+    public Object getMargin() {
+        return (Object)getProperty("margin");
     }
 
-    public void setMargin(float value) {
+    public void setMargin(Object value) {
         setProperty("margin", value);
     }
 
-    public float getPadding() {
-        return (float)getProperty("padding");
+    public Object getPadding() {
+        return (Object)getProperty("padding");
     }
 
-    public void setPadding(float value) {
+    public void setPadding(Object value) {
         setProperty("padding", value);
     }
 

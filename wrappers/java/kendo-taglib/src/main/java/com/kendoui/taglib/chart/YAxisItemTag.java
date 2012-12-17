@@ -75,12 +75,12 @@ public class YAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("title", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public Object getAxisCrossingValue() {
+        return (Object)getProperty("axisCrossingValue");
     }
 
-    public void setType(String value) {
-        setProperty("type", value);
+    public void setAxisCrossingValue(Object value) {
+        setProperty("axisCrossingValue", value);
     }
 
     public String getBaseUnit() {
@@ -163,20 +163,20 @@ public class YAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("reverse", value);
     }
 
+    public String getType() {
+        return (String)getProperty("type");
+    }
+
+    public void setType(String value) {
+        setProperty("type", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
-    }
-
-    public Object getAxisCrossingValue() {
-        return (Object)getProperty("axisCrossingValue");
-    }
-
-    public void setAxisCrossingValue(Object value) {
-        setProperty("axisCrossingValue", value);
     }
 
 //<< Attributes

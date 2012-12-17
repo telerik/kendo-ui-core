@@ -54,36 +54,20 @@ public class PageableTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("messages", value);
     }
 
-    public float getPageSize() {
-        return (float)getProperty("pageSize");
-    }
-
-    public void setPageSize(float value) {
-        setProperty("pageSize", value);
-    }
-
-    public boolean getPreviousNext() {
-        return (boolean)getProperty("previousNext");
-    }
-
-    public void setPreviousNext(boolean value) {
-        setProperty("previousNext", value);
-    }
-
-    public boolean getNumeric() {
-        return (boolean)getProperty("numeric");
-    }
-
-    public void setNumeric(boolean value) {
-        setProperty("numeric", value);
-    }
-
     public float getButtonCount() {
         return (float)getProperty("buttonCount");
     }
 
     public void setButtonCount(float value) {
         setProperty("buttonCount", value);
+    }
+
+    public boolean getInfo() {
+        return (boolean)getProperty("info");
+    }
+
+    public void setInfo(boolean value) {
+        setProperty("info", value);
     }
 
     public boolean getInput() {
@@ -94,12 +78,36 @@ public class PageableTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("input", value);
     }
 
-    public boolean getPageSizes() {
-        return (boolean)getProperty("pageSizes");
+    public boolean getNumeric() {
+        return (boolean)getProperty("numeric");
     }
 
-    public void setPageSizes(boolean value) {
+    public void setNumeric(boolean value) {
+        setProperty("numeric", value);
+    }
+
+    public float getPageSize() {
+        return (float)getProperty("pageSize");
+    }
+
+    public void setPageSize(float value) {
+        setProperty("pageSize", value);
+    }
+
+    public Object getPageSizes() {
+        return (Object)getProperty("pageSizes");
+    }
+
+    public void setPageSizes(Object value) {
         setProperty("pageSizes", value);
+    }
+
+    public boolean getPreviousNext() {
+        return (boolean)getProperty("previousNext");
+    }
+
+    public void setPreviousNext(boolean value) {
+        setProperty("previousNext", value);
     }
 
     public boolean getRefresh() {
@@ -108,14 +116,6 @@ public class PageableTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setRefresh(boolean value) {
         setProperty("refresh", value);
-    }
-
-    public boolean getInfo() {
-        return (boolean)getProperty("info");
-    }
-
-    public void setInfo(boolean value) {
-        setProperty("info", value);
     }
 
 //<< Attributes

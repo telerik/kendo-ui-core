@@ -52,8 +52,28 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-schema";
     }
 
+    public void setAggregates(AggregatesFunctionTag value) {
+        setEvent("aggregates", value.getBody());
+    }
+
+    public void setData(DataFunctionTag value) {
+        setEvent("data", value.getBody());
+    }
+
+    public void setErrors(ErrorsFunctionTag value) {
+        setEvent("errors", value.getBody());
+    }
+
+    public void setGroups(GroupsFunctionTag value) {
+        setEvent("groups", value.getBody());
+    }
+
     public void setParse(ParseFunctionTag value) {
         setEvent("parse", value.getBody());
+    }
+
+    public void setTotal(TotalFunctionTag value) {
+        setEvent("total", value.getBody());
     }
 
     public String getAggregates() {

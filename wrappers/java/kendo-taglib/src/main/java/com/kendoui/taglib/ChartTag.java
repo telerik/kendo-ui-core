@@ -54,10 +54,6 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     }
 
-    public void setTitle(TitleTag value) {
-        setProperty("title", value);
-    }
-
     public void setChartArea(ChartAreaTag value) {
         setProperty("chartArea", value);
     }
@@ -80,6 +76,10 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
         setProperty("series", value.series());
 
+    }
+
+    public void setTitle(TitleTag value) {
+        setProperty("title", value);
     }
 
     public void setTooltip(TooltipTag value) {
@@ -112,16 +112,16 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setEvent("dataBound", value.getBody());
     }
 
-    public void setDragStart(DragStartFunctionTag value) {
-        setEvent("dragStart", value.getBody());
-    }
-
     public void setDrag(DragFunctionTag value) {
         setEvent("drag", value.getBody());
     }
 
     public void setDragEnd(DragEndFunctionTag value) {
         setEvent("dragEnd", value.getBody());
+    }
+
+    public void setDragStart(DragStartFunctionTag value) {
+        setEvent("dragStart", value.getBody());
     }
 
     public void setPlotAreaClick(PlotAreaClickFunctionTag value) {
@@ -136,16 +136,16 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setEvent("seriesHover", value.getBody());
     }
 
-    public void setZoomStart(ZoomStartFunctionTag value) {
-        setEvent("zoomStart", value.getBody());
-    }
-
     public void setZoom(ZoomFunctionTag value) {
         setEvent("zoom", value.getBody());
     }
 
     public void setZoomEnd(ZoomEndFunctionTag value) {
         setEvent("zoomEnd", value.getBody());
+    }
+
+    public void setZoomStart(ZoomStartFunctionTag value) {
+        setEvent("zoomStart", value.getBody());
     }
 
     @Override
@@ -201,18 +201,6 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("dataBound", new Function(value));
     }
 
-    public String getDragStart() {
-        Function property = ((Function)getProperty("dragStart"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setDragStart(String value) {
-        setProperty("dragStart", new Function(value));
-    }
-
     public String getDrag() {
         Function property = ((Function)getProperty("drag"));
         if (property != null) {
@@ -235,6 +223,18 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setDragEnd(String value) {
         setProperty("dragEnd", new Function(value));
+    }
+
+    public String getDragStart() {
+        Function property = ((Function)getProperty("dragStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDragStart(String value) {
+        setProperty("dragStart", new Function(value));
     }
 
     public String getPlotAreaClick() {
@@ -273,18 +273,6 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("seriesHover", new Function(value));
     }
 
-    public String getZoomStart() {
-        Function property = ((Function)getProperty("zoomStart"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setZoomStart(String value) {
-        setProperty("zoomStart", new Function(value));
-    }
-
     public String getZoom() {
         Function property = ((Function)getProperty("zoom"));
         if (property != null) {
@@ -307,6 +295,18 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setZoomEnd(String value) {
         setProperty("zoomEnd", new Function(value));
+    }
+
+    public String getZoomStart() {
+        Function property = ((Function)getProperty("zoomStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setZoomStart(String value) {
+        setProperty("zoomStart", new Function(value));
     }
 
 //<< Attributes

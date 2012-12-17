@@ -50,11 +50,11 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         return "grid-editable";
     }
 
-    public boolean getConfirmation() {
-        return (boolean)getProperty("confirmation");
+    public Object getConfirmation() {
+        return (Object)getProperty("confirmation");
     }
 
-    public void setConfirmation(boolean value) {
+    public void setConfirmation(Object value) {
         setProperty("confirmation", value);
     }
 

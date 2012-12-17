@@ -51,20 +51,20 @@ public class AnimationCloseTag extends  BaseTag  /* interfaces *//* interfaces *
         return "datePicker-animation-close";
     }
 
-    public String getEffects() {
-        return (String)getProperty("effects");
-    }
-
-    public void setEffects(String value) {
-        setProperty("effects", value);
-    }
-
     public float getDuration() {
         return (float)getProperty("duration");
     }
 
     public void setDuration(float value) {
         setProperty("duration", value);
+    }
+
+    public String getEffects() {
+        return (String)getProperty("effects");
+    }
+
+    public void setEffects(String value) {
+        setProperty("effects", value);
     }
 
 //<< Attributes

@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI
 
         public override IChartSerializer CreateSerializer()
         {
-            return new GaugeRadialScaleLabelsSerializer(this);
+            return new GaugeScaleLabelsSerializerBase(this);
         }
     }
 }

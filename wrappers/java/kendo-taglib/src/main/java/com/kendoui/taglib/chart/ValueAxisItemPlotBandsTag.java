@@ -65,7 +65,7 @@ public class ValueAxisItemPlotBandsTag extends BaseTag /* interfaces *//* interf
         return "chart-valueAxisItem-plotBands";
     }
 
-    public void addPlotBand(ValueAxisItemPlotBandsPlotBandTag value) {
+    public void addPlotBand(ValueAxisItemPlotBandTag value) {
         plotBands.add(value.properties());
     }
 

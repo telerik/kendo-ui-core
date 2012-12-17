@@ -67,20 +67,12 @@ public class PageableMessagesTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("empty", value);
     }
 
-    public String getPage() {
-        return (String)getProperty("page");
+    public String getFirst() {
+        return (String)getProperty("first");
     }
 
-    public void setPage(String value) {
-        setProperty("page", value);
-    }
-
-    public String getOf() {
-        return (String)getProperty("of");
-    }
-
-    public void setOf(String value) {
-        setProperty("of", value);
+    public void setFirst(String value) {
+        setProperty("first", value);
     }
 
     public String getItemsPerPage() {
@@ -91,20 +83,12 @@ public class PageableMessagesTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("itemsPerPage", value);
     }
 
-    public String getFirst() {
-        return (String)getProperty("first");
+    public String getLast() {
+        return (String)getProperty("last");
     }
 
-    public void setFirst(String value) {
-        setProperty("first", value);
-    }
-
-    public String getPrevious() {
-        return (String)getProperty("previous");
-    }
-
-    public void setPrevious(String value) {
-        setProperty("previous", value);
+    public void setLast(String value) {
+        setProperty("last", value);
     }
 
     public String getNext() {
@@ -115,12 +99,28 @@ public class PageableMessagesTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("next", value);
     }
 
-    public String getLast() {
-        return (String)getProperty("last");
+    public String getOf() {
+        return (String)getProperty("of");
     }
 
-    public void setLast(String value) {
-        setProperty("last", value);
+    public void setOf(String value) {
+        setProperty("of", value);
+    }
+
+    public String getPage() {
+        return (String)getProperty("page");
+    }
+
+    public void setPage(String value) {
+        setProperty("page", value);
+    }
+
+    public String getPrevious() {
+        return (String)getProperty("previous");
+    }
+
+    public void setPrevious(String value) {
+        setProperty("previous", value);
     }
 
     public String getRefresh() {

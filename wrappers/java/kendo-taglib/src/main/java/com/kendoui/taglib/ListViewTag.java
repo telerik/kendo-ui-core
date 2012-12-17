@@ -125,12 +125,12 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("change", value.getBody());
     }
 
-    public void setDataBound(DataBoundFunctionTag value) {
-        setEvent("dataBound", value.getBody());
-    }
-
     public void setDataBinding(DataBindingFunctionTag value) {
         setEvent("dataBinding", value.getBody());
+    }
+
+    public void setDataBound(DataBoundFunctionTag value) {
+        setEvent("dataBound", value.getBody());
     }
 
     public void setEdit(EditFunctionTag value) {
@@ -139,6 +139,14 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setRemove(RemoveFunctionTag value) {
         setEvent("remove", value.getBody());
+    }
+
+    public String getAltTemplate() {
+        return (String)getProperty("altTemplate");
+    }
+
+    public void setAltTemplate(String value) {
+        setProperty("altTemplate", value);
     }
 
     public boolean getAutoBind() {
@@ -154,28 +162,20 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("dataSource", dataSource);
     }
 
+    public String getEditTemplate() {
+        return (String)getProperty("editTemplate");
+    }
+
+    public void setEditTemplate(String value) {
+        setProperty("editTemplate", value);
+    }
+
     public boolean getNavigatable() {
         return (boolean)getProperty("navigatable");
     }
 
     public void setNavigatable(boolean value) {
         setProperty("navigatable", value);
-    }
-
-    public String getSelectable() {
-        return (String)getProperty("selectable");
-    }
-
-    public void setSelectable(String value) {
-        setProperty("selectable", value);
-    }
-
-    public String getTemplate() {
-        return (String)getProperty("template");
-    }
-
-    public void setTemplate(String value) {
-        setProperty("template", value);
     }
 
     public boolean getPageable() {
@@ -186,20 +186,12 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("pageable", value);
     }
 
-    public String getEditTemplate() {
-        return (String)getProperty("editTemplate");
+    public String getSelectable() {
+        return (String)getProperty("selectable");
     }
 
-    public void setEditTemplate(String value) {
-        setProperty("editTemplate", value);
-    }
-
-    public String getAltTemplate() {
-        return (String)getProperty("altTemplate");
-    }
-
-    public void setAltTemplate(String value) {
-        setProperty("altTemplate", value);
+    public void setSelectable(String value) {
+        setProperty("selectable", value);
     }
 
     public String getTagName() {
@@ -208,6 +200,14 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setTagName(String value) {
         setProperty("tagName", value);
+    }
+
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
     }
 
     public String getChange() {
@@ -222,18 +222,6 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("change", new Function(value));
     }
 
-    public String getDataBound() {
-        Function property = ((Function)getProperty("dataBound"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setDataBound(String value) {
-        setProperty("dataBound", new Function(value));
-    }
-
     public String getDataBinding() {
         Function property = ((Function)getProperty("dataBinding"));
         if (property != null) {
@@ -244,6 +232,18 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setDataBinding(String value) {
         setProperty("dataBinding", new Function(value));
+    }
+
+    public String getDataBound() {
+        Function property = ((Function)getProperty("dataBound"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDataBound(String value) {
+        setProperty("dataBound", new Function(value));
     }
 
     public String getEdit() {

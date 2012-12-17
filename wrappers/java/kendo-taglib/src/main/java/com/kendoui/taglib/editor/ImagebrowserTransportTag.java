@@ -51,6 +51,34 @@ public class ImagebrowserTransportTag extends  BaseTag  /* interfaces *//* inter
         return "editor-imagebrowser-transport";
     }
 
+    public void setImageUrl(ImageUrlFunctionTag value) {
+        setEvent("imageUrl", value.getBody());
+    }
+
+    public Object getCreate() {
+        return (Object)getProperty("create");
+    }
+
+    public void setCreate(Object value) {
+        setProperty("create", value);
+    }
+
+    public Object getDestroy() {
+        return (Object)getProperty("destroy");
+    }
+
+    public void setDestroy(Object value) {
+        setProperty("destroy", value);
+    }
+
+    public String getImageUrl() {
+        return (String)getProperty("imageUrl");
+    }
+
+    public void setImageUrl(String value) {
+        setProperty("imageUrl", value);
+    }
+
     public Object getRead() {
         return (Object)getProperty("read");
     }
@@ -73,30 +101,6 @@ public class ImagebrowserTransportTag extends  BaseTag  /* interfaces *//* inter
 
     public void setUploadUrl(String value) {
         setProperty("uploadUrl", value);
-    }
-
-    public String getImageUrl() {
-        return (String)getProperty("imageUrl");
-    }
-
-    public void setImageUrl(String value) {
-        setProperty("imageUrl", value);
-    }
-
-    public Object getDestroy() {
-        return (Object)getProperty("destroy");
-    }
-
-    public void setDestroy(Object value) {
-        setProperty("destroy", value);
-    }
-
-    public Object getCreate() {
-        return (Object)getProperty("create");
-    }
-
-    public void setCreate(Object value) {
-        setProperty("create", value);
     }
 
 //<< Attributes

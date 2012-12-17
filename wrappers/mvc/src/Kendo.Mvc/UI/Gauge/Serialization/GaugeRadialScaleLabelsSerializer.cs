@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Extensions;
 
     internal class GaugeRadialScaleLabelsSerializer : GaugeScaleLabelsSerializerBase
     {

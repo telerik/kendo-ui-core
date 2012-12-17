@@ -58,6 +58,10 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("animation", value);
     }
 
+    public void setCascade(CascadeFunctionTag value) {
+        setEvent("cascade", value.getBody());
+    }
+
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
@@ -76,10 +80,6 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
 
     public void setSelect(SelectFunctionTag value) {
         setEvent("select", value.getBody());
-    }
-
-    public void setCascade(CascadeFunctionTag value) {
-        setEvent("cascade", value.getBody());
     }
 
     public boolean getAutoBind() {
@@ -159,11 +159,11 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("index", value);
     }
 
-    public String getOptionLabel() {
-        return (String)getProperty("optionLabel");
+    public Object getOptionLabel() {
+        return (Object)getProperty("optionLabel");
     }
 
-    public void setOptionLabel(String value) {
+    public void setOptionLabel(Object value) {
         setProperty("optionLabel", value);
     }
 
@@ -189,6 +189,18 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
 
     public void setValue(String value) {
         setProperty("value", value);
+    }
+
+    public String getCascade() {
+        Function property = ((Function)getProperty("cascade"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setCascade(String value) {
+        setProperty("cascade", new Function(value));
     }
 
     public String getChange() {
@@ -249,18 +261,6 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
 
     public void setSelect(String value) {
         setProperty("select", new Function(value));
-    }
-
-    public String getCascade() {
-        Function property = ((Function)getProperty("cascade"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setCascade(String value) {
-        setProperty("cascade", new Function(value));
     }
 
 //<< Attributes

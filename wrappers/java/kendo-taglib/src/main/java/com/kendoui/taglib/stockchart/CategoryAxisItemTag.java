@@ -83,6 +83,38 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("title", value);
     }
 
+    public Object getAutoBaseUnitSteps() {
+        return (Object)getProperty("autoBaseUnitSteps");
+    }
+
+    public void setAutoBaseUnitSteps(Object value) {
+        setProperty("autoBaseUnitSteps", value);
+    }
+
+    public Object getAxisCrossingValue() {
+        return (Object)getProperty("axisCrossingValue");
+    }
+
+    public void setAxisCrossingValue(Object value) {
+        setProperty("axisCrossingValue", value);
+    }
+
+    public String getBaseUnit() {
+        return (String)getProperty("baseUnit");
+    }
+
+    public void setBaseUnit(String value) {
+        setProperty("baseUnit", value);
+    }
+
+    public Object getBaseUnitStep() {
+        return (Object)getProperty("baseUnitStep");
+    }
+
+    public void setBaseUnitStep(Object value) {
+        setProperty("baseUnitStep", value);
+    }
+
     public Object getCategories() {
         return (Object)getProperty("categories");
     }
@@ -115,6 +147,30 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("justified", value);
     }
 
+    public Object getMax() {
+        return (Object)getProperty("max");
+    }
+
+    public void setMax(Object value) {
+        setProperty("max", value);
+    }
+
+    public float getMaxDateGroups() {
+        return (float)getProperty("maxDateGroups");
+    }
+
+    public void setMaxDateGroups(float value) {
+        setProperty("maxDateGroups", value);
+    }
+
+    public Object getMin() {
+        return (Object)getProperty("min");
+    }
+
+    public void setMin(Object value) {
+        setProperty("min", value);
+    }
+
     public String getName() {
         return (String)getProperty("name");
     }
@@ -139,54 +195,6 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("reverse", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
-    }
-
-    public void setType(String value) {
-        setProperty("type", value);
-    }
-
-    public Object getAutoBaseUnitSteps() {
-        return (Object)getProperty("autoBaseUnitSteps");
-    }
-
-    public void setAutoBaseUnitSteps(Object value) {
-        setProperty("autoBaseUnitSteps", value);
-    }
-
-    public String getBaseUnit() {
-        return (String)getProperty("baseUnit");
-    }
-
-    public void setBaseUnit(String value) {
-        setProperty("baseUnit", value);
-    }
-
-    public Object getBaseUnitStep() {
-        return (Object)getProperty("baseUnitStep");
-    }
-
-    public void setBaseUnitStep(Object value) {
-        setProperty("baseUnitStep", value);
-    }
-
-    public Object getMax() {
-        return (Object)getProperty("max");
-    }
-
-    public void setMax(Object value) {
-        setProperty("max", value);
-    }
-
-    public Object getMin() {
-        return (Object)getProperty("min");
-    }
-
-    public void setMin(Object value) {
-        setProperty("min", value);
-    }
-
     public boolean getRoundToBaseUnit() {
         return (boolean)getProperty("roundToBaseUnit");
     }
@@ -195,20 +203,12 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("roundToBaseUnit", value);
     }
 
-    public float getWeekStartDay() {
-        return (float)getProperty("weekStartDay");
+    public String getType() {
+        return (String)getProperty("type");
     }
 
-    public void setWeekStartDay(float value) {
-        setProperty("weekStartDay", value);
-    }
-
-    public float getMaxDateGroups() {
-        return (float)getProperty("maxDateGroups");
-    }
-
-    public void setMaxDateGroups(float value) {
-        setProperty("maxDateGroups", value);
+    public void setType(String value) {
+        setProperty("type", value);
     }
 
     public boolean getVisible() {
@@ -219,12 +219,12 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("visible", value);
     }
 
-    public Object getAxisCrossingValue() {
-        return (Object)getProperty("axisCrossingValue");
+    public float getWeekStartDay() {
+        return (float)getProperty("weekStartDay");
     }
 
-    public void setAxisCrossingValue(Object value) {
-        setProperty("axisCrossingValue", value);
+    public void setWeekStartDay(float value) {
+        setProperty("weekStartDay", value);
     }
 
 //<< Attributes

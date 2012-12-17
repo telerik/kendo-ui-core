@@ -51,30 +51,6 @@ public class OperatorsStringTag extends  BaseTag  /* interfaces *//* interfaces 
         return "grid-filterable-operators-string";
     }
 
-    public String getEq() {
-        return (String)getProperty("eq");
-    }
-
-    public void setEq(String value) {
-        setProperty("eq", value);
-    }
-
-    public String getNeq() {
-        return (String)getProperty("neq");
-    }
-
-    public void setNeq(String value) {
-        setProperty("neq", value);
-    }
-
-    public String getStartswith() {
-        return (String)getProperty("startswith");
-    }
-
-    public void setStartswith(String value) {
-        setProperty("startswith", value);
-    }
-
     public String getContains() {
         return (String)getProperty("contains");
     }
@@ -97,6 +73,30 @@ public class OperatorsStringTag extends  BaseTag  /* interfaces *//* interfaces 
 
     public void setEndswith(String value) {
         setProperty("endswith", value);
+    }
+
+    public String getEq() {
+        return (String)getProperty("eq");
+    }
+
+    public void setEq(String value) {
+        setProperty("eq", value);
+    }
+
+    public String getNeq() {
+        return (String)getProperty("neq");
+    }
+
+    public void setNeq(String value) {
+        setProperty("neq", value);
+    }
+
+    public String getStartswith() {
+        return (String)getProperty("startswith");
+    }
+
+    public void setStartswith(String value) {
+        setProperty("startswith", value);
     }
 
 //<< Attributes

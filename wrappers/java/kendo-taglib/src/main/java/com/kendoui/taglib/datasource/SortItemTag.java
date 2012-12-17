@@ -49,20 +49,20 @@ public class SortItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "dataSource-sortItem";
     }
 
-    public String getField() {
-        return (String)getProperty("field");
-    }
-
-    public void setField(String value) {
-        setProperty("field", value);
-    }
-
     public String getDir() {
         return (String)getProperty("dir");
     }
 
     public void setDir(String value) {
         setProperty("dir", value);
+    }
+
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
     }
 
 //<< Attributes

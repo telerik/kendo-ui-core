@@ -49,20 +49,20 @@ public class AggregateAggregateItemTag extends  BaseTag  /* interfaces *//* inte
         return "dataSource-aggregateItem";
     }
 
-    public String getField() {
-        return (String)getProperty("field");
-    }
-
-    public void setField(String value) {
-        setProperty("field", value);
-    }
-
     public String getAggregate() {
         return (String)getProperty("aggregate");
     }
 
     public void setAggregate(String value) {
         setProperty("aggregate", value);
+    }
+
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
     }
 
 //<< Attributes

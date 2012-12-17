@@ -49,20 +49,20 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
         return "stockChart-navigator-seriesItem";
     }
 
-    public void setHighlight(NavigatorSeriesItemHighlightTag value) {
-        setProperty("highlight", value);
-    }
-
     public void setBorder(NavigatorSeriesItemBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setLine(NavigatorSeriesItemLineTag value) {
-        setProperty("line", value);
+    public void setHighlight(NavigatorSeriesItemHighlightTag value) {
+        setProperty("highlight", value);
     }
 
     public void setLabels(NavigatorSeriesItemLabelsTag value) {
         setProperty("labels", value);
+    }
+
+    public void setLine(NavigatorSeriesItemLineTag value) {
+        setProperty("line", value);
     }
 
     public void setMarkers(NavigatorSeriesItemMarkersTag value) {
@@ -75,62 +75,6 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
 
     public void setTooltip(NavigatorSeriesItemTooltipTag value) {
         setProperty("tooltip", value);
-    }
-
-    public String getType() {
-        return (String)getProperty("type");
-    }
-
-    public void setType(String value) {
-        setProperty("type", value);
-    }
-
-    public String getDashType() {
-        return (String)getProperty("dashType");
-    }
-
-    public void setDashType(String value) {
-        setProperty("dashType", value);
-    }
-
-    public Object getData() {
-        return (Object)getProperty("data");
-    }
-
-    public void setData(Object value) {
-        setProperty("data", value);
-    }
-
-    public String getHighField() {
-        return (String)getProperty("highField");
-    }
-
-    public void setHighField(String value) {
-        setProperty("highField", value);
-    }
-
-    public String getField() {
-        return (String)getProperty("field");
-    }
-
-    public void setField(String value) {
-        setProperty("field", value);
-    }
-
-    public String getGroupNameTemplate() {
-        return (String)getProperty("groupNameTemplate");
-    }
-
-    public void setGroupNameTemplate(String value) {
-        setProperty("groupNameTemplate", value);
-    }
-
-    public String getName() {
-        return (String)getProperty("name");
-    }
-
-    public void setName(String value) {
-        setProperty("name", value);
     }
 
     public String getAggregate() {
@@ -173,6 +117,22 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("colorField", value);
     }
 
+    public String getDashType() {
+        return (String)getProperty("dashType");
+    }
+
+    public void setDashType(String value) {
+        setProperty("dashType", value);
+    }
+
+    public Object getData() {
+        return (Object)getProperty("data");
+    }
+
+    public void setData(Object value) {
+        setProperty("data", value);
+    }
+
     public String getDownColor() {
         return (String)getProperty("downColor");
     }
@@ -189,12 +149,36 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("downColorField", value);
     }
 
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
+    }
+
     public float getGap() {
         return (float)getProperty("gap");
     }
 
     public void setGap(float value) {
         setProperty("gap", value);
+    }
+
+    public String getGroupNameTemplate() {
+        return (String)getProperty("groupNameTemplate");
+    }
+
+    public void setGroupNameTemplate(String value) {
+        setProperty("groupNameTemplate", value);
+    }
+
+    public String getHighField() {
+        return (String)getProperty("highField");
+    }
+
+    public void setHighField(String value) {
+        setProperty("highField", value);
     }
 
     public String getLine() {
@@ -221,6 +205,14 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("missingValues", value);
     }
 
+    public String getName() {
+        return (String)getProperty("name");
+    }
+
+    public void setName(String value) {
+        setProperty("name", value);
+    }
+
     public float getOpacity() {
         return (float)getProperty("opacity");
     }
@@ -245,12 +237,20 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("spacing", value);
     }
 
-    public boolean getStack() {
-        return (boolean)getProperty("stack");
+    public Object getStack() {
+        return (Object)getProperty("stack");
     }
 
-    public void setStack(boolean value) {
+    public void setStack(Object value) {
         setProperty("stack", value);
+    }
+
+    public String getType() {
+        return (String)getProperty("type");
+    }
+
+    public void setType(String value) {
+        setProperty("type", value);
     }
 
     public float getWidth() {

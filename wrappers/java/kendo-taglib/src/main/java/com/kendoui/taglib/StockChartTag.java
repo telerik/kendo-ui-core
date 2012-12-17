@@ -45,28 +45,10 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
         return "stockChart";
     }
 
-    public void setNavigator(NavigatorTag value) {
-        setProperty("navigator", value);
-    }
-
-    public void setSeries(SeriesTag value) {
-
-        setProperty("series", value.series());
-
-    }
-
-    public void setTooltip(TooltipTag value) {
-        setProperty("tooltip", value);
-    }
-
     public void setCategoryAxis(CategoryAxisTag value) {
 
         setProperty("categoryAxis", value.categoryAxis());
 
-    }
-
-    public void setTitle(TitleTag value) {
-        setProperty("title", value);
     }
 
     public void setChartArea(ChartAreaTag value) {
@@ -77,6 +59,10 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
         setProperty("legend", value);
     }
 
+    public void setNavigator(NavigatorTag value) {
+        setProperty("navigator", value);
+    }
+
     public void setPanes(PanesTag value) {
 
         setProperty("panes", value.panes());
@@ -85,6 +71,20 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     public void setPlotArea(PlotAreaTag value) {
         setProperty("plotArea", value);
+    }
+
+    public void setSeries(SeriesTag value) {
+
+        setProperty("series", value.series());
+
+    }
+
+    public void setTitle(TitleTag value) {
+        setProperty("title", value);
+    }
+
+    public void setTooltip(TooltipTag value) {
+        setProperty("tooltip", value);
     }
 
     public void setValueAxis(ValueAxisTag value) {
@@ -105,17 +105,17 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     }
 
+    @Override
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
+    }
+
     public String getDateField() {
         return (String)getProperty("dateField");
     }
 
     public void setDateField(String value) {
         setProperty("dateField", value);
-    }
-
-    @Override
-    public void setDataSource(DataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
     }
 
     public Object getSeriesColors() {

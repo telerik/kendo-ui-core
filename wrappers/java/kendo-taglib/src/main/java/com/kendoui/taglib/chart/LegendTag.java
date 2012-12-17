@@ -69,11 +69,11 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("background", value);
     }
 
-    public float getMargin() {
-        return (float)getProperty("margin");
+    public Object getMargin() {
+        return (Object)getProperty("margin");
     }
 
-    public void setMargin(float value) {
+    public void setMargin(Object value) {
         setProperty("margin", value);
     }
 
@@ -93,11 +93,11 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("offsetY", value);
     }
 
-    public float getPadding() {
-        return (float)getProperty("padding");
+    public Object getPadding() {
+        return (Object)getProperty("padding");
     }
 
-    public void setPadding(float value) {
+    public void setPadding(Object value) {
         setProperty("padding", value);
     }
 

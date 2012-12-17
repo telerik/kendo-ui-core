@@ -57,6 +57,14 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setEvent("editor", value.getBody());
     }
 
+    public Object getAggregates() {
+        return (Object)getProperty("aggregates");
+    }
+
+    public void setAggregates(Object value) {
+        setProperty("aggregates", value);
+    }
+
     public Object getAttributes() {
         return (Object)getProperty("attributes");
     }
@@ -109,12 +117,36 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("filterable", value);
     }
 
+    public String getFooterTemplate() {
+        return (String)getProperty("footerTemplate");
+    }
+
+    public void setFooterTemplate(String value) {
+        setProperty("footerTemplate", value);
+    }
+
     public String getFormat() {
         return (String)getProperty("format");
     }
 
     public void setFormat(String value) {
         setProperty("format", value);
+    }
+
+    public String getGroupFooterTemplate() {
+        return (String)getProperty("groupFooterTemplate");
+    }
+
+    public void setGroupFooterTemplate(String value) {
+        setProperty("groupFooterTemplate", value);
+    }
+
+    public String getGroupHeaderTemplate() {
+        return (String)getProperty("groupHeaderTemplate");
+    }
+
+    public void setGroupHeaderTemplate(String value) {
+        setProperty("groupHeaderTemplate", value);
     }
 
     public Object getHeaderAttributes() {
@@ -141,6 +173,14 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("hidden", value);
     }
 
+    public boolean getMenu() {
+        return (boolean)getProperty("menu");
+    }
+
+    public void setMenu(boolean value) {
+        setProperty("menu", value);
+    }
+
     public boolean getSortable() {
         return (boolean)getProperty("sortable");
     }
@@ -157,38 +197,6 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("template", value);
     }
 
-    public Object getAggregates() {
-        return (Object)getProperty("aggregates");
-    }
-
-    public void setAggregates(Object value) {
-        setProperty("aggregates", value);
-    }
-
-    public String getGroupHeaderTemplate() {
-        return (String)getProperty("groupHeaderTemplate");
-    }
-
-    public void setGroupHeaderTemplate(String value) {
-        setProperty("groupHeaderTemplate", value);
-    }
-
-    public String getGroupFooterTemplate() {
-        return (String)getProperty("groupFooterTemplate");
-    }
-
-    public void setGroupFooterTemplate(String value) {
-        setProperty("groupFooterTemplate", value);
-    }
-
-    public String getFooterTemplate() {
-        return (String)getProperty("footerTemplate");
-    }
-
-    public void setFooterTemplate(String value) {
-        setProperty("footerTemplate", value);
-    }
-
     public String getTitle() {
         return (String)getProperty("title");
     }
@@ -203,14 +211,6 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setWidth(String value) {
         setProperty("width", value);
-    }
-
-    public boolean getMenu() {
-        return (boolean)getProperty("menu");
-    }
-
-    public void setMenu(boolean value) {
-        setProperty("menu", value);
     }
 
 //<< Attributes

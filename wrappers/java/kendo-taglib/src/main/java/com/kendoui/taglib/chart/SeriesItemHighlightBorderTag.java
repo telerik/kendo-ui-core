@@ -51,14 +51,6 @@ public class SeriesItemHighlightBorderTag extends  BaseTag  /* interfaces *//* i
         return "chart-seriesItem-highlight-border";
     }
 
-    public float getWidth() {
-        return (float)getProperty("width");
-    }
-
-    public void setWidth(float value) {
-        setProperty("width", value);
-    }
-
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -73,6 +65,14 @@ public class SeriesItemHighlightBorderTag extends  BaseTag  /* interfaces *//* i
 
     public void setOpacity(float value) {
         setProperty("opacity", value);
+    }
+
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
 //<< Attributes

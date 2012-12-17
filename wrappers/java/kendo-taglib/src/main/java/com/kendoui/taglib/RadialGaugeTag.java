@@ -58,20 +58,20 @@ public class RadialGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("scale", value);
     }
 
-    public float getRangeSize() {
-        return (float)getProperty("rangeSize");
-    }
-
-    public void setRangeSize(float value) {
-        setProperty("rangeSize", value);
-    }
-
     public float getRangeDistance() {
         return (float)getProperty("rangeDistance");
     }
 
     public void setRangeDistance(float value) {
         setProperty("rangeDistance", value);
+    }
+
+    public float getRangeSize() {
+        return (float)getProperty("rangeSize");
+    }
+
+    public void setRangeSize(float value) {
+        setProperty("rangeSize", value);
     }
 
     public boolean getTransitions() {

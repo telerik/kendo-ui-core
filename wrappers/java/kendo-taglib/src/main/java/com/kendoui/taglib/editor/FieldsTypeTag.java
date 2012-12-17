@@ -56,6 +56,14 @@ public class FieldsTypeTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setEvent("parse", value.getBody());
     }
 
+    public String getField() {
+        return (String)getProperty("field");
+    }
+
+    public void setField(String value) {
+        setProperty("field", value);
+    }
+
     public String getParse() {
         Function property = ((Function)getProperty("parse"));
         if (property != null) {
@@ -66,14 +74,6 @@ public class FieldsTypeTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setParse(String value) {
         setProperty("parse", new Function(value));
-    }
-
-    public String getField() {
-        return (String)getProperty("field");
-    }
-
-    public void setField(String value) {
-        setProperty("field", value);
     }
 
 //<< Attributes

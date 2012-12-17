@@ -83,6 +83,14 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("title", value);
     }
 
+    public Object getAxisCrossingValue() {
+        return (Object)getProperty("axisCrossingValue");
+    }
+
+    public void setAxisCrossingValue(Object value) {
+        setProperty("axisCrossingValue", value);
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -161,14 +169,6 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
-    }
-
-    public Object getAxisCrossingValue() {
-        return (Object)getProperty("axisCrossingValue");
-    }
-
-    public void setAxisCrossingValue(Object value) {
-        setProperty("axisCrossingValue", value);
     }
 
 //<< Attributes

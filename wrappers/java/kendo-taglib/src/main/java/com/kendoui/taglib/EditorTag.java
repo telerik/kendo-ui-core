@@ -51,14 +51,14 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "editor";
     }
 
+    public void setImagebrowser(ImagebrowserTag value) {
+        setProperty("imagebrowser", value);
+    }
+
     public void setTools(ToolsTag value) {
 
         setProperty("tools", value.tools());
 
-    }
-
-    public void setImagebrowser(ImagebrowserTag value) {
-        setProperty("imagebrowser", value);
     }
 
     public void setChange(ChangeFunctionTag value) {
