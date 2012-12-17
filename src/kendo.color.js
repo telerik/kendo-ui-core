@@ -751,9 +751,11 @@ kendo_module({
             return this._value;
         },
         _updateUI: function(value) {
-            // seems that input type="color" doesn't support opacity
-            // in colors; the only accepted format is hex #RRGGBB
-            this.element.val(value.toCss());
+            if (value) {
+                // seems that input type="color" doesn't support opacity
+                // in colors; the only accepted format is hex #RRGGBB
+                this.element.val(value.toCss());
+            }
             if (value && !value.equals(this.value())) {
                 this.trigger("select", { value: value });
             }
