@@ -25,6 +25,7 @@ kendo_module({
             that._input();
 
             that.input.on("click" + ns, function() {
+                that.list.width(that.wrapper.width());
                 that.popup.open();
             });
 
@@ -172,9 +173,13 @@ kendo_module({
             that.resultList = $('<ul unselectable="on" class="k-list k-reset"/>')
                                 .appendTo(that._innerWraper)
                                 .on("click" + ns, ".k-delete", function(e) {
-                                    var item = $(e.target).closest("li");
-                                    $(that.ul[0].children[item.data("index")]).show();
+                                    var item = $(e.target).closest("li"),
+                                        index = item.data("index");
+
+                                    $(that.ul[0].children[index]).show();
                                     item.remove();
+
+                                    that.element[0].children[index].selected = false;
                                 });
         },
 
@@ -189,6 +194,8 @@ kendo_module({
 
             li.hide();
             this.popup.close(); //TODO: create close() API
+
+            this.element[0].children[index].selected = true;
         },
 
         _list: function() {
