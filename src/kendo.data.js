@@ -1791,6 +1791,24 @@
                     that.trigger(SYNC);
                 });
         },
+        
+        hasChanges: function() {
+            var idx,
+                length,
+                data = this._data;
+
+            if (this._destroyed.length) {
+                return true;
+            }
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].isNew() || data[idx].dirty) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
 
         _accept: function(result) {
             var that = this,

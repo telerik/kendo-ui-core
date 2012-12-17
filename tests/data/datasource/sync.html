@@ -489,6 +489,65 @@
                 equal(models[0].foo, 1);
                 equal(models.length, 1);
             });
+
+            test("hasChanges returns true if model is updated", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" }
+                    },
+                    data: [{ id: 0, foo: "bar"}]
+                });
+
+                dataSource.read();
+
+                dataSource.get(0).set("foo", "baz");
+
+                ok(dataSource.hasChanges());
+            });
+
+            test("hasChanges returns false if no changes are made", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" }
+                    },
+                    data: [{ id: 0, foo: "bar"}]
+                });
+
+                dataSource.read();
+
+                ok(!dataSource.hasChanges());
+            });
+
+            test("hasChanges returns true if new model is added", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" }
+                    },
+                    data: [{ id: 0, foo: "bar"}]
+                });
+
+                dataSource.read();
+
+                dataSource.add({});
+
+                ok(dataSource.hasChanges());
+            });
+
+            test("hasChanges returns true if record is deleted", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" }
+                    },
+                    data: [{ id: 0, foo: "bar"}]
+                });
+
+                dataSource.read();
+
+                dataSource.remove(dataSource.get(0));
+
+                ok(dataSource.hasChanges());
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
