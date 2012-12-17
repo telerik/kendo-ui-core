@@ -5,7 +5,6 @@ TLD = 'wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld'
 
 MARKDOWN = FileList['docs/api/{web,dataviz}/*.md']
                 .exclude('**/ui.md')
-                .exclude('**/color*')
                 .include('docs/api/framework/datasource.md')
 
 IGNORED = {
