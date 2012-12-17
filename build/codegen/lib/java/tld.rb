@@ -81,7 +81,7 @@ module CodeGen::Java::TLD
 
     EVENT = ERB.new(%{
     <tag>
-        <description>Subscribes to the <%= name.camelize %> event of <%= owner.name %>.</description>
+        <description><%= description %></description>
         <name><%= tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
         <body-content>JSP</body-content>
