@@ -59,7 +59,7 @@ kendo_module({
         _select: function(color, nohooks) {
             color = this.value(color);
             if (!nohooks) {
-                this.trigger("change", { value: this.value() });
+                this.trigger("change");
             }
         },
         destroy: function() {
@@ -638,6 +638,7 @@ kendo_module({
                                 parseInt(m[3], 10) / 100, parseFloat(m[4]));
         }
         if (!nothrow) {
+            console.log("Bad color: ", color);
             throw new Error("Cannot parse color: " + color);
         }
         return null;
@@ -683,7 +684,7 @@ kendo_module({
                 .on(KEYDOWN_NS, bind(that._keydown, that))
                 .one(CLICK_NS, ".k-icon", bind(that.open, that))
                 .on(CLICK_NS, options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
-                    that.trigger("change", { value: that.value() });
+                    that.trigger("change");
                 });
 
             var accesskey = element.attr("accesskey");
@@ -741,7 +742,7 @@ kendo_module({
         },
         _select: function(value) {
             value = this.value(value);
-            this.trigger("change", { value: value });
+            this.trigger("change");
         },
         value: function(value) {
             if (value !== undefined) {
@@ -804,8 +805,8 @@ kendo_module({
                     select: function(ev){
                         that._updateUI(ev.value);
                     },
-                    change: function(ev){
-                        that._select(ev.value);
+                    change: function(){
+                        that._select(sel.value());
                         p.close();
                     },
                     cancel: function() {
