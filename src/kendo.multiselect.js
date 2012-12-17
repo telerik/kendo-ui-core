@@ -10,7 +10,8 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
-        CHANGE = "change";
+        CHANGE = "change",
+        ns = ".kendoMultiSelect";
 
     var MultiSelect = Widget.extend({
 
@@ -20,9 +21,10 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that._wrapper();
-            that._container();
+            that._resultList();
             that._input();
-            that.input.on("click", function() {
+
+            that.input.on("click" + ns, function() {
                 that.popup.open();
             });
 
@@ -49,7 +51,22 @@ kendo_module({
         ],
 
         destroy: function() {
+            var that = this,
+                ns = that.ns;
 
+            Widget.fn.destroy.call(that);
+
+            that._unbindDataSource();
+
+            /*that.ul.off(ns);
+            that.list.off(ns);
+            that.resultList.off(ns);*/
+
+            that.popup.destroy();
+
+            /*if (that._form) {
+                that._form.off("reset", that._resetHandler);
+            }*/
         },
 
         refresh: function() {
@@ -95,7 +112,7 @@ kendo_module({
             }
 
             //TODO: use options.tagTemplate if defined
-            that.tagTemplate = kendo.template('<li><span class="">#:data' + (options.dataTextField ? "." : "") + options.dataTextField + "#</span><span>delete</span></li>", { useWithBlock: false });
+            that.tagTemplate = kendo.template('<li><span class="">#:data' + (options.dataTextField ? "." : "") + options.dataTextField + '#</span><span class="k-icon k-delete">delete</span></li>', { useWithBlock: false });
         },
 
         _unbindDataSource: function() {
@@ -149,26 +166,36 @@ kendo_module({
                             .appendTo(this._innerWraper);
         },
 
-        _container: function() {
-            this.container = $('<ul unselectable="on" class="k-list k-reset"/>')
-                                .appendTo(this._innerWraper);
+        _resultList: function() {
+            var that = this;
+
+            that.resultList = $('<ul unselectable="on" />')
+                                .appendTo(that._innerWraper)
+                                .on("click" + ns, ".k-delete", function(e) {
+                                    var item = $(e.target).closest("li");
+                                    $(that.ul[0].children[item.data("index")]).show();
+                                    item.remove();
+                                });
         },
 
         _click: function(e) {
             var li = $(e.currentTarget),
                 data = this.dataSource.view(),
-                dataItem = data[li.index()];
+                index = li.index(),
+                tag = $(this.tagTemplate(data[index]));
 
-            this.container.append(this.tagTemplate(dataItem));
+            this.resultList.append(tag);
+            tag.data("index", index);
 
             li.hide();
+            this.popup.close(); //TODO: create close() API
         },
 
         _list: function() {
             this.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
                         .on("click", "li.k-item", $.proxy(this._click, this));
 
-            this.list = $("<div class='k-list-container'/>")
+            this.list = $("<div class='k-list-resultList'/>")
                         .append(this.ul);
         },
 

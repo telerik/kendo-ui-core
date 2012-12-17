@@ -61,7 +61,61 @@
 
                 multiselect.ul.children().eq(1).click();
 
-                ok(multiselect.container.children(":first")[0]);
+                ok(multiselect.resultList.children(":first")[0]);
+            });
+
+            test("MultiSelect hides selected item", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+                multiselect.input.click();
+
+                var item = multiselect.ul.children().eq(1);
+
+                item.click();
+
+                ok(!item.is(":visible"));
+            });
+
+            test("MultiSelect hides popup on click", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+                multiselect.input.click();
+
+                var item = multiselect.ul.children().eq(1);
+
+                item.click();
+
+                ok(!multiselect.popup.visible());
+            });
+
+            test("MultiSelect deletes tag on delete button click", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select);
+                multiselect.input.click();
+
+                var item = multiselect.ul.children().eq(1).click();
+                multiselect.ul.children().eq(0).click();
+
+                var tag = multiselect.resultList.children().first();
+                tag.find(".k-delete").click();
+
+                ok(!tag.parent()[0]);
+            });
+
+            test("MultiSelect shows clicked item on delete", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select);
+                multiselect.input.click();
+
+                var item = multiselect.ul.children().eq(1).click();
+                multiselect.ul.children().eq(0).click();
+
+                multiselect.resultList.children().first().find(".k-delete").click();
+                multiselect.popup.open();
+
+                ok(item.is(":visible"));
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
