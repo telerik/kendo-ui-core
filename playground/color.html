@@ -39,7 +39,7 @@
 
     <div style="padding: 1em">
       <input type="color" value="#22cc22" id="dropdown3" />
-      <input type="color" value="#2255cc" id="dropdown4" />
+      <input type="color" value="#2255cc" id="dropdown4" disabled="disabled" />
       <input type="color" value="#cc88ee" id="dropdown6" />
       <input type="color" id="dropdown7" />
 
@@ -73,6 +73,8 @@
 
       window.hsv1 = $("#hsv1").kendoColorSelectorHSV({ buttons: false, opacity: true }).data("kendoColorSelectorHSV");
       window.hsv2 = $("#hsv2").kendoColorSelectorHSV({ buttons: false, opacity: true }).data("kendoColorSelectorHSV");
+      window.cp1 = $("#dropdown3").data("kendoColorPicker");
+      window.cp2 = $("#dropdown4").data("kendoColorPicker");
 
       window.dd1 = $("#dropdown5").data("kendoColorPicker");
       window.dd2 = $("#dropdown").data("kendoColorPicker");

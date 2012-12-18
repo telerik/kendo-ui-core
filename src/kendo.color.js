@@ -682,12 +682,7 @@ kendo_module({
             var content = that.wrapper = $(that._template(options));
             element.hide().after(content);
 
-            content.attr("tabIndex", 0)
-                .on(KEYDOWN_NS, bind(that._keydown, that))
-                .one(CLICK_NS, ".k-icon", bind(that.open, that))
-                .on(CLICK_NS, options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
-                    that.trigger("change");
-                });
+            that.enable(!element.attr("disabled"));
 
             var accesskey = element.attr("accesskey");
             if (accesskey) {
@@ -698,13 +693,32 @@ kendo_module({
             that._updateUI(value);
         },
         destroy: function() {
-            this.wrapper.off(NS).find("*").off(NS);
+            this.wrapper.add("*").off(NS);
             if (this._popup) {
                 this._selector.destroy();
                 this._popup.destroy();
             }
             this._selector = this._popup = this.wrapper = null;
             Widget.fn.destroy.call(this);
+        },
+        enable: function(enable) {
+            var that = this, wrapper = that.wrapper;
+            that.element.attr("disabled", !enable);
+            wrapper.attr("disabled", !enable);
+            if (enable) {
+                wrapper.removeClass("k-state-disabled")
+                    .attr("tabIndex", 0)
+                    .on(KEYDOWN_NS, bind(that._keydown, that))
+                    .on(MOUSEDOWN_NS, ".k-icon", bind(that.toggle, that))
+                    .on(CLICK_NS, (that.options.toolIcon
+                                   ? ".k-tool-icon"
+                                   : ".k-selected-color"),
+                        function(){ that.trigger("change"); });
+            } else {
+                wrapper.addClass("k-state-disabled")
+                    .removeAttr("tabIndex")
+                    .add("*", wrapper).off(NS);
+            }
         },
 
         _template: kendo.template
@@ -795,8 +809,7 @@ kendo_module({
                 }
                 var sel = this._selector = new ctor(document.body, opt);
                 that._popup = p = sel.wrapper.kendoPopup({
-                    anchor       : that.wrapper,
-                    toggleTarget : that.wrapper.find(".k-icon")
+                    anchor: that.wrapper
                 }).data("kendoPopup");
                 sel.bind({
                     select: function(ev){
