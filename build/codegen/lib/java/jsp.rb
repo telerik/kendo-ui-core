@@ -243,6 +243,16 @@ public interface Items {
 
                 File.write(filename, java.dos)
             end
+
+            composite_options(component)
+        end
+
+        def composite_options(owner)
+
+            owner.unique_composite_options.each do |option|
+                filename = "#{@path}#{option.namespace}/#{option.tag_class}.java"
+            end
+
         end
     end
 end
