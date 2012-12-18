@@ -211,6 +211,13 @@ public class <%= tag_class %> extends WidgetTag /* interfaces */ /* interfaces *
 }
 })
 
+ITEMS = ERB.new(%{
+package com.kendoui.taglib.<%= namespace %>;
+
+public interface Items {
+    void setItems(ItemsTag items);
+}
+})
     class Generator
         def initialize(path)
             @path = path
@@ -226,6 +233,16 @@ public class <%= tag_class %> extends WidgetTag /* interfaces */ /* interfaces *
             java = component.to_java(filename)
 
             File.write(filename, java.dos)
+
+            if component.interfaces.include?('Items')
+                namespace = component.namespace
+
+                java = ITEMS.result(binding)
+
+                filename = "#{@path}#{component.namespace}/Items.java"
+
+                File.write(filename, java.dos)
+            end
         end
     end
 end
