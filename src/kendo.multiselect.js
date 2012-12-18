@@ -27,6 +27,9 @@ kendo_module({
             that.input.on("click" + ns, function() {
                 that.list.width(that.wrapper.width());
                 that.popup.open();
+            })
+            .on("keydown", function(e) {
+                that._search();
             });
 
             that._templates();
@@ -44,7 +47,12 @@ kendo_module({
 
         options: {
             name: "MultiSelect",
-            autoBind: true
+            autoBind: true,
+            delay: 100,
+            ignoreCase: true,
+            filter: "startswith",
+            dataTextField: "",
+            minLength: 1
         },
 
         events: [
@@ -75,6 +83,51 @@ kendo_module({
                 data = that.dataSource.view();
 
             that.ul[0].innerHTML = kendo.render(that.itemTemplate, data);
+
+            if (that._open) {
+                that.popup.open()
+                that._open = false;
+            }
+        },
+
+        search: function(word) {
+            word = typeof word === "string" ? word : this.text();
+            var that = this,
+                length = word.length,
+                options = that.options,
+                ignoreCase = options.ignoreCase,
+                filter = options.filter,
+                field = options.dataTextField;
+
+            clearTimeout(that._typing);
+
+            if (length >= options.minLength) {
+                //that._state = STATE_FILTER;
+                that._open = true;
+                that.dataSource.filter({
+                    value: ignoreCase ? word.toLowerCase() : word,
+                    field: field,
+                    operator: filter,
+                    ignoreCase: ignoreCase
+                });
+            }
+        },
+
+        text: function() {
+            return this.input.val();
+        },
+
+
+        _search: function() {
+            var that = this;
+
+            that._typing = setTimeout(function() {
+                var value = that.text();
+                if (that._prev !== value) {
+                    that._prev = value;
+                    that.search(value);
+                }
+            }, that.options.delay);
         },
 
         _popup: function() {
