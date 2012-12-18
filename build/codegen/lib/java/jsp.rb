@@ -50,7 +50,8 @@ module CodeGen::Java::JSP
 
             java = implement_interfaces(java)
 
-            java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/, COMPONENT_ATTRIBUTES.result(binding))
+            java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
+                     COMPONENT_ATTRIBUTES.result(binding))
         end
     end
 
@@ -92,7 +93,8 @@ module CodeGen::Java::JSP
 
             java = File.read(filename) if File.exists?(filename)
 
-            java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/, COMPONENT_ATTRIBUTES.result(binding))
+            java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
+                     COMPOSITE_OPTION_ATTRIBUTES.result(binding))
         end
     end
 
@@ -132,8 +134,16 @@ module CodeGen::Java::JSP
             super.sub(@owner.name.pascalize, '')
         end
 
-        def to_setter
+        def to_java(filename)
+            java = super(filename)
 
+            if @owner.name == 'items' && @recursive
+                java = java.sub(/\/\* interfaces \*\/(.|\n)*\/\* interfaces \*\//,
+                '/* interfaces */implements Items/* interfaces */')
+            end
+
+            java.sub(/\/\/>> doEndTag(.|\n)*\/\/<< doEndTag/,
+                     ARRAY_ITEM_ADD.result(binding))
         end
     end
 
@@ -159,6 +169,14 @@ EVENT_SETTER = ERB.new(%{
     }
 })
 
+ARRAY_ITEM_ADD = ERB.new(%{//>> doEndTag
+
+        <%= owner.tag_class %> parent = (<%= owner.tag_class %>)findParentWithClass(<%= owner.tag_class %>.class);
+
+        parent.addItem(this);
+
+//<< doEndTag})
+
 ARRAY_SETTER = ERB.new(%{
     public void set<%= name.pascalize %>(<%= tag_class %> value) {
 <% if name == 'items' %>
@@ -168,6 +186,7 @@ ARRAY_SETTER = ERB.new(%{
 <% end %>
     }
 })
+
 EVENT_GETTER_AND_SETTER = ERB.new(%{
     public String get<%= name.pascalize %>() {
         Function property = ((Function)getProperty("<%= name %>"));
@@ -188,6 +207,20 @@ DATA_SOURCE_SETTER = %{
         setProperty("dataSource", dataSource);
     }
 }
+
+COMPOSITE_OPTION_ATTRIBUTES = ERB.new(%{//>> Attributes
+<% if recursive %>
+    public void setItems(ItemsTag value) {
+
+        items = value.items();
+
+    }<% end %>
+
+    public static String tagName() {
+        return "<%= tag_name %>";
+    }
+<%= unique_composite_options.map { |option| option.to_setter }.join %><%= events.map { |event| event.to_setter }.join %><%= unique_options.map { |option| option.to_getter_and_setter }.join %><%= events.map { |event| event.to_getter_and_setter }.join %>
+//<< Attributes})
 
 COMPONENT_ATTRIBUTES = ERB.new(%{//>> Attributes
 
@@ -251,7 +284,7 @@ public class <%= tag_class %> extends WidgetTag /* interfaces */ /* interfaces *
 COMPOSITE_OPTION = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
 
-<% if owner.name == 'Items' %>
+<% if owner.name == 'items' %>
 import com.kendoui.taglib.BaseItemTag;
 <% else %>
 import com.kendoui.taglib.BaseTag;
@@ -268,7 +301,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class <%= tag_class %> extends <% if owner.name == 'Items' %> BaseItemTag <% else %> BaseTag <% end %> /* interfaces */ /* interfaces */ {
+public class <%= tag_class %> extends <% if owner.name == 'items' %> BaseItemTag <% else %> BaseTag <% end %> /* interfaces */ /* interfaces */ {
     #{METHODS}
 }
 })
@@ -300,7 +333,7 @@ ARRAY_ATTRIBUTES = ERB.new(%{//>> Attributes
 ARRAY = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
 
-<% if name == 'Items' %>
+<% if name == 'items' %>
 import com.kendoui.taglib.ContentTag;
 <% else %>
 import com.kendoui.taglib.BaseTag;
@@ -317,7 +350,7 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class <%= tag_class %> extends <% if name == 'Items' %>ContentTag<% else %>BaseTag<% end %> /* interfaces */ /* interfaces */ {
+public class <%= tag_class %> extends <% if name == 'items' %>ContentTag<% else %>BaseTag<% end %> /* interfaces */ /* interfaces */ {
     #{JAVA_METHODS}
 }
 })
@@ -368,8 +401,6 @@ public interface Items {
                 java = option.to_java(filename)
 
                 File.write(filename, java.dos)
-
-                break
 
                 composite_options(option)
             end
