@@ -99,6 +99,10 @@ module CodeGen::Java::JSP
     class ArrayOption < CompositeOption
         include CodeGen::Array
 
+        def item_class
+            ArrayItem
+        end
+
         def to_setter
             ARRAY_SETTER.result(binding)
         end
@@ -108,7 +112,8 @@ module CodeGen::Java::JSP
 
             java = File.read(filename) if File.exists?(filename)
 
-            java = java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/, COMPONENT_ATTRIBUTES.result(binding))
+            java = java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
+                            ARRAY_ATTRIBUTES.result(binding))
 
             java = java.sub(/\/\/>> initialize(.|\n)*\/\/<< initialize/, ARRAY_INIT.result(binding))
 
@@ -119,6 +124,17 @@ module CodeGen::Java::JSP
 
     class ArrayItem < CompositeOption
 
+        def tag_name
+            @owner.tag_name.sub(@owner.name.camelize, @name.camelize)
+        end
+
+        def tag_class
+            super.sub(@owner.name.pascalize, '')
+        end
+
+        def to_setter
+
+        end
     end
 
 COMPOSITE_OPTION_SETTER = ERB.new(%{
@@ -258,9 +274,28 @@ public class <%= tag_class %> extends <% if owner.name == 'Items' %> BaseItemTag
 })
 
 ARRAY_INIT = ERB.new(%{//>> initialize
+
         <%= name %> = new ArrayList<Map<String, Object>>();
 
 //<< initialize})
+
+ARRAY_ATTRIBUTES = ERB.new(%{//>> Attributes
+
+    private List<Map<String, Object>> <%= name %>;
+
+    public List<Map<String, Object>> <%= name %>() {
+        return <%= name %>;
+    }
+
+    public static String tagName() {
+        return "<%= tag_name %>";
+    }
+
+    public void add<%= item.name.pascalize %>(<%= item.tag_class %> value) {
+        <%= name %>.add(value.properties());
+    }
+
+//<< Attributes})
 
 ARRAY = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
