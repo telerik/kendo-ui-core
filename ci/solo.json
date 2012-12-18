@@ -1,5 +1,6 @@
 { "run_list": [
     "recipe[apt]",
+    "recipe[zsh]",
     "recipe[git]",
     "recipe[ruby]",
     "recipe[nodejs]",
@@ -10,6 +11,7 @@
     "recipe[google-chrome]",
     "recipe[jenkins]",
     "recipe[jenkins-jobs]",
+    "recipe[selenium]",
     "recipe[mono-fcgi]",
     "recipe[nginx]"
 ]}
