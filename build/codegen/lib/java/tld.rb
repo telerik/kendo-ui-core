@@ -18,6 +18,9 @@ module CodeGen::Java::TLD
             Event
         end
 
+        def array_option_class
+            ArrayOption
+        end
     end
 
     class Component < CodeGen::Java::Component
@@ -70,8 +73,22 @@ module CodeGen::Java::TLD
     class ArrayOption < CompositeOption
         include CodeGen::Array
 
+        def item_class
+            ArrayItem
+        end
+
         def to_tag
             ARRAY.result(binding)
+        end
+    end
+
+    class ArrayItem < CompositeOption
+        def tag_name
+            @owner.tag_name.sub(@owner.name.camelize, @name.camelize)
+        end
+
+        def tag_class
+            super.sub(@owner.name.pascalize, '')
         end
     end
 

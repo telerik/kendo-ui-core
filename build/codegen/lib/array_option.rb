@@ -5,12 +5,17 @@ module CodeGen
         def initialize(settings)
             super
 
-            @item = composite_option_class.new(:name => @name.singular,
-                                               :type => 'Object',
-                                               :owner => self,
-                                               :description => @description)
+            @item = item_class.new(:name => @name.singular,
+                                   :type => 'Object',
+                                   :recursive => @recursive,
+                                   :owner => self,
+                                   :description => @description)
 
             @options.push(@item)
+        end
+
+        def item_class
+            ArrayItem
         end
 
         def add_option(settings)
@@ -20,5 +25,8 @@ module CodeGen
 
     class ArrayOption < CompositeOption
         include Array
+    end
+
+    class ArrayItem < CompositeOption
     end
 end

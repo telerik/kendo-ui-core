@@ -86,6 +86,14 @@ module CodeGen::Java::JSP
         def to_setter
             COMPOSITE_OPTION_SETTER.result(binding)
         end
+
+        def to_java(filename)
+            java = COMPOSITE_OPTION.result(binding)
+
+            java = File.read(filename) if File.exists?(filename)
+
+            java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/, COMPONENT_ATTRIBUTES.result(binding))
+        end
     end
 
     class ArrayOption < CompositeOption
@@ -94,6 +102,19 @@ module CodeGen::Java::JSP
         def to_setter
             ARRAY_SETTER.result(binding)
         end
+
+        def to_java(filename)
+            java = ARRAY.result(binding)
+
+            java = File.read(filename) if File.exists?(filename)
+
+            java = java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/, COMPONENT_ATTRIBUTES.result(binding))
+
+            java = java.sub(/\/\/>> initialize(.|\n)*\/\/<< initialize/, ARRAY_INIT.result(binding))
+
+            java
+        end
+
     end
 
     class ArrayItem < CompositeOption
@@ -211,6 +232,61 @@ public class <%= tag_class %> extends WidgetTag /* interfaces */ /* interfaces *
 }
 })
 
+COMPOSITE_OPTION = ERB.new(%{
+package com.kendoui.taglib.<%= namespace %>;
+
+<% if owner.name == 'Items' %>
+import com.kendoui.taglib.BaseItemTag;
+<% else %>
+import com.kendoui.taglib.BaseTag;
+<% end %>
+
+<% if owner.namespace == owner.name.downcase %>
+import com.kendoui.taglib.<%= owner.tag_class %>;
+<% end %>
+
+<% if events.any? %>
+import com.kendoui.taglib.json.Function;
+<% end %>
+
+import javax.servlet.jsp.JspException;
+
+@SuppressWarnings("serial")
+public class <%= tag_class %> extends <% if owner.name == 'Items' %> BaseItemTag <% else %> BaseTag <% end %> /* interfaces */ /* interfaces */ {
+    #{METHODS}
+}
+})
+
+ARRAY_INIT = ERB.new(%{//>> initialize
+        <%= name %> = new ArrayList<Map<String, Object>>();
+
+//<< initialize})
+
+ARRAY = ERB.new(%{
+package com.kendoui.taglib.<%= namespace %>;
+
+<% if name == 'Items' %>
+import com.kendoui.taglib.ContentTag;
+<% else %>
+import com.kendoui.taglib.BaseTag;
+<% end %>
+
+<% if owner.namespace == owner.name.downcase && name != 'Items' %>
+import com.kendoui.taglib.<%= owner.tag_class %>;
+<% end %>
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.List;
+
+import javax.servlet.jsp.JspException;
+
+@SuppressWarnings("serial")
+public class <%= tag_class %> extends <% if name == 'Items' %>ContentTag<% else %>BaseTag<% end %> /* interfaces */ /* interfaces */ {
+    #{JAVA_METHODS}
+}
+})
+
 ITEMS = ERB.new(%{
 package com.kendoui.taglib.<%= namespace %>;
 
@@ -251,6 +327,16 @@ public interface Items {
 
             owner.unique_composite_options.each do |option|
                 filename = "#{@path}#{option.namespace}/#{option.tag_class}.java"
+
+                $stderr.puts("Updating #{filename}") if VERBOSE
+
+                java = option.to_java(filename)
+
+                File.write(filename, java.dos)
+
+                break
+
+                composite_options(option)
             end
 
         end
