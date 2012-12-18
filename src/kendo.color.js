@@ -709,10 +709,9 @@ kendo_module({
                     .attr("tabIndex", 0)
                     .on(KEYDOWN_NS, bind(that._keydown, that))
                     .on(MOUSEDOWN_NS, ".k-icon", bind(that.toggle, that))
-                    .on(CLICK_NS, (that.options.toolIcon
-                                   ? ".k-tool-icon"
-                                   : ".k-selected-color"),
-                        function(){ that.trigger("change"); });
+                    .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
+                        that.trigger("change");
+                    });
             } else {
                 wrapper.addClass("k-state-disabled")
                     .removeAttr("tabIndex")
