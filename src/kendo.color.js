@@ -640,7 +640,6 @@ kendo_module({
                                 parseInt(m[3], 10) / 100, parseFloat(m[4]));
         }
         if (!nothrow) {
-            console.log("Bad color: ", color);
             throw new Error("Cannot parse color: " + color);
         }
         return null;
