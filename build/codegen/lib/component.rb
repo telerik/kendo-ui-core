@@ -52,6 +52,8 @@ class Component
     def add_option(settings)
         name = settings[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
 
+        recursive = settings[:recursive]
+
         description = settings[:description]
 
         types = settings[:type]
@@ -75,6 +77,7 @@ class Component
 
                     parent.add_option(:name => name,
                                       :type => type,
+                                      :recursive => recursive,
                                       :description => description)
                 end
 
@@ -82,6 +85,7 @@ class Component
 
                 @options.push option_class.new(:name => name,
                                                :owner => self,
+                                               :recursive => recursive,
                                                :type => type,
                                                :description => description)
 

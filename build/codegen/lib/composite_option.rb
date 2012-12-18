@@ -8,6 +8,7 @@ class CompositeOption
         @description = settings[:description]
         @type = settings[:type]
         @owner = settings[:owner]
+        @recursive = settings[:recursive]
         @options = []
     end
 
@@ -34,7 +35,11 @@ class CompositeOption
     def add_option(settings, prefix = nil)
         prefix ||= @name + '.'
 
+        recursive = settings[:recursive]
+
         name = settings[:name].sub(prefix, '')
+
+        return if name == ''
 
         type = settings[:type]
 
@@ -42,7 +47,7 @@ class CompositeOption
 
         return if @options.any? { |option| option.name == name && option.type == type }
 
-        parent = @options.find { |option| name.start_with?(option.name + '.') }
+        parent = @options.find { |option| name.start_with?(option.name + '.') && option.type =~ /Object|Array/ }
 
         if parent
 
@@ -50,16 +55,17 @@ class CompositeOption
 
             parent.add_option(:name => name,
                               :type => type,
+                              :recursive => recursive,
                               :description => description)
 
         else
             @options.push option_class.new(:name => name,
                                            :owner => self,
                                            :type => type,
+                                           :recursive => recursive,
                                            :description => description)
         end
 
-        p @options.find_all { |o| o.name == 'labels' }.size if @name == 'categoryAxis' && name == 'labels'
     end
 end
 

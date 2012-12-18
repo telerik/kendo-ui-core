@@ -8,6 +8,7 @@ module CodeGen
             @description = options[:description]
             @type = options[:type]
             @owner = options[:owner]
+            @recursive = options[:recursive]
         end
 
         def composite?
@@ -31,6 +32,7 @@ module CodeGen
 
             parent = target_class.new(:name => @name,
                                       :owner => @owner,
+                                      :recursive => @recursive,
                                       :type => @type,
                                       :description => @description)
 

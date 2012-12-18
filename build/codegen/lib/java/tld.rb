@@ -60,7 +60,7 @@ module CodeGen::Java::TLD
         include Options
 
         def body_content
-            return 'JSP' if @options.any? { |option| option.composite? }
+            return 'JSP' if @recursive || @options.any? { |option| option.composite? || option.type == 'Function' }
 
             'empty'
         end

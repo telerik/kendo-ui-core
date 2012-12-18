@@ -16,7 +16,7 @@ module CodeGen::Java
 
             return name + 'Tag' if @owner.instance_of?(component_class)
 
-            @owner.name.pascalize + name + 'Tag'
+            @owner.tag_class.sub('Tag', '') + name + 'Tag'
         end
 
         def tag_name

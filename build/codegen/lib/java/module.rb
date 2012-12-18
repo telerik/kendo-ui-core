@@ -52,8 +52,7 @@ module CodeGen::Java
         end
 
         def unique_options
-            options = @options.find_all { |o| o.instance_of?(option_class) }
-                              .find_all { |o| !CodeGen::Java.ignored?(@name, o.name) }
+            options = @options.find_all { |o| !o.composite? }
 
             options.clone.each do |option|
 
