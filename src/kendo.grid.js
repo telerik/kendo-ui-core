@@ -1567,7 +1567,7 @@
 
             if (groupable) {
                 if(!wrapper.has("div.k-grouping-header")[0]) {
-                    $("<div />").addClass("k-grouping-header").prependTo(wrapper);
+                    $("<div>&nbsp;</div>").addClass("k-grouping-header").prependTo(wrapper);
                 }
 
                 if (that.groupable) {
