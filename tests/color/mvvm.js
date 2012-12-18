@@ -45,3 +45,104 @@ test("Updating model value changes the UI", function(){
     observable.set("value", "#345");
     equal(dom.data("kendoColorPicker").value(), "#334455");
 });
+
+test("Binding enabled to false disables the widget", function() {
+    var dom = $('<input data-bind="enabled:enabled" />').kendoColorPicker();
+    var observable = kendo.observable({ enabled: false });
+    kendo.bind(dom, observable);
+    ok(dom.is(":disabled"));
+});
+
+test("Binding enabled to true enables the widget", function() {
+    var dom = $('<input data-bind="enabled:enabled" disabled="disabled" />').kendoColorPicker();
+    var observable = kendo.observable({ enabled: true });
+    kendo.bind(dom, observable);
+    ok(!dom.is(":disabled"));
+});
+
+test("Binding disabled to true disables the widget", function() {
+    var dom = $('<input data-bind="disabled:disabled" />').kendoColorPicker();
+    var observable = kendo.observable({ disabled: true });
+    kendo.bind(dom, observable);
+    ok(dom.is(":disabled"));
+});
+
+test("Binding disabled to false enables the widget", function() {
+    var dom = $('<input data-bind="disabled:disabled" disabled="disabled" />').kendoColorPicker();
+    var observable = kendo.observable({ disabled: false });
+    kendo.bind(dom, observable);
+    ok(!dom.is(":disabled"));
+});
+
+test("Binding visible to false hides the widget", function() {
+    var dom = $('<input data-bind="visible:visible" data-role="colorpicker"/>');
+    var observable = kendo.observable({ visible: false });
+    kendo.bind(dom, observable);
+    ok(dom.data("kendoColorPicker").wrapper.css("display") == "none", "Display is 'none'");
+});
+
+test("Binding visible to true shows the widget", function() {
+    var dom = $('<input data-bind="visible:visible" data-role="colorpicker" style="display:none"/>');
+    var observable = kendo.observable({ visible: true });
+    kendo.bind(dom, observable);
+    ok(dom.data("kendoColorPicker").wrapper.css("display") != "none", "Display is not 'none'");
+});
+
+test("Changing visible to false hides the widget", function() {
+    var dom = $('<input data-bind="visible:visible" data-role="colorpicker"/>');
+    var observable = kendo.observable({ visible: true });
+    kendo.bind(dom, observable);
+    observable.set("visible", false);
+    ok(dom.data("kendoColorPicker").wrapper.css("display") == "none", "Display is 'none'");
+});
+
+test("Changing visible to true shows the widget", function() {
+    var dom = $('<input data-bind="visible:visible" data-role="colorpicker"/>');
+    var observable = kendo.observable({ visible: false });
+    kendo.bind(dom, observable);
+    observable.set("visible", true);
+    ok(dom.data("kendoColorPicker").wrapper.css("display") != "none", "Display is not 'none'");
+});
+
+test("Binding invisible to true hides the widget", function() {
+    var dom = $('<input data-bind="invisible:invisible" data-role="colorpicker"/>');
+    var observable = kendo.observable({ invisible: true });
+    kendo.bind(dom, observable);
+    ok(dom.data("kendoColorPicker").wrapper.css("display") == "none", "display is 'none'");
+});
+
+test("Binding invisible to false shows the widget", function() {
+    var dom = $('<input data-bind="invisible:invisible" data-role="colorpicker" style="display:none"/>');
+    var observable = kendo.observable({ invisible: false });
+    kendo.bind(dom, observable);
+    ok(dom.data("kendoColorPicker").wrapper.css("display") != "none", "display is not 'none'");
+});
+
+test("Changing invisible to true hides the widget", function() {
+    var dom = $('<input data-bind="invisible:invisible" data-role="colorpicker"/>');
+    var observable = kendo.observable({ invisible: false });
+    kendo.bind(dom, observable);
+    observable.set("invisible", true);
+    ok(dom.data("kendoColorPicker").wrapper.css("display") == "none", "display is 'none'");
+});
+
+test("Changing invisible to false shows the widget", function() {
+    var dom = $('<input data-bind="invisible:invisible" data-role="colorpicker"/>');
+    var observable = kendo.observable({ invisible: true });
+    kendo.bind(dom, observable);
+    observable.set("invisible", false);
+    ok(dom.data("kendoColorPicker").wrapper.css("display") != "none", "display is not 'none'");
+});
+
+test("Change event reflects value modifications", 1, function() {
+    var dom = $('<input data-bind="value:value, events:{change: changeEvent}" data-role="colorpicker"/>');
+    var observable = kendo.observable({
+        value: "#fff",
+        changeEvent: function() {
+            equal(this.get("value"), "#ff0000");
+        }
+    });
+    kendo.bind(dom, observable);
+    dom.data("kendoColorPicker").value("#f00");
+    dom.data("kendoColorPicker").trigger("change");
+});
