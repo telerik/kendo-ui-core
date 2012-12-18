@@ -481,7 +481,6 @@
     <Compile Include="UI\Gauge\Scales\ILinearScale.cs" />
     <Compile Include="UI\Gauge\Scales\GaugeRadialScale.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeRadialScaleLabelsSerializer.cs" />
-    <Compile Include="UI\Gauge\Serialization\GaugeLinearScaleLabelsSerializer.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeLinearScaleSerializer.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeRadialScaleSerializer.cs" />
     <Compile Include="UI\DatePickerBase\DatePickerBase.cs" />
