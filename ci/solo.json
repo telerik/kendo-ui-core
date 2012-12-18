@@ -13,5 +13,6 @@
     "recipe[jenkins-jobs]",
     "recipe[selenium]",
     "recipe[mono-fcgi]",
-    "recipe[nginx]"
+    "recipe[nginx]",
+    "recipe[monit]"
 ]}
