@@ -1,4 +1,4 @@
-JENKINS_URL = 'http://localhost:8080/build'
+JENKINS_URL = 'http://localhost:8080/build/'
 
 apt_repository "jenkins" do
   uri "http://pkg.jenkins-ci.org/debian"
