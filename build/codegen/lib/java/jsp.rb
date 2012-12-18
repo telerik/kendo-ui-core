@@ -93,8 +93,11 @@ module CodeGen::Java::JSP
 
             java = File.read(filename) if File.exists?(filename)
 
-            java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
+            java = java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
                      COMPOSITE_OPTION_ATTRIBUTES.result(binding))
+
+            java.sub(/\/\/>> doEndTag(.|\n)*\/\/<< doEndTag/,
+                     COMPOSITE_OPTION_PARENT.result(binding))
         end
     end
 
@@ -117,9 +120,8 @@ module CodeGen::Java::JSP
             java = java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
                             ARRAY_ATTRIBUTES.result(binding))
 
-            java = java.sub(/\/\/>> initialize(.|\n)*\/\/<< initialize/, ARRAY_INIT.result(binding))
+            java.sub(/\/\/>> initialize(.|\n)*\/\/<< initialize/, ARRAY_INIT.result(binding))
 
-            java
         end
 
     end
@@ -169,6 +171,14 @@ EVENT_SETTER = ERB.new(%{
     }
 })
 
+COMPOSITE_OPTION_PARENT = ERB.new(%{//>> doEndTag
+
+        <%= owner.tag_class %> parent = (<%= owner.tag_class %>)findParentWithClass(<%= owner.tag_class %>.class);
+
+        parent.set<%= name.pascalize %>(this);
+
+//<< doEndTag})
+
 ARRAY_ITEM_ADD = ERB.new(%{//>> doEndTag
 
         <%= owner.tag_class %> parent = (<%= owner.tag_class %>)findParentWithClass(<%= owner.tag_class %>.class);
@@ -209,13 +219,12 @@ DATA_SOURCE_SETTER = %{
 }
 
 COMPOSITE_OPTION_ATTRIBUTES = ERB.new(%{//>> Attributes
-<% if recursive %>
-    public void setItems(ItemsTag value) {
+<% if recursive %>public void setItems(ItemsTag value) {
 
         items = value.items();
 
-    }<% end %>
-
+    }
+<% end %>
     public static String tagName() {
         return "<%= tag_name %>";
     }
