@@ -6325,6 +6325,34 @@ kendo_module({
                     return currentPane;
                 }
             }
+        },
+
+        getPointsByCategory: function(category) {
+            var plotArea = this,
+                charts = plotArea.charts,
+                points, pointCategory, point, i, j, result = [];
+
+            for (i = 0; i < charts.length; i++) {
+                points = charts[i].points;
+                for (j = 0; j < points.length; j++) {
+                    point = points[j];
+
+                    if (point) {
+                        pointCategory = point.category;
+                        if (pointCategory instanceof Date && category instanceof Date) {
+                            if (pointCategory.getTime() === category.getTime()) {
+                                result.push(point);
+                            }
+                        } else {
+                            if (pointCategory === category) {
+                                result.push(point);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
     });
 

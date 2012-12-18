@@ -3995,6 +3995,74 @@
                 });
 
             })();
+
+
+            (function() {
+                var chart,
+                    bar,
+                    barElement,
+                    plotArea;
+
+                var TOLERANCE = 5;
+
+                function createColumnChart(options) {
+                    chart = createChart($.extend({
+                        seriesDefaults: {
+                            type: "bar"
+                        },
+                        series: [{
+                            data: [1, 2]
+                        },{
+                            data: [1, 2]
+                        },{
+                            data: [1, 2]
+                        },{
+                            data: [1]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    bar = plotArea.charts[0].points[0];
+                }
+
+                // ------------------------------------------------------------
+                module("Categorical Plot Area / GetPointsByCategory", {
+                    setup: function() {
+                        createColumnChart();
+                    },
+                    teardown: destroyChart
+                });
+
+                test("returns empty array if has no category", function() {
+                    equals(plotArea.getPointsByCategory("").length, 0);
+                });
+
+                test("returns array with points", function() {
+                    equals(plotArea.getPointsByCategory("A").length, 4);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical Plot Area / Date categoryes / GetPointsByCategory ", {
+                    setup: function() {
+                        createColumnChart({categoryAxis: {
+                            categories: [new Date("2012/12/18"), new Date("2012/12/19")]
+                        }});
+                    },
+                    teardown: destroyChart
+                });
+
+                test("returns empty array if has no category", function() {
+                    equals(plotArea.getPointsByCategory("").length, 0);
+                });
+
+                test("returns array with points", function() {
+                    equals(plotArea.getPointsByCategory(new Date("2012/12/18")).length, 4);
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

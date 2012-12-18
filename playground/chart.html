@@ -37,15 +37,36 @@
                     },
                     categoryAxis: {
                         crosshair: {
-                            visible: true
-                        }
+                            visible: true,
+                            tooltip: {
+                                visible: true
+                            }
+                        },
+                            baseUnit: "days",
+                            categories: [
+                            new Date("2011/12/31"),
+                            new Date("2012/01/01"),
+                            new Date("2012/01/02"),
+                            new Date("2012/01/03"),
+                            new Date("2012/01/04"),
+                            new Date("2012/01/05"),
+                            new Date("2012/01/06"),
+                            new Date("2012/01/07"),
+                            new Date("2012/01/08"),
+                            new Date("2012/01/09"),
+                            new Date("2012/01/10")
+                            ],
+                        type: "date"
                     },
                     valueAxis: {
                         crosshair: {
-                            visible: true
+                            visible: true,
+                            tooltip: {
+                                visible: true
+                            }
                         }
                     }
-                });
+                }).data("kendoChart");
 
                 $("#scatterchart").kendoChart({
                     theme: "blueopal",
@@ -55,16 +76,22 @@
                     }],
                     tooltip: {
                         visible: true,
-                        crosshair: true
+                        multiple: true
                     },
                     xAxis: {
                         crosshair: {
-                            visible: true
+                            visible: true,
+                            tooltip: {
+                                visible: true
+                            }
                         }
                     },
                     yAxis: {
                         crosshair: {
-                            visible: true
+                            visible: true,
+                            tooltip: {
+                                visible: true
+                            }
                         }
                     }
                 });
