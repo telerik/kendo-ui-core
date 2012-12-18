@@ -49,8 +49,8 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "stockChart-seriesItem";
     }
 
-    public void setLabels(SeriesItemLabelsTag value) {
-        setProperty("labels", value);
+    public void setHighlight(SeriesItemHighlightTag value) {
+        setProperty("highlight", value);
     }
 
     public void setBorder(SeriesItemBorderTag value) {
@@ -61,28 +61,20 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("line", value);
     }
 
-    public void setMarkers(SeriesItemMarkersTag value) {
-        setProperty("markers", value);
+    public void setLabels(SeriesItemLabelsTag value) {
+        setProperty("labels", value);
     }
 
-    public void setTooltip(SeriesItemTooltipTag value) {
-        setProperty("tooltip", value);
+    public void setMarkers(SeriesItemMarkersTag value) {
+        setProperty("markers", value);
     }
 
     public void setOverlay(SeriesItemOverlayTag value) {
         setProperty("overlay", value);
     }
 
-    public void setHighlight(SeriesItemHighlightTag value) {
-        setProperty("highlight", value);
-    }
-
-    public void setNegativeValues(SeriesItemNegativeValuesTag value) {
-        setProperty("negativeValues", value);
-    }
-
-    public void setConnectors(SeriesItemConnectorsTag value) {
-        setProperty("connectors", value);
+    public void setTooltip(SeriesItemTooltipTag value) {
+        setProperty("tooltip", value);
     }
 
     public String getType() {
@@ -93,12 +85,12 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("type", value);
     }
 
-    public Object get() {
-        return (Object)getProperty("");
+    public String getDashType() {
+        return (String)getProperty("dashType");
     }
 
-    public void set(Object value) {
-        setProperty("", value);
+    public void setDashType(String value) {
+        setProperty("dashType", value);
     }
 
     public Object getData() {
@@ -107,6 +99,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setData(Object value) {
         setProperty("data", value);
+    }
+
+    public String getHighField() {
+        return (String)getProperty("highField");
+    }
+
+    public void setHighField(String value) {
+        setProperty("highField", value);
     }
 
     public String getField() {
@@ -141,38 +141,6 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("aggregate", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
-    }
-
-    public void setColor(String value) {
-        setProperty("color", value);
-    }
-
-    public String getLine() {
-        return (String)getProperty("line");
-    }
-
-    public void setLine(String value) {
-        setProperty("line", value);
-    }
-
-    public String getMissingValues() {
-        return (String)getProperty("missingValues");
-    }
-
-    public void setMissingValues(String value) {
-        setProperty("missingValues", value);
-    }
-
-    public float getOpacity() {
-        return (float)getProperty("opacity");
-    }
-
-    public void setOpacity(float value) {
-        setProperty("opacity", value);
-    }
-
     public String getAxis() {
         return (String)getProperty("axis");
     }
@@ -181,164 +149,28 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("axis", value);
     }
 
+    public String getCloseField() {
+        return (String)getProperty("closeField");
+    }
+
+    public void setCloseField(String value) {
+        setProperty("closeField", value);
+    }
+
+    public String getColor() {
+        return (String)getProperty("color");
+    }
+
+    public void setColor(String value) {
+        setProperty("color", value);
+    }
+
     public String getColorField() {
         return (String)getProperty("colorField");
     }
 
     public void setColorField(String value) {
         setProperty("colorField", value);
-    }
-
-    public float getGap() {
-        return (float)getProperty("gap");
-    }
-
-    public void setGap(float value) {
-        setProperty("gap", value);
-    }
-
-    public float getSpacing() {
-        return (float)getProperty("spacing");
-    }
-
-    public void setSpacing(float value) {
-        setProperty("spacing", value);
-    }
-
-    public String getCategoryField() {
-        return (String)getProperty("categoryField");
-    }
-
-    public void setCategoryField(String value) {
-        setProperty("categoryField", value);
-    }
-
-    public float getMaxSize() {
-        return (float)getProperty("maxSize");
-    }
-
-    public void setMaxSize(float value) {
-        setProperty("maxSize", value);
-    }
-
-    public float getMinSize() {
-        return (float)getProperty("minSize");
-    }
-
-    public void setMinSize(float value) {
-        setProperty("minSize", value);
-    }
-
-    public String getSizeField() {
-        return (String)getProperty("sizeField");
-    }
-
-    public void setSizeField(String value) {
-        setProperty("sizeField", value);
-    }
-
-    public String getXaxis() {
-        return (String)getProperty("xAxis");
-    }
-
-    public void setXaxis(String value) {
-        setProperty("xAxis", value);
-    }
-
-    public String getXfield() {
-        return (String)getProperty("xField");
-    }
-
-    public void setXfield(String value) {
-        setProperty("xField", value);
-    }
-
-    public String getYaxis() {
-        return (String)getProperty("yAxis");
-    }
-
-    public void setYaxis(String value) {
-        setProperty("yAxis", value);
-    }
-
-    public String getYfield() {
-        return (String)getProperty("yField");
-    }
-
-    public void setYfield(String value) {
-        setProperty("yField", value);
-    }
-
-    public String getExplodeField() {
-        return (String)getProperty("explodeField");
-    }
-
-    public void setExplodeField(String value) {
-        setProperty("explodeField", value);
-    }
-
-    public float getHoleSize() {
-        return (float)getProperty("holeSize");
-    }
-
-    public void setHoleSize(float value) {
-        setProperty("holeSize", value);
-    }
-
-    public float getMargin() {
-        return (float)getProperty("margin");
-    }
-
-    public void setMargin(float value) {
-        setProperty("margin", value);
-    }
-
-    public float getPadding() {
-        return (float)getProperty("padding");
-    }
-
-    public void setPadding(float value) {
-        setProperty("padding", value);
-    }
-
-    public float getSize() {
-        return (float)getProperty("size");
-    }
-
-    public void setSize(float value) {
-        setProperty("size", value);
-    }
-
-    public float getStartAngle() {
-        return (float)getProperty("startAngle");
-    }
-
-    public void setStartAngle(float value) {
-        setProperty("startAngle", value);
-    }
-
-    public String getDashType() {
-        return (String)getProperty("dashType");
-    }
-
-    public void setDashType(String value) {
-        setProperty("dashType", value);
-    }
-
-    public String getWidth() {
-        return (String)getProperty("width");
-    }
-
-    public void setWidth(String value) {
-        setProperty("width", value);
-    }
-
-    public Object getAggregates() {
-        return (Object)getProperty("aggregates");
-    }
-
-    public void setAggregates(Object value) {
-        setProperty("aggregates", value);
     }
 
     public String getDownColor() {
@@ -357,20 +189,20 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("downColorField", value);
     }
 
-    public String getOpenField() {
-        return (String)getProperty("openField");
+    public float getGap() {
+        return (float)getProperty("gap");
     }
 
-    public void setOpenField(String value) {
-        setProperty("openField", value);
+    public void setGap(float value) {
+        setProperty("gap", value);
     }
 
-    public String getHighField() {
-        return (String)getProperty("highField");
+    public String getLine() {
+        return (String)getProperty("line");
     }
 
-    public void setHighField(String value) {
-        setProperty("highField", value);
+    public void setLine(String value) {
+        setProperty("line", value);
     }
 
     public String getLowField() {
@@ -381,28 +213,52 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("lowField", value);
     }
 
-    public String getCloseField() {
-        return (String)getProperty("closeField");
+    public String getMissingValues() {
+        return (String)getProperty("missingValues");
     }
 
-    public void setCloseField(String value) {
-        setProperty("closeField", value);
+    public void setMissingValues(String value) {
+        setProperty("missingValues", value);
     }
 
-    public Object getStack() {
-        return (Object)getProperty("stack");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setStack(Object value) {
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
+    }
+
+    public String getOpenField() {
+        return (String)getProperty("openField");
+    }
+
+    public void setOpenField(String value) {
+        setProperty("openField", value);
+    }
+
+    public float getSpacing() {
+        return (float)getProperty("spacing");
+    }
+
+    public void setSpacing(float value) {
+        setProperty("spacing", value);
+    }
+
+    public boolean getStack() {
+        return (boolean)getProperty("stack");
+    }
+
+    public void setStack(boolean value) {
         setProperty("stack", value);
     }
 
-    public Object getVisibleInLegendField() {
-        return (Object)getProperty("visibleInLegendField");
+    public float getWidth() {
+        return (float)getProperty("width");
     }
 
-    public void setVisibleInLegendField(Object value) {
-        setProperty("visibleInLegendField", value);
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
 //<< Attributes

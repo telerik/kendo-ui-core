@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class SeriesItemNegativeValuesTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class NavigatorSeriesItemHighlightTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
+        NavigatorSeriesItemTag parent = (NavigatorSeriesItemTag)findParentWithClass(NavigatorSeriesItemTag.class);
 
 
-        parent.setNegativeValues(this);
+        parent.setHighlight(this);
 
 //<< doEndTag
 
@@ -48,7 +48,15 @@ public class SeriesItemNegativeValuesTag extends  BaseTag  /* interfaces *//* in
 //>> Attributes
 
     public static String tagName() {
-        return "stockChart-seriesItem-negativeValues";
+        return "stockChart-navigator-seriesItem-highlight";
+    }
+
+    public void setBorder(NavigatorSeriesItemHighlightBorderTag value) {
+        setProperty("border", value);
+    }
+
+    public void setLine(NavigatorSeriesItemHighlightLineTag value) {
+        setProperty("line", value);
     }
 
     public String getColor() {
@@ -59,12 +67,12 @@ public class SeriesItemNegativeValuesTag extends  BaseTag  /* interfaces *//* in
         setProperty("color", value);
     }
 
-    public boolean getVisible() {
-        return (boolean)getProperty("visible");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setVisible(boolean value) {
-        setProperty("visible", value);
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
     }
 
 //<< Attributes

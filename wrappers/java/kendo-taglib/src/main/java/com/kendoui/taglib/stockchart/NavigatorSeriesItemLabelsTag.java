@@ -87,6 +87,22 @@ public class NavigatorSeriesItemLabelsTag extends  BaseTag  /* interfaces *//* i
         setProperty("format", value);
     }
 
+    public float getMargin() {
+        return (float)getProperty("margin");
+    }
+
+    public void setMargin(float value) {
+        setProperty("margin", value);
+    }
+
+    public float getPadding() {
+        return (float)getProperty("padding");
+    }
+
+    public void setPadding(float value) {
+        setProperty("padding", value);
+    }
+
     public String getPosition() {
         return (String)getProperty("position");
     }
@@ -95,36 +111,20 @@ public class NavigatorSeriesItemLabelsTag extends  BaseTag  /* interfaces *//* i
         setProperty("position", value);
     }
 
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
-    }
-
-    public Object getTemplate() {
-        return (Object)getProperty("template");
-    }
-
-    public void setTemplate(Object value) {
-        setProperty("template", value);
-    }
-
-    public Object getMargin() {
-        return (Object)getProperty("margin");
-    }
-
-    public void setMargin(Object value) {
-        setProperty("margin", value);
-    }
-
-    public Object getPadding() {
-        return (Object)getProperty("padding");
-    }
-
-    public void setPadding(Object value) {
-        setProperty("padding", value);
     }
 
 //<< Attributes

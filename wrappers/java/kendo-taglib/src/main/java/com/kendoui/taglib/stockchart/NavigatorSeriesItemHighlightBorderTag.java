@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class SeriesItemHighlightTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class NavigatorSeriesItemHighlightBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesItemTag parent = (SeriesItemTag)findParentWithClass(SeriesItemTag.class);
+        NavigatorSeriesItemHighlightTag parent = (NavigatorSeriesItemHighlightTag)findParentWithClass(NavigatorSeriesItemHighlightTag.class);
 
 
-        parent.setHighlight(this);
+        parent.setBorder(this);
 
 //<< doEndTag
 
@@ -48,15 +48,15 @@ public class SeriesItemHighlightTag extends  BaseTag  /* interfaces *//* interfa
 //>> Attributes
 
     public static String tagName() {
-        return "stockChart-seriesItem-highlight";
+        return "stockChart-navigator-seriesItem-highlight-border";
     }
 
-    public void setBorder(SeriesItemHighlightBorderTag value) {
-        setProperty("border", value);
+    public float getWidth() {
+        return (float)getProperty("width");
     }
 
-    public void setLine(SeriesItemHighlightLineTag value) {
-        setProperty("line", value);
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
     public String getColor() {

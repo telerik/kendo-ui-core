@@ -87,28 +87,28 @@ public class SeriesItemTooltipTag extends  BaseTag  /* interfaces *//* interface
         setProperty("format", value);
     }
 
+    public float getPadding() {
+        return (float)getProperty("padding");
+    }
+
+    public void setPadding(float value) {
+        setProperty("padding", value);
+    }
+
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
-    }
-
-    public Object getTemplate() {
-        return (Object)getProperty("template");
-    }
-
-    public void setTemplate(Object value) {
-        setProperty("template", value);
-    }
-
-    public Object getPadding() {
-        return (Object)getProperty("padding");
-    }
-
-    public void setPadding(Object value) {
-        setProperty("padding", value);
     }
 
 //<< Attributes

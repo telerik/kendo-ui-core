@@ -59,20 +59,20 @@ public class SeriesItemHighlightTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("line", value);
     }
 
-    public float getOpacity() {
-        return (float)getProperty("opacity");
-    }
-
-    public void setOpacity(float value) {
-        setProperty("opacity", value);
-    }
-
     public String getColor() {
         return (String)getProperty("color");
     }
 
     public void setColor(String value) {
         setProperty("color", value);
+    }
+
+    public float getOpacity() {
+        return (float)getProperty("opacity");
+    }
+
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
     }
 
 //<< Attributes

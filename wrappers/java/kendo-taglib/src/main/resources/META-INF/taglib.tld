@@ -4064,8 +4064,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
         <attribute>
             <description>The template of the labels.
-Template variables:
-*</description>
+Template variables:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -4282,18 +4281,45 @@ hex and rgb.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The type of the series.</description>
+            <description>The type of the series. Available types:</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>The series line dash type.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
         <attribute>
-            <description>Array of data points.</description>
+            <description>Array of data items. The data item type can be either a:</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing a boolean value that indicates if the sector is exploded.</description>
+            <name>explodeField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the high value.</description>
+            <name>highField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The the size of the donut hole.</description>
+            <name>holeSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4304,8 +4330,7 @@ hex and rgb.</description>
         </attribute>
 
         <attribute>
-            <description>Name template for auto-generated
-series when binding to grouped data.</description>
+            <description>Name template for auto-generated series when binding to grouped data.</description>
             <name>groupNameTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -4319,31 +4344,10 @@ series when binding to grouped data.</description>
         </attribute>
 
         <attribute>
-            <description>The series base color.</description>
-            <name>color</name>
+            <description>Aggregate function for date series.</description>
+            <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The line of the area chart.</description>
-            <name>line</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Configures the behavior for handling missing values in area series.</description>
-            <name>missingValues</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The series opacity.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4354,138 +4358,31 @@ series when binding to grouped data.</description>
         </attribute>
 
         <attribute>
-            <description>The data field containing the bar color.</description>
-            <name>colorField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The distance between category clusters.</description>
-            <name>gap</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>Space between bars.</description>
-            <name>spacing</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble category name.</description>
+            <description>The data field containing the point category name.</description>
             <name>categoryField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The max size of the bubble.</description>
-            <name>maxSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The min size of the bubble.</description>
-            <name>minSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble size value.</description>
-            <name>sizeField</name>
+            <description>The data field containing the close value.</description>
+            <name>closeField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The name of the X axis to use.</description>
-            <name>xaxis</name>
+            <description>The series base color.</description>
+            <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The data field containing the bubble x value.</description>
-            <name>xfield</name>
+            <description>The data field containing the point color.</description>
+            <name>colorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The name of the Y axis to use.</description>
-            <name>yaxis</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble y value.</description>
-            <name>yfield</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing a boolean value that indicates if the sector is exploded
-(available only for the last level of the series).</description>
-            <name>explodeField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The the size of the donut hole.</description>
-            <name>holeSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The margin around each series
-(not available for the last level of the series).</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding around the donut chart (equal on all sides).</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The size of the series.</description>
-            <name>size</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The start angle of the first donut segment.</description>
-            <name>startAngle</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The dash type of the line.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The line width of the line chart.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4503,15 +4400,15 @@ series when binding to grouped data.</description>
         </attribute>
 
         <attribute>
-            <description>The data field containing the open value.</description>
-            <name>openField</name>
+            <description>The distance between category clusters.</description>
+            <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
-            <description>The data field containing the high value.</description>
-            <name>highField</name>
+            <description>Line options.</description>
+            <name>line</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4524,127 +4421,160 @@ series when binding to grouped data.</description>
         </attribute>
 
         <attribute>
-            <description>The data field containing the close value.</description>
-            <name>closeField</name>
+            <description>The margin around each donut series (ring)</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The max size of the marker.</description>
+            <name>maxSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The min size of the marker.</description>
+            <name>minSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Configures the behavior for handling missing values.</description>
+            <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>Aggregate function for date series.
-This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.</description>
-            <name>aggregate</name>
+            <description>The series opacity.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
-            <description>Indicates that the series should be stacked in a group with the specified name.</description>
+            <description>The data field containing the open value.</description>
+            <name>openField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding around the chart (equal on all sides).</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The size (or radius) of the series in pixels.
+If not specified, the available space is split evenly between the series.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The start angle of the first segment.</description>
+            <name>startAngle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the bubble size value.</description>
+            <name>sizeField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Space between points as proportion of the point width.</description>
+            <name>spacing</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>A value indicating if the series should be stacked.</description>
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>boolean</type>
         </attribute>
 
         <attribute>
-            <description>A boolean value indicating whether to show the sector in the legend.</description>
+            <description>A boolean value indicating whether to show the point category name in the legend.</description>
             <name>visibleInLegendField</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The line width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The name of the X axis to use.</description>
+            <name>xaxis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the X value.</description>
+            <name>xfield</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The name of the Y axis to use.</description>
+            <name>yaxis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the Y value.</description>
+            <name>yfield</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>Configures the series data labels.</description>
-        <name>chart-seriesItem-labels</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsTag</tag-class>
+        <description>Configures the appearance of highlighted points.</description>
+        <name>chart-seriesItem-highlight</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The background color of the labels.</description>
-            <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The text color of the labels.</description>
+            <description>The highlight color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The font style of the labels.</description>
-            <name>font</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The format of the labels.</description>
-            <name>format</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Defines the position of the area labels.</description>
-            <name>position</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The visibility of the labels.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-        <attribute>
-            <description>Defines the alignment of the donut labels.</description>
-            <name>align</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The distance of the labels.</description>
-            <name>distance</name>
+            <description>The opacity of the highlighted points.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The label template.
-Template variables:</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The margin of the labels.</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding of the labels.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>The border of the labels.</description>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
         <name>chart-seriesItem-border</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemBorderTag</tag-class>
         <body-content>empty</body-content>
@@ -4674,27 +4604,27 @@ Template variables:</description>
 
 
     <tag>
-        <description>The line of the area chart.</description>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
         <name>chart-seriesItem-line</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemLineTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The line color of the area chart.</description>
+            <description>The line color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The line opacity of the area chart.</description>
+            <description>The line opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
 
         <attribute>
-            <description>The line width of the area chart.</description>
+            <description>The line width.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -4704,7 +4634,123 @@ Template variables:</description>
 
 
     <tag>
-        <description>Configures the area markers.</description>
+        <description>The label connectors options.</description>
+        <name>chart-seriesItem-connectors</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemConnectorsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the connector line.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding between the connector line and the label, and connector line and donut chart.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the connector line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Configures the series data labels.</description>
+        <name>chart-seriesItem-labels</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Defines the alignment of the labels.</description>
+            <name>align</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The background color of the labels.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The text color of the labels.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The distance of the labels.</description>
+            <name>distance</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The font style of the labels.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The format of the labels.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The margin of the labels.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the position of the labels.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template. Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the labels.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Marker options.</description>
         <name>chart-seriesItem-markers</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersTag</tag-class>
         <body-content>JSP</body-content>
@@ -4741,6 +4787,45 @@ Template variables:</description>
 
 
     <tag>
+        <description>The settings for negative values.</description>
+        <name>chart-seriesItem-negativeValues</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemNegativeValuesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the negative values.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The visibility of the negative values.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The effects overlay.</description>
+        <name>chart-seriesItem-overlay</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOverlayTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The gradient name.</description>
+            <name>gradient</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The data point tooltip configuration options.</description>
         <name>chart-seriesItem-tooltip</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemTooltipTag</tag-class>
@@ -4768,8 +4853,23 @@ Template variables:</description>
         </attribute>
 
         <attribute>
-            <description>The tooltip format.</description>
+            <description>The tooltip format. Format variables depend on the series type:</description>
             <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -4781,109 +4881,62 @@ Template variables:</description>
             <type>boolean</type>
         </attribute>
 
-        <attribute>
-            <description>The tooltip template.
-Template variables:</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding of the tooltip.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
     </tag>
 
 
     <tag>
-        <description>The effects overlay.</description>
-        <name>chart-seriesItem-overlay</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesItemOverlayTag</tag-class>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <name>chart-seriesItem-highlight-border</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The gradient name.</description>
-            <name>gradient</name>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The border color.</description>
+            <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
-    </tag>
-
-
-    <tag>
-        <description>Configures the appearance of highlighted points.</description>
-        <name>chart-seriesItem-highlight</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightTag</tag-class>
-        <body-content>JSP</body-content>
-
         <attribute>
-            <description>The opacity of the highlighted points.</description>
+            <description>The border opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
 
-        <attribute>
-            <description>The segment color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
     </tag>
 
 
     <tag>
-        <description>The settings for negative values.</description>
-        <name>chart-seriesItem-negativeValues</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesItemNegativeValuesTag</tag-class>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <name>chart-seriesItem-highlight-line</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightLineTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The color of the negative values.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The visibility of the negative values.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The label connectors options.</description>
-        <name>chart-seriesItem-connectors</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesItemConnectorsTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the connector line.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding between the connector line and the label, and connector line and donut chart.</description>
-            <name>padding</name>
+            <description>The width of the line.</description>
+            <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
 
         <attribute>
-            <description>The width of the connector line.</description>
-            <name>width</name>
+            <description>The line color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the line.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -4960,66 +5013,6 @@ Template variables:</description>
         <attribute>
             <description>The width of the border.</description>
             <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
-        <name>chart-seriesItem-highlight-border</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The border color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The border opacity.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
-        <name>chart-seriesItem-highlight-line</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightLineTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The width of the line.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The line color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The opacity of the line.</description>
-            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -10836,18 +10829,31 @@ Includes</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The type of the series.</description>
+            <description>The type of the series. Available types:</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>The series line dash type.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
         <attribute>
-            <description>Array of data points.</description>
+            <description>Array of data items. The data item type can be either a:</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the high value.</description>
+            <name>highField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -10858,8 +10864,7 @@ Includes</description>
         </attribute>
 
         <attribute>
-            <description>Name template for auto-generated
-series when binding to grouped data.</description>
+            <description>Name template for auto-generated series when binding to grouped data.</description>
             <name>groupNameTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -10873,9 +10878,7 @@ series when binding to grouped data.</description>
         </attribute>
 
         <attribute>
-            <description>Aggregate function for date series.
-This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.</description>
+            <description>Aggregate function for date series.</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -10889,6 +10892,13 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
+            <description>The data field containing the close value.</description>
+            <name>closeField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
             <description>The series base color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10896,14 +10906,49 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>The dash type of the line.</description>
-            <name>dashType</name>
+            <description>The data field containing the point color.</description>
+            <name>colorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>Configures the behavior for handling missing values in line series.</description>
+            <description>The series color when open value is smoller then close value.</description>
+            <name>downColor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the body color.</description>
+            <name>downColorField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The distance between category clusters.</description>
+            <name>gap</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Line options.</description>
+            <name>line</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the low value.</description>
+            <name>lowField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Configures the behavior for handling missing values.</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -10917,43 +10962,112 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>The line width of the line chart.</description>
-            <name>width</name>
+            <description>The data field containing the open value.</description>
+            <name>openField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The line of the area chart.</description>
-            <name>line</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the column color.</description>
-            <name>colorField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The distance between category clusters.</description>
-            <name>gap</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>Space between columns.</description>
+            <description>Space between points as proportion of the point width.</description>
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
 
         <attribute>
-            <description>Indicates that the series should be stacked in a group with the specified name.</description>
+            <description>A value indicating if the series should be stacked.</description>
             <name>stack</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The line width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Configures the appearance of highlighted points.</description>
+        <name>stockChart-navigator-seriesItem-highlight</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemHighlightTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The highlight color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the highlighted points.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-navigator-seriesItem-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-navigator-seriesItem-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The line opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The line width.</description>
+            <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -10996,8 +11110,29 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>Defines the position of the line labels.</description>
+            <description>The margin of the labels.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the position of the labels.</description>
             <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template. Template variables:</description>
+            <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11009,63 +11144,11 @@ The function return value is displayed instead of the individual points.</descri
             <type>boolean</type>
         </attribute>
 
-        <attribute>
-            <description>The label template.
-Template variables:</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The margin of the labels.</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding of the labels.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
     </tag>
 
 
     <tag>
-        <description>The border of the labels.</description>
-        <name>stockChart-navigator-seriesItem-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the border.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The dash type of the border.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Configures the line markers.</description>
+        <description>Marker options.</description>
         <name>stockChart-navigator-seriesItem-markers</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemMarkersTag</tag-class>
         <body-content>JSP</body-content>
@@ -11102,6 +11185,22 @@ Template variables:</description>
 
 
     <tag>
+        <description>The effects overlay.</description>
+        <name>stockChart-navigator-seriesItem-overlay</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemOverlayTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The gradient name.</description>
+            <name>gradient</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The data point tooltip configuration options.</description>
         <name>stockChart-navigator-seriesItem-tooltip</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemTooltipTag</tag-class>
@@ -11129,8 +11228,23 @@ Template variables:</description>
         </attribute>
 
         <attribute>
-            <description>The tooltip format.</description>
+            <description>The tooltip format. Format variables depend on the series type:</description>
             <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11142,65 +11256,64 @@ Template variables:</description>
             <type>boolean</type>
         </attribute>
 
-        <attribute>
-            <description>The tooltip template.
-Template variables:</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding of the tooltip.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
     </tag>
 
 
     <tag>
-        <description>The line of the area chart.</description>
-        <name>stockChart-navigator-seriesItem-line</name>
-        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemLineTag</tag-class>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-navigator-seriesItem-highlight-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemHighlightBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The line color of the area chart.</description>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The border color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>The line opacity of the area chart.</description>
+            <description>The border opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The line width of the area chart.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
         </attribute>
 
     </tag>
 
 
     <tag>
-        <description>The effects overlay.</description>
-        <name>stockChart-navigator-seriesItem-overlay</name>
-        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemOverlayTag</tag-class>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-navigator-seriesItem-highlight-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemHighlightLineTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The gradient name.</description>
-            <name>gradient</name>
+            <description>The width of the line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The line color.</description>
+            <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the line.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -11289,18 +11402,31 @@ Template variables:</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The type of the series.</description>
+            <description>The type of the series. Available types:</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
+        <attribute>
+            <description>The series line dash type.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
         <attribute>
-            <description>Array of data points.</description>
+            <description>Array of data items. The data item type can be either a:</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the high value.</description>
+            <name>highField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -11311,8 +11437,7 @@ Template variables:</description>
         </attribute>
 
         <attribute>
-            <description>Name template for auto-generated
-series when binding to grouped data.</description>
+            <description>Name template for auto-generated series when binding to grouped data.</description>
             <name>groupNameTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -11326,10 +11451,22 @@ series when binding to grouped data.</description>
         </attribute>
 
         <attribute>
-            <description>Aggregate function for date series.
-This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.</description>
+            <description>Aggregate function for date series.</description>
             <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The name of the value axis to use.</description>
+            <name>axis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The data field containing the close value.</description>
+            <name>closeField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11342,175 +11479,10 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>The line of the area chart.</description>
-            <name>line</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Configures the behavior for handling missing values in area series.</description>
-            <name>missingValues</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The series opacity.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The name of the value axis to use.</description>
-            <name>axis</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bar color.</description>
+            <description>The data field containing the point color.</description>
             <name>colorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The distance between category clusters.</description>
-            <name>gap</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>Space between bars.</description>
-            <name>spacing</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble category name.</description>
-            <name>categoryField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The max size of the bubble.</description>
-            <name>maxSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The min size of the bubble.</description>
-            <name>minSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble size value.</description>
-            <name>sizeField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The name of the X axis to use.</description>
-            <name>xaxis</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble x value.</description>
-            <name>xfield</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The name of the Y axis to use.</description>
-            <name>yaxis</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing the bubble y value.</description>
-            <name>yfield</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The data field containing a boolean value that indicates if the sector is exploded
-(available only for the last level of the series).</description>
-            <name>explodeField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The the size of the donut hole.</description>
-            <name>holeSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The margin around each series
-(not available for the last level of the series).</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding around the donut chart (equal on all sides).</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The size of the series.</description>
-            <name>size</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The start angle of the first donut segment.</description>
-            <name>startAngle</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The dash type of the line.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The line width of the line chart.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Aggregate function for date series.
-This function is used when a category (an year, month, etc.) contains two or more points.
-The function return values are displayed instead of the individual points.</description>
-            <name>aggregates</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -11528,15 +11500,15 @@ The function return values are displayed instead of the individual points.</desc
         </attribute>
 
         <attribute>
-            <description>The data field containing the open value.</description>
-            <name>openField</name>
+            <description>The distance between category clusters.</description>
+            <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
-            <description>The data field containing the high value.</description>
-            <name>highField</name>
+            <description>Line options.</description>
+            <name>line</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11549,24 +11521,128 @@ The function return values are displayed instead of the individual points.</desc
         </attribute>
 
         <attribute>
-            <description>The data field containing the close value.</description>
-            <name>closeField</name>
+            <description>Configures the behavior for handling missing values.</description>
+            <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
         <attribute>
-            <description>Indicates that the series should be stacked in a group with the specified name.</description>
-            <name>stack</name>
+            <description>The series opacity.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
-            <description>A boolean value indicating whether to show the sector in the legend.</description>
-            <name>visibleInLegendField</name>
+            <description>The data field containing the open value.</description>
+            <name>openField</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Space between points as proportion of the point width.</description>
+            <name>spacing</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>A value indicating if the series should be stacked.</description>
+            <name>stack</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The line width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Configures the appearance of highlighted points.</description>
+        <name>stockChart-seriesItem-highlight</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The highlight color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the highlighted points.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-seriesItem-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-seriesItem-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The line opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The line width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -11607,8 +11683,29 @@ The function return values are displayed instead of the individual points.</desc
         </attribute>
 
         <attribute>
-            <description>Defines the position of the area labels.</description>
+            <description>The margin of the labels.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the labels.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>Defines the position of the labels.</description>
             <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The label template. Template variables:</description>
+            <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11620,107 +11717,11 @@ The function return values are displayed instead of the individual points.</desc
             <type>boolean</type>
         </attribute>
 
-        <attribute>
-            <description>Defines the alignment of the donut labels.</description>
-            <name>align</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The distance of the labels.</description>
-            <name>distance</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The label template.
-Template variables:</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The margin of the labels.</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding of the labels.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
     </tag>
 
 
     <tag>
-        <description>The border of the labels.</description>
-        <name>stockChart-seriesItem-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the border.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The dash type of the border.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The line of the area chart.</description>
-        <name>stockChart-seriesItem-line</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLineTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The line color of the area chart.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The line opacity of the area chart.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The line width of the area chart.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Configures the area markers.</description>
+        <description>Marker options.</description>
         <name>stockChart-seriesItem-markers</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersTag</tag-class>
         <body-content>JSP</body-content>
@@ -11757,6 +11758,22 @@ Template variables:</description>
 
 
     <tag>
+        <description>The effects overlay.</description>
+        <name>stockChart-seriesItem-overlay</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemOverlayTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The gradient name.</description>
+            <name>gradient</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The data point tooltip configuration options.</description>
         <name>stockChart-seriesItem-tooltip</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemTooltipTag</tag-class>
@@ -11784,8 +11801,23 @@ Template variables:</description>
         </attribute>
 
         <attribute>
-            <description>The tooltip format.</description>
+            <description>The tooltip format. Format variables depend on the series type:</description>
             <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11797,109 +11829,62 @@ Template variables:</description>
             <type>boolean</type>
         </attribute>
 
-        <attribute>
-            <description>The tooltip template.
-Template variables:</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding of the tooltip.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-
     </tag>
 
 
     <tag>
-        <description>The effects overlay.</description>
-        <name>stockChart-seriesItem-overlay</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemOverlayTag</tag-class>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-seriesItem-highlight-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The gradient name.</description>
-            <name>gradient</name>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The border color.</description>
+            <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
-    </tag>
-
-
-    <tag>
-        <description>Configures the appearance of highlighted points.</description>
-        <name>stockChart-seriesItem-highlight</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightTag</tag-class>
-        <body-content>JSP</body-content>
-
         <attribute>
-            <description>The opacity of the highlighted points.</description>
+            <description>The border opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
 
-        <attribute>
-            <description>The segment color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
     </tag>
 
 
     <tag>
-        <description>The settings for negative values.</description>
-        <name>stockChart-seriesItem-negativeValues</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemNegativeValuesTag</tag-class>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-seriesItem-highlight-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightLineTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The color of the negative values.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The visibility of the negative values.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The label connectors options.</description>
-        <name>stockChart-seriesItem-connectors</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemConnectorsTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the connector line.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The padding between the connector line and the label, and connector line and donut chart.</description>
-            <name>padding</name>
+            <description>The width of the line.</description>
+            <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
 
         <attribute>
-            <description>The width of the connector line.</description>
-            <name>width</name>
+            <description>The line color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the line.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -11976,66 +11961,6 @@ Template variables:</description>
         <attribute>
             <description>The width of the border.</description>
             <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
-        <name>stockChart-seriesItem-highlight-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The border color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The border opacity.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
-        <name>stockChart-seriesItem-highlight-line</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightLineTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The width of the line.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>The line color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>The opacity of the line.</description>
-            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
