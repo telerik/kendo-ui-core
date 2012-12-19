@@ -332,6 +332,8 @@ kendo_module({
             that._dataItems.push(dataItem);
 
             that._state = "accept";
+
+            that.input.val("");
         },
 
         _list: function() {

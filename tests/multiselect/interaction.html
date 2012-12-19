@@ -181,6 +181,19 @@
                 equal(multiselect._dataItems.length, 1);
                 equal(multiselect._dataItems[0].value, 0);
             });
+
+            test("MultiSelect clears input on selection", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.click().val("option");
+                multiselect.search("option");
+
+                multiselect.ul.children().eq(0).click();
+
+                equal(multiselect.input.val(), "");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
