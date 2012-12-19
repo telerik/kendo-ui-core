@@ -1622,6 +1622,8 @@ function pad(number, digits, end) {
         support.transitions = transitions;
 
         support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
+        support.screenWidth = window.outerWidth || window.screen ? window.screen.availWidth : window.innerWidth;
+        support.screenHeight = window.outerHeight || window.screen ? window.screen.availHeight : window.innerHeight;
 
         support.detectOS = function (ua) {
             var os = false, minorVersion, match = [],
@@ -1675,7 +1677,7 @@ function pad(number, digits, end) {
                         os.flatVersion = os.majorVersion + minorVersion + (new Array(3 - (minorVersion.length < 3 ? minorVersion.length : 2)).join("0"));
                         os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== UNDEFINED || typeof window.cordova !== UNDEFINED; // Use file protocol to detect appModes.
 
-                        if (os.android && (support.devicePixelRatio < 1.5 && os.flatVersion < 400 || notAndroidPhone) && (window.outerWidth > 800 || window.outerHeight > 800 || (window.screen && (window.screen.availWidth > 800 || window.screen.availHeight > 800)))) {
+                        if (os.android && (support.devicePixelRatio < 1.5 && os.flatVersion < 400 || notAndroidPhone) && (support.screenWidth > 800 || support.screenHeight > 800)) {
                             os.tablet = agent;
                         }
 
