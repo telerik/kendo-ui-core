@@ -20,17 +20,23 @@
         <script>
             var detect = kendo.support.detectOS,
                 dpr = kendo.support.devicePixelRatio,
+                sw = kendo.support.screenWidth,
+                sh = kendo.support.screenHeight,
                 span;
 
             module("detect", {
                 setup: function() {
                 },
                 teardown: function() {
+                    kendo.support.screenWidth = sw;
+                    kendo.support.screenHeight = sh;
                     kendo.support.devicePixelRatio = dpr;
                }
             });
 
             test("detects Kindle Fire and as a tablet", function() {
+                kendo.support.screenWidth = 1024;
+                kendo.support.screenHeight = 600;
                 var result = detect("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-84) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true");
 
                 ok(result.device == "fire");
@@ -40,6 +46,8 @@
             });
 
             test("detects Android 2.x (Nexus S) and as a phone", function() {
+                kendo.support.screenWidth = 480;
+                kendo.support.screenHeight = 800;
                 kendo.support.devicePixelRatio = 1.5;
                 var result = detect("Mozilla/5.0 (Linux; U; Android 2.3.4; fr-fr; Nexus S Build/GRJ22) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1");
 
@@ -51,6 +59,8 @@
             });
 
             test("detects Android 3.x (Motorola Xoom) and as a tablet", function() {
+                kendo.support.screenWidth = 1280;
+                kendo.support.screenHeight = 800;
                 var result = detect("Mozilla/5.0 (Linux; U; Android 3.0.1; en-us; Xoom Build/HWI69) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13");
 
                 ok(result.device == "android");
@@ -61,6 +71,8 @@
             });
 
             test("detects Android 4.x (Galaxy Nexus) and as a phone", function() {
+                kendo.support.screenWidth = 720;
+                kendo.support.screenHeight = 1280;
                 kendo.support.devicePixelRatio = 2;
                 var result = detect("Mozilla/5.0 (Linux; U; Android 4.0.2; en-us; Galaxy Nexus Build/ICL53F) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30");
 
@@ -188,6 +200,8 @@
             });
 
             test("detects Nexus 7 and as a tablet", function() {
+                kendo.support.screenWidth = 1280;
+                kendo.support.screenHeight = 800;
                 kendo.support.devicePixelRatio = 1.33;
                 var result = detect("Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166  Safari/535.19");
 
@@ -199,6 +213,8 @@
             });
 
             test("detects Nexus 10 and as a tablet", function() {
+                kendo.support.screenWidth = 2560;
+                kendo.support.screenHeight = 1600;
                 kendo.support.devicePixelRatio = 2;
                 var result = detect("Mozilla/5.0 (Linux; U; Android 4.2; en-us; Nexus 10 Build/JVP15I) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30");
 
@@ -210,6 +226,8 @@
             });
 
             test("detects Acer A100 and as a tablet", function() {
+                kendo.support.screenWidth = 1024;
+                kendo.support.screenHeight = 600;
                 var result = detect("Mozilla/5.0 (Linux; U; Android 3.0; xx-xx; A100 Build/HRI66) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13");
 
                 ok(result.device == "android");
@@ -220,6 +238,8 @@
             });
 
             test("detects Asus Padfone 2 and as a phone", function() {
+                kendo.support.screenWidth = 720;
+                kendo.support.screenHeight = 1280;
                 kendo.support.devicePixelRatio = 2;
                 var result = detect("Mozilla/5.0 (Linux; Android 4.0.4; PadFone 2 Build/IMM76I) AppleWebKit/535.19 (KHTML like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19");
 
@@ -231,6 +251,8 @@
             });
 
             test("detects Motorola Droid DNA and as a phone", function() {
+                kendo.support.screenWidth = 1080;
+                kendo.support.screenHeight = 1920;
                 kendo.support.devicePixelRatio = 2.75;
                 var result = detect("Mozilla/5.0 (Linux; U; Android 4.1.1; es-es; HTC_Droid_DNA/1.26.161.2 Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30");
 
@@ -242,6 +264,8 @@
             });
 
             test("detects Kindle Fire HD and as a tablet", function() {
+                kendo.support.screenWidth = 1280;
+                kendo.support.screenHeight = 800;
                 kendo.support.devicePixelRatio = 1.33;
                 var result = detect("Mozilla/5.0 (Linux; U; en-us; KFTT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/2.2 Safari/535.19 Silk-Accelerated=true");
 
@@ -253,6 +277,8 @@
             });
 
             test("detects Transformer Pad Infinity and as a tablet", function() {
+                kendo.support.screenWidth = 1920;
+                kendo.support.screenHeight = 1200;
                 kendo.support.devicePixelRatio = 1.4;
                 var result = detect("Mozilla/5.0 (Linux; U; Android 4.1.2; en-us; Transformer Pad Infinity TF700T Build/JZO54K; CyanogenMod-10) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30");
 
