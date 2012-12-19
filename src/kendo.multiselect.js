@@ -88,11 +88,62 @@ kendo_module({
             popup.close();
         },
 
+        _buildFilters: function(filter) {
+            var options = this.options,
+                dataItems = this._dataItems,
+                ignoreCase = options.ignoreCase,
+                field = options.dataTextField,
+                length = dataItems.length,
+                idx = 0, dataItem, value,
+                filters = [];
+
+            for(; idx < length; idx++) {
+                dataItem = dataItems[idx];
+                value = dataItem[field];
+
+                filters.push({
+                    value: ignoreCase ? value.toLowerCase() : value,
+                    field: field,
+                    operator: "neq",
+                    ignoreCase: ignoreCase
+                });
+            }
+
+            if (filter) {
+                filters.push(filter);
+            }
+
+            return filters;
+        },
+
+        _filterSource: function(filter) {
+            var that = this,
+                options = that.options,
+                dataSource = that.dataSource,
+                expression = dataSource.filter() || {}
+                filters = that._buildFilters(filter);
+
+            removeFiltersForField(expression, options.dataTextField);
+
+            if (filters[0]) {
+                expression = expression.filters || [];
+                expression = expression.concat(filters);
+            }
+
+            dataSource.filter(expression);
+        },
+
         open: function() {
             var that = this,
                 popup = that.popup;
 
-            popup.open();
+            if (that._state === "accept") {
+                //rebind and open
+                that._open = true;
+                that._filterSource();
+            } else {
+                popup.open();
+            }
         },
 
         refresh: function() {
@@ -119,7 +170,7 @@ kendo_module({
             clearTimeout(that._typing);
 
             if (length >= options.minLength) {
-                //that._state = STATE_FILTER;
+                that._state = "filter";
                 that._open = true;
                 that.dataSource.filter({
                     value: ignoreCase ? word.toLowerCase() : word,
@@ -278,6 +329,8 @@ kendo_module({
 
             //add data item
             that._dataItems.push(dataItem);
+
+            that._state = "accept";
         },
 
         _list: function() {
@@ -306,6 +359,19 @@ kendo_module({
             that._innerWraper = $(wrapper[0].firstChild);
         }
     });
+
+    function removeFiltersForField(expression, field) {
+        if (expression.filters) {
+            expression.filters = $.grep(expression.filters, function(filter) {
+                removeFiltersForField(filter, field);
+                if (filter.filters) {
+                    return filter.filters.length;
+                } else {
+                    return filter.field != field;
+                }
+            });
+        }
+    }
 
     ui.plugin(MultiSelect);
 

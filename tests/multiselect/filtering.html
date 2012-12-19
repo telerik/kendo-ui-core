@@ -67,7 +67,20 @@
                 });
             });
 
+            test("MultiSelect does not show selected items on filter", function() {
+                popuplateSelect();
 
+                var multiselect = new MultiSelect(select, {
+                    delay: 0
+                });
+
+                multiselect.search("Option1");
+                multiselect.ul.children().first().click();
+
+                multiselect.open();
+
+                equal(multiselect.ul.children().length, 4); /* all items without one */
+            });
 
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
