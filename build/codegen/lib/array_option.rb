@@ -19,7 +19,7 @@ module CodeGen
         end
 
         def add_option(settings)
-            @item.add_option(settings, @name + '.')
+            @item.add_option(settings)
         end
     end
 

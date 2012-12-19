@@ -1,6 +1,6 @@
 class String
     def camelize
-        self.sub(/^./) { |c| c.downcase }
+        self[0].downcase + self[1..-1]
     end
 
     def pascalize

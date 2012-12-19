@@ -30,8 +30,29 @@ class MarkdownParser
         each_section(configuration) do |option, index|
 
             component.add_option(:name => section_name(option),
-                                :type => option_type(option),
-                                :description => section_description(index, configuration))
+                                 :type => option_type(option),
+                                 :description => section_description(index, configuration))
+        end
+
+        methods = methods_section(root)
+
+        each_section(methods) do |method, index|
+
+            method = component.add_method(:name => section_name(method),
+                                          :result => method_result(index, methods),
+                                          :description => section_description(index, methods))
+
+            parameters = methods.slice(index, methods.size)
+
+            parameters.each_with_index do |element, index|
+                if element.type == :header && element.options[:level] == 5
+
+                    method.add_parameter(:name => section_name(element),
+                                         :type => option_type(element),
+                                         :description => section_description(index, parameters))
+
+                end
+            end
         end
 
         events = events_section(root)
@@ -41,6 +62,7 @@ class MarkdownParser
             component.add_event(:name => section_name(event),
                                 :description => section_description(index, events))
 
+
         end
 
         component
@@ -48,12 +70,31 @@ class MarkdownParser
 
     private
 
+    def method_result(index, siblings)
+        index = siblings.slice(index, siblings.size).find_index { |e| e.options[:raw_text] == 'Returns' }
+
+        return unless index
+
+        description = siblings.slice(index, siblings.size).find {|e| e.type == :p}
+
+        { :type => option_type(description),
+          :description => element_text(find_text_child(description)) }
+    end
+
     def configuration_section(element)
         start_index = child_index(element, 'Configuration')
 
         end_index = child_index(element, 'Methods')
 
-        end_index = child_index(element, 'Events') if end_index = element.children.size
+        end_index = child_index(element, 'Events') if end_index == element.children.size
+
+        element.children.slice(start_index..end_index)
+    end
+
+    def methods_section(element)
+        start_index = child_index(element, 'Methods')
+
+        end_index = child_index(element, 'Events')
 
         element.children.slice(start_index..end_index)
     end

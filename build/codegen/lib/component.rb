@@ -1,4 +1,5 @@
 require 'string'
+require 'method'
 require 'composite_option'
 require 'array_option'
 require 'option'
@@ -13,90 +14,47 @@ module CodeGen
              'Boolean',
              'Function']
 
-class Component
-    attr_reader :name, :full_name, :options, :events
+    class Component
+        include Options
 
-    def initialize(settings)
-        @full_name = settings[:name]
-        @name = @full_name.split('.').last
-        @options = []
-        @events = []
-    end
+        attr_reader :name, :options, :events, :methods
 
-    def import(metadata)
-        metadata[:options].each do |option|
-
-            @options.delete_if { |o| o.name == option[:name] }
-
-            add_option(option)
-
+        def initialize(settings)
+            @name = settings[:name].split('.').last
+            @options = []
+            @events = []
+            @methods = []
         end
-    end
 
-    def composite_options
-        @options.find_all { |option| option.composite? }.sort {|a, b| a.name <=> b.name }
-    end
+        def method_class
+            Method
+        end
 
-    def composite_option_class
-        CompositeOption
-    end
+        def import(metadata)
+            metadata[:options].each do |option|
 
-    def option_class
-        Option
-    end
+                @options.delete_if { |o| o.name == option[:name] }
 
-    def event_class
-        Event
-    end
-
-    def add_option(settings)
-        name = settings[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
-
-        recursive = settings[:recursive]
-
-        description = settings[:description]
-
-        types = settings[:type]
-
-        return unless types
-
-        parents = @options.find_all { |option| name.start_with?(option.name + '.') && option.type =~ /Object|Array/ }
-
-        parents.map! { |parent| parent.to_composite }
-
-        types.split('|').each do |type|
-            type = type.strip
-
-            next unless TYPES.include?(type)
-
-            next if @options.any? { |option| option.name == name && option.type == type }
-
-            if parents.any?
-
-                parents.each do |parent|
-
-                    parent.add_option(:name => name,
-                                      :type => type,
-                                      :recursive => recursive,
-                                      :description => description)
-                end
-
-            else
-
-                @options.push option_class.new(:name => name,
-                                               :owner => self,
-                                               :recursive => recursive,
-                                               :type => type,
-                                               :description => description)
+                add_option(option)
 
             end
         end
-    end
 
-    def add_event(settings)
-        settings[:owner] = self
-        @events.push event_class.new(settings)
+        def add_method(settings)
+            settings[:owner] = self
+
+            method = method_class.new(settings)
+
+            @methods.push(method)
+
+            method
+        end
+
+        def add_event(settings)
+            settings[:owner] = self
+
+            @events.push event_class.new(settings)
+        end
     end
-end
 
 end #module CodeGen

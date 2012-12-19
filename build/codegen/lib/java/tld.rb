@@ -60,7 +60,7 @@ module CodeGen::Java::TLD
         include Options
 
         def body_content
-            return 'JSP' if @recursive || @options.any? { |option| option.composite? || option.type == 'Function' }
+            return 'JSP' if @recursive || @options.any? { |option| option.composite? || option.type.include?('Function') }
 
             'empty'
         end
@@ -83,13 +83,7 @@ module CodeGen::Java::TLD
     end
 
     class ArrayItem < CompositeOption
-        def tag_name
-            @owner.tag_name.sub(@owner.name.camelize, @name.camelize)
-        end
-
-        def tag_class
-            super.sub(@owner.name.pascalize, '')
-        end
+        include CodeGen::Java::ArrayItem
     end
 
     EVENT = ERB.new(%{
@@ -108,11 +102,11 @@ module CodeGen::Java::TLD
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
         <body-content><%= body_content %></body-content>
 
-<%= unique_options.map { |option| option.to_attribute }.join %>
+<%= simple_options.map { |option| option.to_attribute }.join %>
 
     </tag>
 
-<%= unique_composite_options.map { |option| option.to_tag }.join %>
+<%= composite_options.map { |option| option.to_tag }.join %>
 
 <%= events.map { |event| event.to_tag }.join %>
 
@@ -136,7 +130,7 @@ module CodeGen::Java::TLD
 <% else %>
         <body-content><%= item.body_content %></body-content>
 <% end %>
-<%= item.unique_options.map { |option| option.to_attribute }.join %>
+<%= item.simple_options.map { |option| option.to_attribute }.join %>
 
 <% if item.tag_name == 'splitter-pane' %>
         <dynamic-attributes>true</dynamic-attributes>
@@ -144,7 +138,7 @@ module CodeGen::Java::TLD
 
     </tag>
 
-<%= item.unique_composite_options.map { |option| option.to_tag }.join %>
+<%= item.composite_options.map { |option| option.to_tag }.join %>
 
 <%= item.events.map { |event| event.to_tag }.join %>
     }, 0, '<>%')
@@ -164,7 +158,7 @@ module CodeGen::Java::TLD
             <type>java.lang.String</type>
         </attribute>
 <% end %>
-<%= unique_options.map { |option| option.to_attribute }.join %>
+<%= simple_options.map { |option| option.to_attribute }.join %>
 <%= events.map { |event| event.to_attribute }.join %>
 
 <% if name != 'DataSource' %>
@@ -172,7 +166,7 @@ module CodeGen::Java::TLD
 <% end %>
     </tag>
 
-<%= unique_composite_options.map { |option| option.to_tag }.join("\n") %>
+<%= composite_options.map { |option| option.to_tag }.join("\n") %>
 
 <%= events.map { |event| event.to_tag }.join("\n") %>
 
@@ -183,9 +177,7 @@ module CodeGen::Java::TLD
             <description><%= description %></description>
             <name><%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
             <rtexprvalue>true</rtexprvalue>
-<% if type != 'Function' %>
             <type><%= java_type %></type>
-<% end %>
         </attribute>
     }, 0, '<>%')
 
@@ -213,11 +205,8 @@ class Generator
 
     def sync()
         src = File.read(@filename)
-
-        src = src.sub(/<!-- Auto-generated -->(.|\n)*<!-- Auto-generated -->/,
-                     "<!-- Auto-generated -->\n\n" +
-                     @tld +
-                     "\n\n<!-- Auto-generated -->")
+                  .sub(/<!-- Auto-generated -->(.|\n)*<!-- Auto-generated -->/,
+                     "<!-- Auto-generated -->\n\n" + @tld + "\n\n<!-- Auto-generated -->")
 
         File.write(@filename, src.dos)
     end

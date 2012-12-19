@@ -19,12 +19,9 @@ module CodeGen::Java
             @owner.tag_class.sub('Tag', '') + name + 'Tag'
         end
 
-        def tag_name
-            @owner.tag_name + '-' + @name
-        end
-
         def events
-            @options.find_all { |option| option.type == 'Function' }
+            composite = composite_options
+            @options.find_all { |option| option.type.include?('Function') && !composite.any? { |o| o.name == option.name } }
                     .map { |option | event_class.new(:name => option.name, :owner => self, :description => option.description) }
         end
     end

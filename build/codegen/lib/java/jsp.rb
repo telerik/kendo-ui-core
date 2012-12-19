@@ -33,25 +33,30 @@ module CodeGen::Java::JSP
                 interfaces.push('DataBoundWidget')
             end
 
+            if @options.any? { |o| o.name == 'items' }
+                interfaces.push('Items')
+            end
+
             interfaces
+        end
+
+        def events
+            @events.sort { |a, b| a.name <=> b.name }
         end
 
         def implement_interfaces(java)
             implements = 'implements ' + interfaces.join(", ") if interfaces.any?
 
-            java.sub /\/\* interfaces \*\/(.|\n)*\/\* interfaces \*\//,
-                "/* interfaces */#{implements}/* interfaces */"
+            java.sub(/\/\* interfaces \*\/(.|\n)*\/\* interfaces \*\//,
+                "/* interfaces */#{implements}/* interfaces */")
         end
 
         def to_java(filename)
-            java = COMPONENT.result(binding)
 
-            java = File.read(filename) if File.exists?(filename)
+            java = File.exists?(filename) ? File.read(filename) : COMPONENT.result(binding)
 
-            java = implement_interfaces(java)
-
-            java.sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/,
-                     COMPONENT_ATTRIBUTES.result(binding))
+            implement_interfaces(java)
+                    .sub(/\/\/>> Attributes(.|\n)*\/\/<< Attributes/, COMPONENT_ATTRIBUTES.result(binding))
         end
     end
 
@@ -69,6 +74,14 @@ module CodeGen::Java::JSP
         def tag_class
             @name.pascalize + 'FunctionTag'
         end
+
+        def to_java(filename)
+            java = EVENT.result(binding)
+
+            java = File.read(filename) if File.exists?(filename)
+
+            java
+        end
     end
 
     class Option < CodeGen::Java::Option
@@ -76,6 +89,8 @@ module CodeGen::Java::JSP
 
         def to_getter_and_setter
             return DATA_SOURCE_SETTER if @name == 'dataSource'
+
+            return EVENT_GETTER_AND_SETTER.result(binding) if @type[0] == 'Function' && @type.size == 1
 
             OPTION_GETTER_AND_SETTER.result(binding)
         end
@@ -173,7 +188,9 @@ EVENT_SETTER = ERB.new(%{
 
 COMPOSITE_OPTION_PARENT = ERB.new(%{//>> doEndTag
 
+
         <%= owner.tag_class %> parent = (<%= owner.tag_class %>)findParentWithClass(<%= owner.tag_class %>.class);
+
 
         parent.set<%= name.pascalize %>(this);
 
@@ -183,7 +200,7 @@ ARRAY_ITEM_ADD = ERB.new(%{//>> doEndTag
 
         <%= owner.tag_class %> parent = (<%= owner.tag_class %>)findParentWithClass(<%= owner.tag_class %>.class);
 
-        parent.addItem(this);
+        parent.add<%= name.pascalize %>(this);
 
 //<< doEndTag})
 
@@ -195,6 +212,22 @@ ARRAY_SETTER = ERB.new(%{
         setProperty("<%= name %>", value.<%= name %>());
 <% end %>
     }
+})
+
+EVENT = ERB.new(%{
+package com.kendoui.taglib.<%= namespace %>;
+
+import com.kendoui.taglib.FunctionTag;
+<% if owner.namespace == owner.name.downcase %>
+import com.kendoui.taglib.<%= owner.tag_class %>;
+<% end %>
+
+import javax.servlet.jsp.JspException;
+
+@SuppressWarnings("serial")
+public class <%= tag_class %> extends FunctionTag /* interfaces */ /* interfaces */ {
+    #{JAVA_METHODS}
+}
 })
 
 EVENT_GETTER_AND_SETTER = ERB.new(%{
@@ -219,7 +252,7 @@ DATA_SOURCE_SETTER = %{
 }
 
 COMPOSITE_OPTION_ATTRIBUTES = ERB.new(%{//>> Attributes
-<% if recursive %>public void setItems(ItemsTag value) {
+<% if recursive %>    public void setItems(ItemsTag value) {
 
         items = value.items();
 
@@ -228,7 +261,7 @@ COMPOSITE_OPTION_ATTRIBUTES = ERB.new(%{//>> Attributes
     public static String tagName() {
         return "<%= tag_name %>";
     }
-<%= unique_composite_options.map { |option| option.to_setter }.join %><%= events.map { |event| event.to_setter }.join %><%= unique_options.map { |option| option.to_getter_and_setter }.join %><%= events.map { |event| event.to_getter_and_setter }.join %>
+<%= composite_options.map { |option| option.to_setter }.join %><%= events.map { |event| event.to_setter }.join %><%= simple_options.map { |option| option.to_getter_and_setter }.join %>
 //<< Attributes})
 
 COMPONENT_ATTRIBUTES = ERB.new(%{//>> Attributes
@@ -236,7 +269,7 @@ COMPONENT_ATTRIBUTES = ERB.new(%{//>> Attributes
     public static String tagName() {
         return "<%= tag_name %>";
     }
-<%= unique_composite_options.map { |option| option.to_setter }.join %><%= events.map { |event| event.to_setter }.join %><%= unique_options.map { |option| option.to_getter_and_setter }.join %><%= events.map { |event| event.to_getter_and_setter }.join %>
+<%= composite_options.map { |option| option.to_setter }.join %><%= events.map { |event| event.to_setter }.join %><%= simple_options.map { |option| option.to_getter_and_setter }.join %><%= events.map { |event| event.to_getter_and_setter }.join %>
 //<< Attributes})
 
 METHODS = %{
@@ -303,7 +336,7 @@ import com.kendoui.taglib.BaseTag;
 import com.kendoui.taglib.<%= owner.tag_class %>;
 <% end %>
 
-<% if events.any? %>
+<% if options.any? { |o| o.type == 'Function' } %>
 import com.kendoui.taglib.json.Function;
 <% end %>
 
@@ -397,21 +430,30 @@ public interface Items {
                 File.write(filename, java.dos)
             end
 
-            composite_options(component)
+            component.events.each { |event| tag(event) }
+
+            composite_options(component.composite_options)
         end
 
-        def composite_options(owner)
+        def tag(tag)
+            filename = "#{@path}#{tag.namespace}/#{tag.tag_class}.java"
 
-            owner.unique_composite_options.each do |option|
-                filename = "#{@path}#{option.namespace}/#{option.tag_class}.java"
+            $stderr.puts("Updating #{filename}") if VERBOSE
 
-                $stderr.puts("Updating #{filename}") if VERBOSE
+            java = tag.to_java(filename)
 
-                java = option.to_java(filename)
+            File.write(filename, java.dos)
 
-                File.write(filename, java.dos)
+        end
 
-                composite_options(option)
+        def composite_options(options)
+
+            options.each do |option|
+                tag(option)
+
+                option.events.each { |option| tag(option) }
+
+                composite_options(option.composite_options)
             end
 
         end

@@ -24,16 +24,25 @@ module CodeGen
         end
 
         def to_composite
-            @owner.options.delete(self)
+            type = []
+
+            %w{Array Object}.each do |t|
+                if @type.include?(t)
+                    type.push(t)
+                    @type.delete(t)
+                end
+            end
+
+            @owner.options.delete(self) if @type.empty?
 
             target_class = composite_option_class
 
-            target_class = array_option_class if @type == 'Array'
+            target_class = array_option_class if type.include?('Array')
 
             parent = target_class.new(:name => @name,
                                       :owner => @owner,
                                       :recursive => @recursive,
-                                      :type => @type,
+                                      :type => type,
                                       :description => @description)
 
             @owner.options.push(parent)

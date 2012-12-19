@@ -12,8 +12,7 @@ module CodeGen::Java
 
     IGNORED = {
         'chart' => ['axisDefaults', 'seriesDefaults'],
-        'stockchart' => ['axisDefaults', 'seriesDefaults'],
-        'window' => ['content'],
+        'stockchart' => ['axisDefaults', 'seriesDefaults']
     }
 
     def self.ignored?(component, option)
@@ -32,46 +31,22 @@ module CodeGen::Java
             Option
         end
 
-        def unique_composite_options
-            options = composite_options
-
-            options.clone.each do |option|
-
-                next if option.type == 'Array'
-
-                homonyms = options.find_all {|o| o.name == option.name }
-
-                if homonyms.size > 1
-
-                    options.delete(option)
-
-                end
-            end
-
-            options
-        end
-
-        def unique_options
-            options = @options.find_all { |o| !o.composite? }
-
-            options.clone.each do |option|
-
-                homonyms = options.find_all {|o| o.name == option.name }
-
-                if homonyms.size > 1
-
-                    homonyms.each { |option| options.delete(option) }
-
-                    options.push option_class.new(:name => option.name,
-                                            :owner => self,
-                                            :description => option.description,
-                                            :type => 'Object')
-                end
-            end
-
-            options.sort{ |a, b| a.name <=> b.name }
+        def simple_options
+            @options.find_all { |o| !o.composite? }
+                    .sort { |a, b| a.name <=> b.name }
         end
 
     end
 
+    module ArrayItem
+
+        def tag_name
+            @owner.tag_name.sub(@owner.name.camelize, @name.camelize)
+        end
+
+        def tag_class
+            super.sub(@owner.name.pascalize, '')
+        end
+
+    end
 end

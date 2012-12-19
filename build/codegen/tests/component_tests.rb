@@ -2,6 +2,7 @@ require 'test/unit'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 
+require 'options'
 require 'component'
 
 class ComponentTests < Test::Unit::TestCase
@@ -29,22 +30,14 @@ class ComponentTests < Test::Unit::TestCase
         assert_equal @component.options[0], @component.options[0].options[0].owner
     end
 
-    def test_add_option_ignores_options_with_same_name_and_type
-        @component = CodeGen::Component.new(:name => 'foo')
-        @component.add_option(:name => 'foo', :type => 'String')
-        @component.add_option(:name => 'foo', :type => 'String')
-
-        assert_equal 1, @component.options.size
-    end
-
-    def test_add_option_creates_multiple_options_for_multiple_types
+    def test_add_option_with_multiple_types
         @component = CodeGen::Component.new(:name => 'foo')
 
         @component.add_option(:name => 'foo', :type => 'String|Object')
 
-        assert_equal 2, @component.options.size
-        assert_equal 'String', @component.options[0].type
-        assert_equal 'Object', @component.options[1].type
+        assert_equal 1, @component.options.size
+        assert_equal 'String', @component.options[0].type[0]
+        assert_equal 'Object', @component.options[0].type[1]
     end
 
     def test_add_option_adds_option_only_if_type_is_specified
@@ -53,14 +46,6 @@ class ComponentTests < Test::Unit::TestCase
         @component.add_option(:name => 'foo')
 
         assert_equal 0, @component.options.size
-    end
-
-    def test_add_option_ignores_type_in_name
-        @component = CodeGen::Component.new(:name => 'foo')
-
-        @component.add_option(:name => 'foo.type=bar.baz', :type => 'String')
-
-        assert_equal 'foo.baz', @component.options[0].name
     end
 
     def test_add_option_trims_name
@@ -76,7 +61,7 @@ class ComponentTests < Test::Unit::TestCase
 
         @component.add_option(:name => '  foo  ', :type => ' String |Object')
 
-        assert_equal 'String', @component.options[0].type
+        assert_equal 'String', @component.options[0].type[0]
     end
 
     def test_nested_options_are_removed_from_top_parent
@@ -90,7 +75,6 @@ class ComponentTests < Test::Unit::TestCase
         @component.add_option(:name => 'foo.bar', :type => 'Object')
 
         assert_equal 1, @component.options[0].options.size
-        assert_equal 1, @component.options[1].options.size
     end
 
     def test_add_option_leaves_options_of_primitive_types_when_creating_nested_options
@@ -100,6 +84,7 @@ class ComponentTests < Test::Unit::TestCase
         @component.add_option(:name => 'foo.bar', :type => 'Object')
 
         assert_equal true, @component.options[0].instance_of?(CodeGen::Option)
+        assert_equal true, @component.options[1].instance_of?(CodeGen::CompositeOption)
     end
 
     def test_add_option_creates_nested_options
@@ -155,6 +140,6 @@ class ComponentTests < Test::Unit::TestCase
         @component.import(metadata)
 
         assert_equal 1, @component.options.size
-        assert_equal 'String', @component.options[0].type
+        assert_equal 'String', @component.options[0].type[0]
     end
 end

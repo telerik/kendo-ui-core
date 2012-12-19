@@ -1,5 +1,6 @@
 require 'test/unit'
 require 'markdown_parser'
+require 'options'
 require 'component'
 
 class MarkdownParserTests < Test::Unit::TestCase
@@ -45,7 +46,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 ### foo `String`
         })
 
-        assert_equal 'String', result.options[0].type
+        assert_equal 'String', result.options[0].type[0]
     end
 
     def test_parse_option_description
@@ -59,6 +60,134 @@ bar
         })
 
         assert_equal 'bar', result.options[0].description
+    end
+
+    def test_parse_method_from_methods_section
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+        })
+
+        assert_equal 'foo', result.methods[0].name
+    end
+
+    def test_parse_multiple_methods
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+### bar
+        })
+
+        assert_equal 'bar', result.methods[1].name
+    end
+
+    def test_parse_method_description
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+Foo
+
+        })
+
+        assert_equal 'Foo', result.methods[0].description
+    end
+
+    def test_parse_method_parameter
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+#### Parameters
+
+##### bar `String`
+
+        })
+
+        assert_equal 'bar', result.methods[0].parameters[0].name
+    end
+
+    def test_parse_method_parameter_description
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+#### Parameters
+
+##### bar `String`
+
+Bar
+
+        })
+
+        assert_equal 'Bar', result.methods[0].parameters[0].description
+    end
+
+    def test_parse_method_parameter_type
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+#### Parameters
+
+##### bar `String`
+
+Bar
+
+        })
+
+        assert_equal 'String', result.methods[0].parameters[0].type
+    end
+
+    def test_parse_method_result_type
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+#### Returns
+
+`String` Foo
+        })
+
+        assert_equal 'String', result.methods[0].result.type
+    end
+
+    def test_parse_method_result_description
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+#### Returns
+
+`String` Foo
+        })
+
+        assert_equal 'Foo', result.methods[0].result.description
     end
 
     def test_parse_event_from_events_section
