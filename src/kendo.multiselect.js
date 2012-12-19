@@ -26,7 +26,7 @@ kendo_module({
 
             that.input.on("click" + ns, function() {
                 that.list.width(that.wrapper.width());
-                that.popup.open();
+                that.open();
             })
             .on("keydown", function(e) {
                 that._search();
@@ -172,7 +172,8 @@ kendo_module({
             if (length >= options.minLength) {
                 that._state = "filter";
                 that._open = true;
-                that.dataSource.filter({
+
+                that._filterSource({
                     value: ignoreCase ? word.toLowerCase() : word,
                     field: field,
                     operator: filter,

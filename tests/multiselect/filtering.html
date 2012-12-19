@@ -67,7 +67,7 @@
                 });
             });
 
-            test("MultiSelect does not show selected items on filter", function() {
+            test("MultiSelect filters data on rebind depending on the selected items", function() {
                 popuplateSelect();
 
                 var multiselect = new MultiSelect(select, {
@@ -80,6 +80,22 @@
                 multiselect.open();
 
                 equal(multiselect.ul.children().length, 4); /* all items without one */
+            });
+
+            test("MultiSelect filters data using selected items too", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select, {
+                    delay: 0
+                });
+
+                multiselect.ul.children().first().click();
+                multiselect.search("Option1");
+                multiselect.ul.children().first().click();
+
+                multiselect.input.click();
+
+                equal(multiselect.ul.children().length, 3); /* all items without one */
             });
 
       </script>
