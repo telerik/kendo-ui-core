@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MultiSelect filtering</title>
+        <title>MultiSelect API</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">MultiSelect filtering</h1>
+        <h1 id="qunit-header">MultiSelect API</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -22,14 +22,6 @@
             kendo.ns = "kendo-";
             var MultiSelect = kendo.ui.MultiSelect,
                 select;
-
-            $.fn.keydown = function(character) {
-                var keyCode = character.charCodeAt(0);
-                $(this).trigger({
-                    type: "keydown",
-                    keyCode: keyCode
-                });
-            }
 
             function popuplateSelect() {
                 var options = [];
@@ -40,7 +32,7 @@
                 select.html(options);
             }
 
-            module("kendo.ui.MultiSelect filtering", {
+            module("kendo.ui.MultiSelect API", {
                 setup: function() {
                     select = $("<select />").appendTo(document.body);
                 },
@@ -53,21 +45,23 @@
                 }
             });
 
-            asyncTest("MultiSelect filters items on keydown", 1, function() {
+            test("MultiSelect opens the popup element", function() {
                 popuplateSelect();
-                var multiselect = new MultiSelect(select, {
-                    delay: 0
-                });
+                var multiselect = new MultiSelect(select);
 
-                multiselect.input.val("Option1").keydown("1");
+                multiselect.open();
 
-                setTimeout(function() {
-                    start();
-                    equal(multiselect.ul.children().length, 1);
-                });
+                ok(multiselect.popup.visible());
             });
 
+            test("MultiSelect closes the popup element", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
 
+                multiselect.close();
+
+                ok(!multiselect.popup.visible());
+            });
 
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

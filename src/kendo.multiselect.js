@@ -78,6 +78,20 @@ kendo_module({
             }*/
         },
 
+        close: function() {
+            var that = this,
+                popup = that.popup;
+
+            popup.close();
+        },
+
+        open: function() {
+            var that = this,
+                popup = that.popup;
+
+            popup.open();
+        },
+
         refresh: function() {
             var that = this,
                 data = that.dataSource.view();
