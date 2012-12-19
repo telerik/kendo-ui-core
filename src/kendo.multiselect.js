@@ -24,13 +24,19 @@ kendo_module({
             that._resultList();
             that._input();
 
-            that.input.on("click" + ns, function() {
-                that.list.width(that.wrapper.width());
-                that.open();
-            })
-            .on("keydown", function(e) {
-                that._search();
-            });
+            that.input
+                .on("click" + ns, function() {
+                    that.list.width(that.wrapper.width());
+                    that.open();
+                })
+                .on("blur" + ns, function() {
+                    this.value = "";
+
+                    that._state = "accept";
+                })
+                .on("keydown" + ns, function(e) {
+                    that._search();
+                });
 
             that._templates();
             that._dataSource();
@@ -55,7 +61,7 @@ kendo_module({
             ignoreCase: true,
             filter: "startswith",
             dataTextField: "",
-            minLength: 1
+            minLength: 0
         },
 
         events: [

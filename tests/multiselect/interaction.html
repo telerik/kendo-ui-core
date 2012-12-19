@@ -194,6 +194,28 @@
 
                 equal(multiselect.input.val(), "");
             });
+
+            test("MultiSelect clears input on blur", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.focus().val("test").blur();
+
+                equal(multiselect.input.val(), "");
+            });
+
+            test("MultiSelect shows all available items if input is clear", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.focus().val("nothing");
+                multiselect.search("nothing");
+
+                multiselect.input.blur();
+
+                multiselect.open();
+
+                equal(multiselect.ul.children().length, 5);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
