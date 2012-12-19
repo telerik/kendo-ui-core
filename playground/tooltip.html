@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>ComboBox</title>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet/less" href="../styles/web/kendo.default.less" type="text/css" media="screen" charset="utf-8">
+        <script src="../demos/mvc/content/shared/js/less.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <fieldset id="title">
+            <legend>title attribute</legend>
+            <input title="me 1"/> <br /><br />
+            <input title="me 2"/>
+        </fieldset>
+
+        <fieldset id="template">
+            <legend>template</legend>
+            <div style="width: 200px; height: 200px; background: red;"><span>foo</span></div>
+        </fieldset>
+
+        <script>
+            $(document).ready(function() {
+                $("#title").kendoTooltip({
+                    position: "right-center",
+                    filter: "input",
+                    width: 100
+                });
+
+                $("#template").kendoTooltip({
+                    content: kendo.template($("#tooltip-template").html()),
+                    filter: "div",
+                    position: "center",
+                    width: 300
+                });
+            });
+        </script>
+
+        <script id="tooltip-template" type="script/kendo-x-tempalte">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut ipsum odio. Nam sem nisi, tempor nec sodales non, vehicula a lorem. Cras commodo tristique lacus nec volutpat. Fusce nec quam diam, ac scelerisque nisi. Suspendisse eu arcu risus, quis luctus elit. Etiam convallis rutrum eros sed vestibulum. Fusce viverra congue placerat. Nulla sodales vehicula lobortis.
+
+            Nullam ac mauris vitae urna eleifend blandit quis eget tortor. Fusce pellentesque, nisl sed imperdiet tincidunt, elit neque iaculis mi, quis dapibus purus tortor sodales neque. Suspendisse dapibus bibendum dolor vel sagittis. Donec faucibus commodo orci, eu sollicitudin turpis cursus eu. Vivamus consequat ante eget justo eleifend porta elementum dui imperdiet. Mauris nisl mi, hendrerit vitae vehicula sit amet, ultrices sed nibh. Quisque ornare elementum tempus.
+        </script>
+
+        <script>
+            /*
+            var positions = {
+                "bottom-center": { position: "top center", origin: "bottom center" },
+                "right-center": { position: "center top", origin: "center right" },
+                "center": { position: "top center", origin: "center center" }
+            }
+
+            var browser = kendo.support.browser,
+                TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em"><div class="k-tooltip-content"></div>' +
+                    '<div class="k-callout k-callout-#=/^(bottom|center)/.test(position) ? \"n\": \"w\" #"></div></div>';
+
+            var Tooltip = kendo.ui.Widget.extend({
+                init: function(element, options) {
+                    var that = this;
+
+                    kendo.ui.Widget.fn.init.call(that, element, options);
+
+                    that.element
+                        .on("mouseover", that.options.filter, $.proxy(that._mouseenter, this))
+                        .on("mouseleave", that.options.filter, $.proxy(that._mouseleave, this));
+                },
+
+                options: {
+                    name: "Tooltip",
+                    filter: "[title]",
+                    template: kendo.template("#=element[0].title#")
+                },
+
+                destroy: function() {
+                    if (this.popup) {
+                        this.popup.destroy();
+                    }
+
+                    kendo.ui.Widget.fn.destroy.call(this);
+                },
+
+                _mouseenter: function(e) {
+                    var that = this,
+                        options = that.options,
+                        target = $(e.currentTarget),
+                        position,
+                        text;
+
+                    if (!that.popup) {
+
+                        that.content = $(kendo.template(TEMPLATE)({ position: options.position }));
+
+                        that.content.width(options.width);
+
+                        position = positions[options.position];
+
+                        that.popup = new kendo.ui.Popup(that.content, {
+                            origin: position.origin,
+                            position: position.position
+                        });
+
+                        that.content.on("mouseleave", $.proxy(that._mouseleave, this));
+                    }
+
+                    if (that.current && target[0] !== that.current[0]) {
+                        that.popup.element.hide();
+                        that._restoreTitle();
+                    }
+
+                    that._appendContent(target);
+
+                    target.data(kendo.ns + "title", target.attr("title"));
+
+                    target.removeAttr("title");
+
+                    that.popup.options.anchor = target;
+
+                    that.current = target;
+
+                    that.popup.open();
+                },
+
+                _hide: function() {
+                    if (this.popup && this.popup.visible()) {
+                        this.popup.close();
+                        this._restoreTitle();
+                    }
+                },
+
+                _appendContent: function(target) {
+                    var that = this,
+                        options = that.options,
+                        text = options.template({ element: target});
+
+                    that.content.children(".k-tooltip-content").empty().append(text);
+                },
+
+                _mouseleave: function(e) {
+                    var element = $(e.currentTarget),
+                        offset = element.offset(),
+                        pageX = e.pageX,
+                        pageY = e.pageY;
+
+                    offset.right = offset.left + element.outerWidth();
+                    offset.bottom = offset.top + element.outerHeight();
+
+                    if (pageX > offset.left && pageX < offset.right && pageY > offset.top && pageY < offset.bottom) {
+                        return;
+                    }
+
+                    this._restoreTitle();
+
+                    this.popup.close();
+
+                    this.current = null;
+                },
+
+                _restoreTitle: function() {
+                    var current = this.current,
+                        title;
+
+                    if (!current) {
+                        return;
+                    }
+
+                    title = current.data(kendo.ns + "title");
+
+                    if (title != "") {
+                        current.attr("title", title);
+                    }
+                }
+            });
+
+            kendo.ui.plugin(Tooltip);
+            */
+        </script>
+    </body>
+</html>

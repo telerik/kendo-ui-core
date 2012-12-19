@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.tooltip tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.tooltip.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+
+        <style>
+            .k-tooltip {
+                height: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.tooltip Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var container,
+                Tooltip = kendo.ui.Tooltip;
+
+            module("kendo.ui.tooltip", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container);
+                },
+                teardown: function() {
+                    if (container.data("kendoTooltip")) {
+                        container.kendoTooltip("destroy");
+                    }
+
+                    container.remove();
+                }
+            });
+
+            function triggerEvent(element, type, info) {
+                element.trigger($.Event(type, info));
+
+                return element;
+            };
+
+            test("tooltip is attached to the element", function() {
+                container.kendoTooltip();
+
+                ok(container.data("kendoTooltip") instanceof kendo.ui.Tooltip);
+            });
+
+            test("hovering the target shows a popup", function() {
+                var tooltip = new Tooltip(container, {});
+
+                triggerEvent(container, "mouseenter");
+
+                ok(tooltip.popup.visible());
+            });
+
+            test("content is added to the tooltip", function() {
+                var tooltip = new Tooltip(container, {
+                    content: "bar"
+                });
+
+                triggerEvent(container, "mouseenter");
+
+                equal(tooltip.content.text(), "bar");
+            });
+
+            test("content with html is added to the tooltip", function() {
+                var tooltip = new Tooltip(container, {
+                    content: "<span>bar</span>"
+                });
+
+                triggerEvent(container, "mouseenter");
+
+                ok(tooltip.content.find("span").length);
+                equal(tooltip.content.find("span").text(), "bar");
+            });
+
+            test("content as function", 3,  function() {
+                var tooltip = new Tooltip(container, {
+                    content: function() {
+                        ok(true);
+                        return "<span>bar</span>";
+                    }
+                });
+
+                triggerEvent(container, "mouseenter");
+
+                ok(tooltip.content.find("span").length);
+                equal(tooltip.content.find("span").text(), "bar");
+            });
+
+            test("content as function element is passed", 3,  function() {
+                var tooltip = new Tooltip(container, {
+                    content: function(e) {
+
+                        ok(container[0], e.element);
+
+                        return "<span>bar</span>";
+                    }
+                });
+
+                triggerEvent(container, "mouseenter");
+
+                ok(tooltip.content.find("span").length);
+                equal(tooltip.content.find("span").text(), "bar");
+            });
+
+            test("content is updated for every element", 3, function() {
+                container.append($('<span id="first"/><span id="second"/>'));
+
+                var tooltip = new Tooltip(container, {
+                    filter: "span",
+                    content: function(e) {
+                        ok(true);
+                        return "foo";
+                    }
+                });
+
+                triggerEvent(container.find("span:first"), "mouseenter");
+
+                triggerEvent(container.find("span:last"), "mouseenter");
+
+                equal(tooltip.content.text(), "foo");
+            });
+
+            test("show is trigger on hover of  every matched element", 2, function() {
+                container.append($('<span id="first"/><span id="second"/>'));
+
+                var tooltip = new Tooltip(container, {
+                    filter: "span",
+                    show: function() {
+                        ok(true);
+                    }
+                });
+
+                triggerEvent(container.find("span:first"), "mouseenter");
+
+                triggerEvent(container.find("span:last"), "mouseenter");
+            });
+
+
+            test("show event is raised", 1, function() {
+                var tooltip = new Tooltip(container, {
+                    show: function() { ok(true); }
+                });
+
+                triggerEvent(container, "mouseenter");
+            });
+
+            test("hide event is raised", 1, function() {
+                var tooltip = new Tooltip(container, {
+                    hide: function() { ok(true); }
+                });
+
+                triggerEvent(container, "mouseenter");
+                triggerEvent(container, "mouseleave");
+            });
+
+            test("popup creation is deferred until element is hovered", function() {
+                var tooltip = new Tooltip(container, {});
+
+                ok(!tooltip.popup);
+            });
+
+            test("same popup instance is used for multiple elements", function() {
+                container.append($('<span id="first"/><span id="second"/>'));
+
+                var tooltip = new Tooltip(container, {
+                        filter: "span"
+                    }),
+                    popup;
+
+                triggerEvent(container.find("span:first"), "mouseenter");
+
+                popup = tooltip.popup;
+
+                triggerEvent(container.find("span:last"), "mouseenter");
+
+                same(popup, tooltip.popup);
+            });
+
+            test("popup is hidden when mouse leave the element", function() {
+                var tooltip = new Tooltip(container, {});
+
+                triggerEvent(container, "mouseenter");
+                triggerEvent(container, "mouseleave");
+
+                ok(!tooltip.popup.visible());
+            });
+
+            test("popup is destoryed if tooltip is destoryed", function() {
+                var tooltip = new Tooltip(container, {});
+
+                triggerEvent(container, "mouseenter");
+                triggerEvent(container, "mouseleave");
+
+                var popupDestroy = stub(tooltip.popup, "destroy");
+
+                tooltip.destroy();
+
+                ok(popupDestroy.calls("destroy"));
+            });
+
+            test("popup is shown for elements matched by the filter", function() {
+                container.append($("<span/>"));
+
+                var tooltip = new Tooltip(container, {
+                        filter: "span"
+                    }),
+                    target = container.find("span");
+
+
+                triggerEvent(target, "mouseenter");
+
+                ok(tooltip.popup.visible());
+                equal(tooltip.target()[0], target[0]);
+            });
+
+            test("popup is moved to the new element matched by the filter", function() {
+                container.append($('<span id="first"/><span id="second"/>'));
+
+                var tooltip = new Tooltip(container, {
+                        filter: "span"
+                    }),
+                    target = container.find("span:first");
+
+                triggerEvent(target, "mouseenter");
+
+                target = container.find("span:last");
+
+                triggerEvent(target, "mouseenter");
+
+                ok(tooltip.popup.visible());
+                equal(tooltip.target()[0], target[0]);
+            });
+
+
+            test("popup is hidden when mouse leaves the matched by the filter element ", function() {
+                container.append($("<span/>"));
+
+                var tooltip = new Tooltip(container, {
+                        filter: "span"
+                    }),
+                    target = container.find("span");
+
+
+                triggerEvent(target, "mouseenter");
+                triggerEvent(target, "mouseleave");
+
+                ok(!tooltip.popup.visible());
+                equal(tooltip.target()[0], target[0]);
+            });
+        </script>
+    </body>
+</html>
