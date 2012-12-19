@@ -6,5 +6,13 @@ tests.push(
     {
         page: "multiselect/interaction.html",
         title: "multiselect interaction"
+    },
+    {
+        page: "multiselect/filtering.html",
+        title: "multiselect filtering"
+    },
+    {
+        page: "multiselect/api.html",
+        title: "multiselect API"
     }
 );
