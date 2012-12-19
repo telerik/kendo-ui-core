@@ -26,7 +26,7 @@ bash "Update jenkins jobs" do
     }
 end
 
-[ "", "/staging", "/production", "/functional-tests", "/functional-tests/custom-sites", "/download-builder-staging" ].each do |dir|
+[ "", "/staging", "/production", "/functional-tests", "/functional-tests/custom-sites", "/download-builder-staging", "/changelog" ].each do |dir|
     directory "/var/www#{dir}" do
         owner "jenkins"
         group "nogroup"
