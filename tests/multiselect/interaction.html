@@ -152,6 +152,35 @@
 
                 ok(!select[0].children[1].selected);
             });
+
+            test("MultiSelect persists selected data items", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.click();
+                multiselect.ul.children().eq(1).click();
+
+                //TODO: use method instead of _dataItems
+                equal(multiselect._dataItems.length, 1);
+            });
+
+            test("MultiSelect removes corresponding data item", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.click();
+                multiselect.ul.children().eq(1).click();
+                multiselect.ul.children().eq(0).click();
+
+                //unselect item
+                multiselect.resultList.children().first().find(".k-delete").click();
+
+                //TODO: use method instead of _dataItems
+                equal(multiselect._dataItems.length, 1);
+                equal(multiselect._dataItems[0].value, 0);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

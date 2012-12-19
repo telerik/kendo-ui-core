@@ -38,6 +38,9 @@ kendo_module({
             that._list();
             that._popup();
 
+            //list selected items
+            that._dataItems = [];
+
             that.element.hide();
 
             if (that.options.autoBind) {
@@ -241,28 +244,40 @@ kendo_module({
                                 .appendTo(that._innerWraper)
                                 .on("click" + ns, ".k-delete", function(e) {
                                     var item = $(e.target).closest("li"),
-                                        index = item.data("index");
+                                        index = item.data("index"),
+                                        idxInList = item.index();
 
                                     $(that.ul[0].children[index]).show();
                                     item.remove();
 
+                                    //de-select Option
                                     that.element[0].children[index].selected = false;
+
+                                    //remove data item
+                                    that._dataItems.splice(idxInList, 1);
                                 });
         },
 
         _click: function(e) {
-            var li = $(e.currentTarget),
-                data = this.dataSource.view(),
+            var that = this,
+                li = $(e.currentTarget),
                 index = li.index(),
-                tag = $(this.tagTemplate(data[index]));
+                dataItem = that.dataSource.view()[index],
+                tag = $(that.tagTemplate(dataItem));
 
-            this.resultList.append(tag);
+            that.resultList.append(tag);
+
             tag.data("index", index);
 
             li.hide();
-            this.popup.close(); //TODO: create close() API
 
-            this.element[0].children[index].selected = true;
+            that.close();
+
+            //select Option
+            that.element[0].children[index].selected = true;
+
+            //add data item
+            that._dataItems.push(dataItem);
         },
 
         _list: function() {
