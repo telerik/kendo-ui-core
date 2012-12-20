@@ -325,6 +325,23 @@
 
                 ok(!triggered);
             });
+
+            test("opening and closing modal Windows positions the modal overlay correctly over all other instances but one", function() {
+
+                var win1 = createWindow({ modal: true, animate: false }),
+                    win2 = createWindow({ modal: true, animate: false }),
+                    win3 = createWindow({ modal: true, animate: false }),
+                    modalOverlay = $(document.body).children(".k-overlay");
+
+                ok(modalOverlay.css("z-index") < win3.wrapper.css("z-index"));
+                ok(modalOverlay.css("z-index") > win2.wrapper.css("z-index"));
+
+                win3.close();
+
+                ok(modalOverlay.css("z-index") < win2.wrapper.css("z-index"));
+                ok(modalOverlay.css("z-index") > win1.wrapper.css("z-index"));
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
