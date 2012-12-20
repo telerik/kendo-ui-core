@@ -8,6 +8,7 @@ require 'codegen/lib/java/option'
 require 'codegen/lib/java/component'
 require 'codegen/lib/java/tld'
 require 'codegen/lib/java/jsp'
+require 'codegen/lib/java/api'
 
 namespace :generate do
 
@@ -34,6 +35,22 @@ namespace :generate do
                 import_metadata(component)
 
                 generator = CodeGen::Java::JSP::Generator.new('wrappers/java/kendo-taglib/src/main/java/com/kendoui/taglib/')
+
+                generator.component(component)
+
+            end
+
+        end
+
+        task :api do
+
+            components = CodeGen::MarkdownParser.all(CodeGen::Java::API::Component)
+
+            components.each do |component|
+
+                import_metadata(component)
+
+                generator = CodeGen::Java::API::Generator.new('docs/api/wrappers/jsp/')
 
                 generator.component(component)
 
