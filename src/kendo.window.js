@@ -541,7 +541,7 @@
                         overlay.hide();
                     }
                 } else if (modalWindows.length) {
-                    windowObject(modalWindows.eq(modalWindows.length - 2), options.name)._overlay(true);
+                    windowObject(modalWindows.eq(modalWindows.length - 1), options.name)._overlay(true);
                 }
 
                 wrapper.kendoStop().kendoAnimate({
