@@ -36,11 +36,15 @@ module CodeGen
 
             return unless types
 
+<<<<<<< HEAD
             if types.is_a?(String)
                 type = types.split('|').map { |type| type.strip }.find_all { |t| TYPES.include?(t) }
             else
                 type = types
             end
+=======
+            type = types.split('|').map { |type| type.strip }.find_all { |t| TYPES.include?(t) }
+>>>>>>> Add generate:java task
 
             return if type.empty?
 

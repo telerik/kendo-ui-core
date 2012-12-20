@@ -1,3 +1,4 @@
+require 'codegen/lib/options'
 require 'codegen/lib/markdown_parser'
 require 'codegen/lib/component'
 require 'codegen/lib/java/module'
@@ -9,6 +10,8 @@ require 'codegen/lib/java/tld'
 require 'codegen/lib/java/jsp'
 
 namespace :generate do
+
+    task :java => ['java:tld', 'java:jsp']
 
     namespace :java do
 
@@ -23,6 +26,7 @@ namespace :generate do
         end
 
         task :jsp do
+
             components = CodeGen::MarkdownParser.all(CodeGen::Java::JSP::Component)
 
             components.each do |component|
@@ -34,6 +38,7 @@ namespace :generate do
                 generator.component(component)
 
             end
+
         end
 
         task :tld do

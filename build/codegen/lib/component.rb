@@ -17,12 +17,17 @@ module CodeGen
     class Component
         include Options
 
+<<<<<<< HEAD
         attr_reader :name, :options, :events, :methods
+=======
+        attr_reader :name, :options, :events
+>>>>>>> Add generate:java task
 
         def initialize(settings)
             @name = settings[:name].split('.').last
             @options = []
             @events = []
+<<<<<<< HEAD
             @methods = []
         end
 
@@ -51,11 +56,18 @@ module CodeGen
 
     def add_option(settings)
         name = settings[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
+=======
+        end
 
-        recursive = settings[:recursive]
+        def import(metadata)
+            metadata[:options].each do |option|
+>>>>>>> Add generate:java task
 
-        description = settings[:description]
+                @options.delete_if { |o| o.name == option[:name] }
 
+                add_option(option)
+
+<<<<<<< HEAD
         types = settings[:type]
 
         return unless types
@@ -85,6 +97,9 @@ module CodeGen
             @methods.push(method)
 
             method
+=======
+            end
+>>>>>>> Add generate:java task
         end
 
         def add_event(settings)

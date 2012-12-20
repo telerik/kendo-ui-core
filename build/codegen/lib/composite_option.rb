@@ -23,6 +23,7 @@ class CompositeOption
     end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     def composite_option_class
         CompositeOption
@@ -32,6 +33,8 @@ class CompositeOption
         Option
     end
 
+=======
+>>>>>>> Add generate:java task
     def add_option(settings, prefix = nil)
         prefix ||= @name + '.'
 
