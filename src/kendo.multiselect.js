@@ -291,7 +291,7 @@ kendo_module({
         },
 
         _input: function() {
-            this.input = $('<input class="k-input" style="width: 100%" />')
+            this.input = $('<input class="k-input" style="width: 25px" />')
                             .appendTo(this._innerWraper);
         },
 
@@ -359,7 +359,7 @@ kendo_module({
                 wrapper = element.wrap('<div class="k-widget k-multiselect k-header" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
 
-                $('<div class="k-multiselect-wrap" />').insertBefore(element);
+                $('<div class="k-multiselect-wrap floatWrap" />').insertBefore(element);
             }
 
             that.wrapper = wrapper.addClass(element[0].className)
