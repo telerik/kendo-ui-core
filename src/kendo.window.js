@@ -569,7 +569,6 @@
         },
 
         toFront: function (e) {
-            console.log("toFront");
             var that = this,
                 wrapper = that.wrapper,
                 currentWindow = wrapper[0],
