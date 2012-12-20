@@ -216,6 +216,15 @@
 
                 equal(multiselect.ul.children().length, 5);
             });
+
+            test("MultiSelect focuses input on click", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.wrapper.click();
+
+                equal(multiselect.input[0], document.activeElement);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -38,6 +38,14 @@ kendo_module({
                     that._search();
                 });
 
+            that.wrapper
+                .add(that._innerWraper)
+                .on("click" + ns, function(e) {
+                    if (e.target === e.currentTarget) {
+                        that.input.focus().click();
+                    }
+                });
+
             that._templates();
             that._dataSource();
 
