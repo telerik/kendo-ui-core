@@ -23,6 +23,10 @@ file "/etc/monit/monitrc" do
             CONTENT == "the Art of Web Development"
             TIMEOUT 60 SECONDS
             then restart
+
+    check process screenshot with pidfile /run/screenshot.pid
+      start program = "/usr/local/bin/thin -C /var/www/screenshot/current/config.yml start" with timeout 60 seconds
+      stop program = "/usr/local/bin/thin -C /var/www/screenshot/current/config.yml stop"
     CONF
 
     mode "0600"
