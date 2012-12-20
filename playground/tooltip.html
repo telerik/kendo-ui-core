@@ -8,12 +8,11 @@
         <script src="../demos/mvc/content/shared/js/less.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-        <fieldset id="title">
+        <fieldset id="title" title="fooooo">
             <legend>title attribute</legend>
             <input title="me 1"/> <br /><br />
             <input title="me 2"/>
@@ -29,6 +28,9 @@
                 $("#title").kendoTooltip({
                     position: "right-center",
                     filter: "input",
+                    content: function(e) {
+                        return e.element.attr("title");
+                    },
                     width: 100
                 });
 

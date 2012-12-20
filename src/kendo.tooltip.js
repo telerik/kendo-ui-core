@@ -16,6 +16,36 @@ kendo_module({
         TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em"><div class="k-tooltip-content"></div></div>',
         NS = ".kendoTooltip";
 
+    function restoreTitle(element) {
+        while(element.length) {
+            restoreTitleAttributeForElement(element);
+            element = element.parent();
+        }
+    }
+
+    function restoreTitleAttributeForElement(element) {
+        var title = element.data(kendo.ns + "title");
+        if (title) {
+            element.attr("title", title);
+            element.removeData(kendo.ns + "title");
+        }
+    }
+
+    function saveTitleAttributeForElement(element) {
+        var title = element.attr("title");
+        if (title) {
+            element.data(kendo.ns + "title", title);
+            element.removeAttr("title");
+        }
+    }
+
+    function saveTitle(element) {
+        while(element.length) {
+            saveTitleAttributeForElement(element);
+            element = element.parent();
+        }
+    }
+
     var Tooltip = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -44,12 +74,12 @@ kendo_module({
         show: function(target) {
             var that = this,
                 content = that.options.content,
-                current = that.target();
+                current = that.target(),
+                wrapper;
 
             if (!that.popup) {
-                that.content = $(kendo.template(TEMPLATE)({}));
-
-                that.popup = new Popup(that.content, {
+                wrapper = $(kendo.template(TEMPLATE)({}));
+                that.popup = new Popup(wrapper, {
                     open: function() {
                         that.trigger(SHOW);
                     },
@@ -57,6 +87,7 @@ kendo_module({
                         that.trigger(HIDE);
                     }
                 });
+                that.content = wrapper.find(".k-tooltip-content");
             }
 
             if (current && current[0] != target[0]) {
@@ -67,12 +98,16 @@ kendo_module({
                 content = content({ element: target });
             }
 
-            that.content
-                .find(".k-tooltip-content")
-                .empty()
-                .append(content);
+            saveTitle(target);
+
+            that.content.empty().append(content);
 
             that.popup.options.anchor = target;
+
+            that.popup.one("deactivate", function() {
+               restoreTitle(target);
+            });
+
             that.popup.open();
         },
 

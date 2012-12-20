@@ -148,7 +148,6 @@
                 triggerEvent(container.find("span:last"), "mouseenter");
             });
 
-
             test("show event is raised", 1, function() {
                 var tooltip = new Tooltip(container, {
                     show: function() { ok(true); }
@@ -260,6 +259,51 @@
                 ok(!tooltip.popup.visible());
                 equal(tooltip.target()[0], target[0]);
             });
+
+            test("title attributes are temporary removed", function() {
+                container.attr("title", "foo");
+
+                var tooltip = new Tooltip(container, { });
+
+                triggerEvent(container, "mouseenter");
+
+                ok(!container.filter("[title]").length);
+            });
+
+            test("title attributes are temporary removed from element parents", function() {
+                container.attr("title", "foo");
+                container.append($('<span title="bar"/>'));
+
+                var tooltip = new Tooltip(container, { filter: "span" });
+
+                triggerEvent(container.find("span"), "mouseenter");
+
+                ok(!container.filter("[title]").length);
+            });
+
+            test("title attributes is restored on mouse leave", function() {
+                container.attr("title", "foo");
+
+                var tooltip = new Tooltip(container, { });
+
+                triggerEvent(container, "mouseenter");
+                triggerEvent(container, "mouseleave");
+
+                equal(container.attr("title"), "foo");
+            });
+
+            test("title attributes is restored on mouse leave", function() {
+                container.attr("title", "foo");
+                container.append($('<span title="bar"/>'));
+
+                var tooltip = new Tooltip(container, { filter: "span" });
+
+                triggerEvent(container.find("span"), "mouseenter");
+                triggerEvent(container.find("span"), "mouseleave");
+
+                equal(container.attr("title"), "foo");
+            });
+
         </script>
     </body>
 </html>
