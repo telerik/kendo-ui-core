@@ -522,6 +522,16 @@ kendo_module({
             if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !!userTriggered })) {
                 options.visible = false;
 
+                $(KWINDOW).each(function(i, element) {
+                    var windowObject = $(element),
+                        contentElement = windowObject.find(KWINDOWCONTENT);
+
+                    // Remove overlay set by toFront
+                    if (element != wrapper && contentElement.find("> ." + KCONTENTFRAME).length > 0) {
+                        contentElement.children(".k-overlay").remove();
+                    }
+                });
+
                 modalWindows = openedModalWindows(options.name);
 
                 shouldHideOverlay = options.modal && !modalWindows.length;
@@ -567,6 +577,7 @@ kendo_module({
         },
 
         toFront: function (e) {
+            console.log("toFront");
             var that = this,
                 wrapper = that.wrapper,
                 currentWindow = wrapper[0],
@@ -594,8 +605,8 @@ kendo_module({
 
             if (zIndex == 10001 || originalZIndex < zIndex) {
                 wrapper.css(ZINDEX, zIndex + 2);
-                that.element.find("> .k-overlay").remove();
             }
+            that.element.find("> .k-overlay").remove();
 
             if (!$(activeElement).is(winElement) &&
                 !$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon") &&
