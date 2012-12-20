@@ -10,6 +10,8 @@
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
         <fieldset id="title" title="fooooo">
@@ -26,7 +28,7 @@
         <script>
             $(document).ready(function() {
                 $("#title").kendoTooltip({
-                    position: "right-center",
+                    position: "right",
                     filter: "input",
                     content: function(e) {
                         return e.element.attr("title");
@@ -44,7 +46,7 @@
         </script>
 
         <script id="tooltip-template" type="script/kendo-x-tempalte">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut ipsum odio. Nam sem nisi, tempor nec sodales non, vehicula a lorem. Cras commodo tristique lacus nec volutpat. Fusce nec quam diam, ac scelerisque nisi. Suspendisse eu arcu risus, quis luctus elit. Etiam convallis rutrum eros sed vestibulum. Fusce viverra congue placerat. Nulla sodales vehicula lobortis.
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut ipsum odio. Nam sem nisi, tempor nec sodales non, vehicula a lorem. Cras commodo tristique lacus nec volutpat. Fusce nec quam diam, ac scelerisque nisi. Suspendisse eu arcu risus, quis luctus elit. Etiam convallis rutrum eros sed vestibulum. Fusce viverra congue placerat. Nulla sodales vehicula lobortis.
 
             Nullam ac mauris vitae urna eleifend blandit quis eget tortor. Fusce pellentesque, nisl sed imperdiet tincidunt, elit neque iaculis mi, quis dapibus purus tortor sodales neque. Suspendisse dapibus bibendum dolor vel sagittis. Donec faucibus commodo orci, eu sollicitudin turpis cursus eu. Vivamus consequat ante eget justo eleifend porta elementum dui imperdiet. Mauris nisl mi, hendrerit vitae vehicula sit amet, ultrices sed nibh. Quisque ornare elementum tempus.
         </script>

@@ -304,6 +304,16 @@
                 equal(container.attr("title"), "foo");
             });
 
+            test("center position is set to the popup", function() {
+                var tooltip = new Tooltip(container, {
+                    position: "center"
+                });
+
+                tooltip.show(container);
+
+                equal(tooltip.popup.options.position, "top center");
+                equal(tooltip.popup.options.origin, "center center");
+            });
         </script>
     </body>
 </html>

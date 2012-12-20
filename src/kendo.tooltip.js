@@ -11,10 +11,35 @@ kendo_module({
         Widget = kendo.ui.Widget,
         Popup = kendo.ui.Popup,
         isFunction = $.isFunction,
+        extend = $.extend,
         SHOW = "show",
         HIDE = "hide",
         TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em"><div class="k-tooltip-content"></div></div>',
-        NS = ".kendoTooltip";
+        NS = ".kendoTooltip",
+        POSITIONS = {
+            "below": {
+                origin: "bottom center",
+                position: "top center"
+            },
+            "over": {
+                origin: "top center",
+                position: "bottom center"
+            },
+            "left": {
+                origin: "center left",
+                position: "center right",
+                collision: "fit flip"
+            },
+            "right": {
+                origin: "center right",
+                position: "center left",
+                collision: "fit flip"
+            },
+            "center": {
+                position: "top center",
+                origin: "center center"
+            }
+        };
 
     function restoreTitle(element) {
         while(element.length) {
@@ -39,7 +64,7 @@ kendo_module({
         }
     }
 
-    function saveTitle(element) {
+    function saveTitleAttributes(element) {
         while(element.length) {
             saveTitleAttributeForElement(element);
             element = element.parent();
@@ -53,10 +78,8 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that.element
-                .on("mouseenter" + NS, that.options.filter, $.proxy(that._show, that))
-                .on("mouseleave" + NS, that.options.filter, function() {
-                    that.popup.close();
-                });
+                .on("mouseenter" + NS, that.options.filter, $.proxy(that._mouseenter, that))
+                .on("mouseleave" + NS, that.options.filter, $.proxy(that._mouseleave, that));
         },
 
         options: {
@@ -67,48 +90,74 @@ kendo_module({
 
         events: [ SHOW, HIDE ],
 
-        _show: function(e) {
+        _mouseenter: function(e) {
             this.show($(e.currentTarget));
         },
 
         show: function(target) {
             var that = this,
                 content = that.options.content,
-                current = that.target(),
-                wrapper;
+                current = that.target();
 
             if (!that.popup) {
-                wrapper = $(kendo.template(TEMPLATE)({}));
-                that.popup = new Popup(wrapper, {
-                    open: function() {
-                        that.trigger(SHOW);
-                    },
-                    close: function() {
-                        that.trigger(HIDE);
-                    }
-                });
-                that.content = wrapper.find(".k-tooltip-content");
+                that._initPopup();
             }
 
             if (current && current[0] != target[0]) {
                 that.popup.close();
             }
 
-            if (content && isFunction(content)) {
-                content = content({ element: target });
+            if (!current || current[0] != target[0]) {
+                if (content && isFunction(content)) {
+                    content = content({ element: target });
+                }
+
+                that.content.empty().append(content);
+
+                that.popup.options.anchor = target;
             }
 
-            saveTitle(target);
-
-            that.content.empty().append(content);
-
-            that.popup.options.anchor = target;
+            saveTitleAttributes(target);
 
             that.popup.one("deactivate", function() {
-               restoreTitle(target);
+                restoreTitle(target);
             });
 
             that.popup.open();
+        },
+
+        _initPopup: function() {
+            var that = this,
+                wrapper = $(kendo.template(TEMPLATE)({}));
+
+            that.popup = new Popup(wrapper, extend({
+                open: function() {
+                    that.trigger(SHOW);
+                },
+                close: function() {
+                    that.trigger(HIDE);
+                }
+            }, POSITIONS[that.options.position]));
+
+            that.content = wrapper.find(".k-tooltip-content");
+
+            wrapper.on("mouseleave" + NS, $.proxy(that._mouseleave, that));
+        },
+
+        _mouseleave: function(e) {
+            var element = $(e.currentTarget),
+                offset = element.offset(),
+                pageX = e.pageX,
+                pageY = e.pageY;
+
+            offset.right = offset.left + element.outerWidth();
+            offset.bottom = offset.top + element.outerHeight();
+
+            if (pageX > offset.left && pageX < offset.right && pageY > offset.top && pageY < offset.bottom) {
+                return;
+            }
+
+            this.popup.close();
         },
 
         target: function() {
@@ -119,13 +168,16 @@ kendo_module({
         },
 
         destroy: function() {
-            Widget.fn.destroy.call(this);
+            var popup = this.popup;
 
-            if (this.popup) {
-                this.popup.destroy();
+            if (popup) {
+                popup.element.off(NS);
+                popup.destroy();
             }
 
             this.element.off(NS);
+
+            Widget.fn.destroy.call(this);
         }
     });
 
