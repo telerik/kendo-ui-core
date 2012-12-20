@@ -24,6 +24,7 @@ class CompositeOption
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     def composite_option_class
         CompositeOption
@@ -69,6 +70,8 @@ class CompositeOption
 
     end
 >>>>>>> Refactor tld generation.
+=======
+>>>>>>> More refactoring.
 end
 
 end # module CodeGen
