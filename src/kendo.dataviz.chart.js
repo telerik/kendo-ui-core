@@ -6327,7 +6327,7 @@ kendo_module({
             }
         },
 
-        getPointsByCategory: function(category) {
+        pointsByCategory: function(category) {
             var plotArea = this,
                 charts = plotArea.charts,
                 points, pointCategory, point, i, j, result = [];
@@ -6933,6 +6933,158 @@ kendo_module({
         }
     });
 
+    var MultiplePointTooltip = Class.extend({
+        init: function(chartElement, options) {
+            var tooltip = this;
+
+            tooltip.options = deepExtend({}, tooltip.options, options);
+            options = tooltip.options;
+
+            tooltip.chartElement = chartElement;
+            tooltip.chartPadding = {
+                top: parseInt(chartElement.css("paddingTop"), 10),
+                left: parseInt(chartElement.css("paddingLeft"), 10)
+            };
+
+            tooltip.template = Tooltip.template;
+            if (!tooltip.template) {
+                tooltip.template = Tooltip.template = renderTemplate(
+                    "<div class='" + CSS_PREFIX + "tooltip' " +
+                    "style='display:none; position: absolute; font: #= d.font #;" +
+                    "border: #= d.border.width #px solid;" +
+                    "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);'>" +
+                    "</div>"
+                );
+            }
+
+            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(chartElement);
+        },
+
+        options: {
+            background: BLACK,
+            color: WHITE,
+            border: {
+                width: 3
+            },
+            opacity: 1,
+            animation: {
+                duration: TOOLTIP_ANIMATION_DURATION
+            }
+        },
+
+        show: function() {
+            var tooltip = this;
+
+            tooltip.showTimeout =
+                setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
+        },
+
+        _show: function() {
+            var tooltip = this,
+                point = tooltip.point,
+                axis = tooltip.axis,
+                plotArea = axis.plotArea,
+                element = tooltip.element,
+                options = tooltip.options,
+                chartPadding = tooltip.chartPadding,
+                anchor, tooltipTemplate, content = "",
+                tooltipOptions, top, left, points;
+
+            value = content = axis[options.stickyMode ? "getCategory" : "getValue"](point);
+            if (options.stickyMode) {
+                points = plotArea.pointsByCategory(value);
+            }
+
+            if (options.template) {
+                template = template(options.template);
+                content = template({
+                    value: value
+                });
+            } else if (options.format) {
+                content = autoFormat(options.format, value);
+            }
+
+            element.html(content);
+
+            anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
+            top = round(anchor.y + chartPadding.top) + "px";
+            left = round(anchor.x + chartPadding.left) + "px";
+
+            if (!tooltip.visible) {
+                tooltip.element.css({ top: top, left: left });
+            }
+
+            tooltip.element
+                .css({
+                   backgroundColor: tooltipOptions.background,
+                   borderColor: tooltipOptions.border.color || point.options.color,
+                   font: tooltipOptions.font,
+                   color: tooltipOptions.color,
+                   opacity: tooltipOptions.opacity,
+                   borderWidth: tooltipOptions.border.width
+                })
+                .stop(true, true)
+                .show()
+                .animate({
+                    left: left,
+                    top: top
+                }, options.animation.duration);
+
+            tooltip.visible = true;
+        },
+
+        content: function(points) {
+            var tooltip = this,
+                content = "",
+                i, point;
+
+            if (points) {
+                for (i = 0; i < points.length; i++) {
+                    point = points[i];
+                    if (!point) {
+                        continue;
+                    }
+
+                    content = tooltip.pointContent(point);
+                }
+            }
+        },
+
+        pointContent: function(point) {
+            var tooptip = this,
+                content = point.value.toString(),
+                tooltipOptions = deepExtend({}, tooltip.options, point.options.tooltip);
+
+            if (tooltipOptions.template) {
+                tooltipTemplate = template(tooltipOptions.template);
+                content = tooltipTemplate({
+                    value: point.value,
+                    category: point.category,
+                    series: point.series,
+                    dataItem: point.dataItem,
+                    percentage: point.percentage
+                });
+            } else if (tooltipOptions.format) {
+                content = point.formatValue(tooltipOptions.format);
+            }
+
+            return content;
+        },
+
+        hide: function() {
+            var tooltip = this;
+
+            clearTimeout(tooltip.showTimeout);
+
+            if (tooltip.visible) {
+                tooltip.element.fadeOut();
+
+                tooltip.point = null;
+                tooltip.visible = false;
+            }
+        }
+    });
+
     var Crosshair = ChartElement.extend({
         init: function(axis, options) {
             var crosshair = this;
@@ -7105,6 +7257,7 @@ kendo_module({
                 return;
             }
 
+            // Apply date format here
             value = content = axis[options.stickyMode ? "getCategory" : "getValue"](point);
 
             if (options.template) {

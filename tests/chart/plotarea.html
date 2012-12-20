@@ -4029,7 +4029,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Categorical Plot Area / GetPointsByCategory", {
+                module("Categorical Plot Area / pointsByCategory", {
                     setup: function() {
                         createColumnChart();
                     },
@@ -4037,29 +4037,31 @@
                 });
 
                 test("returns empty array if has no category", function() {
-                    equals(plotArea.getPointsByCategory("").length, 0);
+                    equals(plotArea.pointsByCategory("").length, 0);
                 });
 
                 test("returns array with points", function() {
-                    equals(plotArea.getPointsByCategory("A").length, 4);
+                    equals(plotArea.pointsByCategory("A").length, 4);
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical Plot Area / Date categoryes / GetPointsByCategory ", {
+                module("Categorical Plot Area / Date categoryes / pointsByCategory ", {
                     setup: function() {
-                        createColumnChart({categoryAxis: {
-                            categories: [new Date("2012/12/18"), new Date("2012/12/19")]
-                        }});
+                        createColumnChart({
+                            categoryAxis: {
+                                categories: [new Date("2012/12/18"), new Date("2012/12/19")]
+                            }
+                        });
                     },
                     teardown: destroyChart
                 });
 
                 test("returns empty array if has no category", function() {
-                    equals(plotArea.getPointsByCategory("").length, 0);
+                    equals(plotArea.pointsByCategory("").length, 0);
                 });
 
                 test("returns array with points", function() {
-                    equals(plotArea.getPointsByCategory(new Date("2012/12/18")).length, 4);
+                    equals(plotArea.pointsByCategory(new Date("2012/12/18")).length, 4);
                 });
 
             })();
