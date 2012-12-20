@@ -10,8 +10,10 @@
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
         <fieldset id="title" title="fooooo">
@@ -30,23 +32,74 @@
                 $("#title").kendoTooltip({
                     position: "right",
                     filter: "input",
-                    content: function(e) {
-                        return e.element.attr("title");
+                    content: {
+                        url: "http://demos.kendoui.com/content/web/window/ajax/ajaxContent.html"
                     },
                     width: 100
                 });
 
-                $("#template").kendoTooltip({
+                $("#template div").kendoTooltip({
                     content: kendo.template($("#tooltip-template").html()),
-                    filter: "div",
                     position: "center",
-                    width: 300
+                    width: 300,
+                    show: function() {
+                        var element = this.content.find("#grid");
+                        if (element.data("kendoGrid")) {
+                            return;
+                        }
+
+                        element.kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+                            },
+                            schema: {
+                                model: {
+                                    fields: {
+                                        OrderID: { type: "number" },
+                                        Freight: { type: "number" },
+                                        ShipName: { type: "string" },
+                                        OrderDate: { type: "date" },
+                                        ShipCity: { type: "string" }
+                                    }
+                                }
+                            },
+                            pageSize: 10,
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        height: 250,
+                        pageable: true,
+                        columns: [{
+                                field:"OrderID",
+                                filterable: false
+                            },
+                            "Freight",
+                            {
+                                field: "OrderDate",
+                                title: "Order Date",
+                                width: 100,
+                                format: "{0:MM/dd/yyyy}"
+                            }, {
+                                field: "ShipName",
+                                title: "Ship Name",
+                                width: 200
+                            }, {
+                                field: "ShipCity",
+                                title: "Ship City"
+                            }
+                        ]
+                    });
+                    }
                 });
             });
         </script>
 
         <script id="tooltip-template" type="script/kendo-x-tempalte">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut ipsum odio. Nam sem nisi, tempor nec sodales non, vehicula a lorem. Cras commodo tristique lacus nec volutpat. Fusce nec quam diam, ac scelerisque nisi. Suspendisse eu arcu risus, quis luctus elit. Etiam convallis rutrum eros sed vestibulum. Fusce viverra congue placerat. Nulla sodales vehicula lobortis.
+            <div id="grid"></div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut ipsum odio. Nam sem nisi, tempor nec sodales non, vehicula a lorem. Cras commodo tristique lacus nec volutpat. Fusce nec quam diam, ac scelerisque nisi. Suspendisse eu arcu risus, quis luctus elit. Etiam convallis rutrum eros sed vestibulum. Fusce viverra congue placerat. Nulla sodales vehicula lobortis.
 
             Nullam ac mauris vitae urna eleifend blandit quis eget tortor. Fusce pellentesque, nisl sed imperdiet tincidunt, elit neque iaculis mi, quis dapibus purus tortor sodales neque. Suspendisse dapibus bibendum dolor vel sagittis. Donec faucibus commodo orci, eu sollicitudin turpis cursus eu. Vivamus consequat ante eget justo eleifend porta elementum dui imperdiet. Mauris nisl mi, hendrerit vitae vehicula sit amet, ultrices sed nibh. Quisque ornare elementum tempus.
         </script>

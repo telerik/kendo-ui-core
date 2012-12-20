@@ -11,10 +11,21 @@ kendo_module({
         Widget = kendo.ui.Widget,
         Popup = kendo.ui.Popup,
         isFunction = $.isFunction,
+        isPlainObject = $.isPlainObject,
         extend = $.extend,
+        proxy = $.proxy,
+        isLocalUrl = kendo.isLocalUrl,
         SHOW = "show",
         HIDE = "hide",
+        ERROR = "error",
+        CONTENTLOAD = "contentLoad",
+        KCONTENTFRAME = "k-content-frame",
         TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em"><div class="k-tooltip-content"></div></div>',
+        IFRAMETEMPLATE = kendo.template(
+        "<iframe frameborder='0' class='" + KCONTENTFRAME + "' " +
+                "src='#= content.url #'>" +
+                    "This page requires frames in order to show content" +
+        "</iframe>"),
         NS = ".kendoTooltip",
         POSITIONS = {
             "below": {
@@ -78,8 +89,8 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that.element
-                .on("mouseenter" + NS, that.options.filter, $.proxy(that._mouseenter, that))
-                .on("mouseleave" + NS, that.options.filter, $.proxy(that._mouseleave, that));
+                .on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that))
+                .on("mouseleave" + NS, that.options.filter, proxy(that._mouseleave, that));
         },
 
         options: {
@@ -88,15 +99,76 @@ kendo_module({
             content: ""
         },
 
-        events: [ SHOW, HIDE ],
+        events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
 
         _mouseenter: function(e) {
             this.show($(e.currentTarget));
         },
 
-        show: function(target) {
+        _appendContent: function(target) {
             var that = this,
                 content = that.options.content,
+                element = that.content,
+                showIframe = that.options.showIframe,
+                iframe;
+
+            if (isPlainObject(content) && content.url) {
+                if (!("showIframe" in that.options)) {
+                    showIframe = !isLocalUrl(content.url);
+                }
+
+                if (!showIframe) {
+                    kendo.ui.progress(element, true);
+                    // perform AJAX request
+                    that._ajaxRequest(content);
+                } else {
+                    iframe = element.find("." + KCONTENTFRAME)[0];
+
+                    if (iframe) {
+                        // refresh existing iframe
+                        iframe.src = content.url || iframe.src;
+                    } else {
+                        element.html(IFRAMETEMPLATE({ content: content }));
+                    }
+
+                    element.find("." + KCONTENTFRAME)
+                        .unbind("load" + NS)
+                        .on("load" + NS, function(){
+                            that.trigger(CONTENTLOAD);
+                        });
+                }
+            } else if (content && isFunction(content)) {
+                content = content({ element: target });
+                that.content.html(content);
+            } else {
+                that.content.html(content);
+            }
+        },
+
+        _ajaxRequest: function(options) {
+            var that = this;
+
+            jQuery.ajax(extend({
+                type: "GET",
+                dataType: "html",
+                cache: false,
+                error: function (xhr, status) {
+                    kendo.ui.progress(that.content, false);
+
+                    that.trigger(ERROR, { status: status, xhr: xhr });
+                },
+                success: proxy(function (data) {
+                    kendo.ui.progress(that.content, false);
+
+                    that.content.html(data);
+
+                    that.trigger(CONTENTLOAD);
+                }, that)
+            }, options));
+        },
+
+        show: function(target) {
+            var that = this,
                 current = that.target();
 
             if (!that.popup) {
@@ -108,11 +180,7 @@ kendo_module({
             }
 
             if (!current || current[0] != target[0]) {
-                if (content && isFunction(content)) {
-                    content = content({ element: target });
-                }
-
-                that.content.empty().append(content);
+                that._appendContent(target);
 
                 that.popup.options.anchor = target;
             }
@@ -141,7 +209,7 @@ kendo_module({
 
             that.content = wrapper.find(".k-tooltip-content");
 
-            wrapper.on("mouseleave" + NS, $.proxy(that._mouseleave, that));
+            wrapper.on("mouseleave" + NS, proxy(that._mouseleave, that));
         },
 
         _mouseleave: function(e) {

@@ -4,6 +4,10 @@ tests.push(
         title: "tooltip"
     },
     {
+        page: "tooltip/ajaxloading.html",
+        title: "tooltip ajax loading"
+    },
+    {
         page: "tooltip/lint.html",
         title: "lint"
     }
