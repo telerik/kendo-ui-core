@@ -342,6 +342,20 @@
                 ok(modalOverlay.css("z-index") > win1.wrapper.css("z-index"));
             });
 
+            test("Resizing with keyboard raises resize event", 1, function() {
+                var wnd = createWindow({
+                    resize: function() {
+                        ok(true);
+                    }
+                });
+
+                wnd.wrapper.children(".k-window-content").trigger({
+                    type: "keydown",
+                    keyCode: 40,
+                    ctrlKey: true
+                });
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

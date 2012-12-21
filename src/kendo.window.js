@@ -367,6 +367,8 @@ kendo_module({
                         width: constrain(newWidth, options.minWidth, options.maxWidth),
                         height: constrain(newHeight, options.minHeight, options.maxHeight)
                     });
+
+                    that.trigger(RESIZE);
                 }
             }
 
