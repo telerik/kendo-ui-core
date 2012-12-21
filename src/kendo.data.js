@@ -60,6 +60,7 @@ kendo_module({
         toString = {}.toString,
         stableSort = kendo.support.stableSort,
         dateRegExp = /^\/Date\((.*?)\)\/$/,
+        newLineRegExp = /(\r+|\n+)/g,
         quoteRegExp = /(?=['\\])/g;
 
     var ObservableArray = Observable.extend({
@@ -756,7 +757,7 @@ kendo_module({
     var operators = (function(){
 
         function quote(value) {
-            return value.replace(quoteRegExp, "\\");
+            return value.replace(quoteRegExp, "\\").replace(newLineRegExp, "");
         }
 
         function operator(op, a, b, ignore) {

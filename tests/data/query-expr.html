@@ -532,6 +532,12 @@
                     filters: [ { ignoreCase: false, operator: "neq", value: "Foo"} ]
                 }), "(d != 'Foo')");
             });
+
+            test("carriage return in strings is escaped", function() {
+                equal(compile({
+                    filters: [ { operator: "eq", value: "foo \r\n bar"} ]
+                }), "((d || '').toLowerCase() == 'foo  bar')");
+            });
         </script>
     </body>
 </html>
