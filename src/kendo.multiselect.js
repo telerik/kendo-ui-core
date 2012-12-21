@@ -309,41 +309,47 @@ kendo_module({
             that.resultList = $('<ul unselectable="on" class="k-list k-reset"/>')
                                 .appendTo(that._innerWraper)
                                 .on("click" + ns, ".k-delete", function(e) {
-                                    var item = $(e.target).closest("li"),
-                                        index = item.data("index"),
-                                        idxInList = item.index();
+                                    var index = that._removeTag($(e.target).closest("li"));
 
                                     $(that.ul[0].children[index]).show();
-                                    item.remove();
-
-                                    //de-select Option
                                     that.element[0].children[index].selected = false;
-
-                                    //remove data item
-                                    that._dataItems.splice(idxInList, 1);
                                 });
         },
 
-        _click: function(e) {
+        _addTag: function(dataItem, index) {
             var that = this,
-                li = $(e.currentTarget),
-                index = li.index(),
-                dataItem = that.dataSource.view()[index],
                 tag = $(that.tagTemplate(dataItem));
 
             that.resultList.append(tag);
 
             tag.data("index", index);
 
-            li.hide();
+            //add data item
+            that._dataItems.push(dataItem);
+        },
+
+        _removeTag: function(tag) {
+            var that = this,
+                index = tag.index(),
+                optionIndex = tag.data("index");
+
+            that._dataItems.splice(tag.index(), 1);
+            tag.remove();
+
+            return optionIndex;
+        },
+
+        _click: function(e) {
+            var that = this,
+                li = $(e.currentTarget).hide(),
+                index = li.index();
+
+            that._addTag(that.dataSource.view()[index], index);
 
             that.close();
 
             //select Option
             that.element[0].children[index].selected = true;
-
-            //add data item
-            that._dataItems.push(dataItem);
 
             that._state = "accept";
 
