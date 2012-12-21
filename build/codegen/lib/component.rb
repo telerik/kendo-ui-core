@@ -18,17 +18,29 @@ module CodeGen
         include Options
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         attr_reader :name, :options, :events, :methods
 =======
         attr_reader :name, :options, :events
 >>>>>>> Add generate:java task
+=======
+        attr_reader :name, :options, :events, :methods
+>>>>>>> Method parsing from markdown.
 
         def initialize(settings)
             @name = settings[:name].split('.').last
             @options = []
             @events = []
 <<<<<<< HEAD
+<<<<<<< HEAD
             @methods = []
+=======
+            @methods = []
+        end
+
+        def method_class
+            Method
+>>>>>>> Method parsing from markdown.
         end
 
 <<<<<<< HEAD
@@ -97,9 +109,12 @@ module CodeGen
             @methods.push(method)
 
             method
+<<<<<<< HEAD
 =======
             end
 >>>>>>> Add generate:java task
+=======
+>>>>>>> Method parsing from markdown.
         end
 
         def add_event(settings)
