@@ -2191,10 +2191,22 @@ kendo_module({
         },
 
         _averageRowHeight: function() {
-            var rowHeight = this._rowHeight;
+            var that = this,
+                rowHeight = that._rowHeight;
 
-            this._rowHeight = rowHeight = this.table.outerHeight() / this.table[0].rows.length;
+            if (!that._rowHeight) {
+                that._rowHeight = rowHeight = that.table.outerHeight() / that.table[0].rows.length;
+                that._sum = rowHeight;
+                that._measures = 1;
+            }
 
+            var currentRowHeight = that.table.outerHeight() / that.table[0].rows.length;
+
+            if (rowHeight !== currentRowHeight) {
+                that._measures ++;
+                that._sum += currentRowHeight;
+                that._rowHeight = that._sum / that._measures;
+            }
             return rowHeight;
         },
 
