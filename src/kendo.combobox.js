@@ -435,7 +435,7 @@
                     that._placeholder();
                 }
 
-                that._old = that._accessor();
+                that._prev = that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
             } else {
                 return that._accessor();

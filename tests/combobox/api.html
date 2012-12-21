@@ -437,6 +437,31 @@
 
                 ok(combobox.ul.children(":first").hasClass("k-state-selected"));
             });
+
+            asyncTest("ComboBox filter after value method is used", 1, function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["Item1", "Item2"],
+                    filter: "contains",
+                    delay: 0
+                });
+
+                stub(combobox, {
+                    search: combobox.search
+                });
+
+                //simulate search
+                combobox._prev = "i";
+                combobox.value("");
+
+                combobox.input.val("i");
+                combobox._search();
+
+                setTimeout(function() {
+                    start();
+                    equal(combobox.calls("search"), 1);
+                });
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
