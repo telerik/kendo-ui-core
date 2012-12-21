@@ -56,10 +56,10 @@
                 ok(container.data("kendoTooltip") instanceof kendo.ui.Tooltip);
             });
 
-            test("hovering the target shows a popup", function() {
+            test("shows a popup", function() {
                 var tooltip = new Tooltip(container, {});
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
 
                 ok(tooltip.popup.visible());
             });
@@ -69,7 +69,7 @@
                     content: "bar"
                 });
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
 
                 equal(tooltip.content.text(), "bar");
             });
@@ -79,7 +79,7 @@
                     content: "<span>bar</span>"
                 });
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
 
                 ok(tooltip.content.find("span").length);
                 equal(tooltip.content.find("span").text(), "bar");
@@ -93,7 +93,7 @@
                     }
                 });
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
 
                 ok(tooltip.content.find("span").length);
                 equal(tooltip.content.find("span").text(), "bar");
@@ -109,7 +109,7 @@
                     }
                 });
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
 
                 ok(tooltip.content.find("span").length);
                 equal(tooltip.content.find("span").text(), "bar");
@@ -126,9 +126,9 @@
                     }
                 });
 
-                triggerEvent(container.find("span:first"), "mouseenter");
+                tooltip.show(container.find("span:first"));
 
-                triggerEvent(container.find("span:last"), "mouseenter");
+                tooltip.show(container.find("span:last"));
 
                 equal(tooltip.content.text(), "foo");
             });
@@ -143,9 +143,9 @@
                     }
                 });
 
-                triggerEvent(container.find("span:first"), "mouseenter");
+                tooltip.show(container.find("span:first"));
 
-                triggerEvent(container.find("span:last"), "mouseenter");
+                tooltip.show(container.find("span:last"));
             });
 
             test("show event is raised", 1, function() {
@@ -153,7 +153,7 @@
                     show: function() { ok(true); }
                 });
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
             });
 
             test("hide event is raised", 1, function() {
@@ -161,7 +161,7 @@
                     hide: function() { ok(true); }
                 });
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
                 triggerEvent(container, "mouseleave");
             });
 
@@ -179,11 +179,11 @@
                     }),
                     popup;
 
-                triggerEvent(container.find("span:first"), "mouseenter");
+                tooltip.show(container.find("span:first"));
 
                 popup = tooltip.popup;
 
-                triggerEvent(container.find("span:last"), "mouseenter");
+                tooltip.show(container.find("span:last"));
 
                 same(popup, tooltip.popup);
             });
@@ -191,7 +191,7 @@
             test("popup is hidden when mouse leave the element", function() {
                 var tooltip = new Tooltip(container, {});
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
                 triggerEvent(container, "mouseleave");
 
                 ok(!tooltip.popup.visible());
@@ -200,7 +200,7 @@
             test("popup is destoryed if tooltip is destoryed", function() {
                 var tooltip = new Tooltip(container, {});
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container, "mouseenter");
                 triggerEvent(container, "mouseleave");
 
                 var popupDestroy = stub(tooltip.popup, "destroy");
@@ -219,7 +219,7 @@
                     target = container.find("span");
 
 
-                triggerEvent(target, "mouseenter");
+                tooltip.show(target);
 
                 ok(tooltip.popup.visible());
                 equal(tooltip.target()[0], target[0]);
@@ -233,11 +233,11 @@
                     }),
                     target = container.find("span:first");
 
-                triggerEvent(target, "mouseenter");
+                tooltip.show(target);
 
                 target = container.find("span:last");
 
-                triggerEvent(target, "mouseenter");
+                tooltip.show(target);
 
                 ok(tooltip.popup.visible());
                 equal(tooltip.target()[0], target[0]);
@@ -253,7 +253,7 @@
                     target = container.find("span");
 
 
-                triggerEvent(target, "mouseenter");
+                tooltip.show(target);
                 triggerEvent(target, "mouseleave");
 
                 ok(!tooltip.popup.visible());
@@ -265,7 +265,7 @@
 
                 var tooltip = new Tooltip(container, { });
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
 
                 ok(!container.filter("[title]").length);
             });
@@ -276,7 +276,7 @@
 
                 var tooltip = new Tooltip(container, { filter: "span" });
 
-                triggerEvent(container.find("span"), "mouseenter");
+                tooltip.show(container.find("span"));
 
                 ok(!container.filter("[title]").length);
             });
@@ -286,7 +286,7 @@
 
                 var tooltip = new Tooltip(container, { });
 
-                triggerEvent(container, "mouseenter");
+                tooltip.show(container);
                 triggerEvent(container, "mouseleave");
 
                 equal(container.attr("title"), "foo");
@@ -298,7 +298,7 @@
 
                 var tooltip = new Tooltip(container, { filter: "span" });
 
-                triggerEvent(container.find("span"), "mouseenter");
+                tooltip.show(container.find("span"));
                 triggerEvent(container.find("span"), "mouseleave");
 
                 equal(container.attr("title"), "foo");

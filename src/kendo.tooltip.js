@@ -96,7 +96,8 @@ kendo_module({
         options: {
             name: "Tooltip",
             filter: "",
-            content: ""
+            content: "",
+            showAfter: 100
         },
 
         events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
@@ -104,11 +105,11 @@ kendo_module({
         _mouseenter: function(e) {
             var that = this;
 
-            //clearTimeout(that.timeout);
+            clearTimeout(that.timeout);
 
-            //that.timeout = setTimeout( function() {
+            that.timeout = setTimeout(function() {
                 that.show($(e.currentTarget));
-            //}, 100);
+            }, that.options.showAfter);
         },
 
         _appendContent: function(target) {
@@ -226,19 +227,22 @@ kendo_module({
         },
 
         _mouseleave: function(e) {
-            var element = $(e.currentTarget),
-                offset = element.offset(),
-                pageX = e.pageX,
-                pageY = e.pageY;
+            if (this.popup) {
+                var element = $(e.currentTarget),
+                    offset = element.offset(),
+                    pageX = e.pageX,
+                    pageY = e.pageY;
 
-            offset.right = offset.left + element.outerWidth();
-            offset.bottom = offset.top + element.outerHeight();
+                offset.right = offset.left + element.outerWidth();
+                offset.bottom = offset.top + element.outerHeight();
 
-            if (pageX > offset.left && pageX < offset.right && pageY > offset.top && pageY < offset.bottom) {
-                return;
+                if (pageX > offset.left && pageX < offset.right && pageY > offset.top && pageY < offset.bottom) {
+                    return;
+                }
+
+                this.popup.close();
             }
-
-            this.popup.close();
+            clearTimeout(this.timeout);
         },
 
         target: function() {
