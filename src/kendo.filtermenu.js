@@ -21,8 +21,10 @@
                     '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false" name="filters[0].value"/>' +
                     '#=messages.isFalse#' +
                 '</label>' +
+                '<div>' +
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                '</div>' +
             '</div>';
 
     var defaultTemplate =
@@ -56,8 +58,10 @@
                         '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
                     '#}#' +
                 '#}#'+
+                '<div>'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                '</div>'+
             '</div>';
 
     function removeFiltersForField(expression, field) {
