@@ -1543,9 +1543,9 @@ kendo_module({
                 }
 
                 if (editable && editable.create !== false) {
-                    container.on("touchend" + NS + " " + CLICK + NS, ".k-grid-add", function(e) { e.preventDefault(); that.addRow(); })
-                        .on("touchend" + NS + " " + CLICK + NS, ".k-grid-cancel-changes", function(e) { e.preventDefault(); that.cancelChanges(); })
-                        .on("touchend" + NS + " " + CLICK + NS, ".k-grid-save-changes", function(e) { e.preventDefault(); that.saveChanges(); });
+                    container.on(CLICK + NS, ".k-grid-add", function(e) { e.preventDefault(); that.addRow(); })
+                        .on(CLICK + NS, ".k-grid-cancel-changes", function(e) { e.preventDefault(); that.cancelChanges(); })
+                        .on(CLICK + NS, ".k-grid-save-changes", function(e) { e.preventDefault(); that.saveChanges(); });
                 }
             }
         },
