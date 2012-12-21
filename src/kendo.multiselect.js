@@ -20,6 +20,8 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+            that.element.attr("multiple", "multiple");
+
             that._wrapper();
             that._resultList();
             that._input();
@@ -338,10 +340,22 @@ kendo_module({
 
         _select: function(li) {
             var that = this;
-                index = li.hide().index();
+                index = li.hide().index(),
+                dataItem = that.dataSource.view()[index];
 
-            that._addTag(that.dataSource.view()[index], index);
-            that.element[0].children[index].selected = true;
+            var options = that.element[0].children,
+                idx = 0,
+                length = options.length,
+                value =  kendo.getter(that.options.dataValueField)(dataItem);
+
+            for (; idx < length; idx ++) {
+                if (options[idx].value === value) {
+                    options[idx].selected = true;
+                    break;
+                }
+            }
+
+            that._addTag(dataItem, idx);
 
             that.input.val("");
         },
