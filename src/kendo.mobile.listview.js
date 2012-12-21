@@ -27,7 +27,8 @@ kendo_module({
         NS = ".kendoMobileListView",
         LAST_PAGE_REACHED = "lastPageReached",
         CLICK = "click",
-        CLICK_NS = CLICK + NS,
+        TRIGGER = "touchend click",
+        TRIGGER_NS = TRIGGER.split(" ").join(NS + " ") + NS,
 
         CHANGE = "change",
         PROGRESS = "progress",
@@ -110,10 +111,10 @@ kendo_module({
             element
                 .on("down", HIGHLIGHT_SELECTOR, "_highlight")
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
-                .on("touchend click", ITEM_SELECTOR, "_click");
+                .on(TRIGGER, ITEM_SELECTOR, "_click");
 
             if (support.touch) {
-                element.on("touchend click", ".km-listview-label", toggleiOSLabel);
+                element.on(TRIGGER, ".km-listview-label", toggleiOSLabel);
             }
 
             element.wrap(WRAPPER);
@@ -313,7 +314,7 @@ kendo_module({
            if (that._loadButton) {
                that.loading = false;
                that._loadButton
-                   .off(CLICK_NS)
+                   .off(TRIGGER_NS)
                    .parent().hide();
 
                that.trigger(LAST_PAGE_REACHED);
@@ -633,7 +634,7 @@ kendo_module({
 
                 if (loadMore) {
                     that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
-                                        .on(CLICK_NS, proxy(that._nextPage, that));
+                                        .on(TRIGGER_NS, proxy(that._nextPage, that));
 
                     loadWrapper.append(that._loadButton);
                 }
