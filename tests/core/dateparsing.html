@@ -734,6 +734,10 @@
 
                 equal(+date, +new Date(2012, 9, 21, 1, 0, 0));
             });
+
+            test("parseDate return null if entered day is bigger then the possible in the current month", function() {
+                equal(parse("09/31/2012"), null);
+            });
         </script>
     </body>
 </html>

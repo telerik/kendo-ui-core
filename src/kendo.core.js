@@ -1259,6 +1259,10 @@ function pad(number, digits, end) {
             value.setFullYear(year);
         }
 
+        if (value.getDate() !== day) {
+            return null;
+        }
+
         return value;
     }
 
