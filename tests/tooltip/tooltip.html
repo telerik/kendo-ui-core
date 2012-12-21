@@ -314,6 +314,25 @@
                 equal(tooltip.popup.options.position, "top center");
                 equal(tooltip.popup.options.origin, "center center");
             });
+
+            test("width is set to the popup", function() {
+                var tooltip = new Tooltip(container, {
+                    width: "100"
+                });
+
+                tooltip.show(container);
+                equal(tooltip.content.width(), 100);
+            });
+
+            test("height is set to the popup", function() {
+                var tooltip = new Tooltip(container, {
+                    height: "100"
+                });
+
+                tooltip.show(container);
+
+                equal(tooltip.popup.element.height(), 100);
+            });
         </script>
     </body>
 </html>

@@ -102,33 +102,40 @@ kendo_module({
         events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
 
         _mouseenter: function(e) {
-            this.show($(e.currentTarget));
+            var that = this;
+
+            //clearTimeout(that.timeout);
+
+            //that.timeout = setTimeout( function() {
+                that.show($(e.currentTarget));
+            //}, 100);
         },
 
         _appendContent: function(target) {
             var that = this,
-                content = that.options.content,
+                contentOptions = that.options.content,
                 element = that.content,
-                showIframe = that.options.showIframe,
+                showIframe = that.options.iframe,
                 iframe;
 
-            if (isPlainObject(content) && content.url) {
-                if (!("showIframe" in that.options)) {
-                    showIframe = !isLocalUrl(content.url);
+            if (isPlainObject(contentOptions) && contentOptions.url) {
+                if (!("iframe" in that.options)) {
+                    showIframe = !isLocalUrl(contentOptions.url);
                 }
 
                 if (!showIframe) {
+                    element.empty();
                     kendo.ui.progress(element, true);
                     // perform AJAX request
-                    that._ajaxRequest(content);
+                    that._ajaxRequest(contentOptions);
                 } else {
                     iframe = element.find("." + KCONTENTFRAME)[0];
 
                     if (iframe) {
                         // refresh existing iframe
-                        iframe.src = content.url || iframe.src;
+                        iframe.src = contentOptions.url || iframe.src;
                     } else {
-                        element.html(IFRAMETEMPLATE({ content: content }));
+                        element.html(IFRAMETEMPLATE({ content: contentOptions }));
                     }
 
                     element.find("." + KCONTENTFRAME)
@@ -137,11 +144,11 @@ kendo_module({
                             that.trigger(CONTENTLOAD);
                         });
                 }
-            } else if (content && isFunction(content)) {
-                content = content({ element: target });
-                that.content.html(content);
+            } else if (contentOptions && isFunction(contentOptions)) {
+                contentOptions = contentOptions({ element: target });
+                that.content.html(contentOptions);
             } else {
-                that.content.html(content);
+                that.content.html(contentOptions);
             }
         },
 
@@ -196,6 +203,7 @@ kendo_module({
 
         _initPopup: function() {
             var that = this,
+                options = that.options,
                 wrapper = $(kendo.template(TEMPLATE)({}));
 
             that.popup = new Popup(wrapper, extend({
@@ -205,7 +213,12 @@ kendo_module({
                 close: function() {
                     that.trigger(HIDE);
                 }
-            }, POSITIONS[that.options.position]));
+            }, POSITIONS[options.position]));
+
+            wrapper.css({
+                width: options.width,
+                height: options.height
+            });
 
             that.content = wrapper.find(".k-tooltip-content");
 
