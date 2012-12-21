@@ -130,6 +130,8 @@ kendo_module({
                     // perform AJAX request
                     that._ajaxRequest(contentOptions);
                 } else {
+                    element.hide();
+
                     iframe = element.find("." + KCONTENTFRAME)[0];
 
                     if (iframe) {
@@ -143,6 +145,7 @@ kendo_module({
                         .unbind("load" + NS)
                         .on("load" + NS, function(){
                             that.trigger(CONTENTLOAD);
+                            element.show();
                         });
                 }
             } else if (contentOptions && isFunction(contentOptions)) {
