@@ -309,10 +309,7 @@ kendo_module({
             that.resultList = $('<ul unselectable="on" class="k-list k-reset"/>')
                                 .appendTo(that._innerWraper)
                                 .on("click" + ns, ".k-delete", function(e) {
-                                    var index = that._removeTag($(e.target).closest("li"));
-
-                                    $(that.ul[0].children[index]).show();
-                                    that.element[0].children[index].selected = false;
+                                    that._unselect($(e.target).closest("li"));
                                 });
         },
 
@@ -339,21 +336,28 @@ kendo_module({
             return optionIndex;
         },
 
-        _click: function(e) {
-            var that = this,
-                li = $(e.currentTarget).hide(),
-                index = li.index();
+        _select: function(li) {
+            var that = this;
+                index = li.hide().index();
 
             that._addTag(that.dataSource.view()[index], index);
-
-            that.close();
-
-            //select Option
             that.element[0].children[index].selected = true;
 
-            that._state = "accept";
-
             that.input.val("");
+        },
+
+        _unselect: function(tag) {
+            var that = this,
+                index = that._removeTag(tag);
+
+            $(that.ul[0].children[index]).show();
+            that.element[0].children[index].selected = false;
+        },
+
+        _click: function(e) {
+            this._select($(e.currentTarget));
+            this._state = "accept";
+            this.close();
         },
 
         _list: function() {

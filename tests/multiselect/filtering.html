@@ -96,6 +96,9 @@
                 multiselect.input.click();
 
                 equal(multiselect.ul.children().length, 3); /* all items without one */
+
+                ok(select[0].children[0].selected);
+                ok(select[0].children[1].selected);
             });
 
       </script>
