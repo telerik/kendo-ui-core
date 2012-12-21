@@ -452,7 +452,7 @@ kendo_module({
                         position: "relative",
                         width: viewWidth * 2,
                         "float": LEFT,
-                        left: future ? 0 : -viewWidth
+                        "margin-left": future ? 0 : -viewWidth
                     });
 
                 to[future ? "insertAfter" : "insertBefore"](from);
@@ -464,7 +464,7 @@ kendo_module({
                         to.unwrap();
 
                         that._focusView(active);
-                    }
+                   }
                 });
 
                 from.parent().kendoStop(true, true).kendoAnimate(horizontal);
