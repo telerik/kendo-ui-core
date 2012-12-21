@@ -1165,7 +1165,7 @@
 
                 container = that._editContainer;
 
-                container.on("touchend" + NS + " " + CLICK + NS, "a.k-grid-cancel", function(e) {
+                container.on(CLICK + NS, "a.k-grid-cancel", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
@@ -1179,7 +1179,7 @@
                     }
                 });
 
-                container.on("touchend" + NS + " " + CLICK + NS, "a.k-grid-update", function(e) {
+                container.on(CLICK + NS, "a.k-grid-update", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
