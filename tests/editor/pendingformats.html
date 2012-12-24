@@ -314,6 +314,21 @@
             equals(pendingFormats.getPending('fontsize'), format);
         });
 
+        test("apply pending formats on editor without focus", function() {
+            editor.value("foo");
+
+            var pendingFormats = new PendingFormats(editor);
+
+            pendingFormats.toggle({ name: 'bold', params: undefined });
+
+            pendingFormats.apply(editor.getRange());
+
+            var range = editor.getRange();
+
+            ok(range.collapsed);
+
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
