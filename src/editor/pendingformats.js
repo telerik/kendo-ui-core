@@ -35,7 +35,7 @@ var PendingFormats = Class.extend({
 
             range.setStart(target, target.nodeValue.length - 1);
         } else {
-            range.setStart(target, 0);
+            range.setStart(range.startContainer, range.startOffset);
         }
 
         marker.add(range);
