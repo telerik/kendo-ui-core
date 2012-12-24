@@ -1,328 +1,328 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <meta charset="utf-8" />
+    <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+    <script src="../../src/jquery.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit-runner.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.popup.js"></script>
+    <script src="../../src/kendo.list.js"></script>
+    <script src="../../src/kendo.combobox.js"></script>
+    <script src="../../src/kendo.dropdownlist.js"></script>
+    <script src="../../src/kendo.window.js"></script>
+    <script src="../../src/kendo.editor.js"></script>
+    <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+    <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+    <script>
 
-var PendingFormats;
+        var PendingFormats;
 
-$("#Editor1").kendoEditor();
+        $("#Editor1").kendoEditor();
 
-module("Editor / PendingFormats", {
-    setup: function() {
-        PendingFormats = kendo.ui.editor.PendingFormats;
-        editor = getEditor();
-        editor.focus();
-    }
-});
+        module("Editor / PendingFormats", {
+            setup: function() {
+                PendingFormats = kendo.ui.editor.PendingFormats;
+                editor = getEditor();
+                editor.focus();
+            }
+        });
 
-test('pending formats are empty by default', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('pending formats are empty by default', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    equals(pendingFormats.hasPending(), 0);
-});
+            equals(pendingFormats.hasPending(), 0);
+        });
 
-test('toggle() toggles pending format', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('toggle() toggles pending format', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle({ name: 'italic', params: undefined });
+            pendingFormats.toggle({ name: 'italic', params: undefined });
 
-    ok(pendingFormats.hasPending());
+            ok(pendingFormats.hasPending());
 
-    pendingFormats.toggle({ name: 'italic', params: undefined });
+            pendingFormats.toggle({ name: 'italic', params: undefined });
 
-    ok(!pendingFormats.hasPending());
-});
+            ok(!pendingFormats.hasPending());
+        });
 
-test('toggle() toggles multiple formats', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('toggle() toggles multiple formats', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle({ name: 'italic', params: undefined });
+            pendingFormats.toggle({ name: 'italic', params: undefined });
 
-    ok(pendingFormats.hasPending());
+            ok(pendingFormats.hasPending());
 
-    pendingFormats.toggle({ name: 'bold', params: undefined });
+            pendingFormats.toggle({ name: 'bold', params: undefined });
 
-    ok(pendingFormats.hasPending());
-});
+            ok(pendingFormats.hasPending());
+        });
 
-test('toggle() replaces format values, if any', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('toggle() replaces format values, if any', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command });
+            pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command });
 
-    ok(pendingFormats.hasPending());
+            ok(pendingFormats.hasPending());
 
-    pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
+            pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
 
-    equals(pendingFormats.getPending('fontsize').params.value, 'xx-small');
-    ok(pendingFormats.hasPending());
+            equals(pendingFormats.getPending('fontsize').params.value, 'xx-small');
+            ok(pendingFormats.hasPending());
 
-    pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
+            pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
 
-    ok(!pendingFormats.hasPending());
-});
+            ok(!pendingFormats.hasPending());
+        });
 
-test('clear() removes all pending formats', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('clear() removes all pending formats', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle({ name: 'italic', params: undefined });
+            pendingFormats.toggle({ name: 'italic', params: undefined });
 
-    pendingFormats.clear();
+            pendingFormats.clear();
 
-    ok(!pendingFormats.hasPending());
-});
+            ok(!pendingFormats.hasPending());
+        });
 
-test('apply() applies pending format to range', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() applies pending format to range', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle(editor.options.tools.italic);
+            pendingFormats.toggle(editor.options.tools.italic);
 
-    editor.value('foo');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.setStart(editor.body.firstChild, 2);
+            editor.value('foo');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild, 1);
+            range.setStart(editor.body.firstChild, 2);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    equals(editor.value(), 'f<em>o</em>o');
-});
+            equals(editor.value(), 'f<em>o</em>o');
+        });
 
-test('apply() applies pending format with parameter to range', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() applies pending format with parameter to range', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    var tool = $.extend({}, editor.options.tools.fontSize);
-    $.extend(tool.options, { params: { value: 'xx-large' } });
+            var tool = $.extend({}, editor.options.tools.fontSize);
+            $.extend(tool.options, { params: { value: 'xx-large' } });
 
-    pendingFormats.toggle(tool);
+            pendingFormats.toggle(tool);
 
-    editor.value('foo');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.setStart(editor.body.firstChild, 2);
+            editor.value('foo');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild, 1);
+            range.setStart(editor.body.firstChild, 2);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    equals(editor.value(), 'f<span style="font-size:xx-large;">o</span>o');
-});
+            equals(editor.value(), 'f<span style="font-size:xx-large;">o</span>o');
+        });
 
-test('apply() applies multiple pending formats to range', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() applies multiple pending formats to range', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle(editor.options.tools.italic);
-    pendingFormats.toggle(editor.options.tools.bold);
+            pendingFormats.toggle(editor.options.tools.italic);
+            pendingFormats.toggle(editor.options.tools.bold);
 
-    editor.value('foo');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.setStart(editor.body.firstChild, 2);
+            editor.value('foo');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild, 1);
+            range.setStart(editor.body.firstChild, 2);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    equals(editor.value(), 'f<em><strong>o</strong></em>o');
-});
+            equals(editor.value(), 'f<em><strong>o</strong></em>o');
+        });
 
-test('apply() focuses end of format after apply', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() focuses end of format after apply', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle(editor.options.tools.italic);
+            pendingFormats.toggle(editor.options.tools.italic);
 
-    editor.value('foo');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.setStart(editor.body.firstChild, 2);
+            editor.value('foo');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild, 1);
+            range.setStart(editor.body.firstChild, 2);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    range.insertNode(editor.document.createElement('a'));
+            range.insertNode(editor.document.createElement('a'));
 
-    equals(editor.value(), 'f<em>o<a></a></em>o');
-});
+            equals(editor.value(), 'f<em>o<a></a></em>o');
+        });
 
-test('apply() removes pending format to range', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() removes pending format to range', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle(editor.options.tools.bold);
+            pendingFormats.toggle(editor.options.tools.bold);
 
-    editor.value('<strong>foo</strong>');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild, 1);
-    range.setStart(editor.body.firstChild.firstChild, 2);
+            editor.value('<strong>foo</strong>');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild.firstChild, 1);
+            range.setStart(editor.body.firstChild.firstChild, 2);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    equals(editor.value(), '<strong>f</strong>o<strong>o</strong>');
-});
+            equals(editor.value(), '<strong>f</strong>o<strong>o</strong>');
+        });
 
-test('apply() removes multiple pending formats to range', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() removes multiple pending formats to range', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle(editor.options.tools.bold);
-    pendingFormats.toggle(editor.options.tools.italic);
+            pendingFormats.toggle(editor.options.tools.bold);
+            pendingFormats.toggle(editor.options.tools.italic);
 
-    editor.value('<em><strong>foo</strong></em>');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild.firstChild, 1);
-    range.setStart(editor.body.firstChild.firstChild.firstChild, 2);
+            editor.value('<em><strong>foo</strong></em>');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild.firstChild.firstChild, 1);
+            range.setStart(editor.body.firstChild.firstChild.firstChild, 2);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    equals(editor.value(), '<em><strong>f</strong></em>o<em><strong>o</strong></em>');
-});
+            equals(editor.value(), '<em><strong>f</strong></em>o<em><strong>o</strong></em>');
+        });
 
-test('apply() focuses end of range after remove', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() focuses end of range after remove', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle(editor.options.tools.bold);
-    pendingFormats.toggle(editor.options.tools.italic);
+            pendingFormats.toggle(editor.options.tools.bold);
+            pendingFormats.toggle(editor.options.tools.italic);
 
-    editor.value('<em><strong>foo</strong></em>');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild.firstChild, 1);
-    range.setStart(editor.body.firstChild.firstChild.firstChild, 2);
+            editor.value('<em><strong>foo</strong></em>');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild.firstChild.firstChild, 1);
+            range.setStart(editor.body.firstChild.firstChild.firstChild, 2);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    range = editor.getRange();
+            range = editor.getRange();
 
-    ok(range.collapsed);
+            ok(range.collapsed);
 
-    range.insertNode(editor.document.createElement('a'));
+            range.insertNode(editor.document.createElement('a'));
 
-    equals(editor.value(), '<em><strong>f</strong></em>o<a></a><em><strong>o</strong></em>');
-});
+            equals(editor.value(), '<em><strong>f</strong></em>o<a></a><em><strong>o</strong></em>');
+        });
 
-test('apply() applies format on whitespace nodes', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() applies format on whitespace nodes', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle(editor.options.tools.bold);
+            pendingFormats.toggle(editor.options.tools.bold);
 
-    editor.value('f o');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 2);
-    range.setStart(editor.body.firstChild, 2);
+            editor.value('f o');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild, 2);
+            range.setStart(editor.body.firstChild, 2);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    equals(editor.value(), 'f o');
+            equals(editor.value(), 'f o');
 
-    ok(pendingFormats.hasPending());
+            ok(pendingFormats.hasPending());
 
-    range = editor.getRange();
+            range = editor.getRange();
 
-    ok(range.collapsed);
+            ok(range.collapsed);
 
-    range.insertNode(editor.document.createElement('a'));
+            range.insertNode(editor.document.createElement('a'));
 
-    equals(editor.value(), 'f <a></a>o');
-});
+            equals(editor.value(), 'f <a></a>o');
+        });
 
-test('apply() removes format on whitespace nodes', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() removes format on whitespace nodes', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle(editor.options.tools.bold);
+            pendingFormats.toggle(editor.options.tools.bold);
 
-    editor.value('<strong>f</strong>oo');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.setStart(editor.body.firstChild, 1);
+            editor.value('<strong>f</strong>oo');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild, 1);
+            range.setStart(editor.body.firstChild, 1);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    equals(editor.value(), 'foo');
+            equals(editor.value(), 'foo');
 
-    ok(!pendingFormats.hasPending());
+            ok(!pendingFormats.hasPending());
 
-    range = editor.getRange();
+            range = editor.getRange();
 
-    ok(range.collapsed);
+            ok(range.collapsed);
 
-    range.insertNode(editor.document.createElement('a'));
+            range.insertNode(editor.document.createElement('a'));
 
-    equals(editor.value(), 'f<a></a>oo');
-});
+            equals(editor.value(), 'f<a></a>oo');
+        });
 
-test('apply() removes format at start of node', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('apply() removes format at start of node', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle(editor.options.tools.bold);
+            pendingFormats.toggle(editor.options.tools.bold);
 
-    editor.value('<strong>af</strong>oo');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild, 1);
-    range.setStart(editor.body.firstChild.firstChild, 1);
+            editor.value('<strong>af</strong>oo');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild.firstChild, 1);
+            range.setStart(editor.body.firstChild.firstChild, 1);
 
-    pendingFormats.apply(range);
+            pendingFormats.apply(range);
 
-    equals(editor.value(), 'a<strong>f</strong>oo');
+            equals(editor.value(), 'a<strong>f</strong>oo');
 
-    ok(!pendingFormats.hasPending());
+            ok(!pendingFormats.hasPending());
 
-    range = editor.getRange();
+            range = editor.getRange();
 
-    ok(range.collapsed);
+            ok(range.collapsed);
 
-    range.insertNode(editor.document.createElement('a'));
+            range.insertNode(editor.document.createElement('a'));
 
-    equals(editor.value(), 'a<a></a><strong>f</strong>oo');
-});
+            equals(editor.value(), 'a<a></a><strong>f</strong>oo');
+        });
 
-test('isPending() returns true if specified format is pending', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('isPending() returns true if specified format is pending', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle({ name: 'bold', params: undefined });
+            pendingFormats.toggle({ name: 'bold', params: undefined });
 
-    ok(pendingFormats.isPending('bold'));
+            ok(pendingFormats.isPending('bold'));
 
-    pendingFormats.clear();
+            pendingFormats.clear();
 
-    ok(!pendingFormats.isPending('bold'));
-});
+            ok(!pendingFormats.isPending('bold'));
+        });
 
-test('getPending() returns specified format if it is pending', function() {
-    var pendingFormats = new PendingFormats(editor);
+        test('getPending() returns specified format if it is pending', function() {
+            var pendingFormats = new PendingFormats(editor);
 
-    var format = { name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command };
+            var format = { name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command };
 
-    pendingFormats.toggle(format);
+            pendingFormats.toggle(format);
 
-    equals(pendingFormats.getPending('fontsize'), format);
-});
+            equals(pendingFormats.getPending('fontsize'), format);
+        });
 
-</script>
+    </script>
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+    <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
 
 </body>
 </html>
