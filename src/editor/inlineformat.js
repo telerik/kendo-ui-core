@@ -348,10 +348,15 @@ var FontTool = Tool.extend({
     willDelayExecution: inlineFormatWillDelayExecution,
 
     update: function(ui, nodes, pendingFormats) {
-        var that = this,
-            list = ui.data(that.type),
-            pendingFormat = pendingFormats.getPending(that.name),
-            format = (pendingFormat && pendingFormat.params) ? pendingFormat.params.value : that.finder.getFormat(nodes);
+        var list = ui.data(this.type),
+            pendingFormat = pendingFormats.getPending(this.name),
+            format;
+
+        if (pendingFormat && pendingFormat.options.params) {
+            format = pendingFormat.options.params.value;
+        } else {
+            format = this.finder.getFormat(nodes);
+        }
 
         list.close();
         list.value(format);

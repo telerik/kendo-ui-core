@@ -44,6 +44,7 @@
             });
 
             test('initially fontName should have "inherit" value', function () {
+                editor.value("foo");
 
                 var component = $('select.k-fontSize').data(componentType);
 
@@ -202,7 +203,7 @@
 
                 editor.selectRange(range);
 
-                editor.pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command });
+                editor.pendingFormats.toggle({ name: 'fontsize', options: { params: { value: 'xx-large' } }, command: editor.options.tools.fontSize.command });
 
                 editor.trigger('select');
 
