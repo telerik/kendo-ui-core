@@ -637,6 +637,11 @@
         _focus: function(e) {
             var current = this.select();
 
+            // suppress initial focus state on touch devices (until keyboard is used)
+            if (kendo.support.touch) {
+                return;
+            }
+
             if (!this._focusable(current)) {
                 current = this._clickTarget;
             }
