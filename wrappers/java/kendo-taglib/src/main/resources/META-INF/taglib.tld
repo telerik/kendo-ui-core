@@ -452,7 +452,7 @@ and is about to render it.</description>
         </attribute>
     
         <attribute>
-            <description>Fires when the user has used the mouse or a swipe gesture to drag the chart.</description>
+            <description>Fires when the user has used the mouse or a swipe gesture to drag the chart.The drag operation can be aborted by calling e.preventDefault().</description>
             <name>dragStart</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -488,7 +488,7 @@ and is about to render it.</description>
         </attribute>
     
         <attribute>
-            <description>Fires when the user has used the mousewheel to zoom the chart.</description>
+            <description>Fires when the user has used the mousewheel to zoom the chart.The zoom operation can be aborted by calling e.preventDefault().</description>
             <name>zoomStart</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -524,14 +524,16 @@ and is about to render it.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Specifies the discrete</description>
+            <description>Specifies the discrete baseUnitStep values when
+either baseUnit is set to "fit" or baseUnitStep is set to "auto".The default configuration is as follows:Each setting can be overriden individually.</description>
             <name>autoBaseUnitSteps</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
     
         <attribute>
-            <description>Category index at which the first value axis crosses this axis. (Only for object)</description>
+            <description>Category index at which the first value axis crosses this axis. (Only for object)Category indicies at which the value axes cross the category axis. (Only for array)Note: Specify an index greater than or equal to the number
+of categories to denote the far end of the axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -540,7 +542,9 @@ and is about to render it.</description>
         <attribute>
             <description>The base time interval for the axis.
 The default baseUnit is determined automatically from the minimum difference
-between subsequent categories. Available options:</description>
+between subsequent categories. Available options:Setting baseUnit to "fit" will set such base unit and baseUnitStep
+that the total number of categories does not exceed maxDateGroups.Series data is aggregated for the specified base unit by using the
+series.aggregate function.</description>
             <name>baseUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -548,7 +552,7 @@ between subsequent categories. Available options:</description>
     
         <attribute>
             <description>Sets the step (interval) between categories in base units.
-Specifiying "auto" will set the step to such value that the total number of categories does not exceed</description>
+Specifiying "auto" will set the step to such value that the total number of categories does not exceed maxDateGroups.This option is ignored if baseUnit is set to "fit".</description>
             <name>baseUnitStep</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -577,7 +581,7 @@ Individual color settings for line and labels take priority.</description>
         </attribute>
     
         <attribute>
-            <description>Positions categories and series points on major ticks. This removes the empty space before and after the series.</description>
+            <description>Positions categories and series points on major ticks. This removes the empty space before and after the series.This option is ignored if either bar, column, ohlc or candlestick series are plotted on the axis.</description>
             <name>justified</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -586,7 +590,8 @@ Individual color settings for line and labels take priority.</description>
         <attribute>
             <description>The last date displayed on the axis.
 By default, the minimum date is the same as the last category.
-This is often used in combination with the</description>
+This is often used in combination with the min and roundToBaseUnit configuration options to
+set up a fixed date range.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -594,7 +599,7 @@ This is often used in combination with the</description>
     
         <attribute>
             <description>Specifies the maximum number of groups (categories) to produce when
-either</description>
+either baseUnit is set to "fit" or baseUnitStep is set to "auto".This option is ignored in all other cases.</description>
             <name>maxDateGroups</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -603,7 +608,8 @@ either</description>
         <attribute>
             <description>The first date displayed on the axis.
 By default, the minimum date is the same as the first category.
-This is often used in combination with the</description>
+This is often used in combination with the max and roundToBaseUnit configuration options to
+set up a fixed date range.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -634,7 +640,7 @@ categories are listed from right to left and from top to bottom.</description>
     
         <attribute>
             <description>By default, the first and last dates will be rounded off to the nearest base unit.
-Specifying</description>
+Specifying false for this option will disable this behavior.This option is most useful in combination with explicit min and max dates.It will be ignored if either bar, column, ohlc or candlestick series are plotted on the axis.</description>
             <name>roundToBaseUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -655,7 +661,8 @@ Specifying</description>
         </attribute>
     
         <attribute>
-            <description>Specifies the week start day when</description>
+            <description>Specifies the week start day when baseUnit is set to "weeks".
+Use the kendo.days constants to specify the day by name.</description>
             <name>weekStartDay</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -687,7 +694,7 @@ Specifying</description>
         </attribute>
     
         <attribute>
-            <description>Culture to use for formatting the dates. See</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -829,7 +836,7 @@ Template variables:</description>
 
 
         <attribute>
-            <description>The color of the lines. Any valid CSS color string will work here, including hex and rgb.</description>
+            <description>The color of the lines. Any valid CSS color string will work here, including hex and rgb.Note: This will also effect the major and minor ticks, but not the grid lines.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -932,7 +939,7 @@ on the chart.</description>
     
     <tag>
         <description>Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
-the body of the chart.</description>
+the body of the chart.Note that minor grid lines are not visible by default, therefore none of these settings will take effect with the minor grid lines visibility being set to true.</description>
         <name>chart-categoryAxisItem-minorGridLines</name>
         <tag-class>com.kendoui.taglib.chart.CategoryAxisItemMinorGridLinesTag</tag-class>
         <body-content>empty</body-content>
@@ -940,7 +947,8 @@ the body of the chart.</description>
 
         <attribute>
             <description>The color of the lines. Any valid CSS color string will work here, including hex and
-rgb.</description>
+rgb.Note that this setting has no effect if the visibility of the minor
+grid lines is not set to true.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -961,7 +969,8 @@ rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The width of the lines.</description>
+            <description>The width of the lines.Note that this setting has no effect if the visibility of the minor
+grid lines is not set to true.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -1368,14 +1377,16 @@ Template variables:</description>
     
 
     <tag>
-        <description>The chart panes configuration.</description>
+        <description>The chart panes configuration.Panes are used to split the chart in two or more parts. The panes are ordered from top to bottom.Each axis can be associated with a pane by setting its pane option to the name of the desired pane.
+Axis that don't have specified pane are placed in the top (default) pane.Series are moved to the desired pane by associating them with an axis.</description>
         <name>chart-panes</name>
         <tag-class>com.kendoui.taglib.chart.PanesTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>The chart panes configuration.</description>
+        <description>The chart panes configuration.Panes are used to split the chart in two or more parts. The panes are ordered from top to bottom.Each axis can be associated with a pane by setting its pane option to the name of the desired pane.
+Axis that don't have specified pane are placed in the top (default) pane.Series are moved to the desired pane by associating them with an axis.</description>
         <name>chart-pane</name>
         <tag-class>com.kendoui.taglib.chart.PaneTag</tag-class>
 
@@ -1626,42 +1637,45 @@ hex and rgb.</description>
     
 
     <tag>
-        <description>Array of series definitions.</description>
+        <description>Array of series definitions.The series type is determined by the value of the type field.
+If a type value is missing, the type is assumed to be the one specified in seriesDefaults.Each series type has a different set of options.</description>
         <name>chart-series</name>
         <tag-class>com.kendoui.taglib.chart.SeriesTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Array of series definitions.</description>
+        <description>Array of series definitions.The series type is determined by the value of the type field.
+If a type value is missing, the type is assumed to be the one specified in seriesDefaults.Each series type has a different set of options.</description>
         <name>chart-seriesItem</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemTag</tag-class>
 
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Aggregate function for date series.</description>
+            <description>Aggregate function for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The name of the value axis to use.</description>
+            <description>The name of the value axis to use.** Applicable to area, bar, column, line, ohlc and candlestick series **</description>
             <name>axis</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the point category name.</description>
+            <description>The data field containing the point category name.** Applicable to bubble, donut and pie series. **</description>
             <name>categoryField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the close value.</description>
+            <description>The data field containing the close value.** Available for candlestick and ohlc series only **</description>
             <name>closeField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -1675,14 +1689,14 @@ hex and rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The data field containing the point color.</description>
+            <description>The data field containing the point color.** Applicable for bar, column, bubble, donut, pie, candlestick and ohlc series. **</description>
             <name>colorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The series line dash type.</description>
+            <description>The series line dash type.** Applicable only to line and scatterLine series **</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -1696,21 +1710,21 @@ hex and rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The series color when open value is smoller then close value.</description>
+            <description>The series color when open value is smoller then close value.** Available for candlestick series only **</description>
             <name>downColor</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the body color.</description>
+            <description>The data field containing the body color.** Available for candlestick series only **</description>
             <name>downColorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing a boolean value that indicates if the sector is exploded.</description>
+            <description>The data field containing a boolean value that indicates if the sector is exploded.** Available for donut and pie series **</description>
             <name>explodeField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -1724,70 +1738,70 @@ hex and rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The distance between category clusters.</description>
+            <description>The distance between category clusters.** Applicable for bar, column, candlestick and ohlc series. **</description>
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>Name template for auto-generated series when binding to grouped data.</description>
+            <description>Name template for auto-generated series when binding to grouped data.Template variables:</description>
             <name>groupNameTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the high value.</description>
+            <description>The data field containing the high value.** Available for candlestick and ohlc series only **</description>
             <name>highField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The the size of the donut hole.</description>
+            <description>The the size of the donut hole.** Available for donut series only. **</description>
             <name>holeSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>Line options.</description>
+            <description>Line options.** Applicable to area, candlestick and ohlc series. **</description>
             <name>line</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the low value.</description>
+            <description>The data field containing the low value.** Available for candlestick and ohlc series **</description>
             <name>lowField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The margin around each donut series (ring)</description>
+            <description>The margin around each donut series (ring)** Applicable only to donut series **</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>The max size of the marker.</description>
+            <description>The max size of the marker.** Applicable only to bubble series. **</description>
             <name>maxSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>The min size of the marker.</description>
+            <description>The min size of the marker.** Applicable only to bubble series. **</description>
             <name>minSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>Configures the behavior for handling missing values.</description>
+            <description>Configures the behavior for handling missing values.** Available for area, line and scatterLine series **</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -1808,14 +1822,14 @@ hex and rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The data field containing the open value.</description>
+            <description>The data field containing the open value.** Available for candlestick and ohlc series **</description>
             <name>openField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The padding around the chart (equal on all sides).</description>
+            <description>The padding around the chart (equal on all sides).** Available for donut and pie series. **</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -1823,21 +1837,21 @@ hex and rgb.</description>
     
         <attribute>
             <description>The size (or radius) of the series in pixels.
-If not specified, the available space is split evenly between the series.</description>
+If not specified, the available space is split evenly between the series.Available for donut series only.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the bubble size value.</description>
+            <description>The data field containing the bubble size value.** Applicable only to bubble series. **</description>
             <name>sizeField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Space between points as proportion of the point width.</description>
+            <description>Space between points as proportion of the point width.** Available for bar, column, candlestick and ohlc series. **</description>
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -1852,7 +1866,7 @@ If not specified, the available space is split evenly between the series.</descr
         </attribute>
     
         <attribute>
-            <description>The start angle of the first segment.</description>
+            <description>The start angle of the first segment.Available for donut and pie series.</description>
             <name>startAngle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -1866,42 +1880,42 @@ If not specified, the available space is split evenly between the series.</descr
         </attribute>
     
         <attribute>
-            <description>A boolean value indicating whether to show the point category name in the legend.</description>
+            <description>A boolean value indicating whether to show the point category name in the legend.** Available for bubble and pie series. **</description>
             <name>visibleInLegendField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The line width.</description>
+            <description>The line width.** Available for area, line and scatterLine series **</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>The name of the X axis to use.</description>
+            <description>The name of the X axis to use.** Available for bubble, scatter and scatterLine series. **</description>
             <name>xaxis</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the X value.</description>
+            <description>The data field containing the X value.** Available for bubble, scatter and scatterLine series. **</description>
             <name>xfield</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The name of the Y axis to use.</description>
+            <description>The name of the Y axis to use.** Available for bubble, scatter and scatterLine series. **</description>
             <name>yaxis</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the Y value.</description>
+            <description>The data field containing the Y value.** Available for bubble, scatter and scatterLine series. **</description>
             <name>yfield</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -1912,7 +1926,7 @@ If not specified, the available space is split evenly between the series.</descr
 
 
     <tag>
-        <description>The border of the points.</description>
+        <description>The border of the points.** Applicable to bar, column, bubble, donut, pie, ohlc and candlestick series **</description>
         <name>chart-seriesItem-border</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemBorderTag</tag-class>
         <body-content>empty</body-content>
@@ -1945,7 +1959,7 @@ If not specified, the available space is split evenly between the series.</descr
 
     
     <tag>
-        <description>The label connectors options.</description>
+        <description>The label connectors options.** Applicable to donut and pie series. **</description>
         <name>chart-seriesItem-connectors</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemConnectorsTag</tag-class>
         <body-content>empty</body-content>
@@ -1978,14 +1992,14 @@ If not specified, the available space is split evenly between the series.</descr
 
     
     <tag>
-        <description>Configures the appearance of highlighted points.</description>
+        <description>Configures the appearance of highlighted points.** Applicable to bubble, pie, candlestick and ohlc series. **</description>
         <name>chart-seriesItem-highlight</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightTag</tag-class>
         <body-content>JSP</body-content>
 
 
         <attribute>
-            <description>The highlight color.</description>
+            <description>The highlight color.** Available only for pie series **</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -2035,7 +2049,7 @@ If not specified, the available space is split evenly between the series.</descr
 
     
     <tag>
-        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.** Available only for candlestick series **</description>
         <name>chart-seriesItem-highlight-line</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightLineTag</tag-class>
         <body-content>empty</body-content>
@@ -2077,7 +2091,7 @@ If not specified, the available space is split evenly between the series.</descr
 
 
         <attribute>
-            <description>Defines the alignment of the labels.</description>
+            <description>Defines the alignment of the labels.** Available for donut and pie series. **</description>
             <name>align</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -2098,7 +2112,7 @@ If not specified, the available space is split evenly between the series.</descr
         </attribute>
     
         <attribute>
-            <description>The distance of the labels.</description>
+            <description>The distance of the labels.** Available for donut and pie series. **</description>
             <name>distance</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -2199,7 +2213,7 @@ If not specified, the available space is split evenly between the series.</descr
     
     
     <tag>
-        <description>Line options.</description>
+        <description>Line options.** Applicable to area, candlestick and ohlc series. **</description>
         <name>chart-seriesItem-line</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemLineTag</tag-class>
         <body-content>empty</body-content>
@@ -2232,7 +2246,7 @@ If not specified, the available space is split evenly between the series.</descr
 
     
     <tag>
-        <description>Marker options.</description>
+        <description>Marker options.** Applicable to area, line, scatter and scatterLine series **</description>
         <name>chart-seriesItem-markers</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersTag</tag-class>
         <body-content>JSP</body-content>
@@ -2298,7 +2312,7 @@ If not specified, the available space is split evenly between the series.</descr
 
     
     <tag>
-        <description>The settings for negative values.</description>
+        <description>The settings for negative values.** Applicable only to bubble series. **</description>
         <name>chart-seriesItem-negativeValues</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemNegativeValuesTag</tag-class>
         <body-content>empty</body-content>
@@ -2331,7 +2345,7 @@ If not specified, the available space is split evenly between the series.</descr
 
 
         <attribute>
-            <description>The gradient name.</description>
+            <description>The gradient name.Available options:</description>
             <name>gradient</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -2654,7 +2668,7 @@ Template variables:</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Value at which the category axis crosses this axis. (Only for object)</description>
+            <description>Value at which the category axis crosses this axis. (Only for object)Value indicies at which the category axes cross the value axis. (Only for array)Date at which the category axis crosses this axis. (Only for date)</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -2677,7 +2691,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
     
         <attribute>
             <description>The maximum value of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the min configuration option.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -2685,7 +2699,7 @@ This is often used in combination with the</description>
     
         <attribute>
             <description>The minimum value of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the max configuration option.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -2994,7 +3008,7 @@ body of the chart.</description>
 
 
         <attribute>
-            <description>The color of the lines.</description>
+            <description>The color of the lines.Note that this has no effect if the visibility of the minor grid lines is not set to true.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -3015,7 +3029,7 @@ body of the chart.</description>
         </attribute>
     
         <attribute>
-            <description>The width of the lines.</description>
+            <description>The width of the lines.Note that this settings has no effect if the visibility of the minor grid lines is not set to true.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -3212,7 +3226,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Scatter charts X-axis configuration options.
-Includes</description>
+Includes all valueAxis options in addition to:</description>
         <name>chart-xAxis</name>
         <tag-class>com.kendoui.taglib.chart.XAxisTag</tag-class>
         <body-content>JSP</body-content>
@@ -3220,14 +3234,15 @@ Includes</description>
 
     <tag>
         <description>Scatter charts X-axis configuration options.
-Includes</description>
+Includes all valueAxis options in addition to:</description>
         <name>chart-xAxisItem</name>
         <tag-class>com.kendoui.taglib.chart.XAxisItemTag</tag-class>
 
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
+            <description>Value at which the Y axis crosses this axis. (Only for object)Value indicies at which the Y axes cross the value axis. (Only for array)Date at which the Y axis crosses this axis. (Only for date)Note: Specify a value greater than or equal to the
+axis maximum value to denote the far end of the axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -3258,7 +3273,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
     
         <attribute>
             <description>The end date of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the min configuration option.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -3266,7 +3281,7 @@ This is often used in combination with the</description>
     
         <attribute>
             <description>The maximum value of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the max configuration option.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -3311,7 +3326,8 @@ values increase from right to left and from top to bottom.</description>
         </attribute>
     
         <attribute>
-            <description>The axis type.</description>
+            <description>The axis type.Note: The Chart will automatically switch to a date axis if the series X value
+is of type Date. Specify type explicitly when such behavior is undesired.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -3351,7 +3367,7 @@ hex and rgb</description>
         </attribute>
     
         <attribute>
-            <description>Culture to use for formatting the dates. See</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -3746,7 +3762,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Scatter charts Y-axis configuration options.
-Includes</description>
+Includes all valueAxis options in addition to:</description>
         <name>chart-yAxis</name>
         <tag-class>com.kendoui.taglib.chart.YAxisTag</tag-class>
         <body-content>JSP</body-content>
@@ -3754,14 +3770,15 @@ Includes</description>
 
     <tag>
         <description>Scatter charts Y-axis configuration options.
-Includes</description>
+Includes all valueAxis options in addition to:</description>
         <name>chart-yAxisItem</name>
         <tag-class>com.kendoui.taglib.chart.YAxisItemTag</tag-class>
 
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
+            <description>Value at which the Y axis crosses this axis. (Only for object)Value indicies at which the Y axes cross the value axis. (Only for array)Date at which the Y axis crosses this axis. (Only for date)Note: Specify a value greater than or equal to the
+axis maximum value to denote the far end of the axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -3792,7 +3809,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
     
         <attribute>
             <description>The end date of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the min configuration option.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -3800,7 +3817,7 @@ This is often used in combination with the</description>
     
         <attribute>
             <description>The maximum value of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the max configuration option.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -3845,7 +3862,8 @@ values increase from right to left and from top to bottom.</description>
         </attribute>
     
         <attribute>
-            <description>The axis type.</description>
+            <description>The axis type.Note: The Chart will automatically switch to a date axis if the series X value
+is of type Date. Specify type explicitly when such behavior is undesired.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -3885,7 +3903,7 @@ hex and rgb</description>
         </attribute>
     
         <attribute>
-            <description>Culture to use for formatting the dates. See</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -4297,7 +4315,7 @@ and is about to render it.</description>
     
 
     <tag>
-        <description>Fires when the user has used the mouse or a swipe gesture to drag the chart.</description>
+        <description>Fires when the user has used the mouse or a swipe gesture to drag the chart.The drag operation can be aborted by calling e.preventDefault().</description>
         <name>chart-dragStart</name>
         <tag-class>com.kendoui.taglib.chart.DragStartFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -4345,7 +4363,7 @@ and is about to render it.</description>
     
 
     <tag>
-        <description>Fires when the user has used the mousewheel to zoom the chart.</description>
+        <description>Fires when the user has used the mousewheel to zoom the chart.The zoom operation can be aborted by calling e.preventDefault().</description>
         <name>chart-zoomStart</name>
         <tag-class>com.kendoui.taglib.chart.ZoomStartFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -4383,7 +4401,9 @@ and is about to render it.</description>
         </attribute>
 
         <attribute>
-            <description>Applicable only for the HSV selector (that is, when</description>
+            <description>Applicable only for the HSV selector (that is, when pallete is
+null).  This specifies whether the "Apply" / "Cancel" buttons are to
+be displayed in the drop-down HSV picker.</description>
             <name>buttons</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -4407,14 +4427,18 @@ sense for your colors.</description>
         </attribute>
     
         <attribute>
-            <description>Only for the HSV selector.  If</description>
+            <description>Only for the HSV selector.  If true, the widget will display the
+opacity slider.  Note that currently in HTML5 the <input
+type="color"> does not support opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>When a non-null</description>
+            <description>When a non-null palette argument is supplied, the drop-down will be
+a simple color picker.  The following are supported:If palette is missing or null, the widget will display the HSV
+selector.</description>
             <name>palette</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -4438,7 +4462,10 @@ specified, the HTML for the element will look like this:</description>
         </attribute>
     
         <attribute>
-            <description>The initially selected color.  This can be a string supported by</description>
+            <description>The initially selected color.  This can be a string supported by
+Color.parse or a Color object (see below).  Note that when
+initializing the widget from an <input> element, the initial color
+will be decided by the field instead.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -4792,14 +4819,14 @@ original value.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Enables (</description>
+            <description>Enables (true) or disables (false) the automatic invocation of the sync() method for each change made.</description>
             <name>autoSync</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Enables (</description>
+            <description>Enables (true) or disables (false) batch mode.</description>
             <name>batch</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -4834,28 +4861,29 @@ original value.</description>
         </attribute>
     
         <attribute>
-            <description>Determines if filtering of the data is handled on the server. By default filtering is performed client-side.</description>
+            <description>Determines if filtering of the data is handled on the server. By default filtering is performed client-side.By default, a filter object is sent to the server with the query string in the following form:Possible values for operator include:</description>
             <name>serverFiltering</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Determines if grouping of the data is handled on the server. By default grouping is performed client-side.</description>
+            <description>Determines if grouping of the data is handled on the server. By default grouping is performed client-side.By default, a group object is sent to the server with the query string in the following form:It is possible to modify these parameters by using the parameterMap function found on the transport.</description>
             <name>serverGrouping</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Determines if paging of the data is on the server. By default paging is performed client-side. If</description>
+            <description>Determines if paging of the data is on the server. By default paging is performed client-side. If serverPaging is enabled the
+total number of data items should also be returned in the response. Use the schema.total setting to customize that.The following options are sent to the server as part of the query string by default:</description>
             <name>serverPaging</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Determines if sorting of the data should is handled on the server. By default sorting is performed client-side.</description>
+            <description>Determines if sorting of the data should is handled on the server. By default sorting is performed client-side.By default, a sort object is sent to the server with the query string in the following form:It is possible to modify these parameters by using the parameterMap function found on the transport.</description>
             <name>serverSorting</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -5052,7 +5080,7 @@ original value.</description>
 
         <attribute>
             <description>Specifies the field from the response which contains the aggregate results. If set to a function - the function will be called to
-return the aggregate results for the current response.</description>
+return the aggregate results for the current response.Result should have the following format:i.e.</description>
             <name>aggregates</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5068,7 +5096,7 @@ return the data items for the current response.</description>
     
         <attribute>
             <description>Specifies the field from the response which contains any errors. If set to a function - the function will be called to
-return the errors for the current response (if present). If there are any errors the</description>
+return the errors for the current response (if present). If there are any errors the error event of the DataSource will be raised.</description>
             <name>errors</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5076,14 +5104,15 @@ return the errors for the current response (if present). If there are any errors
     
         <attribute>
             <description>Specifies the field from the response which contains the groups. If set to a function - the function will be called to
-return the groups for the current response.</description>
+return the groups for the current response.Used instead of the schema.data setting if remote grouping operation is executed.The result should have the following format:</description>
             <name>groups</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Describes the</description>
+            <description>Describes the Model of the DataSource. If set to Object the Model.define method will be used to create the model. Check the documentation of
+ Model.define for the available configuration options.</description>
             <name>model</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -5105,7 +5134,7 @@ return the total number of data items for the current response.</description>
         </attribute>
     
         <attribute>
-            <description>Specify the type of the response - XML or JSON. The only supported values are</description>
+            <description>Specify the type of the response - XML or JSON. The only supported values are "xml" and "json".</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5117,7 +5146,7 @@ return the total number of data items for the current response.</description>
 
     <tag>
         <description>Specifies the field from the response which contains the aggregate results. If set to a function - the function will be called to
-return the aggregate results for the current response.</description>
+return the aggregate results for the current response.Result should have the following format:i.e.</description>
         <name>dataSource-schema-aggregates</name>
         <tag-class>com.kendoui.taglib.datasource.AggregatesFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -5133,7 +5162,7 @@ return the data items for the current response.</description>
     
     <tag>
         <description>Specifies the field from the response which contains any errors. If set to a function - the function will be called to
-return the errors for the current response (if present). If there are any errors the</description>
+return the errors for the current response (if present). If there are any errors the error event of the DataSource will be raised.</description>
         <name>dataSource-schema-errors</name>
         <tag-class>com.kendoui.taglib.datasource.ErrorsFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -5141,7 +5170,7 @@ return the errors for the current response (if present). If there are any errors
     
     <tag>
         <description>Specifies the field from the response which contains the groups. If set to a function - the function will be called to
-return the groups for the current response.</description>
+return the groups for the current response.Used instead of the schema.data setting if remote grouping operation is executed.The result should have the following format:</description>
         <name>dataSource-schema-groups</name>
         <tag-class>com.kendoui.taglib.datasource.GroupsFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -5251,14 +5280,16 @@ return the total number of data items for the current response.</description>
 
 
         <attribute>
-            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>cache</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>The content-type HTTP header sent to the server. Default is</description>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5266,21 +5297,23 @@ return the total number of data items for the current response.</description>
     
         <attribute>
             <description>Data to be send to the server.
-Refer to the</description>
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
     
         <attribute>
-            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The type of request to make (</description>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5299,7 +5332,7 @@ Refer to the</description>
 
     <tag>
         <description>Data to be send to the server.
-Refer to the</description>
+Refer to the jQuery.ajax documentation for further info.</description>
         <name>dataSource-transport-create-data</name>
         <tag-class>com.kendoui.taglib.datasource.DataFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -5321,14 +5354,16 @@ Refer to the</description>
 
 
         <attribute>
-            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>cache</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>The content-type HTTP header sent to the server. Default is</description>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5336,21 +5371,23 @@ Refer to the</description>
     
         <attribute>
             <description>Data to be send to the server.
-Refer to the</description>
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
     
         <attribute>
-            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The type of request to make (</description>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5369,7 +5406,7 @@ Refer to the</description>
 
     <tag>
         <description>Data to be send to the server.
-Refer to the</description>
+Refer to the jQuery.ajax documentation for further info.</description>
         <name>dataSource-transport-destroy-data</name>
         <tag-class>com.kendoui.taglib.datasource.DataFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -5391,14 +5428,16 @@ Refer to the</description>
 
 
         <attribute>
-            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>cache</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>The content-type HTTP header sent to the server. Default is</description>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5406,21 +5445,23 @@ Refer to the</description>
     
         <attribute>
             <description>Data to be send to the server.
-Refer to the</description>
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
     
         <attribute>
-            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The type of request to make (</description>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5439,7 +5480,7 @@ Refer to the</description>
 
     <tag>
         <description>Data to be send to the server.
-Refer to the</description>
+Refer to the jQuery.ajax documentation for further info.</description>
         <name>dataSource-transport-read-data</name>
         <tag-class>com.kendoui.taglib.datasource.DataFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -5461,14 +5502,16 @@ Refer to the</description>
 
 
         <attribute>
-            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter,</description>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>cache</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>The content-type HTTP header sent to the server. Default is</description>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5476,21 +5519,23 @@ Refer to the</description>
     
         <attribute>
             <description>Data to be send to the server.
-Refer to the</description>
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
     
         <attribute>
-            <description>The type of data that you're expecting back from the server. Commonly used values are</description>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The type of request to make (</description>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5509,7 +5554,7 @@ Refer to the</description>
 
     <tag>
         <description>Data to be send to the server.
-Refer to the</description>
+Refer to the jQuery.ajax documentation for further info.</description>
         <name>dataSource-transport-update-data</name>
         <tag-class>com.kendoui.taglib.datasource.DataFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -5604,7 +5649,7 @@ Refer to the</description>
     
         <attribute>
             <description>Specifies the navigation depth. The following
-settings are available for the</description>
+settings are available for the depth value:</description>
             <name>depth</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5647,7 +5692,7 @@ settings are available for the</description>
     
         <attribute>
             <description>Specifies the start view.
-The following settings are available for the</description>
+The following settings are available for the start value:</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5683,7 +5728,8 @@ The following settings are available for the</description>
 
 
     <tag>
-        <description>The animation(s) used for opening and/or closing the pop-up. Setting this value to</description>
+        <description>The animation(s) used for opening and/or closing the pop-up. Setting this value to false
+will disable the animation(s).</description>
         <name>datePicker-animation</name>
         <tag-class>com.kendoui.taglib.datepicker.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -5830,7 +5876,7 @@ the minimum and maximum values.</description>
     
         <attribute>
             <description>Specifies the navigation depth of the calendar. The following
-settings are available for the</description>
+settings are available for the depth value:</description>
             <name>depth</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5880,7 +5926,7 @@ settings are available for the</description>
     
         <attribute>
             <description>Specifies the start view of the calendar.
-The following settings are available for the</description>
+The following settings are available for the start value:</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5923,7 +5969,8 @@ The following settings are available for the</description>
 
 
     <tag>
-        <description>The animation(s) used for opening and/or closing the pop-ups. Setting this value to</description>
+        <description>The animation(s) used for opening and/or closing the pop-ups. Setting this value to false
+will disable the animation(s).</description>
         <name>dateTimePicker-animation</name>
         <tag-class>com.kendoui.taglib.datetimepicker.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -6508,7 +6555,7 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>The field which contains the name of the image/directory</description>
+        <description></description>
         <name>editor-imagebrowser-schema-model-fields</name>
         <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelFieldsTag</tag-class>
         <body-content>JSP</body-content>
@@ -6529,7 +6576,7 @@ the minimum and maximum values.</description>
         </attribute>
     
         <attribute>
-            <description>The field which contains the type of the entry. Either</description>
+            <description>The field which contains the type of the entry. Either f for image or d for directory.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -6605,7 +6652,7 @@ the minimum and maximum values.</description>
     
     
     <tag>
-        <description>The field which contains the type of the entry. Either</description>
+        <description>The field which contains the type of the entry. Either f for image or d for directory.</description>
         <name>editor-imagebrowser-schema-model-fields-type</name>
         <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelFieldsTypeTag</tag-class>
         <body-content>JSP</body-content>
@@ -7194,7 +7241,8 @@ as a collection of required properties, while the insertHtml  tool requires a co
         </attribute>
     
         <attribute>
-            <description>The template for column's header cell. If sorting is enabled, it will be wrapped in a</description>
+            <description>The template for column's header cell. If sorting is enabled, it will be wrapped in a <a class="k-link"> element, so the template should consist of only inline elements
+in order to have valid HTML markup in the Grid.</description>
             <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7836,7 +7884,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
 
 
         <attribute>
-            <description>Enable/disable virtual scrolling. When enabled the grid will display only a single page of data (configured via</description>
+            <description>Enable/disable virtual scrolling. When enabled the grid will display only a single page of data (configured via dataSource.pageSize).</description>
             <name>virtual</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -8846,7 +8894,9 @@ its sub menus to the left.</description>
         </attribute>
     
         <attribute>
-            <description>Specifies how Menu should adjust to screen boundaries. By default the strategy is</description>
+            <description>Specifies how Menu should adjust to screen boundaries. By default the strategy is "fit" for a sub menu with a horizontal parent,
+meaning it will move to fit in screen boundaries in all directions, and "fit flip" for a sub menu with vertical parent, meaning it will fit vertically and flip over
+its parent horizontally. You can also switch off the screen boundary detection completely if you set the popupCollision to false.</description>
             <name>popupCollision</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -8875,7 +8925,8 @@ its sub menus to the left.</description>
 
 
     <tag>
-        <description>A collection of</description>
+        <description>A collection of Animation objects, used to change default animations. A value of false will disable all animations in the widget.Available animations for the Menu are listed below.  Each animation has a reverse options which is used for the close effect by default, but can be over-ridden
+by setting the close animation.  Each animation also has a direction which can be set off the animation (i.e. slideIn:Down).</description>
         <name>menu-animation</name>
         <tag-class>com.kendoui.taglib.menu.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -9173,7 +9224,7 @@ its sub menus to the left.</description>
         </attribute>
     
         <attribute>
-            <description>Instance of kendo DataSource. See the</description>
+            <description>Instance of kendo DataSource. See the kendo.data.DataSource.This option is mandatory because the Pager is tightly connected with DataSource. The pager is UI widget for managing paging over the DataSource. The Pager gets values like page size or total count of items from DataSource.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -9352,14 +9403,16 @@ its sub menus to the left.</description>
         </attribute>
 
         <attribute>
-            <description>A collection of visual animations used when</description>
+            <description>A collection of visual animations used when PanelBar items are exapnd or collapsed through
+user interactions. Setting this option to false will disable all animations.</description>
             <name>animation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Specifies how the</description>
+            <description>Specifies how the PanelBar items are displayed when opened and closed. The following values
+are available:</description>
             <name>expandMode</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -9406,7 +9459,8 @@ its sub menus to the left.</description>
 
 
     <tag>
-        <description>A collection of visual animations used when</description>
+        <description>A collection of visual animations used when PanelBar items are exapnd or collapsed through
+user interactions. Setting this option to false will disable all animations.</description>
         <name>panelBar-animation</name>
         <tag-class>com.kendoui.taglib.panelbar.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -9416,21 +9470,22 @@ its sub menus to the left.</description>
 
 
     <tag>
-        <description>The visual animation(s) that will be used when</description>
+        <description>The visual animation(s) that will be used when PanelBar items are closed.</description>
         <name>panelBar-animation-collapse</name>
         <tag-class>com.kendoui.taglib.panelbar.AnimationCollapseTag</tag-class>
         <body-content>empty</body-content>
 
 
         <attribute>
-            <description>The number of milliseconds used for the visual animation when a</description>
+            <description>The number of milliseconds used for the visual animation when a PanelBar item is closed.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>A whitespace-delimited string of animation effects that are utilized when a</description>
+            <description>A whitespace-delimited string of animation effects that are utilized when a PanelBar item
+is closed. Options include "fadeOut".</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -9456,14 +9511,15 @@ its sub menus to the left.</description>
         </attribute>
     
         <attribute>
-            <description>A whitespace-delimited string of animation effects that are used when an item is expanded. Options include</description>
+            <description>A whitespace-delimited string of animation effects that are used when an item is expanded. Options include
+"expandVertical" and "fadeIn".</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Specifies how the</description>
+            <description></description>
             <name>show</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -10105,14 +10161,14 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         </attribute>
     
         <attribute>
-            <description>The maximum value of the</description>
+            <description>The maximum value of the RangeSlider.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>The minimum value of the</description>
+            <description>The minimum value of the RangeSlider.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -10120,35 +10176,38 @@ handle must be focused). Note: The allied largeStep will also set large tick for
     
         <attribute>
             <description>F
-The orientation of a</description>
+The orientation of a RangeSlider; "horizontal" or
+"vertical".</description>
             <name>orientation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The selection end value of the</description>
+            <description>The selection end value of the RangeSlider.</description>
             <name>selectionEnd</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>The selection start value of the</description>
+            <description>The selection start value of the RangeSlider.</description>
             <name>selectionStart</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>The small step value of the</description>
+            <description>The small step value of the RangeSlider. The underlying value will be changed when the end
+user (1) clicks on the increase or decrease buttons of the RangeSlider, (2) presses the
+arrow keys (the drag handle must be focused), or (3) drags the drag handle.</description>
             <name>smallStep</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>Denotes the location of the tick marks in the</description>
+            <description>Denotes the location of the tick marks in the RangeSlider. The available options are:</description>
             <name>tickPlacement</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10171,14 +10230,14 @@ The orientation of a</description>
 
 
     <tag>
-        <description>Configuration of the</description>
+        <description>Configuration of the RangeSlider tooltip.</description>
         <name>rangeSlider-tooltip</name>
         <tag-class>com.kendoui.taglib.rangeslider.TooltipTag</tag-class>
         <body-content>empty</body-content>
 
 
         <attribute>
-            <description>Disables (</description>
+            <description>Disables (false) or enables (true) the tooltip of the RangeSlider.</description>
             <name>enabled</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -10186,7 +10245,7 @@ The orientation of a</description>
     
         <attribute>
             <description>Format string for the text of the tooltip. Note: The applied format will also influence the appearance of
-the</description>
+the RangeSlider tick labels.</description>
             <name>format</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10237,14 +10296,14 @@ the</description>
         </attribute>
 
         <attribute>
-            <description>The title of the decrease button of the</description>
+            <description>The title of the decrease button of the Slider.</description>
             <name>decreaseButtonTitle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The title of the increase button of the</description>
+            <description>The title of the increase button of the Slider.</description>
             <name>increaseButtonTitle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10259,49 +10318,52 @@ handle must be focused). Note: The allied largeStep will also set large tick for
         </attribute>
     
         <attribute>
-            <description>The maximum value of the</description>
+            <description>The maximum value of the Slider.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>The minimum value of the</description>
+            <description>The minimum value of the Slider.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>The orientation of a</description>
+            <description>The orientation of a Slider: "horizontal" or "vertical".</description>
             <name>orientation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Can be used to show (</description>
+            <description>Can be used to show (true) or hide (false) the
+increase and decrease buttons of a Slider.</description>
             <name>showButtons</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>The small step value of the</description>
+            <description>The small step value of the Slider. The underlying value will be changed when the end user
+(1) clicks on the increase or decrease buttons of the Slider, (2) presses the arrow keys
+(the drag handle must be focused), or (3) drags the drag handle.</description>
             <name>smallStep</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>Denotes the location of the tick marks in the</description>
+            <description>Denotes the location of the tick marks in the Slider. The available options are:</description>
             <name>tickPlacement</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The underlying value of the</description>
+            <description>The underlying value of the Slider.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -10324,14 +10386,15 @@ handle must be focused). Note: The allied largeStep will also set large tick for
 
 
     <tag>
-        <description>Configuration of the</description>
+        <description>Configuration of the Slider tooltip.</description>
         <name>slider-tooltip</name>
         <tag-class>com.kendoui.taglib.slider.TooltipTag</tag-class>
         <body-content>empty</body-content>
 
 
         <attribute>
-            <description>Disables (</description>
+            <description>Disables (false) or enables (true) the tooltip of
+the Slider.</description>
             <name>enabled</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -10339,7 +10402,8 @@ handle must be focused). Note: The allied largeStep will also set large tick for
     
         <attribute>
             <description>Format string for the text of the tooltip. Note: The applied
-format will also influence the appearance of the</description>
+format will also influence the appearance of the Slider
+tick labels.</description>
             <name>format</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10390,7 +10454,7 @@ format will also influence the appearance of the</description>
         </attribute>
 
         <attribute>
-            <description>Specifies the orientation of the</description>
+            <description>Specifies the orientation of the Splitter.</description>
             <name>orientation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10445,14 +10509,14 @@ format will also influence the appearance of the</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Specifies whether a pane is initially collapsed (</description>
+            <description>Specifies whether a pane is initially collapsed (true) or expanded (true).</description>
             <name>collapsed</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Specifies whether a pane is collapsible (</description>
+            <description>Specifies whether a pane is collapsible (true) or not collapsible (false).</description>
             <name>collapsible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -10482,14 +10546,14 @@ size of a resized pane cannot be less than the defined minimum size.</descriptio
         </attribute>
     
         <attribute>
-            <description>Specifies whether a pane is resizable (</description>
+            <description>Specifies whether a pane is resizable (true) or not resizable (false).</description>
             <name>resizable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Specifies whether a pane is scrollable (</description>
+            <description>Specifies whether a pane is scrollable (true) or not scrollable (false).</description>
             <name>scrollable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -10497,7 +10561,7 @@ size of a resized pane cannot be less than the defined minimum size.</descriptio
     
         <attribute>
             <description>Specifies the size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). Note: This
-value must not exceed</description>
+value must not exceed panes.max or be less then panes.min.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10574,7 +10638,7 @@ value must not exceed</description>
     
         <attribute>
             <description>The field containing the point date.
-It is used as a default</description>
+It is used as a default field for all date axes, including the navigator pane.The data item field value must be either:</description>
             <name>dateField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10620,14 +10684,16 @@ It is used as a default</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Specifies the discrete</description>
+            <description>Specifies the discrete baseUnitStep values when
+either baseUnit is set to "fit" or baseUnitStep is set to "auto".The default configuration is as follows:Each setting can be overriden individually.</description>
             <name>autoBaseUnitSteps</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
     
         <attribute>
-            <description>Category index at which the first value axis crosses this axis. (Only for object)</description>
+            <description>Category index at which the first value axis crosses this axis. (Only for object)Category indicies at which the value axes cross the category axis. (Only for array)Note: Specify an index greater than or equal to the number
+of categories to denote the far end of the axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -10636,7 +10702,9 @@ It is used as a default</description>
         <attribute>
             <description>The base time interval for the axis.
 The default baseUnit is determined automatically from the minimum difference
-between subsequent categories. Available options:</description>
+between subsequent categories. Available options:Setting baseUnit to "fit" will set such base unit and baseUnitStep
+that the total number of categories does not exceed maxDateGroups.Series data is aggregated for the specified base unit by using the
+series.aggregate function.</description>
             <name>baseUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10644,7 +10712,7 @@ between subsequent categories. Available options:</description>
     
         <attribute>
             <description>Sets the step (interval) between categories in base units.
-Specifiying "auto" will set the step to such value that the total number of categories does not exceed</description>
+Specifiying "auto" will set the step to such value that the total number of categories does not exceed maxDateGroups.This option is ignored if baseUnit is set to "fit".</description>
             <name>baseUnitStep</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -10673,7 +10741,7 @@ Individual color settings for line and labels take priority.</description>
         </attribute>
     
         <attribute>
-            <description>Positions categories and series points on major ticks. This removes the empty space before and after the series.</description>
+            <description>Positions categories and series points on major ticks. This removes the empty space before and after the series.This option is ignored if either column, ohlc or candlestick series are plotted on the axis.</description>
             <name>justified</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -10682,7 +10750,8 @@ Individual color settings for line and labels take priority.</description>
         <attribute>
             <description>The last date displayed on the axis.
 By default, the minimum date is the same as the last category.
-This is often used in combination with the</description>
+This is often used in combination with the min and roundToBaseUnit configuration options to
+set up a fixed date range.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -10690,7 +10759,7 @@ This is often used in combination with the</description>
     
         <attribute>
             <description>Specifies the maximum number of groups (categories) to produce when
-either</description>
+either baseUnit is set to "fit" or baseUnitStep is set to "auto".This option is ignored in all other cases.</description>
             <name>maxDateGroups</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -10699,7 +10768,8 @@ either</description>
         <attribute>
             <description>The first date displayed on the axis.
 By default, the minimum date is the same as the first category.
-This is often used in combination with the</description>
+This is often used in combination with the max and roundToBaseUnit configuration options to
+set up a fixed date range.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -10730,7 +10800,7 @@ categories are listed from right to left and from top to bottom.</description>
     
         <attribute>
             <description>By default, the first and last dates will be rounded off to the nearest base unit.
-Specifying</description>
+Specifying false for this option will disable this behavior.This option is most useful in combination with explicit min and max dates.It will be ignored if either column, ohlc or candlestick series are plotted on the axis.</description>
             <name>roundToBaseUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -10751,7 +10821,8 @@ Specifying</description>
         </attribute>
     
         <attribute>
-            <description>Specifies the week start day when</description>
+            <description>Specifies the week start day when baseUnit is set to "weeks".
+Use the kendo.days constants to specify the day by name.</description>
             <name>weekStartDay</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -10783,7 +10854,7 @@ Specifying</description>
         </attribute>
     
         <attribute>
-            <description>Culture to use for formatting the dates. See</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10925,7 +10996,7 @@ Template variables:</description>
 
 
         <attribute>
-            <description>The color of the lines. Any valid CSS color string will work here, including hex and rgb.</description>
+            <description>The color of the lines. Any valid CSS color string will work here, including hex and rgb.Note: This will also effect the major and minor ticks, but not the grid lines.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11028,7 +11099,7 @@ on the chart.</description>
     
     <tag>
         <description>Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
-the body of the chart.</description>
+the body of the chart.Note that minor grid lines are not visible by default, therefore none of these settings will take effect with the minor grid lines visibility being set to true.</description>
         <name>stockChart-categoryAxisItem-minorGridLines</name>
         <tag-class>com.kendoui.taglib.stockchart.CategoryAxisItemMinorGridLinesTag</tag-class>
         <body-content>empty</body-content>
@@ -11036,7 +11107,8 @@ the body of the chart.</description>
 
         <attribute>
             <description>The color of the lines. Any valid CSS color string will work here, including hex and
-rgb.</description>
+rgb.Note that this setting has no effect if the visibility of the minor
+grid lines is not set to true.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11057,7 +11129,8 @@ rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The width of the lines.</description>
+            <description>The width of the lines.Note that this setting has no effect if the visibility of the minor
+grid lines is not set to true.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -11450,7 +11523,8 @@ Any valid CSS color string will work here, including hex and rgb.</description>
         <attribute>
             <description>The template of the labels.
 Template variables:
-*</description>
+*   text - the text the legend item.
+*   series - the data series.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11475,7 +11549,7 @@ Template variables:
 
 
     <tag>
-        <description>Specifies the initially selected range.</description>
+        <description>Specifies the initially selected range.The full range of values is shown if no range is specified.</description>
         <name>stockChart-navigator-select</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSelectTag</tag-class>
         <body-content>empty</body-content>
@@ -11501,35 +11575,36 @@ Template variables:
 
     
     <tag>
-        <description>Array of series definitions.</description>
+        <description>Array of series definitions.Accepts the same options as the root series collection.Omitting the array and specifying a single series is also acceptable.</description>
         <name>stockChart-navigator-series</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Array of series definitions.</description>
+        <description>Array of series definitions.Accepts the same options as the root series collection.Omitting the array and specifying a single series is also acceptable.</description>
         <name>stockChart-navigator-seriesItem</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemTag</tag-class>
 
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Aggregate function for date series.</description>
+            <description>Aggregate function for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The name of the value axis to use.</description>
+            <description>The name of the value axis to use.** Applicable to area, column, line, ohlc and candlestick series **</description>
             <name>axis</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the close value.</description>
+            <description>The data field containing the close value.** Available for candlestick and ohlc series only **</description>
             <name>closeField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11543,14 +11618,14 @@ Template variables:
         </attribute>
     
         <attribute>
-            <description>The data field containing the point color.</description>
+            <description>The data field containing the point color.** Applicable for column, candlestick and ohlc series. **</description>
             <name>colorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The series line dash type.</description>
+            <description>The series line dash type.** Applicable only to line series **</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11564,14 +11639,14 @@ Template variables:
         </attribute>
     
         <attribute>
-            <description>The series color when open value is smoller then close value.</description>
+            <description>The series color when open value is smoller then close value.** Available for candlestick series only **</description>
             <name>downColor</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the body color.</description>
+            <description>The data field containing the body color.** Available for candlestick series only **</description>
             <name>downColorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11585,42 +11660,42 @@ Template variables:
         </attribute>
     
         <attribute>
-            <description>The distance between category clusters.</description>
+            <description>The distance between category clusters.** Applicable for column, candlestick and ohlc series. **</description>
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>Name template for auto-generated series when binding to grouped data.</description>
+            <description>Name template for auto-generated series when binding to grouped data.Template variables:</description>
             <name>groupNameTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the high value.</description>
+            <description>The data field containing the high value.** Available for candlestick and ohlc series only **</description>
             <name>highField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Line options.</description>
+            <description>Line options.** Applicable to area, candlestick and ohlc series. **</description>
             <name>line</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the low value.</description>
+            <description>The data field containing the low value.** Available for candlestick and ohlc series **</description>
             <name>lowField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Configures the behavior for handling missing values.</description>
+            <description>Configures the behavior for handling missing values.** Applicable for area and line series. **</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11641,14 +11716,14 @@ Template variables:
         </attribute>
     
         <attribute>
-            <description>The data field containing the open value.</description>
+            <description>The data field containing the open value.** Available for candlestick and ohlc series **</description>
             <name>openField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Space between points as proportion of the point width.</description>
+            <description>Space between points as proportion of the point width.Available for column, candlestick and ohlc series.</description>
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -11670,7 +11745,7 @@ Available for column series.</description>
         </attribute>
     
         <attribute>
-            <description>The line width.</description>
+            <description>The line width.** Applicable for area and line series. **</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -11681,7 +11756,7 @@ Available for column series.</description>
 
 
     <tag>
-        <description>The border of the points.</description>
+        <description>The border of the points.** Applicable to column, ohlc and candlestick series **</description>
         <name>stockChart-navigator-seriesItem-border</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemBorderTag</tag-class>
         <body-content>empty</body-content>
@@ -11714,14 +11789,14 @@ Available for column series.</description>
 
     
     <tag>
-        <description>Configures the appearance of highlighted points.</description>
+        <description>Configures the appearance of highlighted points.** Applicable to candlestick and ohlc series. **</description>
         <name>stockChart-navigator-seriesItem-highlight</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemHighlightTag</tag-class>
         <body-content>JSP</body-content>
 
 
         <attribute>
-            <description>The highlight color.</description>
+            <description>The highlight color.** Available only for pie series **</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11771,7 +11846,7 @@ Available for column series.</description>
 
     
     <tag>
-        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.** Available only for candlestick series **</description>
         <name>stockChart-navigator-seriesItem-highlight-line</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemHighlightLineTag</tag-class>
         <body-content>empty</body-content>
@@ -11921,7 +11996,7 @@ Available for column series.</description>
     
     
     <tag>
-        <description>Line options.</description>
+        <description>Line options.** Applicable to area, candlestick and ohlc series. **</description>
         <name>stockChart-navigator-seriesItem-line</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemLineTag</tag-class>
         <body-content>empty</body-content>
@@ -11954,7 +12029,7 @@ Available for column series.</description>
 
     
     <tag>
-        <description>Marker options.</description>
+        <description>Marker options.** Applicable for area and line series. **</description>
         <name>stockChart-navigator-seriesItem-markers</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemMarkersTag</tag-class>
         <body-content>JSP</body-content>
@@ -12027,7 +12102,7 @@ Available for column series.</description>
 
 
         <attribute>
-            <description>The gradient name.</description>
+            <description>The gradient name.Available options:</description>
             <name>gradient</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -12139,14 +12214,16 @@ Template variables:</description>
     
 
     <tag>
-        <description>The chart panes configuration.</description>
+        <description>The chart panes configuration.Panes are used to split the chart in two or more parts. The panes are ordered from top to bottom.Each axis can be associated with a pane by setting its pane option to the name of the desired pane.
+Axis that don't have specified pane are placed in the top (default) pane.Series are moved to the desired pane by associating them with an axis.</description>
         <name>stockChart-panes</name>
         <tag-class>com.kendoui.taglib.stockchart.PanesTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>The chart panes configuration.</description>
+        <description>The chart panes configuration.Panes are used to split the chart in two or more parts. The panes are ordered from top to bottom.Each axis can be associated with a pane by setting its pane option to the name of the desired pane.
+Axis that don't have specified pane are placed in the top (default) pane.Series are moved to the desired pane by associating them with an axis.</description>
         <name>stockChart-pane</name>
         <tag-class>com.kendoui.taglib.stockchart.PaneTag</tag-class>
 
@@ -12397,35 +12474,38 @@ hex and rgb.</description>
     
 
     <tag>
-        <description>Array of series definitions.</description>
+        <description>Array of series definitions.The series type is determined by the value of the type field.
+If a type value is missing, the type is assumed to be the one specified in seriesDefaults.Each series type has a different set of options.</description>
         <name>stockChart-series</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Array of series definitions.</description>
+        <description>Array of series definitions.The series type is determined by the value of the type field.
+If a type value is missing, the type is assumed to be the one specified in seriesDefaults.Each series type has a different set of options.</description>
         <name>stockChart-seriesItem</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemTag</tag-class>
 
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Aggregate function for date series.</description>
+            <description>Aggregate function for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The name of the value axis to use.</description>
+            <description>The name of the value axis to use.** Applicable to area, column, line, ohlc and candlestick series **</description>
             <name>axis</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the close value.</description>
+            <description>The data field containing the close value.** Available for candlestick and ohlc series only **</description>
             <name>closeField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -12439,14 +12519,14 @@ hex and rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The data field containing the point color.</description>
+            <description>The data field containing the point color.** Applicable for column, candlestick and ohlc series. **</description>
             <name>colorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The series line dash type.</description>
+            <description>The series line dash type.** Applicable only to line series **</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -12460,14 +12540,14 @@ hex and rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The series color when open value is smoller then close value.</description>
+            <description>The series color when open value is smoller then close value.** Available for candlestick series only **</description>
             <name>downColor</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the body color.</description>
+            <description>The data field containing the body color.** Available for candlestick series only **</description>
             <name>downColorField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -12481,42 +12561,42 @@ hex and rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The distance between category clusters.</description>
+            <description>The distance between category clusters.** Applicable for column, candlestick and ohlc series. **</description>
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
     
         <attribute>
-            <description>Name template for auto-generated series when binding to grouped data.</description>
+            <description>Name template for auto-generated series when binding to grouped data.Template variables:</description>
             <name>groupNameTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the high value.</description>
+            <description>The data field containing the high value.** Available for candlestick and ohlc series only **</description>
             <name>highField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Line options.</description>
+            <description>Line options.** Applicable to area, candlestick and ohlc series. **</description>
             <name>line</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>The data field containing the low value.</description>
+            <description>The data field containing the low value.** Available for candlestick and ohlc series **</description>
             <name>lowField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Configures the behavior for handling missing values.</description>
+            <description>Configures the behavior for handling missing values.** Applicable for area and line series. **</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -12537,14 +12617,14 @@ hex and rgb.</description>
         </attribute>
     
         <attribute>
-            <description>The data field containing the open value.</description>
+            <description>The data field containing the open value.** Available for candlestick and ohlc series **</description>
             <name>openField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Space between points as proportion of the point width.</description>
+            <description>Space between points as proportion of the point width.Available for column, candlestick and ohlc series.</description>
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -12566,7 +12646,7 @@ Available for column series.</description>
         </attribute>
     
         <attribute>
-            <description>The line width.</description>
+            <description>The line width.** Applicable for area and line series. **</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -12577,7 +12657,7 @@ Available for column series.</description>
 
 
     <tag>
-        <description>The border of the points.</description>
+        <description>The border of the points.** Applicable to column, ohlc and candlestick series **</description>
         <name>stockChart-seriesItem-border</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderTag</tag-class>
         <body-content>empty</body-content>
@@ -12610,14 +12690,14 @@ Available for column series.</description>
 
     
     <tag>
-        <description>Configures the appearance of highlighted points.</description>
+        <description>Configures the appearance of highlighted points.** Applicable to candlestick and ohlc series. **</description>
         <name>stockChart-seriesItem-highlight</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightTag</tag-class>
         <body-content>JSP</body-content>
 
 
         <attribute>
-            <description>The highlight color.</description>
+            <description>The highlight color.** Available only for pie series **</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -12667,7 +12747,7 @@ Available for column series.</description>
 
     
     <tag>
-        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.** Available only for candlestick series **</description>
         <name>stockChart-seriesItem-highlight-line</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightLineTag</tag-class>
         <body-content>empty</body-content>
@@ -12817,7 +12897,7 @@ Available for column series.</description>
     
     
     <tag>
-        <description>Line options.</description>
+        <description>Line options.** Applicable to area, candlestick and ohlc series. **</description>
         <name>stockChart-seriesItem-line</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemLineTag</tag-class>
         <body-content>empty</body-content>
@@ -12850,7 +12930,7 @@ Available for column series.</description>
 
     
     <tag>
-        <description>Marker options.</description>
+        <description>Marker options.** Applicable for area and line series. **</description>
         <name>stockChart-seriesItem-markers</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersTag</tag-class>
         <body-content>JSP</body-content>
@@ -12923,7 +13003,7 @@ Available for column series.</description>
 
 
         <attribute>
-            <description>The gradient name.</description>
+            <description>The gradient name.Available options:</description>
             <name>gradient</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -13246,7 +13326,7 @@ Template variables:</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Value at which the category axis crosses this axis. (Only for object)</description>
+            <description>Value at which the category axis crosses this axis. (Only for object)Value indicies at which the category axes cross the value axis. (Only for array)Date at which the category axis crosses this axis. (Only for date)</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -13269,7 +13349,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
     
         <attribute>
             <description>The maximum value of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the min configuration option.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13277,7 +13357,7 @@ This is often used in combination with the</description>
     
         <attribute>
             <description>The minimum value of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the max configuration option.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13586,7 +13666,7 @@ body of the chart.</description>
 
 
         <attribute>
-            <description>The color of the lines.</description>
+            <description>The color of the lines.Note that this has no effect if the visibility of the minor grid lines is not set to true.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -13607,7 +13687,7 @@ body of the chart.</description>
         </attribute>
     
         <attribute>
-            <description>The width of the lines.</description>
+            <description>The width of the lines.Note that this settings has no effect if the visibility of the minor grid lines is not set to true.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13804,7 +13884,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Scatter charts X-axis configuration options.
-Includes</description>
+Includes all valueAxis options in addition to:</description>
         <name>stockChart-xAxis</name>
         <tag-class>com.kendoui.taglib.stockchart.XAxisTag</tag-class>
         <body-content>JSP</body-content>
@@ -13812,14 +13892,15 @@ Includes</description>
 
     <tag>
         <description>Scatter charts X-axis configuration options.
-Includes</description>
+Includes all valueAxis options in addition to:</description>
         <name>stockChart-xAxisItem</name>
         <tag-class>com.kendoui.taglib.stockchart.XAxisItemTag</tag-class>
 
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
+            <description>Value at which the Y axis crosses this axis. (Only for object)Value indicies at which the Y axes cross the value axis. (Only for array)Date at which the Y axis crosses this axis. (Only for date)Note: Specify a value greater than or equal to the
+axis maximum value to denote the far end of the axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -13850,7 +13931,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
     
         <attribute>
             <description>The end date of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the min configuration option.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -13858,7 +13939,7 @@ This is often used in combination with the</description>
     
         <attribute>
             <description>The maximum value of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the max configuration option.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -13903,7 +13984,8 @@ values increase from right to left and from top to bottom.</description>
         </attribute>
     
         <attribute>
-            <description>The axis type.</description>
+            <description>The axis type.Note: The Chart will automatically switch to a date axis if the series X value
+is of type Date. Specify type explicitly when such behavior is undesired.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -13943,7 +14025,7 @@ hex and rgb</description>
         </attribute>
     
         <attribute>
-            <description>Culture to use for formatting the dates. See</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -14338,7 +14420,7 @@ hex and rgb.</description>
 
     <tag>
         <description>Scatter charts Y-axis configuration options.
-Includes</description>
+Includes all valueAxis options in addition to:</description>
         <name>stockChart-yAxis</name>
         <tag-class>com.kendoui.taglib.stockchart.YAxisTag</tag-class>
         <body-content>JSP</body-content>
@@ -14346,14 +14428,15 @@ Includes</description>
 
     <tag>
         <description>Scatter charts Y-axis configuration options.
-Includes</description>
+Includes all valueAxis options in addition to:</description>
         <name>stockChart-yAxisItem</name>
         <tag-class>com.kendoui.taglib.stockchart.YAxisItemTag</tag-class>
 
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Value at which the Y axis crosses this axis. (Only for object)</description>
+            <description>Value at which the Y axis crosses this axis. (Only for object)Value indicies at which the Y axes cross the value axis. (Only for array)Date at which the Y axis crosses this axis. (Only for date)Note: Specify a value greater than or equal to the
+axis maximum value to denote the far end of the axis.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -14384,7 +14467,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
     
         <attribute>
             <description>The end date of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the min configuration option.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -14392,7 +14475,7 @@ This is often used in combination with the</description>
     
         <attribute>
             <description>The maximum value of the axis.
-This is often used in combination with the</description>
+This is often used in combination with the max configuration option.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -14437,7 +14520,8 @@ values increase from right to left and from top to bottom.</description>
         </attribute>
     
         <attribute>
-            <description>The axis type.</description>
+            <description>The axis type.Note: The Chart will automatically switch to a date axis if the series X value
+is of type Date. Specify type explicitly when such behavior is undesired.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -14477,7 +14561,7 @@ hex and rgb</description>
         </attribute>
     
         <attribute>
-            <description>Culture to use for formatting the dates. See</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -14969,7 +15053,8 @@ tab.</description>
 
 
     <tag>
-        <description>A collection of visual animations used when</description>
+        <description>A collection of visual animations used when TabStrip tab are selected through
+user interactions. Setting this option to false will disable all animations.</description>
         <name>tabStrip-animation</name>
         <tag-class>com.kendoui.taglib.tabstrip.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -15020,14 +15105,15 @@ is closed. By default not specified - uses the opening animation with reverse.</
         </attribute>
     
         <attribute>
-            <description>A whitespace-separated string of animation effects that are used when a new tab is shown. Options include</description>
+            <description>A whitespace-separated string of animation effects that are used when a new tab is shown. Options include
+"expand:vertical" and "fadeIn".</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.</description>
+            <description></description>
             <name>show</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -15333,7 +15419,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
         </attribute>
 
         <attribute>
-            <description>If</description>
+            <description>If true or an object, renders checkboxes within each treeview item.</description>
             <name>checkboxes</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -15348,7 +15434,7 @@ the image URL of the treeview nodes.</description>
         </attribute>
     
         <attribute>
-            <description>The data that the</description>
+            <description>The data that the TreeView will be bound to.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -15379,7 +15465,8 @@ the link URL of the treeview nodes.</description>
         </attribute>
     
         <attribute>
-            <description>Disables (</description>
+            <description>Disables (false) or enables (true) drag-and-drop on the nodes of a
+TreeView.</description>
             <name>dragAndDrop</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -15462,7 +15549,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
 
     <tag>
         <description>A collection of visual animations used when items are expanded or collapsed through user interaction.
-Setting this option to</description>
+Setting this option to false will disable all animations.</description>
         <name>treeView-animation</name>
         <tag-class>com.kendoui.taglib.treeview.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -15486,7 +15573,8 @@ Setting this option to</description>
         </attribute>
     
         <attribute>
-            <description>A whitespace-delimited string of animation effects that are utilized when a</description>
+            <description>A whitespace-delimited string of animation effects that are utilized when a TreeView node
+is collapsed. Options include "fadeOut".</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -15513,14 +15601,15 @@ node is expanded.</description>
         </attribute>
     
         <attribute>
-            <description>A whitespace-delimited string of animation effects that are utilized when a</description>
+            <description>A whitespace-delimited string of animation effects that are utilized when a TreeView node
+is expanded. Options include "expandVertical" and "fadeIn".</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     
         <attribute>
-            <description>If</description>
+            <description></description>
             <name>show</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -15535,7 +15624,7 @@ node is expanded.</description>
     
 
     <tag>
-        <description>If</description>
+        <description>If true or an object, renders checkboxes within each treeview item.</description>
         <name>treeView-checkboxes</name>
         <tag-class>com.kendoui.taglib.treeview.CheckboxesTag</tag-class>
         <body-content>JSP</body-content>
@@ -15725,46 +15814,55 @@ node is expanded.</description>
         </attribute>
 
         <attribute>
-            <description>Enables (</description>
+            <description>Enables (true) or disables (false) an Upload. A disabled
+Upload may be re-enabled via enable().</description>
             <name>enabled</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Enables (</description>
+            <description>Enables (true) or disables (false) the ability to select multiple files.
+If false, users will be able to select only one file at a time. Note: This option does not
+limit the total number of uploaded files in an asynchronous configuration.</description>
             <name>multiple</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Enables (</description>
+            <description>Enables (true) or disables (false) the ability to display a file listing
+for uploading a file(s). Disabling a file listing may be useful you wish to customize the UI; use the
+client-side events to build your own UI.</description>
             <name>showFileList</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
     
         <attribute>
-            <description>Fires when the upload has been cancelled while in progress.</description>
+            <description>Fires when the upload has been cancelled while in progress.Note: The cancel event fires only when the upload is in
+async mode.</description>
             <name>cancel</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     
         <attribute>
-            <description>Fires when all active uploads have completed either successfully or with errors.</description>
+            <description>Fires when all active uploads have completed either successfully or with errors.Note: The complete event fires only when the upload is in
+async mode.</description>
             <name>complete</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     
         <attribute>
-            <description>Fires when an upload / remove operation has failed.</description>
+            <description>Fires when an upload / remove operation has failed.Note: The error event fires only when the upload is in
+async mode.</description>
             <name>error</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     
         <attribute>
-            <description>Fires when upload progress data is available.</description>
+            <description>Fires when upload progress data is available.Note: The progress event fires only when the upload is in
+async mode.</description>
             <name>progress</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -15784,14 +15882,16 @@ occurring.</description>
         </attribute>
     
         <attribute>
-            <description>Fires when an upload / remove operation has been completed successfully.</description>
+            <description>Fires when an upload / remove operation has been completed successfully.Note: The success event fires only when the upload is in
+async mode.</description>
             <name>success</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     
         <attribute>
             <description>Fires when one or more files are about to be uploaded.
-Cancelling the event will prevent the upload.</description>
+Cancelling the event will prevent the upload.Note: The upload event fires only when the upload is in
+async mode.</description>
             <name>upload</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -15801,7 +15901,9 @@ Cancelling the event will prevent the upload.</description>
 
 
     <tag>
-        <description>Configures the ability to upload a file(s) in an asynchronous manner. Please refer to the</description>
+        <description>Configures the ability to upload a file(s) in an asynchronous manner. Please refer to the
+async mode help topic
+for more details.</description>
         <name>upload-async</name>
         <tag-class>com.kendoui.taglib.upload.AsyncTag</tag-class>
         <body-content>empty</body-content>
@@ -15944,7 +16046,8 @@ containing one or more fields with the same name as the original input name.</de
 
 
     <tag>
-        <description>Fires when the upload has been cancelled while in progress.</description>
+        <description>Fires when the upload has been cancelled while in progress.Note: The cancel event fires only when the upload is in
+async mode.</description>
         <name>upload-cancel</name>
         <tag-class>com.kendoui.taglib.upload.CancelFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -15952,7 +16055,8 @@ containing one or more fields with the same name as the original input name.</de
     
 
     <tag>
-        <description>Fires when all active uploads have completed either successfully or with errors.</description>
+        <description>Fires when all active uploads have completed either successfully or with errors.Note: The complete event fires only when the upload is in
+async mode.</description>
         <name>upload-complete</name>
         <tag-class>com.kendoui.taglib.upload.CompleteFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -15960,7 +16064,8 @@ containing one or more fields with the same name as the original input name.</de
     
 
     <tag>
-        <description>Fires when an upload / remove operation has failed.</description>
+        <description>Fires when an upload / remove operation has failed.Note: The error event fires only when the upload is in
+async mode.</description>
         <name>upload-error</name>
         <tag-class>com.kendoui.taglib.upload.ErrorFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -15968,7 +16073,8 @@ containing one or more fields with the same name as the original input name.</de
     
 
     <tag>
-        <description>Fires when upload progress data is available.</description>
+        <description>Fires when upload progress data is available.Note: The progress event fires only when the upload is in
+async mode.</description>
         <name>upload-progress</name>
         <tag-class>com.kendoui.taglib.upload.ProgressFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -15994,7 +16100,8 @@ occurring.</description>
     
 
     <tag>
-        <description>Fires when an upload / remove operation has been completed successfully.</description>
+        <description>Fires when an upload / remove operation has been completed successfully.Note: The success event fires only when the upload is in
+async mode.</description>
         <name>upload-success</name>
         <tag-class>com.kendoui.taglib.upload.SuccessFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -16003,7 +16110,8 @@ occurring.</description>
 
     <tag>
         <description>Fires when one or more files are about to be uploaded.
-Cancelling the event will prevent the upload.</description>
+Cancelling the event will prevent the upload.Note: The upload event fires only when the upload is in
+async mode.</description>
         <name>upload-upload</name>
         <tag-class>com.kendoui.taglib.upload.UploadFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -16034,7 +16142,7 @@ and "Maximize".</description>
     
         <attribute>
             <description>The element that the Window will be appended to.
-Note that this</description>
+Note that this does not constrain the window dragging within the given element.</description>
             <name>appendTo</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -16048,7 +16156,8 @@ Note that this</description>
         </attribute>
     
         <attribute>
-            <description>Enables (</description>
+            <description>Enables (true) or disables (false) the ability for users to move/drag a
+Window.</description>
             <name>draggable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -16104,7 +16213,8 @@ Note that this</description>
         </attribute>
     
         <attribute>
-            <description>Enables (</description>
+            <description>Enables (true) or disables (false) the ability for users to resize a
+Window.</description>
             <name>resizable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -16192,7 +16302,8 @@ has been clicked on a window with static content.</description>
 
 
     <tag>
-        <description>A collection of {Animation} objects, used to change default animations. A value of</description>
+        <description>A collection of {Animation} objects, used to change default animations. A value of false
+will disable all animations in the widget.</description>
         <name>window-animation</name>
         <tag-class>com.kendoui.taglib.window.AnimationTag</tag-class>
         <body-content>JSP</body-content>

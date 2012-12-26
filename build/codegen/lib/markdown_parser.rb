@@ -43,17 +43,10 @@ class MarkdownParser
                                           :result => method_result(index, methods),
                                           :description => section_description(index, methods))
 
-            parameters = methods.slice(index, methods.size)
+            parameters = methods.slice(index + 1, methods.size)
 
-            parameters.each_with_index do |element, index|
-                if element.type == :header && element.options[:level] == 5
+            add_parameters(method, parameters)
 
-                    method.add_parameter(:name => section_name(element),
-                                         :type => option_type(element),
-                                         :description => section_description(index, parameters))
-
-                end
-            end
         end
 
         events = events_section(root)
@@ -71,15 +64,42 @@ class MarkdownParser
 
     private
 
+    def add_parameters(method, parameters)
+        parameters.each_with_index do |element, index|
+
+            level = element.options[:level]
+
+            break if level && level < 4
+
+            if element.type == :header && level == 5
+
+                method.add_parameter(:name => section_name(element),
+                                     :type => option_type(element),
+                                     :description => section_description(index, parameters))
+
+            end
+        end
+    end
+
     def method_result(index, siblings)
-        index = siblings.slice(index, siblings.size).find_index { |e| e.options[:raw_text] == 'Returns' }
+        siblings = siblings.slice(index + 1, siblings.size)
+
+        index = siblings.find_index { |e| e.options[:raw_text] == 'Returns' }
 
         return unless index
 
+        next_heading_index = siblings.find_index { |e| e.type == :header && e.options[:level] < 4 }
+
+        next_heading_index = siblings.size unless next_heading_index
+
+        return unless index < next_heading_index
+
         description = siblings.slice(index, siblings.size).find {|e| e.type == :p}
 
-        { :type => option_type(description),
-          :description => element_text(find_text_child(description)) }
+        {
+            :type => option_type(description),
+            :description => section_description(index, siblings)
+        }
     end
 
     def configuration_section(element)
@@ -129,13 +149,13 @@ class MarkdownParser
     end
 
     def section_name(element)
-        element_text find_text_child(element)
+        element_value find_text_child(element)
     end
 
     def option_type(element)
         child = element.children.find {|e| e.type == :codespan }
 
-        element_text child
+        element_value child
     end
 
     def option_default(element)
@@ -143,16 +163,28 @@ class MarkdownParser
 
         return unless child
 
-        default = element_text find_text_child(child)
+        default = element_value find_text_child(child)
 
 
         default.sub(/default\s*:/i, '').sub('(', '').sub(')', '').strip
     end
 
     def section_description(index, siblings)
-        element = siblings.slice(index, siblings.size).find {|e| e.type == :p}
+        description = ""
 
-        element_text find_text_child(element)
+        siblings.slice(index + 1, siblings.size).each do |element|
+            break if element.type == :header
+
+            if element.type == :p
+                element.children.each_with_index do |child, index|
+                    next if index == 0 && child.type == :codespan
+
+                    description += element_text(child)
+                end
+            end
+        end
+
+        description.strip
     end
 
     def find_text_child(element)
@@ -160,6 +192,14 @@ class MarkdownParser
     end
 
     def element_text(element)
+        if element.children.any?
+            element.children.map { |child| element_text(child) }.join
+        else
+            element.value
+        end
+    end
+
+    def element_value(element)
         element.value.strip if element
     end
 end

@@ -17,10 +17,11 @@ module CodeGen
     class Component
         include Options
 
-        attr_reader :name, :options, :events, :methods
+        attr_reader :full_name, :name, :options, :events, :methods
 
         def initialize(settings)
-            @name = settings[:name].split('.').last
+            @full_name = settings[:name]
+            @name = @full_name.split('.').last
             @options = []
             @events = []
             @methods = []
