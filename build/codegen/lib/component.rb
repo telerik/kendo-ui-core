@@ -17,79 +17,18 @@ module CodeGen
     class Component
         include Options
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         attr_reader :name, :options, :events, :methods
-=======
-        attr_reader :name, :options, :events
->>>>>>> Add generate:java task
-=======
-        attr_reader :name, :options, :events, :methods
->>>>>>> Method parsing from markdown.
 
         def initialize(settings)
             @name = settings[:name].split('.').last
             @options = []
             @events = []
-<<<<<<< HEAD
-<<<<<<< HEAD
-            @methods = []
-=======
             @methods = []
         end
 
         def method_class
             Method
->>>>>>> Method parsing from markdown.
         end
-
-<<<<<<< HEAD
-        def method_class
-            Method
-        end
-=======
-    end
-
-    def composite_options
-        @options.find_all { |option| option.composite? }.sort {|a, b| a.name <=> b.name }
-    end
-
-    def composite_option_class
-        CompositeOption
-    end
-
-    def option_class
-        Option
-    end
-
-    def event_class
-        Event
-    end
-
-    def add_option(settings)
-        name = settings[:name].strip.sub(/\s*type\s*[=:][^\.]*\.?/, '')
-=======
-        end
-
-        def import(metadata)
-            metadata[:options].each do |option|
->>>>>>> Add generate:java task
-
-                @options.delete_if { |o| o.name == option[:name] }
-
-                add_option(option)
-
-<<<<<<< HEAD
-        types = settings[:type]
-
-        return unless types
-
-        type = types.split('|').map { |type| type.strip }.find_all { |t| TYPES.include?(t) }
-
-        return if type.empty?
-
-        parents = @options.find_all { |option| name.start_with?(option.name + '.') && (option.type.include?('Object') || option.type.include?('Array')) }
->>>>>>> Refactor tld generation.
 
         def import(metadata)
             metadata[:options].each do |option|
@@ -109,12 +48,6 @@ module CodeGen
             @methods.push(method)
 
             method
-<<<<<<< HEAD
-=======
-            end
->>>>>>> Add generate:java task
-=======
->>>>>>> Method parsing from markdown.
         end
 
         def add_event(settings)
