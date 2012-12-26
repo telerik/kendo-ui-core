@@ -37,6 +37,19 @@ class MarkdownParserTests < Test::Unit::TestCase
         assert_equal 2, result.options.size
     end
 
+    def test_parse_option_default_value
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Configuration
+
+### boo `String`*(default: true)*
+
+        })
+
+        assert_equal 'true', result.options[0].default
+    end
+
     def test_parse_option_type
         result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete

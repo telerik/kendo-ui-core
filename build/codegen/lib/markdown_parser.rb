@@ -31,6 +31,7 @@ class MarkdownParser
 
             component.add_option(:name => section_name(option),
                                  :type => option_type(option),
+                                 :default => option_default(option),
                                  :description => section_description(index, configuration))
         end
 
@@ -135,6 +136,17 @@ class MarkdownParser
         child = element.children.find {|e| e.type == :codespan }
 
         element_text child
+    end
+
+    def option_default(element)
+        child = element.children.find {|e| e.type == :em }
+
+        return unless child
+
+        default = element_text find_text_child(child)
+
+
+        default.sub(/default\s*:/i, '').sub('(', '').sub(')', '').strip
     end
 
     def section_description(index, siblings)

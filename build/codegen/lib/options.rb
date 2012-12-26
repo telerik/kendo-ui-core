@@ -32,6 +32,8 @@ module CodeGen
 
             description = settings[:description]
 
+            default = settings[:default]
+
             types = settings[:type]
 
             return unless types
@@ -55,6 +57,7 @@ module CodeGen
                     parent.add_option(:name => name,
                                       :type => type,
                                       :recursive => recursive,
+                                      :default => default,
                                       :prefix => parent.name + '.',
                                       :description => description)
                 end
@@ -65,6 +68,7 @@ module CodeGen
                                                :owner => self,
                                                :recursive => recursive,
                                                :type => type,
+                                               :default => default,
                                                :description => description)
 
             end
