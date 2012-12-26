@@ -262,6 +262,15 @@
                 equal($('.k-window').length, 0);
             });
 
+            test("applying substitues spaces with %20", function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                $('#k-editor-image-url').val('foo bar baz');
+                $('.k-dialog-insert').click();
+                equal(editor.value(), '<img alt="" src="foo%20bar%20baz" />')
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
