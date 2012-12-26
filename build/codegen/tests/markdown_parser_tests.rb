@@ -69,10 +69,33 @@ class MarkdownParserTests < Test::Unit::TestCase
 ## Configuration
 
 ### foo `String`
-bar
+
+bar `foo`
+
+bar `foo`
+
         })
 
-        assert_equal 'bar', result.options[0].description
+        assert_equal 'bar foobar foo', result.options[0].description
+    end
+
+    def test_parse_multiple_option_description
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Configuration
+
+### foo `String`
+
+bar `foo`
+
+### bar `String`
+
+bar `foo`
+
+        })
+
+        assert_equal 'bar foo', result.options[0].description
     end
 
     def test_parse_method_from_methods_section

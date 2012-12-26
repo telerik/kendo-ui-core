@@ -73,7 +73,7 @@ $.fn.<%= the_class.plugin %> = function(options) {
     /// &#10;Accepts an object with the following configuration options:
     /// &#10;
 % the_class.options.each do |option|
-    /// &#10;<%= option.name %> — <%= option.type.join('|') %> <%= option.default %>
+    /// &#10;<%= option.name %> — <%= option.type.join('|') %> <% if option.default %>(default: <%= option.default %>)<%end%>
     /// &#10;<%= option.description.strip.gsub(/\n/, "\n/// &#10;").gsub(/<(?:.|\n)*?>/, '') %>
     /// &#10;
 % end
