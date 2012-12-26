@@ -950,7 +950,8 @@ namespace Kendo.Mvc.UI
 
             if (!IsClientBinding)
             {
-                popup.Events["close"] = new ClientHandlerDescriptor { TemplateDelegate = obj => "function(e) { e.preventDefault();" + string.Format("window.location.href = \"{0}\";", cancelUrl) + "}" };
+                popup.Events["activate"] = new ClientHandlerDescriptor { TemplateDelegate = obj => "function(e){this.center();}" };
+                popup.Events["close"] = new ClientHandlerDescriptor { TemplateDelegate = obj => "function(e){e.preventDefault();" + string.Format("window.location.href = \"{0}\";", cancelUrl) + "}" };
             }
             
             if (!popup.Name.HasValue())
