@@ -94,9 +94,11 @@ var ImageCommand = Command.extend({
             options = that.editor.options;
 
         function apply(e) {
+            var element = dialog.element;
+
             that.attributes = {
-                src: $(KEDITORIMAGEURL, dialog.element).val(),
-                alt: $(KEDITORIMAGETITLE, dialog.element).val()
+                src: element.find(KEDITORIMAGEURL).val().replace(/ /g, "%20"),
+                alt: element.find(KEDITORIMAGETITLE).val()
             };
 
             applied = that.insertImage(img, range);

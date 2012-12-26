@@ -37,8 +37,12 @@
                 }
             });
 
+            function setup(content) {
+                editor = textarea.val(content).kendoEditor().data("kendoEditor");
+            }
+
             test("editor value is get from textarea", function() {
-                editor = textarea.val("foo").kendoEditor().data("kendoEditor");
+                setup("foo");
 
                 equal(editor.value(), "foo");
             });
