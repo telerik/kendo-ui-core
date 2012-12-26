@@ -1,4 +1,7 @@
 require 'erb'
+require 'codegen/lib/options'
+require 'codegen/lib/markdown_parser'
+require 'codegen/lib/component'
 
 VS_DOC_TEMPLATE_CONTENTS = File.read(File.join(File.dirname(__FILE__), "vsdoc.js.erb"))
 VS_DOC_TEMPLATE = ERB.new VS_DOC_TEMPLATE_CONTENTS, 0, '%<>'
@@ -129,42 +132,46 @@ def to_heading_tree(file)
     root
 end
 
-def get_vsdoc(sources)
-    classes = []
+module CodeGen::VSDoc
+    class Component < CodeGen::Component
 
-    sources.each do |file|
-        root = to_heading_tree(file).children[0]
-
-        name = root.title
-
-        plugin = name.gsub(/\.(ui|dataviz)/, '').gsub(/\.(.)/) { |match| match[1].upcase }
-
-        the_class = VsDocClass.new(name,  plugin)
-
-        sections = root.children
-
-        methods = sections.find { |section| section.title =~ /Methods/ }
-
-        configuration = sections.find { |section| section.title =~ /Configuration/ }
-
-        if methods
-            methods.children.each do |child|
-                the_class.methods.push VsDocMethod.parse(child)
-            end
+        def real_class?
+            @name =~ /[A-Z]\w+$/
         end
 
-        if configuration
-            configuration.children.each do |child|
-                if config = VsDocConfiguration.parse(child)
-                    the_class.configuration.push config
-                end
-            end
+        def plugin
+            'kendo' + @name
         end
 
-        classes.push(the_class)
+        def method_class
+            Method
+        end
+
+        def methods
+            @methods.find_all { |m| !m.name.include?('.') }
+        end
     end
 
-    classes.sort! {|a, b| a.name <=> b.name }
+    class Method < CodeGen::Method
+
+        def parameters
+            @parameters.find_all { |p| !p.name.include?('.') }
+        end
+
+    end
+end
+
+def get_vsdoc(sources)
+
+    classes = sources.map do |source|
+        parser = CodeGen::MarkdownParser.new
+
+        markdown = File.read(source)
+
+        parser.parse(File.read(source), CodeGen::VSDoc::Component)
+    end
+
+    classes.sort! {|a, b| a.full_name <=> b.full_name }
 
     VS_DOC_TEMPLATE.result(binding)
 end

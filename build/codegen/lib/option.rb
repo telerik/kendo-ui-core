@@ -5,7 +5,7 @@ module CodeGen
 
         def initialize(options)
             @name = options[:name]
-            @description = options[:description]
+            @description = options[:description] || ''
             @type = options[:type]
             @owner = options[:owner]
             @recursive = options[:recursive]

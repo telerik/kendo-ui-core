@@ -152,6 +152,25 @@ Bar
         assert_equal 'Bar', result.methods[0].parameters[0].description
     end
 
+    def test_parse_empty_parameters
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+### bar
+
+#### Parameters
+
+##### baz `String`
+
+        })
+
+        assert_equal 0, result.methods[0].parameters.size
+    end
+
     def test_parse_method_parameter_type
         result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
@@ -169,6 +188,24 @@ Bar
         })
 
         assert_equal 'String', result.methods[0].parameters[0].type
+    end
+
+    def test_method_result_empty
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+### bar
+
+#### Returns
+
+`String` Foo
+        })
+
+        assert_equal nil, result.methods[0].result
     end
 
     def test_parse_method_result_type

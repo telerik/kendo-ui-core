@@ -43,17 +43,10 @@ class MarkdownParser
                                           :result => method_result(index, methods),
                                           :description => section_description(index, methods))
 
-            parameters = methods.slice(index, methods.size)
+            parameters = methods.slice(index + 1, methods.size)
 
-            parameters.each_with_index do |element, index|
-                if element.type == :header && element.options[:level] == 5
+            add_parameters(method, parameters)
 
-                    method.add_parameter(:name => section_name(element),
-                                         :type => option_type(element),
-                                         :description => section_description(index, parameters))
-
-                end
-            end
         end
 
         events = events_section(root)
@@ -71,10 +64,35 @@ class MarkdownParser
 
     private
 
+    def add_parameters(method, parameters)
+        parameters.each_with_index do |element, index|
+
+            level = element.options[:level]
+
+            break if level && level < 4
+
+            if element.type == :header && level == 5
+
+                method.add_parameter(:name => section_name(element),
+                                     :type => option_type(element),
+                                     :description => section_description(index, parameters))
+
+            end
+        end
+    end
+
     def method_result(index, siblings)
-        index = siblings.slice(index, siblings.size).find_index { |e| e.options[:raw_text] == 'Returns' }
+        siblings = siblings.slice(index + 1, siblings.size)
+
+        index = siblings.find_index { |e| e.options[:raw_text] == 'Returns' }
 
         return unless index
+
+        next_heading_index = siblings.find_index { |e| e.type == :header && e.options[:level] < 4 }
+
+        next_heading_index = siblings.size unless next_heading_index
+
+        return unless index < next_heading_index
 
         description = siblings.slice(index, siblings.size).find {|e| e.type == :p}
 
