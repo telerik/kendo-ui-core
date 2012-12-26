@@ -22,12 +22,9 @@ module CodeGen::Java::API
             ArrayOption
         end
 
-<<<<<<< HEAD
         def simple_options
             super.find_all { |option| option.name != 'dataSource' }
         end
-=======
->>>>>>> JSP API generation.
     end
 
     class Component < CodeGen::Java::Component
@@ -40,13 +37,10 @@ module CodeGen::Java::API
 
             markdown += CONFIGURATION.result(binding)
 
-<<<<<<< HEAD
             markdown += COMPOSITE_OPTIONS.result(binding) if composite_options.any?
 
             markdown += EVENTS.result(binding) if events.any?
 
-=======
->>>>>>> JSP API generation.
             markdown
         end
     end
@@ -66,7 +60,6 @@ A JSP tag representing Kendo <%= name %>.
 
 CONFIGURATION = ERB.new(%{
 ## Configuration Attributes
-<<<<<<< HEAD
 <%= simple_options.map { |option| option.to_markdown_attribute }.join %>
 })
 
@@ -120,38 +113,16 @@ EVENT_SECTION = ERB.new(%{
         }
     </script>
 })
-=======
-<% (options + events).each do |option| %><% if option.name != 'dataSource' %>
-<%= option.to_markdown_section %>
-<% end %><% end %>
-})
-    class Event < CodeGen::Java::Event
-        include Options
-
-        def to_markdown_section
-        end
-    end
-
->>>>>>> JSP API generation.
 
     class Option < CodeGen::Java::Option
         include Options
 
-<<<<<<< HEAD
         def to_markdown_attribute
             OPTION_SECTION.result(binding)
         end
     end
 
 OPTION_SECTION = ERB.new(%{
-=======
-        def to_markdown_section
-            OPTION.result(binding)
-        end
-    end
-
-OPTION = ERB.new(%{
->>>>>>> JSP API generation.
 ### <%= name %> `<%= java_type %>`
 <% tag = owner.composite_options.find { |c| c.name == name } %>
 <%= description %><% if tag %> Further configuration is available via [kendo:<%= tag.tag_name %>](#kendo-<%= tag.tag_name %>). <% end %>
@@ -164,7 +135,6 @@ OPTION = ERB.new(%{
         include Options
 
         def to_markdown
-<<<<<<< HEAD
             markdown = METADATA.result(binding)
 
             markdown += COMPOSITE_OPTION_DESCRIPTION.result(binding)
@@ -213,11 +183,6 @@ More documentation is available at [kendo:<%= tag_name %>](<%= namespace %>/<%= 
     </kendo:<%= owner.tag_name %>>
 })
 
-=======
-        end
-    end
-
->>>>>>> JSP API generation.
     class ArrayOption < CompositeOption
         include CodeGen::Array
 
@@ -236,7 +201,6 @@ More documentation is available at [kendo:<%= tag_name %>](<%= namespace %>/<%= 
         end
 
         def component(component)
-<<<<<<< HEAD
             component.delete_ignored
 
             tag(component, "#{@path}#{component.tag_name}.md")
@@ -251,19 +215,6 @@ More documentation is available at [kendo:<%= tag_name %>](<%= namespace %>/<%= 
             File.write(filename, tag.to_markdown.dos)
 
             tag.composite_options.each { |option| tag(option) }
-=======
-            filename = "#{@path}#{component.tag_name.sub(component.namespace + '-', '')}.md"
-
-            $stderr.puts "Updating #{filename}" if VERBOSE
-
-            component.delete_ignored
-
-            File.write(filename, component.to_markdown.dos)
-        end
-
-        def tag(component)
-
->>>>>>> JSP API generation.
         end
     end
 end
