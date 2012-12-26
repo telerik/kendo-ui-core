@@ -20,7 +20,15 @@ module CodeGen::Java
         end
 
         def events
+<<<<<<< HEAD
+<<<<<<< HEAD
             composite = composite_options
+=======
+            composite = unique_composite_options
+>>>>>>> Refactor tld generation.
+=======
+            composite = composite_options
+>>>>>>> Refactor code.
             @options.find_all { |option| option.type.include?('Function') && !composite.any? { |o| o.name == option.name } }
                     .map { |option | event_class.new(:name => option.name, :owner => self, :description => option.description) }
         end

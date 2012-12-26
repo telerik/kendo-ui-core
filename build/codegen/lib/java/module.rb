@@ -31,6 +31,8 @@ module CodeGen::Java
             Option
         end
 
+<<<<<<< HEAD
+<<<<<<< HEAD
         def simple_options
             @options.find_all { |o| !o.composite? }
                     .sort { |a, b| a.name <=> b.name }
@@ -46,6 +48,21 @@ module CodeGen::Java
 
         def tag_class
             super.sub(@owner.name.pascalize, '')
+<<<<<<< HEAD
+=======
+        def unique_composite_options
+            composite_options
+        end
+
+        def unique_options
+=======
+        def simple_options
+>>>>>>> Refactor code.
+            @options.find_all { |o| !o.composite? }
+                    .sort { |a, b| a.name <=> b.name }
+>>>>>>> Refactor jsp generation.
+=======
+>>>>>>> JSP API generation.
         end
 
     end
