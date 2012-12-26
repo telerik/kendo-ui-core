@@ -325,6 +325,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="ColorPicker"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPicker()
+        ///             .Name("ColorPicker")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual ColorPickerBuilder ColorPicker()
+        {
+            return new ColorPickerBuilder(new ColorPicker(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Calendar"/>.
         /// </summary>
         /// <example>
