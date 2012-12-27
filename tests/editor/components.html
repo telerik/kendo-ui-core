@@ -68,7 +68,7 @@
             });
 
             test('colorpicker value returns black when no value has been selected', function() {
-                ok(colorpicker.value().equals('#000000'));
+                equal(colorpicker.value(), '#000000');
             });
 
             test('FontName combobox accepts custom item collections and preserves the default value item', function() {
