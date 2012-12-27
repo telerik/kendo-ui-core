@@ -1,0 +1,73 @@
+// Type definitions for Kendo UI
+
+interface Kendo {
+    ui: Kendo_ui;
+    mobile: Kendo_mobile;
+    dataviz: Kendo_dataviz;
+}
+
+interface Kendo_ui {
+}
+
+interface Kendo_dataviz {
+    ui: Kendo_dataviz_ui;
+}
+
+interface Kendo_dataviz_ui {
+}
+
+interface Kendo_mobile {
+    ui: Kendo_mobile_ui;
+}
+
+interface Kendo_mobile_ui {
+}
+
+% def options(owner)
+% _erbout = ''
+% owner.options.each do |option|
+    <%= option.name %>?: <%= option.type_script_type %>;
+% end
+% _erbout
+% end
+
+% def composite_options(owner)
+% _erbout = ''
+% owner.composite_options.each do |option|
+<%= composite_options(option) %>
+
+interface <%= option.type_script_type %> {
+<%= options(option) %>
+}
+% end
+% _erbout
+% end
+
+% widgets.each do |widget|
+//<%= widget.name %>
+
+interface <%= widget.namespace %> {
+    <%= widget.name %>: <%= widget.type_script_type %>;
+}
+
+interface <%= widget.type_script_type %> {
+    element: JQuery;
+}
+
+<%= composite_options(widget) %>
+
+interface <%= widget.type_script_options_type %> {
+<%= options(widget) %>
+}
+% end
+
+
+interface JQuery {
+% widgets.each do |widget|
+% unless widget.name.include?('Widget')
+    kendo<%= widget.plugin%>(): JQuery;
+
+    kendo<%= widget.plugin%>(options: <%= widget.type_script_options_type%>): JQuery;
+% end
+% end
+}

@@ -3,6 +3,7 @@
    "version": "1.0.0",
    "dependencies": {
        "optimist": "",
+       "typescript": "0.8.1",
        "uglify-js": "2.2.2",
        "cssmin": "",
        "faye": "0.8.3",
