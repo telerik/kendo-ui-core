@@ -2,7 +2,16 @@
 <html>
   <head>
     <title>Color tools tests</title>
-    <script src="load.js"></script>
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/module.js"></script>
+    <script src="../../src/kendo.binder.js"></script>
+    <script src="../../src/kendo.color.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit-runner.js"></script>
+    <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    <link rel="stylesheet/less" href="../../styles/web/kendo.common.less" />
+    <link rel="stylesheet/less" href="../../styles/web/kendo.default.less" />
+    <script src="../../demos/mvc/content/shared/js/less.js"></script>
   </head>
   <body>
     <h1 id="qunit-header">Color tools</h1>
@@ -15,6 +24,37 @@
 
     <div id="x"></div>
 
-    <script src="aria.js"></script>
+    <script>
+        module("Color tools", {
+            setup: function() {
+                cp = $("#x").kendoColorSelectorSimple().data("kendoColorSelectorSimple");
+            },
+            teardown: function() {
+                x.innerHTML = "";
+            }
+        });
+
+        test("Simple color selector renders aria-label for each color", function(){
+            cp.element.find("li.k-item").each(function(){
+                var label = $(this).attr("aria-label");
+                ok(label, "aria-label defined on LI elements"); // label defined
+                var bg = $(this).find("div");
+                var color = kendo.Color.parse(label);
+                bg = kendo.Color.parse(bg.css("background-color"));
+                ok(color && bg && color.equals(bg), "aria-label is same as background color");
+            });
+        });
+
+        test("Simple color selector maintains aria-selected attribute consistent with selection", function(){
+            var items = cp.element.find("li.k-item");
+            for (var i = 0; i < 5; ++i) {
+                var index = Math.floor(items.length * Math.random());
+                var li = $(items[index]);
+                li.click();
+                var a = cp.element.find("li[aria-selected]");
+                ok(a.length == 1 && a[0] === li[0]);
+            }
+        });
+    </script>
   </body>
 </html>
