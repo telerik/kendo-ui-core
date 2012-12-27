@@ -45,7 +45,7 @@ kendo_module({
             }
         },
         options: {
-            value : null
+            value: null
         },
         events: [ "change", "select", "cancel" ],
         color: function(value) {
@@ -198,20 +198,21 @@ kendo_module({
             this.wrapper.focus();
         },
         options: {
-            name    : "ColorSelectorSimple",
-            columns : 10,
-            palette : SIMPLEPALETTE
+            name: "ColorSelectorSimple",
+            columns: 10,
+            palette: SIMPLEPALETTE
         },
-        _template: kendo.template
-        ('<div class="k-colorpicker-popup">' +
-           '<ul class="k-reset">'+
-             '# for(var i = 0; i < colors.length; i++) { #' +
-               '<li #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #">' +
-                 '<div style="background-color:#= colors[i].toCss() #"></div>' +
-               '</li>' +
-             '# } #' +
-           '</ul>' +
-         '</div>')
+        _template: kendo.template(
+            '<div class="k-colorpicker-popup">' +
+                '<ul class="k-reset">'+
+                '# for (var i = 0; i < colors.length; i++) { #' +
+                    '<li #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #">' +
+                        '<div style="background-color:#= colors[i].toCss() #"></div>' +
+                    '</li>' +
+                '# } #' +
+                '</ul>' +
+            '</div>'
+        )
     });
 
     var ColorSelectorHSV = ColorSelectorBase.extend({
@@ -330,11 +331,11 @@ kendo_module({
             ColorSelectorBase.fn.destroy.call(this);
         },
         options: {
-            name     : "ColorSelectorHSV",
-            opacity  : false,
-            buttons  : true,
-            preview  : true,
-            messages : APPLY_CANCEL
+            name: "ColorSelectorHSV",
+            opacity: false,
+            buttons: true,
+            preview: true,
+            messages: APPLY_CANCEL
         },
         _keydown: function(ev) {
             var that = this;
@@ -441,20 +442,21 @@ kendo_module({
         _selectOnHide: function() {
             return this.options.buttons ? null : this._getHSV();
         },
-        _template: kendo.template
-        ('<div class="k-colorpicker-hsv">' +
-           '# if (preview) { #' +
-             '<div class="k-selected-color"><div class="k-selected-color-display"><input spellcheck="false" class="k-color-value" /></div></div>' +
-           '# } #' +
-           '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
-           '<input class="k-hue-slider" />' +
-           '# if (opacity) { #' +
-             '<input class="k-transparency-slider" />' +
-           '# } #' +
-           '# if (buttons) { #' +
-             '<div class="k-controls"><button class="k-button apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
-           '# } #' +
-         '</div>')
+        _template: kendo.template(
+            '<div class="k-colorpicker-hsv">' +
+                '# if (preview) { #' +
+                    '<div class="k-selected-color"><div class="k-selected-color-display"><input spellcheck="false" class="k-color-value" /></div></div>' +
+                '# } #' +
+                '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
+                '<input class="k-hue-slider" />' +
+                '# if (opacity) { #' +
+                    '<input class="k-transparency-slider" />' +
+                '# } #' +
+                '# if (buttons) { #' +
+                    '<div class="k-controls"><button class="k-button apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
+                '# } #' +
+            '</div>'
+        )
     });
 
     /* -----[ color utils ]----- */
@@ -707,6 +709,8 @@ kendo_module({
             if (enable) {
                 wrapper.removeClass("k-state-disabled")
                     .attr("tabIndex", 0)
+                    .on("mouseenter" + NS, function() { wrapper.children(".k-picker-wrap").addClass("k-state-hover") })
+                    .on("mouseleave" + NS, function() { wrapper.children(".k-picker-wrap").removeClass("k-state-hover") })
                     .on(KEYDOWN_NS, bind(that._keydown, that))
                     .on(MOUSEDOWN_NS, ".k-icon", bind(that.toggle, that))
                     .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
@@ -719,28 +723,33 @@ kendo_module({
             }
         },
 
-        _template: kendo.template
-        ('<div class="k-widget k-colorpicker">' +
-           '# if (toolIcon) { #' +
-             '<span class="k-tool-icon #= toolIcon #">' +
-               '<span class="k-selected-color"></span>' +
-             '</span>' +
-           '# } else { #' +
-             '<span class="k-selected-color"></span>' +
-           '# } #' +
-           '<span class="k-icon k-i-arrow-s"></span>' +
-         '</div>'),
+        _template: kendo.template(
+            '<span class="k-widget k-colorpicker k-header">' +
+                '<span class="k-picker-wrap">' +
+                    '# if (toolIcon) { #' +
+                        '<span class="k-tool-icon #= toolIcon #">' +
+                            '<span class="k-selected-color"></span>' +
+                        '</span>' +
+                    '# } else { #' +
+                        '<span class="k-selected-color"></span>' +
+                    '# } #' +
+                    '<span class="k-select">' +
+                        '<span class="k-icon k-i-arrow-s"></span>' +
+                    '</span>' +
+                '</span>' +
+            '</span>'
+        ),
 
         options: {
-            name         : "ColorPicker",
-            palette      : null,
-            columns      : 10,
-            toolIcon     : null,
-            value        : null,
-            messages     : APPLY_CANCEL,
-            opacity      : false,
-            buttons      : true,
-            preview      : true
+            name: "ColorPicker",
+            palette: null,
+            columns: 10,
+            toolIcon: null,
+            value: null,
+            messages: APPLY_CANCEL,
+            opacity: false,
+            buttons: true,
+            preview: true
         },
 
         events: [ "change", "select" ],

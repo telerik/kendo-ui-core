@@ -1782,11 +1782,12 @@ html .k-grid-edit-row .k-tooltip
 /* ComboBox & DropDownList */
 
 span.k-datepicker,
+span.k-timepicker,
+span.k-datetimepicker,
+span.k-colorpicker,
 span.k-numerictextbox,
 span.k-combobox,
-span.k-dropdown,
-span.k-timepicker,
-span.k-datetimepicker
+span.k-dropdown
 {
     background: none;
 }
@@ -1796,6 +1797,7 @@ span.k-datetimepicker
 .k-datepicker,
 .k-timepicker,
 .k-datetimepicker,
+.k-colorpicker,
 .k-numerictextbox,
 .k-dropdown,
 .k-selectbox,
@@ -1814,11 +1816,17 @@ span.k-datetimepicker
 .k-datepicker,
 .k-timepicker,
 .k-datetimepicker,
+.k-colorpicker,
 .k-numerictextbox,
 .k-dropdown,
 .k-selectbox
 {
     white-space: nowrap;
+}
+
+.k-colorpicker
+{
+    width: auto;
 }
 
 .k-datetimepicker
@@ -2483,10 +2491,6 @@ span.k-numerictextbox
 
 .k-colorpicker
 {
-    display: inline-block;
-    vertical-align: middle;
-    border: 1px solid #ccc;
-    padding: 2px;
     .k-selected-color {
         font-size: 0;
         vertical-align: top;
@@ -2500,7 +2504,7 @@ span.k-numerictextbox
         position: relative;
         top: -4px;
         display: inline-block;
-        padding: 1px 3px;
+        padding: 2px 3px;
         font-size: 0;
         line-height: 0;
         background-repeat: no-repeat;
@@ -2516,13 +2520,7 @@ span.k-numerictextbox
         }
     }
     .k-icon {
-        display: inline-block;
-        border-style: solid;
-        border-width: 0 0 0 1px;
-        border-color: #ccc;
-    vertical-align: middle;
     cursor: pointer;
-        margin-left: 2px;
     }
     &:focus {
         outline: 1px dotted #000;
@@ -4068,6 +4066,7 @@ html .k-upload
 .k-ie7 .k-timepicker,
 .k-ie7 .k-datepicker,
 .k-ie7 .k-datetimepicker,
+.k-ie7 .k-colorpicker,
 .k-ie7 .k-calendar,
 .k-ie7 .k-calendar .k-nav-fast,
 
