@@ -36,7 +36,7 @@ module CodeGen::TypeScript
         end
 
         def namespace
-            @full_name.sub('.' + @name, '').gsub('.', '_').capitalize
+            @full_name.sub('.' + @name, '')
         end
 
         def type_script_options_type
@@ -44,7 +44,7 @@ module CodeGen::TypeScript
         end
 
         def type_script_type
-            plugin
+            name
         end
 
     end
@@ -79,23 +79,7 @@ def get_type_script(sources)
     widgets = components.find_all { |component| component.full_name.include?('.ui.') }
                         .sort { |a, b| a.plugin <=> b.plugin }
 
-    namespaces = {};
-
-    widgets.each do |widget|
-        namespace = widget.namespace
-
-        current = namespaces
-
-        path = namespace.split('.')
-
-        path.each do |ns|
-            namespace = current[ns] ||= {}
-
-            current = namespace
-        end
-
-        namespace[widget.name] = widget
-    end
+    namespaces = widgets.group_by { |widget| widget.namespace }
 
     TYPE_SCRIPT.result(binding)
 end
