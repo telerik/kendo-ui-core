@@ -1,0 +1,17 @@
+﻿ @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+            .Name("Orders_#=EmployeeID#")
+            .Columns(columns =>
+            {
+                columns.Bound(o => o.OrderID).Width(101);
+                columns.Bound(o => o.ShipCountry).Width(140);
+                columns.Bound(o => o.ShipAddress).Width(200);
+                columns.Bound(o => o.ShipName).Width(200);
+            })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Read(read => read.Action("HierarchyBinding_Orders", "Grid", new { employeeID = "#=EmployeeID#" }))
+            )
+            .Pageable()
+            .Sortable()
+            .ToClientTemplate()
+    )
