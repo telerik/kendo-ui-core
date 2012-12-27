@@ -33,26 +33,17 @@ module CodeGen::Java::TLD
 
     class Event < CodeGen::Java::Event
         include Options
-
-        def to_attribute
-            EVENT_ATTRIBUTE.result(binding)
-        end
-
-        def to_tag
-            EVENT.result(binding)
-        end
     end
-
 
     class Option < CodeGen::Java::Option
         include Options
 
-        def to_attribute
-            OPTION_ATTRIBUTE.result(binding)
-        end
-
         def array_option_class
             ArrayOption
+        end
+
+        def attr
+            @name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/) {|c| c.downcase}
         end
     end
 
@@ -86,108 +77,11 @@ module CodeGen::Java::TLD
         include CodeGen::Java::ArrayItem
     end
 
-    EVENT = ERB.new(%{
-    <tag>
-        <description><%= description %></description>
-        <name><%= tag_name %></name>
-        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    }, 0, '<>%')
+    COMPOSITE_OPTION = ERB.new(File.read('build/codegen/lib/java/composite_option.tld.erb'), 0, '<>%')
 
-    COMPOSITE_OPTION = ERB.new(%{
-    <tag>
-        <description><%= description %></description>
-        <name><%= tag_name %></name>
-        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
-        <body-content><%= body_content %></body-content>
+    ARRAY = ERB.new(File.read('build/codegen/lib/java/array.tld.erb'), 0, '<>%')
 
-<%= simple_options.map { |option| option.to_attribute }.join %>
-
-    </tag>
-
-<%= composite_options.map { |option| option.to_tag }.join %>
-
-<%= events.map { |event| event.to_tag }.join %>
-
-    }, 0, '<>%')
-
-    ARRAY = ERB.new(%{
-    <tag>
-        <description><%= description %></description>
-        <name><%= tag_name %></name>
-        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description><%= item.description %></description>
-        <name><%= item.tag_name %></name>
-        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= item.tag_class %></tag-class>
-
-<% if item.tag_name == 'splitter-pane' %>
-        <body-content>JSP</body-content>
-<% else %>
-        <body-content><%= item.body_content %></body-content>
-<% end %>
-<%= item.simple_options.map { |option| option.to_attribute }.join %>
-
-<% if item.tag_name == 'splitter-pane' %>
-        <dynamic-attributes>true</dynamic-attributes>
-<% end %>
-
-    </tag>
-
-<%= item.composite_options.map { |option| option.to_tag }.join %>
-
-<%= item.events.map { |event| event.to_tag }.join %>
-    }, 0, '<>%')
-
-    COMPONENT = ERB.new(%{
-    <tag>
-        <description><%= name %></description>
-        <name><%= tag_name %></name>
-        <tag-class>com.kendoui.taglib.<%= tag_class %></tag-class>
-        <body-content>JSP</body-content>
-<% if name != 'DataSource' %>
-        <attribute>
-            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
-            <name>name</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-<% end %>
-<%= simple_options.map { |option| option.to_attribute }.join %>
-<%= events.map { |event| event.to_attribute }.join %>
-
-<% if name != 'DataSource' %>
-        <dynamic-attributes>true</dynamic-attributes>
-<% end %>
-    </tag>
-
-<%= composite_options.map { |option| option.to_tag }.join("\n") %>
-
-<%= events.map { |event| event.to_tag }.join("\n") %>
-
-            }, 0, '<>%')
-
-    OPTION_ATTRIBUTE = ERB.new(%{
-        <attribute>
-            <description><%= description %></description>
-            <name><%= name.sub(/^[a-z]{1}[A-Z]{1}[a-zA-Z]*/){|c| c.downcase} %></name>
-            <rtexprvalue>true</rtexprvalue>
-            <type><%= java_type %></type>
-        </attribute>
-    }, 0, '<>%')
-
-    EVENT_ATTRIBUTE = ERB.new(%{
-        <attribute>
-            <description><%= description %></description>
-            <name><%= name %></name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-    }, 0, '<>%')
+    COMPONENT = ERB.new(File.read('build/codegen/lib/java/component.tld.erb'), 0, '<>%')
 
 class Generator
     def initialize(filename)

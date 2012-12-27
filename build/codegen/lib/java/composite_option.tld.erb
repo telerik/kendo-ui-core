@@ -1,0 +1,27 @@
+    <tag>
+        <description><%= description %></description>
+        <name><%= tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
+        <body-content><%= body_content %></body-content>
+
+% simple_options.each do |option|
+        <attribute>
+            <description><%= option.description %></description>
+            <name><%= option.attr %></name>
+            <rtexprvalue>true</rtexprvalue>
+            <type><%= option.java_type %></type>
+        </attribute>
+% end
+
+    </tag>
+
+<%= composite_options.map { |option| option.to_tag }.join %>
+
+% events.each do |event|
+    <tag>
+        <description><%= event.description %></description>
+        <name><%= event.tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= event.namespace %>.<%= event.tag_class %></tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+% end

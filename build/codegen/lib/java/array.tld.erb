@@ -1,0 +1,40 @@
+    <tag>
+        <description><%= description %></description>
+        <name><%= tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description><%= item.description %></description>
+        <name><%= item.tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= namespace %>.<%= item.tag_class %></tag-class>
+
+% if item.tag_name == 'splitter-pane'
+        <body-content>JSP</body-content>
+% else
+        <body-content><%= item.body_content %></body-content>
+% end
+% item.simple_options.each do |option|
+        <attribute>
+            <description><%= option.description %></description>
+            <name><%= option.attr %></name>
+            <rtexprvalue>true</rtexprvalue>
+            <type><%= option.java_type %></type>
+        </attribute>
+% end
+% if item.tag_name == 'splitter-pane'
+        <dynamic-attributes>true</dynamic-attributes>
+% end
+    </tag>
+
+<%= item.composite_options.map { |option| option.to_tag }.join %>
+
+% item.events.each do |event|
+    <tag>
+        <description><%= event.description %></description>
+        <name><%= event.tag_name %></name>
+        <tag-class>com.kendoui.taglib.<%= event.namespace %>.<%= event.tag_class %></tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+% end
