@@ -56,15 +56,15 @@
 
     <div id="mvvm" style="border: 1px solid #888; background: #e0e0e0; padding: 1em">
       <input data-role="colorpicker" value="#cc6633" />
-      <input data-role="colorpicker" data-palette="web" data-tool-icon="k-foreColor" value="#cc6633" />
+      <input data-role="colorpicker" data-palette="websafe" data-tool-icon="k-foreColor" value="#cc6633" />
       <input data-role="colorpicker" data-palette="eee,e22,ee2,2e2,2ee,e2e" data-columns="3" />
     </div>
 
     <script>
-      window.flat = $("#flat").kendoColorSelectorSimple().data("kendoColorSelectorSimple");
+      window.flat = $("#flat").kendoColorSelectorPalette().data("kendoColorSelectorPalette");
 
       $("#dropdown").kendoColorPicker({ palette: "basic", toolIcon: "k-foreColor" });
-      $("#dropdown2").kendoColorPicker({ palette: "web", toolIcon: "k-backColor" });
+      $("#dropdown2").kendoColorPicker({ palette: "websafe", toolIcon: "k-backColor" });
       $("#dropdown3").kendoColorPicker({ opacity: true });
       $("#dropdown4").kendoColorPicker({ opacity: true, preview: false, toolIcon: "k-bold" });
       $("#dropdown5").kendoColorPicker({ opacity: false });

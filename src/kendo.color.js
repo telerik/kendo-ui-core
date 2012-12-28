@@ -79,7 +79,7 @@ kendo_module({
         }
     });
 
-    var ColorSelectorSimple = ColorSelectorBase.extend({
+    var ColorSelectorPalette = ColorSelectorBase.extend({
         init: function(element, options) {
             var that = this;
             ColorSelectorBase.fn.init.call(that, element, options);
@@ -198,7 +198,7 @@ kendo_module({
             this.wrapper.focus();
         },
         options: {
-            name: "ColorSelectorSimple",
+            name: "ColorSelectorPalette",
             columns: 10,
             palette: SIMPLEPALETTE
         },
@@ -804,8 +804,8 @@ kendo_module({
                 var opt = this.options;
                 var ctor;
                 if (opt.palette) {
-                    ctor = ColorSelectorSimple;
-                    if (opt.palette == "web") {
+                    ctor = ColorSelectorPalette;
+                    if (opt.palette == "websafe") {
                         opt.palette = WEBPALETTE;
                         opt.columns = 18;
                     } else if (opt.palette == "basic") {
@@ -858,7 +858,7 @@ kendo_module({
         };
     }
 
-    ui.plugin(ColorSelectorSimple);
+    ui.plugin(ColorSelectorPalette);
     ui.plugin(ColorSelectorHSV);
     ui.plugin(ColorPicker);
 
