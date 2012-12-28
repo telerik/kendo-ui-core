@@ -709,8 +709,8 @@ kendo_module({
             if (enable) {
                 wrapper.removeClass("k-state-disabled")
                     .attr("tabIndex", 0)
-                    .on("mouseenter" + NS, function() { wrapper.children(".k-picker-wrap").addClass("k-state-hover") })
-                    .on("mouseleave" + NS, function() { wrapper.children(".k-picker-wrap").removeClass("k-state-hover") })
+                    .on("mouseenter" + NS, function() { wrapper.children(".k-picker-wrap").addClass("k-state-hover"); })
+                    .on("mouseleave" + NS, function() { wrapper.children(".k-picker-wrap").removeClass("k-state-hover"); })
                     .on(KEYDOWN_NS, bind(that._keydown, that))
                     .on(MOUSEDOWN_NS, ".k-icon", bind(that.toggle, that))
                     .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
