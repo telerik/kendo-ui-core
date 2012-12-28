@@ -204,7 +204,7 @@ kendo_module({
         },
         _template: kendo.template(
             '<div class="k-colorpicker-popup">' +
-                '<ul class="k-reset">'+
+                '<ul class="k-palette k-reset">'+
                 '# for (var i = 0; i < colors.length; i++) { #' +
                     '<li #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #">' +
                         '<div style="background-color:#= colors[i].toCss() #"></div>' +

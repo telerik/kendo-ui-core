@@ -7,6 +7,13 @@
     transition: ~"@{transition}";
 }
 
+.border-radius(...) {
+    -moz-border-radius: @arguments;
+    -webkit-border-radius: @arguments;
+    -o-border-radius: @arguments;
+    border-radius: @arguments;
+}
+
 /* fix for chrome 22&23 transition bugs */
 :-webkit-any(body):after {
     content: "";
@@ -804,9 +811,7 @@ div.k-window-content
     margin: 0;
     zoom: 1;
 
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
+    .border-radius(0);
 }
 
 .k-panelbar .k-image,
@@ -1322,7 +1327,7 @@ div.k-grid-header .k-header
     padding: 0 3px;
     height: 22px;/*IE7*/
     line-height: 22px;/*IE7*/
-    border-radius:13px;
+    .border-radius(13px);
     cursor:pointer;
 }
 
@@ -1341,7 +1346,7 @@ div.k-grid-header .k-header
 .k-pager-numbers .k-link
 {
     padding: 0 8px;
-    border-radius:13px;
+    .border-radius(13px);
 }
 
 .k-pager-numbers .k-link:hover
@@ -1363,7 +1368,7 @@ div.k-grid-header .k-header
     float:right;
     margin-right:6px;
     border-width:0;
-    border-radius:0;
+    .border-radius(0);
 }
 
 .k-pager-numbers .k-state-selected
@@ -1372,7 +1377,7 @@ div.k-grid-header .k-header
     border-width:1px;
     line-height:22px;
     padding:0 7px;
-    border-radius:13px;
+    .border-radius(13px);
 }
 
 .k-pager-wrap .k-textbox
@@ -2105,9 +2110,7 @@ span.k-datetimepicker .k-select+.k-select
 
 body .k-datetimepicker .k-select
 {
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
+    .border-radius(0);
 }
 
 .k-combobox .k-icon,
@@ -2535,11 +2538,11 @@ span.k-numerictextbox
 .k-colorpicker-popup
 {
     width: 120px;
-    padding: .25em;
     line-height: 0;
-    .k-reset {
+    .k-palette {
     display: inline-block;
-    margin: 0;
+        vertical-align: top;
+        padding: 5px 0;
     }
     .k-item {
     display: block;
@@ -2575,30 +2578,22 @@ span.k-numerictextbox
     display: inline-block;
     width: 250px;
     padding-bottom: 5px;
-    line-height: 0;
-
-    .border-radius(...) {
-        border-radius: @arguments;
-        -webkit-border-radius: @arguments;
-        -o-border-radius: @arguments;
-        -moz-border-radius: @arguments;
-    }
 
     .k-selected-color {
-        .k-selected-color-display {
-            padding: 3px;
-        }
         background-image: url("textures/transtexture.png");
         background-position: 50% 50%;
+
+        .k-selected-color-display {
+            overflow: hidden;
+        }
+
         input.k-color-value {
-            font-size: 90%;
-            text-align: center;
-            border: 0px;
-            margin-left: 100%;
-            position: relative;
+            float: right;
+            font-family: Consolas,"Courier New",monospace;
+            padding: .75em .3em .65em 1em;
+            border: 0;
             width: 70%;
-            left: -70%;
-            .border-radius(4px);
+            height: 100%;
         }
     }
 
