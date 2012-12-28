@@ -563,7 +563,7 @@ kendo_module({
                 nextPaneConfig = nextPane.data(PANE),
                 prevBoundary = parseInt(previousPane[0].style[that.positioningProperty], 10),
                 nextBoundary = parseInt(nextPane[0].style[that.positioningProperty], 10) + nextPane[0][that.sizingDomProperty] - splitbar[0][that.sizingDomProperty],
-                totalSize = that._element.css(that.sizingProperty),
+                totalSize = parseInt(that._element.css(that.sizingProperty), 10),
                 toPx = function (value) {
                     var val = parseInt(value, 10);
                     return (isPixelSize(value) ? val : (totalSize * val) / 100) || 0;
