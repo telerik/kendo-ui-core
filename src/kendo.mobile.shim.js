@@ -18,10 +18,11 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 app = kendo.mobile.application,
-                ios = (app ? app.os : kendo.support.mobileOS.name) == "ios",
-                align = options.align || (ios ?  "bottom center" : "center center"),
-                position = options.position || (ios ? "bottom center" : "center center"),
-                effect = options.effect || (ios ? "slideIn:up" : "fade:in"),
+                osname = app ? app.os : kendo.support.mobileOS.name,
+                ioswp = osname === "ios" || osname === "wp",
+                align = options.align || (ioswp ?  "bottom center" : "center center"),
+                position = options.position || (ioswp ? "bottom center" : "center center"),
+                effect = options.effect || (ioswp ? "slideIn:up" : "fade:in"),
                 shim = $(SHIM).handler(that).hide();
 
             Widget.fn.init.call(that, element, options);

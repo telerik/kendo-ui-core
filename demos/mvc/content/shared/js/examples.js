@@ -431,11 +431,11 @@
 
     var kendoSkin = "default";
 
-    window.kendoMobileOS = "ios";
+    window.kendoMobileOS = "wp";
 
     $(Application.init);
 
-    var mobileClasses = "km-ios km-android km-blackberry km-ios4";
+    var mobileClasses = "km-ios km-android km-blackberry km-ios4 km-wp";
 
     function applyCurrentTheme() {
         if (supports.sessionStorage) {
@@ -455,7 +455,7 @@
         }
 
         $(container).removeClass(mobileClasses).addClass("km-" + kendoMobileOS);
-        $("#device-wrapper").removeClass("ios android blackberry").addClass(kendoMobileOS);
+        $("#device-wrapper").removeClass("ios android blackberry wp").addClass(kendoMobileOS);
         $("#deviceList .selectedThumb").removeClass("selectedThumb");
         $("#deviceList ." + kendoMobileOS + "Thumb").parent().addClass("selectedThumb");
     }
@@ -488,7 +488,8 @@
             data: [
                 { text: "iOS", value: "ios" },
                 { text: "Android", value: "android" },
-                { text: "Blackberry", value: "blackberry" }
+                { text: "Blackberry", value: "blackberry" },
+                { text: "Windows Phone", value: "wp" }
             ]
         });
 
