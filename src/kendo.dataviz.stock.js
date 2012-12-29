@@ -295,14 +295,6 @@
                 delta *= ZOOM_ACCELERATION;
             }
 
-            if (!navi._lastZoomTime) {
-                navi._lastZoomTime = new Date();
-            } else {
-                if (new Date() - navi._lastZoomTime < 50) {
-                    return;
-                }
-            }
-
             navi._applyZoom(delta);
         },
 
@@ -320,7 +312,7 @@
                 navi.readSelection();
             } else {
                 axis.options.min = select.from;
-                select.from = axis.scaleRange(delta).min;
+                select.from = axis.scaleRange(-delta).min;
             }
 
             if (!kendo.support.touch) {
@@ -579,6 +571,11 @@
             }, hint.options.hideDelay);
         }
     });
+
+    // Helpers ================================================================
+    function now() {
+        return (new Date()).getTime();
+    }
 
     // Exports ================================================================
 
