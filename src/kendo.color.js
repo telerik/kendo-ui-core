@@ -236,6 +236,17 @@ kendo_module({
                 showButtons: false
             }).data("kendoSlider");
 
+            if (isIE8) {
+                // We need a filter to stretch the image, but IE filters require an absolute URL.
+                //
+                // Props to Alexander Gyoshev for figuring out this solution: we use an ordinary background-image in the
+                // CSS, and inspect currentStyle.backgroundImage to get the absolute URL.
+                var el = $(".k-hue-slider .k-slider-track", content)[0];
+                var url = el.currentStyle.backgroundImage;
+                url = url.replace(/^url\([\'\"]?|[\'\"]?\)/g, "");
+                el.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + url + "', sizingMethod='scale')";
+            }
+
             var opSlider = that._opacitySlider = $(".k-transparency-slider", content).kendoSlider({
                 min: 0,
                 max: 100,
