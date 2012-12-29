@@ -432,9 +432,9 @@ var ColorTool = Tool.extend({
             toolIcon: "k-" + this.options.name,
             palette: "websafe",
             change: function(e) {
-                var color = e.value;
+                var color = ui.value();
                 if (color) {
-                    Tool.exec(editor, toolName, color.toDisplay());
+                    Tool.exec(editor, toolName, color);
                 }
             }
         });
