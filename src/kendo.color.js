@@ -243,7 +243,7 @@ kendo_module({
                 // CSS, and inspect currentStyle.backgroundImage to get the absolute URL.
                 var el = $(".k-hue-slider .k-slider-track", content)[0];
                 var url = el.currentStyle.backgroundImage;
-                url = url.replace(/^url\([\'\"]?|[\'\"]?\)/g, "");
+                url = url.replace(/^url\([\'\"]?|[\'\"]?\)$/g, "");
                 el.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + url + "', sizingMethod='scale')";
             }
 
