@@ -296,7 +296,7 @@
             }
 
             if (!navi._lastZoomTime) {
-                navi.lastZoomTime = new Date();
+                navi._lastZoomTime = new Date();
             } else {
                 if (new Date() - navi._lastZoomTime < 50) {
                     return;
