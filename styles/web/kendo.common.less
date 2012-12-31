@@ -213,6 +213,14 @@ html body .k-button-bare
     outline: 0;
 }
 
+@media print {
+	.k-state-disabled,
+	.k-state-disabled .k-input
+	{
+		opacity:1 !important;
+	}
+}
+
 .k-state-error
 {
     border-style: ridge;
