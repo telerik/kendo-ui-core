@@ -184,7 +184,7 @@
 
             isSelectRaised = false;
 
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
 
             ok(isSelectRaised);
         });
@@ -197,7 +197,7 @@
 
             var item = getRootItem(3);
 
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
 
             ok(isCollapseRaised);
         });
@@ -210,7 +210,7 @@
 
             var item = getRootItem(2);
 
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
 
             ok(isExpandRaised);
         });
@@ -223,7 +223,7 @@
 
             var item = getRootItem(4);
 
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
 
             setTimeout(function () {
                 ok(isActivateRaised);

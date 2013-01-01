@@ -162,7 +162,7 @@
                 collapseItem = e.item;
             });
 
-            item2.find('> .k-link').trigger('mouseup');
+            item2.find('> .k-link').trigger('click');
 
             equal(item.find('.k-group').css("display"), "none");
             equal(collapseItem, item[0]);
@@ -172,8 +172,8 @@
 
             var item = getRootItem(0);
 
-            item.find('> .k-link').trigger('mouseup');
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
+            item.find('> .k-link').trigger('click');
 
             equal(item.find('.k-group').css("display"), "block");
         });
@@ -183,7 +183,7 @@
             var item = getRootItem(0);
             var subItem = item.find('> .k-group').children()[0];
 
-            $(subItem).find('> .k-link').trigger('mouseup');
+            $(subItem).find('> .k-link').trigger('click');
 
             equal(item.find('.k-group').css("display"), "block");
         });
@@ -193,7 +193,7 @@
             var item = getRootItem(0);
             var item2 = getRootItem(1);
 
-            item2.find('> .k-link').trigger('mouseup');
+            item2.find('> .k-link').trigger('click');
 
             equal(item.find('.k-group').css("display"), "block");
         });

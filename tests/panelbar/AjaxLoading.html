@@ -63,13 +63,13 @@
                 start();
             });
 
-            item.trigger("mouseup");
+            item.trigger("click");
         });
 
         test("clicking expanded content items should collapse them", function() {
             var item = getRootItem(0);
 
-            item.trigger("mouseup");
+            item.trigger("click");
 
             equal(item.parent().find(".k-content").css("display"), "none");
         });
@@ -83,13 +83,13 @@
                 start();
             });
 
-            item.trigger("mouseup");
+            item.trigger("click");
         });
 
         test("clicking expanded content items should toggle arrow", function() {
             var item = getRootItem(1);
 
-            item.trigger("mouseup");
+            item.trigger("click");
 
             ok(item.find(".k-icon").hasClass("k-i-arrow-s"));
         });
@@ -103,7 +103,7 @@
                 start();
             });
 
-            item.trigger("mouseup");
+            item.trigger("click");
         });
 
         test("initially expanded items fetch their AJAX content", function() {
