@@ -165,7 +165,7 @@
         test('clicking root items selects them', function() {
             var firstLink = getRootItem(0).find('> .k-link');
 
-            firstLink.trigger({ type: 'mouseup' });
+            firstLink.trigger({ type: 'click' });
 
             ok(firstLink.hasClass('k-state-selected'));
         });
@@ -174,8 +174,8 @@
             var firstLink = getRootItem(0).find('> .k-link');
             var secondLink = getRootItem(1).find('> .k-link');
 
-            firstLink.trigger({ type: 'mouseup' });
-            secondLink.trigger({ type: 'mouseup' });
+            firstLink.trigger({ type: 'click' });
+            secondLink.trigger({ type: 'click' });
 
             equal($(panelbar.element).find('.k-state-selected').length, 1);
         });
