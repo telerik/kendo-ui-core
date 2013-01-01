@@ -218,7 +218,7 @@ kendo_module({
             }
 
             element
-                .on("touchend" + NS + " mouseup" + NS, clickableItems, function(e) {
+                .on("click" + NS, clickableItems, function(e) {
                     if (that._click($(e.currentTarget))) {
                         e.preventDefault();
                     }
@@ -804,7 +804,7 @@ kendo_module({
                 isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
 
             if (contents.data("animating")) {
-                return;
+                return true;
             }
 
             if (that._triggerEvent(SELECT, item)) {
@@ -819,7 +819,7 @@ kendo_module({
 
             if (that.options.expandMode == SINGLE) {
                 if (that._collapseAllExpanded(item)) {
-                    return;
+                    return prevent;
                 }
             }
 
