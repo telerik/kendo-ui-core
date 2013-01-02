@@ -29,6 +29,10 @@ module CodeGen::TypeScript
         def method_class
             Method
         end
+
+        def type_script_declaration
+            "#{name}: #{type_script_type};"
+        end
     end
 
     class Method < CodeGen::Method
@@ -41,7 +45,15 @@ module CodeGen::TypeScript
         end
 
         def type_script_parameters
-            @parameters.map { |p| "#{p.name}:#{p.type_script_type}" }.join(', ')
+            @parameters.map { |p| "#{p.name}: #{p.type_script_type}" }.join(', ')
+        end
+
+        def type_script_declaration
+            declaration = "#{name}(#{type_script_parameters})"
+
+            declaration += ": #{result.type_script_type}" if @result
+
+            declaration + ';'
         end
     end
 
@@ -56,6 +68,8 @@ module CodeGen::TypeScript
             TYPES[@type]
         end
     end
+
+    COMPONENT = ERB.new(File.read("build/component.ts.erb"), 0, '%<>')
 
     class Component < CodeGen::Component
         include Options
@@ -72,6 +86,10 @@ module CodeGen::TypeScript
 
         def type_script_options_type
             type_script_type + 'Options'
+        end
+
+        def type_script_interface
+            COMPONENT.result(binding)
         end
 
         def type_script_type
@@ -95,11 +113,16 @@ module CodeGen::TypeScript
         end
     end
 
+    COMPOSITE = ERB.new(File.read("build/composite_option.ts.erb"), 0, '%<>')
     class CompositeOption < CodeGen::CompositeOption
         include Options
 
         def type_script_type
             @owner.type_script_type + @name.pascalize
+        end
+
+        def type_script_interface
+            COMPOSITE.result(binding)
         end
     end
 
@@ -111,6 +134,7 @@ module CodeGen::TypeScript
 
             TYPES[@type[0]]
         end
+
     end
 end
 

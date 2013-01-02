@@ -1,0 +1,9 @@
+% composite_options.each do |option|
+<%= option.type_script_interface %>
+% end
+
+    interface <%= type_script_type %> {
+% options.each do |option|
+        <%= option.type_script_declaration %>
+% end
+    }

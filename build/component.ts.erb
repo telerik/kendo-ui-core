@@ -1,0 +1,15 @@
+    interface <%= type_script_type %> {
+        element: JQuery;
+% methods.each do |method|
+        <%= method.type_script_declaration %>
+% end
+    }
+% composite_options.each do |option|
+<%= option.type_script_interface %>
+% end
+
+    interface <%= type_script_options_type %> {
+% options.each do |option|
+        <%= option.type_script_declaration %>
+% end
+    }

@@ -1,51 +1,12 @@
 // Type definitions for Kendo UI
 
-<% def options(owner)
-     _erbout = ''
-     owner.options.each do |option|
-%>
-        <%= option.name %>?: <%= option.type_script_type %>;
-<%   end
-    _erbout
-end %>
-
-<% def composite_options(owner)
-     _erbout = ''
-     owner.composite_options.each do |option|
-%>
-<%= composite_options(option) %>
-
-    interface <%= option.type_script_type %> {
-        <%= options(option) %>
-    }
-<%  end
-   _erbout
-end %>
-
 % namespaces.keys.each do |key|
 module <%= key %> {
 %   namespaces[key].each do |widget|
-    interface <%= widget.type_script_type %> {
-        element: JQuery;
-%       widget.methods.each do |method|
-
-%       if method.result
-        <%= method.name %>(<%= method.type_script_parameters %>): <%= method.result.type_script_type %>;
-%       else
-        <%= method.name %>(<%= method.type_script_parameters %>);
-%       end
-%       end
-    }
-
-    <%= composite_options(widget) %>
-
-    interface <%= widget.type_script_options_type %> {
-        <%= options(widget) %>
-    }
+<%= widget.type_script_interface %>
 %   end
-}
 % end
-
+}
 
 interface JQuery {
 % widgets.each do |widget|
