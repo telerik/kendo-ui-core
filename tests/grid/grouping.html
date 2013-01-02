@@ -385,6 +385,38 @@
                 equal(grid.tbody.find("tr>td:first").text(), "foo: foo");
             });
 
+            test("text in grouping row shows column value from values if set", function() {
+                var dataSource = new DataSource({
+                    data: [{foo: "foo1", bar: "bar"}, {foo: "foo2", bar: "baz"}],
+                    group: [{field: "foo"}]
+                }),
+                grid = new Grid(table(), { dataSource: dataSource, columns: [
+                    {
+                        field: "foo", title: "bar",
+                        values: [ { value: "foo", text: "custom text" }, { value: "foo1", text: "custom text1" },{ value: "foo2", text: "custom text2" }]
+                    },
+                    "bar"]
+                });
+
+                equal(grid.tbody.find("tr>td:first").text(), "bar: custom text1");
+            });
+
+            test("text in grouping row shows empty string if values is set but value does not exist", function() {
+                var dataSource = new DataSource({
+                    data: [{foo: "notexisting", bar: "bar"}, {foo: "notexisting2", bar: "baz"}],
+                    group: [{field: "foo"}]
+                }),
+                grid = new Grid(table(), { dataSource: dataSource, columns: [
+                    {
+                        field: "foo", title: "bar",
+                        values: [ { value: "foo", text: "custom text" }, { value: "foo1", text: "custom text1" },{ value: "foo2", text: "custom text2" }]
+                    },
+                    "bar"]
+                });
+
+                equal(grid.tbody.find("tr>td:first").text(), "bar: ");
+            });
+
             test("column format is applied on grouping row", function() {
                 var dataSource = new DataSource({
                     data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],
