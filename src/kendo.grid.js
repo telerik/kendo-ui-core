@@ -514,6 +514,15 @@ kendo_module({
         return result;
     }
 
+    function formatGroupValue(value, format, columnValues) {
+        var isForiegnKey = columnValues && columnValues.length && isPlainObject(columnValues[0]) && "value" in columnValues[0],
+            groupValue = isForiegnKey ? convertToObject(columnValues)[value] : value;
+
+        groupValue = groupValue != null ? groupValue : "";
+
+        return format ? kendo.format(format, groupValue) : groupValue;
+    }
+
     var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -3035,9 +3044,8 @@ kendo_module({
                 length,
                 field = group.field,
                 column = grep(that.columns, function(column) { return column.field == field; })[0] || { },
-                value = column.format ? kendo.format(column.format, group.value) : group.value,
                 template = column.groupHeaderTemplate,
-                text =  (column.title || field) + ': ' + value,
+                text =  (column.title || field) + ': ' + formatGroupValue(group.value, column.format, column.values),
                 data = extend({}, { field: group.field, value: group.value }, group.aggregates[group.field]),
                 footerDefaults = that._groupAggregatesDefaultObject || {},
                 groupItems = group.items;

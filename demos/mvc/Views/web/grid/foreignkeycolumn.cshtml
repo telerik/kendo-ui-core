@@ -71,7 +71,7 @@
                              fields: {
                                 ProductID: { editable: false, nullable: true },
                                 ProductName: { validation: { required: true } },
-                                CategoryID: { field: "CategoryID" },
+                                CategoryID: { field: "CategoryID", type: "number", defaultValue: 1 },
                                 UnitPrice: { type: "number", validation: { required: true, min: 1} }
                              }
                            }
@@ -83,6 +83,7 @@
                         filterable: true,
                         scrollable: false,
                         toolbar: ["create"],
+                        groupable: true,
                         columns: [
                             { field:"ProductName",title:"Product Name" },
                             { field: "CategoryID", width: "150px", values: categories, title: "Category" },
