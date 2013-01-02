@@ -34,5 +34,11 @@
         <classShapeMoniker Id="b9614664-0e2b-4c38-ab7a-c951fb139343" />
       </nodes>
     </associationConnector>
+    <classShape Id="8fff1cf3-e579-465d-b875-2b6a7cf1d581" absoluteBounds="6.5, 3.875, 2, 3.1170068359375">
+      <DataClassMoniker Name="/NorthwindDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4919612f-0d69-4d86-96b6-1324d977deab" absoluteBounds="6.515, 4.335, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
