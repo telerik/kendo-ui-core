@@ -359,7 +359,7 @@
         append: function (item, referenceItem) {
             referenceItem = this.element.find(referenceItem);
 
-            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group, .k-animation-container > .k-group") : null);
+            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group, > .k-animation-container > .k-group") : null);
 
             each(inserted.items, function (idx) {
                 inserted.group.append(this);
