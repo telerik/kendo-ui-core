@@ -76,13 +76,18 @@
                 $(document).ready(function() {
                     var getItem = function (target) {
                             var itemIndexes = target.val().split(/[.,]/),
-                                rootItem = itemIndexes[0] != "" ?
-                                                menu.element.children("li").eq(itemIndexes[0]) :
-                                                false;
+                                item = menu.element;
 
-                            return itemIndexes.length > 1 ?
-                                        rootItem.find(".k-group > .k-item").eq(itemIndexes[1]) :
-                                        rootItem;
+                            if (itemIndexes[0] !== "") {
+                                for (var i = 0, len = itemIndexes.length; i < len; i++) {
+                                    item = item.children("li").eq(itemIndexes[i]);
+                                    if (i < len-1) {
+                                        item = item.find("ul:first");
+                                    }
+                                }
+                            }
+
+                            return item;
                         },
                         toggle = function (e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
