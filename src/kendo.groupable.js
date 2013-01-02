@@ -193,6 +193,7 @@
         options: {
             name: "Groupable",
             filter: "th",
+            draggableElements: "th",
             messages: {
                 empty: "Drag a column header and drop it here to group by that column"
             }
