@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.history.js"></script>
+    <script src="../src/kendo.mobile.scroller.js"></script>
+    <script src="../src/kendo.mobile.scrollview.js"></script>
+    <script src="../src/kendo.mobile.view.js"></script>
+    <script src="../src/kendo.mobile.loader.js"></script>
+    <script src="../src/kendo.mobile.pane.js"></script>
+    <script src="../src/kendo.mobile.switch.js"></script>
+    <script src="../src/kendo.mobile.listview.js"></script>
+    <script src="../src/kendo.mobile.application.js"></script>
+    <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+    <div data-role="view" id="orderhistory" >
+        <ul data-role="listview" data-style="inset">
+            <li>
+                not rounded in android
+                <input id="chkremember" data-role="switch" />
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var app = new kendo.mobile.Application($(document.body), {
+            platform: {
+                device: "ipad",       
+                name: "ios",          
+                ios: true,            
+                majorVersion: 5,      
+                minorVersion: "0.0",  
+                flatVersion: "500",   
+                appMode: false,       
+                tablet: "ipad"        
+            }
+        });
+    </script>
+
+</body>
+</html>
+
