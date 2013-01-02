@@ -1,5 +1,6 @@
     interface <%= type_script_type %> {
         element: JQuery;
+        options: <%= type_script_options_type %>;
 % methods.each do |method|
         <%= method.type_script_declaration %>
 % end

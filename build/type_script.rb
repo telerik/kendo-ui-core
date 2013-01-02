@@ -15,6 +15,7 @@ module CodeGen::TypeScript
         'Date' => 'date',
         'Function' => 'Function',
         'jQuery' => 'JQuery',
+        'Selector' => 'string',
         'Date' => 'Date'
     }
 
@@ -29,6 +30,10 @@ module CodeGen::TypeScript
 
         def method_class
             Method
+        end
+
+        def array_option_class
+            ArrayOption
         end
 
         def type_script_declaration
@@ -116,6 +121,7 @@ module CodeGen::TypeScript
     end
 
     COMPOSITE = ERB.new(File.read("build/composite_option.ts.erb"), 0, '%<>')
+
     class CompositeOption < CodeGen::CompositeOption
         include Options
 
@@ -138,6 +144,29 @@ module CodeGen::TypeScript
         end
 
     end
+
+    class ArrayOption < CompositeOption
+        include CodeGen::Array
+
+        def item_class
+            ArrayItem
+        end
+
+        def type_script_interface
+            item.type_script_interface
+        end
+
+        def type_script_declaration
+            "#{name}: #{item.type_script_type}[];"
+        end
+    end
+
+    class ArrayItem < CompositeOption
+        def type_script_type
+            super.sub(@owner.name.pascalize, '')
+        end
+    end
+
 end
 
 def get_type_script(sources)
@@ -177,7 +206,7 @@ end
 namespace :type_script do
     #TYPE_SCRIPT_SOURCES = FileList["docs/api/{web,mobile,dataviz,framework}/*.md"]
 
-    TYPE_SCRIPT_SOURCES = FileList["docs/api/web/calendar.md"]
+    TYPE_SCRIPT_SOURCES = FileList["docs/api/web/splitter.md"]
 
     %w(master production).each do |branch|
         namespace branch do
