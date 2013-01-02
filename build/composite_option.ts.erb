@@ -3,7 +3,7 @@
 % end
 
     interface <%= type_script_type %> {
-% options.each do |option|
+% unique_options.each do |option|
         <%= option.type_script_declaration %>
 % end
     }

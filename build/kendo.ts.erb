@@ -1,19 +1,68 @@
 // Type definitions for Kendo UI
 
+module kendo {
+    class Observable {
+        bind(eventName: string, handler: Function): Observable;
+        one(eventName: string, handler: Function): Observable;
+        trigger(eventName: string, e?: any): bool;
+        unbind(eventName: string, handler?: any): Observable;
+    }
+}
+
+module kendo.data {
+    class ObservableObject extends Observable{
+        get(name: string): any;
+        parent(): ObservableObject;
+        set(name: string, value: any);
+        toJSON(): { [key: string]: any; };
+    }
+
+    class Model extends ObservableObject {
+        dirty: bool;
+        uid: string;
+        editable(field: string): bool;
+        isNew(): bool;
+    }
+
+    class ObservableArray extends Observable {
+        length: number;
+        join(separator: string): string;
+        parent(): ObservableObject;
+        pop(): ObservableObject;
+        push(...items: any[]): number;
+        slice(begin: number, end?: number): any[];
+        splice(start: number): any[];
+        splice(start: number, deleteCount: number, ...items: any[]): any[];
+        shift(): any;
+        toJSON(): any[];
+        unshift(...items: any[]): number;
+    }
+}
+
+module kendo.ui {
+    class Widget extends Observable {
+    }
+}
+
+module kendo.mobile.ui {
+    class Widget extends kendo.ui.Widget {
+    }
+}
+
 % namespaces.keys.each do |key|
 module <%= key %> {
-%   namespaces[key].each do |widget|
-<%= widget.type_script_interface %>
+%   namespaces[key].each do |component|
+<%= component.type_script_class %>
 %   end
 % end
 }
 
 interface JQuery {
-% widgets.each do |widget|
-% unless widget.name.include?('Widget')
-    kendo<%= widget.plugin%>(): JQuery;
+% components.each do |component|
+% if component.full_name.include?('ui')
+    kendo<%= component.plugin%>(): JQuery;
 
-    kendo<%= widget.plugin%>(options: <%= widget.namespace %>.<%= widget.type_script_options_type%>): JQuery;
+    kendo<%= component.plugin%>(options: <%= component.namespace %>.<%= component.type_script_options_type%>): JQuery;
 % end
 % end
 }

@@ -10,12 +10,17 @@ module CodeGen::TypeScript
         'Number' => 'number',
         'String' => 'string',
         'Boolean' => 'bool',
+        'Document' => 'Document',
+        'Range' => 'Range',
         'Object' => 'any',
         'Array' => 'any',
         'Date' => 'date',
         'Function' => 'Function',
         'jQuery' => 'JQuery',
         'Selector' => 'string',
+        'kendo.data.ObservableObject' => 'ObservableObject',
+        'kendo.data.ObservableArray' => 'ObservableArray',
+        'kendo.data.Model' => 'Model',
         'Date' => 'Date'
     }
 
@@ -39,6 +44,12 @@ module CodeGen::TypeScript
         def type_script_declaration
             "#{name}: #{type_script_type};"
         end
+
+        def unique_options
+            composite = composite_options
+
+            options.find_all {|o| o.composite? || !composite.any? { |composite| composite.name == o.name } }
+        end
     end
 
     class Method < CodeGen::Method
@@ -55,25 +66,34 @@ module CodeGen::TypeScript
         end
 
         def type_script_declaration
-            declaration = "#{name}(#{type_script_parameters})"
+            declaration = "#{name}(#{type_script_parameters}): "
 
-            declaration += ": #{result.type_script_type}" if @result
+            if @result
+                declaration += @result.type_script_type
+            else
+                declaration += 'void'
+            end
 
             declaration + ';'
         end
     end
 
-    class Parameter < CodeGen::Parameter
+    module Type
         def type_script_type
-            type = @type.split('|')[0].strip
-            TYPES[type]
+            type = TYPES[@type.split('|')[0].strip]
+
+            raise "No TypeScript mapping for type #{@type}" unless type
+
+            type
         end
     end
 
+    class Parameter < CodeGen::Parameter
+        include Type
+    end
+
     class Result < CodeGen::Result
-        def type_script_type
-            TYPES[@type]
-        end
+        include Type
     end
 
     COMPONENT = ERB.new(File.read("build/component.ts.erb"), 0, '%<>')
@@ -87,6 +107,12 @@ module CodeGen::TypeScript
             @name
         end
 
+        def type_script_base_class
+            return 'Widget' if @full_name.include?('ui')
+
+            'Observable'
+        end
+
         def namespace
             @full_name.sub('.' + @name, '')
         end
@@ -95,7 +121,7 @@ module CodeGen::TypeScript
             type_script_type + 'Options'
         end
 
-        def type_script_interface
+        def type_script_class
             COMPONENT.result(binding)
         end
 
@@ -177,10 +203,9 @@ def get_type_script(sources)
         parser.parse(File.read(source), CodeGen::TypeScript::Component)
     end
 
-    widgets = components.find_all { |component| component.full_name.include?('.ui.') }
-                        .sort { |a, b| a.plugin <=> b.plugin }
+    components = components.sort { |a, b| a.plugin <=> b.plugin }
 
-    namespaces = widgets.group_by { |widget| widget.namespace }
+    namespaces = components.group_by { |component| component.namespace }
 
     TYPE_SCRIPT.result(binding)
 end
@@ -206,7 +231,8 @@ end
 namespace :type_script do
     #TYPE_SCRIPT_SOURCES = FileList["docs/api/{web,mobile,dataviz,framework}/*.md"]
 
-    TYPE_SCRIPT_SOURCES = FileList["docs/api/web/splitter.md"]
+    TYPE_SCRIPT_SOURCES = FileList["docs/api/web/*.md"]
+        .include('docs/api/framework/datasource.md')
 
     %w(master production).each do |branch|
         namespace branch do

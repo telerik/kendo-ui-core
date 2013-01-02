@@ -20,6 +20,7 @@ module CodeGen
         end
 
         def add_parameter(settings)
+            settings[:owner] = self
             @parameters.push parameter_class.new(settings)
         end
     end
@@ -34,11 +35,12 @@ module CodeGen
     end
 
     class Parameter
-        attr_reader :name, :description, :type
+        attr_reader :name, :description, :type, :owner
 
         def initialize(settings)
             @name = settings[:name]
             @type = settings[:type]
+            @owner = settings[:owner]
             @description = settings[:description] || ''
         end
     end

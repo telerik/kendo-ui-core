@@ -1,6 +1,9 @@
-    interface <%= type_script_type %> {
+    class <%= type_script_type %> extends <%= type_script_base_class %>{
         element: JQuery;
         options: <%= type_script_options_type %>;
+% if options.any? { |o| o.name == 'dataSource' }
+        dataSource: DataSource;
+% end
 % methods.each do |method|
         <%= method.type_script_declaration %>
 % end
@@ -10,7 +13,7 @@
 % end
 
     interface <%= type_script_options_type %> {
-% options.each do |option|
+% unique_options.each do |option|
         <%= option.type_script_declaration %>
 % end
     }
