@@ -52,7 +52,7 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that.draggable = draggable = that.options.draggable || new kendo.ui.Draggable(that.element, {
-                filter: that.options.filter,
+                filter: that.options.draggableElements,
                 hint: hint,
                 group: group
             });
