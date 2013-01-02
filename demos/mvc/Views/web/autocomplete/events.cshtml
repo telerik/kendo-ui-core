@@ -5,8 +5,8 @@
                 <div class="console"></div>
             </div>
             <div id="taxi">
-                <label for="products">Select a state in USA:</label>
-                <input id="products"/>
+                <label for="states">Select a state in USA:</label>
+                <input id="states"/>
             </div>
             <script>
                 $(document).ready(function() {
@@ -94,7 +94,7 @@
                             "Wyoming"
                         ];
 
-                    $("#products").kendoAutoComplete({
+                    $("#states").kendoAutoComplete({
                         dataSource: data,
                         select: onSelect,
                         change: onChange,
