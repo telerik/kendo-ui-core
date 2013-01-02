@@ -448,6 +448,20 @@
         table.prepend(colgroup);
     }
 
+    function convertToObject(array) {
+        var result = {},
+            item,
+            idx,
+            length;
+
+        for (idx = 0, length = array.length; idx < length; idx++) {
+            item = array[idx];
+            result[item.value] = item.text;
+        }
+
+        return result;
+    }
+
     var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -2594,21 +2608,16 @@
                 state.count ++;
             } else if (type === STRING) {
                 html += template;
-            } else if (columnValues && columnValues.length && isPlainObject(columnValues[0]) && "value" in columnValues[0]) {
-                html += "#var v =" + kendo.stringify(columnValues) + "#";
-                html += "#for (var idx=0,length=v.length;idx<length;idx++) {#";
-                html += "#if (v[idx].value == ";
+            } else if (columnValues && columnValues.length && isPlainObject(columnValues[0]) && "value" in columnValues[0] && field) {
+                html += "#var v =" + kendo.stringify(convertToObject(columnValues)) + "#";
+                html += "#var f = v[";
 
                 if (!settings.useWithBlock) {
                     html += paramName + ".";
                 }
 
-                html += field;
-                html += ") { #";
-                html += "${v[idx].text}";
-                html += "#break;#";
-                html += "#}#";
-                html += "#}#";
+                html += field + "]#";
+                html += "${f != null ? f : ''}";
             } else {
                 html += column.encoded ? "${" : "#=";
 
