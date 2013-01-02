@@ -17,7 +17,7 @@
 % end
 % item.simple_options.each do |option|
         <attribute>
-            <description><%= option.description %></description>
+            <description><%= option.description.html_encode %></description>
             <name><%= option.attr %></name>
             <rtexprvalue>true</rtexprvalue>
             <type><%= option.java_type %></type>

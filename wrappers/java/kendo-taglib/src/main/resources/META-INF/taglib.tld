@@ -3774,8 +3774,8 @@ sense for your colors.</description>
         </attribute>
         <attribute>
             <description>Only for the HSV selector.  If true, the widget will display the
-opacity slider.  Note that currently in HTML5 the <input
-type="color"> does not support opacity.</description>
+opacity slider.  Note that currently in HTML5 the &lt;input
+type="color"&gt; does not support opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -3806,7 +3806,7 @@ specified, the HTML for the element will look like this:</description>
         <attribute>
             <description>The initially selected color.  This can be a string supported by
 Color.parse or a Color object (see below).  Note that when
-initializing the widget from an <input> element, the initial color
+initializing the widget from an &lt;input&gt; element, the initial color
 will be decided by the field instead.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
@@ -6144,7 +6144,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The template for column's header cell. If sorting is enabled, it will be wrapped in a <a class="k-link"> element, so the template should consist of only inline elements
+            <description>The template for column's header cell. If sorting is enabled, it will be wrapped in a &lt;a class="k-link"&gt; element, so the template should consist of only inline elements
 in order to have valid HTML markup in the Grid.</description>
             <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>

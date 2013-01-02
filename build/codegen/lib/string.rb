@@ -17,6 +17,10 @@ class String
         self.sub(/s$/, '')
     end
 
+    def html_encode
+        return self.sub('&', '&amp;').sub('<', '&lt;').sub('>', '&gt;')
+    end
+
     def dos
 
         new_line = RUBY_PLATFORM =~ /w32/ ? "\n" : "\r\n"

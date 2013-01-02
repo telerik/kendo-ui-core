@@ -1,12 +1,12 @@
     <tag>
-        <description><%= description %></description>
+        <description><%= description.html_encode %></description>
         <name><%= tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
         <body-content><%= body_content %></body-content>
 
 % simple_options.each do |option|
         <attribute>
-            <description><%= option.description %></description>
+            <description><%= option.description.html_encode %></description>
             <name><%= option.attr %></name>
             <rtexprvalue>true</rtexprvalue>
             <type><%= option.java_type %></type>
