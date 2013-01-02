@@ -1601,7 +1601,8 @@
                     draggable: that._draggableInstance,
                     groupContainer: ">div.k-grouping-header",
                     dataSource: that.dataSource,
-                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell):visible[" + kendo.attr("field") + "]",
+                    draggableElements: ".k-header:not(.k-group-cell,.k-hierarchy-cell):visible[" + kendo.attr("field") + "]",
+                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
                     allowDrag: that.options.reorderable
                 }));
             }
