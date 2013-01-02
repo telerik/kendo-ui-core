@@ -944,6 +944,24 @@
                 equal(grid.items().first().find("td:first").text(), "custom text1");
             });
 
+            test("empty cell is displayed when value does not exists in values", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 3, bar: "bar"}],
+                    columns: [ { field: "foo", values: [ { value: 0, text: "custom text" }, { value: 1, text: "custom text1" },{ value: 2, text: "custom text2" }] } ]
+                });
+
+                equal(grid.items().first().find("td:first").text(), "");
+            });
+
+            test("column displays value from values if text is zero", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 0, bar: "bar"}],
+                    columns: [ { field: "foo", values: [ { value: 0, text: 0 }, { value: 1, text: "custom text1" },{ value: 2, text: "custom text2" }] } ]
+                });
+
+                equal(grid.items().first().find("td:first").text(), "0");
+            });
+
             test("column does not display value from values if value field is not defined", function() {
                 var grid = new Grid($("<table/>"), {
                     dataSource: [{ foo: 1, bar: "bar"}],
