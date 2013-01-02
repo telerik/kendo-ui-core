@@ -936,7 +936,7 @@ kendo_module({
         that.type = type;
 
         that.draggable = new Draggable(dragHandle, {
-            threshold: 0,
+            distance: 0,
             dragstart: proxy(that._dragstart, that),
             drag: proxy(that.drag, that),
             dragend: proxy(that.dragend, that),
