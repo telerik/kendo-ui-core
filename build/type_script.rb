@@ -12,6 +12,7 @@ module CodeGen::TypeScript
         'Boolean' => 'bool',
         'Object' => 'any',
         'Array' => 'any',
+        'Date' => 'date',
         'Function' => 'Function',
         'jQuery' => 'JQuery',
         'Date' => 'Date'
@@ -59,7 +60,8 @@ module CodeGen::TypeScript
 
     class Parameter < CodeGen::Parameter
         def type_script_type
-            TYPES[@type]
+            type = @type.split('|')[0].strip
+            TYPES[type]
         end
     end
 
@@ -175,7 +177,7 @@ end
 namespace :type_script do
     #TYPE_SCRIPT_SOURCES = FileList["docs/api/{web,mobile,dataviz,framework}/*.md"]
 
-    TYPE_SCRIPT_SOURCES = FileList["docs/api/web/autocomplete.md"]
+    TYPE_SCRIPT_SOURCES = FileList["docs/api/web/calendar.md"]
 
     %w(master production).each do |branch|
         namespace branch do
