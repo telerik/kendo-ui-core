@@ -13,6 +13,7 @@ module CodeGen::TypeScript
         'Object' => 'any',
         'Array' => 'any',
         'Function' => 'Function',
+        'jQuery' => 'JQuery',
         'Date' => 'Date'
     }
 
@@ -23,6 +24,36 @@ module CodeGen::TypeScript
 
         def composite_option_class
             CompositeOption
+        end
+
+        def method_class
+            Method
+        end
+    end
+
+    class Method < CodeGen::Method
+        def result_class
+            Result
+        end
+
+        def parameter_class
+            Parameter
+        end
+
+        def type_script_parameters
+            @parameters.map { |p| "#{p.name}:#{p.type_script_type}" }.join(', ')
+        end
+    end
+
+    class Parameter < CodeGen::Parameter
+        def type_script_type
+            TYPES[@type]
+        end
+    end
+
+    class Result < CodeGen::Result
+        def type_script_type
+            TYPES[@type]
         end
     end
 

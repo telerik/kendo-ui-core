@@ -3,16 +3,24 @@ module CodeGen
     class Method
         attr_reader :name, :owner, :description, :parameters, :result
 
+        def result_class
+            Result
+        end
+
+        def parameter_class
+            Parameter
+        end
+
         def initialize(settings)
             @name = settings[:name]
             @description = settings[:description] || ''
             @owner = settings[:owner]
             @parameters = []
-            @result = Result.new(settings[:result]) if settings[:result]
+            @result = result_class.new(settings[:result]) if settings[:result]
         end
 
         def add_parameter(settings)
-            @parameters.push Parameter.new(settings)
+            @parameters.push parameter_class.new(settings)
         end
     end
 
