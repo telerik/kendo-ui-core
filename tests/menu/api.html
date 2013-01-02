@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.menu.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
@@ -267,6 +268,29 @@
                 ok(item.find(".k-group").eq(0).data("kendoPopup").options.collision == "flip");
                 start();
             }, 1);
+        });
+
+        test('setOptions resets the animation', function() {
+            var m = new kendo.ui.Menu("<div />");
+
+            ok(!("effects" in m.options.animation.open));
+
+            m.setOptions({ animation: false });
+
+            ok("effects" in m.options.animation.open);
+            ok(kendo.size(m.options.animation.open.effects) == 0);
+            m.destroy();
+        });
+
+        test('setOptions resets the dataSource object', function() {
+            var m = new kendo.ui.Menu("<div />", { dataSource: [ { text: "Item 1" } ] });
+
+            ok(m.element.find("li").text() == "Item 1");
+
+            m.setOptions({ dataSource: [ { text: "Changed" } ] });
+
+            ok(m.element.find("li").text() == "Changed");
+            m.destroy();
         });
 
 </script>

@@ -249,16 +249,11 @@ kendo_module({
             element = that.wrapper = that.element;
             options = that.options;
 
-            if (options.dataSource) {
-                that.element.empty();
-                that.append(options.dataSource, element);
-            }
+            that._initData(options);
 
             that._updateClasses();
 
-            if (options.animation === false) {
-                options.animation = { open: { effects: {} }, close: { hide: true, effects: {} } };
-            }
+            that._animations(options);
 
             that.nextItemZIndex = 100;
 
@@ -320,6 +315,29 @@ kendo_module({
             openOnClick: false,
             closeOnClick: true,
             hoverDelay: 100
+        },
+
+        _initData: function(options) {
+            var that = this;
+
+            if (options.dataSource) {
+                that.element.empty();
+                that.append(options.dataSource, that.element);
+            }
+        },
+
+        setOptions: function(options) {
+            var animation = this.options.animation;
+
+            this._animations(options);
+
+            options.animation = extend(true, animation, options.animation);
+
+            if ("dataSource" in options) {
+                this._initData(options);
+            }
+
+            Widget.fn.setOptions.call(this, options);
         },
 
         destroy: function() {
@@ -1000,6 +1018,12 @@ kendo_module({
             }
 
             return nextItem;
+        },
+
+        _animations: function(options) {
+            if (options && ("animation" in options) && !options.animation) {
+                options.animation = { open: { effects: {} }, close: { hide: true, effects: {} } };
+            }
         }
 
     });
