@@ -78,6 +78,21 @@ module CodeGen::TypeScript
             name
         end
 
+        def add_method(settings)
+            description = settings[:description]
+            result = settings[:result]
+
+            if description =~ /Gets?\/Sets?/i
+
+                settings[:result] = nil
+
+                super(:description => description,
+                      :name => settings[:name],
+                      :result => result)
+            end
+
+            super(settings)
+        end
     end
 
     class CompositeOption < CodeGen::CompositeOption
