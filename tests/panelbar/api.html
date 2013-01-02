@@ -289,6 +289,29 @@
             ok($("#panel2").find(".k-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-i-arrow-n"));
         });
 
+        test('setOptions resets the animation', function() {
+            var p = new kendo.ui.PanelBar("<div />");
+
+            ok(p.options.animation.expand.effects == "expand:vertical");
+
+            p.setOptions({ animation: false });
+
+            ok("effects" in p.options.animation.expand);
+            ok(kendo.size(p.options.animation.expand.effects) == 0);
+            p.destroy();
+        });
+
+        test('setOptions resets the dataSource object', function() {
+            var p = new kendo.ui.PanelBar("<div />", { dataSource: [ { text: "Item 1" } ] });
+
+            ok(p.element.find("li").text() == "Item 1");
+
+            p.setOptions({ dataSource: [ { text: "Changed" } ] });
+
+            ok(p.element.find("li").text() == "Changed");
+            p.destroy();
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>

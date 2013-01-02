@@ -193,21 +193,17 @@
             element = that.wrapper = that.element.addClass("k-widget k-reset k-header k-panelbar");
             options = that.options;
 
-            if (options.dataSource) {
-                that.element.empty();
-                that.append(options.dataSource, element);
-            }
-
             if (element[0].id) {
                 that._itemId = element[0].id + "_pb_active";
             }
 
             that._tabindex();
+
+            that._initData(options);
+
             that._updateClasses();
 
-            if (options.animation === false) {
-                options.animation = { expand: { effects: {} }, collapse: { hide:true, effects: {} } };
-            }
+            that._animations(options);
 
             element
                 .on("click" + NS, clickableItems, function(e) {
@@ -272,6 +268,30 @@
 
             kendo.destroy(this.element);
         },
+
+        _initData: function(options) {
+            var that = this;
+
+            if (options.dataSource) {
+                that.element.empty();
+                that.append(options.dataSource, that.element);
+            }
+        },
+
+        setOptions: function(options) {
+            var animation = this.options.animation;
+
+            this._animations(options);
+
+            options.animation = extend(true, animation, options.animation);
+
+            if ("dataSource" in options) {
+                this._initData(options);
+            }
+
+            Widget.fn.setOptions.call(this, options);
+        },
+
         expand: function (element, useAnimation) {
             var that = this,
                 animBackup = {};
@@ -977,7 +997,14 @@
             link.addClass(SELECTEDCLASS);
             link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS);
             that._current(item);
+        },
+
+        _animations: function(options) {
+            if (options && ("animation" in options) && !options.animation) {
+                options.animation = { expand: { effects: {} }, collapse: { hide: true, effects: {} } };
+            }
         }
+
     });
 
     // client-side rendering
