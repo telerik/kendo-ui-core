@@ -333,6 +333,44 @@
 
                 equal(tooltip.popup.element.height(), 100);
             });
+
+            test("callout is rendered if enabled", function() {
+                var tooltip = new Tooltip(container, {
+                    callout: true
+                });
+
+                tooltip.show(container);
+
+                ok(tooltip.popup.wrapper.find(".k-callout").length);
+            });
+
+            test("callout is rendered by default", function() {
+                var tooltip = new Tooltip(container, { });
+
+                tooltip.show(container);
+
+                ok(tooltip.popup.wrapper.find(".k-callout").length);
+            });
+
+            test("callout is not rendered if not enabled", function() {
+                var tooltip = new Tooltip(container, {
+                    callout: false
+                });
+
+                tooltip.show(container);
+
+                ok(!tooltip.popup.wrapper.find(".k-callout").length);
+            });
+
+            test("callout class is set for the position", function() {
+                var tooltip = new Tooltip(container, {
+                    position: "left"
+                });
+
+                tooltip.show(container);
+
+                ok(tooltip.popup.wrapper.find(".k-callout-e").length);
+            });
         </script>
     </body>
 </html>

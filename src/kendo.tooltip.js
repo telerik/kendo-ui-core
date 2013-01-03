@@ -20,7 +20,9 @@ kendo_module({
         ERROR = "error",
         CONTENTLOAD = "contentLoad",
         KCONTENTFRAME = "k-content-frame",
-        TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em"><div class="k-tooltip-content"></div></div>',
+        TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em"><div class="k-tooltip-content"></div>' +
+                '#if (callout){ #<div class="k-callout k-callout-#=dir#"></div>#}#' +
+            '</div>',
         IFRAMETEMPLATE = kendo.template(
         "<iframe frameborder='0' class='" + KCONTENTFRAME + "' " +
                 "src='#= content.url #'>" +
@@ -28,28 +30,35 @@ kendo_module({
         "</iframe>"),
         NS = ".kendoTooltip",
         POSITIONS = {
-            "below": {
+            below: {
                 origin: "bottom center",
                 position: "top center"
             },
-            "over": {
+            over: {
                 origin: "top center",
                 position: "bottom center"
             },
-            "left": {
+            left: {
                 origin: "center left",
                 position: "center right",
                 collision: "fit flip"
             },
-            "right": {
+            right: {
                 origin: "center right",
                 position: "center left",
                 collision: "fit flip"
             },
-            "center": {
+            center: {
                 position: "top center",
                 origin: "center center"
             }
+        },
+        DIRCLASSES = {
+            bellow: "n",
+            over: "s",
+            left: "e",
+            right: "w",
+            center: "n"
         };
 
     function restoreTitle(element) {
@@ -97,7 +106,8 @@ kendo_module({
             name: "Tooltip",
             filter: "",
             content: "",
-            showAfter: 100
+            showAfter: 100,
+            callout: true
         },
 
         events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
@@ -208,7 +218,10 @@ kendo_module({
         _initPopup: function() {
             var that = this,
                 options = that.options,
-                wrapper = $(kendo.template(TEMPLATE)({}));
+                wrapper = $(kendo.template(TEMPLATE)({
+                    callout: options.callout,
+                    dir: DIRCLASSES[options.position]
+                }));
 
             that.popup = new Popup(wrapper, extend({
                 open: function() {
