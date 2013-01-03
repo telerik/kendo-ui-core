@@ -18,7 +18,7 @@
     <script>
         module("Color tools", {
             setup: function() {
-                cp = $("#x").kendoColorSelectorPalette().data("kendoColorSelectorPalette");
+                cp = $("#x").kendoColorPalette().data("kendoColorPalette");
             },
             teardown: function() {
                 x.innerHTML = "";
@@ -30,8 +30,8 @@
                 var label = $(this).attr("aria-label");
                 ok(label, "aria-label defined on LI elements"); // label defined
                 var bg = $(this).find("div");
-                var color = kendo.Color.parse(label);
-                bg = kendo.Color.parse(bg.css("background-color"));
+                var color = kendo.parseColor(label);
+                bg = kendo.parseColor(bg.css("background-color"));
                 ok(color && bg && color.equals(bg), "aria-label is same as background color");
             });
         });
