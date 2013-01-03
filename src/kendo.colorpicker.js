@@ -208,7 +208,7 @@ kendo_module({
         options: {
             name: "ColorPalette",
             columns: 10,
-            palette: SIMPLEPALETTE
+            palette: "basic"
         },
         _template: kendo.template(
             '<div class="k-colorpicker-popup">' +
