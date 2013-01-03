@@ -606,7 +606,7 @@ kendo_module({
         }
     });
 
-    var parse = function(color, nothrow) {
+    function parse(color, nothrow) {
         if (color == null ||
             color == "transparent" /* IE8 does this */)
         {
@@ -654,7 +654,7 @@ kendo_module({
         if (!nothrow) {
             throw new Error("Cannot parse color: " + color);
         }
-        return null;
+        return undefined;
     };
 
     function relative(array, element, delta) {
