@@ -324,7 +324,7 @@
                 that._currentWidth = width;
             }
 
-            if (!that._hovered) {
+            if (!that._hovered && !contains(that.element[0], document.activeElement)) {
                 that.close();
             }
         },
