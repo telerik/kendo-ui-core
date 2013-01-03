@@ -1,4 +1,4 @@
-namespace Kendo.Mvc.UI.Tests.ColorPicker
+namespace Kendo.Mvc.UI.Tests
 {
     using System.Web.Mvc;
     using Kendo.Mvc;

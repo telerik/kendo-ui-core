@@ -1,9 +1,10 @@
-namespace Kendo.Mvc.UI.Tests.ColorPicker
+namespace Kendo.Mvc.UI.Tests
 {
     using System.IO;
     using Kendo.Mvc.UI;
     using Moq;
     using Xunit;
+    using System.Collections.Generic;
 
     public class ColorPickerSerializationTests
     {
@@ -40,10 +41,28 @@ namespace Kendo.Mvc.UI.Tests.ColorPicker
         [Fact]
         public void WebSafe_palette_is_serialized()
         {
-            colorpicker.Palette = ColorPickerPalette.Web;
+            colorpicker.Palette = ColorPickerPalette.WebSafe;
             colorpicker.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{\"palette\":\"web\"}");
+            output.ShouldContain("{\"palette\":\"websafe\"}");
+        }
+
+        [Fact]
+        public void Arbitrary_palette_is_serialized()
+        {
+            colorpicker.PaletteColors = new List<string>() { "ff0000", "00ff00", "0000ff" };
+            colorpicker.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"palette\":[\"ff0000\",\"00ff00\",\"0000ff\"]}");
+        }
+
+        [Fact]
+        public void Opacity_is_serialized()
+        {
+            colorpicker.Opacity = true;
+            colorpicker.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"opacity\":true}");
         }
     }
 }

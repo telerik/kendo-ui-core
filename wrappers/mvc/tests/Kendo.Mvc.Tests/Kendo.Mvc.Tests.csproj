@@ -164,6 +164,7 @@
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\ColorPicker\ColorPickerSerializationTests.cs" />
     <Compile Include="UI\ColorPicker\ColorPickerTestHelper.cs" />
+    <Compile Include="UI\ColorPicker\ColorPickerHtmlBuilderTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
     <Compile Include="UI\Editor\ImageBrowserControllerTests.cs" />
     <Compile Include="UI\Grid\GridScrollingSettingsTests.cs" />

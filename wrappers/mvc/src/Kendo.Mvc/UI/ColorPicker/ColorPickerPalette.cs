@@ -17,6 +17,6 @@
         /// <summary>
         /// Use a palette of web-safe colors
         /// </summary>
-        Web
+        WebSafe
     }
 }

@@ -20,9 +20,13 @@ namespace Kendo.Mvc.UI
 
         public ColorPickerPalette Palette { get; set; }
 
+        public IEnumerable<string> PaletteColors { get; set; }
+
         public string Value { get; set; }
 
         public bool Enabled { get; set; }
+
+        public bool Opacity { get; set; }
        
         public override void WriteInitializationScript(TextWriter writer)
         {
@@ -32,9 +36,18 @@ namespace Kendo.Mvc.UI
             {
                 options["palette"] = "basic";
             }
-            else if (Palette == ColorPickerPalette.Web)
+            else if (Palette == ColorPickerPalette.WebSafe)
             {
-                options["palette"] = "web";
+                options["palette"] = "websafe";
+            }
+            else if (PaletteColors != null && PaletteColors.Any())
+            {
+                options["palette"] = PaletteColors;
+            }
+
+            if (Opacity)
+            {
+                options["opacity"] = true;
             }
 
             writer.Write(Initializer.Initialize(Selector, "ColorPicker", options));
