@@ -11,6 +11,7 @@ module kendo {
 
 module kendo.data {
     class ObservableObject extends Observable{
+        constructor(value?: any);
         get(name: string): any;
         parent(): ObservableObject;
         set(name: string, value: any);
@@ -18,13 +19,16 @@ module kendo.data {
     }
 
     class Model extends ObservableObject {
+        constructor(data?: any);
         dirty: bool;
+        id: any;
         uid: string;
         editable(field: string): bool;
         isNew(): bool;
     }
 
     class ObservableArray extends Observable {
+        constructor(array?: any[]);
         length: number;
         join(separator: string): string;
         parent(): ObservableObject;
