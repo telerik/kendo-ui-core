@@ -68,6 +68,7 @@ class MarkdownParserTests < Test::Unit::TestCase
 
 ## Configuration
 
+
 ### foo `String`
 
 bar `foo`
@@ -156,6 +157,67 @@ Foo
         assert_equal 'bar', result.methods[0].parameters[0].name
     end
 
+    def test_parse_composite_method_parameter
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+#### Parameters
+
+##### bar `Object`
+
+##### bar.baz `String`
+
+        })
+
+        assert_equal 'baz', result.methods[0].parameters[0].parameters[0].name
+    end
+
+    def test_parse_multiple_composite_method_parameter
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+#### Parameters
+
+##### bar `Object`
+
+##### bar.baz `Object`
+
+##### bar.baz.boo `String`
+
+        })
+
+        assert_equal 'boo', result.methods[0].parameters[0].parameters[0].parameters[0].name
+    end
+
+    def test_parse_composite_method_parameter_with_many_parameters
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+#### Parameters
+
+##### bar `Object`
+
+##### bar.baz `String`
+
+##### bar.boo `String`
+
+        })
+
+        assert_equal 'boo', result.methods[0].parameters[0].parameters[1].name
+    end
+
     def test_parse_method_parameter_description
         result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
@@ -210,7 +272,7 @@ Bar
 
         })
 
-        assert_equal 'String', result.methods[0].parameters[0].type
+        assert_equal 'String', result.methods[0].parameters[0].type[0]
     end
 
     def test_method_result_empty
