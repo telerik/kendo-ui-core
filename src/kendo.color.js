@@ -486,7 +486,6 @@ kendo_module({
     }
 
     var Color = Class.extend({
-        init: function(){ throw new Error("kendo.Color is an abstract base class"); },
         toHSV: function() { return this; },
         toRGB: function() { return this; },
         toHex: function() { return this.toBytes().toHex(); },
@@ -521,18 +520,6 @@ kendo_module({
             return c;
         }
     });
-
-    Color.fromBytes = function(r, g, b, a) {
-        return new _Bytes(r, g, b, a != null ? a : 1);
-    };
-
-    Color.fromRGB = function(r, g, b, a) {
-        return new _RGB(r, g, b, a != null ? a : 1);
-    };
-
-    Color.fromHSV = function(h, s, v, a) {
-        return new _HSV(h, s, v, a != null ? a : 1);
-    };
 
     var _RGB = Color.extend({
         init: function(r, g, b, a) {
@@ -619,7 +606,7 @@ kendo_module({
         }
     });
 
-    var parse = Color.parse = function(color, nothrow) {
+    var parse = function(color, nothrow) {
         if (color == null ||
             color == "transparent" /* IE8 does this */)
         {
@@ -891,6 +878,17 @@ kendo_module({
     ui.plugin(ColorHSV);
     ui.plugin(ColorPicker);
 
-    kendo.Color = Color;
+    kendo.parseColor = parse;
+    kendo.Color = {
+        fromBytes: function(r, g, b, a) {
+            return new _Bytes(r, g, b, a != null ? a : 1);
+        },
+        fromRGB: function(r, g, b, a) {
+            return new _RGB(r, g, b, a != null ? a : 1);
+        },
+        fromHSV: function(h, s, v, a) {
+            return new _HSV(h, s, v, a != null ? a : 1);
+        }
+    };
 
 })(jQuery, parseInt);
