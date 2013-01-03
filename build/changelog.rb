@@ -171,6 +171,8 @@ class ChangeLog
 
             names.unshift self.class.milestone_name(year, q, "next")
        end
+
+       names
     end
 
     class << self
