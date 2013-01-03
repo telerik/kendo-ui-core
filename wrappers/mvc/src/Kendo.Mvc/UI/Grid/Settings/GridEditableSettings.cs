@@ -162,8 +162,10 @@ namespace Kendo.Mvc.UI
         private IDictionary<string, object> SerializePopUp()
         {
             var result = new Dictionary<string, object>();
+            var title = PopUp.Title ?? Messages.Grid_Edit;
+
             FluentDictionary.For(result)
-                .Add("title", PopUp.Title, "")
+                .Add("title", title)
                 .Add("modal", PopUp.Modal)
                 .Add("draggable", PopUp.Draggable)
                 .Add("resizable", PopUp.ResizingSettings.Enabled);
