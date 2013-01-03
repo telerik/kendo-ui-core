@@ -680,8 +680,10 @@ kendo_module({
 
                 tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
                 if (tooltipOptions.visible) {
-                    tooltip.options.stickyMode = true;
                     tooltip.plotArea = chart._plotArea;
+                    if (tooltipOptions.shared) {
+                        point = chart._eventCoordinates(e);
+                    }
                     tooltip.show(point);
                 }
 
@@ -717,9 +719,11 @@ kendo_module({
                         chart._activePoint = seriesPoint;
 
                         tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
-                        if (tooltipOptions.visible) {
-                            tooltip.show(seriesPoint);
+                        tooltip.plotArea = chart._plotArea;
+                        if (tooltipOptions.shared) {
+                            point = coords = chart._eventCoordinates(e);
                         }
+                        tooltip.show(point);
                         highlight.show(seriesPoint);
                     }
                 }
@@ -6986,8 +6990,6 @@ kendo_module({
                 element = tooltip.element,
                 chartPadding = tooltip.chartPadding, top, left;
 
-            plotArea.pointsByCategory(category);
-
             top = round(anchor.y + chartPadding.top) + "px";
             left = round(anchor.x + chartPadding.left) + "px";
 
@@ -6999,7 +7001,7 @@ kendo_module({
                 .css({
                    backgroundColor: options.background,
                    // Here you need to pass point color
-                   borderColor: options.border.color || point.options.color,
+                   borderColor: options.border.color || "blue",
                    font: options.font,
                    color: options.color,
                    opacity: options.opacity,
@@ -7016,7 +7018,7 @@ kendo_module({
         },
 
         pointContent: function(point) {
-            var tooptip = this,
+            var tooltip = this,
                 content = point.value.toString(),
                 options = deepExtend({}, tooltip.options, point.options.tooltip),
                 tooltipTemplate;
@@ -7053,33 +7055,29 @@ kendo_module({
 
     var SinglePointTooltip = Tooltip.extend({
         show: function(point) {
-            var tooltip = this;
+            var tooltip = this,
+                element = tooltip.element;
 
             if (point) {
-                content = tooltip.pointContent(point);
-                anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
+                tooltip.content = tooltip.pointContent(point);
+                tooltip.anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
             } else {
                 return;
             }
 
             tooltip.showTimeout =
                 setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
-        },
+        }
     });
 
-    var MultiplePointTooltip = Class.extend({
+    var MultiplePointTooltip = Tooltip.extend({
         show: function(point) {
             var tooltip = this,
                 options = tooltip.options,
-                point = tooltip.point,
-                plotArea = tooltip.plotArea,
-                element = tooltip.element,
-                content = "", points,
-                anchor;
+                content = "";
 
             if (options.shared) {
-                points = tooltip.getPoints();
-                content = tooltip.getContent(points);
+                content = tooltip.getContent(tooltip.getPoints(point));
             }
 
             tooltip.element.html(content);
@@ -7101,9 +7099,30 @@ kendo_module({
                         continue;
                     }
 
-                    content = tooltip.pointContent(point);
+                    content += tooltip.pointContent(point);
                 }
             }
+
+            return content;
+        },
+
+        getPoints: function(point) {
+            var tooltip = this,
+                plotArea = tooltip.plotArea,
+                pane = plotArea.pointPane(point),
+                axes = pane.axes,
+                points = [], i, axis, category;
+
+            for (i = 0; i < axes.length; i++) {
+                axis = axes[i];
+
+                if (axis instanceof CategoryAxis) {
+                    category = axis.getCategory(point);
+                    append(points, plotArea.pointsByCategory(category));
+                }
+            }
+
+            return points;
         }
     });
 
