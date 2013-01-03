@@ -431,7 +431,7 @@ var ColorTool = Tool.extend({
             value: "#000",
             toolIcon: "k-" + this.options.name,
             palette: "websafe",
-            change: function(e) {
+            change: function() {
                 var color = ui.value();
                 if (color) {
                     Tool.exec(editor, toolName, color);

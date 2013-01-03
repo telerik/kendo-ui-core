@@ -655,7 +655,7 @@ kendo_module({
             throw new Error("Cannot parse color: " + color);
         }
         return undefined;
-    };
+    }
 
     function relative(array, element, delta) {
         array = Array.prototype.slice.call(array);
