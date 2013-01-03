@@ -1224,7 +1224,10 @@ kendo_module({
 
         options: {
             plotArea: {},
-            theme: "default"
+            theme: "default",
+            pointer: {},
+            scale: {},
+            gaugeArea: {}
         },
 
         value: function(value) {
