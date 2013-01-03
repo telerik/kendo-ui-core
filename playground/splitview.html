@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Dual Split Example</title>
+        <style type="text/css">
+          #basicMap {
+              height: 1000px;
+          }
+
+          #bottomPane
+          {
+              -webkit-box-flex: 1;
+              -webkit-flex: 1;
+          }
+
+          #bottomPane,
+          #bottomPane .km-view > :first-child
+          {
+              -webkit-border-top-left-radius: 0;
+              -webkit-border-top-right-radius: 0;
+          }
+
+          #internalSplit .km-pane,
+          #internalSplit .km-view > :first-child,
+          #internalSplit .km-view > :last-child
+          {
+              border-radius: 0;
+              -webkit-border-radius: 0;
+          }
+
+          .km-stretched-view {
+              -webkit-box-orient: vertical;
+              -webkit-flex-direction: column;
+          }
+        </style>
+        <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+        <script>
+          function initMap() {
+            map = new OpenLayers.Map("basicMap");
+            var mapnik         = new OpenLayers.Layer.OSM(),
+                fromProjection = new OpenLayers.Projection("EPSG:4326"),   // Transform from WGS 1984
+                toProjection   = new OpenLayers.Projection("EPSG:900913"), // to Spherical Mercator Projection
+                position       = new OpenLayers.LonLat(13.41,52.52).transform( fromProjection, toProjection),
+                zoom           = 15;
+
+            map.addLayer(mapnik);
+            map.setCenter(position, zoom );
+          }
+        </script>
+        <!--<script src="../src/jquery.min.js"></script>-->
+        <!--<script src="../src/kendo.core.js"></script>-->
+        <!--<script src="../src/kendo.fx.js"></script>-->
+        <!--<script src="../src/kendo.data.js"></script>-->
+        <!--<script src="../src/kendo.draganddrop.js"></script>-->
+        <!--<script src="../src/kendo.userevents.js"></script>-->
+        <!--<script src="../src/kendo.history.js"></script>-->
+        <!--<script src="../src/kendo.mobile.scroller.js"></script>-->
+        <!--<script src="../src/kendo.mobile.scrollview.js"></script>-->
+        <!--<script src="../src/kendo.mobile.navbar.js"></script>-->
+        <!--<script src="../src/kendo.mobile.loader.js"></script>-->
+        <!--<script src="../src/kendo.mobile.button.js"></script>-->
+        <!--<script src="../src/kendo.mobile.tabstrip.js"></script>-->
+        <!--<script src="../src/kendo.mobile.listview.js"></script>-->
+        <!--<script src="../src/kendo.mobile.view.js"></script>-->
+        <!--<script src="../src/kendo.mobile.splitview.js"></script>-->
+        <!--<script src="../src/kendo.mobile.pane.js"></script>-->
+        <!--<script src="../src/kendo.mobile.application.js"></script>-->
+        <!--<link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />-->
+        <!--<script src="../demos/mvc/content/shared/js/less.js"></script>-->
+        <link href="http://cdn.kendostatic.com/2012.3.1114/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://cdn.kendostatic.com/2012.3.1114/js/kendo.all.min.js"></script>
+    </head>
+    <body>
+        <div data-role="splitview" data-style="vertical">
+            <div data-role="pane">
+                <div data-role="view" data-stretch="true">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <div data-role="view-title">Airports Brief</div>
+                        </div>
+                    </div>
+                    <div class="km-view km-splitview km-split-horizontal" id="internalSplit">
+                        <div class="km-pane">
+                            <div data-role="view">
+                                <div data-role="header">
+                                    <div data-role="navbar">
+                                        <div data-role="view-title">Airports</div>
+                                    </div>
+                                </div>
+                                <ul data-role="listview" data-click="resetMap">
+                                    <li>
+                                        <a>Test 1</a>
+                                    </li>
+                                    <li>
+                                        <a>Test 2</a>
+                                    </li>
+                                    <li>
+                                        <a>Test 3</a>
+                                    </li>
+                                    <li>
+                                        <a>Test 4</a>
+                                    </li>
+                                    <li>
+                                        <a>Test 5</a>
+                                    </li>
+                                    <li>
+                                        <a>Test 6</a>
+                                    </li>
+                                    <li>
+                                        <a>Test 7</a>
+                                    </li>
+                                    <li>
+                                        <a>Test 8</a>
+                                    </li>
+                                    <li>
+                                        <a>Test 9</a>
+                                    </li>
+                                    <li>
+                                        <a>Test 10</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="km-pane">
+                            <div data-role="view" data-stretch="true" id="map">
+                                <div id="basicMap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-role="pane" id="bottomPane">
+                <div data-role="view" id="bottom">
+                    <ul data-role="buttongroup" data-index="0">
+                        <li>
+                            Weather
+                        </li>
+                        <li>
+                            METAR (1)
+                        </li>
+                        <li>
+                            TAF (1)
+                        </li>
+                        <li>
+                            NOTAR (13)
+                        </li>
+                    </ul>
+
+                    <div data-role="footer">
+                        <div data-role="tabstrip">
+                            <a data-role="button" data-icon="home">Airport Brief</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function resetMap() {
+                var position       = new OpenLayers.LonLat(Math.random()+13,Math.random()+52),
+                    zoom           = Math.random()*15;
+
+                map.setCenter(position, zoom );
+            }
+
+            var app = new kendo.mobile.Application();
+            initMap();
+        </script>
+    </body>
+</html>
