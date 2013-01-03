@@ -438,6 +438,11 @@ var ColorTool = Tool.extend({
                 }
             }
         });
+        ui.bind("activate", function(ev){
+            ev.preventDefault();
+            ui.trigger("change");
+            editor.focus();
+        });
         ui.element.attr("title", initOptions.title);
     }
 });

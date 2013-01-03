@@ -714,6 +714,12 @@ kendo_module({
                 content.attr("accesskey", accesskey);
             }
 
+            that.bind("activate", function(ev){
+                if (!ev.isDefaultPrevented()) {
+                    that.toggle();
+                }
+            });
+
             that._updateUI(value);
         },
         destroy: function() {
@@ -737,7 +743,7 @@ kendo_module({
                     .on(KEYDOWN_NS, bind(that._keydown, that))
                     .on(MOUSEDOWN_NS, ".k-icon", bind(that.toggle, that))
                     .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
-                        that.trigger("change");
+                        that.trigger("activate");
                     });
             } else {
                 wrapper.addClass("k-state-disabled")
@@ -775,7 +781,7 @@ kendo_module({
             preview: true
         },
 
-        events: [ "change", "select" ],
+        events: [ "activate", "change", "select" ],
 
         open: function() {
             this._getPopup().open();
