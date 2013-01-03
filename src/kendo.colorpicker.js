@@ -1,5 +1,5 @@
 kendo_module({
-    id: "color",
+    id: "colorpicker",
     name: "Color tools",
     category: "web",
     description: "Color selection widgets",
