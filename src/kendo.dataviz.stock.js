@@ -286,8 +286,14 @@
         },
 
         _zoom: function(e) {
-            var navi =  this,
-                delta = e.delta;
+            var navi = this,
+                chart = navi.chart,
+                delta = e.delta,
+                navigatorAxis = navi.mainAxis(),
+                axis = chart._plotArea.categoryAxis,
+                select = navi.options.select,
+                selection = chart._selection,
+                selectionLength = selection.options.to - selection.options.from;
 
             e.originalEvent.preventDefault();
 
@@ -295,24 +301,12 @@
                 delta *= ZOOM_ACCELERATION;
             }
 
-            navi._applyZoom(delta);
-        },
-
-        _applyZoom: function(delta) {
-            var navi = this,
-                chart = navi.chart,
-                navigatorAxis = navi.mainAxis(),
-                axis = chart._plotArea.categoryAxis,
-                select = navi.options.select,
-                selection = chart._selection,
-                selectionLength = selection.options.to - selection.options.from;
-
             if (selectionLength > 1) {
                 selection.expandLeft(delta);
                 navi.readSelection();
             } else {
                 axis.options.min = select.from;
-                select.from = axis.scaleRange(-delta).min;
+                select.from = axis.scaleRange(-e.delta).min;
             }
 
             if (!kendo.support.touch) {

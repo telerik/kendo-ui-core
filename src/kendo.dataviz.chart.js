@@ -480,7 +480,6 @@
 
             if (origEvent.wheelDelta) {
               delta = -origEvent.wheelDelta / 120;
-              delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
             }
 
             if (origEvent.detail) {
@@ -499,6 +498,7 @@
                 state.totalDelta = totalDelta + delta;
 
                 axes = chart._navState.axes;
+
                 for (i = 0; i < axes.length; i++) {
                     currentAxis = axes[i];
                     axisName = currentAxis.options.name;
