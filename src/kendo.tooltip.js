@@ -53,12 +53,23 @@ kendo_module({
                 origin: "center center"
             }
         },
+        REVERSE = {
+            "over": "below",
+            "below": "over",
+            "left": "right",
+            "right": "left",
+            "center": "center"
+        },
         DIRCLASSES = {
             bellow: "n",
             over: "s",
             left: "e",
             right: "w",
             center: "n"
+        },
+        DIMENSIONS = {
+            "horizontal": { offset: "top", size: "height" },
+            "vertical": { offset: "left", size: "width" }
         };
 
     function restoreTitle(element) {
@@ -93,9 +104,14 @@ kendo_module({
 
     var Tooltip = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                axis;
 
             Widget.fn.init.call(that, element, options);
+
+            axis = that.options.position.match(/left|right/) ? "horizontal" : "vertical";
+
+            that.dimensions = DIMENSIONS[axis];
 
             that.element
                 .on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that))
@@ -107,7 +123,8 @@ kendo_module({
             filter: "",
             content: "",
             showAfter: 100,
-            callout: true
+            callout: true,
+            position: "center"
         },
 
         events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
@@ -224,7 +241,11 @@ kendo_module({
                 }));
 
             that.popup = new Popup(wrapper, extend({
-                open: function() {
+                activate: function() {
+                    if (options.callout) {
+                        that._positionCallout();
+                    }
+
                     that.trigger(SHOW);
                 },
                 close: function() {
@@ -238,7 +259,7 @@ kendo_module({
             });
 
             that.content = wrapper.find(".k-tooltip-content");
-
+            that.arrow = wrapper.find(".k-callout");
             wrapper.on("mouseleave" + NS, proxy(that._mouseleave, that));
         },
 
@@ -259,6 +280,24 @@ kendo_module({
                 this.popup.close();
             }
             clearTimeout(this.timeout);
+        },
+
+        _positionCallout: function() {
+            var that = this,
+                position = that.options.position,
+                dimensions = that.dimensions,
+                offset = dimensions.offset,
+                popup = that.popup,
+                anchor = popup.options.anchor,
+                anchorOffset = $(anchor).offset(),
+                elementOffset = $(popup.element).offset(),
+                cssClass = DIRCLASSES[popup.flipped ? REVERSE[position] : position],
+                offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2);
+
+           that.arrow
+               .removeClass("k-callout-n k-callout-s k-callout-w k-callout-e")
+               .addClass("k-callout-" + cssClass)
+               .css(offset, offsetAmount);
         },
 
         target: function() {
