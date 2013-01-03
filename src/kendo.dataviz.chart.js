@@ -487,7 +487,8 @@ kendo_module({
                 ranges = {};
 
             if (origEvent.wheelDelta) {
-                delta = round(-origEvent.wheelDelta / 120);
+                delta = -origEvent.wheelDelta / 120;
+                delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
             }
 
             if (origEvent.detail) {
