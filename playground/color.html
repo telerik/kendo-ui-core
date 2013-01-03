@@ -61,7 +61,7 @@
     </div>
 
     <script>
-      window.flat = $("#flat").kendoColorSelectorPalette().data("kendoColorSelectorPalette");
+      window.flat = $("#flat").kendoColorPalette().data("kendoColorPalette");
 
       $("#dropdown").kendoColorPicker({ palette: "basic", toolIcon: "k-foreColor" });
       $("#dropdown2").kendoColorPicker({ palette: "websafe", toolIcon: "k-backColor" });
@@ -71,19 +71,23 @@
       $("#dropdown6").kendoColorPicker({ preview: false, opacity: false });
       $("#dropdown7").kendoColorPicker({ preview: false, opacity: false, buttons: false });
 
-      window.hsv1 = $("#hsv1").kendoColorSelectorHSV({ buttons: false, opacity: true }).data("kendoColorSelectorHSV");
-      window.hsv2 = $("#hsv2").kendoColorSelectorHSV({ buttons: false, opacity: true }).data("kendoColorSelectorHSV");
+      window.hsv1 = $("#hsv1").kendoColorHSV({ buttons: false, opacity: true }).data("kendoColorHSV");
+      window.hsv2 = $("#hsv2").kendoColorHSV({ buttons: false, opacity: true }).data("kendoColorHSV");
       window.cp1 = $("#dropdown3").data("kendoColorPicker");
       window.cp2 = $("#dropdown4").data("kendoColorPicker");
 
       window.dd1 = $("#dropdown5").data("kendoColorPicker");
       window.dd2 = $("#dropdown").data("kendoColorPicker");
 
-      flat.bind("change", function(ev){
-        hsv1.select(ev.value);
+      flat.bind("change", function(){
+        hsv1.value(flat.value());
+        hsv1.trigger("change");
       });
-      hsv1.bind(["slide", "change"], function(ev){
-        hsv2.select(ev.value, true);
+      hsv1.bind("select", function(ev) {
+        hsv2.value(ev.value);
+      });
+      hsv1.bind("change", function(){
+        hsv2.value(hsv1.value());
       });
 
       $("#dropdown3").data("kendoColorPicker").bind({

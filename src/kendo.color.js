@@ -32,7 +32,7 @@ kendo_module({
     var browser = kendo.support.browser;
     var isIE8 = browser.msie && parseInt(browser.version, 10) < 9;
 
-    var ColorSelectorBase = Widget.extend({
+    var ColorSelector = Widget.extend({
         init: function(element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
@@ -79,10 +79,10 @@ kendo_module({
         }
     });
 
-    var ColorSelectorPalette = ColorSelectorBase.extend({
+    var ColorPalette = ColorSelector.extend({
         init: function(element, options) {
             var that = this;
-            ColorSelectorBase.fn.init.call(that, element, options);
+            ColorSelector.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
             var colors = options.palette;
@@ -198,7 +198,7 @@ kendo_module({
             this.wrapper.focus();
         },
         options: {
-            name: "ColorSelectorPalette",
+            name: "ColorPalette",
             columns: 10,
             palette: SIMPLEPALETTE
         },
@@ -215,10 +215,10 @@ kendo_module({
         )
     });
 
-    var ColorSelectorHSV = ColorSelectorBase.extend({
+    var ColorHSV = ColorSelector.extend({
         init: function(element, options) {
             var that = this;
-            ColorSelectorBase.fn.init.call(that, element, options);
+            ColorSelector.fn.init.call(that, element, options);
             options = that.options;
             element = that.element;
 
@@ -274,7 +274,7 @@ kendo_module({
                 });
             }
 
-            that._updateUI(that._value || new ColorRGB(1, 0, 0, 1));
+            that._updateUI(that._value || new _RGB(1, 0, 0, 1));
 
             hsvRect.on(MOUSEDOWN_NS, function(ev){
                 hsvHandle.focus();
@@ -339,10 +339,10 @@ kendo_module({
             }
             this._hueSlider = this._opacitySlider = this._hsvRect = this._hsvHandle =
                 this._hueElements = this._selectedColor = this._colorAsText = null;
-            ColorSelectorBase.fn.destroy.call(this);
+            ColorSelector.fn.destroy.call(this);
         },
         options: {
-            name: "ColorSelectorHSV",
+            name: "ColorHSV",
             opacity: false,
             buttons: true,
             preview: true,
@@ -418,7 +418,7 @@ kendo_module({
             if (a == null) {
                 a = this._opacitySlider ? this._opacitySlider.value() / 100 : 1;
             }
-            return new ColorHSV(h, s, v, a);
+            return new _HSV(h, s, v, a);
         },
         _svChange: function(s, v) {
             var color = this._getHSV(null, s, v, null);
@@ -444,7 +444,7 @@ kendo_module({
                 // value is 0 on the bottom, full on the top.
                 top: (1 - color.v) * height + "px"
             });
-            that._hueElements.css(BACKGROUNDCOLOR, new ColorHSV(color.h, 1, 1, 1).toCss());
+            that._hueElements.css(BACKGROUNDCOLOR, new _HSV(color.h, 1, 1, 1).toCss());
             that._hueSlider.value(color.h);
             if (that._opacitySlider) {
                 that._opacitySlider.value(100 * color.a);
@@ -516,13 +516,25 @@ kendo_module({
         clone: function() {
             var c = this.toBytes();
             if (c === this) {
-                c = new ColorBytes(c.r, c.g, c.b, c.a);
+                c = new _Bytes(c.r, c.g, c.b, c.a);
             }
             return c;
         }
     });
 
-    var ColorRGB = Color.extend({
+    Color.fromBytes = function(r, g, b, a) {
+        return new _Bytes(r, g, b, a != null ? a : 1);
+    };
+
+    Color.fromRGB = function(r, g, b, a) {
+        return new _RGB(r, g, b, a != null ? a : 1);
+    };
+
+    Color.fromHSV = function(h, s, v, a) {
+        return new _HSV(h, s, v, a != null ? a : 1);
+    };
+
+    var _RGB = Color.extend({
         init: function(r, g, b, a) {
             this.r = r; this.g = g; this.b = b; this.a = a;
         },
@@ -550,19 +562,19 @@ kendo_module({
                 s = 0;
                 h = -1;
             }
-            return new ColorHSV(h, s, v, this.a);
+            return new _HSV(h, s, v, this.a);
         },
         toBytes: function() {
-            return new ColorBytes(this.r * 255, this.g * 255, this.b * 255, this.a);
+            return new _Bytes(this.r * 255, this.g * 255, this.b * 255, this.a);
         }
     });
 
-    var ColorBytes = ColorRGB.extend({
+    var _Bytes = _RGB.extend({
         init: function(r, g, b, a) {
             this.r = Math.round(r); this.g = Math.round(g); this.b = Math.round(b); this.a = a;
         },
         toRGB: function() {
-            return new ColorRGB(this.r / 255, this.g / 255, this.b / 255, this.a);
+            return new _RGB(this.r / 255, this.g / 255, this.b / 255, this.a);
         },
         toHSV: function() {
             return this.toRGB().toHSV();
@@ -575,7 +587,7 @@ kendo_module({
         }
     });
 
-    var ColorHSV = Color.extend({
+    var _HSV = Color.extend({
         init: function(h, s, v, a) {
             this.h = h; this.s = s; this.v = v; this.a = a;
         },
@@ -600,7 +612,7 @@ kendo_module({
                   default : r = v; g = p; b = q; break;
                 }
             }
-            return new ColorRGB(r, g, b, this.a);
+            return new _RGB(r, g, b, this.a);
         },
         toBytes: function() {
             return this.toRGB().toBytes();
@@ -618,39 +630,39 @@ kendo_module({
         }
         var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(color);
         if (m) {
-            return new ColorBytes(parseInt(m[1], 16),
-                                  parseInt(m[2], 16),
-                                  parseInt(m[3], 16), 1);
+            return new _Bytes(parseInt(m[1], 16),
+                              parseInt(m[2], 16),
+                              parseInt(m[3], 16), 1);
         }
         m = /^#?([0-9a-f])([0-9a-f])([0-9a-f])$/i.exec(color);
         if (m) {
-            return new ColorBytes(parseInt(m[1] + m[1], 16),
-                                  parseInt(m[2] + m[2], 16),
-                                  parseInt(m[3] + m[3], 16), 1);
+            return new _Bytes(parseInt(m[1] + m[1], 16),
+                              parseInt(m[2] + m[2], 16),
+                              parseInt(m[3] + m[3], 16), 1);
         }
         m = /^rgb\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\)/.exec(color);
         if (m) {
-            return new ColorBytes(parseInt(m[1], 10),
-                                  parseInt(m[2], 10),
-                                  parseInt(m[3], 10), 1);
+            return new _Bytes(parseInt(m[1], 10),
+                              parseInt(m[2], 10),
+                              parseInt(m[3], 10), 1);
         }
         m = /^rgba\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9.]+)\)/.exec(color);
         if (m) {
-            return new ColorBytes(parseInt(m[1], 10),
-                                  parseInt(m[2], 10),
-                                  parseInt(m[3], 10), parseFloat(m[4]));
+            return new _Bytes(parseInt(m[1], 10),
+                              parseInt(m[2], 10),
+                              parseInt(m[3], 10), parseFloat(m[4]));
         }
         m = /^rgb\(([0-9]+)%\s*,\s*([0-9]+)%\s*,\s*([0-9]+)%\)/.exec(color);
         if (m) {
-            return new ColorRGB(parseInt(m[1], 10) / 100,
-                                parseInt(m[2], 10) / 100,
-                                parseInt(m[3], 10) / 100, 1);
+            return new _RGB(parseInt(m[1], 10) / 100,
+                            parseInt(m[2], 10) / 100,
+                            parseInt(m[3], 10) / 100, 1);
         }
         m = /^rgba\(([0-9]+)%\s*,\s*([0-9]+)%\s*,\s*([0-9]+)%\s*,\s*([0-9.]+)\)/.exec(color);
         if (m) {
-            return new ColorRGB(parseInt(m[1], 10) / 100,
-                                parseInt(m[2], 10) / 100,
-                                parseInt(m[3], 10) / 100, parseFloat(m[4]));
+            return new _RGB(parseInt(m[1], 10) / 100,
+                            parseInt(m[2], 10) / 100,
+                            parseInt(m[3], 10) / 100, parseFloat(m[4]));
         }
         if (!nothrow) {
             throw new Error("Cannot parse color: " + color);
@@ -778,8 +790,8 @@ kendo_module({
             value = this.color(value);
             this.trigger("change");
         },
-        color: ColorSelectorBase.fn.color,
-        value: ColorSelectorBase.fn.value,
+        color: ColorSelector.fn.color,
+        value: ColorSelector.fn.value,
         _updateUI: function(value) {
             if (value) {
                 // seems that input type="color" doesn't support opacity
@@ -815,7 +827,7 @@ kendo_module({
                 var opt = this.options;
                 var ctor;
                 if (opt.palette) {
-                    ctor = ColorSelectorPalette;
+                    ctor = ColorPalette;
                     if (opt.palette == "websafe") {
                         opt.palette = WEBPALETTE;
                         opt.columns = 18;
@@ -823,7 +835,7 @@ kendo_module({
                         opt.palette = SIMPLEPALETTE;
                     }
                 } else {
-                    ctor = ColorSelectorHSV;
+                    ctor = ColorHSV;
                 }
                 var sel = this._selector = new ctor(document.body, opt);
                 that._popup = p = sel.wrapper.kendoPopup({
@@ -869,13 +881,10 @@ kendo_module({
         };
     }
 
-    ui.plugin(ColorSelectorPalette);
-    ui.plugin(ColorSelectorHSV);
+    ui.plugin(ColorPalette);
+    ui.plugin(ColorHSV);
     ui.plugin(ColorPicker);
 
     kendo.Color = Color;
-    kendo.ColorRGB = ColorRGB;
-    kendo.ColorHSV = ColorHSV;
-    kendo.ColorBytes = ColorBytes;
 
 })(jQuery, parseInt);
