@@ -642,7 +642,7 @@ kendo_module({
 
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
-            if (!defined(options.value)) {
+            if (!defined(options.value) || options.value === null) {
                 options.value = options.min;
                 element.val(options.min);
             }
@@ -660,7 +660,8 @@ kendo_module({
             increaseButtonTitle: "Increase",
             decreaseButtonTitle: "Decrease",
             dragHandleTitle: "drag",
-            tooltip: { format: "{0}" }
+            tooltip: { format: "{0}" },
+            value: null
         },
 
         enable: function (enable) {
@@ -1224,12 +1225,12 @@ kendo_module({
 
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
-            if (!defined(options.selectionStart)) {
+            if (!defined(options.selectionStart) || options.selectionStart === null) {
                 options.selectionStart = options.min;
                 inputs.eq(0).val(options.min);
             }
 
-            if (!defined(options.selectionEnd)) {
+            if (!defined(options.selectionEnd) || options.selectionEnd === null) {
                 options.selectionEnd = options.max;
                 inputs.eq(1).val(options.max);
             }
@@ -1245,7 +1246,9 @@ kendo_module({
             name: "RangeSlider",
             leftDragHandleTitle: "drag",
             rightDragHandleTitle: "drag",
-            tooltip: { format: "{0}" }
+            tooltip: { format: "{0}" },
+            selectionStart: null,
+            selectionEnd: null
         },
 
         enable: function (enable) {

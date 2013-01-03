@@ -306,6 +306,15 @@
                 ok(dom.data("kendoSlider").wrapper.css("display") != "none", "display is not 'none'");
             });
 
+            test("slider should have value 10", function() {
+                var dom = $('<input data-value="10" data-role="slider"/>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoSlider").options.value == 10, "value is not equal to 10");
+            });
+
+            /*----------------------------------------------------------------------*/
             module("RangeSlider / ");
 
             test("initializes a rangeslider when data role is rangeslider", function() {
@@ -594,6 +603,22 @@
                 observable.set("invisible", false);
 
                 ok(dom.data("kendoRangeSlider").wrapper.css("display") != "none", "display is not 'none'");
+            });
+
+            test("rangeslider should have selection start 10", function() {
+                var dom = $('<div data-selection-start="10" data-role="rangeslider"><input /><input /></div>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoRangeSlider").options.selectionStart == 10, "selectionStart is not equal to 10");
+            });
+
+            test("rangeslider should have selection end 10", function() {
+                var dom = $('<div data-selection-end="10" data-role="rangeslider"><input /><input /></div>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoRangeSlider").options.selectionEnd == 10, "selectionEnd is not equal to 10");
             });
         </script>
 
