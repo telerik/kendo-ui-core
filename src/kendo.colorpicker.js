@@ -86,6 +86,14 @@ kendo_module({
             element = that.element;
             options = that.options;
             var colors = options.palette;
+
+            if (colors == "websafe") {
+                colors = WEBPALETTE;
+                options.columns = 18;
+            } else if (colors == "basic") {
+                colors = SIMPLEPALETTE;
+            }
+
             if (typeof colors == "string") {
                 colors = colors.split(",");
             }
@@ -821,12 +829,6 @@ kendo_module({
                 var ctor;
                 if (opt.palette) {
                     ctor = ColorPalette;
-                    if (opt.palette == "websafe") {
-                        opt.palette = WEBPALETTE;
-                        opt.columns = 18;
-                    } else if (opt.palette == "basic") {
-                        opt.palette = SIMPLEPALETTE;
-                    }
                 } else {
                     ctor = ColorHSV;
                 }
