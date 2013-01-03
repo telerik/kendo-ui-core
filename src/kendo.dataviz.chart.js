@@ -338,7 +338,11 @@ kendo_module({
                 view = chart._view = viewType.fromModel(model);
 
                 chart._viewElement = view.renderTo(element[0]);
-                chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
+                if (options.tooltip.shared) {
+                    chart._tooltip = new MultiplePointTooltip(element, options.tooltip);
+                } else {
+                    chart._tooltip = new SinglePointTooltip(element, options.tooltip);
+                }
                 chart._highlight = new Highlight(view, chart._viewElement);
             }
         },
@@ -676,6 +680,8 @@ kendo_module({
 
                 tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
                 if (tooltipOptions.visible) {
+                    tooltip.options.stickyMode = true;
+                    tooltip.plotArea = chart._plotArea;
                     tooltip.show(point);
                 }
 
@@ -6933,12 +6939,11 @@ kendo_module({
         }
     });
 
-    var MultiplePointTooltip = Class.extend({
+    var Tooltip = Class.extend({
         init: function(chartElement, options) {
             var tooltip = this;
 
             tooltip.options = deepExtend({}, tooltip.options, options);
-            options = tooltip.options;
 
             tooltip.chartElement = chartElement;
             tooltip.chartPadding = {
@@ -6972,56 +6977,33 @@ kendo_module({
             }
         },
 
-        show: function() {
-            var tooltip = this;
+        show: $.noop,
 
-            tooltip.showTimeout =
-                setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
-        },
-
-        _show: function() {
+        move: function() {
             var tooltip = this,
-                point = tooltip.point,
-                axis = tooltip.axis,
-                plotArea = axis.plotArea,
-                element = tooltip.element,
                 options = tooltip.options,
-                chartPadding = tooltip.chartPadding,
-                anchor, tooltipTemplate, content = "",
-                tooltipOptions, top, left, points;
+                anchor = tooltip.anchor,
+                element = tooltip.element,
+                chartPadding = tooltip.chartPadding, top, left;
 
-            value = content = axis[options.stickyMode ? "getCategory" : "getValue"](point);
-            if (options.stickyMode) {
-                points = plotArea.pointsByCategory(value);
-            }
+            plotArea.pointsByCategory(category);
 
-            if (options.template) {
-                template = template(options.template);
-                content = template({
-                    value: value
-                });
-            } else if (options.format) {
-                content = autoFormat(options.format, value);
-            }
-
-            element.html(content);
-
-            anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
             top = round(anchor.y + chartPadding.top) + "px";
             left = round(anchor.x + chartPadding.left) + "px";
 
             if (!tooltip.visible) {
-                tooltip.element.css({ top: top, left: left });
+                element.css({ top: top, left: left });
             }
 
-            tooltip.element
+            element
                 .css({
-                   backgroundColor: tooltipOptions.background,
-                   borderColor: tooltipOptions.border.color || point.options.color,
-                   font: tooltipOptions.font,
-                   color: tooltipOptions.color,
-                   opacity: tooltipOptions.opacity,
-                   borderWidth: tooltipOptions.border.width
+                   backgroundColor: options.background,
+                   // Here you need to pass point color
+                   borderColor: options.border.color || point.options.color,
+                   font: options.font,
+                   color: options.color,
+                   opacity: options.opacity,
+                   borderWidth: options.border.width
                 })
                 .stop(true, true)
                 .show()
@@ -7033,30 +7015,14 @@ kendo_module({
             tooltip.visible = true;
         },
 
-        content: function(points) {
-            var tooltip = this,
-                content = "",
-                i, point;
-
-            if (points) {
-                for (i = 0; i < points.length; i++) {
-                    point = points[i];
-                    if (!point) {
-                        continue;
-                    }
-
-                    content = tooltip.pointContent(point);
-                }
-            }
-        },
-
         pointContent: function(point) {
             var tooptip = this,
                 content = point.value.toString(),
-                tooltipOptions = deepExtend({}, tooltip.options, point.options.tooltip);
+                options = deepExtend({}, tooltip.options, point.options.tooltip),
+                tooltipTemplate;
 
-            if (tooltipOptions.template) {
-                tooltipTemplate = template(tooltipOptions.template);
+            if (options.template) {
+                tooltipTemplate = template(options.template);
                 content = tooltipTemplate({
                     value: point.value,
                     category: point.category,
@@ -7064,8 +7030,8 @@ kendo_module({
                     dataItem: point.dataItem,
                     percentage: point.percentage
                 });
-            } else if (tooltipOptions.format) {
-                content = point.formatValue(tooltipOptions.format);
+            } else if (options.format) {
+                content = point.formatValue(options.format);
             }
 
             return content;
@@ -7081,6 +7047,62 @@ kendo_module({
 
                 tooltip.point = null;
                 tooltip.visible = false;
+            }
+        }
+    });
+
+    var SinglePointTooltip = Tooltip.extend({
+        show: function(point) {
+            var tooltip = this;
+
+            if (point) {
+                content = tooltip.pointContent(point);
+                anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
+            } else {
+                return;
+            }
+
+            tooltip.showTimeout =
+                setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
+        },
+    });
+
+    var MultiplePointTooltip = Class.extend({
+        show: function(point) {
+            var tooltip = this,
+                options = tooltip.options,
+                point = tooltip.point,
+                plotArea = tooltip.plotArea,
+                element = tooltip.element,
+                content = "", points,
+                anchor;
+
+            if (options.shared) {
+                points = tooltip.getPoints();
+                content = tooltip.getContent(points);
+            }
+
+            tooltip.element.html(content);
+            tooltip.anchor = point;
+
+            tooltip.showTimeout =
+                setTimeout(proxy(tooltip.move, tooltip), TOOLTIP_SHOW_DELAY);
+        },
+
+        getContent: function(points) {
+            var tooltip = this,
+                content = "",
+                i, point;
+
+            if (points) {
+                for (i = 0; i < points.length; i++) {
+                    point = points[i];
+                    if (!point) {
+                        continue;
+                    }
+
+                    content = tooltip.pointContent(point);
+                }
             }
         }
     });
