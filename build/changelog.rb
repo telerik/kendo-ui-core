@@ -169,12 +169,13 @@ class ChangeLog
                 q = 3;
             end
 
-            names.unshift self.class.milestone_name(year, q, ".next")
+            names.unshift self.class.milestone_name(year, q, "next")
        end
     end
 
     class << self
         def milestone_name(year, quarter, service_pack)
+            service_pack = "." + service_pack if service_pack == "next"
             "#{year}.Q#{quarter}#{".SP#{service_pack}" if service_pack}"
         end
     end
