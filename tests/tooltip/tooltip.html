@@ -381,6 +381,23 @@
 
                 ok(tooltip.popup.visible());
             });
+
+            test("hide method closes the popup", function() {
+                var tooltip = new Tooltip(container, { });
+
+                tooltip.show(container);
+                tooltip.hide();
+
+                ok(!tooltip.popup.visible());
+            });
+
+            test("call hide method without opening the popup", function() {
+                var tooltip = new Tooltip(container, { });
+
+                tooltip.hide();
+                ok(!tooltip.popup);
+            });
+
         </script>
     </body>
 </html>

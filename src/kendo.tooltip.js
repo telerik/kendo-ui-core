@@ -215,6 +215,12 @@ kendo_module({
             }, options));
         },
 
+        hide: function() {
+            if (this.popup) {
+                this.popup.close();
+            }
+        },
+
         show: function(target) {
             var that = this,
                 current = that.target();

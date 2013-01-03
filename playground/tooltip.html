@@ -43,12 +43,19 @@
                 $("#template div").kendoTooltip({
                     content: kendo.template($("#tooltip-template").html()),
                     position: "center",
+                    showOn: "click",
                     width: 300,
                     show: function() {
-                        var element = this.content.find("#grid");
+                        var that = this;
+
+                        var element = that.content.find("#grid");
                         if (element.data("kendoGrid")) {
                             return;
                         }
+
+                        that.content.on("click", "button", function() {
+                            that.hide();
+                        });
 
                         element.kendoGrid({
                         dataSource: {
@@ -100,6 +107,7 @@
         </script>
 
         <script id="tooltip-template" type="script/kendo-x-tempalte">
+            <button>Close Me</button>
             <div id="grid"></div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut ipsum odio. Nam sem nisi, tempor nec sodales non, vehicula a lorem. Cras commodo tristique lacus nec volutpat. Fusce nec quam diam, ac scelerisque nisi. Suspendisse eu arcu risus, quis luctus elit. Etiam convallis rutrum eros sed vestibulum. Fusce viverra congue placerat. Nulla sodales vehicula lobortis.
 
