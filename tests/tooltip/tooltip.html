@@ -263,9 +263,9 @@
             test("title attributes are temporary removed", function() {
                 container.attr("title", "foo");
 
-                var tooltip = new Tooltip(container, { });
+                var tooltip = new Tooltip(container, { showOn: "click" });
 
-                tooltip.show(container);
+                triggerEvent(container, "mouseenter");
 
                 ok(!container.filter("[title]").length);
             });
@@ -274,9 +274,9 @@
                 container.attr("title", "foo");
                 container.append($('<span title="bar"/>'));
 
-                var tooltip = new Tooltip(container, { filter: "span" });
+                var tooltip = new Tooltip(container, { filter: "span", showOn: "click" });
 
-                tooltip.show(container.find("span"));
+                triggerEvent(container.find("span"), "mouseenter");
 
                 ok(!container.filter("[title]").length);
             });
@@ -370,6 +370,16 @@
                 tooltip.show(container);
 
                 ok(tooltip.popup.wrapper.find(".k-callout-e").length);
+            });
+
+            test("open on click", function() {
+                var tooltip = new Tooltip(container, {
+                    showOn: "click"
+                });
+
+                triggerEvent(container, "click");
+
+                ok(tooltip.popup.visible());
             });
         </script>
     </body>

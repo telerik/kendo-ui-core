@@ -115,6 +115,7 @@ kendo_module({
 
             that.element
                 .on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that))
+                .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that))
                 .on("mouseleave" + NS, that.options.filter, proxy(that._mouseleave, that));
         },
 
@@ -124,19 +125,28 @@ kendo_module({
             content: "",
             showAfter: 100,
             callout: true,
-            position: "center"
+            position: "center",
+            showOn: "mouseenter"
         },
 
         events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
 
         _mouseenter: function(e) {
+            saveTitleAttributes($(e.currentTarget));
+        },
+
+        _showOn: function(e) {
             var that = this;
 
-            clearTimeout(that.timeout);
-
-            that.timeout = setTimeout(function() {
+            if (that.options.showOn === "click") {
                 that.show($(e.currentTarget));
-            }, that.options.showAfter);
+            } else {
+                clearTimeout(that.timeout);
+
+                that.timeout = setTimeout(function() {
+                    that.show($(e.currentTarget));
+                }, that.options.showAfter);
+            }
         },
 
         _appendContent: function(target) {
@@ -223,8 +233,6 @@ kendo_module({
                 that.popup.options.anchor = target;
             }
 
-            saveTitleAttributes(target);
-
             that.popup.one("deactivate", function() {
                 restoreTitle(target);
             });
@@ -278,6 +286,8 @@ kendo_module({
                 }
 
                 this.popup.close();
+            } else {
+                restoreTitle($(e.currentTarget));
             }
             clearTimeout(this.timeout);
         },
