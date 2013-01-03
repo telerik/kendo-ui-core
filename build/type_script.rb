@@ -14,22 +14,29 @@ module CodeGen::TypeScript
         'Range' => 'Range',
         'Object' => 'any',
         'Array' => 'any',
-        'Date' => 'date',
+        'Date' => 'Date',
         'Function' => 'Function',
         'Element' => 'Element',
         'jQuery' => 'JQuery',
         'Selector' => 'string',
-        'kendo.data.ObservableObject' => 'ObservableObject',
-        'kendo.data.ObservableArray' => 'ObservableArray',
-        'kendo.data.Model' => 'Model',
-        'kendo.ui.Menu' => 'Menu',
-        'kendo.ui.PanelBar' => 'PanelBar',
-        'kendo.ui.TabStrip' => 'TabStrip',
-        'kendo.ui.Window' => 'Window',
-        'Date' => 'Date'
+        'kendo.data.ObservableObject' => 'kendo.data.ObservableObject',
+        'kendo.data.ObservableArray' => 'kendo.data.ObservableArray',
+        'kendo.data.Model' => 'kendo.data.Model',
+        'kendo.ui.Menu' => 'kendo.ui.Menu',
+        'kendo.ui.PanelBar' => 'kendo.ui.PanelBar',
+        'kendo.ui.TabStrip' => 'kendo.ui.TabStrip',
+        'kendo.ui.Window' => 'kendo.ui.Window'
     }
 
+    module Declaration
+        def type_script_declaration
+            "#{name}?: #{type_script_type};"
+        end
+    end
+
     module Options
+        include Declaration
+
         def option_class
             Option
         end
@@ -46,9 +53,6 @@ module CodeGen::TypeScript
             ArrayOption
         end
 
-        def type_script_declaration
-            "#{name}: #{type_script_type};"
-        end
 
         def unique_options
             composite = composite_options
@@ -66,8 +70,12 @@ module CodeGen::TypeScript
             Parameter
         end
 
+        def type_script_type
+            @owner.type_script_type + @name.pascalize
+        end
+
         def type_script_parameters
-            @parameters.map { |p| "#{p.name}: #{p.type_script_type}" }.join(', ')
+            unique_parameters.map { |p| "#{p.name}: #{p.type_script_type}" }.join(', ')
         end
 
         def type_script_declaration
@@ -81,9 +89,55 @@ module CodeGen::TypeScript
 
             declaration + ';'
         end
+
+        def unique_parameters
+            composite = composite_parameters
+
+            parameters.find_all {|p| p.composite? || !composite.any? { |composite| composite.name == p.name } }
+        end
     end
 
-    module Type
+    class Parameter < CodeGen::Parameter
+        include Declaration
+
+        def type_script_type
+            type = TYPES[@type[0]]
+
+            raise "No TypeScript mapping for type #{@type[0]}" unless type
+
+            type
+        end
+
+        def composite_parameter_class
+            CompositeParameter
+        end
+    end
+
+    PARAMETER = ERB.new(File.read("build/parameter.ts.erb"), 0, '%<>')
+
+    class CompositeParameter < CodeGen::CompositeParameter
+        include Declaration
+
+        def parameter_class
+            Parameter
+        end
+
+        def type_script_type
+            @owner.type_script_type + @name.pascalize
+        end
+
+        def type_script_interface
+            PARAMETER.result(binding)
+        end
+
+        def unique_parameters
+            composite = composite_parameters
+
+            parameters.find_all {|p| p.composite? || !composite.any? { |composite| composite.name == p.name } }
+        end
+    end
+
+    class Result < CodeGen::Result
         def type_script_type
             type = TYPES[@type.split('|')[0].strip]
 
@@ -91,14 +145,6 @@ module CodeGen::TypeScript
 
             type
         end
-    end
-
-    class Parameter < CodeGen::Parameter
-        include Type
-    end
-
-    class Result < CodeGen::Result
-        include Type
     end
 
     COMPONENT = ERB.new(File.read("build/component.ts.erb"), 0, '%<>')

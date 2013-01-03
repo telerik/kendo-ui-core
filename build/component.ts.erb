@@ -2,7 +2,7 @@
         element: JQuery;
         options: <%= type_script_options_type %>;
 % if options.any? { |o| o.name == 'dataSource' }
-        dataSource: DataSource;
+        dataSource: kendo.data.DataSource;
 % end
 % methods.each do |method|
         <%= method.type_script_declaration %>
@@ -10,6 +10,11 @@
     }
 % composite_options.each do |option|
 <%= option.type_script_interface %>
+% end
+% methods.each do |method|
+% method.composite_parameters.each do |parameter|
+<%= parameter.type_script_interface %>
+% end
 % end
 
     interface <%= type_script_options_type %> {

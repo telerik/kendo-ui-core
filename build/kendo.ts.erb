@@ -57,16 +57,17 @@ module kendo.mobile.ui {
 module <%= key %> {
 %   namespaces[key].each do |component|
 <%= component.type_script_class %>
+
 %   end
-% end
 }
+% end
 
 interface JQuery {
 % components.each do |component|
 % if component.full_name.include?('ui')
     kendo<%= component.plugin%>(): JQuery;
-
     kendo<%= component.plugin%>(options: <%= component.namespace %>.<%= component.type_script_options_type%>): JQuery;
+
 % end
 % end
 }

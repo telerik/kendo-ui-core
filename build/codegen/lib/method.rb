@@ -12,7 +12,7 @@ module CodeGen
 
             type = settings[:type]
 
-            parent = @parameters.find { |p| name.start_with?(p.name + '.') }
+            parent = @parameters.find { |p| name.start_with?(p.name + '.') && p.type.include?('Object') }
 
             if parent
                 parent = parent.to_composite
@@ -37,6 +37,10 @@ module CodeGen
 
         def composite_parameter_class
             CompositeParameter
+        end
+
+        def composite_parameters
+            @parameters.find_all {|p| p.composite? }
         end
     end
 
@@ -71,6 +75,10 @@ module CodeGen
 
     class Parameter
         attr_reader :name, :description, :type, :owner
+
+        def composite?
+            false
+        end
 
         def initialize(settings)
             @name = settings[:name]
@@ -118,6 +126,10 @@ module CodeGen
             super(settings)
 
             @parameters = []
+        end
+
+        def composite?
+            true
         end
 
         def to_composite
