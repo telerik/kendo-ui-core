@@ -16,11 +16,16 @@ module CodeGen::TypeScript
         'Array' => 'any',
         'Date' => 'date',
         'Function' => 'Function',
+        'Element' => 'Element',
         'jQuery' => 'JQuery',
         'Selector' => 'string',
         'kendo.data.ObservableObject' => 'ObservableObject',
         'kendo.data.ObservableArray' => 'ObservableArray',
         'kendo.data.Model' => 'Model',
+        'kendo.ui.Menu' => 'Menu',
+        'kendo.ui.PanelBar' => 'PanelBar',
+        'kendo.ui.TabStrip' => 'TabStrip',
+        'kendo.ui.Window' => 'Window',
         'Date' => 'Date'
     }
 
@@ -196,6 +201,8 @@ module CodeGen::TypeScript
 end
 
 def get_type_script(sources)
+
+    sources = sources.find_all { |source| !source.end_with?('ui.md') }
 
     components = sources.map do |source|
         parser = CodeGen::MarkdownParser.new
