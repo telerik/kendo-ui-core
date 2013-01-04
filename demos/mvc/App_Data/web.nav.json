@@ -142,6 +142,16 @@
                     "url": "colorpicker/navigation.html",
                     "title": "ColorPicker keyboard navigation",
                     "meta": "ColorPicker keyboard navigation"
+                },{
+                    "text": "Standalone ColorPalette",
+                    "url": "colorpicker/palette.html",
+                    "title": "Standalone ColorPalette",
+                    "meta": "Standalone ColorPalette"
+                },{
+                    "text": "Standalone ColorHSV",
+                    "url": "colorpicker/hsv.html",
+                    "title": "Standalone ColorHSV",
+                    "meta": "Standalone ColorHSV"
                 }
             ]
         },
