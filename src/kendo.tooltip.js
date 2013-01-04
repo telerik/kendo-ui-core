@@ -129,7 +129,7 @@ kendo_module({
             content: "",
             showAfter: 100,
             callout: true,
-            position: "center",
+            position: "bottom",
             showOn: "mouseenter",
             autoHide: true
         },
@@ -255,7 +255,7 @@ kendo_module({
             var that = this,
                 options = that.options,
                 wrapper = $(kendo.template(TEMPLATE)({
-                    callout: options.callout,
+                    callout: options.callout && options.position !== "center",
                     dir: DIRCLASSES[options.position],
                     autoHide: options.autoHide
                 }));

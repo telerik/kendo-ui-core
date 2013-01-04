@@ -334,6 +334,17 @@
                 equal(tooltip.popup.element.height(), 100);
             });
 
+            test("callout is not rendered if center position", function() {
+                var tooltip = new Tooltip(container, {
+                    callout: true,
+                    position: "center"
+                });
+
+                tooltip.show(container);
+
+                ok(!tooltip.popup.wrapper.find(".k-callout").length);
+            });
+
             test("callout is rendered if enabled", function() {
                 var tooltip = new Tooltip(container, {
                     callout: true
