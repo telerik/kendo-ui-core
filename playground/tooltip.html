@@ -10,6 +10,12 @@
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+            .k-tooltip-button {
+                position: absolute;
+                float: right;
+            }
+        </style>
     </head>
     <body>
         <fieldset id="container" title="I'm your father :)">
@@ -30,10 +36,9 @@
                     filter: "input",
                     content: kendo.template($("#tooltip-template").html()),
                     show: function() {
-                        $(document)
-                        .find("[data-role=tooltip]")
-                        .not(this.element)
-                        .kendoTooltip("hide");
+                        $(document).find("[data-role=tooltip]")
+                            .not(this.element)
+                            .kendoTooltip("hide");
                     },
                     width: 300
                 });
@@ -47,7 +52,7 @@
                     callout: false,
                     width: 800,
                     height: 300,
-                    autoClose: false
+                    autoHide: false
                 });
             });
         </script>

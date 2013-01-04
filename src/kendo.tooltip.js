@@ -20,7 +20,8 @@ kendo_module({
         ERROR = "error",
         CONTENTLOAD = "contentLoad",
         KCONTENTFRAME = "k-content-frame",
-        TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em"><div class="k-tooltip-content"></div>' +
+        TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#">close</a></div> #}#' +
+                '<div class="k-tooltip-content"></div>' +
                 '#if (callout){ #<div class="k-callout k-callout-#=dir#"></div>#}#' +
             '</div>',
         IFRAMETEMPLATE = kendo.template(
@@ -114,10 +115,10 @@ kendo_module({
             that.dimensions = DIMENSIONS[axis];
 
             that.element
-                .on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that))
-                .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that));
+                .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that))
+                .on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that));
 
-            if (this.options.autoClose) {
+            if (this.options.autoHide) {
                 that.element.on("mouseleave" + NS, that.options.filter, proxy(that._mouseleave, that));
             }
         },
@@ -130,7 +131,7 @@ kendo_module({
             callout: true,
             position: "center",
             showOn: "mouseenter",
-            autoClose: true
+            autoHide: true
         },
 
         events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
@@ -255,7 +256,8 @@ kendo_module({
                 options = that.options,
                 wrapper = $(kendo.template(TEMPLATE)({
                     callout: options.callout,
-                    dir: DIRCLASSES[options.position]
+                    dir: DIRCLASSES[options.position],
+                    autoHide: options.autoHide
                 }));
 
             that.popup = new Popup(wrapper, extend({
@@ -279,8 +281,10 @@ kendo_module({
             that.content = wrapper.find(".k-tooltip-content");
             that.arrow = wrapper.find(".k-callout");
 
-            if (options.autoClose) {
+            if (options.autoHide) {
                 wrapper.on("mouseleave" + NS, proxy(that._mouseleave, that));
+            } else {
+                wrapper.on("click" + NS, ".k-tooltip-button", proxy(that.hide, that));
             }
         },
 

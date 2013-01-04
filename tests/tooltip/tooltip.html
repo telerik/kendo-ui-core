@@ -400,13 +400,35 @@
 
             test("autoclose false does not hide the tooltip on mouseleave", function() {
                 var tooltip = new Tooltip(container, {
-                    autoClose: false
+                    autoHide: false
                 });
                 tooltip.show(container);
 
                 triggerEvent(container, "mouseleave");
 
                 ok(tooltip.popup.visible());
+            });
+
+            test("autohide false renders a close button", function() {
+                var tooltip = new Tooltip(container, {
+                    autoHide: false
+                });
+
+                tooltip.show(container);
+
+                ok(tooltip.popup.element.find(".k-tooltip-button").length);
+            });
+
+            test("clicking the close button hides the tooltip", function() {
+                var tooltip = new Tooltip(container, {
+                    autoHide: false
+                });
+
+                tooltip.show(container);
+
+                triggerEvent(tooltip.popup.element.find(".k-tooltip-button"), "click");
+
+                ok(!tooltip.popup.visible());
             });
         </script>
     </body>
