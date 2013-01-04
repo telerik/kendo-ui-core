@@ -13,6 +13,7 @@
             var that = this,
                 total = options.total,
                 model = options.model,
+                parse = options.parse,
                 data = options.data;
 
             if (model) {
@@ -42,37 +43,54 @@
             }
 
             if (total) {
-                total = that.getter(total);
-                that.total = function(data) {
-                    return parseInt(total(data), 10);
-                };
+                if (typeof total == "string") {
+                    total = that.getter(total);
+                    that.total = function(data) {
+                        return parseInt(total(data), 10);
+                    };
+                } else if (typeof total == "function"){
+                    that.total = total;
+                }
             }
 
             if (data) {
-                data = that.xpathToMember(data);
-                that.data = function(value) {
-                    var result = that.evaluate(value, data),
-                        modelInstance;
+                if (typeof data == "string") {
+                    data = that.xpathToMember(data);
+                    that.data = function(value) {
+                        var result = that.evaluate(value, data),
+                            modelInstance;
 
-                    result = isArray(result) ? result : [result];
+                        result = isArray(result) ? result : [result];
 
-                    if (that.model && model.fields) {
-                        modelInstance = new that.model();
+                        if (that.model && model.fields) {
+                            modelInstance = new that.model();
 
-                        return map(result, function(value) {
-                            if (value) {
-                                var record = {}, field;
+                            return map(result, function(value) {
+                                if (value) {
+                                    var record = {}, field;
 
-                                for (field in model.fields) {
-                                    record[field] = modelInstance._parse(field, model.fields[field].field(value));
+                                    for (field in model.fields) {
+                                        record[field] = modelInstance._parse(field, model.fields[field].field(value));
+                                    }
+
+                                    return record;
                                 }
+                            });
+                        }
 
-                                return record;
-                            }
-                        });
-                    }
+                        return result;
+                    };
+                } else if (typeof data == "function") {
+                    that.data = data;
+                }
+            }
 
-                    return result;
+            if (typeof parse == "function") {
+                var xmlParse = that.parse;
+
+                that.parse = function(data) {
+                    var xml = parse.call(that, data);
+                    return xmlParse.call(that, xml);
                 };
             }
         },

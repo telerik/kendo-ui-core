@@ -36,6 +36,18 @@
                 ok(result.foo);
             });
 
+            test("parse as function", function() {
+                var reader = new XmlDataReader({
+                    parse: function(result) {
+                        return "<bar />";
+                    }
+                });
+
+                var result = reader.parse("<foo />");
+
+                ok(result.bar);
+            });
+
             test("parse sets the text field to be the contents of the result", function() {
                 var reader = new XmlDataReader({});
 
@@ -146,8 +158,31 @@
                 ok(reader.total(result) === 1);
             });
 
+            test("total as function", function() {
+                var reader = new XmlDataReader({ total:function() { return 1; } });
+
+                var result = reader.parse("<foo>1</foo>");
+
+                ok(reader.total(result) === 1);
+            });
+
             test("data returns the records", function() {
                 var reader = new XmlDataReader({ data: "/foo/bar"});
+
+                var result = reader.data({foo: { bar: [1,2] } });
+
+                ok($.isArray(result));
+                equal(result[0], 1);
+                equal(result[1], 2);
+                equal(result.length, 2);
+            });
+
+            test("data as function", function() {
+                var reader = new XmlDataReader({
+                    data: function(result) {
+                        return result.foo.bar;
+                    }
+                });
 
                 var result = reader.data({foo: { bar: [1,2] } });
 
