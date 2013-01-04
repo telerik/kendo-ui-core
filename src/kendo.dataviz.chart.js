@@ -252,7 +252,10 @@ kendo_module({
             DRAG_END,
             ZOOM_START,
             ZOOM,
-            ZOOM_END
+            ZOOM_END,
+            SELECT_START,
+            SELECT,
+            SELECT_END
         ],
 
         items: function() {
@@ -6903,7 +6906,7 @@ kendo_module({
                 }
             };
 
-            that.trigger(SELECT_START);
+            that.trigger(SELECT_START, that._state.range);
         },
 
         _move: function(e) {
@@ -6953,10 +6956,7 @@ kendo_module({
 
             that.move(range.from, range.to);
 
-            that.trigger(SELECT, {
-                from: range.from,
-                to: range.to
-            });
+            that.trigger(SELECT, range);
         },
 
         _end: function() {
@@ -6965,7 +6965,7 @@ kendo_module({
 
             delete that._state;
             that.set(range.from, range.to);
-            that.trigger(SELECT_END);
+            that.trigger(SELECT_END, range);
         },
 
         _gesturechange: function(e) {
