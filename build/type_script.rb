@@ -72,7 +72,9 @@ module CodeGen::TypeScript
         end
 
         def type_script_type
-            @owner.type_script_type + @name.pascalize + 'Event'
+            return @owner.type_script_type + @name.pascalize + 'Event' if @options.size > 0
+
+            @owner.type_script_type + 'Event'
         end
     end
 

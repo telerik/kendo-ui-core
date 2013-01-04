@@ -2,7 +2,9 @@
         element: JQuery;
         options: <%= type_script_options_type %>;
 % if options.any? { |o| o.name == 'dataSource' }
+% unless name =~ /Menu|PanelBar/
         dataSource: kendo.data.DataSource;
+% end
 % end
 % methods.each do |method|
         <%= method.type_script_declaration %>
@@ -20,6 +22,9 @@
     interface <%= type_script_options_type %> {
 % unique_options.each do |option|
         <%= option.type_script_declaration %>
+% end
+% events.each do |event|
+        <%= event.name %>?(e: <%= event.type_script_type %>): void;
 % end
     }
 
