@@ -10,7 +10,9 @@
         <script src="../../src/kendo.treeview.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet/less" href="../../styles/web/kendo.common.less">
+        <link rel="stylesheet/less" href="../../styles/web/kendo.default.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="test-helper.js"></script>
     </head>
     <body>
@@ -794,6 +796,23 @@
 
                 equal(treeview.find(":hidden").length, 1);
                 equal(treeview.text(), "baz");
+            });
+
+            test("collapse() of non-visible items hides their subgroup", function() {
+                createTreeView({
+                    animation: false,
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar", expanded: true, items: [
+                                { text: "baz" }
+                            ] }
+                        ] }
+                    ]
+                });
+
+                treeviewObject.collapse(".k-item");
+
+                equal(treeview.find(".k-group:last").css("display"), "none");
             });
         </script>
 

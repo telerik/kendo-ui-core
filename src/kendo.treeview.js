@@ -1287,7 +1287,7 @@ kendo_module({
                 if (loaded && contents.children().length > 0) {
                     that._updateNodeClasses(node, {}, { expanded: expand });
 
-                    if (contents.is(":visible") == expand) {
+                    if (contents.css("display") == (expand ? "block" : "none")) {
                         return;
                     }
 
