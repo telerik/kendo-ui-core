@@ -54,7 +54,11 @@ module CodeGen
         def add_event(settings)
             settings[:owner] = self
 
-            @events.push event_class.new(settings)
+            event = event_class.new(settings)
+
+            @events.push(event)
+
+            event
         end
     end
 

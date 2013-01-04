@@ -53,16 +53,35 @@ class MarkdownParser
 
         each_section(events) do |event, index|
 
-            component.add_event(:name => section_name(event),
-                                :description => section_description(index, events))
+            event = component.add_event(:name => section_name(event),
+                                        :description => section_description(index, events))
 
+            options = events.slice(index + 1, events.size)
 
+            add_options(event, options)
         end
 
         component
     end
 
     private
+
+    def add_options(event, options)
+        options.each_with_index do |element, index|
+
+            level = element.options[:level]
+
+            break if level && level < 4
+
+            if element.type == :header && level == 5
+
+                event.add_option(:name => section_name(element),
+                                 :type => option_type(element),
+                                 :description => section_description(index, options))
+
+            end
+        end
+    end
 
     def add_parameters(method, parameters)
         parameters.each_with_index do |element, index|
