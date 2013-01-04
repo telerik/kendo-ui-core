@@ -26,3 +26,16 @@
     interface <%= type_script_type %>Event {
         sender: <%= type_script_type %>;
     }
+
+% events.each do |event|
+% if event.options.size > 0
+    interface <%= event.type_script_type %> extends <%= type_script_type %>Event {
+% event.options.each do |option|
+% if option.name != 'sender'
+        <%= option.name %>: <%= option.type_script_type %>;
+% end
+% end
+    }
+
+% end
+% end

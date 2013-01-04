@@ -18,10 +18,12 @@ module CodeGen::TypeScript
         'Function' => 'Function',
         'Element' => 'Element',
         'jQuery' => 'JQuery',
+        'jqXHR' => 'JQueryXHR',
         'Selector' => 'string',
         'kendo.data.ObservableObject' => 'kendo.data.ObservableObject',
         'kendo.data.ObservableArray' => 'kendo.data.ObservableArray',
         'kendo.data.Model' => 'kendo.data.Model',
+        'kendo.data.DataSource' => 'kendo.data.DataSource',
         'kendo.ui.Menu' => 'kendo.ui.Menu',
         'kendo.ui.PanelBar' => 'kendo.ui.PanelBar',
         'kendo.ui.TabStrip' => 'kendo.ui.TabStrip',
@@ -53,11 +55,34 @@ module CodeGen::TypeScript
             ArrayOption
         end
 
+        def event_class
+            Event
+        end
 
         def unique_options
             composite = composite_options
 
             options.find_all {|o| o.composite? || !composite.any? { |composite| composite.name == o.name } }
+        end
+    end
+
+    class Event < CodeGen::Event
+        def option_class
+            EventOption
+        end
+
+        def type_script_type
+            @owner.type_script_type + @name.pascalize + 'Event'
+        end
+    end
+
+    class EventOption < CodeGen::EventOption
+        def type_script_type
+            type = TYPES[@type.split('|')[0].strip]
+
+            raise "No TypeScript mapping for type #{@type}" unless type
+
+            type
         end
     end
 
