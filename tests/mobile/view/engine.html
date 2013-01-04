@@ -315,7 +315,7 @@
                     equal(e.view.params["foo"], "bar");
                 });
 
-                viewEngine.showView("foo?foo=bar");
+                viewEngine.showView("foo?foo=bar&baz=qux");
             });
 
             asyncTest("hides given view", 4, function() {

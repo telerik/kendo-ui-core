@@ -440,8 +440,6 @@ kendo_module({
             var that = this,
                 container = that.container,
                 params = urlParams(url),
-                local = url.charAt(0) === "#",
-                remote = !local && !url.match(/^([\w\-\?=]+)$/),
                 view,
                 element,
                 urlPath = url.split("?")[0];
@@ -458,8 +456,9 @@ kendo_module({
             } else {
                 element = container.children("[" + attr("url") + "='" + urlPath + "']");
 
-                if (!element[0] && !remote) {
-                    element = container.children(local ? urlPath : "#" + urlPath);
+                // do not try to search for "#/foo/bar" id, jQuery throws error
+                if (!element[0] && urlPath.indexOf("/") === -1) {
+                    element = container.children(urlPath.charAt(0) === "#" ? urlPath : "#" + urlPath);
                 }
             }
 
