@@ -115,8 +115,11 @@ kendo_module({
 
             that.element
                 .on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that))
-                .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that))
-                .on("mouseleave" + NS, that.options.filter, proxy(that._mouseleave, that));
+                .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that));
+
+            if (this.options.autoClose) {
+                that.element.on("mouseleave" + NS, that.options.filter, proxy(that._mouseleave, that));
+            }
         },
 
         options: {
@@ -126,7 +129,8 @@ kendo_module({
             showAfter: 100,
             callout: true,
             position: "center",
-            showOn: "mouseenter"
+            showOn: "mouseenter",
+            autoClose: true
         },
 
         events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
@@ -274,7 +278,10 @@ kendo_module({
 
             that.content = wrapper.find(".k-tooltip-content");
             that.arrow = wrapper.find(".k-callout");
-            wrapper.on("mouseleave" + NS, proxy(that._mouseleave, that));
+
+            if (options.autoClose) {
+                wrapper.on("mouseleave" + NS, proxy(that._mouseleave, that));
+            }
         },
 
         _mouseleave: function(e) {

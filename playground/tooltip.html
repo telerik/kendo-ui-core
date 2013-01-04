@@ -29,6 +29,12 @@
                     position: "right",
                     filter: "input",
                     content: kendo.template($("#tooltip-template").html()),
+                    show: function() {
+                        $(document)
+                        .find("[data-role=tooltip]")
+                        .not(this.element)
+                        .kendoTooltip("hide");
+                    },
                     width: 300
                 });
 
@@ -40,7 +46,8 @@
                     showOn: "click",
                     callout: false,
                     width: 800,
-                    height: 300
+                    height: 300,
+                    autoClose: false
                 });
             });
         </script>

@@ -398,6 +398,16 @@
                 ok(!tooltip.popup);
             });
 
+            test("autoclose false does not hide the tooltip on mouseleave", function() {
+                var tooltip = new Tooltip(container, {
+                    autoClose: false
+                });
+                tooltip.show(container);
+
+                triggerEvent(container, "mouseleave");
+
+                ok(tooltip.popup.visible());
+            });
         </script>
     </body>
 </html>
