@@ -10,241 +10,45 @@
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-        <fieldset id="title" title="fooooo">
-            <legend>title attribute</legend>
-            <input title="me 1"/> <br /><br />
-            <input title="me 2"/>
+        <fieldset id="container" title="I'm your father :)">
+            <legend>template</legend>
+            <input title="luke 1"/> <br /><br />
+            <input title="luke 2"/>
         </fieldset>
 
-        <fieldset id="template">
-            <legend>template</legend>
-            <div style="width: 200px; height: 200px; background: red;"><span>foo</span></div>
+        <fieldset id="ajax">
+            <legend>click to show tooltip with ajax loaded content</legend>
+            <div style="width: 200px; height: 200px; background: red;"><span>a red square</span></div>
         </fieldset>
 
         <script>
             $(document).ready(function() {
-                $("#title").kendoTooltip({
+                $("#container").kendoTooltip({
                     position: "right",
                     filter: "input",
-                    content: {
-                        url: "http://demos.kendoui.com/content/web/window/ajax/ajaxContent.html"
-                    },
-                    width: 100,
-                    height: 200,
-                    showOn: "click"
+                    content: kendo.template($("#tooltip-template").html()),
+                    width: 300
                 });
 
-                $("#template div").kendoTooltip({
-                    content: kendo.template($("#tooltip-template").html()),
+                $("#ajax div").kendoTooltip({
+                    content: {
+                        url: "http://en.wikipedia.org/wiki/Red_Square"
+                    },
                     position: "center",
                     showOn: "click",
-                    width: 300,
-                    show: function() {
-                        var that = this;
-
-                        var element = that.content.find("#grid");
-                        if (element.data("kendoGrid")) {
-                            return;
-                        }
-
-                        that.content.on("click", "button", function() {
-                            that.hide();
-                        });
-
-                        element.kendoGrid({
-                        dataSource: {
-                            type: "odata",
-                            transport: {
-                                read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
-                            },
-                            schema: {
-                                model: {
-                                    fields: {
-                                        OrderID: { type: "number" },
-                                        Freight: { type: "number" },
-                                        ShipName: { type: "string" },
-                                        OrderDate: { type: "date" },
-                                        ShipCity: { type: "string" }
-                                    }
-                                }
-                            },
-                            pageSize: 10,
-                            serverPaging: true,
-                            serverFiltering: true,
-                            serverSorting: true
-                        },
-                        height: 250,
-                        pageable: true,
-                        columns: [{
-                                field:"OrderID",
-                                filterable: false
-                            },
-                            "Freight",
-                            {
-                                field: "OrderDate",
-                                title: "Order Date",
-                                width: 100,
-                                format: "{0:MM/dd/yyyy}"
-                            }, {
-                                field: "ShipName",
-                                title: "Ship Name",
-                                width: 200
-                            }, {
-                                field: "ShipCity",
-                                title: "Ship City"
-                            }
-                        ]
-                    });
-                    }
+                    callout: false,
+                    width: 800,
+                    height: 300
                 });
             });
         </script>
 
         <script id="tooltip-template" type="script/kendo-x-tempalte">
-            <button>Close Me</button>
-            <div id="grid"></div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut ipsum odio. Nam sem nisi, tempor nec sodales non, vehicula a lorem. Cras commodo tristique lacus nec volutpat. Fusce nec quam diam, ac scelerisque nisi. Suspendisse eu arcu risus, quis luctus elit. Etiam convallis rutrum eros sed vestibulum. Fusce viverra congue placerat. Nulla sodales vehicula lobortis.
 
             Nullam ac mauris vitae urna eleifend blandit quis eget tortor. Fusce pellentesque, nisl sed imperdiet tincidunt, elit neque iaculis mi, quis dapibus purus tortor sodales neque. Suspendisse dapibus bibendum dolor vel sagittis. Donec faucibus commodo orci, eu sollicitudin turpis cursus eu. Vivamus consequat ante eget justo eleifend porta elementum dui imperdiet. Mauris nisl mi, hendrerit vitae vehicula sit amet, ultrices sed nibh. Quisque ornare elementum tempus.
-        </script>
-
-        <script>
-            /*
-            var positions = {
-                "bottom-center": { position: "top center", origin: "bottom center" },
-                "right-center": { position: "center top", origin: "center right" },
-                "center": { position: "top center", origin: "center center" }
-            }
-
-            var browser = kendo.support.browser,
-                TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em"><div class="k-tooltip-content"></div>' +
-                    '<div class="k-callout k-callout-#=/^(bottom|center)/.test(position) ? \"n\": \"w\" #"></div></div>';
-
-            var Tooltip = kendo.ui.Widget.extend({
-                init: function(element, options) {
-                    var that = this;
-
-                    kendo.ui.Widget.fn.init.call(that, element, options);
-
-                    that.element
-                        .on("mouseover", that.options.filter, $.proxy(that._mouseenter, this))
-                        .on("mouseleave", that.options.filter, $.proxy(that._mouseleave, this));
-                },
-
-                options: {
-                    name: "Tooltip",
-                    filter: "[title]",
-                    template: kendo.template("#=element[0].title#")
-                },
-
-                destroy: function() {
-                    if (this.popup) {
-                        this.popup.destroy();
-                    }
-
-                    kendo.ui.Widget.fn.destroy.call(this);
-                },
-
-                _mouseenter: function(e) {
-                    var that = this,
-                        options = that.options,
-                        target = $(e.currentTarget),
-                        position,
-                        text;
-
-                    if (!that.popup) {
-
-                        that.content = $(kendo.template(TEMPLATE)({ position: options.position }));
-
-                        that.content.width(options.width);
-
-                        position = positions[options.position];
-
-                        that.popup = new kendo.ui.Popup(that.content, {
-                            origin: position.origin,
-                            position: position.position
-                        });
-
-                        that.content.on("mouseleave", $.proxy(that._mouseleave, this));
-                    }
-
-                    if (that.current && target[0] !== that.current[0]) {
-                        that.popup.element.hide();
-                        that._restoreTitle();
-                    }
-
-                    that._appendContent(target);
-
-                    target.data(kendo.ns + "title", target.attr("title"));
-
-                    target.removeAttr("title");
-
-                    that.popup.options.anchor = target;
-
-                    that.current = target;
-
-                    that.popup.open();
-                },
-
-                _hide: function() {
-                    if (this.popup && this.popup.visible()) {
-                        this.popup.close();
-                        this._restoreTitle();
-                    }
-                },
-
-                _appendContent: function(target) {
-                    var that = this,
-                        options = that.options,
-                        text = options.template({ element: target});
-
-                    that.content.children(".k-tooltip-content").empty().append(text);
-                },
-
-                _mouseleave: function(e) {
-                    var element = $(e.currentTarget),
-                        offset = element.offset(),
-                        pageX = e.pageX,
-                        pageY = e.pageY;
-
-                    offset.right = offset.left + element.outerWidth();
-                    offset.bottom = offset.top + element.outerHeight();
-
-                    if (pageX > offset.left && pageX < offset.right && pageY > offset.top && pageY < offset.bottom) {
-                        return;
-                    }
-
-                    this._restoreTitle();
-
-                    this.popup.close();
-
-                    this.current = null;
-                },
-
-                _restoreTitle: function() {
-                    var current = this.current,
-                        title;
-
-                    if (!current) {
-                        return;
-                    }
-
-                    title = current.data(kendo.ns + "title");
-
-                    if (title != "") {
-                        current.attr("title", title);
-                    }
-                }
-            });
-
-            kendo.ui.plugin(Tooltip);
-            */
         </script>
     </body>
 </html>

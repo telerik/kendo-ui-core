@@ -30,11 +30,11 @@ kendo_module({
         "</iframe>"),
         NS = ".kendoTooltip",
         POSITIONS = {
-            below: {
+            bottom: {
                 origin: "bottom center",
                 position: "top center"
             },
-            over: {
+            top: {
                 origin: "top center",
                 position: "bottom center"
             },
@@ -49,20 +49,20 @@ kendo_module({
                 collision: "fit flip"
             },
             center: {
-                position: "top center",
+                position: "center center",
                 origin: "center center"
             }
         },
         REVERSE = {
-            "over": "below",
-            "below": "over",
+            "top": "bottom",
+            "bottom": "top",
             "left": "right",
             "right": "left",
             "center": "center"
         },
         DIRCLASSES = {
-            bellow: "n",
-            over: "s",
+            bottom: "n",
+            top: "s",
             left: "e",
             right: "w",
             center: "n"
