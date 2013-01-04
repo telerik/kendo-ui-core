@@ -101,6 +101,8 @@ module CodeGen::TypeScript
         include Declaration
 
         def type_script_type
+            return 'any' if @type.size > 1
+
             type = TYPES[@type[0]]
 
             raise "No TypeScript mapping for type #{@type[0]}" unless type
