@@ -70,14 +70,18 @@
                         },
                         select: {
                             from: "2011/10/05"
-                        }
+                        },
+                        visible: false
                     },
                     dragStart: function(e) { console.log("dragStart", e); },
                     drag: function(e) { console.log("drag", e); },
                     dragEnd: function(e) { console.log("dragEnd", e); },
                     zoomStart: function(e) { console.log("zoomStart", e); },
                     zoom: function(e) { console.log("zoom", e); },
-                    zoomEnd: function(e) { console.log("zoomEnd", e); }
+                    zoomEnd: function(e) { console.log("zoomEnd", e); },
+                    selectStart: function(e) { console.log("selectStart", e); },
+                    select: function(e) { console.log("select", e); },
+                    selectEnd: function(e) { console.log("selectEnd", e); }
                 });
             });
         </script>

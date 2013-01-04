@@ -22,6 +22,9 @@
         DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
+        SELECT_START = "selectStart",
+        SELECT = "select",
+        SELECT_END = "selectEnd",
         ZOOM_ACCELERATION = 3,
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd";
@@ -159,6 +162,7 @@
                     to: to,
                     min: min,
                     max: max,
+                    selectStart: $.proxy(navi._selectStart, navi),
                     select: $.proxy(navi._select, navi),
                     selectEnd: $.proxy(navi._selectEnd, navi)
                 });
@@ -342,6 +346,13 @@
             );
         },
 
+        _selectStart: function(e) {
+            this.chart.trigger(SELECT_START, {
+                from: e.from,
+                to: e.to
+            });
+        },
+
         _select: function(e) {
             var navi = this;
 
@@ -349,6 +360,11 @@
                 navi.indexToDate(e.from),
                 navi.indexToDate(e.to)
             );
+
+            navi.chart.trigger(SELECT, {
+                from: e.from,
+                to: e.to
+            });
         },
 
         _selectEnd: function(e) {
@@ -358,6 +374,11 @@
             navi.readSelection();
             navi.applySelection();
             navi.redrawSlaves();
+
+            navi.chart.trigger(SELECT_END, {
+                from: e.from,
+                to: e.to
+            });
         },
 
         mainAxis: function() {
