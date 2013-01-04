@@ -363,7 +363,10 @@
                     return cssClass;
                 },
                 dragClue: template(
-                    "<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"
+                    "<div class='k-header k-drag-clue'>" +
+                        "<span class='k-icon k-drag-status'></span>" +
+                        "#= treeview.template(data) #" +
+                    "</div>"
                 ),
                 group: template(
                     "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) # role='group'>" +
@@ -1590,7 +1593,10 @@
         that._draggable = new ui.Draggable(treeview.element, {
            filter: "div:not(.k-state-disabled) .k-in",
            hint: function(node) {
-               return treeview.templates.dragClue({ text: node.text() });
+               return treeview.templates.dragClue({
+                   item: treeview.dataItem(node),
+                   treeview: treeview.options
+               });
            },
            cursorOffset: {
                left: 10,

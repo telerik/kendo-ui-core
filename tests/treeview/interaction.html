@@ -316,6 +316,26 @@
                 equal(tree1.find(".k-item").length, 0);
             });
 
+            test("drag hint encoding follows item.encoded field", function() {
+                window.flag = false;
+
+                var text = "foo<script>window.flag = true</" + "script>";
+
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: text },
+                        { text: "bar" }
+                    ]
+                });
+
+                moveNode(treeviewObject, text, "bar", "below");
+
+                ok(!window.flag);
+
+                delete window.flag;
+            });
+
             module("keyboard support", {
                 teardown: cleanArtifacts
             });
