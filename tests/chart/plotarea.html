@@ -861,6 +861,45 @@
                     );
                 });
 
+                test("sets named primary axis min/max to series limits (impl./expl. axis)", function() {
+                    var fn = dataviz.CategoricalPlotArea.fn;
+                    stubMethod(fn, "createValueAxes",
+                        function(panes) {
+                            fn._stubbed["createValueAxes"].call(this, panes);
+                            equal(this.valueAxis.options.min, 0);
+                            equal(this.valueAxis.options.max, 120);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "column",
+                                data: [10],
+                                axis: "A"
+                            }, {
+                                type: "column",
+                                data: [100]
+                            }], {
+                                valueAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary axis min/max to series limits (implicit axis)", function() {
+                    var fn = dataviz.CategoricalPlotArea.fn;
+                    stubMethod(fn, "createValueAxes",
+                        function(panes) {
+                            fn._stubbed["createValueAxes"].call(this, panes);
+                            equal(this.valueAxis.options.min, 0);
+                            equal(this.valueAxis.options.max, 350);
+                        },
+                        function() {
+                            createPlotArea(columnSeriesData, {
+                                valueAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
                 test("NaN values are ignored when tracking axis range", 2, function() {
                     stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
                         function() {
@@ -875,6 +914,7 @@
                         }
                     );
                 });
+
                 test("applies gap from first series", function() {
                     equals(chartSeries.options.gap, GAP);
                 });
@@ -1145,6 +1185,48 @@
 
                 test("Candlestick chart added to pane content", function() {
                     ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
+                test("sets named primary axis min/max to series limits (impl./expl. axis)", function() {
+                    var fn = dataviz.CategoricalPlotArea.fn;
+                    stubMethod(fn, "createValueAxes",
+                        function(panes) {
+                            fn._stubbed["createValueAxes"].call(this, panes);
+                            equal(this.valueAxis.options.min, 0);
+                            equal(this.valueAxis.options.max, 120);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "candlestick",
+                                data: [[0, 10, 0, 0]],
+                                axis: "A"
+                            }, {
+                                type: "candlestick",
+                                data: [[0, 100, 0, 0]]
+                            }], {
+                                valueAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary axis min/max to series limits (implicit axis)", function() {
+                    var fn = dataviz.CategoricalPlotArea.fn;
+                    stubMethod(fn, "createValueAxes",
+                        function(panes) {
+                            fn._stubbed["createValueAxes"].call(this, panes);
+                            equal(this.valueAxis.options.min, 0);
+                            equal(this.valueAxis.options.max, 12);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "candlestick",
+                                data: [[0, 10, 0, 0]]
+                            }], {
+                                valueAxis: { name: "A" }
+                            });
+                        }
+                    );
                 });
 
                 // ------------------------------------------------------------

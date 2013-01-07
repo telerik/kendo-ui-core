@@ -6137,6 +6137,8 @@ kendo_module({
                 name,
                 i;
 
+            var anonRange = plotArea.valueAxisRangeTracker.query();
+
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
                 axisPane = plotArea.findPane(axisOptions.pane);
@@ -6144,6 +6146,11 @@ kendo_module({
                 if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
                     range = plotArea.valueAxisRangeTracker.query(name);
+
+                    if (i === 0 && anonRange) {
+                        range.min = math.min(range.min, anonRange.min);
+                        range.max = math.max(range.max, anonRange.max);
+                    }
 
                     valueAxis = new NumericAxis(range.min, range.max,
                         deepExtend({}, baseOptions, axisOptions)
@@ -6233,32 +6240,33 @@ kendo_module({
             var tracker = this;
 
             tracker.axisRanges = {},
-            tracker.axisOptions = [].concat(axisOptions),
-            tracker.defaultRange = { min: 0, max: 1 };
+            tracker.axisNames = ["undefined"].concat(
+                map([].concat(axisOptions), function(axis) {
+                    return axis.name;
+                })
+            );
         },
 
         update: function(chartAxisRanges) {
             var tracker = this,
                 axisRanges = tracker.axisRanges,
-                axisOptions = tracker.axisOptions,
+                axisNames = tracker.axisNames,
                 range,
                 chartRange,
                 i,
-                axis,
-                axisName,
-                length = axisOptions.length;
+                name,
+                length = axisNames.length;
 
             if (!chartAxisRanges) {
                 return;
             }
 
             for (i = 0; i < length; i++) {
-                axis = axisOptions[i];
-                axisName = axis.name;
-                range = axisRanges[axisName];
-                chartRange = chartAxisRanges[axisName];
+                name = axisNames[i];
+                range = axisRanges[name];
+                chartRange = chartAxisRanges[name];
                 if (chartRange) {
-                    axisRanges[axisName] = range =
+                    axisRanges[name] = range =
                         range || { min: MAX_VALUE, max: MIN_VALUE };
 
                     range.min = math.min(range.min, chartRange.min);
@@ -6274,7 +6282,7 @@ kendo_module({
         query: function(axisName) {
             var tracker = this;
 
-            return tracker.axisRanges[axisName] || deepExtend({}, tracker.defaultRange);
+            return tracker.axisRanges[axisName] || { min: 0, max: 1 };
         }
     });
 
