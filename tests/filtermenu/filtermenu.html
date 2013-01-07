@@ -11,6 +11,8 @@
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <script src="../../src/kendo.datetimepicker.js"></script>
         <script src="../../src/kendo.numerictextbox.js"></script>
         <script src="../../src/kendo.dropdownlist.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -536,7 +538,7 @@
                         dataSource: dataSource
                     });
 
-                ok(filterMenu.form.find("[" + kendo.attr("type") + "=number]:first").data("kendoNumericTextBox"));
+                ok(filterMenu.form.find("[" + kendo.attr("role") + "=numerictextbox]:first").data("kendoNumericTextBox"));
             });
 
             test("creates datepicker for date fields", function() {
@@ -545,7 +547,7 @@
                         dataSource: dataSource
                     });
 
-                ok(filterMenu.form.find("[" + kendo.attr("type") + "=date]:first").data("kendoDatePicker"));
+                ok(filterMenu.form.find("[" + kendo.attr("role") + "=datepicker]:first").data("kendoDatePicker"));
             });
 
             test("updates dropdownlists", function() {
@@ -566,7 +568,7 @@
                 });
 
                 dataSource.filter({ field: "bar", value: 1 });
-                equal(filterMenu.form.find("[" + kendo.attr("type") + "=number]:first").data("kendoNumericTextBox")._text.val(), "1.00");
+                equal(filterMenu.form.find("[" + kendo.attr("role") + "=numerictextbox]:first").data("kendoNumericTextBox")._text.val(), "1.00");
             });
 
             test("updates datepickers", function() {
@@ -576,7 +578,7 @@
 
                 var date = new Date(2011, 1, 1);
                 dataSource.filter({ field: "baz", value:date });
-                equal(filterMenu.form.find("[" + kendo.attr("type") + "=date]:first").data("kendoDatePicker").value().getTime(), date.getTime());
+                equal(filterMenu.form.find("[" + kendo.attr("role") + "=datepicker]:first").data("kendoDatePicker").value().getTime(), date.getTime());
             });
 
             test("closes sibling filtering menus", function() {
@@ -825,6 +827,40 @@
                 filterMenu.form.submit();
 
                 strictEqual(dataSource.filter().filters[0].value, "foo");
+            });
+
+            test("role is not set if ui is function", 2, function() {
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource,
+                    ui: function(element) {
+                       ok(!element.filter("[" + kendo.attr("role") + "]").length);
+                    }
+                });
+            });
+
+            test("role is set if ui is string",  function() {
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource,
+                    ui: "datetimepicker"
+                });
+
+                equal(filterMenu.form.find("[" + kendo.attr("role") + "=datetimepicker]").length, 2);
+            });
+
+            test("ui widget is bound to the model",  function() {
+                var date = new Date();
+
+                dataSource.filter({ field: "baz", op: "eq", value: date });
+
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource,
+                    field: "baz",
+                    ui: function(element) {
+                        element.kendoDateTimePicker();
+                    }
+                });
+
+                equal(filterMenu.form.find("[" + kendo.attr("role") + "=datetimepicker]:first").kendoDateTimePicker("value").getTime(), date.getTime());
             });
       </script>
     </body>
