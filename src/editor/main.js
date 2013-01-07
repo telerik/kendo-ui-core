@@ -1023,4 +1023,4 @@ kendo_module({
         }
     });
 
-})(window.kendo.jQuery);
+})(window.jQuery);
