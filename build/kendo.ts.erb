@@ -14,7 +14,7 @@ module kendo.data {
         constructor(value?: any);
         get(name: string): any;
         parent(): ObservableObject;
-        set(name: string, value: any);
+        set(name: string, value: any): void;
         toJSON(): { [key: string]: any; };
     }
 
@@ -25,6 +25,48 @@ module kendo.data {
         uid: string;
         editable(field: string): bool;
         isNew(): bool;
+    }
+
+    class Node extends Model {
+        children: HierarchicalDataSource;
+
+        append(model: any): void;
+        level(): number;
+        load(id: any): void;
+        loaded(value: bool): void;
+        loaded(): bool;
+        parentNode(): Node;
+    }
+
+    class HierarchicalDataSource extends DataSource {
+    }
+
+    interface HierarchicalDataSourceOptions extends DataSourceOptions {
+    }
+
+    interface DataSourceSchema {
+        model?: DataSourceSchemaModel;
+    }
+
+    interface DataSourceSchemaModel {
+        id?: string;
+        fields?: DataSourceSchemaModelField[];
+    }
+
+    interface DataSourceSchemaModelField {
+        name?: string;
+        defaultValue?: any;
+        editable?: bool;
+        nullable?: bool;
+        parse?: Function;
+        type?: string;
+        validation?: DataSourceSchemaModelFieldValidation;
+    }
+
+    interface DataSourceSchemaModelFieldValidation {
+        required?: bool;
+        min?: any;
+        max?: any;
     }
 
     class ObservableArray extends Observable {

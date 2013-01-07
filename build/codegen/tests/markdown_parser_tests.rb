@@ -361,6 +361,28 @@ Bar
         assert_equal 'foo', result.events[0].options[0].name
     end
 
+    def test_parse_nested_event_data
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Configuration
+
+### foo `String`
+
+## Events
+
+### bar
+
+#### Event Data
+
+##### e.foo `Object`
+
+##### e.foo.bar `String`
+        })
+
+        assert_equal 'bar', result.events[0].options[0].options[0].name
+    end
+
     def test_parse_event_data_type
         result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
@@ -378,7 +400,7 @@ Bar
 ##### e.foo `String`
         })
 
-        assert_equal 'String', result.events[0].options[0].type
+        assert_equal 'String', result.events[0].options[0].type[0]
     end
 
     def test_parse_event_data_description

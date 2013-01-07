@@ -27,12 +27,23 @@ module CodeGen::TypeScript
         'kendo.ui.Menu' => 'kendo.ui.Menu',
         'kendo.ui.PanelBar' => 'kendo.ui.PanelBar',
         'kendo.ui.TabStrip' => 'kendo.ui.TabStrip',
-        'kendo.ui.Window' => 'kendo.ui.Window'
+        'kendo.ui.Window' => 'kendo.ui.Window',
+        'kendo.data.Node' => 'kendo.data.Node'
     }
 
     module Declaration
         def type_script_declaration
             "#{name}?: #{type_script_type};"
+        end
+
+        def type_script_type
+            return 'any' if @type.size > 1
+
+            type = TYPES[@type[0]]
+
+            raise "No TypeScript mapping for type #{@type[0]}" unless type
+
+            type
         end
     end
 
@@ -62,13 +73,23 @@ module CodeGen::TypeScript
         def unique_options
             composite = composite_options
 
-            options.find_all {|o| o.composite? || !composite.any? { |composite| composite.name == o.name } }
+            result = options.find_all {|o| o.composite? || !composite.any? { |composite| composite.name == o.name } }
+
+            result.delete_if { |o| o.name == 'model' } if @name == 'schema'
+
+            result
         end
     end
 
     class Event < CodeGen::Event
+        include Options
+
         def option_class
             EventOption
+        end
+
+        def composite_option_class
+            CompositeEventOption
         end
 
         def type_script_type
@@ -79,12 +100,25 @@ module CodeGen::TypeScript
     end
 
     class EventOption < CodeGen::EventOption
+        include Declaration
+
+        def composite_option_class
+            CompositeEventOption
+        end
+
+    end
+
+    EVENT = ERB.new(File.read("build/event.ts.erb"), 0, '%<>')
+
+    class CompositeEventOption < CodeGen::CompositeEventOption
+        include Options
+
         def type_script_type
-            type = TYPES[@type.split('|')[0].strip]
+            @owner.type_script_type + @name.pascalize
+        end
 
-            raise "No TypeScript mapping for type #{@type}" unless type
-
-            type
+        def type_script_interface
+            EVENT.result(binding)
         end
     end
 
@@ -126,16 +160,6 @@ module CodeGen::TypeScript
 
     class Parameter < CodeGen::Parameter
         include Declaration
-
-        def type_script_type
-            return 'any' if @type.size > 1
-
-            type = TYPES[@type[0]]
-
-            raise "No TypeScript mapping for type #{@type[0]}" unless type
-
-            type
-        end
 
         def composite_parameter_class
             CompositeParameter
@@ -188,7 +212,9 @@ module CodeGen::TypeScript
         end
 
         def type_script_base_class
-            return 'Widget' if @full_name.include?('ui')
+            return 'kendo.ui.Widget' if @full_name.include?('ui') && !@full_name.include?('mobile')
+
+            return 'kendo.mobile.ui.Widget' if @full_name.include?('ui') && @full_name.include?('mobile')
 
             'Observable'
         end
@@ -311,10 +337,9 @@ def type_script(*args, &block)
 end
 
 namespace :type_script do
-    #TYPE_SCRIPT_SOURCES = FileList["docs/api/{web,mobile,dataviz,framework}/*.md"]
-
     TYPE_SCRIPT_SOURCES = FileList["docs/api/web/*.md"]
         .include('docs/api/framework/datasource.md')
+        .include('docs/api/dataviz/*.md')
 
     %w(master production).each do |branch|
         namespace branch do

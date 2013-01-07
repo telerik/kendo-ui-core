@@ -18,6 +18,11 @@
 <%= parameter.type_script_interface %>
 % end
 % end
+% events.each do |event|
+% event.composite_options.each do |option|
+<%= option.type_script_interface %>
+% end
+% end
 
     interface <%= type_script_options_type %> {
 % unique_options.each do |option|
@@ -37,7 +42,7 @@
     interface <%= event.type_script_type %> extends <%= type_script_type %>Event {
 % event.options.each do |option|
 % if option.name != 'sender'
-        <%= option.name %>: <%= option.type_script_type %>;
+        <%= option.name %>?: <%= option.type_script_type %>;
 % end
 % end
     }
