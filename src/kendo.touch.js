@@ -3,7 +3,7 @@
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         abs = Math.abs,
-        MAX_DOUBLE_TAP_DISTANCE = 8;
+        MAX_DOUBLE_TAP_DISTANCE = 20;
 
     var Swipe = kendo.Class.extend({
         init: function(element, callback, options) {
@@ -142,7 +142,6 @@
                 touch = e.touch;
 
             that._cancelHold();
-
 
             if (lastTap &&
                 (touch.endTime - lastTap.endTime < that.options.doubleTapTimeout) &&
