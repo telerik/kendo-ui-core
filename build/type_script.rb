@@ -20,16 +20,19 @@ module CodeGen::TypeScript
         'jQuery' => 'JQuery',
         'jqXHR' => 'JQueryXHR',
         'Selector' => 'string',
-        'kendo.data.ObservableObject' => 'kendo.data.ObservableObject',
-        'kendo.data.ObservableArray' => 'kendo.data.ObservableArray',
-        'kendo.data.Model' => 'kendo.data.Model',
-        'kendo.data.DataSource' => 'kendo.data.DataSource',
-        'kendo.ui.Menu' => 'kendo.ui.Menu',
-        'kendo.ui.PanelBar' => 'kendo.ui.PanelBar',
-        'kendo.ui.TabStrip' => 'kendo.ui.TabStrip',
-        'kendo.ui.Window' => 'kendo.ui.Window',
-        'kendo.data.Node' => 'kendo.data.Node'
+        'TouchEvent' => 'kendo.mobile.ui.TouchEventOptions',
+        'Point' => 'kendo.mobile.ui.Point'
     }
+
+    def self.type(type)
+        return type if type.start_with?('kendo')
+
+        result = TYPES[type]
+
+        raise "No TypeScript mapping for type #{type}" unless result
+
+        result
+    end
 
     module Declaration
         def type_script_declaration
@@ -39,11 +42,7 @@ module CodeGen::TypeScript
         def type_script_type
             return 'any' if @type.size > 1
 
-            type = TYPES[@type[0]]
-
-            raise "No TypeScript mapping for type #{@type[0]}" unless type
-
-            type
+            CodeGen::TypeScript.type(@type[0])
         end
     end
 
@@ -192,11 +191,7 @@ module CodeGen::TypeScript
 
     class Result < CodeGen::Result
         def type_script_type
-            type = TYPES[@type.split('|')[0].strip]
-
-            raise "No TypeScript mapping for type #{@type}" unless type
-
-            type
+            CodeGen::TypeScript.type(@type.split('|')[0].strip)
         end
     end
 
@@ -272,7 +267,7 @@ module CodeGen::TypeScript
         def type_script_type
             return 'any' if @type.size > 1
 
-            TYPES[@type[0]]
+            CodeGen::TypeScript.type(@type[0])
         end
 
     end
@@ -340,6 +335,7 @@ namespace :type_script do
     TYPE_SCRIPT_SOURCES = FileList["docs/api/web/*.md"]
         .include('docs/api/framework/datasource.md')
         .include('docs/api/dataviz/*.md')
+        .include('docs/api/mobile/*.md')
 
     %w(master production).each do |branch|
         namespace branch do

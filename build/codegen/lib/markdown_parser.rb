@@ -155,6 +155,10 @@ class MarkdownParser
 
     def each_section(configuration)
         configuration.each_with_index do |element, index|
+            next if index == 0
+
+            break if element.type == :header && element.options[:level] < 3
+
             if element.type == :header && element.options[:level] == 3
                 yield element, index
             end

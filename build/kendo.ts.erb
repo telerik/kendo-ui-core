@@ -93,6 +93,25 @@ module kendo.ui {
 module kendo.mobile.ui {
     class Widget extends kendo.ui.Widget {
     }
+
+    interface TouchAxis {
+        location?: number;
+        startLocation?: number;
+        client?: number;
+        delta?: number;
+        velocity?: number;
+    }
+
+    interface TouchEventOptions {
+        target?: JQuery;
+        x?: TouchAxis;
+        y?: TouchAxis;
+    }
+
+    interface Point {
+        x?: number;
+        y?: number;
+    }
 }
 
 % namespaces.keys.each do |key|
