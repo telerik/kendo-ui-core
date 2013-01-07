@@ -438,9 +438,10 @@ kendo_module({
         },
 
         _start: function(e) {
-            var chart = this;
+            var chart = this,
+                events = chart._events;
 
-            if (defined(chart._events[DRAG_START])) {
+            if (defined(events[DRAG_START] || events[DRAG] || events[DRAG_END])) {
                 chart._startNavigation(e, DRAG_START);
             }
         },
