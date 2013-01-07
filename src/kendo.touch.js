@@ -11,7 +11,7 @@ kendo_module({
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         abs = Math.abs,
-        MAX_DOUBLE_TAP_DISTANCE = 8;
+        MAX_DOUBLE_TAP_DISTANCE = 20;
 
     var Swipe = kendo.Class.extend({
         init: function(element, callback, options) {
@@ -151,6 +151,10 @@ kendo_module({
 
             that._cancelHold();
 
+
+        if (lastTap) {
+            $("span").append("Distance: " + kendo.touchDelta(touch, lastTap).distance + "<br />");
+        }
 
             if (lastTap &&
                 (touch.endTime - lastTap.endTime < that.options.doubleTapTimeout) &&
