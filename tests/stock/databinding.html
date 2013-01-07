@@ -402,6 +402,48 @@
                     });
                 });
 
+                test("main DS is filtered during zoomEnd", function() {
+                    createStockChart({
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    data: defaultOptions.dataSource.data
+                                }
+                            }
+                        }
+                    });
+
+                    chart.trigger("zoom", {
+                        originalEvent: {
+                            preventDefault: function() {}
+                        },
+                        delta: -1
+                    });
+
+                    chart.trigger("zoomEnd");
+                    same(chart.dataSource._filter.filters[0].value, new Date("2012/09/02"));
+                });
+
+                test("main DS is not filtered during zoom", function() {
+                    createStockChart({
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    data: defaultOptions.dataSource.data
+                                }
+                            }
+                        }
+                    });
+
+                    chart.trigger("zoom", {
+                        originalEvent: {
+                            preventDefault: function() {}
+                        },
+                        delta: -1
+                    });
+
+                    same(chart.dataSource._filter, undefined);
+                });
             })();
 
         </script>

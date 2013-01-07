@@ -481,16 +481,17 @@ kendo_module({
                 select = navi.options.select || {},
                 chart = navi.chart,
                 chartDataSource = chart.dataSource,
+                transport = chartDataSource.options.transport,
                 filter = Navigator.buildFilter(select.from, select.to);
 
-            if (navi.dataSource && chartDataSource && filter.length) {
+            if (navi.dataSource && chartDataSource && transport && filter.length) {
                 var dummyAxis = new dataviz.DateCategoryAxis(deepExtend({
                     baseUnit: "fit"
                 }, chart.options.categoryAxis[0], {
                     categories: [select.from, select.to]
                 }));
 
-                chartDataSource.options.transport.read.data.baseUnit = dummyAxis.options.baseUnit;
+                transport.read.data.baseUnit = dummyAxis.options.baseUnit;
                 chartDataSource.filter(filter);
             }
         },
@@ -520,7 +521,6 @@ kendo_module({
 
             if (!kendo.support.touch) {
                 navi.filterAxes();
-                navi.filterDataSource();
                 navi.redrawSlaves();
             }
 
