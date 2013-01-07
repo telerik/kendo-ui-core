@@ -155,6 +155,24 @@ kendo_module({
             that.os = os;
 
             that.osCssClass = osCssClass(that.os);
+            
+            if (os.name == "wp") {
+                that._setupWP8Theme();
+            }
+        },
+
+        _setupWP8Theme: function() {
+
+            var docElement = document.documentElement,
+                div, bgColor;
+            
+            div = $("<div />").css({background: "Background", visibility: "hidden", position: "absolute", top: "-3333px" }).appendTo(document.body);
+            bgColor = parseInt(div.css("background-color").split(",")[1], 10);
+            if (bgColor === 0) {
+                $(docElement).addClass("km-wp8-dark");
+            } else {
+                $(docElement).addClass("km-wp8-light");
+            }
         },
 
         _startHistory: function() {
