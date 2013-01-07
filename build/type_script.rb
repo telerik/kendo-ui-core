@@ -6,6 +6,20 @@ require 'codegen/lib/component'
 TYPE_SCRIPT = ERB.new(File.read("build/kendo.ts.erb"), 0, '%<>')
 
 module CodeGen::TypeScript
+    EXCLUDE = [
+        'docs/api/framework/kendo.md',
+        'docs/api/framework/class.md',
+        'docs/api/framework/hierarchicaldatasource.md',
+        'docs/api/framework/model.md',
+        'docs/api/framework/observable.md',
+        'docs/api/framework/observableobject.md',
+        'docs/api/framework/node.md',
+        'docs/api/framework/observablearray.md',
+        'docs/api/framework/widget.md',
+        'docs/api/framework/mobilewidget.md',
+        'docs/api/web/ui.md'
+    ]
+
     TYPES = {
         'Number' => 'number',
         'String' => 'string',
@@ -298,7 +312,7 @@ end
 
 def get_type_script(sources)
 
-    sources = sources.find_all { |source| !source.end_with?('ui.md') }
+    sources = sources.find_all { |source| !CodeGen::TypeScript::EXCLUDE.include?(source) }
 
     components = sources.map do |source|
         parser = CodeGen::MarkdownParser.new
@@ -333,7 +347,7 @@ end
 
 namespace :type_script do
     TYPE_SCRIPT_SOURCES = FileList["docs/api/web/*.md"]
-        .include('docs/api/framework/datasource.md')
+        .include('docs/api/framework/*.md')
         .include('docs/api/dataviz/*.md')
         .include('docs/api/mobile/*.md')
 
