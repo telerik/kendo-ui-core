@@ -1015,4 +1015,4 @@
         }
     });
 
-})(window.kendo.jQuery);
+})(window.jQuery);
