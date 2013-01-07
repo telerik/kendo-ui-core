@@ -37,22 +37,17 @@ kendo_module({
         whitespaceRegExp = /^\s+$/,
         buttonRegExp = /button/;
 
-    function toggleiOSLabel(e) {
+    function touchLabelHandler(e) {
         var target = $(e.target),
-            input = target.is("input") ? target : target.find("input"),
-            value = !input[0].checked;
+            clickedOnInput = target.is("input"),
+            input = clickedOnInput ? target : target.find("input");
 
-        if (support.touch && e.type === CLICK) {
-            e.preventDefault();
-            return;
+        // check the input
+        input.attr("checked", input.is(":radio") ? true : !input[0].checked);
+
+        if (!clickedOnInput) {
+            input.trigger("change"); // trigger the change event for any listeners (MVVM)
         }
-
-        if (input.is(":radio")) {
-            value = true;
-        }
-
-        input.attr("checked", value) // check the input
-             .trigger("change"); // trigger the change event for any listeners (MVVM)
     }
 
     function whitespace() {
@@ -113,8 +108,9 @@ kendo_module({
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
                 .on(TRIGGER, ITEM_SELECTOR, "_click");
 
-            if (support.touch) {
-                element.on(TRIGGER, ".km-listview-label", toggleiOSLabel);
+            if (support.mobileOS && support.mobileOS.ios) {
+                element.on("touchend", ".km-listview-label", touchLabelHandler)
+                    .on("click", ".km-listview-label", kendo.preventDefault);
             }
 
             element.wrap(WRAPPER);
