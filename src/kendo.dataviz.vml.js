@@ -700,6 +700,10 @@
 
         _renderClip: function() {
             return this.clipTemplate(this);
+        },
+
+        destroy: function() {
+            $("#" + this.options.id + ">*").unwrap();
         }
     });
 
