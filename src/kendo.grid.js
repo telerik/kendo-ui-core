@@ -52,6 +52,8 @@
         formatRegExp = /(\}|\#)/ig,
         indicatorWidth = 3,
         templateHashRegExp = /#/ig,
+        whitespaceRegExp = "[\\x20\\t\\r\\n\\f]",
+        nonDataCellsRegExp = new RegExp("(^|" + whitespaceRegExp + ")" + "(k-group-cell|k-hierarchy-cell)" + "(" + whitespaceRegExp + "|$)"),
         COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
         isRtl = false;
 
@@ -469,6 +471,19 @@
         groupValue = groupValue != null ? groupValue : "";
 
         return format ? kendo.format(format, groupValue) : groupValue;
+    }
+
+    function setCellVisibility(cells, index, visible) {
+        var pad = 0,
+            cell = cells[pad];
+
+        while (cell) {
+            if (! ((!visible && cell.style.display == "none") || nonDataCellsRegExp.test(cell.className)) ) {
+                cells[index + pad].style.display = visible ? "" : "none";
+                break;
+            }
+            cell = cells[++pad];
+        }
     }
 
     var Grid = Widget.extend({
@@ -3149,6 +3164,7 @@
             }
 
             rows = that.tbody.children();
+
             for (idx = 0, length = rows.length; idx < length; idx += 1) {
                 row = rows.eq(idx);
                 if (row.is(".k-grouping-row,.k-detail-row")) {
@@ -3162,7 +3178,7 @@
                         row = cell.find("tr:first");
                     }
 
-                    row.children(":not(.k-group-cell,.k-hierarchy-cell):visible").eq(columnIndex).hide();
+                    setCellVisibility(row[0].cells, columnIndex, false);
                 }
             }
 
@@ -3248,7 +3264,7 @@
                         row = cell.find("tr:first");
                     }
 
-                    row.children(":not(.k-group-cell,.k-hierarchy-cell)").eq(columnIndex).show();
+                    setCellVisibility(row[0].cells, columnIndex, true);
                 }
             }
 
