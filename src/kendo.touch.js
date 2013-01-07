@@ -151,11 +151,6 @@ kendo_module({
 
             that._cancelHold();
 
-
-        if (lastTap) {
-            $("span").append("Distance: " + kendo.touchDelta(touch, lastTap).distance + "<br />");
-        }
-
             if (lastTap &&
                 (touch.endTime - lastTap.endTime < that.options.doubleTapTimeout) &&
                 kendo.touchDelta(touch, lastTap).distance < MAX_DOUBLE_TAP_DISTANCE
