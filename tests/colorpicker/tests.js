@@ -1,12 +1,12 @@
 tests.push(
     {
-        page: "color/aria.html",
+        page: "colorpicker/aria.html",
         title: "Color tools - ARIA tests"
     },{
-        page: "color/mvvm.html",
+        page: "colorpicker/mvvm.html",
         title: "Color MVVM"
     },{
-        page: "color/lint.html",
+        page: "colorpicker/lint.html",
         title: "Color lint"
     }
 );
