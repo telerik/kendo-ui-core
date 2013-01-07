@@ -158,7 +158,6 @@
 
                 datetimepicker.value(value);
 
-                equal(input.val(), value);
                 equal(datetimepicker.value(), null);
             });
 
@@ -601,6 +600,15 @@
 
                 notEqual(datepicker._value, null);
                 equal(+datepicker._value, +midnight);
+            });
+
+            test("value method does not show text representation of invalid value", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.value("invalid");
+
+                equal(datetimepicker.value(), null);
+                equal(input.val(), "");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

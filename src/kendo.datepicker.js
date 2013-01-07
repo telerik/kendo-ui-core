@@ -435,6 +435,10 @@
             }
 
             that._old = that._update(value);
+
+            if (that._old === null) {
+                that.element.val("");
+            }
         },
 
         _toggleHover: function(e) {

@@ -394,14 +394,14 @@
                 equal(+datepicker._value, +midnight);
             });
 
-            /*test("destroy deletes shared calendar if it has never been opened", function() {
+            test("value method does not show text representation of invalid value", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                datepicker.destroy();
+                datepicker.value("invalid");
 
-                equal(kendo.ui.DatePicker.sharedCalendar, null);
-            });*/
-
+                equal(datepicker.value(), null);
+                equal(input.val(), "");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
