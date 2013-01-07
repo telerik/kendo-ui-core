@@ -709,6 +709,10 @@ kendo_module({
 
         _renderClip: function() {
             return this.clipTemplate(this);
+        },
+
+        destroy: function() {
+            $("#" + this.options.id + ">*").unwrap();
         }
     });
 

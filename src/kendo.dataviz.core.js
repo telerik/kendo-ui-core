@@ -1969,12 +1969,15 @@ kendo_module({
                 };
 
                 loop();
+                anim.stop();
             }, delay);
         },
 
         abort: function() {
             this._stopped = true;
         },
+
+        stop: noop,
 
         setup: noop,
 
@@ -2024,6 +2027,11 @@ kendo_module({
 
             // Expands rectangle to the right
             points[1].x = points[2].x = points[0].x + size;
+        },
+
+        stop: function() {
+            // Unwrap all child elements
+            this.element.destroy();
         }
     });
 

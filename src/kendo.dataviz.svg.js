@@ -375,6 +375,10 @@ kendo_module({
             }
 
             return NONE;
+        },
+
+        destroy: function() {
+            // Expand animation should have this method
         }
     });
 
