@@ -103,6 +103,16 @@
                     equal(autocomplete.element.val(), "Select...");
                 });
 
+                test("setting null as value shows placeholder", function() {
+                    var autocomplete = input.val("1").kendoAutoComplete({
+                        placeholder: "Select..."
+                    }).data("kendoAutoComplete");
+
+                    autocomplete.value(null);
+
+                    equal(autocomplete.element.val(), "Select...");
+                });
+
             } else {
                 test("add placeholder attr to the input", function() {
                     var autocomplete = input.attr("placeholder", "test").kendoAutoComplete({

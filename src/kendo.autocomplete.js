@@ -372,7 +372,7 @@ kendo_module({
                 element = that.element[0];
 
             if (value !== undefined) {
-                element.value = value;
+                element.value = value === null ? "" : value;
                 that._placeholder();
             } else {
                 value = element.value;
