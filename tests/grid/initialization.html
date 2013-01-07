@@ -674,6 +674,30 @@
                 equal(grid.thead.find("th").data("kendoFilterMenu").options.values.length, 1);
             });
 
+            test("column filterable ui as function", 1, function() {
+                $(table).html("<thead><tr><th data-kendo-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
+                var grid = new Grid(table, {
+                    filterable: true,
+                    columns: [{ filterable: {
+                            ui: function(element) {
+                                element.addClass("foo");
+                            }
+                    }}],
+                    dataSource: {
+                        schema: {
+                            model: {
+                                fields: {
+                                    col1: {}
+                                }
+                            }
+                        }
+                    }
+                });
+
+                grid.thead.find("th").data("kendoFilterMenu").link.click();
+                equal(grid.thead.find("th").data("kendoFilterMenu").form.find(".foo").length, 2);
+            });
+
             test("detail th is created when thead is defined", function() {
                 var grid = new Grid($('<table><th data-kendo-field="foo"></th></table>')[0], {
                         dataSource: [],

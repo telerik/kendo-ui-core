@@ -19,6 +19,7 @@ kendo_module({
             "number": "numerictextbox",
             "date": "datepicker"
         },
+        isFunction = $.isFunction,
         Widget = ui.Widget;
 
     var booleanTemplate =
@@ -43,14 +44,14 @@ kendo_module({
                 '<div class="k-filter-help-text">#=messages.info#</div>'+
                 '<select data-#=ns#bind="value: filters[0].operator" data-#=ns#role="dropdownlist">'+
                     '#for(var op in operators){#'+
-                        '<option value="#=op#">#=operators[op]#</option>'+
+                        '<option value="#=op#">#=operators[op]#</option>' +
                     '#}#'+
                 '</select>'+
                 '#if(values){#' +
                     '<select data-#=ns#bind="value:filters[0].value" data-#=ns#text-field="text" data-#=ns#value-field="value" data-#=ns#source=\'#=kendo.stringify(values).replace(/\'/g,"&\\#39;")#\' data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
                     '</select>' +
                 '#}else{#' +
-                    '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" #=roles[type] ? "data-" + ns + "role=\'" + roles[type] + "\'" : ""# />'+
+                    '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" #=role ? "data-" + ns + "role=\'" + role + "\'" : ""# />'+
                 '#}#' +
                 '#if(extra){#'+
                     '<select class="k-filter-and" data-#=ns#bind="value: logic" data-#=ns#role="dropdownlist">'+
@@ -66,7 +67,7 @@ kendo_module({
                         '<select data-#=ns#bind="value:filters[1].value" data-#=ns#text-field="text" data-#=ns#value-field="value" data-#=ns#source=\'#=kendo.stringify(values).replace(/\'/g,"&\\#39;")#\' data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
                         '</select>'+
                     '#}else{#' +
-                        '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" #=roles[type] ? "data-" + ns + "role=\'" + roles[type] + "\'" : ""#/>'+
+                        '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" #=role ? "data-" + ns + "role=\'" + role + "\'" : ""#/>'+
                     '#}#' +
                 '#}#'+
                 '<div>'+
@@ -172,6 +173,9 @@ kendo_module({
                 options = that.options,
                 operators = that.operators || {},
                 initial,
+                ui = options.ui,
+                setUI = isFunction(ui),
+                role,
                 type = that.type;
 
             that._refreshHandler = proxy(that.refresh, that);
@@ -188,15 +192,20 @@ kendo_module({
                 return { field: that.field, operator: initial || "eq", value: "" };
             };
 
+            if (!setUI) {
+                role = ui || roles[type];
+            }
+
             that.form = $('<form class="k-filter-menu"/>')
                 .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
                     field: that.field,
+                    format: options.format,
                     ns: kendo.ns,
                     messages: options.messages,
                     extra: options.extra,
                     operators: operators,
                     type: type,
-                    roles: roles,
+                    role: role,
                     values: convertItems(options.values)
                 }))
                 .on("keydown" + NS, proxy(that._keydown, that))
@@ -215,8 +224,22 @@ kendo_module({
                 that.popup = that.element.closest(".k-popup").data(POPUP);
             }
 
+            if (setUI) {
+                that.form.find(".k-textbox")
+                    .removeClass("k-textbox")
+                    .each(function() {
+                        ui($(this));
+                    });
+            }
+
             that.form
                  .find("[" + kendo.attr("role") + "=numerictextbox]")
+                 .removeClass("k-textbox")
+                 .end()
+                 .find("[" + kendo.attr("role") + "=datetimepicker]")
+                 .removeClass("k-textbox")
+                 .end()
+                 .find("[" + kendo.attr("role") + "=timepicker]")
                  .removeClass("k-textbox")
                  .end()
                  .find("[" + kendo.attr("role") + "=datepicker]")
