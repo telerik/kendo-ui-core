@@ -470,6 +470,15 @@
                 equal(timepicker.timeView.ul.children().length, 2);
                 equal(timepicker.timeView.ul.children(":first").text(), "7:59 AM");
             });
+
+            test("value method does not show text representation of invalid value", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.value("invalid");
+
+                equal(timepicker.value(), null);
+                equal(input.val(), "");
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
