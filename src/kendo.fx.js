@@ -39,6 +39,7 @@
         ABORT_ID = "abortId",
         OVERFLOW = "overflow",
         TRANSLATE = "translate",
+        COMPLETE_CALLBACK = "completeCallback",
         TRANSITION = cssPrefix + "transition",
         TRANSFORM = cssPrefix + "transform",
         PERSPECTIVE = cssPrefix + "perspective",
@@ -333,15 +334,14 @@
 
                 timeoutID = setTimeout(stopTransition, options.duration + delay);
                 element.data(ABORT_ID, timeoutID);
-                element.data("callback", stopTransition);
+                element.data(COMPLETE_CALLBACK, stopTransition);
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
-                var completeCallback = element.data("callback");
-
-                var that = this, cssValues,
+                var cssValues,
                     taskKeys = element.data("keys"),
-                    retainPosition = (gotoEnd === false && taskKeys);
+                    retainPosition = (gotoEnd === false && taskKeys),
+                    completeCallback = element.data(COMPLETE_CALLBACK);
 
                 if (retainPosition) {
                     cssValues = kendo.getComputedStyles(element[0], taskKeys);
