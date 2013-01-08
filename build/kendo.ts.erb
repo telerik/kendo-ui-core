@@ -39,9 +39,20 @@ module kendo.data {
     }
 
     class HierarchicalDataSource extends DataSource {
+        constructor(options?: HierarchicalDataSourceOptions);
     }
 
     interface HierarchicalDataSourceOptions extends DataSourceOptions {
+        schema?: HierarchicalDataSourceSchema;
+    }
+
+    interface HierarchicalDataSourceSchema extends DataSourceSchema {
+        model?: HierarchicalDataSourceSchemaModel;
+    }
+
+    interface HierarchicalDataSourceSchemaModel extends DataSourceSchemaModel {
+        hasChildren?: any;
+        children?: any;
     }
 
     interface DataSourceSchema {

@@ -220,10 +220,18 @@ module CodeGen::TypeScript
             @name
         end
 
-        def type_script_base_class
-            return 'kendo.ui.Widget' if @full_name.include?('ui') && !@full_name.include?('mobile')
+        def widget?
+            @full_name.include?('ui.')
+        end
 
-            return 'kendo.mobile.ui.Widget' if @full_name.include?('ui') && @full_name.include?('mobile')
+        def mobile?
+            @full_name.include?('mobile.')
+        end
+
+        def type_script_base_class
+            return 'kendo.ui.Widget' if widget? && !mobile?
+
+            return 'kendo.mobile.ui.Widget' if widget? && mobile?
 
             'Observable'
         end
