@@ -555,5 +555,140 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the SelectStart client-side event.
+        /// </summary>
+        /// <param name="onSelectStartHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.SelectStart("onSelectStart"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder SelectStart(string onSelectStartHandlerName)
+        {
+            Handler("selectStart", onSelectStartHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the SelectStart client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.SelectStart(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder SelectStart(Func<object, object> inlineCodeBlock)
+        {
+            Handler("selectStart", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the Select client-side event.
+        /// </summary>
+        /// <param name="onSelectHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.Select("onSelect"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder Select(string onSelectHandlerName)
+        {
+            Handler("select", onSelectHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the Select client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.Select(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder Select(Func<object, object> inlineCodeBlock)
+        {
+            Handler("select", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the SelectEnd client-side event.
+        /// </summary>
+        /// <param name="onSelectEndHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.SelectEnd("onSelectEnd"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder SelectEnd(string onSelectEndHandlerName)
+        {
+            Handler("selectEnd", onSelectEndHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the SelectEnd client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.SelectEnd(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder SelectEnd(Func<object, object> inlineCodeBlock)
+        {
+            Handler("selectEnd", inlineCodeBlock);
+
+            return this;
+        }
     }
 }
