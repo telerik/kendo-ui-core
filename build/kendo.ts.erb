@@ -1,8 +1,34 @@
 // Type definitions for Kendo UI
 
 module kendo {
-    declare function template(template: string): (data: any) => string;
+    declare function bind(selector: string, viewModel: any, namespace?: any): void;
+    declare function bind(element: JQuery, viewModel: any, namespace?: any): void;
+    declare function bind(element: Element, viewModel: any, namespace?: any): void;
+    declare function culture(value: string): void;
+    declare function culture(): string;
+    declare function destroy(selector: string): void;
+    declare function destroy(element: Element): void;
+    declare function destroy(element: JQuery): void;
+    declare function format(format: string, ...values: any[]): string;
+    declare function htmlEncode(value: string): string;
+    declare function parseDate(value: any, format?: string, culture?: string): Date;
+    declare function parseFloat(value: any, culture?: string): number;
+    declare function parseInt(value: any, culture?: string): number;
     declare function render(template:(data: any) => string, data: any[]): string;
+    declare function template(template: string, options?: TemplateOptions): (data: any) => string;
+    declare function touchScroller(selector: string): void;
+    declare function touchScroller(element: Element): void;
+    declare function touchScroller(element: JQuery): void;
+    declare function toString(value: number, format: string): string;
+    declare function toString(value: Date, format: string): string;
+    declare function unbind(selector: string): void;
+    declare function unbind(element: JQuery): void;
+    declare function unbind(element: Element): void;
+
+    interface TemplateOptions {
+        paramName?: string;
+        useWithBlock?: bool;
+    }
 
     class Observable {
         bind(eventName: string, handler: Function): Observable;

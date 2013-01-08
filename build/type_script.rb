@@ -363,7 +363,7 @@ namespace :type_script do
         namespace branch do
             desc "Test TypeScript generation"
             task :test do
-                #sh "cd docs && git fetch && git reset --hard origin/#{branch}"
+                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 
                 path = "dist/kendo-#{branch}.d.ts"
 
