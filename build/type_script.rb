@@ -149,7 +149,7 @@ module CodeGen::TypeScript
         end
 
         def type_script_parameters
-            unique_parameters.map { |p| "#{p.name}: #{p.type_script_type}" }.join(', ')
+            unique_parameters.map { |p| "#{p.name}#{p.optional ? "?" : ""}: #{p.type_script_type}" }.join(', ')
         end
 
         def type_script_declaration

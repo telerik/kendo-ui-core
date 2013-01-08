@@ -1,6 +1,9 @@
 // Type definitions for Kendo UI
 
 module kendo {
+    declare function template(template: string): (data: any) => string;
+    declare function render(template:(data: any) => string, data: any[]): string;
+
     class Observable {
         bind(eventName: string, handler: Function): Observable;
         one(eventName: string, handler: Function): Observable;
