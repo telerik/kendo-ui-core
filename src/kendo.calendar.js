@@ -239,6 +239,7 @@ kendo_module({
                 max = options.max,
                 title = that._title,
                 from = that._table,
+                old = that._oldTable,
                 selectedValue = that._value,
                 currentValue = that._current,
                 future = value && +value > +currentValue,
@@ -270,11 +271,12 @@ kendo_module({
             disabled = compare(value, max) > -1;
             that[NEXTARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
 
-            if (from && from.data("animating")) {
-                that._from.remove();
+            if (from && old && old.data("animating")) {
+                old.kendoStop(true, true);
+                from.kendoStop(true, true);
             }
 
-            that._from = from;
+            that._oldTable = from;
 
             if (!from || that._changeView) {
                 title.html(currentView.title(value, culture));
@@ -470,7 +472,9 @@ kendo_module({
                         to.unwrap();
 
                         that._focusView(active);
-                   }
+
+                        that._oldTable = undefined;
+                    }
                 });
 
                 from.parent().kendoStop(true, true).kendoAnimate(horizontal);
@@ -503,6 +507,7 @@ kendo_module({
                     duration: 600,
                     complete: function() {
                         from.remove();
+
                         to.css({
                             position: "static",
                             top: 0,
@@ -510,6 +515,8 @@ kendo_module({
                         });
 
                         that._focusView(active);
+
+                        that._oldTable = undefined;
                     }
                 });
 
