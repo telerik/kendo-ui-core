@@ -48,7 +48,8 @@
                                 }, {
                                     date: new Date("2012/09/06"),
                                     sales: 105
-                                }]
+                                }],
+                                serverFiltering: true
                         },
                         dateField: "date",
                         navigator: {
@@ -108,21 +109,6 @@
                     equal(chart.options.categoryAxis[1].categories.length, 6);
                     equal(chart.options.categoryAxis[2].categories.length, 6);
                     equal(chart.options.categoryAxis[3].categories.length, 6);
-                });
-
-                test("chart is redrawn fully on subsequent main DS changes", 3, function() {
-                    stubMethod(Chart.fn, "_redraw", function() {
-                        ok(true);
-                        Chart.fn._stubbed._redraw.call(this);
-                    }, function() {
-                        createStockChart({
-                            navigator: {
-                                dataSource: null
-                            }
-                        });
-
-                        chart.dataSource.fetch();
-                    });
                 });
 
                 test("slave axis min is set to selected range start", function() {
@@ -286,6 +272,22 @@
                     ok(!chart.dataSource._filter);
                 });
 
+                test("navigator does not filter main data source w/o server filtering", function() {
+                    createStockChart({
+                        dataSource: {
+                            serverFiltering: false
+                        },
+                        navigator: {
+                            select: {
+                                from: "2012/01/02",
+                                to: "2012/02/02"
+                            }
+                        }
+                    });
+
+                    ok(!chart.dataSource._filter);
+                });
+
                 test("navigator preserves existing filters", function() {
                     createStockChart({
                         dataSource: {
@@ -306,57 +308,23 @@
                     same(chart.dataSource._filter.filters[2].value, 100);
                 });
 
-                test("chart is redrawn fully during first main DS change", 2, function() {
-                    var partialRedrawCalls = 0,
-                        redrawCalls = 0;
-
-                    stubMethod(StockChart.fn, "_partialRedraw", function() {
-                        ok(false, "Should not execute partial redraw");
-                    }, function() {
-                        stubMethod(Chart.fn, "_redraw", function() {
-                            ok(++redrawCalls <= 2, "Too many redraws");
-                            Chart.fn._stubbed._redraw.call(this);
-                        }, function() {
-                            createStockChart({
-                                navigator: {
-                                    dataSource: null
-                                }
-                            });
-                        });
-                    });
-                });
-
-                test("slave panes are redrawn on subsequent main DS changes", 3, function() {
-                    var partialRedrawCalls = 0,
-                        redrawCalls = 0;
-
+                test("slave panes are redrawn on main DS change", 1, function() {
                     stubMethod(Navigator.fn, "redrawSlaves", function() {
-                        ok(++partialRedrawCalls === 1, "More than one partial redraw");
+                        ok(true);
                     }, function() {
-                        stubMethod(Chart.fn, "_redraw", function() {
-                            ok(++redrawCalls <= 2, "Too many redraws");
-                            Chart.fn._stubbed._redraw.call(this);
-                        }, function() {
-                            createStockChart();
-                            chart.dataSource.fetch();
+                        createStockChart({
+                            autoBind: false
                         });
+                        chart.dataSource.fetch();
                     });
                 });
 
-                test("navigator is redrawn partially during navigator DS change", 3, function() {
-                    var partialRedrawCalls = 0,
-                        redrawCalls = 0;
-
+                test("navigator is redrawn partially during navigator DS change", 1, function() {
                     stubMethod(Navigator.fn, "_redrawSelf", function() {
-                        ok(++partialRedrawCalls === 1, "More than one partial redraw");
+                        ok(true);
                     }, function() {
-                        stubMethod(Chart.fn, "_redraw", function() {
-                            ok(++redrawCalls <= 2, "Too many redraws");
-                            Chart.fn._stubbed._redraw.call(this);
-                        }, function() {
-                            createStockChart();
-                            chart._navigator.dataSource.fetch();
-                        });
+                        createStockChart();
+                        chart._navigator.dataSource.fetch();
                     });
                 });
 
@@ -379,26 +347,17 @@
                     });
                 });
 
-                test("chart is not redrawn during early navigator DS change", 3, function() {
-                    var partialRedrawCalls = 0,
-                        redrawCalls = 0;
-
-                    stubMethod(Navigator.fn, "_redrawSelf", function(silent) {
-                        ok(!!silent, "Should not execute a partial redraw");
+                test("slave panes are not redrawn during early navigator DS change", function() {
+                    stubMethod(Navigator.fn, "_redrawSlaves", function(silent) {
+                        ok(false);
                     }, function() {
-                        stubMethod(Chart.fn, "_redraw", function() {
-                            ok(++redrawCalls <= 2, "More than one redraw");
-                            Chart.fn._stubbed._redraw.call(this);
-                        }, function() {
-                            createStockChart({
-                                autoBind: false,
-                                navigator: {
-                                    autoBind: false
-                                }
-                            });
-                            chart._navigator.dataSource.fetch();
-                            chart.dataSource.fetch();
+                        createStockChart({
+                            autoBind: false,
+                            navigator: {
+                                autoBind: false
+                            }
                         });
+                        chart._navigator.dataSource.fetch();
                     });
                 });
 
