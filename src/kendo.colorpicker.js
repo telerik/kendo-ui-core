@@ -727,6 +727,9 @@ kendo_module({
             Widget.fn.destroy.call(this);
         },
         enable: function(enable) {
+            if (arguments.length == 0) {
+                enable = true;
+            }
             var that = this, wrapper = that.wrapper;
             that.element.attr("disabled", !enable);
             wrapper.attr("disabled", !enable);
