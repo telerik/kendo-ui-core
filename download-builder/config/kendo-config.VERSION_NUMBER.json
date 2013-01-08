@@ -64,7 +64,7 @@
             "source": "kendo.calendar.min.js"
         },
         {
-            "id": "color",
+            "id": "colorpicker",
             "name": "Color tools",
             "category": "web",
             "description": "Color selection widgets",
@@ -73,7 +73,7 @@
                 "popup",
                 "slider"
             ],
-            "source": "kendo.color.min.js"
+            "source": "kendo.colorpicker.min.js"
         },
         {
             "id": "columnmenu",
