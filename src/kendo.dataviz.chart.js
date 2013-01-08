@@ -7254,7 +7254,10 @@ kendo_module({
             }
         }
 
-        return { min: min, max: max };
+        return {
+            min: min === MAX_VALUE ? undefined : min,
+            max: max === MIN_VALUE ? undefined : max
+        };
     }
 
     function intersection(a1, a2, b1, b2) {
@@ -7846,6 +7849,7 @@ kendo_module({
         duration: duration,
         floorDate: floorDate,
         lteDateIndex: lteDateIndex,
+        sparseArrayLimits: sparseArrayLimits,
         toDate: toDate,
         toTime: toTime
     });
