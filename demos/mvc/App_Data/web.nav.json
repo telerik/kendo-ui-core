@@ -138,6 +138,11 @@
                     "title": "ColorPicker events",
                     "meta": "ColorPicker events"
                 },{
+                    "text": "API",
+                    "url": "colorpicker/api.html",
+                    "title": "ColorPicker API demo",
+                    "meta": "ColorPicker API demo"
+                },{
                     "text": "Keyboard",
                     "url": "colorpicker/navigation.html",
                     "title": "ColorPicker keyboard navigation",
