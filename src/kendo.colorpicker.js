@@ -747,6 +747,7 @@ kendo_module({
             });
 
             that._updateUI(value);
+            that.wrapper.find(".k-picker-wrap").append(that.element);
         },
         destroy: function() {
             this.wrapper.add("*").off(NS);
