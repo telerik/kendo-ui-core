@@ -93,7 +93,7 @@ kendo_module({
 
                         that._click($(link));
                     })
-                    .on("click" + ns, function() {
+                    .on("mouseup" + ns, function() {
                         that._focusView(that.options.focusOnNav !== false);
                     })
                     .attr(ID);
