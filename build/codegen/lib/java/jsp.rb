@@ -164,6 +164,34 @@ module CodeGen::Java::JSP
         end
     end
 
+METHODS = %{
+    @Override
+    public int doEndTag() throws JspException {
+//>> doEndTag
+//<< doEndTag
+
+        return super.doEndTag();
+    }
+
+    @Override
+    public void initialize() {
+//>> initialize
+//<< initialize
+
+        super.initialize();
+    }
+
+    @Override
+    public void destroy() {
+//>> destroy
+//<< destroy
+
+        super.destroy();
+    }
+
+//>> Attributes
+//<< Attributes
+}
 COMPOSITE_OPTION_SETTER = ERB.new(%{
     public void set<%= name.pascalize %>(<%= tag_class %> value) {
         setProperty("<%= name %>", value);
@@ -226,7 +254,7 @@ import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class <%= tag_class %> extends FunctionTag /* interfaces */ /* interfaces */ {
-    #{JAVA_METHODS}
+    #{METHODS}
 }
 })
 
@@ -272,34 +300,6 @@ COMPONENT_ATTRIBUTES = ERB.new(%{//>> Attributes
 <%= composite_options.map { |option| option.to_setter }.join %><%= events.map { |event| event.to_setter }.join %><%= simple_options.map { |option| option.to_getter_and_setter }.join %><%= events.map { |event| event.to_getter_and_setter }.join %>
 //<< Attributes})
 
-METHODS = %{
-    @Override
-    public int doEndTag() throws JspException {
-//>> doEndTag
-//<< doEndTag
-
-        return super.doEndTag();
-    }
-
-    @Override
-    public void initialize() {
-//>> initialize
-//<< initialize
-
-        super.initialize();
-    }
-
-    @Override
-    public void destroy() {
-//>> destroy
-//<< destroy
-
-        super.destroy();
-    }
-
-//>> Attributes
-//<< Attributes
-}
 
 COMPONENT = ERB.new(%{
 package com.kendoui.taglib;
@@ -393,7 +393,7 @@ import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class <%= tag_class %> extends <% if name == 'items' %>ContentTag<% else %>BaseTag<% end %> /* interfaces */ /* interfaces */ {
-    #{JAVA_METHODS}
+    #{METHODS}
 }
 })
 

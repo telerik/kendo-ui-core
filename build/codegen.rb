@@ -12,6 +12,7 @@ require 'codegen/lib/java/api'
 
 namespace :generate do
 
+    desc 'Generate JSP wrappers'
     task :java => ['java:tld', 'java:jsp']
 
     namespace :java do
@@ -26,6 +27,7 @@ namespace :generate do
             end
         end
 
+        desc 'Generate JSP classes'
         task :jsp do
 
             components = CodeGen::MarkdownParser.all(CodeGen::Java::JSP::Component)
@@ -42,6 +44,7 @@ namespace :generate do
 
         end
 
+        desc 'Generate JSP API reference'
         task :api do
 
             components = CodeGen::MarkdownParser.all(CodeGen::Java::API::Component)
@@ -58,6 +61,7 @@ namespace :generate do
 
         end
 
+        desc 'Generate JSP TLD'
         task :tld do
 
             generator = CodeGen::Java::TLD::Generator.new('wrappers/java/kendo-taglib/src/main/resources/META-INF/taglib.tld')
