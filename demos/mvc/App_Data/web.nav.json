@@ -568,6 +568,13 @@
                     "packages": ["online", "offline", "jsp"]
                 },
                 {
+                    "text": "Filter menu customization",
+                    "url": "grid/filter-menu-customization.html",
+                    "title": "Demo for Kendo UI HTML5 Grid column filter menu customization",
+                    "meta": "This example demonstrates the how to customize the filter menu of KendoGrid.",
+                    "packages": ["online", "offline"]
+                },
+                {
                     "text": "Server aggregates",
                     "url": "grid/serveraggregates.html",
                     "packages": ["mvc"]
