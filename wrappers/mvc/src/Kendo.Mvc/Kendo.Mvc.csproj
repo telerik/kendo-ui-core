@@ -555,6 +555,8 @@
     <Compile Include="UI\Grid\Columns\IGridForeignKeyColumn.cs" />
     <Compile Include="UI\Grid\Commands\GridCustomActionCommand.cs" />
     <Compile Include="UI\Grid\Commands\GridCustomCommandBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridBoundColumnFilterableBuilder.cs" />
+    <Compile Include="UI\Grid\GridFilterUIRole.cs" />
     <Compile Include="UI\Grid\Fluent\ColumnMenuMessagesBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridColumnMenuSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\EnumOperatorsBuilder.cs" />

@@ -72,6 +72,8 @@ namespace Kendo.Mvc.UI
             {
                 Title = Member.AsTitle();
             }
+
+            FilterUIHandler = new ClientHandlerDescriptor();
         }
 
         /// <summary>
@@ -183,6 +185,25 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        public ClientHandlerDescriptor FilterUIHandler
+        {
+            get;
+            set;
+        }
+
+        public GridFilterUIRole FilterUIRole
+        {
+            get
+            {
+                return Settings.FilterUIRole;
+            }
+
+            set
+            {
+                Settings.FilterUIRole = value;
+            }
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             base.Serialize(json);
@@ -212,6 +233,20 @@ namespace Kendo.Mvc.UI
             if (!Filterable)
             {
                 json["filterable"] = false;
+            }
+            else if (FilterUIHandler.HasValue())
+            {
+                json["filterable"] = new Dictionary<string, object>()
+                {
+                    { "ui", FilterUIHandler }
+                };
+            }
+            else if (FilterUIRole != GridFilterUIRole.Default)
+            {
+                json["filterable"] = new Dictionary<string, object>()
+                {
+                    { "ui", Enum.GetName(typeof(GridFilterUIRole), FilterUIRole).ToLowerInvariant() }
+                };
             }
 
             if (Encoded)
