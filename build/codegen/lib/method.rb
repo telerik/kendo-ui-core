@@ -10,6 +10,8 @@ module CodeGen
 
             description = settings[:description]
 
+            optional = settings[:optional]
+
             type = settings[:type]
 
             parent = @parameters.find { |p| name.start_with?(p.name + '.') && p.type.include?('Object') }
@@ -20,11 +22,13 @@ module CodeGen
                 parent.add_parameter(:name => name,
                                      :description => description,
                                      :type => type,
+                                     :optional => optional,
                                      :owner => self,
                                      :prefix => parent.name + '.')
             else
                 @parameters.push parameter_class.new(:name => name,
                                                      :description => description,
+                                                     :optional => optional,
                                                      :owner => self,
                                                      :type => type)
 
@@ -74,7 +78,7 @@ module CodeGen
     end
 
     class Parameter
-        attr_reader :name, :description, :type, :owner
+        attr_reader :name, :description, :type, :owner, :optional
 
         def composite?
             false
@@ -82,6 +86,8 @@ module CodeGen
 
         def initialize(settings)
             @name = settings[:name]
+
+            @optional = settings[:optional]
 
             @type = settings[:type]
 

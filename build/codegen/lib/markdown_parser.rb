@@ -94,6 +94,7 @@ class MarkdownParser
 
                 method.add_parameter(:name => section_name(element),
                                      :type => option_type(element),
+                                     :optional => optional(element),
                                      :description => section_description(index, parameters))
 
             end
@@ -179,6 +180,14 @@ class MarkdownParser
         child = element.children.find {|e| e.type == :codespan }
 
         element_value child
+    end
+
+    def optional(element)
+        child = element.children.find {|e| e.type == :em }
+
+        return false unless child
+
+        element_text(child).include?('optional')
     end
 
     def option_default(element)

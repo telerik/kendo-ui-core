@@ -157,6 +157,23 @@ Foo
         assert_equal 'bar', result.methods[0].parameters[0].name
     end
 
+    def test_parse_method_parameter_optional
+        result = CodeGen::MarkdownParser.new.parse(%{
+# kendo.ui.AutoComplete
+
+## Methods
+
+### foo
+
+#### Parameters
+
+##### bar `String` *(optional)*
+
+        })
+
+        assert_equal true, result.methods[0].parameters[0].optional
+    end
+
     def test_parse_composite_method_parameter
         result = CodeGen::MarkdownParser.new.parse(%{
 # kendo.ui.AutoComplete
