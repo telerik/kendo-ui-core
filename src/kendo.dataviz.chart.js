@@ -5758,7 +5758,7 @@ kendo_module({
 
             plotArea.namedCategoryAxes = {};
             plotArea.namedValueAxes = {};
-            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
+            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker();
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
@@ -6125,6 +6125,8 @@ kendo_module({
 
         createValueAxes: function(panes) {
             var plotArea = this,
+                tracker = plotArea.valueAxisRangeTracker,
+                defaultRange = tracker.query(),
                 definitions = [].concat(plotArea.options.valueAxis),
                 invertAxes = plotArea.invertAxes,
                 baseOptions = { vertical: !invertAxes },
@@ -6137,19 +6139,17 @@ kendo_module({
                 name,
                 i;
 
-            var anonRange = plotArea.valueAxisRangeTracker.query();
-
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];
                 axisPane = plotArea.findPane(axisOptions.pane);
 
                 if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
-                    range = plotArea.valueAxisRangeTracker.query(name);
+                    range = tracker.query(name);
 
-                    if (i === 0 && anonRange) {
-                        range.min = math.min(range.min, anonRange.min);
-                        range.max = math.max(range.max, anonRange.max);
+                    if (i === 0 && defaultRange) {
+                        range.min = math.min(range.min, defaultRange.min);
+                        range.max = math.max(range.max, defaultRange.max);
                     }
 
                     valueAxis = new NumericAxis(range.min, range.max,
@@ -6236,42 +6236,27 @@ kendo_module({
     });
 
     var AxisGroupRangeTracker = Class.extend({
-        init: function(axisOptions) {
+        init: function() {
             var tracker = this;
 
-            tracker.axisRanges = {},
-            tracker.axisNames = ["undefined"].concat(
-                map([].concat(axisOptions), function(axis) {
-                    return axis.name;
-                })
-            );
+            tracker.axisRanges = {};
         },
 
         update: function(chartAxisRanges) {
             var tracker = this,
                 axisRanges = tracker.axisRanges,
-                axisNames = tracker.axisNames,
                 range,
                 chartRange,
-                i,
-                name,
-                length = axisNames.length;
+                axisName;
 
-            if (!chartAxisRanges) {
-                return;
-            }
+            for (var axisName in chartAxisRanges) {
+                range = axisRanges[axisName];
+                chartRange = chartAxisRanges[axisName];
+                axisRanges[axisName] = range =
+                    range || { min: MAX_VALUE, max: MIN_VALUE };
 
-            for (i = 0; i < length; i++) {
-                name = axisNames[i];
-                range = axisRanges[name];
-                chartRange = chartAxisRanges[name];
-                if (chartRange) {
-                    axisRanges[name] = range =
-                        range || { min: MAX_VALUE, max: MIN_VALUE };
-
-                    range.min = math.min(range.min, chartRange.min);
-                    range.max = math.max(range.max, chartRange.max);
-                }
+                range.min = math.min(range.min, chartRange.min);
+                range.max = math.max(range.max, chartRange.max);
             }
         },
 
@@ -6294,8 +6279,8 @@ kendo_module({
             plotArea.namedXAxes = {};
             plotArea.namedYAxes = {};
 
-            plotArea.xAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.xAxis);
-            plotArea.yAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.yAxis);
+            plotArea.xAxisRangeTracker = new AxisGroupRangeTracker();
+            plotArea.yAxisRangeTracker = new AxisGroupRangeTracker();
 
             PlotAreaBase.fn.init.call(plotArea, series, options);
         },
@@ -6423,12 +6408,13 @@ kendo_module({
             }
         },
 
-        createXYAxis: function(options, vertical) {
+        createXYAxis: function(options, vertical, axisIndex) {
             var plotArea = this,
                 axisName = options.name,
                 namedAxes = vertical ? plotArea.namedYAxes : plotArea.namedXAxes,
-                rangeTracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
-                range = rangeTracker.query(axisName),
+                tracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
+                range = tracker.query(axisName),
+                defaultRange = tracker.query(),
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
                 axis,
                 seriesIx,
@@ -6445,6 +6431,11 @@ kendo_module({
 
                     break;
                 }
+            }
+
+            if (axisIndex === 0 && defaultRange) {
+                range.min = math.min(range.min, defaultRange.min);
+                range.max = math.max(range.max, defaultRange.max);
             }
 
             if (equalsIgnoreCase(axisOptions.type, DATE) || (!axisOptions.type && dateData)) {
@@ -6477,17 +6468,17 @@ kendo_module({
                 yAxesOptions = [].concat(options.yAxis),
                 yAxes = [];
 
-            each(xAxesOptions, function() {
+            each(xAxesOptions, function(i) {
                 axisPane = plotArea.findPane(this.pane);
                 if (inArray(axisPane, panes)) {
-                    xAxes.push(plotArea.createXYAxis(this, false));
+                    xAxes.push(plotArea.createXYAxis(this, false, i));
                 }
             });
 
-            each(yAxesOptions, function() {
+            each(yAxesOptions, function(i) {
                 axisPane = plotArea.findPane(this.pane);
                 if (inArray(axisPane, panes)) {
-                    yAxes.push(plotArea.createXYAxis(this, true));
+                    yAxes.push(plotArea.createXYAxis(this, true, i));
                 }
             });
 

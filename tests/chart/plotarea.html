@@ -3151,6 +3151,84 @@
                     );
                 });
 
+                test("sets named primary X axis range (impl./expl. series axis)", function() {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            equal(this.axisX.options.min, 0);
+                            equal(this.axisX.options.max, 120);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "scatter",
+                                data: [[10, 0]],
+                                xAxis: "A"
+                            }, {
+                                type: "scatter",
+                                data: [[100, 0]]
+                            }], {
+                                xAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary X axis range (implicit series axis)", function() {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            equal(this.axisX.options.min, 0);
+                            equal(this.axisX.options.max, 350);
+                        },
+                        function() {
+                            createPlotArea(scatterSeriesData, {
+                                xAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary Y axis range (impl./expl. series axis)", function() {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            equal(this.axisY.options.min, 0);
+                            equal(this.axisY.options.max, 120);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "scatter",
+                                data: [[0, 10]],
+                                yAxis: "A"
+                            }, {
+                                type: "scatter",
+                                data: [[0, 100]]
+                            }], {
+                                yAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary Y axis range (implicit series axis)", function() {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            equal(this.axisY.options.min, 0);
+                            equal(this.axisY.options.max, 350);
+                        },
+                        function() {
+                            createPlotArea(scatterSeriesData, {
+                                yAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
                 test("creates Numeric axes by default", function() {
                     ok(plotArea.axisX instanceof dataviz.NumericAxis);
                     ok(plotArea.axisY instanceof dataviz.NumericAxis);
