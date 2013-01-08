@@ -1,0 +1,85 @@
+        <script src="../../content/shared/js/people.js"></script>
+
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(50),
+                            schema: {
+                                model: {
+                                    fields: {
+                                        City: { type: "string" },
+                                        Title: { type: "string" },
+                                        BirthDate: { type: "date" }
+                                    }
+                                }
+                            },
+                            pageSize: 10
+                        },
+                        height: 250,
+                        scrollable: true,
+                        filterable: true,
+                        pageable: true,
+                        columns: [
+                            {
+                                title: "Name",
+                                width: 200,
+                                filterable: false,
+                                template: "#=FirstName# #=LastName#"
+                            },
+                            {
+                                field: "City",
+                                width: 100,
+                                filterable: {
+                                    ui: cityFilter,
+                                    operators: {
+                                        string: {
+                                            startswith: "Starts with",
+                                            contains: "Contains",
+                                            doesnotcontain: "Does not contain",
+                                            endswith: "Ends with"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                field: "Title",
+                                filterable: {
+                                    ui: titleFilter,
+                                    extra: false,
+                                    operators: {
+                                        string: {
+                                            startswith: "Starts with"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                field: "BirthDate",
+                                title: "Birth Date",
+                                format: "{0:MM/dd/yyyy HH:mm tt}",
+                                filterable: {
+                                    ui: "datetimepicker"
+                                }
+                            }
+                       ]
+                    });
+                });
+
+                function titleFilter(element) {
+                    element.kendoAutoComplete({
+                        dataSource: titles
+                    });
+                }
+
+                function cityFilter(element) {
+                    element.kendoDropDownList({
+                        dataSource: cities
+                    });
+                }
+
+            </script>
+        </div>
