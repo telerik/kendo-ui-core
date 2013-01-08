@@ -58,6 +58,17 @@ kendo_module({
             color = this.color(color);
             return color ? this.options.opacity ? color.toCssRgba() : color.toCss() : null;
         },
+        enable: function(enable) {
+            if (arguments.length == 0) {
+                enable = true;
+            }
+            if (enable) {
+                $(".k-disabled-overlay", this.wrapper).remove();
+            } else {
+                this.wrapper.append("<div class='k-disabled-overlay'></div>");
+            }
+            this._onEnable(enable);
+        },
         _select: function(color, nohooks) {
             color = this.color(color);
             if (!nohooks) {
@@ -123,6 +134,21 @@ kendo_module({
             if (options.columns) {
                 // XXX: assuming 14px per cell; depends on CSS.
                 content.css("width", options.columns * 14 + "px");
+            }
+        },
+        focus: function(){
+            this.wrapper.focus();
+        },
+        options: {
+            name: "ColorPalette",
+            columns: 10,
+            palette: "basic"
+        },
+        _onEnable: function(enable) {
+            if (enable) {
+                this.wrapper.removeAttr("tabIndex");
+            } else {
+                this.wrapper.attr("tabIndex", 0);
             }
         },
         _keydown: function(ev) {
@@ -201,14 +227,6 @@ kendo_module({
             if (el) {
                 $(el).addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
             }
-        },
-        focus: function(){
-            this.wrapper.focus();
-        },
-        options: {
-            name: "ColorPalette",
-            columns: 10,
-            palette: "basic"
         },
         _template: kendo.template(
             '<div class="k-colorpicker-popup">' +
@@ -355,6 +373,19 @@ kendo_module({
             buttons: true,
             preview: true,
             messages: APPLY_CANCEL
+        },
+        _onEnable: function(enable) {
+            this._hueSlider.enable(enable);
+            if (this._opacitySlider) {
+                this._opacitySlider.enable(enable);
+            }
+            $("input", this.wrapper).attr("disabled", !enable);
+            var h = $(".k-draghandle", this._hsvRect);
+            if (enable) {
+                h.attr("tabIndex", 0);
+            } else {
+                h.removeAttr("tabIndex");
+            }
         },
         _keydown: function(ev) {
             var that = this;

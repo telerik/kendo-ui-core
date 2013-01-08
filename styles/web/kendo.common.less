@@ -2535,8 +2535,20 @@ span.k-numerictextbox
     box-shadow: @arguments;
 }
 
+.k-disabled-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
 .k-colorpicker-popup
 {
+    position: relative;
     width: 120px;
     line-height: 0;
     .k-palette {
@@ -2578,6 +2590,7 @@ span.k-numerictextbox
     display: inline-block;
     width: 250px;
     padding-bottom: 5px;
+    position: relative;
 
     .k-selected-color {
         background-image: url("textures/transtexture.png");
