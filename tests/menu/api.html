@@ -293,6 +293,13 @@
             m.destroy();
         });
 
+        test("Element with class k-icon doesn't get removed in an item", function () {
+            var m = new kendo.ui.Menu("<ul><li><span class='k-icon'></span></li></ul>");
+
+            ok(m.element.find(".k-icon")[0]);
+            m.destroy();
+        });
+
 </script>
 
     <h1 id="qunit-header">kendo.ui.Menu Tests</h1>
