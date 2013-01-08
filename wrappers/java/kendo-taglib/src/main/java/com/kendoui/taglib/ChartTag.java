@@ -128,6 +128,18 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setEvent("plotAreaClick", value.getBody());
     }
 
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
+    }
+
+    public void setSelectEnd(SelectEndFunctionTag value) {
+        setEvent("selectEnd", value.getBody());
+    }
+
+    public void setSelectStart(SelectStartFunctionTag value) {
+        setEvent("selectStart", value.getBody());
+    }
+
     public void setSeriesClick(SeriesClickFunctionTag value) {
         setEvent("seriesClick", value.getBody());
     }
@@ -247,6 +259,42 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setPlotAreaClick(String value) {
         setProperty("plotAreaClick", new Function(value));
+    }
+
+    public String getSelect() {
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
+    }
+
+    public String getSelectEnd() {
+        Function property = ((Function)getProperty("selectEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSelectEnd(String value) {
+        setProperty("selectEnd", new Function(value));
+    }
+
+    public String getSelectStart() {
+        Function property = ((Function)getProperty("selectStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSelectStart(String value) {
+        setProperty("selectStart", new Function(value));
     }
 
     public String getSeriesClick() {

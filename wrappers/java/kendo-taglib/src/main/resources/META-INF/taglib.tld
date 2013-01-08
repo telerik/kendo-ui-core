@@ -423,6 +423,21 @@ and is about to render it.</description>
             <name>zoomEnd</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <description>Fires when the user start to dragging the drag handle.</description>
+            <name>selectStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user drags the drag handle to a new position.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user stops dragging the drag handle.</description>
+            <name>selectEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
 
@@ -3738,6 +3753,24 @@ and is about to render it.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>Fires when the user start to dragging the drag handle.</description>
+        <name>chart-selectStart</name>
+        <tag-class>com.kendoui.taglib.chart.SelectStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user drags the drag handle to a new position.</description>
+        <name>chart-select</name>
+        <tag-class>com.kendoui.taglib.chart.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user stops dragging the drag handle.</description>
+        <name>chart-selectEnd</name>
+        <tag-class>com.kendoui.taglib.chart.SelectEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>ColorPicker</description>
         <name>colorPicker</name>
         <tag-class>com.kendoui.taglib.ColorPickerTag</tag-class>
@@ -3759,9 +3792,9 @@ be displayed in the drop-down HSV picker.</description>
         </attribute>
         <attribute>
             <description>The number of columns to show in the simple color dropdown.  For the
-"basic" and "web" palettes this is automatically initialized; if you
-pass a custom palette then you can set this to some value that makes
-sense for your colors.</description>
+"basic" and "websafe" palettes this is automatically initialized; if
+you pass a custom palette then you can set this to some value that
+makes sense for your colors.</description>
             <name>columns</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -3805,9 +3838,9 @@ specified, the HTML for the element will look like this:</description>
         </attribute>
         <attribute>
             <description>The initially selected color.  This can be a string supported by
-Color.parse or a Color object (see below).  Note that when
-initializing the widget from an &lt;input&gt; element, the initial color
-will be decided by the field instead.</description>
+parseColor or a Color object.  Note that when initializing the
+widget from an &lt;input&gt; element, the initial color will be decided by the
+field instead.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5933,6 +5966,11 @@ as a collection of required properties, while the insertHtml  tool requires a co
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when the user changes the order of a column.</description>
+            <name>columnReorder</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when the user resizes a column.</description>
             <name>columnResize</name>
             <rtexprvalue>true</rtexprvalue>
@@ -6232,6 +6270,28 @@ in order to have valid HTML markup in the Grid.</description>
         <description>The JavaScript function executed when the user clicks the command button.</description>
         <name>grid-column-commandItem-click</name>
         <tag-class>com.kendoui.taglib.grid.ClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Specifies whether given column is filterable.</description>
+        <name>grid-column-filterable</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnFilterableTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Role of the widget shown as column filter menu input element.</description>
+            <name>ui</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Role of the widget shown as column filter menu input element.</description>
+        <name>grid-column-filterable-ui</name>
+        <tag-class>com.kendoui.taglib.grid.UiFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6767,6 +6827,12 @@ Or template to be used for rendering the toolbar content.</description>
         <description>Fires when the grid selection has changed.</description>
         <name>grid-change</name>
         <tag-class>com.kendoui.taglib.grid.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user changes the order of a column.</description>
+        <name>grid-columnReorder</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnReorderFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

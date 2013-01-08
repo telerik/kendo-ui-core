@@ -112,6 +112,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("columnMenuInit", value.getBody());
     }
 
+    public void setColumnReorder(ColumnReorderFunctionTag value) {
+        setEvent("columnReorder", value.getBody());
+    }
+
     public void setColumnResize(ColumnResizeFunctionTag value) {
         setEvent("columnResize", value.getBody());
     }
@@ -311,6 +315,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setColumnMenuInit(String value) {
         setProperty("columnMenuInit", new Function(value));
+    }
+
+    public String getColumnReorder() {
+        Function property = ((Function)getProperty("columnReorder"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setColumnReorder(String value) {
+        setProperty("columnReorder", new Function(value));
     }
 
     public String getColumnResize() {
