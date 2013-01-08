@@ -24,6 +24,18 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        GridFilterUIRole FilterUIRole
+        {
+            get;
+            set;
+        }
+
+        ClientHandlerDescriptor FilterUIHandler
+        {
+            get;
+            set;
+        }
+
         bool Sortable
         {
             get;

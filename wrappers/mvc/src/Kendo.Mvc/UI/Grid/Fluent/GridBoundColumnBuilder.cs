@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="column">The column.</param>
         public GridBoundColumnBuilder(IGridBoundColumn column)
             : base(column)
-        {
+        {            
         }
 
         /// <summary>
@@ -128,6 +128,12 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public GridBoundColumnBuilder<T> Filterable(Action<GridBoundColumnFilterableBuilder> configurator)
+        {
+            configurator(new GridBoundColumnFilterableBuilder(Column));
+            return this;
+        }  
+        
         /// <summary>
         /// Enables or disables HTML encoding the data of the column. All bound columns are encoded by default.
         /// </summary>

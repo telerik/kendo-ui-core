@@ -172,5 +172,11 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        public GridFilterUIRole FilterUIRole 
+        { 
+            get; 
+            set; 
+        }
     }
 }
