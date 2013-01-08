@@ -79,8 +79,7 @@
                     zoomStart: function(e) { console.log("zoomStart", e); },
                     zoom: function(e) { console.log("zoom", e); },
                     zoomEnd: function(e) { console.log("zoomEnd", e); },
-                    selectStart: function(e) { console.log("selectStart", e); },
-                    select: function(e) { console.log("select", e); },
+                    selectStart: function(e) { e.preventDefault(); e.preventDefault(); },
                     selectEnd: function(e) { console.log("selectEnd", e); }
                 });
             });
