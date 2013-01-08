@@ -355,10 +355,9 @@ kendo_module({
         },
 
         _selectStart: function(e) {
-            this.chart.trigger(SELECT_START, {
-                from: e.from,
-                to: e.to
-            });
+            if (this.chart.trigger(SELECT_START, { from: e.from, to: e.to })) {
+                e.preventDefault();
+            }
         },
 
         _select: function(e) {

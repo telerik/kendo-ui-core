@@ -6906,7 +6906,10 @@ kendo_module({
                 }
             };
 
-            that.trigger(SELECT_START, that._state.range);
+            if (that.trigger(SELECT_START, that._state.range)) {
+                that.userEvents.cancel();
+                that._state = null;
+            }
         },
 
         _move: function(e) {
