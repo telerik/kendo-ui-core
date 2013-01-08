@@ -531,8 +531,8 @@
                 div.find(".k-nav-prev").click();
             });
 
-            test("click on calendar will focus the table", 1, function() {
-                calendar.element.click();
+            test("mouseup on calendar will focus the table", 1, function() {
+                calendar.element.mouseup();
 
                 equal(document.activeElement, calendar._table[0]);
             });

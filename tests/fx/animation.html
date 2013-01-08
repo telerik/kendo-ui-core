@@ -72,6 +72,20 @@
                 }
             });
 
+            test("kendoStop calls callback", 1, function() {
+                var span = kendo.jQuery("<span />");
+
+                span.kendoAnimate({
+                    effects: "fadeOut",
+                    duration: 600,
+                    complete: function() {
+                        ok(true);
+                    }
+                });
+
+                span.kendoStop(true, true);
+            });
+
             asyncTest("animate waits all effects to finish", function() {
                 var fooFinished = false, barFinished = false;
 

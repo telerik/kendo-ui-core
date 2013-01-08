@@ -333,13 +333,11 @@
 
                 timeoutID = setTimeout(stopTransition, options.duration + delay);
                 element.data(ABORT_ID, timeoutID);
+                element.data("callback", stopTransition);
             },
 
             stopQueue: function(element, clearQueue, gotoEnd) {
-                if (element.data(ABORT_ID)) {
-                    clearTimeout(element.data(ABORT_ID));
-                    element.removeData(ABORT_ID);
-                }
+                var completeCallback = element.data("callback");
 
                 var that = this, cssValues,
                     taskKeys = element.data("keys"),
@@ -349,17 +347,15 @@
                     cssValues = kendo.getComputedStyles(element[0], taskKeys);
                 }
 
-                element.css(TRANSITION, "").css(TRANSITION);
+                if (completeCallback) {
+                    completeCallback();
+                }
 
                 if (retainPosition) {
                     element.css(cssValues);
                 }
 
                 element.removeData("keys");
-
-                if (that.complete) {
-                    that.complete.call(element);
-                }
 
                 element.stop(clearQueue);
                 return element;
@@ -565,7 +561,7 @@
             if (effectClass) {
                 effect = new effectClass(element, parsedEffects[effectName].direction);
                 effects.push(effect);
-            }
+           }
         }
 
         if (effects[0]) {
