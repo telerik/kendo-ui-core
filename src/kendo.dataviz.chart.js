@@ -5753,8 +5753,7 @@ kendo_module({
 
     var CategoricalPlotArea = PlotAreaBase.extend({
         init: function(series, options) {
-            var plotArea = this,
-                axisOptions = deepExtend({}, plotArea.options, options);
+            var plotArea = this;
 
             plotArea.namedCategoryAxes = {};
             plotArea.namedValueAxes = {};
@@ -6249,7 +6248,7 @@ kendo_module({
                 chartRange,
                 axisName;
 
-            for (var axisName in chartAxisRanges) {
+            for (axisName in chartAxisRanges) {
                 range = axisRanges[axisName];
                 chartRange = chartAxisRanges[axisName];
                 axisRanges[axisName] = range =
@@ -6273,8 +6272,7 @@ kendo_module({
 
     var XYPlotArea = PlotAreaBase.extend({
         init: function(series, options) {
-            var plotArea = this,
-                axisOptions = deepExtend({}, plotArea.options, options);
+            var plotArea = this;
 
             plotArea.namedXAxes = {};
             plotArea.namedYAxes = {};
