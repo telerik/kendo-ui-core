@@ -827,11 +827,19 @@ kendo_module({
         },
         color: ColorSelector.fn.color,
         value: ColorSelector.fn.value,
+        _isInputTypeColor: function() {
+            var el = this.element[0];
+            return /^input$/i.test(el.tagName) && /^color$/i.test(el.type);
+        },
         _updateUI: function(value) {
             if (value) {
-                // seems that input type="color" doesn't support opacity
-                // in colors; the only accepted format is hex #RRGGBB
-                this.element.val(value.toCss());
+                if (this._isInputTypeColor() || value.a == 1) {
+                    // seems that input type="color" doesn't support opacity
+                    // in colors; the only accepted format is hex #RRGGBB
+                    this.element.val(value.toCss());
+                } else {
+                    this.element.val(value.toCssRgba());
+                }
             }
             if (value && !value.equals(this.color())) {
                 this.trigger("select", { value: value });
