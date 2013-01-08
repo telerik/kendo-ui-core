@@ -95,6 +95,26 @@ bundle :name => 'complete.commercial',
             'src/styles' => SRC_CSS
        }
 
+bundle :name => 'trial.hotfix',
+       :license => 'src-license-complete',
+       :eula => 'trial',
+       :vsdoc => { %w(web mobile dataviz framework) => "all" },
+       :type_script => { %w(web mobile dataviz framework) => "all" },
+       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :contents => {
+            'js' => TRIAL_MIN_JS,
+            'styles' => MIN_CSS_RESOURCES,
+            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
+            'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
+            'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
+            'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
+       },
+       :prerequisites => [
+#           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+#           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
+           'mvc:assets'
+       ]
+
 bundle :name => 'trial',
        :license => 'src-license-complete',
        :eula => 'trial',
@@ -209,6 +229,7 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
        }
 
+
 bundle :name => 'cdn.commercial',
        :license => 'src-license-cdn',
        :contents => {
@@ -254,6 +275,7 @@ BUNDLES = [
     'aspnetmvc.commercial',
     'jsp.beta',
     'aspnetmvc.hotfix.commercial',
+    'trial.hotfix',
     'winjs.commercial',
     'cdn.commercial'
 ]
