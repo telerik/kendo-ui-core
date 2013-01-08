@@ -306,7 +306,7 @@ module CodeGen::TypeScript
         end
 
         def type_script_declaration
-            "#{name}: #{item.type_script_type}[];"
+            "#{name}?: #{item.type_script_type}[];"
         end
     end
 

@@ -9,6 +9,7 @@ def bundle(options)
     eula = options[:eula]
     readme = options[:readme]
     vsdoc_sources = options[:vsdoc]
+    type_script_sources = options[:type_script]
     changelog_suites = options[:changelog]
     demo_suites = options[:demos]
     path = "dist/bundles/#{name}"
@@ -67,6 +68,13 @@ def bundle(options)
         vsdoc_path = File.join(path, "vsdoc", "kendo.#{vsdoc_sources.values[0]}-vsdoc.js")
         vsdoc vsdoc_path => sources
         prerequisites.push(vsdoc_path)
+    end
+
+    if type_script_sources
+        md = FileList["docs/api/{#{type_script_sources.keys[0].join(",")}}/*.md"]
+        type_script_path = File.join(path, "typescript", "kendo.#{type_script_sources.values[0]}.d.ts")
+        type_script type_script_path => md
+        prerequisites.push(type_script_path)
     end
 
     if changelog_suites
