@@ -2047,7 +2047,7 @@ function pad(number, digits, end) {
             support.mouseup = "mouseup touchend";
             support.mousemove = "mousemove touchmove";
             support.mousecancel = "mouseleave touchcancel";
-            support.click = "click touchend";
+            support.click = "click";
             support.resize = "resize";
         } else {
             support.mousedown = "touchstart";
