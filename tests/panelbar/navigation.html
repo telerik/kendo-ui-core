@@ -383,6 +383,20 @@
             panelbar._click(item.find(".k-link"));
             equal(panelbar._focused[0], item[0]);
         });
+
+        test("PanelBar prevents default action even ", function() {
+            var panelbarHtml = $('<ul class="k-widget k-panelbar k-reset" id="panelbar"><li class="k-item"><a class="k-link k-header" href="#panelbar-1">My Teammates<span class="k-icon k-i-arrow-n k-panelbar-collapse"></span></a><div class="k-content" id="panelbar-1"><p>Teamead</p></div></li><li class="k-item"><a class="k-link k-header" href="#panelbar-2">My Teammates2<span class="k-icon k-i-arrow-n k-panelbar-collapse"></span></a><div class="k-content" id="panelbar-2"><p>Teamead2</p></div></li></ul>').appendTo(document.body);
+            panelbarHtml.kendoPanelBar().focus();
+
+            var panelbar = panelbarHtml.data("kendoPanelBar"),
+                item = panelbarHtml.find(".k-item").last();
+
+            item.find(".k-content").data("animating", true);
+
+            equal(panelbar._click(item.children(".k-link")), true);
+
+            panelbarHtml.remove();
+        });
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
