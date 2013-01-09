@@ -117,11 +117,11 @@
             ]
         },
         {
-            text: "ColorPicker",
-            name: "colorpicker",
-            documentation: "web/colorpicker",
-            spriteCssClass: "colorPickerIcon",
-            items: [
+            "text": "ColorPicker",
+            "name": "colorpicker",
+            "documentation": "web/colorpicker",
+            "spriteCssClass": "colorPickerIcon",
+            "items": [
                 {
                     "text": "Basic usage",
                     "url": "colorpicker/index.html",
