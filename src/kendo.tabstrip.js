@@ -747,19 +747,18 @@ kendo_module({
                 return true;
             }
 
+            isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+            prevent = !href || isAnchor;
+
             if (that.tabGroup.children("[data-animating], [data-in-request]").length) {
-                return;
+                return prevent;
             }
 
             if (that.trigger(SELECT, { item: item[0], contentElement: contentHolder[0] })) {
                 return true;
             }
 
-            isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
-
-            if (!href || isAnchor) {
-                prevent = true;
-            } else {
+            if (prevent === false) {
                 return;
             }
 
