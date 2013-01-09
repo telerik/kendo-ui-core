@@ -666,29 +666,29 @@ kendo_module({
                               parseInt(m[2] + m[2], 16),
                               parseInt(m[3] + m[3], 16), 1);
         }
-        m = /^rgb\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\)/.exec(color);
+        m = /^rgb\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)/.exec(color);
         if (m) {
             return new _Bytes(parseInt(m[1], 10),
                               parseInt(m[2], 10),
                               parseInt(m[3], 10), 1);
         }
-        m = /^rgba\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9.]+)\)/.exec(color);
+        m = /^rgba\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9.]+)\s*\)/.exec(color);
         if (m) {
             return new _Bytes(parseInt(m[1], 10),
                               parseInt(m[2], 10),
                               parseInt(m[3], 10), parseFloat(m[4]));
         }
-        m = /^rgb\(([0-9]+)%\s*,\s*([0-9]+)%\s*,\s*([0-9]+)%\)/.exec(color);
+        m = /^rgb\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*\)/.exec(color);
         if (m) {
-            return new _RGB(parseInt(m[1], 10) / 100,
-                            parseInt(m[2], 10) / 100,
-                            parseInt(m[3], 10) / 100, 1);
+            return new _RGB(parseFloat(m[1]) / 100,
+                            parseFloat(m[2]) / 100,
+                            parseFloat(m[3]) / 100, 1);
         }
-        m = /^rgba\(([0-9]+)%\s*,\s*([0-9]+)%\s*,\s*([0-9]+)%\s*,\s*([0-9.]+)\)/.exec(color);
+        m = /^rgba\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9.]+)\s*\)/.exec(color);
         if (m) {
-            return new _RGB(parseInt(m[1], 10) / 100,
-                            parseInt(m[2], 10) / 100,
-                            parseInt(m[3], 10) / 100, parseFloat(m[4]));
+            return new _RGB(parseFloat(m[1]) / 100,
+                            parseFloat(m[2]) / 100,
+                            parseFloat(m[3]) / 100, parseFloat(m[4]));
         }
         if (!nothrow) {
             throw new Error("Cannot parse color: " + color);
