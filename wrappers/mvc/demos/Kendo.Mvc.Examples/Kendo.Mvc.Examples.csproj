@@ -192,6 +192,7 @@
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
     <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_MenuController.cs" />
+    <Compile Include="Controllers\Web\Grid\Filter_Menu_CustomizationController.cs" />
     <Compile Include="Controllers\Web\Grid\NavigationController.cs" />
     <Compile Include="Controllers\Web\Grid\RtlController.cs" />
     <Compile Include="Controllers\Web\Grid\ForeignKeyColumnController.cs" />
@@ -427,6 +428,7 @@
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\columnsettings.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_menu.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\filter_menu_customization.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\foreignkeycolumn.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editing_custom.aspx" />
@@ -498,6 +500,7 @@
     <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\razor\Views\web\grid\filter_menu_customization.cshtml" />
     <None Include="Areas\razor\Views\web\listview\navigation.cshtml" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />
