@@ -1,0 +1,13 @@
+@using (Html.BeginForm("Index", "ColorPicker"))
+{
+
+    @(Html.Kendo().ColorPicker()
+        .Name("colorpicker")
+        .Opacity(true)
+        .Value(ViewBag.color ?? "rgba(10,20,30,.5)")
+    )
+    
+    <p>Posted color is @ViewBag.color</p>
+
+    <button type="submit" class="k-button">Save</button>
+}

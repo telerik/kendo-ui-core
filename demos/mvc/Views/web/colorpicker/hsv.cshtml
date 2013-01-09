@@ -1,0 +1,31 @@
+<div id="example" class="k-content">
+
+  <p>
+    <tt>ColorHSV</tt> is the widget that is used to display the color
+    palette selector in the <tt>ColorPicker</tt> popup.  It can be used
+    independently via the <tt>kendoColorHSV</tt> method on a
+    jQuery-wrapped container element.  It triggers the same events
+    as <tt>ColorPicker</tt>.
+  </p>
+
+  <div style="float: right" class="console"></div>
+  <div id="container"></div>
+
+  <script>
+    var cp = $("#container").kendoColorHSV({ 
+        opacity: true
+    }).data("kendoColorHSV");
+    cp.bind({
+        select: function(ev) {
+            kendoConsole.log("Select event: " + ev.value.toCss());
+        },
+        change: function() {
+            kendoConsole.log("Change event: " + this.value());
+        },
+        cancel: function() {
+            kendoConsole.log("Cancel event");
+        }
+    });
+  </script>
+
+</div>

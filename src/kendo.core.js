@@ -69,6 +69,13 @@
                 handlersIsFunction = typeof handlers === FUNCTION,
                 events;
 
+            if (handlers === undefined) {
+                for (idx in eventName) {
+                    that.bind(idx, eventName[idx]);
+                }
+                return that;
+            }
+
             for (idx = 0, length = eventNames.length; idx < length; idx++) {
                 eventName = eventNames[idx];
 

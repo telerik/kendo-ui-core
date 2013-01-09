@@ -403,8 +403,8 @@ var ColorTool = Tool.extend({
         this.format = [{ tags: ["span"] }];
     },
 
-    update: function(ui) {
-        ui.data("kendoColorPicker").close();
+    update: function() {
+        this._widget.close();
     },
 
     command: function (commandArguments) {
@@ -427,15 +427,23 @@ var ColorTool = Tool.extend({
         var editor = initOptions.editor,
             toolName = this.name;
 
-        ui.attr("title", initOptions.title);
-
-        new Editor.ColorPicker(ui, {
-            value: "#000000",
-            ariaId: editor.element[0].id ? kendo.format("{0}_{1}_cp", editor.element[0].id, toolName) : "",
-            change: function (e) {
-                Tool.exec(editor, toolName, e.value);
+        ui = this._widget = new kendo.ui.ColorPicker(ui, {
+            value: "#000",
+            toolIcon: "k-" + this.options.name,
+            palette: "websafe",
+            change: function() {
+                var color = ui.value();
+                if (color) {
+                    Tool.exec(editor, toolName, color);
+                }
             }
         });
+        ui.bind("activate", function(ev){
+            ev.preventDefault();
+            ui.trigger("change");
+            editor.focus();
+        });
+        ui.element.attr("title", initOptions.title);
     }
 });
 

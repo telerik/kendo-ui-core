@@ -1,0 +1,17 @@
+<div id="example" class="k-content">
+
+  Default: <input id="hsv-default" type="color" value="#e94d43" /><br /><br />
+  Without buttons: <input id="hsv-no-buttons" type="color" value="#fbd109" /><br /><br />
+  Without preview: <input id="hsv-no-preview" type="color" value="#4bb549" /><br /><br />
+  With opacity: <input id="hsv-opacity" type="color" value="#5492cd" /><br /><br />
+
+  <script>
+    $(document).ready(function() {
+      $("#hsv-default").kendoColorPicker();
+      $("#hsv-no-buttons").kendoColorPicker({ buttons: false });
+      $("#hsv-no-preview").kendoColorPicker({ preview: false });
+      $("#hsv-opacity").kendoColorPicker({ opacity: true });
+    });
+  </script>
+
+</div>

@@ -1,0 +1,21 @@
+<div id="example" class="k-content">
+
+  HSV color picker: <input id="colorpicker1" />
+
+  <br /><br />
+
+  Simple color picker with "web-safe" palette: <input id="colorpicker2" />
+
+  <br /><br />
+
+  Simple color picker with a basic palette: <input id="colorpicker3" />
+
+  <script>
+    $(document).ready(function() {
+      $("#colorpicker1").kendoColorPicker();
+      $("#colorpicker2").kendoColorPicker({ palette: "websafe" });
+      $("#colorpicker3").kendoColorPicker({ palette: "basic" });
+    });
+  </script>
+
+</div>

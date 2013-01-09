@@ -86,6 +86,7 @@ WEB_JS = FileList[
     "src/kendo.autocomplete.js",
     "src/kendo.dropdownlist.js",
     "src/kendo.combobox.js",
+    "src/kendo.colorpicker.js",
     "src/kendo.columnmenu.js",
     "src/kendo.grid.js",
     "src/kendo.listview.js",

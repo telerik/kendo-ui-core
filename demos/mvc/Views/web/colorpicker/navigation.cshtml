@@ -1,0 +1,124 @@
+<div id="example" class="k-content">
+
+  <h2>Simple (palette-based) picker:</h2>
+
+  <input type="color" id="basic" value="#cc2222" accesskey="s"
+         data-role="colorpicker" data-palette="websafe" />
+
+  <ul class="keyboard-legend">
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+        +
+        <span class="key-button">s</span>
+      </span>
+      <span class="button-descr">Focuses the simple selector</span>
+    </li>
+  </ul>
+
+  <ul class="keyboard-legend">
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">enter, down</span>
+      </span>
+      <span class="button-descr">(when popup is closed) opens the popup</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">left arrow</span>
+      </span>
+      <span class="button-descr">selects previous color</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">right arrow</span>
+      </span>
+      <span class="button-descr">selects next color</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">up/down</span>
+      </span>
+      <span class="button-descr">move one row up/down</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">enter</span>
+      </span>
+      <span class="button-descr">select current color</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">escape</span>
+      </span>
+      <span class="button-descr">cancel the selection</span>
+    </li>
+  </ul>
+
+  <h2>HSV picker</h2>
+
+  <input type="color" id="hsv" value="#22cc22" accesskey="h"
+         data-role="colorpicker" data-opacity="true" />
+
+  <ul class="keyboard-legend">
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+        +
+        <span class="key-button">h</span>
+      </span>
+      <span class="button-descr">Focuses the HSV selector</span>
+    </li>
+  </ul>
+
+  <ul class="keyboard-legend">
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">enter, down</span>
+      </span>
+      <span class="button-descr">(when popup is closed) opens the popup</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">arrows</span>
+      </span>
+      <span class="button-descr">update saturation/value in the big rectangle</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">ctrl + left/right</span>
+      </span>
+      <span class="button-descr">update hue slider</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">ctrl + up/down</span>
+      </span>
+      <span class="button-descr">update opacity slider (when opacity present)</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">shift</span>
+      </span>
+      <span class="button-descr">hold shift for fine-tuning</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">enter</span>
+      </span>
+      <span class="button-descr">select current color</span>
+    </li>
+    <li>
+      <span class="button-preview">
+        <span class="key-button leftAlign wider">escape</span>
+      </span>
+      <span class="button-descr">cancel the selection</span>
+    </li>
+  </ul>
+
+  <script>
+    // initialize widgets
+    kendo.init($("#example"));
+  </script>
+
+</div>

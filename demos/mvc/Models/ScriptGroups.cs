@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +23,7 @@ namespace Kendo.Models
             "kendo.list.js",
             "kendo.autocomplete.js",
             "kendo.calendar.js",
+            "kendo.colorpicker.js",
             "kendo.dataviz.core.js",
             "kendo.dataviz.chart.js",
             "kendo.dataviz.themes.js",
