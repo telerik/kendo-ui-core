@@ -56,7 +56,7 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode ItemInnerContentTag(MenuItem item, bool hasAccessibleChildren)
         {
-            IHtmlNode a = this.LinkTag(item, delegate { });
+            IHtmlNode a = LinkTag(item);
 
             if (hasAccessibleChildren || item.Template.HasValue())
             {
@@ -71,6 +71,40 @@ namespace Kendo.Mvc.UI
                     .AddClass(UIPrimitives.Icon, iconClass)
                     .AppendTo(a);
             }
+
+            return a;
+        }
+
+        public IHtmlNode LinkTag(MenuItem item)
+        {
+            var url = Component.GetItemUrl(item);
+
+            IHtmlNode a;
+
+            if (url != "#" && !url.StartsWith("#" + Component.Id))
+            {
+                a = new HtmlElement("a").Attribute("href", url);
+            }
+            else
+            {
+                a = new HtmlElement("span");
+            }
+
+            a.Attributes(item.LinkHtmlAttributes);
+
+            a.PrependClass(UIPrimitives.Link);
+
+            if (!string.IsNullOrEmpty(item.ImageUrl))
+            {
+                ImageTag(item).AppendTo(a);
+            }
+
+            if (!string.IsNullOrEmpty(item.SpriteCssClasses))
+            {
+                SpriteTag(item).AppendTo(a);
+            }
+
+            Text(item).AppendTo(a);
 
             return a;
         }
