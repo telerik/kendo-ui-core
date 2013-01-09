@@ -59,7 +59,7 @@ kendo_module({
             return color ? this.options.opacity ? color.toCssRgba() : color.toCss() : null;
         },
         enable: function(enable) {
-            if (arguments.length == 0) {
+            if (arguments.length === 0) {
                 enable = true;
             }
             if (enable) {
@@ -758,7 +758,7 @@ kendo_module({
             Widget.fn.destroy.call(this);
         },
         enable: function(enable) {
-            if (arguments.length == 0) {
+            if (arguments.length === 0) {
                 enable = true;
             }
             var that = this, wrapper = that.wrapper;
@@ -829,7 +829,7 @@ kendo_module({
         value: ColorSelector.fn.value,
         _isInputTypeColor: function() {
             var el = this.element[0];
-            return /^input$/i.test(el.tagName) && /^color$/i.test(el.type);
+            return (/^input$/i).test(el.tagName) && (/^color$/i).test(el.type);
         },
         _updateUI: function(value) {
             if (value) {
