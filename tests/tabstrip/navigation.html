@@ -225,6 +225,20 @@
             tabstrip._click(item);
             equal(tabstrip._focused[0], item[0]);
         });
+
+        test("TabStrip prevents default action even ", function() {
+            var tabStripHtml = $('<div class="k-widget k-tabstrip k-header" id="tabstrip"><ul class="k-reset k-tabstrip-items"><li class="k-item k-state-default k-state-active"><a class="k-link" href="#tabstrip-1">Paris</a></li><li class="k-item k-state-default"><a class="k-link" href="#tabstrip-2">New York</a></li></ul><div class="k-content k-state-active" id="tabstrip-1" style="display:block"><p>Rainy weather in Paris.</p></div><div class="k-content" id="tabstrip-2"><p>Sunny weather in New York.</p></div></div>').appendTo(document.body);
+            tabStripHtml.kendoTabStrip();
+
+            var tabstrip = tabStripHtml.data("kendoTabStrip");
+
+            tabStripHtml.focus();
+            tabstrip.tabGroup.children().eq(1).attr("data-animating", true);
+
+            equal(tabstrip._click(tabStripHtml.find(".k-item").eq(1)), true);
+
+            tabStripHtml.remove();
+        });
     </script>
 
     <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>
