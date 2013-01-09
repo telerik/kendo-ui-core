@@ -21,7 +21,7 @@
                 cp = $("#x").kendoColorPalette().data("kendoColorPalette");
             },
             teardown: function() {
-                x.innerHTML = "";
+                cp.wrapper.remove();
             }
         });
 
