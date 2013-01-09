@@ -51,11 +51,11 @@ public class TransportReadTag extends  BaseTag  /* interfaces *//* interfaces */
         return "dataSource-transport-read";
     }
 
-    public void setData(DataFunctionTag value) {
+    public void setData(TransportReadDataFunctionTag value) {
         setEvent("data", value.getBody());
     }
 
-    public void setUrl(UrlFunctionTag value) {
+    public void setUrl(TransportReadUrlFunctionTag value) {
         setEvent("url", value.getBody());
     }
 

@@ -55,7 +55,7 @@ public class XAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("border", value);
     }
 
-    public void setTemplate(TemplateFunctionTag value) {
+    public void setTemplate(XAxisItemLabelsTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
 

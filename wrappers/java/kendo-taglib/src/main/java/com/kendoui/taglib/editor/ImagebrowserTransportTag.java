@@ -51,7 +51,7 @@ public class ImagebrowserTransportTag extends  BaseTag  /* interfaces *//* inter
         return "editor-imagebrowser-transport";
     }
 
-    public void setImageUrl(ImageUrlFunctionTag value) {
+    public void setImageUrl(ImagebrowserTransportImageUrlFunctionTag value) {
         setEvent("imageUrl", value.getBody());
     }
 

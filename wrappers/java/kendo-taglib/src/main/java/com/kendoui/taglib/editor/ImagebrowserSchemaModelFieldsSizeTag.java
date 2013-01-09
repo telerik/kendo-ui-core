@@ -53,7 +53,7 @@ public class ImagebrowserSchemaModelFieldsSizeTag extends  BaseTag  /* interface
         return "editor-imagebrowser-schema-model-fields-size";
     }
 
-    public void setParse(ParseFunctionTag value) {
+    public void setParse(ImagebrowserSchemaModelFieldsSizeParseFunctionTag value) {
         setEvent("parse", value.getBody());
     }
 

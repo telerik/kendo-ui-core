@@ -55,7 +55,7 @@ public class NavigatorSeriesItemTooltipTag extends  BaseTag  /* interfaces *//* 
         setProperty("border", value);
     }
 
-    public void setTemplate(TemplateFunctionTag value) {
+    public void setTemplate(NavigatorSeriesItemTooltipTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
 

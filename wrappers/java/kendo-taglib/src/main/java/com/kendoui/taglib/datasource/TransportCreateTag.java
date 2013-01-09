@@ -51,11 +51,11 @@ public class TransportCreateTag extends  BaseTag  /* interfaces *//* interfaces 
         return "dataSource-transport-create";
     }
 
-    public void setData(DataFunctionTag value) {
+    public void setData(TransportCreateDataFunctionTag value) {
         setEvent("data", value.getBody());
     }
 
-    public void setUrl(UrlFunctionTag value) {
+    public void setUrl(TransportCreateUrlFunctionTag value) {
         setEvent("url", value.getBody());
     }
 

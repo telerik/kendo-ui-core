@@ -55,7 +55,7 @@ public class ScaleLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
-    public void setTemplate(TemplateFunctionTag value) {
+    public void setTemplate(ScaleLabelsTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
 

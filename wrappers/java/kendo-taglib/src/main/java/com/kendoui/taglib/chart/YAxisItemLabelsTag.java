@@ -55,7 +55,7 @@ public class YAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("border", value);
     }
 
-    public void setTemplate(TemplateFunctionTag value) {
+    public void setTemplate(YAxisItemLabelsTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
 

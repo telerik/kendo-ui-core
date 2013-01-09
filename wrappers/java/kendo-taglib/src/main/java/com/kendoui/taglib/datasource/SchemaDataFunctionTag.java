@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.editor;
+package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,11 +7,18 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ParseFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class SchemaDataFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        SchemaTag parent = (SchemaTag)findParentWithClass(SchemaTag.class);
+
+
+        parent.setData(this);
+
 //<< doEndTag
 
         return super.doEndTag();

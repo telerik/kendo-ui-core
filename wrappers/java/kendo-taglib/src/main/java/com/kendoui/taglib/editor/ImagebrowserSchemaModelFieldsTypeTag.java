@@ -53,7 +53,7 @@ public class ImagebrowserSchemaModelFieldsTypeTag extends  BaseTag  /* interface
         return "editor-imagebrowser-schema-model-fields-type";
     }
 
-    public void setParse(ParseFunctionTag value) {
+    public void setParse(ImagebrowserSchemaModelFieldsTypeParseFunctionTag value) {
         setEvent("parse", value.getBody());
     }
 

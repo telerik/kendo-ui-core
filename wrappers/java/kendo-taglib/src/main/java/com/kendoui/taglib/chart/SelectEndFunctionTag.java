@@ -14,6 +14,13 @@ public class SelectEndFunctionTag extends FunctionTag /* interfaces */ /* interf
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
+
+
+        parent.setSelectEnd(this);
+
 //<< doEndTag
 
         return super.doEndTag();

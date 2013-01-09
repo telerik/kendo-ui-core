@@ -50,7 +50,7 @@ public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "editor-tool";
     }
 
-    public void setExec(ExecFunctionTag value) {
+    public void setExec(ToolExecFunctionTag value) {
         setEvent("exec", value.getBody());
     }
 

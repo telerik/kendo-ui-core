@@ -50,7 +50,7 @@ public class CheckboxesTag extends BaseTag /* interfaces *//* interfaces */ {
         return "treeView-checkboxes";
     }
 
-    public void setTemplate(TemplateFunctionTag value) {
+    public void setTemplate(CheckboxesTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
 

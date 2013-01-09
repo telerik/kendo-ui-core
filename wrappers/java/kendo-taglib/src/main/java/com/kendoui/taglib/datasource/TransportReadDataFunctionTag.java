@@ -7,11 +7,18 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TotalFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class TransportReadDataFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        TransportReadTag parent = (TransportReadTag)findParentWithClass(TransportReadTag.class);
+
+
+        parent.setData(this);
+
 //<< doEndTag
 
         return super.doEndTag();

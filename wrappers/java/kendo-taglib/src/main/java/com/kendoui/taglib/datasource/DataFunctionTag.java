@@ -12,6 +12,13 @@ public class DataFunctionTag extends FunctionTag /* interfaces */ /* interfaces 
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        TransportUpdateTag parent = (TransportUpdateTag)findParentWithClass(TransportUpdateTag.class);
+
+
+        parent.setData(this);
+
 //<< doEndTag
 
         return super.doEndTag();

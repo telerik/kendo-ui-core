@@ -57,7 +57,7 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("filterable", value);
     }
 
-    public void setEditor(EditorFunctionTag value) {
+    public void setEditor(ColumnEditorFunctionTag value) {
         setEvent("editor", value.getBody());
     }
 

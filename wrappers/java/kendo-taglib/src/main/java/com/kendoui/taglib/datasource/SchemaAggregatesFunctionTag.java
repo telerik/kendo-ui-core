@@ -7,17 +7,17 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ParameterMapFunctionTag extends FunctionTag /* interfaces *//* interfaces */ {
+public class SchemaAggregatesFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        TransportTag parent = (TransportTag)findParentWithClass(TransportTag.class);
+        SchemaTag parent = (SchemaTag)findParentWithClass(SchemaTag.class);
 
 
-        parent.setParameterMap(this);
+        parent.setAggregates(this);
 
 //<< doEndTag
 
@@ -41,11 +41,6 @@ public class ParameterMapFunctionTag extends FunctionTag /* interfaces *//* inte
     }
 
 //>> Attributes
-
-    public static String tagName() {
-        return "dataSource-transport-parameterMap";
-    }
-
 //<< Attributes
 
 }

@@ -7,11 +7,18 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ValueAxisItemLabelsTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        ValueAxisItemLabelsTag parent = (ValueAxisItemLabelsTag)findParentWithClass(ValueAxisItemLabelsTag.class);
+
+
+        parent.setTemplate(this);
+
 //<< doEndTag
 
         return super.doEndTag();

@@ -14,6 +14,13 @@ public class ColumnReorderFunctionTag extends FunctionTag /* interfaces */ /* in
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        GridTag parent = (GridTag)findParentWithClass(GridTag.class);
+
+
+        parent.setColumnReorder(this);
+
 //<< doEndTag
 
         return super.doEndTag();

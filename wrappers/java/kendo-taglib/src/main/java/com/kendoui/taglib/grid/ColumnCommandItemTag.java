@@ -51,7 +51,7 @@ public class ColumnCommandItemTag extends  BaseTag  /* interfaces */ /* interfac
         return "grid-column-commandItem";
     }
 
-    public void setClick(ClickFunctionTag value) {
+    public void setClick(ColumnCommandItemClickFunctionTag value) {
         setEvent("click", value.getBody());
     }
 

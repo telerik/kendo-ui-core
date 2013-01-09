@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.grid;
+package com.kendoui.taglib.datasource;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,11 +7,18 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class UiFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class TransportUpdateUrlFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        TransportUpdateTag parent = (TransportUpdateTag)findParentWithClass(TransportUpdateTag.class);
+
+
+        parent.setUrl(this);
+
 //<< doEndTag
 
         return super.doEndTag();

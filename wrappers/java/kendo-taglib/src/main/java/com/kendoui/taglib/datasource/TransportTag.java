@@ -67,7 +67,7 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("update", value);
     }
 
-    public void setParameterMap(ParameterMapFunctionTag value) {
+    public void setParameterMap(TransportParameterMapFunctionTag value) {
         setEvent("parameterMap", value.getBody());
     }
 

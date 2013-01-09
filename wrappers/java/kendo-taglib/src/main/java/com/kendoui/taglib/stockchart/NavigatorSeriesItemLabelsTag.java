@@ -55,7 +55,7 @@ public class NavigatorSeriesItemLabelsTag extends  BaseTag  /* interfaces *//* i
         setProperty("border", value);
     }
 
-    public void setTemplate(TemplateFunctionTag value) {
+    public void setTemplate(NavigatorSeriesItemLabelsTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
 

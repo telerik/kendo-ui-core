@@ -71,16 +71,14 @@ module CodeGen::Java::JSP
             EVENT_SETTER.result(binding)
         end
 
-        def tag_class
-            @name.pascalize + 'FunctionTag'
-        end
 
         def to_java(filename)
             java = EVENT.result(binding)
 
             java = File.read(filename) if File.exists?(filename)
 
-            java
+            java.sub(/\/\/>> doEndTag(.|\n)*\/\/<< doEndTag/,
+                     COMPOSITE_OPTION_PARENT.result(binding))
         end
     end
 

@@ -108,6 +108,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("change", value.getBody());
     }
 
+    public void setColumnHide(ColumnHideFunctionTag value) {
+        setEvent("columnHide", value.getBody());
+    }
+
     public void setColumnMenuInit(ColumnMenuInitFunctionTag value) {
         setEvent("columnMenuInit", value.getBody());
     }
@@ -118,6 +122,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setColumnResize(ColumnResizeFunctionTag value) {
         setEvent("columnResize", value.getBody());
+    }
+
+    public void setColumnShow(ColumnShowFunctionTag value) {
+        setEvent("columnShow", value.getBody());
     }
 
     public void setDataBinding(DataBindingFunctionTag value) {
@@ -305,6 +313,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("change", new Function(value));
     }
 
+    public String getColumnHide() {
+        Function property = ((Function)getProperty("columnHide"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setColumnHide(String value) {
+        setProperty("columnHide", new Function(value));
+    }
+
     public String getColumnMenuInit() {
         Function property = ((Function)getProperty("columnMenuInit"));
         if (property != null) {
@@ -339,6 +359,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setColumnResize(String value) {
         setProperty("columnResize", new Function(value));
+    }
+
+    public String getColumnShow() {
+        Function property = ((Function)getProperty("columnShow"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setColumnShow(String value) {
+        setProperty("columnShow", new Function(value));
     }
 
     public String getDataBinding() {

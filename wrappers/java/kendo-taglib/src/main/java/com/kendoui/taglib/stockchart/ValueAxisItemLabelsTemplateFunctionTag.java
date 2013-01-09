@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.datasource;
+package com.kendoui.taglib.stockchart;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,11 +7,18 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class UrlFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ValueAxisItemLabelsTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        ValueAxisItemLabelsTag parent = (ValueAxisItemLabelsTag)findParentWithClass(ValueAxisItemLabelsTag.class);
+
+
+        parent.setTemplate(this);
+
 //<< doEndTag
 
         return super.doEndTag();

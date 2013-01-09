@@ -55,7 +55,7 @@ public class ValueAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("border", value);
     }
 
-    public void setTemplate(TemplateFunctionTag value) {
+    public void setTemplate(ValueAxisItemLabelsTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
 

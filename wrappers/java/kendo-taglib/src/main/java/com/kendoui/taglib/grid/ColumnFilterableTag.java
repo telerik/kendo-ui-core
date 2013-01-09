@@ -51,7 +51,7 @@ public class ColumnFilterableTag extends  BaseTag  /* interfaces */ /* interface
         return "grid-column-filterable";
     }
 
-    public void setUi(UiFunctionTag value) {
+    public void setUi(ColumnFilterableUiFunctionTag value) {
         setEvent("ui", value.getBody());
     }
 

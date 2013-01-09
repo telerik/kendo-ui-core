@@ -7,7 +7,11 @@ module CodeGen::Java
         end
 
         def tag_class
-            @name.pascalize + 'FunctionTag'
+            name = @name.pascalize
+
+            return name + 'FunctionTag' if @owner.instance_of?(component_class)
+
+            @owner.tag_class.sub('Tag', '') + name + 'FunctionTag'
         end
 
         def namespace

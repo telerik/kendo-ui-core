@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.datasource;
+package com.kendoui.taglib.radialgauge;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,11 +7,18 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class AggregatesFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ScaleLabelsTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        ScaleLabelsTag parent = (ScaleLabelsTag)findParentWithClass(ScaleLabelsTag.class);
+
+
+        parent.setTemplate(this);
+
 //<< doEndTag
 
         return super.doEndTag();

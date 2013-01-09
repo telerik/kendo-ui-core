@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.grid;
+package com.kendoui.taglib.chart;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,11 +7,18 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ClickFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class XAxisItemLabelsTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        XAxisItemLabelsTag parent = (XAxisItemLabelsTag)findParentWithClass(XAxisItemLabelsTag.class);
+
+
+        parent.setTemplate(this);
+
 //<< doEndTag
 
         return super.doEndTag();

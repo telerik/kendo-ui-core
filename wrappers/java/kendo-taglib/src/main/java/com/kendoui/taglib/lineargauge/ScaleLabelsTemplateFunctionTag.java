@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.editor;
+package com.kendoui.taglib.lineargauge;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,17 +7,17 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ExecFunctionTag extends FunctionTag /* interfaces *//* interfaces */ {
+public class ScaleLabelsTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ToolTag parent = (ToolTag)findParentWithClass(ToolTag.class);
+        ScaleLabelsTag parent = (ScaleLabelsTag)findParentWithClass(ScaleLabelsTag.class);
 
 
-        parent.setExec(this);
+        parent.setTemplate(this);
 
 //<< doEndTag
 
@@ -41,11 +41,6 @@ public class ExecFunctionTag extends FunctionTag /* interfaces *//* interfaces *
     }
 
 //>> Attributes
-
-    public static String tagName() {
-        return "editor-tool-exec";
-    }
-
 //<< Attributes
 
 }

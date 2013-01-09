@@ -57,7 +57,7 @@ public class TooltipTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
-    public void setTemplate(TemplateFunctionTag value) {
+    public void setTemplate(TooltipTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
 

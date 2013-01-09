@@ -51,11 +51,11 @@ public class TransportDestroyTag extends  BaseTag  /* interfaces *//* interfaces
         return "dataSource-transport-destroy";
     }
 
-    public void setData(DataFunctionTag value) {
+    public void setData(TransportDestroyDataFunctionTag value) {
         setEvent("data", value.getBody());
     }
 
-    public void setUrl(UrlFunctionTag value) {
+    public void setUrl(TransportDestroyUrlFunctionTag value) {
         setEvent("url", value.getBody());
     }
 

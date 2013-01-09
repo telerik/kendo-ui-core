@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.grid;
+package com.kendoui.taglib.chart;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,17 +7,17 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class EditorFunctionTag extends FunctionTag /* interfaces *//* interfaces */ {
+public class SeriesItemTooltipTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ColumnTag parent = (ColumnTag)findParentWithClass(ColumnTag.class);
+        SeriesItemTooltipTag parent = (SeriesItemTooltipTag)findParentWithClass(SeriesItemTooltipTag.class);
 
 
-        parent.setEditor(this);
+        parent.setTemplate(this);
 
 //<< doEndTag
 
@@ -41,11 +41,6 @@ public class EditorFunctionTag extends FunctionTag /* interfaces *//* interfaces
     }
 
 //>> Attributes
-
-    public static String tagName() {
-        return "grid-column-editor";
-    }
-
 //<< Attributes
 
 }

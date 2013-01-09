@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.stockchart;
+package com.kendoui.taglib.editor;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,11 +7,18 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ImagebrowserSchemaModelFieldsTypeParseFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        ImagebrowserSchemaModelFieldsTypeTag parent = (ImagebrowserSchemaModelFieldsTypeTag)findParentWithClass(ImagebrowserSchemaModelFieldsTypeTag.class);
+
+
+        parent.setParse(this);
+
 //<< doEndTag
 
         return super.doEndTag();

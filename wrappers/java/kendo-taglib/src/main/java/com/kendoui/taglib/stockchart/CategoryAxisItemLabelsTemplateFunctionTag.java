@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.datasource;
+package com.kendoui.taglib.stockchart;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,17 +7,17 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ParseFunctionTag extends FunctionTag /* interfaces *//* interfaces */ {
+public class CategoryAxisItemLabelsTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SchemaTag parent = (SchemaTag)findParentWithClass(SchemaTag.class);
+        CategoryAxisItemLabelsTag parent = (CategoryAxisItemLabelsTag)findParentWithClass(CategoryAxisItemLabelsTag.class);
 
 
-        parent.setParse(this);
+        parent.setTemplate(this);
 
 //<< doEndTag
 
@@ -41,11 +41,6 @@ public class ParseFunctionTag extends FunctionTag /* interfaces *//* interfaces 
     }
 
 //>> Attributes
-
-    public static String tagName() {
-        return "dataSource-schema-parse";
-    }
-
 //<< Attributes
 
 }

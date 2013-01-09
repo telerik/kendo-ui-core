@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.radialgauge;
+package com.kendoui.taglib.chart;
 
 import com.kendoui.taglib.FunctionTag;
 
@@ -7,11 +7,18 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class TooltipTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        TooltipTag parent = (TooltipTag)findParentWithClass(TooltipTag.class);
+
+
+        parent.setTemplate(this);
+
 //<< doEndTag
 
         return super.doEndTag();

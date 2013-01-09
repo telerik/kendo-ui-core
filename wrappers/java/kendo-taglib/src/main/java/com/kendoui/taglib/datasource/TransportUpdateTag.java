@@ -51,11 +51,11 @@ public class TransportUpdateTag extends  BaseTag  /* interfaces *//* interfaces 
         return "dataSource-transport-update";
     }
 
-    public void setData(DataFunctionTag value) {
+    public void setData(TransportUpdateDataFunctionTag value) {
         setEvent("data", value.getBody());
     }
 
-    public void setUrl(UrlFunctionTag value) {
+    public void setUrl(TransportUpdateUrlFunctionTag value) {
         setEvent("url", value.getBody());
     }
 
