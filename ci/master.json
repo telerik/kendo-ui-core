@@ -14,6 +14,6 @@
     "recipe[selenium]",
     "recipe[mono-fcgi]",
     "recipe[nginx]",
-    "recipe[screenshot]",
-    "recipe[monit]"
+    "recipe[monit]",
+    "recipe[screenshot]"
 ]}
