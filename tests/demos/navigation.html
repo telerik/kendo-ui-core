@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Online demos navigation</title>
+    </head>
+    <body>
+        <h1 id="qunit-header">Online demos navigation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+
+        <script>
+            module("Navigation");
+
+            function isValidJSON(file) {
+                stop(1);
+
+                $.ajax({
+                    url: file,
+                    success: function(content) {
+                        try {
+                            var result = JSON.parse(content);
+                            ok(true);
+                        } catch(ex) {
+                            ok(false, "'" + file + "' contains invalid JSON");
+                        }
+                    },
+                    complete: function() {
+                        start();
+                    }
+                });
+            }
+
+            test("suite.nav.json files are valid JSON", function() {
+                isValidJSON("../../demos/mvc/App_Data/web.nav.json");
+                isValidJSON("../../demos/mvc/App_Data/dataviz.nav.json");
+                isValidJSON("../../demos/mvc/App_Data/mobile.nav.json");
+            });
+        </script>
+    </body>
+</html>
+
+
