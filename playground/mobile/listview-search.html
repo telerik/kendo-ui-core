@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title>Scrollview</title>
+        <title>LsitView filtering</title>
         <link rel="stylesheet" href="../../styles/mobile/kendo.mobile.all.css">
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
@@ -64,9 +64,7 @@
                     },
                     template: "${name}",
                     filterable: {
-                        field: "name",
-                        ignoreCase: true,
-                        autoFilter: false
+                        field: "name"
                     }
                 }).data("kendoMobileListView");
             }

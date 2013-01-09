@@ -135,7 +135,8 @@ kendo_module({
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing",
-            pullOffset: 140
+            pullOffset: 140,
+            filterable: false
         },
 
         setOptions: function(options) {
@@ -675,7 +676,7 @@ kendo_module({
                     e.preventDefault();
                 });
 
-                this.element.before(form);
+                that.element.before(form);
 
                 if (filterable.autoFilter !== false) {
                     events += " keyup";

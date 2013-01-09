@@ -252,6 +252,19 @@
 
                 ok(dom.find("li a").is(".km-listview-link"));
             });
+
+            test("enable filtering", function() {
+                var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" data-filterable="true" />');
+
+                var observable = kendo.observable({
+                    dataSource: [ { foo: "foo" } ]
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileListView").options.filterable);
+            });
+
         </script>
     </body>
 </html>
