@@ -59,5 +59,10 @@
         {
             get { return ""; }
         }
+
+        public override string CurrentExecutionFilePath
+        {
+            get { return ""; }
+        }
     }
 }
