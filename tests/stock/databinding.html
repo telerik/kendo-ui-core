@@ -380,7 +380,8 @@
                     });
 
                     chart.trigger("zoomEnd");
-                    same(chart.dataSource._filter.filters[0].value, new Date("2012/09/02"));
+                    same(chart.dataSource._filter.filters[0].value, new Date("2012/08/30"));
+                    same(chart.dataSource._filter.filters[1].value, new Date("2012/11/04"));
                 });
 
                 test("main DS is not filtered during zoom", function() {

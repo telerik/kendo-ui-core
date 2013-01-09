@@ -20,6 +20,7 @@ kendo_module({
         defined = dataviz.defined,
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
+        addDuration = dataviz.addDuration,
         defined = dataviz.defined,
         duration = dataviz.duration,
         last = dataviz.last,
@@ -88,13 +89,15 @@ kendo_module({
         _initDataSource: function(userOptions) {
             var options = userOptions || {},
                 dataSource = options.dataSource,
+                hasServerFiltering = dataSource && dataSource.serverFiltering,
                 mainAxis = [].concat(options.categoryAxis)[0],
                 naviOptions = options.navigator || {},
                 select = naviOptions.select,
+                hasSelect = select && select.from && select.to,
                 filter,
                 dummyAxis;
 
-            if (dataSource && select && select.from && select.to) {
+            if (hasServerFiltering && hasSelect) {
                 filter = [].concat(dataSource.filter || []);
 
                 dummyAxis = new dataviz.DateCategoryAxis(deepExtend({
@@ -162,7 +165,6 @@ kendo_module({
                 Chart.fn._redraw.call(chart);
                 navigator.redraw();
             } else {
-                navigator.filterAxes();
                 navigator.redrawSlaves();
             }
         },
@@ -359,13 +361,13 @@ kendo_module({
 
             from = toDate(math.min(
                 math.max(groups[0], range.min),
-                dataviz.addDuration(
+                addDuration(
                     dataviz.last(groups), -selectionDuration, baseUnit
                 )
             ));
 
             to = toDate(math.min(
-                dataviz.addDuration(from, selectionDuration, baseUnit),
+                addDuration(from, selectionDuration, baseUnit),
                 dataviz.last(navigatorAxis.options.categories)
             ));
 
@@ -373,7 +375,6 @@ kendo_module({
 
             if (navi._liveDrag()) {
                 navi.filterAxes();
-                navi.filterDataSource();
                 navi.redrawSlaves();
             }
 
@@ -409,7 +410,7 @@ kendo_module({
                 isFirefox = browser.mozilla,
                 isOldIE = browser.msie && browser.version < 9;
 
-            return !isTouch && !isFirefox && !isOldIE && !this.dataSource;
+            return !isTouch && !isFirefox && !isOldIE;
         },
 
         readSelection: function() {
@@ -463,10 +464,6 @@ kendo_module({
                 }
             }
 
-            if (navi.dataSource && chart.dataSource) {
-                return;
-            }
-
             for (i = 0; i < slaveAxes.length; i++) {
                 axis = slaveAxes[i];
                 if (axis.pane !== NAVIGATOR_PANE) {
@@ -481,18 +478,25 @@ kendo_module({
                 select = navi.options.select || {},
                 chart = navi.chart,
                 chartDataSource = chart.dataSource,
+                hasServerFiltering = chartDataSource && chartDataSource.options.serverFiltering,
                 transport = chartDataSource.options.transport,
-                filter = Navigator.buildFilter(select.from, select.to);
+                axisOptions,
+                baseUnit;
 
-            if (navi.dataSource && chartDataSource && transport && filter.length) {
-                var dummyAxis = new dataviz.DateCategoryAxis(deepExtend({
+            if (navi.dataSource && hasServerFiltering && transport) {
+                axisOptions = new dataviz.DateCategoryAxis(deepExtend({
                     baseUnit: "fit"
                 }, chart.options.categoryAxis[0], {
                     categories: [select.from, select.to]
-                }));
+                })).options;
 
-                transport.read.data.baseUnit = dummyAxis.options.baseUnit;
-                chartDataSource.filter(filter);
+                baseUnit = transport.read.data.baseUnit = axisOptions.baseUnit;
+                chartDataSource.filter(
+                    Navigator.buildFilter(
+                        addDuration(axisOptions.min, -axisOptions.baseUnitStep, baseUnit),
+                        addDuration(axisOptions.max, axisOptions.baseUnitStep, baseUnit)
+                    )
+                );
             }
         },
 
