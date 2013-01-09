@@ -1,45 +1,7 @@
 JENKINS_URL = 'http://localhost:8080/build/'
 
-apt_repository "jenkins" do
-  uri "http://pkg.jenkins-ci.org/debian"
-  components ["binary/"]
-  key "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key"
-end
-
-package "jenkins"
-
-bash "set jenkins users shell" do
-    code "chsh -s /bin/zsh jenkins"
-end
-
-cookbook_file "/var/lib/jenkins/.zshrc" do
-    source "zshrc"
-    owner "jenkins"
-    group "nogroup"
-    mode "0600"
-end
-
-directory "/var/lib/jenkins/.ssh" do
-    owner "jenkins"
-    group "nogroup"
-    mode "0700"
-end
-
-cookbook_file "/var/lib/jenkins/.gitconfig" do
-    source "gitconfig"
-    owner "jenkins"
-    group "nogroup"
-    mode "0600"
-end
-
-%w[id_rsa id_rsa.pub authorized_keys known_hosts].each do |file|
-    cookbook_file "/var/lib/jenkins/.ssh/#{file}" do
-        source "ssh/#{file}"
-        owner "jenkins"
-        group "nogroup"
-        mode "0600"
-    end
-end
+include_recipe "jenkins::install"
+include_recipe "jenkins::setup_user"
 
 cookbook_file "/etc/default/jenkins" do
     source "config"
