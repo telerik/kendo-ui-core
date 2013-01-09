@@ -636,6 +636,14 @@ kendo_module({
             tooltip: { visible: false },
             labels: { step: 1 },
             autoBind: !naviOptions.dataSource,
+            autoBaseUnitSteps: {
+                minutes: [1],
+                hours: [1],
+                days: [1],
+                weeks: [],
+                months: [1],
+                years: [1]
+            },
             _overlap: false
         };
 
@@ -654,26 +662,13 @@ kendo_module({
                 maxDateGroups: 20,
                 baseUnitStep: "auto",
                 autoBaseUnitSteps: {
-                    minutes: [],
-                    hours: [1],
-                    days: [1],
-                    weeks: [],
-                    months: [1],
-                    years: [1]
+                    minutes: []
                 },
                 majorTicks: { visible: true }
             }), deepExtend({}, base, {
                 name: NAVIGATOR_AXIS + "_ticks",
                 // TODO: Width based
                 maxDateGroups: 200,
-                autoBaseUnitSteps: {
-                    minutes: [1],
-                    hours: [1],
-                    days: [1],
-                    weeks: [],
-                    months: [1],
-                    years: [1]
-                },
                 majorTicks: {
                     visible: true,
                     width: 0.5
