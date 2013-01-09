@@ -291,7 +291,7 @@
                 "combobox",
                 "dropdownlist",
                 "window",
-                "color"
+                "colorpicker"
             ],
             "source": "kendo.editor.min.js"
         },

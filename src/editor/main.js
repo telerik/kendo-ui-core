@@ -3,7 +3,7 @@ kendo_module({
     name: "Editor",
     category: "web",
     description: "Rich text editor component",
-    depends: [ "combobox", "dropdownlist", "window", "color" ]
+    depends: [ "combobox", "dropdownlist", "window", "colorpicker" ]
 });
 
 (function($,undefined) {
