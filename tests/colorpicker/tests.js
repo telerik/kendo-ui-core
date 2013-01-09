@@ -6,6 +6,9 @@ tests.push(
         page: "colorpicker/mvvm.html",
         title: "Color MVVM"
     },{
+        page: "colorpicker/parseColor.html",
+        title: "Parsing colors"
+    },{
         page: "colorpicker/lint.html",
         title: "Color lint"
     }

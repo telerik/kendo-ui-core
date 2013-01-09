@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>parseColor tests</title>
+    <script src="test-scripts.js"></script>
+  </head>
+  <body>
+    <h1 id="qunit-header">parseColor</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+
+    <div id="x"></div>
+
+    <script>
+
+      var parseColor = kendo.parseColor;
+
+      test("Short hex notation", function(){
+          var color = parseColor("#ff0");
+          ok(/^#ffff00/i.test(color.toCss()));
+
+          var color = parseColor("#0f0");
+          ok(/^#00ff00/i.test(color.toCss()));
+
+          var color = parseColor("#0ff");
+          ok(/^#00ffff/i.test(color.toCss()));
+
+          var color = parseColor("#000");
+          ok(/^#000000/i.test(color.toCss()));
+
+          var color = parseColor("#234");
+          ok(/^#223344/i.test(color.toCss()));
+      });
+
+      test("Long hex notation", function(){
+          var color = parseColor("#ffff00");
+          ok(/^#ffff00/i.test(color.toCss()));
+
+          var color = parseColor("#00ff00");
+          ok(/^#00ff00/i.test(color.toCss()));
+
+          var color = parseColor("#00ffff");
+          ok(/^#00ffff/i.test(color.toCss()));
+
+          var color = parseColor("#000000");
+          ok(/^#000000/i.test(color.toCss()));
+
+          var color = parseColor("#223344");
+          ok(/^#223344/i.test(color.toCss()));
+      });
+
+      test("RGB notation", function(){
+          var color = parseColor("rgb(255, 255, 0)");
+          ok(/^#ffff00/i.test(color.toCss()));
+
+          var color = parseColor("rgb(  0,255, 0  )");
+          ok(/^#00ff00/i.test(color.toCss()));
+
+          var color = parseColor("rgb( 0000,255,0255\t)");
+          ok(/^#00ffff/i.test(color.toCss()));
+
+          var color = parseColor("rgb( 0,\t00,000)");
+          ok(/^#000000/i.test(color.toCss()));
+
+          var color = parseColor("rgb(34,51,68)");
+          ok(/^#223344/i.test(color.toCss()));
+      });
+
+      test("RGBA notation", function(){
+          var color = parseColor("rgba(255, 255, 0, 1)");
+          ok(/^#ffff00/i.test(color.toCss()));
+
+          var color = parseColor("rgba(  0,255, 0  , 01  )");
+          ok(/^#00ff00/i.test(color.toCss()));
+
+          var color = parseColor("rgba( 0000,255,0255\t, 1\t)");
+          ok(/^#00ffff/i.test(color.toCss()));
+
+          var color = parseColor("rgba( 0,\t00,000,1)");
+          ok(/^#000000/i.test(color.toCss()));
+
+          var color = parseColor("rgba(34,51,68,1)");
+          ok(/^#223344/i.test(color.toCss()));
+      });
+
+      test("Random samples", function(){
+          console.time("randomColorParsing");
+          function randomByte() {
+              return Math.floor(Math.random() * 256);
+          }
+          var r, g, b, a;
+          function hexColor() {
+              function pad(h) {
+                  if (h.length == 1) return "0" + h;
+                  return h;
+              }
+              return pad(r.toString(16)) + pad(g.toString(16)) + pad(b.toString(16));
+          }
+          function randomSpace() {
+              var a = [ "", " ", "  ", "   ", "\t", " \t " ];
+              return a[Math.floor(Math.random() * a.length)];
+          }
+          function percent(byte) {
+              return 100 * (byte / 255) + "%";
+          }
+          function rgbColor1() {
+              return "rgb(" +
+                          randomSpace() + r + randomSpace() + "," +
+                          randomSpace() + g + randomSpace() + "," +
+                          randomSpace() + b + randomSpace() + ")";
+          }
+          function rgbColor2() {
+              return "rgb(" +
+                          randomSpace() + percent(r) + randomSpace() + "," +
+                          randomSpace() + percent(g) + randomSpace() + "," +
+                          randomSpace() + percent(b) + randomSpace() + ")";
+          }
+          function rgbaColor1() {
+              return "rgba(" +
+                           randomSpace() + r + randomSpace() + "," +
+                           randomSpace() + g + randomSpace() + "," +
+                           randomSpace() + b + randomSpace() + "," +
+                           randomSpace() + a + randomSpace() + ")";
+          }
+          function rgbaColor2() {
+              return "rgba(" +
+                           randomSpace() + percent(r) + randomSpace() + "," +
+                           randomSpace() + percent(g) + randomSpace() + "," +
+                           randomSpace() + percent(b) + randomSpace() + "," +
+                           randomSpace() + a + randomSpace() + ")";
+          }
+          for (var i = 0; i < 1000; ++i) {
+              r = randomByte();
+              g = randomByte();
+              b = randomByte();
+              a = Math.random() < 0.5 ? 1 : Math.random();
+              var hex = hexColor();
+              var c1 = parseColor(hex);
+              var c2 = parseColor(rgbColor1());
+              var c3 = parseColor(rgbColor2());
+              var c4 = parseColor(rgbaColor1());
+              var c5 = parseColor(rgbaColor2());
+              ok(c1.equals(c2) && c2.equals(c3));
+              ok(c4.equals(c5));
+              ok(hex == c1.toHex());
+              ok(hex == c2.toHex());
+              ok(hex == c3.toHex());
+
+              var rgba = "rgba(" + r + ", " + g + ", " + b + ", " + a + ")";
+              ok(rgba = c4.toCssRgba());
+              ok(rgba = c5.toCssRgba());
+          }
+          console.timeEnd("randomColorParsing");
+      });
+
+    </script>
+  </body>
+</html>
