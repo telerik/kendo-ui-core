@@ -804,7 +804,7 @@ kendo_module({
         _click: function (target) {
             var that = this,
                 element = that.element,
-                prevent;
+                prevent, contents, href, isAnchor;
 
             if (target.parents("li." + DISABLEDCLASS).length) {
                 return;
@@ -819,21 +819,20 @@ kendo_module({
 
             that._updateSelected(link);
 
-            var contents = item.find(GROUPS).add(item.find(CONTENTS)),
-                href = link.attr(HREF),
-                isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+            contents = item.find(GROUPS).add(item.find(CONTENTS));
+            href = link.attr(HREF);
+            isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+            prevent = !!(isAnchor || contents.length);
 
             if (contents.data("animating")) {
-                return true;
+                return prevent;
             }
 
             if (that._triggerEvent(SELECT, item)) {
                 prevent = true;
             }
 
-            if (isAnchor || contents.length) {
-                prevent = true;
-            } else {
+            if (prevent === false) {
                 return;
             }
 
