@@ -1,0 +1,97 @@
+<div id="example" class="k-content">
+    <div class="current-state">
+        <h4>Current view model state:</h4>
+        <pre>
+{
+    name: <span data-bind="text: name"></span>,
+    files: <span data-bind="text: printFiles"></span>
+}
+        </pre>
+    </div>
+    <div class="files">
+        <h3><span data-bind="text: name"></span>'s files</h3>
+        <div data-role="treeview"
+            data-drag-and-drop="true"
+            data-text-field="name"
+            data-spritecssclass-field="type"
+            data-bind="source: files"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var viewModel = kendo.observable({
+                name: "John Doe",
+                files: kendo.observableHierarchy([
+                    { name: "My Web Site", type: "folder", expanded: true, items: [
+                        { name: "images", type: "folder", expanded: true, items: [
+                            { name: "logo.png", type: "image" },
+                            { name: "body-back.png", type: "image" },
+                            { name: "my-photo.jpg", type: "image" }
+                        ] },
+                        { name: "resources", type: "folder", expanded: true, items: [
+                            { name: "resources", type: "folder" },
+                            { name: "zip", type: "folder" }
+                        ] },
+                        { name: "about.html", type: "html" },
+                        { name: "contacts.html", type: "html" },
+                        { name: "index.html", type: "html" },
+                        { name: "portfolio.html", type: "html" }
+                    ] }
+                ]),
+                printFiles: function() {
+                    // helper function for printing the hierarchical model
+                    var items = this.files.toJSON(),
+                        jsonString = JSON.stringify(items, null, 2);
+
+                    return jsonString.replace(/\n/gi, "\n    ")
+                                .replace(/\n\s*("name)/gi, " $1")
+                                .replace(/\n\s*("type)/gi, " $1")
+                                .replace(/\n\s*("expanded)/gi, " $1")
+                                .replace(/\n\s*("items)/gi, " $1")
+                                .replace(/(\s*)]\n\s*}/gi, "] }");
+                }
+            });
+
+            kendo.bind($("#example"), viewModel);
+        });
+    </script>
+
+    <style scoped>
+        .current-state {
+            float: right;
+            width: 300px;
+            margin: 60px 85px 0 0;
+        }
+
+        .current-state pre {
+            font-size: 12px;
+        }
+
+        .files h3 {
+            color: #787878;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .files {
+            float: left;
+            clear: left;
+            width: 300px;
+            margin: 30px 0;
+            padding: 60px 0 30px 30px;
+        }
+
+        .files .k-treeview {
+            height: 400px;
+        }
+
+        .files .k-sprite {
+            background-image: url("../../content/web/treeview/coloricons-sprite.png");
+        }
+
+        .rootfolder { background-position: 0 0; }
+        .folder { background-position: 0 -16px; }
+        .pdf { background-position: 0 -32px; }
+        .html { background-position: 0 -48px; }
+        .image { background-position: 0 -64px; }
+    </style>
+</div>
