@@ -16,6 +16,7 @@ kendo_module({
 
         dataviz = kendo.dataviz,
         template = kendo.template,
+        defined = dataviz.defined,
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
         duration = dataviz.duration,
@@ -110,9 +111,7 @@ kendo_module({
                         width: 2
                     }
                 },
-                hint: {
-                    visible: true
-                },
+                hint: {},
                 visible: true
             },
             tooltip: {
@@ -143,6 +142,10 @@ kendo_module({
 
             navi.chart = chart;
             navi.options = chart.options.navigator;
+
+            if (!defined(navi.options.hint.visible)) {
+                navi.options.hint.visible = navi.options.visible;
+            }
 
             chart.bind(DRAG, proxy(navi._drag, navi));
             chart.bind(DRAG_END, proxy(navi._dragEnd, navi));
