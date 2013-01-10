@@ -6959,6 +6959,15 @@ kendo_module({
             max: MAX_VALUE
         },
 
+        destroy: function() {
+            var that = this,
+                userEvents = that.userEvents;
+
+            if (userEvents) {
+                userEvents.destroy();
+            }
+        },
+
         _start: function(e) {
             var that = this,
                 options = that.options,

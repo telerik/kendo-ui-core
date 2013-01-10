@@ -137,6 +137,35 @@
                     same(chart.options.categoryAxis[0].max, new Date("2012/01/01"));
                 });
 
+                test("navigator redrawn on main DS change", 1, function() {
+                    stubMethod(Navigator.fn, "_redrawSelf", function() {
+                        ok(true);
+                    }, function() {
+                        createStockChart({
+                            autoBind: false,
+                            navigator: {
+                                dataSource: null
+                            }
+                        });
+                        chart.dataSource.fetch();
+                    });
+                });
+
+                test("slaves redrawn fully on main DS change", 2, function() {
+                    stubMethod(Chart.fn, "_redraw", function() {
+                        ok(true);
+                        Chart.fn._stubbed._redraw.call(this);
+                    }, function() {
+                        createStockChart({
+                            autoBind: false,
+                            navigator: {
+                                dataSource: null
+                            }
+                        });
+                        chart.dataSource.fetch();
+                    });
+                });
+
                 // ------------------------------------------------------------
                 module("Data Binding / With Navigator Data Source", {
                     setup: function() {

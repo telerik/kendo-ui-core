@@ -159,13 +159,16 @@ kendo_module({
             var chart = this,
                 navigator = chart._navigator;
 
-            if (!navigator) {
-                navigator = chart._navigator = new Navigator(chart);
+            if (navigator && navigator.dataSource) {
+                navigator.redrawSlaves();
+            } else {
+                if (!navigator) {
+                    navigator = chart._navigator = new Navigator(chart);
+                }
+
                 navigator.filterAxes();
                 Chart.fn._redraw.call(chart);
                 navigator.redraw();
-            } else {
-                navigator.redrawSlaves();
             }
         },
 
@@ -174,6 +177,10 @@ kendo_module({
 
             Chart.fn._onDataChanged.call(chart);
             chart._dataBound = true;
+
+            if (chart._navigator && !chart._navigator.dataSource) {
+                chart._navigator.redraw();
+            }
         },
 
         destroy: function() {
@@ -259,9 +266,8 @@ kendo_module({
             }
 
             if (chart._model) {
-               navi._redrawSelf();
-               navi.filterAxes();
                navi.redraw();
+               navi.filterAxes();
 
                if (!chart.options.dataSource || (chart.options.dataSource && chart._dataBound)) {
                    navi.redrawSlaves();
@@ -279,12 +285,15 @@ kendo_module({
         },
 
         redraw: function() {
+            this._redrawSelf();
+
             var navi = this,
                 chart = navi.chart,
                 options = navi.options,
                 axis = navi.mainAxis(),
                 groups = axis.options.categories,
                 select = navi.options.select || {},
+                selection = navi.selection,
                 min = 0,
                 max = groups.length - 1,
                 from = min,
@@ -299,11 +308,16 @@ kendo_module({
                     to = lteDateIndex(groups, toDate(select.to));
                 }
 
-                chart._selection = new Selection(chart, axis, {
-                    from: from,
-                    to: to,
+                if (selection) {
+                    selection.destroy();
+                    selection.wrapper.remove();
+                }
+
+                selection = navi.selection = new Selection(chart, axis, {
                     min: min,
                     max: max,
+                    from: from,
+                    to: to,
                     selectStart: $.proxy(navi._selectStart, navi),
                     select: $.proxy(navi._select, navi),
                     selectEnd: $.proxy(navi._selectEnd, navi),
@@ -348,7 +362,7 @@ kendo_module({
                 axis = chart._plotArea.categoryAxis,
                 baseUnit = axis.options.baseUnit,
                 range = e.axisRanges[axis.options.name],
-                selection = chart._selection,
+                selection = navi.selection,
                 selectionDuration = duration(
                     axis.options.min, axis.options.max, axis.options.baseUnit
                 ),
@@ -412,8 +426,7 @@ kendo_module({
             var navi = this,
                 axis = navi.mainAxis(),
                 groups = axis.options.categories,
-                chart = navi.chart,
-                selection = chart._selection,
+                selection = navi.selection,
                 src = selection.options,
                 dst = navi.options.select;
 
@@ -431,36 +444,42 @@ kendo_module({
 
         filterAxes: function() {
             var navi = this,
-                mainAxis = navi.mainAxis(),
                 categories,
                 select = navi.options.select || {},
                 chart = navi.chart,
-                slaveAxes = chart.options.categoryAxis,
+                allAxes = chart.options.categoryAxis,
                 from = select.from,
                 to = select.to,
+                min,
+                max,
                 i,
                 axis;
 
-            if (mainAxis) {
-                categories = mainAxis.options.categories;
-                if (categories.length > 0) {
-                    var min = toTime(categories[0]),
+            for (i = 0; i < allAxes.length; i++) {
+                axis = allAxes[i];
+                if (axis.name === NAVIGATOR_AXIS) {
+                    categories = axis.categories;
+                    if (categories && categories.length > 0) {
+                        min = toTime(categories[0]);
                         max = toTime(last(categories));
 
-                    from = toTime(from);
-                    if (from < min || from > max) {
-                        from = toDate(min);
-                    }
+                        from = toTime(from);
+                        if (from < min || from > max) {
+                            from = toDate(min);
+                        }
 
-                    to = toTime(to);
-                    if (to < min || to > max) {
-                        to = toDate(max);
+                        to = toTime(to);
+                        if (to < min || to > max) {
+                            to = toDate(max);
+                        }
+
+                        break;
                     }
                 }
             }
 
-            for (i = 0; i < slaveAxes.length; i++) {
-                axis = slaveAxes[i];
+            for (i = 0; i < allAxes.length; i++) {
+                axis = allAxes[i];
                 if (axis.pane !== NAVIGATOR_PANE) {
                     axis.min = from;
                     axis.max = to;
@@ -502,7 +521,8 @@ kendo_module({
                 navigatorAxis = navi.mainAxis(),
                 axis = chart._plotArea.categoryAxis,
                 select = navi.options.select,
-                selection = chart._selection;
+                selection = navi.selection,
+                selectionLength = selection.options.to - selection.options.from;
 
             e.originalEvent.preventDefault();
 
@@ -626,7 +646,7 @@ kendo_module({
         categoryAxes = options.categoryAxis = [].concat(options.categoryAxis);
         valueAxes = options.valueAxis = [].concat(options.valueAxis);
 
-        var base = {
+        var base = deepExtend({
             type: "date",
             pane: NAVIGATOR_PANE,
             field: naviOptions.dateField,
@@ -644,7 +664,7 @@ kendo_module({
                 years: [1]
             },
             _overlap: false
-        };
+        }, naviOptions.categoryAxis);
 
         categoryAxes.push(
             deepExtend({}, base, {
