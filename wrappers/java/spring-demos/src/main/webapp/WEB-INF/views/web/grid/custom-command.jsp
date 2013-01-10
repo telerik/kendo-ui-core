@@ -38,6 +38,13 @@
             <kendo:dataSource-schema data="data" total="total" />
             <kendo:dataSource-transport>
                 <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST"  contentType="application/json"/>
+                <kendo:dataSource-transport-parameterMap>
+	            	<script>
+	             		function parameterMap(options) { 
+	            			return JSON.stringify(options);
+	             		}
+	            	</script>
+	            </kendo:dataSource-transport-parameterMap>
             </kendo:dataSource-transport>
         </kendo:dataSource>
     </kendo:grid>

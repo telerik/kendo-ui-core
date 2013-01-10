@@ -13,10 +13,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
-    private static final String BATCH_PARAMETERMAP = "function(options,type){if(type===\"read\"){return JSON.stringify(options);}else{return JSON.stringify(options.models);}}";
-    private static final String PARAMETERMAP = "function(options,type){return JSON.stringify(options);}";
-    
+public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {    
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
@@ -29,13 +26,6 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //<< doEndTag
 
-        if (getParameterMap() == null && (parent.getType() == null || !parent.getType().equals("odata"))) {
-            if (parent.isSet("batch") && parent.getBatch()) {
-                setParameterMap(BATCH_PARAMETERMAP);
-            } else {
-                setParameterMap(PARAMETERMAP);
-            }
-        }
         return super.doEndTag();
     }
 

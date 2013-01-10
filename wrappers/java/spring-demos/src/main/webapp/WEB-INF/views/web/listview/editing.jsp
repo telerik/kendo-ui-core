@@ -23,6 +23,13 @@
                 <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json"/>
                 <kendo:dataSource-transport-update url="${updateUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-destroy url="${destroyUrl}" dataType="json" type="POST" contentType="application/json" />
+                 <kendo:dataSource-transport-parameterMap>
+                	<script>
+	                	function parameterMap(options,type) {
+	                		return JSON.stringify(options);	                		
+	                	}
+                	</script>
+                </kendo:dataSource-transport-parameterMap>
 		</kendo:dataSource-transport>
 		<kendo:dataSource-schema data="data" total="total">
 			<kendo:dataSource-schema-model id="productId">

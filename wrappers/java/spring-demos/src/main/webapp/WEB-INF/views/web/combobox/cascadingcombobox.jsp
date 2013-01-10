@@ -17,6 +17,13 @@
             <kendo:dataSource>
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${categoriesUrl}" type="POST" contentType="application/json"/>
+                   <kendo:dataSource-transport-parameterMap>
+	                	<script>
+		                	function parameterMap(options,type) { 		                		
+		                		return JSON.stringify(options);		                		
+		                	}
+	                	</script>
+	                </kendo:dataSource-transport-parameterMap>
                 </kendo:dataSource-transport>
                 <kendo:dataSource-schema data="data" total="total">
                 </kendo:dataSource-schema>
@@ -31,6 +38,13 @@
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${productsUrl}" type="POST" contentType="application/json"/>
+                   <kendo:dataSource-transport-parameterMap>
+	                	<script>
+		                	function parameterMap(options,type) { 		                		
+		                		return JSON.stringify(options);		                		
+		                	}
+	                	</script>
+	                </kendo:dataSource-transport-parameterMap>
                 </kendo:dataSource-transport>
                 <kendo:dataSource-schema data="data" total="total">
                 </kendo:dataSource-schema>
@@ -45,6 +59,13 @@
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${ordersUrl}" type="POST" contentType="application/json"/>
+                   <kendo:dataSource-transport-parameterMap>
+	                	<script>
+		                	function parameterMap(options,type) { 		                		
+		                		return JSON.stringify(options);		                		
+		                	}
+	                	</script>
+	                </kendo:dataSource-transport-parameterMap>
                 </kendo:dataSource-transport>
             </kendo:dataSource>
         </kendo:comboBox>

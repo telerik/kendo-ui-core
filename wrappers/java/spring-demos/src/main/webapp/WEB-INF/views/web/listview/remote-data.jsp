@@ -10,6 +10,13 @@
 	<kendo:dataSource pageSize="12" serverPaging="true">
 		<kendo:dataSource-transport>
 			<kendo:dataSource-transport-read url="${transportReadUrl}" contentType="application/json" type="POST"/>
+			<kendo:dataSource-transport-parameterMap>
+              	<script>
+	               	function parameterMap(options,type) { 		                		
+	               		return JSON.stringify(options);		                		
+	               	}
+              	</script>
+            </kendo:dataSource-transport-parameterMap>
 		</kendo:dataSource-transport>
 		<kendo:dataSource-schema data="data" total="total"></kendo:dataSource-schema>
 	</kendo:dataSource>		

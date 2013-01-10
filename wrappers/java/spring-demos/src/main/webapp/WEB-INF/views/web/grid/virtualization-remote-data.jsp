@@ -16,7 +16,14 @@
         </kendo:grid-columns>
         <kendo:dataSource pageSize="100" serverPaging="true" serverSorting="true">
             <kendo:dataSource-transport>            	
-                <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST"  contentType="application/json"/>                
+                <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST"  contentType="application/json"/>  
+                <kendo:dataSource-transport-parameterMap>
+                	<script>
+	                	function parameterMap(options) { 
+                			return JSON.stringify(options);
+	                	}
+                	</script>
+                </kendo:dataSource-transport-parameterMap>              
             </kendo:dataSource-transport>
             <kendo:dataSource-schema data="data" total="total" groups="data">
                     <kendo:dataSource-schema-model>
