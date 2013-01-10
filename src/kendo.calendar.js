@@ -168,6 +168,14 @@
             Widget.fn.destroy.call(that);
         },
 
+        current: function() {
+            return this._current;
+        },
+
+        view: function() {
+            return this._view;
+        },
+
         focus: function(table) {
             table = table || this._table;
             this._bindTable(table);
