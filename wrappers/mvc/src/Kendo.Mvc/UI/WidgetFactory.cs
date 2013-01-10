@@ -1019,6 +1019,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="ColorPicker"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPickerFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual ColorPickerBuilder ColorPickerFor(Expression<Func<TModel, String>> expression)
+        {
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+
+            return ColorPicker()
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value(metadata.Model as String);
+        }
+
+        /// <summary>
         /// Creates a new <see cref="DatePicker"/>.
         /// </summary>
         /// <example>

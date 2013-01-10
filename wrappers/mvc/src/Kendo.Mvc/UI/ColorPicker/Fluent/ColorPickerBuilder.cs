@@ -105,5 +105,37 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the range of colors that the user can pick from.
+        /// </summary>
+        /// <param name="palette">One of the preset palettes of colors</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPicker()
+        ///             .Name("ColorPicker")
+        ///             .Palette(ColorPickerPalette.WebSafe)
+        /// %&gt;
+        /// </code>
+        /// </example>
+
+        /// <summary>
+        /// Enables or disables the picker.
+        /// </summary>
+        /// <param name="value">Whether the picker is enabled</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPicker()
+        ///             .Name("ColorPicker")
+        ///             .Enable(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ColorPickerBuilder Enable(bool value)
+        {
+            Component.Enabled = value;
+
+            return this;
+        }
     }
 }
