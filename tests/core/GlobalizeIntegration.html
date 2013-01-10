@@ -71,6 +71,24 @@
 
                 equal(result, 1.1);
             });
+
+            test("kendo.parseFloat returns null if value is undefined", function() {
+                var result = kendo.parseFloat(undefined);
+
+                equal(result, null);
+            });
+
+            test("kendo.parseDate returns null if value is undefined", function() {
+                var result = kendo.parseDate(undefined);
+
+                equal(result, null);
+            });
+
+            test("kendo.toString returns null if value is undefined", function() {
+                var result = kendo.toString(undefined, "n");
+
+                equal(result, null);
+            });
         </script>
     </body>
 </html>
