@@ -573,7 +573,8 @@ kendo_module({
                 posRange = maxPos - minPos,
                 range = options.max - options.min,
                 scale = posRange / range,
-                offset = middle - options.min;
+                offset = middle - options.min,
+                hintTemplate;
 
             if (hint._hideTimeout) {
                 clearTimeout(hint._hideTimeout);
