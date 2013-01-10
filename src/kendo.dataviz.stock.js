@@ -368,7 +368,7 @@ kendo_module({
 
             to = toDate(math.min(
                 addDuration(from, selectionDuration, baseUnit),
-                dataviz.last(navigatorAxis.options.categories)
+                dataviz.last(groups)
             ));
 
             navi.options.select = { from: from, to: to };
@@ -379,14 +379,9 @@ kendo_module({
             }
 
             selection.set(
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    from
-                ),
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    to
-            ));
+                lteDateIndex(groups, from),
+                lteDateIndex(groups, to) + 1
+            );
 
             navi.showHint(from, to);
         },
