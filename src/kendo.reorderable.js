@@ -54,7 +54,7 @@ kendo_module({
                     if (!same) {
                         that.reorderDropCue.css({
                              height: dropTarget.outerHeight(),
-                             top: element.offset().top,
+                             top: dropTarget.offset().top,
                              left: dropTarget.offset().left + (dropTarget.index() > that._draggable.index() ? dropTarget.outerWidth() : 0)
                         })
                         .appendTo(document.body);
