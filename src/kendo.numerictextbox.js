@@ -257,7 +257,7 @@
             clearTimeout(that._focusing);
             that._focusing = setTimeout(function() {
                 var input = e.target,
-                    idx = caret(input),
+                    idx = caret(input)[0],
                     value = input.value.substring(0, idx),
                     format = that._format(that.options.format),
                     group = format[","],
@@ -397,7 +397,10 @@
                 numberFormat = that._format(options.format),
                 separator = numberFormat[POINT],
                 precision = options.decimals,
-                idx = caret(element),
+                selection = caret(element),
+                selectionStart = selection[0],
+                selectionEnd = selection[1],
+                textSelected = selectionStart === 0 && selectionEnd === value.length,
                 prevent = true,
                 number;
 
@@ -421,16 +424,21 @@
                 if (shiftKey) {
                     number = parseInt(String.fromCharCode(key), 10);
                     if (!isNaN(number)) {
-                        element.value = value.substring(0, idx) + number + value.substring(idx);
+                        number = number + "";
+                        element.value = value.substring(0, selectionStart) + number + value.substring(selectionEnd);
+                        caret(element, selectionStart + number.length);
                         prevent = true;
                     }
                 }
-            } else if (decimals[key] === separator && precision > 0 && value.indexOf(separator) == -1) {
+            } else if ((decimals[key] === separator || key == 110) && precision > 0 && (value.indexOf(separator) == -1 || textSelected)) {
+                if (key == 110) {
+                    element.value = value.substring(0, selectionStart) + separator + value.substring(selectionEnd);
+                    caret(element, selectionStart + separator.length);
+                } else {
+                    prevent = false;
+                }
+            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109 || key == 173) && selectionStart === 0) { //sign
                 prevent = false;
-            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109 || key == 173) && idx === 0) { //sign
-                prevent = false;
-            } else if (key == 110 && precision > 0 && value.indexOf(separator) == -1) {
-                element.value = value.substring(0, idx) + separator + value.substring(idx);
             }
 
             return prevent;
@@ -579,7 +587,14 @@
         var range,
             isPosition = position !== undefined;
 
-        if (document.selection) {
+        if (element.selectionStart !== undefined) {
+            if (isPosition) {
+                element.focus();
+                element.setSelectionRange(position, position);
+            } else {
+                position = [element.selectionStart, element.selectionEnd];
+            }
+        } else if (document.selection) {
             if ($(element).is(":visible")) {
                 element.focus();
             }
@@ -589,19 +604,15 @@
                 range.select();
             } else {
                 var rangeElement = element.createTextRange(),
-                    rangeDuplicated = rangeElement.duplicate();
+                    rangeDuplicated = rangeElement.duplicate(),
+                    selectionStart, selectionEnd;
+
                     rangeElement.moveToBookmark(range.getBookmark());
                     rangeDuplicated.setEndPoint('EndToStart', rangeElement);
+                    selectionStart = rangeDuplicated.text.length;
+                    selectionEnd = selectionStart + rangeElement.text.length;
 
-                position = rangeDuplicated.text.length;
-
-            }
-        } else if (element.selectionStart !== undefined) {
-            if (isPosition) {
-                element.focus();
-                element.setSelectionRange(position, position);
-            } else {
-                position = element.selectionStart;
+                position = [selectionStart, selectionEnd];
             }
         }
 
