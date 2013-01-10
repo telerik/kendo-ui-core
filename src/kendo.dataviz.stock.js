@@ -108,6 +108,9 @@ kendo_module({
                     line: {
                         width: 2
                     }
+                },
+                hint: {
+                    visible: true
                 }
             },
             tooltip: {
@@ -165,17 +168,21 @@ kendo_module({
                     to = lteDateIndex(groups, toDate(select.to));
                 }
 
-                chart._selection = new Selection(chart, axis, {
-                    from: from,
-                    to: to,
-                    min: min,
-                    max: max,
-                    selectStart: $.proxy(navi._selectStart, navi),
-                    select: $.proxy(navi._select, navi),
-                    selectEnd: $.proxy(navi._selectEnd, navi)
-                });
+                if (navi.options.visible) {
+                    chart._selection = new Selection(chart, axis, {
+                        from: from,
+                        to: to,
+                        min: min,
+                        max: max,
+                        selectStart: $.proxy(navi._selectStart, navi),
+                        select: $.proxy(navi._select, navi),
+                        selectEnd: $.proxy(navi._selectEnd, navi)
+                    });
+                }
 
-                navi.hint = new NavigatorHint(chart.element, { min: groups[0], max: dataviz.last(groups) });
+                if (navi.options.hint.visible) {
+                    navi.hint = new NavigatorHint(chart.element, { min: groups[0], max: dataviz.last(groups) });
+                }
             }
         },
 
@@ -214,30 +221,39 @@ kendo_module({
 
             navi.options.select = { from: from, to: to };
 
-            if (navi._realtimeDrag()) {
-                navi.applySelection();
-                navi.redrawSlaves();
+            if (selection) {
+                if (navi._realtimeDrag()) {
+                    navi.applySelection();
+                    navi.redrawSlaves();
+                }
+
+                selection.set(
+                    lteDateIndex(
+                        navigatorAxis.options.categories,
+                        from
+                    ),
+                    lteDateIndex(
+                        navigatorAxis.options.categories,
+                        to
+                ));
             }
 
-            selection.set(
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    from
-                ),
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    to
-            ));
-
-            navi.showHint(from, to);
+            if (navi.hint) {
+                navi.showHint(from, to);
+            }
         },
 
         _dragEnd: function() {
             var navi = this;
 
-            navi.applySelection();
-            navi.redrawSlaves();
-            navi.hint.hide();
+            if (navi.selection) {
+                navi.applySelection();
+                navi.redrawSlaves();
+            }
+
+            if (navi.hint) {
+                navi.hint.hide();
+            }
         },
 
         _realtimeDrag: function() {
@@ -304,8 +320,7 @@ kendo_module({
                 navigatorAxis = navi.mainAxis(),
                 axis = chart._plotArea.categoryAxis,
                 select = navi.options.select,
-                selection = chart._selection,
-                selectionLength = selection.options.to - selection.options.from;
+                selection = chart._selection;
 
             e.originalEvent.preventDefault();
 
@@ -313,29 +328,34 @@ kendo_module({
                 delta *= ZOOM_ACCELERATION;
             }
 
-            if (selectionLength > 1) {
-                selection.expandLeft(delta);
-                navi.readSelection();
-            } else {
-                axis.options.min = select.from;
-                select.from = axis.scaleRange(-e.delta).min;
+            if (selection) {
+                if (selection.options.to - selection.options.from > 1) {
+                    selection.expandLeft(delta);
+                    navi.readSelection();
+                } else {
+                    axis.options.min = select.from;
+                    select.from = axis.scaleRange(-e.delta).min;
+                }
+
+                if (!kendo.support.touch) {
+                    navi.applySelection();
+                    navi.redrawSlaves();
+                }
+
+                selection.set(
+                    lteDateIndex(
+                        navigatorAxis.options.categories,
+                        navi.options.select.from
+                    ),
+                    lteDateIndex(
+                        navigatorAxis.options.categories,
+                        navi.options.select.to
+                ));
             }
 
-            if (!kendo.support.touch) {
-                navi.applySelection();
-                navi.redrawSlaves();
+            if (navi.hint) {
+                navi.showHint(navi.options.select.from, navi.options.select.to);
             }
-            navi.showHint(navi.options.select.from, navi.options.select.to);
-
-            selection.set(
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    navi.options.select.from
-                ),
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    navi.options.select.to
-            ));
         },
 
         _zoomEnd: function(e) {
@@ -398,11 +418,15 @@ kendo_module({
         themeOptions = themeOptions || {};
 
         var naviOptions = deepExtend({}, themeOptions.navigator, options.navigator),
-            panes = options.panes = [].concat(options.panes);
+            panes = options.panes = [].concat(options.panes),
+            paneOptions = deepExtend({}, naviOptions.pane, { name: NAVIGATOR_PANE });
 
-        panes.push(deepExtend(
-            {}, naviOptions.pane, { name: NAVIGATOR_PANE })
-        );
+        if (!naviOptions.visible) {
+            paneOptions.visible = false;
+            paneOptions.height = 0.1;
+        }
+
+        panes.push(paneOptions);
 
         Navigator.attachAxes(options);
         Navigator.attachSeries(options, naviOptions, themeOptions);

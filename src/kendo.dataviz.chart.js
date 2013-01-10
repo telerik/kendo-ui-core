@@ -4906,7 +4906,8 @@ kendo_module({
             shrinkToFit: true,
             title: {
                 align: LEFT
-            }
+            },
+            visible: true
         },
 
         appendAxis: function(axis) {
@@ -4957,7 +4958,7 @@ kendo_module({
 
             BoxElement.fn.reflow.call(pane, targetBox);
 
-            if(pane.title) {
+            if (pane.title) {
                 pane.contentBox.y1 += pane.title.box.height();
             }
         },
@@ -4967,7 +4968,8 @@ kendo_module({
                 elements = CategoricalChart.fn.getViewElements.call(pane, view),
                 group = view.createGroup({
                     id: pane.options.id
-                });
+                }),
+                result = [];
 
             group.children = elements.concat(
                 pane.renderGridLines(view),
@@ -4976,7 +4978,11 @@ kendo_module({
 
             pane.view = view;
 
-            return [group];
+            if (pane.options.visible) {
+                result = [group];
+            }
+
+            return result;
         },
 
         renderGridLines: function(view) {
