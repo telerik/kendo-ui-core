@@ -22,7 +22,7 @@
     </head>
     <body class="k-default">
         <h3>The Boeing Company (NYSE:BA)</h3>
-        <div id="chart" style="width: 900px; height: 500px;"></div>
+        <div id="chart" style="width: 900px; height: 500px; border: 1px solid red;"></div>
         <script>
             $(function() {
                 $("#chart").kendoStockChart({
@@ -71,7 +71,7 @@
                         select: {
                             from: "2011/10/05"
                         },
-                        visible: false
+                        visible: true
                     },
                     dragStart: function(e) { console.log("dragStart", e); },
                     drag: function(e) { console.log("drag", e); },
@@ -79,7 +79,7 @@
                     zoomStart: function(e) { console.log("zoomStart", e); },
                     zoom: function(e) { console.log("zoom", e); },
                     zoomEnd: function(e) { console.log("zoomEnd", e); },
-                    selectStart: function(e) { e.preventDefault(); e.preventDefault(); },
+                    selectStart: function(e) {  },
                     selectEnd: function(e) { console.log("selectEnd", e); }
                 });
             });

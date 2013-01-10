@@ -4898,7 +4898,8 @@
             shrinkToFit: true,
             title: {
                 align: LEFT
-            }
+            },
+            visible: true
         },
 
         appendAxis: function(axis) {
@@ -4949,7 +4950,7 @@
 
             BoxElement.fn.reflow.call(pane, targetBox);
 
-            if(pane.title) {
+            if (pane.title) {
                 pane.contentBox.y1 += pane.title.box.height();
             }
         },
@@ -4959,7 +4960,8 @@
                 elements = CategoricalChart.fn.getViewElements.call(pane, view),
                 group = view.createGroup({
                     id: pane.options.id
-                });
+                }),
+                result = [];
 
             group.children = elements.concat(
                 pane.renderGridLines(view),
@@ -4968,7 +4970,11 @@
 
             pane.view = view;
 
-            return [group];
+            if (pane.options.visible) {
+                result = [group];
+            }
+
+            return result;
         },
 
         renderGridLines: function(view) {
