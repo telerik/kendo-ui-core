@@ -50,6 +50,22 @@
                         <li class="k-item k-state-default k-last"><span class="k-link">Sub Item 2</span></li>
                     </ul>
                 </li>
+                <li>Fourth item
+                    <ul>
+                        <li>
+                            <div id="template">
+                                <h2>Around the Globe</h2>
+                                <ol>
+                                    <li>United States</li>
+                                    <li>Europe</li>
+                                    <li>Canada</li>
+                                    <li>Australia</li>
+                                </ol>
+                                <button class="k-button">See full list</button>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
             </ul>
 
 <script type="text/javascript">
@@ -77,6 +93,13 @@
             menu.wrapper.focus();
 
             ok(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
+        });
+
+        test("Template focus focuses the parent Menu item", function () {
+            var template = menu.element.find("#template");
+            template.focus();
+
+            ok(template.parents(".k-item").eq(1).hasClass(FOCUSEDSTATE));
         });
 
         test('Left and right arrows move focus between first and second item', function() {
