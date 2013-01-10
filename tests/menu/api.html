@@ -300,6 +300,15 @@
             m.destroy();
         });
 
+        test("Add dynamic item with cssClass", function () {
+            var m = new kendo.ui.Menu("<ul></ul>");
+
+            m.append({ text: "test", cssClass: "cssClass" });
+
+            ok(m.element.find(".cssClass")[0]);
+            m.destroy();
+        });
+
 </script>
 
     <h1 id="qunit-header">kendo.ui.Menu Tests</h1>
