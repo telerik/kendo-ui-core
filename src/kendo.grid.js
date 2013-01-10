@@ -26,6 +26,9 @@
         NAVROW = "tr:not(.k-footer-template):visible",
         NAVCELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
         FIRSTNAVITEM = NAVROW + ":first>" + NAVCELL + ":first",
+        HEADERCELLS = "th.k-header:not(.k-group-cell,.k-hierarchy-cell)",
+        GROUPINGDRAGGABLES = HEADERCELLS + ":visible[" + kendo.attr("field") + "]",
+        GROUPINGFILTER =  HEADERCELLS + "[" + kendo.attr("field") + "]",
         NS = ".kendoGrid",
         EDIT = "edit",
         SAVE = "save",
@@ -867,7 +870,7 @@
 
                 that._draggableInstance = that.wrapper.kendoDraggable({
                     group: kendo.guid(),
-                    filter: "th.k-header:not(.k-group-cell,.k-hierarchy-cell)",
+                    filter: ">.k-grid-header " + HEADERCELLS + ",>table>.k-grid-header " + HEADERCELLS,
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
                             .css({
@@ -888,7 +891,7 @@
         _reorderable: function() {
             var that = this;
             if (that.options.reorderable) {
-                that.thead.kendoReorderable({
+                that.wrapper.kendoReorderable({
                     draggable: that._draggableInstance,
                     change: function(e) {
                         var newIndex = inArray(that.columns[e.newIndex], that.columns),
@@ -1616,8 +1619,8 @@
                     draggable: that._draggableInstance,
                     groupContainer: ">div.k-grouping-header",
                     dataSource: that.dataSource,
-                    draggableElements: ".k-header:not(.k-group-cell,.k-hierarchy-cell):visible[" + kendo.attr("field") + "]",
-                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
+                    draggableElements: ">.k-grid-header " + GROUPINGDRAGGABLES + ",>table>.k-grid-header " + GROUPINGDRAGGABLES,
+                    filter: ">.k-grid-header " + GROUPINGFILTER + ",>table>.k-grid-header " + GROUPINGFILTER,
                     allowDrag: that.options.reorderable
                 }));
             }

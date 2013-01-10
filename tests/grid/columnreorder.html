@@ -50,23 +50,23 @@
                 strictEqual(Grid.fn.options.reorderable, false);
             });
 
-            test("Reorderable widget is initialized in Grid header", function() {
+            test("Reorderable widget is initialized in Grid wrapper", function() {
                 var grid = new Grid(table, {
                     reorderable: true,
                     columns: ["foo", "bar"],
                     dataSource: data
                 });
 
-                ok(grid.thead.data("kendoReorderable") instanceof kendo.ui.Reorderable);
+                ok(grid.wrapper.data("kendoReorderable") instanceof kendo.ui.Reorderable);
             });
 
-            test("Reorderable widget is initialized in Grid header when no columns are defined", function() {
+            test("Reorderable widget is initialized in Grid wrapper when no columns are defined", function() {
                 var grid = new Grid(table, {
                     reorderable: true,
                     dataSource: data
                 });
 
-                ok(grid.thead.data("kendoReorderable") instanceof kendo.ui.Reorderable);
+                ok(grid.wrapper.data("kendoReorderable") instanceof kendo.ui.Reorderable);
             });
 
             test("columnReorder reorder col elements", function() {
