@@ -105,7 +105,7 @@ namespace Kendo.Mvc.UI
                 options["filter"] = Filter;
             }
 
-            if (SelectedIndex != null)
+            if (SelectedIndex != null && SelectedIndex > -1)
             {
                 options["index"] = SelectedIndex;
             }

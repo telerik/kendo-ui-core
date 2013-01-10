@@ -62,7 +62,7 @@ namespace Kendo.Mvc.UI
                 options["dataValueField"] = DataValueField;
             }
 
-            if (SelectedIndex != null)
+            if (SelectedIndex != null && SelectedIndex > -1)
             {
                 options["index"] = SelectedIndex;
             }
