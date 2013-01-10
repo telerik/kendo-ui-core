@@ -168,7 +168,9 @@ namespace Kendo.Mvc.UI
                 .Add("title", title)
                 .Add("modal", PopUp.Modal)
                 .Add("draggable", PopUp.Draggable)
-                .Add("resizable", PopUp.ResizingSettings.Enabled);
+                .Add("resizable", PopUp.ResizingSettings.Enabled)
+                .Add("width", PopUp.Width, 0)
+                .Add("height", PopUp.Height, 0);
 
             return result;
         }
