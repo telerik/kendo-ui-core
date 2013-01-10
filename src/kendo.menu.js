@@ -37,11 +37,14 @@
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item:not(.k-state-disabled)",
         linkSelector = ".k-item:not(.k-state-disabled) > .k-link",
+        exclusionSelector = ":not(.k-item.k-separator)",
+        nextSelector = exclusionSelector + ":eq(0)",
+        lastSelector = exclusionSelector + ":last",
         templateSelector = "div:not(.k-animation-container,.k-list-container)",
 
         templates = {
             content: template(
-                "<div class='k-content k-group'>#= content(item) #</div>"
+                "<div class='k-content k-group' tabindex='-1'>#= content(item) #</div>"
             ),
             group: template(
                 "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) # role='menu' aria-hidden='true'>" +
@@ -255,20 +258,14 @@
 
             that._tabindex();
 
-            element.on("touchstart", function (e) {
-                        that.element[0].blur();
-                        that.element[0].focus();
-                        setTimeout(function () {
-                            that._moveHover([], $(kendo.eventTarget(e)).closest(allItemsSelector));
-                        }, 200); // Focus happens after click in WebKit.
-                    })
-                    .on("MSPointerDown", function (e) {
-                        that._oldHoverItem = $(e.target).closest(allItemsSelector);
-                    })
+            that._focusProxy = proxy(that._focusHandler, that);
+
+            element.on("touchstart MSPointerDown", that._focusProxy)
                    .on(CLICK + NS, disabledSelector, false)
                    .on(CLICK + NS, itemSelector, proxy(that._click , that))
                    .on("keydown" + NS, proxy(that._keydown, that))
                    .on("focus" + NS, proxy(that._focus, that))
+                   .on("focus" + NS, ".k-content", proxy(that._focus, that))
                    .on("blur" + NS, proxy(that._removeHoverItem, that))
                    .on(MOUSEENTER + NS, itemSelector, proxy(that._mouseenter, that))
                    .on(MOUSELEAVE + NS, itemSelector, proxy(that._mouseleave, that))
@@ -642,7 +639,7 @@
         },
 
         _removeHoverItem: function() {
-            var oldHoverItem = this._oldHoverItem;
+            var oldHoverItem = this._hoverItem();
 
             if (oldHoverItem && oldHoverItem.hasClass(FOCUSEDSTATE)) {
                 oldHoverItem.removeClass(FOCUSEDSTATE);
@@ -656,7 +653,14 @@
 
             element.addClass("k-widget k-reset k-header " + MENU).addClass(MENU + "-" + this.options.orientation);
 
-            element.find("li > ul").addClass("k-group").attr("role", "menu").attr("aria-hidden", element.is(":visible"));
+            element.find("li > ul")
+                   .addClass("k-group")
+                   .attr("role", "menu")
+                   .attr("aria-hidden", element.is(":visible"))
+                   .end()
+                   .find("li > div")
+                   .addClass("k-content")
+                   .attr("tabindex", "-1"); // Capture the focus before the Menu
 
             items = element.find("> li,.k-group > li");
 
@@ -768,9 +772,16 @@
                 target = e.target,
                 hoverItem = that._hoverItem();
 
+            if (target != that.wrapper[0]) {
+                e.stopPropagation();
+                $(target).closest(".k-content").closest(".k-group").closest(".k-item").addClass(FOCUSEDSTATE);
+                that.wrapper.focus();
+                return;
+            }
+
             if (target == that.wrapper[0] && hoverItem.length) {
                 that._moveHover([], hoverItem);
-            } else if (target == that.wrapper[0] && !that._oldHoverItem) {
+            } else if (target == that.wrapper[0] && !that._oldHoverItem && document.activeElement != that.wrapper[0]) {
                 that._moveHover([], that.wrapper.children().first());
             }
         },
@@ -826,7 +837,7 @@
         },
 
         _hoverItem: function() {
-            return this.wrapper.find("li.k-item.k-state-hover").filter(":visible");
+            return this.wrapper.find(".k-item.k-state-hover,.k-item.k-state-focused").filter(":visible");
         },
 
         _itemBelongsToVertival: function (item) {
@@ -890,12 +901,9 @@
                 parentItem;
 
             if (!belongsToVertical) {
-                nextItem = item.next();
-                if (nextItem.is(".k-separator")) {
-                    nextItem = nextItem.next();
-                }
+                nextItem = item.nextAll(nextSelector);
                 if (!nextItem.length) {
-                    nextItem = item.parent().children().first();
+                    nextItem = item.prevAll(lastSelector);
                 }
             } else if (hasChildren) {
                 that.open(item);
@@ -903,10 +911,7 @@
             } else if (that.options.orientation == "horizontal") {
                 parentItem = that._findRootParent(item);
                 that.close(parentItem);
-                nextItem = parentItem.next();
-                if (nextItem.is(".k-separator")) {
-                    nextItem = nextItem.next();
-                }
+                nextItem = parentItem.nextAll(nextSelector);
             }
 
             if (nextItem && !nextItem.length) {
@@ -924,21 +929,15 @@
                 nextItem;
 
             if (!belongsToVertical) {
-                nextItem = item.prev();
-                if (nextItem.is(".k-separator")) {
-                    nextItem = nextItem.prev();
-                }
+                nextItem = item.prevAll(nextSelector);
                 if (!nextItem.length) {
-                    nextItem = item.parent().children().last();
+                    nextItem = item.nextAll(lastSelector);
                 }
             } else {
                 nextItem = item.parent().closest(".k-item");
                 that.close(nextItem);
                 if (that._isRootItem(nextItem) && that.options.orientation == "horizontal") {
-                    nextItem = nextItem.prev();
-                    if (nextItem.is(".k-separator")) {
-                        nextItem = nextItem.prev();
-                    }
+                    nextItem = nextItem.prevAll(nextSelector);
                 }
             }
 
@@ -962,10 +961,7 @@
                     nextItem = item.find(".k-group").children().first();
                 }
             } else {
-                nextItem = item.next();
-                if (nextItem.is(".k-separator")) {
-                    nextItem = nextItem.next();
-                }
+                nextItem = item.nextAll(nextSelector);
             }
 
             if (!nextItem.length && item.length) {
@@ -985,10 +981,7 @@
             if (!belongsToVertical) {
                 return;
             } else {
-                nextItem = item.prev();
-                if (nextItem.is(".k-separator")) {
-                    nextItem = nextItem.prev();
-                }
+                nextItem = item.prevAll(nextSelector);
             }
 
             if (!nextItem.length && item.length) {
@@ -1014,6 +1007,18 @@
             }
 
             return nextItem;
+        },
+
+        _focusHandler: function (e) {
+            var that = this,
+                item = $(kendo.eventTarget(e)).closest(allItemsSelector);
+
+            setTimeout(function () {
+                that._moveHover([], item);
+                if (item.children(".k-content")[0]) {
+                    item.parent().closest(".k-item").removeClass(FOCUSEDSTATE);
+                }
+            }, 200);
         },
 
         _animations: function(options) {
