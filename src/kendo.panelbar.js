@@ -121,6 +121,10 @@ kendo_module({
                     result += " k-last";
                 }
 
+                if (item.cssClass) {
+                    result += " " + item.cssClass;
+                }
+
                 return result;
             },
 

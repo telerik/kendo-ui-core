@@ -312,6 +312,15 @@
             p.destroy();
         });
 
+        test("Add dynamic item with cssClass", function () {
+            var p = new kendo.ui.PanelBar("<ul></ul>");
+
+            p.append({ text: "test", cssClass: "cssClass" });
+
+            ok(p.element.find(".cssClass")[0]);
+            p.destroy();
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
