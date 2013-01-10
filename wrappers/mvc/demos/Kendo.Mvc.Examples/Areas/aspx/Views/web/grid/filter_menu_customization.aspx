@@ -18,8 +18,13 @@
     })        
     .Filterable(filterable => filterable
         .Extra(false)
-        .Operators(operators => operators
-            .ForString(str => str.Clear().StartsWith("Starts with"))))
+         .Operators(operators => operators
+            .ForString(str => str.Clear()
+                .StartsWith("Starts with")
+                .IsEqualTo("Is equal to")
+                .IsNotEqualTo("Is not equal to")
+            ))
+        )
 
     .DataSource(dataSource => dataSource
         .Ajax()
