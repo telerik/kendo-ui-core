@@ -171,6 +171,7 @@
             test("110 key (numpad decimal point) should set '.'", function() {
                 var textbox = new NumericTextBox(input);
 
+                textbox.focus();
                 input.pressKey(110);
 
                 equal(input.val(), ".");
@@ -178,6 +179,7 @@
 
             test("110 key (numpad decimal point) should set ',' if BG culture", function() {
                 var textbox = new NumericTextBox(input);
+                textbox.focus();
 
                 kendo.culture("bg-BG");
 
@@ -193,6 +195,7 @@
                     decimals: 0
                 });
 
+                textbox.focus();
                 input.pressKey(110);
 
                 equal(input.val(), "");
@@ -202,6 +205,7 @@
                 var textbox = new NumericTextBox(input),
                     shiftKey = true;
 
+                textbox.focus();
                 ok(textbox._prevent(48 /* 0 */, shiftKey));
                 equal(input.val(), "0");
             });
@@ -210,6 +214,7 @@
                 var textbox = new NumericTextBox(input),
                     shiftKey = true;
 
+                textbox.focus();
                 ok(textbox._prevent(192 /* ` */, shiftKey));
                 equal(input.val(), "");
             });
