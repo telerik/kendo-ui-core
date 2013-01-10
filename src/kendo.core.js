@@ -1403,6 +1403,10 @@ function pad(number, digits, end) {
                 return value;
             }
 
+            if (value === undefined) {
+               return null;
+            }
+
             return globalize.parseFloat(value, culture);
         };
     }
