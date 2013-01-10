@@ -695,6 +695,21 @@
 
                 ok(!calendar._nextArrow.hasClass("k-state-disabled"));
             });
+
+            test("current method returns currently focused date", 1, function() {
+                var calendar = new Calendar(div),
+                    today = new Date();
+
+                today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+                equal(+calendar.current(), +today);
+            });
+
+            test("view method returns current view", 1, function() {
+                var calendar = new Calendar(div);
+
+                equal(calendar.view().name, "month");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
