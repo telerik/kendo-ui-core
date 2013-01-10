@@ -6842,43 +6842,45 @@ kendo_module({
                 to: options.max
             }, options);
 
-            that.wrapper = wrapper = $(that.template(that.options)).appendTo(chartElement);
+            if (that.options.visible) {
+                that.wrapper = wrapper = $(that.template(that.options)).appendTo(chartElement);
 
-            that.selection = wrapper.find(selectorPrefix + "selection");
-            that.leftMask = wrapper.find(selectorPrefix + "mask").first();
-            that.rightMask = wrapper.find(selectorPrefix + "mask").last();
-            that.leftHandle = wrapper.find(selectorPrefix + "leftHandle");
-            that.rightHandle = wrapper.find(selectorPrefix + "rightHandle");
-            that.options.selection = {
-                border: {
-                    left: parseFloat(that.selection.css("border-left-width"), 10),
-                    right: parseFloat(that.selection.css("border-right-width"), 10)
+                that.selection = wrapper.find(selectorPrefix + "selection");
+                that.leftMask = wrapper.find(selectorPrefix + "mask").first();
+                that.rightMask = wrapper.find(selectorPrefix + "mask").last();
+                that.leftHandle = wrapper.find(selectorPrefix + "leftHandle");
+                that.rightHandle = wrapper.find(selectorPrefix + "rightHandle");
+                that.options.selection = {
+                    border: {
+                        left: parseFloat(that.selection.css("border-left-width"), 10),
+                        right: parseFloat(that.selection.css("border-right-width"), 10)
+                    }
+                };
+
+                that.leftHandle.css("top", (that.selection.height() - that.leftHandle.height()) / 2);
+                that.rightHandle.css("top", (that.selection.height() - that.rightHandle.height()) / 2);
+
+                that.move(options.from, options.to);
+
+                that.bind(that.events, that.options);
+                that.wrapper[0].style.cssText = that.wrapper[0].style.cssText;
+
+                if (kendo.UserEvents) {
+                    that.userEvents = new kendo.UserEvents(that.wrapper, {
+                        global: true,
+                        threshold: 5,
+                        stopPropagation: true,
+                        multiTouch: true,
+                        start: proxy(that._start, that),
+                        move: proxy(that._move, that),
+                        end: proxy(that._end, that),
+                        tap: proxy(that._tap, that),
+                        gesturestart: proxy(that._gesturechange, that),
+                        gesturechange: proxy(that._gesturechange, that)
+                    });
+                } else {
+                    that.leftHandle.add(that.rightHandle).removeClass(CSS_PREFIX + "handle");
                 }
-            };
-
-            that.leftHandle.css("top", (that.selection.height() - that.leftHandle.height()) / 2);
-            that.rightHandle.css("top", (that.selection.height() - that.rightHandle.height()) / 2);
-
-            that.move(options.from, options.to);
-
-            that.bind(that.events, that.options);
-            that.wrapper[0].style.cssText = that.wrapper[0].style.cssText;
-
-            if (kendo.UserEvents) {
-                that.userEvents = new kendo.UserEvents(that.wrapper, {
-                    global: true,
-                    threshold: 5,
-                    stopPropagation: true,
-                    multiTouch: true,
-                    start: proxy(that._start, that),
-                    move: proxy(that._move, that),
-                    end: proxy(that._end, that),
-                    tap: proxy(that._tap, that),
-                    gesturestart: proxy(that._gesturechange, that),
-                    gesturechange: proxy(that._gesturechange, that)
-                });
-            } else {
-                that.leftHandle.add(that.rightHandle).removeClass(CSS_PREFIX + "handle");
             }
         },
 
@@ -7080,7 +7082,9 @@ kendo_module({
             from = clipValue(from, options.min, options.max);
             to = clipValue(to, from + 1, options.max);
 
-            that.move(from, to);
+            if (options.visible) {
+                that.move(from, to);
+            }
 
             options.from = from;
             options.to = to;

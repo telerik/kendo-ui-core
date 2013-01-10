@@ -15,6 +15,7 @@ kendo_module({
         proxy = $.proxy,
 
         dataviz = kendo.dataviz,
+        template = kendo.template,
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
         duration = dataviz.duration,
@@ -111,7 +112,8 @@ kendo_module({
                 },
                 hint: {
                     visible: true
-                }
+                },
+                visible: true
             },
             tooltip: {
                 visible: true
@@ -151,6 +153,7 @@ kendo_module({
         redraw: function() {
             var navi = this,
                 chart = navi.chart,
+                options = navi.options,
                 axis = navi.mainAxis(),
                 groups = axis.options.categories,
                 select = navi.options.select || {},
@@ -168,20 +171,24 @@ kendo_module({
                     to = lteDateIndex(groups, toDate(select.to));
                 }
 
-                if (navi.options.visible) {
-                    chart._selection = new Selection(chart, axis, {
-                        from: from,
-                        to: to,
-                        min: min,
-                        max: max,
-                        selectStart: $.proxy(navi._selectStart, navi),
-                        select: $.proxy(navi._select, navi),
-                        selectEnd: $.proxy(navi._selectEnd, navi)
-                    });
-                }
+                chart._selection = new Selection(chart, axis, {
+                    from: from,
+                    to: to,
+                    min: min,
+                    max: max,
+                    selectStart: $.proxy(navi._selectStart, navi),
+                    select: $.proxy(navi._select, navi),
+                    selectEnd: $.proxy(navi._selectEnd, navi),
+                    visible: options.visible
+                });
 
-                if (navi.options.hint.visible) {
-                    navi.hint = new NavigatorHint(chart.element, { min: groups[0], max: dataviz.last(groups) });
+                if (options.hint.visible) {
+                    navi.hint = new NavigatorHint(chart.element, {
+                        min: groups[0],
+                        max: dataviz.last(groups),
+                        template: options.hint.template,
+                        format: options.hint.format
+                    });
                 }
             }
         },
@@ -221,35 +228,29 @@ kendo_module({
 
             navi.options.select = { from: from, to: to };
 
-            if (selection) {
-                if (navi._realtimeDrag()) {
-                    navi.applySelection();
-                    navi.redrawSlaves();
-                }
-
-                selection.set(
-                    lteDateIndex(
-                        navigatorAxis.options.categories,
-                        from
-                    ),
-                    lteDateIndex(
-                        navigatorAxis.options.categories,
-                        to
-                ));
+            if (navi._realtimeDrag()) {
+                navi.applySelection();
+                navi.redrawSlaves();
             }
 
-            if (navi.hint) {
-                navi.showHint(from, to);
-            }
+            selection.set(
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    from
+                ),
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    to
+            ));
+
+            navi.showHint(from, to);
         },
 
         _dragEnd: function() {
             var navi = this;
 
-            if (navi.selection) {
-                navi.applySelection();
-                navi.redrawSlaves();
-            }
+            navi.applySelection();
+            navi.redrawSlaves();
 
             if (navi.hint) {
                 navi.hint.hide();
@@ -328,34 +329,30 @@ kendo_module({
                 delta *= ZOOM_ACCELERATION;
             }
 
-            if (selection) {
-                if (selection.options.to - selection.options.from > 1) {
-                    selection.expandLeft(delta);
-                    navi.readSelection();
-                } else {
-                    axis.options.min = select.from;
-                    select.from = axis.scaleRange(-e.delta).min;
-                }
-
-                if (!kendo.support.touch) {
-                    navi.applySelection();
-                    navi.redrawSlaves();
-                }
-
-                selection.set(
-                    lteDateIndex(
-                        navigatorAxis.options.categories,
-                        navi.options.select.from
-                    ),
-                    lteDateIndex(
-                        navigatorAxis.options.categories,
-                        navi.options.select.to
-                ));
+            if (selection.options.to - selection.options.from > 1) {
+                selection.expandLeft(delta);
+                navi.readSelection();
+            } else {
+                axis.options.min = select.from;
+                select.from = axis.scaleRange(-e.delta).min;
             }
 
-            if (navi.hint) {
-                navi.showHint(navi.options.select.from, navi.options.select.to);
+            if (!kendo.support.touch) {
+                navi.applySelection();
+                navi.redrawSlaves();
             }
+
+            selection.set(
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    navi.options.select.from
+                ),
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    navi.options.select.to
+            ));
+
+            navi.showHint(navi.options.select.from, navi.options.select.to);
         },
 
         _zoomEnd: function(e) {
@@ -367,11 +364,13 @@ kendo_module({
                 chart = navi.chart,
                 plotArea = chart._plotArea;
 
-            navi.hint.show(
-                from,
-                to,
-                plotArea.backgroundBox()
-            );
+            if (navi.hint) {
+                navi.hint.show(
+                    from,
+                    to,
+                    plotArea.backgroundBox()
+                );
+            }
         },
 
         _selectStart: function(e) {
@@ -397,7 +396,9 @@ kendo_module({
         _selectEnd: function(e) {
             var navi = this;
 
-            navi.hint.hide();
+            if (navi.hint) {
+                navi.hint.hide();
+            }
             navi.readSelection();
             navi.applySelection();
             navi.redrawSlaves();
@@ -583,6 +584,13 @@ kendo_module({
                 hint._visible = true;
             }
 
+            if (options.template) {
+                hintTemplate = template(options.template);
+                text = hintTemplate({
+                    from: from,
+                    to: to
+                });
+            }
 
             tooltip
                 .text(text)
