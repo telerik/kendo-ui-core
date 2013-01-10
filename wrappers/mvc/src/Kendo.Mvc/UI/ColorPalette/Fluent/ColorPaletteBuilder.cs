@@ -5,13 +5,13 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePickerBase"/> component.
     /// </summary>
-    public class ColorPickerBuilder : WidgetBuilderBase<ColorPicker, ColorPickerBuilder>, IHideObjectMembers
+    public class ColorPaletteBuilder : WidgetBuilderBase<ColorPalette, ColorPaletteBuilder>, IHideObjectMembers
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ColorPickerBuilder"/> class.
+        /// Initializes a new instance of the <see cref="ColorPaletteBuilder"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public ColorPickerBuilder(ColorPicker component)
+        public ColorPaletteBuilder(ColorPalette component)
             : base(component)
         {
         }
@@ -22,15 +22,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="clientEventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ColorPicker()
-        ///             .Name("ColorPicker")
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
         ///             .Events(events =>
         ///                 events.Select("select").Change("change")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public ColorPickerBuilder Events(Action<ColorPickerEventBuilder> clientEventsAction)
+        public ColorPaletteBuilder Events(Action<ColorPickerEventBuilder> clientEventsAction)
         {
             clientEventsAction(new ColorPickerEventBuilder(Component.Events));
 
@@ -40,45 +40,35 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the value of the picker input
         /// </summary>
-        public ColorPickerBuilder Value(string color)
+        /// <param name="color">The initially selected color</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
+        ///             .Value("#ff0000")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ColorPaletteBuilder Value(string color)
         {
             Component.Value = color;
 
             return this;
         }
-
-        /// <summary>
-        /// Indicates whether the picker will allow transparent colors to be picked.
-        /// </summary>
-        /// <param name="allowOpacity">Whether the user is allowed to change the color opacity.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ColorPicker()
-        ///             .Name("ColorPicker")
-        ///             .Opacity(true)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ColorPickerBuilder Opacity(bool allowOpacity)
-        {
-            Component.Opacity = allowOpacity;
-
-            return this;
-        }
-
+        
         /// <summary>
         /// Sets the range of colors that the user can pick from.
         /// </summary>
         /// <param name="palette">A list of colors.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ColorPicker()
-        ///             .Name("ColorPicker")
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
         ///             .Palette(new List&lt;string&gt; { "#ff0000", "#00ff00", "#0000ff" })
         /// %&gt;
         /// </code>
         /// </example>
-        public ColorPickerBuilder Palette(IEnumerable<string> palette)
+        public ColorPaletteBuilder Palette(IEnumerable<string> palette)
         {
             Component.PaletteColors = palette;
             Component.Palette = ColorPickerPalette.None;
@@ -92,35 +82,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="palette">One of the preset palettes of colors</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ColorPicker()
-        ///             .Name("ColorPicker")
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
         ///             .Palette(ColorPickerPalette.WebSafe)
         /// %&gt;
         /// </code>
         /// </example>
-        public ColorPickerBuilder Palette(ColorPickerPalette palette)
+        public ColorPaletteBuilder Palette(ColorPickerPalette palette)
         {
             Component.PaletteColors = null;
             Component.Palette = palette;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Enables or disables the picker.
-        /// </summary>
-        /// <param name="value">Whether the picker is enabled</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ColorPicker()
-        ///             .Name("ColorPicker")
-        ///             .Enable(false)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ColorPickerBuilder Enable(bool value)
-        {
-            Component.Enabled = value;
 
             return this;
         }

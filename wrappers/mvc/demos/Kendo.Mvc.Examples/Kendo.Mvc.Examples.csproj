@@ -118,6 +118,7 @@
     <Compile Include="Controllers\DataViz\Area_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\IndexController.cs" />
+    <Compile Include="Controllers\Web\ColorPicker\PaletteController.cs" />
     <Compile Include="Controllers\Web\ColorPicker\IndexController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ApiController.cs" />
@@ -494,6 +495,7 @@
     <Content Include="Areas\aspx\Views\web\treeview\navigation.aspx" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
     <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
     <Content Include="Areas\aspx\Views\web\window\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\window\rtl.aspx" />

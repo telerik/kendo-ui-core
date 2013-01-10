@@ -340,6 +340,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="ColorPalette"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual ColorPaletteBuilder ColorPalette()
+        {
+            return new ColorPaletteBuilder(new ColorPalette(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Calendar"/>.
         /// </summary>
         /// <example>

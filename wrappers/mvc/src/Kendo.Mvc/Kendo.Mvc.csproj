@@ -403,6 +403,8 @@
     <Compile Include="UI\Chart\Series\IChartBoundSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartBarSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartSeries.cs" />
+    <Compile Include="UI\ColorPalette\ColorPalette.cs" />
+    <Compile Include="UI\ColorPalette\Fluent\ColorPaletteBuilder.cs" />
     <Compile Include="UI\ColorPicker\ColorPicker.cs" />
     <Compile Include="UI\ColorPicker\ColorPickerPalette.cs" />
     <Compile Include="UI\ColorPicker\Fluent\ColorPickerBuilder.cs" />
