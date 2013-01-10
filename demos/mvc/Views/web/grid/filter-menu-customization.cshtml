@@ -21,7 +21,14 @@
                         },
                         height: 250,
                         scrollable: true,
-                        filterable: true,
+                        filterable: {
+                            extra: false,
+                            operators: {
+                                string: {
+                                    startswith: "Starts with"
+                                }
+                            }
+                        },
                         pageable: true,
                         columns: [
                             {
@@ -34,27 +41,13 @@
                                 field: "City",
                                 width: 100,
                                 filterable: {
-                                    ui: cityFilter,
-                                    operators: {
-                                        string: {
-                                            startswith: "Starts with",
-                                            contains: "Contains",
-                                            doesnotcontain: "Does not contain",
-                                            endswith: "Ends with"
-                                        }
-                                    }
-                                }
+                                    ui: cityFilter
+                               }
                             },
                             {
                                 field: "Title",
                                 filterable: {
-                                    ui: titleFilter,
-                                    extra: false,
-                                    operators: {
-                                        string: {
-                                            startswith: "Starts with"
-                                        }
-                                    }
+                                    ui: titleFilter
                                 }
                             },
                             {
