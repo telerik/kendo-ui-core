@@ -140,7 +140,7 @@ kendo_module({
                 }
             }
 
-            if (!defined(options.visible)) {
+            if (!defined(options.visible) || options.visible === null) {
                 options.visible = element.is(VISIBLE);
             }
 
@@ -308,7 +308,7 @@ kendo_module({
             minHeight: 50,
             maxWidth: Infinity,
             maxHeight: Infinity,
-            visible: undefined
+            visible: null
         },
 
         _closable: function() {
