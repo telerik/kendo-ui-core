@@ -2717,7 +2717,27 @@ function pad(number, digits, end) {
 
     var on = $.fn.on;
 
-    var kendoJQuery = $.sub();
+    function kendoJQuery(selector, context) {
+        return new kendoJQuery.fn.init(selector, context);
+    }
+
+    extend(true, kendoJQuery, $);
+
+    kendoJQuery.fn = kendoJQuery.prototype = new $();
+
+    kendoJQuery.fn.constructor = kendoJQuery;
+
+    kendoJQuery.fn.init = function(selector, context) {
+        if (context && context instanceof $ && !(context instanceof kendoJQuery)) {
+            context = kendoJQuery(context);
+        }
+
+        return $.fn.init.call(this, selector, context, rootjQuery);
+    };
+
+    kendoJQuery.fn.init.prototype = kendoJQuery.fn;
+
+    var rootjQuery = kendoJQuery(document);
 
     extend(kendoJQuery.fn, {
         handler: function(handler) {
