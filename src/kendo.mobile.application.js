@@ -55,7 +55,7 @@ kendo_module({
         HEAD.append(viewportTemplate({
             height: isOrientationHorizontal() ?
                         ", height=" + window.innerHeight + "px"  :
-                        (OS.flatVersion >= 600 && OS.flatVersion < 700) ?
+                        (support.mobileOS.flatVersion >= 600 && support.mobileOS.flatVersion < 700) ?
                             ", height=" + window.innerWidth + "px" :
                             ", height=device-height"
         }));
@@ -223,7 +223,7 @@ kendo_module({
             var that = this,
                 hideBar = proxy(that._hideBar, that);
 
-            if (OS.appMode || !that.options.hideAddressBar) {
+            if (support.mobileOS.appMode || !that.options.hideAddressBar) {
                 return;
             }
 
