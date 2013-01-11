@@ -4,9 +4,6 @@
 
 <demo:header />
 
-<c:url value="/resources/css/web/menu/header.jpg" var="header" />
-<c:url value="/resources/web/menu/map.png" var="map" />
-
 <div id="megaStore">
 <kendo:menu name="Menu">
     <kendo:menu-items>
@@ -68,7 +65,7 @@
 		                    <li>Canada</li>
 		                    <li>Australia</li>
 		                </ol>
-		                <img src="${map}" alt="Stores Around the Globe" />
+		                <img src="../../resources/web/menu/map.png" alt="Stores Around the Globe" />
 		                <button class="k-button">See full list</button>
 		            </kendo:menu-item-content>
 	            </kendo:menu-item>
@@ -87,7 +84,7 @@
         width: 600px;
         margin: 30px auto;
         padding-top: 120px;
-        background: url('${header}') no-repeat 0 0;
+        background: url('../../resources/web/menu/header.jpg') no-repeat 0 0;
     }
     #menu h2 {
         font-size: 1em;

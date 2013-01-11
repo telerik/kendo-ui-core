@@ -14,8 +14,6 @@
 <c:url value="/resources/shared/icons/16/video.png" var="video"/>
 <c:url value="/resources/shared/icons/16/speaker.png" var="speaker"/>
 
-<c:url value="/resources/shared/styles/flags.png" var="flags" />
-
 <div class="demo-section">
 <kendo:menu name="menuImages">
     <kendo:menu-items>
@@ -85,7 +83,7 @@
     	padding-bottom: 10px;
     }
     #menu-sprites .k-sprite {
-        background-image: url('${flags}');
+        background-image: url('../../resources/shared/styles/flags.png');
     }
     .brazilFlag {
     	background-position: 0 0;
