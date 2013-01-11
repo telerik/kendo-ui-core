@@ -14,6 +14,8 @@
 <c:url value="/resources/shared/icons/16/video.png" var="video"/>
 <c:url value="/resources/shared/icons/16/speaker.png" var="speaker"/>
 
+<c:url value="/resources/shared/styles/flags.png" var="flags" />
+
 <div class="demo-section">
 <kendo:menu name="menuImages">
     <kendo:menu-items>
@@ -74,9 +76,31 @@
 </kendo:menu>
 </div>
 
-<style>
+<style scoped>
     .demo-section {
         margin: 30px auto;
+    }
+    .demo-section h3 {
+    	font-weight: normal;
+    	padding-bottom: 10px;
+    }
+    #menu-sprites .k-sprite {
+        background-image: url('${flags}');
+    }
+    .brazilFlag {
+    	background-position: 0 0;
+    }
+    .indiaFlag {
+    	background-position: 0 -32px;
+    }
+    .netherlandsFlag {
+    	background-position: 0 -64px;
+    }
+    .historyIcon {
+    	background-position: 0 -96px;
+    }
+    .geographyIcon {
+    	background-position: 0 -128px;
     }
 </style>
 
