@@ -33,6 +33,17 @@ namespace Kendo.Mvc.UI
                 result.Add("select", selectData);
             }
 
+            var hint = navigator.Hint.CreateSerializer().Serialize();
+            if (hint.Count > 0)
+            {
+                result.Add("hint", hint);
+            }
+
+            if (navigator.Visible.HasValue)
+            {
+                result.Add("visible", navigator.Visible);
+            }
+
             return result;
         }
     }

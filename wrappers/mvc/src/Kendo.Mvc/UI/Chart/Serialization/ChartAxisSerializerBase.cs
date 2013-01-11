@@ -1,7 +1,6 @@
 namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
-    using System.Linq;
     using Kendo.Mvc.Infrastructure;
 
     internal class ChartAxisSerializerBase<TValue> : IChartSerializer
