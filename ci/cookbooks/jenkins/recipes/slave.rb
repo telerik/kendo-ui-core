@@ -8,3 +8,4 @@ directory "/var/lib/jenkins" do
 end
 
 include_recipe "jenkins::setup_user"
+include_recipe "jenkins::mount_filesrv"

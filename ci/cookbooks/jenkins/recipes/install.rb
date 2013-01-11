@@ -5,3 +5,10 @@ apt_repository "jenkins" do
 end
 
 package "jenkins"
+
+cookbook_file "/var/lib/jenkins/config.xml" do
+    source "config.xml"
+    owner "jenkins"
+    group "nogroup"
+    mode "0600"
+end

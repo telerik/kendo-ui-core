@@ -2,6 +2,7 @@ JENKINS_URL = 'http://localhost:8080/build/'
 
 include_recipe "jenkins::install"
 include_recipe "jenkins::setup_user"
+include_recipe "jenkins::mount_filesrv"
 
 cookbook_file "/etc/default/jenkins" do
     source "config"
