@@ -5398,7 +5398,6 @@ kendo_module({
                 paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
-                // TODO: TEST
                 if (axis.options._overlap) {
                     continue;
                 }
@@ -5442,7 +5441,6 @@ kendo_module({
                 paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
-                // TODO: TEST
                 if (axis.options._overlap) {
                     continue;
                 }

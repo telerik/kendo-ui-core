@@ -536,6 +536,17 @@
                     );
                 });
 
+                test("axis can be superimposed using options._overlap", function() {
+                    valueAxis.options._overlap = true;
+                    secondaryValueAxis._overlap = true;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.box.x2, secondaryValueAxis.box.y1],
+                         [valueAxis.box.x2, valueAxis.box.y1]
+                    );
+                });
+
                 test("stacked axes on left are aligned", function() {
                     plotArea.reflow(chartBox);
 
@@ -723,6 +734,23 @@
 
                     ok(plotArea.namedCategoryAxes["a"]);
                     ok(plotArea.namedCategoryAxes["b"]);
+                });
+
+                test("axis can be superimposed using options._overlap", function() {
+                    createPlotArea(columnSeriesData, {
+                        categoryAxis: [{
+                                name: "a",
+                                _overlap: true
+                            }, {
+                                name: "b",
+                                _overlap: true
+                            }]
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    same(plotArea.namedCategoryAxes["a"].box.y1,
+                         plotArea.namedCategoryAxes["b"].box.y1);
                 });
 
                 test("first axis is set as primary category axis", function() {
@@ -3495,6 +3523,15 @@
                     equals(secondaryXAxis.box.y2, axisX.box.y1 - margin);
                 });
 
+                test("X axis can be superimposed using options._overlap", function() {
+                    axisX.options._overlap = true;
+                    secondaryXAxis.options._overlap = true;
+
+                    plotArea.reflow(chartBox);
+
+                    same(secondaryXAxis.box.y1, axisX.box.y1);
+                });
+
                 test("stacked X axes on top are aligned", function() {
                     plotArea.reflow(chartBox);
 
@@ -3538,6 +3575,15 @@
                     same([secondaryYAxis.box.x1, secondaryYAxis.box.y1],
                          [axisY.box.x2 + margin, axisY.box.y1]
                     );
+                });
+
+                test("Y axis can be superimposed using options._overlap", function() {
+                    axisY.options._overlap = true;
+                    secondaryYAxis.options._overlap = true;
+
+                    plotArea.reflow(chartBox);
+
+                    same(secondaryYAxis.box.x2, axisY.box.x2);
                 });
 
                 test("stacked Y axes on right are aligned", function() {
