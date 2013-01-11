@@ -8,35 +8,17 @@ namespace Kendo.Mvc.UI.Fluent
     /// Defines the fluent interface for configuring bound columns filterable options
     /// </summary>
     /// <typeparam name="T">The type of the data item</typeparam>
-    public class GridBoundColumnFilterableBuilder : IHideObjectMembers        
+    public class GridBoundColumnFilterableBuilder : GridFilterableSettingsBuilderBase<GridBoundColumnFilterableBuilder>      
     {
-        private readonly IGridBoundColumn column;
+        private readonly GridBoundColumnFilterableSettings settings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GridBoundColumnFilterableBuilder"/> class.
         /// </summary>
         /// <param name="column">The column.</param>
-        public GridBoundColumnFilterableBuilder(IGridBoundColumn column)            
+        public GridBoundColumnFilterableBuilder(GridBoundColumnFilterableSettings settings) : base(settings)       
         {
-            this.column = column;
-        }
-
-        /// <summary>
-        /// Enables or disables filtering the column. All bound columns are filterable by default.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Grid(Model)
-        ///             .Name("Grid")
-        ///             .Columns(columns => columns.Bound(o => o.OrderDate).Filterable(filterable => filterable.Enabled(true)))
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public GridBoundColumnFilterableBuilder Enabled(bool value)
-        {
-            column.Filterable = value;
-
-            return this;
+            this.settings = settings;
         }
 
         /// <summary>
@@ -52,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>        
         public GridBoundColumnFilterableBuilder UI(GridFilterUIRole role)
         {
-            column.FilterUIRole = role;
+            settings.FilterUIRole = role;
             return this;
         }
 
@@ -68,8 +50,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>
         /// </example>        
         public GridBoundColumnFilterableBuilder UI(Func<object, object> handler)
-        {            
-            column.FilterUIHandler.TemplateDelegate = handler;
+        {
+            settings.FilterUIHandler.TemplateDelegate = handler;
             return this;
         }
 
@@ -78,9 +60,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="handler">JavaScript function name</param>        
         public GridBoundColumnFilterableBuilder UI(string handler)
-        {            
-            column.FilterUIHandler.HandlerName= handler;
+        {
+            settings.FilterUIHandler.HandlerName = handler;
             return this;
-        }
+        }        
     }
 }

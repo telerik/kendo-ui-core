@@ -22,15 +22,9 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }
+        }        
 
-        GridFilterUIRole FilterUIRole
-        {
-            get;
-            set;
-        }
-
-        ClientHandlerDescriptor FilterUIHandler
+        GridBoundColumnFilterableSettings FilterableSettings
         {
             get;
             set;

@@ -130,7 +130,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridBoundColumnBuilder<T> Filterable(Action<GridBoundColumnFilterableBuilder> configurator)
         {
-            configurator(new GridBoundColumnFilterableBuilder(Column));
+            configurator(new GridBoundColumnFilterableBuilder(Column.FilterableSettings));
             return this;
         }  
         
