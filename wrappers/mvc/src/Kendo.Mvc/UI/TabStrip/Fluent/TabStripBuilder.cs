@@ -250,7 +250,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder SecurityTrimming(bool value)
         {
-            Component.SecurityTrimming = value;
+            Component.SecurityTrimming.Enabled = value;
 
             return this;
         }

@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI.Tests
             set;
         }
 
-        public bool SecurityTrimming
+        public SecurityTrimming SecurityTrimming
         {
             get;
             set;

@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI
             Items = new LinkedObjectCollection<PanelBarItem>(null);
 
             SelectedIndex = -1;
-            SecurityTrimming = true;
+            SecurityTrimming = new SecurityTrimming();
         }
 
         public INavigationItemAuthorization Authorization
@@ -94,7 +94,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public bool SecurityTrimming
+        public SecurityTrimming SecurityTrimming
         {
             get;
             set;

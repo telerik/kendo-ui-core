@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI
             Items = new List<TabStripItem>();
             SelectedIndex = -1;
             HighlightPath = true;
-            SecurityTrimming = true;
+            SecurityTrimming = new SecurityTrimming();
         }
 
         public PopupAnimation Animation
@@ -76,7 +76,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool SecurityTrimming
+        public SecurityTrimming SecurityTrimming
         {
             get;
             set;
@@ -160,7 +160,7 @@ namespace Kendo.Mvc.UI
             }
 
             var accessible = true;
-            if (this.SecurityTrimming)
+            if (this.SecurityTrimming.Enabled)
             {
                 accessible = item.IsAccessible(Authorization, ViewContext);
             }

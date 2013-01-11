@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI
             where TComponent : WidgetBase, INavigationItemComponent<TItem>
         {
             var accessible = true;
-            if (component.SecurityTrimming)
+            if (component.SecurityTrimming.Enabled)
             {
                 accessible = item.IsAccessible(component.Authorization, ((WidgetBase)component).ViewContext);
             }
@@ -30,9 +30,14 @@ namespace Kendo.Mvc.UI
             if (item.Visible && accessible)
             {
                 var hasAccessibleChildren = item.Items.Any() && item.Items.Any(i => i.Visible);
-                if (component.SecurityTrimming && hasAccessibleChildren)
+                if (component.SecurityTrimming.Enabled && hasAccessibleChildren)
                 {
                     hasAccessibleChildren = item.Items.IsAccessible(component.Authorization, ((WidgetBase)component).ViewContext);
+
+                    if (component.SecurityTrimming.HideParent && !hasAccessibleChildren)
+                    {
+                        return;
+                    }
                 }
 
                 IHtmlNode itemTag = builder.ItemTag(item).AppendTo(parentTag);

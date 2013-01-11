@@ -80,7 +80,7 @@ namespace Kendo.Mvc.UI.Tests.UITests
             get { throw new System.NotImplementedException(); }
         }
 
-        public bool SecurityTrimming
+        public SecurityTrimming SecurityTrimming
         {
             get;
             set;
