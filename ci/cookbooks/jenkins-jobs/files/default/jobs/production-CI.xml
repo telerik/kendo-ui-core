@@ -62,7 +62,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-    <command>export PATH=/usr/local/bin:$PATH; bundle --without development &amp;&amp; rake build:production:tests</command>
+    <command>bundle --without development --path ~/gems &amp;&amp; bundle exec rake build:production:tests</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

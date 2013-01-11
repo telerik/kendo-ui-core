@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
   <actions/>
   <description>Update the demos on http://mvc-kendobuild/production/ </description>
   <logRotator>
@@ -9,16 +10,16 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.4">
       <projectUrl>https://github.com/telerik/kendo/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.1.26">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <name/>
-        <refspec/>
+        <name></name>
+        <refspec></refspec>
         <url>git@github.com:telerik/kendo.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
@@ -35,22 +36,26 @@
     <wipeOutWorkspace>false</wipeOutWorkspace>
     <pruneBranches>false</pruneBranches>
     <remotePoll>false</remotePoll>
+    <ignoreNotifyCommit>false</ignoreNotifyCommit>
+    <useShallowClone>false</useShallowClone>
     <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
     <gitTool>Default</gitTool>
     <browser class="hudson.plugins.git.browser.GithubWeb">
       <url>https://github.com/telerik/kendo/</url>
     </browser>
     <submoduleCfg class="list"/>
-    <relativeTargetDir/>
-    <reference/>
-    <excludedRegions/>
-    <excludedUsers/>
-    <gitConfigName/>
-    <gitConfigEmail/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
     <skipTag>false</skipTag>
-    <scmName/>
+    <includedRegions></includedRegions>
+    <scmName></scmName>
   </scm>
-  <canRoam>true</canRoam>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
@@ -58,16 +63,24 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-    <command>bundle --without development --path ~/gems &amp;&amp; npm install &amp;&amp; bundle exec rake build:production:demos;</command>
+      <command>bundle --without development --path ~/gems &amp;&amp; npm install &amp;&amp; bundle exec rake build:production:demos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.campfire.CampfireNotifier>
+    <hudson.plugins.campfire.CampfireNotifier plugin="campfire@2.6">
+      <campfire>
+        <subdomain>kendoui</subdomain>
+        <token>9a0d90b779802e8cb4112897897ed94e36a3f72c</token>
+        <ssl>true</ssl>
+      </campfire>
       <room>
+        <campfire reference="../../campfire"/>
         <name>Dev Daily</name>
         <id>488924</id>
       </room>
       <hudsonUrl>http://mvc-kendobuild/build/</hudsonUrl>
+      <smartNotify>false</smartNotify>
+      <sound>false</sound>
     </hudson.plugins.campfire.CampfireNotifier>
   </publishers>
   <buildWrappers/>

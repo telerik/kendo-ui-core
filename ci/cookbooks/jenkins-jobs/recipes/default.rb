@@ -32,10 +32,3 @@ end
         group "nogroup"
     end
 end
-
-[ "", "/Stable", "/Production", "/WinJS" ].each do |dir|
-    directory "/kendo-builds#{dir}" do
-        owner "jenkins"
-        group "nogroup"
-    end
-end
