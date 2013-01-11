@@ -390,7 +390,7 @@
 
             if (isPlainObject(command) && command.click) {
                 commandName = command.name || command.text;
-                container.on("touchend " + CLICK, "a.k-grid-" + (commandName || "").replace(/\s/g, ""), { commandName: commandName }, proxy(command.click, context));
+                container.on(CLICK + NS, "a.k-grid-" + (commandName || "").replace(/\s/g, ""), { commandName: commandName }, proxy(command.click, context));
             }
         }
     }
@@ -977,7 +977,7 @@
                 var mode = that._editMode();
                 if (mode === "incell") {
                     if (editable.update !== false) {
-                        that.wrapper.on("touchend" + NS + " " + CLICK + NS, "tr:not(.k-grouping-row) > td", function(e) {
+                        that.wrapper.on(CLICK + NS, "tr:not(.k-grouping-row) > td", function(e) {
                             var td = $(this);
 
                             if (td.hasClass("k-hierarchy-cell") ||
@@ -1010,7 +1010,7 @@
                     }
                 } else {
                     if (editable.update !== false) {
-                        that.wrapper.on("touchend" + NS + " " + CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-edit", function(e) {
+                        that.wrapper.on(CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-edit", function(e) {
                             e.preventDefault();
                             that.editRow($(this).closest("tr"));
                         });
@@ -1018,14 +1018,14 @@
                 }
 
                 if (editable.destroy !== false) {
-                    that.wrapper.on("touchend" + NS + " " + CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible .k-grid-delete", function(e) {
+                    that.wrapper.on(CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible .k-grid-delete", function(e) {
                         e.preventDefault();
                         e.stopPropagation();
                         that.removeRow($(this).closest("tr"));
                     });
                 } else {
                     //Required for the MVC server wrapper delete button
-                    that.wrapper.on("touchend" + NS + " " + CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible button.k-grid-delete", function(e) {
+                    that.wrapper.on(CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible button.k-grid-delete", function(e) {
                         if (!that._confirmation()) {
                             e.preventDefault();
                         }
@@ -1585,7 +1585,7 @@
         _groupable: function() {
             var that = this;
 
-            that.table.on("touchend" + NS + " " + CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", function(e) {
+            that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", function(e) {
                 var element = $(this),
                 group = element.closest("tr");
 
@@ -2802,7 +2802,7 @@
         _details: function() {
             var that = this;
 
-            that.table.on("touchend" + NS + " " + CLICK + NS, ".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", function(e) {
+            that.table.on(CLICK + NS, ".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", function(e) {
                 var button = $(this),
                     expanding = button.hasClass("k-plus"),
                     masterRow = button.closest("tr.k-master-row"),
