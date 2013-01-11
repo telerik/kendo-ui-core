@@ -82,7 +82,7 @@
     	font-weight: normal;
     	padding-bottom: 10px;
     }
-    #menu-sprites .k-sprite {
+    #menuSprites .k-sprite {
         background-image: url('../../resources/shared/styles/flags.png');
     }
     .brazilFlag {
