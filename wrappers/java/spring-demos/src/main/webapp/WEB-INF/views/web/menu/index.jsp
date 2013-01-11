@@ -4,6 +4,10 @@
 
 <demo:header />
 
+<c:url value="/resources/css/web/menu/header.jpg" var="header" />
+<c:url value="/resources/web/menu/map.png" var="map" />
+
+<div id="megaStore">
 <kendo:menu name="Menu">
     <kendo:menu-items>
         <kendo:menu-item text="Products">
@@ -64,7 +68,7 @@
 		                    <li>Canada</li>
 		                    <li>Australia</li>
 		                </ol>
-		                <img src="<c:url value="/resources/web/menu/map.png" />" alt="Stores Around the Globe" />
+		                <img src="${map}" alt="Stores Around the Globe" />
 		                <button class="k-button">See full list</button>
 		            </kendo:menu-item-content>
 	            </kendo:menu-item>
@@ -76,5 +80,44 @@
         <kendo:menu-item text="News" enabled="false"></kendo:menu-item>
     </kendo:menu-items>
 </kendo:menu>
+</div>
+
+<style scoped>
+    #megaStore {
+        width: 600px;
+        margin: 30px auto;
+        padding-top: 120px;
+        background: url('${header}') no-repeat 0 0;
+    }
+    #menu h2 {
+        font-size: 1em;
+        text-transform: uppercase;
+        padding: 5px 10px;
+    }
+    #template img {
+        margin: 5px 20px 0 0;
+        float: left;
+    }
+    #template {
+        width: 380px;
+    }
+    #template ol {
+        float: left;
+        margin: 0 0 0 30px;
+        padding: 10px 10px 0 10px;
+    }
+    #template:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    #template .k-button {
+        float: left;
+        clear: left;
+        margin: 5px 0 5px 12px;
+    }
+</style>
 
 <demo:footer />
