@@ -299,7 +299,8 @@
             minWidth: 90,
             minHeight: 50,
             maxWidth: Infinity,
-            maxHeight: Infinity
+            maxHeight: Infinity,
+            visible: undefined
         },
 
         _closable: function() {
