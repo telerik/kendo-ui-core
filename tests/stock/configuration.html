@@ -222,15 +222,6 @@
                     ok(!chart._navigator._liveDrag());
                 });
 
-                test("disabled when navigator has data source", function() {
-                    createStockChart({
-                        navigator: {
-                            dataSource: {}
-                        }
-                    });
-                    equals(chart._navigator._liveDrag(), false);
-                });
-
                 test("enabled on everything else", function() {
                     kendo.support.touch = false;
                     kendo.support.browser.mozilla = false;

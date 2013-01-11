@@ -177,10 +177,6 @@ kendo_module({
 
             Chart.fn._onDataChanged.call(chart);
             chart._dataBound = true;
-
-            if (chart._navigator && !chart._navigator.dataSource) {
-                chart._navigator.redraw();
-            }
         },
 
         destroy: function() {
@@ -197,7 +193,7 @@ kendo_module({
             var navi = this;
 
             navi.chart = chart;
-            navi.options = deepExtend(navi.options, chart.options.navigator);
+            navi.options = deepExtend({}, navi.options, chart.options.navigator);
 
             navi._initDataSource();
 
@@ -281,6 +277,10 @@ kendo_module({
 
             if (dataSource) {
                 dataSource.unbind(CHANGE, navi._dataChangeHandler);
+            }
+
+            if (navi.selection) {
+                navi.selection.destroy();
             }
         },
 
@@ -465,12 +465,12 @@ kendo_module({
 
                         from = toTime(from);
                         if (from < min || from > max) {
-                            from = toDate(min);
+                            from = min;
                         }
 
                         to = toTime(to);
                         if (to < min || to > max) {
-                            to = toDate(max);
+                            to = max;
                         }
 
                         break;
@@ -481,8 +481,8 @@ kendo_module({
             for (i = 0; i < allAxes.length; i++) {
                 axis = allAxes[i];
                 if (axis.pane !== NAVIGATOR_PANE) {
-                    axis.min = from;
-                    axis.max = to;
+                    axis.min = toDate(from);
+                    axis.max = toDate(to);
                 }
             }
         },

@@ -116,12 +116,25 @@
                         navigator: {
                             dataSource: null,
                             select: {
-                                from: new Date("2012/01/01")
+                                from: new Date("2012/09/04")
                             }
                         }
                     });
 
-                    same(chart.options.categoryAxis[0].min, new Date("2012/01/01"));
+                    same(chart.options.categoryAxis[0].min, new Date("2012/09/04"));
+                });
+
+                test("slave axis min is limited to navigator range", function() {
+                    createStockChart({
+                        navigator: {
+                            dataSource: null,
+                            select: {
+                                from: new Date("2012/06/01")
+                            }
+                        }
+                    });
+
+                    same(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
                 });
 
                 test("slave axis max is set to selected range end", function() {
@@ -129,15 +142,28 @@
                         navigator: {
                             dataSource: null,
                             select: {
-                                to: new Date("2012/01/01")
+                                to: new Date("2012/09/04")
                             }
                         }
                     });
 
-                    same(chart.options.categoryAxis[0].max, new Date("2012/01/01"));
+                    same(chart.options.categoryAxis[0].max, new Date("2012/09/04"));
                 });
 
-                test("navigator redrawn on main DS change", 1, function() {
+                test("slave axis max is limited to navigator range", function() {
+                    createStockChart({
+                        navigator: {
+                            dataSource: null,
+                            select: {
+                                to: new Date("2012/10/01")
+                            }
+                        }
+                    });
+
+                    same(chart.options.categoryAxis[0].max, new Date("2012/09/06"));
+                });
+
+                test("navigator redrawn on main DS change", 2, function() {
                     stubMethod(Navigator.fn, "_redrawSelf", function() {
                         ok(true);
                     }, function() {
@@ -348,7 +374,7 @@
                     });
                 });
 
-                test("navigator is redrawn partially during navigator DS change", 1, function() {
+                test("navigator is redrawn partially during navigator DS change", 2, function() {
                     stubMethod(Navigator.fn, "_redrawSelf", function() {
                         ok(true);
                     }, function() {
@@ -357,15 +383,15 @@
                     });
                 });
 
-                test("navigator is redrawn during navigator DS change (unbound chart)", 2, function() {
+                test("navigator is redrawn during navigator DS change (unbound chart)", 3, function() {
                     var partialRedrawCalls = 0,
                         redrawCalls = 0;
 
                     stubMethod(Navigator.fn, "_redrawSelf", function() {
-                        ok(++partialRedrawCalls === 1, "More than one partial redraw");
+                        ok(++partialRedrawCalls <= 2, "Expected two navigator redraws");
                     }, function() {
                         stubMethod(Chart.fn, "_redraw", function() {
-                            ok(++redrawCalls <= 1, "Too many redraws");
+                            ok(++redrawCalls === 1, "Too many redraws");
                             Chart.fn._stubbed._redraw.call(this);
                         }, function() {
                             createStockChart({
@@ -390,17 +416,23 @@
                     });
                 });
 
-                test("main DS is filtered during zoomEnd", function() {
-                    createStockChart({
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    data: defaultOptions.dataSource.data
+                // ------------------------------------------------------------
+                module("Data Binding / With Navigator Data Source / Zoom", {
+                    setup: function() {
+                        createStockChart({
+                            dataSource: {
+                                transport: {
+                                    read: {
+                                        data: defaultOptions.dataSource.data
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
+                    },
+                    teardown: destroyChart
+                });
 
+                test("main DS is filtered during zoomEnd", function() {
                     chart.trigger("zoom", {
                         originalEvent: {
                             preventDefault: function() {}
@@ -414,16 +446,6 @@
                 });
 
                 test("main DS is not filtered during zoom", function() {
-                    createStockChart({
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    data: defaultOptions.dataSource.data
-                                }
-                            }
-                        }
-                    });
-
                     chart.trigger("zoom", {
                         originalEvent: {
                             preventDefault: function() {}
