@@ -1,0 +1,25 @@
+NAME=jenkins
+
+JAVA=/usr/bin/java
+
+PIDFILE=/var/run/jenkins/jenkins.pid
+
+JENKINS_USER=jenkins
+
+JENKINS_WAR=/usr/share/jenkins/jenkins.war
+
+JENKINS_HOME=/var/lib/jenkins
+
+RUN_STANDALONE=true
+
+JENKINS_LOG=/var/log/jenkins/$NAME.log
+
+MAXOPENFILES=8192
+
+HTTP_PORT=8080
+
+AJP_PORT=-1
+
+PREFIX=/jenkins
+
+JENKINS_ARGS="--webroot=/var/cache/jenkins/war --httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT --prefix=/build"

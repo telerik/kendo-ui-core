@@ -1,0 +1,11 @@
+[user]
+  name = Kendo Bot
+  email = bot@kendoui.com
+
+[push]
+  default = tracking
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto

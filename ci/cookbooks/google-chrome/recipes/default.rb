@@ -1,13 +1,7 @@
-yum_key "google-chrome" do
-    url "https://dl-ssl.google.com/linux/linux_signing_key.pub"
-    action :add
-end
-
-yum_repository "google-chrome" do
-    description "google-chrome - 64-bit"
-    url "http://dl.google.com/linux/chrome/rpm/stable/x86_64"
-    key "google-chrome"
-    action :add
+apt_repository "google" do
+  uri "http://dl.google.com/linux/chrome/deb/ "
+  components ["stable", "main"]
+  key "https://dl-ssl.google.com/linux/linux_signing_key.pub"
 end
 
 package "google-chrome-stable"

@@ -1,0 +1,19 @@
+{ "run_list": [
+    "recipe[apt]",
+    "recipe[zsh]",
+    "recipe[git]",
+    "recipe[ruby]",
+    "recipe[nodejs]",
+    "recipe[java]",
+    "recipe[mono]",
+    "recipe[x11]",
+    "recipe[firefox]",
+    "recipe[google-chrome]",
+    "recipe[jenkins]",
+    "recipe[jenkins-jobs]",
+    "recipe[selenium]",
+    "recipe[mono-fcgi]",
+    "recipe[nginx]",
+    "recipe[monit]",
+    "recipe[screenshot]"
+]}
