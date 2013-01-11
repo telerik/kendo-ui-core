@@ -27,7 +27,7 @@ namespace :tests do
         end
 
         task :java do
-            mvn(POM, 'test')
+            mvn(POM, 'clean test')
         end
 
         task :aspnetmvc do
