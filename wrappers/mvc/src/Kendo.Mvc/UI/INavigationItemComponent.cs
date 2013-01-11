@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        bool SecurityTrimming
+        SecurityTrimming SecurityTrimming
         {
             get;
             set;

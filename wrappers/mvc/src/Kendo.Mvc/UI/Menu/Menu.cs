@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI
 
             CloseOnClick = true;
             HighlightPath = true;
-            SecurityTrimming = true;
+            SecurityTrimming = new SecurityTrimming();
         }
 
         public PopupAnimation Animation
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool SecurityTrimming
+        public SecurityTrimming SecurityTrimming
         {
             get;
             set;

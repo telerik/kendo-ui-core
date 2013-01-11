@@ -476,8 +476,29 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder SecurityTrimming(bool value)
         {
+            Component.SecurityTrimming.Enabled = value;
 
-            Component.SecurityTrimming = value;
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the security trimming functionality of the component
+        /// </summary>
+        /// <param name="securityTrimmingAction">The securityTrimming action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .SecurityTrimming(builder =>
+        ///             {
+        ///                 builder.Enabled(true).HideParent(true);
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder SecurityTrimming(Action<SecurityTrimmingBuilder> securityTrimmingAction)
+        {
+            securityTrimmingAction(new SecurityTrimmingBuilder(Component.SecurityTrimming));
 
             return this;
         }

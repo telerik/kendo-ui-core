@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI
             Items = new LinkedObjectCollection<TreeViewItem>(null);
 
             SelectedIndex = -1;
-            SecurityTrimming = true;
+            SecurityTrimming = new SecurityTrimming();
 
             LoadOnDemand = true;
 
@@ -139,7 +139,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool SecurityTrimming
+        public SecurityTrimming SecurityTrimming
         {
             get;
             set;
@@ -336,7 +336,7 @@ namespace Kendo.Mvc.UI
             if (item.Visible)
             {
                 var accessible = true;
-                if (this.SecurityTrimming)
+                if (this.SecurityTrimming.Enabled)
                 {
                     accessible = item.IsAccessible(Authorization, ViewContext);
                 }
@@ -345,9 +345,14 @@ namespace Kendo.Mvc.UI
                 if (accessible)
                 {
                     var hasAccessibleChildren = item.Items.Any(x => x.Visible);
-                    if (hasAccessibleChildren && this.SecurityTrimming)
+                    if (hasAccessibleChildren && this.SecurityTrimming.Enabled)
                     {
                         hasAccessibleChildren = item.Items.IsAccessible(Authorization, ViewContext);
+
+                        if (this.SecurityTrimming.HideParent && !hasAccessibleChildren)
+                        {
+                            return;
+                        }
                     }
 
                     IHtmlNode itemTag = builder.ItemTag(item, hasAccessibleChildren).AppendTo(parentTag);

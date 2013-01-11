@@ -887,6 +887,8 @@
     <Compile Include="Infrastructure\Implementation\ControllerTypeCache.cs" />
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
     <Compile Include="UI\RequestSettings.cs" />
+    <Compile Include="UI\SecurityTrimming.cs" />
+    <Compile Include="UI\SecurityTrimmingBuilder.cs" />
     <Compile Include="UI\Slider\Fluent\SliderTooltipBuilder.cs" />
     <Compile Include="UI\Slider\Fluent\RangeSliderEventBuilder.cs" />
     <Compile Include="UI\Slider\Fluent\SliderEventBuilder.cs" />
