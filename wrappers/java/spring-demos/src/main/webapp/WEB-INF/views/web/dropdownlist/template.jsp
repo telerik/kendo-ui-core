@@ -13,18 +13,18 @@
                 "<dt>Company:</dt><dd>#:data.companyName#</dd>" +
             "</dl>";
         %>
-        
+
         <label for="customers">Choose customer:</label>
-        
+
         <kendo:dropDownList name="customers" template="<%=template%>" height="300"
-            dataTextField="contactName" dataValueField="customerID">
+            dataTextField="contactName" dataValueField="customerId">
             <kendo:dataSource>
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${readUrl}" type="POST" contentType="application/json"/>
                    <kendo:dataSource-transport-parameterMap>
 	                	<script>
-		                	function parameterMap(options,type) { 		                		
-		                		return JSON.stringify(options);		                		
+		                	function parameterMap(options,type) {
+		                		return JSON.stringify(options);
 		                	}
 	                	</script>
 	                </kendo:dataSource-transport-parameterMap>
@@ -33,11 +33,11 @@
                 </kendo:dataSource-schema>
             </kendo:dataSource>
         </kendo:dropDownList>
-        
+
         <script>
 	    $(document).ready(function() {
 	        var ddl = $("#customers").data("kendoDropDownList");
-	
+
 	        // set width of the drop-down list
 	        ddl.list.width(400);
 	    });

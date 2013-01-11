@@ -7,15 +7,15 @@
         <c:url value="/web/autocomplete/template/read" var="readUrl" />
 
         <%
-        String template = "<img src=\"/spring-demos/resources/web/Customers/#:data.customerID#.jpg\" alt=\"#:data.customerID#\" />" +
+        String template = "<img src=\"/spring-demos/resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
                 "<dl>" +
                 "<dt>Contact:</dt><dd>#:data.contactName#</dd>" +
                 "<dt>Company:</dt><dd>#:data.companyName#</dd>" +
             "</dl>";
         %>
-        
+
         <label for="customers">Choose customer:</label>
-        
+
         <kendo:autoComplete name="customers" dataTextField="contactName" placeholder="type 'John' ..." template="<%=template%>" height="300">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
@@ -23,7 +23,7 @@
                    <kendo:dataSource-transport-parameterMap>
 	                	<script>
 		                	function parameterMap(options) {
-		                		return JSON.stringify(options);	
+		                		return JSON.stringify(options);
 		                	}
 	                	</script>
 	                </kendo:dataSource-transport-parameterMap>
@@ -32,11 +32,11 @@
                 </kendo:dataSource-schema>
             </kendo:dataSource>
         </kendo:autoComplete>
-        
+
         <script>
 	    $(document).ready(function() {
 	        var autocomplete = $("#customers").data("kendoAutoComplete");
-	
+
 	        // set width of the drop-down list
 	        autocomplete.list.width(400);
 	    });
