@@ -205,6 +205,13 @@ namespace Kendo.Mvc.UI.Fluent
             return ColorPicker("backColor");
         }
 
+        public EditorToolFactory Separator()
+        {
+            group.Tools.Add(new EditorTool(("separator")));
+
+            return this;
+        }
+        
         private EditorToolFactory Button(string text)
         {
             group.Tools.Add(new EditorTool(text));
