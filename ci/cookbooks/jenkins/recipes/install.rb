@@ -12,3 +12,11 @@ cookbook_file "/var/lib/jenkins/config.xml" do
     group "nogroup"
     mode "0600"
 end
+
+template "/var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml" do
+    variables( :host => node.name )
+    source "jenkins.model.JenkinsLocationConfiguration.xml.erb"
+    owner "jenkins"
+    group "nogroup"
+    mode "0600"
+end
