@@ -58,9 +58,55 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartNavigatorBuilder<T> Series(Action<ChartSeriesFactory<T>> configurator)
         {
-            ChartSeriesFactory<T> factory = new ChartSeriesFactory<T>(navigator);
+            configurator(new ChartSeriesFactory<T>(navigator));
 
-            configurator(factory);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the navigator visibility
+        /// </summary>
+        /// <param name="visible">The navigator visibility.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().StockChart(Model)
+        ///            .Name("Chart")
+        ///            .Navigator(nav => nav
+        ///                 .Series(series =>
+        ///                 {
+        ///                    series.Bar(s => s.SalesAmount);
+        ///                 })
+        ///                 .Visible(false)
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartNavigatorBuilder<T> Visible(bool visible)
+        {
+            navigator.Visible = visible;
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the navigator hint.
+        /// </summary>
+        /// <param name="configurator">The add action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart(Model)
+        ///             .Name("Chart")
+        ///             .Navigator(nav =>
+        ///                  nav.Series(series =>
+        ///                 {
+        ///                     series.Bar(s => s.SalesAmount);
+        ///                 })
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartNavigatorBuilder<T> Hint(Action<ChartNavigatorHintBuilder> configurator)
+        {
+            configurator(new ChartNavigatorHintBuilder(navigator.Hint));
 
             return this;
         }

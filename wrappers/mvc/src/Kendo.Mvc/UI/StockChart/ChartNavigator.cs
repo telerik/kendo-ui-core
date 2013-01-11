@@ -11,6 +11,7 @@ namespace Kendo.Mvc.UI
         {
             Series = new List<IChartSeries>();
             Select = new ChartDateSelection();
+            Hint = new ChartNavigatorHint();
         }
 
         /// <summary>
@@ -23,9 +24,27 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets a value indicating if the navigator is visible.
+        /// </summary>
+        public bool? Visible
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the navigator selection.
         /// </summary>
         public ChartDateSelection Select
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the navigator hint.
+        /// </summary>
+        public ChartNavigatorHint Hint
         {
             get;
             set;

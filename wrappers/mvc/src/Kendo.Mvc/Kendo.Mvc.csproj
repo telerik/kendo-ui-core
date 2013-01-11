@@ -913,10 +913,13 @@
     <Compile Include="UI\NumericTextBox\Html\NumericTextBoxHtmlBuilder.cs" />
     <Compile Include="UI\StockChart\ChartNavigator.cs" />
     <Compile Include="UI\StockChart\ChartRange.cs" />
+    <Compile Include="UI\StockChart\Fluent\ChartNavigatorHintBuilder.cs" />
     <Compile Include="UI\StockChart\Fluent\ChartNavigatorBuilder.cs" />
     <Compile Include="UI\StockChart\Fluent\StockChartBuilder.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartDateSelectionSerializer.cs" />
+    <Compile Include="UI\StockChart\ChartNavigatorHint.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorSerializer.cs" />
+    <Compile Include="UI\StockChart\Serialization\ChartNavigatorHintSerializer.cs" />
     <Compile Include="UI\StockChart\StockChart.cs" />
     <Compile Include="UI\TextNode.cs" />
     <Compile Include="Infrastructure\IUrlGenerator.cs" />
