@@ -69,6 +69,8 @@
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
+                    "# } else if (item.content || item.contentUrl) { #" +
+                    "#= renderContent(data) #" +
                     "# } #" +
                 "</li>"
             ),
@@ -413,14 +415,8 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find(GROUPS) : null);
 
-            each(inserted.items, function (idx) {
+            each(inserted.items, function () {
                 inserted.group.append(this);
-
-                var contents = inserted.contents[idx];
-                if (contents) {
-                    $(this).append(contents);
-                }
-
                 updateFirstLast(this);
             });
 
@@ -436,14 +432,8 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function (idx) {
+            each(inserted.items, function () {
                 referenceItem.before(this);
-
-                var contents = inserted.contents[idx];
-                if (contents) {
-                    $(this).append(contents);
-                }
-
                 updateFirstLast(this);
             });
 
@@ -458,14 +448,8 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function (idx) {
+            each(inserted.items, function () {
                 referenceItem.after(this);
-
-                var contents = inserted.contents[idx];
-                if (contents) {
-                    $(this).append(contents);
-                }
-
                 updateFirstLast(this);
             });
 
@@ -643,7 +627,7 @@
 
         _insert: function (item, referenceItem, parent) {
             var that = this,
-                items, contents = [],
+                items,
                 plain = $.isPlainObject(item),
                 isReferenceItem = referenceItem && referenceItem[0],
                 groupData;
@@ -674,16 +658,6 @@
                             }
                         });
 
-                contents = $.map(plain ? [ item ] : item, function (value, idx) {
-                            if (value.content || value.contentUrl) {
-                                return $(PanelBar.renderContent({
-                                    item: extend(value, { index: idx })
-                                }));
-                            } else {
-                                return false;
-                            }
-                        });
-
                 if (isReferenceItem) {
                     referenceItem.attr(ARIA_EXPANDED, false);
                 }
@@ -692,7 +666,7 @@
                 that._updateItemsClasses(items);
             }
 
-            return { items: items, group: parent, contents: contents };
+            return { items: items, group: parent };
         },
 
         _toggleHover: function(e) {
@@ -1022,6 +996,7 @@
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
+                renderContent: PanelBar.renderContent,
                 arrow: item.items || item.content || item.contentUrl ? templates.arrow : empty,
                 subGroup: PanelBar.renderGroup
             }, rendering));

@@ -63,6 +63,8 @@
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
                     "#= subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } }) #" +
+                    "# } else if (item.content || item.contentUrl) { #" +
+                    "#= renderContent(data) #" +
                     "# } #" +
                 "</li>"
             ),
@@ -362,14 +364,8 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group, > .k-animation-container > .k-group") : null);
 
-            each(inserted.items, function (idx) {
+            each(inserted.items, function () {
                 inserted.group.append(this);
-
-                var contents = inserted.contents[idx];
-                if (contents) {
-                    $(this).append(contents);
-                }
-
                 updateArrow(this);
             });
 
@@ -384,14 +380,8 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function (idx) {
+            each(inserted.items, function () {
                 referenceItem.before(this);
-
-                var contents = inserted.contents[idx];
-                if (contents) {
-                    $(this).append(contents);
-                }
-
                 updateArrow(this);
                 updateFirstLast(this);
             });
@@ -406,14 +396,8 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function (idx) {
+            each(inserted.items, function () {
                 referenceItem.after(this);
-
-                var contents = inserted.contents[idx];
-                if (contents) {
-                    $(this).append(contents);
-                }
-
                 updateArrow(this);
                 updateFirstLast(this);
             });
@@ -425,7 +409,7 @@
 
         _insert: function (item, referenceItem, parent) {
             var that = this,
-                items, groups, contents = [];
+                items, groups;
 
             if (!referenceItem || !referenceItem.length) {
                 parent = that.element;
@@ -454,15 +438,6 @@
                                 }));
                             }
                         });
-                contents = $.map(plain ? [ item ] : item, function (value, idx) {
-                            if (value.content || value.contentUrl) {
-                                return $(Menu.renderContent({
-                                    item: extend(value, { index: idx })
-                                }));
-                            } else {
-                                return false;
-                            }
-                        });
             } else {
                 items = $(item);
                 groups = items.find("> ul")
@@ -476,7 +451,7 @@
                 });
             }
 
-            return { items: items, group: parent, contents: contents };
+            return { items: items, group: parent };
         },
 
         remove: function (element) {
@@ -1041,6 +1016,7 @@
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
+                renderContent: Menu.renderContent,
                 arrow: item.items || item.content ? templates.arrow : empty,
                 subGroup: Menu.renderGroup
             }, rendering));
