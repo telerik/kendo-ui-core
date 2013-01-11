@@ -309,6 +309,54 @@
             m.destroy();
         });
 
+        test("Adding dynamic content element renders properly on root and inner levels", function () {
+            var m = new kendo.ui.Menu("<ul></ul>");
+
+            m.append([
+                {
+                    text: "Item 1",
+                    content: "Item 1 Content"
+                },
+                {
+                    text: "Item 2",
+                    items: [
+                        {
+                            text: "Sub Item 1",
+                            content: "Sub Item 1 Content"
+                        }
+                    ]
+                }
+            ]);
+
+            ok(m.element.children("li:first").children("div.k-content")[0]);
+            ok(m.element.find("> li:last > ul > li:first").children("div.k-content")[0]);
+            m.destroy();
+        });
+
+        test("Adding dynamic contentUrl element renders contents on root and inner levels", function () {
+            var m = new kendo.ui.Menu("<ul></ul>");
+
+            m.append([
+                {
+                    text: "Item 1",
+                    contentUrl: "AjaxView1.html"
+                },
+                {
+                    text: "Item 2",
+                    items: [
+                        {
+                            text: "Sub Item 1",
+                            contentUrl: "AjaxView2.html"
+                        }
+                    ]
+                }
+            ]);
+
+            ok(m.element.children("li:first").children("div.k-content")[0]);
+            ok(m.element.find("> li:last > ul > li:first").children("div.k-content")[0]);
+            m.destroy();
+        });
+
 </script>
 
     <h1 id="qunit-header">kendo.ui.Menu Tests</h1>

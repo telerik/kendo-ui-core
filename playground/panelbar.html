@@ -34,14 +34,62 @@
             $("#PanelBar3").kendoPanelBar({ animation: { expand: { effects: "fadeIn expand:vertical" } }, expandMode: 0 });
             $("#PanelBar4").kendoPanelBar({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html' ] });
             $("#Panel").kendoPanelBar().css({ width: '300px', 'float': 'left' });//.data("kendoPanelBar").expand(">li:first");
+            var dynamic = $("#dynamicPanel").kendoPanelBar({
+                dataSource: [
+                    {
+                        text: "Item 1",
+                        items: [
+                            {
+                                text: "Sub Item 1",
+                                content: "test"
+                            },
+                            {
+                                text: "Sub Item 2",
+                                contentUrl: "flip.html"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Item 2",
+                        content: "TEEEST"
+                    }
+                ]
+            }).data("kendoPanelBar");
 
             var item = $("#PanelBar1 li:first").eq(0);
             panel1.expand(item).select(item);
 
             panel1.append(
-            	{ text: "kendo", cssClass: "bep-mep", content: "howdy!" },
+            	{
+                    text: "kendo",
+                    cssClass: "bep-mep",
+                    contentUrl: "flip.html"
+                },
                 panel1.select()
             );
+
+//            dynamic.append({
+//                text: "Item 1",
+//                items: [
+//                    {
+//                        text: "Sub Item 1",
+//                        content: "test"
+//                    },
+//                    {
+//                        text: "Sub Item 2",
+//                        content: "test"
+//                    }
+//                ]
+//            });
+
+//            dynamic.insertAfter(
+//                {
+//                    text: "kendo",
+//                    cssClass: "bep-mep",
+//                    content: "howdy!"
+//                },
+//                dynamic.element.find("> li li")
+//            );
 
             $("#tree").kendoTreeView();
 
@@ -468,6 +516,8 @@
     <!--<ul id="emptyPanel">-->
         <!--<li id="redundantItem">Test Item</li>-->
     <!--</ul>-->
+
+    <ul id="dynamicPanel" style="float: left; width:  200px;"></ul>
 
     <button onclick="addItem()">Add Item</button>
 
