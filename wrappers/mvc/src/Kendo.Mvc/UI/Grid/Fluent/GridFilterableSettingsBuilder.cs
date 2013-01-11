@@ -5,7 +5,15 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring <see cref="Grid{T}.Filterable"/>.
     /// </summary>
-    public class GridFilterableSettingsBuilder : IHideObjectMembers
+    public class GridFilterableSettingsBuilder : GridFilterableSettingsBuilderBase<GridFilterableSettingsBuilder>
+    {
+        public GridFilterableSettingsBuilder(GridFilterableSettings settings) : base(settings)
+        {
+        } 
+    }
+
+    public abstract class GridFilterableSettingsBuilderBase<TDataSourceBuilder> : IHideObjectMembers
+        where TDataSourceBuilder : GridFilterableSettingsBuilderBase<TDataSourceBuilder>
     {
         private readonly GridFilterableSettings settings;
 
@@ -13,7 +21,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Initializes a new instance of the <see cref="GridFilterableSettings"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public GridFilterableSettingsBuilder(GridFilterableSettings settings)
+        public GridFilterableSettingsBuilderBase(GridFilterableSettings settings)
         {
             this.settings = settings;
         }
@@ -32,22 +40,22 @@ namespace Kendo.Mvc.UI.Fluent
         /// <remarks>
         /// The Enabled method is useful when you need to enable filtering based on certain conditions.
         /// </remarks>
-        public GridFilterableSettingsBuilder Enabled(bool value)
+        public TDataSourceBuilder Enabled(bool value)
         {
             settings.Enabled = value;
 
-            return this;
+            return (TDataSourceBuilder)this;
         }
 
         /// <summary>
         /// Configures the Filter menu operators.
         /// </summary>        
         /// <returns></returns>
-        public GridFilterableSettingsBuilder Operators(Action<FilterableOperatorsBuilder> configurator)
+        public TDataSourceBuilder Operators(Action<FilterableOperatorsBuilder> configurator)
         {
             configurator(new FilterableOperatorsBuilder(settings.Operators));
 
-            return this;
+            return (TDataSourceBuilder)this;
         }
 
         /// <summary>
@@ -55,11 +63,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="configurator"></param>
         /// <returns></returns>
-        public GridFilterableSettingsBuilder Messages(Action<FilterableMessagesBuilder> configurator)
+        public TDataSourceBuilder Messages(Action<FilterableMessagesBuilder> configurator)
         {
             configurator(new FilterableMessagesBuilder(settings.Messages));
 
-            return this;
+            return (TDataSourceBuilder)this;
         }
 
         /// <summary>
@@ -67,12 +75,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="value">True to show the extra inputs, otherwise false</param>
         /// <returns></returns>
-        public GridFilterableSettingsBuilder Extra(bool value)
+        public TDataSourceBuilder Extra(bool value)
         {
             settings.Extra = value;
             settings.Enabled = true;
 
-            return this;
-        }        
-    }
+            return (TDataSourceBuilder)this;
+        }       
+    }    
 }

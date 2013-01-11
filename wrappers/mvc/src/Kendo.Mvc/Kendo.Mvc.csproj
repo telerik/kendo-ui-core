@@ -574,6 +574,7 @@
     <Compile Include="UI\Grid\Fluent\FilterableOperatorsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\StringOperatorsBuilder.cs" />
     <Compile Include="UI\Grid\Settings\ColumnMenuMessages.cs" />
+    <Compile Include="UI\Grid\Settings\GridBoundColumnFilterableSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnMenuSettings.cs" />
     <Compile Include="UI\Grid\Settings\EnumsOperators.cs" />
     <Compile Include="UI\Grid\Settings\DateOperators.cs" />
