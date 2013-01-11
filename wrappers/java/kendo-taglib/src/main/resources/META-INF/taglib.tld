@@ -344,6 +344,12 @@ the dataSource.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Indicates whether the chart will call read on the data source initially.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>DataSource configuration or instance.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5769,7 +5775,7 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
-as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs</description>
+as a collection of required properties, while the insertHtml tool requires a collection of text-value pairs. A separator may be included multiple times.</description>
         <name>editor-tools</name>
         <tag-class>com.kendoui.taglib.editor.ToolsTag</tag-class>
         <body-content>JSP</body-content>
@@ -5777,7 +5783,7 @@ as a collection of required properties, while the insertHtml  tool requires a co
 
     <tag>
         <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
-as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs</description>
+as a collection of required properties, while the insertHtml tool requires a collection of text-value pairs. A separator may be included multiple times.</description>
         <name>editor-tool</name>
         <tag-class>com.kendoui.taglib.editor.ToolTag</tag-class>
 
@@ -9081,6 +9087,12 @@ value must not exceed panes.max or be less then panes.min.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Indicates whether the chart will call read on the data source initially.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>DataSource configuration or instance.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
@@ -9867,6 +9879,28 @@ Template variables:
         <tag-class>com.kendoui.taglib.stockchart.NavigatorTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>Indicates whether the navigator will call read on the data source initially.
+Applicable only when using a dedicated navigator data source.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Navigator DataSource configuration or instance.When the navigator is bound via its own data source,
+it will automatically set "from" and "to" filters on the main data source.This, in conjunction with server filtering, allows you to visualize large data sets
+without loading them at once.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The field containing the point date.
+It is used as a default field for the navigator axis.The data item field value must be either:</description>
+            <name>dateField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
 
     </tag>
 
