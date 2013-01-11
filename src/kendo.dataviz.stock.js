@@ -21,7 +21,6 @@ kendo_module({
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
         addDuration = dataviz.addDuration,
-        defined = dataviz.defined,
         duration = dataviz.duration,
         last = dataviz.last,
         lteDateIndex = dataviz.lteDateIndex,
@@ -521,8 +520,7 @@ kendo_module({
                 navigatorAxis = navi.mainAxis(),
                 axis = chart._plotArea.categoryAxis,
                 select = navi.options.select,
-                selection = navi.selection,
-                selectionLength = selection.options.to - selection.options.from;
+                selection = navi.selection;
 
             e.originalEvent.preventDefault();
 
