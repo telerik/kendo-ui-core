@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+for file in `ssh $1 "find /var/lib/jenkins/jobs/ -maxdepth 1 -mindepth 1"`
+    scp $1:$file/config.xml cookbooks/jenkins-jobs/files/default/jobs/${file##*/}.xml
+
+
