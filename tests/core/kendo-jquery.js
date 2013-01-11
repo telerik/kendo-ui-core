@@ -60,6 +60,18 @@ test("Skips syntetic mouse events", 3, function() {
     dispatchRealEvent(div, "mouseup");
 })
 
+test("Is instance of jQuery", function() {
+    ok($$() instanceof jQuery);
+});
+
+test("Creates instances of kendo.jQuery", function() {
+    ok($$() instanceof $$);
+});
+
+test("find returns instances of kendo.jQuery", function() {
+    ok($$().find("body") instanceof $$);
+});
+
 asyncTest("Registers real mouse events", 2, function() {
     var div = $$("<div />").handler({ _down: function() { ok(true) } });
 
