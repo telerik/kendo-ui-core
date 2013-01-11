@@ -3,8 +3,8 @@
     <head>
         <title>window MVVM support</title>
         <script src="../../src/jquery.js"></script>
-        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
@@ -12,7 +12,7 @@
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.window.js"></script>
-        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" ></div>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css">
     </head>
     <body>
         <h1 id="qunit-header"></h1>
@@ -21,6 +21,12 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+            module("MVVM", {
+                teardown: function() {
+                    $(".k-window").remove();
+                }
+            });
+
             test("initializes a window when data role is window", function() {
                 var dom = $('<div data-role="window"></div>');
 
@@ -121,6 +127,16 @@
                 var window = dom.data("kendoWindow");
 
                 ok(window.wrapper.css("display") != "none", "window is not invisible");
+            });
+
+            test("bind visible through data attribute", function() {
+                var dom = $('<div data-role="window" data-visible="false"></div>').appendTo("body");
+
+                kendo.bind(dom, {});
+
+                var window = dom.data("kendoWindow");
+
+                ok(window.wrapper.css("display") == "none");
             });
         </script>
 
