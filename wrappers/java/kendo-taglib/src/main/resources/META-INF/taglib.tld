@@ -269,6 +269,13 @@ the dataSource.</description>
         </attribute>
 
         <attribute>
+            <description>Indicates whether the chart will call read on the data source initially.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
             <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
             <name>seriesColors</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2080,6 +2087,13 @@ It is used as a default</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates whether the chart will call read on the data source initially.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
         <attribute>
@@ -4195,15 +4209,6 @@ series when binding to grouped data.</description>
         </attribute>
 
         <attribute>
-            <description>Aggregate function for date series.
-This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.</description>
-            <name>aggregate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>The series base color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4257,14 +4262,6 @@ The function return value is displayed instead of the individual points.</descri
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
-        </attribute>
-
-        <attribute>
-            <description>Name template for auto-generated
-series when binding to grouped data.</description>
-            <name>afield</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
         </attribute>
 
         <attribute>
@@ -4378,16 +4375,7 @@ series when binding to grouped data.</description>
             <description>The line width of the line chart.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
-            <description>Aggregate function for date series.
-This function is used when a category (an year, month, etc.) contains two or more points.
-The function return values are displayed instead of the individual points.</description>
-            <name>aggregates</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>float</type>
         </attribute>
 
         <attribute>
@@ -4430,6 +4418,15 @@ The function return values are displayed instead of the individual points.</desc
             <name>closeField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>Aggregate function for date series.
+This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.</description>
+            <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
         </attribute>
 
         <attribute>
@@ -4709,6 +4706,29 @@ Template variables:</description>
 
 
     <tag>
+        <description>Configures the appearance of highlighted points.</description>
+        <name>chart-seriesItem-highlight</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The opacity of the highlighted points.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The segment color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The settings for negative values.</description>
         <name>chart-seriesItem-negativeValues</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemNegativeValuesTag</tag-class>
@@ -4830,6 +4850,66 @@ Template variables:</description>
         <attribute>
             <description>The width of the border.</description>
             <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <name>chart-seriesItem-highlight-border</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The border color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The border opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <name>chart-seriesItem-highlight-line</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The line color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the line.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -9907,6 +9987,29 @@ value must not exceed</description>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>Navigator DataSource configuration or instance.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+        <attribute>
+            <description>Indicates whether the navigator will call read on the data source initially.
+Applicable only when using a dedicated navigator data source.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>The field containing the point date.
+It is used as a default</description>
+            <name>dateField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
 
@@ -10821,14 +10924,6 @@ The function return value is displayed instead of the individual points.</descri
         </attribute>
 
         <attribute>
-            <description>Name template for auto-generated
-series when binding to grouped data.</description>
-            <name>afield</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-        <attribute>
             <description>The data field containing the bubble category name.</description>
             <name>categoryField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11270,6 +11365,29 @@ Template variables:</description>
 
 
     <tag>
+        <description>Configures the appearance of highlighted points.</description>
+        <name>stockChart-seriesItem-highlight</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The opacity of the highlighted points.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The segment color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The settings for negative values.</description>
         <name>stockChart-seriesItem-negativeValues</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemNegativeValuesTag</tag-class>
@@ -11391,6 +11509,66 @@ Template variables:</description>
         <attribute>
             <description>The width of the border.</description>
             <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-seriesItem-highlight-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The border color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The border opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Line options for highlighted points. The color is computed automatically from the base point color.</description>
+        <name>stockChart-seriesItem-highlight-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+        <attribute>
+            <description>The line color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>The opacity of the line.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>

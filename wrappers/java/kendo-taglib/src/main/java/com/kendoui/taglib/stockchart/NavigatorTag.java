@@ -2,7 +2,7 @@
 package com.kendoui.taglib.stockchart;
 
 
-import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.*;
 
 
 
@@ -14,7 +14,7 @@ import com.kendoui.taglib.StockChartTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class NavigatorTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class NavigatorTag extends  BaseTag  /* interfaces */implements DataBoundWidget/* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -61,6 +61,27 @@ public class NavigatorTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setSelect(NavigatorSelectTag value) {
         setProperty("select", value);
+    }
+
+    @Override
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
+    }
+
+    public boolean getAutoBind() {
+        return (boolean)getProperty("autoBind");
+    }
+
+    public void setAutoBind(boolean value) {
+        setProperty("autoBind", value);
+    }
+
+    public String getDateField() {
+        return (String)getProperty("dateField");
+    }
+
+    public void setDateField(String value) {
+        setProperty("dateField", value);
     }
 
 //<< Attributes

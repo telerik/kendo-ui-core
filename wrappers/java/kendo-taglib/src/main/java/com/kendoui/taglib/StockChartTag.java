@@ -118,6 +118,14 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
         setProperty("dataSource", dataSource);
     }
 
+    public boolean getAutoBind() {
+        return (boolean)getProperty("autoBind");
+    }
+
+    public void setAutoBind(boolean value) {
+        setProperty("autoBind", value);
+    }
+
     public Object getSeriesColors() {
         return (Object)getProperty("seriesColors");
     }
